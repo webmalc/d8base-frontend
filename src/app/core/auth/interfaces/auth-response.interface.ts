@@ -1,4 +1,4 @@
 export interface AuthResponseInterface {
     access: string;
-    refresh: string | null;
+    refresh?: string | null;
 }

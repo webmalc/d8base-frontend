@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class StorageManagerService {
 
-    constructor(protected storage: Storage) {}
+    constructor(private storage: Storage) {}
 
     public get(storageKey: string): Promise<any> {
         return this.storage.get(storageKey);

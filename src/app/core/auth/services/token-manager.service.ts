@@ -17,11 +17,12 @@ export class TokenManagerService {
     private readonly TOKEN_OBTAIN_URL = environment.backend.api_auth_url;
     private readonly TOKEN_REFRESH_URL = environment.backend.api_refresh_url;
 
-    private token: string = undefined;
+    public token: string = undefined;
 
     constructor(private storage: StorageManagerService, private http: HttpClient) { }
 
     public async getToken(): Promise<string> {
+        // console.log(this.token);
         if (undefined !== this.token) {
             return this.token;
         }
@@ -55,26 +56,18 @@ export class TokenManagerService {
         );
     }
 
-    private auth(data: object, url): Observable<AuthResponseInterface> {
-        const headers = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
-
-        return this.http.post<AuthResponseInterface>(this.getHost() + url, JSON.stringify(data), headers);
-    }
-
     public refreshToken(): Observable<boolean> {
         return new Observable<boolean>(
             (subscriber) => {
                 this.getRefreshToken().then(refresh => {
                     this.auth({refresh}, this.TOKEN_REFRESH_URL).subscribe(
-                        async (response: AuthResponseInterface) => {
-                            await this.setToken(response.access);
-
-                            subscriber.next(true);
-                            subscriber.complete();
+                        (response: AuthResponseInterface) => {
+                            this.setToken(response.access).then(
+                                res => {
+                                    subscriber.next(true);
+                                    subscriber.complete();
+                                }
+                            );
                         },
                         error => {
                             subscriber.error(false);
@@ -83,6 +76,16 @@ export class TokenManagerService {
                 });
             }
         );
+    }
+
+    private auth(data: object, url): Observable<AuthResponseInterface> {
+        const headers = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+
+        return this.http.post<AuthResponseInterface>(this.getHost() + url, JSON.stringify(data), headers);
     }
 
     private getRefreshToken(): Promise<any> {
