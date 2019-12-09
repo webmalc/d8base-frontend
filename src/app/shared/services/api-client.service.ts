@@ -40,15 +40,17 @@ export class ApiClientService {
                                                 }
                                             );
                                         });
+                                    } else {
+                                        subscriber.error(response);
                                     }
-                                    subscriber.error(response);
                                 },
                                 errorRefresh => {
                                     subscriber.error(errorRefresh);
                                 }
                             );
+                        } else {
+                            subscriber.error(error);
                         }
-                        subscriber.error(error);
                     }
                 );
             });
@@ -79,15 +81,17 @@ export class ApiClientService {
                                                 }
                                             );
                                         });
+                                    } else {
+                                        subscriber.error(error);
                                     }
-                                    subscriber.error(response);
                                 },
                                 errorRefresh => {
                                     subscriber.error(errorRefresh);
                                 }
                             );
+                        } else {
+                            subscriber.error(error);
                         }
-                        subscriber.error(error);
                     }
                 );
             });

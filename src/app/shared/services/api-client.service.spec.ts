@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {AuthResponseInterface} from '../../core/auth/interfaces/auth-response.interface';
 
 describe('ApiClientService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
+  beforeEach(async () => TestBed.configureTestingModule({
     providers: [
       {provide: StorageManagerService, useClass: StorageManagerMock},
       {provide: HttpClient, useClass: HttpMock}
@@ -19,12 +19,12 @@ describe('ApiClientService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('test #get', async (done) => {
+  it('test #get',  async (done) => {
     const service: ApiClientService = TestBed.get(ApiClientService);
 
     expect(await (service as any).tokenService.getToken()).toBe('outdatedToken');
 
-    service.get('testUrl').subscribe(
+    service.get('/testUrl').subscribe(
         async (output: HttpResponse<string>) => {
           expect(output.status).toBe(200);
           expect(await (service as any).tokenService.getToken()).toBe('refreshedAccessToken');
@@ -35,13 +35,13 @@ describe('ApiClientService', () => {
 
   it('test #post', async (done) => {
     const service: ApiClientService = TestBed.get(ApiClientService);
-
+    await (service as any).tokenService.setToken('outdatedToken');
     expect(await (service as any).tokenService.getToken()).toBe('outdatedToken');
 
-    service.post('testUrl', {test: 'data'}).subscribe(
+    service.post('/testUrl', {test: 'data'}).subscribe(
         async (output: HttpResponse<string>) => {
           expect(output.status).toBe(200);
-          // expect(await (service as any).tokenService.getToken()).toBe('refreshedAccessToken');
+          expect(await (service as any).tokenService.getToken()).toBe('refreshedAccessToken');
           done();
         }
     );
@@ -68,8 +68,6 @@ export class StorageManagerMock {
 
 export class HttpMock {
 
-  private counter = 0;
-
   public get(url: string, options?: {
     headers: HttpHeaders;
     observe?: 'body';
@@ -80,22 +78,8 @@ export class HttpMock {
     responseType?: 'json';
     withCredentials?: boolean;
   }): Observable<any> {
-    this.counter++;
-    if (options.headers.get('Authorization') === 'outdatedToken') {
-      return new Observable<any>(subscriber => {
-        subscriber.next(new HttpResponse({status: 401}));
-        subscriber.complete();
-      });
-    } else {
-      return new Observable<any>(subscriber => {
-        subscriber.next(new HttpResponse({status: 200}));
-        subscriber.complete();
-      });
-    }
-
+    return this.mock(options);
   }
-
-
 
   public post(url: string, body: any | null, options?: {
     headers: HttpHeaders;
@@ -113,11 +97,21 @@ export class HttpMock {
         subscriber.complete();
       });
     } else {
+      return this.mock(options);
+    }
+  }
+
+  private mock(options?: {headers: HttpHeaders}): Observable<AuthResponseInterface> {
+    if (options.headers.get('Authorization') === 'Bearer outdatedToken') {
       return new Observable<any>(subscriber => {
-        subscriber.next(new HttpResponse({status: 200}));
+        subscriber.error(new HttpResponse({status: 401, statusText: 'Unauthorized'}));
+        subscriber.complete();
+      });
+    } else {
+      return new Observable<any>(subscriber => {
+        subscriber.next(new HttpResponse({status: 200, statusText: 'OK'}));
         subscriber.complete();
       });
     }
   }
-
 }
