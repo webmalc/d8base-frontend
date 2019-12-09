@@ -33,10 +33,12 @@ describe('TokenManagerService', () => {
         async (authResult) => {
           expect(authResult).toBe(true);
           expect(await service.getToken()).toBe('AccessToken');
+          expect(await (service as any).getRefreshToken()).toBe('RefreshToken');
           service.refreshToken().subscribe(
               async (refreshRes) => {
                 expect(refreshRes).toBe(true);
                 expect(await service.getToken()).toBe('refreshedAccessToken');
+                expect(await (service as any).getRefreshToken()).toBe('refreshedRefreshToken');
                 done();
               }
           );
@@ -78,7 +80,7 @@ export class HttpMock {
   }): Observable<AuthResponseInterface> {
     if (JSON.parse(body).hasOwnProperty('refresh')) {
       return new Observable<AuthResponseInterface>(subscriber => {
-        subscriber.next({access: 'refreshedAccessToken'});
+        subscriber.next({access: 'refreshedAccessToken', refresh: 'refreshedRefreshToken'});
         subscriber.complete();
       });
     } else {

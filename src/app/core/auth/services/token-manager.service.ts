@@ -22,7 +22,6 @@ export class TokenManagerService {
     constructor(private storage: StorageManagerService, private http: HttpClient) { }
 
     public async getToken(): Promise<string> {
-        // console.log(this.token);
         if (undefined !== this.token) {
             return this.token;
         }
@@ -62,14 +61,17 @@ export class TokenManagerService {
                 this.getRefreshToken().then(refresh => {
                     this.auth({refresh}, this.TOKEN_REFRESH_URL).subscribe(
                         (response: AuthResponseInterface) => {
-                            this.setToken(response.access).then(
-                                res => {
+                            Promise.all([
+                                this.setToken(response.access),
+                                this.setRefreshToken(response.refresh)
+                            ]).then(
+                                _ => {
                                     subscriber.next(true);
                                     subscriber.complete();
                                 }
                             );
                         },
-                        error => {
+                        _ => {
                             subscriber.error(false);
                         }
                     );
