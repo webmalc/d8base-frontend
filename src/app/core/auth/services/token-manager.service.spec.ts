@@ -34,7 +34,7 @@ describe('TokenManagerService', () => {
           expect(authResult).toBe(true);
           expect(await service.getToken()).toBe('AccessToken');
           expect(await (service as any).getRefreshToken()).toBe('RefreshToken');
-          service.refreshToken().subscribe(
+          service.refreshTokens().subscribe(
               async (refreshRes) => {
                 expect(refreshRes).toBe(true);
                 expect(await service.getToken()).toBe('refreshedAccessToken');

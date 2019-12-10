@@ -11,10 +11,6 @@ export class ApiClientService {
 
     constructor(private http: HttpClient, private tokenService: TokenManagerService) { }
 
-    private getHost(): string {
-        return environment.backend.url;
-    }
-
     public get(url: string): Observable<any > {
         return new Observable<any>((subscriber) => {
             this.getApiHeaders().then((headers: object) => {
@@ -26,7 +22,7 @@ export class ApiClientService {
                     },
                      (error: HttpErrorResponse) => {
                         if (error.status === 401) {
-                            this.tokenService.refreshToken().subscribe(
+                            this.tokenService.refreshTokens().subscribe(
                                 response => {
                                     if (response) {
                                         this.getApiHeaders().then((refreshedHeaders: object) => {
@@ -67,7 +63,7 @@ export class ApiClientService {
                     },
                     (error: HttpErrorResponse) => {
                         if (error.status === 401) {
-                            this.tokenService.refreshToken().subscribe(
+                            this.tokenService.refreshTokens().subscribe(
                                 response => {
                                     if (response) {
                                         this.getApiHeaders().then((refreshedHeaders: object) => {
@@ -96,6 +92,10 @@ export class ApiClientService {
                 );
             });
         });
+    }
+
+    private getHost(): string {
+        return environment.backend.url;
     }
 
     private async getApiHeaders(): Promise<{headers: HttpHeaders}> {

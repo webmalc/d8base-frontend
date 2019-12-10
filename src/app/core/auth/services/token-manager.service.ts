@@ -19,7 +19,8 @@ export class TokenManagerService {
 
     public token: string = undefined;
 
-    constructor(private storage: StorageManagerService, private http: HttpClient) { }
+    constructor(private storage: StorageManagerService, private http: HttpClient) {
+    }
 
     public async getToken(): Promise<string> {
         if (undefined !== this.token) {
@@ -40,22 +41,26 @@ export class TokenManagerService {
         return new Observable<boolean>(
             (subscriber) => {
                 this.auth(data, this.TOKEN_OBTAIN_URL).subscribe(
-                    async (response: AuthResponseInterface) => {
-                        await this.setRefreshToken(response.refresh);
-                        await this.setToken(response.access);
-
-                        subscriber.next(true);
-                        subscriber.complete();
+                    (response: AuthResponseInterface) => {
+                        Promise.all([
+                            this.setRefreshToken(response.refresh),
+                            this.setToken(response.access)
+                        ]).then(
+                            _ => {
+                                subscriber.next(true);
+                                subscriber.complete();
+                            }
+                        );
                     },
                     error => {
-                        subscriber.error(false);
+                        subscriber.error(error);
                     }
                 );
             }
         );
     }
 
-    public refreshToken(): Observable<boolean> {
+    public refreshTokens(): Observable<boolean> {
         return new Observable<boolean>(
             (subscriber) => {
                 this.getRefreshToken().then(refresh => {
@@ -69,6 +74,8 @@ export class TokenManagerService {
                                     subscriber.next(true);
                                     subscriber.complete();
                                 }
+                            ).catch(
+                                _ => subscriber.error(false)
                             );
                         },
                         _ => {
@@ -81,13 +88,7 @@ export class TokenManagerService {
     }
 
     private auth(data: object, url): Observable<AuthResponseInterface> {
-        const headers = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
-
-        return this.http.post<AuthResponseInterface>(this.getHost() + url, JSON.stringify(data), headers);
+        return this.http.post<AuthResponseInterface>(this.getHost() + url, JSON.stringify(data), this.getHeaders());
     }
 
     private getRefreshToken(): Promise<any> {
@@ -102,6 +103,14 @@ export class TokenManagerService {
         this.token = token;
 
         return this.storage.set(this.ACCESS_TOKEN_STORAGE_KEY, token);
+    }
+
+    private getHeaders(): {headers: HttpHeaders} {
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
     }
 
     private getHost(): string {

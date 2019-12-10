@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import {MainGuard} from '../shared/guards/main.guard';
 
 @NgModule({
   imports: [
@@ -14,10 +15,13 @@ import { HomePage } from './home.page';
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
+        component: HomePage,
+        canActivate: [MainGuard]
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [MainGuard]
 })
 export class HomePageModule {}
+
