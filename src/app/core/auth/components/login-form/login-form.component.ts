@@ -24,7 +24,9 @@ export class LoginFormComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+      this.loginForm.initForm();
+  }
 
   public submitLoginForm() {
     const user: UserModel = UserModel.createFromForm(this.loginForm.form.getRawValue());

@@ -21,4 +21,10 @@ describe('ErrorFlashbagComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('test input', () => {
+    (component as any).message = 'test';
+
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('div').innerText).toEqual('test');
+  });
 });
