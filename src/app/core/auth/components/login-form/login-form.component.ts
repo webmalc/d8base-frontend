@@ -4,6 +4,7 @@ import {LoginFormService} from '../../forms/login-form.service';
 import {UserModel} from '../../../shared/models/user.model';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -33,12 +34,16 @@ export class LoginFormComponent implements OnInit {
         (result: boolean) => {
           if (result) {
             console.log('successfully authenticated');
-            this.router.navigateByUrl('/home');
+            return this.router.navigateByUrl('/home');
           }
         },
-        error => {
-            this.errorMessage = 'incorrect login or password';
-            console.log(error);
+        (error: HttpErrorResponse) => {
+            if (401 === error.status) {
+                this.errorMessage = 'incorrect login or password';
+                console.log(error);
+            } else {
+                console.log('something went wrong');
+            }
         }
     );
   }

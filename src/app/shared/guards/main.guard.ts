@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { CanActivate, Router, UrlTree} from '@angular/router';
 import { Observable } from 'rxjs';
 import {TokenManagerService} from '../../core/auth/services/token-manager.service';
 
@@ -11,7 +11,7 @@ export class MainGuard implements CanActivate {
   constructor(private tokenManager: TokenManagerService, private router: Router) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+  canActivate(): Observable<boolean | UrlTree> {
     return new Observable<UrlTree | boolean>(subscriber => {
       this.tokenManager.refreshTokens().subscribe(
           next => {
