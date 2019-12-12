@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {UserModel} from '../../shared/models/user.model';
+import {TokenManagerService} from '../services/token-manager.service';
+import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  private errorMessage: string;
+
+  constructor(
+      private tokenManager: TokenManagerService,
+      private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  private onSubmitLoginForm(user: UserModel) {
+    this.tokenManager.doAuth(user).subscribe(
+        (result: boolean) => {
+          if (result) {
+            console.log('successfully authenticated');
+            return this.router.navigateByUrl('/home');
+          }
+        },
+        (error: HttpErrorResponse) => {
+            if (401 === error.status) {
+                this.errorMessage = 'incorrect login or password';
+                console.log(error);
+            } else {
+                console.log('something went wrong');
+            }
+        }
+    );
+    console.log(user.username, 'q');
   }
 
 }
