@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginFormFields} from '../enums/login-form-fields';
 
 @Injectable({
@@ -9,7 +9,7 @@ export class LoginFormService {
 
   private _form: FormGroup;
 
-  constructor() {
+  constructor(private builder: FormBuilder) {
   }
 
   get form(): FormGroup {
@@ -17,7 +17,7 @@ export class LoginFormService {
   }
 
   public initForm(): void {
-    this._form = new FormGroup({
+    this._form = this.builder.group({
       [LoginFormFields.Username]: new FormControl(null, Validators.compose([
           Validators.required
       ])),

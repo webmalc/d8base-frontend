@@ -11,22 +11,22 @@ import {LoginFormFields} from '../../enums/login-form-fields';
 export class LoginFormComponent implements OnInit {
 
   @Input() private errorMessage: string;
-  @Output() private submit = new EventEmitter<UserModel>();
+  @Output() private user = new EventEmitter<UserModel>();
 
   private readonly FieldNames = LoginFormFields;
 
   constructor(
-      private loginForm: LoginFormService
+      private loginFormService: LoginFormService
   ) {
   }
 
   ngOnInit() {
-      this.loginForm.initForm();
+      this.loginFormService.initForm();
   }
 
   public submitLoginForm() {
-    const user: UserModel = UserModel.createFromForm(this.loginForm.form.getRawValue());
+    const user: UserModel = UserModel.createFromForm(this.loginFormService.form.getRawValue());
 
-    this.submit.emit(user);
+    this.user.emit(user);
   }
 }

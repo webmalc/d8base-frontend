@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm.form" (ngSubmit)="submitLoginForm()">
+<form [formGroup]="loginFormService.form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()" >
   <ion-row class="ion-justify-content-center">
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <error-flashbag [message]="errorMessage"></error-flashbag>
@@ -8,7 +8,7 @@
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-item>
         <ion-label class="mbh-label-for-required-input" color="medium" position="floating">login</ion-label>
-        <ion-input type="text" name="username" [formControlName]="this.FieldNames.Username" ></ion-input>
+        <ion-input type="text" name="username" [formControlName]="FieldNames.Username" ></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -16,7 +16,7 @@
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-item>
         <ion-label class="mbh-label-for-required-input" color="medium" position="floating">password</ion-label>
-        <ion-input type="text" name="password" [formControlName]="this.FieldNames.Password"></ion-input>
+        <ion-input type="text" name="password" [formControlName]="FieldNames.Password"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
