@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  private onSubmitLoginForm(user: UserModel) {
+  public onSubmitLoginForm(user: UserModel) {
     this.tokenManager.doAuth(user).subscribe(
         (result: boolean) => {
           if (result) {
@@ -38,7 +38,5 @@ export class LoginPage implements OnInit {
             }
         }
     );
-    console.log(user.username, 'q');
   }
-
 }

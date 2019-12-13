@@ -19,10 +19,7 @@ describe('LoginFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginFormComponent, ErrorFlashbagComponent ],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule],
-      providers: [
-        { provide: TokenManagerService, useClass: TokenManagerServiceMock },
-      ]
+      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule]
     }).compileComponents();
 
     router = TestBed.get(Router);
@@ -35,44 +32,24 @@ describe('LoginFormComponent', () => {
   }));
 
   it('should create', () => {
-    expect((component as any).loginForm.form.valid).toBeFalsy();
+    expect((component as any).loginFormService.form.valid).toBeFalsy();
   });
 
-  it('test wrong auth data', () => {
-    const username = (component as any).loginForm.form.controls[LoginFormFields.Username];
-    const password = (component as any).loginForm.form.controls[LoginFormFields.Password];
-    password.setValue('invalid');
-    username.setValue('invalid');
-    expect((component as any).loginForm.form.valid).toBeTruthy();
-
-    fixture.debugElement.nativeElement.querySelector('ion-button').click();
-
-    expect(router.navigateByUrl).not.toHaveBeenCalled();
-  });
   it('test correct auth data', () => {
-    const username = (component as any).loginForm.form.controls[LoginFormFields.Username];
-    const password = (component as any).loginForm.form.controls[LoginFormFields.Password];
+    const username = (component as any).loginFormService.form.controls[LoginFormFields.Username];
+    const password = (component as any).loginFormService.form.controls[LoginFormFields.Password];
     password.setValue('valid');
     username.setValue('valid');
 
+    spyOn((component as any).user, 'emit');
+
     fixture.debugElement.nativeElement.querySelector('ion-button').click();
 
-    expect(router.navigateByUrl).toHaveBeenCalled();
+    const newUser = new UserModel();
+    newUser.password = 'valid';
+    newUser.username = 'valid';
+
+    expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
   });
 });
 
-export class TokenManagerServiceMock {
-
-  public doAuth(user: UserModel): Observable<boolean> {
-    return new Observable<boolean>(
-        subscriber => {
-          if ('valid' === user.password && ('valid' === user.username)) {
-            subscriber.next(true);
-          } else {
-            subscriber.next(false);
-          }
-          subscriber.complete();
-        }
-    );
-  }
-}
