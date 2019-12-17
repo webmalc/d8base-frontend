@@ -4,8 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import { LoginFormComponent } from './login-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorFlashbagComponent} from '../../../../shared/components/error-flashbag/error-flashbag.component';
-import {TokenManagerService} from '../../services/token-manager.service';
-import {Observable} from 'rxjs';
 import {UserModel} from '../../../shared/models/user.model';
 import {Router} from '@angular/router';
 import {LoginFormFields} from '../../enums/login-form-fields';

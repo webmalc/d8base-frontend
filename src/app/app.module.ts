@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {IonicStorageModule} from '@ionic/storage';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthModule} from './core/auth/auth.module';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
       AppRoutingModule,
       HttpClientModule,
       ReactiveFormsModule,
-      FormsModule
+      FormsModule,
   ],
   providers: [
     StatusBar,

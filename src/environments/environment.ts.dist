@@ -3,6 +3,7 @@ export const environment = {
     backend: {
         url: '',
         api_auth_url: '',
-        api_refresh_url: ''
+        api_refresh_url: '',
+        api_register_url: ''
     }
 };

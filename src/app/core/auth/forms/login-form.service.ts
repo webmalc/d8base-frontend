@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginFormFields} from '../enums/login-form-fields';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginFormService {
 
   private _form: FormGroup;

@@ -2,14 +2,15 @@ import {Injectable} from '@angular/core';
 import {StorageManagerService} from '../../../shared/services/storage-manager.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {UserModel} from '../../shared/models/user.model';
 import {AuthResponseInterface} from '../interfaces/auth-response.interface';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {UserModel} from '../../../shared/models/user.model';
+import {AbstractAuthService} from './abstract-auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TokenManagerService {
+export class TokenManagerService extends AbstractAuthService {
 
     private readonly ACCESS_TOKEN_STORAGE_KEY = 'api_token';
     private readonly REFRESH_TOKEN_STORAGE_KEY = 'refresh_token';
@@ -19,7 +20,8 @@ export class TokenManagerService {
 
     public token: string = undefined;
 
-    constructor(private storage: StorageManagerService, private http: HttpClient) {
+    constructor(private storage: StorageManagerService, protected http: HttpClient) {
+        super(http);
     }
 
     public async getToken(): Promise<string> {
@@ -88,7 +90,7 @@ export class TokenManagerService {
     }
 
     private auth(data: object, url): Observable<AuthResponseInterface> {
-        return this.http.post<AuthResponseInterface>(this.getHost() + url, JSON.stringify(data), this.getHeaders());
+        return this.post(data, url) as Observable<AuthResponseInterface>;
     }
 
     private getRefreshToken(): Promise<any> {
@@ -103,17 +105,5 @@ export class TokenManagerService {
         this.token = token;
 
         return this.storage.set(this.ACCESS_TOKEN_STORAGE_KEY, token);
-    }
-
-    private getHeaders(): {headers: HttpHeaders} {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
-    }
-
-    private getHost(): string {
-        return environment.backend.url;
     }
 }

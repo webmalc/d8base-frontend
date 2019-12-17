@@ -16,14 +16,14 @@ export class MainGuard implements CanActivate {
       this.tokenManager.refreshTokens().subscribe(
           next => {
             if (!next) {
-              subscriber.next(this.router.parseUrl('/login'));
+              subscriber.next(this.router.parseUrl('/auth/login'));
             } else {
               subscriber.next(true);
             }
             subscriber.complete();
           },
           _ => {
-            subscriber.next(this.router.parseUrl('/login'));
+            subscriber.next(this.router.parseUrl('/auth/login'));
             subscriber.complete();
           }
       );

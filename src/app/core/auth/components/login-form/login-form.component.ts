@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginFormService} from '../../forms/login-form.service';
-import {UserModel} from '../../../shared/models/user.model';
 import {LoginFormFields} from '../../enums/login-form-fields';
+import {UserModel} from '../../../../shared/models/user.model';
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +13,7 @@ export class LoginFormComponent implements OnInit {
   @Input() private errorMessage: string;
   @Output() private user = new EventEmitter<UserModel>();
 
-  private readonly FieldNames = LoginFormFields;
+  private readonly formFields = LoginFormFields;
 
   constructor(
       private loginFormService: LoginFormService
@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   public submitLoginForm() {
-    const user: UserModel = UserModel.createFromForm(this.loginFormService.form.getRawValue());
+    const user: UserModel = UserModel.createFromLoginForm(this.loginFormService.form.getRawValue());
 
     this.user.emit(user);
   }
