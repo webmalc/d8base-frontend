@@ -10,11 +10,12 @@ export class UserModel implements UserInterface {
     private _password: string | null;
     private _access_token: string | null;
     private _city: string | null;
-    private _county: string | null;
+    private _country: string | null;
     private _email: string | null;
     private _phone: string | null;
     private _refresh_token: string | null;
     private _name: string | null;
+    private _county_code: string;
 
     get username(): string {
         return this._username;
@@ -40,11 +41,17 @@ export class UserModel implements UserInterface {
     set city(value: string | null) {
         this._city = value;
     }
-    get county(): string | null {
-        return this._county;
+    get country(): string | null {
+        return this._country;
     }
-    set county(value: string | null) {
-        this._county = value;
+    set country(value: string | null) {
+        this._country = value;
+    }
+    get county_code(): string {
+        return this._county_code;
+    }
+    set county_code(value: string) {
+        this._county_code = value;
     }
     get email(): string | null {
         return this._email;
@@ -97,7 +104,7 @@ export class UserModel implements UserInterface {
         newInstance.password = data[RegistrationFormFields.Password];
         newInstance.name = data[RegistrationFormFields.Name];
         newInstance.phone = data[RegistrationFormFields.Phone];
-        newInstance.county = data[RegistrationFormFields.Country];
+        newInstance.country = data[RegistrationFormFields.Country];
         newInstance.city = data[RegistrationFormFields.City];
 
         return newInstance;
@@ -106,14 +113,16 @@ export class UserModel implements UserInterface {
     public toJson(): object {
         return {
             name: this.name,
+            password: this.password,
             username: this.username,
             access_token: this.access_token,
             refresh_token: this.refresh_token,
             email: this.email,
             phone: this.phone,
-            country: this.county,
+            country: this.country,
             ip: this.ip,
-            postal_code: this.postal_code
+            postal_code: this.postal_code,
+            country_code: this.county_code
         };
     }
 }

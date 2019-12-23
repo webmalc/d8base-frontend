@@ -12,6 +12,11 @@ import {RegistrationFormComponent} from '../../registration-form/registration-fo
 import {TokenManagerService} from '../../../services/token-manager.service';
 import {RegistrationFormService} from '../../../forms/registration-form.service';
 import {RegistrationService} from '../../../services/registration.service';
+import {LocationService} from '../../../services/location/location.service';
+import {IpServicesHolderService} from '../../../services/location/ip-services-holder.service';
+import {IpApiService} from '../../../services/location/ip-api.service';
+import {IpDataService} from '../../../services/location/ip-data.service';
+import {IpnfDataService} from '../../../services/location/ipnf-data.service';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import {RegistrationService} from '../../../services/registration.service';
   providers: [
     TokenManagerService,
     RegistrationFormService,
-    RegistrationService
+    RegistrationService,
+    LocationService,
+    IpServicesHolderService,
+    IpApiService,
+    IpDataService,
+    IpnfDataService
   ]
 })
 export class RegistrationPageModule {}

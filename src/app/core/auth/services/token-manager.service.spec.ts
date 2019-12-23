@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {StorageManagerService} from '../../../shared/services/storage-manager.service';
 import {Observable} from 'rxjs';
 import {AuthResponseInterface} from '../interfaces/auth-response.interface';
-import {UserModel} from '../../shared/models/user.model';
+import {UserModel} from '../../../shared/models/user.model';
 
 describe('TokenManagerService', () => {
 

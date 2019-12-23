@@ -6,6 +6,7 @@ export interface UserInterface {
     email: string;
     phone: string | null;
     county: string | null;
+    county_code: string | null;
     city: string | null;
     ip: string | null;
     postal_code: string| null;
