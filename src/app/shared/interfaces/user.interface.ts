@@ -5,7 +5,7 @@ export interface UserInterface {
     refresh_token: string | null;
     email: string;
     phone: string | null;
-    county: string | null;
+    country: string | null;
     county_code: string | null;
     city: string | null;
     ip: string | null;

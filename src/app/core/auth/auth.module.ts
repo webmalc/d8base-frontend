@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {AuthRoutingModule} from './auth-routing.module';
-import {LoginPageModule} from './components/pages/login/login.module';
 
 @NgModule({
   imports: [
@@ -11,8 +10,7 @@ import {LoginPageModule} from './components/pages/login/login.module';
     FormsModule,
     IonicModule,
     AuthRoutingModule,
-    ReactiveFormsModule,
-    LoginPageModule
+    ReactiveFormsModule
   ],
   declarations: [
 
