@@ -2,15 +2,15 @@ import {async, ComponentFixture, fakeAsync, flush, TestBed} from '@angular/core/
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
-import {LoginFormComponent} from '../components/login-form/login-form.component';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {TokenManagerService} from '../services/token-manager.service';
 import {Router} from '@angular/router';
-import {LoginFormService} from '../forms/login-form.service';
-import {UserModel} from '../../shared/models/user.model';
 import {Observable} from 'rxjs';
+import {LoginFormComponent} from '../../login-form/login-form.component';
+import {ErrorFlashbagComponent} from '../../../../../shared/components/error-flashbag/error-flashbag.component';
+import {TokenManagerService} from '../../../services/token-manager.service';
+import {LoginFormService} from '../../../forms/login-form.service';
+import {UserModel} from '../../../../../shared/models/user.model';
 
 describe('LoginPage', () => {
   let component: LoginPage;

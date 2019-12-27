@@ -30,7 +30,7 @@ describe('MainGuard', () => {
     (guard as any).tokenManager.counter = 1;
     guard.canActivate().subscribe(
         (res: UrlTree) => {
-          expect(res.toString()).toBe('/login');
+          expect(res.toString()).toBe('/auth/login');
         }
     );
   }));

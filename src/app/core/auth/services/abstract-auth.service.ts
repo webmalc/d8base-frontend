@@ -23,5 +23,4 @@ export abstract class AbstractAuthService {
   private getHost(): string {
     return environment.backend.url;
   }
-
 }

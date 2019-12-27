@@ -20,7 +20,7 @@ export class RegistrationPage implements OnInit {
         this.registrationService.register(user).subscribe(
             next => {
                 console.log(next);
-                this.router.navigateByUrl('/auth/login', { queryParams: {} });
+                this.router.navigateByUrl('/auth/login');
             }
         );
     }

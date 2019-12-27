@@ -4,10 +4,11 @@ import { IonicModule } from '@ionic/angular';
 import { LoginFormComponent } from './login-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorFlashbagComponent} from '../../../../shared/components/error-flashbag/error-flashbag.component';
-import {UserModel} from '../../../shared/models/user.model';
 import {Router} from '@angular/router';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {RouterTestingModule} from '@angular/router/testing';
+import {UserModel} from '../../../../shared/models/user.model';
+import {LoginFormService} from '../../forms/login-form.service';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -17,7 +18,8 @@ describe('LoginFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginFormComponent, ErrorFlashbagComponent ],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule]
+      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule],
+      providers: [LoginFormService]
     }).compileComponents();
 
     router = TestBed.get(Router);
