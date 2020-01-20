@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import {DarkModeService} from './shared/services/dark-mode.service';
+import {DarkModeService} from '@app/core/services/dark-mode.service';
 
 @Component({
   selector: 'app-root',
