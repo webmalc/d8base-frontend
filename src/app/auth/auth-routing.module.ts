@@ -10,6 +10,10 @@ const routes: Routes = [
     {
         path: 'registration',
         loadChildren: './pages/registration/registration.module#RegistrationPageModule'
+    },
+    {
+        path: 'password-recover',
+        loadChildren: './pages/password-recover/password-recover.module#PasswordRecoverPageModule'
     }
 ];
 

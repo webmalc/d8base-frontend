@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginFormService} from '../../forms/login-form.service';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {User} from '@app/shared/models/user';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-login-form',
@@ -16,7 +17,8 @@ export class LoginFormComponent implements OnInit {
     private readonly formFields = LoginFormFields;
 
     constructor(
-        private loginFormService: LoginFormService
+        private loginFormService: LoginFormService,
+        private router: Router
     ) {
     }
 
@@ -28,5 +30,9 @@ export class LoginFormComponent implements OnInit {
         const user: User = User.createFromLoginForm(this.loginFormService.form.getRawValue());
 
         this.user.emit(user);
+    }
+
+    public onForgotPassword() {
+        this.router.navigateByUrl('/auth/password-recover');
     }
 }
