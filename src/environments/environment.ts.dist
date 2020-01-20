@@ -1,0 +1,10 @@
+export const environment = {
+    production: false,
+    backend: {
+        url: '',
+        api_auth_url: '',
+        api_refresh_url: '',
+        api_register_url: '',
+        api_password_recovery_url: ''
+    }
+};

@@ -1,0 +1,82 @@
+<form [formGroup]="registrationFormService.form" (ngSubmit)="submitRegistrationForm()" (keydown.enter)="submitRegistrationForm()" >
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <error-flashbag [message]="errorMessage"></error-flashbag>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label class="label-for-required-input" color="medium" position="floating">email</ion-label>
+        <ion-input type="text" name="email" [formControlName]="formFields.Email" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label class="label-for-required-input" color="medium" position="floating">password</ion-label>
+        <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label class="label-for-required-input" color="medium" position="floating">confirm password</ion-label>
+        <ion-input type="password" name="confirm" [formControlName]="formFields.Confirm"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label color="medium" position="floating">name</ion-label>
+        <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label color="medium" position="floating">phone</ion-label>
+        <ion-input type="text" name="phone" [formControlName]="formFields.Phone"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label color="medium" position="floating">country</ion-label>
+        <ion-input type="text" name="country" [formControlName]="formFields.Country"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-item>
+        <ion-label color="medium" position="floating">city</ion-label>
+        <ion-input type="text" name="city" [formControlName]="formFields.City"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-button
+              type="submit"
+              expand="block"
+              fill="solid"
+              color="success"
+              [disabled]="registrationFormService.isFormValid()"
+      >register</ion-button>
+    </ion-col>
+  </ion-row>
+</form>

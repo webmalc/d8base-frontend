@@ -1,3 +1,4 @@
-<ion-app>
+<ion-app [class.dark-theme]="darkTheme">
+  <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

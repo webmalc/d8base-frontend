@@ -83,6 +83,11 @@
       "app",
       "page",
       "kebab-case"
+    ],
+    "indent": [
+      true,
+      "spaces",
+      4
     ]
   }
 }

@@ -24,3 +24,11 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+:root {
+  .label-for-required-input::after {
+    content: "*";
+    color: red;
+    margin-left: .1em;
+  }
+}
