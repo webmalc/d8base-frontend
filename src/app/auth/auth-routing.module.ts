@@ -5,15 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     {
         path: 'login',
-        loadChildren: './pages/login/login.module#LoginPageModule'
+        loadChildren: () => import('src/app/auth/pages/login/login.module').then( m => m.LoginPageModule)
     },
     {
         path: 'registration',
-        loadChildren: './pages/registration/registration.module#RegistrationPageModule'
+        loadChildren: () => import('src/app/auth/pages/registration/registration.module').then( m => m.RegistrationPageModule)
     },
     {
         path: 'password-recover',
-        loadChildren: './pages/password-recover/password-recover.module#PasswordRecoverPageModule'
+        loadChildren: () => import('src/app/auth/pages/password-recover/password-recover.module').then( m => m.PasswordRecoverPageModule)
     }
 ];
 
