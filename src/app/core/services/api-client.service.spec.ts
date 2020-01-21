@@ -35,7 +35,7 @@ describe('ApiClientService', () => {
 
   it('test #post', async (done) => {
     const service: ApiClientService = TestBed.get(ApiClientService);
-    await (service as any).tokenService.setToken('outdatedToken');
+    await (service as any).tokenService.setAccessToken('outdatedToken');
     expect(await (service as any).tokenService.getToken()).toBe('outdatedToken');
 
     service.post('/testUrl', {test: 'data'}).subscribe(

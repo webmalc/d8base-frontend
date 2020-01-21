@@ -3,13 +3,14 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {TokenManagerService} from '@app/auth/services/token-manager.service';
+import {AuthenticationService} from '@app/auth/services/authentication.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiClientService {
 
-    constructor(private http: HttpClient, private tokenService: TokenManagerService) { }
+    constructor(private http: HttpClient, private tokenService: TokenManagerService, private authService: AuthenticationService) { }
 
     public get(url: string): Observable<any > {
         return new Observable<any>((subscriber) => {
@@ -22,7 +23,7 @@ export class ApiClientService {
                     },
                      (error: HttpErrorResponse) => {
                         if (error.status === 401) {
-                            this.tokenService.refreshTokens().subscribe(
+                            this.authService.refresh().subscribe(
                                 response => {
                                     if (response) {
                                         this.getApiHeaders().then((refreshedHeaders: object) => {
@@ -63,7 +64,7 @@ export class ApiClientService {
                     },
                     (error: HttpErrorResponse) => {
                         if (error.status === 401) {
-                            this.tokenService.refreshTokens().subscribe(
+                            this.authService.refresh().subscribe(
                                 response => {
                                     if (response) {
                                         this.getApiHeaders().then((refreshedHeaders: object) => {
@@ -101,7 +102,7 @@ export class ApiClientService {
     private async getApiHeaders(): Promise<{headers: HttpHeaders}> {
         return { headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + await this.tokenService.getToken()
+                Authorization: 'Bearer ' + await this.tokenService.getAccessToken()
             })
         };
     }
