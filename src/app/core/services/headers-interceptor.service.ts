@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {from, Observable} from 'rxjs';
-import {TokenManagerService} from '@app/auth/services/token-manager.service';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {from, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {AuthenticationService} from '@app/auth/services/authentication.service';
+import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {AuthenticationService} from '@app/core/services/authentication.service';
 
 @Injectable()
-export class ApiInterceptor implements HttpInterceptor {
+export class HeadersInterceptor implements HttpInterceptor {
 
-    constructor(private tokenManager: TokenManagerService) {
+    constructor(private tokenManager: TokenManagerService, private auth: AuthenticationService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -16,7 +16,7 @@ export class ApiInterceptor implements HttpInterceptor {
             .pipe(
                 switchMap(token => {
                     let headers;
-                    if (AuthenticationService.getAuthUrls().includes(req.url)) {
+                    if (null === token) {
                         headers = req.headers
                             .append('Content-Type', 'application/json');
                     } else {

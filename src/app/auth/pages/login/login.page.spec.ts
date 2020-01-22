@@ -7,10 +7,10 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {LoginFormComponent} from '../../components/login-form/login-form.component';
-import {TokenManagerService} from '../../services/token-manager.service';
 import {LoginFormService} from '../../forms/login-form.service';
 import {User} from '../../../shared/models/user';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {TokenManagerService} from '../../../core/services/token-manager.service';
 
 describe('LoginPage', () => {
   let component: LoginPage;

@@ -3,9 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { TokenManagerService } from './token-manager.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AuthResponseInterface} from '../interfaces/auth-response.interface';
 import {User} from '../../shared/models/user';
-import {StorageManagerService} from '../../core/services/storage-manager.service';
+import {StorageManagerService} from './storage-manager.service';
+import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 
 describe('TokenManagerService', () => {
 

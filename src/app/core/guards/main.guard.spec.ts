@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { MainGuard } from './main.guard';
 import {Router, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {TokenManagerService} from '../../auth/services/token-manager.service';
+import {TokenManagerService} from '../services/token-manager.service';
 
 describe('MainGuard', () => {
   beforeEach(() => {

@@ -1,24 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {AuthResponseInterface} from '../interfaces/auth-response.interface';
 import {HttpClient} from '@angular/common/http';
-import {AbstractAuthService} from './abstract-auth.service';
 import {StorageManagerService} from '@app/core/services/storage-manager.service';
-import {environment} from '../../../environments/environment';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
+import {JwtHelper} from '@app/core/services/jwt-helper.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TokenManagerService extends AbstractAuthService {
+export class TokenManagerService {
 
     private readonly ACCESS_TOKEN_STORAGE_KEY = 'api_token';
     private readonly REFRESH_TOKEN_STORAGE_KEY = 'refresh_token';
 
     public token: string = undefined;
 
-    constructor(private storage: StorageManagerService, protected http: HttpClient, private jwtHelper: JwtHelperService) {
-        super(http);
+    constructor(
+        private storage: StorageManagerService,
+        protected http: HttpClient,
+        private jwtHelper: JwtHelper
+    ) {
     }
 
     public async getAccessToken(): Promise<string> {
@@ -29,10 +29,6 @@ export class TokenManagerService extends AbstractAuthService {
         const token = await this.storage.get(this.ACCESS_TOKEN_STORAGE_KEY);
 
         return this.token = token;
-    }
-
-    public getRefreshToken(): Promise<any> {
-        return this.storage.get(this.REFRESH_TOKEN_STORAGE_KEY);
     }
 
     public setTokens(data: AuthResponseInterface): Promise<any> {
@@ -52,13 +48,25 @@ export class TokenManagerService extends AbstractAuthService {
     }
 
     public isAccessTokenExpired(): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            this.getAccessToken().then(
+        return this.isAbstractTokenExpired(this.getAccessToken());
+    }
+
+    public isRefreshTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired(this.getRefreshToken());
+    }
+
+    public getRefreshToken(): Promise<any> {
+        return this.storage.get(this.REFRESH_TOKEN_STORAGE_KEY);
+    }
+
+    private isAbstractTokenExpired(tokenHandler: Promise<any>): Promise<boolean> {
+        return new Promise<boolean>((resolve) => {
+            tokenHandler.then(
                 token => {
-                    if (token) {
+                    if (null !== token) {
                         resolve(this.jwtHelper.isTokenExpired(token));
                     } else {
-                        resolve(true);
+                        resolve(false);
                     }
                 }
             );

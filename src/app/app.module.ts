@@ -11,8 +11,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {IonicStorageModule} from '@ionic/storage';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthInterceptorService} from '@app/auth/services/auth-interceptor.service';
-import {ApiInterceptor} from '@app/core/services/api-interceptor.service';
+import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
+import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -35,7 +35,12 @@ import {ApiInterceptor} from '@app/core/services/api-interceptor.service';
         },
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: ApiInterceptor,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HeadersInterceptor,
             multi: true
         },
     ],

@@ -7,8 +7,8 @@ import {LoginPageRoutingModule} from './login-routing.module';
 import {LoginPage} from './login.page';
 import {SharedModule} from '@app/shared/shared.module';
 import {LoginFormComponent} from '@app/auth/components/login-form/login-form.component';
-import {TokenManagerService} from '@app/auth/services/token-manager.service';
 import {LoginFormService} from '@app/auth/forms/login-form.service';
+import {TokenManagerService} from '@app/core/services/token-manager.service';
 
 
 @NgModule({

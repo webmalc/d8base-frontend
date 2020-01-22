@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {AuthRoutingModule} from './auth-routing.module';
-import {JwtModule} from '@auth0/angular-jwt';
+import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 
 @NgModule({
     imports: [
@@ -11,8 +11,7 @@ import {JwtModule} from '@auth0/angular-jwt';
         FormsModule,
         IonicModule,
         AuthRoutingModule,
-        ReactiveFormsModule,
-        JwtModule
+        ReactiveFormsModule
     ],
     declarations: []
 })
