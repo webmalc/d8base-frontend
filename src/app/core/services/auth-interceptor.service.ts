@@ -18,32 +18,17 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
 
-        return this.refresh().pipe(switchMap(_ => next.handle(req)));
-    }
-
-    private refresh(): Observable<void | {}> {
-        return from(this.tokenManager.isAccessTokenExpired())
+        return from(this.auth.needToRefresh())
             .pipe(
                 switchMap(
-                    (isAccessExpired: boolean) => {
-                        if (isAccessExpired) {
-                            return from(this.tokenManager.isRefreshTokenExpired())
-                                .pipe(
-                                    switchMap(
-                                        (isRefreshExpired: boolean) => {
-                                            if (!isRefreshExpired) {
-                                                return this.auth.refresh();
-                                            }
-                                        }
-                                    )
-                                );
-                        } else {
-                            console.log('in of');
-                            return of();
+                    (isNeedToRefresh: boolean) => {
+                        if (isNeedToRefresh) {
+                            return this.auth.refresh().pipe(switchMap(() => next.handle(req)));
                         }
+
+                        return next.handle(req);
                     }
-                ),
-                finalize(() => console.log('end'))
+                )
             );
     }
 }

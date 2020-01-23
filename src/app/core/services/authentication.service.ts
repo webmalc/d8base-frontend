@@ -47,21 +47,7 @@ export class AuthenticationService implements AuthenticatorInterface{
     }
 
     public needToRefresh(): Promise<boolean> {
-        return new Promise<boolean>(resolve => {
-            this.tokenManager.isAccessTokenExpired().then(
-                isAccessTokenExpired => {
-                    if (isAccessTokenExpired) {
-                        this.tokenManager.isRefreshTokenExpired().then(
-                            isRefreshTokenExpired => {
-                                if (!isRefreshTokenExpired) {
-                                    resolve(true);
-                                }
-                            }
-                        );
-                    }
-                }
-            );
-        });
+        return this.tokenManager.needToRefresh();
     }
 
     public refresh(): Observable<void> {

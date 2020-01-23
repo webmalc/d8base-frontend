@@ -47,16 +47,38 @@ export class TokenManagerService {
         ]);
     }
 
+    public needToRefresh(): Promise<boolean> {
+        return new Promise<boolean>(resolve => {
+            this.isAccessTokenExpired().then(
+                isAccessTokenExpired => {
+                    if (isAccessTokenExpired) {
+                        this.isRefreshTokenExpired().then(
+                            isRefreshTokenExpired => {
+                                if (!isRefreshTokenExpired) {
+                                    resolve(true);
+                                } else {
+                                    resolve(false);
+                                }
+                            }
+                        );
+                    } else {
+                        resolve(false);
+                    }
+                }
+            );
+        });
+    }
+
     public isAccessTokenExpired(): Promise<boolean> {
         return this.isAbstractTokenExpired(this.getAccessToken());
     }
 
-    public isRefreshTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired(this.getRefreshToken());
-    }
-
     public getRefreshToken(): Promise<any> {
         return this.storage.get(this.REFRESH_TOKEN_STORAGE_KEY);
+    }
+
+    private isRefreshTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired(this.getRefreshToken());
     }
 
     private isAbstractTokenExpired(tokenHandler: Promise<any>): Promise<boolean> {

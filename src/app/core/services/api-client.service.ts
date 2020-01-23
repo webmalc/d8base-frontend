@@ -27,19 +27,15 @@ export class ApiClientService {
                     if (error.status === 401) {
                         this.authService.refresh().subscribe(
                             response => {
-                                if (response) {
-                                    this.http.get<any>(this.getHost() + url).subscribe(
-                                        next => {
-                                            subscriber.next(next);
-                                            subscriber.complete();
-                                        },
-                                        err => {
-                                            subscriber.error(err);
-                                        }
-                                    );
-                                } else {
-                                    subscriber.error(response);
-                                }
+                                this.http.get<any>(this.getHost() + url).subscribe(
+                                    next => {
+                                        subscriber.next(next);
+                                        subscriber.complete();
+                                    },
+                                    err => {
+                                        subscriber.error(err);
+                                    }
+                                );
                             },
                             errorRefresh => {
                                 subscriber.error(errorRefresh);
@@ -64,19 +60,15 @@ export class ApiClientService {
                     if (error.status === 401) {
                         this.authService.refresh().subscribe(
                             response => {
-                                if (response) {
-                                    this.http.post<any>(this.getHost() + url, JSON.stringify(data)).subscribe(
-                                        next => {
-                                            subscriber.next(next);
-                                            subscriber.complete();
-                                        },
-                                        err => {
-                                            subscriber.error(err);
-                                        }
-                                    );
-                                } else {
-                                    subscriber.error(error);
-                                }
+                                this.http.post<any>(this.getHost() + url, JSON.stringify(data)).subscribe(
+                                    next => {
+                                        subscriber.next(next);
+                                        subscriber.complete();
+                                    },
+                                    err => {
+                                        subscriber.error(err);
+                                    }
+                                );
                             },
                             errorRefresh => {
                                 subscriber.error(errorRefresh);
