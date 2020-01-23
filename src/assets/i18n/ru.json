@@ -1,0 +1,21 @@
+{
+  "login-form": {
+    "login": "Логин",
+    "password": "Пароль",
+    "sign-in": "Войти",
+    "forgot-password": "Забыли пароль?"
+  },
+  "registration-form": {
+    "email": "Email",
+    "password": "Пароль",
+    "confirm": "Подтвердите пароль",
+    "name": "Имя",
+    "phone": "Номер телефона",
+    "country": "Страна",
+    "city": "Город",
+    "register": "Зарегестрироваться"
+  },
+  "login-page": {
+    "incorrect-login-data": "Недействительные аутентификационные данные"
+  }
+}

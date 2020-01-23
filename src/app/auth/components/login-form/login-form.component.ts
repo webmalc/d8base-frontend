@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginFormService} from '../../forms/login-form.service';
 import {LoginFormFields} from '../../enums/login-form-fields';
-import {User} from '@app/shared/models/user';
 import {Router} from '@angular/router';
 import {Credentials} from '@app/auth/interfaces/credentials';
 

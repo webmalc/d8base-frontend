@@ -1,0 +1,21 @@
+{
+  "login-form": {
+    "login": "Login",
+    "password": "Password",
+    "sign-in": "Sign-in",
+    "forgot-password": "Forgot password?"
+  },
+  "registration-form": {
+    "email": "Email",
+    "password": "Password",
+    "confirm": "Confirm password",
+    "name": "Name",
+    "phone": "Phone number",
+    "country": "Country",
+    "city": "City",
+    "register": "Register"
+  },
+  "login-page": {
+    "incorrect-login-data": "Incorrect login or password"
+  }
+}

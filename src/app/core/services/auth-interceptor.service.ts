@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {from, Observable, of} from 'rxjs';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
-import {filter, finalize, switchMap, tap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private tokenManager: TokenManagerService, private auth: AuthenticationService) {
+    constructor(private auth: AuthenticationService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

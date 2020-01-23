@@ -9,6 +9,7 @@ import {SharedModule} from '@app/shared/shared.module';
 import {LoginFormComponent} from '@app/auth/components/login-form/login-form.component';
 import {LoginFormService} from '@app/auth/forms/login-form.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {TokenManagerService} from '@app/core/services/token-manager.service';
         IonicModule,
         LoginPageRoutingModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        TranslateModule
     ],
     declarations: [
         LoginPage,

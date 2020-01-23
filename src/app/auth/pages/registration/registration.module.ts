@@ -17,16 +17,18 @@ import {IpApiService} from '@app/auth/services/location/ip-api.service';
 import {IpDataService} from '@app/auth/services/location/ip-data.service';
 import {IpnfDataService} from '@app/auth/services/location/ipnf-data.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RegistrationPageRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RegistrationPageRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        TranslateModule,
+    ],
   declarations: [
     RegistrationPage,
     RegistrationFormComponent

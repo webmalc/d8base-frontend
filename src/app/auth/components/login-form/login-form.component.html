@@ -7,7 +7,7 @@
   <ion-row class="ion-justify-content-center">
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-item>
-        <ion-label color="medium" position="floating">login</ion-label>
+        <ion-label color="medium" position="floating">{{ 'login-form.login' | translate }}</ion-label>
         <ion-input type="text" name="username" [formControlName]="formFields.Username" ></ion-input>
       </ion-item>
     </ion-col>
@@ -15,7 +15,7 @@
   <ion-row class="ion-justify-content-center">
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-item>
-        <ion-label color="medium" position="floating">password</ion-label>
+        <ion-label color="medium" position="floating">{{ 'login-form.password' | translate }}</ion-label>
         <ion-input type="text" name="password" [formControlName]="formFields.Password"></ion-input>
       </ion-item>
     </ion-col>
@@ -27,7 +27,7 @@
               expand="block"
               fill="solid"
               color="success"
-      >login</ion-button>
+      >{{ 'login-form.sign-in' | translate }}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="ion-justify-content-center">
@@ -37,7 +37,7 @@
               fill="solid"
               color="secondary"
               (click)="onForgotPassword()"
-      >forgot password?</ion-button>
+      >{{ 'login-form.forgot-password' | translate }}</ion-button>
     </ion-col>
   </ion-row>
 </form>

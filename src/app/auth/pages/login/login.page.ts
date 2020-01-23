@@ -30,8 +30,7 @@ export class LoginPage implements OnInit {
             },
             (error: HttpErrorResponse) => {
                 if (401 === error.status) {
-                    this.errorMessage = 'incorrect login or password';
-                    console.log(error);
+                    this.errorMessage = 'login-page.incorrect-login-data';
                 } else {
                     console.log('something went wrong');
                 }
