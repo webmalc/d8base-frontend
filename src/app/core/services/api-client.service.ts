@@ -10,76 +10,14 @@ import {TokenManagerService} from '@app/core/services/token-manager.service';
 })
 export class ApiClientService {
 
-    constructor(
-        private http: HttpClient,
-        private tokenService: TokenManagerService,
-        private authService: AuthenticationService
-    ) { }
+    constructor(private http: HttpClient) { }
 
     public get(url: string): Observable<any > {
-        return new Observable<any>((subscriber) => {
-            this.http.get<any>(this.getHost() + url).subscribe(
-                (responseData) => {
-                    subscriber.next(responseData);
-                    subscriber.complete();
-                },
-                (error: HttpErrorResponse) => {
-                    if (error.status === 401) {
-                        this.authService.refresh().subscribe(
-                            response => {
-                                this.http.get<any>(this.getHost() + url).subscribe(
-                                    next => {
-                                        subscriber.next(next);
-                                        subscriber.complete();
-                                    },
-                                    err => {
-                                        subscriber.error(err);
-                                    }
-                                );
-                            },
-                            errorRefresh => {
-                                subscriber.error(errorRefresh);
-                            }
-                        );
-                    } else {
-                        subscriber.error(error);
-                    }
-                }
-            );
-        });
+        return this.http.get<any>(this.getHost() + url);
     }
 
     public post(url: string, data: object = {}): Observable<any> {
-        return new Observable<any>((subscriber) => {
-            this.http.post<any>(this.getHost() + url, JSON.stringify(data)).subscribe(
-                (responseData) => {
-                    subscriber.next(responseData);
-                    subscriber.complete();
-                },
-                (error: HttpErrorResponse) => {
-                    if (error.status === 401) {
-                        this.authService.refresh().subscribe(
-                            response => {
-                                this.http.post<any>(this.getHost() + url, JSON.stringify(data)).subscribe(
-                                    next => {
-                                        subscriber.next(next);
-                                        subscriber.complete();
-                                    },
-                                    err => {
-                                        subscriber.error(err);
-                                    }
-                                );
-                            },
-                            errorRefresh => {
-                                subscriber.error(errorRefresh);
-                            }
-                        );
-                    } else {
-                        subscriber.error(error);
-                    }
-                }
-            );
-        });
+        return this.http.post<any>(this.getHost() + url, JSON.stringify(data));
     }
 
     private getHost(): string {
