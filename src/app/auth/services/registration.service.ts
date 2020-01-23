@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {AbstractAuthService} from './abstract-auth.service';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {LocationService} from './location/location.service';
 import {IpDataInterface} from '../interfaces/location/ip-data.interface';
 import {environment} from '../../../environments/environment';
 import {User} from '@app/shared/models/user';
+import {ApiClientService} from '@app/core/services/api-client.service';
 
 @Injectable()
-export class RegistrationService extends AbstractAuthService {
+export class RegistrationService {
 
     private readonly REGISTER_URL = environment.backend.api_register_url;
 
-    constructor(protected http: HttpClient, private locationService: LocationService) {
-        super(http);
-    }
+    constructor(protected client: ApiClientService, private locationService: LocationService) { }
 
     public register(user: User): Observable<boolean> {
         return new Observable<boolean>(
             subscriber => {
                 this.locationService.getIpData().then(
                     (data: IpDataInterface | null) => {
-                        console.log(this.userToJson(user, data));
-                        this.post(this.userToJson(user, data), this.REGISTER_URL).subscribe(
+                        this.client.post(this.REGISTER_URL, this.userToJson(user, data)).subscribe(
                             resp => {
                                 subscriber.next(true);
                                 subscriber.complete();
