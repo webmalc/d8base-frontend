@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
         this.initializeApp();
         this.initDarkMode();
     }
+
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     ngOnInit(): void {
         const appTitle = this.titleService.getTitle();
@@ -36,23 +37,21 @@ export class AppComponent implements OnInit {
             .events.pipe(
             filter(event => event instanceof NavigationEnd),
             map(_ => {
-              let child = this.activatedRoute.firstChild;
-              while (child.firstChild) {
-                child = child.firstChild;
-              }
-              const titleName = 'title';
-              if (child.snapshot.data[titleName]) {
-                return child.snapshot.data[titleName];
-              }
+                let child = this.activatedRoute.firstChild;
+                while (child.firstChild) {
+                    child = child.firstChild;
+                }
+                if (child.snapshot.data.title) {
+                    return child.snapshot.data.title;
+                }
 
-              return appTitle;
+                return appTitle;
             })
         ).subscribe((title: string) => {
-          this.titleService.setTitle(title);
+            this.titleService.setTitle(title);
         })
         ;
     }
-
 
     initializeApp() {
         this.platform.ready().then(() => {
