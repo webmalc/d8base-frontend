@@ -1,6 +1,7 @@
 import {UserInterface} from '../interfaces/user.interface';
 import {LoginFormFields} from '@app/auth/enums/login-form-fields';
 import {RegistrationFormFields} from '@app/auth/enums/registration-form-fields';
+import SettingsInterface from '@app/shared/interfaces/settings.interface';
 
 export class User implements UserInterface {
     // tslint:disable:variable-name
@@ -16,6 +17,8 @@ export class User implements UserInterface {
     private _refresh_token: string | null;
     private _name: string | null;
     private _county_code: string;
+    private _avatar: string | null;
+    private _settings: SettingsInterface | null;
 
     get username(): string {
         return this._username;
@@ -96,6 +99,22 @@ export class User implements UserInterface {
         newInstance.password = data[LoginFormFields.Password];
 
         return newInstance;
+    }
+
+    get avatar(): string | null {
+        return this._avatar;
+    }
+
+    set avatar(value: string | null) {
+        this._avatar = value;
+    }
+
+    get settings(): SettingsInterface | null {
+        return this._settings;
+    }
+
+    set settings(value: SettingsInterface | null) {
+        this._settings = value;
     }
 
     public static createFromRegistrationForm(data: object): User {
