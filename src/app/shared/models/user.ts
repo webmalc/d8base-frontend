@@ -19,12 +19,20 @@ export class User implements UserInterface {
     private _county_code: string;
     private _avatar: string | null;
     private _settings: SettingsInterface | null;
+    private _surname: string | null
 
     get username(): string {
         return this._username;
     }
     set username(value: string) {
         this._username = value;
+    }
+
+    get surname(): string {
+        return this._surname;
+    }
+    set surname(value: string) {
+        this._surname = value;
     }
     get password(): string {
         return this._password;

@@ -1,23 +1,82 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item-group>
 
-<ion-toolbar>
-    <ion-buttons slot="end" class="button-bar">
-        <ion-button
-                color="default"
-                routerLink="/auth/login"
-                routerLinkActive="active"
-                routerDirection="forward"
-                expand="block"
-        >
-            <ion-icon name="lock"></ion-icon>
-        </ion-button>
-        <ion-button
-                color="default"
-                routerLink="/profile"
-                routerLinkActive="active"
-                routerDirection="forward"
-                expand="block"
-        >
-            <ion-icon name="contact"></ion-icon>
-        </ion-button>
-    </ion-buttons>
-</ion-toolbar>
+        <ion-item-divider>
+            <ion-label>Main</ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-label>{{'profile-form.fields.name' | translate }}:</ion-label>
+            <ion-input
+                    [placeholder]="'profile-form.placeholders.name'| translate"
+                    formControlName="name"></ion-input>
+        </ion-item>
+        <div
+                *ngIf="form.get('name').invalid && form.get('name').touched"
+                class="validation">
+            <small *ngIf="form.get('name').errors.required">
+                Поле не может быть пустым
+            </small>
+
+            <small *ngIf="form.get('name').errors.minlength">
+                Поле не должно быть меньше {{form.get('name').errors.minlength.requiredLength}} символов
+            </small>
+
+            <small *ngIf="form.get('name').errors.maxlength">
+                Поле не должно быть больше {{form.get('name').errors.maxlength.requiredLength}} символов
+            </small>
+
+        </div>
+
+        <ion-item>
+            <ion-label>{{'profile-form.fields.surname' | translate }}:</ion-label>
+            <ion-input
+                    [placeholder]="'profile-form.placeholders.surname'| translate"
+                    formControlName="surname"
+
+            ></ion-input>
+        </ion-item>
+        <div
+                *ngIf="form.get('name').invalid && form.get('name').touched"
+                class="validation">
+            <small *ngIf="form.get('name').errors.required">
+                Поле не может быть пустым
+            </small>
+
+            <small *ngIf="form.get('name').errors.minlength">
+                Поле не должно быть меньше {{form.get('name').errors.minlength.requiredLength}} символов
+            </small>
+
+            <small *ngIf="form.get('name').errors.maxlength">
+                Поле не должно быть больше {{form.get('name').errors.maxlength.requiredLength}} символов
+            </small>
+
+        </div>
+
+
+        <ion-item-divider>
+            <ion-label>Settings</ion-label>
+        </ion-item-divider>
+
+        <ion-item-group formGroupName="settings">
+
+            <ion-item>
+                <ion-label>{{'profile-form.fields.settings.push' | translate }}:</ion-label>
+                <ion-input formControlName="push"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>{{'profile-form.fields.settings.autoLocation' | translate }}:</ion-label>
+                <ion-input formControlName="autoLocation"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>{{'profile-form.fields.settings.location' | translate }}:</ion-label>
+                <ion-input formControlName="location"></ion-input>
+            </ion-item>
+
+        </ion-item-group>
+
+    </ion-item-group>
+
+    <ion-button type="submit" expand="block" [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>
+</form>

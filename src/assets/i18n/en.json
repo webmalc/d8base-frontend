@@ -17,5 +17,21 @@
   },
   "login-page": {
     "incorrect-login-data": "Incorrect login or password"
+  },
+  "profile-form": {
+    "fields": {
+      "name": "Name",
+      "surname": "Surname",
+      "settings": {
+        "push": "Push notice",
+        "location": "Location",
+        "autoLocation": "AutoLocation"
+      }
+    },
+    "placeholders": {
+      "name": "Enter your name",
+      "surname": "Enter your surname"
+    },
+    "button": "Save"
   }
 }

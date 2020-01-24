@@ -14,5 +14,6 @@ export interface UserInterface {
     ip: string | null;
     postal_code: string| null;
     name: string | null;
+    surname: string | null;
     settings: SettingsInterface | null;
 }

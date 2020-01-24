@@ -12,8 +12,10 @@ export class ApiClientService {
 
     constructor(private http: HttpClient) { }
 
-    public get(url: string): Observable<any > {
-        return this.http.get<any>(this.getHost() + url);
+    public get <T>(url: string, params?: { [param: string]: string | string[]; } ): Observable<T> {
+        return this.http.get<any>(this.getHost() + url, {
+            params
+        });
     }
 
     public post(url: string, data: object = {}): Observable<any> {

@@ -17,5 +17,21 @@
   },
   "login-page": {
     "incorrect-login-data": "Недействительные аутентификационные данные"
+  },
+  "profile-form": {
+    "fields": {
+      "name": "Имя",
+      "surname": "Фамилия",
+      "settings": {
+        "push": "Push уведомления",
+        "location": "Местоположение",
+        "autoLocation": "Автоопределение положения"
+      }
+    },
+    "placeholders": {
+      "name": "Введите имя",
+      "surname": "Введите фамилию"
+    },
+    "button": "Сохранить"
   }
 }
