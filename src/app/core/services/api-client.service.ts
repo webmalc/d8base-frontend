@@ -17,7 +17,7 @@ export class ApiClientService {
     }
 
     public post(url: string, data: object = {}): Observable<any> {
-        return this.http.post<any>(this.getHost() + url, JSON.stringify(data));
+        return this.http.post<any>(this.getHost() + url, data);
     }
 
     private getHost(): string {

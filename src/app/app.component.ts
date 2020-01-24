@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
         private activatedRoute: ActivatedRoute
     ) {
         this.initializeApp();
-        this.initDarkMode();
     }
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
@@ -57,12 +56,7 @@ export class AppComponent implements OnInit {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-        });
-    }
-
-    private initDarkMode() {
-        this.darkModeService.isDarkMode().then((data: boolean) => {
-            this.darkTheme = data;
+            this.initDarkMode();
         });
     }
 
@@ -73,5 +67,11 @@ export class AppComponent implements OnInit {
 
     public getTitle() {
         return this.titleService.getTitle();
+    }
+
+    private initDarkMode() {
+        this.darkModeService.isDarkMode().then((data: boolean) => {
+            this.darkTheme = data;
+        });
     }
 }
