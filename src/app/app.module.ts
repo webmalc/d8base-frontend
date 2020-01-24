@@ -1,5 +1,5 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
@@ -46,6 +46,7 @@ import {AppInitService} from '@app/core/services/app-init.service';
         },
         StatusBar,
         SplashScreen,
+        Title,
         {
             provide: RouteReuseStrategy,
             useClass: IonicRouteStrategy
@@ -63,5 +64,4 @@ import {AppInitService} from '@app/core/services/app-init.service';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

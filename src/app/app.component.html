@@ -1,4 +1,16 @@
 <ion-app [class.dark-theme]="darkTheme">
-  <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-text>{{getTitle()|titlecase}}</ion-text>
+  </ion-toolbar>
+</ion-header>
+  <ion-content>
   <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+
+<ion-footer>
+    <ion-toolbar class="ion-text-center">
+        <ion-toggle class="ion-float-left" (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
+    </ion-toolbar>
+</ion-footer>
 </ion-app>

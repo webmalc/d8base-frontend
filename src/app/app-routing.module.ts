@@ -2,10 +2,14 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
+    loadChildren: () => import('src/app/auth/auth.module').then( m => m.AuthModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('src/app/profile/profile.module').then( m => m.ProfilePageModule)
   },
 ];
 
