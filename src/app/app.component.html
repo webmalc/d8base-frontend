@@ -1,16 +1,38 @@
 <ion-app [class.dark-theme]="darkTheme">
-<ion-header>
-  <ion-toolbar class="ion-text-center">
-    <ion-text>{{getTitle()|titlecase}}</ion-text>
-  </ion-toolbar>
-</ion-header>
-  <ion-content>
-  <ion-router-outlet></ion-router-outlet>
-  </ion-content>
+    <ion-header>
+        <ion-toolbar class="ion-text-center">
+            <ion-text>{{getTitle()|titlecase}}</ion-text>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+    </ion-content>
 
-<ion-footer>
-    <ion-toolbar class="ion-text-center">
-        <ion-toggle class="ion-float-left" (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
-    </ion-toolbar>
-</ion-footer>
+    <ion-footer>
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
+            </ion-buttons>
+            <ion-buttons slot="end" class="button-bar">
+                <ion-button
+                        color="default"
+                        routerLink="/auth/login"
+                        routerLinkActive="active"
+                        routerDirection="forward"
+                        expand="block"
+                >
+                    <ion-icon name="lock"></ion-icon>
+                </ion-button>
+                <ion-button
+                        color="default"
+                        routerLink="/profile"
+                        routerLinkActive="active"
+                        routerDirection="forward"
+                        expand="block"
+                >
+                    <ion-icon name="contact"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-footer>
 </ion-app>

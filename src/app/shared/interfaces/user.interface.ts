@@ -1,6 +1,9 @@
+import SettingsInterface from '@app/shared/interfaces/settings.interface';
+
 export interface UserInterface {
     username: string;
     password: string | null;
+    avatar: string | null;
     access_token: string | null;
     refresh_token: string | null;
     email: string;
@@ -11,4 +14,5 @@ export interface UserInterface {
     ip: string | null;
     postal_code: string| null;
     name: string | null;
+    settings: SettingsInterface | null;
 }

@@ -1,3 +1,23 @@
+
 <ion-toolbar>
-    AAA
+    <ion-buttons slot="end" class="button-bar">
+        <ion-button
+                color="default"
+                routerLink="/auth/login"
+                routerLinkActive="active"
+                routerDirection="forward"
+                expand="block"
+        >
+            <ion-icon name="lock"></ion-icon>
+        </ion-button>
+        <ion-button
+                color="default"
+                routerLink="/profile"
+                routerLinkActive="active"
+                routerDirection="forward"
+                expand="block"
+        >
+            <ion-icon name="contact"></ion-icon>
+        </ion-button>
+    </ion-buttons>
 </ion-toolbar>
