@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {StorageManagerService} from '@app/core/services/storage-manager.service';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {JwtHelper} from '@app/core/services/jwt-helper.service';
@@ -16,7 +15,6 @@ export class TokenManagerService {
 
     constructor(
         private storage: StorageManagerService,
-        protected http: HttpClient,
         private jwtHelper: JwtHelper
     ) {
     }

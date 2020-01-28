@@ -5,6 +5,7 @@ import SettingsInterface from '@app/shared/interfaces/settings.interface';
 
 export class User implements UserInterface {
     // tslint:disable:variable-name
+    private _id?: number | null;
     private _ip: string | null;
     private _postal_code: string | null;
     private _username: string | null;
@@ -20,6 +21,14 @@ export class User implements UserInterface {
     private _avatar: string | null;
     private _settings: SettingsInterface | null;
     private _surname: string | null
+
+    get id(): number | null {
+        return this._id;
+    }
+
+    set id(value: number | null) {
+        this._id = value;
+    }
 
     get username(): string {
         return this._username;
@@ -101,14 +110,6 @@ export class User implements UserInterface {
         this._name = value;
     }
 
-    public static createFromLoginForm(data: object): User {
-        const newInstance = new User();
-        newInstance.username = data[LoginFormFields.Username];
-        newInstance.password = data[LoginFormFields.Password];
-
-        return newInstance;
-    }
-
     get avatar(): string | null {
         return this._avatar;
     }
@@ -123,18 +124,6 @@ export class User implements UserInterface {
 
     set settings(value: SettingsInterface | null) {
         this._settings = value;
-    }
-
-    public static createFromRegistrationForm(data: object): User {
-        const newInstance = new User();
-        newInstance.email = data[RegistrationFormFields.Email];
-        newInstance.password = data[RegistrationFormFields.Password];
-        newInstance.name = data[RegistrationFormFields.Name];
-        newInstance.phone = data[RegistrationFormFields.Phone];
-        newInstance.country = data[RegistrationFormFields.Country];
-        newInstance.city = data[RegistrationFormFields.City];
-
-        return newInstance;
     }
 
     public toJson(): object {

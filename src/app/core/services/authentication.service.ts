@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
+import { Observable} from 'rxjs';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {TokenManagerService} from '@app/core/services/token-manager.service';

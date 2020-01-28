@@ -9,12 +9,9 @@ export class LocationService {
     }
 
     public getIpData(): Promise<IpDataInterface | null> {
-        return new Promise<IpDataInterface | null>((resolve, reject) => {
+        return new Promise<IpDataInterface | null>((resolve) => {
             this.getData()
                 .then((ipData: IpDataInterface | null) => {
-                    if (ipData === null) {
-                        reject(null);
-                    }
                     resolve(ipData);
                 });
         });
