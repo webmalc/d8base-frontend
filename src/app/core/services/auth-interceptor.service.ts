@@ -29,7 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 switchMap(
                     (isNeedToRefresh: boolean) => {
                         if (isNeedToRefresh) {
-                            return this.auth.refresh().pipe(tap(_ => {console.log('qwerqwr'); }), switchMap(() => next.handle(req)));
+                            return this.auth.refresh().pipe(switchMap(() => next.handle(req)));
                         }
 
                         return next.handle(req);

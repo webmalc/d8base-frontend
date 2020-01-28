@@ -20,7 +20,6 @@ export class RegistrationService {
         return this.combineWithIpData(user).pipe(
             switchMap(
                 (combinedUser: UserInterface) => {
-                    console.log(combinedUser);
                     return this.client.post(this.REGISTER_URL, classToPlain(combinedUser)).pipe(
                         switchMap(
                             response => of(true)
