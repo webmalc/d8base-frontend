@@ -3,6 +3,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {from, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
@@ -11,6 +12,15 @@ export class HeadersInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        try {
+            const url = new URL(req.url);
+            if (url.origin !== environment.backend.url) {
+                return next.handle(req);
+            }
+        } catch (e) {
+            return next.handle(req);
+        }
+
         return from(this.tokenManager.getAccessToken())
             .pipe(
                 switchMap(token => {
