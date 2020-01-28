@@ -8,8 +8,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppComponent} from './app.component';
 import {DarkModeService} from './core/services/dark-mode.service';
-import {StorageManagerService} from './core/services/storage-manager.service';
 import {IonicStorageModule} from '@ionic/storage';
+import {StorageManagerService} from './core/proxies/storage-manager.service';
 
 describe('AppComponent', () => {
 

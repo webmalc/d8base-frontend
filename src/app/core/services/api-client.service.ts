@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {Observable} from 'rxjs';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
 
 @Injectable({
     providedIn: 'root'

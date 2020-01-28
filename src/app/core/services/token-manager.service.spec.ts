@@ -1,10 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 
 import {TokenManagerService} from './token-manager.service';
-import {StorageManagerService} from './storage-manager.service';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
-import {JwtHelper} from './jwt-helper.service';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
+import {StorageManagerService} from '../proxies/storage-manager.service';
+import {JwtHelper} from '../proxies/jwt-helper.service';
 
 describe('TokenManagerService', () => {
 

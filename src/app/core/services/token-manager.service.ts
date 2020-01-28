@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {StorageManagerService} from '@app/core/services/storage-manager.service';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
-import {JwtHelper} from '@app/core/services/jwt-helper.service';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
 
 @Injectable({
     providedIn: 'root'
