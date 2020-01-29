@@ -24,9 +24,12 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     public submitRegistrationForm() {
-        const user = plainToClass(User, this.registrationFormService.form.getRawValue());
+        const userData: object = this.registrationFormService.form.getRawValue();
+        if (userData.hasOwnProperty('confirm')) {
+            delete userData['confirm'];
+        }
 
-        this.user.emit(user);
+        this.user.emit(plainToClass(User, userData));
     }
 
 }

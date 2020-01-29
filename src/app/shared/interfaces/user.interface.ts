@@ -1,6 +1,7 @@
 import SettingsInterface from '@app/shared/interfaces/settings.interface';
 
 export interface UserInterface {
+    id?: number | null;
     username: string;
     password: string | null;
     avatar: string | null;
