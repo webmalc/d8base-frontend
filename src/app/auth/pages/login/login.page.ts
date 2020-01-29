@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
         this.authFactory.getAuthenticator().login(user).subscribe(
             _ => {
                 console.log('successfully authenticated');
-                // return this.router.navigateByUrl('/home');
+                return this.router.navigateByUrl('/profile');
             },
             (error: HttpErrorResponse) => {
                 if (401 === error.status) {

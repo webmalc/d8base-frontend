@@ -7,8 +7,10 @@ import {Router} from '@angular/router';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {RouterTestingModule} from '@angular/router/testing';
 import {LoginFormService} from '../../forms/login-form.service';
-import {User} from '../../../shared/models/user';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {Credentials} from '../../interfaces/credentials';
+import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -17,9 +19,11 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent, ErrorFlashbagComponent ],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule],
-      providers: [LoginFormService]
+      declarations: [ LoginFormComponent, ErrorFlashbagComponent, TranslateServiceMock ],
+      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
+      providers: [
+          LoginFormService
+      ]
     }).compileComponents();
 
     router = TestBed.get(Router);
@@ -35,19 +39,17 @@ describe('LoginFormComponent', () => {
     expect((component as any).loginFormService.form.valid).toBeFalsy();
   });
 
-  it('test correct auth data', () => {
+  it('test submit login form', () => {
     const username = (component as any).loginFormService.form.controls[LoginFormFields.Username];
     const password = (component as any).loginFormService.form.controls[LoginFormFields.Password];
-    password.setValue('valid');
+    password.setValue('valid_pass');
     username.setValue('valid');
 
     spyOn((component as any).user, 'emit');
 
     fixture.debugElement.nativeElement.querySelector('ion-button').click();
 
-    const newUser = new User();
-    newUser.password = 'valid';
-    newUser.username = 'valid';
+    const newUser: Credentials = {username: 'valid', password: 'valid_pass'};
 
     expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
   });
