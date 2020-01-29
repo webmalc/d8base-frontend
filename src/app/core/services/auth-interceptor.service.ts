@@ -5,6 +5,9 @@ import {switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 
+/**
+ *  Tries to refresh auth token if it has expired
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 

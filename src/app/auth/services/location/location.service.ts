@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {IpServicesHolderService} from './ip-services-holder.service';
 import {IpDataInterface} from '../../interfaces/location/ip-data.interface';
 
+/**
+ *  Returns user location data by ip
+ */
 @Injectable()
 export class LocationService {
 

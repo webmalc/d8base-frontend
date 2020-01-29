@@ -10,6 +10,9 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
 import {switchMap} from 'rxjs/operators';
 
+/**
+ *  Main authentication service
+ */
 @Injectable({
     providedIn: 'root'
 })
