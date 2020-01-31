@@ -13,7 +13,7 @@ describe('JwtHelper', () => {
 
     beforeEach(() => TestBed.configureTestingModule({}));
 
-    it('should be created', () => {
+    it('test #decodeToken', () => {
         const service: JwtHelper = TestBed.get(JwtHelper);
         expect(service).toBeTruthy();
 
@@ -22,6 +22,9 @@ describe('JwtHelper', () => {
             'ozfQ.RgncOyqF5zqJnFSJMLfRn6bfVblMWPzlw4V-JBvDYD8';
 
         const data = service.decodeToken(refreshToken);
-        console.log(data);
+
+        expect(data.token_type).toEqual('refresh');
+        expect(data.user_id).toEqual(3);
+        expect(data.exp).toEqual(1666521160);
     });
 });

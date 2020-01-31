@@ -4,11 +4,11 @@ import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {StorageManagerService} from './storage-manager.service';
 import {StorageManagerMock} from './token-manager.service.spec';
 import {TokenManagerService} from './token-manager.service';
 import {ApiClientService} from './api-client.service';
 import {Credentials} from '../../auth/interfaces/credentials';
+import {StorageManagerService} from '../proxies/storage-manager.service';
 
 
 describe('AuthenticationService', () => {

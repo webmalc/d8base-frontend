@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Credentials} from '@app/auth/interfaces/credentials';
-import {AuthenticationService} from '@app/core/services/authentication.service';
+import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 
 @Component({
     selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
     private errorMessage: string;
 
     constructor(
-        private authService: AuthenticationService,
+        private authFactory: AuthenticationFactory,
         private router: Router
     ) {
     }
@@ -23,10 +23,10 @@ export class LoginPage implements OnInit {
     }
 
     public onSubmitLoginForm(user: Credentials) {
-        this.authService.login(user).subscribe(
+        this.authFactory.getAuthenticator().login(user).subscribe(
             _ => {
                 console.log('successfully authenticated');
-                // return this.router.navigateByUrl('/home');
+                return this.router.navigateByUrl('/profile');
             },
             (error: HttpErrorResponse) => {
                 if (401 === error.status) {

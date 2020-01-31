@@ -5,6 +5,9 @@ import {switchMap} from 'rxjs/operators';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '../../../environments/environment';
 
+/**
+ * Sets headers while requesting api endpoints
+ */
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
 

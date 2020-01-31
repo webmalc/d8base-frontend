@@ -1,12 +1,39 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AppInitService } from './app-init.service';
+import {AppInitService} from './app-init.service';
+import {Platform} from '@ionic/angular';
+import {TranslationService} from './translation.service';
 
 describe('AppInitService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: AppInitService = TestBed.get(AppInitService);
-    expect(service).toBeTruthy();
-  });
+    let trans: TranslationService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [
+                {provide: Platform, useValue: {ready: () => Promise.resolve()}},
+                {provide: TranslationService, useValue: {init: () => { return; }}}
+            ],
+        });
+
+        trans = TestBed.get(TranslationService);
+
+        spyOn(trans, 'init');
+    });
+
+    it('should be created', () => {
+        const service: AppInitService = TestBed.get(AppInitService);
+        expect(service).toBeTruthy();
+    });
+
+    it('test translate service init', (done) => {
+        const service: AppInitService = TestBed.get(AppInitService);
+
+        service.init().then(
+            res => {
+                expect((service as any).translationService.init).toHaveBeenCalled();
+                done();
+            }
+        );
+    });
 });

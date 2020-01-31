@@ -18,6 +18,8 @@ import {IpnfDataService} from '../../services/location/ipnf-data.service';
 import {User} from '../../../shared/models/user';
 import {IpDataInterface} from '../../interfaces/location/ip-data.interface';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('RegistrationPage', () => {
   let component: RegistrationPage;
@@ -26,8 +28,8 @@ describe('RegistrationPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegistrationPage, RegistrationFormComponent, ErrorFlashbagComponent ],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule],
+      declarations: [ RegistrationPage, RegistrationFormComponent, ErrorFlashbagComponent, TranslateServiceMock ],
+      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
       providers: [
           RegistrationFormService, FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
           {provide: IpApiService, useClass: IpServiceMock},

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StorageManagerService} from './storage-manager.service';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 
 @Injectable({
     providedIn: 'root'

@@ -1,30 +1,32 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { ErrorFlashbagComponent } from './error-flashbag.component';
+import {ErrorFlashbagComponent} from './error-flashbag.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
 
 describe('ErrorFlashbagComponent', () => {
-  let component: ErrorFlashbagComponent;
-  let fixture: ComponentFixture<ErrorFlashbagComponent>;
+    let component: ErrorFlashbagComponent;
+    let fixture: ComponentFixture<ErrorFlashbagComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ErrorFlashbagComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ErrorFlashbagComponent, TranslateServiceMock],
+            imports: [IonicModule.forRoot(), TranslateModule]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(ErrorFlashbagComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(ErrorFlashbagComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-  it('test input', () => {
-    (component as any).message = 'test';
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+    it('test input', () => {
+        (component as any).message = 'test';
 
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('div').innerText).toEqual('test');
-  });
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('div').innerText).toEqual('test');
+    });
 });
