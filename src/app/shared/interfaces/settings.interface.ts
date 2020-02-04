@@ -3,3 +3,4 @@ export default interface SettingsInterface {
     autoLocation: boolean;
     location: string | null;
 }
+

@@ -1,4 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form
+        *ngIf="form"
+        [formGroup]="form" (ngSubmit)="submit()">
     <ion-item-group>
 
         <ion-item-divider>
@@ -57,26 +59,27 @@
             <ion-label>Settings</ion-label>
         </ion-item-divider>
 
-        <ion-item-group formGroupName="settings">
+<!--        <ion-item-group formGroupName="settings">-->
 
-            <ion-item>
-                <ion-label>{{'profile-form.fields.settings.push' | translate }}:</ion-label>
-                <ion-input formControlName="push"></ion-input>
-            </ion-item>
+<!--            <ion-item>-->
+<!--                <ion-label>{{'profile-form.fields.settings.push' | translate }}:</ion-label>-->
+<!--                <ion-input formControlName="push"></ion-input>-->
+<!--            </ion-item>-->
 
-            <ion-item>
-                <ion-label>{{'profile-form.fields.settings.autoLocation' | translate }}:</ion-label>
-                <ion-input formControlName="autoLocation"></ion-input>
-            </ion-item>
+<!--            <ion-item>-->
+<!--                <ion-label>{{'profile-form.fields.settings.autoLocation' | translate }}:</ion-label>-->
+<!--                <ion-input formControlName="autoLocation"></ion-input>-->
+<!--            </ion-item>-->
 
-            <ion-item>
-                <ion-label>{{'profile-form.fields.settings.location' | translate }}:</ion-label>
-                <ion-input formControlName="location"></ion-input>
-            </ion-item>
+<!--            <ion-item>-->
+<!--                <ion-label>{{'profile-form.fields.settings.location' | translate }}:</ion-label>-->
+<!--                <ion-input formControlName="location"></ion-input>-->
+<!--            </ion-item>-->
 
-        </ion-item-group>
+<!--        </ion-item-group>-->
 
     </ion-item-group>
 
     <ion-button type="submit" expand="block" [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>
 </form>
+
