@@ -1,6 +1,7 @@
 import {LoginPage} from './login.po';
 import {Credentials} from '../../src/app/auth/interfaces/credentials';
 import {browser} from 'protractor';
+import {environment} from '../../src/environments/environment';
 
 describe('Login page', () => {
     let page: LoginPage;
@@ -34,7 +35,7 @@ describe('Login page', () => {
 
         page.getSubmitButton().click().then(() => {
             browser.driver.getCurrentUrl().then(url => {
-                expect(url).toEqual('http://localhost:4200' + '/profile');
+                expect(url).toEqual(environment.origin + '/profile');
                 done();
             });
         });
@@ -44,7 +45,7 @@ describe('Login page', () => {
 
         page.getPasswordRecoverButton().click().then(() => {
             browser.driver.getCurrentUrl().then(url => {
-                expect(url).toEqual('http://localhost:4200' + '/auth/password-recover');
+                expect(url).toEqual(environment.origin + '/auth/password-recover');
                 done();
             });
         });
