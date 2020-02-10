@@ -13,6 +13,16 @@
             <ion-buttons slot="start">
                 <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
             </ion-buttons>
+
+            <ion-select interface="popover" slot="start"
+                        [ngModel]="trans.getCurrentLang()"
+                        (ionChange)="trans.setLang($event.detail.value)"
+            >
+                <ion-select-option *ngFor="let lang of trans.getLanguagesAsArray()" value="{{ lang }}">
+                    {{ lang }}
+                </ion-select-option>
+            </ion-select>
+
             <ion-buttons slot="end" class="button-bar">
                 <ion-button
                         color="default"

@@ -7,6 +7,7 @@ import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {Title} from '@angular/platform-browser';
 import {NavigationEnd, Router, ActivatedRoute} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
+import {TranslationService} from '@app/core/services/translation.service';
 
 @Component({
     selector: 'app-root',
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
         private darkModeService: DarkModeService,
         private titleService: Title,
         private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private trans: TranslationService
     ) {
         this.initializeApp();
     }
