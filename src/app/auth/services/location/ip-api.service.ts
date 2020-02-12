@@ -26,9 +26,13 @@ export class IpApiService implements IpServiceInterface {
                 (res: IpApiResponseInterface) => {
                     try {
                         resolve({
-                            ip: res.ip,
                             postal_code: res.postal,
-                            country_code: res.country
+                            country_code: res.country_code,
+                            latitude: res.latitude,
+                            longitude: res.longitude,
+                            region_code: res.region_code,
+                            timezone: res.timezone,
+                            city: res.city
                         });
                     } catch (e) {
                         reject(e);

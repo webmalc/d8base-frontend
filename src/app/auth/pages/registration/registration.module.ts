@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { RegistrationPageRoutingModule } from './registration-routing.module';
+import {RegistrationPageRoutingModule} from './registration-routing.module';
 
-import { RegistrationPage } from './registration.page';
+import {RegistrationPage} from './registration.page';
 import {SharedModule} from '@app/shared/shared.module';
 import {RegistrationFormComponent} from '@app/auth/components/registration-form/registration-form.component';
 import {RegistrationFormService} from '@app/auth/forms/registration-form.service';
@@ -29,19 +29,20 @@ import {TranslateModule} from '@ngx-translate/core';
         ReactiveFormsModule,
         TranslateModule,
     ],
-  declarations: [
-    RegistrationPage,
-    RegistrationFormComponent
-  ],
-  providers: [
-    TokenManagerService,
-    RegistrationFormService,
-    RegistrationService,
-    LocationService,
-    IpServicesHolderService,
-    IpApiService,
-    IpDataService,
-    IpnfDataService
-  ]
+    declarations: [
+        RegistrationPage,
+        RegistrationFormComponent
+    ],
+    providers: [
+        TokenManagerService,
+        RegistrationFormService,
+        RegistrationService,
+        LocationService,
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService
+    ]
 })
-export class RegistrationPageModule {}
+export class RegistrationPageModule {
+}
