@@ -31,4 +31,12 @@ export class TranslationService {
     public trans(key?: string): Observable<string | any> {
         return this.translator.get(key);
     }
+
+    public getCurrentLang(): string {
+        return this.translator.getDefaultLang();
+    }
+
+    public getLanguagesAsArray(): Array<string> {
+        return Object.values(this.LANGUAGES);
+    }
 }

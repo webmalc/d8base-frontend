@@ -23,7 +23,7 @@ import {AppInitService} from '@app/core/services/app-init.service';
     entryComponents: [],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(),
+        IonicModule.forRoot({animated: false}),
         IonicStorageModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
