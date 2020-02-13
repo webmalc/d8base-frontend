@@ -5,140 +5,121 @@ import SettingsInterface from '@app/shared/interfaces/settings.interface';
 
 export class User implements UserInterface {
     // tslint:disable:variable-name
-    private _id?: number | null;
-    private _ip: string | null;
-    private _postal_code: string | null;
-    private _username: string | null;
-    private _password: string | null;
-    private _access_token: string | null;
-    private _city: string | null;
-    private _country: string | null;
-    private _email: string | null;
-    private _phone: string | null;
-    private _refresh_token: string | null;
-    private _name: string | null;
-    private _county_code: string;
-    private _avatar: string | null;
-    private _settings: SettingsInterface | null;
-    private _surname: string | null
+    private _id?: number;
+    private _firstName: string;
+    private _lastName: string;
+    private _patronymic?: string;
+    private _password?: string;
+    private _email: string;
+    private _phone: string;
+    private _avatar?: string;
+    private _gender: string;
+    private _age?: number;
+    private _main_language: string;
+    private _languages?: string[];
+    private _type_of_user: string;
 
-    get id(): number | null {
+    get id(): number {
         return this._id;
     }
 
-    set id(value: number | null) {
+    set id(value: number) {
         this._id = value;
     }
 
-    get username(): string {
-        return this._username;
-    }
-    set username(value: string) {
-        this._username = value;
+    get firstName(): string {
+        return this._firstName;
     }
 
-    get surname(): string {
-        return this._surname;
+    set firstName(value: string) {
+        this._firstName = value;
     }
-    set surname(value: string) {
-        this._surname = value;
+
+    get lastName(): string {
+        return this._lastName;
     }
+
+    set lastName(value: string) {
+        this._lastName = value;
+    }
+
+    get patronymic(): string {
+        return this._patronymic;
+    }
+
+    set patronymic(value: string) {
+        this._patronymic = value;
+    }
+
     get password(): string {
         return this._password;
     }
+
     set password(value: string) {
         this._password = value;
     }
-    get access_token(): string | null {
-        return this._access_token;
-    }
-    set access_token(value: string | null) {
-        this._access_token = value;
-    }
-    get city(): string | null {
-        return this._city;
-    }
-    set city(value: string | null) {
-        this._city = value;
-    }
-    get country(): string | null {
-        return this._country;
-    }
-    set country(value: string | null) {
-        this._country = value;
-    }
-    get county_code(): string {
-        return this._county_code;
-    }
-    set county_code(value: string) {
-        this._county_code = value;
-    }
-    get email(): string | null {
+
+    get email(): string {
         return this._email;
     }
-    set email(value: string | null) {
+
+    set email(value: string) {
         this._email = value;
     }
-    get phone(): string | null {
+
+    get phone(): string {
         return this._phone;
     }
-    set phone(value: string | null) {
+
+    set phone(value: string) {
         this._phone = value;
     }
-    get refresh_token(): string | null {
-        return this._refresh_token;
-    }
-    set refresh_token(value: string | null) {
-        this._refresh_token = value;
-    }
-    get postal_code(): string {
-        return this._postal_code;
-    }
-    set postal_code(value: string) {
-        this._postal_code = value;
-    }
-    get ip(): string {
-        return this._ip;
-    }
-    set ip(value: string) {
-        this._ip = value;
-    }
-    get name(): string | null {
-        return this._name;
-    }
-    set name(value: string | null) {
-        this._name = value;
-    }
 
-    get avatar(): string | null {
+    get avatar(): string {
         return this._avatar;
     }
 
-    set avatar(value: string | null) {
+    set avatar(value: string) {
         this._avatar = value;
     }
 
-    get settings(): SettingsInterface | null {
-        return this._settings;
+    get gender(): string {
+        return this._gender;
     }
 
-    set settings(value: SettingsInterface | null) {
-        this._settings = value;
+    set gender(value: string) {
+        this._gender = value;
     }
 
-    public toJson(): object {
-        return {
-            name: this.name,
-            password: this.password,
-            username: this.username,
-            access_token: this.access_token,
-            refresh_token: this.refresh_token,
-            email: this.email,
-            phone: this.phone,
-            country: this.country,
-            ip: this.ip,
-            postal_code: this.postal_code,
-            country_code: this.county_code
-        };
+    get age(): number {
+        return this._age;
+    }
+
+    set age(value: number) {
+        this._age = value;
+    }
+
+    get main_language(): string {
+        return this._main_language;
+    }
+
+    set main_language(value: string) {
+        this._main_language = value;
+    }
+
+    get languages(): string[] {
+        return this._languages;
+    }
+
+    set languages(value: string[]) {
+        this._languages = value;
+    }
+
+    get type_of_user(): string {
+        return this._type_of_user;
+    }
+
+    set type_of_user(value: string) {
+        this._type_of_user = value;
     }
 }

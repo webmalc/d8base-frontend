@@ -65,7 +65,7 @@ describe('RegistrationPage', () => {
     const user = new User();
     user.email = 'test@test.te';
     user.password = 'test';
-    user.name = 'test';
+    user.firstName = 'test';
 
     component.onSubmitRegistrationForm(user);
     flush();

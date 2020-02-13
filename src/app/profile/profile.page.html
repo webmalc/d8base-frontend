@@ -6,58 +6,169 @@
         <ion-item-divider>
             <ion-label>Main</ion-label>
         </ion-item-divider>
+
         <ion-item>
             <ion-label>{{'profile-form.fields.name' | translate }}:</ion-label>
             <ion-input
                     [placeholder]="'profile-form.placeholders.name'| translate"
-                    formControlName="name"></ion-input>
+                    formControlName="first_name"></ion-input>
         </ion-item>
         <div
-                *ngIf="form.get('name').invalid && form.get('name').touched"
+                *ngIf="form.get('first_name').invalid && form.get('first_name').touched"
                 class="validation">
-            <small *ngIf="form.get('name').errors.required">
+            <small *ngIf="form.get('first_name').errors.required">
                 Поле не может быть пустым
             </small>
 
-            <small *ngIf="form.get('name').errors.minlength">
-                Поле не должно быть меньше {{form.get('name').errors.minlength.requiredLength}} символов
+            <small *ngIf="form.get('first_name').errors.minlength">
+                Поле не должно быть меньше {{form.get('first_name').errors.minlength.requiredLength}} символов
             </small>
 
-            <small *ngIf="form.get('name').errors.maxlength">
-                Поле не должно быть больше {{form.get('name').errors.maxlength.requiredLength}} символов
+            <small *ngIf="form.get('first_name').errors.maxlength">
+                Поле не должно быть больше {{form.get('first_name').errors.maxlength.requiredLength}} символов
             </small>
-
         </div>
 
         <ion-item>
             <ion-label>{{'profile-form.fields.surname' | translate }}:</ion-label>
             <ion-input
                     [placeholder]="'profile-form.placeholders.surname'| translate"
-                    formControlName="surname"
+                    formControlName="last_name"
 
             ></ion-input>
         </ion-item>
         <div
-                *ngIf="form.get('name').invalid && form.get('name').touched"
+                *ngIf="form.get('last_name').invalid && form.get('last_name').touched"
                 class="validation">
-            <small *ngIf="form.get('name').errors.required">
+            <small *ngIf="form.get('last_name').errors.required">
                 Поле не может быть пустым
             </small>
 
-            <small *ngIf="form.get('name').errors.minlength">
-                Поле не должно быть меньше {{form.get('name').errors.minlength.requiredLength}} символов
+            <small *ngIf="form.get('last_name').errors.minlength">
+                Поле не должно быть меньше {{form.get('last_name').errors.minlength.requiredLength}} символов
             </small>
 
-            <small *ngIf="form.get('name').errors.maxlength">
-                Поле не должно быть больше {{form.get('name').errors.maxlength.requiredLength}} символов
+            <small *ngIf="form.get('last_name').errors.maxlength">
+                Поле не должно быть больше {{form.get('last_name').errors.maxlength.requiredLength}} символов
+            </small>
+        </div>
+
+        <ion-item>
+            <ion-label>{{'profile-form.fields.avatar' | translate }}:</ion-label>
+            <ion-input
+                    [placeholder]="'profile-form.placeholders.avatar'| translate"
+                    formControlName="avatar"></ion-input>
+        </ion-item>
+        <div
+                *ngIf="form.get('avatar').invalid && form.get('avatar').touched"
+                class="validation">
+            <small *ngIf="form.get('avatar').errors.required">
+                Поле не может быть пустым
             </small>
 
+            <small *ngIf="form.get('avatar').errors.minlength">
+                Поле не должно быть меньше {{form.get('avatar').errors.minlength.requiredLength}} символов
+            </small>
+
+            <small *ngIf="form.get('avatar').errors.maxlength">
+                Поле не должно быть больше {{form.get('avatar').errors.maxlength.requiredLength}} символов
+            </small>
         </div>
 
 
-        <ion-item-divider>
-            <ion-label>Settings</ion-label>
-        </ion-item-divider>
+        <ion-item>
+            <ion-label>{{'profile-form.fields.email' | translate }}:</ion-label>
+            <ion-input
+                    [placeholder]="'profile-form.placeholders.email'| translate"
+                    formControlName="email"></ion-input>
+        </ion-item>
+        <div
+                *ngIf="form.get('email').invalid && form.get('email').touched"
+                class="validation">
+            <small *ngIf="form.get('email').errors.required">
+                Поле не может быть пустым
+            </small>
+
+            <small *ngIf="form.get('email').errors.minlength">
+                Поле не должно быть меньше {{form.get('email').errors.minlength.requiredLength}} символов
+            </small>
+
+            <small *ngIf="form.get('email').errors.maxlength">
+                Поле не должно быть больше {{form.get('email').errors.maxlength.requiredLength}} символов
+            </small>
+        </div>
+
+<!--        <ion-item>-->
+<!--            <ion-label>{{'profile-form.fields.country' | translate }}:</ion-label>-->
+<!--            <ion-input-->
+<!--                    [placeholder]="'profile-form.placeholders.country'| translate"-->
+<!--                    formControlName="country"></ion-input>-->
+<!--        </ion-item>-->
+<!--        <div-->
+<!--                *ngIf="form.get('country').invalid && form.get('country').touched"-->
+<!--                class="validation">-->
+<!--            <small *ngIf="form.get('country').errors.required">-->
+<!--                Поле не может быть пустым-->
+<!--            </small>-->
+
+<!--            <small *ngIf="form.get('country').errors.minlength">-->
+<!--                Поле не должно быть меньше {{form.get('country').errors.minlength.requiredLength}} символов-->
+<!--            </small>-->
+
+<!--            <small *ngIf="form.get('country').errors.maxlength">-->
+<!--                Поле не должно быть больше {{form.get('country').errors.maxlength.requiredLength}} символов-->
+<!--            </small>-->
+<!--        </div>-->
+
+
+<!--        <ion-item>-->
+<!--            <ion-label>{{'profile-form.fields.city' | translate }}:</ion-label>-->
+<!--            <ion-input-->
+<!--                    [placeholder]="'profile-form.placeholders.city'| translate"-->
+<!--                    formControlName="city"></ion-input>-->
+<!--        </ion-item>-->
+<!--        <div-->
+<!--                *ngIf="form.get('city').invalid && form.get('city').touched"-->
+<!--                class="validation">-->
+<!--            <small *ngIf="form.get('city').errors.required">-->
+<!--                Поле не может быть пустым-->
+<!--            </small>-->
+
+<!--            <small *ngIf="form.get('city').errors.minlength">-->
+<!--                Поле не должно быть меньше {{form.get('city').errors.minlength.requiredLength}} символов-->
+<!--            </small>-->
+
+<!--            <small *ngIf="form.get('city').errors.maxlength">-->
+<!--                Поле не должно быть больше {{form.get('city').errors.maxlength.requiredLength}} символов-->
+<!--            </small>-->
+<!--        </div>-->
+
+<!--        <ion-item>-->
+<!--            <ion-label>{{'profile-form.fields.postal_code' | translate }}:</ion-label>-->
+<!--            <ion-input-->
+<!--                    [placeholder]="'profile-form.placeholders.postal_code'| translate"-->
+<!--                    formControlName="postal_code"></ion-input>-->
+<!--        </ion-item>-->
+<!--        <div-->
+<!--                *ngIf="form.get('postal_code').invalid && form.get('postal_code').touched"-->
+<!--                class="validation">-->
+<!--            <small *ngIf="form.get('postal_code').errors.required">-->
+<!--                Поле не может быть пустым-->
+<!--            </small>-->
+
+<!--            <small *ngIf="form.get('postal_code').errors.minlength">-->
+<!--                Поле не должно быть меньше {{form.get('postal_code').errors.minlength.requiredLength}} символов-->
+<!--            </small>-->
+
+<!--            <small *ngIf="form.get('postal_code').errors.maxlength">-->
+<!--                Поле не должно быть больше {{form.get('postal_code').errors.maxlength.requiredLength}} символов-->
+<!--            </small>-->
+<!--        </div>-->
+
+
+<!--        <ion-item-divider>-->
+<!--            <ion-label>Settings</ion-label>-->
+<!--        </ion-item-divider>-->
 
 <!--        <ion-item-group formGroupName="settings">-->
 
@@ -78,8 +189,10 @@
 
 <!--        </ion-item-group>-->
 
+
     </ion-item-group>
 
-    <ion-button type="submit" expand="block" [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>
+    <ion-button type="submit" expand="block" >{{'profile-form.button'| translate}}</ion-button>
+<!--    <ion-button type="submit" expand="block" [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>-->
 </form>
 
