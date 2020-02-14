@@ -12,8 +12,6 @@ import {environment} from '../../../environments/environment';
 })
 export class UserManagerService {
 
-    private user: UserInterface;
-
     constructor(private api: ApiClientService) {
     }
 
@@ -28,7 +26,4 @@ export class UserManagerService {
     public updateUser(user: UserInterface): Observable<UserInterface> {
         return this.api.patch<User>(`${environment.backend.api_users}/${user.id}`, user);
     }
-
-
-
 }

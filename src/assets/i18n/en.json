@@ -19,18 +19,35 @@
     "incorrect-login-data": "Incorrect login or password"
   },
   "profile-form": {
+    "group": {
+      "main": "Main",
+      "credentials": "Credentials"
+    },
     "fields": {
-      "name": "Name",
-      "surname": "Surname",
-      "settings": {
-        "push": "Push notice",
-        "location": "Location",
-        "autoLocation": "AutoLocation"
-      }
+      "name": "First name",
+      "surname": "Last name",
+      "patronymic": "Patronymic",
+      "password": "Password",
+      "email": "Email",
+      "phone": "Phone number",
+      "avatar": "Avatar",
+      "gender": "Gender",
+      "age": "Age",
+      "main_language": "Language",
+      "languages": "Additional Languages"
     },
     "placeholders": {
-      "name": "Enter your name",
-      "surname": "Enter your surname"
+      "name": "Enter your first name",
+      "surname": "Enter your last name",
+      "patronymic": "Enter your patronymic",
+      "password": "Enter your password",
+      "email": "Enter your email",
+      "phone": "Enter your phone number",
+      "avatar": "Avatar",
+      "gender": "Gender",
+      "age": "Age",
+      "main_language": "Main Language",
+      "languages": "Additional Language"
     },
     "button": "Save"
   }

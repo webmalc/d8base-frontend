@@ -4,19 +4,24 @@ import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/erro
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {TranslateModule} from '@ngx-translate/core';
+import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
+import {IonicModule} from '@ionic/angular';
 
 
 
 @NgModule({
-  declarations: [
-    ErrorFlashbagComponent
-  ],
-  exports: [
-    ErrorFlashbagComponent
-  ],
+    declarations: [
+        ErrorFlashbagComponent,
+        PictureSelectorComponent
+    ],
+    exports: [
+        ErrorFlashbagComponent,
+        PictureSelectorComponent
+    ],
     imports: [
         CommonModule,
-        TranslateModule
+        TranslateModule,
+        IonicModule
     ],
   providers: [
       MainGuard,

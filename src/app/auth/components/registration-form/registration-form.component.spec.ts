@@ -50,10 +50,10 @@ describe('RegistrationFormComponent', () => {
         const user = new User();
         user.email = 'test@test.te';
         user.password = 'test';
-        user.name = null;
+        user.firstName = null;
         user.phone = null;
-        user.country = null;
-        user.city = null;
+
+
 
         expect((component as any).user.emit).toHaveBeenCalledWith(user);
     });
