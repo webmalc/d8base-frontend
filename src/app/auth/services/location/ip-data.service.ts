@@ -24,9 +24,13 @@ export class IpDataService implements IpServiceInterface {
                 (res: IpDataResponseInterface) => {
                     try {
                         resolve({
-                            ip: res.ip,
                             postal_code: res.postal,
-                            country_code: res.country_code
+                            country_code: res.country_code,
+                            latitude: res.latitude,
+                            longitude: res.longitude,
+                            timezone: res.time_zone.name,
+                            city: res.city,
+                            region_code: res.region_code
                         });
                     } catch (e) {
                         reject();

@@ -13,7 +13,7 @@ export class JwtHelper {
     }
 
     public isTokenExpired(token?: string, offsetSeconds?: number): boolean {
-        return this.auth0JwtHelper.isTokenExpired(token);
+        return this.auth0JwtHelper.isTokenExpired(token, offsetSeconds);
     }
 
     public decodeToken(token?: string): TokenInterface {

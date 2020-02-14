@@ -3,7 +3,9 @@ export interface IpApiResponseInterface {
     postal: string;
     error: string;
     city: string;
-    country: string;
-    timezone: string;        //	timezone (IANA format i.e. “Area/Location”)
-    utc_offset: string;      //	UTC offset as +HHMM or -HHMM (HH is hours, MM is minutes)
+    timezone: string;
+    country_code: string;
+    latitude: string;
+    longitude: string;
+    region_code: string;
 }

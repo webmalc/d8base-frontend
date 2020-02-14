@@ -3,9 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {IpDataInterface} from '../../interfaces/location/ip-data.interface';
 import {catchError} from 'rxjs/operators';
 import {IpnfResponseInterface} from '../../interfaces/location/ipnf-response.interface';
+import {IpServiceInterface} from '@app/auth/interfaces/location/ip-service.interface';
 
 @Injectable()
-export class IpnfDataService {
+export class IpnfDataService implements IpServiceInterface {
 
     private readonly url = 'https://ip.nf/me.json';
 
@@ -23,9 +24,11 @@ export class IpnfDataService {
                 (res: IpnfResponseInterface) => {
                     try {
                         resolve({
-                            ip: res.ip.ip,
                             postal_code: res.ip.post_code,
-                            country_code: res.ip.country_code
+                            country_code: res.ip.country_code,
+                            city: res.ip.city,
+                            latitude: res.ip.latitude,
+                            longitude: res.ip.longitude
                         });
                     } catch (e) {
                         reject();

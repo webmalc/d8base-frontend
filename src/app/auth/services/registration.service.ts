@@ -32,9 +32,9 @@ export class RegistrationService {
             )
         );
     }
-
+    // TODO: do 2 requests instead of combined user
     private combineWithIpData(user: User): Observable<UserInterface> {
-        return from(this.locationService.getIpData()).pipe(
+        return from(this.locationService.getLocationData()).pipe(
             switchMap(
                 (data: IpDataInterface | null) => {
                     if (null !== data) {

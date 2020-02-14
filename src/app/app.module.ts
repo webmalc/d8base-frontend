@@ -17,6 +17,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslationService} from '@app/core/services/translation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {GeolocationService} from '@app/core/proxies/geolocation.service';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,6 +32,7 @@ import {AppInitService} from '@app/core/services/app-init.service';
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
+        LeafletModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -61,6 +65,8 @@ import {AppInitService} from '@app/core/services/app-init.service';
             useClass: HeadersInterceptor,
             multi: true
         },
+        Geolocation,
+        GeolocationService
     ],
     bootstrap: [AppComponent]
 })

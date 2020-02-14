@@ -8,6 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import {TranslateModule} from '@ngx-translate/core';
+import {SharedModule} from '@app/shared/shared.module';
 
 @NgModule({
     imports: [
@@ -16,8 +17,10 @@ import {TranslateModule} from '@ngx-translate/core';
         IonicModule,
         ProfilePageRoutingModule,
         TranslateModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
+
   declarations: [ProfilePage]
 })
 export class ProfilePageModule {}
