@@ -6,7 +6,7 @@ import {IpApiService} from './ip-api.service';
 import {IpDataService} from './ip-data.service';
 import {IpnfDataService} from './ipnf-data.service';
 import {Observable} from 'rxjs';
-import {IpDataInterface} from '../../interfaces/location/ip-data.interface';
+import {LocationInterface} from '../../../auth/interfaces/location/location.interface';
 import {HttpClient} from '@angular/common/http';
 
 describe('LocationService', () => {
@@ -29,7 +29,7 @@ describe('LocationService', () => {
     const service: LocationService = TestBed.get(LocationService);
 
     service.getIpData().then(
-        (data: IpDataInterface) => {
+        (data: LocationInterface) => {
           expect(data.ip).toBe('testIp');
           expect(data.postal_code).toBe('testPostal');
           expect(data.country_code).toBe('testCode');

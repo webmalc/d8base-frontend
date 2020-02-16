@@ -3,6 +3,7 @@ import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {User} from '@app/shared/models/user';
 import {plainToClass} from 'class-transformer';
+import {LocationModel} from '@app/core/models/location.model';
 
 @Component({
     selector: 'app-registration-form',
@@ -11,7 +12,7 @@ import {plainToClass} from 'class-transformer';
 })
 export class RegistrationFormComponent implements OnInit {
 
-    @Output() private user = new EventEmitter<User>();
+    @Output() private registrationFormData = new EventEmitter<{user: User, location: LocationModel}>();
 
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
@@ -24,12 +25,11 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     public submitRegistrationForm() {
-        const userData: object = this.registrationFormService.form.getRawValue();
-        if (userData.hasOwnProperty('confirm')) {
-            delete userData['confirm'];
-        }
+        const formData: object = this.registrationFormService.form.getRawValue();
 
-        this.user.emit(plainToClass(User, userData));
+        const user = plainToClass(User, formData, { excludeExtraneousValues: true });
+        const location = plainToClass(LocationModel, formData, { excludeExtraneousValues: true });
+
+        this.registrationFormData.emit({user, location});
     }
-
 }

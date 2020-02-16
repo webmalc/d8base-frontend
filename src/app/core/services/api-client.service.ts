@@ -10,12 +10,12 @@ export class ApiClientService {
 
     constructor(private http: HttpClient) { }
 
-    public get(url: string): Observable<any > {
-        return this.http.get<any>(this.getHost() + url);
+    public get<T>(url: string): Observable<T> {
+        return this.http.get<T>(this.getHost() + url);
     }
 
-    public post(url: string, data: object = {}): Observable<any> {
-        return this.http.post<any>(this.getHost() + url, data);
+    public post<T>(url: string, data: object = {}): Observable<T> {
+        return this.http.post<T>(this.getHost() + url, data);
     }
 
     private getHost(): string {

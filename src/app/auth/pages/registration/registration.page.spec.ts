@@ -10,13 +10,13 @@ import {Observable} from 'rxjs';
 import {RegistrationFormComponent} from '../../components/registration-form/registration-form.component';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationService} from '../../services/registration.service';
-import {LocationService} from '../../services/location/location.service';
-import {IpServicesHolderService} from '../../services/location/ip-services-holder.service';
-import {IpApiService} from '../../services/location/ip-api.service';
-import {IpDataService} from '../../services/location/ip-data.service';
-import {IpnfDataService} from '../../services/location/ipnf-data.service';
+import {LocationService} from '../../../core/services/location/location.service';
+import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
+import {IpApiService} from '../../../core/services/location/ip-api.service';
+import {IpDataService} from '../../../core/services/location/ip-data.service';
+import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
 import {User} from '../../../shared/models/user';
-import {IpDataInterface} from '../../interfaces/location/ip-data.interface';
+import {LocationInterface} from '../../interfaces/location/location.interface';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
 import {TranslateModule} from '@ngx-translate/core';
@@ -75,8 +75,8 @@ describe('RegistrationPage', () => {
 });
 
 export class IpServiceMock {
-  public getData(): Promise<IpDataInterface> {
-    return new Promise<IpDataInterface>((resolve, reject) => {
+  public getData(): Promise<LocationInterface> {
+    return new Promise<LocationInterface>((resolve, reject) => {
       resolve({
         ip: 'testIP',
         postal_code: 'testCode',

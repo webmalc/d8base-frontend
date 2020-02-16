@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {RegistrationService} from './registration.service';
 import {ApiClientService} from '../../core/services/api-client.service';
 import {of} from 'rxjs';
-import {LocationService} from './location/location.service';
+import {LocationService} from '../../core/services/location/location.service';
 import {User} from '../../shared/models/user';
 
 describe('RegistrationService', () => {

@@ -1,50 +1,46 @@
 import { Injectable } from '@angular/core';
 import {from, Observable, of} from 'rxjs';
-import {LocationService} from './location/location.service';
-import {IpDataInterface} from '../interfaces/location/ip-data.interface';
+import {LocationService} from '@app/core/services/location/location.service';
 import {environment} from '../../../environments/environment';
 import {User} from '@app/shared/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {plainToClassFromExist, classToPlain} from 'class-transformer';
+import {classToPlain, plainToClass, plainToClassFromExist} from 'class-transformer';
 import {catchError, switchMap} from 'rxjs/operators';
 import {UserInterface} from '@app/shared/interfaces/user.interface';
+import {LocationModel} from '@app/core/models/location.model';
+import {LocationApiService} from '@app/core/services/location/location-api.service';
 
 @Injectable()
 export class RegistrationService {
 
     private readonly REGISTER_URL = environment.backend.api_register_url;
 
-    constructor(protected client: ApiClientService, private locationService: LocationService) { }
+    constructor(
+        protected client: ApiClientService,
+        private locationService: LocationService,
+        private locationApiService: LocationApiService
+    ) { }
 
-    public register(user: User): Observable<boolean> {
-        return this.combineWithIpData(user).pipe(
+    public register(user: User, location: LocationModel): Observable<boolean> {
+        return this.client.post<UserInterface>(this.REGISTER_URL, classToPlain(user)).pipe(
             switchMap(
-                (combinedUser: UserInterface) => {
-                    return this.client.post(this.REGISTER_URL, classToPlain(combinedUser)).pipe(
+                (newUser: UserInterface) => {
+                    return from(this.locationService.getMergedLocationData()).pipe(
                         switchMap(
-                            response => of(true)
-                        ),
-                        catchError(
-                            err => of(err)
+                            (ipLocation: LocationModel) => {
+                                const merged: LocationModel = plainToClassFromExist(location, ipLocation);
+                                return this.locationApiService.saveLocation(merged, plainToClass(User, newUser)).pipe(
+                                    switchMap(
+                                        result => of(true)
+                                    )
+                                );
+                            }
                         )
                     );
                 }
-            )
-        );
-    }
-    // TODO: do 2 requests instead of combined user
-    private combineWithIpData(user: User): Observable<UserInterface> {
-        return from(this.locationService.getLocationData()).pipe(
-            switchMap(
-                (data: IpDataInterface | null) => {
-                    if (null !== data) {
-                        const combined: UserInterface = plainToClassFromExist(user, data);
-
-                        return of(combined);
-                    }
-
-                    return of(user);
-                }
+            ),
+            catchError(
+                err => of(err)
             )
         );
     }

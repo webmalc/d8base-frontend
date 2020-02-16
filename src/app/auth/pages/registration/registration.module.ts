@@ -11,11 +11,6 @@ import {SharedModule} from '@app/shared/shared.module';
 import {RegistrationFormComponent} from '@app/auth/components/registration-form/registration-form.component';
 import {RegistrationFormService} from '@app/auth/forms/registration-form.service';
 import {RegistrationService} from '@app/auth/services/registration.service';
-import {LocationService} from '@app/auth/services/location/location.service';
-import {IpServicesHolderService} from '@app/auth/services/location/ip-services-holder.service';
-import {IpApiService} from '@app/auth/services/location/ip-api.service';
-import {IpDataService} from '@app/auth/services/location/ip-data.service';
-import {IpnfDataService} from '@app/auth/services/location/ipnf-data.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -36,12 +31,7 @@ import {TranslateModule} from '@ngx-translate/core';
     providers: [
         TokenManagerService,
         RegistrationFormService,
-        RegistrationService,
-        LocationService,
-        IpServicesHolderService,
-        IpApiService,
-        IpDataService,
-        IpnfDataService
+        RegistrationService
     ]
 })
 export class RegistrationPageModule {

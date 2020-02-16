@@ -20,6 +20,12 @@ import {AppInitService} from '@app/core/services/app-init.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {LocationService} from '@app/core/services/location/location.service';
+import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
+import {IpApiService} from '@app/core/services/location/ip-api.service';
+import {IpDataService} from '@app/core/services/location/ip-data.service';
+import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
+import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -66,7 +72,16 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
             multi: true
         },
         Geolocation,
-        GeolocationService
+        GeolocationService,
+        LocationService,
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        {
+            provide: LocationAccuracy,
+            useValue: window.hasOwnProperty('cordova') ? LocationAccuracy : {request: () => Promise.resolve(true), canRequest: () => Promise.resolve()}
+        }
     ],
     bootstrap: [AppComponent]
 })

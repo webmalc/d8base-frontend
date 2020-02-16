@@ -6,6 +6,7 @@ export const environment = {
         api_auth_url: '',
         api_refresh_url: '',
         api_register_url: '',
-        api_password_recovery_url: ''
+        api_password_recovery_url: '',
+        api_save_location_url: ''
     }
 };
