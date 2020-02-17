@@ -1,14 +1,15 @@
-import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {from, Observable, of} from 'rxjs';
+import {Injectable} from '@angular/core';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {Credentials} from '@app/auth/interfaces/credentials';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
+import {TokenInterface} from '@app/core/interfaces/token.interface';
 import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
+import {ApiClientService} from '@app/core/services/api-client.service';
+import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {from, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 /**
  *  Main authentication service
@@ -42,10 +43,12 @@ export class AuthenticationService implements AuthenticatorInterface {
         });
     }
 
-    public isAuthenticated(): Promise<boolean> {
-        return new Promise<boolean>(resolve => {
-            this.tokenManager.isAccessTokenExpired().then(res => resolve(!res));
-        });
+    public isAuthenticated(): Observable<boolean> {
+        return from(this.tokenManager.isAccessTokenExpired()).pipe(
+            switchMap(
+                (isExpired: boolean) => of(!isExpired)
+            )
+        );
     }
 
     public logout(): Promise<any> {
@@ -82,7 +85,7 @@ export class AuthenticationService implements AuthenticatorInterface {
         return from(this.tokenManager.getAccessToken()).pipe(
             switchMap(
                 token => {
-                    const decoded = this.jwt.decodeToken(token);
+                    const decoded: TokenInterface = this.jwt.decodeToken(token);
 
                     return of(decoded.user_id);
                 }

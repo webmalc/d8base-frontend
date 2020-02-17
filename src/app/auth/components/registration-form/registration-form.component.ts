@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {RegistrationFormService} from '../../forms/registration-form.service';
-import {RegistrationFormFields} from '../../enums/registration-form-fields';
+import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/shared/models/user';
 import {plainToClass} from 'class-transformer';
-import {LocationModel} from '@app/core/models/location.model';
+import {RegistrationFormFields} from '../../enums/registration-form-fields';
+import {RegistrationFormService} from '../../forms/registration-form.service';
 
 @Component({
     selector: 'app-registration-form',
@@ -12,19 +12,19 @@ import {LocationModel} from '@app/core/models/location.model';
 })
 export class RegistrationFormComponent implements OnInit {
 
-    @Output() private registrationFormData = new EventEmitter<{user: User, location: LocationModel}>();
-
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
+
+    @Output() private registrationFormData = new EventEmitter<{user: User, location: LocationModel}>();
 
     constructor(private registrationFormService: RegistrationFormService) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.registrationFormService.initForm();
     }
 
-    public submitRegistrationForm() {
+    public submitRegistrationForm(): void {
         const formData: object = this.registrationFormService.form.getRawValue();
 
         const user = plainToClass(User, formData, { excludeExtraneousValues: true });

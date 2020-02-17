@@ -5,6 +5,7 @@ import {PasswordRecoveryFormFields} from '@app/auth/enums/password-recovery-form
 @Injectable()
 export class PasswordRecoveryFormService {
 
+    // tslint:disable-next-line:variable-name
     private _form: FormGroup;
 
     constructor(private builder: FormBuilder) {
@@ -16,12 +17,12 @@ export class PasswordRecoveryFormService {
 
     public initForm(): void {
         this._form = this.builder.group({
-            [PasswordRecoveryFormFields.Email]: new FormControl(null, Validators.compose([
+            [PasswordRecoveryFormFields.Email]: ['', Validators.compose([
                 Validators.required,
                 Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+' +
                     '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
                     '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
-            ]))
+            ])]
         });
     }
 }

@@ -18,11 +18,11 @@ export class PasswordRecoveryFormComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
+     public ngOnInit(): void {
         this.formService.initForm();
     }
 
-    public recover() {
+    public recover(): any {
         const data = this.formService.form.getRawValue();
         console.log(data);
         this.passwordRecoveryService.recover(data);

@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegistrationService} from '@app/auth/services/registration.service';
-import {User} from '@app/shared/models/user';
-import {LocationService} from '@app/core/services/location/location.service';
 import {LocationModel} from '@app/core/models/location.model';
-import {AsyncSubject} from 'rxjs';
+import {User} from '@app/shared/models/user';
 
 @Component({
     selector: 'app-registration',
@@ -13,16 +11,15 @@ import {AsyncSubject} from 'rxjs';
 })
 export class RegistrationPage implements OnInit {
 
-    constructor(private registrationService: RegistrationService, private router: Router, private location: LocationService) {
+    constructor(private registrationService: RegistrationService, private router: Router) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
     }
 
-    public onSubmitRegistrationForm(data: {user: User, location: LocationModel}) {
+    public onSubmitRegistrationForm(data: {user: User, location: LocationModel}): void {
         this.registrationService.register(data.user, data.location).subscribe(
             next => {
-                console.log(next);
                 this.router.navigateByUrl('/auth/login');
             }
         );
