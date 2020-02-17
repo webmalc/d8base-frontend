@@ -25,7 +25,6 @@ export class RegistrationService {
         return this.client.post<UserInterface>(this.REGISTER_URL, classToPlain(user)).pipe(
             switchMap(
                 (newUser: UserInterface) => {
-
                     return from(this.locationService.getMergedLocationData()).pipe(
                         switchMap(
                             (ipLocation: LocationModel) => {
