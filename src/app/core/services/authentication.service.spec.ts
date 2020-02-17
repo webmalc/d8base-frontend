@@ -1,14 +1,14 @@
-import {TestBed} from '@angular/core/testing';
-import {AuthenticationService} from './authentication.service';
 import {HttpHeaders, HttpParams} from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {Observable} from 'rxjs';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
-import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {StorageManagerMock} from './token-manager.service.spec';
-import {TokenManagerService} from './token-manager.service';
-import {ApiClientService} from './api-client.service';
 import {Credentials} from '../../auth/interfaces/credentials';
 import {StorageManagerService} from '../proxies/storage-manager.service';
+import {ApiClientService} from './api-client.service';
+import {AuthenticationService} from './authentication.service';
+import {TokenManagerService} from './token-manager.service';
+import {StorageManagerMock} from './token-manager.service.spec';
 
 
 describe('AuthenticationService', () => {
@@ -59,7 +59,7 @@ describe('AuthenticationService', () => {
             'xv1fGac58a3xrQCtdK7mhnSDYHnqE')
             .then(
                 _ => {
-                    service.isAuthenticated().then(
+                    service.isAuthenticated().subscribe(
                         res => {
                             expect(res).toBeFalsy();
                             done();
@@ -131,11 +131,11 @@ export class HttpMock {
                 subscriber.next({access: 'refreshedAccessToken', refresh: 'refreshedRefreshToken'});
                 subscriber.complete();
             });
-        } else {
-            return new Observable<AuthResponseInterface>(subscriber => {
-                subscriber.next({access: 'AccessToken', refresh: 'RefreshToken'});
-                subscriber.complete();
-            });
         }
+
+        return new Observable<AuthResponseInterface>(subscriber => {
+            subscriber.next({access: 'AccessToken', refresh: 'RefreshToken'});
+            subscriber.complete();
+        });
     }
 }

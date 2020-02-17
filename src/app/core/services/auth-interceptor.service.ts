@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         try {
             const url = new URL(req.url);
-            if (url.origin !== environment.backend.url || url.origin !== window.location.origin) {
+            if (url.origin !== environment.backend.url) {
                 return next.handle(req);
             }
         } catch (e) {

@@ -48,15 +48,11 @@ export class TokenManagerService {
     public needToRefresh(): Promise<boolean> {
         return new Promise<boolean>(resolve => {
             this.isAccessTokenExpired().then(
-                isAccessTokenExpired => {
+                (isAccessTokenExpired: boolean) => {
                     if (isAccessTokenExpired) {
                         this.isRefreshTokenExpired().then(
-                            isRefreshTokenExpired => {
-                                if (!isRefreshTokenExpired) {
-                                    resolve(true);
-                                } else {
-                                    resolve(false);
-                                }
+                            (isRefreshTokenExpired: boolean) => {
+                                resolve(!isRefreshTokenExpired);
                             }
                         );
                     } else {
@@ -75,7 +71,7 @@ export class TokenManagerService {
         return this.storage.get(this.REFRESH_TOKEN_STORAGE_KEY);
     }
 
-    private isRefreshTokenExpired(): Promise<boolean> {
+    public isRefreshTokenExpired(): Promise<boolean> {
         return this.isAbstractTokenExpired(this.getRefreshToken());
     }
 

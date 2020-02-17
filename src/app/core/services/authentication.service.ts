@@ -44,7 +44,7 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public isAuthenticated(): Observable<boolean> {
-        return from(this.tokenManager.isAccessTokenExpired()).pipe(
+        return from(this.tokenManager.isRefreshTokenExpired()).pipe(
             switchMap(
                 (isExpired: boolean) => of(!isExpired)
             )
