@@ -60,11 +60,13 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public refresh(): Observable<void> {
+        console.log('here');
         return new Observable<void>(
             (subscriber) => {
                 this.tokenManager.getRefreshToken().then(refresh => {
                     this.client.post(this.TOKEN_REFRESH_URL, {refresh}).subscribe(
                         (response: AuthResponseInterface) => {
+                            console.log('qwerwqerqwerwqerwerwqerwqerqwer');
                             this.tokenManager.setTokens(response).then(
                                 _ => {
                                     subscriber.next();

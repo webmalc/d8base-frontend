@@ -15,6 +15,10 @@ export class LoginFormService {
         return this._form;
     }
 
+    public isFormValid(): boolean {
+        return !this.form.valid;
+    }
+
     public initForm(): void {
         this._form = this.builder.group({
             [LoginFormFields.Username]: ['', Validators.required],
