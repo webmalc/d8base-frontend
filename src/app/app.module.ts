@@ -57,10 +57,10 @@ import {AppComponent} from './app.component';
         StatusBar,
         SplashScreen,
         Title,
-        {
-            provide: RouteReuseStrategy,
-            useClass: IonicRouteStrategy
-        },
+        // {
+        //     provide: RouteReuseStrategy,
+        //     useClass: IonicRouteStrategy
+        // },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
