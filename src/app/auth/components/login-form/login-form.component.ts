@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LoginFormService} from '../../forms/login-form.service';
-import {LoginFormFields} from '../../enums/login-form-fields';
 import {Router} from '@angular/router';
 import {Credentials} from '@app/auth/interfaces/credentials';
+import {LoginFormFields} from '../../enums/login-form-fields';
+import {LoginFormService} from '../../forms/login-form.service';
 
 @Component({
     selector: 'app-login-form',
@@ -17,16 +17,16 @@ export class LoginFormComponent implements OnInit {
     private readonly formFields = LoginFormFields;
 
     constructor(
-        private loginFormService: LoginFormService,
-        private router: Router
+        private readonly loginFormService: LoginFormService,
+        private readonly router: Router
     ) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.loginFormService.initForm();
     }
 
-    public submitLoginForm() {
+    public submitLoginForm(): void {
         const data = this.loginFormService.form.getRawValue();
         const credentials = {
             username: data[LoginFormFields.Username],
@@ -35,7 +35,7 @@ export class LoginFormComponent implements OnInit {
         this.user.emit(credentials);
     }
 
-    public onForgotPassword() {
+    public onForgotPassword(): void {
         this.router.navigateByUrl('/auth/password-recover');
     }
 }

@@ -2,30 +2,30 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
-import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app-routing.module';
-import {IonicStorageModule} from '@ionic/storage';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
-import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslationService} from '@app/core/services/translation.service';
-import {AppInitService} from '@app/core/services/app-init.service';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {LocationService} from '@app/core/services/location/location.service';
-import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
+import {AppInitService} from '@app/core/services/app-init.service';
+import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
+import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
 import {IpApiService} from '@app/core/services/location/ip-api.service';
 import {IpDataService} from '@app/core/services/location/ip-data.service';
+import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
 import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
+import {LocationService} from '@app/core/services/location/location.service';
+import {TranslationService} from '@app/core/services/translation.service';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
+import {IonicStorageModule} from '@ionic/storage';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
 @NgModule({
     declarations: [AppComponent],
@@ -80,7 +80,10 @@ import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
         IpnfDataService,
         {
             provide: LocationAccuracy,
-            useValue: window.hasOwnProperty('cordova') ? LocationAccuracy : {request: () => Promise.resolve(true), canRequest: () => Promise.resolve()}
+            useValue: window.hasOwnProperty('cordova') ? LocationAccuracy : {
+                request: () => Promise.resolve(true),
+                canRequest: () => Promise.resolve()
+            }
         }
     ],
     bootstrap: [AppComponent]

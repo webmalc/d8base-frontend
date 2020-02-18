@@ -13,8 +13,8 @@ export class PasswordRecoveryFormComponent implements OnInit {
     private readonly formFields = PasswordRecoveryFormFields;
 
     constructor(
-        private formService: PasswordRecoveryFormService,
-        private passwordRecoveryService: PasswordRecoveryService
+        private readonly formService: PasswordRecoveryFormService,
+        private readonly passwordRecoveryService: PasswordRecoveryService
     ) {
     }
 

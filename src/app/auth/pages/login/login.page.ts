@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     ) {
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
     }
 
     public onSubmitLoginForm(user: Credentials): void {

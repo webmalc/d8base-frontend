@@ -1,16 +1,16 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {PasswordRecoverPage} from './password-recover.page';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {PasswordRecoveryFormComponent} from '../../components/password-recovery-form/password-recovery-form.component';
-import {PasswordRecoveryService} from '../../services/password-recovery.service';
-import {PasswordRecoveryFormService} from '../../forms/password-recovery-form.service';
-import {ApiClientService} from '../../../core/services/api-client.service';
 import {of} from 'rxjs';
+import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {ApiClientService} from '../../../core/services/api-client.service';
+import {PasswordRecoveryFormComponent} from '../../components/password-recovery-form/password-recovery-form.component';
+import {PasswordRecoveryFormService} from '../../forms/password-recovery-form.service';
+import {PasswordRecoveryService} from '../../services/password-recovery.service';
+import {PasswordRecoverPage} from './password-recover.page';
 
 describe('PasswordRecoverPage', () => {
     let component: PasswordRecoverPage;

@@ -1,8 +1,8 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import {MainGuard} from './main.guard';
 import {Router, UrlTree} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
+import {MainGuard} from './main.guard';
 
 describe('MainGuard', () => {
     beforeEach(() => {

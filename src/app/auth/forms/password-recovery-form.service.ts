@@ -8,7 +8,7 @@ export class PasswordRecoveryFormService {
     // tslint:disable-next-line:variable-name
     private _form: FormGroup;
 
-    constructor(private builder: FormBuilder) {
+    constructor(private readonly builder: FormBuilder) {
     }
 
     get form(): FormGroup {

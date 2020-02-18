@@ -1,7 +1,7 @@
-import {LoginPage} from './login.po';
-import {Credentials} from '../../src/app/auth/interfaces/credentials';
 import {browser} from 'protractor';
+import {Credentials} from '../../src/app/auth/interfaces/credentials';
 import {environment} from '../../src/environments/environment';
+import {LoginPage} from './login.po';
 
 describe('Login page', () => {
     let page: LoginPage;

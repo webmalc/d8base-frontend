@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ApiClientService} from '@app/core/services/api-client.service';
 import {LocationModel} from '@app/core/models/location.model';
-import {environment} from '../../../../environments/environment';
+import {ApiClientService} from '@app/core/services/api-client.service';
 import {LocationService} from '@app/core/services/location/location.service';
+import {User} from '@app/shared/models/user';
 import {from, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {User} from '@app/shared/models/user';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

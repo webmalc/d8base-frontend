@@ -34,5 +34,4 @@ export abstract class AbstractIpService implements IpServiceInterface {
 
     protected abstract getUrl(): string;
     protected abstract transform(res: object): LocationModel;
-
 }

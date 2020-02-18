@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {IpApiResponseInterface} from '@app/auth/interfaces/location/ip-api-response.interface';
 import {LocationModel} from '@app/core/models/location.model';
 import {AbstractIpService} from '@app/core/services/location/abstract-ip.service';

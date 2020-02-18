@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class MainGuard implements CanActivate {
 
-    constructor(private authFactory: AuthenticationFactory, private router: Router) {
+    constructor(private readonly authFactory: AuthenticationFactory, private readonly router: Router) {
     }
 
     public canActivate(): Observable<boolean | UrlTree> {

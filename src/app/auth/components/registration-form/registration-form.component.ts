@@ -15,9 +15,9 @@ export class RegistrationFormComponent implements OnInit {
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
 
-    @Output() private registrationFormData = new EventEmitter<{user: User, location: LocationModel}>();
+    @Output() private readonly registrationFormData = new EventEmitter<{user: User, location: LocationModel}>();
 
-    constructor(private registrationFormService: RegistrationFormService) {
+    constructor(private readonly registrationFormService: RegistrationFormService) {
     }
 
     public ngOnInit(): void {

@@ -19,14 +19,14 @@ export class AppComponent implements OnInit {
     public darkTheme = false;
 
     constructor(
-        private platform: Platform,
-        private splashScreen: SplashScreen,
-        private statusBar: StatusBar,
-        private darkModeService: DarkModeService,
-        private titleService: Title,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private trans: TranslationService
+        private readonly platform: Platform,
+        private readonly splashScreen: SplashScreen,
+        private readonly statusBar: StatusBar,
+        private readonly darkModeService: DarkModeService,
+        private readonly titleService: Title,
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute,
+        private readonly trans: TranslationService
     ) {
         this.initializeApp();
     }
