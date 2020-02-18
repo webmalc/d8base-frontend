@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {User} from '@app/shared/models/user';
-import {TranslationService} from '@app/core/services/translation.service';
-import {AppValidators} from '@app/core/validators/app.validators';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
+import {TranslationService} from '@app/core/services/translation.service';
+import {UserManagerService} from '@app/core/services/user-manager.service';
+import {AppValidators} from '@app/core/validators/app.validators';
+import {User} from '@app/shared/models/user';
 import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
 
 @Component({
@@ -26,7 +26,7 @@ export class ProfilePage implements OnInit {
     ) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         forkJoin({
             user: this.getUser(),
             addLanguages: this.getAdditionalLanguages()
@@ -39,6 +39,24 @@ export class ProfilePage implements OnInit {
         );
     }
 
+    public submit(): void {
+        if (this.form.valid) {
+            console.log('submit');
+            this.userManager.updateUser(this.form.value).subscribe(
+                (user: User) => console.log(user)
+            );
+        }
+    }
+
+    public computeAddLanguages(currentMainLanguage: string): void {
+        const languageList = this.removeFromArray(currentMainLanguage, this.addLanguagesList);
+        this.availableAddLanguages$.next(languageList);
+        const langForm = this.form.get('languages');
+        const languageFormValue = this.removeFromArray(currentMainLanguage, langForm.value);
+        langForm.setValue(languageFormValue);
+    }
+
+    // tslint:disable-next-line:typedef
     private createForm(user: User, addLanguages: string[]) {
         this.form = this.formBuilder.group({
                 first_name: [
@@ -146,23 +164,6 @@ export class ProfilePage implements OnInit {
 
     private getGenders(): string[] {
         return ['male', 'female'];
-    }
-
-    public submit(): void {
-        if (this.form.valid) {
-            console.log('submit');
-            this.userManager.updateUser(this.form.value).subscribe(
-                (user: User) => console.log(user)
-            );
-        }
-    }
-
-    public computeAddLanguages(currentMainLanguage: string): void {
-        const languageList = this.removeFromArray(currentMainLanguage, this.addLanguagesList);
-        this.availableAddLanguages$.next(languageList);
-        const langForm = this.form.get('languages');
-        const languageFormValue = this.removeFromArray(currentMainLanguage, langForm.value);
-        langForm.setValue(languageFormValue);
     }
 
     private removeFromArray(value: string, array: string[]): string[] {

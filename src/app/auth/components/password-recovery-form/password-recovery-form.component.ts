@@ -13,16 +13,16 @@ export class PasswordRecoveryFormComponent implements OnInit {
     private readonly formFields = PasswordRecoveryFormFields;
 
     constructor(
-        private formService: PasswordRecoveryFormService,
-        private passwordRecoveryService: PasswordRecoveryService
+        private readonly formService: PasswordRecoveryFormService,
+        private readonly passwordRecoveryService: PasswordRecoveryService
     ) {
     }
 
-    ngOnInit() {
+     public ngOnInit(): void {
         this.formService.initForm();
     }
 
-    public recover() {
+    public recover(): any {
         const data = this.formService.form.getRawValue();
         console.log(data);
         this.passwordRecoveryService.recover(data);

@@ -1,21 +1,21 @@
 import {async, ComponentFixture, fakeAsync, flush, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {LoginPage} from './login.page';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
+import {TranslateModule} from '@ngx-translate/core';
+import {Observable, of, throwError} from 'rxjs';
+import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {JwtHelper} from '../../../core/proxies/jwt-helper.service';
+import {ApiClientService} from '../../../core/services/api-client.service';
+import {AuthenticationService} from '../../../core/services/authentication.service';
+import {TokenManagerService} from '../../../core/services/token-manager.service';
+import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {LoginFormComponent} from '../../components/login-form/login-form.component';
 import {LoginFormService} from '../../forms/login-form.service';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {AuthenticationService} from '../../../core/services/authentication.service';
 import {Credentials} from '../../interfaces/credentials';
-import {Observable, of, throwError} from 'rxjs';
-import {ApiClientService} from '../../../core/services/api-client.service';
-import {JwtHelper} from '../../../core/proxies/jwt-helper.service';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
-import {TranslateModule} from '@ngx-translate/core';
-import {TokenManagerService} from '../../../core/services/token-manager.service';
+import {LoginPage} from './login.page';
 
 describe('LoginPage', () => {
     let component: LoginPage;
@@ -73,8 +73,8 @@ describe('LoginPage', () => {
 });
 
 export class ApiClientServiceMock {
-    public post(url: string, data: object = {}): Observable<any> {
-        if (data['username'] === 'valid' && data['password'] === 'valid_pass') {
+    public post(url: string, data: {username: string, password: string}): Observable<any> {
+        if (data.username === 'valid' && data.password === 'valid_pass') {
             return of(true);
         }
 

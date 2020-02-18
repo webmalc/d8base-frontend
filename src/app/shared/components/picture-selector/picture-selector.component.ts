@@ -1,5 +1,7 @@
-import {Component, forwardRef, OnInit, Provider} from '@angular/core';
+import {Component, forwardRef, Input, Provider} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {PhotoService} from '@app/shared/services/photo.service';
+import {Camera, CameraPhoto, CameraResultType, CameraSource} from '@capacitor/core';
 
 const VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
@@ -15,35 +17,43 @@ const VALUE_ACCESSOR: Provider = {
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
 
+    @Input() public camera: boolean = true;
+    @Input() public fileSystem: boolean = true;
+
     private uri: string;
 
-    private pictureGetter: string;
+    constructor(private photoService: PhotoService) {
+    }
 
-    private onChange = (value: any) => {};
+    public async createPhoto(): Promise<void> {
+        const photo = await this.photoService.createPhoto();
+        this.setUri(photo.webPath);
+    }
 
-    public setUri(uri: string) {
+    // public async getImageFile(): Promise<void> {
+    //
+    // }
+
+    public setUri(uri: string): void {
         this.uri = uri;
         this.onChange(this.uri);
     }
 
-    public setPictureGetter(getter: string): void {
-        this.pictureGetter = getter;
-    }
-
-    registerOnChange(fn: any): void {
+    public registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any): void {
+    public registerOnTouched(fn: any): void {
     }
 
-    setDisabledState(isDisabled: boolean): void {
+    public setDisabledState(isDisabled: boolean): void {
     }
 
-    writeValue(uri: string): void {
+    public writeValue(uri: string): void {
         this.uri = uri;
     }
 
+    private onChange = (value: any) => {};
 
 
 }

@@ -1,7 +1,8 @@
 {
   "name": "d8base-frontend",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

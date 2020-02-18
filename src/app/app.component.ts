@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Platform} from '@ionic/angular';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {DarkModeService} from '@app/core/services/dark-mode.service';
+import {TranslationService} from '@app/core/services/translation.service';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {DarkModeService} from '@app/core/services/dark-mode.service';
-import {Title} from '@angular/platform-browser';
-import {NavigationEnd, Router, ActivatedRoute} from '@angular/router';
+import {Platform} from '@ionic/angular';
 import {filter, map} from 'rxjs/operators';
-import {TranslationService} from '@app/core/services/translation.service';
 
 @Component({
     selector: 'app-root',
@@ -19,20 +19,20 @@ export class AppComponent implements OnInit {
     public darkTheme = false;
 
     constructor(
-        private platform: Platform,
-        private splashScreen: SplashScreen,
-        private statusBar: StatusBar,
-        private darkModeService: DarkModeService,
-        private titleService: Title,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private trans: TranslationService
+        private readonly platform: Platform,
+        private readonly splashScreen: SplashScreen,
+        private readonly statusBar: StatusBar,
+        private readonly darkModeService: DarkModeService,
+        private readonly titleService: Title,
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute,
+        private readonly trans: TranslationService
     ) {
         this.initializeApp();
     }
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
-    ngOnInit(): void {
+    public ngOnInit(): void {
         const appTitle = this.titleService.getTitle();
         this.router
             .events.pipe(
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
         ;
     }
 
-    initializeApp() {
+    public initializeApp(): void {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
@@ -62,16 +62,16 @@ export class AppComponent implements OnInit {
         });
     }
 
-    public changeMode(data: any) {
+    public changeMode(data: any): void {
         this.darkTheme = data.target.checked;
         this.darkModeService.setMode(data.target.checked);
     }
 
-    public getTitle() {
+    public getTitle(): string {
         return this.titleService.getTitle();
     }
 
-    private initDarkMode() {
+    private initDarkMode(): void {
         this.darkModeService.isDarkMode().then((data: boolean) => {
             this.darkTheme = data;
         });

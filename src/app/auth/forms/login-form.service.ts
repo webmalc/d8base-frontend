@@ -5,9 +5,10 @@ import {LoginFormFields} from '../enums/login-form-fields';
 @Injectable()
 export class LoginFormService {
 
+    // tslint:disable-next-line:variable-name
     private _form: FormGroup;
 
-    constructor(private builder: FormBuilder) {
+    constructor(private readonly builder: FormBuilder) {
     }
 
     get form(): FormGroup {
@@ -16,12 +17,8 @@ export class LoginFormService {
 
     public initForm(): void {
         this._form = this.builder.group({
-            [LoginFormFields.Username]: new FormControl(null, Validators.compose([
-                Validators.required
-            ])),
-            [LoginFormFields.Password]: new FormControl(null, Validators.compose([
-                Validators.required
-            ]))
+            [LoginFormFields.Username]: ['', Validators.required],
+            [LoginFormFields.Password]: ['', Validators.required]
         });
     }
 }

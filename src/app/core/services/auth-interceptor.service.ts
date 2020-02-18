@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {from, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 
 /**
  *  Tries to refresh auth token if it has expired
@@ -14,10 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private authFactory: AuthenticationFactory) {
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         try {
             const url = new URL(req.url);
-            if (url.origin !== environment.backend.url || url.origin !== window.location.origin) {
+            if (url.origin !== environment.backend.url) {
                 return next.handle(req);
             }
         } catch (e) {

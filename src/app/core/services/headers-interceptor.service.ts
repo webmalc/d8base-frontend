@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '../../../environments/environment';
 
 /**
@@ -14,7 +14,7 @@ export class HeadersInterceptor implements HttpInterceptor {
     constructor(private tokenManager: TokenManagerService) {
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         try {
             const url = new URL(req.url);
             if (url.origin !== environment.backend.url) {

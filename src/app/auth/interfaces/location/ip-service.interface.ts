@@ -1,5 +1,5 @@
-import {IpDataInterface} from './ip-data.interface';
+import {LocationModel} from '@app/core/models/location.model';
 
 export interface IpServiceInterface {
-    getData(): Promise<IpDataInterface>;
+    getData(): Promise<LocationModel>;
 }

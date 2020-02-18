@@ -1,16 +1,16 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {LoginFormComponent} from './login-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoginFormFields} from '../../enums/login-form-fields';
 import {RouterTestingModule} from '@angular/router/testing';
-import {LoginFormService} from '../../forms/login-form.service';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {Credentials} from '../../interfaces/credentials';
 import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {LoginFormFields} from '../../enums/login-form-fields';
+import {LoginFormService} from '../../forms/login-form.service';
+import {Credentials} from '../../interfaces/credentials';
+import {LoginFormComponent} from './login-form.component';
 
 describe('LoginFormComponent', () => {
     let component: LoginFormComponent;

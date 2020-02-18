@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenManagerService {
 
+    public token: string = undefined;
+
     private readonly ACCESS_TOKEN_STORAGE_KEY = 'api_token';
     private readonly REFRESH_TOKEN_STORAGE_KEY = 'refresh_token';
-
-    public token: string = undefined;
 
     constructor(
         private storage: StorageManagerService,
@@ -48,15 +48,11 @@ export class TokenManagerService {
     public needToRefresh(): Promise<boolean> {
         return new Promise<boolean>(resolve => {
             this.isAccessTokenExpired().then(
-                isAccessTokenExpired => {
+                (isAccessTokenExpired: boolean) => {
                     if (isAccessTokenExpired) {
                         this.isRefreshTokenExpired().then(
-                            isRefreshTokenExpired => {
-                                if (!isRefreshTokenExpired) {
-                                    resolve(true);
-                                } else {
-                                    resolve(false);
-                                }
+                            (isRefreshTokenExpired: boolean) => {
+                                resolve(!isRefreshTokenExpired);
                             }
                         );
                     } else {
@@ -75,7 +71,7 @@ export class TokenManagerService {
         return this.storage.get(this.REFRESH_TOKEN_STORAGE_KEY);
     }
 
-    private isRefreshTokenExpired(): Promise<boolean> {
+    public isRefreshTokenExpired(): Promise<boolean> {
         return this.isAbstractTokenExpired(this.getRefreshToken());
     }
 

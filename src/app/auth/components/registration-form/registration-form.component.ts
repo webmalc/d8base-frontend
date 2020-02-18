@@ -1,8 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {RegistrationFormService} from '../../forms/registration-form.service';
-import {RegistrationFormFields} from '../../enums/registration-form-fields';
+import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/shared/models/user';
 import {plainToClass} from 'class-transformer';
+import {RegistrationFormFields} from '../../enums/registration-form-fields';
+import {RegistrationFormService} from '../../forms/registration-form.service';
 
 @Component({
     selector: 'app-registration-form',
@@ -11,25 +12,24 @@ import {plainToClass} from 'class-transformer';
 })
 export class RegistrationFormComponent implements OnInit {
 
-    @Output() private user = new EventEmitter<User>();
-
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
 
-    constructor(private registrationFormService: RegistrationFormService) {
+    @Output() private readonly registrationFormData = new EventEmitter<{user: User, location: LocationModel}>();
+
+    constructor(private readonly registrationFormService: RegistrationFormService) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.registrationFormService.initForm();
     }
 
-    public submitRegistrationForm() {
-        const userData: object = this.registrationFormService.form.getRawValue();
-        if (userData.hasOwnProperty('confirm')) {
-            delete userData['confirm'];
-        }
+    public submitRegistrationForm(): void {
+        const formData: object = this.registrationFormService.form.getRawValue();
 
-        this.user.emit(plainToClass(User, userData));
+        const user = plainToClass(User, formData, { excludeExtraneousValues: true });
+        const location = plainToClass(LocationModel, formData, { excludeExtraneousValues: true });
+
+        this.registrationFormData.emit({user, location});
     }
-
 }

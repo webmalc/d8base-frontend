@@ -1,16 +1,17 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {RegistrationFormComponent} from './registration-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
-import {RegistrationFormService} from '../../forms/registration-form.service';
-import {RegistrationFormFields} from '../../enums/registration-form-fields';
-import {User} from '../../../shared/models/user';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
+import {plainToClass} from 'class-transformer';
+import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {User} from '../../../shared/models/user';
+import {RegistrationFormFields} from '../../enums/registration-form-fields';
+import {RegistrationFormService} from '../../forms/registration-form.service';
+import {RegistrationFormComponent} from './registration-form.component';
 
 describe('RegistrationFormComponent', () => {
     let component: RegistrationFormComponent;
@@ -47,14 +48,11 @@ describe('RegistrationFormComponent', () => {
 
         fixture.debugElement.nativeElement.querySelector('ion-button').click();
 
-        const user = new User();
-        user.email = 'test@test.te';
-        user.password = 'test';
-        user.firstName = null;
-        user.phone = null;
+        const user = {
+            email: 'test@test.te',
+            password: 'test'
+        };
 
-
-
-        expect((component as any).user.emit).toHaveBeenCalledWith(user);
+        expect((component as any).user.emit).toHaveBeenCalledWith(plainToClass(User, user));
     });
 });

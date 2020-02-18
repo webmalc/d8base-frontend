@@ -1,6 +1,6 @@
+import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 
@@ -19,13 +19,14 @@ export class LoginPage implements OnInit {
     ) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
     }
 
-    public onSubmitLoginForm(user: Credentials) {
+    public onSubmitLoginForm(user: Credentials): void {
         this.authFactory.getAuthenticator().login(user).subscribe(
             _ => {
                 console.log('successfully authenticated');
+
                 return this.router.navigateByUrl('/profile');
             },
             (error: HttpErrorResponse) => {

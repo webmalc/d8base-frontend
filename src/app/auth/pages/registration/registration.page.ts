@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegistrationService} from '@app/auth/services/registration.service';
+import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/shared/models/user';
 
 @Component({
@@ -13,13 +14,12 @@ export class RegistrationPage implements OnInit {
     constructor(private registrationService: RegistrationService, private router: Router) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
     }
 
-    public onSubmitRegistrationForm(user: User) {
-        this.registrationService.register(user).subscribe(
+    public onSubmitRegistrationForm(data: {user: User, location: LocationModel}): void {
+        this.registrationService.register(data.user, data.location).subscribe(
             next => {
-                console.log(next);
                 this.router.navigateByUrl('/auth/login');
             }
         );
