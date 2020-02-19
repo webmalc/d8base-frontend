@@ -1,16 +1,12 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {RouterTestingModule} from '@angular/router/testing';
 import {of} from 'rxjs';
+import {environment} from '../../../environments/environment';
 import {ApiClientService} from './api-client.service';
 import {AuthInterceptor} from './auth-interceptor.service';
 import {TokenManagerService} from './token-manager.service';
-import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
-import {environment} from '../../../environments/environment';
-import {LocationApiService} from './location/location-api.service';
-import {UserManagerService} from './user-manager.service';
 
 describe('AuthInterceptor', () => {
 
@@ -18,32 +14,18 @@ describe('AuthInterceptor', () => {
     let tokenManager: jasmine.SpyObj<TokenManagerService>;
     let service: AuthInterceptor;
     let httpMock: HttpTestingController;
-    // let api: ApiClientService;
 
     beforeEach(() => {
-        const spyClient = jasmine.createSpyObj(
-            'ApiClientService', {
-                post: (url: string, data: object = {}) => {
-                    const authData: AuthResponseInterface = {
-                        access: 'access_token',
-                        refresh: 'refresh_token'
-                    };
-
-                    return of(authData);
-                }
-            }
-        );
         const spyTokenManager = jasmine.createSpyObj(
             'TokenManagerService', {
                 needToRefresh: () => new Promise(resolve => resolve(true)),
                 refresh: () => of(),
-                getRefreshToken: () => Promise.resolve('refresh_token')
+                getRefreshToken: () => Promise.resolve('refresh_token'),
+                setTokens: () => Promise.resolve(true)
             }
         );
         TestBed.configureTestingModule({
             imports: [
-                // RouterTestingModule,
-                // HttpTestingController,
                 HttpClientTestingModule
             ],
             providers: [
@@ -64,21 +46,32 @@ describe('AuthInterceptor', () => {
         service = TestBed.get(AuthInterceptor);
         tokenManager = TestBed.get(TokenManagerService);
         httpMock = TestBed.get(HttpTestingController);
-        // location = TestBed.get(LocationApiService);
     });
 
     it('should be created', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should be created', () => {
+    it('should save new tokens if access token has expired', fakeAsync(() => {
         tokenManager.needToRefresh.and.returnValue(Promise.resolve(true));
         tokenManager.getRefreshToken.and.returnValue(Promise.resolve('refresh_token'));
-        const q: UserManagerService = TestBed.get(UserManagerService);
-        q.getUser().subscribe();
-        const httpRequest = httpMock.expectOne(environment.backend.url + environment.backend.get_user_data_url);
+        tokenManager.setTokens.and.returnValue(Promise.resolve(true));
 
-        // expect(httpRequest.request.headers.has('Authorization')).toEqual(true);
-        expect(tokenManager.getRefreshToken).toHaveBeenCalled();
-    });
+        client.get('/test/').subscribe();
+        tick();
+        httpMock.expectOne(environment.backend.url + environment.backend.api_refresh_url)
+            .flush({access: 'test', refresh: 'test2'});
+        tick();
+        expect(tokenManager.setTokens).toHaveBeenCalledWith({access: 'test', refresh: 'test2'});
+    }));
+
+    it('should not refresh if access token hasnt expired', fakeAsync(() => {
+        tokenManager.needToRefresh.and.returnValue(Promise.resolve(false));
+        tokenManager.getRefreshToken.and.returnValue(Promise.resolve('refresh_token'));
+        tokenManager.setTokens.and.returnValue(Promise.resolve(true));
+
+        client.get('/test/').subscribe();
+        tick();
+        expect(tokenManager.setTokens).not.toHaveBeenCalled();
+    }));
 });

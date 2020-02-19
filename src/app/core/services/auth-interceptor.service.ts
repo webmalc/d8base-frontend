@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         try {
             const url = new URL(req.url);
-            console.log(url.origin);
             if (url.origin !== environment.backend.url) {
                 return next.handle(req);
             }
@@ -27,14 +26,12 @@ export class AuthInterceptor implements HttpInterceptor {
         if (this.getRestrictedUrls().includes(req.url)) {
             return next.handle(req);
         }
-        console.log('tetststst');
-        console.log(this.authFactory.getAuthenticator());
+
         return from(this.authFactory.getAuthenticator().needToRefresh())
             .pipe(
                 switchMap(
                     (isNeedToRefresh: boolean) => {
                         if (isNeedToRefresh) {
-                            console.log(isNeedToRefresh, 'qweqwer');
                             return this.authFactory.getAuthenticator().refresh().pipe(
                                 switchMap(() => next.handle(req))
                             );
