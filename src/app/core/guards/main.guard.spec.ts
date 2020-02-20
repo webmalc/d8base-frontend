@@ -1,6 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
 import {Router, UrlTree} from '@angular/router';
+import {of} from 'rxjs';
 import {AuthenticationService} from '../services/authentication.service';
 import {MainGuard} from './main.guard';
 
@@ -9,8 +10,8 @@ describe('MainGuard', () => {
         TestBed.configureTestingModule({
             providers: [
                 MainGuard,
-                {provide: AuthenticationService, useClass: AuthenticationServiceMock},
-                {provide: Router, useClass: RouterMock}
+                {provide: AuthenticationService, useValue: {isAuthenticated : () => of(true)} },
+                {provide: Router, useValue: {parseUrl: (data) => data}}
             ]
         });
     });
@@ -21,7 +22,7 @@ describe('MainGuard', () => {
     });
     it('test canActivate success', (done) => {
         const guard = TestBed.get(MainGuard);
-        spyOn((((guard as any).authFactory) as any).mainAuthenticator, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+        spyOn((((guard as any).authFactory) as any).mainAuthenticator, 'isAuthenticated').and.returnValue(of(true));
         guard.canActivate().subscribe(
             res => {
                 expect(res).toBe(true);
@@ -31,7 +32,7 @@ describe('MainGuard', () => {
     });
     it('test canActivate login redirect', (done) => {
         const guard = TestBed.get(MainGuard);
-        spyOn((((guard as any).authFactory) as any).mainAuthenticator, 'isAuthenticated').and.returnValue(Promise.resolve(false));
+        spyOn((((guard as any).authFactory) as any).mainAuthenticator, 'isAuthenticated').and.returnValue(of(false));
         guard.canActivate().subscribe(
             (res: UrlTree) => {
                 expect(res.toString()).toBe('/auth/login');
@@ -40,16 +41,3 @@ describe('MainGuard', () => {
         );
     });
 });
-
-
-export class AuthenticationServiceMock {
-    public isAuthenticated(): Promise<boolean> {
-        return Promise.resolve(false);
-    }
-}
-
-export class RouterMock {
-    public parseUrl(data: any) {
-        return data;
-    }
-}

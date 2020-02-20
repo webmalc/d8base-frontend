@@ -8,6 +8,8 @@ import {IpDataService} from './ip-data.service';
 import {IpServicesHolderService} from './ip-services-holder.service';
 import {IpnfDataService} from './ipnf-data.service';
 import {LocationService} from './location.service';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 
 describe('LocationService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -17,7 +19,9 @@ describe('LocationService', () => {
             IpApiService,
             IpDataService,
             IpnfDataService,
-            {provide: HttpClient, useClass: HttpMock}
+            {provide: HttpClient, useClass: HttpMock},
+            {provide: Geolocation, useValue: {getCurrentPosition: () => 'test' }},
+            {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}}
         ]
     }));
 

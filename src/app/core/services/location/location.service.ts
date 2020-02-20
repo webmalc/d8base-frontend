@@ -50,10 +50,8 @@ export class LocationService {
         return new Promise<LocationInterface | null>(resolve => {
             this.getCurrentPosition().then(
                 (geolocation: Geoposition) => {
-                    console.log(geolocation);
                     this.getIpLocationData().then(
                         (locationData: LocationInterface) => {
-                            console.log(locationData);
                             locationData.latitude = geolocation.coords.latitude;
                             locationData.longitude = geolocation.coords.longitude;
                             resolve(locationData);

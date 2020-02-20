@@ -61,7 +61,7 @@ describe('AuthenticationService', () => {
                 _ => {
                     service.isAuthenticated().subscribe(
                         res => {
-                            expect(res).toBeFalsy();
+                            expect(res).toBeTruthy();
                             done();
                         }
                     );
