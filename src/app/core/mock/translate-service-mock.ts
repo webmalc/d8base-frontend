@@ -10,7 +10,11 @@ export class TranslateServiceMock implements PipeTransform {
         return of(key);
     }
 
-    transform(value: any, ...args: any[]): any {
+    public transform(value: any, ...args: any[]): any {
         return value;
+    }
+
+    public getDefaultLang(): string {
+        return 'en';
     }
 }

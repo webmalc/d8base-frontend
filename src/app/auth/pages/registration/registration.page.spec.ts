@@ -6,8 +6,10 @@ import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
+import {plainToClass} from 'class-transformer';
+import {of} from 'rxjs';
 import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {LocationModel} from '../../../core/models/location.model';
 import {IpApiService} from '../../../core/services/location/ip-api.service';
 import {IpDataService} from '../../../core/services/location/ip-data.service';
 import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
@@ -20,8 +22,6 @@ import {RegistrationFormService} from '../../forms/registration-form.service';
 import {LocationInterface} from '../../interfaces/location/location.interface';
 import {RegistrationService} from '../../services/registration.service';
 import {RegistrationPage} from './registration.page';
-import {plainToClass} from 'class-transformer';
-import {LocationModel} from '../../../core/models/location.model';
 
 describe('RegistrationPage', () => {
     let component: RegistrationPage;
@@ -37,7 +37,7 @@ describe('RegistrationPage', () => {
                 {provide: IpApiService, useClass: IpServiceMock},
                 {provide: IpDataService, useClass: IpServiceMock},
                 {provide: IpnfDataService, useClass: IpServiceMock},
-                {provide: HttpClient, useValue: {post: () => new Observable(subscriber => subscriber.next(true))}}
+                {provide: HttpClient, useValue: {post: () => of(true)}}
             ]
         }).compileComponents();
 

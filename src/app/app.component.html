@@ -1,4 +1,4 @@
-<ion-app [class.dark-theme]="darkTheme">
+<ion-app [ngClass]="{'dark-theme': darkTheme}">
     <ion-header>
         <ion-toolbar class="ion-text-center">
             <ion-text>{{getTitle()|titlecase}}</ion-text>
