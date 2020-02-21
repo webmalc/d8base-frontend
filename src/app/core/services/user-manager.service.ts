@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
+import {ApiClientService} from '@app/core/services/api-client.service';
 import {UserInterface} from '@app/shared/interfaces/user.interface';
 import {User} from '@app/shared/models/user';
-import {Observable} from 'rxjs';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class UserManagerService {
 
     }
 
-    public updateUser(user: UserInterface): Observable<UserInterface> {
+    public updateUser(user: UserInterface): Observable<User> {
         return this.api.patch<User>(`${environment.backend.api_users}/${user.id}`, user);
     }
 }

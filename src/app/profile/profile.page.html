@@ -1,7 +1,3 @@
-<app-profile-form>
-
-</app-profile-form>
-
 <form
         *ngIf="form"
         [formGroup]="form" (ngSubmit)="submit()">
@@ -86,7 +82,7 @@
                             interface="popover"
                             formControlName="gender"
                     >
-                        <ion-select-option *ngFor="let gender of getGenders()" value="{{ gender }}">
+                        <ion-select-option *ngFor="let gender of genderList$()|async" value="{{ gender }}">
                             {{ gender | titlecase}}
                         </ion-select-option>
                     </ion-select>
@@ -110,14 +106,14 @@
         <ion-row class="ion-justify-content-center">
             <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                 <ion-item>
-                    <ion-label class="label-for-required-input" color="medium"
+                    <ion-label color="medium"
                                position="floating">{{'profile-form.fields.main_language' | translate }}</ion-label>
                     <ion-select
                             interface="popover"
                             formControlName="main_language"
-                            (ionChange)="computeAddLanguages($event.target.value)"
+                            (ionChange)="recomputeAdditionalLanguages()"
                     >
-                        <ion-select-option *ngFor="let lang of languages()" value="{{ lang }}">
+                        <ion-select-option *ngFor="let lang of languages$()|async" value="{{ lang }}">
                             {{ lang }}
                         </ion-select-option>
                     </ion-select>
@@ -135,7 +131,7 @@
                             multiple="true"
                             formControlName="languages"
                     >
-                        <ion-select-option *ngFor="let lang of availableAddLanguages$|async" value="{{ lang }}">
+                        <ion-select-option *ngFor="let lang of availableAddsLanguages$|async" value="{{ lang }}">
                             {{ lang }}
                         </ion-select-option>
                     </ion-select>
@@ -159,17 +155,18 @@
             </ion-col>
         </ion-row>
 
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-item>
-                    <ion-label class="label-for-required-input" color="medium"
-                               position="floating">{{'profile-form.fields.password' | translate }}</ion-label>
-                    <ion-input type="password" name="password"
-                               [placeholder]="'profile-form.placeholders.password'| translate"
-                               formControlName="password"></ion-input>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+<!--        <ion-row class="ion-justify-content-center">-->
+<!--            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">-->
+<!--                <ion-item>-->
+<!--                    <ion-label class="label-for-required-input" color="medium"-->
+<!--                               position="floating">{{'profile-form.fields.password' | translate }}</ion-label>-->
+<!--                    <ion-input type="password" name="password"-->
+<!--                               [placeholder]="'profile-form.placeholders.password'| translate"-->
+<!--                               formControlName="password"></ion-input>-->
+<!--                </ion-item>-->
+<!--            </ion-col>-->
+<!--        </ion-row>-->
+
         <ion-button type="submit" expand="block"
                     [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>
     </ion-grid>

@@ -21,18 +21,19 @@ export class AppValidators {
      * @see `updateValueAndValidity()`
      *
      */
-    static restrictEnum(params: Array<string>): ValidatorFn {
+    public static restrictEnum(params: Array<string>): ValidatorFn {
         return (control: FormControl): ValidationErrors | null => {
             if (control.value && !params.includes(control.value)) {
                 return {
                     restrictEnum: true
                 };
             }
+
             return null;
         };
     }
 
-    static restrictEnumArray(params: Array<string>): ValidatorFn {
+    public static restrictEnumArray(params: Array<string>): ValidatorFn {
         return (control: FormControl): ValidationErrors | null => {
             if (control.value) {
                 for (const value of control.value) {
