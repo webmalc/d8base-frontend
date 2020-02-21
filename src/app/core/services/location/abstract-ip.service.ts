@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {IpDataResponseInterface} from '@app/auth/interfaces/location/ip-data-response.interface';
 import {IpServiceInterface} from '@app/auth/interfaces/location/ip-service.interface';
 import {LocationModel} from '@app/core/models/location.model';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,8 @@ export abstract class AbstractIpService implements IpServiceInterface {
                 ).subscribe(
                 (res: IpDataResponseInterface) => {
                     try {
-                        resolve(this.transform(res));
+                        const tra = this.transform(res);
+                        resolve(tra);
                     } catch (e) {
                         reject();
                     }

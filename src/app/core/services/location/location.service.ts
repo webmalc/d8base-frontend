@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {IpServicesHolderService} from './ip-services-holder.service';
 import {LocationInterface} from '@app/auth/interfaces/location/location.interface';
 import {Geolocation, GeolocationOptions, Geoposition} from '@ionic-native/geolocation/ngx';
-import {Observable} from 'rxjs';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
+import {Observable} from 'rxjs';
+import {IpServicesHolderService} from './ip-services-holder.service';
 
 /**
  *  Returns user location data by ip
