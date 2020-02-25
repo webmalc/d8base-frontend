@@ -1,6 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 
 import {HttpClient} from '@angular/common/http';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {Observable} from 'rxjs';
 import {LocationInterface} from '../../../auth/interfaces/location/location.interface';
 import {IpApiService} from './ip-api.service';
@@ -17,7 +19,9 @@ describe('LocationService', () => {
             IpApiService,
             IpDataService,
             IpnfDataService,
-            {provide: HttpClient, useClass: HttpMock}
+            {provide: HttpClient, useClass: HttpMock},
+            {provide: Geolocation, useValue: {getCurrentPosition: () => 'test' }},
+            {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}}
         ]
     }));
 
@@ -28,10 +32,25 @@ describe('LocationService', () => {
     it('should be created', (done) => {
         const service: LocationService = TestBed.get(LocationService);
 
+        const data = {
+            postalCode: 'testPostal',
+            countryCode: 'testCode',
+            latitude: 123,
+            longitude: 321,
+            timezone: {name: 'timezone'},
+            city: 'test',
+            regionCode: 'code'
+        };
+
         service.getIpLocationData().then(
-            (data: LocationInterface) => {
-                expect(data.postalCode).toBe('testPostal');
-                expect(data.countryCode).toBe('testCode');
+            (returnData: LocationInterface) => {
+                expect(returnData.postalCode).toBe('testPostal');
+                expect(returnData.countryCode).toBe('testCode');
+                expect(returnData.latitude).toBe(123);
+                expect(returnData.longitude).toBe(321);
+                expect(returnData.timezone).toBe('timezone');
+                expect(returnData.city).toBe('test');
+                expect(returnData.regionCode).toBe('code');
                 done();
             }
         );
@@ -55,9 +74,13 @@ export class HttpMock {
         return new Observable<any>(
             subscriber => {
                 const data: any = {
-                    ip: 'testIp',
                     postal: 'testPostal',
-                    country_code: 'testCode'
+                    country_code: 'testCode',
+                    latitude: 123,
+                    longitude: 321,
+                    time_zone: {name: 'timezone'},
+                    city: 'test',
+                    region_code: 'code'
                 };
                 subscriber.next(data);
                 subscriber.complete();

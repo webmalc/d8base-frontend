@@ -4,7 +4,7 @@ import {RouteReuseStrategy} from '@angular/router';
 
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -78,12 +78,20 @@ import {AppComponent} from './app.component';
         IpApiService,
         IpDataService,
         IpnfDataService,
+        // {
+        //     provide: LocationAccuracy,
+        //     useValue: window.hasOwnProperty('cordova') ? LocationAccuracy : {
+        //         request: () => Promise.resolve(true),
+        //         canRequest: () => Promise.resolve()
+        //     }
+        // },
         {
             provide: LocationAccuracy,
-            useValue: window.hasOwnProperty('cordova') ? LocationAccuracy : {
+            useFactory: (platform: Platform) => !platform.is('desktop') ? LocationAccuracy : {
                 request: () => Promise.resolve(true),
                 canRequest: () => Promise.resolve()
-            }
+            },
+            deps: [Platform]
         }
     ],
     bootstrap: [AppComponent]

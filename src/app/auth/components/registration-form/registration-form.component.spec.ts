@@ -7,6 +7,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {plainToClass} from 'class-transformer';
 import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {LocationModel} from '../../../core/models/location.model';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {User} from '../../../shared/models/user';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
@@ -44,15 +45,24 @@ describe('RegistrationFormComponent', () => {
         email.setValue('test@test.te');
         pwd.setValue('test');
 
-        spyOn((component as any).user, 'emit');
+        spyOn((component as any).registrationFormData, 'emit');
 
         fixture.debugElement.nativeElement.querySelector('ion-button').click();
 
-        const user = {
+        const data = {
             email: 'test@test.te',
-            password: 'test'
+            password: 'test',
+            firstName: '',
+            phone: '',
+            city: '',
+            country: ''
         };
 
-        expect((component as any).user.emit).toHaveBeenCalledWith(plainToClass(User, user));
+        expect((component as any).registrationFormData.emit)
+            .toHaveBeenCalledWith(
+                {
+                    user: plainToClass(User, data, { excludeExtraneousValues: true }),
+                    location: plainToClass(LocationModel, data, { excludeExtraneousValues: true })
+                });
     });
 });
