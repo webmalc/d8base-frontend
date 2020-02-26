@@ -1,7 +1,6 @@
 import {Component, forwardRef, Input, Provider} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {PhotoService} from '@app/shared/services/photo.service';
-import {Camera, CameraPhoto, CameraResultType, CameraSource} from '@capacitor/core';
 
 const VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
@@ -22,6 +21,8 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
     private uri: string;
 
+    private onChange: (fn: any) => void;
+
     constructor(private photoService: PhotoService) {
     }
 
@@ -29,7 +30,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         const photo = await this.photoService.createPhoto();
         this.setUri(photo.webPath);
     }
-
     // public async getImageFile(): Promise<void> {
     //
     // }
@@ -40,7 +40,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     }
 
     public registerOnChange(fn: any): void {
-        this.onChange = fn;
+        // this.onChange = fn;
     }
 
     public registerOnTouched(fn: any): void {
@@ -52,8 +52,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     public writeValue(uri: string): void {
         this.uri = uri;
     }
-
-    private onChange = (value: any) => {};
 
 
 }
