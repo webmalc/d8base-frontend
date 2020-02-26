@@ -19,8 +19,8 @@ import {environment} from '../../../environments/environment';
 })
 export class AuthenticationService implements AuthenticatorInterface {
 
-    private readonly TOKEN_OBTAIN_URL = environment.backend.api_auth_url;
-    private readonly TOKEN_REFRESH_URL = environment.backend.api_refresh_url;
+    private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
+    private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
     constructor(private tokenManager: TokenManagerService, private client: ApiClientService, private jwt: JwtHelper) {
     }

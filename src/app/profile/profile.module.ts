@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
+import {ProfilePageRoutingModule} from './profile-routing.module';
 
-import { ProfilePage } from './profile.page';
+import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
 import {SharedModule} from '@app/shared/shared.module';
+import {ProfilePage} from './profile.page';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import {SharedModule} from '@app/shared/shared.module';
         ProfilePageRoutingModule,
         SharedModule
     ],
-  declarations: [ProfilePage]
+    declarations: [ProfilePage]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule {
+}

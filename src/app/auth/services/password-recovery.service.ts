@@ -5,7 +5,7 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class PasswordRecoveryService {
 
-    private readonly PASSWORD_RECOVERY_URL = environment.backend.api_password_recovery_url;
+    private readonly PASSWORD_RECOVERY_URL = environment.backend.password_recovery;
 
     constructor(protected client: ApiClientService) {
     }
