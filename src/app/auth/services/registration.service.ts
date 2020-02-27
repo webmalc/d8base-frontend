@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class RegistrationService {
 
-    private readonly REGISTER_URL = environment.backend.register;
+    private readonly REGISTER_URL = environment.backend.user;
 
     constructor(
         protected client: ApiClientService,
