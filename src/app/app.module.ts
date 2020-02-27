@@ -57,10 +57,10 @@ import {AppComponent} from './app.component';
         StatusBar,
         SplashScreen,
         Title,
-        // {
-        //     provide: RouteReuseStrategy,
-        //     useClass: IonicRouteStrategy
-        // },
+        {
+            provide: RouteReuseStrategy,
+            useClass: IonicRouteStrategy
+        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -78,13 +78,6 @@ import {AppComponent} from './app.component';
         IpApiService,
         IpDataService,
         IpnfDataService,
-        // {
-        //     provide: LocationAccuracy,
-        //     useValue: window.hasOwnProperty('cordova') ? LocationAccuracy : {
-        //         request: () => Promise.resolve(true),
-        //         canRequest: () => Promise.resolve()
-        //     }
-        // },
         {
             provide: LocationAccuracy,
             useFactory: (platform: Platform) => !platform.is('desktop') ? LocationAccuracy : {
