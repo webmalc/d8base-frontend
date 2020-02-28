@@ -1,0 +1,178 @@
+<ion-content>
+
+  <form
+          *ngIf="form"
+          [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item-divider class="ion-text-center" color="medium">
+      <ion-label>{{'profile-form.group.main' | translate}}</ion-label>
+    </ion-item-divider>
+
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.name' | translate }}</ion-label>
+            <ion-input type="text" name="first_name"
+                       [placeholder]="'profile-form.placeholders.name'| translate"
+                       formControlName="first_name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.surname' | translate }}</ion-label>
+            <ion-input type="text" name="last_name"
+                       [placeholder]="'profile-form.placeholders.name'| translate"
+                       formControlName="last_name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label color="medium"
+                       position="floating">{{'profile-form.fields.patronymic' | translate }}</ion-label>
+            <ion-input type="text" name="patronymic"
+                       [placeholder]="'profile-form.placeholders.patronymic'| translate"
+                       formControlName="patronymic"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.phone' | translate }}</ion-label>
+            <ion-input type="text" name="phone"
+                       [placeholder]="'profile-form.placeholders.phone'| translate"
+                       formControlName="phone"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label color="medium"
+            >{{'profile-form.fields.avatar' | translate }}
+            </ion-label>
+            <app-picture-selector
+                    formControlName="avatar"
+                    [camera]="true"
+                    [fileSystem]="true"
+            >
+
+            </app-picture-selector>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!--        <ion-img *ngIf="form.get('avatar').value"></ion-img>-->
+      {{form.get('avatar').value}}
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.gender' | translate }}</ion-label>
+            <ion-select
+                    interface="popover"
+                    formControlName="gender"
+            >
+              <ion-select-option *ngFor="let gender of genderList$()|async" value="{{ gender }}">
+                {{ gender | titlecase}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.age' | translate }}</ion-label>
+            <ion-datetime
+                    display-format="DD/MM/YYYY"
+                    formControlName="year"
+            ></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label color="medium"
+                       position="floating">{{'profile-form.fields.main_language' | translate }}</ion-label>
+            <ion-select
+                    interface="popover"
+                    formControlName="main_language"
+                    (ionChange)="recomputeAdditionalLanguages()"
+            >
+              <ion-select-option *ngFor="let lang of languages$()|async" value="{{ lang }}">
+                {{ lang }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.languages' | translate }}</ion-label>
+            <ion-select
+                    multiple="true"
+                    formControlName="languages"
+            >
+              <ion-select-option *ngFor="let lang of availableAddsLanguages$|async" value="{{ lang }}">
+                {{ lang }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item-divider color="medium">
+        <ion-label>{{'profile-form.group.credentials' | translate}}</ion-label>
+      </ion-item-divider>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-item>
+            <ion-label class="label-for-required-input" color="medium"
+                       position="floating">{{'profile-form.fields.email' | translate }}</ion-label>
+            <ion-input type="text" name="email"
+                       [placeholder]="'profile-form.placeholders.email'| translate"
+                       formControlName="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!--        <ion-row class="ion-justify-content-center">-->
+      <!--            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">-->
+      <!--                <ion-item>-->
+      <!--                    <ion-label class="label-for-required-input" color="medium"-->
+      <!--                               position="floating">{{'profile-form.fields.password' | translate }}</ion-label>-->
+      <!--                    <ion-input type="password" name="password"-->
+      <!--                               [placeholder]="'profile-form.placeholders.password'| translate"-->
+      <!--                               formControlName="password"></ion-input>-->
+      <!--                </ion-item>-->
+      <!--            </ion-col>-->
+      <!--        </ion-row>-->
+
+      <ion-button type="submit" expand="block"
+                  [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>
+    </ion-grid>
+  </form>
+
+
+</ion-content>

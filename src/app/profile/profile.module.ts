@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
+import {ProfilePageRoutingModule} from './profile-routing.module';
 
-import { ProfilePage } from './profile.page';
-import {TranslateModule} from '@ngx-translate/core';
+import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
+import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {SharedModule} from '@app/shared/shared.module';
+import {TranslateModule} from '@ngx-translate/core';
+import {ProfilePage} from './profile.page';
 
 @NgModule({
     imports: [
@@ -20,7 +22,11 @@ import {SharedModule} from '@app/shared/shared.module';
         ReactiveFormsModule,
         SharedModule
     ],
-
-  declarations: [ProfilePage]
+    declarations: [
+        ProfilePage,
+        MainInfoTabComponent,
+        PluginsTabComponent
+    ]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule {
+}

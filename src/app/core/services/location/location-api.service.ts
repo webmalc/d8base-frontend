@@ -12,7 +12,7 @@ import {environment} from '../../../../environments/environment';
 })
 export class LocationApiService {
 
-    private readonly URL = environment.backend.api_save_location_url;
+    private readonly URL = environment.backend.location;
 
     constructor(private client: ApiClientService, private location: LocationService) {
     }

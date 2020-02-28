@@ -45,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private getRestrictedUrls(): Array<string> {
         return [
-            environment.backend.url + environment.backend.api_refresh_url
+            environment.backend.url + environment.backend.refresh
         ];
     }
 }

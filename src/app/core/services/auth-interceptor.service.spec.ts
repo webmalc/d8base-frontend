@@ -59,7 +59,7 @@ describe('AuthInterceptor', () => {
 
         client.get('/test/').subscribe();
         tick();
-        httpMock.expectOne(environment.backend.url + environment.backend.api_refresh_url)
+        httpMock.expectOne(environment.backend.url + environment.backend.refresh)
             .flush({access: 'test', refresh: 'test2'});
         tick();
         expect(tokenManager.setTokens).toHaveBeenCalledWith({access: 'test', refresh: 'test2'});

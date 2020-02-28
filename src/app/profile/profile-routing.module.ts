@@ -1,15 +1,32 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
+import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
+import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {ProfilePage} from './profile.page';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'tabs',
         component: ProfilePage,
         data: {
             title: 'Profile'
-        }
+        },
+        children: [
+            {
+                path: 'main',
+                component: MainInfoTabComponent
+            },
+            {
+                path: 'plugins',
+                component: PluginsTabComponent
+            }
+        ]
+    },
+    {
+        path: '',
+        redirectTo: 'tabs/main',
+        pathMatch: 'full',
     }
 ];
 
