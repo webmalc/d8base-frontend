@@ -1,7 +1,10 @@
 import {Component, forwardRef, Inject, Input, Provider} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FileSaverInterface} from '@app/core/interfaces/file-saver.interface';
+import {AwsFileSaverService} from '@app/core/services/file-savers/aws-file-saver.service';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
+import {Observable} from 'rxjs';
 
 const VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
@@ -29,17 +32,22 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     constructor(
         private photoService: PhotoService,
         private fileService: FileService,
+        private fileSaver: AwsFileSaverService
     ) {
     }
 
     public async createPhoto(): Promise<void> {
         const photo = await this.photoService.createPhoto();
-        this.setUri(this.saveFile(photo.webPath));
+        this.saveFile(photo.webPath).subscribe((uri) => {
+            this.setUri(uri);
+        });
     }
 
     public async getImageFile(): Promise<void> {
         const file = await this.fileService.getFile();
-        this.setUri(this.saveFile(file));
+        this.saveFile(file).subscribe((uri) => {
+            this.setUri(uri);
+        });
     }
 
     public registerOnChange(fn: any): void {
@@ -61,9 +69,8 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         this.onChange(this.uri);
     }
 
-    private saveFile(blob: string): string {
-        return blob;
-        // return this.saveService.save(blob);
+    private saveFile(blob: string): Observable<string> {
+        return this.fileSaver.saveFile(blob);
     }
 
 

@@ -7,6 +7,9 @@ import {By} from '@angular/platform-browser';
 import {FileService} from '../../services/file.service';
 import {PhotoService} from '../../services/photo.service';
 import {PictureSelectorComponent} from './picture-selector.component';
+import {FileSaverInterface} from '../../../core/interfaces/file-saver.interface';
+import {Observable, of} from 'rxjs';
+import {AwsFileSaverService} from '../../../core/services/file-savers/aws-file-saver.service';
 
 const initURI: string = 'https://picture0.example.com' as const;
 
@@ -32,6 +35,7 @@ describe('PictureSelectorComponent', () => {
     let componentDebugElement: DebugElement;
     let photoService: PhotoService;
     let fileService: FileService;
+    let fileSaver: AwsFileSaverService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -45,9 +49,10 @@ describe('PictureSelectorComponent', () => {
         wrapperFixture.detectChanges();
     });
 
-    beforeEach(inject([PhotoService, FileService], (ps, fs) => {
+    beforeEach(inject([PhotoService, FileService, AwsFileSaverService], (ps, fs, fv) => {
         photoService = ps;
         fileService = fs;
+        fileSaver = fv;
     }));
 
     it('should create', () => {
@@ -55,8 +60,12 @@ describe('PictureSelectorComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should pass picture created by createPhoto and getFile method to formControl', fakeAsync(() => {
+    it('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
+
+        spyOn(fileSaver, 'saveFile').and.callFake((blob: string): Observable<string> => {
+            return of<string>(blob);
+        });
 
         const fakePhotoURI = 'http://picture1.example.com';
         spyOn(photoService, 'createPhoto').and.returnValue(Promise.resolve({
@@ -67,9 +76,7 @@ describe('PictureSelectorComponent', () => {
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
 
-
         const fakeFileURI = 'http://picture2.example.com';
-
         spyOn(fileService, 'getFile').and.returnValue(Promise.resolve(fakeFileURI));
         componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
         tick();
