@@ -1,15 +1,15 @@
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {IonButtons, IonicModule} from '@ionic/angular';
 
 import {Component, DebugElement} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
+import {Observable, of} from 'rxjs';
+import {FileSaverService} from '../../../core/services/file-savers/file-saver-abstract.service';
+import {fileSaverProvider} from '../../../core/services/file-savers/file-saver-service.provider';
 import {FileService} from '../../services/file.service';
 import {PhotoService} from '../../services/photo.service';
 import {PictureSelectorComponent} from './picture-selector.component';
-import {FileSaverInterface} from '../../../core/interfaces/file-saver.interface';
-import {Observable, of} from 'rxjs';
-import {AwsFileSaverService} from '../../../core/services/file-savers/aws-file-saver.service';
 
 const initURI: string = 'https://picture0.example.com' as const;
 
@@ -35,12 +35,13 @@ describe('PictureSelectorComponent', () => {
     let componentDebugElement: DebugElement;
     let photoService: PhotoService;
     let fileService: FileService;
-    let fileSaver: AwsFileSaverService;
+    let fileSaver: FileSaverService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PictureSelectorComponent, AppTestFormControlComponent],
-            imports: [IonicModule, ReactiveFormsModule]
+            imports: [IonicModule, ReactiveFormsModule],
+            providers: [fileSaverProvider]
         });
         wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
         wrapperComponent = wrapperFixture.componentInstance;
@@ -49,7 +50,7 @@ describe('PictureSelectorComponent', () => {
         wrapperFixture.detectChanges();
     });
 
-    beforeEach(inject([PhotoService, FileService, AwsFileSaverService], (ps, fs, fv) => {
+    beforeEach(inject([PhotoService, FileService, FileSaverService], (ps, fs, fv) => {
         photoService = ps;
         fileService = fs;
         fileSaver = fv;

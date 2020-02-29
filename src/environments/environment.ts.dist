@@ -11,5 +11,9 @@ export const environment = {
         user_plugin: '',
         plugin: ''
         api_profile: ''
-    }
+    },
+};
+
+export const serviceSettings = {
+    fileSaverService: 'aws'
 };
