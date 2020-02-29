@@ -81,6 +81,12 @@ export class ProfileService {
 
     }
 
+    public updateUser(user: User): void {
+        this.userManager.updateUser(user).subscribe(
+            (updatedUser: User) => console.log(updatedUser)
+        );
+    }
+
     private getUser$(): Observable<User> {
         return new Observable(subscriber => {
             this.authFactory.getAuthenticator().getUserId().subscribe(

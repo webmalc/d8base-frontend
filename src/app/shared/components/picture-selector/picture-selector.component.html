@@ -1,27 +1,18 @@
-<!--<ion-button (click)="setPictureGetter('photo')">-->
-<!--    P-->
-<!--</ion-button>-->
-<!--<ion-button (click)="setPictureGetter('device')">-->
-<!--    D-->
-<!--</ion-button>-->
 <ion-buttons>
     <ion-button
+            id="camera-button"
             *ngIf="camera"
             type="button"
             (click)="createPhoto()"
     >
         <ion-icon name="camera"></ion-icon>
     </ion-button>
-    <ion-button *ngIf="fileSystem"
-                type="button"
-                >
+    <ion-button
+            id="file-button"
+            *ngIf="fileSystem"
+            type="button"
+            (click)="getImageFile()"
+    >
         <ion-icon name="folder"></ion-icon>
     </ion-button>
 </ion-buttons>
-
-<ion-item >
-<!--    {{photo.filepath}}-->
-
-</ion-item>
-
-
