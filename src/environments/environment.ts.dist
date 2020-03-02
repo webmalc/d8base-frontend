@@ -5,7 +5,7 @@ export const environment = {
         url: '',
         auth: '',
         refresh: '',
-        register: '',
+        user: '',
         password_recovery: '',
         location: '',
         user_plugin: '',
