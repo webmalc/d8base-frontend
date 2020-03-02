@@ -3,11 +3,12 @@ export const environment = {
     origin: '',
     backend: {
         url: '',
-        api_auth_url: '',
-        api_refresh_url: '',
-        api_register_url: '',
-        api_password_recovery_url: '',
-        api_save_location_url: ''
-        api_profile: ''
+        auth: '',
+        refresh: '',
+        user: '',
+        password_recovery: '',
+        location: '',
+        user_plugin: '',
+        plugin: ''
     }
 };
