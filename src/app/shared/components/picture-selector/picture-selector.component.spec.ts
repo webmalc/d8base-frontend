@@ -6,7 +6,6 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 import {Observable, of} from 'rxjs';
 import {FileSaverService} from '../../../core/services/file-savers/file-saver-abstract.service';
-import {fileSaverProvider} from '../../../core/services/file-savers/file-saver-service.provider';
 import {FileService} from '../../services/file.service';
 import {PhotoService} from '../../services/photo.service';
 import {PictureSelectorComponent} from './picture-selector.component';
@@ -28,7 +27,6 @@ class AppTestFormControlComponent {
 
 describe('PictureSelectorComponent', () => {
 
-
     let wrapperComponent: AppTestFormControlComponent;
     let wrapperFixture: ComponentFixture<AppTestFormControlComponent>;
     let component: PictureSelectorComponent;
@@ -41,19 +39,21 @@ describe('PictureSelectorComponent', () => {
         TestBed.configureTestingModule({
             declarations: [PictureSelectorComponent, AppTestFormControlComponent],
             imports: [IonicModule, ReactiveFormsModule],
-            providers: [fileSaverProvider]
+            providers: [{
+                provide: FileSaverService
+            }]
         });
         wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
         wrapperComponent = wrapperFixture.componentInstance;
         componentDebugElement = wrapperFixture.debugElement.query(By.directive(PictureSelectorComponent));
         component = componentDebugElement.componentInstance;
         wrapperFixture.detectChanges();
+        fileSaver = componentDebugElement.injector.get(FileSaverService);
     });
 
-    beforeEach(inject([PhotoService, FileService, FileSaverService], (ps, fs, fv) => {
+    beforeEach(inject([PhotoService, FileService, FileSaverService], (ps, fs) => {
         photoService = ps;
         fileService = fs;
-        fileSaver = fv;
     }));
 
     it('should create', () => {
@@ -76,12 +76,16 @@ describe('PictureSelectorComponent', () => {
         componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
+        expect(photoService.createPhoto).toHaveBeenCalled();
 
         const fakeFileURI = 'http://picture2.example.com';
         spyOn(fileService, 'getFile').and.returnValue(Promise.resolve(fakeFileURI));
         componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakeFileURI);
+        expect(fileService.getFile).toHaveBeenCalled();
+
+        expect(fileSaver.saveFile).toHaveBeenCalledTimes(2);
     }));
 
     it('should show/hide buttons because component vars state', () => {
