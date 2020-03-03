@@ -15,5 +15,11 @@ export const environment = {
 };
 
 export const serviceSettings = {
-    fileSaverService: 'aws'
+    fileSaverService: 'aws',
+    aswCredentials: {
+        accessKeyId: '',
+        secretAccessKey: '',
+        region: '',
+        bucket: ''
+    }
 };

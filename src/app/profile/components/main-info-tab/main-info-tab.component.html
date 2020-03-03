@@ -63,6 +63,9 @@
             <ion-label color="medium"
             >{{'profile-form.fields.avatar' | translate }}
             </ion-label>
+              <ion-thumbnail class="app-thumb-mr100" *ngIf="form.get('avatar').value">
+                  <ion-img [src]="form.get('avatar').value"></ion-img>
+              </ion-thumbnail>
             <app-picture-selector
                     formControlName="avatar"
                     [camera]="true"
@@ -73,8 +76,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <!--        <ion-img *ngIf="form.get('avatar').value"></ion-img>-->
-      {{form.get('avatar').value}}
       <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
           <ion-item>

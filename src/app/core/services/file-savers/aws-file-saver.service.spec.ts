@@ -1,16 +1,28 @@
-import { TestBed } from '@angular/core/testing';
-
-import { AwsFileSaverService } from './aws-file-saver.service';
+import {AwsFileSaverService} from './aws-file-saver.service';
 import {FileSaverService} from './file-saver-abstract.service';
-import {fileSaverProvider} from './file-saver-service.provider';
+
+import {serviceSettings} from '../../../../environments/environment';
+import {image} from './test-image';
 
 describe('FileSaverService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-      providers: [fileSaverProvider]
-  }));
+    let service: AwsFileSaverService;
 
-  it('should be created', () => {
-    const service: FileSaverService = TestBed.get(FileSaverService);
-    expect(service).toBeTruthy();
-  });
+    beforeEach(() => {
+        service = new AwsFileSaverService();
+    });
+
+    it('should save file  to aws bucket with save method', async (done) => {
+        const response = await fetch(image);
+        const blob = await response.blob();
+        const file = new File([blob], 'test.jpg', {type: 'image/jpeg'});
+        service.saveFile(file).subscribe((uri) => {
+            expect(uri).toContain(serviceSettings.aswCredentials.bucket);
+            done();
+        });
+    });
+
+    // TODO: error test
+    xit('should handle the error when it occurs', () => {
+        expect(false).toBeTruthy();
+    });
 });

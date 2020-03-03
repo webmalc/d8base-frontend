@@ -1,7 +1,7 @@
 import {FileSaverInterface} from '@app/core/interfaces/file-saver.interface';
 import {CameraPhoto} from '@capacitor/core';
 import {from, Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 
 export abstract class FileSaverService implements FileSaverInterface {
     public saveCameraPhoto(photo: CameraPhoto): Observable<string> {
@@ -9,7 +9,7 @@ export abstract class FileSaverService implements FileSaverInterface {
             switchMap((response: Body) => {
                 return from(response.blob()).pipe(
                     switchMap((blob: Blob) => {
-                        const file: File = new File([blob], 'noname');
+                        const file: File = new File([blob], 'avatar.jpg');
 
                         return this.saveFile(file);
                     })

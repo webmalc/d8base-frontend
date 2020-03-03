@@ -1,12 +1,9 @@
 import {Component, forwardRef, Inject, Input, Provider} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {FileSaverInterface} from '@app/core/interfaces/file-saver.interface';
-import {AwsFileSaverService} from '@app/core/services/file-savers/aws-file-saver.service';
 import {FileSaverService} from '@app/core/services/file-savers/file-saver-abstract.service';
 import {fileSaverProvider} from '@app/core/services/file-savers/file-saver-service.provider';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
-import {Observable} from 'rxjs';
 
 const VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
