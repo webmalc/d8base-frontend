@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '../../../../environments/environment';
-import {plainToClass} from 'class-transformer';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Plugin} from '@app/profile/models/plugin';
-import {switchMap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {PluginApiService} from '@app/profile/services/plugin-api.service';
+import {Observable} from 'rxjs';
+import {plainToClass} from 'class-transformer';
+import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
+import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 
 @Component({
     selector: 'app-plugins-tab',
@@ -15,45 +15,57 @@ import {Observable, of} from 'rxjs';
 export class PluginsTabComponent implements OnInit {
 
     public form: FormGroup;
-    public plugins: Array<Plugin>;
-    private pluginCount: number = 1;
+    public plugins: Plugin[];
 
-    constructor(private formBuilder: FormBuilder, private api: ApiClientService) {
+    constructor(
+        private formBuilder: FormBuilder,
+        private apiPlugins: PluginApiService,
+        private apiUserPlugins: UserPluginApiService,
+        private authFactory: AuthenticationFactory
+    ) {
+    }
+
+    public ngOnInit(): void {
+        this.form = this.formBuilder.group({
+            Plugins: ['', Validators.required]
+        });
         this.getPlugins().subscribe(
-            (plugins: Array<Plugin>) => {
-                this.plugins = plugins;
+            (plugins: Plugin[]) => {
+                this.plugins = this.sortPlugins(plugins);
             }
         );
-        this.form = formBuilder.group({
-            plugins: formBuilder.array([])
-        });
-    }
-
-    ngOnInit() {
-    }
-
-    public removeSelect(index: number): void {
-        (this.form.get('plugins') as FormArray).removeAt(index);
     }
 
     public submitPlugins(): void {
-        console.log(this.form.getRawValue());
+        this.apiPlugins.savePlugin(this.getSelectedPlugins(this.form.getRawValue().Plugins));
     }
 
-    public add(): void {
-        this.pluginCount += 1;
-        (this.form.get('plugins') as FormArray).push(new FormControl(this.pluginCount));
-    }
-
-    public getPlugins(): Observable<Array<Plugin>> {
-        return this.api.get<object[]>(environment.backend.plugin).pipe(
-            switchMap(
-                plugins => {
-                    console.log(plainToClass(Plugin, plugins));
-
-                    return of(plainToClass(Plugin, plugins));
-                }
-            )
+    private getSelectedPlugins(selectedIds: string[]): Plugin[] {
+        const plugins: Plugin[] = [];
+        selectedIds.forEach(
+            id => plugins.push(this.plugins[parseInt(id, 10)])
         );
+
+        return plugins;
+    }
+
+    private getPlugins(): Observable<Array<Plugin>> {
+        return this.apiPlugins.getPlugins();
+    }
+
+    private sortPlugins(plugins: Plugin[]): Plugin[] {
+        const res: Plugin[] = [];
+
+        plugins.sort((a: Plugin, b: Plugin) => {
+            return a.id < b.id ? -1 : 1;
+        });
+
+        plugins.forEach(
+            (plugin: Plugin) => {
+                res[plugin.id] = plugin;
+            }
+        );
+
+        return res;
     }
 }

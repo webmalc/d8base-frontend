@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {ProfileService} from '@app/profile/services/profile.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
+import {ProfileService} from '@app/profile/services/profile.service';
 import {User} from '@app/shared/models/user';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
     selector: 'app-main-info-tab',
