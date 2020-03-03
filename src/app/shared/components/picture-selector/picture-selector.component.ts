@@ -40,17 +40,17 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     }
 
     public async createPhoto(): Promise<void> {
-        const photo = await this.photoService.createPhoto();
-        this.saveFile(photo.webPath).subscribe((uri) => {
-            this.setUri(uri);
-        });
+        const cameraPhoto = await this.photoService.createPhoto();
+        this.fileSaver.saveCameraPhoto(cameraPhoto).subscribe(
+            (uri) => this.setUri(uri)
+        );
     }
 
     public async getImageFile(): Promise<void> {
         const file = await this.fileService.getFile();
-        this.saveFile(file).subscribe((uri) => {
-            this.setUri(uri);
-        });
+        this.fileSaver.saveFileSystemFile(file).subscribe(
+            (uri) => this.setUri(uri)
+        );
     }
 
     public registerOnChange(fn: any): void {
@@ -70,10 +70,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     private setUri(uri: string): void {
         this.uri = uri;
         this.onChange(this.uri);
-    }
-
-    private saveFile(blob: string): Observable<string> {
-        return this.fileSaver.saveFile(blob);
     }
 
 

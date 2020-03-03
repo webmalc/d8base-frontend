@@ -9,6 +9,7 @@ import {FileSaverService} from '../../../core/services/file-savers/file-saver-ab
 import {FileService} from '../../services/file.service';
 import {PhotoService} from '../../services/photo.service';
 import {PictureSelectorComponent} from './picture-selector.component';
+import {CameraPhoto} from '@capacitor/core';
 
 const initURI: string = 'https://picture0.example.com' as const;
 
@@ -64,28 +65,36 @@ describe('PictureSelectorComponent', () => {
     it('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
 
-        spyOn(fileSaver, 'saveFile').and.callFake((blob: string): Observable<string> => {
-            return of<string>(blob);
-        });
+        const fakePhotoURI: string = 'http://picture1.example.com';
+        spyOn(fileSaver, 'saveCameraPhoto').and.callFake((photo: CameraPhoto): Observable<string> => {
+            expect(photo).toBeTruthy();
 
-        const fakePhotoURI = 'http://picture1.example.com';
-        spyOn(photoService, 'createPhoto').and.returnValue(Promise.resolve({
+            return of(fakePhotoURI);
+
+        });
+        spyOn(photoService, 'createPhoto').and.returnValue(Promise.resolve<CameraPhoto>({
             webPath: fakePhotoURI,
             format: 'png'
         }));
+
+        const fakeFileURI: string = 'http://picture2.example.com';
+        spyOn(fileSaver, 'saveFileSystemFile').and.callFake((file: string): Observable<string> => {
+            expect(file).toBeTruthy();
+
+            return of<string>(fakeFileURI);
+        });
+
         componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
         expect(photoService.createPhoto).toHaveBeenCalled();
 
-        const fakeFileURI = 'http://picture2.example.com';
         spyOn(fileService, 'getFile').and.returnValue(Promise.resolve(fakeFileURI));
         componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakeFileURI);
         expect(fileService.getFile).toHaveBeenCalled();
 
-        expect(fileSaver.saveFile).toHaveBeenCalledTimes(2);
     }));
 
     it('should show/hide buttons because component vars state', () => {

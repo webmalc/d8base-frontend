@@ -4,8 +4,8 @@ import {Observable, of} from 'rxjs';
 
 export class AwsFileSaverService extends FileSaverService implements FileSaverInterface {
 
-    public saveFile(blob: string): Observable<string> {
-        return of<string>(blob);
+    public saveFile(file: File): Observable<string> {
+        return of<string>();
     }
 
 }

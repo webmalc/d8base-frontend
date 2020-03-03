@@ -16,14 +16,13 @@ export class UserManagerService {
     }
 
     public getUser(id: number): Observable<User> {
-        return this.api.get<User>(`${environment.backend.users}/${id}`)
+        return this.api.get<User>(`${environment.backend.user}/${id}`)
             .pipe(
                 map((user: User) => plainToClass(User, user))
             );
-
     }
 
     public updateUser(user: UserInterface): Observable<User> {
-        return this.api.patch<User>(`${environment.backend.users}/${user.id}`, user);
+        return this.api.patch<User>(`${environment.backend.user}/${user.id}`, user);
     }
 }
