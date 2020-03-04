@@ -1,11 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {UserManagerService} from '@app/core/services/user-manager.service';
+import {PluginsFormFields} from '@app/profile/enums/plugins-form-fields';
+import {PluginsFormService} from '@app/profile/forms/plugins-form.service';
 import {Plugin} from '@app/profile/models/plugin';
+import {UserPlugin} from '@app/profile/models/user-plugin';
 import {PluginApiService} from '@app/profile/services/plugin-api.service';
-import {Observable} from 'rxjs';
-import {plainToClass} from 'class-transformer';
 import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
+import {User} from '@app/shared/models/user';
+import {Observable, of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-plugins-tab',
@@ -16,20 +20,22 @@ export class PluginsTabComponent implements OnInit {
 
     public form: FormGroup;
     public plugins: Plugin[];
+    public readonly formFields = PluginsFormFields;
 
     constructor(
         private formBuilder: FormBuilder,
         private apiPlugins: PluginApiService,
         private apiUserPlugins: UserPluginApiService,
-        private authFactory: AuthenticationFactory
+        private userManager: UserManagerService,
+        private formService: PluginsFormService
     ) {
     }
 
     public ngOnInit(): void {
-        this.form = this.formBuilder.group({
-            Plugins: ['', Validators.required]
-        });
-        this.getPlugins().subscribe(
+        this.formService.createForm().subscribe(
+            form => this.form = form
+        );
+        this.apiPlugins.getPlugins().subscribe(
             (plugins: Plugin[]) => {
                 this.plugins = this.sortPlugins(plugins);
             }
@@ -37,35 +43,43 @@ export class PluginsTabComponent implements OnInit {
     }
 
     public submitPlugins(): void {
-        this.apiPlugins.savePlugin(this.getSelectedPlugins(this.form.getRawValue().Plugins));
-    }
-
-    private getSelectedPlugins(selectedIds: string[]): Plugin[] {
-        const plugins: Plugin[] = [];
-        selectedIds.forEach(
-            id => plugins.push(this.plugins[parseInt(id, 10)])
+        this.generateUserPlugins(this.form.getRawValue()[PluginsFormFields.Plugins]).subscribe(
+            userPlugins => {
+                this.apiUserPlugins.savePlugin(userPlugins);
+            }
         );
-
-        return plugins;
     }
 
-    private getPlugins(): Observable<Array<Plugin>> {
-        return this.apiPlugins.getPlugins();
+    public isSubmitDisabled(): boolean {
+        return !(this.form.dirty && this.form.valid);
+
+    }
+
+    private generateUserPlugins(pluginsId: string[]): Observable<UserPlugin | UserPlugin[]> {
+        return this.userManager.getCurrentUser().pipe(
+            switchMap(
+                (user: User) => {
+                    const userPlugins: UserPlugin[] = [];
+                    pluginsId.forEach(
+                        pluginId => {
+                            const newUserPlugin = new UserPlugin();
+                            newUserPlugin.user_id = user.id;
+                            newUserPlugin.plugin_id = parseInt(pluginId, 10);
+                            userPlugins.push(newUserPlugin);
+                        }
+                    );
+
+                    return of(userPlugins);
+                }
+            )
+        );
     }
 
     private sortPlugins(plugins: Plugin[]): Plugin[] {
-        const res: Plugin[] = [];
-
         plugins.sort((a: Plugin, b: Plugin) => {
             return a.id < b.id ? -1 : 1;
         });
 
-        plugins.forEach(
-            (plugin: Plugin) => {
-                res[plugin.id] = plugin;
-            }
-        );
-
-        return res;
+        return plugins;
     }
 }

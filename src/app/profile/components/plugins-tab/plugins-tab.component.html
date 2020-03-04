@@ -1,10 +1,10 @@
 <ion-content>
-    <form [formGroup]="form" (ngSubmit)="submitPlugins()" (keydown.enter)="submitPlugins()">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitPlugins()" (keydown.enter)="submitPlugins()">
         <ion-row class="ion-justify-content-center">
             <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                 <ion-item>
                     <ion-label color="medium" position="floating">Plugins</ion-label>
-                    <ion-select formControlName="Plugins" multiple="true" interface="popover">
+                    <ion-select [formControlName]="formFields.Plugins" multiple="true" interface="popover">
                         <ion-select-option *ngFor="let option of plugins"
                                            value="{{option.id}}">{{option.title}}</ion-select-option>
                     </ion-select>
@@ -18,6 +18,7 @@
                         expand="block"
                         fill="solid"
                         color="success"
+                        [disabled]="isSubmitDisabled()"
                 >save
                 </ion-button>
             </ion-col>
