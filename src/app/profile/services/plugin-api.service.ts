@@ -20,7 +20,13 @@ export class PluginApiService {
         );
     }
 
-    public savePlugin(plugin: Plugin): Observable<Plugin> {
+    public getPlugins(): Observable<Plugin[]> {
+        return this.client.get<Plugin[]>(this.URL).pipe(
+            map(raw => plainToClass(Plugin, raw))
+        );
+    }
+
+    public savePlugin(plugin: Plugin | Plugin[]): Observable<Plugin | Plugin[]> {
         return this.client.post(this.URL, plugin);
     }
 }

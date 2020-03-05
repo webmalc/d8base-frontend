@@ -21,7 +21,7 @@ export class UserPluginApiService {
         );
     }
 
-    public savePlugin(plugin: UserPlugin): Observable<UserPlugin> {
-        return this.client.post<UserPlugin>(this.URL, plugin);
+    public savePlugin(plugin: UserPlugin | UserPlugin[]): Observable<UserPlugin | UserPlugin[]> {
+        return this.client.post<UserPlugin | UserPlugin[]>(this.URL, plugin);
     }
 }

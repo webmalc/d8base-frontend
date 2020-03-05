@@ -7,9 +7,7 @@ import {User} from '@app/shared/models/user';
 import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class ProfileService {
 
     private availableAddsLanguages: string[];
@@ -88,18 +86,7 @@ export class ProfileService {
     }
 
     private getUser$(): Observable<User> {
-        return new Observable(subscriber => {
-            this.authFactory.getAuthenticator().getUserId().subscribe(
-                userId => {
-                    this.userManager.getUser(userId).subscribe(
-                        (user: User) => {
-                            subscriber.next(user);
-                            subscriber.complete();
-                        }
-                    );
-                }
-            );
-        });
+        return this.userManager.getCurrentUser();
     }
 
     private getAdditionalLanguages$(): Observable<string[]> {
