@@ -3,7 +3,7 @@
         <ion-row class="ion-justify-content-center">
             <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                 <ion-item>
-                    <ion-label color="medium" position="floating">Plugins</ion-label>
+                    <ion-label color="medium" position="floating">{{'plugins-tab.plugins'|translate}}</ion-label>
                     <ion-select [formControlName]="formFields.Plugins" multiple="true" interface="popover">
                         <ion-select-option *ngFor="let option of plugins"
                                            value="{{option.id}}">{{option.title}}</ion-select-option>
@@ -19,7 +19,7 @@
                         fill="solid"
                         color="success"
                         [disabled]="isSubmitDisabled()"
-                >save
+                >{{'plugins-tab.save'|translate}}
                 </ion-button>
             </ion-col>
         </ion-row>

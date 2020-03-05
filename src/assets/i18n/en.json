@@ -1,4 +1,9 @@
 {
+  "template": {
+    "sign-in": "Sign-in",
+    "sign-up": "Sign-up",
+    "profile": "Profile"
+  },
   "login-form": {
     "login": "Login",
     "password": "Password",
@@ -50,5 +55,13 @@
       "languages": "Additional Language"
     },
     "button": "Save"
+  },
+  "profile-page" : {
+    "profile": "Profile",
+    "plugins": "Plugins"
+  },
+  "plugins-tab": {
+    "plugins": "Plugins",
+    "save": "Save"
   }
 }
