@@ -79,6 +79,12 @@ export class ProfileService {
 
     }
 
+    public updateUser(user: User): void {
+        this.userManager.updateUser(user).subscribe(
+            (updatedUser: User) => console.log(updatedUser)
+        );
+    }
+
     private getUser$(): Observable<User> {
         return this.userManager.getCurrentUser();
     }

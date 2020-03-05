@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileService} from '@app/profile/services/profile.service';
 import {User} from '@app/shared/models/user';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -16,8 +15,7 @@ export class MainInfoTabComponent implements OnInit {
     public availableAddsLanguages$: BehaviorSubject<string[]>;
 
     constructor(
-        private profileService: ProfileService,
-        private userManager: UserManagerService
+        private profileService: ProfileService
     ) {
     }
 
@@ -46,10 +44,8 @@ export class MainInfoTabComponent implements OnInit {
 // TODO: Is there best way for trim input values ?
     public submit(): void {
         if (this.form.valid) {
-            const profileUser: User = this.form.value as User;
-            this.userManager.updateUser(profileUser).subscribe(
-                (user: User) => console.log(user)
-            );
+            const user: User = this.form.value as User;
+            this.profileService.updateUser(user);
         }
     }
 

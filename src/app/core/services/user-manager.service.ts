@@ -31,7 +31,6 @@ export class UserManagerService {
             .pipe(
                 map((user: User) => plainToClass(User, user))
             );
-
     }
 
     public updateUser(user: UserInterface): Observable<User> {
