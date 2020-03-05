@@ -25,7 +25,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     @Input() public camera: boolean = true;
     @Input() public fileSystem: boolean = true;
 
-    public uri: string;
+    public uri: string | null;
 
     private onChange: (fn: any) => void;
 
@@ -37,17 +37,32 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     }
 
     public async createPhoto(): Promise<void> {
-        const cameraPhoto = await this.photoService.createPhoto();
-        this.fileSaver.saveCameraPhoto(cameraPhoto).subscribe(
-            (uri) => this.setUri(uri)
-        );
+        let oldUri: string;
+        try {
+            oldUri = this.uri;
+            this.clearUri();
+            const cameraPhoto = await this.photoService.createPhoto();
+            this.fileSaver.saveCameraPhoto(cameraPhoto).subscribe(
+                uri => this.setUri(uri)
+            );
+        } catch (error) {
+            this.setUri(oldUri);
+        }
     }
 
     public async getImageFile(): Promise<void> {
-        const file = await this.fileService.getFile();
-        this.fileSaver.saveFileSystemFile(file).subscribe(
-            (uri) => this.setUri(uri)
-        );
+        let oldUri: string;
+        try {
+            oldUri = this.uri;
+            this.clearUri();
+            const file = await this.fileService.getFile();
+            this.fileSaver.saveFileSystemFile(file).subscribe(
+                (uri) => this.setUri(uri)
+            );
+        } catch (error) {
+            this.setUri(oldUri);
+        }
+
     }
 
     public registerOnChange(fn: any): void {
@@ -62,6 +77,10 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
     public writeValue(uri: string): void {
         this.uri = uri;
+    }
+
+    private clearUri(): void {
+        this.setUri('');
     }
 
     private setUri(uri: string): void {

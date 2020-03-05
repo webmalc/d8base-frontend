@@ -83,14 +83,15 @@ describe('PictureSelectorComponent', () => {
 
             return of<string>(fakeFileURI);
         });
-
         componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
+        expect(wrapperComponent.form.get('avatar').value).toBe('');
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
         expect(photoService.createPhoto).toHaveBeenCalled();
 
         spyOn(fileService, 'getFile').and.returnValue(Promise.resolve(fakeFileURI));
         componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
+        expect(wrapperComponent.form.get('avatar').value).toBe('');
         tick();
         expect(wrapperComponent.form.get('avatar').value).toBe(fakeFileURI);
         expect(fileService.getFile).toHaveBeenCalled();
@@ -116,5 +117,16 @@ describe('PictureSelectorComponent', () => {
         wrapperFixture.detectChanges();
         checkExpected(2);
     });
+
+    it('should bring the old picture back to form, when one of image services throw error', fakeAsync(() => {
+        expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
+        spyOn(photoService, 'createPhoto').and.throwError('Canceled by user');
+        componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
+        expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
+        spyOn(fileService, 'getFile').and.throwError('Some error');
+        componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
+        expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
+    }));
+
 
 });

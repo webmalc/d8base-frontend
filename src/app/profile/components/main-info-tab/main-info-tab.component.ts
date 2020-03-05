@@ -49,4 +49,7 @@ export class MainInfoTabComponent implements OnInit {
         }
     }
 
+    public getAvatar(): string {
+        return this.form.get('avatar').value || 'assets/images/profile/noavatar.jpeg';
+    }
 }
