@@ -4,8 +4,7 @@ import {IonicModule} from '@ionic/angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
-import {TranslateModule} from '@ngx-translate/core';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {LoginFormService} from '../../forms/login-form.service';
@@ -19,10 +18,11 @@ describe('LoginFormComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LoginFormComponent, ErrorFlashbagComponent, TranslateServiceMock],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
+            declarations: [LoginFormComponent, ErrorFlashbagComponent],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [
-                LoginFormService
+                LoginFormService,
+                TranslateService
             ]
         }).compileComponents();
 

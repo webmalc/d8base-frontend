@@ -12,7 +12,7 @@ describe('LoginFormService', () => {
     }));
 
     it('should be created', () => {
-        const service: LoginFormService = TestBed.get(LoginFormService);
+        const service: LoginFormService = TestBed.inject(LoginFormService);
         expect(service).toBeTruthy();
     });
 });

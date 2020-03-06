@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {of} from 'rxjs';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+
 import {ApiClientService} from '../../../core/services/api-client.service';
 import {PasswordRecoveryFormComponent} from '../../components/password-recovery-form/password-recovery-form.component';
 import {PasswordRecoveryFormService} from '../../forms/password-recovery-form.service';
@@ -18,8 +18,8 @@ describe('PasswordRecoverPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [PasswordRecoverPage, TranslateServiceMock, PasswordRecoveryFormComponent],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
+            declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [
                 PasswordRecoveryService,
                 PasswordRecoveryFormService,

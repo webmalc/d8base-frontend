@@ -10,7 +10,7 @@ import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {TranslateModule} from '@ngx-translate/core';
 import {plainToClass} from 'class-transformer';
 import {of} from 'rxjs';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+
 import {LocationModel} from '../../../core/models/location.model';
 import {IpApiService} from '../../../core/services/location/ip-api.service';
 import {IpDataService} from '../../../core/services/location/ip-data.service';
@@ -38,8 +38,8 @@ describe('RegistrationPage', () => {
                 city: 'testCity'
             })};
         TestBed.configureTestingModule({
-            declarations: [RegistrationPage, RegistrationFormComponent, ErrorFlashbagComponent, TranslateServiceMock],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
+            declarations: [RegistrationPage, RegistrationFormComponent, ErrorFlashbagComponent],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [
                 RegistrationFormService, FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
                 {provide: IpApiService, useValue: ipServiceMock},

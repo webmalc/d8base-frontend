@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {plainToClass} from 'class-transformer';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+
 import {LocationModel} from '../../../core/models/location.model';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {User} from '../../../shared/models/user';
@@ -21,8 +21,8 @@ describe('RegistrationFormComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [RegistrationFormComponent, ErrorFlashbagComponent, TranslateServiceMock],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
+            declarations: [RegistrationFormComponent, ErrorFlashbagComponent],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [RegistrationFormService]
         }).compileComponents();
 

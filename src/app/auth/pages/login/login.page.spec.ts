@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {Observable, of, throwError} from 'rxjs';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+
 import {JwtHelper} from '../../../core/proxies/jwt-helper.service';
 import {ApiClientService} from '../../../core/services/api-client.service';
 import {AuthenticationService} from '../../../core/services/authentication.service';
@@ -24,8 +24,8 @@ describe('LoginPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent, TranslateServiceMock],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule],
+            declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [
                 {provide: ApiClientService, useClass: ApiClientServiceMock},
                 LoginFormService,
@@ -36,7 +36,7 @@ describe('LoginPage', () => {
             ]
         }).compileComponents();
 
-        router = TestBed.get(Router);
+        router = TestBed.inject<Router>(Router);
         spyOn(router, 'navigateByUrl');
 
         fixture = TestBed.createComponent(LoginPage);

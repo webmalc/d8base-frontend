@@ -6,9 +6,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Platform} from '@ionic/angular';
 import {IonicStorageModule, Storage} from '@ionic/storage';
 
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
-import {TranslateServiceMock} from './core/mock/translate-service-mock';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
 import {DarkModeService} from './core/services/dark-mode.service';
 import {TranslationService} from './core/services/translation.service';
@@ -31,9 +30,9 @@ describe('AppComponent', () => {
         };
 
         TestBed.configureTestingModule({
-            declarations: [AppComponent, TranslateServiceMock],
+            declarations: [AppComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule],
+            imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot()],
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true },
                 {provide: StatusBar, useValue: statusBarSpy},
@@ -42,10 +41,9 @@ describe('AppComponent', () => {
                 {provide: Storage, useValue: storageMock},
                 DarkModeService,
                 StorageManagerService,
-                TranslationService,
-                {provide: TranslateService, useClass: TranslateServiceMock}
+                TranslationService
             ]
-        }).compileComponents();
+        }).compileComponents().then();
 
         fixture = TestBed.createComponent(AppComponent);
     }));

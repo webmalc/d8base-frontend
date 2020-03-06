@@ -3,7 +3,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {ErrorFlashbagComponent} from './error-flashbag.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {TranslateServiceMock} from '../../../core/mock/translate-service-mock';
+
 
 describe('ErrorFlashbagComponent', () => {
     let component: ErrorFlashbagComponent;
@@ -11,8 +11,8 @@ describe('ErrorFlashbagComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ErrorFlashbagComponent, TranslateServiceMock],
-            imports: [IonicModule.forRoot(), TranslateModule]
+            declarations: [ErrorFlashbagComponent],
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
         }).compileComponents();
 
         fixture = TestBed.createComponent(ErrorFlashbagComponent);

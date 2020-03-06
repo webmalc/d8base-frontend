@@ -1,12 +1,28 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ProfileFormService } from './profile-form.service';
+import {FormBuilder} from '@angular/forms';
+import {User} from '../../shared/models/user';
+import {ProfileFormService} from './profile-form.service';
 
 describe('ProfileFormService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    let service: ProfileFormService;
 
-  it('should be created', () => {
-    const service: ProfileFormService = TestBed.get(ProfileFormService);
-    expect(service).toBeTruthy();
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [
+                FormBuilder
+            ]
+        });
+        service = TestBed.inject(ProfileFormService);
+    });
+
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
+
+    it('should create form', () => {
+        const user = new User();
+        const form = service.createForm(user);
+        expect(form).toBeTruthy();
+    });
 });
