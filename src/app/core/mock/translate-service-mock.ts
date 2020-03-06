@@ -4,7 +4,7 @@ import {of} from 'rxjs';
 @Pipe({
     name: 'translate'
 })
-export class TranslateServiceMock implements PipeTransform {
+export default class TranslateServiceMock implements PipeTransform {
 
     public get(key: any): any {
         return of(key);
