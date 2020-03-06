@@ -1,4 +1,9 @@
 {
+  "template": {
+    "sign-in": "Войти",
+    "sign-up": "Зарегистрироваться",
+    "profile": "Профиль"
+  },
   "login-form": {
     "login": "Логин",
     "password": "Пароль",
@@ -50,5 +55,13 @@
       "languages": "Доп. языки"
     },
     "button": "Сохранить"
+  },
+  "profile-page" : {
+    "profile": "Профиль",
+    "plugins": "Плагины"
+  },
+  "plugins-tab": {
+    "plugins": "Плагины",
+    "save": "Сохранить"
   }
 }
