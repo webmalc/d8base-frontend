@@ -8,7 +8,6 @@ import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import TranslateServiceMock from '@app/core/mock/translate-service-mock';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
 import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
@@ -29,7 +28,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 @NgModule({
-    declarations: [AppComponent, TranslateServiceMock],
+    declarations: [AppComponent],
     entryComponents: [],
     imports: [
         BrowserModule,
@@ -79,7 +78,6 @@ import {AppComponent} from './app.component';
         IpApiService,
         IpDataService,
         IpnfDataService,
-        TranslateServiceMock,
         {
             provide: LocationAccuracy,
             useFactory: (platform: Platform) => !platform.is('desktop') ? LocationAccuracy : {
