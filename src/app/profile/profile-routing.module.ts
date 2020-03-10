@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {ProfilePage} from './profile.page';
+import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,10 @@ const routes: Routes = [
             {
                 path: 'plugins',
                 component: PluginsTabComponent
+            },
+            {
+                path: 'contacts',
+                component: ContactTabComponent
             }
         ]
     },

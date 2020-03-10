@@ -1,0 +1,24 @@
+<ion-content>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitContacts()" (keydown.enter)="submitContacts()">
+        <ion-row class="ion-justify-content-center">
+            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                <ion-item>
+                    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'whatsapp' | translate }}</ion-label>
+                    <ion-input type="text" name="email" formControlName="whatsapp"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                <ion-button
+                        type="submit"
+                        expand="block"
+                        fill="solid"
+                        color="success"
+                        [disabled]="false"
+                >{{'plugins-tab.save'|translate}}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>

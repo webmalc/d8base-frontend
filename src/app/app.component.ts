@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
         private readonly titleService: Title,
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
-        private readonly trans: TranslationService
+        public readonly trans: TranslationService
     ) {
         this.initializeApp();
     }

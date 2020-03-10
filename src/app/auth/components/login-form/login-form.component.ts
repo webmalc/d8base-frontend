@@ -11,13 +11,12 @@ import {LoginFormService} from '../../forms/login-form.service';
 })
 export class LoginFormComponent implements OnInit {
 
-    @Input() private errorMessage: string;
+    @Input() public errorMessage: string;
+    public readonly formFields = LoginFormFields;
     @Output() private user = new EventEmitter<Credentials>();
 
-    private readonly formFields = LoginFormFields;
-
     constructor(
-        private readonly loginFormService: LoginFormService,
+        public readonly loginFormService: LoginFormService,
         private readonly router: Router
     ) {
     }

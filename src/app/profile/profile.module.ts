@@ -15,6 +15,8 @@ import {UserPluginApiService} from '@app/profile/services/user-plugin-api.servic
 import {SharedModule} from '@app/shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
+import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
+import {ContactFormService} from '@app/profile/forms/contact-form.service';
 
 @NgModule({
     imports: [
@@ -29,13 +31,15 @@ import {ProfilePage} from './profile.page';
     declarations: [
         ProfilePage,
         MainInfoTabComponent,
-        PluginsTabComponent
+        PluginsTabComponent,
+        ContactTabComponent
     ],
     providers: [
         PluginApiService,
         UserPluginApiService,
         PluginsFormService,
-        ProfileService
+        ProfileService,
+        ContactFormService
     ]
 })
 export class ProfilePageModule {

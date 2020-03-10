@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ErrorFlashbagComponent implements OnInit {
 
-    @Input() private message: string;
+    @Input() public message: string;
 
     constructor() {
     }

@@ -10,10 +10,10 @@ import {PasswordRecoveryService} from '@app/auth/services/password-recovery.serv
 })
 export class PasswordRecoveryFormComponent implements OnInit {
 
-    private readonly formFields = PasswordRecoveryFormFields;
+    public readonly formFields = PasswordRecoveryFormFields;
 
     constructor(
-        private readonly formService: PasswordRecoveryFormService,
+        public readonly formService: PasswordRecoveryFormService,
         private readonly passwordRecoveryService: PasswordRecoveryService
     ) {
     }

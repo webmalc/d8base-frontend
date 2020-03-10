@@ -11,7 +11,7 @@ import {AuthenticationFactory} from '@app/core/services/authentication-factory.s
 })
 export class LoginPage implements OnInit {
 
-    private errorMessage: string;
+    public errorMessage: string;
 
     constructor(
         private authFactory: AuthenticationFactory,

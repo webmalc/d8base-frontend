@@ -53,7 +53,7 @@ export class PluginsFormService {
         return this.userManager.getCurrentUser().pipe(
             switchMap(
                 (user: User) => {
-                    return this.apiUserPlugins.getPlugins(user);
+                    return this.apiUserPlugins.getPlugins(user.id);
                 }
             )
         );
