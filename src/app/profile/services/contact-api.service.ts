@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Contact} from '@app/profile/models/contact';
 import {User} from '@app/shared/models/user';
@@ -9,9 +8,7 @@ import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ContactApiService {
 
     private readonly url = environment.backend.contacts;
@@ -21,9 +18,7 @@ export class ContactApiService {
 
     public getByUserId(userId: number): Observable<Contact> {
         return this.api.get<Contact>(`${this.url}/${userId}`).pipe(
-            map(
-                raw => plainToClass(Contact, raw)
-            )
+            map(raw => plainToClass(Contact, raw))
         );
     }
 
@@ -31,29 +26,19 @@ export class ContactApiService {
         contact.user_id = userId;
 
         return this.api.post<Contact>(this.url, contact).pipe(
-            map(
-                raw => plainToClass(Contact, raw)
-            )
+            map(raw => plainToClass(Contact, raw))
         );
     }
 
     public getCurrentUserContact(): Observable<Contact> {
         return this.userManager.getCurrentUser().pipe(
-            switchMap(
-                (user: User) => {
-                    return this.getByUserId(user.id);
-                }
-            )
+            switchMap((user: User) => this.getByUserId(user.id))
         );
     }
 
     public saveCurrentUserContact(contact: Contact): Observable<Contact> {
         return this.userManager.getCurrentUser().pipe(
-            switchMap(
-                (user: User) => {
-                    return this.save(contact, user.id);
-                }
-            )
+            switchMap((user: User) => this.save(contact, user.id))
         );
     }
 }
