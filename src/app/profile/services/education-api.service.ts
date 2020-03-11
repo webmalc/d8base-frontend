@@ -4,9 +4,9 @@ import {environment} from '../../../environments/environment';
 import {Education} from '@app/profile/models/education';
 import {Observable} from 'rxjs';
 import {UserManagerService} from '@app/core/services/user-manager.service';
-import {User} from '@app/shared/models/user';
 import {plainToClass} from 'class-transformer';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
+import {Master} from '@app/shared/models/master';
 
 @Injectable()
 export class EducationApiService {
@@ -18,7 +18,7 @@ export class EducationApiService {
 
     public getCurrentUserEducation(education: Education): Observable<Education> {
         return this.userManager.getCurrentUser().pipe(
-            (user: User) => this.get()
+            switchMap((master: Master) => this.get(master.id))
         );
     }
 

@@ -5,6 +5,7 @@ import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-i
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {ProfilePage} from './profile.page';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
+import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
 
 const routes: Routes = [
     {
@@ -28,7 +29,7 @@ const routes: Routes = [
             },
             {
                 path: 'education',
-                component:
+                component: EducationTabComponent
             }
         ]
     },
