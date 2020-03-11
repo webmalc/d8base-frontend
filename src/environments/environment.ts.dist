@@ -10,7 +10,7 @@ export const environment = {
         location: '',
         user_plugin: '',
         plugin: '',
-        api_profile: ''
+        contacts: ''
     },
 };
 

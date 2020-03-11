@@ -58,10 +58,18 @@
   },
   "profile-page" : {
     "profile": "Profile",
-    "plugins": "Plugins"
+    "plugins": "Plugins",
+    "contacts": "Contacts"
   },
   "plugins-tab": {
     "plugins": "Plugins",
+    "save": "Save"
+  },
+  "contacts-tab": {
+    "whatsapp": "Whatsapp",
+    "facebook_messenger": "Facebook Messenger",
+    "instagram": "Instagram",
+    "www": "Site link",
     "save": "Save"
   }
 }

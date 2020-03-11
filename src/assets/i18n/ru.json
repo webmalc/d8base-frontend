@@ -58,10 +58,18 @@
   },
   "profile-page" : {
     "profile": "Профиль",
-    "plugins": "Плагины"
+    "plugins": "Плагины",
+    "contacts": "Контакты"
   },
   "plugins-tab": {
     "plugins": "Плагины",
+    "save": "Сохранить"
+  },
+  "contacts-tab": {
+    "whatsapp": "Whatsapp",
+    "facebook_messenger": "Facebook Messenger",
+    "instagram": "Instagram",
+    "www": "Ссылка на сайт",
     "save": "Сохранить"
   }
 }

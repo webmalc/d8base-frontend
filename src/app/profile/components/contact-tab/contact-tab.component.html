@@ -3,8 +3,32 @@
         <ion-row class="ion-justify-content-center">
             <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                 <ion-item>
-                    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'whatsapp' | translate }}</ion-label>
-                    <ion-input type="text" name="email" formControlName="whatsapp"></ion-input>
+                    <ion-label color="medium" position="floating">{{ 'contacts-tab.whatsapp' | translate }}</ion-label>
+                    <ion-input type="text" name="email" [formControlName]="formFields.Whatsapp"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                <ion-item>
+                    <ion-label color="medium" position="floating">{{ 'contacts-tab.facebook_messenger' | translate }}</ion-label>
+                    <ion-input type="text" name="email" [formControlName]="formFields.FacebookMessenger"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                <ion-item>
+                    <ion-label color="medium" position="floating">{{ 'contacts-tab.instagram' | translate }}</ion-label>
+                    <ion-input type="text" name="email" [formControlName]="formFields.Instagram"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                <ion-item>
+                    <ion-label color="medium" position="floating">{{ 'contacts-tab.www' | translate }}</ion-label>
+                    <ion-input type="text" name="email" [formControlName]="formFields.WWW"></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
@@ -15,8 +39,8 @@
                         expand="block"
                         fill="solid"
                         color="success"
-                        [disabled]="false"
-                >{{'plugins-tab.save'|translate}}
+                        [disabled]="formService.isDisabled()"
+                >{{'contacts-tab.save'|translate}}
                 </ion-button>
             </ion-col>
         </ion-row>

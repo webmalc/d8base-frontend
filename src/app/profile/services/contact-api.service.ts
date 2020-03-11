@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
+import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Contact} from '@app/profile/models/contact';
+import {User} from '@app/shared/models/user';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {User} from '@app/shared/models/user';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContactApiService {
 
-    private readonly url = environment.backend.contact;
+    private readonly url = environment.backend.contacts;
 
     constructor(private api: ApiClientService, private userManager: UserManagerService) {
     }

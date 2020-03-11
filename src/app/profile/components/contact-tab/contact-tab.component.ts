@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {ContactsFormFields} from '@app/profile/enums/contacts-form-fields';
 import {ContactFormService} from '@app/profile/forms/contact-form.service';
+import {Contact} from '@app/profile/models/contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
+import {plainToClass} from 'class-transformer';
 
 @Component({
     selector: 'app-contact-tab',
@@ -11,6 +14,7 @@ import {ContactApiService} from '@app/profile/services/contact-api.service';
 export class ContactTabComponent implements OnInit {
 
     public form: FormGroup;
+    public formFields = ContactsFormFields;
 
     constructor(public formService: ContactFormService, private api: ContactApiService) {
     }
@@ -22,6 +26,8 @@ export class ContactTabComponent implements OnInit {
     }
 
     public submitContacts(): void {
-        console.log(this.form.getRawValue());
+        this.api.saveCurrentUserContact(plainToClass(Contact, this.form.getRawValue())).subscribe(
+            contact => console.log(contact)
+        );
     }
 }
