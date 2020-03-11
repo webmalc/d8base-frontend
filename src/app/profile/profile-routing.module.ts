@@ -25,6 +25,10 @@ const routes: Routes = [
             {
                 path: 'contacts',
                 component: ContactTabComponent
+            },
+            {
+                path: 'education',
+                component:
             }
         ]
     },
