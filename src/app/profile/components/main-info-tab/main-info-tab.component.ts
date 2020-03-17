@@ -52,4 +52,8 @@ export class MainInfoTabComponent implements OnInit {
     public getAvatar(): string {
         return this.form.get('avatar').value || 'assets/images/profile/noavatar.jpeg';
     }
+
+    public isSubmitDisabled(): boolean {
+        return !(this.form.dirty && this.form.valid);
+    }
 }

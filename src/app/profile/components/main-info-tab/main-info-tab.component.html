@@ -171,7 +171,7 @@
       <!--        </ion-row>-->
 
       <ion-button type="submit" expand="block"
-                  [disabled]="form.invalid">{{'profile-form.button'| translate}}</ion-button>
+                  [disabled]="isSubmitDisabled()">{{'profile-form.button'| translate}}</ion-button>
     </ion-grid>
   </form>
 
