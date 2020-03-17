@@ -17,7 +17,6 @@
       </ion-col>
     </ion-row>
     <div *ngFor="let cert of formService.certifications.controls; let i=index" [formArrayName]="formFields.Certifications">
-
       <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
           <ion-card [formGroupName]="i">
@@ -44,9 +43,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-
     </div>
-
     <ion-row class="ion-justify-content-center">
       <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
         <ion-button
@@ -57,7 +54,6 @@
         >{{ 'add new certification' | translate }}</ion-button>
       </ion-col>
     </ion-row>
-
     <ion-row class="ion-justify-content-center">
       <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
         <ion-button

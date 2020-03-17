@@ -12,6 +12,7 @@ import {switchMap} from 'rxjs/operators';
 export class EducationFormService {
 
     public form: FormGroup;
+    private defaultCertificationsCount: number;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -36,7 +37,7 @@ export class EducationFormService {
     }
 
     public isSubmitDisabled(): boolean {
-        return !(this.form.dirty && this.form.valid);
+        return !(this.form.dirty && this.form.valid || this.certifications.length !== this.defaultCertificationsCount);
     }
 
     public addCertification(certification?: Certification): void {
@@ -68,6 +69,7 @@ export class EducationFormService {
             [EducationFormFields.Certifications]: this.formBuilder.array([])
         });
 
+        this.defaultCertificationsCount = certifications.length;
         certifications.forEach(
             (certification: Certification) => this.addCertification(certification)
         );
