@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppValidators} from '@app/core/validators/app.validators';
-import {User} from '@app/shared/models/user';
+import {User} from '@app/core/models/user';
 
 @Injectable({
         providedIn: 'root',

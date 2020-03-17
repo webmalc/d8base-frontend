@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
 import {FormBuilder} from '@angular/forms';
-import {User} from '../../shared/models/user';
+import {User} from '../../core/models/user';
 import {ProfileFormService} from './profile-form.service';
 
 describe('ProfileFormService', () => {

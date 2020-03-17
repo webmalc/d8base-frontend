@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Contact} from '@app/profile/models/contact';
-import {User} from '@app/shared/models/user';
+import {User} from '@app/core/models/user';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';

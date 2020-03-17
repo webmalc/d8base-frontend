@@ -7,7 +7,7 @@ import {Plugin} from '@app/profile/models/plugin';
 import {UserPlugin} from '@app/profile/models/user-plugin';
 import {PluginApiService} from '@app/profile/services/plugin-api.service';
 import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
-import {User} from '@app/shared/models/user';
+import {User} from '@app/core/models/user';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
@@ -52,7 +52,6 @@ export class PluginsTabComponent implements OnInit {
 
     public isSubmitDisabled(): boolean {
         return !(this.form.dirty && this.form.valid);
-
     }
 
     private generateUserPlugins(pluginsId: string[]): Observable<UserPlugin | UserPlugin[]> {

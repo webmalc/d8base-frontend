@@ -1,5 +1,3 @@
-import SettingsInterface from '@app/shared/interfaces/settings.interface';
-
 export interface UserInterface {
     id?: number;
     firstName: string;

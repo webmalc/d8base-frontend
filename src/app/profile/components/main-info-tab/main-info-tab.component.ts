@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {User} from '@app/core/models/user';
 import {ProfileService} from '@app/profile/services/profile.service';
-import {User} from '@app/shared/models/user';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({

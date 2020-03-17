@@ -6,6 +6,7 @@ import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-t
 import {ProfilePage} from './profile.page';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
+import {MasterGuard} from '@app/core/guards/master.guard';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
             },
             {
                 path: 'education',
-                component: EducationTabComponent
+                component: EducationTabComponent,
+                canActivate: [MasterGuard]
             }
         ]
     },

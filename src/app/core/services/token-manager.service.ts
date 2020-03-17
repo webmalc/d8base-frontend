@@ -30,6 +30,7 @@ export class TokenManagerService {
     }
 
     public setTokens(data: AuthResponseInterface): Promise<any> {
+        console.log(data);
         return Promise.all([
             this.setRefreshToken(data.refresh),
             this.setAccessToken(data.access)

@@ -18,7 +18,7 @@ import {IpServicesHolderService} from '../../../core/services/location/ip-servic
 import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
 import {LocationService} from '../../../core/services/location/location.service';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {User} from '../../../shared/models/user';
+import {User} from '../../../core/models/user';
 import {RegistrationFormComponent} from '../../components/registration-form/registration-form.component';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationService} from '../../services/registration.service';

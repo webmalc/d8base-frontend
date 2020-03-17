@@ -1,23 +1,23 @@
 import {Injectable} from '@angular/core';
+import {Master} from '@app/core/models/master';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '../../../environments/environment';
+import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {Education} from '@app/profile/models/education';
-import {Observable} from 'rxjs';
-import {UserManagerService} from '@app/core/services/user-manager.service';
 import {plainToClass} from 'class-transformer';
+import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {Master} from '@app/shared/models/master';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class EducationApiService {
 
     private readonly url = environment.backend.education;
 
-    constructor(private client: ApiClientService, private userManager: UserManagerService) {
+    constructor(private client: ApiClientService, private masterManager: MasterManagerService) {
     }
 
-    public getCurrentUserEducation(education: Education): Observable<Education> {
-        return this.userManager.getCurrentUser().pipe(
+    public getCurrentMasterEducation(): Observable<Education> {
+        return this.masterManager.getCurrentMaster().pipe(
             switchMap((master: Master) => this.get(master.id))
         );
     }

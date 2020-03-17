@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {of} from 'rxjs';
 import {ApiClientService} from '../../core/services/api-client.service';
 import {LocationService} from '../../core/services/location/location.service';
-import {User} from '../../shared/models/user';
+import {User} from '../../core/models/user';
 import {RegistrationService} from './registration.service';
 import {plainToClass} from 'class-transformer';
 import {LocationModel} from '../../core/models/location.model';

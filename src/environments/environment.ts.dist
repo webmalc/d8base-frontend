@@ -10,7 +10,10 @@ export const environment = {
         location: '',
         user_plugin: '',
         plugin: '',
-        contacts: ''
+        contacts: '',
+        education: '',
+        master: '',
+        certification: ''
     },
 };
 

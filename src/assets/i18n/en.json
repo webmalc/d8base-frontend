@@ -59,7 +59,8 @@
   "profile-page" : {
     "profile": "Profile",
     "plugins": "Plugins",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "education": "Education"
   },
   "plugins-tab": {
     "plugins": "Plugins",

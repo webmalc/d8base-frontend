@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {LocationModel} from '@app/core/models/location.model';
+import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {LocationApiService} from '@app/core/services/location/location-api.service';
 import {LocationService} from '@app/core/services/location/location.service';
-import {UserInterface} from '@app/shared/interfaces/user.interface';
-import {User} from '@app/shared/models/user';
 import {classToPlain, plainToClass, plainToClassFromExist} from 'class-transformer';
 import {from, Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
@@ -22,9 +21,9 @@ export class RegistrationService {
     ) { }
 
     public register(user: User, location: LocationModel): Observable<boolean> {
-        return this.client.post<UserInterface>(this.REGISTER_URL, classToPlain(user)).pipe(
+        return this.client.post<User>(this.REGISTER_URL, classToPlain(user)).pipe(
             switchMap(
-                (newUser: UserInterface) => {
+                (newUser: User) => {
                     return from(this.locationService.getMergedLocationData()).pipe(
                         switchMap(
                             (ipLocation: LocationModel) => {

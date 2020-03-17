@@ -7,9 +7,9 @@ import {MainInfoTabComponent} from './main-info-tab.component';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProfileFormService} from '../../forms/profile-form.service';
-import {User} from '../../../shared/models/user';
+import {User} from '../../../core/models/user';
 import {Injectable} from '@angular/core';
-import {UserInterface} from '../../../shared/interfaces/user.interface';
+import {UserInterface} from '../../../core/interfaces/user.interface';
 import {PictureSelectorComponent} from '../../../shared/components/picture-selector/picture-selector.component';
 import {SharedModule} from '../../../shared/shared.module';
 

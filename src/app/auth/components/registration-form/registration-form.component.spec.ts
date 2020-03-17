@@ -9,7 +9,7 @@ import {plainToClass} from 'class-transformer';
 
 import {LocationModel} from '../../../core/models/location.model';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {User} from '../../../shared/models/user';
+import {User} from '../../../core/models/user';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationFormComponent} from './registration-form.component';

@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
+import {User} from '@app/core/models/user';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormService} from '@app/profile/forms/profile-form.service';
-import {User} from '@app/shared/models/user';
 import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
@@ -22,7 +21,6 @@ export class ProfileService {
 
     constructor(
         private userManager: UserManagerService,
-        private authFactory: AuthenticationFactory,
         private formService: ProfileFormService
     ) {
     }

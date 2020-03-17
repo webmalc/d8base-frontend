@@ -9,12 +9,14 @@
                 <ion-icon name="apps"></ion-icon>
                 <ion-label>{{'profile-page.plugins'|translate}}</ion-label>
             </ion-tab-button>
-
             <ion-tab-button tab="contacts">
                 <ion-icon name="apps"></ion-icon>
                 <ion-label>{{'profile-page.contacts'|translate}}</ion-label>
             </ion-tab-button>
-
+            <ion-tab-button tab="education" *ngIf="masterManager.isMaster$|async">
+                <ion-icon name="apps"></ion-icon>
+                <ion-label>{{'profile-page.education'|translate}}</ion-label>
+            </ion-tab-button>
         </ion-tab-bar>
     </ion-tabs>
 </ion-content>

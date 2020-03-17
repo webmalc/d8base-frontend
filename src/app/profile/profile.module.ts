@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 import {ProfilePageRoutingModule} from './profile-routing.module';
 
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
+import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {ContactFormService} from '@app/profile/forms/contact-form.service';
@@ -18,6 +19,9 @@ import {UserPluginApiService} from '@app/profile/services/user-plugin-api.servic
 import {SharedModule} from '@app/shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
+import {EducationApiService} from '@app/profile/services/education-api.service';
+import {EducationFormService} from '@app/profile/forms/education-form.service';
+import {CertificationApiService} from '@app/profile/services/certification-api.service';
 
 @NgModule({
     imports: [
@@ -33,7 +37,8 @@ import {ProfilePage} from './profile.page';
         ProfilePage,
         MainInfoTabComponent,
         PluginsTabComponent,
-        ContactTabComponent
+        ContactTabComponent,
+        EducationTabComponent
     ],
     providers: [
         PluginApiService,
@@ -41,7 +46,10 @@ import {ProfilePage} from './profile.page';
         PluginsFormService,
         ProfileService,
         ContactFormService,
-        ContactApiService
+        ContactApiService,
+        EducationFormService,
+        EducationApiService,
+        CertificationApiService
     ]
 })
 export class ProfilePageModule {

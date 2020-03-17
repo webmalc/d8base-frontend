@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LocationModel} from '@app/core/models/location.model';
-import {User} from '@app/shared/models/user';
+import {User} from '@app/core/models/user';
 import {plainToClass} from 'class-transformer';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';

@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
+import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {UserInterface} from '@app/shared/interfaces/user.interface';
-import {User} from '@app/shared/models/user';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -26,13 +25,7 @@ export class UserManagerService {
         return this.authFactory.getAuthenticator().getUserId().pipe(
             switchMap((userId: number) => {
                 return this.getUser(userId).pipe(
-                    map(
-                        (user: User) => {
-                            this.user = user;
-
-                            return user;
-                        }
-                    )
+                    tap((user: User) => this.user = user)
                 );
             })
         );
@@ -43,7 +36,7 @@ export class UserManagerService {
             .pipe(map((user: User) => plainToClass(User, user)));
     }
 
-    public updateUser(user: UserInterface): Observable<User> {
+    public updateUser(user: User): Observable<User> {
         return this.api.patch<User>(`${environment.backend.user}/${user.id}`, user);
     }
 }
