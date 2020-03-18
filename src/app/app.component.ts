@@ -6,7 +6,7 @@ import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {Platform} from '@ionic/angular';
+import {MenuController, Platform} from '@ionic/angular';
 import {filter, map} from 'rxjs/operators';
 
 @Component({
@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
         private readonly titleService: Title,
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
-        public readonly trans: TranslationService
+        public readonly trans: TranslationService,
+        public readonly menu: MenuController
     ) {
         this.initializeApp();
     }

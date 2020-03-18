@@ -3,7 +3,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
         <ion-item>
-          <ion-label color="medium" position="floating">{{ 'education' | translate }}</ion-label>
+          <ion-label color="medium" position="floating">{{ 'education-tab.education' | translate }}</ion-label>
           <ion-input type="text" name="education" [formControlName]="formFields.Education" ></ion-input>
         </ion-item>
       </ion-col>
@@ -11,7 +11,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
         <ion-item>
-          <ion-label color="medium" position="floating">{{ 'experience' | translate }}</ion-label>
+          <ion-label color="medium" position="floating">{{ 'education-tab.experience' | translate }}</ion-label>
           <ion-input type="text" name="experience" [formControlName]="formFields.Experience" ></ion-input>
         </ion-item>
       </ion-col>
@@ -20,17 +20,20 @@
       <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
           <ion-card [formGroupName]="i">
+            <ion-card-header>
+              {{ 'education-tab.certificate.certificate' | translate }}
+            </ion-card-header>
             <ion-card-content>
               <ion-item>
-                <ion-label color="medium" position="floating">{{ 'title' | translate }}</ion-label>
+                <ion-label color="medium" position="floating">{{ 'education-tab.certificate.title' | translate }}</ion-label>
                 <ion-input [formControlName]="formFields.Certification_title" type="text" name="title"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label color="medium" position="floating">{{ 'photo' | translate }}</ion-label>
+                <ion-label color="medium" position="floating">{{ 'education-tab.certificate.photo' | translate }}</ion-label>
                 <ion-input [formControlName]="formFields.Certification_photo" type="text" name="photo"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label color="medium" position="floating">{{ 'link' | translate }}</ion-label>
+                <ion-label color="medium" position="floating">{{ 'education-tab.certificate.link' | translate }}</ion-label>
                 <ion-input [formControlName]="formFields.Certification_link" type="text" name="link"></ion-input>
               </ion-item>
               <ion-button
@@ -38,7 +41,7 @@
                       fill="solid"
                       color="danger"
                       (click)="formService.removeCertification(i)"
-              >{{ 'remove cert' | translate }}</ion-button>
+              >{{ 'education-tab.certificate.remove_certificate' | translate }}</ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -51,7 +54,7 @@
                 fill="solid"
                 color="success"
                 (click)="formService.addCertification()"
-        >{{ 'add new certification' | translate }}</ion-button>
+        >{{ 'education-tab.certificate.add_certificate' | translate }}</ion-button>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -62,7 +65,7 @@
                 fill="solid"
                 color="success"
                 [disabled]="formService.isSubmitDisabled()"
-        >{{ 'save' | translate }}</ion-button>
+        >{{ 'education-tab.save' | translate }}</ion-button>
       </ion-col>
     </ion-row>
   </form>

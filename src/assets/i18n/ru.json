@@ -59,7 +59,8 @@
   "profile-page" : {
     "profile": "Профиль",
     "plugins": "Плагины",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "education": "Образование"
   },
   "plugins-tab": {
     "plugins": "Плагины",
@@ -70,6 +71,19 @@
     "facebook_messenger": "Facebook Messenger",
     "instagram": "Instagram",
     "www": "Ссылка на сайт",
+    "save": "Сохранить"
+  },
+  "education-tab": {
+    "education": "Образование",
+    "experience": "Опыт",
+    "certificate": {
+      "certificate": "Подтверждающий документ",
+      "title": "Название",
+      "photo": "Фотография",
+      "link": "Ссылка",
+      "remove_certificate": "Удалить документ",
+      "add_certificate": "Добавить документ"
+    },
     "save": "Сохранить"
   }
 }

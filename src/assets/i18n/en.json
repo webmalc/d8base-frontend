@@ -72,5 +72,18 @@
     "instagram": "Instagram",
     "www": "Site link",
     "save": "Save"
+  },
+  "education-tab": {
+    "education": "Education",
+    "experience": "Experience",
+    "certificate": {
+      "certificate": "Certificate",
+      "title": "Title",
+      "photo": "Photo",
+      "link": "Link",
+      "remove_certificate": "Remove Certificate",
+      "add_certificate": "Add Certificate"
+    },
+    "save": "Save"
   }
 }

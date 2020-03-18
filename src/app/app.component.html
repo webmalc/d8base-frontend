@@ -12,6 +12,7 @@
                             routerLink="/auth/login"
                             routerDirection="forward"
                             routerLinkActive="active"
+                            (click)="menu.close()"
                     >
                         <ion-icon name="log-in"></ion-icon>
                         {{'template.sign-in'|translate}}
@@ -20,6 +21,7 @@
                             routerLink="/auth/registration"
                             routerLinkActive="active"
                             routerDirection="forward"
+                            (click)="menu.close()"
                     >
                         <ion-icon name="clipboard"></ion-icon>
                         {{'template.sign-up'|translate}}
@@ -28,6 +30,7 @@
                             routerLink="/profile"
                             routerLinkActive="active"
                             routerDirection="forward"
+                            (click)="menu.close()"
                     >
                         <ion-icon name="contact"></ion-icon>
                         {{'template.profile'|translate}}

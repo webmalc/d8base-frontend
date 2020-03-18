@@ -33,3 +33,4 @@ src/environments/environment.prod.ts
 /plugins
 /www
 /documentation
+capacitor.config.json
