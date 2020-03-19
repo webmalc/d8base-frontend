@@ -21,7 +21,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
 import {EducationApiService} from '@app/profile/services/education-api.service';
 import {EducationFormService} from '@app/profile/forms/education-form.service';
-import {CertificationApiService} from '@app/profile/services/certification-api.service';
+import {CertificateApiService} from '@app/profile/services/certificate-api.service';
 
 @NgModule({
     imports: [
@@ -49,7 +49,7 @@ import {CertificationApiService} from '@app/profile/services/certification-api.s
         ContactApiService,
         EducationFormService,
         EducationApiService,
-        CertificationApiService
+        CertificateApiService
     ]
 })
 export class ProfilePageModule {

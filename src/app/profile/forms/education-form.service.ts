@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EducationFormFields} from '@app/profile/enums/education-form-fields';
-import {Certification} from '@app/profile/models/certification';
 import {Education} from '@app/profile/models/education';
-import {CertificationApiService} from '@app/profile/services/certification-api.service';
+import {EducationCertificate} from '@app/profile/models/education-certificate';
+import {CertificateApiService} from '@app/profile/services/certificate-api.service';
 import {EducationApiService} from '@app/profile/services/education-api.service';
 import {forkJoin, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class EducationFormService {
     constructor(
         private formBuilder: FormBuilder,
         private educationApiService: EducationApiService,
-        private certificationApiService: CertificationApiService
+        private certificationApiService: CertificateApiService
     ) {
     }
 
@@ -33,19 +33,19 @@ export class EducationFormService {
     }
 
     get certifications(): FormArray {
-        return this.form.get(EducationFormFields.Certifications) as FormArray;
+        return this.form.get(EducationFormFields.Certificates) as FormArray;
     }
 
     public isSubmitDisabled(): boolean {
         return !(this.form.dirty && this.form.valid || this.certifications.length !== this.defaultCertificationsCount);
     }
 
-    public addCertification(certification?: Certification): void {
+    public addCertification(certificate?: EducationCertificate): void {
         this.certifications.push(
             this.formBuilder.group({
-                [EducationFormFields.Certification_title]: certification?.title ?? '',
-                [EducationFormFields.Certification_photo]: certification?.photo ?? '',
-                [EducationFormFields.Certification_link]: certification?.link ?? ''
+                [EducationFormFields.Certificate_title]: certificate?.title ?? '',
+                [EducationFormFields.Certificate_photo]: certificate?.photo ?? '',
+                [EducationFormFields.Certificate_link]: certificate?.link ?? ''
             })
         );
     }
@@ -54,7 +54,7 @@ export class EducationFormService {
         this.certifications.removeAt(index);
     }
 
-    private createForm(education: Education, certifications: Certification[]): FormGroup {
+    private createForm(education: Education, certificates: EducationCertificate[]): FormGroup {
         this.form = this.formBuilder.group({
             [EducationFormFields.Experience]: [
                 education.experience, [
@@ -66,12 +66,12 @@ export class EducationFormService {
                     Validators.required
                 ]
             ],
-            [EducationFormFields.Certifications]: this.formBuilder.array([])
+            [EducationFormFields.Certificates]: this.formBuilder.array([])
         });
 
-        this.defaultCertificationsCount = certifications.length;
-        certifications.forEach(
-            (certification: Certification) => this.addCertification(certification)
+        this.defaultCertificationsCount = certificates.length;
+        certificates.forEach(
+            (certificate: EducationCertificate) => this.addCertification(certificate)
         );
 
         return this.form;

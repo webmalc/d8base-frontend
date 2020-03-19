@@ -1,8 +1,8 @@
 export enum EducationFormFields {
     Experience = 'experience',
     Education = 'education',
-    Certifications = 'certifications',
-    Certification_title = 'title',
-    Certification_photo = 'photo',
-    Certification_link = 'link'
+    Certificates = 'certificates',
+    Certificate_title = 'title',
+    Certificate_photo = 'photo',
+    Certificate_link = 'link'
 }

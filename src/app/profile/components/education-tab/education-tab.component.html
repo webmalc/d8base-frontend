@@ -16,7 +16,7 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <div *ngFor="let cert of formService.certifications.controls; let i=index" [formArrayName]="formFields.Certifications">
+    <div *ngFor="let cert of formService.certifications.controls; let i=index" [formArrayName]="formFields.Certificates">
       <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
           <ion-card [formGroupName]="i">
@@ -26,15 +26,15 @@
             <ion-card-content>
               <ion-item>
                 <ion-label color="medium" position="floating">{{ 'education-tab.certificate.title' | translate }}</ion-label>
-                <ion-input [formControlName]="formFields.Certification_title" type="text" name="title"></ion-input>
+                <ion-input [formControlName]="formFields.Certificate_title" type="text" name="title"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label color="medium" position="floating">{{ 'education-tab.certificate.photo' | translate }}</ion-label>
-                <ion-input [formControlName]="formFields.Certification_photo" type="text" name="photo"></ion-input>
+                <ion-input [formControlName]="formFields.Certificate_photo" type="text" name="photo"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label color="medium" position="floating">{{ 'education-tab.certificate.link' | translate }}</ion-label>
-                <ion-input [formControlName]="formFields.Certification_link" type="text" name="link"></ion-input>
+                <ion-input [formControlName]="formFields.Certificate_link" type="text" name="link"></ion-input>
               </ion-item>
               <ion-button
                       expand="block"

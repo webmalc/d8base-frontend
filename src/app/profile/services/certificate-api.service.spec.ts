@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CertificationApiService } from './certification-api.service';
+import { CertificateApiService } from './certificate-api.service';
 
 describe('CertificationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CertificationApiService = TestBed.get(CertificationApiService);
+    const service: CertificateApiService = TestBed.get(CertificateApiService);
     expect(service).toBeTruthy();
   });
 });

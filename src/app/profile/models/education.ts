@@ -1,4 +1,4 @@
-import {Certification} from '@app/profile/models/certification';
+import {EducationCertificate} from '@app/profile/models/education-certificate';
 import {Expose} from 'class-transformer';
 
 export class Education {
