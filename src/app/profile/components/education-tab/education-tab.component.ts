@@ -47,7 +47,7 @@ export class EducationTabComponent implements OnInit {
                 education.master_id = master.id;
                 this.educationApiService.save(education).subscribe(
                     response => {
-                        (certificates as any).forEach(
+                        certificates.forEach(
                             (cert: EducationCertificate) => cert.master_id = master.id
                         );
                         this.certificateApiService.save(certificates).subscribe(
