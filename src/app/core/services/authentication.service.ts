@@ -1,9 +1,9 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {GrantTypes} from '@app/auth/enums/grant-types';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
-import {TokenInterface} from '@app/core/interfaces/token.interface';
 import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
@@ -27,7 +27,15 @@ export class AuthenticationService implements AuthenticatorInterface {
 
     public login(credentials: Credentials): Observable<void> {
         return new Observable<void>(subscriber => {
-            this.client.post(this.TOKEN_OBTAIN_URL, credentials).subscribe(
+            const loginData = {
+                username: credentials.username,
+                password: credentials.password,
+                grant_type: GrantTypes.PasswordGrantType,
+                client_id: environment.client_id,
+                client_secret: environment.client_secret,
+            };
+
+            this.client.post<AuthResponseInterface>(this.TOKEN_OBTAIN_URL, loginData).subscribe(
                 (result: AuthResponseInterface) => {
                     this.tokenManager.setTokens(result).then(
                         _ => {
@@ -45,9 +53,7 @@ export class AuthenticationService implements AuthenticatorInterface {
 
     public isAuthenticated(): Observable<boolean> {
         return from(this.tokenManager.isRefreshTokenExpired()).pipe(
-            switchMap(
-                (isExpired: boolean) => of(!isExpired)
-            )
+            switchMap((isExpired: boolean) => of(!isExpired))
         );
     }
 
@@ -63,7 +69,8 @@ export class AuthenticationService implements AuthenticatorInterface {
         return new Observable<void>(
             (subscriber) => {
                 this.tokenManager.getRefreshToken().then(refresh => {
-                    this.client.post(this.TOKEN_REFRESH_URL, {refresh}).subscribe(
+                    const refreshData = {refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
+                    this.client.post(this.TOKEN_REFRESH_URL, refreshData).subscribe(
                         (response: AuthResponseInterface) => {
                             this.tokenManager.setTokens(response).then(
                                 _ => {
@@ -78,18 +85,6 @@ export class AuthenticationService implements AuthenticatorInterface {
                     );
                 });
             }
-        );
-    }
-
-    public getUserId(): Observable<number> {
-        return from(this.tokenManager.getAccessToken()).pipe(
-            switchMap(
-                token => {
-                    const decoded: TokenInterface = this.jwt.decodeToken(token);
-
-                    return of(decoded.user_id);
-                }
-            )
         );
     }
 }

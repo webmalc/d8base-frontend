@@ -7,5 +7,4 @@ export interface AuthenticatorInterface {
     isAuthenticated(): Observable<boolean>;
     logout(): Promise<any>;
     needToRefresh(): Promise<boolean>;
-    getUserId(): Observable<number>;
 }

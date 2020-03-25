@@ -1,4 +1,4 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable} from 'rxjs';
@@ -28,19 +28,16 @@ export class HeadersInterceptor implements HttpInterceptor {
             .pipe(
                 switchMap(token => {
                     let headers;
-                    if (null === token) {
-                        headers = req.headers
+                    if (null === token || undefined === token) {
+                        headers = req.headers.append('Authorization', 'Basic ' +
+                            btoa(`${environment.client_id}:${environment.client_secret}`))
                             .append('Content-Type', 'application/json');
                     } else {
-                        headers = req.headers
-                            .set('Authorization', 'Bearer ' + token)
+                        headers = req.headers.append('Authorization', 'Bearer ' + token)
                             .append('Content-Type', 'application/json');
                     }
-                    const requestClone = req.clone({
-                        headers
-                    });
 
-                    return next.handle(requestClone);
+                    return next.handle(req.clone({headers}));
                 })
             );
     }

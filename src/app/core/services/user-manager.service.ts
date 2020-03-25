@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -13,8 +12,9 @@ import {environment} from '../../../environments/environment';
 export class UserManagerService {
 
     private user: User;
+    private readonly url = environment.backend.user;
 
-    constructor(private api: ApiClientService, private authFactory: AuthenticationFactory) {
+    constructor(private api: ApiClientService) {
     }
 
     public getCurrentUser(): Observable<User> {
@@ -22,21 +22,17 @@ export class UserManagerService {
             return of(this.user);
         }
 
-        return this.authFactory.getAuthenticator().getUserId().pipe(
-            switchMap((userId: number) => {
-                return this.getUser(userId).pipe(
-                    tap((user: User) => this.user = user)
-                );
-            })
+        return this.getUser().pipe(
+            tap((user: User) => this.user = user)
         );
     }
 
-    public getUser(id: number): Observable<User> {
-        return this.api.get<User>(`${environment.backend.user}/${id}`)
-            .pipe(map((user: User) => plainToClass(User, user)));
+    public updateUser(user: User): Observable<User> {
+        return this.api.patch<User>(this.url, user);
     }
 
-    public updateUser(user: User): Observable<User> {
-        return this.api.patch<User>(`${environment.backend.user}/${user.id}`, user);
+    private getUser(): Observable<User> {
+        return this.api.get<User>(this.url)
+            .pipe(map((user: User) => plainToClass(User, user)));
     }
 }

@@ -1,49 +1,62 @@
 import {Injectable} from '@angular/core';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
-import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenManagerService {
 
-    public token: string = undefined;
+    public tokenData: AuthResponseInterface = undefined;
 
-    private readonly ACCESS_TOKEN_STORAGE_KEY = 'api_token';
-    private readonly REFRESH_TOKEN_STORAGE_KEY = 'refresh_token';
+    private readonly TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 
-    constructor(
-        private storage: StorageManagerService,
-        private jwtHelper: JwtHelper
-    ) {
-    }
+    constructor(private storage: StorageManagerService) {}
 
-    public async getAccessToken(): Promise<string> {
-        if (undefined !== this.token) {
-            return this.token;
+    public getAccessToken(): Promise<string> {
+        if (undefined !== this.tokenData && null !== this.tokenData) {
+            return Promise.resolve(this.tokenData.access_token);
         }
 
-        const token = await this.storage.get(this.ACCESS_TOKEN_STORAGE_KEY);
+        return new Promise<string>(resolve => {
+            this.getTokenData().then(
+                (tokenData: AuthResponseInterface) => {
+                    this.tokenData = tokenData;
+                    resolve(this.tokenData?.access_token);
+                }
+            );
+        });
+    }
 
-        return this.token = token;
+    public getRefreshToken(): Promise<string> {
+        return new Promise(resolve => {
+            this.getTokenData().then(
+                (tokenData: AuthResponseInterface) => resolve(tokenData.refresh_token)
+            );
+        });
     }
 
     public setTokens(data: AuthResponseInterface): Promise<any> {
-        console.log(data);
-        return Promise.all([
-            this.setRefreshToken(data.refresh),
-            this.setAccessToken(data.access)
-        ]);
+        data.access_expire = this.getTimestamp(data.expires_in);
+        data.refresh_expire = this.getTimestamp(environment.refresh_token_expire_time);
+        this.tokenData = data;
+
+        return this.storage.set(this.TOKEN_DATA_STORAGE_KEY, data);
     }
 
     public clear(): Promise<any> {
-        this.token = undefined;
+        this.tokenData = undefined;
 
-        return Promise.all([
-            this.storage.remove(this.ACCESS_TOKEN_STORAGE_KEY),
-            this.storage.remove(this.REFRESH_TOKEN_STORAGE_KEY)
-        ]);
+        return this.storage.remove(this.TOKEN_DATA_STORAGE_KEY);
+    }
+
+    public isAccessTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired('access_expire');
+    }
+
+    public isRefreshTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired('refresh_expire');
     }
 
     public needToRefresh(): Promise<boolean> {
@@ -64,39 +77,27 @@ export class TokenManagerService {
         });
     }
 
-    public isAccessTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired(this.getAccessToken());
-    }
+    private getTokenData(): Promise<AuthResponseInterface> {
+        if (undefined !== this.tokenData && null !== this.tokenData) {
+            return Promise.resolve(this.tokenData);
+        }
 
-    public getRefreshToken(): Promise<any> {
-        return this.storage.get(this.REFRESH_TOKEN_STORAGE_KEY);
-    }
-
-    public isRefreshTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired(this.getRefreshToken());
-    }
-
-    private isAbstractTokenExpired(tokenHandler: Promise<any>): Promise<boolean> {
-        return new Promise<boolean>((resolve) => {
-            tokenHandler.then(
-                token => {
-                    if (null !== token) {
-                        resolve(this.jwtHelper.isTokenExpired(token));
-                    } else {
-                        resolve(false);
-                    }
-                }
+        return new Promise(resolve => {
+            this.storage.get(this.TOKEN_DATA_STORAGE_KEY).then(
+                (tokenData: AuthResponseInterface) => resolve(tokenData)
             );
         });
     }
 
-    private setAccessToken(token: string): Promise<any> {
-        this.token = token;
-
-        return this.storage.set(this.ACCESS_TOKEN_STORAGE_KEY, token);
+    private getTimestamp(offset?: number): number {
+        return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset ?? 0;
     }
 
-    private setRefreshToken(refresh: string): Promise<any> {
-        return this.storage.set(this.REFRESH_TOKEN_STORAGE_KEY, refresh);
+    private isAbstractTokenExpired(tokenType: string): Promise<boolean> {
+        return new Promise<boolean>(resolve => {
+            this.getTokenData().then(
+                (tokenData: AuthResponseInterface) => resolve(this.getTimestamp() >= tokenData[tokenType])
+            );
+        });
     }
 }

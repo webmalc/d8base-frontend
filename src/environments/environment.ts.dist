@@ -16,6 +16,9 @@ export const environment = {
         certificate: '',
         language: ''
     },
+    client_id: '',
+    client_secret: '',
+    refresh_token_expire_time: ''
 };
 
 export const serviceSettings = {
