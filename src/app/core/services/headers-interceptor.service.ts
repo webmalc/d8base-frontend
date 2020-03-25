@@ -28,7 +28,7 @@ export class HeadersInterceptor implements HttpInterceptor {
             .pipe(
                 switchMap(token => {
                     let headers;
-                    if (null === token || undefined === token) {
+                    if (this.getAuthUrls().includes(req.url)) {
                         headers = req.headers.append('Authorization', 'Basic ' +
                             btoa(`${environment.client_id}:${environment.client_secret}`))
                             .append('Content-Type', 'application/json');
@@ -40,5 +40,11 @@ export class HeadersInterceptor implements HttpInterceptor {
                     return next.handle(req.clone({headers}));
                 })
             );
+    }
+
+    private getAuthUrls(): string[] {
+        return [
+            environment.backend.url + environment.backend.refresh
+        ];
     }
 }

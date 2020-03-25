@@ -89,8 +89,8 @@ export class TokenManagerService {
         });
     }
 
-    private getTimestamp(offset?: number): number {
-        return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset ?? 0;
+    private getTimestamp(offset: number = 0): number {
+        return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;
     }
 
     private isAbstractTokenExpired(tokenType: string): Promise<boolean> {
