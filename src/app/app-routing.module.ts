@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {MainGuard} from '@app/core/guards/main.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -9,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('src/app/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('src/app/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [MainGuard]
   },
 ];
 

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, SecurityContext} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {User} from '@app/core/models/user';
 import {ProfileService} from '@app/profile/services/profile.service';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -15,7 +16,8 @@ export class MainInfoTabComponent implements OnInit {
     public availableAddsLanguages$: BehaviorSubject<string[]>;
 
     constructor(
-        private profileService: ProfileService
+        private profileService: ProfileService,
+        private sanitizer: DomSanitizer
     ) {
     }
 
@@ -49,8 +51,15 @@ export class MainInfoTabComponent implements OnInit {
         }
     }
 
-    public getAvatar(): string {
-        return this.form.get('avatar').value || 'assets/images/profile/noavatar.jpeg';
+    public getAvatar(): string | SafeResourceUrl {
+        if (null === this.form.get('avatar').value) {
+            return 'assets/images/profile/noavatar.jpeg';
+        }
+
+        return this.sanitizer.sanitize(
+            SecurityContext.RESOURCE_URL,
+            this.sanitizer.bypassSecurityTrustResourceUrl(this.form.get('avatar').value)
+        );
     }
 
     public isSubmitDisabled(): boolean {

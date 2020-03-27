@@ -1,8 +1,8 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {from, Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {EMPTY, from, Observable} from 'rxjs';
+import {catchError, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 /**
@@ -39,6 +39,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
                         return next.handle(req);
                     }
+                ),
+                catchError(
+                    _ => EMPTY
                 )
             );
     }

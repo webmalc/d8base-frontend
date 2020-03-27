@@ -21,6 +21,10 @@ export class MainGuard implements CanActivate {
                         subscriber.next(true);
                     }
                     subscriber.complete();
+                },
+                error => {
+                    subscriber.next(this.router.parseUrl('/auth/login'));
+                    subscriber.complete();
                 }
             );
         });

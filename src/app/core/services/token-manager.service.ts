@@ -60,7 +60,7 @@ export class TokenManagerService {
     }
 
     public needToRefresh(): Promise<boolean> {
-        return new Promise<boolean>(resolve => {
+        return new Promise<boolean>((resolve, reject) => {
             this.isAccessTokenExpired().then(
                 (isAccessTokenExpired: boolean) => {
                     if (isAccessTokenExpired) {
@@ -68,12 +68,12 @@ export class TokenManagerService {
                             (isRefreshTokenExpired: boolean) => {
                                 resolve(!isRefreshTokenExpired);
                             }
-                        );
+                        ).catch(err => reject(err));
                     } else {
                         resolve(false);
                     }
                 }
-            );
+            ).catch(err => reject(err));
         });
     }
 
@@ -94,9 +94,15 @@ export class TokenManagerService {
     }
 
     private isAbstractTokenExpired(tokenType: string): Promise<boolean> {
-        return new Promise<boolean>(resolve => {
+        return new Promise<boolean>((resolve, reject) => {
             this.getTokenData().then(
-                (tokenData: AuthResponseInterface) => resolve(this.getTimestamp() >= tokenData[tokenType])
+                (tokenData: AuthResponseInterface) => {
+                    if (tokenData && tokenData[tokenType]) {
+                        resolve(this.getTimestamp() >= tokenData[tokenType]);
+                    } else {
+                        reject();
+                    }
+                }
             );
         });
     }

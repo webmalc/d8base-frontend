@@ -31,4 +31,13 @@
     color: red;
     margin-left: .1em;
   }
+  .file-picker-input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    display: none;
+    z-index: -1;
+  }
 }

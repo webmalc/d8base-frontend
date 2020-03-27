@@ -9,10 +9,23 @@
     </ion-button>
     <ion-button
             id="file-button"
-            *ngIf="fileSystem"
+            *ngIf="fileSystem && !platform.is('desktop')"
             type="button"
             (click)="getImageFile()"
     >
         <ion-icon name="folder"></ion-icon>
     </ion-button>
+    <ion-item *ngIf="fileSystem && platform.is('desktop')">
+        <ion-button appDebounce (debounceClick)="inputClick()">
+            <ion-icon class="file-picker-icon" name="folder"></ion-icon>
+        </ion-button>
+        <ion-input
+                accept="image/x-png,image/gif,image/jpeg"
+                (ionChange)="fileOnChange()"
+                #file
+                class="file-picker-input"
+                name="file"
+                type="file"
+        ></ion-input>
+    </ion-item>
 </ion-buttons>

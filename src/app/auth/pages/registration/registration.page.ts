@@ -20,7 +20,7 @@ export class RegistrationPage implements OnInit {
     public onSubmitRegistrationForm(data: {user: User, location: LocationModel}): void {
         this.registrationService.register(data.user, data.location).subscribe(
             next => {
-                this.router.navigateByUrl('/auth/login');
+                this.router.navigateByUrl('profile/');
             }
         );
     }

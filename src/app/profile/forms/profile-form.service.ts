@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AppValidators} from '@app/core/validators/app.validators';
 import {User} from '@app/core/models/user';
+import {AppValidators} from '@app/core/validators/app.validators';
 
 @Injectable({
         providedIn: 'root',
@@ -20,14 +20,14 @@ export class ProfileFormService {
     public createForm(user: User): FormGroup {
         return this.formBuilder.group({
                 first_name: [
-                    user.firstName, [
+                    user.first_name, [
                         Validators.required,
                         Validators.minLength(1),
                         Validators.maxLength(20)
                     ]
                 ],
                 last_name: [
-                    user.lastName,
+                    user.last_name,
                     [
                         Validators.required,
                         Validators.minLength(1),
