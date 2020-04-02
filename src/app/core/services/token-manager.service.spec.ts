@@ -2,7 +2,6 @@ import {TestBed} from '@angular/core/testing';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
-import {JwtHelper} from '../proxies/jwt-helper.service';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {TokenManagerService} from './token-manager.service';
 
@@ -16,8 +15,7 @@ describe('TokenManagerService', () => {
 
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            {provide: StorageManagerService, useClass: StorageManagerMock},
-            JwtHelper
+            {provide: StorageManagerService, useClass: StorageManagerMock}
         ]
     }));
 

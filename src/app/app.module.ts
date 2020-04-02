@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
 import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
+import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
 import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
 import {IpApiService} from '@app/core/services/location/ip-api.service';
 import {IpDataService} from '@app/core/services/location/ip-data.service';
@@ -72,6 +73,10 @@ import {AppComponent} from './app.component';
             provide: HTTP_INTERCEPTORS,
             useClass: HeadersInterceptor,
             multi: true
+        },
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandlerService
         },
         Geolocation,
         GeolocationService,

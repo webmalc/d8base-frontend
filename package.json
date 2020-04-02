@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "~9.0.5",
     "@angular/router": "~9.0.5",
     "@asymmetrik/ngx-leaflet": "^6.0.1",
-    "@auth0/angular-jwt": "^3.0.1",
     "@capacitor/android": "^1.5.1",
     "@capacitor/core": "^1.5.1",
     "@ionic-native/core": "^5.22.0",

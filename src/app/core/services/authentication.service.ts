@@ -4,7 +4,6 @@ import {GrantTypes} from '@app/auth/enums/grant-types';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
-import {JwtHelper} from '@app/core/proxies/jwt-helper.service';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable, of} from 'rxjs';
@@ -22,7 +21,7 @@ export class AuthenticationService implements AuthenticatorInterface {
     private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
-    constructor(private tokenManager: TokenManagerService, private client: ApiClientService, private jwt: JwtHelper) {
+    constructor(private tokenManager: TokenManagerService, private client: ApiClientService) {
     }
 
     public login(credentials: Credentials): Observable<void> {

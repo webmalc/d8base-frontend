@@ -7,7 +7,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {Observable, of, throwError} from 'rxjs';
 
-import {JwtHelper} from '../../../core/proxies/jwt-helper.service';
 import {ApiClientService} from '../../../core/services/api-client.service';
 import {AuthenticationService} from '../../../core/services/authentication.service';
 import {TokenManagerService} from '../../../core/services/token-manager.service';
@@ -31,7 +30,6 @@ describe('LoginPage', () => {
                 LoginFormService,
                 FormBuilder,
                 AuthenticationService,
-                JwtHelper,
                 {provide: TokenManagerService, useValue: {setTokens: () => Promise.resolve()}}
             ]
         }).compileComponents();
