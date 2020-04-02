@@ -5,6 +5,7 @@ export const environment = {
         url: '',
         auth: '',
         refresh: '',
+        register: '',
         user: '',
         password_recovery: '',
         location: '',
@@ -14,7 +15,9 @@ export const environment = {
         education: '',
         master: '',
         certificate: '',
-        language: ''
+        language: '',
+        countries: '',
+        cities: ''
     },
     client_id: '',
     client_secret: '',
