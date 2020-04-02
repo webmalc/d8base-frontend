@@ -5,7 +5,7 @@ export interface IpApiResponseInterface {
     city: string;
     timezone: string;
     country_code: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     region_code: string;
 }

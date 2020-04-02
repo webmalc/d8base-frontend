@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {IpDataResponseInterface} from '@app/auth/interfaces/location/ip-data-response.interface';
 import {IpServiceInterface} from '@app/auth/interfaces/location/ip-service.interface';
-import {LocationModel} from '@app/core/models/location.model';
+import {IpLocation} from '@app/core/models/ip-location';
 import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
@@ -13,7 +13,7 @@ export abstract class AbstractIpService implements IpServiceInterface {
     protected constructor(protected http: HttpClient) {
     }
 
-    public getData(): Promise<LocationModel> {
+    public getData(): Promise<IpLocation> {
         return new Promise((resolve, reject) => {
             this.http.get(this.getUrl())
                 .pipe(
@@ -34,5 +34,5 @@ export abstract class AbstractIpService implements IpServiceInterface {
     }
 
     protected abstract getUrl(): string;
-    protected abstract transform(res: object): LocationModel;
+    protected abstract transform(res: object): IpLocation;
 }

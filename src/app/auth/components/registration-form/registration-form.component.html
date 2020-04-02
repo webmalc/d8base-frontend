@@ -52,8 +52,16 @@
   <ion-row class="ion-justify-content-center">
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-item>
-        <ion-label color="medium" position="floating">{{ 'registration-form.country' | translate }}</ion-label>
-        <ion-input type="text" name="country" [formControlName]="formFields.Country"></ion-input>
+        <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.country' | translate }}</ion-label>
+        <ionic-selectable
+          [items]="countryList$ | async"
+          itemValueField="id"
+          itemTextField="name"
+          [canSearch]="true"
+          [formControlName]="formFields.Country"
+          (onChange)="onCountryChange($event)"
+        >
+        </ionic-selectable>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -62,11 +70,19 @@
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-item>
         <ion-label color="medium" position="floating">{{ 'registration-form.city' | translate }}</ion-label>
-        <ion-input type="text" name="city" [formControlName]="formFields.City"></ion-input>
+        <ionic-selectable
+                [items]="citiesList$ | async"
+                itemValueField="id"
+                itemTextField="name"
+                [canSearch]="true"
+                [formControlName]="formFields.City"
+
+        >
+        </ionic-selectable>
       </ion-item>
     </ion-col>
   </ion-row>
-
+<!--  [attr.disabled]="true"-->
 
   <ion-row class="ion-justify-content-center">
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">

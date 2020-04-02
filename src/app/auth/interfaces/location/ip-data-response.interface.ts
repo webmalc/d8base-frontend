@@ -6,6 +6,6 @@ export interface IpDataResponseInterface {
         name: string
     };
     region_code: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
 }

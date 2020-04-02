@@ -24,6 +24,7 @@ import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {IonicSelectableModule} from 'ionic-selectable';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
@@ -32,6 +33,7 @@ import {AppComponent} from './app.component';
     entryComponents: [],
     imports: [
         BrowserModule,
+        IonicSelectableModule,
         IonicModule.forRoot({animated: false}),
         IonicStorageModule.forRoot(),
         AppRoutingModule,

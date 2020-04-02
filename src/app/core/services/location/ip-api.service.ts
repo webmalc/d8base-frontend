@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {IpApiResponseInterface} from '@app/auth/interfaces/location/ip-api-response.interface';
-import {LocationModel} from '@app/core/models/location.model';
+import {IpLocation} from '@app/core/models/ip-location';
 import {AbstractIpService} from '@app/core/services/location/abstract-ip.service';
 
 @Injectable()
@@ -17,11 +17,11 @@ export class IpApiService extends AbstractIpService {
         return this.url;
     }
 
-    protected transform(res: IpApiResponseInterface): LocationModel {
+    protected transform(res: IpApiResponseInterface): IpLocation {
         if (res.error) {
             throw Error;
         }
-        const location = new LocationModel();
+        const location = new IpLocation();
         location.postalCode = res.postal;
         location.countryCode = res.country_code;
         location.latitude = res.latitude;

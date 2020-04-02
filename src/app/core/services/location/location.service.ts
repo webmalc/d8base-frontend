@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {LocationInterface} from '@app/auth/interfaces/location/location.interface';
+import {IpLocation} from '@app/core/models/ip-location';
+import {LocationModel} from '@app/core/models/location.model';
 import {Geolocation, GeolocationOptions, Geoposition} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {Observable} from 'rxjs';
@@ -20,7 +21,7 @@ export class LocationService {
     ) {
     }
 
-    public getCurrentPosition(): Promise<Geoposition> {
+    public getCurrentPosition(): Promise<Geoposition | null> {
         return new Promise<Geoposition>(resolve => {
             this.locationAccuracy.canRequest().then(
                 (canRequest: boolean) => {
@@ -28,16 +29,20 @@ export class LocationService {
                         this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
                             () => {
                                 this.geolocation.getCurrentPosition().then(
-                                    (geoposition: Geoposition) => resolve(geoposition)
+                                    (geoposition: Geoposition) => {
+                                        resolve(geoposition);
+                                    }
                                 );
                             }
-                        );
+                        ).catch( e => resolve(null));
                     } else {
                         this.geolocation.getCurrentPosition().then(
                             (geoposition: Geoposition) => resolve(geoposition)
-                        );
+                        ).catch(e => resolve(null));
                     }
                 }
+            ).catch(
+                e => resolve(null)
             );
         });
     }
@@ -46,15 +51,33 @@ export class LocationService {
         return this.geolocation.watchPosition(options);
     }
 
-    public getMergedLocationData(): Promise<LocationInterface | null> {
-        return new Promise<LocationInterface | null>(resolve => {
+    public getMergedLocationData(): Promise<LocationModel | null> {
+        return new Promise<LocationModel | null>(resolve => {
             this.getCurrentPosition().then(
                 (geolocation: Geoposition) => {
                     this.getIpLocationData().then(
-                        (locationData: LocationInterface) => {
-                            locationData.latitude = geolocation.coords.latitude;
-                            locationData.longitude = geolocation.coords.longitude;
-                            resolve(locationData);
+                        (ipLocation: IpLocation) => {
+                            const location = new LocationModel();
+                            if (null !== geolocation) {
+                                location.coordinates = {
+                                    type: 'Point',
+                                    coordinates: [
+                                        geolocation.coords.latitude,
+                                        geolocation.coords.longitude
+                                    ]
+                                };
+                            } else if (null !== ipLocation) {
+                                location.coordinates = {
+                                    type: 'Point',
+                                    coordinates: [
+                                        ipLocation.latitude,
+                                        ipLocation.longitude
+                                    ]
+                                };
+                            } else {
+                                return resolve(null);
+                            }
+                            resolve(location);
                         }
                     );
                 }
@@ -64,8 +87,8 @@ export class LocationService {
         });
     }
 
-    public async getIpLocationData(): Promise<LocationInterface | null> {
-        let ipData: LocationInterface = null;
+    public async getIpLocationData(): Promise<IpLocation> {
+        let ipData: any = null;
         for (const ipService of this.ipServicesHolder.list) {
             try {
                 ipData = await ipService.getData();

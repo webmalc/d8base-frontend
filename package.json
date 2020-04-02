@@ -39,6 +39,7 @@
     "class-transformer": "^0.2.3",
     "cordova-sqlite-storage": "^3.4.1",
     "core-js": "^2.6.11",
+    "ionic-selectable": "^4.7.1",
     "leaflet": "^1.6.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.4",

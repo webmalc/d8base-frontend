@@ -1,23 +1,21 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {Form, FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {ProfileService} from '../../services/profile.service';
-import {MainInfoTabComponent} from './main-info-tab.component';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {TranslateModule} from '@ngx-translate/core';
-import {ProfileFormService} from '../../forms/profile-form.service';
-import {User} from '../../../core/models/user';
 import {Injectable} from '@angular/core';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {UserInterface} from '../../../core/interfaces/user.interface';
 import {PictureSelectorComponent} from '../../../shared/components/picture-selector/picture-selector.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {ProfileFormService} from '../../forms/profile-form.service';
+import {ProfileService} from '../../services/profile.service';
+import {MainInfoTabComponent} from './main-info-tab.component';
 
 @Injectable()
 class ProfileServiceStub {
     private user: UserInterface = {
-        firstName: 'name',
-        lastName: 'name',
+        first_name: 'name',
+        last_name: 'name',
         phone: 'sadf',
         password: 'sdf',
         email: 'wer',

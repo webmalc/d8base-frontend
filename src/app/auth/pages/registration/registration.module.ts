@@ -12,6 +12,7 @@ import {RegistrationService} from '@app/auth/services/registration.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
+import {IonicSelectableModule} from 'ionic-selectable';
 import {RegistrationPage} from './registration.page';
 
 @NgModule({
@@ -23,6 +24,7 @@ import {RegistrationPage} from './registration.page';
         SharedModule,
         ReactiveFormsModule,
         TranslateModule,
+        IonicSelectableModule,
     ],
     declarations: [
         RegistrationPage,

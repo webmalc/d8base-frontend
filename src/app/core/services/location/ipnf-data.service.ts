@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {IpnfResponseInterface} from '@app/auth/interfaces/location/ipnf-response.interface';
-import {LocationModel} from '@app/core/models/location.model';
+import {IpLocation} from '@app/core/models/ip-location';
 import {AbstractIpService} from '@app/core/services/location/abstract-ip.service';
 
 @Injectable()
@@ -17,8 +17,8 @@ export class IpnfDataService extends AbstractIpService {
         return this.url;
     }
 
-    protected transform(res: IpnfResponseInterface): LocationModel {
-        const location = new LocationModel();
+    protected transform(res: IpnfResponseInterface): IpLocation {
+        const location = new IpLocation();
         location.postalCode = res.ip.post_code;
         location.city = res.ip.city;
         location.countryCode = res.ip.country_code;

@@ -15,8 +15,8 @@ export class IpServicesHolderService {
 
   get list(): IpServiceInterface[] {
     return [
-        this.ipApi,
         this.ipData,
+        this.ipApi,
         this.ipNf
     ];
   }

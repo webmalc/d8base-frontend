@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegistrationFormFields} from '../enums/registration-form-fields';
 
 @Injectable()
@@ -19,6 +19,11 @@ export class RegistrationFormService {
         return !this.form.valid;
     }
 
+    public setCityDisabled(value: boolean): void {
+        const control = this.form.controls[RegistrationFormFields.City] as FormControl;
+        value ? control.disable() : control.enable();
+    }
+
     public initForm(): void {
         this._form = this.builder.group({
                 [RegistrationFormFields.Email]: ['', Validators.compose([
@@ -30,8 +35,8 @@ export class RegistrationFormService {
                 [RegistrationFormFields.Name]: ['', Validators.required],
                 [RegistrationFormFields.Password]: ['', Validators.required],
                 [RegistrationFormFields.Confirm]: ['', Validators.required],
-                [RegistrationFormFields.Country]: [''],
-                [RegistrationFormFields.City]: [''],
+                [RegistrationFormFields.Country]: ['', Validators.required],
+                [RegistrationFormFields.City]: [{disabled: true}],
                 [RegistrationFormFields.Phone]: [''],
             },
             {validators: this.checkPassword}
