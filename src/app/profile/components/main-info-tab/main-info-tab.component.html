@@ -16,7 +16,7 @@
                        position="floating">{{'profile-form.fields.name' | translate }}</ion-label>
             <ion-input type="text" name="first_name"
                        [placeholder]="'profile-form.placeholders.name'| translate"
-                       formControlName="first_name"></ion-input>
+                       formControlName="{{formFields.FirstName}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -28,7 +28,7 @@
                        position="floating">{{'profile-form.fields.surname' | translate }}</ion-label>
             <ion-input type="text" name="last_name"
                        [placeholder]="'profile-form.placeholders.name'| translate"
-                       formControlName="last_name"></ion-input>
+                       formControlName="{{formFields.LastName}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -40,7 +40,7 @@
                        position="floating">{{'profile-form.fields.patronymic' | translate }}</ion-label>
             <ion-input type="text" name="patronymic"
                        [placeholder]="'profile-form.placeholders.patronymic'| translate"
-                       formControlName="patronymic"></ion-input>
+                       formControlName="{{formFields.Patronymic}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -52,7 +52,7 @@
                        position="floating">{{'profile-form.fields.phone' | translate }}</ion-label>
             <ion-input type="text" name="phone"
                        [placeholder]="'profile-form.placeholders.phone'| translate"
-                       formControlName="phone"></ion-input>
+                       formControlName="{{formFields.Phone}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -67,7 +67,7 @@
                   <ion-img [src]="getAvatar()"></ion-img>
               </ion-thumbnail>
             <app-picture-selector
-                    formControlName="avatar"
+                    formControlName="{{formFields.Avatar}}"
                     [camera]="true"
                     [fileSystem]="true"
             >
@@ -82,9 +82,9 @@
                        position="floating">{{'profile-form.fields.gender' | translate }}</ion-label>
             <ion-select
                     interface="popover"
-                    formControlName="gender"
+                    [formControlName]="formFields.Gender"
             >
-              <ion-select-option *ngFor="let gender of genderList$()|async" value="{{ gender }}">
+              <ion-select-option *ngFor="let gender of genderList(); let i=index" value="{{ i | number }}">
                 {{ gender | titlecase}}
               </ion-select-option>
             </ion-select>
@@ -98,8 +98,8 @@
             <ion-label class="label-for-required-input" color="medium"
                        position="floating">{{'profile-form.fields.age' | translate }}</ion-label>
             <ion-datetime
-                    display-format="DD/MM/YYYY"
-                    formControlName="year"
+                    display-format="YYYY-MM-DD"
+                    formControlName="{{formFields.Birthday}}"
             ></ion-datetime>
           </ion-item>
         </ion-col>
@@ -112,11 +112,11 @@
                        position="floating">{{'profile-form.fields.main_language' | translate }}</ion-label>
             <ion-select
                     interface="popover"
-                    formControlName="main_language"
+                    formControlName="{{formFields.Language}}"
                     (ionChange)="recomputeAdditionalLanguages()"
             >
-              <ion-select-option *ngFor="let lang of languages$()|async" value="{{ lang }}">
-                {{ lang }}
+              <ion-select-option *ngFor="let lang of languages$ | async" value="{{ lang.code }}">
+                {{ lang.name }}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -131,10 +131,10 @@
                        position="floating">{{'profile-form.fields.languages' | translate }}</ion-label>
             <ion-select
                     multiple="true"
-                    formControlName="languages"
+                    formControlName="{{formFields.AdditionalLanguages}}"
             >
-              <ion-select-option *ngFor="let lang of availableAddsLanguages$|async" value="{{ lang }}">
-                {{ lang }}
+              <ion-select-option *ngFor="let lang of availableAddsLanguages$ | async" value="{{ lang.code }}">
+                {{ lang.name }}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -152,7 +152,7 @@
                        position="floating">{{'profile-form.fields.email' | translate }}</ion-label>
             <ion-input type="text" name="email"
                        [placeholder]="'profile-form.placeholders.email'| translate"
-                       formControlName="email"></ion-input>
+                       formControlName="{{formFields.Email}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

@@ -12,7 +12,7 @@ export class User implements UserInterface {
     @Expose() public phone: string;
     @Expose() public avatar?: string;
     @Expose() public gender: string;
-    @Expose() public age?: number;
+    @Expose() public birthday?: string;
     @Expose() public main_language: string;
     @Expose() public languages?: string[];
     @Expose() public type_of_user: string;

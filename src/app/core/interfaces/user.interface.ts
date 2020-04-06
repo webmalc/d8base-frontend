@@ -8,7 +8,7 @@ export interface UserInterface {
     phone: string;
     avatar?: string;
     gender: string;
-    age?: number;
+    birthday?: string;
     main_language: string;
     languages?: string[];
     type_of_user: string;

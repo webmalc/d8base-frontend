@@ -1,5 +1,7 @@
+import {Expose} from 'class-transformer';
+
 export class Language {
-    public id: number;
-    public code: string;
-    public name: string;
+    @Expose() public id: number;
+    @Expose() public code: string;
+    @Expose() public name: string;
 }
