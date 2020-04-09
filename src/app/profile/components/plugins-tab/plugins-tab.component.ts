@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {User} from '@app/core/models/user';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {PluginsFormFields} from '@app/profile/enums/plugins-form-fields';
 import {PluginsFormService} from '@app/profile/forms/plugins-form.service';
@@ -7,7 +8,6 @@ import {Plugin} from '@app/profile/models/plugin';
 import {UserPlugin} from '@app/profile/models/user-plugin';
 import {PluginApiService} from '@app/profile/services/plugin-api.service';
 import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
-import {User} from '@app/core/models/user';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 

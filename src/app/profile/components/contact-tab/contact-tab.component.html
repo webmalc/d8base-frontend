@@ -1,37 +1,17 @@
 <ion-content>
-    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitContacts()" (keydown.enter)="submitContacts()">
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-item>
-                    <ion-label color="medium" position="floating">{{ 'contacts-tab.whatsapp' | translate }}</ion-label>
-                    <ion-input type="text" name="email" [formControlName]="formFields.Whatsapp"></ion-input>
-                </ion-item>
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-item>
-                    <ion-label color="medium" position="floating">{{ 'contacts-tab.facebook_messenger' | translate }}</ion-label>
-                    <ion-input type="text" name="email" [formControlName]="formFields.FacebookMessenger"></ion-input>
-                </ion-item>
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-item>
-                    <ion-label color="medium" position="floating">{{ 'contacts-tab.instagram' | translate }}</ion-label>
-                    <ion-input type="text" name="email" [formControlName]="formFields.Instagram"></ion-input>
-                </ion-item>
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-item>
-                    <ion-label color="medium" position="floating">{{ 'contacts-tab.www' | translate }}</ion-label>
-                    <ion-input type="text" name="email" [formControlName]="formFields.WWW"></ion-input>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+    <form *ngIf="formService.form" [formGroup]="formService.form" (ngSubmit)="submitContacts()" (keydown.enter)="submitContacts()">
+
+        <div *ngFor="let control of formService.controls">
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label color="medium" position="floating">{{control}}</ion-label>
+                        <ion-input type="text" name="email" [formControlName]="control"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </div>
+
         <ion-row class="ion-justify-content-center">
             <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                 <ion-button
@@ -44,5 +24,6 @@
                 </ion-button>
             </ion-col>
         </ion-row>
+
     </form>
 </ion-content>

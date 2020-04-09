@@ -18,6 +18,10 @@ export class ApiClientService {
         return this.http.post<T>(this.getHost() + url, data);
     }
 
+    public put<T>(url: string, data: object = {}): Observable<T> {
+        return this.http.put<T>(this.getHost() + url, data);
+    }
+
     public patch<T>(url: string, data: object = {}): Observable<T> {
         return this.http.patch<T>(this.getHost() + url, data);
     }
