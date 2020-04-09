@@ -1,16 +1,17 @@
 import {HttpClient} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiClientService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-    public get <T>(url: string, params?: { [param: string]: string | string[]; } ): Observable<T> {
+    public get<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {
         return this.http.get<T>(this.getHost() + url, {params});
     }
 
@@ -24,6 +25,10 @@ export class ApiClientService {
 
     public patch<T>(url: string, data: object = {}): Observable<T> {
         return this.http.patch<T>(this.getHost() + url, data);
+    }
+
+    public delete(url: string, params?: { [param: string]: string | string[]; }): Observable<any> {
+        return this.http.delete(this.getHost() + url, params);
     }
 
     private getHost(): string {

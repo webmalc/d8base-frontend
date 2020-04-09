@@ -40,11 +40,13 @@ export class ContactTabComponent implements OnInit {
     }
 
     public submitContacts(): void {
-        const userContactsToCreate = this.getContactsToCreate(this.formService.form.getRawValue());
-        const userContactsToUpdate = this.getUpdatedDefaultUserContacts(this.formService.form.getRawValue());
+        const userContactsToCreate = this.getUserContactsToCreate(this.formService.form.getRawValue());
+        const userContactsToUpdate = this.getUserContactsToUpdate(this.formService.form.getRawValue());
+        const userContactsToDelete = this.getUserContactsToDelete(this.formService.form.getRawValue());
         forkJoin([
             this.userContactApiService.save(userContactsToCreate),
-            this.userContactApiService.update(userContactsToUpdate)
+            this.userContactApiService.update(userContactsToUpdate),
+            this.userContactApiService.delete(userContactsToDelete)
         ]).subscribe(
             () => this.updateDefaultUserContacts().subscribe(() => console.log('saved'))
         );
@@ -58,7 +60,24 @@ export class ContactTabComponent implements OnInit {
         );
     }
 
-    private getContactsToCreate(contactsData: object): UserContact[] {
+    private getUserContactsToDelete(contactsData: object): UserContact[] {
+        const toDelete: UserContact[] = [];
+        for (const contactName in contactsData) {
+            if ('' === contactsData[contactName]) {
+                this.defaultUserContacts.forEach(
+                    userContact => {
+                        if (userContact.contact_display === contactName) {
+                            toDelete.push(userContact);
+                        }
+                    }
+                );
+            }
+        }
+
+        return toDelete;
+    }
+
+    private getUserContactsToCreate(contactsData: object): UserContact[] {
         for (const contactName in contactsData) {
             if ('' === contactsData[contactName]) {
                 delete contactsData[contactName];
@@ -76,12 +95,15 @@ export class ContactTabComponent implements OnInit {
         return this.generateUserContacts(contactsData);
     }
 
-    private getUpdatedDefaultUserContacts(contactsData: object): UserContact[] {
+    private getUserContactsToUpdate(contactsData: object): UserContact[] {
         const updatedContacts: UserContact[] = [];
         for (const contactName in contactsData) {
             this.defaultUserContacts.forEach(
                 userContact => {
-                    if (userContact.contact_display === contactName && userContact.value !== contactsData[contactName]) {
+                    if (userContact.contact_display === contactName
+                        && userContact.value !== contactsData[contactName]
+                        && '' !== contactsData[contactName]
+                    ) {
                         userContact.value = contactsData[contactName];
                         updatedContacts.push(userContact);
                     }

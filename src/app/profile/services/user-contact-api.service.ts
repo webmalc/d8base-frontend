@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
 import {UserContact} from '@app/profile/models/user-contact';
 import {plainToClass} from 'class-transformer';
 import {forkJoin, Observable, of} from 'rxjs';
@@ -13,7 +12,7 @@ export class UserContactApiService {
 
     private readonly url = environment.backend.user_contact;
 
-    constructor(private api: ApiClientService, private userManager: UserManagerService) {
+    constructor(private api: ApiClientService) {
     }
 
     public getByUserId(userId: number): Observable<ApiListResponseInterface<UserContact>> {
@@ -27,7 +26,7 @@ export class UserContactApiService {
     }
 
     public save(contactsList: UserContact[]): Observable<UserContact[]> {
-        return of(contactsList).pipe(
+        return 0 === contactsList.length ? of([]) : of(contactsList).pipe(
             mergeMap((contacts) => forkJoin(
                 ...contacts.map(contact => this.api.post<UserContact>(this.url, contact))
             ))
@@ -35,9 +34,17 @@ export class UserContactApiService {
     }
 
     public update(contactsList: UserContact[]): Observable<UserContact[]> {
-        return of(contactsList).pipe(
+        return 0 === contactsList.length ? of([]) :  of(contactsList).pipe(
             mergeMap((contacts) => forkJoin(
                 ...contacts.map(contact => this.api.put<UserContact>(`${this.url}${contact.id}/`, contact))
+            ))
+        );
+    }
+
+    public delete(contactsList: UserContact[]): Observable<any> {
+        return 0 === contactsList.length ? of([]) :  of(contactsList).pipe(
+            mergeMap((contacts) => forkJoin(
+                ...contacts.map(contact => this.api.delete(`${this.url}${contact.id}/`))
             ))
         );
     }
