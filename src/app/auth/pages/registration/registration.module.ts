@@ -6,6 +6,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {RegistrationPageRoutingModule} from './registration-routing.module';
 
+import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popover/city-picker-popover.component';
 import {RegistrationFormComponent} from '@app/auth/components/registration-form/registration-form.component';
 import {RegistrationFormService} from '@app/auth/forms/registration-form.service';
 import {RegistrationService} from '@app/auth/services/registration.service';
@@ -28,7 +29,8 @@ import {RegistrationPage} from './registration.page';
     ],
     declarations: [
         RegistrationPage,
-        RegistrationFormComponent
+        RegistrationFormComponent,
+        CityPickerPopoverComponent
     ],
     providers: [
         TokenManagerService,

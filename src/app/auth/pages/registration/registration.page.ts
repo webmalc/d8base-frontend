@@ -3,8 +3,6 @@ import {Router} from '@angular/router';
 import {RegistrationService} from '@app/auth/services/registration.service';
 import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/core/models/user';
-import {LocationService} from '@app/core/services/location/location.service';
-import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'app-registration',

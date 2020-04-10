@@ -39,7 +39,7 @@ export class CountriesApiService {
     }
 
     public getSingle(id: number): Observable<Country> {
-        return this.client.get<Country>(`${this.url}/${id}`).pipe(
+        return this.client.get<Country>(`${this.url}${id}`).pipe(
             map(raw => plainToClass(Country, raw))
         );
     }

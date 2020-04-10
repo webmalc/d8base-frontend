@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {LocationModel} from '@app/core/models/location.model';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {City} from '@app/profile/models/city';
 import {plainToClass} from 'class-transformer';
@@ -43,6 +44,20 @@ export class CitiesApiService {
     public getSingle(id: number): Observable<City> {
         return this.client.get<City>(`${this.url}/${id}`).pipe(
             map(raw => plainToClass(City, raw))
+        );
+    }
+
+    public getByLocation(dist: number, location: LocationModel): Observable<ApiListResponseInterface<City>> {
+        return this.client.get<ApiListResponseInterface<City>>(this.url, {
+            dist: dist.toString(10),
+            // point: `6.061326,49.930906` //TODO: do not forget to delete
+            point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
+        }).pipe(
+            map(result => {
+                result.results = plainToClass(City, result.results);
+
+                return result;
+            })
         );
     }
 }

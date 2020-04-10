@@ -60,6 +60,7 @@
           [canSearch]="true"
           [formControlName]="formFields.Country"
           (onChange)="onCountryChange($event)"
+          (click)="onCountySelectClick()"
         >
         </ionic-selectable>
       </ion-item>
@@ -76,14 +77,12 @@
                 itemTextField="name"
                 [canSearch]="true"
                 [formControlName]="formFields.City"
-
+                (click)="onCitySelectClick()"
         >
         </ionic-selectable>
       </ion-item>
     </ion-col>
   </ion-row>
-<!--  [attr.disabled]="true"-->
-
   <ion-row class="ion-justify-content-center">
     <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
       <ion-button
