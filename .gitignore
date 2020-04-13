@@ -34,3 +34,5 @@ src/environments/environment.prod.ts
 /www
 /documentation
 capacitor.config.json
+
+.docker/.env
