@@ -71,7 +71,7 @@ export class ProfileFormService {
                     ]
                 ],
                 [ProfileFormFields.Gender]: [
-                    user.gender.toString(),
+                    user.gender?.toString(),
                     [Validators.required]
                 ],
                 [ProfileFormFields.Birthday]: [
