@@ -11,7 +11,7 @@ import {CountriesApiService} from '@app/profile/services/countries-api.service';
 import {PopoverController} from '@ionic/angular';
 import {plainToClass} from 'class-transformer';
 import {IonicSelectableComponent} from 'ionic-selectable';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 
@@ -27,16 +27,16 @@ export class RegistrationFormComponent implements OnInit {
     public countryList$: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>([]);
     public citiesList$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
     public supposedCities$: BehaviorSubject<City> = new BehaviorSubject<City>(null);
-    private cityListUploaded: boolean = false;
+    private searchSubscription: Subscription = null;
 
     @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: LocationModel }>();
 
     constructor(
         public readonly registrationFormService: RegistrationFormService,
-        private countriesApi: CountriesApiService,
-        private citiesApi: CitiesApiService,
-        private locationService: LocationService,
-        private popoverController: PopoverController
+        private readonly countriesApi: CountriesApiService,
+        private readonly citiesApi: CitiesApiService,
+        private readonly locationService: LocationService,
+        private readonly popoverController: PopoverController
     ) {
     }
 
@@ -44,6 +44,7 @@ export class RegistrationFormComponent implements OnInit {
         this.listenPopover();
         this.initPopover();
         this.registrationFormService.initForm();
+        this.registrationFormService.setCityDisabled(true);
     }
 
     public submitRegistrationForm(): void {
@@ -56,27 +57,47 @@ export class RegistrationFormComponent implements OnInit {
         this.registrationFormData.emit({user, location});
     }
 
-    public onCountySelectClick(): void {
-        this.countryList$.subscribe(
-            list => 1 === list.length ? this.initCountries() : null
-        );
+    public onCountryChange(): void {
+        this.registrationFormService.setCityDisabled(false);
     }
 
-    public onCitySelectClick(): void {
-        if (!this.cityListUploaded) {
-            const selectedCountry: Country = this.registrationFormService.getFormFiledValue(RegistrationFormFields.Country);
-            this.processCityList({country: selectedCountry.id.toString(10), page_size: '500'});
+    public onCitySearch(event: { component: IonicSelectableComponent, text: string }): void {
+        this.abstractOnSearch(event.component, event.text, this.citiesApi);
+    }
+
+    public onCountrySearch(event: { component: IonicSelectableComponent, text: string }): void {
+        this.abstractOnSearch(event.component, event.text, this.countriesApi);
+    }
+
+    private abstractOnSearch(
+        component: IonicSelectableComponent,
+        text: string,
+        apiService: { getList: (params: { search: string }) => Observable<ApiListResponseInterface<Country | City>> }
+    ): void {
+        component.startSearch();
+
+        if (this.searchSubscription) {
+            this.searchSubscription.unsubscribe();
         }
-    }
 
-    public onCountryChange(event: { component: IonicSelectableComponent, value: Country }): void {
-        this.processCityList({country: event.value.id.toString(10), page_size: '500'});
-    }
+        if (3 > text.length) {
+            if (!text) {
+                component.items = [];
+            }
+            component.endSearch();
 
-    private processCityList(params: {country: string, page_size: string}): void {
-        this.cityListUploaded = true;
-        this.citiesApi.getList(params).subscribe(
-            (data: ApiListResponseInterface<City>) => this.citiesList$.next(data.results)
+            return;
+        }
+
+        this.searchSubscription = apiService.getList({search: text}).subscribe(
+            (data: ApiListResponseInterface<Country | City>) => {
+                if (this.searchSubscription.closed) {
+                    return;
+                }
+
+                component.items = data.results;
+                component.endSearch();
+            }
         );
     }
 
@@ -107,17 +128,12 @@ export class RegistrationFormComponent implements OnInit {
                     (city: City) => {
                         if (null !== city) {
                             this.supposedCities$.next(city);
+                            this.registrationFormService.setCityDisabled(false);
                         }
                         this.popoverController.dismiss();
                     }
                 );
             }
         ));
-    }
-
-    private initCountries(): void {
-        this.countriesApi.getList({page_size: '1000'}).subscribe(
-            (data: ApiListResponseInterface<Country>) => this.countryList$.next(data.results)
-        );
     }
 }

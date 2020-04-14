@@ -59,8 +59,8 @@
           itemTextField="name"
           [canSearch]="true"
           [formControlName]="formFields.Country"
-          (onChange)="onCountryChange($event)"
-          (click)="onCountySelectClick()"
+          (onSearch)="onCountrySearch($event)"
+          (onChange)="onCountryChange()"
         >
         </ionic-selectable>
       </ion-item>
@@ -77,7 +77,7 @@
                 itemTextField="name"
                 [canSearch]="true"
                 [formControlName]="formFields.City"
-                (click)="onCitySelectClick()"
+                (onSearch)="onCitySearch($event)"
         >
         </ionic-selectable>
       </ion-item>
