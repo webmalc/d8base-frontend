@@ -103,12 +103,12 @@ export class RegistrationFormComponent implements OnInit {
             translucent: true
         }).then(pop => pop.present().then(
             () => {
-                CityPickerPopoverComponent.city.subscribe(
+                CityPickerPopoverComponent.city$.subscribe(
                     (city: City) => {
                         if (null !== city) {
-                            this.popoverController.dismiss();
                             this.supposedCities$.next(city);
                         }
+                        this.popoverController.dismiss();
                     }
                 );
             }
