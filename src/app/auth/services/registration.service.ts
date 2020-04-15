@@ -26,7 +26,7 @@ export class RegistrationService {
     public register(user: User, location: LocationModel): Observable<User> {
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
             tap(
-                (data: RegistrationResponseInterface) => this.tokenManager.setTokens(data.token)
+                async (data: RegistrationResponseInterface) => await this.tokenManager.setTokens(data.token)
             ),
             switchMap(
                 (newUser: User) => {

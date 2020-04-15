@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
         public readonly trans: TranslationService,
-        public readonly menu: MenuController
+        public readonly menu: MenuController,
+        private readonly authenticationFactory: AuthenticationFactory
     ) {
         this.initializeApp();
     }
@@ -70,6 +72,11 @@ export class AppComponent implements OnInit {
 
     public getTitle(): string {
         return this.titleService.getTitle();
+    }
+
+    public async logout(): Promise<void> {
+        await this.authenticationFactory.getAuthenticator().logout();
+        this.router.navigateByUrl('/auth/login');
     }
 
     private initDarkMode(): void {

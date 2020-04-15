@@ -33,7 +33,8 @@ export class AuthInterceptor implements HttpInterceptor {
                     (isNeedToRefresh: boolean) => {
                         if (isNeedToRefresh) {
                             return this.authFactory.getAuthenticator().refresh().pipe(
-                                switchMap(() => next.handle(req))
+                                switchMap(() => next.handle(req)),
+                                catchError(_ => EMPTY)
                             );
                         }
 
@@ -41,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     }
                 ),
                 catchError(
-                    _ => EMPTY
+                    _ => next.handle(req)
                 )
             );
     }

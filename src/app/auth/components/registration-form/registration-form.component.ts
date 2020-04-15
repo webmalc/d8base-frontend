@@ -62,17 +62,24 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     public onCitySearch(event: { component: IonicSelectableComponent, text: string }): void {
-        this.abstractOnSearch(event.component, event.text, this.citiesApi);
+        const country: Country = this.registrationFormService.getFormFiledValue(this.formFields.Country);
+        this.abstractOnSearch(
+            event.component,
+            event.text,
+            this.citiesApi,
+            {search: event.text, country: country.id.toString(10)}
+            );
     }
 
     public onCountrySearch(event: { component: IonicSelectableComponent, text: string }): void {
-        this.abstractOnSearch(event.component, event.text, this.countriesApi);
+        this.abstractOnSearch(event.component, event.text, this.countriesApi, {search: event.text});
     }
 
     private abstractOnSearch(
         component: IonicSelectableComponent,
         text: string,
-        apiService: { getList: (params: { search: string }) => Observable<ApiListResponseInterface<Country | City>> }
+        apiService: { getList: (params: { search: string, country?: string }) => Observable<ApiListResponseInterface<Country | City>> },
+        apiParams: { search: string, country?: string }
     ): void {
         component.startSearch();
 
@@ -89,7 +96,7 @@ export class RegistrationFormComponent implements OnInit {
             return;
         }
 
-        this.searchSubscription = apiService.getList({search: text}).subscribe(
+        this.searchSubscription = apiService.getList(apiParams).subscribe(
             (data: ApiListResponseInterface<Country | City>) => {
                 if (this.searchSubscription.closed) {
                     return;

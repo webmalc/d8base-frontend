@@ -43,6 +43,10 @@ export class RegistrationFormService {
         );
     }
 
+    public getFormFiledValue(formField: string): any {
+        return this.form.get(formField).value;
+    }
+
     public setFormFiledValue(formField: string, value: any): void {
         this.form.get(formField).setValue(value);
     }
