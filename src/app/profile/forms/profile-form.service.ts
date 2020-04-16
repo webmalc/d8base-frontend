@@ -12,8 +12,8 @@ import {Language} from '@app/profile/models/language';
 // ** TODO: To find out right way about validation data from API
 export class ProfileFormService {
 
-    private mainLanguages: Language[];
-    private additionalLanguages: Language[];
+    private mainLanguages: Language[] = [];
+    private additionalLanguages: Language[] = [];
 
     constructor(private formBuilder: FormBuilder) {
     }
