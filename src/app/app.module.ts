@@ -33,7 +33,7 @@ import {AppComponent} from './app.component';
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         IonicSelectableModule,
         IonicModule.forRoot({animated: false}),
         IonicStorageModule.forRoot(),
