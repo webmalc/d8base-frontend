@@ -5,16 +5,12 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class PasswordRecoveryService {
 
-    private readonly PASSWORD_RECOVERY_URL = environment.backend.password_recovery;
+    private readonly SEND_RESET_PASSWORD_LINK_URL = environment.backend.reset_password_link;
 
     constructor(protected client: ApiClientService) {
     }
 
     public recover(email: object): any {
-        this.client.post(this.PASSWORD_RECOVERY_URL, email).subscribe(
-            // result => {
-            //
-            // }
-        );
+        this.client.post(this.SEND_RESET_PASSWORD_LINK_URL, email).subscribe();
     }
 }

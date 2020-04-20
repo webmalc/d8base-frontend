@@ -14,6 +14,10 @@ const routes: Routes = [
     {
         path: 'password-recover',
         loadChildren: () => import('src/app/auth/pages/password-recover/password-recover.module').then( m => m.PasswordRecoverPageModule)
+    },
+    {
+        path: 'reset-password',
+        loadChildren: () => import('src/app/auth/pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
     }
 ];
 
