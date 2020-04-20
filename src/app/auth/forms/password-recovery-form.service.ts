@@ -17,7 +17,7 @@ export class PasswordRecoveryFormService {
 
     public initForm(): void {
         this._form = this.builder.group({
-            [PasswordRecoveryFormFields.Email]: ['', Validators.compose([
+            [PasswordRecoveryFormFields.Login]: ['', Validators.compose([
                 Validators.required,
                 Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+' +
                     '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
