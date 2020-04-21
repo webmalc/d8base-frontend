@@ -32,7 +32,7 @@ export class TokenManagerService {
     public getRefreshToken(): Promise<string> {
         return new Promise(resolve => {
             this.getTokenData().then(
-                (tokenData: AuthResponseInterface) => resolve(tokenData.refresh_token)
+                (tokenData: AuthResponseInterface) => resolve(tokenData?.refresh_token)
             );
         });
     }
