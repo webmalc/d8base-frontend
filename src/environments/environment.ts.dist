@@ -13,6 +13,7 @@ export const environment = {
         master: '',
         reset_password_link: '',
         reset_password: '',
+        user_settings: '',
         plugin: '',
         refresh: '/api/auth/token/',
         register: '/ru/api/accounts/register/',

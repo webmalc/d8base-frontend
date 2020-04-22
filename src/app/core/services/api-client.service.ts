@@ -31,6 +31,10 @@ export class ApiClientService {
         return this.http.delete(this.getHost() + url, params);
     }
 
+    public options<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {
+        return this.http.options<T>(this.getHost() + url, params);
+    }
+
     private getHost(): string {
         return environment.backend.url;
     }

@@ -10,9 +10,11 @@ import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-t
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
+import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
 import {ContactFormService} from '@app/profile/forms/contact-form.service';
 import {EducationFormService} from '@app/profile/forms/education-form.service';
 import {PluginsFormService} from '@app/profile/forms/plugins-form.service';
+import {SettingsFormService} from '@app/profile/forms/settings-form.service';
 import {CertificateApiService} from '@app/profile/services/certificate-api.service';
 import {EducationApiService} from '@app/profile/services/education-api.service';
 import {PluginApiService} from '@app/profile/services/plugin-api.service';
@@ -38,7 +40,8 @@ import {ProfilePage} from './profile.page';
         MainInfoTabComponent,
         PluginsTabComponent,
         ContactTabComponent,
-        EducationTabComponent
+        EducationTabComponent,
+        SettingsTabComponent
     ],
     providers: [
         PluginApiService,
@@ -49,7 +52,8 @@ import {ProfilePage} from './profile.page';
         UserContactApiService,
         EducationFormService,
         EducationApiService,
-        CertificateApiService
+        CertificateApiService,
+        SettingsFormService
     ]
 })
 export class ProfilePageModule {
