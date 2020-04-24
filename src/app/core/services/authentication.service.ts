@@ -7,7 +7,7 @@ import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interfa
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable, of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {catchError, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 /**
@@ -52,7 +52,8 @@ export class AuthenticationService implements AuthenticatorInterface {
 
     public isAuthenticated(): Observable<boolean> {
         return from(this.tokenManager.isRefreshTokenExpired()).pipe(
-            switchMap((isExpired: boolean) => of(!isExpired))
+            switchMap((isExpired: boolean) => of(!isExpired)),
+            catchError(error => of(false))
         );
     }
 

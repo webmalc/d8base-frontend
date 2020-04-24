@@ -19,7 +19,7 @@ export class SettingsTabComponent implements OnInit {
     private defaultUserSettings: UserSettings;
 
     constructor(
-        private formService: SettingsFormService,
+        public formService: SettingsFormService,
         private userSettingsApi: UserSettingsApiService,
         private translation: TranslationService
     ) {

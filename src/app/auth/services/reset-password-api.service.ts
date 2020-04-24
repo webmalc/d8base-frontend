@@ -4,9 +4,7 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ResetPasswordApiService {
 
     private URL = environment.backend.reset_password;

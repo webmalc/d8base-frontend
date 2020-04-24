@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {UserSettings} from '@app/core/models/user-settings';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
@@ -23,21 +24,30 @@ export class TranslationService {
     constructor(
         private translator: TranslateService,
         private storageManager: StorageManagerService,
-        private userSettingsApi: UserSettingsApiService
+        private userSettingsApi: UserSettingsApiService,
+        private authenticationFactory: AuthenticationFactory
     ) {
     }
 
     public init(): void {
-        this.getFromApi().subscribe(
-            (lang: string) => {
-                if (lang) {
-                    this.translator.setDefaultLang(lang);
-                    this.setStorage(lang);
+        this.authenticationFactory.getAuthenticator().isAuthenticated().subscribe(
+            isAuthenticated => {
+                if (isAuthenticated) {
+                    this.getFromApi().subscribe(
+                        (lang: string) => {
+                            if (lang) {
+                                this.translator.setDefaultLang(lang);
+                                this.setStorage(lang);
+                            } else {
+                                this.initFromStorage();
+                            }
+                        },
+                        err => this.initFromStorage()
+                    );
                 } else {
                     this.initFromStorage();
                 }
-            },
-            err => this.initFromStorage()
+            }
         );
     }
 
