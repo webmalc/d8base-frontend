@@ -19,7 +19,7 @@ class ProfileServiceStub {
         phone: 'sadf',
         password: 'sdf',
         email: 'wer',
-        age: 11,
+        birthday: '11',
         gender: 'werwer',
         id: 1,
         languages: ['a', 'b'],

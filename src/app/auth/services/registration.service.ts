@@ -14,6 +14,7 @@ import {environment} from '../../../environments/environment';
 export class RegistrationService {
 
     private readonly REGISTER_URL = environment.backend.register;
+    private readonly SEND_VERITY_REGISTRATION = environment.backend.send_verify_registration;
 
     constructor(
         protected client: ApiClientService,
@@ -25,11 +26,11 @@ export class RegistrationService {
 
     public register(user: User, location: LocationModel): Observable<User> {
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
-            tap(
-                async (data: RegistrationResponseInterface) => await this.tokenManager.setTokens(data.token)
-            ),
             switchMap(
-                (newUser: User) => {
+                async (newUser: RegistrationResponseInterface) => {
+                    await this.tokenManager.setTokens(newUser.token);
+                    this.sendVerifyLink().subscribe();
+
                     return from(this.locationService.getMergedLocationData()).pipe(
                         switchMap(
                             (geoposition: LocationModel) => {
@@ -54,6 +55,10 @@ export class RegistrationService {
                 err => of(err)
             )
         );
+    }
+
+    private sendVerifyLink(): Observable<any> {
+        return this.client.post(this.SEND_VERITY_REGISTRATION);
     }
 }
 

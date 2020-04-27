@@ -1,4 +1,4 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable} from 'rxjs';
@@ -34,7 +34,7 @@ export class HeadersInterceptor implements HttpInterceptor {
                         headers = req.headers.append('Authorization', 'Basic ' +
                             btoa(`${environment.client_id}:${environment.client_secret}`))
                             .append('Content-Type', 'application/json');
-                    } else {
+                    } else if (token) {
                         headers = req.headers.append('Authorization', 'Bearer ' + token)
                             .append('Content-Type', 'application/json');
                     }
@@ -53,7 +53,9 @@ export class HeadersInterceptor implements HttpInterceptor {
     private getExcludedUrls(): string[] {
         return [
             environment.backend.url + environment.backend.countries,
-            environment.backend.url + environment.backend.cities
+            environment.backend.url + environment.backend.cities,
+            environment.backend.url + environment.backend.reset_password_link,
+            environment.backend.url + environment.backend.reset_password,
         ];
     }
 }

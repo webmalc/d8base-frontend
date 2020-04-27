@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {Platform} from '@ionic/angular';
@@ -11,7 +12,8 @@ export class AppInitService {
     constructor(
         private translationService: TranslationService,
         private platform: Platform,
-        private masterManager: MasterManagerService
+        private masterManager: MasterManagerService,
+        private errorHandler: GlobalErrorHandlerService
     ) {
     }
 
@@ -21,7 +23,7 @@ export class AppInitService {
                 this.translationService.init();
                 // this.masterManager.updateIsMaster();
                 resolve();
-            });
+            }).catch(error => this.errorHandler.handleError(error));
         });
     }
 }

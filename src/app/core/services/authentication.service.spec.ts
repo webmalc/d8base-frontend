@@ -1,7 +1,7 @@
 import {HttpHeaders, HttpParams} from '@angular/common/http';
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, flush, TestBed} from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {Credentials} from '../../auth/interfaces/credentials';
 import {StorageManagerService} from '../proxies/storage-manager.service';
@@ -28,12 +28,12 @@ describe('AuthenticationService', () => {
     }));
 
     it('should be created', () => {
-        const service: AuthenticationService = TestBed.get(AuthenticationService);
+        const service: AuthenticationService = TestBed.inject(AuthenticationService);
         expect(service).toBeTruthy();
     });
 
     it('test #login', (done) => {
-        const service: AuthenticationService = TestBed.get(AuthenticationService);
+        const service: AuthenticationService = TestBed.inject(AuthenticationService);
 
         const credentials: Credentials = {
             username: 'test_user',
@@ -43,7 +43,7 @@ describe('AuthenticationService', () => {
             _ => {
                 (service as any).tokenManager.getAccessToken().then(
                     token => {
-                        expect(token).toEqual('AccessToken');
+                        expect(token).toEqual('access_token');
                         done();
                     }
                 );
@@ -52,11 +52,15 @@ describe('AuthenticationService', () => {
     });
 
     it('test #isAuthenticated', (done) => {
-        const service: AuthenticationService = TestBed.get(AuthenticationService);
+        const service: AuthenticationService = TestBed.inject(AuthenticationService);
 
-        (service as any).tokenManager.setAccessToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIj' +
-            'oxNTc5ODY4Mjk0LCJqdGkiOiI0MjBmNGQwMmE1OTQ0YmE1YTY0NTNjZmIwZDAxNWM3NiIsInVzZXJfaWQiOjN9.4uxWZj6kRHeqi_' +
-            'xv1fGac58a3xrQCtdK7mhnSDYHnqE')
+        (service as any).tokenManager.setTokens({
+            access_token: 'access_token',
+            expires_in: 3600,
+            token_type: 'Baerer',
+            scope: 'read write groups',
+            refresh_token: 'refresh_token'
+        })
             .then(
                 _ => {
                     service.isAuthenticated().subscribe(
@@ -69,17 +73,41 @@ describe('AuthenticationService', () => {
             );
     });
 
-    it('test #logout', (done) => {
-        const service: AuthenticationService = TestBed.get(AuthenticationService);
+    it('test #refresh', fakeAsync(() => {
+        const service: AuthenticationService = TestBed.inject(AuthenticationService);
 
-        (service as any).tokenManager.setTokens({access: 'access', refresh: 'refresh'})
+        service.refresh().subscribe();
+        flush();
+
+        (service as any).tokenManager.getAccessToken().then(
+            token => {
+                expect(token).toEqual('refreshedAccessToken');
+            }
+        );
+        (service as any).tokenManager.getRefreshToken().then(
+            token => {
+                expect(token).toEqual('refreshedRefreshToken');
+            }
+        );
+    }));
+
+    it('test #logout', (done) => {
+        const service: AuthenticationService = TestBed.inject(AuthenticationService);
+
+        (service as any).tokenManager.setTokens({
+            access_token: 'access_token',
+            expires_in: 3600,
+            token_type: 'Baerer',
+            scope: 'read write groups',
+            refresh_token: 'refresh_token'
+        })
             .then(
                 _ => {
                     service.logout().then(
                         () => {
                             (service as any).tokenManager.getAccessToken().then(
                                 token => {
-                                    expect(token).toBeNull();
+                                    expect(token).toBeUndefined();
                                     done();
                                 }
                             );
@@ -88,28 +116,6 @@ describe('AuthenticationService', () => {
                 }
             );
     });
-
-    it('test #refresh', (done) => {
-        const service: AuthenticationService = TestBed.get(AuthenticationService);
-
-        service.refresh().subscribe(
-            _ => {
-                (service as any).tokenManager.getAccessToken().then(
-                    token => {
-                        expect(token).toEqual('refreshedAccessToken');
-                        done();
-                    }
-                );
-                (service as any).tokenManager.getRefreshToken().then(
-                    token => {
-                        expect(token).toEqual('refreshedRefreshToken');
-                        done();
-                    }
-                );
-            }
-        );
-    });
-
 });
 
 
@@ -126,16 +132,22 @@ export class HttpMock {
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<AuthResponseInterface> {
-        if (body.hasOwnProperty('refresh')) {
-            return new Observable<AuthResponseInterface>(subscriber => {
-                subscriber.next({access: 'refreshedAccessToken', refresh: 'refreshedRefreshToken'});
-                subscriber.complete();
+        if (body.hasOwnProperty('refresh_token')) {
+            return of({
+                access_token: 'refreshedAccessToken',
+                expires_in: 3600,
+                token_type: 'Baerer',
+                scope: 'read write groups',
+                refresh_token: 'refreshedRefreshToken'
             });
         }
 
-        return new Observable<AuthResponseInterface>(subscriber => {
-            subscriber.next({access: 'AccessToken', refresh: 'RefreshToken'});
-            subscriber.complete();
+        return of({
+            access_token: 'access_token',
+            expires_in: 3600,
+            token_type: 'Baerer',
+            scope: 'read write groups',
+            refresh_token: 'refresh_token'
         });
     }
 }

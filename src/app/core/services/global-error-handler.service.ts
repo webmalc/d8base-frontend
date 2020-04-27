@@ -12,8 +12,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     }
 
     public handleError(error: any): void {
-
-        if (error instanceof HttpErrorResponse && 401 === error.status) {
+        if (error instanceof HttpErrorResponse && (401 === error.status || 'invalid_grant' === error.message)) {
             this.showMessage('authentication expired');
             this.router.navigateByUrl('/auth/login');
 

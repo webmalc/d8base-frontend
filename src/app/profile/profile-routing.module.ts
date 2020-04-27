@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
-import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
-import {ProfilePage} from './profile.page';
+import {MasterGuard} from '@app/core/guards/master.guard';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
-import {MasterGuard} from '@app/core/guards/master.guard';
+import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
+import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
+import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
+import {ProfilePage} from './profile.page';
 
 const routes: Routes = [
     {
@@ -32,6 +33,10 @@ const routes: Routes = [
                 path: 'education',
                 component: EducationTabComponent,
                 canActivate: [MasterGuard]
+            },
+            {
+                path: 'settings',
+                component: SettingsTabComponent
             }
         ]
     },

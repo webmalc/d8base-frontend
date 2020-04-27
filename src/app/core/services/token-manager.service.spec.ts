@@ -1,4 +1,4 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, flush, TestBed, tick} from '@angular/core/testing';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
@@ -6,6 +6,14 @@ import {StorageManagerService} from '../proxies/storage-manager.service';
 import {TokenManagerService} from './token-manager.service';
 
 describe('TokenManagerService', () => {
+
+    const tokenData: AuthResponseInterface = {
+        access_token: 'access_token',
+        expires_in: 5,
+        token_type: 'Baerer',
+        scope: 'read write groups',
+        refresh_token: 'refresh_token'
+    };
 
     beforeEach(() => {
         TestBed.resetTestEnvironment();
@@ -20,27 +28,18 @@ describe('TokenManagerService', () => {
     }));
 
     it('should be created', () => {
-        const service: TokenManagerService = TestBed.get(TokenManagerService);
+        const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         expect(service).toBeTruthy();
     });
 
     it('test #setTokens', (done) => {
-        const service: TokenManagerService = TestBed.get(TokenManagerService);
+        const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
-        const data: AuthResponseInterface = {
-            access: 'test-access',
-            refresh: 'test-refresh'
-        };
-
-        service.setTokens(data).then(
+        service.setTokens(tokenData).then(
             _ => {
-                (service as any).storage.get('api_token').then(token => {
-                    expect(token).toEqual('test-access');
-                    done();
-                });
-                (service as any).storage.get('refresh_token').then(token => {
-                    expect(token).toEqual('test-refresh');
+                (service as any).storage.get('api_token_data').then(token => {
+                    expect(token).toEqual(tokenData);
                     done();
                 });
             }
@@ -48,13 +47,13 @@ describe('TokenManagerService', () => {
     });
 
     it('test #getAccessToken',  (done) => {
-        const service: TokenManagerService = TestBed.get(TokenManagerService);
+        const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
-        (service as any).setAccessToken('test').then(
+        service.setTokens(tokenData).then(
             _ => {
                 service.getAccessToken().then(
                     token => {
-                        expect(token).toEqual('test');
+                        expect(token).toEqual('access_token');
                         done();
                     }
                 );
@@ -63,13 +62,13 @@ describe('TokenManagerService', () => {
     });
 
     it('test #getRefreshToken',  (done) => {
-        const service: TokenManagerService = TestBed.get(TokenManagerService);
+        const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
-        (service as any).setRefreshToken('test').then(
+        service.setTokens(tokenData).then(
             _ => {
                 service.getRefreshToken().then(
                     token => {
-                        expect(token).toEqual('test');
+                        expect(token).toEqual('refresh_token');
                         done();
                     }
                 );
@@ -78,26 +77,21 @@ describe('TokenManagerService', () => {
     });
 
     it('test #clear',  (done) => {
-        const service: TokenManagerService = TestBed.get(TokenManagerService);
+        const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
-        const data: AuthResponseInterface = {
-            access: 'test-access',
-            refresh: 'test-refresh'
-        };
-
-        service.setTokens(data).then(
+        service.setTokens(tokenData).then(
             _ => {
                 service.clear().then(
                     () => {
                         service.getAccessToken().then(
                             token => {
-                                expect(token).toEqual(null);
+                                expect(token).toBeUndefined();
                                 done();
                             }
                         );
                         service.getRefreshToken().then(
                             token => {
-                                expect(token).toEqual(null);
+                                expect(token).toBeUndefined();
                                 done();
                             }
                         );
@@ -107,23 +101,20 @@ describe('TokenManagerService', () => {
         );
     });
 
-    it('test #isAccessTokenExpired',  (done) => {
-        const service: TokenManagerService = TestBed.get(TokenManagerService);
+    it('test #isAccessTokenExpired', fakeAsync(() => {
+        const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
-        (service as any).setAccessToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIj' +
-            'oxNTc5ODY4Mjk0LCJqdGkiOiI0MjBmNGQwMmE1OTQ0YmE1YTY0NTNjZmIwZDAxNWM3NiIsInVzZXJfaWQiOjN9.4uxWZj6kRHeqi_' +
-            'xv1fGac58a3xrQCtdK7mhnSDYHnqE'
-        ).then(
+        service.setTokens(tokenData).then(
             _ => {
+                tick(6000);
                 service.isAccessTokenExpired().then(
                     bool => {
                         expect(bool).toBeTruthy();
-                        done();
                     }
                 );
             }
         );
-    });
+    }));
 
 });
 
