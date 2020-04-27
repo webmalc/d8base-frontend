@@ -20,7 +20,8 @@ export const environment = {
         user: '/api/accounts/profile/',
         user_contact: '/api/accounts/contacts/',
         user_plugin: '',
-        send_verify_registration: '',
+        send_verify_registration: '/ru/api/accounts/resend-verify-registration/',
+        verify_registration: '/ru/api/accounts/verify-registration/'
         url: 'http://localhost:8000'
     },
     client_id: '',

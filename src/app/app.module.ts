@@ -41,7 +41,8 @@ import {AppComponent} from './app.component';
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        LeafletModule.forRoot(),
+        // Temporary disable because SSR
+        // LeafletModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

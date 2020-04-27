@@ -1,14 +1,17 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {ErrorHandler, Injectable} from '@angular/core';
+import {ErrorHandler, Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Router} from '@angular/router';
-import {ToastController} from '@ionic/angular';
+import {Platform, ToastController} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GlobalErrorHandlerService implements ErrorHandler {
 
-    constructor(public toaster: ToastController, private router: Router) {
+    constructor(public toaster: ToastController,
+                private router: Router,
+                @Inject(PLATFORM_ID)private platformId: object
+    ) {
     }
 
     public handleError(error: any): void {
@@ -26,12 +29,16 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         }
 
         this.showMessage('unexpected error');
-        throw error;
+        // throw error;
     }
 
     private showMessage(message: string, duration: number = 3000): void {
-        this.toaster.create({message, duration}).then(
-            toast => toast.present()
-        );
+        if (this.platformId.toString() === 'server') {
+            console.log(message);
+        } else {
+            this.toaster.create({message, duration}).then(
+                toast => toast.present()
+            );
+        }
     }
 }
