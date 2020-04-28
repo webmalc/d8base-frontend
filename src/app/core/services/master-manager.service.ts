@@ -1,12 +1,13 @@
-import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
+import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {plainToClass} from 'class-transformer';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -15,7 +16,6 @@ import {environment} from '../../../environments/environment';
 export class MasterManagerService {
 
     public isMaster$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    private master: Master;
     private readonly url = environment.backend.master;
 
     constructor(private client: ApiClientService, private userManager: UserManagerService) {
@@ -24,36 +24,40 @@ export class MasterManagerService {
     public updateIsMaster(): void {
         this.userManager.getCurrentUser().subscribe(
             (user: User) => {
-                this.client.get(`${this.url}/${user.id}`).subscribe(
-                    (master: Master) => this.isMaster$.next(true),
-                    (error: HttpErrorResponse) => {
-                        if (404 === error.status) {
-                            this.isMaster$.next(false);
-                        }
-
-                        return of(false);
-                    }
-                );
+                if (TypeOfUser.Master === user.account_type) {
+                    return this.isMaster$.next(true);
+                }
+                this.isMaster$.next(false);
             }
         );
     }
 
-    public getCurrentMaster(): Observable<Master | null> {
-        if (this.master) {
-            return of(this.master);
-        }
-
-        return this.userManager.getCurrentUser().pipe(
-            switchMap((user: User) => {
-                return this.getMaster(user.id).pipe(
-                    tap((master: Master) => this.master = master)
-                );
-            })
+    public becomeMaster(): Observable<User> {
+        return this.userManager.becomeMaster().pipe(
+            tap(_ => this.updateIsMaster())
         );
     }
 
-    public getMaster(userId: number): Observable<Master> {
-        return this.client.get(`${this.url}/${userId}`).pipe(
+    public getMasterList(): Observable<Master[]> {
+        return this.client.get(this.url).pipe(
+            map((data: ApiListResponseInterface<Master>) => data.results)
+        );
+    }
+
+    public updateMaster(master: Master): Observable<Master> {
+        return this.client.put(`${this.url}${master.id}/`, master).pipe(
+            map(raw => plainToClass(Master, raw))
+        );
+    }
+
+    public saveMaster(master: Master): Observable<Master> {
+        return this.client.post(this.url, master).pipe(
+            map(raw => plainToClass(Master, raw))
+        );
+    }
+
+    public getMaster(masterId?: number): Observable<Master> {
+        return this.client.get(this.url + masterId).pipe(
             map(raw => plainToClass(Master, raw))
         );
     }

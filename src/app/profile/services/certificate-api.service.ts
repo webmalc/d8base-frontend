@@ -23,8 +23,8 @@ export class CertificateApiService {
     }
 
     public getCurrentMasterCertifications(): Observable<EducationCertificate[]> {
-        return this.masterManager.getCurrentMaster().pipe(
-            switchMap((master: Master) => this.get(master.id))
+        return this.masterManager.getMasterList().pipe(
+            switchMap((master: Master[]) => this.get(master[0].id))
         );
     }
 

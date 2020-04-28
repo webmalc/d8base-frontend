@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
+import {MasterManagerService} from '@app/core/services/master-manager.service';
 
 @Component({
     selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
 
     constructor(
         private authFactory: AuthenticationFactory,
-        private router: Router
+        private router: Router,
+        private masterManager: MasterManagerService
     ) {
     }
 
@@ -25,7 +27,7 @@ export class LoginPage implements OnInit {
     public onSubmitLoginForm(user: Credentials): void {
         this.authFactory.getAuthenticator().login(user).subscribe(
             _ => {
-                console.log('successfully authenticated');
+                this.masterManager.updateIsMaster();
 
                 return this.router.navigateByUrl('/profile');
             },

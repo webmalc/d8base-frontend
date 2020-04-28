@@ -15,5 +15,5 @@ export class User implements UserInterface {
     @Expose() public birthday?: string;
     @Expose() public main_language: string;
     @Expose() public languages?: string[];
-    @Expose() public type_of_user: string;
+    @Expose() public account_type: string;
 }

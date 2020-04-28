@@ -2,7 +2,9 @@
   "template": {
     "sign-in": "Sign-in",
     "sign-up": "Sign-up",
-    "profile": "Profile"
+    "profile": "Profile",
+    "master-profile": "Professional profile",
+    "logout": "Logout"
   },
   "login-form": {
     "login": "Login",

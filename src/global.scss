@@ -40,4 +40,10 @@
     display: none;
     z-index: -1;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .not-clickable {
+    pointer-events: none;
+  }
 }

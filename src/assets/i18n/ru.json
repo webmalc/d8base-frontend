@@ -2,7 +2,9 @@
   "template": {
     "sign-in": "Войти",
     "sign-up": "Зарегистрироваться",
-    "profile": "Профиль"
+    "profile": "Профиль",
+    "master-profile": "Профиль мастера",
+    "logout": "Выйти"
   },
   "login-form": {
     "login": "Логин",

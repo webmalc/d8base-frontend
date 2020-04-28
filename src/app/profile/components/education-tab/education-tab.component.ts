@@ -42,13 +42,13 @@ export class EducationTabComponent implements OnInit {
             { excludeExtraneousValues: true }
             );
 
-        this.masterManager.getCurrentMaster().subscribe(
-            (master: Master) => {
-                education.master_id = master.id;
+        this.masterManager.getMasterList().subscribe(
+            (master: Master[]) => {
+                education.master_id = master[0].id;
                 this.educationApiService.save(education).subscribe(
                     response => {
                         certificates.forEach(
-                            (cert: EducationCertificate) => cert.master_id = master.id
+                            (cert: EducationCertificate) => cert.master_id = master[0].id
                         );
                         this.certificateApiService.save(certificates).subscribe(
                             resp => console.log('saved')

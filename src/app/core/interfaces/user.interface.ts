@@ -11,5 +11,5 @@ export interface UserInterface {
     birthday?: string;
     main_language: string;
     languages?: string[];
-    type_of_user: string;
+    account_type: string;
 }

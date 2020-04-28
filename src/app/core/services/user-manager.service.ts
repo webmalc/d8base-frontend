@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
@@ -27,8 +28,16 @@ export class UserManagerService {
         );
     }
 
-    public updateUser(user: User): Observable<User> {
-        return this.api.patch<User>(this.url, user);
+    public updateUser(user: Partial<User>): Observable<User> {
+        return this.api.patch<User>(this.url, user).pipe(
+            map(raw => plainToClass(User, raw))
+        );
+    }
+
+    public becomeMaster(): Observable<User> {
+        return this.updateUser({account_type: TypeOfUser.Master}).pipe(
+            tap(user => this.user = user)
+        );
     }
 
     private getUser(): Observable<User> {
