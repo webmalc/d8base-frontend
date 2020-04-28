@@ -33,7 +33,7 @@ import {AppComponent} from './app.component';
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         IonicSelectableModule,
         IonicModule.forRoot({animated: false}),
         IonicStorageModule.forRoot(),
@@ -41,7 +41,8 @@ import {AppComponent} from './app.component';
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        LeafletModule.forRoot(),
+        // Temporary disable because SSR
+        // LeafletModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
