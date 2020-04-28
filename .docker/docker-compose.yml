@@ -10,5 +10,15 @@ services:
     networks:
       - d8b-network
 
+  ssr:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+      target: ssr
+    ports:
+      - "8383:4000"
+    networks:
+      - d8b-network
+
 networks:
   d8b-network:
