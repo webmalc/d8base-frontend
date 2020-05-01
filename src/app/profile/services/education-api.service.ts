@@ -17,8 +17,8 @@ export class EducationApiService {
     }
 
     public getCurrentMasterEducation(): Observable<Education> {
-        return this.masterManager.getCurrentMaster().pipe(
-            switchMap((master: Master) => this.get(master.id))
+        return this.masterManager.getMasterList().pipe(
+            switchMap((master: Master[]) => this.get(master[0].id))
         );
     }
 
@@ -29,7 +29,7 @@ export class EducationApiService {
     }
 
     public save(education: Education): Observable<Education> {
-        return this.client.post(this.url).pipe(
+        return this.client.post(this.url, education).pipe(
             map(raw => plainToClass(Education, raw))
         );
     }

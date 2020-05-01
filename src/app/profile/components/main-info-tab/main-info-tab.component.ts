@@ -2,6 +2,7 @@ import {Component, OnInit, SecurityContext} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {User} from '@app/core/models/user';
+import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Language} from '@app/profile/models/language';
 import {ProfileService} from '@app/profile/services/profile.service';
@@ -22,7 +23,8 @@ export class MainInfoTabComponent implements OnInit {
 
     constructor(
         private profileService: ProfileService,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        public masterManager: MasterManagerService
     ) {
     }
 
@@ -72,5 +74,9 @@ export class MainInfoTabComponent implements OnInit {
 
     public isSubmitDisabled(): boolean {
         return !(this.form.dirty && this.form.valid);
+    }
+
+    public becomeMaster(): void {
+        this.masterManager.becomeMaster().subscribe();
     }
 }

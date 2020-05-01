@@ -13,8 +13,6 @@ import {AppServerModule} from './src/main.server';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
     const server = express();
-    // const distFolder = join(process.cwd(), 'www');
-    // ???
     const distFolder = join(process.cwd(), 'www');
     const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
@@ -38,7 +36,6 @@ export function app() {
         res.render(indexHtml, {
             req, providers: [
                 {provide: APP_BASE_HREF, useValue: req.baseUrl},
-                // ???
                 {provide: REQUEST, useValue: req},
                 {provide: RESPONSE, useValue: res}
             ]

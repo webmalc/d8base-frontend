@@ -1,0 +1,114 @@
+<ion-content>
+
+    <form
+            *ngIf="formService.form"
+            [formGroup]="formService.form" (ngSubmit)="submitForm()">
+
+        <ion-grid>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label class="label-for-required-input" color="medium"
+                                   position="floating">name
+                        </ion-label>
+                        <ion-input type="text" name="first_name"
+                                   formControlName="{{formFields.Name}}"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label color="medium"
+                                   position="floating">description
+                        </ion-label>
+                        <ion-input type="text" name="first_name"
+                                   formControlName="{{formFields.Description}}"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label color="medium"
+                                   position="floating">company
+                        </ion-label>
+                        <ion-input type="text" name="first_name"
+                                   formControlName="{{formFields.Company}}"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label color="medium"
+                                   position="floating">experience
+                        </ion-label>
+                        <ion-input type="text" name="first_name"
+                                   formControlName="{{formFields.Experience}}"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label color="medium"
+                                   position="floating">level
+                        </ion-label>
+                        <ion-select
+                                interface="popover"
+                                [formControlName]="formFields.Level"
+                        >
+                            <ion-select-option *ngFor="let level of formService.levelOptions" value="{{level}}">
+                                {{level}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label class="label-for-required-input" color="medium"
+                                   position="floating">subcategory
+                        </ion-label>
+                        <ion-select
+                                interface="popover"
+                                [formControlName]="formFields.Subcategory"
+                        >
+                            <ion-select-option *ngFor="let subcategory of subcategoriesList$ | async"
+                                               value="{{subcategory.id}}">
+                                {{ subcategory.name | titlecase}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-item>
+                        <ion-label color="medium">IsAutoOrderConfirmation</ion-label>
+                        <ion-toggle [formControlName]="formFields.IsAutoOrderConfirmation"></ion-toggle>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <ion-button type="submit" expand="block"
+                                [disabled]="formService.isSubmitDisabled()">save
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </form>
+
+</ion-content>

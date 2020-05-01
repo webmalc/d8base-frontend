@@ -21,7 +21,7 @@ export class AppInitService {
         return new Promise<any>(resolve => {
             this.platform.ready().then(() => {
                 this.translationService.init();
-                // this.masterManager.updateIsMaster();
+                this.masterManager.updateIsMaster();
                 resolve();
             }).catch(error => this.errorHandler.handleError(error));
         });

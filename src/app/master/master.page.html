@@ -1,0 +1,28 @@
+<ion-content>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <ion-card class="cursor-pointer" *ngFor="let master of masterList$|async" [attr.masterId]="master.id"
+                      (click)="onMasterClick($event)">
+                <ion-card-header class="not-clickable">
+                    Professional summary
+                </ion-card-header>
+                <ion-card-content class="not-clickable">
+                    <ion-item>
+                        {{master.name}}
+                    </ion-item>
+                    <ion-item>
+                        {{master.description}}
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <ion-button [routerLink]="['/professional/edit']" expand="block">add professional summary</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

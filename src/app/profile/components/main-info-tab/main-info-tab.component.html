@@ -7,8 +7,14 @@
       <ion-label>{{'profile-form.group.main' | translate}}</ion-label>
     </ion-item-divider>
 
-
     <ion-grid>
+
+      <ion-row class="ion-justify-content-center" *ngIf="!(masterManager.isMaster$ | async)">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-button (click)="becomeMaster()" expand="block" >become a master</ion-button>
+        </ion-col>
+      </ion-row>
+
       <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
           <ion-item>

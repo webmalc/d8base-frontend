@@ -25,8 +25,8 @@ class ProfileServiceStub {
         languages: ['a', 'b'],
         main_language: 'sdf',
         patronymic: 'sdf',
-        type_of_user: 'sdf',
         avatar: 'noavatar',
+        account_type: 'asdf'
 
     };
 

@@ -8,6 +8,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "testnb": "ng test --browsers='ChromeHeadless'",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "doc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s -r 9099",
