@@ -5,7 +5,7 @@ import { GlobalErrorHandlerService } from './global-error-handler.service';
 describe('GlobalErrorHandlerService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  xit('should be created', () => {
     const service: GlobalErrorHandlerService = TestBed.get(GlobalErrorHandlerService);
     expect(service).toBeTruthy();
   });

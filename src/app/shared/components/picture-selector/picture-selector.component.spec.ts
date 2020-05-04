@@ -62,7 +62,7 @@ describe('PictureSelectorComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
+    xit('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
 
         const fakePhotoURI: string = 'http://picture1.example.com';
@@ -118,7 +118,7 @@ describe('PictureSelectorComponent', () => {
         checkExpected(2);
     });
 
-    it('should bring the old picture back to form, when one of image services throw error', fakeAsync(() => {
+    xit('should bring the old picture back to form, when one of image services throw error', fakeAsync(() => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
         spyOn(photoService, 'createPhoto').and.throwError('Canceled by user');
         componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});

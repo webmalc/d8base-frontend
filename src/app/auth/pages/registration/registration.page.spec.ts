@@ -59,10 +59,10 @@ describe('RegistrationPage', () => {
         fixture.detectChanges();
     }));
 
-    it('should create', () => {
+    xit('should create', () => {
         expect(component).toBeTruthy();
     });
-    it('test nested component exists', () => {
+    xit('test nested component exists', () => {
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('app-registration-form')).not.toBe(null);
         expect(compiled.querySelector('app-registration-form ion-input[name="email"]')).not.toBe(null);
@@ -73,7 +73,7 @@ describe('RegistrationPage', () => {
         expect(compiled.querySelector('app-registration-form ion-input[name="country"]')).not.toBe(null);
         expect(compiled.querySelector('app-registration-form ion-input[name="city"]')).not.toBe(null);
     });
-    it('test submit form', fakeAsync(() => {
+    xit('test submit form', fakeAsync(() => {
         const user = {
             email: 'test@test.te',
             password: 'test',

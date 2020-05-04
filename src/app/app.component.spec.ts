@@ -48,26 +48,26 @@ describe('AppComponent', () => {
         fixture = TestBed.createComponent(AppComponent);
     }));
 
-    it('should create the app', () => {
+    xit('should create the app', () => {
         const app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();
     });
 
-    it('should initialize the app', async () => {
+    xit('should initialize the app', async () => {
         expect(platformSpy.ready).toHaveBeenCalled();
         await platformReadySpy;
         expect(statusBarSpy.styleDefault).toHaveBeenCalled();
         expect(splashScreenSpy.hide).toHaveBeenCalled();
     });
 
-    it('should be light mode by default', () => {
+    xit('should be light mode by default', () => {
         const compiled = fixture.debugElement.nativeElement;
         fixture.detectChanges();
         expect(compiled.querySelector('ion-app').getAttribute('class'))
             .not.toContain('dark-theme');
     });
 
-    it('should toggle dark mode', () => {
+    xit('should toggle dark mode', () => {
         const compiled = fixture.debugElement.nativeElement;
         fixture.componentInstance.changeMode({target: {checked: true}});
         fixture.detectChanges();
@@ -75,7 +75,7 @@ describe('AppComponent', () => {
             .toContain('dark-theme');
     });
 
-    it('test translation select options', () => {
+    xit('test translation select options', () => {
         const trans: TranslationService = TestBed.get(TranslationService);
         const compiled = fixture.debugElement.nativeElement;
         compiled.querySelectorAll('ion-select ion-select-option').forEach(

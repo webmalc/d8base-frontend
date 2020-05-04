@@ -4,14 +4,14 @@ import {FileSaverService} from './file-saver-abstract.service';
 import {serviceSettings} from '../../../../environments/environment';
 import {image} from './test-image';
 
-describe('FileSaverService', () => {
+describe('FileSaverAWSService', () => {
     let service: AwsFileSaverService;
 
     beforeEach(() => {
         service = new AwsFileSaverService();
     });
 
-    it('should save file  to aws bucket with save method', async (done) => {
+    xit('should save file  to aws bucket with save method', async (done) => {
         const response = await fetch(image);
         const blob = await response.blob();
         const file = new File([blob], 'test.jpg', {type: 'image/jpeg'});
