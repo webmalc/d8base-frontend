@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 
 @Component({

@@ -8,17 +8,19 @@ import {EditMasterFormService} from '@app/master/forms/edit-master-form.service'
 import {Subcategory} from '@app/master/models/subcategory';
 import {SubcategoriesApiService} from '@app/master/services/subcategories-api.service';
 import {plainToClass} from 'class-transformer';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-edit-master',
-    templateUrl: './edit-master.page.html',
-    styleUrls: ['./edit-master.page.scss'],
+    templateUrl: './edit-master.component.html',
+    styleUrls: ['./edit-master.component.scss'],
 })
-export class EditMasterPage implements OnInit {
+export class EditMasterComponent implements OnInit {
 
     public formFields = EditMasterFormFields;
     public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
+    private masterId: number;
 
     constructor(
         public formService: EditMasterFormService,
@@ -27,21 +29,25 @@ export class EditMasterPage implements OnInit {
         private subcategoriesApi: SubcategoriesApiService
     ) { }
 
-    public ngOnInit(): void { // TODO: cannot set default subcategory value
-        this.initSubcategoriesList();
-        if (this.route.snapshot.paramMap.get('id')) {
-            this.masterManager.getMaster(parseInt(this.route.snapshot.paramMap.get('id'), 10)).subscribe(
-                (master: Master) => this.formService.createForm(master)
-            );
-        } else {
-            this.formService.createForm();
-        }
+    public ngOnInit(): void {
+        this.masterId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+        this.initSubcategoriesList().subscribe(
+            _ => {
+                if (this.masterId) {
+                    this.masterManager.getMaster(this.masterId).subscribe(
+                        (master: Master) => this.formService.createForm(master)
+                    );
+                } else {
+                    this.formService.createForm();
+                }
+            }
+        );
     }
 
     public submitForm(): void {
-        if (this.route.snapshot.paramMap.get('id')) {
+        if (this.masterId) {
             const master: Master = plainToClass(Master, this.formService.form.getRawValue());
-            master.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+            master.id = this.masterId;
             this.masterManager.updateMaster(master).subscribe(
                 (updatedMaster: Master) => console.log(updatedMaster)
             );
@@ -52,9 +58,9 @@ export class EditMasterPage implements OnInit {
         }
     }
 
-    public initSubcategoriesList(): void {
-        this.subcategoriesApi.getList().subscribe(
-            (data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)
+    public initSubcategoriesList(): Observable<any> {
+        return this.subcategoriesApi.getList().pipe(
+            tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results))
         );
     }
 }

@@ -21,7 +21,9 @@ export const environment = {
         user_contact: '/api/accounts/contacts/',
         user_plugin: '',
         send_verify_registration: '/ru/api/accounts/resend-verify-registration/',
-        verify_registration: '/ru/api/accounts/verify-registration/'
+        verify_registration: '/ru/api/accounts/verify-registration/',
+        professional_tags: '/ru/api/accounts/professional-tags/',
+        professional_tags_list: '/ru/api/professionals/tags/'
         url: 'http://localhost:8000'
     },
     client_id: '',

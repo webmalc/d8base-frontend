@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { MasterPage } from './master.page';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
+import {MasterPage} from './master.page';
 
 const routes: Routes = [
     {
@@ -8,13 +9,12 @@ const routes: Routes = [
         component: MasterPage,
     },
     {
-        path: 'edit',
-        loadChildren: () => import('src/app/master/pages/edit-master/edit-master.module').then( m => m.EditMasterPageModule),
+        path: 'add',
+        component: EditMasterComponent
     },
     {
         path: 'edit/:id',
-        loadChildren: () => import('src/app/master/pages/edit-master/edit-master.module').then( m => m.EditMasterPageModule),
-        pathMatch: 'full'
+        loadChildren: () => import('./pages/master-tabs/master-tabs.module').then(m => m.MasterTabsPageModule)
     }
 ];
 
@@ -22,4 +22,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class MasterPageRoutingModule {}
+export class MasterPageRoutingModule {
+}

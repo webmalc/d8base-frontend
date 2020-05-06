@@ -83,8 +83,8 @@
                                 [formControlName]="formFields.Subcategory"
                         >
                             <ion-select-option *ngFor="let subcategory of subcategoriesList$ | async"
-                                               value="{{subcategory.id}}">
-                                {{ subcategory.name | titlecase}}
+                                               [value]="subcategory.id">
+                                {{subcategory.name}}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
