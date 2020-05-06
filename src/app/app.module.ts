@@ -75,10 +75,10 @@ import {AppComponent} from './app.component';
             useClass: HeadersInterceptor,
             multi: true
         },
-        {
-            provide: ErrorHandler,
-            useClass: GlobalErrorHandlerService
-        },
+        // {
+        //     provide: ErrorHandler,
+        //     useClass: GlobalErrorHandlerService
+        // },
         Geolocation,
         GeolocationService,
         LocationService,

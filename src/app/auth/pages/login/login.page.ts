@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
                 if (401 === error.status) {
                     this.errorMessage = 'login-page.incorrect-login-data';
                 } else {
-                    console.log('something went wrong');
+                    console.log(error.error);
                 }
             }
         );

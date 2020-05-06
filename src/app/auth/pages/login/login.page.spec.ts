@@ -51,7 +51,7 @@ describe('LoginPage', () => {
         expect(compiled.querySelector('app-login-form ion-input[name="username"]')).not.toBe(null);
         expect(compiled.querySelector('app-login-form ion-input[name="password"]')).not.toBe(null);
     });
-    xit('test valid auth data submit', fakeAsync(() => {
+    it('test valid auth data submit', fakeAsync(() => {
         const user: Credentials = {username: 'valid', password: 'valid_pass'};
 
         component.onSubmitLoginForm(user);
@@ -70,7 +70,7 @@ describe('LoginPage', () => {
     }));
 });
 
-export class ApiClientServiceMock {
+class ApiClientServiceMock {
     public post(url: string, data: {username: string, password: string}): Observable<any> {
         if (data.username === 'valid' && data.password === 'valid_pass') {
             return of(true);
