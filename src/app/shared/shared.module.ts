@@ -19,7 +19,8 @@ import {DebounceDirective} from './directives/debounce.directive';
     exports: [
         ErrorFlashbagComponent,
         PictureSelectorComponent,
-        SelectInputComponent
+        SelectInputComponent,
+        DebounceDirective
     ],
     imports: [
         CommonModule,

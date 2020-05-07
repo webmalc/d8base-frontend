@@ -38,11 +38,14 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     }
 
     public addTag(): void {
+        const newOption: string = this.form.get('tagInput').value;
+        if (!newOption) {
+            return;
+        }
         this.tagsList$.pipe(
             first()
         ).subscribe(
             list => {
-                const newOption: string = this.form.get('tagInput').value;
                 this.form.get('tagInput').setValue('');
                 if (this.isNewOptionUnique(list, newOption)) {
                     list.push(newOption);
