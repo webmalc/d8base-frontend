@@ -29,6 +29,7 @@ export class MainInfoTabComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+
         this.profileService.getLanguages$().subscribe(
             languages => this.languages$.next(languages)
         );

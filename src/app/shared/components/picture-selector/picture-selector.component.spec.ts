@@ -1,5 +1,5 @@
 import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
-import {IonButtons, IonicModule} from '@ionic/angular';
+import {IonButtons, IonicModule, Platform} from '@ionic/angular';
 
 import {Component, DebugElement} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
@@ -40,9 +40,11 @@ describe('PictureSelectorComponent', () => {
         TestBed.configureTestingModule({
             declarations: [PictureSelectorComponent, AppTestFormControlComponent],
             imports: [IonicModule, ReactiveFormsModule],
-            providers: [{
-                provide: FileSaverService
-            }]
+            providers: [
+                {
+                    provide: FileSaverService
+                }
+            ]
         });
         wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
         wrapperComponent = wrapperFixture.componentInstance;
@@ -62,39 +64,41 @@ describe('PictureSelectorComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    xit('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
+    it('should trigger click and pass saved picture creaetd by createPhoto', fakeAsync(() => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
 
         const fakePhotoURI: string = 'http://picture1.example.com';
         spyOn(fileSaver, 'saveCameraPhoto').and.callFake((photo: CameraPhoto): Observable<string> => {
             expect(photo).toBeTruthy();
 
-            return of(fakePhotoURI);
-
+            return of(photo.webPath);
         });
         spyOn(photoService, 'createPhoto').and.returnValue(Promise.resolve<CameraPhoto>({
             webPath: fakePhotoURI,
             format: 'png'
         }));
 
+        componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
+        expect(wrapperComponent.form.get('avatar').value).toBe('');
+        tick();
+        expect(photoService.createPhoto).toHaveBeenCalled();
+        expect(fileSaver.saveCameraPhoto).toHaveBeenCalled();
+        expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
+    }));
+
+    it('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
         const fakeFileURI: string = 'http://picture2.example.com';
         spyOn(fileSaver, 'saveFileSystemFile').and.callFake((file: string): Observable<string> => {
             expect(file).toBeTruthy();
 
             return of<string>(fakeFileURI);
         });
-        componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
-        expect(wrapperComponent.form.get('avatar').value).toBe('');
-        tick();
-        expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
-        expect(photoService.createPhoto).toHaveBeenCalled();
-
         spyOn(fileService, 'getFile').and.returnValue(Promise.resolve(fakeFileURI));
         componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
         expect(wrapperComponent.form.get('avatar').value).toBe('');
         tick();
-        expect(wrapperComponent.form.get('avatar').value).toBe(fakeFileURI);
         expect(fileService.getFile).toHaveBeenCalled();
+        expect(wrapperComponent.form.get('avatar').value).toBe(fakeFileURI);
 
     }));
 
@@ -118,7 +122,7 @@ describe('PictureSelectorComponent', () => {
         checkExpected(2);
     });
 
-    xit('should bring the old picture back to form, when one of image services throw error', fakeAsync(() => {
+    it('should bring the old picture back to form, when one of image services throw error', fakeAsync(() => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
         spyOn(photoService, 'createPhoto').and.throwError('Canceled by user');
         componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
@@ -127,6 +131,5 @@ describe('PictureSelectorComponent', () => {
         componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
     }));
-
 
 });

@@ -28,6 +28,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {BrowserFileSelectorComponent} from '@app/shared/components/browser-file-selector/browser-file-selector.component';
 
 @NgModule({
     declarations: [AppComponent],

@@ -17,7 +17,7 @@ export class LanguagesApiService {
     constructor(private client: ApiClientService) {
     }
 
-    public getLanguages(): Observable<Language[]> {
+    public getLanguages$(): Observable<Language[]> {
         return this.client.get<ApiListResponseInterface<Language>>(this.url).pipe(
             map(
                 ({results}) => {

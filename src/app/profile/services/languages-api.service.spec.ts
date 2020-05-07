@@ -21,7 +21,7 @@ describe('LanguageApiService', () => {
             previous: null
         };
         apiClientServiceSpy.get.and.returnValue(of(data));
-        languagesApiService.getLanguages().subscribe(
+        languagesApiService.getLanguages$().subscribe(
             languages => {
                 expect(languages).toEqual([]);
             }
@@ -55,7 +55,7 @@ describe('LanguageApiService', () => {
             previous: null
         };
         apiClientServiceSpy.get.and.returnValue(of(data));
-        languagesApiService.getLanguages().subscribe(
+        languagesApiService.getLanguages$().subscribe(
             languages => {
                 expect(languages).toEqual([
                     language1,

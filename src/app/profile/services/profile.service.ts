@@ -15,6 +15,8 @@ export class ProfileService {
     private availableAddsLanguages: Language[];
     private availableAddsLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject<Language[]>([]);
 
+    private languages$: BehaviorSubject<Language[]>;
+
     private genderList: string[] = ['male', 'female'];
 
 
@@ -45,7 +47,11 @@ export class ProfileService {
     }
 
     public getLanguages$(): Observable<Language[]> {
-        return this.languagesApi.getLanguages();
+        if (this.languages$) {
+            return this.languages$;
+        }
+
+        return this.languagesApi.getLanguages$();
     }
 
     public getGenders(): string[] {
@@ -82,7 +88,7 @@ export class ProfileService {
     }
 
     private getAdditionalLanguages$(): Observable<Language[]> {
-        return this.languagesApi.getLanguages();
+        return this.languagesApi.getLanguages$();
     }
 
     private removeFromArray(value: string, array: string[]): string[] {

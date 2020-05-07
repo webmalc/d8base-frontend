@@ -108,4 +108,31 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         this.uri = uri;
         this.onChange(uri);
     }
+
+    // private getImageDesktopStyle(): void {
+    //     const browserFileSelectorFactory = this.resolver.resolveComponentFactory(BrowserFileSelectorComponent);
+    //     const component = browserFileSelectorFactory.create(this.injector);
+    //     this.refDirective.containerRef.clear();
+    //     const componentRef = this.refDirective.containerRef.createComponent(browserFileSelectorFactory);
+    //     // componentRef.instance.open();
+    //     this.fileSelectSubscription = component.instance.selected.subscribe(
+    //         data => this.setUri(data)
+    //     );
+    // }
+    //
+    // private async getImageCellPhoneStyle(): Promise<void> {
+    //     let oldUri: string;
+    //     try {
+    //         oldUri = this.uri;
+    //         this.clearUri();
+    //         // TODO: Use platform depended fileService
+    //         const file = await this.fileService.getFile();
+    //         this.fileSaver.saveFileSystemFile(file).subscribe(
+    //             (uri) => this.setUri(uri)
+    //         );
+    //     } catch (error) {
+    //         this.setUri(oldUri);
+    //     }
+    // }
+
 }
