@@ -67,7 +67,7 @@ export class RegistrationFormComponent implements OnInit {
             event.component,
             event.text,
             this.citiesApi,
-            {search: event.text, country: country.id.toString(10)}
+            {by_name: event.text, country: country.id.toString(10)}
             );
     }
 
@@ -78,8 +78,8 @@ export class RegistrationFormComponent implements OnInit {
     private abstractOnSearch(
         component: IonicSelectableComponent,
         text: string,
-        apiService: { getList: (params: { search: string, country?: string }) => Observable<ApiListResponseInterface<Country | City>> },
-        apiParams: { search: string, country?: string }
+        apiService: { getList: (params: { search?: string, country?: string, by_name?: string }) => Observable<ApiListResponseInterface<Country | City>> },
+        apiParams: { search?: string, country?: string, by_name?: string }
     ): void {
         component.startSearch();
 
