@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { EditMasterPage } from './edit-master.page';
+import { EditMasterComponent } from './edit-master.component';
 
-describe('EditMasterPage', () => {
-  let component: EditMasterPage;
-  let fixture: ComponentFixture<EditMasterPage>;
+describe('EditMasterComponent', () => {
+  let component: EditMasterComponent;
+  let fixture: ComponentFixture<EditMasterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditMasterPage ],
+      declarations: [ EditMasterComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditMasterPage);
+    fixture = TestBed.createComponent(EditMasterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

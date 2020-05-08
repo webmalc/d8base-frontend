@@ -87,5 +87,9 @@
       "add_certificate": "Add Certificate"
     },
     "save": "Save"
+  },
+  "master-page": {
+    "main": "Main settings",
+    "tags": "Professional tags"
   }
 }

@@ -29,7 +29,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         }
 
         this.showMessage('unexpected error');
-        // throw error;
+        throw error;
     }
 
     private showMessage(message: string, duration: number = 3000): void {
