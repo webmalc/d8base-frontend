@@ -29,13 +29,3 @@ export const environment = {
     client_secret: '',
     refresh_token_expire_time: 3600
 };
-
-export const serviceSettings = {
-    fileSaverService: 'aws',
-    aswCredentials: {
-        accessKeyId: '',
-        secretAccessKey: '',
-        region: '',
-        bucket: ''
-    }
-};

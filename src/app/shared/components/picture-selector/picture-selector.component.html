@@ -3,7 +3,7 @@
             id="camera-button"
             *ngIf="camera"
             type="button"
-            (click)="createPhoto()"
+            (click)="createCameraSnap()"
     >
         <ion-icon name="camera"></ion-icon>
     </ion-button>
@@ -16,16 +16,21 @@
         <ion-icon name="folder"></ion-icon>
     </ion-button>
     <ion-item *ngIf="fileSystem && platform.is('desktop')">
-        <ion-button appDebounce (debounceClick)="inputClick()">
+        <ion-button
+                appDebounce
+                (debounceClick)="openAndSelectFile()"
+                id="file-button"
+        >
             <ion-icon class="file-picker-icon" name="folder"></ion-icon>
         </ion-button>
         <ion-input
                 accept="image/x-png,image/gif,image/jpeg"
-                (ionChange)="fileOnChange()"
+                (ionChange)="onFileSelected()"
                 #file
                 class="file-picker-input"
                 name="file"
                 type="file"
+                id="file-picker"
         ></ion-input>
     </ion-item>
 </ion-buttons>

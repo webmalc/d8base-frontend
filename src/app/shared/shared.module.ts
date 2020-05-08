@@ -7,7 +7,6 @@ import {PictureSelectorComponent} from '@app/shared/components/picture-selector/
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {DebounceDirective} from './directives/debounce.directive';
-import { RefDirective } from './directives/ref.directive';
 
 @NgModule({
     declarations: [

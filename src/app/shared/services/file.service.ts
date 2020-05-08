@@ -6,9 +6,9 @@ import {of} from 'rxjs';
   providedIn: 'root'
 })
 export class FileService {
-    public getFile(): Promise<string> {
-        return new Promise<string>(resolve => {
-            resolve('1');
+    public getFile(): Promise<File> {
+        return new Promise<File>(resolve => {
+            resolve(new File(['foo'], 'foo.txt'));
         });
     }
 }

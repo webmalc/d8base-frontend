@@ -1,7 +1,5 @@
 import {Component, ElementRef, forwardRef, Input, Provider, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {FileSaverService} from '@app/core/services/file-savers/file-saver-abstract.service';
-import {fileSaverProvider} from '@app/core/services/file-savers/file-saver-service.provider';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
 import {CameraPhoto} from '@capacitor/core';
@@ -18,54 +16,43 @@ const VALUE_ACCESSOR: Provider = {
     templateUrl: './picture-selector.component.html',
     styleUrls: ['./picture-selector.component.scss'],
     providers: [
-        VALUE_ACCESSOR,
-        fileSaverProvider
+        VALUE_ACCESSOR
     ]
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
 
     @Input() public camera: boolean = true;
     @Input() public fileSystem: boolean = true;
-    @ViewChild('file', { read: ElementRef }) public fileInput: ElementRef<IonInput>;
+    @ViewChild('file', {read: ElementRef}) public fileInput: ElementRef<IonInput>;
 
     public uri: string | null;
     private onChange: (fn: any) => void;
 
     constructor(
+        public platform: Platform,
         private photoService: PhotoService,
-        private fileService: FileService,
-        private fileSaver: FileSaverService,
-        public platform: Platform
+        private fileService: FileService
     ) {
     }
 
-    public inputClick(): void {
-        this.fileInput.nativeElement.getInputElement().then(
-            (res: HTMLInputElement) => res.click()
-        );
+    public async openAndSelectFile(): Promise<void> {
+        const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement()
+        input.click();
     }
 
-    public fileOnChange(): void {
-        this.fileInput.nativeElement.getInputElement().then(
-            (res: HTMLInputElement) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(res.files.item(0) as File);
-                reader.onload = () => {
-                    this.setUri(reader.result as string);
-                };
-            }
-        );
+    public async onFileSelected(): Promise<void> {
+        const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement();
+        await this.readBaseAndSetUri(input.files.item(0) as File);
     }
 
-    public async createPhoto(): Promise<void> {
+    public async createCameraSnap(): Promise<void> {
         let oldUri: string;
         try {
             oldUri = this.uri;
             this.clearUri();
             const cameraPhoto: CameraPhoto = await this.photoService.createPhoto();
-            this.fileSaver.saveCameraPhoto(cameraPhoto).subscribe(
-                uri => this.setUri(uri)
-            );
+            const blob = await fetch(cameraPhoto.webPath).then(r => r.blob());
+            await this.readBaseAndSetUri(blob);
         } catch (error) {
             this.setUri(oldUri);
         }
@@ -77,9 +64,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
             oldUri = this.uri;
             this.clearUri();
             const file = await this.fileService.getFile();
-            this.fileSaver.saveFileSystemFile(file).subscribe(
-                (uri) => this.setUri(uri)
-            );
+            await this.readBaseAndSetUri(file);
         } catch (error) {
             this.setUri(oldUri);
         }
@@ -100,6 +85,18 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         this.uri = uri;
     }
 
+    private readBaseAndSetUri(file: Blob | File): Promise<null> {
+        return new Promise<null>(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                this.setUri(reader.result as string);
+                resolve();
+            };
+        });
+
+    }
+
     private clearUri(): void {
         this.setUri('');
     }
@@ -108,31 +105,5 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         this.uri = uri;
         this.onChange(uri);
     }
-
-    // private getImageDesktopStyle(): void {
-    //     const browserFileSelectorFactory = this.resolver.resolveComponentFactory(BrowserFileSelectorComponent);
-    //     const component = browserFileSelectorFactory.create(this.injector);
-    //     this.refDirective.containerRef.clear();
-    //     const componentRef = this.refDirective.containerRef.createComponent(browserFileSelectorFactory);
-    //     // componentRef.instance.open();
-    //     this.fileSelectSubscription = component.instance.selected.subscribe(
-    //         data => this.setUri(data)
-    //     );
-    // }
-    //
-    // private async getImageCellPhoneStyle(): Promise<void> {
-    //     let oldUri: string;
-    //     try {
-    //         oldUri = this.uri;
-    //         this.clearUri();
-    //         // TODO: Use platform depended fileService
-    //         const file = await this.fileService.getFile();
-    //         this.fileSaver.saveFileSystemFile(file).subscribe(
-    //             (uri) => this.setUri(uri)
-    //         );
-    //     } catch (error) {
-    //         this.setUri(oldUri);
-    //     }
-    // }
 
 }
