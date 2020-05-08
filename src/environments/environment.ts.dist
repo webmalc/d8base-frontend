@@ -23,8 +23,8 @@ export const environment = {
         send_verify_registration: '/en/api/accounts/resend-verify-registration/',
         subcategory: '/en/api/professionals/subcategories/',
         verify_registration: '/en/api/accounts/verify-registration/',
-        professional_tags: '/api/accounts/professional-tags/',
-        professional_tags_list: '/api/professionals/tags/'
+        professional_tags: '/en/api/accounts/professional-tags/',
+        professional_tags_list: '/en/api/professionals/tags/'
         url: 'http://localhost:8000'
     },
     client_id: '',

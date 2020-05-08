@@ -4,7 +4,6 @@ import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
-import {SelectInputComponent} from '@app/shared/components/select-input/select-input.component';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {DebounceDirective} from './directives/debounce.directive';
@@ -13,19 +12,17 @@ import {DebounceDirective} from './directives/debounce.directive';
     declarations: [
         ErrorFlashbagComponent,
         PictureSelectorComponent,
-        DebounceDirective,
-        SelectInputComponent
-    ],
-    exports: [
-        ErrorFlashbagComponent,
-        PictureSelectorComponent,
-        SelectInputComponent,
         DebounceDirective
     ],
     imports: [
         CommonModule,
         TranslateModule,
         IonicModule
+    ],
+    exports: [
+        ErrorFlashbagComponent,
+        PictureSelectorComponent,
+        DebounceDirective
     ],
     providers: [
         MainGuard,

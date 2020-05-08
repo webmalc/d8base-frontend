@@ -24,11 +24,11 @@ export class AuthenticationService implements AuthenticatorInterface {
     constructor(private tokenManager: TokenManagerService, private client: ApiClientService) {
     }
 
-    public login(credentials: Credentials): Observable<void> {
+    public login({username, password}: Credentials): Observable<void> {
         return new Observable<void>(subscriber => {
             const loginData = {
-                username: credentials.username,
-                password: credentials.password,
+                username,
+                password,
                 grant_type: GrantTypes.PasswordGrantType,
                 client_id: environment.client_id,
                 client_secret: environment.client_secret,
