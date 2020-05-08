@@ -1,10 +1,12 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
-import {SelectInputComponent} from '@app/shared/components/select-input/select-input.component';
+import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {DebounceDirective} from './directives/debounce.directive';
@@ -14,22 +16,24 @@ import {DebounceDirective} from './directives/debounce.directive';
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        SelectInputComponent
+        ContactsTabComponent
     ],
     exports: [
         ErrorFlashbagComponent,
         PictureSelectorComponent,
-        SelectInputComponent,
-        DebounceDirective
+        DebounceDirective,
+        ContactsTabComponent
     ],
     imports: [
         CommonModule,
         TranslateModule,
-        IonicModule
+        IonicModule,
+        ReactiveFormsModule
     ],
     providers: [
         MainGuard,
-        TokenManagerService
+        TokenManagerService,
+        ContactsTabFormService
     ]
 })
 export class SharedModule {

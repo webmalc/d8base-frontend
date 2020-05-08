@@ -11,7 +11,6 @@ import {EducationTabComponent} from '@app/profile/components/education-tab/educa
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
-import {ContactFormService} from '@app/profile/forms/contact-form.service';
 import {EducationFormService} from '@app/profile/forms/education-form.service';
 import {PluginsFormService} from '@app/profile/forms/plugins-form.service';
 import {SettingsFormService} from '@app/profile/forms/settings-form.service';
@@ -48,7 +47,6 @@ import {ProfilePage} from './profile.page';
         UserPluginApiService,
         PluginsFormService,
         ProfileService,
-        ContactFormService,
         UserContactApiService,
         EducationFormService,
         EducationApiService,

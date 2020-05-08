@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
+import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
 import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
 import {TagsTabComponent} from '@app/master/components/tags-tab/tags-tab.component';
 import {MasterTabsPage} from './master-tabs.page';
@@ -20,6 +21,10 @@ const routes: Routes = [
             {
                 path: 'tags',
                 component: TagsTabComponent
+            },
+            {
+                path: 'contacts',
+                component: ContactsTabComponent
             }
         ]
     },
