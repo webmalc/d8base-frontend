@@ -13,6 +13,17 @@ import {User} from '../../../core/models/user';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationFormComponent} from './registration-form.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
+import {IpApiService} from '../../../core/services/location/ip-api.service';
+import {IpDataService} from '../../../core/services/location/ip-data.service';
+import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
+// https://github.com/angular/angularfire/issues/1259#issuecomment-549745894
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
+import {CommonModule} from '@angular/common';
+import {IonicSelectableModule} from 'ionic-selectable';
+import {CityPickerPopoverComponent} from '../city-picker-popover/city-picker-popover.component';
 
 describe('RegistrationFormComponent', () => {
     let component: RegistrationFormComponent;
@@ -21,12 +32,33 @@ describe('RegistrationFormComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [RegistrationFormComponent, ErrorFlashbagComponent],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
-            providers: [RegistrationFormService]
+            declarations: [
+                RegistrationFormComponent,
+                ErrorFlashbagComponent,
+                CityPickerPopoverComponent
+            ],
+            imports: [
+                IonicModule.forRoot(),
+                ReactiveFormsModule,
+                FormsModule,
+                RouterTestingModule,
+                TranslateModule.forRoot(),
+                HttpClientTestingModule,
+                CommonModule,
+                IonicSelectableModule
+            ],
+            providers: [
+                RegistrationFormService,
+                IpServicesHolderService,
+                IpApiService,
+                IpDataService,
+                IpnfDataService,
+                LocationAccuracy,
+                Geolocation
+            ]
         }).compileComponents();
 
-        router = TestBed.get(Router);
+        router = TestBed.inject(Router);
         spyOn(router, 'navigateByUrl');
 
         fixture = TestBed.createComponent(RegistrationFormComponent);
@@ -35,9 +67,10 @@ describe('RegistrationFormComponent', () => {
         fixture.detectChanges();
     }));
 
-    xit('should create', () => {
+    it('should create', () => {
         expect(component).toBeTruthy();
     });
+
     xit('test submit registration form', () => {
         const email = (component as any).registrationFormService.form.controls[RegistrationFormFields.Email];
         const pwd = (component as any).registrationFormService.form.controls[RegistrationFormFields.Password];
@@ -61,8 +94,8 @@ describe('RegistrationFormComponent', () => {
         expect((component as any).registrationFormData.emit)
             .toHaveBeenCalledWith(
                 {
-                    user: plainToClass(User, data, { excludeExtraneousValues: true }),
-                    location: plainToClass(LocationModel, data, { excludeExtraneousValues: true })
+                    user: plainToClass(User, data, {excludeExtraneousValues: true}),
+                    location: plainToClass(LocationModel, data, {excludeExtraneousValues: true})
                 });
     });
 });
