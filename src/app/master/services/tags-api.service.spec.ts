@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TagsApiService } from './tags-api.service';
+import {TagsApiService} from './tags-api.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-describe('TagsApiServiceSSSSSSSSSSSSSSSSss', () => {
-  // beforeEach(() => TestBed.configureTestingModule({}));
+describe('TagsApiService', () => {
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [TagsApiService]
+    }));
 
-  xit('should be created', () => {
-    // const service: TagsApiService = TestBed.get(TagsApiService);
-    // expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: TagsApiService = TestBed.inject(TagsApiService);
+        expect(service).toBeTruthy();
+    });
+    xit('should be some tests');
 });

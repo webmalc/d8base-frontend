@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -15,7 +15,8 @@ describe('LoginFormComponent', () => {
     let component: LoginFormComponent;
     let fixture: ComponentFixture<LoginFormComponent>;
     let router: Router;
-
+    // Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.
+    // But if remove 'forRoot()' - test submit login form don't pass. Magick!
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [LoginFormComponent, ErrorFlashbagComponent],
@@ -26,7 +27,7 @@ describe('LoginFormComponent', () => {
             ]
         }).compileComponents();
 
-        router = TestBed.get(Router);
+        router = TestBed.inject(Router);
         spyOn(router, 'navigateByUrl');
 
         fixture = TestBed.createComponent(LoginFormComponent);
@@ -39,19 +40,17 @@ describe('LoginFormComponent', () => {
         expect((component as any).loginFormService.form.valid).toBeFalsy();
     });
 
-    it('test submit login form', () => {
-        const username = (component as any).loginFormService.form.controls[LoginFormFields.Username];
-        const password = (component as any).loginFormService.form.controls[LoginFormFields.Password];
+    it('test submit login form', async(() => {
+        const username = component.loginFormService.form.controls[LoginFormFields.Username];
+        const password = component.loginFormService.form.controls[LoginFormFields.Password];
         password.setValue('valid_pass');
         username.setValue('valid');
 
         spyOn((component as any).user, 'emit');
 
         fixture.debugElement.nativeElement.querySelector('ion-button').click();
-
         const newUser: Credentials = {username: 'valid', password: 'valid_pass'};
-
         expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
-    });
+    }));
 });
 

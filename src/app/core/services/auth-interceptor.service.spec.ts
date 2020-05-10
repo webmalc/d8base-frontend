@@ -10,13 +10,13 @@ import {TokenManagerService} from './token-manager.service';
 
 describe('AuthInterceptor', () => {
 
-    let client: jasmine.SpyObj<ApiClientService>;
+    let client: ApiClientService;
     let tokenManager: jasmine.SpyObj<TokenManagerService>;
     let service: AuthInterceptor;
     let httpMock: HttpTestingController;
 
     beforeEach(() => {
-        const spyTokenManager = jasmine.createSpyObj(
+        const spyTokenManager: jasmine.SpyObj<TokenManagerService> = jasmine.createSpyObj(
             'TokenManagerService', {
                 needToRefresh: () => new Promise(resolve => resolve(true)),
                 refresh: () => of(),
@@ -42,10 +42,10 @@ describe('AuthInterceptor', () => {
             ]
         });
 
-        client = TestBed.get(ApiClientService);
-        service = TestBed.get(AuthInterceptor);
+        client = TestBed.inject(ApiClientService);
+        service = TestBed.inject(AuthInterceptor);
         tokenManager = TestBed.get(TokenManagerService);
-        httpMock = TestBed.get(HttpTestingController);
+        httpMock = TestBed.inject(HttpTestingController);
     });
 
     it('should be created', () => {
@@ -65,7 +65,7 @@ describe('AuthInterceptor', () => {
         expect(tokenManager.setTokens).toHaveBeenCalledWith({access: 'test', refresh: 'test2'});
     }));
 
-    it('should not refresh if access token hasnt expired', fakeAsync(() => {
+    it('should not refresh if access token hasn\'t expired', fakeAsync(() => {
         tokenManager.needToRefresh.and.returnValue(Promise.resolve(false));
         tokenManager.getRefreshToken.and.returnValue(Promise.resolve('refresh_token'));
         tokenManager.setTokens.and.returnValue(Promise.resolve(true));

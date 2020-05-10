@@ -1,12 +1,18 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { UserPluginApiService } from './user-plugin-api.service';
+import {UserPluginApiService} from './user-plugin-api.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('UserPluginApiService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [UserPluginApiService]
+    }));
 
-  xit('should be created', () => {
-    const service: UserPluginApiService = TestBed.get(UserPluginApiService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: UserPluginApiService = TestBed.inject(UserPluginApiService);
+        expect(service).toBeTruthy();
+    });
+
+    xit('should be some tests');
 });

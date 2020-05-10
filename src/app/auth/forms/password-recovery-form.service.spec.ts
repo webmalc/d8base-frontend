@@ -11,10 +11,12 @@ describe('PasswordRecoveryFormService', () => {
         ]
     }));
 
-    xit('should be created', () => {
+    it('should be created', () => {
         const service: PasswordRecoveryFormService = TestBed.get(PasswordRecoveryFormService);
         expect(service).toBeTruthy();
     });
+
+    xit('should be some tests');
 });
 
   // TODO: test validators

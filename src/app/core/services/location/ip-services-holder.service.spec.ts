@@ -5,26 +5,33 @@ import {IpApiService} from './ip-api.service';
 import {IpDataService} from './ip-data.service';
 import {IpnfDataService} from './ipnf-data.service';
 import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('IpServicesHolderService', () => {
   beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+        HttpClientTestingModule
+    ],
     providers: [
       IpServicesHolderService,
       IpApiService,
       IpDataService,
       IpnfDataService,
-      {provide: HttpClient, useValue: { post: () => {} }},
     ]
   }));
 
   it('should be created', () => {
-    const service: IpServicesHolderService = TestBed.get(IpServicesHolderService);
+    const service: IpServicesHolderService = TestBed.inject(IpServicesHolderService);
     expect(service).toBeTruthy();
   });
-  xit('should be created', () => {
-    const service: IpServicesHolderService = TestBed.get(IpServicesHolderService);
-    expect(service.list[0] instanceof IpApiService).toBeTruthy();
-    expect(service.list[1] instanceof IpDataService).toBeTruthy();
-    expect(service.list[2] instanceof IpnfDataService).toBeTruthy();
+
+  it('should be created related services', () => {
+    const service: IpServicesHolderService = TestBed.inject(IpServicesHolderService);
+    expect(service.list.length).toEqual(3);
+    expect(service.list[0]).toBeTruthy();
+    expect(service.list[1]).toBeTruthy();
+    expect(service.list[2]).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

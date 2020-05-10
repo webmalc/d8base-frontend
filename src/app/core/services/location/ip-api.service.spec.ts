@@ -15,4 +15,6 @@ describe('IpApiService', () => {
     const service: IpApiService = TestBed.get(IpApiService);
     expect(service).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

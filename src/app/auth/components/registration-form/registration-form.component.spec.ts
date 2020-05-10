@@ -7,23 +7,23 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {plainToClass} from 'class-transformer';
 
-import {LocationModel} from '../../../core/models/location.model';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {User} from '../../../core/models/user';
-import {RegistrationFormFields} from '../../enums/registration-form-fields';
-import {RegistrationFormService} from '../../forms/registration-form.service';
-import {RegistrationFormComponent} from './registration-form.component';
+import {CommonModule} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
-import {IpApiService} from '../../../core/services/location/ip-api.service';
-import {IpDataService} from '../../../core/services/location/ip-data.service';
-import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
 // https://github.com/angular/angularfire/issues/1259#issuecomment-549745894
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
-import {CommonModule} from '@angular/common';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {LocationModel} from '../../../core/models/location.model';
+import {User} from '../../../core/models/user';
+import {IpApiService} from '../../../core/services/location/ip-api.service';
+import {IpDataService} from '../../../core/services/location/ip-data.service';
+import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
+import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
+import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {RegistrationFormFields} from '../../enums/registration-form-fields';
+import {RegistrationFormService} from '../../forms/registration-form.service';
 import {CityPickerPopoverComponent} from '../city-picker-popover/city-picker-popover.component';
+import {RegistrationFormComponent} from './registration-form.component';
 
 describe('RegistrationFormComponent', () => {
     let component: RegistrationFormComponent;

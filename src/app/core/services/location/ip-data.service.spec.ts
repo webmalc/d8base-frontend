@@ -1,18 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 
 import { IpDataService } from './ip-data.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('IpDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+        HttpClientTestingModule
+    ],
     providers: [
-      {provide: HttpClient, useValue: { post: () => {} }},
       IpDataService
     ]
   }));
 
   it('should be created', () => {
-    const service: IpDataService = TestBed.get(IpDataService);
+    const service: IpDataService = TestBed.inject(IpDataService);
     expect(service).toBeTruthy();
   });
+
+  it('should be some tests');
 });

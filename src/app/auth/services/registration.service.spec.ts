@@ -7,23 +7,27 @@ import {User} from '../../core/models/user';
 import {RegistrationService} from './registration.service';
 import {plainToClass} from 'class-transformer';
 import {LocationModel} from '../../core/models/location.model';
+import {IonicStorageModule} from '@ionic/storage';
 
 describe('RegistrationService', () => {
     beforeEach(() => TestBed.configureTestingModule({
+        imports: [
+            IonicStorageModule.forRoot()
+        ],
         providers: [
             RegistrationService,
             {provide: ApiClientService, useValue: {post: () => of(true)}},
-            {provide: LocationService, useValue: {getIpData: () => of(null)}}
+            {provide: LocationService, useValue: {getIpData: () => of(null)}},
         ]
     }));
 
-    xit('should be created', () => {
-        const service: RegistrationService = TestBed.get(RegistrationService);
+    it('should be created', () => {
+        const service: RegistrationService = TestBed.inject(RegistrationService);
         expect(service).toBeTruthy();
     });
 
-    xit('test #register', (done) => {
-        const service: RegistrationService = TestBed.get(RegistrationService);
+    it('test #register', (done) => {
+        const service: RegistrationService = TestBed.inject(RegistrationService);
 
         const user = {
             firstName: 'testName',

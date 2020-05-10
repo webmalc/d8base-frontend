@@ -12,8 +12,10 @@ describe('PasswordRecoveryService', () => {
         ]
     }));
 
-    xit('should be created', () => {
-        const service: PasswordRecoveryService = TestBed.get(PasswordRecoveryService);
+    it('should be created', () => {
+        const service: PasswordRecoveryService = TestBed.inject(PasswordRecoveryService);
         expect(service).toBeTruthy();
     });
+
+    xit('should be some tests');
 });

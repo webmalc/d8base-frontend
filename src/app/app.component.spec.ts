@@ -11,6 +11,7 @@ import {AppComponent} from './app.component';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
 import {DarkModeService} from './core/services/dark-mode.service';
 import {TranslationService} from './core/services/translation.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
 
@@ -32,9 +33,8 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [AppComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot()],
+            imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
             providers: [
-                { provide: ComponentFixtureAutoDetect, useValue: true },
                 {provide: StatusBar, useValue: statusBarSpy},
                 {provide: SplashScreen, useValue: splashScreenSpy},
                 {provide: Platform, useValue: platformSpy},
@@ -48,26 +48,26 @@ describe('AppComponent', () => {
         fixture = TestBed.createComponent(AppComponent);
     }));
 
-    xit('should create the app', () => {
+    it('should create the app', () => {
         const app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();
     });
 
-    xit('should initialize the app', async () => {
+    it('should initialize the app', async () => {
         expect(platformSpy.ready).toHaveBeenCalled();
         await platformReadySpy;
         expect(statusBarSpy.styleDefault).toHaveBeenCalled();
         expect(splashScreenSpy.hide).toHaveBeenCalled();
     });
 
-    xit('should be light mode by default', () => {
+    it('should be light mode by default', () => {
         const compiled = fixture.debugElement.nativeElement;
         fixture.detectChanges();
         expect(compiled.querySelector('ion-app').getAttribute('class'))
             .not.toContain('dark-theme');
     });
 
-    xit('should toggle dark mode', () => {
+    it('should toggle dark mode', () => {
         const compiled = fixture.debugElement.nativeElement;
         fixture.componentInstance.changeMode({target: {checked: true}});
         fixture.detectChanges();
@@ -75,7 +75,7 @@ describe('AppComponent', () => {
             .toContain('dark-theme');
     });
 
-    xit('test translation select options', () => {
+    it('test translation select options', () => {
         const trans: TranslationService = TestBed.get(TranslationService);
         const compiled = fixture.debugElement.nativeElement;
         compiled.querySelectorAll('ion-select ion-select-option').forEach(

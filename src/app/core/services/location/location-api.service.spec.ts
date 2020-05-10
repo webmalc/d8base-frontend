@@ -10,12 +10,14 @@ describe('LocationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-          {provide: LocationService, useValue: {getMergedLocationData: () => plainToClass(LocationModel, {})}}
+          LocationApiService
       ]
   }));
 
   it('should be created', () => {
-    const service: LocationApiService = TestBed.get(LocationApiService);
+    const service: LocationApiService = TestBed.inject(LocationApiService);
     expect(service).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

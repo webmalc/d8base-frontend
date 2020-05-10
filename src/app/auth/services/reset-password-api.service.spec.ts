@@ -1,12 +1,22 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ResetPasswordApiService } from './reset-password-api.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ResetPasswordApiService} from './reset-password-api.service';
 
 describe('ResetPasswordApiService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [
+            HttpClientTestingModule
+        ],
+        providers: [
+            ResetPasswordApiService
+        ]
+    }));
 
-  xit('should be created', () => {
-    const service: ResetPasswordApiService = TestBed.get(ResetPasswordApiService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: ResetPasswordApiService = TestBed.inject(ResetPasswordApiService);
+        expect(service).toBeTruthy();
+    });
+
+    xit('should be some tests');
 });

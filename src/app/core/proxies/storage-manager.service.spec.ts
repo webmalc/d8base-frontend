@@ -25,7 +25,9 @@ describe('StorageManagerService', () => {
   }));
 
   it('should be created', () => {
-    const service: StorageManagerService = TestBed.get(StorageManagerService);
+    const service: StorageManagerService = TestBed.inject(StorageManagerService);
     expect(service).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

@@ -57,4 +57,6 @@ describe('CityPickerPopoverComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    xit('should be some tests');
 });

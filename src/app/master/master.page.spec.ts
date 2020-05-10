@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { MasterPage } from './master.page';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('MasterPage', () => {
   let component: MasterPage;
@@ -9,8 +11,8 @@ describe('MasterPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MasterPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+      declarations: [ MasterPage ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MasterPage);
@@ -18,7 +20,9 @@ describe('MasterPage', () => {
     fixture.detectChanges();
   }));
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

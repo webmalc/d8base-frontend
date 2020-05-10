@@ -1,7 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 
-import {AppInitService} from './app-init.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 import {Platform} from '@ionic/angular';
+import {IonicStorageModule} from '@ionic/storage';
+import {TranslateModule} from '@ngx-translate/core';
+import {AppInitService} from './app-init.service';
 import {TranslationService} from './translation.service';
 
 describe('AppInitService', () => {
@@ -10,24 +14,30 @@ describe('AppInitService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule,
+                RouterTestingModule,
+                TranslateModule.forRoot(),
+                IonicStorageModule.forRoot()
+            ],
             providers: [
-                {provide: Platform, useValue: {ready: () => Promise.resolve()}},
-                {provide: TranslationService, useValue: {init: () => { return; }}}
+                Platform,
+                AppInitService
             ],
         });
 
-        trans = TestBed.get(TranslationService);
+        trans = TestBed.inject(TranslationService);
 
         spyOn(trans, 'init');
     });
 
-    xit('should be created', () => {
-        const service: AppInitService = TestBed.get(AppInitService);
+    it('should be created', () => {
+        const service: AppInitService = TestBed.inject(AppInitService);
         expect(service).toBeTruthy();
     });
 
-    xit('test translate service init', (done) => {
-        const service: AppInitService = TestBed.get(AppInitService);
+    it('test translate service init', (done) => {
+        const service: AppInitService = TestBed.inject(AppInitService);
 
         service.init().then(
             res => {
