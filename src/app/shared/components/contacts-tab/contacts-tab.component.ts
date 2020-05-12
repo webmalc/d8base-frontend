@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Contact} from '@app/profile/models/contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
@@ -13,11 +13,12 @@ import {map, tap} from 'rxjs/operators';
     templateUrl: './contacts-tab.component.html',
     styleUrls: ['./contacts-tab.component.scss'],
 })
-export class ContactsTabComponent implements OnInit {
+export class ContactsTabComponent implements OnInit, OnChanges {
 
     @Input() public clientContactsApiService: ContactsApiServiceInterface;
     @Input() public getNewClientContact: () => ClientContactInterface;
     @Input() public clientId: number;
+    @Input() public toFillFormData: ClientContactInterface[] = [];
     private contactsList: string[] = [];
     private defaultClientContacts: ClientContactInterface[];
 
@@ -27,13 +28,24 @@ export class ContactsTabComponent implements OnInit {
     ) {
     }
 
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hasOwnProperty('toFillFormData') && changes.toFillFormData.currentValue.length > 0) {
+            this.fillForm(changes.toFillFormData.currentValue);
+        }
+    }
+
     public ngOnInit(): void {
         this.contactApiService.get().pipe(
             tap((result: ApiListResponseInterface<Contact>) => this.generateContactArray(result.results))
         ).subscribe(
             (result: ApiListResponseInterface<Contact>) => {
                 this.updateDefaultClientContacts().subscribe(
-                    (data: ClientContactInterface[]) => this.formService.createForm(result.results, data)
+                    (data: ClientContactInterface[]) => {
+                        this.formService.createForm(result.results, data);
+                        if (this.toFillFormData.length > 0) {
+                            this.fillForm(this.toFillFormData);
+                        }
+                    }
                 );
             }
         );
@@ -51,6 +63,10 @@ export class ContactsTabComponent implements OnInit {
             () => this.updateDefaultClientContacts().subscribe(() => console.log('saved'))
         );
 
+    }
+
+    private fillForm(data: ClientContactInterface[]): void {
+        this.formService.fillForm(data);
     }
 
     private updateDefaultClientContacts(): Observable<ClientContactInterface[]> {

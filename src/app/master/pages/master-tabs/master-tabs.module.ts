@@ -6,6 +6,7 @@ import {EditMasterComponent} from '@app/master/components/edit-master/edit-maste
 import {TagsSelectInputComponent} from '@app/master/components/tags-select-input/tags-select-input.component';
 import {TagsTabComponent} from '@app/master/components/tags-tab/tags-tab.component';
 import {EditMasterFormService} from '@app/master/forms/edit-master-form.service';
+import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -20,7 +21,8 @@ import {MasterTabsPage} from './master-tabs.page';
         MasterTabsPageRoutingModule,
         TranslateModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+
     ],
     declarations: [
         MasterTabsPage,
@@ -29,7 +31,7 @@ import {MasterTabsPage} from './master-tabs.page';
         TagsSelectInputComponent,
         ContactsTabComponent
     ],
-    providers: [EditMasterFormService]
+    providers: [EditMasterFormService, UserContactApiService]
 })
 export class MasterTabsPageModule {
 }
