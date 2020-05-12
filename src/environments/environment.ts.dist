@@ -2,42 +2,33 @@ export const environment = {
     production: false,
     origin: 'http://localhost:4200',
     backend: {
-        auth: '/api/auth/token/',
+        auth: '/en/api/auth/token/',
         certificate: '',
-        cities: '/api/location/cites/',
-        countries: '/api/location/countries/',
-        contact: '/contacts/contacts/',
+        cities: '/en/api/location/cites/',
+        contact: '/en/api/contacts/contacts/',
+        countries: '/en/api/location/countries/',
         education: '',
-        language: '',
-        location: '/api/accounts/locations/',
+        language: '/en/api/accounts/languages',
+        location: '/en/api/accounts/locations/',
         master: '',
-        reset_password_link: '',
-        reset_password: '',
-        user_settings: '',
         plugin: '',
-        refresh: '/api/auth/token/',
-        register: '/api/accounts/register/',
-        user: '/api/accounts/profile/',
-        user_contact: '/api/accounts/contacts/',
+        reset_password_link: '',
+        reset_password: '/en/api/accounts/reset-password/',
+        refresh: '/en/api/auth/token/',
+        register: '/en/api/accounts/register/',
+        user: '/en/api/accounts/profile/',
+        user_contact: '/en/api/accounts/contacts/',
         user_plugin: '',
-        send_verify_registration: '/api/accounts/resend-verify-registration/',
-        subcategory: '/api/professionals/subcategories/',
-        verify_registration: '/api/accounts/verify-registration/',
-        professional_tags: '/api/accounts/professional-tags/',
-        professional_tags_list: '/api/professionals/tags/'
+        user_settings: '/en/api/accounts/settings/',
+        send_verify_registration: '/en/api/accounts/resend-verify-registration/',
+        subcategory: '/en/api/professionals/subcategories/',
+        verify_registration: '/en/api/accounts/verify-registration/',
+        professional_contact: '/en/api/accounts/professional-contacts/',
+        professional_tags: '/en/api/accounts/professional-tags/',
+        professional_tags_list: '/en/api/professionals/tags/'
         url: 'http://localhost:8000'
     },
     client_id: '',
     client_secret: '',
     refresh_token_expire_time: 3600
-};
-
-export const serviceSettings = {
-    fileSaverService: 'aws',
-    aswCredentials: {
-        accessKeyId: '',
-        secretAccessKey: '',
-        region: '',
-        bucket: ''
-    }
 };

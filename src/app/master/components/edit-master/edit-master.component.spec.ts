@@ -2,6 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { EditMasterComponent } from './edit-master.component';
+import {EditMasterFormService} from '../../forms/edit-master-form.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {SubcategoriesApiService} from '../../services/subcategories-api.service';
 
 describe('EditMasterComponent', () => {
   let component: EditMasterComponent;
@@ -9,8 +14,17 @@ describe('EditMasterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+          ReactiveFormsModule,
+          HttpClientTestingModule,
+          RouterTestingModule,
+          IonicModule
+      ],
       declarations: [ EditMasterComponent ],
-      imports: [IonicModule.forRoot()]
+      providers: [
+          EditMasterFormService,
+          SubcategoriesApiService
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditMasterComponent);
@@ -21,4 +35,6 @@ describe('EditMasterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

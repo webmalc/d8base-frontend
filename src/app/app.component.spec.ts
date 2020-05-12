@@ -11,6 +11,7 @@ import {AppComponent} from './app.component';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
 import {DarkModeService} from './core/services/dark-mode.service';
 import {TranslationService} from './core/services/translation.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
 
@@ -32,9 +33,8 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [AppComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot()],
+            imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
             providers: [
-                { provide: ComponentFixtureAutoDetect, useValue: true },
                 {provide: StatusBar, useValue: statusBarSpy},
                 {provide: SplashScreen, useValue: splashScreenSpy},
                 {provide: Platform, useValue: platformSpy},

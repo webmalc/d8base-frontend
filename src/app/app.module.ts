@@ -19,7 +19,6 @@ import {IpServicesHolderService} from '@app/core/services/location/ip-services-h
 import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {TranslationService} from '@app/core/services/translation.service';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {IonicStorageModule} from '@ionic/storage';
@@ -75,10 +74,10 @@ import {AppComponent} from './app.component';
             useClass: HeadersInterceptor,
             multi: true
         },
-        {
-            provide: ErrorHandler,
-            useClass: GlobalErrorHandlerService
-        },
+        // {
+        //     provide: ErrorHandler,
+        //     useClass: GlobalErrorHandlerService
+        // },
         Geolocation,
         GeolocationService,
         LocationService,

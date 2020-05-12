@@ -15,6 +15,8 @@ describe('RegistrationFormService', () => {
         const service: RegistrationFormService = TestBed.get(RegistrationFormService);
         expect(service).toBeTruthy();
     });
+
+    xit('should be some tests');
 });
 
   // TODO: test validators

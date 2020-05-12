@@ -1,15 +1,14 @@
-import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, inject, TestBed} from '@angular/core/testing';
 import {IonButtons, IonicModule} from '@ionic/angular';
 
 import {Component, DebugElement} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
-import {Observable, of} from 'rxjs';
-import {FileSaverService} from '../../../core/services/file-savers/file-saver-abstract.service';
+import {CameraPhoto} from '@capacitor/core';
+import {ProfileFormFields} from '../../../profile/enums/profile-form-fields';
 import {FileService} from '../../services/file.service';
 import {PhotoService} from '../../services/photo.service';
 import {PictureSelectorComponent} from './picture-selector.component';
-import {CameraPhoto} from '@capacitor/core';
 
 const initURI: string = 'https://picture0.example.com' as const;
 
@@ -34,25 +33,20 @@ describe('PictureSelectorComponent', () => {
     let componentDebugElement: DebugElement;
     let photoService: PhotoService;
     let fileService: FileService;
-    let fileSaver: FileSaverService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PictureSelectorComponent, AppTestFormControlComponent],
             imports: [IonicModule, ReactiveFormsModule],
-            providers: [{
-                provide: FileSaverService
-            }]
         });
         wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
         wrapperComponent = wrapperFixture.componentInstance;
         componentDebugElement = wrapperFixture.debugElement.query(By.directive(PictureSelectorComponent));
         component = componentDebugElement.componentInstance;
         wrapperFixture.detectChanges();
-        fileSaver = componentDebugElement.injector.get(FileSaverService);
     });
 
-    beforeEach(inject([PhotoService, FileService, FileSaverService], (ps, fs) => {
+    beforeEach(inject([PhotoService, FileService], (ps, fs) => {
         photoService = ps;
         fileService = fs;
     }));
@@ -62,41 +56,19 @@ describe('PictureSelectorComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should trigger click and pass saved picture created by createPhoto or getFile method to formControl', fakeAsync(() => {
+    it('should trigger click and pass base 64 format of picture created by createCameraSnap', async () => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
 
-        const fakePhotoURI: string = 'http://picture1.example.com';
-        spyOn(fileSaver, 'saveCameraPhoto').and.callFake((photo: CameraPhoto): Observable<string> => {
-            expect(photo).toBeTruthy();
-
-            return of(fakePhotoURI);
-
+        const blob = new Blob(['someText']);
+        const webPath = URL.createObjectURL(blob);
+        const promise = new Promise<CameraPhoto>(resolve => {
+            resolve({webPath, format: 'png'});
         });
-        spyOn(photoService, 'createPhoto').and.returnValue(Promise.resolve<CameraPhoto>({
-            webPath: fakePhotoURI,
-            format: 'png'
-        }));
-
-        const fakeFileURI: string = 'http://picture2.example.com';
-        spyOn(fileSaver, 'saveFileSystemFile').and.callFake((file: string): Observable<string> => {
-            expect(file).toBeTruthy();
-
-            return of<string>(fakeFileURI);
-        });
-        componentDebugElement.query(By.css('#camera-button')).triggerEventHandler('click', {});
-        expect(wrapperComponent.form.get('avatar').value).toBe('');
-        tick();
-        expect(wrapperComponent.form.get('avatar').value).toBe(fakePhotoURI);
+        spyOn(photoService, 'createPhoto').and.returnValue(promise);
+        await component.createCameraSnap();
         expect(photoService.createPhoto).toHaveBeenCalled();
-
-        spyOn(fileService, 'getFile').and.returnValue(Promise.resolve(fakeFileURI));
-        componentDebugElement.query(By.css('#file-button')).triggerEventHandler('click', {});
-        expect(wrapperComponent.form.get('avatar').value).toBe('');
-        tick();
-        expect(wrapperComponent.form.get('avatar').value).toBe(fakeFileURI);
-        expect(fileService.getFile).toHaveBeenCalled();
-
-    }));
+        expect(wrapperComponent.form.get(ProfileFormFields.Avatar).value).toEqual('data:text/plain;base64,c29tZVRleHQ=');
+    });
 
     it('should show/hide buttons because component vars state', () => {
         let buttons: DebugElement[];
@@ -128,5 +100,8 @@ describe('PictureSelectorComponent', () => {
         expect(wrapperComponent.form.get('avatar').value).toBe(initURI);
     }));
 
+    xit('should be test with input file selector');
+
+    xit('should implement cellphone file selector');
 
 });

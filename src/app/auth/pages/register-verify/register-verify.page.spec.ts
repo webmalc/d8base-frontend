@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { RegisterVerifyPage } from './register-verify.page';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('RegisterVerifyPage', () => {
   let component: RegisterVerifyPage;
@@ -10,7 +12,11 @@ describe('RegisterVerifyPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RegisterVerifyPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [
+          IonicModule,
+          HttpClientTestingModule,
+          RouterTestingModule
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RegisterVerifyPage);
@@ -21,4 +27,6 @@ describe('RegisterVerifyPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('should be some tests');
 });

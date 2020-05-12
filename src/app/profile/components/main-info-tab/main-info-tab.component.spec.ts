@@ -10,38 +10,7 @@ import {PictureSelectorComponent} from '../../../shared/components/picture-selec
 import {ProfileFormService} from '../../forms/profile-form.service';
 import {ProfileService} from '../../services/profile.service';
 import {MainInfoTabComponent} from './main-info-tab.component';
-
-@Injectable()
-class ProfileServiceStub {
-    private user: UserInterface = {
-        first_name: 'name',
-        last_name: 'name',
-        phone: 'sadf',
-        password: 'sdf',
-        email: 'wer',
-        birthday: '11',
-        gender: 'werwer',
-        id: 1,
-        languages: ['a', 'b'],
-        main_language: 'sdf',
-        patronymic: 'sdf',
-        avatar: 'noavatar',
-        account_type: 'asdf'
-
-    };
-
-    constructor(private profileFormService: ProfileFormService) {
-    }
-
-    public getAvailableAdditionalLanguages$(): BehaviorSubject<string[]> {
-        return new BehaviorSubject<string[]>([]);
-    }
-
-    public createProfileForm$(): Observable<FormGroup> {
-        return of<FormGroup>(this.profileFormService.createForm(this.user));
-    }
-
-}
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('MainInfoTabComponent', () => {
 
@@ -51,14 +20,15 @@ describe('MainInfoTabComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [MainInfoTabComponent, PictureSelectorComponent],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, TranslateModule.forRoot(), HttpClientTestingModule],
             providers: [
                 ProfileFormService,
-                {
-                    provide: ProfileService,
-                    useClass: ProfileServiceStub,
-                }
-            ],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, TranslateModule.forRoot()]
+                ProfileService
+                // {
+                //     provide: ProfileService,
+                //     useClass: ProfileServiceStub,
+                // }
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(MainInfoTabComponent);
@@ -69,4 +39,6 @@ describe('MainInfoTabComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    xit('should be some tests');
 });

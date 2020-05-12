@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Language} from '@app/profile/models/language';
 import {plainToClass} from 'class-transformer';
@@ -16,9 +17,13 @@ export class LanguagesApiService {
     constructor(private client: ApiClientService) {
     }
 
-    public getLanguages(): Observable<Language[]> {
-        return this.client.get(this.url).pipe(
-            map((raw: object[]) => plainToClass<Language, object>(Language, raw, { excludeExtraneousValues: true }))
+    public getLanguages$(): Observable<Language[]> {
+        return this.client.get<ApiListResponseInterface<Language>>(this.url).pipe(
+            map(
+                ({results}) => {
+                    return plainToClass<Language, object>(Language, results, {excludeExtraneousValues: true});
+                }
+            )
         );
     }
 }

@@ -1,32 +1,22 @@
 import {TestBed} from '@angular/core/testing';
 
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ApiClientService} from './api-client.service';
-import {HttpClient} from '@angular/common/http';
-import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 
 describe('ApiClientService', () => {
-    beforeEach(() => {
-        TestBed.resetTestEnvironment();
-        TestBed.initTestEnvironment(BrowserDynamicTestingModule,
-            platformBrowserDynamicTesting());
-    });
     beforeEach(async () => TestBed.configureTestingModule({
+        imports: [
+            HttpClientTestingModule
+        ],
         providers: [
-            {provide: HttpClient, useClass: HttpMock}
+            ApiClientService
         ]
     }));
 
     it('should be created', () => {
-        const service: ApiClientService = TestBed.get(ApiClientService);
+        const service: ApiClientService = TestBed.inject(ApiClientService);
         expect(service).toBeTruthy();
     });
+
+    xit('should be some tests');
 });
-
-
-export class HttpMock {
-    public get(...args) {
-    }
-
-    public post(...args) {
-    }
-}

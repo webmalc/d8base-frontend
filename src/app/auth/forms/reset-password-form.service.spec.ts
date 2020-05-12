@@ -1,12 +1,19 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ResetPasswordFormService } from './reset-password-form.service';
+import {ResetPasswordFormService} from './reset-password-form.service';
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('ResetPasswordFormService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [
+            ReactiveFormsModule,
+        ]
+    }));
 
-  it('should be created', () => {
-    const service: ResetPasswordFormService = TestBed.get(ResetPasswordFormService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: ResetPasswordFormService = TestBed.inject(ResetPasswordFormService);
+        expect(service).toBeTruthy();
+    });
+
+    xit('should be some tests');
 });

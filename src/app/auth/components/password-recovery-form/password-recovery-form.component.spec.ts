@@ -17,7 +17,7 @@ describe('PasswordRecoveryFormComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [PasswordRecoveryFormComponent],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+            imports: [IonicModule, ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [
                 PasswordRecoveryFormService,
                 PasswordRecoveryService,

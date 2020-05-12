@@ -28,7 +28,7 @@
   "profile-form": {
     "group": {
       "main": "Главное",
-      "credentials": "Данный доступа"
+      "credentials": "Данные доступа"
     },
     "fields": {
       "name": "Имя",
