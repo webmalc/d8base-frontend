@@ -21,6 +21,10 @@ export class ContactsTabFormService {
         );
     }
 
+    public fillForm(data: ClientContactInterface[]): void {
+        data.forEach(contact => this.form.get(contact.contact_display).setValue(contact.value));
+    }
+
     public isDisabled(): boolean {
         return this.form.invalid || !this.form.dirty;
     }
