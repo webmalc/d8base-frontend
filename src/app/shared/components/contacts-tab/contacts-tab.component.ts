@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Contact} from '@app/profile/models/contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
@@ -67,6 +67,7 @@ export class ContactsTabComponent implements OnInit, OnChanges {
 
     private fillForm(data: ClientContactInterface[]): void {
         this.formService.fillForm(data);
+        this.submitContacts();
     }
 
     private updateDefaultClientContacts(): Observable<ClientContactInterface[]> {
