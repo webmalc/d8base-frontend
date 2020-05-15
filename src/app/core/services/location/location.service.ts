@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IpLocation} from '@app/core/models/ip-location';
-import {LocationModel} from '@app/core/models/location.model';
+import {UserLocation} from '@app/core/models/user-location';
 import {Geolocation, GeolocationOptions, Geoposition} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {Observable} from 'rxjs';
@@ -51,13 +51,13 @@ export class LocationService {
         return this.geolocation.watchPosition(options);
     }
 
-    public getMergedLocationData(): Promise<LocationModel | null> {
-        return new Promise<LocationModel | null>(resolve => {
+    public getMergedLocationData(): Promise<UserLocation | null> {
+        return new Promise<UserLocation | null>(resolve => {
             this.getCurrentPosition().then(
                 (geolocation: Geoposition) => {
                     this.getIpLocationData().then(
                         (ipLocation: IpLocation) => {
-                            const location = new LocationModel();
+                            const location = new UserLocation();
                             if (null !== geolocation) {
                                 location.coordinates = {
                                     type: 'Point',

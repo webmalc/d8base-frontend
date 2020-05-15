@@ -43,7 +43,7 @@ export class RegistrationFormService {
         );
     }
 
-    public getFormFiledValue(formField: string): any {
+    public getFormFieldValue(formField: string): any {
         return this.form.get(formField).value;
     }
 

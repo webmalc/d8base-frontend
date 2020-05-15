@@ -11,21 +11,20 @@ import {TranslateModule} from '@ngx-translate/core';
 import {plainToClass} from 'class-transformer';
 import {of} from 'rxjs';
 
-import {LocationModel} from '../../../core/models/location.model';
+import {IonicStorageModule} from '@ionic/storage';
+import {IonicSelectableModule} from 'ionic-selectable';
+import {User} from '../../../core/models/user';
+import {UserLocation} from '../../../core/models/user-location';
 import {IpApiService} from '../../../core/services/location/ip-api.service';
 import {IpDataService} from '../../../core/services/location/ip-data.service';
 import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
 import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
 import {LocationService} from '../../../core/services/location/location.service';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {User} from '../../../core/models/user';
 import {RegistrationFormComponent} from '../../components/registration-form/registration-form.component';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationService} from '../../services/registration.service';
 import {RegistrationPage} from './registration.page';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {IonicSelectableModule} from 'ionic-selectable';
-import {IonicStorageModule} from '@ionic/storage';
 
 describe('RegistrationPage', () => {
     let component: RegistrationPage;
@@ -104,7 +103,7 @@ describe('RegistrationPage', () => {
 
         component.onSubmitRegistrationForm({
             user: plainToClass(User, user, {excludeExtraneousValues: true}),
-            location: plainToClass(LocationModel, location, {excludeExtraneousValues: true})
+            location: plainToClass(UserLocation, location, {excludeExtraneousValues: true})
         });
         flush();
 

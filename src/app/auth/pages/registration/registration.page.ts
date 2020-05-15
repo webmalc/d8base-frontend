@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegistrationService} from '@app/auth/services/registration.service';
-import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/core/models/user';
+import {UserLocation} from '@app/core/models/user-location';
 
 @Component({
     selector: 'app-registration',
@@ -17,7 +17,7 @@ export class RegistrationPage implements OnInit {
     public ngOnInit(): void {
     }
 
-    public onSubmitRegistrationForm(data: {user: User, location: LocationModel}): void {
+    public onSubmitRegistrationForm(data: {user: User, location: UserLocation}): void {
         this.registrationService.register(data.user, data.location).subscribe(
             next => {
                 this.router.navigateByUrl('/profile');
