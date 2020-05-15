@@ -1,0 +1,10 @@
+<ion-list>
+  <app-bookmarks-item
+          *ngFor="let bookmark of bookmarks;" [bookmark]="bookmark"
+          (removeFromBookmark)="removeFromList($event)"
+          (restoreToBookmark)="restoreToList($event)"
+          [deleted]="deletedBookmarks.includes(bookmark.id)"
+  >
+  </app-bookmarks-item>
+</ion-list>
+

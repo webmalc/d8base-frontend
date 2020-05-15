@@ -1,40 +1,58 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {RouterTestingModule} from '@angular/router/testing';
+import {IonicModule, IonTabBar} from '@ionic/angular';
+import {TranslateModule} from '@ngx-translate/core';
+import {bool} from 'aws-sdk/clients/signer';
+import {BehaviorSubject} from 'rxjs';
+import {MasterManagerService} from '../core/services/master-manager.service';
+import {ProfilePage} from './profile.page';
 
-import { ProfilePage } from './profile.page';
+class MasterManagerServiceStub {
+    public isMaster$: BehaviorSubject<bool> = new BehaviorSubject<bool>(false);
+}
 
-let profilePage: ProfilePage;
+describe('ProfilePage', () => {
+    let component: ProfilePage;
+    let fixture: ComponentFixture<ProfilePage>;
+    let masterService;
 
-// describe('ProfilePage', () => {
-//     beforeEach(() => {
-//         profilePage = new ProfilePage(null, null);
-//     });
-//
-//     it('should have form and availableAddsLanguages after init', () => {
-//         expect(profilePage.form).toBe('2');
-//     });
-// });
+    beforeEach(async(() => {
+        masterService = jasmine.createSpyObj('MasterManagerService', ['isMaster']);
+        TestBed.configureTestingModule({
+            declarations: [ProfilePage],
+            imports: [
+                IonicModule.forRoot(),
+                RouterTestingModule,
+                TranslateModule.forRoot()
+            ],
+            providers: [
+                {
+                    provide: MasterManagerService,
+                    useClass: MasterManagerServiceStub
+                }
+            ]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(ProfilePage);
+        component = fixture.componentInstance;
+        masterService = TestBed.inject(MasterManagerService);
+    }));
+    it('should create', () => {
+        expect(component).toBeDefined();
+    });
+
+    it('should create tabs', () => {
+        const tabs = fixture.debugElement.query(By.directive(IonTabBar)).children;
+        expect(tabs.length).toEqual(5);
+    });
+
+    it('should create tabs with education when isMaster true', () => {
+        masterService.isMaster$.next(true);
+        fixture.detectChanges();
+        const tabs = fixture.debugElement.query(By.directive(IonTabBar)).children;
+        expect(tabs.length).toEqual(6);
+    });
 
 
-// describe('ProfilePage', () => {
-//   let component: ProfilePage;
-//   let fixture: ComponentFixture<ProfilePage>;
-//
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ ProfilePage ],
-//       imports: [IonicModule.forRoot()]
-//     }).compileComponents();
-//
-//     fixture = TestBed.createComponent(ProfilePage);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   }));
-//
-//   it('should create', () => {
-//     expect(component).toBeDefined();
-//   });
-//
-//   it('', () => {
-//   });
-// });
+});

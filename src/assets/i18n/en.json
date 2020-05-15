@@ -60,9 +60,11 @@
   },
   "profile-page" : {
     "profile": "Profile",
+    "settings": "Settings",
     "plugins": "Plugins",
     "contacts": "Contacts",
-    "education": "Education"
+    "education": "Education",
+    "bookmark": "Bookmarks"
   },
   "plugins-tab": {
     "plugins": "Plugins",

@@ -6,6 +6,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {ProfilePageRoutingModule} from './profile-routing.module';
 
+import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
@@ -23,6 +24,8 @@ import {UserPluginApiService} from '@app/profile/services/user-plugin-api.servic
 import {SharedModule} from '@app/shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
+import {BookmarksItemComponent} from '@app/profile/components/bookmarks-tab/bookmarks-item/bookmarks-item.component';
+import {BookmarksService} from '@app/profile/services/bookmarks.service';
 
 @NgModule({
     imports: [
@@ -40,7 +43,9 @@ import {ProfilePage} from './profile.page';
         PluginsTabComponent,
         ContactTabComponent,
         EducationTabComponent,
-        SettingsTabComponent
+        SettingsTabComponent,
+        BookmarksTabComponent,
+        BookmarksItemComponent
     ],
     providers: [
         PluginApiService,
@@ -51,7 +56,8 @@ import {ProfilePage} from './profile.page';
         EducationFormService,
         EducationApiService,
         CertificateApiService,
-        SettingsFormService
+        SettingsFormService,
+        BookmarksService
     ]
 })
 export class ProfilePageModule {

@@ -60,9 +60,11 @@
   },
   "profile-page" : {
     "profile": "Профиль",
+    "settings": "Настройки",
     "plugins": "Плагины",
     "contacts": "Контакты",
-    "education": "Образование"
+    "education": "Образование",
+    "bookmark": "Избранное"
   },
   "plugins-tab": {
     "plugins": "Плагины",

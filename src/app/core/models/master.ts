@@ -1,6 +1,7 @@
 import {Expose} from 'class-transformer';
+import {MasterInterface} from '@app/core/interfaces/master.interface';
 
-export class Master {
+export class Master implements MasterInterface {
     @Expose() public id: number;
     @Expose() public name: string;
     @Expose() public description: string;
@@ -9,4 +10,5 @@ export class Master {
     @Expose() public level: string;
     @Expose() public is_auto_order_confirmation: boolean;
     @Expose() public subcategory: number;
+
 }

@@ -1,0 +1,11 @@
+<ion-item class="ion-align-self-center" [class.bm-deleted]="deleted">
+    <ion-avatar slot="start">
+        <img src="assets/images/profile/noavatar.jpeg" alt="avatar">
+    </ion-avatar>
+    <ion-label>
+        <h2>{{professional.name}}</h2>
+        <h3>{{bookmark.note}}</h3>
+    </ion-label>
+    <ion-button *ngIf="!deleted" (click)="removeFromBookmarks()">Remove</ion-button>
+    <ion-button *ngIf="deleted" (click)="restoreToBookmarks()">Restore</ion-button>
+</ion-item>

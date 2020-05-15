@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {MasterGuard} from '@app/core/guards/master.guard';
+import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
             {
                 path: 'settings',
                 component: SettingsTabComponent
+            },
+            {
+                path: 'bookmark',
+                component: BookmarksTabComponent
             }
         ]
     },
