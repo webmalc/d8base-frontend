@@ -24,7 +24,9 @@ export class BookmarksTabComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.uSub.unsubscribe();
+        if (this.uSub) {
+            this.uSub.unsubscribe();
+        }
     }
 
     public removeFromList(deletedBookmarkId: number): void {

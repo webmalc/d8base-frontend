@@ -1,5 +1,4 @@
 import {of} from 'rxjs';
-import {ApiListResponseInterface} from '../../core/interfaces/api-list-response.interface';
 import {ApiClientService} from '../../core/services/api-client.service';
 import {Language} from '../models/language';
 import {LanguagesApiService} from './languages-api.service';
@@ -14,13 +13,7 @@ describe('LanguageApiService', () => {
         languagesApiService = new LanguagesApiService(apiClientServiceSpy as any);
     });
     it('should return empty array of languages', () => {
-        const data: ApiListResponseInterface<Language> = {
-            count: 0,
-            results: [],
-            next: null,
-            previous: null
-        };
-        apiClientServiceSpy.get.and.returnValue(of(data));
+        apiClientServiceSpy.get.and.returnValue(of([]));
         languagesApiService.getLanguages$().subscribe(
             languages => {
                 expect(languages).toEqual([]);
@@ -37,9 +30,8 @@ describe('LanguageApiService', () => {
         language2.id = 1;
         language2.code = 'en';
         language2.name = 'english';
-        const data: ApiListResponseInterface<Language> = {
-            count: 2,
-            results: [
+        const data: Language[] =
+            [
                 {
                     id: 0,
                     code: 'ru',
@@ -50,10 +42,8 @@ describe('LanguageApiService', () => {
                     code: 'en',
                     name: 'english'
                 }
-            ],
-            next: null,
-            previous: null
-        };
+            ];
+
         apiClientServiceSpy.get.and.returnValue(of(data));
         languagesApiService.getLanguages$().subscribe(
             languages => {

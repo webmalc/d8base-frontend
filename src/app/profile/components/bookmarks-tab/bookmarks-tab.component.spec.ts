@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { BookmarksTabComponent } from './bookmarks-tab.component';
+import {BookmarksService} from '../../services/bookmarks.service';
+import {SavedProfessionalApiService} from '../../services/saved-professional-api.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('BookmarksTabComponent', () => {
   let component: BookmarksTabComponent;
@@ -10,7 +13,8 @@ describe('BookmarksTabComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BookmarksTabComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule],
+      providers: [BookmarksService, SavedProfessionalApiService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookmarksTabComponent);

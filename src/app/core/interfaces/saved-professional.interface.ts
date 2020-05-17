@@ -1,6 +1,7 @@
+import {MasterInterface} from '@app/core/interfaces/master.interface';
 import {Master} from '@app/core/models/master';
 
-export interface SavedProfessionalInterface<T extends number | Master> {
+export interface SavedProfessionalInterface<T extends number | MasterInterface> {
     id?: number;
     note: string;
     professional: T;
@@ -10,5 +11,5 @@ export interface SavedProfessionalInterface<T extends number | Master> {
     modified_by: number;
 }
 
-export interface BookMarkInterface extends SavedProfessionalInterface<Master> {
+export interface BookMarkInterface extends SavedProfessionalInterface<MasterInterface> {
 }

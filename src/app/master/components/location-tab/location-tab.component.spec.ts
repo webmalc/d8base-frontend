@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { LocationTabComponent } from './location-tab.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('LocationTabComponent', () => {
   let component: LocationTabComponent;
@@ -10,7 +12,7 @@ describe('LocationTabComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LocationTabComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LocationTabComponent);
