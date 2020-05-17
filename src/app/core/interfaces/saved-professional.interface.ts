@@ -9,3 +9,6 @@ export interface SavedProfessionalInterface<T extends number | Master> {
     created_by: number;
     modified_by: number;
 }
+
+export interface BookMarkInterface extends SavedProfessionalInterface<Master> {
+}

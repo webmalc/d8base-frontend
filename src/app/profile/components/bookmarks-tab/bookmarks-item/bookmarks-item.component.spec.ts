@@ -29,7 +29,7 @@ describe('BookmarksItemComponent', () => {
 
         const template = MasterFixture.create();
         const master: Master = autofixture.create<Master>(template, { id: 'integer' });
-        bookmark = BookmarkFixture.create<Master>(master);
+        bookmark = BookmarkFixture.create(master);
         component.bookmark = bookmark;
         fixture.detectChanges();
     }));

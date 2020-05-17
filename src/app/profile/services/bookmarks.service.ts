@@ -1,18 +1,22 @@
 import {Injectable} from '@angular/core';
-import {Observable, pipe} from 'rxjs';
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
 import {environment} from '../../../environments/environment';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {plainToClass} from 'class-transformer';
-import {BookmarkMaster} from '@app/core/models/bookmark-master';
+import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
+import {Observable} from 'rxjs';
+import {BookMarkInterface, SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
 import {map} from 'rxjs/operators';
 
 @Injectable()
 export class BookmarksService {
     private readonly url = environment.backend.saved_professionals;
 
-    constructor(private api: ApiClientService) {
+    constructor(
+        private savedService: SavedProfessionalApiService,
+
+    ) {
+    }
+
+    public getAll$(): Observable<BookMarkInterface[]> {
+        return this.savedService.getAll$<SavedProfessionalInterface<number>[]>();
     }
 
     // private master: Master = {
@@ -35,8 +39,6 @@ export class BookmarksService {
     //     modified_by: 2,
     //     note: 'note'
     // };
-
-
 
     // public createBookMark$(professional: Master): Observable<null>: void {
     //     return of();

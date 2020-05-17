@@ -1,8 +1,8 @@
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
+import {BookMarkInterface} from '@app/core/interfaces/saved-professional.interface';
 import {Master} from '@app/core/models/master';
 
 export class BookmarkFixture {
-    public static create<T extends Master|number>(master: T): SavedProfessionalInterface<T> {
+    public static create(master: Master): BookMarkInterface {
         return {
             id: 1,
             created: '',

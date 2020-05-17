@@ -17,7 +17,7 @@ export class SavedProfessionalApiService {
     public getAll$(): Observable<SavedProfessionalInterface<number>[]> {
         return this.api.get<ApiListResponseInterface<SavedProfessionalInterface<number>>>(this.url)
             .pipe(
-                map((raw) => raw.results)
+                map((raw: ApiListResponseInterface<SavedProfessionalInterface<number>>) => raw.results)
             );
     }
 
@@ -28,11 +28,15 @@ export class SavedProfessionalApiService {
         });
     }
 
-    public getSavedById(id: number): Observable<SavedProfessionalInterface<number>> {
-        return this.api.get(this.url, {id: id.toString()});
+    public getById(id: number): Observable<SavedProfessionalInterface<number>> {
+        return this.api.get(`${this.url}${id}/`);
     }
 
-    public removeSaved(saved: SavedProfessionalInterface<any>): Observable<void> {
-        return this.api.delete(this.url, {id: saved.id.toString()});
+    public remove(saved: SavedProfessionalInterface<Master>): Observable<void> {
+        return this.api.delete(`${this.url}${saved.id}/`);
+    }
+
+    public update(saved: SavedProfessionalInterface<number>): Observable<SavedProfessionalInterface<number>> {
+        return this.api.patch(this.url, saved);
     }
 }

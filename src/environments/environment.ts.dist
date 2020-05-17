@@ -26,7 +26,7 @@ export const environment = {
         professional_contact: '/en/api/accounts/professional-contacts/',
         professional_tags: '/en/api/accounts/professional-tags/',
         professional_tags_list: '/en/api/professionals/tags/'
-        saved_professionals: '/en/api/accounts/saved-professionals'
+        saved_professionals: '/en/api/accounts/saved-professionals/'
         url: 'http://localhost:8000'
     },
     client_id: '',
