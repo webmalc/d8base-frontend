@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
+import {IonicStorageModule} from '@ionic/storage';
+import {plainToClass} from 'class-transformer';
 import {of} from 'rxjs';
+import {User} from '../../core/models/user';
+import {UserLocation} from '../../core/models/user-location';
 import {ApiClientService} from '../../core/services/api-client.service';
 import {LocationService} from '../../core/services/location/location.service';
-import {User} from '../../core/models/user';
 import {RegistrationService} from './registration.service';
-import {plainToClass} from 'class-transformer';
-import {LocationModel} from '../../core/models/location.model';
-import {IonicStorageModule} from '@ionic/storage';
 
 describe('RegistrationService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -41,7 +41,7 @@ describe('RegistrationService', () => {
 
         service.register(
             plainToClass(User, user, { excludeExtraneousValues: true }),
-            plainToClass(LocationModel, location, { excludeExtraneousValues: true })
+            plainToClass(UserLocation, location, { excludeExtraneousValues: true })
         ).subscribe(
             res => {
                 expect(res).toBeTruthy();

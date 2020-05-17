@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {LocationModel} from '@app/core/models/location.model';
+import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {AbstractLocationService} from '@app/core/services/location/abstract-location.service';
+import {LocationTypes} from '@app/core/types/location-types';
 import {City} from '@app/profile/models/city';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
@@ -11,11 +13,12 @@ import {environment} from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class CitiesApiService {
+export class CitiesApiService extends AbstractLocationService {
 
     private readonly url = environment.backend.cities;
 
-    constructor(private client: ApiClientService) {
+    constructor(protected client: ApiClientService) {
+        super(client);
     }
 
     public getList(
@@ -29,28 +32,13 @@ export class CitiesApiService {
             page?: string,
             page_size?: string
         }
-    ): Observable<ApiListResponseInterface<City>> {
-        return this.client.get<ApiListResponseInterface<City>>(this.url, params).pipe(
-            map(
-                (data: ApiListResponseInterface<City>) => {
-                    data.results = plainToClass(City, data.results);
-
-                    return data;
-                }
-            )
-        );
+    ): Observable<ApiListResponseInterface<LocationTypes>> {
+        return super.getList(params);
     }
 
-    public getSingle(id: number): Observable<City> {
-        return this.client.get<City>(`${this.url}/${id}`).pipe(
-            map(raw => plainToClass(City, raw))
-        );
-    }
-
-    public getByLocation(dist: number, location: LocationModel): Observable<ApiListResponseInterface<City>> {
+    public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
         return this.client.get<ApiListResponseInterface<City>>(this.url, {
             dist: dist.toString(10),
-            // point: `6.061326,49.930906` //TODO: do not forget to delete
             point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
         }).pipe(
             map(result => {
@@ -59,5 +47,13 @@ export class CitiesApiService {
                 return result;
             })
         );
+    }
+
+    protected getPlainToClass(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
+        return plainToClass(City, results);
+    }
+
+    protected getUrl(): string {
+        return this.url;
     }
 }

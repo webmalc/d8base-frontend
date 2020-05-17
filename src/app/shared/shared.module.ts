@@ -5,10 +5,12 @@ import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
+import {LocationComponent} from '@app/shared/components/location/location.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {IonicSelectableModule} from 'ionic-selectable';
 import {DebounceDirective} from './directives/debounce.directive';
 
 @NgModule({
@@ -16,19 +18,22 @@ import {DebounceDirective} from './directives/debounce.directive';
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        ContactsTabComponent
+        ContactsTabComponent,
+        LocationComponent
     ],
     exports: [
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        ContactsTabComponent
+        ContactsTabComponent,
+        LocationComponent
     ],
     imports: [
         CommonModule,
         TranslateModule,
         IonicModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        IonicSelectableModule
     ],
     providers: [
         MainGuard,

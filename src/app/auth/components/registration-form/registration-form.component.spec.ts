@@ -13,8 +13,8 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {IonicSelectableModule} from 'ionic-selectable';
-import {LocationModel} from '../../../core/models/location.model';
 import {User} from '../../../core/models/user';
+import {UserLocation} from '../../../core/models/user-location';
 import {IpApiService} from '../../../core/services/location/ip-api.service';
 import {IpDataService} from '../../../core/services/location/ip-data.service';
 import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
@@ -95,7 +95,7 @@ describe('RegistrationFormComponent', () => {
             .toHaveBeenCalledWith(
                 {
                     user: plainToClass(User, data, {excludeExtraneousValues: true}),
-                    location: plainToClass(LocationModel, data, {excludeExtraneousValues: true})
+                    location: plainToClass(UserLocation, data, {excludeExtraneousValues: true})
                 });
     });
 });

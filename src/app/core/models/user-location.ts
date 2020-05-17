@@ -1,6 +1,7 @@
+import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {Expose} from 'class-transformer';
 
-export class LocationModel {
+export class UserLocation implements ClientLocationInterface  {
     @Expose() public id?: number;
     @Expose() public country?: number;
     @Expose() public region?: number;
@@ -13,6 +14,6 @@ export class LocationModel {
         type: string,
         coordinates: number[]
     };
-    @Expose() public is_default: boolean;
-    @Expose() public userId?: number;
+    @Expose() public units: number;
+    @Expose() public timezone: string;
 }

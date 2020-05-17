@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {RegistrationResponseInterface} from '@app/auth/interfaces/registration-response.interface';
-import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/core/models/user';
+import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {LocationApiService} from '@app/core/services/location/location-api.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable, of} from 'rxjs';
-import {catchError, switchMap, tap} from 'rxjs/operators';
+import {catchError, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class RegistrationService {
     ) {
     }
 
-    public register(user: User, location: LocationModel): Observable<User> {
+    public register(user: User, location: UserLocation): Observable<User> {
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
             switchMap(
                 async (newUser: RegistrationResponseInterface) => {
@@ -33,7 +33,7 @@ export class RegistrationService {
 
                     return from(this.locationService.getMergedLocationData()).pipe(
                         switchMap(
-                            (geoposition: LocationModel) => {
+                            (geoposition: UserLocation) => {
                                 if (null !== geoposition) {
                                     location.coordinates = geoposition.coordinates;
                                 }

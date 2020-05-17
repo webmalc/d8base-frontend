@@ -1,17 +1,16 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popover/city-picker-popover.component';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/core/models/user';
+import {UserLocation} from '@app/core/models/user-location';
 import {LocationService} from '@app/core/services/location/location.service';
+import {CountryCitySelectTrait} from '@app/core/traits/country-city-select-trait';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {CitiesApiService} from '@app/profile/services/cities-api.service';
 import {CountriesApiService} from '@app/profile/services/countries-api.service';
 import {PopoverController} from '@ionic/angular';
 import {plainToClass} from 'class-transformer';
-import {IonicSelectableComponent} from 'ionic-selectable';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 
@@ -20,16 +19,13 @@ import {RegistrationFormService} from '../../forms/registration-form.service';
     templateUrl: './registration-form.component.html',
     styleUrls: ['./registration-form.component.scss'],
 })
-export class RegistrationFormComponent implements OnInit {
+export class RegistrationFormComponent extends CountryCitySelectTrait implements OnInit {
 
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
-    public countryList$: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>([]);
-    public citiesList$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
     public supposedCities$: BehaviorSubject<City> = new BehaviorSubject<City>(null);
-    private searchSubscription: Subscription = null;
 
-    @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: LocationModel }>();
+    @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: UserLocation }>();
 
     constructor(
         public readonly registrationFormService: RegistrationFormService,
@@ -38,6 +34,7 @@ export class RegistrationFormComponent implements OnInit {
         private readonly locationService: LocationService,
         private readonly popoverController: PopoverController
     ) {
+        super();
     }
 
     public ngOnInit(): void {
@@ -51,7 +48,7 @@ export class RegistrationFormComponent implements OnInit {
         const formData: object = this.registrationFormService.form.getRawValue();
 
         const user = plainToClass(User, formData, {excludeExtraneousValues: true});
-        const location: LocationModel = new LocationModel();
+        const location: UserLocation = new UserLocation();
         location.country = formData[this.formFields.Country].id;
         location.city = formData[this.formFields.City].id;
         this.registrationFormData.emit({user, location});
@@ -61,62 +58,31 @@ export class RegistrationFormComponent implements OnInit {
         this.registrationFormService.setCityDisabled(false);
     }
 
-    public onCitySearch(event: { component: IonicSelectableComponent, text: string }): void {
-        const country: Country = this.registrationFormService.getFormFiledValue(this.formFields.Country);
-        this.abstractOnSearch(
-            event.component,
-            event.text,
-            this.citiesApi,
-            {by_name: event.text, country: country.id.toString(10)}
-            );
+    protected getCitiesApiService(): CitiesApiService {
+        return this.citiesApi;
     }
 
-    public onCountrySearch(event: { component: IonicSelectableComponent, text: string }): void {
-        this.abstractOnSearch(event.component, event.text, this.countriesApi, {search: event.text});
+    protected getCountriesApiService(): CountriesApiService {
+        return this.countriesApi;
     }
 
-    private abstractOnSearch(
-        component: IonicSelectableComponent,
-        text: string,
-        apiService: { getList: (params: { search?: string, country?: string, by_name?: string }) => Observable<ApiListResponseInterface<Country | City>> },
-        apiParams: { search?: string, country?: string, by_name?: string }
-    ): void {
-        component.startSearch();
+    protected getCountyFormField(): string {
+        return this.formFields.Country;
+    }
 
-        if (this.searchSubscription) {
-            this.searchSubscription.unsubscribe();
-        }
-
-        if (3 > text.length) {
-            if (!text) {
-                component.items = [];
-            }
-            component.endSearch();
-
-            return;
-        }
-
-        this.searchSubscription = apiService.getList(apiParams).subscribe(
-            (data: ApiListResponseInterface<Country | City>) => {
-                if (this.searchSubscription.closed) {
-                    return;
-                }
-
-                component.items = data.results;
-                component.endSearch();
-            }
-        );
+    protected getFormService(): { getFormFieldValue(formField: string): any } {
+        return this.registrationFormService;
     }
 
     private listenPopover(): void {
         this.supposedCities$.subscribe(
-            city => {
+            (city: City) => {
                 if (null !== city) {
                     this.countriesApi.getSingle(city.country).subscribe(
-                        county => {
-                            this.countryList$.next([county]);
+                        (country: Country) => {
+                            this.countryList$.next([country]);
                             this.citiesList$.next([city]);
-                            this.registrationFormService.setFormFiledValue(RegistrationFormFields.Country, county);
+                            this.registrationFormService.setFormFiledValue(RegistrationFormFields.Country, country);
                             this.registrationFormService.setFormFiledValue(RegistrationFormFields.City, city);
                         }
                     );

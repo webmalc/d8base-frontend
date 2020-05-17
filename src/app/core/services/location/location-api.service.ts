@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {LocationModel} from '@app/core/models/location.model';
 import {User} from '@app/core/models/user';
+import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -17,13 +18,13 @@ export class LocationApiService {
     constructor(private client: ApiClientService) {
     }
 
-    public saveLocation(location: LocationModel, user?: User): Observable<LocationModel> {
-        return this.client.post<LocationModel>(this.URL, location);
+    public saveLocation(location: ClientLocationInterface, user?: User): Observable<ClientLocationInterface> {
+        return this.client.post<ClientLocationInterface>(this.URL, location);
     }
 
-    public getLocation(user: User): Observable<LocationModel> {
+    public getLocation(user: User): Observable<UserLocation> {
         return this.client.get(`${this.URL}/${user.id}`).pipe(
-            map(raw => plainToClass(LocationModel, raw))
+            map(raw => plainToClass(UserLocation, raw))
         );
     }
 }
