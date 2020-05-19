@@ -21,7 +21,7 @@ jobs:
 
             - name: copy env file
               run: |
-                yes| cp ./src/environments/environments.ts.dist ./src/environments/environments.ts
+                yes| cp ./src/environments/environment.ts.dist ./src/environments/environment.ts
 #            - name: Lint
 #              run: npm run lint
 
