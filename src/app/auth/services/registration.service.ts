@@ -3,8 +3,8 @@ import {RegistrationResponseInterface} from '@app/auth/interfaces/registration-r
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {LocationApiService} from '@app/core/services/location/location-api.service';
 import {LocationService} from '@app/core/services/location/location.service';
+import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class RegistrationService {
     constructor(
         protected client: ApiClientService,
         private locationService: LocationService,
-        private locationApiService: LocationApiService,
+        private locationApiService: UserLocationApiService,
         private tokenManager: TokenManagerService
     ) {
     }
@@ -38,7 +38,7 @@ export class RegistrationService {
                                     location.coordinates = geoposition.coordinates;
                                 }
 
-                                return this.locationApiService.saveLocation(location).pipe(
+                                return this.locationApiService.save(location).pipe(
                                     switchMap(
                                         _ => of(newUser)
                                     )

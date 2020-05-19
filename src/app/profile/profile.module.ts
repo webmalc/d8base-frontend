@@ -9,6 +9,7 @@ import {ProfilePageRoutingModule} from './profile-routing.module';
 import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
+import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
@@ -45,6 +46,7 @@ import {SavedProfessionalApiService} from '@app/profile/services/saved-professio
         ContactTabComponent,
         EducationTabComponent,
         SettingsTabComponent,
+        LocationTabComponent,
         BookmarksTabComponent,
         BookmarksItemComponent
     ],

@@ -7,7 +7,6 @@ import {DistrictApiService} from '@app/core/services/location/district-api.servi
 import {RegionApiService} from '@app/core/services/location/region-api.service';
 import {SubregionApiService} from '@app/core/services/location/subregion-api.service';
 import {CountryCitySelectTrait} from '@app/core/traits/country-city-select-trait';
-import {MasterLocation} from '@app/master/models/master-location';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {CitiesApiService} from '@app/profile/services/cities-api.service';
@@ -35,6 +34,7 @@ export class LocationComponent extends CountryCitySelectTrait implements OnInit 
     public districtList$: BehaviorSubject<District[]> = new BehaviorSubject<District[]>([]);
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
         new BehaviorSubject<Array<{ value: string, display_name: string }>>([]);
+    private defaultData: ClientLocationInterface = null;
 
     constructor(
         public formService: LocationFormService,
@@ -53,9 +53,16 @@ export class LocationComponent extends CountryCitySelectTrait implements OnInit 
     }
 
     public submitForm(): void {
-        this.apiService.save(this.getClientLocationModel(this.formService.form.getRawValue())).subscribe(
-            res => console.log(res)
-        );
+        const form = this.getClientLocationModel(this.formService.form.getRawValue());
+        if (this.defaultData) {
+            this.apiService.update(this.getUpdatedLocationModel(form)).subscribe(
+                res => console.log(res)
+            );
+        } else {
+            this.apiService.save(form).subscribe(
+                res => console.log(res)
+            );
+        }
     }
 
     public onDistrictSearch(event: { component: IonicSelectableComponent, text: string }): void {
@@ -118,9 +125,16 @@ export class LocationComponent extends CountryCitySelectTrait implements OnInit 
         return this.formFields.Country;
     }
 
+    private getUpdatedLocationModel(location: ClientLocationInterface): ClientLocationInterface {
+        location.id = this.defaultData.id;
+
+        return location;
+    }
+
     private initForm(): void {
         this.apiService.get(this.masterId).subscribe(
-            (data: ApiListResponseInterface<MasterLocation>) => {
+            (data: ApiListResponseInterface<ClientLocationInterface>) => {
+                this.defaultData = data.results[0];
                 if (data.results.length === 0) {
                     return this.formService.createForm();
                 }

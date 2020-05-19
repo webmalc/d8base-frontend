@@ -18,6 +18,12 @@ export class MasterLocationApiService implements LocationApiServiceInterface {
     constructor(private api: ApiClientService) {
     }
 
+    public update(location: MasterLocation): Observable<MasterLocation> {
+        return this.api.patch(`${this.url + location.id}/`, location).pipe(
+            map(raw => plainToClass(MasterLocation, raw))
+        );
+    }
+
     public save(location: MasterLocation): Observable<MasterLocation> {
         return this.api.post(this.url, location).pipe(
             map(raw => plainToClass(MasterLocation, raw))
