@@ -5,7 +5,7 @@ import { LocationTabComponent } from './location-tab.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
-describe('LocationTabComponent', () => {
+describe('MasterLocationTabComponent', () => {
   let component: LocationTabComponent;
   let fixture: ComponentFixture<LocationTabComponent>;
 

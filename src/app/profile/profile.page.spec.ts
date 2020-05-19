@@ -44,14 +44,14 @@ describe('ProfilePage', () => {
 
     it('should create tabs', () => {
         const tabs = fixture.debugElement.query(By.directive(IonTabBar)).children;
-        expect(tabs.length).toEqual(5);
+        expect(tabs.length).toEqual(6);
     });
 
     it('should create tabs with education when isMaster true', () => {
         masterService.isMaster$.next(true);
         fixture.detectChanges();
         const tabs = fixture.debugElement.query(By.directive(IonTabBar)).children;
-        expect(tabs.length).toEqual(6);
+        expect(tabs.length).toEqual(7);
     });
 
 
