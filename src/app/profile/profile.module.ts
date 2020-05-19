@@ -26,6 +26,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
 import {BookmarksItemComponent} from '@app/profile/components/bookmarks-tab/bookmarks-item/bookmarks-item.component';
 import {BookmarksService} from '@app/profile/services/bookmarks.service';
+import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
 
 @NgModule({
     imports: [
@@ -57,7 +58,8 @@ import {BookmarksService} from '@app/profile/services/bookmarks.service';
         EducationApiService,
         CertificateApiService,
         SettingsFormService,
-        BookmarksService
+        BookmarksService,
+        SavedProfessionalApiService
     ]
 })
 export class ProfilePageModule {

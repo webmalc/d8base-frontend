@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookmarksService} from '@app/profile/services/bookmarks.service';
 import {Subscription} from 'rxjs';
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
-import {Master} from '@app/core/models/master';
+import {BookmarkMaster} from '@app/core/models/bookmark-master';
 
 @Component({
     selector: 'app-bookmarks-tab',
@@ -10,16 +9,20 @@ import {Master} from '@app/core/models/master';
     styleUrls: ['./bookmarks-tab.component.scss'],
 })
 export class BookmarksTabComponent implements OnInit, OnDestroy {
-    public bookmarks: SavedProfessionalInterface<Master>[] = [];
+    public bookmarks: BookmarkMaster[] = [];
     public deletedBookmarks: number[] = [];
     private uSub: Subscription;
 
-    constructor(private bookmarksService: BookmarksService) {
+    constructor(
+        private bookmarksService: BookmarksService
+    ) {
     }
 
     public ngOnInit(): void {
         this.uSub = this.bookmarksService.getAll$().subscribe(
-            bookmarks => this.bookmarks = bookmarks
+            bookmarks => {
+                this.bookmarks = bookmarks;
+            }
         );
     }
 
@@ -30,10 +33,21 @@ export class BookmarksTabComponent implements OnInit, OnDestroy {
     }
 
     public removeFromList(deletedBookmarkId: number): void {
-        this.deletedBookmarks.push(deletedBookmarkId);
+        this.bookmarksService.deleteBookmark(deletedBookmarkId).subscribe(
+            _ => {
+                this.deletedBookmarks.push(deletedBookmarkId);
+            }
+        );
     }
 
     public restoreToList(restoredBookmarkId: number): void {
-        this.deletedBookmarks = this.deletedBookmarks.filter(bookmarkId => bookmarkId !== restoredBookmarkId);
+        const oldBookmark = this.bookmarks.find(bmark => restoredBookmarkId === bmark.id);
+        this.bookmarksService.restoreBookmark(oldBookmark).subscribe(
+            newBookmark => {
+                this.deletedBookmarks = this.deletedBookmarks.filter(bookmarkId => bookmarkId !== oldBookmark.id);
+                this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== oldBookmark.id);
+                this.bookmarks.push(newBookmark);
+            }
+        );
     }
 }

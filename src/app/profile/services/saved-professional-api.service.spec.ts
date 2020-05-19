@@ -53,7 +53,7 @@ describe('SavedProfessionalApiService', () => {
         request.flush(listFixture);
     });
 
-    it ('should perform create method', () => {
+    it ('should be able to create item', () => {
         const master: Master = MasterFixture.create();
 
         const note = 'some note';
@@ -75,7 +75,7 @@ describe('SavedProfessionalApiService', () => {
         request.flush(answer);
     });
 
-    it ('should perform getById method', () => {
+    it ('should be able to getById method', () => {
         const answer = SavedProfessionalFixture.create();
 
         service.getById(answer.id).subscribe(
@@ -89,7 +89,7 @@ describe('SavedProfessionalApiService', () => {
         request.flush(answer);
     });
 
-    it ('should perform remove', () => {
+    it ('should be able to remove item', () => {
         const master = MasterFixture.create();
         const bookmark = BookmarkFixture.create(master);
 

@@ -1,8 +1,8 @@
-import {BookMarkInterface} from '@app/core/interfaces/saved-professional.interface';
 import {Master} from '@app/core/models/master';
+import {BookmarkMaster} from '@app/core/models/bookmark-master';
 
 export class BookmarkFixture {
-    public static create(master: Master): BookMarkInterface {
+    public static create(master: Master): BookmarkMaster {
         return {
             id: 1,
             created: '',

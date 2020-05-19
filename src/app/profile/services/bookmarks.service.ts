@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Observable} from 'rxjs';
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
+import {Observable, of, throwError} from 'rxjs';
+import {BookMarkInterface, SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
 import {map, switchMap} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {Master} from '@app/core/models/master';
@@ -22,40 +22,70 @@ export class BookmarksService {
     }
 
     public getAll$(): Observable<BookmarkMaster[]> {
-        let savedProfs: SavedProfessionalInterface<number>[];
+        let rawBookmarks: SavedProfessionalInterface<number>[] = [];
 
         return this.savedService.getAll$()
             .pipe(
                 map(value => {
-                    savedProfs = value;
+                    rawBookmarks = value;
 
-                    return value.map(({id}) => id);
+                    return value.map(({professional}) => professional);
                 }),
-                switchMap(value => this.masterManager.getUserLessList$(value)),
+                switchMap(ids => this.masterManager.getUserLessList$(ids)),
                 map((value: MasterInterface[]) => {
-                    return savedProfs.map<BookmarkMaster>(prof => {
-                        const masterId: number = prof.professional;
-                        const masterRaw: MasterInterface = value.find((master) => master.id === masterId);
-                        const bookmark = plainToClass<BookmarkMaster, SavedProfessionalInterface<number>>(BookmarkMaster, prof);
-                        if (masterRaw) {
-                            bookmark.professional = plainToClass(Master, masterRaw);
-                        } else {
-                            bookmark.professional = null;
-                        }
-
-                        return bookmark;
-                    });
+                    return this.fill(rawBookmarks, value);
                 })
             );
     }
+    public createBookmark(master: MasterInterface): Observable<BookmarkMaster> {
+        let rawBookmark: SavedProfessionalInterface<number>;
 
+        return this.savedService.create(master)
+            .pipe(
+                map((value) => {
+                    rawBookmark = value;
 
-    // public createBookMark$(professional: Master): Observable<null>: void {
-    //     return of();
-    // }
+                    return master.id;
+                }),
+                switchMap(id => this.masterManager.getUserLessList$([id])),
+                map(masters => this.fill([rawBookmark], masters).pop())
+            );
+    }
+
+    public restoreBookmark(bookmark: BookmarkMaster): Observable<BookmarkMaster> {
+        if (bookmark.professional === null) {
+            return throwError('Cannot restore bookmark with null master');
+        }
+
+        return this.createBookmark(bookmark.professional);
+    }
+
+    public deleteBookmark(id: number): Observable<void> {
+        return this.savedService.removeById(id);
+    }
+
+    private fill(
+        rawBooks: SavedProfessionalInterface<number>[], masters: MasterInterface[]): BookmarkMaster[] {
+        return rawBooks.map(prof => {
+            const masterId: number = prof.professional;
+            const masterRaw: MasterInterface = masters.find((master) => master.id === masterId);
+            const bookmark = plainToClass(BookmarkMaster, prof);
+            bookmark.professional = masterRaw ? plainToClass(Master, masterRaw) : null;
+
+            return bookmark;
+        });
+    }
+
+    // private fill<T, U, W>(external: T[], internal: U[], fillField?: string): W[] {
+    //     return external.map<W>(prof => {
+    //         const masterId: number = prof['professional'];
+    //         const masterRaw: U = internal.find((master) => master.id === masterId);
+    //         const bookmark = plainToClass<BookmarkMaster, T>(BookmarkMaster, prof);
+    //         bookmark.professional = masterRaw ? plainToClass(Master, masterRaw) : null;
     //
-    // public removeBookMark(bookMark: SavedProfessionalInterface<any>): void {
-    //
+    //         return bookmark;
+    //     });
     // }
+
 
 }

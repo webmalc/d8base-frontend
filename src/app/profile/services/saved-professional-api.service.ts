@@ -36,6 +36,10 @@ export class SavedProfessionalApiService {
         return this.api.delete(`${this.url}${saved.id}/`);
     }
 
+    public removeById(id: number): Observable<void> {
+        return this.api.delete(`${this.url}${id}/`);
+    }
+
     public update(saved: SavedProfessionalInterface<number>): Observable<SavedProfessionalInterface<number>> {
         return this.api.patch(this.url, saved);
     }

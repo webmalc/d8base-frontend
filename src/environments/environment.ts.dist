@@ -11,7 +11,7 @@ export const environment = {
         education: '',
         language: '/en/api/location/languages/',
         location: '/en/api/accounts/locations/',
-        master: '/en/api/accounts/professionals',
+        master: '/en/api/accounts/professionals/',
         master_list: '/en/api/professionals/professionals/',
         plugin: '',
         reset_password_link: '',
