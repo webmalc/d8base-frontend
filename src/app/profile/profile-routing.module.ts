@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MasterGuard} from '@app/core/guards/master.guard';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
 import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
+import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
             {
                 path: 'settings',
                 component: SettingsTabComponent
+            },
+            {
+                path: 'location',
+                component: LocationTabComponent
             }
         ]
     },

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {UserLocation} from '@app/core/models/user-location';
 import {HelperService} from '@app/core/services/helper.service';
-import {MasterLocation} from '@app/master/models/master-location';
-import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
+import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {plainToClass} from 'class-transformer';
 
@@ -13,22 +13,21 @@ import {plainToClass} from 'class-transformer';
 })
 export class LocationTabComponent implements OnInit {
 
-    public masterId: number;
+    public userId: number;
 
     constructor(
-        public api: MasterLocationApiService,
+        public api: UserLocationApiService,
         private route: ActivatedRoute
     ) {
     }
 
     public ngOnInit(): void {
-        this.masterId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+        this.userId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     }
 
-    public getNewMasterLocation(): (data: any) => ClientLocationInterface {
+    public getNewUserLocation(): (data: any) => ClientLocationInterface {
         return (data: any) => {
-            const model = plainToClass(MasterLocation, data, {excludeExtraneousValues: true});
-            model.professional = this.masterId;
+            const model = plainToClass(UserLocation, data, {excludeExtraneousValues: true});
             model.city = data.city?.id ?? undefined;
             model.country = data.country?.id ?? undefined;
             model.region = data.region?.id ?? undefined;
@@ -36,7 +35,7 @@ export class LocationTabComponent implements OnInit {
             model.district = data.district?.id ?? undefined;
             model.timezone = data.timezone?.value ?? undefined;
 
-            return HelperService.clean<MasterLocation>(model);
+            return HelperService.clean<UserLocation>(model);
         };
     }
 }
