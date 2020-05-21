@@ -1,12 +1,21 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { EducationFormService } from './education-form.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {EditMasterFormService} from './edit-master-form.service';
+import {EducationFormService} from './education-form.service';
 
 describe('EducationFormService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [
+            ReactiveFormsModule
+        ],
+        providers: [
+            EditMasterFormService
+        ]
+    }));
 
-  it('should be created', () => {
-    const service: EducationFormService = TestBed.get(EducationFormService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: EducationFormService = TestBed.inject(EducationFormService);
+        expect(service).toBeTruthy();
+    });
 });

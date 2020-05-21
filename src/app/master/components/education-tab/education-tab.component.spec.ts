@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {FormBuilder} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
 import { EducationTabComponent } from './education-tab.component';
 
 describe('EducationTabComponent', () => {
@@ -10,7 +13,8 @@ describe('EducationTabComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EducationTabComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+      providers: [FormBuilder]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EducationTabComponent);
