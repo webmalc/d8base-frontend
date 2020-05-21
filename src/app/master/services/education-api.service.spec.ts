@@ -1,22 +1,20 @@
 import {TestBed} from '@angular/core/testing';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MasterContactsApiService} from './master-contacts-api.service';
+import {EducationApiService} from './education-api.service';
 
-describe('MasterContactsApiService', () => {
+describe('EducationApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
             HttpClientTestingModule
         ],
         providers: [
-            MasterContactsApiService
+            EducationApiService
         ]
     }));
 
     it('should be created', () => {
-        const service: MasterContactsApiService = TestBed.inject(MasterContactsApiService);
+        const service: EducationApiService = TestBed.inject(EducationApiService);
         expect(service).toBeTruthy();
     });
-
-    xit('should be some tests');
 });

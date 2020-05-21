@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
 import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
+import {EducationTabComponent} from '@app/master/components/education-tab/education-tab.component';
 import {LocationTabComponent} from '@app/master/components/location-tab/location-tab.component';
 import {TagsSelectInputComponent} from '@app/master/components/tags-select-input/tags-select-input.component';
 import {TagsTabComponent} from '@app/master/components/tags-tab/tags-tab.component';
@@ -23,7 +24,6 @@ import {MasterTabsPage} from './master-tabs.page';
         TranslateModule,
         ReactiveFormsModule,
         SharedModule,
-
     ],
     declarations: [
         MasterTabsPage,
@@ -31,7 +31,8 @@ import {MasterTabsPage} from './master-tabs.page';
         TagsTabComponent,
         TagsSelectInputComponent,
         ContactsTabComponent,
-        LocationTabComponent
+        LocationTabComponent,
+        EducationTabComponent
     ],
     providers: [EditMasterFormService, UserContactApiService]
 })
