@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class HelperService {
 
-    constructor() { }
-
     public static clean<T>(obj: T): T {
         for (const propName in obj) {
             if (obj[propName] === null || obj[propName] === undefined) {
@@ -15,5 +13,11 @@ export class HelperService {
         }
 
         return obj;
+    }
+
+    public static cleanArray<T>(arr: T[]): T[] {
+        arr.forEach(val => this.clean(val));
+
+        return arr;
     }
 }

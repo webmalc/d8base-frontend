@@ -1,6 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {UserContact} from '@app/profile/models/user-contact';
+import {forkJoin, Observable, of} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -33,6 +35,38 @@ export class ApiClientService {
 
     public options<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {
         return this.http.options<T>(this.getHost() + url, params);
+    }
+
+    public deleteList<T extends {id: number}>(dataList: T[], url: string): Observable<any> {
+        return 0 === dataList.length ? of([]) :  of(dataList).pipe(
+            mergeMap((list) => forkJoin(
+                ...list.map((value: {id: number}) => this.delete(`${url + value.id}/`))
+            ))
+        );
+    }
+
+    public putList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
+        return 0 === dataList.length ? of([]) :  of(dataList).pipe(
+            mergeMap((list) => forkJoin(
+                ...list.map((value: {id: number}) => this.put<UserContact>(`${url}${value.id}/`, value))
+            ))
+        );
+    }
+
+    public patchList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
+        return 0 === dataList.length ? of([]) :  of(dataList).pipe(
+            mergeMap((list) => forkJoin(
+                ...list.map((value: {id: number}) => this.patch<UserContact>(`${url}${value.id}/`, value))
+            ))
+        );
+    }
+
+    public postList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
+        return 0 === dataList.length ? of([]) : of(dataList).pipe(
+            mergeMap((list) => forkJoin(
+                ...list.map((value: {id: number}) => this.post<UserContact>(url, value))
+            ))
+        );
     }
 
     private getHost(): string {
