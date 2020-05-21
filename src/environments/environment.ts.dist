@@ -8,7 +8,7 @@ export const environment = {
         contact: '/en/api/contacts/contacts/',
         countries: '/en/api/location/countries/',
         districts: '/en/api/location/districts/',
-        education: '',
+        education: '/en/api/accounts/professional-educations/',
         language: '/en/api/location/languages/',
         location: '/en/api/accounts/locations/',
         master: '/en/api/accounts/professionals/',
