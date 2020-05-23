@@ -1,10 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-
-import {MasterGuard} from '@app/core/guards/master.guard';
 import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
-import {EducationTabComponent} from '@app/profile/components/education-tab/education-tab.component';
 import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
@@ -30,11 +27,6 @@ const routes: Routes = [
             {
                 path: 'contacts',
                 component: ContactTabComponent
-            },
-            {
-                path: 'education',
-                component: EducationTabComponent,
-                canActivate: [MasterGuard]
             },
             {
                 path: 'settings',

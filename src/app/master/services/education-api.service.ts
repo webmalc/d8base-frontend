@@ -7,9 +7,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class EducationApiService {
 
     private readonly url = environment.backend.education;
@@ -27,11 +25,15 @@ export class EducationApiService {
     }
 
     public create(education: Education[]): Observable<Education[]> {
-        return this.client.postList<Education>(education, this.url);
+        return this.client.postList<Education>(education, this.url).pipe(
+            map(raw => plainToClass(Education, raw))
+        );
     }
 
     public update(education: Education[]): Observable<Education[]> {
-        return this.client.putList<Education>(education, this.url);
+        return this.client.putList<Education>(education, this.url).pipe(
+            map(raw => plainToClass(Education, raw))
+        );
     }
 
     public delete(education: Education[]): Observable<Education[]> {

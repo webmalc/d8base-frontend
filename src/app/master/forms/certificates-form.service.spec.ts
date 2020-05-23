@@ -1,20 +1,20 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import {ReactiveFormsModule} from '@angular/forms';
-import {EducationFormService} from './education-form.service';
+import { CertificatesFormService } from './certificates-form.service';
 
-describe('EducationFormService', () => {
+describe('CertificatesFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
             ReactiveFormsModule
         ],
         providers: [
-            EducationFormService
+            CertificatesFormService
         ]
     }));
 
     it('should be created', () => {
-        const service: EducationFormService = TestBed.inject(EducationFormService);
+        const service: CertificatesFormService = TestBed.inject(CertificatesFormService);
         expect(service).toBeTruthy();
     });
 });

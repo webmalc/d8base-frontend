@@ -9,6 +9,8 @@ export const environment = {
         countries: '/en/api/location/countries/',
         districts: '/en/api/location/districts/',
         education: '/en/api/accounts/professional-educations/',
+        experience: '/en/api/accounts/professional-experience/',
+        certificates: '/en/api/accounts/professional-certificates/',
         language: '/en/api/location/languages/',
         location: '/en/api/accounts/locations/',
         master: '/en/api/accounts/professionals/',

@@ -3,9 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {EducationFormFields} from '@app/master/enums/education-form-fields';
 import {Education} from '@app/master/models/education';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class EducationFormService {
 
     public form: FormGroup;
