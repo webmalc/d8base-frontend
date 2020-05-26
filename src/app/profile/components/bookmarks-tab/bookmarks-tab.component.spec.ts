@@ -1,5 +1,5 @@
 import {async, ComponentFixture, fakeAsync, flush, inject, TestBed, tick} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import {IonicModule, IonLabel} from '@ionic/angular';
 
 import {BookmarksTabComponent} from './bookmarks-tab.component';
 import {BookmarksService} from '../../services/bookmarks.service';
@@ -13,7 +13,8 @@ import {By} from '@angular/platform-browser';
 import {BookmarksItemComponent} from './bookmarks-item/bookmarks-item.component';
 import {Master} from '../../../core/models/master';
 import {BookmarkMaster} from '../../../core/models/bookmark-master';
-import {of} from 'rxjs';
+import {TranslateModule} from '@ngx-translate/core';
+import * as translate from '../../../../assets/i18n/ru.json';
 
 describe('BookmarksTabComponent', () => {
     let component: BookmarksTabComponent;
@@ -24,7 +25,7 @@ describe('BookmarksTabComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [BookmarksTabComponent, BookmarksItemComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
+            imports: [IonicModule, HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [BookmarksService, SavedProfessionalApiService]
         }).compileComponents();
 
@@ -62,6 +63,14 @@ describe('BookmarksTabComponent', () => {
         expect(items.length).toBe(bookmarks.length);
     });
 
+    it('should show message when list empty', () => {
+        component.bookmarks = [];
+        fixture.detectChanges();
+        const label = fixture.debugElement.query(By.directive(IonLabel));
+        expect(label).toBeTruthy();
+        expect(label.nativeElement.textContent).toEqual(translate.bookmarks['no-bookmarks']);
+    });
+
     it('should be able to remove bookmark', fakeAsync(() => {
         spyOn(bookmarksService, 'deleteBookmark').and.returnValue(asyncData<void>(null));
         component.removeFromList(bookmarks[0].id);
@@ -71,8 +80,6 @@ describe('BookmarksTabComponent', () => {
     }));
 
     it('should be able to restore bookmark', async(() => {
-
-
         const bookmark = component.bookmarks[1];
         component.deletedBookmarks.push(bookmark.id);
         fixture.detectChanges();

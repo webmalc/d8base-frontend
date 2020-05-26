@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonButton, IonicModule, IonItem, IonLabel} from '@ionic/angular';
+import {IonButton, IonicModule, IonItem} from '@ionic/angular';
 
 import {Autofixture} from '../../../../../testing/fixtures/generator';
 import {MasterFixture} from '../../../../../testing/fixtures/master-fixture';
