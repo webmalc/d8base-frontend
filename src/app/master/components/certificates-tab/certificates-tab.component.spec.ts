@@ -4,22 +4,22 @@ import { IonicModule } from '@ionic/angular';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {EducationFormService} from '../../forms/education-form.service';
-import {EducationApiService} from '../../services/education-api.service';
-import { EducationTabComponent } from './education-tab.component';
+import {CertificatesFormService} from '../../forms/certificates-form.service';
+import {CertificatesApiService} from '../../services/certificates-api.service';
+import { CertificatesTabComponent } from './certificates-tab.component';
 
-describe('EducationTabComponent', () => {
-  let component: EducationTabComponent;
-  let fixture: ComponentFixture<EducationTabComponent>;
+describe('CertificatesTabComponent', () => {
+  let component: CertificatesTabComponent;
+  let fixture: ComponentFixture<CertificatesTabComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EducationTabComponent ],
+      declarations: [ CertificatesTabComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
-      providers: [FormBuilder, EducationApiService, EducationFormService]
+      providers: [FormBuilder, CertificatesFormService, CertificatesApiService]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EducationTabComponent);
+    fixture = TestBed.createComponent(CertificatesTabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

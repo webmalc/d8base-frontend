@@ -1,0 +1,88 @@
+<ion-content>
+  <form *ngIf="formService.form" [formGroup]="formService.form" (ngSubmit)="submitExperienceForm()">
+    <div *ngFor="let e of formService.getExperienceFormArray().controls; let i=index"
+         [formArrayName]="formFields.Experience">
+      <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+          <ion-card [formGroupName]="i">
+            <ion-card-header>
+              {{'experience-tab.experience.experience'|translate}}
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label color="medium"
+                           position="floating">{{'experience-tab.experience.title'|translate}}</ion-label>
+                <ion-input [formControlName]="formFields.Title" type="text"
+                           name="title"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label color="medium"
+                           position="floating">{{'experience-tab.experience.company'|translate}}</ion-label>
+                <ion-input [formControlName]="formFields.Company" type="text" name="company"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label
+                        color="medium">{{'experience-tab.experience.is_still_here'|translate}}</ion-label>
+                <ion-toggle [formControlName]="formFields.IsStillHere"></ion-toggle>
+              </ion-item>
+
+              <ion-item>
+                <ion-label color="medium"
+                           position="floating">{{'experience-tab.experience.startDate'|translate}}</ion-label>
+                <ion-datetime
+                        display-format="YYYY-MM-DD"
+                        [formControlName]="formFields.StartDate"
+                ></ion-datetime>
+              </ion-item>
+              <ion-item>
+                <ion-label color="medium"
+                           position="floating">{{'experience-tab.experience.endDate'|translate}}</ion-label>
+                <ion-datetime
+                        display-format="YYYY-MM-DD"
+                        [formControlName]="formFields.EndDate"
+                ></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                <ion-label
+                        color="medium" position="floating">{{'experience-tab.experience.description'|translate}}</ion-label>
+                <ion-input [formControlName]="formFields.Description" type="text"
+                           name="title"></ion-input>
+              </ion-item>
+
+              <ion-input [formControlName]="formFields.ID" type="hidden"></ion-input>
+
+              <ion-button
+                      expand="block"
+                      fill="solid"
+                      color="danger"
+                      (click)="formService.removeExperience(i)"
+              >{{ 'experience-tab.experience.remove_experience' | translate }}</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-row class="ion-justify-content-center">
+      <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-button
+                expand="block"
+                fill="solid"
+                color="success"
+                (click)="formService.addExperience()"
+        >{{ 'experience-tab.experience.add_experience' | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-button
+                type="submit"
+                expand="block"
+                fill="solid"
+                color="success"
+                [disabled]="formService.isSubmitDisabled()"
+        >{{ 'experience-tab.save' | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
