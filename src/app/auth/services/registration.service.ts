@@ -7,7 +7,7 @@ import {LocationService} from '@app/core/services/location/location.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {from, Observable, of} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
@@ -27,27 +27,30 @@ export class RegistrationService {
     public register(user: User, location: UserLocation): Observable<User> {
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
             switchMap(
-                async (newUser: RegistrationResponseInterface) => {
-                    await this.tokenManager.setTokens(newUser.token);
-                    this.sendVerifyLink().subscribe();
+                (newUser: RegistrationResponseInterface) => {
+                    return from(this.tokenManager.setTokens(newUser.token)).pipe(
+                        switchMap(() => {
+                            this.sendVerifyLink().subscribe();
 
-                    return from(this.locationService.getMergedLocationData()).pipe(
-                        switchMap(
-                            (geoposition: UserLocation) => {
-                                if (null !== geoposition) {
-                                    location.coordinates = geoposition.coordinates;
-                                }
+                            return from(this.locationService.getMergedLocationData()).pipe(
+                                switchMap(
+                                    (geoposition: UserLocation) => {
+                                        if (null !== geoposition) {
+                                            location.coordinates = geoposition.coordinates;
+                                        }
 
-                                return this.locationApiService.save(location).pipe(
-                                    switchMap(
-                                        _ => of(newUser)
-                                    )
-                                );
-                            }
-                        ),
-                        catchError(
-                            e => of(newUser)
-                        )
+                                        return this.locationApiService.save(location).pipe(
+                                            map(
+                                                _ => of(newUser)
+                                            )
+                                        );
+                                    }
+                                ),
+                                catchError(
+                                    e => of(newUser)
+                                )
+                            );
+                        })
                     );
                 }
             ),

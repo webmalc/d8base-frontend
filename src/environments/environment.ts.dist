@@ -34,7 +34,8 @@ export const environment = {
         professional_tags_list: '/en/api/professionals/tags/',
         professional_location: '/en/api/accounts/professional-locations/',
         saved_professionals: '/en/api/accounts/saved-professionals/',
-        url: 'http://localhost:8000'
+        url: 'http://localhost:8000',
+        map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     },
     client_id: '',
     client_secret: '',

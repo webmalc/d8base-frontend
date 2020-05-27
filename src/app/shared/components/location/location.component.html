@@ -109,6 +109,16 @@
 
             <ion-row class="ion-justify-content-center">
                 <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <app-user-location-map
+                        [clientLocationList]="clientLocationList"
+                        [formControlName]="formFields.Coordinates"
+                    >
+                    </app-user-location-map>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-center">
+                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label color="medium" position="floating">{{ 'location.postal' | translate }}</ion-label>
                         <ion-input type="text" name="phone" [formControlName]="formFields.PostalCode"></ion-input>

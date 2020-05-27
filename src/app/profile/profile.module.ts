@@ -24,6 +24,7 @@ import {UserPluginApiService} from '@app/profile/services/user-plugin-api.servic
 import {SharedModule} from '@app/shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import {ProfilePage} from './profile.page';
         ProfilePageRoutingModule,
         TranslateModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        LeafletModule
     ],
     declarations: [
         ProfilePage,

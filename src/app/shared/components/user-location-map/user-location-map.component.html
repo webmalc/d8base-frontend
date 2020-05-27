@@ -1,0 +1,9 @@
+<div style="height: 300px;"
+     *ngIf="options"
+     leaflet
+     [leafletOptions]="options"
+     (leafletClick)="onMapClick($event)"
+     (leafletMapReady)="onMapReady($event)"
+>
+</div>
+

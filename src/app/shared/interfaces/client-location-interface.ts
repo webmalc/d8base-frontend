@@ -1,3 +1,5 @@
+import {Coordinates} from '@app/shared/interfaces/coordinates';
+
 export interface ClientLocationInterface {
     id?: number;
     country?: number;
@@ -7,10 +9,7 @@ export interface ClientLocationInterface {
     district: number;
     postal_code: number;
     address: string;
-    coordinates: {
-        type: string,
-        coordinates: number[]
-    };
+    coordinates: Coordinates;
     units: number;
     professional?: number;
     timezone: string;

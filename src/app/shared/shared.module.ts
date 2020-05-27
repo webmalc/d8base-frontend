@@ -7,7 +7,9 @@ import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {LocationComponent} from '@app/shared/components/location/location.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
+import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
@@ -19,7 +21,8 @@ import {DebounceDirective} from './directives/debounce.directive';
         PictureSelectorComponent,
         DebounceDirective,
         ContactsTabComponent,
-        LocationComponent
+        LocationComponent,
+        UserLocationMapComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -33,7 +36,8 @@ import {DebounceDirective} from './directives/debounce.directive';
         TranslateModule,
         IonicModule,
         ReactiveFormsModule,
-        IonicSelectableModule
+        IonicSelectableModule,
+        LeafletModule
     ],
     providers: [
         MainGuard,
