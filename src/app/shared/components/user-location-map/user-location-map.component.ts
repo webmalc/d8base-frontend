@@ -4,7 +4,6 @@ import {ClientLocationInterface} from '@app/shared/interfaces/client-location-in
 import {Coordinates} from '@app/shared/interfaces/coordinates';
 import * as L from 'leaflet';
 import {LeafletMouseEvent} from 'leaflet';
-import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 
 @Component({
@@ -20,23 +19,27 @@ import {environment} from '../../../../environments/environment';
 export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
 
     public options: L.MapOptions;
-    @Input() public clientLocationList: BehaviorSubject<ClientLocationInterface[]>;
+    @Input() public clientLocation: ClientLocationInterface;
     private map: L.Map;
     private layerGroup: L.LayerGroup;
     private onChange: (fn: any) => void;
 
     public ngOnInit(): void {
-        this.clientLocationList.subscribe(
-            cords => cords.length ? this.initMap(cords[0].coordinates.coordinates) : null
-        );
+        this.initMap(this.clientLocation?.coordinates?.coordinates);
     }
 
     public onMapReady(map: L.Map): void {
         this.map = map;
         this.layerGroup = L.layerGroup().addTo(this.map);
-        this.clientLocationList.subscribe((data: ClientLocationInterface[]) =>
-            (new L.Marker({lat: data[0].coordinates.coordinates[1], lng: data[0].coordinates.coordinates[0]}))
-                .addTo(this.layerGroup));
+        if (this.clientLocation.coordinates) {
+            (new L.Marker(
+                {
+                    lat: this.clientLocation.coordinates.coordinates[1],
+                    lng: this.clientLocation.coordinates.coordinates[0]
+                }
+            )).addTo(this.layerGroup);
+        }
+
     }
 
     public onMapClick(event: LeafletMouseEvent): void {
@@ -54,19 +57,26 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     }
 
     // tslint:disable:no-empty
-    public registerOnTouched(fn: any): void {}
+    public registerOnTouched(fn: any): void {
+    }
 
-    public writeValue(data: string[]): void {}
+    public writeValue(data: string[]): void {
+    }
 
-    public setDisabledState(isDisabled: boolean): void {}
+    public setDisabledState(isDisabled: boolean): void {
+    }
 
     private initMap(coordinates: number[]): void {
+        let center: L.LatLngLiteral = { lat: 46.550429, lng: -30.499274 };
+        let zoom: number = 2;
+        if (coordinates) {
+            center = { lat: coordinates[1], lng: coordinates[0]};
+            zoom = 12;
+        }
         this.options = {
-            layers: [
-                L.tileLayer(environment.map_url, { maxZoom: 18, attribution: '...' })
-            ],
-            zoom: 12,
-            center: L.latLng(coordinates[1], coordinates[0])
+            layers: [L.tileLayer(environment.map_url, {maxZoom: 18, attribution: '...'})],
+            zoom,
+            center
         };
     }
 

@@ -34,11 +34,10 @@ export class LocationComponent extends CountryCitySelectTrait implements OnInit 
     public districtList$: BehaviorSubject<District[]> = new BehaviorSubject<District[]>([]);
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
         new BehaviorSubject<Array<{ value: string, display_name: string }>>([]);
-    public clientLocationList: BehaviorSubject<ClientLocationInterface[]> = new BehaviorSubject<ClientLocationInterface[]>([]);
-    private defaultData: ClientLocationInterface = null;
+    public defaultData: ClientLocationInterface = null;
 
     constructor(
-        public formService: LocationFormService,
+        public readonly formService: LocationFormService,
         private readonly countriesApi: CountriesApiService,
         private readonly regionApi: RegionApiService,
         private readonly subregionApi: SubregionApiService,
@@ -136,7 +135,6 @@ export class LocationComponent extends CountryCitySelectTrait implements OnInit 
         this.apiService.get(this.masterId).subscribe(
             (data: ApiListResponseInterface<ClientLocationInterface>) => {
                 this.defaultData = data.results[0];
-                this.clientLocationList.next(data.results);
                 if (data.results.length === 0) {
                     return this.formService.createForm();
                 }
