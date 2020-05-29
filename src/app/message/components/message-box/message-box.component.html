@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-list-header>
+    {{boxType}} message
+  </ion-list-header>
+  <ion-list>
+    <app-message-instance
+            *ngFor="let message of messages" [message]="message"
+            (read)="readMessage($event)"
+            (delete)="deleteMessage($event)"
+            (unread)="makeMessageUnread($event)"
+            (reply)="replyMessage($event)"
+    >
+    </app-message-instance>
+  </ion-list>
+</ion-list>

@@ -1,0 +1,44 @@
+<ion-item>
+    <ion-label color="{{isRead() ? 'default': 'secondary'}}">
+        <span>From: {{message.receiver||'unknow'}} To: {{message.sender||'unknow'}} Subject: {{message.subject}}</span>
+    </ion-label>
+    <ion-buttons>
+        <ion-button
+                *ngIf="boxType === availableBoxTypes.INBOX"
+                color="success"
+                fill="solid"
+                (click)="doReply()"
+        >
+            {{'message.reply'|translate}}
+        </ion-button>
+        <ion-button
+                *ngIf="boxType === availableBoxTypes.INBOX"
+                color="warning"
+                fill="solid"
+                (click)="makeUnread()"
+                [disabled]="!isRead()"
+        >
+            {{'message.unread'|translate}}
+        </ion-button>
+        <ion-button
+                (click)="readMessage()"
+                size="small"
+                color="secondary"
+                fill="solid"
+        >
+            {{(!isOpened ? 'messages.read':'messages.close')|translate}}
+        </ion-button>
+        <ion-button
+                size="small"
+                color="danger"
+                fill="solid"
+                (click)="deleteMessage()"
+        >
+            {{'messages.delete'|translate}}
+        </ion-button>
+
+    </ion-buttons>
+</ion-item>
+<ion-textarea *ngIf="isOpened">{{message.body}}</ion-textarea>
+
+

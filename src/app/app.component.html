@@ -48,6 +48,15 @@
                     </ion-item>
 
                     <ion-item
+                            routerLink="/message"
+                            routerLinkActive="active"
+                            routerDirection="forward"
+                    >
+                        <ion-icon name="{{newMessages ? 'mail-unread-outline': 'mail-outline'}}"></ion-icon>
+                        {{'messages.messages'|translate}}
+                    </ion-item>
+
+                    <ion-item
                             (click)="logout()"
                     >
                         <ion-icon name="log-out-outline"></ion-icon>

@@ -19,6 +19,11 @@ const routes: Routes = [
         loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule),
         canActivate: [MasterGuard]
     },
+    {
+        path: 'message',
+        loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule)
+    },
+
 ];
 
 @NgModule({
