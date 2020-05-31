@@ -1,12 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {District} from '@app/core/models/district';
 import {Region} from '@app/core/models/region';
-import {Subregion} from '@app/core/models/subregion';
 import {DistrictApiService} from '@app/core/services/location/district-api.service';
 import {RegionApiService} from '@app/core/services/location/region-api.service';
 import {SubregionApiService} from '@app/core/services/location/subregion-api.service';
-import {CountryCitySelectTrait} from '@app/core/traits/country-city-select-trait';
+import {SelectableCityOnSearchService} from '@app/core/services/selectable-city-on-search.service';
+import {SelectableCountryOnSearchService} from '@app/core/services/selectable-country-on-search.service';
+import {SelectableDistrictOnSearchService} from '@app/core/services/selectable-district-on-search.service';
+import {SelectableRegionOnSearchService} from '@app/core/services/selectable-region-on-search.service';
+import {SelectableSubregionOnSearchService} from '@app/core/services/selectable-subregion-on-search.service';
+import {ListComponentTrait} from '@app/core/traits/list-component-trait';
+import {LocationTypes} from '@app/core/types/location-types';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {CitiesApiService} from '@app/profile/services/cities-api.service';
@@ -15,29 +19,31 @@ import {LocationFormFields} from '@app/shared/enums/location-form-fields';
 import {LocationFormService} from '@app/shared/forms/location-form.service';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
-import {IonicSelectableComponent} from 'ionic-selectable';
-import {BehaviorSubject, forkJoin, of} from 'rxjs';
+import {BehaviorSubject, forkJoin} from 'rxjs';
 
 @Component({
     selector: 'app-location',
     templateUrl: './location.component.html',
     styleUrls: ['./location.component.scss'],
 })
-export class LocationComponent extends CountryCitySelectTrait implements OnInit {
+export class LocationComponent extends ListComponentTrait implements OnInit {
 
     @Input() public apiService: LocationApiServiceInterface;
     @Input() public masterId: number;
     @Input() public getClientLocationModel: (data: object) => ClientLocationInterface;
     public formFields = LocationFormFields;
-    public regionList$: BehaviorSubject<Region[]> = new BehaviorSubject<Region[]>([]);
-    public subregionList$: BehaviorSubject<Subregion[]> = new BehaviorSubject<Subregion[]>([]);
-    public districtList$: BehaviorSubject<District[]> = new BehaviorSubject<District[]>([]);
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
         new BehaviorSubject<Array<{ value: string, display_name: string }>>([]);
-    public defaultData: ClientLocationInterface = null;
+    public defaultDataForMaps: ClientLocationInterface[] = [];
+    public locationsList: ClientLocationInterface[] = [];
 
     constructor(
         public readonly formService: LocationFormService,
+        public readonly countrySelectable: SelectableCountryOnSearchService,
+        public readonly citySelectable: SelectableCityOnSearchService,
+        public readonly regionSelectable: SelectableRegionOnSearchService,
+        public readonly selectableSubregion: SelectableSubregionOnSearchService,
+        public readonly districtSelectable: SelectableDistrictOnSearchService,
         private readonly countriesApi: CountriesApiService,
         private readonly regionApi: RegionApiService,
         private readonly subregionApi: SubregionApiService,
@@ -53,109 +59,110 @@ export class LocationComponent extends CountryCitySelectTrait implements OnInit 
     }
 
     public submitForm(): void {
-        const form = this.getClientLocationModel(this.formService.form.getRawValue());
-        if (this.defaultData) {
-            this.apiService.update(this.getUpdatedLocationModel(form)).subscribe(
-                res => console.log(res)
-            );
-        } else {
-            this.apiService.save(form).subscribe(
-                res => console.log(res)
-            );
-        }
+        const rawForm: ClientLocationInterface[] = this.formService.form.getRawValue()[this.formFields.Location];
+        const form: ClientLocationInterface[] = [];
+        rawForm.forEach(location => form.push(this.getClientLocationModel(location)));
+        const toCreate = this.getDataToCreate<ClientLocationInterface>(form, this.masterId);
+        console.log(toCreate);
+        const toUpdate = this.getDataToUpdate<ClientLocationInterface>(form, this.masterId, this.locationsList);
+        console.log(toUpdate);
+        const toDelete = this.getDataToDelete<ClientLocationInterface>(form, this.locationsList);
+        console.log(toDelete);
+        // if (this.defaultData) {
+        //     this.apiService.update(this.getUpdatedLocationModel(form)).subscribe(
+        //         res => console.log(res)
+        //     );
+        // } else {
+        //     this.apiService.save(form).subscribe(
+        //         res => console.log(res)
+        //     );
+        // }
     }
 
-    public onDistrictSearch(event: { component: IonicSelectableComponent, text: string }): void {
-        const city: City = this.formService.getFormFieldValue(this.formFields.City);
-        this.abstractOnSearch(
-            event.component,
-            event.text,
-            this.districtApi,
-            {city: city?.id.toString(10)}
-        );
+    public getCountryValue(index: number): Country {
+        return this.formService.getFieldValue<Country>(index, LocationFormFields.Country);
     }
 
-    public onSubregionSearch(event: { component: IonicSelectableComponent, text: string }): void {
-        const country: Country = this.formService.getFormFieldValue(this.formFields.Country);
-        const region: Region = this.formService.getFormFieldValue(this.formFields.Region);
-        this.abstractOnSearch(
-            event.component,
-            event.text,
-            this.subregionApi,
-            {country: country?.id.toString(10), region: region?.id.toString(10)}
-        );
+    public getRegionValue(index: number): Region {
+        return this.formService.getFieldValue<Region>(index, LocationFormFields.Region);
     }
 
-    public onRegionSearch(event: { component: IonicSelectableComponent, text: string }): void {
-        const country: Country = this.formService.getFormFieldValue(this.formFields.Country);
-        this.abstractOnSearch(
-            event.component,
-            event.text,
-            this.regionApi,
-            {country: country?.id.toString(10)}
-        );
+    public getCityValue(index: number): City {
+        return this.formService.getFieldValue<City>(index, LocationFormFields.City);
     }
 
-    public onCityChange(): void {
-        this.formService.setControlDisabled(false, this.formFields.District);
+    public onCityChange(index: number): void {
+        this.formService.setControlDisabled(false, this.formFields.District, index);
     }
 
-    public onRegionChange(): void {
-        this.formService.setControlDisabled(false, this.formFields.Subregion);
+    public onRegionChange(index: number): void {
+        this.formService.setControlDisabled(false, this.formFields.Subregion, index);
     }
 
-    public onCountryChange(): void {
-        this.formService.setControlDisabled(false, this.formFields.City);
-        this.formService.setControlDisabled(false, this.formFields.Region);
+    public onCountryChange(index: number): void {
+        this.formService.setControlDisabled(false, this.formFields.City, index);
+        this.formService.setControlDisabled(false, this.formFields.Region, index);
     }
 
-    protected getFormService(): { getFormFieldValue(formField: string): string } {
-        return this.formService;
+    // private getUpdatedLocationModel(location: ClientLocationInterface): ClientLocationInterface {
+    //     location.id = this.defaultData.id;
+    //
+    //     return location;
+    // }
+
+    protected updateListAfterDelete(element: any): void {
     }
 
-    protected getCitiesApiService(): CitiesApiService {
-        return this.citiesApi;
-    }
-
-    protected getCountriesApiService(): CountriesApiService {
-        return this.countriesApi;
-    }
-
-    protected getCountyFormField(): string {
-        return this.formFields.Country;
-    }
-
-    private getUpdatedLocationModel(location: ClientLocationInterface): ClientLocationInterface {
-        location.id = this.defaultData.id;
-
-        return location;
+    protected updateListAfterPost(element: any): void {
     }
 
     private initForm(): void {
         this.apiService.get(this.masterId).subscribe(
             (data: ApiListResponseInterface<ClientLocationInterface>) => {
-                this.defaultData = data.results[0];
+                this.defaultDataForMaps = data.results;
+                this.createHashArray(data.results, this.locationsList);
                 if (data.results.length === 0) {
                     return this.formService.createForm();
                 }
                 forkJoin({
-                    country: data.results[0]?.country ? this.countriesApi.getSingle(data.results[0].country) : of(null),
-                    region: data.results[0]?.region ? this.regionApi.getSingle(data.results[0].region) : of(null),
-                    subregion: data.results[0]?.subregion ? this.subregionApi.getSingle(data.results[0].subregion) : of(null),
-                    city: data.results[0]?.city ? this.citiesApi.getSingle(data.results[0].city) : of(null),
-                    district: data.results[0]?.district ? this.districtApi.getSingle(data.results[0].district) : of(null)
+                    countries: this.countriesApi.getListByIdArray(data.results.map(client => client.country)),
+                    regions: this.regionApi.getListByIdArray(data.results.map(client => client.region)),
+                    subregions: this.subregionApi.getListByIdArray(data.results.map(client => client.subregion)),
+                    cities: this.citiesApi.getListByIdArray(data.results.map(client => client.city)),
+                    districts: this.districtApi.getListByIdArray(data.results.map(client => client.district))
                 }).subscribe(
-                    ({country, region, subregion, city, district}) => {
-                        data.results[0].country = country;
-                        data.results[0].region = region;
-                        data.results[0].subregion = subregion;
-                        data.results[0].city = city;
-                        data.results[0].district = district;
-                        this.formService.createForm(data.results[0]);
+                    ({countries, regions, subregions, cities, districts}) => {
+                        this.formService.createForm(
+                            this.generateLocationList(data.results, countries, regions, subregions, cities, districts)
+                        );
                     }
                 );
             }
         );
+    }
+
+    private generateLocationList(
+        clientData: ClientLocationInterface[],
+        countries: LocationTypes[],
+        regions: LocationTypes[],
+        subregions: LocationTypes[],
+        cities: LocationTypes[],
+        districts: LocationTypes[]
+    ): ClientLocationInterface[] {
+        clientData.forEach((clientLocationData, index) => {
+            // @ts-ignore
+            clientLocationData.country = countries[index];
+            // @ts-ignore
+            clientLocationData.region = regions[index];
+            // @ts-ignore
+            clientLocationData.subregion = subregions[index];
+            // @ts-ignore
+            clientLocationData.city = cities[index];
+            // @ts-ignore
+            clientLocationData.district = districts[index];
+        });
+
+        return clientData;
     }
 
     private initTimezoneList(): void {

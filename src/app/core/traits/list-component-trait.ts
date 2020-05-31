@@ -1,11 +1,13 @@
 import {HelperService} from '@app/core/services/helper.service';
 
 export abstract class ListComponentTrait {
-    protected getDataToUpdate<T extends { id: number, professional: number }>(data: T[], masterId: number, componentsList: T[]): T[] {
+    protected getDataToUpdate<T extends { id: number, professional?: number }>(data: T[], masterId: number, componentsList: T[]): T[] {
         const toUpdate: T[] = [];
         data.forEach(value => {
             if (componentsList[value.id]) {
-                value.professional = masterId;
+                if (value.professional) {
+                    value.professional = masterId;
+                }
                 toUpdate.push(value);
             }
         });
@@ -14,11 +16,14 @@ export abstract class ListComponentTrait {
     }
 
     protected getDataToCreate
-    <T extends { id: number, professional: number, start_date?: string, end_date?: string, date?: string }>(data: T[], masterId: number): T[] {
+    <T extends { id: number, professional?: number, start_date?: string, end_date?: string, date?: string }>
+    (data: T[], masterId: number): T[] {
         const toCreate: T[] = [];
         data.forEach(value => {
             if (!value.id) {
-                value.professional = masterId;
+                if (value.professional) {
+                    value.professional = masterId;
+                }
                 if (value.start_date) {
                     value.start_date = value.start_date.slice(0, 10);
                 }
@@ -35,7 +40,7 @@ export abstract class ListComponentTrait {
         return HelperService.cleanArray(toCreate);
     }
 
-    protected getDataToDelete<T extends { id: number, professional: number }>(data: T[], componentsList: T[]): T[] {
+    protected getDataToDelete<T extends { id: number, professional?: number }>(data: T[], componentsList: T[]): T[] {
         const toDelete: T[] = [];
         const combinedArray: T[] = this.combineArray(data);
         for (const defaultValue of componentsList) {

@@ -31,7 +31,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     public onMapReady(map: L.Map): void {
         this.map = map;
         this.layerGroup = L.layerGroup().addTo(this.map);
-        if (this.clientLocation.coordinates) {
+        if (this.clientLocation?.coordinates) {
             (new L.Marker(
                 {
                     lat: this.clientLocation.coordinates.coordinates[1],
@@ -70,7 +70,8 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
         let center: L.LatLngLiteral = { lat: 46.550429, lng: -30.499274 };
         let zoom: number = 2;
         if (coordinates) {
-            center = { lat: coordinates[1], lng: coordinates[0]};
+            center = { lat: coordinates[1], lng: coordinates[0]}; // TODO: crutch
+            // center = { lat: coordinates[1] + 0.03, lng: coordinates[0] - 0.08}; // TODO: crutch
             zoom = 12;
         }
         this.options = {

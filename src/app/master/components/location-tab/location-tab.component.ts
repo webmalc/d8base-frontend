@@ -35,6 +35,7 @@ export class LocationTabComponent implements OnInit {
             model.subregion = data.subregion?.id ?? undefined;
             model.district = data.district?.id ?? undefined;
             model.timezone = data.timezone?.value ?? undefined;
+            model.is_default = data.is_default?.value ?? undefined;
 
             return HelperService.clean<MasterLocation>(model);
         };

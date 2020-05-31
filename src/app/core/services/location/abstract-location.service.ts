@@ -32,6 +32,10 @@ export abstract class AbstractLocationService {
         );
     }
 
+    public getListByIdArray(ids: number[]): Observable<LocationTypes[]> {
+        return this.client.getList<LocationTypes>(ids, this.getUrl());
+    }
+
     protected abstract getUrl(): string;
     protected abstract getPlainToClass(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[];
 }

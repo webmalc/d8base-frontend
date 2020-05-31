@@ -1,7 +1,7 @@
 import {Coordinates} from '@app/shared/interfaces/coordinates';
 
 export interface ClientLocationInterface {
-    id?: number;
+    id: number;
     country?: number;
     region?: number;
     subregion?: number;
@@ -13,4 +13,5 @@ export interface ClientLocationInterface {
     units: number;
     professional?: number;
     timezone: string;
+    is_default: boolean;
 }
