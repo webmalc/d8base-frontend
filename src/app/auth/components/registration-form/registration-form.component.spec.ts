@@ -20,6 +20,8 @@ import {IpDataService} from '../../../core/services/location/ip-data.service';
 import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
 import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {SelectableCityOnSearchService} from '../../../shared/services/selectable-city-on-search.service';
+import {SelectableCountryOnSearchService} from '../../../shared/services/selectable-country-on-search.service';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {CityPickerPopoverComponent} from '../city-picker-popover/city-picker-popover.component';
@@ -54,7 +56,9 @@ describe('RegistrationFormComponent', () => {
                 IpDataService,
                 IpnfDataService,
                 LocationAccuracy,
-                Geolocation
+                Geolocation,
+                SelectableCountryOnSearchService,
+                SelectableCityOnSearchService
             ]
         }).compileComponents();
 
