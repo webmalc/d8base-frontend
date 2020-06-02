@@ -34,10 +34,10 @@ export const environment = {
         professional_tags_list: '/en/api/professionals/tags/',
         professional_location: '/en/api/accounts/professional-locations/',
         saved_professionals: '/en/api/accounts/saved-professionals/',
-        url: 'http://localhost:8000',
-        map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        url: 'http://localhost:8000'
     },
     client_id: '',
     client_secret: '',
-    refresh_token_expire_time: 3600
+    refresh_token_expire_time: 3600,
+    map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 };
