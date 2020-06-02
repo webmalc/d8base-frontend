@@ -93,5 +93,8 @@
   "master-page": {
     "main": "Main settings",
     "tags": "Professional tags"
+  },
+  "bookmarks": {
+    "no-bookmarks" : "There's no bookmarks yet"
   }
 }

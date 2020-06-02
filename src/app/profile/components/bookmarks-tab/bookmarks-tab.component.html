@@ -1,4 +1,4 @@
-<ion-list>
+<ion-list *ngIf="bookmarks.length; else noBookmarks">
   <app-bookmarks-item
           *ngFor="let bookmark of bookmarks;" [bookmark]="bookmark"
           (removeFromBookmark)="removeFromList($event)"
@@ -7,4 +7,8 @@
   >
   </app-bookmarks-item>
 </ion-list>
+
+<ng-template #noBookmarks>
+  <ion-label>{{'bookmarks.no-bookmarks'|translate}}</ion-label>
+</ng-template>
 

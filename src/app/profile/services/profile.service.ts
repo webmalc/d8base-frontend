@@ -79,7 +79,8 @@ export class ProfileService {
 
     public updateUser(user: User): void {
         this.userManager.updateUser(user).subscribe(
-            (updatedUser: User) => console.log(updatedUser)
+            (updatedUser: User) => console.log(updatedUser),
+            (error) => console.log(error.error)
         );
     }
 
