@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Region} from '@app/core/models/region';
 import {SubregionApiService} from '@app/core/services/location/subregion-api.service';
-import {SelectableSearchService} from '@app/core/services/selectable-search.service';
 import {Country} from '@app/profile/models/country';
+import {SelectableSearchService} from '@app/shared/services/selectable-search.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class SelectableSubregionOnSearchService extends SelectableSearchService {
 
     constructor(private subregionApi: SubregionApiService) {

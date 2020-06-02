@@ -5,7 +5,8 @@ export abstract class ListComponentTrait {
         const toUpdate: T[] = [];
         data.forEach(value => {
             if (componentsList[value.id]) {
-                if (value.professional) {
+                // if ((value as object)) {
+                if ((value as object).hasOwnProperty('professional')) {
                     value.professional = masterId;
                 }
                 toUpdate.push(value);
@@ -21,7 +22,7 @@ export abstract class ListComponentTrait {
         const toCreate: T[] = [];
         data.forEach(value => {
             if (!value.id) {
-                if (value.professional) {
+                if (value.hasOwnProperty('professional')) {
                     value.professional = masterId;
                 }
                 if (value.start_date) {

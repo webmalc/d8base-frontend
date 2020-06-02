@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import {SelectableSearchService} from '@app/core/services/selectable-search.service';
 import {Country} from '@app/profile/models/country';
 import {CitiesApiService} from '@app/profile/services/cities-api.service';
+import {SelectableSearchService} from '@app/shared/services/selectable-search.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class SelectableCityOnSearchService extends SelectableSearchService {
 
     constructor(public citiesApi: CitiesApiService) {

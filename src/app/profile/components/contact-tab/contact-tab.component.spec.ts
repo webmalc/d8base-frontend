@@ -1,12 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {ContactTabComponent} from './contact-tab.component';
-import {ContactsTabComponent as SharedContactsTabComponent} from '../../../shared/components/contacts-tab/contacts-tab.component';
-import {UserContactApiService} from '../../services/user-contact-api.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ContactsTabFormService} from '../../../shared/forms/contacts-tab-form.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ContactsTabComponent as SharedContactsTabComponent} from '../../../shared/components/contacts-tab/contacts-tab.component';
+import {ContactsTabFormService} from '../../../shared/forms/contacts-tab-form.service';
+import {UserContactApiService} from '../../services/user-contact-api.service';
+import {ContactTabComponent} from './contact-tab.component';
 
 describe('ContactTabComponent', () => {
     let component: ContactTabComponent;

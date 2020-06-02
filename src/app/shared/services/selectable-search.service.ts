@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {IonicSelectableComponent} from 'ionic-selectable';
 import {Observable, Subscription} from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
 export abstract class SelectableSearchService {
 
     private searchSubscription: Subscription = null;

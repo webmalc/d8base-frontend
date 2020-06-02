@@ -1,0 +1,147 @@
+<ion-grid>
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <ion-card>
+                <ion-card-header>
+                    {{'location.loc'|translate}}
+                </ion-card-header>
+                <ion-card-content>
+
+                    <ion-item>
+                        <ion-label class="label-for-required-input" color="medium" position="floating">
+                            {{ 'location.country' | translate }}
+                        </ion-label>
+                        <ionic-selectable
+                                itemValueField="id"
+                                itemTextField="name"
+                                [canSearch]="true"
+                                [(ngModel)]="location.country"
+                                (onSearch)="countrySelectable.onCountrySearch($event)"
+                                (onChange)="onCountryChange()"
+                        >
+                        </ionic-selectable>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label color="medium" position="floating">
+                            {{ 'location.region' | translate }}
+                        </ion-label>
+                        <ionic-selectable
+                                itemValueField="id"
+                                itemTextField="name"
+                                [canSearch]="true"
+                                [(ngModel)]="location.region"
+                                (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
+                                (onChange)="onRegionChange()"
+                                [isEnabled]="isRegionEnabled$|async"
+                        >
+                        </ionic-selectable>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label color="medium" position="floating">
+                            {{ 'location.subregion' | translate }}
+                        </ion-label>
+                        <ionic-selectable
+                                itemValueField="id"
+                                itemTextField="name"
+                                [canSearch]="true"
+                                [(ngModel)]="location.subregion"
+                                (onSearch)="selectableSubregion.onSubregionSearch(
+                                                $event,
+                                                getCountryValue(),
+                                                getRegionValue())"
+                                [isEnabled]="isSubregionEnabled$|async"
+                        >
+                        </ionic-selectable>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label class="label-for-required-input" color="medium" position="floating">
+                            {{ 'location.city' | translate }}
+                        </ion-label>
+                        <ionic-selectable
+                                itemValueField="id"
+                                itemTextField="name"
+                                [canSearch]="true"
+                                [(ngModel)]="location.city"
+                                (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
+                                (onChange)="onCityChange()"
+                                [isEnabled]="isCityEnabled$|async"
+                        >
+                        </ionic-selectable>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label color="medium" position="floating">
+                            {{ 'location.district' | translate }}
+                        </ion-label>
+                        <ionic-selectable
+                                itemValueField="id"
+                                itemTextField="name"
+                                [canSearch]="true"
+                                [(ngModel)]="location.district"
+                                (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
+                                [isEnabled]="isDistrictEnabled$|async"
+                        >
+                        </ionic-selectable>
+                    </ion-item>
+
+                    <app-user-location-map
+                            [clientCoordinates]="location?.coordinates?.coordinates"
+                            [(ngModel)]="location.coordinates"
+                    >
+                    </app-user-location-map>
+
+                    <ion-item>
+                        <ion-label color="medium"
+                                   position="floating">{{ 'location.postal' | translate }}</ion-label>
+                        <ion-input type="text"
+                                   [(ngModel)]="location.postal_code" name="phone">
+                        </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label color="medium"
+                                   position="floating">{{ 'location.address' | translate }}
+                        </ion-label>
+                        <ion-input type="text" [(ngModel)]="location.address" name="first_name">
+                        </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label color="medium" position="floating">
+                            {{ 'location.timezone' | translate }}
+                        </ion-label>
+                        <ionic-selectable
+                                [items]="timezoneList$ | async"
+                                itemValueField="value"
+                                itemTextField="display_name"
+                                [canSearch]="true"
+                                [(ngModel)]="location.timezone"
+                        >
+                        </ionic-selectable>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label color="medium">{{'location.is_default'|translate}}</ion-label>
+                        <ion-toggle [(ngModel)]="location.is_default">
+                        </ion-toggle>
+                    </ion-item>
+
+                    <ion-button
+                            expand="block"
+                            fill="solid"
+                            color="danger"
+                            (click)="deleteLocation()"
+                    >{{ 'location.remove_location' | translate }}</ion-button>
+
+                    <ion-button expand="block" (click)="saveLocation()">{{ 'location.save' | translate }}
+                    </ion-button>
+
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+

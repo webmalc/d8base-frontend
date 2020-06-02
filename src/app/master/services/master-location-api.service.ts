@@ -40,6 +40,10 @@ export class MasterLocationApiService implements LocationApiServiceInterface {
         );
     }
 
+    public delete(location: MasterLocation): Observable<any> {
+        return this.api.delete(`${this.url + location.id}/`);
+    }
+
     public getTimeZoneList(): Observable<{ actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }> {
         return this.api.options(this.url).pipe(
             map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) => raw)

@@ -25,9 +25,13 @@ export class LocationTabComponent implements OnInit {
         this.userId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     }
 
+    public getNewItem(): ClientLocationInterface {
+        return new UserLocation();
+    }
+
     public getNewUserLocation(): (data: any) => ClientLocationInterface {
         return (data: any) => {
-            const model = plainToClass(UserLocation, data, {excludeExtraneousValues: true});
+            const model: UserLocation = plainToClass(UserLocation, data, {excludeExtraneousValues: true});
             model.city = data.city?.id ?? undefined;
             model.country = data.country?.id ?? undefined;
             model.region = data.region?.id ?? undefined;
