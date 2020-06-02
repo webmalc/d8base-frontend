@@ -15,24 +15,8 @@ export class MessageService {
     }
 
     public getMessages(): Observable<MessageInterface[]> {
-        const message = {
-            id: 0,
-            body: 'message0 body body message',
-            isRead: false,
-            parent: null,
-            subject: 'subject0',
-            sender: 0
-        };
-        const message1 = {
-            id: 1,
-            body: 'message1 bodsf body1 mesasge',
-            isRead: false,
-            parent: null,
-            subject: 'subject1',
-            sender: 1
-        };
 
-        return of([message, message1]);
+        return this.client.get<MessageInterface[]>(`${this.url}`);
     }
 
     public getMessage(messageId: number): Observable<MessageInterface> {

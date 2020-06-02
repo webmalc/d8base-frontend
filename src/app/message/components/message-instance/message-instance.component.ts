@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
+import {MessageBoxType} from '@app/message/enums/message-box-type';
 import {MessageInterface} from '@app/message/interfaces/message-interface';
 import {BOX_TYPE} from '@app/message/providers/box-type.provider';
-import {MessageBoxType} from '@app/message/enums/message-box-type';
 
 @Component({
     selector: 'app-message-instance',

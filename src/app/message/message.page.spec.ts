@@ -1,10 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MessagePage } from './message.page';
-import {MessageBoxComponent} from './components/message-box/inbox.component';
-import {OutboxComponent} from './components/outbox/outbox.component';
 import {By} from '@angular/platform-browser';
+import {MessageBoxComponent} from './components/message-box/message-box.component';
+import { MessagePage } from './message.page';
 
 describe('MessagePage', () => {
   let component: MessagePage;
@@ -12,7 +11,7 @@ describe('MessagePage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessagePage, MessageBoxComponent, OutboxComponent ],
+      declarations: [ MessagePage, MessageBoxComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
@@ -23,7 +22,6 @@ describe('MessagePage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(fixture.debugElement.query(By.directive(MessageBoxComponent))).toBeTruthy();
-    expect(fixture.debugElement.query(By.directive(OutboxComponent))).toBeTruthy();
+    expect(fixture.debugElement.queryAll(By.directive(MessageBoxComponent)).length).toEqual(2);
   });
 });

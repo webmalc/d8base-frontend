@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import {MessageBoxComponent} from './message-box.component';
 
-import { MessageBoxComponent } from './inbox.component';
 
 describe('InboxComponent', () => {
   let component: MessageBoxComponent;
