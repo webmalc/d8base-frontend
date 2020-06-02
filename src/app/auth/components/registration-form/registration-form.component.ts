@@ -3,11 +3,12 @@ import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popov
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {LocationService} from '@app/core/services/location/location.service';
-import {CountryCitySelectTrait} from '@app/core/traits/country-city-select-trait';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {CitiesApiService} from '@app/profile/services/cities-api.service';
 import {CountriesApiService} from '@app/profile/services/countries-api.service';
+import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
+import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {PopoverController} from '@ionic/angular';
 import {plainToClass} from 'class-transformer';
 import {BehaviorSubject} from 'rxjs';
@@ -19,7 +20,7 @@ import {RegistrationFormService} from '../../forms/registration-form.service';
     templateUrl: './registration-form.component.html',
     styleUrls: ['./registration-form.component.scss'],
 })
-export class RegistrationFormComponent extends CountryCitySelectTrait implements OnInit {
+export class RegistrationFormComponent implements OnInit {
 
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
@@ -32,9 +33,10 @@ export class RegistrationFormComponent extends CountryCitySelectTrait implements
         private readonly countriesApi: CountriesApiService,
         private readonly citiesApi: CitiesApiService,
         private readonly locationService: LocationService,
-        private readonly popoverController: PopoverController
+        private readonly popoverController: PopoverController,
+        public readonly countrySelectable: SelectableCountryOnSearchService,
+        public readonly citySelectable: SelectableCityOnSearchService,
     ) {
-        super();
     }
 
     public ngOnInit(): void {
@@ -58,20 +60,8 @@ export class RegistrationFormComponent extends CountryCitySelectTrait implements
         this.registrationFormService.setCityDisabled(false);
     }
 
-    protected getCitiesApiService(): CitiesApiService {
-        return this.citiesApi;
-    }
-
-    protected getCountriesApiService(): CountriesApiService {
-        return this.countriesApi;
-    }
-
-    protected getCountyFormField(): string {
-        return this.formFields.Country;
-    }
-
-    protected getFormService(): { getFormFieldValue(formField: string): any } {
-        return this.registrationFormService;
+    public getCountryValue(): Country {
+        return this.registrationFormService.getFormFieldValue(this.formFields.Country);
     }
 
     private listenPopover(): void {
@@ -80,8 +70,6 @@ export class RegistrationFormComponent extends CountryCitySelectTrait implements
                 if (null !== city) {
                     this.countriesApi.getSingle(city.country).subscribe(
                         (country: Country) => {
-                            this.countryList$.next([country]);
-                            this.citiesList$.next([city]);
                             this.registrationFormService.setFormFiledValue(RegistrationFormFields.Country, country);
                             this.registrationFormService.setFormFiledValue(RegistrationFormFields.City, city);
                         }
