@@ -29,6 +29,12 @@ export class ExperienceTabComponent implements OnInit {
     public getPreparedExperience(): (data: Experience) => Experience {
         return (data: Experience) => {
             data.professional = this.masterId;
+            if (data.start_date) {
+                data.start_date = data.start_date.slice(0, 10);
+            }
+            if (data.end_date) {
+                data.end_date = data.end_date.slice(0, 10);
+            }
 
             return data;
         };

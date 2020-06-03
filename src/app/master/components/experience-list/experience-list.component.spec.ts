@@ -19,7 +19,6 @@ describe('ExperienceListComponent', () => {
 
     fixture = TestBed.createComponent(ExperienceListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   }));
 
   it('should create', () => {

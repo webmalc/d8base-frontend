@@ -1,0 +1,22 @@
+<ion-content>
+  <app-education-item
+          *ngFor="let education of items; let i=index"
+          [item]="education"
+          [index]="i"
+          (saveEmitter)="saveItem($event)"
+          (deleteEmitter)="deleteItem($event)"
+          [interactive]="true"
+  >
+  </app-education-item>
+
+  <ion-row *ngIf="interactive" class="ion-justify-content-center">
+    <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+      <ion-button
+              expand="block"
+              fill="solid"
+              color="success"
+              (click)="addNewItem()"
+      >{{ 'education.add_education' | translate }}</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

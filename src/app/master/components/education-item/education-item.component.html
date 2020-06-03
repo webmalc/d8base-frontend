@@ -2,27 +2,33 @@
   <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
     <ion-card>
       <ion-card-header>
-        {{'experience-tab.experience.experience'|translate}}
+        {{'education-tab.education.education'|translate}}
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label color="medium" position="floating">{{'experience-tab.experience.title'|translate}}</ion-label>
-          <ion-input [disabled]="!interactive" [(ngModel)]="item.title" type="text" name="title"></ion-input>
+          <ion-label color="medium"
+                     position="floating">{{'education-tab.education.university'|translate}}</ion-label>
+          <ion-input [disabled]="!interactive" [(ngModel)]="item.university" type="text" name="title"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label color="medium"
-                     position="floating">{{'experience-tab.experience.company'|translate}}</ion-label>
-          <ion-input [disabled]="!interactive" [(ngModel)]="item.company" type="text" name="company"></ion-input>
+                     position="floating">{{'education-tab.education.degree'|translate}}</ion-label>
+          <ion-input [disabled]="!interactive" [(ngModel)]="item.deegree" type="text" name="photo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium"
+                     position="floating">{{'education-tab.education.fieldOfStudy'|translate}}</ion-label>
+          <ion-input [disabled]="!interactive" [(ngModel)]="item.field_of_study" type="text" name="link"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label
-                  color="medium">{{'experience-tab.experience.is_still_here'|translate}}</ion-label>
-          <ion-toggle [disabled]="!interactive" [(ngModel)]="item.is_still_here"></ion-toggle>
+                  color="medium">{{'education-tab.education.isStillHere'|translate}}</ion-label>
+          <ion-toggle [(ngModel)]="item.is_still_here" [disabled]="!interactive"></ion-toggle>
         </ion-item>
 
         <ion-item>
           <ion-label color="medium"
-                     position="floating">{{'experience-tab.experience.startDate'|translate}}</ion-label>
+                     position="floating">{{'education-tab.education.startDate'|translate}}</ion-label>
           <ion-datetime
                   display-format="YYYY-MM-DD"
                   [(ngModel)]="item.start_date"
@@ -30,8 +36,7 @@
           ></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label color="medium"
-                     position="floating">{{'experience-tab.experience.endDate'|translate}}</ion-label>
+          <ion-label color="medium" position="floating">{{'education-tab.education.endDate'|translate}}</ion-label>
           <ion-datetime
                   display-format="YYYY-MM-DD"
                   [(ngModel)]="item.end_date"
@@ -41,7 +46,7 @@
 
         <ion-item>
           <ion-label
-                  color="medium" position="floating">{{'experience-tab.experience.description'|translate}}</ion-label>
+                  color="medium" position="floating">{{'education-tab.education.description'|translate}}</ion-label>
           <ion-input [disabled]="!interactive" [(ngModel)]="item.description" type="text" name="title"></ion-input>
         </ion-item>
 
@@ -53,13 +58,13 @@
                 fill="solid"
                 color="danger"
                 (click)="delete()"
-        >{{ 'experience-tab.experience.remove_experience' | translate }}</ion-button>
+        >{{ 'education-tab.education.remove_education' | translate }}</ion-button>
 
         <ion-button
                 *ngIf="interactive"
                 expand="block"
                 (click)="save()"
-        >{{ 'experience-tab.experience.save_experience' | translate }}</ion-button>
+        >{{ 'education-tab.education.save_education' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-col>

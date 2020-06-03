@@ -4,6 +4,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CertificatesTabComponent} from '@app/master/components/certificates-tab/certificates-tab.component';
 import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
 import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
+import {EducationItemComponent} from '@app/master/components/education-item/education-item.component';
+import {EducationListComponent} from '@app/master/components/education-list/education-list.component';
 import {EducationTabComponent} from '@app/master/components/education-tab/education-tab.component';
 import {ExperienceItemComponent} from '@app/master/components/experience-item/experience-item.component';
 import {ExperienceListComponent} from '@app/master/components/experience-list/experience-list.component';
@@ -46,7 +48,9 @@ import {MasterTabsPage} from './master-tabs.page';
         ExperienceTabComponent,
         CertificatesTabComponent,
         ExperienceItemComponent,
-        ExperienceListComponent
+        ExperienceListComponent,
+        EducationListComponent,
+        EducationItemComponent
     ],
     providers: [
         EditMasterFormService,

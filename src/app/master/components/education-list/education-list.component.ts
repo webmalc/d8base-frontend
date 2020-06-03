@@ -1,15 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Experience} from '@app/master/models/experience';
+import {Education} from '@app/master/models/education';
 import {AbstractListComponent} from '@app/shared/components/abstract-list/abstract-list.component';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Component({
-    selector: 'app-experience-list',
-    templateUrl: './experience-list.component.html',
-    styleUrls: ['./experience-list.component.scss'],
+    selector: 'app-education-list',
+    templateUrl: './education-list.component.html',
+    styleUrls: ['./education-list.component.scss'],
 })
-export class ExperienceListComponent extends AbstractListComponent<Experience> implements OnInit {
+export class EducationListComponent extends AbstractListComponent<Education> implements OnInit {
 
     @Input() public masterId: number;
 
@@ -21,9 +21,10 @@ export class ExperienceListComponent extends AbstractListComponent<Experience> i
         super.ngOnInit();
     }
 
-    protected getItems(): Observable<Experience[]> {
+    protected getItems(): Observable<Education[]> {
         return this.apiService.get(this.masterId).pipe(
             map(raw => raw.results)
         );
     }
+
 }

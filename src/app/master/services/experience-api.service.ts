@@ -31,8 +31,8 @@ export class ExperienceApiService implements Partial<ApiServiceInterface<Experie
         );
     }
 
-    public put(experience: Experience): Observable<Experience> {
-        return this.client.put<Experience>(this.url, experience).pipe(
+    public patch(experience: Experience): Observable<Experience> {
+        return this.client.patch<Experience>(`${this.url + experience.id}/`, experience).pipe(
             map(raw => plainToClass(Experience, raw))
         );
     }
