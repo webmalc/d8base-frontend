@@ -25,6 +25,10 @@ export class LocationTabComponent implements OnInit {
         this.masterId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     }
 
+    public getNewItem(): ClientLocationInterface {
+        return new MasterLocation();
+    }
+
     public getNewMasterLocation(): (data: any) => ClientLocationInterface {
         return (data: any) => {
             const model = plainToClass(MasterLocation, data, {excludeExtraneousValues: true});
