@@ -2,7 +2,7 @@ export const environment = {
     production: false,
     origin: 'http://localhost:4200',
     backend: {
-        auth: '/en/api/auth/token/',
+        auth: '/api/auth/token/',
         certificate: '',
         cities: '/en/api/location/cites/',
         communication_messages_received: '/en/api/communication/messages/received/',
