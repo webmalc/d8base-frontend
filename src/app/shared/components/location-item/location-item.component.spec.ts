@@ -10,6 +10,7 @@ import {SelectableRegionOnSearchService} from '../../services/selectable-region-
 import {SelectableSubregionOnSearchService} from '../../services/selectable-subregion-on-search.service';
 import { LocationItemComponent } from './location-item.component';
 import {IonicSelectableComponent} from 'ionic-selectable';
+import {UserLocationMapComponent} from '../user-location-map/user-location-map.component';
 
 describe('LocationItemComponent', () => {
   let component: LocationItemComponent;
@@ -17,7 +18,7 @@ describe('LocationItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationItemComponent, IonicSelectableComponent ],
+      declarations: [ LocationItemComponent, IonicSelectableComponent, UserLocationMapComponent],
       imports: [IonicModule, HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
         SelectableCountryOnSearchService,
