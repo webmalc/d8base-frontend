@@ -25,6 +25,10 @@ export class LocationTabComponent implements OnInit {
         this.masterId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     }
 
+    public getNewItem(): ClientLocationInterface {
+        return new MasterLocation();
+    }
+
     public getNewMasterLocation(): (data: any) => ClientLocationInterface {
         return (data: any) => {
             const model = plainToClass(MasterLocation, data, {excludeExtraneousValues: true});
@@ -35,6 +39,7 @@ export class LocationTabComponent implements OnInit {
             model.subregion = data.subregion?.id ?? undefined;
             model.district = data.district?.id ?? undefined;
             model.timezone = data.timezone?.value ?? undefined;
+            model.is_default = data.is_default?.value ?? undefined;
 
             return HelperService.clean<MasterLocation>(model);
         };

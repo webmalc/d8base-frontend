@@ -7,6 +7,9 @@ export enum LocationFormFields {
     PostalCode = 'postalCode',
     Address = 'address',
     Coordinates = 'coordinates',
+    IsDefault = 'is_default',
     Units = 'units',
-    Timezone = 'timezone'
+    Timezone = 'timezone',
+    Location = 'location',
+    ID = 'id'
 }

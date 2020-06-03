@@ -1,0 +1,21 @@
+<ion-content>
+
+    <app-location-item
+            *ngFor="let location of locationsList; let i=index" [index]="i" [location]="location" [timezoneList$]="timezoneList$"
+            (save)="saveLocation($event)"
+            (delete)="deleteLocation($event)"
+    >
+    </app-location-item>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <ion-button
+                    expand="block"
+                    fill="solid"
+                    color="success"
+                    (click)="addNewLocation()"
+            >{{ 'location.add_location' | translate }}</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

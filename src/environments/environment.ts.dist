@@ -41,5 +41,6 @@ export const environment = {
     },
     client_id: '',
     client_secret: '',
-    refresh_token_expire_time: 3600
+    refresh_token_expire_time: 3600,
+    map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 };

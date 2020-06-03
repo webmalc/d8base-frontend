@@ -1,7 +1,8 @@
 <ion-content>
-  <app-location
-          [masterId]="userId"
-          [apiService]="api"
-          [getClientLocationModel]="getNewUserLocation()"
-  ></app-location>
+    <app-location-list
+            [masterId]="userId"
+            [apiService]="api"
+            [getClientLocationModel]="getNewUserLocation()"
+            [getNewItem]="getNewItem"
+    ></app-location-list>
 </ion-content>

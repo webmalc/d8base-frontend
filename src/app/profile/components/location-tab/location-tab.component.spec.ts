@@ -1,11 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {LocationTabComponent} from './location-tab.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {LocationComponent} from '../../../shared/components/location/location.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+import {LocationListComponent} from '../../../shared/components/location/location-list.component';
+import {LocationTabComponent} from './location-tab.component';
 
 describe('LocationTabComponent', () => {
     let component: LocationTabComponent;
@@ -13,11 +13,12 @@ describe('LocationTabComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LocationTabComponent, LocationComponent],
+            declarations: [LocationTabComponent, LocationListComponent],
             imports: [IonicModule.forRoot(),
-                HttpClientTestingModule,
+                TranslateModule.forRoot(),
                 RouterTestingModule,
-                ReactiveFormsModule]
+                HttpClientTestingModule
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(LocationTabComponent);

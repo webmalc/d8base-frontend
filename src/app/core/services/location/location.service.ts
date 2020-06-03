@@ -62,16 +62,16 @@ export class LocationService {
                                 location.coordinates = {
                                     type: 'Point',
                                     coordinates: [
+                                        geolocation.coords.longitude,
                                         geolocation.coords.latitude,
-                                        geolocation.coords.longitude
                                     ]
                                 };
                             } else if (null !== ipLocation) {
                                 location.coordinates = {
                                     type: 'Point',
                                     coordinates: [
+                                        ipLocation.longitude,
                                         ipLocation.latitude,
-                                        ipLocation.longitude
                                     ]
                                 };
                             } else {

@@ -1,135 +1,114 @@
-<ion-content>
-    <form
-            *ngIf="formService.form"
-            [formGroup]="formService.form" (ngSubmit)="submitForm()">
+<ion-grid>
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <ion-card>
+                <ion-card-header>
+                    {{'location.loc'|translate}}
+                </ion-card-header>
+                <ion-card-content>
 
-        <ion-grid>
-
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label class="label-for-required-input" color="medium" position="floating">
                             {{ 'location.country' | translate }}
                         </ion-label>
                         <ionic-selectable
-                                [items]="countryList$ | async"
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [formControlName]="formFields.Country"
-                                (onSearch)="onCountrySearch($event)"
+                                [(ngModel)]="location.country"
+                                (onSearch)="countrySelectable.onCountrySearch($event)"
                                 (onChange)="onCountryChange()"
                         >
                         </ionic-selectable>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-
-
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label color="medium" position="floating">
                             {{ 'location.region' | translate }}
                         </ion-label>
                         <ionic-selectable
-                                [items]="regionList$ | async"
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [formControlName]="formFields.Region"
-                                (onSearch)="onRegionSearch($event)"
+                                [(ngModel)]="location.region"
+                                (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
                                 (onChange)="onRegionChange()"
+                                [isEnabled]="isRegionEnabled$|async"
                         >
                         </ionic-selectable>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label color="medium" position="floating">
                             {{ 'location.subregion' | translate }}
                         </ion-label>
                         <ionic-selectable
-                                [items]="subregionList$ | async"
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [formControlName]="formFields.Subregion"
-                                (onSearch)="onSubregionSearch($event)"
+                                [(ngModel)]="location.subregion"
+                                (onSearch)="selectableSubregion.onSubregionSearch(
+                                                $event,
+                                                getCountryValue(),
+                                                getRegionValue())"
+                                [isEnabled]="isSubregionEnabled$|async"
                         >
                         </ionic-selectable>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label class="label-for-required-input" color="medium" position="floating">
                             {{ 'location.city' | translate }}
                         </ion-label>
                         <ionic-selectable
-                                [items]="citiesList$ | async"
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [formControlName]="formFields.City"
-                                (onSearch)="onCitySearch($event)"
+                                [(ngModel)]="location.city"
+                                (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
                                 (onChange)="onCityChange()"
+                                [isEnabled]="isCityEnabled$|async"
                         >
                         </ionic-selectable>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label color="medium" position="floating">
                             {{ 'location.district' | translate }}
                         </ion-label>
                         <ionic-selectable
-                                [items]="districtList$ | async"
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [formControlName]="formFields.District"
-                                (onSearch)="onDistrictSearch($event)"
+                                [(ngModel)]="location.district"
+                                (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
+                                [isEnabled]="isDistrictEnabled$|async"
                         >
                         </ionic-selectable>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+                    <app-user-location-map
+                            [clientCoordinates]="location?.coordinates?.coordinates"
+                            [(ngModel)]="location.coordinates"
+                    >
+                    </app-user-location-map>
+
                     <ion-item>
-                        <ion-label color="medium" position="floating">{{ 'location.postal' | translate }}</ion-label>
-                        <ion-input type="text" name="phone" [formControlName]="formFields.PostalCode"></ion-input>
+                        <ion-label color="medium"
+                                   position="floating">{{ 'location.postal' | translate }}</ion-label>
+                        <ion-input type="text"
+                                   [(ngModel)]="location.postal_code" name="phone">
+                        </ion-input>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label color="medium"
                                    position="floating">{{ 'location.address' | translate }}
                         </ion-label>
-                        <ion-input type="text" name="first_name"
-                                   formControlName="{{formFields.Address}}"></ion-input>
+                        <ion-input type="text" [(ngModel)]="location.address" name="first_name">
+                        </ion-input>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
                     <ion-item>
                         <ion-label color="medium" position="floating">
                             {{ 'location.timezone' | translate }}
@@ -139,21 +118,30 @@
                                 itemValueField="value"
                                 itemTextField="display_name"
                                 [canSearch]="true"
-                                [formControlName]="formFields.Timezone"
+                                [(ngModel)]="location.timezone"
                         >
                         </ionic-selectable>
                     </ion-item>
-                </ion-col>
-            </ion-row>
 
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                    <ion-button type="submit" expand="block"
-                                [disabled]="">{{ 'location.save' | translate }}
+                    <ion-item>
+                        <ion-label color="medium">{{'location.is_default'|translate}}</ion-label>
+                        <ion-toggle [(ngModel)]="location.is_default">
+                        </ion-toggle>
+                    </ion-item>
+
+                    <ion-button
+                            expand="block"
+                            fill="solid"
+                            color="danger"
+                            (click)="deleteLocation()"
+                    >{{ 'location.remove_location' | translate }}</ion-button>
+
+                    <ion-button expand="block" (click)="saveLocation()">{{ 'location.save' | translate }}
                     </ion-button>
-                </ion-col>
-            </ion-row>
 
-        </ion-grid>
-    </form>
-</ion-content>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+

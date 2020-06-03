@@ -37,6 +37,14 @@ export class ApiClientService {
         return this.http.options<T>(this.getHost() + url, params);
     }
 
+    public getList<T>(ids: number[], url: string): Observable<T[]> {
+        return 0 === ids.length ? of([]) :  of(ids).pipe(
+            mergeMap((list) => forkJoin(
+                ...list.map(id => id ? this.get<T>(`${url}${id}/`) : of(null))
+            ))
+        );
+    }
+
     public deleteList<T extends {id: number}>(dataList: T[], url: string): Observable<any> {
         return 0 === dataList.length ? of([]) :  of(dataList).pipe(
             mergeMap((list) => forkJoin(

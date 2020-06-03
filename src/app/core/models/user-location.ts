@@ -2,7 +2,7 @@ import {ClientLocationInterface} from '@app/shared/interfaces/client-location-in
 import {Expose} from 'class-transformer';
 
 export class UserLocation implements ClientLocationInterface  {
-    @Expose() public id?: number;
+    @Expose() public id: number;
     @Expose() public country?: number;
     @Expose() public region?: number;
     @Expose() public subregion?: number;
@@ -16,4 +16,5 @@ export class UserLocation implements ClientLocationInterface  {
     };
     @Expose() public units: number;
     @Expose() public timezone: string;
+    @Expose() public is_default: boolean;
 }

@@ -38,6 +38,10 @@ export class UserLocationApiService implements LocationApiServiceInterface {
         );
     }
 
+    public delete(location: UserLocation): Observable<any> {
+        return this.client.delete(`${this.URL + location.id}/`);
+    }
+
     public getTimeZoneList(): Observable<{ actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }> {
         return this.client.options(this.URL).pipe(
             map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) => raw)

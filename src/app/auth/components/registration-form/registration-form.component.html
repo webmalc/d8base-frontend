@@ -54,12 +54,11 @@
       <ion-item>
         <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.country' | translate }}</ion-label>
         <ionic-selectable
-          [items]="countryList$ | async"
           itemValueField="id"
           itemTextField="name"
           [canSearch]="true"
           [formControlName]="formFields.Country"
-          (onSearch)="onCountrySearch($event)"
+          (onSearch)="countrySelectable.onCountrySearch($event)"
           (onChange)="onCountryChange()"
         >
         </ionic-selectable>
@@ -72,12 +71,11 @@
       <ion-item>
         <ion-label color="medium" position="floating">{{ 'registration-form.city' | translate }}</ion-label>
         <ionic-selectable
-                [items]="citiesList$ | async"
                 itemValueField="id"
                 itemTextField="name"
                 [canSearch]="true"
                 [formControlName]="formFields.City"
-                (onSearch)="onCitySearch($event)"
+                (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
         >
         </ionic-selectable>
       </ion-item>

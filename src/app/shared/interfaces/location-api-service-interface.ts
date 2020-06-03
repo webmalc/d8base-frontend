@@ -7,4 +7,5 @@ export interface LocationApiServiceInterface {
     save(location: ClientLocationInterface): Observable<ClientLocationInterface>;
     getTimeZoneList(): Observable<{ actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }>;
     update(location: ClientLocationInterface): Observable<ClientLocationInterface>;
+    delete(location: ClientLocationInterface): Observable<any>;
 }

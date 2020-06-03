@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Observable, throwError} from 'rxjs';
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
-import {map, switchMap} from 'rxjs/operators';
-import {plainToClass} from 'class-transformer';
-import {Master} from '@app/core/models/master';
-import {BookmarkMaster} from '@app/core/models/bookmark-master';
 import {MasterInterface} from '@app/core/interfaces/master.interface';
+import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
+import {BookmarkMaster} from '@app/core/models/bookmark-master';
+import {Master} from '@app/core/models/master';
+import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
+import {plainToClass} from 'class-transformer';
+import {Observable, throwError} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable()

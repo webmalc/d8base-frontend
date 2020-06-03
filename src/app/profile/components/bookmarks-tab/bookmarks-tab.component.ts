@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BookmarkMaster} from '@app/core/models/bookmark-master';
 import {BookmarksService} from '@app/profile/services/bookmarks.service';
 import {Subscription} from 'rxjs';
-import {BookmarkMaster} from '@app/core/models/bookmark-master';
 
 @Component({
     selector: 'app-bookmarks-tab',

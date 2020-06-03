@@ -39,7 +39,8 @@ export class CitiesApiService extends AbstractLocationService {
     public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
         return this.client.get<ApiListResponseInterface<City>>(this.url, {
             dist: dist.toString(10),
-            point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
+            point: `6.061326,49.930906` // TODO
+            // point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
         }).pipe(
             map(result => {
                 result.results = plainToClass(City, result.results);
