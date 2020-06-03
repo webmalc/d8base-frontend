@@ -13,7 +13,7 @@ describe('MessageService', () => {
         ApiClientService,
         {
           provide: String,
-          useValue: 'http://example.com'
+          useValue: 'http://example.com/'
         }
       ]
     });

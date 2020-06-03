@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import {By} from '@angular/platform-browser';
+import {RouterOutlet} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
 import {MessageBoxComponent} from './components/message-box/message-box.component';
 import { MessagePage } from './message.page';
 
@@ -12,7 +14,7 @@ describe('MessagePage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MessagePage, MessageBoxComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule, RouterTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MessagePage);
@@ -22,6 +24,6 @@ describe('MessagePage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(fixture.debugElement.queryAll(By.directive(MessageBoxComponent)).length).toEqual(2);
+    expect(fixture.debugElement.queryAll(By.directive(RouterOutlet)).length).toEqual(2);
   });
 });

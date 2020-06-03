@@ -1,20 +1,19 @@
-import {async, ComponentFixture, fakeAsync, flush, inject, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {IonicModule, IonLabel} from '@ionic/angular';
 
-import {BookmarksTabComponent} from './bookmarks-tab.component';
-import {BookmarksService} from '../../services/bookmarks.service';
-import {SavedProfessionalApiService} from '../../services/saved-professional-api.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {By} from '@angular/platform-browser';
+import {TranslateModule} from '@ngx-translate/core';
 import {asyncData} from '../../../../testing/async-observable-helper';
 import {BookmarkFixture} from '../../../../testing/fixtures/bookmark-fixture';
-import {MasterFixture} from '../../../../testing/fixtures/master-fixture';
 import {Autofixture} from '../../../../testing/fixtures/generator';
-import {By} from '@angular/platform-browser';
-import {BookmarksItemComponent} from './bookmarks-item/bookmarks-item.component';
-import {Master} from '../../../core/models/master';
+import {MasterFixture} from '../../../../testing/fixtures/master-fixture';
 import {BookmarkMaster} from '../../../core/models/bookmark-master';
-import {TranslateModule} from '@ngx-translate/core';
-import * as translate from '../../../../assets/i18n/ru.json';
+import {Master} from '../../../core/models/master';
+import {BookmarksService} from '../../services/bookmarks.service';
+import {SavedProfessionalApiService} from '../../services/saved-professional-api.service';
+import {BookmarksItemComponent} from './bookmarks-item/bookmarks-item.component';
+import {BookmarksTabComponent} from './bookmarks-tab.component';
 
 describe('BookmarksTabComponent', () => {
     let component: BookmarksTabComponent;

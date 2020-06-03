@@ -13,7 +13,7 @@ const endpointMap: { [key in MessageBoxType]: string } = {
 const messageServiceFactory = (route: ActivatedRoute, apiClient: ApiClientService): MessageService => {
     const type: string = route.snapshot.data.boxType;
 
-    return new MessageService(apiClient, endpointMap[type]);
+    return new MessageService(apiClient, endpointMap[type || MessageBoxType.INBOX]);
 };
 
 export const messageServiceProvider: Provider = {

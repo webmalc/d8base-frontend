@@ -56,7 +56,7 @@ describe('MessageInstanceComponent', () => {
     expect(component.isOpened).toBeTrue();
   });
 
-  it('should generate events because buttons click', () => {
+  it('should generate events when click button fired', () => {
     const message: MessageInterface = MessageFixture.create(2);
     component.message = message;
     fixture.detectChanges();
