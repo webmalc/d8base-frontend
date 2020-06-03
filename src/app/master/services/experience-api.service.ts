@@ -16,7 +16,7 @@ export class ExperienceApiService implements Partial<ApiServiceInterface<Experie
     constructor(private client: ApiClientService) { }
 
     public get(masterId: number): Observable<ApiListResponseInterface<Experience>> {
-        return this.client.get(this.url, {professional: masterId.toString(10)}).pipe(
+        return this.client.get(this.url, {professional: masterId?.toString(10)}).pipe( // nullable masterId only for tests
             map((raw: ApiListResponseInterface<Experience>) => {
                 raw.results = plainToClass(Experience, raw.results);
 
