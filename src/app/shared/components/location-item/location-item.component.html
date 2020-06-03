@@ -15,7 +15,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [(ngModel)]="location.country"
+                                [(ngModel)]="item.country"
                                 (onSearch)="countrySelectable.onCountrySearch($event)"
                                 (onChange)="onCountryChange()"
                         >
@@ -30,7 +30,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [(ngModel)]="location.region"
+                                [(ngModel)]="item.region"
                                 (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
                                 (onChange)="onRegionChange()"
                                 [isEnabled]="isRegionEnabled$|async"
@@ -46,7 +46,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [(ngModel)]="location.subregion"
+                                [(ngModel)]="item.subregion"
                                 (onSearch)="selectableSubregion.onSubregionSearch(
                                                 $event,
                                                 getCountryValue(),
@@ -64,7 +64,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [(ngModel)]="location.city"
+                                [(ngModel)]="item.city"
                                 (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
                                 (onChange)="onCityChange()"
                                 [isEnabled]="isCityEnabled$|async"
@@ -80,7 +80,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
-                                [(ngModel)]="location.district"
+                                [(ngModel)]="item.district"
                                 (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
                                 [isEnabled]="isDistrictEnabled$|async"
                         >
@@ -88,8 +88,8 @@
                     </ion-item>
 
                     <app-user-location-map
-                            [clientCoordinates]="location?.coordinates?.coordinates"
-                            [(ngModel)]="location.coordinates"
+                            [clientCoordinates]="item?.coordinates?.coordinates"
+                            [(ngModel)]="item.coordinates"
                     >
                     </app-user-location-map>
 
@@ -97,7 +97,7 @@
                         <ion-label color="medium"
                                    position="floating">{{ 'location.postal' | translate }}</ion-label>
                         <ion-input type="text"
-                                   [(ngModel)]="location.postal_code" name="phone">
+                                   [(ngModel)]="item.postal_code" name="phone">
                         </ion-input>
                     </ion-item>
 
@@ -105,7 +105,7 @@
                         <ion-label color="medium"
                                    position="floating">{{ 'location.address' | translate }}
                         </ion-label>
-                        <ion-input type="text" [(ngModel)]="location.address" name="first_name">
+                        <ion-input type="text" [(ngModel)]="item.address" name="first_name">
                         </ion-input>
                     </ion-item>
 
@@ -118,14 +118,14 @@
                                 itemValueField="value"
                                 itemTextField="display_name"
                                 [canSearch]="true"
-                                [(ngModel)]="location.timezone"
+                                [(ngModel)]="item.timezone"
                         >
                         </ionic-selectable>
                     </ion-item>
 
                     <ion-item>
                         <ion-label color="medium">{{'location.is_default'|translate}}</ion-label>
-                        <ion-toggle [(ngModel)]="location.is_default">
+                        <ion-toggle [(ngModel)]="item.is_default">
                         </ion-toggle>
                     </ion-item>
 
@@ -133,10 +133,10 @@
                             expand="block"
                             fill="solid"
                             color="danger"
-                            (click)="deleteLocation()"
+                            (click)="delete()"
                     >{{ 'location.remove_location' | translate }}</ion-button>
 
-                    <ion-button expand="block" (click)="saveLocation()">{{ 'location.save' | translate }}
+                    <ion-button expand="block" (click)="save()">{{ 'location.save' | translate }}
                     </ion-button>
 
                 </ion-card-content>

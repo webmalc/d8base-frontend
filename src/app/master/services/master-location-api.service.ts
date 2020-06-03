@@ -18,13 +18,13 @@ export class MasterLocationApiService implements LocationApiServiceInterface {
     constructor(private api: ApiClientService) {
     }
 
-    public update(location: MasterLocation): Observable<MasterLocation> {
+    public patch(location: MasterLocation): Observable<MasterLocation> {
         return this.api.patch(`${this.url + location.id}/`, location).pipe(
             map(raw => plainToClass(MasterLocation, raw))
         );
     }
 
-    public save(location: MasterLocation): Observable<MasterLocation> {
+    public create(location: MasterLocation): Observable<MasterLocation> {
         return this.api.post(this.url, location).pipe(
             map(raw => plainToClass(MasterLocation, raw))
         );
@@ -44,9 +44,10 @@ export class MasterLocationApiService implements LocationApiServiceInterface {
         return this.api.delete(`${this.url + location.id}/`);
     }
 
-    public getTimeZoneList(): Observable<{ actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }> {
+    public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
         return this.api.options(this.url).pipe(
-            map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) => raw)
+            map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
+                raw.actions.POST.timezone.choices)
         );
     }
 }

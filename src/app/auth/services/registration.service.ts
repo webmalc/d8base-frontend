@@ -39,7 +39,7 @@ export class RegistrationService {
                                             location.coordinates = geoposition.coordinates;
                                         }
 
-                                        return this.locationApiService.save(location).pipe(
+                                        return this.locationApiService.create(location).pipe(
                                             map(
                                                 _ => of(newUser)
                                             )

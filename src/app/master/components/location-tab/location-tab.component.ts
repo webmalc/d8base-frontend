@@ -29,7 +29,7 @@ export class LocationTabComponent implements OnInit {
         return new MasterLocation();
     }
 
-    public getNewMasterLocation(): (data: any) => ClientLocationInterface {
+    public getPreparedMasterLocation(): (data: any) => ClientLocationInterface {
         return (data: any) => {
             const model = plainToClass(MasterLocation, data, {excludeExtraneousValues: true});
             model.professional = this.masterId;
