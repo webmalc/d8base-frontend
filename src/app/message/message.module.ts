@@ -6,10 +6,13 @@ import {IonicModule} from '@ionic/angular';
 
 import {MessagePageRoutingModule} from './message-routing.module';
 
-import {MessagePage} from './message.page';
-import {TranslateModule} from '@ngx-translate/core';
 import {MessageBoxComponent} from '@app/message/components/message-box/message-box.component';
-import {MessageInstanceComponent} from '@app/message/components/message-instance/message-instance.component';
+import {MessageInstanceListComponent} from '@app/message/components/message-instance/message-instance-list.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {MessagePage} from './message.page';
+import {MessageReaderComponent} from '@app/message/components/message-reader/message-reader.component';
+import {MessageInboxResolver} from '@app/message/resolvers/message-inbox.resolver';
+import {MessageOutboxResolver} from '@app/message/resolvers/message-outbox.resolver';
 
 
 @NgModule({
@@ -25,8 +28,10 @@ import {MessageInstanceComponent} from '@app/message/components/message-instance
     declarations: [
         MessagePage,
         MessageBoxComponent,
-        MessageInstanceComponent
-    ]
+        MessageInstanceListComponent,
+        MessageReaderComponent
+    ],
+    providers: [MessageInboxResolver, MessageOutboxResolver]
 })
 export class MessagePageModule {
 }

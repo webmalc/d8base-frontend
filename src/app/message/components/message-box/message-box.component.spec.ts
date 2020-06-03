@@ -1,28 +1,32 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {MessageBoxComponent} from './message-box.component';
-import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MessageService} from '../../services/message.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {RouterTestingModule} from '@angular/router/testing';
+import {IonicModule} from '@ionic/angular';
+import {TranslateModule} from '@ngx-translate/core';
+import {of} from 'rxjs';
 import {MessageFixture} from '../../../../testing/fixtures/message-fixture';
 import {MessageInterface} from '../../interfaces/message-interface';
-import {of} from 'rxjs';
-import {MessageInstanceComponent} from '../message-instance/message-instance.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {By} from '@angular/platform-browser';
+import {InboxMessageService} from '../../services/inbox-message.service';
+import {MessageInstanceListComponent} from '../message-instance/message-instance-list.component';
+import {MessageBoxComponent} from './message-box.component';
+import {ApiClientService} from '../../../core/services/api-client.service';
+import {ApiListResponseFixture} from '../../../../testing/fixtures/api-list-response-fixture';
+import {AbstractMessageService} from '../../services/abstract-message.service';
 
 
 describe('MessageBoxComponent', () => {
     let component: MessageBoxComponent;
     let fixture: ComponentFixture<MessageBoxComponent>;
-    let messageService: MessageService;
+    let inboxMessageService: AbstractMessageService;
     let message0: MessageInterface;
     let message1: MessageInterface;
     let messages: MessageInterface[] = [];
+    let apiClient: ApiClientService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MessageBoxComponent, MessageInstanceComponent],
+            declarations: [MessageBoxComponent, MessageInstanceListComponent],
             imports: [
                 IonicModule,
                 RouterTestingModule,
@@ -33,37 +37,36 @@ describe('MessageBoxComponent', () => {
 
         fixture = TestBed.createComponent(MessageBoxComponent);
         component = fixture.componentInstance;
-        messageService = fixture.debugElement.injector.get(MessageService);
+        inboxMessageService = fixture.debugElement.injector.get(AbstractMessageService);
+        apiClient = TestBed.inject(ApiClientService);
     }));
 
     beforeEach(() => {
         message0 = getMessageFixture(0);
         message1 = getMessageFixture(1);
         messages = [message0, message1];
-        spyOn(messageService, 'getMessages').and.returnValue(of(messages));
+        const apiList = ApiListResponseFixture.create(messages);
+
+        spyOn(apiClient, 'get').and.returnValue(of(apiList));
+        spyOn(inboxMessageService, 'getMessages').and.callThrough();
         fixture.detectChanges();
-        expect(messageService.getMessages).toHaveBeenCalled();
+        expect(apiClient.get).toHaveBeenCalled();
+        expect(inboxMessageService.getMessages).toHaveBeenCalled();
     });
 
     it('should create messages', () => {
         expect(component).toBeTruthy();
-        expect(fixture.debugElement.queryAll(By.directive(MessageInstanceComponent)).length).toEqual(messages.length);
+        expect(fixture.debugElement.queryAll(By.directive(MessageInstanceListComponent)).length).toEqual(messages.length);
     });
 
     it('should delete message', () => {
-        spyOn(messageService, 'removeMessage').and.callFake((id: number) => {
-            expect(id).toEqual(message0.id);
-
-            return of(null);
-        });
+        spyOn(apiClient, 'delete').and.returnValue(of(null));
         component.deleteMessage(message0.id);
         fixture.detectChanges();
-        expect(messageService.removeMessage).toHaveBeenCalled();
-        expect(fixture.debugElement.queryAll(By.directive(MessageInstanceComponent)).length).toEqual(messages.length - 1);
+        expect(apiClient.delete).toHaveBeenCalled();
+        expect(fixture.debugElement.queryAll(By.directive(MessageInstanceListComponent)).length).toEqual(messages.length - 1);
         expect(component.messages.length).toEqual(messages.length - 1);
     });
-
-    xit('should be some add, delete listeners');
 
 });
 

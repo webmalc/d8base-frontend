@@ -4,18 +4,16 @@ import {MessageInterface} from '@app/message/interfaces/message-interface';
 import {BOX_TYPE} from '@app/message/providers/box-type.provider';
 
 @Component({
-    selector: 'app-message-instance',
-    templateUrl: './message-instance.component.html',
-    styleUrls: ['./message-instance.component.scss'],
+    selector: 'app-message-instance-list',
+    templateUrl: './message-instance-list.component.html',
+    styleUrls: ['./message-instance-list.component.scss'],
 })
-export class MessageInstanceComponent {
+export class MessageInstanceListComponent {
     @Input() public message: MessageInterface;
     @Output() public delete: EventEmitter<number> = new EventEmitter<number>();
-    @Output() public read: EventEmitter<number> = new EventEmitter<number>();
     @Output() public unread: EventEmitter<number> = new EventEmitter<number>();
     @Output() public reply: EventEmitter<number> = new EventEmitter<number>();
 
-    public isOpened: boolean = false;
     public availableBoxTypes = MessageBoxType;
 
     constructor(@Inject(BOX_TYPE) public boxType: string ) {
@@ -25,13 +23,7 @@ export class MessageInstanceComponent {
         this.delete.emit(this.message.id);
     }
 
-    public readMessage(): void {
-        !this.isOpened ? this.openMessage() : this.closeMessage();
-        this.read.emit(this.message.id);
-    }
-
     public makeUnread(): void {
-        this.closeMessage();
         this.unread.emit(this.message.id);
     }
 
@@ -40,16 +32,6 @@ export class MessageInstanceComponent {
     }
 
     public isRead(): boolean {
-        return this.message.isRead;
+        return this.message['is_read'];
     }
-
-    private openMessage(): void {
-        this.isOpened = true;
-    }
-
-    private closeMessage(): void {
-        this.isOpened = false;
-    }
-
-
 }

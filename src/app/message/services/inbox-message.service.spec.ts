@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
-import {MessageService} from './message.service';
+import {InboxMessageService} from './inbox-message.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ApiClientService} from '../../core/services/api-client.service';
 
@@ -9,7 +9,7 @@ describe('MessageService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        MessageService,
+        InboxMessageService,
         ApiClientService,
         {
           provide: String,
@@ -20,7 +20,7 @@ describe('MessageService', () => {
   });
 
   it('should be created', () => {
-    const service: MessageService = TestBed.inject(MessageService);
+    const service: InboxMessageService = TestBed.inject(InboxMessageService);
     expect(service).toBeTruthy();
   });
 });

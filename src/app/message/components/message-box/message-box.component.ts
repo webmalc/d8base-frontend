@@ -1,59 +1,75 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MessageInterface} from '@app/message/interfaces/message-interface';
 import {BOX_TYPE, boxTypeProvider} from '@app/message/providers/box-type.provider';
 import {messageServiceProvider} from '@app/message/providers/message-service.factory';
-import {MessageService} from '@app/message/services/message.service';
+import {AbstractMessageService} from '@app/message/services/abstract-message.service';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-message-box',
     templateUrl: './message-box.component.html',
     styleUrls: ['./message-box.component.scss'],
     providers: [
-        messageServiceProvider,
-        boxTypeProvider
+        boxTypeProvider,
+        messageServiceProvider
     ]
 })
-export class MessageBoxComponent implements OnInit {
+export class MessageBoxComponent implements OnInit, OnDestroy {
     public messages: MessageInterface[] = [];
-
+    private messageSubscription: Subscription;
+    private deleteSubscription: Subscription;
+    private updateSubscription: Subscription;
 
     constructor(
-        private service: MessageService,
+        private service: AbstractMessageService,
         @Inject(BOX_TYPE) public boxType: string
     ) {
     }
 
     public ngOnInit(): void {
-        this.service.getMessages().subscribe(
-            messages => {
-                this.messages = messages;
-            }
-        );
+        this.messageSubscription = this.service.newMessageEmitter
+            .subscribe(
+                message => this.messages.push(message)
+            );
+        this.deleteSubscription = this.service.deletedMessageEmitter
+            .subscribe(
+                messageId => this.messages = this.messages.filter(message => message.id !== messageId)
+            );
+        this.updateSubscription = this.service.updateMessageEmitter
+            .subscribe(
+                updatedMessage => {
+                    const messageToUpdate = this.messages.find(message => {
+                        return message.id === updatedMessage.id;
+                    });
+                    const index = this.messages.indexOf(messageToUpdate);
+                    this.messages[index] = updatedMessage;
+                }
+            );
+        this.service.getMessages().subscribe(message => this.messages = message);
     }
 
+    public ngOnDestroy(): void {
+        this.messageSubscription.unsubscribe();
+        this.deleteSubscription.unsubscribe();
+        this.updateSubscription.unsubscribe();
+    }
+
+
     public deleteMessage(messageId: number): void {
-        this.service.removeMessage(messageId).subscribe(
-            _ => this.messages = this.messages.filter(message => message.id !== messageId)
-        );
+        this.service.removeMessage(messageId)
+            .subscribe();
     }
 
     public makeMessageUnread(messageId: number): void {
-        this.changeMessageReadStatus(messageId, false);
+        console.log('No way yet');
     }
 
     public readMessage(messageId: number): void {
-        this.changeMessageReadStatus(messageId, true);
+        this.service.readMessage(messageId);
     }
 
     public replyMessage(messageId: number): void {
-        console.log('some reply');
+        console.log('Implement reply');
     }
 
-    private changeMessageReadStatus(messageId: number, status: boolean): void {
-        this.messages.map(message => {
-            if (message.id === messageId) {
-                message.isRead = status;
-            }
-        });
-    }
 }

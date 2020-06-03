@@ -101,6 +101,7 @@
     "messages": "Messages",
     "read": "Read Message",
     "delete": "Delete Message",
-    "close": "Close Message"
+    "close": "Close Message",
+    "reply": "Reply Message"
   }
 }

@@ -1,24 +1,33 @@
-import {ActivatedRoute} from '@angular/router';
-import {MessageService} from '@app/message/services/message.service';
-import {ApiClientService} from '@app/core/services/api-client.service';
+import {InboxMessageService} from '@app/message/services/inbox-message.service';
 import {Provider} from '@angular/core';
-import {environment} from '../../../environments/environment';
 import {MessageBoxType} from '@app/message/enums/message-box-type';
+import {BOX_TYPE} from '@app/message/providers/box-type.provider';
+import {OutboxMessageService} from '@app/message/services/outbox-message.service';
+import {AbstractMessageService} from '@app/message/services/abstract-message.service';
 
-const endpointMap: { [key in MessageBoxType]: string } = {
-    inbox: environment.backend.communication_messages_received,
-    outbox: environment.backend.communication_messages_sent
-};
+type BoxType = { [key in MessageBoxType]: string };
 
-const messageServiceFactory = (route: ActivatedRoute, apiClient: ApiClientService): MessageService => {
-    const type: string = route.snapshot.data.boxType;
+// const endpointMap: BoxType = {
+//     inbox: environment.backend.communication_messages_received,
+//     outbox: environment.backend.communication_messages_sent
+// };
 
-    return new MessageService(apiClient, endpointMap[type || MessageBoxType.INBOX]);
+const messageServiceFactory = (
+    inboxMessageService: InboxMessageService,
+    outboxMessageService: OutboxMessageService,
+    boxType: string
+): AbstractMessageService => {
+    if (boxType === MessageBoxType.INBOX) {
+        return inboxMessageService;
+    }
+    if (boxType === MessageBoxType.OUTBOX) {
+        return outboxMessageService;
+    }
 };
 
 export const messageServiceProvider: Provider = {
-    provide: MessageService,
+    provide: AbstractMessageService,
     useFactory: messageServiceFactory,
-    deps: [ActivatedRoute, ApiClientService]
+    deps: [InboxMessageService, OutboxMessageService, BOX_TYPE]
 };
 

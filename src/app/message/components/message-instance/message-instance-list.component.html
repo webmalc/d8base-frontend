@@ -1,6 +1,7 @@
 <ion-item>
     <ion-label color="{{isRead() ? 'default': 'secondary'}}">
-        <span>From: {{message.receiver||'unknow'}} To: {{message.sender||'unknow'}} Subject: {{message.subject}}</span>
+        <span>From: {{message.receiver || 'unknow'}} To: {{message.sender || 'unknow'}}
+            Subject: {{message.subject}}</span>
     </ion-label>
     <ion-buttons>
         <ion-button
@@ -9,25 +10,15 @@
                 fill="solid"
                 (click)="doReply()"
         >
-            {{'message.reply'|translate}}
+            {{'messages.reply'|translate}}
         </ion-button>
         <ion-button
-                class="make-read"
-                *ngIf="boxType === availableBoxTypes.INBOX"
-                color="warning"
-                fill="solid"
-                (click)="makeUnread()"
-                [disabled]="!isRead()"
-        >
-            {{'message.unread'|translate}}
-        </ion-button>
-        <ion-button
-                (click)="readMessage()"
+                [routerLink]="['read/'+boxType, message.id]"
                 size="small"
                 color="secondary"
                 fill="solid"
         >
-            {{(!isOpened ? 'messages.read':'messages.close')|translate}}
+            {{'messages.read'|translate}}
         </ion-button>
         <ion-button
                 size="small"
@@ -40,6 +31,5 @@
 
     </ion-buttons>
 </ion-item>
-<ion-textarea *ngIf="isOpened">{{message.body}}</ion-textarea>
 
 
