@@ -5,6 +5,8 @@ import {CertificatesTabComponent} from '@app/master/components/certificates-tab/
 import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
 import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
 import {EducationTabComponent} from '@app/master/components/education-tab/education-tab.component';
+import {ExperienceItemComponent} from '@app/master/components/experience-item/experience-item.component';
+import {ExperienceListComponent} from '@app/master/components/experience-list/experience-list.component';
 import {ExperienceTabComponent} from '@app/master/components/experience-tab/experience-tab.component';
 import {LocationTabComponent} from '@app/master/components/location-tab/location-tab.component';
 import {TagsSelectInputComponent} from '@app/master/components/tags-select-input/tags-select-input.component';
@@ -42,7 +44,9 @@ import {MasterTabsPage} from './master-tabs.page';
         LocationTabComponent,
         EducationTabComponent,
         ExperienceTabComponent,
-        CertificatesTabComponent
+        CertificatesTabComponent,
+        ExperienceItemComponent,
+        ExperienceListComponent
     ],
     providers: [
         EditMasterFormService,

@@ -1,15 +1,13 @@
 <ion-content>
-
-    <app-location-item
-            *ngFor="let location of items; let i=index"
+    <app-experience-item
+            *ngFor="let exp of items; let i=index"
+            [item]="exp"
             [index]="i"
-            [item]="location"
-            [timezoneList$]="timezoneList$"
             (saveEmitter)="saveItem($event)"
             (deleteEmitter)="deleteItem($event)"
-            [interactive]="interactive"
+            [interactive]="true"
     >
-    </app-location-item>
+    </app-experience-item>
 
     <ion-row *ngIf="interactive" class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
@@ -18,8 +16,7 @@
                     fill="solid"
                     color="success"
                     (click)="addNewItem()"
-            >{{ 'location.add_location' | translate }}</ion-button>
+            >{{ 'experience.add_experience' | translate }}</ion-button>
         </ion-col>
     </ion-row>
-
 </ion-content>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Experience} from '@app/master/models/experience';
 import {plainToClass} from 'class-transformer';
@@ -8,7 +9,7 @@ import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
-export class ExperienceApiService {
+export class ExperienceApiService implements Partial<ApiServiceInterface<Experience>> {
 
     private readonly url = environment.backend.experience;
 
@@ -24,19 +25,19 @@ export class ExperienceApiService {
         );
     }
 
-    public create(experiences: Experience[]): Observable<Experience[]> {
-        return this.client.postList<Experience>(experiences, this.url).pipe(
+    public create(experience: Experience): Observable<Experience> {
+        return this.client.post<Experience>(this.url, experience).pipe(
             map(raw => plainToClass(Experience, raw))
         );
     }
 
-    public update(experiences: Experience[]): Observable<Experience[]> {
-        return this.client.putList<Experience>(experiences, this.url).pipe(
+    public put(experience: Experience): Observable<Experience> {
+        return this.client.put<Experience>(this.url, experience).pipe(
             map(raw => plainToClass(Experience, raw))
         );
     }
 
-    public delete(experiences: Experience[]): Observable<Experience[]> {
-        return this.client.deleteList<Experience>(experiences, this.url);
+    public delete(experience: Experience): Observable<Experience> {
+        return this.client.delete(`${this.url + experience.id}/`);
     }
 }

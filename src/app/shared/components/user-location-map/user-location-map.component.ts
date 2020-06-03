@@ -19,6 +19,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
 
     public options: L.MapOptions;
     @Input() public clientCoordinates: number[];
+    @Input() public interactive: boolean = true;
     private map: L.Map;
     private layerGroup: L.LayerGroup;
     private onChange: (fn: any) => void;
@@ -51,6 +52,9 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
     }
 
     public onMapClick(event: LeafletMouseEvent): void {
+        if (!this.interactive) {
+            return;
+        }
         this.layerGroup.clearLayers();
         (new L.Marker({lat: event.latlng.lat, lng: event.latlng.lng})
             .bindPopup('your position'))

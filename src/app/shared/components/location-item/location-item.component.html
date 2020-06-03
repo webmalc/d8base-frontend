@@ -15,6 +15,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
+                                [disabled]="!interactive"
                                 [(ngModel)]="item.country"
                                 (onSearch)="countrySelectable.onCountrySearch($event)"
                                 (onChange)="onCountryChange()"
@@ -30,6 +31,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
+                                [disabled]="!interactive"
                                 [(ngModel)]="item.region"
                                 (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
                                 (onChange)="onRegionChange()"
@@ -46,6 +48,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
+                                [disabled]="!interactive"
                                 [(ngModel)]="item.subregion"
                                 (onSearch)="selectableSubregion.onSubregionSearch(
                                                 $event,
@@ -64,6 +67,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
+                                [disabled]="!interactive"
                                 [(ngModel)]="item.city"
                                 (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
                                 (onChange)="onCityChange()"
@@ -80,6 +84,7 @@
                                 itemValueField="id"
                                 itemTextField="name"
                                 [canSearch]="true"
+                                [disabled]="!interactive"
                                 [(ngModel)]="item.district"
                                 (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
                                 [isEnabled]="isDistrictEnabled$|async"
@@ -90,6 +95,7 @@
                     <app-user-location-map
                             [clientCoordinates]="item?.coordinates?.coordinates"
                             [(ngModel)]="item.coordinates"
+                            [interactive]="interactive"
                     >
                     </app-user-location-map>
 
@@ -97,7 +103,7 @@
                         <ion-label color="medium"
                                    position="floating">{{ 'location.postal' | translate }}</ion-label>
                         <ion-input type="text"
-                                   [(ngModel)]="item.postal_code" name="phone">
+                                   [(ngModel)]="item.postal_code" [disabled]="!interactive" name="phone">
                         </ion-input>
                     </ion-item>
 
@@ -105,7 +111,7 @@
                         <ion-label color="medium"
                                    position="floating">{{ 'location.address' | translate }}
                         </ion-label>
-                        <ion-input type="text" [(ngModel)]="item.address" name="first_name">
+                        <ion-input type="text" [disabled]="!interactive" [(ngModel)]="item.address" name="first_name">
                         </ion-input>
                     </ion-item>
 
@@ -115,6 +121,7 @@
                         </ion-label>
                         <ionic-selectable
                                 [items]="timezoneList$ | async"
+                                [disabled]="!interactive"
                                 itemValueField="value"
                                 itemTextField="display_name"
                                 [canSearch]="true"
@@ -125,18 +132,19 @@
 
                     <ion-item>
                         <ion-label color="medium">{{'location.is_default'|translate}}</ion-label>
-                        <ion-toggle [(ngModel)]="item.is_default">
+                        <ion-toggle [disabled]="!interactive" [(ngModel)]="item.is_default">
                         </ion-toggle>
                     </ion-item>
 
                     <ion-button
+                            *ngIf="interactive"
                             expand="block"
                             fill="solid"
                             color="danger"
                             (click)="delete()"
                     >{{ 'location.remove_location' | translate }}</ion-button>
 
-                    <ion-button expand="block" (click)="save()">{{ 'location.save' | translate }}
+                    <ion-button *ngIf="interactive" expand="block" (click)="save()">{{ 'location.save' | translate }}
                     </ion-button>
 
                 </ion-card-content>
