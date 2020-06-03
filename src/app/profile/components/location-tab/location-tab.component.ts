@@ -29,7 +29,7 @@ export class LocationTabComponent implements OnInit {
         return new UserLocation();
     }
 
-    public getNewUserLocation(): (data: any) => ClientLocationInterface {
+    public getPreparedUserLocation(): (data: any) => ClientLocationInterface {
         return (data: any) => {
             const model: UserLocation = plainToClass(UserLocation, data, {excludeExtraneousValues: true});
             model.city = data.city?.id ?? undefined;

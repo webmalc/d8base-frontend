@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
@@ -11,20 +12,20 @@ import {environment} from '../../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class UserLocationApiService implements LocationApiServiceInterface {
+export class UserLocationApiService implements LocationApiServiceInterface, Partial<ApiServiceInterface<UserLocation>> {
 
     private readonly URL = environment.backend.location;
 
     constructor(private client: ApiClientService) {
     }
 
-    public update(location: UserLocation): Observable<UserLocation> {
+    public patch(location: UserLocation): Observable<UserLocation> {
         return this.client.patch(`${this.URL + location.id}/`, location).pipe(
             map(raw => plainToClass(UserLocation, raw))
         );
     }
 
-    public save(location: UserLocation): Observable<UserLocation> {
+    public create(location: UserLocation): Observable<UserLocation> {
         return this.client.post<UserLocation>(this.URL, location);
     }
 
@@ -42,9 +43,10 @@ export class UserLocationApiService implements LocationApiServiceInterface {
         return this.client.delete(`${this.URL + location.id}/`);
     }
 
-    public getTimeZoneList(): Observable<{ actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }> {
+    public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
         return this.client.options(this.URL).pipe(
-            map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) => raw)
+            map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
+                raw.actions.POST.timezone.choices)
         );
     }
 }

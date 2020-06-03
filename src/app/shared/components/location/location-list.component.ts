@@ -6,78 +6,56 @@ import {Subregion} from '@app/core/models/subregion';
 import {DistrictApiService} from '@app/core/services/location/district-api.service';
 import {RegionApiService} from '@app/core/services/location/region-api.service';
 import {SubregionApiService} from '@app/core/services/location/subregion-api.service';
+import {TimezoneService} from '@app/core/services/timezone.service';
 import {LocationTypes} from '@app/core/types/location-types';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {CitiesApiService} from '@app/profile/services/cities-api.service';
 import {CountriesApiService} from '@app/profile/services/countries-api.service';
+import {AbstractListComponent} from '@app/shared/components/abstract-list/abstract-list.component';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
-import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
-import {BehaviorSubject, forkJoin} from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-location-list',
     templateUrl: './location-list.component.html',
     styleUrls: ['./location-list.component.scss'],
 })
-export class LocationListComponent implements OnInit {
+export class LocationListComponent extends AbstractListComponent<ClientLocationInterface> implements OnInit {
 
-    @Input() public apiService: LocationApiServiceInterface;
     @Input() public masterId: number;
-    @Input() public getClientLocationModel: (data: object) => ClientLocationInterface;
-    @Input() public getNewItem: () => ClientLocationInterface;
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
         new BehaviorSubject<Array<{ value: string, display_name: string }>>([]);
-    public locationsList: ClientLocationInterface[] = [];
 
     constructor(
         private readonly countriesApi: CountriesApiService,
         private readonly regionApi: RegionApiService,
         private readonly subregionApi: SubregionApiService,
         private readonly citiesApi: CitiesApiService,
-        private readonly districtApi: DistrictApiService
+        private readonly districtApi: DistrictApiService,
+        private readonly timezoneService: TimezoneService
     ) {
+        super();
     }
 
     public ngOnInit(): void {
         this.initTimezoneList();
-        this.init();
+        super.ngOnInit();
     }
 
-    public saveLocation(location: ClientLocationInterface): void {
-        if (!location.id) {
-            this.apiService.save(this.getClientLocationModel(location)).subscribe(res => console.log(res));
-        } else {
-            this.apiService.update(this.getClientLocationModel(location)).subscribe(res => console.log(res));
-        }
-    }
-
-    public deleteLocation(data: {index: number, data: ClientLocationInterface}): void {
-        if (data.data.id) {
-            this.apiService.delete(data.data).subscribe(res => console.log(res));
-        }
-        this.locationsList.splice(data.index, 1);
-    }
-
-    public addNewLocation(): void {
-        this.locationsList.push(this.getNewItem());
-    }
-
-    private init(): void {
-        this.apiService.get(this.masterId).subscribe(
-            (data: ApiListResponseInterface<ClientLocationInterface>) => {
-                forkJoin({
-                    countries: this.countriesApi.getListByIdArray(data.results.map(client => client.country as number)),
-                    regions: this.regionApi.getListByIdArray(data.results.map(client => client.region as number)),
-                    subregions: this.subregionApi.getListByIdArray(data.results.map(client => client.subregion as number)),
-                    cities: this.citiesApi.getListByIdArray(data.results.map(client => client.city as number)),
-                    districts: this.districtApi.getListByIdArray(data.results.map(client => client.district as number))
-                }).subscribe(
-                    ({countries, regions, subregions, cities, districts}) => {
-                        this.locationsList = this.generateLocationList(data.results, countries, regions, subregions, cities, districts);
-                    }
-                );
-            }
+    protected getItems(): Observable<ClientLocationInterface[]> {
+        return this.apiService.get(this.masterId).pipe(
+            switchMap((data: ApiListResponseInterface<ClientLocationInterface>) => forkJoin({
+                countries: this.countriesApi.getListByIdArray(data.results.map(client => client.country as number)),
+                regions: this.regionApi.getListByIdArray(data.results.map(client => client.region as number)),
+                subregions: this.subregionApi.getListByIdArray(data.results.map(client => client.subregion as number)),
+                cities: this.citiesApi.getListByIdArray(data.results.map(client => client.city as number)),
+                districts: this.districtApi.getListByIdArray(data.results.map(client => client.district as number))
+            }).pipe(
+                map(({countries, regions, subregions, cities, districts}) =>
+                    this.generateLocationList(data.results, countries, regions, subregions, cities, districts))
+            ))
         );
     }
 
@@ -101,8 +79,8 @@ export class LocationListComponent implements OnInit {
     }
 
     private initTimezoneList(): void {
-        this.apiService.getTimeZoneList().subscribe(
-            list => this.timezoneList$.next(list.actions.POST.timezone.choices)
+        this.timezoneService.getTimezoneList().subscribe(
+            list => this.timezoneList$.next(list)
         );
     }
 }

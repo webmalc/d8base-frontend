@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Region} from '@app/core/models/region';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
+import {AbstractListItemComponent} from '@app/shared/components/abstract-list-item/abstract-list-item.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
@@ -16,14 +17,9 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './location-item.component.html',
     styleUrls: ['./location-item.component.scss'],
 })
-export class LocationItemComponent implements OnInit, AfterViewInit {
+export class LocationItemComponent extends AbstractListItemComponent<ClientLocationInterface> implements OnInit, AfterViewInit {
 
-    @Input() public location: ClientLocationInterface;
-    @Input() public index: number;
     @Input() public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>>;
-    @Output() public save: EventEmitter<ClientLocationInterface> = new EventEmitter<ClientLocationInterface>();
-    @Output() public delete: EventEmitter<{index: number, data: ClientLocationInterface}>
-        = new EventEmitter<{index: number, data: ClientLocationInterface}>();
     @ViewChild(UserLocationMapComponent) public map: UserLocationMapComponent;
     public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public isRegionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -37,6 +33,7 @@ export class LocationItemComponent implements OnInit, AfterViewInit {
         public readonly selectableSubregion: SelectableSubregionOnSearchService,
         public readonly districtSelectable: SelectableDistrictOnSearchService,
     ) {
+        super();
     }
 
     public ngAfterViewInit(): void {
@@ -44,15 +41,7 @@ export class LocationItemComponent implements OnInit, AfterViewInit {
     }
 
     public ngOnInit(): void {
-        this.processDisabledFields(this.location);
-    }
-
-    public saveLocation(): void {
-        this.save.emit(this.location);
-    }
-
-    public deleteLocation(): void {
-        this.delete.emit({index: this.index, data: this.location});
+        this.processDisabledFields(this.item);
     }
 
     public onCityChange(): void {
@@ -69,15 +58,15 @@ export class LocationItemComponent implements OnInit, AfterViewInit {
     }
 
     public getCountryValue(): Country {
-        return this.location?.country as Country;
+        return this.item?.country as Country;
     }
 
     public getRegionValue(): Region {
-        return this.location?.region as Region;
+        return this.item?.region as Region;
     }
 
     public getCityValue(): City {
-        return this.location?.city as City;
+        return this.item?.city as City;
     }
 
     private processDisabledFields(location?: ClientLocationInterface): void {
