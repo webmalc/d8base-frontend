@@ -4,7 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {CertificatesFormService} from '../../forms/certificates-form.service';
 import {CertificatesApiService} from '../../services/certificates-api.service';
 import { CertificatesTabComponent } from './certificates-tab.component';
 
@@ -16,7 +15,7 @@ describe('CertificatesTabComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CertificatesTabComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
-      providers: [FormBuilder, CertificatesFormService, CertificatesApiService]
+      providers: [FormBuilder, CertificatesApiService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CertificatesTabComponent);

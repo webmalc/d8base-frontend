@@ -4,7 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {ExperienceFormService} from '../../forms/experience-form.service';
 import {ExperienceApiService} from '../../services/experience-api.service';
 import { ExperienceTabComponent } from './experience-tab.component';
 
@@ -16,7 +15,7 @@ describe('ExperienceTabComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ExperienceTabComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
-      providers: [ExperienceFormService, FormBuilder, ExperienceApiService]
+      providers: [FormBuilder, ExperienceApiService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExperienceTabComponent);
