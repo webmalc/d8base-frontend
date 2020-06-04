@@ -19,6 +19,7 @@ import {filter, map} from 'rxjs/operators';
 export class AppComponent implements OnInit {
 
     public darkTheme = false;
+    public newMessages: boolean = false;
 
     constructor(
         private readonly platform: Platform,

@@ -96,5 +96,12 @@
   },
   "bookmarks": {
     "no-bookmarks" : "В ваших закладках пусто"
+  },
+  "messages": {
+    "messages": "Cообщения",
+    "read": "Прочитать",
+    "delete": "Удалить",
+    "close": "Закрыть",
+    "reply": "Ответить"
   }
 }

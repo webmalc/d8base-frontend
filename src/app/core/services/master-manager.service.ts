@@ -59,7 +59,7 @@ export class MasterManagerService {
     }
 
     public getMaster(masterId?: number): Observable<Master> {
-        return this.client.get(this.url + masterId).pipe(
+        return this.client.get(`${this.url}${masterId}/`).pipe(
             map(raw => plainToClass(Master, raw))
         );
     }

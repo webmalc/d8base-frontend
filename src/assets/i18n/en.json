@@ -96,5 +96,12 @@
   },
   "bookmarks": {
     "no-bookmarks" : "There's no bookmarks yet"
+  },
+  "messages": {
+    "messages": "Messages",
+    "read": "Read Message",
+    "delete": "Delete Message",
+    "close": "Close Message",
+    "reply": "Reply Message"
   }
 }

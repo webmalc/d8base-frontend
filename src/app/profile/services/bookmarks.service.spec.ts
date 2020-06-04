@@ -94,7 +94,7 @@ describe('BookmarksService', () => {
         spyOn(masterService, 'getUserLessList$').and.returnValue(asyncData([master]));
         service.createBookmark(master).subscribe(
             value => {
-                expect(value).toEqual(jasmine.any(BookmarkMaster));
+                expect(value).toBeInstanceOf(BookmarkMaster);
             }
         );
         flush();
