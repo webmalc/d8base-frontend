@@ -1,6 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CertificatesItemComponent} from '@app/master/components/certificates-item/certificates-item.component';
+import {CertificatesListComponent} from '@app/master/components/certificates-list/certificates-list.component';
 import {CertificatesTabComponent} from '@app/master/components/certificates-tab/certificates-tab.component';
 import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
 import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
@@ -50,7 +52,9 @@ import {MasterTabsPage} from './master-tabs.page';
         ExperienceItemComponent,
         ExperienceListComponent,
         EducationListComponent,
-        EducationItemComponent
+        EducationItemComponent,
+        CertificatesListComponent,
+        CertificatesItemComponent
     ],
     providers: [
         EditMasterFormService,

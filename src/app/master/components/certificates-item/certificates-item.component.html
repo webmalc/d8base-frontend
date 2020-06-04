@@ -1,0 +1,76 @@
+<ion-row class="ion-justify-content-center" *ngIf="item">
+  <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+    <ion-card>
+      <ion-card-header>
+        {{'certificates-tab.certificates.certificates'|translate}}
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label color="medium"
+                     position="floating">{{'certificates-tab.certificates.name'|translate}}</ion-label>
+          <ion-input [disabled]="!interactive" [(ngModel)]="item.name" type="text" name="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium"
+                     position="floating">{{'certificates-tab.certificates.organization'|translate}}</ion-label>
+          <ion-input [disabled]="!interactive" [(ngModel)]="item.organization" type="text" name="organization"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="medium"
+                     position="floating">{{'certificates-tab.certificates.date'|translate}}</ion-label>
+          <ion-datetime
+                  display-format="YYYY-MM-DD"
+                  [(ngModel)]="item.date"
+                  [disabled]="!interactive"
+          ></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label
+                  color="medium"
+                  position="floating">{{'certificates-tab.certificates.certificate_id'|translate}}</ion-label>
+          <ion-input [(ngModel)]="item.certificate_id" type="text" [disabled]="!interactive" name="certificate_id"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label
+                  color="medium"
+                  position="floating">{{'certificates-tab.certificates.url'|translate}}</ion-label>
+          <ion-input [(ngModel)]="item.url" type="text" [disabled]="!interactive" name="url"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="medium">{{'certificates-tab.certificates.photo'|translate}}</ion-label>
+          <ion-label color="medium">{{'photo'|translate}}</ion-label>
+          <ion-thumbnail class="app-thumb-mr100">
+            <ion-img [src]="getPhoto()"></ion-img>
+          </ion-thumbnail>
+          <app-picture-selector
+                  [disabled]="!interactive"
+                  [(ngModel)]="item.photo"
+                  [camera]="true"
+                  [fileSystem]="true"
+          >
+          </app-picture-selector>
+        </ion-item>
+
+        <ion-input [(ngModel)]="item.id" type="hidden"></ion-input>
+
+        <ion-button
+                *ngIf="interactive"
+                expand="block"
+                fill="solid"
+                color="danger"
+                (click)="delete()"
+        >{{ 'certificates-tab.certificates.remove_certificate' | translate }}</ion-button>
+
+        <ion-button
+                *ngIf="interactive"
+                expand="block"
+                (click)="save()"
+        >{{ 'certificates-tab.certificate.save_certificate' | translate }}</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>

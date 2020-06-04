@@ -1,99 +1,10 @@
 <ion-content>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (ngSubmit)="submitCertificatesForm()">
-        <div *ngFor="let e of formService.getCertificatesFormArray().controls; let i=index"
-             [formArrayName]="formFields.Certificates">
-            <ion-row class="ion-justify-content-center">
-                <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                    <ion-card [formGroupName]="i">
-                        <ion-card-header>
-                            {{'certificates-tab.certificates.certificates'|translate}}
-                        </ion-card-header>
-                        <ion-card-content>
-                            <ion-item>
-                                <ion-label color="medium"
-                                           position="floating">{{'certificates-tab.certificates.name'|translate}}</ion-label>
-                                <ion-input [formControlName]="formFields.Name" type="text"
-                                           name="name"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="medium"
-                                           position="floating">{{'certificates-tab.certificates.organization'|translate}}</ion-label>
-                                <ion-input [formControlName]="formFields.Organization" type="text"
-                                           name="organization"></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                                <ion-label color="medium"
-                                           position="floating">{{'certificates-tab.certificates.date'|translate}}</ion-label>
-                                <ion-datetime
-                                        display-format="YYYY-MM-DD"
-                                        [formControlName]="formFields.Date"
-                                ></ion-datetime>
-                            </ion-item>
-
-                            <ion-item>
-                                <ion-label
-                                        color="medium"
-                                        position="floating">{{'certificates-tab.certificates.certificate_id'|translate}}</ion-label>
-                                <ion-input [formControlName]="formFields.CertificateId" type="text"
-                                           name="certificate_id"></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                                <ion-label
-                                        color="medium"
-                                        position="floating">{{'certificates-tab.certificates.url'|translate}}</ion-label>
-                                <ion-input [formControlName]="formFields.Url" type="text"
-                                           name="url"></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                                <ion-label color="medium">{{'certificates-tab.certificates.photo'|translate}}</ion-label>
-                                <ion-label color="medium">{{'photo'|translate}}</ion-label>
-                                <ion-thumbnail class="app-thumb-mr100">
-                                    <ion-img [src]="getPhoto(i)"></ion-img>
-                                </ion-thumbnail>
-                                <app-picture-selector
-                                        [formControlName]="formFields.Photo"
-                                        [camera]="true"
-                                        [fileSystem]="true"
-                                >
-                                </app-picture-selector>
-                            </ion-item>
-
-                            <ion-input [formControlName]="formFields.ID" type="hidden"></ion-input>
-
-                            <ion-button
-                                    expand="block"
-                                    fill="solid"
-                                    color="danger"
-                                    (click)="formService.removeCertificate(i)"
-                            >{{ 'certificates-tab.certificates.remove_certificate' | translate }}</ion-button>
-                        </ion-card-content>
-                    </ion-card>
-                </ion-col>
-            </ion-row>
-        </div>
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-button
-                        expand="block"
-                        fill="solid"
-                        color="success"
-                        (click)="formService.addCertificate()"
-                >{{ 'certificates-tab.certificates.add_certificate' | translate }}</ion-button>
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-                <ion-button
-                        type="submit"
-                        expand="block"
-                        fill="solid"
-                        color="success"
-                        [disabled]="formService.isSubmitDisabled()"
-                >{{ 'certificate-tab.save' | translate }}</ion-button>
-            </ion-col>
-        </ion-row>
-    </form>
+    <app-certificates-list
+            [masterId]="masterId"
+            [apiService]="api"
+            [getPreparedModel]="getPreparedCertificate()"
+            [getNewItem]="getNewItem"
+            [interactive]="true"
+    >
+    </app-certificates-list>
 </ion-content>
