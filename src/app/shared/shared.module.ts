@@ -8,6 +8,7 @@ import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/erro
 import {LocationItemComponent} from '@app/shared/components/location-item/location-item.component';
 import {LocationListComponent} from '@app/shared/components/location/location-list.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
+import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-list.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
@@ -29,7 +30,8 @@ import {DebounceDirective} from './directives/debounce.directive';
         ContactsTabComponent,
         LocationListComponent,
         UserLocationMapComponent,
-        LocationItemComponent
+        LocationItemComponent,
+        ReviewsListComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -37,7 +39,8 @@ import {DebounceDirective} from './directives/debounce.directive';
         DebounceDirective,
         ContactsTabComponent,
         LocationListComponent,
-        LocationItemComponent
+        LocationItemComponent,
+        ReviewsListComponent
     ],
     imports: [
         CommonModule,

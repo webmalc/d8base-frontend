@@ -48,7 +48,7 @@ describe('LoginPage', () => {
     it('test nested component exists', () => {
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('app-login-form')).not.toBe(null);
-        expect(compiled.querySelector('app-login-form ion-input[name="username"]')).not.toBe(null);
+        expect(compiled.querySelector('app-login-form ion-input[name="email"]')).not.toBe(null);
         expect(compiled.querySelector('app-login-form ion-input[name="password"]')).not.toBe(null);
     });
 

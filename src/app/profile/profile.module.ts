@@ -12,6 +12,7 @@ import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-t
 import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
+import {ReviewsTabComponent} from '@app/profile/components/reviews-tab/reviews-tab.component';
 import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
 import {PluginsFormService} from '@app/profile/forms/plugins-form.service';
 import {SettingsFormService} from '@app/profile/forms/settings-form.service';
@@ -22,9 +23,9 @@ import {SavedProfessionalApiService} from '@app/profile/services/saved-professio
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
 import {SharedModule} from '@app/shared/shared.module';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProfilePage} from './profile.page';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
     imports: [
@@ -45,7 +46,8 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
         SettingsTabComponent,
         LocationTabComponent,
         BookmarksTabComponent,
-        BookmarksItemComponent
+        BookmarksItemComponent,
+        ReviewsTabComponent
     ],
     providers: [
         PluginApiService,

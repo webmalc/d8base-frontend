@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Master} from '@app/core/models/master';
+import {HelperService} from '@app/core/services/helper.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {EditMasterFormFields} from '@app/master/enums/edit-master-form-fields';
 import {EditMasterFormService} from '@app/master/forms/edit-master-form.service';
@@ -52,7 +53,9 @@ export class EditMasterComponent implements OnInit {
                 (updatedMaster: Master) => console.log(updatedMaster)
             );
         } else {
-            this.masterManager.saveMaster(plainToClass(Master, this.formService.form.getRawValue())).subscribe(
+            this.masterManager.saveMaster(
+                HelperService.clean(plainToClass(Master, this.formService.form.getRawValue()))
+            ).subscribe(
                 (master: Master) => console.log(master)
             );
         }

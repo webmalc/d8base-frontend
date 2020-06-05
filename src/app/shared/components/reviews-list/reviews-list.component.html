@@ -1,0 +1,22 @@
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <ion-card *ngFor="let item of list">
+                <ion-card-header>
+                    <ion-card-title>{{item.title}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-item>
+                        {{item.description}}
+                    </ion-item>
+                    <ion-item>
+                        rating: {{item.rating}}
+                    </ion-item>
+                    <ion-item>
+                        professional: {{item.professional}}
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-content>
