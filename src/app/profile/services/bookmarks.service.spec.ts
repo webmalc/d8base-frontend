@@ -1,4 +1,4 @@
-import {fakeAsync, flush, inject, TestBed, tick} from '@angular/core/testing';
+import {fakeAsync, flush, inject, TestBed} from '@angular/core/testing';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {asyncData} from '../../../testing/async-observable-helper';
@@ -90,9 +90,11 @@ describe('BookmarksService', () => {
         const saved: SavedProfessionalInterface<number> = SavedProfessionalFixture.create();
         const master: MasterInterface = MasterFixture.create();
         master.id = 333;
+        saved.professional = master.id;
+
         spyOn(savedService, 'create').and.returnValue(asyncData(saved));
         spyOn(masterService, 'getUserLessList$').and.returnValue(asyncData([master]));
-        service.createBookmark(master).subscribe(
+        service.createBookmark(saved).subscribe(
             value => {
                 expect(value).toBeInstanceOf(BookmarkMaster);
             }

@@ -59,18 +59,16 @@ describe('SavedProfessionalApiService', () => {
         const note = 'some note';
         const answer = SavedProfessionalFixture.create();
         answer.note = note;
+        answer.professional = master.id;
 
-        service.create(master, note).subscribe(
+        service.create(answer).subscribe(
             data => expect(data).toEqual(answer)
         );
 
         const request = httpTestingController
             .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}`);
         expect(request.request.method).toBe('POST');
-        expect(request.request.body).toEqual({
-            professional: master.id,
-            note
-        });
+        expect(request.request.body).toEqual(answer);
 
         request.flush(answer);
     });

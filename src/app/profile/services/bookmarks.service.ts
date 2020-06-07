@@ -37,15 +37,15 @@ export class BookmarksService {
                 })
             );
     }
-    public createBookmark(master: MasterInterface): Observable<BookmarkMaster> {
+    public createBookmark(savedProfessional: SavedProfessionalInterface<number>): Observable<BookmarkMaster> {
         let rawBookmark: SavedProfessionalInterface<number>;
 
-        return this.savedService.create(master)
+        return this.savedService.create(savedProfessional)
             .pipe(
                 map((value) => {
                     rawBookmark = value;
 
-                    return master.id;
+                    return savedProfessional.professional;
                 }),
                 switchMap(id => this.masterManager.getUserLessList$([id])),
                 map(masters => this.fill([rawBookmark], masters).pop())
@@ -56,8 +56,9 @@ export class BookmarksService {
         if (bookmark.professional === null) {
             return throwError('Cannot restore bookmark with null master');
         }
+        const newBookmark: SavedProfessionalInterface<number> = {...bookmark, ...{professional: bookmark.professional.id}};
 
-        return this.createBookmark(bookmark.professional);
+        return this.createBookmark(newBookmark);
     }
 
     public deleteBookmark(id: number): Observable<void> {

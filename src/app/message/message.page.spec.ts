@@ -6,6 +6,7 @@ import {RouterOutlet} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MessageBoxComponent} from './components/message-box/message-box.component';
 import { MessagePage } from './message.page';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('MessagePage', () => {
   let component: MessagePage;
@@ -14,7 +15,7 @@ describe('MessagePage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MessagePage, MessageBoxComponent ],
-      imports: [IonicModule, RouterTestingModule]
+      imports: [IonicModule, RouterTestingModule, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MessagePage);

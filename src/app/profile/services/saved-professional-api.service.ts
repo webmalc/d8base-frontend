@@ -6,6 +6,7 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {MasterInterface} from '@app/core/interfaces/master.interface';
 
 @Injectable()
 export class SavedProfessionalApiService {
@@ -21,11 +22,8 @@ export class SavedProfessionalApiService {
             );
     }
 
-    public create(professional: Master, note: string = ''): Observable<SavedProfessionalInterface<number>> {
-        return this.api.post<SavedProfessionalInterface<number>>(this.url, {
-            professional: professional.id,
-            note
-        });
+    public create(savedProfessional: SavedProfessionalInterface<number>): Observable<SavedProfessionalInterface<number>> {
+        return this.api.post<SavedProfessionalInterface<number>>(this.url, savedProfessional);
     }
 
     public getById(id: number): Observable<SavedProfessionalInterface<number>> {
@@ -41,6 +39,20 @@ export class SavedProfessionalApiService {
     }
 
     public update(saved: SavedProfessionalInterface<number>): Observable<SavedProfessionalInterface<number>> {
-        return this.api.patch(this.url, saved);
+        return this.api.patch<SavedProfessionalInterface<number>>(this.url, saved);
+    }
+
+    public createFromMaster(master: MasterInterface, note: string): Observable<SavedProfessionalInterface<number>> {
+        const bookmark = this.createBookmark(master.id, note);
+
+        return this.api.post<SavedProfessionalInterface<number>>(this.url, bookmark);
+    }
+
+    private createBookmark(masterId: number, note: string): SavedProfessionalInterface<number> {
+        return {
+            id: null,
+            professional: masterId,
+            note
+        };
     }
 }
