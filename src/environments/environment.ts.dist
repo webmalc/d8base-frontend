@@ -36,8 +36,8 @@ export const environment = {
         professional_tags: '/en/api/accounts/professional-tags/',
         professional_tags_list: '/en/api/professionals/tags/',
         professional_location: '/en/api/accounts/professional-locations/',
-        saved_professionals: '/en/api/accounts/saved-professionals/',
         reviews: '/en/api/accounts/reviews/',
+        saved_professionals: '/en/api/accounts/saved-professionals/',
         url: 'http://localhost:8000'
     },
     client_id: '',

@@ -13,6 +13,7 @@ import {MessagePage} from './message.page';
 import {MessageReaderComponent} from '@app/message/components/message-reader/message-reader.component';
 import {MessageInboxResolver} from '@app/message/resolvers/message-inbox.resolver';
 import {MessageOutboxResolver} from '@app/message/resolvers/message-outbox.resolver';
+import {NewMessageComponent} from '@app/message/components/new-message/new-message.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MessageOutboxResolver} from '@app/message/resolvers/message-outbox.resol
         MessagePage,
         MessageBoxComponent,
         MessageInstanceListComponent,
-        MessageReaderComponent
+        MessageReaderComponent,
+        NewMessageComponent
     ],
     providers: [MessageInboxResolver, MessageOutboxResolver]
 })

@@ -6,6 +6,7 @@ import {MessageBoxType} from '@app/message/enums/message-box-type';
 import {MessageReaderComponent} from '@app/message/components/message-reader/message-reader.component';
 import {MessageInboxResolver} from '@app/message/resolvers/message-inbox.resolver';
 import {MessageOutboxResolver} from '@app/message/resolvers/message-outbox.resolver';
+import {NewMessageComponent} from '@app/message/components/new-message/new-message.component';
 
 const routes: Routes = [
     {
@@ -49,6 +50,11 @@ const routes: Routes = [
         resolve: {
             message: MessageOutboxResolver
         }
+    },
+    {
+        path: 'new',
+        component: NewMessageComponent
+
     }
 ];
 

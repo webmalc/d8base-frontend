@@ -1,0 +1,36 @@
+<ion-grid>
+    <ion-list *ngIf="parentMessage">
+        <ion-list-header>В ответ на письмо</ion-list-header>
+    </ion-list>
+
+    <ion-list>
+        <ion-item>
+            <ion-label>Кому:</ion-label>
+            <ion-input [(ngModel)]="message.recipient"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Тема:</ion-label>
+            <ion-input [(ngModel)]="message.subject"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-textarea
+                    placeholder="message.body"
+                    [(ngModel)]="message.body"
+                    auto-grow="true"
+                    rows="5"
+                    debounce="100"
+                    required="true"
+                    spellcheck="true"
+            ></ion-textarea>
+        </ion-item>
+
+    </ion-list>
+  <ion-buttons>
+    <ion-button
+            (click)="sendMessage()"
+            color="success"
+            fill="solid"
+    >message.send
+    </ion-button>
+  </ion-buttons>
+</ion-grid>
