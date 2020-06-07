@@ -1,6 +1,8 @@
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
+import {LocationTypes} from '@app/core/types/location-types';
 import {IonicSelectableComponent} from 'ionic-selectable';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 export abstract class SelectableSearchService {
 
@@ -9,8 +11,8 @@ export abstract class SelectableSearchService {
     public abstractOnSearch<T>(
         component: IonicSelectableComponent,
         text: string,
-        apiService: { getList: (params: object) => Observable<ApiListResponseInterface<T>> },
-        apiParams: object
+        apiService: ApiServiceInterface<LocationTypes>,
+        apiParams: { [param: string]: string | string[]; }
     ): void {
         component.startSearch();
 
@@ -27,8 +29,8 @@ export abstract class SelectableSearchService {
             return;
         }
 
-        this.searchSubscription = apiService.getList(apiParams).subscribe(
-            (data: ApiListResponseInterface<T>) => {
+        this.searchSubscription = apiService.get(apiParams).subscribe(
+            (data: ApiListResponseInterface<LocationTypes>) => {
                 if (this.searchSubscription.closed) {
                     return;
                 }

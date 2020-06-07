@@ -1,42 +1,21 @@
 import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {UserSettings} from '@app/core/models/user-settings';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserSettingsApiService {
+export class UserSettingsApiService extends AbstractApiService<UserSettings> implements Partial<ApiServiceInterface<UserSettings>> {
 
     private readonly url = environment.backend.user_settings;
 
-    constructor(private client: ApiClientService) {
-    }
-
-    public get(): Observable<ApiListResponseInterface<UserSettings>> {
-        return this.client.get(this.url).pipe(
-            map((response: ApiListResponseInterface<UserSettings>) => {
-                response.results = plainToClass(UserSettings, response.results);
-
-                return response;
-            })
-        );
-    }
-
-    public save(userSettings: UserSettings): Observable<UserSettings> {
-        return this.client.post(this.url, userSettings).pipe(
-            map((response: UserSettings) => plainToClass(UserSettings, response))
-        );
-    }
-
-    public update(userSettings: UserSettings): Observable<UserSettings> {
-        return this.client.put(`${this.url}${userSettings.id}/`, userSettings).pipe(
-            map((response: UserSettings) => plainToClass(UserSettings, response))
-        );
+    constructor(protected client: ApiClientService) {
+        super(client);
     }
 
     public getOptions(): Observable<{
@@ -48,5 +27,14 @@ export class UserSettingsApiService {
         }
     }> {
         return this.client.options(this.url);
+    }
+
+    protected getUrl(): string {
+        return this.url;
+    }
+
+    // @ts-ignore
+    protected transform(data: UserSettings | UserSettings[]): UserSettings | UserSettings[] {
+        return plainToClass(UserSettings, data);
     }
 }

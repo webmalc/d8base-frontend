@@ -42,13 +42,13 @@ export class SettingsTabComponent implements OnInit {
         if (this.defaultUserSettings) {
             this.defaultUserSettings.currency = this.formService.form.get(UserSettingsFromFields.Currency).value;
             this.defaultUserSettings.language = this.formService.form.get(UserSettingsFromFields.Language).value;
-            this.userSettingsApi.update(this.defaultUserSettings).pipe(
+            this.userSettingsApi.put(this.defaultUserSettings).pipe(
                 tap(res => this.translation.setLang(res.language as string))
             ).subscribe(
                 res => this.defaultUserSettings = res
             );
         } else {
-            this.userSettingsApi.save(plainToClass(UserSettings, this.formService.form.getRawValue())).pipe(
+            this.userSettingsApi.create(plainToClass(UserSettings, this.formService.form.getRawValue())).pipe(
                 tap(res => this.translation.setLang(res.language as string))
             ).subscribe(
                 res => this.defaultUserSettings = res

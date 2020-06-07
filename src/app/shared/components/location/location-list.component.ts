@@ -14,6 +14,7 @@ import {CitiesApiService} from '@app/profile/services/cities-api.service';
 import {CountriesApiService} from '@app/profile/services/countries-api.service';
 import {AbstractListComponent} from '@app/shared/components/abstract-list/abstract-list.component';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
+import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
 import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
@@ -45,13 +46,13 @@ export class LocationListComponent extends AbstractListComponent<ClientLocationI
     }
 
     protected getItems(): Observable<ClientLocationInterface[]> {
-        return this.apiService.get(this.masterId).pipe(
+        return (this.apiService as LocationApiServiceInterface).getByClientId(this.masterId).pipe(
             switchMap((data: ApiListResponseInterface<ClientLocationInterface>) => forkJoin({
-                countries: this.countriesApi.getListByIdArray(data.results.map(client => client.country as number)),
-                regions: this.regionApi.getListByIdArray(data.results.map(client => client.region as number)),
-                subregions: this.subregionApi.getListByIdArray(data.results.map(client => client.subregion as number)),
-                cities: this.citiesApi.getListByIdArray(data.results.map(client => client.city as number)),
-                districts: this.districtApi.getListByIdArray(data.results.map(client => client.district as number))
+                countries: this.countriesApi.getList(data.results.map(client => client.country as number)),
+                regions: this.regionApi.getList(data.results.map(client => client.region as number)),
+                subregions: this.subregionApi.getList(data.results.map(client => client.subregion as number)),
+                cities: this.citiesApi.getList(data.results.map(client => client.city as number)),
+                districts: this.districtApi.getList(data.results.map(client => client.district as number))
             }).pipe(
                 map(({countries, regions, subregions, cities, districts}) =>
                     this.generateLocationList(data.results, countries, regions, subregions, cities, districts))

@@ -2,6 +2,7 @@ import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Tag} from '@app/master/models/tag';
 import {TagsApiService} from '@app/master/services/tags-api.service';
+import {TagsListApiService} from '@app/master/services/tags-list-api.service';
 import {BehaviorSubject} from 'rxjs';
 import {first} from 'rxjs/operators';
 
@@ -22,14 +23,14 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     public form: FormGroup;
     private onChange: (fn: any) => void;
 
-    constructor(private api: TagsApiService, private formBuilder: FormBuilder) {
+    constructor(private api: TagsApiService, private formBuilder: FormBuilder, private tagsListApi: TagsListApiService) {
     }
 
     public ngOnInit(): void {
-        this.api.getList().subscribe(
+        this.tagsListApi.get().subscribe(
             data => this.tagsList$.next(this.getTagNamesArray(data.results))
         );
-        this.api.getCurrentMasterTagsList(this.masterId).subscribe(
+        this.api.getByMasterId(this.masterId).subscribe(
             data => {
                 this.createForm(data.results);
                 this.onChange(this.form.get('tagSelect').value);

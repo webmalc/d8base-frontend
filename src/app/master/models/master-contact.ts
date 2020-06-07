@@ -2,7 +2,7 @@ import {ClientContactInterface} from '@app/shared/interfaces/client-contact-inte
 import {Expose} from 'class-transformer';
 
 export class MasterContact implements ClientContactInterface {
-    @Expose() public id?: number;
+    @Expose() public id: number;
     @Expose() public professional?: number;
     @Expose() public contact: number;
     @Expose() public contact_display?: string;

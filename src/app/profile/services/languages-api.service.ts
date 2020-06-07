@@ -18,11 +18,7 @@ export class LanguagesApiService {
 
     public getLanguages$(): Observable<Language[]> {
         return this.client.get<Language[]>(this.url).pipe(
-            map(
-                (languages) => {
-                    return plainToClass<Language, object>(Language, languages, {excludeExtraneousValues: true});
-                }
-            )
+            map(languages => plainToClass(Language, languages, {excludeExtraneousValues: true}))
         );
     }
 }

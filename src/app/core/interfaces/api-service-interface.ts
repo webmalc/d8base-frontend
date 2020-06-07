@@ -2,7 +2,7 @@ import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.i
 import {Observable} from 'rxjs';
 
 export interface ApiServiceInterface<T> {
-    get(masterId?: number): Observable<ApiListResponseInterface<T>>;
+    get(params?: { [param: string]: string | string[]; }): Observable<ApiListResponseInterface<T>>;
     getByEntityId(entityId: number): Observable<T>;
     create(data: T): Observable<T>;
     createList(data: T[]): Observable<T[]>;

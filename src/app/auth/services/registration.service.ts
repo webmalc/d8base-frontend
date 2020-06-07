@@ -25,6 +25,7 @@ export class RegistrationService {
     }
 
     public register(user: User, location: UserLocation): Observable<User> {
+        // @ts-ignore
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
             switchMap(
                 (newUser: RegistrationResponseInterface) => {
@@ -61,7 +62,7 @@ export class RegistrationService {
     }
 
     private sendVerifyLink(): Observable<any> {
-        return this.client.post(this.SEND_VERITY_REGISTRATION);
+        return this.client.post(this.SEND_VERITY_REGISTRATION, {});
     }
 }
 

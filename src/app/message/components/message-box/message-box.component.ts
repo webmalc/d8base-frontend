@@ -1,8 +1,8 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AbstractMessageService} from '@app/message/abstract/abstract-message.service';
 import {MessageInterface} from '@app/message/interfaces/message-interface';
 import {BOX_TYPE, boxTypeProvider} from '@app/message/providers/box-type.provider';
 import {messageServiceProvider} from '@app/message/providers/message-service.factory';
-import {AbstractMessageService} from '@app/message/services/abstract-message.service';
 import {Subscription} from 'rxjs';
 
 @Component({

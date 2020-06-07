@@ -34,6 +34,7 @@ export class AuthenticationService implements AuthenticatorInterface {
                 client_secret: environment.client_secret,
             };
 
+            // @ts-ignore
             this.client.post<AuthResponseInterface>(this.TOKEN_OBTAIN_URL, loginData).subscribe(
                 (result: AuthResponseInterface) => {
                     this.tokenManager.setTokens(result).then(
@@ -70,7 +71,8 @@ export class AuthenticationService implements AuthenticatorInterface {
             (subscriber) => {
                 this.tokenManager.getRefreshToken().then(refresh => {
                     const refreshData = {refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
-                    this.client.post(this.TOKEN_REFRESH_URL, refreshData).subscribe(
+                    // @ts-ignore
+                    this.client.post<AuthResponseInterface>(this.TOKEN_REFRESH_URL, refreshData).subscribe(
                         (response: AuthResponseInterface) => {
                             this.tokenManager.setTokens(response).then(
                                 _ => {
