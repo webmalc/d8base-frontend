@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {MasterLocation} from '@app/master/models/master-location';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
@@ -11,43 +13,32 @@ import {environment} from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class MasterLocationApiService implements LocationApiServiceInterface {
+export class MasterLocationApiService extends AbstractApiService<MasterLocation>
+    implements LocationApiServiceInterface, ApiServiceInterface<MasterLocation> {
 
     private readonly url = environment.backend.professional_location;
 
-    constructor(private api: ApiClientService) {
+    constructor(private client: ApiClientService) {
+        super(client);
     }
 
-    public patch(location: MasterLocation): Observable<MasterLocation> {
-        return this.api.patch(`${this.url + location.id}/`, location).pipe(
-            map(raw => plainToClass(MasterLocation, raw))
-        );
-    }
-
-    public create(location: MasterLocation): Observable<MasterLocation> {
-        return this.api.post(this.url, location).pipe(
-            map(raw => plainToClass(MasterLocation, raw))
-        );
-    }
-
-    public get(clientId?: number): Observable<ApiListResponseInterface<MasterLocation>> {
-        return this.api.get(this.url, {professional: clientId.toString(10)}).pipe(
-            map((raw: ApiListResponseInterface<MasterLocation>) => {
-                raw.results = plainToClass(MasterLocation, raw.results);
-
-                return raw;
-            })
-        );
-    }
-
-    public delete(location: MasterLocation): Observable<any> {
-        return this.api.delete(`${this.url + location.id}/`);
+    public getByClientId(clientId?: number): Observable<ApiListResponseInterface<MasterLocation>> {
+        return super.get({professional: clientId.toString(10)});
     }
 
     public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
-        return this.api.options(this.url).pipe(
+        return this.client.options(this.url).pipe(
             map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
                 raw.actions.POST.timezone.choices)
         );
+    }
+
+    protected getUrl(): string {
+        return this.url;
+    }
+
+    // @ts-ignore
+    protected transform(data: MasterLocation | MasterLocation[]): MasterLocation | MasterLocation[] {
+        return plainToClass(MasterLocation, data);
     }
 }

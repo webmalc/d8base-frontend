@@ -29,7 +29,7 @@ export class TagsTabComponent implements OnInit {
         this.form = this.formBuilder.group({
             tags: ['']
         });
-        this.api.getCurrentMasterTagsList(this.masterId).subscribe(
+        this.api.getByMasterId(this.masterId).subscribe(
             (list: ApiListResponseInterface<Tag>) => this.defaultTags = list.results
         );
     }
@@ -41,7 +41,7 @@ export class TagsTabComponent implements OnInit {
 
         forkJoin([
             this.api.deleteList(defaultArr.filter(x => !selected.includes(x)).map((val: string) => this.getDefaultTagByName(val))),
-            this.api.saveList(selected.filter(x => !defaultArr.includes(x)).map((val: string) => this.getNewTag(val)))
+            this.api.createList(selected.filter(x => !defaultArr.includes(x)).map((val: string) => this.getNewTag(val)))
         ]).subscribe(
             res => console.log('updated')
         );

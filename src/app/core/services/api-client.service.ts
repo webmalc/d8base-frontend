@@ -17,15 +17,15 @@ export class ApiClientService {
         return this.http.get<T>(this.getHost() + url, {params});
     }
 
-    public post<T>(url: string, data: object = {}): Observable<T> {
+    public post<T>(url: string, data: T): Observable<T> {
         return this.http.post<T>(this.getHost() + url, data);
     }
 
-    public put<T>(url: string, data: object = {}): Observable<T> {
+    public put<T extends {id: number}>(url: string, data: T): Observable<T> {
         return this.http.put<T>(this.getHost() + url, data);
     }
 
-    public patch<T>(url: string, data: object = {}): Observable<T> {
+    public patch<T extends {id: number}>(url: string, data: object = {}): Observable<T> {
         return this.http.patch<T>(this.getHost() + url, data);
     }
 
@@ -56,7 +56,7 @@ export class ApiClientService {
     public putList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
         return 0 === dataList.length ? of([]) :  of(dataList).pipe(
             mergeMap((list) => forkJoin(
-                ...list.map((value: {id: number}) => this.put<UserContact>(`${url}${value.id}/`, value))
+                ...list.map((value: T) => this.put<T>(`${url}${value.id}/`, value))
             ))
         );
     }
@@ -64,15 +64,15 @@ export class ApiClientService {
     public patchList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
         return 0 === dataList.length ? of([]) :  of(dataList).pipe(
             mergeMap((list) => forkJoin(
-                ...list.map((value: {id: number}) => this.patch<UserContact>(`${url}${value.id}/`, value))
+                ...list.map((value: T) => this.patch<T>(`${url}${value.id}/`, value))
             ))
         );
     }
 
-    public postList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
+    public createList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
         return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
-                ...list.map((value: {id: number}) => this.post<UserContact>(url, value))
+                ...list.map((value: T) => this.post<T>(url, value))
             ))
         );
     }

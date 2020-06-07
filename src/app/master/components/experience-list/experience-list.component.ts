@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Experience} from '@app/master/models/experience';
+import {ExperienceApiService} from '@app/master/services/experience-api.service';
 import {AbstractListComponent} from '@app/shared/components/abstract-list/abstract-list.component';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -22,7 +23,7 @@ export class ExperienceListComponent extends AbstractListComponent<Experience> i
     }
 
     protected getItems(): Observable<Experience[]> {
-        return this.apiService.get(this.masterId).pipe(
+        return (this.apiService as ExperienceApiService).getByMasterId(this.masterId).pipe(
             map(raw => raw.results)
         );
     }

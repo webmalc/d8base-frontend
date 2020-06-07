@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {AbstractLocationService} from '@app/core/services/location/abstract-location.service';
 import {LocationTypes} from '@app/core/types/location-types';
 import {City} from '@app/profile/models/city';
 import {plainToClass} from 'class-transformer';
@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class CitiesApiService extends AbstractLocationService {
+export class CitiesApiService extends AbstractApiService<City> {
 
     private readonly url = environment.backend.cities;
 
@@ -21,19 +21,51 @@ export class CitiesApiService extends AbstractLocationService {
         super(client);
     }
 
-    public getList(
+    public get(
         params: {
             country?: string,
-            region?: string,
-            subregion?: string,
+            City?: string,
+            subCity?: string,
             timezone?: string,
             search?: string,
             ordering?: string,
             page?: string,
             page_size?: string
         }
-    ): Observable<ApiListResponseInterface<LocationTypes>> {
-        return super.getList(params);
+    ): Observable<ApiListResponseInterface<City>> {
+        return super.get(params);
+    }
+
+    public create(data: City): Observable<City> {
+        throw Error('readonly endpoint');
+    }
+
+    public createList(data: City[]): Observable<City[]> {
+        throw Error('readonly endpoint');
+    }
+
+    public patch(data: City): Observable<City> {
+        throw Error('readonly endpoint');
+    }
+
+    public patchList(data: City[]): Observable<City[]> {
+        throw Error('readonly endpoint');
+    }
+
+    public put(data: City): Observable<City> {
+        throw Error('readonly endpoint');
+    }
+
+    public putList(data: City[]): Observable<City[]> {
+        throw Error('readonly endpoint');
+    }
+
+    public delete(data: City): Observable<any> {
+        throw Error('readonly endpoint');
+    }
+
+    public deleteList(data: City[]): Observable<any> {
+        throw Error('readonly endpoint');
     }
 
     public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
@@ -50,7 +82,8 @@ export class CitiesApiService extends AbstractLocationService {
         );
     }
 
-    protected getPlainToClass(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
+    // @ts-ignore
+    protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
         return plainToClass(City, results);
     }
 

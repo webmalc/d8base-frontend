@@ -1,9 +1,9 @@
-import {InboxMessageService} from '@app/message/services/inbox-message.service';
 import {Provider} from '@angular/core';
+import {AbstractMessageService} from '@app/message/abstract/abstract-message.service';
 import {MessageBoxType} from '@app/message/enums/message-box-type';
 import {BOX_TYPE} from '@app/message/providers/box-type.provider';
+import {InboxMessageService} from '@app/message/services/inbox-message.service';
 import {OutboxMessageService} from '@app/message/services/outbox-message.service';
-import {AbstractMessageService} from '@app/message/services/abstract-message.service';
 
 type BoxType = { [key in MessageBoxType]: string };
 

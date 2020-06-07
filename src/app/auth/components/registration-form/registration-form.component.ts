@@ -68,7 +68,7 @@ export class RegistrationFormComponent implements OnInit {
         this.supposedCities$.subscribe(
             (city: City) => {
                 if (null !== city) {
-                    this.countriesApi.getSingle(city.country).subscribe(
+                    this.countriesApi.getByEntityId(city.country).subscribe(
                         (country: Country) => {
                             this.registrationFormService.setFormFiledValue(RegistrationFormFields.Country, country);
                             this.registrationFormService.setFormFiledValue(RegistrationFormFields.City, city);

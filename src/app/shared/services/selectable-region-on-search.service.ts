@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Region} from '@app/core/models/region';
 import {RegionApiService} from '@app/core/services/location/region-api.service';
-import {SelectableSearchService} from '@app/shared/services/selectable-search.service';
+import {SelectableSearchService} from '@app/shared/abstract/selectable-search.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 
 @Injectable()
