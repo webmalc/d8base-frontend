@@ -62,7 +62,7 @@ export class EditMasterComponent implements OnInit {
     }
 
     public initSubcategoriesList(): Observable<any> {
-        return this.subcategoriesApi.getList().pipe(
+        return this.subcategoriesApi.get().pipe(
             tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results))
         );
     }

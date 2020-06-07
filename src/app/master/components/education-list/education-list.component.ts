@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Education} from '@app/master/models/education';
+import {EducationApiService} from '@app/master/services/education-api.service';
 import {AbstractListComponent} from '@app/shared/components/abstract-list/abstract-list.component';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -22,9 +23,8 @@ export class EducationListComponent extends AbstractListComponent<Education> imp
     }
 
     protected getItems(): Observable<Education[]> {
-        return this.apiService.get(this.masterId).pipe(
+        return (this.apiService as EducationApiService).getByMasterId(this.masterId).pipe(
             map(raw => raw.results)
         );
     }
-
 }

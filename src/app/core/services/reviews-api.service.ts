@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {Review} from '@app/core/models/review';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ReviewsApiService implements Partial<ApiServiceInterface<Review>> {
+export class ReviewsApiService extends AbstractApiService<Review> implements ApiServiceInterface<Review> {
 
     private readonly URL = environment.backend.reviews;
 
-    constructor(private client: ApiClientService) { }
+    constructor(protected client: ApiClientService) {
+        super(client);
+    }
 
-    public get(masterId?: number): Observable<ApiListResponseInterface<Review>> {
-        return this.client.get(this.URL).pipe(
-            map((raw: ApiListResponseInterface<Review>) => {
-                raw.results = plainToClass(Review, raw.results);
+    protected getUrl(): string {
+        return this.URL;
+    }
 
-                return raw;
-            })
-        );
+    // @ts-ignore
+    protected transform(data: Review[] | Review): Review[] | Review {
+        return plainToClass(Review, data);
     }
 }

@@ -1,64 +1,48 @@
 import { Injectable } from '@angular/core';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {MasterContact} from '@app/master/models/master-contact';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
 import {plainToClass} from 'class-transformer';
-import {forkJoin, Observable, of} from 'rxjs';
-import {map, mergeMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MasterContactsApiService implements ContactsApiServiceInterface {
+export class MasterContactsApiService extends AbstractApiService<ClientContactInterface>
+    implements ContactsApiServiceInterface, ApiServiceInterface<ClientContactInterface> {
 
     private readonly url = environment.backend.professional_contact;
 
-    constructor(private client: ApiClientService) { }
-
-    public getByClientId(id: number): Observable<ApiListResponseInterface<ClientContactInterface>> {
-        return this.client.get<ApiListResponseInterface<MasterContact>>(this.url, {professional: id.toString(10)}).pipe(
-            map(response => {
-                response.results = plainToClass(MasterContact, response.results);
-
-                return response;
-            })
-        );
+    constructor(protected client: ApiClientService) {
+        super(client);
     }
 
-    public saveList(contactsList: ClientContactInterface[]): Observable<ClientContactInterface[]> {
-        return 0 === contactsList.length ? of([]) : of(contactsList).pipe(
-            mergeMap((contacts) => forkJoin(
-                ...contacts.map(contact => this.client.post<MasterContact>(this.url, contact))
-            ))
-        );
-    }
-
-    public updateList(contactsList: ClientContactInterface[]): Observable<ClientContactInterface[]> {
-        return 0 === contactsList.length ? of([]) :  of(contactsList).pipe(
-            mergeMap((contacts) => forkJoin(
-                ...contacts.map(contact => this.client.put<MasterContact>(`${this.url}${contact.id}/`, contact))
-            ))
-        );
-    }
-
-    public deleteList(contactsList: ClientContactInterface[]): Observable<any> {
-        return 0 === contactsList.length ? of([]) :  of(contactsList).pipe(
-            mergeMap((contacts) => forkJoin(
-                ...contacts.map(contact => this.client.delete(`${this.url}${contact.id}/`))
-            ))
-        );
+    public getByClientId(masterId: number): Observable<ApiListResponseInterface<ClientContactInterface>> {
+        return super.get({professional: masterId.toString(10)});
     }
 
     public getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>> {
-        return this.client.get<ApiListResponseInterface<MasterContact>>(this.url).pipe(
+        return this.client.get<ApiListResponseInterface<ClientContactInterface>>(this.url).pipe(
             map(response => {
                 response.results = plainToClass(MasterContact, response.results);
 
                 return response;
             })
         );
+    }
+
+    protected getUrl(): string {
+        return this.url;
+    }
+
+    // @ts-ignore
+    protected transform(data: ClientContactInterface | ClientContactInterface[]): ClientContactInterface | ClientContactInterface[] {
+        return plainToClass(MasterContact, data);
     }
 }

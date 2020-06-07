@@ -8,5 +8,5 @@ export interface MessageInterface {
     body: string;
     isRead: boolean;
     sender?: number;
-    receiver?: number;
+    recipient?: number;
 }

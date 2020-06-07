@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
+import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Subcategory} from '@app/master/models/subcategory';
 import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
-export class SubcategoriesApiService {
+export class SubcategoriesApiService extends AbstractApiService<Subcategory> implements ApiServiceInterface<Subcategory> {
 
     private readonly url = environment.backend.subcategory;
 
-    constructor(private client: ApiClientService) { }
+    constructor(private client: ApiClientService) {
+        super(client);
+    }
 
-    public getList(): Observable<ApiListResponseInterface<Subcategory>> {
-        return this.client.get<ApiListResponseInterface<Subcategory>>(this.url).pipe(
-            map((result: ApiListResponseInterface<Subcategory>) => {
-                result.results = plainToClass(Subcategory, result.results);
+    protected getUrl(): string {
+        return this.url;
+    }
 
-                return result;
-            })
-        );
+    // @ts-ignore
+    protected transform(data: Subcategory | Subcategory[]): Subcategory | Subcategory[] {
+        return plainToClass(Subcategory, data);
     }
 }

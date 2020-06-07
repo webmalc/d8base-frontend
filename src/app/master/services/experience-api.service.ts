@@ -1,43 +1,32 @@
 import { Injectable } from '@angular/core';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Experience} from '@app/master/models/experience';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
-export class ExperienceApiService implements Partial<ApiServiceInterface<Experience>> {
+export class ExperienceApiService extends AbstractApiService<Experience> implements ApiServiceInterface<Experience> {
 
     private readonly url = environment.backend.experience;
 
-    constructor(private client: ApiClientService) { }
-
-    public get(masterId: number): Observable<ApiListResponseInterface<Experience>> {
-        return this.client.get(this.url, {professional: masterId?.toString(10)}).pipe( // nullable masterId only for tests
-            map((raw: ApiListResponseInterface<Experience>) => {
-                raw.results = plainToClass(Experience, raw.results);
-
-                return raw;
-            })
-        );
+    constructor(protected client: ApiClientService) {
+        super(client);
     }
 
-    public create(experience: Experience): Observable<Experience> {
-        return this.client.post<Experience>(this.url, experience).pipe(
-            map(raw => plainToClass(Experience, raw))
-        );
+    public getByMasterId(masterId: number): Observable<ApiListResponseInterface<Experience>> {
+        return super.get({professional: masterId?.toString(10)});
     }
 
-    public patch(experience: Experience): Observable<Experience> {
-        return this.client.patch<Experience>(`${this.url + experience.id}/`, experience).pipe(
-            map(raw => plainToClass(Experience, raw))
-        );
+    protected getUrl(): string {
+        return this.url;
     }
 
-    public delete(experience: Experience): Observable<Experience> {
-        return this.client.delete(`${this.url + experience.id}/`);
+    // @ts-ignore
+    protected transform(data: Experience | Experience[]): Experience | Experience[] {
+        return plainToClass(Experience, data);
     }
 }

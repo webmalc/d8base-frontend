@@ -56,8 +56,8 @@ export class ContactsTabComponent implements OnInit, OnChanges {
         const userContactsToUpdate = this.getClientContactsToUpdate(this.formService.form.getRawValue());
         const userContactsToDelete = this.getClientContactsToDelete(this.formService.form.getRawValue());
         forkJoin([
-            this.clientContactsApiService.saveList(userContactsToCreate),
-            this.clientContactsApiService.updateList(userContactsToUpdate),
+            this.clientContactsApiService.createList(userContactsToCreate),
+            this.clientContactsApiService.putList(userContactsToUpdate),
             this.clientContactsApiService.deleteList(userContactsToDelete)
         ]).subscribe(
             () => this.updateDefaultClientContacts().subscribe(() => console.log('saved'))

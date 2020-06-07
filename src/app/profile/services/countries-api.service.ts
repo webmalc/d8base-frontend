@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {AbstractLocationService} from '@app/core/services/location/abstract-location.service';
 import {LocationTypes} from '@app/core/types/location-types';
 import {Country} from '@app/profile/models/country';
 import {plainToClass} from 'class-transformer';
@@ -11,7 +11,7 @@ import {environment} from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class CountriesApiService extends AbstractLocationService {
+export class CountriesApiService extends AbstractApiService<Country> {
 
     private readonly url = environment.backend.countries;
 
@@ -19,7 +19,7 @@ export class CountriesApiService extends AbstractLocationService {
         super(client);
     }
 
-    public getList(
+    public get(
         params: {
             page_size?: string,
             currency?: string,
@@ -28,11 +28,44 @@ export class CountriesApiService extends AbstractLocationService {
             ordering?: string,
             page?: string
         }
-    ): Observable<ApiListResponseInterface<LocationTypes>> {
-        return super.getList(params);
+    ): Observable<ApiListResponseInterface<Country>> {
+        return super.get(params);
     }
 
-    protected getPlainToClass(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
+    public create(data: Country): Observable<Country> {
+        throw Error('readonly endpoint');
+    }
+
+    public createList(data: Country[]): Observable<Country[]> {
+        throw Error('readonly endpoint');
+    }
+
+    public patch(data: Country): Observable<Country> {
+        throw Error('readonly endpoint');
+    }
+
+    public patchList(data: Country[]): Observable<Country[]> {
+        throw Error('readonly endpoint');
+    }
+
+    public put(data: Country): Observable<Country> {
+        throw Error('readonly endpoint');
+    }
+
+    public putList(data: Country[]): Observable<Country[]> {
+        throw Error('readonly endpoint');
+    }
+
+    public delete(data: Country): Observable<any> {
+        throw Error('readonly endpoint');
+    }
+
+    public deleteList(data: Country[]): Observable<any> {
+        throw Error('readonly endpoint');
+    }
+
+    // @ts-ignore
+    protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
         return plainToClass(Country, results);
     }
 
