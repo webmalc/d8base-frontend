@@ -19,6 +19,7 @@ import {EditMasterFormService} from '@app/master/forms/edit-master-form.service'
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
+import {TagsListApiService} from '@app/master/services/tags-list-api.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
@@ -58,7 +59,8 @@ import {MasterTabsPage} from './master-tabs.page';
         UserContactApiService,
         ExperienceApiService,
         EducationApiService,
-        CertificatesApiService
+        CertificatesApiService,
+        TagsListApiService
     ]
 })
 export class MasterTabsPageModule {

@@ -1,9 +1,7 @@
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-service-interface';
 import {Observable} from 'rxjs';
 
-export interface ApiServiceInterface<T> {
-    get(params?: { [param: string]: string | string[]; }): Observable<ApiListResponseInterface<T>>;
-    getByEntityId(entityId: number): Observable<T>;
+export interface ApiServiceInterface<T> extends ReadonlyApiServiceInterface<T> {
     create(data: T): Observable<T>;
     createList(data: T[]): Observable<T[]>;
     patch(data: T): Observable<T>;

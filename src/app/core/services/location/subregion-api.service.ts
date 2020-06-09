@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
+import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Subregion} from '@app/core/models/subregion';
 import {ApiClientService} from '@app/core/services/api-client.service';
@@ -11,7 +11,7 @@ import {environment} from '../../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class SubregionApiService extends AbstractApiService<Subregion> {
+export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
 
     private readonly url = environment.backend.subregions;
 
@@ -30,38 +30,6 @@ export class SubregionApiService extends AbstractApiService<Subregion> {
         }
     ): Observable<ApiListResponseInterface<Subregion>> {
         return super.get(params);
-    }
-
-    public create(data: Subregion): Observable<Subregion> {
-        throw Error('readonly endpoint');
-    }
-
-    public createList(data: Subregion[]): Observable<Subregion[]> {
-        throw Error('readonly endpoint');
-    }
-
-    public patch(data: Subregion): Observable<Subregion> {
-        throw Error('readonly endpoint');
-    }
-
-    public patchList(data: Subregion[]): Observable<Subregion[]> {
-        throw Error('readonly endpoint');
-    }
-
-    public put(data: Subregion): Observable<Subregion> {
-        throw Error('readonly endpoint');
-    }
-
-    public putList(data: Subregion[]): Observable<Subregion[]> {
-        throw Error('readonly endpoint');
-    }
-
-    public delete(data: Subregion): Observable<any> {
-        throw Error('readonly endpoint');
-    }
-
-    public deleteList(data: Subregion[]): Observable<any> {
-        throw Error('readonly endpoint');
     }
 
     // @ts-ignore

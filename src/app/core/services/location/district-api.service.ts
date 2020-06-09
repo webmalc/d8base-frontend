@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
+import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {District} from '@app/core/models/district';
 import {ApiClientService} from '@app/core/services/api-client.service';
@@ -11,7 +11,7 @@ import {environment} from '../../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class DistrictApiService extends AbstractApiService<District> {
+export class DistrictApiService extends AbstractReadonlyApiService<District> {
 
     private readonly url = environment.backend.districts;
 
@@ -29,38 +29,6 @@ export class DistrictApiService extends AbstractApiService<District> {
         }
     ): Observable<ApiListResponseInterface<District>> {
         return super.get(params);
-    }
-
-    public create(data: District): Observable<District> {
-        throw Error('readonly endpoint');
-    }
-
-    public createList(data: District[]): Observable<District[]> {
-        throw Error('readonly endpoint');
-    }
-
-    public patch(data: District): Observable<District> {
-        throw Error('readonly endpoint');
-    }
-
-    public patchList(data: District[]): Observable<District[]> {
-        throw Error('readonly endpoint');
-    }
-
-    public put(data: District): Observable<District> {
-        throw Error('readonly endpoint');
-    }
-
-    public putList(data: District[]): Observable<District[]> {
-        throw Error('readonly endpoint');
-    }
-
-    public delete(data: District): Observable<any> {
-        throw Error('readonly endpoint');
-    }
-
-    public deleteList(data: District[]): Observable<any> {
-        throw Error('readonly endpoint');
     }
 
     // @ts-ignore

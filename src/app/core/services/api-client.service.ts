@@ -69,7 +69,7 @@ export class ApiClientService {
         );
     }
 
-    public createList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
+    public createList<T>(dataList: T[], url: string): Observable<T[]> {
         return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
                 ...list.map((value: T) => this.post<T>(url, value))
