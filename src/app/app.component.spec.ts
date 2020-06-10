@@ -12,10 +12,11 @@ import {StorageManagerService} from './core/proxies/storage-manager.service';
 import {DarkModeService} from './core/services/dark-mode.service';
 import {TranslationService} from './core/services/translation.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {PusherService} from './core/services/pusher.service';
 
 describe('AppComponent', () => {
 
-    let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
+    let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy, pusherSpy;
     let storageMock: Partial<Storage>;
     let fixture: ComponentFixture<AppComponent>;
 
@@ -24,6 +25,7 @@ describe('AppComponent', () => {
         splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
         platformReadySpy = Promise.resolve();
         platformSpy = jasmine.createSpyObj('Platform', {ready: platformReadySpy});
+        pusherSpy = jasmine.createSpyObj('PusherService', ['requestPushPermission']);
 
         storageMock = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
@@ -41,7 +43,8 @@ describe('AppComponent', () => {
                 {provide: Storage, useValue: storageMock},
                 DarkModeService,
                 StorageManagerService,
-                TranslationService
+                TranslationService,
+                {provide: PusherService, useValue: pusherSpy}
             ]
         }).compileComponents().then();
 

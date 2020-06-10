@@ -43,5 +43,13 @@ export const environment = {
     client_id: '',
     client_secret: '',
     refresh_token_expire_time: 3600,
-    map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    firebaseConfig:  {
+       apiKey: '<your-key>',
+       authDomain: '<your-project-authdomain>',
+       databaseURL: '<your-database-URL>',
+       projectId: '<your-project-id>',
+       storageBucket: '<your-storage-bucket>',
+       messagingSenderId: '<your-messaging-sender-id>'
+     }
 };

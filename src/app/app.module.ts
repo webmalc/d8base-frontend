@@ -30,12 +30,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         IonicSelectableModule,
         IonicModule.forRoot({animated: false}),
         IonicStorageModule.forRoot(),
@@ -52,7 +54,9 @@ import { environment } from '../environments/environment';
                 deps: [HttpClient]
             }
         }),
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+        ServiceWorkerModule.register('combined-sw.js', {enabled: environment.production}),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireMessagingModule
     ],
     providers: [
         {

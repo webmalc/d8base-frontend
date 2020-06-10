@@ -5,6 +5,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {PusherService} from '@app/core/services/pusher.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
         public readonly trans: TranslationService,
         public readonly menu: MenuController,
         private readonly authenticationFactory: AuthenticationFactory,
-        public readonly masterManager: MasterManagerService
+        public readonly masterManager: MasterManagerService,
+        private readonly pusher: PusherService
     ) {
         this.initializeApp();
     }
@@ -61,10 +63,13 @@ export class AppComponent implements OnInit {
     }
 
     public initializeApp(): void {
+        /** TODO: Why code duplicate? */
+        /** @see AppInitService.init */
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initDarkMode();
+            this.pusher.requestPushPermission();
         });
     }
 
