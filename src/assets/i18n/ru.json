@@ -1,10 +1,16 @@
 {
   "template": {
-    "sign-in": "Войти",
-    "sign-up": "Зарегистрироваться",
+    "sign-in": "Вход",
+    "sign-up": "Регистрация",
     "profile": "Профиль",
     "master-profile": "Профиль мастера",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "download" : "Скачать приложение",
+    "become-master": "Стать матсером",
+    "my-orders": "Мои заказы",
+    "about": "О сервисе",
+    "support": "Поддержка",
+    "terms-of-use": "Пользовательское соглашение"
   },
   "login-form": {
     "login": "Логин",

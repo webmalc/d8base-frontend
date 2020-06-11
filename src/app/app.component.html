@@ -82,7 +82,7 @@
 
             <div class="ion-page" id="main-content">
                 <ion-header>
-                    <ion-toolbar>
+                    <ion-toolbar class="fs16">
                         <ion-buttons slot="start">
                             <ion-menu-button autoHide="false" menu="menu">
                                 <ion-button (click)="toggleMenu()">
@@ -119,14 +119,14 @@
                         </ion-title>
 
                         <ion-item class="ion-item-no-border" slot="end">
-                            <ion-label>Скачать приложение</ion-label>
+                            {{'template.download'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border" slot="end">
-                            Стать мастером
+                            {{'template.become-master'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border" slot="end">
                             <ion-icon name="calendar-outline"></ion-icon>
-                            Мои заказы
+                            {{'template.my-orders'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border" slot="end">
                             <ion-icon name="notifications-outline"></ion-icon>
@@ -138,14 +138,13 @@
                                   routerLink="/auth/login"
                                   routerDirection="forward"
                                   routerLinkActive="active">
-                            Вход
-                            <!--                        <ion-label>Вход</ion-label>-->
+                            {{'template.sign-in'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
                                   routerLink="/auth/registration"
                                   routerLinkActive="active"
                                   routerDirection="forward">
-                            Регистрация
+                            {{'template.sign-up'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border" slot="end">
                             <svg width="45" height="32" viewBox="0 0 45 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -205,28 +204,28 @@
                     24.9086Z" fill="white"/>
                 </svg>
             </ion-item>
-            <ion-item class="ion-item-no-border" color="secondary" slot="end">
+            <ion-item class="ion-item-no-border fs18" color="secondary" slot="end">
                 Booking made simple
             </ion-item>
         </ion-toolbar>
-        <ion-toolbar class="d8b-container footer-min-height ion-padding-top">
+        <ion-toolbar class="d8b-container fs16 footer-min-height ion-padding-top">
             <ion-item class="footer-min-height ion-item-no-border" slot="start">
-                О сервисе
+                {{'template.about'|translate}}
             </ion-item>
             <ion-item class="footer-min-height ion-item-no-border" slot="start">
-                Поддержка
+                {{'template.support'|translate}}
             </ion-item>
             <ion-item class="footer-min-height ion-item-no-border" slot="end">
                 <app-media-links class="footer-min-height"></app-media-links>
             </ion-item>
         </ion-toolbar>
-        <ion-toolbar class="d8b-container footer-min-height ion-no-margin ion-no-padding">
+        <ion-toolbar class="d8b-container fs16 footer-min-height ion-no-margin ion-no-padding">
             <ion-item class="footer-min-height ion-item-no-border" slot="start">
-                Пользовательское<br /> соглашение
+                {{'template.terms-of-use'|translate}}
             </ion-item>
         </ion-toolbar>
         <ion-toolbar class="d8b-container footer-min-height ion-padding-bottom">
-            <ion-item class="footer-min-height ion-item-no-border" slot="start">
+            <ion-item class="footer-min-height ion-item-no-border footer-copy" slot="start">
                 &copy; 2020 d8base | All rights reserved
             </ion-item>
         </ion-toolbar>

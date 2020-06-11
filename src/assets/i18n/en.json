@@ -4,7 +4,13 @@
     "sign-up": "Sign-up",
     "profile": "Profile",
     "master-profile": "Professional profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "download" : "Download application",
+    "become-master": "Become professional",
+    "my-orders": "My orders",
+    "about": "About",
+    "support": "Support",
+    "terms-of-use": "Terms of use"
   },
   "login-form": {
     "login": "Login",
