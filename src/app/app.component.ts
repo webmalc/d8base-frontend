@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
@@ -68,6 +67,17 @@ export class AppComponent implements OnInit {
         });
     }
 
+    public toggleMenu(): void {
+        const splitPane = document.querySelector('ion-split-pane');
+        const windowWidth = window.innerWidth;
+        const splitPaneShownAt = 992;
+        const menu = splitPane.querySelector('ion-menu');
+        if (windowWidth >= splitPaneShownAt) {
+            splitPane.disabled = !splitPane.disabled;
+            menu.disabled = !menu.disabled;
+        }
+    }
+
     public changeMode(data: any): void {
         this.darkTheme = data.target.checked;
         this.darkModeService.setMode(data.target.checked);
@@ -84,8 +94,6 @@ export class AppComponent implements OnInit {
     }
 
     private initDarkMode(): void {
-        this.darkModeService.isDarkMode().then((data: boolean) => {
-            this.darkTheme = data;
-        });
+        this.darkModeService.isDarkMode().then((data: boolean) => this.darkTheme = data);
     }
 }

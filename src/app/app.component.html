@@ -1,100 +1,234 @@
 <ion-app [ngClass]="{'dark-theme': darkTheme}">
-    <ion-split-pane contentId="main-content">
-        <ion-menu contentId="main-content" type="overlay" style="max-width: 300px">
-            <ion-header>
-                <ion-toolbar>
-                    <ion-title>Navigate</ion-title>
-                </ion-toolbar>
-            </ion-header>
-            <ion-content>
-                <ion-list>
-                    <ion-item
-                            routerLink="/auth/login"
-                            routerDirection="forward"
-                            routerLinkActive="active"
-                            (click)="menu.close()"
-                    >
-                        <ion-icon name="log-in-outline"></ion-icon>
-                        {{'template.sign-in'|translate}}
-                    </ion-item>
-                    <ion-item
-                            routerLink="/auth/registration"
-                            routerLinkActive="active"
-                            routerDirection="forward"
-                            (click)="menu.close()"
-                    >
-                        <ion-icon name="reader-outline"></ion-icon>
-                        {{'template.sign-up'|translate}}
-                    </ion-item>
-                    <ion-item
-                            routerLink="/profile"
-                            routerLinkActive="active"
-                            routerDirection="forward"
-                            (click)="menu.close()"
-                    >
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        {{'template.profile'|translate}}
-                    </ion-item>
+    <ion-content>
+        <ion-split-pane contentId="main-content">
+            <ion-menu [disabled]="false" menu-id="menu" contentId="main-content" type="overlay" style="max-width: 300px">
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-title>Navigate</ion-title>
+                    </ion-toolbar>
+                </ion-header>
+                <ion-content>
+                    <ion-list>
+                        <ion-item
+                                routerLink="/auth/login"
+                                routerDirection="forward"
+                                routerLinkActive="active"
+                                (click)="menu.close()"
+                        >
+                            <ion-icon name="log-in-outline"></ion-icon>
+                            {{'template.sign-in'|translate}}
+                        </ion-item>
+                        <ion-item
+                                routerLink="/auth/registration"
+                                routerLinkActive="active"
+                                routerDirection="forward"
+                                (click)="menu.close()"
+                        >
+                            <ion-icon name="reader-outline"></ion-icon>
+                            {{'template.sign-up'|translate}}
+                        </ion-item>
+                        <ion-item
+                                routerLink="/profile"
+                                routerLinkActive="active"
+                                routerDirection="forward"
+                                (click)="menu.close()"
+                        >
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                            {{'template.profile'|translate}}
+                        </ion-item>
 
-                    <ion-item
-                            routerLink="/professional/"
-                            routerLinkActive="active"
-                            routerDirection="forward"
-                            *ngIf="masterManager.isMaster$ | async"
-                            (click)="menu.close()"
-                    >
-                        <ion-icon name="construct-outline"></ion-icon>
-                        {{'template.master-profile'|translate}}
-                    </ion-item>
+                        <ion-item
+                                routerLink="/professional/"
+                                routerLinkActive="active"
+                                routerDirection="forward"
+                                *ngIf="masterManager.isMaster$ | async"
+                                (click)="menu.close()"
+                        >
+                            <ion-icon name="construct-outline"></ion-icon>
+                            {{'template.master-profile'|translate}}
+                        </ion-item>
 
-                    <ion-item
-                            routerLink="/message"
-                            routerLinkActive="active"
-                            routerDirection="forward"
-                    >
-                        <ion-icon name="{{newMessages ? 'mail-unread-outline': 'mail-outline'}}"></ion-icon>
-                        {{'messages.messages'|translate}}
-                    </ion-item>
+                        <ion-item
+                                routerLink="/message"
+                                routerLinkActive="active"
+                                routerDirection="forward"
+                        >
+                            <ion-icon name="{{newMessages ? 'mail-unread-outline': 'mail-outline'}}"></ion-icon>
+                            {{'messages.messages'|translate}}
+                        </ion-item>
 
-                    <ion-item
-                            (click)="logout()"
-                    >
-                        <ion-icon name="log-out-outline"></ion-icon>
-                        {{'template.logout'|translate}}
+                        <ion-item
+                                (click)="logout()"
+                        >
+                            <ion-icon name="log-out-outline"></ion-icon>
+                            {{'template.logout'|translate}}
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+                <ion-footer>
+                    <ion-item>
+                        <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
+                        <ion-select interface="alert" slot="start"
+                                    [ngModel]="trans.getCurrentLang()"
+                                    (ionChange)="trans.setLang($event.detail.value)"
+                        >
+                            <ion-select-option *ngFor="let lang of trans.getLanguagesAsArray()" value="{{ lang }}">
+                                {{ lang }}
+                            </ion-select-option>
+                        </ion-select>
                     </ion-item>
-                </ion-list>
-            </ion-content>
-            <ion-footer>
-                <ion-item>
-                    <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
-                    <ion-select interface="alert" slot="start"
-                                [ngModel]="trans.getCurrentLang()"
-                                (ionChange)="trans.setLang($event.detail.value)"
-                    >
-                        <ion-select-option *ngFor="let lang of trans.getLanguagesAsArray()" value="{{ lang }}">
-                            {{ lang }}
-                        </ion-select-option>
-                    </ion-select>
-                </ion-item>
-            </ion-footer>
-        </ion-menu>
+                </ion-footer>
+            </ion-menu>
 
-        <div class="ion-page" id="main-content">
-            <ion-header>
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <ion-menu-toggle>
-                            <ion-button>
-                                <ion-icon slot="icon-only" name="menu"></ion-icon>
-                            </ion-button>
-                        </ion-menu-toggle>
-                    </ion-buttons>
-                    <ion-title>{{getTitle()|titlecase}}</ion-title>
-                </ion-toolbar>
-            </ion-header>
-            <ion-content>
-                <ion-router-outlet id="main-content"></ion-router-outlet>
-            </ion-content>
-        </div>
-    </ion-split-pane>
+            <div class="ion-page" id="main-content">
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-buttons slot="start">
+                            <ion-menu-button autoHide="false" menu="menu">
+                                <ion-button (click)="toggleMenu()">
+                                    <ion-icon slot="icon-only" name="menu"></ion-icon>
+                                </ion-button>
+                            </ion-menu-button>
+                        </ion-buttons>
+                        <ion-title>
+                            <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
+                            7.45976C4.5997 7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419
+                            29.6441C13.241 29.6441 15.3605 27.9881 16.6344
+                            26.1462H16.7077V28.9643H21.1609V1.13798H16.3075V10.2778ZM10.6875 24.9086C7.22085
+                            24.9086 4.84772 22.1602 4.84772 18.5519C4.84772 14.7519 7.40123 12.1953 10.6875
+                            12.1953C14.0809 12.1953 16.6006 14.8681 16.6006 18.5519C16.6006 22.2358 14.1204
+                            24.9086 10.6875 24.9086ZM38.0715 13.5143C39.4244 12.5381 40.7716 10.8821 40.7716
+                            8.28485C40.7716 3.88633 37.7446 0.649902 33.5113 0.649902C28.4775 0.649902 26.251
+                            4.82181 26.251 8.28485C26.251 10.0164 27.0176 12.1953 28.951 13.5143C26.3581
+                            14.717 24.5374 17.1632 24.5374 20.6611C24.5374 26.1171 28.5508 29.6499 33.5113
+                            29.6499C38.5112 29.6499 42.4852 26.1171 42.4852 20.6611C42.4852 16.5938 40.0782
+                            14.4497 38.0715 13.5143ZM33.5451 5.39124C35.1516 5.39124 36.3523 6.66954 36.3523
+                            8.40105C36.3523 10.1326 35.146 11.4109 33.5451 11.4109C31.9048 11.4109 30.6646
+                            10.1326 30.6646 8.40105C30.6646 6.66954 31.9048 5.39124 33.5451 5.39124ZM33.5113
+                            24.9086C31.1381 24.9086 29.3907 23.026 29.3907 20.5856C29.3907 18.1045 31.1776
+                            16.1464 33.5113 16.1464C35.8449 16.1464 37.6318 18.1045 37.6318 20.5856C37.6318
+                            23.026 35.8844 24.9086 33.5113 24.9086ZM56.9269 7.45976C54.4467 7.45976 52.2934
+                            8.47659 50.7601 10.3185H50.6869V1.13798H45.8335V28.9701H50.2866V26.152H50.3599C51.9664
+                            28.6331 54.5199 29.6499 57.0735 29.6499C63.8941 29.6499 67 23.6709 67 18.5577C67
+                            13.247 63.973 7.45976 56.9269 7.45976ZM56.4196 24.9086C52.8796 24.9086 50.3994
+                            21.9743 50.3994 18.2905C50.3994 14.7577 53.0994 12.1953 56.4196 12.1953C59.9201
+                            12.1953 62.1466 14.9378 62.1466 18.5868C62.1466 22.1602 59.8863 24.9086 56.4196
+                            24.9086Z" fill="#0CD1E8"/>
+                            </svg>
+                        </ion-title>
+
+                        <ion-item class="ion-item-no-border" slot="end">
+                            <ion-label>Скачать приложение</ion-label>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border" slot="end">
+                            Стать мастером
+                        </ion-item>
+                        <ion-item class="ion-item-no-border" slot="end">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            Мои заказы
+                        </ion-item>
+                        <ion-item class="ion-item-no-border" slot="end">
+                            <ion-icon name="notifications-outline"></ion-icon>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border" slot="end">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border text-blue" slot="end"
+                                  routerLink="/auth/login"
+                                  routerDirection="forward"
+                                  routerLinkActive="active">
+                            Вход
+                            <!--                        <ion-label>Вход</ion-label>-->
+                        </ion-item>
+                        <ion-item class="ion-item-no-border text-blue" slot="end"
+                                  routerLink="/auth/registration"
+                                  routerLinkActive="active"
+                                  routerDirection="forward">
+                            Регистрация
+                        </ion-item>
+                        <ion-item class="ion-item-no-border" slot="end">
+                            <svg width="45" height="32" viewBox="0 0 45 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d)">
+                                    <path d="M39.0789 5.92593H5.92102V26.0741H39.0789V5.92593Z" fill="white"/>
+                                </g>
+                                <path d="M39.0789 5.92593H5.92102V12.6454H39.0789V5.92593Z" fill="white"/>
+                                <path d="M39.0789 12.6454H5.92102V19.3649H39.0789V12.6454Z" fill="#323E95"/>
+                                <path d="M39.0789 19.3546H5.92102V26.0741H39.0789V19.3546Z" fill="#D8001E"/>
+                                <defs>
+                                    <filter id="filter0_d" x="3.92102" y="3.92593" width="37.1579" height="24.1481" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                                        <feOffset/>
+                                        <feGaussianBlur stdDeviation="1"/>
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                                    </filter>
+                                </defs>
+                            </svg>
+                        </ion-item>
+
+                    </ion-toolbar>
+                </ion-header>
+                <ion-content class="bgc-light-blue main-content">
+                    <ion-router-outlet></ion-router-outlet>
+                </ion-content>
+            </div>
+        </ion-split-pane>
+    </ion-content>
+    <ion-footer>
+        <ion-toolbar class="d8b-container" color="secondary">
+            <ion-item slot="start" color="secondary" class="ion-item-no-border">
+                <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408 7.45976C4.5997
+                    7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419 29.6441C13.241 29.6441 15.3605
+                    27.9881 16.6344 26.1462H16.7077V28.9643H21.1609V1.13798H16.3075V10.2778ZM10.6875 24.9086C7.22085
+                    24.9086 4.84772 22.1602 4.84772 18.5519C4.84772 14.7519 7.40123 12.1953 10.6875 12.1953C14.0809
+                    12.1953 16.6006 14.8681 16.6006 18.5519C16.6006 22.2358 14.1204 24.9086 10.6875
+                    24.9086ZM38.0715 13.5143C39.4244 12.5381 40.7716 10.8821 40.7716 8.28485C40.7716
+                    3.88633 37.7446 0.649902 33.5113 0.649902C28.4775 0.649902 26.251 4.82181 26.251
+                    8.28485C26.251 10.0164 27.0176 12.1953 28.951 13.5143C26.3581 14.717 24.5374 17.1632
+                    24.5374 20.6611C24.5374 26.1171 28.5508 29.6499 33.5113 29.6499C38.5112 29.6499 42.4852
+                    26.1171 42.4852 20.6611C42.4852 16.5938 40.0782 14.4497 38.0715 13.5143ZM33.5451
+                    5.39124C35.1516 5.39124 36.3523 6.66954 36.3523 8.40105C36.3523 10.1326 35.146 11.4109
+                    33.5451 11.4109C31.9048 11.4109 30.6646 10.1326 30.6646 8.40105C30.6646 6.66954 31.9048
+                    5.39124 33.5451 5.39124ZM33.5113 24.9086C31.1381 24.9086 29.3907 23.026 29.3907
+                    20.5856C29.3907 18.1045 31.1776 16.1464 33.5113 16.1464C35.8449 16.1464 37.6318
+                    18.1045 37.6318 20.5856C37.6318 23.026 35.8844 24.9086 33.5113 24.9086ZM56.9269
+                    7.45976C54.4467 7.45976 52.2934 8.47659 50.7601
+                    10.3185H50.6869V1.13798H45.8335V28.9701H50.2866V26.152H50.3599C51.9664 28.6331
+                    54.5199 29.6499 57.0735 29.6499C63.8941 29.6499 67 23.6709 67 18.5577C67 13.247
+                    63.973 7.45976 56.9269 7.45976ZM56.4196 24.9086C52.8796 24.9086 50.3994 21.9743
+                    50.3994 18.2905C50.3994 14.7577 53.0994 12.1953 56.4196 12.1953C59.9201 12.1953
+                    62.1466 14.9378 62.1466 18.5868C62.1466 22.1602 59.8863 24.9086 56.4196
+                    24.9086Z" fill="white"/>
+                </svg>
+            </ion-item>
+            <ion-item class="ion-item-no-border" color="secondary" slot="end">
+                Booking made simple
+            </ion-item>
+        </ion-toolbar>
+        <ion-toolbar class="d8b-container footer-min-height ion-padding-top">
+            <ion-item class="footer-min-height ion-item-no-border" slot="start">
+                О сервисе
+            </ion-item>
+            <ion-item class="footer-min-height ion-item-no-border" slot="start">
+                Поддержка
+            </ion-item>
+            <ion-item class="footer-min-height ion-item-no-border" slot="end">
+                <app-media-links class="footer-min-height"></app-media-links>
+            </ion-item>
+        </ion-toolbar>
+        <ion-toolbar class="d8b-container footer-min-height ion-no-margin ion-no-padding">
+            <ion-item class="footer-min-height ion-item-no-border" slot="start">
+                Пользовательское<br /> соглашение
+            </ion-item>
+        </ion-toolbar>
+        <ion-toolbar class="d8b-container footer-min-height ion-padding-bottom">
+            <ion-item class="footer-min-height ion-item-no-border" slot="start">
+                &copy; 2020 d8base | All rights reserved
+            </ion-item>
+        </ion-toolbar>
+    </ion-footer>
 </ion-app>

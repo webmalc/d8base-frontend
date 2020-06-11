@@ -38,4 +38,22 @@
   .not-clickable {
     pointer-events: none;
   }
+
+  .ion-item-no-border {
+    --border-width: 0;
+    --inner-border-width: 0;
+  }
+
+  .d8b-container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .text-blue {
+    color: #3880FF;
+  }
+
+  .footer-min-height {
+    --min-height: 2.8rem
+  }
 }

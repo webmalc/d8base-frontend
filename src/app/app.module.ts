@@ -8,6 +8,7 @@ import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
 import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
@@ -19,6 +20,7 @@ import {IpServicesHolderService} from '@app/core/services/location/ip-services-h
 import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {TranslationService} from '@app/core/services/translation.service';
+import {SharedModule} from '@app/shared/shared.module';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
@@ -26,16 +28,15 @@ import {IonicStorageModule} from '@ionic/storage';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {IonicSelectableModule} from 'ionic-selectable';
+import { environment } from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         IonicSelectableModule,
         IonicModule.forRoot({animated: false}),
         IonicStorageModule.forRoot(),
@@ -52,7 +53,8 @@ import { environment } from '../environments/environment';
                 deps: [HttpClient]
             }
         }),
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        SharedModule
     ],
     providers: [
         {
