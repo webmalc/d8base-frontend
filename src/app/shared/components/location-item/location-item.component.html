@@ -1,6 +1,12 @@
 <ion-grid>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col
+                [sizeXs]="gridSizes.sizeXs"
+                [sizeSm]="gridSizes.sizeSm"
+                [sizeMd]="gridSizes.sizeMd"
+                [sizeLg]="gridSizes.sizeLg"
+                [sizeXl]="gridSizes.sizeXl"
+        >
             <ion-card>
                 <ion-card-header>
                     {{'location.loc'|translate}}

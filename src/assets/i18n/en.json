@@ -32,6 +32,14 @@
     "incorrect-login-data": "Incorrect login or password"
   },
   "profile-form": {
+    "title": "Profile",
+    "main": "Main",
+    "contacts": "Contacts",
+    "address": "You address",
+    "corporate": "Corporate client",
+    "about": "About",
+    "units": "Currency, Units, Language",
+    "change-password": "Change password",
     "group": {
       "main": "Main",
       "credentials": "Credentials"

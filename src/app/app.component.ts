@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initDarkMode();
+            this.toggleMenu();
         });
     }
 
@@ -76,6 +77,10 @@ export class AppComponent implements OnInit {
             splitPane.disabled = !splitPane.disabled;
             menu.disabled = !menu.disabled;
         }
+    }
+
+    public becomeMaster(): void {
+        this.masterManager.becomeMaster().subscribe();
     }
 
     public changeMode(data: any): void {

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {MasterContact} from '@app/master/models/master-contact';
 import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
 import {UserContact} from '@app/profile/models/user-contact';
@@ -17,7 +18,13 @@ export class ContactsTabComponent implements OnInit {
 
     public masterId: number;
     public masterContactsData: MasterContact[] = [];
-
+    public sizes: GridSizesInterface = {
+        sizeXs: 12,
+        sizeSm: 6,
+        sizeMd: 6,
+        sizeLg: 4,
+        sizeXl: 3
+    };
     constructor(
         public masterContactsApiService: MasterContactsApiService,
         private route: ActivatedRoute,

@@ -26,18 +26,6 @@ const routes: Routes = [
                 component: PluginsTabComponent
             },
             {
-                path: 'contacts',
-                component: ContactTabComponent
-            },
-            {
-                path: 'settings',
-                component: SettingsTabComponent
-            },
-            {
-                path: 'location',
-                component: LocationTabComponent
-            },
-            {
                 path: 'bookmark',
                 component: BookmarksTabComponent
             },

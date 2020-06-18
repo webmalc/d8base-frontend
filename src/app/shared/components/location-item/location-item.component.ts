@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {Region} from '@app/core/models/region';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
@@ -19,6 +20,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class LocationItemComponent extends AbstractListItemComponent<ClientLocationInterface> implements OnInit, AfterViewInit {
 
+    @Input() public gridSizes: GridSizesInterface;
     @Input() public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>>;
     @ViewChild(UserLocationMapComponent) public map: UserLocationMapComponent;
     public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

@@ -1,12 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {UserSettings} from '@app/core/models/user-settings';
 import {TranslationService} from '@app/core/services/translation.service';
 import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
 import {UserSettingsFromFields} from '@app/profile/enums/user-settings-from-fields';
 import {SettingsFormService} from '@app/profile/forms/settings-form.service';
 import {plainToClass} from 'class-transformer';
-import {tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
+import {filter, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-settings-tab',
@@ -15,6 +17,15 @@ import {tap} from 'rxjs/operators';
 })
 export class SettingsTabComponent implements OnInit {
 
+    public static submitThis: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    @Input() public gridSizes: GridSizesInterface = {
+        sizeXs: 12,
+        sizeSm: 6,
+        sizeMd: 6,
+        sizeLg: 4,
+        sizeXl: 3
+    };
+    @Input() public submittable: boolean = true;
     public formFields = UserSettingsFromFields;
     private defaultUserSettings: UserSettings;
 
@@ -36,13 +47,18 @@ export class SettingsTabComponent implements OnInit {
                 );
             }
         );
+        SettingsTabComponent.submitThis.pipe(
+            filter(isUpdated => true === isUpdated)
+        ).subscribe(
+            isUpdated => this.submitSettings()
+        );
     }
 
     public submitSettings(): void {
         if (this.defaultUserSettings) {
-            this.defaultUserSettings.currency = this.formService.form.get(UserSettingsFromFields.Currency).value;
-            this.defaultUserSettings.language = this.formService.form.get(UserSettingsFromFields.Language).value;
-            this.userSettingsApi.put(this.defaultUserSettings).pipe(
+            const data: UserSettings = plainToClass(UserSettings, this.formService.form.getRawValue());
+            data.id = this.defaultUserSettings.id;
+            this.userSettingsApi.put(data).pipe(
                 tap(res => this.translation.setLang(res.language as string))
             ).subscribe(
                 res => this.defaultUserSettings = res

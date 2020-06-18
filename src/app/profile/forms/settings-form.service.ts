@@ -10,6 +10,7 @@ export class SettingsFormService {
     public form: FormGroup;
     public languages: Array<{ value: string, display_name: string }>;
     public currency: Array<{ value: string, display_name: string }>;
+    public units = ['metric', 'imperial/US'];
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -25,6 +26,9 @@ export class SettingsFormService {
                 userSettings?.currency, [
                     AppValidators.restrictEnum(this.currency?.map(cur => cur.value))
                 ]
+            ],
+            [UserSettingsFromFields.Units]: [
+                userSettings?.units?.toString(10)
             ]
         });
     }

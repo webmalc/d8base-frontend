@@ -1,12 +1,13 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {Contact} from '@app/profile/models/contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
-import {forkJoin, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
+import {filter, map, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-contacts-tab',
@@ -15,10 +16,13 @@ import {map, tap} from 'rxjs/operators';
 })
 export class ContactsTabComponent implements OnInit, OnChanges {
 
+    public static submitThis: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    @Input() public gridSizes: GridSizesInterface;
     @Input() public clientContactsApiService: ContactsApiServiceInterface;
     @Input() public getNewClientContact: () => ClientContactInterface;
     @Input() public clientId: number;
     @Input() public toFillFormData: ClientContactInterface[] = [];
+    @Input() public submittable: boolean = true;
     private contactsList: string[] = [];
     private defaultClientContacts: ClientContactInterface[];
 
@@ -48,6 +52,12 @@ export class ContactsTabComponent implements OnInit, OnChanges {
                     }
                 );
             }
+        );
+
+        ContactsTabComponent.submitThis.pipe(
+            filter(isUpdated => true === isUpdated)
+        ).subscribe(
+            isUpdated => this.submitContacts()
         );
     }
 
@@ -95,21 +105,22 @@ export class ContactsTabComponent implements OnInit, OnChanges {
     }
 
     private getClientContactsToCreate(contactsData: object): ClientContactInterface[] {
+        const copy = Object.assign({}, contactsData);
         for (const contactName in contactsData) {
-            if ('' === contactsData[contactName]) {
-                delete contactsData[contactName];
+            if ('' === copy[contactName]) {
+                delete copy[contactName];
                 continue;
             }
             this.defaultClientContacts.forEach(
                 userContact => {
                     if (userContact.contact_display === contactName) {
-                        delete contactsData[contactName];
+                        delete copy[contactName];
                     }
                 }
             );
         }
 
-        return this.generateUserContacts(contactsData);
+        return this.generateUserContacts(copy);
     }
 
     private getClientContactsToUpdate(contactsData: object): ClientContactInterface[] {
@@ -121,8 +132,9 @@ export class ContactsTabComponent implements OnInit, OnChanges {
                         && userContact.value !== contactsData[contactName]
                         && '' !== contactsData[contactName]
                     ) {
-                        userContact.value = contactsData[contactName];
-                        updatedContacts.push(userContact);
+                        const copy = Object.assign({}, userContact);
+                        copy.value = contactsData[contactName];
+                        updatedContacts.push(copy);
                     }
                 }
             );

@@ -39,6 +39,26 @@
     pointer-events: none;
   }
 
+  .fs18 {
+    font-size: 18px;
+  }
+
+  .fs16 {
+    font-size: 16px;
+  }
+
+  .fs20 {
+    font-size: 20px;
+  }
+
+  .fs13 {
+    font-size: 13px;
+  }
+
+  .pt10 {
+    padding-top: 10px;
+  }
+
   .ion-item-no-border {
     --border-width: 0;
     --inner-border-width: 0;
@@ -53,7 +73,11 @@
     color: #3880FF;
   }
 
-  .footer-min-height {
-    --min-height: 2.8rem
+  .no-padding-right {
+    padding-right: 0;
+  }
+
+  .base-blue {
+    color: #0CD1E8;
   }
 }

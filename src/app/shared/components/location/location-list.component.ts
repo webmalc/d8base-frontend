@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {District} from '@app/core/models/district';
 import {Region} from '@app/core/models/region';
 import {Subregion} from '@app/core/models/subregion';
@@ -25,6 +26,7 @@ import {map, switchMap} from 'rxjs/operators';
 })
 export class LocationListComponent extends AbstractListComponent<ClientLocationInterface> implements OnInit {
 
+    @Input() public gridSizes: GridSizesInterface;
     @Input() public masterId: number;
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
         new BehaviorSubject<Array<{ value: string, display_name: string }>>([]);

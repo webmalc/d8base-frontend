@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {AppFooterComponent} from '@app/shared/components/app-footer/app-footer.component';
+import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {LocationItemComponent} from '@app/shared/components/location-item/location-item.component';
@@ -33,7 +35,9 @@ import {DebounceDirective} from './directives/debounce.directive';
         UserLocationMapComponent,
         LocationItemComponent,
         ReviewsListComponent,
-        MediaLinksComponent
+        MediaLinksComponent,
+        AppFooterComponent,
+        CollapseItemComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -43,7 +47,9 @@ import {DebounceDirective} from './directives/debounce.directive';
         LocationListComponent,
         LocationItemComponent,
         ReviewsListComponent,
-        MediaLinksComponent
+        MediaLinksComponent,
+        AppFooterComponent,
+        CollapseItemComponent
     ],
     imports: [
         CommonModule,

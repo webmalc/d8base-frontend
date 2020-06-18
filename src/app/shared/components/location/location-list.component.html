@@ -1,25 +1,30 @@
-<ion-content>
+<app-location-item
+        *ngFor="let location of items; let i=index"
+        [index]="i"
+        [item]="location"
+        [timezoneList$]="timezoneList$"
+        (saveEmitter)="saveItem($event)"
+        (deleteEmitter)="deleteItem($event)"
+        [interactive]="interactive"
+        [gridSizes]="gridSizes"
+>
+</app-location-item>
 
-    <app-location-item
-            *ngFor="let location of items; let i=index"
-            [index]="i"
-            [item]="location"
-            [timezoneList$]="timezoneList$"
-            (saveEmitter)="saveItem($event)"
-            (deleteEmitter)="deleteItem($event)"
-            [interactive]="interactive"
+<ion-row *ngIf="interactive" class="ion-justify-content-center">
+    <ion-col
+            [sizeXs]="gridSizes.sizeXs"
+            [sizeSm]="gridSizes.sizeSm"
+            [sizeMd]="gridSizes.sizeMd"
+            [sizeLg]="gridSizes.sizeLg"
+            [sizeXl]="gridSizes.sizeXl"
     >
-    </app-location-item>
+        <ion-button
+                expand="block"
+                fill="solid"
+                color="success"
+                (click)="addNewItem()"
+        >{{ 'location.add_location' | translate }}</ion-button>
+    </ion-col>
+</ion-row>
 
-    <ion-row *ngIf="interactive" class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-            <ion-button
-                    expand="block"
-                    fill="solid"
-                    color="success"
-                    (click)="addNewItem()"
-            >{{ 'location.add_location' | translate }}</ion-button>
-        </ion-col>
-    </ion-row>
 
-</ion-content>

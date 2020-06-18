@@ -1,9 +1,8 @@
-<ion-content>
-    <app-location-list
-            [masterId]="userId"
-            [apiService]="api"
-            [getPreparedModel]="getPreparedUserLocation()"
-            [getNewItem]="getNewItem"
-            [interactive]="true"
-    ></app-location-list>
-</ion-content>
+<app-location-list
+        [apiService]="api"
+        [getPreparedModel]="getPreparedUserLocation()"
+        [getNewItem]="getNewItem"
+        [interactive]="true"
+        [gridSizes]="gridSizes"
+></app-location-list>
+

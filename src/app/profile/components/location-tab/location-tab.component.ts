@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {UserLocation} from '@app/core/models/user-location';
 import {HelperService} from '@app/core/services/helper.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
@@ -11,18 +11,11 @@ import {plainToClass} from 'class-transformer';
     templateUrl: './location-tab.component.html',
     styleUrls: ['./location-tab.component.scss'],
 })
-export class LocationTabComponent implements OnInit {
+export class LocationTabComponent {
 
-    public userId: number;
+    @Input() public gridSizes: GridSizesInterface;
 
-    constructor(
-        public api: UserLocationApiService,
-        private route: ActivatedRoute
-    ) {
-    }
-
-    public ngOnInit(): void {
-        this.userId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    constructor(public api: UserLocationApiService) {
     }
 
     public getNewItem(): ClientLocationInterface {
