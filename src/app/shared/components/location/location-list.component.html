@@ -18,12 +18,10 @@
             [sizeLg]="gridSizes.sizeLg"
             [sizeXl]="gridSizes.sizeXl"
     >
-        <ion-button
-                expand="block"
-                fill="solid"
-                color="success"
-                (click)="addNewItem()"
-        >{{ 'location.add_location' | translate }}</ion-button>
+        <ion-item (click)="addNewItem()" class="cursor-pointer ion-item-no-border ion-no-padding pl5">
+            <ion-icon color="secondary" name="add-circle"></ion-icon>
+            <ion-label class="ion-padding-start">{{'list-item.add-new' | translate}}</ion-label>
+        </ion-item>
     </ion-col>
 </ion-row>
 

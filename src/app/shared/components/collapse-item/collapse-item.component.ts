@@ -14,6 +14,8 @@ export class CollapseItemComponent {
     public readonly arrowUp = 'arrow-up-circle-outline';
     public readonly arrowDown = 'arrow-down-circle-outline';
     public collapsed: boolean = true;
+    // tslint:disable-next-line:no-empty
+    @Input() public onClickFunc = () => {};
 
     public collapse(): void {
         this.collapsed = !this.collapsed;

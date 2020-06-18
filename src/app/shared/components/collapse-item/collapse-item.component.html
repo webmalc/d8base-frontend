@@ -2,7 +2,7 @@
     <ion-label class="fs16">
         <b>{{title | translate}}</b>
     </ion-label>
-    <ion-icon name="{{collapsed ? arrowDown : arrowUp}}" (click)="collapse()"></ion-icon>
+    <ion-icon name="{{collapsed ? arrowDown : arrowUp}}" (click)="collapse();onClickFunc()"></ion-icon>
 </ion-item>
 <div *ngIf="!collapsed">
     <ng-content></ng-content>

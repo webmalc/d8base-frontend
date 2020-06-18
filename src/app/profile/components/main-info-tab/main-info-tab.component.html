@@ -54,7 +54,7 @@
                                 <ion-col>
                                     <ion-row class="fs13 pt10">
                                         <ion-label class="label-for-required-input" color="medium" position="fixed">
-                                            Пол
+                                            {{'profile-form.fields.gender' | translate }}
                                         </ion-label>
                                     </ion-row>
                                     <ion-row class="ion-padding-top" style="margin-left: -14px;">
@@ -117,46 +117,79 @@
                                            formControlName="{{formFields.Email}}"></ion-input>
                             </ion-item>
 
+                            <app-collapse-item title="profile-form.contacts">
+                                <app-contacts-tab
+                                        [clientContactsApiService]="userContactApiService"
+                                        [getNewClientContact]="getNewUser"
+                                        [gridSizes]="sizes"
+                                        [submittable]="false"
+                                ></app-contacts-tab>
+                            </app-collapse-item>
+                            <app-collapse-item [onClickFunc]="invalidateMapSize" title="profile-form.address">
+                                <app-location-tab
+                                        [gridSizes]="sizes"
+                                ></app-location-tab>
+                            </app-collapse-item>
+
+                            <ion-item class="pt10">
+                                <ion-label>
+                                    <b>{{'profile-form.corporate' | translate }}</b>
+                                </ion-label>
+                                <ion-toggle class="no-padding-right"></ion-toggle>
+                            </ion-item>
+
+                            <app-collapse-item title="profile-form.about">
+                                <ion-item>
+                                    <ion-label color="medium"
+                                               position="floating">{{'profile-form.fields.age' | translate }}</ion-label>
+                                    <ion-datetime
+                                            display-format="YYYY-MM-DD"
+                                            formControlName="{{formFields.Birthday}}"
+                                    ></ion-datetime>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label color="medium"
+                                               position="floating">{{'profile-form.fields.main_language' | translate }}</ion-label>
+                                    <ion-select
+                                            interface="popover"
+                                            formControlName="{{formFields.Language}}"
+                                            (ionChange)="recomputeAdditionalLanguages()"
+                                    >
+                                        <ion-select-option *ngFor="let lang of languages$ | async"
+                                                           value="{{ lang.code }}">
+                                            {{ lang.name }}
+                                        </ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label color="medium"
+                                               position="floating">{{'profile-form.fields.languages' | translate }}</ion-label>
+                                    <ion-select
+                                            multiple="true"
+                                            formControlName="{{formFields.AdditionalLanguages}}"
+                                    >
+                                        <ion-select-option *ngFor="let lang of availableAddsLanguages$ | async"
+                                                           value="{{ lang.code }}">
+                                            {{ lang.name }}
+                                        </ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </app-collapse-item>
+
+                            <app-collapse-item title="profile-form.units">
+                                <app-settings-tab
+                                        [submittable]="false"
+                                        [gridSizes]="sizes"
+                                ></app-settings-tab>
+                            </app-collapse-item>
+
+                            <ion-item class="ion-padding-top ion-item-no-border">
+                                <ion-label>
+                                    <b class="base-blue">{{'profile-form.change-password' | translate }}</b>
+                                </ion-label>
+                                <ion-icon class="cursor-pointer" name="arrow-forward-outline"></ion-icon>
+                            </ion-item>
                         </form>
-                        <app-collapse-item title="profile-form.contacts">
-                            <app-contacts-tab
-                                    [clientContactsApiService]="userContactApiService"
-                                    [getNewClientContact]="getNewUser"
-                                    [gridSizes]="sizes"
-                                    [submittable]="false"
-                            ></app-contacts-tab>
-                        </app-collapse-item>
-                        <app-collapse-item title="profile-form.address">
-                            <app-location-tab
-                                    [gridSizes]="sizes"
-                            ></app-location-tab>
-                        </app-collapse-item>
-
-                        <ion-item class="pt10">
-                            <ion-label>
-                                <b>{{'profile-form.corporate' | translate }}</b>
-                            </ion-label>
-                            <ion-toggle class="no-padding-right"></ion-toggle>
-                        </ion-item>
-
-                        <app-collapse-item title="profile-form.about">
-
-                        </app-collapse-item>
-                        <!--TODO-->
-                        <app-collapse-item title="profile-form.units">
-                            <app-settings-tab
-                                    [submittable]="false"
-                                    [gridSizes]="sizes"
-                            ></app-settings-tab>
-                        </app-collapse-item>
-
-                        <ion-item class="ion-padding-top ion-item-no-border">
-                            <ion-label>
-                                <b class="base-blue">{{'profile-form.change-password' | translate }}</b>
-                            </ion-label>
-                            <ion-icon class="cursor-pointer" name="arrow-forward-outline"></ion-icon>
-                        </ion-item>
-
                         <ion-button color="primary" (click)="submit()" class="ion-margin-top" expand="block">
                             {{'profile-form.button'| translate}}
                         </ion-button>

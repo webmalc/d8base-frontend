@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {HelperService} from '@app/core/services/helper.service';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
@@ -14,6 +15,13 @@ import {plainToClass} from 'class-transformer';
 export class LocationTabComponent implements OnInit {
 
     public masterId: number;
+    public sizes: GridSizesInterface = {
+        sizeXs: 12,
+        sizeSm: 6,
+        sizeMd: 6,
+        sizeLg: 4,
+        sizeXl: 3
+    };
 
     constructor(
         public api: MasterLocationApiService,

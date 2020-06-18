@@ -3,6 +3,8 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Coordinates} from '@app/shared/interfaces/coordinates';
 import * as L from 'leaflet';
 import {LeafletMouseEvent} from 'leaflet';
+import {BehaviorSubject} from 'rxjs';
+import {filter} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 
 @Component({
@@ -17,6 +19,7 @@ import {environment} from '../../../../environments/environment';
 })
 export class UserLocationMapComponent implements OnInit, ControlValueAccessor, AfterViewInit {
 
+    public static forceInvalidate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public options: L.MapOptions;
     @Input() public clientCoordinates: number[];
     @Input() public interactive: boolean = true;
@@ -31,11 +34,14 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
     }
 
     public invalidateSize(): void {
-        setTimeout(() => this.map.invalidateSize(true), 1000); // TODO: crutch TA DA
+        setTimeout(() => this.map.invalidateSize(true), 200); // TODO: crutch TA DA
     }
 
     public ngOnInit(): void {
         this.initMap(this.clientCoordinates);
+        UserLocationMapComponent.forceInvalidate.pipe(filter(v => true === v)).subscribe(
+            _ => this.invalidateSize()
+        );
     }
 
     public onMapReady(map: L.Map): void {

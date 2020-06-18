@@ -10,6 +10,7 @@ import {UserContact} from '@app/profile/models/user-contact';
 import {ProfileService} from '@app/profile/services/profile.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
+import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {plainToClass} from 'class-transformer';
 import {BehaviorSubject} from 'rxjs';
@@ -59,8 +60,8 @@ export class MainInfoTabComponent implements OnInit {
         return new UserContact();
     }
 
-    public genderList(): string[] {
-        return this.profileService.getGenders();
+    public invalidateMapSize(): void {
+        UserLocationMapComponent.forceInvalidate.next(true);
     }
 
     public recomputeAdditionalLanguages(): void {
