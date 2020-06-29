@@ -1,0 +1,123 @@
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
+
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                    <ion-col class="ion-no-padding">
+                        <ion-row class="ion-justify-content-start ion-align-items-center">
+                            <ion-item routerLink="/profile"
+                                      routerDirection="back"
+                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
+                                <ion-icon name="arrow-back-outline"></ion-icon>
+                            </ion-item>
+                            <ion-item class="ion-item-no-border">Основное</ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+                        <ion-item>
+                            <ion-label class="label-for-required-input" color="medium"
+                                       position="floating">{{'profile-form.fields.name' | translate }}</ion-label>
+                            <ion-input type="text" name="first_name"
+                                       [placeholder]="'profile-form.placeholders.name'| translate"
+                                       formControlName="{{formFields.FirstName}}"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label class="label-for-required-input" color="medium"
+                                       position="floating">{{'profile-form.fields.surname' | translate }}</ion-label>
+                            <ion-input type="text" name="last_name"
+                                       [placeholder]="'profile-form.placeholders.surname'| translate"
+                                       formControlName="{{formFields.LastName}}"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label color="medium"
+                                       position="floating">{{'profile-form.fields.patronymic' | translate }}</ion-label>
+                            <ion-input type="text" name="patronymic"
+                                       [placeholder]="'profile-form.placeholders.patronymic'| translate"
+                                       formControlName="{{formFields.Patronymic}}"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-col>
+                                <ion-row class="fs13 pt10">
+                                    <ion-label class="label-for-required-input" color="medium" position="fixed">
+                                        {{'profile-form.fields.gender' | translate }}
+                                    </ion-label>
+                                </ion-row>
+                                <ion-row class="ion-padding-top" style="margin-left: -14px;">
+                                    <ion-radio-group [formControlName]="formFields.Gender">
+                                        <ion-row>
+                                            <ion-col>
+                                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11.375 11.375V25.8125C11.373 25.9854 11.4056 26.157 11.4709 26.3171C11.5361 26.4772 11.6327 26.6227 11.755 26.745C11.8773 26.8673 12.0228 26.9639 12.1829 27.0291C12.343 27.0944 12.5146 27.127 12.6875 27.125V27.125C12.8604 27.127 13.032 27.0944 13.1921 27.0291C13.3522 26.9639 13.4977 26.8673 13.62 26.745C13.7422 26.6227 13.8389 26.4772 13.9041 26.3171C13.9694 26.157 14.002 25.9854 14 25.8125"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M14 18.375V25.8125C13.998 25.9854 14.0306 26.157 14.0959 26.3171C14.1611 26.4772 14.2577 26.6227 14.38 26.745C14.5023 26.8673 14.6478 26.9639 14.8079 27.0291C14.968 27.0944 15.1396 27.127 15.3125 27.125C15.4854 27.127 15.657 27.0944 15.8171 27.0291C15.9772 26.9639 16.1227 26.8673 16.245 26.745C16.3673 26.6227 16.4639 26.4772 16.5291 26.3171C16.5944 26.157 16.627 25.9854 16.625 25.8125V11.375"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M11.375 10.5V15.3125C11.377 15.4854 11.3445 15.657 11.2793 15.8172C11.214 15.9774 11.1174 16.1229 10.9951 16.2452C10.8729 16.3674 10.7274 16.464 10.5672 16.5293C10.407 16.5945 10.2354 16.6271 10.0625 16.625V16.625C9.88957 16.6271 9.71797 16.5945 9.55781 16.5293C9.39764 16.464 9.25213 16.3674 9.12985 16.2452C9.00756 16.1229 8.91096 15.9774 8.84572 15.8172C8.78049 15.657 8.74795 15.4854 8.75 15.3125V10.5C8.75 9.80381 9.02656 9.13613 9.51884 8.64384C10.0111 8.15156 10.6788 7.875 11.375 7.875H16.625C17.3212 7.875 17.9889 8.15156 18.4811 8.64384C18.9734 9.13613 19.25 9.80381 19.25 10.5V15.3125C19.252 15.4854 19.2195 15.657 19.1543 15.8172C19.089 15.9774 18.9924 16.1229 18.8701 16.2452C18.7478 16.3674 18.6023 16.464 18.4422 16.5293C18.282 16.5945 18.1104 16.6271 17.9375 16.625V16.625C17.7646 16.6271 17.593 16.5945 17.4328 16.5293C17.2726 16.464 17.1271 16.3674 17.0048 16.2452C16.8825 16.1229 16.7859 15.9774 16.7207 15.8172C16.6555 15.657 16.6229 15.4854 16.625 15.3125V10.5"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M14 5.25C15.2081 5.25 16.1875 4.27062 16.1875 3.0625C16.1875 1.85438 15.2081 0.875 14 0.875C12.7919 0.875 11.8125 1.85438 11.8125 3.0625C11.8125 4.27062 12.7919 5.25 14 5.25Z"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                            </ion-col>
+                                            <ion-col>
+                                                <ion-radio value="{{ 0 | number}}"></ion-radio>
+                                            </ion-col>
+                                            <ion-col>
+                                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11.375 20.125V25.8125C11.373 25.9854 11.4056 26.157 11.4709 26.3171C11.5361 26.4772 11.6327 26.6227 11.755 26.745C11.8773 26.8673 12.0228 26.9639 12.1829 27.0291C12.343 27.0944 12.5146 27.127 12.6875 27.125V27.125C12.8604 27.127 13.032 27.0944 13.1921 27.0291C13.3522 26.9639 13.4977 26.8673 13.62 26.745C13.7422 26.6227 13.8389 26.4772 13.9041 26.3171C13.9694 26.157 14.002 25.9854 14 25.8125"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M14 20.125V25.8125C13.998 25.9854 14.0306 26.157 14.0959 26.3171C14.1611 26.4772 14.2577 26.6227 14.38 26.745C14.5023 26.8673 14.6478 26.9639 14.8079 27.0291C14.968 27.0944 15.1396 27.127 15.3125 27.125C15.4854 27.127 15.657 27.0944 15.8171 27.0291C15.9772 26.9639 16.1227 26.8673 16.245 26.745C16.3673 26.6227 16.4639 26.4772 16.5291 26.3171C16.5944 26.157 16.627 25.9854 16.625 25.8125V20.125"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M10.0078 14.9844C9.96052 15.1507 9.88046 15.3059 9.77232 15.4409C9.66419 15.5759 9.53017 15.6879 9.37814 15.7703C9.22611 15.8527 9.05913 15.9039 8.88703 15.9209C8.71492 15.9379 8.54116 15.9203 8.37595 15.8692C8.20961 15.8219 8.0544 15.7419 7.91945 15.6337C7.78451 15.5256 7.67255 15.3915 7.59016 15.2395C7.50777 15.0875 7.45661 14.9205 7.43969 14.7484C7.42278 14.5763 7.44044 14.4025 7.49165 14.2373L8.85884 9.62828C9.00959 9.12159 9.32002 8.67716 9.74387 8.36122C10.1677 8.04528 10.6823 7.87474 11.2109 7.875H16.7891C17.3177 7.87492 17.8323 8.04568 18.2561 8.36182C18.6798 8.67796 18.9901 9.12257 19.1406 9.62938L20.5078 14.2384C20.559 14.4036 20.5767 14.5774 20.5598 14.7495C20.5428 14.9216 20.4917 15.0885 20.4093 15.2406C20.3269 15.3926 20.2149 15.5267 20.08 15.6348C19.9451 15.743 19.7898 15.823 19.6235 15.8703V15.8703C19.4584 15.9209 19.2849 15.9381 19.1131 15.9208C18.9413 15.9034 18.7747 15.852 18.6231 15.7695C18.4714 15.687 18.3377 15.5751 18.2299 15.4403C18.122 15.3054 18.0421 15.1505 17.9949 14.9844"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M14 5.25C15.2081 5.25 16.1875 4.27062 16.1875 3.0625C16.1875 1.85438 15.2081 0.875 14 0.875C12.7919 0.875 11.8125 1.85438 11.8125 3.0625C11.8125 4.27062 12.7919 5.25 14 5.25Z"
+                                                          stroke="#86888F" stroke-miterlimit="10"
+                                                          stroke-linecap="round"/>
+                                                    <path d="M11.375 10.5L8.75 19.25H19.25L16.625 10.5"
+                                                          stroke="#86888F" stroke-linecap="round"
+                                                          stroke-linejoin="round"/>
+                                                </svg>
+                                            </ion-col>
+                                            <ion-col>
+                                                <ion-radio value="{{ 1 | number}}"></ion-radio>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-radio-group>
+                                </ion-row>
+                            </ion-col>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label class="label-for-required-input" color="medium"
+                                       position="floating">{{'profile-form.fields.email' | translate }}</ion-label>
+                            <ion-input type="text" name="email"
+                                       [placeholder]="'profile-form.placeholders.email'| translate"
+                                       formControlName="{{formFields.Email}}">
+
+                            </ion-input>
+                        </ion-item>
+                        <ion-button [disabled]="isSubmitDisabled()" color="secondary" type="submit"
+                                    class="ion-margin-top" fill="solid" expand="block">
+                            {{'profile-form.button'| translate}}
+                        </ion-button>
+                    </ion-col>
+                </ion-item>
+
+            </form>
+        </ion-col>
+    </ion-row>
+</ion-content>

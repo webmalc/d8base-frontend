@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Contact} from '@app/profile/models/contact';
@@ -10,11 +11,12 @@ import {environment} from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class ContactApiService {
+export class ContactApiService extends AbstractReadonlyApiService<Contact> {
 
     private readonly url = environment.backend.contact;
 
-    constructor(private client: ApiClientService) {
+    constructor(protected client: ApiClientService) {
+        super(client);
     }
 
     public get(params?: {
@@ -26,12 +28,15 @@ export class ContactApiService {
         page?: string,
         page_size?: string
     }): Observable<ApiListResponseInterface<Contact>> {
-        return this.client.get<ApiListResponseInterface<Contact>>(this.url, params).pipe(
-            map(response => {
-                response.results = plainToClass(Contact, response.results);
+        return super.get(params);
+    }
 
-                return response;
-            })
-        );
+    protected getUrl(): string {
+        return this.url;
+    }
+
+    // @ts-ignore
+    protected transform(data: Contact | Contact[]): Contact | Contact[] {
+        return plainToClass(Contact, data);
     }
 }

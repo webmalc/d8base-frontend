@@ -1,4 +1,4 @@
-import {Component, ElementRef, forwardRef, Input, Provider, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, Provider, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
@@ -24,6 +24,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     @Input() public camera: boolean = true;
     @Input() public fileSystem: boolean = true;
     @ViewChild('file', {read: ElementRef}) public fileInput: ElementRef<IonInput>;
+    @Output() public value: EventEmitter<string> = new EventEmitter<string>();
 
     public uri: string | null;
     private onChange: (fn: any) => void;
@@ -36,7 +37,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     }
 
     public async openAndSelectFile(): Promise<void> {
-        const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement()
+        const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement();
         input.click();
     }
 
@@ -104,6 +105,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     private setUri(uri: string): void {
         this.uri = uri;
         this.onChange(uri);
+        this.value.emit(uri);
     }
 
 }

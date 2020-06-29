@@ -78,7 +78,17 @@
     "plugins": "Плагины",
     "contacts": "Контакты",
     "education": "Образование",
-    "bookmark": "Избранное"
+    "bookmark": "Избранное",
+    "add-new-contact": "Добавить еще контант",
+    "add-new-address": "Добавить еще адрес",
+    "your-address": "Ваш адрес",
+    "main-address": "Основной адрес",
+    "additional-address": "Дополнительный адрес",
+    "about": "О себе",
+    "age": "Дата рождения",
+    "nationality": "Национальность",
+    "languages": "Языки общения",
+    "not-specified": "Не указано"
   },
   "plugins-tab": {
     "plugins": "Плагины",

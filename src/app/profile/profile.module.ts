@@ -6,14 +6,18 @@ import {IonicModule} from '@ionic/angular';
 
 import {ProfilePageRoutingModule} from './profile-routing.module';
 
+import {AboutEditComponent} from '@app/profile/components/about-edit/about-edit.component';
 import {BookmarksItemComponent} from '@app/profile/components/bookmarks-tab/bookmarks-item/bookmarks-item.component';
 import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
+import {LocationEditComponent} from '@app/profile/components/location-edit/location-edit.component';
 import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {ReviewsTabComponent} from '@app/profile/components/reviews-tab/reviews-tab.component';
 import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
+import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
+import {UserEditComponent} from '@app/profile/components/user-edit/user-edit.component';
 import {PluginsFormService} from '@app/profile/forms/plugins-form.service';
 import {SettingsFormService} from '@app/profile/forms/settings-form.service';
 import {BookmarksService} from '@app/profile/services/bookmarks.service';
@@ -25,6 +29,7 @@ import {UserPluginApiService} from '@app/profile/services/user-plugin-api.servic
 import {SharedModule} from '@app/shared/shared.module';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {TranslateModule} from '@ngx-translate/core';
+import {IonicSelectableModule} from 'ionic-selectable';
 import {ProfilePage} from './profile.page';
 
 @NgModule({
@@ -36,7 +41,8 @@ import {ProfilePage} from './profile.page';
         TranslateModule,
         ReactiveFormsModule,
         SharedModule,
-        LeafletModule
+        LeafletModule,
+        IonicSelectableModule
     ],
     declarations: [
         ProfilePage,
@@ -47,7 +53,11 @@ import {ProfilePage} from './profile.page';
         LocationTabComponent,
         BookmarksTabComponent,
         BookmarksItemComponent,
-        ReviewsTabComponent
+        ReviewsTabComponent,
+        UserContactEditComponent,
+        UserEditComponent,
+        LocationEditComponent,
+        AboutEditComponent
     ],
     providers: [
         PluginApiService,

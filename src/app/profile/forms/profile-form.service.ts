@@ -12,9 +12,6 @@ import {Language} from '@app/profile/models/language';
 // ** TODO: To find out right way about validation data from API
 export class ProfileFormService {
 
-    private mainLanguages: string[] = [];
-    private additionalLanguages: string[] = [];
-
     constructor(private formBuilder: FormBuilder) {
     }
 
@@ -43,14 +40,6 @@ export class ProfileFormService {
                         Validators.maxLength(20)
                     ]
                 ],
-                // password: [
-                //     user.password,
-                //     [
-                //         Validators.required,
-                //         Validators.minLength(4),
-                //         Validators.maxLength(30),
-                //     ]
-                // ],
                 [ProfileFormFields.Email]: [
                     user.email,
                     [
@@ -58,47 +47,16 @@ export class ProfileFormService {
                         Validators.email,
                     ]
                 ],
-                [ProfileFormFields.Phone]: [
-                    user.phone,
-                    [
-                        Validators.required,
-                    ]
-                ],
-                [ProfileFormFields.Avatar]: [
-                    user.avatar,
-                    [
-                        Validators.maxLength(512)
-                    ]
-                ],
                 [ProfileFormFields.Gender]: [
                     user.gender?.toString(),
                     [Validators.required]
-                ],
-                [ProfileFormFields.Birthday]: [
-                    user.birthday,
-                    [
-                        Validators.required,
-                    ]
-                ],
-                [ProfileFormFields.Language]: [
-                    user.main_language,
-                    [
-                        // Validators.required,
-                        AppValidators.restrictEnum(this.mainLanguages)
-                    ]
-                ],
-                [ProfileFormFields.AdditionalLanguages]: [
-                    user.languages,
-                    [
-                        AppValidators.restrictEnumArray(this.additionalLanguages)
-                    ]
                 ]
             }
         );
     }
 
     public setValidators(languages: Language[], addsLanguages: Language[]): void {
-        this.mainLanguages = languages.map(lang => lang.code);
-        this.additionalLanguages = addsLanguages.map(lang => lang.code);
+        // this.mainLanguages = languages.map(lang => lang.code);
+        // this.additionalLanguages = addsLanguages.map(lang => lang.code);
     }
 }

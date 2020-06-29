@@ -49,7 +49,8 @@ import {DebounceDirective} from './directives/debounce.directive';
         ReviewsListComponent,
         MediaLinksComponent,
         AppFooterComponent,
-        CollapseItemComponent
+        CollapseItemComponent,
+        UserLocationMapComponent
     ],
     imports: [
         CommonModule,

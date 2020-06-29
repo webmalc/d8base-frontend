@@ -1,44 +1,39 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
-import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
-import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
+import {AboutEditComponent} from '@app/profile/components/about-edit/about-edit.component';
+import {LocationEditComponent} from '@app/profile/components/location-edit/location-edit.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
-import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
-import {ReviewsTabComponent} from '@app/profile/components/reviews-tab/reviews-tab.component';
-import {SettingsTabComponent} from '@app/profile/components/settings-tab/settings-tab.component';
-import {ProfilePage} from './profile.page';
+import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
+import {UserEditComponent} from '@app/profile/components/user-edit/user-edit.component';
 
 const routes: Routes = [
     {
-        path: 'tabs',
-        component: ProfilePage,
-        data: {
-            title: 'Profile'
-        },
-        children: [
-            {
-                path: 'main',
-                component: MainInfoTabComponent
-            },
-            {
-                path: 'plugins',
-                component: PluginsTabComponent
-            },
-            {
-                path: 'bookmark',
-                component: BookmarksTabComponent
-            },
-            {
-                path: 'reviews',
-                component: ReviewsTabComponent
-            }
-        ]
+        path: '',
+        component : MainInfoTabComponent,
     },
     {
-        path: '',
-        redirectTo: 'tabs/main',
-        pathMatch: 'full',
+        path: 'contact-edit/:contact-id',
+        component: UserContactEditComponent
+    },
+    {
+        path: 'contact-add',
+        component: UserContactEditComponent
+    },
+    {
+        path: 'location-edit/:location-id',
+        component: LocationEditComponent
+    },
+    {
+        path: 'location-add',
+        component: LocationEditComponent
+    },
+    {
+        path: 'edit',
+        component: UserEditComponent
+    },
+    {
+        path: 'about',
+        component: AboutEditComponent
     }
 ];
 

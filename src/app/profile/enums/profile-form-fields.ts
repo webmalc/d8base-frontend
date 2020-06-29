@@ -6,7 +6,7 @@ export enum ProfileFormFields {
     Phone = 'phone',
     Gender = 'gender',
     Birthday = 'birthday',
-    Language = 'language',
-    AdditionalLanguages = 'additional_languages',
+    Languages = 'languages',
+    Nationality = 'nationality',
     Avatar = 'avatar'
 }
