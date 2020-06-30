@@ -3,12 +3,16 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {DarkModeService} from '@app/core/services/dark-mode.service';
+import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {TranslationService} from '@app/core/services/translation.service';
+import {Country} from '@app/profile/models/country';
+import {CountriesApiService} from '@app/profile/services/countries-api.service';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
-import {filter, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {filter, map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -19,9 +23,10 @@ export class AppComponent implements OnInit {
 
     public darkTheme = false;
     public newMessages: boolean = false;
+    public countryCode: string;
 
     constructor(
-        private readonly platform: Platform,
+        public readonly platform: Platform,
         private readonly splashScreen: SplashScreen,
         private readonly statusBar: StatusBar,
         private readonly darkModeService: DarkModeService,
@@ -30,8 +35,10 @@ export class AppComponent implements OnInit {
         private readonly activatedRoute: ActivatedRoute,
         public readonly trans: TranslationService,
         public readonly menu: MenuController,
-        private readonly authenticationFactory: AuthenticationFactory,
-        public readonly masterManager: MasterManagerService
+        public readonly authenticationFactory: AuthenticationFactory,
+        public readonly masterManager: MasterManagerService,
+        public readonly userLocationApi: UserLocationApiService,
+        public readonly countryApi: CountriesApiService
     ) {
         this.initializeApp();
     }
@@ -39,8 +46,7 @@ export class AppComponent implements OnInit {
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
         const appTitle = this.titleService.getTitle();
-        this.router
-            .events.pipe(
+        this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
             map(_ => {
                 let child = this.activatedRoute.firstChild;
@@ -53,10 +59,8 @@ export class AppComponent implements OnInit {
 
                 return appTitle;
             })
-        ).subscribe((title: string) => {
-            this.titleService.setTitle(title);
-        })
-        ;
+        ).subscribe((title: string) => this.titleService.setTitle(title));
+        this.getDefaultUserCountry().subscribe(c => this.countryCode = c.code.toLowerCase());
     }
 
     public initializeApp(): void {
@@ -96,6 +100,12 @@ export class AppComponent implements OnInit {
         await this.authenticationFactory.getAuthenticator().logout();
         this.masterManager.updateIsMaster();
         this.router.navigateByUrl('/auth/login');
+    }
+
+    private getDefaultUserCountry(): Observable<Country> {
+        return this.userLocationApi.getDefaultLocation().pipe(
+            switchMap(location => this.countryApi.getByEntityId(location.country as number))
+        );
     }
 
     private initDarkMode(): void {

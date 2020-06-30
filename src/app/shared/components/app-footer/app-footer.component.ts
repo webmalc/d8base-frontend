@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'app-footer',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./app-footer.component.scss'],
 })
 export class AppFooterComponent {
+    constructor(public readonly platform: Platform) {
+    }
 }

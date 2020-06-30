@@ -73,8 +73,14 @@
   }
 
   .d8b-container {
-    padding-left: 10%;
-    padding-right: 10%;
+    @media (min-width: 577px) {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+    @media (max-width: 576px) {
+      padding-right: 3%;
+      padding-left: 3%;
+    }
   }
 
   .no-horizontal-padding {
@@ -106,5 +112,16 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
     border-left: 1px solid rgba(0, 0, 0, 0.13);
     border-right: 1px solid rgba(0, 0, 0, 0.13);
+  }
+
+  .ion-item-no-side-padding {
+    --padding-end: 0;
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --padding-start: 0;
+  }
+
+  .ion-item-no-min-height {
+    --min-height: 0px;
   }
 }

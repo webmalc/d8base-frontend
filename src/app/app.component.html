@@ -90,7 +90,7 @@
                                 </ion-button>
                             </ion-menu-button>
                         </ion-buttons>
-                        <ion-title>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
                             7.45976C4.5997 7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419
@@ -116,56 +116,46 @@
                             12.1953 62.1466 14.9378 62.1466 18.5868C62.1466 22.1602 59.8863 24.9086 56.4196
                             24.9086Z" fill="#0CD1E8"/>
                             </svg>
-                        </ion-title>
+                        </ion-item>
 
-                        <ion-item class="ion-item-no-border" slot="end">
+                        <ion-item class="ion-item-no-border" slot="end" *ngIf="platform.is('desktop')">
                             {{'template.download'|translate}}
                         </ion-item>
-                        <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)" class="ion-item-no-border" slot="end">
+                        <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
+                            && (authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
+                            && platform.is('desktop')"
+                            class="ion-item-no-border" slot="end">
                             {{'template.become-master'|translate}}
                         </ion-item>
-                        <ion-item class="ion-item-no-border" slot="end">
+                        <ion-item class="ion-item-no-border" slot="end"
+                            *ngIf="(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)">
                             <ion-icon name="calendar-outline"></ion-icon>
                             {{'template.my-orders'|translate}}
                         </ion-item>
-                        <ion-item class="ion-item-no-border" slot="end">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
                             <ion-icon name="notifications-outline"></ion-icon>
                         </ion-item>
-                        <ion-item class="ion-item-no-border" slot="end">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding" slot="end">
                             <ion-icon name="heart-outline"></ion-icon>
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
+                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)">
                                   routerLink="/auth/login"
                                   routerDirection="forward"
                                   routerLinkActive="active">
                             {{'template.sign-in'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
+                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)">
                                   routerLink="/auth/registration"
                                   routerLinkActive="active"
                                   routerDirection="forward">
                             {{'template.sign-up'|translate}}
                         </ion-item>
-                        <ion-item class="ion-item-no-border" slot="end">
-                            <svg width="45" height="32" viewBox="0 0 45 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g filter="url(#filter0_d)">
-                                    <path d="M39.0789 5.92593H5.92102V26.0741H39.0789V5.92593Z" fill="white"/>
-                                </g>
-                                <path d="M39.0789 5.92593H5.92102V12.6454H39.0789V5.92593Z" fill="white"/>
-                                <path d="M39.0789 12.6454H5.92102V19.3649H39.0789V12.6454Z" fill="#323E95"/>
-                                <path d="M39.0789 19.3546H5.92102V26.0741H39.0789V19.3546Z" fill="#D8001E"/>
-                                <defs>
-                                    <filter id="filter0_d" x="3.92102" y="3.92593" width="37.1579" height="24.1481" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-                                        <feOffset/>
-                                        <feGaussianBlur stdDeviation="1"/>
-                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                                    </filter>
-                                </defs>
-                            </svg>
+                        <ion-item class="ion-item-no-border" slot="end"
+                                  *ngIf="(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
+                                   && countryCode">
+                            <span class="flag-icon flag-icon-{{countryCode}}"></span>
                         </ion-item>
 
                     </ion-toolbar>

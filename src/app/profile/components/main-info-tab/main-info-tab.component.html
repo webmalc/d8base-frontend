@@ -70,7 +70,7 @@
                                 <ion-item class="ion-item-no-border">
                                     {{contact.value}}
                                 </ion-item>
-                                <ion-item class="no-padding-right ion-item-no-border ion-align-items-center"
+                                <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
                                           routerLink="contact-edit/{{contact.id}}"
                                           routerDirection="forward"
                                           routerLinkActive="active"
@@ -115,7 +115,7 @@
                             </ion-item>
                         </ion-row>
                         <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-align-items-center">
+                            <ion-item class="ion-item-no-border ion-align-items-center ion-item-no-min-height ion-margin-bottom">
                                 {{(defaultLocation$|async)?.country.name}}, {{(defaultLocation$|async)?.city.name}}
                             </ion-item>
                         </ion-row>
@@ -127,7 +127,7 @@
                                     <ion-item class="ion-item-no-border ion-align-items-center">
                                         {{'profile-page.additional-address'|translate}}
                                     </ion-item>
-                                    <ion-item class="no-padding-right ion-item-no-border ion-align-items-center"
+                                    <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
                                               routerLink="location-edit/{{location.id}}"
                                               routerDirection="forward"
                                               routerLinkActive="active"
@@ -136,7 +136,7 @@
                                     </ion-item>
                                 </ion-row>
                                 <ion-row class="ion-justify-content-start ion-align-items-center">
-                                    <ion-item class="ion-item-no-border ion-align-items-center">
+                                    <ion-item class="ion-item-no-border ion-align-items-center ion-item-no-min-height ion-margin-bottom">
                                         {{location.country.name}}, {{location.city.name}}
                                     </ion-item>
                                 </ion-row>

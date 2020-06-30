@@ -23,6 +23,13 @@ export class UserLocationApiService extends AbstractApiService<ClientLocationInt
         super(client);
     }
 
+    public getDefaultLocation(): Observable<UserLocation> {
+        return super.get().pipe(
+            map((locationList: ApiListResponseInterface<ClientLocationInterface>) =>
+                locationList.results.filter(location => location.is_default === true)[0] as UserLocation)
+        );
+    }
+
     public getByClientId(): Observable<ApiListResponseInterface<ClientLocationInterface>> {
         return super.get();
     }

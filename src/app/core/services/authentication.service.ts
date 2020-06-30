@@ -6,8 +6,8 @@ import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {from, Observable, of} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import {BehaviorSubject, from, Observable, of} from 'rxjs';
+import {catchError, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 /**
@@ -18,10 +18,15 @@ import {environment} from '../../../environments/environment';
 })
 export class AuthenticationService implements AuthenticatorInterface {
 
+    public isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
     constructor(private tokenManager: TokenManagerService, private client: ApiClientService) {
+    }
+
+    public getIsAuthenticatedSubject(): BehaviorSubject<boolean> {
+        return this.isAuthenticated$;
     }
 
     public login({username, password}: Credentials): Observable<void> {
@@ -39,12 +44,14 @@ export class AuthenticationService implements AuthenticatorInterface {
                 (result: AuthResponseInterface) => {
                     this.tokenManager.setTokens(result).then(
                         _ => {
+                            this.isAuthenticated$.next(true);
                             subscriber.next();
                             subscriber.complete();
                         }
                     );
                 },
                 (authError: HttpErrorResponse) => {
+                    this.isAuthenticated$.next(false);
                     subscriber.error(authError);
                 }
             );
@@ -53,12 +60,15 @@ export class AuthenticationService implements AuthenticatorInterface {
 
     public isAuthenticated(): Observable<boolean> {
         return from(this.tokenManager.isRefreshTokenExpired()).pipe(
+            tap((isExpired: boolean) => this.isAuthenticated$.next(!isExpired)),
             switchMap((isExpired: boolean) => of(!isExpired)),
             catchError(error => of(false))
         );
     }
 
     public logout(): Promise<any> {
+        this.isAuthenticated$.next(false);
+
         return this.tokenManager.clear();
     }
 
@@ -76,12 +86,14 @@ export class AuthenticationService implements AuthenticatorInterface {
                         (response: AuthResponseInterface) => {
                             this.tokenManager.setTokens(response).then(
                                 _ => {
+                                    this.isAuthenticated$.next(true);
                                     subscriber.next();
                                     subscriber.complete();
                                 }
                             );
                         },
                         _ => {
+                            this.isAuthenticated$.next(false);
                             subscriber.error();
                         }
                     );
