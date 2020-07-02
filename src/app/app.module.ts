@@ -7,6 +7,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
@@ -30,9 +32,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {IonicSelectableModule} from 'ionic-selectable';
 import { environment } from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';;
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AppComponent} from './app.component';
 
 @NgModule({
     declarations: [AppComponent],
