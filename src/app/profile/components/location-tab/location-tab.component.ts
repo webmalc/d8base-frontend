@@ -13,7 +13,13 @@ import {plainToClass} from 'class-transformer';
 })
 export class LocationTabComponent {
 
-    @Input() public gridSizes: GridSizesInterface;
+    @Input() public gridSizes: GridSizesInterface = {
+        sizeXs: 12,
+        sizeSm: 6,
+        sizeMd: 6,
+        sizeLg: 4,
+        sizeXl: 3
+    };
 
     constructor(public api: UserLocationApiService) {
     }

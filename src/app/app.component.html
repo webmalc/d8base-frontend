@@ -139,14 +139,14 @@
                             <ion-icon name="heart-outline"></ion-icon>
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
-                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)">
+                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)"
                                   routerLink="/auth/login"
                                   routerDirection="forward"
                                   routerLinkActive="active">
                             {{'template.sign-in'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
-                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)">
+                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)"
                                   routerLink="/auth/registration"
                                   routerLinkActive="active"
                                   routerDirection="forward">

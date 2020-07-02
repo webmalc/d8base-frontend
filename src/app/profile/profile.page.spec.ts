@@ -3,13 +3,12 @@ import {By} from '@angular/platform-browser';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicModule, IonTabBar} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {bool} from 'aws-sdk/clients/signer';
 import {BehaviorSubject} from 'rxjs';
 import {MasterManagerService} from '../core/services/master-manager.service';
 import {ProfilePage} from './profile.page';
 
 class MasterManagerServiceStub {
-    public isMaster$: BehaviorSubject<bool> = new BehaviorSubject<bool>(false);
+    public isMaster$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 }
 
 describe('ProfilePage', () => {
@@ -44,6 +43,6 @@ describe('ProfilePage', () => {
 
     it('should create tabs', () => {
         const tabs = fixture.debugElement.query(By.directive(IonTabBar)).children;
-        expect(tabs.length).toEqual(7);
+        expect(tabs.length).toEqual(4);
     });
 });

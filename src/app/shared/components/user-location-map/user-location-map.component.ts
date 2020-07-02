@@ -34,7 +34,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
     }
 
     public invalidateSize(): void {
-        setTimeout(() => this.map.invalidateSize(true), 2000); // TODO: crutch TA DA
+        setTimeout(() => this.map?.invalidateSize(true), 2000); // TODO: crutch TA DA
     }
 
     public ngOnInit(): void {

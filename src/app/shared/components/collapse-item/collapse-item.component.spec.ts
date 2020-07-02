@@ -1,24 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
+import {TranslateModule} from '@ngx-translate/core';
 import { CollapseItemComponent } from './collapse-item.component';
 
 describe('CollapseItemComponent', () => {
-  let component: CollapseItemComponent;
-  let fixture: ComponentFixture<CollapseItemComponent>;
+    let component: CollapseItemComponent;
+    let fixture: ComponentFixture<CollapseItemComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CollapseItemComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ CollapseItemComponent ],
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(CollapseItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(CollapseItemComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

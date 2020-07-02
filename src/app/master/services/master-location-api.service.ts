@@ -23,7 +23,7 @@ export class MasterLocationApiService extends AbstractApiService<MasterLocation>
     }
 
     public getByClientId(clientId?: number): Observable<ApiListResponseInterface<MasterLocation>> {
-        return super.get({professional: clientId.toString(10)});
+        return super.get({professional: clientId?.toString(10)});
     }
 
     public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {

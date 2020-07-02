@@ -1,16 +1,17 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {Injectable} from '@angular/core';
-import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {UserInterface} from '../../../core/interfaces/user.interface';
+import {UserManagerService} from '../../../core/services/user-manager.service';
 import {PictureSelectorComponent} from '../../../shared/components/picture-selector/picture-selector.component';
 import {ProfileFormService} from '../../forms/profile-form.service';
+import {ContactApiService} from '../../services/contact-api.service';
 import {ProfileService} from '../../services/profile.service';
+import {UserContactApiService} from '../../services/user-contact-api.service';
 import {MainInfoTabComponent} from './main-info-tab.component';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('MainInfoTabComponent', () => {
 
@@ -20,10 +21,13 @@ describe('MainInfoTabComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [MainInfoTabComponent, PictureSelectorComponent],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, TranslateModule.forRoot(), HttpClientTestingModule],
+            imports: [IonicModule.forRoot(), ReactiveFormsModule, TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
             providers: [
                 ProfileFormService,
-                ProfileService
+                ProfileService,
+                UserContactApiService,
+                ContactApiService,
+                UserManagerService
                 // {
                 //     provide: ProfileService,
                 //     useClass: ProfileServiceStub,
