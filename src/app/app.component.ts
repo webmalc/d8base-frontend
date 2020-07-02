@@ -5,6 +5,7 @@ import {AuthenticationFactory} from '@app/core/services/authentication-factory.s
 import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {PusherService} from '@app/core/services/pusher.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {Country} from '@app/profile/models/country';
 import {CountriesApiService} from '@app/profile/services/countries-api.service';
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
         public readonly authenticationFactory: AuthenticationFactory,
         public readonly masterManager: MasterManagerService,
         public readonly userLocationApi: UserLocationApiService,
-        public readonly countryApi: CountriesApiService
+        public readonly countryApi: CountriesApiService,
+        private readonly pusher: PusherService
     ) {
         this.initializeApp();
     }
@@ -64,11 +66,14 @@ export class AppComponent implements OnInit {
     }
 
     public initializeApp(): void {
+        /** TODO: Why code duplicate? */
+        /** @see AppInitService.init */
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initDarkMode();
             this.toggleMenu();
+            this.pusher.requestPushPermission();
         });
     }
 

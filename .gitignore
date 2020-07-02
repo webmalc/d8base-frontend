@@ -37,3 +37,8 @@ capacitor.config.json
 local.karma.conf.js
 
 .docker/.env
+#cordova
+/resources/
+android/
+config.xml
+src/firebase-messaging-sw.js.dist

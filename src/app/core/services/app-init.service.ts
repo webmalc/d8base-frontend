@@ -17,6 +17,8 @@ export class AppInitService {
     ) {
     }
 
+    /** TODO: Why code duplicate? */
+    /** @see AppComponent.initializeApp */
     public init(): Promise<any> {
         return new Promise<any>(resolve => {
             this.platform.ready().then(() => {

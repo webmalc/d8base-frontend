@@ -30,7 +30,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {IonicSelectableModule} from 'ionic-selectable';
 import { environment } from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {AppComponent} from './app.component';;
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 
 @NgModule({
     declarations: [AppComponent],
@@ -53,7 +55,9 @@ import {AppComponent} from './app.component';
                 deps: [HttpClient]
             }
         }),
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        ServiceWorkerModule.register('combined-sw.js', {enabled: environment.production}),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireMessagingModule,
         SharedModule
     ],
     providers: [
