@@ -38,6 +38,11 @@ export const environment = {
         professional_location: '/en/api/accounts/professional-locations/',
         reviews: '/en/api/accounts/reviews/',
         saved_professionals: '/en/api/accounts/saved-professionals/',
+        service_prices: '/en/api/accounts/service-prices/',
+        services: '/en/api/accounts/services/',
+        service_tag: '/en/api/accounts/service-tags/',
+        service_location: '/en/api/accounts/service-locations/',
+        service_photo: '/en/api/accounts/service-photos/',
         url: 'http://localhost:8000'
     },
     client_id: '',

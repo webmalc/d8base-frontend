@@ -22,6 +22,7 @@ import {IpServicesHolderService} from '@app/core/services/location/ip-services-h
 import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {TranslationService} from '@app/core/services/translation.service';
+import {ServiceModule} from '@app/service/service.module';
 import {SharedModule} from '@app/shared/shared.module';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
@@ -58,7 +59,8 @@ import {AppComponent} from './app.component';
         ServiceWorkerModule.register('combined-sw.js', {enabled: environment.production}),
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireMessagingModule,
-        SharedModule
+        SharedModule,
+        ServiceModule
     ],
     providers: [
         {
