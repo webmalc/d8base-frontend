@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {User} from '@app/core/models/user';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {ProfileService} from '@app/profile/services/profile.service';
+import {RegisterEmailApiService} from '@app/profile/services/register-email-api.service';
 import {plainToClass} from 'class-transformer';
 
 @Component({
@@ -18,7 +19,8 @@ export class UserEditComponent implements OnInit {
 
     constructor(
         private profileService: ProfileService,
-        private location: Location
+        private location: Location,
+        private registerEmailApi: RegisterEmailApiService
     ) {
     }
 
@@ -32,6 +34,7 @@ export class UserEditComponent implements OnInit {
         this.profileService.updateUser(
             plainToClass(User, this.form.getRawValue(), {excludeExtraneousValues: true})
         );
+        this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();
         this.location.back();
     }
 

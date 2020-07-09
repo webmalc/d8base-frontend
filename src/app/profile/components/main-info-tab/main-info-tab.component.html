@@ -22,7 +22,9 @@
                             <ion-item class="ion-item-no-border">{{'profile-form.main'|translate}}</ion-item>
                             <ion-item routerLink="edit/"
                                       routerDirection="forward"
-                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
+                                      routerLinkActive="active"
+                                      id="edit-main"
+                                      class="ion-item-no-border ion-align-items-center">
                                 <ion-icon name="create-outline"></ion-icon>
                             </ion-item>
                         </ion-row>
@@ -32,7 +34,7 @@
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-no-padding">
                         <ion-row>
-                            <ion-item class="ion-item-no-border ion-align-items-center">
+                            <ion-item id="username" class="ion-item-no-border ion-align-items-center">
                                 {{user?.first_name}} {{user?.last_name}}
                             </ion-item>
                         </ion-row>
@@ -41,7 +43,7 @@
                                 <ion-icon class="pr5" name="mail-outline"></ion-icon>
                                 Email
                             </ion-item>
-                            <ion-item class="ion-item-no-border">
+                            <ion-item id="email" class="ion-item-no-border">
                                 {{user?.email}}
                             </ion-item>
                         </ion-row>
@@ -67,7 +69,7 @@
                                 {{contact.contact_display}}
                             </ion-item>
                             <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end">
-                                <ion-item class="ion-item-no-border">
+                                <ion-item class="ion-item-no-border" id="item-contact-value">
                                     {{contact.value}}
                                 </ion-item>
                                 <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
@@ -83,7 +85,8 @@
                             <ion-item routerLink="contact-add/"
                                       routerDirection="forward"
                                       routerLinkActive="active"
-                                      class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start">
+                                      class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
+                                      id="add-new-contact">
                                 <ion-icon color="secondary" name="add-circle"></ion-icon>
                                 <ion-label class="ion-padding-start">{{'profile-page.add-new-contact'|translate}}</ion-label>
                             </ion-item>
@@ -115,7 +118,8 @@
                             </ion-item>
                         </ion-row>
                         <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-align-items-center ion-item-no-min-height ion-margin-bottom">
+                            <ion-item id="default-location"
+                                      class="ion-item-no-border ion-align-items-center ion-item-no-min-height ion-margin-bottom">
                                 {{(defaultLocation$|async)?.country.name}}, {{(defaultLocation$|async)?.city.name}}
                             </ion-item>
                         </ion-row>

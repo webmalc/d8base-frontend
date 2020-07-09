@@ -8,7 +8,7 @@ export class LoginPage {
     }
 
     public async fillCredentials(cred: Credentials): Promise<void> {
-        await element(by.css('ion-input[name="username"] input')).sendKeys(cred.username);
+        await element(by.css('ion-input[name="email"] input')).sendKeys(cred.username);
         await element(by.css('ion-input[name="password"] input')).sendKeys(cred.password);
 
         return;

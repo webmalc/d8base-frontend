@@ -104,6 +104,7 @@ export class AppComponent implements OnInit {
     public async logout(): Promise<void> {
         await this.authenticationFactory.getAuthenticator().logout();
         this.masterManager.updateIsMaster();
+        this.authenticationFactory.getAuthenticator().getIsAuthenticatedSubject().next(false);
         this.router.navigateByUrl('/auth/login');
     }
 

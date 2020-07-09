@@ -58,6 +58,9 @@
                         </ion-item>
 
                         <ion-item
+                                routerLink="/auth/login"
+                                routerLinkActive="active"
+                                id="logout"
                                 (click)="logout()"
                         >
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -85,7 +88,7 @@
                     <ion-toolbar class="fs16">
                         <ion-buttons slot="start">
                             <ion-menu-button autoHide="false" menu="menu">
-                                <ion-button (click)="toggleMenu()">
+                                <ion-button id="menu-toggle-btn" (click)="toggleMenu()">
                                     <ion-icon slot="icon-only" name="menu"></ion-icon>
                                 </ion-button>
                             </ion-menu-button>

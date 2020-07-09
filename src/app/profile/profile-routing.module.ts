@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {MainGuard} from '@app/core/guards/main.guard';
 import {AboutEditComponent} from '@app/profile/components/about-edit/about-edit.component';
 import {LocationEditComponent} from '@app/profile/components/location-edit/location-edit.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
@@ -10,30 +11,37 @@ const routes: Routes = [
     {
         path: '',
         component : MainInfoTabComponent,
+        canActivate: [MainGuard]
     },
     {
         path: 'contact-edit/:contact-id',
-        component: UserContactEditComponent
+        component: UserContactEditComponent,
+        canActivate: [MainGuard]
     },
     {
         path: 'contact-add',
-        component: UserContactEditComponent
+        component: UserContactEditComponent,
+        canActivate: [MainGuard]
     },
     {
         path: 'location-edit/:location-id',
-        component: LocationEditComponent
+        component: LocationEditComponent,
+        canActivate: [MainGuard]
     },
     {
         path: 'location-add',
-        component: LocationEditComponent
+        component: LocationEditComponent,
+        canActivate: [MainGuard]
     },
     {
         path: 'edit',
-        component: UserEditComponent
+        component: UserEditComponent,
+        canActivate: [MainGuard]
     },
     {
         path: 'about',
-        component: AboutEditComponent
+        component: AboutEditComponent,
+        canActivate: [MainGuard]
     }
 ];
 

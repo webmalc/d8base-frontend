@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormBuilder} from '@angular/forms';
 import {ProfileService} from '../../services/profile.service';
+import {RegisterEmailApiService} from '../../services/register-email-api.service';
 import { UserEditComponent } from './user-edit.component';
 
 describe('UserEditComponent', () => {
@@ -18,7 +19,8 @@ describe('UserEditComponent', () => {
             providers: [
                 ProfileService,
                 Location,
-                FormBuilder
+                FormBuilder,
+                RegisterEmailApiService
             ]
         }).compileComponents();
 

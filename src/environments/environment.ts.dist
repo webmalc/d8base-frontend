@@ -53,3 +53,15 @@ export const environment = {
        messagingSenderId: '<your-messaging-sender-id>'
     }
 };
+
+export const testing = {
+    registration: {
+        email: 'test@test.test',
+        password: 'sdhse5w4g',
+        confirm: 'sdhse5w4g',
+        name: 'testName',
+        phone: '+78005553535',
+        firstPopoverOption: 'Niederschlinder',
+        country: 'Luxembourg'
+    }
+};

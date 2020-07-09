@@ -9,7 +9,10 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'firefox'
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage']
+    }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
@@ -24,5 +27,6 @@ exports.config = {
       project: require('path').join(__dirname, './tsconfig.json')
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    browser.manage().window().setSize(1600, 1000);
   }
 };

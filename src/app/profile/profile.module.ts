@@ -23,6 +23,7 @@ import {SettingsFormService} from '@app/profile/forms/settings-form.service';
 import {BookmarksService} from '@app/profile/services/bookmarks.service';
 import {PluginApiService} from '@app/profile/services/plugin-api.service';
 import {ProfileService} from '@app/profile/services/profile.service';
+import {RegisterEmailApiService} from '@app/profile/services/register-email-api.service';
 import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {UserPluginApiService} from '@app/profile/services/user-plugin-api.service';
@@ -67,7 +68,8 @@ import {ProfilePage} from './profile.page';
         UserContactApiService,
         SettingsFormService,
         BookmarksService,
-        SavedProfessionalApiService
+        SavedProfessionalApiService,
+        RegisterEmailApiService
     ]
 })
 export class ProfilePageModule {

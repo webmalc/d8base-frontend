@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
                 return this.router.navigateByUrl('/profile');
             },
             (error: HttpErrorResponse) => {
-                if (401 === error.status) {
+                if (400 === error.status && error.error.error === 'invalid_grant') {
                     this.errorMessage = 'login-page.incorrect-login-data';
                 } else {
                     console.log(error.error);

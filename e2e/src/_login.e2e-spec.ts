@@ -1,6 +1,6 @@
 import {browser} from 'protractor';
 import {Credentials} from '../../src/app/auth/interfaces/credentials';
-import {environment} from '../../src/environments/environment';
+import {environment, testing} from '../../src/environments/environment';
 import {LoginPage} from './login.po';
 
 describe('Login page', () => {
@@ -11,8 +11,8 @@ describe('Login page', () => {
         password: 'test1'
     };
     const credentials: Credentials = {
-        username: 'test1',
-        password: 'test1'
+        username: testing.registration.email,
+        password: testing.registration.password
     };
 
     beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Login page', () => {
         page.getSubmitButton().click();
         browser.sleep(1000);
 
-        expect(page.getErrorMessage()).toEqual('Incorrect login or password');
+        expect(await page.getErrorMessage()).toEqual('Incorrect login or password');
     });
     it('test auth', async (done) => {
         page.navigateTo();
@@ -34,7 +34,9 @@ describe('Login page', () => {
         await page.fillCredentials(credentials);
 
         page.getSubmitButton().click().then(() => {
-            browser.driver.getCurrentUrl().then(url => {
+            browser.sleep(1000);
+            browser.driver.getCurrentUrl().then( async (url) => {
+                browser.sleep(1000);
                 expect(url).toEqual(environment.origin + '/profile');
                 done();
             });
