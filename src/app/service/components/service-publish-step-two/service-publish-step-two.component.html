@@ -1,6 +1,6 @@
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding">
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white">
                     <ion-col class="ion-no-padding">
@@ -32,9 +32,7 @@
                             <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
                         </ion-item>
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
-                            <div class="label-for-required-input">
-                                {{"service-publish.step-two.service-description"|translate}}
-                            </div>
+                            {{"service-publish.step-two.service-description"|translate}}
                         </ion-item>
                         <ion-item class="ion-item-bordered">
                             <ion-label color="medium" position="floating">

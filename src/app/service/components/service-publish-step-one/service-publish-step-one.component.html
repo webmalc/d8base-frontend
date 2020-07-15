@@ -1,6 +1,6 @@
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding">
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
                     <ion-col class="ion-no-padding">
@@ -81,7 +81,7 @@
                             </ion-col>
                             <ion-col size="6">
                                 <ion-button color="secondary" type="submit" class="ion-margin-top" fill="solid"
-                                            expand="block">
+                                            expand="block" [disabled]="formService.isSubmitDisabled()">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>
                             </ion-col>

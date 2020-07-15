@@ -11,15 +11,14 @@ export class ServicePublishStepOneFormService {
 
     constructor(private formBuilder: FormBuilder) { }
 
-    public createForm(): void {
+    public createForm(category?: Category, subcategory?: Subcategory): void {
         this.form = this.formBuilder.group({
-            [ServicePublishStepOneFormFields.Category]: ['', Validators.required],
-            [ServicePublishStepOneFormFields.Subcategory]: ['', Validators.required],
+            [ServicePublishStepOneFormFields.Category]: [category ?? '', Validators.required],
+            [ServicePublishStepOneFormFields.Subcategory]: [subcategory ?? '', Validators.required],
         });
     }
 
-    public fillForm(category: Category, subcategory: Subcategory): void {
-        this.form.get(ServicePublishStepOneFormFields.Category).setValue(category);
-        this.form.get(ServicePublishStepOneFormFields.Subcategory).setValue(subcategory);
+    public isSubmitDisabled(): boolean {
+        return !(this.form.valid && this.form.dirty);
     }
 }

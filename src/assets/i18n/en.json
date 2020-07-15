@@ -159,6 +159,15 @@
       "end-price": "Service price to",
       "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
       "location": "Service location"
+    },
+    "step-three": {
+      "title": "Want to add photos of the service? With them your service will be brighter!",
+      "first-info-row": "Do not know which photo to choose - feel free to go to the next step! You can easily add and update photos at any time!",
+      "photos": "Add service photos",
+      "dropzone-label": "Move service photos to this area or upload them",
+      "add-new-service": "Want to add another service?",
+      "second-info-row": "You can always add any number of services later.",
+      "add-new-service-button": "Add another service"
     }
   }
 }

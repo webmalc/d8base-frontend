@@ -41,14 +41,13 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
 
         if (this.servicePublishService.isset(this.STEP)) {
             const stepData = this.servicePublishService.getStepData<{ category: Category, subcategory: Subcategory }>(this.STEP);
-            this.formService.fillForm(stepData.category, stepData.subcategory);
+            this.formService.createForm(stepData.category, stepData.subcategory);
         } else {
             this.formService.createForm();
         }
     }
 
     public submitForm(): void {
-        console.log(this.formService.form.getRawValue());
         this.servicePublishService.setStepData(
             this.STEP,
             {

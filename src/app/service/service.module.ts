@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { ServicePageRoutingModule } from './service-routing.module';
-
 import {ServicePublishStepOneComponent} from '@app/service/components/service-publish-step-one/service-publish-step-one.component';
+import {ServicePublishStepThreeComponent} from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
 import {ServicePublishStepTwoComponent} from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
 import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
 import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
+import {ServicePublishStepThreeGuardService} from '@app/service/guards/service-publish-step-three-guard.service';
 import {ServicePublishStepTwoGuardService} from '@app/service/guards/service-publish-step-two-guard.service';
 import {PricesApiService} from '@app/service/services/prices-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
@@ -18,8 +15,11 @@ import {ServicePublishService} from '@app/service/services/service-publish.servi
 import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {SharedModule} from '@app/shared/shared.module';
+import { IonicModule } from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {NgxDropzoneModule} from 'ngx-dropzone';
+import { ServicePageRoutingModule } from './service-routing.module';
 import { ServicePage } from './service.page';
 
 @NgModule({
@@ -31,12 +31,14 @@ import { ServicePage } from './service.page';
         SharedModule,
         ReactiveFormsModule,
         TranslateModule,
-        IonicSelectableModule
+        IonicSelectableModule,
+        NgxDropzoneModule
     ],
     declarations: [
         ServicePage,
         ServicePublishStepOneComponent,
-        ServicePublishStepTwoComponent
+        ServicePublishStepTwoComponent,
+        ServicePublishStepThreeComponent
     ],
     providers: [
         PricesApiService,
@@ -47,7 +49,8 @@ import { ServicePage } from './service.page';
         ServicePublishService,
         ServicePublishStepOneFormService,
         ServicePublishStepTwoFormService,
-        ServicePublishStepTwoGuardService
+        ServicePublishStepTwoGuardService,
+        ServicePublishStepThreeGuardService
     ]
 })
 export class ServicePageModule {}

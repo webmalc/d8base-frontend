@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {ServicePublishStepTwoFormFields} from '@app/service/enums/service-publish-step-two-form-fields';
 import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
 import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
@@ -24,7 +25,8 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
     constructor(
         private servicePublishService: ServicePublishService,
         public formService: ServicePublishStepTwoFormService,
-        private servicesApiService: ServicesApiService
+        private servicesApiService: ServicesApiService,
+        private router: Router
     ) {
         super();
     }
@@ -41,8 +43,8 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
     }
 
     public submitForm(): void {
-        console.log(this.formService.form.getRawValue());
         this.servicePublishService.setStepData(this.STEP, this.formService.form.getRawValue());
+        this.router.navigateByUrl('/service/publish/step-three');
     }
 
     public durationHoursChange(): void {
