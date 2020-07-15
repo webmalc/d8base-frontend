@@ -18,7 +18,7 @@ const routes: Routes = [
     {
         path: 'publish/step-two',
         component: ServicePublishStepTwoComponent,
-        // canActivate: [ServicePublishStepTwoGuardService]
+        canActivate: [ServicePublishStepTwoGuardService]
     }
 ];
 
