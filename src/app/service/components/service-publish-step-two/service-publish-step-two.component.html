@@ -50,12 +50,12 @@
                                 </ion-item>
                             </ion-row>
                             <ion-row>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         {{"service-publish.step-two.hours"|translate}}
                                     </ion-item>
                                 </ion-col>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
                                         <ion-input appNumbersOnly name="hours" (ionChange)="durationHoursChange()"
                                                    [formControlName]="formFields.DurationHours"></ion-input>
@@ -63,12 +63,12 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         {{"service-publish.step-two.minutes"|translate}}
                                     </ion-item>
                                 </ion-col>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
                                         <ion-input appNumbersOnly name="minutes" (ionChange)="durationMinutesChange()"
                                                    [formControlName]="formFields.DurationMinutes"></ion-input>
@@ -86,13 +86,17 @@
 
                         <ion-list>
                             <ion-row class="ion-justify-content-between ion-align-items-center pr5">
-                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                    {{"service-publish.step-two.fixed-price"|translate}}
-                                </ion-item>
-                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                    <ion-checkbox color="light"
-                                                  [formControlName]="formFields.IsPriceFixed"></ion-checkbox>
-                                </ion-item>
+                                <ion-col size="11" class="ion-no-padding">
+                                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                        {{"service-publish.step-two.fixed-price"|translate}}
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="1">
+                                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                        <ion-checkbox color="light"
+                                                      [formControlName]="formFields.IsPriceFixed"></ion-checkbox>
+                                    </ion-item>
+                                </ion-col>
                             </ion-row>
                         </ion-list>
                         <ion-col size="12" *ngIf="formService.form.get(formFields.IsPriceFixed).value">
@@ -104,12 +108,12 @@
                                 </ion-item>
                             </ion-row>
                             <ion-row>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         currency
                                     </ion-item>
                                 </ion-col>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
                                         <ion-input name="price" appNumbersOnly [formControlName]="formFields.FixedPrice"></ion-input>
                                     </ion-item>
@@ -126,12 +130,12 @@
                                 </ion-item>
                             </ion-row>
                             <ion-row>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         currency
                                     </ion-item>
                                 </ion-col>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
                                         <ion-input name="price" appNumbersOnly
                                                    [formControlName]="formFields.StartPrice"></ion-input>
@@ -146,12 +150,12 @@
                                 </ion-item>
                             </ion-row>
                             <ion-row>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         currency
                                     </ion-item>
                                 </ion-col>
-                                <ion-col size="6">
+                                <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
                                         <ion-input name="price" appNumbersOnly [formControlName]="formFields.EndPrice"></ion-input>
                                     </ion-item>

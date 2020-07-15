@@ -25,7 +25,7 @@ const routes: Routes = [
     {
         path: 'publish/step-three',
         component: ServicePublishStepThreeComponent,
-        // canActivate: [ServicePublishStepThreeGuardService]
+        canActivate: [ServicePublishStepThreeGuardService]
     }
 ];
 
