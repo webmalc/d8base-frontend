@@ -7,6 +7,7 @@ import {AppFooterComponent} from '@app/shared/components/app-footer/app-footer.c
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
+import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
 import {LocationItemComponent} from '@app/shared/components/location-item/location-item.component';
 import {LocationListComponent} from '@app/shared/components/location/location-list.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
@@ -24,6 +25,7 @@ import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {DebounceDirective} from './directives/debounce.directive';
+import { NumberDirective } from './directives/number.directive';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,9 @@ import {DebounceDirective} from './directives/debounce.directive';
         ReviewsListComponent,
         MediaLinksComponent,
         AppFooterComponent,
-        CollapseItemComponent
+        CollapseItemComponent,
+        InfoRowComponent,
+        NumberDirective
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -50,7 +54,9 @@ import {DebounceDirective} from './directives/debounce.directive';
         MediaLinksComponent,
         AppFooterComponent,
         CollapseItemComponent,
-        UserLocationMapComponent
+        UserLocationMapComponent,
+        InfoRowComponent,
+        NumberDirective
     ],
     imports: [
         CommonModule,

@@ -1,0 +1,210 @@
+<ion-content class="ion-padding-top">
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+            <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+                <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white">
+                    <ion-col class="ion-no-padding">
+                        <ion-row class="ion-justify-content-start ion-align-items-center">
+                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                <b>
+                                    {{"service-publish.step-two.title"|translate}}
+                                </b>
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+
+                <app-info-row>
+                    {{"service-publish.step-two.first-info-row"|translate}}
+                </app-info-row>
+
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                            <div class="label-for-required-input">
+                                {{"service-publish.step-two.service-title"|translate}}
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-two.service-placeholder"|translate}}
+                            </ion-label>
+                            <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+                            <div class="label-for-required-input">
+                                {{"service-publish.step-two.service-description"|translate}}
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-two.service-description-placeholder"|translate}}
+                            </ion-label>
+                            <ion-textarea rows="4" type="text" name="description"
+                                          [formControlName]="formFields.Description"></ion-textarea>
+                        </ion-item>
+                        <ion-col size="12">
+                            <ion-row>
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    <div class="label-for-required-input">
+                                        {{"service-publish.step-two.duration"|translate}}
+                                    </div>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+                                        {{"service-publish.step-two.hours"|translate}}
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-bordered">
+                                        <ion-input appNumbersOnly name="hours" (ionChange)="durationHoursChange()"
+                                                   [formControlName]="formFields.DurationHours"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+                                        {{"service-publish.step-two.minutes"|translate}}
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-bordered">
+                                        <ion-input appNumbersOnly name="minutes" (ionChange)="durationMinutesChange()"
+                                                   [formControlName]="formFields.DurationMinutes"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="durationMinutes || durationHours">
+                                <ion-item class="ion-item-no-border fs16">
+                                    {{"service-publish.step-two.duration"|translate}}:
+                                    <div *ngIf="durationHours">{{ this.durationHours}} {{"service-publish.step-two.hours-desc"|translate}}</div>
+                                    <div *ngIf="durationMinutes">{{this.durationMinutes}} {{"service-publish.step-two.minutes-desc"|translate}}</div>
+                                </ion-item>
+                            </ion-row>
+                        </ion-col>
+
+                        <ion-list>
+                            <ion-row class="ion-justify-content-between ion-align-items-center pr5">
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    {{"service-publish.step-two.fixed-price"|translate}}
+                                </ion-item>
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    <ion-checkbox color="light"
+                                                  [formControlName]="formFields.IsPriceFixed"></ion-checkbox>
+                                </ion-item>
+                            </ion-row>
+                        </ion-list>
+                        <ion-col size="12" *ngIf="formService.form.get(formFields.IsPriceFixed).value">
+                            <ion-row>
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    <div class="label-for-required-input">
+                                        {{"service-publish.step-two.fixed-price-title"|translate}}
+                                    </div>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+                                        currency
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-bordered">
+                                        <ion-input name="price" appNumbersOnly [formControlName]="formFields.FixedPrice"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+
+                        <ion-col size="12" *ngIf="!formService.form.get(formFields.IsPriceFixed).value">
+                            <ion-row>
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    <div class="label-for-required-input">
+                                        {{"service-publish.step-two.start-price"|translate}}
+                                    </div>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+                                        currency
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-bordered">
+                                        <ion-input name="price" appNumbersOnly
+                                                   [formControlName]="formFields.StartPrice"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    <div class="label-for-required-input">
+                                        {{"service-publish.step-two.end-price"|translate}}
+                                    </div>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+                                        currency
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="6">
+                                    <ion-item class="ion-item-bordered">
+                                        <ion-input name="price" appNumbersOnly [formControlName]="formFields.EndPrice"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-col>
+                </ion-item>
+
+                <app-info-row>
+                    {{"service-publish.step-two.second-info-row"|translate}}
+                </app-info-row>
+
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+                        <ion-list>
+                            <ion-radio-group [formControlName]="formFields.Location">
+                                <ion-list-header class="ion-item-bottom-border ion-item-no-side-padding">
+                                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                        <div class="label-for-required-input">
+                                            {{"service-publish.step-two.location"|translate}}
+                                        </div>
+                                    </ion-item>
+                                </ion-list-header>
+                                <ion-item *ngFor="let type of (serviceTypeList|async)">
+                                    <ion-label>{{type.display_name}}</ion-label>
+                                    <ion-radio value="{{type.value}}"></ion-radio>
+                                </ion-item>
+                            </ion-radio-group>
+                        </ion-list>
+                        <ion-row class="ion-justify-content-center">
+                            <ion-col size="6">
+                                <ion-button color="light"
+                                            routerDirection="back"
+                                            routerLink="/service/publish/step-one"
+                                            routerLinkActive="active"
+                                            class="ion-margin-top" fill="solid" expand="block">
+                                    {{"service-publish.back-button" | translate}}
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-button color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                            class="ion-margin-top" fill="solid" expand="block">
+                                    {{"service-publish.forward-button" | translate}}
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+            </form>
+        </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
+</ion-content>

@@ -1,4 +1,9 @@
 {
+  "ion-selectable": {
+    "close-button-text": "Close",
+    "search-text": "Search",
+    "search-fail-text": "No items found"
+  },
   "template": {
     "sign-in": "Sign-in",
     "sign-up": "Sign-up",
@@ -122,5 +127,38 @@
   },
   "list-item": {
     "add-new": "Add new"
+  },
+  "service-publish": {
+    "back-button": "Back",
+    "forward-button": "Continue",
+    "step-one": {
+      "title": "Service publishing",
+      "description": "Publish an advertisement about your services in just 3 minutes and it will be seen by thousands of customers who are looking for your service and you.",
+      "subdesc": "It's free!",
+      "info": "Service information",
+      "category-title": "Choose a category for your service",
+      "category-subtitle": "Service category",
+      "subcategory-title": "Choose a subcategory for your service",
+      "subcategory-subtitle": "Service subcategory"
+    },
+    "step-two": {
+      "title": "Service information",
+      "first-info-row": "Hint: you can easily update and edit all the information at any time!",
+      "service-title": "Service name",
+      "service-placeholder": "Enter service name",
+      "service-description": "Service description",
+      "service-description-placeholder": "Enter service description",
+      "duration": "Service duration",
+      "hours": "hours",
+      "minutes": "minutes",
+      "hours-desc": "hours(s)",
+      "minutes-desc": "minute(s)",
+      "fixed-price": "Fixed service price",
+      "fixed-price-title": "Service price",
+      "start-price": "Service price from",
+      "end-price": "Service price to",
+      "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
+      "location": "Service location"
+    }
   }
 }

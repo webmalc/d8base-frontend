@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { EditMasterComponent } from './edit-master.component';
-import {EditMasterFormService} from '../../forms/edit-master-form.service';
-import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {SubcategoriesApiService} from '../../services/subcategories-api.service';
+import {SubcategoriesApiService} from '../../../core/services/subcategories-api.service';
+import {EditMasterFormService} from '../../forms/edit-master-form.service';
+import { EditMasterComponent } from './edit-master.component';
 
 describe('EditMasterComponent', () => {
   let component: EditMasterComponent;

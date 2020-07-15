@@ -7,7 +7,6 @@ import {IonicModule} from '@ionic/angular';
 import {MasterPageRoutingModule} from './master-routing.module';
 
 import {MasterTabsPageModule} from '@app/master/pages/master-tabs/master-tabs.module';
-import {SubcategoriesApiService} from '@app/master/services/subcategories-api.service';
 import {MasterPage} from './master.page';
 
 @NgModule({
@@ -18,8 +17,7 @@ import {MasterPage} from './master.page';
         MasterPageRoutingModule,
         MasterTabsPageModule
     ],
-    declarations: [MasterPage],
-    providers: [SubcategoriesApiService]
+    declarations: [MasterPage]
 })
 export class MasterPageModule {
 }

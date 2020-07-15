@@ -121,6 +121,21 @@
     --padding-start: 0;
   }
 
+  .ion-item-no-vertical-padding {
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  .ion-item-bordered {
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
+    border-left: 1px solid rgba(0, 0, 0, 0.13);
+    border-right: 1px solid rgba(0, 0, 0, 0.13);
+  }
+
+  .ion-item-bottom-border {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  }
+
   .ion-item-no-min-height {
     --min-height: 0px;
   }
