@@ -110,6 +110,7 @@ export class AppComponent implements OnInit {
 
     private getDefaultUserCountry(): Observable<Country> {
         return this.userLocationApi.getDefaultLocation().pipe(
+            filter(location => location !== undefined),
             switchMap(location => this.countryApi.getByEntityId(location.country as number))
         );
     }
