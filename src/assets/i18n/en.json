@@ -168,6 +168,19 @@
       "add-new-service": "Want to add another service?",
       "second-info-row": "You can always add any number of services later.",
       "add-new-service-button": "Add another service"
+    },
+    "step-five": {
+      "title": "Enter the information about you that you want your customers to see.",
+      "company-title": "Company name",
+      "company-placeholder": "Company name",
+      "name-title": "First name",
+      "name-placeholder": "Enter your first name",
+      "last-name-title": "Last name",
+      "last-name-placeholder": "Enter your last name",
+      "gender": "Sex",
+      "add-photo": "It's a good idea to add a photo to your profile!",
+      "first-info-row": "By adding your main photo to your profile, you will increase the credibility of your profile and you will have more clients!",
+      "add-photo-title": "Add your main photo"
     }
   }
 }
