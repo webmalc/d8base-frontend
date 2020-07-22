@@ -38,7 +38,6 @@ export class ServicePublishStepSixComponent implements OnInit {
     }
 
     public submitForm(): void {
-        console.log(this.formService.form.getRawValue());
         this.servicePublishService.setStepData(this.STEP, this.formService.form.getRawValue());
         this.router.navigateByUrl('/service/publish/step-seven');
     }

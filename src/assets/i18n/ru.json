@@ -213,6 +213,33 @@
       "specialization": "Специализация",
       "specialization-placeholder": "Специализация",
       "level": "Профессиональный уровень"
+    },
+    "step-seven": {
+      "title": "Введите данные и адрес, для лучшего ранжирования вашего профайла.",
+      "first-info-row": "Хотите получать оплаты онлайн - подключите Paypal после публикации вашей услуги  и  получайте оплаты уже сегодня. Это бесплатно!",
+      "timetable-title": "Время оказания услуг",
+      "location-title": "Адрес оказания услуг",
+      "country-title": "Страна",
+      "country-placeholder": "Выберите вашу страну",
+      "city-title": "Город",
+      "city-placeholder": "Выберите ваш город",
+      "address": "Адрес",
+      "address-placeholder": "Введите ваш адрес",
+      "address-required-info": "При «Прием у мастера» поле обязательно",
+      "postal": "Индекс (Почтовый код)",
+      "postal-placeholder": "Ваш индекс",
+      "location-radius": "Выезд: ",
+      "payment-title": "Оплата",
+      "payment-description": "Доступные варианты оплаты для клиентов за ваши услуги",
+      "payment-info": "Оплату  онлайн вы сможете активировать после публикации услуги",
+      "payment-cash": "Наличные",
+      "payment-online": "Оплата онлайн",
+      "departure": {
+        "title": "География выезда",
+        "description": "Радиус на который Вы выезжаете  от введенного адреса"
+      },
+      "location-radius-within": "В пределах города",
+      "location-radius-radius": "В радиусе "
     }
   }
 }

@@ -1,0 +1,33 @@
+ion-toggle {
+  width: 100%;
+  height: 40px;
+  --handle-width: 50%;
+  --handle-height: 36px;
+  --handle-max-height: 36px;
+  --handle-border-radius: 14px;
+  --background: #D7D8DA;
+  --background-checked: #D7D8DA;
+  --handle-background: #fff;
+  --handle-background-checked: #fff;
+}
+ion-toggle.toggle-checked {
+  --handle-border-radius: 14px;
+}
+ion-toggle::before {
+  position: absolute;
+  top: 22px;
+  left: 46px;
+  content: "В пределах города";
+  color: black;
+  font-size: 16px;
+  z-index: 1;
+}
+ion-toggle::after {
+  position: absolute;
+  top: 22px;
+  right: 88px;
+  content: "Радиус";
+  color: black;
+  font-size: 16px;
+  z-index: 1;
+}

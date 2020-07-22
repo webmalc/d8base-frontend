@@ -33,15 +33,15 @@ export class ServicePublishStepTwoFormService {
 
     private fixedPriceValidator(group: FormGroup): any {
         if (group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
-            group.get(ServicePublishStepTwoFormFields.FixedPrice).value === null) {
+            !group.get(ServicePublishStepTwoFormFields.FixedPrice).value) {
             group.get(ServicePublishStepTwoFormFields.FixedPrice).setErrors({priceError: true});
         }
         if (!group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
-            group.get(ServicePublishStepTwoFormFields.StartPrice).value === null) {
+            !group.get(ServicePublishStepTwoFormFields.StartPrice).value) {
             group.get(ServicePublishStepTwoFormFields.StartPrice).setErrors({priceError: true});
         }
         if (!group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
-            group.get(ServicePublishStepTwoFormFields.EndPrice).value === null) {
+            !group.get(ServicePublishStepTwoFormFields.EndPrice).value) {
             group.get(ServicePublishStepTwoFormFields.EndPrice).setErrors({priceError: true});
         }
     }
