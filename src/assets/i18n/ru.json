@@ -239,7 +239,17 @@
         "description": "Радиус на который Вы выезжаете  от введенного адреса"
       },
       "location-radius-within": "В пределах города",
-      "location-radius-radius": "В радиусе "
+      "location-radius-radius": "В радиусе ",
+      "timetable": {
+        "title": "Время оказания услуг",
+        "mon": "ПН",
+        "tue": "ВТ",
+        "wed": "СР",
+        "thu": "ЧТ",
+        "fri": "ПТ",
+        "sat": "СБ",
+        "sun": "ВС"
+      }
     }
   }
 }

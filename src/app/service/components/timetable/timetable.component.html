@@ -1,7 +1,63 @@
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding ion-margin-top">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3"
+                 class="ion-no-padding ion-margin-top">
+            <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                    <ion-col class="ion-no-padding">
+                        <ion-row class="ion-justify-content-start ion-align-items-center">
+                            <ion-item routerLink="/service/publish/step-seven"
+                                      routerDirection="back"
+                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
+                                <ion-icon name="arrow-back-outline"></ion-icon>
+                            </ion-item>
+                            <ion-item class="ion-item-no-border">
+                                {{"service-publish.step-seven.timetable.title"|translate}}
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
 
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12" formArrayName="timetable">
+                        <ion-row class="ion-justify-content-start ion-align-items-center" [formGroupName]="i" *ngFor="let row of formService.controls; let i = index">
+                            <ion-col size="2" class="ion-item-no-vertical-padding">
+                                <ion-item class="ion-item-no-border">
+                                    <ion-checkbox formControlName="isEnabled"></ion-checkbox>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="2" class="ion-item-no-vertical-padding">
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    {{"service-publish.step-seven.timetable."+row.controls.day.value|translate}}
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="3" class="ion-item-no-vertical-padding">
+                                <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
+                                    <ion-input [disabled]="!row.controls.isEnabled.value" formControlName="startTime"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="2" class="ion-item-no-vertical-padding">
+                                <div class="ion-text-center">
+                                    &mdash;
+                                </div>
+                            </ion-col>
+                            <ion-col size="3" class="ion-item-no-vertical-padding">
+                                <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
+<!--                                    <ion-input formControlName="endTime"></ion-input>-->
+                                    <ion-input [disabled]="!row.controls.isEnabled.value" formControlName="endTime"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-button color="secondary" type="submit" class="ion-margin-vertical" fill="solid" expand="block"
+                                    [disabled]="formService.isSubmitDisabled()">
+                            {{'profile-form.button'| translate}}
+                        </ion-button>
+
+                    </ion-col>
+                </ion-item>
+
+            </form>
         </ion-col>
     </ion-row>
     <app-footer></app-footer>

@@ -142,6 +142,8 @@
   .ion-item-no-vertical-padding {
     --padding-top: 0;
     --padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .ion-item-bordered {
@@ -156,5 +158,13 @@
 
   .ion-item-no-min-height {
     --min-height: 0px;
+  }
+
+  .min-height-36 {
+    --min-height: 36px;
+  }
+
+  .border-radius5 {
+    border-radius: 5px;
   }
 }

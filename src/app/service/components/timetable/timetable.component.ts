@@ -16,6 +16,12 @@ export class TimetableComponent implements OnInit {
         public formService: ServicePublishStepSevenTimetableFormService
     ) { }
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.formService.createForm();
+        console.log(this.formService.controls);
+    }
 
+    public submitForm(): void {
+        console.log(this.formService.form.getRawValue());
+    }
 }
