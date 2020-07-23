@@ -15,6 +15,7 @@ import {ServicePublishStepFourFormService} from '@app/service/forms/service-publ
 import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
 import {ServicePublishStepSevenDepartureFormService} from '@app/service/forms/service-publish-step-seven-departure-form.service';
 import {ServicePublishStepSevenFormService} from '@app/service/forms/service-publish-step-seven-form.service';
+import {ServicePublishStepSevenTimetableFormService} from '@app/service/forms/service-publish-step-seven-timetable-form.service';
 import {ServicePublishStepSixFormService} from '@app/service/forms/service-publish-step-six-form.service';
 import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
 import {ServicePublishStepThreeGuardService} from '@app/service/guards/service-publish-step-three-guard.service';
@@ -72,7 +73,8 @@ import { ServicePage } from './service.page';
         ServicePublishStepFiveFormService,
         ServicePublishStepSixFormService,
         ServicePublishStepSevenFormService,
-        ServicePublishStepSevenDepartureFormService
+        ServicePublishStepSevenDepartureFormService,
+        ServicePublishStepSevenTimetableFormService
     ]
 })
 export class ServicePageModule {}
