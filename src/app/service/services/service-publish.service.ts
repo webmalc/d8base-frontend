@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 
 @Injectable()
 export class ServicePublishService {
 
     private stepsData: object[] = [];
-    private readonly stepsNumber = 7;
+    private readonly totalSteps = 6;
+    private readonly storageKey = 'service_publish_data';
 
-    constructor() {
-        this.reset();
+    constructor(private storageManager: StorageManagerService) {
+        this.loadFromStorage();
     }
 
     public setStepData(step: number, data: object): void {
         this.stepsData[step] = data;
+        this.updateStorage();
     }
 
     public assignStepData(step: number, data: object): void {
@@ -19,11 +22,11 @@ export class ServicePublishService {
             this.stepsData[step] = {};
         }
         this.stepsData[step] = Object.assign(this.stepsData[step], data);
+        this.updateStorage();
     }
 
     public getStepData<T>(step: number): T {
-        // @ts-ignore
-        return this.stepsData[step] as T;
+        return this.stepsData[step];
     }
 
     public getPartialStepData<T>(step: number, data: string): T {
@@ -31,7 +34,7 @@ export class ServicePublishService {
     }
 
     public removeSteps(fromStep: number): void {
-        for (let i = fromStep; i < this.stepsNumber; i += 1) {
+        for (let i = fromStep; i < this.totalSteps; i += 1) {
             this.stepsData[i] = undefined;
         }
     }
@@ -41,7 +44,7 @@ export class ServicePublishService {
     }
 
     public issetStepPartialData(step: number, data: string): boolean {
-        return this.setStepData[step] !== undefined && this.setStepData[step][data] !== undefined;
+        return this.stepsData[step] !== undefined && this.stepsData[step][data] !== undefined;
     }
 
     public reset(): void {
@@ -50,5 +53,18 @@ export class ServicePublishService {
 
     public getFullData(): object[] {
         return this.stepsData;
+    }
+
+    private async updateStorage(): Promise<void> {
+        return await this.storageManager.set(this.storageKey, this.stepsData);
+    }
+
+    private async loadFromStorage(): Promise<void> {
+        const data = await this.storageManager.get(this.storageKey);
+        if (data) {
+            this.stepsData = data;
+        }
+
+        return;
     }
 }

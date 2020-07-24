@@ -29,6 +29,7 @@ import {ServicesApiService} from '@app/service/services/services-api.service';
 import {SharedModule} from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {BrMaskerModule} from 'br-mask';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {NgxDropzoneModule} from 'ngx-dropzone';
 import { ServicePageRoutingModule } from './service-routing.module';
@@ -44,7 +45,8 @@ import { ServicePage } from './service.page';
         ReactiveFormsModule,
         TranslateModule,
         IonicSelectableModule,
-        NgxDropzoneModule
+        NgxDropzoneModule,
+        BrMaskerModule
     ],
     declarations: [
         ServicePage,

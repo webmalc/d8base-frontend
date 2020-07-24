@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
+import {ServiceTimetableInterface} from '@app/service/interfaces/service-timetable-interface';
 
 @Injectable()
 export class ServicePublishStepSevenTimetableFormService {
@@ -10,11 +12,15 @@ export class ServicePublishStepSevenTimetableFormService {
     constructor(private formBuilder: FormBuilder) {
     }
 
-    public createForm(): void {
+    public createForm(timetable?: ServiceTimetableInterface): void {
         this.form = this.formBuilder.group({
             timetable: this.formBuilder.array([])
         });
-        this.fillDefaultTimeTable();
+        if (timetable) {
+            this.fillTimeTable(timetable);
+        } else {
+            this.fillDefaultTimeTable();
+        }
 
         return;
     }
@@ -29,30 +35,96 @@ export class ServicePublishStepSevenTimetableFormService {
 
     public fillDefaultTimeTable(): void {
         this.defaultWeek.forEach(dayCode =>
-            (this.form.get('timetable') as FormArray).push(
-                this.formBuilder.group({
-                    day: [dayCode],
-                    startTime: [null],
-                    endTime: [null],
-                    isEnabled: [false]
-                }, {validators: [this.startTimeValidator, this.endTimeValidator]})
+            (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).push(
+                this.getFormGroup(dayCode)
             )
         );
     }
 
+    public unsetError(i: number): void {
+        const endTimeValue = this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.EndTime].value;
+        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.EndTime].reset();
+        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.EndTime].setValue(endTimeValue);
+        const startTimeValue = this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.StartTime].value;
+        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.StartTime].reset();
+        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.StartTime].setValue(startTimeValue);
+    }
+
+    private fillTimeTable(timetable: ServiceTimetableInterface): void {
+        timetable.timetable.forEach(time =>
+            (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).push(
+                this.getFormGroup(time.day, time.startTime, time.endTime, time.isEnabled)
+            )
+        );
+    }
+
+    private getFormGroup(dayCode: string, startTime: string = null, endTime: string = null, isEnabled: boolean = false): FormGroup {
+        return this.formBuilder.group({
+            [ServicePublishStepSevenTimetableFormFields.Day]: [dayCode],
+            [ServicePublishStepSevenTimetableFormFields.StartTime]: [startTime],
+            [ServicePublishStepSevenTimetableFormFields.EndTime]: [endTime],
+            [ServicePublishStepSevenTimetableFormFields.IsEnabled]: [isEnabled]
+        }, {
+            validators: [
+                this.startTimeValidator,
+                this.endTimeValidator,
+                this.startTimeFormatValidator,
+                this.endTimeFormatValidator,
+                this.timeIntervalValidator
+            ]
+        });
+    }
+
+    private timeIntervalValidator(group: FormGroup): any {
+        if (!group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value) {
+            return;
+        }
+        const startTime = parseInt(
+            (group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(0, 2) +
+            (group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(3, 5),
+            10
+        );
+        const endTimeTime = parseInt(
+            (group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(0, 2) +
+            (group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(3, 5),
+            10
+        );
+        if (startTime >= endTimeTime) {
+            group.get(ServicePublishStepSevenTimetableFormFields.EndTime).setErrors({timeError: true});
+        }
+    }
+
+    private startTimeFormatValidator(group: FormGroup): any {
+        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
+            ((group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.length !== 5 ||
+            parseInt((group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(0, 1), 10) > 2 ||
+            parseInt((group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
+        ) {
+            group.get(ServicePublishStepSevenTimetableFormFields.StartTime).setErrors({timeError: true});
+        }
+    }
+
+    private endTimeFormatValidator(group: FormGroup): any {
+        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
+            ((group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.length !== 5 ||
+            parseInt((group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(0, 1), 10) > 2 ||
+            parseInt((group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
+        ) {
+            group.get(ServicePublishStepSevenTimetableFormFields.EndTime).setErrors({timeError: true});
+        }
+    }
+
     private startTimeValidator(group: FormGroup): any {
-        if (group.get('isEnabled').value && !group.get('startTime').value) {
-            group.get('startTime').setErrors({timeError: true});
-        } else {
-            group.get('startTime').setErrors(null);
+        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
+            !group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value) {
+            group.get(ServicePublishStepSevenTimetableFormFields.StartTime).setErrors({timeError: true});
         }
     }
 
     private endTimeValidator(group: FormGroup): any {
-        if (group.get('isEnabled').value && !group.get('endTime').value) {
-            group.get('endTime').setErrors({timeError: true});
-        } else {
-            group.get('endTime').setErrors(null);
+        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
+            !group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value) {
+            group.get(ServicePublishStepSevenTimetableFormFields.EndTime).setErrors({timeError: true});
         }
     }
 }

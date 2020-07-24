@@ -23,7 +23,7 @@
                         <ion-row class="ion-justify-content-start ion-align-items-center" [formGroupName]="i" *ngFor="let row of formService.controls; let i = index">
                             <ion-col size="2" class="ion-item-no-vertical-padding">
                                 <ion-item class="ion-item-no-border">
-                                    <ion-checkbox formControlName="isEnabled"></ion-checkbox>
+                                    <ion-checkbox (ionChange)="formService.unsetError(i)" formControlName="isEnabled"></ion-checkbox>
                                 </ion-item>
                             </ion-col>
                             <ion-col size="2" class="ion-item-no-vertical-padding">
@@ -33,7 +33,11 @@
                             </ion-col>
                             <ion-col size="3" class="ion-item-no-vertical-padding">
                                 <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
-                                    <ion-input [disabled]="!row.controls.isEnabled.value" formControlName="startTime"></ion-input>
+                                    <ion-input [brmasker]="{mask: '00:00', type:'num', len: 5}"
+                                               placeholder="00:00"
+
+                                               formControlName="startTime"
+                                               class="ion-text-center"></ion-input>
                                 </ion-item>
                             </ion-col>
                             <ion-col size="2" class="ion-item-no-vertical-padding">
@@ -43,11 +47,32 @@
                             </ion-col>
                             <ion-col size="3" class="ion-item-no-vertical-padding">
                                 <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
-<!--                                    <ion-input formControlName="endTime"></ion-input>-->
-                                    <ion-input [disabled]="!row.controls.isEnabled.value" formControlName="endTime"></ion-input>
+                                    <ion-input class="ion-text-center"
+                                            [brmasker]="{mask: '00:00', type:'num', len: 5}"
+                                            placeholder="00:00"
+
+                                            formControlName="endTime"></ion-input>
                                 </ion-item>
                             </ion-col>
                         </ion-row>
+                    </ion-col>
+                </ion-item>
+
+                <ion-item class="ion-item-no-border ion-item-border-top item-background-color-white">
+                    <ion-col class="ion-no-padding">
+                        <ion-row>
+                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start">
+                                <ion-icon color="secondary" name="add-circle"></ion-icon>
+                                <ion-label class="ion-padding-start">
+                                    {{'service-publish.step-seven.timetable.add-new-time'|translate}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-row>
+                    </ion-col></ion-item>
+
+
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
 
                         <ion-button color="secondary" type="submit" class="ion-margin-vertical" fill="solid" expand="block"
                                     [disabled]="formService.isSubmitDisabled()">
