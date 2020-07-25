@@ -1,0 +1,8 @@
+<ion-list>
+    <ion-list-header>
+        chose day
+    </ion-list-header>
+    <ion-item class="cursor-pointer" (click)="onDayClick($event)" *ngFor="let day of defaultWeek">
+        <ion-label>{{day}}</ion-label>
+    </ion-item>
+</ion-list>

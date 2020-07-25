@@ -33,12 +33,14 @@ export class ServicePublishStepSevenTimetableFormService {
         return !(this.form.valid && this.form.dirty);
     }
 
-    public fillDefaultTimeTable(): void {
-        this.defaultWeek.forEach(dayCode =>
-            (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).push(
-                this.getFormGroup(dayCode)
-            )
+    public pushNewDay(dayCode: string, startTime: string = null, endTime: string = null, isEnabled: boolean = false): void {
+        (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).push(
+            this.getFormGroup(dayCode, startTime, endTime, isEnabled)
         );
+    }
+
+    public fillDefaultTimeTable(): void {
+        this.defaultWeek.forEach(dayCode => this.pushNewDay(dayCode));
     }
 
     public unsetError(i: number): void {
@@ -51,11 +53,7 @@ export class ServicePublishStepSevenTimetableFormService {
     }
 
     private fillTimeTable(timetable: ServiceTimetableInterface): void {
-        timetable.timetable.forEach(time =>
-            (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).push(
-                this.getFormGroup(time.day, time.startTime, time.endTime, time.isEnabled)
-            )
-        );
+        timetable.timetable.forEach(time => this.pushNewDay(time.day, time.startTime, time.endTime, time.isEnabled));
     }
 
     private getFormGroup(dayCode: string, startTime: string = null, endTime: string = null, isEnabled: boolean = false): FormGroup {

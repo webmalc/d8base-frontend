@@ -61,7 +61,8 @@
                 <ion-item class="ion-item-no-border ion-item-border-top item-background-color-white">
                     <ion-col class="ion-no-padding">
                         <ion-row>
-                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start">
+                            <ion-item (click)="initPopover()"
+                                      class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start">
                                 <ion-icon color="secondary" name="add-circle"></ion-icon>
                                 <ion-label class="ion-padding-start">
                                     {{'service-publish.step-seven.timetable.add-new-time'|translate}}
