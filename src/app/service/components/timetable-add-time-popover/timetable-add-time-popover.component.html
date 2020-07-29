@@ -1,8 +1,8 @@
 <ion-list>
     <ion-list-header>
-        chose day
+        {{"service-publish.step-seven.timetable.popover-title"|translate}}
     </ion-list-header>
-    <ion-item class="cursor-pointer" (click)="onDayClick($event)" *ngFor="let day of defaultWeek">
-        <ion-label>{{day}}</ion-label>
+    <ion-item class="cursor-pointer" (click)="onDayClick(i)" *ngFor="let day of defaultWeek; let i=index">
+        <ion-label>{{"service-publish.step-seven.timetable."+day|translate}}</ion-label>
     </ion-item>
 </ion-list>

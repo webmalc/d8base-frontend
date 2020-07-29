@@ -25,6 +25,7 @@ import {PricesApiService} from '@app/service/services/prices-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
 import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {SharedModule} from '@app/shared/shared.module';
@@ -78,7 +79,8 @@ import { ServicePage } from './service.page';
         ServicePublishStepSixFormService,
         ServicePublishStepSevenFormService,
         ServicePublishStepSevenDepartureFormService,
-        ServicePublishStepSevenTimetableFormService
+        ServicePublishStepSevenTimetableFormService,
+        ServiceScheduleApiService
     ]
 })
 export class ServicePageModule {}

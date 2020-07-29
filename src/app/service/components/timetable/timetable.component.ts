@@ -48,6 +48,22 @@ export class TimetableComponent extends Reinitable implements OnInit {
         this.location.back();
     }
 
+    public onIsEnabledChange(event: CustomEvent, index: number): void {
+        this.formService.updateIsEnabled((event.detail as any).checked, index);
+    }
+
+    public onStartTimeChange(event: CustomEvent, index: number): void {
+        if (this.formService.isControlValid(this.formFields.StartTime, index)) {
+            this.formService.updateStartTime((event.detail as any).value, index);
+        }
+    }
+
+    public onEndTimeChange(event: CustomEvent, index: number): void {
+        if (this.formService.isControlValid(this.formFields.EndTime, index)) {
+            this.formService.updateEndTime((event.detail as any).value, index);
+        }
+    }
+
     public initPopover(): void {
         this.popoverController.create({
             component: TimetableAddTimePopoverComponent,
@@ -55,9 +71,9 @@ export class TimetableComponent extends Reinitable implements OnInit {
         }).then(pop => pop.present().then(
             () => {
                 const subscription = TimetableAddTimePopoverComponent.day$.subscribe(
-                    (day: string) => {
-                        if (null !== day) {
-                            this.formService.pushNewDay(day);
+                    (dayCode: number) => {
+                        if (null !== dayCode) {
+                            this.formService.pushNewDay(dayCode);
                             this.popoverController.dismiss();
                             subscription.unsubscribe();
                         }
@@ -65,5 +81,9 @@ export class TimetableComponent extends Reinitable implements OnInit {
                 );
             }
         ));
+    }
+
+    public deleteDay(index: number): void {
+        this.formService.deleteDay(index);
     }
 }

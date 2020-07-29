@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class TimetableAddTimePopoverComponent extends Reinitable implements OnInit {
 
-    public static day$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+    public static day$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     public defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
     constructor() {
@@ -20,7 +20,7 @@ export class TimetableAddTimePopoverComponent extends Reinitable implements OnIn
         TimetableAddTimePopoverComponent.day$.next(null);
     }
 
-    public onDayClick(event: MouseEvent): void {
-        TimetableAddTimePopoverComponent.day$.next((event.target as any).innerText);
+    public onDayClick(index: number): void {
+        TimetableAddTimePopoverComponent.day$.next(index);
     }
 }

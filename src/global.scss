@@ -139,6 +139,11 @@
     --padding-start: 0;
   }
 
+  .ion-item-no-padding-right {
+    --padding-end: 0;
+    --inner-padding-end: 0;
+  }
+
   .ion-item-no-vertical-padding {
     --padding-top: 0;
     --padding-bottom: 0;

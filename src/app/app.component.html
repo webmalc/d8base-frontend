@@ -121,7 +121,10 @@
                             </svg>
                         </ion-item>
 
-                        <ion-item class="ion-item-no-border" slot="end" *ngIf="platform.is('desktop')">
+                        <ion-item routerLink="/service/publish/step-seven/timetable"
+                                  routerLinkActive="active"
+                                  routerDirection="forward"
+                                class="ion-item-no-border" slot="end" *ngIf="platform.is('desktop')">
                             {{'template.download'|translate}}
                         </ion-item>
                         <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)

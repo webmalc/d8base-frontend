@@ -26,6 +26,7 @@ export class ServicePublishService {
     }
 
     public getStepData<T>(step: number): T {
+        // @ts-ignore
         return this.stepsData[step];
     }
 
@@ -33,10 +34,8 @@ export class ServicePublishService {
         return this.stepsData[step][data];
     }
 
-    public removeSteps(fromStep: number): void {
-        for (let i = fromStep; i < this.totalSteps; i += 1) {
-            this.stepsData[i] = undefined;
-        }
+    public removeStep(step: number): void {
+        this.stepsData[step] = undefined;
     }
 
     public isset(step: number): boolean {

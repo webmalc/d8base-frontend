@@ -1,7 +1,8 @@
 export enum ServicePublishStepSevenTimetableFormFields {
     Timetable = 'timetable',
-    StartTime = 'startTime',
-    EndTime = 'endTime',
-    IsEnabled = 'isEnabled',
-    Day = 'day'
+    StartTime = 'start_time',
+    EndTime = 'end_time',
+    IsEnabled = 'is_enabled',
+    Day = 'day_of_week',
+    Id = 'id'
 }
