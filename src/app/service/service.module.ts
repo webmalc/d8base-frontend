@@ -1,7 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DepartureComponent} from '@app/service/components/departure/departure.component';
+import {ServicePublishFinalStepComponent} from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import {ServicePublishStepFiveComponent} from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
 import {ServicePublishStepOneComponent} from '@app/service/components/service-publish-step-one/service-publish-step-one.component';
@@ -29,13 +30,13 @@ import {ServiceScheduleApiService} from '@app/service/services/service-schedule-
 import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {SharedModule} from '@app/shared/shared.module';
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {BrMaskerModule} from 'br-mask';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {NgxDropzoneModule} from 'ngx-dropzone';
-import { ServicePageRoutingModule } from './service-routing.module';
-import { ServicePage } from './service.page';
+import {ServicePageRoutingModule} from './service-routing.module';
+import {ServicePage} from './service.page';
 
 @NgModule({
     imports: [
@@ -61,7 +62,8 @@ import { ServicePage } from './service.page';
         ServicePublishStepSevenComponent,
         TimetableComponent,
         DepartureComponent,
-        TimetableAddTimePopoverComponent
+        TimetableAddTimePopoverComponent,
+        ServicePublishFinalStepComponent
     ],
     providers: [
         PricesApiService,

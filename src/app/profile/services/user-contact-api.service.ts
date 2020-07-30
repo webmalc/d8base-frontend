@@ -11,7 +11,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class UserContactApiService extends AbstractApiService<ClientContactInterface>
     implements ContactsApiServiceInterface, Partial<ApiServiceInterface<UserContact>> {
 

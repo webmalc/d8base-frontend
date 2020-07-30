@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {AppFooterComponent} from '@app/shared/components/app-footer/app-footer.component';
@@ -13,6 +14,7 @@ import {LocationListComponent} from '@app/shared/components/location/location-li
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-list.component';
+import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
@@ -24,8 +26,9 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {ContactsAddComponent} from './components/contacts-add/contacts-add.component';
 import {DebounceDirective} from './directives/debounce.directive';
-import { NumberDirective } from './directives/number.directive';
+import {NumberDirective} from './directives/number.directive';
 
 @NgModule({
     declarations: [
@@ -41,7 +44,9 @@ import { NumberDirective } from './directives/number.directive';
         AppFooterComponent,
         CollapseItemComponent,
         InfoRowComponent,
-        NumberDirective
+        NumberDirective,
+        ContactsAddComponent,
+        ServicePublishAgreementComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -56,7 +61,9 @@ import { NumberDirective } from './directives/number.directive';
         CollapseItemComponent,
         UserLocationMapComponent,
         InfoRowComponent,
-        NumberDirective
+        NumberDirective,
+        ContactsAddComponent,
+        ServicePublishAgreementComponent
     ],
     imports: [
         CommonModule,
@@ -65,7 +72,8 @@ import { NumberDirective } from './directives/number.directive';
         ReactiveFormsModule,
         IonicSelectableModule,
         LeafletModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     providers: [
         MainGuard,
