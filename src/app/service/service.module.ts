@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RegistrationPageModule} from '@app/auth/pages/registration/registration.module';
 import {DepartureComponent} from '@app/service/components/departure/departure.component';
 import {ServicePublishFinalStepComponent} from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import {ServicePublishStepFiveComponent} from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
@@ -27,6 +28,7 @@ import {ServiceLocationApiService} from '@app/service/services/service-location-
 import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
 import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {SharedModule} from '@app/shared/shared.module';
@@ -49,7 +51,8 @@ import {ServicePage} from './service.page';
         TranslateModule,
         IonicSelectableModule,
         NgxDropzoneModule,
-        BrMaskerModule
+        BrMaskerModule,
+        RegistrationPageModule
     ],
     declarations: [
         ServicePage,
@@ -82,7 +85,8 @@ import {ServicePage} from './service.page';
         ServicePublishStepSevenFormService,
         ServicePublishStepSevenDepartureFormService,
         ServicePublishStepSevenTimetableFormService,
-        ServiceScheduleApiService
+        ServiceScheduleApiService,
+        ServiceStepsNavigationService
     ]
 })
 export class ServicePageModule {}

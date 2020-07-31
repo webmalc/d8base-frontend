@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {ServicePublishStepSixFormFields} from '@app/service/enums/service-publish-step-six-form-fields';
 import {ServicePublishStepSixFormService} from '@app/service/forms/service-publish-step-six-form.service';
 import {StepSixDataInterface} from '@app/service/interfaces/step-six-data-interface';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -23,7 +23,7 @@ export class ServicePublishStepSixComponent implements OnInit {
     constructor(
         public formService: ServicePublishStepSixFormService,
         private servicePublishService: ServicePublishService,
-        private router: Router,
+        public serviceStepsNavigationService: ServiceStepsNavigationService,
         public trans: TranslationService,
         private masterManager: MasterManagerService
     ) { }
@@ -39,6 +39,6 @@ export class ServicePublishStepSixComponent implements OnInit {
 
     public submitForm(): void {
         this.servicePublishService.setStepData(this.STEP, this.formService.form.getRawValue());
-        this.router.navigateByUrl('/service/publish/step-seven');
+        this.serviceStepsNavigationService.navigateToNextStep();
     }
 }

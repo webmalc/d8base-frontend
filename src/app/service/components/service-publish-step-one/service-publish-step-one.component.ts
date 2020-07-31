@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {Category} from '@app/core/models/category';
 import {Subcategory} from '@app/core/models/subcategory';
 import {CategoriesApiService} from '@app/core/services/categories-api.service';
@@ -8,6 +7,7 @@ import {TranslationService} from '@app/core/services/translation.service';
 import {ServicePublishStepOneFormFields} from '@app/service/enums/service-publish-step-one-form-fields';
 import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {BehaviorSubject} from 'rxjs';
 
@@ -28,7 +28,7 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
         private subcategoriesApi: SubcategoriesApiService,
         public readonly formService: ServicePublishStepOneFormService,
         public servicePublishService: ServicePublishService,
-        private router: Router,
+        public serviceStepsNavigationService: ServiceStepsNavigationService,
         public trans: TranslationService
     ) {
         super();
@@ -55,7 +55,7 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
                 subcategory: this.formService.form.get(this.formFields.Subcategory).value
             }
         );
-        this.router.navigateByUrl('/service/publish/step-two');
+        this.serviceStepsNavigationService.navigateToNextStep();
     }
 
     public onCategoryChange(): void {
@@ -64,5 +64,4 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
             list => this.subcategoriesList$.next(list.results)
         );
     }
-
 }

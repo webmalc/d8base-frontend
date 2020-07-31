@@ -24,13 +24,14 @@ export class MasterManagerService {
     }
 
     public updateIsMaster(): void {
-        this.userManager.getCurrentUser().subscribe(
-            (user: User) => {
-                if (TypeOfUser.Master === user.account_type) {
-                    return this.isMaster$.next(true);
-                }
-                this.isMaster$.next(false);
-            }
+        this.isMaster().subscribe(
+            isMaster => this.isMaster$.next(isMaster)
+        );
+    }
+
+    public isMaster(): Observable<boolean> {
+        return this.userManager.getCurrentUser().pipe(
+            map(user => user.account_type === TypeOfUser.Master)
         );
     }
 

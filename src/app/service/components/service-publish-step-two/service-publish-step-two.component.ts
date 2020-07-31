@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {ServicePublishStepTwoFormFields} from '@app/service/enums/service-publish-step-two-form-fields';
 import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
 import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {BehaviorSubject} from 'rxjs';
@@ -26,7 +26,7 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
         private servicePublishService: ServicePublishService,
         public formService: ServicePublishStepTwoFormService,
         private servicesApiService: ServicesApiService,
-        private router: Router
+        public serviceStepsNavigationService: ServiceStepsNavigationService
     ) {
         super();
     }
@@ -44,7 +44,7 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
 
     public submitForm(): void {
         this.servicePublishService.setStepData(this.STEP, this.formService.form.getRawValue());
-        this.router.navigateByUrl('/service/publish/step-three');
+        this.serviceStepsNavigationService.navigateToNextStep();
     }
 
     public durationHoursChange(): void {
@@ -54,5 +54,4 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
     public durationMinutesChange(): void {
         this.durationMinutes = parseInt(this.formService.form.get(this.formFields.DurationMinutes).value, 10);
     }
-
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {ServicePublishStepFiveFormFields} from '@app/service/enums/service-publish-step-five-form-fields';
 import {ServicePublishStepFiveFormService} from '@app/service/forms/service-publish-step-five-form.service';
 import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 
 @Component({
     selector: 'app-service-publish-step-five',
@@ -18,7 +18,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
     constructor(
         public formService: ServicePublishStepFiveFormService,
         private servicePublish: ServicePublishService,
-        private router: Router
+        public serviceStepsNavigationService: ServiceStepsNavigationService
     ) { }
 
     public ngOnInit(): void {
@@ -31,7 +31,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
 
     public submitForm(): void {
         this.servicePublish.setStepData(this.STEP, this.formService.form.getRawValue());
-        this.router.navigateByUrl('/service/publish/step-six');
+        this.serviceStepsNavigationService.navigateToNextStep();
     }
 
     public onSelect(data: {addedFiles: File[]}): void {

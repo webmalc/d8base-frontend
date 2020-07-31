@@ -27,6 +27,10 @@ export class ServicePublishStepFourFormService {
             {validators: this.checkPassword});
     }
 
+    public isEmailValid(): boolean {
+        return this.form.controls[ServicePublishStepFourFormFields.Email].valid;
+    }
+
     public isSubmitDisabled(): boolean {
         return !(this.form.valid && this.form.dirty);
     }

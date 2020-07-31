@@ -23,8 +23,8 @@ export class RegistrationService {
         private tokenManager: TokenManagerService
     ) {
     }
-
-    public register(user: User, location: UserLocation): Observable<User> {
+    // TODO: check email verification request
+    public register(user: User, location?: UserLocation): Observable<User> {
         // @ts-ignore
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
             switchMap(
@@ -32,6 +32,9 @@ export class RegistrationService {
                     return from(this.tokenManager.setTokens(newUser.token)).pipe(
                         switchMap(() => {
                             this.sendVerifyLink().subscribe();
+                            if (!location) {
+                                return of(newUser);
+                            }
 
                             return from(this.locationService.getMergedLocationData()).pipe(
                                 switchMap(

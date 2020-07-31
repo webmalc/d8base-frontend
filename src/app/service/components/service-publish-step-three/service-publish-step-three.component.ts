@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {StepThreeDataInterface} from '@app/service/interfaces/step-three-data-interface';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 
 @Component({
     selector: 'app-service-publish-step-three',
@@ -15,7 +15,7 @@ export class ServicePublishStepThreeComponent implements OnInit {
 
     constructor(
         private servicePublishService: ServicePublishService,
-        private router: Router
+        public serviceStepsNavigationService: ServiceStepsNavigationService
     ) { }
 
     public ngOnInit(): void {
@@ -26,7 +26,7 @@ export class ServicePublishStepThreeComponent implements OnInit {
 
     public submit(): void {
         this.servicePublishService.setStepData(this.STEP, this.files);
-        this.router.navigateByUrl('/service/publish/step-four');
+        this.serviceStepsNavigationService.navigateToNextStep();
     }
 
     public onSelect(data: {addedFiles: File[]}): void {

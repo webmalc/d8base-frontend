@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslationService} from '@app/core/services/translation.service';
 import {Country} from '@app/profile/models/country';
 import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publish-step-seven-form-fields';
@@ -6,6 +6,7 @@ import {ServicePublishStepSevenFormService} from '@app/service/forms/service-pub
 import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
 import {StepSevenDepartureDataInterface} from '@app/service/interfaces/step-seven-departure-data-interface';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 
@@ -24,7 +25,8 @@ export class ServicePublishStepSevenComponent implements OnInit {
         public trans: TranslationService,
         public servicePublish: ServicePublishService,
         public readonly countrySelectable: SelectableCountryOnSearchService,
-        public readonly citySelectable: SelectableCityOnSearchService
+        public readonly citySelectable: SelectableCityOnSearchService,
+        public serviceStepsNavigationService: ServiceStepsNavigationService
     ) { }
 
     public ngOnInit(): void {
@@ -38,6 +40,7 @@ export class ServicePublishStepSevenComponent implements OnInit {
 
     public submitForm(): void {
         this.servicePublish.assignStepData(this.STEP, this.formService.form.getRawValue());
+        this.serviceStepsNavigationService.navigateToNextStep();
     }
 
     public onCountryChange(): void {

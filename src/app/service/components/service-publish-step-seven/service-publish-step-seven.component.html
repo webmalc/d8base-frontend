@@ -22,7 +22,6 @@
                     <ion-col class="ion-no-padding">
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -32,7 +31,6 @@
                         </ion-item>
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
@@ -42,14 +40,12 @@
                             <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
                                       routerLink="timetable"
                                       routerDirection="forward"
-                                      routerLinkActive="active"
-                            >
+                                      routerLinkActive="active">
                                 <ion-icon name="create-outline"></ion-icon>
                             </ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -59,10 +55,8 @@
                         </ion-item>
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-padding-vertical" size="12">
-
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
                                 <b>
@@ -86,7 +80,6 @@
                                     (onChange)="onCountryChange()">
                             </ionic-selectable>
                         </ion-item>
-
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
                                 <b>
@@ -109,7 +102,6 @@
                                     (onSearch)="citySelectable.onCitySearch($event, getCountryValue())">
                             </ionic-selectable>
                         </ion-item>
-
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
                             <b>
                                 {{"service-publish.step-seven.address"|translate}}
@@ -126,7 +118,6 @@
                                 class="ion-item-no-border text-red ion-item-no-side-padding fs14 ion-item-no-min-height pt10">
                             {{"service-publish.step-seven.address-required-info"|translate}}
                         </ion-item>
-
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
                             <b>
                                 {{"service-publish.step-seven.postal"|translate}}
@@ -139,7 +130,6 @@
                             <ion-input type="text" name="postal" appNumbersOnly
                                        [formControlName]="formFields.Postal"></ion-input>
                         </ion-item>
-
                         <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-vertical">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                 <b>
@@ -159,10 +149,8 @@
                                 <ion-icon name="create-outline"></ion-icon>
                             </ion-item>
                         </ion-row>
-
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col>
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -172,7 +160,6 @@
                         </ion-item>
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-padding-vertical">
                         <ion-list>
@@ -194,12 +181,10 @@
                                 <ion-checkbox [formControlName]="formFields.PaymentOnline"></ion-checkbox>
                             </ion-item>
                         </ion-list>
-
                         <ion-item class="ion-item-no-border text-grey ion-margin-bottom
                             ion-item-no-side-padding fs14 ion-item-no-min-height pt10">
                             {{"service-publish.step-seven.payment-info"|translate}}
                         </ion-item>
-
                         <ion-row class="ion-justify-content-center">
                             <ion-col size="6">
                                 <ion-button color="light"
@@ -217,10 +202,8 @@
                                 </ion-button>
                             </ion-col>
                         </ion-row>
-
                     </ion-col>
                 </ion-item>
-
             </form>
         </ion-col>
     </ion-row>

@@ -2,7 +2,8 @@
     <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding">
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                <ion-item
+                        class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-top">
                             <ion-item class="ion-item-no-border fs18">
@@ -23,7 +24,7 @@
                 <app-info-row>
                     {{"service-publish.step-four.first-info-row"|translate}}
                 </app-info-row>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border item-background-color-white">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
@@ -34,22 +35,48 @@
                             <ion-label color="medium" position="floating">
                                 {{"service-publish.step-four.email-placeholder"|translate}}
                             </ion-label>
-                            <ion-input type="text" name="name" [formControlName]="formFields.Email"></ion-input>
+                            <ion-input (ionChange)="onEmailChange()"
+                                       type="text" name="name" [formControlName]="formFields.Email"></ion-input>
                         </ion-item>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+                        <!--newUser-->
+                        <ion-item *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                         !isUserExists && formService.isEmailValid()"
+                                class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
                             {{"service-publish.step-four.new-user"|translate}}
                         </ion-item>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+                        <ion-item *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                         !isUserExists && formService.isEmailValid()"
+                                class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
                             <div class="label-for-required-input">
                                 {{"service-publish.step-four.create-password"|translate}}
                             </div>
                         </ion-item>
+                        <!--/newUser-->
+                        <!--userExists-->
+                        <ion-item *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                         isUserExists && formService.isEmailValid()"
+                                  class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+                            {{"service-publish.step-four.user-exists"|translate}}
+                        </ion-item>
+                        <ion-item *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                         isUserExists && formService.isEmailValid()"
+                                  class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+                            <div class="label-for-required-input">
+                                {{"service-publish.step-four.enter-password"|translate}}
+                            </div>
+                        </ion-item>
+                        <!--/userExists-->
                     </ion-col>
                 </ion-item>
-                <app-info-row>
+
+                <app-info-row *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                 !isUserExists && formService.isEmailValid()">
                     {{"service-publish.step-four.second-info-row"|translate}}
                 </app-info-row>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+
+                <ion-item *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                 !isUserExists && formService.isEmailValid()"
+                        class="ion-item-no-border item-background-color-white">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
                             <ion-label color="medium" position="floating" class="label-for-required-input">
@@ -66,18 +93,39 @@
                             </ion-label>
                             <ion-input type="password" name="name" [formControlName]="formFields.Confirm"></ion-input>
                         </ion-item>
-                        <ion-row class="ion-justify-content-center ion-margin-top">
+                    </ion-col>
+                </ion-item>
+
+                <ion-item *ngIf="!(authenticationService.getIsAuthenticatedSubject()|async) &&
+                 isUserExists && formService.isEmailValid()"
+                          class="ion-item-no-border item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+                        <ion-item class="ion-item-bordered ion-margin-top">
+                            <ion-label color="medium" position="floating" class="label-for-required-input">
+                                {{"service-publish.step-four.password-placeholder"|translate}}
+                            </ion-label>
+                            <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+                            <a routerLink="/auth/password-recover" routerDirection="forward">
+                                {{"service-publish.step-four.forgot-password"|translate}}
+                            </a>
+                        </ion-item>
+                    </ion-col>
+                </ion-item>
+
+                <ion-item class="ion-item-no-border item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+                        <ion-row class="ion-justify-content-center">
                             <ion-col size="6">
                                 <ion-button color="light"
-                                            routerDirection="back"
-                                            routerLink="/service/publish/step-three"
-                                            routerLinkActive="active"
+                                            (click)="serviceStepsNavigationService.navigateToPreviousStep()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.back-button" | translate}}
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                <ion-button color="secondary" type="submit" [disabled]="isSubmitDisabled()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>
@@ -85,6 +133,7 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
+
             </form>
         </ion-col>
     </ion-row>

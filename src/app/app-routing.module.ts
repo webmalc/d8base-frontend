@@ -25,8 +25,7 @@ const routes: Routes = [
     },
     {
         path: 'service',
-        loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule),
-        canActivate: [MainGuard]
+        loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule)
     }
 ];
 

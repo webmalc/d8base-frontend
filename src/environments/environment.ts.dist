@@ -44,6 +44,7 @@ export const environment = {
         service_location: '/en/api/accounts/service-locations/',
         service_photo: '/en/api/accounts/service-photos/',
         service_schedule: '/en/api/accounts/service-schedule/',
+        is_user_registered: '/ru/api/accounts/is-user-registered',
         url: 'http://localhost:8000'
     },
     client_id: '',
