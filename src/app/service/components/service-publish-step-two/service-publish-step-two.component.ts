@@ -6,7 +6,6 @@ import {ServicePublishService} from '@app/service/services/service-publish.servi
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
-import {BehaviorSubject} from 'rxjs';
 
 @Component({
     selector: 'app-service-publish-step-two',
@@ -17,8 +16,9 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
 
     public durationHours: number;
     public durationMinutes: number;
-    public serviceTypeList: BehaviorSubject<{value: string, display_name: string}[]> =
-        new BehaviorSubject<{value: string, display_name: string}[]>([]);
+    // public serviceTypeList: BehaviorSubject<{value: string, display_name: string}[]> =
+    //     new BehaviorSubject<{value: string, display_name: string}[]>([]);
+    public serviceTypeList = ['online', 'professional', 'client'];
     public readonly formFields = ServicePublishStepTwoFormFields;
     private readonly STEP = 1;
 
@@ -37,9 +37,9 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
         } else {
             this.formService.createForm();
         }
-        this.servicesApiService.getServiceTypeList().subscribe(
-            data => this.serviceTypeList.next(data)
-        );
+        // this.servicesApiService.getServiceTypeList().subscribe(
+        //     data => this.serviceTypeList.next(data)
+        // );
     }
 
     public submitForm(): void {

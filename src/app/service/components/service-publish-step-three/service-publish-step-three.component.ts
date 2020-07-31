@@ -16,7 +16,8 @@ export class ServicePublishStepThreeComponent implements OnInit {
     constructor(
         private servicePublishService: ServicePublishService,
         public serviceStepsNavigationService: ServiceStepsNavigationService
-    ) { }
+    ) {
+    }
 
     public ngOnInit(): void {
         if (this.servicePublishService.isset(this.STEP)) {
@@ -25,11 +26,11 @@ export class ServicePublishStepThreeComponent implements OnInit {
     }
 
     public submit(): void {
-        this.servicePublishService.setStepData(this.STEP, this.files);
+        this.servicePublishService.setStepData(this.STEP, {photos: this.files});
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 
-    public onSelect(data: {addedFiles: File[]}): void {
+    public onSelect(data: { addedFiles: File[] }): void {
         this.files.push(...data.addedFiles);
     }
 

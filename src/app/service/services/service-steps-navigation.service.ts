@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {ServicePublishService} from '@app/service/services/service-publish.service';
 
 @Injectable()
 export class ServiceStepsNavigationService {
@@ -15,7 +16,7 @@ export class ServiceStepsNavigationService {
         '/service/publish/step-final',
     ];
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private servicePublishService: ServicePublishService) { }
 
     public navigateToLastStep(): void {
         this.router.navigateByUrl(this.urls[7]);

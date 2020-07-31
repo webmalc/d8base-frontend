@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 
 @Injectable()
@@ -48,6 +48,7 @@ export class ServicePublishService {
 
     public reset(): void {
         this.stepsData = [];
+        this.storageManager.remove(this.storageKey);
     }
 
     public getFullData(): object[] {

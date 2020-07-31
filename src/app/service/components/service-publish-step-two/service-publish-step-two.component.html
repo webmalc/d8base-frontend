@@ -180,9 +180,9 @@
                                         </div>
                                     </ion-item>
                                 </ion-list-header>
-                                <ion-item *ngFor="let type of (serviceTypeList|async)">
-                                    <ion-label>{{type.display_name}}</ion-label>
-                                    <ion-radio value="{{type.value}}"></ion-radio>
+                                <ion-item *ngFor="let type of serviceTypeList">
+                                    <ion-label>{{"service-publish.step-two.location-"+type|translate}}</ion-label>
+                                    <ion-radio value="{{type}}"></ion-radio>
                                 </ion-item>
                             </ion-radio-group>
                         </ion-list>
