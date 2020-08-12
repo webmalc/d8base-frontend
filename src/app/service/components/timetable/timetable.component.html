@@ -37,6 +37,7 @@
                                 <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
                                     <ion-input [brmasker]="{mask: '00:00', type:'num', len: 5}"
                                                placeholder="00:00"
+                                               [disabled]="!formService?.controls[i]?.controls[formFields.IsEnabled]?.value"
                                                (ionChange)="onStartTimeChange($event, i);formService.checkOverlapValidity(i)"
                                                formControlName="{{formFields.StartTime}}"
                                                class="ion-text-center"></ion-input>
@@ -52,6 +53,7 @@
                                     <ion-input class="ion-text-center"
                                                [brmasker]="{mask: '00:00', type:'num', len: 5}"
                                                placeholder="00:00"
+                                               [disabled]="!formService?.controls[i]?.controls[formFields.IsEnabled]?.value"
                                                (ionChange)="onEndTimeChange($event, i);formService.checkOverlapValidity(i)"
                                                formControlName="{{formFields.EndTime}}"></ion-input>
                                 </ion-item>

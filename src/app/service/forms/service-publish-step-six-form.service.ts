@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Injectable} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ServicePublishStepSixFormFields} from '@app/service/enums/service-publish-step-six-form-fields';
 import {StepSixDataInterface} from '@app/service/interfaces/step-six-data-interface';
 
@@ -13,12 +13,12 @@ export class ServicePublishStepSixFormService {
     public createForm(data?: StepSixDataInterface): void {
         this.form = this.formBuilder.group({
             [ServicePublishStepSixFormFields.Description]: [data?.description],
-            [ServicePublishStepSixFormFields.Specialization]: [data?.specialization],
+            [ServicePublishStepSixFormFields.Specialization]: [data?.name, Validators.required],
             [ServicePublishStepSixFormFields.Level]: [data?.level],
         });
     }
 
     public isSubmitDisabled(): boolean {
-        return !(this.form.valid && this.form.dirty);
+        return this.form.invalid;
     }
 }

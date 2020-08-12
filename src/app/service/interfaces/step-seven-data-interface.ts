@@ -2,8 +2,7 @@ import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {ServiceTimetableInterface} from '@app/service/interfaces/service-timetable-interface';
 
-export interface StepSevenDataInterface {
-    serviceTimetable: ServiceTimetableInterface;
+export interface StepSevenDataInterface extends ServiceTimetableInterface {
     country: Country;
     city: City;
     address: string;

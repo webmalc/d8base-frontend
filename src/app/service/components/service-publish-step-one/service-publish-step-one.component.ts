@@ -6,7 +6,8 @@ import {SubcategoriesApiService} from '@app/core/services/subcategories-api.serv
 import {TranslationService} from '@app/core/services/translation.service';
 import {ServicePublishStepOneFormFields} from '@app/service/enums/service-publish-step-one-form-fields';
 import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {StepOneDataInterface} from '@app/service/interfaces/step-one-data-interface';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {BehaviorSubject} from 'rxjs';
@@ -22,13 +23,14 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
     public categoriesList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
     public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
     private readonly STEP = 0;
+    private isReinitialized: boolean = false;
 
     constructor(
         private categoriesApi: CategoriesApiService,
         private subcategoriesApi: SubcategoriesApiService,
-        public readonly formService: ServicePublishStepOneFormService,
-        public servicePublishService: ServicePublishService,
-        public serviceStepsNavigationService: ServiceStepsNavigationService,
+        public formService: ServicePublishStepOneFormService,
+        private servicePublishDataHolderService: ServicePublishDataHolderService,
+        private serviceStepsNavigationService: ServiceStepsNavigationService,
         public trans: TranslationService
     ) {
         super();
@@ -39,16 +41,18 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
             list => this.categoriesList$.next(list.results)
         );
 
-        if (this.servicePublishService.isset(this.STEP)) {
-            const stepData = this.servicePublishService.getStepData<{ category: Category, subcategory: Subcategory }>(this.STEP);
+        if (this.servicePublishDataHolderService.isset(this.STEP)) {
+            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(this.STEP);
             this.formService.createForm(stepData.category, stepData.subcategory);
+            this.isReinitialized = true;
         } else {
             this.formService.createForm();
+            this.isReinitialized = false;
         }
     }
 
     public submitForm(): void {
-        this.servicePublishService.setStepData(
+        this.servicePublishDataHolderService.setStepData(
             this.STEP,
             {
                 category: this.formService.form.get(this.formFields.Category).value,
@@ -63,5 +67,13 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
         this.subcategoriesApi.get({category: this.formService.form.get(this.formFields.Category).value.id}).subscribe(
             list => this.subcategoriesList$.next(list.results)
         );
+    }
+
+    public isSubmitDisabled(): boolean {
+        if (!this.isReinitialized) {
+            return this.formService.form.invalid && !this.formService.form.dirty;
+        }
+
+        return this.formService.form.invalid;
     }
 }

@@ -19,7 +19,7 @@ export class ServicePublishStepSevenFormService {
             [ServicePublishStepSevenFormFields.Postal]: [data?.postal_code],
             [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
             [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
-        }, {validators: this.paymentValidator});
+        });
     }
 
     public getFormFieldValue(formField: string): any {
@@ -27,20 +27,15 @@ export class ServicePublishStepSevenFormService {
     }
 
     public isSubmitDisabled(): boolean {
-        return !(this.form.valid && this.form.dirty);
+        return (this.form.invalid) ||
+        (
+            !this.form.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
+            !this.form.get(ServicePublishStepSevenFormFields.PaymentCash).value
+        );
     }
 
     public setCityDisabled(val: boolean): void {
         const control = this.form.controls[ServicePublishStepSevenFormFields.City] as FormControl;
         val ? control.disable() : control.enable();
-    }
-
-    private paymentValidator(group: FormGroup): any {
-        if (!group.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
-            !group.get(ServicePublishStepSevenFormFields.PaymentCash).value
-        ) {
-            group.get(ServicePublishStepSevenFormFields.PaymentOnline).setErrors({paymentError: true});
-            group.get(ServicePublishStepSevenFormFields.PaymentCash).setErrors({paymentError: true});
-        }
     }
 }

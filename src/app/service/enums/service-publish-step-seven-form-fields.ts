@@ -3,6 +3,6 @@ export enum ServicePublishStepSevenFormFields {
     City = 'city',
     Address = 'address',
     Postal = 'postal_code',
-    PaymentOnline = 'online',
-    PaymentCash = 'cash',
+    PaymentOnline = 'payment_online',
+    PaymentCash = 'payment_cash',
 }

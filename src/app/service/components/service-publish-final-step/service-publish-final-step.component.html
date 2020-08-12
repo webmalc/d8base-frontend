@@ -29,16 +29,11 @@
                         {{"service-publish.back-button" | translate}}
                     </ion-button>
                     <ion-button color="light"
-                                routerDirection="back"
-                                routerLink=""
-                                routerLinkActive="active"
                                 class="ion-margin-top" fill="solid" expand="block">
                         просмотр
                     </ion-button>
-                    <ion-button color="success"
-                                routerDirection="back"
-                                routerLink=""
-                                routerLinkActive="active"
+                    <ion-button (click)="publish()"
+                                color="success"
                                 class="ion-margin-top" fill="solid" expand="block">
                         Опубликовать
                     </ion-button>

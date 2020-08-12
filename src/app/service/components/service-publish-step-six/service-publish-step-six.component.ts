@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {ServicePublishStepSixFormFields} from '@app/service/enums/service-publish-step-six-form-fields';
 import {ServicePublishStepSixFormService} from '@app/service/forms/service-publish-step-six-form.service';
 import {StepSixDataInterface} from '@app/service/interfaces/step-six-data-interface';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
-import {BehaviorSubject} from 'rxjs';
 
 @Component({
     selector: 'app-service-publish-step-six',
@@ -16,29 +14,26 @@ import {BehaviorSubject} from 'rxjs';
 export class ServicePublishStepSixComponent implements OnInit {
 
     public formFields = ServicePublishStepSixFormFields;
-    public levelList$: BehaviorSubject<{ value: string, display_name: string }[]> =
-        new BehaviorSubject<{value: string, display_name: string}[]>([]);
+    public levelList = ['junior', 'middle', 'senior'];
     private readonly STEP = 5;
 
     constructor(
         public formService: ServicePublishStepSixFormService,
-        private servicePublishService: ServicePublishService,
+        private servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        public trans: TranslationService,
-        private masterManager: MasterManagerService
+        public trans: TranslationService
     ) { }
 
     public ngOnInit(): void {
-        this.masterManager.getExperienceLevelList().subscribe(data => this.levelList$.next(data));
-        if (this.servicePublishService.isset(this.STEP)) {
-            this.formService.createForm(this.servicePublishService.getStepData<StepSixDataInterface>(this.STEP));
+        if (this.servicePublishDataHolder.isset(this.STEP)) {
+            this.formService.createForm(this.servicePublishDataHolder.getStepData<StepSixDataInterface>(this.STEP));
         } else {
             this.formService.createForm();
         }
     }
 
     public submitForm(): void {
-        this.servicePublishService.setStepData(this.STEP, this.formService.form.getRawValue());
+        this.servicePublishDataHolder.setStepData(this.STEP, this.formService.form.getRawValue());
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 }

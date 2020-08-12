@@ -1,5 +1,5 @@
 export interface StepSixDataInterface {
     description: string;
-    specialization: string;
+    name: string;
     level: string;
 }

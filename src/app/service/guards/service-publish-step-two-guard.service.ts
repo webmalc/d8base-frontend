@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {AbstractServicePublishStepsGuard} from '@app/service/abstract/abstract-service-publish-steps-guard';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 
 @Injectable()
 export class ServicePublishStepTwoGuardService extends AbstractServicePublishStepsGuard implements CanActivate {
 
-    constructor(protected readonly router: Router, protected readonly servicePublishService: ServicePublishService) {
+    constructor(protected readonly router: Router, protected readonly servicePublishService: ServicePublishDataHolderService) {
         super(servicePublishService, router);
     }
 

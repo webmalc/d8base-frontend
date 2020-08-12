@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StepThreeDataInterface} from '@app/service/interfaces/step-three-data-interface';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 
 @Component({
@@ -14,19 +14,19 @@ export class ServicePublishStepThreeComponent implements OnInit {
     private readonly STEP = 2;
 
     constructor(
-        private servicePublishService: ServicePublishService,
+        private servicePublishDataHolderService: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService
     ) {
     }
 
     public ngOnInit(): void {
-        if (this.servicePublishService.isset(this.STEP)) {
-            this.files = this.servicePublishService.getStepData<StepThreeDataInterface>(this.STEP).photos;
+        if (this.servicePublishDataHolderService.isset(this.STEP)) {
+            this.files = this.servicePublishDataHolderService.getStepData<StepThreeDataInterface>(this.STEP).photos;
         }
     }
 
     public submit(): void {
-        this.servicePublishService.setStepData(this.STEP, {photos: this.files});
+        this.servicePublishDataHolderService.setStepData(this.STEP, {photos: this.files});
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 

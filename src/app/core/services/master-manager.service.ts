@@ -53,7 +53,7 @@ export class MasterManagerService {
         );
     }
 
-    public saveMaster(master: Master): Observable<Master> {
+    public createMaster(master: Master): Observable<Master> {
         return this.client.post(this.url, master).pipe(
             map(raw => plainToClass(Master, raw))
         );

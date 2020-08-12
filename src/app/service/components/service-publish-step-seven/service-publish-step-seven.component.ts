@@ -5,7 +5,7 @@ import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publ
 import {ServicePublishStepSevenFormService} from '@app/service/forms/service-publish-step-seven-form.service';
 import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
 import {StepSevenDepartureDataInterface} from '@app/service/interfaces/step-seven-departure-data-interface';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
@@ -23,15 +23,17 @@ export class ServicePublishStepSevenComponent implements OnInit {
     constructor(
         public formService: ServicePublishStepSevenFormService,
         public trans: TranslationService,
-        public servicePublish: ServicePublishService,
+        public servicePublishDataHolderService: ServicePublishDataHolderService,
         public readonly countrySelectable: SelectableCountryOnSearchService,
         public readonly citySelectable: SelectableCityOnSearchService,
         public serviceStepsNavigationService: ServiceStepsNavigationService
     ) { }
 
     public ngOnInit(): void {
-        if (this.servicePublish.isset(this.STEP)) {
-            this.formService.createForm(this.servicePublish.getStepData<StepSevenDataInterface>(this.STEP));
+        // console.log(this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP));
+        // console.log(this.servicePublishDataHolderService.getFullData());
+        if (this.servicePublishDataHolderService.isset(this.STEP)) {
+            this.formService.createForm(this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP));
         } else {
             this.formService.createForm();
             this.formService.setCityDisabled(true);
@@ -39,7 +41,9 @@ export class ServicePublishStepSevenComponent implements OnInit {
     }
 
     public submitForm(): void {
-        this.servicePublish.assignStepData(this.STEP, this.formService.form.getRawValue());
+        // console.log(this.formService.form.getRawValue());
+        // console.log(this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP));
+        this.servicePublishDataHolderService.assignStepData(this.STEP, this.formService.form.getRawValue());
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 
@@ -52,6 +56,6 @@ export class ServicePublishStepSevenComponent implements OnInit {
     }
 
     public getDepartureData(): StepSevenDepartureDataInterface {
-        return this.servicePublish.getStepData<StepSevenDataInterface>(this.STEP)?.departure;
+        return this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP)?.departure;
     }
 }

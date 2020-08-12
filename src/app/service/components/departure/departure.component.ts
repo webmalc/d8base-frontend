@@ -1,8 +1,8 @@
 import {Location} from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServicePublishStepSevenDepartureFormFields} from '@app/service/enums/service-publish-step-seven-departure-form-fields';
 import {ServicePublishStepSevenDepartureFormService} from '@app/service/forms/service-publish-step-seven-departure-form.service';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 
 @Component({
     selector: 'app-departure',
@@ -17,7 +17,7 @@ export class DepartureComponent implements OnInit {
 
     constructor(
         public formService: ServicePublishStepSevenDepartureFormService,
-        private servicePublish: ServicePublishService,
+        private servicePublish: ServicePublishDataHolderService,
         private location: Location
     ) { }
 

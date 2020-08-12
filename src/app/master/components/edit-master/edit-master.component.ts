@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Master} from '@app/core/models/master';
@@ -53,8 +53,8 @@ export class EditMasterComponent implements OnInit {
                 (updatedMaster: Master) => console.log(updatedMaster)
             );
         } else {
-            this.masterManager.saveMaster(
-                HelperService.clean(plainToClass(Master, this.formService.form.getRawValue()))
+            this.masterManager.createMaster(
+                HelperService.clear(plainToClass(Master, this.formService.form.getRawValue()))
             ).subscribe(
                 (master: Master) => console.log(master)
             );

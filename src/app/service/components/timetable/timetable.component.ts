@@ -4,7 +4,7 @@ import {TimetableAddTimePopoverComponent} from '@app/service/components/timetabl
 import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import {ServicePublishStepSevenTimetableFormService} from '@app/service/forms/service-publish-step-seven-timetable-form.service';
 import {ServiceTimetableInterface} from '@app/service/interfaces/service-timetable-interface';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {PopoverController} from '@ionic/angular';
 
@@ -19,7 +19,7 @@ export class TimetableComponent extends Reinitable implements OnInit {
     private readonly STEP = 6;
 
     constructor(
-        public servicePublish: ServicePublishService,
+        public servicePublishDataHolderService: ServicePublishDataHolderService,
         private location: Location,
         public formService: ServicePublishStepSevenTimetableFormService,
         private readonly popoverController: PopoverController
@@ -28,9 +28,9 @@ export class TimetableComponent extends Reinitable implements OnInit {
     }
 
     public ngOnInit(): void {
-        if (this.servicePublish.issetStepPartialData(this.STEP, ServicePublishStepSevenTimetableFormFields.Timetable)) {
+        if (this.servicePublishDataHolderService.issetStepPartialData(this.STEP, ServicePublishStepSevenTimetableFormFields.Timetable)) {
             this.formService.createForm(
-                this.servicePublish.getPartialStepData<ServiceTimetableInterface>(
+                this.servicePublishDataHolderService.getPartialStepData<ServiceTimetableInterface>(
                     this.STEP,
                     ServicePublishStepSevenTimetableFormFields.Timetable
                 )
@@ -41,9 +41,9 @@ export class TimetableComponent extends Reinitable implements OnInit {
     }
 
     public submitForm(): void {
-        this.servicePublish.assignStepData(
+        this.servicePublishDataHolderService.assignStepData(
             this.STEP,
-            {[ServicePublishStepSevenTimetableFormFields.Timetable]: this.formService.form.getRawValue()}
+            this.formService.form.getRawValue()
         );
         this.location.back();
     }

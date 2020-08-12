@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Category} from '@app/core/models/category';
 import {Subcategory} from '@app/core/models/subcategory';
@@ -16,9 +16,5 @@ export class ServicePublishStepOneFormService {
             [ServicePublishStepOneFormFields.Category]: [category ?? '', Validators.required],
             [ServicePublishStepOneFormFields.Subcategory]: [subcategory ?? '', Validators.required],
         });
-    }
-
-    public isSubmitDisabled(): boolean {
-        return !(this.form.valid && this.form.dirty);
     }
 }

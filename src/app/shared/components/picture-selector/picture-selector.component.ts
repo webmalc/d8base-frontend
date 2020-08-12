@@ -95,7 +95,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
                 resolve();
             };
         });
-
     }
 
     private clearUri(): void {
@@ -107,5 +106,4 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         this.onChange(uri);
         this.value.emit(uri);
     }
-
 }

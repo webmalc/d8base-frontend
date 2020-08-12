@@ -76,7 +76,7 @@
                                 </ion-col>
                             </ion-row>
                             <ion-row *ngIf="durationMinutes || durationHours">
-                                <ion-item class="ion-item-no-border fs16">
+                                <ion-item class="ion-item-no-border fs16 ion-item-no-side-padding">
                                     {{"service-publish.step-two.duration"|translate}}:
                                     <div *ngIf="durationHours">{{ this.durationHours}} {{"service-publish.step-two.hours-desc"|translate}}</div>
                                     <div *ngIf="durationMinutes">{{this.durationMinutes}} {{"service-publish.step-two.minutes-desc"|translate}}</div>
@@ -110,7 +110,17 @@
                             <ion-row>
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        currency
+                                        <ionic-selectable
+                                                itemValueField="value"
+                                                itemTextField="display_name"
+                                                [canSearch]="true"
+                                                [items]="currencyList$|async"
+                                                [formControlName]="this.formFields.Currency"
+                                                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                        >
+                                        </ionic-selectable>
                                     </ion-item>
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">
@@ -132,7 +142,17 @@
                             <ion-row>
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        currency
+                                        <ionic-selectable
+                                                itemValueField="value"
+                                                itemTextField="display_name"
+                                                [canSearch]="true"
+                                                [items]="currencyList$|async"
+                                                [formControlName]="this.formFields.StartPriceCurrency"
+                                                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                        >
+                                        </ionic-selectable>
                                     </ion-item>
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">
@@ -152,7 +172,17 @@
                             <ion-row>
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        currency
+                                        <ionic-selectable
+                                                itemValueField="value"
+                                                itemTextField="display_name"
+                                                [canSearch]="true"
+                                                [items]="currencyList$|async"
+                                                [formControlName]="this.formFields.EndPriceCurrency"
+                                                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                        >
+                                        </ionic-selectable>
                                     </ion-item>
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">

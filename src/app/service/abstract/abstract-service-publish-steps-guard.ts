@@ -1,9 +1,9 @@
 import {CanActivate, Router, UrlTree} from '@angular/router';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 
 export abstract class AbstractServicePublishStepsGuard implements CanActivate {
 
-    protected constructor(protected servicePublishService: ServicePublishService, protected readonly router: Router) {
+    protected constructor(protected servicePublishService: ServicePublishDataHolderService, protected readonly router: Router) {
     }
 
     public canActivate(): boolean | UrlTree {

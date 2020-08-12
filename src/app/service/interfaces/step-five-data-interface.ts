@@ -4,5 +4,5 @@ export interface StepFiveDataInterface {
     first_name: string;
     last_name: string;
     gender: boolean;
-    avatar: File;
+    _avatar: File;
 }

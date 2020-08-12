@@ -10,12 +10,15 @@ import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts
 })
 export class ServicePublishFinalStepComponent extends Reinitable implements OnInit {
 
-    constructor(private servicePublishService: ServicePublishService) {
+    constructor(private servicePublish: ServicePublishService) {
         super();
+    }
+
+    public publish(): void {
+        this.servicePublish.publish();
     }
 
     public ngOnInit(): void {
         ContactsAddComponent.reinit$.next(true);
     }
-
 }

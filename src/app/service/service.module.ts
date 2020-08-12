@@ -26,6 +26,7 @@ import {ServicePublishStepTwoGuardService} from '@app/service/guards/service-pub
 import {PricesApiService} from '@app/service/services/prices-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
 import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
 import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
@@ -74,7 +75,7 @@ import {ServicePage} from './service.page';
         ServiceTagsApiService,
         ServiceLocationApiService,
         ServicePhotoApiService,
-        ServicePublishService,
+        ServicePublishDataHolderService,
         ServicePublishStepOneFormService,
         ServicePublishStepTwoFormService,
         ServicePublishStepTwoGuardService,
@@ -86,7 +87,8 @@ import {ServicePage} from './service.page';
         ServicePublishStepSevenDepartureFormService,
         ServicePublishStepSevenTimetableFormService,
         ServiceScheduleApiService,
-        ServiceStepsNavigationService
+        ServiceStepsNavigationService,
+        ServicePublishService
     ]
 })
 export class ServicePageModule {}
