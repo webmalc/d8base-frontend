@@ -14,9 +14,11 @@ export class ServicePublishStepTwoFormService {
     public createForm(data?: StepTwoDataInterface): void {
         this.form = this.formBuilder.group({
                 [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
-                [ServicePublishStepTwoFormFields.Description]: [data?.description],
-                [ServicePublishStepTwoFormFields.DurationHours]: [data?.duration_hours, Validators.required],
-                [ServicePublishStepTwoFormFields.DurationMinutes]: [data?.duration_minutes, Validators.required],
+                [ServicePublishStepTwoFormFields.Description]: [data?.description, Validators.minLength(20)],
+                [ServicePublishStepTwoFormFields.DurationFirst]: [data?.duration_first],
+                [ServicePublishStepTwoFormFields.DurationSecond]: [data?.duration_second],
+                [ServicePublishStepTwoFormFields.DurationFirstName]: [data?.duration_first_name],
+                [ServicePublishStepTwoFormFields.DurationSecondName]: [data?.duration_second_name],
                 [ServicePublishStepTwoFormFields.IsPriceFixed]: [data?.is_price_fixed ?? true],
                 [ServicePublishStepTwoFormFields.FixedPrice]: [data?.price],
                 [ServicePublishStepTwoFormFields.StartPrice]: [data?.start_price],
@@ -31,7 +33,13 @@ export class ServicePublishStepTwoFormService {
     }
 
     public isSubmitDisabled(): boolean {
-        return this.form.invalid;
+        return this.form.invalid || (
+            !this.form.get(ServicePublishStepTwoFormFields.DurationFirst).value &&
+            !this.form.get(ServicePublishStepTwoFormFields.DurationSecond).value
+        ) || (
+            !this.form.get(ServicePublishStepTwoFormFields.DurationFirstName) &&
+            !this.form.get(ServicePublishStepTwoFormFields.DurationSecondName)
+        );
     }
 
     private currencyValidator(group: FormGroup): any {

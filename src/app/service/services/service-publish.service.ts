@@ -4,6 +4,8 @@ import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
+import {MasterLocation} from '@app/master/models/master-location';
+import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
 import {StepOneDataInterface} from '@app/service/interfaces/step-one-data-interface';
@@ -16,14 +18,12 @@ import {Service} from '@app/service/models/service';
 import {ServiceLocation} from '@app/service/models/service-location';
 import {ServicePhoto} from '@app/service/models/service-photo';
 import {ServiceSchedule} from '@app/service/models/service-schedule';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {plainToClass, plainToClassFromExist} from 'class-transformer';
-import {MasterLocation} from '@app/master/models/master-location';
-import {ServicesApiService} from '@app/service/services/services-api.service';
-import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
-import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
-import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
+import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
+import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
+import {ServicesApiService} from '@app/service/services/services-api.service';
+import {plainToClass, plainToClassFromExist} from 'class-transformer';
 import {forkJoin, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
@@ -65,6 +65,8 @@ export class ServicePublishService {
         }).pipe(
             switchMap(
                 ({userRet, masterRet}) => {
+                    service.professional = masterRet.id;
+
                     return this.serviceApi.create(service).pipe(
                         switchMap(serviceRet => {
                             photos.forEach(photo => photo.service = serviceRet.id);
@@ -141,6 +143,7 @@ export class ServicePublishService {
         const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(1);
         service = plainToClassFromExist(service, stepData, {excludeExtraneousValues: true});
         service.price = this.generateServicePrice(stepData);
+        service.duration = this.getDuration(stepData);
     }
 
     private prepareThirdStep(): Promise<ServicePhoto[]> {
@@ -211,5 +214,23 @@ export class ServicePublishService {
 
     private getNewPhoto(photo: string): ServicePhoto {
         return plainToClass(ServicePhoto, {photo}, {excludeExtraneousValues: true});
+    }
+
+    private getDuration(data: StepTwoDataInterface): number {
+        return this.conventDuration(data.duration_first_name, data.duration_first) +
+            this.conventDuration(data.duration_second_name, data.duration_second);
+    }
+
+    private conventDuration(name: string, val: number): number {
+        switch (name) {
+            case 'days':
+                return val * 1440;
+            case 'hours':
+                return val * 60;
+            case 'minutes':
+                return val;
+            default:
+                return 0;
+        }
     }
 }

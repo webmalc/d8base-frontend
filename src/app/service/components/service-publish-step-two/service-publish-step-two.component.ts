@@ -16,13 +16,16 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ServicePublishStepTwoComponent extends Reinitable implements OnInit {
 
-    public durationHours: number;
-    public durationMinutes: number;
+    public firstDurationList: string[] = ['days', 'hours', 'minutes'];
+    public secondDurationList: string[] = ['days', 'hours', 'minutes'];
+    public durationFirstValue: number;
+    public durationSecondValue: number;
     public serviceTypeList = ['online', 'professional', 'client'];
     public readonly formFields = ServicePublishStepTwoFormFields;
     public currencyList$: BehaviorSubject<{ value: string, display_name: string }[]> =
         new BehaviorSubject<{value: string; display_name: string}[]>([]);
     private readonly STEP = 1;
+    private defaultDuration = ['days', 'hours', 'minutes'];
 
     constructor(
         private servicePublishDataHolder: ServicePublishDataHolderService,
@@ -32,6 +35,18 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
         public trans: TranslationService
     ) {
         super();
+    }
+
+    public recomputeFirstDurationLists(val: any): void {
+        const list = [...this.defaultDuration];
+        list.splice(list.indexOf(val), 1);
+        this.firstDurationList = list;
+    }
+
+    public recomputeSecondDurationLists(val: string): void {
+        const list = [...this.defaultDuration];
+        list.splice(list.indexOf(val), 1);
+        this.secondDurationList = list;
     }
 
     public ngOnInit(): void {
@@ -49,10 +64,10 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
     }
 
     public durationHoursChange(): void {
-        this.durationHours = parseInt(this.formService.form.get(this.formFields.DurationHours).value, 10);
+        this.durationFirstValue = parseInt(this.formService.form.get(this.formFields.DurationFirst).value, 10);
     }
 
     public durationMinutesChange(): void {
-        this.durationMinutes = parseInt(this.formService.form.get(this.formFields.DurationMinutes).value, 10);
+        this.durationSecondValue = parseInt(this.formService.form.get(this.formFields.DurationSecond).value, 10);
     }
 }

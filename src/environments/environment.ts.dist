@@ -31,6 +31,7 @@ export const environment = {
         subregions: '/en/api/location/subregions/',
         send_verify_registration: '/en/api/accounts/resend-verify-registration/',
         subcategory: '/en/api/professionals/subcategories/',
+        category: '/en/api/professionals/categories/',
         verify_registration: '/en/api/accounts/verify-registration/',
         professional_contact: '/en/api/accounts/professional-contacts/',
         professional_tags: '/en/api/accounts/professional-tags/',
@@ -44,7 +45,8 @@ export const environment = {
         service_location: '/en/api/accounts/service-locations/',
         service_photo: '/en/api/accounts/service-photos/',
         service_schedule: '/en/api/accounts/service-schedule/',
-        is_user_registered: '/ru/api/accounts/is-user-registered',
+        is_user_registered: '/ru/api/accounts/is-user-registered/',
+        register_email: '/en/api/accounts/register-email/',
         url: 'http://localhost:8000'
     },
     client_id: '',

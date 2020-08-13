@@ -52,34 +52,51 @@
                             <ion-row>
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        {{"service-publish.step-two.hours"|translate}}
+                                        <ion-select (ionChange)="recomputeSecondDurationLists($event.detail.value)"
+                                                [formControlName]="formFields.DurationFirstName" interface="popover" class="max-width100 no-padding-left">
+                                            <ion-select-option *ngFor="let val of firstDurationList"
+                                                               value="{{val}}">{{"service-publish.step-two."+val|translate}}
+                                            </ion-select-option>
+                                        </ion-select>
                                     </ion-item>
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
+
                                         <ion-input appNumbersOnly name="hours" (ionChange)="durationHoursChange()"
-                                                   [formControlName]="formFields.DurationHours"></ion-input>
+                                                   [formControlName]="formFields.DurationFirst"></ion-input>
                                     </ion-item>
                                 </ion-col>
                             </ion-row>
                             <ion-row>
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        {{"service-publish.step-two.minutes"|translate}}
+                                        <ion-select (ionChange)="recomputeFirstDurationLists($event.detail.value)"
+                                                    [formControlName]="formFields.DurationSecondName" interface="popover" class="max-width100 no-padding-left">
+                                            <ion-select-option *ngFor="let val of secondDurationList"
+                                                               value="{{val}}">{{"service-publish.step-two."+val|translate}}
+                                            </ion-select-option>
+                                        </ion-select>
                                     </ion-item>
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
                                         <ion-input appNumbersOnly name="minutes" (ionChange)="durationMinutesChange()"
-                                                   [formControlName]="formFields.DurationMinutes"></ion-input>
+                                                   [formControlName]="formFields.DurationSecond"></ion-input>
                                     </ion-item>
                                 </ion-col>
                             </ion-row>
-                            <ion-row *ngIf="durationMinutes || durationHours">
+                            <ion-row *ngIf="durationSecondValue || durationFirstValue">
                                 <ion-item class="ion-item-no-border fs16 ion-item-no-side-padding">
                                     {{"service-publish.step-two.duration"|translate}}:
-                                    <div *ngIf="durationHours">{{ this.durationHours}} {{"service-publish.step-two.hours-desc"|translate}}</div>
-                                    <div *ngIf="durationMinutes">{{this.durationMinutes}} {{"service-publish.step-two.minutes-desc"|translate}}</div>
+                                    <div *ngIf="durationFirstValue && formService.form.get(formFields.DurationFirst).value">
+                                        {{ this.durationFirstValue}}
+                                        {{"service-publish.step-two."+formService.form.get(formFields.DurationFirstName).value+"-desc"|translate}}
+                                    </div>
+                                    <div *ngIf="durationSecondValue">
+                                        {{this.durationSecondValue}}
+                                        {{"service-publish.step-two."+formService.form.get(formFields.DurationSecondName).value+"-desc"|translate}}
+                                    </div>
                                 </ion-item>
                             </ion-row>
                         </ion-col>

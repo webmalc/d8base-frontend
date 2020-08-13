@@ -1,8 +1,10 @@
 export interface StepTwoDataInterface {
     name: string;
     description: string;
-    duration_hours: number;
-    duration_minutes: number;
+    duration_first_name: string;
+    duration_second_name: string;
+    duration_first: number;
+    duration_second: number;
     is_price_fixed: boolean;
     price: number;
     price_currency: {value: string; display_name: string};
