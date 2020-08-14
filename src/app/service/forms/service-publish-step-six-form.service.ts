@@ -8,12 +8,15 @@ export class ServicePublishStepSixFormService {
 
     public form: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) { }
+    constructor(private formBuilder: FormBuilder) {
+    }
 
     public createForm(data?: StepSixDataInterface): void {
         this.form = this.formBuilder.group({
             [ServicePublishStepSixFormFields.Description]: [data?.description],
-            [ServicePublishStepSixFormFields.Specialization]: [data?.name, Validators.required],
+            [ServicePublishStepSixFormFields.Specialization]: [data?.name,
+                [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
+            ],
             [ServicePublishStepSixFormFields.Level]: [data?.level],
         });
     }

@@ -127,8 +127,20 @@
                             <ion-label color="medium" position="floating">
                                 {{"service-publish.step-seven.postal-placeholder"|translate}}
                             </ion-label>
-                            <ion-input type="text" name="postal" appNumbersOnly
-                                       [formControlName]="formFields.Postal"></ion-input>
+
+                            <ionic-selectable
+                                    itemValueField="id"
+                                    itemTextField="code"
+                                    [canSearch]="true"
+                                    formControlName="{{formFields.Postal}}"
+                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                    (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())">
+                            </ionic-selectable>
+
+<!--                            <ion-input type="text" name="postal" appNumbersOnly-->
+<!--                                       [formControlName]="formFields.Postal"></ion-input>-->
                         </ion-item>
                         <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-vertical">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
