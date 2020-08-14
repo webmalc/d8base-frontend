@@ -37,7 +37,8 @@ export class ServicePublishStepSevenComponent implements OnInit {
             this.formService.createForm(this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP));
         } else {
             this.formService.createForm();
-            this.formService.setCityDisabled(true);
+            this.formService.setControlDisabled(true, this.formFields.City);
+            this.formService.setControlDisabled(true, this.formFields.Postal);
         }
     }
 
@@ -47,7 +48,11 @@ export class ServicePublishStepSevenComponent implements OnInit {
     }
 
     public onCountryChange(): void {
-        this.formService.setCityDisabled(false);
+        this.formService.setControlDisabled(false, this.formFields.City);
+    }
+
+    public onCityChange(): void {
+        this.formService.setControlDisabled(false, this.formFields.Postal);
     }
 
     public getCountryValue(): Country {

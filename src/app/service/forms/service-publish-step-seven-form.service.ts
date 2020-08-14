@@ -34,8 +34,8 @@ export class ServicePublishStepSevenFormService {
         );
     }
 
-    public setCityDisabled(val: boolean): void {
-        const control = this.form.controls[ServicePublishStepSevenFormFields.City] as FormControl;
+    public setControlDisabled(val: boolean, controlName: string): void {
+        const control = this.form.controls[controlName] as FormControl;
         val ? control.disable() : control.enable();
     }
 }

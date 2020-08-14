@@ -1,12 +1,12 @@
 import {TestBed} from '@angular/core/testing';
 
-import {CurrencyListService} from './currency-list.service';
+import {CurrencyListApiService} from './currency-list-api.service';
 
 describe('CurrencyListService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CurrencyListService = TestBed.get(CurrencyListService);
+    const service: CurrencyListApiService = TestBed.get(CurrencyListApiService);
     expect(service).toBeTruthy();
   });
 });

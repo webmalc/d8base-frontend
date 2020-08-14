@@ -13,6 +13,7 @@ export class DepartureComponent implements OnInit {
 
     public static readonly departureDataKey = 'departure';
     public readonly formFields = ServicePublishStepSevenDepartureFormFields;
+    public units: string[] = ['km', 'ml'];
     private readonly STEP = 6;
 
     constructor(

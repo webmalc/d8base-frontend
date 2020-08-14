@@ -99,7 +99,8 @@
                                     closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
                                     searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
                                     searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                                    (onSearch)="citySelectable.onCitySearch($event, getCountryValue())">
+                                    (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
+                                    (onChange)="onCityChange()">
                             </ionic-selectable>
                         </ion-item>
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
@@ -139,18 +140,16 @@
                                     (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())">
                             </ionic-selectable>
 
-<!--                            <ion-input type="text" name="postal" appNumbersOnly-->
-<!--                                       [formControlName]="formFields.Postal"></ion-input>-->
                         </ion-item>
                         <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-vertical">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                 <b>
                                     {{"service-publish.step-seven.location-radius"|translate}}
-                                    <b *ngIf="!getDepartureData()?.not_within_the_city">
-                                        {{"service-publish.step-seven.location-radius-within"|translate}}
-                                    </b>
-                                    <b *ngIf="getDepartureData()?.not_within_the_city">
-                                        {{"service-publish.step-seven.location-radius-radius"|translate}} {{getDepartureData()?.max_distance}}
+<!--                                    <b *ngIf="!getDepartureData()?.not_within_the_city">-->
+<!--                                        {{"service-publish.step-seven.location-radius-within"|translate}}-->
+<!--                                    </b>-->
+                                    <b>
+                                        {{"service-publish.step-seven.location-radius-radius"|translate}} {{getDepartureData()?.max_distance}} {{"units."+getDepartureData()?.units|translate}}
                                     </b>
                                 </b>
                             </ion-item>

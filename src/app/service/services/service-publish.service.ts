@@ -18,6 +18,7 @@ import {Service} from '@app/service/models/service';
 import {ServiceLocation} from '@app/service/models/service-location';
 import {ServicePhoto} from '@app/service/models/service-photo';
 import {ServiceSchedule} from '@app/service/models/service-schedule';
+import {PricesApiService} from '@app/service/services/prices-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
 import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
@@ -38,14 +39,22 @@ export class ServicePublishService {
         private servicePhotosApi: ServicePhotoApiService,
         private serviceScheduleApi: ServiceScheduleApiService,
         private serviceLocationApi: ServiceLocationApiService,
-        private masterLocationApi: MasterLocationApiService
+        private masterLocationApi: MasterLocationApiService,
+        private servicePriceApi: PricesApiService
     ) {
     }
 
     public publish(): void {
         this.prepare().then(
             data => this.processData(
-                data.user, data.master, data.service, data.servicePhotos, data.serviceSchedule, data.serviceLocation, data.masterLocation
+                data.user,
+                data.master,
+                data.service,
+                data.servicePhotos,
+                data.serviceSchedule,
+                data.serviceLocation,
+                data.masterLocation,
+                data.servicePrice
             ).subscribe()
         );
     }
@@ -57,7 +66,8 @@ export class ServicePublishService {
         photos: ServicePhoto[],
         schedule: ServiceSchedule[],
         serviceLocation: ServiceLocation,
-        masterLocation: MasterLocation
+        masterLocation: MasterLocation,
+        price: Price
     ): Observable<any> {
         return forkJoin({
             userRet: this.userManager.updateUser(user),
@@ -73,13 +83,20 @@ export class ServicePublishService {
                             schedule.forEach(v => v.service = serviceRet.id);
                             serviceLocation.service = serviceRet.id;
                             masterLocation.professional = masterRet.id;
+                            price.service = serviceRet.id;
 
-                            return forkJoin([
-                                this.servicePhotosApi.createList(photos),
-                                this.serviceScheduleApi.createList(schedule),
-                                this.serviceLocationApi.create(serviceLocation),
-                                this.masterLocationApi.create(masterLocation)
-                            ]);
+                            return forkJoin({
+                                photosRet: this.servicePhotosApi.createList(photos),
+                                scheduleRet: this.serviceScheduleApi.createList(schedule),
+                                masterLocationRet: this.masterLocationApi.create(masterLocation as MasterLocation),
+                                priceRet: this.servicePriceApi.create(price)
+                            }).pipe(
+                                switchMap(({photosRet, scheduleRet, masterLocationRet}) => {
+                                    serviceLocation.location = masterLocationRet.id;
+
+                                    return this.serviceLocationApi.create(serviceLocation);
+                                })
+                            );
                         })
                     );
                 }
@@ -94,7 +111,8 @@ export class ServicePublishService {
         servicePhotos: ServicePhoto[],
         serviceSchedule: ServiceSchedule[],
         serviceLocation: ServiceLocation,
-        masterLocation: MasterLocation
+        masterLocation: MasterLocation,
+        servicePrice: Price
     }> {
         const master = new Master();
         const user = new User();
@@ -103,6 +121,7 @@ export class ServicePublishService {
         let serviceSchedule: ServiceSchedule[];
         const serviceLocation = new ServiceLocation();
         const masterLocation: MasterLocation = new MasterLocation();
+        const price: Price = new Price();
 
         this.prepareFirstStepData(master);
         this.prepareSecondStep(service);
@@ -113,15 +132,8 @@ export class ServicePublishService {
         this.generateServiceLocation(serviceLocation);
         this.prepareSeventhStep(service);
         this.generateMasterLocation(masterLocation);
-        service.price = HelperService.clear(service.price);
-
-        console.log(HelperService.clear(master));
-        console.log(HelperService.clear(user));
-        console.log(HelperService.clear(service));
-        console.log(HelperService.clearArray(servicePhotos));
-        console.log(HelperService.clearArray(serviceSchedule));
-        console.log(HelperService.clear(serviceLocation));
-        console.log(HelperService.clear(masterLocation));
+        this.generateServicePrice(price);
+        // service.price = HelperService.clear(service.price);
 
         return {
             master: HelperService.clear(master),
@@ -130,7 +142,8 @@ export class ServicePublishService {
             servicePhotos: HelperService.clearArray(servicePhotos),
             serviceSchedule: HelperService.clearArray(serviceSchedule),
             serviceLocation: HelperService.clear(serviceLocation),
-            masterLocation: HelperService.clear(masterLocation)
+            masterLocation: HelperService.clear(masterLocation),
+            servicePrice: HelperService.clear(price)
         };
     }
 
@@ -142,7 +155,7 @@ export class ServicePublishService {
     private prepareSecondStep(service: Service): void {
         const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(1);
         service = plainToClassFromExist(service, stepData, {excludeExtraneousValues: true});
-        service.price = this.generateServicePrice(stepData);
+        // service.price = this.generateServicePrice(stepData);
         service.duration = this.getDuration(stepData);
     }
 
@@ -185,7 +198,8 @@ export class ServicePublishService {
         location.country = stepData.country.id;
         location.city = stepData.city.id;
         location.address = stepData.address;
-        location.postal_code = stepData.postal_code;
+        location.postal_code = stepData.postal_code.id;
+        location.units = parseInt(stepData.departure.units, 10);
     }
 
     private generateServiceLocation(location: ServiceLocation): void {
@@ -199,13 +213,12 @@ export class ServicePublishService {
         );
     }
 
-    private generateServicePrice(data: StepTwoDataInterface): Price {
-        const price: Price = plainToClass(Price, data, {excludeExtraneousValues: true});
-        price.end_price_currency = data.end_price_currency?.value;
-        price.start_price_currency = data.start_price_currency?.value;
-        price.price_currency = data.price_currency?.value;
-
-        return price;
+    private generateServicePrice(price: Price): void {
+        const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(1);
+        price = plainToClass(Price, stepData, {excludeExtraneousValues: true});
+        price.end_price_currency = stepData.end_price_currency?.value;
+        price.start_price_currency = stepData.start_price_currency?.value;
+        price.price_currency = stepData.price_currency?.value;
     }
 
     private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {

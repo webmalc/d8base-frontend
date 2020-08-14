@@ -47,6 +47,7 @@ export const environment = {
         service_schedule: '/en/api/accounts/service-schedule/',
         is_user_registered: '/ru/api/accounts/is-user-registered/',
         register_email: '/en/api/accounts/register-email/',
+        postal_codes: '/en/api/location/postal-codes',
         url: 'http://localhost:8000'
     },
     client_id: '',

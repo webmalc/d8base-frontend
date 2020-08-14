@@ -4,6 +4,10 @@
     "search-text": "Поиск",
     "search-fail-text": "Ничего не найдено"
   },
+  "units": {
+    "0": "КМ",
+    "1": "МЛ"
+  },
   "template": {
     "sign-in": "Вход",
     "sign-up": "Регистрация",
