@@ -43,6 +43,7 @@ export const environment = {
         service_tag: '/en/api/accounts/service-tags/',
         service_location: '/en/api/accounts/service-locations/',
         service_photo: '/en/api/accounts/service-photos/',
+        register_email: '/en/api/accounts/register-email/',
         url: 'http://localhost:8000'
     },
     client_id: '',
