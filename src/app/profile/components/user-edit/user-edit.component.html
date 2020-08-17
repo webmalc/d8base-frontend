@@ -1,6 +1,6 @@
 <ion-content>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding ion-margin-top">
             <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
 
                 <ion-item class="ion-item-no-border ion-item-bordered-first">
@@ -120,4 +120,5 @@
             </form>
         </ion-col>
     </ion-row>
+    <app-footer></app-footer>
 </ion-content>

@@ -3,6 +3,7 @@ import {RegistrationResponseInterface} from '@app/auth/interfaces/registration-r
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {AuthenticationService} from '@app/core/services/authentication.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
@@ -20,18 +21,23 @@ export class RegistrationService {
         protected client: ApiClientService,
         private locationService: LocationService,
         private locationApiService: UserLocationApiService,
-        private tokenManager: TokenManagerService
+        private tokenManager: TokenManagerService,
+        private authenticationService: AuthenticationService
     ) {
     }
-
-    public register(user: User, location: UserLocation): Observable<User> {
+    // TODO: check email verification request
+    public register(user: User, location?: UserLocation): Observable<User> {
         // @ts-ignore
         return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
             switchMap(
                 (newUser: RegistrationResponseInterface) => {
                     return from(this.tokenManager.setTokens(newUser.token)).pipe(
                         switchMap(() => {
+                            this.authenticationService.isAuthenticated$.next(true);
                             this.sendVerifyLink().subscribe();
+                            if (!location) {
+                                return of(newUser);
+                            }
 
                             return from(this.locationService.getMergedLocationData()).pipe(
                                 switchMap(

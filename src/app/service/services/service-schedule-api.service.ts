@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {Subcategory} from '@app/master/models/subcategory';
+import {ServiceSchedule} from '@app/service/models/service-schedule';
 import {plainToClass} from 'class-transformer';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
-export class SubcategoriesApiService extends AbstractApiService<Subcategory> implements ApiServiceInterface<Subcategory> {
+export class ServiceScheduleApiService extends AbstractApiService<ServiceSchedule> {
 
-    private readonly url = environment.backend.subcategory;
+    private readonly url = environment.backend.service_schedule;
 
     constructor(private client: ApiClientService) {
         super(client);
@@ -20,7 +19,7 @@ export class SubcategoriesApiService extends AbstractApiService<Subcategory> imp
     }
 
     // @ts-ignore
-    protected transform(data: Subcategory | Subcategory[]): Subcategory | Subcategory[] {
-        return plainToClass(Subcategory, data);
+    protected transform(data: ServiceSchedule  | ServiceSchedule[]): ServiceSchedule | ServiceSchedule[] {
+        return plainToClass(ServiceSchedule, data);
     }
 }

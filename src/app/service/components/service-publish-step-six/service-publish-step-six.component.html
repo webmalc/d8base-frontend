@@ -1,0 +1,89 @@
+<ion-content class="ion-padding-top">
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding">
+            <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+                <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white">
+                    <ion-col class="ion-no-padding ion-padding-vertical">
+                        <ion-row class="ion-justify-content-start ion-align-items-center">
+                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                <b>
+                                    {{"service-publish.step-six.title"|translate}}
+                                </b>
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+
+                <app-info-row>
+                    {{"service-publish.step-six.first-info-row"|translate}}
+                </app-info-row>
+
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+                            {{"service-publish.step-six.description"|translate}}
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-six.description-placeholder"|translate}}
+                            </ion-label>
+                            <ion-textarea rows="4" type="text" name="description"
+                                          [formControlName]="formFields.Description"></ion-textarea>
+                        </ion-item>
+
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+                            <div class="label-for-required-input">
+                                {{"service-publish.step-six.specialization"|translate}}
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-six.specialization-placeholder"|translate}}
+                            </ion-label>
+                            <ion-input type="text" name="description"
+                                       [formControlName]="formFields.Specialization"></ion-input>
+                        </ion-item>
+
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+                            {{"service-publish.step-six.level" | translate}}
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-six.level" | translate}}
+                            </ion-label>
+                            <ionic-selectable
+                                    [items]="levelList"
+                                    formControlName="{{formFields.Level}}"
+                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                            >
+                            </ionic-selectable>
+                        </ion-item>
+
+
+                        <ion-row class="ion-justify-content-center">
+                            <ion-col size="6">
+                                <ion-button color="light"
+                                            routerDirection="back"
+                                            routerLink="/service/publish/step-four"
+                                            routerLinkActive="active"
+                                            class="ion-margin-top" fill="solid" expand="block">
+                                    {{"service-publish.back-button" | translate}}
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-button color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                            class="ion-margin-top" fill="solid" expand="block">
+                                    {{"service-publish.forward-button" | translate}}
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+            </form>
+        </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
+</ion-content>

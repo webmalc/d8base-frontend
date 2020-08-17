@@ -29,7 +29,6 @@
                             </ion-item>
                         </ion-row>
                     </ion-col>
-
                 </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-no-padding">
@@ -49,53 +48,13 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <!--                /Main-->
+                <!--            /Main-->
 
-                <!--                Contacts-->
-                <ion-item class="ion-item-no-border ion-margin-top ion-item-bordered-first">
-                    <ion-col class="ion-no-padding">
-                        <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border">{{'profile-form.contacts'|translate}}</ion-item>
-                        </ion-row>
-                    </ion-col>
-
-                </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
-                    <ion-col class="ion-no-padding">
-                        <ion-row *ngFor="let contact of userContacts$ | async"
-                                 class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-align-items-center">
-                                <ion-icon class="pr5" name="{{getContactIcon(contact.contact_display)}}"></ion-icon>
-                                {{contact.contact_display}}
-                            </ion-item>
-                            <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end">
-                                <ion-item class="ion-item-no-border" id="item-contact-value">
-                                    {{contact.value}}
-                                </ion-item>
-                                <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
-                                          routerLink="contact-edit/{{contact.id}}"
-                                          routerDirection="forward"
-                                          routerLinkActive="active"
-                                >
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </ion-item>
-                            </ion-item>
-                        </ion-row>
-                        <ion-row *ngIf="canAddNewContact$ | async">
-                            <ion-item routerLink="contact-add/"
-                                      routerDirection="forward"
-                                      routerLinkActive="active"
-                                      class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
-                                      id="add-new-contact">
-                                <ion-icon color="secondary" name="add-circle"></ion-icon>
-                                <ion-label class="ion-padding-start">{{'profile-page.add-new-contact'|translate}}</ion-label>
-                            </ion-item>
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
+                <!--            Contacts-->
+                <app-contacts-add></app-contacts-add>
                 <!--            /Contacts-->
                 <!--            Location-->
-                <ion-item class="ion-item-no-border ion-margin-top ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border">{{'profile-page.your-address'|translate}}</ion-item>
@@ -163,7 +122,7 @@
                 <!--            /Location-->
 
 <!--            About-->
-                <ion-item class="ion-item-no-border ion-margin-top ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border">{{'profile-page.about'|translate}}</ion-item>

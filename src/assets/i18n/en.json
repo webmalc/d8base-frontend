@@ -1,4 +1,9 @@
 {
+  "ion-selectable": {
+    "close-button-text": "Close",
+    "search-text": "Search",
+    "search-fail-text": "No items found"
+  },
   "template": {
     "sign-in": "Sign-in",
     "sign-up": "Sign-up",
@@ -122,5 +127,60 @@
   },
   "list-item": {
     "add-new": "Add new"
+  },
+  "service-publish": {
+    "back-button": "Back",
+    "forward-button": "Continue",
+    "step-one": {
+      "title": "Service publishing",
+      "description": "Publish an advertisement about your services in just 3 minutes and it will be seen by thousands of customers who are looking for your service and you.",
+      "subdesc": "It's free!",
+      "info": "Service information",
+      "category-title": "Choose a category for your service",
+      "category-subtitle": "Service category",
+      "subcategory-title": "Choose a subcategory for your service",
+      "subcategory-subtitle": "Service subcategory"
+    },
+    "step-two": {
+      "title": "Service information",
+      "first-info-row": "Hint: you can easily update and edit all the information at any time!",
+      "service-title": "Service name",
+      "service-placeholder": "Enter service name",
+      "service-description": "Service description",
+      "service-description-placeholder": "Enter service description",
+      "duration": "Service duration",
+      "hours": "hours",
+      "minutes": "minutes",
+      "hours-desc": "hours(s)",
+      "minutes-desc": "minute(s)",
+      "fixed-price": "Fixed service price",
+      "fixed-price-title": "Service price",
+      "start-price": "Service price from",
+      "end-price": "Service price to",
+      "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
+      "location": "Service location"
+    },
+    "step-three": {
+      "title": "Want to add photos of the service? With them your service will be brighter!",
+      "first-info-row": "Do not know which photo to choose - feel free to go to the next step! You can easily add and update photos at any time!",
+      "photos": "Add service photos",
+      "dropzone-label": "Move service photos to this area or upload them",
+      "add-new-service": "Want to add another service?",
+      "second-info-row": "You can always add any number of services later.",
+      "add-new-service-button": "Add another service"
+    },
+    "step-five": {
+      "title": "Enter the information about you that you want your customers to see.",
+      "company-title": "Company name",
+      "company-placeholder": "Company name",
+      "name-title": "First name",
+      "name-placeholder": "Enter your first name",
+      "last-name-title": "Last name",
+      "last-name-placeholder": "Enter your last name",
+      "gender": "Sex",
+      "add-photo": "It's a good idea to add a photo to your profile!",
+      "first-info-row": "By adding your main photo to your profile, you will increase the credibility of your profile and you will have more clients!",
+      "add-photo-title": "Add your main photo"
+    }
   }
 }

@@ -38,7 +38,7 @@ export class LocationTabComponent {
             model.district = data.district?.id ?? undefined;
             model.timezone = data.timezone?.value ?? undefined;
 
-            return HelperService.clean<UserLocation>(model);
+            return HelperService.clear<UserLocation>(model);
         };
     }
 }

@@ -4,27 +4,22 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
-import {MediaIconFactoryService} from '@app/core/services/media-icon-factory.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
-import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
-import {UserContact} from '@app/profile/models/user-contact';
-import {ContactApiService} from '@app/profile/services/contact-api.service';
 import {ProfileService} from '@app/profile/services/profile.service';
-import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
-import {BehaviorSubject, forkJoin} from 'rxjs';
+import {Reinitable} from '@app/shared/abstract/reinitable';
+import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
     selector: 'app-main-info-tab',
     templateUrl: './main-info-tab.component.html',
     styleUrls: ['./main-info-tab.component.scss'],
 })
-export class MainInfoTabComponent implements OnInit {
+export class MainInfoTabComponent extends Reinitable implements OnInit {
 
     public form: FormGroup;
     public formFields = ProfileFormFields;
-    public userContacts$: BehaviorSubject<UserContact[]> = new BehaviorSubject<UserContact[]>([]);
-    public canAddNewContact$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
     public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
     public user: User;
@@ -39,20 +34,15 @@ export class MainInfoTabComponent implements OnInit {
     constructor(
         public profileService: ProfileService,
         private sanitizer: DomSanitizer,
-        public userContactApiService: UserContactApiService,
-        private contactsApi: ContactApiService,
         private userManager: UserManagerService
     ) {
+        super();
     }
 
     public ngOnInit(): void {
         this.profileService.createProfileForm$().subscribe(
             form => this.form = form
         );
-        this.userContactApiService.getCurrentClientContacts().subscribe(
-            contacts => this.userContacts$.next(contacts.results)
-        );
-        this.canAddNewContact();
         this.userManager.getCurrentUser().subscribe(
             user => this.user = user
         );
@@ -63,10 +53,7 @@ export class MainInfoTabComponent implements OnInit {
                 this.additionalLocationsList$.next(locationList as UserLocation[]);
             }
         );
-    }
-
-    public getContactIcon(contactDisplay: string): string {
-        return MediaIconFactoryService.getIcon(contactDisplay);
+        ContactsAddComponent.reinit$.next(true);
     }
 
 // TODO: Is there best way for trim input values ?
@@ -95,19 +82,6 @@ export class MainInfoTabComponent implements OnInit {
         return this.sanitizer.sanitize(
             SecurityContext.RESOURCE_URL,
             this.sanitizer.bypassSecurityTrustResourceUrl(avatar)
-        );
-    }
-
-    private canAddNewContact(): void {
-        forkJoin({
-            contacts: this.contactsApi.get(),
-            userContacts: this.userContactApiService.getCurrentClientContacts()
-        }).subscribe(
-            ({contacts, userContacts}) => {
-                if (UserContactEditComponent.calculateContacts(contacts.results, userContacts.results).length === 0) {
-                    this.canAddNewContact$.next(false);
-                }
-            }
         );
     }
 }

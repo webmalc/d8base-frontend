@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Master} from '@app/core/models/master';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {Reinitable} from '@app/shared/abstract/reinitable';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -9,11 +10,13 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './master.page.html',
     styleUrls: ['./master.page.scss'],
 })
-export class MasterPage implements OnInit {
+export class MasterPage extends Reinitable implements OnInit {
 
     public masterList$: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
 
-    constructor(private masterManager: MasterManagerService, private router: Router) { }
+    constructor(private masterManager: MasterManagerService, private router: Router) {
+        super();
+    }
 
     public ngOnInit(): void {
         this.initMasterList();

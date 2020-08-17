@@ -49,7 +49,7 @@ export class LocationTabComponent implements OnInit {
             model.timezone = data.timezone?.value ?? undefined;
             model.is_default = data.is_default?.value ?? undefined;
 
-            return HelperService.clean<MasterLocation>(model);
+            return HelperService.clear<MasterLocation>(model);
         };
     }
 }

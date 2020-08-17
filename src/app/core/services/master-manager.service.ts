@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {MasterInterface} from '@app/core/interfaces/master.interface';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
@@ -9,7 +10,6 @@ import {plainToClass} from 'class-transformer';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {MasterInterface} from '@app/core/interfaces/master.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -24,13 +24,14 @@ export class MasterManagerService {
     }
 
     public updateIsMaster(): void {
-        this.userManager.getCurrentUser().subscribe(
-            (user: User) => {
-                if (TypeOfUser.Master === user.account_type) {
-                    return this.isMaster$.next(true);
-                }
-                this.isMaster$.next(false);
-            }
+        this.isMaster().subscribe(
+            isMaster => this.isMaster$.next(isMaster)
+        );
+    }
+
+    public isMaster(): Observable<boolean> {
+        return this.userManager.getCurrentUser().pipe(
+            map(user => user.account_type === TypeOfUser.Master)
         );
     }
 
@@ -52,7 +53,7 @@ export class MasterManagerService {
         );
     }
 
-    public saveMaster(master: Master): Observable<Master> {
+    public createMaster(master: Master): Observable<Master> {
         return this.client.post(this.url, master).pipe(
             map(raw => plainToClass(Master, raw))
         );
@@ -70,5 +71,12 @@ export class MasterManagerService {
             .pipe(
                 map((data) => data.results)
             );
+    }
+
+    public getExperienceLevelList(): Observable<{ value: string, display_name: string }[]> {
+        return this.client.options(this.url).pipe(
+            map((data: { actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }) =>
+                data.actions.POST.level.choices)
+        );
     }
 }

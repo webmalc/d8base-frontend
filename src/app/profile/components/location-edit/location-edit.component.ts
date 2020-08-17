@@ -1,5 +1,5 @@
 import {Location} from '@angular/common';
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Region} from '@app/core/models/region';
 import {UserLocation} from '@app/core/models/user-location';
@@ -136,6 +136,6 @@ export class LocationEditComponent implements OnInit {
         model.timezone = data.timezone?.value ?? undefined;
         model.is_default = data.is_default?.value ?? undefined;
 
-        return HelperService.clean<UserLocation>(model);
+        return HelperService.clear<UserLocation>(model);
     }
 }

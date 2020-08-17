@@ -1,0 +1,222 @@
+<ion-content class="ion-padding-top">
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding">
+            <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+                <ion-item
+                        class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                    <ion-col class="ion-no-padding">
+                        <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
+                            <ion-item class="ion-item-no-border fs18">
+                                <b>
+                                    {{"service-publish.step-seven.title" | translate}}
+                                </b>
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+                <app-info-row class="ion-margin-bottom">
+                    {{"service-publish.step-seven.first-info-row"|translate}}
+                </app-info-row>
+                <ion-item
+                        class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                    <ion-col class="ion-no-padding">
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                    <ion-col class="ion-no-padding">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                            <b>
+                                {{"service-publish.step-seven.timetable-title" | translate}}
+                            </b>
+                        </ion-item>
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-no-padding">
+                        <ion-row class="ion-justify-content-between ion-align-items-center">
+                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                timetable data
+                            </ion-item>
+                            <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
+                                      routerLink="timetable"
+                                      routerDirection="forward"
+                                      routerLinkActive="active">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                    <ion-col class="ion-no-padding">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                            <b>
+                                {{"service-publish.step-seven.location-title" | translate}}
+                            </b>
+                        </ion-item>
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical" size="12">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                            <div class="label-for-required-input">
+                                <b>
+                                    {{"service-publish.step-seven.country-title" | translate}}
+                                </b>
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-seven.country-placeholder" | translate}}
+                            </ion-label>
+                            <ionic-selectable
+                                    itemValueField="id"
+                                    itemTextField="name"
+                                    [canSearch]="true"
+                                    formControlName="{{formFields.Country}}"
+                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                    (onSearch)="countrySelectable.onCountrySearch($event)"
+                                    (onChange)="onCountryChange()">
+                            </ionic-selectable>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                            <div class="label-for-required-input">
+                                <b>
+                                    {{"service-publish.step-seven.city-title" | translate}}
+                                </b>
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-seven.city-placeholder" | translate}}
+                            </ion-label>
+                            <ionic-selectable
+                                    itemValueField="id"
+                                    itemTextField="name"
+                                    [canSearch]="true"
+                                    formControlName="{{formFields.City}}"
+                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                    (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
+                                    (onChange)="onCityChange()">
+                            </ionic-selectable>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+                            <b>
+                                {{"service-publish.step-seven.address"|translate}}
+                            </b>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-seven.address-placeholder"|translate}}
+                            </ion-label>
+                            <ion-textarea rows="4" type="text" name="address"
+                                          [formControlName]="formFields.Address"></ion-textarea>
+                        </ion-item>
+                        <ion-item
+                                class="ion-item-no-border text-red ion-item-no-side-padding fs14 ion-item-no-min-height pt10">
+                            {{"service-publish.step-seven.address-required-info"|translate}}
+                        </ion-item>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+                            <b>
+                                {{"service-publish.step-seven.postal"|translate}}
+                            </b>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-seven.postal-placeholder"|translate}}
+                            </ion-label>
+
+                            <ionic-selectable
+                                    itemValueField="id"
+                                    itemTextField="code"
+                                    [canSearch]="true"
+                                    formControlName="{{formFields.Postal}}"
+                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+                                    (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())">
+                            </ionic-selectable>
+
+                        </ion-item>
+                        <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-vertical">
+                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                <b>
+                                    {{"service-publish.step-seven.location-radius"|translate}}
+<!--                                    <b *ngIf="!getDepartureData()?.not_within_the_city">-->
+<!--                                        {{"service-publish.step-seven.location-radius-within"|translate}}-->
+<!--                                    </b>-->
+                                    <b>
+                                        {{"service-publish.step-seven.location-radius-radius"|translate}} {{getDepartureData()?.max_distance}} {{"units."+getDepartureData()?.units|translate}}
+                                    </b>
+                                </b>
+                            </ion-item>
+                            <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
+                                      routerLink="departure"
+                                      routerDirection="forward"
+                                      routerLinkActive="active">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                    <ion-col>
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                            <b>
+                                {{"service-publish.step-seven.payment-title" | translate}}
+                            </b>
+                        </ion-item>
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                    <ion-col class="ion-padding-vertical">
+                        <ion-list>
+                            <ion-list-header class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
+                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                    <div class="label-for-required-input">
+                                        <b>
+                                            {{"service-publish.step-seven.payment-description"|translate}}
+                                        </b>
+                                    </div>
+                                </ion-item>
+                            </ion-list-header>
+                            <ion-item class="ion-item-no-side-padding">
+                                <ion-label>{{"service-publish.step-seven.payment-cash"|translate}}</ion-label>
+                                <ion-checkbox [formControlName]="formFields.PaymentCash"></ion-checkbox>
+                            </ion-item>
+                            <ion-item class="ion-item-no-side-padding">
+                                <ion-label>{{"service-publish.step-seven.payment-online"|translate}}</ion-label>
+                                <ion-checkbox [formControlName]="formFields.PaymentOnline"></ion-checkbox>
+                            </ion-item>
+                        </ion-list>
+                        <ion-item class="ion-item-no-border text-grey ion-margin-bottom
+                            ion-item-no-side-padding fs14 ion-item-no-min-height pt10">
+                            {{"service-publish.step-seven.payment-info"|translate}}
+                        </ion-item>
+                        <ion-row class="ion-justify-content-center">
+                            <ion-col size="6">
+                                <ion-button color="light"
+                                            routerDirection="back"
+                                            routerLink="/service/publish/step-six"
+                                            routerLinkActive="active"
+                                            class="ion-margin-top" fill="solid" expand="block">
+                                    {{"service-publish.back-button" | translate}}
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-button color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                            class="ion-margin-top" fill="solid" expand="block">
+                                    {{"service-publish.forward-button" | translate}}
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+            </form>
+        </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
+</ion-content>
