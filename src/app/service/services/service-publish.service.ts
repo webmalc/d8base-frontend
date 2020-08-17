@@ -55,7 +55,9 @@ export class ServicePublishService {
                 data.serviceLocation,
                 data.masterLocation,
                 data.servicePrice
-            ).subscribe()
+            ).subscribe(
+                () => this.servicePublishDataHolder.reset()
+            )
         );
     }
 
