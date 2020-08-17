@@ -48,6 +48,7 @@ export const environment = {
         is_user_registered: '/ru/api/accounts/is-user-registered/',
         register_email: '/en/api/accounts/register-email/',
         postal_codes: '/en/api/location/postal-codes',
+        rates: '/en/api/rates/',
         url: 'http://localhost:8000'
     },
     client_id: '',

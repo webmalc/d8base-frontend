@@ -130,10 +130,9 @@ export class ServicePublishService {
         this.prepareSixthStep(master);
         serviceSchedule = this.generateServiceSchedule();
         this.generateServiceLocation(serviceLocation);
-        this.prepareSeventhStep(service);
+        this.prepareSeventhStep(price);
         this.generateMasterLocation(masterLocation);
         this.generateServicePrice(price);
-        // service.price = HelperService.clear(service.price);
 
         return {
             master: HelperService.clear(master),
@@ -155,7 +154,6 @@ export class ServicePublishService {
     private prepareSecondStep(service: Service): void {
         const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(1);
         service = plainToClassFromExist(service, stepData, {excludeExtraneousValues: true});
-        // service.price = this.generateServicePrice(stepData);
         service.duration = this.getDuration(stepData);
     }
 
@@ -182,14 +180,14 @@ export class ServicePublishService {
         master.name = stepData.name;
     }
 
-    private prepareSeventhStep(service: Service): void {
-        service.price.payment_methods = [];
+    private prepareSeventhStep(price: Price): void {
+        price.payment_methods = [];
         const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(6);
         if (stepData.payment_cash) {
-            service.price.payment_methods.push('cash');
+            price.payment_methods.push('cash');
         }
         if (stepData.payment_online) {
-            service.price.payment_methods.push('online');
+            price.payment_methods.push('online');
         }
     }
 
@@ -215,10 +213,13 @@ export class ServicePublishService {
 
     private generateServicePrice(price: Price): void {
         const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(1);
-        price = plainToClass(Price, stepData, {excludeExtraneousValues: true});
-        price.end_price_currency = stepData.end_price_currency?.value;
-        price.start_price_currency = stepData.start_price_currency?.value;
-        price.price_currency = stepData.price_currency?.value;
+        price.price = stepData.price;
+        price.start_price = stepData.start_price;
+        price.end_price = stepData.end_price;
+        price.end_price_currency = stepData.end_price_currency?.currency;
+        price.start_price_currency = stepData.start_price_currency?.currency;
+        price.price_currency = stepData.price_currency?.currency;
+        price.is_price_fixed = stepData.is_price_fixed;
     }
 
     private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {

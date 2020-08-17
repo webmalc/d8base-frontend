@@ -1,3 +1,5 @@
+import {Currency} from '@app/core/models/currency';
+
 export interface StepTwoDataInterface {
     name: string;
     description: string;
@@ -7,9 +9,9 @@ export interface StepTwoDataInterface {
     duration_second: number;
     is_price_fixed: boolean;
     price: number;
-    price_currency: {value: string; display_name: string};
-    start_price_currency: {value: string; display_name: string};
-    end_price_currency: {value: string; display_name: string};
+    price_currency: Currency;
+    start_price_currency: Currency;
+    end_price_currency: Currency;
     start_price: number;
     end_price: number;
     service_type: string;
