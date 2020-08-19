@@ -19,10 +19,10 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ServicePublishStepOneComponent extends Reinitable implements OnInit {
 
+    public static readonly STEP = 0;
     public formFields = ServicePublishStepOneFormFields;
     public categoriesList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
     public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
-    private readonly STEP = 0;
     private isReinitialized: boolean = false;
 
     constructor(
@@ -41,8 +41,8 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
             list => this.categoriesList$.next(list.results)
         );
 
-        if (this.servicePublishDataHolderService.isset(this.STEP)) {
-            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(this.STEP);
+        if (this.servicePublishDataHolderService.isset(ServicePublishStepOneComponent.STEP)) {
+            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishStepOneComponent.STEP);
             this.formService.createForm(stepData.category, stepData.subcategory);
             this.isReinitialized = true;
         } else {
@@ -52,8 +52,8 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
     }
 
     public submitForm(): void {
-        this.servicePublishDataHolderService.setStepData(
-            this.STEP,
+        this.servicePublishDataHolderService.setStepData<StepOneDataInterface>(
+            ServicePublishStepOneComponent.STEP,
             {
                 category: this.formService.form.get(this.formFields.Category).value,
                 subcategory: this.formService.form.get(this.formFields.Subcategory).value

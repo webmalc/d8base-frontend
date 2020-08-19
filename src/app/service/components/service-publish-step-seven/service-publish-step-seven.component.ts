@@ -19,8 +19,8 @@ import {SelectablePostalCodeOnSearchService} from '@app/shared/services/selectab
 })
 export class ServicePublishStepSevenComponent implements OnInit {
 
+    public static readonly STEP = 6;
     public formFields = ServicePublishStepSevenFormFields;
-    public readonly STEP = 6;
 
     constructor(
         public formService: ServicePublishStepSevenFormService,
@@ -33,8 +33,10 @@ export class ServicePublishStepSevenComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        if (this.servicePublishDataHolderService.isset(this.STEP)) {
-            this.formService.createForm(this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP));
+        if (this.servicePublishDataHolderService.isset(ServicePublishStepSevenComponent.STEP)) {
+            this.formService.createForm(
+                this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP)
+            );
         } else {
             this.formService.createForm();
             this.formService.setControlDisabled(true, this.formFields.City);
@@ -43,7 +45,7 @@ export class ServicePublishStepSevenComponent implements OnInit {
     }
 
     public submitForm(): void {
-        this.servicePublishDataHolderService.assignStepData(this.STEP, this.formService.form.getRawValue());
+        this.servicePublishDataHolderService.assignStepData(ServicePublishStepSevenComponent.STEP, this.formService.form.getRawValue());
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 
@@ -64,6 +66,6 @@ export class ServicePublishStepSevenComponent implements OnInit {
     }
 
     public getDepartureData(): StepSevenDepartureDataInterface {
-        return this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(this.STEP)?.departure;
+        return this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP)?.departure;
     }
 }

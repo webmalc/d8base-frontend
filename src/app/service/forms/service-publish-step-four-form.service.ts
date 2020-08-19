@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
-import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 
 @Injectable()
 export class ServicePublishStepFourFormService {
@@ -11,17 +10,17 @@ export class ServicePublishStepFourFormService {
     constructor(private formBuilder: FormBuilder) {
     }
 
-    public createForm(data?: StepFourDataInterface): void {
+    public createForm(): void {
         this.form = this.formBuilder.group({
-                [ServicePublishStepFourFormFields.Email]: [data?.email ?? '', Validators.compose([
+                [ServicePublishStepFourFormFields.Email]: [null, Validators.compose([
                     Validators.required,
                     Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+' +
                         '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
                         '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
                 ])],
-                [ServicePublishStepFourFormFields.Password]: [data?.password ?? '',
+                [ServicePublishStepFourFormFields.Password]: [null,
                     Validators.compose([Validators.required, Validators.minLength(6)])],
-                [ServicePublishStepFourFormFields.Confirm]: [data?.confirm ?? '',
+                [ServicePublishStepFourFormFields.Confirm]: [null,
                     Validators.compose([Validators.required, Validators.minLength(6)])],
             },
             {validators: this.checkPassword});

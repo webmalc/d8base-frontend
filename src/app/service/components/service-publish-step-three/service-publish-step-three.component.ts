@@ -10,8 +10,8 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 })
 export class ServicePublishStepThreeComponent implements OnInit {
 
+    public static readonly STEP = 2;
     public files: File[] = [];
-    private readonly STEP = 2;
 
     constructor(
         private servicePublishDataHolderService: ServicePublishDataHolderService,
@@ -20,13 +20,16 @@ export class ServicePublishStepThreeComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        if (this.servicePublishDataHolderService.isset(this.STEP)) {
-            this.files = this.servicePublishDataHolderService.getStepData<StepThreeDataInterface>(this.STEP).photos;
+        if (this.servicePublishDataHolderService.isset(ServicePublishStepThreeComponent.STEP)) {
+            this.files =
+                this.servicePublishDataHolderService.getStepData<StepThreeDataInterface>(ServicePublishStepThreeComponent.STEP).photos;
         }
     }
 
     public submit(): void {
-        this.servicePublishDataHolderService.setStepData(this.STEP, {photos: this.files});
+        this.servicePublishDataHolderService.setStepData<StepThreeDataInterface>(
+            ServicePublishStepThreeComponent.STEP, {photos: this.files}
+            );
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 

@@ -1,0 +1,8 @@
+<ion-list *ngIf="(masterList$|async).length">
+  <ion-list-header>
+    {{"service-publish.step-final.master-picker.popover-title"|translate}}
+  </ion-list-header>
+  <ion-item class="cursor-pointer" (click)="onMasterClick(master)" *ngFor="let master of (masterList$|async)">
+    <ion-label>{{master.name}}</ion-label>
+  </ion-item>
+</ion-list>

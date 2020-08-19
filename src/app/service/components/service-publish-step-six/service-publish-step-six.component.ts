@@ -13,9 +13,9 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 })
 export class ServicePublishStepSixComponent implements OnInit {
 
+    public static readonly STEP = 5;
     public formFields = ServicePublishStepSixFormFields;
     public levelList = ['junior', 'middle', 'senior'];
-    private readonly STEP = 5;
 
     constructor(
         public formService: ServicePublishStepSixFormService,
@@ -25,15 +25,19 @@ export class ServicePublishStepSixComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        if (this.servicePublishDataHolder.isset(this.STEP)) {
-            this.formService.createForm(this.servicePublishDataHolder.getStepData<StepSixDataInterface>(this.STEP));
+        if (this.servicePublishDataHolder.isset(ServicePublishStepSixComponent.STEP)) {
+            this.formService.createForm(
+                this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishStepSixComponent.STEP)
+            );
         } else {
             this.formService.createForm();
         }
     }
 
     public submitForm(): void {
-        this.servicePublishDataHolder.setStepData(this.STEP, this.formService.form.getRawValue());
+        this.servicePublishDataHolder.setStepData<StepSixDataInterface>(
+            ServicePublishStepSixComponent.STEP, this.formService.form.getRawValue()
+        );
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 }

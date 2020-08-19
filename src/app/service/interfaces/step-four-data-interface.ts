@@ -1,5 +1,6 @@
+import {User} from '@app/core/models/user';
+
 export interface StepFourDataInterface {
-    email: string;
-    password: string;
-    confirm: string;
+    isNewMaster: boolean;
+    user?: User;
 }

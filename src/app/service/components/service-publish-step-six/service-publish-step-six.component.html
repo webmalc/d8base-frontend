@@ -21,6 +21,28 @@
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-padding-vertical" size="12">
 
+
+                        <ion-row>
+                            <ion-item class="width100 ion-item-no-side-padding ion-item-no-border ion-padding-vertical">
+                                <ion-toggle name="is-company" [formControlName]="formFields.IsCompany"></ion-toggle>
+                            </ion-item>
+                        </ion-row>
+
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding"
+                                  *ngIf="formService.form.get(formFields.IsCompany).value">
+                            <div class="label-for-required-input">
+                                {{"service-publish.step-six.company-title"|translate}}
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered ion-margin-bottom"
+                                  *ngIf="formService.form.get(formFields.IsCompany).value">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-six.company-placeholder"|translate}}
+                            </ion-label>
+                            <ion-input type="text" name="company-name"
+                                       [formControlName]="formFields.CompanyName"></ion-input>
+                        </ion-item>
+
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
                             {{"service-publish.step-six.description"|translate}}
                         </ion-item>

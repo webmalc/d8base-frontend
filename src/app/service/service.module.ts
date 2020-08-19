@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistrationPageModule} from '@app/auth/pages/registration/registration.module';
 import {DepartureComponent} from '@app/service/components/departure/departure.component';
+import {MasterPickerPopoverComponent} from '@app/service/components/master-peeker/master-picker-popover.component';
 import {ServicePublishFinalStepComponent} from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import {ServicePublishStepFiveComponent} from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
@@ -27,6 +28,7 @@ import {PricesApiService} from '@app/service/services/prices-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
 import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
+import {ServicePublishDataPreparerService} from '@app/service/services/service-publish-data-preparer.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
 import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
@@ -67,7 +69,8 @@ import {ServicePage} from './service.page';
         TimetableComponent,
         DepartureComponent,
         TimetableAddTimePopoverComponent,
-        ServicePublishFinalStepComponent
+        ServicePublishFinalStepComponent,
+        MasterPickerPopoverComponent
     ],
     providers: [
         PricesApiService,
@@ -88,7 +91,8 @@ import {ServicePage} from './service.page';
         ServicePublishStepSevenTimetableFormService,
         ServiceScheduleApiService,
         ServiceStepsNavigationService,
-        ServicePublishService
+        ServicePublishService,
+        ServicePublishDataPreparerService
     ]
 })
 export class ServicePageModule {}

@@ -7,7 +7,7 @@ export interface UserInterface {
     email: string;
     phone: string;
     avatar?: string;
-    gender: string;
+    gender: boolean;
     birthday?: string;
     main_language: string;
     languages?: string[];

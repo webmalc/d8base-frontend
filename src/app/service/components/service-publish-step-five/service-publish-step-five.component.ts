@@ -12,8 +12,8 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 })
 export class ServicePublishStepFiveComponent implements OnInit {
 
+    public static readonly STEP = 4;
     public readonly formFields = ServicePublishStepFiveFormFields;
-    private readonly STEP = 4;
 
     constructor(
         public formService: ServicePublishStepFiveFormService,
@@ -22,15 +22,19 @@ export class ServicePublishStepFiveComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        if (this.servicePublishDataHolder.isset(this.STEP)) {
-            this.formService.createForm(this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(this.STEP));
+        if (this.servicePublishDataHolder.isset(ServicePublishStepFiveComponent.STEP)) {
+            this.formService.createForm(
+                this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishStepFiveComponent.STEP)
+            );
         } else {
             this.formService.createForm();
         }
     }
 
     public submitForm(): void {
-        this.servicePublishDataHolder.setStepData(this.STEP, this.formService.form.getRawValue());
+        this.servicePublishDataHolder.setStepData<StepFiveDataInterface>(
+            ServicePublishStepFiveComponent.STEP, this.formService.form.getRawValue()
+        );
         this.serviceStepsNavigationService.navigateToNextStep();
     }
 

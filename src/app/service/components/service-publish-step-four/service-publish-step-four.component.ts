@@ -1,14 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {RegistrationService} from '@app/auth/services/registration.service';
+import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {IsUserRegisteredApiService} from '@app/core/services/is-user-registered-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
 import {ServicePublishStepFourFormService} from '@app/service/forms/service-publish-step-four-form.service';
+import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
+import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {plainToClass} from 'class-transformer';
+import {forkJoin, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 
 @Component({
@@ -18,9 +23,10 @@ import {filter} from 'rxjs/operators';
 })
 export class ServicePublishStepFourComponent extends Reinitable implements OnInit {
 
+    public static readonly STEP = 3;
     public readonly formFields = ServicePublishStepFourFormFields;
     public isUserExists: boolean = false;
-    private readonly STEP = 3;
+    private checkEmailSubscription: Subscription = null;
 
     constructor(
         public formService: ServicePublishStepFourFormService,
@@ -28,16 +34,22 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
         private masterManager: MasterManagerService,
         public authenticationService: AuthenticationService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private registrationService: RegistrationService
+        private registrationService: RegistrationService,
+        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private userManager: UserManagerService
     ) {
         super();
     }
 
     public onEmailChange(): void {
         if (this.formService.isEmailValid()) {
-            this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value).subscribe(
-                val => this.isUserExists = val
-            );
+            if (this.checkEmailSubscription) {
+                this.checkEmailSubscription.unsubscribe();
+            }
+            this.checkEmailSubscription = this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)
+                .subscribe(
+                    val => this.isUserExists = val
+                );
         }
     }
 
@@ -64,11 +76,24 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
                     password: this.formService.form.get(this.formFields.Password).value
                 }
             ).subscribe(
-                _ => this.serviceStepsNavigationService.navigateToNextStep()
+                _ => forkJoin({
+                    masterList: this.masterManager.getMasterList(),
+                    user: this.userManager.getCurrentUser()
+                }).subscribe(({user, masterList}) => {
+                    this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
+                        ServicePublishStepFourComponent.STEP, {isNewMaster: (masterList as Master[]).length === 0, user}
+                    );
+                    this.serviceStepsNavigationService.navigateToNextStep();
+                })
             );
         } else {
             this.registrationService.register(plainToClass(User, this.formService.form.getRawValue())).subscribe(
-                _ => this.serviceStepsNavigationService.navigateToNextStep()
+                user => {
+                    this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
+                        ServicePublishStepFourComponent.STEP, {isNewMaster: true, user}
+                    );
+                    this.serviceStepsNavigationService.navigateToNextStep();
+                }
             );
         }
     }
