@@ -59,7 +59,17 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
                 this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
                     () => {
                         this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
-                            () => this.serviceStepsNavigationService.navigateToLastStep()
+                            () => {
+                                this.userManager.getCurrentUser().subscribe(
+                                    user => {
+                                        this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
+                                            ServicePublishStepFourComponent.STEP, {isNewMaster: false, user}
+                                        );
+                                        // this.serviceStepsNavigationService.navigateToLastStep();
+                                        this.serviceStepsNavigationService.navigateToNextStep();
+                                    }
+                                );
+                            }
                         );
                     }
                 );

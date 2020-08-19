@@ -34,6 +34,15 @@ import {ServiceScheduleApiService} from '@app/service/services/service-schedule-
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
+import {ChainManagerService} from '@app/service/services/steps-navigation-chain/chain-manager.service';
+import {StepFinalHandlerService} from '@app/service/services/steps-navigation-chain/step-final-handler.service';
+import {StepFiveHandlerService} from '@app/service/services/steps-navigation-chain/step-five-handler.service';
+import {StepFourHandlerService} from '@app/service/services/steps-navigation-chain/step-four-handler.service';
+import {StepOneHandlerService} from '@app/service/services/steps-navigation-chain/step-one-handler.service';
+import {StepSevenHandlerService} from '@app/service/services/steps-navigation-chain/step-seven-handler.service';
+import {StepSixHandlerService} from '@app/service/services/steps-navigation-chain/step-six-handler.service';
+import {StepThreeHandlerService} from '@app/service/services/steps-navigation-chain/step-three-handler.service';
+import {StepTwoHandlerService} from '@app/service/services/steps-navigation-chain/step-two-handler.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -92,7 +101,16 @@ import {ServicePage} from './service.page';
         ServiceScheduleApiService,
         ServiceStepsNavigationService,
         ServicePublishService,
-        ServicePublishDataPreparerService
+        ServicePublishDataPreparerService,
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService
     ]
 })
 export class ServicePageModule {}

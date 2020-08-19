@@ -31,9 +31,13 @@ export class ServicePublishFinalStepComponent extends Reinitable implements OnIn
 
     public publish(): void {
         if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster) {
-            this.popover().then(() => this.servicePublish.publish());
+            this.popover().then(() => this.servicePublish.publish().subscribe(
+                () => console.log('done')
+            ));
         } else {
-            this.servicePublish.publish();
+            this.servicePublish.publish().subscribe(
+                () => console.log('done')
+            );
         }
     }
 

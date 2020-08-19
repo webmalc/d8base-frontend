@@ -69,7 +69,7 @@ export class ServicePublishService {
                 (createdMaster) => this.createService(service, createdMaster).pipe(
                     switchMap(createdService => forkJoin({
                         photosRet: this.createPhotos(photos, createdService),
-                        scheduleRet: this.createSchedule(schedule, service),
+                        scheduleRet: this.createSchedule(schedule, createdService),
                         masterLocationRet: this.createMasterLocation(masterLocation, createdMaster),
                         priceRet: this.createPrice(price, createdService)
                     }).pipe(
