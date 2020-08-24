@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
-import {ServiceTimetableInterface} from '@app/service/interfaces/service-timetable-interface';
 import {ServiceSchedule} from '@app/service/models/service-schedule';
 import {plainToClass} from 'class-transformer';
 
@@ -17,7 +16,7 @@ export class ServicePublishStepSevenTimetableFormService {
     constructor(private formBuilder: FormBuilder) {
     }
 
-    public createForm(timetable?: ServiceTimetableInterface): void {
+    public createForm(timetable?: ServiceSchedule[]): void {
         this.formArray = [];
         this.toDelete = [];
         this.form = this.formBuilder.group({
@@ -136,11 +135,11 @@ export class ServicePublishStepSevenTimetableFormService {
     }
 
     private sort(): void {
-        this.formArray = this.formArray.sort((a, b) => a.day_of_week > b.day_of_week ? 1 : -1);
+        this.formArray = this.formArray?.sort((a, b) => a.day_of_week > b.day_of_week ? 1 : -1);
     }
 
-    private fillTimeTable(timetable: ServiceTimetableInterface): void {
-        this.formArray = timetable.timetable;
+    private fillTimeTable(timetable: ServiceSchedule[]): void {
+        this.formArray = timetable;
         this.updateForm();
     }
 

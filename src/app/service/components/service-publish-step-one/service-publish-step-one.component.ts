@@ -59,7 +59,7 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
                 subcategory: this.formService.form.get(this.formFields.Subcategory).value
             }
         );
-        this.serviceStepsNavigationService.navigateToNextStep();
+        this.serviceStepsNavigationService.next();
     }
 
     public onCategoryChange(): void {

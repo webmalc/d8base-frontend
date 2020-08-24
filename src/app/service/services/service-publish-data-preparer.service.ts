@@ -80,9 +80,9 @@ export class ServicePublishDataPreparerService {
     }
 
     private async getUser(): Promise<User | null> {
-        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster &&
-            this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).user) {
-            return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).user;
+        if (this.servicePublishDataHolder.isset(ServicePublishStepFourComponent.STEP) &&
+            !this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewUser) {
+            return null;
         }
         const stepData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishStepFiveComponent.STEP);
         const user = new User();
@@ -109,13 +109,17 @@ export class ServicePublishDataPreparerService {
         master.subcategory = stepOneData.subcategory.id;
         master.company = stepSixData?.company_name;
         master.description = stepSixData?.description;
-        master.name = stepSixData.name;
+        master.name = stepSixData?.name;
         master.level = stepSixData?.level;
 
         return HelperService.clear(master);
     }
 
     private getMasterLocation(): MasterLocation {
+        if (this.servicePublishDataHolder.isset(ServicePublishFinalStepComponent.STEP) &&
+            this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishFinalStepComponent.STEP).masterLocation) {
+            return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishFinalStepComponent.STEP).masterLocation;
+        }
         const location = new MasterLocation();
         const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP);
         location.country = stepData.country.id;

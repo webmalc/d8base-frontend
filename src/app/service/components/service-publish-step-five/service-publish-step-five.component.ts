@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
 import {ServicePublishStepFiveFormFields} from '@app/service/enums/service-publish-step-five-form-fields';
 import {ServicePublishStepFiveFormService} from '@app/service/forms/service-publish-step-five-form.service';
 import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
-import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 
@@ -24,9 +22,6 @@ export class ServicePublishStepFiveComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster) {
-            return this.serviceStepsNavigationService.navigateToNextStep();
-        }
         if (this.servicePublishDataHolder.isset(ServicePublishStepFiveComponent.STEP)) {
             this.formService.createForm(
                 this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishStepFiveComponent.STEP)
@@ -40,7 +35,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
         this.servicePublishDataHolder.setStepData<StepFiveDataInterface>(
             ServicePublishStepFiveComponent.STEP, this.formService.form.getRawValue()
         );
-        this.serviceStepsNavigationService.navigateToNextStep();
+        this.serviceStepsNavigationService.next();
     }
 
     public onSelect(data: {addedFiles: File[]}): void {

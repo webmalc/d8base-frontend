@@ -4,25 +4,36 @@ import {ServicePublishStepFourComponent} from '@app/service/components/service-p
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
+import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class StepFiveHandlerService extends AbstractHandler {
 
-    constructor(private servicePublishDataHolderService: ServicePublishDataHolderService) {
+    constructor(
+        private servicePublishDataHolderService: ServicePublishDataHolderService
+    ) {
         super();
     }
 
-    public handle(): number {
-        if (this.servicePublishDataHolderService.isset(ServicePublishStepFourComponent.STEP) &&
-            !this.servicePublishDataHolderService.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster &&
-            this.servicePublishDataHolderService.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).user) {
-            return super.handle();
-        }
-
-        return this.getIndex();
+    public handleNext(): Observable<number> {
+        return this.handle(super.handleNext.bind(this));
     }
 
-    protected getIndex(): number {
+    public handlePrevious(): Observable<number> {
+        return this.handle(super.handlePrevious.bind(this));
+    }
+
+    public getIndex(): number {
         return ServicePublishStepFiveComponent.STEP;
+    }
+
+    private handle(handler: () => Observable<number>): Observable<number> {
+        if ((this.servicePublishDataHolderService.isset(ServicePublishStepFourComponent.STEP) &&
+            !this.servicePublishDataHolderService.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewUser) ||
+            !this.servicePublishDataHolderService.isset(ServicePublishStepFourComponent.STEP)) {
+            return handler();
+        }
+
+        return of(this.getIndex());
     }
 }

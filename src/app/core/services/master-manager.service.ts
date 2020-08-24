@@ -4,6 +4,7 @@ import {MasterInterface} from '@app/core/interfaces/master.interface';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {AuthenticationService} from '@app/core/services/authentication.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {plainToClass} from 'class-transformer';
@@ -20,7 +21,8 @@ export class MasterManagerService {
     private readonly url = environment.backend.master;
     private readonly masterListUrl = environment.backend.master_list;
 
-    constructor(private client: ApiClientService, private userManager: UserManagerService) {
+    constructor(private client: ApiClientService, private userManager: UserManagerService, private auth: AuthenticationService) {
+        this.subscribeToAuth();
     }
 
     public updateIsMaster(): void {
@@ -77,6 +79,18 @@ export class MasterManagerService {
         return this.client.options(this.url).pipe(
             map((data: { actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }) =>
                 data.actions.POST.level.choices)
+        );
+    }
+
+    private subscribeToAuth(): void {
+        this.auth.isAuthenticated$.subscribe(
+            isAuth => {
+                if (isAuth) {
+                    this.updateIsMaster();
+                } else {
+                    this.isMaster$.next(false);
+                }
+            }
         );
     }
 }

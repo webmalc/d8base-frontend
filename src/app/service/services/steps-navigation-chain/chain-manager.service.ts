@@ -8,13 +8,13 @@ import {StepSevenHandlerService} from '@app/service/services/steps-navigation-ch
 import {StepSixHandlerService} from '@app/service/services/steps-navigation-chain/step-six-handler.service';
 import {StepThreeHandlerService} from '@app/service/services/steps-navigation-chain/step-three-handler.service';
 import {StepTwoHandlerService} from '@app/service/services/steps-navigation-chain/step-two-handler.service';
-import {cloneDeep} from 'lodash/fp';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class ChainManagerService {
 
     private chain: Handler[] = [];
-    private invertedChain: Handler[] = [];
     private readonly urls: string[] = [
         '/service/publish/step-one',
         '/service/publish/step-two',
@@ -37,44 +37,35 @@ export class ChainManagerService {
         private readonly finalStepHandler: StepFinalHandlerService
     ) {
         this.generateChain();
-        this.generateInvertedChain();
     }
 
-    public getNextPage(url: string): string {
-        return this.urls[this.chain[this.urls.indexOf(url) + 1].handle()];
+    public getNextPage(url: string): Observable<string> {
+        return this.chain[this.urls.indexOf(url) + 1].handleNext().pipe(
+            map(index => this.urls[index])
+        );
     }
 
-    public getPreviousPage(url: string): string {
-        return this.urls[this.invertedChain[this.urls.indexOf(url) - 1].handle()];
+    public getPreviousPage(url: string): Observable<string> {
+        return this.chain[this.urls.indexOf(url) - 1].handlePrevious().pipe(
+            map(index => this.urls[index])
+        );
     }
 
     private generateChain(): void {
         this.stepOneHandler.setNext(this.stepTwoHandler).setNext(this.stepThreeHandler).setNext(this.stepFourHandler)
             .setNext(this.stepFiveHandler).setNext(this.stepSixHandler).setNext(this.stepSevenHandler).setNext(this.finalStepHandler);
+        this.finalStepHandler.setPrevious(this.stepSevenHandler).setPrevious(this.stepSixHandler).setPrevious(this.stepFiveHandler)
+            .setPrevious(this.stepFourHandler).setPrevious(this.stepThreeHandler).setPrevious(this.stepTwoHandler)
+            .setPrevious(this.stepOneHandler);
         this.chain = [
-            cloneDeep<Handler>(this.stepOneHandler),
-            cloneDeep<Handler>(this.stepTwoHandler),
-            cloneDeep<Handler>(this.stepThreeHandler),
-            cloneDeep<Handler>(this.stepFourHandler),
-            cloneDeep<Handler>(this.stepFiveHandler),
-            cloneDeep<Handler>(this.stepSixHandler),
-            cloneDeep<Handler>(this.stepSevenHandler),
-            cloneDeep<Handler>(this.finalStepHandler)
-        ];
-    }
-
-    private generateInvertedChain(): void {
-        this.finalStepHandler.setNext(this.stepSevenHandler).setNext(this.stepSixHandler).setNext(this.stepFiveHandler)
-            .setNext(this.stepFourHandler).setNext(this.stepThreeHandler).setNext(this.stepTwoHandler).setNext(this.stepOneHandler);
-        this.invertedChain = [
-            cloneDeep<Handler>(this.finalStepHandler),
-            cloneDeep<Handler>(this.stepSevenHandler),
-            cloneDeep<Handler>(this.stepSixHandler),
-            cloneDeep<Handler>(this.stepFiveHandler),
-            cloneDeep<Handler>(this.stepFourHandler),
-            cloneDeep<Handler>(this.stepThreeHandler),
-            cloneDeep<Handler>(this.stepTwoHandler),
-            cloneDeep<Handler>(this.stepOneHandler)
+            this.stepOneHandler,
+            this.stepTwoHandler,
+            this.stepThreeHandler,
+            this.stepFourHandler,
+            this.stepFiveHandler,
+            this.stepSixHandler,
+            this.stepSevenHandler,
+            this.finalStepHandler
         ];
     }
 }

@@ -39,7 +39,9 @@ export class ServicePublishDataHolderService {
         if (!this.stepsData[step]) {
             this.stepsData[step] = {};
         }
-        this.stepsData[step] = Object.assign(this.stepsData[step], data);
+        for (const k in data) {
+            this.stepsData[step][k] = data[k];
+        }
 
         return this.updateStorage();
     }

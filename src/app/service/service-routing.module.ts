@@ -11,6 +11,7 @@ import {ServicePublishStepSixComponent} from '@app/service/components/service-pu
 import {ServicePublishStepThreeComponent} from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
 import {ServicePublishStepTwoComponent} from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
 import {TimetableComponent} from '@app/service/components/timetable/timetable.component';
+import {ServicePublishGuardService} from '@app/service/guards/service-publish-guard.service';
 import {ServicePage} from './service.page';
 
 const routes: Routes = [
@@ -25,41 +26,47 @@ const routes: Routes = [
     {
         path: 'publish/step-two',
         component: ServicePublishStepTwoComponent,
-        // canActivate: [ServicePublishStepTwoGuardService]
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-three',
         component: ServicePublishStepThreeComponent,
-        // canActivate: [ServicePublishStepThreeGuardService]
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-four',
         component: ServicePublishStepFourComponent,
-        // canActivate: [ServicePublishStepThreeGuardService]
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-five',
-        component: ServicePublishStepFiveComponent
+        component: ServicePublishStepFiveComponent,
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-six',
-        component: ServicePublishStepSixComponent
+        component: ServicePublishStepSixComponent,
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-seven',
-        component: ServicePublishStepSevenComponent
+        component: ServicePublishStepSevenComponent,
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-seven/timetable',
-        component: TimetableComponent
+        component: TimetableComponent,
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/step-seven/departure',
-        component: DepartureComponent
+        component: DepartureComponent,
+        canActivate: [ServicePublishGuardService]
     },
     {
         path: 'publish/final',
-        component: ServicePublishFinalStepComponent
+        component: ServicePublishFinalStepComponent,
+        canActivate: [ServicePublishGuardService]
     }
 ];
 

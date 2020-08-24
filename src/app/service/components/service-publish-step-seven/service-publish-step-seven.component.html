@@ -77,7 +77,7 @@
                                     searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
                                     searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
                                     (onSearch)="countrySelectable.onCountrySearch($event)"
-                                    (onChange)="onCountryChange()">
+                                    (onChange)="onCountryChange(); onThisPageDataChange()">
                             </ionic-selectable>
                         </ion-item>
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -100,7 +100,7 @@
                                     searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
                                     searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
                                     (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
-                                    (onChange)="onCityChange()">
+                                    (onChange)="onCityChange(); onThisPageDataChange()">
                             </ionic-selectable>
                         </ion-item>
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
@@ -112,7 +112,7 @@
                             <ion-label color="medium" position="floating">
                                 {{"service-publish.step-seven.address-placeholder"|translate}}
                             </ion-label>
-                            <ion-textarea rows="4" type="text" name="address"
+                            <ion-textarea rows="4" type="text" name="address" (ionChange)="onThisPageDataChange()"
                                           [formControlName]="formFields.Address"></ion-textarea>
                         </ion-item>
                         <ion-item
@@ -137,7 +137,8 @@
                                     closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
                                     searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
                                     searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                                    (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())">
+                                    (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())"
+                                    (onChange)="onThisPageDataChange()">
                             </ionic-selectable>
 
                         </ion-item>
@@ -148,7 +149,7 @@
 <!--                                    <b *ngIf="!getDepartureData()?.not_within_the_city">-->
 <!--                                        {{"service-publish.step-seven.location-radius-within"|translate}}-->
 <!--                                    </b>-->
-                                    <b>
+                                    <b *ngIf="getDepartureData()">
                                         {{"service-publish.step-seven.location-radius-radius"|translate}} {{getDepartureData()?.max_distance}} {{"units."+getDepartureData()?.units|translate}}
                                     </b>
                                 </b>
@@ -173,7 +174,7 @@
                 </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-padding-vertical">
-                        <ion-list>
+                        <ion-list (change)="onThisPageDataChange()">
                             <ion-list-header class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                     <div class="label-for-required-input">
@@ -199,9 +200,7 @@
                         <ion-row class="ion-justify-content-center">
                             <ion-col size="6">
                                 <ion-button color="light"
-                                            routerDirection="back"
-                                            routerLink="/service/publish/step-six"
-                                            routerLinkActive="active"
+                                            (click)="serviceStepsNavigationService.previous()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.back-button" | translate}}
                                 </ion-button>

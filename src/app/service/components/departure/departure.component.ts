@@ -18,21 +18,24 @@ export class DepartureComponent implements OnInit {
 
     constructor(
         public formService: ServicePublishStepSevenDepartureFormService,
-        private servicePublish: ServicePublishDataHolderService,
+        private servicePublishDataHolder: ServicePublishDataHolderService,
         private location: Location
-    ) { }
+    ) {
+    }
 
     public ngOnInit(): void {
-        if (this.servicePublish.issetStepPartialData(this.STEP, DepartureComponent.departureDataKey)) {
-            this.formService.createForm(this.servicePublish.getPartialStepData(this.STEP, DepartureComponent.departureDataKey));
+        if (this.servicePublishDataHolder.issetStepPartialData(this.STEP, DepartureComponent.departureDataKey)) {
+            this.formService.createForm(this.servicePublishDataHolder.getPartialStepData(this.STEP, DepartureComponent.departureDataKey));
         } else {
             this.formService.createForm();
         }
     }
 
     public submitForm(): void {
-        this.servicePublish.assignStepData(this.STEP, {[DepartureComponent.departureDataKey]: this.formService.form.getRawValue()});
+        this.servicePublishDataHolder.assignStepData(
+            this.STEP,
+            {[DepartureComponent.departureDataKey]: this.formService.form.getRawValue()}
+        );
         this.location.back();
     }
-
 }

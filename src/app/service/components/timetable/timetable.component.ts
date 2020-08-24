@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {TimetableAddTimePopoverComponent} from '@app/service/components/timetable-add-time-popover/timetable-add-time-popover.component';
 import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import {ServicePublishStepSevenTimetableFormService} from '@app/service/forms/service-publish-step-seven-timetable-form.service';
-import {ServiceTimetableInterface} from '@app/service/interfaces/service-timetable-interface';
+import {ServiceSchedule} from '@app/service/models/service-schedule';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {PopoverController} from '@ionic/angular';
@@ -30,7 +30,7 @@ export class TimetableComponent extends Reinitable implements OnInit {
     public ngOnInit(): void {
         if (this.servicePublishDataHolderService.issetStepPartialData(this.STEP, ServicePublishStepSevenTimetableFormFields.Timetable)) {
             this.formService.createForm(
-                this.servicePublishDataHolderService.getPartialStepData<ServiceTimetableInterface>(
+                this.servicePublishDataHolderService.getPartialStepData<ServiceSchedule[]>(
                     this.STEP,
                     ServicePublishStepSevenTimetableFormFields.Timetable
                 )

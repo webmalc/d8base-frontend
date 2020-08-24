@@ -65,7 +65,7 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
         this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
             ServicePublishStepTwoComponent.STEP, this.formService.form.getRawValue()
         );
-        this.serviceStepsNavigationService.navigateToNextStep();
+        this.serviceStepsNavigationService.next();
     }
 
     public durationHoursChange(): void {

@@ -17,7 +17,7 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 import {ServicePublishDataPreparerService} from '@app/service/services/service-publish-data-preparer.service';
 import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
-import {forkJoin, from, Observable} from 'rxjs';
+import {forkJoin, from, Observable, of} from 'rxjs';
 import {map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable()
@@ -40,14 +40,14 @@ export class ServicePublishService {
     public publish(): Observable<void> {
         return from(this.servicePublishDataFormatter.getData()).pipe(
             switchMap(data => this.processData(
-                data.user,
                 data.master,
                 data.service,
                 data.servicePhotos,
                 data.serviceSchedule,
                 data.serviceLocation,
                 data.masterLocation,
-                data.servicePrice
+                data.servicePrice,
+                data.user
             ).pipe(
                 tap(() => this.servicePublishDataHolder.reset())
             ))
@@ -55,34 +55,38 @@ export class ServicePublishService {
     }
 
     private processData(
-        user: User,
         master: Master,
         service: Service,
         photos: ServicePhoto[],
         schedule: ServiceSchedule[],
         serviceLocation: ServiceLocation,
         masterLocation: MasterLocation,
-        price: Price
+        price: Price,
+        user?: User
     ): Observable<any> {
-        return this.createMasterUpdateUser(user, master).pipe(
+        return this.createMasterUpdateUser(master, user).pipe(
             switchMap(
                 (createdMaster) => this.createService(service, createdMaster).pipe(
                     switchMap(createdService => forkJoin({
                         photosRet: this.createPhotos(photos, createdService),
                         scheduleRet: this.createSchedule(schedule, createdService),
-                        masterLocationRet: this.createMasterLocation(masterLocation, createdMaster),
+                        masterLocRet: !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation),
                         priceRet: this.createPrice(price, createdService)
                     }).pipe(
-                        switchMap(({masterLocationRet}) => this.createServiceLocation(serviceLocation, createdService, masterLocationRet))
+                        switchMap(({masterLocRet}) => this.createServiceLocation(serviceLocation, createdService, masterLocRet))
                     ))
                 )
             )
         );
     }
 
-    private createMasterUpdateUser(user: User, master: Master): Observable<Master> {
+    private createMasterUpdateUser(master: Master, user?: User): Observable<Master> {
+        if (master.id) {
+            return of(master);
+        }
+
         return forkJoin({
-            updatedUser: this.userManager.updateUser(user),
+            updatedUser: user ? this.userManager.updateUser(user) : of(null),
             createdMaster: this.masterManager.createMaster(master)
         }).pipe(
             map(({createdMaster}) => createdMaster)

@@ -12,7 +12,7 @@ import {CountriesApiService} from '@app/profile/services/countries-api.service';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
                 return appTitle;
             })
         ).subscribe((title: string) => this.titleService.setTitle(title));
-        this.getDefaultUserCountry().subscribe(c => this.countryCode = c.code.toLowerCase());
+        this.getDefaultUserCountry().pipe(filter(code => null !== code)).subscribe(c => this.countryCode = c.code.toLowerCase());
     }
 
     public initializeApp(): void {
@@ -109,9 +109,12 @@ export class AppComponent implements OnInit {
     }
 
     private getDefaultUserCountry(): Observable<Country> {
-        return this.userLocationApi.getDefaultLocation().pipe(
-            filter(location => location !== undefined),
-            switchMap(location => this.countryApi.getByEntityId(location.country as number))
+        return this.authenticationFactory.getAuthenticator().isAuthenticated().pipe(
+            filter(isAuth => isAuth === true),
+            switchMap(isAuth => isAuth ? this.userLocationApi.getDefaultLocation().pipe(
+                filter(location => location !== undefined),
+                switchMap(location => this.countryApi.getByEntityId(location.country as number))
+            ) : of(null))
         );
     }
 

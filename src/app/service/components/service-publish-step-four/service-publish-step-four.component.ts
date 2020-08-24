@@ -48,7 +48,8 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
             }
             this.checkEmailSubscription = this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)
                 .subscribe(
-                    val => this.isUserExists = val
+                    val => this.isUserExists = val,
+                    err => console.log(err)
                 );
         }
     }
@@ -63,10 +64,10 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
                                 this.userManager.getCurrentUser().subscribe(
                                     user => {
                                         this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                                            ServicePublishStepFourComponent.STEP, {isNewMaster: false, user}
+                                            ServicePublishStepFourComponent.STEP, {isNewMaster: false, user, isNewUser: false}
+                                        ).then(
+                                            () => this.serviceStepsNavigationService.next()
                                         );
-                                        // this.serviceStepsNavigationService.navigateToLastStep();
-                                        this.serviceStepsNavigationService.navigateToNextStep();
                                     }
                                 );
                             }
@@ -91,18 +92,18 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
                     user: this.userManager.getCurrentUser()
                 }).subscribe(({user, masterList}) => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishStepFourComponent.STEP, {isNewMaster: (masterList as Master[]).length === 0, user}
+                        ServicePublishStepFourComponent.STEP, {isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false}
+                    ).then(
+                        () => this.serviceStepsNavigationService.next()
                     );
-                    this.serviceStepsNavigationService.navigateToNextStep();
                 })
             );
         } else {
             this.registrationService.register(plainToClass(User, this.formService.form.getRawValue())).subscribe(
                 user => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishStepFourComponent.STEP, {isNewMaster: true, user}
-                    );
-                    this.serviceStepsNavigationService.navigateToNextStep();
+                        ServicePublishStepFourComponent.STEP, {isNewMaster: true, user, isNewUser: true}
+                    ).then(() => this.serviceStepsNavigationService.next());
                 }
             );
         }

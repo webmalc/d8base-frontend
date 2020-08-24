@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Master} from '@app/core/models/master';
+import {MasterLocation} from '@app/master/models/master-location';
+import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {MasterPickerPopoverComponent} from '@app/service/components/master-peeker/master-picker-popover.component';
 import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
 import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
@@ -10,6 +12,8 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
 import {PopoverController} from '@ionic/angular';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-final-step',
@@ -24,7 +28,8 @@ export class ServicePublishFinalStepComponent extends Reinitable implements OnIn
         private servicePublish: ServicePublishService,
         private popoverController: PopoverController,
         private servicePublishDataHolder: ServicePublishDataHolderService,
-        public serviceStepsNavigationService: ServiceStepsNavigationService
+        public serviceStepsNavigationService: ServiceStepsNavigationService,
+        private masterLocationApi: MasterLocationApiService
     ) {
         super();
     }
@@ -55,9 +60,12 @@ export class ServicePublishFinalStepComponent extends Reinitable implements OnIn
                     const subscription = MasterPickerPopoverComponent.master$.subscribe(
                         (master: Master) => {
                             if (master !== undefined) {
-                                this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
-                                    ServicePublishFinalStepComponent.STEP, {master}
+                                this.getMasterLocation(master).subscribe(
+                                    masterLocation => this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
+                                        ServicePublishFinalStepComponent.STEP, {master, masterLocation}
+                                    )
                                 );
+                                this.servicePublishDataHolder.assignStepData(ServicePublishStepFourComponent.STEP, {isNewMaster: false});
                                 this.popoverController.dismiss();
                                 subscription.unsubscribe();
                                 resolve();
@@ -67,5 +75,11 @@ export class ServicePublishFinalStepComponent extends Reinitable implements OnIn
                 }
             ));
         });
+    }
+
+    private getMasterLocation(master: Master): Observable<MasterLocation> {
+        return this.masterLocationApi.getByClientId(master.id).pipe(
+            map(list => list.results.length === 0 ? null : list.results[0])
+        );
     }
 }

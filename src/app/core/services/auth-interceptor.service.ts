@@ -1,5 +1,5 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {from, Observable} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
@@ -27,23 +27,17 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
 
-        return from(this.authFactory.getAuthenticator().needToRefresh())
-            .pipe(
-                switchMap(
-                    (isNeedToRefresh: boolean) => {
-                        if (isNeedToRefresh) {
-                            return this.authFactory.getAuthenticator().refresh().pipe(
-                                switchMap(() => next.handle(req))
-                            );
-                        }
-
-                        return next.handle(req);
-                    }
-                ),
-                catchError(
-                    _ => next.handle(req)
-                )
-            );
+        return from(this.authFactory.getAuthenticator().needToRefresh()).pipe(
+            switchMap(
+                (isNeedToRefresh: boolean) => isNeedToRefresh ?
+                    this.authFactory.getAuthenticator().refresh().pipe(
+                        switchMap(() => next.handle(req))
+                    ) : next.handle(req)
+            ),
+            catchError(
+                _ => next.handle(req)
+            )
+        );
     }
 
     private getRestrictedUrls(): string[] {

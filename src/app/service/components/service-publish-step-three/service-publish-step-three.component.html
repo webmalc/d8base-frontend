@@ -63,9 +63,7 @@
                     <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
                         <ion-col size="6">
                             <ion-button color="light" class="ion-margin-top"
-                                        routerDirection="back"
-                                        routerLink="/service/publish/step-two"
-                                        routerLinkActive="active"
+                                        (click)="serviceStepsNavigationService.previous()"
                                         fill="solid" expand="block">
                                 {{"service-publish.back-button" | translate}}
                             </ion-button>

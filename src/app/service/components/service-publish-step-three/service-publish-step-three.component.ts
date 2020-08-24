@@ -30,7 +30,7 @@ export class ServicePublishStepThreeComponent implements OnInit {
         this.servicePublishDataHolderService.setStepData<StepThreeDataInterface>(
             ServicePublishStepThreeComponent.STEP, {photos: this.files}
             );
-        this.serviceStepsNavigationService.navigateToNextStep();
+        this.serviceStepsNavigationService.next();
     }
 
     public onSelect(data: { addedFiles: File[] }): void {

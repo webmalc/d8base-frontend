@@ -22,11 +22,11 @@ import {ServicePublishStepSevenFormService} from '@app/service/forms/service-pub
 import {ServicePublishStepSevenTimetableFormService} from '@app/service/forms/service-publish-step-seven-timetable-form.service';
 import {ServicePublishStepSixFormService} from '@app/service/forms/service-publish-step-six-form.service';
 import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
-import {ServicePublishStepThreeGuardService} from '@app/service/guards/service-publish-step-three-guard.service';
-import {ServicePublishStepTwoGuardService} from '@app/service/guards/service-publish-step-two-guard.service';
+import {ServicePublishGuardService} from '@app/service/guards/service-publish-guard.service';
 import {PricesApiService} from '@app/service/services/prices-api.service';
 import {ServiceLocationApiService} from '@app/service/services/service-location-api.service';
 import {ServicePhotoApiService} from '@app/service/services/service-photo-api.service';
+import {ServicePublishAuthStateManagerService} from '@app/service/services/service-publish-auth-state-manager.service';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServicePublishDataPreparerService} from '@app/service/services/service-publish-data-preparer.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
@@ -90,8 +90,6 @@ import {ServicePage} from './service.page';
         ServicePublishDataHolderService,
         ServicePublishStepOneFormService,
         ServicePublishStepTwoFormService,
-        ServicePublishStepTwoGuardService,
-        ServicePublishStepThreeGuardService,
         ServicePublishStepFourFormService,
         ServicePublishStepFiveFormService,
         ServicePublishStepSixFormService,
@@ -110,7 +108,9 @@ import {ServicePage} from './service.page';
         StepFiveHandlerService,
         StepSixHandlerService,
         StepSevenHandlerService,
-        StepFinalHandlerService
+        StepFinalHandlerService,
+        ServicePublishAuthStateManagerService,
+        ServicePublishGuardService
     ]
 })
 export class ServicePageModule {}
