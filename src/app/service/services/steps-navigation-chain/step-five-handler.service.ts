@@ -23,7 +23,7 @@ export class StepFiveHandlerService extends AbstractHandler {
         return this.handle(super.handlePrevious.bind(this));
     }
 
-    public getIndex(): number {
+    protected getIndex(): number {
         return ServicePublishStepFiveComponent.STEP;
     }
 

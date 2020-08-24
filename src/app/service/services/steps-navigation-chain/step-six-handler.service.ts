@@ -21,7 +21,7 @@ export class StepSixHandlerService extends AbstractHandler {
         return this.handle(super.handlePrevious.bind(this));
     }
 
-    public getIndex(): number {
+    protected getIndex(): number {
         return ServicePublishStepSixComponent.STEP;
     }
 

@@ -18,7 +18,7 @@ export class StepOneHandlerService extends AbstractHandler {
         return of(this.getIndex());
     }
 
-    public getIndex(): number {
+    protected getIndex(): number {
         return ServicePublishStepOneComponent.STEP;
     }
 }

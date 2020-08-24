@@ -24,7 +24,7 @@ export class StepFourHandlerService extends AbstractHandler {
         return this.handle(super.handlePrevious.bind(this));
     }
 
-    public getIndex(): number {
+    protected getIndex(): number {
         return ServicePublishStepFourComponent.STEP;
     }
 
