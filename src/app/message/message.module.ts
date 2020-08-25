@@ -6,34 +6,30 @@ import {IonicModule} from '@ionic/angular';
 
 import {MessagePageRoutingModule} from './message-routing.module';
 
-import {MessageBoxComponent} from '@app/message/components/message-box/message-box.component';
-import {MessageInstanceListComponent} from '@app/message/components/message-instance/message-instance-list.component';
-import {TranslateModule} from '@ngx-translate/core';
+import {DirectComponent} from '@app/message/components/direct/direct.component';
+import {MessagesComponent} from '@app/message/components/messages/messages.component';
 import {MessagePage} from './message.page';
-import {MessageReaderComponent} from '@app/message/components/message-reader/message-reader.component';
-import {MessageInboxResolver} from '@app/message/resolvers/message-inbox.resolver';
-import {MessageOutboxResolver} from '@app/message/resolvers/message-outbox.resolver';
-import {NewMessageComponent} from '@app/message/components/new-message/new-message.component';
-
+import {SharedModule} from '@app/shared/shared.module';
+import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
+import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        IonicModule,
-        CommonModule,
-        TranslateModule,
-        MessagePageRoutingModule
+        MessagePageRoutingModule,
+        SharedModule
     ],
     declarations: [
         MessagePage,
-        MessageBoxComponent,
-        MessageInstanceListComponent,
-        MessageReaderComponent,
-        NewMessageComponent
+        DirectComponent,
+        MessagesComponent
     ],
-    providers: [MessageInboxResolver, MessageOutboxResolver]
+    providers: [
+        ChatsCompilerService,
+        LatestMessagesApiService
+    ]
 })
 export class MessagePageModule {
 }

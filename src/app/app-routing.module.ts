@@ -20,12 +20,12 @@ const routes: Routes = [
         canActivate: [MasterGuard]
     },
     {
-        path: 'message',
-        loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule)
-    },
-    {
         path: 'service',
         loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule)
+    },
+    {
+        path: 'message',
+        loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule)
     }
 ];
 

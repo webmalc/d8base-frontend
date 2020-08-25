@@ -1,12 +1,9 @@
-export interface UserInterface {
-    id?: number;
-    first_name: string;
-    last_name: string;
+import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
+
+export interface UserInterface extends PartialUserInterface {
     patronymic?: string;
     password?: string;
-    email: string;
     phone: string;
-    avatar?: string;
     gender: boolean;
     birthday?: string;
     main_language: string;

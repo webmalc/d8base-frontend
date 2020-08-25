@@ -1,0 +1,24 @@
+.search-bar {
+  --ion-background-color: linear-gradient(0deg, #0CD1E8 11.37%, #3880FF 125.68%);
+}
+
+.text-white {
+  color: white;
+}
+
+ion-searchbar {
+  --icon-color: var(--ion-color-light);
+  --placeholder-color: var(--ion-color-light);
+  --placeholder-opacity: 1;
+  --cancel-button-color: var(--ion-color-light);
+  --clear-button-color: var(--ion-color-light);
+  --ion-text-color: var(--ion-color-light);
+  --color: var(--ion-color-light);
+}
+
+.messages-count {
+  border-radius: 20px;
+  color: white;
+  background-color: #3880FF;
+  padding: 2px 6px;
+}
