@@ -1,5 +1,6 @@
 import {Component, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {HelperService} from '@app/core/services/helper.service';
 import {Certificate} from '@app/master/models/certificate';
 import {AbstractListItemComponent} from '@app/shared/components/abstract-list-item/abstract-list-item.component';
 
@@ -17,7 +18,7 @@ export class CertificatesItemComponent extends AbstractListItemComponent<Certifi
     public getPhoto(): string | SafeResourceUrl {
         const photo: string = this.item.photo;
         if (!photo) {
-            return 'assets/images/profile/noavatar.jpeg';
+            return HelperService.getNoAvatarLink();
         }
 
         return this.sanitizer.sanitize(

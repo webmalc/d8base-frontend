@@ -116,15 +116,6 @@
   "bookmarks": {
     "no-bookmarks" : "There's no bookmarks yet"
   },
-  "messages": {
-    "messages": "Messages",
-    "read": "Read Message",
-    "delete": "Delete Message",
-    "close": "Close Message",
-    "reply": "Reply Message",
-    "send": "Send",
-    "new": "Create"
-  },
   "list-item": {
     "add-new": "Add new"
   },
@@ -181,6 +172,11 @@
       "add-photo": "It's a good idea to add a photo to your profile!",
       "first-info-row": "By adding your main photo to your profile, you will increase the credibility of your profile and you will have more clients!",
       "add-photo-title": "Add your main photo"
+    }
+  },
+  "messages": {
+    "chat-list-page": {
+      "search": "Search contact"
     }
   }
 }

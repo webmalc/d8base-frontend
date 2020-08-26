@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {AbstractMessage} from '@app/message/models/abstract-message';
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
+import {Reinitable} from '@app/shared/abstract/reinitable';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -8,28 +10,21 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './messages.component.html',
     styleUrls: ['./messages.component.scss'],
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent extends Reinitable implements OnInit {
 
-    // public messages: AbstractMessage[] = [
-    //     {
-    //         interlocutor_id: 7,
-    //         interlocutor: 'Test user',
-    //         interlocutor_avatar_thumbnail: 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-    //         body: 'test body...',
-    //         is_read: false,
-    //         created: '15:00',
-    //         unread_count: 7
-    //     }
-    // ];
     public messages$: BehaviorSubject<AbstractMessage[]> = new BehaviorSubject<AbstractMessage[]>([]);
 
-    constructor(private chatsCompilerService: ChatsCompilerService) {
+    constructor(private chatsCompilerService: ChatsCompilerService, private router: Router) {
+        super();
+    }
+
+    public ngOnInit(): void {
         this.chatsCompilerService.generateChatList().subscribe(
             list => this.messages$.next(list)
         );
     }
 
-    public ngOnInit(): void {
+    public onChatClick(interlocutorId: number): void {
+        this.router.navigateByUrl('/message/chat/' + interlocutorId);
     }
-
 }

@@ -1,18 +1,20 @@
 <ion-header class="search-bar">
     <ion-item class="ion-item-no-border ion-justify-content-center ion-align-items-center">
-        <ion-item class="cursor-pointer ion-item-no-border">
-            <ion-icon color="light" name="arrow-back-outline"></ion-icon>
-        </ion-item>
-        <ion-item class="ion-item-no-border">
-            <ion-searchbar animated color=""></ion-searchbar>
-        </ion-item>
+        <ion-row class="d8b-container width100 ion-align-items-center">
+            <ion-item class="cursor-pointer ion-item-no-border height100">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-item>
+            <ion-item class="ion-item-no-border">
+                <ion-searchbar animated placeholder="{{'messages.chat-list-page.search'|translate}}"></ion-searchbar>
+            </ion-item>
+        </ion-row>
     </ion-item>
 </ion-header>
 
 <ion-content class="ion-margin-top">
 
     <ion-list class="d8b-container">
-        <ion-item class="cursor-pointer hover-bg-dark-grey" *ngFor="let chat of (messages$|async)">
+        <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey" *ngFor="let chat of (messages$|async)">
             <ion-avatar slot="start">
                 <img src="{{chat.interlocutor_avatar_thumbnail}}">
             </ion-avatar>
@@ -41,7 +43,7 @@
                     </ion-label>
                 </ion-row>
                 <ion-row class="ion-justify-content-end">
-                    <span class="messages-count">
+                    <span class="messages-count" *ngIf="chat.unread_count">
                         {{chat.unread_count}}
                     </span>
                 </ion-row>

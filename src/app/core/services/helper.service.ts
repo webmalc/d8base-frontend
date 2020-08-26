@@ -28,4 +28,15 @@ export class HelperService {
             reader.onload = () => resolve(reader.result as string);
         });
     }
+
+    public static fromDatetime(datetime: string): { date: string; time: string; } {
+        return {
+            date: datetime.slice(0, 10),
+            time: datetime.slice(11, 16)
+        };
+    }
+
+    public static getNoAvatarLink(): string {
+        return 'assets/images/profile/noavatar.jpeg';
+    }
 }

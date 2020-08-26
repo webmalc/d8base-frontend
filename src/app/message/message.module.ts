@@ -8,10 +8,12 @@ import {MessagePageRoutingModule} from './message-routing.module';
 
 import {DirectComponent} from '@app/message/components/direct/direct.component';
 import {MessagesComponent} from '@app/message/components/messages/messages.component';
-import {MessagePage} from './message.page';
-import {SharedModule} from '@app/shared/shared.module';
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
 import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
+import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
+import {SharedModule} from '@app/shared/shared.module';
+import {TranslateModule} from '@ngx-translate/core';
+import {MessagePage} from './message.page';
 
 @NgModule({
     imports: [
@@ -19,7 +21,8 @@ import {LatestMessagesApiService} from '@app/message/services/latest-messages-ap
         FormsModule,
         IonicModule,
         MessagePageRoutingModule,
-        SharedModule
+        SharedModule,
+        TranslateModule
     ],
     declarations: [
         MessagePage,
@@ -28,7 +31,8 @@ import {LatestMessagesApiService} from '@app/message/services/latest-messages-ap
     ],
     providers: [
         ChatsCompilerService,
-        LatestMessagesApiService
+        LatestMessagesApiService,
+        MessagesListApiService
     ]
 })
 export class MessagePageModule {

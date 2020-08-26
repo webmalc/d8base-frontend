@@ -4,6 +4,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
+import {HelperService} from '@app/core/services/helper.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {ProfileService} from '@app/profile/services/profile.service';
@@ -75,7 +76,7 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
     public getAvatar(): string | SafeResourceUrl {
         const avatar = this.profileService.avatarForm.get(ProfileFormFields.Avatar).value;
         if (null === avatar) {
-            return 'assets/images/profile/noavatar.jpeg';
+            return HelperService.getNoAvatarLink();
         }
         this.saveAvatar(avatar);
 

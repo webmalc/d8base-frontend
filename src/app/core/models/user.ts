@@ -12,11 +12,12 @@ export class User implements UserInterface {
     @Expose() public password_confirm?: string;
     @Expose() public email: string;
     @Expose() public phone: string;
-    @Expose() public avatar?: string;
+    @Expose() public avatar: string;
     @Expose() public gender: boolean;
     @Expose() public birthday?: string;
     @Expose() public nationality: number | Country;
     @Expose() public main_language: string;
     @Expose() public languages?: string[];
     @Expose() public account_type: string;
+    @Expose() public avatar_thumbnail: string;
 }

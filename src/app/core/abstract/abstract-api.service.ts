@@ -1,6 +1,7 @@
 import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {HelperService} from '@app/core/services/helper.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -12,19 +13,19 @@ export abstract class AbstractApiService<T extends {id: number}> extends Abstrac
     }
 
     public create(data: T): Observable<T> {
-        return this.client.post<T>(this.getUrl(), data).pipe(
+        return this.client.post<T>(this.getUrl(), HelperService.clear(data)).pipe(
             map(raw => this.transform(raw))
         );
     }
 
     public patch(data: T): Observable<T> {
-        return this.client.patch<T>(`${this.getUrl() + data.id}/`, data).pipe(
+        return this.client.patch<T>(`${this.getUrl() + data.id}/`, HelperService.clear(data)).pipe(
             map(raw => this.transform(raw))
         );
     }
 
     public put(data: T): Observable<T> {
-        return this.client.put<T>(`${this.getUrl()}${data.id}/`, data).pipe(
+        return this.client.put<T>(`${this.getUrl()}${data.id}/`, HelperService.clear(data)).pipe(
             map(raw => this.transform(raw))
         );
     }

@@ -130,15 +130,6 @@
   "bookmarks": {
     "no-bookmarks" : "В ваших закладках пусто"
   },
-  "messages": {
-    "messages": "Cообщения",
-    "read": "Прочитать",
-    "delete": "Удалить",
-    "close": "Закрыть",
-    "reply": "Ответить",
-    "send": "Послать",
-    "new": "Создать"
-  },
   "list-item": {
     "add-new": "Добавить еще"
   },
@@ -271,6 +262,11 @@
       "master-picker": {
         "popover-title": "Выберите профиль специалиста"
       }
+    }
+  },
+  "messages": {
+    "chat-list-page": {
+      "search": "Поиск контакта"
     }
   }
 }

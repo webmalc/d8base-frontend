@@ -25,7 +25,8 @@ const routes: Routes = [
     },
     {
         path: 'message',
-        loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule)
+        loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule),
+        canActivate: [MainGuard]
     }
 ];
 

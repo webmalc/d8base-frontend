@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
+import {DirectComponent} from '@app/message/components/direct/direct.component';
 import {MessagesComponent} from '@app/message/components/messages/messages.component';
 
 const routes: Routes = [
@@ -11,7 +12,11 @@ const routes: Routes = [
     },
     {
         path: 'list',
-        component: MessagesComponent
+        component: MessagesComponent,
+    },
+    {
+        path: 'chat/:interlocutor-id',
+        component: DirectComponent
     }
 ];
 
