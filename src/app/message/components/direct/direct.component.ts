@@ -26,7 +26,7 @@ export class DirectComponent implements OnInit {
 
     public ngOnInit(): void {
         this.messagesListApi.getByInterlocutor(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10), 50).subscribe(
-            listApiResponse => this.messages$.next(listApiResponse.results)
+            listApiResponse => this.messages$.next(listApiResponse.results.reverse())
         );
         this.userManager.getCurrentUser().subscribe(
             user => this.currentUserId = user.id

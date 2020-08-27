@@ -1,34 +1,47 @@
 <ion-content class="ion-margin-top">
-    <ion-list class="d8b-container">
+    <ion-list class="d8b-container height100">
 
-        <div class="chat-container">
-            <div *ngFor="let message of (messages$|async)">
-                <ion-row class="width100" *ngIf="message.sender !== currentUserId && currentUserId">
-                    <div class="message-container">
-                        <div class="received-message message">
-                            <div class="message-text">
-                                {{message.body}}
+        <div class="chat-container chat-flex-container">
+            <div class="messages-area height100" style="overflow-y: scroll">
+                <div *ngFor="let message of (messages$|async)">
+                    <ion-row class="width100" *ngIf="message.sender !== currentUserId && currentUserId">
+                        <div class="message-container">
+                            <div class="received-message message">
+                                <div class="message-text">
+                                    {{message.body}}
+                                </div>
+                            </div>
+                            <div class="timeline timeline-received">
+                                {{timeFromDatetime(message.created)}}
                             </div>
                         </div>
-                        <div class="timeline timeline-received">
-                            {{timeFromDatetime(message.created)}}
-                        </div>
-                    </div>
-                </ion-row>
-                <ion-row class="width100 ion-justify-content-end" *ngIf="message.sender === currentUserId && currentUserId">
-                    <div class="message-container">
-                        <div class="sent-message message">
-                            <div class="message-text">
-                                {{message.body}}
+                    </ion-row>
+                    <ion-row class="width100 ion-justify-content-end" *ngIf="message.sender === currentUserId && currentUserId">
+                        <div class="message-container">
+                            <div class="sent-message message">
+                                <div class="message-text">
+                                    {{message.body}}
+                                </div>
+                            </div>
+                            <div class="timeline timeline-sent width100">
+                                {{timeFromDatetime(message.created)}}
+                                <ion-icon class="checkmark" color="{{getCheckmarkColor(message)}}" name="checkmark-done-outline"></ion-icon>
                             </div>
                         </div>
-                        <div class="timeline timeline-sent width100">
-                            {{timeFromDatetime(message.created)}}
-                            <ion-icon class="checkmark" color="{{getCheckmarkColor(message)}}" name="checkmark-done-outline"></ion-icon>
-                        </div>
-                    </div>
-                </ion-row>
+                    </ion-row>
+                </div>
             </div>
+            <div class="type-area">
+                <div>
+                    <ion-item class="ion-item-bordered">
+                        <ion-input name="price"></ion-input>
+                    </ion-item>
+                </div>
+            </div>
+
+
+
+
         </div>
 
     </ion-list>

@@ -2,6 +2,12 @@
   padding-left: 20%;
   padding-right: 20%;
 }
+.chat-flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
 .message-container {
   display: flex;
   flex-direction: column;
