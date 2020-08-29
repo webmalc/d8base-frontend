@@ -2,6 +2,10 @@
   padding-left: 20%;
   padding-right: 20%;
 }
+.messages-area {
+  overflow-y: scroll;
+  height: 80%;
+}
 .chat-flex-container {
   display: flex;
   flex-direction: column;

@@ -1,8 +1,8 @@
-<ion-content class="ion-margin-top">
+<ion-content class="ion-margin-top" (keydown.enter)="send()">
     <ion-list class="d8b-container height100">
 
         <div class="chat-container chat-flex-container">
-            <div class="messages-area height100" style="overflow-y: scroll">
+            <div class="messages-area">
                 <div *ngFor="let message of (messages$|async)">
                     <ion-row class="width100" *ngIf="message.sender !== currentUserId && currentUserId">
                         <div class="message-container">
@@ -32,16 +32,17 @@
                 </div>
             </div>
             <div class="type-area">
-                <div>
-                    <ion-item class="ion-item-bordered">
-                        <ion-input name="price"></ion-input>
-                    </ion-item>
-                </div>
+                <ion-row class="ion-justify-content-center ion-align-items-center">
+                    <ion-col size="11">
+                        <ion-item class="ion-item-bordered border-radius24">
+                            <ion-textarea [(ngModel)]="message" name="message"></ion-textarea>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="1" class="ion-justify-content-end ion-align-items-end">
+                        <ion-button (click)="send()" color="secondary">send</ion-button>
+                    </ion-col>
+                </ion-row>
             </div>
-
-
-
-
         </div>
 
     </ion-list>

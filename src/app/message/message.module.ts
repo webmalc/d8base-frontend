@@ -11,6 +11,7 @@ import {MessagesComponent} from '@app/message/components/messages/messages.compo
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
 import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
 import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
+import {MessagesSentApiService} from '@app/message/services/messages-sent-api.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {MessagePage} from './message.page';
@@ -32,7 +33,8 @@ import {MessagePage} from './message.page';
     providers: [
         ChatsCompilerService,
         LatestMessagesApiService,
-        MessagesListApiService
+        MessagesListApiService,
+        MessagesSentApiService
     ]
 })
 export class MessagePageModule {
