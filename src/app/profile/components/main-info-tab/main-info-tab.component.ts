@@ -1,7 +1,6 @@
 import {Component, OnInit, SecurityContext} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {UserManagerService} from '@app/core/services/user-manager.service';
@@ -23,13 +22,6 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
     public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
     public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
     public user: User;
-    public sizes: GridSizesInterface = {
-        sizeXs: 12,
-        sizeSm: 12,
-        sizeMd: 12,
-        sizeLg: 12,
-        sizeXl: 12
-    };
 
     constructor(
         public profileService: ProfileService,

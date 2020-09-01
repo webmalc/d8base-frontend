@@ -1,16 +1,16 @@
-<ion-item class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
+<ion-item class="ion-item-no-border ion-item-bordered-first">
     <ion-col class="ion-no-padding">
         <ion-row class="ion-justify-content-between ion-align-items-center">
             <ion-item class="ion-item-no-border">{{'profile-form.contacts'|translate}}</ion-item>
         </ion-row>
     </ion-col>
 </ion-item>
-<ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-bordered-others item-background-color-white">
+<ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
     <ion-col class="ion-no-padding">
         <ion-row *ngFor="let contact of userContacts$ | async"
                  class="ion-justify-content-between ion-align-items-center">
             <ion-item class="ion-item-no-border ion-align-items-center">
-                <ion-icon class="pr5" name="{{getContactIcon(contact.contact_display)}}"></ion-icon>
+                <ion-icon class="pr5" name="{{getContactIcon(contact.code)}}"></ion-icon>
                 {{contact.contact_display}}
             </ion-item>
             <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end">

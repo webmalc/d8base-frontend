@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Credentials} from '@app/auth/interfaces/credentials';
+import {Reinitable} from '@app/shared/abstract/reinitable';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {LoginFormService} from '../../forms/login-form.service';
 
@@ -9,7 +10,7 @@ import {LoginFormService} from '../../forms/login-form.service';
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent extends Reinitable implements OnInit {
 
     @Input() public errorMessage: string;
     public readonly formFields = LoginFormFields;
@@ -19,6 +20,7 @@ export class LoginFormComponent implements OnInit {
         public readonly loginFormService: LoginFormService,
         private readonly router: Router
     ) {
+        super();
     }
 
     public ngOnInit(): void {

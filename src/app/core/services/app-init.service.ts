@@ -3,6 +3,7 @@ import {AuthenticationService} from '@app/core/services/authentication.service';
 import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {TranslationService} from '@app/core/services/translation.service';
+import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Platform} from '@ionic/angular';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class AppInitService {
         private platform: Platform,
         private masterManager: MasterManagerService,
         private errorHandler: GlobalErrorHandlerService,
-        private auth: AuthenticationService
+        private auth: AuthenticationService,
+        private userManager: UserManagerService
     ) {
     }
 
@@ -33,6 +35,7 @@ export class AppInitService {
                         }
                     }
                 );
+                this.userManager.subscribeToAuthSubject();
                 this.translationService.init();
                 resolve();
             }).catch(error => this.errorHandler.handleError(error));
