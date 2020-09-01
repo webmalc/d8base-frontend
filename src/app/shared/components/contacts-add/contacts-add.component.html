@@ -10,7 +10,7 @@
         <ion-row *ngFor="let contact of userContacts$ | async"
                  class="ion-justify-content-between ion-align-items-center">
             <ion-item class="ion-item-no-border ion-align-items-center">
-                <ion-icon class="pr5" name="{{getContactIcon(contact.code)}}"></ion-icon>
+                <ion-icon class="pr5" name="{{getContactIcon(contact.contact_code)}}"></ion-icon>
                 {{contact.contact_display}}
             </ion-item>
             <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end">
@@ -18,7 +18,7 @@
                     {{contact.value}}
                 </ion-item>
                 <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
-                          routerLink="/profile/contact-edit/{{contact.id}}"
+                          routerLink="contact-edit/{{contact.id}}"
                           routerDirection="forward"
                           routerLinkActive="active"
                 >
@@ -26,8 +26,28 @@
                 </ion-item>
             </ion-item>
         </ion-row>
+
+        <div *ngFor="let contact of contacts$ | async">
+            <ion-row *ngIf="!(userContacts$ | async).length"
+                      class="ion-no-margin ion-no-margin ion-item-no-vertical-padding ion-item-no-side-padding ion-justify-content-between ion-align-items-center">
+                <ion-item class="ion-item-no-border ion-align-items-center">
+                    <ion-icon class="pr5" name="{{getContactIcon(contact.code)}}"></ion-icon>
+                    {{contact.name}}
+                </ion-item>
+                <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end">
+                    <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
+                              routerLink="contact-add-default/{{contact.id}}"
+                              routerDirection="forward"
+                              routerLinkActive="active"
+                    >
+                        <ion-icon name="create-outline"></ion-icon>
+                    </ion-item>
+                </ion-item>
+            </ion-row>
+        </div>
+
         <ion-row *ngIf="canAddNewContact$ | async">
-            <ion-item routerLink="/profile/contact-add/"
+            <ion-item routerLink="contact-add/"
                       routerDirection="forward"
                       routerLinkActive="active"
                       class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"

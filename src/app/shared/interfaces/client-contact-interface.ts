@@ -4,5 +4,5 @@ export interface ClientContactInterface {
     contact_display?: string;
     value?: string;
     professional?: number;
-    code?: string;
+    contact_code?: string;
 }

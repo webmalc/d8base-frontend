@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaIconFactoryService} from '@app/core/services/media-icon-factory.service';
 import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
+import {Contact} from '@app/profile/models/contact';
 import {UserContact} from '@app/profile/models/user-contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
@@ -18,16 +19,27 @@ export class ContactsAddComponent extends Reinitable implements OnInit, OnDestro
     public static reinit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public userContacts$: BehaviorSubject<UserContact[]> = new BehaviorSubject<UserContact[]>([]);
     public canAddNewContact$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+    public contacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
+    public defaultContacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
     private subscription: Subscription = null;
     private inited: boolean = false;
 
-    constructor(public userContactApiService: UserContactApiService, private contactsApi: ContactApiService) {
+    constructor(
+        public userContactApiService: UserContactApiService,
+        private contactsApi: ContactApiService
+    ) {
         super();
     }
 
     public ngOnInit(): void {
         this.userContactApiService.getCurrentClientContacts().subscribe(
             contacts => this.userContacts$.next(contacts.results)
+        );
+        this.contactsApi.get().subscribe(
+            list => {
+                this.contacts$.next(list.results);
+                this.initDefaultContacts(list.results);
+            }
         );
         this.canAddNewContact();
         this.subToReinit();
@@ -39,6 +51,13 @@ export class ContactsAddComponent extends Reinitable implements OnInit, OnDestro
 
     public getContactIcon(contactDisplay: string): string {
         return MediaIconFactoryService.getIcon(contactDisplay);
+    }
+
+    private initDefaultContacts(contacts: Contact[]): void {
+        const defaultContacts: Contact[] = [];
+        contacts.forEach(contact => contact.is_default ? defaultContacts.push(contact) : null);
+
+        this.defaultContacts$.next(defaultContacts);
     }
 
     private subToReinit(): void {

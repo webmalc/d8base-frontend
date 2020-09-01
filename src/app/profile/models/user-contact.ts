@@ -5,7 +5,7 @@ import {Expose} from 'class-transformer';
 export class UserContact implements ClientContactInterface {
     @Expose() public id: number;
     @Expose() public contact: number;
-    @Expose() public code?: string;
+    @Expose() public contact_code?: string;
     @Expose() public contact_display?: string;
     @Expose() public value?: string;
 }

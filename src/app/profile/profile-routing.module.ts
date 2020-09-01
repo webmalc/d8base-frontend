@@ -24,6 +24,11 @@ const routes: Routes = [
         canActivate: [MainGuard]
     },
     {
+        path: 'contact-add-default/:default-contact-id',
+        component: UserContactEditComponent,
+        canActivate: [MainGuard]
+    },
+    {
         path: 'location-edit/:location-id',
         component: LocationEditComponent,
         canActivate: [MainGuard]
