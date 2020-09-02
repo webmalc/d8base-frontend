@@ -31,7 +31,6 @@ export class RegistrationService {
             (newUser: RegistrationResponseInterface) => this.tokenManager.setTokens(newUser.token).then(
                 _ => {
                     this.authenticationService.isAuthenticated$.next(true);
-                    this.sendVerifyLink();
                     if (!location) {
                         subscriber.next(newUser);
                         subscriber.complete();
