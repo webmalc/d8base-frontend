@@ -28,6 +28,9 @@ export class LoginFormComponent extends Reinitable implements OnInit {
     }
 
     public submitLoginForm(): void {
+        if (this.loginFormService.form.invalid) {
+            return;
+        }
         const data = this.loginFormService.form.getRawValue();
         const credentials = {
             username: data[LoginFormFields.Username],

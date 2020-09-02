@@ -19,7 +19,7 @@ export const environment = {
         master: '/en/api/accounts/professionals/',
         master_list: '/en/api/professionals/professionals/',
         plugin: '',
-        reset_password_link: '',
+        reset_password_link: '/en/api/accounts/send-reset-password-link/',
         reset_password: '/en/api/accounts/reset-password/',
         refresh: '/en/api/auth/token/',
         register: '/en/api/accounts/register/',

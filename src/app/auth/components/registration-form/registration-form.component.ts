@@ -47,6 +47,9 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     public submitRegistrationForm(): void {
+        if (this.registrationFormService.form.invalid) {
+            return;
+        }
         const formData: object = this.registrationFormService.form.getRawValue();
 
         const user = plainToClass(User, formData, {excludeExtraneousValues: true});
