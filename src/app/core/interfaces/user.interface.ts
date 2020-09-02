@@ -1,5 +1,7 @@
+import {Country} from '@app/profile/models/country';
+
 export interface UserInterface {
-    id?: number;
+    id: number;
     first_name: string;
     last_name: string;
     patronymic?: string;
@@ -12,4 +14,5 @@ export interface UserInterface {
     main_language: string;
     languages?: string[];
     account_type: string;
+    nationality: number | Country;
 }

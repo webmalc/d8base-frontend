@@ -7,8 +7,7 @@ import {AuthenticationService} from '@app/core/services/authentication.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {from, Observable, of} from 'rxjs';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 
 @Injectable()
@@ -25,50 +24,44 @@ export class RegistrationService {
         private authenticationService: AuthenticationService
     ) {
     }
-    // TODO: check email verification request
+
     public register(user: User, location?: UserLocation): Observable<User> {
         // @ts-ignore
-        return this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).pipe(
-            switchMap(
-                (newUser: RegistrationResponseInterface) => {
-                    return from(this.tokenManager.setTokens(newUser.token)).pipe(
-                        switchMap(() => {
-                            this.authenticationService.isAuthenticated$.next(true);
-                            this.sendVerifyLink().subscribe();
-                            if (!location) {
-                                return of(newUser);
+        return new Observable<User>(subscriber => this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).subscribe(
+            (newUser: RegistrationResponseInterface) => this.tokenManager.setTokens(newUser.token).then(
+                _ => {
+                    this.authenticationService.isAuthenticated$.next(true);
+                    this.sendVerifyLink();
+                    if (!location) {
+                        subscriber.next(newUser);
+                        subscriber.complete();
+
+                        return;
+                    }
+                    this.locationService.getMergedLocationData().then(
+                        (geoposition: UserLocation) => {
+                            if (null !== geoposition) {
+                                location.coordinates = geoposition.coordinates;
                             }
-
-                            return from(this.locationService.getMergedLocationData()).pipe(
-                                switchMap(
-                                    (geoposition: UserLocation) => {
-                                        if (null !== geoposition) {
-                                            location.coordinates = geoposition.coordinates;
-                                        }
-
-                                        return this.locationApiService.create(location).pipe(
-                                            map(
-                                                _ => of(newUser)
-                                            )
-                                        );
-                                    }
-                                ),
-                                catchError(
-                                    e => of(newUser)
-                                )
+                            this.locationApiService.create(location).subscribe(
+                                createdLocation => {
+                                    subscriber.next(newUser);
+                                    subscriber.complete();
+                                },
+                                err => {
+                                    subscriber.next(newUser);
+                                    subscriber.complete();
+                                }
                             );
-                        })
+                        }
                     );
                 }
-            ),
-            catchError(
-                err => of(err)
             )
-        );
+        ));
     }
 
-    private sendVerifyLink(): Observable<any> {
-        return this.client.post(this.SEND_VERITY_REGISTRATION, {});
+    private sendVerifyLink(): void {
+        this.client.post(this.SEND_VERITY_REGISTRATION, {}).subscribe();
     }
 }
 
