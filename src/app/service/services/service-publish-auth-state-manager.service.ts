@@ -6,7 +6,6 @@ import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {filter} from 'rxjs/operators';
 
 @Injectable()
 export class ServicePublishAuthStateManagerService {
@@ -21,16 +20,20 @@ export class ServicePublishAuthStateManagerService {
 
     public updateFourStepState(): void {
         if (!this.servicePublishDataHolder.isset(ServicePublishStepFourComponent.STEP)) {
-            this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
-                () => this.masterManager.getMasterList().subscribe(
-                    masterList => this.userManager.getCurrentUser().subscribe(
-                        user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                            ServicePublishStepFourComponent.STEP,
-                            {isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false}
-                        )
-                    )
-                )
+            this.masterManager.isMaster().subscribe(
+                isMaster => isMaster ? this.masterManager.getMasterList().subscribe(
+                    masterList => this.update((masterList as Master[]).length === 0)
+                ) : this.update(true)
             );
         }
+    }
+
+    private update(isNewMaster: boolean): void {
+        this.userManager.getCurrentUser().subscribe(
+            user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
+                ServicePublishStepFourComponent.STEP,
+                {isNewMaster, user, isNewUser: false}
+            )
+        );
     }
 }
