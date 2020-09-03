@@ -1,5 +1,5 @@
 import {Location} from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Contact} from '@app/profile/models/contact';
@@ -52,6 +52,19 @@ export class UserContactEditComponent implements OnInit {
 
     public ngOnInit(): void {
         const contactId = parseInt(this.route.snapshot.paramMap.get('contact-id'), 10);
+        const defaultContactId = parseInt(this.route.snapshot.paramMap.get('default-contact-id'), 10);
+        if (defaultContactId) {
+            this.contactsApi.getByEntityId(defaultContactId).subscribe(
+                contact => {
+                    this.selectedContact = contact;
+                    this.selectOptions.push(contact);
+                    this.createForm(contact);
+                    this.disableContact();
+                }
+            );
+
+            return;
+        }
         if (contactId) {
             this.api.getByEntityId(contactId).subscribe(
                 (result: UserContact) => {

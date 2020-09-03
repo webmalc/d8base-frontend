@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +17,8 @@ export class MediaIconFactoryService {
                 return 'logo-skype';
             case 'phone':
                 return 'call-outline';
+            case 'whatsapp':
+                return 'logo-whatsapp';
             default:
                 return 'reader-outline';
         }

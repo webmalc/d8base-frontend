@@ -32,7 +32,7 @@
                 </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
                     <ion-col class="ion-no-padding">
-                        <ion-row>
+                        <ion-row *ngIf="user?.first_name || user?.last_name">
                             <ion-item id="username" class="ion-item-no-border ion-align-items-center">
                                 {{user?.first_name}} {{user?.last_name}}
                             </ion-item>

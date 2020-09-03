@@ -46,13 +46,15 @@ export class ProfileService {
         );
     }
 
-    public createAvatarForm(): void {
-        this.getUser$().subscribe(
-            user => {
-                this.avatarForm = this.formBuilder.group({
-                    [ProfileFormFields.Avatar]: [user.avatar, [Validators.required]]
-                });
-            }
+    public createAvatarForm(): Observable<void> {
+        return this.getUser$().pipe(
+            map(
+                user => {
+                    this.avatarForm = this.formBuilder.group({
+                        [ProfileFormFields.Avatar]: [user.avatar, [Validators.required]]
+                    });
+                }
+            )
         );
     }
 
@@ -75,7 +77,7 @@ export class ProfileService {
     }
 
     public updateUser(user: Partial<User>): void {
-        this.userManager.updateUser(user).subscribe(
+        this.userManager.updateUser(user).pipe().subscribe(
             (updatedUser: User) => console.log(updatedUser),
             (error) => console.log(error.error)
         );

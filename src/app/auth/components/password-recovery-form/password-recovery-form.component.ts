@@ -23,8 +23,9 @@ export class PasswordRecoveryFormComponent implements OnInit {
     }
 
     public recover(): any {
-        const data = this.formService.form.getRawValue();
-        console.log(data);
-        this.passwordRecoveryService.recover(data);
+        if (this.formService.form.invalid) {
+            return;
+        }
+        this.passwordRecoveryService.recover(this.formService.form.getRawValue());
     }
 }

@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {AuthenticationService} from '@app/core/services/authentication.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {filter, map, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -15,7 +16,16 @@ export class UserManagerService {
     private user: User;
     private readonly url = environment.backend.user;
 
-    constructor(private api: ApiClientService) {
+    constructor(
+        private api: ApiClientService,
+        private auth: AuthenticationService
+    ) {
+    }
+
+    public subscribeToAuthSubject(): void {
+        this.auth.isAuthenticated$.pipe(filter(isAuth => isAuth === false)).subscribe(
+            _ => this.user = null
+        );
     }
 
     public getCurrentUser(): Observable<User> {

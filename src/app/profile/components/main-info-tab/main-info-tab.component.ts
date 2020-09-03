@@ -1,7 +1,6 @@
 import {Component, OnInit, SecurityContext} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {GridSizesInterface} from '@app/core/interfaces/grid-sizes-interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {HelperService} from '@app/core/services/helper.service';
@@ -24,13 +23,6 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
     public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
     public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
     public user: User;
-    public sizes: GridSizesInterface = {
-        sizeXs: 12,
-        sizeSm: 12,
-        sizeMd: 12,
-        sizeLg: 12,
-        sizeXl: 12
-    };
 
     constructor(
         public profileService: ProfileService,
@@ -47,7 +39,9 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
         this.userManager.getCurrentUser().subscribe(
             user => this.user = user
         );
-        this.profileService.createAvatarForm();
+        this.profileService.createAvatarForm().subscribe(
+            () => this.onAvatarChange()
+        );
         this.profileService.initLocation().subscribe(
             locationList => {
                 this.defaultLocation$.next(locationList.pop() as UserLocation);
@@ -68,7 +62,7 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
     }
 
     public saveAvatar(data: string): void {
-        if (data.slice(0, 7) !== 'http://' && data.slice(0, 8) !== 'https://') {
+        if (data.slice(0, 7) !== 'http://' || data.slice(0, 8) !== 'https://') {
             this.profileService.updateUser({avatar: data});
         }
     }
@@ -78,11 +72,16 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
         if (null === avatar) {
             return HelperService.getNoAvatarLink();
         }
-        this.saveAvatar(avatar);
 
         return this.sanitizer.sanitize(
             SecurityContext.RESOURCE_URL,
             this.sanitizer.bypassSecurityTrustResourceUrl(avatar)
+        );
+    }
+
+    private onAvatarChange(): void {
+        this.profileService.avatarForm.get(ProfileFormFields.Avatar).statusChanges.subscribe(
+            _ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value)
         );
     }
 }

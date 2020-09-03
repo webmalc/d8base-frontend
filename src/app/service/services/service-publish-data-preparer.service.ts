@@ -124,8 +124,8 @@ export class ServicePublishDataPreparerService {
         const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP);
         location.country = stepData.country.id;
         location.city = stepData.city.id;
-        location.address = stepData.address;
-        location.postal_code = stepData.postal_code.id;
+        location.address = stepData?.address;
+        location.postal_code = stepData?.postal_code?.id;
         location.units = parseInt(stepData.departure.units, 10);
 
         return HelperService.clear(location);

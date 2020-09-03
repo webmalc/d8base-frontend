@@ -58,6 +58,15 @@
                         </ion-item>
 
                         <ion-item
+                                routerLink="/service/publish/step-one"
+                                routerLinkActive="active"
+                                routerDirection="forward"
+                        >
+                            <ion-icon name="log-out-outline"></ion-icon>
+                            {{'template.service'|translate}}
+                        </ion-item>
+
+                        <ion-item
                                 routerLink="/auth/login"
                                 routerLinkActive="active"
                                 id="logout"
@@ -127,7 +136,7 @@
                         <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
                             && (authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
                             && platform.is('desktop')"
-                            class="ion-item-no-border" slot="end">
+                            class="ion-item-no-border cursor-pointer" slot="end">
                             {{'template.become-master'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border" slot="end"
