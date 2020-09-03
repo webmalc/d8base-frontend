@@ -18,7 +18,7 @@
                     {{contact.value}}
                 </ion-item>
                 <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
-                          routerLink="contact-edit/{{contact.id}}"
+                          routerLink="/profile/contact-edit/{{contact.id}}"
                           routerDirection="forward"
                           routerLinkActive="active"
                 >
@@ -36,7 +36,7 @@
                 </ion-item>
                 <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end">
                     <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
-                              routerLink="contact-add-default/{{contact.id}}"
+                              routerLink="/profile/contact-add-default/{{contact.id}}"
                               routerDirection="forward"
                               routerLinkActive="active"
                     >
@@ -47,7 +47,7 @@
         </div>
 
         <ion-row *ngIf="canAddNewContact$ | async">
-            <ion-item routerLink="contact-add/"
+            <ion-item routerLink="/profile/contact-add/"
                       routerDirection="forward"
                       routerLinkActive="active"
                       class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
