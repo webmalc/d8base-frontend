@@ -1,8 +1,34 @@
-<ion-content class="ion-margin-top" (keydown.enter)="send()">
-    <ion-list class="d8b-container height100">
+<ion-header class="d8b-gradient-bgc">
+    <ion-item class="ion-item-no-border ion-justify-content-center ion-align-items-center">
+        <ion-row class="d8b-container chat-container width100 ion-align-items-center">
+            <ion-col size="1" class="ion-no-margin ion-no-padding">
+                <ion-item routerLink="/message"
+                          routerDirection="back"
+                          routerLinkActive="active"
+                          class="cursor-pointer ion-item-no-border ion-no-padding" style="min-width: 60px">
+                    <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+                </ion-item>
+            </ion-col>
+            <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
+                <ion-item class="ion-item-no-border">
 
-        <div class="chat-container chat-flex-container">
-            <div class="messages-area">
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+</ion-header>
+
+<ion-content class="ion-margin-top" id="content" [scrollEvents]="true">
+<!--    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData()" position="top">-->
+<!--        <ion-infinite-scroll-content-->
+<!--                loadingSpinner="bubbles"-->
+<!--                loadingText="Loading more data...">-->
+<!--        </ion-infinite-scroll-content>-->
+<!--    </ion-infinite-scroll>-->
+    <ion-list class="d8b-container chat-container ion-margin-bottom">
+<!--        <div class="chat-flex-container">-->
+<!--            <div class="messages-area">-->
+
                 <div *ngFor="let message of (messages$|async)">
                     <ion-row class="width100" *ngIf="message.sender !== currentUserId && currentUserId">
                         <div class="message-container">
@@ -30,20 +56,26 @@
                         </div>
                     </ion-row>
                 </div>
-            </div>
-            <div class="type-area">
-                <ion-row class="ion-justify-content-center ion-align-items-center">
-                    <ion-col size="11">
-                        <ion-item class="ion-item-bordered border-radius24">
-                            <ion-textarea [(ngModel)]="message" name="message"></ion-textarea>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col size="1" class="ion-justify-content-end ion-align-items-end">
-                        <ion-button (click)="send()" color="secondary">send</ion-button>
-                    </ion-col>
-                </ion-row>
-            </div>
-        </div>
+
+<!--            </div>-->
+<!--        </div>-->
 
     </ion-list>
+
 </ion-content>
+<ion-footer class="ion-no-border d8b-container chat-container" (keydown.enter)="send()">
+    <ion-toolbar>
+        <div class="type-area">
+            <ion-row class="ion-justify-content-center ion-align-items-center">
+                <ion-col size="11">
+                    <ion-item class="ion-item-bordered border-radius24">
+                        <ion-textarea [(ngModel)]="message" name="message"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="1" class="ion-justify-content-end ion-align-items-end">
+                    <ion-button (click)="send()" color="secondary">send</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-toolbar>
+</ion-footer>
