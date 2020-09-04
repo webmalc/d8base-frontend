@@ -18,7 +18,7 @@
 <ion-content class="ion-margin-top">
 
     <ion-list class="d8b-container">
-        <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey" *ngFor="let chat of (messages$|async)">
+        <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey" *ngFor="let chat of (chatList$|async)">
             <ion-avatar slot="start">
                 <img src="{{chat.interlocutor_avatar_thumbnail}}">
             </ion-avatar>

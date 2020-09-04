@@ -9,7 +9,7 @@ import {MessagesListApiService} from '@app/message/services/messages-list-api.se
 import {MessagesSentApiService} from '@app/message/services/messages-sent-api.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {IonContent, IonInfiniteScroll} from '@ionic/angular';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {filter, first, map, tap} from 'rxjs/operators';
 
 @Component({
@@ -26,6 +26,8 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
     public message: string;
     @ViewChild(IonInfiniteScroll) public infiniteScroll: IonInfiniteScroll;
     @ViewChild(IonContent, {read: IonContent, static: false}) public content: IonContent;
+    private messagesSubscription: Subscription;
+    private currentMessagesApiPage: number = 1;
 
     constructor(
         private messagesListApi: MessagesListApiService,
@@ -48,6 +50,7 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         console.log('destroyed');
+        this.messagesSubscription.unsubscribe();
         this.messageListUpdater.destroy();
     }
 
@@ -61,6 +64,9 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
     }
 
     public send(): void {
+        if (!this.message) {
+            return;
+        }
         this.messagesSentApi.create(this.generateSentMessage()).subscribe(
             res => {
                 this.updateMessageList();
@@ -78,8 +84,8 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
     }
 
     private subscribeToMessagesUpdate(): void {
-        this.messageListUpdater.receiveUpdates(this.interlocutorId).subscribe(
-            (list: Message[]) => this.isNeedToUpdate(list).pipe(tap(_ => console.log('tick')), filter(isNeed => isNeed))
+        this.messagesSubscription = this.messageListUpdater.receiveUpdates(this.interlocutorId).subscribe(
+            (list: Message[]) => this.isNeedToUpdate(list.reverse()).pipe(tap(_ => console.log('tick')), filter(isNeed => isNeed))
                 .subscribe(_ => this.updateMessageList(list))
         );
     }
@@ -88,11 +94,13 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
         return this.messages$.pipe(
             first(),
             map(
+                (currentList: Message[]) => currentList.slice(0, 50)
+            ),
+            map(
                 (currentList: Message[]) => {
                     if (newList.length !== currentList.length) {
                         return true;
                     }
-                    newList = newList.reverse();
                     for (let i = 0; i < newList.length; i += 1) {
                         if ((newList[i].body !== currentList[i].body) || (newList[i].is_read !== currentList[i].is_read)) {
                             return true;
@@ -114,7 +122,7 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
     }
 
     private updateMessageList(list?: Message[]): void {
-        list ? this.setList(list.reverse()) : this.messagesListApi.getByInterlocutor(this.interlocutorId, 50).subscribe(
+        list ? this.setList(list) : this.messagesListApi.getByInterlocutor(this.interlocutorId, 50).subscribe(
             listApiResponse => this.setList(listApiResponse.results.reverse())
         );
     }

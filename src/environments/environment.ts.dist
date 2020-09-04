@@ -65,6 +65,11 @@ export const environment = {
        projectId: '<your-project-id>',
        storageBucket: '<your-storage-bucket>',
        messagingSenderId: '<your-messaging-sender-id>'
+    },
+    message: {
+        direct_update_interval_ms: 1000,
+        chat_list_update_interval_ms: 5000,
+        background_update_interval_ms: 5000
     }
 };
 

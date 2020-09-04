@@ -5,6 +5,7 @@ export interface UserInterface extends PartialUserInterface {
     patronymic?: string;
     password?: string;
     phone: string;
+    email: string;
     gender: boolean;
     birthday?: string;
     main_language: string;

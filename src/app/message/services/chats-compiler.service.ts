@@ -5,7 +5,6 @@ import {LatestMessageInterface} from '@app/message/interfaces/latest-message-int
 import {AbstractMessage} from '@app/message/models/abstract-message';
 import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
 import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
-import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
@@ -19,22 +18,22 @@ export class ChatsCompilerService {
     ) {
     }
 
-    public generateChatList(): Observable<AbstractMessage[]> {
-        return this.latestMessagesApi.get().pipe(
-            map((list: LatestMessageInterface[]) => {
+    public async generateChatList(): Promise<AbstractMessage[]> {
+        return await this.latestMessagesApi.get().pipe(
+            map(async (list: LatestMessageInterface[]) => {
                 const res: AbstractMessage[] = [];
-                list.forEach(async mes => {
+                for (const mes of list) {
                     const abstractMessage: AbstractMessage = await this.getInterlocutorData(mes) as AbstractMessage;
                     abstractMessage.body = mes.body;
                     abstractMessage.is_read = mes.is_read;
                     abstractMessage.created = HelperService.fromDatetime(mes.created).time;
                     abstractMessage.unread_count = await this.getUnreadCount(mes);
                     res.push(abstractMessage);
-                });
+                }
 
                 return res.reverse();
             })
-        );
+        ).toPromise();
     }
 
     private getUnreadCount(message: LatestMessageInterface): Promise<number> {
@@ -48,12 +47,12 @@ export class ChatsCompilerService {
     private getInterlocutorData(message: LatestMessageInterface): Promise<Partial<AbstractMessage>> {
         return this.userManager.getCurrentUser().pipe(
             map(user => {
-                const data = message.sender.email !== user.email ? {
-                    interlocutor: `${message.sender.first_name} ${message.sender.last_name}`,
+                const data = message.sender.id !== user.id ? {
+                    interlocutor: `${message.sender.first_name} ${message.sender.last_name ?? ''}`,
                     interlocutor_id: message.sender.id,
                     interlocutor_avatar_thumbnail: message.sender.avatar_thumbnail
                 } : {
-                    interlocutor: `${message.recipient.first_name} ${message.recipient.last_name}`,
+                    interlocutor: `${message.recipient.first_name} ${message.recipient.last_name ?? ''}`,
                     interlocutor_id: message.recipient.id,
                     interlocutor_avatar_thumbnail: message.recipient.avatar_thumbnail
                 };

@@ -19,15 +19,13 @@
 </ion-header>
 
 <ion-content class="ion-margin-top" id="content" [scrollEvents]="true">
-<!--    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData()" position="top">-->
-<!--        <ion-infinite-scroll-content-->
-<!--                loadingSpinner="bubbles"-->
-<!--                loadingText="Loading more data...">-->
-<!--        </ion-infinite-scroll-content>-->
-<!--    </ion-infinite-scroll>-->
+    <ion-infinite-scroll threshold="100px" [disabled]="true" (ionInfinite)="loadData()" position="top">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
     <ion-list class="d8b-container chat-container ion-margin-bottom">
-<!--        <div class="chat-flex-container">-->
-<!--            <div class="messages-area">-->
 
                 <div *ngFor="let message of (messages$|async)">
                     <ion-row class="width100" *ngIf="message.sender !== currentUserId && currentUserId">
@@ -56,9 +54,6 @@
                         </div>
                     </ion-row>
                 </div>
-
-<!--            </div>-->
-<!--        </div>-->
 
     </ion-list>
 
