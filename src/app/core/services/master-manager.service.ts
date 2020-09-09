@@ -26,53 +26,37 @@ export class MasterManagerService {
     }
 
     public updateIsMaster(): void {
-        this.isMaster().subscribe(
-            isMaster => this.isMaster$.next(isMaster)
-        );
+        this.isMaster().subscribe(isMaster => this.isMaster$.next(isMaster));
     }
 
     public isMaster(): Observable<boolean> {
-        return this.userManager.getCurrentUser().pipe(
-            map(user => user.account_type === TypeOfUser.Master)
-        );
+        return this.userManager.getCurrentUser().pipe(map(user => user.account_type === TypeOfUser.Master));
     }
 
     public becomeMaster(): Observable<User> {
-        return this.userManager.becomeMaster().pipe(
-            tap(_ => this.updateIsMaster())
-        );
+        return this.userManager.becomeMaster().pipe(tap(_ => this.updateIsMaster()));
     }
 
     public getMasterList(): Observable<Master[]> {
-        return this.client.get(this.url).pipe(
-            map((data: ApiListResponseInterface<Master>) => data.results)
-        );
+        return this.client.get(this.url).pipe(map((data: ApiListResponseInterface<Master>) => data.results));
     }
 
     public updateMaster(master: Master): Observable<Master> {
-        return this.client.put(`${this.url}${master.id}/`, master).pipe(
-            map(raw => plainToClass(Master, raw))
-        );
+        return this.client.put(`${this.url}${master.id}/`, master).pipe(map(raw => plainToClass(Master, raw)));
     }
 
     public createMaster(master: Master): Observable<Master> {
-        return this.client.post(this.url, master).pipe(
-            map(raw => plainToClass(Master, raw))
-        );
+        return this.client.post(this.url, master).pipe(map(raw => plainToClass(Master, raw)));
     }
 
     public getMaster(masterId?: number): Observable<Master> {
-        return this.client.get(`${this.url}${masterId}/`).pipe(
-            map(raw => plainToClass(Master, raw))
-        );
+        return this.client.get(`${this.url}${masterId}/`).pipe(map(raw => plainToClass(Master, raw)));
     }
 
     public getUserLessList$(ids: number[]): Observable<MasterInterface[]> {
         return this.client
             .get<ApiListResponseInterface<MasterInterface>>(this.masterListUrl, {pk_in: ids.join(',')})
-            .pipe(
-                map((data) => data.results)
-            );
+            .pipe(map((data) => data.results));
     }
 
     public getExperienceLevelList(): Observable<{ value: string, display_name: string }[]> {
@@ -83,14 +67,6 @@ export class MasterManagerService {
     }
 
     private subscribeToAuth(): void {
-        this.auth.isAuthenticated$.subscribe(
-            isAuth => {
-                if (isAuth) {
-                    this.updateIsMaster();
-                } else {
-                    this.isMaster$.next(false);
-                }
-            }
-        );
+        this.auth.isAuthenticated$.subscribe(isAuth => isAuth ? this.updateIsMaster() : this.isMaster$.next(false));
     }
 }

@@ -178,6 +178,14 @@
   "messages": {
     "chat-list-page": {
       "search": "Search contact"
+    },
+    "direct": {
+      "loading-text": "Loading more messages..."
+    },
+    "context-menu": {
+      "edit": "Edit",
+      "delete-from-me": "Delete from me",
+      "delete": "Delete from me and from "
     }
   }
 }

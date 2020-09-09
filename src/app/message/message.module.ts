@@ -6,10 +6,12 @@ import {IonicModule} from '@ionic/angular';
 
 import {MessagePageRoutingModule} from './message-routing.module';
 
+import {ContextMenuPopoverComponent} from '@app/message/components/context-menu-popover/context-menu-popover.component';
 import {DirectComponent} from '@app/message/components/direct/direct.component';
 import {MessagesComponent} from '@app/message/components/messages/messages.component';
 import {ChatListUpdaterService} from '@app/message/services/chat-list-updater.service';
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
+import {DirectServiceService} from '@app/message/services/direct-service.service';
 import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
 import {MessageListUpdaterService} from '@app/message/services/message-list-updater.service';
 import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
@@ -30,7 +32,8 @@ import {MessagePage} from './message.page';
     declarations: [
         MessagePage,
         DirectComponent,
-        MessagesComponent
+        MessagesComponent,
+        ContextMenuPopoverComponent
     ],
     providers: [
         ChatsCompilerService,
@@ -38,7 +41,8 @@ import {MessagePage} from './message.page';
         MessagesListApiService,
         MessagesSentApiService,
         MessageListUpdaterService,
-        ChatListUpdaterService
+        ChatListUpdaterService,
+        DirectServiceService
     ]
 })
 export class MessagePageModule {

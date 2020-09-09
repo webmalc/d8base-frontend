@@ -1,47 +1,43 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HelperService} from '@app/core/services/helper.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
+import {ContextMenuPopoverComponent} from '@app/message/components/context-menu-popover/context-menu-popover.component';
 import {Message} from '@app/message/models/message';
-import {SentMessage} from '@app/message/models/sent-message';
-import {MessageListUpdaterService} from '@app/message/services/message-list-updater.service';
-import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
-import {MessagesSentApiService} from '@app/message/services/messages-sent-api.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {IonContent, IonInfiniteScroll} from '@ionic/angular';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {filter, first, map, tap} from 'rxjs/operators';
+import {DirectServiceService} from '@app/message/services/direct-service.service';
+import {IonContent, IonInfiniteScroll, Platform, PopoverController} from '@ionic/angular';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-direct',
     templateUrl: './direct.component.html',
     styleUrls: ['./direct.component.scss'],
 })
-export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
+export class DirectComponent implements OnInit, OnDestroy {
 
-    public messages$: BehaviorSubject<Message[]> = new BehaviorSubject([]);
-    public list: Message[] = [];
-    public currentUserId: number;
-    public interlocutorId: number;
-    public message: string;
     @ViewChild(IonInfiniteScroll) public infiniteScroll: IonInfiniteScroll;
     @ViewChild(IonContent, {read: IonContent, static: false}) public content: IonContent;
-    private messagesSubscription: Subscription;
-    private currentMessagesApiPage: number = 1;
+    @ViewChild('bottomPoint', {read: ElementRef}) public bottom: ElementRef<HTMLElement>;
+    @ViewChild('sentMenu', {read: ElementRef}) public sentMenu: ElementRef<HTMLElement>;
+    public showContextIndex;
+    public isUpdate: boolean = false;
+    private updateMessageId: number;
 
     constructor(
-        private messagesListApi: MessagesListApiService,
         private route: ActivatedRoute,
-        private userManager: UserManagerService,
-        private messagesSentApi: MessagesSentApiService,
-        private messageListUpdater: MessageListUpdaterService
+        public directService: DirectServiceService,
+        private platform: Platform,
+        private popoverController: PopoverController
     ) {
-        super();
+        // super();
     }
 
-    public loadData(): void {
-        console.log('asdf');
-        this.infiniteScroll.complete();
+    public resetContext(): void {
+        this.showContextIndex = undefined;
+    }
+
+    public initMessageMenuContext(event: MouseEvent, message: Message): void {
+        event.preventDefault();
+        this.initContextMenuPopover(message, event);
     }
 
     public ionViewDidLeave(): void {
@@ -49,30 +45,25 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        console.log('destroyed');
-        this.messagesSubscription.unsubscribe();
-        this.messageListUpdater.destroy();
+        this.directService.destroy();
     }
 
     public ngOnInit(): void {
-        // this.infiniteScroll.disabled = true;
-        this.interlocutorId = parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10);
-        this.userManager.getCurrentUser().subscribe(
-            user => this.currentUserId = user.id
+        this.directService.init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10)).subscribe(
+            _ => this.subscribeToNextApiPageUpdate()
         );
-        this.subscribeToMessagesUpdate();
+        this.directService.messagesListUpdated.subscribe(_ => this.scrollToBottom());
+        this.directService.newMessageSent.subscribe(_ => this.scrollToBottom(true));
+    }
+
+    public loadData(): void {
+        this.directService.appendNextApiPage().subscribe(_ => this.infiniteScroll.complete());
     }
 
     public send(): void {
-        if (!this.message) {
-            return;
-        }
-        this.messagesSentApi.create(this.generateSentMessage()).subscribe(
-            res => {
-                this.updateMessageList();
-                this.clearMessageArea();
-            }
-        );
+        this.isUpdate ? this.directService.update(this.updateMessageId) : this.directService.send();
+        this.isUpdate = false;
+        this.updateMessageId = undefined;
     }
 
     public timeFromDatetime(datetime: string): string {
@@ -83,61 +74,49 @@ export class DirectComponent extends Reinitable implements OnInit, OnDestroy {
         return message.is_read ? 'success' : 'dark';
     }
 
-    private subscribeToMessagesUpdate(): void {
-        this.messagesSubscription = this.messageListUpdater.receiveUpdates(this.interlocutorId).subscribe(
-            (list: Message[]) => this.isNeedToUpdate(list.reverse()).pipe(tap(_ => console.log('tick')), filter(isNeed => isNeed))
-                .subscribe(_ => this.updateMessageList(list))
-        );
-    }
-
-    private isNeedToUpdate(newList: Message[]): Observable<boolean> {
-        return this.messages$.pipe(
-            first(),
-            map(
-                (currentList: Message[]) => currentList.slice(0, 50)
-            ),
-            map(
-                (currentList: Message[]) => {
-                    if (newList.length !== currentList.length) {
-                        return true;
+    private initContextMenuPopover(message: Message, event: MouseEvent): void {
+        this.updateMessageId = undefined;
+        this.popoverController.create({
+            component: ContextMenuPopoverComponent,
+            translucent: true,
+            componentProps: {message},
+            animated: true,
+            event
+        }).then(pop => pop.present().then(
+            () => {
+                ContextMenuPopoverComponent.delete$.pipe(filter(mes => mes !== null)).subscribe(
+                    (mes: Message) => {
+                        this.directService.delete(mes).subscribe();
+                        this.popoverController.dismiss();
                     }
-                    for (let i = 0; i < newList.length; i += 1) {
-                        if ((newList[i].body !== currentList[i].body) || (newList[i].is_read !== currentList[i].is_read)) {
-                            return true;
-                        }
+                );
+                ContextMenuPopoverComponent.update$.pipe(filter(mes => mes !== null)).subscribe(
+                    (mes: Message) => {
+                        this.isUpdate = true;
+                        this.directService.setMessageText(mes.body);
+                        this.updateMessageId = mes.id;
+                        this.popoverController.dismiss();
                     }
+                );
+            }
+        ));
 
-                    return false;
-                }
-            )
-        );
     }
 
-    private generateSentMessage(): SentMessage {
-        const message = new SentMessage();
-        message.recipient = this.interlocutorId;
-        message.body = this.message;
-
-        return message;
+    private subscribeToNextApiPageUpdate(): void {
+        this.directService.hasNextApiPage.subscribe(hasNext => {
+            this.infiniteScroll.disabled = !hasNext;
+        });
     }
 
-    private updateMessageList(list?: Message[]): void {
-        list ? this.setList(list) : this.messagesListApi.getByInterlocutor(this.interlocutorId, 50).subscribe(
-            listApiResponse => this.setList(listApiResponse.results.reverse())
-        );
-    }
-
-    private setList(list: Message[]): void {
-        this.messages$.next(list);
-        console.log('scrolling');
-        this.scrollToBottom();
-    }
-
-    private scrollToBottom(): void {
-        setTimeout(() => this.content.scrollToBottom(), 200);
-    }
-
-    private clearMessageArea(): void {
-        this.message = null;
+    private scrollToBottom(force: boolean = false): void {
+        if (
+            this.bottom && !force &&
+            !(this.bottom.nativeElement.getBoundingClientRect().top >= 0 &&
+                this.bottom.nativeElement.getBoundingClientRect().top <= this.platform.height())
+        ) {
+            return;
+        }
+        setTimeout(() => this.content.scrollToBottom(), 50);
     }
 }

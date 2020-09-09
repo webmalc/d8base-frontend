@@ -11,49 +11,58 @@
             </ion-col>
             <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
                 <ion-item class="ion-item-no-border">
-
+<!--                    user avatar here-->
                 </ion-item>
             </ion-col>
         </ion-row>
     </ion-item>
 </ion-header>
 
-<ion-content class="ion-margin-top" id="content" [scrollEvents]="true">
-    <ion-infinite-scroll threshold="100px" [disabled]="true" (ionInfinite)="loadData()" position="top">
+<ion-content class="ion-margin-top" id="content" [scrollEvents]="true" (click)="resetContext()">
+    <ion-infinite-scroll threshold="800px" [disabled]="true" (ionInfinite)="loadData()" position="top">
         <ion-infinite-scroll-content
                 loadingSpinner="bubbles"
-                loadingText="Loading more data...">
+                loadingText="{{'messages.direct.loading-text'|translate}}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
     <ion-list class="d8b-container chat-container ion-margin-bottom">
 
-                <div *ngFor="let message of (messages$|async)">
-                    <ion-row class="width100" *ngIf="message.sender !== currentUserId && currentUserId">
-                        <div class="message-container">
-                            <div class="received-message message">
-                                <div class="message-text">
-                                    {{message.body}}
-                                </div>
-                            </div>
-                            <div class="timeline timeline-received">
-                                {{timeFromDatetime(message.created)}}
-                            </div>
+        <div *ngFor="let message of (directService.messages$|async); let i=index">
+            <ion-row class="width100"
+                     *ngIf="message.sender !== directService.currentUserId && directService.currentUserId">
+
+                <div class="message-container">
+                    <div class="received-message message">
+                        <div class="message-text">
+                            {{message.body + " " + message?.id}}
                         </div>
-                    </ion-row>
-                    <ion-row class="width100 ion-justify-content-end" *ngIf="message.sender === currentUserId && currentUserId">
-                        <div class="message-container">
-                            <div class="sent-message message">
-                                <div class="message-text">
-                                    {{message.body}}
-                                </div>
-                            </div>
-                            <div class="timeline timeline-sent width100">
-                                {{timeFromDatetime(message.created)}}
-                                <ion-icon class="checkmark" color="{{getCheckmarkColor(message)}}" name="checkmark-done-outline"></ion-icon>
-                            </div>
-                        </div>
-                    </ion-row>
+                    </div>
+                    <div class="timeline timeline-received">
+                        {{timeFromDatetime(message.created)}}
+                    </div>
                 </div>
+            </ion-row>
+            <ion-row class="width100 ion-justify-content-end"
+                     *ngIf="message.sender === directService.currentUserId && directService.currentUserId">
+
+                <div class="message-container" (contextmenu)="initMessageMenuContext($event, message)">
+                    <div class="sent-message message">
+                        <div class="message-text">
+                            {{message.body + " " + message?.id}}
+                        </div>
+                    </div>
+                    <div class="timeline timeline-sent width100" *ngIf="message.id">
+                        {{timeFromDatetime(message.created)}}
+                        <ion-icon class="checkmark" color="{{getCheckmarkColor(message)}}"
+                                  name="checkmark-done-outline"></ion-icon>
+                    </div>
+                    <div class="timeline timeline-sent width100" *ngIf="!message.id">
+                        <ion-icon name="time-outline"></ion-icon>
+                    </div>
+                </div>
+            </ion-row>
+        </div>
+        <div #bottomPoint></div>
 
     </ion-list>
 
@@ -64,11 +73,11 @@
             <ion-row class="ion-justify-content-center ion-align-items-center">
                 <ion-col size="11">
                     <ion-item class="ion-item-bordered border-radius24">
-                        <ion-textarea [(ngModel)]="message" name="message"></ion-textarea>
+                        <ion-textarea [(ngModel)]="directService.message" name="message"></ion-textarea>
                     </ion-item>
                 </ion-col>
                 <ion-col size="1" class="ion-justify-content-end ion-align-items-end">
-                    <ion-button (click)="send()" color="secondary">send</ion-button>
+                    <ion-button (click)="send()" color="secondary">{{isUpdate ? 'update' : 'send'}}</ion-button>
                 </ion-col>
             </ion-row>
         </div>
