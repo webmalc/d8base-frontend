@@ -1,4 +1,4 @@
-import {Component, OnInit, SecurityContext} from '@angular/core';
+import {Component, SecurityContext} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {User} from '@app/core/models/user';
@@ -16,7 +16,7 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './main-info-tab.component.html',
     styleUrls: ['./main-info-tab.component.scss'],
 })
-export class MainInfoTabComponent extends Reinitable implements OnInit {
+export class MainInfoTabComponent extends Reinitable {
 
     public form: FormGroup;
     public formFields = ProfileFormFields;
@@ -30,25 +30,6 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
         private userManager: UserManagerService
     ) {
         super();
-    }
-
-    public ngOnInit(): void {
-        this.profileService.createProfileForm$().subscribe(
-            form => this.form = form
-        );
-        this.userManager.getCurrentUser().subscribe(
-            user => this.user = user
-        );
-        this.profileService.createAvatarForm().subscribe(
-            () => this.onAvatarChange()
-        );
-        this.profileService.initLocation().subscribe(
-            locationList => {
-                this.defaultLocation$.next(locationList.pop() as UserLocation);
-                this.additionalLocationsList$.next(locationList as UserLocation[]);
-            }
-        );
-        ContactsAddComponent.reinit$.next(true);
     }
 
 // TODO: Is there best way for trim input values ?
@@ -77,6 +58,25 @@ export class MainInfoTabComponent extends Reinitable implements OnInit {
             SecurityContext.RESOURCE_URL,
             this.sanitizer.bypassSecurityTrustResourceUrl(avatar)
         );
+    }
+
+    protected init(): void {
+        this.profileService.createProfileForm$().subscribe(
+            form => this.form = form
+        );
+        this.userManager.getCurrentUser().subscribe(
+            user => this.user = user
+        );
+        this.profileService.createAvatarForm().subscribe(
+            () => this.onAvatarChange()
+        );
+        this.profileService.initLocation().subscribe(
+            locationList => {
+                this.defaultLocation$.next(locationList.pop() as UserLocation);
+                this.additionalLocationsList$.next(locationList as UserLocation[]);
+            }
+        );
+        ContactsAddComponent.reinit$.next(true);
     }
 
     private onAvatarChange(): void {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Currency} from '@app/core/models/currency';
 import {CurrencyListApiService} from '@app/core/services/currency-list-api.service';
 import {TranslationService} from '@app/core/services/translation.service';
@@ -15,7 +15,7 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './service-publish-step-two.component.html',
     styleUrls: ['./service-publish-step-two.component.scss'],
 })
-export class ServicePublishStepTwoComponent extends Reinitable implements OnInit {
+export class ServicePublishStepTwoComponent extends Reinitable {
 
     public static readonly STEP = 1;
     public firstDurationList: string[] = ['days', 'hours', 'minutes'];
@@ -50,17 +50,6 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
         this.secondDurationList = list;
     }
 
-    public ngOnInit(): void {
-        this.currencyList.getList().subscribe(data  => this.currencyList$.next(data));
-        if (this.servicePublishDataHolder.isset(ServicePublishStepTwoComponent.STEP)) {
-            this.formService.createForm(
-                this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishStepTwoComponent.STEP)
-            );
-        } else {
-            this.formService.createForm();
-        }
-    }
-
     public submitForm(): void {
         this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
             ServicePublishStepTwoComponent.STEP, this.formService.form.getRawValue()
@@ -74,5 +63,16 @@ export class ServicePublishStepTwoComponent extends Reinitable implements OnInit
 
     public durationMinutesChange(): void {
         this.durationSecondValue = parseInt(this.formService.form.get(this.formFields.DurationSecond).value, 10);
+    }
+
+    protected init(): void {
+        this.currencyList.getList().subscribe(data  => this.currencyList$.next(data));
+        if (this.servicePublishDataHolder.isset(ServicePublishStepTwoComponent.STEP)) {
+            this.formService.createForm(
+                this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishStepTwoComponent.STEP)
+            );
+        } else {
+            this.formService.createForm();
+        }
     }
 }

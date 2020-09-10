@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Master} from '@app/core/models/master';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
@@ -20,7 +20,7 @@ import {map} from 'rxjs/operators';
     templateUrl: './service-publish-final-step.component.html',
     styleUrls: ['./service-publish-final-step.component.scss'],
 })
-export class ServicePublishFinalStepComponent extends Reinitable implements OnInit {
+export class ServicePublishFinalStepComponent extends Reinitable {
 
     public static STEP = 7;
 
@@ -46,7 +46,7 @@ export class ServicePublishFinalStepComponent extends Reinitable implements OnIn
         }
     }
 
-    public ngOnInit(): void {
+    protected init(): void {
         ContactsAddComponent.reinit$.next(true);
     }
 

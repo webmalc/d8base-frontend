@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Message} from '@app/message/models/message';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {NavParams} from '@ionic/angular';
@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './context-menu-popover.component.html',
     styleUrls: ['./context-menu-popover.component.scss'],
 })
-export class ContextMenuPopoverComponent extends Reinitable implements OnInit, OnDestroy {
+export class ContextMenuPopoverComponent extends Reinitable implements OnDestroy {
 
     public static delete$: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
     public static update$: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
@@ -17,10 +17,6 @@ export class ContextMenuPopoverComponent extends Reinitable implements OnInit, O
 
     constructor(private navParams: NavParams) {
         super();
-    }
-
-    public ngOnInit(): void {
-        this.message = this.navParams.get<Message>('message');
     }
 
     public ngOnDestroy(): void {
@@ -35,5 +31,9 @@ export class ContextMenuPopoverComponent extends Reinitable implements OnInit, O
 
     public update(): void {
         ContextMenuPopoverComponent.update$.next(this.message);
+    }
+
+    protected init(): void {
+        this.message = this.navParams.get<Message>('message');
     }
 }

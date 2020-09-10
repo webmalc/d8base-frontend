@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AbstractMessage} from '@app/message/models/abstract-message';
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
-import {Observable} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import Timer = NodeJS.Timer;
 
@@ -24,6 +24,10 @@ export class ChatListUpdaterService {
                 ), this.updateInterval);
             }
         );
+    }
+
+    public getChatList(): Observable<AbstractMessage[]> {
+        return from(this.chatsCompilerService.generateChatList());
     }
 
     public destroy(): void {

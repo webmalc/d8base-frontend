@@ -1,56 +1,50 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Injectable} from '@angular/core';
 import {AbstractMessage} from '@app/message/models/abstract-message';
 import {ChatListUpdaterService} from '@app/message/services/chat-list-updater.service';
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
+import {ChatsSearchService} from '@app/message/services/chats-search.service';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {filter, first, map, tap} from 'rxjs/operators';
+import {filter, first, map} from 'rxjs/operators';
 
-@Component({
-    selector: 'app-messages',
-    templateUrl: './messages.component.html',
-    styleUrls: ['./messages.component.scss'],
-})
-export class MessagesComponent extends Reinitable implements OnInit, OnDestroy {
+@Injectable()
+export class ChatsService {
 
     public chatList$: BehaviorSubject<AbstractMessage[]> = new BehaviorSubject<AbstractMessage[]>([]);
+    private defaultChatList: AbstractMessage[] = [];
     private chatsSubscription: Subscription;
 
     constructor(
         private chatsCompilerService: ChatsCompilerService,
-        private router: Router,
-        private chatListUpdater: ChatListUpdaterService
+        private chatListUpdater: ChatListUpdaterService,
+        private search: ChatsSearchService
     ) {
-        super();
     }
 
-    public ionViewDidLeave(): void {
-        this.ngOnDestroy();
+    public doSearch(value: string): void {
+        value === '' ? this.chatList$.next(this.defaultChatList) : this.chatList$.next(this.search.search(this.defaultChatList, value));
     }
 
-    public ngOnDestroy(): void {
-        console.log('destroyed');
+    public destroy(): void {
         this.chatsSubscription.unsubscribe();
         this.chatListUpdater.destroy();
     }
 
-    public ngOnInit(): void {
-        this.chatsCompilerService.generateChatList().then(
-            list => this.chatList$.next(list.reverse())
+    public initChatList(): Observable<any> {
+        return this.chatListUpdater.getChatList().pipe(
+            map(list => this.setLists(list.reverse()))
         );
-        this.subscribeToChatListUpdates();
     }
 
-    public onChatClick(interlocutorId: number): void {
-        this.router.navigateByUrl('/message/chat/' + interlocutorId);
-    }
-
-    private subscribeToChatListUpdates(): void {
+    public subscribeToChatListUpdates(): void {
         this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe(
-            (newList: AbstractMessage[]) => this.isNeedToUpdate(newList).pipe(filter(isNeed => isNeed), tap(_ => console.log('tick')))
-                .subscribe(_ => this.chatList$.next(newList.reverse()))
+            (newList: AbstractMessage[]) => this.isNeedToUpdate(newList.reverse()).pipe(filter(isNeed => true === isNeed))
+                .subscribe(_ => this.setLists(newList.reverse()))
         );
+    }
+
+    private setLists(data: AbstractMessage[]): void {
+        this.chatList$.next(data);
+        this.defaultChatList = data;
     }
 
     private isNeedToUpdate(chatList: AbstractMessage[]): Observable<boolean> {

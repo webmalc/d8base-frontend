@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslationService} from '@app/core/services/translation.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
@@ -19,7 +19,7 @@ import {SelectablePostalCodeOnSearchService} from '@app/shared/services/selectab
     templateUrl: './service-publish-step-seven.component.html',
     styleUrls: ['./service-publish-step-seven.component.scss'],
 })
-export class ServicePublishStepSevenComponent extends Reinitable implements OnInit {
+export class ServicePublishStepSevenComponent extends Reinitable {
 
     public static readonly STEP = 6;
     public formFields = ServicePublishStepSevenFormFields;
@@ -35,19 +35,6 @@ export class ServicePublishStepSevenComponent extends Reinitable implements OnIn
         private authStateManager: ServicePublishAuthStateManagerService
     ) {
         super();
-    }
-
-    public ngOnInit(): void {
-        this.authStateManager.updateFourStepState();
-        if (this.servicePublishDataHolderService.isset(ServicePublishStepSevenComponent.STEP)) {
-            this.formService.createForm(
-                this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP)
-            );
-        } else {
-            this.formService.createForm();
-            this.formService.setControlDisabled(true, this.formFields.City);
-            this.formService.setControlDisabled(true, this.formFields.Postal);
-        }
     }
 
     public submitForm(): void {
@@ -77,5 +64,18 @@ export class ServicePublishStepSevenComponent extends Reinitable implements OnIn
 
     public onThisPageDataChange(): void {
         this.servicePublishDataHolderService.assignStepData(ServicePublishStepSevenComponent.STEP, this.formService.form.getRawValue());
+    }
+
+    protected init(): void {
+        this.authStateManager.updateFourStepState();
+        if (this.servicePublishDataHolderService.isset(ServicePublishStepSevenComponent.STEP)) {
+            this.formService.createForm(
+                this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP)
+            );
+        } else {
+            this.formService.createForm();
+            this.formService.setControlDisabled(true, this.formFields.City);
+            this.formService.setControlDisabled(true, this.formFields.Postal);
+        }
     }
 }

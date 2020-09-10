@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Category} from '@app/core/models/category';
 import {Subcategory} from '@app/core/models/subcategory';
 import {CategoriesApiService} from '@app/core/services/categories-api.service';
@@ -17,7 +17,7 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './service-publish-step-one.component.html',
     styleUrls: ['./service-publish-step-one.component.scss'],
 })
-export class ServicePublishStepOneComponent extends Reinitable implements OnInit {
+export class ServicePublishStepOneComponent extends Reinitable {
 
     public static readonly STEP = 0;
     public formFields = ServicePublishStepOneFormFields;
@@ -34,21 +34,6 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
         public trans: TranslationService
     ) {
         super();
-    }
-
-    public ngOnInit(): void {
-        this.categoriesApi.get().subscribe(
-            list => this.categoriesList$.next(list.results)
-        );
-
-        if (this.servicePublishDataHolderService.isset(ServicePublishStepOneComponent.STEP)) {
-            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishStepOneComponent.STEP);
-            this.formService.createForm(stepData.category, stepData.subcategory);
-            this.isReinitialized = true;
-        } else {
-            this.formService.createForm();
-            this.isReinitialized = false;
-        }
     }
 
     public submitForm(): void {
@@ -75,5 +60,20 @@ export class ServicePublishStepOneComponent extends Reinitable implements OnInit
         }
 
         return this.formService.form.invalid;
+    }
+
+    protected init(): void {
+        this.categoriesApi.get().subscribe(
+            list => this.categoriesList$.next(list.results)
+        );
+
+        if (this.servicePublishDataHolderService.isset(ServicePublishStepOneComponent.STEP)) {
+            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishStepOneComponent.STEP);
+            this.formService.createForm(stepData.category, stepData.subcategory);
+            this.isReinitialized = true;
+        } else {
+            this.formService.createForm();
+            this.isReinitialized = false;
+        }
     }
 }

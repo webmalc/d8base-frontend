@@ -1,5 +1,5 @@
 import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TimetableAddTimePopoverComponent} from '@app/service/components/timetable-add-time-popover/timetable-add-time-popover.component';
 import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import {ServicePublishStepSevenTimetableFormService} from '@app/service/forms/service-publish-step-seven-timetable-form.service';
@@ -13,7 +13,7 @@ import {PopoverController} from '@ionic/angular';
     templateUrl: './timetable.component.html',
     styleUrls: ['./timetable.component.scss'],
 })
-export class TimetableComponent extends Reinitable implements OnInit {
+export class TimetableComponent extends Reinitable {
 
     public formFields = ServicePublishStepSevenTimetableFormFields;
     private readonly STEP = 6;
@@ -25,19 +25,6 @@ export class TimetableComponent extends Reinitable implements OnInit {
         private readonly popoverController: PopoverController
     ) {
         super();
-    }
-
-    public ngOnInit(): void {
-        if (this.servicePublishDataHolderService.issetStepPartialData(this.STEP, ServicePublishStepSevenTimetableFormFields.Timetable)) {
-            this.formService.createForm(
-                this.servicePublishDataHolderService.getPartialStepData<ServiceSchedule[]>(
-                    this.STEP,
-                    ServicePublishStepSevenTimetableFormFields.Timetable
-                )
-            );
-        } else {
-            this.formService.createForm();
-        }
     }
 
     public submitForm(): void {
@@ -85,5 +72,18 @@ export class TimetableComponent extends Reinitable implements OnInit {
 
     public deleteDay(index: number): void {
         this.formService.deleteDay(index);
+    }
+
+    protected init(): void {
+        if (this.servicePublishDataHolderService.issetStepPartialData(this.STEP, ServicePublishStepSevenTimetableFormFields.Timetable)) {
+            this.formService.createForm(
+                this.servicePublishDataHolderService.getPartialStepData<ServiceSchedule[]>(
+                    this.STEP,
+                    ServicePublishStepSevenTimetableFormFields.Timetable
+                )
+            );
+        } else {
+            this.formService.createForm();
+        }
     }
 }

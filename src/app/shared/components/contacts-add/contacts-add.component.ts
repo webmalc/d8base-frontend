@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MediaIconFactoryService} from '@app/core/services/media-icon-factory.service';
 import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {Contact} from '@app/profile/models/contact';
@@ -14,7 +14,7 @@ import {debounceTime, filter} from 'rxjs/operators';
     templateUrl: './contacts-add.component.html',
     styleUrls: ['./contacts-add.component.scss'],
 })
-export class ContactsAddComponent extends Reinitable implements OnInit, OnDestroy {
+export class ContactsAddComponent extends Reinitable implements OnDestroy {
 
     public static reinit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public userContacts$: BehaviorSubject<UserContact[]> = new BehaviorSubject<UserContact[]>([]);
@@ -31,7 +31,15 @@ export class ContactsAddComponent extends Reinitable implements OnInit, OnDestro
         super();
     }
 
-    public ngOnInit(): void {
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+    public getContactIcon(contactDisplay: string): string {
+        return MediaIconFactoryService.getIcon(contactDisplay);
+    }
+
+    protected init(): void {
         this.userContactApiService.getCurrentClientContacts().subscribe(
             contacts => this.userContacts$.next(contacts.results)
         );
@@ -43,14 +51,6 @@ export class ContactsAddComponent extends Reinitable implements OnInit, OnDestro
         );
         this.canAddNewContact();
         this.subToReinit();
-    }
-
-    public ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
-
-    public getContactIcon(contactDisplay: string): string {
-        return MediaIconFactoryService.getIcon(contactDisplay);
     }
 
     private initDefaultContacts(contacts: Contact[]): void {
@@ -66,7 +66,7 @@ export class ContactsAddComponent extends Reinitable implements OnInit, OnDestro
             this.subscription = ContactsAddComponent.reinit$.pipe(
                 filter(val => val === true),
                 debounceTime(150)
-            ).subscribe(val => this.ngOnInit());
+            ).subscribe(val => this.init());
         }
     }
 

@@ -8,17 +8,17 @@
             </ion-col>
             <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
                 <ion-item class="ion-item-no-border">
-                    <ion-searchbar animated placeholder="{{'messages.chat-list-page.search'|translate}}"></ion-searchbar>
+                    <ion-searchbar animated (ionChange)="search($event.target.value)" debounce="200"
+                                   placeholder="{{'messages.chat-list-page.search'|translate}}"></ion-searchbar>
                 </ion-item>
             </ion-col>
         </ion-row>
     </ion-item>
 </ion-header>
-
 <ion-content class="ion-margin-top">
-
     <ion-list class="d8b-container">
-        <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey" *ngFor="let chat of (chatList$|async)">
+        <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey"
+                  *ngFor="let chat of (chatsService.chatList$|async)">
             <ion-avatar slot="start">
                 <img src="{{chat.interlocutor_avatar_thumbnail}}">
             </ion-avatar>
@@ -54,6 +54,5 @@
             </ion-col>
         </ion-item>
     </ion-list>
-
     <app-footer></app-footer>
 </ion-content>

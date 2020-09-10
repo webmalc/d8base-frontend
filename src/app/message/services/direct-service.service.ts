@@ -57,6 +57,7 @@ export class DirectServiceService {
     public destroy(): void {
         this.messagesSubscription.unsubscribe();
         this.messageListUpdater.destroy();
+        this.messages$.next([]);
     }
 
     public clearMessage(): void {

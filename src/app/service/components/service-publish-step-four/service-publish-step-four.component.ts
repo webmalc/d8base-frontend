@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RegistrationService} from '@app/auth/services/registration.service';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
@@ -21,7 +21,7 @@ import {filter} from 'rxjs/operators';
     templateUrl: './service-publish-step-four.component.html',
     styleUrls: ['./service-publish-step-four.component.scss'],
 })
-export class ServicePublishStepFourComponent extends Reinitable implements OnInit {
+export class ServicePublishStepFourComponent extends Reinitable {
 
     public static readonly STEP = 3;
     public readonly formFields = ServicePublishStepFourFormFields;
@@ -52,31 +52,6 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
                     err => console.log(err)
                 );
         }
-    }
-
-    public ngOnInit(): void {
-        this.authenticationService.isAuthenticated().pipe(filter(val => true === val)).subscribe(
-            () => {
-                this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
-                    () => {
-                        this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
-                            () => {
-                                this.userManager.getCurrentUser().subscribe(
-                                    user => {
-                                        this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                                            ServicePublishStepFourComponent.STEP, {isNewMaster: false, user, isNewUser: false}
-                                        ).then(
-                                            () => this.serviceStepsNavigationService.next()
-                                        );
-                                    }
-                                );
-                            }
-                        );
-                    }
-                );
-            }
-        );
-        this.formService.createForm();
     }
 
     public submitForm(): void {
@@ -122,5 +97,30 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnIni
         }
 
         return true;
+    }
+
+    protected init(): void {
+        this.authenticationService.isAuthenticated().pipe(filter(val => true === val)).subscribe(
+            () => {
+                this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
+                    () => {
+                        this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
+                            () => {
+                                this.userManager.getCurrentUser().subscribe(
+                                    user => {
+                                        this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
+                                            ServicePublishStepFourComponent.STEP, {isNewMaster: false, user, isNewUser: false}
+                                        ).then(
+                                            () => this.serviceStepsNavigationService.next()
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+        this.formService.createForm();
     }
 }

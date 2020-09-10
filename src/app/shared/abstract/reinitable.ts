@@ -1,9 +1,8 @@
-import {OnInit} from '@angular/core';
-
-export abstract class Reinitable implements OnInit {
-    public abstract ngOnInit(): any;
+export abstract class Reinitable {
 
     public ionViewDidEnter(): void {
-        this.ngOnInit();
+        this.init();
     }
+
+    protected abstract init(): any;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Master} from '@app/core/models/master';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
@@ -10,7 +10,7 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './master.page.html',
     styleUrls: ['./master.page.scss'],
 })
-export class MasterPage extends Reinitable implements OnInit {
+export class MasterPage extends Reinitable {
 
     public masterList$: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
 
@@ -18,13 +18,13 @@ export class MasterPage extends Reinitable implements OnInit {
         super();
     }
 
-    public ngOnInit(): void {
-        this.initMasterList();
-    }
-
     public onMasterClick(event: MouseEvent): any {
         const masterId: number = (event.target as any).getAttribute('masterId');
         this.router.navigateByUrl('/professional/edit/' + masterId);
+    }
+
+    protected init(): void {
+        this.initMasterList();
     }
 
     private initMasterList(): void {
