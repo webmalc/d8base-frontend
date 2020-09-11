@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HelperService} from '@app/core/services/helper.service';
 import {ContextMenuPopoverComponent} from '@app/message/components/context-menu-popover/context-menu-popover.component';
@@ -6,13 +6,13 @@ import {Message} from '@app/message/models/message';
 import {DirectServiceService} from '@app/message/services/direct-service.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {IonContent, IonInfiniteScroll, Platform, PopoverController} from '@ionic/angular';
-import {filter} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {filter, first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-direct',
     templateUrl: './direct.component.html',
-    styleUrls: ['./direct.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./direct.component.scss']
 })
 export class DirectComponent extends Reinitable implements OnDestroy {
 
@@ -23,6 +23,8 @@ export class DirectComponent extends Reinitable implements OnDestroy {
     public showContextIndex;
     public isUpdate: boolean = false;
     private updateMessageId: number;
+    private deleteSubscription: Subscription;
+    private updateSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
@@ -31,6 +33,29 @@ export class DirectComponent extends Reinitable implements OnDestroy {
         private popoverController: PopoverController
     ) {
         super();
+    }
+
+    public cancelUpdate(): void {
+        if (this.isUpdate) {
+            this.isUpdate = false;
+            this.directService.clearMessage();
+        }
+    }
+
+    public showUpdatingMessage(): void {
+        const messageElement = document.getElementById(this.directService.updateMessage.id.toString(10));
+        this.content.scrollToPoint(null, messageElement.offsetTop);
+        let i = 0.6;
+        const interval = setInterval(() => {
+            if (i < 0) {
+                clearInterval(interval);
+                messageElement.style.backgroundColor = `rgba(12,209,232,0)`;
+
+                return;
+            }
+            messageElement.style.backgroundColor = `rgba(12,209,232,${i})`;
+            i -= 0.05;
+        }, 100);
     }
 
     public resetContext(): void {
@@ -47,6 +72,8 @@ export class DirectComponent extends Reinitable implements OnDestroy {
     }
 
     public ngOnDestroy(): void {
+        this.deleteSubscription?.unsubscribe();
+        this.updateSubscription?.unsubscribe();
         this.directService.destroy();
     }
 
@@ -86,18 +113,20 @@ export class DirectComponent extends Reinitable implements OnDestroy {
             event
         }).then(pop => pop.present().then(
             () => {
-                ContextMenuPopoverComponent.delete$.pipe(filter(mes => mes !== null)).subscribe(
+                this.deleteSubscription = ContextMenuPopoverComponent.delete$.pipe(filter(mes => mes !== null), first()).subscribe(
                     (mes: Message) => {
                         this.directService.delete(mes).subscribe();
                         this.popoverController.dismiss();
                     }
                 );
-                ContextMenuPopoverComponent.update$.pipe(filter(mes => mes !== null)).subscribe(
+                this.updateSubscription = ContextMenuPopoverComponent.update$.pipe(filter(mes => mes !== null), first()).subscribe(
                     (mes: Message) => {
                         this.isUpdate = true;
-                        this.directService.setMessageText(mes.body);
+                        // this.directService.setMessageText(mes.body);
+                        this.directService.updateMessage = mes;
                         this.updateMessageId = mes.id;
                         this.popoverController.dismiss();
+                        this.updateSubscription.unsubscribe();
                     }
                 );
             }

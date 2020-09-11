@@ -20,6 +20,8 @@ export class DirectServiceService {
     public currentUserId: number;
     public interlocutorId: number;
     public message: string;
+    public defaultUpdateMessage: string;
+    public updateMessage: Message;
     private messagesSubscription: Subscription;
     private currentMessagesApiPage: number = 1;
     private readonly messagesPerPage: number = environment.message.messages_per_page;
@@ -62,10 +64,13 @@ export class DirectServiceService {
 
     public clearMessage(): void {
         this.message = null;
+        this.defaultUpdateMessage = null;
+        this.updateMessage = null;
     }
 
     public setMessageText(message: string): void {
         this.message = message;
+        this.defaultUpdateMessage = message;
     }
 
     public send(): void {
@@ -86,14 +91,20 @@ export class DirectServiceService {
     }
 
     public update(id: number): void {
-        const sentMessage = this.generateSentMessage();
-        sentMessage.id = id;
-        this.messagesSentApi.patch(sentMessage).subscribe(
+        this.messagesSentApi.patch(this.generateUpdateSentMessage()).subscribe(
             _ => {
                 this.messagesListUpdated.next();
                 this.clearMessage();
             }
         );
+    }
+
+    private generateUpdateSentMessage(): SentMessage {
+        const message = new SentMessage();
+        message.id = this.updateMessage.id;
+        message.body = this.updateMessage.body;
+
+        return message;
     }
 
     private extendMessagesList(list: Message[]): Observable<void> {

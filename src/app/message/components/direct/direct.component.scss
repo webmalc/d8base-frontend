@@ -18,12 +18,17 @@
   align-items: start;
   justify-content: start;
 }
+.wrap-text {
+  overflow: hidden;
+  -o-text-overflow: clip;
+  text-overflow:    clip;
+}
 .message {
   margin: 20px 26px 0 26px;
   display: inline-block;
   position: relative;
-  max-width: 400px;
-  white-space: pre;
+  max-width: 600px;
+  white-space: pre-wrap;
   height: auto;
   min-height: 28px;
   border-radius: 16px;
