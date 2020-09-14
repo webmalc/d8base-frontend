@@ -9,6 +9,7 @@
             <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
                 <ion-item class="ion-item-no-border">
                     <ion-searchbar animated (ionChange)="search($event.target.value)" debounce="200"
+                                   (ionCancel)="search('')" (keydown.escape)="search('')"
                                    placeholder="{{'messages.chat-list-page.search'|translate}}"></ion-searchbar>
                 </ion-item>
             </ion-col>

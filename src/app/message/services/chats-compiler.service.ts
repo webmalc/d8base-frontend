@@ -31,7 +31,7 @@ export class ChatsCompilerService {
                     res.push(abstractMessage);
                 }
 
-                return res.reverse();
+                return res;
             })
         ).toPromise();
     }

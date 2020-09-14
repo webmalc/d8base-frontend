@@ -21,25 +21,40 @@ export class ChatsService {
     }
 
     public doSearch(value: string): void {
-        value === '' ? this.chatList$.next(this.defaultChatList) : this.chatList$.next(this.search.search(this.defaultChatList, value));
+        if ('' === value) {
+            this.subscribeToChatListUpdates();
+            this.chatList$.next(this.defaultChatList);
+        } else {
+            this.unsubscribeFromUpdates();
+            this.chatList$.next(this.search.search(this.defaultChatList, value));
+        }
     }
 
     public destroy(): void {
-        this.chatsSubscription.unsubscribe();
+        this.unsubscribeFromUpdates();
         this.chatListUpdater.destroy();
+        this.chatList$.next([]);
     }
 
     public initChatList(): Observable<any> {
         return this.chatListUpdater.getChatList().pipe(
-            map(list => this.setLists(list.reverse()))
+            map(list => this.setLists(list))
         );
     }
 
     public subscribeToChatListUpdates(): void {
+        this.unsubscribeFromUpdates();
         this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe(
-            (newList: AbstractMessage[]) => this.isNeedToUpdate(newList.reverse()).pipe(filter(isNeed => true === isNeed))
-                .subscribe(_ => this.setLists(newList.reverse()))
+            (newList: AbstractMessage[]) => this.isNeedToUpdate(newList).pipe(filter(isNeed => true === isNeed))
+                .subscribe(_ => this.setLists(newList))
         );
+    }
+
+    private unsubscribeFromUpdates(): void {
+        if (this.chatsSubscription) {
+            this.chatsSubscription.unsubscribe();
+        }
+        this.chatsSubscription = undefined;
     }
 
     private setLists(data: AbstractMessage[]): void {
