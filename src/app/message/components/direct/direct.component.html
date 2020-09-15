@@ -28,7 +28,8 @@
     <ion-list class="d8b-container chat-container ion-margin-bottom">
 
         <div *ngFor="let message of (directService.messages$|async); let i=index">
-            <ion-row *ngIf="needToRenderDateString(i)|async" class="ion-justify-content-center ion-align-items-center ion-padding-vertical">
+            <ion-row *ngIf="message.id && needToRenderDateString(i)|async"
+                     class="ion-justify-content-center ion-align-items-center ion-padding-vertical">
                 {{getDateString(message.created)}}
             </ion-row>
             <ion-row class="width100"
