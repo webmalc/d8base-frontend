@@ -49,6 +49,9 @@ export const environment = {
         register_email: '/en/api/accounts/register-email/',
         postal_codes: '/en/api/location/postal-codes/',
         rates: '/en/api/rates/',
+        latest_messages: '/en/api/communication/messages/latest/',
+        messages_list: '/en/api/communication/messages/list/',
+        messages_sent: '/en/api/communication/messages/sent/',
         url: 'http://localhost:8000'
     },
     client_id: '',
