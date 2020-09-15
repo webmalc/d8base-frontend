@@ -1,6 +1,7 @@
-import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HelperService} from '@app/core/services/helper.service';
+import {TranslationService} from '@app/core/services/translation.service';
 import {ContextMenuPopoverComponent} from '@app/message/components/context-menu-popover/context-menu-popover.component';
 import {Message} from '@app/message/models/message';
 import {DirectServiceService} from '@app/message/services/direct-service.service';
@@ -12,7 +13,8 @@ import {filter, first} from 'rxjs/operators';
 @Component({
     selector: 'app-direct',
     templateUrl: './direct.component.html',
-    styleUrls: ['./direct.component.scss']
+    styleUrls: ['./direct.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DirectComponent extends Reinitable implements OnDestroy {
 
@@ -30,9 +32,16 @@ export class DirectComponent extends Reinitable implements OnDestroy {
         private route: ActivatedRoute,
         public directService: DirectServiceService,
         private platform: Platform,
-        private popoverController: PopoverController
+        private popoverController: PopoverController,
+        private trans: TranslationService
     ) {
         super();
+    }
+
+    public getDateString(datetime: string): string {
+        const date = new Date(datetime.slice(0, 10));
+
+        return `${date.toLocaleString(this.trans.getCurrentLang(), {month: 'long'})}, ${date.getDay()}`;
     }
 
     public cancelUpdate(): void {
@@ -117,13 +126,14 @@ export class DirectComponent extends Reinitable implements OnDestroy {
                     (mes: Message) => {
                         this.directService.delete(mes).subscribe();
                         this.popoverController.dismiss();
+                        this.deleteSubscription.unsubscribe();
                     }
                 );
                 this.updateSubscription = ContextMenuPopoverComponent.update$.pipe(filter(mes => mes !== null), first()).subscribe(
                     (mes: Message) => {
                         this.isUpdate = true;
-                        // this.directService.setMessageText(mes.body);
                         this.directService.updateMessage = mes;
+                        this.directService.defaultUpdateMessage = mes.body;
                         this.updateMessageId = mes.id;
                         this.popoverController.dismiss();
                         this.updateSubscription.unsubscribe();

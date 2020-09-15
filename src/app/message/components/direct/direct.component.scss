@@ -1,6 +1,22 @@
 .chat-container {
   padding-left: 20%;
   padding-right: 20%;
+  @media (max-width: 1200px) {
+    padding-right: 15%;
+    padding-left: 15%;
+  }
+  @media (max-width: 992px) {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+  @media (max-width: 768px) {
+    padding-right: 1%;
+    padding-left: 1%;
+  }
+}
+.default-message-container {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .messages-area {
   overflow-y: scroll;
@@ -21,7 +37,7 @@
 .wrap-text {
   overflow: hidden;
   -o-text-overflow: clip;
-  text-overflow:    clip;
+  text-overflow: clip;
 }
 .message {
   margin: 20px 26px 0 26px;
@@ -34,6 +50,18 @@
   border-radius: 16px;
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
+  @media (max-width: 684px) {
+    max-width: 500px;
+  }
+  @media (max-width: 582px) {
+    max-width: 420px;
+  }
+  @media (max-width: 498px) {
+    max-width: 350px;
+  }
+  @media (max-width: 412px) {
+    max-width: 264px;
+  }
 }
 .received-message {
   background-color: #c0d8ff;
