@@ -28,22 +28,20 @@
     <ion-list class="d8b-container chat-container ion-margin-bottom">
 
         <div *ngFor="let message of (directService.messages$|async); let i=index">
+            <ion-row *ngIf="needToRenderDateString(i)|async" class="ion-justify-content-center ion-align-items-center ion-padding-vertical">
+                {{getDateString(message.created)}}
+            </ion-row>
             <ion-row class="width100"
                      *ngIf="message.sender !== directService.currentUserId && directService.currentUserId">
 
                 <div class="message-container">
                     <div class="received-message message">
-                        <div class="message-text">
-                            {{message.body}}
-                        </div>
+                        <div class="message-text wrap-text">{{message.body}}</div>
                     </div>
                     <div class="timeline timeline-received">
                         {{timeFromDatetime(message.created)}}
                     </div>
                 </div>
-            </ion-row>
-            <ion-row class="ion-justify-content-center ion-align-items-center ion-padding-vertical">
-                {{getDateString(message.created)}}
             </ion-row>
             <ion-row class="width100 ion-justify-content-end" id="{{message?.id}}"
                      *ngIf="message.sender === directService.currentUserId && directService.currentUserId">

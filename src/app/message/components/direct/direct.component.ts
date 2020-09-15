@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HelperService} from '@app/core/services/helper.service';
 import {TranslationService} from '@app/core/services/translation.service';
@@ -7,14 +7,13 @@ import {Message} from '@app/message/models/message';
 import {DirectServiceService} from '@app/message/services/direct-service.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {IonContent, IonInfiniteScroll, Platform, PopoverController} from '@ionic/angular';
-import {Subscription} from 'rxjs';
-import {filter, first} from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {filter, first, map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-direct',
     templateUrl: './direct.component.html',
-    styleUrls: ['./direct.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./direct.component.scss']
 })
 export class DirectComponent extends Reinitable implements OnDestroy {
 
@@ -38,10 +37,23 @@ export class DirectComponent extends Reinitable implements OnDestroy {
         super();
     }
 
+    public needToRenderDateString(messageIndex: number): Observable<boolean> {
+        return this.directService.messages$.pipe(
+            first(),
+            map(messageList => {
+                if (messageIndex === 0) {
+                    return true;
+                }
+
+                return messageList[messageIndex].created.slice(0, 10) !== messageList[messageIndex - 1].created.slice(0, 10);
+            })
+        );
+    }
+
     public getDateString(datetime: string): string {
         const date = new Date(datetime.slice(0, 10));
 
-        return `${date.toLocaleString(this.trans.getCurrentLang(), {month: 'long'})}, ${date.getDay()}`;
+        return `${date.toLocaleString(this.trans.getCurrentLang(), {month: 'long'})}, ${date.getDate()}`;
     }
 
     public cancelUpdate(): void {
