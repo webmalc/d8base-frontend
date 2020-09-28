@@ -1,22 +1,21 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {async, ComponentFixture, ComponentFixtureAutoDetect, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Platform} from '@ionic/angular';
 import {IonicStorageModule, Storage} from '@ionic/storage';
 
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
 import {DarkModeService} from './core/services/dark-mode.service';
 import {TranslationService} from './core/services/translation.service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {PusherService} from './core/services/pusher.service';
 
 describe('AppComponent', () => {
 
-    let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy, pusherSpy;
+    let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
     let storageMock: Partial<Storage>;
     let fixture: ComponentFixture<AppComponent>;
 
@@ -25,7 +24,6 @@ describe('AppComponent', () => {
         splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
         platformReadySpy = Promise.resolve();
         platformSpy = jasmine.createSpyObj('Platform', {ready: platformReadySpy});
-        pusherSpy = jasmine.createSpyObj('PusherService', ['requestPushPermission']);
 
         storageMock = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
@@ -43,8 +41,7 @@ describe('AppComponent', () => {
                 {provide: Storage, useValue: storageMock},
                 DarkModeService,
                 StorageManagerService,
-                TranslationService,
-                {provide: PusherService, useValue: pusherSpy}
+                TranslationService
             ]
         }).compileComponents().then();
 

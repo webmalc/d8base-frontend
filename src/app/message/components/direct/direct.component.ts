@@ -95,7 +95,6 @@ export class DirectComponent extends Reinitable implements OnDestroy {
     public ngOnDestroy(): void {
         this.deleteSubscription?.unsubscribe();
         this.updateSubscription?.unsubscribe();
-        this.directService.destroy();
     }
 
     public loadData(): void {

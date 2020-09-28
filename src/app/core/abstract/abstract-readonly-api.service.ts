@@ -25,7 +25,7 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
         );
     }
 
-    public getByEntityId(entityId: number): Observable<T> {
+    public getByEntityId(entityId: number | string): Observable<T> {
         return this.client.get<T>(`${this.getUrl() + entityId}/`).pipe(
             map((raw: T) => this.transform(raw))
         );

@@ -1,20 +1,12 @@
-import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
-
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
-
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireMessagingModule} from '@angular/fire/messaging';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
 import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
-import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
+import {FcmDeviceService} from '@app/core/services/fcm-device.service';
 import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
 import {IpApiService} from '@app/core/services/location/ip-api.service';
 import {IpDataService} from '@app/core/services/location/ip-data.service';
@@ -26,11 +18,13 @@ import {SharedModule} from '@app/shared/shared.module';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 import {IonicStorageModule} from '@ionic/storage';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {IonicSelectableModule} from 'ionic-selectable';
-import { environment } from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
@@ -46,7 +40,6 @@ import {AppComponent} from './app.component';
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        // Temporary disable because SSR
         LeafletModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
@@ -55,9 +48,6 @@ import {AppComponent} from './app.component';
                 deps: [HttpClient]
             }
         }),
-        ServiceWorkerModule.register('combined-sw.js', {enabled: environment.production}),
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireMessagingModule,
         SharedModule
     ],
     providers: [
@@ -95,6 +85,7 @@ import {AppComponent} from './app.component';
         IpApiService,
         IpDataService,
         IpnfDataService,
+        FcmDeviceService,
         {
             provide: LocationAccuracy,
             useFactory: (platform: Platform) => !platform.is('desktop') ? LocationAccuracy : {

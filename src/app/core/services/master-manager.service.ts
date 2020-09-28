@@ -22,7 +22,10 @@ export class MasterManagerService {
     private readonly masterListUrl = environment.backend.master_list;
 
     constructor(private client: ApiClientService, private userManager: UserManagerService, private auth: AuthenticationService) {
-        this.subscribeToAuth();
+    }
+
+    public subscribeToAuth(): void {
+        this.auth.isAuthenticated$.subscribe(isAuth => isAuth ? this.updateIsMaster() : this.isMaster$.next(false));
     }
 
     public updateIsMaster(): void {
@@ -64,9 +67,5 @@ export class MasterManagerService {
             map((data: { actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }) =>
                 data.actions.POST.level.choices)
         );
-    }
-
-    private subscribeToAuth(): void {
-        this.auth.isAuthenticated$.subscribe(isAuth => isAuth ? this.updateIsMaster() : this.isMaster$.next(false));
     }
 }

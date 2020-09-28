@@ -52,6 +52,7 @@ export const environment = {
         latest_messages: '/en/api/communication/messages/latest/',
         messages_list: '/en/api/communication/messages/list/',
         messages_sent: '/en/api/communication/messages/sent/',
+        fcm_devices: '/en/api/communication/devices/fcm/',
         url: 'http://localhost:8000'
     },
     client_id: '',
@@ -64,7 +65,9 @@ export const environment = {
        databaseURL: '<your-database-URL>',
        projectId: '<your-project-id>',
        storageBucket: '<your-storage-bucket>',
-       messagingSenderId: '<your-messaging-sender-id>'
+       messagingSenderId: '<your-messaging-sender-id>',
+       vapidKey: '<your-valid-key>',
+       appId: '<your-app-id>'
     },
     message: {
         direct_update_interval_ms: 1000,

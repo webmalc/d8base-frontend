@@ -1,26 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {DarkModeService} from '@app/core/services/dark-mode.service';
+import {FcmDeviceService} from '@app/core/services/fcm-device.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {PusherService} from '@app/core/services/pusher.service';
+import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
 import {TranslationService} from '@app/core/services/translation.service';
+import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
 import {CountriesApiService} from '@app/profile/services/countries-api.service';
+import {firebase} from '@firebase/app';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
+import {environment} from '../environments/environment';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
     public darkTheme = false;
     public newMessages: boolean = false;
@@ -40,13 +44,16 @@ export class AppComponent implements OnInit {
         public readonly masterManager: MasterManagerService,
         public readonly userLocationApi: UserLocationApiService,
         public readonly countryApi: CountriesApiService,
-        private readonly pusher: PusherService
+        private readonly notificationWorker: NotificationWorkerService,
+        private readonly fcmDevice: FcmDeviceService,
+        private readonly userManager: UserManagerService
     ) {
         this.initializeApp();
     }
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
+        firebase.initializeApp(environment.firebaseConfig);
         const appTitle = this.titleService.getTitle();
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
@@ -63,17 +70,25 @@ export class AppComponent implements OnInit {
             })
         ).subscribe((title: string) => this.titleService.setTitle(title));
         this.getDefaultUserCountry().pipe(filter(code => null !== code)).subscribe(c => this.countryCode = c.code.toLowerCase());
+
     }
 
     public initializeApp(): void {
-        /** TODO: Why code duplicate? */
-        /** @see AppInitService.init */
-        this.platform.ready().then(() => {
+        this.platform.ready().then(async () => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initDarkMode();
             this.toggleMenu();
-            this.pusher.requestPushPermission();
+            this.userManager.subscribeToAuthSubject();
+            this.masterManager.subscribeToAuth();
+        });
+    }
+
+    public ngAfterViewInit(): void {
+        this.platform.ready().then(async () => {
+            await this.notificationWorker.init();
+            await this.notificationWorker.requestPermission();
+            this.fcmDevice.subscribeToAuth();
         });
     }
 

@@ -5,6 +5,7 @@ import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interfac
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {BehaviorSubject, from, Observable, of} from 'rxjs';
 import {catchError, switchMap, tap} from 'rxjs/operators';
@@ -22,7 +23,11 @@ export class AuthenticationService implements AuthenticatorInterface {
     private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
-    constructor(private tokenManager: TokenManagerService, private client: ApiClientService) {
+    constructor(
+        private tokenManager: TokenManagerService,
+        private client: ApiClientService,
+        private preLogout: PreLogoutService
+    ) {
     }
 
     public getIsAuthenticatedSubject(): BehaviorSubject<boolean> {
@@ -67,9 +72,10 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public logout(): Promise<any> {
-        this.isAuthenticated$.next(false);
-
-        return this.tokenManager.clear();
+        return this.preLogout.run().then(async () => {
+            await this.tokenManager.clear();
+            this.isAuthenticated$.next(false);
+        });
     }
 
     public needToRefresh(): Promise<boolean> {
