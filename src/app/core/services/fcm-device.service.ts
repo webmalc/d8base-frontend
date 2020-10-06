@@ -24,9 +24,7 @@ export class FcmDeviceService {
 
     private saveTokenOrUpdateActivity(): void {
         if (firebase.messaging.isSupported() && Notification.permission === 'granted') {
-            firebase.messaging().getToken().then(token => this.fcmDevicesApi.saveTokenOrUpdateActivity(token).subscribe(
-                data => console.log(data)
-            ));
+            firebase.messaging().getToken().then(token => this.fcmDevicesApi.saveTokenOrUpdateActivity(token).subscribe());
         }
     }
 }

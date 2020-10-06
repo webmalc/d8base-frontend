@@ -1,56 +1,67 @@
 import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {HelperService} from '@app/core/services/helper.service';
+import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {MasterContact} from '@app/master/models/master-contact';
+import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
 import {Contact} from '@app/profile/models/contact';
 import {UserContact} from '@app/profile/models/user-contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
-import {forkJoin} from 'rxjs';
+import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
+import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
+import {forkJoin, Observable, of, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-contact-edit',
     templateUrl: './user-contact-edit.component.html',
     styleUrls: ['./user-contact-edit.component.scss'],
 })
-export class UserContactEditComponent implements OnInit {
+export class UserContactEditComponent implements OnInit, OnDestroy {
 
-    public contact: UserContact;
+    public contact: ClientContactInterface;
     public selectOptions: Contact[] = [];
     public selectedContact: Contact;
     public form: FormGroup;
+    private isMasterContacts: boolean;
+    private sub: Subscription;
+    private clientContactsApiService: ContactsApiServiceInterface;
 
     constructor(
-        private api: UserContactApiService,
+        private userContactApiService: UserContactApiService,
+        private masterContactApiService: MasterContactsApiService,
         private route: ActivatedRoute,
         private contactsApi: ContactApiService,
         private formBuilder: FormBuilder,
-        private location: Location
+        private location: Location,
+        private masterManager: MasterManagerService
     ) {
-    }
-
-    public static calculateContacts(contacts: Contact[], userContacts: UserContact[]): Contact[] {
-        const ret = [];
-        del: for (const c of contacts) {
-            for (const uc of userContacts) {
-                if (c.id === uc.contact) {
-                    continue del;
-                }
-            }
-            ret.push(c);
-        }
-
-        return ret;
     }
 
     public deleteContact(): void {
         if (parseInt(this.route.snapshot.paramMap.get('contact-id'), 10)) {
-            this.api.delete(this.contact).subscribe(() => console.log('deleted'));
+            this.clientContactsApiService.delete(this.contact).subscribe(() => console.log('deleted'));
         }
         this.location.back();
     }
 
-    public ngOnInit(): void {
+    public ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
+
+    public pickApiService(): Promise<void> {
+        return new Promise<void>(resolve => this.sub = this.route.data.subscribe(data => {
+            this.clientContactsApiService = data.isMaster ? this.masterContactApiService : this.userContactApiService;
+            this.isMasterContacts = data.isMaster;
+            resolve();
+        }));
+    }
+
+    public async ngOnInit(): Promise<void> {
+        await this.pickApiService();
         const contactId = parseInt(this.route.snapshot.paramMap.get('contact-id'), 10);
         const defaultContactId = parseInt(this.route.snapshot.paramMap.get('default-contact-id'), 10);
         if (defaultContactId) {
@@ -66,8 +77,8 @@ export class UserContactEditComponent implements OnInit {
             return;
         }
         if (contactId) {
-            this.api.getByEntityId(contactId).subscribe(
-                (result: UserContact) => {
+            this.clientContactsApiService.getByEntityId(contactId).subscribe(
+                (result: ClientContactInterface) => {
                     this.contact = result;
                     this.contactsApi.getByEntityId(result.contact).subscribe(
                         data => {
@@ -82,11 +93,11 @@ export class UserContactEditComponent implements OnInit {
         } else {
             forkJoin({
                 contacts: this.contactsApi.get(),
-                userContacts: this.api.getCurrentClientContacts()
+                userContacts: this.clientContactsApiService.getCurrentClientContacts()
             }).subscribe(
                 ({contacts, userContacts}) => {
                     this.createForm();
-                    this.selectOptions = UserContactEditComponent.calculateContacts(contacts.results, userContacts.results);
+                    this.selectOptions = HelperService.calculateContacts(contacts.results, userContacts.results);
                 }
             );
         }
@@ -95,15 +106,18 @@ export class UserContactEditComponent implements OnInit {
     public submitForm(): void {
         if (parseInt(this.route.snapshot.paramMap.get('contact-id'), 10)) {
             this.contact.value = this.form.getRawValue().userContact;
-            this.api.put(this.contact).subscribe(
+            this.clientContactsApiService.put(this.contact).subscribe(
                 res => console.log(res)
             );
         } else {
-            const userContact = new UserContact();
-            userContact.value = this.form.getRawValue().userContact;
-            userContact.contact = this.form.getRawValue().contact;
-            this.api.create(userContact).subscribe(
-                res => console.log(res)
+            this.getNewClientContactModel().subscribe(
+                contact => {
+                    contact.value = this.form.getRawValue().userContact;
+                    contact.contact = this.form.getRawValue().contact;
+                    this.clientContactsApiService.create(contact).subscribe(
+                        res => console.log(res)
+                    );
+                }
             );
         }
         this.location.back();
@@ -113,10 +127,25 @@ export class UserContactEditComponent implements OnInit {
         this.form.controls.contact.disable();
     }
 
-    private createForm(contact?: Contact, userContact?: UserContact): void {
+    private createForm(contact?: Contact, userContact?: ClientContactInterface): void {
         this.form = this.formBuilder.group({
             contact: [contact?.id, [Validators.required]],
             userContact: [userContact?.value, [Validators.required]]
         });
+    }
+
+    private getNewClientContactModel(): Observable<ClientContactInterface> {
+        if (this.isMasterContacts) {
+            return this.masterManager.getMasterList().pipe(
+                map(list => {
+                    const contact = new MasterContact();
+                    contact.professional = list[0].id;
+
+                    return contact;
+                })
+            );
+        }
+
+        return of(new UserContact());
     }
 }

@@ -4,4 +4,6 @@ export interface PartialUserInterface {
     last_name: string;
     avatar: string;
     avatar_thumbnail: string;
+    gender: boolean;
+    is_confirmed: boolean;
 }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {CitiesApiService} from '@app/core/services/location/cities-api.service';
 import {Country} from '@app/profile/models/country';
-import {CitiesApiService} from '@app/profile/services/cities-api.service';
 import {SelectableSearchService} from '@app/shared/abstract/selectable-search.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 

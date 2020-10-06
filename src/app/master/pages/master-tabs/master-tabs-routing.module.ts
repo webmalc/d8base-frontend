@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {CertificatesTabComponent} from '@app/master/components/certificates-tab/certificates-tab.component';
-import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
 import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
 import {EducationTabComponent} from '@app/master/components/education-tab/education-tab.component';
 import {ExperienceTabComponent} from '@app/master/components/experience-tab/experience-tab.component';
@@ -25,10 +24,6 @@ const routes: Routes = [
             {
                 path: 'tags',
                 component: TagsTabComponent
-            },
-            {
-                path: 'contacts',
-                component: ContactsTabComponent
             },
             {
                 path: 'location',

@@ -1,14 +1,11 @@
 import {Location} from '@angular/common';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Region} from '@app/core/models/region';
-import {UserLocation} from '@app/core/models/user-location';
 import {HelperService} from '@app/core/services/helper.service';
-import {LocationService} from '@app/core/services/location.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TimezoneService} from '@app/core/services/timezone.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
+import {AbstractEditComponent} from '@app/shared/abstract/abstract-edit-component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
@@ -16,74 +13,45 @@ import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-
 import {SelectableDistrictOnSearchService} from '@app/shared/services/selectable-district-on-search.service';
 import {SelectableRegionOnSearchService} from '@app/shared/services/selectable-region-on-search.service';
 import {SelectableSubregionOnSearchService} from '@app/shared/services/selectable-subregion-on-search.service';
-import {plainToClass} from 'class-transformer';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
-    selector: 'app-location-edit',
-    templateUrl: './location-edit.component.html',
-    styleUrls: ['./location-edit.component.scss'],
+    selector: 'app-abstract-location-edit',
+    templateUrl: './abstract-location-edit.component.html',
+    styleUrls: ['./abstract-location-edit.component.scss']
 })
-export class LocationEditComponent implements OnInit {
+export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit {
 
-    public item: ClientLocationInterface = new UserLocation();
+    @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
-        new BehaviorSubject<Array<{value: string, display_name: string}>>(null);
+        new BehaviorSubject<Array<{ value: string, display_name: string }>>(null);
     @ViewChild(UserLocationMapComponent) public map: UserLocationMapComponent;
     public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public isRegionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public isSubregionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public isCityEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-    public locationId: number;
 
     constructor(
-        private route: ActivatedRoute,
-        private userLocationApi: UserLocationApiService,
+        protected readonly location: Location,
+        protected readonly timezone: TimezoneService,
         public readonly countrySelectable: SelectableCountryOnSearchService,
         public readonly citySelectable: SelectableCityOnSearchService,
         public readonly regionSelectable: SelectableRegionOnSearchService,
         public readonly selectableSubregion: SelectableSubregionOnSearchService,
-        public readonly districtSelectable: SelectableDistrictOnSearchService,
-        private readonly locationService: LocationService,
-        private readonly timezone: TimezoneService,
-        private location: Location
-    ) { }
+        public readonly districtSelectable: SelectableDistrictOnSearchService
+    ) {
+        super();
+    }
 
     public ngOnInit(): void {
-        this.locationId = parseInt(this.route.snapshot.paramMap.get('location-id'), 10);
-        if (this.locationId) {
-            this.locationService.getSingle<UserLocation>(this.userLocationApi, this.locationId).subscribe(
-                location => {
-                    this.item = location;
-                    this.processDisabledFields(this.item);
-                    UserLocationMapComponent.forceInvalidate.next(true);
-                }
-            );
-        } else {
-            this.processDisabledFields(this.item);
-            UserLocationMapComponent.forceInvalidate.next(true);
-        }
+        this.processDisabledFields(this.item);
         this.timezone.getTimezoneList().subscribe(
             data => this.timezoneList$.next(data)
         );
     }
 
-    public delete(): void {
-        this.userLocationApi.delete(this.item).subscribe(
-            () => this.location.back()
-        );
-    }
-
-    public save(): void {
-        if (this.locationId) {
-            this.userLocationApi.patch(this.prepare(this.item)).subscribe(
-                data => this.location.back()
-            );
-        } else {
-            this.userLocationApi.create(this.prepare(this.item)).subscribe(
-                data => console.log('created')
-            );
-        }
+    public locationBack(): void {
+        this.location.back();
     }
 
     public onCityChange(): void {
@@ -111,7 +79,23 @@ export class LocationEditComponent implements OnInit {
         return this.item?.city as City;
     }
 
+    protected transform(data: any): ClientLocationInterface {
+        const model = this.transformFn(data);
+        model.city = data.city?.id ?? undefined;
+        model.country = data.country?.id ?? undefined;
+        model.region = data.region?.id ?? undefined;
+        model.subregion = data.subregion?.id ?? undefined;
+        model.district = data.district?.id ?? undefined;
+        model.timezone = data.timezone?.value ?? undefined;
+        model.is_default = data.is_default?.value ?? undefined;
+
+        return HelperService.clear<ClientLocationInterface>(model);
+    }
+
     private processDisabledFields(location?: ClientLocationInterface): void {
+        if (!this.item) {
+            return;
+        }
         if (!location?.country) {
             this.isCityEnabled$.next(false);
             this.isRegionEnabled$.next(false);
@@ -124,18 +108,5 @@ export class LocationEditComponent implements OnInit {
         if (!location?.city) {
             this.isDistrictEnabled$.next(false);
         }
-    }
-
-    private prepare(data: any): UserLocation {
-        const model = plainToClass(UserLocation, data, {excludeExtraneousValues: true});
-        model.city = data.city?.id ?? undefined;
-        model.country = data.country?.id ?? undefined;
-        model.region = data.region?.id ?? undefined;
-        model.subregion = data.subregion?.id ?? undefined;
-        model.district = data.district?.id ?? undefined;
-        model.timezone = data.timezone?.value ?? undefined;
-        model.is_default = data.is_default?.value ?? undefined;
-
-        return HelperService.clear<UserLocation>(model);
     }
 }

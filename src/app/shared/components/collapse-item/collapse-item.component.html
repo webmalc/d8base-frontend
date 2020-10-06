@@ -1,9 +1,13 @@
-<ion-item class="pt10">
-    <ion-label class="fs16">
-        <b>{{title | translate}}</b>
-    </ion-label>
-    <ion-icon name="{{collapsed ? arrowDown : arrowUp}}" (click)="collapse();onClickFunc()"></ion-icon>
-</ion-item>
+<ion-row class="ion-justify-content-between width100">
+    <ion-item class="ion-item-no-border">
+        <ion-label>
+            <b>{{title | translate}}</b>
+        </ion-label>
+    </ion-item>
+    <ion-item class="ion-item-no-border">
+        <ion-icon (click)="collapse();onClickFunc()" name="{{collapsed ? arrowDown : arrowUp}}"></ion-icon>
+    </ion-item>
+</ion-row>
 <div *ngIf="!collapsed">
     <ng-content></ng-content>
 </div>

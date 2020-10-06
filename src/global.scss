@@ -72,8 +72,22 @@
     padding-left: 5px;
   }
 
+  .pl10 {
+    padding-left: 10px;
+  }
+
   .pr5 {
     padding-right: 5px;
+  }
+
+  .pv5 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .pv10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .width100 {
@@ -196,5 +210,19 @@
 
   .border-radius24 {
     border-radius: 24px;
+  }
+
+  .ion-item-tag {
+    --padding-end: 0;
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --padding-start: 0;
+    padding: 8px 12px;
+    background-color: #EEF5FF;
+    --ion-item-background: #EEF5FF;
+    border-radius: 16px;
+    margin: 0 7px;
+    font-size: 12px;
+    line-height: 16px;
   }
 }

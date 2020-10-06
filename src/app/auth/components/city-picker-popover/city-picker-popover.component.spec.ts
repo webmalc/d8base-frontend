@@ -4,9 +4,9 @@ import {IonicModule} from '@ionic/angular';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {Observable, of} from 'rxjs';
 import {ApiListResponseInterface} from '../../../core/interfaces/api-list-response.interface';
+import {CitiesApiService} from '../../../core/services/location/cities-api.service';
 import {LocationService} from '../../../core/services/location/location.service';
 import {City} from '../../../profile/models/city';
-import {CitiesApiService} from '../../../profile/services/cities-api.service';
 import {CityPickerPopoverComponent} from './city-picker-popover.component';
 
 class LocationServiceStub {

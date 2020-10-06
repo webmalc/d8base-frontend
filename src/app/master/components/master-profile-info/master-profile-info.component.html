@@ -1,0 +1,277 @@
+<ion-row>
+    <ion-col class="ion-no-padding" size="12">
+        <ion-item class="ion-item-no-border ion-item-bottom-border main-title">
+            Информация
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row>
+                    <ion-row class="ion-justify-content-start">
+                        <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
+                            Адрес мастера
+                        </ion-item>
+                    </ion-row>
+                    <ion-item *ngFor="let masterLocation of masterLocation"
+                              class="ion-item-no-min-height ion-item-no-border width100 ion-item-no-side-padding pv10">
+                        <ion-col class="ion-no-padding">
+                            <ion-row class="ion-justify-content-between ion-align-items-center">
+                                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                                    {{masterLocation?.address}}
+                                </ion-item>
+                                <ion-item class="ion-item-no-border ion-align-items-center"
+                                          routerDirection="forward"
+                                          routerLink="location-edit/{{masterLocation.id}}"
+                                          routerLinkActive="active"
+                                >
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="ion-justify-content-between">
+                                <ion-item
+                                        class="ion-item-no-border ion-item-no-side-padding pl10 ion-item-no-min-height pv5 location-map-link">
+                                    <ion-icon class="ion-padding-end" color="secondary"
+                                              name="location-outline"></ion-icon>
+                                    Смотреть на карте
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="ion-justify-content-between">
+                                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                                    От заданного адреса
+                                </ion-item>
+                                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                                    0,2км
+                                </ion-item>
+                            </ion-row>
+                        </ion-col>
+                    </ion-item>
+                </ion-row>
+                <ion-row>
+                    <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
+                              routerDirection="forward"
+                              routerLink="location-add/"
+                              routerLinkActive="active">
+                        <ion-icon color="secondary" name="add-circle"></ion-icon>
+                        <ion-label class="ion-padding-start">
+                            {{'profile-page.add-new-address'|translate}}
+                        </ion-label>
+                    </ion-item>
+                </ion-row>
+                <ion-row>
+                    <app-collapse-item class="width100" title="Контакты">
+                        <ion-item class="ion-item-no-border">
+                            <app-abstract-contacts
+                                    [contactsApiService]="masterContactApi"
+                                    addNewContactUrl="{{addUrl}}"
+                                    class="width100"
+                                    editContactUrl="{{editUrl}}"
+                                    editDefaultContactUrl="{{editDefaultUrl}}"
+                                    interactable="true">
+                            </app-abstract-contacts>
+                        </ion-item>
+                    </app-collapse-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row class="ion-justify-content-start ion-padding-top">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
+                        Описание
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-start">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-desc">
+                        {{master?.description}}
+                    </ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row class="ion-justify-content-start ion-padding-top">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
+                        Специализация
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-start">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        {{master?.name}}
+                    </ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row class="ion-justify-content-start ion-padding-top">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
+                        Теги
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-start">
+                    <ion-item *ngFor="let tag of masterTags"
+                              class="ion-item-no-border ion-item-no-min-height ion-item-tag">
+                        {{tag.name}}
+                    </ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row class="ion-justify-content-start ion-padding-top">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
+                        О себе
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-between">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        Стаж работы
+                    </ion-item>
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        {{master?.experience}} {{declinationYears(master?.experience) | translate}}
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-between">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        Профессиональный уровень
+                    </ion-item>
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        {{"global.professional-level." + master?.level | translate}}
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-between">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        Пол
+                    </ion-item>
+                    <ion-item *ngIf="user?.gender" class="ion-item-no-border ion-item-no-min-height pv5">
+                        {{"global.sex." + user?.gender | translate}}
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-between">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        Возраст
+                    </ion-item>
+                    <ion-item *ngIf="user?.birthday" class="ion-item-no-border ion-item-no-min-height pv5">
+                        {{getYearsFromBirthday(user?.birthday)}} {{declinationYears(getYearsFromBirthday(user?.birthday)) | translate}}
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-between">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                        Национальность
+                    </ion-item>
+                    <ion-item *ngIf="user?.nationality" class="ion-item-no-border ion-item-no-min-height pv5">
+                        {{userCountry?.name}}
+                    </ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+
+
+        <ion-item *ngIf="experienceList?.length"
+                  class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row>
+                    <app-collapse-item class="width100" title="Опыт работы">
+                        <ion-item
+                                *ngFor="let experience of experienceList"
+                                class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
+                            <ion-col>
+                                <ion-row class="availability-subtitle">{{experience.company}}</ion-row>
+                                <ion-row *ngIf="experience.end_date">
+                                    {{experience.start_date}} - {{experience.end_date}}
+                                </ion-row>
+                                <ion-row *ngIf="!experience.end_date && experience.is_still_here">
+                                    {{experience.start_date}} - {{"global.experience-dates.until-now"|translate}}
+                                </ion-row>
+                            </ion-col>
+                        </ion-item>
+                    </app-collapse-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row>
+                    <app-collapse-item class="width100" title="Образование">
+                        <ion-item
+                                *ngFor="let education of educationList"
+                                class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
+                            <ion-col>
+                                <ion-row class="availability-subtitle">{{education.university}}</ion-row>
+                                <ion-row *ngIf="education.deegree">{{education.deegree}}</ion-row>
+                                <ion-row *ngIf="education.end_date">
+                                    {{education.start_date}} - {{education.end_date}}
+                                </ion-row>
+                                <ion-row *ngIf="!education.end_date && education.is_still_here">
+                                    {{education.start_date}} - {{"global.experience-dates.until-now"|translate}}
+                                </ion-row>
+                            </ion-col>
+                        </ion-item>
+                    </app-collapse-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row>
+                    <app-collapse-item class="width100" title="Курсы повышения квалификации">
+                        <ion-item class="ion-item-no-border">
+                        </ion-item>
+                    </app-collapse-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row>
+                    <app-collapse-item class="width100" title="Сертификаты">
+                        <ion-item
+                                *ngFor="let certificate of certificateList"
+                                class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
+                            <ion-col>
+                                <ion-row class="availability-subtitle">{{certificate.name}}</ion-row>
+                                <ion-row>{{certificate.organization}}</ion-row>
+                                <ion-row *ngIf="certificate.date">{{certificate.date}}</ion-row>
+                                <ion-row *ngIf="certificate.photo_thumbnail">
+                                    <ion-img src="{{certificate.photo_thumbnail}}"></ion-img>
+                                </ion-row>
+                            </ion-col>
+                        </ion-item>
+                    </app-collapse-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="6">
+                <ion-row class="ion-justify-content-start ion-padding-top ion-margin-bottom">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
+                        Доступность сервиса
+                    </ion-item>
+                </ion-row>
+                <ion-item class="ion-item-no-border">
+                    <ion-col class="ion-no-padding" size="12">
+                        <ion-row class="availability-subtitle">Языки общения</ion-row>
+                        <ion-row *ngFor="let lang of userLanguages"> - {{lang.name}}</ion-row>
+                    </ion-col>
+                </ion-item>
+            </ion-col>
+            <ion-col class="ion-no-padding" size="6">
+            </ion-col>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row>
+                    <app-collapse-item class="width100" title="Отзывы">
+                        <ion-item class="ion-item-no-border">
+                        </ion-item>
+                    </app-collapse-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+    </ion-col>
+</ion-row>

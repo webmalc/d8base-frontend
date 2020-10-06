@@ -1,4 +1,18 @@
 {
+  "global": {
+    "professional-level": {
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior"
+    },
+    "sex": {
+      "1": "Female",
+      "0": "Male"
+    },
+    "experience-dates": {
+      "until-now": "until now"
+    }
+  },
   "ion-selectable": {
     "close-button-text": "Close",
     "search-text": "Search",
@@ -186,6 +200,18 @@
       "edit": "Edit",
       "delete-from-me": "Delete from me",
       "delete": "Delete from me and from "
+    }
+  },
+  "declination": {
+    "reviews": {
+      "1": "review",
+      "2": "reviews",
+      "3": "reviews"
+    },
+    "years": {
+      "1": "year",
+      "2": "years",
+      "3": "years"
     }
   }
 }

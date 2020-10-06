@@ -5,6 +5,7 @@ export interface MasterInterface {
     company: string;
     experience: number;
     level: string;
-    is_auto_order_confirmation: boolean;
+    // is_auto_order_confirmation: boolean;
+    rating: string;
     subcategory: number;
 }

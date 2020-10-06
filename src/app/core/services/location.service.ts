@@ -1,19 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {District} from '@app/core/models/district';
 import {Region} from '@app/core/models/region';
 import {Subregion} from '@app/core/models/subregion';
+import {CitiesApiService} from '@app/core/services/location/cities-api.service';
+import {CountriesApiService} from '@app/core/services/location/countries-api.service';
 import {DistrictApiService} from '@app/core/services/location/district-api.service';
 import {RegionApiService} from '@app/core/services/location/region-api.service';
 import {SubregionApiService} from '@app/core/services/location/subregion-api.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {LocationTypes} from '@app/core/types/location-types';
-import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
-import {CitiesApiService} from '@app/profile/services/cities-api.service';
-import {CountriesApiService} from '@app/profile/services/countries-api.service';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
 import {forkJoin, Observable} from 'rxjs';
@@ -25,8 +22,6 @@ import {map, switchMap} from 'rxjs/operators';
 export class LocationService {
 
     constructor(
-        private userLocationApi: UserLocationApiService,
-        private masterLocationApi: MasterLocationApiService,
         private readonly countriesApi: CountriesApiService,
         private readonly regionApi: RegionApiService,
         private readonly subregionApi: SubregionApiService,

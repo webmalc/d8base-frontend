@@ -19,7 +19,7 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
         );
     }
 
-    public getList(ids: number[]): Observable<T[]> {
+    public getList(ids: number[] | string[]): Observable<T[]> {
         return this.client.getList<T>(ids, this.getUrl()).pipe(
             map(raw => this.transform(raw))
         );

@@ -37,7 +37,7 @@ export class EditMasterFormService {
                 ]
             ],
             [EditMasterFormFields.IsAutoOrderConfirmation]: [
-                master?.is_auto_order_confirmation, ''
+                // master?.is_auto_order_confirmation, ''
             ]
         });
     }

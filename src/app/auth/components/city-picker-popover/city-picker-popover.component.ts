@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {CitiesApiService} from '@app/core/services/location/cities-api.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {City} from '@app/profile/models/city';
-import {CitiesApiService} from '@app/profile/services/cities-api.service';
 import {IonItem} from '@ionic/angular';
 import {BehaviorSubject, ReplaySubject} from 'rxjs';
 

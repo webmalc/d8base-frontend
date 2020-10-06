@@ -20,4 +20,5 @@ export class User implements UserInterface {
     @Expose() public languages?: string[];
     @Expose() public account_type: string;
     @Expose() public avatar_thumbnail: string;
+    @Expose() public is_confirmed: boolean;
 }

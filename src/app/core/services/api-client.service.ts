@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {UserContact} from '@app/profile/models/user-contact';
 import {forkJoin, Observable, of} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
@@ -37,16 +36,17 @@ export class ApiClientService {
         return this.http.options<T>(this.getHost() + url, params);
     }
 
-    public getList<T>(ids: number[], url: string): Observable<T[]> {
-        return 0 === ids.length ? of([]) :  of(ids).pipe(
+    public getList<T>(ids: number[] | string[], url: string): Observable<T[]> {
+        return 0 === ids.length ? of([]) : of(ids).pipe(
             mergeMap((list) => forkJoin(
+                // @ts-ignore
                 ...list.map(id => id ? this.get<T>(`${url}${id}/`) : of(null))
             ))
         );
     }
 
-    public deleteList<T extends {id: number}>(dataList: T[], url: string): Observable<any> {
-        return 0 === dataList.length ? of([]) :  of(dataList).pipe(
+    public deleteList<T extends { id: number }>(dataList: T[], url: string): Observable<any> {
+        return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
                 ...list.map((value: {id: number}) => this.delete(`${url + value.id}/`))
             ))

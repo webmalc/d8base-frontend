@@ -1,26 +1,46 @@
-<ion-content>
-    <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-            <ion-card class="cursor-pointer" *ngFor="let master of masterList$|async" [attr.masterId]="master.id"
-                      (click)="onMasterClick($event)">
-                <ion-card-header class="not-clickable">
-                    Professional summary
-                </ion-card-header>
-                <ion-card-content class="not-clickable">
-                    <ion-item>
-                        {{master.name}}
+<ion-header>
+    <ion-toolbar class="background-color-white">
+        <ion-row class="ion-justify-content-between">
+            <ion-col offset="1" size="2">
+                <ion-item class="ion-item-no-border ion-align-items-center master-submenu-font">
+                    <ion-icon class="ion-padding-end" name="arrow-back-outline"></ion-icon>
+                    back
+                </ion-item>
+            </ion-col>
+            <ion-col offset="2" size="7">
+                <ion-row>
+                    <ion-item (click)="selectTab(submenu.Services)"
+                              class="ion-item-no-border master-submenu-font cursor-pointer">Услуги
                     </ion-item>
-                    <ion-item>
-                        {{master.description}}
+                    <ion-item (click)="selectTab(submenu.Info)"
+                              class="ion-item-no-border master-submenu-font cursor-pointer">Инфо
                     </ion-item>
-                </ion-card-content>
-            </ion-card>
+                    <ion-item (click)="selectTab(submenu.Calendar)"
+                              class="ion-item-no-border master-submenu-font cursor-pointer">Календарь
+                    </ion-item>
+                    <ion-item (click)="selectTab(submenu.Portfolio)"
+                              class="ion-item-no-border master-submenu-font cursor-pointer">Портфолио
+                    </ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="background-color-white">
+    <ion-row class="ion-justify-content-center ion-margin-bottom">
+        <ion-col [sizeLg]="12" [sizeMd]="12" [sizeSm]="6" [sizeXl]="12" [sizeXs]="6" class="ion-no-padding">
+            <ion-row class="ion-margin-top">
+                <ion-col offset="1" size="3">
+                    <ion-item class="ion-item-no-border">
+                        <app-master-profile-main-info-section
+                                [sectionData]="this.mainInfoSectionData"></app-master-profile-main-info-section>
+                    </ion-item>
+                </ion-col>
+                <ion-col offset="1" size="5">
+                    <app-master-profile-factory [mode]="tab"></app-master-profile-factory>
+                </ion-col>
+            </ion-row>
         </ion-col>
     </ion-row>
-
-    <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
-            <ion-button [routerLink]="['/professional/add']" expand="block">add professional summary</ion-button>
-        </ion-col>
-    </ion-row>
+    <app-footer></app-footer>
 </ion-content>

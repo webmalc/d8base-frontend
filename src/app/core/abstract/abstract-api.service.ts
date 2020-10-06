@@ -19,7 +19,7 @@ export abstract class AbstractApiService<T extends {id: number}> extends Abstrac
     }
 
     public patch(data: T, key?: string | number): Observable<T> {
-        return this.client.patch<T>(`${this.getUrl() + key ? key : data.id}/`, HelperService.clear(data)).pipe(
+        return this.client.patch<T>(`${this.getUrl() + (key ? key : data.id)}/`, HelperService.clear(data)).pipe(
             map(raw => this.transform(raw))
         );
     }

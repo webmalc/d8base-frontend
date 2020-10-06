@@ -5,7 +5,6 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {Contact} from '@app/profile/models/contact';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 @Injectable({

@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
-import {MasterGuard} from '@app/core/guards/master.guard';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+    // {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+    {path: '', redirectTo: 'professional', pathMatch: 'full'},
     {
         path: 'auth',
         loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule)
@@ -16,8 +16,9 @@ const routes: Routes = [
     },
     {
         path: 'professional',
+        // component: MasterPage,
         loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule),
-        canActivate: [MasterGuard]
+        // canActivate: [MasterGuard]
     },
     {
         path: 'service',

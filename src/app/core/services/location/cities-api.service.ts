@@ -8,7 +8,7 @@ import {City} from '@app/profile/models/city';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

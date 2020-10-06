@@ -6,7 +6,7 @@ import {LocationTypes} from '@app/core/types/location-types';
 import {Country} from '@app/profile/models/country';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

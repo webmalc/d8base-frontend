@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HelperService} from '@app/core/services/helper.service';
 import {MediaIconFactoryService} from '@app/core/services/media-icon-factory.service';
-import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {Contact} from '@app/profile/models/contact';
 import {UserContact} from '@app/profile/models/user-contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
@@ -14,7 +14,7 @@ import {debounceTime, filter} from 'rxjs/operators';
     templateUrl: './contacts-add.component.html',
     styleUrls: ['./contacts-add.component.scss'],
 })
-export class ContactsAddComponent extends Reinitable implements OnDestroy {
+export class ContactsAddComponent extends Reinitable implements OnDestroy, OnInit {
 
     public static reinit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public userContacts$: BehaviorSubject<UserContact[]> = new BehaviorSubject<UserContact[]>([]);
@@ -29,6 +29,10 @@ export class ContactsAddComponent extends Reinitable implements OnDestroy {
         private contactsApi: ContactApiService
     ) {
         super();
+    }
+
+    public ngOnInit(): void {
+        this.init();
     }
 
     public ngOnDestroy(): void {
@@ -76,7 +80,7 @@ export class ContactsAddComponent extends Reinitable implements OnDestroy {
             userContacts: this.userContactApiService.getCurrentClientContacts()
         }).subscribe(
             ({contacts, userContacts}) => {
-                if (UserContactEditComponent.calculateContacts(contacts.results, userContacts.results).length === 0) {
+                if (HelperService.calculateContacts(contacts.results, userContacts.results).length === 0) {
                     this.canAddNewContact$.next(false);
                 }
             }
