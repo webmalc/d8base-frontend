@@ -5,6 +5,7 @@ import {EditMasterComponent} from '@app/master/components/edit-master/edit-maste
 import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {MasterPage} from './master.page';
 
+// tslint:disable:max-line-length
 const routes: Routes = [
     {
         path: '',
@@ -26,6 +27,30 @@ const routes: Routes = [
     {
         path: 'location-edit/:location-id',
         loadChildren: () => import('./pages/master-location-edit/master-location-edit.module').then(m => m.MasterLocationEditPageModule)
+    },
+    {
+        path: 'experience-edit/:experience-id',
+        loadChildren: () => import('./pages/master-experience-edit/master-experience-edit.module').then(m => m.MasterExperienceEditPageModule)
+    },
+    {
+        path: 'experience-add',
+        loadChildren: () => import('./pages/master-experience-edit/master-experience-edit.module').then(m => m.MasterExperienceEditPageModule)
+    },
+    {
+        path: 'education-add',
+        loadChildren: () => import('./pages/master-education-edit/master-education-edit.module').then(m => m.MasterEducationEditPageModule)
+    },
+    {
+        path: 'education-edit/:education-id',
+        loadChildren: () => import('./pages/master-education-edit/master-education-edit.module').then(m => m.MasterEducationEditPageModule)
+    },
+    {
+        path: 'certificate-add',
+        loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module').then(m => m.MasterCertificateEditPageModule)
+    },
+    {
+        path: 'certificate-edit/:certificate-id',
+        loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module').then(m => m.MasterCertificateEditPageModule)
     },
     {
         path: 'professional-contact-add-default/:default-contact-id',

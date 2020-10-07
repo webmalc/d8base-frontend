@@ -179,7 +179,19 @@
                                 *ngFor="let experience of experienceList"
                                 class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
                             <ion-col>
-                                <ion-row class="availability-subtitle">{{experience.company}}</ion-row>
+                                <ion-row class="ion-justify-content-between">
+                                    <ion-item
+                                            class="ion-item-no-border availability-subtitle ion-item-no-vertical-padding ion-item-no-side-padding">
+                                        {{experience.company}}
+                                    </ion-item>
+                                    <ion-item class="ion-item-no-border ion-align-items-center"
+                                              routerDirection="forward"
+                                              routerLink="experience-edit/{{experience.id}}"
+                                              routerLinkActive="active"
+                                    >
+                                        <ion-icon name="create-outline"></ion-icon>
+                                    </ion-item>
+                                </ion-row>
                                 <ion-row *ngIf="experience.end_date">
                                     {{experience.start_date}} - {{experience.end_date}}
                                 </ion-row>
@@ -188,6 +200,17 @@
                                 </ion-row>
                             </ion-col>
                         </ion-item>
+                        <ion-row>
+                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
+                                      routerDirection="forward"
+                                      routerLink="experience-add/"
+                                      routerLinkActive="active">
+                                <ion-icon color="secondary" name="add-circle"></ion-icon>
+                                <ion-label class="ion-padding-start">
+                                    {{'master-profile.info.add-new-location'|translate}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-row>
                     </app-collapse-item>
                 </ion-row>
             </ion-col>
@@ -200,7 +223,19 @@
                                 *ngFor="let education of educationList"
                                 class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
                             <ion-col>
-                                <ion-row class="availability-subtitle">{{education.university}}</ion-row>
+                                <ion-row class="ion-justify-content-between">
+                                    <ion-item
+                                            class="ion-item-no-border availability-subtitle ion-item-no-vertical-padding ion-item-no-side-padding">
+                                        {{education.university}}
+                                    </ion-item>
+                                    <ion-item class="ion-item-no-border ion-align-items-center"
+                                              routerDirection="forward"
+                                              routerLink="education-edit/{{education.id}}"
+                                              routerLinkActive="active"
+                                    >
+                                        <ion-icon name="create-outline"></ion-icon>
+                                    </ion-item>
+                                </ion-row>
                                 <ion-row *ngIf="education.deegree">{{education.deegree}}</ion-row>
                                 <ion-row *ngIf="education.end_date">
                                     {{education.start_date}} - {{education.end_date}}
@@ -210,6 +245,17 @@
                                 </ion-row>
                             </ion-col>
                         </ion-item>
+                        <ion-row>
+                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
+                                      routerDirection="forward"
+                                      routerLink="education-add/"
+                                      routerLinkActive="active">
+                                <ion-icon color="secondary" name="add-circle"></ion-icon>
+                                <ion-label class="ion-padding-start">
+                                    {{'master-profile.info.add-new-education'|translate}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-row>
                     </app-collapse-item>
                 </ion-row>
             </ion-col>
@@ -228,11 +274,24 @@
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
                     <app-collapse-item class="width100" title="Сертификаты">
-                        <ion-item
-                                *ngFor="let certificate of certificateList"
-                                class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
+                        <ion-item *ngFor="let certificate of certificateList"
+                                  class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
                             <ion-col>
-                                <ion-row class="availability-subtitle">{{certificate.name}}</ion-row>
+                                <ion-row class="ion-justify-content-between">
+                                    <ion-item
+                                            class="ion-item-no-border availability-subtitle ion-item-no-vertical-padding ion-item-no-side-padding">
+                                        {{certificate.name}}
+                                    </ion-item>
+                                    <ion-item class="ion-item-no-border ion-align-items-center">
+                                        <ion-item class="ion-item-no-border ion-align-items-center"
+                                                  routerDirection="forward"
+                                                  routerLink="certificate-edit/{{certificate.id}}"
+                                                  routerLinkActive="active"
+                                        >
+                                            <ion-icon name="create-outline"></ion-icon>
+                                        </ion-item>
+                                    </ion-item>
+                                </ion-row>
                                 <ion-row>{{certificate.organization}}</ion-row>
                                 <ion-row *ngIf="certificate.date">{{certificate.date}}</ion-row>
                                 <ion-row *ngIf="certificate.photo_thumbnail">
@@ -240,6 +299,17 @@
                                 </ion-row>
                             </ion-col>
                         </ion-item>
+                        <ion-row>
+                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
+                                      routerDirection="forward"
+                                      routerLink="certificate-add/"
+                                      routerLinkActive="active">
+                                <ion-icon color="secondary" name="add-circle"></ion-icon>
+                                <ion-label class="ion-padding-start">
+                                    {{'master-profile.info.add-new-education'|translate}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-row>
                     </app-collapse-item>
                 </ion-row>
             </ion-col>

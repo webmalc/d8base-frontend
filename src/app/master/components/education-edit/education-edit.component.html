@@ -1,0 +1,74 @@
+<ion-row *ngIf="item" class="ion-justify-content-center">
+    <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+        <ion-item class="ion-item-no-border ion-item-bordered-first">
+            <ion-col class="ion-no-padding">
+                <ion-row class="ion-justify-content-start ion-align-items-center">
+                    <ion-item (click)="locationBack()"
+                              class="ion-item-no-border ion-align-items-center"
+                              routerDirection="back" routerLinkActive="active">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </ion-item>
+                    <ion-item class="ion-item-no-border">Профиль мастера</ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+            <ion-col class="ion-padding-vertical" size="12">
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        {{'education-tab.education.university'|translate}}
+                    </ion-label>
+                    <ion-input [(ngModel)]="item.university" name="title" type="text"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        {{'education-tab.education.degree'|translate}}
+                    </ion-label>
+                    <ion-input [(ngModel)]="item.deegree" name="photo" type="text"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        {{'education-tab.education.fieldOfStudy'|translate}}
+                    </ion-label>
+                    <ion-input [(ngModel)]="item.field_of_study" name="link" type="text"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="medium">
+                        {{'education-tab.education.isStillHere'|translate}}
+                    </ion-label>
+                    <ion-toggle [(ngModel)]="item.is_still_here"></ion-toggle>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        {{'education-tab.education.startDate'|translate}}
+                    </ion-label>
+                    <ion-datetime [(ngModel)]="item.start_date" display-format="YYYY-MM-DD"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        {{'education-tab.education.endDate'|translate}}
+                    </ion-label>
+                    <ion-datetime
+                            [(ngModel)]="item.end_date"
+                            display-format="YYYY-MM-DD"
+                    ></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        {{'education-tab.education.description'|translate}}
+                    </ion-label>
+                    <ion-input [(ngModel)]="item.description" name="title" type="text"></ion-input>
+                </ion-item>
+
+                <ion-button (click)="delete()" *ngIf="item.id" color="danger" expand="block" fill="solid">
+                    {{ 'education-tab.education.remove_education' | translate }}
+                </ion-button>
+                <ion-button (click)="save()" expand="block">
+                    {{ 'education-tab.education.save_education' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-item>
+    </ion-col>
+</ion-row>
