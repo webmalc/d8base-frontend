@@ -13,7 +13,6 @@ import {ExperienceItemComponent} from '@app/master/components/experience-item/ex
 import {ExperienceListComponent} from '@app/master/components/experience-list/experience-list.component';
 import {ExperienceTabComponent} from '@app/master/components/experience-tab/experience-tab.component';
 import {LocationTabComponent} from '@app/master/components/location-tab/location-tab.component';
-import {TagsSelectInputComponent} from '@app/master/components/tags-select-input/tags-select-input.component';
 import {TagsTabComponent} from '@app/master/components/tags-tab/tags-tab.component';
 import {EditMasterFormService} from '@app/master/forms/edit-master-form.service';
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
@@ -41,7 +40,7 @@ import {MasterTabsPage} from './master-tabs.page';
         MasterTabsPage,
         EditMasterComponent,
         TagsTabComponent,
-        TagsSelectInputComponent,
+        // TagsSelectInputComponent,
         ContactsTabComponent,
         LocationTabComponent,
         EducationTabComponent,
@@ -53,6 +52,9 @@ import {MasterTabsPage} from './master-tabs.page';
         EducationItemComponent,
         CertificatesListComponent,
         CertificatesItemComponent
+    ],
+    exports: [
+        // TagsSelectInputComponent
     ],
     providers: [
         EditMasterFormService,

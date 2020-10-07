@@ -1,10 +1,11 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {Tag} from '@app/master/models/tag';
 import {TagsApiService} from '@app/master/services/tags-api.service';
 import {TagsListApiService} from '@app/master/services/tags-list-api.service';
 import {BehaviorSubject} from 'rxjs';
-import {first} from 'rxjs/operators';
+import {first, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-tags-select-input',
@@ -19,21 +20,32 @@ import {first} from 'rxjs/operators';
 export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
 
     public tagsList$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-    @Input() public masterId: number;
+    public masterId: number;
     public form: FormGroup;
     private onChange: (fn: any) => void;
 
-    constructor(private api: TagsApiService, private formBuilder: FormBuilder, private tagsListApi: TagsListApiService) {
+    constructor(
+        private api: TagsApiService,
+        private formBuilder: FormBuilder,
+        private tagsListApi: TagsListApiService,
+        private masterManager: MasterManagerService
+    ) {
     }
 
     public ngOnInit(): void {
-        this.tagsListApi.get().subscribe(
-            data => this.tagsList$.next(this.getTagNamesArray(data.results))
-        );
-        this.api.getByMasterId(this.masterId).subscribe(
-            data => {
-                this.createForm(data.results);
-                this.onChange(this.form.get('tagSelect').value);
+        this.masterManager.getMasterList().pipe(
+            tap(list => this.masterId = list[0].id)
+        ).subscribe(
+            _ => {
+                this.tagsListApi.get().subscribe(
+                    data => this.tagsList$.next(this.getTagNamesArray(data.results))
+                );
+                this.api.getByMasterId(this.masterId).subscribe(
+                    data => {
+                        this.createForm(data.results);
+                        this.onChange(this.form.get('tagSelect').value);
+                    }
+                );
             }
         );
     }

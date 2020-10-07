@@ -53,6 +53,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module').then(m => m.MasterCertificateEditPageModule)
     },
     {
+        path: 'tags-edit',
+        loadChildren: () => import('./pages/master-tag-edit/master-tag-edit.module').then(m => m.MasterTagEditPageModule)
+    },
+    {
         path: 'professional-contact-add-default/:default-contact-id',
         component: UserContactEditComponent,
         data: {isMaster: true}

@@ -1,4 +1,4 @@
-<form *ngIf="form" [formGroup]="form">
+<form *ngIf="form && masterId" [formGroup]="form">
     <ion-item>
         <ion-label>Professional tags</ion-label>
         <ion-select (ionChange)="selectChange()" multiple="true" formControlName="tagSelect">
