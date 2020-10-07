@@ -1,4 +1,3 @@
-import {Location} from '@angular/common';
 import {OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
@@ -12,7 +11,6 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
 
     protected constructor(
         protected readonly route: ActivatedRoute,
-        protected readonly location: Location,
         protected readonly api: ApiServiceInterface<T>,
         protected readonly masterManager?: MasterManagerService
     ) {
@@ -31,7 +29,7 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
 
     public save(item: T): void {
         this.itemId ?
-            this.api.patch(item).subscribe(() => this.location.back()) :
+            this.api.patch(item).subscribe(() => this.afterApiCallback()) :
             (this.isUserOnly() ? this.api.create(item) : this.masterManager.getMasterList().pipe(
                 switchMap(
                     list => {
@@ -41,11 +39,11 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
                         return this.api.create(item);
                     }
                 )
-            ).subscribe(() => this.location.back()));
+            ).subscribe(() => this.afterApiCallback()));
     }
 
     public delete(item: T): void {
-        this.api.delete(item).subscribe(() => this.location.back());
+        this.api.delete(item).subscribe(() => this.afterApiCallback());
     }
 
     protected abstract getNewModel(): T;
@@ -53,5 +51,7 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
     protected abstract isUserOnly(): boolean;
 
     protected abstract getItemId(): number;
+
+    protected abstract afterApiCallback(): void;
 }
 

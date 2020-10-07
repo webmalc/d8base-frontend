@@ -5,7 +5,6 @@ import {CertificatesItemComponent} from '@app/master/components/certificates-ite
 import {CertificatesListComponent} from '@app/master/components/certificates-list/certificates-list.component';
 import {CertificatesTabComponent} from '@app/master/components/certificates-tab/certificates-tab.component';
 import {ContactsTabComponent} from '@app/master/components/contacts-tab/contacts-tab.component';
-import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
 import {EducationItemComponent} from '@app/master/components/education-item/education-item.component';
 import {EducationListComponent} from '@app/master/components/education-list/education-list.component';
 import {EducationTabComponent} from '@app/master/components/education-tab/education-tab.component';
@@ -14,7 +13,6 @@ import {ExperienceListComponent} from '@app/master/components/experience-list/ex
 import {ExperienceTabComponent} from '@app/master/components/experience-tab/experience-tab.component';
 import {LocationTabComponent} from '@app/master/components/location-tab/location-tab.component';
 import {TagsTabComponent} from '@app/master/components/tags-tab/tags-tab.component';
-import {EditMasterFormService} from '@app/master/forms/edit-master-form.service';
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
@@ -38,9 +36,7 @@ import {MasterTabsPage} from './master-tabs.page';
     ],
     declarations: [
         MasterTabsPage,
-        EditMasterComponent,
         TagsTabComponent,
-        // TagsSelectInputComponent,
         ContactsTabComponent,
         LocationTabComponent,
         EducationTabComponent,
@@ -54,10 +50,8 @@ import {MasterTabsPage} from './master-tabs.page';
         CertificatesItemComponent
     ],
     exports: [
-        // TagsSelectInputComponent
     ],
     providers: [
-        EditMasterFormService,
         UserContactApiService,
         ExperienceApiService,
         EducationApiService,

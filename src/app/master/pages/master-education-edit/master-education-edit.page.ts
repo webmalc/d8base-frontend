@@ -19,7 +19,11 @@ export class MasterEducationEditPage extends AbstractModelEditPage<Education> {
         protected readonly masterManager: MasterManagerService,
         protected readonly location: Location
     ) {
-        super(route, location, educationApi, masterManager);
+        super(route, educationApi, masterManager);
+    }
+
+    protected afterApiCallback(): void {
+        this.location.back();
     }
 
     protected getItemId(): number {

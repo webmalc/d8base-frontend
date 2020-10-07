@@ -19,7 +19,11 @@ export class MasterExperienceEditPage extends AbstractModelEditPage<Experience> 
         protected readonly masterManager: MasterManagerService,
         protected readonly location: Location
     ) {
-        super(route, location, experienceApi, masterManager);
+        super(route, experienceApi, masterManager);
+    }
+
+    protected afterApiCallback(): void {
+        this.location.back();
     }
 
     protected getItemId(): number {

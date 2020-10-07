@@ -1,27 +1,28 @@
 import {Injectable} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {MasterInterface} from '@app/core/interfaces/master.interface';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
-import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
+import {MasterApiService} from '@app/master/services/master-api.service';
+import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
-import {plainToClass} from 'class-transformer';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MasterManagerService {
+export class MasterManagerService { // TODO: refactor with masterApiService
 
     public isMaster$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    private readonly url = environment.backend.master;
-    private readonly masterListUrl = environment.backend.master_list;
 
-    constructor(private client: ApiClientService, private userManager: UserManagerService, private auth: AuthenticationService) {
+    constructor(
+        private userManager: UserManagerService,
+        private auth: AuthenticationService,
+        private masterApi: MasterApiService,
+        private masterReadonlyApi: MasterReadonlyApiService
+    ) {
     }
 
     public subscribeToAuth(): void {
@@ -41,31 +42,28 @@ export class MasterManagerService {
     }
 
     public getMasterList(): Observable<Master[]> {
-        return this.client.get(this.url).pipe(map((data: ApiListResponseInterface<Master>) => data.results));
+        return this.masterApi.get().pipe(map((data: ApiListResponseInterface<Master>) => data.results));
     }
 
     public updateMaster(master: Master): Observable<Master> {
-        return this.client.put(`${this.url}${master.id}/`, master).pipe(map(raw => plainToClass(Master, raw)));
+        return this.masterApi.put(master);
     }
 
     public createMaster(master: Master): Observable<Master> {
-        return this.client.post(this.url, master).pipe(map(raw => plainToClass(Master, raw)));
+        return this.masterApi.create(master);
     }
 
     public getMaster(masterId?: number): Observable<Master> {
-        return this.client.get(`${this.url}${masterId}/`).pipe(map(raw => plainToClass(Master, raw)));
+        return this.masterApi.getByEntityId(masterId);
     }
 
-    public getUserLessList$(ids: number[]): Observable<MasterInterface[]> {
-        return this.client
-            .get<ApiListResponseInterface<MasterInterface>>(this.masterListUrl, {pk_in: ids.join(',')})
-            .pipe(map((data) => data.results));
+    public getUserLessList$(ids: number[]): Observable<Master[]> {
+        return this.masterReadonlyApi.getList(ids);
     }
 
     public getExperienceLevelList(): Observable<{ value: string, display_name: string }[]> {
-        return this.client.options(this.url).pipe(
-            map((data: { actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }) =>
-                data.actions.POST.level.choices)
+        return this.masterApi.options<{ actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }>().pipe(
+            map((data) => data.actions.POST.level.choices)
         );
     }
 }

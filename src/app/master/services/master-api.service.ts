@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
+import {Master} from '@app/core/models/master';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {MasterList} from '@app/master/models/master-list';
 import {plainToClass} from 'class-transformer';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MasterReadonlyApiService extends AbstractReadonlyApiService<MasterList> {
+export class MasterApiService extends AbstractApiService<Master> {
 
-    private readonly url = environment.backend.master_list;
+    private readonly url = environment.backend.master;
 
     constructor(protected client: ApiClientService) {
         super(client);
@@ -21,7 +21,7 @@ export class MasterReadonlyApiService extends AbstractReadonlyApiService<MasterL
     }
 
     // @ts-ignore
-    protected transform(data: MasterList[]): MasterList[] {
-        return plainToClass(MasterList, data);
+    protected transform(data: Master | Master[]): Master | Master[] {
+        return plainToClass(Master, data);
     }
 }

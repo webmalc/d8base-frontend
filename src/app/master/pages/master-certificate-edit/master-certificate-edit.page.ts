@@ -19,7 +19,11 @@ export class MasterCertificateEditPage extends AbstractModelEditPage<Certificate
         protected readonly api: CertificatesApiService,
         protected readonly masterManager: MasterManagerService
     ) {
-        super(route, location, api, masterManager);
+        super(route, api, masterManager);
+    }
+
+    protected afterApiCallback(): void {
+        this.location.back();
     }
 
     protected getItemId(): number {

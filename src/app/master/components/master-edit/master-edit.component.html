@@ -1,0 +1,93 @@
+<ion-grid *ngIf="item">
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-item>
+                <ion-label class="label-for-required-input" color="medium"
+                           position="floating">name
+                </ion-label>
+                <ion-input [(ngModel)]="item.name" name="first_name"
+                           type="text"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-item>
+                <ion-label color="medium"
+                           position="floating">description
+                </ion-label>
+                <ion-input [(ngModel)]="item.description" name="first_name"
+                           type="text"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-item>
+                <ion-label color="medium"
+                           position="floating">company
+                </ion-label>
+                <ion-input [(ngModel)]="item.company" name="first_name"
+                           type="text"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-item>
+                <ion-label color="medium"
+                           position="floating">experience
+                </ion-label>
+                <ion-input [(ngModel)]="item.experience" name="first_name"
+                           type="text"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-item>
+                <ion-label color="medium"
+                           position="floating">level
+                </ion-label>
+                <ion-select
+                        [(ngModel)]="item.level"
+                        interface="popover"
+                >
+                    <ion-select-option *ngFor="let level of levelOptions" value="{{level}}">
+                        {{level}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-item>
+                <ion-label class="label-for-required-input" color="medium"
+                           position="floating">subcategory
+                </ion-label>
+                <ion-select
+                        [(ngModel)]="item.subcategory"
+                        interface="popover"
+                >
+                    <ion-select-option *ngFor="let subcategory of subcategoriesList$ | async"
+                                       [value]="subcategory.id">
+                        {{subcategory.name}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
+            <ion-button (click)="save()" expand="block" type="submit">save</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-grid>

@@ -31,7 +31,12 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
         );
     }
 
+    public options<Q>(params?: { [param: string]: string | string[]; }): Observable<Q> {
+        return this.client.options<Q>(this.getUrl(), params);
+    }
+
     protected abstract getUrl(): string;
+
     protected abstract transform(data: T): T;
     protected abstract transform(data: T[]): T[];
 }

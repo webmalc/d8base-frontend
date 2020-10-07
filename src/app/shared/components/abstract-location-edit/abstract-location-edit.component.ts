@@ -1,12 +1,11 @@
 import {Location} from '@angular/common';
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Region} from '@app/core/models/region';
 import {HelperService} from '@app/core/services/helper.service';
 import {TimezoneService} from '@app/core/services/timezone.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {AbstractEditComponent} from '@app/shared/abstract/abstract-edit-component';
-import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
@@ -25,7 +24,6 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
     @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
     public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
         new BehaviorSubject<Array<{ value: string, display_name: string }>>(null);
-    @ViewChild(UserLocationMapComponent) public map: UserLocationMapComponent;
     public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public isRegionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public isSubregionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

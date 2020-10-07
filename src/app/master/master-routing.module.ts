@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
-import {EditMasterComponent} from '@app/master/components/edit-master/edit-master.component';
 import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {MasterPage} from './master.page';
 
@@ -14,7 +13,11 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: EditMasterComponent
+        loadChildren: () => import('./pages/master-edit/master-edit.module').then(m => m.MasterEditPageModule)
+    },
+    {
+        path: 'edit/:master-id',
+        loadChildren: () => import('./pages/master-edit/master-edit.module').then(m => m.MasterEditPageModule)
     },
     {
         path: 'edit/:id',
@@ -72,6 +75,10 @@ const routes: Routes = [
         component: UserContactEditComponent,
         canActivate: [MainGuard],
         data: {isMaster: true}
+    },
+    {
+        path: 'master-edit',
+        loadChildren: () => import('./pages/master-edit/master-edit.module').then(m => m.MasterEditPageModule)
     }
 ];
 
