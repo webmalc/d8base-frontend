@@ -15,6 +15,7 @@ import {LocationItemComponent} from '@app/shared/components/location-item/locati
 import {LocationListComponent} from '@app/shared/components/location/location-list.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
+import {RatingComponent} from '@app/shared/components/rating/rating.component';
 import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-list.component';
 import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
@@ -50,7 +51,8 @@ import {NumberDirective} from './directives/number.directive';
         ContactsAddComponent,
         ServicePublishAgreementComponent,
         AbstractContactsComponent,
-        AbstractLocationEditComponent
+        AbstractLocationEditComponent,
+        RatingComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -69,7 +71,8 @@ import {NumberDirective} from './directives/number.directive';
         ContactsAddComponent,
         ServicePublishAgreementComponent,
         AbstractContactsComponent,
-        AbstractLocationEditComponent
+        AbstractLocationEditComponent,
+        RatingComponent
     ],
     imports: [
         CommonModule,

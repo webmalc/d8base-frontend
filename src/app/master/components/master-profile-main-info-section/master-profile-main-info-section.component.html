@@ -9,13 +9,19 @@
         <ion-item *ngIf="sectionData?.avatar" class="ion-item-no-border ion-item-no-min-height pv5">
             <ion-img [src]="sectionData?.avatar"></ion-img>
         </ion-item>
-        <ion-row class="ion-justify-content-between pv5">
+        <ion-row class="ion-justify-content-between ion-align-items-center pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
                 Рейтинг мастера
             </ion-item>
-            <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
-                {{sectionData?.rating}}
-            </ion-item>
+            <ion-row class="ion-align-items-center">
+                <ion-item
+                        class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-align-items-center">
+                    <app-rating [rating]="ratingToNumber()"></app-rating>
+                </ion-item>
+                <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
+                    {{sectionData?.rating}}
+                </ion-item>
+            </ion-row>
         </ion-row>
         <ion-row class="ion-justify-content-between pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">

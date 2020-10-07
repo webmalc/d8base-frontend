@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {HelperService} from '@app/core/services/helper.service';
-import {TranslationService} from '@app/core/services/translation.service';
 import {MainInfoSectionComponentInputDataInterface} from '@app/master/interfaces/main-info-section-component-input-data-interface';
 
 @Component({
@@ -12,10 +11,11 @@ import {MainInfoSectionComponentInputDataInterface} from '@app/master/interfaces
 export class MasterProfileMainInfoSectionComponent {
     @Input() public sectionData: MainInfoSectionComponentInputDataInterface;
 
-    constructor(private trans: TranslationService) {
-    }
-
     public declinationReviews(num: number): string {
         return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
+    }
+
+    public ratingToNumber(): number {
+        return parseFloat(this.sectionData.rating);
     }
 }
