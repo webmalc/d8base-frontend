@@ -58,11 +58,13 @@ export class ServicePublishDataPreparerService {
     }
 
     private getServiceSchedule(): ServiceSchedule[] {
-        return HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
+        const stepData: ServiceSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
             ServicePublishStepSevenComponent.STEP
-        ).timetable.map(
+        )?.timetable?.map(
             raw => plainToClass(ServiceSchedule, raw)
         ));
+
+        return !stepData ? [] : stepData;
     }
 
     private async getServicePhotos(): Promise<ServicePhoto[]> {

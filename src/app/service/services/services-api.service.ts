@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Service} from '@app/service/models/service';
@@ -17,8 +17,8 @@ export class ServicesApiService extends AbstractApiService<Service> {
     }
 
     public getServiceTypeList(): Observable<{value: string, display_name: string}[]> {
-        return this.client.options(this.url).pipe(
-            map((data: { actions: { POST: { service_type: { choices: { value: string, display_name: string }[] } } } }) =>
+        return super.options<{ actions: { POST: { service_type: { choices: { value: string, display_name: string }[] } } } }>().pipe(
+            map(data =>
                 data.actions.POST.service_type.choices)
         );
     }

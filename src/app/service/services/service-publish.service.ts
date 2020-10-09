@@ -106,7 +106,7 @@ export class ServicePublishService {
     }
 
     private createSchedule(schedule: ServiceSchedule[], service: Service): Observable<ServiceSchedule[]> {
-        schedule.forEach(v => v.service = service.id);
+        schedule?.forEach(v => v.service = service.id);
 
         return this.serviceScheduleApi.createList(schedule);
     }

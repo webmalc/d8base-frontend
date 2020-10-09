@@ -1,3 +1,21 @@
-<p>
-    master-profile-services works!
-</p>
+<ion-row>
+    <ion-col class="ion-no-padding" size="12">
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-justify-content-start">
+            <ion-label color="medium" position="floating">
+                <ion-icon name="search-outline"></ion-icon>
+                Услуги мастера
+            </ion-label>
+            <ion-input (ionChange)="search()" (keydown.escape)="clearSearchModel()" [(ngModel)]="searchModel">
+            </ion-input>
+        </ion-item>
+
+        <ion-item class="ion-item-no-border ion-item-bottom-border ion-justify-content-start main-title ion-margin-top">
+            Услуги мастера ({{serviceData.length}})
+        </ion-item>
+
+        <app-master-profile-service-presentation *ngFor="let service of serviceData" [serviceData]="service">
+        </app-master-profile-service-presentation>
+
+    </ion-col>
+</ion-row>

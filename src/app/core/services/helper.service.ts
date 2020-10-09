@@ -18,7 +18,7 @@ export class HelperService {
     }
 
     public static clearArray<T>(arr: T[]): T[] {
-        arr.forEach(val => this.clear(val));
+        arr?.forEach(val => this.clear(val));
 
         return arr;
     }

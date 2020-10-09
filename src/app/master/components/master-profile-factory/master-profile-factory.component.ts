@@ -40,13 +40,14 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
             case MasterProfileSubmenu.Services:
                 const serviceComponentFactory =
                     this.componentFactoryResolver.resolveComponentFactory<MasterProfileServicesComponent>(MasterProfileServicesComponent);
-                this.viewContainerRef.createComponent<MasterProfileServicesComponent>(serviceComponentFactory);
+                const servicesC = this.viewContainerRef.createComponent<MasterProfileServicesComponent>(serviceComponentFactory);
+                servicesC.instance.init();
                 break;
             case MasterProfileSubmenu.Info:
                 const infoComponentFactory =
                     this.componentFactoryResolver.resolveComponentFactory<MasterProfileInfoComponent>(MasterProfileInfoComponent);
-                const c = this.viewContainerRef.createComponent<MasterProfileInfoComponent>(infoComponentFactory);
-                c.instance.init();
+                const infoC = this.viewContainerRef.createComponent<MasterProfileInfoComponent>(infoComponentFactory);
+                infoC.instance.init();
                 break;
             case MasterProfileSubmenu.Calendar:
                 const calendarComponentFactory =

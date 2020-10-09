@@ -1,0 +1,32 @@
+.service-title {
+  font-size: 16px;
+  color: #222428;
+  line-height: 20px;
+}
+
+.service-description {
+  font-size: 16px;
+  line-height: 20px;
+  color: #989AA2;
+}
+
+.space-between-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.right-col {
+  align-items: flex-end;
+}
+
+.service-price-hour-text {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.service-price-text {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+}
