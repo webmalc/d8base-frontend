@@ -13,7 +13,7 @@ import {map, tap} from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class MasterManagerService { // TODO: refactor with masterApiService
+export class MasterManagerService {
 
     public isMaster$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

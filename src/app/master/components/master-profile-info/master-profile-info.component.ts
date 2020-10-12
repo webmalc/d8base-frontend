@@ -10,19 +10,21 @@ import {Education} from '@app/master/models/education';
 import {Experience} from '@app/master/models/experience';
 import {MasterContact} from '@app/master/models/master-contact';
 import {MasterLocation} from '@app/master/models/master-location';
+import {PublicReview} from '@app/master/models/public-review';
 import {Tag} from '@app/master/models/tag';
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
 import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
+import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {TagsApiService} from '@app/master/services/tags-api.service';
 import {Country} from '@app/profile/models/country';
 import {Language} from '@app/profile/models/language';
 import {UserLanguage} from '@app/profile/models/user-language';
 import {LanguagesApiService} from '@app/profile/services/languages-api.service';
 import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
@@ -32,6 +34,7 @@ import {switchMap, tap} from 'rxjs/operators';
 })
 export class MasterProfileInfoComponent {
 
+    public editable: Observable<boolean>;
     public master: Master;
     public masterLocation: MasterLocation[];
     public masterContacts: MasterContact[];
@@ -42,6 +45,7 @@ export class MasterProfileInfoComponent {
     public experienceList: Experience[];
     public educationList: Education[];
     public certificateList: Certificate[];
+    public publicReviewList: PublicReview[];
     public readonly editDefaultUrl = 'professional-contact-add-default/';
     public readonly editUrl = 'professional-contact-edit/';
     public readonly addUrl = 'professional-contact-add';
@@ -58,8 +62,13 @@ export class MasterProfileInfoComponent {
         private userLanguagesApi: UserLanguagesApiService,
         private masterExperienceApi: ExperienceApiService,
         private masterEducationApi: EducationApiService,
-        private certificatesApi: CertificatesApiService
+        private certificatesApi: CertificatesApiService,
+        private publicReviewsApi: ReviewsReadonlyApiService
     ) {
+    }
+
+    public setEditable(editable: Observable<boolean>): void {
+        this.editable = editable;
     }
 
     public init(): void {
@@ -91,15 +100,25 @@ export class MasterProfileInfoComponent {
                 masterTagList: this.masterTagsApi.getByMasterId(list[0].id),
                 masterExperienceList: this.masterExperienceApi.get({professional: list[0].id.toString(10)}),
                 educationList: this.masterEducationApi.getByMasterId(list[0].id),
-                certificateList: this.certificatesApi.getByMasterId(list[0].id)
+                certificateList: this.certificatesApi.getByMasterId(list[0].id),
+                publicReviewList: this.publicReviewsApi.get({professional: list[0].id.toString()})
             }).subscribe(
-                ({masterLocationList, masterContactList, masterTagList, masterExperienceList, educationList, certificateList}) => {
+                ({
+                     masterLocationList,
+                     masterContactList,
+                     masterTagList,
+                     masterExperienceList,
+                     educationList,
+                     certificateList,
+                     publicReviewList
+                 }) => {
                     this.masterLocation = masterLocationList.results;
                     this.masterContacts = masterContactList.results;
                     this.masterTags = masterTagList.results;
                     this.experienceList = masterExperienceList.results;
                     this.educationList = educationList.results;
                     this.certificateList = certificateList.results;
+                    this.publicReviewList = publicReviewList.results;
                 }
             )
         );

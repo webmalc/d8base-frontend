@@ -1,10 +1,10 @@
-import {Review} from '@app/core/models/review';
+import {PublicReview} from '@app/master/models/public-review';
 
 export interface MainInfoSectionComponentInputDataInterface {
     fullName: string;
     company: string;
     avatar: string;
     rating: string;
-    reviews: Review[];
+    reviews: PublicReview[];
     is_confirmed: boolean;
 }

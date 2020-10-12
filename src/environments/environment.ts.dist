@@ -38,6 +38,7 @@ export const environment = {
         professional_tags_list: '/en/api/professionals/tags/',
         professional_location: '/en/api/accounts/professional-locations/',
         reviews: '/en/api/accounts/reviews/',
+        reviews_readonly: '/en/api/communication/reviews',
         saved_professionals: '/en/api/accounts/saved-professionals/',
         service_prices: '/en/api/accounts/service-prices/',
         services: '/en/api/accounts/services/',

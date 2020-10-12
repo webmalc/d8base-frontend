@@ -20,6 +20,6 @@ export class RatingComponent {
     }
 
     public needToRenderHalf(): boolean {
-        return this.rating - Math.round(this.rating) !== 0;
+        return this.rating - Math.floor(this.rating) !== 0;
     }
 }

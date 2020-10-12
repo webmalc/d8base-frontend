@@ -22,6 +22,7 @@
                                           routerDirection="forward"
                                           routerLink="location-edit/{{masterLocation.id}}"
                                           routerLinkActive="active"
+                                          *ngIf="editable | async"
                                 >
                                     <ion-icon name="create-outline"></ion-icon>
                                 </ion-item>
@@ -45,7 +46,7 @@
                         </ion-col>
                     </ion-item>
                 </ion-row>
-                <ion-row>
+                <ion-row *ngIf="editable | async">
                     <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
                               routerDirection="forward"
                               routerLink="location-add/"
@@ -65,7 +66,7 @@
                                     class="width100"
                                     editContactUrl="{{editUrl}}"
                                     editDefaultContactUrl="{{editDefaultUrl}}"
-                                    interactable="true">
+                                    [interactable]="editable | async">
                             </app-abstract-contacts>
                         </ion-item>
                     </app-collapse-item>
@@ -83,6 +84,7 @@
                               routerDirection="forward"
                               routerLink="edit/{{master?.id}}"
                               routerLinkActive="active"
+                              *ngIf="editable | async"
                     >
                         <ion-icon name="create-outline"></ion-icon>
                     </ion-item>
@@ -105,6 +107,7 @@
                               routerDirection="forward"
                               routerLink="edit/{{master?.id}}"
                               routerLinkActive="active"
+                              *ngIf="editable | async"
                     >
                         <ion-icon name="create-outline"></ion-icon>
                     </ion-item>
@@ -127,6 +130,7 @@
                               routerDirection="forward"
                               routerLink="tags-edit/"
                               routerLinkActive="active"
+                              *ngIf="editable | async"
                     >
                         <ion-icon name="create-outline"></ion-icon>
                     </ion-item>
@@ -209,6 +213,7 @@
                                               routerDirection="forward"
                                               routerLink="experience-edit/{{experience.id}}"
                                               routerLinkActive="active"
+                                              *ngIf="editable | async"
                                     >
                                         <ion-icon name="create-outline"></ion-icon>
                                     </ion-item>
@@ -221,7 +226,7 @@
                                 </ion-row>
                             </ion-col>
                         </ion-item>
-                        <ion-row>
+                        <ion-row *ngIf="editable | async">
                             <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
                                       routerDirection="forward"
                                       routerLink="experience-add/"
@@ -253,6 +258,7 @@
                                               routerDirection="forward"
                                               routerLink="education-edit/{{education.id}}"
                                               routerLinkActive="active"
+                                              *ngIf="editable | async"
                                     >
                                         <ion-icon name="create-outline"></ion-icon>
                                     </ion-item>
@@ -266,7 +272,7 @@
                                 </ion-row>
                             </ion-col>
                         </ion-item>
-                        <ion-row>
+                        <ion-row *ngIf="editable | async">
                             <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
                                       routerDirection="forward"
                                       routerLink="education-add/"
@@ -284,16 +290,6 @@
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
-                    <app-collapse-item class="width100" title="Курсы повышения квалификации">
-                        <ion-item class="ion-item-no-border">
-                        </ion-item>
-                    </app-collapse-item>
-                </ion-row>
-            </ion-col>
-        </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-row>
                     <app-collapse-item class="width100" title="Сертификаты">
                         <ion-item *ngFor="let certificate of certificateList"
                                   class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
@@ -303,7 +299,8 @@
                                             class="ion-item-no-border availability-subtitle ion-item-no-vertical-padding ion-item-no-side-padding">
                                         {{certificate.name}}
                                     </ion-item>
-                                    <ion-item class="ion-item-no-border ion-align-items-center">
+                                    <ion-item *ngIf="editable | async"
+                                              class="ion-item-no-border ion-align-items-center">
                                         <ion-item class="ion-item-no-border ion-align-items-center"
                                                   routerDirection="forward"
                                                   routerLink="certificate-edit/{{certificate.id}}"
@@ -320,7 +317,7 @@
                                 </ion-row>
                             </ion-col>
                         </ion-item>
-                        <ion-row>
+                        <ion-row *ngIf="editable | async">
                             <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
                                       routerDirection="forward"
                                       routerLink="certificate-add/"
@@ -358,8 +355,10 @@
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
                     <app-collapse-item class="width100" title="Отзывы">
-                        <ion-item class="ion-item-no-border">
-                        </ion-item>
+                        <app-master-profile-review *ngFor="let review of publicReviewList"
+                                                   [publicReview]="review"
+                        >
+                        </app-master-profile-review>
                     </app-collapse-item>
                 </ion-row>
             </ion-col>

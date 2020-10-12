@@ -31,6 +31,11 @@ export class HelperService {
         });
     }
 
+    public static getRatingTitle(rating: number): string {
+        return 'global.rating.' + Math.round(rating).toString(10);
+    }
+
+
     public static fromDatetime(datetime: string): { date: string; time: string; } {
         return {
             date: datetime.slice(0, 10),

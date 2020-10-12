@@ -6,10 +6,12 @@ import {MasterProfileFactoryComponent} from '@app/master/components/master-profi
 import {MasterProfileInfoComponent} from '@app/master/components/master-profile-info/master-profile-info.component';
 import {MasterProfileMainInfoSectionComponent} from '@app/master/components/master-profile-main-info-section/master-profile-main-info-section.component';
 import {MasterProfilePortfolioComponent} from '@app/master/components/master-profile-portfolio/master-profile-portfolio.component';
+import {MasterProfileReviewComponent} from '@app/master/components/master-profile-review/master-profile-review.component';
 import {MasterProfileServicePresentationComponent} from '@app/master/components/master-profile-service-presentation/master-profile-service-presentation.component';
 import {MasterProfileServicesComponent} from '@app/master/components/master-profile-services/master-profile-services.component';
 import {MasterTabsPageModule} from '@app/master/pages/master-tabs/master-tabs.module';
 import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
+import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {ServicePageModule} from '@app/service/service.module';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
@@ -36,10 +38,12 @@ import {MasterPage} from './master.page';
         MasterProfileCalendarComponent,
         MasterProfilePortfolioComponent,
         MasterProfileMainInfoSectionComponent,
-        MasterProfileServicePresentationComponent
+        MasterProfileServicePresentationComponent,
+        MasterProfileReviewComponent
     ],
     providers: [
-        MasterProfileServicesSearchService
+        MasterProfileServicesSearchService,
+        ReviewsReadonlyApiService
     ]
 })
 export class MasterPageModule {

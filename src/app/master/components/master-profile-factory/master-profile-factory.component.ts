@@ -14,6 +14,7 @@ import {Observable, Subscription} from 'rxjs';
 export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
 
     @Input() public mode: Observable<string>;
+    @Input() public editable: Observable<boolean>;
     private sub: Subscription;
 
     constructor(
@@ -48,6 +49,7 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
                     this.componentFactoryResolver.resolveComponentFactory<MasterProfileInfoComponent>(MasterProfileInfoComponent);
                 const infoC = this.viewContainerRef.createComponent<MasterProfileInfoComponent>(infoComponentFactory);
                 infoC.instance.init();
+                infoC.instance.setEditable(this.editable);
                 break;
             case MasterProfileSubmenu.Calendar:
                 const calendarComponentFactory =

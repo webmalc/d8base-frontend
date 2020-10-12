@@ -9,7 +9,8 @@ const routes: Routes = [
     {
         path: '',
         component: MasterPage,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        data: {editable: true}
     },
     {
         path: 'add',
@@ -94,9 +95,10 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: ':master-id', // attention, keep this path at the very bottom, because this pattern matches every URL
+        path: ':master-id', // attention, keep this path at the very bottom, because this pattern matches all URLs
         component: MasterPage,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        data: {editable: false}
     }
 ];
 

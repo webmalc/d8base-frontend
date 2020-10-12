@@ -11,6 +11,13 @@
     },
     "experience-dates": {
       "until-now": "until now"
+    },
+    "rating": {
+      "1": "Poor",
+      "2": "Average",
+      "3": "Good",
+      "4": "Very good",
+      "5": "Excellent"
     }
   },
   "ion-selectable": {
