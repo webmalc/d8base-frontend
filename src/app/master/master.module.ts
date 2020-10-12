@@ -7,6 +7,7 @@ import {MasterProfileInfoComponent} from '@app/master/components/master-profile-
 import {MasterProfileMainInfoSectionComponent} from '@app/master/components/master-profile-main-info-section/master-profile-main-info-section.component';
 import {MasterProfilePortfolioComponent} from '@app/master/components/master-profile-portfolio/master-profile-portfolio.component';
 import {MasterProfileReviewComponent} from '@app/master/components/master-profile-review/master-profile-review.component';
+import {MasterProfileServiceEditComponent} from '@app/master/components/master-profile-service-edit/master-profile-service-edit.component';
 import {MasterProfileServicePresentationComponent} from '@app/master/components/master-profile-service-presentation/master-profile-service-presentation.component';
 import {MasterProfileServicesComponent} from '@app/master/components/master-profile-services/master-profile-services.component';
 import {MasterTabsPageModule} from '@app/master/pages/master-tabs/master-tabs.module';
@@ -39,7 +40,8 @@ import {MasterPage} from './master.page';
         MasterProfilePortfolioComponent,
         MasterProfileMainInfoSectionComponent,
         MasterProfileServicePresentationComponent,
-        MasterProfileReviewComponent
+        MasterProfileReviewComponent,
+        MasterProfileServiceEditComponent
     ],
     providers: [
         MasterProfileServicesSearchService,

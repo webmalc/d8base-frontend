@@ -7,7 +7,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ServicesApiService extends AbstractApiService<Service> {
 
     private readonly url = environment.backend.services;

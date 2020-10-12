@@ -40,6 +40,20 @@
     --ion-background-color: #cdd5df;
   }
 
+  .text-color-success {
+    color: #10dc60;
+  }
+
+  .text-secondary {
+    color: #3880ff;
+  }
+
+  .space-between-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   .not-clickable {
     pointer-events: none;
   }
@@ -50,6 +64,10 @@
 
   .fs14 {
     font-size: 14px;
+  }
+
+  .mr10 {
+    margin-right: 10px;
   }
 
   .fs16 {

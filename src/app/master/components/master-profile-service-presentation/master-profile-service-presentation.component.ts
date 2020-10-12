@@ -9,7 +9,7 @@ import {ServiceTag} from '@app/service/models/service-tag';
 })
 export class MasterProfileServicePresentationComponent {
 
-    @Input() public serviceData: { service: Service, tags: ServiceTag[] };
+    @Input() public serviceData: { service: Service, tags?: ServiceTag[] };
 
     public getHourPrice(): string {
         return this.serviceData.service.price.is_price_fixed ?

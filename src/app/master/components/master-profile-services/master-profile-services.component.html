@@ -1,6 +1,5 @@
 <ion-row>
     <ion-col class="ion-no-padding" size="12">
-
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-justify-content-start">
             <ion-label color="medium" position="floating">
                 <ion-icon name="search-outline"></ion-icon>
@@ -14,8 +13,20 @@
             Услуги мастера ({{serviceData.length}})
         </ion-item>
 
-        <app-master-profile-service-presentation *ngFor="let service of serviceData" [serviceData]="service">
-        </app-master-profile-service-presentation>
-
+        <ion-list *ngIf="masterId"
+                  class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-item-no-vertical-padding">
+            <app-master-profile-service-presentation *ngFor="let service of serviceData" [serviceData]="service"
+                                                     class="pv5">
+            </app-master-profile-service-presentation>
+        </ion-list>
+        <ion-list *ngIf="!masterId"
+                  class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-item-no-vertical-padding">
+            <app-master-profile-service-edit (disableService)="disableService($event)"
+                                             (enableService)="enableService($event)"
+                                             *ngFor="let service of serviceData"
+                                             [service]="service.service"
+                                             class="pv5">
+            </app-master-profile-service-edit>
+        </ion-list>
     </ion-col>
 </ion-row>

@@ -1,0 +1,48 @@
+<ion-card>
+    <ion-card-content>
+        <ion-row>
+            <ion-col class="ion-margin-bottom" size="8">
+                <ion-item class="ion-item-no-border ion-margin-bottom">
+                    {{service.name}}
+                </ion-item>
+
+                <ion-item *ngIf="service.is_enabled"
+                          class="ion-item-no-border text-color-success ion-item-no-min-height">
+                    <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>
+                    услуга опубликована
+                </ion-item>
+                <ion-item *ngIf="!service.is_enabled" class="ion-item-no-border text-grey ion-item-no-min-height">
+                    <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
+                    услуга не опубликована
+                </ion-item>
+
+                <ion-item (click)="onIsEnabled(false)" *ngIf="service.is_enabled"
+                          class="cursor-pointer ion-item-no-border text-grey ion-item-no-min-height ion-margin-start ion-padding-start">
+                    снять с публикации
+                </ion-item>
+                <ion-item (click)="onIsEnabled(true)" *ngIf="!service.is_enabled"
+                          class="cursor-pointer ion-item-no-border text-color-success ion-item-no-min-height ion-margin-start ion-padding-start">
+                    опубликовать
+                </ion-item>
+            </ion-col>
+            <ion-col size="4">
+                <ion-row class="ion-justify-content-end">
+                    <ion-item class="ion-item-no-border price-text">
+                        {{service.price.price_currency}}&nbsp;{{getPrice()}}
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-end">
+                    <ion-item class="ion-item-no-border ion-item-no-min-height duration-text">
+                        {{service.duration}}&nbsp;min
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-end ion-align-items-center">
+                    <ion-item class="ion-item-no-border text-secondary cursor-pointer">
+                        <ion-icon class="mr10" name="create-outline"></ion-icon>
+                        Просмотр
+                    </ion-item>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>

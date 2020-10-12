@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
+import {ServicesGeneratorFactoryService} from '@app/master/services/services-generator-factory.service';
 import {Service} from '@app/service/models/service';
 import {ServiceTag} from '@app/service/models/service-tag';
-import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
-import {forkJoin, Observable, of} from 'rxjs';
-import {mergeMap, switchMap, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-master-profile-services',
@@ -15,26 +13,32 @@ import {mergeMap, switchMap, tap} from 'rxjs/operators';
 })
 export class MasterProfileServicesComponent {
 
-    public serviceData: { service: Service, tags: ServiceTag[] }[] = [];
     public searchModel: string;
-    private masterId: number;
-    private serviceDefaultData: { service: Service, tags: ServiceTag[] }[] = [];
+    public serviceData: { service: Service, tags?: ServiceTag[] }[] = [];
+    public masterId: number;
+    private serviceDefaultData: { service: Service, tags?: ServiceTag[] }[] = [];
 
     constructor(
         private route: ActivatedRoute,
         private servicesApi: ServicesApiService,
-        private serviceTagsApi: ServiceTagsApiService,
-        private searchService: MasterProfileServicesSearchService
+        private searchService: MasterProfileServicesSearchService,
+        private serviceGeneratorFactory: ServicesGeneratorFactoryService
     ) {
     }
 
     public init(): void {
         this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-        this.servicesApi.get({professional: this.masterId.toString()}).pipe(
-            switchMap(serviceList => this.generateData(serviceList.results))
-        ).subscribe(
-            _ => this.serviceDefaultData = this.serviceData
+        this.serviceGeneratorFactory.getServiceList(this.masterId).subscribe(
+            servicesData => this.serviceData = this.serviceDefaultData = servicesData
         );
+    }
+
+    public enableService(service: Service): void {
+        this.patchService(service, true);
+    }
+
+    public disableService(service: Service): void {
+        this.patchService(service, false);
     }
 
     public search(): void {
@@ -52,14 +56,8 @@ export class MasterProfileServicesComponent {
         this.searchModel = '';
     }
 
-    private generateData(serviceList: Service[]): Observable<ServiceTag[]> {
-        return of(serviceList).pipe(
-            mergeMap(services => forkJoin(
-                ...services.map(service => this.serviceTagsApi.get({service: service.id.toString()}).pipe(
-                    tap(res => this.serviceData.push({service, tags: res.results}))
-                    )
-                ))
-            )
-        );
+    public patchService(service: Service, isEnabled: boolean): void {
+        service.is_enabled = isEnabled;
+        this.servicesApi.patch(service).subscribe(() => this.init());
     }
 }
