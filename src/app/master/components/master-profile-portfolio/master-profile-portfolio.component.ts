@@ -12,7 +12,7 @@ import {Reinitable} from '@app/shared/abstract/reinitable';
 export class MasterProfilePortfolioComponent extends Reinitable {
 
     public masterPhotos: MasterPhoto[];
-    private masterId: number;
+    public masterId: number;
 
     constructor(
         private route: ActivatedRoute,
