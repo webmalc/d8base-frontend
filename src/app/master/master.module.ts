@@ -10,7 +10,9 @@ import {MasterProfileReviewComponent} from '@app/master/components/master-profil
 import {MasterProfileServiceEditComponent} from '@app/master/components/master-profile-service-edit/master-profile-service-edit.component';
 import {MasterProfileServicePresentationComponent} from '@app/master/components/master-profile-service-presentation/master-profile-service-presentation.component';
 import {MasterProfileServicesComponent} from '@app/master/components/master-profile-services/master-profile-services.component';
-import {MasterTabsPageModule} from '@app/master/pages/master-tabs/master-tabs.module';
+import {CertificatesApiService} from '@app/master/services/certificates-api.service';
+import {EducationApiService} from '@app/master/services/education-api.service';
+import {ExperienceApiService} from '@app/master/services/experience-api.service';
 import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
 import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {ServicePageModule} from '@app/service/service.module';
@@ -26,7 +28,6 @@ import {MasterPage} from './master.page';
         FormsModule,
         IonicModule,
         MasterPageRoutingModule,
-        MasterTabsPageModule,
         TranslateModule,
         SharedModule,
         ServicePageModule // TODO: move service_module services to own module
@@ -45,7 +46,10 @@ import {MasterPage} from './master.page';
     ],
     providers: [
         MasterProfileServicesSearchService,
-        ReviewsReadonlyApiService
+        ReviewsReadonlyApiService,
+        ExperienceApiService,
+        EducationApiService,
+        CertificatesApiService
     ]
 })
 export class MasterPageModule {

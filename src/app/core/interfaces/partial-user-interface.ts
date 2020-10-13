@@ -9,7 +9,7 @@ export interface PartialUserInterface {
     gender: boolean;
     is_confirmed: boolean;
 
-    getAvatar(): string | SafeResourceUrl;
+    getPhoto(): string | SafeResourceUrl;
 
-    getAvatarThumbnail(): string | SafeResourceUrl;
+    getPhotoThumbnail(): string | SafeResourceUrl;
 }

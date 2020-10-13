@@ -32,6 +32,7 @@ export class RegistrationService {
                 _ => {
                     this.authenticationService.isAuthenticated$.next(true);
                     if (!location) {
+                        // @ts-ignore
                         subscriber.next(newUser);
                         subscriber.complete();
 
@@ -44,10 +45,12 @@ export class RegistrationService {
                             }
                             this.locationApiService.create(location).subscribe(
                                 createdLocation => {
+                                    // @ts-ignore
                                     subscriber.next(newUser);
                                     subscriber.complete();
                                 },
                                 err => {
+                                    // @ts-ignore
                                     subscriber.next(newUser);
                                     subscriber.complete();
                                 }

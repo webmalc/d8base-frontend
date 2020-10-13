@@ -11,8 +11,6 @@ import {CollapseItemComponent} from '@app/shared/components/collapse-item/collap
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
-import {LocationItemComponent} from '@app/shared/components/location-item/location-item.component';
-import {LocationListComponent} from '@app/shared/components/location/location-list.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {RatingComponent} from '@app/shared/components/rating/rating.component';
@@ -39,9 +37,7 @@ import {NumberDirective} from './directives/number.directive';
         PictureSelectorComponent,
         DebounceDirective,
         ContactsTabComponent,
-        LocationListComponent,
         UserLocationMapComponent,
-        LocationItemComponent,
         ReviewsListComponent,
         MediaLinksComponent,
         AppFooterComponent,
@@ -59,8 +55,6 @@ import {NumberDirective} from './directives/number.directive';
         PictureSelectorComponent,
         DebounceDirective,
         ContactsTabComponent,
-        LocationListComponent,
-        LocationItemComponent,
         ReviewsListComponent,
         MediaLinksComponent,
         AppFooterComponent,

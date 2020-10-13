@@ -10,7 +10,6 @@ import {AboutEditComponent} from '@app/profile/components/about-edit/about-edit.
 import {BookmarksItemComponent} from '@app/profile/components/bookmarks-tab/bookmarks-item/bookmarks-item.component';
 import {BookmarksTabComponent} from '@app/profile/components/bookmarks-tab/bookmarks-tab.component';
 import {ContactTabComponent} from '@app/profile/components/contact-tab/contact-tab.component';
-import {LocationTabComponent} from '@app/profile/components/location-tab/location-tab.component';
 import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {PluginsTabComponent} from '@app/profile/components/plugins-tab/plugins-tab.component';
 import {ReviewsTabComponent} from '@app/profile/components/reviews-tab/reviews-tab.component';
@@ -50,7 +49,6 @@ import {ProfilePage} from './profile.page';
         PluginsTabComponent,
         ContactTabComponent,
         SettingsTabComponent,
-        LocationTabComponent,
         BookmarksTabComponent,
         BookmarksItemComponent,
         ReviewsTabComponent,

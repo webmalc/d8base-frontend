@@ -50,7 +50,7 @@ export class MainInfoTabComponent extends Reinitable {
     }
 
     public getAvatar(): string | SafeResourceUrl {
-        return (plainToClass(User, this.profileService.avatarForm.getRawValue() as UserInterface) as User).getAvatar();
+        return (plainToClass(User, this.profileService.avatarForm.getRawValue() as UserInterface) as User).getPhoto();
     }
 
     protected init(): void {

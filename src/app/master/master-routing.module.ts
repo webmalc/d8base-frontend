@@ -23,11 +23,6 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'edit/:id',
-        loadChildren: () => import('./pages/master-tabs/master-tabs.module').then(m => m.MasterTabsPageModule),
-        pathMatch: 'full'
-    },
-    {
         path: 'location-add',
         loadChildren: () => import('./pages/master-location-edit/master-location-edit.module').then(m => m.MasterLocationEditPageModule),
         pathMatch: 'full'

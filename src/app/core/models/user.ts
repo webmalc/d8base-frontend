@@ -24,11 +24,11 @@ export class User extends AbstractPhotoSanitizer implements UserInterface {
     @Expose() public avatar_thumbnail: string;
     @Expose() public is_confirmed: boolean;
 
-    public getAvatar(): string | SafeResourceUrl {
+    public getPhoto(): string | SafeResourceUrl {
         return super.getPhoto(this.avatar);
     }
 
-    public getAvatarThumbnail(): string | SafeResourceUrl {
+    public getPhotoThumbnail(): string | SafeResourceUrl {
         return super.getPhotoThumbnail(this.avatar_thumbnail);
     }
 }

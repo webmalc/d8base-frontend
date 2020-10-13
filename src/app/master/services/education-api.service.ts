@@ -29,5 +29,4 @@ export class EducationApiService extends AbstractApiService<Education> implement
     protected transform(data: Education | Education[]): Education | Education[] {
         return plainToClass(Education, data);
     }
-
 }

@@ -49,11 +49,7 @@ const routes: Routes = [
         path: 'about',
         component: AboutEditComponent,
         canActivate: [MainGuard]
-    },
-    // {
-    //   path: 'user-location-edit',
-    //   loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then( m => m.UserLocationEditPageModule)
-    // }
+    }
 ];
 
 @NgModule({
