@@ -16,7 +16,7 @@ export class User extends AbstractPhotoSanitizer implements UserInterface {
     @Expose() public phone: string;
     @Expose() public avatar: string;
     @Expose() public gender: boolean;
-    @Expose() public birthday?: string;
+    @Expose() public birthday: string;
     @Expose() public nationality: number | Country;
     @Expose() public main_language: string;
     @Expose() public languages?: string[];

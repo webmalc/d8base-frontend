@@ -13,6 +13,7 @@ import {MasterProfileServicesComponent} from '@app/master/components/master-prof
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
+import {MasterProfileInfoGeneratorFactoryService} from '@app/master/services/master-profile-info-generator-factory.service';
 import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
 import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {ServicePageModule} from '@app/service/service.module';
@@ -49,7 +50,8 @@ import {MasterPage} from './master.page';
         ReviewsReadonlyApiService,
         ExperienceApiService,
         EducationApiService,
-        CertificatesApiService
+        CertificatesApiService,
+        MasterProfileInfoGeneratorFactoryService
     ]
 })
 export class MasterPageModule {
