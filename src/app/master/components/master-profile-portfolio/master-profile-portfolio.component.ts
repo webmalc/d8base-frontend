@@ -1,16 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {MasterPhoto} from '@app/master/models/master-photo';
+import {MasterPhotosGeneratorFactoryService} from '@app/master/services/master-photos-generator-factory.service';
+import {Reinitable} from '@app/shared/abstract/reinitable';
 
 @Component({
-  selector: 'app-master-profile-portfolio',
-  templateUrl: './master-profile-portfolio.component.html',
-  styleUrls: ['./master-profile-portfolio.component.scss'],
+    selector: 'app-master-profile-portfolio',
+    templateUrl: './master-profile-portfolio.component.html',
+    styleUrls: ['./master-profile-portfolio.component.scss'],
 })
-export class MasterProfilePortfolioComponent implements OnInit {
+export class MasterProfilePortfolioComponent extends Reinitable {
 
-  constructor() {
-  }
+    public masterPhotos: MasterPhoto[];
+    private masterId: number;
 
-  ngOnInit() {
-  }
+    constructor(
+        private route: ActivatedRoute,
+        private masterPhotosGenerator: MasterPhotosGeneratorFactoryService
+    ) {
+        super();
+    }
 
+    public init(): void {
+        this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
+        this.masterPhotosGenerator.getPhotos(this.masterId).subscribe(
+            list => this.masterPhotos = list
+        );
+    }
 }

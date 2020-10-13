@@ -1,14 +1,15 @@
-import {Component, SecurityContext} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {UserInterface} from '@app/core/interfaces/user.interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
-import {HelperService} from '@app/core/services/helper.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {ProfileService} from '@app/profile/services/profile.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
+import {plainToClass} from 'class-transformer';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -49,15 +50,7 @@ export class MainInfoTabComponent extends Reinitable {
     }
 
     public getAvatar(): string | SafeResourceUrl {
-        const avatar = this.profileService.avatarForm.get(ProfileFormFields.Avatar).value;
-        if (null === avatar) {
-            return HelperService.getNoAvatarLink();
-        }
-
-        return this.sanitizer.sanitize(
-            SecurityContext.RESOURCE_URL,
-            this.sanitizer.bypassSecurityTrustResourceUrl(avatar)
-        );
+        return (plainToClass(User, this.profileService.avatarForm.getRawValue() as UserInterface) as User).getAvatar();
     }
 
     protected init(): void {

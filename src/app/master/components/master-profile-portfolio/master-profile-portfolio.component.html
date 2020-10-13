@@ -1,3 +1,9 @@
-<p>
-    master-profile-portfolio works!
-</p>
+<ion-row *ngIf="masterPhotos" class="ion-wrap ion-align-items-start ion-margin-bottom">
+    <ion-item *ngFor="let photo of masterPhotos"
+              class="photo-container ion-item-no-border ion-item-no-side-padding pv5 ph5">
+        <ion-img [src]="photo.getPhoto()" alt="{{photo.name}}" title="{{photo.name}}"></ion-img>
+    </ion-item>
+</ion-row>
+<ion-row>
+    <ion-button color="secondary">add new photo</ion-button>
+</ion-row>

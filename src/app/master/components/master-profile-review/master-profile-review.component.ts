@@ -1,5 +1,4 @@
-import {Component, Input, OnInit, SecurityContext} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
@@ -15,14 +14,11 @@ export class MasterProfileReviewComponent implements OnInit {
     @Input() public publicReview: PublicReview;
     public tempUserData: User;
 
-    constructor(private userManager: UserManagerService, private sanitizer: DomSanitizer) {
+    constructor(private userManager: UserManagerService) {
     }
 
     public ngOnInit(): void {
-        console.log('init');
-        this.userManager.getCurrentUser().subscribe(
-            user => this.tempUserData = user
-        );
+        this.userManager.getCurrentUser().subscribe(user => this.tempUserData = user);
     }
 
     public getRatingTitle(): string {
@@ -31,17 +27,5 @@ export class MasterProfileReviewComponent implements OnInit {
 
     public getDate(): string {
         return HelperService.fromDatetime(this.publicReview.created).date;
-    }
-
-    public getAvatar(): string | SafeResourceUrl {
-        const avatar = this.tempUserData.avatar_thumbnail;
-        if (null === avatar) {
-            return HelperService.getNoAvatarLink();
-        }
-
-        return this.sanitizer.sanitize(
-            SecurityContext.RESOURCE_URL,
-            this.sanitizer.bypassSecurityTrustResourceUrl(avatar)
-        );
     }
 }

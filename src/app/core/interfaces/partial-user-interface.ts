@@ -1,3 +1,5 @@
+import {SafeResourceUrl} from '@angular/platform-browser';
+
 export interface PartialUserInterface {
     id: number;
     first_name: string;
@@ -6,4 +8,8 @@ export interface PartialUserInterface {
     avatar_thumbnail: string;
     gender: boolean;
     is_confirmed: boolean;
+
+    getAvatar(): string | SafeResourceUrl;
+
+    getAvatarThumbnail(): string | SafeResourceUrl;
 }

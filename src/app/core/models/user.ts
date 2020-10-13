@@ -1,9 +1,11 @@
+import {SafeResourceUrl} from '@angular/platform-browser';
+import {AbstractPhotoSanitizer} from '@app/core/models/abstract-photo-sanitizer';
 import {Country} from '@app/profile/models/country';
 import {Expose} from 'class-transformer';
 import {UserInterface} from '../interfaces/user.interface';
 
 // tslint:disable:variable-name
-export class User implements UserInterface {
+export class User extends AbstractPhotoSanitizer implements UserInterface {
     @Expose() public id: number;
     @Expose() public first_name: string;
     @Expose() public last_name: string;
@@ -21,4 +23,12 @@ export class User implements UserInterface {
     @Expose() public account_type: string;
     @Expose() public avatar_thumbnail: string;
     @Expose() public is_confirmed: boolean;
+
+    public getAvatar(): string | SafeResourceUrl {
+        return super.getPhoto(this.avatar);
+    }
+
+    public getAvatarThumbnail(): string | SafeResourceUrl {
+        return super.getPhotoThumbnail(this.avatar_thumbnail);
+    }
 }

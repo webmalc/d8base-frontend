@@ -59,7 +59,8 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
             case MasterProfileSubmenu.Portfolio:
                 const portfolioComponentFactory =
                     this.componentFactoryResolver.resolveComponentFactory<MasterProfilePortfolioComponent>(MasterProfilePortfolioComponent);
-                this.viewContainerRef.createComponent<MasterProfilePortfolioComponent>(portfolioComponentFactory);
+                const portC = this.viewContainerRef.createComponent<MasterProfilePortfolioComponent>(portfolioComponentFactory);
+                portC.instance.init();
                 break;
             default:
                 throw Error('unexpected component name');
