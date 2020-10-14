@@ -1,25 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
 import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
 import {PublicReview} from '@app/master/models/public-review';
+import {plainToClass} from 'class-transformer';
 
 @Component({
     selector: 'app-master-profile-review',
     templateUrl: './master-profile-review.component.html',
     styleUrls: ['./master-profile-review.component.scss'],
 })
-export class MasterProfileReviewComponent implements OnInit {
+export class MasterProfileReviewComponent {
 
     @Input() public publicReview: PublicReview;
-    public tempUserData: User;
-
-    constructor(private userManager: UserManagerService) {
-    }
-
-    public ngOnInit(): void {
-        this.userManager.getCurrentUser().subscribe(user => this.tempUserData = user);
-    }
 
     public getRatingTitle(): string {
         return HelperService.getRatingTitle(this.publicReview.rating);
@@ -27,5 +20,9 @@ export class MasterProfileReviewComponent implements OnInit {
 
     public getDate(): string {
         return HelperService.fromDatetime(this.publicReview.created).date;
+    }
+
+    public getUser(): PartialUserInterface {
+        return plainToClass(User, this.publicReview.user, {excludeExtraneousValues: true});
     }
 }
