@@ -136,12 +136,13 @@
                         <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
                             && (authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
                             && platform.is('desktop')"
-                            class="ion-item-no-border cursor-pointer" slot="end">
+                                  class="ion-item-no-border cursor-pointer" slot="end">
                             {{'template.become-master'|translate}}
                         </ion-item>
-                        <ion-item class="ion-item-no-border" slot="end"
-                            *ngIf="(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)">
-                            <ion-icon name="calendar-outline"></ion-icon>
+                        <ion-item *ngIf="(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)"
+                                  class="ion-item-no-border orders"
+                                  slot="end">
+                            <ion-icon class="pr5" name="calendar-outline"></ion-icon>
                             {{'template.my-orders'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">

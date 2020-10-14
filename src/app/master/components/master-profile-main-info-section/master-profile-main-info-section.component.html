@@ -10,8 +10,8 @@
             <ion-img [src]="sectionData?.avatar"></ion-img>
         </ion-item>
         <ion-row class="ion-justify-content-between ion-align-items-center pv5">
-            <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
-                Рейтинг мастера
+            <ion-item class="other-text ion-item-no-border ion-item-no-min-height ion-item-no-padding-right">
+                {{"master-profile.main-info.rating"|translate}}
             </ion-item>
             <ion-row class="ion-align-items-center">
                 <ion-item
@@ -25,7 +25,7 @@
         </ion-row>
         <ion-row class="ion-justify-content-between pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
-                Отзывы
+                {{"master-profile.main-info.reviews"|translate}}
             </ion-item>
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
                 {{sectionData?.reviews?.length}} {{declinationReviews(sectionData?.reviews.length) | translate}}
@@ -33,7 +33,7 @@
         </ion-row>
         <ion-row class="ion-justify-content-between pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
-                E-меил подтвержден
+                {{"master-profile.main-info.email"|translate}}
             </ion-item>
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
                 <ion-icon *ngIf="sectionData?.is_confirmed" color="success" name="checkmark-circle-outline"></ion-icon>

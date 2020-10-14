@@ -19,8 +19,8 @@ import {BehaviorSubject, forkJoin} from 'rxjs';
 })
 export class MasterPage extends Reinitable {
 
-    public readonly submenu = MasterProfileSubmenu;
-    public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.submenu.Info);
+    public defaultTab: string = MasterProfileSubmenu.Info;
+    public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
     public mainInfoSectionData: MainInfoSectionComponentInputDataInterface;
     public editable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

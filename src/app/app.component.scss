@@ -4,3 +4,8 @@ ion-button {
     opacity: 1;
   }
 }
+@media (max-width: 370px) {
+  .orders {
+    font-size: 12px;
+  }
+}

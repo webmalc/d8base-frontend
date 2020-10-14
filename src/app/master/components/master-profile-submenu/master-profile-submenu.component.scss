@@ -1,0 +1,29 @@
+.master-submenu-font {
+  font-size: 16px;
+  line-height: 20px;
+  color: #222428;
+}
+
+@media (max-width: 575px) {
+  .master-submenu-font {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 392px) {
+  .master-submenu-font {
+    --padding-end: 0;
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --padding-start: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .row {
+    justify-content: center;
+  }
+}
+
+.active {
+  border-bottom: 1px solid #3880ff;
+}

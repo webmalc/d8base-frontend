@@ -1,42 +1,41 @@
 <ion-header>
     <ion-toolbar class="background-color-white">
-        <ion-row class="ion-justify-content-between">
-            <ion-col offset="1" size="2">
-                <ion-item class="ion-item-no-border ion-align-items-center master-submenu-font">
-                    <ion-icon class="ion-padding-end" name="arrow-back-outline"></ion-icon>
-                    back
+        <ion-row class="">
+            <ion-col
+                    offset-lg="1" offset-md="0" offset-sm="0" offset-xl="2" offset-xs="0"
+                    size-lg="2" size-md="2" size-sm="3" size-xl="2" size-xs="2">
+                <ion-item
+                        class="ion-item-no-border ion-align-items-center master-submenu-font ion-item-no-side-padding">
+                    <ion-icon class="ph5" name="arrow-back-outline"></ion-icon>
+                    <ion-item class="ion-item-no-border ion-item-no-side-padding back-text">
+                        {{"global.back"|translate}}
+                    </ion-item>
                 </ion-item>
             </ion-col>
-            <ion-col offset="2" size="7">
-                <ion-row>
-                    <ion-item (click)="selectTab(submenu.Services)"
-                              class="ion-item-no-border master-submenu-font cursor-pointer">Услуги
-                    </ion-item>
-                    <ion-item (click)="selectTab(submenu.Info)"
-                              class="ion-item-no-border master-submenu-font cursor-pointer">Инфо
-                    </ion-item>
-                    <ion-item (click)="selectTab(submenu.Calendar)"
-                              class="ion-item-no-border master-submenu-font cursor-pointer">Календарь
-                    </ion-item>
-                    <ion-item (click)="selectTab(submenu.Portfolio)"
-                              class="ion-item-no-border master-submenu-font cursor-pointer">Портфолио
-                    </ion-item>
-                </ion-row>
+            <ion-col
+                    offset-lg="3" offset-md="3" offset-sm="0" offset-xl="2" offset-xs="0"
+                    size-lg="6" size-md="6" size-sm="9" size-xl="6" size-xs="10">
+                <app-master-profile-submenu (selectedTab)="selectTab($event)"
+                                            defaultTab="{{defaultTab}}"></app-master-profile-submenu>
             </ion-col>
         </ion-row>
     </ion-toolbar>
 </ion-header>
 <ion-content class="background-color-white">
     <ion-row class="ion-justify-content-center ion-margin-bottom">
-        <ion-col [sizeLg]="12" [sizeMd]="12" [sizeSm]="6" [sizeXl]="12" [sizeXs]="6" class="ion-no-padding">
+        <ion-col class="ion-no-padding" size="12">
             <ion-row class="ion-margin-top">
-                <ion-col offset="1" size="3">
-                    <ion-item class="ion-item-no-border">
-                        <app-master-profile-main-info-section
-                                [sectionData]="this.mainInfoSectionData"></app-master-profile-main-info-section>
-                    </ion-item>
+                <ion-col
+                        offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="1"
+                        size-lg="4" size-md="5" size-sm="10" size-xl="4" size-xs="12">
+                    <ion-row class="ion-justify-content-center">
+                        <app-master-profile-main-info-section [sectionData]="mainInfoSectionData">
+                        </app-master-profile-main-info-section>
+                    </ion-row>
                 </ion-col>
-                <ion-col offset="1" size="5">
+                <ion-col
+                        offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="1"
+                        size-lg="5" size-md="7" size-sm="10" size-xl="5" size-xs="12">
                     <app-master-profile-factory [editable]="editable" [mode]="tab"></app-master-profile-factory>
                 </ion-col>
             </ion-row>

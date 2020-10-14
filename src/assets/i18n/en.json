@@ -18,7 +18,8 @@
       "3": "Good",
       "4": "Very good",
       "5": "Excellent"
-    }
+    },
+    "back": "Back"
   },
   "ion-selectable": {
     "close-button-text": "Close",
@@ -219,6 +220,19 @@
       "1": "year",
       "2": "years",
       "3": "years"
+    }
+  },
+  "master-profile": {
+    "submenu": {
+      "services": "Services",
+      "info": "Info",
+      "calendar": "Calendar",
+      "portfolio": "Portfolio"
+    },
+    "main-info": {
+      "rating": "Professional rating",
+      "reviews": "Reviews",
+      "email": "Email confirmed"
     }
   }
 }
