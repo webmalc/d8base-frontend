@@ -1,6 +1,8 @@
 <form *ngIf="form && masterId" [formGroup]="form">
     <ion-item>
-        <ion-label>Professional tags</ion-label>
+        <ion-label>
+            {{"tags-edit-page.master-tags"|translate}}
+        </ion-label>
         <ion-select (ionChange)="selectChange()" multiple="true" formControlName="tagSelect">
             <ion-select-option *ngFor="let tag of tagsList$|async" value="{{tag}}">
                 {{tag}}
@@ -11,12 +13,16 @@
         <ion-row>
             <ion-col size="9">
                 <ion-item>
-                    <ion-label color="medium" position="floating">Add new tag</ion-label>
+                    <ion-label color="medium" position="floating">
+                        {{"tags-edit-page.add-new-tag"|translate}}
+                    </ion-label>
                     <ion-input type="text" name="new" formControlName="tagInput"></ion-input>
                 </ion-item>
             </ion-col>
             <ion-col size="3">
-                <ion-button appDebounce (click)="addTag()">add</ion-button>
+                <ion-button (click)="addTag()" appDebounce>
+                    {{"tags-edit-page.add"|translate}}
+                </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

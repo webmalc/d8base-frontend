@@ -21,7 +21,7 @@
         </ion-row>
         <ion-row>
             <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding grey-text">
-                Время отзыва: {{getDate()}}
+                {{"master-review.created-time"|translate}}: {{getDate()}}
             </ion-item>
         </ion-row>
         <ion-row>
@@ -37,12 +37,11 @@
                 {{publicReview.description}}
             </ion-item>
         </ion-row>
-
         <ion-row *ngIf="publicReview.comment">
             <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding width100">
                 <ion-col class="ion-no-padding">
                     <ion-row class="ion-align-items-center ion-justify-content-between width100 mb10">
-                        Ответ мастера
+                        {{"master-review.answer"|translate}}
                     </ion-row>
                     <ion-row>
                         <ion-item
@@ -53,6 +52,5 @@
                 </ion-col>
             </ion-item>
         </ion-row>
-
     </ion-col>
 </ion-item>

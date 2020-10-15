@@ -26,13 +26,17 @@
     "search-text": "Search",
     "search-fail-text": "No items found"
   },
+  "units": {
+    "0": "KM",
+    "1": "Mi"
+  },
   "template": {
     "sign-in": "Sign-in",
     "sign-up": "Sign-up",
     "profile": "Profile",
     "master-profile": "Professional profile",
     "logout": "Logout",
-    "download" : "Download application",
+    "download": "Download application",
     "become-master": "Become professional",
     "my-orders": "My orders",
     "about": "About",
@@ -100,7 +104,7 @@
     },
     "button": "Save"
   },
-  "profile-page" : {
+  "profile-page": {
     "profile": "Profile",
     "settings": "Settings",
     "plugins": "Plugins",
@@ -137,7 +141,7 @@
     "tags": "Professional tags"
   },
   "bookmarks": {
-    "no-bookmarks" : "There's no bookmarks yet"
+    "no-bookmarks": "There's no bookmarks yet"
   },
   "list-item": {
     "add-new": "Add new"
@@ -233,6 +237,109 @@
       "rating": "Professional rating",
       "reviews": "Reviews",
       "email": "Email confirmed"
+    },
+    "services": {
+      "service-edit": {
+        "published": "Service published",
+        "not-published": "Service not published",
+        "publish": "Publish",
+        "unpublish": "Unpublish",
+        "view": "Review",
+        "minutes": "min"
+      },
+      "service-presentation": {
+        "pick": "Choice",
+        "minutes": "Min"
+      },
+      "services-tab": {
+        "master-services": "Professional services"
+      }
+    },
+    "info": {
+      "information": "Information",
+      "master-location": "Professional address",
+      "contacts": "Contacts",
+      "description": "Description",
+      "specialization": "Expertise area",
+      "tags": "Tags",
+      "about": "About",
+      "professional-experience": "Seniority",
+      "professional-level": "Expertise level",
+      "sex": "Sex",
+      "age": "Age",
+      "nationality": "Nationality",
+      "experience": "Qualification",
+      "education": "Education",
+      "certificates": "Certificates",
+      "availability": "Service availability",
+      "languages": "Languages",
+      "reviews": "Reviews",
+      "on-map": "Trace on map",
+      "from-here": "From target address"
     }
+  },
+  "location-edit-page": {
+    "address": "Address",
+    "country": "Country",
+    "region": "Region",
+    "subregion": "Subregion",
+    "city": "City",
+    "district": "District",
+    "postal-code": "Zip code",
+    "timezone": "Time zone",
+    "remove-location": "Remove location",
+    "save-location": "Save location"
+  },
+  "contact-edit-page": {
+    "contacts": "Contacts",
+    "choice-contact": "Select contact",
+    "enter-contact": "Enter your contact",
+    "delete": "Remove contact",
+    "save": "Save contact",
+    "add-new": "Add new contact"
+  },
+  "tags-edit-page": {
+    "save": "Save",
+    "master-tags": "Professional tags",
+    "add-new-tag": "Add new tag",
+    "add": "Add"
+  },
+  "experience-edit-page": {
+    "back": "Back",
+    "title": "Title",
+    "company": "Organization",
+    "is-still-here": "Ongoing",
+    "start-date": "From",
+    "end-date": "To",
+    "description": "Description",
+    "remove": "Remove",
+    "save": "Save"
+  },
+  "education-edit-page": {
+    "back": "Back",
+    "university": "University",
+    "degree": "Degree",
+    "field-of-study": "Academic field",
+    "is-still-here": "Ongoing",
+    "start-date": "From",
+    "end-date": "To",
+    "description": "Description",
+    "remove": "Remove",
+    "save": "Save"
+  },
+  "certificates-edit-page": {
+    "back": "Back",
+    "name": "Name",
+    "organization": "Organization",
+    "date": "Date",
+    "certificate-id": "Certificate ID",
+    "certificate-link": "Certificate link",
+    "certificate-photo": "Certificate photo",
+    "remove": "Remove",
+    "save": "Save"
+  },
+  "master-review": {
+    "created-time": "Created at",
+    "answer": "Answer"
   }
 }

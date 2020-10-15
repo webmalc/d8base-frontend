@@ -323,6 +323,109 @@
       "rating": "Рейтинг мастера",
       "reviews": "Отзывы",
       "email": "E-меил подтвержден"
+    },
+    "services": {
+      "service-edit": {
+        "published": "Услуга опубликована",
+        "not-published": "Услуга не опубликована",
+        "publish": "Опубликовать",
+        "unpublish": "Снять с публикации",
+        "view": "Просмотр",
+        "minutes": "мин"
+      },
+      "service-presentation": {
+        "pick": "Выбрать",
+        "minutes": "мин"
+      },
+      "services-tab": {
+        "master-services": "Услуги мастера"
+      }
+    },
+    "info": {
+      "information": "Информация",
+      "master-location": "Адрес мастера",
+      "contacts": "Контакты",
+      "description": "Описание",
+      "specialization": "Специализация",
+      "tags": "Теги",
+      "about": "О себе",
+      "professional-experience": "Стаж работы",
+      "professional-level": "Профессиональный уровень",
+      "sex": "Пол",
+      "age": "Возраст",
+      "nationality": "Национальность",
+      "experience": "Опыт работы",
+      "education": "Образование",
+      "certificates": "Сертификаты",
+      "availability": "Доступность сервиса",
+      "languages": "Языки общения",
+      "reviews": "Отзывы",
+      "on-map": "Смотреть на карте",
+      "from-here": "От заданного адреса"
     }
+  },
+  "location-edit-page": {
+    "address": "Адрес",
+    "country": "Страна",
+    "region": "Регион",
+    "subregion": "Субрегион",
+    "city": "Город",
+    "district": "Область",
+    "postal-code": "Индекс",
+    "timezone": "Временная зона",
+    "remove-location": "Удалить",
+    "save-location": "Сохранить"
+  },
+  "contact-edit-page": {
+    "contacts": "Контаные данные",
+    "choice-contact": "Выберите контакт",
+    "enter-contact": "Введите ваш контакт",
+    "delete": "Удалить",
+    "save": "Сохранить",
+    "add-new": "Добавить еще контакт"
+  },
+  "tags-edit-page": {
+    "save": "Сохранить",
+    "master-tags": "Теги мастера",
+    "add-new-tag": "Добавить новый тег",
+    "add": "Добавить"
+  },
+  "experience-edit-page": {
+    "back": "Назад",
+    "title": "Название",
+    "company": "Организация",
+    "is-still-here": "По настоящее время",
+    "start-date": "с",
+    "end-date": "по",
+    "description": "Описание",
+    "remove": "Удалить",
+    "save": "Сохранить"
+  },
+  "education-edit-page": {
+    "back": "Назад",
+    "university": "Университет",
+    "degree": "Ученая степень",
+    "field-of-study": "Научная область",
+    "is-still-here": "По настоящее время",
+    "start-date": "с",
+    "end-date": "по",
+    "description": "Описание",
+    "remove": "Удалить",
+    "save": "Сохранить"
+  },
+  "certificates-edit-page": {
+    "back": "Назад",
+    "name": "Название",
+    "organization": "Организация",
+    "date": "Дата",
+    "certificate-id": "ID сертификата",
+    "certificate-link": "Ссылка",
+    "certificate-photo": "Фото",
+    "remove": "Удалить",
+    "save": "Сохранить"
+  },
+  "master-review": {
+    "created-time": "Время отзыва",
+    "answer": "Ответ мастера"
   }
 }

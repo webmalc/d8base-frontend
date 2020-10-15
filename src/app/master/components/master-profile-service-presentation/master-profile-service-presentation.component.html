@@ -1,6 +1,6 @@
 <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-bottom-border width100 pv10">
     <ion-row class="width100">
-        <ion-col size="9">
+        <ion-col class="ion-no-padding" size="9" size-xs="8">
             <div class="space-between-column">
                 <ion-item class="ion-item-no-border  service-title">
                     {{serviceData.service.name}}
@@ -16,17 +16,21 @@
                 </ion-row>
             </div>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="3" size-xs="4">
             <div class="height100 space-between-column right-col">
                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                    <div class="service-price-text">
-                        {{getHourPrice()}} {{serviceData.service.price.price_currency}}
-                    </div>
-                    <div class="service-price-hour-text">
-                        &nbsp;/ 60мин
+                    <div class="space-between-column aie">
+                        <div class="service-price-text">
+                            {{getPrice()}} {{serviceData.service.price.price_currency}}
+                        </div>
+                        <div class="service-price-hour-text">
+                            {{serviceData.service.duration}}&nbsp;{{"master-profile.services.service-presentation.minutes"|translate}}
+                        </div>
                     </div>
                 </ion-item>
-                <ion-button color="secondary" expand="full" size="default">Выбрать</ion-button>
+                <ion-button color="secondary" expand="full" size="default">
+                    {{"master-profile.services.service-presentation.pick"|translate}}
+                </ion-button>
             </div>
         </ion-col>
     </ion-row>

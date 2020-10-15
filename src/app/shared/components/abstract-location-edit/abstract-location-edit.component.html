@@ -9,7 +9,9 @@
                               routerDirection="back" routerLinkActive="active">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </ion-item>
-                    <ion-item class="ion-item-no-border">Адрес</ion-item>
+                    <ion-item class="ion-item-no-border">
+                        {{"location-edit-page.address"|translate}}
+                    </ion-item>
                 </ion-row>
             </ion-col>
         </ion-item>
@@ -17,7 +19,7 @@
             <ion-col class="ion-padding-vertical" size="12">
                 <ion-item>
                     <ion-label class="label-for-required-input" color="medium" position="floating">
-                        {{ 'location.country' | translate }}
+                        {{"location-edit-page.country"|translate}}
                     </ion-label>
                     <ionic-selectable
                             (onChange)="onCountryChange()"
@@ -31,7 +33,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label color="medium" position="floating">
-                        {{ 'location.region' | translate }}
+                        {{"location-edit-page.region"|translate}}
                     </ion-label>
                     <ionic-selectable
                             (onChange)="onRegionChange()"
@@ -46,7 +48,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label color="medium" position="floating">
-                        {{ 'location.subregion' | translate }}
+                        {{"location-edit-page.subregion"|translate}}
                     </ion-label>
                     <ionic-selectable
                             (onSearch)="selectableSubregion.onSubregionSearch(
@@ -63,7 +65,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label class="label-for-required-input" color="medium" position="floating">
-                        {{ 'location.city' | translate }}
+                        {{"location-edit-page.city"|translate}}
                     </ion-label>
                     <ionic-selectable
                             (onChange)="onCityChange()"
@@ -78,7 +80,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label color="medium" position="floating">
-                        {{ 'location.district' | translate }}
+                        {{"location-edit-page.district"|translate}}
                     </ion-label>
                     <ionic-selectable
                             (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
@@ -97,21 +99,24 @@
                 </app-user-location-map>
                 <ion-item>
                     <ion-label color="medium"
-                               position="floating">{{ 'location.postal' | translate }}</ion-label>
+                               position="floating">
+                        {{"location-edit-page.postal-code"|translate}}
+                    </ion-label>
                     <ion-input [(ngModel)]="item.postal_code"
                                name="phone" type="text">
                     </ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label color="medium"
-                               position="floating">{{ 'location.address' | translate }}
+                               position="floating">
+                        {{"location-edit-page.address"|translate}}
                     </ion-label>
                     <ion-input [(ngModel)]="item.address" name="first_name" type="text">
                     </ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label color="medium" position="floating">
-                        {{ 'location.timezone' | translate }}
+                        {{"location-edit-page.timezone"|translate}}
                     </ion-label>
                     <ionic-selectable
                             [(ngModel)]="item.timezone"
@@ -129,9 +134,10 @@
                         expand="block"
                         fill="solid"
                 >
-                    {{ 'location.remove_location' | translate }}
+                    {{"location-edit-page.remove-location"|translate}}
                 </ion-button>
-                <ion-button (click)="save()" expand="block">{{ 'location.save' | translate }}
+                <ion-button (click)="save()" expand="block">
+                    {{"location-edit-page.save-location"|translate}}
                 </ion-button>
             </ion-col>
         </ion-item>

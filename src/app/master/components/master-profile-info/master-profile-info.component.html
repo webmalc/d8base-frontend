@@ -1,14 +1,14 @@
 <ion-row>
     <ion-col class="ion-no-padding" size="12">
         <ion-item class="ion-item-no-border ion-item-bottom-border main-title">
-            Информация
+            {{"master-profile.info.information"|translate}}
         </ion-item>
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
                     <ion-row class="ion-justify-content-start">
                         <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                            Адрес мастера
+                            {{"master-profile.info.master-location"|translate}}
                         </ion-item>
                     </ion-row>
                     <ion-item *ngFor="let masterLocation of masterLocation"
@@ -32,15 +32,15 @@
                                         class="ion-item-no-border ion-item-no-side-padding pl10 ion-item-no-min-height pv5 location-map-link">
                                     <ion-icon class="ion-padding-end" color="secondary"
                                               name="location-outline"></ion-icon>
-                                    Смотреть на карте
+                                    {{"master-profile.info.on-map"|translate}}
                                 </ion-item>
                             </ion-row>
                             <ion-row class="ion-justify-content-between">
                                 <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                    От заданного адреса
+                                    {{"master-profile.info.from-here"|translate}}
                                 </ion-item>
                                 <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                    0,2км
+                                    0,2{{"units.0"|translate}}
                                 </ion-item>
                             </ion-row>
                         </ion-col>
@@ -58,7 +58,7 @@
                     </ion-item>
                 </ion-row>
                 <ion-row>
-                    <app-collapse-item class="width100" title="Контакты">
+                    <app-collapse-item class="width100" title='{{"master-profile.info.contacts"|translate}}'>
                         <ion-item class="ion-item-no-border">
                             <app-abstract-contacts
                                     [contactsApiService]="masterContactApi"
@@ -78,7 +78,7 @@
             <ion-col class="ion-no-padding" size="12">
                 <ion-row class="ion-justify-content-between ion-padding-top">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        Описание
+                        {{"master-profile.info.description"|translate}}
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-align-items-center"
                               routerDirection="forward"
@@ -101,7 +101,7 @@
             <ion-col class="ion-no-padding" size="12">
                 <ion-row class="ion-justify-content-between ion-padding-top">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        Специализация
+                        {{"master-profile.info.specialization"|translate}}
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-align-items-center"
                               routerDirection="forward"
@@ -124,7 +124,7 @@
             <ion-col class="ion-no-padding" size="12">
                 <ion-row class="ion-justify-content-between ion-padding-top">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        Теги
+                        {{"master-profile.info.tags"|translate}}
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-align-items-center"
                               routerDirection="forward"
@@ -149,12 +149,12 @@
                 <ion-row class="ion-justify-content-start ion-padding-top">
                     <ion-item
                             class="ion-item-no-border ion-item-no-min-height pv5 master-address ion-item-no-padding-right">
-                        О себе
+                        {{"master-profile.info.about"|translate}}
                     </ion-item>
                 </ion-row>
                 <ion-row class="ion-justify-content-between">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        Стаж работы
+                        {{"master-profile.info.professional-experience"|translate}}
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
                         {{master?.experience}} {{declinationYears(master?.experience) | translate}}
@@ -162,7 +162,7 @@
                 </ion-row>
                 <ion-row class="ion-justify-content-between">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        Профессиональный уровень
+                        {{"master-profile.info.professional-level"|translate}}
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
                         {{"global.professional-level." + master?.level | translate}}
@@ -170,7 +170,7 @@
                 </ion-row>
                 <ion-row class="ion-justify-content-between">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        Пол
+                        {{"master-profile.info.sex"|translate}}
                     </ion-item>
                     <ion-item *ngIf="user?.gender" class="ion-item-no-border ion-item-no-min-height pv5">
                         {{"global.sex." + user?.gender | translate}}
@@ -178,7 +178,7 @@
                 </ion-row>
                 <ion-row class="ion-justify-content-between">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        Возраст
+                        {{"master-profile.info.age"|translate}}
                     </ion-item>
                     <ion-item *ngIf="user?.birthday" class="ion-item-no-border ion-item-no-min-height pv5">
                         {{getYearsFromBirthday(user?.birthday)}} {{declinationYears(getYearsFromBirthday(user?.birthday)) | translate}}
@@ -186,7 +186,7 @@
                 </ion-row>
                 <ion-row class="ion-justify-content-between">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        Национальность
+                        {{"master-profile.info.nationality"|translate}}
                     </ion-item>
                     <ion-item *ngIf="user?.nationality" class="ion-item-no-border ion-item-no-min-height pv5">
                         {{userCountry?.name}}
@@ -200,7 +200,7 @@
                   class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
-                    <app-collapse-item class="width100" title="Опыт работы">
+                    <app-collapse-item class="width100" title='{{"master-profile.info.experience"|translate}}'>
                         <ion-item
                                 *ngFor="let experience of experienceList"
                                 class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
@@ -245,7 +245,7 @@
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
-                    <app-collapse-item class="width100" title="Образование">
+                    <app-collapse-item class="width100" title='{{"master-profile.info.education"|translate}}'>
                         <ion-item
                                 *ngFor="let education of educationList"
                                 class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
@@ -291,7 +291,7 @@
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
-                    <app-collapse-item class="width100" title="Сертификаты">
+                    <app-collapse-item class="width100" title='{{"master-profile.info.certificates"|translate}}'>
                         <ion-item *ngFor="let certificate of certificateList"
                                   class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
                             <ion-col>
@@ -338,12 +338,14 @@
             <ion-col class="ion-no-padding" size="6">
                 <ion-row class="ion-justify-content-start ion-padding-top ion-margin-bottom">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        Доступность сервиса
+                        {{"master-profile.info.availability"|translate}}
                     </ion-item>
                 </ion-row>
                 <ion-item class="ion-item-no-border">
                     <ion-col class="ion-no-padding" size="12">
-                        <ion-row class="availability-subtitle">Языки общения</ion-row>
+                        <ion-row class="availability-subtitle">
+                            {{"master-profile.info.languages"|translate}}
+                        </ion-row>
                         <ion-row *ngFor="let lang of userLanguages"> - {{lang.name}}</ion-row>
                     </ion-col>
                 </ion-item>
@@ -355,7 +357,7 @@
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
-                    <app-collapse-item class="width100" title="Отзывы">
+                    <app-collapse-item class="width100" title='{{"master-profile.info.reviews"|translate}}'>
                         <app-master-profile-review *ngFor="let review of publicReviewList"
                                                    [publicReview]="review"
                         >

@@ -1,45 +1,48 @@
 <ion-card>
     <ion-card-content>
         <ion-row>
-            <ion-col class="ion-margin-bottom" size="8">
-                <ion-item class="ion-item-no-border ion-margin-bottom">
+            <ion-col class="ion-margin-bottom ion-no-padding" size="8">
+                <ion-item class="ion-item-no-border ion-margin-bottom item">
                     {{service.name}}
                 </ion-item>
 
                 <ion-item *ngIf="service.is_enabled"
-                          class="ion-item-no-border text-color-success ion-item-no-min-height">
+                          class="ion-item-no-border text-color-success ion-item-no-min-height item publish-text">
                     <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>
-                    услуга опубликована
+                    {{"master-profile.services.service-edit.published"|translate}}
                 </ion-item>
-                <ion-item *ngIf="!service.is_enabled" class="ion-item-no-border text-grey ion-item-no-min-height">
+                <ion-item *ngIf="!service.is_enabled"
+                          class="ion-item-no-border text-grey ion-item-no-min-height item publish-text">
                     <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
-                    услуга не опубликована
+                    {{"master-profile.services.service-edit.not-published"|translate}}
                 </ion-item>
 
                 <ion-item (click)="onIsEnabled(false)" *ngIf="service.is_enabled"
-                          class="cursor-pointer ion-item-no-border text-grey ion-item-no-min-height ion-margin-start ion-padding-start">
-                    снять с публикации
+                          class="cursor-pointer ion-item-no-border text-grey ion-item-no-min-height ion-margin-start ion-padding-start item publish-text">
+                    {{"master-profile.services.service-edit.unpublish"|translate}}
                 </ion-item>
                 <ion-item (click)="onIsEnabled(true)" *ngIf="!service.is_enabled"
-                          class="cursor-pointer ion-item-no-border text-color-success ion-item-no-min-height ion-margin-start ion-padding-start">
-                    опубликовать
+                          class="cursor-pointer ion-item-no-border text-color-success ion-item-no-min-height ion-margin-start ion-padding-start item publish-text">
+                    {{"master-profile.services.service-edit.publish"|translate}}
                 </ion-item>
             </ion-col>
             <ion-col size="4">
                 <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border price-text">
+                    <ion-item class="ion-item-no-border price-text item">
                         {{service.price.price_currency}}&nbsp;{{getPrice()}}
                     </ion-item>
                 </ion-row>
                 <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height duration-text">
-                        {{service.duration}}&nbsp;min
+                    <ion-item class="ion-item-no-border ion-item-no-min-height duration-text item">
+                        {{service.duration}}&nbsp;{{"master-profile.services.service-edit.minutes"|translate}}
                     </ion-item>
                 </ion-row>
                 <ion-row class="ion-justify-content-end ion-align-items-center">
-                    <ion-item class="ion-item-no-border text-secondary cursor-pointer">
-                        <ion-icon class="mr10" name="create-outline"></ion-icon>
-                        Просмотр
+                    <ion-item class="ion-item-no-border text-secondary cursor-pointer item">
+                        <ion-row class="ion-align-items-center ion-no-padding ion-no-margin">
+                            <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>
+                            {{"master-profile.services.service-edit.view"|translate}}
+                        </ion-row>
                     </ion-item>
                 </ion-row>
             </ion-col>
