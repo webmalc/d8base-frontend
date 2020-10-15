@@ -12,7 +12,7 @@ describe('PasswordRecoveryFormService', () => {
     }));
 
     it('should be created', () => {
-        const service: PasswordRecoveryFormService = TestBed.get(PasswordRecoveryFormService);
+        const service: PasswordRecoveryFormService = TestBed.inject(PasswordRecoveryFormService);
         expect(service).toBeTruthy();
     });
 

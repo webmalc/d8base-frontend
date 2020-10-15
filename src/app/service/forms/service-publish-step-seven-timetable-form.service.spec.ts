@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ServicePublishStepSevenTimetableFormService } from './service-publish-step-seven-timetable-form.service';
+import {ServicePublishStepSevenTimetableFormService} from './service-publish-step-seven-timetable-form.service';
 
 describe('ServicePublishStepSevenTimetableFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ServicePublishStepSevenTimetableFormService = TestBed.get(ServicePublishStepSevenTimetableFormService);
+    const service: ServicePublishStepSevenTimetableFormService = TestBed.inject(ServicePublishStepSevenTimetableFormService);
     expect(service).toBeTruthy();
   });
 });

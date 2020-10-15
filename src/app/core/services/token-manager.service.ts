@@ -8,8 +8,7 @@ import {environment} from '../../../environments/environment';
 })
 export class TokenManagerService {
 
-    public tokenData: AuthResponseInterface = undefined;
-
+    private tokenData: AuthResponseInterface = undefined;
     private readonly TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 
     constructor(private storage: StorageManagerService) {}

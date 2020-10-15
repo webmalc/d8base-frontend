@@ -6,7 +6,7 @@ describe('UserLanguagesApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UserLanguagesApiService = TestBed.get(UserLanguagesApiService);
+    const service: UserLanguagesApiService = TestBed.inject(UserLanguagesApiService);
     expect(service).toBeTruthy();
   });
 });

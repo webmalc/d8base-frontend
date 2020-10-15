@@ -6,7 +6,7 @@ describe('NotificationService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FcmDeviceService = TestBed.get(FcmDeviceService);
+    const service: FcmDeviceService = TestBed.inject(FcmDeviceService);
     expect(service).toBeTruthy();
   });
 });

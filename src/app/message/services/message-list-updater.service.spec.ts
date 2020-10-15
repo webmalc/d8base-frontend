@@ -6,7 +6,7 @@ describe('MessageListUpdaterService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MessageListUpdaterService = TestBed.get(MessageListUpdaterService);
+    const service: MessageListUpdaterService = TestBed.inject(MessageListUpdaterService);
     expect(service).toBeTruthy();
   });
 });

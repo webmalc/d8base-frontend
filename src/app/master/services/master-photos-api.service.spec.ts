@@ -6,7 +6,7 @@ describe('MasterPhotosApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MasterPhotosApiService = TestBed.get(MasterPhotosApiService);
+    const service: MasterPhotosApiService = TestBed.inject(MasterPhotosApiService);
     expect(service).toBeTruthy();
   });
 });

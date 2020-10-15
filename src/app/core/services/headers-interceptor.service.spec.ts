@@ -38,10 +38,10 @@ describe('HeadersInterceptor', () => {
             ]
         });
 
-        client = TestBed.get(ApiClientService);
-        service = TestBed.get(HeadersInterceptor);
-        tokenManager = TestBed.get(TokenManagerService);
-        httpMock = TestBed.get(HttpTestingController);
+        client = TestBed.inject(ApiClientService) as jasmine.SpyObj<ApiClientService>;
+        service = TestBed.inject(HeadersInterceptor);
+        tokenManager = TestBed.inject(TokenManagerService) as jasmine.SpyObj<TokenManagerService>;
+        httpMock = TestBed.inject(HttpTestingController);
     });
 
     it('should be created', () => {

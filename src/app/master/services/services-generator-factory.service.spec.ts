@@ -6,7 +6,7 @@ describe('ServicesGeneratorFactoryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ServicesGeneratorFactoryService = TestBed.get(ServicesGeneratorFactoryService);
+    const service: ServicesGeneratorFactoryService = TestBed.inject(ServicesGeneratorFactoryService);
     expect(service).toBeTruthy();
   });
 });

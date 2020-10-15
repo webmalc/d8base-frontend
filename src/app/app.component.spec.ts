@@ -76,7 +76,7 @@ describe('AppComponent', () => {
     });
 
     it('test translation select options', () => {
-        const trans: TranslationService = TestBed.get(TranslationService);
+        const trans: TranslationService = TestBed.inject(TranslationService);
         const compiled = fixture.debugElement.nativeElement;
         compiled.querySelectorAll('ion-select ion-select-option').forEach(
             (elem: Element) => {

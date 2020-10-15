@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { IpApiService } from './ip-api.service';
 import {HttpClient} from '@angular/common/http';
+import {IpApiService} from './ip-api.service';
 
 describe('IpApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -12,7 +12,7 @@ describe('IpApiService', () => {
   }));
 
   it('should be created', () => {
-    const service: IpApiService = TestBed.get(IpApiService);
+    const service: IpApiService = TestBed.inject(IpApiService);
     expect(service).toBeTruthy();
   });
 

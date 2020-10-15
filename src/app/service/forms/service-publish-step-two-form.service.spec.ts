@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ServicePublishStepTwoFormService } from './service-publish-step-two-form.service';
+import {ServicePublishStepTwoFormService} from './service-publish-step-two-form.service';
 
 describe('ServicePublishStepTwoFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ServicePublishStepTwoFormService = TestBed.get(ServicePublishStepTwoFormService);
+    const service: ServicePublishStepTwoFormService = TestBed.inject(ServicePublishStepTwoFormService);
     expect(service).toBeTruthy();
   });
 });

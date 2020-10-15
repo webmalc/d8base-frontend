@@ -6,7 +6,7 @@ describe('CurrencyListService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CurrencyListApiService = TestBed.get(CurrencyListApiService);
+    const service: CurrencyListApiService = TestBed.inject(CurrencyListApiService);
     expect(service).toBeTruthy();
   });
 });

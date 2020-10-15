@@ -6,7 +6,7 @@ describe('MasterPhotosGeneratorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MasterPhotosGeneratorFactoryService = TestBed.get(MasterPhotosGeneratorFactoryService);
+    const service: MasterPhotosGeneratorFactoryService = TestBed.inject(MasterPhotosGeneratorFactoryService);
     expect(service).toBeTruthy();
   });
 });

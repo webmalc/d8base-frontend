@@ -11,7 +11,7 @@ describe('AuthenticationFactoryService', () => {
     }));
 
     it('should be created', () => {
-        const service: AuthenticationFactory = TestBed.get(AuthenticationFactory);
+        const service: AuthenticationFactory = TestBed.inject(AuthenticationFactory);
         expect(service).toBeTruthy();
     });
 });

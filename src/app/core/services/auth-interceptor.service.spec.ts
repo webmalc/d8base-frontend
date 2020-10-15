@@ -3,7 +3,7 @@ import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {of} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {ApiClientService} from './api-client.service';
 import {AuthInterceptor} from './auth-interceptor.service';
 import {TokenManagerService} from './token-manager.service';
@@ -18,10 +18,14 @@ describe('AuthInterceptor', () => {
     beforeEach(() => {
         const spyTokenManager: jasmine.SpyObj<TokenManagerService> = jasmine.createSpyObj(
             'TokenManagerService', {
-                needToRefresh: () => new Promise(resolve => resolve(true)),
+                needToRefresh: () => Promise.resolve(true),
                 refresh: () => of(),
                 getRefreshToken: () => Promise.resolve('refresh_token'),
-                setTokens: () => Promise.resolve(true)
+                setTokens: (data: AuthResponseInterface) => Promise.resolve(true),
+                getAccessToken: () => Promise.resolve('access_token'),
+                clear: () => Promise.resolve(),
+                isAccessTokenExpired: () => Promise.resolve(true),
+                isRefreshTokenExpired: () => Promise.resolve(true)
             }
         );
         TestBed.configureTestingModule({
@@ -44,7 +48,7 @@ describe('AuthInterceptor', () => {
 
         client = TestBed.inject(ApiClientService);
         service = TestBed.inject(AuthInterceptor);
-        tokenManager = TestBed.get(TokenManagerService);
+        tokenManager = TestBed.inject(TokenManagerService) as jasmine.SpyObj<TokenManagerService>;
         httpMock = TestBed.inject(HttpTestingController);
     });
 

@@ -6,7 +6,7 @@ describe('MessagesListApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MessagesListApiService = TestBed.get(MessagesListApiService);
+    const service: MessagesListApiService = TestBed.inject(MessagesListApiService);
     expect(service).toBeTruthy();
   });
 });

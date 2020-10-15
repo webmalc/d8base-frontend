@@ -6,7 +6,7 @@ describe('ServicePublishGuardService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ServicePublishGuardService = TestBed.get(ServicePublishGuardService);
+    const service: ServicePublishGuardService = TestBed.inject(ServicePublishGuardService);
     expect(service).toBeTruthy();
   });
 });

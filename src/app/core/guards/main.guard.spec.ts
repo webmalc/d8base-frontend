@@ -17,11 +17,11 @@ describe('MainGuard', () => {
     });
 
     it('should ...', () => {
-        const guard = TestBed.get(MainGuard);
+        const guard = TestBed.inject(MainGuard);
         expect(guard).toBeTruthy();
     });
     it('test canActivate success', (done) => {
-        const guard = TestBed.get(MainGuard);
+        const guard = TestBed.inject(MainGuard);
         spyOn((((guard as any).authFactory) as any).mainAuthenticator, 'isAuthenticated').and.returnValue(of(true));
         guard.canActivate().subscribe(
             res => {
@@ -31,7 +31,7 @@ describe('MainGuard', () => {
         );
     });
     it('test canActivate login redirect', (done) => {
-        const guard = TestBed.get(MainGuard);
+        const guard = TestBed.inject(MainGuard);
         spyOn((((guard as any).authFactory) as any).mainAuthenticator, 'isAuthenticated').and.returnValue(of(false));
         guard.canActivate().subscribe(
             (res: UrlTree) => {

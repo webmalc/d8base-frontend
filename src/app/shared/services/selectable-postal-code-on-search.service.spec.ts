@@ -6,7 +6,7 @@ describe('SelectablePostalCodeOnSearchService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SelectablePostalCodeOnSearchService = TestBed.get(SelectablePostalCodeOnSearchService);
+    const service: SelectablePostalCodeOnSearchService = TestBed.inject(SelectablePostalCodeOnSearchService);
     expect(service).toBeTruthy();
   });
 });

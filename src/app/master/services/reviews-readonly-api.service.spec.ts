@@ -6,7 +6,7 @@ describe('ReviewsReadonlyApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ReviewsReadonlyApiService = TestBed.get(ReviewsReadonlyApiService);
+    const service: ReviewsReadonlyApiService = TestBed.inject(ReviewsReadonlyApiService);
     expect(service).toBeTruthy();
   });
 });

@@ -6,7 +6,7 @@ describe('MasterProfileServicesSearchService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MasterProfileServicesSearchService = TestBed.get(MasterProfileServicesSearchService);
+    const service: MasterProfileServicesSearchService = TestBed.inject(MasterProfileServicesSearchService);
     expect(service).toBeTruthy();
   });
 });

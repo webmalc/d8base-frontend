@@ -87,7 +87,7 @@ export class LocationService {
         });
     }
 
-    public async getIpLocationData(): Promise<IpLocation> {
+    public async getIpLocationData(): Promise<IpLocation | null> {
         let ipData: any = null;
         for (const ipService of this.ipServicesHolder.list) {
             try {

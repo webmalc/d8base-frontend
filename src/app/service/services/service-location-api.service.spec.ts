@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import { ServiceLocationApiService } from './service-location-api.service';
+import {ServiceLocationApiService} from './service-location-api.service';
 
 describe('ServiceLocationApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('ServiceLocationApiService', () => {
     }));
 
     it('should be created', () => {
-        const service: ServiceLocationApiService = TestBed.get(ServiceLocationApiService);
+        const service: ServiceLocationApiService = TestBed.inject(ServiceLocationApiService);
         expect(service).toBeTruthy();
     });
 });

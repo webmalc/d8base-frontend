@@ -10,7 +10,7 @@ describe('AbstractIpService', () => {
     }));
 
     it('should be created', () => {
-        const service: AbstractIpService = TestBed.get(AbstractIpService);
+        const service: AbstractIpService = TestBed.inject(AbstractIpService);
         expect(service).toBeTruthy();
     });
 

@@ -6,7 +6,7 @@ describe('PostalCodeApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PostalCodeApiService = TestBed.get(PostalCodeApiService);
+    const service: PostalCodeApiService = TestBed.inject(PostalCodeApiService);
     expect(service).toBeTruthy();
   });
 });

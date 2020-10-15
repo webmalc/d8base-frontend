@@ -6,7 +6,7 @@ describe('LatestMessagesApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: LatestMessagesApiService = TestBed.get(LatestMessagesApiService);
+    const service: LatestMessagesApiService = TestBed.inject(LatestMessagesApiService);
     expect(service).toBeTruthy();
   });
 });

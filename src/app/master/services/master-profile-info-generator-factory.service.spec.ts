@@ -6,7 +6,7 @@ describe('MasterProfileInfoGeneratorFactoryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MasterProfileInfoGeneratorFactoryService = TestBed.get(MasterProfileInfoGeneratorFactoryService);
+    const service: MasterProfileInfoGeneratorFactoryService = TestBed.inject(MasterProfileInfoGeneratorFactoryService);
     expect(service).toBeTruthy();
   });
 });

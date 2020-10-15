@@ -6,7 +6,7 @@ describe('FcmDevicesApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FcmDevicesApiService = TestBed.get(FcmDevicesApiService);
+    const service: FcmDevicesApiService = TestBed.inject(FcmDevicesApiService);
     expect(service).toBeTruthy();
   });
 });

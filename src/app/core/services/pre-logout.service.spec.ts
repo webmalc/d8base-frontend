@@ -6,7 +6,7 @@ describe('PreLogoutService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PreLogoutService = TestBed.get(PreLogoutService);
+    const service: PreLogoutService = TestBed.inject(PreLogoutService);
     expect(service).toBeTruthy();
   });
 });
