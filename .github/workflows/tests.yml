@@ -66,22 +66,7 @@ jobs:
                 key: ${{ secrets.STAGEDEPLKEY }}
                 script: docker container restart mb-nginx
 
-            - name: Send email if failure tests
-              uses: dawidd6/action-send-mail@v2
-              if: ${{ failure() }}
-              with:
-                server_address: smtp.yandex.ru
-                server_port: 465
-                username: ${{secrets.MAIL_USERNAME}}
-                password: ${{secrets.MAIL_PASSWORD}}
-                subject: Tests are failed - ${{github.repository}} on push
-                body: Tests of ${{github.repository}} on push are failed
-                to: ${{secrets.FAIL_MAIL_RECEPIENTS}}
-                from: Github actions # <user@example.com>
-                # Optional content type (defaults to text/plain):
-                content_type: text/html
-                    
-            - name: Send email if success tests
+            - name: Send email for successfull tests
               uses: dawidd6/action-send-mail@v2
               if: ${{ success() }}
               with:
