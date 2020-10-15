@@ -10,7 +10,5 @@ export class Master implements MasterInterface {
     @Expose() public experience: number;
     @Expose() public level: string;
     @Expose() public rating: string;
-    @Expose() public is_auto_order_confirmation: boolean;
     @Expose() public subcategory: number;
-
 }

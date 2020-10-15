@@ -3,6 +3,7 @@ import {TranslationService} from '@app/core/services/translation.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publish-step-seven-form-fields';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishStepSevenFormService} from '@app/service/forms/service-publish-step-seven-form.service';
 import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
 import {StepSevenDepartureDataInterface} from '@app/service/interfaces/step-seven-departure-data-interface';
@@ -21,7 +22,6 @@ import {SelectablePostalCodeOnSearchService} from '@app/shared/services/selectab
 })
 export class ServicePublishStepSevenComponent extends Reinitable {
 
-    public static readonly STEP = 6;
     public formFields = ServicePublishStepSevenFormFields;
 
     constructor(
@@ -38,7 +38,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     }
 
     public submitForm(): void {
-        this.servicePublishDataHolderService.assignStepData(ServicePublishStepSevenComponent.STEP, this.formService.form.getRawValue());
+        this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, this.formService.form.getRawValue());
         this.serviceStepsNavigationService.next();
     }
 
@@ -59,18 +59,18 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     }
 
     public getDepartureData(): StepSevenDepartureDataInterface {
-        return this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP)?.departure;
+        return this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)?.departure;
     }
 
     public onThisPageDataChange(): void {
-        this.servicePublishDataHolderService.assignStepData(ServicePublishStepSevenComponent.STEP, this.formService.form.getRawValue());
+        this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, this.formService.form.getRawValue());
     }
 
     protected init(): void {
         this.authStateManager.updateFourStepState();
-        if (this.servicePublishDataHolderService.isset(ServicePublishStepSevenComponent.STEP)) {
+        if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Seven)) {
             this.formService.createForm(
-                this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP)
+                this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
             );
         } else {
             this.formService.createForm();

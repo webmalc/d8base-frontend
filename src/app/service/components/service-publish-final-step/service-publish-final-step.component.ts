@@ -3,7 +3,7 @@ import {Master} from '@app/core/models/master';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {MasterPickerPopoverComponent} from '@app/service/components/master-peeker/master-picker-popover.component';
-import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
@@ -22,8 +22,6 @@ import {map} from 'rxjs/operators';
 })
 export class ServicePublishFinalStepComponent extends Reinitable {
 
-    public static STEP = 7;
-
     constructor(
         private servicePublish: ServicePublishService,
         private popoverController: PopoverController,
@@ -35,7 +33,7 @@ export class ServicePublishFinalStepComponent extends Reinitable {
     }
 
     public publish(): void {
-        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster) {
+        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster) {
             this.popover().then(() => this.servicePublish.publish().subscribe(
                 () => console.log('done')
             ));
@@ -62,10 +60,10 @@ export class ServicePublishFinalStepComponent extends Reinitable {
                             if (master !== undefined) {
                                 this.getMasterLocation(master).subscribe(
                                     masterLocation => this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
-                                        ServicePublishFinalStepComponent.STEP, {master, masterLocation}
+                                        ServicePublishSteps.Final, {master, masterLocation}
                                     )
                                 );
-                                this.servicePublishDataHolder.assignStepData(ServicePublishStepFourComponent.STEP, {isNewMaster: false});
+                                this.servicePublishDataHolder.assignStepData(ServicePublishSteps.Four, {isNewMaster: false});
                                 this.popoverController.dismiss();
                                 subscription.unsubscribe();
                                 resolve();

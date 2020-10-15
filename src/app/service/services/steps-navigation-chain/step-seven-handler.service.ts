@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ServicePublishStepSevenComponent} from '@app/service/components/service-publish-step-seven/service-publish-step-seven.component';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
 import {Observable, of} from 'rxjs';
 
@@ -19,6 +19,6 @@ export class StepSevenHandlerService extends AbstractHandler {
     }
 
     protected getIndex(): number {
-        return ServicePublishStepSevenComponent.STEP;
+        return ServicePublishSteps.Seven;
     }
 }

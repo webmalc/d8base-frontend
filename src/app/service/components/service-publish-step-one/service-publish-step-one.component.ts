@@ -5,6 +5,7 @@ import {CategoriesApiService} from '@app/core/services/categories-api.service';
 import {SubcategoriesApiService} from '@app/core/services/subcategories-api.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {ServicePublishStepOneFormFields} from '@app/service/enums/service-publish-step-one-form-fields';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
 import {StepOneDataInterface} from '@app/service/interfaces/step-one-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
@@ -19,7 +20,6 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ServicePublishStepOneComponent extends Reinitable {
 
-    public static readonly STEP = 0;
     public formFields = ServicePublishStepOneFormFields;
     public categoriesList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
     public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
@@ -38,7 +38,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
 
     public submitForm(): void {
         this.servicePublishDataHolderService.setStepData<StepOneDataInterface>(
-            ServicePublishStepOneComponent.STEP,
+            ServicePublishSteps.One,
             {
                 category: this.formService.form.get(this.formFields.Category).value,
                 subcategory: this.formService.form.get(this.formFields.Subcategory).value
@@ -67,8 +67,8 @@ export class ServicePublishStepOneComponent extends Reinitable {
             list => this.categoriesList$.next(list.results)
         );
 
-        if (this.servicePublishDataHolderService.isset(ServicePublishStepOneComponent.STEP)) {
-            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishStepOneComponent.STEP);
+        if (this.servicePublishDataHolderService.isset(ServicePublishSteps.One)) {
+            const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
             this.formService.createForm(stepData.category, stepData.subcategory);
             this.isReinitialized = true;
         } else {

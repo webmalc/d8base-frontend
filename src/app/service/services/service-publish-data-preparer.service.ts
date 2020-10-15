@@ -4,15 +4,8 @@ import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
 import {MasterLocation} from '@app/master/models/master-location';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
-import {ServicePublishFinalStepComponent} from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
-import {ServicePublishStepFiveComponent} from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
-import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
-import {ServicePublishStepOneComponent} from '@app/service/components/service-publish-step-one/service-publish-step-one.component';
-import {ServicePublishStepSevenComponent} from '@app/service/components/service-publish-step-seven/service-publish-step-seven.component';
-import {ServicePublishStepSixComponent} from '@app/service/components/service-publish-step-six/service-publish-step-six.component';
-import {ServicePublishStepThreeComponent} from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
-import {ServicePublishStepTwoComponent} from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
 import {PaymentMethods} from '@app/service/enums/payment-methods';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
 import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
@@ -59,7 +52,7 @@ export class ServicePublishDataPreparerService {
 
     private getServiceSchedule(): ServiceSchedule[] {
         const stepData: ServiceSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
-            ServicePublishStepSevenComponent.STEP
+            ServicePublishSteps.Seven
         )?.timetable?.map(
             raw => plainToClass(ServiceSchedule, raw)
         ));
@@ -68,13 +61,13 @@ export class ServicePublishDataPreparerService {
     }
 
     private async getServicePhotos(): Promise<ServicePhoto[]> {
-        const data = this.servicePublishDataHolder.getStepData<StepThreeDataInterface>(ServicePublishStepThreeComponent.STEP);
+        const data = this.servicePublishDataHolder.getStepData<StepThreeDataInterface>(ServicePublishSteps.Three);
 
         return HelperService.clearArray(await this.generateServicePhotos(data));
     }
 
     private getService(): Service {
-        const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishStepTwoComponent.STEP);
+        const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
         const service = plainToClass(Service, stepData, {excludeExtraneousValues: true});
         service.duration = this.getDuration(stepData);
 
@@ -82,11 +75,11 @@ export class ServicePublishDataPreparerService {
     }
 
     private async getUser(): Promise<User | null> {
-        if (this.servicePublishDataHolder.isset(ServicePublishStepFourComponent.STEP) &&
-            !this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewUser) {
+        if (this.servicePublishDataHolder.isset(ServicePublishSteps.Four) &&
+            !this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewUser) {
             return null;
         }
-        const stepData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishStepFiveComponent.STEP);
+        const stepData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
         const user = new User();
         user.first_name = stepData.first_name;
         user.last_name = stepData.last_name;
@@ -100,14 +93,14 @@ export class ServicePublishDataPreparerService {
     }
 
     private getMaster(): Master {
-        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster &&
-            this.servicePublishDataHolder.isset(ServicePublishFinalStepComponent.STEP)
+        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster &&
+            this.servicePublishDataHolder.isset(ServicePublishSteps.Final)
         ) {
-            return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishFinalStepComponent.STEP).master;
+            return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).master;
         }
         const master = new Master();
-        const stepOneData = this.servicePublishDataHolder.getStepData<StepOneDataInterface>(ServicePublishStepOneComponent.STEP);
-        const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishStepSixComponent.STEP);
+        const stepOneData = this.servicePublishDataHolder.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
+        const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six);
         master.subcategory = stepOneData.subcategory.id;
         master.company = stepSixData?.company_name;
         master.description = stepSixData?.description;
@@ -118,12 +111,12 @@ export class ServicePublishDataPreparerService {
     }
 
     private getMasterLocation(): MasterLocation {
-        if (this.servicePublishDataHolder.isset(ServicePublishFinalStepComponent.STEP) &&
-            this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishFinalStepComponent.STEP).masterLocation) {
-            return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishFinalStepComponent.STEP).masterLocation;
+        if (this.servicePublishDataHolder.isset(ServicePublishSteps.Final) &&
+            this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).masterLocation) {
+            return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).masterLocation;
         }
         const location = new MasterLocation();
-        const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP);
+        const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
         location.country = stepData.country.id;
         location.city = stepData.city.id;
         location.address = stepData?.address;
@@ -135,7 +128,7 @@ export class ServicePublishDataPreparerService {
 
     private getServiceLocation(): ServiceLocation {
         const location = new ServiceLocation();
-        const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP);
+        const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
         location.max_distance = stepData.departure.max_distance;
 
         return HelperService.clear(location);
@@ -144,8 +137,8 @@ export class ServicePublishDataPreparerService {
     private getServicePrice(): Price {
         const price = new Price();
         price.payment_methods = [];
-        const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishStepTwoComponent.STEP);
-        const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishStepSevenComponent.STEP);
+        const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
+        const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
         if (stepSevenData.payment_cash) {
             price.payment_methods.push(PaymentMethods.Cash);
         }

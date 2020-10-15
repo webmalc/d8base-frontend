@@ -1,12 +1,11 @@
-import {TestBed} from '@angular/core/testing';
-
-import {MasterManagerService} from './master-manager.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
 import {environment} from '../../../environments/environment';
 import {ApiListResponseFixture} from '../../../testing/fixtures/api-list-response-fixture';
-import {MasterInterface} from '../interfaces/master.interface';
-import {MasterFixture} from '../../../testing/fixtures/master-fixture';
 import {Autofixture} from '../../../testing/fixtures/generator';
+import {MasterFixture} from '../../../testing/fixtures/master-fixture';
+import {MasterInterface} from '../interfaces/master.interface';
+import {MasterManagerService} from './master-manager.service';
 
 describe('MasterManagerService', () => {
     let service: MasterManagerService;
