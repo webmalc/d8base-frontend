@@ -1,4 +1,4 @@
-name: tests ans staging deploy
+name: tests and staging deploy
 on: [push]
 jobs:
     build:
