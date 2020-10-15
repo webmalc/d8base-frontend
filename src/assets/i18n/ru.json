@@ -361,7 +361,8 @@
       "languages": "Языки общения",
       "reviews": "Отзывы",
       "on-map": "Смотреть на карте",
-      "from-here": "От заданного адреса"
+      "from-here": "От заданного адреса",
+      "add-new-address": "Добавит еще адрес"
     }
   },
   "location-edit-page": {

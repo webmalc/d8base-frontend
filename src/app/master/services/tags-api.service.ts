@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
@@ -19,8 +19,11 @@ export class TagsApiService extends AbstractApiService<Tag> implements ApiServic
         super(client);
     }
 
-    public getByMasterId(masterId: number): Observable<ApiListResponseInterface<Tag>> {
-        return this.client.get(this.url, {professional: masterId?.toString(10)});
+    public getByMasterId(
+        masterId: number,
+        params?: { [param: string]: string | string[]; }
+    ): Observable<ApiListResponseInterface<Tag>> {
+        return this.client.get(this.url, {professional: masterId?.toString(10), ...params});
     }
 
     protected getUrl(): string {

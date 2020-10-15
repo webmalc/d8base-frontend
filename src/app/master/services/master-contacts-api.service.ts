@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
@@ -23,8 +23,11 @@ export class MasterContactsApiService extends AbstractApiService<ClientContactIn
         super(client);
     }
 
-    public getByClientId(masterId: number): Observable<ApiListResponseInterface<ClientContactInterface>> {
-        return super.get({professional: masterId.toString(10)});
+    public getByClientId(
+        masterId: number,
+        params?: { [param: string]: string | string[]; }
+    ): Observable<ApiListResponseInterface<ClientContactInterface>> {
+        return super.get({professional: masterId.toString(10), ...params});
     }
 
     public getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>> {

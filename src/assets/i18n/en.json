@@ -275,7 +275,8 @@
       "languages": "Languages",
       "reviews": "Reviews",
       "on-map": "Trace on map",
-      "from-here": "From target address"
+      "from-here": "From target address",
+      "add-new-address": "Add one more address"
     }
   },
   "location-edit-page": {

@@ -17,8 +17,11 @@ export class EducationApiService extends AbstractApiService<Education> implement
         super(client);
     }
 
-    public getByMasterId(masterId: number): Observable<ApiListResponseInterface<Education>> {
-        return super.get({professional: masterId?.toString(10)});
+    public getByMasterId(
+        masterId: number,
+        params?: { [param: string]: string | string[]; }
+    ): Observable<ApiListResponseInterface<Education>> {
+        return super.get({professional: masterId?.toString(10), ...params});
     }
 
     protected getUrl(): string {

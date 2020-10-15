@@ -86,13 +86,19 @@ export class MasterProfileInfoGeneratorFactoryService {
                         switchMap((userLanguagesList: UserLanguage[]) =>
                             this.languagesApi.getList(userLanguagesList.map(lang => lang.language)))),
                     user: of(master.user),
-                    masterLocation: this.masterLocationApi.getByClientId(master.id).pipe(map(res => res.results)),
-                    masterContacts: this.masterContactApi.getByClientId(master.id).pipe(map(res => res.results)),
-                    masterTags: this.masterTagsApi.getByMasterId(master.id).pipe(map(res => res.results)),
-                    experienceList: this.masterExperienceApi.get({professional: master.id.toString()}).pipe(map(res => res.results)),
-                    educationList: this.masterEducationApi.getByMasterId(master.id).pipe(map(res => res.results)),
-                    certificateList: this.certificatesApi.getByMasterId(master.id).pipe(map(res => res.results)),
-                    publicReviewList: this.publicReviewsApi.get({professional: master.id.toString()}).pipe(map(res => res.results))
+                    masterLocation: this.masterLocationApi.getByClientId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
+                    masterContacts: this.masterContactApi.getByClientId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
+                    masterTags: this.masterTagsApi.getByMasterId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
+                    experienceList: this.masterExperienceApi.get({
+                        professional: master.id.toString(),
+                        ordering: 'created'
+                    }).pipe(map(res => res.results)),
+                    educationList: this.masterEducationApi.getByMasterId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
+                    certificateList: this.certificatesApi.getByMasterId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
+                    publicReviewList: this.publicReviewsApi.get({
+                        professional: master.id.toString(),
+                        ordering: 'created'
+                    }).pipe(map(res => res.results))
                 })
             )
         );

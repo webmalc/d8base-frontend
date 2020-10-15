@@ -21,11 +21,11 @@ export class ServicesGeneratorFactoryService {
 
     public getServiceList(masterId?: number): Observable<{ service: Service, tags?: ServiceTag[] }[]> {
         return masterId ?
-            this.servicesApi.get({professional: masterId.toString()}).pipe(
+            this.servicesApi.get({professional: masterId.toString(), ordering: 'created'}).pipe(
                 switchMap(serviceList => this.combineWithTags(serviceList.results))) :
             this.masterManager.getMasterList().pipe(
-                switchMap(list => this.servicesApi.get({professional: list[0].id.toString()}).pipe(
-                    map(masterServiceList => masterServiceList.results.map(service => ({service})))
+                switchMap(list => this.servicesApi.get({professional: list[0].id.toString(), ordering: 'created'}).pipe(
+                    map(masterServiceList => masterServiceList.results.map(service => ({service})).reverse())
                 ))
             );
     }

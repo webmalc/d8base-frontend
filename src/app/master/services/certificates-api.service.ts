@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
@@ -17,8 +17,11 @@ export class CertificatesApiService extends AbstractApiService<Certificate> impl
         super(client);
     }
 
-    public getByMasterId(masterId: number): Observable<ApiListResponseInterface<Certificate>> {
-        return super.get({professional: masterId?.toString(10)});
+    public getByMasterId(
+        masterId: number,
+        params?: { [param: string]: string | string[]; }
+    ): Observable<ApiListResponseInterface<Certificate>> {
+        return super.get({professional: masterId?.toString(10), ...params});
     }
 
     protected getUrl(): string {

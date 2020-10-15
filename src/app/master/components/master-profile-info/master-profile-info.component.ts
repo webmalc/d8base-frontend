@@ -55,16 +55,16 @@ export class MasterProfileInfoComponent {
         this.masterInfoGeneratorFactory.getData(parseInt(this.route.snapshot.paramMap.get('master-id'), 10)).subscribe(
             data => {
                 this.master = data.master;
-                this.masterLocation = data.masterLocation;
-                this.masterContacts = data.masterContacts;
-                this.masterTags = data.masterTags;
+                this.masterLocation = data.masterLocation.reverse();
+                this.masterContacts = data.masterContacts.reverse();
+                this.masterTags = data.masterTags.reverse();
                 this.user = data.user;
                 this.userCountry = data.userCountry;
-                this.userLanguages = data.userLanguages;
-                this.experienceList = data.experienceList;
-                this.certificateList = data.certificateList;
-                this.publicReviewList = data.publicReviewList;
-                this.educationList = data.educationList;
+                this.userLanguages = data.userLanguages.reverse();
+                this.experienceList = data.experienceList.reverse();
+                this.certificateList = data.certificateList.reverse();
+                this.publicReviewList = data.publicReviewList.reverse();
+                this.educationList = data.educationList.reverse();
             }
         );
     }
