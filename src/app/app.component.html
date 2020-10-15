@@ -49,6 +49,16 @@
                         </ion-item>
 
                         <ion-item
+                                (click)="menu.close()"
+                                routerDirection="forward"
+                                routerLink="/issuance/"
+                                routerLinkActive="active"
+                        >
+                            <ion-icon name="construct-outline"></ion-icon>
+                            issuance
+                        </ion-item>
+
+                        <ion-item
                                 routerLink="/message"
                                 routerLinkActive="active"
                                 routerDirection="forward"
