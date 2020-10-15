@@ -28,7 +28,7 @@ jobs:
             - name: Test
               run: npm run test -- --no-watch
 
-              - name: git pull
+            - name: git pull
               uses: appleboy/ssh-action@master
               with:
                 host: ${{ secrets.STAGEHOST }}
