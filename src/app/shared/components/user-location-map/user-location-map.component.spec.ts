@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { UserLocationMapComponent } from './user-location-map.component';
+import {UserLocationMapComponent} from './user-location-map.component';
 
 describe('UserLocationMapComponent', () => {
     let component: UserLocationMapComponent;
@@ -9,7 +9,7 @@ describe('UserLocationMapComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ UserLocationMapComponent ],
+            declarations: [UserLocationMapComponent],
             imports: [IonicModule.forRoot()],
             providers: [
                 // {provide: map, useValue: {invalidateSize()}}

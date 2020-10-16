@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
 import {TranslateModule} from '@ngx-translate/core';
-import { CollapseItemComponent } from './collapse-item.component';
+import {CollapseItemComponent} from './collapse-item.component';
 
 describe('CollapseItemComponent', () => {
     let component: CollapseItemComponent;
@@ -10,7 +10,7 @@ describe('CollapseItemComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ CollapseItemComponent ],
+            declarations: [CollapseItemComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
         }).compileComponents();
 
