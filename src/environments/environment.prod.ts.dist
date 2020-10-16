@@ -15,6 +15,7 @@ export const environment = {
         experience: '/en/api/accounts/professional-experience/',
         certificates: '/en/api/accounts/professional-certificates/',
         language: '/en/api/location/languages/',
+        user_language: '/en/api/accounts/languages/',
         location: '/en/api/accounts/locations/',
         master: '/en/api/accounts/professionals/',
         master_list: '/en/api/professionals/professionals/',
