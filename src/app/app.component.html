@@ -130,12 +130,12 @@
                             </svg>
                         </ion-item>
 
-                        <ion-item class="ion-item-no-border" slot="end" *ngIf="platform.is('desktop')">
+                        <ion-item *ngIf="isDesktop()" class="ion-item-no-border" slot="end">
                             {{'template.download'|translate}}
                         </ion-item>
                         <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
                             && (authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
-                            && platform.is('desktop')"
+                            && isDesktop()"
                                   class="ion-item-no-border cursor-pointer" slot="end">
                             {{'template.become-master'|translate}}
                         </ion-item>

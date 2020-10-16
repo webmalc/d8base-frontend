@@ -1,12 +1,23 @@
 import {TestBed} from '@angular/core/testing';
 
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {StorageManagerService} from '../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
 import {MasterPhotosGeneratorFactoryService} from './master-photos-generator-factory.service';
 
 describe('MasterPhotosGeneratorService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [
+            HttpClientTestingModule
+        ],
+        providers: [
+            MasterPhotosGeneratorFactoryService,
+            {provide: StorageManagerService, useClass: StorageManagerMock}
+        ]
+    }));
 
-  it('should be created', () => {
-    const service: MasterPhotosGeneratorFactoryService = TestBed.inject(MasterPhotosGeneratorFactoryService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: MasterPhotosGeneratorFactoryService = TestBed.inject(MasterPhotosGeneratorFactoryService);
+        expect(service).toBeTruthy();
+    });
 });

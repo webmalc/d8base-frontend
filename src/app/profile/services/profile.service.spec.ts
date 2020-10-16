@@ -1,21 +1,17 @@
-import {TestBed} from '@angular/core/testing';
-
-import {AuthenticationFactory} from '../../core/services/authentication-factory.service';
-import {UserManagerService} from '../../core/services/user-manager.service';
-import {ProfileService} from './profile.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
-
-
-class ProfileServiceStub {
-}
+import {StorageManagerService} from '../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
+import {ProfileService} from './profile.service';
 
 
 describe('ProfileService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, ReactiveFormsModule],
         providers: [
-            ProfileService
+            ProfileService,
+            {provide: StorageManagerService, useClass: StorageManagerMock}
         ]
     }));
 
