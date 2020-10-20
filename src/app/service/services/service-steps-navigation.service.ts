@@ -5,7 +5,7 @@ import {ChainManagerService} from '@app/service/services/steps-navigation-chain/
 @Injectable()
 export class ServiceStepsNavigationService {
 
-    constructor(private router: Router, private chainManager: ChainManagerService) {
+    constructor(private readonly router: Router, private readonly chainManager: ChainManagerService) {
     }
 
     public next(): void {

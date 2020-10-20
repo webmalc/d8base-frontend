@@ -9,7 +9,7 @@ import {switchMap} from 'rxjs/operators';
 @Injectable()
 export class StepSixHandlerService extends AbstractHandler {
 
-    constructor(private servicePublishDataHolderService: ServicePublishDataHolderService, private masterManager: MasterManagerService) {
+    constructor(private readonly servicePublishDataHolderService: ServicePublishDataHolderService, private readonly masterManager: MasterManagerService) {
         super();
     }
 

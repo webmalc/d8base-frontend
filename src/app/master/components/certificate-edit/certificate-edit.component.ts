@@ -13,7 +13,7 @@ import {plainToClass} from 'class-transformer';
 })
 export class CertificateEditComponent extends AbstractEditComponent<Certificate> {
 
-    constructor(private readonly location: Location, private sanitizer: DomSanitizer) {
+    constructor(private readonly location: Location, private readonly sanitizer: DomSanitizer) {
         super();
     }
 

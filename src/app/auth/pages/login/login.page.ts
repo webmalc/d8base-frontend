@@ -15,9 +15,9 @@ export class LoginPage implements OnInit {
     public errorMessage: string;
 
     constructor(
-        private authFactory: AuthenticationFactory,
-        private router: Router,
-        private masterManager: MasterManagerService
+        private readonly authFactory: AuthenticationFactory,
+        private readonly router: Router,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

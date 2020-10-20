@@ -30,7 +30,7 @@ export class AbstractContactsComponent extends Reinitable implements OnInit, OnD
     private inited: boolean = false;
 
     constructor(
-        private contactsApi: ContactApiService
+        private readonly contactsApi: ContactApiService
     ) {
         super();
     }

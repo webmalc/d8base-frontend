@@ -30,13 +30,13 @@ export class ServicePublishStepFourComponent extends Reinitable {
 
     constructor(
         public formService: ServicePublishStepFourFormService,
-        private isRegisteredApi: IsUserRegisteredApiService,
-        private masterManager: MasterManagerService,
+        private readonly isRegisteredApi: IsUserRegisteredApiService,
+        private readonly masterManager: MasterManagerService,
         public authenticationService: AuthenticationService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private registrationService: RegistrationService,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
-        private userManager: UserManagerService
+        private readonly registrationService: RegistrationService,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly userManager: UserManagerService
     ) {
         super();
     }

@@ -25,10 +25,10 @@ export class MasterPage extends Reinitable {
     public editable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private masterManager: MasterManagerService,
-        private userManager: UserManagerService,
-        private reviewsReadonly: ReviewsReadonlyApiService,
-        private route: ActivatedRoute
+        private readonly masterManager: MasterManagerService,
+        private readonly userManager: UserManagerService,
+        private readonly reviewsReadonly: ReviewsReadonlyApiService,
+        private readonly route: ActivatedRoute
     ) {
         super();
     }

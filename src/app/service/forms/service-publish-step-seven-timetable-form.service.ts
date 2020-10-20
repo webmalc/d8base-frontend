@@ -11,9 +11,9 @@ export class ServicePublishStepSevenTimetableFormService {
     public form: FormGroup;
     public formArray: ServiceSchedule[] = [];
     public toDelete: ServiceSchedule[] = [];
-    private defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    private readonly defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private readonly formBuilder: FormBuilder) {
     }
 
     public createForm(timetable?: ServiceSchedule[]): void {

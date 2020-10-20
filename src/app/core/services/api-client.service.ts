@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
 })
 export class ApiClientService {
 
-    constructor(private http: HttpClient) {
+    constructor(private readonly http: HttpClient) {
     }
 
     public get<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {

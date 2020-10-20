@@ -32,7 +32,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         public readonly citySelectable: SelectableCityOnSearchService,
         public postalSelectable: SelectablePostalCodeOnSearchService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private authStateManager: ServicePublishAuthStateManagerService
+        private readonly authStateManager: ServicePublishAuthStateManagerService
     ) {
         super();
     }

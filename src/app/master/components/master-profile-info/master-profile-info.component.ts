@@ -42,8 +42,8 @@ export class MasterProfileInfoComponent {
 
     constructor(
         public masterContactApi: MasterContactsApiService,
-        private masterInfoGeneratorFactory: MasterProfileInfoGeneratorFactoryService,
-        private route: ActivatedRoute
+        private readonly masterInfoGeneratorFactory: MasterProfileInfoGeneratorFactoryService,
+        private readonly route: ActivatedRoute
     ) {
     }
 

@@ -20,10 +20,10 @@ export class ServicePublishStepSixComponent implements OnInit {
 
     constructor(
         public formService: ServicePublishStepSixFormService,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
         public trans: TranslationService,
-        private authStateManager: ServicePublishAuthStateManagerService
+        private readonly authStateManager: ServicePublishAuthStateManagerService
     ) { }
 
     public ngOnInit(): void {

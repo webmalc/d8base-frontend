@@ -26,7 +26,7 @@ export class ContactsAddComponent extends Reinitable implements OnDestroy, OnIni
 
     constructor(
         public userContactApiService: UserContactApiService,
-        private contactsApi: ContactApiService
+        private readonly contactsApi: ContactApiService
     ) {
         super();
     }

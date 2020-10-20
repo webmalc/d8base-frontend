@@ -8,7 +8,7 @@ import {firebase} from '@firebase/app';
 })
 export class FcmDeviceDisableService {
 
-    constructor(private fcmDevicesApi: FcmDevicesApiService) {
+    constructor(private readonly fcmDevicesApi: FcmDevicesApiService) {
     }
 
     public async disableDevice(): Promise<GcmDevice> {

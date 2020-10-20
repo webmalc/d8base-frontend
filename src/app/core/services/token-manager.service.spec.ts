@@ -120,7 +120,7 @@ describe('TokenManagerService', () => {
 
 export class StorageManagerMock {
 
-    private data: object = {
+    private readonly data: object = {
         api_token: null,
         refresh_token: null
     };

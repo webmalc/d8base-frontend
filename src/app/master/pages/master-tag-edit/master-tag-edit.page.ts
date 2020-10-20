@@ -19,9 +19,9 @@ export class MasterTagEditPage implements OnInit {
     private defaultTags: Tag[];
 
     constructor(
-        private formBuilder: FormBuilder,
-        private api: TagsApiService,
-        private masterManager: MasterManagerService
+        private readonly formBuilder: FormBuilder,
+        private readonly api: TagsApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

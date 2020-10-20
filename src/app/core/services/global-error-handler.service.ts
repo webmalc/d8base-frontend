@@ -9,8 +9,8 @@ import {Platform, ToastController} from '@ionic/angular';
 export class GlobalErrorHandlerService implements ErrorHandler {
 
     constructor(public toaster: ToastController,
-                private router: Router,
-                @Inject(PLATFORM_ID)private platformId: object
+                private readonly router: Router,
+                @Inject(PLATFORM_ID)private readonly platformId: object
     ) {
     }
 

@@ -18,8 +18,8 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
     private sub: Subscription;
 
     constructor(
-        private viewContainerRef: ViewContainerRef,
-        private componentFactoryResolver: ComponentFactoryResolver
+        private readonly viewContainerRef: ViewContainerRef,
+        private readonly componentFactoryResolver: ComponentFactoryResolver
     ) {
     }
 

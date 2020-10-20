@@ -11,7 +11,7 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
 
-    constructor(private tokenManager: TokenManagerService) {
+    constructor(private readonly tokenManager: TokenManagerService) {
     }
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

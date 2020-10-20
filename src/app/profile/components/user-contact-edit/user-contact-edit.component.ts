@@ -31,13 +31,13 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
     private clientContactsApiService: ContactsApiServiceInterface;
 
     constructor(
-        private userContactApiService: UserContactApiService,
-        private masterContactApiService: MasterContactsApiService,
-        private route: ActivatedRoute,
-        private contactsApi: ContactApiService,
-        private formBuilder: FormBuilder,
-        private location: Location,
-        private masterManager: MasterManagerService
+        private readonly userContactApiService: UserContactApiService,
+        private readonly masterContactApiService: MasterContactsApiService,
+        private readonly route: ActivatedRoute,
+        private readonly contactsApi: ContactApiService,
+        private readonly formBuilder: FormBuilder,
+        private readonly location: Location,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

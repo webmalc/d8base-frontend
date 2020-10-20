@@ -21,10 +21,10 @@ export class AboutEditComponent implements OnInit {
     public formFields = ProfileFormFields;
 
     constructor(
-        private userManager: UserManagerService,
+        private readonly userManager: UserManagerService,
         public countriesApi: SelectableCountryOnSearchService,
         public languagesApi: LanguagesApiService,
-        private formBuilder: FormBuilder
+        private readonly formBuilder: FormBuilder
     ) { }
 
     public ngOnInit(): void {

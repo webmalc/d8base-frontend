@@ -11,7 +11,7 @@ export class IsUserRegisteredApiService {
 
     private readonly url = environment.backend.is_user_registered;
 
-    constructor(private client: ApiClientService) { }
+    constructor(private readonly client: ApiClientService) { }
 
     public isEmailRegistered(email: string): Observable<boolean> {
         // @ts-ignore

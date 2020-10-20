@@ -12,9 +12,9 @@ import {environment} from '../../../environments/environment';
 export class ChatsCompilerService {
 
     constructor(
-        private latestMessagesApi: LatestMessagesApiService,
-        private userManager: UserManagerService,
-        private messagesListApiService: MessagesListApiService
+        private readonly latestMessagesApi: LatestMessagesApiService,
+        private readonly userManager: UserManagerService,
+        private readonly messagesListApiService: MessagesListApiService
     ) {
     }
 

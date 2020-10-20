@@ -15,7 +15,7 @@ export class MasterPickerPopoverComponent extends Reinitable {
     public static master$: BehaviorSubject<Master> = new BehaviorSubject<Master>(undefined);
     public masterList$: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
 
-    constructor(private masterManager: MasterManagerService) {
+    constructor(private readonly masterManager: MasterManagerService) {
         super();
     }
 

@@ -23,12 +23,12 @@ export class ContactsTabComponent implements OnInit, OnChanges {
     @Input() public clientId: number;
     @Input() public toFillFormData: ClientContactInterface[] = [];
     @Input() public submittable: boolean = true;
-    private contactsList: string[] = [];
+    private readonly contactsList: string[] = [];
     private defaultClientContacts: ClientContactInterface[];
 
     constructor(
         public formService: ContactsTabFormService,
-        private contactApiService: ContactApiService
+        private readonly contactApiService: ContactApiService
     ) {
     }
 

@@ -26,11 +26,11 @@ export class ServicePublishStepOneComponent extends Reinitable {
     private isReinitialized: boolean = false;
 
     constructor(
-        private categoriesApi: CategoriesApiService,
-        private subcategoriesApi: SubcategoriesApiService,
+        private readonly categoriesApi: CategoriesApiService,
+        private readonly subcategoriesApi: SubcategoriesApiService,
         public formService: ServicePublishStepOneFormService,
-        private servicePublishDataHolderService: ServicePublishDataHolderService,
-        private serviceStepsNavigationService: ServiceStepsNavigationService,
+        private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
+        private readonly serviceStepsNavigationService: ServiceStepsNavigationService,
         public trans: TranslationService
     ) {
         super();

@@ -23,11 +23,11 @@ import {map} from 'rxjs/operators';
 export class ServicePublishFinalStepComponent extends Reinitable {
 
     constructor(
-        private servicePublish: ServicePublishService,
-        private popoverController: PopoverController,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly servicePublish: ServicePublishService,
+        private readonly popoverController: PopoverController,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private masterLocationApi: MasterLocationApiService
+        private readonly masterLocationApi: MasterLocationApiService
     ) {
         super();
     }

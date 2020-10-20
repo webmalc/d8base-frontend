@@ -31,8 +31,8 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
     constructor(
         public platform: Platform,
-        private photoService: PhotoService,
-        private fileService: FileService
+        private readonly photoService: PhotoService,
+        private readonly fileService: FileService
     ) {
     }
 

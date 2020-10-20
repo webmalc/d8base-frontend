@@ -11,10 +11,10 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 export class ServicePublishAuthStateManagerService {
 
     constructor(
-        private auth: AuthenticationService,
-        private masterManager: MasterManagerService,
-        private userManager: UserManagerService,
-        private servicePublishDataHolder: ServicePublishDataHolderService
+        private readonly auth: AuthenticationService,
+        private readonly masterManager: MasterManagerService,
+        private readonly userManager: UserManagerService,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService
     ) {
     }
 

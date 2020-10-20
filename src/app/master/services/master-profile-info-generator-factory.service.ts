@@ -32,19 +32,19 @@ import {map, switchMap} from 'rxjs/operators';
 export class MasterProfileInfoGeneratorFactoryService {
 
     constructor(
-        private masterManager: MasterManagerService,
-        private masterLocationApi: MasterLocationApiService,
-        private masterContactApi: MasterContactsApiService,
-        private masterTagsApi: TagsApiService,
-        private userManager: UserManagerService,
-        private countriesApi: CountriesApiService,
-        private languagesApi: LanguagesApiService,
-        private userLanguagesApi: UserLanguagesApiService,
-        private masterExperienceApi: ExperienceApiService,
-        private masterEducationApi: EducationApiService,
-        private certificatesApi: CertificatesApiService,
-        private publicReviewsApi: ReviewsReadonlyApiService,
-        private masterReadonlyApi: MasterReadonlyApiService
+        private readonly masterManager: MasterManagerService,
+        private readonly masterLocationApi: MasterLocationApiService,
+        private readonly masterContactApi: MasterContactsApiService,
+        private readonly masterTagsApi: TagsApiService,
+        private readonly userManager: UserManagerService,
+        private readonly countriesApi: CountriesApiService,
+        private readonly languagesApi: LanguagesApiService,
+        private readonly userLanguagesApi: UserLanguagesApiService,
+        private readonly masterExperienceApi: ExperienceApiService,
+        private readonly masterEducationApi: EducationApiService,
+        private readonly certificatesApi: CertificatesApiService,
+        private readonly publicReviewsApi: ReviewsReadonlyApiService,
+        private readonly masterReadonlyApi: MasterReadonlyApiService
     ) {
     }
 

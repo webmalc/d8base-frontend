@@ -11,7 +11,7 @@ export class TokenManagerService {
     private tokenData: AuthResponseInterface = undefined;
     private readonly TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 
-    constructor(private storage: StorageManagerService) {}
+    constructor(private readonly storage: StorageManagerService) {}
 
     public getAccessToken(): Promise<string> {
         if (undefined !== this.tokenData && null !== this.tokenData) {

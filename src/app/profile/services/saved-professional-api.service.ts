@@ -10,9 +10,9 @@ import {MasterInterface} from '@app/core/interfaces/master.interface';
 
 @Injectable()
 export class SavedProfessionalApiService {
-    private url: string = environment.backend.saved_professionals;
+    private readonly url: string = environment.backend.saved_professionals;
 
-    constructor(private api: ApiClientService) {
+    constructor(private readonly api: ApiClientService) {
     }
 
     public getAll$(): Observable<SavedProfessionalInterface<number>[]> {

@@ -11,7 +11,7 @@ import {UserLocation} from '@app/core/models/user-location';
 })
 export class RegistrationPage implements OnInit {
 
-    constructor(private registrationService: RegistrationService, private router: Router) {
+    constructor(private readonly registrationService: RegistrationService, private readonly router: Router) {
     }
 
     public ngOnInit(): void {

@@ -20,7 +20,7 @@ export class TimetableComponent extends Reinitable {
 
     constructor(
         public servicePublishDataHolderService: ServicePublishDataHolderService,
-        private location: Location,
+        private readonly location: Location,
         public formService: ServicePublishStepSevenTimetableFormService,
         private readonly popoverController: PopoverController
     ) {

@@ -5,10 +5,10 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class NumberDirective {
 
-    private regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*)?$/g);
-    private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home' ];
+    private readonly regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*)?$/g);
+    private readonly specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home' ];
 
-    constructor(private el: ElementRef) {
+    constructor(private readonly el: ElementRef) {
     }
 
     @HostListener('keydown', ['$event'])

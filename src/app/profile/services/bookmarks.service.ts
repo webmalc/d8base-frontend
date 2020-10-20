@@ -16,8 +16,8 @@ export class BookmarksService {
     private readonly url = environment.backend.saved_professionals;
 
     constructor(
-        private savedService: SavedProfessionalApiService,
-        private masterManager: MasterManagerService
+        private readonly savedService: SavedProfessionalApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

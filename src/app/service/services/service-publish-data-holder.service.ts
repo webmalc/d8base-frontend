@@ -25,7 +25,7 @@ export class ServicePublishDataHolderService {
     } = {};
     private readonly storageKey = 'service_publish_data';
 
-    constructor(private storageManager: StorageManagerService) {
+    constructor(private readonly storageManager: StorageManagerService) {
         this.loadFromStorage();
     }
 

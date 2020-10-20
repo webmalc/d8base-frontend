@@ -11,8 +11,8 @@ import {filter} from 'rxjs/operators';
 export class FcmDeviceService {
 
     constructor(
-        private fcmDevicesApi: FcmDevicesApiService,
-        private auth: AuthenticationService
+        private readonly fcmDevicesApi: FcmDevicesApiService,
+        private readonly auth: AuthenticationService
     ) {
     }
 

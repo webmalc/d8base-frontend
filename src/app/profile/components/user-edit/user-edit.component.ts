@@ -18,9 +18,9 @@ export class UserEditComponent implements OnInit {
     public formFields = ProfileFormFields;
 
     constructor(
-        private profileService: ProfileService,
-        private location: Location,
-        private registerEmailApi: RegisterEmailApiService
+        private readonly profileService: ProfileService,
+        private readonly location: Location,
+        private readonly registerEmailApi: RegisterEmailApiService
     ) {
     }
 

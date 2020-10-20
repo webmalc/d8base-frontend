@@ -13,9 +13,9 @@ import {map, mergeMap, switchMap} from 'rxjs/operators';
 export class ServicesGeneratorFactoryService {
 
     constructor(
-        private servicesApi: ServicesApiService,
-        private serviceTagsApi: ServiceTagsApiService,
-        private masterManager: MasterManagerService
+        private readonly servicesApi: ServicesApiService,
+        private readonly serviceTagsApi: ServiceTagsApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

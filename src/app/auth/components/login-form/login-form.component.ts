@@ -13,7 +13,7 @@ export class LoginFormComponent implements OnInit {
 
     @Input() public errorMessage: string;
     public readonly formFields = LoginFormFields;
-    @Output() private user = new EventEmitter<Credentials>();
+    @Output() private readonly user = new EventEmitter<Credentials>();
 
     constructor(
         public readonly loginFormService: LoginFormService,

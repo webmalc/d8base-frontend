@@ -26,10 +26,10 @@ export class ServicePublishStepTwoComponent extends Reinitable {
     public readonly formFields = ServicePublishStepTwoFormFields;
     public currencyList$: BehaviorSubject<Currency[]> =
         new BehaviorSubject<Currency[]>([]);
-    private defaultDuration = ['days', 'hours', 'minutes'];
+    private readonly defaultDuration = ['days', 'hours', 'minutes'];
 
     constructor(
-        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public formService: ServicePublishStepTwoFormService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
         public currencyList: CurrencyListApiService,
