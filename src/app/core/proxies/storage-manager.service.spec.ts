@@ -5,10 +5,10 @@ import {StorageManagerService} from './storage-manager.service';
 
 describe('StorageManagerService', () => {
 
-  let StorageMock: Partial<Storage>;
+  let storageMock: Partial<Storage>;
 
   beforeEach(() => {
-    StorageMock = {
+    storageMock = {
       get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
       set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null))
     };
@@ -16,7 +16,7 @@ describe('StorageManagerService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      { provide: Storage, useValue: StorageMock },
+      { provide: Storage, useValue: storageMock },
       StorageManagerService
     ],
     imports: [

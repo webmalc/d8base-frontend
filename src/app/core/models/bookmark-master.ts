@@ -4,6 +4,7 @@ import {Expose} from 'class-transformer';
 import {MasterInterface} from '@app/core/interfaces/master.interface';
 
 export class BookmarkMaster implements SavedProfessionalInterface<MasterInterface> {
+    // tslint:disable:variable-name
     @Expose() public created: string;
     @Expose() public created_by: number;
     @Expose() public id: number;
