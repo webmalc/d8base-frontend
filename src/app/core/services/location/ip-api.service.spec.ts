@@ -6,7 +6,7 @@ import {IpApiService} from './ip-api.service';
 describe('IpApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      {provide: HttpClient, useValue: { post: () => {} }},
+      {provide: HttpClient, useValue: { post: () => undefined }},
       IpApiService
     ]
   }));

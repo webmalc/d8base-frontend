@@ -1,5 +1,5 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
@@ -10,7 +10,7 @@ import {MasterManagerService} from '@app/core/services/master-manager.service';
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
     public errorMessage: string;
 
@@ -19,9 +19,6 @@ export class LoginPage implements OnInit {
         private readonly router: Router,
         private readonly masterManager: MasterManagerService
     ) {
-    }
-
-    public ngOnInit(): void {
     }
 
     public onSubmitLoginForm(user: Credentials): void {
@@ -35,7 +32,7 @@ export class LoginPage implements OnInit {
                 if (400 === error.status && error.error.error === 'invalid_grant') {
                     this.errorMessage = 'login-page.incorrect-login-data';
                 } else {
-                    console.log(error.error);
+                    console.error(error.error);
                 }
             }
         );

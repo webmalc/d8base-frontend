@@ -39,9 +39,10 @@ export class ServicePublishDataHolderService {
         if (!this.stepsData[step]) {
             this.stepsData[step] = {};
         }
-        for (const k in data) {
-            this.stepsData[step][k] = data[k];
-        }
+        this.stepsData[step] = {
+            ...this.stepsData[step],
+            ...data
+        };
 
         return this.updateStorage();
     }

@@ -35,11 +35,15 @@ export class ServicePublishFinalStepComponent extends Reinitable {
     public publish(): void {
         if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster) {
             this.popover().then(() => this.servicePublish.publish().subscribe(
-                () => console.log('done')
+                () => {
+                    // TODO: show feedback about operation success
+                }
             ));
         } else {
             this.servicePublish.publish().subscribe(
-                () => console.log('done')
+                () => {
+                    // TODO: show feedback about operation success
+                }
             );
         }
     }

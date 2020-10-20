@@ -5,7 +5,6 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
-import {SharedModule} from '../../../shared/shared.module';
 import {ResetPasswordApiService} from '../../services/reset-password-api.service';
 import { ResetPasswordPage } from './reset-password.page';
 
@@ -36,5 +35,5 @@ describe('ResetPasswordPage', () => {
     expect(component).toBeTruthy();
   });
 
-    xit('should be some tests');
+  xit('should be some tests');
 });

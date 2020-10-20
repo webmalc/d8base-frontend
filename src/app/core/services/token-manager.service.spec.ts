@@ -1,9 +1,33 @@
-import {fakeAsync, flush, TestBed, tick} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {TokenManagerService} from './token-manager.service';
+
+export class StorageManagerMock {
+
+    private readonly data: object = {
+        api_token: null,
+        refresh_token: null
+    };
+
+    public get(storageKey: string): Promise<any> {
+        return Promise.resolve(this.data[storageKey]);
+    }
+
+    public set(storageKey: string, data: any): Promise<any> {
+        this.data[storageKey] = data;
+
+        return Promise.resolve(this.data[storageKey]);
+    }
+
+    public remove(storageKey: string): Promise<any> {
+        this.data[storageKey] = null;
+
+        return Promise.resolve();
+    }
+}
 
 describe('TokenManagerService', () => {
 
@@ -117,27 +141,3 @@ describe('TokenManagerService', () => {
     }));
 
 });
-
-export class StorageManagerMock {
-
-    private readonly data: object = {
-        api_token: null,
-        refresh_token: null
-    };
-
-    public get(storageKey: string): Promise<any> {
-        return Promise.resolve(this.data[storageKey]);
-    }
-
-    public set(storageKey: string, data: any): Promise<any> {
-        this.data[storageKey] = data;
-
-        return Promise.resolve(this.data[storageKey]);
-    }
-
-    public remove(storageKey: string): Promise<any> {
-        this.data[storageKey] = null;
-
-        return Promise.resolve();
-    }
-}

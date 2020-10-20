@@ -56,7 +56,8 @@ describe('AuthInterceptor', () => {
         expect(service).toBeTruthy();
     });
 
-    // Argument of type '{ access_token: string; refresh_token: string; }' is not assignable to parameter of type 'AuthResponseInterface | AsymmetricMatcher<any>'.
+    // Argument of type '{ access_token: string; refresh_token: string; }'
+    //     is not assignable to parameter of type 'AuthResponseInterface | AsymmetricMatcher<any>'.
     // it('should save new tokens if access token has expired', fakeAsync(() => {
     //     tokenManager.needToRefresh.and.returnValue(Promise.resolve(true));
     //     tokenManager.getRefreshToken.and.returnValue(Promise.resolve('refresh_token'));

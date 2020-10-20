@@ -78,8 +78,10 @@ export class ProfileService {
 
     public updateUser(user: Partial<User>): void {
         this.userManager.updateUser(user).pipe().subscribe(
-            (updatedUser: User) => console.log(updatedUser),
-            (error) => console.log(error.error)
+            () => {
+                // TODO: show feedback about operation success
+            },
+            (error) => console.error(error.error)
         );
     }
 

@@ -43,7 +43,9 @@ export class AboutEditComponent implements OnInit {
 
     public submitForm(): void {
         this.userManager.updateUser(plainToClass(User, this.form.getRawValue())).subscribe(
-            user => console.log('updated')
+            user => {
+                // TODO: show feedback about operation success
+            }
         );
     }
 }

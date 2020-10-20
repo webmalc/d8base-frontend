@@ -30,7 +30,7 @@ export class MessageListUpdaterService {
                     interlocutorId, this.messagesPerPage
                 ).subscribe(
                     data => subscriber.next(data),
-                    err => console.log(err)
+                    err => console.error(err)
                 ), this.updateInterval);
             }
         );

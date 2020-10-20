@@ -34,7 +34,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
     private showMessage(message: string, duration: number = 3000): void {
         if (this.platformId.toString() === 'server') {
-            console.log(message);
+            console.error(message);
         } else {
             this.toaster.create({message, duration}).then(
                 toast => toast.present()

@@ -49,7 +49,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
             this.checkEmailSubscription = this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)
                 .subscribe(
                     val => this.isUserExists = val,
-                    err => console.log(err)
+                    err => console.error(err)
                 );
         }
     }

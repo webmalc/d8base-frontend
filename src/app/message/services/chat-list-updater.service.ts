@@ -13,7 +13,10 @@ export class ChatListUpdaterService {
     private timer: Timer;
     private readonly updateInterval: number = environment.message.chat_list_update_interval_ms;
 
-    constructor(private readonly chatsCompilerService: ChatsCompilerService, private readonly notificationWorker: NotificationWorkerService) {
+    constructor(
+        private readonly chatsCompilerService: ChatsCompilerService,
+        private readonly notificationWorker: NotificationWorkerService
+    ) {
     }
 
     public receiveUpdates(): Observable<AbstractMessage[]> {

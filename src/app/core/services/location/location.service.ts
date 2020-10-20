@@ -94,6 +94,7 @@ export class LocationService {
                 ipData = await ipService.getData();
                 break;
             } catch (e) {
+                // ignore errors
             }
         }
 
