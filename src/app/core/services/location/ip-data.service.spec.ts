@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IpDataService } from './ip-data.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { IpDataService } from './ip-data.service';
 
 describe('IpDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
