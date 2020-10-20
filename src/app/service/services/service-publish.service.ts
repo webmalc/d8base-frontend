@@ -24,16 +24,16 @@ import {map, switchMap, tap} from 'rxjs/operators';
 export class ServicePublishService {
 
     constructor(
-        private servicePublishDataHolder: ServicePublishDataHolderService,
-        private masterManager: MasterManagerService,
-        private userManager: UserManagerService,
-        private serviceApi: ServicesApiService,
-        private servicePhotosApi: ServicePhotoApiService,
-        private serviceScheduleApi: ServiceScheduleApiService,
-        private serviceLocationApi: ServiceLocationApiService,
-        private masterLocationApi: MasterLocationApiService,
-        private servicePriceApi: PricesApiService,
-        private servicePublishDataFormatter: ServicePublishDataPreparerService
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly masterManager: MasterManagerService,
+        private readonly userManager: UserManagerService,
+        private readonly serviceApi: ServicesApiService,
+        private readonly servicePhotosApi: ServicePhotoApiService,
+        private readonly serviceScheduleApi: ServiceScheduleApiService,
+        private readonly serviceLocationApi: ServiceLocationApiService,
+        private readonly masterLocationApi: MasterLocationApiService,
+        private readonly servicePriceApi: PricesApiService,
+        private readonly servicePublishDataFormatter: ServicePublishDataPreparerService
     ) {
     }
 

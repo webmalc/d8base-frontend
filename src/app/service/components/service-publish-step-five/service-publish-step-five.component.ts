@@ -17,7 +17,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
 
     constructor(
         public formService: ServicePublishStepFiveFormService,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService
     ) { }
 

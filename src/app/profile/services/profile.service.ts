@@ -17,15 +17,15 @@ export class ProfileService {
 
     public form: FormGroup;
     public avatarForm: FormGroup;
-    private languages$: BehaviorSubject<Language[]>;
+    private readonly languages$: BehaviorSubject<Language[]>;
 
     constructor(
-        private userManager: UserManagerService,
-        private formService: ProfileFormService,
-        private languagesApi: LanguagesApiService,
-        private formBuilder: FormBuilder,
-        private locationService: LocationService,
-        private userLocationApi: UserLocationApiService
+        private readonly userManager: UserManagerService,
+        private readonly formService: ProfileFormService,
+        private readonly languagesApi: LanguagesApiService,
+        private readonly formBuilder: FormBuilder,
+        private readonly locationService: LocationService,
+        private readonly userLocationApi: UserLocationApiService
     ) {
     }
 
@@ -78,8 +78,10 @@ export class ProfileService {
 
     public updateUser(user: Partial<User>): void {
         this.userManager.updateUser(user).pipe().subscribe(
-            (updatedUser: User) => console.log(updatedUser),
-            (error) => console.log(error.error)
+            () => {
+                // TODO: show feedback about operation success
+            },
+            (error) => console.error(error.error)
         );
     }
 

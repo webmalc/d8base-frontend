@@ -19,9 +19,9 @@ export class MasterTagEditPage implements OnInit {
     private defaultTags: Tag[];
 
     constructor(
-        private formBuilder: FormBuilder,
-        private api: TagsApiService,
-        private masterManager: MasterManagerService
+        private readonly formBuilder: FormBuilder,
+        private readonly api: TagsApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 
@@ -45,9 +45,9 @@ export class MasterTagEditPage implements OnInit {
         forkJoin([
             this.api.deleteList(defaultArr.filter(x => !selected.includes(x)).map((val: string) => this.getDefaultTagByName(val))),
             this.api.createList(selected.filter(x => !defaultArr.includes(x)).map((val: string) => this.getNewTag(val)))
-        ]).subscribe(
-            res => console.log('updated')
-        );
+        ]).subscribe(() => {
+                // TODO: show feedback about operation success
+            });
     }
 
     private getNewTag(tagName: string): Tag {

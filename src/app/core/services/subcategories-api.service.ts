@@ -12,7 +12,7 @@ export class SubcategoriesApiService extends AbstractReadonlyApiService<Subcateg
 
     private readonly url = environment.backend.subcategory;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 

@@ -28,11 +28,11 @@ export class DirectComponent extends Reinitable implements OnDestroy {
     private updateSubscription: Subscription;
 
     constructor(
-        private route: ActivatedRoute,
+        private readonly route: ActivatedRoute,
         public directService: DirectServiceService,
-        private platform: Platform,
-        private popoverController: PopoverController,
-        private trans: TranslationService
+        private readonly platform: Platform,
+        private readonly popoverController: PopoverController,
+        private readonly trans: TranslationService
     ) {
         super();
     }

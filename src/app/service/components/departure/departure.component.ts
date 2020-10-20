@@ -18,8 +18,8 @@ export class DepartureComponent implements OnInit {
 
     constructor(
         public formService: ServicePublishStepSevenDepartureFormService,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
-        private location: Location
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly location: Location
     ) {
     }
 

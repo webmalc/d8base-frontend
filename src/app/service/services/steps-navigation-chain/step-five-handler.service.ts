@@ -9,7 +9,7 @@ import {Observable, of} from 'rxjs';
 export class StepFiveHandlerService extends AbstractHandler {
 
     constructor(
-        private servicePublishDataHolderService: ServicePublishDataHolderService
+        private readonly servicePublishDataHolderService: ServicePublishDataHolderService
     ) {
         super();
     }

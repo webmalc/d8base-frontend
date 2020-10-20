@@ -1,58 +1,10 @@
+import {RandomValuesProvider} from './random-values-provider';
+
 export interface Options {
     [key: string]: string | Options;
 }
 
 export class Autofixture {
-
-    public static createBoolean(): boolean {
-        return Math.random() > 0.5;
-    }
-
-    public static createString(length?: number): string {
-        // TODO use random-seed or randomatic
-        length = length || 10;
-        let result = '';
-        const buffer = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV1234567890';
-        for (let i = 0; i < length; i += 1) {
-            const offset = Math.floor(Math.random() * buffer.length);
-            result += buffer[offset];
-        }
-
-        return result;
-    }
-
-    public static createNumber(): number {
-        return 1000 * Math.random();
-    }
-
-    public static createNumberBelow(upperBound: number): number {
-        return upperBound - 1000 * Math.random();
-    }
-
-    public static createNumberAbove(lowerBound: number): number {
-        return lowerBound + 1000 * Math.random();
-    }
-
-    public static createNumberBetween(lowerBound: number, upperBound: number): number {
-        return lowerBound + (upperBound - lowerBound) * Math.random();
-    }
-
-    public static createInteger(): number {
-        return Math.floor(Autofixture.createNumber());
-    }
-
-    public static createIntegerBelow(upperBound: number): number {
-        return Math.floor(Autofixture.createNumberBelow(upperBound));
-    }
-
-    public static createIntegerAbove(lowerBound: number): number {
-        return Math.floor(Autofixture.createNumberAbove(lowerBound));
-    }
-
-    public static createIntegerBetween(lowerBound: number, upperBound: number): number {
-        return Math.floor(Autofixture.createNumberBetween(lowerBound, upperBound));
-    }
-
     public createMany<T extends object>(template: T, count?: number, options?: Options): T[] {
         count = count || 3;
         const results = [];
@@ -70,7 +22,7 @@ export class Autofixture {
         let childSpec: string;
         const elementCount = 3;
         let childElementTemplate;
-        this.throwIfOptionsContainsFieldsNotIn(template, options); // typo, Contain
+        this.throwIfOptionsContainFieldsNotIn(template, options);
 
         result = Object.assign({}, template);
 
@@ -79,24 +31,29 @@ export class Autofixture {
             childOptions = options && options[name] as Options;
             childSpec = (options && options[name] as string) || typeof result[name][0];
 
-            if (childSpec === 'skip') {
-                delete result[name];
-            } else if (childType === 'actualObject') {
-                result[name] = this.create(result[name], childOptions);
-            } else if (childType === 'arrayOfObjects') {
-                childElementTemplate = result[name][0];
-                result[name] = this.createMany(childElementTemplate, elementCount, childOptions);
-            } else if (childType === 'arrayOfPrimitives') {
-                result[name] = this.createManyPrimitiveFromSpec(elementCount, childSpec);
-            } else {
-                result[name] = this.createSimpleProperty(name, childType, options);
+            switch (childSpec) {
+                case('skip'):
+                    delete result[name];
+                    break;
+                case('actualObject'):
+                    result[name] = this.create(result[name], childOptions);
+                    break;
+                case('arrayOfObjects'):
+                    childElementTemplate = result[name][0];
+                    result[name] = this.createMany(childElementTemplate, elementCount, childOptions);
+                    break;
+                case('arrayOfPrimitives'):
+                    result[name] = this.createManyPrimitiveFromSpec(elementCount, childSpec);
+                    break;
+                default:
+                    result[name] = this.createSimpleProperty(name, childType, options);
             }
         });
 
         return result;
     }
 
-    private throwIfOptionsContainsFieldsNotIn<T>(template: T, options?: object): void {
+    private throwIfOptionsContainFieldsNotIn<T>(template: T, options?: object): void {
         if (!options) {
             return;
         }
@@ -170,11 +127,7 @@ export class Autofixture {
     }
 
     private throwOnUnsupportedType(type: string): void {
-        if (type === 'boolean' ||
-            type === 'string' ||
-            type === 'number' ||
-            type === 'actualObject' ||
-            type === 'arrayOfObjects') {
+        if (['boolean', 'string', 'number', 'actualObject', 'arrayOfObjects'].includes(type)) {
             return;
         }
         throw Error(`Autofixture cannot generate values of type ' ${type}'`);
@@ -191,7 +144,7 @@ export class Autofixture {
 
     private createPrimitiveFromSpec(spec: string): boolean | string | number {
         if (spec === 'boolean') {
-            return Autofixture.createBoolean();
+            return RandomValuesProvider.createBoolean();
         }
         if (/string/.test(spec)) {
             return this.createStringFromSpec(spec);
@@ -204,7 +157,7 @@ export class Autofixture {
 
     private createStringFromSpec(spec: string): string {
         if (spec === 'string') {
-            return Autofixture.createString();
+            return RandomValuesProvider.createString();
         }
 
         // string followed by length inside []
@@ -212,7 +165,7 @@ export class Autofixture {
         if (parsedString) {
             const length = parseInt(parsedString[1], 10);
 
-            return Autofixture.createString(length);
+            return RandomValuesProvider.createString(length);
         }
 
         throw new Error(`Invalid string autofixture spec: '${spec}'`);
@@ -238,12 +191,12 @@ export class Autofixture {
     private parseSimpleNumericalSpec(spec: string): () => number {
         if (spec === 'number') {
             return () => {
-                return Autofixture.createNumber();
+                return RandomValuesProvider.createNumber();
             };
         }
         if (spec === 'integer') {
             return () => {
-                return Autofixture.createInteger();
+                return RandomValuesProvider.createInteger();
             };
         }
 
@@ -266,23 +219,23 @@ export class Autofixture {
 
             if (isUpperBound) {
                 return () => {
-                    return Autofixture.createIntegerBelow(limit);
+                    return RandomValuesProvider.createIntegerBelow(limit);
                 };
             }
 
             return () => {
-                return Autofixture.createIntegerAbove(limit);
+                return RandomValuesProvider.createIntegerAbove(limit);
             };
         }
 
         if (isUpperBound) {
             return () => {
-                return Autofixture.createNumberBelow(limit);
+                return RandomValuesProvider.createNumberBelow(limit);
             };
         }
 
         return () => {
-            return Autofixture.createNumberAbove(limit);
+            return RandomValuesProvider.createNumberAbove(limit);
         };
     }
 
@@ -316,13 +269,12 @@ export class Autofixture {
             this.validateIsInteger(upperBoundAsString);
 
             return () => {
-                return Autofixture.createIntegerBetween(lowerBound, upperBound);
+                return RandomValuesProvider.createIntegerBetween(lowerBound, upperBound);
             };
         }
 
         return () => {
-            return Autofixture.createNumberBetween(lowerBound, upperBound);
+            return RandomValuesProvider.createNumberBetween(lowerBound, upperBound);
         };
     }
 }
-

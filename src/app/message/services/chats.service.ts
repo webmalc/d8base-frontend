@@ -14,9 +14,9 @@ export class ChatsService {
     private chatsSubscription: Subscription;
 
     constructor(
-        private chatsCompilerService: ChatsCompilerService,
-        private chatListUpdater: ChatListUpdaterService,
-        private search: ChatsSearchService
+        private readonly chatsCompilerService: ChatsCompilerService,
+        private readonly chatListUpdater: ChatListUpdaterService,
+        private readonly search: ChatsSearchService
     ) {
     }
 

@@ -9,7 +9,7 @@ import {Storage} from '@ionic/storage';
 })
 export class StorageManagerService {
 
-    constructor(private storage: Storage) {}
+    constructor(private readonly storage: Storage) {}
 
     public get(storageKey: string): Promise<any> {
         return this.storage.get(storageKey);

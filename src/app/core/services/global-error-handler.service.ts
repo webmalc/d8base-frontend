@@ -9,8 +9,8 @@ import {Platform, ToastController} from '@ionic/angular';
 export class GlobalErrorHandlerService implements ErrorHandler {
 
     constructor(public toaster: ToastController,
-                private router: Router,
-                @Inject(PLATFORM_ID)private platformId: object
+                private readonly router: Router,
+                @Inject(PLATFORM_ID)private readonly platformId: object
     ) {
     }
 
@@ -34,7 +34,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
     private showMessage(message: string, duration: number = 3000): void {
         if (this.platformId.toString() === 'server') {
-            console.log(message);
+            console.error(message);
         } else {
             this.toaster.create({message, duration}).then(
                 toast => toast.present()

@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
-import {SettingsFormService} from './settings-form.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {SettingsFormService} from './settings-form.service';
 
 describe('SettingsFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({

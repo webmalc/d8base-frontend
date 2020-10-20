@@ -19,7 +19,7 @@ export class UserLocationApiService extends AbstractApiService<ClientLocationInt
 
     private readonly URL = environment.backend.location;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 

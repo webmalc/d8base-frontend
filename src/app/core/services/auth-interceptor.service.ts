@@ -11,7 +11,7 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private authFactory: AuthenticationFactory) {
+    constructor(private readonly authFactory: AuthenticationFactory) {
     }
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

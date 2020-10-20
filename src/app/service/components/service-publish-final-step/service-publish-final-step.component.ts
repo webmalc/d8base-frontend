@@ -23,11 +23,11 @@ import {map} from 'rxjs/operators';
 export class ServicePublishFinalStepComponent extends Reinitable {
 
     constructor(
-        private servicePublish: ServicePublishService,
-        private popoverController: PopoverController,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly servicePublish: ServicePublishService,
+        private readonly popoverController: PopoverController,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private masterLocationApi: MasterLocationApiService
+        private readonly masterLocationApi: MasterLocationApiService
     ) {
         super();
     }
@@ -35,11 +35,15 @@ export class ServicePublishFinalStepComponent extends Reinitable {
     public publish(): void {
         if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster) {
             this.popover().then(() => this.servicePublish.publish().subscribe(
-                () => console.log('done')
+                () => {
+                    // TODO: show feedback about operation success
+                }
             ));
         } else {
             this.servicePublish.publish().subscribe(
-                () => console.log('done')
+                () => {
+                    // TODO: show feedback about operation success
+                }
             );
         }
     }

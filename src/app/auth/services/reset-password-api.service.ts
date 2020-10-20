@@ -7,9 +7,9 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class ResetPasswordApiService {
 
-    private URL = environment.backend.reset_password;
+    private readonly URL = environment.backend.reset_password;
 
-    constructor(private client: ApiClientService) { }
+    constructor(private readonly client: ApiClientService) { }
 
     public reset(data: PasswordRecoveryInterface): Observable<PasswordRecoveryInterface> {
         return this.client.post(this.URL, data);

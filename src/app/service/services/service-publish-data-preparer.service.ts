@@ -25,7 +25,7 @@ import {plainToClass} from 'class-transformer';
 @Injectable()
 export class ServicePublishDataPreparerService {
 
-    constructor(private servicePublishDataHolder: ServicePublishDataHolderService) {
+    constructor(private readonly servicePublishDataHolder: ServicePublishDataHolderService) {
     }
 
     public async getData(): Promise<{

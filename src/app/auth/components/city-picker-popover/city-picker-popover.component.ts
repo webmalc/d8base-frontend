@@ -15,7 +15,7 @@ export class CityPickerPopoverComponent implements OnInit {
     public static city$: ReplaySubject<City> = new ReplaySubject<City>(1);
     public list$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
 
-    constructor(private locationService: LocationService, private citiesApi: CitiesApiService) {
+    constructor(private readonly locationService: LocationService, private readonly citiesApi: CitiesApiService) {
     }
 
     public ngOnInit(): void {

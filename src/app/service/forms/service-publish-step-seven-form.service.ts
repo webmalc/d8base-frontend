@@ -8,7 +8,7 @@ export class ServicePublishStepSevenFormService {
 
     public form: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private readonly formBuilder: FormBuilder) {
     }
 
     public createForm(data?: StepSevenDataInterface): void {

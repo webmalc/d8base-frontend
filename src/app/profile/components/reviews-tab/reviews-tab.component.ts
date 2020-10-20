@@ -11,7 +11,7 @@ export class ReviewsTabComponent implements OnInit {
 
     public reviewsList: Review[] = [];
 
-    constructor(private reviewsApi: ReviewsApiService) { }
+    constructor(private readonly reviewsApi: ReviewsApiService) { }
 
     public ngOnInit(): void {
         this.reviewsApi.get().subscribe(

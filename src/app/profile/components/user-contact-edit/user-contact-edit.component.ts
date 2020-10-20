@@ -13,7 +13,7 @@ import {UserContactApiService} from '@app/profile/services/user-contact-api.serv
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
 import {forkJoin, Observable, of, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-contact-edit',
@@ -31,19 +31,21 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
     private clientContactsApiService: ContactsApiServiceInterface;
 
     constructor(
-        private userContactApiService: UserContactApiService,
-        private masterContactApiService: MasterContactsApiService,
-        private route: ActivatedRoute,
-        private contactsApi: ContactApiService,
-        private formBuilder: FormBuilder,
-        private location: Location,
-        private masterManager: MasterManagerService
+        private readonly userContactApiService: UserContactApiService,
+        private readonly masterContactApiService: MasterContactsApiService,
+        private readonly route: ActivatedRoute,
+        private readonly contactsApi: ContactApiService,
+        private readonly formBuilder: FormBuilder,
+        private readonly location: Location,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 
     public deleteContact(): void {
         if (parseInt(this.route.snapshot.paramMap.get('contact-id'), 10)) {
-            this.clientContactsApiService.delete(this.contact).subscribe(() => console.log('deleted'));
+            this.clientContactsApiService.delete(this.contact).subscribe(() => {
+                // TODO: show feedback about operation success
+            });
         }
         this.location.back();
     }
@@ -104,23 +106,22 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
     }
 
     public submitForm(): void {
-        if (parseInt(this.route.snapshot.paramMap.get('contact-id'), 10)) {
-            this.contact.value = this.form.getRawValue().userContact;
-            this.clientContactsApiService.put(this.contact).subscribe(
-                res => console.log(res)
+        const contactId = parseInt(this.route.snapshot.paramMap.get('contact-id'), 10);
+        const userContact = this.form.getRawValue().userContact;
+        const request = contactId
+            ? this.clientContactsApiService.put({
+                ...this.contact,
+                value: userContact
+            })
+            : this.getNewClientContactModel().pipe(
+                switchMap(contact => this.clientContactsApiService.create({
+                        ...contact,
+                        value: userContact,
+                        contact: this.form.getRawValue().contact
+                    })
+                )
             );
-        } else {
-            this.getNewClientContactModel().subscribe(
-                contact => {
-                    contact.value = this.form.getRawValue().userContact;
-                    contact.contact = this.form.getRawValue().contact;
-                    this.clientContactsApiService.create(contact).subscribe(
-                        res => console.log(res)
-                    );
-                }
-            );
-        }
-        this.location.back();
+        request.subscribe(() => this.location.back());
     }
 
     private disableContact(): void {

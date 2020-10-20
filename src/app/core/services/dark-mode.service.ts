@@ -7,7 +7,7 @@ import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 export class DarkModeService {
     private readonly DARK_MODE_STORAGE_KEY = 'is_dark_mode';
 
-    constructor(private storage: StorageManagerService) {
+    constructor(private readonly storage: StorageManagerService) {
     }
 
     public async isDarkMode(): Promise<boolean> {

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GlobalErrorHandlerService } from './global-error-handler.service';
 import {RouterTestingModule} from '@angular/router/testing';
+import { GlobalErrorHandlerService } from './global-error-handler.service';
 
 describe('GlobalErrorHandlerService', () => {
   beforeEach(() => TestBed.configureTestingModule({

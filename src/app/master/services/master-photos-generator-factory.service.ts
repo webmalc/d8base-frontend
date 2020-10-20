@@ -11,8 +11,8 @@ import {map, switchMap} from 'rxjs/operators';
 export class MasterPhotosGeneratorFactoryService {
 
     constructor(
-        private masterPhotosApi: MasterPhotosApiService,
-        private masterManager: MasterManagerService
+        private readonly masterPhotosApi: MasterPhotosApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

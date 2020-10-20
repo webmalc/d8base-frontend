@@ -15,9 +15,9 @@ import {IpServicesHolderService} from './ip-services-holder.service';
 export class LocationService {
 
     constructor(
-        private ipServicesHolder: IpServicesHolderService,
-        private geolocation: Geolocation,
-        private locationAccuracy: LocationAccuracy
+        private readonly ipServicesHolder: IpServicesHolderService,
+        private readonly geolocation: Geolocation,
+        private readonly locationAccuracy: LocationAccuracy
     ) {
     }
 
@@ -94,6 +94,7 @@ export class LocationService {
                 ipData = await ipService.getData();
                 break;
             } catch (e) {
+                // ignore errors
             }
         }
 

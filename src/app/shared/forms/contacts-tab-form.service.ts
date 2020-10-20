@@ -8,7 +8,7 @@ export class ContactsTabFormService {
 
     public form: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private readonly formBuilder: FormBuilder) {
     }
 
     get controls(): string[] {

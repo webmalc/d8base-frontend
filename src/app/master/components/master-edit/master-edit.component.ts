@@ -21,7 +21,7 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
     public levelOptions = ['junior', 'middle', 'senior'];
 
     constructor(
-        private subcategoriesApi: SubcategoriesApiService
+        private readonly subcategoriesApi: SubcategoriesApiService
     ) {
         super();
     }

@@ -1,6 +1,7 @@
 import {Expose} from 'class-transformer';
 
 export class Plugin {
+    // tslint:disable:variable-name
     @Expose() public id: number;
     @Expose() public title?: string;
     @Expose() public description?: string;

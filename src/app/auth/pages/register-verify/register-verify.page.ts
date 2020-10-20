@@ -14,7 +14,7 @@ export class RegisterVerifyPage implements OnInit {
     public success: boolean = false;
     private readonly VERIFY_URL = environment.backend.verify_registration;
 
-    constructor(private client: ApiClientService, private activatedRoute: ActivatedRoute) {
+    constructor(private readonly client: ApiClientService, private readonly activatedRoute: ActivatedRoute) {
     }
 
     public ngOnInit(): void {

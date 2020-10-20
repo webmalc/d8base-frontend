@@ -8,7 +8,7 @@ import {debounceTime} from 'rxjs/operators';
 export class DebounceDirective implements OnInit, OnDestroy {
 
     @Output() public debounceClick = new EventEmitter();
-    private clicks = new Subject();
+    private readonly clicks = new Subject();
     private subscription: Subscription;
 
     public ngOnInit(): void {

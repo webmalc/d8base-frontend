@@ -1,9 +1,9 @@
 import {TestBed} from '@angular/core/testing';
 
-import {TranslationService} from './translation.service';
-import {TranslateModule} from '@ngx-translate/core';
-import {IonicStorageModule} from '@ionic/storage';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {IonicStorageModule} from '@ionic/storage';
+import {TranslateModule} from '@ngx-translate/core';
+import {TranslationService} from './translation.service';
 
 describe('TranslationService', () => {
     beforeEach(() => TestBed.configureTestingModule({

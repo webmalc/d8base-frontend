@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ContactsTabFormService } from './contacts-tab-form.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ContactsTabFormService } from './contacts-tab-form.service';
 
 describe('ContactsTabFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({

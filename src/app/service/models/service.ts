@@ -2,6 +2,7 @@ import {Price} from '@app/service/models/price';
 import {Expose} from 'class-transformer';
 
 export class Service {
+    // tslint:disable:variable-name
     @Expose() public id: number;
     @Expose() public professional: number;
     @Expose() public name: string;

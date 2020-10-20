@@ -15,8 +15,8 @@ export class MasterProfilePortfolioComponent extends Reinitable {
     public masterId: number;
 
     constructor(
-        private route: ActivatedRoute,
-        private masterPhotosGenerator: MasterPhotosGeneratorFactoryService
+        private readonly route: ActivatedRoute,
+        private readonly masterPhotosGenerator: MasterPhotosGeneratorFactoryService
     ) {
         super();
     }

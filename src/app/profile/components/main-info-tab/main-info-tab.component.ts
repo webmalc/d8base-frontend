@@ -27,8 +27,8 @@ export class MainInfoTabComponent extends Reinitable {
 
     constructor(
         public profileService: ProfileService,
-        private sanitizer: DomSanitizer,
-        private userManager: UserManagerService
+        private readonly sanitizer: DomSanitizer,
+        private readonly userManager: UserManagerService
     ) {
         super();
     }

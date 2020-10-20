@@ -1,6 +1,7 @@
 import {Expose} from 'class-transformer';
 
 export class City {
+    // tslint:disable:variable-name
     @Expose() public id: number;
     @Expose() public slug: string;
     @Expose() public name: string;

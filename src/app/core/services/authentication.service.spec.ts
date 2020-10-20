@@ -10,6 +10,38 @@ import {AuthenticationService} from './authentication.service';
 import {TokenManagerService} from './token-manager.service';
 import {StorageManagerMock} from './token-manager.service.spec';
 
+class HttpMock {
+    public post(url: string, body: any | null, options?: {
+        headers?: HttpHeaders | {
+            [header: string]: string | string[];
+        };
+        observe?: 'body';
+        params?: HttpParams | {
+            [param: string]: string | string[];
+        };
+        reportProgress?: boolean;
+        responseType?: 'json';
+        withCredentials?: boolean;
+    }): Observable<AuthResponseInterface> {
+        if (body.hasOwnProperty('refresh_token')) {
+            return of({
+                access_token: 'refreshedAccessToken',
+                expires_in: 3600,
+                token_type: 'Baerer',
+                scope: 'read write groups',
+                refresh_token: 'refreshedRefreshToken'
+            });
+        }
+
+        return of({
+            access_token: 'access_token',
+            expires_in: 3600,
+            token_type: 'Baerer',
+            scope: 'read write groups',
+            refresh_token: 'refresh_token'
+        });
+    }
+}
 
 describe('AuthenticationService', () => {
 
@@ -117,37 +149,3 @@ describe('AuthenticationService', () => {
             );
     });
 });
-
-
-export class HttpMock {
-    public post(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | {
-            [header: string]: string | string[];
-        };
-        observe?: 'body';
-        params?: HttpParams | {
-            [param: string]: string | string[];
-        };
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-    }): Observable<AuthResponseInterface> {
-        if (body.hasOwnProperty('refresh_token')) {
-            return of({
-                access_token: 'refreshedAccessToken',
-                expires_in: 3600,
-                token_type: 'Baerer',
-                scope: 'read write groups',
-                refresh_token: 'refreshedRefreshToken'
-            });
-        }
-
-        return of({
-            access_token: 'access_token',
-            expires_in: 3600,
-            token_type: 'Baerer',
-            scope: 'read write groups',
-            refresh_token: 'refresh_token'
-        });
-    }
-}

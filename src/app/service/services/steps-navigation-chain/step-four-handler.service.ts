@@ -10,8 +10,8 @@ import {switchMap} from 'rxjs/operators';
 export class StepFourHandlerService extends AbstractHandler {
 
     constructor(
-        private servicePublishDataHolderService: ServicePublishDataHolderService,
-        private authenticationService: AuthenticationService
+        private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
+        private readonly authenticationService: AuthenticationService
     ) {
         super();
     }

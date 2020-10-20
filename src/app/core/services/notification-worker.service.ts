@@ -33,10 +33,10 @@ export class NotificationWorkerService {
             messaging.onTokenRefresh(() => {
                 messaging.getToken().then(
                     (refreshedToken: string) => {
-                        console.log(refreshedToken);
+                        console.warn(refreshedToken);
                     }).catch((err) => {
-                    console.error(err);
-                });
+                        console.error(err);
+                    });
             });
             resolve();
         });

@@ -14,7 +14,7 @@ export class BookmarksTabComponent implements OnInit, OnDestroy {
     private uSub: Subscription;
 
     constructor(
-        private bookmarksService: BookmarksService
+        private readonly bookmarksService: BookmarksService
     ) {
     }
 

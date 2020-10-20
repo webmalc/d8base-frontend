@@ -28,8 +28,8 @@ jobs:
               run: |
                 yes| cp ./src/environments/environment.ts.dist ./src/environments/environment.ts
 
-#            - name: Lint
-#              run: npm run lint
+            - name: Lint
+              run: npm run lint
 
             - name: Test
               run: npm run test -- --no-watch

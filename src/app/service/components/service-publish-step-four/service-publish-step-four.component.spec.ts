@@ -30,6 +30,20 @@ import {StepThreeHandlerService} from '../../services/steps-navigation-chain/ste
 import {StepTwoHandlerService} from '../../services/steps-navigation-chain/step-two-handler.service';
 import {ServicePublishStepFourComponent} from './service-publish-step-four.component';
 
+export class LocationServiceMock {
+    public getCurrentPosition(): Promise<Geoposition | null> {
+        return Promise.resolve(null);
+    }
+
+    public getMergedLocationData(): Promise<UserLocation | null> {
+        return Promise.resolve(null);
+    }
+
+    public async getIpLocationData(): Promise<IpLocation | null> {
+        return Promise.resolve(null);
+    }
+}
+
 describe('ServicePublishStepFourComponent', () => {
     let component: ServicePublishStepFourComponent;
     let fixture: ComponentFixture<ServicePublishStepFourComponent>;
@@ -78,18 +92,3 @@ describe('ServicePublishStepFourComponent', () => {
         expect(component).toBeTruthy();
     });
 });
-
-
-export class LocationServiceMock {
-    public getCurrentPosition(): Promise<Geoposition | null> {
-        return Promise.resolve(null);
-    }
-
-    public getMergedLocationData(): Promise<UserLocation | null> {
-        return Promise.resolve(null);
-    }
-
-    public async getIpLocationData(): Promise<IpLocation | null> {
-        return Promise.resolve(null);
-    }
-}

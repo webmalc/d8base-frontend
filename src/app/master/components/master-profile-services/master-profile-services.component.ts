@@ -19,10 +19,10 @@ export class MasterProfileServicesComponent {
     private serviceDefaultData: { service: Service, tags?: ServiceTag[] }[] = [];
 
     constructor(
-        private route: ActivatedRoute,
-        private servicesApi: ServicesApiService,
-        private searchService: MasterProfileServicesSearchService,
-        private serviceGeneratorFactory: ServicesGeneratorFactoryService
+        private readonly route: ActivatedRoute,
+        private readonly servicesApi: ServicesApiService,
+        private readonly searchService: MasterProfileServicesSearchService,
+        private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService
     ) {
     }
 

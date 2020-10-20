@@ -16,6 +16,16 @@ import {LoginFormService} from '../../forms/login-form.service';
 import {Credentials} from '../../interfaces/credentials';
 import {LoginPage} from './login.page';
 
+class ApiClientServiceMock {
+    public post(url: string, data: {username: string, password: string}): Observable<any> {
+        if (data.username === 'valid' && data.password === 'valid_pass') {
+            return of(true);
+        }
+
+        return throwError('err');
+    }
+}
+
 describe('LoginPage', () => {
     let component: LoginPage;
     let fixture: ComponentFixture<LoginPage>;
@@ -71,15 +81,5 @@ describe('LoginPage', () => {
         expect(router.navigateByUrl).not.toHaveBeenCalled();
     }));
 });
-
-class ApiClientServiceMock {
-    public post(url: string, data: {username: string, password: string}): Observable<any> {
-        if (data.username === 'valid' && data.password === 'valid_pass') {
-            return of(true);
-        }
-
-        return throwError('err');
-    }
-}
 
 // ** TODO: Need to title test

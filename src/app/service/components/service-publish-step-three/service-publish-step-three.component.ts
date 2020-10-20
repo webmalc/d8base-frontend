@@ -14,7 +14,7 @@ export class ServicePublishStepThreeComponent implements OnInit {
     public files: File[] = [];
 
     constructor(
-        private servicePublishDataHolderService: ServicePublishDataHolderService,
+        private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService
     ) {
     }

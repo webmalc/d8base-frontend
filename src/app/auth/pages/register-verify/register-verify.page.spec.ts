@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterVerifyPage } from './register-verify.page';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import { RegisterVerifyPage } from './register-verify.page';
 
 describe('RegisterVerifyPage', () => {
   let component: RegisterVerifyPage;

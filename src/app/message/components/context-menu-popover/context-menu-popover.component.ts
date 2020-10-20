@@ -14,7 +14,7 @@ export class ContextMenuPopoverComponent implements OnDestroy, OnInit {
     public static update$: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
     public message: Message;
 
-    constructor(private navParams: NavParams) {
+    constructor(private readonly navParams: NavParams) {
     }
 
     public ngOnInit(): void {

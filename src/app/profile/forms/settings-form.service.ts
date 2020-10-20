@@ -12,7 +12,7 @@ export class SettingsFormService {
     public currency: Array<{ value: string, display_name: string }>;
     public units = ['metric', 'imperial/US'];
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private readonly formBuilder: FormBuilder) {
     }
 
     public createForm(userSettings: UserSettings): FormGroup {
