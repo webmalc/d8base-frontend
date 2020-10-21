@@ -63,7 +63,7 @@ export class LocationService {
                                     type: 'Point',
                                     coordinates: [
                                         geolocation.coords.longitude,
-                                        geolocation.coords.latitude,
+                                        geolocation.coords.latitude
                                     ]
                                 };
                             } else if (null !== ipLocation) {
@@ -71,7 +71,7 @@ export class LocationService {
                                     type: 'Point',
                                     coordinates: [
                                         ipLocation.longitude,
-                                        ipLocation.latitude,
+                                        ipLocation.latitude
                                     ]
                                 };
                             } else {

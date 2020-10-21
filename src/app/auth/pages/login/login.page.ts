@@ -8,7 +8,7 @@ import {MasterManagerService} from '@app/core/services/master-manager.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
-    styleUrls: ['./login.page.scss'],
+    styleUrls: ['./login.page.scss']
 })
 export class LoginPage {
 

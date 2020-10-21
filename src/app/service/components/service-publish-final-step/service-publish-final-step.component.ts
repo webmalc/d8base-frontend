@@ -18,7 +18,7 @@ import {map} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-final-step',
     templateUrl: './service-publish-final-step.component.html',
-    styleUrls: ['./service-publish-final-step.component.scss'],
+    styleUrls: ['./service-publish-final-step.component.scss']
 })
 export class ServicePublishFinalStepComponent extends Reinitable {
 

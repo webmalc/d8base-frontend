@@ -7,7 +7,7 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 @Component({
     selector: 'app-service-publish-step-three',
     templateUrl: './service-publish-step-three.component.html',
-    styleUrls: ['./service-publish-step-three.component.scss'],
+    styleUrls: ['./service-publish-step-three.component.scss']
 })
 export class ServicePublishStepThreeComponent implements OnInit {
 

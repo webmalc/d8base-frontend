@@ -5,7 +5,7 @@ import {ServiceTag} from '@app/service/models/service-tag';
 @Component({
     selector: 'app-master-profile-service-presentation',
     templateUrl: './master-profile-service-presentation.component.html',
-    styleUrls: ['./master-profile-service-presentation.component.scss'],
+    styleUrls: ['./master-profile-service-presentation.component.scss']
 })
 export class MasterProfileServicePresentationComponent {
 

@@ -6,7 +6,7 @@ import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Language} from '@app/profile/models/language';
 
 @Injectable({
-        providedIn: 'root',
+        providedIn: 'root'
     }
 )
 // ** TODO: To find out right way about validation data from API
@@ -44,7 +44,7 @@ export class ProfileFormService {
                     user.email,
                     [
                         Validators.required,
-                        Validators.email,
+                        Validators.email
                     ]
                 ],
                 [ProfileFormFields.Gender]: [

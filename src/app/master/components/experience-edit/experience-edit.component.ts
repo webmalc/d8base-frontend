@@ -7,7 +7,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-experience-edit',
     templateUrl: './experience-edit.component.html',
-    styleUrls: ['./experience-edit.component.scss'],
+    styleUrls: ['./experience-edit.component.scss']
 })
 export class ExperienceEditComponent extends AbstractEditComponent<Experience> {
 

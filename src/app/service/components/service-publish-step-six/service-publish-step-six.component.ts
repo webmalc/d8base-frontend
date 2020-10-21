@@ -11,7 +11,7 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 @Component({
     selector: 'app-service-publish-step-six',
     templateUrl: './service-publish-step-six.component.html',
-    styleUrls: ['./service-publish-step-six.component.scss'],
+    styleUrls: ['./service-publish-step-six.component.scss']
 })
 export class ServicePublishStepSixComponent implements OnInit {
 

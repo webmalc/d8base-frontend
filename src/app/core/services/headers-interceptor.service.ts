@@ -55,7 +55,7 @@ export class HeadersInterceptor implements HttpInterceptor {
             environment.backend.url + environment.backend.countries,
             environment.backend.url + environment.backend.cities,
             environment.backend.url + environment.backend.reset_password_link,
-            environment.backend.url + environment.backend.reset_password,
+            environment.backend.url + environment.backend.reset_password
         ];
     }
 }

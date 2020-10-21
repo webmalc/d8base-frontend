@@ -7,7 +7,7 @@ import {UserLocation} from '@app/core/models/user-location';
 @Component({
     selector: 'app-registration',
     templateUrl: './registration.page.html',
-    styleUrls: ['./registration.page.scss'],
+    styleUrls: ['./registration.page.scss']
 })
 export class RegistrationPage {
 

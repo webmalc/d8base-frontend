@@ -17,7 +17,7 @@ const routes: Routes = [
     {
         path: 'professional',
         // component: MasterPage,
-        loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule),
+        loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule)
         // canActivate: [MasterGuard]
     },
     {

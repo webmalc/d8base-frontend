@@ -7,7 +7,7 @@ import {ClientContactInterface} from '@app/shared/interfaces/client-contact-inte
 @Component({
     selector: 'app-contact-tab',
     templateUrl: './contact-tab.component.html',
-    styleUrls: ['./contact-tab.component.scss'],
+    styleUrls: ['./contact-tab.component.scss']
 })
 export class ContactTabComponent {
 

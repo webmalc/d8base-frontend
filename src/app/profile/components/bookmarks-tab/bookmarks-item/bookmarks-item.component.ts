@@ -5,7 +5,7 @@ import {Master} from '@app/core/models/master';
 @Component({
     selector: 'app-bookmarks-item',
     templateUrl: './bookmarks-item.component.html',
-    styleUrls: ['./bookmarks-item.component.scss'],
+    styleUrls: ['./bookmarks-item.component.scss']
 })
 export class BookmarksItemComponent {
     @Input() public bookmark: SavedProfessionalInterface<Master>;

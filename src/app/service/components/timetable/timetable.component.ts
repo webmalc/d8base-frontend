@@ -11,7 +11,7 @@ import {PopoverController} from '@ionic/angular';
 @Component({
     selector: 'app-timetable',
     templateUrl: './timetable.component.html',
-    styleUrls: ['./timetable.component.scss'],
+    styleUrls: ['./timetable.component.scss']
 })
 export class TimetableComponent extends Reinitable {
 

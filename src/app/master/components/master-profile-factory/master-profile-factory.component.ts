@@ -9,7 +9,7 @@ import {Observable, Subscription} from 'rxjs';
 @Component({
     selector: 'app-master-profile-factory',
     templateUrl: './master-profile-factory.component.html',
-    styleUrls: ['./master-profile-factory.component.scss'],
+    styleUrls: ['./master-profile-factory.component.scss']
 })
 export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
 

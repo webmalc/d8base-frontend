@@ -9,7 +9,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-certificate-edit',
     templateUrl: './certificate-edit.component.html',
-    styleUrls: ['./certificate-edit.component.scss'],
+    styleUrls: ['./certificate-edit.component.scss']
 })
 export class CertificateEditComponent extends AbstractEditComponent<Certificate> {
 

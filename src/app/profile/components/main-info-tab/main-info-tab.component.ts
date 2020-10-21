@@ -15,7 +15,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-main-info-tab',
     templateUrl: './main-info-tab.component.html',
-    styleUrls: ['./main-info-tab.component.scss'],
+    styleUrls: ['./main-info-tab.component.scss']
 })
 export class MainInfoTabComponent extends Reinitable {
 

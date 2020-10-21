@@ -9,7 +9,7 @@ import {ServicesApiService} from '@app/service/services/services-api.service';
 @Component({
     selector: 'app-master-profile-services',
     templateUrl: './master-profile-services.component.html',
-    styleUrls: ['./master-profile-services.component.scss'],
+    styleUrls: ['./master-profile-services.component.scss']
 })
 export class MasterProfileServicesComponent {
 

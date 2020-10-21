@@ -4,7 +4,7 @@ import {MasterProfileSubmenu} from '@app/master/enums/master-profile-submenu';
 @Component({
     selector: 'app-master-profile-submenu',
     templateUrl: './master-profile-submenu.component.html',
-    styleUrls: ['./master-profile-submenu.component.scss'],
+    styleUrls: ['./master-profile-submenu.component.scss']
 })
 export class MasterProfileSubmenuComponent implements OnInit {
     @Input() public defaultTab: string;

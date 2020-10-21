@@ -12,7 +12,7 @@ import {debounceTime, filter} from 'rxjs/operators';
 @Component({
     selector: 'app-abstract-contacts',
     templateUrl: './abstract-contacts.component.html',
-    styleUrls: ['./abstract-contacts.component.scss'],
+    styleUrls: ['./abstract-contacts.component.scss']
 })
 export class AbstractContactsComponent extends Reinitable implements OnInit, OnDestroy {
 

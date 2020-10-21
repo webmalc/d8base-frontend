@@ -37,7 +37,7 @@ describe('PictureSelectorComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PictureSelectorComponent, AppTestFormControlComponent],
-            imports: [IonicModule, ReactiveFormsModule],
+            imports: [IonicModule, ReactiveFormsModule]
         });
         wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
         wrapperComponent = wrapperFixture.componentInstance;

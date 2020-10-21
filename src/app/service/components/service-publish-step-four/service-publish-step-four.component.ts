@@ -20,7 +20,7 @@ import {filter} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-step-four',
     templateUrl: './service-publish-step-four.component.html',
-    styleUrls: ['./service-publish-step-four.component.scss'],
+    styleUrls: ['./service-publish-step-four.component.scss']
 })
 export class ServicePublishStepFourComponent extends Reinitable {
 

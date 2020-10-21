@@ -1,12 +1,13 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule, Title} from '@angular/platform-browser';
-import {RouteReuseStrategy} from '@angular/router';
+import {Router, RouteReuseStrategy} from '@angular/router';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
 import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
 import {FcmDeviceService} from '@app/core/services/fcm-device.service';
+import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
 import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
 import {IpApiService} from '@app/core/services/location/ip-api.service';
 import {IpDataService} from '@app/core/services/location/ip-data.service';
@@ -24,6 +25,7 @@ import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 import {IonicStorageModule} from '@ionic/storage';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import * as Sentry from '@sentry/angular';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -55,7 +57,7 @@ import {AppComponent} from './app.component';
             provide: APP_INITIALIZER,
             useFactory: (initService: AppInitService) => () => initService.init(),
             multi: true,
-            deps: [AppInitService]
+            deps: [AppInitService, Sentry.TraceService]
         },
         StatusBar,
         SplashScreen,
@@ -74,10 +76,10 @@ import {AppComponent} from './app.component';
             useClass: HeadersInterceptor,
             multi: true
         },
-        // {
-        //     provide: ErrorHandler,
-        //     useClass: GlobalErrorHandlerService
-        // },
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandlerService
+        },
         Geolocation,
         GeolocationService,
         LocationService,
@@ -93,6 +95,10 @@ import {AppComponent} from './app.component';
                 canRequest: () => Promise.resolve()
             },
             deps: [Platform]
+        },
+        {
+            provide: Sentry.TraceService,
+            deps: [Router]
         }
     ],
     bootstrap: [AppComponent]

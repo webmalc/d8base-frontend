@@ -23,7 +23,7 @@ describe('AppInitService', () => {
             providers: [
                 Platform,
                 AppInitService
-            ],
+            ]
         });
 
         trans = TestBed.inject(TranslationService);

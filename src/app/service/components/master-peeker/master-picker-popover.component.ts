@@ -8,7 +8,7 @@ import {tap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-picker-popover',
     templateUrl: './master-picker-popover.component.html',
-    styleUrls: ['./master-picker-popover.component.scss'],
+    styleUrls: ['./master-picker-popover.component.scss']
 })
 export class MasterPickerPopoverComponent extends Reinitable {
 

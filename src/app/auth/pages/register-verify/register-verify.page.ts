@@ -7,7 +7,7 @@ import {environment} from '../../../../environments/environment';
 @Component({
     selector: 'app-register-verify',
     templateUrl: './register-verify.page.html',
-    styleUrls: ['./register-verify.page.scss'],
+    styleUrls: ['./register-verify.page.scss']
 })
 export class RegisterVerifyPage implements OnInit {
 

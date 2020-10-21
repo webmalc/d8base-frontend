@@ -12,7 +12,7 @@ import {tap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-edit',
     templateUrl: './master-edit.component.html',
-    styleUrls: ['./master-edit.component.scss'],
+    styleUrls: ['./master-edit.component.scss']
 })
 export class MasterEditComponent extends AbstractEditComponent<Master> implements OnInit {
 

@@ -15,7 +15,7 @@ import {BehaviorSubject, forkJoin} from 'rxjs';
 @Component({
     selector: 'app-master',
     templateUrl: './master.page.html',
-    styleUrls: ['./master.page.scss'],
+    styleUrls: ['./master.page.scss']
 })
 export class MasterPage extends Reinitable {
 

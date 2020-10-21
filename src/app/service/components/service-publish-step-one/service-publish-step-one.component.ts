@@ -16,7 +16,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-service-publish-step-one',
     templateUrl: './service-publish-step-one.component.html',
-    styleUrls: ['./service-publish-step-one.component.scss'],
+    styleUrls: ['./service-publish-step-one.component.scss']
 })
 export class ServicePublishStepOneComponent extends Reinitable {
 

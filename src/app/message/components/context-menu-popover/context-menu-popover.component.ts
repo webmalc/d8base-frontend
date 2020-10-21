@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-context-menu-popover',
     templateUrl: './context-menu-popover.component.html',
-    styleUrls: ['./context-menu-popover.component.scss'],
+    styleUrls: ['./context-menu-popover.component.scss']
 })
 export class ContextMenuPopoverComponent implements OnDestroy, OnInit {
 

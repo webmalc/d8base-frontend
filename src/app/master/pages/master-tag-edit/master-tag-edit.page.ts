@@ -10,7 +10,7 @@ import {switchMap, tap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-tag-edit',
     templateUrl: './master-tag-edit.page.html',
-    styleUrls: ['./master-tag-edit.page.scss'],
+    styleUrls: ['./master-tag-edit.page.scss']
 })
 export class MasterTagEditPage implements OnInit {
 

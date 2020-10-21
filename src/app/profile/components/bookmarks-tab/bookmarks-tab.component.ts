@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 @Component({
     selector: 'app-bookmarks-tab',
     templateUrl: './bookmarks-tab.component.html',
-    styleUrls: ['./bookmarks-tab.component.scss'],
+    styleUrls: ['./bookmarks-tab.component.scss']
 })
 export class BookmarksTabComponent implements OnInit, OnDestroy {
     public bookmarks: BookmarkMaster[] = [];

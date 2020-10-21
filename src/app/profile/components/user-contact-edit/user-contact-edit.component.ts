@@ -18,7 +18,7 @@ import {map, switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-user-contact-edit',
     templateUrl: './user-contact-edit.component.html',
-    styleUrls: ['./user-contact-edit.component.scss'],
+    styleUrls: ['./user-contact-edit.component.scss']
 })
 export class UserContactEditComponent implements OnInit, OnDestroy {
 

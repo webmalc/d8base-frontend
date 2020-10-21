@@ -8,7 +8,7 @@ import {BehaviorSubject, ReplaySubject} from 'rxjs';
 @Component({
     selector: 'app-city-picker-popover',
     templateUrl: './city-picker-popover.component.html',
-    styleUrls: ['./city-picker-popover.component.scss'],
+    styleUrls: ['./city-picker-popover.component.scss']
 })
 export class CityPickerPopoverComponent implements OnInit {
 

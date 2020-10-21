@@ -9,7 +9,7 @@ import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-pa
 @Component({
     selector: 'app-master-education-edit',
     templateUrl: './master-education-edit.page.html',
-    styleUrls: ['./master-education-edit.page.scss'],
+    styleUrls: ['./master-education-edit.page.scss']
 })
 export class MasterEducationEditPage extends AbstractModelEditPage<Education> {
 

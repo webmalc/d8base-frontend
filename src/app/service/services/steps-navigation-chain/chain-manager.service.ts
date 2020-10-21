@@ -23,7 +23,7 @@ export class ChainManagerService {
         '/service/publish/step-five',
         '/service/publish/step-six',
         '/service/publish/step-seven',
-        '/service/publish/final',
+        '/service/publish/final'
     ];
 
     constructor(
