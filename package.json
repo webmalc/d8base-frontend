@@ -45,6 +45,8 @@
     "@nguniversal/express-engine": "^9.1.1",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@sentry/angular": "^5.27.0",
+    "@sentry/tracing": "^5.27.0",
     "@types/async": "^3.2.3",
     "br-mask": "0.0.10",
     "class-transformer": "^0.3.1",

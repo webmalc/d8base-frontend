@@ -1,7 +1,12 @@
+import {isPlatformServer} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorHandler, Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Router} from '@angular/router';
-import {Platform, ToastController} from '@ionic/angular';
+import {ToastController} from '@ionic/angular';
+import * as Sentry from '@sentry/angular';
+import {environment} from '../../../environments/environment';
+
+const ERROR_TOAST_DURATION_MS = 3000;
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +20,10 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     }
 
     public handleError(error: any): void {
+        if (environment.sentry.enabled) {
+            Sentry.captureException(error);
+        }
+
         if (error instanceof HttpErrorResponse && (401 === error.status || 'invalid_grant' === error.message)) {
             this.showMessage('authentication expired');
             this.router.navigateByUrl('/auth/login');
@@ -32,8 +41,8 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         throw error;
     }
 
-    private showMessage(message: string, duration: number = 3000): void {
-        if (this.platformId.toString() === 'server') {
+    private showMessage(message: string, duration: number = ERROR_TOAST_DURATION_MS): void {
+        if (isPlatformServer(this.platformId)) {
             console.error(message);
         } else {
             this.toaster.create({message, duration}).then(

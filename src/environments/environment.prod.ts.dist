@@ -77,5 +77,9 @@ export const environment = {
         chat_list_update_interval_ms: 5000,
         background_update_interval_ms: 5000,
         messages_per_page: 50
+    },
+    sentry: {
+        enabled: true,
+        dsn: ''
     }
 };
