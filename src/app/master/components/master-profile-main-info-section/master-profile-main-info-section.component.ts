@@ -11,6 +11,10 @@ import {MainInfoSectionComponentInputDataInterface} from '@app/master/interfaces
 export class MasterProfileMainInfoSectionComponent {
     @Input() public sectionData: MainInfoSectionComponentInputDataInterface;
 
+    public getAvatar(): string {
+        return this.sectionData?.avatar ? this.sectionData.avatar : HelperService.getNoAvatarLink();
+    }
+
     public declinationReviews(num: number): string {
         return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
     }
