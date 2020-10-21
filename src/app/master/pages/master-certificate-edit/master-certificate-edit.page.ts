@@ -9,7 +9,7 @@ import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-pa
 @Component({
     selector: 'app-master-certificate-edit',
     templateUrl: './master-certificate-edit.page.html',
-    styleUrls: ['./master-certificate-edit.page.scss'],
+    styleUrls: ['./master-certificate-edit.page.scss']
 })
 export class MasterCertificateEditPage extends AbstractModelEditPage<Certificate> {
 

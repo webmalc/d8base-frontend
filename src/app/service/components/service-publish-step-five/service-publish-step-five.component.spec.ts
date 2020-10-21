@@ -49,7 +49,7 @@ describe('ServicePublishStepFiveComponent', () => {
                 StepFiveHandlerService,
                 StepSixHandlerService,
                 StepSevenHandlerService,
-                StepFinalHandlerService,
+                StepFinalHandlerService
             ]
         }).compileComponents();
 

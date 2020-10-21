@@ -17,7 +17,7 @@ class HttpMock {
             return new Observable<any>(
                 subscriber => {
                     const data = {
-                        error: true,
+                        error: true
                     };
                     subscriber.next(data);
                     subscriber.complete();

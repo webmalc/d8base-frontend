@@ -41,7 +41,7 @@ export class AuthenticationService implements AuthenticatorInterface {
                 password,
                 grant_type: GrantTypes.PasswordGrantType,
                 client_id: environment.client_id,
-                client_secret: environment.client_secret,
+                client_secret: environment.client_secret
             };
 
             // @ts-ignore

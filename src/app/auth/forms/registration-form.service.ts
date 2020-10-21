@@ -30,14 +30,14 @@ export class RegistrationFormService {
                     Validators.required,
                     Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+' +
                         '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
-                        '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
+                        '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
                 ])],
                 [RegistrationFormFields.Name]: ['', Validators.required],
                 [RegistrationFormFields.Password]: ['', Validators.required],
                 [RegistrationFormFields.Confirm]: ['', Validators.required],
                 [RegistrationFormFields.Country]: ['', Validators.required],
                 [RegistrationFormFields.City]: [''],
-                [RegistrationFormFields.Phone]: [''],
+                [RegistrationFormFields.Phone]: ['']
             },
             {validators: this.checkPassword}
         );

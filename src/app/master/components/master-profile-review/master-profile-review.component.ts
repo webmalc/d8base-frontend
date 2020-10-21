@@ -8,7 +8,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-master-profile-review',
     templateUrl: './master-profile-review.component.html',
-    styleUrls: ['./master-profile-review.component.scss'],
+    styleUrls: ['./master-profile-review.component.scss']
 })
 export class MasterProfileReviewComponent {
 

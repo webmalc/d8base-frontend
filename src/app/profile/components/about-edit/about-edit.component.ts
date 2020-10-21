@@ -12,7 +12,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-about-edit',
     templateUrl: './about-edit.component.html',
-    styleUrls: ['./about-edit.component.scss'],
+    styleUrls: ['./about-edit.component.scss']
 })
 export class AboutEditComponent implements OnInit {
 

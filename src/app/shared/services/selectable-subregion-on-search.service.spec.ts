@@ -6,7 +6,7 @@ import {SelectableSubregionOnSearchService} from './selectable-subregion-on-sear
 describe('SelectableSubregionOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule,
+            HttpClientTestingModule
         ],
         providers: [
             SelectableSubregionOnSearchService

@@ -6,7 +6,7 @@ import {ResetPasswordFormService} from './reset-password-form.service';
 describe('ResetPasswordFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            ReactiveFormsModule,
+            ReactiveFormsModule
         ]
     }));
 

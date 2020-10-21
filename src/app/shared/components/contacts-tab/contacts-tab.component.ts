@@ -13,7 +13,7 @@ import {filter, map, switchMap, tap} from 'rxjs/operators';
 @Component({
     selector: 'app-contacts-tab',
     templateUrl: './contacts-tab.component.html',
-    styleUrls: ['./contacts-tab.component.scss'],
+    styleUrls: ['./contacts-tab.component.scss']
 })
 export class ContactsTabComponent implements OnInit, OnChanges {
 

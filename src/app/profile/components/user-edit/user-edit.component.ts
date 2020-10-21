@@ -10,7 +10,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-user-edit',
     templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.scss'],
+    styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
 

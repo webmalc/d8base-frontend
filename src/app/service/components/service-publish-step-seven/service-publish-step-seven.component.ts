@@ -18,7 +18,7 @@ import {SelectablePostalCodeOnSearchService} from '@app/shared/services/selectab
 @Component({
     selector: 'app-service-publish-step-seven',
     templateUrl: './service-publish-step-seven.component.html',
-    styleUrls: ['./service-publish-step-seven.component.scss'],
+    styleUrls: ['./service-publish-step-seven.component.scss']
 })
 export class ServicePublishStepSevenComponent extends Reinitable {
 

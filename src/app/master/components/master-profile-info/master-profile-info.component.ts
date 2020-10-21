@@ -19,7 +19,7 @@ import {Observable} from 'rxjs';
 @Component({
     selector: 'app-master-profile-info',
     templateUrl: './master-profile-info.component.html',
-    styleUrls: ['./master-profile-info.component.scss'],
+    styleUrls: ['./master-profile-info.component.scss']
 })
 export class MasterProfileInfoComponent {
 

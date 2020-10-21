@@ -37,7 +37,7 @@ describe('TagsSelectInputComponent', () => {
                 {
                     provide: TagsApiService,
                     useClass: TagsApiServiceStub
-                },
+                }
             ]
         }).compileComponents();
 

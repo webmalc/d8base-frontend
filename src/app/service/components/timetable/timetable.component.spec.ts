@@ -19,7 +19,7 @@ describe('TimetableComponent', () => {
             imports: [
                 IonicModule.forRoot(),
                 ReactiveFormsModule,
-                FormsModule,
+                FormsModule
             ],
             providers: [
                 ServicePublishDataHolderService,

@@ -8,7 +8,7 @@ import {ResetPasswordApiService} from '@app/auth/services/reset-password-api.ser
 @Component({
     selector: 'app-reset-password',
     templateUrl: './reset-password.page.html',
-    styleUrls: ['./reset-password.page.scss'],
+    styleUrls: ['./reset-password.page.scss']
 })
 export class ResetPasswordPage implements OnInit {
 

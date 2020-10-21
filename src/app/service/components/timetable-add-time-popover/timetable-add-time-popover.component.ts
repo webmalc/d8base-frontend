@@ -5,7 +5,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-timetable-add-time-popover',
     templateUrl: './timetable-add-time-popover.component.html',
-    styleUrls: ['./timetable-add-time-popover.component.scss'],
+    styleUrls: ['./timetable-add-time-popover.component.scss']
 })
 export class TimetableAddTimePopoverComponent extends Reinitable {
 

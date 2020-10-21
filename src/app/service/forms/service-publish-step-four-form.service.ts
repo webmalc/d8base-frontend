@@ -16,12 +16,12 @@ export class ServicePublishStepFourFormService {
                     Validators.required,
                     Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+' +
                         '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
-                        '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
+                        '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
                 ])],
                 [ServicePublishStepFourFormFields.Password]: [null,
                     Validators.compose([Validators.required, Validators.minLength(6)])],
                 [ServicePublishStepFourFormFields.Confirm]: [null,
-                    Validators.compose([Validators.required, Validators.minLength(6)])],
+                    Validators.compose([Validators.required, Validators.minLength(6)])]
             },
             {validators: this.checkPassword});
     }

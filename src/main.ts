@@ -16,7 +16,7 @@ if (environment.sentry.enabled && environment.sentry.dsn) {
       new Integrations.BrowserTracing({
         tracingOrigins: [ environment.origin ],
         routingInstrumentation: Sentry.routingInstrumentation
-      }),
+      })
     ],
     tracesSampleRate: 1.0
   });

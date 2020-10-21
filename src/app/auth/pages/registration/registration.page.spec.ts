@@ -63,7 +63,7 @@ describe('RegistrationPage', () => {
                 {provide: IpnfDataService, useValue: ipServiceMock},
                 {provide: HttpClient, useValue: {post: () => of(true)}},
                 {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
-                {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
+                {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}}
             ]
         }).compileComponents();
 

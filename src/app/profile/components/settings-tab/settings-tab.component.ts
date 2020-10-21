@@ -13,7 +13,7 @@ import {filter, tap} from 'rxjs/operators';
 @Component({
     selector: 'app-settings-tab',
     templateUrl: './settings-tab.component.html',
-    styleUrls: ['./settings-tab.component.scss'],
+    styleUrls: ['./settings-tab.component.scss']
 })
 export class SettingsTabComponent implements OnInit {
 

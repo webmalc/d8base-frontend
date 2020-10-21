@@ -16,7 +16,7 @@ describe('IpServicesHolderService', () => {
       IpServicesHolderService,
       IpApiService,
       IpDataService,
-      IpnfDataService,
+      IpnfDataService
     ]
   }));
 

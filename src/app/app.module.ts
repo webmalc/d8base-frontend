@@ -98,8 +98,8 @@ import {AppComponent} from './app.component';
         },
         {
             provide: Sentry.TraceService,
-            deps: [Router],
-        },
+            deps: [Router]
+        }
     ],
     bootstrap: [AppComponent]
 })

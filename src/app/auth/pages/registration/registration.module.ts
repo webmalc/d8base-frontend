@@ -25,7 +25,7 @@ import {RegistrationPage} from './registration.page';
         SharedModule,
         ReactiveFormsModule,
         TranslateModule,
-        IonicSelectableModule,
+        IonicSelectableModule
     ],
     declarations: [
         RegistrationPage,

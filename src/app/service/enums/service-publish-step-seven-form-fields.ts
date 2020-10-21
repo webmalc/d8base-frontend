@@ -4,5 +4,5 @@ export enum ServicePublishStepSevenFormFields {
     Address = 'address',
     Postal = 'postal_code',
     PaymentOnline = 'payment_online',
-    PaymentCash = 'payment_cash',
+    PaymentCash = 'payment_cash'
 }

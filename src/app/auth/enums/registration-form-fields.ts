@@ -5,5 +5,5 @@ export enum RegistrationFormFields {
     Confirm = 'password_confirm',
     Phone = 'phone',
     Country = 'country',
-    City = 'city',
+    City = 'city'
 }
