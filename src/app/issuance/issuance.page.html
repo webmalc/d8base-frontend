@@ -1,12 +1,31 @@
-<ion-content>
+<ion-content class="background-color-white">
     <ion-grid class="ion-no-padding">
         <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center ion-no-padding">
 
             <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size="6">
                 <ion-searchbar animated class="ion-margin-vertical" color="light"
-                               placeholder="Найти услугу/специалиста"></ion-searchbar>
+                               placeholder='{{"issuance.search-placeholder"|translate}}'></ion-searchbar>
             </ion-col>
 
         </ion-row>
+
+        <ion-row class="ion-justify-content-center ion-margin-bottom ion-margin-top">
+            <ion-col class="ion-no-padding" size="12">
+                <ion-row class="ion-margin-top">
+                    <ion-col
+                            offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="2"
+                            size-lg="4" size-md="5" size-sm="10" size-xl="2" size-xs="12">
+                        <app-issuance-filters></app-issuance-filters>
+                    </ion-col>
+                    <ion-col
+                            offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="1"
+                            size-lg="5" size-md="7" size-sm="10" size-xl="5" size-xs="12">
+
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
     </ion-grid>
+    <app-footer></app-footer>
 </ion-content>

@@ -1,0 +1,18 @@
+<ion-item class="ion-item-no-border ion-d8b-gradient-bgc">
+    <ion-row class="ion-align-items-center ion-justify-content-between width100">
+        <ion-icon class="ph5" color="light" name="arrow-back-outline"></ion-icon>
+        <ion-item class="ion-item-no-border filter-text">
+            {{"issuance.filters.title"|translate}}
+            <ion-icon color="light" name="funnel" slot="end"></ion-icon>
+        </ion-item>
+        <ion-button (click)="filtersStateManager.clear()" class="reset-button-text" color="light"
+                    size="medium">{{"issuance.filters.reset"|translate}}</ion-button>
+    </ion-row>
+</ion-item>
+<ion-item class="ion-item-no-border ion-item-no-side-padding">
+    <app-issuance-filters-submenu (selectedTab)="tab.next($event)" class="width100" defaultTab="{{defaultTab}}">
+    </app-issuance-filters-submenu>
+</ion-item>
+<ion-col size="12">
+    <app-issuance-filters-factory [mode]="tab"></app-issuance-filters-factory>
+</ion-col>
