@@ -16,7 +16,8 @@ export class ApiClientService {
         return this.http.get<T>(this.getHost() + url, {params});
     }
 
-    public post<T>(url: string, data: any): Observable<T> {
+    public post<T, V>(url: string, data: V): Observable<T>;
+    public post<T>(url: string, data: T): Observable<T> {
         return this.http.post<T>(this.getHost() + url, data);
     }
 
@@ -71,7 +72,7 @@ export class ApiClientService {
     public createList<T>(dataList: T[], url: string): Observable<T[]> {
         return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
-                [...list.map((value: T) => this.post<T>(url, value))]
+                [...list.map((value: T) => this.post<T, T>(url, value))]
             ))
         );
     }
