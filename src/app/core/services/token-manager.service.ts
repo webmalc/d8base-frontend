@@ -3,12 +3,16 @@ import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interfac
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {environment} from '../../../environments/environment';
 
+function getTimestamp(offset: number = 0): number {
+    return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class TokenManagerService {
 
-    private tokenData: AuthResponseInterface = undefined;
+    private tokenData: AuthResponseInterface;
     private readonly TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 
     constructor(private readonly storage: StorageManagerService) {}
@@ -37,8 +41,8 @@ export class TokenManagerService {
     }
 
     public setTokens(data: AuthResponseInterface): Promise<any> {
-        data.access_expire = this.getTimestamp(data.expires_in);
-        data.refresh_expire = this.getTimestamp(environment.refresh_token_expire_time);
+        data.access_expire = getTimestamp(data.expires_in);
+        data.refresh_expire = getTimestamp(environment.refresh_token_expire_time);
         this.tokenData = data;
 
         return this.storage.set(this.TOKEN_DATA_STORAGE_KEY, data);
@@ -88,16 +92,12 @@ export class TokenManagerService {
         });
     }
 
-    private getTimestamp(offset: number = 0): number {
-        return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;
-    }
-
     private isAbstractTokenExpired(tokenType: string): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.getTokenData().then(
                 (tokenData: AuthResponseInterface) => {
                     if (tokenData && tokenData[tokenType]) {
-                        resolve(this.getTimestamp() >= tokenData[tokenType]);
+                        resolve(getTimestamp() >= tokenData[tokenType]);
                     } else {
                         reject();
                     }

@@ -7,8 +7,8 @@ import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interfa
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {BehaviorSubject, from, Observable, of} from 'rxjs';
-import {catchError, switchMap, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, from, Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
 /**
@@ -19,7 +19,9 @@ import {environment} from '../../../environments/environment';
 })
 export class AuthenticationService implements AuthenticatorInterface {
 
-    public isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public readonly isAuthenticated$: Observable<boolean>;
+
+    private readonly isAuthenticatedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
@@ -28,10 +30,13 @@ export class AuthenticationService implements AuthenticatorInterface {
         private readonly client: ApiClientService,
         private readonly preLogout: PreLogoutService
     ) {
-    }
-
-    public getIsAuthenticatedSubject(): BehaviorSubject<boolean> {
-        return this.isAuthenticated$;
+        this.isAuthenticated$ = combineLatest([
+            from(this.tokenManager.isRefreshTokenExpired()),
+            this.isAuthenticatedSubject$
+        ]).pipe(
+            map(([isExpired, isAuthenticated]) => isAuthenticated && !isExpired),
+            catchError(() => of(false))
+        );
     }
 
     public login({username, password}: Credentials): Observable<void> {
@@ -44,38 +49,36 @@ export class AuthenticationService implements AuthenticatorInterface {
                 client_secret: environment.client_secret
             };
 
-            // @ts-ignore
             this.client.post<AuthResponseInterface>(this.TOKEN_OBTAIN_URL, loginData).subscribe(
                 (result: AuthResponseInterface) => {
                     this.tokenManager.setTokens(result).then(
                         _ => {
-                            this.isAuthenticated$.next(true);
+                            this.isAuthenticatedSubject$.next(true);
                             subscriber.next();
                             subscriber.complete();
                         }
                     );
                 },
                 (authError: HttpErrorResponse) => {
-                    this.isAuthenticated$.next(false);
+                    this.isAuthenticatedSubject$.next(false);
                     subscriber.error(authError);
                 }
             );
         });
     }
 
-    public isAuthenticated(): Observable<boolean> {
-        return from(this.tokenManager.isRefreshTokenExpired()).pipe(
-            tap((isExpired: boolean) => this.isAuthenticated$.next(!isExpired)),
-            switchMap((isExpired: boolean) => of(!isExpired)),
-            catchError(error => of(false))
-        );
+    public async logout(): Promise<void> {
+        await this.preLogout.run();
+        await this.tokenManager.clear();
+        this.isAuthenticatedSubject$.next(false);
     }
 
-    public logout(): Promise<any> {
-        return this.preLogout.run().then(async () => {
-            await this.tokenManager.clear();
-            this.isAuthenticated$.next(false);
-        });
+    public authenticateWithToken(token: AuthResponseInterface): Promise<void> {
+        return this.tokenManager.setTokens(token).then(() => this.isAuthenticatedSubject$.next(true));
+    }
+
+    public isAuthenticated(): Observable<boolean> {
+        return this.isAuthenticated$;
     }
 
     public needToRefresh(): Promise<boolean> {
@@ -87,19 +90,19 @@ export class AuthenticationService implements AuthenticatorInterface {
             (subscriber) => {
                 this.tokenManager.getRefreshToken().then(refresh => {
                     const refreshData = {refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
-                    // @ts-ignore
+
                     this.client.post<AuthResponseInterface>(this.TOKEN_REFRESH_URL, refreshData).subscribe(
                         (response: AuthResponseInterface) => {
                             this.tokenManager.setTokens(response).then(
                                 _ => {
-                                    this.isAuthenticated$.next(true);
+                                    this.isAuthenticatedSubject$.next(true);
                                     subscriber.next();
                                     subscriber.complete();
                                 }
                             );
                         },
                         _ => {
-                            this.isAuthenticated$.next(false);
+                            this.isAuthenticatedSubject$.next(false);
                             subscriber.error();
                         }
                     );
