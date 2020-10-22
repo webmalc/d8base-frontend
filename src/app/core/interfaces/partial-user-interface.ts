@@ -1,4 +1,3 @@
-import {SafeResourceUrl} from '@angular/platform-browser';
 import {Country} from '@app/profile/models/country';
 
 export interface PartialUserInterface {
@@ -12,8 +11,4 @@ export interface PartialUserInterface {
     nationality: number | Country;
     birthday: string;
     languages?: string[];
-
-    getPhoto(): string | SafeResourceUrl;
-
-    getPhotoThumbnail(): string | SafeResourceUrl;
 }

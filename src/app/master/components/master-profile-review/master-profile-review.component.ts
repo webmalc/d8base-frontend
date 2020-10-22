@@ -1,7 +1,9 @@
 import {Component, Input} from '@angular/core';
+import {SafeResourceUrl} from '@angular/platform-browser';
 import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
 import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
+import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {PublicReview} from '@app/master/models/public-review';
 import {plainToClass} from 'class-transformer';
 
@@ -14,12 +16,19 @@ export class MasterProfileReviewComponent {
 
     @Input() public publicReview: PublicReview;
 
+    constructor(private readonly photoSanitizer: PhotoSanitizerService) {
+    }
+
     public getRatingTitle(): string {
         return HelperService.getRatingTitle(this.publicReview.rating);
     }
 
     public getDate(): string {
         return HelperService.fromDatetime(this.publicReview.created).date;
+    }
+
+    public getPhotoThumbnail(): string | SafeResourceUrl {
+        return this.photoSanitizer.sanitize(this.getUser().avatar_thumbnail);
     }
 
     public getUser(): PartialUserInterface {

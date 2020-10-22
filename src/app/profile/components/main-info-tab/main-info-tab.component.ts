@@ -4,6 +4,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {UserInterface} from '@app/core/interfaces/user.interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
+import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {ProfileService} from '@app/profile/services/profile.service';
@@ -26,9 +27,10 @@ export class MainInfoTabComponent extends Reinitable {
     public user: User;
 
     constructor(
-        public profileService: ProfileService,
+        public readonly profileService: ProfileService,
         private readonly sanitizer: DomSanitizer,
-        private readonly userManager: UserManagerService
+        private readonly userManager: UserManagerService,
+        public readonly photoSanitizer: PhotoSanitizerService
     ) {
         super();
     }
@@ -50,7 +52,9 @@ export class MainInfoTabComponent extends Reinitable {
     }
 
     public getAvatar(): string | SafeResourceUrl {
-        return (plainToClass(User, this.profileService.avatarForm.getRawValue() as UserInterface) as User).getPhoto();
+        return this.photoSanitizer.sanitize(
+            (plainToClass(User, this.profileService.avatarForm.getRawValue() as UserInterface) as User).avatar
+        );
     }
 
     protected init(): void {
