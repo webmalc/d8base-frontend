@@ -9,7 +9,7 @@ import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {BehaviorSubject, combineLatest, from, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
+import {environment} from '@env/environment';
 
 /**
  *  Main authentication service

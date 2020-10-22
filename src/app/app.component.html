@@ -134,12 +134,12 @@
                             {{'template.download'|translate}}
                         </ion-item>
                         <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
-                            && (authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
+                            && (authenticationFactory.getAuthenticator().isAuthenticated$|async)
                             && isDesktop()"
                                   class="ion-item-no-border cursor-pointer" slot="end">
                             {{'template.become-master'|translate}}
                         </ion-item>
-                        <ion-item *ngIf="(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)"
+                        <ion-item *ngIf="(authenticationFactory.getAuthenticator().isAuthenticated$|async)"
                                   class="ion-item-no-border orders"
                                   slot="end">
                             <ion-icon class="pr5" name="calendar-outline"></ion-icon>
@@ -152,21 +152,21 @@
                             <ion-icon name="heart-outline"></ion-icon>
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
-                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)"
+                                  *ngIf="!(authenticationFactory.getAuthenticator().isAuthenticated$|async)"
                                   routerLink="/auth/login"
                                   routerDirection="forward"
                                   routerLinkActive="active">
                             {{'template.sign-in'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border text-blue" slot="end"
-                                  *ngIf="!(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)"
+                                  *ngIf="!(authenticationFactory.getAuthenticator().isAuthenticated$|async)"
                                   routerLink="/auth/registration"
                                   routerLinkActive="active"
                                   routerDirection="forward">
                             {{'template.sign-up'|translate}}
                         </ion-item>
                         <ion-item class="ion-item-no-border" slot="end"
-                                  *ngIf="(authenticationFactory.getAuthenticator().getIsAuthenticatedSubject()|async)
+                                  *ngIf="(authenticationFactory.getAuthenticator().isAuthenticated$|async)
                                    && countryCode">
                             <span class="flag-icon flag-icon-{{countryCode}}"></span>
                         </ion-item>
