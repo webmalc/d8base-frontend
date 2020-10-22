@@ -2,13 +2,14 @@ import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {fakeAsync, flush, TestBed} from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {Observable, of} from 'rxjs';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {Credentials} from '../../auth/interfaces/credentials';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {ApiClientService} from './api-client.service';
 import {AuthenticationService} from './authentication.service';
 import {TokenManagerService} from './token-manager.service';
-import {StorageManagerMock} from './token-manager.service.spec';
+
 
 class HttpMock {
     public post(url: string, body: any | null, options?: {
@@ -27,7 +28,7 @@ class HttpMock {
             return of({
                 access_token: 'refreshedAccessToken',
                 expires_in: 3600,
-                token_type: 'Baerer',
+                token_type: 'Bearer',
                 scope: 'read write groups',
                 refresh_token: 'refreshedRefreshToken'
             });
@@ -36,7 +37,7 @@ class HttpMock {
         return of({
             access_token: 'access_token',
             expires_in: 3600,
-            token_type: 'Baerer',
+            token_type: 'Bearer',
             scope: 'read write groups',
             refresh_token: 'refresh_token'
         });
@@ -44,29 +45,29 @@ class HttpMock {
 }
 
 describe('AuthenticationService', () => {
+    let service: AuthenticationService;
 
     beforeEach(() => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule,
             platformBrowserDynamicTesting());
+
+        TestBed.configureTestingModule({
+            providers: [
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+                {provide: ApiClientService, useClass: HttpMock},
+                TokenManagerService
+            ]
+        });
+
+        service = TestBed.inject(AuthenticationService);
     });
 
-    beforeEach(() => TestBed.configureTestingModule({
-        providers: [
-            {provide: StorageManagerService, useClass: StorageManagerMock},
-            {provide: ApiClientService, useClass: HttpMock},
-            TokenManagerService
-        ]
-    }));
-
     it('should be created', () => {
-        const service: AuthenticationService = TestBed.inject(AuthenticationService);
         expect(service).toBeTruthy();
     });
 
     it('test #login', (done) => {
-        const service: AuthenticationService = TestBed.inject(AuthenticationService);
-
         const credentials: Credentials = {
             username: 'test_user',
             password: 'test_pass'
@@ -84,12 +85,10 @@ describe('AuthenticationService', () => {
     });
 
     it('test #isAuthenticated', (done) => {
-        const service: AuthenticationService = TestBed.inject(AuthenticationService);
-
-        (service as any).tokenManager.setTokens({
+        service.authenticateWithToken({
             access_token: 'access_token',
             expires_in: 3600,
-            token_type: 'Baerer',
+            token_type: 'Bearer',
             scope: 'read write groups',
             refresh_token: 'refresh_token'
         })
@@ -106,8 +105,6 @@ describe('AuthenticationService', () => {
     });
 
     it('test #refresh', fakeAsync(() => {
-        const service: AuthenticationService = TestBed.inject(AuthenticationService);
-
         service.refresh().subscribe();
         flush();
 
@@ -124,9 +121,7 @@ describe('AuthenticationService', () => {
     }));
 
     it('test #logout', (done) => {
-        const service: AuthenticationService = TestBed.inject(AuthenticationService);
-
-        (service as any).tokenManager.setTokens({
+        service.authenticateWithToken({
             access_token: 'access_token',
             expires_in: 3600,
             token_type: 'Baerer',

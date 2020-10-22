@@ -1,5 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {fakeAsync, flush, inject, TestBed} from '@angular/core/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {asyncData} from '../../../testing/async-observable-helper';
 import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../testing/fixtures/generator';
@@ -10,7 +11,6 @@ import {SavedProfessionalInterface} from '../../core/interfaces/saved-profession
 import {BookmarkMaster} from '../../core/models/bookmark-master';
 import {StorageManagerService} from '../../core/proxies/storage-manager.service';
 import {MasterManagerService} from '../../core/services/master-manager.service';
-import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
 import {BookmarksService} from './bookmarks.service';
 import {SavedProfessionalApiService} from './saved-professional-api.service';
 

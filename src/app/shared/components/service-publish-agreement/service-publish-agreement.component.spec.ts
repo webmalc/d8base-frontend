@@ -3,8 +3,8 @@ import {IonicModule} from '@ionic/angular';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {ServicePublishAgreementComponent} from './service-publish-agreement.component';
 
 describe('ServicePublishAgreementComponent', () => {

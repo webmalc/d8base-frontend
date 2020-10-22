@@ -7,9 +7,9 @@ import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interfa
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {BehaviorSubject, combineLatest, from, Observable, of} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
 import {environment} from '@env/environment';
+import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
+import {catchError, map, shareReplay} from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -31,11 +31,12 @@ export class AuthenticationService implements AuthenticatorInterface {
         private readonly preLogout: PreLogoutService
     ) {
         this.isAuthenticated$ = combineLatest([
-            from(this.tokenManager.isRefreshTokenExpired()),
-            this.isAuthenticatedSubject$
+            this.isAuthenticatedSubject$,
+            this.tokenManager.isRefreshTokenExpired$
         ]).pipe(
-            map(([isExpired, isAuthenticated]) => isAuthenticated && !isExpired),
-            catchError(() => of(false))
+            map(([isAuthenticated, isExpired]) => isAuthenticated && !isExpired),
+            catchError(() => of(null)),
+            shareReplay(1)
         );
     }
 

@@ -1,9 +1,9 @@
 import {TestBed} from '@angular/core/testing';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../core/proxies/storage-manager.service';
 import {NotificationWorkerService} from '../../core/services/notification-worker.service';
-import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
 import {ChatListUpdaterService} from './chat-list-updater.service';
 import {ChatsCompilerService} from './chats-compiler.service';
 import {ChatsSearchService} from './chats-search.service';
