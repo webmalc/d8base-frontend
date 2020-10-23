@@ -53,12 +53,12 @@ export class MasterProfileInfoGeneratorFactoryService {
         masterLocation: MasterLocation[],
         masterContacts: MasterContact[],
         masterTags: Tag[],
-        user: PartialUserInterface,
         userCountry: Country | null,
+        user: PartialUserInterface,
         userLanguages: Language[],
         experienceList: Experience[],
-        educationList: Education[],
         certificateList: Certificate[],
+        educationList: Education[],
         publicReviewList: PublicReview[]
     }> {
         return masterId ? this.get(masterId) : this.masterManager.getMasterList().pipe(switchMap(list => this.get(list[0].id)));
