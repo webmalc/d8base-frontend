@@ -2,8 +2,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {MasterPickerPopoverComponent} from './master-picker-popover.component';
 
 describe('MasterPickerPopoverComponent', () => {

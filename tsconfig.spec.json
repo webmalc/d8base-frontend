@@ -9,7 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["src/app/*"],
-      "@env/*": ["environments/*"],
+      "@env/*": ["src/environments/*"],
       "@tes/*": ["./"]
     }
   },

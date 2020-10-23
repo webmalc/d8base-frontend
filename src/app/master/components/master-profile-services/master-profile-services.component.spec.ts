@@ -3,8 +3,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {MasterProfileServicesSearchService} from '../../services/master-profile-services-search.service';
 import {MasterProfileServicesComponent} from './master-profile-services.component';
 

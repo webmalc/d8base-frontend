@@ -1,10 +1,6 @@
-import {Injectable} from '@angular/core';
 import {Contact} from '@app/profile/models/contact';
 import {UserContact} from '@app/profile/models/user-contact';
 
-@Injectable({
-    providedIn: 'root'
-})
 export class HelperService {
 
     public static clear<T>(obj: T): T {

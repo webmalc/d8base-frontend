@@ -3,6 +3,7 @@ import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angula
 import {By} from '@angular/platform-browser';
 import {IonicModule, IonLabel} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {asyncData} from '../../../../testing/async-observable-helper';
 import {BookmarkFixture} from '../../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../../testing/fixtures/generator';
@@ -10,7 +11,6 @@ import {MasterFixture} from '../../../../testing/fixtures/master-fixture';
 import {BookmarkMaster} from '../../../core/models/bookmark-master';
 import {Master} from '../../../core/models/master';
 import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {BookmarksService} from '../../services/bookmarks.service';
 import {SavedProfessionalApiService} from '../../services/saved-professional-api.service';
 import {BookmarksItemComponent} from './bookmarks-item/bookmarks-item.component';

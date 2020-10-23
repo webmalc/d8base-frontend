@@ -3,8 +3,8 @@ import {IonicModule} from '@ionic/angular';
 
 import {Location} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {ServicePublishStepSevenTimetableFormService} from '../../forms/service-publish-step-seven-timetable-form.service';
 import {ServicePublishDataHolderService} from '../../services/service-publish-data-holder.service';
 import {TimetableComponent} from './timetable.component';

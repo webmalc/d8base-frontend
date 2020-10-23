@@ -26,11 +26,9 @@ export class RegistrationService {
     }
 
     public register(user: User, location?: UserLocation): Observable<User> {
-        // @ts-ignore
-        return new Observable<User>(subscriber => this.client.post<RegistrationResponseInterface>(this.REGISTER_URL, user).subscribe(
-            (newUser: RegistrationResponseInterface) => this.tokenManager.setTokens(newUser.token).then(
+        return new Observable<User>(subscriber => this.client.post<RegistrationResponseInterface, User>(this.REGISTER_URL, user).subscribe(
+            (newUser: RegistrationResponseInterface) => this.authenticationService.authenticateWithToken(newUser.token).then(
                 _ => {
-                    this.authenticationService.isAuthenticated$.next(true);
                     if (!location) {
                         // @ts-ignore
                         subscriber.next(newUser);

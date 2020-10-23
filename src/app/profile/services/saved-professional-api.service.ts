@@ -23,7 +23,7 @@ export class SavedProfessionalApiService {
     }
 
     public create(savedProfessional: SavedProfessionalInterface<number>): Observable<SavedProfessionalInterface<number>> {
-        return this.api.post<SavedProfessionalInterface<number>>(this.url, savedProfessional);
+        return this.api.post(this.url, savedProfessional);
     }
 
     public getById(id: number): Observable<SavedProfessionalInterface<number>> {
@@ -45,7 +45,7 @@ export class SavedProfessionalApiService {
     public createFromMaster(master: MasterInterface, note: string): Observable<SavedProfessionalInterface<number>> {
         const bookmark = this.createBookmark(master.id, note);
 
-        return this.api.post<SavedProfessionalInterface<number>>(this.url, bookmark);
+        return this.api.post(this.url, bookmark);
     }
 
     private createBookmark(masterId: number, note: string): SavedProfessionalInterface<number> {

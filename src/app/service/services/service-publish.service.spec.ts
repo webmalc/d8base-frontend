@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
 import {PricesApiService} from './prices-api.service';
 import {ServiceLocationApiService} from './service-location-api.service';
 import {ServicePhotoApiService} from './service-photo-api.service';

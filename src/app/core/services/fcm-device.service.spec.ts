@@ -1,8 +1,8 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {FcmDeviceService} from './fcm-device.service';
-import {StorageManagerMock} from './token-manager.service.spec';
 
 describe('FcmDeviceService', () => {
     beforeEach(() => TestBed.configureTestingModule({

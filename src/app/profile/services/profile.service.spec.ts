@@ -1,8 +1,8 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
 import {ProfileService} from './profile.service';
 
 
