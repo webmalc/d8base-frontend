@@ -78,8 +78,8 @@ export class ServicePublishDataHolderService {
         return this.stepsData;
     }
 
-    private async updateStorage(): Promise<void> {
-        return await this.storageManager.set(this.storageKey, this.stepsData);
+    private updateStorage(): Promise<void> {
+        return this.storageManager.set(this.storageKey, this.stepsData);
     }
 
     private async loadFromStorage(): Promise<void> {

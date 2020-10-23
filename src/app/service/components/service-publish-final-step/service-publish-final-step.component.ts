@@ -65,12 +65,15 @@ export class ServicePublishFinalStepComponent extends Reinitable {
                                 this.getMasterLocation(master).subscribe(
                                     masterLocation => this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
                                         ServicePublishSteps.Final, {master, masterLocation}
-                                    )
+                                    ).then(() => this.servicePublishDataHolder.assignStepData(
+                                        ServicePublishSteps.Four, {isNewMaster: false}
+                                    ).then(
+                                        () => this.popoverController.dismiss().then(() => {
+                                            subscription.unsubscribe();
+                                            resolve();
+                                        })
+                                    ))
                                 );
-                                this.servicePublishDataHolder.assignStepData(ServicePublishSteps.Four, {isNewMaster: false});
-                                this.popoverController.dismiss();
-                                subscription.unsubscribe();
-                                resolve();
                             }
                         }
                     );
