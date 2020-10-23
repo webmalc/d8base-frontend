@@ -1,3 +1,4 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -5,8 +6,6 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Platform} from '@ionic/angular';
 import {IonicStorageModule, Storage} from '@ionic/storage';
-
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
@@ -23,7 +22,7 @@ describe('AppComponent', () => {
         statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
         splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
         platformReadySpy = Promise.resolve();
-        platformSpy = jasmine.createSpyObj('Platform', {ready: platformReadySpy});
+        platformSpy = jasmine.createSpyObj('Platform', {ready: platformReadySpy, is: () => true});
 
         storageMock = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
@@ -43,7 +42,7 @@ describe('AppComponent', () => {
                 StorageManagerService,
                 TranslationService
             ]
-        }).compileComponents().then();
+        });
 
         fixture = TestBed.createComponent(AppComponent);
     }));
@@ -76,17 +75,13 @@ describe('AppComponent', () => {
     });
 
     it('test translation select options', () => {
-        const trans: TranslationService = TestBed.get(TranslationService);
+        const trans: TranslationService = TestBed.inject(TranslationService);
         const compiled = fixture.debugElement.nativeElement;
         compiled.querySelectorAll('ion-select ion-select-option').forEach(
             (elem: Element) => {
                 expect(trans.getLanguagesAsArray()).toContain(elem.innerHTML.trim());
             }
         );
-    });
-
-    // TODO: How have I test header to ?
-    xit('should have title in  header', () => {
     });
 
     // TODO: add more tests!

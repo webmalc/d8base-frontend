@@ -25,10 +25,10 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     private onChange: (fn: any) => void;
 
     constructor(
-        private api: TagsApiService,
-        private formBuilder: FormBuilder,
-        private tagsListApi: TagsListApiService,
-        private masterManager: MasterManagerService
+        private readonly api: TagsApiService,
+        private readonly formBuilder: FormBuilder,
+        private readonly tagsListApi: TagsListApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 

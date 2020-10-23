@@ -53,7 +53,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
-        firebase.initializeApp(environment.firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(environment.firebaseConfig);
+        }
         const appTitle = this.titleService.getTitle();
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
@@ -101,6 +103,10 @@ export class AppComponent implements OnInit, AfterViewInit {
             splitPane.disabled = !splitPane.disabled;
             menu.disabled = !menu.disabled;
         }
+    }
+
+    public isDesktop(): boolean {
+        return this.platform.is('desktop');
     }
 
     public becomeMaster(): void {

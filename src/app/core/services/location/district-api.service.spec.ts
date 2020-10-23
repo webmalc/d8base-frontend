@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
-import {DistrictApiService} from './district-api.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {DistrictApiService} from './district-api.service';
 
 describe('DistrictApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({

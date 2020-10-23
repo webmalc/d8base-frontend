@@ -9,11 +9,11 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-certificate-edit',
     templateUrl: './certificate-edit.component.html',
-    styleUrls: ['./certificate-edit.component.scss'],
+    styleUrls: ['./certificate-edit.component.scss']
 })
 export class CertificateEditComponent extends AbstractEditComponent<Certificate> {
 
-    constructor(private readonly location: Location, private sanitizer: DomSanitizer) {
+    constructor(private readonly location: Location, private readonly sanitizer: DomSanitizer) {
         super();
     }
 

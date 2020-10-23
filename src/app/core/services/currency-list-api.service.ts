@@ -13,7 +13,7 @@ export class CurrencyListApiService {
 
     private readonly url = environment.backend.rates;
 
-    constructor(private api: ApiClientService) {
+    constructor(private readonly api: ApiClientService) {
     }
 
     public getList(): Observable<Currency[]> {

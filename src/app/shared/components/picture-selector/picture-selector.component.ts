@@ -1,23 +1,19 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, Provider, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
 import {CameraPhoto} from '@capacitor/core';
 import {IonInput, Platform} from '@ionic/angular';
 
-const VALUE_ACCESSOR: Provider = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => PictureSelectorComponent),
-    multi: true
-};
-
 @Component({
     selector: 'app-picture-selector',
     templateUrl: './picture-selector.component.html',
     styleUrls: ['./picture-selector.component.scss'],
-    providers: [
-        VALUE_ACCESSOR
-    ]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => PictureSelectorComponent),
+        multi: true
+    }]
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
 
@@ -28,11 +24,12 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
     public uri: string | null;
     private onChange: (fn: any) => void;
+    private onTouched: (fn: any) => void;
 
     constructor(
         public platform: Platform,
-        private photoService: PhotoService,
-        private fileService: FileService
+        private readonly photoService: PhotoService,
+        private readonly fileService: FileService
     ) {
     }
 
@@ -77,9 +74,11 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     }
 
     public registerOnTouched(fn: any): void {
+        this.onTouched = fn;
     }
 
     public setDisabledState(isDisabled: boolean): void {
+        // can't be disabled
     }
 
     public writeValue(uri: string): void {

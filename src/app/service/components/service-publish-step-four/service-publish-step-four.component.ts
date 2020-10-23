@@ -7,6 +7,7 @@ import {IsUserRegisteredApiService} from '@app/core/services/is-user-registered-
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishStepFourFormService} from '@app/service/forms/service-publish-step-four-form.service';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
@@ -19,24 +20,23 @@ import {filter} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-step-four',
     templateUrl: './service-publish-step-four.component.html',
-    styleUrls: ['./service-publish-step-four.component.scss'],
+    styleUrls: ['./service-publish-step-four.component.scss']
 })
 export class ServicePublishStepFourComponent extends Reinitable {
 
-    public static readonly STEP = 3;
     public readonly formFields = ServicePublishStepFourFormFields;
     public isUserExists: boolean = false;
     private checkEmailSubscription: Subscription = null;
 
     constructor(
         public formService: ServicePublishStepFourFormService,
-        private isRegisteredApi: IsUserRegisteredApiService,
-        private masterManager: MasterManagerService,
+        private readonly isRegisteredApi: IsUserRegisteredApiService,
+        private readonly masterManager: MasterManagerService,
         public authenticationService: AuthenticationService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private registrationService: RegistrationService,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
-        private userManager: UserManagerService
+        private readonly registrationService: RegistrationService,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly userManager: UserManagerService
     ) {
         super();
     }
@@ -49,7 +49,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
             this.checkEmailSubscription = this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)
                 .subscribe(
                     val => this.isUserExists = val,
-                    err => console.log(err)
+                    err => console.error(err)
                 );
         }
     }
@@ -67,7 +67,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
                     user: this.userManager.getCurrentUser()
                 }).subscribe(({user, masterList}) => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishStepFourComponent.STEP, {isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false}
+                        ServicePublishSteps.Four, {isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false}
                     ).then(
                         () => this.serviceStepsNavigationService.next()
                     );
@@ -77,7 +77,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
             this.registrationService.register(plainToClass(User, this.formService.form.getRawValue())).subscribe(
                 user => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishStepFourComponent.STEP, {isNewMaster: true, user, isNewUser: true}
+                        ServicePublishSteps.Four, {isNewMaster: true, user, isNewUser: true}
                     ).then(() => this.serviceStepsNavigationService.next());
                 }
             );
@@ -109,7 +109,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
                                 this.userManager.getCurrentUser().subscribe(
                                     user => {
                                         this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                                            ServicePublishStepFourComponent.STEP, {isNewMaster: false, user, isNewUser: false}
+                                            ServicePublishSteps.Four, {isNewMaster: false, user, isNewUser: false}
                                         ).then(
                                             () => this.serviceStepsNavigationService.next()
                                         );

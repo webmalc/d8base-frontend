@@ -27,10 +27,10 @@ export class DirectServiceService {
     private readonly messagesPerPage: number = environment.message.messages_per_page;
 
     constructor(
-        private userManager: UserManagerService,
-        private messageListUpdater: MessageListUpdaterService,
-        private messagesListApi: MessagesListApiService,
-        private messagesSentApi: MessagesSentApiService
+        private readonly userManager: UserManagerService,
+        private readonly messageListUpdater: MessageListUpdaterService,
+        private readonly messagesListApi: MessagesListApiService,
+        private readonly messagesSentApi: MessagesSentApiService
     ) {
     }
 

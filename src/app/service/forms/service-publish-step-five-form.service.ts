@@ -8,7 +8,7 @@ export class ServicePublishStepFiveFormService {
 
     public form: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private readonly formBuilder: FormBuilder) {
     }
 
     public createForm(data?: StepFiveDataInterface): void {
@@ -16,7 +16,7 @@ export class ServicePublishStepFiveFormService {
             [ServicePublishStepFiveFormFields.FirstName]: [data?.first_name, Validators.required],
             [ServicePublishStepFiveFormFields.LastName]: [data?.last_name, Validators.required],
             [ServicePublishStepFiveFormFields.Gender]: [data?.gender, Validators.required],
-            [ServicePublishStepFiveFormFields.Avatar]: [data?._avatar],
+            [ServicePublishStepFiveFormFields.Avatar]: [data?._avatar]
         });
     }
 

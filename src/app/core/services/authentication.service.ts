@@ -24,9 +24,9 @@ export class AuthenticationService implements AuthenticatorInterface {
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
     constructor(
-        private tokenManager: TokenManagerService,
-        private client: ApiClientService,
-        private preLogout: PreLogoutService
+        private readonly tokenManager: TokenManagerService,
+        private readonly client: ApiClientService,
+        private readonly preLogout: PreLogoutService
     ) {
     }
 
@@ -41,7 +41,7 @@ export class AuthenticationService implements AuthenticatorInterface {
                 password,
                 grant_type: GrantTypes.PasswordGrantType,
                 client_id: environment.client_id,
-                client_secret: environment.client_secret,
+                client_secret: environment.client_secret
             };
 
             // @ts-ignore

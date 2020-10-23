@@ -18,7 +18,7 @@ import {RegistrationFormService} from '../../forms/registration-form.service';
 @Component({
     selector: 'app-registration-form',
     templateUrl: './registration-form.component.html',
-    styleUrls: ['./registration-form.component.scss'],
+    styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent implements OnInit {
 
@@ -35,7 +35,7 @@ export class RegistrationFormComponent implements OnInit {
         private readonly locationService: LocationService,
         private readonly popoverController: PopoverController,
         public readonly countrySelectable: SelectableCountryOnSearchService,
-        public readonly citySelectable: SelectableCityOnSearchService,
+        public readonly citySelectable: SelectableCityOnSearchService
     ) {
     }
 

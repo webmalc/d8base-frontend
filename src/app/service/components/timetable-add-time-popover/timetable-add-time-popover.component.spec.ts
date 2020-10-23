@@ -1,24 +1,28 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { TimetableAddTimePopoverComponent } from './timetable-add-time-popover.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {TimetableAddTimePopoverComponent} from './timetable-add-time-popover.component';
 
 describe('TimetableAddTimePopoverComponent', () => {
-  let component: TimetableAddTimePopoverComponent;
-  let fixture: ComponentFixture<TimetableAddTimePopoverComponent>;
+    let component: TimetableAddTimePopoverComponent;
+    let fixture: ComponentFixture<TimetableAddTimePopoverComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TimetableAddTimePopoverComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TimetableAddTimePopoverComponent],
+            imports: [
+                IonicModule.forRoot(),
+                TranslateModule.forRoot()
+            ]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(TimetableAddTimePopoverComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(TimetableAddTimePopoverComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

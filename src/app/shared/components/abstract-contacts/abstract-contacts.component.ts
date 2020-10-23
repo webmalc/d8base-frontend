@@ -12,7 +12,7 @@ import {debounceTime, filter} from 'rxjs/operators';
 @Component({
     selector: 'app-abstract-contacts',
     templateUrl: './abstract-contacts.component.html',
-    styleUrls: ['./abstract-contacts.component.scss'],
+    styleUrls: ['./abstract-contacts.component.scss']
 })
 export class AbstractContactsComponent extends Reinitable implements OnInit, OnDestroy {
 
@@ -21,16 +21,16 @@ export class AbstractContactsComponent extends Reinitable implements OnInit, OnD
     @Input() public editDefaultContactUrl: string = '/profile/contact-add-default/';
     @Input() public editContactUrl: string = '/profile/contact-edit/';
     @Input() public interactable: boolean = false;
+    @Input() public contactsApiService: ContactsApiServiceInterface;
     public userContacts$: BehaviorSubject<UserContact[]> = new BehaviorSubject<UserContact[]>([]);
     public canAddNewContact$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public contacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
     public defaultContacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
     private subscription: Subscription = null;
     private inited: boolean = false;
-    @Input() private contactsApiService: ContactsApiServiceInterface;
 
     constructor(
-        private contactsApi: ContactApiService
+        private readonly contactsApi: ContactApiService
     ) {
         super();
     }

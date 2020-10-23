@@ -19,7 +19,7 @@ import {Observable} from 'rxjs';
 @Component({
     selector: 'app-master-profile-info',
     templateUrl: './master-profile-info.component.html',
-    styleUrls: ['./master-profile-info.component.scss'],
+    styleUrls: ['./master-profile-info.component.scss']
 })
 export class MasterProfileInfoComponent {
 
@@ -42,8 +42,8 @@ export class MasterProfileInfoComponent {
 
     constructor(
         public masterContactApi: MasterContactsApiService,
-        private masterInfoGeneratorFactory: MasterProfileInfoGeneratorFactoryService,
-        private route: ActivatedRoute
+        private readonly masterInfoGeneratorFactory: MasterProfileInfoGeneratorFactoryService,
+        private readonly route: ActivatedRoute
     ) {
     }
 

@@ -1,19 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'error-flashbag',
     templateUrl: './error-flashbag.component.html',
-    styleUrls: ['./error-flashbag.component.scss'],
+    styleUrls: ['./error-flashbag.component.scss']
 })
-export class ErrorFlashbagComponent implements OnInit {
+export class ErrorFlashbagComponent {
 
     @Input() public message: string;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
 
     public isVisible(): boolean {
         return undefined !== this.message && 0 !== this.message.length;

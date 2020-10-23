@@ -7,7 +7,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-education-edit',
     templateUrl: './education-edit.component.html',
-    styleUrls: ['./education-edit.component.scss'],
+    styleUrls: ['./education-edit.component.scss']
 })
 export class EducationEditComponent extends AbstractEditComponent<Education> {
 

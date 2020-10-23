@@ -15,6 +15,7 @@ export const environment = {
         experience: '/en/api/accounts/professional-experience/',
         certificates: '/en/api/accounts/professional-certificates/',
         language: '/en/api/location/languages/',
+        user_language: '/en/api/accounts/languages/',
         location: '/en/api/accounts/locations/',
         master: '/en/api/accounts/professionals/',
         master_list: '/en/api/professionals/professionals/',
@@ -76,6 +77,10 @@ export const environment = {
         chat_list_update_interval_ms: 5000,
         background_update_interval_ms: 5000,
         messages_per_page: 50
+    },
+    sentry: {
+        enabled: true,
+        dsn: ''
     }
 };
 

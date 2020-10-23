@@ -25,7 +25,7 @@ export class ServicePublishDataHolderService {
     } = {};
     private readonly storageKey = 'service_publish_data';
 
-    constructor(private storageManager: StorageManagerService) {
+    constructor(private readonly storageManager: StorageManagerService) {
         this.loadFromStorage();
     }
 
@@ -39,9 +39,10 @@ export class ServicePublishDataHolderService {
         if (!this.stepsData[step]) {
             this.stepsData[step] = {};
         }
-        for (const k in data) {
-            this.stepsData[step][k] = data[k];
-        }
+        this.stepsData[step] = {
+            ...this.stepsData[step],
+            ...data
+        };
 
         return this.updateStorage();
     }
@@ -77,8 +78,8 @@ export class ServicePublishDataHolderService {
         return this.stepsData;
     }
 
-    private async updateStorage(): Promise<void> {
-        return await this.storageManager.set(this.storageKey, this.stepsData);
+    private updateStorage(): Promise<void> {
+        return this.storageManager.set(this.storageKey, this.stepsData);
     }
 
     private async loadFromStorage(): Promise<void> {

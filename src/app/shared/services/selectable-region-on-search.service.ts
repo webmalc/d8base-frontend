@@ -7,7 +7,7 @@ import {IonicSelectableComponent} from 'ionic-selectable';
 @Injectable()
 export class SelectableRegionOnSearchService extends SelectableSearchService {
 
-    constructor(private regionApi: RegionApiService) {
+    constructor(private readonly regionApi: RegionApiService) {
         super();
     }
 

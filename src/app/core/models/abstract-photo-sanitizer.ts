@@ -4,7 +4,7 @@ import {HelperService} from '@app/core/services/helper.service';
 
 export abstract class AbstractPhotoSanitizer {
 
-    private sanitizer: DomSanitizer;
+    private readonly sanitizer: DomSanitizer;
 
     constructor() {
         this.sanitizer = new ɵDomSanitizerImpl(document);

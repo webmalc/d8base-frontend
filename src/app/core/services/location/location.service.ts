@@ -15,9 +15,9 @@ import {IpServicesHolderService} from './ip-services-holder.service';
 export class LocationService {
 
     constructor(
-        private ipServicesHolder: IpServicesHolderService,
-        private geolocation: Geolocation,
-        private locationAccuracy: LocationAccuracy
+        private readonly ipServicesHolder: IpServicesHolderService,
+        private readonly geolocation: Geolocation,
+        private readonly locationAccuracy: LocationAccuracy
     ) {
     }
 
@@ -63,7 +63,7 @@ export class LocationService {
                                     type: 'Point',
                                     coordinates: [
                                         geolocation.coords.longitude,
-                                        geolocation.coords.latitude,
+                                        geolocation.coords.latitude
                                     ]
                                 };
                             } else if (null !== ipLocation) {
@@ -71,7 +71,7 @@ export class LocationService {
                                     type: 'Point',
                                     coordinates: [
                                         ipLocation.longitude,
-                                        ipLocation.latitude,
+                                        ipLocation.latitude
                                     ]
                                 };
                             } else {
@@ -87,13 +87,14 @@ export class LocationService {
         });
     }
 
-    public async getIpLocationData(): Promise<IpLocation> {
+    public async getIpLocationData(): Promise<IpLocation | null> {
         let ipData: any = null;
         for (const ipService of this.ipServicesHolder.list) {
             try {
                 ipData = await ipService.getData();
                 break;
             } catch (e) {
+                // ignore errors
             }
         }
 

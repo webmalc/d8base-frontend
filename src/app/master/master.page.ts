@@ -15,7 +15,7 @@ import {BehaviorSubject, forkJoin} from 'rxjs';
 @Component({
     selector: 'app-master',
     templateUrl: './master.page.html',
-    styleUrls: ['./master.page.scss'],
+    styleUrls: ['./master.page.scss']
 })
 export class MasterPage extends Reinitable {
 
@@ -25,10 +25,10 @@ export class MasterPage extends Reinitable {
     public editable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private masterManager: MasterManagerService,
-        private userManager: UserManagerService,
-        private reviewsReadonly: ReviewsReadonlyApiService,
-        private route: ActivatedRoute
+        private readonly masterManager: MasterManagerService,
+        private readonly userManager: UserManagerService,
+        private readonly reviewsReadonly: ReviewsReadonlyApiService,
+        private readonly route: ActivatedRoute
     ) {
         super();
     }

@@ -12,7 +12,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-about-edit',
     templateUrl: './about-edit.component.html',
-    styleUrls: ['./about-edit.component.scss'],
+    styleUrls: ['./about-edit.component.scss']
 })
 export class AboutEditComponent implements OnInit {
 
@@ -21,10 +21,10 @@ export class AboutEditComponent implements OnInit {
     public formFields = ProfileFormFields;
 
     constructor(
-        private userManager: UserManagerService,
+        private readonly userManager: UserManagerService,
         public countriesApi: SelectableCountryOnSearchService,
         public languagesApi: LanguagesApiService,
-        private formBuilder: FormBuilder
+        private readonly formBuilder: FormBuilder
     ) { }
 
     public ngOnInit(): void {
@@ -43,7 +43,9 @@ export class AboutEditComponent implements OnInit {
 
     public submitForm(): void {
         this.userManager.updateUser(plainToClass(User, this.form.getRawValue())).subscribe(
-            user => console.log('updated')
+            user => {
+                // TODO: show feedback about operation success
+            }
         );
     }
 }

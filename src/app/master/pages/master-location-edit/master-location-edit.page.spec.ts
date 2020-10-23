@@ -1,24 +1,41 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ActivatedRoute} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
-
+import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {MasterLocationEditPage} from './master-location-edit.page';
 
 describe('MasterLocationEditPage', () => {
-  let component: MasterLocationEditPage;
-  let fixture: ComponentFixture<MasterLocationEditPage>;
+    let component: MasterLocationEditPage;
+    let fixture: ComponentFixture<MasterLocationEditPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterLocationEditPage],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [MasterLocationEditPage],
+            imports: [IonicModule.forRoot(), HttpClientTestingModule],
+            providers: [
+                {
+                    provide: ActivatedRoute, useValue: {
+                        snapshot: {
+                            paramMap: {
+                                get(): string {
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                },
+                {provide: StorageManagerService, useClass: StorageManagerMock}
+            ]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterLocationEditPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(MasterLocationEditPage);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

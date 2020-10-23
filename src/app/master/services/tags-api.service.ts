@@ -15,7 +15,7 @@ export class TagsApiService extends AbstractApiService<Tag> implements ApiServic
 
     private readonly url = environment.backend.professional_tags;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 

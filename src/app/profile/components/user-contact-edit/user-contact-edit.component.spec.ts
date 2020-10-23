@@ -1,13 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
 import {Location} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {FormBuilder} from '@angular/forms';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {IonicModule} from '@ionic/angular';
+import {of} from 'rxjs';
+import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {ContactApiService} from '../../services/contact-api.service';
 import {UserContactApiService} from '../../services/user-contact-api.service';
-import { UserContactEditComponent } from './user-contact-edit.component';
+import {UserContactEditComponent} from './user-contact-edit.component';
 
 describe('UserContactEditComponent', () => {
     let component: UserContactEditComponent;
@@ -15,14 +17,25 @@ describe('UserContactEditComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ UserContactEditComponent ],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
+            declarations: [UserContactEditComponent],
+            imports: [IonicModule.forRoot(), HttpClientTestingModule, ReactiveFormsModule, FormsModule],
             providers: [
                 UserContactApiService,
                 ContactApiService,
                 FormBuilder,
                 Location,
-                {provide: ActivatedRoute, useValue: {snapshot: {paramMap: {get(): string { return ''; }}}}}
+                {
+                    provide: ActivatedRoute, useValue: {
+                        snapshot: {
+                            paramMap: {
+                                get(): string {
+                                    return '';
+                                }
+                            }
+                        }, data: of({isMaster: false})
+                    }
+                },
+                {provide: StorageManagerService, useClass: StorageManagerMock}
             ]
         }).compileComponents();
 

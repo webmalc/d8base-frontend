@@ -6,7 +6,7 @@ import {PasswordRecoveryService} from '@app/auth/services/password-recovery.serv
 @Component({
     selector: 'app-password-recovery-form',
     templateUrl: './password-recovery-form.component.html',
-    styleUrls: ['./password-recovery-form.component.scss'],
+    styleUrls: ['./password-recovery-form.component.scss']
 })
 export class PasswordRecoveryFormComponent implements OnInit {
 

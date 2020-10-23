@@ -1,24 +1,43 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ActivatedRoute} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
-
+import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {EducationApiService} from '../../services/education-api.service';
 import {MasterEducationEditPage} from './master-education-edit.page';
 
 describe('MasterEducationEditPage', () => {
-  let component: MasterEducationEditPage;
-  let fixture: ComponentFixture<MasterEducationEditPage>;
+    let component: MasterEducationEditPage;
+    let fixture: ComponentFixture<MasterEducationEditPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterEducationEditPage],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [MasterEducationEditPage],
+            imports: [IonicModule.forRoot(), HttpClientTestingModule],
+            providers: [
+                EducationApiService,
+                {
+                    provide: ActivatedRoute, useValue: {
+                        snapshot: {
+                            paramMap: {
+                                get(): string {
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                },
+                {provide: StorageManagerService, useClass: StorageManagerMock}
+            ]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterEducationEditPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(MasterEducationEditPage);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

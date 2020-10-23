@@ -10,7 +10,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-user-edit',
     templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.scss'],
+    styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
 
@@ -18,9 +18,9 @@ export class UserEditComponent implements OnInit {
     public formFields = ProfileFormFields;
 
     constructor(
-        private profileService: ProfileService,
-        private location: Location,
-        private registerEmailApi: RegisterEmailApiService
+        private readonly profileService: ProfileService,
+        private readonly location: Location,
+        private readonly registerEmailApi: RegisterEmailApiService
     ) {
     }
 

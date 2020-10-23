@@ -12,7 +12,7 @@ const routes: Routes = [
     },
     {
         path: 'list',
-        component: ChatsComponent,
+        component: ChatsComponent
     },
     {
         path: 'chat/:interlocutor-id',
@@ -22,7 +22,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class MessagePageRoutingModule {
 }

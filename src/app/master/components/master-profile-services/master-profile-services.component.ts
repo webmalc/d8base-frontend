@@ -9,7 +9,7 @@ import {ServicesApiService} from '@app/service/services/services-api.service';
 @Component({
     selector: 'app-master-profile-services',
     templateUrl: './master-profile-services.component.html',
-    styleUrls: ['./master-profile-services.component.scss'],
+    styleUrls: ['./master-profile-services.component.scss']
 })
 export class MasterProfileServicesComponent {
 
@@ -19,10 +19,10 @@ export class MasterProfileServicesComponent {
     private serviceDefaultData: { service: Service, tags?: ServiceTag[] }[] = [];
 
     constructor(
-        private route: ActivatedRoute,
-        private servicesApi: ServicesApiService,
-        private searchService: MasterProfileServicesSearchService,
-        private serviceGeneratorFactory: ServicesGeneratorFactoryService
+        private readonly route: ActivatedRoute,
+        private readonly servicesApi: ServicesApiService,
+        private readonly searchService: MasterProfileServicesSearchService,
+        private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService
     ) {
     }
 

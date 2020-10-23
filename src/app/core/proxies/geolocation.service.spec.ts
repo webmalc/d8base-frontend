@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
-import {GeolocationService} from './geolocation.service';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {GeolocationService} from './geolocation.service';
 
 describe('GeolocationService', () => {
     beforeEach(() => TestBed.configureTestingModule({

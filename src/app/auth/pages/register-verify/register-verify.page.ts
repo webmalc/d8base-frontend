@@ -7,14 +7,14 @@ import {environment} from '../../../../environments/environment';
 @Component({
     selector: 'app-register-verify',
     templateUrl: './register-verify.page.html',
-    styleUrls: ['./register-verify.page.scss'],
+    styleUrls: ['./register-verify.page.scss']
 })
 export class RegisterVerifyPage implements OnInit {
 
     public success: boolean = false;
     private readonly VERIFY_URL = environment.backend.verify_registration;
 
-    constructor(private client: ApiClientService, private activatedRoute: ActivatedRoute) {
+    constructor(private readonly client: ApiClientService, private readonly activatedRoute: ActivatedRoute) {
     }
 
     public ngOnInit(): void {

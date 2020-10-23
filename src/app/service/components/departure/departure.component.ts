@@ -7,7 +7,7 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 @Component({
     selector: 'app-departure',
     templateUrl: './departure.component.html',
-    styleUrls: ['./departure.component.scss'],
+    styleUrls: ['./departure.component.scss']
 })
 export class DepartureComponent implements OnInit {
 
@@ -18,8 +18,8 @@ export class DepartureComponent implements OnInit {
 
     constructor(
         public formService: ServicePublishStepSevenDepartureFormService,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
-        private location: Location
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly location: Location
     ) {
     }
 

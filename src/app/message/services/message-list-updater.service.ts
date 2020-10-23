@@ -15,7 +15,7 @@ export class MessageListUpdaterService {
     private readonly updateInterval: number = environment.message.direct_update_interval_ms;
     private readonly messagesPerPage: number = environment.message.messages_per_page;
 
-    constructor(private messagesListApi: MessagesListApiService, private notificationWorker: NotificationWorkerService) {
+    constructor(private readonly messagesListApi: MessagesListApiService, private readonly notificationWorker: NotificationWorkerService) {
     }
 
     public receiveUpdates(interlocutorId: number): Observable<ApiListResponseInterface<Message>> {
@@ -30,7 +30,7 @@ export class MessageListUpdaterService {
                     interlocutorId, this.messagesPerPage
                 ).subscribe(
                     data => subscriber.next(data),
-                    err => console.log(err)
+                    err => console.error(err)
                 ), this.updateInterval);
             }
         );

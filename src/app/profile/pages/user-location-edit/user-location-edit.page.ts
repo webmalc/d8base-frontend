@@ -10,7 +10,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-user-location-edit',
     templateUrl: './user-location-edit.page.html',
-    styleUrls: ['./user-location-edit.page.scss'],
+    styleUrls: ['./user-location-edit.page.scss']
 })
 export class UserLocationEditPage implements OnInit {
 

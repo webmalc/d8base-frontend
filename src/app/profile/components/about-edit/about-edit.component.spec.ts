@@ -1,10 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {FormBuilder} from '@angular/forms';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
+import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {SelectableCountryOnSearchService} from '../../../shared/services/selectable-country-on-search.service';
-import { AboutEditComponent } from './about-edit.component';
+import {SavedProfessionalApiService} from '../../services/saved-professional-api.service';
+import {AboutEditComponent} from './about-edit.component';
 
 describe('AboutEditComponent', () => {
     let component: AboutEditComponent;
@@ -12,11 +14,13 @@ describe('AboutEditComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ AboutEditComponent ],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
+            declarations: [AboutEditComponent],
+            imports: [IonicModule.forRoot(), HttpClientTestingModule, ReactiveFormsModule, FormsModule],
             providers: [
                 SelectableCountryOnSearchService,
-                FormBuilder
+                FormBuilder,
+                SavedProfessionalApiService,
+                {provide: StorageManagerService, useClass: StorageManagerMock}
             ]
         }).compileComponents();
 

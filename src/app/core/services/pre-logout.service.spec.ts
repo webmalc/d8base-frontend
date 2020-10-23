@@ -3,10 +3,14 @@ import {TestBed} from '@angular/core/testing';
 import {PreLogoutService} from './pre-logout.service';
 
 describe('PreLogoutService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        providers: [
+            PreLogoutService
+        ]
+    }));
 
-  it('should be created', () => {
-    const service: PreLogoutService = TestBed.get(PreLogoutService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: PreLogoutService = TestBed.inject(PreLogoutService);
+        expect(service).toBeTruthy();
+    });
 });

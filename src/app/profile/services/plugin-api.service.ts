@@ -11,7 +11,7 @@ export class PluginApiService {
 
     private readonly URL = environment.backend.plugin;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
     }
 
     public getPlugin(pluginId: number): Observable<Plugin> {

@@ -17,8 +17,8 @@ export class UserManagerService {
     private readonly url = environment.backend.user;
 
     constructor(
-        private api: ApiClientService,
-        private auth: AuthenticationService
+        private readonly api: ApiClientService,
+        private readonly auth: AuthenticationService
     ) {
     }
 

@@ -18,10 +18,10 @@ export class MasterManagerService {
     public isMaster$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private userManager: UserManagerService,
-        private auth: AuthenticationService,
-        private masterApi: MasterApiService,
-        private masterReadonlyApi: MasterReadonlyApiService
+        private readonly userManager: UserManagerService,
+        private readonly auth: AuthenticationService,
+        private readonly masterApi: MasterApiService,
+        private readonly masterReadonlyApi: MasterReadonlyApiService
     ) {
     }
 

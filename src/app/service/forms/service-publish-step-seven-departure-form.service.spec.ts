@@ -1,12 +1,20 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ServicePublishStepSevenDepartureFormService } from './service-publish-step-seven-departure-form.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ServicePublishStepSevenDepartureFormService} from './service-publish-step-seven-departure-form.service';
 
 describe('ServicePublishStepSevenDepartureFormService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({
+        imports: [
+            ReactiveFormsModule, FormsModule
+        ],
+        providers: [
+            ServicePublishStepSevenDepartureFormService
+        ]
+    }));
 
-  it('should be created', () => {
-    const service: ServicePublishStepSevenDepartureFormService = TestBed.get(ServicePublishStepSevenDepartureFormService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: ServicePublishStepSevenDepartureFormService = TestBed.inject(ServicePublishStepSevenDepartureFormService);
+        expect(service).toBeTruthy();
+    });
 });

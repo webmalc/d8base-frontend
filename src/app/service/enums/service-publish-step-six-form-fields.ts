@@ -3,5 +3,5 @@ export enum ServicePublishStepSixFormFields {
     Level = 'level',
     Specialization = 'name',
     IsCompany = 'is_company',
-    CompanyName = 'company_name',
+    CompanyName = 'company_name'
 }

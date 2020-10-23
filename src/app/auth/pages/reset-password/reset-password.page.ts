@@ -8,7 +8,7 @@ import {ResetPasswordApiService} from '@app/auth/services/reset-password-api.ser
 @Component({
     selector: 'app-reset-password',
     templateUrl: './reset-password.page.html',
-    styleUrls: ['./reset-password.page.scss'],
+    styleUrls: ['./reset-password.page.scss']
 })
 export class ResetPasswordPage implements OnInit {
 
@@ -17,9 +17,9 @@ export class ResetPasswordPage implements OnInit {
 
     constructor(
         public formService: ResetPasswordFormService,
-        private activatedRoute: ActivatedRoute,
-        private api: ResetPasswordApiService,
-        private router: Router
+        private readonly activatedRoute: ActivatedRoute,
+        private readonly api: ResetPasswordApiService,
+        private readonly router: Router
     ) { }
 
     public ngOnInit(): void {

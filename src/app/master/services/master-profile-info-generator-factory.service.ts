@@ -32,19 +32,19 @@ import {map, switchMap} from 'rxjs/operators';
 export class MasterProfileInfoGeneratorFactoryService {
 
     constructor(
-        private masterManager: MasterManagerService,
-        private masterLocationApi: MasterLocationApiService,
-        private masterContactApi: MasterContactsApiService,
-        private masterTagsApi: TagsApiService,
-        private userManager: UserManagerService,
-        private countriesApi: CountriesApiService,
-        private languagesApi: LanguagesApiService,
-        private userLanguagesApi: UserLanguagesApiService,
-        private masterExperienceApi: ExperienceApiService,
-        private masterEducationApi: EducationApiService,
-        private certificatesApi: CertificatesApiService,
-        private publicReviewsApi: ReviewsReadonlyApiService,
-        private masterReadonlyApi: MasterReadonlyApiService
+        private readonly masterManager: MasterManagerService,
+        private readonly masterLocationApi: MasterLocationApiService,
+        private readonly masterContactApi: MasterContactsApiService,
+        private readonly masterTagsApi: TagsApiService,
+        private readonly userManager: UserManagerService,
+        private readonly countriesApi: CountriesApiService,
+        private readonly languagesApi: LanguagesApiService,
+        private readonly userLanguagesApi: UserLanguagesApiService,
+        private readonly masterExperienceApi: ExperienceApiService,
+        private readonly masterEducationApi: EducationApiService,
+        private readonly certificatesApi: CertificatesApiService,
+        private readonly publicReviewsApi: ReviewsReadonlyApiService,
+        private readonly masterReadonlyApi: MasterReadonlyApiService
     ) {
     }
 
@@ -53,12 +53,12 @@ export class MasterProfileInfoGeneratorFactoryService {
         masterLocation: MasterLocation[],
         masterContacts: MasterContact[],
         masterTags: Tag[],
+        userCountry: Country | null,
         user: PartialUserInterface,
-        userCountry: Country,
         userLanguages: Language[],
         experienceList: Experience[],
-        educationList: Education[],
         certificateList: Certificate[],
+        educationList: Education[],
         publicReviewList: PublicReview[]
     }> {
         return masterId ? this.get(masterId) : this.masterManager.getMasterList().pipe(switchMap(list => this.get(list[0].id)));
@@ -70,7 +70,7 @@ export class MasterProfileInfoGeneratorFactoryService {
         masterContacts: MasterContact[],
         masterTags: Tag[],
         user: PartialUserInterface,
-        userCountry: Country,
+        userCountry: Country | null,
         userLanguages: Language[],
         experienceList: Experience[],
         educationList: Education[],
@@ -81,10 +81,8 @@ export class MasterProfileInfoGeneratorFactoryService {
             switchMap(
                 (master: MasterList) => forkJoin({
                     master: of(master),
-                    userCountry: this.countriesApi.getByEntityId((master.user.nationality as number).toString(10)),
-                    userLanguages: this.userLanguagesApi.getList(master.user.languages.map(lang => parseInt(lang, 10))).pipe(
-                        switchMap((userLanguagesList: UserLanguage[]) =>
-                            this.languagesApi.getList(userLanguagesList.map(lang => lang.language)))),
+                    userCountry: this.getUserCountry(master.user),
+                    userLanguages: this.getUserLanguages(master.user),
                     user: of(master.user),
                     masterLocation: this.masterLocationApi.getByClientId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
                     masterContacts: this.masterContactApi.getByClientId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
@@ -102,5 +100,17 @@ export class MasterProfileInfoGeneratorFactoryService {
                 })
             )
         );
+    }
+
+    private getUserLanguages(user: PartialUserInterface): Observable<Language[]> {
+        return (user.languages && user.languages.length !== 0) ?
+            this.userLanguagesApi.getList(user.languages.map(lang => parseInt(lang, 10))).pipe(
+                switchMap((userLanguagesList: UserLanguage[]) =>
+                    this.languagesApi.getList(userLanguagesList.map(lang => lang.language)))) :
+            of([]);
+    }
+
+    private getUserCountry(user: PartialUserInterface): Observable<Country | null> {
+        return user.nationality ? this.countriesApi.getByEntityId((user.nationality as number).toString(10)) : of(null);
     }
 }

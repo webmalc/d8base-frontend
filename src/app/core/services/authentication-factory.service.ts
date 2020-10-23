@@ -7,7 +7,7 @@ import {AuthenticationService} from '@app/core/services/authentication.service';
 })
 export class AuthenticationFactory {
 
-    constructor(private mainAuthenticator: AuthenticationService) {
+    constructor(private readonly mainAuthenticator: AuthenticationService) {
     }
 
     public getAuthenticator(): AuthenticatorInterface {

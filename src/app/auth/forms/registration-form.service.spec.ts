@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
-import {RegistrationFormService} from './registration-form.service';
 import {FormBuilder} from '@angular/forms';
+import {RegistrationFormService} from './registration-form.service';
 
 describe('RegistrationFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -12,7 +12,7 @@ describe('RegistrationFormService', () => {
     }));
 
     it('should be created', () => {
-        const service: RegistrationFormService = TestBed.get(RegistrationFormService);
+        const service: RegistrationFormService = TestBed.inject(RegistrationFormService);
         expect(service).toBeTruthy();
     });
 

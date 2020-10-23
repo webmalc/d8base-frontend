@@ -1,8 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {ErrorFlashbagComponent} from './error-flashbag.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {ErrorFlashbagComponent} from './error-flashbag.component';
 
 
 describe('ErrorFlashbagComponent', () => {

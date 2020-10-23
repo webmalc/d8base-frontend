@@ -11,7 +11,7 @@ import {AppModule} from './app.module';
         ServerModule,
         IonicServerModule
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppServerModule {
 }

@@ -1,14 +1,14 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonButton, IonicModule, IonItem} from '@ionic/angular';
 
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {BookmarkFixture} from '../../../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../../../testing/fixtures/generator';
 import {MasterFixture} from '../../../../../testing/fixtures/master-fixture';
+import {SavedProfessionalInterface} from '../../../../core/interfaces/saved-professional.interface';
 import {Master} from '../../../../core/models/master';
 import {BookmarksItemComponent} from './bookmarks-item.component';
-import {BookmarkFixture} from '../../../../../testing/fixtures/bookmark-fixture';
-import {SavedProfessionalInterface} from '../../../../core/interfaces/saved-professional.interface';
-import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
 
 
 describe('BookmarksItemComponent', () => {

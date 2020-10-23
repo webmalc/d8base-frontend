@@ -16,7 +16,7 @@ export class ChatsComponent extends Reinitable implements OnDestroy {
 
     constructor(
         public chatsService: ChatsService,
-        private router: Router
+        private readonly router: Router
     ) {
         super();
     }

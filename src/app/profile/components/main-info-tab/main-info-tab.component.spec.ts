@@ -1,11 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {UserManagerService} from '../../../core/services/user-manager.service';
+import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {PictureSelectorComponent} from '../../../shared/components/picture-selector/picture-selector.component';
 import {ProfileFormService} from '../../forms/profile-form.service';
 import {ContactApiService} from '../../services/contact-api.service';
@@ -27,7 +27,7 @@ describe('MainInfoTabComponent', () => {
                 ProfileService,
                 UserContactApiService,
                 ContactApiService,
-                UserManagerService
+                {provide: StorageManagerService, useClass: StorageManagerMock}
                 // {
                 //     provide: ProfileService,
                 //     useClass: ProfileServiceStub,

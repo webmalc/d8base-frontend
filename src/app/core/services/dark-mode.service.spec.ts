@@ -18,8 +18,8 @@ describe('DarkModeService', () => {
                 {provide: StorageManagerService, useValue: spy}
             ]
         });
-        darkModeService = TestBed.get(DarkModeService);
-        storageManagerSpy = TestBed.get(StorageManagerService);
+        darkModeService = TestBed.inject(DarkModeService);
+        storageManagerSpy = TestBed.inject(StorageManagerService) as jasmine.SpyObj<StorageManagerService>;
     });
 
     it('should be created', () => {

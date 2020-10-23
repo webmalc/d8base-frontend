@@ -1,23 +1,40 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
-
 import {IonicStorageModule} from '@ionic/storage';
-import {plainToClass} from 'class-transformer';
 import {of} from 'rxjs';
 import {User} from '../../core/models/user';
-import {UserLocation} from '../../core/models/user-location';
+import {StorageManagerService} from '../../core/proxies/storage-manager.service';
 import {ApiClientService} from '../../core/services/api-client.service';
 import {LocationService} from '../../core/services/location/location.service';
+import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
+import {LocationServiceMock} from '../../service/components/service-publish-step-four/service-publish-step-four.component.spec';
+import {AuthResponseInterface} from '../interfaces/auth-response.interface';
 import {RegistrationService} from './registration.service';
 
 describe('RegistrationService', () => {
+    const userModel = new User();
+    userModel.first_name = 'name';
+    userModel.last_name = 'lastName';
+    userModel.password = 'pass';
+    userModel.password_confirm = 'pass';
+    const tokenData: AuthResponseInterface = {
+        access_token: 'string',
+        expires_in: 123,
+        token_type: 'string',
+        scope: 'string',
+        refresh_token: 'string'
+    };
+
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            IonicStorageModule.forRoot()
+            IonicStorageModule.forRoot(),
+            HttpClientTestingModule
         ],
         providers: [
             RegistrationService,
-            {provide: ApiClientService, useValue: {post: () => of(true)}},
-            {provide: LocationService, useValue: {getIpData: () => of(null)}},
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+            {provide: LocationService, useClass: LocationServiceMock},
+            {provide: ApiClientService, useValue: {post: () => of({token: tokenData, ...userModel})}}
         ]
     }));
 
@@ -28,20 +45,8 @@ describe('RegistrationService', () => {
 
     it('test #register', (done) => {
         const service: RegistrationService = TestBed.inject(RegistrationService);
-
-        const user = {
-            firstName: 'testName',
-            password: 'testPass',
-            email: 'test@test.te'
-        };
-        const location = {
-            country: 'testCountry',
-            city: 'testCity'
-        };
-
         service.register(
-            plainToClass(User, user, { excludeExtraneousValues: true }),
-            plainToClass(UserLocation, location, { excludeExtraneousValues: true })
+            userModel
         ).subscribe(
             res => {
                 expect(res).toBeTruthy();

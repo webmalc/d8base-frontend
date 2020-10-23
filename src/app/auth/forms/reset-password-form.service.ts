@@ -9,7 +9,7 @@ export class ResetPasswordFormService {
 
     public form: FormGroup;
 
-    constructor(private builder: FormBuilder) {
+    constructor(private readonly builder: FormBuilder) {
     }
 
     public initForm(): void {

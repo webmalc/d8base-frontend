@@ -1,12 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {SettingsTabComponent} from './settings-tab.component';
-import {SettingsFormService} from '../../forms/settings-form.service';
-import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TranslateModule} from '@ngx-translate/core';
+import {ReactiveFormsModule} from '@angular/forms';
 import {IonicStorageModule} from '@ionic/storage';
+import {TranslateModule} from '@ngx-translate/core';
+import {SettingsFormService} from '../../forms/settings-form.service';
+import {SettingsTabComponent} from './settings-tab.component';
 
 describe('SettingsTabComponent', () => {
     let component: SettingsTabComponent;

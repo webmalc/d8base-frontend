@@ -18,10 +18,10 @@ export class RegistrationService {
 
     constructor(
         protected client: ApiClientService,
-        private locationService: LocationService,
-        private locationApiService: UserLocationApiService,
-        private tokenManager: TokenManagerService,
-        private authenticationService: AuthenticationService
+        private readonly locationService: LocationService,
+        private readonly locationApiService: UserLocationApiService,
+        private readonly tokenManager: TokenManagerService,
+        private readonly authenticationService: AuthenticationService
     ) {
     }
 

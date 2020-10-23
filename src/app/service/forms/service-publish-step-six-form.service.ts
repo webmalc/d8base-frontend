@@ -8,7 +8,7 @@ export class ServicePublishStepSixFormService {
 
     public form: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private readonly formBuilder: FormBuilder) {
     }
 
     public createForm(data?: StepSixDataInterface): void {
@@ -19,7 +19,7 @@ export class ServicePublishStepSixFormService {
             [ServicePublishStepSixFormFields.Specialization]: [data?.name,
                 [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
             ],
-            [ServicePublishStepSixFormFields.Level]: [data?.level],
+            [ServicePublishStepSixFormFields.Level]: [data?.level]
         }, {validators: this.companyNameValidator});
     }
 

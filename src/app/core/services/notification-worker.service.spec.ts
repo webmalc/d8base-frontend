@@ -6,7 +6,7 @@ describe('NotificationWorkerService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: NotificationWorkerService = TestBed.get(NotificationWorkerService);
+    const service: NotificationWorkerService = TestBed.inject(NotificationWorkerService);
     expect(service).toBeTruthy();
   });
 });

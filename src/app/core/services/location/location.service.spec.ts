@@ -11,6 +11,38 @@ import {IpServicesHolderService} from './ip-services-holder.service';
 import {IpnfDataService} from './ipnf-data.service';
 import {LocationService} from './location.service';
 
+class HttpMock {
+    public get(url: string): Observable<any> {
+        if (url === 'https://ipapi.co/json/') {
+            return new Observable<any>(
+                subscriber => {
+                    const data = {
+                        error: true
+                    };
+                    subscriber.next(data);
+                    subscriber.complete();
+                }
+            );
+        }
+
+        return new Observable<any>(
+            subscriber => {
+                const data: any = {
+                    postal: 'testPostal',
+                    country_code: 'testCode',
+                    latitude: 123,
+                    longitude: 321,
+                    time_zone: {name: 'timezone'},
+                    city: 'test',
+                    region_code: 'code'
+                };
+                subscriber.next(data);
+                subscriber.complete();
+            }
+        );
+    }
+}
+
 describe('LocationService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
@@ -56,35 +88,3 @@ describe('LocationService', () => {
         );
     });
 });
-
-export class HttpMock {
-    public get(url: string): Observable<any> {
-        if (url === 'https://ipapi.co/json/') {
-            return new Observable<any>(
-                subscriber => {
-                    const data = {
-                        error: true,
-                    };
-                    subscriber.next(data);
-                    subscriber.complete();
-                }
-            );
-        }
-
-        return new Observable<any>(
-            subscriber => {
-                const data: any = {
-                    postal: 'testPostal',
-                    country_code: 'testCode',
-                    latitude: 123,
-                    longitude: 321,
-                    time_zone: {name: 'timezone'},
-                    city: 'test',
-                    region_code: 'code'
-                };
-                subscriber.next(data);
-                subscriber.complete();
-            }
-        );
-    }
-}

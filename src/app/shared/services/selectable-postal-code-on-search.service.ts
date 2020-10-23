@@ -9,7 +9,7 @@ import {IonicSelectableComponent} from 'ionic-selectable';
 })
 export class SelectablePostalCodeOnSearchService extends SelectableSearchService {
 
-    constructor(private postalApi: PostalCodeApiService) {
+    constructor(private readonly postalApi: PostalCodeApiService) {
         super();
     }
 

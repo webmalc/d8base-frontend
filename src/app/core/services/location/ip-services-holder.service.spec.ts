@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IpServicesHolderService } from './ip-services-holder.service';
-import {IpApiService} from './ip-api.service';
-import {IpDataService} from './ip-data.service';
-import {IpnfDataService} from './ipnf-data.service';
 import {HttpClient} from '@angular/common/http';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {IpApiService} from './ip-api.service';
+import {IpDataService} from './ip-data.service';
+import { IpServicesHolderService } from './ip-services-holder.service';
+import {IpnfDataService} from './ipnf-data.service';
 
 describe('IpServicesHolderService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('IpServicesHolderService', () => {
       IpServicesHolderService,
       IpApiService,
       IpDataService,
-      IpnfDataService,
+      IpnfDataService
     ]
   }));
 

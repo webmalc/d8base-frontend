@@ -18,7 +18,7 @@ export class MasterLocationApiService extends AbstractApiService<MasterLocation>
 
     private readonly url = environment.backend.professional_location;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 

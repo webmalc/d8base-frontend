@@ -8,14 +8,14 @@ import {tap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-picker-popover',
     templateUrl: './master-picker-popover.component.html',
-    styleUrls: ['./master-picker-popover.component.scss'],
+    styleUrls: ['./master-picker-popover.component.scss']
 })
 export class MasterPickerPopoverComponent extends Reinitable {
 
     public static master$: BehaviorSubject<Master> = new BehaviorSubject<Master>(undefined);
     public masterList$: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
 
-    constructor(private masterManager: MasterManagerService) {
+    constructor(private readonly masterManager: MasterManagerService) {
         super();
     }
 

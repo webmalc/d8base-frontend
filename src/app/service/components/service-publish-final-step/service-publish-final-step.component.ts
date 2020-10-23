@@ -3,7 +3,7 @@ import {Master} from '@app/core/models/master';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {MasterPickerPopoverComponent} from '@app/service/components/master-peeker/master-picker-popover.component';
-import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
+import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
@@ -18,30 +18,32 @@ import {map} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-final-step',
     templateUrl: './service-publish-final-step.component.html',
-    styleUrls: ['./service-publish-final-step.component.scss'],
+    styleUrls: ['./service-publish-final-step.component.scss']
 })
 export class ServicePublishFinalStepComponent extends Reinitable {
 
-    public static STEP = 7;
-
     constructor(
-        private servicePublish: ServicePublishService,
-        private popoverController: PopoverController,
-        private servicePublishDataHolder: ServicePublishDataHolderService,
+        private readonly servicePublish: ServicePublishService,
+        private readonly popoverController: PopoverController,
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private masterLocationApi: MasterLocationApiService
+        private readonly masterLocationApi: MasterLocationApiService
     ) {
         super();
     }
 
     public publish(): void {
-        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishStepFourComponent.STEP).isNewMaster) {
+        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster) {
             this.popover().then(() => this.servicePublish.publish().subscribe(
-                () => console.log('done')
+                () => {
+                    // TODO: show feedback about operation success
+                }
             ));
         } else {
             this.servicePublish.publish().subscribe(
-                () => console.log('done')
+                () => {
+                    // TODO: show feedback about operation success
+                }
             );
         }
     }
@@ -62,13 +64,16 @@ export class ServicePublishFinalStepComponent extends Reinitable {
                             if (master !== undefined) {
                                 this.getMasterLocation(master).subscribe(
                                     masterLocation => this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
-                                        ServicePublishFinalStepComponent.STEP, {master, masterLocation}
-                                    )
+                                        ServicePublishSteps.Final, {master, masterLocation}
+                                    ).then(() => this.servicePublishDataHolder.assignStepData(
+                                        ServicePublishSteps.Four, {isNewMaster: false}
+                                    ).then(
+                                        () => this.popoverController.dismiss().then(() => {
+                                            subscription.unsubscribe();
+                                            resolve();
+                                        })
+                                    ))
                                 );
-                                this.servicePublishDataHolder.assignStepData(ServicePublishStepFourComponent.STEP, {isNewMaster: false});
-                                this.popoverController.dismiss();
-                                subscription.unsubscribe();
-                                resolve();
                             }
                         }
                     );

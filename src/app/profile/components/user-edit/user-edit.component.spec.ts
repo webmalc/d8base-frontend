@@ -1,12 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
 import {Location} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormBuilder} from '@angular/forms';
+import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {ProfileService} from '../../services/profile.service';
 import {RegisterEmailApiService} from '../../services/register-email-api.service';
-import { UserEditComponent } from './user-edit.component';
+import {UserEditComponent} from './user-edit.component';
 
 describe('UserEditComponent', () => {
     let component: UserEditComponent;
@@ -14,13 +16,14 @@ describe('UserEditComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ UserEditComponent ],
+            declarations: [UserEditComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule],
             providers: [
                 ProfileService,
                 Location,
                 FormBuilder,
-                RegisterEmailApiService
+                RegisterEmailApiService,
+                {provide: StorageManagerService, useClass: StorageManagerMock}
             ]
         }).compileComponents();
 

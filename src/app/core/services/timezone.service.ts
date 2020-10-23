@@ -11,7 +11,7 @@ export class TimezoneService {
 
     private readonly STORAGE_KEY = 'timezones';
 
-    constructor(private storageManager: StorageManagerService, private userLocationApiService: UserLocationApiService) { }
+    constructor(private readonly storageManager: StorageManagerService, private readonly userLocationApiService: UserLocationApiService) { }
 
     public getTimezoneList(): Observable<{ value: string, display_name: string }[]> {
         return from(this.storageManager.get(this.STORAGE_KEY)).pipe(

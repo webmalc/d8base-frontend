@@ -12,7 +12,7 @@ import {debounceTime, filter} from 'rxjs/operators';
 @Component({
     selector: 'app-contacts-add',
     templateUrl: './contacts-add.component.html',
-    styleUrls: ['./contacts-add.component.scss'],
+    styleUrls: ['./contacts-add.component.scss']
 })
 export class ContactsAddComponent extends Reinitable implements OnDestroy, OnInit {
 
@@ -26,7 +26,7 @@ export class ContactsAddComponent extends Reinitable implements OnDestroy, OnIni
 
     constructor(
         public userContactApiService: UserContactApiService,
-        private contactsApi: ContactApiService
+        private readonly contactsApi: ContactApiService
     ) {
         super();
     }

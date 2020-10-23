@@ -22,10 +22,10 @@ export class TranslationService {
     private readonly STORAGE_KEY = 'lang';
 
     constructor(
-        private translator: TranslateService,
-        private storageManager: StorageManagerService,
-        private userSettingsApi: UserSettingsApiService,
-        private authenticationFactory: AuthenticationFactory
+        private readonly translator: TranslateService,
+        private readonly storageManager: StorageManagerService,
+        private readonly userSettingsApi: UserSettingsApiService,
+        private readonly authenticationFactory: AuthenticationFactory
     ) {
     }
 

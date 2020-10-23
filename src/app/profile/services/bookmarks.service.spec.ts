@@ -1,17 +1,18 @@
-import {fakeAsync, flush, inject, TestBed} from '@angular/core/testing';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {fakeAsync, flush, inject, TestBed} from '@angular/core/testing';
 import {asyncData} from '../../../testing/async-observable-helper';
+import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../testing/fixtures/generator';
 import {MasterFixture} from '../../../testing/fixtures/master-fixture';
 import {SavedProfessionalFixture} from '../../../testing/fixtures/saved-professional-fixture';
 import {MasterInterface} from '../../core/interfaces/master.interface';
 import {SavedProfessionalInterface} from '../../core/interfaces/saved-professional.interface';
 import {BookmarkMaster} from '../../core/models/bookmark-master';
+import {StorageManagerService} from '../../core/proxies/storage-manager.service';
 import {MasterManagerService} from '../../core/services/master-manager.service';
+import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
 import {BookmarksService} from './bookmarks.service';
 import {SavedProfessionalApiService} from './saved-professional-api.service';
-import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
 
 describe('BookmarksService', () => {
     let service: BookmarksService;
@@ -20,7 +21,12 @@ describe('BookmarksService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [BookmarksService, SavedProfessionalApiService, MasterManagerService]
+            providers: [
+                BookmarksService,
+                SavedProfessionalApiService,
+                MasterManagerService,
+                {provide: StorageManagerService, useClass: StorageManagerMock}
+            ]
         });
     });
     beforeEach(inject([BookmarksService, SavedProfessionalApiService, MasterManagerService], (bms, sps, mms) => {

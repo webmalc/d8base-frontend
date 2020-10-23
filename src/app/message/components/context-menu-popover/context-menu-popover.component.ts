@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-context-menu-popover',
     templateUrl: './context-menu-popover.component.html',
-    styleUrls: ['./context-menu-popover.component.scss'],
+    styleUrls: ['./context-menu-popover.component.scss']
 })
 export class ContextMenuPopoverComponent implements OnDestroy, OnInit {
 
@@ -14,7 +14,7 @@ export class ContextMenuPopoverComponent implements OnDestroy, OnInit {
     public static update$: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
     public message: Message;
 
-    constructor(private navParams: NavParams) {
+    constructor(private readonly navParams: NavParams) {
     }
 
     public ngOnInit(): void {

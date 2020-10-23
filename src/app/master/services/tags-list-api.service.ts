@@ -10,7 +10,7 @@ export class TagsListApiService extends AbstractReadonlyApiService<Tag> {
 
     private readonly url = environment.backend.professional_tags_list;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 

@@ -13,9 +13,9 @@ import {map, mergeMap, switchMap} from 'rxjs/operators';
 export class ServicesGeneratorFactoryService {
 
     constructor(
-        private servicesApi: ServicesApiService,
-        private serviceTagsApi: ServiceTagsApiService,
-        private masterManager: MasterManagerService
+        private readonly servicesApi: ServicesApiService,
+        private readonly serviceTagsApi: ServiceTagsApiService,
+        private readonly masterManager: MasterManagerService
     ) {
     }
 
@@ -33,9 +33,9 @@ export class ServicesGeneratorFactoryService {
     private combineWithTags(serviceList: Service[]): Observable<{ service: Service, tags: ServiceTag[] }[]> {
         return of(serviceList).pipe(
             mergeMap(services => forkJoin(
-                ...services.map(service => this.serviceTagsApi.get({service: service.id.toString()}).pipe(
+                [...services.map(service => this.serviceTagsApi.get({service: service.id.toString()}).pipe(
                     map(res => ({service, tags: res.results}))
-                ))
+                ))]
             ))
         );
     }

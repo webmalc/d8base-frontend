@@ -19,7 +19,7 @@ export class UserContactApiService extends AbstractApiService<ClientContactInter
 
     private readonly url = environment.backend.user_contact;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 

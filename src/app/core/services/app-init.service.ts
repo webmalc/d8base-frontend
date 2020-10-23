@@ -10,10 +10,10 @@ import {Platform} from '@ionic/angular';
 export class AppInitService {
 
     constructor(
-        private translationService: TranslationService,
-        private platform: Platform,
-        private masterManager: MasterManagerService,
-        private errorHandler: GlobalErrorHandlerService
+        private readonly translationService: TranslationService,
+        private readonly platform: Platform,
+        private readonly masterManager: MasterManagerService,
+        private readonly errorHandler: GlobalErrorHandlerService
     ) {
     }
 

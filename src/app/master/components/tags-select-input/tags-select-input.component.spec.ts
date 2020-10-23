@@ -4,12 +4,12 @@ import {IonicModule} from '@ionic/angular';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {Injectable} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ValueAccessor} from '@ionic/angular/directives/control-value-accessors/value-accessor';
 import {Observable, of} from 'rxjs';
 import {ApiListResponseInterface} from '../../../core/interfaces/api-list-response.interface';
 import {Tag} from '../../models/tag';
 import {TagsApiService} from '../../services/tags-api.service';
 import {TagsSelectInputComponent} from './tags-select-input.component';
-import {ValueAccessor} from '@ionic/angular/directives/control-value-accessors/value-accessor';
 
 describe('TagsSelectInputComponent', () => {
     let component: TagsSelectInputComponent;
@@ -37,7 +37,7 @@ describe('TagsSelectInputComponent', () => {
                 {
                     provide: TagsApiService,
                     useClass: TagsApiServiceStub
-                },
+                }
             ]
         }).compileComponents();
 

@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class GeolocationService {
 
-    constructor(private geolocation: Geolocation) {
+    constructor(private readonly geolocation: Geolocation) {
     }
 
     public getCurrentPosition(): Promise<Geoposition> {

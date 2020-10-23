@@ -10,7 +10,7 @@ export class ServiceScheduleApiService extends AbstractApiService<ServiceSchedul
 
     private readonly url = environment.backend.service_schedule;
 
-    constructor(private client: ApiClientService) {
+    constructor(private readonly client: ApiClientService) {
         super(client);
     }
 
