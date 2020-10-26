@@ -60,7 +60,7 @@
     "mutation-observer": "^1.0.3",
     "ngx-dropzone": "^2.2.2",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.5.5",
+    "rxjs": "^6.6.3",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.3"
   },
