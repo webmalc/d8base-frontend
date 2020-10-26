@@ -1,5 +1,7 @@
-import {EventEmitter, Input, Output} from '@angular/core';
+import {Directive, EventEmitter, Input, Output} from '@angular/core';
 
+// tslint:disable:directive-class-suffix
+@Directive()
 export abstract class AbstractEditComponent<T> {
 
     @Output() public saveEmitter: EventEmitter<T> = new EventEmitter<T>();
