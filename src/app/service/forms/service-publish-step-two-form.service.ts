@@ -15,10 +15,7 @@ export class ServicePublishStepTwoFormService {
         this.form = this.formBuilder.group({
                 [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
                 [ServicePublishStepTwoFormFields.Description]: [data?.description, Validators.minLength(20)],
-                [ServicePublishStepTwoFormFields.DurationFirst]: [data?.duration_first],
-                [ServicePublishStepTwoFormFields.DurationSecond]: [data?.duration_second],
-                [ServicePublishStepTwoFormFields.DurationFirstName]: [data?.duration_first_name],
-                [ServicePublishStepTwoFormFields.DurationSecondName]: [data?.duration_second_name],
+                [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
                 [ServicePublishStepTwoFormFields.IsPriceFixed]: [data?.is_price_fixed ?? true],
                 [ServicePublishStepTwoFormFields.FixedPrice]: [data?.price],
                 [ServicePublishStepTwoFormFields.StartPrice]: [data?.start_price],
@@ -33,13 +30,7 @@ export class ServicePublishStepTwoFormService {
     }
 
     public isSubmitDisabled(): boolean {
-        return this.form.invalid || (
-            !this.form.get(ServicePublishStepTwoFormFields.DurationFirst).value &&
-            !this.form.get(ServicePublishStepTwoFormFields.DurationSecond).value
-        ) || (
-            !this.form.get(ServicePublishStepTwoFormFields.DurationFirstName) &&
-            !this.form.get(ServicePublishStepTwoFormFields.DurationSecondName)
-        );
+        return this.form.invalid;
     }
 
     private currencyValidator(group: FormGroup): any {

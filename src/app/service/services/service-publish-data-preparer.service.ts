@@ -69,7 +69,7 @@ export class ServicePublishDataPreparerService {
     private getService(): Service {
         const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
         const service = plainToClass(Service, stepData, {excludeExtraneousValues: true});
-        service.duration = this.getDuration(stepData);
+        service.duration = stepData.duration;
 
         return HelperService.clear(service);
     }
@@ -162,23 +162,5 @@ export class ServicePublishDataPreparerService {
 
     private getNewPhoto(photo: string): ServicePhoto {
         return plainToClass(ServicePhoto, {photo}, {excludeExtraneousValues: true});
-    }
-
-    private getDuration(data: StepTwoDataInterface): number {
-        return this.conventDuration(data.duration_first_name, data.duration_first) +
-            this.conventDuration(data.duration_second_name, data.duration_second);
-    }
-
-    private conventDuration(name: string, val: number): number {
-        switch (name) {
-            case 'days':
-                return val * 1440;
-            case 'hours':
-                return val * 60;
-            case 'minutes':
-                return val;
-            default:
-                return 0;
-        }
     }
 }
