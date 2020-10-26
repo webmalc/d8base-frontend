@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule, NavParams} from '@ionic/angular';
 
 import {TranslateModule} from '@ngx-translate/core';
@@ -9,7 +9,7 @@ describe('ContextMenuPopoverComponent', () => {
     let component: ContextMenuPopoverComponent;
     let fixture: ComponentFixture<ContextMenuPopoverComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ContextMenuPopoverComponent],
             imports: [

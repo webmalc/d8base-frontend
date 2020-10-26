@@ -1,16 +1,16 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {IonicModule} from '@ionic/angular';
 import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
 import {MasterLocationEditPage} from './master-location-edit.page';
 
 describe('MasterLocationEditPage', () => {
     let component: MasterLocationEditPage;
     let fixture: ComponentFixture<MasterLocationEditPage>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterLocationEditPage],
             imports: [IonicModule.forRoot(), HttpClientTestingModule],

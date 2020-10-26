@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {InfoRowComponent} from './info-row.component';
@@ -7,7 +7,7 @@ describe('InfoRowComponent', () => {
     let component: InfoRowComponent;
     let fixture: ComponentFixture<InfoRowComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [InfoRowComponent],
             imports: [IonicModule.forRoot()]

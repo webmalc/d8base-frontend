@@ -1,13 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonButton, IonicModule, IonItem} from '@ionic/angular';
-
 import {DebugElement} from '@angular/core';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
+import {Master} from '@app/core/models/master';
+import {IonButton, IonicModule, IonItem} from '@ionic/angular';
 import {BookmarkFixture} from '../../../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../../../testing/fixtures/generator';
 import {MasterFixture} from '../../../../../testing/fixtures/master-fixture';
-import {SavedProfessionalInterface} from '../../../../core/interfaces/saved-professional.interface';
-import {Master} from '../../../../core/models/master';
 import {BookmarksItemComponent} from './bookmarks-item.component';
 
 
@@ -17,7 +16,7 @@ describe('BookmarksItemComponent', () => {
     let autofixture: Autofixture;
     let bookmark: SavedProfessionalInterface<Master>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [BookmarksItemComponent],
             imports: [IonicModule.forRoot()]
@@ -28,7 +27,7 @@ describe('BookmarksItemComponent', () => {
         autofixture = new Autofixture();
 
         const template = MasterFixture.create();
-        const master: Master = autofixture.create<Master>(template, { id: 'integer' });
+        const master: Master = autofixture.create<Master>(template, {id: 'integer'});
         bookmark = BookmarkFixture.create(master);
         component.bookmark = bookmark;
         fixture.detectChanges();

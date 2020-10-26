@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -6,7 +6,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {of} from 'rxjs';
 
-import {ApiClientService} from '../../../core/services/api-client.service';
+import {ApiClientService} from '@app/core/services/api-client.service';
 import {PasswordRecoveryFormComponent} from '../../components/password-recovery-form/password-recovery-form.component';
 import {PasswordRecoveryFormService} from '../../forms/password-recovery-form.service';
 import {PasswordRecoveryService} from '../../services/password-recovery.service';
@@ -16,7 +16,7 @@ describe('PasswordRecoverPage', () => {
     let component: PasswordRecoverPage;
     let fixture: ComponentFixture<PasswordRecoverPage>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
             imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],

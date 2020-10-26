@@ -1,11 +1,10 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {Location} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormBuilder} from '@angular/forms';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {IonicModule} from '@ionic/angular';
 import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
 import {ProfileService} from '../../services/profile.service';
 import {RegisterEmailApiService} from '../../services/register-email-api.service';
 import {UserEditComponent} from './user-edit.component';
@@ -14,7 +13,7 @@ describe('UserEditComponent', () => {
     let component: UserEditComponent;
     let fixture: ComponentFixture<UserEditComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [UserEditComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule],

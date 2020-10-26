@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {MasterProfileSubmenuComponent} from './master-profile-submenu.component';
@@ -7,7 +7,7 @@ describe('MasterProfileSubmenuComponent', () => {
     let component: MasterProfileSubmenuComponent;
     let fixture: ComponentFixture<MasterProfileSubmenuComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfileSubmenuComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
