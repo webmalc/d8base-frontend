@@ -63,6 +63,11 @@ export class DurationComponent implements ControlValueAccessor, OnDestroy {
     }
 
     public writeValue(value: number): void {
+        if (!value) {
+            this.form.reset({}, {emitEvent: false});
+
+            return;
+        }
         this.form.setValue(durationFromMinutes(value), {emitEvent: false});
     }
 
