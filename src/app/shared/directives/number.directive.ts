@@ -17,7 +17,7 @@ export class NumberDirective {
             return;
         }
 
-        const current: string = this.el.nativeElement.value;
+        const current: string = this.el.nativeElement.value || '';
         const next: string = current.concat(event.key);
         if (next && !String(next).match(this.regex)) {
             event.preventDefault();
