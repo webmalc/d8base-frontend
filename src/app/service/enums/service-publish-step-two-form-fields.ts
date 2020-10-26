@@ -1,10 +1,7 @@
 export enum ServicePublishStepTwoFormFields {
     Name = 'name',
     Description = 'description',
-    DurationFirstName = 'duration_first_name',
-    DurationSecondName = 'duration_second_name',
-    DurationFirst = 'duration_first',
-    DurationSecond = 'duration_second',
+    Duration = 'duration',
     Currency = 'price_currency',
     StartPrice = 'start_price',
     StartPriceCurrency = 'start_price_currency',
