@@ -8,7 +8,7 @@ import {Observable, Subscription} from 'rxjs';
 @Component({
     selector: 'app-issuance-filters-factory',
     templateUrl: './issuance-filters-factory.component.html',
-    styleUrls: ['./issuance-filters-factory.component.scss'],
+    styleUrls: ['./issuance-filters-factory.component.scss']
 })
 export class IssuanceFiltersFactoryComponent implements OnInit, OnDestroy {
 

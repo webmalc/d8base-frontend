@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-issuance-filters-main-tab',
     templateUrl: './issuance-filters-main-tab.component.html',
-    styleUrls: ['./issuance-filters-main-tab.component.scss'],
+    styleUrls: ['./issuance-filters-main-tab.component.scss']
 })
 export class IssuanceFiltersMainTabComponent {
 
@@ -27,10 +27,6 @@ export class IssuanceFiltersMainTabComponent {
         this.categoriesApi.get().subscribe(
             results => this.categoryList$.next(results.results)
         );
-    }
-
-    public submitFilters(): void {
-        console.log(this.stateManager.data);
     }
 
     public initSubcategories(cat: Category[]): void {

@@ -1,5 +1,5 @@
 <ion-row class="width100">
-    <ion-col class="ion-padding-vertical">
+    <ion-col class="ion-padding-vertical ph5">
         <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
             {{"issuance.filters.main-tab.address"|translate}}
         </ion-item>
@@ -17,11 +17,10 @@
             <ion-label color="medium" position="floating">
                 {{"issuance.filters.main-tab.radius"|translate}}
             </ion-label>
-            <ion-input [(ngModel)]="stateManager.data.main.radius.distance"></ion-input>
+            <ion-input [(ngModel)]="stateManager.data.main.radius.distance" appNumbersOnly></ion-input>
         </ion-item>
         <ion-item
                 class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
-
         <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
             {{"issuance.filters.main-tab.categories"|translate}}
         </ion-item>
@@ -43,7 +42,6 @@
             >
             </ionic-selectable>
         </ion-item>
-
         <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
             {{"issuance.filters.main-tab.subcategories"|translate}}
         </ion-item>
@@ -67,7 +65,6 @@
         </ion-item>
         <ion-item
                 class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
-
         <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
             {{"issuance.filters.main-tab.tags"|translate}}
         </ion-item>
@@ -84,132 +81,94 @@
                     {{"issuance.filters.main-tab.add"|translate}}
                 </ion-button>
             </ion-item>
-            <ion-item class="ion-item-no-border ion-item-no-side-padding pricetags-text">
-                <ion-icon class="ion-padding-end" color="secondary" name="pricetags"></ion-icon>
-                {{"issuance.filters.main-tab.tags-select"|translate}}
+        </ion-row>
+        <ion-item
+                class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
+        <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-top ion-nowrap">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                <ion-col>
+                    <ion-item
+                            class="ion-item-no-border ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
+                        {{"issuance.filters.main-tab.online-booking"|translate}}
+                    </ion-item>
+                    <ion-item
+                            class="ion-item-no-border ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
+                        {{"issuance.filters.main-tab.online-booking-desc"|translate}}
+                    </ion-item>
+                </ion-col>
             </ion-item>
-        </ion-row>
-
-        <ion-item
-                class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
-
-        <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-top">
-            <ion-col size="10">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                    <ion-col>
-                        <ion-item
-                                class="ion-item-no-border ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
-                            {{"issuance.filters.main-tab.online-booking"|translate}}
-                        </ion-item>
-                        <ion-item
-                                class="ion-item-no-border ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
-                            {{"issuance.filters.main-tab.online-booking-desc"|translate}}
-                        </ion-item>
-                    </ion-col>
+            <ion-row class="ion-justify-content-end">
+                <ion-item class="ion-item-no-border">
+                    <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineBooking"></ion-checkbox>
                 </ion-item>
-            </ion-col>
-            <ion-col size="2">
-                <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border">
-                        <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineBooking"></ion-checkbox>
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+            </ion-row>
         </ion-row>
-        <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-col size="10">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                    <ion-col>
-                        <ion-item
-                                class="ion-item-no-border ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
-                            {{"issuance.filters.main-tab.instant-booking"|translate}}
-                        </ion-item>
-                        <ion-item
-                                class="ion-item-no-border ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
-                            {{"issuance.filters.main-tab.instant-booking-desc"|translate}}
-                        </ion-item>
-                    </ion-col>
-                </ion-item>
-            </ion-col>
-            <ion-col size="2">
-                <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border">
-                        <ion-checkbox [(ngModel)]="stateManager.data.main.isInstantBooking"></ion-checkbox>
+        <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                <ion-col>
+                    <ion-item
+                            class="ion-item-no-border ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
+                        {{"issuance.filters.main-tab.instant-booking"|translate}}
                     </ion-item>
-                </ion-row>
-            </ion-col>
+                    <ion-item
+                            class="ion-item-no-border ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
+                        {{"issuance.filters.main-tab.instant-booking-desc"|translate}}
+                    </ion-item>
+                </ion-col>
+            </ion-item>
+            <ion-row class="ion-justify-content-end">
+                <ion-item class="ion-item-no-border">
+                    <ion-checkbox [(ngModel)]="stateManager.data.main.isInstantBooking"></ion-checkbox>
+                </ion-item>
+            </ion-row>
         </ion-row>
         <ion-item
                 class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
-
         <ion-item
                 class="ion-item-no-border ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
             <app-collapse-item [noSidePadding]="true" class="width100"
                                title='{{"issuance.filters.main-tab.datetime"|translate}}'>
             </app-collapse-item>
         </ion-item>
-
         <ion-item class="ion-item-no-border ion-item-no-side-padding">
             {{"issuance.filters.main-tab.availability"|translate}}
         </ion-item>
-        <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-col size="10">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
-                    {{"issuance.filters.main-tab.online-service"|translate}}
+        <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
+                {{"issuance.filters.main-tab.online-service"|translate}}
+            </ion-item>
+            <ion-row class="ion-justify-content-end">
+                <ion-item class="ion-item-no-border">
+                    <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineService"
+                                  class="ion-no-margin"></ion-checkbox>
                 </ion-item>
-            </ion-col>
-            <ion-col size="2">
-                <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border">
-                        <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineService"
-                                      class="ion-no-margin"></ion-checkbox>
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+            </ion-row>
         </ion-row>
-        <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-col size="10">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
-                    {{"issuance.filters.main-tab.at-master-location"|translate}}
-                </ion-item>
-            </ion-col>
-            <ion-col size="2">
-                <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border">
-                        <ion-checkbox [(ngModel)]="stateManager.data.main.isAtMasterLocationService"
-                                      class="ion-no-margin"></ion-checkbox>
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+        <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
+                {{"issuance.filters.main-tab.at-master-location"|translate}}
+            </ion-item>
+            <ion-item class="ion-item-no-border">
+                <ion-checkbox [(ngModel)]="stateManager.data.main.isAtMasterLocationService"
+                              class="ion-no-margin"></ion-checkbox>
+            </ion-item>
         </ion-row>
-        <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-col size="10">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
-                    {{"issuance.filters.main-tab.at-client-location"|translate}}
-                </ion-item>
-            </ion-col>
-            <ion-col size="2">
-                <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border">
-                        <ion-checkbox [(ngModel)]="stateManager.data.main.isAtClientLocationService"
-                                      class="ion-no-margin"></ion-checkbox>
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+        <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
+                {{"issuance.filters.main-tab.at-client-location"|translate}}
+            </ion-item>
+            <ion-item class="ion-item-no-border">
+                <ion-checkbox [(ngModel)]="stateManager.data.main.isAtClientLocationService"
+                              class="ion-no-margin"></ion-checkbox>
+            </ion-item>
         </ion-row>
         <ion-item
                 class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
-
         <ion-item
                 class="ion-item-no-border ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
             <app-collapse-item [noSidePadding]="true" class="width100"
                                title='{{"issuance.filters.main-tab.price"|translate}}'>
             </app-collapse-item>
         </ion-item>
-
-        <ion-button (click)="submitFilters()" class="ion-margin-top" color="secondary" expand="block" fill="solid"
-                    size="medium">
-            {{"issuance.filters.main-tab.apply"|translate}}
-        </ion-button>
     </ion-col>
 </ion-row>

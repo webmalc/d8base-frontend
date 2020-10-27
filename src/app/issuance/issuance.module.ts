@@ -7,7 +7,9 @@ import {IssuanceFiltersFactoryComponent} from '@app/issuance/components/issuance
 import {IssuanceFiltersMainTabComponent} from '@app/issuance/components/issuance-filters-main-tab/issuance-filters-main-tab.component';
 import {IssuanceFiltersSubmenuComponent} from '@app/issuance/components/issuance-filters-submenu/issuance-filters-submenu.component';
 import {IssuanceFiltersComponent} from '@app/issuance/components/issuance-filters/issuance-filters.component';
+import {SearchResultComponent} from '@app/issuance/components/search-result/search-result.component';
 import {IssuanceFilterStateService} from '@app/issuance/services/issuance-filter-state.service';
+import {SearchService} from '@app/issuance/services/search.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -31,10 +33,15 @@ import {IssuancePage} from './issuance.page';
         IssuanceFiltersSubmenuComponent,
         IssuanceFiltersFactoryComponent,
         IssuanceFiltersMainTabComponent,
-        IssuanceFiltersAdditionalTabComponent
+        IssuanceFiltersAdditionalTabComponent,
+        SearchResultComponent
+    ],
+    exports: [
+        IssuanceFiltersComponent
     ],
     providers: [
-        IssuanceFilterStateService
+        IssuanceFilterStateService,
+        SearchService
     ]
 })
 export class IssuancePageModule {

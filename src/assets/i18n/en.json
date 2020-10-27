@@ -224,6 +224,16 @@
       "1": "year",
       "2": "years",
       "3": "years"
+    },
+    "proposal": {
+      "1": "proposal",
+      "2": "proposals",
+      "3": "proposals"
+    },
+    "is-waiting": {
+      "1": "is waiting",
+      "2": "is waiting",
+      "3": "is waiting"
     }
   },
   "master-profile": {
@@ -376,6 +386,16 @@
         "price": "Service price",
         "apply": "Apply"
       }
+    },
+    "result": {
+      "you": "for you",
+      "sort": "sorting"
+    },
+    "search-result": {
+      "services": "Professional service(s)",
+      "more": "More services",
+      "address": "Professional location",
+      "select": "Select"
     }
   }
 }
