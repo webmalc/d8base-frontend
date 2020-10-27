@@ -1,11 +1,11 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
+import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
 import {LoginFormFields} from '../../enums/login-form-fields';
 import {LoginFormService} from '../../forms/login-form.service';
 import {Credentials} from '../../interfaces/credentials';
@@ -17,7 +17,7 @@ describe('LoginFormComponent', () => {
     let router: Router;
     // Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.
     // But if remove 'forRoot()' - test submit login form don't pass. Magick!
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LoginFormComponent, ErrorFlashbagComponent],
             imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
@@ -40,7 +40,7 @@ describe('LoginFormComponent', () => {
         expect((component as any).loginFormService.form.valid).toBeFalsy();
     });
 
-    it('test submit login form', async(() => {
+    it('test submit login form', waitForAsync(() => {
         const username = component.loginFormService.form.controls[LoginFormFields.Username];
         const password = component.loginFormService.form.controls[LoginFormFields.Password];
         password.setValue('valid_pass');

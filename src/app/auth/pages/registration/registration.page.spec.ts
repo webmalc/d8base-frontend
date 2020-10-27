@@ -1,26 +1,25 @@
-import {async, ComponentFixture, fakeAsync, flush, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClient} from '@angular/common/http';
+import {ComponentFixture, fakeAsync, flush, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
+import {User} from '@app/core/models/user';
+import {UserLocation} from '@app/core/models/user-location';
+import {IpApiService} from '@app/core/services/location/ip-api.service';
+import {IpDataService} from '@app/core/services/location/ip-data.service';
+import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
+import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
+import {LocationService} from '@app/core/services/location/location.service';
+import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
-import {TranslateModule} from '@ngx-translate/core';
-import {plainToClass} from 'class-transformer';
-import {of} from 'rxjs';
+import {IonicModule} from '@ionic/angular';
 
 import {IonicStorageModule} from '@ionic/storage';
+import {TranslateModule} from '@ngx-translate/core';
+import {plainToClass} from 'class-transformer';
 import {IonicSelectableModule} from 'ionic-selectable';
-import {User} from '../../../core/models/user';
-import {UserLocation} from '../../../core/models/user-location';
-import {IpApiService} from '../../../core/services/location/ip-api.service';
-import {IpDataService} from '../../../core/services/location/ip-data.service';
-import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
-import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
-import {LocationService} from '../../../core/services/location/location.service';
-import {ErrorFlashbagComponent} from '../../../shared/components/error-flashbag/error-flashbag.component';
+import {of} from 'rxjs';
 import {RegistrationFormComponent} from '../../components/registration-form/registration-form.component';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 import {RegistrationService} from '../../services/registration.service';
@@ -31,7 +30,7 @@ describe('RegistrationPage', () => {
     let fixture: ComponentFixture<RegistrationPage>;
     let router: Router;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         const ipServiceMock = {
             getData: () => Promise.resolve({
                 postalCode: 'testCode',

@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {CitiesApiService} from '@app/core/services/location/cities-api.service';
+import {LocationService} from '@app/core/services/location/location.service';
+import {City} from '@app/profile/models/city';
+import {IonicModule} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
-import {ApiListResponseInterface} from '../../../core/interfaces/api-list-response.interface';
-import {CitiesApiService} from '../../../core/services/location/cities-api.service';
-import {LocationService} from '../../../core/services/location/location.service';
-import {City} from '../../../profile/models/city';
 import {CityPickerPopoverComponent} from './city-picker-popover.component';
 
 class LocationServiceStub {
@@ -33,7 +32,7 @@ describe('CityPickerPopoverComponent', () => {
     let component: CityPickerPopoverComponent;
     let fixture: ComponentFixture<CityPickerPopoverComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CityPickerPopoverComponent],
             imports: [IonicModule, HttpClientTestingModule],

@@ -1,10 +1,10 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {of} from 'rxjs';
 import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
 import {MasterProfileSubmenu} from '../../enums/master-profile-submenu';
 import {CertificatesApiService} from '../../services/certificates-api.service';
 import {EducationApiService} from '../../services/education-api.service';
@@ -18,7 +18,7 @@ xdescribe('MasterProfileFactoryComponent', () => {
     let component: MasterProfileFactoryComponent;
     let fixture: ComponentFixture<MasterProfileFactoryComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfileFactoryComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],

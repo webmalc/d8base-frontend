@@ -1,5 +1,5 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 import {MasterEditComponent} from './master-edit.component';
 
@@ -7,7 +7,7 @@ describe('MasterEditComponent', () => {
     let component: MasterEditComponent;
     let fixture: ComponentFixture<MasterEditComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterEditComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule]

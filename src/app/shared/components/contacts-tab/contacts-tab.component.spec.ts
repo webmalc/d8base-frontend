@@ -1,8 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
 import {ContactsTabFormService} from '../../forms/contacts-tab-form.service';
 import {ContactsTabComponent} from './contacts-tab.component';
 
@@ -10,7 +9,7 @@ describe('SharedContactsTabComponent', () => {
     let component: ContactsTabComponent;
     let fixture: ComponentFixture<ContactsTabComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ContactsTabComponent],
             imports: [IonicModule.forRoot(), ReactiveFormsModule, HttpClientTestingModule],
