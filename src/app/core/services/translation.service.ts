@@ -30,7 +30,7 @@ export class TranslationService {
     }
 
     public init(): void {
-        this.authenticationFactory.getAuthenticator().isAuthenticated().subscribe(
+        this.authenticationFactory.getAuthenticator().isAuthenticated$.subscribe(
             isAuthenticated => {
                 if (isAuthenticated) {
                     this.getFromApi().subscribe(

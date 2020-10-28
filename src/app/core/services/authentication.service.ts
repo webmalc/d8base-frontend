@@ -8,8 +8,8 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
-import {catchError, map, shareReplay} from 'rxjs/operators';
+import {BehaviorSubject, from, Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 interface RefreshData {
     refresh_token: string;
@@ -43,14 +43,7 @@ export class AuthenticationService implements AuthenticatorInterface {
         private readonly client: ApiClientService,
         private readonly preLogout: PreLogoutService
     ) {
-        this.isAuthenticated$ = combineLatest([
-            this.isAuthenticatedSubject$,
-            this.tokenManager.isRefreshTokenExpired$
-        ]).pipe(
-            map(([isAuthenticated, isExpired]) => isAuthenticated && !isExpired),
-            catchError(() => of(null)),
-            shareReplay(1)
-        );
+        this.isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
     }
 
     public login({username, password}: Credentials): Observable<void> {
@@ -81,22 +74,14 @@ export class AuthenticationService implements AuthenticatorInterface {
         });
     }
 
-    public async logout(): Promise<void> {
-        await this.preLogout.run();
-        await this.tokenManager.clear();
-        this.isAuthenticatedSubject$.next(false);
+    public logout(): Observable<void> {
+        return from(this.preLogout.run().then(() => this.tokenManager.clear())).pipe(
+            tap(() => this.isAuthenticatedSubject$.next(false))
+        );
     }
 
     public authenticateWithToken(token: AuthResponseInterface): Promise<void> {
         return this.tokenManager.setTokens(token).then(() => this.isAuthenticatedSubject$.next(true));
-    }
-
-    public isAuthenticated(): Observable<boolean> {
-        return this.isAuthenticated$;
-    }
-
-    public needToRefresh(): Promise<boolean> {
-        return this.tokenManager.needToRefresh();
     }
 
     public refresh(): Observable<void> {

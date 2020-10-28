@@ -1,4 +1,4 @@
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {StorageManagerMock} from 'src/testing/mocks';
@@ -47,7 +47,7 @@ describe('TokenManagerService', () => {
         );
     });
 
-    it('test #getAccessToken',  (done) => {
+    it('test #getAccessToken', (done) => {
         const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         service.setTokens(tokenData).then(
@@ -62,7 +62,7 @@ describe('TokenManagerService', () => {
         );
     });
 
-    it('test #getRefreshToken',  (done) => {
+    it('test #getRefreshToken', (done) => {
         const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         service.setTokens(tokenData).then(
@@ -77,7 +77,7 @@ describe('TokenManagerService', () => {
         );
     });
 
-    it('test #clear',  (done) => {
+    it('test #clear', (done) => {
         const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         service.setTokens(tokenData).then(
@@ -101,20 +101,5 @@ describe('TokenManagerService', () => {
             }
         );
     });
-
-    it('test #isAccessTokenExpired', fakeAsync(() => {
-        const service: TokenManagerService = TestBed.inject(TokenManagerService);
-
-        service.setTokens(tokenData).then(
-            _ => {
-                tick(6000);
-                (service as any).isAccessTokenExpired().then(
-                    bool => {
-                        expect(bool).toBeTruthy();
-                    }
-                );
-            }
-        );
-    }));
 
 });

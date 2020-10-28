@@ -13,7 +13,7 @@ export class MainGuard implements CanActivate {
 
     public canActivate(): Observable<boolean | UrlTree> {
         return new Observable<UrlTree | boolean>(subscriber => {
-            this.authFactory.getAuthenticator().isAuthenticated().subscribe(
+            this.authFactory.getAuthenticator().isAuthenticated$.subscribe(
                 isAuthenticated => {
                     if (!isAuthenticated) {
                         subscriber.next(this.router.parseUrl('/auth/login'));
@@ -22,7 +22,7 @@ export class MainGuard implements CanActivate {
                     }
                     subscriber.complete();
                 },
-                error => {
+                () => {
                     subscriber.next(this.router.parseUrl('/auth/login'));
                     subscriber.complete();
                 }

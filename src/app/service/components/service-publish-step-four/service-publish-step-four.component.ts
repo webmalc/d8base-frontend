@@ -100,7 +100,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
     }
 
     protected init(): void {
-        this.authenticationService.isAuthenticated().pipe(filter(val => true === val)).subscribe(
+        this.authenticationService.isAuthenticated$.pipe(filter(val => true === val)).subscribe(
             () => {
                 this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
                     () => {

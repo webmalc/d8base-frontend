@@ -5,7 +5,6 @@ import {BrowserModule, Title} from '@angular/platform-browser';
 import {Router, RouteReuseStrategy} from '@angular/router';
 import {GeolocationService} from '@app/core/proxies/geolocation.service';
 import {AppInitService} from '@app/core/services/app-init.service';
-import {AuthInterceptor} from '@app/core/services/auth-interceptor.service';
 import {FcmDeviceService} from '@app/core/services/fcm-device.service';
 import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
 import {HeadersInterceptor} from '@app/core/services/headers-interceptor.service';
@@ -65,11 +64,6 @@ import {AppComponent} from './app.component';
         {
             provide: RouteReuseStrategy,
             useClass: IonicRouteStrategy
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
         },
         {
             provide: HTTP_INTERCEPTORS,

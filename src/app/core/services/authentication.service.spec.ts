@@ -94,7 +94,7 @@ describe('AuthenticationService', () => {
         })
             .then(
                 _ => {
-                    service.isAuthenticated().subscribe(
+                    service.isAuthenticated$.subscribe(
                         res => {
                             expect(res).toBeTruthy();
                             done();
@@ -130,7 +130,7 @@ describe('AuthenticationService', () => {
         })
             .then(
                 _ => {
-                    service.logout().then(
+                    service.logout().subscribe(
                         () => {
                             (service as any).tokenManager.getAccessToken().then(
                                 token => {
