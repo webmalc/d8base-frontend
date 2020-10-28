@@ -7,13 +7,13 @@ describe('MasterScheduleApiService', () => {
         imports: [
             HttpClientTestingModule
         ],
-        declarations: [
+        providers: [
             MasterScheduleApiService
         ]
     }));
 
     it('should be created', () => {
-        const service: MasterScheduleApiService = TestBed.get(MasterScheduleApiService);
+        const service: MasterScheduleApiService = TestBed.inject(MasterScheduleApiService);
         expect(service).toBeTruthy();
     });
 });
