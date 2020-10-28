@@ -2,9 +2,9 @@ import {isPlatformServer} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorHandler, Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Router} from '@angular/router';
+import {environment} from '@env/environment';
 import {ToastController} from '@ionic/angular';
 import * as Sentry from '@sentry/angular';
-import {environment} from '../../../environments/environment';
 
 const ERROR_TOAST_DURATION_MS = 3000;
 

@@ -3,6 +3,7 @@ import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
 import {MasterLocation} from '@app/master/models/master-location';
+import {MasterSchedule} from '@app/master/models/master-schedule';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {PaymentMethods} from '@app/service/enums/payment-methods';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
@@ -34,6 +35,7 @@ export class ServicePublishDataPreparerService {
         service: Service,
         servicePhotos: ServicePhoto[],
         serviceSchedule: ServiceSchedule[],
+        masterSchedule: MasterSchedule[],
         serviceLocation: ServiceLocation,
         masterLocation: MasterLocation,
         servicePrice: Price
@@ -44,13 +46,31 @@ export class ServicePublishDataPreparerService {
             service: this.getService(),
             servicePhotos: await this.getServicePhotos(),
             serviceSchedule: this.getServiceSchedule(),
+            masterSchedule: this.getMasterSchedule(),
             serviceLocation: this.getServiceLocation(),
             masterLocation: this.getMasterLocation(),
             servicePrice: this.getServicePrice()
         };
     }
 
+    private getMasterSchedule(): MasterSchedule[] {
+        if (this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).need_to_create_master_schedule) {
+            const stepData: MasterSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
+                ServicePublishSteps.Seven
+            )?.timetable?.map(
+                raw => plainToClass(MasterSchedule, raw)
+            ));
+
+            return !stepData ? [] : stepData;
+        }
+
+        return [];
+    }
+
     private getServiceSchedule(): ServiceSchedule[] {
+        if (this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).use_master_schedule) {
+            return [];
+        }
         const stepData: ServiceSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
             ServicePublishSteps.Seven
         )?.timetable?.map(
@@ -70,6 +90,9 @@ export class ServicePublishDataPreparerService {
         const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
         const service = plainToClass(Service, stepData, {excludeExtraneousValues: true});
         service.duration = stepData.duration;
+        service.is_base_schedule = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
+            .use_master_schedule || this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
+            .need_to_create_master_schedule;
 
         return HelperService.clear(service);
     }

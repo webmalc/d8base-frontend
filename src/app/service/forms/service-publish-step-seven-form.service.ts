@@ -18,7 +18,8 @@ export class ServicePublishStepSevenFormService {
             [ServicePublishStepSevenFormFields.Address]: [data?.address],
             [ServicePublishStepSevenFormFields.Postal]: [data?.postal_code],
             [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
-            [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false]
+            [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
+            [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false]
         });
     }
 

@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {MasterPhoto} from '@app/master/models/master-photo';
+import {MasterSchedule} from '@app/master/models/master-schedule';
 import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MasterPhotosApiService extends AbstractApiService<MasterPhoto> {
+export class MasterScheduleApiService extends AbstractApiService<MasterSchedule> {
 
-    private readonly url = environment.backend.master_photos;
+    private readonly url = environment.backend.master_schedule;
 
-    constructor(protected client: ApiClientService) {
+    constructor(protected readonly client: ApiClientService) {
         super(client);
     }
 
@@ -21,7 +21,7 @@ export class MasterPhotosApiService extends AbstractApiService<MasterPhoto> {
     }
 
     // @ts-ignore
-    protected transform(data: MasterPhoto | MasterPhoto[]): MasterPhoto | MasterPhoto[] {
-        return plainToClass(MasterPhoto, data);
+    protected transform(data: (MasterSchedule | MasterSchedule[])): (MasterSchedule | MasterSchedule[]) {
+        return plainToClass(MasterSchedule, data);
     }
 }

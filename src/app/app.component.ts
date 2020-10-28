@@ -11,13 +11,13 @@ import {NotificationWorkerService} from '@app/core/services/notification-worker.
 import {TranslationService} from '@app/core/services/translation.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
+import {environment} from '@env/environment';
 import {firebase} from '@firebase/app';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
-import {environment} from '../environments/environment';
 
 @Component({
     selector: 'app-root',

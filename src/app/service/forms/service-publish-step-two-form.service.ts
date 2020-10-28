@@ -25,42 +25,40 @@ export class ServicePublishStepTwoFormService {
                 [ServicePublishStepTwoFormFields.StartPriceCurrency]: [data?.start_price_currency],
                 [ServicePublishStepTwoFormFields.EndPriceCurrency]: [data?.end_price_currency]
             },
-            {validators: [this.checkPricesValidator, this.fixedPriceValidator, this.currencyValidator]}
+            {validators: [this.checkPricesValidator]}
         );
     }
 
     public isSubmitDisabled(): boolean {
-        return this.form.invalid;
+        return (this.form.invalid || this.currencyValidator(this.form) || this.fixedPriceValidator(this.form));
     }
 
-    private currencyValidator(group: FormGroup): any {
+    private currencyValidator(group: FormGroup): boolean {
         if (group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
             !group.get(ServicePublishStepTwoFormFields.Currency).value) {
-            group.get(ServicePublishStepTwoFormFields.Currency).setErrors({fixedPriceCurrencyError: true});
+            return true;
         }
         if (!group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
             !group.get(ServicePublishStepTwoFormFields.StartPriceCurrency).value) {
-            group.get(ServicePublishStepTwoFormFields.StartPriceCurrency).setErrors({startPriceCurrencyError: true});
+            return true;
         }
-        if (!group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
-            !group.get(ServicePublishStepTwoFormFields.EndPriceCurrency).value) {
-            group.get(ServicePublishStepTwoFormFields.EndPriceCurrency).setErrors({endPriceCurrencyError: true});
-        }
+
+        return !group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
+            !group.get(ServicePublishStepTwoFormFields.EndPriceCurrency).value;
     }
 
-    private fixedPriceValidator(group: FormGroup): any {
+    private fixedPriceValidator(group: FormGroup): boolean {
         if (group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
             !group.get(ServicePublishStepTwoFormFields.FixedPrice).value) {
-            group.get(ServicePublishStepTwoFormFields.FixedPrice).setErrors({priceError: true});
+            return true;
         }
         if (!group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
             !group.get(ServicePublishStepTwoFormFields.StartPrice).value) {
-            group.get(ServicePublishStepTwoFormFields.StartPrice).setErrors({priceError: true});
+            return true;
         }
-        if (!group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
-            !group.get(ServicePublishStepTwoFormFields.EndPrice).value) {
-            group.get(ServicePublishStepTwoFormFields.EndPrice).setErrors({priceError: true});
-        }
+
+        return !group.get(ServicePublishStepTwoFormFields.IsPriceFixed).value &&
+            !group.get(ServicePublishStepTwoFormFields.EndPrice).value;
     }
 
     private checkPricesValidator(group: FormGroup): any {
