@@ -29,7 +29,7 @@ export class StepFourHandlerService extends AbstractHandler {
     }
 
     private handle(handler: () => Observable<number>): Observable<number> {
-        return this.authenticationService.isAuthenticated().pipe(
+        return this.authenticationService.isAuthenticated$.pipe(
             switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex()))
         );
     }

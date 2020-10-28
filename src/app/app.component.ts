@@ -11,13 +11,13 @@ import {NotificationWorkerService} from '@app/core/services/notification-worker.
 import {TranslationService} from '@app/core/services/translation.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
+import {environment} from '@env/environment';
 import {firebase} from '@firebase/app';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
-import {environment} from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -122,14 +122,15 @@ export class AppComponent implements OnInit, AfterViewInit {
         return this.titleService.getTitle();
     }
 
-    public async logout(): Promise<void> {
-        await this.authenticationFactory.getAuthenticator().logout();
-        this.masterManager.updateIsMaster();
-        this.router.navigateByUrl('/auth/login');
+    public logout(): void {
+        this.authenticationFactory.getAuthenticator().logout().subscribe(() => {
+            this.masterManager.updateIsMaster();
+            this.router.navigateByUrl('/auth/login');
+        });
     }
 
     private getDefaultUserCountry(): Observable<Country> {
-        return this.authenticationFactory.getAuthenticator().isAuthenticated().pipe(
+        return this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(
             filter(isAuth => isAuth === true),
             switchMap(isAuth => isAuth ? this.userLocationApi.getDefaultLocation().pipe(
                 filter(location => location !== undefined),
