@@ -1,0 +1,26 @@
+ion-searchbar {
+  --icon-color: var(--ion-color-medium);
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 1;
+  --cancel-button-color: var(--ion-color-medium);
+  --clear-button-color: var(--ion-color-medium);
+  --ion-text-color: var(--ion-color-medium);
+  --color: var(--ion-color-medium);
+}
+
+.filters-sort-btn-sm {
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-start: 0;
+  padding: 4px 12px;
+  border-radius: 26px;
+  border: 1px solid black;
+  margin: 2px 7px;
+  font-size: 12px;
+}
+
+.search-title {
+  font-size: 24px;
+  font-weight: bold;
+}

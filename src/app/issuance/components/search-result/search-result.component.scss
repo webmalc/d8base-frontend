@@ -1,0 +1,61 @@
+.border-radius {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.aie {
+  align-items: flex-end;
+}
+
+.master-full-name {
+  font-size: 16px;
+  color: #222428;
+  font-weight: bold;
+}
+
+.master-company {
+  font-size: 12px;
+  color: #989aa2;
+}
+
+.master-rating {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222428;
+}
+
+.master-reviews {
+  font-size: 12px;
+}
+
+.services-title {
+  font-size: 12px;
+  color: #989aa2;
+}
+
+.master-level {
+  font-size: 12px;
+  color: #0cd1e8;
+}
+
+.more-services {
+  font-size: 16px;
+  color: #3880ff;
+}
+
+.master-location-title {
+  font-size: 12px;
+  color: #989aa2;
+}
+
+.select-button-lg {
+  @media (max-width: 540px) {
+    display: none;
+  }
+}
+
+.select-button-sm {
+  @media (min-width: 540px) {
+    display: none;
+  }
+}

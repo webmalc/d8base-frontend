@@ -11,6 +11,7 @@ import {Component, Input} from '@angular/core';
 export class CollapseItemComponent {
 
     @Input() public title: string;
+    @Input() public noSidePadding: boolean = false;
     public readonly arrowUp = 'arrow-up-circle-outline';
     public readonly arrowDown = 'arrow-down-circle-outline';
     public collapsed: boolean = true;

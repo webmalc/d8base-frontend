@@ -134,8 +134,12 @@
     --inner-border-width: 0;
   }
 
-  .d8b-gradient-bgc {
+  .ion-d8b-gradient-bgc {
     --ion-background-color: linear-gradient(0deg, #0CD1E8 11.37%, #3880FF 125.68%);
+  }
+
+  .d8b-gradient-bgc {
+    background: linear-gradient(0deg, #0CD1E8 11.37%, #3880FF 125.68%);
   }
 
   .d8b-container {
@@ -152,6 +156,8 @@
   .no-horizontal-padding {
     padding-right: 0;
     padding-left: 0;
+    --padding-end: 0;
+    --padding-start: 0;
   }
 
   .text-blue {

@@ -3,8 +3,7 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 
 const routes: Routes = [
-    // {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
-    {path: '', redirectTo: 'professional', pathMatch: 'full'},
+    {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
     {
         path: 'auth',
         loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule)
@@ -16,9 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'professional',
-        // component: MasterPage,
         loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule)
-        // canActivate: [MasterGuard]
     },
     {
         path: 'service',
@@ -28,6 +25,10 @@ const routes: Routes = [
         path: 'message',
         loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule),
         canActivate: [MainGuard]
+    },
+    {
+        path: 'issuance',
+        loadChildren: () => import('./issuance/issuance.module').then(m => m.IssuancePageModule)
     }
 ];
 
