@@ -7,8 +7,8 @@ import {AuthenticationService} from '@app/core/services/authentication.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class RegistrationService {

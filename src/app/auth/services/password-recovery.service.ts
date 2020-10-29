@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '../../../environments/environment';
+import {environment} from '@env/environment';
 
 @Injectable()
 export class PasswordRecoveryService {

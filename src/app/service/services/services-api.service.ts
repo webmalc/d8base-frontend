@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Service} from '@app/service/models/service';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class ServicesApiService extends AbstractApiService<Service> {
         super(client);
     }
 
-    public getServiceTypeList(): Observable<{value: string, display_name: string}[]> {
+    public getServiceTypeList(): Observable<{ value: string, display_name: string }[]> {
         return super.options<{ actions: { POST: { service_type: { choices: { value: string, display_name: string }[] } } } }>().pipe(
             map(data =>
                 data.actions.POST.service_type.choices)

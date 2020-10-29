@@ -3,7 +3,7 @@ import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-a
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {MasterList} from '@app/master/models/master-list';
 import {plainToClass} from 'class-transformer';
-import {environment} from '../../../environments/environment';
+import {environment} from '@env/environment';
 
 @Injectable({
     providedIn: 'root'
