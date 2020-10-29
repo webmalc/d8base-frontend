@@ -4,7 +4,7 @@ import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
 import {Observable, of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {first, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class StepFourHandlerService extends AbstractHandler {
@@ -30,6 +30,7 @@ export class StepFourHandlerService extends AbstractHandler {
 
     private handle(handler: () => Observable<number>): Observable<number> {
         return this.authenticationService.isAuthenticated$.pipe(
+            first(),
             switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex()))
         );
     }

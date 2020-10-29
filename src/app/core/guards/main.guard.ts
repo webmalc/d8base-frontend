@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {CanActivate, Router, UrlTree} from '@angular/router';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class MainGuard implements CanActivate {
 
     public canActivate(): Observable<boolean | UrlTree> {
         return new Observable<UrlTree | boolean>(subscriber => {
-            this.authFactory.getAuthenticator().isAuthenticated$.subscribe(
+            this.authFactory.getAuthenticator().isAuthenticated$.pipe(first()).subscribe(
                 isAuthenticated => {
                     if (!isAuthenticated) {
                         subscriber.next(this.router.parseUrl('/auth/login'));
