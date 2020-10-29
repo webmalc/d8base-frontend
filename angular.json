@@ -48,7 +48,10 @@
                 "input": "./node_modules/flag-icon-css/css/flag-icon.css"
               }
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "firebase"
+            ]
           },
           "configurations": {
             "production": {
