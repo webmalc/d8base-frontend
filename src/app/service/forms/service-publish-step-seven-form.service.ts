@@ -24,7 +24,7 @@ export class ServicePublishStepSevenFormService {
     }
 
     public getFormFieldValue(formField: string): any {
-        return this.form.get(formField).value;
+        return this.form?.get(formField)?.value;
     }
 
     public isSubmitDisabled(): boolean {

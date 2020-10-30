@@ -17,11 +17,6 @@
                 <app-info-row class="ion-margin-bottom">
                     {{"service-publish.step-seven.first-info-row"|translate}}
                 </app-info-row>
-                <ion-item
-                        class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
-                    <ion-col class="ion-no-padding">
-                    </ion-col>
-                </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -36,7 +31,7 @@
                         <ion-row *ngIf="!useMasterSchedule()"
                                  class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                timetable data
+                                {{"service-publish.step-seven.timetable-desc"|translate}}
                             </ion-item>
                             <ion-item class="ion-item-no-border ion-align-items-center"
                                       routerLink="timetable"
@@ -48,7 +43,7 @@
                         <ion-row *ngIf="renderUseMasterSchedule"
                                  class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                use master schedule
+                                {{"service-publish.step-seven.use-base-timetable"|translate}}
                             </ion-item>
                             <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center">
                                 <ion-toggle formControlName="{{formFields.UseMasterSchedule}}"></ion-toggle>
