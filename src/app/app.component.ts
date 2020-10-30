@@ -53,7 +53,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
-        // throw Error(ErrorList.EMPTY_REFRESH_TOKEN_ERROR);
         if (!firebase.apps.length) {
             firebase.initializeApp(environment.firebaseConfig);
         }
