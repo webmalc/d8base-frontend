@@ -52,9 +52,9 @@ import {NumberDirective} from './directives/number.directive';
         AbstractContactsComponent,
         AbstractLocationEditComponent,
         RatingComponent,
-        DurationComponent,
         RatingFullStarComponent,
-        RatingHalfStarComponent
+        RatingHalfStarComponent,
+        DurationComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -73,9 +73,9 @@ import {NumberDirective} from './directives/number.directive';
         AbstractContactsComponent,
         AbstractLocationEditComponent,
         RatingComponent,
-        DurationComponent,
         RatingFullStarComponent,
-        RatingHalfStarComponent
+        RatingHalfStarComponent,
+        DurationComponent
     ],
     imports: [
         CommonModule,

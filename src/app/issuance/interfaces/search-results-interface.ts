@@ -4,6 +4,6 @@ import {Service} from '@app/service/models/service';
 
 export interface SearchResultsInterface {
     master: MasterList;
-    masterLocationList: MasterLocation[];
+    masterLocationList?: MasterLocation[];
     services: Service[];
 }

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {MasterList} from '@app/master/models/master-list';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

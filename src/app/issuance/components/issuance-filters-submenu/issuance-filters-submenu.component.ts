@@ -4,7 +4,7 @@ import {IssuanceFiltersSubmenu} from '@app/issuance/enums/issuance-filters-subme
 @Component({
     selector: 'app-issuance-filters-submenu',
     templateUrl: './issuance-filters-submenu.component.html',
-    styleUrls: ['./issuance-filters-submenu.component.scss'],
+    styleUrls: ['./issuance-filters-submenu.component.scss']
 })
 export class IssuanceFiltersSubmenuComponent implements OnInit {
 
