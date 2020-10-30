@@ -1,10 +1,10 @@
 import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {fakeAsync, flush, TestBed} from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {Observable, of} from 'rxjs';
+import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
+import {Credentials} from '@app/auth/interfaces/credentials';
+import {from, Observable, of} from 'rxjs';
 import {StorageManagerMock} from 'src/testing/mocks';
-import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
-import {Credentials} from '../../auth/interfaces/credentials';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {ApiClientService} from './api-client.service';
 import {AuthenticationService} from './authentication.service';
@@ -91,20 +91,25 @@ describe('AuthenticationService', () => {
             token_type: 'Bearer',
             scope: 'read write groups',
             refresh_token: 'refresh_token'
-        })
-            .then(
-                _ => {
-                    service.isAuthenticated$.subscribe(
-                        res => {
-                            expect(res).toBeTruthy();
-                            done();
-                        }
-                    );
+        }).then(
+            _ => ((service as any).tokenManager as any).needToRefresh().then(
+                res => {
+                    expect(res).toBeFalse();
+                    done();
                 }
-            );
+            )
+        );
     });
 
     it('test #refresh', fakeAsync(() => {
+        from(service.authenticateWithToken({
+            access_token: 'access_token',
+            expires_in: 3600,
+            token_type: 'Bearer',
+            scope: 'read write groups',
+            refresh_token: 'refresh_token'
+        })).subscribe();
+        flush();
         service.refresh().subscribe();
         flush();
 
