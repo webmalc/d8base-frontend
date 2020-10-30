@@ -5,10 +5,10 @@ import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {MasterLocation} from '@app/master/models/master-location';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

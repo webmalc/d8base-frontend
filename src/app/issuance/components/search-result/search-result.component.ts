@@ -34,7 +34,7 @@ export class SearchResultComponent {
     }
 
     public getCompanyName(): string {
-        return this.data.master?.company ? this.data.master.company : 'Частное лицо';
+        return this.data?.master?.company ? this.data.master.company : 'Частное лицо';
     }
 
     public getPrice(service: Service): string {
