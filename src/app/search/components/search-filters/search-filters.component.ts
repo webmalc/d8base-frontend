@@ -2,7 +2,6 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {SearchFiltersSubmenu} from '@app/search/enums/search-filters-submenu';
 import {SearchFilterStateInterface} from '@app/search/interfaces/search-filter-state-interface';
 import {SearchFilterStateService} from '@app/search/services/search-filter-state.service';
-import {BehaviorSubject} from 'rxjs';
 
 @Component({
     selector: 'app-search-filters',
@@ -12,7 +11,8 @@ import {BehaviorSubject} from 'rxjs';
 export class SearchFiltersComponent {
 
     public defaultTab: string = SearchFiltersSubmenu.Main;
-    public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
+    public tabs = SearchFiltersSubmenu;
+    public tab: string = this.defaultTab;
     @Output() public filtersData: EventEmitter<SearchFilterStateInterface> = new EventEmitter<SearchFilterStateInterface>();
 
     constructor(public readonly filtersStateManager: SearchFilterStateService) {
@@ -20,5 +20,9 @@ export class SearchFiltersComponent {
 
     public submitFilters(): void {
         this.filtersData.emit(this.filtersStateManager.data);
+    }
+
+    public setTab(tab: string): void {
+        this.tab = tab;
     }
 }
