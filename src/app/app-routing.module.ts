@@ -31,8 +31,8 @@ const routes: Routes = [
         canActivate: [MainGuard]
     },
     {
-        path: 'issuance',
-        loadChildren: () => import('./issuance/issuance.module').then(m => m.IssuancePageModule)
+        path: 'search',
+        loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
     }
 ];
 
