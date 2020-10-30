@@ -3,7 +3,11 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+    {
+        path: '',
+        loadChildren: () => import('./main/main.module').then(m => m.MainPageModule),
+        pathMatch: 'full'
+    },
     {
         path: 'auth',
         loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule)

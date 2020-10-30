@@ -1,0 +1,58 @@
+<ion-content class="background-color-white">
+    <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
+        <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size-lg="8" size-md="8" size-sm="10" size-xl="8"
+                 size-xs="11">
+            <ion-row class="ion-justify-content-center ion-margin-vertical main-title">
+                Booking made simple
+            </ion-row>
+            <ion-row>
+                <ion-searchbar animated
+                               color="light" placeholder='{{"issuance.search-placeholder"|translate}}'
+                               style="box-shadow: none"></ion-searchbar>
+            </ion-row>
+            <ion-row>
+                <ion-col size="3">
+                    <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
+                        <ion-datetime display-format="YYYY-MM-DD" placeholder="Любая дата" slot="start"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="3">
+                    <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
+                        <ion-datetime display-format="HH:mm" picker-format="HH:mm" placeholder="Любое время"
+                                      slot="start"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item class="cursor-pointer ion-item-no-min-width ion-item-no-min-height menu-item"
+                              color="light">
+                        <ion-label class="ion-margin-start" style="opacity: 0.4">Текущее местоположение</ion-label>
+                        <ion-icon class="ion-no-margin" color="secondary" name="location-outline"
+                                  slot="end"></ion-icon>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center ion-margin-vertical">
+                <ion-col size="3">
+                    <ion-button color="secondary"
+                                expand="block" fill="solid" size="medium">Искать
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size-lg="8" size-md="8" size-sm="10" size-xl="8" size-xs="11">
+            <ion-row class="ion-justify-content-center">
+                Категории услуг
+            </ion-row>
+            <ion-row class="ion-justify-content-center ion-wrap">
+                <ion-item class="ion-item-no-border">
+                    <fa-icon icon="faGraduationCap"></fa-icon>
+                </ion-item>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-content>
+
+<app-footer></app-footer>
