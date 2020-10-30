@@ -1,6 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
@@ -18,7 +18,7 @@ describe('AppComponent', () => {
     let storageMock: Partial<Storage>;
     let fixture: ComponentFixture<AppComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
         splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
         platformReadySpy = Promise.resolve();

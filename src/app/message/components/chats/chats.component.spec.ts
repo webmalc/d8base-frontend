@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {NotificationWorkerService} from '../../../core/services/notification-worker.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {ChatListUpdaterService} from '../../services/chat-list-updater.service';
 import {ChatsCompilerService} from '../../services/chats-compiler.service';
 import {ChatsSearchService} from '../../services/chats-search.service';
@@ -19,7 +18,7 @@ describe('ChatsComponent', () => {
     let component: ChatsComponent;
     let fixture: ComponentFixture<ChatsComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ChatsComponent],
             imports: [

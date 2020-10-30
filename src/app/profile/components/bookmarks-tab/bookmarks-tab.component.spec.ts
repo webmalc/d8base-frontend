@@ -1,16 +1,16 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {BookmarkMaster} from '@app/core/models/bookmark-master';
+import {Master} from '@app/core/models/master';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {IonicModule, IonLabel} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {asyncData} from '../../../../testing/async-observable-helper';
 import {BookmarkFixture} from '../../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../../testing/fixtures/generator';
 import {MasterFixture} from '../../../../testing/fixtures/master-fixture';
-import {BookmarkMaster} from '../../../core/models/bookmark-master';
-import {Master} from '../../../core/models/master';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
 import {BookmarksService} from '../../services/bookmarks.service';
 import {SavedProfessionalApiService} from '../../services/saved-professional-api.service';
 import {BookmarksItemComponent} from './bookmarks-item/bookmarks-item.component';
@@ -22,7 +22,7 @@ describe('BookmarksTabComponent', () => {
     let bookmarksService: BookmarksService;
     let bookmarks: BookmarkMaster[];
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [BookmarksTabComponent, BookmarksItemComponent],
             imports: [IonicModule, HttpClientTestingModule, TranslateModule.forRoot()],
@@ -83,7 +83,7 @@ describe('BookmarksTabComponent', () => {
         expect(component.deletedBookmarks[0]).toEqual(bookmarks[0].id);
     }));
 
-    it('should be able to restore bookmark', async(() => {
+    it('should be able to restore bookmark', waitForAsync(() => {
         const bookmark = component.bookmarks[1];
         component.deletedBookmarks.push(bookmark.id);
         fixture.detectChanges();

@@ -1,13 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {ServicePublishStepSixFormService} from '../../forms/service-publish-step-six-form.service';
 import {ServicePublishAuthStateManagerService} from '../../services/service-publish-auth-state-manager.service';
 import {ServicePublishDataHolderService} from '../../services/service-publish-data-holder.service';
@@ -27,7 +26,7 @@ describe('ServicePublishStepSixComponent', () => {
     let component: ServicePublishStepSixComponent;
     let fixture: ComponentFixture<ServicePublishStepSixComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ServicePublishStepSixComponent],
             imports: [

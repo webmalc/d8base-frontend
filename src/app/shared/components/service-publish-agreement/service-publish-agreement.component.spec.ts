@@ -1,17 +1,16 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {ServicePublishAgreementComponent} from './service-publish-agreement.component';
 
 describe('ServicePublishAgreementComponent', () => {
     let component: ServicePublishAgreementComponent;
     let fixture: ComponentFixture<ServicePublishAgreementComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ServicePublishAgreementComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],

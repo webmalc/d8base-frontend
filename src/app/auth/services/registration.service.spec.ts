@@ -2,12 +2,11 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {IonicStorageModule} from '@ionic/storage';
 import {of} from 'rxjs';
+import {LocationServiceMock, StorageManagerMock} from 'src/testing/mocks';
 import {User} from '../../core/models/user';
 import {StorageManagerService} from '../../core/proxies/storage-manager.service';
 import {ApiClientService} from '../../core/services/api-client.service';
 import {LocationService} from '../../core/services/location/location.service';
-import {StorageManagerMock} from '../../core/services/token-manager.service.spec';
-import {LocationServiceMock} from '../../service/components/service-publish-step-four/service-publish-step-four.component.spec';
 import {AuthResponseInterface} from '../interfaces/auth-response.interface';
 import {RegistrationService} from './registration.service';
 

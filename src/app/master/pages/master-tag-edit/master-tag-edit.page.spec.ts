@@ -1,10 +1,10 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {TagsSelectInputComponent} from '../../components/tags-select-input/tags-select-input.component';
 import {TagsListApiService} from '../../services/tags-list-api.service';
 import {MasterTagEditPage} from './master-tag-edit.page';
@@ -13,7 +13,7 @@ describe('MasterTagEditPage', () => {
     let component: MasterTagEditPage;
     let fixture: ComponentFixture<MasterTagEditPage>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterTagEditPage, TagsSelectInputComponent],
             imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, HttpClientTestingModule, TranslateModule.forRoot()],

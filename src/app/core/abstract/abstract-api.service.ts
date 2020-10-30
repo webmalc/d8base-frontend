@@ -13,7 +13,7 @@ export abstract class AbstractApiService<T extends {id: number}> extends Abstrac
     }
 
     public create(data: T): Observable<T> {
-        return this.client.post<T>(this.getUrl(), HelperService.clear(data)).pipe(
+        return this.client.post<T, T>(this.getUrl(), HelperService.clear(data)).pipe(
             map(raw => this.transform(raw))
         );
     }

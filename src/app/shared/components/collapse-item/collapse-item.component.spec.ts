@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {TranslateModule} from '@ngx-translate/core';
@@ -8,7 +8,7 @@ describe('CollapseItemComponent', () => {
     let component: CollapseItemComponent;
     let fixture: ComponentFixture<CollapseItemComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CollapseItemComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot()]

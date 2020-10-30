@@ -1,21 +1,18 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Geoposition} from '@ionic-native/geolocation/ngx';
+import {RegistrationService} from '@app/auth/services/registration.service';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {IpApiService} from '@app/core/services/location/ip-api.service';
+import {IpDataService} from '@app/core/services/location/ip-data.service';
+import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
+import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
+import {LocationService} from '@app/core/services/location/location.service';
+import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {RegistrationService} from '../../../auth/services/registration.service';
-import {IpLocation} from '../../../core/models/ip-location';
-import {UserLocation} from '../../../core/models/user-location';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {IpApiService} from '../../../core/services/location/ip-api.service';
-import {IpDataService} from '../../../core/services/location/ip-data.service';
-import {IpServicesHolderService} from '../../../core/services/location/ip-services-holder.service';
-import {IpnfDataService} from '../../../core/services/location/ipnf-data.service';
-import {LocationService} from '../../../core/services/location/location.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {LocationServiceMock, StorageManagerMock, TokenManagerServiceMock} from 'src/testing/mocks';
 import {ServicePublishStepFourFormService} from '../../forms/service-publish-step-four-form.service';
 import {ServicePublishDataHolderService} from '../../services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '../../services/service-steps-navigation.service';
@@ -30,25 +27,11 @@ import {StepThreeHandlerService} from '../../services/steps-navigation-chain/ste
 import {StepTwoHandlerService} from '../../services/steps-navigation-chain/step-two-handler.service';
 import {ServicePublishStepFourComponent} from './service-publish-step-four.component';
 
-export class LocationServiceMock {
-    public getCurrentPosition(): Promise<Geoposition | null> {
-        return Promise.resolve(null);
-    }
-
-    public getMergedLocationData(): Promise<UserLocation | null> {
-        return Promise.resolve(null);
-    }
-
-    public async getIpLocationData(): Promise<IpLocation | null> {
-        return Promise.resolve(null);
-    }
-}
-
 describe('ServicePublishStepFourComponent', () => {
     let component: ServicePublishStepFourComponent;
     let fixture: ComponentFixture<ServicePublishStepFourComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ServicePublishStepFourComponent],
             imports: [
@@ -79,7 +62,8 @@ describe('ServicePublishStepFourComponent', () => {
                 IpApiService,
                 IpDataService,
                 IpnfDataService,
-                {provide: LocationService, useClass: LocationServiceMock}
+                {provide: LocationService, useClass: LocationServiceMock},
+                {provide: TokenManagerService, useValue: TokenManagerServiceMock}
             ]
         }).compileComponents();
 

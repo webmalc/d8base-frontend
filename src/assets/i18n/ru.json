@@ -156,6 +156,11 @@
   "list-item": {
     "add-new": "Добавить еще"
   },
+  "duration": {
+      "days": "дни",
+      "hours": "часы",
+      "minutes": "минуты"
+  },
   "service-publish": {
     "back-button": "Назад",
     "forward-button": "Продолжить",
@@ -177,12 +182,6 @@
       "service-description": "Описание услуги",
       "service-description-placeholder": "Введите текст описания услуги",
       "duration": "Продолжительность услуги",
-      "days": "дни",
-      "hours": "часы",
-      "minutes": "минуты",
-      "days-desc": "день",
-      "hours-desc": "час(а)",
-      "minutes-desc": "минут(ы)",
       "fixed-price": "Стоимость услуги фиксированная",
       "fixed-price-title": "Стоимость услуги",
       "start-price": "Стоимость услуги от",

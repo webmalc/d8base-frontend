@@ -1,20 +1,36 @@
 import {Injectable} from '@angular/core';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
+import {ErrorList} from '@app/core/enums/error-list';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {environment} from '../../../environments/environment';
+import {environment} from '@env/environment';
+import {interval, Observable, Subject} from 'rxjs';
+
+function getTimestamp(offset: number = 0): number {
+    return parseInt((new Date().getUTCMilliseconds() / 1000).toFixed(0), 10) + offset;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenManagerService {
 
-    private tokenData: AuthResponseInterface = undefined;
+    public readonly isExpired$: Observable<boolean>;
+    private tokenData: AuthResponseInterface;
     private readonly TOKEN_DATA_STORAGE_KEY = 'api_token_data';
+    private readonly isExpSubject$: Subject<boolean> = new Subject<boolean>();
 
-    constructor(private readonly storage: StorageManagerService) {}
+    constructor(private readonly storage: StorageManagerService) {
+        this.isExpired$ = this.isExpSubject$.asObservable();
+    }
+
+    public init(): void {
+        interval(1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
+            _ => this.isExpSubject$.next(true)
+        ));
+    }
 
     public getAccessToken(): Promise<string> {
-        if (undefined !== this.tokenData && null !== this.tokenData) {
+        if (this.tokenData && this.tokenData.access_token) {
             return Promise.resolve(this.tokenData.access_token);
         }
 
@@ -29,19 +45,21 @@ export class TokenManagerService {
     }
 
     public getRefreshToken(): Promise<string> {
-        return new Promise(resolve => {
-            this.getTokenData().then(
-                (tokenData: AuthResponseInterface) => resolve(tokenData?.refresh_token)
-            );
+        return new Promise((resolve, reject) => {
+            this.getTokenData().then(tokenData => tokenData?.refresh_token ?
+                resolve(tokenData?.refresh_token) :
+                reject(Error(ErrorList.EMPTY_REFRESH_TOKEN_ERROR)));
         });
     }
 
-    public setTokens(data: AuthResponseInterface): Promise<any> {
-        data.access_expire = this.getTimestamp(data.expires_in);
-        data.refresh_expire = this.getTimestamp(environment.refresh_token_expire_time);
-        this.tokenData = data;
+    public setTokens(data: AuthResponseInterface): Promise<void> {
+        this.tokenData = {
+            ...data,
+            access_expire: getTimestamp(data.expires_in),
+            refresh_expire: getTimestamp(environment.refresh_token_expire_time)
+        };
 
-        return this.storage.set(this.TOKEN_DATA_STORAGE_KEY, data);
+        return this.storage.set(this.TOKEN_DATA_STORAGE_KEY, this.tokenData);
     }
 
     public clear(): Promise<any> {
@@ -50,34 +68,27 @@ export class TokenManagerService {
         return this.storage.remove(this.TOKEN_DATA_STORAGE_KEY);
     }
 
-    public isAccessTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired('access_expire');
-    }
-
-    public isRefreshTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired('refresh_expire');
-    }
-
-    public needToRefresh(): Promise<boolean> {
+    private needToRefresh(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.isAccessTokenExpired().then(
-                (isAccessTokenExpired: boolean) => {
-                    if (isAccessTokenExpired) {
-                        this.isRefreshTokenExpired().then(
-                            (isRefreshTokenExpired: boolean) => {
-                                resolve(!isRefreshTokenExpired);
-                            }
-                        ).catch(err => reject(err));
-                    } else {
-                        resolve(false);
-                    }
-                }
+                (isAccessTokenExpired: boolean) => isAccessTokenExpired ?
+                    this.isRefreshTokenExpired().then((isRefreshTokenExpired: boolean) => resolve(!isRefreshTokenExpired))
+                        .catch(err => reject(err)) :
+                    resolve(false)
             ).catch(err => reject(err));
         });
     }
 
+    private isAccessTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired('access_expire');
+    }
+
+    private isRefreshTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired('refresh_expire');
+    }
+
     private getTokenData(): Promise<AuthResponseInterface> {
-        if (undefined !== this.tokenData && null !== this.tokenData) {
+        if (this.tokenData) {
             return Promise.resolve(this.tokenData);
         }
 
@@ -88,20 +99,12 @@ export class TokenManagerService {
         });
     }
 
-    private getTimestamp(offset: number = 0): number {
-        return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;
-    }
-
     private isAbstractTokenExpired(tokenType: string): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.getTokenData().then(
-                (tokenData: AuthResponseInterface) => {
-                    if (tokenData && tokenData[tokenType]) {
-                        resolve(this.getTimestamp() >= tokenData[tokenType]);
-                    } else {
-                        reject();
-                    }
-                }
+                (tokenData: AuthResponseInterface) => tokenData && tokenData[tokenType] ?
+                    resolve(getTimestamp() >= tokenData[tokenType]) :
+                    reject('no token error')
             );
         });
     }

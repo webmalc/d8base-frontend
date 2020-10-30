@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule, PopoverController} from '@ionic/angular';
-
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
+import {IonicModule, PopoverController} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {NotificationWorkerService} from '../../../core/services/notification-worker.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {DirectServiceService} from '../../services/direct-service.service';
 import {MessageListUpdaterService} from '../../services/message-list-updater.service';
 import {MessagesListApiService} from '../../services/messages-list-api.service';
@@ -17,7 +16,7 @@ describe('DirectComponent', () => {
     let component: DirectComponent;
     let fixture: ComponentFixture<DirectComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [DirectComponent],
             imports: [

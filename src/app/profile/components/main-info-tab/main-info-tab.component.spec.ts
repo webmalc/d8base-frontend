@@ -1,12 +1,12 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
-import {PictureSelectorComponent} from '../../../shared/components/picture-selector/picture-selector.component';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {ProfileFormService} from '../../forms/profile-form.service';
 import {ContactApiService} from '../../services/contact-api.service';
 import {ProfileService} from '../../services/profile.service';
@@ -18,7 +18,7 @@ describe('MainInfoTabComponent', () => {
     let component: MainInfoTabComponent;
     let fixture: ComponentFixture<MainInfoTabComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MainInfoTabComponent, PictureSelectorComponent],
             imports: [IonicModule.forRoot(), ReactiveFormsModule, TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
@@ -28,10 +28,6 @@ describe('MainInfoTabComponent', () => {
                 UserContactApiService,
                 ContactApiService,
                 {provide: StorageManagerService, useClass: StorageManagerMock}
-                // {
-                //     provide: ProfileService,
-                //     useClass: ProfileServiceStub,
-                // }
             ]
         }).compileComponents();
 

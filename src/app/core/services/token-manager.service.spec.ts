@@ -1,33 +1,10 @@
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {TokenManagerService} from './token-manager.service';
-
-export class StorageManagerMock {
-
-    private readonly data: object = {
-        api_token: null,
-        refresh_token: null
-    };
-
-    public get(storageKey: string): Promise<any> {
-        return Promise.resolve(this.data[storageKey]);
-    }
-
-    public set(storageKey: string, data: any): Promise<any> {
-        this.data[storageKey] = data;
-
-        return Promise.resolve(this.data[storageKey]);
-    }
-
-    public remove(storageKey: string): Promise<any> {
-        this.data[storageKey] = null;
-
-        return Promise.resolve();
-    }
-}
 
 describe('TokenManagerService', () => {
 
@@ -63,14 +40,14 @@ describe('TokenManagerService', () => {
         service.setTokens(tokenData).then(
             _ => {
                 (service as any).storage.get('api_token_data').then(token => {
-                    expect(token).toEqual(tokenData);
+                    expect(token).toEqual(jasmine.objectContaining(tokenData)); // can have more fields
                     done();
                 });
             }
         );
     });
 
-    it('test #getAccessToken',  (done) => {
+    it('test #getAccessToken', (done) => {
         const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         service.setTokens(tokenData).then(
@@ -85,7 +62,7 @@ describe('TokenManagerService', () => {
         );
     });
 
-    it('test #getRefreshToken',  (done) => {
+    it('test #getRefreshToken', (done) => {
         const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         service.setTokens(tokenData).then(
@@ -100,7 +77,7 @@ describe('TokenManagerService', () => {
         );
     });
 
-    it('test #clear',  (done) => {
+    it('test #clear', (done) => {
         const service: TokenManagerService = TestBed.inject(TokenManagerService);
 
         service.setTokens(tokenData).then(
@@ -124,20 +101,5 @@ describe('TokenManagerService', () => {
             }
         );
     });
-
-    it('test #isAccessTokenExpired', fakeAsync(() => {
-        const service: TokenManagerService = TestBed.inject(TokenManagerService);
-
-        service.setTokens(tokenData).then(
-            _ => {
-                tick(6000);
-                service.isAccessTokenExpired().then(
-                    bool => {
-                        expect(bool).toBeTruthy();
-                    }
-                );
-            }
-        );
-    }));
 
 });

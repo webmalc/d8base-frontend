@@ -1,15 +1,15 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {Price} from '@app/service/models/price';
+import {Service} from '@app/service/models/service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
-import {Price} from '../../../service/models/price';
-import {Service} from '../../../service/models/service';
 import {MasterProfileServicePresentationComponent} from './master-profile-service-presentation.component';
 
 describe('MasterProfileServicePresentationComponent', () => {
     let component: MasterProfileServicePresentationComponent;
     let fixture: ComponentFixture<MasterProfileServicePresentationComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfileServicePresentationComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot()]

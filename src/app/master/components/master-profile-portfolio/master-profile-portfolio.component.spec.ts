@@ -1,16 +1,16 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {IonicModule} from '@ionic/angular';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {StorageManagerMock} from '../../../core/services/token-manager.service.spec';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {MasterProfilePortfolioComponent} from './master-profile-portfolio.component';
 
 describe('MasterProfilePortfolioComponent', () => {
     let component: MasterProfilePortfolioComponent;
     let fixture: ComponentFixture<MasterProfilePortfolioComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfilePortfolioComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule],

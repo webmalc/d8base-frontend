@@ -6,7 +6,7 @@ import {AuthenticationFactory} from '@app/core/services/authentication-factory.s
 import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -30,7 +30,7 @@ export class TranslationService {
     }
 
     public init(): void {
-        this.authenticationFactory.getAuthenticator().isAuthenticated().subscribe(
+        this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(first()).subscribe(
             isAuthenticated => {
                 if (isAuthenticated) {
                     this.getFromApi().subscribe(

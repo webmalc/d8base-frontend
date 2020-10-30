@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicModule, IonTabBar} from '@ionic/angular';
@@ -16,7 +16,7 @@ describe('ProfilePage', () => {
     let fixture: ComponentFixture<ProfilePage>;
     let masterService;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         masterService = jasmine.createSpyObj('MasterManagerService', ['isMaster']);
         TestBed.configureTestingModule({
             declarations: [ProfilePage],

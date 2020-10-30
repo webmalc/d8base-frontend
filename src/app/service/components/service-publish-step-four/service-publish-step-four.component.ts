@@ -15,7 +15,7 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {plainToClass} from 'class-transformer';
 import {forkJoin, Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import {filter, first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-step-four',
@@ -100,26 +100,16 @@ export class ServicePublishStepFourComponent extends Reinitable {
     }
 
     protected init(): void {
-        this.authenticationService.isAuthenticated().pipe(filter(val => true === val)).subscribe(
-            () => {
-                this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
-                    () => {
-                        this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
-                            () => {
-                                this.userManager.getCurrentUser().subscribe(
-                                    user => {
-                                        this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                                            ServicePublishSteps.Four, {isNewMaster: false, user, isNewUser: false}
-                                        ).then(
-                                            () => this.serviceStepsNavigationService.next()
-                                        );
-                                    }
-                                );
-                            }
-                        );
-                    }
-                );
-            }
+        this.authenticationService.isAuthenticated$.pipe(first(), filter(val => true === val)).subscribe(
+            () => this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
+                () => this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
+                    () => this.userManager.getCurrentUser().subscribe(
+                        user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
+                            ServicePublishSteps.Four, {isNewMaster: false, user, isNewUser: false}
+                        ).then(() => this.serviceStepsNavigationService.next())
+                    )
+                )
+            )
         );
         this.formService.createForm();
     }

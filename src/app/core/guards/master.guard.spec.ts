@@ -1,7 +1,7 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
+import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../proxies/storage-manager.service';
-import {StorageManagerMock} from '../services/token-manager.service.spec';
 import {MasterGuard} from './master.guard';
 
 describe('MasterGuard', () => {

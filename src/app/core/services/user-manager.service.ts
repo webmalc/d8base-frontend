@@ -3,10 +3,10 @@ import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
 import {filter, map, tap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

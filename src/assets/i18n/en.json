@@ -146,6 +146,11 @@
   "list-item": {
     "add-new": "Add new"
   },
+  "duration": {
+      "days": "days",
+      "hours": "hours",
+      "minutes": "minutes"
+  },
   "service-publish": {
     "back-button": "Back",
     "forward-button": "Continue",
@@ -167,10 +172,6 @@
       "service-description": "Service description",
       "service-description-placeholder": "Enter service description",
       "duration": "Service duration",
-      "hours": "hours",
-      "minutes": "minutes",
-      "hours-desc": "hours(s)",
-      "minutes-desc": "minute(s)",
       "fixed-price": "Fixed service price",
       "fixed-price-title": "Service price",
       "start-price": "Service price from",
