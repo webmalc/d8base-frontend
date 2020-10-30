@@ -4,25 +4,14 @@ import {GrantTypes} from '@app/auth/enums/grant-types';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {Credentials} from '@app/auth/interfaces/credentials';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
+import {LoginDataInterface} from '@app/core/interfaces/login-data-interface';
+import {RefreshDataInterface} from '@app/core/interfaces/refresh-data-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
 import {from, Observable, Subject} from 'rxjs';
 import {first, map} from 'rxjs/operators';
-
-interface RefreshData {
-    refresh_token: string;
-    grant_type: string;
-}
-
-interface LoginData {
-    username: string;
-    password: string;
-    grant_type: string;
-    client_id: string;
-    client_secret: string;
-}
 
 /**
  *  Main authentication service
@@ -51,7 +40,7 @@ export class AuthenticationService implements AuthenticatorInterface {
 
     public login({username, password}: Credentials): Observable<void> {
         return new Observable<void>(subscriber => {
-            this.client.post<AuthResponseInterface, LoginData>(this.TOKEN_OBTAIN_URL, {
+            this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
                 username,
                 password,
                 grant_type: GrantTypes.PasswordGrantType,
@@ -85,8 +74,8 @@ export class AuthenticationService implements AuthenticatorInterface {
         return new Observable<void>(
             (subscriber) => {
                 this.tokenManager.getRefreshToken().then(refresh => {
-                    const refreshData: RefreshData = {refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
-                    this.client.post<AuthResponseInterface, RefreshData>(this.TOKEN_REFRESH_URL, refreshData).subscribe(
+                    const refreshData: RefreshDataInterface = {refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
+                    this.client.post<AuthResponseInterface, RefreshDataInterface>(this.TOKEN_REFRESH_URL, refreshData).subscribe(
                         (response: AuthResponseInterface) => this.tokenManager.setTokens(response).then(
                             _ => {
                                 subscriber.next();
