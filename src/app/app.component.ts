@@ -17,7 +17,7 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
-import {filter, map, switchMap} from 'rxjs/operators';
+import {filter, first, map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -53,6 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
+        // throw Error(ErrorList.EMPTY_REFRESH_TOKEN_ERROR);
         if (!firebase.apps.length) {
             firebase.initializeApp(environment.firebaseConfig);
         }
@@ -131,6 +132,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     private getDefaultUserCountry(): Observable<Country> {
         return this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(
+            first(),
             filter(isAuth => isAuth === true),
             switchMap(isAuth => isAuth ? this.userLocationApi.getDefaultLocation().pipe(
                 filter(location => location !== undefined),
