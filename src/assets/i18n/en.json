@@ -19,7 +19,10 @@
       "4": "Very good",
       "5": "Excellent"
     },
-    "back": "Back"
+    "back": "Back",
+    "master": {
+      "private-person": "Private person"
+    }
   },
   "ion-selectable": {
     "close-button-text": "Close",

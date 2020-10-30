@@ -19,7 +19,10 @@
       "4": "Очень хорошо",
       "5": "Отлично"
     },
-    "back": "Назад"
+    "back": "Назад",
+    "master": {
+      "private-person": "Частное лицо"
+    }
   },
   "ion-selectable": {
     "close-button-text": "Закрыть",
