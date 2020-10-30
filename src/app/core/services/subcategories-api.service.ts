@@ -3,10 +3,10 @@ import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-a
 import {Category} from '@app/core/models/category';
 import {Subcategory} from '@app/core/models/subcategory';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
