@@ -25,8 +25,7 @@ export class LoginPage {
         this.authFactory.getAuthenticator().login(user).subscribe(
             _ => {
                 this.masterManager.updateIsMaster();
-
-                return this.router.navigateByUrl('/profile');
+                this.router.navigateByUrl('/profile');
             },
             (error: HttpErrorResponse) => {
                 if (400 === error.status && error.error.error === 'invalid_grant') {

@@ -4,7 +4,9 @@ import {User} from '@app/core/models/user';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {MasterLocation} from '@app/master/models/master-location';
+import {MasterSchedule} from '@app/master/models/master-schedule';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
+import {MasterScheduleApiService} from '@app/master/services/master-schedule-api.service';
 import {Price} from '@app/service/models/price';
 import {Service} from '@app/service/models/service';
 import {ServiceLocation} from '@app/service/models/service-location';
@@ -33,7 +35,8 @@ export class ServicePublishService {
         private readonly serviceLocationApi: ServiceLocationApiService,
         private readonly masterLocationApi: MasterLocationApiService,
         private readonly servicePriceApi: PricesApiService,
-        private readonly servicePublishDataFormatter: ServicePublishDataPreparerService
+        private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
+        private readonly masterScheduleApi: MasterScheduleApiService
     ) {
     }
 
@@ -44,6 +47,7 @@ export class ServicePublishService {
                 data.service,
                 data.servicePhotos,
                 data.serviceSchedule,
+                data.masterSchedule,
                 data.serviceLocation,
                 data.masterLocation,
                 data.servicePrice,
@@ -59,6 +63,7 @@ export class ServicePublishService {
         service: Service,
         photos: ServicePhoto[],
         schedule: ServiceSchedule[],
+        masterSchedule: MasterSchedule[],
         serviceLocation: ServiceLocation,
         masterLocation: MasterLocation,
         price: Price,
@@ -70,6 +75,7 @@ export class ServicePublishService {
                     switchMap(createdService => forkJoin({
                         photosRet: this.createPhotos(photos, createdService),
                         scheduleRet: this.createSchedule(schedule, createdService),
+                        masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
                         masterLocRet: !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation),
                         priceRet: this.createPrice(price, createdService)
                     }).pipe(
@@ -109,6 +115,12 @@ export class ServicePublishService {
         schedule?.forEach(v => v.service = service.id);
 
         return this.serviceScheduleApi.createList(schedule);
+    }
+
+    private createMasterSchedule(schedule: MasterSchedule[], master: Master): Observable<MasterSchedule[]> {
+        schedule?.forEach(v => v.professional = master.id);
+
+        return this.masterScheduleApi.createList(schedule);
     }
 
     private createMasterLocation(location: MasterLocation, master: Master): Observable<MasterLocation> {
