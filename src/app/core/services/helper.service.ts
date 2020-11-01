@@ -91,7 +91,6 @@ export class HelperService {
             environment.backend.url + environment.backend.category,
             environment.backend.url + environment.backend.subcategory,
             environment.backend.url + environment.backend.auth,
-            environment.backend.url + environment.backend.register,
             environment.backend.url + environment.backend.reset_password_link,
             environment.backend.url + environment.backend.reset_password
         ];
