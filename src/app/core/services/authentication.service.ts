@@ -10,8 +10,8 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
-import {BehaviorSubject, EMPTY, from, Observable, Subject} from 'rxjs';
-import {filter, first, map, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {EMPTY, from, Observable, ReplaySubject} from 'rxjs';
+import {filter, first, takeUntil} from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -22,7 +22,7 @@ import {filter, first, map, switchMap, takeUntil, tap} from 'rxjs/operators';
 export class AuthenticationService implements AuthenticatorInterface {
 
     public readonly isAuthenticated$: Observable<boolean>;
-    private readonly isAuthenticatedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private readonly isAuthenticatedSubject$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
@@ -35,15 +35,14 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public init(): void {
-        this.tokenManager.isExpired$.subscribe(isExpired => {
-            this.isAuthenticated$.pipe(first()).subscribe(
-                previousIsAuthStatus => {
-                    if (isExpired === previousIsAuthStatus) {
-                        this.isAuthenticatedSubject$.next(!isExpired);
-                    }
-                }
+        this.tokenManager.needToRefresh()
+            .then(isExp => this.isAuthenticatedSubject$.next(!isExp))
+            .catch(_ => this.isAuthenticatedSubject$.next(false))
+            .finally(
+                () => this.tokenManager.isExpired$.subscribe(isExpired => this.isAuthenticated$.pipe(first()).subscribe(
+                    previousIsAuthStatus => isExpired === previousIsAuthStatus ? this.isAuthenticatedSubject$.next(!isExpired) : EMPTY
+                ))
             );
-        });
     }
 
     public login({username, password}: Credentials): Observable<void> {

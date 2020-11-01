@@ -3,7 +3,7 @@ import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interfac
 import {ErrorList} from '@app/core/enums/error-list';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {environment} from '@env/environment';
-import {interval, Observable, Subject} from 'rxjs';
+import {Observable, Subject, timer} from 'rxjs';
 
 function getTimestamp(offset: number = 0): number {
     return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;
@@ -24,7 +24,7 @@ export class TokenManagerService {
     }
 
     public init(): void {
-        interval(1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
+        timer(0, 1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
             _ => this.isExpSubject$.next(true)
         ));
     }
