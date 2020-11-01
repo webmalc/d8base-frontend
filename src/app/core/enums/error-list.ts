@@ -1,3 +1,4 @@
 export enum ErrorList {
-    EMPTY_REFRESH_TOKEN_ERROR = 'empty_refresh_token_error'
+    EMPTY_TOKEN_ERROR = 'empty_token_error',
+    REFRESH_TOKEN_EXPIRED_ERROR = 'refresh_token_expired_error'
 }

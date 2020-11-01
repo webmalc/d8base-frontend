@@ -17,7 +17,7 @@ export class FcmDeviceService {
     }
 
     public subscribeToAuth(): void {
-        this.auth.isAuthenticated$.pipe(first(), filter(isAuth => isAuth)).subscribe(
+        this.auth.isAuthenticated$.pipe(filter(isAuth => isAuth)).subscribe(
             _ => this.saveTokenOrUpdateActivity()
         );
     }

@@ -1,9 +1,10 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {HelperService} from '@app/core/services/helper.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {environment} from '@env/environment';
 import {from, Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
+import {catchError, switchMap} from 'rxjs/operators';
 
 /**
  * Sets headers while requesting api endpoints
@@ -28,7 +29,7 @@ export class HeadersInterceptor implements HttpInterceptor {
             .pipe(
                 switchMap(token => {
                     let headers;
-                    if (this.getExcludedUrls().includes(req.url)) {
+                    if (HelperService.isNoAuthGetUrl(req.url) && req.method === 'GET') {
                         headers = req.headers.append('Content-Type', 'application/json');
                     } else if (this.getAuthUrls().includes(req.url)) {
                         headers = req.headers.append('Authorization', 'Basic ' +
@@ -40,22 +41,14 @@ export class HeadersInterceptor implements HttpInterceptor {
                     }
 
                     return next.handle(req.clone({headers}));
-                })
+                }),
+                catchError(_ => next.handle(req.clone({headers: req.headers.append('Content-Type', 'application/json')})))
             );
     }
 
     private getAuthUrls(): string[] {
         return [
             environment.backend.url + environment.backend.refresh
-        ];
-    }
-
-    private getExcludedUrls(): string[] {
-        return [
-            environment.backend.url + environment.backend.countries,
-            environment.backend.url + environment.backend.cities,
-            environment.backend.url + environment.backend.reset_password_link,
-            environment.backend.url + environment.backend.reset_password
         ];
     }
 }

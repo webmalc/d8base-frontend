@@ -10,8 +10,8 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
-import {from, Observable, Subject} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {BehaviorSubject, EMPTY, from, Observable, Subject} from 'rxjs';
+import {filter, first, map, switchMap, takeUntil, tap} from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -22,7 +22,7 @@ import {first, map} from 'rxjs/operators';
 export class AuthenticationService implements AuthenticatorInterface {
 
     public readonly isAuthenticated$: Observable<boolean>;
-    private readonly isAuthenticatedSubject$: Subject<boolean> = new Subject<boolean>();
+    private readonly isAuthenticatedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
     private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
@@ -35,31 +35,41 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public init(): void {
-        this.tokenManager.isExpired$.subscribe(isExpired => this.isAuthenticatedSubject$.next(!isExpired));
-    }
-
-    public login({username, password}: Credentials): Observable<void> {
-        return new Observable<void>(subscriber => {
-            this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
-                username,
-                password,
-                grant_type: GrantTypes.PasswordGrantType,
-                client_id: environment.client_id,
-                client_secret: environment.client_secret
-            }).subscribe(
-                (result: AuthResponseInterface) => this.tokenManager.setTokens(result).then(
-                    _ => {
-                        subscriber.next();
-                        subscriber.complete();
+        this.tokenManager.isExpired$.subscribe(isExpired => {
+            this.isAuthenticated$.pipe(first()).subscribe(
+                previousIsAuthStatus => {
+                    if (isExpired === previousIsAuthStatus) {
+                        this.isAuthenticatedSubject$.next(!isExpired);
                     }
-                ),
-                (authError: HttpErrorResponse) => this.logout().subscribe(() => subscriber.error(authError))
+                }
             );
         });
     }
 
+    public login({username, password}: Credentials): Observable<void> {
+        return new Observable<void>(subscriber => this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
+            username,
+            password,
+            grant_type: GrantTypes.PasswordGrantType,
+            client_id: environment.client_id,
+            client_secret: environment.client_secret
+        }).subscribe(
+            (result: AuthResponseInterface) => this.tokenManager.setTokens(result).then(
+                _ => this.isAuthenticated$.pipe(takeUntil(this.isAuthenticated$.pipe(filter(isAuth => isAuth)))).subscribe(
+                    () => EMPTY,
+                    () => EMPTY,
+                    () => {
+                        subscriber.next();
+                        subscriber.complete();
+                    }
+                )
+            ),
+            (authError: HttpErrorResponse) => this.logout().subscribe(() => subscriber.error(authError))
+        ));
+    }
+
     public needToRefresh(): Observable<boolean> {
-        return this.isAuthenticated$.pipe(first(), map(isAuth => !isAuth));
+        return from(this.tokenManager.needToRefresh());
     }
 
     public logout(): Observable<void> {

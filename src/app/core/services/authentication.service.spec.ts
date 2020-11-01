@@ -54,13 +54,15 @@ describe('AuthenticationService', () => {
 
         TestBed.configureTestingModule({
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock},
                 {provide: ApiClientService, useClass: HttpMock},
-                TokenManagerService
+                TokenManagerService,
+                {provide: StorageManagerService, useClass: StorageManagerMock}
             ]
         });
 
         service = TestBed.inject(AuthenticationService);
+        TestBed.inject(TokenManagerService).init();
+        service.init();
     });
 
     it('should be created', () => {
@@ -72,6 +74,7 @@ describe('AuthenticationService', () => {
             username: 'test_user',
             password: 'test_pass'
         };
+
         service.login(credentials).subscribe(
             _ => {
                 (service as any).tokenManager.getAccessToken().then(
@@ -137,9 +140,9 @@ describe('AuthenticationService', () => {
                 _ => {
                     service.logout().subscribe(
                         () => {
-                            (service as any).tokenManager.getAccessToken().then(
-                                token => {
-                                    expect(token).toBeUndefined();
+                            service.isAuthenticated$.subscribe(
+                                res => {
+                                    expect(res).toBeFalse();
                                     done();
                                 }
                             );

@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
-
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
+import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
+import {ErrorList} from '@app/core/enums/error-list';
 import {StorageManagerMock} from 'src/testing/mocks';
-import {AuthResponseInterface} from '../../auth/interfaces/auth-response.interface';
 import {StorageManagerService} from '../proxies/storage-manager.service';
 import {TokenManagerService} from './token-manager.service';
 
@@ -84,22 +84,12 @@ describe('TokenManagerService', () => {
             _ => {
                 service.clear().then(
                     () => {
-                        service.getAccessToken().then(
-                            token => {
-                                expect(token).toBeUndefined();
-                                done();
-                            }
-                        );
-                        service.getRefreshToken().then(
-                            token => {
-                                expect(token).toBeUndefined();
-                                done();
-                            }
-                        );
+                        service.getAccessToken().catch(err => expect(err).toEqual(Error(ErrorList.EMPTY_TOKEN_ERROR)));
+                        service.getRefreshToken().catch(err => expect(err).toEqual(Error(ErrorList.EMPTY_TOKEN_ERROR)));
+                        done();
                     }
                 );
             }
         );
     });
-
 });
