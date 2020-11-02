@@ -12,4 +12,6 @@ export interface StepSevenDataInterface extends ServiceTimetableInterface {
     payment_cash: boolean;
     payment_online: boolean;
     departure: StepSevenDepartureDataInterface;
+    need_to_create_master_schedule: boolean;
+    use_master_schedule: boolean;
 }

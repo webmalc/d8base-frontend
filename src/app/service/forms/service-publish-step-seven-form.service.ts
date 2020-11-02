@@ -18,12 +18,13 @@ export class ServicePublishStepSevenFormService {
             [ServicePublishStepSevenFormFields.Address]: [data?.address],
             [ServicePublishStepSevenFormFields.Postal]: [data?.postal_code],
             [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
-            [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false]
+            [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
+            [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false]
         });
     }
 
     public getFormFieldValue(formField: string): any {
-        return this.form.get(formField).value;
+        return this.form?.get(formField)?.value;
     }
 
     public isSubmitDisabled(): boolean {

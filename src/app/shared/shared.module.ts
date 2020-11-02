@@ -14,6 +14,8 @@ import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/erro
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
+import {RatingFullStarComponent} from '@app/shared/components/rating-full-star/rating-full-star.component';
+import {RatingHalfStarComponent} from '@app/shared/components/rating-half-star/rating-half-star.component';
 import {RatingComponent} from '@app/shared/components/rating/rating.component';
 import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-list.component';
 import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
@@ -50,6 +52,8 @@ import {NumberDirective} from './directives/number.directive';
         AbstractContactsComponent,
         AbstractLocationEditComponent,
         RatingComponent,
+        RatingFullStarComponent,
+        RatingHalfStarComponent,
         DurationComponent
     ],
     exports: [
@@ -69,6 +73,8 @@ import {NumberDirective} from './directives/number.directive';
         AbstractContactsComponent,
         AbstractLocationEditComponent,
         RatingComponent,
+        RatingFullStarComponent,
+        RatingHalfStarComponent,
         DurationComponent
     ],
     imports: [

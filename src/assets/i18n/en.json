@@ -19,7 +19,10 @@
       "4": "Very good",
       "5": "Excellent"
     },
-    "back": "Back"
+    "back": "Back",
+    "master": {
+      "private-person": "Private person"
+    }
   },
   "ion-selectable": {
     "close-button-text": "Close",
@@ -225,6 +228,16 @@
       "1": "year",
       "2": "years",
       "3": "years"
+    },
+    "proposal": {
+      "1": "proposal",
+      "2": "proposals",
+      "3": "proposals"
+    },
+    "is-waiting": {
+      "1": "is waiting",
+      "2": "is waiting",
+      "3": "is waiting"
     }
   },
   "master-profile": {
@@ -343,5 +356,50 @@
   "master-review": {
     "created-time": "Created at",
     "answer": "Answer"
+  },
+  "issuance": {
+    "search-placeholder": "Find service/professional",
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "submenu": {
+        "main": "Main",
+        "additional": "Additional"
+      },
+      "main-tab": {
+        "address": "Location",
+        "address-input": "Enter location",
+        "on-map": "Or select location on map",
+        "radius": "Search radius",
+        "categories": "Search categories",
+        "categories-select": "Select category",
+        "subcategories": "Search subcategories",
+        "subcategories-select": "Select subcategories",
+        "tags": "Tags",
+        "add": "Add",
+        "tags-select": "Select from tag cloud",
+        "online-booking": "Online booking",
+        "online-booking-desc": "Show offline booking only",
+        "instant-booking": "Instant booking",
+        "instant-booking-desc": "Show instant booking only",
+        "datetime": "Date and time",
+        "availability": "Service availability",
+        "online-service": "Online service",
+        "at-master-location": "At professional’s location",
+        "at-client-location": "At client’s location",
+        "price": "Service price",
+        "apply": "Apply"
+      }
+    },
+    "result": {
+      "you": "for you",
+      "sort": "sorting"
+    },
+    "search-result": {
+      "services": "Professional service(s)",
+      "more": "More services",
+      "address": "Professional location",
+      "select": "Select"
+    }
   }
 }

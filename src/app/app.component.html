@@ -49,6 +49,16 @@
                         </ion-item>
 
                         <ion-item
+                                (click)="menu.close()"
+                                routerDirection="forward"
+                                routerLink="/search/"
+                                routerLinkActive="active"
+                        >
+                            <ion-icon name="construct-outline"></ion-icon>
+                            Search
+                        </ion-item>
+
+                        <ion-item
                                 routerLink="/message"
                                 routerLinkActive="active"
                                 routerDirection="forward"
@@ -69,6 +79,7 @@
                         <ion-item
                                 routerLink="/auth/login"
                                 routerLinkActive="active"
+                                routerDirection="forward"
                                 id="logout"
                                 (click)="logout()"
                         >

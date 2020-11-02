@@ -18,7 +18,6 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
     constructor(private readonly toaster: ToastController,
                 private readonly router: Router,
-                private readonly authenticationService: AuthenticationService,
                 @Inject(PLATFORM_ID) private readonly platformId: object
     ) {
     }
