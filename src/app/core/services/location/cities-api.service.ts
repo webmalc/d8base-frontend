@@ -5,10 +5,10 @@ import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {LocationTypes} from '@app/core/types/location-types';
 import {City} from '@app/profile/models/city';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

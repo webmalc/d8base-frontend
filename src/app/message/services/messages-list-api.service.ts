@@ -3,10 +3,10 @@ import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-a
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Message} from '@app/message/models/message';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class MessagesListApiService extends AbstractReadonlyApiService<Message> {

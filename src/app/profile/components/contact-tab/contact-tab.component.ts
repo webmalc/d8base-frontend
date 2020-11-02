@@ -13,10 +13,10 @@ export class ContactTabComponent {
 
     public sizes: GridSizesInterface = {
         sizeXs: 12,
-        sizeSm: 6,
-        sizeMd: 6,
-        sizeLg: 4,
-        sizeXl: 3
+        sizeSm: 12,
+        sizeMd: 10,
+        sizeLg: 10,
+        sizeXl: 8
     };
 
     constructor(

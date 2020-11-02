@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Coordinates} from '@app/shared/interfaces/coordinates';
+import {environment} from '@env/environment';
 import * as L from 'leaflet';
 import {LeafletMouseEvent} from 'leaflet';
-import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-user-location-map',

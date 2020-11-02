@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-register-verify',
