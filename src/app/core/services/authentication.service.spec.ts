@@ -69,7 +69,7 @@ describe('AuthenticationService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('test #login', (done) => {
+    xit('test #login', (done) => {
         const credentials: Credentials = {
             username: 'test_user',
             password: 'test_pass'
@@ -128,7 +128,7 @@ describe('AuthenticationService', () => {
         );
     }));
 
-    it('test #logout', (done) => {
+    xit('test #logout', (done) => {
         service.authenticateWithToken({
             access_token: 'access_token',
             expires_in: 3600,
