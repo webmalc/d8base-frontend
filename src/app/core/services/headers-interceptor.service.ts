@@ -1,6 +1,5 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {HelperService} from '@app/core/services/helper.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
 import {from, Observable} from 'rxjs';
@@ -29,9 +28,7 @@ export class HeadersInterceptor implements HttpInterceptor {
             .pipe(
                 switchMap(token => {
                     let headers;
-                    if (HelperService.isNoAuthGetUrl(req.url) && req.method === 'GET') {
-                        headers = req.headers.append('Content-Type', 'application/json');
-                    } else if (this.getAuthUrls().includes(req.url)) {
+                    if (this.getAuthUrls().includes(req.url)) {
                         headers = req.headers.append('Authorization', 'Basic ' +
                             btoa(`${environment.client_id}:${environment.client_secret}`))
                             .append('Content-Type', 'application/json');

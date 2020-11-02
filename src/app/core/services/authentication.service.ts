@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {GrantTypes} from '@app/auth/enums/grant-types';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
 import {Credentials} from '@app/auth/interfaces/credentials';
+import {once} from '@app/core/decorators/once';
 import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
 import {LoginDataInterface} from '@app/core/interfaces/login-data-interface';
 import {RefreshDataInterface} from '@app/core/interfaces/refresh-data-interface';
@@ -34,6 +35,7 @@ export class AuthenticationService implements AuthenticatorInterface {
         this.isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
     }
 
+    @once
     public init(): void {
         this.tokenManager.needToRefresh()
             .then(isExp => this.isAuthenticatedSubject$.next(!isExp))

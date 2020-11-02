@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
+import {once} from '@app/core/decorators/once';
 import {ErrorList} from '@app/core/enums/error-list';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {environment} from '@env/environment';
@@ -23,6 +24,7 @@ export class TokenManagerService {
         this.isExpired$ = this.isExpSubject$.asObservable();
     }
 
+    @once
     public init(): void {
         timer(0, 1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
             _ => this.isExpSubject$.next(true)

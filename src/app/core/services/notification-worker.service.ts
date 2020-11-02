@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
+import {once} from '@app/core/decorators/once';
+import {environment} from '@env/environment';
 import {firebase} from '@firebase/app';
 import '@firebase/messaging';
 import {BehaviorSubject} from 'rxjs';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ export class NotificationWorkerService {
         return firebase.messaging.isSupported();
     }
 
+    @once
     public async init(): Promise<void> {
         return new Promise<void>(async resolve => {
             const registration = await navigator.serviceWorker.register('../../../firebase-messaging-sw.js');
@@ -35,8 +37,8 @@ export class NotificationWorkerService {
                     (refreshedToken: string) => {
                         console.warn(refreshedToken);
                     }).catch((err) => {
-                        console.error(err);
-                    });
+                    console.error(err);
+                });
             });
             resolve();
         });
