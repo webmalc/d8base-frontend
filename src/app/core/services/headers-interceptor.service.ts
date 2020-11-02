@@ -1,9 +1,9 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {environment} from '@env/environment';
 import {from, Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 /**
  * Sets headers while requesting api endpoints

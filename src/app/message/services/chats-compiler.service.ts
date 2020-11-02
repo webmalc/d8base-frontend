@@ -5,8 +5,8 @@ import {LatestMessageInterface} from '@app/message/interfaces/latest-message-int
 import {AbstractMessage} from '@app/message/models/abstract-message';
 import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
 import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
+import {environment} from '@env/environment';
 import {map, switchMap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class ChatsCompilerService {

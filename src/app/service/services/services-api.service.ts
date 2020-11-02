@@ -18,7 +18,7 @@ export class ServicesApiService extends AbstractApiService<Service> {
         super(client);
     }
 
-    public getServiceTypeList(): Observable<{value: string, display_name: string}[]> {
+    public getServiceTypeList(): Observable<{ value: string, display_name: string }[]> {
         return super.options<{ actions: { POST: { service_type: { choices: { value: string, display_name: string }[] } } } }>().pipe(
             map(data =>
                 data.actions.POST.service_type.choices)

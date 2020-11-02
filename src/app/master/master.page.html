@@ -22,20 +22,14 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="background-color-white">
-    <ion-row class="ion-justify-content-center ion-margin-bottom">
+    <ion-row class="ion-margin-bottom">
         <ion-col class="ion-no-padding" size="12">
-            <ion-row class="ion-margin-top">
-                <ion-col
-                        offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="1"
-                        size-lg="4" size-md="5" size-sm="10" size-xl="4" size-xs="12">
-                    <ion-row class="ion-justify-content-center">
-                        <app-master-profile-main-info-section [sectionData]="mainInfoSectionData">
-                        </app-master-profile-main-info-section>
-                    </ion-row>
+            <ion-row class="ion-margin-top ion-justify-content-center">
+                <ion-col size-xs="12" size-sm="6" size-md="5" size-lg="4" size-xl="3">
+                    <app-master-profile-main-info-section [sectionData]="mainInfoSectionData">
+                    </app-master-profile-main-info-section>
                 </ion-col>
-                <ion-col
-                        offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="1"
-                        size-lg="5" size-md="7" size-sm="10" size-xl="5" size-xs="12">
+                <ion-col size-xs="12" size-sm="10" size-md="6" size-lg="5" size-xl="4">
                     <app-master-profile-factory [editable]="editable" [mode]="tab"></app-master-profile-factory>
                 </ion-col>
             </ion-row>

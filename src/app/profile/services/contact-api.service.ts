@@ -3,9 +3,9 @@ import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-a
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Contact} from '@app/profile/models/contact';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

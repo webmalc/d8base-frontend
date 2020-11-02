@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {environment} from '../../../environments/environment';
+import {environment} from '@env/environment';
 import {ApiListResponseFixture} from '../../../testing/fixtures/api-list-response-fixture';
 import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../testing/fixtures/generator';

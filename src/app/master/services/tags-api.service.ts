@@ -4,9 +4,9 @@ import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.i
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {Tag} from '@app/master/models/tag';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

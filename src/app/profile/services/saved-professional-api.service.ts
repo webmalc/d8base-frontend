@@ -4,9 +4,9 @@ import {MasterInterface} from '@app/core/interfaces/master.interface';
 import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
 import {Master} from '@app/core/models/master';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class SavedProfessionalApiService {
