@@ -3,14 +3,21 @@ import {once} from '@app/core/decorators/once';
 import {environment} from '@env/environment';
 import {firebase} from '@firebase/app';
 import '@firebase/messaging';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotificationWorkerService {
 
-    public messageReceived$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public static isInitialized: Observable<boolean>;
+    public messageReceived$: Subject<boolean> = new Subject<boolean>();
+    private readonly initSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    constructor() {
+        NotificationWorkerService.isInitialized = this.initSubject.asObservable();
+    }
+
 
     public static isFirebaseSupported(): boolean {
         return firebase.messaging.isSupported();
@@ -49,7 +56,10 @@ export class NotificationWorkerService {
             if (!Notification || !NotificationWorkerService.isFirebaseSupported()) {
                 return resolve();
             }
-            Notification.requestPermission().finally(() => resolve());
+            Notification.requestPermission().finally(() => {
+                this.initSubject.next(true);
+                resolve();
+            });
         });
     }
 }

@@ -73,7 +73,6 @@ export class AppComponent implements OnInit, AfterViewInit {
             })
         ).subscribe((title: string) => this.titleService.setTitle(title));
         this.getDefaultUserCountry().pipe(filter(code => null !== code)).subscribe(c => this.countryCode = c.code.toLowerCase());
-
     }
 
     public initializeApp(): void {

@@ -1,4 +1,4 @@
-const onceFn = require('lodash.once');
+import * as onceFn from 'lodash.once';
 
 export function once(target: any, propertyKey: string, descriptor: PropertyDescriptor): any {
     const originalMethod = descriptor.value;

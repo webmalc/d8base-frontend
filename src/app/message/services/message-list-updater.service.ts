@@ -22,7 +22,6 @@ export class MessageListUpdaterService {
         this.destroy();
 
         return NotificationWorkerService.isFirebaseSupported() ? this.notificationWorker.messageReceived$.pipe(
-            filter(received => received),
             switchMap(() => this.getMessageList(interlocutorId))
         ) : new Observable<ApiListResponseInterface<Message>>(
             subscriber => {

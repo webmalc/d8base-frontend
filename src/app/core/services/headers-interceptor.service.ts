@@ -26,6 +26,7 @@ export class HeadersInterceptor implements HttpInterceptor {
 
         return from(this.tokenManager.getAccessToken())
             .pipe(
+                catchError(_ => next.handle(req.clone({headers: req.headers.append('Content-Type', 'application/json')}))),
                 switchMap(token => {
                     let headers;
                     if (this.getAuthUrls().includes(req.url)) {
@@ -38,8 +39,7 @@ export class HeadersInterceptor implements HttpInterceptor {
                     }
 
                     return next.handle(req.clone({headers}));
-                }),
-                catchError(_ => next.handle(req.clone({headers: req.headers.append('Content-Type', 'application/json')})))
+                })
             );
     }
 

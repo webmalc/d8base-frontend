@@ -23,7 +23,6 @@ export class ChatListUpdaterService {
         this.destroy();
 
         return NotificationWorkerService.isFirebaseSupported() ? this.notificationWorker.messageReceived$.pipe(
-            filter(received => received),
             switchMap(() => this.getChatList())
         ) : new Observable<AbstractMessage[]>(
             subscriber => {
