@@ -68,12 +68,12 @@ import {AppComponent} from './app.component';
         },
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: HeadersInterceptor,
+            useClass: AuthInterceptor,
             multi: true
         },
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
+            useClass: HeadersInterceptor,
             multi: true
         },
         {

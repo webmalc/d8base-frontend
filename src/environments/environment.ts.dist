@@ -22,7 +22,7 @@ export const environment = {
         plugin: '',
         reset_password_link: '/en/api/accounts/send-reset-password-link/',
         reset_password: '/en/api/accounts/reset-password/',
-        refresh: '/en/api/auth/token/',
+        refresh: '/api/auth/token/',
         register: '/en/api/accounts/register/',
         user: '/en/api/accounts/profile/',
         user_contact: '/en/api/accounts/contacts/',

@@ -1,6 +1,7 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
+import {HelperService} from '@app/core/services/helper.service';
 import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
@@ -25,7 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
         } catch (e) {
             return next.handle(req);
         }
-        if (this.getRestrictedUrls().includes(req.url)) {
+        if (
+            this.getRestrictedUrls().includes(req.url) ||
+            (req.method === 'GET' && HelperService.isNoAuthGetUrl(req.url))
+        ) {
             return next.handle(req);
         }
 
@@ -41,7 +45,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private getRestrictedUrls(): string[] {
         return [
-            environment.backend.url + environment.backend.refresh
+            environment.backend.url + environment.backend.refresh,
+            environment.backend.url + environment.backend.register,
+            environment.backend.url + environment.backend.auth,
+            environment.backend.url + environment.backend.reset_password,
+            environment.backend.url + environment.backend.reset_password_link
         ];
     }
 }

@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
 import {from, Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {catchError, switchMap} from 'rxjs/operators';
 
 /**
  * Sets headers while requesting api endpoints
@@ -26,11 +26,10 @@ export class HeadersInterceptor implements HttpInterceptor {
 
         return from(this.tokenManager.getAccessToken())
             .pipe(
+                catchError(_ => next.handle(req.clone({headers: req.headers.append('Content-Type', 'application/json')}))),
                 switchMap(token => {
                     let headers;
-                    if (this.getExcludedUrls().includes(req.url)) {
-                        headers = req.headers.append('Content-Type', 'application/json');
-                    } else if (this.getAuthUrls().includes(req.url)) {
+                    if (this.getAuthUrls().includes(req.url)) {
                         headers = req.headers.append('Authorization', 'Basic ' +
                             btoa(`${environment.client_id}:${environment.client_secret}`))
                             .append('Content-Type', 'application/json');
@@ -47,15 +46,6 @@ export class HeadersInterceptor implements HttpInterceptor {
     private getAuthUrls(): string[] {
         return [
             environment.backend.url + environment.backend.refresh
-        ];
-    }
-
-    private getExcludedUrls(): string[] {
-        return [
-            environment.backend.url + environment.backend.countries,
-            environment.backend.url + environment.backend.cities,
-            environment.backend.url + environment.backend.reset_password_link,
-            environment.backend.url + environment.backend.reset_password
         ];
     }
 }
