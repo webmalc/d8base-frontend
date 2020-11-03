@@ -60,6 +60,7 @@
     "flag-icon-css": "^3.5.0",
     "ionic-selectable": "^4.7.1",
     "leaflet": "^1.6.0",
+    "lodash.once": "^4.1.1",
     "mutation-observer": "^1.0.3",
     "ngx-dropzone": "^2.2.2",
     "reflect-metadata": "^0.1.13",

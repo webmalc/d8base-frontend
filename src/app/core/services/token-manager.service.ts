@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
+import {once} from '@app/core/decorators/once';
 import {ErrorList} from '@app/core/enums/error-list';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {environment} from '@env/environment';
-import {interval, Observable, Subject} from 'rxjs';
+import {Observable, Subject, timer} from 'rxjs';
 
 function getTimestamp(offset: number = 0): number {
-    return parseInt((new Date().getUTCMilliseconds() / 1000).toFixed(0), 10) + offset;
+    return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;
 }
 
 @Injectable({
@@ -23,8 +24,9 @@ export class TokenManagerService {
         this.isExpired$ = this.isExpSubject$.asObservable();
     }
 
+    @once
     public init(): void {
-        interval(1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
+        timer(0, 1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
             _ => this.isExpSubject$.next(true)
         ));
     }
@@ -34,11 +36,14 @@ export class TokenManagerService {
             return Promise.resolve(this.tokenData.access_token);
         }
 
-        return new Promise<string>(resolve => {
+        return new Promise<string>((resolve, reject) => {
             this.getTokenData().then(
                 (tokenData: AuthResponseInterface) => {
+                    if (!tokenData?.access_token) {
+                        return reject(Error(ErrorList.EMPTY_TOKEN_ERROR));
+                    }
                     this.tokenData = tokenData;
-                    resolve(this.tokenData?.access_token);
+                    resolve(this.tokenData.access_token);
                 }
             );
         });
@@ -48,7 +53,7 @@ export class TokenManagerService {
         return new Promise((resolve, reject) => {
             this.getTokenData().then(tokenData => tokenData?.refresh_token ?
                 resolve(tokenData?.refresh_token) :
-                reject(Error(ErrorList.EMPTY_REFRESH_TOKEN_ERROR)));
+                reject(Error(ErrorList.EMPTY_TOKEN_ERROR)));
         });
     }
 
@@ -68,11 +73,12 @@ export class TokenManagerService {
         return this.storage.remove(this.TOKEN_DATA_STORAGE_KEY);
     }
 
-    private needToRefresh(): Promise<boolean> {
+    public needToRefresh(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.isAccessTokenExpired().then(
                 (isAccessTokenExpired: boolean) => isAccessTokenExpired ?
-                    this.isRefreshTokenExpired().then((isRefreshTokenExpired: boolean) => resolve(!isRefreshTokenExpired))
+                    this.isRefreshTokenExpired()
+                        .then(isExpired => !isExpired ? resolve(true) : reject(ErrorList.REFRESH_TOKEN_EXPIRED_ERROR))
                         .catch(err => reject(err)) :
                     resolve(false)
             ).catch(err => reject(err));
@@ -87,7 +93,7 @@ export class TokenManagerService {
         return this.isAbstractTokenExpired('refresh_expire');
     }
 
-    private getTokenData(): Promise<AuthResponseInterface> {
+    private getTokenData(): Promise<AuthResponseInterface | null> {
         if (this.tokenData) {
             return Promise.resolve(this.tokenData);
         }
@@ -104,7 +110,7 @@ export class TokenManagerService {
             this.getTokenData().then(
                 (tokenData: AuthResponseInterface) => tokenData && tokenData[tokenType] ?
                     resolve(getTimestamp() >= tokenData[tokenType]) :
-                    reject('no token error')
+                    reject(Error(ErrorList.EMPTY_TOKEN_ERROR))
             );
         });
     }

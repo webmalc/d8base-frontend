@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {once} from '@app/core/decorators/once';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
@@ -22,6 +23,7 @@ export class UserManagerService {
     ) {
     }
 
+    @once
     public subscribeToAuthSubject(): void {
         this.auth.isAuthenticated$.pipe(filter(isAuth => isAuth === false)).subscribe(
             _ => this.user = null

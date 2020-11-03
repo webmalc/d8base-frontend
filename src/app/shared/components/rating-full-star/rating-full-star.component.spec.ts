@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {RatingFullStarComponent} from './rating-full-star.component';
@@ -7,7 +7,7 @@ describe('RatingFullStarComponent', () => {
   let component: RatingFullStarComponent;
   let fixture: ComponentFixture<RatingFullStarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RatingFullStarComponent],
       imports: [IonicModule.forRoot()]
