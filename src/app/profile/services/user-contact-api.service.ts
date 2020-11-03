@@ -6,10 +6,10 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {UserContact} from '@app/profile/models/user-contact';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {Review} from '@app/core/models/review';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

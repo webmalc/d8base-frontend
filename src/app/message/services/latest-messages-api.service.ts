@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {LatestMessageInterface} from '@app/message/interfaces/latest-message-interface';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class LatestMessagesApiService {

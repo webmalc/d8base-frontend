@@ -7,8 +7,8 @@ import {UserManagerService} from '@app/core/services/user-manager.service';
 import {MasterApiService} from '@app/master/services/master-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +34,8 @@ export class MasterManagerService {
     }
 
     public isMaster(): Observable<boolean> {
-        return this.userManager.getCurrentUser().pipe(map(user => user.account_type === TypeOfUser.Master));
+        return this.userManager.getCurrentUser().pipe(map(user => user.account_type === TypeOfUser.Master),
+            catchError(err => of(false)));
     }
 
     public becomeMaster(): Observable<User> {

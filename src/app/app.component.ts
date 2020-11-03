@@ -12,10 +12,11 @@ import {TranslationService} from '@app/core/services/translation.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
 import {environment} from '@env/environment';
-import {firebase} from '@firebase/app';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {MenuController, Platform} from '@ionic/angular';
+import firebase from 'firebase';
+
 import {Observable, of} from 'rxjs';
 import {filter, first, map, switchMap} from 'rxjs/operators';
 
@@ -53,7 +54,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
-        // throw Error(ErrorList.EMPTY_REFRESH_TOKEN_ERROR);
         if (!firebase.apps.length) {
             firebase.initializeApp(environment.firebaseConfig);
         }

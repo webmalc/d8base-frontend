@@ -6,9 +6,9 @@ import {SentMessage} from '@app/message/models/sent-message';
 import {MessageListUpdaterService} from '@app/message/services/message-list-updater.service';
 import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
 import {MessagesSentApiService} from '@app/message/services/messages-sent-api.service';
+import {environment} from '@env/environment';
 import {BehaviorSubject, forkJoin, Observable, Subscription} from 'rxjs';
 import {filter, first, map, switchMap, tap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class DirectServiceService {

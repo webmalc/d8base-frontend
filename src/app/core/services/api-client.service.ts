@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {environment} from '@env/environment';
 import {forkJoin, Observable, of} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -21,11 +21,11 @@ export class ApiClientService {
         return this.http.post<T>(this.getHost() + url, data);
     }
 
-    public put<T extends {id: number}>(url: string, data: T): Observable<T> {
+    public put<T extends { id: number }>(url: string, data: T): Observable<T> {
         return this.http.put<T>(this.getHost() + url, data);
     }
 
-    public patch<T extends {id: number}>(url: string, data: object = {}): Observable<T> {
+    public patch<T extends { id: number }>(url: string, data: object = {}): Observable<T> {
         return this.http.patch<T>(this.getHost() + url, data);
     }
 
@@ -48,21 +48,21 @@ export class ApiClientService {
     public deleteList<T extends { id: number }>(dataList: T[], url: string): Observable<any> {
         return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
-                [...list.map((value: {id: number}) => this.delete(`${url + value.id}/`))]
+                [...list.map((value: { id: number }) => this.delete(`${url + value.id}/`))]
             ))
         );
     }
 
-    public putList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
-        return 0 === dataList.length ? of([]) :  of(dataList).pipe(
+    public putList<T extends { id: number }>(dataList: T[], url: string): Observable<T[]> {
+        return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
                 [...list.map((value: T) => this.put<T>(`${url}${value.id}/`, value))]
             ))
         );
     }
 
-    public patchList<T extends {id: number}>(dataList: T[], url: string): Observable<T[]> {
-        return 0 === dataList.length ? of([]) :  of(dataList).pipe(
+    public patchList<T extends { id: number }>(dataList: T[], url: string): Observable<T[]> {
+        return 0 === dataList.length ? of([]) : of(dataList).pipe(
             mergeMap((list) => forkJoin(
                 [...list.map((value: T) => this.patch<T>(`${url}${value.id}/`, value))]
             ))

@@ -1,6 +1,6 @@
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3" class="ion-no-padding">
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="10" sizeXl="8">
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white">
                     <ion-col class="ion-no-padding">
@@ -52,21 +52,17 @@
                             <app-duration [formControlName]="formFields.Duration"></app-duration>
                         </ion-col>
 
-                        <ion-list>
-                            <ion-row class="ion-justify-content-between ion-align-items-center pr5">
-                                <ion-col size="11" class="ion-no-padding">
-                                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                        {{"service-publish.step-two.fixed-price"|translate}}
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col size="1">
-                                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                        <ion-checkbox color="light"
-                                                      [formControlName]="formFields.IsPriceFixed"></ion-checkbox>
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </ion-list>
+
+                        <ion-row class="ion-justify-content-between ion-align-items-center pr5">
+                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                                {{"service-publish.step-two.fixed-price"|translate}}
+                            </ion-item>
+                            <ion-item class="ion-item-no-border">
+                                <ion-checkbox [formControlName]="formFields.IsPriceFixed"
+                                              color="light"></ion-checkbox>
+                            </ion-item>
+                        </ion-row>
+
                         <ion-col size="12" *ngIf="formService.form.get(formFields.IsPriceFixed).value">
                             <ion-row>
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -93,7 +89,8 @@
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
-                                        <ion-input name="price" appNumbersOnly [formControlName]="formFields.FixedPrice"></ion-input>
+                                        <ion-input [formControlName]="formFields.FixedPrice" appNumbersOnly
+                                                   name="price"></ion-input>
                                     </ion-item>
                                 </ion-col>
                             </ion-row>
@@ -111,8 +108,8 @@
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         <ionic-selectable
-                                                itemValueField="value"
-                                                itemTextField="display_name"
+                                                itemTextField="title"
+                                                itemValueField="currency"
                                                 [canSearch]="true"
                                                 [items]="currencyList$|async"
                                                 [formControlName]="this.formFields.StartPriceCurrency"
@@ -141,8 +138,8 @@
                                 <ion-col size="6" class="no-padding-left">
                                     <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                         <ionic-selectable
-                                                itemValueField="value"
-                                                itemTextField="display_name"
+                                                itemTextField="title"
+                                                itemValueField="currency"
                                                 [canSearch]="true"
                                                 [items]="currencyList$|async"
                                                 [formControlName]="this.formFields.EndPriceCurrency"
@@ -155,7 +152,8 @@
                                 </ion-col>
                                 <ion-col size="6" class="no-padding-right">
                                     <ion-item class="ion-item-bordered">
-                                        <ion-input name="price" appNumbersOnly [formControlName]="formFields.EndPrice"></ion-input>
+                                        <ion-input [formControlName]="formFields.EndPrice" appNumbersOnly
+                                                   name="price"></ion-input>
                                     </ion-item>
                                 </ion-col>
                             </ion-row>
@@ -179,7 +177,7 @@
                                     </ion-item>
                                 </ion-list-header>
                                 <ion-item *ngFor="let type of serviceTypeList">
-                                    <ion-label>{{"service-publish.step-two.location-"+type|translate}}</ion-label>
+                                    <ion-label>{{"service-publish.step-two.location-" + type|translate}}</ion-label>
                                     <ion-radio value="{{type}}"></ion-radio>
                                 </ion-item>
                             </ion-radio-group>

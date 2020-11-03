@@ -1,7 +1,7 @@
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {environment} from '../../../environments/environment';
+import {environment} from '@env/environment';
 import {ApiClientService} from './api-client.service';
 import {HeadersInterceptor} from './headers-interceptor.service';
 import {TokenManagerService} from './token-manager.service';

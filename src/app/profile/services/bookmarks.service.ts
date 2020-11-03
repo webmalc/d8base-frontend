@@ -5,10 +5,10 @@ import {BookmarkMaster} from '@app/core/models/bookmark-master';
 import {Master} from '@app/core/models/master';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
+import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable, throwError} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 
 
 @Injectable()
@@ -37,6 +37,7 @@ export class BookmarksService {
                 })
             );
     }
+
     public createBookmark(savedProfessional: SavedProfessionalInterface<number>): Observable<BookmarkMaster> {
         let rawBookmark: SavedProfessionalInterface<number>;
 
