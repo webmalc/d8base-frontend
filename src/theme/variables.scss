@@ -9,15 +9,15 @@
 
   ion-content .bgc-light-blue {
     //--ion-background-color: #828aff;
-    --ion-background-color: #eef5ff;
+    --ion-background-color: var(--ion-color-light);
   }
 
   .item-background-color-white {
-    --ion-item-background: #fff;
+    --ion-item-background: var(--ion-color-light);
   }
 
   .background-color-white {
-    --ion-background-color: #fff;
+    --ion-background-color: var(--ion-color-light);
   }
 
   --ion-color-white: #fff;
@@ -88,7 +88,7 @@
   --ion-color-medium-tint: #a2a4ab;
 
   /** light **/
-  --ion-color-light: #eef5ff;
+  --ion-color-light: #fff;
   --ion-color-light-rgb: 238, 245, 255;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
