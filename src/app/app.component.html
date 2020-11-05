@@ -1,7 +1,7 @@
 <ion-app [ngClass]="{'dark-theme': darkTheme}">
     <ion-content>
         <ion-split-pane contentId="main-content">
-            <ion-menu [disabled]="false" menu-id="menu" contentId="main-content" type="overlay" style="max-width: 300px">
+            <ion-menu [disabled]="false" contentId="main-content" id="menu" menu-id="menu" type="overlay">
                 <ion-header>
                     <ion-toolbar>
                         <ion-title>Navigate</ion-title>
@@ -13,8 +13,7 @@
                                 routerLink="/auth/login"
                                 routerDirection="forward"
                                 routerLinkActive="active"
-                                (click)="menu.close()"
-                        >
+                                (click)="menu.close()">
                             <ion-icon name="log-in-outline"></ion-icon>
                             {{'template.sign-in'|translate}}
                         </ion-item>
@@ -22,8 +21,7 @@
                                 routerLink="/auth/registration"
                                 routerLinkActive="active"
                                 routerDirection="forward"
-                                (click)="menu.close()"
-                        >
+                                (click)="menu.close()">
                             <ion-icon name="reader-outline"></ion-icon>
                             {{'template.sign-up'|translate}}
                         </ion-item>
@@ -31,58 +29,47 @@
                                 routerLink="/profile"
                                 routerLinkActive="active"
                                 routerDirection="forward"
-                                (click)="menu.close()"
-                        >
+                                (click)="menu.close()">
                             <ion-icon name="person-circle-outline"></ion-icon>
                             {{'template.profile'|translate}}
                         </ion-item>
-
                         <ion-item
                                 routerLink="/professional/"
                                 routerLinkActive="active"
                                 routerDirection="forward"
                                 *ngIf="masterManager.isMaster$ | async"
-                                (click)="menu.close()"
-                        >
+                                (click)="menu.close()">
                             <ion-icon name="construct-outline"></ion-icon>
                             {{'template.master-profile'|translate}}
                         </ion-item>
-
                         <ion-item
                                 (click)="menu.close()"
                                 routerDirection="forward"
                                 routerLink="/search/"
-                                routerLinkActive="active"
-                        >
+                                routerLinkActive="active">
                             <ion-icon name="construct-outline"></ion-icon>
                             Search
                         </ion-item>
-
                         <ion-item
                                 routerLink="/message"
                                 routerLinkActive="active"
-                                routerDirection="forward"
-                        >
+                                routerDirection="forward">
                             <ion-icon name="{{newMessages ? 'mail-unread-outline': 'mail-outline'}}"></ion-icon>
                             {{'messages.messages'|translate}}
                         </ion-item>
-
                         <ion-item
                                 routerLink="/service/publish/step-one"
                                 routerLinkActive="active"
-                                routerDirection="forward"
-                        >
+                                routerDirection="forward">
                             <ion-icon name="log-out-outline"></ion-icon>
                             {{'template.service'|translate}}
                         </ion-item>
-
                         <ion-item
                                 routerLink="/auth/login"
                                 routerLinkActive="active"
                                 routerDirection="forward"
                                 id="logout"
-                                (click)="logout()"
-                        >
+                                (click)="logout()">
                             <ion-icon name="log-out-outline"></ion-icon>
                             {{'template.logout'|translate}}
                         </ion-item>
@@ -93,8 +80,7 @@
                         <ion-toggle (ionChange)="changeMode($event)" [(ngModel)]="darkTheme"></ion-toggle>
                         <ion-select interface="alert" slot="start"
                                     [ngModel]="trans.getCurrentLang()"
-                                    (ionChange)="trans.setLang($event.detail.value)"
-                        >
+                                    (ionChange)="trans.setLang($event.detail.value)">
                             <ion-select-option *ngFor="let lang of trans.getLanguagesAsArray()" value="{{ lang }}">
                                 {{ lang }}
                             </ion-select-option>
@@ -102,7 +88,6 @@
                     </ion-item>
                 </ion-footer>
             </ion-menu>
-
             <div class="ion-page" id="main-content">
                 <ion-header>
                     <ion-toolbar class="fs16">
@@ -116,7 +101,7 @@
                         <ion-item class="cursor-pointer ion-item-no-border ion-item-no-side-padding"
                                   routerDirection="forward"
                                   routerLink="/"
-                                  routerLinkActive="active">
+                                  routerLinkActive="active" slot="start">
                             <svg fill="none" height="30" viewBox="0 0 67 30" width="67"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
@@ -185,7 +170,6 @@
                                    && countryCode">
                             <span class="flag-icon flag-icon-{{countryCode}}"></span>
                         </ion-item>
-
                     </ion-toolbar>
                 </ion-header>
                 <ion-content class="bgc-light-blue main-content">

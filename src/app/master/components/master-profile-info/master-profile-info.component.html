@@ -214,8 +214,7 @@
                                               routerDirection="forward"
                                               routerLink="experience-edit/{{experience.id}}"
                                               routerLinkActive="active"
-                                              *ngIf="editable | async"
-                                    >
+                                              *ngIf="editable | async">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </ion-item>
                                 </ion-row>
@@ -259,8 +258,7 @@
                                               routerDirection="forward"
                                               routerLink="education-edit/{{education.id}}"
                                               routerLinkActive="active"
-                                              *ngIf="editable | async"
-                                    >
+                                              *ngIf="editable | async">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </ion-item>
                                 </ion-row>
@@ -305,8 +303,7 @@
                                         <ion-item class="ion-item-no-border ion-align-items-center"
                                                   routerDirection="forward"
                                                   routerLink="certificate-edit/{{certificate.id}}"
-                                                  routerLinkActive="active"
-                                        >
+                                                  routerLinkActive="active">
                                             <ion-icon name="create-outline"></ion-icon>
                                         </ion-item>
                                     </ion-item>
@@ -333,7 +330,6 @@
                 </ion-row>
             </ion-col>
         </ion-item>
-
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="6">
                 <ion-row class="ion-justify-content-start ion-padding-top ion-margin-bottom">
@@ -353,14 +349,12 @@
             <ion-col class="ion-no-padding" size="6">
             </ion-col>
         </ion-item>
-
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row>
                     <app-collapse-item class="width100" title='{{"master-profile.info.reviews"|translate}}'>
                         <app-master-profile-review *ngFor="let review of publicReviewList"
-                                                   [publicReview]="review"
-                        >
+                                                   [publicReview]="review">
                         </app-master-profile-review>
                     </app-collapse-item>
                 </ion-row>

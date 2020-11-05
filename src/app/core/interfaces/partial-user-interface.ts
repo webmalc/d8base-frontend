@@ -1,4 +1,5 @@
 import {Country} from '@app/profile/models/country';
+import {UserLanguage} from '@app/profile/models/user-language';
 
 export interface PartialUserInterface {
     id: number;
@@ -10,5 +11,5 @@ export interface PartialUserInterface {
     is_confirmed: boolean;
     nationality: number | Country;
     birthday: string;
-    languages?: string[];
+    languages?: UserLanguage[];
 }

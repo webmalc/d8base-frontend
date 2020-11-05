@@ -72,7 +72,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 return appTitle;
             })
         ).subscribe((title: string) => this.titleService.setTitle(title));
-        this.getDefaultUserCountry().pipe(filter(code => null !== code)).subscribe(c => this.countryCode = c.code.toLowerCase());
+        this.getDefaultUserCountry().subscribe(c => this.countryCode = c.code.toLowerCase());
     }
 
     public initializeApp(): void {
@@ -131,12 +131,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     private getDefaultUserCountry(): Observable<Country> {
         return this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(
-            first(),
-            filter(isAuth => isAuth === true),
-            switchMap(isAuth => isAuth ? this.userLocationApi.getDefaultLocation().pipe(
-                filter(location => location !== undefined),
+            filter(isAuth => isAuth),
+            switchMap(_ => this.userLocationApi.getDefaultLocation().pipe(
+                filter(location => (location && location.country && true)),
                 switchMap(location => this.countryApi.getByEntityId(location.country as number))
-            ) : of(null))
+            ))
         );
     }
 

@@ -26,7 +26,7 @@ import {UserLanguage} from '@app/profile/models/user-language';
 import {LanguagesApiService} from '@app/profile/services/languages-api.service';
 import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
 import {forkJoin, Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable()
 export class MasterProfileInfoGeneratorFactoryService {
@@ -104,9 +104,7 @@ export class MasterProfileInfoGeneratorFactoryService {
 
     private getUserLanguages(user: PartialUserInterface): Observable<Language[]> {
         return (user.languages && user.languages.length !== 0) ?
-            this.userLanguagesApi.getList(user.languages.map(lang => parseInt(lang, 10))).pipe(
-                switchMap((userLanguagesList: UserLanguage[]) =>
-                    this.languagesApi.getList(userLanguagesList.map(lang => lang.language)))) :
+            this.languagesApi.getList(user.languages.map(lang => lang.language)) :
             of([]);
     }
 
