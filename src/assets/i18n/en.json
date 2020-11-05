@@ -19,6 +19,7 @@
       "4": "Very good",
       "5": "Excellent"
     },
+    "forward": "Forward",
     "back": "Back",
     "master": {
       "private-person": "Private person"
@@ -401,5 +402,14 @@
       "address": "Professional location",
       "select": "Select"
     }
+  },
+  "order": {
+    "title": "Service order",
+    "selected-service": "Selected service",
+    "order-service": "Place order",
+    "date-time": "Date/time",
+    "place": "Place",
+    "summary": "Summary",
+    "final-step": "The order data is ready. Tap 'Place Order' to proceed."
   }
 }
