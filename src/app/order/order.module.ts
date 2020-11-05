@@ -1,5 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {DateTimeStepComponent, LocationStepComponent, SummaryStepComponent} from '@app/order/components';
 import {OrderDetailsComponent} from '@app/order/components/order-details/order-details.component';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
@@ -11,7 +12,10 @@ import {OrderPage} from './order.page';
 @NgModule({
     declarations: [
         OrderPage,
-        OrderDetailsComponent
+        OrderDetailsComponent,
+        DateTimeStepComponent,
+        LocationStepComponent,
+        SummaryStepComponent
     ],
     imports: [
         CommonModule,

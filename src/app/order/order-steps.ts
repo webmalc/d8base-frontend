@@ -1,5 +1,5 @@
 import {WizardStep} from '@app/shared/types';
-import {DateTimeStepComponent, PlaceStepComponent, SummaryStepComponent} from './components';
+import {DateTimeStepComponent, LocationStepComponent, SummaryStepComponent} from './components';
 
 export const orderSteps: WizardStep[] = [
     {
@@ -9,8 +9,8 @@ export const orderSteps: WizardStep[] = [
     },
     {
         path: '2',
-        title: 'order.place',
-        component: PlaceStepComponent
+        title: 'order.location',
+        component: LocationStepComponent
     },
     {
         path: '3',

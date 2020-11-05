@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {PlaceStepComponent} from './place-step.component';
+import {LocationStepComponent} from './location-step.component';
 
 describe('ServiceOrderStepTwoComponent', () => {
-    let component: PlaceStepComponent;
-    let fixture: ComponentFixture<PlaceStepComponent>;
+    let component: LocationStepComponent;
+    let fixture: ComponentFixture<LocationStepComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [PlaceStepComponent],
+            declarations: [LocationStepComponent],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(PlaceStepComponent);
+        fixture = TestBed.createComponent(LocationStepComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {OrderDetails} from '@app/order/interfaces/order-details.interface';
 
 @Component({
     selector: 'app-order-details',
@@ -6,4 +7,5 @@ import {Component} from '@angular/core';
     styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent {
+    @Input() public order: OrderDetails;
 }
