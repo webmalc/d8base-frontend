@@ -11,7 +11,7 @@
 
 <ion-grid class="width100">
 
-    <ion-row *ngIf="isLastStep">
+    <ion-row *ngIf="isLastStep && isFormValid">
         <ion-col>
             <ion-text color="success">
                 {{ 'order.final-step' | translate }}
@@ -43,6 +43,7 @@
             <ion-button *ngIf="!isLastStep" expand="block"
                         (click)="next()">{{ 'global.forward' | translate }}</ion-button>
             <ion-button *ngIf="isLastStep" expand="block" color="success"
+                        [disabled]="!isFormValid"
                         (click)="submit()">{{ 'order.order-service' | translate }}</ion-button>
         </ion-col>
     </ion-row>

@@ -47,6 +47,10 @@ export class OrderPage implements OnInit, OnDestroy {
         return this.currentStepIndex === orderSteps.length - 1;
     }
 
+    public get isFormValid(): boolean {
+        return this.orderService.valid;
+    }
+
     public ngOnInit(): void {
         this.serviceId = this.route.snapshot.params.id;
         this.servicesApi.getByEntityId(this.serviceId)

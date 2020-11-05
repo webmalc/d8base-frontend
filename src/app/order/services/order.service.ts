@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class OrderService {
     public order$: Observable<OrderDetails>;
-
     private readonly orderFormGroup = new FormGroup({
         date: new FormControl(null, Validators.required),
         time: new FormControl(null, Validators.required),
@@ -16,6 +15,10 @@ export class OrderService {
 
     constructor() {
         this.order$ = this.orderFormGroup.valueChanges;
+    }
+
+    public get valid(): boolean {
+        return this.orderFormGroup.valid;
     }
 
     public update(details: OrderDetails): void {
