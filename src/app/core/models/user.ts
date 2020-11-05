@@ -1,4 +1,5 @@
 import {Country} from '@app/profile/models/country';
+import {UserLanguage} from '@app/profile/models/user-language';
 import {Expose} from 'class-transformer';
 import {UserInterface} from '../interfaces/user.interface';
 
@@ -18,7 +19,7 @@ export class User implements UserInterface {
     @Expose() public birthday: string;
     @Expose() public nationality: number | Country;
     @Expose() public main_language: string;
-    @Expose() public languages?: string[];
+    @Expose() public languages?: UserLanguage[];
     @Expose() public account_type: string;
     @Expose() public is_confirmed: boolean;
 }
