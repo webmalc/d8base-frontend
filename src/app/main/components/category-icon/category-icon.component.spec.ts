@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {ExperienceEditComponent} from './experience-edit.component';
+import {CategoryIconComponent} from './category-icon.component';
 
-describe('ExperienceEditComponent', () => {
-    let component: ExperienceEditComponent;
-    let fixture: ComponentFixture<ExperienceEditComponent>;
+describe('CategoryIconComponent', () => {
+    let component: CategoryIconComponent;
+    let fixture: ComponentFixture<CategoryIconComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ExperienceEditComponent],
+            declarations: [CategoryIconComponent],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(ExperienceEditComponent);
+        fixture = TestBed.createComponent(CategoryIconComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {ExperienceEditComponent} from './experience-edit.component';
+import {MainPageIconComponent} from './main-page-icon.component';
 
-describe('ExperienceEditComponent', () => {
-    let component: ExperienceEditComponent;
-    let fixture: ComponentFixture<ExperienceEditComponent>;
+describe('MainPageIconComponent', () => {
+    let component: MainPageIconComponent;
+    let fixture: ComponentFixture<MainPageIconComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ExperienceEditComponent],
+            declarations: [MainPageIconComponent],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(ExperienceEditComponent);
+        fixture = TestBed.createComponent(MainPageIconComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));
