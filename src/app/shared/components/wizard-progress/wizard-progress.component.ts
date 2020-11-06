@@ -8,8 +8,8 @@ import {WizardStep} from '@app/shared/types';
 })
 export class WizardProgressComponent {
 
-    @Input() public stepIndex: number;
+    @Input() public stepIndex: number = 0;
 
-    @Input() public steps: WizardStep[];
+    @Input() public steps: WizardStep[] = [];
 
 }
