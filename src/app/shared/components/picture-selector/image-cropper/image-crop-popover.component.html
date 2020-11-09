@@ -1,0 +1,12 @@
+<image-cropper
+    [imageFile]="file"
+    [onlyScaleDown]="true"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+
+<ion-button expand="full" color="success">Сохранить</ion-button>

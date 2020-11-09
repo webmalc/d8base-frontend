@@ -1,9 +1,10 @@
 import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ImageCropPopoverComponent} from './image-cropper/image-crop-popover.component';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
 import {CameraPhoto} from '@capacitor/core';
-import {IonInput, Platform} from '@ionic/angular';
+import {IonInput, Platform, PopoverController} from '@ionic/angular';
 
 @Component({
     selector: 'app-picture-selector',
@@ -29,7 +30,8 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     constructor(
         public platform: Platform,
         private readonly photoService: PhotoService,
-        private readonly fileService: FileService
+        private readonly fileService: FileService,
+        private readonly popoverController: PopoverController
     ) {
     }
 
@@ -38,9 +40,21 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         input.click();
     }
 
-    public async onFileSelected(): Promise<void> {
-        const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement();
-        await this.readBaseAndSetUri(input.files.item(0) as File);
+    public async onFileSelected(event: Event): Promise<void> {
+        const file = (event.target as HTMLInputElement).files[0];
+        if (!file) {
+
+            return;
+        }
+        const popover = await this.popoverController.create({
+            component: ImageCropPopoverComponent,
+            componentProps: {
+                file
+            },
+            cssClass: 'popover-default-size'
+        });
+        await popover.present();
+        await this.readBaseAndSetUri(file);
     }
 
     public async createCameraSnap(): Promise<void> {
