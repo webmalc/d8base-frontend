@@ -1,0 +1,10 @@
+<ion-item class="cursor-pointer ion-item-no-min-width ion-item-no-min-height" color="light">
+    <ion-label *ngIf="!getLocationString()" class="ion-margin-start location-title">
+        {{'main-page.current-location'|translate}}
+    </ion-label>
+    <ion-label *ngIf="getLocationString() !== null" class="ion-margin-start location-title">
+        {{getLocationString()}}
+    </ion-label>
+    <ion-icon (click)="initPopover()" class="ion-no-margin" color="secondary" name="location-outline"
+              slot="end"></ion-icon>
+</ion-item>

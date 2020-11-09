@@ -3,7 +3,8 @@ import {IpLocation} from '@app/core/models/ip-location';
 import {UserLocation} from '@app/core/models/user-location';
 import {Geolocation, GeolocationOptions, Geoposition} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
-import {Observable} from 'rxjs';
+import {Observable, of, onErrorResumeNext} from 'rxjs';
+import {catchError, first} from 'rxjs/operators';
 import {IpServicesHolderService} from './ip-services-holder.service';
 
 /**
@@ -34,7 +35,7 @@ export class LocationService {
                                     }
                                 );
                             }
-                        ).catch( e => resolve(null));
+                        ).catch(e => resolve(null));
                     } else {
                         this.geolocation.getCurrentPosition().then(
                             (geoposition: Geoposition) => resolve(geoposition)
@@ -55,7 +56,7 @@ export class LocationService {
         return new Promise<UserLocation | null>(resolve => {
             this.getCurrentPosition().then(
                 (geolocation: Geoposition) => {
-                    this.getIpLocationData().then(
+                    this.getIpLocationData().subscribe(
                         (ipLocation: IpLocation) => {
                             const location = new UserLocation();
                             if (null !== geolocation) {
@@ -87,17 +88,11 @@ export class LocationService {
         });
     }
 
-    public async getIpLocationData(): Promise<IpLocation | null> {
-        let ipData: any = null;
-        for (const ipService of this.ipServicesHolder.list) {
-            try {
-                ipData = await ipService.getData();
-                break;
-            } catch (e) {
-                // ignore errors
-            }
-        }
-
-        return ipData;
+    public getIpLocationData(): Observable<IpLocation | null> {
+        return onErrorResumeNext(...this.ipServicesHolder.getList().map(service => service.getData()))
+            .pipe(
+                first(),
+                catchError(e => of(null))
+            );
     }
 }
