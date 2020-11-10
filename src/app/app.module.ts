@@ -36,7 +36,7 @@ import {AppComponent} from './app.component';
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         IonicSelectableModule,
-        IonicModule.forRoot({animated: false}),
+        IonicModule.forRoot(),
         IonicStorageModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,

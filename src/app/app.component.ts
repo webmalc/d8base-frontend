@@ -14,7 +14,7 @@ import {Country} from '@app/profile/models/country';
 import {environment} from '@env/environment';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {MenuController, Platform} from '@ionic/angular';
+import {Platform} from '@ionic/angular';
 import firebase from 'firebase';
 
 import {Observable, of} from 'rxjs';
@@ -40,7 +40,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
         public readonly trans: TranslationService,
-        public readonly menu: MenuController,
         public readonly authenticationFactory: AuthenticationFactory,
         public readonly masterManager: MasterManagerService,
         public readonly userLocationApi: UserLocationApiService,
@@ -80,7 +79,6 @@ export class AppComponent implements OnInit, AfterViewInit {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.initDarkMode();
-            this.toggleMenu();
             this.userManager.subscribeToAuthSubject();
             this.masterManager.subscribeToAuth();
         });
@@ -92,17 +90,6 @@ export class AppComponent implements OnInit, AfterViewInit {
             await this.notificationWorker.requestPermission();
             this.fcmDevice.subscribeToAuth();
         });
-    }
-
-    public toggleMenu(): void {
-        const splitPane = document.querySelector('ion-split-pane');
-        const windowWidth = window.innerWidth;
-        const splitPaneShownAt = 992;
-        const menu = splitPane.querySelector('ion-menu');
-        if (windowWidth >= splitPaneShownAt) {
-            splitPane.disabled = !splitPane.disabled;
-            menu.disabled = !menu.disabled;
-        }
     }
 
     public isDesktop(): boolean {
