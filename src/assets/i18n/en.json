@@ -9,6 +9,10 @@
       "1": "Female",
       "0": "Male"
     },
+    "yn": {
+      "y": "Yes",
+      "n": "No"
+    },
     "experience-dates": {
       "until-now": "until now"
     },
@@ -425,5 +429,12 @@
     "search": "Search",
     "bingo": "Bingo",
     "reviews": "Reviews"
+  },
+  "default-location": {
+    "title": "Is it your current location",
+    "select": "Select your location",
+    "country": "Select country",
+    "city": "Select city",
+    "save": "Save"
   }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IpLocation} from '@app/core/models/ip-location';
 import {UserLocation} from '@app/core/models/user-location';
-import {Geolocation, GeolocationOptions, Geoposition} from '@ionic-native/geolocation/ngx';
+import {Geolocation, Geoposition} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {Observable, of, onErrorResumeNext} from 'rxjs';
 import {catchError, first} from 'rxjs/operators';
@@ -46,10 +46,6 @@ export class LocationService {
                 e => resolve(null)
             );
         });
-    }
-
-    public watchPosition(options?: GeolocationOptions): Observable<Geoposition> {
-        return this.geolocation.watchPosition(options);
     }
 
     public getMergedLocationData(): Promise<UserLocation | null> {

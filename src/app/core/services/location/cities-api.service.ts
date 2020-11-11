@@ -30,7 +30,8 @@ export class CitiesApiService extends AbstractReadonlyApiService<City> {
             search?: string,
             ordering?: string,
             page?: string,
-            page_size?: string
+            page_size?: string,
+            by_name?: string
         }
     ): Observable<ApiListResponseInterface<City>> {
         return super.get(params);

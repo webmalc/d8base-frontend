@@ -26,7 +26,8 @@ export class CountriesApiService extends AbstractReadonlyApiService<Country> {
             continent?: string,
             search?: string,
             ordering?: string,
-            page?: string
+            page?: string,
+            tld?: string
         }
     ): Observable<ApiListResponseInterface<Country>> {
         return super.get(params);
