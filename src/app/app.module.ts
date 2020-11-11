@@ -32,7 +32,6 @@ import {AppComponent} from './app.component';
 
 @NgModule({
     declarations: [AppComponent],
-    entryComponents: [],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         IonicSelectableModule,

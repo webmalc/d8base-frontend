@@ -2,19 +2,19 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
 import {TranslateModule} from '@ngx-translate/core';
-import {AppFooterComponent} from './app-footer.component';
+import {FooterComponent} from './footer.component';
 
 describe('AppFooterComponent', () => {
-    let component: AppFooterComponent;
-    let fixture: ComponentFixture<AppFooterComponent>;
+    let component: FooterComponent;
+    let fixture: ComponentFixture<FooterComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AppFooterComponent],
+            declarations: [FooterComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(AppFooterComponent);
+        fixture = TestBed.createComponent(FooterComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

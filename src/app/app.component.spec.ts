@@ -2,6 +2,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import {DarkModeService, TranslationService} from '@app/core/services';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Platform} from '@ionic/angular';
@@ -9,8 +10,6 @@ import {IonicStorageModule, Storage} from '@ionic/storage';
 import {TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
-import {DarkModeService} from './core/services/dark-mode.service';
-import {TranslationService} from './core/services/translation.service';
 
 describe('AppComponent', () => {
 
@@ -64,14 +63,6 @@ describe('AppComponent', () => {
         fixture.detectChanges();
         expect(compiled.querySelector('ion-app').getAttribute('class'))
             .not.toContain('dark-theme');
-    });
-
-    it('should toggle dark mode', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        fixture.componentInstance.changeMode({target: {checked: true}});
-        fixture.detectChanges();
-        expect(compiled.querySelector('ion-app').getAttribute('class'))
-            .toContain('dark-theme');
     });
 
     it('test translation select options', () => {

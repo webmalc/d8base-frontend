@@ -4,10 +4,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {DurationComponent, ServiceDetailsComponent, WizardProgressComponent} from '@app/shared/components';
+import {
+    DurationComponent,
+    FooterComponent,
+    HeaderComponent,
+    MainMenuComponent,
+    ServiceDetailsComponent,
+    WizardProgressComponent
+} from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
-import {AppFooterComponent} from '@app/shared/components/app-footer/app-footer.component';
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
@@ -43,7 +49,9 @@ import {NumberDirective} from './directives/number.directive';
         UserLocationMapComponent,
         ReviewsListComponent,
         MediaLinksComponent,
-        AppFooterComponent,
+        HeaderComponent,
+        FooterComponent,
+        MainMenuComponent,
         CollapseItemComponent,
         InfoRowComponent,
         NumberDirective,
@@ -65,7 +73,9 @@ import {NumberDirective} from './directives/number.directive';
         ContactsTabComponent,
         ReviewsListComponent,
         MediaLinksComponent,
-        AppFooterComponent,
+        HeaderComponent,
+        FooterComponent,
+        MainMenuComponent,
         CollapseItemComponent,
         UserLocationMapComponent,
         InfoRowComponent,

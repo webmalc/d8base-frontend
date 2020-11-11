@@ -10,15 +10,13 @@ import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
 import {TranslationService} from '@app/core/services/translation.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
-import {Country} from '@app/profile/models/country';
 import {environment} from '@env/environment';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Platform} from '@ionic/angular';
 import firebase from 'firebase';
-
-import {Observable, of} from 'rxjs';
-import {filter, first, map, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -27,8 +25,7 @@ import {filter, first, map, switchMap} from 'rxjs/operators';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-    public darkTheme = false;
-    public newMessages: boolean = false;
+    public darkTheme$: Observable<boolean>;
     public countryCode: string;
 
     constructor(
@@ -48,6 +45,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         private readonly fcmDevice: FcmDeviceService,
         private readonly userManager: UserManagerService
     ) {
+        this.darkTheme$ = darkModeService.darkTheme$;
         this.initializeApp();
     }
 
@@ -71,14 +69,12 @@ export class AppComponent implements OnInit, AfterViewInit {
                 return appTitle;
             })
         ).subscribe((title: string) => this.titleService.setTitle(title));
-        this.getDefaultUserCountry().pipe(filter(code => null !== code)).subscribe(c => this.countryCode = c.code.toLowerCase());
     }
 
     public initializeApp(): void {
         this.platform.ready().then(async () => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.initDarkMode();
             this.userManager.subscribeToAuthSubject();
             this.masterManager.subscribeToAuth();
         });
@@ -92,42 +88,10 @@ export class AppComponent implements OnInit, AfterViewInit {
         });
     }
 
-    public isDesktop(): boolean {
-        return this.platform.is('desktop');
-    }
-
-    public becomeMaster(): void {
-        this.masterManager.becomeMaster().subscribe();
-    }
-
-    public changeMode(data: any): void {
-        this.darkTheme = data.target.checked;
-        this.darkModeService.setMode(data.target.checked);
-    }
-
-    public getTitle(): string {
-        return this.titleService.getTitle();
-    }
-
     public logout(): void {
         this.authenticationFactory.getAuthenticator().logout().subscribe(() => {
             this.masterManager.updateIsMaster();
             this.router.navigateByUrl('/auth/login');
         });
-    }
-
-    private getDefaultUserCountry(): Observable<Country> {
-        return this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(
-            first(),
-            filter(isAuth => isAuth === true),
-            switchMap(isAuth => isAuth ? this.userLocationApi.getDefaultLocation().pipe(
-                filter(location => location !== undefined),
-                switchMap(location => this.countryApi.getByEntityId(location.country as number))
-            ) : of(null))
-        );
-    }
-
-    private initDarkMode(): void {
-        this.darkModeService.isDarkMode().then((data: boolean) => this.darkTheme = data);
     }
 }
