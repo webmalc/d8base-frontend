@@ -32,11 +32,10 @@ import {AppComponent} from './app.component';
 
 @NgModule({
     declarations: [AppComponent],
-    entryComponents: [],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         IonicSelectableModule,
-        IonicModule.forRoot({animated: false}),
+        IonicModule.forRoot(),
         IonicStorageModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,

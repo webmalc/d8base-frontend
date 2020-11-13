@@ -1,0 +1,19 @@
+<ion-list>
+    <ion-list-header class="fs20">
+        <ion-label>{{ 'order.date-time-header' | translate }}</ion-label>
+    </ion-list-header>
+    <ion-item>
+        <ion-label>
+            {{ 'order.date-time-subheader' | translate }}
+
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>{{ 'order.date' | translate }}</ion-label>
+        <ion-datetime placeholder="{{ 'order.not-selected' | translate }}" (ionChange)="updateDate($event)"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>{{ 'order.time' | translate }}</ion-label>
+        <ion-datetime placeholder="{{ 'order.not-selected' | translate }}" display-format="HH:mm" picker-format="HH:mm" (ionChange)="updateTime($event)"></ion-datetime>
+    </ion-item>
+</ion-list>

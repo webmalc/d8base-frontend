@@ -19,6 +19,7 @@
       "4": "Very good",
       "5": "Excellent"
     },
+    "forward": "Forward",
     "back": "Back",
     "master": {
       "private-person": "Private person"
@@ -401,5 +402,24 @@
       "address": "Professional location",
       "select": "Select"
     }
+  },
+  "order": {
+    "title": "Service order",
+    "selected-service": "Selected service",
+    "order-service": "Place order",
+    "date-time": "Date/time",
+    "location": "Place",
+    "location-header": "Service location",
+    "location-online": "Online",
+    "location-professional": "Professional",
+    "location-client": "Client",
+    "summary": "Summary",
+    "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
+    "comment-header": "Optional comments",
+    "date-time-header": "Service date and time",
+    "date-time-subheader": "Pick date and time",
+    "order.date": "Date",
+    "order.time": "Time",
+    "not-selected": "not selected"
   }
 }
