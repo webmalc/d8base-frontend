@@ -35,8 +35,13 @@
     "1": "МЛ"
   },
   "template": {
+    "main-menu-title": "Навигация",
+    "menu": "Меню",
+    "search": "Поиск",
+    "favorites": "Избранное",
     "sign-in": "Вход",
     "sign-up": "Регистрация",
+    "my-profile": "Мой профиль",
     "profile": "Профиль",
     "master-profile": "Профиль мастера",
     "logout": "Выйти",
@@ -46,7 +51,9 @@
     "about": "О сервисе",
     "support": "Поддержка",
     "terms-of-use": "Пользовательское соглашение",
-    "service": "Публикация услуги"
+    "service": "Публикация услуги",
+    "preferences": "Настройки системы",
+    "miscellaneous": "Дополнительно"
   },
   "login-form": {
     "login": "Логин",

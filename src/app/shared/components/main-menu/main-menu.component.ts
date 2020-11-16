@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthenticationFactory, DarkModeService, MasterManagerService, TranslationService} from '@app/core/services';
-import {Observable} from 'rxjs';
+import {Component, Input} from '@angular/core';
+import {AuthenticationFactory} from '@app/core/services';
+import {Platform} from '@ionic/angular';
+import {MainMenuItem, mainMenuItems} from './main-menu';
 
 @Component({
     selector: 'app-main-menu',
@@ -9,29 +9,30 @@ import {Observable} from 'rxjs';
     styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
-    public darkTheme$: Observable<boolean>;
-    public newMessages: boolean = false;
+    @Input() public isAuthenticated: boolean;
+    @Input() public isMaster: boolean;
+
+    public mainMenuItems = mainMenuItems;
 
     constructor(
-        public readonly trans: TranslationService,
-        public readonly authenticationFactory: AuthenticationFactory,
-        public readonly masterManager: MasterManagerService,
-        private readonly router: Router,
-        readonly darkModeService: DarkModeService
+        private readonly authenticationFactory: AuthenticationFactory,
+        private readonly platform: Platform
     ) {
-        this.darkTheme$ = darkModeService.darkTheme$;
     }
 
-    public changeMode(event: CustomEvent): void {
-        const toggle = event.target as HTMLIonToggleElement;
-        this.darkModeService.setMode(toggle.checked);
-    }
+    public isShown(item: MainMenuItem): boolean {
+        if (item.guestOnly && this.isAuthenticated) {
+            return false;
+        }
 
-    public logout(): void {
-        this.authenticationFactory.getAuthenticator().logout().subscribe(() => {
-            this.masterManager.updateIsMaster();
-            this.router.navigateByUrl('/auth/login');
-        });
-    }
+        if (item.desktopOnly && !this.platform.is('desktop')) {
+            return false;
+        }
 
+        if ((item.userOnly || item.masterOnly) && !this.isAuthenticated) {
+            return false;
+        }
+
+        return !(item.clientOnly && !item.masterOnly && this.isMaster);
+    }
 }

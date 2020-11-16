@@ -18,6 +18,7 @@ import {CollapseItemComponent} from '@app/shared/components/collapse-item/collap
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
+import {MainMenuFooterToolbarComponent} from '@app/shared/components/main-menu/main-menu-footer-toolbar/main-menu-footer-toolbar.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {RatingFullStarComponent} from '@app/shared/components/rating-full-star/rating-full-star.component';
@@ -64,7 +65,8 @@ import {NumberDirective} from './directives/number.directive';
         RatingHalfStarComponent,
         DurationComponent,
         ServiceDetailsComponent,
-        WizardProgressComponent
+        WizardProgressComponent,
+        MainMenuFooterToolbarComponent
     ],
     exports: [
         ErrorFlashbagComponent,

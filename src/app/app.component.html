@@ -1,7 +1,9 @@
 <ion-app [ngClass]="{'dark-theme': darkTheme$ | async}">
     <ion-split-pane when="md" contentId="main-content">
         <ion-menu contentId="main-content">
-            <app-main-menu></app-main-menu>
+            <app-main-menu [isAuthenticated]="isAuthenticated$ | async"
+                           [isMaster]="masterManager.isMaster$ | async">
+            </app-main-menu>
         </ion-menu>
         <div class="ion-page" id="main-content">
             <ion-router-outlet></ion-router-outlet>

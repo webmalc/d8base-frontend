@@ -4,11 +4,8 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {FcmDeviceService} from '@app/core/services/fcm-device.service';
-import {CountriesApiService} from '@app/core/services/location/countries-api.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
-import {TranslationService} from '@app/core/services/translation.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {environment} from '@env/environment';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
@@ -24,28 +21,26 @@ import {filter, map} from 'rxjs/operators';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-
+    public isAuthenticated$: Observable<boolean>;
     public darkTheme$: Observable<boolean>;
     public countryCode: string;
 
     constructor(
-        public readonly platform: Platform,
+        public readonly masterManager: MasterManagerService,
+        private readonly platform: Platform,
         private readonly splashScreen: SplashScreen,
         private readonly statusBar: StatusBar,
         private readonly darkModeService: DarkModeService,
         private readonly titleService: Title,
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
-        public readonly trans: TranslationService,
-        public readonly authenticationFactory: AuthenticationFactory,
-        public readonly masterManager: MasterManagerService,
-        public readonly userLocationApi: UserLocationApiService,
-        public readonly countryApi: CountriesApiService,
+        private readonly authenticationFactory: AuthenticationFactory,
         private readonly notificationWorker: NotificationWorkerService,
         private readonly fcmDevice: FcmDeviceService,
         private readonly userManager: UserManagerService
     ) {
         this.darkTheme$ = darkModeService.darkTheme$;
+        this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
         this.initializeApp();
     }
 
@@ -85,13 +80,6 @@ export class AppComponent implements OnInit, AfterViewInit {
             await this.notificationWorker.init();
             await this.notificationWorker.requestPermission();
             this.fcmDevice.subscribeToAuth();
-        });
-    }
-
-    public logout(): void {
-        this.authenticationFactory.getAuthenticator().logout().subscribe(() => {
-            this.masterManager.updateIsMaster();
-            this.router.navigateByUrl('/auth/login');
         });
     }
 }
