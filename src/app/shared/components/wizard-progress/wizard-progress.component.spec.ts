@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
-
 import {TranslateModule} from '@ngx-translate/core';
-import {AppFooterComponent} from './app-footer.component';
 
-describe('AppFooterComponent', () => {
-    let component: AppFooterComponent;
-    let fixture: ComponentFixture<AppFooterComponent>;
+import {WizardProgressComponent} from './wizard-progress.component';
+
+describe('WizardProgressComponent', () => {
+    let component: WizardProgressComponent;
+    let fixture: ComponentFixture<WizardProgressComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AppFooterComponent],
+            declarations: [WizardProgressComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(AppFooterComponent);
+        fixture = TestBed.createComponent(WizardProgressComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

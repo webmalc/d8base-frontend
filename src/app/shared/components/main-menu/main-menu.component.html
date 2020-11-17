@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Navigate</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-menu-toggle [autoHide]="false">
+            <ion-item routerLink="/auth/login"
+                      routerDirection="forward"
+                      routerLinkActive="active"
+            >
+                <ion-icon name="log-in-outline"></ion-icon>
+                {{'template.sign-in'|translate}}
+            </ion-item>
+            <ion-item routerLink="/auth/registration"
+                      routerLinkActive="active"
+                      routerDirection="forward"
+            >
+                <ion-icon name="reader-outline"></ion-icon>
+                {{'template.sign-up'|translate}}
+            </ion-item>
+            <ion-item routerLink="/profile"
+                      routerLinkActive="active"
+                      routerDirection="forward"
+            >
+                <ion-icon name="person-circle-outline"></ion-icon>
+                {{'template.profile'|translate}}
+            </ion-item>
+
+            <ion-item routerLink="/professional/"
+                      routerLinkActive="active"
+                      routerDirection="forward"
+                      *ngIf="masterManager.isMaster$ | async"
+            >
+                <ion-icon name="construct-outline"></ion-icon>
+                {{'template.master-profile'|translate}}
+            </ion-item>
+
+            <ion-item routerDirection="forward"
+                      routerLink="/search/"
+                      routerLinkActive="active"
+            >
+                <ion-icon name="construct-outline"></ion-icon>
+                Search
+            </ion-item>
+
+            <ion-item routerLink="/message"
+                      routerLinkActive="active"
+                      routerDirection="forward"
+            >
+                <ion-icon name="{{newMessages ? 'mail-unread-outline': 'mail-outline'}}"></ion-icon>
+                {{'messages.messages'|translate}}
+            </ion-item>
+
+            <ion-item routerLink="/service/publish/step-one"
+                      routerLinkActive="active"
+                      routerDirection="forward"
+            >
+                <ion-icon name="log-out-outline"></ion-icon>
+                {{'template.service'|translate}}
+            </ion-item>
+
+            <ion-item routerLink="/auth/login"
+                      routerLinkActive="active"
+                      routerDirection="forward"
+                      id="logout"
+                      (click)="logout()"
+            >
+                <ion-icon name="log-out-outline"></ion-icon>
+                {{'template.logout'|translate}}
+            </ion-item>
+
+        </ion-menu-toggle>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-item>
+            <ion-toggle (ionChange)="changeMode($event)" [checked]="darkTheme$ | async"></ion-toggle>
+            <ion-select interface="alert" slot="start"
+                        [ngModel]="trans.getCurrentLang()"
+                        (ionChange)="trans.setLang($event.detail.value)"
+            >
+                <ion-select-option *ngFor="let lang of trans.getLanguagesAsArray()" value="{{ lang }}">
+                    {{ lang }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-toolbar>
+</ion-footer>
