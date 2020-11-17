@@ -22,7 +22,8 @@
     "back": "Назад",
     "master": {
       "private-person": "Частное лицо"
-    }
+    },
+    "save": "Сохранить"
   },
   "ion-selectable": {
     "close-button-text": "Закрыть",

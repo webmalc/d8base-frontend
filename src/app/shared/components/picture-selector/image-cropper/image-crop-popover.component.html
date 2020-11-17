@@ -1,12 +1,10 @@
 <image-cropper
-    [imageFile]="file"
+    [imageFile]="image"
     [onlyScaleDown]="true"
     [maintainAspectRatio]="true"
     [aspectRatio]="1"
-    (imageCropped)="imageCropped($event)"
-    (imageLoaded)="imageLoaded()"
-    (cropperReady)="cropperReady()"
-    (loadImageFailed)="loadImageFailed()"
+    (imageCropped)="onImageCropped($event)"
+    (loadImageFailed)="onLoadFailed()"
 ></image-cropper>
 
-<ion-button expand="full" color="success">Сохранить</ion-button>
+<ion-button expand="full" color="success" (click)="save()">{{ 'global.save' | translate }}</ion-button>

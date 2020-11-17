@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {PopoverController} from '@ionic/angular';
 import {ImageCroppedEvent} from 'ngx-image-cropper';
 
 @Component({
@@ -6,30 +7,25 @@ import {ImageCroppedEvent} from 'ngx-image-cropper';
     templateUrl: './image-crop-popover.component.html',
     styleUrls: ['./image-crop-popover.component.scss']
 })
-export class ImageCropPopoverComponent implements OnInit {
-    @Input() public file: File = null;
+export class ImageCropPopoverComponent {
+    @Input() public image: Blob = null;
+    @Input() public callback: (data: string) => void;
 
-    public imageChangedEvent: any = '';
-    public croppedImage: any = '';
+    private croppedImage: string;
 
-    public ngOnInit(): void {
-        console.log('file', this.file);
-
+    constructor(private readonly popoverController: PopoverController) {
     }
 
-    public imageCropped(event: ImageCroppedEvent): void {
+    public save(): void {
+        this.callback(this.croppedImage);
+        this.popoverController.dismiss();
+    }
+
+    public onImageCropped(event: ImageCroppedEvent): void {
         this.croppedImage = event.base64;
     }
 
-    public imageLoaded(): void {
-        // show cropper
-    }
-
-    public cropperReady(): void {
-        // cropper ready
-    }
-
-    public loadImageFailed(): void {
-        // show message
+    public onLoadFailed(): void {
+        // TODO: show error message
     }
 }
