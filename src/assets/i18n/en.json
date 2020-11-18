@@ -35,8 +35,13 @@
     "1": "Mi"
   },
   "template": {
+    "main-menu-title": "Navigation",
+    "menu": "Menu",
+    "search": "Search",
+    "favorites": "Favorites",
     "sign-in": "Sign-in",
     "sign-up": "Sign-up",
+    "my-profile": "My profile",
     "profile": "Profile",
     "master-profile": "Professional profile",
     "logout": "Logout",
@@ -46,7 +51,9 @@
     "about": "About",
     "support": "Support",
     "terms-of-use": "Terms of use",
-    "service": "Service publication"
+    "service": "Service publication",
+    "preferences": "Preferences",
+    "miscellaneous": "Miscellaneous"
   },
   "login-form": {
     "login": "Login",

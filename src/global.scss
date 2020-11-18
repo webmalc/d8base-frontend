@@ -258,4 +258,17 @@
     font-size: 12px;
     line-height: 16px;
   }
+
+  .active {
+    font-weight: bold;
+  }
+
+  .split-pane-visible > .split-pane-side {
+    max-width: 300px;
+  }
+
+  ion-list-header {
+    font-weight: bold;
+    font-size: 1rem;
+  }
 }

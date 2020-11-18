@@ -35,9 +35,6 @@
             </svg>
         </ion-item>
 
-        <ion-item *ngIf="isDesktop()" class="ion-item-no-border" slot="end">
-            {{'template.download'|translate}}
-        </ion-item>
         <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
                             && (isAuthenticated$|async)
                             && isDesktop()"
