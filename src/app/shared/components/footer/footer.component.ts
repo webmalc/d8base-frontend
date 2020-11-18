@@ -3,10 +3,10 @@ import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'app-footer',
-    templateUrl: './app-footer.component.html',
-    styleUrls: ['./app-footer.component.scss']
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss']
 })
-export class AppFooterComponent {
+export class FooterComponent {
     constructor(public readonly platform: Platform) {
     }
 }

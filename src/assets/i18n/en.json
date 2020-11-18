@@ -23,10 +23,12 @@
       "4": "Very good",
       "5": "Excellent"
     },
+    "forward": "Forward",
     "back": "Back",
     "master": {
       "private-person": "Private person"
-    }
+    },
+    "save": "Save"
   },
   "ion-selectable": {
     "close-button-text": "Close",
@@ -38,8 +40,13 @@
     "1": "Mi"
   },
   "template": {
+    "main-menu-title": "Navigation",
+    "menu": "Menu",
+    "search": "Search",
+    "favorites": "Favorites",
     "sign-in": "Sign-in",
     "sign-up": "Sign-up",
+    "my-profile": "My profile",
     "profile": "Profile",
     "master-profile": "Professional profile",
     "logout": "Logout",
@@ -49,7 +56,9 @@
     "about": "About",
     "support": "Support",
     "terms-of-use": "Terms of use",
-    "service": "Service publication"
+    "service": "Service publication",
+    "preferences": "Preferences",
+    "miscellaneous": "Miscellaneous"
   },
   "login-form": {
     "login": "Login",
@@ -438,5 +447,24 @@
     "country": "Select country",
     "city": "Select city",
     "save": "Save"
+  },
+  "order": {
+    "title": "Service order",
+    "selected-service": "Selected service",
+    "order-service": "Place order",
+    "date-time": "Date/time",
+    "location": "Place",
+    "location-header": "Service location",
+    "location-online": "Online",
+    "location-professional": "Professional",
+    "location-client": "Client",
+    "summary": "Summary",
+    "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
+    "comment-header": "Optional comments",
+    "date-time-header": "Service date and time",
+    "date-time-subheader": "Pick date and time",
+    "order.date": "Date",
+    "order.time": "Time",
+    "not-selected": "not selected"
   }
 }

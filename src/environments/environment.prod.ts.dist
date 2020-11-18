@@ -57,6 +57,7 @@ export const environment = {
         fcm_devices: '/en/api/communication/devices/fcm/',
         master_photos: '/en/api/accounts/professional-photos/',
         master_schedule: '/en/api/accounts/professional-schedule',
+        services_readonly: '/en/api/services/services/',
         url: 'http://localhost:8000'
     },
     client_id: '',

@@ -2,21 +2,14 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {IpApiService} from '@app/core/services/location/ip-api.service';
-import {IpDataService} from '@app/core/services/location/ip-data.service';
-import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
-import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
+import {DarkModeService, TranslationService} from '@app/core/services';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {Platform, PopoverController} from '@ionic/angular';
+import {Platform} from '@ionic/angular';
 import {IonicStorageModule, Storage} from '@ionic/storage';
 import {TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {StorageManagerService} from './core/proxies/storage-manager.service';
-import {DarkModeService} from './core/services/dark-mode.service';
-import {TranslationService} from './core/services/translation.service';
 
 describe('AppComponent', () => {
 
@@ -46,14 +39,7 @@ describe('AppComponent', () => {
                 {provide: Storage, useValue: storageMock},
                 DarkModeService,
                 StorageManagerService,
-                TranslationService,
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
-                {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
-                {provide: PopoverController, useValue: {create: () => Promise.resolve()}}
+                TranslationService
             ]
         });
 
@@ -77,14 +63,6 @@ describe('AppComponent', () => {
         fixture.detectChanges();
         expect(compiled.querySelector('ion-app').getAttribute('class'))
             .not.toContain('dark-theme');
-    });
-
-    it('should toggle dark mode', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        fixture.componentInstance.changeMode({target: {checked: true}});
-        fixture.detectChanges();
-        expect(compiled.querySelector('ion-app').getAttribute('class'))
-            .toContain('dark-theme');
     });
 
     it('test translation select options', () => {

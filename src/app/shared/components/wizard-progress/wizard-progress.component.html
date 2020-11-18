@@ -1,0 +1,6 @@
+<ion-list>
+    <ion-list-header class="fs20">
+        <ion-label>Step {{ stepIndex + 1 }} of {{ steps.length }}: {{ steps[stepIndex]?.title | translate }}</ion-label>
+    </ion-list-header>
+    <ion-progress-bar [value]="(stepIndex + 1) / steps.length"></ion-progress-bar>
+</ion-list>

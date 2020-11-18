@@ -3,7 +3,8 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
 import {CameraPhoto} from '@capacitor/core';
-import {IonInput, Platform} from '@ionic/angular';
+import {IonInput, Platform, PopoverController} from '@ionic/angular';
+import {ImageCropPopoverComponent} from './image-cropper/image-crop-popover.component';
 
 @Component({
     selector: 'app-picture-selector',
@@ -28,7 +29,8 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     constructor(
         public platform: Platform,
         private readonly photoService: PhotoService,
-        private readonly fileService: FileService
+        private readonly fileService: FileService,
+        private readonly popoverController: PopoverController
     ) {
     }
 
@@ -37,9 +39,14 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         input.click();
     }
 
-    public async onFileSelected(): Promise<void> {
-        const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement();
-        await this.readBaseAndSetUri(input.files.item(0) as File);
+    public onFileSelected(event: Event): Promise<void> {
+        const file = (event.target as HTMLInputElement).files[0];
+        if (!file) {
+
+            return Promise.resolve();
+        }
+
+        return this.cropAndSave(file);
     }
 
     public async createCameraSnap(): Promise<void> {
@@ -49,7 +56,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
             this.clearUri();
             const cameraPhoto: CameraPhoto = await this.photoService.createPhoto();
             const blob = await fetch(cameraPhoto.webPath).then(r => r.blob());
-            await this.readBaseAndSetUri(blob);
+            await this.cropAndSave(blob);
         } catch (error) {
             this.setUri(oldUri);
         }
@@ -61,7 +68,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
             oldUri = this.uri;
             this.clearUri();
             const file = await this.fileService.getFile();
-            await this.readBaseAndSetUri(file);
+            await this.cropAndSave(file);
         } catch (error) {
             this.setUri(oldUri);
         }
@@ -84,15 +91,19 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         this.uri = uri;
     }
 
-    private readBaseAndSetUri(file: Blob | File): Promise<null> {
-        return new Promise<null>(resolve => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                this.setUri(reader.result as string);
-                resolve();
-            };
+    private async cropAndSave(image: Blob): Promise<void> {
+        const callback = (base64: string) => {
+            this.setUri(base64);
+        };
+        const popover = await this.popoverController.create({
+            component: ImageCropPopoverComponent,
+            componentProps: {
+                image,
+                callback
+            },
+            cssClass: 'popover-big'
         });
+        await popover.present();
     }
 
     private clearUri(): void {

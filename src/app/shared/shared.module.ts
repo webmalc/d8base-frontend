@@ -4,15 +4,22 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {
+    DurationComponent,
+    FooterComponent,
+    HeaderComponent,
+    MainMenuComponent,
+    ServiceDetailsComponent,
+    WizardProgressComponent
+} from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
-import {AppFooterComponent} from '@app/shared/components/app-footer/app-footer.component';
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
-import {DurationComponent} from '@app/shared/components/duration/duration.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
+import {MainMenuFooterToolbarComponent} from '@app/shared/components/main-menu/main-menu-footer-toolbar/main-menu-footer-toolbar.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {RatingFullStarComponent} from '@app/shared/components/rating-full-star/rating-full-star.component';
@@ -31,7 +38,9 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {ImageCropperModule} from 'ngx-image-cropper';
 import {ContactsAddComponent} from './components/contacts-add/contacts-add.component';
+import {ImageCropPopoverComponent} from './components/picture-selector/image-cropper/image-crop-popover.component';
 import {DebounceDirective} from './directives/debounce.directive';
 import {NumberDirective} from './directives/number.directive';
 
@@ -44,7 +53,9 @@ import {NumberDirective} from './directives/number.directive';
         UserLocationMapComponent,
         ReviewsListComponent,
         MediaLinksComponent,
-        AppFooterComponent,
+        HeaderComponent,
+        FooterComponent,
+        MainMenuComponent,
         CollapseItemComponent,
         InfoRowComponent,
         NumberDirective,
@@ -56,6 +67,10 @@ import {NumberDirective} from './directives/number.directive';
         RatingFullStarComponent,
         RatingHalfStarComponent,
         DurationComponent,
+        ImageCropPopoverComponent,
+        ServiceDetailsComponent,
+        WizardProgressComponent,
+        MainMenuFooterToolbarComponent,
         DefaultLocationPopoverComponent
     ],
     exports: [
@@ -65,7 +80,9 @@ import {NumberDirective} from './directives/number.directive';
         ContactsTabComponent,
         ReviewsListComponent,
         MediaLinksComponent,
-        AppFooterComponent,
+        HeaderComponent,
+        FooterComponent,
+        MainMenuComponent,
         CollapseItemComponent,
         UserLocationMapComponent,
         InfoRowComponent,
@@ -78,6 +95,8 @@ import {NumberDirective} from './directives/number.directive';
         RatingFullStarComponent,
         RatingHalfStarComponent,
         DurationComponent,
+        ServiceDetailsComponent,
+        WizardProgressComponent,
         DefaultLocationPopoverComponent
     ],
     imports: [
@@ -88,7 +107,8 @@ import {NumberDirective} from './directives/number.directive';
         IonicSelectableModule,
         LeafletModule,
         FormsModule,
-        RouterModule
+        RouterModule,
+        ImageCropperModule
     ],
     providers: [
         MainGuard,

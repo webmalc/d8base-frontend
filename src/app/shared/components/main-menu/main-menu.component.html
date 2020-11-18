@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-item lines="none">
+            <ion-label> {{ 'Навигация' | translate }}</ion-label>
+        </ion-item>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ng-container *ngFor="let item of mainMenuItems">
+            <ion-list-header *ngIf="item.isHeader && isShown(item)" color="light" lines="full">
+                <ion-label> {{ item.title | translate }}</ion-label>
+            </ion-list-header>
+            <ion-menu-toggle *ngIf="(!item.isHeader) && isShown(item)" [autoHide]="false">
+                <ion-item [routerLink]="item.link" [queryParams]="item.params" routerLinkActive="active" lines="full">
+                    <ion-icon [name]="item.icon" slot="start"></ion-icon>
+                    {{ item.title | translate }}
+                </ion-item>
+            </ion-menu-toggle>
+        </ng-container>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <app-main-menu-footer-toolbar></app-main-menu-footer-toolbar>
+</ion-footer>
