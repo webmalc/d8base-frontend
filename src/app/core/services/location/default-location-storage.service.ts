@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DefaultLocation} from '@app/core/models/default-location';
+import {ExtendedLocation} from '@app/core/models/extended-location';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {deserialize, serialize} from 'class-transformer';
 
@@ -13,11 +13,11 @@ export class DefaultLocationStorageService {
     constructor(private readonly storage: StorageManagerService) {
     }
 
-    public async setDefaultLocation(data: DefaultLocation): Promise<void> {
+    public async setDefaultLocation(data: ExtendedLocation): Promise<void> {
         return this.storage.set(this.STORAGE_KEY, serialize(data));
     }
 
-    public async getDefaultLocation(): Promise<DefaultLocation | null> {
-        return deserialize(DefaultLocation, await this.storage.get(this.STORAGE_KEY));
+    public async getDefaultLocation(): Promise<ExtendedLocation | null> {
+        return deserialize(ExtendedLocation, await this.storage.get(this.STORAGE_KEY));
     }
 }

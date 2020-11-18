@@ -9,10 +9,10 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {TranslateModule} from '@ngx-translate/core';
 import {StorageManagerMock} from '../../../../testing/mocks';
-import {DefaultLocationCompilerService} from './default-location-compiler.service';
+import {CurrentLocationCompilerService} from './current-location-compiler.service';
 
-describe('DefaultLocationCompilerService', () => {
-    let service: DefaultLocationCompilerService;
+describe('CurrentLocationCompilerService', () => {
+    let service: CurrentLocationCompilerService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -30,7 +30,7 @@ describe('DefaultLocationCompilerService', () => {
                 TranslateModule.forRoot()
             ]
         });
-        service = TestBed.inject(DefaultLocationCompilerService);
+        service = TestBed.inject(CurrentLocationCompilerService);
     });
 
     it('should be created', () => {

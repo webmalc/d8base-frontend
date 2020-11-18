@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {once} from '@app/core/decorators/once';
-import {DefaultLocation} from '@app/core/models/default-location';
-import {DefaultLocationCompilerService} from '@app/core/services/location/default-location-compiler.service';
+import {ExtendedLocation} from '@app/core/models/extended-location';
+import {CurrentLocationCompilerService} from '@app/core/services/location/current-location-compiler.service';
 import {DefaultLocationStorageService} from '@app/core/services/location/default-location-storage.service';
 import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
 import {PopoverController} from '@ionic/angular';
@@ -14,7 +14,7 @@ import {filter, first} from 'rxjs/operators';
 export class DefaultLocationPickerService {
 
     constructor(
-        private readonly defaultLocationCompiler: DefaultLocationCompilerService,
+        private readonly currentLocationCompilerService: CurrentLocationCompilerService,
         private readonly defaultLocationStorage: DefaultLocationStorageService,
         private readonly popover: PopoverController
     ) {
@@ -33,7 +33,7 @@ export class DefaultLocationPickerService {
         );
     }
 
-    private async initPopover(data: DefaultLocation): Promise<void> {
+    private async initPopover(data: ExtendedLocation): Promise<void> {
         const pop = await this.popover.create({
             component: DefaultLocationPopoverComponent,
             translucent: true,
@@ -46,7 +46,7 @@ export class DefaultLocationPickerService {
         await pop.present();
     }
 
-    private getDefaultLocation(): Observable<DefaultLocation | null> {
-        return this.defaultLocationCompiler.getDefaultLocation();
+    private getDefaultLocation(): Observable<ExtendedLocation | null> {
+        return this.currentLocationCompilerService.getCurrentLocation();
     }
 }

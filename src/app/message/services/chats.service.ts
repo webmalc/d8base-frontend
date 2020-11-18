@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AbstractMessage} from '@app/message/models/abstract-message';
 import {ChatListUpdaterService} from '@app/message/services/chat-list-updater.service';
-import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
 import {ChatsSearchService} from '@app/message/services/chats-search.service';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {filter, first, map} from 'rxjs/operators';
@@ -14,7 +13,6 @@ export class ChatsService {
     private chatsSubscription: Subscription;
 
     constructor(
-        private readonly chatsCompilerService: ChatsCompilerService,
         private readonly chatListUpdater: ChatListUpdaterService,
         private readonly search: ChatsSearchService
     ) {

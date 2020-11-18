@@ -5,7 +5,6 @@ import {AuthenticationFactory} from '@app/core/services/authentication-factory.s
 import {DarkModeService} from '@app/core/services/dark-mode.service';
 import {FcmDeviceService} from '@app/core/services/fcm-device.service';
 import {CountriesApiService} from '@app/core/services/location/countries-api.service';
-import {DefaultLocationPickerService} from '@app/core/services/location/default-location-picker.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
@@ -47,15 +46,13 @@ export class AppComponent implements OnInit, AfterViewInit {
         public readonly countryApi: CountriesApiService,
         private readonly notificationWorker: NotificationWorkerService,
         private readonly fcmDevice: FcmDeviceService,
-        private readonly userManager: UserManagerService,
-        private readonly defaultLocationPicker: DefaultLocationPickerService
+        private readonly userManager: UserManagerService
     ) {
         this.initializeApp();
     }
 
 // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     public ngOnInit(): void {
-        this.defaultLocationPicker.init();
         if (!firebase.apps.length) {
             firebase.initializeApp(environment.firebaseConfig);
         }

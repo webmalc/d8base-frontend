@@ -1,59 +1,54 @@
-import {Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {LocationService} from '@app/core/services/location/location.service';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {OnMapPopoverComponent} from '@app/main/components/on-map-popover/on-map-popover.component';
-import {City} from '@app/profile/models/city';
-import {Country} from '@app/profile/models/country';
-import {Coordinates} from '@app/shared/interfaces/coordinates';
+import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
 import {PopoverController} from '@ionic/angular';
 
 @Component({
     selector: 'app-location-picker',
     templateUrl: './location-picker.component.html',
     styleUrls: ['./location-picker.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => LocationPickerComponent),
-        multi: true
-    }]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LocationPickerComponent implements ControlValueAccessor {
+export class LocationPickerComponent {
 
-    private onChange: (fn: any) => void;
-    private locationData: {
-        coordinates: Coordinates,
-        country: Country,
-        city: City
-    } = {
-        coordinates: {
-            type: undefined,
-            coordinates: []
-        },
-        country: undefined,
-        city: undefined
-    };
+    @Input() public enabled: boolean = false;
+    @Input() public locationData: SearchLocationDataInterface;
+    @Output() public emitter: EventEmitter<SearchLocationDataInterface> = new EventEmitter<SearchLocationDataInterface>();
 
-    constructor(private readonly location: LocationService, private readonly pop: PopoverController) {
+    constructor(private readonly pop: PopoverController) {
     }
 
-    public initPopover(): void {
-        this.pop.create({
+    public async initPopover(): Promise<void> {
+        const pop = await this.pop.create({
             component: OnMapPopoverComponent,
             translucent: true,
             animated: true,
-            componentProps: {data: this.locationData},
-            cssClass: ['map-popover-width', 'map-popover-height']
-        }).then(pop => pop.present().then(
-            () => {
-                OnMapPopoverComponent.result.subscribe(
-                    data => {
-                        this.locationData = data;
-                        this.onChange(data);
-                        this.pop.dismiss();
+            componentProps: {
+                data: {
+                    coordinates: this.locationData?.coordinates,
+                    country: this.locationData?.country,
+                    city: this.locationData?.city
+                }
+            },
+            cssClass: ['map-popover-width', 'map-popover-city-height']
+        });
+        pop.onDidDismiss().then(
+            (data: { data: SearchLocationDataInterface }) => {
+                if (data.data) {
+                    if (data.data?.city?.id !== this.locationData?.city?.id) {
+                        data.data.coordinates = undefined;
+                        this.emitter.emit(data.data);
+                    } else if (data.data?.coordinates?.longitude !== this.locationData?.coordinates?.longitude ||
+                        data.data?.coordinates?.latitude !== this.locationData?.coordinates?.latitude) {
+                        data.data.country = undefined;
+                        data.data.city = undefined;
+                        this.emitter.emit(data.data);
                     }
-                );
+                }
             }
-        ));
+        );
+
+        return await pop.present();
     }
 
     public getLocationString(): string | null {
@@ -69,24 +64,7 @@ export class LocationPickerComponent implements ControlValueAccessor {
         if (this.locationData.city) {
             return this.locationData.city.name;
         }
-        if (this.locationData.coordinates.coordinates.length === 2) {
-            return `${this.locationData.coordinates.coordinates[1]} ${this.locationData.coordinates.coordinates[0]}`;
-        }
 
         return null;
-    }
-
-    public registerOnChange(fn: any): void {
-        this.onChange = fn;
-    }
-
-    // tslint:disable:no-empty
-    public registerOnTouched(fn: any): void {
-    }
-
-    public writeValue(data: string[]): void {
-    }
-
-    public setDisabledState(isDisabled: boolean): void {
     }
 }

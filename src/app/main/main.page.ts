@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {LocationService} from '@app/core/services/location/location.service';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
+import {Router} from '@angular/router';
+import {ExtendedLocation} from '@app/core/models/extended-location';
+import {CurrentLocationCompilerService} from '@app/core/services/location/current-location-compiler.service';
+import {DefaultCategoryList} from '@app/main/enums/default-category-list';
 import {MainPageSearchInterface} from '@app/main/interfaces/main-page-search-interface';
+import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
+import {DefaultCategoriesFactoryService} from '@app/main/services/default-categories-factory.service';
+import {Observable} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-main',
@@ -11,38 +17,69 @@ import {MainPageSearchInterface} from '@app/main/interfaces/main-page-search-int
 export class MainPage implements OnInit {
 
     public searchData: MainPageSearchInterface;
+    public locationEnabled = false;
+    public defaultCategoryList = DefaultCategoryList;
 
     constructor(
-        public readonly sanitizer: PhotoSanitizerService,
-        private readonly location: LocationService
+        private readonly currentLocation: CurrentLocationCompilerService,
+        private readonly router: Router,
+        private readonly defaultCategory: DefaultCategoriesFactoryService
     ) {
     }
 
     public ngOnInit(): void {
         this.initSearchData();
-    }
-
-    public search(): void {
-        this.checkLocation().then(
-            _ => console.log(this.searchData)
+        this.getCurrentLocation().pipe(
+            filter(loc => null !== loc)
+        ).subscribe(
+            data => this.searchData.location = {
+                country: data.country,
+                city: data.city,
+                coordinates: data.coords
+            },
+            err => null,
+            () => this.locationEnabled = true
         );
     }
 
-    private checkLocation(): Promise<void> {
-        if (
-            this.searchData.location.city
-            || this.searchData.location.country
-            || this.searchData.location.coordinates.coordinates.length === 2
-        ) {
-            return Promise.resolve();
+    public useCategory(categoryName: string): void {
+        const cat = this.defaultCategory.getByName(categoryName);
+        if (cat) {
+            this.router.navigateByUrl('/search', {state: {category: cat, location: this.searchData.location}});
         }
+    }
 
-        return new Promise<void>(resolve => this.location.getMergedLocationData().then(
-            data => {
-                this.searchData.location.coordinates.coordinates = data.coordinates.coordinates;
-                resolve();
-            }
-        ));
+    public updateCity(data: SearchLocationDataInterface): void {
+        if (data.city) {
+            this.currentLocation.getCoords(data.country, data.city).pipe(
+                filter(res => null !== res)
+            ).subscribe(
+                res => this.searchData.location = {
+                    country: data.country,
+                    city: data.city,
+                    coordinates: res
+                }
+            );
+        } else if (data.coordinates?.latitude && data.coordinates?.longitude) {
+            this.currentLocation.getExtendedLocationByCoords(data.coordinates).pipe(
+                filter(res => null !== res)
+            ).subscribe(
+                res => this.searchData.location = {
+                    country: res.country,
+                    city: res.city,
+                    coordinates: res.coords
+                }
+            );
+        }
+    }
+
+
+    public searchDisabled(): boolean {
+        return !(this.searchData.needle && true);
+    }
+
+    public search(): void {
+        this.router.navigateByUrl('/search', {state: {data: this.searchData}});
     }
 
     private initSearchData(): void {
@@ -51,13 +88,14 @@ export class MainPage implements OnInit {
             date: undefined,
             time: undefined,
             location: {
-                coordinates: {
-                    coordinates: [],
-                    type: undefined
-                },
+                coordinates: undefined,
                 country: undefined,
                 city: undefined
             }
         };
+    }
+
+    private getCurrentLocation(): Observable<ExtendedLocation | null> {
+        return this.currentLocation.getCurrentLocation();
     }
 }

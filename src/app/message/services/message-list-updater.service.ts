@@ -5,7 +5,7 @@ import {Message} from '@app/message/models/message';
 import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
 import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
-import {filter, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import Timer = NodeJS.Timer;
 
 @Injectable()

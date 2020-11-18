@@ -3,7 +3,7 @@ export interface IpnfResponseInterface {
         post_code: string;
         city: string;
         country_code: string;
-        latitude: number;
-        longitude: number;
+        latitude: string;
+        longitude: string;
     };
 }

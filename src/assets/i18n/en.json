@@ -371,8 +371,10 @@
         "additional": "Additional"
       },
       "main-tab": {
-        "address": "Location",
-        "address-input": "Enter location",
+        "country": "Country",
+        "country-placeholder": "Select country",
+        "city": "City",
+        "city-placeholder": "Select city",
         "on-map": "Or select location on map",
         "radius": "Search radius",
         "categories": "Search categories",

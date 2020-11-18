@@ -1,53 +1,46 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {City} from '@app/profile/models/city';
+import {Component, OnInit} from '@angular/core';
+import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
 import {Country} from '@app/profile/models/country';
 import {Coordinates} from '@app/shared/interfaces/coordinates';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {NavParams} from '@ionic/angular';
-import {AsyncSubject, BehaviorSubject} from 'rxjs';
+import {NavParams, PopoverController} from '@ionic/angular';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
     selector: 'app-on-map-popover',
     templateUrl: './on-map-popover.component.html',
     styleUrls: ['./on-map-popover.component.scss']
 })
-export class OnMapPopoverComponent implements OnInit, OnDestroy {
+export class OnMapPopoverComponent implements OnInit {
 
-    public static result: AsyncSubject<{ coordinates: Coordinates, country: Country, city: City }>;
     public isCityEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    public data: {
-        coordinates: Coordinates,
-        country: Country,
-        city: City
-    };
+    public data: SearchLocationDataInterface;
+    public renderCountry: boolean = true;
+    public mapCoords: Coordinates;
 
     constructor(
         public readonly countrySelectable: SelectableCountryOnSearchService,
         public readonly citySelectable: SelectableCityOnSearchService,
-        private readonly navParams: NavParams
+        private readonly navParams: NavParams,
+        private readonly popover: PopoverController
     ) {
     }
 
-    public ngOnDestroy(): void {
-        this.emit();
+    public formatCoords(): number[] {
+        return this.data.coordinates ? [this.data.coordinates.longitude, this.data.coordinates.latitude] : null;
     }
 
     public ngOnInit(): void {
-        this.data = this.navParams.get<{ coordinates: Coordinates, country: Country, city: City }>('data');
-        OnMapPopoverComponent.result = new AsyncSubject<{ coordinates: Coordinates; country: Country; city: City }>();
-    }
-
-    public onCordsChange(): void {
-        this.emit();
+        this.data = this.navParams.get<SearchLocationDataInterface>('data');
+        if (this.navParams.get<boolean>('renderCountry') === false) {
+            this.renderCountry = false;
+        }
+        this.isCityEnabled$.next(this.data?.country && true);
     }
 
     public getCountryValue(): Country {
         return this.data?.country as Country;
-    }
-
-    public onCityChange(): void {
-        this.emit();
     }
 
     public onCountryChange(): void {
@@ -55,8 +48,27 @@ export class OnMapPopoverComponent implements OnInit, OnDestroy {
         this.isCityEnabled$.next(true);
     }
 
-    private emit(): void {
-        OnMapPopoverComponent.result.next(this.data);
-        OnMapPopoverComponent.result.complete();
+    public emit(data: Coordinates): void {
+        if (data.coordinates && data.coordinates.length === 2) {
+            this.data.coordinates = {
+                latitude: data.coordinates[1],
+                longitude: data.coordinates[0]
+            };
+        } else {
+            this.data.coordinates = undefined;
+        }
+        this.popover.dismiss(this.data);
+    }
+
+    public emitByCity(): void {
+        if (this.mapCoords?.coordinates && this.mapCoords.coordinates.length === 2) {
+            this.data.coordinates = {
+                latitude: this.mapCoords.coordinates[1],
+                longitude: this.mapCoords.coordinates[0]
+            };
+        } else {
+            this.data.coordinates = undefined;
+        }
+        this.popover.dismiss(this.data);
     }
 }

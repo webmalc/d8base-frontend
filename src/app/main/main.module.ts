@@ -6,6 +6,7 @@ import {LocationPickerComponent} from '@app/main/components/location-picker/loca
 import {MainPageIconComponent} from '@app/main/components/main-page-icon/main-page-icon.component';
 import {MainPageReviewComponent} from '@app/main/components/main-page-review/main-page-review.component';
 import {OnMapPopoverComponent} from '@app/main/components/on-map-popover/on-map-popover.component';
+import {DefaultCategoriesFactoryService} from '@app/main/services/default-categories-factory.service';
 import {SharedModule} from '@app/shared/shared.module';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
@@ -14,7 +15,8 @@ import {
     faHome,
     faPaintRoller,
     faSpa,
-    faStethoscope, faTableTennis,
+    faStethoscope,
+    faTableTennis,
     faUserTie,
     faVenusMars
 } from '@fortawesome/free-solid-svg-icons';
@@ -42,11 +44,13 @@ import {MainPage} from './main.page';
         MainPageReviewComponent,
         LocationPickerComponent,
         OnMapPopoverComponent
+    ],
+    providers: [
+        DefaultCategoriesFactoryService
     ]
 })
 export class MainPageModule {
     constructor(lib: FaIconLibrary) {
         lib.addIcons(faGraduationCap, faStethoscope, faSpa, faVenusMars, faPaintRoller, faHome, faCamera, faUserTie, faTableTennis);
     }
-
 }

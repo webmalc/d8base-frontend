@@ -24,14 +24,17 @@
                 </ion-col>
                 <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
                     <ion-row>
-                        <app-location-picker [(ngModel)]="searchData.location"
+                        <app-location-picker (emitter)="updateCity($event)"
+                                             [enabled]="locationEnabled"
+                                             [locationData]="searchData.location"
                                              class="menu-item width100"></app-location-picker>
                     </ion-row>
                 </ion-col>
             </ion-row>
             <ion-row class="ion-justify-content-center ion-margin-vertical">
                 <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-                    <ion-button (click)="search()" color="secondary" expand="block" fill="solid" size="medium">
+                    <ion-button (click)="search()" [disabled]="searchDisabled()"
+                                color="secondary" expand="block" fill="solid" size="medium">
                         {{'main-page.find-btn'|translate}}
                     </ion-button>
                 </ion-col>
@@ -44,27 +47,36 @@
                 {{'main-page.service-categories'|translate}}
             </ion-row>
             <ion-row class="ion-justify-content-between ion-margin-vertical ion-nowrap">
-                <app-category-icon class="icon-margin category" icon="graduation-cap" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Education)" class="icon-margin category"
+                                   icon="graduation-cap" size="2x"
                                    text="{{'main-page.category-education'|translate}}"></app-category-icon>
-                <app-category-icon class="icon-margin category" icon="stethoscope" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Medicine)" class="icon-margin category"
+                                   icon="stethoscope" size="2x"
                                    text="{{'main-page.category-medicine'|translate}}"></app-category-icon>
-                <app-category-icon class="icon-margin category" icon="spa" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Beauty)" class="icon-margin category"
+                                   icon="spa" size="2x"
                                    text="{{'main-page.category-beauty'|translate}}"></app-category-icon>
             </ion-row>
             <ion-row class="ion-justify-content-between ion-margin-vertical ion-nowrap">
-                <app-category-icon class="icon-margin category" icon="venus-mars" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Dating)" class="icon-margin category"
+                                   icon="venus-mars" size="2x"
                                    text="{{'main-page.category-dating'|translate}}"></app-category-icon>
-                <app-category-icon class="icon-margin category" icon="paint-roller" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Repair)" class="icon-margin category"
+                                   icon="paint-roller" size="2x"
                                    text="{{'main-page.category-repair'|translate}}"></app-category-icon>
-                <app-category-icon class="icon-margin category" icon="home" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Home)" class="icon-margin category"
+                                   icon="home" size="2x"
                                    text="{{'main-page.category-home'|translate}}"></app-category-icon>
             </ion-row>
             <ion-row class="ion-justify-content-between ion-margin-vertical ion-nowrap">
-                <app-category-icon class="icon-margin category" icon="camera" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Media)" class="icon-margin category"
+                                   icon="camera" size="2x"
                                    text="{{'main-page.category-photo'|translate}}"></app-category-icon>
-                <app-category-icon class="icon-margin category" icon="user-tie" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Professional)" class="icon-margin category"
+                                   icon="user-tie" size="2x"
                                    text="{{'main-page.category-pro'|translate}}"></app-category-icon>
-                <app-category-icon class="icon-margin category" icon="table-tennis" size="2x"
+                <app-category-icon (click)="useCategory(defaultCategoryList.Sport)" class="icon-margin category"
+                                   icon="table-tennis" size="2x"
                                    text="{{'main-page.category-sport'|translate}}"></app-category-icon>
             </ion-row>
         </ion-col>

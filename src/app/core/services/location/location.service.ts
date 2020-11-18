@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {IpLocation} from '@app/core/models/ip-location';
 import {UserLocation} from '@app/core/models/user-location';
+import {Coords} from '@app/shared/interfaces/coords';
 import {Geolocation, Geoposition} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
-import {Observable, of, onErrorResumeNext} from 'rxjs';
-import {catchError, first} from 'rxjs/operators';
+import {from, Observable, of, onErrorResumeNext} from 'rxjs';
+import {catchError, first, switchMap} from 'rxjs/operators';
 import {IpServicesHolderService} from './ip-services-holder.service';
 
 /**
@@ -13,7 +14,7 @@ import {IpServicesHolderService} from './ip-services-holder.service';
 @Injectable({
     providedIn: 'root'
 })
-export class LocationService {
+export class LocationService { // cringe
 
     constructor(
         private readonly ipServicesHolder: IpServicesHolderService,
@@ -22,45 +23,39 @@ export class LocationService {
     ) {
     }
 
-    public getCurrentPosition(): Promise<Geoposition | null> {
-        return new Promise<Geoposition>(resolve => {
-            this.locationAccuracy.canRequest().then(
-                (canRequest: boolean) => {
-                    if (canRequest) {
-                        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-                            () => {
-                                this.geolocation.getCurrentPosition().then(
-                                    (geoposition: Geoposition) => {
-                                        resolve(geoposition);
-                                    }
-                                );
-                            }
-                        ).catch(e => resolve(null));
-                    } else {
-                        this.geolocation.getCurrentPosition().then(
-                            (geoposition: Geoposition) => resolve(geoposition)
-                        ).catch(e => resolve(null));
-                    }
-                }
-            ).catch(
-                e => resolve(null)
-            );
-        });
+    public getCurrentPosition(): Promise<Coords | null> {
+        return new Promise<Coords>(resolve => this.locationAccuracy.canRequest().then(
+            (canRequest: boolean) => canRequest ?
+                this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+                    () => this.geolocation.getCurrentPosition().then(
+                        (geo: Geoposition) => resolve({latitude: geo.coords.latitude, longitude: geo.coords.longitude})
+                    )
+                ).catch(_ => resolve(null)) :
+                this.geolocation.getCurrentPosition().then(
+                    (geo: Geoposition) => resolve({latitude: geo.coords.latitude, longitude: geo.coords.longitude})
+                ).catch(_ => resolve(null))
+        ).catch(_ => resolve(null)));
+    }
+
+    public getCurrentMergedPosition(): Observable<Coords | null> {
+        return from(this.getCurrentPosition()).pipe(
+            switchMap(data => null === data ? this.getIpLocationData() : of(data))
+        );
     }
 
     public getMergedLocationData(): Promise<UserLocation | null> {
         return new Promise<UserLocation | null>(resolve => {
             this.getCurrentPosition().then(
-                (geolocation: Geoposition) => {
+                (coords: Coords) => {
                     this.getIpLocationData().subscribe(
                         (ipLocation: IpLocation) => {
                             const location = new UserLocation();
-                            if (null !== geolocation) {
+                            if (null !== coords) {
                                 location.coordinates = {
                                     type: 'Point',
                                     coordinates: [
-                                        geolocation.coords.longitude,
-                                        geolocation.coords.latitude
+                                        coords.longitude,
+                                        coords.latitude
                                     ]
                                 };
                             } else if (null !== ipLocation) {
@@ -78,9 +73,7 @@ export class LocationService {
                         }
                     );
                 }
-            ).catch(
-                e => resolve(null)
-            );
+            ).catch(_ => resolve(null));
         });
     }
 

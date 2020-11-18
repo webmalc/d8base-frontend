@@ -22,8 +22,8 @@ export class IpnfDataService extends AbstractIpService {
         location.postalCode = res.ip.post_code;
         location.city = res.ip.city;
         location.countryCode = res.ip.country_code;
-        location.latitude = res.ip.latitude;
-        location.longitude = res.ip.longitude;
+        location.latitude = parseFloat(res.ip.latitude);
+        location.longitude = parseFloat(res.ip.longitude);
 
         return location;
     }

@@ -18,11 +18,11 @@ export class SearchService {
     ) {
     }
 
-    public search(needle: string, filters?: SearchFilterStateInterface): Observable<SearchResultsInterface> {
+    public search(needle: string, filters?: SearchFilterStateInterface): Observable<SearchResultsInterface[]> {
         return this.servicesApi.get().pipe(
             switchMap(services => this.masterReadonlyApi.getByEntityId(services.results[0].professional).pipe(
                 switchMap((master: MasterList) => this.masterLocationApi.getByClientId(master.id).pipe(
-                    map(locations => ({master, services: services.results, masterLocationList: locations.results}))
+                    map(locations => ([{master, services: services.results, masterLocationList: locations.results}]))
                 ))
             ))
         );

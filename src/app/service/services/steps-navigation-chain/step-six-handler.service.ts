@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
@@ -9,10 +8,7 @@ import {switchMap} from 'rxjs/operators';
 @Injectable()
 export class StepSixHandlerService extends AbstractHandler {
 
-    constructor(
-        private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
-        private readonly masterManager: MasterManagerService
-    ) {
+    constructor(private readonly masterManager: MasterManagerService) {
         super();
     }
 

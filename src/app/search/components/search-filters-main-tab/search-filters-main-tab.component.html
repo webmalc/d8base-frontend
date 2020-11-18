@@ -1,15 +1,39 @@
 <ion-row class="width100">
     <ion-col class="ion-padding-vertical ph5">
         <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
-            {{"issuance.filters.main-tab.address"|translate}}
+            {{"issuance.filters.main-tab.country"|translate}}
         </ion-item>
         <ion-item class="ion-item-bordered">
             <ion-label color="medium" position="floating">
-                {{"issuance.filters.main-tab.address-input"|translate}}
+                {{"issuance.filters.main-tab.country-placeholder"|translate}}
             </ion-label>
-            <ion-input [(ngModel)]="stateManager.data.main.address"></ion-input>
+            <ionic-selectable
+                    (onChange)="onCountryChange()"
+                    (onSearch)="countrySelectable.onCountrySearch($event)"
+                    [(ngModel)]="stateManager.data.main.location.country"
+                    [canSearch]="true"
+                    itemTextField="name"
+                    itemValueField="id">
+            </ionic-selectable>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+            {{"issuance.filters.main-tab.city"|translate}}
+        </ion-item>
+        <ion-item class="ion-item-bordered">
+            <ion-label color="medium" position="floating">
+                {{"issuance.filters.main-tab.city-placeholder"|translate}}
+            </ion-label>
+            <ionic-selectable
+                    (onChange)="onCityChange($event)"
+                    (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
+                    [(ngModel)]="stateManager.data.main.location.city"
+                    [canSearch]="true"
+                    [isEnabled]="stateManager.data.main.location.country && true"
+                    itemTextField="name"
+                    itemValueField="id">
+            </ionic-selectable>
+        </ion-item>
+        <ion-item (click)="initLocationPopover()" class="ion-item-no-border ion-item-no-side-padding cursor-pointer">
             <ion-icon class="ion-padding-end" color="secondary" name="location-outline"></ion-icon>
             {{"issuance.filters.main-tab.on-map"|translate}}
         </ion-item>

@@ -3,7 +3,6 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorHandler, Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Router} from '@angular/router';
 import {ErrorList} from '@app/core/enums/error-list';
-import {AuthenticationService} from '@app/core/services/authentication.service';
 import {environment} from '@env/environment';
 import {ToastController} from '@ionic/angular';
 import * as Sentry from '@sentry/angular';
@@ -29,7 +28,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
             this.showMessage('authentication expired');
             this.router.navigateByUrl('/auth/login');
 
-            throw error;
+            return;
         }
 
         if (environment.sentry.enabled) {

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Master} from '@app/core/models/master';
-import {AuthenticationService} from '@app/core/services/authentication.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
@@ -11,7 +10,6 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 export class ServicePublishAuthStateManagerService {
 
     constructor(
-        private readonly auth: AuthenticationService,
         private readonly masterManager: MasterManagerService,
         private readonly userManager: UserManagerService,
         private readonly servicePublishDataHolder: ServicePublishDataHolderService

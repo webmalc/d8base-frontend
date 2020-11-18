@@ -21,8 +21,8 @@ export class IpDataService extends AbstractIpService {
         const location = new IpLocation();
         location.postalCode = res.postal;
         location.countryCode = res.country_code;
-        location.latitude = res.latitude;
-        location.longitude = res.longitude;
+        location.latitude = parseFloat(res.latitude);
+        location.longitude = parseFloat(res.longitude);
         location.timezone = res.time_zone.name;
         location.city = res.city;
         location.regionCode = res.region_code;

@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Filesystem, ReaddirResult} from '@capacitor/core';
-import {of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

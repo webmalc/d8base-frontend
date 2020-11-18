@@ -1,14 +1,8 @@
-import {City} from '@app/profile/models/city';
-import {Country} from '@app/profile/models/country';
-import {Coordinates} from '@app/shared/interfaces/coordinates';
+import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
 
 export interface MainPageSearchInterface {
     needle: string;
     date: string;
     time: string;
-    location: {
-        coordinates: Coordinates,
-        country: Country,
-        city: City
-    };
+    location: SearchLocationDataInterface;
 }

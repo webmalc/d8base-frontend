@@ -457,8 +457,10 @@
         "additional": "Дополнительные"
       },
       "main-tab": {
-        "address": "Адрес поиска",
-        "address-input": "Введите адрес поиска",
+        "country": "Страна",
+        "country-placeholder": "Выберите страну",
+        "city": "Город",
+        "city-placeholder": "Выберите город",
         "on-map": "Или укажите адрес на карте",
         "radius": "Радиус поиска",
         "categories": "Категории поиска",

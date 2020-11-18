@@ -5,7 +5,7 @@ import {ClientLocationInterface} from '@app/shared/interfaces/client-location-in
 import {Expose} from 'class-transformer';
 
 // tslint:disable:variable-name
-export class UserLocation implements ClientLocationInterface  {
+export class UserLocation implements ClientLocationInterface {
     @Expose() public id: number;
     @Expose() public country?: number | Country;
     @Expose() public region?: number | Region;

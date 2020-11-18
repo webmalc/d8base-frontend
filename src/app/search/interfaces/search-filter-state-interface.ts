@@ -1,10 +1,11 @@
 import {Category} from '@app/core/models/category';
 import {Subcategory} from '@app/core/models/subcategory';
+import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
 import {Tag} from '@app/master/models/tag';
 
 export interface SearchFilterStateInterface {
     main: {
-        address: string,
+        location: SearchLocationDataInterface,
         radius: {
             distance: number,
             units: boolean

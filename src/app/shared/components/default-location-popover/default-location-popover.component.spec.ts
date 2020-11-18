@@ -1,6 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {DefaultLocation} from '@app/core/models/default-location';
+import {ExtendedLocation} from '@app/core/models/extended-location';
 import {Country} from '@app/profile/models/country';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
@@ -27,7 +27,7 @@ describe('DefaultLocationPopoverComponent', () => {
                             const country = new Country();
                             country.name = 'test';
 
-                            return plainToClass(DefaultLocation, {country});
+                            return plainToClass(ExtendedLocation, {country});
                         }
                     }
                 }

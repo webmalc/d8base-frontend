@@ -2,9 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popover/city-picker-popover.component';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
-import {CitiesApiService} from '@app/core/services/location/cities-api.service';
 import {CountriesApiService} from '@app/core/services/location/countries-api.service';
-import {LocationService} from '@app/core/services/location/location.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
@@ -31,8 +29,6 @@ export class RegistrationFormComponent implements OnInit {
     constructor(
         public readonly registrationFormService: RegistrationFormService,
         private readonly countriesApi: CountriesApiService,
-        private readonly citiesApi: CitiesApiService,
-        private readonly locationService: LocationService,
         private readonly popoverController: PopoverController,
         public readonly countrySelectable: SelectableCountryOnSearchService,
         public readonly citySelectable: SelectableCityOnSearchService
@@ -82,22 +78,19 @@ export class RegistrationFormComponent implements OnInit {
         );
     }
 
-    private initPopover(): void {
-        this.popoverController.create({
+    private async initPopover(): Promise<void> {
+        const pop = await this.popoverController.create({
             component: CityPickerPopoverComponent,
             translucent: true
-        }).then(pop => pop.present().then(
-            () => {
-                CityPickerPopoverComponent.city$.subscribe(
-                    (city: City) => {
-                        if (null !== city) {
-                            this.supposedCities$.next(city);
-                            this.registrationFormService.setCityDisabled(false);
-                        }
-                        this.popoverController.dismiss();
-                    }
-                );
+        });
+        pop.onDidDismiss().then(
+            (data) => {
+                if (null !== data.data) {
+                    this.supposedCities$.next(data.data);
+                    this.registrationFormService.setCityDisabled(false);
+                }
             }
-        ));
+        );
+        await pop.present();
     }
 }
