@@ -23,7 +23,8 @@
     "back": "Back",
     "master": {
       "private-person": "Private person"
-    }
+    },
+    "save": "Save"
   },
   "ion-selectable": {
     "close-button-text": "Close",
