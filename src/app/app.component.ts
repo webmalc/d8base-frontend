@@ -39,8 +39,8 @@ export class AppComponent implements OnInit, AfterViewInit {
         private readonly fcmDevice: FcmDeviceService,
         private readonly userManager: UserManagerService
     ) {
-        this.darkTheme$ = darkModeService.darkTheme$;
-        this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
+        this.darkTheme$ = this.darkModeService.darkTheme$;
+        this.isAuthenticated$ = this.authenticationFactory.getAuthenticator().isAuthenticated$;
         this.initializeApp();
     }
 

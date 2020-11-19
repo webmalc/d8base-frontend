@@ -22,7 +22,7 @@ export class LoginPage implements OnDestroy {
         private readonly route: ActivatedRoute,
         private readonly masterManager: MasterManagerService
     ) {
-        route.queryParams.pipe(
+        this.route.queryParams.pipe(
             filter(params => params?.hasOwnProperty('logout')),
             takeUntil(this.destroy$)
         ).subscribe(() => this.logout());

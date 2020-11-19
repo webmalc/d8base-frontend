@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {AuthenticationFactory} from '@app/core/services';
 import {Platform} from '@ionic/angular';
 import {MainMenuItem, mainMenuItems} from './main-menu';
 
@@ -15,7 +14,6 @@ export class MainMenuComponent {
     public mainMenuItems = mainMenuItems;
 
     constructor(
-        private readonly authenticationFactory: AuthenticationFactory,
         private readonly platform: Platform
     ) {
     }

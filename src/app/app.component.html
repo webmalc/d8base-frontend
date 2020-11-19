@@ -1,5 +1,5 @@
 <ion-app [ngClass]="{'dark-theme': darkTheme$ | async}">
-    <ion-split-pane when="md" contentId="main-content">
+    <ion-split-pane contentId="main-content">
         <ion-menu contentId="main-content">
             <app-main-menu [isAuthenticated]="isAuthenticated$ | async"
                            [isMaster]="masterManager.isMaster$ | async">
