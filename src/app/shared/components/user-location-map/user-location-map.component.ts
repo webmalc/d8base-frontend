@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Coordinates} from '@app/shared/interfaces/coordinates';
 import {environment} from '@env/environment';
@@ -15,7 +15,7 @@ import {LeafletMouseEvent} from 'leaflet';
         multi: true
     }]
 })
-export class UserLocationMapComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
 
     public options: L.MapOptions;
     @Input() public clientCoordinates: number[];
@@ -23,16 +23,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
     private map: L.Map;
     private layerGroup: L.LayerGroup;
     private onChange: (fn: any) => void;
-
-    public ngAfterViewInit(): void {
-        if (this.clientCoordinates) {
-            setTimeout(() => this.onChange(this.getCoordinates(this.clientCoordinates)), 1000);
-        }
-    }
-
-    public invalidateSize(): void {
-        setTimeout(() => this.map?.invalidateSize(true), 1000); // TODO: crutch TA DA
-    }
+    private readonly MAGIC_NUMBER = 200;
 
     public ngOnInit(): void {
         this.initMap(this.clientCoordinates);
@@ -41,7 +32,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
     public onMapReady(map: L.Map): void {
         this.map = map;
         this.layerGroup = L.layerGroup().addTo(this.map);
-        if (this.clientCoordinates) {
+        if (this.clientCoordinates && this.clientCoordinates.length === 2) {
             (new L.Marker(
                 {
                     lat: this.clientCoordinates[1],
@@ -83,10 +74,14 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor, A
     public setDisabledState(isDisabled: boolean): void {
     }
 
+    private invalidateSize(): void {
+        setTimeout(() => this.map?.invalidateSize(true), this.MAGIC_NUMBER);
+    }
+
     private initMap(coordinates: number[]): void {
         let center: L.LatLngLiteral = {lat: 46.550429, lng: -30.499274};
         let zoom: number = 2;
-        if (coordinates) {
+        if (coordinates && coordinates.length === 2) {
             center = {lat: coordinates[1], lng: coordinates[0]};
             zoom = 12;
         }

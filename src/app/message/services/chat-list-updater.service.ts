@@ -4,7 +4,7 @@ import {AbstractMessage} from '@app/message/models/abstract-message';
 import {ChatsCompilerService} from '@app/message/services/chats-compiler.service';
 import {environment} from '@env/environment';
 import {from, Observable} from 'rxjs';
-import {filter, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import Timer = NodeJS.Timer;
 
 @Injectable()

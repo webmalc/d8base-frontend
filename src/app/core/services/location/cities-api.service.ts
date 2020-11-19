@@ -30,7 +30,8 @@ export class CitiesApiService extends AbstractReadonlyApiService<City> {
             search?: string,
             ordering?: string,
             page?: string,
-            page_size?: string
+            page_size?: string,
+            by_name?: string
         }
     ): Observable<ApiListResponseInterface<City>> {
         return super.get(params);
@@ -39,8 +40,7 @@ export class CitiesApiService extends AbstractReadonlyApiService<City> {
     public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
         return this.client.get<ApiListResponseInterface<City>>(this.url, {
             dist: dist.toString(10),
-            point: `6.061326,49.930906` // TODO
-            // point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
+            point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
         }).pipe(
             map(result => {
                 result.results = plainToClass(City, result.results);

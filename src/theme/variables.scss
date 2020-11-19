@@ -9,15 +9,15 @@
 
   ion-content .bgc-light-blue {
     //--ion-background-color: #828aff;
-    --ion-background-color: #eef5ff;
+    --ion-background-color: var(--ion-color-light);
   }
 
   .item-background-color-white {
-    --ion-item-background: #fff;
+    --ion-item-background: var(--ion-color-light);
   }
 
   .background-color-white {
-    --ion-background-color: #fff;
+    --ion-background-color: var(--ion-color-light);
   }
 
   --ion-color-white: #fff;

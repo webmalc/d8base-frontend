@@ -1,26 +1,25 @@
-<ion-header>
-    <ion-toolbar class="background-color-white">
-        <ion-row>
-            <ion-col
-                    offset-lg="1" offset-md="0" offset-sm="0" offset-xl="2" offset-xs="0"
-                    size-lg="2" size-md="2" size-sm="3" size-xl="2" size-xs="2">
-                <ion-item
-                        class="ion-item-no-border ion-align-items-center master-submenu-font ion-item-no-side-padding">
-                    <ion-icon class="ph5" name="arrow-back-outline"></ion-icon>
-                    <ion-item class="ion-item-no-border ion-item-no-side-padding back-text">
-                        {{"global.back"|translate}}
-                    </ion-item>
+<app-header></app-header>
+<ion-toolbar class="ion-item-border-top ion-item-bottom-border">
+    <ion-row>
+        <ion-col
+                offset-lg="1" offset-md="0" offset-sm="0" offset-xl="2" offset-xs="0"
+                size-lg="2" size-md="2" size-sm="3" size-xl="2" size-xs="2">
+            <ion-item
+                    class="ion-item-no-border ion-align-items-center master-submenu-font ion-item-no-side-padding">
+                <ion-icon class="ph5" name="arrow-back-outline"></ion-icon>
+                <ion-item class="ion-item-no-border ion-item-no-side-padding back-text">
+                    {{"global.back"|translate}}
                 </ion-item>
-            </ion-col>
-            <ion-col
-                    offset-lg="3" offset-md="3" offset-sm="0" offset-xl="2" offset-xs="0"
-                    size-lg="6" size-md="6" size-sm="9" size-xl="6" size-xs="10">
-                <app-master-profile-submenu (selectedTab)="selectTab($event)"
-                                            defaultTab="{{defaultTab}}"></app-master-profile-submenu>
-            </ion-col>
-        </ion-row>
-    </ion-toolbar>
-</ion-header>
+            </ion-item>
+        </ion-col>
+        <ion-col
+                offset-lg="3" offset-md="3" offset-sm="0" offset-xl="2" offset-xs="0"
+                size-lg="6" size-md="6" size-sm="9" size-xl="6" size-xs="10">
+            <app-master-profile-submenu (selectedTab)="selectTab($event)"
+                                        defaultTab="{{defaultTab}}"></app-master-profile-submenu>
+        </ion-col>
+    </ion-row>
+</ion-toolbar>
 <ion-content class="background-color-white">
     <ion-row class="ion-margin-bottom">
         <ion-col class="ion-no-padding" size="12">

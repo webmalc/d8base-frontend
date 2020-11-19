@@ -9,6 +9,10 @@
       "1": "Female",
       "0": "Male"
     },
+    "yn": {
+      "y": "Yes",
+      "n": "No"
+    },
     "experience-dates": {
       "until-now": "until now"
     },
@@ -376,8 +380,10 @@
         "additional": "Additional"
       },
       "main-tab": {
-        "address": "Location",
-        "address-input": "Enter location",
+        "country": "Country",
+        "country-placeholder": "Select country",
+        "city": "City",
+        "city-placeholder": "Select city",
         "on-map": "Or select location on map",
         "radius": "Search radius",
         "categories": "Search categories",
@@ -410,6 +416,37 @@
       "address": "Professional location",
       "select": "Select"
     }
+  },
+  "main-page": {
+    "search-placeholder": "Find service",
+    "any-date": "Any date",
+    "any-time": "Any time",
+    "current-location": "Current location",
+    "find-btn": "Find",
+    "service-categories": "Service categories",
+    "category-education": "Education",
+    "category-medicine": "Medicine",
+    "category-beauty": "Beauty",
+    "category-dating": "Dating",
+    "category-repair": "Repair",
+    "category-home": "Home",
+    "category-photo": "Media",
+    "category-pro": "Professional",
+    "category-sport": "Sport",
+    "counter-text": "The number of professionals and services offered on the portal",
+    "download": "Download application",
+    "three-steps": "Just 3 steps",
+    "registration": "Registration",
+    "search": "Search",
+    "bingo": "Bingo",
+    "reviews": "Reviews"
+  },
+  "default-location": {
+    "title": "Is it your current location",
+    "select": "Select your location",
+    "country": "Select country",
+    "city": "Select city",
+    "save": "Save"
   },
   "order": {
     "title": "Service order",

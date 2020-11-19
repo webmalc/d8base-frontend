@@ -1,0 +1,136 @@
+<app-header></app-header>
+<ion-content class="background-color-white">
+    <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
+        <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical"
+                 size-lg="9" size-md="11" size-sm="11" size-xl="8" size-xs="12">
+            <ion-row class="ion-justify-content-center ion-margin-vertical main-title">
+                Booking made simple
+            </ion-row>
+            <ion-row>
+                <ion-searchbar [(ngModel)]="searchData.needle" animated class="main-page-search" color="light"
+                               placeholder='{{"main-page.search-placeholder"|translate}}'></ion-searchbar>
+            </ion-row>
+            <ion-row>
+                <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="6">
+                    <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
+                        <ion-datetime [(ngModel)]="searchData.date" class="width100" display-format="YYYY-MM-DD"
+                                      placeholder='{{"main-page.any-date"|translate}}'></ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="6">
+                    <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
+                        <ion-datetime [(ngModel)]="searchData.time" display-format="HH:mm" picker-format="HH:mm"
+                                      placeholder="{{'main-page.any-time'|translate}}"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
+                    <ion-row>
+                        <app-location-picker (emitter)="updateCity($event)"
+                                             [enabled]="locationEnabled"
+                                             [locationData]="searchData.location"
+                                             class="menu-item width100"></app-location-picker>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center ion-margin-vertical">
+                <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
+                    <ion-button (click)="search()" [disabled]="searchDisabled()"
+                                color="secondary" expand="block" fill="solid" size="medium">
+                        {{'main-page.find-btn'|translate}}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col class="ion-no-padding" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
+            <ion-row class="ion-justify-content-center subtitle-bold ion-padding-vertical ion-margin-top">
+                {{'main-page.service-categories'|translate}}
+            </ion-row>
+            <ion-row class="ion-justify-content-between ion-margin-vertical ion-nowrap">
+                <app-category-icon (click)="useCategory(defaultCategoryList.Education)"
+                                   class="icon-margin cursor-pointer"
+                                   icon="graduation-cap" size="2x"
+                                   text="{{'main-page.category-education'|translate}}"></app-category-icon>
+                <app-category-icon (click)="useCategory(defaultCategoryList.Medicine)"
+                                   class="icon-margin cursor-pointer"
+                                   icon="stethoscope" size="2x"
+                                   text="{{'main-page.category-medicine'|translate}}"></app-category-icon>
+                <app-category-icon (click)="useCategory(defaultCategoryList.Beauty)" class="icon-margin cursor-pointer"
+                                   icon="spa" size="2x"
+                                   text="{{'main-page.category-beauty'|translate}}"></app-category-icon>
+            </ion-row>
+            <ion-row class="ion-justify-content-between ion-margin-vertical ion-nowrap">
+                <app-category-icon (click)="useCategory(defaultCategoryList.Dating)" class="icon-margin cursor-pointer"
+                                   icon="venus-mars" size="2x"
+                                   text="{{'main-page.category-dating'|translate}}"></app-category-icon>
+                <app-category-icon (click)="useCategory(defaultCategoryList.Repair)" class="icon-margin cursor-pointer"
+                                   icon="paint-roller" size="2x"
+                                   text="{{'main-page.category-repair'|translate}}"></app-category-icon>
+                <app-category-icon (click)="useCategory(defaultCategoryList.Home)" class="icon-margin cursor-pointer"
+                                   icon="home" size="2x"
+                                   text="{{'main-page.category-home'|translate}}"></app-category-icon>
+            </ion-row>
+            <ion-row class="ion-justify-content-between ion-margin-vertical ion-nowrap">
+                <app-category-icon (click)="useCategory(defaultCategoryList.Media)" class="icon-margin cursor-pointer"
+                                   icon="camera" size="2x"
+                                   text="{{'main-page.category-photo'|translate}}"></app-category-icon>
+                <app-category-icon (click)="useCategory(defaultCategoryList.Professional)"
+                                   class="icon-margin cursor-pointer"
+                                   icon="user-tie" size="2x"
+                                   text="{{'main-page.category-pro'|translate}}"></app-category-icon>
+                <app-category-icon (click)="useCategory(defaultCategoryList.Sport)" class="icon-margin cursor-pointer"
+                                   icon="table-tennis" size="2x"
+                                   text="{{'main-page.category-sport'|translate}}"></app-category-icon>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
+        <ion-col size-lg="4" size-md="6" size-sm="8" size-xl="3" size-xs="11">
+            <ion-row class="ion-justify-content-center counter">
+                2300
+            </ion-row>
+            <ion-row class="ion-justify-content-center counter-text ion-text-center ion-padding-bottom">
+                {{'main-page.counter-text'|translate}}
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
+        <ion-col class="ion-padding-vertical" size-lg="5" size-md="7" size-sm="9" size-xl="4" size-xs="11">
+            <ion-button class="ion-margin-vertical download-btn-text" color="secondary" expand="block" fill="solid"
+                        size="large">
+                {{'main-page.download'|translate}}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
+        <ion-col class="ion-no-padding" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
+            <ion-row class="ion-justify-content-center ion-margin-vertical ion-padding-vertical subtitle-bold">
+                {{'main-page.three-steps'|translate}}
+            </ion-row>
+            <ion-row class="ion-justify-content-around">
+                <app-main-page-icon class="bingo-text" text="{{'main-page.registration'|translate}}">
+                    <div class="bingo">1</div>
+                </app-main-page-icon>
+                <app-main-page-icon class="bingo-text" text="{{'main-page.search'|translate}}">
+                    <div class="bingo">2</div>
+                </app-main-page-icon>
+                <app-main-page-icon class="bingo-text" text="{{'main-page.bingo'|translate}}">
+                    <div class="bingo">3</div>
+                </app-main-page-icon>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
+        <ion-col class="ion-no-padding" size-lg="10" size-md="10" size-sm="11" size-xl="10" size-xs="12">
+            <ion-row class="ion-justify-content-center subtitle-bold ion-padding-vertical">
+                {{'main-page.reviews'|translate}}
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+                <app-main-page-review class="review-size"></app-main-page-review>
+                <app-main-page-review class="review-size"></app-main-page-review>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
+</ion-content>

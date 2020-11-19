@@ -4,21 +4,21 @@ import {IonicModule} from '@ionic/angular';
 import {MasterProfileCalendarComponent} from './master-profile-calendar.component';
 
 describe('MasterProfileCalendarComponent', () => {
-  let component: MasterProfileCalendarComponent;
-  let fixture: ComponentFixture<MasterProfileCalendarComponent>;
+    let component: MasterProfileCalendarComponent;
+    let fixture: ComponentFixture<MasterProfileCalendarComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterProfileCalendarComponent],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [MasterProfileCalendarComponent],
+            imports: [IonicModule.forRoot()]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterProfileCalendarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(MasterProfileCalendarComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

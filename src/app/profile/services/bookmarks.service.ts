@@ -5,7 +5,6 @@ import {BookmarkMaster} from '@app/core/models/bookmark-master';
 import {Master} from '@app/core/models/master';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
-import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable, throwError} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
@@ -13,7 +12,6 @@ import {map, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class BookmarksService {
-    private readonly url = environment.backend.saved_professionals;
 
     constructor(
         private readonly savedService: SavedProfessionalApiService,

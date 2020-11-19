@@ -1,0 +1,23 @@
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+}
+
+.category-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  background: var(--ion-color-primary);
+  border-radius: 50px;
+  margin: 5px 8px;
+}
+
+@media (max-width: 576px) {
+  .title-text {
+    font-size: 14px;
+  }
+}

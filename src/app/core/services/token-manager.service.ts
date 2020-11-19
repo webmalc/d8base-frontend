@@ -78,7 +78,7 @@ export class TokenManagerService {
             this.isAccessTokenExpired().then(
                 (isAccessTokenExpired: boolean) => isAccessTokenExpired ?
                     this.isRefreshTokenExpired()
-                        .then(isExpired => !isExpired ? resolve(true) : reject(ErrorList.REFRESH_TOKEN_EXPIRED_ERROR))
+                        .then(isExpired => !isExpired ? resolve(true) : reject(Error(ErrorList.REFRESH_TOKEN_EXPIRED_ERROR)))
                         .catch(err => reject(err)) :
                     resolve(false)
             ).catch(err => reject(err));

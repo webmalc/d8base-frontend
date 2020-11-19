@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {SafeResourceUrl} from '@angular/platform-browser';
 import {UserInterface} from '@app/core/interfaces/user.interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
@@ -28,7 +28,6 @@ export class MainInfoTabComponent extends Reinitable {
 
     constructor(
         public readonly profileService: ProfileService,
-        private readonly sanitizer: DomSanitizer,
         private readonly userManager: UserManagerService,
         public readonly photoSanitizer: PhotoSanitizerService
     ) {

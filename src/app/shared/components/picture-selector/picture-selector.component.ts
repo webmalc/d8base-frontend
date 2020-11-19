@@ -25,7 +25,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
     public uri: string | null;
     private onChange: (fn: any) => void;
-    private onTouched: (fn: any) => void;
 
     constructor(
         public platform: Platform,
@@ -81,7 +80,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     }
 
     public registerOnTouched(fn: any): void {
-        this.onTouched = fn;
+        // can't be disabled
     }
 
     public setDisabledState(isDisabled: boolean): void {

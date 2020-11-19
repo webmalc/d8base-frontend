@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationFactory, CountriesApiService, MasterManagerService, UserLocationApiService} from '@app/core/services';
 import {Country} from '@app/profile/models/country';
-import {Platform} from '@ionic/angular';
-import {Observable, of} from 'rxjs';
-import {filter, first, switchMap} from 'rxjs/operators';
+import {MenuController, Platform} from '@ionic/angular';
+import {Observable} from 'rxjs';
+import {filter, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
         private readonly platform: Platform,
         private readonly userLocationApi: UserLocationApiService,
         private readonly countryApi: CountriesApiService,
+        private readonly menuController: MenuController,
         authenticationFactory: AuthenticationFactory
     ) {
         this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
@@ -26,7 +27,6 @@ export class HeaderComponent implements OnInit {
 
     public ngOnInit(): void {
         this.getDefaultUserCountry()
-            .pipe(filter(code => null !== code))
             .subscribe(c => this.countryCode = c.code.toLowerCase());
     }
 
@@ -38,14 +38,22 @@ export class HeaderComponent implements OnInit {
         this.masterManager.becomeMaster().subscribe();
     }
 
+    public toggleMenu(menuId: string): void {
+        this.menuController.get(menuId).then(menu => {
+            if (menu.classList.contains('menu-pane-visible')) {
+                // the menu is at the side pane, toggle its disabled flag manually
+                menu.disabled = !menu.disabled;
+            }
+        });
+    }
+
     private getDefaultUserCountry(): Observable<Country> {
         return this.isAuthenticated$.pipe(
-            first(),
-            filter(isAuth => isAuth === true),
-            switchMap(isAuth => isAuth ? this.userLocationApi.getDefaultLocation().pipe(
-                filter(location => location !== undefined),
+            filter(isAuth => isAuth),
+            switchMap(_ => this.userLocationApi.getDefaultLocation().pipe(
+                filter(location => (location && location.country && true)),
                 switchMap(location => this.countryApi.getByEntityId(location.country as number))
-            ) : of(null))
+            ))
         );
     }
 }

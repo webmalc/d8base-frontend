@@ -3,7 +3,7 @@
     <ion-grid class="ion-no-padding">
         <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center ion-no-padding">
             <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size="6" size-sm="10" size-xs="11">
-                <ion-searchbar (keydown.enter)="searchRaw()" [(ngModel)]="searchNeedle"
+                <ion-searchbar (keydown.enter)="doSearch()" [(ngModel)]="searchNeedle"
                                animated class="ion-margin-vertical" color="light"
                                placeholder='{{"issuance.search-placeholder"|translate}}'></ion-searchbar>
             </ion-col>
@@ -30,7 +30,7 @@
                     <ion-col *ngIf="needToRenderFilters()"
                              offset="0" offset-lg="1" offset-md="0" offset-sm="1" offset-xl="1"
                              size-lg="4" size-md="5" size-sm="10" size-xl="3" size-xs="12">
-                        <app-search-filters (filtersData)="searchWithFilters($event)"></app-search-filters>
+                        <app-search-filters (filtersData)="doSearch()"></app-search-filters>
                     </ion-col>
                     <ion-col
                             offset="0" offset-lg="1" offset-md="2" offset-sm="1" offset-xl="1"

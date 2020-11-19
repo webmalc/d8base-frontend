@@ -51,7 +51,7 @@ export class DurationComponent implements ControlValueAccessor, OnDestroy {
     }
 
     public registerOnTouched(fn: () => void): void {
-        this.onTouch = fn;
+        // can't be disabled
     }
 
     public setDisabledState(isDisabled: boolean): void {
@@ -90,6 +90,4 @@ export class DurationComponent implements ControlValueAccessor, OnDestroy {
     }
 
     private onChange: (v: number) => void = () => null;
-
-    private onTouch: () => void = () => null;
 }

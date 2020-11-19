@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '@app/core/models/user';
-import {AppValidators} from '@app/core/validators/app.validators';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Language} from '@app/profile/models/language';
 

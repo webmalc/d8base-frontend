@@ -6,7 +6,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list>
+    <ion-list class="ion-no-padding">
         <ng-container *ngFor="let item of mainMenuItems">
             <ion-list-header *ngIf="item.isHeader && isShown(item)" color="light" lines="full">
                 <ion-label> {{ item.title | translate }}</ion-label>

@@ -6,7 +6,6 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 
@@ -14,13 +13,11 @@ import {Observable} from 'rxjs';
 export class RegistrationService {
 
     private readonly REGISTER_URL = environment.backend.register;
-    private readonly SEND_VERITY_REGISTRATION = environment.backend.send_verify_registration;
 
     constructor(
         protected client: ApiClientService,
         private readonly locationService: LocationService,
         private readonly locationApiService: UserLocationApiService,
-        private readonly tokenManager: TokenManagerService,
         private readonly authenticationService: AuthenticationService
     ) {
     }
@@ -55,10 +52,6 @@ export class RegistrationService {
                 }
             )
         ));
-    }
-
-    private sendVerifyLink(): void {
-        this.client.post(this.SEND_VERITY_REGISTRATION, {}).subscribe();
     }
 }
 

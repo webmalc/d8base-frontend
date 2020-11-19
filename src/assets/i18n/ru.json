@@ -9,6 +9,10 @@
       "1": "Женщина",
       "0": "Мужчина"
     },
+    "yn": {
+      "y": "Да",
+      "n": "Нет"
+    },
     "experience-dates": {
       "until-now": "по настоящее время"
     },
@@ -462,8 +466,10 @@
         "additional": "Дополнительные"
       },
       "main-tab": {
-        "address": "Адрес поиска",
-        "address-input": "Введите адрес поиска",
+        "country": "Страна",
+        "country-placeholder": "Выберите страну",
+        "city": "Город",
+        "city-placeholder": "Выберите город",
         "on-map": "Или укажите адрес на карте",
         "radius": "Радиус поиска",
         "categories": "Категории поиска",
@@ -496,6 +502,37 @@
       "address": "Адрес мастера",
       "select": "Выбрать"
     }
+  },
+  "main-page": {
+    "search-placeholder": "Найти услугу",
+    "any-date": "Любая дата",
+    "any-time": "Любое время",
+    "current-location": "Текущее местоположение",
+    "find-btn": "Искать",
+    "service-categories": "Категории услуг",
+    "category-education": "Образование",
+    "category-medicine": "Медицина",
+    "category-beauty": "Красота",
+    "category-dating": "Знакомства",
+    "category-repair": "Ремонт",
+    "category-home": "Дом",
+    "category-photo": "Фото и видео",
+    "category-pro": "Профи",
+    "category-sport": "Спорт",
+    "counter-text": "Количество мастеров и услуг предлагаемых на портале",
+    "download": "Скачать приложение",
+    "three-steps": "Всего 3 шага",
+    "registration": "Регистрация",
+    "search": "Поиск",
+    "bingo": "Бинго",
+    "reviews": "Отзывы"
+  },
+  "default-location": {
+    "title": "Это Ваше текущее местоположение",
+    "select": "Выберите Ваше местоположение",
+    "country": "Выберите страну",
+    "city": "Выберите город",
+    "save": "Сохранить"
   },
   "order": {
     "title": "Заказ услуги",

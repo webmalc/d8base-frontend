@@ -10,11 +10,19 @@
       "call-signature",
       "parameter"
     ],
+    "no-unused-variable": true,
     "no-trailing-whitespace": true,
     "no-irregular-whitespace": true,
-    "no-consecutive-blank-lines": [true, 2],
+    "no-consecutive-blank-lines": [
+      true,
+      2
+    ],
     "newline-before-return": true,
-    "indent": [true, "spaces", 4],
+    "indent": [
+      true,
+      "spaces",
+      4
+    ],
     "variable-name": {
       "options": [
         "ban-keywords",
@@ -117,7 +125,7 @@
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-use-before-declare": true,
-    "no-var-requires": false,
+    "no-var-requires": true,
     "object-literal-key-quotes": [
       true,
       "as-needed"

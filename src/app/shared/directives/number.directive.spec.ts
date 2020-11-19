@@ -1,4 +1,4 @@
-import {NumberDirective} from './number.directive';
+// import {NumberDirective} from './number.directive';
 
 describe('NumberDirective', () => {
   xit('should create an instance', () => {

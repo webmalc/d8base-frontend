@@ -3,7 +3,6 @@ import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface'
 import {Master} from '@app/core/models/master';
 import {CountriesApiService} from '@app/core/services/location/countries-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Certificate} from '@app/master/models/certificate';
 import {Education} from '@app/master/models/education';
 import {Experience} from '@app/master/models/experience';
@@ -22,9 +21,7 @@ import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-a
 import {TagsApiService} from '@app/master/services/tags-api.service';
 import {Country} from '@app/profile/models/country';
 import {Language} from '@app/profile/models/language';
-import {UserLanguage} from '@app/profile/models/user-language';
 import {LanguagesApiService} from '@app/profile/services/languages-api.service';
-import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
 import {forkJoin, Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
@@ -36,10 +33,8 @@ export class MasterProfileInfoGeneratorFactoryService {
         private readonly masterLocationApi: MasterLocationApiService,
         private readonly masterContactApi: MasterContactsApiService,
         private readonly masterTagsApi: TagsApiService,
-        private readonly userManager: UserManagerService,
         private readonly countriesApi: CountriesApiService,
         private readonly languagesApi: LanguagesApiService,
-        private readonly userLanguagesApi: UserLanguagesApiService,
         private readonly masterExperienceApi: ExperienceApiService,
         private readonly masterEducationApi: EducationApiService,
         private readonly certificatesApi: CertificatesApiService,
@@ -104,9 +99,7 @@ export class MasterProfileInfoGeneratorFactoryService {
 
     private getUserLanguages(user: PartialUserInterface): Observable<Language[]> {
         return (user.languages && user.languages.length !== 0) ?
-            this.userLanguagesApi.getList(user.languages.map(lang => parseInt(lang, 10))).pipe(
-                switchMap((userLanguagesList: UserLanguage[]) =>
-                    this.languagesApi.getList(userLanguagesList.map(lang => lang.language)))) :
+            this.languagesApi.getList(user.languages.map(lang => lang.language)) :
             of([]);
     }
 

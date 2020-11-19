@@ -16,6 +16,7 @@ import {AbstractContactsComponent} from '@app/shared/components/abstract-contact
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
+import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
 import {MainMenuFooterToolbarComponent} from '@app/shared/components/main-menu/main-menu-footer-toolbar/main-menu-footer-toolbar.component';
@@ -69,7 +70,8 @@ import {NumberDirective} from './directives/number.directive';
         ImageCropPopoverComponent,
         ServiceDetailsComponent,
         WizardProgressComponent,
-        MainMenuFooterToolbarComponent
+        MainMenuFooterToolbarComponent,
+        DefaultLocationPopoverComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -94,7 +96,8 @@ import {NumberDirective} from './directives/number.directive';
         RatingHalfStarComponent,
         DurationComponent,
         ServiceDetailsComponent,
-        WizardProgressComponent
+        WizardProgressComponent,
+        DefaultLocationPopoverComponent
     ],
     imports: [
         CommonModule,

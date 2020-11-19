@@ -1,10 +1,9 @@
-import {TestBed} from '@angular/core/testing';
-
 import {HttpClient} from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {LocationInterface} from '@app/auth/interfaces/location/location.interface';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
 import {Observable} from 'rxjs';
-import {LocationInterface} from '../../../auth/interfaces/location/location.interface';
 import {IpApiService} from './ip-api.service';
 import {IpDataService} from './ip-data.service';
 import {IpServicesHolderService} from './ip-services-holder.service';
@@ -64,17 +63,7 @@ describe('LocationService', () => {
     it('should be do some work', (done) => {
         const service: LocationService = TestBed.inject(LocationService);
 
-        const data = {
-            postalCode: 'testPostal',
-            countryCode: 'testCode',
-            latitude: 123,
-            longitude: 321,
-            timezone: {name: 'timezone'},
-            city: 'test',
-            regionCode: 'code'
-        };
-
-        service.getIpLocationData().then(
+        service.getIpLocationData().subscribe(
             (returnData: LocationInterface) => {
                 expect(returnData.postalCode).toBe('testPostal');
                 expect(returnData.countryCode).toBe('testCode');

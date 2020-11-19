@@ -1,0 +1,41 @@
+<ion-col *ngIf="data" class="ion-no-margin ion-no-padding">
+    <ion-row class="width100">
+        <app-user-location-map
+                (ngModelChange)="emit($event)"
+                [(ngModel)]="mapCoords"
+                [clientCoordinates]="this.formatCoords()"
+                class="main-page-map-container-width" style="height: 400px">
+        </app-user-location-map>
+    </ion-row>
+    <ion-row *ngIf="renderCountry" class="width100">
+        <ion-item class="width100">
+            <ion-label color="medium" position="floating">
+                country
+            </ion-label>
+            <ionic-selectable
+                    (onChange)="onCountryChange()"
+                    (onSearch)="countrySelectable.onCountrySearch($event)"
+                    [(ngModel)]="data.country"
+                    [canSearch]="true"
+                    itemTextField="name"
+                    itemValueField="id">
+            </ionic-selectable>
+        </ion-item>
+    </ion-row>
+    <ion-row *ngIf="renderCountry" class="width100">
+        <ion-item class="width100">
+            <ion-label color="medium" position="floating">
+                city
+            </ion-label>
+            <ionic-selectable
+                    (ngModelChange)="emitByCity()"
+                    (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
+                    [(ngModel)]="data.city"
+                    [canSearch]="true"
+                    [isEnabled]="isCityEnabled$|async"
+                    itemTextField="name"
+                    itemValueField="id">
+            </ionic-selectable>
+        </ion-item>
+    </ion-row>
+</ion-col>
