@@ -1,9 +1,11 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-button (click)="toggleMenu()">
-                <ion-icon name="menu" slot="icon-only"></ion-icon>
-            </ion-button>
+            <ion-menu-toggle [autoHide]="false">
+                <ion-button (click)="toggleMenu('main-menu')">
+                    <ion-icon slot="icon-only" name="menu"></ion-icon>
+                </ion-button>
+            </ion-menu-toggle>
         </ion-buttons>
         <ion-item lines="none" routerDirection="root"
                   routerLink="/"

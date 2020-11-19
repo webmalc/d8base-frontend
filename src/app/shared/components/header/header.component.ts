@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationFactory, CountriesApiService, MasterManagerService, UserLocationApiService} from '@app/core/services';
 import {Country} from '@app/profile/models/country';
-import {Platform} from '@ionic/angular';
+import {MenuController, Platform} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {filter, switchMap} from 'rxjs/operators';
 
@@ -19,26 +19,15 @@ export class HeaderComponent implements OnInit {
         private readonly platform: Platform,
         private readonly userLocationApi: UserLocationApiService,
         private readonly countryApi: CountriesApiService,
-        private readonly authenticationFactory: AuthenticationFactory
+        private readonly menuController: MenuController,
+        authenticationFactory: AuthenticationFactory
     ) {
-        this.isAuthenticated$ = this.authenticationFactory.getAuthenticator().isAuthenticated$;
+        this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
     }
 
     public ngOnInit(): void {
-        this.getDefaultUserCountry().subscribe(c => this.countryCode = c.code.toLowerCase());
-    }
-
-    public toggleMenu(): void {
-        const splitPane = document.querySelector('ion-split-pane');
-        const windowWidth = window.innerWidth;
-        const splitPaneShownAt = 992;
-        const menu = splitPane.querySelector('ion-menu');
-        if (windowWidth >= splitPaneShownAt) {
-            splitPane.disabled = !splitPane.disabled;
-            menu.disabled = !menu.disabled;
-        } else {
-            menu.toggle();
-        }
+        this.getDefaultUserCountry()
+            .subscribe(c => this.countryCode = c.code.toLowerCase());
     }
 
     public isDesktop(): boolean {
@@ -47,6 +36,15 @@ export class HeaderComponent implements OnInit {
 
     public becomeMaster(): void {
         this.masterManager.becomeMaster().subscribe();
+    }
+
+    public toggleMenu(menuId: string): void {
+        this.menuController.get(menuId).then(menu => {
+            if (menu.classList.contains('menu-pane-visible')) {
+                // the menu is at the side pane, toggle its disabled flag manually
+                menu.disabled = !menu.disabled;
+            }
+        });
     }
 
     private getDefaultUserCountry(): Observable<Country> {
