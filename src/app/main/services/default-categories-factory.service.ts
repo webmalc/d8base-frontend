@@ -12,7 +12,7 @@ export class DefaultCategoriesFactoryService {
     }
 
     public getByName(name: string): Category | null {
-        const cat = this.list.find(el => el.name === name);
+        const cat = this.list.find(el => el.code === name);
 
         return cat === undefined ? null : cat;
     }
