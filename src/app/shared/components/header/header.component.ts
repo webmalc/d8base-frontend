@@ -36,6 +36,8 @@ export class HeaderComponent implements OnInit {
         if (windowWidth >= splitPaneShownAt) {
             splitPane.disabled = !splitPane.disabled;
             menu.disabled = !menu.disabled;
+        } else {
+            menu.toggle();
         }
     }
 

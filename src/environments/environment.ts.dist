@@ -64,6 +64,8 @@ export const environment = {
     client_secret: '',
     refresh_token_expire_time: 3600,
     map_url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    nominatim_reverse_url: 'https://nominatim.openstreetmap.org/reverse',
+    nominatim_search_url: 'https://nominatim.openstreetmap.org/search',
     firebaseConfig:  {
        apiKey: '<your-key>',
        authDomain: '<your-project-authdomain>',

@@ -19,10 +19,10 @@ export class LoginPage implements OnDestroy {
     constructor(
         private readonly authFactory: AuthenticationFactory,
         private readonly router: Router,
-        private readonly route: ActivatedRoute,
+        route: ActivatedRoute,
         private readonly masterManager: MasterManagerService
     ) {
-        this.route.queryParams.pipe(
+        route.queryParams.pipe(
             filter(params => params?.hasOwnProperty('logout')),
             takeUntil(this.destroy$)
         ).subscribe(() => this.logout());

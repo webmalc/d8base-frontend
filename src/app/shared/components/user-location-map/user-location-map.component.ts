@@ -23,6 +23,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     private map: L.Map;
     private layerGroup: L.LayerGroup;
     private onChange: (fn: any) => void;
+    private readonly MAGIC_NUMBER = 200;
 
     public ngOnInit(): void {
         this.initMap(this.clientCoordinates);
@@ -74,7 +75,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     }
 
     private invalidateSize(): void {
-        setTimeout(() => this.map?.invalidateSize(true), 200);
+        setTimeout(() => this.map?.invalidateSize(true), this.MAGIC_NUMBER);
     }
 
     private initMap(coordinates: number[]): void {

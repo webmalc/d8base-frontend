@@ -29,13 +29,15 @@ export class MainPage implements OnInit {
 
     public ngOnInit(): void {
         this.initSearchData();
-        this.getCurrentLocation().pipe(
-            filter(loc => null !== loc)
-        ).subscribe(
-            data => this.searchData.location = {
-                country: data.country,
-                city: data.city,
-                coordinates: data.coords
+        this.getCurrentLocation().subscribe(
+            data => {
+                if (data) {
+                    this.searchData.location = {
+                        country: data.country,
+                        city: data.city,
+                        coordinates: data.coords
+                    };
+                }
             },
             err => null,
             () => this.locationEnabled = true

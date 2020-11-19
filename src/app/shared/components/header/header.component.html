@@ -1,18 +1,12 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-menu-toggle *ngIf="!isDesktop()">
-                <ion-button>
-                    <ion-icon slot="icon-only" name="menu"></ion-icon>
-                </ion-button>
-            </ion-menu-toggle>
-            <ion-button (click)="toggleMenu()" *ngIf="isDesktop()">
+            <ion-button (click)="toggleMenu()">
                 <ion-icon name="menu" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-item lines="none" routerDirection="forward"
+        <ion-item lines="none" routerDirection="root"
                   routerLink="/"
-                  routerLinkActive="active"
                   slot="start">
             <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
