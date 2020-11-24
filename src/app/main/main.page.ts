@@ -39,7 +39,7 @@ export class MainPage implements OnInit {
                     };
                 }
             },
-            err => null,
+            err => this.locationEnabled = true,
             () => this.locationEnabled = true
         );
     }

@@ -15,7 +15,6 @@ import {
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
-import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
@@ -49,7 +48,6 @@ import {NumberDirective} from './directives/number.directive';
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        ContactsTabComponent,
         UserLocationMapComponent,
         ReviewsListComponent,
         MediaLinksComponent,
@@ -77,7 +75,6 @@ import {NumberDirective} from './directives/number.directive';
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        ContactsTabComponent,
         ReviewsListComponent,
         MediaLinksComponent,
         HeaderComponent,

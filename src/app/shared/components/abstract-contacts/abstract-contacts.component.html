@@ -1,4 +1,4 @@
-<ion-row *ngFor="let contact of userContacts$ | async"
+<ion-row *ngFor="let contact of clientContacts"
          class="width100 ion-justify-content-between ion-align-items-center">
     <ion-item class="ion-item-no-border ion-align-items-center ion-item-no-side-padding">
         <ion-icon class="pr5" name="{{getContactIcon(contact.contact_code)}}"></ion-icon>
@@ -8,7 +8,7 @@
         <ion-item class="ion-item-no-border" id="item-contact-value">
             {{contact.value}}
         </ion-item>
-        <ion-item *ngIf="interactable" class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
+        <ion-item *ngIf="interactable" class="ion-item-no-border ion-align-items-center"
                   routerDirection="forward"
                   routerLink="{{editContactUrl + contact.id}}"
                   routerLinkActive="active"
@@ -20,14 +20,14 @@
 
 <div *ngIf="interactable">
     <div *ngFor="let contact of contacts$ | async">
-        <ion-row *ngIf="!(userContacts$ | async).length"
+        <ion-row *ngIf="!clientContacts.length"
                  class="width100 ion-no-margin ion-no-margin ion-item-no-vertical-padding ion-item-no-side-padding ion-justify-content-between ion-align-items-center">
             <ion-item class="ion-item-no-border ion-align-items-center ion-item-no-side-padding">
                 <ion-icon class="pr5" name="{{getContactIcon(contact.code)}}"></ion-icon>
                 {{contact.name}}
             </ion-item>
             <ion-item class="ion-item-no-border no-padding-right ion-justify-content-end ion-item-no-side-padding">
-                <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
+                <ion-item class="ion-item-no-border ion-align-items-center"
                           routerDirection="forward"
                           routerLink="{{editDefaultContactUrl + contact.id}}"
                           routerLinkActive="active"

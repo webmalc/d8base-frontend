@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
 import {Service} from '@app/service/models/service';
 import {ServiceTag} from '@app/service/models/service-tag';
-import {ServiceTagsApiService} from '@app/service/services/service-tags-api.service';
-import {ServicesApiService} from '@app/service/services/services-api.service';
+import {ServiceTagsReadonlyApiService} from '@app/service/services/service-tags-readonly-api.service';
 import {forkJoin, Observable, of} from 'rxjs';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
 
@@ -13,8 +13,8 @@ import {map, mergeMap, switchMap} from 'rxjs/operators';
 export class ServicesGeneratorFactoryService {
 
     constructor(
-        private readonly servicesApi: ServicesApiService,
-        private readonly serviceTagsApi: ServiceTagsApiService,
+        private readonly servicesApi: ServicesReadonlyApiService,
+        private readonly serviceTagsReadonlyApi: ServiceTagsReadonlyApiService,
         private readonly masterManager: MasterManagerService
     ) {
     }
@@ -33,7 +33,7 @@ export class ServicesGeneratorFactoryService {
     private combineWithTags(serviceList: Service[]): Observable<{ service: Service, tags: ServiceTag[] }[]> {
         return of(serviceList).pipe(
             mergeMap(services => forkJoin(
-                [...services.map(service => this.serviceTagsApi.get({service: service.id.toString()}).pipe(
+                [...services.map(service => this.serviceTagsReadonlyApi.get({service: service.id.toString()}).pipe(
                     map(res => ({service, tags: res.results}))
                 ))]
             ))

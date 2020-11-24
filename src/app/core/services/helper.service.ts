@@ -1,5 +1,5 @@
 import {Contact} from '@app/profile/models/contact';
-import {UserContact} from '@app/profile/models/user-contact';
+import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {environment} from '@env/environment';
 
 export class HelperService {
@@ -58,7 +58,7 @@ export class HelperService {
         return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
     }
 
-    public static calculateContacts(contacts: Contact[], userContacts: UserContact[]): Contact[] {
+    public static calculateContacts(contacts: Contact[], userContacts: ClientContactInterface[]): Contact[] {
         const ret = [];
         del: for (const c of contacts) {
             for (const uc of userContacts) {
@@ -92,7 +92,14 @@ export class HelperService {
             environment.backend.url + environment.backend.subcategory,
             environment.backend.url + environment.backend.auth,
             environment.backend.url + environment.backend.reset_password_link,
-            environment.backend.url + environment.backend.reset_password
+            environment.backend.url + environment.backend.reset_password,
+            environment.backend.url + environment.backend.master_list,
+            environment.backend.url + environment.backend.language,
+            environment.backend.url + environment.backend.reviews_readonly,
+            environment.backend.url + environment.backend.contact,
+            environment.backend.url + environment.backend.services_readonly,
+            environment.backend.url + environment.backend.service_tag_readonly,
+            environment.backend.url + environment.backend.master_photos_readonly
         ];
     }
 }

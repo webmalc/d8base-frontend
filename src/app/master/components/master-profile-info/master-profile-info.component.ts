@@ -10,7 +10,6 @@ import {MasterContact} from '@app/master/models/master-contact';
 import {MasterLocation} from '@app/master/models/master-location';
 import {PublicReview} from '@app/master/models/public-review';
 import {Tag} from '@app/master/models/tag';
-import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
 import {MasterProfileInfoGeneratorFactoryService} from '@app/master/services/master-profile-info-generator-factory.service';
 import {Country} from '@app/profile/models/country';
 import {Language} from '@app/profile/models/language';
@@ -26,7 +25,7 @@ export class MasterProfileInfoComponent {
     public editable: Observable<boolean>;
     public master: Master;
     public masterLocation: MasterLocation[];
-    public masterContacts: MasterContact[];
+    public masterContacts: MasterContact[] = [];
     public masterTags: Tag[];
     public user: PartialUserInterface;
     public userCountry: Country;
@@ -41,7 +40,6 @@ export class MasterProfileInfoComponent {
 
 
     constructor(
-        public masterContactApi: MasterContactsApiService,
         private readonly masterInfoGeneratorFactory: MasterProfileInfoGeneratorFactoryService,
         private readonly route: ActivatedRoute
     ) {
