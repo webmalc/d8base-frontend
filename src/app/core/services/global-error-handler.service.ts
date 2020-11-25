@@ -35,21 +35,38 @@ export class GlobalErrorHandlerService implements ErrorHandler {
             Sentry.captureException(error);
         }
 
-        if (error instanceof HttpErrorResponse && (401 === error.status || 'invalid_grant' === error.message)) {
-            if (error.url.endsWith(environment.backend.refresh)) {
-                this.showMessage('authentication expired');
-                this.router.navigateByUrl('/auth/login');
-            }
-        }
-
-        if (error instanceof HttpErrorResponse && (5 === Math.floor(error.status / 100))) {
-            this.showMessage('server error');
+        if (error instanceof HttpErrorResponse) {
+            this.showHttpError(error);
 
             return;
         }
 
         this.showMessage('unexpected error');
         throw error;
+    }
+
+    private showHttpError(error: HttpErrorResponse): void {
+        if (400 === error.status) {
+            const messages: string[] = error.error.__all__;
+            if (Array.isArray(messages)) {
+                messages.forEach(message => this.showMessage(message));
+            } else {
+                this.showMessage(error.message);
+            }
+        }
+
+        if (401 === error.status || 'invalid_grant' === error.message) {
+            if (error.url.endsWith(environment.backend.refresh)) {
+                this.showMessage('authentication expired');
+                this.router.navigateByUrl('/auth/login');
+            }
+        }
+
+        if (5 === Math.floor(error.status / 100)) {
+            this.showMessage('server error');
+
+            return;
+        }
     }
 
     private showMessage(message: string, duration: number = this.ERROR_TOAST_DURATION_MS): void {

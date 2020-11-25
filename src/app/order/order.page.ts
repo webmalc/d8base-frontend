@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {OrdersApiService} from '@app/core/services/orders-api.service';
 import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
 import {MasterList} from '@app/master/models/master-list';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
@@ -13,10 +14,7 @@ import {OrderService} from './services/order.service';
 @Component({
     selector: 'app-order',
     templateUrl: './order.page.html',
-    styleUrls: ['./order.page.scss'],
-    providers: [
-        OrderService
-    ]
+    styleUrls: ['./order.page.scss']
 })
 export class OrderPage implements OnInit, OnDestroy {
     public currentStepIndex: number;
@@ -33,8 +31,10 @@ export class OrderPage implements OnInit, OnDestroy {
         private readonly router: Router,
         private readonly route: ActivatedRoute,
         private readonly servicesApi: ServicesReadonlyApiService,
-        private readonly mastersApi: MasterReadonlyApiService
+        private readonly mastersApi: MasterReadonlyApiService,
+        private readonly ordersApi: OrdersApiService
     ) {
+        this.orderService.reset();
         this.order$ = this.orderService.order$;
         this.subscribeToRouterEvents();
     }
@@ -76,7 +76,14 @@ export class OrderPage implements OnInit, OnDestroy {
     }
 
     public submit(): void {
-        // TODO: Отсылать команду на сервер
+        const newOrder = {
+            ...this.orderService.getOrderModel(),
+            service: Number.parseInt(this.serviceId, 10)
+        };
+        this.ordersApi.postNewOrder(newOrder).subscribe(
+            order => this.router.navigate(['order', 'done']).then(),
+            order => this.router.navigate(['order', 'done']).then()
+        );
     }
 
     private subscribeToRouterEvents(): void {

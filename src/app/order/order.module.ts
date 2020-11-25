@@ -1,12 +1,18 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {DateTimeStepComponent, LocationStepComponent, SummaryStepComponent} from '@app/order/components';
-import {OrderDetailsComponent} from '@app/order/components/order-details/order-details.component';
+import {
+    DateTimeStepComponent,
+    LocationStepComponent,
+    OrderConfirmationComponent,
+    OrderDetailsComponent,
+    SummaryStepComponent
+} from '@app/order/components';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {OrderRoutingModule} from './order-routing.module';
 import {OrderPage} from './order.page';
+import {OrderService} from './services/order.service';
 
 
 @NgModule({
@@ -15,7 +21,8 @@ import {OrderPage} from './order.page';
         OrderDetailsComponent,
         DateTimeStepComponent,
         LocationStepComponent,
-        SummaryStepComponent
+        SummaryStepComponent,
+        OrderConfirmationComponent
     ],
     imports: [
         CommonModule,
@@ -23,6 +30,9 @@ import {OrderPage} from './order.page';
         IonicModule,
         TranslateModule,
         OrderRoutingModule
+    ],
+    providers: [
+        OrderService
     ]
 })
 export class OrderPageModule {

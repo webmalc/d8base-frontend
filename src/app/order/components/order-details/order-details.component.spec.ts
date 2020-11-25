@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 import {OrderService} from '@app/order/services/order.service';
 import {IonicModule} from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,7 +13,7 @@ describe('OrderDetailsComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [OrderDetailsComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
             providers: [OrderService]
         }).compileComponents();
 

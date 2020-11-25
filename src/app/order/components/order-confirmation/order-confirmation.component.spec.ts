@@ -1,31 +1,25 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {OrderService} from '@app/order/services/order.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
-import {OrderPage} from './order.page';
+import {OrderConfirmationComponent} from './order-confirmation.component';
 
-describe('OrderPage', () => {
-    let component: OrderPage;
-    let fixture: ComponentFixture<OrderPage>;
+describe('OrderConfirmationComponent', () => {
+    let component: OrderConfirmationComponent;
+    let fixture: ComponentFixture<OrderConfirmationComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [OrderPage],
+            declarations: [OrderConfirmationComponent],
             imports: [
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule
-            ],
-            providers: [
-                OrderService
+                RouterTestingModule
             ]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(OrderPage);
+        fixture = TestBed.createComponent(OrderConfirmationComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

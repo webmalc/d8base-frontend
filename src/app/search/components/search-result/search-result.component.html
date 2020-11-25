@@ -86,7 +86,7 @@
                 </div>
                 <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
                     <ion-item class="ion-item-no-border">
-                        <ion-button color="secondary" size="medium">
+                        <ion-button color="secondary" size="medium" [routerLink]="'/service/' + data.services[0]?.id">
                             {{'issuance.search-result.select'|translate}}
                         </ion-button>
                     </ion-item>

@@ -1,0 +1,25 @@
+<app-header></app-header>
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <ion-row class="ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="8" sizeMd="8" sizeLg="7" sizeXl="5" offset-xl="-1" offset-lg="-1">
+                <ion-item color="light" lines="full">
+                    <ion-buttons slot="start">
+                        <ion-button routerLink="/service/{{1}}" routerDirection="back">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <ion-title>{{ 'order.done' | translate }}</ion-title>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        {{ 'order.done-details' | translate }}
+                    </ion-label>
+                    <ion-note>
+                        {{ 'order.confirmation-sent' | translate }}
+                    </ion-note>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

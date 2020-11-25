@@ -30,6 +30,10 @@
     },
     "save": "Save"
   },
+  "accordion": {
+    "expand": "show more",
+    "collapse": "show less"
+  },
   "ion-selectable": {
     "close-button-text": "Close",
     "search-text": "Search",
@@ -465,6 +469,9 @@
     "date-time-subheader": "Pick date and time",
     "order.date": "Date",
     "order.time": "Time",
-    "not-selected": "not selected"
+    "not-selected": "not selected",
+    "done": "The order was sent",
+    "done-details": "Please wait for confirmation from the professional.",
+    "confirmation-sent": "Order details were sent to the e-mail address"
   }
 }

@@ -9,7 +9,9 @@ import {
     FooterComponent,
     HeaderComponent,
     MainMenuComponent,
-    ServiceDetailsComponent,
+    MasterWidgetComponent,
+    MoreInfoComponent,
+    ServiceWidgetComponent,
     WizardProgressComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -68,10 +70,12 @@ import {NumberDirective} from './directives/number.directive';
         RatingHalfStarComponent,
         DurationComponent,
         ImageCropPopoverComponent,
-        ServiceDetailsComponent,
+        ServiceWidgetComponent,
         WizardProgressComponent,
         MainMenuFooterToolbarComponent,
-        DefaultLocationPopoverComponent
+        DefaultLocationPopoverComponent,
+        MoreInfoComponent,
+        MasterWidgetComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -95,7 +99,7 @@ import {NumberDirective} from './directives/number.directive';
         RatingFullStarComponent,
         RatingHalfStarComponent,
         DurationComponent,
-        ServiceDetailsComponent,
+        ServiceWidgetComponent,
         WizardProgressComponent,
         DefaultLocationPopoverComponent
     ],

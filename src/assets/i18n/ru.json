@@ -30,6 +30,10 @@
     },
     "save": "Сохранить"
   },
+  "accordion": {
+    "expand": "Подробнее",
+    "collapse": "Свернуть"
+  },
   "ion-selectable": {
     "close-button-text": "Закрыть",
     "search-text": "Поиск",
@@ -50,7 +54,7 @@
     "profile": "Профиль",
     "master-profile": "Профиль мастера",
     "logout": "Выйти",
-    "download" : "Скачать приложение",
+    "download": "Скачать приложение",
     "become-master": "Стать мастером",
     "my-orders": "Мои заказы",
     "about": "О сервисе",
@@ -120,7 +124,7 @@
     },
     "button": "Сохранить"
   },
-  "profile-page" : {
+  "profile-page": {
     "profile": "Профиль",
     "settings": "Настройки",
     "plugins": "Плагины",
@@ -167,15 +171,15 @@
     "tags": "Теги"
   },
   "bookmarks": {
-    "no-bookmarks" : "В ваших закладках пусто"
+    "no-bookmarks": "В ваших закладках пусто"
   },
   "list-item": {
     "add-new": "Добавить еще"
   },
   "duration": {
-      "days": "дни",
-      "hours": "часы",
-      "minutes": "минуты"
+    "days": "дни",
+    "hours": "часы",
+    "minutes": "минуты"
   },
   "service-publish": {
     "back-button": "Назад",
@@ -551,6 +555,9 @@
     "date-time-subheader": "Выберите желаемую дату и время начала услуги",
     "date": "Дата услуги",
     "time": "Время начала услуги",
-    "not-selected": "не выбрано"
+    "not-selected": "не выбрано",
+    "done": "Заказ сформирован",
+    "done-details": "Ваше бронирование успешно отправлено мастеру для подтверждения.",
+    "confirmation-sent": "E-mail c деталями бронирования  отправлен на Ваш электронный адрес"
   }
 }
