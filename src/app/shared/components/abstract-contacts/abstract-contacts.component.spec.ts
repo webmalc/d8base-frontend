@@ -1,6 +1,5 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {AbstractContactsComponent} from './abstract-contacts.component';
@@ -17,7 +16,6 @@ describe('AbstractContactsComponent', () => {
 
         fixture = TestBed.createComponent(AbstractContactsComponent);
         component = fixture.componentInstance;
-        component.contactsApiService = TestBed.inject(MasterContactsApiService);
         fixture.detectChanges();
     }));
 

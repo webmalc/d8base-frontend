@@ -11,14 +11,14 @@ import {MasterList} from '@app/master/models/master-list';
 import {MasterLocation} from '@app/master/models/master-location';
 import {PublicReview} from '@app/master/models/public-review';
 import {Tag} from '@app/master/models/tag';
-import {CertificatesApiService} from '@app/master/services/certificates-api.service';
-import {EducationApiService} from '@app/master/services/education-api.service';
-import {ExperienceApiService} from '@app/master/services/experience-api.service';
-import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
-import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
+import {MasterCertificatesReadonlyApiService} from '@app/master/services/master-certificates-readonly-api.service';
+import {MasterContactsReadonlyApiService} from '@app/master/services/master-contacts-readonly-api.service';
+import {MasterEducationReadonlyApiService} from '@app/master/services/master-education-readonly-api.service';
+import {MasterExperienceReadonlyApiService} from '@app/master/services/master-experience-readonly-api.service';
+import {MasterLocationsReadonlyApiService} from '@app/master/services/master-locations-readonly-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
-import {TagsApiService} from '@app/master/services/tags-api.service';
+import {TagsReadonlyApiService} from '@app/master/services/tags-readonly-api.service';
 import {Country} from '@app/profile/models/country';
 import {Language} from '@app/profile/models/language';
 import {LanguagesApiService} from '@app/profile/services/languages-api.service';
@@ -30,16 +30,16 @@ export class MasterProfileInfoGeneratorFactoryService {
 
     constructor(
         private readonly masterManager: MasterManagerService,
-        private readonly masterLocationApi: MasterLocationApiService,
-        private readonly masterContactApi: MasterContactsApiService,
-        private readonly masterTagsApi: TagsApiService,
         private readonly countriesApi: CountriesApiService,
         private readonly languagesApi: LanguagesApiService,
-        private readonly masterExperienceApi: ExperienceApiService,
-        private readonly masterEducationApi: EducationApiService,
-        private readonly certificatesApi: CertificatesApiService,
         private readonly publicReviewsApi: ReviewsReadonlyApiService,
-        private readonly masterReadonlyApi: MasterReadonlyApiService
+        private readonly masterReadonlyApi: MasterReadonlyApiService,
+        private readonly masterTagsReadonlyApi: TagsReadonlyApiService,
+        private readonly masterContactReadonlyApi: MasterContactsReadonlyApiService,
+        private readonly masterLocationReadonlyApi: MasterLocationsReadonlyApiService,
+        private readonly masterExperienceReadonlyApi: MasterExperienceReadonlyApiService,
+        private readonly masterEducationReadonlyApi: MasterEducationReadonlyApiService,
+        private readonly masterCertificatesReadonlyApi: MasterCertificatesReadonlyApiService
     ) {
     }
 
@@ -79,15 +79,12 @@ export class MasterProfileInfoGeneratorFactoryService {
                     userCountry: this.getUserCountry(master.user),
                     userLanguages: this.getUserLanguages(master.user),
                     user: of(master.user),
-                    masterLocation: this.masterLocationApi.getByClientId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
-                    masterContacts: this.masterContactApi.getByClientId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
-                    masterTags: this.masterTagsApi.getByMasterId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
-                    experienceList: this.masterExperienceApi.get({
-                        professional: master.id.toString(),
-                        ordering: 'created'
-                    }).pipe(map(res => res.results)),
-                    educationList: this.masterEducationApi.getByMasterId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
-                    certificateList: this.certificatesApi.getByMasterId(master.id, {ordering: 'created'}).pipe(map(res => res.results)),
+                    masterLocation: this.getLocations(master.id),
+                    masterContacts: this.getContacts(master.id),
+                    masterTags: this.getTags(master.id),
+                    experienceList: this.getExperience(master.id),
+                    educationList: this.getEducation(master.id),
+                    certificateList: this.getCertificates(master.id),
                     publicReviewList: this.publicReviewsApi.get({
                         professional: master.id.toString(),
                         ordering: 'created'
@@ -95,6 +92,30 @@ export class MasterProfileInfoGeneratorFactoryService {
                 })
             )
         );
+    }
+
+    private getCertificates(masterId: number): Observable<Certificate[]> {
+        return this.masterCertificatesReadonlyApi.getByMasterId(masterId).pipe(map(res => res.results));
+    }
+
+    private getExperience(masterId: number): Observable<Experience[]> {
+        return this.masterExperienceReadonlyApi.getByMasterId(masterId).pipe(map(res => res.results));
+    }
+
+    private getEducation(masterId: number): Observable<Education[]> {
+        return this.masterEducationReadonlyApi.getByMasterId(masterId).pipe(map(res => res.results));
+    }
+
+    private getTags(masterId: number): Observable<Tag[]> {
+        return this.masterTagsReadonlyApi.getByMasterId(masterId).pipe(map(res => res.results));
+    }
+
+    private getContacts(masterId: number): Observable<MasterContact[]> {
+        return this.masterContactReadonlyApi.getByClientId(masterId).pipe(map(res => res.results));
+    }
+
+    private getLocations(masterId: number): Observable<MasterLocation[]> {
+        return this.masterLocationReadonlyApi.getByMasterId(masterId).pipe(map(res => res.results));
     }
 
     private getUserLanguages(user: PartialUserInterface): Observable<Language[]> {

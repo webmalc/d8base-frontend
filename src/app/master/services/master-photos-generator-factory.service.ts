@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {MasterPhoto} from '@app/master/models/master-photo';
-import {MasterPhotosApiService} from '@app/master/services/master-photos-api.service';
+import {MasterPhotosReadonlyApiService} from '@app/master/services/master-photos-readonly-api.service';
 import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import {map, switchMap} from 'rxjs/operators';
 export class MasterPhotosGeneratorFactoryService {
 
     constructor(
-        private readonly masterPhotosApi: MasterPhotosApiService,
+        private readonly masterPhotosReadonlyApi: MasterPhotosReadonlyApiService,
         private readonly masterManager: MasterManagerService
     ) {
     }
@@ -21,6 +21,6 @@ export class MasterPhotosGeneratorFactoryService {
     }
 
     private get(masterId: number): Observable<MasterPhoto[]> {
-        return this.masterPhotosApi.get({professional: masterId.toString()}).pipe(map(res => res.results));
+        return this.masterPhotosReadonlyApi.get({professional: masterId.toString()}).pipe(map(res => res.results));
     }
 }
