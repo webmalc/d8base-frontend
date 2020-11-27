@@ -17,8 +17,8 @@ import {AbstractLocationEditComponent} from '@app/shared/components/abstract-loc
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
+import {FlagMenuComponent} from '@app/shared/components/flag-menu/flag-menu.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
-import {MainMenuFooterToolbarComponent} from '@app/shared/components/main-menu/main-menu-footer-toolbar/main-menu-footer-toolbar.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {RatingFullStarComponent} from '@app/shared/components/rating-full-star/rating-full-star.component';
@@ -68,8 +68,8 @@ import {NumberDirective} from './directives/number.directive';
         ImageCropPopoverComponent,
         ServiceDetailsComponent,
         WizardProgressComponent,
-        MainMenuFooterToolbarComponent,
-        DefaultLocationPopoverComponent
+        DefaultLocationPopoverComponent,
+        FlagMenuComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -94,7 +94,8 @@ import {NumberDirective} from './directives/number.directive';
         DurationComponent,
         ServiceDetailsComponent,
         WizardProgressComponent,
-        DefaultLocationPopoverComponent
+        DefaultLocationPopoverComponent,
+        FlagMenuComponent
     ],
     imports: [
         CommonModule,

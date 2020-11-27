@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationFactory, CountriesApiService, MasterManagerService, UserLocationApiService} from '@app/core/services';
+import {once} from '@app/core/decorators/once';
+import {AuthenticationFactory, MasterManagerService} from '@app/core/services';
+import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
 import {MenuController, Platform} from '@ionic/angular';
-import {Observable} from 'rxjs';
-import {filter, switchMap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {first, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -17,17 +19,18 @@ export class HeaderComponent implements OnInit {
     constructor(
         public readonly masterManager: MasterManagerService,
         private readonly platform: Platform,
-        private readonly userLocationApi: UserLocationApiService,
-        private readonly countryApi: CountriesApiService,
         private readonly menuController: MenuController,
-        authenticationFactory: AuthenticationFactory
+        authenticationFactory: AuthenticationFactory,
+        private readonly userManager: UserManagerService
     ) {
         this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
     }
 
     public ngOnInit(): void {
-        this.getDefaultUserCountry()
-            .subscribe(c => this.countryCode = c.code.toLowerCase());
+        this.isAuthenticated$.pipe(first(), switchMap(
+            isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry())
+        )).subscribe(c => this.countryCode = c.code.toLowerCase());
+        this.closeFlagMenu();
     }
 
     public isDesktop(): boolean {
@@ -38,22 +41,20 @@ export class HeaderComponent implements OnInit {
         this.masterManager.becomeMaster().subscribe();
     }
 
-    public toggleMenu(menuId: string): void {
-        this.menuController.get(menuId).then(menu => {
-            if (menu.classList.contains('menu-pane-visible')) {
-                // the menu is at the side pane, toggle its disabled flag manually
-                menu.disabled = !menu.disabled;
-            }
-        });
+    public toggleMenu(menuId: string, animated: boolean = true): void {
+        this.menuController.get(menuId)
+            .then(menu => menu?.classList.contains('menu-pane-visible') ? menu.disabled = !menu.disabled : menu?.toggle(animated));
     }
 
-    private getDefaultUserCountry(): Observable<Country> {
-        return this.isAuthenticated$.pipe(
-            filter(isAuth => isAuth),
-            switchMap(_ => this.userLocationApi.getDefaultLocation().pipe(
-                filter(location => (location && location.country && true)),
-                switchMap(location => this.countryApi.getByEntityId(location.country as number))
-            ))
-        );
+    @once
+    private closeFlagMenu(): void {
+        this.toggleMenu('flag-menu', false);
+    }
+
+    private getTemporaryDefaultCountry(): Country {
+        const model = new Country();
+        model.code = 'ca';
+
+        return model;
     }
 }

@@ -1,11 +1,9 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-menu-toggle [autoHide]="false">
-                <ion-button (click)="toggleMenu('main-menu')">
-                    <ion-icon slot="icon-only" name="menu"></ion-icon>
-                </ion-button>
-            </ion-menu-toggle>
+            <ion-button (click)="toggleMenu('main-menu')">
+                <ion-icon name="menu" slot="icon-only"></ion-icon>
+            </ion-button>
         </ion-buttons>
         <ion-item lines="none" routerDirection="root"
                   routerLink="/"
@@ -69,10 +67,9 @@
                   routerDirection="forward">
             {{'template.sign-up'|translate}}
         </ion-item>
-        <ion-item class="ion-item-no-border" slot="end"
-                  *ngIf="(isAuthenticated$|async) && countryCode">
+        <ion-item (click)="toggleMenu('flag-menu')" *ngIf="countryCode" class="ion-item-no-border cursor-pointer"
+                  slot="end">
             <span class="flag-icon flag-icon-{{countryCode}}"></span>
         </ion-item>
-
     </ion-toolbar>
 </ion-header>
