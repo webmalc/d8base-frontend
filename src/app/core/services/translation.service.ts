@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {once} from '@app/core/decorators/once';
 import {UserSettings} from '@app/core/models/user-settings';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
+import {UserSettingsService} from '@app/shared/services/user-settings.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {EMPTY, Observable} from 'rxjs';
+import {filter, first, map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -24,30 +24,22 @@ export class TranslationService {
     constructor(
         private readonly translator: TranslateService,
         private readonly storageManager: StorageManagerService,
-        private readonly userSettingsApi: UserSettingsApiService,
+        private readonly userSettings: UserSettingsService,
         private readonly authenticationFactory: AuthenticationFactory
     ) {
     }
 
+    @once
     public init(): void {
         this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(first()).subscribe(
-            isAuthenticated => {
-                if (isAuthenticated) {
-                    this.getFromApi().subscribe(
-                        (lang: string) => {
-                            if (lang) {
-                                this.translator.setDefaultLang(lang);
-                                this.setStorage(lang);
-                            } else {
-                                this.initFromStorage();
-                            }
-                        },
-                        err => this.initFromStorage()
-                    );
-                } else {
-                    this.initFromStorage();
-                }
-            }
+            isAuthenticated => isAuthenticated ?
+                this.getFromApi().subscribe(
+                    (lang: string) => null !== lang ? this.setLang(lang) : this.initFromStorage(),
+                    _ => this.initFromStorage()
+                ) :
+                this.initFromStorage(),
+            _ => EMPTY,
+            () => this.subToUserSettings()
         );
     }
 
@@ -68,22 +60,24 @@ export class TranslationService {
         return Object.values(this.LANGUAGES);
     }
 
-    private initFromStorage(): void {
-        this.getStorage().then(
-            (defaultLang: string | null) => {
-                if (defaultLang !== null) {
-                    this.translator.setDefaultLang(defaultLang);
-                } else {
-                    this.translator.setDefaultLang(this.LANGUAGES.en);
-                    this.setStorage(this.LANGUAGES.en);
-                }
-            }
+    private subToUserSettings(): void {
+        this.userSettings.userSettings$.pipe(filter(data => data.language && true)).subscribe(
+            data => this.setLang(data.language)
         );
     }
 
-    private getFromApi(): Observable<string> {
-        return this.userSettingsApi.get().pipe(
-            map((data: ApiListResponseInterface<UserSettings>) => data.results[0].language as string)
+    private initFromStorage(): void {
+        this.getStorage().then(
+            (defaultLang: string | null) => null !== defaultLang ?
+                this.translator.setDefaultLang(defaultLang) :
+                this.setLang(this.LANGUAGES.en)
+        );
+    }
+
+    private getFromApi(): Observable<string | null> {
+        return this.userSettings.userSettings$.pipe(
+            first(),
+            map((data: UserSettings) => data?.language as string)
         );
     }
 
