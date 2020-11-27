@@ -1,7 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {TranslateModule} from '@ngx-translate/core';
 import {StorageManagerMock} from '../../../../testing/mocks';
 import {NominatimService} from './nominatim.service';
 
@@ -11,8 +10,7 @@ describe('NominatimService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule,
-                TranslateModule.forRoot()
+                HttpClientTestingModule
             ],
             providers: [
                 {provide: StorageManagerService, useClass: StorageManagerMock}

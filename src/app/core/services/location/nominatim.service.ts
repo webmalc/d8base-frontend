@@ -6,7 +6,6 @@ import {NominatimSearchResponseInterface} from '@app/core/interfaces/nominatim-s
 import {NominatimReverseResponse} from '@app/core/models/nominatim-reverse-response';
 import {PostalCode} from '@app/core/models/postal-code';
 import {HelperService} from '@app/core/services/helper.service';
-import {TranslationService} from '@app/core/services/translation.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {Coords} from '@app/shared/interfaces/coords';
@@ -23,16 +22,14 @@ export class NominatimService {
     private readonly REVERSE_URL = environment.nominatim_reverse_url;
     private readonly SEARCH_URL = environment.nominatim_search_url;
 
-    constructor(private readonly http: HttpClient, private readonly trans: TranslationService) {
+    constructor(private readonly http: HttpClient) {
     }
 
-    public reverse(coords: Coords, lang?: string): Observable<NominatimReverseResponse | null> {
-        const responseLang = lang ? lang : this.trans.getCurrentLang();
-
+    public reverse(coords: Coords): Observable<NominatimReverseResponse | null> {
         return this.http.get<NominatimReverseResponseInterface | null>(
             this.REVERSE_URL,
             {
-                headers: {'accept-language': responseLang},
+                headers: {'accept-language': 'en'},
                 params: {lat: coords.latitude.toString(), lon: coords.longitude.toString(), format: 'jsonv2'}
             }
         ).pipe(
