@@ -5,7 +5,7 @@ import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
 import {MenuController, Platform} from '@ionic/angular';
 import {Observable, of, Subscription} from 'rxjs';
-import {first, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
