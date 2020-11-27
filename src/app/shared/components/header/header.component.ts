@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {once} from '@app/core/decorators/once';
 import {AuthenticationFactory, MasterManagerService} from '@app/core/services';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
 import {MenuController, Platform} from '@ionic/angular';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {first, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -12,9 +12,10 @@ import {first, switchMap} from 'rxjs/operators';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
     public isAuthenticated$: Observable<boolean>;
     public countryCode: string;
+    private countrySub: Subscription;
 
     constructor(
         public readonly masterManager: MasterManagerService,
@@ -26,8 +27,12 @@ export class HeaderComponent implements OnInit {
         this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
     }
 
+    public ngOnDestroy(): void {
+        this.countrySub.unsubscribe();
+    }
+
     public ngOnInit(): void {
-        this.isAuthenticated$.pipe(first(), switchMap(
+        this.countrySub = this.isAuthenticated$.pipe(switchMap(
             isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry())
         )).subscribe(c => this.countryCode = c.code.toLowerCase());
         this.closeFlagMenu();
