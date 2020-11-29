@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {OrderConfirmationComponent} from '@app/order/components';
-import {orderSteps} from './order-steps';
 import {OrderPage} from './order.page';
 
 const routes: Routes = [
@@ -12,15 +11,13 @@ const routes: Routes = [
     },
     {
         path: ':id',
+        pathMatch: 'full',
+        redirectTo: ':id/0'
+    },
+    {
+        path: ':id/:step',
         component: OrderPage,
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: '1'
-            },
-            ...orderSteps
-        ]
+        pathMatch: 'full'
     }
 ];
 

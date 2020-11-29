@@ -47,8 +47,10 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
     private showHttpError(error: HttpErrorResponse): void {
         if (400 === error.status) {
-            const messages: string[] = error.error.__all__;
-            if (Array.isArray(messages)) {
+            const messages: string[] = Array.isArray(error.error?.__all__)
+                ? error.error.__all__
+                : Object.entries(error.error).map(e => `${e[0]}: ${e[1]}`);
+            if (messages.length > 0) {
                 messages.forEach(message => this.showMessage(message));
             } else {
                 this.showMessage(error.message);

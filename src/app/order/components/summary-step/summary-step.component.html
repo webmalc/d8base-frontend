@@ -1,8 +1,10 @@
-<ion-list>
-    <ion-list-header class="fs20">
-        <ion-label>{{ 'order.comment-header' | translate }}</ion-label>
-    </ion-list-header>
-    <ion-item>
-        <ion-textarea></ion-textarea>
-    </ion-item>
-</ion-list>
+<ion-row>
+    <ion-col>
+        <ion-button expand="block" color="medium" (click)="prevStep()">
+            {{ 'global.back' | translate }}
+        </ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button expand="block" color="success" (click)="onSubmit()">{{ 'order.order-service' | translate }}</ion-button>
+    </ion-col>
+</ion-row>

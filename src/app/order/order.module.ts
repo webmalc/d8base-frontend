@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {
+    ClientDetailsStepComponent,
     DateTimeStepComponent,
     LocationStepComponent,
     OrderConfirmationComponent,
@@ -12,7 +13,7 @@ import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {OrderRoutingModule} from './order-routing.module';
 import {OrderPage} from './order.page';
-import {OrderService} from './services/order.service';
+import {OrderWizardStateService} from './services/order-wizard-state.service';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {OrderService} from './services/order.service';
         OrderDetailsComponent,
         DateTimeStepComponent,
         LocationStepComponent,
+        ClientDetailsStepComponent,
         SummaryStepComponent,
         OrderConfirmationComponent
     ],
@@ -32,7 +34,7 @@ import {OrderService} from './services/order.service';
         OrderRoutingModule
     ],
     providers: [
-        OrderService
+        OrderWizardStateService
     ]
 })
 export class OrderPageModule {

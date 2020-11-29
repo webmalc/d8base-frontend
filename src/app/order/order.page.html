@@ -5,51 +5,30 @@
             <ion-col sizeXs="12" sizeSm="8" sizeMd="8" sizeLg="7" sizeXl="5" offset-xl="-1" offset-lg="-1">
                 <ion-item color="light" lines="full">
                     <ion-buttons slot="start">
-                        <ion-button routerLink="/service/{{service?.id}}" routerDirection="back">
+                        <ion-button routerLink="/service/{{(service$ | async)?.id}}" routerDirection="back">
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <ion-title>{{ 'order.title' | translate }}</ion-title>
+                    <ion-title>{{ currentStepTitle | translate }}</ion-title>
                 </ion-item>
-
-                <app-wizard-progress [stepIndex]="currentStepIndex" [steps]="steps"></app-wizard-progress>
-
-                <ion-row *ngIf="isLastStep && isFormValid">
-                    <ion-col>
-                        <ion-text color="success">
-                            {{ 'order.final-step' | translate }}
-                        </ion-text>
-                    </ion-col>
-                </ion-row>
-
                 <ion-row>
                     <ion-col>
                         <ion-list>
                             <ion-list-header class="fs20">
                                 {{ 'order.selected-service' | translate }}
                             </ion-list-header>
-                            <app-service-widget [service]="service" [master]="master"></app-service-widget>
+                            <app-service-widget [service]="service$ | async" [master]="master$ | async"></app-service-widget>
                             <app-order-details [order]="order$ | async"></app-order-details>
                         </ion-list>
                     </ion-col>
                 </ion-row>
-
-                <router-outlet></router-outlet>
-
-                <ion-row>
-                    <ion-col>
-                        <ion-button expand="block" color="medium" [disabled]="isFirstStep" (click)="back()">
-                            {{ 'global.back' | translate }}
-                        </ion-button>
-                    </ion-col>
-                    <ion-col>
-                        <ion-button *ngIf="!isLastStep" expand="block"
-                                    (click)="next()">{{ 'global.forward' | translate }}</ion-button>
-                        <ion-button *ngIf="isLastStep" expand="block" color="success"
-                                    [disabled]="!isFormValid"
-                                    (click)="submit()">{{ 'order.order-service' | translate }}</ion-button>
-                    </ion-col>
-                </ion-row>
+                <ng-container [ngSwitch]="currentStepIndex">
+                    <app-date-time-step *ngSwitchCase="0"></app-date-time-step>
+                    <app-location-step *ngSwitchCase="1"></app-location-step>
+                    <app-client-details-step *ngSwitchCase="2"></app-client-details-step>
+                    <app-summary-step *ngSwitchCase="3" (submit)="submit()"></app-summary-step>
+                    <app-date-time-step *ngSwitchDefault></app-date-time-step>
+                </ng-container>
             </ion-col>
         </ion-row>
     </ion-grid>

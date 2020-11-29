@@ -4,20 +4,20 @@ import {OrderWizardStateService} from '@app/order/services/order-wizard-state.se
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
-import {DateTimeStepComponent} from './date-time-step.component';
+import {ClientDetailsStepComponent} from './client-details-step.component';
 
-describe('ServiceOrderStepOneComponent', () => {
-    let component: DateTimeStepComponent;
-    let fixture: ComponentFixture<DateTimeStepComponent>;
+describe('ClientDetailsStepComponent', () => {
+    let component: ClientDetailsStepComponent;
+    let fixture: ComponentFixture<ClientDetailsStepComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DateTimeStepComponent],
+            declarations: [ClientDetailsStepComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
             providers: [OrderWizardStateService]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(DateTimeStepComponent);
+        fixture = TestBed.createComponent(ClientDetailsStepComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

@@ -36,13 +36,13 @@ export class TranslationService {
                     this.getFromApi().subscribe(
                         (lang: string) => {
                             if (lang) {
-                                this.translator.setDefaultLang(lang);
+                                this.translator.use(lang);
                                 this.setStorage(lang);
                             } else {
                                 this.initFromStorage();
                             }
                         },
-                        err => this.initFromStorage()
+                        () => this.initFromStorage()
                     );
                 } else {
                     this.initFromStorage();
@@ -52,7 +52,7 @@ export class TranslationService {
     }
 
     public setLang(lang: string): void {
-        this.translator.setDefaultLang(lang);
+        this.translator.use(lang);
         this.setStorage(lang);
     }
 
@@ -61,7 +61,7 @@ export class TranslationService {
     }
 
     public getCurrentLang(): string {
-        return this.translator.getDefaultLang();
+        return this.translator.currentLang;
     }
 
     public getLanguagesAsArray(): Array<string> {
@@ -70,11 +70,11 @@ export class TranslationService {
 
     private initFromStorage(): void {
         this.getStorage().then(
-            (defaultLang: string | null) => {
-                if (defaultLang !== null) {
-                    this.translator.setDefaultLang(defaultLang);
+            (lang: string | null) => {
+                if (lang) {
+                    this.translator.use(lang);
                 } else {
-                    this.translator.setDefaultLang(this.LANGUAGES.en);
+                    this.translator.use(this.LANGUAGES.en);
                     this.setStorage(this.LANGUAGES.en);
                 }
             }

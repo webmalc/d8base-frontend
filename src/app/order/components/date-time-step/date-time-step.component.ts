@@ -1,22 +1,31 @@
 import {Component} from '@angular/core';
-import {OrderService} from '@app/order/services/order.service';
+import {StepComponent} from '@app/order/abstract/step';
+import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
 
 @Component({
-    selector: 'app-service-order-step-one',
+    selector: 'app-date-time-step',
     templateUrl: './date-time-step.component.html',
     styleUrls: ['./date-time-step.component.scss']
 })
-export class DateTimeStepComponent {
-    constructor(private readonly orderService: OrderService) {
+export class DateTimeStepComponent extends StepComponent {
+    public date: Date;
+    public time: Date;
+
+    constructor(wizardState: OrderWizardStateService) {
+        super(wizardState);
     }
 
     public updateDate(event: CustomEvent): void {
-        const date = new Date(event.detail.value);
-        this.orderService.update({date});
+        this.date = new Date(event.detail.value);
     }
 
     public updateTime(event: CustomEvent): void {
-        const time = new Date(event.detail.value);
-        this.orderService.update({time});
+        this.time = new Date(event.detail.value);
+    }
+
+    protected update(): void {
+        const date = this.date?.toDateString() || '';
+        const time = this.time?.toTimeString() || '';
+        this.wizardState.update({start_datetime: new Date(`${date} ${time}`).toISOString()});
     }
 }

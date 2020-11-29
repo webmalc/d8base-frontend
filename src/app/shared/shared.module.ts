@@ -11,8 +11,7 @@ import {
     MainMenuComponent,
     MasterWidgetComponent,
     MoreInfoComponent,
-    ServiceWidgetComponent,
-    WizardProgressComponent
+    ServiceWidgetComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -71,7 +70,6 @@ import {NumberDirective} from './directives/number.directive';
         DurationComponent,
         ImageCropPopoverComponent,
         ServiceWidgetComponent,
-        WizardProgressComponent,
         MainMenuFooterToolbarComponent,
         DefaultLocationPopoverComponent,
         MoreInfoComponent,
@@ -100,7 +98,6 @@ import {NumberDirective} from './directives/number.directive';
         RatingHalfStarComponent,
         DurationComponent,
         ServiceWidgetComponent,
-        WizardProgressComponent,
         DefaultLocationPopoverComponent
     ],
     imports: [

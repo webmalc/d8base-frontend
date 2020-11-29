@@ -453,23 +453,27 @@
     "save": "Save"
   },
   "order": {
+    "step": {
+      "date-time": "Date/time",
+      "location": "Place",
+      "client-details": "Order on behalf of",
+      "summary": "Service order"
+    },
     "title": "Service order",
     "selected-service": "Selected service",
     "order-service": "Place order",
-    "date-time": "Date/time",
-    "location": "Place",
     "location-header": "Service location",
     "location-online": "Online",
     "location-professional": "Professional",
     "location-client": "Client",
-    "summary": "Summary",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
     "comment-header": "Optional comments",
     "date-time-header": "Service date and time",
     "date-time-subheader": "Pick date and time",
-    "order.date": "Date",
-    "order.time": "Time",
+    "date": "Date",
+    "time": "Time",
     "not-selected": "not selected",
+    "client-details": "Service order",
     "done": "The order was sent",
     "done-details": "Please wait for confirmation from the professional.",
     "confirmation-sent": "Order details were sent to the e-mail address"

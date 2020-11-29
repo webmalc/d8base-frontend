@@ -10,10 +10,23 @@
     </ion-item>
     <ion-item>
         <ion-label>{{ 'order.date' | translate }}</ion-label>
-        <ion-datetime placeholder="{{ 'order.not-selected' | translate }}" (ionChange)="updateDate($event)"></ion-datetime>
+        <ion-datetime placeholder="{{ 'order.not-selected' | translate }}"
+                      (ionChange)="updateDate($event)"></ion-datetime>
     </ion-item>
-    <ion-item>
+    <ion-item [disabled]="!date">
         <ion-label>{{ 'order.time' | translate }}</ion-label>
-        <ion-datetime placeholder="{{ 'order.not-selected' | translate }}" display-format="HH:mm" picker-format="HH:mm" (ionChange)="updateTime($event)"></ion-datetime>
+        <ion-datetime placeholder="{{ 'order.not-selected' | translate }}" display-format="HH:mm" picker-format="HH:mm"
+                      (ionChange)="updateTime($event)"></ion-datetime>
     </ion-item>
 </ion-list>
+
+<ion-row>
+    <ion-col>
+        <ion-button expand="block" color="medium" [disabled]="true">
+            {{ 'global.back' | translate }}
+        </ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button expand="block" (click)="nextStep()" [disabled]="!date || !time">{{ 'global.forward' | translate }}</ion-button>
+    </ion-col>
+</ion-row>
