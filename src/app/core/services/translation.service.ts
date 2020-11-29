@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {once} from '@app/core/decorators/once';
 import {UserSettings} from '@app/core/models/user-settings';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
+import {UserSettingsService} from '@app/shared/services/user-settings.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import {first, map} from 'rxjs/operators';
@@ -14,7 +14,6 @@ import {first, map} from 'rxjs/operators';
 export class TranslationService {
 
     public static readonly DIR = './assets/i18n/';
-    public static readonly SUFFIX = '.json';
     public readonly LANGUAGES = {
         ru: 'ru',
         en: 'en'
@@ -24,11 +23,12 @@ export class TranslationService {
     constructor(
         private readonly translator: TranslateService,
         private readonly storageManager: StorageManagerService,
-        private readonly userSettingsApi: UserSettingsApiService,
+        private readonly userSettings: UserSettingsService,
         private readonly authenticationFactory: AuthenticationFactory
     ) {
     }
 
+    @once
     public init(): void {
         this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(first()).subscribe(
             isAuthenticated => {
@@ -81,9 +81,10 @@ export class TranslationService {
         );
     }
 
-    private getFromApi(): Observable<string> {
-        return this.userSettingsApi.get().pipe(
-            map((data: ApiListResponseInterface<UserSettings>) => data.results[0].language as string)
+    private getFromApi(): Observable<string | null> {
+        return this.userSettings.userSettings$.pipe(
+            first(),
+            map((data: UserSettings) => data?.language as string)
         );
     }
 

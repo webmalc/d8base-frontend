@@ -49,7 +49,8 @@ export class AuthInterceptor implements HttpInterceptor {
             environment.backend.url + environment.backend.register,
             environment.backend.url + environment.backend.auth,
             environment.backend.url + environment.backend.reset_password,
-            environment.backend.url + environment.backend.reset_password_link
+            environment.backend.url + environment.backend.reset_password_link,
+            environment.backend.url + environment.backend.is_user_registered
         ];
     }
 }

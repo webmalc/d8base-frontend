@@ -58,6 +58,8 @@ export const environment = {
         master_photos: '/en/api/accounts/professional-photos/',
         master_schedule: '/en/api/accounts/professional-schedule',
         services_readonly: '/en/api/services/services/',
+        service_tag_readonly: '/en/api/services/tags/',
+        master_photos_readonly: '/en/api/professionals/professional-photos/',
         url: 'http://localhost:8000'
     },
     client_id: '',

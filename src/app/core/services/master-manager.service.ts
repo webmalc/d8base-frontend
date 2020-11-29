@@ -37,7 +37,7 @@ export class MasterManagerService {
 
     public isMaster(): Observable<boolean> {
         return this.userManager.getCurrentUser().pipe(map(user => user.account_type === TypeOfUser.Master),
-            catchError(err => of(false)));
+            catchError(_ => of(false)));
     }
 
     public becomeMaster(): Observable<User> {

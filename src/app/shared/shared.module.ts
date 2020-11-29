@@ -16,11 +16,10 @@ import {
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
-import {ContactsTabComponent} from '@app/shared/components/contacts-tab/contacts-tab.component';
 import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
+import {FlagMenuComponent} from '@app/shared/components/flag-menu/flag-menu.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
-import {MainMenuFooterToolbarComponent} from '@app/shared/components/main-menu/main-menu-footer-toolbar/main-menu-footer-toolbar.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {RatingFullStarComponent} from '@app/shared/components/rating-full-star/rating-full-star.component';
@@ -50,7 +49,6 @@ import {NumberDirective} from './directives/number.directive';
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        ContactsTabComponent,
         UserLocationMapComponent,
         ReviewsListComponent,
         MediaLinksComponent,
@@ -70,16 +68,16 @@ import {NumberDirective} from './directives/number.directive';
         DurationComponent,
         ImageCropPopoverComponent,
         ServiceWidgetComponent,
-        MainMenuFooterToolbarComponent,
         DefaultLocationPopoverComponent,
         MoreInfoComponent,
-        MasterWidgetComponent
+        MasterWidgetComponent,
+        DefaultLocationPopoverComponent,
+        FlagMenuComponent
     ],
     exports: [
         ErrorFlashbagComponent,
         PictureSelectorComponent,
         DebounceDirective,
-        ContactsTabComponent,
         ReviewsListComponent,
         MediaLinksComponent,
         HeaderComponent,
@@ -98,7 +96,8 @@ import {NumberDirective} from './directives/number.directive';
         RatingHalfStarComponent,
         DurationComponent,
         ServiceWidgetComponent,
-        DefaultLocationPopoverComponent
+        DefaultLocationPopoverComponent,
+        FlagMenuComponent
     ],
     imports: [
         CommonModule,

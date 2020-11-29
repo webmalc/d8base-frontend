@@ -3,11 +3,14 @@ import {once} from '@app/core/decorators/once';
 import {User} from '@app/core/models/user';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
+import {CountriesApiService} from '@app/core/services/location/countries-api.service';
+import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
+import {Country} from '@app/profile/models/country';
 import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
-import {filter, map, tap} from 'rxjs/operators';
+import {filter, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +22,9 @@ export class UserManagerService {
 
     constructor(
         private readonly api: ApiClientService,
-        private readonly auth: AuthenticationService
+        private readonly auth: AuthenticationService,
+        private readonly userLocationApi: UserLocationApiService,
+        private readonly countryApi: CountriesApiService
     ) {
     }
 
@@ -27,6 +32,16 @@ export class UserManagerService {
     public subscribeToAuthSubject(): void {
         this.auth.isAuthenticated$.pipe(filter(isAuth => isAuth === false)).subscribe(
             _ => this.user = null
+        );
+    }
+
+    public getDefaultUserCountry(): Observable<Country> {
+        return this.auth.isAuthenticated$.pipe(
+            filter(isAuth => isAuth),
+            switchMap(_ => this.userLocationApi.getDefaultLocation().pipe(
+                filter(location => (location && location.country && true)),
+                switchMap(location => this.countryApi.getByEntityId(location.country as number))
+            ))
         );
     }
 

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {MasterContact} from '@app/master/models/master-contact';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
@@ -15,7 +14,7 @@ import {map} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class MasterContactsApiService extends AbstractApiService<ClientContactInterface>
-    implements ContactsApiServiceInterface, ApiServiceInterface<ClientContactInterface> {
+    implements ContactsApiServiceInterface {
 
     private readonly url = environment.backend.professional_contact;
 
@@ -26,12 +25,12 @@ export class MasterContactsApiService extends AbstractApiService<ClientContactIn
     public getByClientId(
         masterId: number,
         params?: { [param: string]: string | string[]; }
-    ): Observable<ApiListResponseInterface<ClientContactInterface>> {
+    ): Observable<ApiListResponseInterface<MasterContact>> {
         return super.get({professional: masterId.toString(10), ...params});
     }
 
-    public getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>> {
-        return this.client.get<ApiListResponseInterface<ClientContactInterface>>(this.url).pipe(
+    public getCurrentClientContacts(): Observable<ApiListResponseInterface<MasterContact>> {
+        return this.client.get<ApiListResponseInterface<MasterContact>>(this.url).pipe(
             map(response => {
                 response.results = plainToClass(MasterContact, response.results);
 
@@ -45,7 +44,7 @@ export class MasterContactsApiService extends AbstractApiService<ClientContactIn
     }
 
     // @ts-ignore
-    protected transform(data: ClientContactInterface | ClientContactInterface[]): ClientContactInterface | ClientContactInterface[] {
+    protected transform(data: MasterContact | MasterContact[]): MasterContact | MasterContact[] {
         return plainToClass(MasterContact, data);
     }
 }

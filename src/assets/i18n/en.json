@@ -40,8 +40,8 @@
     "search-fail-text": "No items found"
   },
   "units": {
-    "0": "KM",
-    "1": "Mi"
+    "0": "Km",
+    "1": "Miles"
   },
   "template": {
     "main-menu-title": "Navigation",
@@ -472,10 +472,16 @@
     "date-time-subheader": "Pick date and time",
     "date": "Date",
     "time": "Time",
-    "not-selected": "not selected",
     "client-details": "Service order",
     "done": "The order was sent",
     "done-details": "Please wait for confirmation from the professional.",
     "confirmation-sent": "Order details were sent to the e-mail address"
+  },
+  "flag-menu": {
+    "language": "Language",
+    "currency": "Currency",
+    "units": "Km / Miles",
+    "hide-last-name": "Hide last name",
+    "dark-theme": "Dark theme"
   }
 }
