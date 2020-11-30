@@ -1,0 +1,22 @@
+<app-header></app-header>
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <ion-row class="ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="8" sizeMd="8" sizeLg="7" sizeXl="5" offset-xl="-1" offset-lg="-1">
+                <ion-item color="light" lines="full">
+                    <ion-buttons slot="start">
+                        <ion-button routerLink="/search" routerDirection="back">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <ion-title>{{ 'Информация об услуге' }}</ion-title>
+                </ion-item>
+                <ng-container *ngIf="service">
+                    <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
+                    <ion-button [routerLink]="'/order/' + service.id">Выбрать</ion-button>
+                </ng-container>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer></app-footer>

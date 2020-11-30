@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 import {User} from '@app/core/models/user';
 import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {MasterList} from '@app/master/models/master-list';
@@ -15,7 +16,7 @@ describe('SearchResultComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SearchResultComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
             providers: [
                 {provide: PhotoSanitizerService, useValue: {sanitize: (data: any): any => data}}
             ]

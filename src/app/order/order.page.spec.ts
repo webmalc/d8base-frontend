@@ -1,6 +1,7 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -18,6 +19,9 @@ describe('OrderPage', () => {
                 TranslateModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule
+            ],
+            providers: [
+                OrderWizardStateService
             ]
         }).compileComponents();
 

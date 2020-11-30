@@ -1,9 +1,3 @@
-<ion-item *ngIf="order?.date" lines="none">
-  <p><b>{{ 'order.date' | translate }}:</b> {{order.date.toLocaleDateString()}}</p>
-</ion-item>
-<ion-item *ngIf="order?.time" lines="none">
-  <p><b>{{ 'order.time' | translate }}:</b> {{order.time.toLocaleTimeString()}}</p>
-</ion-item>
-<ion-item *ngIf="order?.location" lines="none">
-  <p><b>{{ 'order.location' | translate }}:</b> {{'order.' + order.location | translate }}</p>
+<ion-item *ngIf="order?.start_datetime" lines="none">
+    <p><b>{{ 'order.date' | translate }}:</b> {{ order.start_datetime | date:'medium' }}</p>
 </ion-item>

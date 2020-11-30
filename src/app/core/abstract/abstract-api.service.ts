@@ -12,8 +12,8 @@ export abstract class AbstractApiService<T extends {id: number}> extends Abstrac
         super(client);
     }
 
-    public create(data: T): Observable<T> {
-        return this.client.post<T, T>(this.getUrl(), HelperService.clear(data)).pipe(
+    public create(data: Partial<T>): Observable<T> {
+        return this.client.post<T, Partial<T>>(this.getUrl(), HelperService.clear(data)).pipe(
             map(raw => this.transform(raw))
         );
     }

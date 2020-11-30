@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {ServiceDetailsComponent} from './service-details.component';
+import {MasterWidgetComponent} from './master-widget.component';
 
-describe('ServiceDetailsComponent', () => {
-    let component: ServiceDetailsComponent;
-    let fixture: ComponentFixture<ServiceDetailsComponent>;
+describe('MasterWidgetComponent', () => {
+    let component: MasterWidgetComponent;
+    let fixture: ComponentFixture<MasterWidgetComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ServiceDetailsComponent],
+            declarations: [MasterWidgetComponent],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(ServiceDetailsComponent);
+        fixture = TestBed.createComponent(MasterWidgetComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

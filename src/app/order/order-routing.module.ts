@@ -1,20 +1,23 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {orderSteps} from './order-steps';
+import {OrderConfirmationComponent} from '@app/order/components';
 import {OrderPage} from './order.page';
 
 const routes: Routes = [
     {
+        path: 'done',
+        pathMatch: 'full',
+        component: OrderConfirmationComponent
+    },
+    {
         path: ':id',
+        pathMatch: 'full',
+        redirectTo: ':id/0'
+    },
+    {
+        path: ':id/:step',
         component: OrderPage,
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: '1'
-            },
-            ...orderSteps
-        ]
+        pathMatch: 'full'
     }
 ];
 

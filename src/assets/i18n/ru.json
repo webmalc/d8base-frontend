@@ -30,6 +30,10 @@
     },
     "save": "Сохранить"
   },
+  "accordion": {
+    "expand": "Подробнее",
+    "collapse": "Свернуть"
+  },
   "ion-selectable": {
     "close-button-text": "Закрыть",
     "search-text": "Поиск",
@@ -50,7 +54,7 @@
     "profile": "Профиль",
     "master-profile": "Профиль мастера",
     "logout": "Выйти",
-    "download" : "Скачать приложение",
+    "download": "Скачать приложение",
     "become-master": "Стать мастером",
     "my-orders": "Мои заказы",
     "about": "О сервисе",
@@ -120,7 +124,7 @@
     },
     "button": "Сохранить"
   },
-  "profile-page" : {
+  "profile-page": {
     "profile": "Профиль",
     "settings": "Настройки",
     "plugins": "Плагины",
@@ -167,15 +171,15 @@
     "tags": "Теги"
   },
   "bookmarks": {
-    "no-bookmarks" : "В ваших закладках пусто"
+    "no-bookmarks": "В ваших закладках пусто"
   },
   "list-item": {
     "add-new": "Добавить еще"
   },
   "duration": {
-      "days": "дни",
-      "hours": "часы",
-      "minutes": "минуты"
+    "days": "дни",
+    "hours": "часы",
+    "minutes": "минуты"
   },
   "service-publish": {
     "back-button": "Назад",
@@ -535,23 +539,34 @@
     "save": "Сохранить"
   },
   "order": {
+    "step": {
+      "date-time": "Выбор даты и времени",
+      "location": "Выбор места оказания услуги",
+      "client-details": "Заказ услуги",
+      "summary": "Заказ услуги"
+    },
     "title": "Заказ услуги",
     "selected-service": "Выбранная услуга",
     "order-service": "Бронировать",
-    "date-time": "Дата/время",
-    "location": "Место",
     "location-header": "Место оказания услуги",
     "location-online": "Онлайн услуга",
     "location-professional": "Приём у мастера",
     "location-client": "Выезд к клиенту",
-    "summary": "Завершение",
     "final-step": "Для завершения бронирования осталось нажать кнопку «Бронировать».",
     "comment-header": "Комментарий к заказу",
     "date-time-header": "Дата и время услуги",
     "date-time-subheader": "Выберите желаемую дату и время начала услуги",
     "date": "Дата услуги",
     "time": "Время начала услуги",
-    "not-selected": "не выбрано"
+    "done": "Заказ сформирован",
+    "done-details": "Ваше бронирование успешно отправлено мастеру для подтверждения.",
+    "confirmation-sent": "E-mail c деталями бронирования  отправлен на Ваш электронный адрес",
+    "not-selected": "Не выбрано",
+    "is-for-me": "Запись для меня",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "email": "E-mail",
+    "tel": "Телефон"
   },
   "flag-menu": {
     "language": "Язык интерфейса",

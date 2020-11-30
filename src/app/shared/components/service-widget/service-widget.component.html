@@ -1,0 +1,17 @@
+<ion-item lines="none">
+    <ion-label>{{ service?.name }}</ion-label>
+    <ion-note slot="end">
+        <p><b>{{ service?.price.price }} {{ service?.price.price_currency }}</b></p>
+        <p>{{ service?.duration }}</p>
+    </ion-note>
+</ion-item>
+<app-master-widget [master]="master"></app-master-widget>
+<app-more-info *ngIf="!alwaysExpanded else serviceDescription">
+    <ng-container *ngTemplateOutlet="serviceDescription"></ng-container>
+</app-more-info>
+
+<ng-template #serviceDescription>
+    <ion-item lines="none">
+        <p>{{ service?.description }}</p>
+    </ion-item>
+</ng-template>

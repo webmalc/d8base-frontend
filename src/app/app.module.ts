@@ -1,4 +1,4 @@
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule, Title} from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import {IpDataService} from '@app/core/services/location/ip-data.service';
 import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
 import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
 import {LocationService} from '@app/core/services/location/location.service';
-import {TranslationService} from '@app/core/services/translation.service';
+import {JsonTranslateLoader} from '@app/shared/services/json-translate-loader';
 import {SharedModule} from '@app/shared/shared.module';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
@@ -24,7 +24,6 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 import {IonicStorageModule} from '@ionic/storage';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import * as Sentry from '@sentry/angular';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {AppRoutingModule} from './app-routing.module';
@@ -45,8 +44,7 @@ import {AppComponent} from './app.component';
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: (http: HttpClient) => new TranslateHttpLoader(http, TranslationService.DIR, TranslationService.SUFFIX),
-                deps: [HttpClient]
+                useClass: JsonTranslateLoader
             }
         }),
         SharedModule
@@ -102,4 +100,5 @@ import {AppComponent} from './app.component';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

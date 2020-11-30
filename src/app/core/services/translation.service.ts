@@ -5,8 +5,8 @@ import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {UserSettingsService} from '@app/shared/services/user-settings.service';
 import {TranslateService} from '@ngx-translate/core';
-import {EMPTY, Observable} from 'rxjs';
-import {filter, first, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {first, map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +14,6 @@ import {filter, first, map} from 'rxjs/operators';
 export class TranslationService {
 
     public static readonly DIR = './assets/i18n/';
-    public static readonly SUFFIX = '.json';
     public readonly LANGUAGES = {
         ru: 'ru',
         en: 'en'
@@ -32,19 +31,28 @@ export class TranslationService {
     @once
     public init(): void {
         this.authenticationFactory.getAuthenticator().isAuthenticated$.pipe(first()).subscribe(
-            isAuthenticated => isAuthenticated ?
-                this.getFromApi().subscribe(
-                    (lang: string) => null !== lang ? this.setLang(lang) : this.initFromStorage(),
-                    _ => this.initFromStorage()
-                ) :
-                this.initFromStorage(),
-            _ => EMPTY,
-            () => this.subToUserSettings()
+            isAuthenticated => {
+                if (isAuthenticated) {
+                    this.getFromApi().subscribe(
+                        (lang: string) => {
+                            if (lang) {
+                                this.translator.use(lang);
+                                this.setStorage(lang);
+                            } else {
+                                this.initFromStorage();
+                            }
+                        },
+                        () => this.initFromStorage()
+                    );
+                } else {
+                    this.initFromStorage();
+                }
+            }
         );
     }
 
     public setLang(lang: string): void {
-        this.translator.setDefaultLang(lang);
+        this.translator.use(lang);
         this.setStorage(lang);
     }
 
@@ -53,24 +61,22 @@ export class TranslationService {
     }
 
     public getCurrentLang(): string {
-        return this.translator.getDefaultLang();
+        return this.translator.currentLang;
     }
 
     public getLanguagesAsArray(): Array<string> {
         return Object.values(this.LANGUAGES);
     }
 
-    private subToUserSettings(): void {
-        this.userSettings.userSettings$.pipe(filter(data => data.language && true)).subscribe(
-            data => this.setLang(data.language)
-        );
-    }
-
     private initFromStorage(): void {
         this.getStorage().then(
-            (defaultLang: string | null) => null !== defaultLang ?
-                this.translator.setDefaultLang(defaultLang) :
-                this.setLang(this.LANGUAGES.en)
+            (lang: string | null) => {
+                if (lang) {
+                    this.translator.use(lang);
+                } else {
+                    this.setLang(lang);
+                }
+            }
         );
     }
 

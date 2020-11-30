@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {DepartureComponent} from '@app/service/components/departure/departure.component';
+import {ServiceDetailsPageComponent} from '@app/service/components/service-details-page/service-details-page.component';
 import {ServicePublishFinalStepComponent} from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import {ServicePublishStepFiveComponent} from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import {ServicePublishStepFourComponent} from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
@@ -67,6 +68,10 @@ const routes: Routes = [
         path: 'publish/final',
         component: ServicePublishFinalStepComponent,
         canActivate: [ServicePublishGuardService]
+    },
+    {
+        path: ':id',
+        component: ServiceDetailsPageComponent
     }
 ];
 
