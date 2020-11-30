@@ -1,23 +1,23 @@
 <form>
     <ion-item lines="none">
-        <ion-label>Запись для меня</ion-label>
+        <ion-label>{{ 'order.is-for-me' | translate }}</ion-label>
         <ion-checkbox (ionChange)="toggleIsForMe($event)"></ion-checkbox>
     </ion-item>
     <ion-list>
         <ion-item [disabled]="isForMe">
-            <ion-label position="floating">{{ 'Имя' | translate }}</ion-label>
+            <ion-label position="floating">{{ 'order.name' | translate }}</ion-label>
             <ion-input [required]="true"></ion-input>
         </ion-item>
         <ion-item [disabled]="isForMe">
-            <ion-label position="floating">{{ 'Фамилия' | translate }}</ion-label>
+            <ion-label position="floating">{{ 'order.surname' | translate }}</ion-label>
             <ion-input></ion-input>
         </ion-item>
         <ion-item [disabled]="isForMe">
-            <ion-label position="floating">E-{{ 'E-mail' | translate }}</ion-label>
+            <ion-label position="floating">{{ 'order.email' | translate }}</ion-label>
             <ion-input type="email" pattern="email" [required]="true"></ion-input>
         </ion-item>
         <ion-item [disabled]="isForMe">
-            <ion-label position="floating">{{ 'Телефон' | translate }}</ion-label>
+            <ion-label position="floating">{{ 'order.tel' | translate }}</ion-label>
             <ion-input type="tel" inputmode="tel" pattern="tel"></ion-input>
         </ion-item>
         <ion-item [disabled]="isForMe">

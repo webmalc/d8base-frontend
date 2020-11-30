@@ -475,7 +475,13 @@
     "client-details": "Service order",
     "done": "The order was sent",
     "done-details": "Please wait for confirmation from the professional.",
-    "confirmation-sent": "Order details were sent to the e-mail address"
+    "confirmation-sent": "Order details were sent to the e-mail address",
+    "not-selected": "Not selected",
+    "is-for-me": "Book this for me",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "E-mail",
+    "tel": "Phone"
   },
   "flag-menu": {
     "language": "Language",

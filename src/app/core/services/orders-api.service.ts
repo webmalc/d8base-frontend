@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {OrderModel, OrderPostModel} from '@app/core/models/order-model';
 import {ApiClientService} from '@app/core/services/api-client.service';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class OrdersApiService {
 
-    private readonly url = '/en/api/accounts/orders/sent/';
+    private readonly url = environment.backend.orders;
 
     constructor(private readonly client: ApiClientService) {
     }

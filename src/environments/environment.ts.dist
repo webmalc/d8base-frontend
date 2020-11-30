@@ -60,6 +60,7 @@ export const environment = {
         services_readonly: '/en/api/services/services/',
         service_tag_readonly: '/en/api/services/tags/',
         master_photos_readonly: '/en/api/professionals/professional-photos/',
+        orders: '/en/api/accounts/orders/sent/',
         url: 'http://localhost:8000'
     },
     client_id: '',
