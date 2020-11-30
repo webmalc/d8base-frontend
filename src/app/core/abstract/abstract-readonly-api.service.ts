@@ -37,6 +37,9 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
 
     protected abstract getUrl(): string;
 
-    protected abstract transform(data: T): T;
-    protected abstract transform(data: T[]): T[];
+    protected transform(data: T): T;
+    protected transform(data: T[]): T[];
+    protected transform(data: T | T[]): T | T[] {
+        return data;
+    }
 }

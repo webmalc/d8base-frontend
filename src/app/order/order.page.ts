@@ -60,7 +60,7 @@ export class OrderPage implements OnInit, OnDestroy {
             ...this.wizardState.getOrderModel(),
             service: Number.parseInt(this.serviceId, 10)
         };
-        this.ordersApi.postNewOrder(newOrder).subscribe(order => this.wizardState.finalize(order));
+        this.ordersApi.create(newOrder).subscribe(order => this.wizardState.finalize(order));
     }
 
     private subscribeToCurrentStepChange(): void {

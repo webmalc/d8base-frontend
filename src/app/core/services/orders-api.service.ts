@@ -1,20 +1,19 @@
 import {Injectable} from '@angular/core';
-import {OrderModel, OrderPostModel} from '@app/core/models/order-model';
+import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
+import {OrderModel} from '@app/core/models/order-model';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
-export class OrdersApiService {
+export class OrdersApiService extends AbstractApiService<OrderModel> {
 
-    private readonly url = environment.backend.orders;
-
-    constructor(private readonly client: ApiClientService) {
+    constructor(client: ApiClientService) {
+        super(client);
     }
 
-    public postNewOrder(order: OrderPostModel): Observable<OrderModel> {
-        return this.client.post<OrderModel, OrderPostModel>(this.url, order);
+    protected getUrl(): string {
+        return environment.backend.orders;
     }
 }

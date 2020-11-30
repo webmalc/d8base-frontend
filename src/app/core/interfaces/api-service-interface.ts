@@ -2,7 +2,7 @@ import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-ser
 import {Observable} from 'rxjs';
 
 export interface ApiServiceInterface<T> extends ReadonlyApiServiceInterface<T> {
-    create(data: T): Observable<T>;
+    create(data: Partial<T>): Observable<T>;
     createList(data: T[]): Observable<T[]>;
     patch(data: T, key?: string | number): Observable<T>;
     patchList(data: T[]): Observable<T[]>;
