@@ -7,13 +7,12 @@ import {environment} from '@env/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class OrdersApiService extends AbstractApiService<OrderModel> {
-
+export class ReceivedOrdersApiService extends AbstractApiService<OrderModel> {
     constructor(client: ApiClientService) {
         super(client);
     }
 
     protected getUrl(): string {
-        return environment.backend.orders;
+        return environment.backend.received_orders;
     }
 }
