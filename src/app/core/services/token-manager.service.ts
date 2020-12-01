@@ -26,7 +26,7 @@ export class TokenManagerService {
 
     @once
     public init(): void {
-        timer(0, 1000).subscribe(() => this.needToRefresh().then(isNeed => this.isExpSubject$.next(isNeed)).catch(
+        timer(0, 1000).subscribe(() => this.isRefreshTokenExpired().then(isExp => this.isExpSubject$.next(isExp)).catch(
             _ => this.isExpSubject$.next(true)
         ));
     }
@@ -85,12 +85,12 @@ export class TokenManagerService {
         });
     }
 
-    private isAccessTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired('access_expire');
+    public isRefreshTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired('refresh_expire');
     }
 
-    private isRefreshTokenExpired(): Promise<boolean> {
-        return this.isAbstractTokenExpired('refresh_expire');
+    private isAccessTokenExpired(): Promise<boolean> {
+        return this.isAbstractTokenExpired('access_expire');
     }
 
     private getTokenData(): Promise<AuthResponseInterface | null> {

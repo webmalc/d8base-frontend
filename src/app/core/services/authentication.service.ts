@@ -37,7 +37,7 @@ export class AuthenticationService implements AuthenticatorInterface {
 
     @once
     public init(): void {
-        this.tokenManager.needToRefresh()
+        this.tokenManager.isRefreshTokenExpired()
             .then(isExp => this.isAuthenticatedSubject$.next(!isExp))
             .catch(_ => this.isAuthenticatedSubject$.next(false))
             .finally(
