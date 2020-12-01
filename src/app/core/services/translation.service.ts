@@ -74,7 +74,7 @@ export class TranslationService {
                 if (lang) {
                     this.translator.use(lang);
                 } else {
-                    this.setLang(lang);
+                    this.setLang(this.LANGUAGES.en);
                 }
             }
         );
