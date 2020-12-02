@@ -569,7 +569,8 @@
     "name": "Name",
     "surname": "Surname",
     "email": "E-mail",
-    "tel": "Phone"
+    "tel": "Phone",
+    "is-not-for-me-description": "Enter the name of the person who will get the service"
   },
   "flag-menu": {
     "language": "Language",
