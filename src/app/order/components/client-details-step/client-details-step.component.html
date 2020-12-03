@@ -1,28 +1,31 @@
-<form>
+<form [formGroup]="form">
     <ion-item lines="none">
         <ion-label>{{ 'order.is-for-me' | translate }}</ion-label>
-        <ion-checkbox (ionChange)="toggleIsForMe($event)"></ion-checkbox>
+        <ion-checkbox [formControlName]="formFields.IsForMe"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="!form.get(formFields.IsForMe).value" lines="none">
+        {{ 'order.is-not-for-me-description' | translate }}
     </ion-item>
     <ion-list>
-        <ion-item [disabled]="isForMe">
-            <ion-label position="floating">{{ 'order.name' | translate }}</ion-label>
-            <ion-input [required]="true"></ion-input>
+        <ion-item>
+            <ion-label position="floating" class="label-for-required-input">{{ 'order.name' | translate }}</ion-label>
+            <ion-input [formControlName]="formFields.FirstName"></ion-input>
         </ion-item>
-        <ion-item [disabled]="isForMe">
+        <ion-item>
             <ion-label position="floating">{{ 'order.surname' | translate }}</ion-label>
-            <ion-input></ion-input>
+            <ion-input [formControlName]="formFields.LastName"></ion-input>
         </ion-item>
-        <ion-item [disabled]="isForMe">
+        <ion-item>
             <ion-label position="floating">{{ 'order.email' | translate }}</ion-label>
-            <ion-input type="email" pattern="email" [required]="true"></ion-input>
+            <ion-input type="email" inputmode="email" email [formControlName]="formFields.Email"></ion-input>
         </ion-item>
-        <ion-item [disabled]="isForMe">
-            <ion-label position="floating">{{ 'order.tel' | translate }}</ion-label>
-            <ion-input type="tel" inputmode="tel" pattern="tel"></ion-input>
+        <ion-item>
+            <ion-label position="floating" class="label-for-required-input">{{ 'order.tel' | translate }}</ion-label>
+            <ion-input type="tel" inputmode="tel" [formControlName]="formFields.Phone"></ion-input>
         </ion-item>
-        <ion-item [disabled]="isForMe">
+        <ion-item>
             <ion-label position="floating">{{ 'order.comment-header' | translate }}</ion-label>
-            <ion-textarea></ion-textarea>
+            <ion-textarea [formControlName]="formFields.Comment"></ion-textarea>
         </ion-item>
     </ion-list>
 </form>
@@ -34,6 +37,6 @@
         </ion-button>
     </ion-col>
     <ion-col>
-        <ion-button expand="block" (click)="nextStep()" [disabled]="!valid">{{ 'global.forward' | translate }}</ion-button>
+        <ion-button expand="block" (click)="nextStep()" [disabled]="form.invalid">{{ 'global.forward' | translate }}</ion-button>
     </ion-col>
 </ion-row>

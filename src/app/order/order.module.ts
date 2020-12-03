@@ -1,5 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     ClientDetailsStepComponent,
     DateTimeStepComponent,
@@ -31,7 +32,9 @@ import {OrderWizardStateService} from './services/order-wizard-state.service';
         SharedModule,
         IonicModule,
         TranslateModule,
-        OrderRoutingModule
+        OrderRoutingModule,
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [
         OrderWizardStateService

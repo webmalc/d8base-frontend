@@ -14,6 +14,6 @@ export class OrdersApiService extends AbstractApiService<OrderModel> {
     }
 
     protected getUrl(): string {
-        return environment.backend.orders;
+        return environment.backend.sent_orders;
     }
 }

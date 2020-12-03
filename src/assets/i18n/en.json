@@ -130,7 +130,17 @@
     "plugins": "Plugins",
     "contacts": "Contacts",
     "education": "Education",
-    "bookmark": "Bookmarks"
+    "bookmark": "Bookmarks",
+    "add-new-contact": "Add new contact",
+    "add-new-address": "Add new address",
+    "your-address": "Your address",
+    "main-address": "Main address",
+    "additional-address": "Additional address",
+    "about": "About",
+    "age": "Age",
+    "nationality": "Nationality",
+    "languages": "Languages",
+    "not-specified": "Not specified"
   },
   "plugins-tab": {
     "plugins": "Plugins",
@@ -197,7 +207,10 @@
       "start-price": "Service price from",
       "end-price": "Service price to",
       "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
-      "location": "Service location"
+      "location": "Service location",
+      "location-online": "Online",
+      "location-professional": "Professional's place",
+      "location-client": "Client's place"
     },
     "step-three": {
       "title": "Want to add photos of the service? With them your service will be brighter!",
@@ -207,6 +220,22 @@
       "add-new-service": "Want to add another service?",
       "second-info-row": "You can always add any number of services later.",
       "add-new-service-button": "Add another service"
+    },
+    "step-four": {
+      "title": "Congratulations! The service is ready",
+      "subtitle": "Please provide some essential information about yourself.",
+      "first-info-row": "Enter address for e-mail notifications.",
+      "email-title": "Your Email",
+      "email-placeholder": "Enter Email",
+      "new-user": "I am a new user",
+      "create-password": "Please enter a new password",
+      "second-info-row": "You can edit the service after the publication",
+      "password-placeholder": "Enter password",
+      "password-info": "Minimum password length is 6 symbols",
+      "password-confirm": "Confirm password",
+      "forgot-password": "Forgot?",
+      "user-exists": "I am an existing user",
+      "enter-password": "Please enter your password"
     },
     "step-five": {
       "title": "Enter the information about you that you want your customers to see.",
@@ -220,6 +249,65 @@
       "add-photo": "It's a good idea to add a photo to your profile!",
       "first-info-row": "By adding your main photo to your profile, you will increase the credibility of your profile and you will have more clients!",
       "add-photo-title": "Add your main photo"
+    },
+    "step-six": {
+      "company-title": "Company name",
+      "company-placeholder": "Company name",
+      "title": "Additional information (not required)",
+      "first-info-row": "Provide more information about yourself.",
+      "description": "About",
+      "description-placeholder": "This text will be displayed as a part of the search result",
+      "specialization": "Specialization",
+      "specialization-placeholder": "Specialization",
+      "level": "Level"
+    },
+    "step-seven": {
+      "timetable-desc": "Set the service schedule",
+      "use-base-timetable": "Use the default schedule",
+      "title": "Location, time",
+      "first-info-row": "You can link your Paypal account after the service publication.",
+      "timetable-title": "Service schedule",
+      "location-title": "Service georgaphy",
+      "country-title": "Country",
+      "country-placeholder": "Choose country",
+      "city-title": "City",
+      "city-placeholder": "Choose city",
+      "address": "Address",
+      "address-placeholder": "Enter address",
+      "address-required-info": "Required when service is provided at «professional's place»",
+      "postal": "Index",
+      "postal-placeholder": "Index",
+      "location-radius": "Attendance:",
+      "payment-title": "Payment",
+      "payment-description": "Payment options available",
+      "payment-info": "You can activate online payments after the service publication.",
+      "payment-cash": "Cash",
+      "payment-online": "Online",
+      "departure": {
+        "title": "Service georgaphy",
+        "description": "Max distance from the base location"
+      },
+      "location-radius-within": "Within city borders",
+      "location-radius-radius": "Within distance",
+      "timetable": {
+        "title": "Service schedule",
+        "mon": "MO",
+        "tue": "TU",
+        "wed": "WE",
+        "thu": "TH",
+        "fri": "FR",
+        "sat": "SA",
+        "sun": "SU",
+        "add-new-time": "Add new time",
+        "popover-title": "Choose day"
+      }
+    },
+    "final-step": {
+      "title": "Congratulations! All set.",
+      "first-info-row": "You can add more references here.",
+      "master-picker": {
+        "popover-title": "Choose the professional profile"
+      }
     }
   },
   "messages": {
@@ -484,7 +572,8 @@
     "name": "Name",
     "surname": "Surname",
     "email": "E-mail",
-    "tel": "Phone"
+    "tel": "Phone",
+    "is-not-for-me-description": "Enter the name of the person who will get the service"
   },
   "flag-menu": {
     "language": "Language",
