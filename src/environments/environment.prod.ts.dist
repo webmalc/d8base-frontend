@@ -91,5 +91,6 @@ export const environment = {
         enabled: true,
         dsn: ''
     },
-    default_calendar_interval: 15
+    default_calendar_interval: 15,
+    calendar_day_intervals: 4
 };

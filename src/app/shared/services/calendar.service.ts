@@ -3,24 +3,26 @@ import {HelperService} from '@app/core/services/helper.service';
 import {MasterCalendar} from '@app/master/models/master-calendar';
 import {CalendarInterval} from '@app/shared/interfaces/calendar-interval';
 import {CalendarUnit} from '@app/shared/interfaces/calendar-unit';
+import {environment} from '@env/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CalendarService {
 
-    private readonly intervals = 4;
-    private readonly minutesInSixHours = 360;
+    private readonly minutesInDay = 1440;
+    private readonly intervals = environment.calendar_day_intervals;
+    private readonly minutesInInterval = this.minutesInDay / this.intervals;
 
     public generate(interval: number, disabledPeriods: MasterCalendar[]): CalendarInterval[] {
-        if (!Number.isInteger(this.minutesInSixHours / interval)) {
+        if (!Number.isInteger(this.minutesInInterval / interval)) {
             throw Error('cannot generate calendar with given interval');
         }
         const calendar: CalendarInterval[] = [];
         const closedPeriodArray: { start: number, end: number }[] = this.generateDisabledPeriodsArray(disabledPeriods);
         for (let i = 0; i < this.intervals; i += 1) {
             const units: CalendarUnit[] = [];
-            for (let j = i * this.minutesInSixHours; j <= (i + 1) * this.minutesInSixHours; j += interval) {
+            for (let j = i * this.minutesInInterval; j <= (i + 1) * this.minutesInInterval; j += interval) {
                 units.push({
                     minutes: j,
                     enabled: this.checkIfTimeDisabled(closedPeriodArray, j)
