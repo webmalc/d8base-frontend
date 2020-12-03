@@ -14,7 +14,7 @@ export class CalendarGeneratorFactoryService {
     ) {
     }
 
-    public getDisabledPeriods(startDate: Date, endDate: Date, masterId?: number): Observable<MasterCalendar[]> {
+    public getEnabledPeriods(startDate: Date, endDate: Date, masterId?: number): Observable<MasterCalendar[]> {
         return masterId ? this.get(startDate, endDate, masterId) : this.masterManager.getMasterList()
             .pipe(switchMap(list => this.get(startDate, endDate, list[0].id)));
     }

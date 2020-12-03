@@ -12,26 +12,26 @@ import {BehaviorSubject, Observable} from 'rxjs';
 })
 export class MasterProfileCalendarComponent implements OnInit {
 
-    public disabledPeriods: Observable<MasterCalendar[]>;
+    public enabledPeriods: Observable<MasterCalendar[]>;
     public timezone: string = Intl.DateTimeFormat().resolvedOptions().timeZone;
     private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
     private masterId: number;
 
     constructor(private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService, private readonly route: ActivatedRoute) {
-        this.disabledPeriods = this.periods.asObservable();
+        this.enabledPeriods = this.periods.asObservable();
     }
 
     public ngOnInit(): void {
         this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-        this.updateDisabledPeriods((new Date()));
+        this.updateEnabledPeriods((new Date()));
     }
 
     public changeDate(date: Date): void {
-        this.updateDisabledPeriods(date);
+        this.updateEnabledPeriods(date);
     }
 
-    private updateDisabledPeriods(startDate: Date): void {
-        this.calendarGeneratorFactory.getDisabledPeriods(
+    private updateEnabledPeriods(startDate: Date): void {
+        this.calendarGeneratorFactory.getEnabledPeriods(
             startDate,
             HelperService.getDate(startDate, 1),
             this.masterId

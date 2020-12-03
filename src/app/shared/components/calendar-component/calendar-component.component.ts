@@ -14,7 +14,7 @@ import {Observable} from 'rxjs';
 export class CalendarComponentComponent implements OnInit {
 
     @Input() public interval: number = environment.default_calendar_interval;
-    @Input() public disabledPeriods: Observable<MasterCalendar[]>;
+    @Input() public enabledPeriods: Observable<MasterCalendar[]>;
     @Input() public timezone: string;
     @Output() public newDate: EventEmitter<Date> = new EventEmitter<Date>();
     public calendarIntervals: CalendarInterval[];
@@ -24,7 +24,7 @@ export class CalendarComponentComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.disabledPeriods.subscribe(list => this.calendarIntervals = this.calendar.generate(this.interval, list));
+        this.enabledPeriods.subscribe(list => this.calendarIntervals = this.calendar.generate(this.interval, list));
     }
 
     public getTimeStringFromMinutes(minutes: number): string {
