@@ -15,6 +15,7 @@ import {
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
+import {CalendarComponentComponent} from '@app/shared/components/calendar-component/calendar-component.component';
 import {CollapseItemComponent} from '@app/shared/components/collapse-item/collapse-item.component';
 import {DefaultLocationPopoverComponent} from '@app/shared/components/default-location-popover/default-location-popover.component';
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
@@ -72,7 +73,8 @@ import {NumberDirective} from './directives/number.directive';
         MoreInfoComponent,
         MasterWidgetComponent,
         DefaultLocationPopoverComponent,
-        FlagMenuComponent
+        FlagMenuComponent,
+        CalendarComponentComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -97,7 +99,8 @@ import {NumberDirective} from './directives/number.directive';
         DurationComponent,
         ServiceWidgetComponent,
         DefaultLocationPopoverComponent,
-        FlagMenuComponent
+        FlagMenuComponent,
+        CalendarComponentComponent
     ],
     imports: [
         CommonModule,
