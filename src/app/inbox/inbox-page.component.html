@@ -1,1 +1,39 @@
 <app-header></app-header>
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <ion-row class="ion-justify-content-center">
+            <ion-col sizeXs="12" sizeSm="8" sizeMd="8" sizeLg="7" sizeXl="5" offset-xl="-1" offset-lg="-1">
+                <ion-item color="light" lines="full">
+                    <ion-buttons slot="start">
+                        <ion-button routerLink="/" routerDirection="back">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <ion-title>{{ 'Мои заказы' | translate }}</ion-title>
+                </ion-item>
+                <ion-segment (ionChange)="changeTab($event)" [value]="tabs.new">
+                    <ion-segment-button [value]="tabs.new">
+                        <ion-label>{{ 'Ожидают' | translate }}</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button [value]="tabs.current">
+                        <ion-label>{{ 'Текущие' | translate }}</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button [value]="tabs.archive">
+                        <ion-label>{{ 'Архив' | translate }}</ion-label>
+                    </ion-segment-button>
+                </ion-segment>
+
+                <ion-list *ngIf="orders?.length > 0; else placeholder">
+                    <app-order-list-item *ngFor="let order of orders"></app-order-list-item>
+                </ion-list>
+                <ng-template #placeholder>
+                    <ion-item class="ion-text-center" lines="none">
+                        <ion-label>{{ 'Заказов нет' | translate }}</ion-label>
+                    </ion-item>
+                </ng-template>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer></app-footer>
