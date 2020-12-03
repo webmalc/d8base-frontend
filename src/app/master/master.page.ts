@@ -20,7 +20,7 @@ import {map} from 'rxjs/operators';
 })
 export class MasterPage extends Reinitable {
 
-    public defaultTab: string = MasterProfileSubmenu.Calendar;
+    public defaultTab: string = MasterProfileSubmenu.Info;
     public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
     public mainInfoSectionData: MainInfoSectionComponentInputDataInterface;
     public editable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
