@@ -22,8 +22,8 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     }
 
     public handleError(error: Error): void {
-        if (error.message === ErrorList.EMPTY_TOKEN_ERROR ||
-            error.message === ErrorList.REFRESH_TOKEN_EXPIRED_ERROR
+        if (error?.message === ErrorList.EMPTY_TOKEN_ERROR ||
+            error?.message === ErrorList.REFRESH_TOKEN_EXPIRED_ERROR
         ) {
             this.showMessage('authentication expired');
             this.router.navigateByUrl('/auth/login');

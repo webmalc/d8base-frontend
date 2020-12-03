@@ -62,6 +62,7 @@ export const environment = {
         master_photos_readonly: '/en/api/professionals/professional-photos/',
         sent_orders: '/en/api/accounts/orders/sent/',
         received_orders: '/en/api/accounts/orders/received/',
+        calendar: '/en/api/schedule/calendar/',
         url: 'http://localhost:8000'
     },
     client_id: '',
@@ -89,5 +90,7 @@ export const environment = {
     sentry: {
         enabled: true,
         dsn: ''
-    }
+    },
+    default_calendar_interval: 15,
+    calendar_day_intervals: 4
 };

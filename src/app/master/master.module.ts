@@ -15,6 +15,8 @@ import {
 } from '@app/master/components/master-profile-service-presentation/master-profile-service-presentation.component';
 import {MasterProfileServicesComponent} from '@app/master/components/master-profile-services/master-profile-services.component';
 import {MasterProfileSubmenuComponent} from '@app/master/components/master-profile-submenu/master-profile-submenu.component';
+import {CalendarApiService} from '@app/master/services/calendar-api.service';
+import {CalendarGeneratorFactoryService} from '@app/master/services/calendar-generator-factory.service';
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
@@ -57,7 +59,9 @@ import {MasterPage} from './master.page';
         ExperienceApiService,
         EducationApiService,
         CertificatesApiService,
-        MasterProfileInfoGeneratorFactoryService
+        MasterProfileInfoGeneratorFactoryService,
+        CalendarGeneratorFactoryService,
+        CalendarApiService
     ]
 })
 export class MasterPageModule {
