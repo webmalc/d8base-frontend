@@ -1,5 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {OrderModel} from '@app/core/models/order-model';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
 
 import {Tabs} from './enums/tabs.enum';
 import {ReceivedOrdersApiService} from './services';
@@ -12,7 +14,9 @@ import {ReceivedOrdersApiService} from './services';
 export class InboxPageComponent implements OnInit {
     public orders: OrderModel[];
     public tabs = Tabs;
-    public currentTab: Tabs = Tabs.new;
+
+    private currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({status__in: 'new'});
+    private destroy$ = new Subject<void>();
 
     constructor(
         private readonly receivedOrdersApi: ReceivedOrdersApiService,
@@ -21,13 +25,27 @@ export class InboxPageComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.receivedOrdersApi.get().subscribe(orders => {
+        this.currentFilter$.pipe(
+            takeUntil(this.destroy$),
+            switchMap(params => this.receivedOrdersApi.get(params))
+        ).subscribe(orders => {
             this.orders = orders.results;
             this.changeDetector.markForCheck();
         });
     }
 
     public changeTab(e: CustomEvent): void {
-        this.currentTab = e.detail.value;
+        const currentTab: Tabs = e.detail.value;
+        switch (currentTab) {
+            case Tabs.current:
+                this.currentFilter$.next({status__in: 'confirmed,paid'});
+                break;
+            case Tabs.archive:
+                this.currentFilter$.next({status__in: 'completed,canceled'});
+                break;
+            default:
+                this.currentFilter$.next({status__in: 'not_confirmed'});
+                break;
+        }
     }
 }

@@ -1,3 +1,32 @@
-<ion-card>
-  <ion-card-header>{{ order?.start_datetime | date:'medium'}}</ion-card-header>
+<ion-card [routerLink]="['inbox', order.id]">
+    <ion-item lines="none">
+        <ion-label slot="start">
+            <div>{{ order.start_datetime | date:'mediumDate'}}</div>
+            <div>{{ order.start_datetime | date:'shortTime'}} — {{ order.end_datetime | date:'shortTime'}}</div>
+        </ion-label>
+        <app-order-status [status]="order.status" slot="end"></app-order-status>
+    </ion-item>
+
+    <ion-item lines="none">
+        <ion-avatar slot="start">
+            <img src="{{ order.client.avatar_thumbnail }}" alt="avatar">
+        </ion-avatar>
+        <ion-label>
+            {{ order.client.first_name }}
+            {{ order.client.last_name }}
+        </ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+        <ion-label>
+            {{ order.service }}
+        </ion-label>
+    </ion-item>
+
+    <ng-container *ngIf="order.status === 'not_confirmed'">
+        <ion-button color="success">
+            {{ 'Принять заказ' | translate }}
+        </ion-button>
+    </ng-container>
+
 </ion-card>

@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {OrderListItemComponent} from '@app/inbox/components';
+import {OrderListItemComponent, OrderStatusComponent} from '@app/inbox/components';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -12,7 +12,8 @@ import {InboxRoutingModule} from './inbox-routing.module';
 @NgModule({
     declarations: [
         InboxPageComponent,
-        OrderListItemComponent
+        OrderListItemComponent,
+        OrderStatusComponent
     ],
     imports: [
         CommonModule,

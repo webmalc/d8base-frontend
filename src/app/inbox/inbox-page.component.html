@@ -24,7 +24,7 @@
                 </ion-segment>
 
                 <ion-list *ngIf="orders?.length > 0; else placeholder">
-                    <app-order-list-item *ngFor="let order of orders"></app-order-list-item>
+                    <app-order-list-item *ngFor="let order of orders" [order]="order"></app-order-list-item>
                 </ion-list>
                 <ng-template #placeholder>
                     <ion-item class="ion-text-center" lines="none">

@@ -1,3 +1,5 @@
+import {User} from '@app/core/models/user';
+
 export interface OrderPostModel {
   service: number;
   start_datetime: string;
@@ -15,8 +17,11 @@ export interface OrderModel extends OrderPostModel {
   id: number;
   created: string;
   modified: string;
-  status: string;
+  status: OrderStatus;
   price_amount: string;
   price_currency: string;
   duration: string;
+  client: User;
 }
+
+export type OrderStatus = 'not_confirmed' | 'confirmed' | 'paid' | 'completed' | 'canceled';
