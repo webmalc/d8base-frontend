@@ -47,10 +47,11 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-            preloadingStrategy: PreloadAllModules,
-            initialNavigation: 'enabled',
-            paramsInheritanceStrategy: 'always'
-        })
+    preloadingStrategy: PreloadAllModules,
+    initialNavigation: 'enabled',
+    paramsInheritanceStrategy: 'always',
+    relativeLinkResolution: 'legacy'
+})
     ],
     exports: [RouterModule]
 })
