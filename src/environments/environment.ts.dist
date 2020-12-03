@@ -89,7 +89,8 @@ export const environment = {
     sentry: {
         enabled: true,
         dsn: ''
-    }
+    },
+    default_calendar_interval: 15
 };
 
 export const testing = {
