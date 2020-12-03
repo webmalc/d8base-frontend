@@ -1,0 +1,57 @@
+import {Injectable} from '@angular/core';
+import {HelperService} from '@app/core/services/helper.service';
+import {MasterCalendar} from '@app/master/models/master-calendar';
+import {CalendarInterval} from '@app/shared/interfaces/calendar-interval';
+import {CalendarUnit} from '@app/shared/interfaces/calendar-unit';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class CalendarService {
+
+    private readonly intervals = 4;
+    private readonly minutesInSixHours = 360;
+
+    public generate(interval: number, disabledPeriods: MasterCalendar[]): CalendarInterval[] {
+        if (!Number.isInteger(this.minutesInSixHours / interval)) {
+            throw Error('cannot generate calendar with given interval');
+        }
+        const calendar: CalendarInterval[] = [];
+        const closedPeriodArray: { start: number, end: number }[] = this.generateDisabledPeriodsArray(disabledPeriods);
+        for (let i = 0; i < this.intervals; i += 1) {
+            const units: CalendarUnit[] = [];
+            for (let j = i * this.minutesInSixHours; j <= (i + 1) * this.minutesInSixHours; j += interval) {
+                units.push({
+                    minutes: j,
+                    enabled: this.checkIfTimeDisabled(closedPeriodArray, j)
+                });
+            }
+            const startIntervalTimeString = HelperService.getTimeStringFromMinutes(units[0].minutes);
+            const endIntervalTimeString = HelperService.getTimeStringFromMinutes(units[units.length - 1].minutes - 1);
+            calendar.push({title: `${startIntervalTimeString} - ${endIntervalTimeString}`, units});
+        }
+
+        return calendar;
+    }
+
+    private checkIfTimeDisabled(disabledPeriods: { start: number, end: number }[], time: number): boolean {
+        for (const period of disabledPeriods) {
+            if (time > period.start && time < period.end) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private generateDisabledPeriodsArray(disabledPeriods: MasterCalendar[]): { start: number, end: number }[] {
+        const res = [];
+        disabledPeriods.forEach(v => {
+            const startTime = new Date(v.start_datetime);
+            const endTime = new Date(v.end_datetime);
+            res.push({start: startTime.getHours() * 60 + startTime.getMinutes(), end: endTime.getHours() * 60 + endTime.getMinutes()});
+        });
+
+        return res;
+    }
+}

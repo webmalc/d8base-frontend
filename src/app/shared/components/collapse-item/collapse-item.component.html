@@ -1,7 +1,10 @@
 <ion-row class="ion-justify-content-between width100">
     <ion-item [class.ion-item-no-side-padding]="noSidePadding" class="ion-item-no-border">
-        <ion-label>
+        <ion-label *ngIf="titleBold">
             <b>{{title | translate}}</b>
+        </ion-label>
+        <ion-label *ngIf="!titleBold">
+            {{title | translate}}
         </ion-label>
     </ion-item>
     <ion-item [class.ion-item-no-side-padding]="noSidePadding" class="ion-item-no-border">

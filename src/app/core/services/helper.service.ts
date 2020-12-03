@@ -4,6 +4,22 @@ import {environment} from '@env/environment';
 
 export class HelperService {
 
+    public static getDate(date: Date, offset: number): Date {
+        const newDay = new Date(date);
+        newDay.setDate(date.getDate() + offset);
+
+        return newDay;
+    }
+
+    public static getTimeStringFromMinutes(minutes: number): string {
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes - hours * 60;
+        const hoursStr = /^\d$/.test(hours.toString()) ? '0' + hours.toString() : hours;
+        const minsStr = /^\d$/.test(mins.toString()) ? '0' + mins.toString() : mins;
+
+        return `${hoursStr}:${minsStr}`;
+    }
+
     public static isNoAuthGetUrl(url: string): boolean {
         for (const noAuthUrl of HelperService.getNoAuthGetEndpoints()) {
             if (url.includes(noAuthUrl)) {
@@ -99,7 +115,8 @@ export class HelperService {
             environment.backend.url + environment.backend.contact,
             environment.backend.url + environment.backend.services_readonly,
             environment.backend.url + environment.backend.service_tag_readonly,
-            environment.backend.url + environment.backend.master_photos_readonly
+            environment.backend.url + environment.backend.master_photos_readonly,
+            environment.backend.url + environment.backend.calendar
         ];
     }
 }

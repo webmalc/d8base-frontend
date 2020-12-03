@@ -1,0 +1,28 @@
+<ion-row class="bgc-light ion-margin-top ion-padding-horizontal date-row">
+    <ion-item class="ion-item-no-border bgc-light ion-padding-vertical">
+        <ion-icon (click)="changeDate(-1)" class="ion-activatable cursor-pointer pr5"
+                  name="chevron-back-outline"></ion-icon>
+        <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+            {{date.toDateString()}}
+        </ion-item>
+        <ion-icon (click)="changeDate(1)" class="ion-activatable cursor-pointer pl5"
+                  name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item class="ion-item-no-border bgc-light ion-padding-vertical">
+        <div class="space-between-column">
+            <div>{{"calendar.timezone" | translate}}</div>
+            <div>{{timezone}}</div>
+        </div>
+    </ion-item>
+</ion-row>
+<ion-row *ngFor="let interval of calendarIntervals">
+    <app-collapse-item [collapsed]="false" [titleBold]="false" class="width100" noSidePadding="true"
+                       title="{{interval.title}}">
+        <ion-row class="ion-justify-content-between ion-wrap border-top ion-padding-top">
+            <ion-item *ngFor="let unit of interval.units" [class.time-unit-disabled]="!unit.enabled"
+                      class="ion-item-no-border ion-item-bordered ion-item-bottom-border border-radius5 ion-item-no-min-height time-unit mv5">
+                {{getTimeStringFromMinutes(unit.minutes)}}
+            </ion-item>
+        </ion-row>
+    </app-collapse-item>
+</ion-row>

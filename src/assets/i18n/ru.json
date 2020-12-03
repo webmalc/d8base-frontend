@@ -394,6 +394,9 @@
       "on-map": "Смотреть на карте",
       "from-here": "От заданного адреса",
       "add-new-address": "Добавить еще адрес"
+    },
+    "calendar": {
+      "title": "Календарь"
     }
   },
   "location-edit-page": {
@@ -574,5 +577,8 @@
     "units": "Kм / Мили",
     "hide-last-name": "Скрывать фамилию",
     "dark-theme": "Темная тема"
+  },
+  "calendar": {
+    "timezone": "Часовой пояс"
   }
 }

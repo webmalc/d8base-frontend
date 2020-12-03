@@ -308,6 +308,9 @@
       "on-map": "Trace on map",
       "from-here": "From target address",
       "add-new-address": "Add one more address"
+    },
+    "calendar": {
+      "title": "Calendar"
     }
   },
   "location-edit-page": {
@@ -489,5 +492,8 @@
     "units": "Km / Miles",
     "hide-last-name": "Hide last name",
     "dark-theme": "Dark theme"
+  },
+  "calendar": {
+    "timezone": "Timezone"
   }
 }
