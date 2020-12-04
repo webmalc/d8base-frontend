@@ -46,8 +46,7 @@ export class AuthenticationService implements AuthenticatorInterface {
                     );
                 }
                 this.isAuthenticatedSubject$.next(!isExp);
-            }
-            )
+            })
             .catch(_ => this.isAuthenticatedSubject$.next(false))
             .finally(
                 () => {
