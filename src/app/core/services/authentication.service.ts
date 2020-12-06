@@ -11,8 +11,8 @@ import {ApiClientService} from '@app/core/services/api-client.service';
 import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
-import {EMPTY, from, Observable, ReplaySubject} from 'rxjs';
-import {filter, first, takeUntil} from 'rxjs/operators';
+import {EMPTY, from, Observable, of, ReplaySubject} from 'rxjs';
+import {filter, first, switchMap, takeUntil, tap} from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -36,15 +36,32 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     @once
-    public init(): void {
-        this.tokenManager.isRefreshTokenExpired()
-            .then(isExp => this.isAuthenticatedSubject$.next(!isExp))
+    public init(): Promise<void> {
+        return new Promise<void>(resolve => this.tokenManager.isRefreshTokenExpired()
+            .then(isExp => {
+                if (!isExp) {
+                    return this.needToRefresh().pipe(
+                        switchMap(isNeed => isNeed ?
+                            this.refresh().pipe(
+                                tap(() => resolve()),
+                                tap(_ => this.isAuthenticatedSubject$.next(!isExp))
+                            ) : of(this.isAuthenticatedSubject$.next(!isExp))
+                        )
+                    ).subscribe(
+                        () => null,
+                        _ => this.isAuthenticatedSubject$.next(false));
+                }
+                this.isAuthenticatedSubject$.next(!isExp);
+            })
             .catch(_ => this.isAuthenticatedSubject$.next(false))
             .finally(
-                () => this.tokenManager.isExpired$.subscribe(isExpired => this.isAuthenticated$.pipe(first()).subscribe(
-                    previousIsAuthStatus => isExpired === previousIsAuthStatus ? this.isAuthenticatedSubject$.next(!isExpired) : EMPTY
-                ))
-            );
+                () => {
+                    this.tokenManager.isExpired$.subscribe(isExpired => this.isAuthenticated$.pipe(first()).subscribe(
+                        previousIsAuthStatus => isExpired === previousIsAuthStatus ? this.isAuthenticatedSubject$.next(!isExpired) : EMPTY
+                    ));
+                    resolve();
+                })
+        );
     }
 
     public login({username, password}: Credentials): Observable<void> {
