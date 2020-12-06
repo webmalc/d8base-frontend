@@ -4,19 +4,20 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {switchMap, takeUntil} from 'rxjs/operators';
 
 import {Tabs} from './enums/tabs.enum';
-import {ReceivedOrdersApiService} from './services';
+import {ReceivedOrdersApiService, ServicesApiCache} from './services';
 
 @Component({
     selector: 'app-inbox-page',
     templateUrl: './inbox-page.component.html',
-    styleUrls: ['./inbox-page.component.scss']
+    styleUrls: ['./inbox-page.component.scss'],
+    providers: [ServicesApiCache]
 })
 export class InboxPageComponent implements OnInit {
     public orders: OrderModel[];
     public tabs = Tabs;
 
-    private currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({status__in: 'new'});
-    private destroy$ = new Subject<void>();
+    private readonly currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({status__in: 'new'});
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
         private readonly receivedOrdersApi: ReceivedOrdersApiService,
@@ -47,5 +48,9 @@ export class InboxPageComponent implements OnInit {
                 this.currentFilter$.next({status__in: 'not_confirmed'});
                 break;
         }
+    }
+
+    public onOrderAccept(order: OrderModel): void {
+        // TODO: change order status
     }
 }

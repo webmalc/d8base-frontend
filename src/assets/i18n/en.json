@@ -584,5 +584,13 @@
   },
   "calendar": {
     "timezone": "Timezone"
+  },
+  "received_orders": {
+    "title": "My orders",
+    "newTab": "New",
+    "currentTab": "Current",
+    "archiveTab": "Archived",
+    "empty-placeholder": "empty",
+    "accept-order": "Accept order"
   }
 }

@@ -9,7 +9,7 @@ import {Service} from '@app/service/models/service';
 import {Observable, Subject} from 'rxjs';
 import {map, switchMap, takeUntil} from 'rxjs/operators';
 
-import {SentOrdersApiService, OrderWizardStateService} from './services';
+import {OrderWizardStateService, SentOrdersApiService} from './services';
 
 @Component({
     selector: 'app-order',
@@ -23,7 +23,6 @@ export class OrderPage implements OnInit, OnDestroy {
     public service$: Observable<Service>;
     public master$: Observable<MasterList>;
     public order$: Observable<Partial<OrderPostModel>>;
-    public step$: Observable<number>;
 
     private serviceId: string;
     private readonly destroy$ = new Subject<void>();

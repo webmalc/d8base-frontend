@@ -9,26 +9,29 @@
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <ion-title>{{ 'Мои заказы' | translate }}</ion-title>
+                    <ion-title>{{ 'received_orders.title' | translate }}</ion-title>
                 </ion-item>
                 <ion-segment (ionChange)="changeTab($event)" [value]="tabs.new">
                     <ion-segment-button [value]="tabs.new">
-                        <ion-label>{{ 'Ожидают' | translate }}</ion-label>
+                        <ion-label>{{ 'received_orders.newTab' | translate }}</ion-label>
                     </ion-segment-button>
                     <ion-segment-button [value]="tabs.current">
-                        <ion-label>{{ 'Текущие' | translate }}</ion-label>
+                        <ion-label>{{ 'received_orders.currentTab' | translate }}</ion-label>
                     </ion-segment-button>
                     <ion-segment-button [value]="tabs.archive">
-                        <ion-label>{{ 'Архив' | translate }}</ion-label>
+                        <ion-label>{{ 'received_orders.archiveTab' | translate }}</ion-label>
                     </ion-segment-button>
                 </ion-segment>
 
                 <ion-list *ngIf="orders?.length > 0; else placeholder">
-                    <app-order-list-item *ngFor="let order of orders" [order]="order"></app-order-list-item>
+                    <app-order-list-item *ngFor="let order of orders"
+                                         [order]="order"
+                                         (accept)="onOrderAccept($event)">
+                    </app-order-list-item>
                 </ion-list>
                 <ng-template #placeholder>
                     <ion-item class="ion-text-center" lines="none">
-                        <ion-label>{{ 'Заказов нет' | translate }}</ion-label>
+                        <ion-label>{{ 'received_orders.empty-placeholder' | translate }}</ion-label>
                     </ion-item>
                 </ng-template>
 

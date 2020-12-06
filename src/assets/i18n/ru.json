@@ -584,5 +584,13 @@
   },
   "calendar": {
     "timezone": "Часовой пояс"
+  },
+  "received_orders": {
+    "title": "Мои заказы",
+    "newTab": "Ожидают",
+    "currentTab": "Текущие",
+    "archiveTab": "Архив",
+    "empty-placeholder": "Заказов нет",
+    "accept-order": "Принять заказ"
   }
 }
