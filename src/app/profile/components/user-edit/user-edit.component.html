@@ -46,10 +46,10 @@
                                         {{'profile-form.fields.gender' | translate }}
                                     </ion-label>
                                 </ion-row>
-                                <ion-row class="ion-padding-top" style="margin-left: -14px;">
+                                <ion-row class="ion-padding-top gender-row">
                                     <ion-radio-group [formControlName]="formFields.Gender">
                                         <ion-row>
-                                            <ion-col>
+                                            <ion-col class="gender-icon">
                                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M11.375 11.375V25.8125C11.373 25.9854 11.4056 26.157 11.4709 26.3171C11.5361 26.4772 11.6327 26.6227 11.755 26.745C11.8773 26.8673 12.0228 26.9639 12.1829 27.0291C12.343 27.0944 12.5146 27.127 12.6875 27.125V27.125C12.8604 27.127 13.032 27.0944 13.1921 27.0291C13.3522 26.9639 13.4977 26.8673 13.62 26.745C13.7422 26.6227 13.8389 26.4772 13.9041 26.3171C13.9694 26.157 14.002 25.9854 14 25.8125"
@@ -66,10 +66,10 @@
                                                           stroke-linecap="round"/>
                                                 </svg>
                                             </ion-col>
-                                            <ion-col>
-                                                <ion-radio name="male" value="{{ 0 | number}}"></ion-radio>
+                                            <ion-col class="gender-control">
+                                                <ion-radio name="male" value="{{ 0 | number}}"  color="secondary"></ion-radio>
                                             </ion-col>
-                                            <ion-col>
+                                            <ion-col class="gender-icon">
                                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M11.375 20.125V25.8125C11.373 25.9854 11.4056 26.157 11.4709 26.3171C11.5361 26.4772 11.6327 26.6227 11.755 26.745C11.8773 26.8673 12.0228 26.9639 12.1829 27.0291C12.343 27.0944 12.5146 27.127 12.6875 27.125V27.125C12.8604 27.127 13.032 27.0944 13.1921 27.0291C13.3522 26.9639 13.4977 26.8673 13.62 26.745C13.7422 26.6227 13.8389 26.4772 13.9041 26.3171C13.9694 26.157 14.002 25.9854 14 25.8125"
@@ -89,8 +89,8 @@
                                                           stroke-linejoin="round"/>
                                                 </svg>
                                             </ion-col>
-                                            <ion-col>
-                                                <ion-radio name="female" value="{{ 1 | number}}"></ion-radio>
+                                            <ion-col class="gender-control">
+                                                <ion-radio name="female" value="{{ 1 | number}}"  color="secondary"></ion-radio>
                                             </ion-col>
                                         </ion-row>
                                     </ion-radio-group>
