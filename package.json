@@ -15,7 +15,8 @@
     "dev:ssr": "ng run app:serve-ssr",
     "serve:ssr": "node dist/app-server/main.js",
     "build:ssr": "ng build --prod && ng run app:server:production",
-    "prerender": "ng run app:prerender"
+    "prerender": "ng run app:prerender",
+    "generate:api": "./node_modules/.bin/ng-swagger-gen --config ng-swagger-gen.json"
   },
   "private": true,
   "dependencies": {
@@ -101,6 +102,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~3.3.1",
     "karma-jasmine-html-reporter": "^1.5.4",
+    "ng-swagger-gen": "^2.3.0",
     "protractor": "^7.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.3",

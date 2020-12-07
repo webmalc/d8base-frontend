@@ -1,34 +1,45 @@
 import {Location} from '@angular/common';
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {Category} from '@app/core/models/category';
 import {HelperService} from '@app/core/services/helper.service';
 import {MainPageSearchInterface} from '@app/main/interfaces/main-page-search-interface';
 import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
-import {SearchResultsInterface} from '@app/search/interfaces/search-results-interface';
 import {SearchFilterStateService} from '@app/search/services/search-filter-state.service';
-import {SearchService} from '@app/search/services/search.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {Platform} from '@ionic/angular';
-import {tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {map, takeUntil} from 'rxjs/operators';
+import {Search} from '../api/models';
+import {PaginatedResult} from '../api/models/paginated-result';
+import {SearchService} from '../api/services';
 
 @Component({
     selector: 'app-search',
     templateUrl: './search-page.component.html',
-    styleUrls: ['./search-page.component.scss']
+    styleUrls: ['./search-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchPage extends Reinitable {
+export class SearchPage extends Reinitable implements OnDestroy {
 
     public searchNeedle: string;
-    public searchResult: SearchResultsInterface[];
+    public searchResult: Search[];
     public searchResultTitle: string;
+
+    private readonly ngDestroy$ = new Subject<void>();
 
     constructor(
         private readonly search: SearchService,
         public readonly platform: Platform,
         private readonly location: Location,
-        private readonly state: SearchFilterStateService
+        private readonly state: SearchFilterStateService,
+        private readonly cd: ChangeDetectorRef
     ) {
         super();
+    }
+
+    public ngOnDestroy(): void {
+        this.ngDestroy$.next();
+        this.ngDestroy$.complete();
     }
 
     public init(): void {
@@ -63,10 +74,13 @@ export class SearchPage extends Reinitable {
     }
 
     public doSearch(): void {
-        this.search.search(this.searchNeedle, this.state.data).pipe(
-            tap(() => this.searchResultTitle = this.searchNeedle)
-        ).subscribe(
-            data => this.searchResult = data
-        );
+        this.search.searchList({ query: this.searchNeedle }).pipe(
+            map((response: PaginatedResult) => response.results),
+            takeUntil(this.ngDestroy$)
+        ).subscribe((results: Search[]) => {
+            this.searchResult = results;
+            this.searchResultTitle = this.searchNeedle;
+            this.cd.markForCheck();
+        });
     }
 }
