@@ -219,49 +219,26 @@
                 </app-collapse-item>
             </ion-col>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
-                <ion-row>
-                    <app-collapse-item class="width100" title='{{"master-profile.info.education"|translate}}'>
-                        <ion-item
-                                *ngFor="let education of educationList"
-                                class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
-                            <ion-col>
-                                <ion-row class="ion-justify-content-between">
-                                    <ion-item
-                                            class="ion-item-no-border availability-subtitle ion-item-no-vertical-padding ion-item-no-side-padding">
-                                        {{education.university}}
-                                    </ion-item>
-                                    <ion-item class="ion-item-no-border ion-align-items-center"
-                                              routerDirection="forward"
-                                              routerLink="education-edit/{{education.id}}"
-                                              routerLinkActive="active"
-                                              *ngIf="editable | async">
-                                        <ion-icon name="create-outline"></ion-icon>
-                                    </ion-item>
-                                </ion-row>
-                                <ion-row *ngIf="education.deegree">{{education.deegree}}</ion-row>
-                                <ion-row *ngIf="education.end_date">
-                                    {{education.start_date}} - {{education.end_date}}
-                                </ion-row>
-                                <ion-row *ngIf="!education.end_date && education.is_still_here">
-                                    {{education.start_date}} - {{"global.experience-dates.until-now"|translate}}
-                                </ion-row>
-                            </ion-col>
+                <app-collapse-item class="width100" title='{{"master-profile.info.education"|translate}}'>
+                    <ion-item *ngFor="let education of educationList"
+                              lines="none" class="ion-item-no-padding-right experience">
+                        <app-education [education]="education" [editable]="editable | async"
+                                       class="width100"></app-education>
+                    </ion-item>
+                    <ion-row *ngIf="editable | async">
+                        <ion-item class="ion-no-padding ion-margin-start" lines="none"
+                                  routerDirection="forward"
+                                  routerLink="education-add/"
+                                  routerLinkActive="active">
+                            <ion-icon color="secondary" name="add-circle"></ion-icon>
+                            <ion-label class="ion-padding-start">
+                                {{'master-profile.info.add-new-education'|translate}}
+                            </ion-label>
                         </ion-item>
-                        <ion-row *ngIf="editable | async">
-                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
-                                      routerDirection="forward"
-                                      routerLink="education-add/"
-                                      routerLinkActive="active">
-                                <ion-icon color="secondary" name="add-circle"></ion-icon>
-                                <ion-label class="ion-padding-start">
-                                    {{'master-profile.info.add-new-education'|translate}}
-                                </ion-label>
-                            </ion-item>
-                        </ion-row>
-                    </app-collapse-item>
-                </ion-row>
+                    </ion-row>
+                </app-collapse-item>
             </ion-col>
         </ion-item>
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
