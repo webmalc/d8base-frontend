@@ -40,7 +40,7 @@ export class ServicePublishService {
     ) {
     }
 
-    public publish(): Observable<void> {
+    public publish(): Observable<Service> {
         return from(this.servicePublishDataFormatter.getData()).pipe(
             switchMap(data => this.processData(
                 data.master,
@@ -52,9 +52,8 @@ export class ServicePublishService {
                 data.masterLocation,
                 data.servicePrice,
                 data.user
-            ).pipe(
-                tap(() => this.servicePublishDataHolder.reset())
-            ))
+            )),
+            tap(() => this.servicePublishDataHolder.reset())
         );
     }
 
@@ -68,21 +67,29 @@ export class ServicePublishService {
         masterLocation: MasterLocation,
         price: Price,
         user?: User
-    ): Observable<any> {
+    ): Observable<Service> {
+        let createdService: Service;
+        let createdMaster: Master;
+
         return this.createMasterUpdateUser(master, user).pipe(
-            switchMap(
-                (createdMaster) => this.createService(service, createdMaster).pipe(
-                    switchMap(createdService => forkJoin({
-                        photosRet: this.createPhotos(photos, createdService),
-                        scheduleRet: this.createSchedule(schedule, createdService),
-                        masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
-                        masterLocRet: !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation),
-                        priceRet: this.createPrice(price, createdService)
-                    }).pipe(
-                        switchMap(({masterLocRet}) => this.createServiceLocation(serviceLocation, createdService, masterLocRet))
-                    ))
-                )
-            )
+            switchMap((reply) => {
+                createdMaster = reply;
+
+                return this.createService(service, createdMaster);
+            }),
+            switchMap(reply => {
+                createdService = reply;
+
+                return forkJoin({
+                    photosRet: this.createPhotos(photos, createdService),
+                    scheduleRet: this.createSchedule(schedule, createdService),
+                    masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
+                    masterLocRet: !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation),
+                    priceRet: this.createPrice(price, createdService)
+                });
+            }),
+            switchMap(({masterLocRet}) => this.createServiceLocation(serviceLocation, createdService, masterLocRet)),
+            map(() => createdService)
         );
     }
 
