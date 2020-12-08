@@ -2,8 +2,8 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {SentOrder} from '@app/core/models/sent-order';
 import {Tabs} from '@app/my-orders/enums/tabs.enum';
 import {SentOrdersApiService} from '@app/order/services';
-import {BehaviorSubject, Subscription} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-outbox',
@@ -15,7 +15,7 @@ export class OutboxComponent implements OnInit, OnDestroy {
     public tabs = Tabs;
     public orders: SentOrder[];
     private readonly currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({status__in: 'confirmed,paid,not_confirmed'});
-    private sub: Subscription;
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
         private readonly sentOrdersApi: SentOrdersApiService,
@@ -24,7 +24,8 @@ export class OutboxComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.sub = this.currentFilter$.pipe(
+        this.currentFilter$.pipe(
+            takeUntil(this.destroy$),
             switchMap(params => this.sentOrdersApi.get(params))
         ).subscribe(orders => {
             this.orders = orders.results;
@@ -33,7 +34,7 @@ export class OutboxComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.sub.unsubscribe();
+        this.destroy$.next();
     }
 
     public changeTab(e: CustomEvent): void {

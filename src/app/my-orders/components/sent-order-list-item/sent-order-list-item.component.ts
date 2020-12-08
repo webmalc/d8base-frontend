@@ -6,7 +6,7 @@ import {MasterList} from '@app/master/models/master-list';
 import {ServicesApiCache} from '@app/my-orders/services';
 import {MasterReadonlyApiCacheService} from '@app/my-orders/services/master-readonly-api-cache.service';
 import {Service} from '@app/service/models/service';
-import {switchMap, tap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-sent-order-list-item',
@@ -38,10 +38,15 @@ export class SentOrderListItemComponent  {
             return;
         }
         this.servicesCache.getById(order.service).pipe(
-            switchMap(service => this.masterCache.getById(service.professional)),
-            tap(master => this.master = master),
-            tap(() => this.changeDetector.markForCheck())
-        ).subscribe();
+            switchMap(service => {
+                this.service = service;
+
+                return this.masterCache.getById(service.professional);
+            })
+        ).subscribe(master => {
+            this.master = master;
+            this.changeDetector.markForCheck();
+        });
     }
 
     public getPhoto(photo: string): string | SafeResourceUrl {
