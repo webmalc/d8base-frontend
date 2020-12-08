@@ -2,13 +2,13 @@
   font-size: 18px;
   font-weight: bold;
   line-height: 24px;
-  color: #222428;
+  color: var(--ion-color-dark);
 }
 
 .location-map-link {
   font-size: 16px;
   line-height: 20px;
-  color: #3880FF;
+  color: var(--ion-color-secondary);
 }
 
 .availability-subtitle {
@@ -16,4 +16,7 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: bold;
+}
+.experience {
+  padding-right: 7px;
 }

@@ -395,7 +395,8 @@
       "reviews": "Reviews",
       "on-map": "Trace on map",
       "from-here": "From target address",
-      "add-new-address": "Add one more address"
+      "add-new-address": "Add one more address",
+      "add-new-exp": "Add new qualification"
     },
     "calendar": {
       "title": "Calendar"
