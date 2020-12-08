@@ -9,11 +9,11 @@
         <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
             <ion-img [src]="getAvatar()"></ion-img>
         </ion-item>
-        <ion-row class="ion-justify-content-between ion-align-items-center pv5">
+        <ion-row class="ion-justify-content-start ion-align-items-center pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height ion-item-no-padding-right">
                 {{"master-profile.main-info.rating"|translate}}
             </ion-item>
-            <ion-row class="ion-align-items-center">
+            <ion-row class="ion-align-items-center ion-margin-start">
                 <ion-item
                         class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-align-items-center">
                     <app-rating [rating]="ratingToNumber()"></app-rating>
@@ -23,19 +23,19 @@
                 </ion-item>
             </ion-row>
         </ion-row>
-        <ion-row class="ion-justify-content-between pv5">
+        <ion-row class="ion-justify-content-start pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
                 {{"master-profile.main-info.reviews"|translate}}
             </ion-item>
-            <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
+            <ion-item class="other-text ion-item-no-border ion-item-no-min-height ion-margin-start">
                 {{sectionData?.reviews?.length}} {{declinationReviews(sectionData?.reviews.length) | translate}}
             </ion-item>
         </ion-row>
-        <ion-row class="ion-justify-content-between pv5">
+        <ion-row class="ion-justify-content-start pv5">
             <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
                 {{"master-profile.main-info.email"|translate}}
             </ion-item>
-            <ion-item class="other-text ion-item-no-border ion-item-no-min-height">
+            <ion-item class="other-text ion-item-no-border ion-item-no-min-height ion-margin-start">
                 <ion-icon *ngIf="sectionData?.is_confirmed" color="success" name="checkmark-circle-outline"></ion-icon>
                 <ion-icon *ngIf="!sectionData?.is_confirmed" color="danger" name="close-circle-outline"></ion-icon>
             </ion-item>
