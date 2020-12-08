@@ -40,7 +40,7 @@ export class ServicePublishService {
     ) {
     }
 
-    public publish(): Observable<void> {
+    public publish(): Observable<Service> {
         return from(this.servicePublishDataFormatter.getData()).pipe(
             switchMap(data => this.processData(
                 data.master,
@@ -52,9 +52,8 @@ export class ServicePublishService {
                 data.masterLocation,
                 data.servicePrice,
                 data.user
-            ).pipe(
-                tap(() => this.servicePublishDataHolder.reset())
-            ))
+            )),
+            tap(() => this.servicePublishDataHolder.reset())
         );
     }
 
@@ -68,21 +67,29 @@ export class ServicePublishService {
         masterLocation: MasterLocation,
         price: Price,
         user?: User
-    ): Observable<any> {
+    ): Observable<Service> {
+        let createdService: Service;
+        let createdMaster: Master;
+
         return this.createMasterUpdateUser(master, user).pipe(
-            switchMap(
-                (createdMaster) => this.createService(service, createdMaster).pipe(
-                    switchMap(createdService => forkJoin({
-                        photosRet: this.createPhotos(photos, createdService),
-                        scheduleRet: this.createSchedule(schedule, createdService),
-                        masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
-                        masterLocRet: !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation),
-                        priceRet: this.createPrice(price, createdService)
-                    }).pipe(
-                        switchMap(({masterLocRet}) => this.createServiceLocation(serviceLocation, createdService, masterLocRet))
-                    ))
-                )
-            )
+            switchMap((reply) => {
+                createdMaster = reply;
+
+                return this.createService(service, createdMaster);
+            }),
+            switchMap(reply => {
+                createdService = reply;
+
+                return forkJoin({
+                    photosRet: this.createPhotos(photos, createdService),
+                    scheduleRet: this.createSchedule(schedule, createdService),
+                    masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
+                    masterLocRet: !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation),
+                    priceRet: this.createPrice(price, createdService)
+                });
+            }),
+            switchMap(({masterLocRet}) => this.createServiceLocation(serviceLocation, createdService, masterLocRet)),
+            map(() => createdService)
         );
     }
 
@@ -100,45 +107,33 @@ export class ServicePublishService {
     }
 
     private createService(service: Service, master: Master): Observable<Service> {
-        service.professional = master.id;
-
-        return this.serviceApi.create(service);
+        return this.serviceApi.create({ ...service, professional: master.id });
     }
 
     private createPhotos(photos: ServicePhoto[], service: Service): Observable<ServicePhoto[]> {
+        // TODO: shouldn't mutate method's arguments
         photos.forEach(photo => photo.service = service.id);
 
         return this.servicePhotosApi.createList(photos);
     }
 
     private createSchedule(schedule: ServiceSchedule[], service: Service): Observable<ServiceSchedule[]> {
-        schedule?.forEach(v => v.service = service.id);
-
-        return this.serviceScheduleApi.createList(schedule);
+        return this.serviceScheduleApi.createList(schedule?.map(v => ({ ...v, service: service.id })));
     }
 
     private createMasterSchedule(schedule: MasterSchedule[], master: Master): Observable<MasterSchedule[]> {
-        schedule?.forEach(v => v.professional = master.id);
-
-        return this.masterScheduleApi.createList(schedule);
+        return this.masterScheduleApi.createList(schedule?.map(v => ({ ...v, professional: master.id })));
     }
 
     private createMasterLocation(location: MasterLocation, master: Master): Observable<MasterLocation> {
-        location.professional = master.id;
-
-        return this.masterLocationApi.create(location);
+        return this.masterLocationApi.create({ ...location, professional: master.id });
     }
 
     private createPrice(price: Price, service: Service): Observable<Price> {
-        price.service = service.id;
-
-        return this.servicePriceApi.create(price);
+        return this.servicePriceApi.create({ ...price, service: service.id });
     }
 
     private createServiceLocation(location: ServiceLocation, service: Service, masterLoc: MasterLocation): Observable<ServiceLocation> {
-        location.location = masterLoc.id;
-        location.service = service.id;
-
-        return this.serviceLocationApi.create(location);
+        return this.serviceLocationApi.create({ ...location, location: masterLoc.id, service: service.id });
     }
 }

@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
+import { Router } from '@angular/router';
 import {Master} from '@app/core/models/master';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
-import {MasterPickerPopoverComponent} from '@app/service/components/master-peeker/master-picker-popover.component';
+import {MasterPickerPopoverComponent, MasterPickerPopoverData} from '@app/service/components/master-peeker/master-picker-popover.component';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
@@ -12,8 +13,8 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
 import {PopoverController} from '@ionic/angular';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {OverlayEventDetail} from '@ionic/core';
+import {map, single} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-final-step',
@@ -27,64 +28,44 @@ export class ServicePublishFinalStepComponent extends Reinitable {
         private readonly popoverController: PopoverController,
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
-        private readonly masterLocationApi: MasterLocationApiService
+        private readonly masterLocationApi: MasterLocationApiService,
+        private readonly router: Router
     ) {
         super();
     }
 
-    public publish(): void {
-        if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster) {
-            this.popover().then(() => this.servicePublish.publish().subscribe(
-                () => {
-                    // TODO: show feedback about operation success
-                }
-            ));
-        } else {
-            this.servicePublish.publish().subscribe(
-                () => {
-                    // TODO: show feedback about operation success
-                }
+    public async publish(): Promise<void> {
+        const isNewMaster = this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster;
+        // TODO show master selector only when masters.length > 1
+        const master = isNewMaster ? null : await this.chooseMaster();
+        if (master) {
+            const masterLocation = await this.getMasterLocation(master);
+            await this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
+                ServicePublishSteps.Final, {master, masterLocation}
             );
         }
+        this.servicePublish.publish()
+            .pipe(single())
+            .subscribe((service) => this.router.navigate(['service', service.id ]));
     }
 
     protected init(): void {
         ContactsAddComponent.reinit$.next(true);
     }
 
-    private popover(): Promise<void> {
-        return new Promise<void>(resolve => {
-            this.popoverController.create({
-                component: MasterPickerPopoverComponent,
-                translucent: true
-            }).then(pop => pop.present().then(
-                () => {
-                    const subscription = MasterPickerPopoverComponent.master$.subscribe(
-                        (master: Master) => {
-                            if (master !== undefined) {
-                                this.getMasterLocation(master).subscribe(
-                                    masterLocation => this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
-                                        ServicePublishSteps.Final, {master, masterLocation}
-                                    ).then(() => this.servicePublishDataHolder.assignStepData(
-                                        ServicePublishSteps.Four, {isNewMaster: false}
-                                    ).then(
-                                        () => this.popoverController.dismiss().then(() => {
-                                            subscription.unsubscribe();
-                                            resolve();
-                                        })
-                                    ))
-                                );
-                            }
-                        }
-                    );
-                }
-            ));
+    private async chooseMaster(): Promise<Master> {
+        const popover = await this.popoverController.create({
+            component: MasterPickerPopoverComponent,
+            translucent: true
         });
+        await popover.present();
+
+        return popover.onDidDismiss().then((eventDetail: OverlayEventDetail<MasterPickerPopoverData>) => eventDetail.data.master);
     }
 
-    private getMasterLocation(master: Master): Observable<MasterLocation> {
+    private getMasterLocation(master: Master): Promise<MasterLocation> {
         return this.masterLocationApi.getByClientId(master.id).pipe(
             map(list => list.results.length === 0 ? null : list.results[0])
-        );
+        ).toPromise();
     }
 }
