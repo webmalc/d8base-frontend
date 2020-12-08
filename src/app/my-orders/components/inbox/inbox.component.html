@@ -1,0 +1,23 @@
+<ion-segment (ionChange)="changeTab($event)" [value]="tabs.new">
+    <ion-segment-button [value]="tabs.new">
+        <ion-label>{{ 'received_orders.newTab' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="tabs.current">
+        <ion-label>{{ 'received_orders.currentTab' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="tabs.archive">
+        <ion-label>{{ 'received_orders.archiveTab' | translate }}</ion-label>
+    </ion-segment-button>
+</ion-segment>
+
+<ion-list *ngIf="orders?.length > 0; else placeholder">
+    <app-received-order-list-item (accept)="onOrderAccept($event)"
+                         *ngFor="let order of orders"
+                         [order]="order">
+    </app-received-order-list-item>
+</ion-list>
+<ng-template #placeholder>
+    <ion-item class="ion-text-center" lines="none">
+        <ion-label>{{ 'received_orders.empty-placeholder' | translate }}</ion-label>
+    </ion-item>
+</ng-template>

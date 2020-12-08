@@ -39,8 +39,8 @@ const routes: Routes = [
         loadChildren: () => import('./order/order.module').then(m => m.OrderPageModule)
     },
     {
-        path: 'inbox',
-        loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule)
+        path: 'my-orders',
+        loadChildren: () => import('./my-orders/my-orders.module').then(m => m.MyOrdersModule)
     }
 ];
 

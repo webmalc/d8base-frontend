@@ -8,12 +8,5 @@ import {ServiceTag} from '@app/service/models/service-tag';
     styleUrls: ['./master-profile-service-presentation.component.scss']
 })
 export class MasterProfileServicePresentationComponent {
-
     @Input() public serviceData: { service: Service, tags?: ServiceTag[] };
-
-    public getPrice(): string {
-        return this.serviceData.service.price.is_price_fixed ?
-            Math.round(this.serviceData.service.price.price).toString() :
-            `${Math.round(this.serviceData.service.price.start_price)} - ${this.serviceData.service.price.end_price}`;
-    }
 }

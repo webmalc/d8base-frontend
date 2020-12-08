@@ -592,5 +592,15 @@
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",
     "accept-order": "Принять заказ"
+  },
+  "order-status": {
+    "pending": "Ожидает",
+    "accepted": "Подтверждён",
+    "archived": "Архивирован",
+    "completed": "Выполнен"
+  },
+  "orders-type": {
+    "sent": "Отправленные",
+    "received": "Полученные"
   }
 }

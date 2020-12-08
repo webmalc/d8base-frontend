@@ -592,5 +592,15 @@
     "archiveTab": "Archived",
     "empty-placeholder": "empty",
     "accept-order": "Accept order"
+  },
+  "order-status": {
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "archived": "Archived",
+    "completed": "Completed"
+  },
+  "orders-type": {
+    "sent": "Sent",
+    "received": "Received"
   }
 }

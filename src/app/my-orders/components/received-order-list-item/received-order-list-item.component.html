@@ -1,15 +1,15 @@
-<ion-card [routerLink]="['inbox', order.id]" *ngIf="order">
+<ion-card *ngIf="order" [routerLink]="['my-orders', order.id]" class="ion-no-margin mv5">
     <ion-item lines="none">
         <ion-label slot="start">
             <div>{{ order.start_datetime | date:'mediumDate'}}</div>
-            <div>{{ order.start_datetime | date:'shortTime'}} — {{ order.end_datetime | date:'shortTime'}}</div>
+            <div>{{ order.start_datetime | date:'hh:mm'}} — {{ order.end_datetime | date:'hh:mm'}}</div>
         </ion-label>
         <app-order-status [status]="order.status" slot="end"></app-order-status>
     </ion-item>
 
     <ion-item lines="none">
         <ion-avatar slot="start">
-            <img src="{{ order.client.avatar_thumbnail }}" alt="avatar">
+            <ion-img alt="avatar" src="{{ getPhoto(order.client?.avatar_thumbnail) }}"></ion-img>
         </ion-avatar>
         <ion-label>
             {{ order.client.first_name }}

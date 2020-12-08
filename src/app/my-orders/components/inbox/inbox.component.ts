@@ -1,19 +1,18 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {OrderModel} from '@app/core/models/order-model';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ReceivedOrder} from '@app/core/models/received-order';
+import {Tabs} from '@app/my-orders/enums/tabs.enum';
+import {ReceivedOrdersApiService} from '@app/my-orders/services';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {switchMap, takeUntil} from 'rxjs/operators';
 
-import {Tabs} from './enums/tabs.enum';
-import {ReceivedOrdersApiService, ServicesApiCache} from './services';
-
 @Component({
-    selector: 'app-inbox-page',
-    templateUrl: './inbox-page.component.html',
-    styleUrls: ['./inbox-page.component.scss'],
-    providers: [ServicesApiCache]
+    selector: 'app-inbox',
+    templateUrl: './inbox.component.html',
+    styleUrls: ['./inbox.component.scss']
 })
-export class InboxPageComponent implements OnInit {
-    public orders: OrderModel[];
+export class InboxComponent implements OnInit, OnDestroy {
+
+    public orders: ReceivedOrder[];
     public tabs = Tabs;
 
     private readonly currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({status__in: 'new'});
@@ -35,6 +34,10 @@ export class InboxPageComponent implements OnInit {
         });
     }
 
+    public ngOnDestroy(): void {
+        this.destroy$.next();
+    }
+
     public changeTab(e: CustomEvent): void {
         const currentTab: Tabs = e.detail.value;
         switch (currentTab) {
@@ -50,7 +53,7 @@ export class InboxPageComponent implements OnInit {
         }
     }
 
-    public onOrderAccept(order: OrderModel): void {
+    public onOrderAccept(order: ReceivedOrder): void {
         // TODO: change order status
     }
 }

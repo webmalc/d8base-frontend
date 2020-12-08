@@ -1,5 +1,0 @@
-<ng-container [ngSwitch]="status">
-    <ion-button *ngSwitchCase="'new'" color="warning" [disabled]="true">{{ 'Ожидает' | translate }}</ion-button>
-    <ion-button *ngSwitchCase="'confirmed'" color="success" [disabled]="true">{{ 'Подтверждён' | translate }}</ion-button>
-    <ion-button *ngSwitchCase="'archived'" color="dark" [disabled]="true">{{ 'Архивирован' | translate }}</ion-button>
-</ng-container>

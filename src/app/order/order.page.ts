@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {OrderPostModel} from '@app/core/models/order-model';
+import {OrderPostModel} from '@app/core/interfaces/order-model';
 import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
 import {MasterList} from '@app/master/models/master-list';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';

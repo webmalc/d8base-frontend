@@ -32,7 +32,7 @@ export const mainMenuItems: MainMenuItem[] = [
     {
         title: 'template.my-orders',
         icon: 'calendar-outline',
-        link: '/inbox',
+        link: '/my-orders',
         masterOnly: true
     },
     {

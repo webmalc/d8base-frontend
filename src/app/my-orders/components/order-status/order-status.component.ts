@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {OrderStatus} from '@app/core/models/order-model';
+import {OrderStatus} from '@app/core/types/order-status';
 
 @Component({
     selector: 'app-order-status',

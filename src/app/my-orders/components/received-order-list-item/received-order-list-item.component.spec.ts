@@ -2,18 +2,18 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
-import {OrderListItemComponent} from '@app/inbox/components';
-import { ServicesApiCache } from '@app/inbox/services';
+import {ReceivedOrderListItemComponent} from '@app/my-orders/components';
+import { ServicesApiCache } from '@app/my-orders/services';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
 describe('OrderListItemComponent', () => {
-    let component: OrderListItemComponent;
-    let fixture: ComponentFixture<OrderListItemComponent>;
+    let component: ReceivedOrderListItemComponent;
+    let fixture: ComponentFixture<ReceivedOrderListItemComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [OrderListItemComponent],
+            declarations: [ReceivedOrderListItemComponent],
             imports: [
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
@@ -23,7 +23,7 @@ describe('OrderListItemComponent', () => {
             providers: [ServicesApiCache]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(OrderListItemComponent);
+        fixture = TestBed.createComponent(ReceivedOrderListItemComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

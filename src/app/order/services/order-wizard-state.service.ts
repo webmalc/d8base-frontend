@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {OrderModel, OrderPostModel} from '@app/core/models/order-model';
+import {OrderPostModel} from '@app/core/interfaces/order-model';
+import {SentOrder} from '@app/core/models/sent-order';
 import {MasterList} from '@app/master/models/master-list';
 import {orderSteps} from '@app/order/order-steps';
 import {Service} from '@app/service/models/service';
@@ -12,7 +13,7 @@ export class OrderWizardStateService {
     public order$ = new BehaviorSubject<Partial<OrderPostModel>>({});
     public master$ = new BehaviorSubject<MasterList>(null);
     public service$ = new BehaviorSubject<Service>(null);
-    public result: OrderModel;
+    public result: SentOrder;
 
     private currentStepIndex: number = 0;
 
@@ -34,7 +35,7 @@ export class OrderWizardStateService {
         }
     }
 
-    public finalize(result: OrderModel): void {
+    public finalize(result: SentOrder): void {
         this.order$.next({});
         this.result = result;
         this.router.navigate(['order', 'done']).then();

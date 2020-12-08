@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {InboxPageComponent} from './inbox-page.component';
+import {MyOrdersPageComponent} from './my-orders-page.component';
 
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: InboxPageComponent
+        component: MyOrdersPageComponent
     }
 ];
 
@@ -14,5 +14,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class InboxRoutingModule {
+export class MyOrdersRoutingModule {
 }
