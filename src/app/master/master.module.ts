@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {CertificateComponent} from '@app/master/components/certificate/certificate.component';
 import {EducationComponent} from '@app/master/components/education/education.component';
 import {ExperienceComponent} from '@app/master/components/experience/experience.component';
 import {MasterProfileCalendarComponent} from '@app/master/components/master-profile-calendar/master-profile-calendar.component';
@@ -55,7 +56,8 @@ import {MasterPage} from './master.page';
         MasterProfileServiceEditComponent,
         MasterProfileSubmenuComponent,
         ExperienceComponent,
-        EducationComponent
+        EducationComponent,
+        CertificateComponent
     ],
     providers: [
         MasterProfileServicesSearchService,

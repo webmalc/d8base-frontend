@@ -1,80 +1,72 @@
 <ion-row>
     <ion-col class="ion-no-padding" size="12">
-        <ion-item class="ion-item-no-border ion-item-bottom-border master-profile-tab-title">
+        <ion-item class="master-profile-tab-title">
             {{"master-profile.info.information"|translate}}
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding">
+        <ion-item class="ion-item-no-side-padding">
             <ion-col class="ion-no-padding" size="12">
-                <ion-row>
-                    <ion-row class="ion-justify-content-start">
-                        <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                            {{"master-profile.info.master-location"|translate}}
-                        </ion-item>
-                    </ion-row>
-                    <ion-item *ngFor="let masterLocation of masterLocation"
-                              class="ion-item-no-min-height ion-item-no-border width100 ion-item-no-side-padding pv10">
-                        <ion-col class="ion-no-padding">
-                            <ion-row class="ion-justify-content-between ion-align-items-center">
-                                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                    {{masterLocation?.address}}
-                                </ion-item>
-                                <ion-item class="ion-item-no-border ion-align-items-center"
-                                          routerDirection="forward"
-                                          routerLink="location-edit/{{masterLocation.id}}"
-                                          routerLinkActive="active"
-                                          *ngIf="editable | async"
-                                >
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </ion-item>
-                            </ion-row>
-                            <ion-row class="ion-justify-content-between">
-                                <ion-item
-                                        class="ion-item-no-border ion-item-no-side-padding pl10 ion-item-no-min-height pv5 location-map-link">
-                                    <ion-icon class="ion-padding-end" color="secondary"
-                                              name="location-outline"></ion-icon>
-                                    {{"master-profile.info.on-map"|translate}}
-                                </ion-item>
-                            </ion-row>
-                            <ion-row class="ion-justify-content-between">
-                                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                    {{"master-profile.info.from-here"|translate}}
-                                </ion-item>
-                                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                    0,2{{"units.0"|translate}}
-                                </ion-item>
-                            </ion-row>
-                        </ion-col>
+                <ion-item class="ion-item-no-min-height pv5 master-address" lines="none">
+                    {{"master-profile.info.master-location"|translate}}
+                </ion-item>
+                <ion-item *ngFor="let masterLocation of masterLocation"
+                          class="ion-item-no-min-height ion-item-no-border width100 ion-item-no-side-padding pv10">
+                    <ion-col class="ion-no-padding">
+                        <ion-row class="ion-justify-content-between ion-align-items-center">
+                            <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                                {{masterLocation?.address}}
+                            </ion-item>
+                            <ion-item class="ion-item-no-border ion-align-items-center"
+                                      routerDirection="forward"
+                                      routerLink="location-edit/{{masterLocation.id}}"
+                                      routerLinkActive="active"
+                                      *ngIf="editable | async"
+                            >
+                                <ion-icon name="create-outline"></ion-icon>
+                            </ion-item>
+                        </ion-row>
+                        <ion-row class="ion-justify-content-between">
+                            <ion-item
+                                    class="ion-item-no-border ion-item-no-side-padding pl10 ion-item-no-min-height pv5 location-map-link">
+                                <ion-icon class="ion-padding-end" color="secondary"
+                                          name="location-outline"></ion-icon>
+                                {{"master-profile.info.on-map"|translate}}
+                            </ion-item>
+                        </ion-row>
+                        <ion-row class="ion-justify-content-between">
+                            <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                                {{"master-profile.info.from-here"|translate}}
+                            </ion-item>
+                            <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                                0,2{{"units.0"|translate}}
+                            </ion-item>
+                        </ion-row>
+                    </ion-col>
+                </ion-item>
+                <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
+                          routerDirection="forward"
+                          routerLink="location-add/"
+                          routerLinkActive="active">
+                    <ion-icon color="secondary" name="add-circle"></ion-icon>
+                    <ion-label class="ion-padding-start">
+                        {{'master-profile.info.add-new-address'|translate}}
+                    </ion-label>
+                </ion-item>
+                <app-collapse-item class="width100" title='{{"master-profile.info.contacts"|translate}}'>
+                    <ion-item class="ion-item-no-border ion-item-no-padding-right">
+                        <app-abstract-contacts
+                                [clientContacts]="masterContacts"
+                                addNewContactUrl="{{addUrl}}"
+                                class="width100"
+                                editContactUrl="{{editUrl}}"
+                                editDefaultContactUrl="{{editDefaultUrl}}"
+                                [interactable]="editable | async">
+                        </app-abstract-contacts>
                     </ion-item>
-                </ion-row>
-                <ion-row *ngIf="editable | async">
-                    <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
-                              routerDirection="forward"
-                              routerLink="location-add/"
-                              routerLinkActive="active">
-                        <ion-icon color="secondary" name="add-circle"></ion-icon>
-                        <ion-label class="ion-padding-start">
-                            {{'master-profile.info.add-new-address'|translate}}
-                        </ion-label>
-                    </ion-item>
-                </ion-row>
-                <ion-row>
-                    <app-collapse-item class="width100" title='{{"master-profile.info.contacts"|translate}}'>
-                        <ion-item class="ion-item-no-border ion-item-no-padding-right">
-                            <app-abstract-contacts
-                                    [clientContacts]="masterContacts"
-                                    addNewContactUrl="{{addUrl}}"
-                                    class="width100"
-                                    editContactUrl="{{editUrl}}"
-                                    editDefaultContactUrl="{{editDefaultUrl}}"
-                                    [interactable]="editable | async">
-                            </app-abstract-contacts>
-                        </ion-item>
-                    </app-collapse-item>
-                </ion-row>
+                </app-collapse-item>
             </ion-col>
         </ion-item>
 
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row class="ion-justify-content-between ion-padding-top">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
@@ -89,15 +81,13 @@
                         <ion-icon name="create-outline"></ion-icon>
                     </ion-item>
                 </ion-row>
-                <ion-row class="ion-justify-content-start">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-desc">
-                        {{master?.description}}
-                    </ion-item>
-                </ion-row>
+                <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-desc">
+                    {{master?.description}}
+                </ion-item>
             </ion-col>
         </ion-item>
 
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row class="ion-justify-content-between ion-padding-top">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
@@ -112,15 +102,13 @@
                         <ion-icon name="create-outline"></ion-icon>
                     </ion-item>
                 </ion-row>
-                <ion-row class="ion-justify-content-start">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{master?.name}}
-                    </ion-item>
-                </ion-row>
+                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
+                    {{master?.name}}
+                </ion-item>
             </ion-col>
         </ion-item>
 
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <ion-row class="ion-justify-content-between ion-padding-top">
                     <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
@@ -135,7 +123,7 @@
                         <ion-icon name="create-outline"></ion-icon>
                     </ion-item>
                 </ion-row>
-                <ion-row class="ion-justify-content-start">
+                <ion-row class="ion-justify-content-start ion-margin-bottom">
                     <ion-item *ngFor="let tag of masterTags"
                               class="ion-item-no-border ion-item-no-min-height ion-item-tag">
                         {{tag.name}}
@@ -194,10 +182,7 @@
                 </ion-row>
             </ion-col>
         </ion-item>
-
-
-        <ion-item *ngIf="experienceList?.length"
-                  class="ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
                 <app-collapse-item class="width100" title='{{"master-profile.info.experience"|translate}}'>
                     <ion-item lines="none" class="ion-item-no-padding-right experience"
@@ -205,17 +190,15 @@
                         <app-experience [editable]="editable | async" [exp]="experience"
                                         class="width100"></app-experience>
                     </ion-item>
-                    <ion-row *ngIf="editable | async">
-                        <ion-item class="ion-no-padding ion-margin-start" lines="none"
-                                  routerDirection="forward"
-                                  routerLink="experience-add/"
-                                  routerLinkActive="active">
-                            <ion-icon color="secondary" name="add-circle"></ion-icon>
-                            <ion-label class="ion-padding-start">
-                                {{'master-profile.info.add-new-exp'|translate}}
-                            </ion-label>
-                        </ion-item>
-                    </ion-row>
+                    <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
+                              routerDirection="forward"
+                              routerLink="experience-add/"
+                              routerLinkActive="active">
+                        <ion-icon color="secondary" name="add-circle"></ion-icon>
+                        <ion-label class="ion-padding-start">
+                            {{'master-profile.info.add-new-exp'|translate}}
+                        </ion-label>
+                    </ion-item>
                 </app-collapse-item>
             </ion-col>
         </ion-item>
@@ -227,72 +210,44 @@
                         <app-education [education]="education" [editable]="editable | async"
                                        class="width100"></app-education>
                     </ion-item>
-                    <ion-row *ngIf="editable | async">
-                        <ion-item class="ion-no-padding ion-margin-start" lines="none"
-                                  routerDirection="forward"
-                                  routerLink="education-add/"
-                                  routerLinkActive="active">
-                            <ion-icon color="secondary" name="add-circle"></ion-icon>
-                            <ion-label class="ion-padding-start">
-                                {{'master-profile.info.add-new-education'|translate}}
-                            </ion-label>
-                        </ion-item>
-                    </ion-row>
+                    <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
+                              routerDirection="forward"
+                              routerLink="education-add/"
+                              routerLinkActive="active">
+                        <ion-icon color="secondary" name="add-circle"></ion-icon>
+                        <ion-label class="ion-padding-start">
+                            {{'master-profile.info.add-new-education'|translate}}
+                        </ion-label>
+                    </ion-item>
                 </app-collapse-item>
             </ion-col>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
-                <ion-row>
-                    <app-collapse-item class="width100" title='{{"master-profile.info.certificates"|translate}}'>
-                        <ion-item *ngFor="let certificate of certificateList"
-                                  class="ion-item-no-border ion-item-bottom-border ion-margin-horizontal ion-margin-bottom">
-                            <ion-col>
-                                <ion-row class="ion-justify-content-between">
-                                    <ion-item
-                                            class="ion-item-no-border availability-subtitle ion-item-no-vertical-padding ion-item-no-side-padding">
-                                        {{certificate.name}}
-                                    </ion-item>
-                                    <ion-item *ngIf="editable | async"
-                                              class="ion-item-no-border ion-align-items-center">
-                                        <ion-item class="ion-item-no-border ion-align-items-center"
-                                                  routerDirection="forward"
-                                                  routerLink="certificate-edit/{{certificate.id}}"
-                                                  routerLinkActive="active">
-                                            <ion-icon name="create-outline"></ion-icon>
-                                        </ion-item>
-                                    </ion-item>
-                                </ion-row>
-                                <ion-row>{{certificate.organization}}</ion-row>
-                                <ion-row *ngIf="certificate.date">{{certificate.date}}</ion-row>
-                                <ion-row *ngIf="certificate.photo_thumbnail">
-                                    <ion-img src="{{certificate.photo_thumbnail}}"></ion-img>
-                                </ion-row>
-                            </ion-col>
-                        </ion-item>
-                        <ion-row *ngIf="editable | async">
-                            <ion-item class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start"
-                                      routerDirection="forward"
-                                      routerLink="certificate-add/"
-                                      routerLinkActive="active">
-                                <ion-icon color="secondary" name="add-circle"></ion-icon>
-                                <ion-label class="ion-padding-start">
-                                    {{'master-profile.info.add-new-education'|translate}}
-                                </ion-label>
-                            </ion-item>
-                        </ion-row>
-                    </app-collapse-item>
-                </ion-row>
+                <app-collapse-item class="width100" title='{{"master-profile.info.certificates"|translate}}'>
+                    <ion-item *ngFor="let certificate of certificateList" lines="none"
+                              class="ion-item-no-padding-right experience">
+                        <app-certificate [certificate]="certificate" [editable]="editable | async"
+                                         class="width100"></app-certificate>
+                    </ion-item>
+                    <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
+                              routerDirection="forward"
+                              routerLink="certificate-add/"
+                              routerLinkActive="active">
+                        <ion-icon color="secondary" name="add-circle"></ion-icon>
+                        <ion-label class="ion-padding-start">
+                            {{'master-profile.info.add-new-certificate'|translate}}
+                        </ion-label>
+                    </ion-item>
+                </app-collapse-item>
             </ion-col>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="6">
-                <ion-row class="ion-justify-content-start ion-padding-top ion-margin-bottom">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        {{"master-profile.info.availability"|translate}}
-                    </ion-item>
-                </ion-row>
-                <ion-item class="ion-item-no-border">
+                <ion-item class="ion-item-no-min-height pv5 master-address ion-padding-top ion-margin-bottom" lines="none">
+                    {{"master-profile.info.availability"|translate}}
+                </ion-item>
+                <ion-item lines="none">
                     <ion-col class="ion-no-padding" size="12">
                         <ion-row class="availability-subtitle">
                             {{"master-profile.info.languages"|translate}}
@@ -301,18 +256,15 @@
                     </ion-col>
                 </ion-item>
             </ion-col>
-            <ion-col class="ion-no-padding" size="6">
-            </ion-col>
+            <ion-col class="ion-no-padding" size="6"></ion-col>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
+        <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">
-                <ion-row>
-                    <app-collapse-item class="width100" title='{{"master-profile.info.reviews"|translate}}'>
-                        <app-master-profile-review *ngFor="let review of publicReviewList"
-                                                   [publicReview]="review">
-                        </app-master-profile-review>
-                    </app-collapse-item>
-                </ion-row>
+                <app-collapse-item class="width100" title='{{"master-profile.info.reviews"|translate}}'>
+                    <app-master-profile-review *ngFor="let review of publicReviewList"
+                                               [publicReview]="review">
+                    </app-master-profile-review>
+                </app-collapse-item>
             </ion-col>
         </ion-item>
     </ion-col>
