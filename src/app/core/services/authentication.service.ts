@@ -111,7 +111,6 @@ export class AuthenticationService implements AuthenticatorInterface {
                             }
                         ),
                         _ => EMPTY
-                        // _ => this.logout().subscribe(() => subscriber.error())
                     );
                 }).catch(err => subscriber.error(err));
             }
