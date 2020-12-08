@@ -1,11 +1,11 @@
 <form *ngIf="loginFormService.form" [formGroup]="loginFormService.form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()">
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col appMainColumn>
             <error-flashbag [message]="errorMessage"></error-flashbag>
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col appMainColumn>
             <ion-item>
                 <ion-label color="medium" position="floating">{{ 'login-form.login' | translate }}</ion-label>
                 <ion-input type="text" name="email" [formControlName]="formFields.Username" ></ion-input>
@@ -13,7 +13,7 @@
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col appMainColumn>
             <ion-item>
                 <ion-label color="medium" position="floating">{{ 'login-form.password' | translate }}</ion-label>
                 <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
@@ -21,7 +21,7 @@
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col appMainColumn>
             <ion-button
                     type="submit"
                     expand="block"
@@ -32,7 +32,7 @@
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="12" [sizeSm]="6" [sizeMd]="6" [sizeLg]="4" [sizeXl]="3">
+        <ion-col appMainColumn>
             <ion-button
                     expand="block"
                     fill="solid"

@@ -43,6 +43,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import {ContactsAddComponent} from './components/contacts-add/contacts-add.component';
 import {ImageCropPopoverComponent} from './components/picture-selector/image-cropper/image-crop-popover.component';
 import {DebounceDirective} from './directives/debounce.directive';
+import {MainColumnDirective} from './directives/main-column.directive';
 import {NumberDirective} from './directives/number.directive';
 
 @NgModule({
@@ -74,7 +75,8 @@ import {NumberDirective} from './directives/number.directive';
         MasterWidgetComponent,
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
-        CalendarComponentComponent
+        CalendarComponentComponent,
+        MainColumnDirective
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -100,7 +102,8 @@ import {NumberDirective} from './directives/number.directive';
         ServiceWidgetComponent,
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
-        CalendarComponentComponent
+        CalendarComponentComponent,
+        MainColumnDirective
     ],
     imports: [
         CommonModule,
