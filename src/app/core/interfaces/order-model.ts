@@ -10,13 +10,3 @@ export interface OrderPostModel {
   last_name?: string;
   phone?: string;
 }
-
-export interface OrderModel extends OrderPostModel {
-  id: number;
-  created: string;
-  modified: string;
-  status: string;
-  price_amount: string;
-  price_currency: string;
-  duration: string;
-}

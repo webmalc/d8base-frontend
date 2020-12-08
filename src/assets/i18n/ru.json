@@ -584,5 +584,23 @@
   },
   "calendar": {
     "timezone": "Часовой пояс"
+  },
+  "received_orders": {
+    "title": "Мои заказы",
+    "newTab": "Ожидают",
+    "currentTab": "Текущие",
+    "archiveTab": "Архив",
+    "empty-placeholder": "Заказов нет",
+    "accept-order": "Принять заказ"
+  },
+  "order-status": {
+    "pending": "Ожидает",
+    "accepted": "Подтверждён",
+    "archived": "Архивирован",
+    "completed": "Выполнен"
+  },
+  "orders-type": {
+    "sent": "Отправленные",
+    "received": "Полученные"
   }
 }

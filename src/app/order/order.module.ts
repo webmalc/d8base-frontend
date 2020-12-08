@@ -36,6 +36,9 @@ import {OrderWizardStateService} from './services/order-wizard-state.service';
         ReactiveFormsModule,
         FormsModule
     ],
+    exports: [
+        OrderDetailsComponent
+    ],
     providers: [
         OrderWizardStateService
     ]

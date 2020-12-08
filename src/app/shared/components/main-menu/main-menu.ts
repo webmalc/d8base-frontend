@@ -32,8 +32,8 @@ export const mainMenuItems: MainMenuItem[] = [
     {
         title: 'template.my-orders',
         icon: 'calendar-outline',
-        link: '/orders',
-        userOnly: true
+        link: '/my-orders',
+        masterOnly: true
     },
     {
         title: 'template.download',

@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {OrderPostModel} from '@app/core/models/order-model';
-import {OrdersApiService} from '@app/core/services/orders-api.service';
+import {OrderPostModel} from '@app/core/interfaces/order-model';
 import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
 import {MasterList} from '@app/master/models/master-list';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
@@ -9,7 +8,8 @@ import {orderSteps} from '@app/order/order-steps';
 import {Service} from '@app/service/models/service';
 import {Observable, Subject} from 'rxjs';
 import {map, switchMap, takeUntil} from 'rxjs/operators';
-import {OrderWizardStateService} from './services/order-wizard-state.service';
+
+import {OrderWizardStateService, SentOrdersApiService} from './services';
 
 @Component({
     selector: 'app-order',
@@ -23,7 +23,6 @@ export class OrderPage implements OnInit, OnDestroy {
     public service$: Observable<Service>;
     public master$: Observable<MasterList>;
     public order$: Observable<Partial<OrderPostModel>>;
-    public step$: Observable<number>;
 
     private serviceId: string;
     private readonly destroy$ = new Subject<void>();
@@ -33,7 +32,7 @@ export class OrderPage implements OnInit, OnDestroy {
         private readonly route: ActivatedRoute,
         private readonly servicesApi: ServicesReadonlyApiService,
         private readonly mastersApi: MasterReadonlyApiService,
-        private readonly ordersApi: OrdersApiService
+        private readonly ordersApi: SentOrdersApiService
     ) {
         this.order$ = this.wizardState.order$;
         this.service$ = this.wizardState.service$;

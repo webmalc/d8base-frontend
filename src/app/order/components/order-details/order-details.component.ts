@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {OrderPostModel} from '@app/core/models/order-model';
+import {OrderPostModel} from '@app/core/interfaces/order-model';
 
 @Component({
     selector: 'app-order-details',
