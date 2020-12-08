@@ -14,7 +14,7 @@ import {Reinitable} from '@app/shared/abstract/reinitable';
 import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
 import {PopoverController} from '@ionic/angular';
 import {OverlayEventDetail} from '@ionic/core';
-import {map} from 'rxjs/operators';
+import {map, single} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-final-step',
@@ -44,7 +44,9 @@ export class ServicePublishFinalStepComponent extends Reinitable {
                 ServicePublishSteps.Final, {master, masterLocation}
             );
         }
-        this.servicePublish.publish().subscribe((service) => this.router.navigate(['service', service.id ]));
+        this.servicePublish.publish()
+            .pipe(single())
+            .subscribe((service) => this.router.navigate(['service', service.id ]));
     }
 
     protected init(): void {
