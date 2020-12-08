@@ -12,7 +12,7 @@
         </ion-avatar>
         <ion-label>
             <div><b>{{ master.user.first_name }} {{ master.user.last_name }}</b></div>
-            <div class="company mv5">{{master.company}}</div>
+            <div class="mv5">{{master.company}}</div>
             <div *ngIf="master.rating">
                 <app-rating-full-star></app-rating-full-star>
                 <b>{{master.rating}}</b>
