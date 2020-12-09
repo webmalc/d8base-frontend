@@ -11,7 +11,7 @@
   "removeStaleFiles": true,
   "modelIndex": true,
   "serviceIndex": true,
-  "apiModule": true,
+  "apiModule": false,
   "enumModule": true,
   "generateExamples": true,
   "camelCase": true,
