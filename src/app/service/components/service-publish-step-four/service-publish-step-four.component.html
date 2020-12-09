@@ -3,16 +3,16 @@
         <ion-col appMainColumn>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item
-                        class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                        class="ion-item-no-border ion-item-bordered-first item-content ion-item-no-side-padding ion-padding-vertical">
                     <ion-col class="ion-no-padding">
-                        <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-top">
+                        <ion-row class="ion-justify-content-start ion-align-items-center">
                             <ion-item class="ion-item-no-border fs18">
                                 <b>
                                     {{"service-publish.step-four.title" | translate}}
                                 </b>
                             </ion-item>
                         </ion-row>
-                        <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-bottom">
+                        <ion-row class="ion-justify-content-start ion-align-items-center">
                             <ion-item class="ion-item-no-border fs18">
                                 <b>
                                     {{"service-publish.step-four.subtitle" | translate}}
@@ -24,7 +24,7 @@
                 <app-info-row>
                     {{"service-publish.step-four.first-info-row"|translate}}
                 </app-info-row>
-                <ion-item class="ion-item-no-border item-background-color-white">
+                <ion-item class="ion-item-no-border item-content">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
@@ -76,7 +76,7 @@
 
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  !isUserExists && formService.isEmailValid()"
-                        class="ion-item-no-border item-background-color-white">
+                        class="ion-item-no-border item-content">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
                             <ion-label color="medium" position="floating" class="label-for-required-input">
@@ -98,7 +98,7 @@
 
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  isUserExists && formService.isEmailValid()"
-                          class="ion-item-no-border item-background-color-white">
+                          class="ion-item-no-border item-content">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
                             <ion-label color="medium" position="floating" class="label-for-required-input">
@@ -114,18 +114,18 @@
                     </ion-col>
                 </ion-item>
 
-                <ion-item class="ion-item-no-border item-background-color-white">
+                <ion-item class="ion-item-no-border item-content">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-row class="ion-justify-content-center">
                             <ion-col size="6">
-                                <ion-button color="light"
+                                <ion-button size="medium" color="light"
                                             (click)="serviceStepsNavigationService.previous()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.back-button" | translate}}
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button color="secondary" type="submit" [disabled]="isSubmitDisabled()"
+                                <ion-button size="medium" color="secondary" type="submit" [disabled]="isSubmitDisabled()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>

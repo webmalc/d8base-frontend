@@ -307,7 +307,9 @@
       "first-info-row": "You can add more references here.",
       "master-picker": {
         "popover-title": "Choose the professional profile"
-      }
+      },
+      "publish": "Publish",
+      "view": "Review"
     }
   },
   "messages": {
