@@ -73,10 +73,9 @@
         <ion-buttons slot="end">
             <ion-menu-toggle menu="flag-menu">
                 <ion-button>
-                    <span *ngIf="countryCode else defaultCountry" class="flag-icon flag-icon-{{countryCode}}"></span>
+                    <span *ngIf="(countryCode$ | async) else defaultCountry" class="flag-icon flag-icon-{{countryCode$ | async}}"></span>
                     <ng-template #defaultCountry>
-                        <span *ngIf="countryCode else defaultCountry"
-                              class="flag-icon flag-icon-{{getTemporaryDefaultCountry().code}}"></span>
+                        <span class="flag-icon flag-icon-{{getTemporaryDefaultCountry().code}}"></span>
                     </ng-template>
                 </ion-button>
             </ion-menu-toggle>
