@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {once} from '@app/core/decorators/once';
 import {AuthenticationFactory, MasterManagerService} from '@app/core/services';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
@@ -35,7 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.countrySub = this.isAuthenticated$.pipe(switchMap(
             isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry())
         )).subscribe(c => this.countryCode = c.code.toLowerCase());
-        this.closeFlagMenu();
     }
 
     public isDesktop(): boolean {
@@ -46,17 +44,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.masterManager.becomeMaster().subscribe();
     }
 
-    public toggleMenu(menuId: string, animated: boolean = true): void {
-        this.menuController.get(menuId)
-            .then(menu => menu?.classList.contains('menu-pane-visible') ? menu.disabled = !menu.disabled : menu?.toggle(animated));
+    /**
+     * Enable/disable the specified menu. A workaround for wide (desktop) screen only
+     */
+    public toggleMenu(menuId: string): void {
+        this.menuController.get(menuId).then(menu => {
+            if (menu.classList.contains('menu-pane-visible')) {
+                // the menu is at the side pane, toggle its disabled flag manually
+                menu.disabled = !menu.disabled;
+            }
+        });
     }
 
-    @once
-    private closeFlagMenu(): void {
-        this.toggleMenu('flag-menu', false);
-    }
-
-    private getTemporaryDefaultCountry(): Country {
+    public getTemporaryDefaultCountry(): Country {
         const model = new Country();
         model.code = 'ca';
 
