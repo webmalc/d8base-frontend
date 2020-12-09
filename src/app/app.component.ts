@@ -23,7 +23,6 @@ import {filter, map} from 'rxjs/operators';
 export class AppComponent implements OnInit, AfterViewInit {
     public isAuthenticated$: Observable<boolean>;
     public darkTheme$: Observable<boolean>;
-    public countryCode: string;
 
     constructor(
         public readonly masterManager: MasterManagerService,

@@ -38,10 +38,9 @@ export class UserManagerService {
     public getDefaultUserCountry(): Observable<Country> {
         return this.auth.isAuthenticated$.pipe(
             filter(isAuth => isAuth),
-            switchMap(_ => this.userLocationApi.getDefaultLocation().pipe(
-                filter(location => (location && location.country && true)),
-                switchMap(location => this.countryApi.getByEntityId(location.country as number))
-            ))
+            switchMap(_ => this.userLocationApi.getDefaultLocation()),
+            filter(location => (location && location.country && true)),
+            switchMap(location => this.countryApi.getByEntityId(location.country as number))
         );
     }
 
