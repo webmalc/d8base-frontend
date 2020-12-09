@@ -1,6 +1,9 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {CertificateComponent} from '@app/master/components/certificate/certificate.component';
+import {EducationComponent} from '@app/master/components/education/education.component';
+import {ExperienceComponent} from '@app/master/components/experience/experience.component';
 import {MasterProfileCalendarComponent} from '@app/master/components/master-profile-calendar/master-profile-calendar.component';
 import {MasterProfileFactoryComponent} from '@app/master/components/master-profile-factory/master-profile-factory.component';
 import {MasterProfileInfoComponent} from '@app/master/components/master-profile-info/master-profile-info.component';
@@ -38,7 +41,7 @@ import {MasterPage} from './master.page';
         MasterPageRoutingModule,
         TranslateModule,
         SharedModule,
-        ServicePageModule // TODO: move service_module services to own module
+        ServicePageModule
     ],
     declarations: [
         MasterPage,
@@ -51,7 +54,10 @@ import {MasterPage} from './master.page';
         MasterProfileServicePresentationComponent,
         MasterProfileReviewComponent,
         MasterProfileServiceEditComponent,
-        MasterProfileSubmenuComponent
+        MasterProfileSubmenuComponent,
+        ExperienceComponent,
+        EducationComponent,
+        CertificateComponent
     ],
     providers: [
         MasterProfileServicesSearchService,

@@ -395,7 +395,12 @@
       "reviews": "Отзывы",
       "on-map": "Смотреть на карте",
       "from-here": "От заданного адреса",
-      "add-new-address": "Добавить еще адрес"
+      "add-new-address": "Добавить еще адрес",
+      "add-new-exp": "Добавить опыт работы",
+      "add-new-education": "Добавить образование",
+      "add-new-certificate": "Добавить сертификат",
+      "certificate-url": "Ссылка на сертификат",
+      "certificate-id": "ID сертификата"
     },
     "calendar": {
       "title": "Календарь"

@@ -14,7 +14,6 @@
                 </ion-row>
             </ion-col>
         </ion-item>
-
         <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
             <ion-col class="ion-padding-vertical" size="12">
                 <ion-item>
@@ -54,26 +53,32 @@
                             display-format="YYYY-MM-DD"
                     ></ion-datetime>
                 </ion-item>
-
                 <ion-item>
                     <ion-label color="medium" position="floating">
                         {{'experience-edit-page.description'|translate}}
                     </ion-label>
                     <ion-input [(ngModel)]="item.description" name="title" type="text"></ion-input>
                 </ion-item>
-
-                <ion-button
-                        (click)="delete()"
-                        *ngIf="item.id"
-                        color="danger"
-                        expand="block"
-                        fill="solid"
-                >{{ 'experience-edit-page.remove' | translate }}</ion-button>
-
-                <ion-button
-                        (click)="save()"
-                        expand="block"
-                >{{ 'experience-edit-page.save' | translate }}</ion-button>
+                <ion-row class="ion-justify-content-center ion-margin-top">
+                    <ion-col size="6">
+                        <ion-button
+                                (click)="delete()"
+                                *ngIf="item.id"
+                                color="light"
+                                expand="block"
+                                fill="solid"
+                                size="medium">
+                            {{ 'experience-edit-page.remove' | translate }}
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button
+                                (click)="save()"
+                                expand="block" color="secondary" fill="solid" size="medium">
+                            {{ 'experience-edit-page.save' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
             </ion-col>
         </ion-item>
     </ion-col>
