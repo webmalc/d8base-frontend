@@ -1,4 +1,3 @@
-import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {GrantTypes} from '@app/auth/enums/grant-types';
 import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
@@ -12,7 +11,7 @@ import {PreLogoutService} from '@app/core/services/pre-logout.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
 import {EMPTY, from, Observable, of, ReplaySubject} from 'rxjs';
-import {filter, first, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {first, switchMap, tap} from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -65,25 +64,15 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public login({username, password}: Credentials): Observable<void> {
-        return new Observable<void>(subscriber => this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
+        return this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
             username,
             password,
             grant_type: GrantTypes.PasswordGrantType,
             client_id: environment.client_id,
             client_secret: environment.client_secret
-        }).subscribe(
-            (result: AuthResponseInterface) => this.tokenManager.setTokens(result).then(
-                _ => this.isAuthenticated$.pipe(takeUntil(this.isAuthenticated$.pipe(filter(isAuth => isAuth)))).subscribe(
-                    () => EMPTY,
-                    () => EMPTY,
-                    () => {
-                        subscriber.next();
-                        subscriber.complete();
-                    }
-                )
-            ),
-            (authError: HttpErrorResponse) => this.logout().subscribe(() => subscriber.error(authError))
-        ));
+        }).pipe(
+            switchMap(result => from(this.tokenManager.setTokens(result)))
+        );
     }
 
     public needToRefresh(): Observable<boolean> {
