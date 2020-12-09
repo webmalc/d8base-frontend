@@ -88,7 +88,7 @@ const testData: Search = {
     ]
 };
 
-fdescribe('SearchResultComponent', () => {
+describe('SearchResultComponent', () => {
     let component: SearchResultComponent;
     let fixture: ComponentFixture<SearchResultComponent>;
 
