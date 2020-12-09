@@ -86,7 +86,7 @@ const testData: Search = {
             modified: '2020-12-06T18:25:42.086759+01:00'
         }
     ]
-}
+};
 
 fdescribe('SearchResultComponent', () => {
     let component: SearchResultComponent;
