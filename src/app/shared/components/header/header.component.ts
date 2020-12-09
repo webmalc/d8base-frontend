@@ -4,7 +4,7 @@ import {UserManagerService} from '@app/core/services/user-manager.service';
 import {Country} from '@app/profile/models/country';
 import {MenuController, Platform} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
-import {map, share, switchMap} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     public ngOnInit(): void {
         this.countryCode$ = this.isAuthenticated$.pipe(switchMap(
             isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry())
-        ), map(c => c.code.toLowerCase()), share());
+        ), map(c => c.code.toLowerCase()));
     }
 
     public isDesktop(): boolean {

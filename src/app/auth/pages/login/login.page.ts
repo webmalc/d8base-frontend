@@ -30,6 +30,7 @@ export class LoginPage implements OnDestroy {
 
     public ngOnDestroy(): void {
         this.destroy$.next();
+        this.destroy$.complete();
     }
 
     public onSubmitLoginForm(user: Credentials): void {

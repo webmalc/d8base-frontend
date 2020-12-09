@@ -2,7 +2,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Injectable} from '@angular/core';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {environment} from '@env/environment';
-import {from, Observable} from 'rxjs';
+import {from, Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
 
 /**
@@ -24,9 +24,12 @@ export class HeadersInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
 
+        // TODO: don't ask for token if not needed
         return from(this.tokenManager.getAccessToken())
             .pipe(
-                catchError(_ => next.handle(req.clone({headers: req.headers.append('Content-Type', 'application/json')}))),
+                catchError(_ => {
+                    return of('');
+                }),
                 switchMap(token => {
                     let headers;
                     if (this.getAuthUrls().includes(req.url)) {
