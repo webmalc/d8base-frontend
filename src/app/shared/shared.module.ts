@@ -11,6 +11,7 @@ import {
     MainMenuComponent,
     MasterWidgetComponent,
     MoreInfoComponent,
+    OrderDetailsComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -76,7 +77,8 @@ import {NumberDirective} from './directives/number.directive';
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
         CalendarComponentComponent,
-        MainColumnDirective
+        MainColumnDirective,
+        OrderDetailsComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -103,7 +105,8 @@ import {NumberDirective} from './directives/number.directive';
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
         CalendarComponentComponent,
-        MainColumnDirective
+        MainColumnDirective,
+        OrderDetailsComponent
     ],
     imports: [
         CommonModule,
