@@ -1,3 +1,4 @@
+import {HttpErrorResponse} from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 
 export class ApiClientServiceMock {
@@ -6,6 +7,6 @@ export class ApiClientServiceMock {
           return of(true);
       }
 
-      return throwError('err');
+      return throwError(new HttpErrorResponse({status: 400, error: {error: 'invalid_grant'}}));
   }
 }

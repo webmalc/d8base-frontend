@@ -15,14 +15,14 @@ export class ReceivedOrderListItemComponent {
     public service: Service;
     @Output() public accept = new EventEmitter<ReceivedOrder>();
 
+    private _order: ReceivedOrder;
+
     constructor(
         private readonly servicesCache: ServicesApiCache,
         private readonly changeDetector: ChangeDetectorRef,
         private readonly sanitizer: PhotoSanitizerService
     ) {
     }
-
-    private _order: ReceivedOrder;
 
     public get order(): ReceivedOrder {
         return this._order;

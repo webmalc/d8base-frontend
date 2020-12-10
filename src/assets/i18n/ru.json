@@ -597,7 +597,12 @@
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",
     "accept-order": "Принять заказ",
-    "order-details-title": "Детали заказа"
+    "order-details-title": "Детали заказа",
+    "order-details-subtitle": "Вас забронировали",
+    "order-number": "Номер бронирования",
+    "ordered-service": "Забронированная услуга",
+    "order-details": "Детали бронирования",
+    "order-status": "Статус заказа"
   },
   "sent_orders": {
     "title": "Мои заказы",

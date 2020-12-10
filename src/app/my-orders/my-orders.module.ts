@@ -9,6 +9,7 @@ import {
 import {InboxComponent} from '@app/my-orders/components/inbox/inbox.component';
 import {OutboxComponent} from '@app/my-orders/components/outbox/outbox.component';
 import {SentOrderListItemComponent} from '@app/my-orders/components/sent-order-list-item/sent-order-list-item.component';
+import {ServiceByIdPipe} from '@app/my-orders/pipes';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -25,7 +26,8 @@ import {MyOrdersRoutingModule} from './my-orders-routing.module';
         ReceivedOrderListItemComponent,
         SentOrderListItemComponent,
         ReceivedOrderPageComponent,
-        SentOrderPageComponent
+        SentOrderPageComponent,
+        ServiceByIdPipe
     ],
     imports: [
         CommonModule,

@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {
+    ClientWidgetComponent,
     DurationComponent,
     FooterComponent,
     HeaderComponent,
@@ -78,7 +79,8 @@ import {NumberDirective} from './directives/number.directive';
         FlagMenuComponent,
         CalendarComponentComponent,
         MainColumnDirective,
-        OrderDetailsComponent
+        OrderDetailsComponent,
+        ClientWidgetComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -106,7 +108,8 @@ import {NumberDirective} from './directives/number.directive';
         FlagMenuComponent,
         CalendarComponentComponent,
         MainColumnDirective,
-        OrderDetailsComponent
+        OrderDetailsComponent,
+        ClientWidgetComponent
     ],
     imports: [
         CommonModule,
