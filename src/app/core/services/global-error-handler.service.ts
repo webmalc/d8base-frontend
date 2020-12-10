@@ -7,6 +7,9 @@ import {environment} from '@env/environment';
 import {ToastController} from '@ionic/angular';
 import * as Sentry from '@sentry/angular';
 
+const AUTHENTICATION_ERROR = 'authentication expired';
+const GENERIC_SERVER_ERROR = 'server error';
+const UNKNOWN_ERROR = 'unexpected error';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +28,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         if (error?.message === ErrorList.EMPTY_TOKEN_ERROR ||
             error?.message === ErrorList.REFRESH_TOKEN_EXPIRED_ERROR
         ) {
-            this.showMessage('authentication expired');
+            this.showMessage(AUTHENTICATION_ERROR);
             this.router.navigateByUrl('/auth/login');
 
             return;
@@ -41,7 +44,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
             return;
         }
 
-        this.showMessage('unexpected error');
+        this.showMessage(UNKNOWN_ERROR);
         throw error;
     }
 
@@ -59,16 +62,18 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
         if (401 === error.status || 'invalid_grant' === error.message) {
             if (error.url.endsWith(environment.backend.refresh)) {
-                this.showMessage('authentication expired');
+                this.showMessage(AUTHENTICATION_ERROR);
                 this.router.navigateByUrl('/auth/login');
             }
         }
 
         if (5 === Math.floor(error.status / 100)) {
-            this.showMessage('server error');
+            this.showMessage(GENERIC_SERVER_ERROR);
 
             return;
         }
+
+        this.showMessage(error.message || UNKNOWN_ERROR);
     }
 
     private showMessage(message: string, duration: number = this.ERROR_TOAST_DURATION_MS): void {
