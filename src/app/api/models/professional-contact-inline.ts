@@ -1,7 +1,7 @@
 /* tslint:disable */
 export interface ProfessionalContactInline {
-  contact: number;
-  contact_display?: string;
-  id?: number;
-  value: string;
+    contact: number;
+    contact_display?: string;
+    id?: number;
+    value: string;
 }

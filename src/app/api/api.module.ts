@@ -9,28 +9,21 @@ import { SearchService } from './services/search.service';
  * Provider for all Api services, plus ApiConfiguration
  */
 @NgModule({
-  imports: [
-    HttpClientModule
-  ],
-  exports: [
-    HttpClientModule
-  ],
-  declarations: [],
-  providers: [
-    ApiConfiguration,
-    SearchService
-  ],
+    imports: [HttpClientModule],
+    exports: [HttpClientModule],
+    declarations: [],
+    providers: [ApiConfiguration, SearchService]
 })
 export class ApiModule {
-  static forRoot(customParams: ApiConfigurationInterface): ModuleWithProviders<ApiModule> {
-    return {
-      ngModule: ApiModule,
-      providers: [
-        {
-          provide: ApiConfiguration,
-          useValue: {rootUrl: customParams.rootUrl}
-        }
-      ]
+    static forRoot(customParams: ApiConfigurationInterface): ModuleWithProviders<ApiModule> {
+        return {
+            ngModule: ApiModule,
+            providers: [
+                {
+                    provide: ApiConfiguration,
+                    useValue: { rootUrl: customParams.rootUrl }
+                }
+            ]
+        };
     }
-  }
 }
