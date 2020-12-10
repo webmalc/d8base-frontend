@@ -3,10 +3,10 @@
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
-                        <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                        <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
+                            <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
                                 <b>
                                     {{"service-publish.step-two.title"|translate}}
                                 </b>
@@ -19,7 +19,7 @@
                     {{"service-publish.step-two.first-info-row"|translate}}
                 </app-info-row>
 
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
@@ -166,7 +166,7 @@
                     {{"service-publish.step-two.second-info-row"|translate}}
                 </app-info-row>
 
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-list>
                             <ion-radio-group [formControlName]="formFields.Location">
@@ -185,14 +185,14 @@
                         </ion-list>
                         <ion-row class="ion-justify-content-center">
                             <ion-col size="6">
-                                <ion-button color="light"
+                                <ion-button size="medium" color="light"
                                             (click)="serviceStepsNavigationService.previous()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.back-button" | translate}}
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                <ion-button size="medium" color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>

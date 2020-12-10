@@ -4,7 +4,7 @@
         <ion-col appMainColumn>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item
-                        class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                        class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
                             <ion-item class="ion-item-no-border fs18">
@@ -18,16 +18,16 @@
                 <app-info-row class="ion-margin-bottom">
                     {{"service-publish.step-seven.first-info-row"|translate}}
                 </app-info-row>
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
                             <b>
                                 {{"service-publish.step-seven.timetable-title" | translate}}
                             </b>
                         </ion-item>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding">
                         <ion-row *ngIf="!useMasterSchedule()"
                                  class="ion-justify-content-between ion-align-items-center">
@@ -52,16 +52,16 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
                             <b>
                                 {{"service-publish.step-seven.location-title" | translate}}
                             </b>
                         </ion-item>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
@@ -169,16 +169,16 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
                             <b>
                                 {{"service-publish.step-seven.payment-title" | translate}}
                             </b>
                         </ion-item>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical">
                         <ion-list (change)="onThisPageDataChange()">
                             <ion-list-header class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
@@ -205,14 +205,14 @@
                         </ion-item>
                         <ion-row class="ion-justify-content-center">
                             <ion-col size="6">
-                                <ion-button color="light"
+                                <ion-button size="medium" color="light"
                                             (click)="serviceStepsNavigationService.previous()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.back-button" | translate}}
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                <ion-button size="medium" color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>

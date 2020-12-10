@@ -17,13 +17,14 @@
                     </ion-row>
                 </form>
                 <!--                Main-->
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border">{{'profile-form.main'|translate}}</ion-item>
+                            <ion-item class="ion-item-no-border" color="light">{{'profile-form.main'|translate}}</ion-item>
                             <ion-item routerLink="edit/"
                                       routerDirection="forward"
                                       routerLinkActive="active"
+                                      color="light"
                                       id="edit-main"
                                       class="ion-item-no-border ion-align-items-center">
                                 <ion-icon name="create-outline"></ion-icon>
@@ -31,7 +32,7 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding">
                         <ion-row *ngIf="user?.first_name || user?.last_name">
                             <ion-item id="username" class="ion-item-no-border ion-align-items-center">
@@ -55,15 +56,15 @@
                 <app-contacts-add></app-contacts-add>
                 <!--            /Contacts-->
                 <!--            Location-->
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border">{{'profile-page.your-address'|translate}}</ion-item>
+                            <ion-item class="ion-item-no-border" color="light">{{'profile-page.your-address' | translate}}</ion-item>
                         </ion-row>
                     </ion-col>
 
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-align-items-center">
@@ -123,20 +124,22 @@
                 <!--            /Location-->
 
                 <!--            About-->
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border">{{'profile-page.about'|translate}}</ion-item>
+                            <ion-item class="ion-item-no-border" color="light">{{'profile-page.about'|translate}}</ion-item>
                             <ion-item routerLink="about/"
                                       routerDirection="forward"
-                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
+                                      routerLinkActive="active" 
+                                      color="light"
+                                      class="ion-item-no-border ion-align-items-center">
                                 <ion-icon name="create-outline"></ion-icon>
                             </ion-item>
                         </ion-row>
                     </ion-col>
 
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-align-items-center">
