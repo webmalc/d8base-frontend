@@ -1,0 +1,49 @@
+<app-header></app-header>
+<ion-content *ngIf="order$ | async as order">
+    <ion-grid class="ion-no-padding">
+        <ion-row class="ion-justify-content-center">
+            <ion-col appMainColumn>
+                <ion-item color="light" lines="full">
+                    <ion-buttons slot="start">
+                        <ion-button routerLink="/my-orders/outbox" routerDirection="back">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <ion-title>{{ 'sent_orders.order-details-title' | translate }}</ion-title>
+                </ion-item>
+
+                <ng-container *ngIf="order.service | serviceById$ | async as service">
+                <ion-list>
+                    <ion-list-header>
+                        <ion-label>{{ 'sent_orders.order-details-subtitle' | translate }}:</ion-label>
+                    </ion-list-header>
+                    <app-master-widget [master]="service.professional | masterById$ | async"></app-master-widget>
+                    <ion-item lines="none">
+                        <ion-label color="primary"><b>{{ 'sent_orders.order-number' | translate }}: {{ order.id}}</b></ion-label>
+                    </ion-item>
+                </ion-list>
+
+                <ion-list>
+                    <ion-list-header>
+                        <ion-label>{{ 'sent_orders.ordered-service' | translate }}:</ion-label>
+                    </ion-list-header>
+                    <app-service-widget [service]="service"></app-service-widget>
+                    <ion-item lines="none">
+                        <ion-label>{{ 'order-status.title' | translate }}:</ion-label>
+                        <app-order-status [status]="order.status"></app-order-status>
+                    </ion-item>
+                </ion-list>
+                    </ng-container>
+
+                <ion-list>
+                    <ion-list-header>
+                        <ion-label>{{ 'sent_orders.order-details' | translate }}:</ion-label>
+                    </ion-list-header>
+                    <app-order-details [order]="order"></app-order-details>
+                </ion-list>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer></app-footer>

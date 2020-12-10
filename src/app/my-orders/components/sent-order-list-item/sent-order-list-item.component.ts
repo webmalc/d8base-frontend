@@ -17,7 +17,7 @@ export class SentOrderListItemComponent  {
 
     public service: Service;
     public master: MasterList;
-    private _order: SentOrder;
+    private _order: Partial<SentOrder>;
 
     constructor(
         private readonly servicesCache: ServicesApiCache,
@@ -27,12 +27,12 @@ export class SentOrderListItemComponent  {
     ) {
     }
 
-    public get order(): SentOrder {
-        return this._order;
+    public get order(): Partial<SentOrder> {
+        return this._order || {};
     }
 
     @Input()
-    public set order(order: SentOrder) {
+    public set order(order: Partial<SentOrder>) {
         this._order = order;
         if (!order) {
             return;

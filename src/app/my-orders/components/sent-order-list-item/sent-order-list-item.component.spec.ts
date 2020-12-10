@@ -1,5 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 import {ServicesApiCache} from '@app/my-orders/services';
 import {MasterReadonlyApiCacheService} from '@app/my-orders/services/master-readonly-api-cache.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
@@ -14,7 +15,12 @@ describe('SentOrderListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SentOrderListItemComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+            imports: [
+                IonicModule.forRoot(),
+                TranslateModule.forRoot(),
+                HttpClientTestingModule,
+                RouterTestingModule
+            ],
             providers: [ServicesApiService, ServicesApiCache, MasterReadonlyApiCacheService]
         }).compileComponents();
 

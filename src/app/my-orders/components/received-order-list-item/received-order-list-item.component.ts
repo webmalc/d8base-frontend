@@ -14,6 +14,7 @@ export class ReceivedOrderListItemComponent {
 
     public service: Service;
     @Output() public accept = new EventEmitter<ReceivedOrder>();
+
     private _order: ReceivedOrder;
 
     constructor(

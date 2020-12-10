@@ -5,12 +5,14 @@ import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {
+    ClientWidgetComponent,
     DurationComponent,
     FooterComponent,
     HeaderComponent,
     MainMenuComponent,
     MasterWidgetComponent,
     MoreInfoComponent,
+    OrderDetailsComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -76,7 +78,9 @@ import {NumberDirective} from './directives/number.directive';
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
         CalendarComponentComponent,
-        MainColumnDirective
+        MainColumnDirective,
+        OrderDetailsComponent,
+        ClientWidgetComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -103,7 +107,10 @@ import {NumberDirective} from './directives/number.directive';
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
         CalendarComponentComponent,
-        MainColumnDirective
+        MainColumnDirective,
+        OrderDetailsComponent,
+        ClientWidgetComponent,
+        MasterWidgetComponent
     ],
     imports: [
         CommonModule,

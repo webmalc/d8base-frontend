@@ -1,3 +1,4 @@
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, fakeAsync, flush, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -31,7 +32,8 @@ describe('LoginPage', () => {
                 FormBuilder,
                 AuthenticationService,
                 {provide: TokenManagerService, useClass: TokenManagerServiceMock}
-            ]
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
 
         router = TestBed.inject<Router>(Router);
@@ -68,6 +70,7 @@ describe('LoginPage', () => {
         component.onSubmitLoginForm(user);
         flush();
 
+        expect(component.errorMessage).toBe('login-page.incorrect-login-data');
         expect(router.navigateByUrl).not.toHaveBeenCalled();
     }));
 });
