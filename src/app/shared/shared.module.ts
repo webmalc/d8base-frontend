@@ -109,7 +109,8 @@ import {NumberDirective} from './directives/number.directive';
         CalendarComponentComponent,
         MainColumnDirective,
         OrderDetailsComponent,
-        ClientWidgetComponent
+        ClientWidgetComponent,
+        MasterWidgetComponent
     ],
     imports: [
         CommonModule,

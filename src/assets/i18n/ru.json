@@ -601,17 +601,21 @@
     "order-details-subtitle": "Вас забронировали",
     "order-number": "Номер бронирования",
     "ordered-service": "Забронированная услуга",
-    "order-details": "Детали бронирования",
-    "order-status": "Статус заказа"
+    "order-details": "Детали бронирования"
   },
   "sent_orders": {
     "title": "Мои заказы",
     "currentTab": "Текущие",
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",
-    "order-details-title": "Детали заказа"
+    "order-details-title": "Детали заказа",
+    "order-details-subtitle": "Вы забронировали",
+    "order-number": "Номер бронирования",
+    "ordered-service": "Забронированная услуга",
+    "order-details": "Детали бронирования"
   },
   "order-status": {
+    "title": "Статус заказа",
     "pending": "Ожидает",
     "accepted": "Подтверждён",
     "archived": "Архивирован",

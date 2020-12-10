@@ -17,8 +17,8 @@
                         <ion-label>{{ 'received_orders.order-details-subtitle' | translate }}:</ion-label>
                     </ion-list-header>
                     <app-client-widget [client]="order.client"></app-client-widget>
-                    <ion-item>
-                        <ion-label>{{ 'received_orders.order-number' | translate }}: {{ order.id}}</ion-label>
+                    <ion-item lines="none">
+                        <ion-label color="primary">{{ 'received_orders.order-number' | translate }}: {{ order.id}}</ion-label>
                     </ion-item>
                 </ion-list>
 
@@ -28,7 +28,7 @@
                     </ion-list-header>
                     <app-service-widget [service]="order.service | serviceById$ | async"></app-service-widget>
                     <ion-item>
-                        <ion-label>{{ 'received_orders.order-status' | translate }}:</ion-label>
+                        <ion-label>{{ 'order-status.title' | translate }}:</ion-label>
                         <app-order-status [status]="order.status"></app-order-status>
                     </ion-item>
                 </ion-list>

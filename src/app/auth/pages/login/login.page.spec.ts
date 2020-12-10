@@ -63,7 +63,7 @@ describe('LoginPage', () => {
     //     expect(router.navigateByUrl).toHaveBeenCalled();
     // }));
 
-    fit('test invalid auth data submit', fakeAsync(() => {
+    it('test invalid auth data submit', fakeAsync(() => {
 
         const user: Credentials = {username: 'invalid', password: 'invalid'};
 

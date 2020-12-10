@@ -1,33 +1,31 @@
-<ng-container *ngIf="order">
-    <ion-card class="ion-no-margin mv5" [routerLink]="['/my-orders', 'outbox', order.id]">
-        <ion-item lines="none">
-            <ion-label slot="start">
-                <div><b>{{ order.start_datetime | date:'mediumDate'}}</b></div>
-                <div><b>{{ order.start_datetime | date:'hh:mm'}} — {{ order.end_datetime | date:'hh:mm'}}</b></div>
-            </ion-label>
-            <app-order-status [status]="order.status" slot="end"></app-order-status>
-        </ion-item>
-        <ion-item *ngIf="master" lines="none">
-            <ion-avatar slot="start">
-                <ion-img alt="avatar" src="{{ getPhoto(master.user?.avatar_thumbnail) }}"></ion-img>
-            </ion-avatar>
-            <ion-label>
-                <div><b>{{ master.user.first_name }} {{ master.user.last_name }}</b></div>
-                <div class="mv5">{{master.company}}</div>
-                <div *ngIf="master.rating">
-                    <app-rating-full-star></app-rating-full-star>
-                    <b>{{master.rating}}</b>
-                </div>
-            </ion-label>
-        </ion-item>
-        <ion-item *ngIf="service" lines="none">
-            <ion-label class="ion-text-wrap">
-                {{ service.name }}
-            </ion-label>
-            <ion-label class="text-end" slot="end">
-                <div><b>{{service?.price.getPrice()}} {{service?.price.price_currency}}</b></div>
-                <div>{{service.duration}}</div>
-            </ion-label>
-        </ion-item>
-    </ion-card>
-</ng-container>
+<ion-card class="ion-no-margin mv5" [routerLink]="['/my-orders', 'outbox', order.id]">
+    <ion-item lines="none">
+        <ion-label slot="start">
+            <div><b>{{ order.start_datetime | date:'mediumDate'}}</b></div>
+            <div><b>{{ order.start_datetime | date:'hh:mm'}} — {{ order.end_datetime | date:'hh:mm'}}</b></div>
+        </ion-label>
+        <app-order-status [status]="order.status" slot="end"></app-order-status>
+    </ion-item>
+    <ion-item *ngIf="master" lines="none">
+        <ion-avatar slot="start">
+            <ion-img alt="avatar" src="{{ getPhoto(master.user?.avatar_thumbnail) }}"></ion-img>
+        </ion-avatar>
+        <ion-label>
+            <div><b>{{ master.user.first_name }} {{ master.user.last_name }}</b></div>
+            <div class="mv5">{{master.company}}</div>
+            <div *ngIf="master.rating">
+                <app-rating-full-star></app-rating-full-star>
+                <b>{{master.rating}}</b>
+            </div>
+        </ion-label>
+    </ion-item>
+    <ion-item *ngIf="service" lines="none">
+        <ion-label class="ion-text-wrap">
+            {{ service.name }}
+        </ion-label>
+        <ion-label class="text-end" slot="end">
+            <div><b>{{service?.price.getPrice()}} {{service?.price.price_currency}}</b></div>
+            <div>{{service.duration}}</div>
+        </ion-label>
+    </ion-item>
+</ion-card>
