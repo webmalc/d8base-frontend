@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MyOrdersPageComponent} from '@app/my-orders/my-orders-page.component';
 
-import {OrderPageComponent} from './components';
+import {ReceivedOrderPageComponent, SentOrderPageComponent} from './components';
 
 const routes: Routes = [
     {
@@ -19,7 +19,7 @@ const routes: Routes = [
     {
         path: 'inbox/:id',
         pathMatch: 'full',
-        component: OrderPageComponent
+        component: ReceivedOrderPageComponent
     },
     {
         path: 'outbox',
@@ -30,7 +30,7 @@ const routes: Routes = [
     {
         path: 'outbox/:id',
         pathMatch: 'full',
-        component: OrderPageComponent
+        component: SentOrderPageComponent
     }
 ];
 

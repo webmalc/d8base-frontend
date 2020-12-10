@@ -596,7 +596,15 @@
     "currentTab": "Current",
     "archiveTab": "Archived",
     "empty-placeholder": "empty",
-    "accept-order": "Accept order"
+    "accept-order": "Accept order",
+    "order-details-title": "Order details"
+  },
+  "sent_orders": {
+    "title": "My orders",
+    "currentTab": "Current",
+    "archiveTab": "Archived",
+    "empty-placeholder": "empty",
+    "order-details-title": "Order details"
   },
   "order-status": {
     "pending": "Pending",

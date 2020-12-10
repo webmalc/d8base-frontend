@@ -596,7 +596,15 @@
     "currentTab": "Текущие",
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",
-    "accept-order": "Принять заказ"
+    "accept-order": "Принять заказ",
+    "order-details-title": "Детали заказа"
+  },
+  "sent_orders": {
+    "title": "Мои заказы",
+    "currentTab": "Текущие",
+    "archiveTab": "Архив",
+    "empty-placeholder": "Заказов нет",
+    "order-details-title": "Детали заказа"
   },
   "order-status": {
     "pending": "Ожидает",

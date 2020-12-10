@@ -1,0 +1,19 @@
+<app-header></app-header>
+<ion-content *ngIf="order$ | async as order">
+    <ion-grid class="ion-no-padding">
+        <ion-row class="ion-justify-content-center">
+            <ion-col appMainColumn>
+                <ion-item color="light" lines="full">
+                    <ion-buttons slot="start">
+                        <ion-button routerLink="/my-orders/outbox" routerDirection="back">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <ion-title>{{ 'sent_orders.order-details-title' | translate }}</ion-title>
+                </ion-item>
+                <app-order-details [order]="order"></app-order-details>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer></app-footer>
