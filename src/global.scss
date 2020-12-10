@@ -26,14 +26,6 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 :root {
-  .item-content {
-    --ion-background-color: var(--ion-color-white);
-  }
-  
-  .item-header {
-    --ion-background-color: var(--ion-color-light);
-  }
-  
   .label-for-required-input::after {
     content: "*";
     color: red;

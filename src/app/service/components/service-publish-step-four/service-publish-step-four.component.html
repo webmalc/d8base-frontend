@@ -3,7 +3,7 @@
         <ion-col appMainColumn>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item
-                        class="ion-item-no-border ion-item-bordered-first item-content ion-item-no-side-padding ion-padding-vertical">
+                        class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding ion-padding-vertical">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
                             <ion-item class="ion-item-no-border fs18">
@@ -24,7 +24,7 @@
                 <app-info-row>
                     {{"service-publish.step-four.first-info-row"|translate}}
                 </app-info-row>
-                <ion-item class="ion-item-no-border item-content">
+                <ion-item class="ion-item-no-border">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
@@ -76,7 +76,7 @@
 
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  !isUserExists && formService.isEmailValid()"
-                        class="ion-item-no-border item-content">
+                        class="ion-item-no-border">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
                             <ion-label color="medium" position="floating" class="label-for-required-input">
@@ -98,7 +98,7 @@
 
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  isUserExists && formService.isEmailValid()"
-                          class="ion-item-no-border item-content">
+                          class="ion-item-no-border">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
                             <ion-label color="medium" position="floating" class="label-for-required-input">
@@ -114,7 +114,7 @@
                     </ion-col>
                 </ion-item>
 
-                <ion-item class="ion-item-no-border item-content">
+                <ion-item class="ion-item-no-border">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-row class="ion-justify-content-center">
                             <ion-col size="6">

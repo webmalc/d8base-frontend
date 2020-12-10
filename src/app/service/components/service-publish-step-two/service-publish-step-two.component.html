@@ -3,7 +3,7 @@
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first item-content">
+                <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
@@ -19,7 +19,7 @@
                     {{"service-publish.step-two.first-info-row"|translate}}
                 </app-info-row>
 
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-content">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-no-border ion-item-no-side-padding">
                             <div class="label-for-required-input">
@@ -166,7 +166,7 @@
                     {{"service-publish.step-two.second-info-row"|translate}}
                 </app-info-row>
 
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-content">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-list>
                             <ion-radio-group [formControlName]="formFields.Location">

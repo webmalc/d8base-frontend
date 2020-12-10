@@ -1,11 +1,11 @@
-<ion-item class="ion-item-no-border ion-item-bordered-first item-header">
+<ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
     <ion-col class="ion-no-padding">
         <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-item class="ion-item-no-border">{{'profile-form.contacts'|translate}}</ion-item>
+            <ion-item class="ion-item-no-border" color="light">{{'profile-form.contacts'|translate}}</ion-item>
         </ion-row>
     </ion-col>
 </ion-item>
-<ion-item class="ion-item-no-border ion-item-bordered-others item-content">
+<ion-item class="ion-item-no-border ion-item-bordered-others">
     <ion-col class="ion-no-padding">
         <ion-row *ngFor="let contact of userContacts$ | async"
                  class="ion-justify-content-between ion-align-items-center">

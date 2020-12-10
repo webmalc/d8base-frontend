@@ -4,7 +4,7 @@
         <ion-col appMainColumn>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
 
-                <ion-item class="ion-item-no-border ion-item-bordered-first item-content ion-padding-vertical">
+                <ion-item class="ion-item-no-border ion-item-bordered-first ion-padding-vertical">
                     <ion-col class="ion-no-padding" size="12">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
@@ -107,7 +107,7 @@
                     {{"service-publish.step-five.first-info-row"|translate}}
                 </app-info-row>
 
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-content">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding" size="12">
                         <ion-item class="ion-item-no-border ion-margin-top ion-item-no-side-padding">
                             <b>
@@ -137,7 +137,7 @@
                             </ngx-dropzone>
                         </ion-item>
 
-                        <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom ion-margin-bottom">
+                        <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
                             <ion-col size="6">
                                 <ion-button size="medium" color="light" class="ion-margin-top"
                                             (click)="serviceStepsNavigationService.previous()"
