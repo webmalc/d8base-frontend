@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
+import {Search, ServiceList} from '@app/api/models';
 import {HelperService} from '@app/core/services/helper.service';
 import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {Service} from '@app/service/models/service';
-import {Search, ServiceList} from '../../../api/models';
 
 @Component({
     selector: 'app-search-result',
