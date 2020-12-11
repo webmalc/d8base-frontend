@@ -1,10 +1,10 @@
-<ion-card class="ion-no-margin ion-no-padding">
+<ion-card class="ion-no-margin ion-no-padding card">
     <ion-card-content class="no-horizontal-padding">
         <ion-col class="ion-no-padding ion-no-margin">
             <ion-row class="ion-justify-content-between ion-nowrap">
                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
                     <ion-item class="ion-item-no-border">
-                        <ion-img class="border-radius" src="{{photoSanitizer.sanitize(data.master.user?.avatar)}}"
+                        <ion-img class="border-radius" src="{{photoSanitizer.sanitize(data.professional.user?.avatar)}}"
                                  style="height: 100px; width: 100px"></ion-img>
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -12,9 +12,9 @@
                             <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding">
                                 <ion-col class="ion-no-padding">
                                     <ion-item class="ion-item-no-border ion-item-no-min-height master-full-name">
-                                        {{data.master.user.first_name}}&nbsp;{{data.master.user.last_name}}
+                                        {{data.professional.user.first_name}}&nbsp;{{data.professional.user.last_name}}
                                     </ion-item>
-                                    <ion-item *ngIf="data.master?.company"
+                                    <ion-item *ngIf="data.professional?.company"
                                               class="ion-item-no-border ion-item-no-min-height master-company">
                                         {{this.getCompanyName()|translate}}
                                     </ion-item>
@@ -25,7 +25,7 @@
                                     <app-rating-full-star></app-rating-full-star>
                                     <ion-item
                                             class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ph5 master-rating">
-                                        {{data.master.rating}}
+                                        {{data.professional.rating}}
                                     </ion-item>
                                     <ion-item
                                             class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding master-reviews">
@@ -41,9 +41,9 @@
                         <ion-icon name="heart-outline"></ion-icon>
                     </ion-item>
                     <ion-item class="ion-item-no-border no-padding-left">
-                        <ion-icon *ngIf="data.master.user.is_confirmed" color="success"
+                        <ion-icon *ngIf="data.professional.user.is_confirmed" color="success"
                                   name="checkmark-circle-outline"></ion-icon>
-                        <ion-icon *ngIf="!data.master.user.is_confirmed" color="danger"
+                        <ion-icon *ngIf="!data.professional.user.is_confirmed" color="danger"
                                   name="close-circle-outline"></ion-icon>
                     </ion-item>
                 </div>
@@ -53,14 +53,16 @@
                     {{'issuance.search-result.services'|translate}}
                 </ion-item>
                 <ion-row class="ion-justify-content-end">
-                    <ion-item *ngIf="data.master?.level" class="ion-item-no-border master-level">
-                        {{'global.professional-level.' + data.master.level | translate}}
+                    <ion-item *ngIf="data.professional?.level" class="ion-item-no-border master-level">
+                        {{'global.professional-level.' + data.professional.level | translate}}
                     </ion-item>
                 </ion-row>
             </ion-row>
             <ion-row *ngFor="let service of getServiceList()" class="ion-nowrap ion-justify-content-between">
                 <ion-item class="ion-item-no-border ion-item-no-min-height">
-                    {{service.name}}
+                    <a [routerLink]="'/service/' + service?.id">
+                        {{service.name}}
+                    </a>
                 </ion-item>
                 <ion-row class="ion-justify-content-end">
                     <ion-item class="ion-item-no-border ion-item-no-min-height">
@@ -79,7 +81,7 @@
                     <ion-item class="ion-item-no-border ion-item-no-min-height master-location-title">
                         {{'issuance.search-result.address'|translate}}
                     </ion-item>
-                    <ion-item *ngFor="let loc of data.masterLocationList"
+                    <ion-item *ngFor="let loc of data.professional?.locations"
                               class="ion-item-no-border ion-item-no-min-height pv5">
                         {{loc.address}}
                     </ion-item>

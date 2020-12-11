@@ -26,7 +26,7 @@ export class NotificationWorkerService {
     @once
     public async init(): Promise<void> {
         return new Promise<void>(async resolve => {
-            const registration = await navigator.serviceWorker.register('../../../firebase-messaging-sw.js');
+            const registration = await navigator.serviceWorker?.register('../../../firebase-messaging-sw.js');
             if (!NotificationWorkerService.isFirebaseSupported()) {
                 resolve();
 

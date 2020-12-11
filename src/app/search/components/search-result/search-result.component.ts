@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
+import {Search, ServiceList} from '@app/api/models';
 import {HelperService} from '@app/core/services/helper.service';
 import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
-import {SearchResultsInterface} from '@app/search/interfaces/search-results-interface';
 import {Service} from '@app/service/models/service';
 
 @Component({
@@ -11,7 +11,7 @@ import {Service} from '@app/service/models/service';
 })
 export class SearchResultComponent {
 
-    @Input() public data: SearchResultsInterface;
+    @Input() public data: Search;
     private isMoreServicesClicked: boolean = false;
 
     constructor(public readonly photoSanitizer: PhotoSanitizerService) {
@@ -29,12 +29,12 @@ export class SearchResultComponent {
         return (this.data.services.length > 3 && !this.isMoreServicesClicked);
     }
 
-    public getServiceList(): Service[] {
+    public getServiceList(): ServiceList[] {
         return this.isMoreServicesClicked ? this.data.services : this.data.services.slice(0, 3);
     }
 
     public getCompanyName(): string {
-        return this.data?.master?.company ? this.data.master.company : 'global.master.private-person';
+        return this.data?.professional?.company ? this.data.professional.company : 'global.professional.private-person';
     }
 
     public getPrice(service: Service): string {

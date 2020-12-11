@@ -50,7 +50,7 @@
                             "{{searchResultTitle}}"&nbsp;{{declineIsWaiting(searchResult.length)|translate}}&nbsp;
                             {{'issuance.result.you'|translate}}
                         </ion-item>
-                        <app-search-result *ngFor="let res of searchResult" [data]="res"></app-search-result>
+                        <app-search-result *ngFor="let res of searchResult" [data]="res" class="search-result"></app-search-result>
                     </ion-col>
                 </ion-row>
             </ion-col>

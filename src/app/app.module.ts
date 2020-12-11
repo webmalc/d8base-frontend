@@ -26,6 +26,8 @@ import {IonicStorageModule} from '@ionic/storage';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import * as Sentry from '@sentry/angular';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {environment} from '../environments/environment';
+import {ApiModule} from './api/api.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
@@ -47,7 +49,8 @@ import {AppComponent} from './app.component';
                 useClass: JsonTranslateLoader
             }
         }),
-        SharedModule
+        SharedModule,
+        ApiModule.forRoot({rootUrl: `${environment.backend.url}/en/api`})
     ],
     providers: [
         {
