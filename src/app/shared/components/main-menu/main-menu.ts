@@ -32,8 +32,14 @@ export const mainMenuItems: MainMenuItem[] = [
     {
         title: 'template.my-orders',
         icon: 'calendar-outline',
-        link: '/my-orders',
+        link: '/my-orders/inbox',
         masterOnly: true
+    },
+    {
+        title: 'template.my-orders',
+        icon: 'calendar-outline',
+        link: '/my-orders/outbox',
+        clientOnly: true
     },
     {
         title: 'template.download',
@@ -77,7 +83,7 @@ export const mainMenuItems: MainMenuItem[] = [
     {
         title: 'template.service',
         icon: 'medal-outline',
-        link: '/service/publish/step-one'
+        link: '/service/publish'
     },
     {
         title: 'template.support',
