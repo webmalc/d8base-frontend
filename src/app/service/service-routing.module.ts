@@ -21,6 +21,11 @@ const routes: Routes = [
         component: ServicePage
     },
     {
+        path: 'publish',
+        pathMatch: 'full',
+        redirectTo: 'publish/step-one'
+    },
+    {
         path: 'publish/step-one',
         component: ServicePublishStepOneComponent
     },

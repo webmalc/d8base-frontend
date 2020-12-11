@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, Input} from '@angular/core';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {SentOrder} from '@app/core/models/sent-order';
+import {ServicesApiCache} from '@app/core/services/cache';
+import {MasterReadonlyApiCacheService} from '@app/core/services/cache/master-readonly-api-cache.service';
 import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {MasterList} from '@app/master/models/master-list';
-import {ServicesApiCache} from '@app/my-orders/services';
-import {MasterReadonlyApiCacheService} from '@app/my-orders/services/master-readonly-api-cache.service';
 import {Service} from '@app/service/models/service';
 import {switchMap} from 'rxjs/operators';
 
@@ -13,10 +13,11 @@ import {switchMap} from 'rxjs/operators';
     templateUrl: './sent-order-list-item.component.html',
     styleUrls: ['./sent-order-list-item.component.scss']
 })
-export class SentOrderListItemComponent  {
+export class SentOrderListItemComponent {
 
     public service: Service;
     public master: MasterList;
+
     private _order: Partial<SentOrder>;
 
     constructor(

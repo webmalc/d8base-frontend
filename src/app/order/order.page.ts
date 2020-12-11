@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {OrderPostModel} from '@app/core/interfaces/order-model';
+import {ServicesApiCache} from '@app/core/services/cache';
 import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
 import {MasterList} from '@app/master/models/master-list';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
@@ -14,7 +15,8 @@ import {OrderWizardStateService, SentOrdersApiService} from './services';
 @Component({
     selector: 'app-order',
     templateUrl: './order.page.html',
-    styleUrls: ['./order.page.scss']
+    styleUrls: ['./order.page.scss'],
+    providers: [ServicesApiCache]
 })
 export class OrderPage implements OnInit, OnDestroy {
     public currentStepIndex: number;

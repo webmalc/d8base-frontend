@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {ReceivedOrder} from '@app/core/models/received-order';
+import {ServicesApiCache} from '@app/core/services/cache';
 import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
-import {ServicesApiCache} from '@app/my-orders/services';
 import {Service} from '@app/service/models/service';
 
 @Component({

@@ -32,6 +32,7 @@ import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-
 import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
+import {MasterByIdPipe, ServiceByIdPipe} from '@app/shared/pipes';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {SelectableDistrictOnSearchService} from '@app/shared/services/selectable-district-on-search.service';
@@ -80,7 +81,9 @@ import {NumberDirective} from './directives/number.directive';
         CalendarComponentComponent,
         MainColumnDirective,
         OrderDetailsComponent,
-        ClientWidgetComponent
+        ClientWidgetComponent,
+        ServiceByIdPipe,
+        MasterByIdPipe
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -110,7 +113,9 @@ import {NumberDirective} from './directives/number.directive';
         MainColumnDirective,
         OrderDetailsComponent,
         ClientWidgetComponent,
-        MasterWidgetComponent
+        MasterWidgetComponent,
+        ServiceByIdPipe,
+        MasterByIdPipe
     ],
     imports: [
         CommonModule,
