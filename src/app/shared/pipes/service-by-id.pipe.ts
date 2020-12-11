@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {ServicesApiCache} from '@app/my-orders/services';
 import {Service} from '@app/service/models/service';
+import {ServicesApiCache} from '@app/shared/services';
 import {Observable, of} from 'rxjs';
 
 @Pipe({

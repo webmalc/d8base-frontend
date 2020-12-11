@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SentOrder} from '@app/core/models/sent-order';
-import {MasterReadonlyApiCacheService, ServicesApiCache} from '@app/my-orders/services';
 import {SentOrdersApiService} from '@app/order/services';
+import {MasterReadonlyApiCacheService, ServicesApiCache} from '@app/shared/services';
 import {Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 

@@ -1,5 +1,5 @@
 {
-  "extends":  [
+  "extends": [
     "tslint:recommended",
     "tslint-config-prettier"
   ],
@@ -37,19 +37,35 @@
     "unnecessary-else": true,
     "unnecessary-bind": true,
     "prefer-while": true,
-    "prefer-template": [true, "allow-single-concat"],
+    "prefer-template": [
+      true,
+      "allow-single-concat"
+    ],
     "prefer-switch": true,
     "encoding": true,
     "increment-decrement": true,
-    "comment-type": [true, "doc", "singleline"],
+    "comment-type": [
+      true,
+      "doc",
+      "singleline"
+    ],
     "class-name": true,
     "prefer-const": true,
     "prefer-readonly": true,
-    "no-duplicate-imports": [true, {
-      "allow-namespace-imports": true
-    }],
-    "max-classes-per-file": [true, 1],
-    "max-file-line-count": [true, 300],
+    "no-duplicate-imports": [
+      true,
+      {
+        "allow-namespace-imports": true
+      }
+    ],
+    "max-classes-per-file": [
+      true,
+      1
+    ],
+    "max-file-line-count": [
+      true,
+      300
+    ],
     "cyclomatic-complexity": true,
     "unnecessary-constructor": true,
     "triple-equals": true,
@@ -62,13 +78,19 @@
     "no-this-assignment": true,
     "no-invalid-template-strings": true,
     "no-eval": true,
-    "no-duplicate-variable": [true, "check-parameters"],
+    "no-duplicate-variable": [
+      true,
+      "check-parameters"
+    ],
     "no-duplicate-switch-case": true,
     "no-duplicate-super": true,
     "no-debugger": true,
     "prefer-for-of": true,
     "curly": true,
-    "semicolon": [true, "always"],
+    "semicolon": [
+      true,
+      "always"
+    ],
     "no-empty-interface": true,
     "array-type": false,
     "arrow-parens": false,
@@ -92,19 +114,15 @@
           "public-static-field",
           "protected-static-field",
           "private-static-field",
-
           "public-instance-field",
           "protected-instance-field",
           "private-instance-field",
-
           "public-constructor",
           "protected-constructor",
           "private-constructor",
-
           "public-static-method",
           "protected-static-method",
           "private-static-method",
-
           "public-instance-method",
           "protected-instance-method",
           "private-instance-method"
@@ -160,7 +178,11 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "one-variable-per-declaration": false,
-    "component-class-suffix": [true, "Page", "Component"],
+    "component-class-suffix": [
+      true,
+      "Page",
+      "Component"
+    ],
     "directive-class-suffix": true,
     "directive-selector": [
       true,
@@ -174,6 +196,11 @@
       "app",
       "page",
       "kebab-case"
+    ],
+    "ban": [
+      true,
+      "fit",
+      "fdescribe"
     ]
   }
 }

@@ -28,7 +28,13 @@
     "master": {
       "private-person": "Private person"
     },
-    "save": "Save"
+    "save": "Save",
+    "at": "at"
+  },
+  "service-location": {
+    "online": "Online",
+    "professional": "Professional's place",
+    "client": "Client's place"
   },
   "accordion": {
     "expand": "show more",
@@ -207,10 +213,7 @@
       "start-price": "Service price from",
       "end-price": "Service price to",
       "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
-      "location": "Service location",
-      "location-online": "Online",
-      "location-professional": "Professional's place",
-      "location-client": "Client's place"
+      "location": "Service location"
     },
     "step-three": {
       "title": "Want to add photos of the service? With them your service will be brighter!",
@@ -501,9 +504,6 @@
         "instant-booking-desc": "Show instant booking only",
         "datetime": "Date and time",
         "availability": "Service availability",
-        "online-service": "Online service",
-        "at-master-location": "At professional’s location",
-        "at-client-location": "At client’s location",
         "price": "Service price",
         "apply": "Apply"
       }
@@ -570,7 +570,7 @@
     "date-time-subheader": "Pick date and time",
     "date": "Date",
     "time": "Time",
-    "client-details": "Service order",
+    "client-details": "Client details",
     "done": "The order was sent",
     "done-details": "Please wait for confirmation from the professional.",
     "confirmation-sent": "Order details were sent to the e-mail address",
@@ -579,7 +579,7 @@
     "name": "Name",
     "surname": "Surname",
     "email": "E-mail",
-    "tel": "Phone",
+    "phone": "Phone",
     "is-not-for-me-description": "Enter the name of the person who will get the service"
   },
   "flag-menu": {

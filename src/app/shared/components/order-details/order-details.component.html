@@ -1,3 +1,41 @@
 <ion-item *ngIf="order?.start_datetime" lines="none">
-    <p><b>{{ 'order.date' | translate }}:</b> {{ order.start_datetime | date:'medium' }}</p>
+    <ion-icon slot="start" name="calendar-outline" color="secondary" class="ion-align-self-start"></ion-icon>
+    <ion-label>
+        <b>
+            {{ order.start_datetime | date:'fullDate' }}
+            {{ 'global.at' | translate }}
+            {{ order.start_datetime | date:'shortTime' }}
+        </b>
+    </ion-label>
+</ion-item>
+
+<ion-item *ngIf="(order?.service | serviceById$ | async) as service" lines="none">
+    <ion-icon slot="start" name="location-outline" color="secondary" class="ion-align-self-start"></ion-icon>
+    <p><b>{{ 'service-location.' + service.service_type | translate }}</b></p>
+</ion-item>
+
+<ion-item *ngIf="order?.first_name" lines="none">
+    <ion-icon slot="start" name="person-circle-outline" color="secondary" class="ion-align-self-start"></ion-icon>
+    <ion-label>
+        <h2><b>{{ 'order.client-details' | translate }}</b></h2>
+        <div>
+            {{ 'order.name' | translate }}:
+            <b>
+                {{ order.first_name }}
+                {{ order.last_name }}
+            </b>
+        </div>
+        <div>
+            {{ 'order.phone' | translate }}:
+            <b>
+                {{ order.phone }}
+            </b>
+        </div>
+        <div>
+            {{ 'order.comment-header' | translate }}:
+            <b>
+                {{ order.note }}
+            </b>
+        </div>
+    </ion-label>
 </ion-item>

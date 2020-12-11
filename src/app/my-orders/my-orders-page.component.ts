@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MasterManagerService} from '@app/core/services';
-import {MasterReadonlyApiCacheService} from '@app/my-orders/services/master-readonly-api-cache.service';
+import {ServicesApiCache} from '@app/shared/services';
+import {MasterReadonlyApiCacheService} from '@app/shared/services/master-readonly-api-cache.service';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {ServicesApiCache} from './services';
 
 @Component({
     selector: 'app-my-orders-page',
@@ -14,6 +14,7 @@ import {ServicesApiCache} from './services';
 })
 export class MyOrdersPageComponent {
     public state$: Observable<{ isMaster: boolean, isInbox: boolean }>;
+
     constructor(
         masterManager: MasterManagerService,
         route: ActivatedRoute
@@ -22,7 +23,7 @@ export class MyOrdersPageComponent {
             masterManager.isMaster$.asObservable(),
             route.data
         ]).pipe(
-            map(([isMaster, data]) => ({ isMaster, isInbox: data.isInbox }))
+            map(([isMaster, data]) => ({isMaster, isInbox: data.isInbox}))
         );
     }
 }
