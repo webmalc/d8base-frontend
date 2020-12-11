@@ -6,6 +6,7 @@ import {MasterList} from '@app/master/models/master-list';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {orderSteps} from '@app/order/order-steps';
 import {Service} from '@app/service/models/service';
+import {ServicesApiCache} from '@app/shared/services';
 import {Observable, Subject} from 'rxjs';
 import {map, switchMap, takeUntil} from 'rxjs/operators';
 
@@ -14,7 +15,8 @@ import {OrderWizardStateService, SentOrdersApiService} from './services';
 @Component({
     selector: 'app-order',
     templateUrl: './order.page.html',
-    styleUrls: ['./order.page.scss']
+    styleUrls: ['./order.page.scss'],
+    providers: [ServicesApiCache]
 })
 export class OrderPage implements OnInit, OnDestroy {
     public currentStepIndex: number;
