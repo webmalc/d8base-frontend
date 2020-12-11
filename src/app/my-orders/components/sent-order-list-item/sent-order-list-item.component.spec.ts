@@ -1,9 +1,9 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import {MasterReadonlyApiCacheService, ServicesApiCache} from '@app/core/services/cache';
 import {ServicesApiService} from '@app/service/services/services-api.service';
-import {ServicesApiCache} from '@app/shared/services';
-import {MasterReadonlyApiCacheService} from '@app/shared/services/master-readonly-api-cache.service';
+
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {SentOrderListItemComponent} from './sent-order-list-item.component';

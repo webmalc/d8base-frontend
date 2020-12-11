@@ -1,11 +1,11 @@
 import {ChangeDetectorRef, Component, Input} from '@angular/core';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {SentOrder} from '@app/core/models/sent-order';
+import {ServicesApiCache} from '@app/core/services/cache';
+import {MasterReadonlyApiCacheService} from '@app/core/services/cache/master-readonly-api-cache.service';
 import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {MasterList} from '@app/master/models/master-list';
 import {Service} from '@app/service/models/service';
-import {ServicesApiCache} from '@app/shared/services';
-import {MasterReadonlyApiCacheService} from '@app/shared/services/master-readonly-api-cache.service';
 import {switchMap} from 'rxjs/operators';
 
 @Component({

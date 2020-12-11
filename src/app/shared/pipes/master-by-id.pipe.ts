@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {MasterReadonlyApiCacheService} from '@app/core/services/cache';
 import {MasterList} from '@app/master/models/master-list';
-import {MasterReadonlyApiCacheService} from '@app/shared/services';
 import {Observable, of} from 'rxjs';
 
 @Pipe({
