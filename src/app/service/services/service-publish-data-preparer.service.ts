@@ -22,6 +22,7 @@ import {ServicePhoto} from '@app/service/models/service-photo';
 import {ServiceSchedule} from '@app/service/models/service-schedule';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {plainToClass} from 'class-transformer';
+import ServicePublishData from '../interfaces/service-publish-data.interface';
 
 @Injectable()
 export class ServicePublishDataPreparerService {
@@ -29,26 +30,20 @@ export class ServicePublishDataPreparerService {
     constructor(private readonly servicePublishDataHolder: ServicePublishDataHolderService) {
     }
 
-    public async getData(): Promise<{
-        master: Master,
-        user: User,
-        service: Service,
-        servicePhotos: ServicePhoto[],
-        serviceSchedule: ServiceSchedule[],
-        masterSchedule: MasterSchedule[],
-        serviceLocation: ServiceLocation,
-        masterLocation: MasterLocation,
-        servicePrice: Price
-    }> {
+    public async getData(): Promise<ServicePublishData> {
+        const service = this.getService();
+        const serviceLocation = service.service_type === 'client' ? this.getServiceLocation() : null;
+        const masterLocation = service.service_type !== 'online' ? this.getMasterLocation() : null;
+
         return {
+            service,
+            serviceLocation,
+            masterLocation,
             master: this.getMaster(),
             user: await this.getUser(),
-            service: this.getService(),
             servicePhotos: await this.getServicePhotos(),
             serviceSchedule: this.getServiceSchedule(),
             masterSchedule: this.getMasterSchedule(),
-            serviceLocation: this.getServiceLocation(),
-            masterLocation: this.getMasterLocation(),
             servicePrice: this.getServicePrice()
         };
     }
