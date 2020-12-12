@@ -48,16 +48,11 @@ export class ServicePublishDataHolderService {
     }
 
     public getStepData<T>(step: number): T {
-        // @ts-ignore
         return this.stepsData[step];
     }
 
     public getPartialStepData<T>(step: number, data: string): T {
         return this.stepsData[step][data];
-    }
-
-    public removeStep(step: number): void {
-        this.stepsData[step] = undefined;
     }
 
     public isset(step: number): boolean {

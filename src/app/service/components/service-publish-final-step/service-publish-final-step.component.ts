@@ -12,7 +12,6 @@ import {ServicePublishService} from '@app/service/services/service-publish.servi
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
-import {PopoverController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {map, single} from 'rxjs/operators';
 
@@ -23,11 +22,14 @@ import {map, single} from 'rxjs/operators';
 })
 export class ServicePublishFinalStepComponent extends Reinitable {
 
+    public readonly contactAddUrl: string = '/professional/professional-contact-add/';
+    public readonly contactEditUrl: string = '/professional/professional-contact-edit/';
+    public readonly contactAddDefaultUrl: string = '/professional/professional-contact-add-default/';
+
     constructor(
         private readonly servicePublish: ServicePublishService,
-        private readonly popoverController: PopoverController,
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        public serviceStepsNavigationService: ServiceStepsNavigationService,
+        public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
         private readonly masterLocationApi: MasterLocationApiService,
         private readonly router: Router,
         private readonly masterManager: MasterManagerService
@@ -59,7 +61,7 @@ export class ServicePublishFinalStepComponent extends Reinitable {
         );
     }
 
-    private getMasterLocation(master: Master): Promise<MasterLocation> {
+    private getMasterLocation(master: Master): Promise<MasterLocation | null> {
         return this.masterLocationApi.getByClientId(master.id).pipe(
             map(list => list.results.length === 0 ? null : list.results[0])
         ).toPromise();
