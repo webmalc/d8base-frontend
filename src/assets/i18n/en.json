@@ -148,6 +148,16 @@
     "languages": "Languages",
     "not-specified": "Not specified"
   },
+  "profile-main-edit": {
+    "main": "Main info"
+  },
+  "profile-edit": {
+    "about": "About",
+    "save": "Save",
+    "birthday": "Birthday",
+    "nationality": "Nationality",
+    "languages": "Languages"
+  },
   "plugins-tab": {
     "plugins": "Plugins",
     "save": "Save"

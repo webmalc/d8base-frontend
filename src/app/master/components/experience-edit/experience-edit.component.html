@@ -1,20 +1,20 @@
 <ion-row *ngIf="item" class="ion-justify-content-center">
-    <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12">
-        <ion-item class="ion-item-no-border ion-item-bordered-first">
+    <ion-col appMainColumn>
+        <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
             <ion-col class="ion-no-padding">
                 <ion-row class="ion-justify-content-start ion-align-items-center">
-                    <ion-item (click)="locationBack()"
-                              class="ion-item-no-border ion-align-items-center"
+                    <ion-item (click)="locationBack()" color="light"
+                              class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer"
                               routerDirection="back" routerLinkActive="active">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </ion-item>
-                    <ion-item class="ion-item-no-border">
+                    <ion-item class="ion-item-no-border" color="light">
                         {{'experience-edit-page.back'|translate}}
                     </ion-item>
                 </ion-row>
             </ion-col>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+        <ion-item class="ion-item-no-border ion-item-bordered-others">
             <ion-col class="ion-padding-vertical" size="12">
                 <ion-item>
                     <ion-label color="medium" position="floating">
@@ -28,13 +28,12 @@
                     </ion-label>
                     <ion-input [(ngModel)]="item.company" name="company" type="text"></ion-input>
                 </ion-item>
-                <ion-item class="ion-justify-content-between width100">
+                <ion-item lines="none" class="ion-item-bottom-border width100">
                     <ion-label color="medium">
                         {{'experience-edit-page.is-still-here'|translate}}
                     </ion-label>
-                    <ion-toggle [(ngModel)]="item.is_still_here"></ion-toggle>
+                    <ion-toggle slot="end" [(ngModel)]="item.is_still_here"></ion-toggle>
                 </ion-item>
-
                 <ion-item>
                     <ion-label color="medium" position="floating">
                         {{'experience-edit-page.start-date'|translate}}

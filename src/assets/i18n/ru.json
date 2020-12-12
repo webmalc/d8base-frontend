@@ -148,6 +148,16 @@
     "languages": "Языки общения",
     "not-specified": "Не указано"
   },
+  "profile-main-edit": {
+    "main": "Основное"
+  },
+  "profile-edit": {
+    "about": "О себе",
+    "save": "Сохранить",
+    "birthday": "Дата рождения",
+    "nationality": "Национальность",
+    "languages": "Языки общения"
+  },
   "plugins-tab": {
     "plugins": "Плагины",
     "save": "Сохранить"
