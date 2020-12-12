@@ -37,33 +37,35 @@
             </svg>
         </ion-item>
 
-        <ion-item (click)="becomeMaster()" *ngIf="!(masterManager.isMaster$ | async)
+        <ion-item *ngIf="!(masterManager.isMaster$ | async)
                             && (isAuthenticated$|async)
                             && isDesktop()"
-                  class="ion-item-no-border cursor-pointer" slot="end">
+                  routerLink="/service/publish/step-one"
+                  lines="none" slot="end">
             {{'template.become-master'|translate}}
         </ion-item>
         <ion-item *ngIf="(isAuthenticated$|async)"
-                  class="ion-item-no-border orders"
+                  class="orders"
                   slot="end"
+                  lines="none"
                   routerLink="/my-orders">
             <ion-icon class="pr5" name="calendar-outline"></ion-icon>
             {{'template.my-orders'|translate}}
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
+        <ion-item lines="none" class="ion-item-no-side-padding ion-padding-end" slot="end">
             <ion-icon name="notifications-outline"></ion-icon>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-no-side-padding" slot="end">
+        <ion-item lines="none" class="ion-item-no-side-padding" slot="end">
             <ion-icon name="heart-outline"></ion-icon>
         </ion-item>
-        <ion-item class="ion-item-no-border text-blue" slot="end"
+        <ion-item lines="none" class="text-blue" slot="end"
                   *ngIf="!(isAuthenticated$|async)"
                   routerLink="/auth/login"
                   routerDirection="forward"
                   routerLinkActive="active">
             {{'template.sign-in'|translate}}
         </ion-item>
-        <ion-item class="ion-item-no-border text-blue" slot="end"
+        <ion-item lines="none" class="text-blue" slot="end"
                   *ngIf="!(isAuthenticated$|async)"
                   routerLink="/auth/registration"
                   routerLinkActive="active"

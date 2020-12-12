@@ -2,7 +2,7 @@
 <ion-content>
     <ion-row class="ion-justify-content-center">
         <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="10" sizeXl="8" class="ion-no-padding ion-margin-top">
-            <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
+            <form *ngIf="form" [formGroup]="form">
                 <ion-item class="ion-item-no-border ion-item-bordered-first">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
@@ -24,7 +24,7 @@
                                 {{ 'profile-about.birthday' | translate }}
                             </ion-label>
                             <ion-datetime
-                                    display-format="YYYY-MM-DD"
+                                    display-format="YYYY-MM-DD" picker-format="YYYY-MM-DD"
                                     formControlName="{{this.formFields.Birthday}}"
                             ></ion-datetime>
                         </ion-item>
@@ -34,7 +34,7 @@
                                 {{ 'profile-about.nationality' | translate }}
                             </ion-label>
                             <ionic-selectable
-                                    (onSearch)="countriesApi.onCountrySearch($event)"
+                                    (onSearch)="countriesSearch.onCountrySearch($event)"
                                     [canSearch]="true"
                                     formControlName="{{this.formFields.Nationality}}"
                                     itemTextField="name"
@@ -58,8 +58,8 @@
                             </ionic-selectable>
                         </ion-item>
 
-                        <ion-button class="ion-margin-top" color="secondary"
-                                    expand="block" fill="solid" type="submit">
+                        <ion-button class="ion-margin-top" color="secondary" (click)="submitForm()"
+                                    expand="block" fill="solid">
                             {{'profile-about.button'| translate}}
                         </ion-button>
 

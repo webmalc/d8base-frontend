@@ -2,7 +2,6 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AboutEditComponent} from '@app/profile/components/about-edit/about-edit.component';
-import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
 import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {UserEditComponent} from '@app/profile/components/user-edit/user-edit.component';
 import {SettingsFormService} from '@app/profile/forms/settings-form.service';
@@ -34,7 +33,6 @@ import {ProfilePage} from './profile.page';
     ],
     declarations: [
         ProfilePage,
-        MainInfoTabComponent,
         UserContactEditComponent,
         UserEditComponent,
         AboutEditComponent

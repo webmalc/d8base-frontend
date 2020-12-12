@@ -21,6 +21,7 @@ import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-a
 import {TagsReadonlyApiService} from '@app/master/services/tags-readonly-api.service';
 import {Country} from '@app/profile/models/country';
 import {Language} from '@app/profile/models/language';
+import {UserLanguage} from '@app/profile/models/user-language';
 import {LanguagesApiService} from '@app/profile/services/languages-api.service';
 import {forkJoin, Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
@@ -120,7 +121,7 @@ export class MasterProfileInfoGeneratorFactoryService {
 
     private getUserLanguages(user: PartialUserInterface): Observable<Language[]> {
         return (user.languages && user.languages.length !== 0) ?
-            this.languagesApi.getList(user.languages.map(lang => lang.language)) :
+            this.languagesApi.getList((user.languages as UserLanguage[]).map(lang => lang.language)) :
             of([]);
     }
 

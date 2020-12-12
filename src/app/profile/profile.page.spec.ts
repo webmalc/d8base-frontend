@@ -1,10 +1,14 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
-import {IonicModule, IonTabBar} from '@ionic/angular';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {MasterManagerService} from '@app/core/services';
+import {ProfileService} from '@app/profile/services/profile.service';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {BehaviorSubject} from 'rxjs';
-import {MasterManagerService} from '../core/services/master-manager.service';
+import {StorageManagerMock} from '../../testing/mocks';
 import {ProfilePage} from './profile.page';
 
 class MasterManagerServiceStub {
@@ -23,13 +27,18 @@ describe('ProfilePage', () => {
             imports: [
                 IonicModule.forRoot(),
                 RouterTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule
             ],
             providers: [
                 {
                     provide: MasterManagerService,
                     useClass: MasterManagerServiceStub
-                }
+                },
+                ProfileService,
+                {provide: StorageManagerService, useClass: StorageManagerMock}
             ]
         }).compileComponents();
 
@@ -39,10 +48,5 @@ describe('ProfilePage', () => {
     }));
     it('should create', () => {
         expect(component).toBeDefined();
-    });
-
-    it('should create tabs', () => {
-        const tabs = fixture.debugElement.query(By.directive(IonTabBar)).children;
-        expect(tabs.length).toEqual(4);
     });
 });

@@ -14,7 +14,7 @@ import {Country} from '@app/profile/models/country';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
 import {forkJoin, Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'

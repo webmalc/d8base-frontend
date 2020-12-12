@@ -35,10 +35,6 @@ export class HeaderComponent implements OnInit {
         return this.platform.is('desktop');
     }
 
-    public becomeMaster(): void {
-        this.masterManager.becomeMaster().subscribe();
-    }
-
     /**
      * Enable/disable the specified menu. A workaround for wide (desktop) screen only
      */

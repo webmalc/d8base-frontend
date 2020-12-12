@@ -40,12 +40,12 @@
                         </ion-item>
                         <!--newUser-->
                         <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                         !isUserExists && formService.isEmailValid()"
+                         !(isUserExists$ | async) && formService.isEmailValid()"
                                 class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
                             {{"service-publish.step-four.new-user"|translate}}
                         </ion-item>
                         <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                         !isUserExists && formService.isEmailValid()"
+                         !(isUserExists$ | async) && formService.isEmailValid()"
                                 class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
                             <div class="label-for-required-input">
                                 {{"service-publish.step-four.create-password"|translate}}
@@ -54,12 +54,12 @@
                         <!--/newUser-->
                         <!--userExists-->
                         <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                         isUserExists && formService.isEmailValid()"
+                         (isUserExists$ | async) && formService.isEmailValid()"
                                   class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
                             {{"service-publish.step-four.user-exists"|translate}}
                         </ion-item>
                         <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                         isUserExists && formService.isEmailValid()"
+                         (isUserExists$ | async) && formService.isEmailValid()"
                                   class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
                             <div class="label-for-required-input">
                                 {{"service-publish.step-four.enter-password"|translate}}
@@ -70,12 +70,12 @@
                 </ion-item>
 
                 <app-info-row *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                 !isUserExists && formService.isEmailValid()">
+                 !(isUserExists$ | async) && formService.isEmailValid()">
                     {{"service-publish.step-four.second-info-row"|translate}}
                 </app-info-row>
 
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                 !isUserExists && formService.isEmailValid()"
+                 !(isUserExists$ | async) && formService.isEmailValid()"
                         class="ion-item-no-border item-background-color-white">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
@@ -97,7 +97,7 @@
                 </ion-item>
 
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
-                 isUserExists && formService.isEmailValid()"
+                 (isUserExists$ | async) && formService.isEmailValid()"
                           class="ion-item-no-border item-background-color-white">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item class="ion-item-bordered ion-margin-top">
