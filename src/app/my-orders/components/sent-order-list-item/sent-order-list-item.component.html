@@ -1,4 +1,4 @@
-<ion-card *ngIf="order" class="ion-no-margin mv5">
+<ion-card class="ion-no-margin mv5" [routerLink]="['/my-orders', 'outbox', order.id]">
     <ion-item lines="none">
         <ion-label slot="start">
             <div><b>{{ order.start_datetime | date:'mediumDate'}}</b></div>

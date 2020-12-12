@@ -5,7 +5,7 @@
         <p>{{ service?.duration }}</p>
     </ion-note>
 </ion-item>
-<app-master-widget [master]="master"></app-master-widget>
+<app-master-widget *ngIf="master" [master]="master"></app-master-widget>
 <app-more-info *ngIf="!alwaysExpanded else serviceDescription">
     <ng-container *ngTemplateOutlet="serviceDescription"></ng-container>
 </app-more-info>

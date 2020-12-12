@@ -71,7 +71,8 @@ export class AuthenticationService implements AuthenticatorInterface {
             client_id: environment.client_id,
             client_secret: environment.client_secret
         }).pipe(
-            switchMap(result => from(this.tokenManager.setTokens(result)).pipe(tap(_ => this.isAuthenticatedSubject$.next(true))))
+            switchMap(result => from(this.tokenManager.setTokens(result))),
+            tap(() => this.isAuthenticatedSubject$.next(true))
         );
     }
 
@@ -80,18 +81,13 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public logout(): Observable<void> {
-        return from(this.preLogout.run().then(() => this.tokenManager.clear())).pipe(tap(_ => this.isAuthenticatedSubject$.next(false)));
+        return from(this.preLogout.run()
+            .then(() => this.tokenManager.clear())
+            .then(() => this.isAuthenticatedSubject$.next(false)));
     }
 
     public authenticateWithToken(token: AuthResponseInterface): Promise<void> {
-        return new Promise<void>(resolve => {
-            this.tokenManager.setTokens(token).then(
-                _ => {
-                    this.isAuthenticatedSubject$.next(true);
-                    resolve();
-                }
-            );
-        });
+        return this.tokenManager.setTokens(token).then(_ => this.isAuthenticatedSubject$.next(true));
     }
 
     public refresh(): Observable<void> {

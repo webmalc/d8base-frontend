@@ -43,7 +43,7 @@ export class LoginPage implements OnDestroy {
                 if (400 === error.status && error.error.error === 'invalid_grant') {
                     this.errorMessage = 'login-page.incorrect-login-data';
                 } else {
-                    console.error(error.error);
+                    throw error;
                 }
             }
         );

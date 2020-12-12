@@ -2,10 +2,10 @@
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
-            <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+            <ion-item class="ion-item-no-border ion-item-bordered-first ion-padding-vertical">
                 <ion-col class="ion-no-padding">
-                    <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
-                        <ion-item class="ion-item-no-border fs20">
+                    <ion-row class="ion-justify-content-start ion-align-items-center ">
+                        <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
                             <b>
                                 {{"service-publish.step-three.title" | translate}}
                             </b>
@@ -17,7 +17,7 @@
                 {{"service-publish.step-three.first-info-row"|translate}}
             </app-info-row>
             <ion-item
-                    class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                    class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
                 <ion-col class="ion-no-padding">
                     <ion-item class="ion-item-no-border ion-margin-top">
                         <b>
@@ -54,7 +54,7 @@
                 {{"service-publish.step-three.second-info-row"|translate}}
             </app-info-row>
 
-            <ion-item class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-no-side-padding">
+            <ion-item class="ion-item-no-border ion-item-bordered-first ion-no-side-padding">
                 <ion-col class="ion-no-padding">
 <!--                    <ion-item class="ion-item-no-side-padding cursor-pointer ion-item-no-border" id="add-new-service">-->
 <!--                        <ion-icon color="secondary" name="add-circle"></ion-icon>-->
@@ -63,14 +63,14 @@
 
                     <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
                         <ion-col size="6">
-                            <ion-button color="light" class="ion-margin-top"
+                            <ion-button size="medium" color="light" class="ion-margin-top"
                                         (click)="serviceStepsNavigationService.previous()"
                                         fill="solid" expand="block">
                                 {{"service-publish.back-button" | translate}}
                             </ion-button>
                         </ion-col>
                         <ion-col size="6">
-                            <ion-button color="secondary" type="submit" (click)="submit()"
+                            <ion-button size="medium" color="secondary" type="submit" (click)="submit()"
                                         class="ion-margin-top" fill="solid" expand="block">
                                 {{"service-publish.forward-button" | translate}}
                             </ion-button>

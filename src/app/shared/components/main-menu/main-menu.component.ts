@@ -27,10 +27,14 @@ export class MainMenuComponent {
             return false;
         }
 
-        if ((item.userOnly || item.masterOnly) && !this.isAuthenticated) {
+        if ((item.userOnly || item.masterOnly || item.clientOnly) && !this.isAuthenticated) {
             return false;
         }
 
-        return !(item.clientOnly && !item.masterOnly && this.isMaster);
+        if (item.clientOnly && this.isMaster) {
+            return false;
+        }
+
+        return !(item.masterOnly && !this.isMaster);
     }
 }

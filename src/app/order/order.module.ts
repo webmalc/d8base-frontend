@@ -6,7 +6,6 @@ import {
     DateTimeStepComponent,
     LocationStepComponent,
     OrderConfirmationComponent,
-    OrderDetailsComponent,
     SummaryStepComponent
 } from '@app/order/components';
 import {SharedModule} from '@app/shared/shared.module';
@@ -20,7 +19,6 @@ import {OrderWizardStateService} from './services/order-wizard-state.service';
 @NgModule({
     declarations: [
         OrderPage,
-        OrderDetailsComponent,
         DateTimeStepComponent,
         LocationStepComponent,
         ClientDetailsStepComponent,
@@ -35,9 +33,6 @@ import {OrderWizardStateService} from './services/order-wizard-state.service';
         OrderRoutingModule,
         ReactiveFormsModule,
         FormsModule
-    ],
-    exports: [
-        OrderDetailsComponent
     ],
     providers: [
         OrderWizardStateService

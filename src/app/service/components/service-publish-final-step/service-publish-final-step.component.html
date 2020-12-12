@@ -3,7 +3,7 @@
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <ion-item
-                    class="ion-item-no-border ion-item-bordered-first item-background-color-white ion-item-no-side-padding">
+                    class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
                 <ion-col class="ion-no-padding">
                     <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
                         <ion-item class="ion-item-no-border fs18">
@@ -25,27 +25,30 @@
 <!--                    [editDefaultContactUrl]="contactAddDefaultUrl"-->
 <!--            ></app-abstract-contacts>-->
 
-            <ion-item class="ion-item-no-border item-background-color-white ion-item-no-side-padding">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding">
                 <ion-col size="12" class="ion-align-items-center ion-justify-content-center">
                     <ion-button color="light"
+                                size="medium"
                                 (click)="serviceStepsNavigationService.previous()"
                                 class="ion-margin-top" fill="solid" expand="block">
                         {{"service-publish.back-button" | translate}}
                     </ion-button>
                     <ion-button color="light"
+                                size="medium"
                                 class="ion-margin-top" fill="solid" expand="block">
-                        просмотр
+                        {{"service-publish.final-step.view" | translate}}
                     </ion-button>
                     <ion-button (click)="publish()"
                                 color="success"
+                                size="medium"
                                 class="ion-margin-top" fill="solid" expand="block">
-                        Опубликовать
+                        {{"service-publish.final-step.publish" | translate}}
                     </ion-button>
 
                 </ion-col>
             </ion-item>
 
-            <ion-item class="ion-item-no-border item-background-color-white ion-item-no-side-padding">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding">
                 <app-service-publish-agreement></app-service-publish-agreement>
             </ion-item>
 
