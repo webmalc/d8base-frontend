@@ -56,14 +56,13 @@ export class UserManagerService {
 
     public updateUser(user: Partial<User>): Observable<User> {
         return this.api.patch<User>(this.url, user).pipe(
-            map(raw => plainToClass(User, raw))
+            map(raw => plainToClass(User, raw)),
+            tap(usr => this.user = usr)
         );
     }
 
     public becomeMaster(): Observable<User> {
-        return this.updateUser({account_type: TypeOfUser.Master}).pipe(
-            tap(user => this.user = user)
-        );
+        return this.updateUser({account_type: TypeOfUser.Master});
     }
 
     private getUser(): Observable<User> {

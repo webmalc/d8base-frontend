@@ -1,11 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {StorageManagerMock} from '../../../testing/mocks';
 import {PreLogoutService} from './pre-logout.service';
 
 describe('PreLogoutService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            PreLogoutService
+            PreLogoutService,
+            {provide: StorageManagerService, useClass: StorageManagerMock}
         ]
     }));
 

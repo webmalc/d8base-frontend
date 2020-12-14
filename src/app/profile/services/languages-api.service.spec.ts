@@ -1,5 +1,5 @@
+import {ApiClientService} from '@app/core/services/api-client.service';
 import {of} from 'rxjs';
-import {ApiClientService} from '../../core/services/api-client.service';
 import {Language} from '../models/language';
 import {LanguagesApiService} from './languages-api.service';
 
@@ -23,22 +23,18 @@ describe('LanguageApiService', () => {
 
     it('should return array of languages', () => {
         const language1 = new Language();
-        language1.id = 0;
         language1.code = 'ru';
         language1.name = 'russian';
         const language2 = new Language();
-        language2.id = 1;
         language2.code = 'en';
         language2.name = 'english';
         const data: Language[] =
             [
                 {
-                    id: 0,
                     code: 'ru',
                     name: 'russian'
                 },
                 {
-                    id: 1,
                     code: 'en',
                     name: 'english'
                 }

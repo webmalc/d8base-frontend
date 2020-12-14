@@ -2,7 +2,9 @@ import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {User} from '@app/core/models/user';
+import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
+import {ProfileFormService} from '@app/profile/forms/profile-form.service';
 import {ProfileService} from '@app/profile/services/profile.service';
 import {RegisterEmailApiService} from '@app/profile/services/register-email-api.service';
 import {plainToClass} from 'class-transformer';
@@ -16,17 +18,23 @@ export class UserEditComponent implements OnInit {
 
     public form: FormGroup;
     public formFields = ProfileFormFields;
+    public user: User;
 
     constructor(
         private readonly profileService: ProfileService,
         private readonly location: Location,
-        private readonly registerEmailApi: RegisterEmailApiService
+        private readonly registerEmailApi: RegisterEmailApiService,
+        private readonly formService: ProfileFormService,
+        private readonly userManager: UserManagerService
     ) {
     }
 
     public ngOnInit(): void {
-        this.profileService.createProfileForm$().subscribe(
-            form => this.form = form
+        this.userManager.getCurrentUser().subscribe(
+            user => {
+                this.user = user;
+                this.form = this.formService.createForm(user);
+            }
         );
     }
 
@@ -34,7 +42,9 @@ export class UserEditComponent implements OnInit {
         this.profileService.updateUser(
             plainToClass(User, this.form.getRawValue(), {excludeExtraneousValues: true})
         );
-        this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();
+        if (this.user.email !== this.form.get(this.formFields.Email).value) {
+            this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();
+        }
         this.location.back();
     }
 

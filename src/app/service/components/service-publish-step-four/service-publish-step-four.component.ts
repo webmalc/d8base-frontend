@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {RegistrationService} from '@app/auth/services/registration.service';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
@@ -14,19 +14,21 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
 import {plainToClass} from 'class-transformer';
-import {forkJoin, Subscription} from 'rxjs';
-import {filter, first} from 'rxjs/operators';
+import {BehaviorSubject, forkJoin, Observable, Subject, Subscription} from 'rxjs';
+import {filter, first, switchMap, takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-step-four',
     templateUrl: './service-publish-step-four.component.html',
     styleUrls: ['./service-publish-step-four.component.scss']
 })
-export class ServicePublishStepFourComponent extends Reinitable {
+export class ServicePublishStepFourComponent extends Reinitable implements OnDestroy {
 
     public readonly formFields = ServicePublishStepFourFormFields;
+    public readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public isUserExists: boolean = false;
-    private checkEmailSubscription: Subscription = null;
+    private readonly emailChanged$: Subject<void> = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
         public formService: ServicePublishStepFourFormService,
@@ -43,14 +45,7 @@ export class ServicePublishStepFourComponent extends Reinitable {
 
     public onEmailChange(): void {
         if (this.formService.isEmailValid()) {
-            if (this.checkEmailSubscription) {
-                this.checkEmailSubscription.unsubscribe();
-            }
-            this.checkEmailSubscription = this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)
-                .subscribe(
-                    val => this.isUserExists = val,
-                    err => console.error(err)
-                );
+            this.emailChanged$.next();
         }
     }
 
@@ -99,6 +94,10 @@ export class ServicePublishStepFourComponent extends Reinitable {
         return true;
     }
 
+    public ngOnDestroy(): void {
+        this.destroy$.next();
+    }
+
     protected init(): void {
         this.authenticationService.isAuthenticated$.pipe(first(), filter(val => true === val)).subscribe(
             () => this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
@@ -112,5 +111,12 @@ export class ServicePublishStepFourComponent extends Reinitable {
             )
         );
         this.formService.createForm();
+        this.emailChanged$.pipe(
+            switchMap(() => this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)),
+            takeUntil(this.destroy$)
+        ).subscribe(val => {
+            this.isUserExists$.next(val);
+            this.isUserExists = val;
+        });
     }
 }

@@ -23,7 +23,6 @@ export class ServicePublishStepOneComponent extends Reinitable {
     public formFields = ServicePublishStepOneFormFields;
     public categoriesList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
     public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
-    private isReinitialized: boolean = false;
 
     constructor(
         private readonly categoriesApi: CategoriesApiService,
@@ -55,10 +54,6 @@ export class ServicePublishStepOneComponent extends Reinitable {
     }
 
     public isSubmitDisabled(): boolean {
-        if (!this.isReinitialized) {
-            return this.formService.form.invalid && !this.formService.form.dirty;
-        }
-
         return this.formService.form.invalid;
     }
 
@@ -70,10 +65,8 @@ export class ServicePublishStepOneComponent extends Reinitable {
         if (this.servicePublishDataHolderService.isset(ServicePublishSteps.One)) {
             const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
             this.formService.createForm(stepData.category, stepData.subcategory);
-            this.isReinitialized = true;
         } else {
             this.formService.createForm();
-            this.isReinitialized = false;
         }
     }
 }

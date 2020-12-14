@@ -148,6 +148,16 @@
     "languages": "Languages",
     "not-specified": "Not specified"
   },
+  "profile-main-edit": {
+    "main": "Main info"
+  },
+  "profile-edit": {
+    "about": "About",
+    "save": "Save",
+    "birthday": "Birthday",
+    "nationality": "Nationality",
+    "languages": "Languages"
+  },
   "plugins-tab": {
     "plugins": "Plugins",
     "save": "Save"
@@ -409,6 +419,22 @@
     },
     "calendar": {
       "title": "Calendar"
+    },
+    "edit-master": {
+      "title": "Основное",
+      "name": "Специализация",
+      "name-placeholder": "Введите Вашу специализацию",
+      "description": "Описание",
+      "description-placeholder": "Введите описание",
+      "company": "Организация",
+      "company-placeholder": "Введите организацию",
+      "experience": "Опыт работы",
+      "experience-placeholder": "Введите опыт работы",
+      "level": "Профессиональный уровень",
+      "level-placeholder": "Выберите профессиональный уровень",
+      "subcategory": "Подкатегория",
+      "subcategory-placeholder": "Выберите подкатегорию",
+      "save": "Сохранить"
     }
   },
   "location-edit-page": {

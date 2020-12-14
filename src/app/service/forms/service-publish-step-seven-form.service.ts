@@ -27,14 +27,6 @@ export class ServicePublishStepSevenFormService {
         return this.form?.get(formField)?.value;
     }
 
-    public isSubmitDisabled(): boolean {
-        return (this.form.invalid) ||
-        (
-            !this.form.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
-            !this.form.get(ServicePublishStepSevenFormFields.PaymentCash).value
-        );
-    }
-
     public setControlDisabled(val: boolean, controlName: string): void {
         const control = this.form.controls[controlName] as FormControl;
         val ? control.disable() : control.enable();

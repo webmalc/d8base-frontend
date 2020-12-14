@@ -42,7 +42,6 @@ describe('ServicePublishFinalStepComponent', () => {
             ],
             providers: [
                 ServicePublishService,
-                ServicePublishDataHolderService,
                 ServiceStepsNavigationService,
                 {provide: StorageManagerService, useClass: StorageManagerMock},
                 ServicePhotoApiService,
@@ -58,7 +57,8 @@ describe('ServicePublishFinalStepComponent', () => {
                 StepFiveHandlerService,
                 StepSixHandlerService,
                 StepSevenHandlerService,
-                StepFinalHandlerService
+                StepFinalHandlerService,
+                {provide: ServicePublishDataHolderService, useValue: {getStepData: () => ({isNewMaster: true})}}
             ]
         }).compileComponents();
 

@@ -57,6 +57,7 @@ export class RegistrationFormComponent implements OnInit {
 
     public onCountryChange(): void {
         this.registrationFormService.setCityDisabled(false);
+        this.registrationFormService.setFormFiledValue(this.formFields.City, null);
     }
 
     public getCountryValue(): Country {

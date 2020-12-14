@@ -4,11 +4,11 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {ContactApiService} from '@app/profile/services/contact-api.service';
+import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {IonicModule} from '@ionic/angular';
 import {of} from 'rxjs';
 import {StorageManagerMock} from 'src/testing/mocks';
-import {ContactApiService} from '../../services/contact-api.service';
-import {UserContactApiService} from '../../services/user-contact-api.service';
 import {UserContactEditComponent} from './user-contact-edit.component';
 
 describe('UserContactEditComponent', () => {

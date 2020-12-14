@@ -43,7 +43,6 @@ import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {ImageCropperModule} from 'ngx-image-cropper';
-import {ContactsAddComponent} from './components/contacts-add/contacts-add.component';
 import {ImageCropPopoverComponent} from './components/picture-selector/image-cropper/image-crop-popover.component';
 import {DebounceDirective} from './directives/debounce.directive';
 import {MainColumnDirective} from './directives/main-column.directive';
@@ -63,7 +62,6 @@ import {NumberDirective} from './directives/number.directive';
         CollapseItemComponent,
         InfoRowComponent,
         NumberDirective,
-        ContactsAddComponent,
         ServicePublishAgreementComponent,
         AbstractContactsComponent,
         AbstractLocationEditComponent,
@@ -98,7 +96,6 @@ import {NumberDirective} from './directives/number.directive';
         UserLocationMapComponent,
         InfoRowComponent,
         NumberDirective,
-        ContactsAddComponent,
         ServicePublishAgreementComponent,
         AbstractContactsComponent,
         AbstractLocationEditComponent,

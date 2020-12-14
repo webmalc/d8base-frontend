@@ -1,40 +1,41 @@
 <app-header></app-header>
 <ion-content>
     <ion-row class="ion-justify-content-center">
-        <ion-col sizeXs="12" sizeSm="12" sizeMd="10" sizeLg="10" sizeXl="8" class="ion-no-padding ion-margin-top">
-            <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+        <ion-col appMainColumn class="ion-no-padding ion-margin-top">
+            <form *ngIf="form" [formGroup]="form">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-align-items-center"
                                       routerDirection="back"
+                                      color="light"
                                       routerLink="/profile" routerLinkActive="active">
                                 <ion-icon name="arrow-back-outline"></ion-icon>
                             </ion-item>
-                            <ion-item class="ion-item-no-border">О себе</ion-item>
+                            <ion-item class="ion-item-no-border" color="light">
+                                {{'profile-edit.about'|translate}}
+                            </ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
-
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
-
                         <ion-item>
                             <ion-label color="medium" position="floating">
-                                {{ 'profile-about.birthday' | translate }}
+                                {{ 'profile-edit.birthday' | translate }}
                             </ion-label>
                             <ion-datetime
-                                    display-format="YYYY-MM-DD"
+                                    display-format="YYYY-MM-DD" picker-format="YYYY-MM-DD"
                                     formControlName="{{this.formFields.Birthday}}"
                             ></ion-datetime>
                         </ion-item>
 
                         <ion-item>
                             <ion-label color="medium" position="floating">
-                                {{ 'profile-about.nationality' | translate }}
+                                {{ 'profile-edit.nationality' | translate }}
                             </ion-label>
                             <ionic-selectable
-                                    (onSearch)="countriesApi.onCountrySearch($event)"
+                                    (onSearch)="countriesSearch.onCountrySearch($event)"
                                     [canSearch]="true"
                                     formControlName="{{this.formFields.Nationality}}"
                                     itemTextField="name"
@@ -42,10 +43,9 @@
                             >
                             </ionic-selectable>
                         </ion-item>
-
                         <ion-item>
                             <ion-label color="medium" position="floating">
-                                {{ 'profile-about.languages' | translate }}
+                                {{ 'profile-edit.languages' | translate }}
                             </ion-label>
                             <ionic-selectable
                                     [canSearch]="true"
@@ -57,12 +57,10 @@
                             >
                             </ionic-selectable>
                         </ion-item>
-
-                        <ion-button class="ion-margin-top" color="secondary"
-                                    expand="block" fill="solid" type="submit">
-                            {{'profile-about.button'| translate}}
+                        <ion-button class="ion-margin-top" color="secondary" (click)="submitForm()"
+                                    expand="block" fill="solid">
+                            {{'profile-edit.save'| translate}}
                         </ion-button>
-
                     </ion-col>
                 </ion-item>
             </form>

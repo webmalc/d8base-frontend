@@ -1,15 +1,11 @@
-<ion-item class="ion-item-no-border item-background-color-green">
-    <ion-row class="ion-padding-vertical ion-justify-content-center">
-        <ion-col size="11" class="ion-no-padding">
-            <ion-item class="ion-item-no-side-padding ion-item-no-border">
-                <ng-content></ng-content>
-            </ion-item>
-        </ion-col>
-        <ion-col size="1">
-            <ion-item
-                    class="ion-item-no-min-height ion-item-no-side-padding ion-item-no-border ion-align-self-start ion-item-no-vertical-padding">
-                <ion-icon color="success" name="alert-circle"></ion-icon>
-            </ion-item>
-        </ion-col>
+<ion-item class="item-background-color-green" lines="none">
+    <ion-row class="ion-padding-vertical width100 ion-justify-content-between ion-nowrap">
+        <ion-item class="ion-item-no-side-padding" lines="none">
+            <ng-content></ng-content>
+        </ion-item>
+        <ion-item lines="none"
+                  class="ion-item-no-side-padding ion-margin-start ion-align-self-start ion-item-no-min-height min-width24">
+            <ion-icon color="success" name="alert-circle"></ion-icon>
+        </ion-item>
     </ion-row>
 </ion-item>

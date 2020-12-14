@@ -23,7 +23,7 @@ describe('ProfileFormService', () => {
 
     xit('should create form with empty validation settings', () => {
         const user = new User();
-        service.setValidators([], []);
+        // service.setValidators([], []);
         const form = service.createForm(user);
 
         expect(form).toBeTruthy();

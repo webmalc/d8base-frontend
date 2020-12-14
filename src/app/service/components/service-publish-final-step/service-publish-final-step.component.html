@@ -18,7 +18,13 @@
                 {{"service-publish.final-step.first-info-row"|translate}}
             </app-info-row>
 
-            <app-contacts-add></app-contacts-add>
+            <app-abstract-contacts
+                    *ngIf="!isNewMaster()"
+                    [interactable]="true"
+                    [addNewContactUrl]="contactAddUrl"
+                    [editContactUrl]="contactEditUrl"
+                    [editDefaultContactUrl]="contactAddDefaultUrl"
+            ></app-abstract-contacts>
 
             <ion-item class="ion-item-no-border ion-item-no-side-padding">
                 <ion-col size="12" class="ion-align-items-center ion-justify-content-center">
