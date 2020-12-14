@@ -10,7 +10,9 @@ import {StepThreeDataInterface} from '@app/service/interfaces/step-three-data-in
 import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
 import {StepDataInterfaceType} from '@app/service/types/step-data-interface-type';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ServicePublishDataHolderService {
 
     private stepsData: {

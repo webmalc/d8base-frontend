@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {Master} from '@app/core/models/master';
 import {MasterManagerService} from '@app/core/services';
 import {MasterLocation} from '@app/master/models/master-location';
@@ -10,8 +10,6 @@ import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-inte
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {ContactsAddComponent} from '@app/shared/components/contacts-add/contacts-add.component';
 import {Observable} from 'rxjs';
 import {map, single} from 'rxjs/operators';
 
@@ -20,7 +18,7 @@ import {map, single} from 'rxjs/operators';
     templateUrl: './service-publish-final-step.component.html',
     styleUrls: ['./service-publish-final-step.component.scss']
 })
-export class ServicePublishFinalStepComponent extends Reinitable {
+export class ServicePublishFinalStepComponent {
 
     public readonly contactAddUrl: string = '/professional/professional-contact-add/';
     public readonly contactEditUrl: string = '/professional/professional-contact-edit/';
@@ -34,12 +32,10 @@ export class ServicePublishFinalStepComponent extends Reinitable {
         private readonly router: Router,
         private readonly masterManager: MasterManagerService
     ) {
-        super();
     }
 
     public async publish(): Promise<void> {
-        const isNewMaster = this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster;
-        const master = isNewMaster ? null : await this.getMaster().toPromise();
+        const master = this.isNewMaster() ? null : await this.getMaster().toPromise();
         if (master) {
             const masterLocation = await this.getMasterLocation(master);
             await this.servicePublishDataHolder.setStepData<FinalStepDataInterface>(
@@ -48,11 +44,11 @@ export class ServicePublishFinalStepComponent extends Reinitable {
         }
         this.servicePublish.publish()
             .pipe(single())
-            .subscribe((service) => this.router.navigate(['service', service.id ]));
+            .subscribe((service) => this.router.navigate(['service', service.id]));
     }
 
-    protected init(): void {
-        ContactsAddComponent.reinit$.next(true);
+    public isNewMaster(): boolean {
+        return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster;
     }
 
     private getMaster(): Observable<Master> {
