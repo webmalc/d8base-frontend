@@ -38,21 +38,29 @@ export class AboutEditComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        let user: User;
+        let nationality: Country;
+        let userLanguages: UserLanguage[];
+
         forkJoin({
-            user: this.userManager.getCurrentUser(),
-            userLanguages: this.userLanguageApi.get()
+            usr: this.userManager.getCurrentUser(),
+            usrLanguages: this.userLanguageApi.get()
         }).pipe(
-            tap(({userLanguages}) => this.defaultUserLanguages = userLanguages.results),
-            switchMap(({user, userLanguages}) => this.getCountry(user.nationality).pipe(
-                switchMap((nationality: Country) => this.userLanguagesToLanguages(userLanguages.results).pipe(
-                    map((languages) => this.form = this.formBuilder.group({
-                        [this.formFields.Birthday]: [user.birthday],
-                        [this.formFields.Nationality]: [nationality],
-                        [this.formFields.Languages]: [languages]
-                    }))
-                ))
-            ))
-        ).subscribe();
+            tap(({usr, usrLanguages}) => {
+                this.defaultUserLanguages = userLanguages = usrLanguages.results;
+                user = usr;
+            }),
+            switchMap(({usr, usrLanguages}) => this.getCountry(user.nationality)),
+            switchMap((country: Country) => {
+                nationality = country;
+
+                return this.userLanguagesToLanguages(userLanguages);
+            })
+        ).subscribe((languages) => this.form = this.formBuilder.group({
+            [this.formFields.Birthday]: [user.birthday],
+            [this.formFields.Nationality]: [nationality],
+            [this.formFields.Languages]: [languages]
+        }));
         this.languagesApi.getLanguages$().subscribe(
             langs => this.languages$.next(langs)
         );
