@@ -134,11 +134,7 @@ export class OrderWizardStateService {
 
                     return from(this.storage.get(this.storageKey)).pipe(map(state => ({ context, state })));
                 }),
-                catchError(err => {
-                    console.error('setContext', err);
-
-                    return of();
-                })
+                catchError(err => of(err))
             )
             .subscribe(({ context, state }) => {
                 const { service } = context;
