@@ -23,13 +23,11 @@ export class CityPickerPopoverComponent implements OnInit {
 
     public ngOnInit(): void {
         this.locationService.getMergedLocationData().then(
-            location => {
-                this.citiesApi.getByLocation(1000, location).subscribe(
-                    cities => 0 === cities.results.length
-                        ? this.pop.dismiss(null).catch(err => console.error(err))
-                        : this.list$.next(cities.results)
-                );
-            }
+            location => this.citiesApi.getByLocation(1000, location).subscribe(
+                cities => 0 === cities.results.length
+                    ? this.pop.dismiss(null).catch(err => console.error(err))
+                    : this.list$.next(cities.results)
+            )
         );
     }
 
