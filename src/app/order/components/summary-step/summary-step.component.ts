@@ -1,21 +1,29 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {StepComponent} from '@app/order/abstract/step';
-import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    forwardRef
+} from '@angular/core';
+import { StepComponent } from '../../abstract/step';
 
 @Component({
     selector: 'app-summary-step',
     templateUrl: './summary-step.component.html',
-    styleUrls: ['./summary-step.component.scss']
+    styleUrls: ['./summary-step.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: StepComponent,
+            useExisting: forwardRef(() => SummaryStepComponent)
+        }
+    ]
 })
-
-export class SummaryStepComponent extends StepComponent {
-    @Output() public submit = new EventEmitter<void>();
-
-    constructor(orderService: OrderWizardStateService) {
-        super(orderService);
+export class SummaryStepComponent extends StepComponent<void> {
+    constructor(protected readonly cd: ChangeDetectorRef) {
+        super(cd);
     }
 
-    public onSubmit(): void {
-        this.submit.emit();
+    protected onStateChanged(data: any): void {
+        return;
     }
 }

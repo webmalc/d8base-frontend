@@ -1,19 +1,41 @@
-import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    OnDestroy
+} from '@angular/core';
+import { Subject } from 'rxjs';
+import { StepContext, StepState } from '../order-steps';
 
-export abstract class StepComponent {
-    protected constructor(protected readonly wizardState: OrderWizardStateService) {
+@Component({
+    template: ''
+})
+export abstract class StepComponent<T extends any> implements OnDestroy {
+    public outputData$ = new EventEmitter<StepState<T>>();
+    protected context: StepContext = null;
+
+    protected readonly ngDestroy$ = new Subject<void>();
+
+    constructor(protected readonly cd: ChangeDetectorRef) {}
+
+    public ngOnDestroy(): void {
+        this.ngDestroy$.next();
+        this.ngDestroy$.complete();
     }
 
-    public nextStep(): void {
-        this.update();
-        this.wizardState.navigateToStep(1);
+    public setState(state: StepState<T>): void {
+        this.onStateChanged(state?.data);
+        this.cd.markForCheck();
     }
 
-    public prevStep(): void {
-        this.wizardState.navigateToStep(-1);
+    public setContext(context: StepContext): void {
+        this.onContextChanged(context);
+        this.cd.markForCheck();
     }
 
-    protected update(): void {
-        // should be overridden
+    protected abstract onStateChanged(data: T): void;
+
+    protected onContextChanged(context: StepContext): void {
+        this.context = context;
     }
 }

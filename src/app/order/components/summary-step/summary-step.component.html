@@ -1,10 +1,8 @@
-<ion-row>
-    <ion-col>
-        <ion-button expand="block" color="medium" (click)="prevStep()">
-            {{ 'global.back' | translate }}
-        </ion-button>
-    </ion-col>
-    <ion-col>
-        <ion-button expand="block" color="success" (click)="onSubmit()">{{ 'order.order-service' | translate }}</ion-button>
-    </ion-col>
-</ion-row>
+<app-step-container>
+    <ion-list-header class="fs20">
+        <ion-label>{{ 'order.step.summary' | translate }}</ion-label>
+    </ion-list-header>
+    <app-info-row>
+        {{"service-publish.step-two.second-info-row"|translate}}
+    </app-info-row>
+</app-step-container>

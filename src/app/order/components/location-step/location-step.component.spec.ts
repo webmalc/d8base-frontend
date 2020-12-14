@@ -1,4 +1,6 @@
+import {HttpClient, HttpHandler} from '@angular/common/http';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
 import {IonicModule} from '@ionic/angular';
@@ -6,7 +8,7 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {LocationStepComponent} from './location-step.component';
 
-describe('ServiceOrderStepTwoComponent', () => {
+describe('LocationStepComponent', () => {
     let component: LocationStepComponent;
     let fixture: ComponentFixture<LocationStepComponent>;
 
@@ -14,7 +16,7 @@ describe('ServiceOrderStepTwoComponent', () => {
         TestBed.configureTestingModule({
             declarations: [LocationStepComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
-            providers: [OrderWizardStateService]
+            providers: [OrderWizardStateService, HttpClient, HttpHandler, FormBuilder]
         }).compileComponents();
 
         fixture = TestBed.createComponent(LocationStepComponent);
