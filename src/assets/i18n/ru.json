@@ -419,6 +419,22 @@
     },
     "calendar": {
       "title": "Календарь"
+    },
+    "edit-master": {
+      "title": "Main",
+      "name": "Expertise area",
+      "name-placeholder": "Enter expertise area",
+      "description": "Description",
+      "description-placeholder": "Enter description",
+      "company": "Company",
+      "company-placeholder": "Enter company name",
+      "experience": "Experience",
+      "experience-placeholder": "Enter experience",
+      "level": "Expertise level",
+      "level-placeholder": "Select expertise level",
+      "subcategory": "Subcategory",
+      "subcategory-placeholder": "Select subcategory",
+      "save": "Save"
     }
   },
   "location-edit-page": {
