@@ -19,7 +19,6 @@
       true,
       2
     ],
-    "newline-before-return": true,
     "indent": [
       true,
       "spaces",
