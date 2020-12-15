@@ -1,14 +1,8 @@
 <app-step-container>
     <ion-list>
         <ion-list-header class="fs20">
-            <ion-label>{{ 'order.location-header' | translate }}</ion-label>
+            <ion-label>{{ 'order.location-header' | translate }}: {{ locationLabel | translate }}</ion-label>
         </ion-list-header>
-        <ion-radio-group [value]="locationLabel" [formGroup]="form">
-            <ion-item>
-                <ion-label>{{ locationLabel | translate }}</ion-label>
-                <ion-radio slot="start" [value]="locationLabel"></ion-radio>
-            </ion-item>
-        </ion-radio-group>
         <ion-radio-group *ngIf="locations.length" [formControl]="formControl">
             <ion-item *ngFor="let location of locations">
                 <ion-label>{{ location.text }}</ion-label>

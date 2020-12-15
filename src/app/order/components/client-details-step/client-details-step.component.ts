@@ -1,17 +1,11 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    forwardRef,
-    OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { User } from '@app/core/models/user';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { StepComponent } from '@app/order/abstract/step';
+import { OrderClientDetailsFormFields } from '@app/order/enums/order-client-details-form';
+import { ClientDetailsStepData } from '@app/order/order-steps';
 import { takeUntil } from 'rxjs/operators';
-import { User } from '../../../core/models/user';
-import { UserManagerService } from '../../../core/services/user-manager.service';
-import { StepComponent } from '../../abstract/step';
-import { OrderClientDetailsFormFields } from '../../enums/order-client-details-form';
-import { ClientDetailsStepData } from '../../order-steps';
 
 @Component({
     selector: 'app-client-details-step',
@@ -25,9 +19,7 @@ import { ClientDetailsStepData } from '../../order-steps';
         }
     ]
 })
-export class ClientDetailsStepComponent
-    extends StepComponent<any>
-    implements OnInit {
+export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepData> implements OnInit {
     public formFields = OrderClientDetailsFormFields;
     public form = this.fb.group({
         [this.formFields.IsForMe]: [false],
@@ -38,12 +30,7 @@ export class ClientDetailsStepComponent
         [this.formFields.Comment]: ['']
     });
 
-    private readonly userFields = [
-        this.formFields.FirstName,
-        this.formFields.LastName,
-        this.formFields.Email,
-        this.formFields.Phone
-    ];
+    private readonly userFields = [this.formFields.FirstName, this.formFields.LastName, this.formFields.Email, this.formFields.Phone];
 
     private currentUserForm: ClientDetailsStepData;
 
@@ -71,8 +58,7 @@ export class ClientDetailsStepComponent
                 ...(!isForMe ? data : {}),
                 [this.formFields.IsForMe]: isForMe,
                 [this.formFields.Comment]: data[this.formFields.Comment]
-            },
-            { emitEvent: false }
+            }
         );
         this.disableUserFields(isForMe);
     }
@@ -81,7 +67,7 @@ export class ClientDetailsStepComponent
         this.form
             .get(this.formFields.IsForMe)
             .valueChanges.pipe(takeUntil(this.ngDestroy$))
-            .subscribe((isForMe) => {
+            .subscribe(isForMe => {
                 this.disableUserFields(isForMe);
                 this.cd.markForCheck();
             });
@@ -103,29 +89,22 @@ export class ClientDetailsStepComponent
     }
 
     private subscribeFormStatus(): void {
-        this.form.statusChanges
-            .pipe(takeUntil(this.ngDestroy$))
-            .subscribe(() => {
-                const isComplete = this.form.valid;
-                const data = this.getStepState();
-                this.outputData$.emit({
-                    isComplete,
-                    data
-                });
-            });
+        this.form.statusChanges.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
+            this.outputData = this.form.valid ? this.getStepState() : null;
+            this.isValid$.next(this.form.valid);
+        });
     }
 
     private getStepState(): ClientDetailsStepData {
         return {
             ...this.currentUserForm,
             ...this.form.value,
-            [this.formFields.IsForMe]: !this.form.get(this.formFields.IsForMe)
-                .value
+            [this.formFields.IsForMe]: !this.form.get(this.formFields.IsForMe).value
         };
     }
 
     private disableUserFields(isDisable: boolean = true): void {
-        this.userFields.forEach((control) => {
+        this.userFields.forEach(control => {
             if (isDisable) {
                 this.form.get(control).disable({ emitEvent: false });
             } else {

@@ -1,15 +1,10 @@
 import { Type } from '@angular/core';
-import { User } from '../core/models/user';
-import { MasterList } from '../master/models/master-list';
-import { Service } from '../service/models/service';
+import { User } from '@app/core/models/user';
+import { MasterList } from '@app/master/models/master-list';
+import { Service } from '@app/service/models/service';
 import { StepComponent } from './abstract/step';
-import {
-    ClientDetailsStepComponent,
-    DateTimeStepComponent,
-    LocationStepComponent,
-    SummaryStepComponent
-} from './components';
-import {OrderClientDetailsFormFields} from './enums/order-client-details-form';
+import { ClientDetailsStepComponent, DateTimeStepComponent, LocationStepComponent, SummaryStepComponent } from './components';
+import { OrderClientDetailsFormFields } from './enums/order-client-details-form';
 
 export interface StepModel {
     id: string;
@@ -22,11 +17,6 @@ export interface StepsModel {
     ids: string[];
 }
 
-export type StepState<T extends any> = {
-    isComplete: boolean;
-    data: T;
-};
-
 export type StepContext = {
     professional: MasterList;
     client: User;
@@ -34,14 +24,14 @@ export type StepContext = {
 };
 
 export type StepsState = {
-    [K in keyof StepsModel['byId']]?: StepState<any>;
+    [K in keyof StepsModel['byId']]?: { [dateKey: string]: any };
 };
 
 export enum OrderIds {
-    Date = 'Date',
-    Location = 'Location',
-    ClientDetails = 'ClientDetails',
-    Summary = 'Summary'
+    Date = 'date',
+    Location = 'location',
+    ClientDetails = 'client-details',
+    Summary = 'summary'
 }
 
 export type DateTimeStepData = {
@@ -56,6 +46,14 @@ export type LocationStepData = {
 export type ClientDetailsStepData = {
     [key in OrderClientDetailsFormFields]: string | boolean | number;
 };
+
+/**
+ * ORDER_STEPS stores a configuration of order creation stepper-wizard.
+ *
+ * The "byId" field stores information about steps.
+ *
+ * The "ids" field sets the order of steps.
+ */
 
 export const ORDER_STEPS: StepsModel = {
     byId: {
@@ -80,13 +78,12 @@ export const ORDER_STEPS: StepsModel = {
             title: 'order.step.summary'
         }
     },
-    ids: [
-        OrderIds.Date,
-        OrderIds.ClientDetails,
-        OrderIds.Location,
-        OrderIds.Summary
-    ]
+    ids: [OrderIds.Date, OrderIds.ClientDetails, OrderIds.Location, OrderIds.Summary]
 };
+
+export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => {
+    return { ...acc, [curr]: null };
+}, {});
 
 export const orderWizardStorageKey = 'orderWizardStorageKey';
 

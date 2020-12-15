@@ -1,17 +1,13 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    OnDestroy
-} from '@angular/core';
-import { Subject } from 'rxjs';
-import { StepContext, StepState } from '../order-steps';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { StepContext } from '../order-steps';
 
 @Component({
     template: ''
 })
-export abstract class StepComponent<T extends any> implements OnDestroy {
-    public outputData$ = new EventEmitter<StepState<T>>();
+export abstract class StepComponent<T> implements OnDestroy {
+    public outputData: T;
+    public isValid$ = new BehaviorSubject<boolean>(false);
     protected context: StepContext = null;
 
     protected readonly ngDestroy$ = new Subject<void>();
@@ -23,8 +19,8 @@ export abstract class StepComponent<T extends any> implements OnDestroy {
         this.ngDestroy$.complete();
     }
 
-    public setState(state: StepState<T>): void {
-        this.onStateChanged(state?.data);
+    public setState(state: T): void {
+        this.onStateChanged(state);
         this.cd.markForCheck();
     }
 

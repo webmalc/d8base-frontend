@@ -1,10 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    forwardRef
-} from '@angular/core';
-import { StepComponent } from '../../abstract/step';
+import { ChangeDetectionStrategy, Component, forwardRef, OnInit } from '@angular/core';
+import { StepComponent } from '@app/order/abstract/step';
 
 @Component({
     selector: 'app-summary-step',
@@ -18,12 +13,12 @@ import { StepComponent } from '../../abstract/step';
         }
     ]
 })
-export class SummaryStepComponent extends StepComponent<void> {
-    constructor(protected readonly cd: ChangeDetectorRef) {
-        super(cd);
+export class SummaryStepComponent extends StepComponent<void> implements OnInit {
+    public ngOnInit(): void {
+        this.isValid$.next(true);
     }
 
-    protected onStateChanged(data: any): void {
+    protected onStateChanged(data: unknown): void {
         return;
     }
 }

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SentOrder } from '@app/core/models/sent-order';
+import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds, StepContext, StepModel } from '@app/order/order-steps';
+import { OrderWizardStateService } from '@app/order/services';
 import { Observable, Subject } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
-import { SentOrder } from '../../../core/models/sent-order';
-import { StepComponent } from '../../abstract/step';
-import { OrderWizardStateService } from '../../services/order-wizard-state.service';
 
 @Component({
     selector: 'app-step-container',
@@ -14,35 +14,18 @@ import { OrderWizardStateService } from '../../services/order-wizard-state.servi
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepContainerComponent implements OnInit, OnDestroy {
-    public get currentStep$(): Observable<StepModel> {
-        return this.wizardState.getCurrentStep();
-    }
-
-    public get isNextDisabled$(): Observable<boolean> {
-        return this.wizardState.isAbleToNext().pipe(map(value => !value));
-    }
-
-    public get isPrevDisabled$(): Observable<boolean> {
-        return this.wizardState.isAbleToPrev().pipe(map(value => !value));
-    }
-
-    public get isLastStep$(): Observable<boolean> {
-        return this.wizardState.isLastStep();
-    }
-
-    public get context$(): Observable<StepContext> {
-        return this.wizardState.getContext();
-    }
-
-    public get orderDetailsState$(): Observable<SentOrder> {
-        return this.wizardState.getState().pipe(
-            map(stepsState => {
-                return Object.values(stepsState).reduce((acc, curr) => {
-                    return { ...acc, ...curr.data };
-                }, {});
-            })
-        );
-    }
+    public currentStep$: Observable<StepModel> = this.wizardState.getCurrentStep();
+    public isNextDisabled$: Observable<boolean> = this.stepComponent.isValid$.pipe(map(value => !value));
+    public isPrevDisabled$: Observable<boolean> = this.wizardState.isAbleToPrev().pipe(map(value => !value));
+    public isLastStep$: Observable<boolean> = this.wizardState.isLastStep();
+    public context$: Observable<StepContext> = this.wizardState.getContext();
+    public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
+        map(stepsState => {
+            return Object.values(stepsState).reduce((acc, curr) => {
+                return { ...acc, ...curr };
+            }, {});
+        })
+    );
 
     private readonly ngDestroy$ = new Subject<void>();
 
@@ -63,10 +46,12 @@ export class StepContainerComponent implements OnInit, OnDestroy {
     }
 
     public nextStep(): void {
+        this.wizardState.setCurrentStepState(this.stepComponent.outputData);
         this.wizardState.nextStep();
     }
 
     public prevStep(): void {
+        this.wizardState.setCurrentStepState(this.stepComponent.outputData);
         this.wizardState.prevStep();
     }
 
@@ -94,17 +79,9 @@ export class StepContainerComponent implements OnInit, OnDestroy {
             });
     }
 
-    private subscribeOutputCurrentState(): void {
-        this.stepComponent.outputData$.pipe(takeUntil(this.ngDestroy$)).subscribe(state => {
-            this.wizardState.setCurrentStepState(state);
-            this.cd.markForCheck();
-        });
-    }
-
     private subscribeAll(): void {
         this.subscribeInputContext();
         this.subscribeInputCurrentState();
-        this.subscribeOutputCurrentState();
         this.subscribeStepRoute();
         this.resubscribeOnReset();
     }

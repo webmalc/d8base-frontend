@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
 import { catchError, filter, first, map, switchMap } from 'rxjs/operators';
-import { SentOrder } from '../../core/models/sent-order';
-import { StorageManagerService } from '../../core/proxies/storage-manager.service';
-import { OrderIds, orderWizardStorageKey, ORDER_STEPS, StepContext, StepModel, StepsState, StepState } from '../order-steps';
-
-const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => {
-    return { ...acc, [curr]: { isComplete: false, data: null } };
-}, {});
+import { initState, OrderIds, orderWizardStorageKey, ORDER_STEPS, StepContext, StepModel, StepsState } from '../order-steps';
 
 @Injectable()
 export class OrderWizardStateService {
@@ -49,18 +44,18 @@ export class OrderWizardStateService {
         return this.state$.asObservable();
     }
 
-    public getStepStateById(id: string): Observable<StepState<any>> {
+    public getStepStateById(id: string): Observable<any> {
         return this.getState().pipe(
             filter(state => Boolean(state)),
             map(state => state[id])
         );
     }
 
-    public getCurrentStepState(): Observable<StepState<any>> {
+    public getCurrentStepState(): Observable<any> {
         return this.getStepStateById(this.getIdOfCurrentStep());
     }
 
-    public setStepStateById(id: string, data: StepState<any> = initState[id]): void {
+    public setStepStateById(id: string, data: any = initState[id]): void {
         const newState = {
             ...this.state$.value,
             [id]: data
@@ -69,7 +64,7 @@ export class OrderWizardStateService {
         this.storage.set(this.storageKey, newState);
     }
 
-    public setCurrentStepState(data: StepState<any>): void {
+    public setCurrentStepState(data: any): void {
         this.setStepStateById(this.getIdOfCurrentStep(), data);
     }
 
@@ -105,11 +100,7 @@ export class OrderWizardStateService {
     }
 
     public isAbleToNext(): Observable<boolean> {
-        return combineLatest([this.isLastStep(), this.getCurrentStepState()]).pipe(
-            map(([isLastStep, stepState]) => {
-                return !isLastStep && stepState.isComplete;
-            })
-        );
+        return this.isLastStep().pipe(map(isLastStep => !isLastStep));
     }
 
     public isAbleToPrev(): Observable<boolean> {
@@ -118,11 +109,6 @@ export class OrderWizardStateService {
 
     public navigateToCurrentStep(): void {
         this.router.navigate([this.path, this.getIdOfCurrentStep()]);
-    }
-
-    public finalize(result: SentOrder): void {
-        this.resetWizard();
-        this.router.navigate(['order', 'done']);
     }
 
     public setContext(context$: Observable<StepContext>): void {

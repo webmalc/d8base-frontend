@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SentOrder } from '@app/core/models/sent-order';
+import { ServicesApiCache } from '@app/core/services/cache';
 import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
-import { StepContext, StepModel } from '@app/order/order-steps';
-import { forkJoin, Observable, of, Subject } from 'rxjs';
-import { catchError, exhaustMap, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { ServicesApiCache } from '../core/services/cache';
-import { UserManagerService } from '../core/services/user-manager.service';
-import { SentOrdersApiService } from './services';
-import { OrderWizardStateService } from './services/order-wizard-state.service';
+import { forkJoin, Observable, Subject } from 'rxjs';
+import { filter, map, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { StepContext, StepModel } from './order-steps';
+import { OrderWizardStateService, SentOrdersApiService } from './services';
 
 @Component({
     selector: 'app-order',
@@ -27,6 +27,7 @@ export class OrderPage {
     constructor(
         private readonly wizardState: OrderWizardStateService,
         private readonly route: ActivatedRoute,
+        private readonly router: Router,
         private readonly servicesApi: ServicesReadonlyApiService,
         private readonly mastersApi: MasterReadonlyApiService,
         private readonly userManagerService: UserManagerService,
@@ -48,21 +49,26 @@ export class OrderPage {
         this.wizardState
             .submit()
             .pipe(
-                switchMap(() => this.wizardState.getState()),
-                map(state => {
+                withLatestFrom(this.wizardState.getState()),
+                map(([, state]) => {
                     return Object.values(state).reduce(
                         (acc, curr) => {
-                            return { ...acc, ...curr.data };
+                            return { ...acc, ...curr };
                         },
                         { service: this.serviceId }
                     );
                 }),
-                exhaustMap(order => this.ordersApi.create(order).pipe(catchError(error => of(error)))),
                 takeUntil(this.ngDestroy$)
             )
-            .subscribe(order => {
-                // TODO Debug finalizing the order's wizard
+            .subscribe((order: SentOrder) => {
+                this.createOrder(order);
             });
+    }
+
+    private createOrder(order: SentOrder): void {
+        this.ordersApi.create(order).subscribe(({ id }) => {
+            this.router.navigate(['/my-orders/outbox', id]);
+        });
     }
 
     private setContext(serviceId: number): void {

@@ -2,10 +2,10 @@
 <ion-content>
     <ion-grid class="ion-no-padding">
         <ion-row class="ion-justify-content-center">
-            <ion-col *ngIf="context$ | async as context" sizeXs="12" sizeSm="8" sizeMd="8" sizeLg="7" sizeXl="5" offset-xl="-1" offset-lg="-1">
+            <ion-col *ngIf="context$ | async as context" appMainColumn>
                 <ion-item color="light" lines="full">
                     <ion-buttons slot="start">
-                        <ion-button routerLink="/service/{{context?.service.id}}" routerDirection="back">
+                        <ion-button routerLink="/service/{{ context?.service.id }}" routerDirection="back">
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </ion-button>
                     </ion-buttons>
@@ -25,14 +25,18 @@
                 <ng-content></ng-content>
                 <ion-row>
                     <ion-col>
-                        <ion-button expand="block" color="medium" (click)="prevStep()" [disabled]="isPrevDisabled$  | async">
+                        <ion-button expand="block" color="medium" (click)="prevStep()" [disabled]="isPrevDisabled$ | async">
                             {{ 'global.back' | translate }}
                         </ion-button>
                     </ion-col>
                     <ion-col>
-                        <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">{{ 'order.order-service' | translate }}</ion-button>
+                        <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">{{
+                            'order.order-service' | translate
+                        }}</ion-button>
                         <ng-template #isNotLastStep>
-                            <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">{{ 'global.forward' | translate }}</ion-button>
+                            <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">{{
+                                'global.forward' | translate
+                            }}</ion-button>
                         </ng-template>
                     </ion-col>
                 </ion-row>

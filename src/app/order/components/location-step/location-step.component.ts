@@ -1,20 +1,10 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    forwardRef
-} from '@angular/core';
-import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators
-} from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { ProfessionalLocationService } from '@app/core/services/location/professional-location.service';
+import { StepComponent } from '@app/order/abstract/step';
+import { LocationStepData, StepContext } from '@app/order/order-steps';
 import { forkJoin } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { ProfessionalLocationService } from '../../../core/services/location/professional-location.service';
-import { StepComponent } from '../../abstract/step';
-import { LocationStepData, StepContext } from '../../order-steps';
 
 export enum LocationType {
     Online = 'online',
@@ -39,18 +29,13 @@ const initState: LocationStepData = {
         }
     ]
 })
-export class LocationStepComponent extends StepComponent<any> {
+export class LocationStepComponent extends StepComponent<LocationStepData> {
     public locationLabel: string;
     public locations: { id: number; text: string }[] = [];
-    public form: FormGroup = this.fb.group({});
     public formControl = new FormControl('', Validators.required);
     private locationKey: string;
 
-    constructor(
-        private readonly professionalLocationService: ProfessionalLocationService,
-        private readonly fb: FormBuilder,
-        protected readonly cd: ChangeDetectorRef
-    ) {
+    constructor(private readonly professionalLocationService: ProfessionalLocationService, protected readonly cd: ChangeDetectorRef) {
         super(cd);
         this.subscribeFormControl();
     }
@@ -66,7 +51,7 @@ export class LocationStepComponent extends StepComponent<any> {
         const { service = null } = context;
         switch (service.service_type) {
             case LocationType.Online: {
-                this.locationLabel = 'order.location-online';
+                this.locationLabel = 'service-location.online';
                 this.locationKey = null;
                 setTimeout(() => {
                     this.formControl.setValue('online');
@@ -74,13 +59,13 @@ export class LocationStepComponent extends StepComponent<any> {
                 break;
             }
             case LocationType.Professional: {
-                this.locationLabel = 'order.location-professional';
+                this.locationLabel = 'service-location.professional';
                 this.locationKey = 'service_location';
                 this.getServiceLocations();
                 break;
             }
             case LocationType.Client: {
-                this.locationLabel = 'order.location-client';
+                this.locationLabel = 'service-location.client';
                 this.locationKey = 'client_location';
                 this.getClientLocations();
 
@@ -93,62 +78,54 @@ export class LocationStepComponent extends StepComponent<any> {
 
     // TODO Extract getting locations out of component
     private getServiceLocations(): void {
-        const locationsObservables = this.context.service.locations.map(
-            ({ location }) => {
-                return this.professionalLocationService
-                    .getFullLocation(location)
-                    .pipe(
-                        map((res) => {
-                            const textLocation = ['country', 'city']
-                                .map((key) => res?.[key]?.name)
-                                .filter((value) => Boolean(value))
-                                .join(', ');
+        const locationsObservables = this.context.service.locations.map(({ location }) => {
+            return this.professionalLocationService.getFullLocation(location).pipe(
+                map(res => {
+                    const textLocation = ['country', 'city']
+                        .map(key => res?.[key]?.name)
+                        .filter(value => Boolean(value))
+                        .join(', ');
 
-                            return {
-                                id: location.id,
-                                text: `${textLocation}, ${location.address}`
-                            };
-                        })
-                    );
-            }
-        );
+                    return {
+                        id: location.id,
+                        text: `${textLocation}, ${location.address}`
+                    };
+                })
+            );
+        });
         forkJoin(locationsObservables)
             .pipe(takeUntil(this.ngDestroy$))
-            .subscribe((locations) => {
+            .subscribe(locations => {
                 this.locations = locations;
                 this.cd.markForCheck();
             });
     }
 
     private getClientLocations(): void {
-        this.locations = (this.context.client as any).locations.map(
-            (location) => {
-                const id = location;
-                const text = `${location}; Client location API is not implemented yet.`;
+        this.locations = (this.context.client as any).locations.map(location => {
+            const id = location;
+            const text = `${location}; Client location API is not implemented yet.`;
 
-                return {
-                    id,
-                    text
-                };
-            }
-        );
+            return {
+                id,
+                text
+            };
+        });
     }
 
     private subscribeFormControl(): void {
-        this.formControl.statusChanges
-            .pipe(takeUntil(this.ngDestroy$))
-            .subscribe(() => {
-                const isComplete = this.formControl.valid;
-                const data = this.locationKey
-                    ? {
-                          ...initState,
-                          [this.locationKey]: this.formControl.value
-                      }
-                    : initState;
-                this.outputData$.emit({
-                    isComplete,
-                    data
-                });
-            });
+        this.formControl.statusChanges.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
+            this.outputData = this.formControl.valid ? this.getStepState() : null;
+            this.isValid$.next(this.formControl.valid);
+        });
+    }
+
+    private getStepState(): LocationStepData {
+        return this.locationKey
+            ? {
+                  ...initState,
+                  [this.locationKey]: this.formControl.value
+              }
+            : initState;
     }
 }
