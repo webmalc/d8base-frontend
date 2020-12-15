@@ -8,7 +8,7 @@
     </ion-item>
     <ion-item *ngIf="master" lines="none">
         <ion-avatar slot="start">
-            <ion-img alt="avatar" src="{{ getPhoto(master.user?.avatar_thumbnail) }}"></ion-img>
+            <ion-img alt="avatar" [src]="getPhoto(master.user?.avatar_thumbnail)"></ion-img>
         </ion-avatar>
         <ion-label>
             <div><b>{{ master.user.first_name }} {{ master.user.last_name }}</b></div>
