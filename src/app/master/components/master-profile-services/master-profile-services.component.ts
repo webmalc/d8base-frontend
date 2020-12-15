@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import ServiceData from '@app/core/interfaces/service-data.interface';
 import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
 import {ServicesGeneratorFactoryService} from '@app/master/services/services-generator-factory.service';
 import {Service} from '@app/service/models/service';
@@ -14,7 +15,7 @@ import {ServicesApiService} from '@app/service/services/services-api.service';
 export class MasterProfileServicesComponent {
 
     public searchModel: string;
-    public serviceData: { service: Service, tags?: ServiceTag[] }[] = [];
+    public serviceData: ServiceData[] = [];
     public masterId: number;
     private serviceDefaultData: { service: Service, tags?: ServiceTag[] }[] = [];
 
