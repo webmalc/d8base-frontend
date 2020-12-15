@@ -197,6 +197,9 @@
       "hours": "hours",
       "minutes": "minutes"
   },
+  "service-details": {
+    "title": "Service information"
+  },
   "service-publish": {
     "back-button": "Back",
     "forward-button": "Continue",
@@ -204,7 +207,6 @@
       "title": "Service publishing",
       "description": "Publish an advertisement about your services in just 3 minutes and it will be seen by thousands of customers who are looking for your service and you.",
       "subdesc": "It's free!",
-      "info": "Service information",
       "category-title": "Choose a category for your service",
       "category-subtitle": "Service category",
       "subcategory-title": "Choose a subcategory for your service",
