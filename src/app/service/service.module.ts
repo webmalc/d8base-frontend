@@ -13,14 +13,12 @@ import {ServicePublishStepSevenComponent} from '@app/service/components/service-
 import {ServicePublishStepSixComponent} from '@app/service/components/service-publish-step-six/service-publish-step-six.component';
 import {ServicePublishStepThreeComponent} from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
 import {ServicePublishStepTwoComponent} from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
-import {TimetableAddTimePopoverComponent} from '@app/service/components/timetable-add-time-popover/timetable-add-time-popover.component';
 import {TimetableComponent} from '@app/service/components/timetable/timetable.component';
 import {ServicePublishStepFiveFormService} from '@app/service/forms/service-publish-step-five-form.service';
 import {ServicePublishStepFourFormService} from '@app/service/forms/service-publish-step-four-form.service';
 import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
 import {ServicePublishStepSevenDepartureFormService} from '@app/service/forms/service-publish-step-seven-departure-form.service';
 import {ServicePublishStepSevenFormService} from '@app/service/forms/service-publish-step-seven-form.service';
-import {ServicePublishStepSevenTimetableFormService} from '@app/service/forms/service-publish-step-seven-timetable-form.service';
 import {ServicePublishStepSixFormService} from '@app/service/forms/service-publish-step-six-form.service';
 import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
 import {ServicePublishGuardService} from '@app/service/guards/service-publish-guard.service';
@@ -78,7 +76,6 @@ import {ServicePage} from './service.page';
         ServicePublishStepSevenComponent,
         TimetableComponent,
         DepartureComponent,
-        TimetableAddTimePopoverComponent,
         ServicePublishFinalStepComponent,
         MasterPickerPopoverComponent,
         ServiceDetailsPageComponent
@@ -97,7 +94,6 @@ import {ServicePage} from './service.page';
         ServicePublishStepSixFormService,
         ServicePublishStepSevenFormService,
         ServicePublishStepSevenDepartureFormService,
-        ServicePublishStepSevenTimetableFormService,
         ServiceScheduleApiService,
         ServiceStepsNavigationService,
         ServicePublishService,

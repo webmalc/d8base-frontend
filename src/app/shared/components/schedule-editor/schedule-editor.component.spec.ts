@@ -1,23 +1,26 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
-
 import {TranslateModule} from '@ngx-translate/core';
-import {TimetableAddTimePopoverComponent} from './timetable-add-time-popover.component';
 
-describe('TimetableAddTimePopoverComponent', () => {
-    let component: TimetableAddTimePopoverComponent;
-    let fixture: ComponentFixture<TimetableAddTimePopoverComponent>;
+import {ScheduleEditorComponent} from './schedule-editor.component';
+
+describe('ScheduleEditorComponent', () => {
+    let component: ScheduleEditorComponent;
+    let fixture: ComponentFixture<ScheduleEditorComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TimetableAddTimePopoverComponent],
+            declarations: [ScheduleEditorComponent],
             imports: [
                 IonicModule.forRoot(),
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
+                ReactiveFormsModule,
+                FormsModule
             ]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(TimetableAddTimePopoverComponent);
+        fixture = TestBed.createComponent(ScheduleEditorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import {ServiceSchedule} from '@app/service/models/service-schedule';
 import {plainToClass} from 'class-transformer';
+import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
 
-// i'm so sorry
 @Injectable()
-export class ServicePublishStepSevenTimetableFormService {
+export class ScheduleEditorFormService {
 
     public form: FormGroup;
     public formArray: ServiceSchedule[] = [];
@@ -14,6 +13,10 @@ export class ServicePublishStepSevenTimetableFormService {
     private readonly defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
     constructor(private readonly formBuilder: FormBuilder) {
+    }
+
+    get controls(): FormGroup[] {
+        return (this.form.controls.timetable as FormArray).controls as FormGroup[];
     }
 
     public createForm(timetable?: ServiceSchedule[]): void {
@@ -43,16 +46,12 @@ export class ServicePublishStepSevenTimetableFormService {
         this.formArray[index].end_time = value;
     }
 
-    get controls(): FormGroup[] {
-        return (this.form.controls.timetable as FormArray).controls as FormGroup[];
-    }
-
     public isSubmitDisabled(): boolean {
         return !(this.form.valid && this.form.dirty);
     }
 
     public pushDay(dayCode: number, startTime: string = null, endTime: string = null, isEnabled: boolean = false, id: number = null): void {
-        (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).push(
+        (this.form.get(ScheduleEditorFormFields.Timetable) as FormArray).push(
             this.getFormGroup(dayCode, startTime, endTime, isEnabled, id)
         );
     }
@@ -73,12 +72,12 @@ export class ServicePublishStepSevenTimetableFormService {
     }
 
     public unsetError(i: number): void {
-        const endTimeValue = this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.EndTime].value;
-        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.EndTime].reset();
-        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.EndTime].setValue(endTimeValue);
-        const startTimeValue = this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.StartTime].value;
-        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.StartTime].reset();
-        this.controls[i].controls[ServicePublishStepSevenTimetableFormFields.StartTime].setValue(startTimeValue);
+        const endTimeValue = this.controls[i].controls[ScheduleEditorFormFields.EndTime].value;
+        this.controls[i].controls[ScheduleEditorFormFields.EndTime].reset();
+        this.controls[i].controls[ScheduleEditorFormFields.EndTime].setValue(endTimeValue);
+        const startTimeValue = this.controls[i].controls[ScheduleEditorFormFields.StartTime].value;
+        this.controls[i].controls[ScheduleEditorFormFields.StartTime].reset();
+        this.controls[i].controls[ScheduleEditorFormFields.StartTime].setValue(startTimeValue);
     }
 
     public getDayByIndex(i: number): string {
@@ -105,13 +104,13 @@ export class ServicePublishStepSevenTimetableFormService {
                             (this.timeToInt(day.end_time) < this.timeToInt(value.end_time) &&
                                 this.timeToInt(day.end_time) > this.timeToInt(value.start_time)))
                     ) {
-                        this.controls[index].controls[ServicePublishStepSevenTimetableFormFields.EndTime].setErrors({overlaps: true});
-                        this.controls[index].controls[ServicePublishStepSevenTimetableFormFields.StartTime].setErrors({overlaps: true});
+                        this.controls[index].controls[ScheduleEditorFormFields.EndTime].setErrors({overlaps: true});
+                        this.controls[index].controls[ScheduleEditorFormFields.StartTime].setErrors({overlaps: true});
                     } else if (
-                        (this.controls[index].controls[ServicePublishStepSevenTimetableFormFields.EndTime].hasError('overlaps') ||
-                            this.controls[index].controls[ServicePublishStepSevenTimetableFormFields.StartTime].hasError('overlaps')) &&
-                        !this.controls[index].controls[ServicePublishStepSevenTimetableFormFields.StartTime].hasError('timeError') &&
-                        !this.controls[index].controls[ServicePublishStepSevenTimetableFormFields.EndTime].hasError('timeError')
+                        (this.controls[index].controls[ScheduleEditorFormFields.EndTime].hasError('overlaps') ||
+                            this.controls[index].controls[ScheduleEditorFormFields.StartTime].hasError('overlaps')) &&
+                        !this.controls[index].controls[ScheduleEditorFormFields.StartTime].hasError('timeError') &&
+                        !this.controls[index].controls[ScheduleEditorFormFields.EndTime].hasError('timeError')
                     ) {
                         this.unsetError(index);
                     }
@@ -129,7 +128,7 @@ export class ServicePublishStepSevenTimetableFormService {
     }
 
     private updateForm(): void {
-        (this.form.get(ServicePublishStepSevenTimetableFormFields.Timetable) as FormArray).clear();
+        (this.form.get(ScheduleEditorFormFields.Timetable) as FormArray).clear();
         this.sort();
         this.formArray.forEach(data => this.pushDay(data.day_of_week, data.start_time, data.end_time, data.is_enabled, data.id));
     }
@@ -151,11 +150,11 @@ export class ServicePublishStepSevenTimetableFormService {
         id: number = null
     ): FormGroup {
         return this.formBuilder.group({
-            [ServicePublishStepSevenTimetableFormFields.Day]: [dayCode],
-            [ServicePublishStepSevenTimetableFormFields.StartTime]: [startTime],
-            [ServicePublishStepSevenTimetableFormFields.EndTime]: [endTime],
-            [ServicePublishStepSevenTimetableFormFields.IsEnabled]: [isEnabled],
-            [ServicePublishStepSevenTimetableFormFields.Id]: [id]
+            [ScheduleEditorFormFields.Day]: [dayCode],
+            [ScheduleEditorFormFields.StartTime]: [startTime],
+            [ScheduleEditorFormFields.EndTime]: [endTime],
+            [ScheduleEditorFormFields.IsEnabled]: [isEnabled],
+            [ScheduleEditorFormFields.Id]: [id]
         }, {
             validators: [
                 this.startTimeValidator,
@@ -168,55 +167,55 @@ export class ServicePublishStepSevenTimetableFormService {
     }
 
     private timeIntervalValidator(group: FormGroup): any {
-        if (!group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value) {
+        if (!group.get(ScheduleEditorFormFields.IsEnabled).value) {
             return;
         }
         const startTime = parseInt(
-            (group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(0, 2) +
-            (group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(3, 5),
+            (group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(0, 2) +
+            (group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(3, 5),
             10
         );
         const endTimeTime = parseInt(
-            (group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(0, 2) +
-            (group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(3, 5),
+            (group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(0, 2) +
+            (group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(3, 5),
             10
         );
         if (startTime >= endTimeTime) {
-            group.get(ServicePublishStepSevenTimetableFormFields.EndTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
         }
     }
 
     private startTimeFormatValidator(group: FormGroup): any {
-        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
-            ((group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.length !== 5 ||
-                parseInt((group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(0, 1), 10) > 2 ||
-                parseInt((group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
+        if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
+            ((group.get(ScheduleEditorFormFields.StartTime).value as string)?.length !== 5 ||
+                parseInt((group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(0, 1), 10) > 2 ||
+                parseInt((group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
         ) {
-            group.get(ServicePublishStepSevenTimetableFormFields.StartTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.StartTime).setErrors({timeError: true});
         }
     }
 
     private endTimeFormatValidator(group: FormGroup): any {
-        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
-            ((group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.length !== 5 ||
-                parseInt((group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(0, 1), 10) > 2 ||
-                parseInt((group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
+        if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
+            ((group.get(ScheduleEditorFormFields.EndTime).value as string)?.length !== 5 ||
+                parseInt((group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(0, 1), 10) > 2 ||
+                parseInt((group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
         ) {
-            group.get(ServicePublishStepSevenTimetableFormFields.EndTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
         }
     }
 
     private startTimeValidator(group: FormGroup): any {
-        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
-            !group.get(ServicePublishStepSevenTimetableFormFields.StartTime).value) {
-            group.get(ServicePublishStepSevenTimetableFormFields.StartTime).setErrors({timeError: true});
+        if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
+            !group.get(ScheduleEditorFormFields.StartTime).value) {
+            group.get(ScheduleEditorFormFields.StartTime).setErrors({timeError: true});
         }
     }
 
     private endTimeValidator(group: FormGroup): any {
-        if (group.get(ServicePublishStepSevenTimetableFormFields.IsEnabled).value &&
-            !group.get(ServicePublishStepSevenTimetableFormFields.EndTime).value) {
-            group.get(ServicePublishStepSevenTimetableFormFields.EndTime).setErrors({timeError: true});
+        if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
+            !group.get(ScheduleEditorFormFields.EndTime).value) {
+            group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
         }
     }
 }

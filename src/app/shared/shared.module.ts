@@ -5,7 +5,7 @@ import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {
-    ClientWidgetComponent,
+    ClientWidgetComponent, DaySelectorComponent,
     DurationComponent,
     FooterComponent,
     HeaderComponent,
@@ -13,6 +13,7 @@ import {
     MasterWidgetComponent,
     MoreInfoComponent,
     OrderDetailsComponent,
+    ScheduleEditorComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -41,6 +42,7 @@ import {SelectableSubregionOnSearchService} from '@app/shared/services/selectabl
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {BrMaskerModule} from 'br-mask';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {ImageCropPopoverComponent} from './components/picture-selector/image-cropper/image-crop-popover.component';
@@ -81,7 +83,9 @@ import {NumberDirective} from './directives/number.directive';
         OrderDetailsComponent,
         ClientWidgetComponent,
         ServiceByIdPipe,
-        MasterByIdPipe
+        MasterByIdPipe,
+        ScheduleEditorComponent,
+        DaySelectorComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -112,7 +116,8 @@ import {NumberDirective} from './directives/number.directive';
         ClientWidgetComponent,
         MasterWidgetComponent,
         ServiceByIdPipe,
-        MasterByIdPipe
+        MasterByIdPipe,
+        ScheduleEditorComponent
     ],
     imports: [
         CommonModule,
@@ -123,7 +128,8 @@ import {NumberDirective} from './directives/number.directive';
         LeafletModule,
         FormsModule,
         RouterModule,
-        ImageCropperModule
+        ImageCropperModule,
+        BrMaskerModule
     ],
     providers: [
         MainGuard,
