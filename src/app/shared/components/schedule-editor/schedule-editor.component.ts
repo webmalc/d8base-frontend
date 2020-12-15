@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AbstractSchedule} from '@app/core/models/abstract-schedule';
 import {PopoverController} from '@ionic/angular';
 import {DaySelectorComponent} from './day-selector/day-selector.component';
 import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
 import {ScheduleEditorFormService} from './schedule-editor-form.service';
+import * as ScheduleConstants from './schedule.constants';
 
 @Component({
     selector: 'app-schedule-editor',
@@ -11,9 +12,8 @@ import {ScheduleEditorFormService} from './schedule-editor-form.service';
     styleUrls: ['./schedule-editor.component.scss'],
     providers: [ScheduleEditorFormService]
 })
-export class ScheduleEditorComponent implements OnInit {
+export class ScheduleEditorComponent {
 
-    @Input() public schedule;
     @Output() public save = new EventEmitter<AbstractSchedule[]>();
 
     public formFields = ScheduleEditorFormFields;
@@ -24,8 +24,10 @@ export class ScheduleEditorComponent implements OnInit {
     ) {
     }
 
-    public ngOnInit(): void {
-        this.formService.createForm(); // TODO set contents from input
+    @Input()
+    public set schedule(schedule: AbstractSchedule[]) {
+        const initialValue = schedule || ScheduleConstants.defaultSchedule;
+        this.formService.createForm([...initialValue]);
     }
 
     public submitForm(): void {

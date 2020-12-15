@@ -420,6 +420,7 @@
       "certificate-id": "ID сертификата"
     },
     "calendar": {
+      "schedule": "Расписание",
       "title": "Календарь"
     },
     "edit-master": {

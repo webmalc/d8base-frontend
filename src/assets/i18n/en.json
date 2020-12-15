@@ -420,6 +420,7 @@
       "certificate-id": "Certificate ID"
     },
     "calendar": {
+      "schedule": "Schedule",
       "title": "Calendar"
     },
     "edit-master": {

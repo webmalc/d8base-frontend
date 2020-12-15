@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {ServiceSchedule} from '@app/service/models/service-schedule';
+import {AbstractSchedule} from '@app/core/models/abstract-schedule';
+
 import {plainToClass} from 'class-transformer';
 import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
+import * as ScheduleConstants from './schedule.constants';
 
 @Injectable()
 export class ScheduleEditorFormService {
 
     public form: FormGroup;
-    public formArray: ServiceSchedule[] = [];
-    public toDelete: ServiceSchedule[] = [];
-    private readonly defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    public formArray: AbstractSchedule[] = [];
+    public toDelete: AbstractSchedule[] = [];
 
     constructor(private readonly formBuilder: FormBuilder) {
     }
@@ -19,15 +20,13 @@ export class ScheduleEditorFormService {
         return (this.form.controls.timetable as FormArray).controls as FormGroup[];
     }
 
-    public createForm(timetable?: ServiceSchedule[]): void {
+    public createForm(timetable: AbstractSchedule[]): void {
         this.formArray = [];
         this.toDelete = [];
         this.form = this.formBuilder.group({
             timetable: this.formBuilder.array([])
         });
-        timetable ? this.fillTimeTable(timetable) : this.fillDefaultTimeTable();
-
-        return;
+        this.fillTimeTable(timetable);
     }
 
     public isControlValid(control: string, index: number): boolean {
@@ -57,17 +56,8 @@ export class ScheduleEditorFormService {
     }
 
     public pushNewDay(dayCode: number): void {
-        this.formArray.push(plainToClass(ServiceSchedule, {day_of_week: dayCode, end_time: null, start_time: null, is_enabled: false}));
+        this.formArray.push(plainToClass(AbstractSchedule, {day_of_week: dayCode, end_time: null, start_time: null, is_enabled: false}));
 
-        this.updateForm();
-    }
-
-    public fillDefaultTimeTable(): void {
-        this.defaultWeek.forEach((dayCode, index) =>
-            this.formArray.push(
-                plainToClass(ServiceSchedule, {day_of_week: index, startTime: null, endTime: null, isEnabled: false, id: null})
-            )
-        );
         this.updateForm();
     }
 
@@ -81,7 +71,7 @@ export class ScheduleEditorFormService {
     }
 
     public getDayByIndex(i: number): string {
-        return this.defaultWeek[i];
+        return ScheduleConstants.defaultWeek[i];
     }
 
     public deleteDay(index: number): void {
@@ -137,7 +127,7 @@ export class ScheduleEditorFormService {
         this.formArray = this.formArray?.sort((a, b) => a.day_of_week > b.day_of_week ? 1 : -1);
     }
 
-    private fillTimeTable(timetable: ServiceSchedule[]): void {
+    private fillTimeTable(timetable: AbstractSchedule[]): void {
         this.formArray = timetable;
         this.updateForm();
     }
