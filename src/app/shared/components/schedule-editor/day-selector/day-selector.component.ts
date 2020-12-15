@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {PopoverController} from '@ionic/angular';
+import * as ScheduleConstants from '../schedule.constants';
 
 /**
  * Day of the week selection popover
@@ -11,7 +12,7 @@ import {PopoverController} from '@ionic/angular';
 })
 export class DaySelectorComponent {
 
-    public defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    public defaultWeek = ScheduleConstants.defaultWeek;
 
     constructor(private readonly popoverController: PopoverController) {
     }

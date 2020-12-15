@@ -1,7 +1,7 @@
 <ion-item lines="none">
     <ion-label>{{ service?.name }}</ion-label>
     <ion-note slot="end">
-        <p><b>{{ service?.price.price | currency:service?.price.price_currency }}</b></p>
+        <app-price [price]="service?.price"></app-price>
         <p>{{ service?.duration }}</p>
     </ion-note>
 </ion-item>

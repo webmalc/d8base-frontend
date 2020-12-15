@@ -13,6 +13,7 @@ import {
     MasterWidgetComponent,
     MoreInfoComponent,
     OrderDetailsComponent,
+    PriceComponent,
     ScheduleEditorComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
@@ -85,7 +86,8 @@ import {NumberDirective} from './directives/number.directive';
         ServiceByIdPipe,
         MasterByIdPipe,
         ScheduleEditorComponent,
-        DaySelectorComponent
+        DaySelectorComponent,
+        PriceComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -117,7 +119,8 @@ import {NumberDirective} from './directives/number.directive';
         MasterWidgetComponent,
         ServiceByIdPipe,
         MasterByIdPipe,
-        ScheduleEditorComponent
+        ScheduleEditorComponent,
+        PriceComponent
     ],
     imports: [
         CommonModule,
