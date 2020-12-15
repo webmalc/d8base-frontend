@@ -36,7 +36,7 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
         private readonly route: ActivatedRoute,
         private readonly contactsApi: ContactApiService,
         private readonly formBuilder: FormBuilder,
-        private readonly location: Location,
+        public readonly location: Location,
         private readonly masterManager: MasterManagerService
     ) {
     }

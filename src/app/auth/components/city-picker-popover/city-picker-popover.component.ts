@@ -13,6 +13,7 @@ import {BehaviorSubject} from 'rxjs';
 export class CityPickerPopoverComponent implements OnInit {
 
     public list$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
+    private readonly distance = 2000;
 
     constructor(
         private readonly locationService: LocationService,
@@ -23,13 +24,11 @@ export class CityPickerPopoverComponent implements OnInit {
 
     public ngOnInit(): void {
         this.locationService.getMergedLocationData().then(
-            location => {
-                this.citiesApi.getByLocation(1000, location).subscribe(
-                    cities => 0 === cities.results.length
-                        ? this.pop.dismiss(null).catch(err => console.error(err))
-                        : this.list$.next(cities.results)
-                );
-            }
+            location => this.citiesApi.getByLocation(this.distance, location).subscribe(
+                cities => 0 === cities.results.length
+                    ? this.pop.dismiss(null).catch(err => console.error(err))
+                    : this.list$.next(cities.results)
+            )
         );
     }
 

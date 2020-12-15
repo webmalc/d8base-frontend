@@ -27,7 +27,7 @@ export class RegistrationService {
             (newUser: RegistrationResponseInterface) => this.authenticationService.authenticateWithToken(newUser.token).then(
                 _ => {
                     if (!location) {
-                        subscriber.next(newUser);
+                        subscriber.next(newUser as User);
                         subscriber.complete();
 
                         return;
@@ -39,11 +39,11 @@ export class RegistrationService {
                             }
                             this.locationApiService.create(location).subscribe(
                                 createdLocation => {
-                                    subscriber.next(newUser);
+                                    subscriber.next(newUser as User);
                                     subscriber.complete();
                                 },
                                 err => {
-                                    subscriber.next(newUser);
+                                    subscriber.next(newUser as User);
                                     subscriber.complete();
                                 }
                             );

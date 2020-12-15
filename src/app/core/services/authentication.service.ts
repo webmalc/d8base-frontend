@@ -87,7 +87,7 @@ export class AuthenticationService implements AuthenticatorInterface {
     }
 
     public authenticateWithToken(token: AuthResponseInterface): Promise<void> {
-        return this.tokenManager.setTokens(token);
+        return this.tokenManager.setTokens(token).then(_ => this.isAuthenticatedSubject$.next(true));
     }
 
     public refresh(): Observable<void> {

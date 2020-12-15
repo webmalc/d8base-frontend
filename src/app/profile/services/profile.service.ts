@@ -32,6 +32,9 @@ export class ProfileService {
     public initLocation(): Observable<ClientLocationInterface[]> {
         return this.locationService.getList(this.userLocationApi).pipe(
             map(locationList => {
+                if (locationList.length === 1) {
+                    return locationList;
+                }
                 locationList.sort((a, b) => {
                     if (a.is_default) {
                         return 1;

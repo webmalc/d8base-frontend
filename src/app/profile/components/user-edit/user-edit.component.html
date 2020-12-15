@@ -1,22 +1,25 @@
 <app-header></app-header>
 <ion-content>
     <ion-row class="ion-justify-content-center">
-        <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12"
+        <ion-col appMainColumn
                  class="ion-no-padding ion-margin-top">
             <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
                             <ion-item routerLink="/profile"
                                       routerDirection="back"
+                                      color="light"
                                       routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
                                 <ion-icon name="arrow-back-outline"></ion-icon>
                             </ion-item>
-                            <ion-item class="ion-item-no-border">Основное</ion-item>
+                            <ion-item class="ion-item-no-border" color="light">
+                                {{'profile-main-edit.main'|translate}}
+                            </ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-item>
                             <ion-label class="label-for-required-input" color="medium"
@@ -39,7 +42,7 @@
                                        [placeholder]="'profile-form.placeholders.patronymic'| translate"
                                        formControlName="{{formFields.Patronymic}}"></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item lines="none" class="ion-item-bottom-border">
                             <ion-col>
                                 <ion-row class="fs13 pt10">
                                     <ion-label class="label-for-required-input" color="medium" position="fixed">
@@ -66,8 +69,9 @@
                                                           stroke-linecap="round"/>
                                                 </svg>
                                             </ion-col>
-                                            <ion-col class="gender-control">
-                                                <ion-radio name="male" value="{{ 0 | number}}"  color="secondary"></ion-radio>
+                                            <ion-col class="gender-control ion-margin-end">
+                                                <ion-radio name="male" value="{{ 0 | number}}"
+                                                           color="secondary"></ion-radio>
                                             </ion-col>
                                             <ion-col class="gender-icon">
                                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
@@ -90,7 +94,8 @@
                                                 </svg>
                                             </ion-col>
                                             <ion-col class="gender-control">
-                                                <ion-radio name="female" value="{{ 1 | number}}"  color="secondary"></ion-radio>
+                                                <ion-radio name="female" value="{{ 1 | number}}"
+                                                           color="secondary"></ion-radio>
                                             </ion-col>
                                         </ion-row>
                                     </ion-radio-group>

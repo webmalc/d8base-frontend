@@ -11,5 +11,5 @@ export interface PartialUserInterface {
     is_confirmed: boolean;
     nationality: number | Country;
     birthday: string;
-    languages?: UserLanguage[];
+    languages?: UserLanguage[] | number[];
 }

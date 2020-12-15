@@ -2,14 +2,14 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {AboutEditComponent} from '@app/profile/components/about-edit/about-edit.component';
-import {MainInfoTabComponent} from '@app/profile/components/main-info-tab/main-info-tab.component';
-import {UserContactEditComponent} from '@app/profile/components/user-contact-edit/user-contact-edit.component';
 import {UserEditComponent} from '@app/profile/components/user-edit/user-edit.component';
+import {ProfilePage} from '@app/profile/profile.page';
+import {UserContactEditComponent} from '@app/shared/components/user-contact-edit/user-contact-edit.component';
 
 const routes: Routes = [
     {
         path: '',
-        component : MainInfoTabComponent,
+        component : ProfilePage,
         canActivate: [MainGuard]
     },
     {

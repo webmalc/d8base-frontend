@@ -4,7 +4,6 @@ import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.i
 import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
 import {UserLocation} from '@app/core/models/user-location';
 import {ApiClientService} from '@app/core/services/api-client.service';
-import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
 import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
@@ -14,8 +13,8 @@ import {map} from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class UserLocationApiService extends AbstractApiService<ClientLocationInterface>
-    implements LocationApiServiceInterface, ApiServiceInterface<ClientLocationInterface> {
+export class UserLocationApiService extends AbstractApiService<UserLocation>
+    implements LocationApiServiceInterface, ApiServiceInterface<UserLocation> {
 
     private readonly URL = environment.backend.location;
 
@@ -25,12 +24,12 @@ export class UserLocationApiService extends AbstractApiService<ClientLocationInt
 
     public getDefaultLocation(): Observable<UserLocation> {
         return super.get().pipe(
-            map((locationList: ApiListResponseInterface<ClientLocationInterface>) =>
+            map((locationList: ApiListResponseInterface<UserLocation>) =>
                 locationList.results.filter(location => location.is_default === true)[0] as UserLocation)
         );
     }
 
-    public getByClientId(): Observable<ApiListResponseInterface<ClientLocationInterface>> {
+    public getByClientId(): Observable<ApiListResponseInterface<UserLocation>> {
         return super.get();
     }
 
@@ -46,7 +45,7 @@ export class UserLocationApiService extends AbstractApiService<ClientLocationInt
     }
 
     // @ts-ignore
-    protected transform(data: ClientLocationInterface | ClientLocationInterface[]): ClientLocationInterface | ClientLocationInterface[] {
+    protected transform(data: UserLocation | UserLocation[]): UserLocation | UserLocation[] {
         return plainToClass(UserLocation, data);
     }
 }

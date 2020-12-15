@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {MasterEditComponent} from '@app/master/components/master-edit/master-edit.component';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
+import {TranslateModule} from '@ngx-translate/core';
 import {MasterEditPageRoutingModule} from './master-edit-routing.module';
 import {MasterEditPage} from './master-edit.page';
 
@@ -13,7 +14,8 @@ import {MasterEditPage} from './master-edit.page';
         FormsModule,
         IonicModule,
         SharedModule,
-        MasterEditPageRoutingModule
+        MasterEditPageRoutingModule,
+        TranslateModule
     ],
     declarations: [MasterEditPage, MasterEditComponent]
 })

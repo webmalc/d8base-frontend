@@ -8,7 +8,6 @@ import {Language} from '@app/profile/models/language';
         providedIn: 'root'
     }
 )
-// ** TODO: To find out right way about validation data from API
 export class ProfileFormService {
 
     constructor(private readonly formBuilder: FormBuilder) {
@@ -52,10 +51,5 @@ export class ProfileFormService {
                 ]
             }
         );
-    }
-
-    public setValidators(languages: Language[], addsLanguages: Language[]): void {
-        // this.mainLanguages = languages.map(lang => lang.code);
-        // this.additionalLanguages = addsLanguages.map(lang => lang.code);
     }
 }

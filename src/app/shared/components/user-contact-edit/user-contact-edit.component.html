@@ -2,25 +2,25 @@
 <ion-content>
     <form [formGroup]="form" *ngIf="form" (submit)="submitForm()">
         <ion-row class="ion-justify-content-center">
-            <ion-col [sizeLg]="4" [sizeMd]="6" [sizeSm]="6" [sizeXl]="3" [sizeXs]="12"
+            <ion-col appMainColumn
                      class="ion-no-padding ion-margin-top">
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item routerLink="/profile"
+                            <ion-item (click)="location.back()"
                                       routerDirection="back"
-                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
+                                      color="light"
+                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer">
                                 <ion-icon name="arrow-back-outline"></ion-icon>
                             </ion-item>
-                            <ion-item class="ion-item-no-border">
+                            <ion-item class="ion-item-no-border" color="light">
                                 {{"contact-edit-page.contacts"|translate}}
                             </ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
-
                         <ion-item>
                             <ion-label class="label-for-required-input" color="medium" position="floating">
                                 {{"contact-edit-page.choice-contact"|translate}}
@@ -38,14 +38,14 @@
                             </ion-label>
                             <ion-input type="text" name="contact-value" formControlName="userContact"></ion-input>
                         </ion-item>
-                        <ion-row class="ion-justify-content-center">
+                        <ion-row class="ion-justify-content-center ion-margin-top">
                             <ion-col size="6">
-                                <ion-button color="light" expand="block" fill="solid" type="submit">
+                                <ion-button size="medium" color="light" expand="block" fill="solid" type="submit">
                                     {{"contact-edit-page.save"|translate}}
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button (click)="deleteContact()" color="secondary" expand="block" fill="solid">
+                                <ion-button size="medium" (click)="deleteContact()" color="secondary" expand="block" fill="solid">
                                     {{"contact-edit-page.delete"|translate}}
                                 </ion-button>
                             </ion-col>

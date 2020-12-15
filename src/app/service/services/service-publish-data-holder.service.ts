@@ -10,7 +10,9 @@ import {StepThreeDataInterface} from '@app/service/interfaces/step-three-data-in
 import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
 import {StepDataInterfaceType} from '@app/service/types/step-data-interface-type';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ServicePublishDataHolderService {
 
     private stepsData: {
@@ -48,16 +50,11 @@ export class ServicePublishDataHolderService {
     }
 
     public getStepData<T>(step: number): T {
-        // @ts-ignore
         return this.stepsData[step];
     }
 
     public getPartialStepData<T>(step: number, data: string): T {
         return this.stepsData[step][data];
-    }
-
-    public removeStep(step: number): void {
-        this.stepsData[step] = undefined;
     }
 
     public isset(step: number): boolean {

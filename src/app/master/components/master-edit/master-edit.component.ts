@@ -1,3 +1,4 @@
+import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Master} from '@app/core/models/master';
@@ -21,7 +22,8 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
     public levelOptions = ['junior', 'middle', 'senior'];
 
     constructor(
-        private readonly subcategoriesApi: SubcategoriesApiService
+        private readonly subcategoriesApi: SubcategoriesApiService,
+        public readonly location: Location
     ) {
         super();
     }

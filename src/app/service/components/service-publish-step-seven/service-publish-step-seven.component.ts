@@ -5,6 +5,7 @@ import {MasterScheduleApiService} from '@app/master/services/master-schedule-api
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publish-step-seven-form-fields';
+import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishStepSevenFormService} from '@app/service/forms/service-publish-step-seven-form.service';
 import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
@@ -53,6 +54,23 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         }
         this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
         this.serviceStepsNavigationService.next();
+    }
+
+    public isSubmitDisabled(): boolean {
+        return (this.formService.form.invalid) ||
+            (
+                !this.formService.form.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.PaymentCash).value
+            ) ||
+            (
+                !this.formService.form.get(ServicePublishStepSevenFormFields.UseMasterSchedule).value &&
+                (JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
+                    ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
+                )) === '{}' || JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
+                    ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
+                )) === undefined)
+            ) ||
+            !this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).departure?.max_distance;
     }
 
     public useMasterSchedule(): boolean {
