@@ -79,6 +79,7 @@ export class ScheduleEditorFormService {
             this.toDelete.push(this.formArray[index]);
         }
         this.formArray.splice(index, 1);
+        this.form.markAsDirty();
         this.updateForm();
     }
 

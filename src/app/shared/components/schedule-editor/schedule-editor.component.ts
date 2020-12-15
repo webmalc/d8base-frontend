@@ -6,6 +6,19 @@ import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
 import {ScheduleEditorFormService} from './schedule-editor-form.service';
 import * as ScheduleConstants from './schedule.constants';
 
+function normalizeTimeFormat(time: string): string {
+    // convert HH:MM:SS into HH:MM
+    return time.substr(0, 5);
+}
+
+function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
+    return {
+        ...schedule,
+        start_time: normalizeTimeFormat(schedule.start_time),
+        end_time: normalizeTimeFormat(schedule.end_time)
+    };
+}
+
 @Component({
     selector: 'app-schedule-editor',
     templateUrl: './schedule-editor.component.html',
@@ -13,6 +26,8 @@ import * as ScheduleConstants from './schedule.constants';
     providers: [ScheduleEditorFormService]
 })
 export class ScheduleEditorComponent {
+
+    @Input() public disabled: boolean = false;
 
     @Output() public save = new EventEmitter<AbstractSchedule[]>();
 
@@ -27,7 +42,7 @@ export class ScheduleEditorComponent {
     @Input()
     public set schedule(schedule: AbstractSchedule[]) {
         const initialValue = schedule || ScheduleConstants.defaultSchedule;
-        this.formService.createForm([...initialValue]);
+        this.formService.createForm(initialValue.map(normalizeScheduleFormat));
     }
 
     public submitForm(): void {
@@ -42,12 +57,14 @@ export class ScheduleEditorComponent {
         if (this.formService.isControlValid(this.formFields.StartTime, index)) {
             this.formService.updateStartTime((event.detail as any).value, index);
         }
+        this.formService.checkOverlapValidity(index);
     }
 
     public onEndTimeChange(event: CustomEvent, index: number): void {
         if (this.formService.isControlValid(this.formFields.EndTime, index)) {
             this.formService.updateEndTime((event.detail as any).value, index);
         }
+        this.formService.checkOverlapValidity(index);
     }
 
     public async showDaySelector(): Promise<void> {
