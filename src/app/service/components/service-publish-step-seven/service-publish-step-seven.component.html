@@ -48,9 +48,13 @@
                                 {{"service-publish.step-seven.use-base-timetable"|translate}}
                             </ion-item>
                             <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center">
-                                <ion-toggle formControlName="{{formFields.UseMasterSchedule}}"></ion-toggle>
+                                <ion-toggle formControlName="{{formFields.UseMasterSchedule}}"
+                                            [value]="useMasterSchedule()"
+                                            (ionChange)="toggleUseMasterSchedule($event)">
+                                </ion-toggle>
                             </ion-item>
                         </ion-row>
+                        <app-schedule-editor [schedule]="selectedSchedules" [disabled]="true"></app-schedule-editor>
                     </ion-col>
                 </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">

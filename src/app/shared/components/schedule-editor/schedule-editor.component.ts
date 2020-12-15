@@ -7,7 +7,7 @@ import {ScheduleEditorFormService} from './schedule-editor-form.service';
 import * as ScheduleConstants from './schedule.constants';
 
 function normalizeTimeFormat(time: string): string {
-    // convert HH:MM:SS into HH:MM
+    // convert "HH:MM:SS" to "HH:MM"
     return time.substr(0, 5);
 }
 

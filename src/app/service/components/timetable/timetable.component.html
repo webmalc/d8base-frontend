@@ -17,9 +17,7 @@
                     </ion-row>
                 </ion-col>
             </ion-item>
-
-            <app-schedule-editor (save)="saveTimetable($event)"></app-schedule-editor>
-
+            <app-schedule-editor [schedule]="null" (save)="saveTimetable($event)"></app-schedule-editor>
         </ion-col>
     </ion-row>
     <app-footer></app-footer>
