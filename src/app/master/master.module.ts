@@ -24,7 +24,6 @@ import {CertificatesApiService} from '@app/master/services/certificates-api.serv
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
 import {MasterProfileInfoGeneratorFactoryService} from '@app/master/services/master-profile-info-generator-factory.service';
-import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
 import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {ServicePageModule} from '@app/service/service.module';
 import {SharedModule} from '@app/shared/shared.module';
@@ -60,7 +59,6 @@ import {MasterPage} from './master.page';
         CertificateComponent
     ],
     providers: [
-        MasterProfileServicesSearchService,
         ReviewsReadonlyApiService,
         ExperienceApiService,
         EducationApiService,

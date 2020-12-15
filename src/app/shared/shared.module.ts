@@ -5,7 +5,8 @@ import {RouterModule} from '@angular/router';
 import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {
-    ClientWidgetComponent, DaySelectorComponent,
+    ClientWidgetComponent,
+    DaySelectorComponent,
     DurationComponent,
     FooterComponent,
     HeaderComponent,
@@ -34,7 +35,7 @@ import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-
 import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
-import {MasterByIdPipe, ServiceByIdPipe} from '@app/shared/pipes';
+import {MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe} from '@app/shared/pipes';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {SelectableDistrictOnSearchService} from '@app/shared/services/selectable-district-on-search.service';
@@ -87,7 +88,8 @@ import {NumberDirective} from './directives/number.directive';
         MasterByIdPipe,
         ScheduleEditorComponent,
         DaySelectorComponent,
-        PriceComponent
+        PriceComponent,
+        ServiceDataFilterPipe
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -120,7 +122,8 @@ import {NumberDirective} from './directives/number.directive';
         ServiceByIdPipe,
         MasterByIdPipe,
         ScheduleEditorComponent,
-        PriceComponent
+        PriceComponent,
+        ServiceDataFilterPipe
     ],
     imports: [
         CommonModule,
