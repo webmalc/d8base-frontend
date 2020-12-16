@@ -25,7 +25,10 @@
         </ion-label>
         <ion-label class="text-end" slot="end">
             <app-price [price]="service?.price"></app-price>
-            <div>{{service.duration}}</div>
+            <div>
+                {{ service.duration }}
+                {{ "master-profile.services.service-presentation.minutes" | translate }}
+            </div>
         </ion-label>
     </ion-item>
 </ion-card>

@@ -2,7 +2,10 @@
     <ion-label>{{ service?.name }}</ion-label>
     <ion-note slot="end">
         <app-price [price]="service?.price"></app-price>
-        <p>{{ service?.duration }}</p>
+        <p>
+            {{ service?.duration }}
+            {{ "master-profile.services.service-presentation.minutes" | translate }}
+        </p>
     </ion-note>
 </ion-item>
 <app-master-widget *ngIf="master" [master]="master"></app-master-widget>
