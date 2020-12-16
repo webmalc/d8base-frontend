@@ -1,7 +1,24 @@
 import { SearchService } from '@app/api/services';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 
+const serviceTypes = (data: SearchFilterStateInterface): string => {
+    const types = [];
+    if (data.main.isOnlineService) {
+        types.push('online');
+    }
+    if (data.main.isAtMasterLocationService) {
+        types.push('professional');
+    }
+    if (data.main.isAtClientLocationService) {
+        types.push('client');
+    }
+
+    return types.join(',');
+};
+
 export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: SearchFilterStateInterface): SearchService.SearchListParams => {
+
+
     return {
         /**
          * multiple values may be separated by commas
@@ -36,7 +53,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         /**
          * multiple types may be separated by commas
          */
-        serviceTypes: void 0,
+        serviceTypes: serviceTypes(data),
 
         /**
          * region ID
@@ -76,7 +93,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         onlyWithPhotos: void 0,
         onlyWithFixedPrice: void 0,
         onlyWithCertificates: void 0,
-        onlyWithAutoOrderConfirmation: void 0,
+        onlyWithAutoOrderConfirmation: data.main.isInstantBooking,
 
         /**
          * multiple country IDs may be separated by commas

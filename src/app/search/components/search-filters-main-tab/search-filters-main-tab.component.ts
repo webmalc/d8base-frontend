@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Category} from '@app/core/models/category';
 import {Subcategory} from '@app/core/models/subcategory';
 import {CategoriesApiService} from '@app/core/services/categories-api.service';
@@ -20,7 +20,7 @@ import {filter} from 'rxjs/operators';
     templateUrl: './search-filters-main-tab.component.html',
     styleUrls: ['./search-filters-main-tab.component.scss']
 })
-export class SearchFiltersMainTabComponent {
+export class SearchFiltersMainTabComponent implements OnInit {
 
     public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
     public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
@@ -36,10 +36,8 @@ export class SearchFiltersMainTabComponent {
     ) {
     }
 
-    public init(): void {
-        this.categoriesApi.get().subscribe(
-            results => this.categoryList$.next(results.results)
-        );
+    public ngOnInit(): void {
+        this.getCategories();
     }
 
     public async initLocationPopover(): Promise<void> {
@@ -102,6 +100,12 @@ export class SearchFiltersMainTabComponent {
                 city: res.city,
                 coordinates: res.coords
             }
+        );
+    }
+
+    private getCategories(): void {
+        this.categoriesApi.get().subscribe(
+            results => this.categoryList$.next(results.results)
         );
     }
 }
