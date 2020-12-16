@@ -23,18 +23,33 @@
       "4": "Very good",
       "5": "Excellent"
     },
-    "forward": "Forward",
-    "back": "Back",
+    "weekdays": {
+      "mon": "MO",
+      "tue": "TU",
+      "wed": "WE",
+      "thu": "TH",
+      "fri": "FR",
+      "sat": "SA",
+      "sun": "SU"
+    },
     "master": {
       "private-person": "Private person"
     },
-    "save": "Save",
-    "at": "at"
+    "from": "from",
+    "to": "to",
+    "at": "at",
+    "forward": "Forward",
+    "back": "Back",
+    "save": "Save"
   },
   "service-location": {
     "online": "Online",
     "professional": "Professional's place",
     "client": "Client's place"
+  },
+  "service-payment-options": {
+    "cash": "Cash",
+    "online": "Online"
   },
   "accordion": {
     "expand": "show more",
@@ -193,12 +208,18 @@
     "add-new": "Add new"
   },
   "duration": {
-      "days": "days",
-      "hours": "hours",
-      "minutes": "minutes"
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "minutes-short": "min"
   },
   "service-details": {
-    "title": "Service information"
+    "title": "Service Information",
+    "location-title": "Service Location",
+    "schedule-title": "Service Schedule",
+    "payment-title": "Payment Options",
+    "instant-book-title": "Instant Book",
+    "instant-book-description": "Ordering of this service will be approved automatically"
   },
   "service-publish": {
     "back-button": "Back",
@@ -296,8 +317,6 @@
       "payment-title": "Payment",
       "payment-description": "Payment options available",
       "payment-info": "You can activate online payments after the service publication.",
-      "payment-cash": "Cash",
-      "payment-online": "Online",
       "departure": {
         "title": "Service georgaphy",
         "description": "Max distance from the base location"
@@ -306,13 +325,6 @@
       "location-radius-radius": "Within distance",
       "timetable": {
         "title": "Service schedule",
-        "mon": "MO",
-        "tue": "TU",
-        "wed": "WE",
-        "thu": "TH",
-        "fri": "FR",
-        "sat": "SA",
-        "sun": "SU",
         "add-new-time": "Add new time",
         "popover-title": "Choose day"
       }
@@ -380,12 +392,10 @@
         "not-published": "Service not published",
         "publish": "Publish",
         "unpublish": "Unpublish",
-        "view": "Review",
-        "minutes": "min"
+        "view": "Review"
       },
       "service-presentation": {
-        "pick": "Choice",
-        "minutes": "Min"
+        "pick": "Choice"
       },
       "services-tab": {
         "master-services": "Professional services"
@@ -590,9 +600,6 @@
     "selected-service": "Selected service",
     "order-service": "Place order",
     "location-header": "Service location",
-    "location-online": "Online",
-    "location-professional": "Professional",
-    "location-client": "Client",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
     "comment-header": "Optional comments",
     "date-time-header": "Service date and time",

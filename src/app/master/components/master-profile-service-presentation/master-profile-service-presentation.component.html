@@ -16,7 +16,7 @@
         </div>
         <div class="service-price-hour-text">
             {{ serviceData.service.duration }}
-            {{ "master-profile.services.service-presentation.minutes" | translate }}
+            {{ "duration.minutes-short" | translate }}
         </div>
         <ion-button color="secondary" size="default" [routerLink]="'/service/' + serviceData.service.id">
             {{ "master-profile.services.service-presentation.pick" | translate }}

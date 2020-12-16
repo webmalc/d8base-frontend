@@ -65,9 +65,7 @@
                     </a>
                 </ion-item>
                 <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height">
-                        {{getPrice(service)}}&nbsp;{{service.price.price_currency}}
-                    </ion-item>
+                    <app-price [price]="service.price"></app-price>
                 </ion-row>
             </ion-row>
             <ion-row *ngIf="needToRenderMoreServicesBtn()">

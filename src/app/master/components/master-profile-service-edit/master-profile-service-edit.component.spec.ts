@@ -25,7 +25,7 @@ describe('MasterProfileServiceEditComponent', () => {
         const service = new Service();
         service.price = new Price();
         service.price.is_price_fixed = true;
-        service.price.price = 100;
+        service.price.price = '100';
         component.service = service;
         fixture.detectChanges();
     }));

@@ -16,6 +16,7 @@ import {
     OrderDetailsComponent,
     PriceComponent,
     ScheduleEditorComponent,
+    ScheduleViewerComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -89,7 +90,8 @@ import {NumberDirective} from './directives/number.directive';
         ScheduleEditorComponent,
         DaySelectorComponent,
         PriceComponent,
-        ServiceDataFilterPipe
+        ServiceDataFilterPipe,
+        ScheduleViewerComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -123,7 +125,8 @@ import {NumberDirective} from './directives/number.directive';
         MasterByIdPipe,
         ScheduleEditorComponent,
         PriceComponent,
-        ServiceDataFilterPipe
+        ServiceDataFilterPipe,
+        ScheduleViewerComponent
     ],
     imports: [
         CommonModule,

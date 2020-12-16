@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { Service } from '@app/service/models/service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -19,6 +20,7 @@ describe('ServiceWidgetComponent', () => {
 
         fixture = TestBed.createComponent(ServiceWidgetComponent);
         component = fixture.componentInstance;
+        component.service = new Service();
         fixture.detectChanges();
     }));
 

@@ -9,4 +9,5 @@ export * from './order-details/order-details.component';
 export * from './client-widget/client-widget.component';
 export * from './schedule-editor/schedule-editor.component';
 export * from './schedule-editor/day-selector/day-selector.component';
+export * from './schedule-viewer/schedule-viewer.component';
 export * from './price/price.component';

@@ -9,14 +9,19 @@
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <ion-title>{{ 'service-details.title' | translate }}</ion-title>
+                    <ion-label>
+                        <h1>{{ 'service-details.title' | translate }}</h1>
+                    </ion-label>
                 </ion-item>
                 <ng-container *ngIf="service">
-                    <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
-                    <ion-button [routerLink]="'/order/' + service.id">{{ 'order.order-service' | translate }}</ion-button>
+                    <app-service-widget [service]="service" [master]="master"
+                                        [alwaysExpanded]="true">
+                    </app-service-widget>
+                    <ion-button [routerLink]="'/order/' + service.id" size="full">
+                        {{ 'order.order-service' | translate }}
+                    </ion-button>
                 </ng-container>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
-<app-footer></app-footer>
