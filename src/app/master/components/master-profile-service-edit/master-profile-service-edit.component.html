@@ -6,10 +6,7 @@
             </ion-text>
             <ion-note slot="end">
                 <app-price [price]="service?.price"></app-price>
-                <p>
-                    {{ service.duration }}
-                    {{ "duration.minutes-short" | translate }}
-                </p>
+                <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
             </ion-note>
         </ion-item>
         <ion-item lines="none">

@@ -7,7 +7,8 @@ import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {
     ClientWidgetComponent,
     DaySelectorComponent,
-    DurationComponent,
+    DurationEditorComponent,
+    DurationViewerComponent,
     FooterComponent,
     HeaderComponent,
     MainMenuComponent,
@@ -73,7 +74,7 @@ import {NumberDirective} from './directives/number.directive';
         RatingComponent,
         RatingFullStarComponent,
         RatingHalfStarComponent,
-        DurationComponent,
+        DurationEditorComponent,
         ImageCropPopoverComponent,
         ServiceWidgetComponent,
         DefaultLocationPopoverComponent,
@@ -91,7 +92,8 @@ import {NumberDirective} from './directives/number.directive';
         DaySelectorComponent,
         PriceComponent,
         ServiceDataFilterPipe,
-        ScheduleViewerComponent
+        ScheduleViewerComponent,
+        DurationViewerComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -112,7 +114,7 @@ import {NumberDirective} from './directives/number.directive';
         RatingComponent,
         RatingFullStarComponent,
         RatingHalfStarComponent,
-        DurationComponent,
+        DurationEditorComponent,
         ServiceWidgetComponent,
         DefaultLocationPopoverComponent,
         FlagMenuComponent,
@@ -126,7 +128,8 @@ import {NumberDirective} from './directives/number.directive';
         ScheduleEditorComponent,
         PriceComponent,
         ServiceDataFilterPipe,
-        ScheduleViewerComponent
+        ScheduleViewerComponent,
+        DurationViewerComponent
     ],
     imports: [
         CommonModule,

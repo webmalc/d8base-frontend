@@ -12,12 +12,9 @@
     </ion-label>
     <ion-note slot="end">
         <div class="service-price-text">
-            <app-price [price]="serviceData.service?.price"></app-price>
+            <app-price [price]="serviceData.service.price"></app-price>
         </div>
-        <div class="service-price-hour-text">
-            {{ serviceData.service.duration }}
-            {{ "duration.minutes-short" | translate }}
-        </div>
+        <app-duration-viewer [duration]="serviceData.service.duration"></app-duration-viewer>
         <ion-button color="secondary" size="default" [routerLink]="'/service/' + serviceData.service.id">
             {{ "master-profile.services.service-presentation.pick" | translate }}
         </ion-button>
