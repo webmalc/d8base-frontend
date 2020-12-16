@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ProfessionalLocationService } from '@app/core/services/location/professional-location.service';
+import { ProfessionalLocationInline } from '@app/api/models';
+import { UserLocationApiService } from '@app/core/services';
+import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { StepComponent } from '@app/order/abstract/step';
 import { LocationStepData, StepContext } from '@app/order/order-steps';
-import { forkJoin } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { forkJoin, Observable } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 export enum LocationType {
     Online = 'online',
@@ -35,15 +37,17 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     public formControl = new FormControl('', Validators.required);
     private locationKey: string;
 
-    constructor(private readonly professionalLocationService: ProfessionalLocationService, protected readonly cd: ChangeDetectorRef) {
+    constructor(
+        private readonly fullLocationService: FullLocationService,
+        private readonly userLocationService: UserLocationApiService,
+        protected readonly cd: ChangeDetectorRef
+    ) {
         super(cd);
         this.subscribeFormControl();
     }
 
     protected onStateChanged(data: LocationStepData): void {
-        this.formControl.setValue(data?.[this.locationKey], {
-            emitEvent: false
-        });
+        this.formControl.setValue(data?.[this.locationKey]);
     }
 
     protected onContextChanged(context: StepContext): void {
@@ -79,19 +83,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     // TODO Extract getting locations out of component
     private getServiceLocations(): void {
         const locationsObservables = this.context.service.locations.map(({ location }) => {
-            return this.professionalLocationService.getFullLocation(location).pipe(
-                map(res => {
-                    const textLocation = ['country', 'city']
-                        .map(key => res?.[key]?.name)
-                        .filter(value => Boolean(value))
-                        .join(', ');
-
-                    return {
-                        id: location.id,
-                        text: `${textLocation}, ${location.address}`
-                    };
-                })
-            );
+            return this.getTextLocation(location);
         });
         forkJoin(locationsObservables)
             .pipe(takeUntil(this.ngDestroy$))
@@ -102,15 +94,31 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     }
 
     private getClientLocations(): void {
-        this.locations = (this.context.client as any).locations.map(location => {
-            const id = location;
-            const text = `${location}; Client location API is not implemented yet.`;
-
-            return {
-                id,
-                text
-            };
+        this.userLocationService.getByClientId().pipe(
+            switchMap(({ results: locations }) => {
+                return forkJoin(locations.map((location) => this.getTextLocation((location as unknown) as ProfessionalLocationInline)));
+            }),
+            takeUntil(this.ngDestroy$)
+        ).subscribe(locations => {
+            this.locations = locations;
+            this.cd.markForCheck();
         });
+    }
+
+    private getTextLocation(location: ProfessionalLocationInline): Observable<{ id: number; text: string }>  {
+        return this.fullLocationService.getFullLocation(location).pipe(
+            map(res => {
+                const textLocation = ['country', 'city']
+                    .map(key => res?.[key]?.name)
+                    .filter(value => Boolean(value))
+                    .join(', ');
+
+                return {
+                    id: location.id,
+                    text: `${textLocation}, ${location.address}`
+                };
+            })
+        );
     }
 
     private subscribeFormControl(): void {

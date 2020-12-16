@@ -24,7 +24,7 @@ export type FullLocation = {
 @Injectable({
     providedIn: 'root'
 })
-export class ProfessionalLocationService {
+export class FullLocationService {
     constructor(
         private readonly countriesApi: CountriesApiService,
         private readonly regionApi: RegionApiService,
