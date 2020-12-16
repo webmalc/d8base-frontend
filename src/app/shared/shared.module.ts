@@ -6,6 +6,7 @@ import {MainGuard} from '@app/core/guards/main.guard';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
 import {
     ClientWidgetComponent,
+    DaySelectorComponent,
     DurationComponent,
     FooterComponent,
     HeaderComponent,
@@ -13,6 +14,8 @@ import {
     MasterWidgetComponent,
     MoreInfoComponent,
     OrderDetailsComponent,
+    PriceComponent,
+    ScheduleEditorComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -32,7 +35,7 @@ import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-
 import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
-import {MasterByIdPipe, ServiceByIdPipe} from '@app/shared/pipes';
+import {MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe} from '@app/shared/pipes';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {SelectableDistrictOnSearchService} from '@app/shared/services/selectable-district-on-search.service';
@@ -41,6 +44,7 @@ import {SelectableSubregionOnSearchService} from '@app/shared/services/selectabl
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
+import {BrMaskerModule} from 'br-mask';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {ImageCropPopoverComponent} from './components/picture-selector/image-cropper/image-crop-popover.component';
@@ -81,7 +85,11 @@ import {NumberDirective} from './directives/number.directive';
         OrderDetailsComponent,
         ClientWidgetComponent,
         ServiceByIdPipe,
-        MasterByIdPipe
+        MasterByIdPipe,
+        ScheduleEditorComponent,
+        DaySelectorComponent,
+        PriceComponent,
+        ServiceDataFilterPipe
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -112,7 +120,10 @@ import {NumberDirective} from './directives/number.directive';
         ClientWidgetComponent,
         MasterWidgetComponent,
         ServiceByIdPipe,
-        MasterByIdPipe
+        MasterByIdPipe,
+        ScheduleEditorComponent,
+        PriceComponent,
+        ServiceDataFilterPipe
     ],
     imports: [
         CommonModule,
@@ -123,7 +134,8 @@ import {NumberDirective} from './directives/number.directive';
         LeafletModule,
         FormsModule,
         RouterModule,
-        ImageCropperModule
+        ImageCropperModule,
+        BrMaskerModule
     ],
     providers: [
         MainGuard,

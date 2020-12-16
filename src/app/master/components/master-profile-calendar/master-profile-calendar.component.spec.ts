@@ -1,9 +1,9 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ActivatedRoute} from '@angular/router';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {CalendarApiService} from '@app/master/services/calendar-api.service';
 import {CalendarGeneratorFactoryService} from '@app/master/services/calendar-generator-factory.service';
+import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {StorageManagerMock} from '../../../../testing/mocks';
@@ -21,17 +21,7 @@ describe('MasterProfileCalendarComponent', () => {
                 CalendarGeneratorFactoryService,
                 {provide: StorageManagerService, useClass: StorageManagerMock},
                 CalendarApiService,
-                {
-                    provide: ActivatedRoute, useValue: {
-                        snapshot: {
-                            paramMap: {
-                                get(): string {
-                                    return '';
-                                }
-                            }
-                        }
-                    }
-                }
+                MasterProfileContextService
             ]
         }).compileComponents();
 

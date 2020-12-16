@@ -1,11 +1,8 @@
 import {Component} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {SafeResourceUrl} from '@angular/platform-browser';
-import {UserInterface} from '@app/core/interfaces/user.interface';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {CountriesApiService} from '@app/core/services';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Country} from '@app/profile/models/country';
@@ -16,7 +13,6 @@ import {ProfileService} from '@app/profile/services/profile.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
-import {plainToClass} from 'class-transformer';
 import {BehaviorSubject, forkJoin, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 
@@ -39,7 +35,6 @@ export class ProfilePage extends Reinitable {
     constructor(
         public readonly profileService: ProfileService,
         private readonly userManager: UserManagerService,
-        public readonly photoSanitizer: PhotoSanitizerService,
         private readonly contactsApi: UserContactApiService,
         private readonly countriesApi: CountriesApiService,
         private readonly userLanguagesApi: UserLanguagesApiService,
@@ -54,10 +49,8 @@ export class ProfilePage extends Reinitable {
         }
     }
 
-    public getAvatar(): string | SafeResourceUrl {
-        return this.photoSanitizer.sanitize(
-            (plainToClass(User, this.profileService.avatarForm.getRawValue() as UserInterface) as User).avatar
-        );
+    public getAvatar(): string {
+        return this.profileService.avatarForm.get(ProfileFormFields.Avatar).value;
     }
 
     protected init(): void {

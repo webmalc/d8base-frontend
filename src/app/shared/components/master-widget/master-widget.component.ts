@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {HelperService} from '@app/core/services/helper.service';
 import {MasterList} from '@app/master/models/master-list';
 
 @Component({
@@ -8,4 +9,6 @@ import {MasterList} from '@app/master/models/master-list';
 })
 export class MasterWidgetComponent {
     @Input() public master: MasterList;
+
+    public defaultAvatar = HelperService.getNoAvatarLink();
 }

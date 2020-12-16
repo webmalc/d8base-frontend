@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angula
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {ReceivedOrder} from '@app/core/models/received-order';
 import {ServicesApiCache} from '@app/core/services/cache';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
+import {HelperService} from '@app/core/services/helper.service';
 import {Service} from '@app/service/models/service';
 
 @Component({
@@ -19,8 +19,7 @@ export class ReceivedOrderListItemComponent {
 
     constructor(
         private readonly servicesCache: ServicesApiCache,
-        private readonly changeDetector: ChangeDetectorRef,
-        private readonly sanitizer: PhotoSanitizerService
+        private readonly changeDetector: ChangeDetectorRef
     ) {
     }
 
@@ -45,6 +44,6 @@ export class ReceivedOrderListItemComponent {
     }
 
     public getPhoto(photo: string): string | SafeResourceUrl {
-        return this.sanitizer.sanitize(photo);
+        return photo || HelperService.getNoAvatarLink();
     }
 }

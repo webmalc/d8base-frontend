@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {MasterPhoto} from '@app/master/models/master-photo';
 import {MasterPhotosGeneratorFactoryService} from '@app/master/services/master-photos-generator-factory.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
@@ -17,8 +16,7 @@ export class MasterProfilePortfolioComponent extends Reinitable {
 
     constructor(
         private readonly route: ActivatedRoute,
-        private readonly masterPhotosGenerator: MasterPhotosGeneratorFactoryService,
-        public readonly sanitizer: PhotoSanitizerService
+        private readonly masterPhotosGenerator: MasterPhotosGeneratorFactoryService
     ) {
         super();
     }

@@ -1,11 +1,11 @@
-<ion-row>
+<ion-row *ngIf="serviceData$ | async as serviceData">
     <ion-col class="ion-no-padding" size="12">
         <ion-item class="ion-item-no-border ion-item-bottom-border ion-justify-content-start">
             <ion-label color="medium" position="floating">
                 <ion-icon name="search-outline"></ion-icon>
                 {{"master-profile.services.services-tab.master-services"|translate}}
             </ion-label>
-            <ion-input (ionChange)="search()" (keydown.escape)="clearSearchModel()" [(ngModel)]="searchModel">
+            <ion-input (ionChange)="search($event)" (keydown.escape)="clearSearchModel()" [value]="searchModel">
             </ion-input>
         </ion-item>
 
@@ -15,7 +15,7 @@
 
         <ion-list *ngIf="masterId"
                   class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-item-no-vertical-padding">
-            <app-master-profile-service-presentation *ngFor="let service of serviceData"
+            <app-master-profile-service-presentation *ngFor="let service of serviceData | serviceDataFilter:searchModel"
                                                      [serviceData]="service"
                                                      class="pv5">
             </app-master-profile-service-presentation>
@@ -23,7 +23,7 @@
         <ion-list *ngIf="!masterId"
                   class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-item-no-vertical-padding">
             <app-master-profile-service-edit (disableService)="disableService($event)"
-                                             *ngFor="let service of serviceData"
+                                             *ngFor="let service of serviceData | serviceDataFilter:searchModel"
                                              (enableService)="enableService($event)"
                                              [service]="service.service"
                                              class="pv5">

@@ -1,7 +1,7 @@
 <ion-row *ngIf="masterPhotos" class="ion-wrap ion-align-items-start ion-margin-bottom ion-justify-content-center">
     <ion-item *ngFor="let photo of masterPhotos"
               class="photo-container ion-item-no-border ion-item-no-side-padding pv5 ph5">
-        <ion-img [src]="sanitizer.sanitize(photo.photo)" alt="{{photo.name}}" title="{{photo.name}}"></ion-img>
+        <ion-img [src]="photo.photo" alt="{{photo.name}}" title="{{photo.name}}"></ion-img>
     </ion-item>
 </ion-row>
 <ion-row *ngIf="!masterId">
