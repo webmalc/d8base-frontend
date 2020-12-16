@@ -24,7 +24,7 @@
             {{ service.name }}
         </ion-label>
         <ion-label class="text-end" slot="end">
-            <div><b>{{service?.price.getPrice()}} {{service?.price.price_currency}}</b></div>
+            <app-price [price]="service?.price"></app-price>
             <div>{{service.duration}}</div>
         </ion-label>
     </ion-item>
