@@ -4,5 +4,5 @@ export enum OrderClientDetailsFormFields {
     FirstName = 'first_name',
     LastName = 'last_name',
     Phone = 'phone',
-    Comment = 'comment'
+    Comment = 'note'
 }
