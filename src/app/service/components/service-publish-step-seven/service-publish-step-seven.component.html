@@ -48,9 +48,13 @@
                                 {{"service-publish.step-seven.use-base-timetable"|translate}}
                             </ion-item>
                             <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center">
-                                <ion-toggle formControlName="{{formFields.UseMasterSchedule}}"></ion-toggle>
+                                <ion-toggle formControlName="{{formFields.UseMasterSchedule}}"
+                                            [value]="useMasterSchedule()"
+                                            (ionChange)="toggleUseMasterSchedule($event)">
+                                </ion-toggle>
                             </ion-item>
                         </ion-row>
+                        <app-schedule-viewer [schedule]="selectedSchedules"></app-schedule-viewer>
                     </ion-col>
                 </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
@@ -192,11 +196,11 @@
                                 </ion-item>
                             </ion-list-header>
                             <ion-item class="ion-item-no-side-padding">
-                                <ion-label>{{"service-publish.step-seven.payment-cash"|translate}}</ion-label>
+                                <ion-label>{{"service-payment-options.cash"|translate}}</ion-label>
                                 <ion-checkbox [formControlName]="formFields.PaymentCash"></ion-checkbox>
                             </ion-item>
                             <ion-item class="ion-item-no-side-padding">
-                                <ion-label>{{"service-publish.step-seven.payment-online"|translate}}</ion-label>
+                                <ion-label>{{"service-payment-options.online"|translate}}</ion-label>
                                 <ion-checkbox [formControlName]="formFields.PaymentOnline"></ion-checkbox>
                             </ion-item>
                         </ion-list>

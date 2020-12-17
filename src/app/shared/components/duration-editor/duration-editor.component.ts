@@ -23,18 +23,18 @@ function durationFromMinutes(minutes: number): Duration {
 }
 
 @Component({
-    selector: 'app-duration',
-    templateUrl: './duration.component.html',
-    styleUrls: ['./duration.component.scss'],
+    selector: 'app-duration-editor',
+    templateUrl: './duration-editor.component.html',
+    styleUrls: ['./duration-editor.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DurationComponent),
+            useExisting: forwardRef(() => DurationEditorComponent),
             multi: true
         }
     ]
 })
-export class DurationComponent implements ControlValueAccessor, OnDestroy {
+export class DurationEditorComponent implements ControlValueAccessor, OnDestroy {
     public isDisabled: boolean;
     public formFields = DurationFormFields;
     public form: FormGroup;

@@ -1,17 +1,83 @@
 <ion-item lines="none">
-    <ion-label>{{ service?.name }}</ion-label>
+    <ion-label class="ion-text-wrap">
+        <h1>
+            {{ service.name }}
+        </h1>
+    </ion-label>
     <ion-note slot="end">
-        <p><b>{{ service?.price.price }} {{ service?.price.price_currency }}</b></p>
-        <p>{{ service?.duration }}</p>
+        <app-price [price]="service.price"></app-price>
+        <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
     </ion-note>
 </ion-item>
 <app-master-widget *ngIf="master" [master]="master"></app-master-widget>
-<app-more-info *ngIf="!alwaysExpanded else serviceDescription">
-    <ng-container *ngTemplateOutlet="serviceDescription"></ng-container>
+<app-more-info *ngIf="!alwaysExpanded else serviceDetails">
+    <ng-container *ngTemplateOutlet="serviceDetails"></ng-container>
 </app-more-info>
 
-<ng-template #serviceDescription>
+<ng-template #serviceDetails>
     <ion-item lines="none">
-        <p>{{ service?.description }}</p>
+        <p>{{ service.description }}</p>
     </ion-item>
+
+    <ion-list>
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ 'service-details.location-title' | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <ng-container [ngSwitch]="service.service_type">
+            <ion-item lines="none" *ngSwitchCase="'online'">
+                <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+                <ion-text>{{ 'service-location.online' | translate }}</ion-text>
+            </ion-item>
+            <ion-item lines="none" *ngSwitchCase="'professional'">
+                <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+                <ion-text>{{ 'service-location.professional' | translate }}</ion-text>
+            </ion-item>
+            <ion-item lines="none" *ngSwitchCase="'client'">
+                <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+                <ion-text>{{ 'service-location.client' | translate }}</ion-text>
+            </ion-item>
+        </ng-container>
+    </ion-list>
+
+    <!--        TODO: show schedule when available -->
+    <!--    <ion-list>-->
+    <!--        <ion-list-header>-->
+    <!--            <ion-label>-->
+    <!--                <h1>{{ 'service-details.schedule-title' | translate }}</h1>-->
+    <!--            </ion-label>-->
+    <!--        </ion-list-header>-->
+    <!--        <app-schedule-viewer [schedule]="service.schedule"></app-schedule-viewer>-->
+    <!--    </ion-list>-->
+
+    <ion-list>
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ 'service-details.payment-title' | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-item lines="none" *ngIf="hasPaymentMethod('cash')">
+            <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+            <ion-text>{{ 'service-payment-options.cash' | translate }}</ion-text>
+        </ion-item>
+        <ion-item lines="none" *ngIf="hasPaymentMethod('online')">
+            <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+            <ion-text>{{ 'service-payment-options.online' | translate }}</ion-text>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="service.is_auto_order_confirmation">
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ 'service-details.instant-book-title' | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-item lines="none">
+            <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+            <ion-text>
+                {{ 'service-details.instant-book-description' | translate }}
+            </ion-text>
+        </ion-item>
+    </ion-list>
 </ng-template>

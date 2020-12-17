@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {Search} from '../../../api/models';
@@ -95,10 +94,7 @@ describe('SearchResultComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SearchResultComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
-            providers: [
-                {provide: PhotoSanitizerService, useValue: {sanitize: (data: any): any => data}}
-            ]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule]
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchResultComponent);

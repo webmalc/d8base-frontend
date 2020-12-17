@@ -10,7 +10,7 @@
 
         <ion-item lines="none">
             <ion-avatar slot="start">
-                <ion-img alt="avatar" src="{{ getPhoto(order.client?.avatar_thumbnail) }}"></ion-img>
+                <ion-img alt="avatar" [src]="getPhoto(order.client?.avatar_thumbnail)"></ion-img>
             </ion-avatar>
             <ion-label>
                 {{ order.client.first_name }}

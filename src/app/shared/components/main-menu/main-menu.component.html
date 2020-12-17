@@ -9,7 +9,7 @@
     <ion-list class="ion-no-padding">
         <ng-container *ngFor="let item of mainMenuItems">
             <ion-list-header *ngIf="item.isHeader && isShown(item)" color="light" lines="full">
-                <ion-label> {{ item.title | translate }}</ion-label>
+                <ion-label><h1>{{ item.title | translate }}</h1></ion-label>
             </ion-list-header>
             <ion-menu-toggle *ngIf="(!item.isHeader) && isShown(item)" menu="main-menu" [autoHide]="false">
                 <ion-item [routerLink]="item.link" [queryParams]="item.params" routerLinkActive="active" lines="full">

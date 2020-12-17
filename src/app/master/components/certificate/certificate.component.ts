@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {Certificate} from '@app/master/models/certificate';
 
 @Component({
@@ -10,7 +9,4 @@ import {Certificate} from '@app/master/models/certificate';
 export class CertificateComponent {
     @Input() public certificate: Certificate;
     @Input() public editable: boolean = false;
-
-    constructor(public readonly sanitizer: PhotoSanitizerService) {
-    }
 }

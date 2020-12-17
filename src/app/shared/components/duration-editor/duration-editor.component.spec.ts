@@ -3,15 +3,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
-import {DurationComponent} from './duration.component';
+import {DurationEditorComponent} from './duration-editor.component';
 
 describe('DurationComponent', () => {
-    let component: DurationComponent;
-    let fixture: ComponentFixture<DurationComponent>;
+    let component: DurationEditorComponent;
+    let fixture: ComponentFixture<DurationEditorComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DurationComponent],
+            declarations: [DurationEditorComponent],
             imports: [
                 IonicModule.forRoot(),
                 ReactiveFormsModule,
@@ -20,7 +20,7 @@ describe('DurationComponent', () => {
             ]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(DurationComponent);
+        fixture = TestBed.createComponent(DurationEditorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

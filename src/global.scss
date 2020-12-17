@@ -319,11 +319,6 @@
   .split-pane-visible > .split-pane-side {
     max-width: 300px;
   }
-
-  ion-list-header {
-    font-weight: bold;
-    font-size: 1rem;
-  }
 }
 
 .popover-big {
@@ -334,4 +329,10 @@
   font-size: 20px;
   font-weight: bold;
   color: var(--ion-color-dark);
+}
+
+.sc-ion-label-md-s h1 {
+  font-weight: bold;
+  font-size: 1rem;
+  --ion-padding: 0;
 }
