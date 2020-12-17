@@ -68,8 +68,8 @@
                   routerDirection="forward"
                   routerLink="location-add/"
                   routerLinkActive="active">
-            <ion-icon color="secondary" name="add-circle"></ion-icon>
-            <ion-label class="ion-padding-start">
+            <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+            <ion-label>
                 {{'master-profile.info.add-new-address'|translate}}
             </ion-label>
         </ion-item>
@@ -91,7 +91,7 @@
             </ion-button>
         </ion-list-header>
         <ion-item>
-            <ion-label>
+            <ion-label class="ion-text-wrap">
                 {{context.master.description}}
             </ion-label>
         </ion-item>
