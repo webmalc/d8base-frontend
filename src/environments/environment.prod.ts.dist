@@ -63,6 +63,8 @@ export const environment = {
         sent_orders: '/api/accounts/orders/sent/',
         received_orders: '/api/accounts/orders/received/',
         calendar: '/api/schedule/calendar/',
+        service_schedule_set: '/api/accounts/service-schedule/set/',
+        master_schedule_set: '/api/accounts/professional-schedule/set/',
         url: 'http://localhost:8000'
     },
     client_id: '',
@@ -92,5 +94,6 @@ export const environment = {
         dsn: ''
     },
     default_calendar_interval: 15,
-    calendar_day_intervals: 4
+    calendar_day_intervals: 4,
+    default_lang: 'en'
 };
