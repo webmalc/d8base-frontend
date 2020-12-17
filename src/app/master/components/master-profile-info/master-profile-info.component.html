@@ -103,32 +103,8 @@
                     </ion-item>
                 </ion-row>
                 <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                    {{master?.name}}
+                    {{master?.subcategory}}
                 </ion-item>
-            </ion-col>
-        </ion-item>
-
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-row class="ion-justify-content-between ion-padding-top">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        {{"master-profile.info.tags"|translate}}
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-align-items-center"
-                              routerDirection="forward"
-                              routerLink="tags-edit/"
-                              routerLinkActive="active"
-                              *ngIf="editable | async"
-                    >
-                        <ion-icon name="create-outline"></ion-icon>
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-start ion-margin-bottom">
-                    <ion-item *ngFor="let tag of masterTags"
-                              class="ion-item-no-border ion-item-no-min-height ion-item-tag">
-                        {{tag.name}}
-                    </ion-item>
-                </ion-row>
             </ion-col>
         </ion-item>
 
@@ -241,22 +217,6 @@
                     </ion-item>
                 </app-collapse-item>
             </ion-col>
-        </ion-item>
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="6">
-                <ion-item class="ion-item-no-min-height pv5 master-address ion-padding-top ion-margin-bottom" lines="none">
-                    {{"master-profile.info.availability"|translate}}
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-col class="ion-no-padding" size="12">
-                        <ion-row class="availability-subtitle">
-                            {{"master-profile.info.languages"|translate}}
-                        </ion-row>
-                        <ion-row *ngFor="let lang of userLanguages"> - {{lang.name}}</ion-row>
-                    </ion-col>
-                </ion-item>
-            </ion-col>
-            <ion-col class="ion-no-padding" size="6"></ion-col>
         </ion-item>
         <ion-item class="ion-item-no-side-padding pv5">
             <ion-col class="ion-no-padding" size="12">

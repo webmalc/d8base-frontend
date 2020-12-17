@@ -36,14 +36,14 @@ export class MasterPage {
     ) {
         this.createContext().subscribe(context => contextService.setContext(context));
         this.mainInfoSectionData$ = contextService.context$.pipe(
-            first(Boolean),
+            first(({user, master}) => Boolean(user) && Boolean(master)),
             map(({user, master}) => ({
-                fullName: `${user?.last_name} ${user?.first_name}`,
-                company: master?.company,
-                avatar: user?.avatar,
-                rating: master?.rating,
+                fullName: master.name ?? `${user.last_name ?? ''} ${user.first_name ?? ''}`,
+                company: master.company,
+                avatar: user.avatar,
+                rating: master.rating,
                 reviews: [],
-                is_confirmed: user?.is_confirmed
+                is_confirmed: user.is_confirmed
             })));
         this.editable$ = contextService.context$.pipe(map(context => context?.canEdit));
     }
