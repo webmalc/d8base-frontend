@@ -54,6 +54,12 @@ export const mainMenuItems: MainMenuItem[] = [
         guestOnly: true
     },
     {
+        title: 'template.sign-up',
+        icon: 'reader-outline',
+        link: '/auth/registration',
+        guestOnly: true
+    },
+    {
         title: 'template.my-profile',
         isHeader: true,
         userOnly: true

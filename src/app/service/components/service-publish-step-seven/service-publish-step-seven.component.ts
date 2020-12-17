@@ -70,7 +70,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
                     ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
                 )) === undefined)
             ) ||
-            !this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).departure?.max_distance;
+            !this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)?.departure?.max_distance;
     }
 
     public useMasterSchedule(): boolean {

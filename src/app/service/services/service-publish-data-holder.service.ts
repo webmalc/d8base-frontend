@@ -54,7 +54,11 @@ export class ServicePublishDataHolderService {
     }
 
     public getPartialStepData<T>(step: number, data: string): T {
-        return this.stepsData[step][data];
+        try {
+            return this.stepsData[step][data];
+        } catch (e) {
+            return undefined;
+        }
     }
 
     public isset(step: number): boolean {

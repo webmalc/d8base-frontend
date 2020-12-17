@@ -48,7 +48,7 @@ export class ServicePublishFinalStepComponent {
     }
 
     public isNewMaster(): boolean {
-        return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster;
+        return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four)?.isNewMaster || false;
     }
 
     private getMaster(): Observable<Master> {

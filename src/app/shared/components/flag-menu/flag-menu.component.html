@@ -35,7 +35,7 @@
         <ion-item class="ion-activatable cursor-pointer">
             {{'flag-menu.units' | translate}}:
             <ion-select (ionChange)="userSettings.setUnits($event.detail.value)"
-                        [ngModel]="(userSettings.userSettings$ | async)?.units.toString()"
+                        [ngModel]="(userSettings.userSettings$ | async)?.units?.toString()"
                         interface="alert"
             >
                 <ion-select-option *ngFor="let unit of userSettings.unitsList" value="{{ unit }}">

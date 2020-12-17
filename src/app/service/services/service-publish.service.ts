@@ -74,7 +74,7 @@ export class ServicePublishService {
                 return forkJoin({
                     photosRet: this.createPhotos(servicePhotos, createdService),
                     scheduleRet: this.createSchedule(serviceSchedule, createdService),
-                    masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
+                    masterScheduleRet: this.createMasterSchedule(masterSchedule, createdMaster),
                     masterLocRet: masterLocation
                         ? !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation)
                         : of<MasterLocation>(null),
@@ -106,18 +106,17 @@ export class ServicePublishService {
     }
 
     private createPhotos(photos: ServicePhoto[], service: Service): Observable<ServicePhoto[]> {
-        // TODO: shouldn't mutate method's arguments
         photos.forEach(photo => photo.service = service.id);
 
         return this.servicePhotosApi.createList(photos);
     }
 
     private createSchedule(schedule: ServiceSchedule[], service: Service): Observable<ServiceSchedule[]> {
-        return this.serviceScheduleApi.createList(schedule?.map(v => ({...v, service: service.id})));
+        return this.serviceScheduleApi.createSet(schedule?.map(v => ({...v, service: service.id})));
     }
 
     private createMasterSchedule(schedule: MasterSchedule[], master: Master): Observable<MasterSchedule[]> {
-        return this.masterScheduleApi.createList(schedule?.map(v => ({...v, professional: master.id})));
+        return this.masterScheduleApi.createSet(schedule?.map(v => ({...v, professional: master.id})));
     }
 
     private createMasterLocation(location: MasterLocation, master: Master): Observable<MasterLocation> {

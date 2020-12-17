@@ -71,10 +71,11 @@
     "miscellaneous": "Дополнительно"
   },
   "login-form": {
-    "login": "Логин",
+    "login": "Email",
     "password": "Пароль",
     "sign-in": "Войти",
-    "forgot-password": "Забыли пароль?"
+    "forgot-password": "Забыли пароль?",
+    "sign-up": "Регистрация"
   },
   "registration-form": {
     "email": "Email",
@@ -298,7 +299,7 @@
       "payment-online": "Оплата онлайн",
       "departure": {
         "title": "География выезда",
-        "description": "Радиус на который Вы выезжаете от введенного адреса"
+        "description": "Радиус, в пределах которого вы выезжаете"
       },
       "location-radius-within": "В пределах города",
       "location-radius-radius": "В радиусе ",

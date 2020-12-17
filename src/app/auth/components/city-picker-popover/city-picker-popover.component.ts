@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CitiesApiService} from '@app/core/services/location/cities-api.service';
-import {LocationService} from '@app/core/services/location/location.service';
 import {City} from '@app/profile/models/city';
-import {IonItem, PopoverController} from '@ionic/angular';
+import {IonItem, NavParams, PopoverController} from '@ionic/angular';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -13,23 +11,15 @@ import {BehaviorSubject} from 'rxjs';
 export class CityPickerPopoverComponent implements OnInit {
 
     public list$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
-    private readonly distance = 2000;
 
     constructor(
-        private readonly locationService: LocationService,
-        private readonly citiesApi: CitiesApiService,
+        private readonly navParams: NavParams,
         private readonly pop: PopoverController
     ) {
     }
 
     public ngOnInit(): void {
-        this.locationService.getMergedLocationData().then(
-            location => this.citiesApi.getByLocation(this.distance, location).subscribe(
-                cities => 0 === cities.results.length
-                    ? this.pop.dismiss(null).catch(err => console.error(err))
-                    : this.list$.next(cities.results)
-            )
-        );
+        this.list$.next(this.navParams.get<City[]>('data'));
     }
 
     public onCitySelect(event: any): void {
