@@ -15,4 +15,5 @@ export class Service {
     @Type(() => Price)
     public price: Price;
     @Expose() public locations: ServiceLocationInline[];
+    @Expose() public is_auto_order_confirmation: boolean;
 }

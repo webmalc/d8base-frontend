@@ -23,18 +23,33 @@
       "4": "Очень хорошо",
       "5": "Отлично"
     },
-    "back": "Назад",
-    "forward": "Продолжить",
+    "weekdays": {
+      "mon": "ПН",
+      "tue": "ВТ",
+      "wed": "СР",
+      "thu": "ЧТ",
+      "fri": "ПТ",
+      "sat": "СБ",
+      "sun": "ВС"
+    },
     "master": {
       "private-person": "Частное лицо"
     },
-    "save": "Сохранить",
-    "at": "в"
+    "from": "с",
+    "to": "до",
+    "at": "в",
+    "back": "Назад",
+    "forward": "Продолжить",
+    "save": "Сохранить"
   },
   "service-location": {
     "online": "Онлайн услуга",
     "professional": "Приём у мастера",
     "client": "Выезд к клиенту"
+  },
+  "service-payment-options": {
+    "cash": "Наличные",
+    "online": "Оплата онлайн"
   },
   "accordion": {
     "expand": "Подробнее",
@@ -195,10 +210,16 @@
   "duration": {
     "days": "дни",
     "hours": "часы",
-    "minutes": "минуты"
+    "minutes": "минуты",
+    "minutes-short": "мин"
   },
   "service-details": {
-    "title": "Информация об услуге"
+    "title": "Информация об услуге",
+    "location-title": "Адрес оказания услуги",
+    "schedule-title": "Время оказания услуги",
+    "payment-title": "Доступные варианты оплаты",
+    "instant-book-title": "Мгновенное подтверждение (Instant Book)",
+    "instant-book-description": "Бронирования данной услуги акцептовываются мастером автоматически и не требуют подтверждения мастером"
   },
   "service-publish": {
     "back-button": "Назад",
@@ -296,8 +317,6 @@
       "payment-title": "Оплата",
       "payment-description": "Доступные варианты оплаты для клиентов за ваши услуги",
       "payment-info": "Оплату онлайн вы сможете активировать после публикации услуги",
-      "payment-cash": "Наличные",
-      "payment-online": "Оплата онлайн",
       "departure": {
         "title": "География выезда",
         "description": "Радиус на который Вы выезжаете от введенного адреса"
@@ -306,13 +325,6 @@
       "location-radius-radius": "В радиусе ",
       "timetable": {
         "title": "Время оказания услуг",
-        "mon": "ПН",
-        "tue": "ВТ",
-        "wed": "СР",
-        "thu": "ЧТ",
-        "fri": "ПТ",
-        "sat": "СБ",
-        "sun": "ВС",
         "add-new-time": "Добавить еще время",
         "popover-title": "Выберите день недели"
       }
@@ -590,9 +602,6 @@
     "selected-service": "Выбранная услуга",
     "order-service": "Бронировать",
     "location-header": "Место оказания услуги",
-    "location-online": "Онлайн услуга",
-    "location-professional": "Приём у мастера",
-    "location-client": "Выезд к клиенту",
     "final-step": "Для завершения бронирования осталось нажать кнопку «Бронировать».",
     "comment-header": "Комментарий к заказу",
     "date-time-header": "Дата и время услуги",

@@ -1,3 +1,13 @@
-<p *ngIf="price">
-    <b>{{ price.price | currency:price.price_currency }}</b>
+<p *ngIf="price?.is_price_fixed && price?.price">
+    <b>
+        {{ price.price | currency:price.price_currency }}
+    </b>
+</p>
+
+<p *ngIf="!price?.is_price_fixed && price?.start_price && price?.end_price">
+    <b>
+        {{ price.start_price | currency:price.start_price_currency }}
+        —
+        {{ price.end_price | currency:price.end_price_currency }}
+    </b>
 </p>

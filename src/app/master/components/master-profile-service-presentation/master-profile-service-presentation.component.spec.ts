@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 import {Price} from '@app/service/models/price';
 import {Service} from '@app/service/models/service';
 import {IonicModule} from '@ionic/angular';
@@ -12,7 +13,11 @@ describe('MasterProfileServicePresentationComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfileServicePresentationComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [
+                IonicModule,
+                RouterTestingModule,
+                TranslateModule.forRoot()
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterProfileServicePresentationComponent);
@@ -20,7 +25,7 @@ describe('MasterProfileServicePresentationComponent', () => {
         const service = new Service();
         service.price = new Price();
         service.price.is_price_fixed = true;
-        service.price.price = 100;
+        service.price.price = '100';
         component.serviceData = {service};
         fixture.detectChanges();
     }));

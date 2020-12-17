@@ -131,7 +131,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
             this.masterSchedules = masterSchedule.results;
             const masterHasSchedules = this.masterSchedules.length > 0;
             this.renderUseMasterSchedule = masterHasSchedules;
-            if (stepData.timetable?.length) {
+            if (stepData?.timetable?.length) {
                 if (stepData.use_master_schedule) {
                     this.masterSchedules = stepData.timetable;
                 } else {

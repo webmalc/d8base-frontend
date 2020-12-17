@@ -33,12 +33,6 @@ export class SearchResultComponent {
         return this.data?.professional?.company ? this.data.professional.company : 'global.professional.private-person';
     }
 
-    public getPrice(service: Service): string {
-        return service.price.is_price_fixed ?
-            Math.round(service.price.price).toString() :
-            `${Math.round(service.price.start_price)} - ${service.price.end_price}`;
-    }
-
     public getPhoto(): string {
         return this.data.professional.user?.avatar || HelperService.getNoAvatarLink();
     }

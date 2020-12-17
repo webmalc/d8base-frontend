@@ -1,26 +1,24 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import { Service } from '@app/service/models/service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 
-import {ServiceWidgetComponent} from './service-widget.component';
+import {DurationViewerComponent} from './duration-viewer.component';
 
-describe('ServiceWidgetComponent', () => {
-    let component: ServiceWidgetComponent;
-    let fixture: ComponentFixture<ServiceWidgetComponent>;
+describe('DurationViewerComponent', () => {
+    let component: DurationViewerComponent;
+    let fixture: ComponentFixture<DurationViewerComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ServiceWidgetComponent],
+            declarations: [DurationViewerComponent],
             imports: [
                 IonicModule,
                 TranslateModule.forRoot()
             ]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(ServiceWidgetComponent);
+        fixture = TestBed.createComponent(DurationViewerComponent);
         component = fixture.componentInstance;
-        component.service = new Service();
         fixture.detectChanges();
     }));
 

@@ -24,8 +24,8 @@
             {{ service.name }}
         </ion-label>
         <ion-label class="text-end" slot="end">
-            <div><b>{{service?.price.getPrice()}} {{service?.price.price_currency}}</b></div>
-            <div>{{service.duration}}</div>
+            <app-price [price]="service?.price"></app-price>
+            <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
         </ion-label>
     </ion-item>
 </ion-card>
