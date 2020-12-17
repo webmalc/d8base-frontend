@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ProfessionalContactInline} from '@app/api/models/professional-contact-inline';
 import {HelperService} from '@app/core/services/helper.service';
 import {MediaIconFactoryService} from '@app/core/services/media-icon-factory.service';
 import {Contact} from '@app/profile/models/contact';
 import {ContactApiService} from '@app/profile/services/contact-api.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
-import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class AbstractContactsComponent extends Reinitable implements OnInit {
     @Input() public editDefaultContactUrl: string = '/profile/contact-add-default/';
     @Input() public editContactUrl: string = '/profile/contact-edit/';
     @Input() public interactable: boolean = false;
-    @Input() public clientContacts: ClientContactInterface[];
+    @Input() public clientContacts: ProfessionalContactInline[];
     public canAddNewContact$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public contacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
     public defaultContacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);

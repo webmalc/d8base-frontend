@@ -6,7 +6,7 @@ export class MasterFixture {
             id: 0,
             name: '',
             company: '',
-            level: '',
+            level: 'middle',
             description: '',
             experience: 0,
             subcategory: 0,

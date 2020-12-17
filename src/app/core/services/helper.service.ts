@@ -1,3 +1,4 @@
+import { ProfessionalContactInline } from '@app/api/models';
 import {Contact} from '@app/profile/models/contact';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {environment} from '@env/environment';
@@ -74,7 +75,7 @@ export class HelperService {
         return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
     }
 
-    public static calculateContacts(contacts: Contact[], userContacts: ClientContactInterface[]): Contact[] {
+    public static calculateContacts(contacts: Contact[], userContacts: ProfessionalContactInline[]): Contact[] {
         const ret = [];
         del: for (const c of contacts) {
             for (const uc of userContacts) {

@@ -16,10 +16,10 @@ export class CollapseItemComponent {
     @Input() public collapsed: boolean = true;
     public readonly arrowUp = 'arrow-up-circle-outline';
     public readonly arrowDown = 'arrow-down-circle-outline';
-    // tslint:disable-next-line:no-empty
-    @Input() public onClickFunc = () => {};
+    @Input() public onClickFunc = () => void 0;
 
     public collapse(): void {
         this.collapsed = !this.collapsed;
+        this.onClickFunc();
     }
 }
