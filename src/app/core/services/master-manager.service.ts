@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ProfessionalList} from '@app/api/models/professional-list';
 import {once} from '@app/core/decorators/once';
 import {Master} from '@app/core/models/master';
+import {User} from '@app/core/models/user';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {MasterApiService} from '@app/master/services/master-api.service';
@@ -9,7 +10,6 @@ import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {User} from '@app/core/models/user';
 
 @Injectable({
     providedIn: 'root'
@@ -52,7 +52,7 @@ export class MasterManagerService {
         return this.masterApi.put(master);
     }
 
-    public createMaster(master: Master): Observable<Master> {
+    public createMaster(master: ProfessionalList): Observable<ProfessionalList> {
         return this.becomeMaster().pipe(
             switchMap(_ => this.masterApi.create(master))
         );
