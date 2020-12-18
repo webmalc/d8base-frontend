@@ -51,7 +51,7 @@ import {AppComponent} from './app.component';
             }
         }),
         SharedModule,
-        ApiModule.forRoot({rootUrl: `${environment.backend.url}/en/api`})
+        ApiModule.forRoot({rootUrl: `${environment.backend.url}/api`})
     ],
     providers: [
         {
