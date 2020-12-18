@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {once} from '@app/core/decorators/once';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {AuthenticationService} from '@app/core/services/authentication.service';

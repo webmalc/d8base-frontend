@@ -39,7 +39,6 @@
                 editDefaultContactUrl="{{editDefaultUrl}}"
                 [interactable]="context.canEdit">
         </app-abstract-contacts>
-        <ion-item lines="full"></ion-item>
     </ion-list>
 
     <ion-list lines="none">
@@ -64,7 +63,7 @@
                 <ion-icon name="create-outline"></ion-icon>
             </ion-button>
         </ion-item>
-        <ion-item *ngIf="context.canEdit"
+        <ion-item *ngIf="context.canEdit" [detail]="false"
                   routerDirection="forward"
                   routerLink="location-add/"
                   routerLinkActive="active">
@@ -165,7 +164,7 @@
                             class="width100"></app-experience>
         </ion-item>
         <ion-item *ngIf="context.canEdit"
-                  lines="full"
+                  lines="full" [detail]="false"
                   routerDirection="forward"
                   routerLink="experience-add/"
                   routerLinkActive="active">
@@ -183,7 +182,7 @@
                            class="width100"></app-education>
         </ion-item>
         <ion-item *ngIf="context.canEdit"
-                  lines="full"
+                  lines="full" [detail]="false"
                   routerDirection="forward"
                   routerLink="education-add/"
                   routerLinkActive="active">
@@ -199,7 +198,7 @@
             <app-certificate [certificate]="certificate" [editable]="context.canEdit"></app-certificate>
         </ion-item>
         <ion-item *ngIf="context.canEdit"
-                  lines="full"
+                  lines="full" [detail]="false"
                   routerDirection="forward"
                   routerLink="certificate-add/"
                   routerLinkActive="active">
@@ -211,7 +210,7 @@
     </app-collapse-item>
 
     <app-collapse-item title='{{"master-profile.info.reviews"|translate}}'>
-        <ion-item *ngFor="let review of []">
+        <ion-item *ngFor="let review of []" [detail]="false">
 
         </ion-item>
     </app-collapse-item>

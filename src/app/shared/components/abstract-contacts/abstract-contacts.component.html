@@ -16,7 +16,7 @@
     </ion-item>
 </ion-list>
 <ion-item *ngIf="interactable"
-          id="add-new-contact"
+          id="add-new-contact" [detail]="false"
           routerDirection="forward"
           routerLink="{{addNewContactUrl}}"
           routerLinkActive="active">
