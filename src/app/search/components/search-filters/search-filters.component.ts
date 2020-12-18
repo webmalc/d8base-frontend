@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
 import {SearchFiltersSubmenu} from '@app/search/enums/search-filters-submenu';
 import {SearchFilterStateInterface} from '@app/search/interfaces/search-filter-state-interface';
 import {SearchFilterStateService} from '@app/search/services/search-filter-state.service';
@@ -15,7 +15,7 @@ export class SearchFiltersComponent {
     public tab: string = this.defaultTab;
     @Output() public filtersData: EventEmitter<SearchFilterStateInterface> = new EventEmitter<SearchFilterStateInterface>();
 
-    constructor(public readonly filtersStateManager: SearchFilterStateService) {
+    constructor(public readonly filtersStateManager: SearchFilterStateService, private readonly cd: ChangeDetectorRef) {
     }
 
     public submitFilters(): void {
@@ -24,5 +24,10 @@ export class SearchFiltersComponent {
 
     public setTab(tab: string): void {
         this.tab = tab;
+    }
+
+    public resetFilters(): void {
+        this.filtersStateManager.clear();
+        this.cd.detectChanges();
     }
 }

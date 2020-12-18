@@ -48,8 +48,6 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
                 const infoComponentFactory =
                     this.componentFactoryResolver.resolveComponentFactory<MasterProfileInfoComponent>(MasterProfileInfoComponent);
                 const infoC = this.viewContainerRef.createComponent<MasterProfileInfoComponent>(infoComponentFactory);
-                infoC.instance.init();
-                infoC.instance.setEditable(this.editable);
                 break;
             case MasterProfileSubmenu.Calendar:
                 const calendarComponentFactory =

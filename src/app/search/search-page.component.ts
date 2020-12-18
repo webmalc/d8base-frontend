@@ -12,6 +12,8 @@ import {map, takeUntil} from 'rxjs/operators';
 import {Search} from '../api/models';
 import {PaginatedResult} from '../api/models/paginated-result';
 import {SearchService} from '../api/services';
+import { SearchFilterStateInterface } from './interfaces/search-filter-state-interface';
+import { searchFilterStateInterfaceToSearchListParamsAdapter } from './search-params.adapter';
 
 @Component({
     selector: 'app-search',
@@ -73,8 +75,9 @@ export class SearchPage extends Reinitable implements OnDestroy {
         return this.platform.width() > 992;
     }
 
-    public doSearch(): void {
-        this.search.searchList({ query: this.searchNeedle }).pipe(
+    public doSearch(filters: SearchFilterStateInterface = null): void {
+        const params = searchFilterStateInterfaceToSearchListParamsAdapter(filters);
+         this.search.searchList({ ...params, query: this.searchNeedle }).pipe(
             map((response: PaginatedResult) => response.results),
             takeUntil(this.ngDestroy$)
         ).subscribe((results: Search[]) => {

@@ -4,7 +4,7 @@ export interface MasterInterface {
     description: string;
     company: string;
     experience: number;
-    level: string;
+    level: 'junior' | 'middle' | 'senior';
     rating: string;
     subcategory: number;
 }

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Experience} from '@app/master/models/experience';
+import {ProfessionalExperienceInline} from '@app/api/models';
 
 @Component({
     selector: 'app-experience',
@@ -7,6 +7,6 @@ import {Experience} from '@app/master/models/experience';
     styleUrls: ['./experience.component.scss']
 })
 export class ExperienceComponent {
-    @Input() public exp: Experience;
+    @Input() public exp: ProfessionalExperienceInline;
     @Input() public editable: boolean = false;
 }

@@ -545,7 +545,11 @@
         "datetime": "Date and time",
         "availability": "Service availability",
         "price": "Service price",
-        "apply": "Apply"
+        "apply": "Apply",
+        "date-from": "Date from",
+        "date-to": "Date to",
+        "price-start": "Start price",
+        "price-end": "End price"
       }
     },
     "result": {

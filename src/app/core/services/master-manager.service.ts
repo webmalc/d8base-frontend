@@ -5,6 +5,7 @@ import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
+import {MasterList} from '@app/master/models/master-list';
 import {MasterApiService} from '@app/master/services/master-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
@@ -44,8 +45,8 @@ export class MasterManagerService {
         return this.userManager.becomeMaster().pipe(tap(_ => this.updateIsMaster()));
     }
 
-    public getMasterList(): Observable<Master[]> {
-        return this.masterApi.get().pipe(map((data: ApiListResponseInterface<Master>) => data.results));
+    public getMasterList(): Observable<MasterList[]> {
+        return this.masterReadonlyApi.get().pipe(map(data => data.results));
     }
 
     public updateMaster(master: Master): Observable<Master> {

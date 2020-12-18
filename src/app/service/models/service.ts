@@ -16,4 +16,5 @@ export class Service {
     public price: Price;
     @Expose() public locations: ServiceLocationInline[];
     @Expose() public is_auto_order_confirmation: boolean;
+    @Expose() public tags: { name: string }[];
 }

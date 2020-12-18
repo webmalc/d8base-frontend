@@ -23,7 +23,6 @@ import {CalendarGeneratorFactoryService} from '@app/master/services/calendar-gen
 import {CertificatesApiService} from '@app/master/services/certificates-api.service';
 import {EducationApiService} from '@app/master/services/education-api.service';
 import {ExperienceApiService} from '@app/master/services/experience-api.service';
-import {MasterProfileInfoGeneratorFactoryService} from '@app/master/services/master-profile-info-generator-factory.service';
 import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {ServicePageModule} from '@app/service/service.module';
 import {SharedModule} from '@app/shared/shared.module';
@@ -63,7 +62,6 @@ import {MasterPage} from './master.page';
         ExperienceApiService,
         EducationApiService,
         CertificatesApiService,
-        MasterProfileInfoGeneratorFactoryService,
         CalendarGeneratorFactoryService,
         CalendarApiService
     ]

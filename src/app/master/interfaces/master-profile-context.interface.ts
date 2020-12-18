@@ -1,8 +1,7 @@
-import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
-import {Master} from '@app/core/models/master';
+import {ProfessionalList, UserExtended} from '@app/api/models';
 
 export default interface MasterProfileContext {
-    user?: PartialUserInterface;
-    master?: Master;
+    user?: UserExtended;
+    master?: ProfessionalList;
     canEdit?: boolean;
 }
