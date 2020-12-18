@@ -17,7 +17,9 @@ const serviceTypes = (data: SearchFilterStateInterface): string => {
 };
 
 export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: SearchFilterStateInterface): SearchService.SearchListParams => {
-
+    if (!data) {
+        return;
+    }
 
     return {
         /**
@@ -38,12 +40,12 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         /**
          * start price value (12.35)
          */
-        startPrice: void 0,
+        startPrice: data?.main?.price.start,
 
         /**
          * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
          */
-        startDatetime: void 0,
+        startDatetime: data?.main?.datetime.from,
 
         /**
          * professional start age
@@ -78,7 +80,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         /**
          * price currency (usd)
          */
-        priceCurrency: void 0,
+        priceCurrency: data.main.price.currency.currency,
 
         /**
          * postal code ID
@@ -133,12 +135,12 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         /**
          * end price value (16.50)
          */
-        endPrice: void 0,
+        endPrice: data?.main?.price.end,
 
         /**
          * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
          */
-        endDatetime: void 0,
+        endDatetime: data?.main?.datetime.to,
 
         /**
          * professional end age

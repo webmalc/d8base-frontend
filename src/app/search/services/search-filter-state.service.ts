@@ -1,10 +1,9 @@
-import {Injectable} from '@angular/core';
-import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
-import {SearchFilterStateInterface} from '@app/search/interfaces/search-filter-state-interface';
+import { Injectable } from '@angular/core';
+import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
+import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 
 @Injectable()
 export class SearchFilterStateService {
-
     public data: SearchFilterStateInterface = this.getDefaultData();
 
     public setLocationData(data: SearchLocationDataInterface): void {
@@ -32,11 +31,18 @@ export class SearchFilterStateService {
                 tags: undefined,
                 isOnlineBooking: undefined,
                 isInstantBooking: undefined,
-                datetime: undefined,
+                datetime: {
+                    from: undefined,
+                    to: undefined
+                },
                 isOnlineService: undefined,
                 isAtMasterLocationService: undefined,
                 isAtClientLocationService: undefined,
-                price: undefined
+                price: {
+                    currency: undefined,
+                    start: undefined,
+                    end: undefined
+                }
             },
             additional: undefined
         };
