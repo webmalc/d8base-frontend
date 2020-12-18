@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
-import {Master} from '@app/core/models/master';
+import {ProfessionalList, UserExtended} from '@app/api/models';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {MasterProfileSubmenu} from '@app/master/enums/master-profile-submenu';
@@ -36,14 +35,14 @@ export class MasterPage {
     ) {
         this.createContext().subscribe(context => contextService.setContext(context));
         this.mainInfoSectionData$ = contextService.context$.pipe(
-            first(Boolean),
+            first(({user, master}) => Boolean(user) && Boolean(master)),
             map(({user, master}) => ({
-                fullName: `${user?.last_name} ${user?.first_name}`,
-                company: master?.company,
-                avatar: user?.avatar,
-                rating: master?.rating,
+                fullName: master.name ?? `${user.last_name ?? ''} ${user.first_name ?? ''}`,
+                company: master.company,
+                avatar: user.avatar,
+                rating: master.rating,
                 reviews: [],
-                is_confirmed: user?.is_confirmed
+                is_confirmed: user.is_confirmed
             })));
         this.editable$ = contextService.context$.pipe(map(context => context?.canEdit));
     }
@@ -52,7 +51,7 @@ export class MasterPage {
         this.tab.next(tab);
     }
 
-    private getUserMaster(masterId: number): Observable<{ user: PartialUserInterface, master: Master }> {
+    private getUserMaster(masterId: number): Observable<{ user: UserExtended, master: ProfessionalList }> {
         return Number.isNaN(masterId) ?
             forkJoin({
                 master: this.masterManager.getMasterList().pipe(map(list => list[0])),

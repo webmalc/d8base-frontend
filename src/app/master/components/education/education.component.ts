@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import { ProfessionalEducationInline } from '@app/api/models';
 import {Education} from '@app/master/models/education';
 
 @Component({
@@ -7,6 +8,6 @@ import {Education} from '@app/master/models/education';
     styleUrls: ['./education.component.scss']
 })
 export class EducationComponent {
-    @Input() public education: Education;
+    @Input() public education: ProfessionalEducationInline;
     @Input() public editable: boolean = false;
 }

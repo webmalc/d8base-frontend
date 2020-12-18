@@ -54,14 +54,6 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    public pickApiService(): Promise<void> {
-        return new Promise<void>(resolve => this.sub = this.route.data.subscribe(data => {
-            this.clientContactsApiService = data.isMaster ? this.masterContactApiService : this.userContactApiService;
-            this.isMasterContacts = data.isMaster;
-            resolve();
-        }));
-    }
-
     public async ngOnInit(): Promise<void> {
         await this.pickApiService();
         const contactId = parseInt(this.route.snapshot.paramMap.get('contact-id'), 10);
@@ -122,6 +114,14 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
                 )
             );
         request.subscribe(() => this.location.back());
+    }
+
+    private pickApiService(): Promise<void> {
+        return new Promise<void>(resolve => this.sub = this.route.data.subscribe(data => {
+            this.clientContactsApiService = data.isMaster ? this.masterContactApiService : this.userContactApiService;
+            this.isMasterContacts = data.isMaster;
+            resolve();
+        }));
     }
 
     private disableContact(): void {

@@ -8,7 +8,7 @@ export class Master implements MasterInterface {
     @Expose() public description: string;
     @Expose() public company: string;
     @Expose() public experience: number;
-    @Expose() public level: string;
+    @Expose() public level: 'junior' | 'middle' | 'senior';
     @Expose() public rating: string;
     @Expose() public subcategory: number;
 }
