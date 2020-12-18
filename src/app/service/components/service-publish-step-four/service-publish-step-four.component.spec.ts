@@ -10,6 +10,8 @@ import {IpServicesHolderService} from '@app/core/services/location/ip-services-h
 import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {TokenManagerService} from '@app/core/services/token-manager.service';
+import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
+import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {LocationServiceMock, StorageManagerMock, TokenManagerServiceMock} from 'src/testing/mocks';
@@ -63,7 +65,9 @@ describe('ServicePublishStepFourComponent', () => {
                 IpDataService,
                 IpnfDataService,
                 {provide: LocationService, useClass: LocationServiceMock},
-                {provide: TokenManagerService, useValue: TokenManagerServiceMock}
+                {provide: TokenManagerService, useValue: TokenManagerServiceMock},
+                SelectableCountryOnSearchService,
+                SelectableCityOnSearchService
             ]
         }).compileComponents();
 

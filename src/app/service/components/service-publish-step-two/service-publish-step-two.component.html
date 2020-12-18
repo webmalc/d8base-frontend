@@ -53,7 +53,6 @@
                             <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
                         </ion-col>
 
-
                         <ion-row class="ion-justify-content-between ion-align-items-center pr5">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                 {{"service-publish.step-two.fixed-price"|translate}}
@@ -81,10 +80,9 @@
                                                 [canSearch]="true"
                                                 [items]="currencyList$|async"
                                                 [formControlName]="this.formFields.Currency"
-                                                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
-                                                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
-                                                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                                        >
+                                                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+                                                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+                                                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
                                         </ionic-selectable>
                                     </ion-item>
                                 </ion-col>
@@ -114,10 +112,9 @@
                                                 [canSearch]="true"
                                                 [items]="currencyList$|async"
                                                 [formControlName]="this.formFields.StartPriceCurrency"
-                                                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
-                                                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
-                                                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                                        >
+                                                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+                                                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+                                                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
                                         </ionic-selectable>
                                     </ion-item>
                                 </ion-col>
@@ -144,10 +141,9 @@
                                                 [canSearch]="true"
                                                 [items]="currencyList$|async"
                                                 [formControlName]="this.formFields.EndPriceCurrency"
-                                                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
-                                                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
-                                                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                                        >
+                                                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+                                                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+                                                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
                                         </ionic-selectable>
                                     </ion-item>
                                 </ion-col>

@@ -46,7 +46,7 @@ export class ScheduleEditorFormService {
     }
 
     public isSubmitDisabled(): boolean {
-        return !(this.form.valid && this.form.dirty);
+        return this.form.invalid;
     }
 
     public pushDay(dayCode: number, startTime: string = null, endTime: string = null, isEnabled: boolean = false, id: number = null): void {

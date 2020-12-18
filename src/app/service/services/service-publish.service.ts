@@ -76,7 +76,7 @@ export class ServicePublishService {
                     scheduleRet: this.createSchedule(serviceSchedule, createdService),
                     masterScheduleRet: this.createMasterSchedule(masterSchedule, createdMaster),
                     masterLocRet: masterLocation
-                        ? !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation)
+                        ? (!masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation))
                         : of<MasterLocation>(null),
                     priceRet: this.createPrice(servicePrice, createdService)
                 });
