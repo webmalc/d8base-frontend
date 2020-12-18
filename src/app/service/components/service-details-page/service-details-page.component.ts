@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {ProfessionalList} from '@app/api/models';
 import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
-import {MasterList} from '@app/master/models/master-list';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {Service} from '@app/service/models/service';
 import {first, switchMap, tap} from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class ServiceDetailsPageComponent {
 
     public service: Service;
 
-    public master: MasterList;
+    public master: ProfessionalList;
 
     constructor(
         route: ActivatedRoute,

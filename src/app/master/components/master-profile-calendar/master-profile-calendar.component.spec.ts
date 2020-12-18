@@ -16,7 +16,11 @@ describe('MasterProfileCalendarComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfileCalendarComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
+            imports: [
+                IonicModule,
+                HttpClientTestingModule,
+                TranslateModule.forRoot()
+            ],
             providers: [
                 CalendarGeneratorFactoryService,
                 {provide: StorageManagerService, useClass: StorageManagerMock},

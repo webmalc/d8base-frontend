@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {MasterInterface} from '@app/core/interfaces/master.interface';
+import {ProfessionalList} from '@app/api/models/professional-list';
+
 import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
 import {BookmarkMaster} from '@app/core/models/bookmark-master';
 import {Master} from '@app/core/models/master';
@@ -30,7 +31,7 @@ export class BookmarksService {
                     return value.map(({professional}) => professional);
                 }),
                 switchMap(ids => this.masterManager.getUserLessList$(ids)),
-                map((value: MasterInterface[]) => {
+                map((value: ProfessionalList[]) => {
                     return this.fill(rawBookmarks, value);
                 })
             );
@@ -65,10 +66,10 @@ export class BookmarksService {
     }
 
     private fill(
-        rawBooks: SavedProfessionalInterface<number>[], masters: MasterInterface[]): BookmarkMaster[] {
+        rawBooks: SavedProfessionalInterface<number>[], masters: ProfessionalList[]): BookmarkMaster[] {
         return rawBooks.map(prof => {
             const masterId: number = prof.professional;
-            const masterRaw: MasterInterface = masters.find((master) => master.id === masterId);
+            const masterRaw: ProfessionalList = masters.find((master) => master.id === masterId);
             const bookmark = plainToClass(BookmarkMaster, prof);
             bookmark.professional = masterRaw ? plainToClass(Master, masterRaw) : null;
 

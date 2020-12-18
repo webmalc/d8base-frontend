@@ -102,24 +102,16 @@ class SearchService extends __BaseService {
         if (params.region != null) __params = __params.set('region', params.region.toString());
         if (params.rating != null) __params = __params.set('rating', params.rating.toString());
         if (params.query != null) __params = __params.set('query', params.query.toString());
-        if (params.professionalLevel != null)
-            __params = __params.set('professional_level', params.professionalLevel.toString());
+        if (params.professionalLevel != null) __params = __params.set('professional_level', params.professionalLevel.toString());
         if (params.priceCurrency != null) __params = __params.set('price_currency', params.priceCurrency.toString());
         if (params.postalCode != null) __params = __params.set('postal_code', params.postalCode.toString());
         if (params.paymentMethods != null) __params = __params.set('payment_methods', params.paymentMethods.toString());
-        if (params.onlyWithReviews != null)
-            __params = __params.set('only_with_reviews', params.onlyWithReviews.toString());
-        if (params.onlyWithPhotos != null)
-            __params = __params.set('only_with_photos', params.onlyWithPhotos.toString());
-        if (params.onlyWithFixedPrice != null)
-            __params = __params.set('only_with_fixed_price', params.onlyWithFixedPrice.toString());
-        if (params.onlyWithCertificates != null)
-            __params = __params.set('only_with_certificates', params.onlyWithCertificates.toString());
+        if (params.onlyWithReviews != null) __params = __params.set('only_with_reviews', params.onlyWithReviews.toString());
+        if (params.onlyWithPhotos != null) __params = __params.set('only_with_photos', params.onlyWithPhotos.toString());
+        if (params.onlyWithFixedPrice != null) __params = __params.set('only_with_fixed_price', params.onlyWithFixedPrice.toString());
+        if (params.onlyWithCertificates != null) __params = __params.set('only_with_certificates', params.onlyWithCertificates.toString());
         if (params.onlyWithAutoOrderConfirmation != null)
-            __params = __params.set(
-                'only_with_auto_order_confirmation',
-                params.onlyWithAutoOrderConfirmation.toString()
-            );
+            __params = __params.set('only_with_auto_order_confirmation', params.onlyWithAutoOrderConfirmation.toString());
         if (params.nationalities != null) __params = __params.set('nationalities', params.nationalities.toString());
         if (params.maxDistance != null) __params = __params.set('max_distance', params.maxDistance.toString());
         if (params.longitude != null) __params = __params.set('longitude', params.longitude.toString());

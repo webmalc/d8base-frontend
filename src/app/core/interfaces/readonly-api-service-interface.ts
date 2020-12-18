@@ -3,6 +3,6 @@ import {Observable} from 'rxjs';
 
 export interface ReadonlyApiServiceInterface<T> {
     get(params?: { [param: string]: string | string[] | boolean; }): Observable<ApiListResponseInterface<T>>;
-    getByEntityId(entityId: number | string): Observable<T>;
+    getByEntityId(entityId: number): Observable<T>;
     getList(ids: number[]): Observable<T[]>;
 }

@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, Input} from '@angular/core';
 import {SafeResourceUrl} from '@angular/platform-browser';
+import {ProfessionalList} from '@app/api/models';
 import {SentOrder} from '@app/core/models/sent-order';
 import {ServicesApiCache} from '@app/core/services/cache';
 import {MasterReadonlyApiCacheService} from '@app/core/services/cache/master-readonly-api-cache.service';
 import {HelperService} from '@app/core/services/helper.service';
-import {MasterList} from '@app/master/models/master-list';
 import {Service} from '@app/service/models/service';
 import {switchMap} from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ import {switchMap} from 'rxjs/operators';
 export class SentOrderListItemComponent {
 
     public service: Service;
-    public master: MasterList;
+    public master: ProfessionalList;
 
     private _order: Partial<SentOrder>;
 
