@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {Master} from '@app/core/models/master';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {MasterManagerService} from '@app/core/services';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
@@ -51,13 +51,13 @@ export class ServicePublishFinalStepComponent {
         return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four)?.isNewMaster || false;
     }
 
-    private getMaster(): Observable<Master> {
+    private getMaster(): Observable<ProfessionalList> {
         return this.masterManager.getMasterList().pipe(
             map(list => list[0])
         );
     }
 
-    private getMasterLocation(master: Master): Promise<MasterLocation | null> {
+    private getMasterLocation(master: ProfessionalList): Promise<MasterLocation | null> {
         return this.masterLocationApi.getByClientId(master.id).pipe(
             map(list => list.results.length === 0 ? null : list.results[0])
         ).toPromise();

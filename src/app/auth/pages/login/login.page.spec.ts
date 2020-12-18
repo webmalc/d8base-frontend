@@ -1,3 +1,4 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, fakeAsync, flush, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -24,7 +25,14 @@ describe('LoginPage', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent],
-            imports: [IonicModule, ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+            imports: [
+                IonicModule,
+                ReactiveFormsModule,
+                FormsModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+                TranslateModule.forRoot()
+            ],
             providers: [
                 {provide: ApiClientService, useClass: ApiClientServiceMock},
                 LoginFormService,

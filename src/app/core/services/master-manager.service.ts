@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {once} from '@app/core/decorators/once';
 import {Master} from '@app/core/models/master';
-import {User} from '@app/core/models/user';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
-import {MasterList} from '@app/master/models/master-list';
 import {MasterApiService} from '@app/master/services/master-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {User} from '@app/core/models/user';
 
 @Injectable({
     providedIn: 'root'
@@ -44,8 +44,8 @@ export class MasterManagerService {
         return this.userManager.becomeMaster().pipe(tap(_ => this.updateIsMaster()));
     }
 
-    public getMasterList(): Observable<MasterList[]> {
-        return this.masterReadonlyApi.get().pipe(map(data => data.results));
+    public getMasterList(): Observable<ProfessionalList[]> {
+        return this.masterApi.get().pipe(map(data => data.results));
     }
 
     public updateMaster(master: Master): Observable<Master> {
@@ -62,7 +62,7 @@ export class MasterManagerService {
         return this.masterApi.getByEntityId(masterId);
     }
 
-    public getUserLessList$(ids: number[]): Observable<Master[]> {
+    public getUserLessList$(ids: number[]): Observable<ProfessionalList[]> {
         return this.masterReadonlyApi.getList(ids);
     }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Master} from '@app/core/models/master';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {User} from '@app/core/models/user';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
@@ -60,7 +60,7 @@ export class ServicePublishService {
                             user
                         }: ServicePublishData): Observable<Service> {
         let createdService: Service;
-        let createdMaster: Master;
+        let createdMaster: ProfessionalList;
 
         return this.createMasterUpdateUser(master, user).pipe(
             switchMap((reply) => {
@@ -88,7 +88,7 @@ export class ServicePublishService {
         );
     }
 
-    private createMasterUpdateUser(master: Master, user?: User): Observable<Master> {
+    private createMasterUpdateUser(master: ProfessionalList, user?: User): Observable<ProfessionalList> {
         if (master.id) {
             return of(master);
         }
@@ -101,7 +101,7 @@ export class ServicePublishService {
         );
     }
 
-    private createService(service: Service, master: Master): Observable<Service> {
+    private createService(service: Service, master: ProfessionalList): Observable<Service> {
         return this.serviceApi.create({...service, professional: master.id});
     }
 
@@ -115,11 +115,11 @@ export class ServicePublishService {
         return this.serviceScheduleApi.createSet(schedule?.map(v => ({...v, service: service.id})));
     }
 
-    private createMasterSchedule(schedule: MasterSchedule[], master: Master): Observable<MasterSchedule[]> {
+    private createMasterSchedule(schedule: MasterSchedule[], master: ProfessionalList): Observable<MasterSchedule[]> {
         return this.masterScheduleApi.createSet(schedule?.map(v => ({...v, professional: master.id})));
     }
 
-    private createMasterLocation(location: MasterLocation, master: Master): Observable<MasterLocation> {
+    private createMasterLocation(location: MasterLocation, master: ProfessionalList): Observable<MasterLocation> {
         return this.masterLocationApi.create({...location, professional: master.id});
     }
 

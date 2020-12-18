@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
@@ -111,7 +112,7 @@ export class ServicePublishDataPreparerService {
         return HelperService.clear(user);
     }
 
-    private getMaster(): Master {
+    private getMaster(): ProfessionalList {
         if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster &&
             this.servicePublishDataHolder.isset(ServicePublishSteps.Final)
         ) {

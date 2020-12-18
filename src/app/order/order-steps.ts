@@ -1,10 +1,10 @@
-import { Type } from '@angular/core';
-import { User } from '@app/core/models/user';
-import { MasterList } from '@app/master/models/master-list';
-import { Service } from '@app/service/models/service';
-import { StepComponent } from './abstract/step';
-import { ClientDetailsStepComponent, DateTimeStepComponent, LocationStepComponent, SummaryStepComponent } from './components';
-import { OrderClientDetailsFormFields } from './enums/order-client-details-form';
+import {Type} from '@angular/core';
+import {ProfessionalList} from '@app/api/models/professional-list';
+import {User} from '@app/core/models/user';
+import {Service} from '@app/service/models/service';
+import {StepComponent} from './abstract/step';
+import {ClientDetailsStepComponent, DateTimeStepComponent, LocationStepComponent, SummaryStepComponent} from './components';
+import {OrderClientDetailsFormFields} from './enums/order-client-details-form';
 
 export interface StepModel {
     id: string;
@@ -18,7 +18,7 @@ export interface StepsModel {
 }
 
 export type StepContext = {
-    professional: MasterList;
+    professional: ProfessionalList;
     client: User;
     service: Service;
 };
@@ -82,13 +82,13 @@ export const ORDER_STEPS: StepsModel = {
 };
 
 export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => {
-    return { ...acc, [curr]: null };
+    return {...acc, [curr]: null};
 }, {});
 
 export const orderWizardStorageKey = 'orderWizardStorageKey';
 
 export const stepsRoutes = (canActivate: any[]) =>
-    Object.values(ORDER_STEPS.byId).map(({ component, id }) => {
+    Object.values(ORDER_STEPS.byId).map(({component, id}) => {
         return {
             path: `${id}`,
             pathMatch: 'full',

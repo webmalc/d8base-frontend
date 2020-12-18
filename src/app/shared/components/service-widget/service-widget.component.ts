@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MasterList} from '@app/master/models/master-list';
+import {ProfessionalList} from '@app/api/models';
 import {Service} from '@app/service/models/service';
 
 @Component({
@@ -10,7 +10,7 @@ import {Service} from '@app/service/models/service';
 export class ServiceWidgetComponent {
     @Input() public service: Service;
 
-    @Input() public master: MasterList;
+    @Input() public master: ProfessionalList;
 
     @Input() public alwaysExpanded = false;
 
