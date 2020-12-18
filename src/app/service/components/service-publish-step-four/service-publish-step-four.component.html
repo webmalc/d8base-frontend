@@ -69,12 +69,10 @@
                         <!--/userExists-->
                     </ion-col>
                 </ion-item>
-
                 <app-info-row *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  !(isUserExists$ | async) && formService.isEmailValid()">
                     {{"service-publish.step-four.second-info-row"|translate}}
                 </app-info-row>
-
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  !(isUserExists$ | async) && formService.isEmailValid()"
                         class="ion-item-no-border">
@@ -96,7 +94,6 @@
                         </ion-item>
                     </ion-col>
                 </ion-item>
-
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  (isUserExists$ | async) && formService.isEmailValid()"
                           class="ion-item-no-border">
@@ -114,7 +111,6 @@
                         </ion-item>
                     </ion-col>
                 </ion-item>
-
                 <ion-item class="ion-item-no-border">
                     <ion-col class="ion-padding-vertical" size="12">
                         <ion-row class="ion-justify-content-center">
@@ -134,7 +130,6 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-
             </form>
         </ion-col>
     </ion-row>

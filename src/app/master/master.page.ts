@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
 import {Master} from '@app/core/models/master';
+import {User} from '@app/core/models/user';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {MasterProfileSubmenu} from '@app/master/enums/master-profile-submenu';
@@ -38,7 +39,7 @@ export class MasterPage {
         this.mainInfoSectionData$ = contextService.context$.pipe(
             first(Boolean),
             map(({user, master}) => ({
-                fullName: `${user?.last_name} ${user?.first_name}`,
+                fullName: this.getFullName(user),
                 company: master?.company,
                 avatar: user?.avatar,
                 rating: master?.rating,
@@ -50,6 +51,14 @@ export class MasterPage {
 
     public selectTab(tab: string): void {
         this.tab.next(tab);
+    }
+
+    private getFullName(user: User): string {
+        if (!user?.last_name && user?.first_name) {
+            return undefined;
+        }
+
+        return `${user?.last_name || ''} ${user?.first_name || ''}`;
     }
 
     private getUserMaster(masterId: number): Observable<{ user: PartialUserInterface, master: Master }> {

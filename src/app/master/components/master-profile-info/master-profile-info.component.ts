@@ -74,4 +74,8 @@ export class MasterProfileInfoComponent {
     public getYearsFromBirthday(birthday: string): number {
         return HelperService.calculateAge(birthday);
     }
+
+    public getAddress(location: MasterLocation): string {
+        return location.address || `${location.country}, ${location.city}`;
+    }
 }

@@ -9,7 +9,7 @@ import {MasterApiService} from '@app/master/services/master-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -53,7 +53,9 @@ export class MasterManagerService {
     }
 
     public createMaster(master: Master): Observable<Master> {
-        return this.masterApi.create(master);
+        return this.becomeMaster().pipe(
+            switchMap(_ => this.masterApi.create(master))
+        );
     }
 
     public getMaster(masterId?: number): Observable<Master> {
@@ -62,11 +64,5 @@ export class MasterManagerService {
 
     public getUserLessList$(ids: number[]): Observable<Master[]> {
         return this.masterReadonlyApi.getList(ids);
-    }
-
-    public getExperienceLevelList(): Observable<{ value: string, display_name: string }[]> {
-        return this.masterApi.options<{ actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }>().pipe(
-            map((data) => data.actions.POST.level.choices)
-        );
     }
 }

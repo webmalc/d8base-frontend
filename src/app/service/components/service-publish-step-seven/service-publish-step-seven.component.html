@@ -37,7 +37,7 @@
                                 {{"service-publish.step-seven.timetable-desc"|translate}}
                             </ion-item>
                             <ion-item class="ion-item-no-border ion-align-items-center"
-                                      routerLink="timetable"
+                                      routerLink="timetable" [detail]="false"
                                       routerDirection="forward"
                                       routerLinkActive="active">
                                 <ion-icon name="create-outline"></ion-icon>
@@ -151,7 +151,6 @@
                                     (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())"
                                     (onChange)="onThisPageDataChange()">
                             </ionic-selectable>
-
                         </ion-item>
                         <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-vertical">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -166,7 +165,7 @@
                                 </b>
                             </ion-item>
                             <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
-                                      routerLink="departure"
+                                      routerLink="departure" [detail]="false"
                                       routerDirection="forward"
                                       routerLinkActive="active">
                                 <ion-icon name="create-outline"></ion-icon>

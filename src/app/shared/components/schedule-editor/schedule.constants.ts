@@ -41,15 +41,15 @@ export const defaultSchedule: AbstractSchedule[] = [
     {
         day_of_week: 5,
         is_enabled: false,
-        start_time: '',
-        end_time: '',
+        start_time: null,
+        end_time: null,
         id: null
     },
     {
         day_of_week: 6,
         is_enabled: false,
-        start_time: '',
-        end_time: '',
+        start_time: null,
+        end_time: null,
         id: null
     }
 ];

@@ -16,12 +16,12 @@
                         </ion-col>
                     </ion-row>
                 </form>
-                <!--                Main-->
-                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light" [detail]="false">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border" color="light">{{'profile-form.main'|translate}}</ion-item>
-                            <ion-item routerLink="edit/"
+                            <ion-item class="ion-item-no-border"
+                                      color="light">{{'profile-form.main'|translate}}</ion-item>
+                            <ion-item routerLink="edit/" [detail]="false"
                                       routerDirection="forward"
                                       routerLinkActive="active"
                                       id="edit-main"
@@ -50,27 +50,25 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <!--            /Main-->
-
-                <!--            Contacts-->
                 <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border" color="light">{{'profile-form.contacts'|translate}}</ion-item>
+                            <ion-item class="ion-item-no-border"
+                                      color="light">{{'profile-form.contacts'|translate}}</ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
                 <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding ion-margin-start">
-                        <app-abstract-contacts [clientContacts]="contacts" [interactable]="true"></app-abstract-contacts>
+                        <app-abstract-contacts [clientContacts]="contacts"
+                                               [interactable]="true"></app-abstract-contacts>
                     </ion-col>
                 </ion-item>
-                <!--            /Contacts-->
-                <!--            Location-->
                 <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border" color="light">{{'profile-page.your-address'|translate}}</ion-item>
+                            <ion-item class="ion-item-no-border"
+                                      color="light">{{'profile-page.your-address'|translate}}</ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
@@ -82,7 +80,7 @@
                             </ion-item>
                             <ion-item class="no-padding-right ion-item-no-border ion-align-items-center"
                                       routerLink="location-edit/{{(defaultLocation$ | async)?.id}}"
-                                      routerDirection="forward"
+                                      routerDirection="forward" [detail]="false"
                                       routerLinkActive="active"
                             >
                                 <ion-icon name="create-outline"></ion-icon>
@@ -94,10 +92,9 @@
                                 <ng-container *ngIf="(defaultLocation$|async)?.city">
                                     {{(defaultLocation$|async)?.country.name}}, {{(defaultLocation$|async)?.city?.name}}
                                 </ng-container>
-                                <ng-container>{{(defaultLocation$|async)?.country.name}}</ng-container>
+                                <ng-container *ngIf="!(defaultLocation$|async)?.city">{{(defaultLocation$|async)?.country.name}}</ng-container>
                             </ion-item>
                         </ion-row>
-
                         <ion-item *ngFor="let location of (additionalLocationsList$|async)"
                                   class="ion-item-no-border ion-no-padding ion-no-margin">
                             <ion-col class="ion-no-padding">
@@ -107,22 +104,21 @@
                                     </ion-item>
                                     <ion-item class="ion-item-no-side-padding ion-item-no-border ion-align-items-center"
                                               routerLink="location-edit/{{location.id}}"
-                                              routerDirection="forward"
-                                              routerLinkActive="active"
-                                    >
+                                              routerDirection="forward" [detail]="false"
+                                              routerLinkActive="active">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </ion-item>
                                 </ion-row>
                                 <ion-row class="ion-justify-content-start ion-align-items-center">
-                                    <ion-item class="ion-item-no-border ion-align-items-center ion-item-no-min-height ion-margin-bottom">
+                                    <ion-item
+                                            class="ion-item-no-border ion-align-items-center ion-item-no-min-height ion-margin-bottom">
                                         {{location.country.name}}, {{location.city.name}}
                                     </ion-item>
                                 </ion-row>
                             </ion-col>
                         </ion-item>
-
                         <ion-row>
-                            <ion-item routerLink="location-add/"
+                            <ion-item routerLink="location-add/" [detail]="false"
                                       routerDirection="forward"
                                       routerLinkActive="active"
                                       class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start">
@@ -134,14 +130,12 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <!--            /Location-->
-
-                <!--            About-->
                 <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border" color="light">{{'profile-page.about'|translate}}</ion-item>
-                            <ion-item routerLink="about/"
+                            <ion-item class="ion-item-no-border"
+                                      color="light">{{'profile-page.about'|translate}}</ion-item>
+                            <ion-item routerLink="about/" [detail]="false"
                                       color="light"
                                       routerDirection="forward"
                                       routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
@@ -180,7 +174,6 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <!--            /About-->
             </ion-col>
         </ion-row>
     </ion-grid>

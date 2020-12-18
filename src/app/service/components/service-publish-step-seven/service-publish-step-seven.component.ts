@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
+import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {TranslationService} from '@app/core/services/translation.service';
+import {MasterSchedule} from '@app/master/models/master-schedule';
 import {MasterScheduleApiService} from '@app/master/services/master-schedule-api.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
@@ -18,7 +20,7 @@ import {SelectableCityOnSearchService} from '@app/shared/services/selectable-cit
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {SelectablePostalCodeOnSearchService} from '@app/shared/services/selectable-postal-code-on-search.service';
 import {of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-step-seven',
@@ -126,9 +128,10 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         this.masterManager.getMasterList().pipe(
             switchMap(list => list.length > 0 ?
                 this.masterScheduleApi.get({professional: list[0].id.toString()}) : of(null)
-            )
+            ),
+            map((res: ApiListResponseInterface<MasterSchedule>) => null === res ? [] : res.results)
         ).subscribe(masterSchedule => {
-            this.masterSchedules = masterSchedule.results;
+            this.masterSchedules = masterSchedule;
             const masterHasSchedules = this.masterSchedules.length > 0;
             this.renderUseMasterSchedule = masterHasSchedules;
             if (stepData?.timetable?.length) {
@@ -139,7 +142,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
                 }
                 this.selectedSchedules = stepData.timetable;
             } else {
-                this.selectedSchedules = masterSchedule.results;
+                this.selectedSchedules = masterSchedule;
                 this.formService.form.get(this.formFields.UseMasterSchedule).setValue(masterHasSchedules);
             }
         });

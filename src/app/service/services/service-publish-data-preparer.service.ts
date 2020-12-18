@@ -32,13 +32,12 @@ export class ServicePublishDataPreparerService {
 
     public async getData(): Promise<ServicePublishData> {
         const service = this.getService();
-        const serviceLocation = service.service_type === 'client' ? this.getServiceLocation() : null;
-        const masterLocation = service.service_type !== 'online' ? this.getMasterLocation() : null;
+        const serviceLocation = service.service_type === 'professional' ? this.getServiceLocation() : null;
 
         return {
             service,
             serviceLocation,
-            masterLocation,
+            masterLocation: this.getMasterLocation(),
             master: this.getMaster(),
             user: await this.getUser(),
             servicePhotos: await this.getServicePhotos(),
