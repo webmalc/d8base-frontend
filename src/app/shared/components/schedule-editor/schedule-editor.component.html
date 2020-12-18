@@ -1,6 +1,6 @@
 <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
     <ion-item
-            class="ion-item-no-border ion-item-bordered-others ion-item-no-side-padding item-background-color-white">
+            class="ion-item-no-border ion-item-bordered-others ion-item-no-side-padding">
         <ion-col class="ion-padding-vertical ion-justify-content-center" size="12"
                  formArrayName="{{formFields.Timetable}}">
             <ion-row class="ion-justify-content-start ion-align-items-center" [formGroupName]="i"
@@ -54,7 +54,7 @@
     </ion-item>
 
     <ng-container *ngIf="!disabled">
-        <ion-item class="ion-item-no-border ion-item-border-top item-background-color-white">
+        <ion-item class="ion-item-no-border  ion-item-bordered-others">
             <ion-col class="ion-no-padding">
                 <ion-row>
                     <ion-item (click)="showDaySelector()"
@@ -67,10 +67,10 @@
                 </ion-row>
             </ion-col>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+        <ion-item class="ion-item-no-border ion-item-bordered-others">
             <ion-col class="ion-padding-vertical" size="12">
 
-                <ion-button color="secondary" type="submit" class="ion-margin-vertical" fill="solid"
+                <ion-button size="medium" color="secondary" type="submit" class="ion-margin-vertical" fill="solid"
                             expand="block"
                             [disabled]="formService.isSubmitDisabled()">
                     {{'global.save'| translate}}
