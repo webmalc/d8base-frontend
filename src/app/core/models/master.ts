@@ -1,8 +1,8 @@
-import {MasterInterface} from '@app/core/interfaces/master.interface';
+import {ProfessionalList} from '@app/api/models';
 import {Expose} from 'class-transformer';
 
 // tslint:disable:variable-name
-export class Master implements MasterInterface {
+export class Master implements ProfessionalList {
     @Expose() public id: number;
     @Expose() public name: string;
     @Expose() public description: string;

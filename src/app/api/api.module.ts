@@ -1,9 +1,9 @@
-/* tslint:disable */
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
+import {HttpClientModule} from '@angular/common/http';
+import {ModuleWithProviders, NgModule} from '@angular/core';
+import {ApiConfiguration, ApiConfigurationInterface} from './api-configuration';
 
-import { SearchService } from './services/search.service';
+import {ProfessionalsService} from './services/professionals.service';
+import {SearchService} from './services/search.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -12,10 +12,10 @@ import { SearchService } from './services/search.service';
     imports: [HttpClientModule],
     exports: [HttpClientModule],
     declarations: [],
-    providers: [ApiConfiguration, SearchService]
+    providers: [ApiConfiguration, SearchService, ProfessionalsService]
 })
 export class ApiModule {
-    static forRoot(customParams: ApiConfigurationInterface): ModuleWithProviders<ApiModule> {
+    public static forRoot(customParams: ApiConfigurationInterface): ModuleWithProviders<ApiModule> {
         return {
             ngModule: ApiModule,
             providers: [

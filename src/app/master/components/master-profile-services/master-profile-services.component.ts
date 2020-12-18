@@ -22,11 +22,11 @@ export class MasterProfileServicesComponent {
         private readonly servicesApi: ServicesApiService,
         private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService
     ) {
-        this.serviceData$ = this.serviceGeneratorFactory.getServiceList(this.masterId);
     }
 
     public init(): void {
         this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
+        this.serviceData$ = this.serviceGeneratorFactory.getServiceList(this.masterId);
     }
 
     public enableService(service: Service): void {

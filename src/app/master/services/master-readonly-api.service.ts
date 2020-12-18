@@ -1,27 +1,27 @@
 import {Injectable} from '@angular/core';
-import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {MasterList} from '@app/master/models/master-list';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
+import {ProfessionalList} from '@app/api/models';
+import {ProfessionalsService} from '@app/api/services/professionals.service';
+import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-service-interface';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MasterReadonlyApiService extends AbstractReadonlyApiService<MasterList> {
-
-    private readonly url = environment.backend.master_list;
-
-    constructor(protected client: ApiClientService) {
-        super(client);
+export class MasterReadonlyApiService implements ReadonlyApiServiceInterface<ProfessionalList> {
+    constructor(private readonly professionalsService: ProfessionalsService) {
     }
 
-    protected getUrl(): string {
-        return this.url;
+    public get(params?: { [p: string]: string | string[] | boolean }): Observable<ApiListResponseInterface<ProfessionalList>> {
+        return this.professionalsService.professionalsProfessionalsList(params ?? {});
     }
 
-    // @ts-ignore
-    protected transform(data: MasterList[]): MasterList[] {
-        return plainToClass(MasterList, data);
+    public getByEntityId(entityId: number): Observable<ProfessionalList> {
+        return this.professionalsService.professionalsProfessionalsRead(entityId);
+    }
+
+    public getList(ids: number[]): Observable<ProfessionalList[]> {
+        return ids.length ? this.professionalsService.professionalsProfessionalsRead(ids[0]).pipe(map(x => [x])) : of([]);
     }
 }

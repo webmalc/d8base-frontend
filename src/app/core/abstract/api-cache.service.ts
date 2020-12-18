@@ -1,10 +1,9 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-service-interface';
 import {Observable, of} from 'rxjs';
 
 @Injectable()
 export abstract class ApiCache<T> implements OnDestroy {
-    protected abstract apiService: ReadonlyApiServiceInterface<T>;
+    protected abstract apiService: { getByEntityId: (id: number) => Observable<T> };
     private readonly cache = new Map<number, T>();
 
     public ngOnDestroy(): void {

@@ -1,7 +1,7 @@
-import {Master} from '@app/core/models/master';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {MasterLocation} from '@app/master/models/master-location';
 
 export interface FinalStepDataInterface {
-    master: Master;
+    master: ProfessionalList;
     masterLocation?: MasterLocation;
 }

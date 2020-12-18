@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {MasterInterface} from '@app/core/interfaces/master.interface';
 import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
 import {Master} from '@app/core/models/master';
 import {ApiClientService} from '@app/core/services/api-client.service';
@@ -42,7 +42,7 @@ export class SavedProfessionalApiService {
         return this.api.patch<SavedProfessionalInterface<number>>(this.url, saved);
     }
 
-    public createFromMaster(master: MasterInterface, note: string): Observable<SavedProfessionalInterface<number>> {
+    public createFromMaster(master: ProfessionalList, note: string): Observable<SavedProfessionalInterface<number>> {
         const bookmark = this.createBookmark(master.id, note);
 
         return this.api.post(this.url, bookmark);
