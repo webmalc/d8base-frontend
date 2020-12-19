@@ -7,11 +7,13 @@ import {StepSevenDepartureDataInterface} from '@app/service/interfaces/step-seve
 export interface StepSevenDataInterface extends ServiceTimetableInterface {
     country: Country;
     city: City;
-    address: string;
-    postal_code: PostalCode;
+    address?: string;
+    postal_code?: PostalCode;
     payment_cash: boolean;
     payment_online: boolean;
-    departure: StepSevenDepartureDataInterface;
+    // departure?: StepSevenDepartureDataInterface;
     need_to_create_master_schedule: boolean;
     use_master_schedule: boolean;
+    max_distance: number;
+    units: string;
 }

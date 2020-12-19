@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
+import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {TranslationService} from '@app/core/services/translation.service';
+import {MasterSchedule} from '@app/master/models/master-schedule';
 import {MasterScheduleApiService} from '@app/master/services/master-schedule-api.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
@@ -8,8 +9,9 @@ import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publ
 import {ServicePublishStepSevenTimetableFormFields} from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishStepSevenFormService} from '@app/service/forms/service-publish-step-seven-form.service';
+import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
-import {StepSevenDepartureDataInterface} from '@app/service/interfaces/step-seven-departure-data-interface';
+import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
 import {ServicePublishAuthStateManagerService} from '@app/service/services/service-publish-auth-state-manager.service';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
@@ -17,8 +19,9 @@ import {Reinitable} from '@app/shared/abstract/reinitable';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
 import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
 import {SelectablePostalCodeOnSearchService} from '@app/shared/services/selectable-postal-code-on-search.service';
+import {UserSettingsService} from '@app/shared/services/user-settings.service';
 import {of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {first, map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-step-seven',
@@ -32,10 +35,10 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     public selectedSchedules = [];
     public masterSchedules = [];
     public serviceSchedules = [];
+    public units: string[] = ['km', 'ml'];
 
     constructor(
         public readonly formService: ServicePublishStepSevenFormService,
-        public readonly trans: TranslationService,
         public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
         public readonly countrySelectable: SelectableCountryOnSearchService,
         public readonly citySelectable: SelectableCityOnSearchService,
@@ -43,7 +46,8 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
         private readonly authStateManager: ServicePublishAuthStateManagerService,
         private readonly masterScheduleApi: MasterScheduleApiService,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
+        private readonly userSetting: UserSettingsService
     ) {
         super();
     }
@@ -72,8 +76,18 @@ export class ServicePublishStepSevenComponent extends Reinitable {
                 )) === '{}' || JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
                     ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
                 )) === undefined)
-            ) ||
-            !this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).departure?.max_distance;
+            ) || (
+                this.renderLocation() &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.Country).value &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.City).value &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value
+            );
+    }
+
+    public renderLocation(): boolean {
+        return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type !== 'online';
     }
 
     public useMasterSchedule(): boolean {
@@ -93,11 +107,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     }
 
     public getCityValue(): City {
-        return this.formService.getFormFieldValue(this.formFields.City);
-    }
-
-    public getDepartureData(): StepSevenDepartureDataInterface {
-        return this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)?.departure;
+        return this.servicePublishDataHolderService.getStepData<StepFourDataInterface>(ServicePublishSteps.Four)?.city;
     }
 
     public onThisPageDataChange(): void {
@@ -120,15 +130,23 @@ export class ServicePublishStepSevenComponent extends Reinitable {
             this.formService.setControlDisabled(true, this.formFields.City);
             this.formService.setControlDisabled(true, this.formFields.Postal);
         }
+        this.initDefaultUnits();
+    }
+
+    private initDefaultUnits(): void {
+        this.userSetting.userSettings$.pipe(
+            first()
+        ).subscribe(settings => this.formService.form.get(this.formFields.Units).setValue(settings?.units));
     }
 
     private initSchedules(stepData: StepSevenDataInterface): void {
         this.masterManager.getMasterList().pipe(
             switchMap(list => list.length > 0 ?
                 this.masterScheduleApi.get({professional: list[0].id.toString()}) : of(null)
-            )
+            ),
+            map((res: ApiListResponseInterface<MasterSchedule>) => null === res ? [] : res.results)
         ).subscribe(masterSchedule => {
-            this.masterSchedules = masterSchedule.results;
+            this.masterSchedules = masterSchedule;
             const masterHasSchedules = this.masterSchedules.length > 0;
             this.renderUseMasterSchedule = masterHasSchedules;
             if (stepData?.timetable?.length) {
@@ -139,7 +157,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
                 }
                 this.selectedSchedules = stepData.timetable;
             } else {
-                this.selectedSchedules = masterSchedule.results;
+                this.selectedSchedules = masterSchedule;
                 this.formService.form.get(this.formFields.UseMasterSchedule).setValue(masterHasSchedules);
             }
         });

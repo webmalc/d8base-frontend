@@ -1,4 +1,4 @@
-<ion-item button color="light" [class.ion-item-no-side-padding]="noSidePadding" [lines]="collapsed ? 'full' : 'none'" (click)="collapse()">
+<ion-item [detail]="false" button color="light" [class.ion-item-no-side-padding]="noSidePadding" [lines]="collapsed ? 'full' : 'none'" (click)="collapse()">
     <ion-label *ngIf="titleBold">
         <b>{{title | translate}}</b>
     </ion-label>

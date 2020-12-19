@@ -2,7 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popover/city-picker-popover.component';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
+import {CitiesApiService} from '@app/core/services/location/cities-api.service';
 import {CountriesApiService} from '@app/core/services/location/countries-api.service';
+import {LocationService} from '@app/core/services/location/location.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
 import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
@@ -10,6 +12,7 @@ import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-
 import {PopoverController} from '@ionic/angular';
 import {plainToClass} from 'class-transformer';
 import {BehaviorSubject} from 'rxjs';
+import {filter, first} from 'rxjs/operators';
 import {RegistrationFormFields} from '../../enums/registration-form-fields';
 import {RegistrationFormService} from '../../forms/registration-form.service';
 
@@ -23,15 +26,17 @@ export class RegistrationFormComponent implements OnInit {
     public errorMessage: string;
     public readonly formFields = RegistrationFormFields;
     public supposedCities$: BehaviorSubject<City> = new BehaviorSubject<City>(null);
-
     @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: UserLocation }>();
+    private readonly distance = 2000;
 
     constructor(
         public readonly registrationFormService: RegistrationFormService,
         private readonly countriesApi: CountriesApiService,
         private readonly popoverController: PopoverController,
         public readonly countrySelectable: SelectableCountryOnSearchService,
-        public readonly citySelectable: SelectableCityOnSearchService
+        public readonly citySelectable: SelectableCityOnSearchService,
+        private readonly locationService: LocationService,
+        private readonly citiesApi: CitiesApiService
     ) {
     }
 
@@ -80,9 +85,29 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     private async initPopover(): Promise<void> {
+        this.locationService.getMergedLocationData().then(
+            location => {
+                if (location && location.coordinates) {
+                    return this.citiesApi.getByLocation(this.distance, location).pipe(
+                        first(),
+                        filter(cities => 0 !== cities.count)
+                    ).subscribe(
+                        cities => this.createPopover(cities.results)
+                    );
+                }
+            }
+        );
+    }
+
+    private async createPopover(cities: City[]): Promise<void> {
         const pop = await this.popoverController.create({
             component: CityPickerPopoverComponent,
-            translucent: true
+            translucent: true,
+            componentProps: {
+                data: {
+                    cities
+                }
+            }
         });
         pop.onDidDismiss().then(
             (data) => {

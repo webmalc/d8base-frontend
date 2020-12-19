@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AbstractSchedule} from '@app/core/models/abstract-schedule';
+import {DaySelectorComponent} from '@app/shared/components';
 import {PopoverController} from '@ionic/angular';
-import {DaySelectorComponent} from './day-selector/day-selector.component';
 import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
 import {ScheduleEditorFormService} from './schedule-editor-form.service';
 import * as ScheduleConstants from './schedule.constants';
 
-function normalizeTimeFormat(time: string): string {
+function normalizeTimeFormat(time: string | null): string {
     // convert "HH:MM:SS" to "HH:MM"
-    return time.substr(0, 5);
+    return time?.substr(0, 5);
 }
 
 function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
@@ -83,5 +83,4 @@ export class ScheduleEditorComponent {
     public deleteDay(index: number): void {
         this.formService.deleteDay(index);
     }
-
 }

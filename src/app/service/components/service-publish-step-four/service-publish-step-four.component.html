@@ -1,3 +1,4 @@
+<app-header></app-header>
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
@@ -68,12 +69,10 @@
                         <!--/userExists-->
                     </ion-col>
                 </ion-item>
-
                 <app-info-row *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  !(isUserExists$ | async) && formService.isEmailValid()">
                     {{"service-publish.step-four.second-info-row"|translate}}
                 </app-info-row>
-
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  !(isUserExists$ | async) && formService.isEmailValid()"
                         class="ion-item-no-border">
@@ -95,7 +94,6 @@
                         </ion-item>
                     </ion-col>
                 </ion-item>
-
                 <ion-item *ngIf="!(authenticationService.isAuthenticated$|async) &&
                  (isUserExists$ | async) && formService.isEmailValid()"
                           class="ion-item-no-border">
@@ -110,6 +108,57 @@
                             <a routerLink="/auth/password-recover" routerDirection="forward">
                                 {{"service-publish.step-four.forgot-password"|translate}}
                             </a>
+                        </ion-item>
+                    </ion-col>
+                </ion-item>
+
+                <ion-item class="ion-item-no-border" *ngIf="!(authenticationService.isAuthenticated$|async) &&
+                 !(isUserExists$ | async) && formService.isEmailValid()">
+                    <ion-col size="12">
+                        <ion-item class="ion-item-no-border">
+                            <div class="label-for-required-input">
+                                <b>
+                                    {{"service-publish.step-seven.country-title" | translate}}
+                                </b>
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-seven.country-placeholder" | translate}}
+                            </ion-label>
+                            <ionic-selectable
+                                    itemValueField="id"
+                                    itemTextField="name"
+                                    [canSearch]="true"
+                                    formControlName="{{formFields.Country}}"
+                                    closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+                                    searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+                                    searchPlaceholder="{{'ion-selectable.search-text' | translate}}"
+                                    (onSearch)="countrySelectable.onCountrySearch($event)"
+                                    (onChange)="onCountryChange()">
+                            </ionic-selectable>
+                        </ion-item>
+                        <ion-item class="ion-item-no-border">
+                            <div class="label-for-required-input">
+                                <b>
+                                    {{"service-publish.step-seven.city-title" | translate}}
+                                </b>
+                            </div>
+                        </ion-item>
+                        <ion-item class="ion-item-bordered">
+                            <ion-label color="medium" position="floating">
+                                {{"service-publish.step-seven.city-placeholder" | translate}}
+                            </ion-label>
+                            <ionic-selectable
+                                    itemValueField="id"
+                                    itemTextField="name"
+                                    [canSearch]="true"
+                                    formControlName="{{formFields.City}}"
+                                    closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+                                    searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+                                    searchPlaceholder="{{'ion-selectable.search-text' | translate}}"
+                                    (onSearch)="citySelectable.onCitySearch($event, getCountryValue())">
+                            </ionic-selectable>
                         </ion-item>
                     </ion-col>
                 </ion-item>
@@ -133,7 +182,6 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-
             </form>
         </ion-col>
     </ion-row>

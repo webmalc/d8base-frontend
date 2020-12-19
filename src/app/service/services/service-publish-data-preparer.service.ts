@@ -33,8 +33,9 @@ export class ServicePublishDataPreparerService {
 
     public async getData(): Promise<ServicePublishData> {
         const service = this.getService();
-        const serviceLocation = service.service_type === 'client' ? this.getServiceLocation() : null;
+        const serviceLocation = service.service_type !== 'online' ? this.getServiceLocation() : null;
         const masterLocation = service.service_type !== 'online' ? this.getMasterLocation() : null;
+
 
         return {
             service,
@@ -140,7 +141,9 @@ export class ServicePublishDataPreparerService {
         location.city = stepData.city.id;
         location.address = stepData?.address;
         location.postal_code = stepData?.postal_code?.id;
-        location.units = parseInt(stepData.departure.units, 10);
+        if (stepData.units) {
+            location.units = parseInt(stepData.units, 10);
+        }
 
         return HelperService.clear(location);
     }
@@ -148,7 +151,7 @@ export class ServicePublishDataPreparerService {
     private getServiceLocation(): ServiceLocation {
         const location = new ServiceLocation();
         const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-        location.max_distance = stepData.departure.max_distance;
+        location.max_distance = stepData?.max_distance;
 
         return HelperService.clear(location);
     }

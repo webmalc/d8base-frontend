@@ -5,5 +5,7 @@ export enum ServicePublishStepSevenFormFields {
     Postal = 'postal_code',
     PaymentOnline = 'payment_online',
     PaymentCash = 'payment_cash',
-    UseMasterSchedule = 'use_master_schedule'
+    UseMasterSchedule = 'use_master_schedule',
+    MaxDistance = 'max_distance',
+    Units = 'units'
 }

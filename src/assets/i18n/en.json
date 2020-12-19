@@ -86,10 +86,11 @@
     "miscellaneous": "Miscellaneous"
   },
   "login-form": {
-    "login": "Login",
+    "login": "Email",
     "password": "Password",
     "sign-in": "Sign-in",
-    "forgot-password": "Forgot password?"
+    "forgot-password": "Forgot password?",
+    "sign-up": "Sign-up"
   },
   "registration-form": {
     "email": "Email",

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publish-step-seven-form-fields';
 import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
 
@@ -13,13 +13,15 @@ export class ServicePublishStepSevenFormService {
 
     public createForm(data?: StepSevenDataInterface): void {
         this.form = this.formBuilder.group({
-            [ServicePublishStepSevenFormFields.Country]: [data?.country, Validators.required],
-            [ServicePublishStepSevenFormFields.City]: [data?.city, Validators.required],
+            [ServicePublishStepSevenFormFields.Country]: [data?.country],
+            [ServicePublishStepSevenFormFields.City]: [data?.city],
             [ServicePublishStepSevenFormFields.Address]: [data?.address],
             [ServicePublishStepSevenFormFields.Postal]: [data?.postal_code],
             [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
             [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
-            [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false]
+            [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false],
+            [ServicePublishStepSevenFormFields.MaxDistance]: [data?.max_distance],
+            [ServicePublishStepSevenFormFields.Units]: [data?.units]
         });
     }
 

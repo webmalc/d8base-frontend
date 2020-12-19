@@ -20,8 +20,8 @@ export class RegistrationFormService {
         value ? control.disable() : control.enable();
     }
 
-    public isFormValid(): boolean {
-        return !this.form.valid;
+    public isFormInvalid(): boolean {
+        return this.form.invalid;
     }
 
     public initForm(): void {

@@ -3,7 +3,7 @@ import {HelperService} from '@app/core/services/helper.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
 import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
 import {Observable} from 'rxjs';
-import {first, map, tap} from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-master-profile-info',
