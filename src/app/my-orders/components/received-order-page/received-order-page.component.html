@@ -27,7 +27,9 @@
                     <ion-list-header>
                         <ion-label>{{ 'received_orders.ordered-service' | translate }}:</ion-label>
                     </ion-list-header>
-                    <app-service-widget [service]="order.service | serviceById$ | async"></app-service-widget>
+                    <ng-container *ngIf="order.service | serviceById$ | async as service">
+                        <app-service-widget [service]="service"></app-service-widget>
+                    </ng-container>
                     <ion-item>
                         <ion-label>{{ 'order-status.title' | translate }}:</ion-label>
                         <app-order-status [status]="order.status"></app-order-status>

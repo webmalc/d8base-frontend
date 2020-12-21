@@ -1,3 +1,4 @@
+import {Location} from '@angular/common';
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProfessionalList, UserExtended} from '@app/api/models';
@@ -26,6 +27,7 @@ export class MasterPage {
     public editable$: Observable<boolean>;
 
     constructor(
+        public readonly location: Location,
         private readonly masterManager: MasterManagerService,
         private readonly userManager: UserManagerService,
         private readonly reviewsReadonly: ReviewsReadonlyApiService,

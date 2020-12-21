@@ -393,12 +393,10 @@
         "not-published": "Услуга не опубликована",
         "publish": "Опубликовать",
         "unpublish": "Снять с публикации",
-        "view": "Просмотр",
-        "minutes": "мин"
+        "view": "Просмотр"
       },
       "service-presentation": {
-        "pick": "Выбрать",
-        "minutes": "мин"
+        "pick": "Подробнее"
       },
       "services-tab": {
         "master-services": "Услуги мастера"
