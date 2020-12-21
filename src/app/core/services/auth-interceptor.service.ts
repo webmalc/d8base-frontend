@@ -1,5 +1,6 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {SearchService} from '@app/api/services';
 import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
 import {HelperService} from '@app/core/services/helper.service';
 import {environment} from '@env/environment';
@@ -50,7 +51,10 @@ export class AuthInterceptor implements HttpInterceptor {
             environment.backend.url + environment.backend.auth,
             environment.backend.url + environment.backend.reset_password,
             environment.backend.url + environment.backend.reset_password_link,
-            environment.backend.url + environment.backend.is_user_registered
+            environment.backend.url + environment.backend.is_user_registered,
+
+            // Search should be allowed for guest users:
+            environment.backend.url + `/api${SearchService.searchListPath}`
         ];
     }
 }
