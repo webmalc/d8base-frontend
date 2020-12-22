@@ -5,9 +5,7 @@ import {CalendarInterval} from '@app/shared/interfaces/calendar-interval';
 import {CalendarUnit} from '@app/shared/interfaces/calendar-unit';
 import {environment} from '@env/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class CalendarService {
 
     private readonly minutesInDay = 1440;
@@ -17,6 +15,9 @@ export class CalendarService {
     public generate(interval: number, enabledPeriods: MasterCalendar[]): CalendarInterval[] {
         if (!Number.isInteger(this.minutesInInterval / interval)) {
             throw Error('cannot generate calendar with given interval');
+        }
+        if (!enabledPeriods) {
+            return null;
         }
         const calendar: CalendarInterval[] = [];
         const openedPeriodArray: { start: number, end: number }[] = this.generateEnabledPeriodsArray(enabledPeriods);

@@ -20,8 +20,8 @@
             </ion-item>
             <app-calendar-component
                     (newDate)="changeDate($event)"
-                    [enabledPeriods]="enabledPeriods"
-                    [timezone]="timezone">
+                    [disabled]="true"
+                    [enabledPeriods]="enabledPeriods | async">
             </app-calendar-component>
         </ion-col>
     </ion-row>

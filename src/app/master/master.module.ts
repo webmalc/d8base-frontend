@@ -62,8 +62,7 @@ import {MasterPage} from './master.page';
         ExperienceApiService,
         EducationApiService,
         CertificatesApiService,
-        CalendarGeneratorFactoryService,
-        CalendarApiService
+        CalendarGeneratorFactoryService
     ]
 })
 export class MasterPageModule {

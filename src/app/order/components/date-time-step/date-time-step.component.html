@@ -8,21 +8,10 @@
                 {{ 'order.date-time-subheader' | translate }}
             </ion-label>
         </ion-item>
-        <ion-item>
-            <ion-label>{{ 'order.date' | translate }}</ion-label>
-            <ion-datetime
-                placeholder="{{ 'order.not-selected' | translate }}"
-                [formControl]="form.get('date')"
-            ></ion-datetime>
-        </ion-item>
-        <ion-item [disabled]="!form.get('date').value">
-            <ion-label>{{ 'order.time' | translate }}</ion-label>
-            <ion-datetime
-                placeholder="{{ 'order.not-selected' | translate }}"
-                display-format="HH:mm"
-                picker-format="HH:mm"
-                [formControl]="form.get('time')"
-            ></ion-datetime>
-        </ion-item>
+        <app-calendar-component
+                [formControl]="form.get('datetime')"
+                (newDate)="showCalendarForDate($event)"
+                [enabledPeriods]="displayedCalendars$ | async">
+        </app-calendar-component>
     </ion-list>
 </app-step-container>

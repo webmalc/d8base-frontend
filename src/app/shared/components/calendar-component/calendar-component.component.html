@@ -15,14 +15,23 @@
         </div>
     </ion-item>
 </ion-row>
-<ion-row *ngFor="let interval of calendarIntervals">
-    <app-collapse-item [collapsed]="false" [titleBold]="false" class="width100" noSidePadding="true"
-                       title="{{interval.title}}">
-        <ion-row class="ion-justify-content-between ion-wrap border-top ion-padding-top">
-            <ion-item *ngFor="let unit of interval.units" [class.time-unit-disabled]="!unit.enabled"
-                      class="ion-item-no-border ion-item-bordered ion-item-bottom-border border-radius5 ion-item-no-min-height time-unit mv5">
-                {{getTimeStringFromMinutes(unit.minutes)}}
-            </ion-item>
-        </ion-row>
-    </app-collapse-item>
-</ion-row>
+<ng-container *ngIf="calendarIntervals else loader">
+    <ion-row *ngFor="let interval of calendarIntervals">
+        <app-collapse-item [collapsed]="false" [titleBold]="false" noSidePadding="true"
+                           title="{{interval.title}}">
+            <ion-row class="ion-justify-content-between ion-wrap border-top ion-padding-top">
+                <ion-button *ngFor="let unit of interval.units"
+                            [color]="getUnitColor(unit)"
+                            [disabled]="disabled || !unit.enabled"
+                            (click)="setStartTime(unit)">
+                    {{getTimeStringFromMinutes(unit.minutes)}}
+                </ion-button>
+            </ion-row>
+        </app-collapse-item>
+    </ion-row>
+</ng-container>
+<ng-template #loader>
+    <ion-row class="ion-justify-content-center">
+        <ion-spinner color="light"></ion-spinner>
+    </ion-row>
+</ng-template>

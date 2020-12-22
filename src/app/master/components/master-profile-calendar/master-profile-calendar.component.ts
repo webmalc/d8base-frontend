@@ -19,7 +19,6 @@ import {map, switchMap} from 'rxjs/operators';
 export class MasterProfileCalendarComponent implements OnInit {
 
     public enabledPeriods: Observable<MasterCalendar[]>;
-    public timezone: string = Intl.DateTimeFormat().resolvedOptions().timeZone;
     public schedule$: Observable<MasterSchedule[]>;
     public context$: Observable<MasterProfileContext>;
 
