@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { IonicModule } from '@ionic/angular';
 import { FiltersPage } from './filters.page';
 
@@ -11,8 +10,7 @@ describe('FiltersPage', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [FiltersPage],
-                imports: [IonicModule.forRoot()],
-                providers: [SearchFilterStateService]
+                imports: [IonicModule.forRoot()]
             }).compileComponents();
 
             fixture = TestBed.createComponent(FiltersPage);
