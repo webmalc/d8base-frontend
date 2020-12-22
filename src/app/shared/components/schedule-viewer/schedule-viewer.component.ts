@@ -8,7 +8,16 @@ import * as ScheduleConstants from '@app/shared/components/schedule-editor/sched
     styleUrls: ['./schedule-viewer.component.scss']
 })
 export class ScheduleViewerComponent {
-    @Input() public schedule: AbstractSchedule[];
+    private _schedule: AbstractSchedule[];
+
+    public get schedule(): AbstractSchedule[] {
+        return this._schedule;
+    }
+
+    @Input()
+    public set schedule(schedule: AbstractSchedule[]) {
+        this._schedule = schedule.filter(x => x.is_enabled);
+    }
 
     public getDayName(index: number): string {
         return ScheduleConstants.defaultWeek[index];
