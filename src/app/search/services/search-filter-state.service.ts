@@ -1,10 +1,27 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class SearchFilterStateService {
     public data: SearchFilterStateInterface = this.getDefaultData();
+    private readonly doSearch$ = new ReplaySubject<void>(1);
+
+    public get isDoingSearch$(): Observable<void> {
+        return this.doSearch$.asObservable();
+    }
+
+    constructor(private readonly router: Router) {
+        this.doSearch$.subscribe(() => {
+            this.router.navigate(['/search']);
+        });
+    }
+
+    public doSearch(): void {
+        return this.doSearch$.next();
+    }
 
     public setLocationData(data: SearchLocationDataInterface): void {
         this.data.main.location = data;

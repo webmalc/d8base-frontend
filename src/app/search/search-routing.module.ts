@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {FiltersPage} from '@app/search/pages/filters/filters.page';
-import {SearchPage} from './search-page.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FiltersPage } from '@app/search/pages/filters/filters.page';
+import { SearchPage } from './search-page.component';
 
 const routes: Routes = [
     {
@@ -11,7 +11,6 @@ const routes: Routes = [
     {
         path: 'filters',
         component: FiltersPage
-        // loadChildren: () => import('./pages/filters/filters.module').then(m => m.FiltersPageModule)
     }
 ];
 
@@ -19,5 +18,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class SearchPageRoutingModule {
-}
+export class SearchPageRoutingModule {}

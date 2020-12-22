@@ -119,7 +119,9 @@ export class SearchFiltersMainTabComponent implements OnInit {
             .pipe(withLatestFrom(this.userSettings.userSettings$))
             .subscribe(([currencies, settings]) => {
                 this.currencyList = currencies;
-                this.stateManager.data.main.price.currency = currencies.find(({ currency }) => currency === settings.currency);
+                this.stateManager.data.main.price.currency = currencies.find(
+                    ({ currency }) => currency === settings?.currency ?? currencies[0].currency
+                );
                 this.cd.markForCheck();
             });
     }
