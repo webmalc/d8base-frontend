@@ -15,7 +15,7 @@ import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { LocationService } from '@app/core/services/location/location.service';
-import { TimezoneInterceptor } from '@app/core/services/timzone-interceptor.service';
+import { TimezoneInterceptor } from '@app/core/services/timezone-interceptor.service';
 import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
