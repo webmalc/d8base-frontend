@@ -11,7 +11,7 @@ import {LoginFormService} from '../../forms/login-form.service';
 })
 export class LoginFormComponent implements OnInit {
 
-    @Input() public errorMessage: string;
+    @Input() public errorMessages: string[];
     public readonly formFields = LoginFormFields;
     @Output() private readonly user = new EventEmitter<Credentials>();
 

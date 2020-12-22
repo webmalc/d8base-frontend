@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popover/city-picker-popover.component';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
@@ -23,7 +23,7 @@ import {RegistrationFormService} from '../../forms/registration-form.service';
 })
 export class RegistrationFormComponent implements OnInit {
 
-    public errorMessage: string;
+    @Input() public errorMessages: string[];
     public readonly formFields = RegistrationFormFields;
     public supposedCities$: BehaviorSubject<City> = new BehaviorSubject<City>(null);
     @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: UserLocation }>();
@@ -38,6 +38,32 @@ export class RegistrationFormComponent implements OnInit {
         private readonly locationService: LocationService,
         private readonly citiesApi: CitiesApiService
     ) {
+    }
+
+    public onPhoneFocus(phone: string): void {
+        if (phone === '') {
+            this.registrationFormService.setFormFiledValue(this.formFields.Phone, '+');
+        }
+    }
+
+    public onPhoneBlur(phone: string): void {
+        if (phone === '+') {
+            this.registrationFormService.setFormFiledValue(this.formFields.Phone, '');
+        }
+    }
+
+    public onPhoneInputChange(phone: string): void {
+        const inputNumericVal = phone.replace(/\D/g, '');
+        let inputNewValue = '';
+        inputNewValue += '+' + inputNumericVal;
+
+        this.registrationFormService.setFormFiledValue(this.formFields.Phone, inputNewValue);
+    }
+
+    public onPhoneChange(phone: string): void {
+        if (phone !== '+' && isNaN(parseInt(phone, 10)) && phone.slice(-1) === phone) {
+            this.registrationFormService.setFormFiledValue(this.formFields.Phone, phone.slice(0, -1));
+        }
     }
 
     public ngOnInit(): void {
@@ -56,7 +82,7 @@ export class RegistrationFormComponent implements OnInit {
         const user = plainToClass(User, formData, {excludeExtraneousValues: true});
         const location: UserLocation = new UserLocation();
         location.country = formData[this.formFields.Country].id;
-        location.city = formData[this.formFields.City].id;
+        location.city = formData[this.formFields.City]?.id;
         this.registrationFormData.emit({user, location});
     }
 

@@ -1,7 +1,7 @@
 <form *ngIf="loginFormService.form" [formGroup]="loginFormService.form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()">
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
-            <error-flashbag [message]="errorMessage"></error-flashbag>
+            <error-flashbag [messages]="errorMessages"></error-flashbag>
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">

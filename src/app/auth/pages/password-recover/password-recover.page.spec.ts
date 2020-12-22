@@ -1,12 +1,10 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {ApiClientService} from '@app/core/services/api-client.service';
+import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {of} from 'rxjs';
-
-import {ApiClientService} from '@app/core/services/api-client.service';
 import {PasswordRecoveryFormComponent} from '../../components/password-recovery-form/password-recovery-form.component';
 import {PasswordRecoveryFormService} from '../../forms/password-recovery-form.service';
 import {PasswordRecoveryService} from '../../services/password-recovery.service';
@@ -43,5 +41,3 @@ describe('PasswordRecoverPage', () => {
         expect(compiled.querySelector('app-password-recovery-form ion-button[type="submit"]')).not.toBe(null);
     });
 });
-
-// ** TODO: Need to title test

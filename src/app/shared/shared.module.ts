@@ -28,6 +28,7 @@ import {DefaultLocationPopoverComponent} from '@app/shared/components/default-lo
 import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
 import {FlagMenuComponent} from '@app/shared/components/flag-menu/flag-menu.component';
 import {InfoRowComponent} from '@app/shared/components/info-row/info-row.component';
+import {InputErrorDescriptionComponent} from '@app/shared/components/input-error-description/input-error-description.component';
 import {MediaLinksComponent} from '@app/shared/components/media-links/media-links.component';
 import {PictureSelectorComponent} from '@app/shared/components/picture-selector/picture-selector.component';
 import {RatingFullStarComponent} from '@app/shared/components/rating-full-star/rating-full-star.component';
@@ -35,6 +36,7 @@ import {RatingHalfStarComponent} from '@app/shared/components/rating-half-star/r
 import {RatingComponent} from '@app/shared/components/rating/rating.component';
 import {ReviewsListComponent} from '@app/shared/components/reviews-list/reviews-list.component';
 import {ServicePublishAgreementComponent} from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
+import {SuccessFlashbagComponent} from '@app/shared/components/success-flashbag/success-flashbag.component';
 import {UserLocationMapComponent} from '@app/shared/components/user-location-map/user-location-map.component';
 import {ContactsTabFormService} from '@app/shared/forms/contacts-tab-form.service';
 import {MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe} from '@app/shared/pipes';
@@ -93,7 +95,9 @@ import {NumberDirective} from './directives/number.directive';
         PriceComponent,
         ServiceDataFilterPipe,
         ScheduleViewerComponent,
-        DurationViewerComponent
+        DurationViewerComponent,
+        InputErrorDescriptionComponent,
+        SuccessFlashbagComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -129,7 +133,9 @@ import {NumberDirective} from './directives/number.directive';
         PriceComponent,
         ServiceDataFilterPipe,
         ScheduleViewerComponent,
-        DurationViewerComponent
+        DurationViewerComponent,
+        InputErrorDescriptionComponent,
+        SuccessFlashbagComponent
     ],
     imports: [
         CommonModule,

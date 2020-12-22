@@ -1,4 +1,4 @@
 <app-header></app-header>
 <ion-content>
-    <app-registration-form (registrationFormData)="onSubmitRegistrationForm($event)"></app-registration-form>
+    <app-registration-form [errorMessages]="errorMessages" (registrationFormData)="onSubmitRegistrationForm($event)"></app-registration-form>
 </ion-content>

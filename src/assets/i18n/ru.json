@@ -42,6 +42,9 @@
     "forward": "Продолжить",
     "save": "Сохранить"
   },
+  "error": {
+    "password-mismatch": "Пароли должны совпадать"
+  },
   "service-location": {
     "online": "Онлайн услуга",
     "professional": "Приём у мастера",
@@ -101,6 +104,16 @@
     "country": "Страна",
     "city": "Город",
     "register": "Зарегистрироваться"
+  },
+  "reset-password": {
+    "password": "Пароль",
+    "confirm": "Подтвердите пароль",
+    "submit": "Изменить пароль",
+    "success": "Пароль успешно изменен"
+  },
+  "password-recovery": {
+    "email": "Email",
+    "submit": "Отправить"
   },
   "login-page": {
     "incorrect-login-data": "Неправильный логин или пароль"
