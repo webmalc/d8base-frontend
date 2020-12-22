@@ -113,7 +113,8 @@
   },
   "password-recovery": {
     "email": "Email",
-    "submit": "Sent reset link"
+    "submit": "Sent reset link",
+    "link-sent": "Reset link has been sent"
   },
   "login-page": {
     "incorrect-login-data": "Incorrect login or password"

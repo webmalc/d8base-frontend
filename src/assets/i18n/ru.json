@@ -113,7 +113,8 @@
   },
   "password-recovery": {
     "email": "Email",
-    "submit": "Отправить"
+    "submit": "Отправить",
+    "link-sent": "Ссылка на сброс пароля была отправлена"
   },
   "login-page": {
     "incorrect-login-data": "Неправильный логин или пароль"

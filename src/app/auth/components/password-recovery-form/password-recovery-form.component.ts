@@ -30,7 +30,7 @@ export class PasswordRecoveryFormComponent implements OnInit {
         this.errorMessages = null;
         this.successMessages = null;
         this.passwordRecoveryService.recover(this.formService.form.getRawValue()).subscribe(
-            next => this.successMessages = ['check email'],
+            next => this.successMessages = ['password-recovery.link-sent'],
             (err: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error)
         );
     }
