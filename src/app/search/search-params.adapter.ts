@@ -80,7 +80,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         /**
          * price currency (usd)
          */
-        priceCurrency: data.main.price.currency.currency,
+        priceCurrency: data?.main?.price?.currency?.currency,
 
         /**
          * postal code ID
