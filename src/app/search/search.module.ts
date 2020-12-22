@@ -11,6 +11,7 @@ import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicSelectableModule} from 'ionic-selectable';
+import { FiltersGuard } from './guards/filters.guard';
 import {SearchPage} from './search-page.component';
 import {SearchPageRoutingModule} from './search-routing.module';
 
@@ -33,6 +34,6 @@ import {SearchPageRoutingModule} from './search-routing.module';
         SearchResultComponent
     ],
     exports: [SearchFiltersComponent],
-    providers: [SearchFilterStateService]
+    providers: [SearchFilterStateService, FiltersGuard]
 })
 export class SearchPageModule {}

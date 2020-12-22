@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class SearchFilterStateService {
     public data: SearchFilterStateInterface = this.getDefaultData();
-
+    public doSearch$ = new Subject<void>();
+    public isSearchPageInit: boolean = false;
     public setLocationData(data: SearchLocationDataInterface): void {
         this.data.main.location = data;
     }
