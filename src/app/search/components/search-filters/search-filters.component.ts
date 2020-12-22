@@ -15,7 +15,7 @@ export class SearchFiltersComponent {
     constructor(public readonly filtersStateManager: SearchFilterStateService, private readonly cd: ChangeDetectorRef) {}
 
     public submitFilters(): void {
-        this.filtersStateManager.doSearch$.next();
+        this.filtersStateManager.doSearch();
     }
 
     public setTab(tab: string): void {

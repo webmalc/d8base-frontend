@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FiltersPage } from '@app/search/pages/filters/filters.page';
-import { FiltersGuard } from './guards/filters.guard';
 import { SearchPage } from './search-page.component';
 
 const routes: Routes = [
@@ -11,8 +10,7 @@ const routes: Routes = [
     },
     {
         path: 'filters',
-        component: FiltersPage,
-        canActivate: [FiltersGuard]
+        component: FiltersPage
     }
 ];
 

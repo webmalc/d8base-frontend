@@ -12,7 +12,6 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Search } from '../api/models';
 import { PaginatedResult } from '../api/models/paginated-result';
 import { SearchService } from '../api/services';
-import { SearchFilterStateInterface } from './interfaces/search-filter-state-interface';
 import { searchFilterStateInterfaceToSearchListParamsAdapter } from './search-params.adapter';
 
 @Component({
@@ -39,14 +38,12 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
     }
 
     public ngOnInit(): void {
-        this.state.isSearchPageInit = true;
-        this.state.doSearch$.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
+        this.state.isDoingSearch$.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
             this.doSearch();
         });
     }
 
     public ngOnDestroy(): void {
-        this.state.isSearchPageInit = false;
         this.ngDestroy$.next();
         this.ngDestroy$.complete();
     }
