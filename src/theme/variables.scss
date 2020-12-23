@@ -1,9 +1,13 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
+.ios {
+  --highlight-height: 2px;
+}
+
 /** Ionic CSS Variables **/
 :root {
-  --highlight-height: 2px;
   --ion-font-family: 'Roboto', sans-serif !important;
   font-family: 'Roboto', sans-serif !important;
 
