@@ -10,7 +10,8 @@
                             <ion-item (click)="location.back()"
                                       routerDirection="back"
                                       color="light"
-                                      routerLinkActive="active" class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer">
+                                      routerLinkActive="active"
+                                      class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer">
                                 <ion-icon name="arrow-back-outline"></ion-icon>
                             </ion-item>
                             <ion-item class="ion-item-no-border" color="light">
@@ -19,39 +20,40 @@
                         </ion-row>
                     </ion-col>
                 </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others">
-                    <ion-col class="ion-padding-vertical" size="12">
-                        <ion-item>
-                            <ion-label class="label-for-required-input" color="medium" position="floating">
-                                {{"contact-edit-page.choice-contact"|translate}}
-                            </ion-label>
-                            <ion-select interface="popover" formControlName="contact" name="contact">
-                                <ion-select-option
-                                        *ngFor="let contact of selectOptions" [value]="contact?.id">
-                                    {{contact?.name}}
-                                </ion-select-option>
-                            </ion-select>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label class="label-for-required-input" color="medium" position="floating">
-                                {{"contact-edit-page.enter-contact"|translate}}
-                            </ion-label>
-                            <ion-input type="text" name="contact-value" formControlName="userContact"></ion-input>
-                        </ion-item>
-                        <ion-row class="ion-justify-content-center ion-margin-top">
-                            <ion-col size="6">
-                                <ion-button size="medium" color="light" expand="block" fill="solid" type="submit">
-                                    {{"contact-edit-page.save"|translate}}
-                                </ion-button>
-                            </ion-col>
-                            <ion-col size="6">
-                                <ion-button size="medium" (click)="deleteContact()" color="secondary" expand="block" fill="solid">
-                                    {{"contact-edit-page.delete"|translate}}
-                                </ion-button>
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
+                <ion-item>
+                    <ion-label class="label-for-required-input" color="medium" position="floating">
+                        {{"contact-edit-page.choice-contact"|translate}}
+                    </ion-label>
+                    <ion-select interface="popover" formControlName="contact" name="contact">
+                        <ion-select-option
+                                *ngFor="let contact of selectOptions" [value]="contact?.id">
+                            {{contact?.name}}
+                        </ion-select-option>
+                    </ion-select>
                 </ion-item>
+                <ion-item>
+                    <ion-label class="label-for-required-input" color="medium" position="floating">
+                        {{"contact-edit-page.enter-contact"|translate}}
+                    </ion-label>
+                    <ion-input type="text" name="contact-value" formControlName="userContact"></ion-input>
+                </ion-item>
+                <ion-row class="ion-justify-content-center ion-margin-top">
+                    <ion-col size="6">
+                        <ion-button *ngIf="contact?.id"
+                                    (click)="deleteContact()"
+                                    size="medium"
+                                    color="danger"
+                                    expand="block"
+                                    fill="solid">
+                            {{"contact-edit-page.delete"|translate}}
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button size="medium" color="primary" expand="block" fill="solid" type="submit">
+                            {{"contact-edit-page.save"|translate}}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
             </ion-col>
         </ion-row>
     </form>
