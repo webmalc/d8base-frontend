@@ -8,14 +8,15 @@ import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Country} from '@app/profile/models/country';
 import {Language} from '@app/profile/models/language';
-import {UserContact} from '@app/profile/models/user-contact';
 import {LanguagesApiService} from '@app/profile/services/languages-api.service';
 import {ProfileService} from '@app/profile/services/profile.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
+import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {BehaviorSubject, forkJoin, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {ContactApiService} from './services/contact-api.service';
 
 @Component({
     selector: 'app-profile',
@@ -29,7 +30,7 @@ export class ProfilePage extends Reinitable {
     public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
     public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
     public user: User;
-    public contacts: UserContact[] = [];
+    public contacts: ClientContactInterface[] = [];
     public nationality: Country | null;
     public languages: Language[];
 
@@ -37,6 +38,7 @@ export class ProfilePage extends Reinitable {
         public readonly profileService: ProfileService,
         private readonly userManager: UserManagerService,
         private readonly contactsApi: UserContactApiService,
+        private readonly contactsReadonlyApi: ContactApiService,
         private readonly countriesApi: CountriesApiService,
         private readonly userLanguagesApi: UserLanguagesApiService,
         private readonly languagesApi: LanguagesApiService
@@ -86,8 +88,25 @@ export class ProfilePage extends Reinitable {
                 this.additionalLocationsList$.next(locationList as UserLocation[]);
             }
         );
-        this.contactsApi.get().subscribe(
-            list => this.contacts = list.results
+        forkJoin([
+            this.contactsReadonlyApi.get({is_default: '1'}),
+            this.contactsApi.get()
+        ]).subscribe(
+            ([defaultContacts, list]) => {
+                const emptyDefaultContacts = defaultContacts.results.filter(c => !list.results.some(x => x.contact === c.id));
+                this.contacts = [
+                    ...emptyDefaultContacts.map(c => (
+                        {
+                            id: null,
+                            contact: c.id,
+                            contact_code: c.code,
+                            contact_display: c.name,
+                            value: ''
+                        }
+                    )),
+                    ...list.results
+                ];
+            }
         );
     }
 

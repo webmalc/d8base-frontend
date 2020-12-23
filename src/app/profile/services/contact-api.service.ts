@@ -25,7 +25,8 @@ export class ContactApiService extends AbstractReadonlyApiService<Contact> {
         search?: string,
         ordering?: string,
         page?: string,
-        page_size?: string
+        page_size?: string,
+        is_default?: string,
     }): Observable<ApiListResponseInterface<Contact>> {
         return super.get(params);
     }

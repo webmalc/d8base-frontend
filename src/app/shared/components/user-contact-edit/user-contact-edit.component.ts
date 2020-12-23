@@ -46,14 +46,16 @@ export class UserContactEditComponent implements OnInit {
 
     public ngOnInit(): void {
         const snapshot = this.route.snapshot;
-        this.isMaster = snapshot.data.isMaster;
+        this.isMaster = snapshot.data?.isMaster;
         this.contactId = parseInt(snapshot.paramMap.get('contact-id'), 10);
+        const defaultContactId = parseInt(snapshot.paramMap.get('default-contact-id'), 10);
+        const newContact = defaultContactId ? { contact: defaultContactId, id: null, value: '' } : null;
         this.clientContactsApiService = this.isMaster ? this.masterContactApiService : this.userContactApiService;
         const selectOptions$ = this.contactsApi.get().pipe(map(response => response.results), shareReplay(1));
         forkJoin([
             selectOptions$,
             (this.contactId ? this.clientContactsApiService.getByEntityId(this.contactId)
-                : of<ClientContactInterface>(null))
+                : of<ClientContactInterface>(newContact))
         ]).pipe(first())
             .subscribe(([options, contact]) => {
                 this.selectOptions = options;
