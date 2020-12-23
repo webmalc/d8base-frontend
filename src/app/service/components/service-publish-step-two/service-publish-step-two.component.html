@@ -42,6 +42,9 @@
                             <ion-textarea rows="4" type="text" name="description"
                                           [formControlName]="formFields.Description"></ion-textarea>
                         </ion-item>
+                        <app-input-error-description text="service-publish.step-two.description-error"
+                            *ngIf="formService.form.get(formFields.Description).invalid && formService.form.get(formFields.Description).dirty">
+                        </app-input-error-description>
                         <ion-col size="12">
                             <ion-row>
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -188,7 +191,8 @@
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button size="medium" color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                                <ion-button size="medium" color="secondary" type="submit"
+                                            [disabled]="formService.isSubmitDisabled()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>

@@ -19,7 +19,7 @@ export class User implements UserInterface {
     @Expose() public nationality: number; // Country id
     @Expose() public main_language: string;
     // note that PartialUserInterface returns array of UserLanguage, but UserInterface returns array of UserLanguage id
-    @Expose() public languages?: Array<UserLanguage>;
+    @Expose() public languages?: UserLanguage[] | number[];
     @Expose() public account_type: string;
     @Expose() public is_confirmed: boolean;
 }
