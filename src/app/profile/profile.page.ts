@@ -44,6 +44,10 @@ export class ProfilePage extends Reinitable {
         super();
     }
 
+    public get languagesList(): string {
+        return this.languages?.map(x => x.name).join(', ') || '';
+    }
+
     public saveAvatar(data: string): void {
         if (data.slice(0, 7) !== 'http://' || data.slice(0, 8) !== 'https://') {
             this.profileService.updateUser({avatar: data});
