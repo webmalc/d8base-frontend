@@ -11,7 +11,7 @@ import {MasterProfileContextService} from '@app/master/services/master-profile-c
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
 import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {first, map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-master',
@@ -56,7 +56,10 @@ export class MasterPage {
     private getUserMaster(masterId: number): Observable<{ user: UserExtended, master: ProfessionalList }> {
         return Number.isNaN(masterId) ?
             forkJoin({
-                master: this.masterManager.getMasterList().pipe(map(list => list[0])),
+                master: this.masterManager.getMasterList().pipe(
+                    map(list => list[0]),
+                    switchMap(master => this.masterReadonly.getByEntityId(master.id))
+                ),
                 user: this.userManager.getCurrentUser()
             }) :
             this.masterReadonly.getByEntityId(masterId).pipe(map(res => ({master: res, user: res.user})));
