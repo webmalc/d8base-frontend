@@ -3,6 +3,7 @@ import {FormGroup} from '@angular/forms';
 import {User} from '@app/core/models/user';
 import {UserLocation} from '@app/core/models/user-location';
 import {CountriesApiService} from '@app/core/services';
+import {HelperService} from '@app/core/services/helper.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
 import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Country} from '@app/profile/models/country';
@@ -50,7 +51,7 @@ export class ProfilePage extends Reinitable {
     }
 
     public getAvatar(): string {
-        return this.profileService.avatarForm.get(ProfileFormFields.Avatar).value;
+        return this.profileService.avatarForm.get(ProfileFormFields.Avatar).value ?? HelperService.getNoAvatarLink();
     }
 
     protected init(): void {
