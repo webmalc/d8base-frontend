@@ -13,7 +13,7 @@ import {filter, takeUntil} from 'rxjs/operators';
     styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnDestroy {
-    public errorMessage: string;
+    public errorMessages: string[];
     private readonly destroy$ = new Subject<void>();
 
     constructor(
@@ -41,7 +41,7 @@ export class LoginPage implements OnDestroy {
             },
             (error: HttpErrorResponse) => {
                 if (400 === error.status && error.error.error === 'invalid_grant') {
-                    this.errorMessage = 'login-page.incorrect-login-data';
+                    this.errorMessages = ['login-page.incorrect-login-data'];
                 } else {
                     throw error;
                 }

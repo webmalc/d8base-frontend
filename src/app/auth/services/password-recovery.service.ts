@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiClientService} from '@app/core/services/api-client.service';
 import {environment} from '@env/environment';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class PasswordRecoveryService {
@@ -10,7 +11,7 @@ export class PasswordRecoveryService {
     constructor(protected client: ApiClientService) {
     }
 
-    public recover(email: object): any {
-        this.client.post(this.SEND_RESET_PASSWORD_LINK_URL, email).subscribe();
+    public recover(email: object): Observable<any> {
+        return this.client.post(this.SEND_RESET_PASSWORD_LINK_URL, email);
     }
 }

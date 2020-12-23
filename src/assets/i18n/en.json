@@ -42,6 +42,9 @@
     "back": "Back",
     "save": "Save"
   },
+  "error": {
+    "password-mismatch": "Passwords mismatch"
+  },
   "service-location": {
     "online": "Online",
     "professional": "Professional's place",
@@ -101,6 +104,17 @@
     "country": "Country",
     "city": "City",
     "register": "Register"
+  },
+  "reset-password": {
+    "password": "Password",
+    "confirm": "Confirm password",
+    "submit": "Change password",
+    "success": "Successfully changed"
+  },
+  "password-recovery": {
+    "email": "Email",
+    "submit": "Sent reset link",
+    "link-sent": "Reset link has been sent"
   },
   "login-page": {
     "incorrect-login-data": "Incorrect login or password"
@@ -247,7 +261,8 @@
       "start-price": "Service price from",
       "end-price": "Service price to",
       "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
-      "location": "Service location"
+      "location": "Service location",
+      "description-error": "Description minimum length is 20 symbols"
     },
     "step-three": {
       "title": "Want to add photos of the service? With them your service will be brighter!",

@@ -60,7 +60,7 @@ export class ProfilePage extends Reinitable {
         this.userManager.getCurrentUser().pipe(
             switchMap(user => forkJoin({
                 user: of(user),
-                languages: this.userLanguagesApi.getList(user.languages.map(x => x.id)).pipe(
+                languages: this.userLanguagesApi.getList(user.languages as number[]).pipe(
                     switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language)))
                 ),
                 nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null)
@@ -91,5 +91,4 @@ export class ProfilePage extends Reinitable {
             _ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value)
         );
     }
-
 }

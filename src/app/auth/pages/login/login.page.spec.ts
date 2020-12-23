@@ -78,7 +78,7 @@ describe('LoginPage', () => {
         component.onSubmitLoginForm(user);
         flush();
 
-        expect(component.errorMessage).toBe('login-page.incorrect-login-data');
+        expect(component.errorMessages).toContain('login-page.incorrect-login-data');
         expect(router.navigateByUrl).not.toHaveBeenCalled();
     }));
 });
