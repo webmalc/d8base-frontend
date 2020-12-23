@@ -1,7 +1,7 @@
 <ion-list lines="none">
     <ion-item *ngFor="let contact of clientContacts">
         <ion-icon name="{{ getContactIcon(contact.contact_display) }}"></ion-icon>
-        <ion-label color="medium">
+        <ion-label color="medium" class="ion-padding-start">
             {{ contact.contact_display }}
         </ion-label>
         <ion-text color="primary">
