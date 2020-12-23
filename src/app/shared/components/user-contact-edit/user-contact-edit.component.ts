@@ -1,8 +1,7 @@
 import {Location} from '@angular/common';
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {HelperService} from '@app/core/services/helper.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {MasterContact} from '@app/master/models/master-contact';
 import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
@@ -12,23 +11,23 @@ import {ContactApiService} from '@app/profile/services/contact-api.service';
 import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
 import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
 import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
-import {forkJoin, Observable, of, Subscription} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {forkJoin, Observable, of} from 'rxjs';
+import {first, map, shareReplay, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-contact-edit',
     templateUrl: './user-contact-edit.component.html',
     styleUrls: ['./user-contact-edit.component.scss']
 })
-export class UserContactEditComponent implements OnInit, OnDestroy {
+export class UserContactEditComponent implements OnInit {
 
-    public contact: ClientContactInterface;
-    public selectOptions: Contact[] = [];
-    public selectedContact: Contact;
+    public selectOptions: Contact[];
     public form: FormGroup;
-    private isMasterContacts: boolean;
-    private sub: Subscription;
+
+    private contact: ClientContactInterface;
+    private isMaster: boolean;
     private clientContactsApiService: ContactsApiServiceInterface;
+    private contactId: number;
 
     constructor(
         private readonly userContactApiService: UserContactApiService,
@@ -41,8 +40,30 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
     ) {
     }
 
+    public get canDelete(): boolean {
+        return Boolean(this.contact?.id); // TODO check is default
+    }
+
+    public ngOnInit(): void {
+        const snapshot = this.route.snapshot;
+        this.isMaster = snapshot.data.isMaster;
+        this.contactId = parseInt(snapshot.paramMap.get('contact-id'), 10);
+        this.clientContactsApiService = this.isMaster ? this.masterContactApiService : this.userContactApiService;
+        const selectOptions$ = this.contactsApi.get().pipe(map(response => response.results), shareReplay(1));
+        forkJoin([
+            selectOptions$,
+            (this.contactId ? this.clientContactsApiService.getByEntityId(this.contactId)
+                : of<ClientContactInterface>(null))
+        ]).pipe(first())
+            .subscribe(([options, contact]) => {
+                this.selectOptions = options;
+                this.contact = contact;
+                this.createForm(contact);
+            });
+    }
+
     public deleteContact(): void {
-        if (parseInt(this.route.snapshot.paramMap.get('contact-id'), 10)) {
+        if (this.contactId) {
             this.clientContactsApiService.delete(this.contact).subscribe(() => {
                 // TODO: show feedback about operation success
             });
@@ -50,93 +71,32 @@ export class UserContactEditComponent implements OnInit, OnDestroy {
         this.location.back();
     }
 
-    public ngOnDestroy(): void {
-        this.sub.unsubscribe();
-    }
-
-    public async ngOnInit(): Promise<void> {
-        await this.pickApiService();
-        const contactId = parseInt(this.route.snapshot.paramMap.get('contact-id'), 10);
-        const defaultContactId = parseInt(this.route.snapshot.paramMap.get('default-contact-id'), 10);
-        if (defaultContactId) {
-            this.contactsApi.getByEntityId(defaultContactId).subscribe(
-                contact => {
-                    this.selectedContact = contact;
-                    this.selectOptions.push(contact);
-                    this.createForm(contact);
-                    this.disableContact();
-                }
-            );
-
-            return;
-        }
-        if (contactId) {
-            this.clientContactsApiService.getByEntityId(contactId).subscribe(
-                (result: ClientContactInterface) => {
-                    this.contact = result;
-                    this.contactsApi.getByEntityId(result.contact).subscribe(
-                        data => {
-                            this.selectOptions.push(data);
-                            this.selectedContact = data;
-                            this.createForm(data, result);
-                            this.disableContact();
-                        }
-                    );
-                }
-            );
-        } else {
-            forkJoin({
-                contacts: this.contactsApi.get(),
-                userContacts: this.clientContactsApiService.getCurrentClientContacts()
-            }).subscribe(
-                ({contacts, userContacts}) => {
-                    this.createForm();
-                    this.selectOptions = HelperService.calculateContacts(contacts.results, userContacts.results);
-                }
-            );
-        }
-    }
-
     public submitForm(): void {
-        const contactId = parseInt(this.route.snapshot.paramMap.get('contact-id'), 10);
-        const userContact = this.form.getRawValue().userContact;
-        const request = contactId
+        const updatedValues = this.form.getRawValue();
+        const request = this.contactId
             ? this.clientContactsApiService.put({
                 ...this.contact,
-                value: userContact
+                ...updatedValues
             })
             : this.getNewClientContactModel().pipe(
                 switchMap(contact => this.clientContactsApiService.create({
                         ...contact,
-                        value: userContact,
-                        contact: this.form.getRawValue().contact
+                        ...updatedValues
                     })
                 )
             );
         request.subscribe(() => this.location.back());
     }
 
-    private pickApiService(): Promise<void> {
-        return new Promise<void>(resolve => this.sub = this.route.data.subscribe(data => {
-            this.clientContactsApiService = data.isMaster ? this.masterContactApiService : this.userContactApiService;
-            this.isMasterContacts = data.isMaster;
-            resolve();
-        }));
-    }
-
-    private disableContact(): void {
-        this.form.controls.contact.disable();
-    }
-
-    private createForm(contact?: Contact, userContact?: ClientContactInterface): void {
+    private createForm(contact?: ClientContactInterface): void {
         this.form = this.formBuilder.group({
-            contact: [contact?.id, [Validators.required]],
-            userContact: [userContact?.value, [Validators.required]]
+            contact: [{value: contact?.contact, disabled: Boolean(contact?.contact)}, [Validators.required]],
+            value: [contact?.value, [Validators.required]]
         });
     }
 
     private getNewClientContactModel(): Observable<ClientContactInterface> {
-        if (this.isMasterContacts) {
+        if (this.isMaster) {
             return this.masterManager.getMasterList().pipe(
                 map(list => {
                     const contact = new MasterContact();
