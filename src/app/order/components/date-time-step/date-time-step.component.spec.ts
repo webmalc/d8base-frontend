@@ -1,3 +1,4 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -14,7 +15,12 @@ describe('DateTimeStepComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [DateTimeStepComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
+            imports: [
+                IonicModule,
+                TranslateModule.forRoot(),
+                HttpClientTestingModule,
+                RouterTestingModule
+            ],
             providers: [OrderWizardStateService, FormBuilder]
         }).compileComponents();
 

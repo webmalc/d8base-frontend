@@ -1,7 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { StepComponent } from '@app/order/abstract/step';
-import { DateTimeStepData } from '@app/order/order-steps';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {HelperService} from '@app/core/services/helper.service';
+import {MasterCalendar} from '@app/master/models/master-calendar';
+import {CalendarApiService} from '@app/master/services/calendar-api.service';
+import {StepComponent} from '@app/order/abstract/step';
+import {DateTimeStepData, StepContext} from '@app/order/order-steps';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-date-time-step',
@@ -17,11 +22,16 @@ import { DateTimeStepData } from '@app/order/order-steps';
 })
 export class DateTimeStepComponent extends StepComponent<DateTimeStepData> implements OnInit {
     public readonly form = this.fb.group({
-        date: ['', Validators.required],
-        time: ['', Validators.required]
+        datetime: [null, Validators.required]
     });
+    public displayedCalendars$: Observable<MasterCalendar[]>;
 
-    constructor(private readonly fb: FormBuilder, protected readonly cd: ChangeDetectorRef) {
+    private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());
+
+    constructor(
+        private readonly fb: FormBuilder,
+        private readonly calendarApi: CalendarApiService,
+        protected readonly cd: ChangeDetectorRef) {
         super(cd);
     }
 
@@ -29,15 +39,12 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
         this.subscribeFormStatus();
     }
 
-    public subscribeFormStatus(): void {
-        this.form.statusChanges.subscribe(() => {
-            this.outputData = this.form.valid ? this.getStepState() : null;
-            this.isValid$.next(this.form.valid);
-        });
-    }
-
     public getData(): DateTimeStepData {
         return this.outputData;
+    }
+
+    public showCalendarForDate(date: Date): void {
+        this.currentlyViewedDate.next(date);
     }
 
     protected onStateChanged(data: DateTimeStepData): void {
@@ -47,16 +54,38 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
             return;
         }
         const start_datetime = data?.start_datetime;
-        const date = new Date(Date.parse(start_datetime)).toString();
-        this.form.get('date').setValue(date);
-        this.form.get('time').setValue(date);
+        this.form.get('datetime').setValue(new Date(start_datetime));
         this.cd.markForCheck();
     }
 
-    private getStepState(): DateTimeStepData {
-        const date = new Date(this.form.get('date').value)?.toDateString() || '';
-        const time = new Date(this.form.get('time').value)?.toTimeString() || '';
+    protected onContextChanged(context: StepContext): void {
+        super.onContextChanged(context);
+        this.updateCalendars();
+    }
 
-        return { start_datetime: new Date(`${date} ${time}`).toISOString() };
+    private updateCalendars(): void {
+        this.displayedCalendars$ = this.currentlyViewedDate.pipe(
+            switchMap(startDate => {
+                const masterId = this.context?.professional.id;
+                const serviceId = this.context?.service.id;
+                const endDate = HelperService.getDate(startDate, 1);
+
+                return (!masterId || !serviceId) ? of(null) :
+                    this.calendarApi.getSchedule(masterId, startDate.toISOString(), endDate.toISOString(), serviceId);
+            })
+        );
+    }
+
+    private subscribeFormStatus(): void {
+        this.form.statusChanges.subscribe(() => {
+            this.outputData = this.form.valid ? this.getStepState() : null;
+            this.isValid$.next(this.form.valid);
+        });
+    }
+
+    private getStepState(): DateTimeStepData {
+        const datetime = this.form.get('datetime').value;
+
+        return {start_datetime: new Date(datetime).toISOString()};
     }
 }

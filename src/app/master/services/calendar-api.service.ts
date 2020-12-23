@@ -7,7 +7,9 @@ import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CalendarApiService {
 
     private readonly url = environment.backend.calendar;
@@ -32,7 +34,6 @@ export class CalendarApiService {
         return this.url;
     }
 
-    // @ts-ignore
     protected transform(data: MasterCalendar[]): MasterCalendar[] {
         return plainToClass(MasterCalendar, data);
     }

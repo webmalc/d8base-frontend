@@ -1,17 +1,16 @@
 <ng-container *ngIf="context$ | async as context">
     <ion-row *ngIf="schedule$ | async as schedule">
         <ion-col size="12">
-            <ion-item class="ion-item-no-border ion-item-bottom-border master-profile-tab-title">
-                {{"master-profile.calendar.schedule" | translate}}
-            </ion-item>
-            <app-schedule-editor *ngIf="context.canEdit else scheduleViewer"
-                                 [schedule]="schedule"
-                                 (save)="updateSchedule($event)">
-            </app-schedule-editor>
-            <ng-template #scheduleViewer>
-                <app-schedule-viewer [schedule]="schedule">
-                </app-schedule-viewer>
-            </ng-template>
+            <app-collapse-item title="{{'master-profile.calendar.schedule' | translate}}">
+                <app-schedule-editor *ngIf="context.canEdit else scheduleViewer"
+                                     [schedule]="schedule"
+                                     (save)="updateSchedule($event)">
+                </app-schedule-editor>
+                <ng-template #scheduleViewer>
+                    <app-schedule-viewer [schedule]="schedule">
+                    </app-schedule-viewer>
+                </ng-template>
+            </app-collapse-item>
         </ion-col>
     </ion-row>
     <ion-row>
@@ -21,8 +20,8 @@
             </ion-item>
             <app-calendar-component
                     (newDate)="changeDate($event)"
-                    [enabledPeriods]="enabledPeriods"
-                    [timezone]="timezone">
+                    [disabled]="true"
+                    [enabledPeriods]="enabledPeriods | async">
             </app-calendar-component>
         </ion-col>
     </ion-row>
