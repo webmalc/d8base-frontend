@@ -3,7 +3,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FileService} from '@app/shared/services/file.service';
 import {PhotoService} from '@app/shared/services/photo.service';
 import {CameraPhoto} from '@capacitor/core';
-import {IonInput, Platform, PopoverController} from '@ionic/angular';
+import {IonInput, PopoverController} from '@ionic/angular';
 import {ImageCropPopoverComponent} from './image-cropper/image-crop-popover.component';
 
 @Component({
@@ -27,7 +27,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     private onChange: (fn: any) => void;
 
     constructor(
-        public platform: Platform,
         private readonly photoService: PhotoService,
         private readonly fileService: FileService,
         private readonly popoverController: PopoverController
@@ -60,19 +59,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
         } catch (error) {
             this.setUri(oldUri);
         }
-    }
-
-    public async getImageFile(): Promise<void> {
-        let oldUri: string;
-        try {
-            oldUri = this.uri;
-            this.clearUri();
-            const file = await this.fileService.getFile();
-            await this.cropAndSave(file);
-        } catch (error) {
-            this.setUri(oldUri);
-        }
-
     }
 
     public registerOnChange(fn: any): void {
