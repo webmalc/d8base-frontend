@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import StepContext from '@app/order/interfaces/step-context.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { StepContext } from '../order-steps';
 
 @Component({
     template: ''

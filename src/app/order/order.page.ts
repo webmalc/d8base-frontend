@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SentOrder } from '@app/core/models/sent-order';
-import { ServicesApiCache } from '@app/core/services/cache';
-import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
-import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
-import { forkJoin, Observable, Subject } from 'rxjs';
-import { filter, map, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
-import { StepContext, StepModel } from './order-steps';
-import { OrderWizardStateService, SentOrdersApiService } from './services';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SentOrder} from '@app/core/models/sent-order';
+import {ServicesApiCache} from '@app/core/services/cache';
+import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
+import {UserManagerService} from '@app/core/services/user-manager.service';
+import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
+import {forkJoin, Subject} from 'rxjs';
+import {filter, first, map, switchMap, takeUntil} from 'rxjs/operators';
+import {OrderWizardStateService, SentOrdersApiService} from './services';
 
 @Component({
     selector: 'app-order',
@@ -17,9 +16,6 @@ import { OrderWizardStateService, SentOrdersApiService } from './services';
     providers: [ServicesApiCache]
 })
 export class OrderPage {
-    public get currentStep$(): Observable<StepModel> {
-        return this.wizardState.getCurrentStep();
-    }
 
     private readonly ngDestroy$ = new Subject<void>();
     private serviceId: number;
@@ -32,7 +28,8 @@ export class OrderPage {
         private readonly mastersApi: MasterReadonlyApiService,
         private readonly userManagerService: UserManagerService,
         private readonly ordersApi: SentOrdersApiService
-    ) {}
+    ) {
+    }
 
     public ionViewWillEnter(): void {
         this.subscribeToRouteParams();
@@ -49,13 +46,12 @@ export class OrderPage {
         this.wizardState
             .submit()
             .pipe(
-                withLatestFrom(this.wizardState.getState()),
-                map(([, state]) => {
+                map((state) => {
                     return Object.values(state).reduce(
                         (acc, curr) => {
-                            return { ...acc, ...curr };
+                            return {...acc, ...curr};
                         },
-                        { service: this.serviceId }
+                        {service: this.serviceId}
                     );
                 }),
                 takeUntil(this.ngDestroy$)
@@ -66,13 +62,13 @@ export class OrderPage {
     }
 
     private createOrder(order: SentOrder): void {
-        this.ordersApi.create(order).subscribe(({ id }) => {
-            this.router.navigate(['/my-orders/outbox', id]);
+        this.ordersApi.create(order).subscribe(({id}) => {
+            this.router.navigate(['/', 'my-orders', 'outbox', id]);
         });
     }
 
     private setContext(serviceId: number): void {
-        const contextObservable: Observable<StepContext> = forkJoin([
+        forkJoin([
             this.servicesApi.getByEntityId(serviceId).pipe(
                 switchMap(service =>
                     this.mastersApi.getByEntityId(service.professional).pipe(
@@ -84,20 +80,19 @@ export class OrderPage {
                 )
             ),
             this.userManagerService.getCurrentUser()
-        ]).pipe(
-            map(([{ service, professional }, client]) => ({
-                service,
-                professional,
-                client
-            }))
-        );
-        this.wizardState.setContext(contextObservable);
+        ]).pipe(first()).subscribe(async ([{service, professional}, client]) => {
+                await this.wizardState.setContext({
+                    service,
+                    professional,
+                    client
+                });
+            });
     }
 
     private subscribeToRouteParams(): void {
         this.route.params
             .pipe(
-                map(({ serviceId }) => serviceId),
+                map(({serviceId}) => serviceId),
                 filter(serviceId => Boolean(serviceId)),
                 takeUntil(this.ngDestroy$)
             )

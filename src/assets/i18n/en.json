@@ -616,6 +616,9 @@
       "client-details": "Order on behalf of",
       "summary": "Service order"
     },
+    "identification": "Your contacts",
+    "registered-user": "This email is registered. Please enter your password",
+    "new-user": "Please enter a password. You can use it to track your order status",
     "title": "Service order",
     "selected-service": "Selected service",
     "order-service": "Place order",

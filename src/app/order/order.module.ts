@@ -1,21 +1,23 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RegistrationPageModule} from '@app/auth/pages/registration/registration.module';
 import {
-    ClientDetailsStepComponent,
+    ClientDetailsStepComponent, ClientIdentificationComponent,
     DateTimeStepComponent,
     LocationStepComponent,
     OrderConfirmationComponent,
     SummaryStepComponent
 } from '@app/order/components';
-import { SharedModule } from '@app/shared/shared.module';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StepContainerComponent } from './components/step-container/step-container.component';
-import { OrderFirstStepGuardService } from './guards/order-first-step-guard.service';
-import { OrderRoutingModule } from './order-routing.module';
-import { OrderPage } from './order.page';
-import { OrderWizardStateService } from './services/order-wizard-state.service';
+import {SharedModule} from '@app/shared/shared.module';
+import {IonicModule} from '@ionic/angular';
+import {TranslateModule} from '@ngx-translate/core';
+import { IonicSelectableModule } from 'ionic-selectable';
+import {StepContainerComponent} from './components/step-container/step-container.component';
+import {OrderAuthenticationGuardService, OrderFirstStepGuardService} from './guards';
+import {OrderRoutingModule} from './order-routing.module';
+import {OrderPage} from './order.page';
+import {OrderWizardStateService} from './services';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,8 @@ import { OrderWizardStateService } from './services/order-wizard-state.service';
         ClientDetailsStepComponent,
         SummaryStepComponent,
         OrderConfirmationComponent,
-        StepContainerComponent
+        StepContainerComponent,
+        ClientIdentificationComponent
     ],
     imports: [
         CommonModule,
@@ -34,8 +37,11 @@ import { OrderWizardStateService } from './services/order-wizard-state.service';
         TranslateModule,
         OrderRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        IonicSelectableModule,
+        RegistrationPageModule
     ],
-    providers: [OrderFirstStepGuardService, OrderWizardStateService]
+    providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService]
 })
-export class OrderPageModule {}
+export class OrderPageModule {
+}

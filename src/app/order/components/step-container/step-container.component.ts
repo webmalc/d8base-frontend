@@ -2,7 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { ActivatedRoute } from '@angular/router';
 import { SentOrder } from '@app/core/models/sent-order';
 import { StepComponent } from '@app/order/abstract/step';
-import { OrderIds, StepContext, StepModel } from '@app/order/order-steps';
+import { OrderIds } from '@app/order/enums/order-ids.enum';
+import StepContext from '@app/order/interfaces/step-context.interface';
+import StepModel from '@app/order/interfaces/step-model.interface';
 import { OrderWizardStateService } from '@app/order/services';
 import { Observable, Subject } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';

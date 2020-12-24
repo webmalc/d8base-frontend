@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
-import { catchError, filter, first, map, switchMap } from 'rxjs/operators';
-import { initState, OrderIds, orderWizardStorageKey, ORDER_STEPS, StepContext, StepModel, StepsState } from '../order-steps';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
+import {OrderIds} from '@app/order/enums/order-ids.enum';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {filter, first, map, switchMap} from 'rxjs/operators';
+import StepContext from '../interfaces/step-context.interface';
+import StepModel from '../interfaces/step-model.interface';
+import { StepsState } from '../interfaces/steps-state.type';
+import {initState, orderWizardStorageKey, ORDER_STEPS} from '../order-steps';
 
 @Injectable()
 export class OrderWizardStateService {
@@ -13,23 +17,24 @@ export class OrderWizardStateService {
     private readonly state$ = new BehaviorSubject<StepsState>(null);
     private readonly context$ = new BehaviorSubject<StepContext>(null);
     private readonly reset$ = new Subject<void>();
-    private readonly submit$ = new Subject<void>();
+    private readonly submit$ = new Subject<StepsState>();
     private readonly isStateEmpty$: Observable<boolean> = this.state$.pipe(
         map(state => {
-            return !state || JSON.stringify(initState) === JSON.stringify(this.state$.value);
+            return !state || JSON.stringify(initState) === JSON.stringify(state);
         })
     );
     private path: string;
     private storageKey: string;
 
-    constructor(private readonly router: Router, private readonly storage: StorageManagerService) {}
+    constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
+    }
 
-    public submit(): Observable<void> {
+    public submit(): Observable<StepsState> {
         return this.submit$.asObservable();
     }
 
     public doSubmit(): void {
-        this.submit$.next();
+        this.submit$.next(this.state$.value);
     }
 
     public getCurrentStep(): Observable<StepModel> {
@@ -55,13 +60,13 @@ export class OrderWizardStateService {
         return this.getStepStateById(this.getIdOfCurrentStep());
     }
 
-    public setStepStateById(id: string, data: any = initState[id]): void {
-        const newState = {
+    public async setStepStateById(id: string, data: any = initState[id]): Promise<void> {
+        const newState: StepsState = {
             ...this.state$.value,
             [id]: data
         };
         this.state$.next(newState);
-        this.storage.set(this.storageKey, newState);
+        await this.storage.set(this.storageKey, newState);
     }
 
     public setCurrentStepState(data: any): void {
@@ -96,7 +101,7 @@ export class OrderWizardStateService {
     }
 
     public isLastStep(): Observable<boolean> {
-        return this.currentStep$.asObservable().pipe(map(({ id }) => this.steps.ids.lastIndexOf(id) === this.steps.ids.length - 1));
+        return this.currentStep$.asObservable().pipe(map(({id}) => this.steps.ids.lastIndexOf(id) === this.steps.ids.length - 1));
     }
 
     public isAbleToNext(): Observable<boolean> {
@@ -111,23 +116,13 @@ export class OrderWizardStateService {
         this.router.navigate([this.path, this.getIdOfCurrentStep()]);
     }
 
-    public setContext(context$: Observable<StepContext>): void {
-        context$
-            .pipe(
-                switchMap(context => {
-                    const { service, client } = context;
-                    this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
-
-                    return from(this.storage.get(this.storageKey)).pipe(map(state => ({ context, state })));
-                }),
-                catchError(err => of(err))
-            )
-            .subscribe(({ context, state }) => {
-                const { service } = context;
-                this.setPath(`order/${service?.id}`);
-                this.state$.next(state ?? initState);
-                this.context$.next(context);
-            });
+    public async setContext(context: StepContext): Promise<void> {
+        const {service, client} = context;
+        this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
+        const state: StepsState = await this.storage.get(this.storageKey);
+        this.setPath(`order/${service?.id}`);
+        this.state$.next(state ?? initState);
+        this.context$.next(context);
     }
 
     public getContext(): Observable<StepContext> {
@@ -139,7 +134,7 @@ export class OrderWizardStateService {
     }
 
     public getFirstStep(): Observable<StepModel> {
-        const { byId, ids } = this.steps;
+        const {byId, ids} = this.steps;
 
         return of(byId[ids[0]]);
     }

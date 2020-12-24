@@ -4,7 +4,7 @@ import { User } from '@app/core/models/user';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderClientDetailsFormFields } from '@app/order/enums/order-client-details-form';
-import { ClientDetailsStepData } from '@app/order/order-steps';
+import { ClientDetailsStepData } from '@app/order/interfaces/client-details-step-data.type';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

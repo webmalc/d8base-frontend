@@ -4,7 +4,8 @@ import { ProfessionalLocationInline } from '@app/api/models';
 import { UserLocationApiService } from '@app/core/services';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { StepComponent } from '@app/order/abstract/step';
-import { LocationStepData, StepContext } from '@app/order/order-steps';
+import LocationStepData from '@app/order/interfaces/location-step-data.interface';
+import StepContext from '@app/order/interfaces/step-context.interface';
 import { forkJoin, Observable } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
