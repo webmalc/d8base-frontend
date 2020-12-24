@@ -1,11 +1,10 @@
-import {ComponentFixture, fakeAsync, inject, TestBed} from '@angular/core/testing';
-import {IonButtons, IonicModule} from '@ionic/angular';
-
 import {Component, DebugElement} from '@angular/core';
+import {ComponentFixture, fakeAsync, inject, TestBed} from '@angular/core/testing';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
+import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {CameraPhoto} from '@capacitor/core';
-import {ProfileFormFields} from '../../../profile/enums/profile-form-fields';
+import {IonButtons, IonicModule} from '@ionic/angular';
 import {FileService} from '../../services/file.service';
 import {PhotoService} from '../../services/photo.service';
 import {PictureSelectorComponent} from './picture-selector.component';
