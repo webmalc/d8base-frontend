@@ -24,12 +24,6 @@ export const mainMenuItems: MainMenuItem[] = [
         link: '/search'
     },
     {
-        title: 'template.favorites',
-        icon: 'heart-outline',
-        link: '/favorites',
-        userOnly: true
-    },
-    {
         title: 'template.my-orders',
         icon: 'calendar-outline',
         link: '/my-orders/inbox',
@@ -40,12 +34,6 @@ export const mainMenuItems: MainMenuItem[] = [
         icon: 'calendar-outline',
         link: '/my-orders/outbox',
         clientOnly: true
-    },
-    {
-        title: 'template.download',
-        icon: 'cloud-download-outline',
-        link: '/app',
-        desktopOnly: true
     },
     {
         title: 'template.sign-in',
@@ -77,12 +65,6 @@ export const mainMenuItems: MainMenuItem[] = [
         masterOnly: true
     },
     {
-        title: 'template.preferences',
-        icon: 'settings-outline',
-        link: '/preferences',
-        userOnly: true
-    },
-    {
         title: 'template.miscellaneous',
         isHeader: true
     },
@@ -90,11 +72,6 @@ export const mainMenuItems: MainMenuItem[] = [
         title: 'template.service',
         icon: 'medal-outline',
         link: '/service/publish'
-    },
-    {
-        title: 'template.support',
-        icon: 'help-circle-outline',
-        link: '/support'
     },
     {
         title: 'template.logout',
