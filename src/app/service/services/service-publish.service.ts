@@ -21,7 +21,7 @@ import {ServicePublishDataPreparerService} from '@app/service/services/service-p
 import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {forkJoin, from, Observable, of} from 'rxjs';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {finalize, map, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class ServicePublishService {
@@ -44,12 +44,7 @@ export class ServicePublishService {
     public publish(): Observable<Service> {
         return from(this.servicePublishDataFormatter.getData()).pipe(
             switchMap(data => this.processData(data)),
-            tap(() => this.servicePublishDataHolder.reset()),
-            catchError(err => {
-                this.servicePublishDataHolder.reset();
-
-                return of(err);
-            })
+            finalize(() => this.servicePublishDataHolder.reset())
         );
     }
 

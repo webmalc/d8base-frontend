@@ -5,13 +5,12 @@ import {MasterManagerService} from '@app/core/services';
 import {LoadingService} from '@app/core/services/loading.service';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
 import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServicePublishService} from '@app/service/services/service-publish.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Observable} from 'rxjs';
-import {map, single, tap} from 'rxjs/operators';
+import {finalize, map, single} from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-final-step',
@@ -46,11 +45,10 @@ export class ServicePublishFinalStepComponent {
         this.servicePublish.publish()
             .pipe(
                 single(),
-                tap(_ => this.loading.loadingDismiss())
+                finalize(() => this.loading.loadingDismiss())
             )
             .subscribe(
-                (service) => this.router.navigate(['service', service.id]),
-                _ => this.loading.loadingDismiss()
+                (service) => this.router.navigate(['service', service.id])
             );
     }
 
