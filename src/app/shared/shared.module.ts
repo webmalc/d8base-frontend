@@ -52,6 +52,7 @@ import {BrMaskerModule} from 'br-mask';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {ImageCropPopoverComponent} from './components/picture-selector/image-cropper/image-crop-popover.component';
+import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import {DebounceDirective} from './directives/debounce.directive';
 import {MainColumnDirective} from './directives/main-column.directive';
 import {NumberDirective} from './directives/number.directive';
@@ -97,7 +98,8 @@ import {NumberDirective} from './directives/number.directive';
         ScheduleViewerComponent,
         DurationViewerComponent,
         InputErrorDescriptionComponent,
-        SuccessFlashbagComponent
+        SuccessFlashbagComponent,
+        ServicePhotosComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -135,7 +137,8 @@ import {NumberDirective} from './directives/number.directive';
         ScheduleViewerComponent,
         DurationViewerComponent,
         InputErrorDescriptionComponent,
-        SuccessFlashbagComponent
+        SuccessFlashbagComponent,
+        ServicePhotosComponent
     ],
     imports: [
         CommonModule,

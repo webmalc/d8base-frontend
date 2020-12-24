@@ -1,0 +1,9 @@
+<!-- <ng-container *ngIf="servicePhotos | async as servicePhotos"> -->
+<ng-container *ngIf="servicePhotos?.length">
+    <!-- <ion-item *ngFor="let servicePhoto of servicePhotos.results" lines="none"> -->
+    <ion-thumbnail *ngFor="let servicePhoto of servicePhotos">
+        <ion-img [src]="servicePhoto.photo"></ion-img>
+    </ion-thumbnail>
+</ng-container>
+<!-- </ion-item> -->
+<!-- </ng-container> -->

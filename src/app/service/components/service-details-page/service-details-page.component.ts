@@ -1,11 +1,11 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ProfessionalList} from '@app/api/models';
-import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
-import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
-import {Service} from '@app/service/models/service';
-import {first, switchMap, tap} from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProfessionalList } from '@app/api/models';
+import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
+import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
+import { Service } from '@app/service/models/service';
+import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-details-page',
@@ -26,9 +26,18 @@ export class ServiceDetailsPageComponent {
     ) {
         route.params.pipe(
             first(params => Boolean(params?.id)),
-            switchMap(params => servicesApi.getByEntityId(params.id)),
-            tap(service => this.service = service),
-            switchMap(service => masterApi.getByEntityId(service.professional))
-        ).subscribe(master => this.master = master);
+            switchMap(params => servicesApi.getByEntityId(params.id).pipe(
+                switchMap(service => masterApi.getByEntityId(service.professional).pipe(
+                map((master) => {
+                    return {
+                        master,
+                        service
+                    };
+                })))
+            ))
+        ).subscribe(({ master, service }) => {
+            this.master = master;
+            this.service = service;
+        });
     }
 }
