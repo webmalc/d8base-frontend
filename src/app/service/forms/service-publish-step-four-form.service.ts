@@ -19,9 +19,9 @@ export class ServicePublishStepFourFormService {
                         '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
                 ])],
                 [ServicePublishStepFourFormFields.Password]: [null,
-                    Validators.compose([Validators.required, Validators.minLength(6)])],
+                    Validators.compose([Validators.required, Validators.minLength(8)])],
                 [ServicePublishStepFourFormFields.Confirm]: [null,
-                    Validators.compose([Validators.required, Validators.minLength(6)])],
+                    Validators.compose([Validators.required, Validators.minLength(8)])],
                 [ServicePublishStepFourFormFields.Country]: [null, Validators.required],
                 [ServicePublishStepFourFormFields.City]: [null, Validators.required]
             },

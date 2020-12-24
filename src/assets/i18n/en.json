@@ -283,7 +283,7 @@
       "create-password": "Please enter a new password",
       "second-info-row": "You can edit the service after the publication",
       "password-placeholder": "Enter password",
-      "password-info": "Minimum password length is 6 symbols",
+      "password-info": "Minimum password length is 8 symbols",
       "password-confirm": "Confirm password",
       "forgot-password": "Forgot?",
       "user-exists": "I am an existing user",
@@ -343,7 +343,9 @@
         "title": "Service schedule",
         "add-new-time": "Add new time",
         "popover-title": "Choose day"
-      }
+      },
+      "use_default-location": "Use existing address",
+      "select-default-location": "Select address"
     },
     "final-step": {
       "title": "Congratulations! All set.",

@@ -20,8 +20,10 @@ export class ServicePublishStepSevenFormService {
             [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
             [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
             [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false],
+            [ServicePublishStepSevenFormFields.UseDefaultLocation]: [data?.use_default_location ?? false],
             [ServicePublishStepSevenFormFields.MaxDistance]: [data?.max_distance],
-            [ServicePublishStepSevenFormFields.Units]: [data?.units]
+            [ServicePublishStepSevenFormFields.Units]: [data?.units],
+            [ServicePublishStepSevenFormFields.DefaultLocation]: [data?.default_location]
         });
     }
 

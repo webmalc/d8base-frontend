@@ -33,8 +33,8 @@ export class RegistrationFormService {
                         '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
                 ])],
                 [RegistrationFormFields.Name]: ['', Validators.required],
-                [RegistrationFormFields.Password]: ['', Validators.required],
-                [RegistrationFormFields.Confirm]: ['', Validators.required],
+                [RegistrationFormFields.Password]: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+                [RegistrationFormFields.Confirm]: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
                 [RegistrationFormFields.Country]: ['', Validators.required],
                 [RegistrationFormFields.City]: [''],
                 [RegistrationFormFields.Phone]: ['']
