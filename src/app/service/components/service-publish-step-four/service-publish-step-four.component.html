@@ -2,6 +2,11 @@
 <ion-content class="ion-padding-top">
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
+            <ion-row class="ion-justify-content-start ion-align-items-center">
+                <ion-item class="ion-item-no-border fs18">
+                    <error-flashbag [messages]="errorMessages"></error-flashbag>
+                </ion-item>
+            </ion-row>
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
                 <ion-item
                         class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding ion-padding-vertical">

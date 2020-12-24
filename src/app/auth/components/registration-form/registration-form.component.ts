@@ -27,7 +27,7 @@ export class RegistrationFormComponent implements OnInit {
     public readonly formFields = RegistrationFormFields;
     public supposedCities$: BehaviorSubject<City> = new BehaviorSubject<City>(null);
     @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: UserLocation }>();
-    private readonly distance = 2000;
+    private readonly distance = 15000;
 
     constructor(
         public readonly registrationFormService: RegistrationFormService,

@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
 import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
+import {LocationService} from '@app/core/services/location.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
+import {MasterLocation} from '@app/master/models/master-location';
 import {MasterSchedule} from '@app/master/models/master-schedule';
+import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {MasterScheduleApiService} from '@app/master/services/master-schedule-api.service';
 import {City} from '@app/profile/models/city';
 import {Country} from '@app/profile/models/country';
@@ -32,6 +35,8 @@ export class ServicePublishStepSevenComponent extends Reinitable {
 
     public formFields = ServicePublishStepSevenFormFields;
     public renderUseMasterSchedule: boolean = false;
+    public defaultLocationList: MasterLocation[];
+    public isUseDefaultLocation: boolean = false;
     public selectedSchedules = [];
     public masterSchedules = [];
     public serviceSchedules = [];
@@ -47,7 +52,9 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         private readonly authStateManager: ServicePublishAuthStateManagerService,
         private readonly masterScheduleApi: MasterScheduleApiService,
         private readonly masterManager: MasterManagerService,
-        private readonly userSetting: UserSettingsService
+        private readonly userSetting: UserSettingsService,
+        private readonly extendedLocation: LocationService,
+        private readonly masterLocation: MasterLocationApiService
     ) {
         super();
     }
@@ -58,6 +65,10 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         data.need_to_create_master_schedule = !this.renderUseMasterSchedule;
         if (!this.renderUseMasterSchedule) {
             data.use_master_schedule = true;
+        }
+        if (this.isUseDefaultLocation) {
+            const masterLocation: MasterLocation = this.formService.form.get(this.formFields.DefaultLocation).value;
+            this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Final, {masterLocation});
         }
         this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
         this.serviceStepsNavigationService.next();
@@ -77,17 +88,28 @@ export class ServicePublishStepSevenComponent extends Reinitable {
                     ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
                 )) === undefined)
             ) || (
-                this.renderLocation() &&
+                this.renderLocation() && !this.isUseDefaultLocation &&
                 !this.formService.form.get(ServicePublishStepSevenFormFields.Country).value &&
                 !this.formService.form.get(ServicePublishStepSevenFormFields.City).value &&
                 !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value &&
                 !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
                 !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value
+            ) || (
+                this.isClientPlaceService() && !this.isUseDefaultLocation &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value
+            ) || (
+                this.isMasterPlaceService() && !this.isUseDefaultLocation &&
+                !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value
             );
     }
 
     public renderLocation(): boolean {
         return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type !== 'online';
+    }
+
+    public useDefaultLocation(): boolean {
+        return this.formService.getFormFieldValue(this.formFields.UseDefaultLocation) as boolean;
     }
 
     public useMasterSchedule(): boolean {
@@ -119,8 +141,21 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         this.selectedSchedules = checked ? this.masterSchedules : this.serviceSchedules;
     }
 
+    public toggleUseDefaultLocation(event: CustomEvent): void {
+        this.isUseDefaultLocation = event.detail.checked;
+    }
+
+    public isClientPlaceService(): boolean {
+        return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type === 'client';
+    }
+
+    public isMasterPlaceService(): boolean {
+        return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type === 'professional';
+    }
+
     protected init(): void {
         this.authStateManager.updateFourStepState();
+        this.initMasterLocation();
         const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
         this.initSchedules(stepData);
         if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Seven)) {
@@ -131,6 +166,52 @@ export class ServicePublishStepSevenComponent extends Reinitable {
             this.formService.setControlDisabled(true, this.formFields.Postal);
         }
         this.initDefaultUnits();
+        this.initMaxDistance();
+    }
+
+    private initMaxDistance(): void {
+        if (!this.isClientPlaceService()) {
+            this.formService.form.get(this.formFields.MaxDistance).setValue(0);
+        }
+    }
+
+    private initMasterLocation(): void {
+        this.masterManager.getMasterList().pipe(
+            switchMap(list => list.length > 0 ?
+                this.extendedLocation.getList<MasterLocation>(this.masterLocation) :
+                of(null)
+            )
+        ).subscribe((res: MasterLocation[]) => {
+            if (res && res.length > 0) {
+                const defaultLocations = this.getCorrectLocations(res);
+                if (defaultLocations.length > 0) {
+                    this.defaultLocationList = defaultLocations;
+                }
+            }
+        });
+    }
+
+    private getCorrectLocations(locations: MasterLocation[]): MasterLocation[] {
+        const ret: MasterLocation[] = [];
+        locations.forEach(
+            loc => {
+                if (this.checkDefaultLocation(loc)) {
+                    ret.push(loc);
+                }
+            }
+        );
+
+        return ret;
+    }
+
+    private checkDefaultLocation(loc: MasterLocation): boolean {
+        if (loc.country && loc.city) {
+            const stepTwo = this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
+
+            return !(stepTwo.service_type === 'professional' && !loc.address);
+        }
+
+        return false;
     }
 
     private initDefaultUnits(): void {

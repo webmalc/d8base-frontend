@@ -106,7 +106,7 @@
             <ion-label>
                 {{"master-profile.info.professional-experience"|translate}}
             </ion-label>
-            <ion-text>
+            <ion-text *ngIf="context.master.experience">
                 {{context.master.experience}} {{declinationYears(context.master?.experience) | translate}}
             </ion-text>
         </ion-item>

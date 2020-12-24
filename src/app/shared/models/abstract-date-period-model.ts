@@ -7,7 +7,11 @@ export class AbstractDatePeriodModel {
     @Expose() public end_date: string;
 
     public formatDates(): void {
-        this.start_date = HelperService.fromDatetime(this.start_date).date;
-        this.end_date = HelperService.fromDatetime(this.end_date).date;
+        if (this.start_date) {
+            this.start_date = HelperService.fromDatetime(this.start_date).date;
+        }
+        if (this.end_date) {
+            this.end_date = HelperService.fromDatetime(this.end_date).date;
+        }
     }
 }
