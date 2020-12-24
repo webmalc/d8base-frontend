@@ -1,9 +1,9 @@
+import {Type} from '@angular/core';
+import {CanActivate} from '@angular/router';
 import {ClientDetailsStepComponent} from '@app/order//components/client-details-step/client-details-step.component';
 import {SummaryStepComponent} from '@app/order//components/summary-step/summary-step.component';
 import {DateTimeStepComponent} from '@app/order/components/date-time-step/date-time-step.component';
 import {LocationStepComponent} from '@app/order/components/location-step/location-step.component';
-import {OrderAuthenticationGuardService} from '@app/order/guards/order-authentication-guard.service';
-import {OrderFirstStepGuardService} from '@app/order/guards/order-first-step-guard.service';
 import StepsModel from '@app/order/interfaces/steps-model.interface';
 import {OrderIds} from './enums/order-ids.enum';
 import {StepsState} from './interfaces/steps-state.type';
@@ -26,19 +26,19 @@ export const ORDER_STEPS: StepsModel = {
         [OrderIds.Location]: {
             id: OrderIds.Location,
             component: LocationStepComponent,
-            canActivate: [OrderFirstStepGuardService, OrderAuthenticationGuardService],
+            needGuards: true,
             title: 'order.step.location'
         },
         [OrderIds.ClientDetails]: {
             id: OrderIds.ClientDetails,
             component: ClientDetailsStepComponent,
-            canActivate: [OrderFirstStepGuardService, OrderAuthenticationGuardService],
+            needGuards: true,
             title: 'order.step.client-details'
         },
         [OrderIds.Summary]: {
             id: OrderIds.Summary,
             component: SummaryStepComponent,
-            canActivate: [OrderFirstStepGuardService, OrderAuthenticationGuardService],
+            needGuards: true,
             title: 'order.step.summary'
         }
     },
@@ -51,12 +51,12 @@ export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => {
 
 export const orderWizardStorageKey = 'orderWizardStorageKey';
 
-export const stepsRoutes = Object.values(ORDER_STEPS.byId)
-    .map(({component, canActivate, id}) => {
+export const stepsRoutes = (guards: Type<CanActivate>[]) => Object.values(ORDER_STEPS.byId)
+    .map(({component, needGuards, id}) => {
         return {
             path: `${id}`,
             pathMatch: 'full',
-            canActivate,
+            canActivate: needGuards ? guards : null,
             component
         };
     });

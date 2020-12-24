@@ -3,13 +3,11 @@ import {ActivatedRouteSnapshot, CanActivate, Router, UrlTree} from '@angular/rou
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {OrderWizardStateService} from '../services';
 
 @Injectable()
 export class OrderAuthenticationGuardService implements CanActivate {
     constructor(
         private readonly authService: AuthenticationService,
-        private readonly wizardState: OrderWizardStateService,
         private readonly router: Router
     ) {
     }
