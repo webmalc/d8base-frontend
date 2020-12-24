@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { OrderFirstStepGuardService } from './guards/order-first-step-guard.service';
-import { ORDER_STEPS, stepsRoutes } from './order-steps';
-import { OrderPage } from './order.page';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {OrderAuthenticationGuardService, OrderFirstStepGuardService} from '@app/order/guards';
+import {ClientIdentificationComponent} from './components/';
+import {ORDER_STEPS, stepsRoutes} from './order-steps';
+import {OrderPage} from './order.page';
 
 const routes: Routes = [
     {
@@ -14,7 +15,12 @@ const routes: Routes = [
                 pathMatch: 'full',
                 redirectTo: `${ORDER_STEPS.ids[0]}`
             },
-            ...stepsRoutes([OrderFirstStepGuardService])
+            ...stepsRoutes([OrderFirstStepGuardService, OrderAuthenticationGuardService]),
+            {
+                path: 'contact-info',
+                pathMatch: 'full',
+                component: ClientIdentificationComponent
+            }
         ]
     }
 ];
@@ -23,4 +29,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class OrderRoutingModule {}
+export class OrderRoutingModule {
+}

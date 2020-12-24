@@ -4,7 +4,8 @@ import {HelperService} from '@app/core/services/helper.service';
 import {MasterCalendar} from '@app/master/models/master-calendar';
 import {CalendarApiService} from '@app/master/services/calendar-api.service';
 import {StepComponent} from '@app/order/abstract/step';
-import {DateTimeStepData, StepContext} from '@app/order/order-steps';
+import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
+import StepContext from '@app/order/interfaces/step-context.interface';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 

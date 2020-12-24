@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, UrlTree} from '@angular/router';
+import {AuthenticationService} from '@app/core/services/authentication.service';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {OrderWizardStateService} from '../services';
 
 @Injectable()
-export class OrderFirstStepGuardService implements CanActivate {
+export class OrderAuthenticationGuardService implements CanActivate {
     constructor(
-        private readonly wizardState: OrderWizardStateService,
+        private readonly authService: AuthenticationService,
         private readonly router: Router
     ) {
     }
@@ -16,18 +16,16 @@ export class OrderFirstStepGuardService implements CanActivate {
         route: ActivatedRouteSnapshot
     ): Observable<boolean | UrlTree> {
         return combineLatest([
-            this.wizardState.isStateEmpty(),
-            this.wizardState.getFirstStep()
+            this.authService.isAuthenticated$
         ]).pipe(
-            map(([isEmptyState, firstStep]) => {
-                const routeStepId = route.url[0]?.path;
-                const serviceId = route.params.serviceId;
-                if (routeStepId === firstStep.id || !isEmptyState) {
+            map(([isAuth]) => {
+                if (isAuth) {
                     return true;
                 }
+                const serviceId = route.params.serviceId;
 
                 return this.router.parseUrl(
-                    `order/${serviceId}/${firstStep.id}`
+                    `order/${serviceId}/contact-info`
                 );
             })
         );

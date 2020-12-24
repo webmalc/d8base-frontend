@@ -1,6 +1,5 @@
-import {HttpClient, HttpHandler} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
 import {IonicModule} from '@ionic/angular';
@@ -15,8 +14,8 @@ describe('LocationStepComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LocationStepComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
-            providers: [OrderWizardStateService, HttpClient, HttpHandler, FormBuilder]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+            providers: [OrderWizardStateService]
         }).compileComponents();
 
         fixture = TestBed.createComponent(LocationStepComponent);
