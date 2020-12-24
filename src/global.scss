@@ -32,6 +32,10 @@
     margin-left: .1em;
   }
 
+  .ion-item-default-bgc {
+    --background: var(--ion-background-color)
+  }
+
   .map-popover-width {
     --width: 40vw;
     @media (max-width: 1200px) {
