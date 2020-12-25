@@ -351,8 +351,10 @@
         "add-new-time": "Добавить еще время",
         "popover-title": "Выберите день недели"
       },
-      "use_default-location": "Использовать существующий адресс",
-      "select-default-location": "Выберите адресс"
+      "use_default-location": "Использовать существующий адрес",
+      "select-default-location": "Выберите адрес",
+      "instant-booking": "Автоподтверждение (Instant Booking)",
+      "instant-booking-label": "Подтверждать услугу автоматически"
     },
     "final-step": {
       "title": "Поздравляем! Все готово к отправке.",

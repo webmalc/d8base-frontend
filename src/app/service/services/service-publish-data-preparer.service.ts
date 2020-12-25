@@ -84,13 +84,13 @@ export class ServicePublishDataPreparerService {
     }
 
     private getService(): Service {
-        const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
-        const service = plainToClass(Service, stepData, {excludeExtraneousValues: true});
-        service.duration = stepData.duration;
-        service.is_base_schedule = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-            .use_master_schedule || this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-            .need_to_create_master_schedule;
-        service.is_enabled = true;
+        const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
+        const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+        const service = plainToClass(Service, stepTwoData, {excludeExtraneousValues: true});
+        service.duration = stepTwoData.duration;
+        service.is_base_schedule = stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule;
+        service.is_auto_order_confirmation = stepSevenData.is_auto_order_confirmation ?? false;
+        service.is_enabled = true; // always create already published service; the owner can un-publish it later
 
         return HelperService.clear(service);
     }

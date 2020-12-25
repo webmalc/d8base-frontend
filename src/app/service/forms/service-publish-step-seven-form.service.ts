@@ -23,7 +23,8 @@ export class ServicePublishStepSevenFormService {
             [ServicePublishStepSevenFormFields.UseDefaultLocation]: [data?.use_default_location ?? false],
             [ServicePublishStepSevenFormFields.MaxDistance]: [data?.max_distance],
             [ServicePublishStepSevenFormFields.Units]: [data?.units],
-            [ServicePublishStepSevenFormFields.DefaultLocation]: [data?.default_location]
+            [ServicePublishStepSevenFormFields.DefaultLocation]: [data?.default_location],
+            [ServicePublishStepSevenFormFields.InstantBooking]: [data?.is_auto_order_confirmation]
         });
     }
 

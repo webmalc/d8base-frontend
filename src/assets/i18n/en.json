@@ -352,7 +352,9 @@
         "popover-title": "Choose day"
       },
       "use_default-location": "Use existing address",
-      "select-default-location": "Select address"
+      "select-default-location": "Select address",
+      "instant-booking": "Instant Booking",
+      "instant-booking-label": "Confirm service order automatically"
     },
     "final-step": {
       "title": "Congratulations! All set.",
