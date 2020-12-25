@@ -58,16 +58,14 @@
                     </ion-item>
                 </ion-row>
             </ion-row>
-            <ion-row *ngFor="let service of getServiceList()" class="ion-nowrap ion-justify-content-between">
-                <ion-item class="ion-item-no-border ion-item-no-min-height">
-                    <a [routerLink]="'/service/' + service?.id">
-                        {{service.name}}
-                    </a>
-                </ion-item>
-                <ion-row class="ion-justify-content-end">
+            <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
+                <ion-label>
+                    {{service.name}}
+                </ion-label>
+                <ion-note slot="end" class="ion-text-end">
                     <app-price [price]="service.price"></app-price>
-                </ion-row>
-            </ion-row>
+                </ion-note>
+            </ion-item>
             <ion-row *ngIf="needToRenderMoreServicesBtn()">
                 <ion-item (click)="onMoreServicesClick()"
                           class="ion-item-no-border ion-item-no-min-height more-services cursor-pointer">
