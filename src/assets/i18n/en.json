@@ -42,6 +42,11 @@
     "back": "Back",
     "save": "Save"
   },
+  "delete-confirmation": {
+    "delete-service": "Delete service?",
+    "okay": "Okay",
+    "cancel": "Cancel"
+  },
   "error": {
     "password-mismatch": "Passwords mismatch",
     "password-too-short": "Password is too short",
@@ -412,7 +417,8 @@
         "not-published": "Service not published",
         "publish": "Publish",
         "unpublish": "Unpublish",
-        "view": "Review"
+        "view": "Review",
+        "delete": "Delete"
       },
       "service-presentation": {
         "pick": "Date",

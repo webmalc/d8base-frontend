@@ -42,6 +42,11 @@
     "forward": "Продолжить",
     "save": "Сохранить"
   },
+  "delete-confirmation": {
+    "delete-service": "Удалить услугу?",
+    "okay": "Удалить",
+    "cancel": "Отмена"
+  },
   "error": {
     "password-mismatch": "Пароли должны совпадать",
     "password-too-short": "Пароль слишком короткий",
@@ -412,7 +417,8 @@
         "not-published": "Услуга не опубликована",
         "publish": "Опубликовать",
         "unpublish": "Снять с публикации",
-        "view": "Просмотр"
+        "view": "Просмотр",
+        "delete": "Удалить"
       },
       "service-presentation": {
         "pick": "Дата",

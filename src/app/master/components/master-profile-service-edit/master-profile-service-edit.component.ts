@@ -11,8 +11,13 @@ export class MasterProfileServiceEditComponent {
     @Input() public service: Service;
     @Output() public enableService: EventEmitter<Service> = new EventEmitter<Service>();
     @Output() public disableService: EventEmitter<Service> = new EventEmitter<Service>();
+    @Output() public deleteService: EventEmitter<Service> = new EventEmitter<Service>();
 
     public onIsEnabled(isEnabled: boolean): void {
         isEnabled ? this.enableService.emit(this.service) : this.disableService.emit(this.service);
+    }
+
+    public delete(): void {
+        this.deleteService.emit(this.service);
     }
 }
