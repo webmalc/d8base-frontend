@@ -5,7 +5,7 @@
             <ion-col appMainColumn>
                 <ion-item color="light" lines="full">
                     <ion-buttons slot="start">
-                        <ion-button routerLink="/search" routerDirection="back">
+                        <ion-button (click)="location.back()">
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </ion-button>
                     </ion-buttons>
@@ -17,9 +17,13 @@
                     <app-service-widget [service]="service" [master]="master"
                                         [alwaysExpanded]="true">
                     </app-service-widget>
-                    <ion-button [routerLink]="'/order/' + service.id" size="full">
-                        {{ 'order.order-service' | translate }}
-                    </ion-button>
+                    <div class="ion-text-right">
+                        <ion-button color="secondary" size="default" class="ion-align-self-end"
+                                    [routerLink]="'/order/' + service.id">
+                            {{ "master-profile.services.service-presentation.pick" | translate }}
+                            <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
+                        </ion-button>
+                    </div>
                 </ng-container>
             </ion-col>
         </ion-row>

@@ -415,7 +415,8 @@
         "view": "Review"
       },
       "service-presentation": {
-        "pick": "More info"
+        "pick": "Date",
+        "more-info": "More info"
       },
       "services-tab": {
         "master-services": "Professional services"

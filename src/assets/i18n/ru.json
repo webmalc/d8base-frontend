@@ -415,7 +415,8 @@
         "view": "Просмотр"
       },
       "service-presentation": {
-        "pick": "Подробнее"
+        "pick": "Дата",
+        "more-info": "Подробнее"
       },
       "services-tab": {
         "master-services": "Услуги мастера"
