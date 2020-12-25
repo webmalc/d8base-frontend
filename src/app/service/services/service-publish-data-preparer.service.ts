@@ -90,6 +90,7 @@ export class ServicePublishDataPreparerService {
         service.is_base_schedule = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
             .use_master_schedule || this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
             .need_to_create_master_schedule;
+        service.is_enabled = true;
 
         return HelperService.clear(service);
     }
