@@ -49,4 +49,13 @@ export class AppValidators {
         };
     }
 
+    public static forbidNumericValue(control: FormControl): ValidationErrors | null {
+        if (control.value && /^([0-9]*)$/.test(control.value)) {
+            return {
+                forbidNumericValue: true
+            };
+        }
+
+        return null;
+    }
 }

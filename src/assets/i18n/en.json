@@ -43,7 +43,9 @@
     "save": "Save"
   },
   "error": {
-    "password-mismatch": "Passwords mismatch"
+    "password-mismatch": "Passwords mismatch",
+    "password-too-short": "Password is too short",
+    "password-numeric": "Numeric passwords are forbidden"
   },
   "service-location": {
     "online": "Online",

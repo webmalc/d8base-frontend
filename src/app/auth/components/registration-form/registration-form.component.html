@@ -23,6 +23,10 @@
                            position="floating">{{ 'registration-form.password' | translate }}</ion-label>
                 <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
             </ion-item>
+            <app-input-error-description text="error.password-too-short" *ngIf="registrationFormService.getErrors(formFields.Password)?.minlength">
+            </app-input-error-description>
+            <app-input-error-description text="error.password-numeric" *ngIf="registrationFormService.getErrors(formFields.Password)?.forbidNumericValue">
+            </app-input-error-description>
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -32,8 +36,7 @@
                            position="floating">{{ 'registration-form.confirm' | translate }}</ion-label>
                 <ion-input type="password" name="confirm" [formControlName]="formFields.Confirm"></ion-input>
             </ion-item>
-            <app-input-error-description text="error.password-mismatch"
-                    *ngIf="registrationFormService.form.get(formFields.Confirm).invalid && registrationFormService.form.get(formFields.Confirm).dirty">
+            <app-input-error-description text="error.password-mismatch" *ngIf="registrationFormService.getErrors(formFields.Confirm)?.passwordMismatch">
             </app-input-error-description>
         </ion-col>
     </ion-row>

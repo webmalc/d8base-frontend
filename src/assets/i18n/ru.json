@@ -43,7 +43,9 @@
     "save": "Сохранить"
   },
   "error": {
-    "password-mismatch": "Пароли должны совпадать"
+    "password-mismatch": "Пароли должны совпадать",
+    "password-too-short": "Пароль слишком короткий",
+    "password-numeric": "Запрещены пароли состоящие из одних только цифр"
   },
   "service-location": {
     "online": "Онлайн услуга",

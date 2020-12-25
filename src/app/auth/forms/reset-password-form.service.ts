@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ResetPasswordFields} from '@app/auth/enums/reset-password-fields';
+import {passwordValidators} from '@app/core/validators/password-validators';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,8 @@ export class ResetPasswordFormService {
 
     public initForm(): void {
         this.form = this.builder.group({
-            [ResetPasswordFields.Password]: ['', Validators.required],
-            [ResetPasswordFields.Confirm]: ['', Validators.required]
+            [ResetPasswordFields.Password]: ['', passwordValidators],
+            [ResetPasswordFields.Confirm]: ['', passwordValidators]
         },
             {validators: this.checkPassword});
     }
