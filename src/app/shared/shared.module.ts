@@ -19,6 +19,7 @@ import {
     ScheduleEditorComponent,
     ScheduleViewerComponent,
     ServicePhotoLoaderComponent,
+    ServicePhotoPopoverComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -101,7 +102,8 @@ import { NumberDirective } from './directives/number.directive';
         InputErrorDescriptionComponent,
         SuccessFlashbagComponent,
         ServicePhotosComponent,
-        ServicePhotoLoaderComponent
+        ServicePhotoLoaderComponent,
+        ServicePhotoPopoverComponent
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -141,7 +143,8 @@ import { NumberDirective } from './directives/number.directive';
         InputErrorDescriptionComponent,
         SuccessFlashbagComponent,
         ServicePhotosComponent,
-        ServicePhotoLoaderComponent
+        ServicePhotoLoaderComponent,
+        ServicePhotoPopoverComponent
     ],
     imports: [
         CommonModule,

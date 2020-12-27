@@ -9,7 +9,7 @@
 </ion-button>
 <ion-spinner class="spinner" name="lines"></ion-spinner>
 <ion-slides class="slides" [options]="slideOptsTwo" #slides>
-    <ion-slide *ngFor="let servicePhoto of servicePhotos">
+    <ion-slide *ngFor="let servicePhoto of servicePhotos" (click)="zoomPhoto(servicePhoto)">
         <app-service-photo-loader [src]="servicePhoto.photo"></app-service-photo-loader>
     </ion-slide>
 </ion-slides>

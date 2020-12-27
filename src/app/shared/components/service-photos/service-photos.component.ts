@@ -11,9 +11,10 @@ import {
 } from '@angular/core';
 import { ServicePhotoList } from '@app/api/models';
 import { ServicesService } from '@app/api/services';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, PopoverController } from '@ionic/angular';
 import { from, Observable, Subject } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { ServicePhotoPopoverComponent } from '../service-photo-popover/service-photo-popover.component';
 
 @Component({
     selector: 'app-service-photos',
@@ -36,7 +37,11 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
     @ViewChild('slides', { static: false }) private readonly slides: IonSlides;
     private readonly ngDestroy$ = new Subject<void>();
 
-    constructor(private readonly servicesService: ServicesService, private readonly cd: ChangeDetectorRef) {}
+    constructor(
+        private readonly servicesService: ServicesService,
+        private readonly cd: ChangeDetectorRef,
+        private readonly popoverController: PopoverController
+    ) {}
 
     public ngOnInit(): void {
         this.subscribeServicePhotos();
@@ -57,6 +62,10 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
 
     public slidePrev(): void {
         this.slides.slidePrev();
+    }
+
+    public zoomPhoto(servicePhoto: ServicePhotoList): void {
+        this.createPopover(servicePhoto.photo);
     }
 
     private initNavigationButtonsAbility(): void {
@@ -80,5 +89,17 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
                 this.servicePhotos = res.results;
                 this.cd.markForCheck();
             });
+    }
+
+    private async createPopover(src: string): Promise<void> {
+        const pop = await this.popoverController.create({
+            component: ServicePhotoPopoverComponent,
+            translucent: true,
+            cssClass: 'popover-big',
+            componentProps: {
+                src
+            }
+        });
+        await pop.present();
     }
 }
