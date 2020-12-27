@@ -18,7 +18,11 @@
     </ion-chip>
 </ion-item>
 <ion-item lines="full">
-    <ion-button color="secondary" size="default" slot="end" [routerLink]="'/service/' + serviceData.service.id">
+    <ion-label slot="start" color="primary" class="cursor-pointer" [routerLink]="'/service/' + serviceData.service.id">
+        {{ "master-profile.services.service-presentation.more-info" | translate }}
+    </ion-label>
+    <ion-button color="secondary" size="default" slot="end" [routerLink]="'/order/' + serviceData.service.id">
         {{ "master-profile.services.service-presentation.pick" | translate }}
+        <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
     </ion-button>
 </ion-item>

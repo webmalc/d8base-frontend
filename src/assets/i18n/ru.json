@@ -42,8 +42,15 @@
     "forward": "Продолжить",
     "save": "Сохранить"
   },
+  "delete-confirmation": {
+    "delete-service": "Удалить услугу?",
+    "okay": "Удалить",
+    "cancel": "Отмена"
+  },
   "error": {
-    "password-mismatch": "Пароли должны совпадать"
+    "password-mismatch": "Пароли должны совпадать",
+    "password-too-short": "Пароль слишком короткий",
+    "password-numeric": "Запрещены пароли состоящие из одних только цифр"
   },
   "service-location": {
     "online": "Онлайн услуга",
@@ -344,8 +351,10 @@
         "add-new-time": "Добавить еще время",
         "popover-title": "Выберите день недели"
       },
-      "use_default-location": "Использовать существующий адресс",
-      "select-default-location": "Выберите адресс"
+      "use_default-location": "Использовать существующий адрес",
+      "select-default-location": "Выберите адрес",
+      "instant-booking": "Автоподтверждение (Instant Booking)",
+      "instant-booking-label": "Подтверждать услугу автоматически"
     },
     "final-step": {
       "title": "Поздравляем! Все готово к отправке.",
@@ -410,10 +419,12 @@
         "not-published": "Услуга не опубликована",
         "publish": "Опубликовать",
         "unpublish": "Снять с публикации",
-        "view": "Просмотр"
+        "view": "Просмотр",
+        "delete": "Удалить"
       },
       "service-presentation": {
-        "pick": "Подробнее"
+        "pick": "Дата",
+        "more-info": "Подробнее"
       },
       "services-tab": {
         "master-services": "Услуги мастера"

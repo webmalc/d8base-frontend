@@ -17,4 +17,5 @@ export interface StepSevenDataInterface extends ServiceTimetableInterface {
     max_distance: number;
     units: string;
     default_location: MasterLocation;
+    is_auto_order_confirmation?: boolean;
 }

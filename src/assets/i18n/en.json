@@ -42,8 +42,15 @@
     "back": "Back",
     "save": "Save"
   },
+  "delete-confirmation": {
+    "delete-service": "Delete service?",
+    "okay": "Okay",
+    "cancel": "Cancel"
+  },
   "error": {
-    "password-mismatch": "Passwords mismatch"
+    "password-mismatch": "Passwords mismatch",
+    "password-too-short": "Password is too short",
+    "password-numeric": "Numeric passwords are forbidden"
   },
   "service-location": {
     "online": "Online",
@@ -345,7 +352,9 @@
         "popover-title": "Choose day"
       },
       "use_default-location": "Use existing address",
-      "select-default-location": "Select address"
+      "select-default-location": "Select address",
+      "instant-booking": "Instant Booking",
+      "instant-booking-label": "Confirm service order automatically"
     },
     "final-step": {
       "title": "Congratulations! All set.",
@@ -410,10 +419,12 @@
         "not-published": "Service not published",
         "publish": "Publish",
         "unpublish": "Unpublish",
-        "view": "Review"
+        "view": "Review",
+        "delete": "Delete"
       },
       "service-presentation": {
-        "pick": "More info"
+        "pick": "Date",
+        "more-info": "More info"
       },
       "services-tab": {
         "master-services": "Professional services"

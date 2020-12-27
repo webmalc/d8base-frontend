@@ -93,7 +93,11 @@
   }
 
   .text-color-success {
-    color: #10dc60;
+    color: var(--ion-color-success);
+  }
+
+  .text-color-danger {
+    color: var(--ion-color-danger);
   }
 
   .text-secondary {
@@ -332,6 +336,7 @@
   --width: 90%;
   --height: 90%;
 }
+
 .master-profile-tab-title {
   font-size: 20px;
   font-weight: bold;

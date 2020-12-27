@@ -1,3 +1,4 @@
+import {Location} from '@angular/common';
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProfessionalList} from '@app/api/models';
@@ -18,6 +19,7 @@ export class ServiceDetailsPageComponent {
     public master: ProfessionalList;
 
     constructor(
+        public location: Location,
         route: ActivatedRoute,
         servicesApi: ServicesReadonlyApiService,
         masterApi: MasterReadonlyApiService

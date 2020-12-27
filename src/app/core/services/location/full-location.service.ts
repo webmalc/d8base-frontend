@@ -33,7 +33,24 @@ export class FullLocationService {
         private readonly districtApi: DistrictApiService
     ) {}
 
-    public getFullLocation({
+    public getTextLocation(location: ProfessionalLocationInline): Observable<{ id: number; text: string }>  {
+        return this.getFullLocation(location).pipe(
+            map(res => {
+                const textLocation = ['country', 'city']
+                    .map(key => res?.[key]?.name)
+                    .concat(location.address)
+                    .filter(value => Boolean(value))
+                    .join(', ');
+
+                return {
+                    id: location.id,
+                    text: textLocation
+                };
+            })
+        );
+    }
+
+    private getFullLocation({
         country: countryId,
         region: regionId,
         subregion: subregionId,

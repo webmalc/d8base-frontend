@@ -9,5 +9,6 @@ export enum ServicePublishStepSevenFormFields {
     UseDefaultLocation = 'use_default_location',
     MaxDistance = 'max_distance',
     Units = 'units',
-    DefaultLocation = 'default_location'
+    DefaultLocation = 'default_location',
+    InstantBooking = 'instant_booking'
 }

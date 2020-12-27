@@ -47,10 +47,9 @@
                 <h1>{{ "master-profile.info.master-location" | translate }}</h1>
             </ion-label>
         </ion-list-header>
-        <ion-item *ngFor="let masterLocation of context.master.locations" lines="none">
+        <ion-item *ngFor="let masterLocation of locations$ | async" lines="none">
             <ion-label>
-                {{"master-profile.info.from-here"|translate}}
-                0,2{{"units.0"|translate}}
+                {{ masterLocation.text }}
             </ion-label>
             <ion-button slot="end"
                         color="medium"

@@ -18,17 +18,11 @@
                 <app-info-row class="ion-margin-bottom">
                     {{"service-publish.step-seven.first-info-row"|translate}}
                 </app-info-row>
-                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
-                    <ion-col class="ion-no-padding">
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
-                            <div class="label-for-required-input">
-                                <b>
-                                    {{"service-publish.step-seven.timetable-title" | translate}}
-                                </b>
-                            </div>
-                        </ion-item>
-                    </ion-col>
-                </ion-item>
+                <ion-item-divider color="light">
+                    <ion-label>
+                        <h1>{{"service-publish.step-seven.timetable-title" | translate}}</h1>
+                    </ion-label>
+                </ion-item-divider>
                 <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-no-padding">
                         <ion-row *ngIf="!useMasterSchedule()"
@@ -43,7 +37,8 @@
                                 <ion-icon name="create-outline"></ion-icon>
                             </ion-item>
                         </ion-row>
-                        <ion-row *ngIf="renderUseMasterSchedule" class="ion-justify-content-between ion-align-items-center">
+                        <ion-row *ngIf="renderUseMasterSchedule"
+                                 class="ion-justify-content-between ion-align-items-center">
                             <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                 {{"service-publish.step-seven.use-base-timetable"|translate}}
                             </ion-item>
@@ -57,20 +52,26 @@
                         <app-schedule-viewer [schedule]="selectedSchedules"></app-schedule-viewer>
                     </ion-col>
                 </ion-item>
+                <ion-item-divider color="light">
+                    <ion-label>
+                        <h1>{{"service-publish.step-seven.instant-booking" | translate}}</h1>
+                    </ion-label>
+                </ion-item-divider>
+                <ion-item lines="full">
+                    <ion-label>{{"service-publish.step-seven.instant-booking-label"|translate}}</ion-label>
+                    <ion-checkbox slot="end" [formControlName]="formFields.InstantBooking"></ion-checkbox>
+                </ion-item>
                 <ng-container *ngIf="renderLocation()">
-                    <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
-                        <ion-col class="ion-no-padding">
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
-                                <b>
-                                    {{"service-publish.step-seven.location-title" | translate}}
-                                </b>
-                            </ion-item>
-                        </ion-col>
-                    </ion-item>
+                    <ion-item-divider color="light">
+                        <ion-label>
+                            <h1>{{"service-publish.step-seven.location-title" | translate}}</h1>
+                        </ion-label>
+                    </ion-item-divider>
                     <ion-item class="ion-item-no-border ion-item-bordered-others">
                         <ion-col class="ion-padding-vertical" size="12">
 
-                            <ion-row *ngIf="defaultLocationList?.length > 0" class="ion-justify-content-between ion-align-items-center">
+                            <ion-row *ngIf="defaultLocationList?.length > 0"
+                                     class="ion-justify-content-between ion-align-items-center">
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                     {{"service-publish.step-seven.use_default-location"|translate}}
                                 </ion-item>
@@ -92,7 +93,8 @@
                                 </ion-item>
                                 <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                     <ion-select
-                                            [formControlName]="formFields.DefaultLocation" interface="popover" class="max-width100 no-padding-left">
+                                            [formControlName]="formFields.DefaultLocation" interface="popover"
+                                            class="max-width100 no-padding-left">
                                         <ion-select-option *ngFor="let loc of defaultLocationList" [value]="loc">
                                             {{loc.address || (loc.country.name + loc.city.name)}}
                                         </ion-select-option>
@@ -158,7 +160,8 @@
                                     <ion-label color="medium" position="floating">
                                         {{"service-publish.step-seven.address-placeholder"|translate}}
                                     </ion-label>
-                                    <ion-textarea rows="4" type="text" name="address" (ionChange)="onThisPageDataChange()"
+                                    <ion-textarea rows="4" type="text" name="address"
+                                                  (ionChange)="onThisPageDataChange()"
                                                   [formControlName]="formFields.Address"></ion-textarea>
                                 </ion-item>
                                 <ion-item
@@ -201,16 +204,18 @@
                                     <ion-col size="6">
                                         <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
                                             <ion-select
-                                                    [formControlName]="formFields.Units" interface="popover" class="max-width100 no-padding-left">
+                                                    [formControlName]="formFields.Units" interface="popover"
+                                                    class="max-width100 no-padding-left">
                                                 <ion-select-option *ngFor="let val of units; let i=index" [value]="i">
-                                                    {{"units."+i|translate}}
+                                                    {{"units." + i|translate}}
                                                 </ion-select-option>
                                             </ion-select>
                                         </ion-item>
                                     </ion-col>
                                     <ion-col size="6">
                                         <ion-item lines="none" class="ion-item-bordered">
-                                            <ion-input [formControlName]="formFields.MaxDistance" name="price" appNumbersOnly></ion-input>
+                                            <ion-input [formControlName]="formFields.MaxDistance" name="price"
+                                                       appNumbersOnly></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
@@ -218,19 +223,16 @@
                         </ion-col>
                     </ion-item>
                 </ng-container>
-                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
-                    <ion-col>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
-                            <b>
-                                {{"service-publish.step-seven.payment-title" | translate}}
-                            </b>
-                        </ion-item>
-                    </ion-col>
-                </ion-item>
+                <ion-item-divider color="light">
+                    <ion-label class="ion-padding-start">
+                        <h1>{{"service-publish.step-seven.payment-title" | translate}}</h1>
+                    </ion-label>
+                </ion-item-divider>
                 <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical">
                         <ion-list (change)="onThisPageDataChange()">
-                            <ion-list-header class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
+                            <ion-list-header
+                                    class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                     <div class="label-for-required-input">
                                         <b>
@@ -261,7 +263,8 @@
                                 </ion-button>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-button size="medium" color="secondary" type="submit" [disabled]="isSubmitDisabled()"
+                                <ion-button size="medium" color="secondary" type="submit"
+                                            [disabled]="isSubmitDisabled()"
                                             class="ion-margin-top" fill="solid" expand="block">
                                     {{"service-publish.forward-button" | translate}}
                                 </ion-button>
