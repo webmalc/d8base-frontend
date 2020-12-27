@@ -12,3 +12,4 @@ export * from './schedule-editor/schedule-editor.component';
 export * from './schedule-editor/day-selector/day-selector.component';
 export * from './schedule-viewer/schedule-viewer.component';
 export * from './price/price.component';
+export * from './service-photo-loader/service-photo-loader.component';

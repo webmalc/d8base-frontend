@@ -1,8 +1,44 @@
 :host {
     display: flex;
-    justify-content: space-evenly;
-    ion-thumbnail {
-        --size: 72px;
-        --border-radius: 5px;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    .button {
+        --padding-start: 0;
+        --padding-end: 0;
+        --opacity: 0.8;
+        z-index: 10;
+    }
+    .prev-button {
+        position: absolute;
+        left: 0;
+    }
+    .next-button {
+        position: absolute;
+        right: 0;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .swiper-slide {
+        width: auto;
+    }
+
+    &.loading .spinner {
+        display: block;
+    }
+
+    .spinner {
+        display: none;
+    }
+
+    &.loading .slides {
+        display: none;
+    }
+
+    .slides {
+        display: block;
     }
 }

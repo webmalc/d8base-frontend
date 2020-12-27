@@ -1,9 +1,24 @@
-<!-- <ng-container *ngIf="servicePhotos | async as servicePhotos"> -->
-<ng-container *ngIf="servicePhotos?.length">
-    <!-- <ion-item *ngFor="let servicePhoto of servicePhotos.results" lines="none"> -->
-    <ion-thumbnail *ngFor="let servicePhoto of servicePhotos">
-        <ion-img [src]="servicePhoto.photo"></ion-img>
-    </ion-thumbnail>
-</ng-container>
-<!-- </ion-item> -->
-<!-- </ng-container> -->
+<ion-button
+    [disabled]="isPrevButtonDisabled$ | async"
+    class="button prev-button"
+    size="small"
+    (click)="slidePrev()"
+    *ngIf="servicePhotos.length"
+>
+    <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+</ion-button>
+<ion-spinner class="spinner" name="lines"></ion-spinner>
+<ion-slides class="slides" [options]="slideOptsTwo" #slides>
+    <ion-slide *ngFor="let servicePhoto of servicePhotos">
+        <app-service-photo-loader [src]="servicePhoto.photo"></app-service-photo-loader>
+    </ion-slide>
+</ion-slides>
+<ion-button
+    [disabled]="isNextButtonDisabled$ | async"
+    class="button next-button"
+    size="small"
+    (click)="slideNext()"
+    *ngIf="servicePhotos.length"
+>
+    <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+</ion-button>

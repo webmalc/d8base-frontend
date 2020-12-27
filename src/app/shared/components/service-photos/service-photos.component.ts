@@ -1,31 +1,44 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ServicePhoto } from '@app/api/models';
-import { AccountsService } from '@app/api/services';
-import { Observable, Subject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    HostBinding,
+    Input,
+    OnDestroy,
+    OnInit,
+    ViewChild
+} from '@angular/core';
+import { ServicePhotoList } from '@app/api/models';
+import { ServicesService } from '@app/api/services';
+import { IonSlides } from '@ionic/angular';
+import { from, Observable, Subject } from 'rxjs';
+import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-photos',
     templateUrl: './service-photos.component.html',
-    styleUrls: ['./service-photos.component.scss']
+    styleUrls: ['./service-photos.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ServicePhotosComponent implements OnInit, OnDestroy {
+export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() public serviceId: number;
-    // TODO: make PaginatedResult type on backend for ServicePhotos
-    public servicePhotos: Array<ServicePhoto> = [];
-    // public servicePhotos: Observable<{
-    //     count: number;
-    //     next?: null | string;
-    //     previous?: null | string;
-    //     results: Array<ServicePhoto>;
-    // }>;
+    public servicePhotos: ServicePhotoList[] = [];
+    public slideOptsTwo = {
+        initialSlide: 0,
+        slidesPerView: 4,
+        loop: false,
+        centeredSlides: false
+    };
+    public isNextButtonDisabled$: Observable<boolean>;
+    public isPrevButtonDisabled$: Observable<boolean>;
+    @HostBinding('class.loading') public isLoading: boolean = false;
+    @ViewChild('slides', { static: false }) private readonly slides: IonSlides;
     private readonly ngDestroy$ = new Subject<void>();
 
-    constructor(private readonly accountsService: AccountsService, private readonly cd: ChangeDetectorRef) {}
+    constructor(private readonly servicesService: ServicesService, private readonly cd: ChangeDetectorRef) {}
 
     public ngOnInit(): void {
-        console.log('serviceId', this.serviceId);
-
         this.subscribeServicePhotos();
     }
 
@@ -34,15 +47,38 @@ export class ServicePhotosComponent implements OnInit, OnDestroy {
         this.ngDestroy$.complete();
     }
 
+    public ngAfterViewInit(): void {
+        this.initNavigationButtonsAbility();
+    }
+
+    public slideNext(): void {
+        this.slides.slideNext();
+    }
+
+    public slidePrev(): void {
+        this.slides.slidePrev();
+    }
+
+    private initNavigationButtonsAbility(): void {
+        this.isPrevButtonDisabled$ = this.slides.ionSlideDidChange.pipe(
+            switchMap(() => from(this.slides.isBeginning())),
+            startWith(true)
+        );
+        this.isNextButtonDisabled$ = this.slides.ionSlideDidChange.pipe(switchMap(() => from(this.slides.isEnd())));
+    }
+
     private subscribeServicePhotos(): void {
-        // TODO: Make available to show all images (for MVP version only 4 images show)
-        this.accountsService
-            .accountsServicePhotosList({ service: `${this.serviceId}`, pageSize: 4 })
-            .pipe(filter(res => Boolean(res)))
+        this.isLoading = true;
+        this.servicesService
+            .servicesServicePhotosList({ service: `${this.serviceId}` })
+            .pipe(
+                filter(res => Boolean(res)),
+                takeUntil(this.ngDestroy$)
+            )
             .subscribe(res => {
+                this.isLoading = false;
                 this.servicePhotos = res.results;
-                console.log('subscribe this.servicePhotos', this.servicePhotos);
-                this.cd.detectChanges();
+                this.cd.markForCheck();
             });
     }
 }
