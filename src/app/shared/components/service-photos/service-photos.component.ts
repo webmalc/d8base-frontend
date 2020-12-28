@@ -84,10 +84,16 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
                 filter(res => Boolean(res)),
                 takeUntil(this.ngDestroy$)
             )
-            .subscribe(res => {
-                this.isLoading = false;
-                this.servicePhotos = res.results;
-                this.cd.markForCheck();
+            .subscribe({
+                next: res => {
+                    this.isLoading = false;
+                    this.servicePhotos = res.results;
+                    this.cd.markForCheck();
+                },
+                error: () => {
+                    this.isLoading = false;
+                    this.cd.markForCheck();
+                }
             });
     }
 
