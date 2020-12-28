@@ -7,7 +7,6 @@ import {MasterSchedule} from '@app/master/models/master-schedule';
 import {CalendarGeneratorFactoryService} from '@app/master/services/calendar-generator-factory.service';
 import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
 import {MasterScheduleApiService} from '@app/master/services/master-schedule-api.service';
-import {ToastController} from '@ionic/angular';
 import {BehaviorSubject, concat, Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
@@ -23,12 +22,12 @@ export class MasterProfileCalendarComponent implements OnInit {
     public context$: Observable<MasterProfileContext>;
 
     private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
+    private selectedDate: Date;
 
     constructor(
         private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
         private readonly scheduleApi: MasterScheduleApiService,
-        private readonly contextService: MasterProfileContextService,
-        private readonly toastController: ToastController
+        private readonly contextService: MasterProfileContextService
     ) {
         this.enabledPeriods = this.periods.asObservable();
         this.schedule$ = scheduleApi.get().pipe(
@@ -42,6 +41,7 @@ export class MasterProfileCalendarComponent implements OnInit {
     }
 
     public changeDate(date: Date): void {
+        this.selectedDate = date;
         this.updateEnabledPeriods(date);
     }
 
@@ -57,14 +57,12 @@ export class MasterProfileCalendarComponent implements OnInit {
             id: null
         })));
 
-        // TODO: use PUT for updating existing schedules
+        // TODO: use /set/ endpoint
         concat(deleteOld$, createNew$)
             .subscribe({
                 next: () => null,
                 complete: async () => {
-                    // TODO: reload schedule, reset the form
-                    const toast = await this.toastController.create({message: 'Schedule updated'});
-                    await toast.present();
+                    this.updateEnabledPeriods(this.selectedDate ?? new Date());
                 }
             });
     }
