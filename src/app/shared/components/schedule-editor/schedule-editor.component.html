@@ -1,83 +1,44 @@
 <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-    <ion-item
-            class="ion-item-no-border ion-item-bordered-others ion-item-no-side-padding">
-        <ion-col class="ion-padding-vertical ion-justify-content-center" size="12"
-                 formArrayName="{{formFields.Timetable}}">
-            <ion-row class="ion-justify-content-start ion-align-items-center" [formGroupName]="i"
-                     *ngFor="let row of formService.controls; let i = index">
-                <ion-col size="2" class="ion-item-no-vertical-padding">
-                    <ion-item class="ion-item-no-border">
-                        <ion-checkbox (ionChange)="formService.unsetError(i);onIsEnabledChange($event, i)"
-                                      formControlName="{{formFields.IsEnabled}}" [disabled]="disabled"></ion-checkbox>
-                    </ion-item>
-                </ion-col>
-                <ion-col size="1" class="ion-item-no-vertical-padding">
-                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                        {{"global.weekdays." + formService.getDayByIndex(row.controls[formFields.Day].value)|translate}}
-                    </ion-item>
-                </ion-col>
-                <ion-col size="3" class="ion-item-no-vertical-padding">
-                    <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
-                        <ion-input class="ion-text-center"
-                                   placeholder="00:00"
-                                   formControlName="{{formFields.StartTime}}"
-                                   [brmasker]="{mask: '00:00', type:'num', len: 5}"
-                                   [disabled]="!formService?.controls[i]?.controls[formFields.IsEnabled]?.value"
-                                   (ionChange)="onStartTimeChange($event, i)"></ion-input>
-                    </ion-item>
-                </ion-col>
-                <ion-col size="1" class="ion-item-no-vertical-padding">
-                    <div class="ion-text-center">
-                        &mdash;
-                    </div>
-                </ion-col>
-                <ion-col size="3" class="ion-item-no-vertical-padding">
-                    <ion-item class="ion-item-bordered ion-item-no-min-height border-radius5">
-                        <ion-input class="ion-text-center"
-                                   placeholder="00:00"
-                                   formControlName="{{formFields.EndTime}}"
-                                   [brmasker]="{mask: '00:00', type:'num', len: 5}"
-                                   [disabled]="!formService?.controls[i]?.controls[formFields.IsEnabled]?.value"
-                                   (ionChange)="onEndTimeChange($event, i)"></ion-input>
-                    </ion-item>
-                </ion-col>
-
-                <ion-col size="2" class="ion-item-no-vertical-padding" *ngIf="!disabled">
-                    <ion-item class="ion-item-no-border cursor-pointer ion-item-no-padding-right"
-                              (click)="deleteDay(i)">
-                        <ion-icon name="close-outline"></ion-icon>
-                    </ion-item>
-                </ion-col>
-                <ion-input style="display: none" formControlName="{{formFields.Id}}"></ion-input>
-            </ion-row>
-        </ion-col>
-    </ion-item>
-
+    <ion-item-group formArrayName="{{formFields.Timetable}}">
+        <ion-item [formGroupName]="i" *ngFor="let row of formService.controls; let i = index">
+            <ion-checkbox (ionChange)="formService.unsetError(i);onIsEnabledChange($event, i)"
+                          formControlName="{{formFields.IsEnabled}}" [disabled]="disabled">
+            </ion-checkbox>
+            <ion-label class="ion-padding-start">
+                {{"global.weekdays." + formService.getDayByIndex(row.controls[formFields.Day].value)|translate}}
+            </ion-label>
+            <ion-input class="ion-text-center"
+                       placeholder="00:00"
+                       formControlName="{{formFields.StartTime}}"
+                       [brmasker]="{mask: '00:00', type:'num', len: 5}"
+                       [disabled]="!formService?.controls[i]?.controls[formFields.IsEnabled]?.value"
+                       (ionChange)="onStartTimeChange($event, i)">
+            </ion-input>
+            <ion-label>—</ion-label>
+            <ion-input class="ion-text-center"
+                       placeholder="00:00"
+                       formControlName="{{formFields.EndTime}}"
+                       [brmasker]="{mask: '00:00', type:'num', len: 5}"
+                       [disabled]="!formService?.controls[i]?.controls[formFields.IsEnabled]?.value"
+                       (ionChange)="onEndTimeChange($event, i)">
+            </ion-input>
+            <ion-button color="medium" fill="clear" (click)="deleteDay(i)" *ngIf="!disabled">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+            <ion-input style="display: none" formControlName="{{formFields.Id}}"></ion-input>
+        </ion-item>
+    </ion-item-group>
     <ng-container *ngIf="!disabled">
-        <ion-item class="ion-item-no-border  ion-item-bordered-others">
-            <ion-col class="ion-no-padding">
-                <ion-row>
-                    <ion-item (click)="showDaySelector()"
-                              class="cursor-pointer ion-item-no-border ion-no-padding ion-margin-start">
-                        <ion-icon color="secondary" name="add-circle"></ion-icon>
-                        <ion-label class="ion-padding-start">
-                            {{'service-publish.step-seven.timetable.add-new-time'|translate}}
-                        </ion-label>
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+        <ion-item button lines="none" (click)="showDaySelector()">
+            <ion-icon color="secondary" name="add-circle"></ion-icon>
+            <ion-label class="ion-padding-start">
+                {{'service-publish.step-seven.timetable.add-new-time'|translate}}
+            </ion-label>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bordered-others">
-            <ion-col class="ion-padding-vertical" size="12">
-
-                <ion-button size="medium" color="secondary" type="submit" class="ion-margin-vertical" fill="solid"
-                            expand="block"
-                            [disabled]="formService.isSubmitDisabled()">
-                    {{'global.save'| translate}}
-                </ion-button>
-
-            </ion-col>
-        </ion-item>
+        <ion-button size="medium" color="secondary" type="submit" class="ion-margin-vertical" fill="solid"
+                    expand="block"
+                    [disabled]="formService.isSubmitDisabled()">
+            {{'global.save'| translate}}
+        </ion-button>
     </ng-container>
-
 </form>
