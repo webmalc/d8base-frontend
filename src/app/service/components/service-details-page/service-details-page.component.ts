@@ -5,6 +5,7 @@ import { ProfessionalList } from '@app/api/models';
 import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import { Service } from '@app/service/models/service';
+import { Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
