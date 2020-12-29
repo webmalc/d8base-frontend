@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
     selector: 'app-service-photo-popover',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./service-photo-popover.component.scss']
 })
 export class ServicePhotoPopoverComponent {
-    public src: string;
+    @Input() public src: string;
+    constructor(private readonly modalController: ModalController) {}
+
+    public close(): void {
+        this.modalController.dismiss();
+    }
 }

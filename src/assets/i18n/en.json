@@ -52,6 +52,9 @@
     "password-too-short": "Password is too short",
     "password-numeric": "Numeric passwords are forbidden"
   },
+  "service-photos": {
+    "title": "Photos"
+  },
   "service-location": {
     "online": "Online",
     "professional": "Professional's place",

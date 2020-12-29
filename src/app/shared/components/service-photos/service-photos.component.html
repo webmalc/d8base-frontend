@@ -1,26 +1,33 @@
-<ion-button
-    [disabled]="isPrevButtonDisabled$ | async"
-    class="button prev-button"
-    size="small"
-    color="secondary"
-    (click)="slidePrev()"
-    *ngIf="servicePhotos.length"
->
-    <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
-</ion-button>
 <ion-spinner class="spinner" name="lines"></ion-spinner>
-<ion-slides class="slides" [options]="slideOptsTwo" #slides>
-    <ion-slide *ngFor="let servicePhoto of servicePhotos" (click)="zoomPhoto(servicePhoto)">
-        <app-service-photo-loader [src]="servicePhoto.photo"></app-service-photo-loader>
-    </ion-slide>
-</ion-slides>
-<ion-button
-    [disabled]="isNextButtonDisabled$ | async"
-    class="button next-button"
-    size="small"
-    color="secondary"
-    (click)="slideNext()"
-    *ngIf="servicePhotos.length"
->
-    <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
-</ion-button>
+<ion-list class="photo-slider">
+    <ion-list-header>
+        <ion-label>
+            <h1>{{ 'service-photos.title' | translate }}</h1>
+        </ion-label>
+    </ion-list-header>
+    <div class="photo-slider-container">
+        <ion-button
+            class="button prev-button"
+            size="small"
+            color="secondary"
+            (click)="slidePrev()"
+            *ngIf="servicePhotos.length"
+        >
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-slides class="slides" [options]="slideOptsTwo" #slides>
+            <ion-slide *ngFor="let servicePhoto of servicePhotos" (click)="zoomPhoto(servicePhoto)" #slide>
+                <app-service-photo-loader [src]="servicePhoto.photo_thumbnail"></app-service-photo-loader>
+            </ion-slide>
+        </ion-slides>
+        <ion-button
+            class="button next-button"
+            size="small"
+            color="secondary"
+            (click)="slideNext()"
+            *ngIf="servicePhotos.length"
+        >
+            <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+    </div>
+</ion-list>

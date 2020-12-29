@@ -1,44 +1,51 @@
 :host {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
-    .button {
-        --padding-start: 0;
-        --padding-end: 0;
-        --opacity: 0.8;
-        z-index: 10;
-    }
-    .prev-button {
-        position: absolute;
-        left: 0;
-    }
-    .next-button {
-        position: absolute;
-        right: 0;
+    &.nav-buttons-hidden .button {
+        display: none;
     }
 
-    .hide {
+    .photo-slider-container {
+        display: flex;
+        justify-content: center;
+        flex-flow: row nowrap;
+        align-items: center;
+        .button {
+            --padding-start: 0;
+            --padding-end: 0;
+            --opacity: 0.8;
+            z-index: 10;
+        }
+        .prev-button {
+            position: absolute;
+            left: 0;
+        }
+        .next-button {
+            position: absolute;
+            right: 0;
+        }
+
+        .slides {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    .photo-slider {
+        display: block;
+    }
+    .spinner {
         display: none;
+        margin: auto;
+    }
+    &.loading {
+        .photo-slider {
+            display: none;
+        }
+        .spinner {
+            display: block;
+        }
     }
 
     .swiper-slide {
         width: auto;
-    }
-
-    &.loading .spinner {
-        display: block;
-    }
-
-    .spinner {
-        display: none;
-    }
-
-    &.loading .slides {
-        display: none;
-    }
-
-    .slides {
-        display: block;
     }
 }
