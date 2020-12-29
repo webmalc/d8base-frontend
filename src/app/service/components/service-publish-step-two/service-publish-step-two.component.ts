@@ -59,8 +59,6 @@ export class ServicePublishStepTwoComponent extends Reinitable {
             switchMap(settings => settings?.currency ? this.currencyList.getByName(settings.currency) : of(null))
         ).subscribe(currency => {
             this.formService.form.get(this.formFields.Currency).setValue(currency);
-            this.formService.form.get(this.formFields.StartPriceCurrency).setValue(currency);
-            this.formService.form.get(this.formFields.EndPriceCurrency).setValue(currency);
         });
     }
 }
