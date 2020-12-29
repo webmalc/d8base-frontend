@@ -18,7 +18,6 @@ import {
     PriceComponent,
     ScheduleEditorComponent,
     ScheduleViewerComponent,
-    ServicePhotoLoaderComponent,
     ServicePhotoPopoverComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
@@ -58,6 +57,7 @@ import { ServicePhotosComponent } from './components/service-photos/service-phot
 import { DebounceDirective } from './directives/debounce.directive';
 import { MainColumnDirective } from './directives/main-column.directive';
 import { NumberDirective } from './directives/number.directive';
+import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
 
 @NgModule({
     declarations: [
@@ -102,8 +102,8 @@ import { NumberDirective } from './directives/number.directive';
         InputErrorDescriptionComponent,
         SuccessFlashbagComponent,
         ServicePhotosComponent,
-        ServicePhotoLoaderComponent,
-        ServicePhotoPopoverComponent
+        ServicePhotoPopoverComponent,
+        IonImageSpinnerDirective
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -143,8 +143,8 @@ import { NumberDirective } from './directives/number.directive';
         InputErrorDescriptionComponent,
         SuccessFlashbagComponent,
         ServicePhotosComponent,
-        ServicePhotoLoaderComponent,
-        ServicePhotoPopoverComponent
+        ServicePhotoPopoverComponent,
+        IonImageSpinnerDirective
     ],
     imports: [
         CommonModule,

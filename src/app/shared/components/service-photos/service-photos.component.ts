@@ -16,7 +16,7 @@ import { ServicePhotoList } from '@app/api/models';
 import { ServicesService } from '@app/api/services';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { from, Observable, Subject } from 'rxjs';
-import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { finalize, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { ServicePhotoPopoverComponent } from '../service-photo-popover/service-photo-popover.component';
 
 const spaceBetweenSlides: number = 16;
@@ -30,7 +30,7 @@ const spaceBetweenSlides: number = 16;
 export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() public serviceId: number;
     public servicePhotos: ServicePhotoList[] = [];
-    public slideOptsTwo = {
+    public slideOptions = {
         initialSlide: 0,
         slidesPerView: 'auto',
         slidesPerGroup: 3,
@@ -40,17 +40,12 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
     };
     public isNextButtonDisabled$: Observable<boolean>;
     public isPrevButtonDisabled$: Observable<boolean>;
+    @HostBinding('class.nav-buttons-hidden') public isNavButtonsHidden: boolean = true;
+    @HostBinding('class.loading') private isLoading: boolean = false;
     @ViewChild('slides', { static: false }) private readonly slides: IonSlides;
     @ViewChild('slides', { read: ElementRef }) private readonly slidesElementRef: ElementRef;
     @ViewChildren('slide', { read: ElementRef }) private readonly slideList: QueryList<ElementRef>;
-    @HostBinding('class.loading') private isLoading: boolean = false;
-    @HostBinding('class.nav-buttons-hidden') get isNavButtonsHidden(): boolean {
-        return this.allSlidesContainerWidth > this.allSlidesWidth;
-    }
-    private allSlidesWidth: number = 0;
-    private allSlidesContainerWidth: number = 0;
     private readonly ngDestroy$ = new Subject<void>();
-    private observer;
 
     constructor(
         private readonly servicesService: ServicesService,
@@ -65,17 +60,10 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
     public ngOnDestroy(): void {
         this.ngDestroy$.next();
         this.ngDestroy$.complete();
-        this.observer.unobserve(this.slidesElementRef.nativeElement);
     }
 
     public ngAfterViewInit(): void {
         this.initNavigationButtonsAbility();
-
-        // @ts-ignore
-        this.observer = new ResizeObserver(() => {
-            this.setAllSlidesContainerWidth();
-        });
-        this.observer.observe(this.slidesElementRef.nativeElement);
     }
 
     public slideNext(): void {
@@ -103,20 +91,16 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
         this.servicesService
             .servicesServicePhotosList({ service: `${this.serviceId}` })
             .pipe(
-                filter(res => Boolean(res)),
-                takeUntil(this.ngDestroy$)
+                finalize(() => {
+                    this.isLoading = false;
+                    this.cd.markForCheck();
+                })
             )
-            .subscribe({
-                next: res => {
-                    this.isLoading = false;
-                    this.servicePhotos = res.results;
-                    this.subscribeSlideListChanges();
-                    this.cd.markForCheck();
-                },
-                error: () => {
-                    this.isLoading = false;
-                    this.cd.markForCheck();
-                }
+            .subscribe(res => {
+                this.isLoading = false;
+                this.servicePhotos = res.results;
+                this.subscribeSlideListChanges();
+                this.cd.markForCheck();
             });
     }
 
@@ -135,15 +119,12 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
     private subscribeSlideListChanges(): void {
         this.slideList.changes.pipe(takeUntil(this.ngDestroy$)).subscribe(slideList => {
             setTimeout(() => {
-                this.allSlidesWidth = slideList
+                const allSlidesWidth = slideList
                     .map(({ nativeElement }) => nativeElement.clientWidth)
                     .reduce((accWidth: number, currentWidth: number) => accWidth + currentWidth + spaceBetweenSlides, -spaceBetweenSlides);
-                this.setAllSlidesContainerWidth();
+                this.isNavButtonsHidden = !allSlidesWidth || this.slidesElementRef.nativeElement.clientWidth > allSlidesWidth;
+                this.cd.markForCheck();
             });
         });
-    }
-
-    private setAllSlidesContainerWidth(): void {
-        this.allSlidesContainerWidth = this.slidesElementRef.nativeElement.clientWidth;
     }
 }

@@ -26,6 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 :root {
+  --service-photo-thumb-size: 72px;
   .label-for-required-input::after {
     content: "*";
     color: red;

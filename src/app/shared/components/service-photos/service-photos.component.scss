@@ -1,4 +1,9 @@
 :host {
+    .thumbnail {
+        --size: var(--service-photo-thumb-size);
+        --border-radius: 5px;
+    }
+
     &.nav-buttons-hidden .button {
         display: none;
     }
@@ -46,6 +51,6 @@
     }
 
     .swiper-slide {
-        width: auto;
+        width: var(--service-photo-thumb-size);
     }
 }
