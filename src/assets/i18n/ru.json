@@ -52,6 +52,9 @@
     "password-too-short": "Пароль слишком короткий",
     "password-numeric": "Запрещены пароли состоящие из одних только цифр"
   },
+  "service-photos": {
+    "title": "Примеры работ"
+  },
   "service-location": {
     "online": "Онлайн услуга",
     "professional": "Приём у мастера",

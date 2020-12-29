@@ -16,3 +16,4 @@ export { ServiceLocationInline } from './models/service-location-inline';
 export { ServiceList } from './models/service-list';
 export { Search } from './models/search';
 export { PaginatedResult } from './models/paginated-result';
+export { ServicePhotoList } from './models/service-photo-list';
