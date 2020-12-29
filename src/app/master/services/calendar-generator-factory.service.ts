@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import * as DateTimeFunctions from '@app/core/functions/datetime.functions';
 import {MasterManagerService} from '@app/core/services';
 import {MasterCalendar} from '@app/master/models/master-calendar';
 import {CalendarApiService} from '@app/master/services/calendar-api.service';
@@ -20,6 +21,10 @@ export class CalendarGeneratorFactoryService {
     }
 
     private get(startDate: Date, endDate: Date, masterId: number): Observable<MasterCalendar[]> {
-        return this.calendarApi.getSchedule(masterId, startDate.toISOString(), endDate.toISOString());
+        return this.calendarApi.getSchedule(
+            masterId,
+            DateTimeFunctions.getLocalDateString(startDate),
+            DateTimeFunctions.getLocalDateString(endDate)
+        );
     }
 }
