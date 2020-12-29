@@ -55,9 +55,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImageCropPopoverComponent } from './components/picture-selector/image-cropper/image-crop-popover.component';
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import { DebounceDirective } from './directives/debounce.directive';
+import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
 import { MainColumnDirective } from './directives/main-column.directive';
 import { NumberDirective } from './directives/number.directive';
-import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
 
 @NgModule({
     declarations: [
