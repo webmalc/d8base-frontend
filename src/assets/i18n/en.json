@@ -265,11 +265,11 @@
       "service-placeholder": "Enter service name",
       "service-description": "Service description",
       "service-description-placeholder": "Enter service description",
-      "duration": "Service duration",
+      "duration-and-price": "The duration per session and its price",
       "fixed-price": "Fixed service price",
       "fixed-price-title": "Service price",
-      "start-price": "Service price from",
-      "end-price": "Service price to",
+      "start-price": "from",
+      "end-price": "to",
       "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
       "location": "Service location",
       "description-error": "Description minimum length is 20 symbols"
@@ -336,7 +336,6 @@
       "city-placeholder": "Choose city",
       "address": "Address",
       "address-placeholder": "Enter address",
-      "address-required-info": "Required when service is provided at «professional's place»",
       "postal": "Index",
       "postal-placeholder": "Index",
       "location-radius": "Attendance:",
@@ -655,7 +654,9 @@
     "surname": "Surname",
     "email": "E-mail",
     "phone": "Phone",
-    "is-not-for-me-description": "Enter the name of the person who will get the service"
+    "is-not-for-me-description": "Enter the name of the person who will get the service",
+    "success-title": "The service was successfully published.",
+    "success-description": "Here's how the clients see it:"
   },
   "flag-menu": {
     "language": "Language",

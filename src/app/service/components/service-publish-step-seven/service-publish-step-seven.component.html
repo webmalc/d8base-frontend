@@ -152,9 +152,11 @@
                                 </ion-item>
 
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
-                                    <b>
-                                        {{"service-publish.step-seven.address"|translate}}
-                                    </b>
+                                    <div class="label-for-required-input">
+                                        <b>
+                                            {{"service-publish.step-seven.address"|translate}}
+                                        </b>
+                                    </div>
                                 </ion-item>
                                 <ion-item class="ion-item-bordered">
                                     <ion-label color="medium" position="floating">
@@ -163,10 +165,6 @@
                                     <ion-textarea rows="4" type="text" name="address"
                                                   (ionChange)="onThisPageDataChange()"
                                                   [formControlName]="formFields.Address"></ion-textarea>
-                                </ion-item>
-                                <ion-item
-                                        class="ion-item-no-border text-red ion-item-no-side-padding fs14 ion-item-no-min-height pt10">
-                                    {{"service-publish.step-seven.address-required-info"|translate}}
                                 </ion-item>
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
                                     <b>

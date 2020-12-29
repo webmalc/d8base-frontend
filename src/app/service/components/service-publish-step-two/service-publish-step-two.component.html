@@ -43,121 +43,57 @@
                                           [formControlName]="formFields.Description"></ion-textarea>
                         </ion-item>
                         <app-input-error-description text="service-publish.step-two.description-error"
-                            *ngIf="formService.form.get(formFields.Description).invalid && formService.form.get(formFields.Description).dirty">
+                                                     *ngIf="formService.form.get(formFields.Description).invalid && formService.form.get(formFields.Description).dirty">
                         </app-input-error-description>
                         <ion-col size="12">
                             <ion-row>
                                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
                                     <div class="label-for-required-input">
-                                        {{"service-publish.step-two.duration"|translate}}
+                                        {{"service-publish.step-two.duration-and-price"|translate}}
                                     </div>
                                 </ion-item>
                             </ion-row>
                             <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
                         </ion-col>
 
-                        <ion-row class="ion-justify-content-between ion-align-items-center pr5">
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                {{"service-publish.step-two.fixed-price"|translate}}
-                            </ion-item>
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                <ion-checkbox [formControlName]="formFields.IsPriceFixed"
-                                              color="light"></ion-checkbox>
-                            </ion-item>
-                        </ion-row>
+                        <ion-item class="ion-item-bordered">
 
-                        <ion-col size="12" *ngIf="formService.form.get(formFields.IsPriceFixed).value">
-                            <ion-row>
-                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                    <div class="label-for-required-input">
-                                        {{"service-publish.step-two.fixed-price-title"|translate}}
-                                    </div>
-                                </ion-item>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col size="6" class="no-padding-left">
-                                    <ion-item class="ion-item-bordered">
-                                        <ionic-selectable
-                                                itemValueField="currency"
-                                                itemTextField="title"
-                                                [canSearch]="true"
-                                                [items]="currencyList$|async"
-                                                [formControlName]="this.formFields.Currency"
-                                                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-                                                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-                                                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
-                                        </ionic-selectable>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col size="6" class="no-padding-right">
-                                    <ion-item class="ion-item-bordered">
-                                        <ion-input [formControlName]="formFields.FixedPrice" appNumbersOnly
-                                                   name="price"></ion-input>
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </ion-col>
+                            <ng-container *ngIf="formService.form.get(formFields.IsPriceFixed).value">
+                                <ion-label position="stacked">{{'service-publish.step-two.fixed-price-title'|translate}}</ion-label>
+                                <ion-input [formControlName]="formFields.FixedPrice" appNumbersOnly
+                                           name="price"></ion-input>
+                            </ng-container>
+                            <ng-container *ngIf="!formService.form.get(formFields.IsPriceFixed).value">
+                                <ion-label position="stacked">
+                                    {{"service-publish.step-two.start-price"|translate}}
+                                </ion-label>
+                                <ion-input name="price" appNumbersOnly
+                                           [formControlName]="formFields.StartPrice"></ion-input>
+                                <ion-label position="stacked">
+                                    {{"service-publish.step-two.end-price"|translate}}
+                                </ion-label>
+                                <ion-input [formControlName]="formFields.EndPrice" appNumbersOnly
+                                           name="price"></ion-input>
+                            </ng-container>
 
-                        <ion-col size="12" *ngIf="!formService.form.get(formFields.IsPriceFixed).value">
-                            <ion-row>
-                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                    <div class="label-for-required-input">
-                                        {{"service-publish.step-two.start-price"|translate}}
-                                    </div>
-                                </ion-item>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col size="6" class="no-padding-left">
-                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        <ionic-selectable
-                                                itemTextField="title"
-                                                itemValueField="currency"
-                                                [canSearch]="true"
-                                                [items]="currencyList$|async"
-                                                [formControlName]="this.formFields.StartPriceCurrency"
-                                                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-                                                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-                                                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
-                                        </ionic-selectable>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col size="6" class="no-padding-right">
-                                    <ion-item class="ion-item-bordered">
-                                        <ion-input name="price" appNumbersOnly
-                                                   [formControlName]="formFields.StartPrice"></ion-input>
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                                    <div class="label-for-required-input">
-                                        {{"service-publish.step-two.end-price"|translate}}
-                                    </div>
-                                </ion-item>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col size="6" class="no-padding-left">
-                                    <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
-                                        <ionic-selectable
-                                                itemTextField="title"
-                                                itemValueField="currency"
-                                                [canSearch]="true"
-                                                [items]="currencyList$|async"
-                                                [formControlName]="this.formFields.EndPriceCurrency"
-                                                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-                                                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-                                                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
-                                        </ionic-selectable>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col size="6" class="no-padding-right">
-                                    <ion-item class="ion-item-bordered">
-                                        <ion-input [formControlName]="formFields.EndPrice" appNumbersOnly
-                                                   name="price"></ion-input>
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </ion-col>
+                            <ionic-selectable
+                                    slot="end"
+                                    itemValueField="currency"
+                                    itemTextField="title"
+                                    [canSearch]="true"
+                                    [items]="currencyList$|async"
+                                    [formControlName]="this.formFields.Currency"
+                                    closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+                                    searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+                                    searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
+                            </ionic-selectable>
+                        </ion-item>
+
+                        <ion-item lines="none">
+                            {{"service-publish.step-two.fixed-price"|translate}}
+                            <ion-checkbox slot="end" [formControlName]="formFields.IsPriceFixed"></ion-checkbox>
+                        </ion-item>
+
                     </ion-col>
                 </ion-item>
 

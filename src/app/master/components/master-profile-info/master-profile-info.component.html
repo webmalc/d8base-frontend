@@ -117,7 +117,7 @@
                 {{"global.professional-level." + context.master?.level | translate}}
             </ion-text>
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="context.user.gender">
             <ion-label>
                 {{"master-profile.info.sex"|translate}}
             </ion-label>

@@ -171,8 +171,8 @@ export class ServicePublishDataPreparerService {
         price.price = stepTwoData.price;
         price.start_price = stepTwoData.start_price;
         price.end_price = stepTwoData.end_price;
-        price.end_price_currency = stepTwoData.end_price_currency?.currency;
-        price.start_price_currency = stepTwoData.start_price_currency?.currency;
+        price.end_price_currency = stepTwoData.price_currency?.currency;
+        price.start_price_currency = stepTwoData.price_currency?.currency;
         price.price_currency = stepTwoData.price_currency?.currency;
         price.is_price_fixed = stepTwoData.is_price_fixed;
 
