@@ -651,7 +651,9 @@
     "surname": "Surname",
     "email": "E-mail",
     "phone": "Phone",
-    "is-not-for-me-description": "Enter the name of the person who will get the service"
+    "is-not-for-me-description": "Enter the name of the person who will get the service",
+    "success-title": "The service was successfully published.",
+    "success-description": "Here's how the clients see it:"
   },
   "flag-menu": {
     "language": "Language",

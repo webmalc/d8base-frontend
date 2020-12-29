@@ -48,7 +48,7 @@ export class ServicePublishFinalStepComponent {
                 finalize(() => this.loading.loadingDismiss())
             )
             .subscribe(
-                (service) => this.router.navigate(['service', service.id])
+                (service) => this.router.navigate(['service', service.id], {queryParams: {from: 'publish'}})
             );
     }
 

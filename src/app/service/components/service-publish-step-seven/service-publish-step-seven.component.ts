@@ -165,8 +165,23 @@ export class ServicePublishStepSevenComponent extends Reinitable {
             this.formService.setControlDisabled(true, this.formFields.City);
             this.formService.setControlDisabled(true, this.formFields.Postal);
         }
+        this.disableIrrelevantControls();
         this.initDefaultUnits();
         this.initMaxDistance();
+    }
+
+    private disableIrrelevantControls(): void {
+        const stepData = this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
+        const serviceType = stepData.service_type;
+
+        if (serviceType === 'online') {
+            this.formService.setControlDisabled(true, this.formFields.Country);
+            this.formService.setControlDisabled(true, this.formFields.City);
+            this.formService.setControlDisabled(true, this.formFields.Address);
+        }
+        if (serviceType !== 'client') {
+            this.formService.setControlDisabled(true, this.formFields.MaxDistance);
+        }
     }
 
     private initMaxDistance(): void {

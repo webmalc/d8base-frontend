@@ -13,6 +13,10 @@
                         <h1>{{ 'service-details.title' | translate }}</h1>
                     </ion-label>
                 </ion-item>
+                <app-info-row *ngIf="showSuccessOrderNotification$ | async">
+                    {{'order.success-title'|translate}}<br>
+                    {{'order.success-description'|translate}}
+                </app-info-row>
                 <ng-container *ngIf="service">
                     <app-service-widget [service]="service" [master]="master"
                                         [alwaysExpanded]="true">
