@@ -333,7 +333,6 @@
       "city-placeholder": "Выберите ваш город",
       "address": "Адрес",
       "address-placeholder": "Введите ваш адрес",
-      "address-required-info": "При «Прием у мастера» поле обязательно",
       "postal": "Индекс (Почтовый код)",
       "postal-placeholder": "Ваш индекс",
       "location-radius": "Выезд: ",

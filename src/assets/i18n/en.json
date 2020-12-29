@@ -333,7 +333,6 @@
       "city-placeholder": "Choose city",
       "address": "Address",
       "address-placeholder": "Enter address",
-      "address-required-info": "Required when service is provided at «professional's place»",
       "postal": "Index",
       "postal-placeholder": "Index",
       "location-radius": "Attendance:",
