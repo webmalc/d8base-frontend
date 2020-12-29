@@ -51,13 +51,12 @@ export class MasterProfileCalendarComponent implements OnInit {
         );
 
         const masterId = this.contextService.contextSnapshot.master?.id;
-        const createNew$ = this.scheduleApi.createList(newSchedules.map(schedule => ({
+        const createNew$ = this.scheduleApi.createSet(newSchedules.map(schedule => ({
             ...schedule,
             professional: masterId,
             id: null
         })));
 
-        // TODO: use /set/ endpoint
         concat(deleteOld$, createNew$)
             .subscribe({
                 next: () => null,
