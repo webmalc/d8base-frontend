@@ -15,10 +15,10 @@ import {
     MasterWidgetComponent,
     MoreInfoComponent,
     OrderDetailsComponent,
+    PhotoPopoverComponent,
     PriceComponent,
     ScheduleEditorComponent,
     ScheduleViewerComponent,
-    ServicePhotoPopoverComponent,
     ServiceWidgetComponent
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -56,6 +56,7 @@ import { ImageCropPopoverComponent } from './components/picture-selector/image-c
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import { DebounceDirective } from './directives/debounce.directive';
 import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
+import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { MainColumnDirective } from './directives/main-column.directive';
 import { NumberDirective } from './directives/number.directive';
 
@@ -102,8 +103,9 @@ import { NumberDirective } from './directives/number.directive';
         InputErrorDescriptionComponent,
         SuccessFlashbagComponent,
         ServicePhotosComponent,
-        ServicePhotoPopoverComponent,
-        IonImageSpinnerDirective
+        PhotoPopoverComponent,
+        IonImageSpinnerDirective,
+        IonImageViewDirective
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -143,8 +145,9 @@ import { NumberDirective } from './directives/number.directive';
         InputErrorDescriptionComponent,
         SuccessFlashbagComponent,
         ServicePhotosComponent,
-        ServicePhotoPopoverComponent,
-        IonImageSpinnerDirective
+        PhotoPopoverComponent,
+        IonImageSpinnerDirective,
+        IonImageViewDirective
     ],
     imports: [
         CommonModule,
