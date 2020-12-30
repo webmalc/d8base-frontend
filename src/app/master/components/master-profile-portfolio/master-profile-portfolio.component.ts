@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {MasterPhoto} from '@app/master/models/master-photo';
-import {MasterPhotosGeneratorFactoryService} from '@app/master/services/master-photos-generator-factory.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProfessionalPhotoList } from '@app/api/models';
+import { ProfessionalsService } from '@app/api/services';
+import { MasterPhotosGeneratorFactoryService } from '@app/master/services/master-photos-generator-factory.service';
+import { Reinitable } from '@app/shared/abstract/reinitable';
 
 @Component({
     selector: 'app-master-profile-portfolio',
@@ -10,21 +11,17 @@ import {Reinitable} from '@app/shared/abstract/reinitable';
     styleUrls: ['./master-profile-portfolio.component.scss']
 })
 export class MasterProfilePortfolioComponent extends Reinitable {
+    public masterPhotos: ProfessionalPhotoList[];
+    public masterId: string;
 
-    public masterPhotos: MasterPhoto[];
-    public masterId: number;
-
-    constructor(
-        private readonly route: ActivatedRoute,
-        private readonly masterPhotosGenerator: MasterPhotosGeneratorFactoryService
-    ) {
+    constructor(private readonly route: ActivatedRoute, private readonly professionalsService: ProfessionalsService) {
         super();
     }
 
     public init(): void {
-        this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-        this.masterPhotosGenerator.getPhotos(this.masterId).subscribe(
-            list => this.masterPhotos = list
-        );
+        this.masterId = this.route.snapshot.paramMap.get('master-id');
+        this.professionalsService.professionalsProfessionalPhotosList({ professional: `${this.masterId}` }).subscribe(({ results }) => {
+            this.masterPhotos = results;
+        });
     }
 }
