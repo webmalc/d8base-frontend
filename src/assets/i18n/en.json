@@ -461,6 +461,9 @@
       "certificate-url": "Digital Certificate URL",
       "certificate-id": "Certificate ID"
     },
+    "portfolio": {
+      "gallery": "Gallery"
+    },
     "calendar": {
       "schedule": "Schedule",
       "title": "Calendar"

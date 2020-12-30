@@ -17,7 +17,6 @@ import { ServicesService } from '@app/api/services';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { from, Observable, Subject } from 'rxjs';
 import { finalize, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { ServicePhotoPopoverComponent } from '../service-photo-popover/service-photo-popover.component';
 
 const spaceBetweenSlides: number = 16;
 
@@ -74,10 +73,6 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
         this.slides.slidePrev();
     }
 
-    public zoomPhoto(servicePhoto: ServicePhotoList): void {
-        this.createPopover(servicePhoto.photo);
-    }
-
     private initNavigationButtonsAbility(): void {
         this.isPrevButtonDisabled$ = this.slides.ionSlideDidChange.pipe(
             switchMap(() => from(this.slides.isBeginning())),
@@ -102,18 +97,6 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
                 this.subscribeSlideListChanges();
                 this.cd.markForCheck();
             });
-    }
-
-    private async createPopover(src: string): Promise<void> {
-        const pop = await this.modalController.create({
-            component: ServicePhotoPopoverComponent,
-            cssClass: 'modal-fullscreen',
-            componentProps: {
-                src
-            }
-        });
-
-        return await pop.present();
     }
 
     private subscribeSlideListChanges(): void {
