@@ -461,6 +461,9 @@
       "certificate-url": "Ссылка на сертификат",
       "certificate-id": "ID сертификата"
     },
+    "portfolio": {
+      "gallery": "Галерея работ"
+    },
     "calendar": {
       "schedule": "Расписание",
       "title": "Календарь"
