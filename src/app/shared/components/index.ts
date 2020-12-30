@@ -13,3 +13,5 @@ export * from './schedule-editor/day-selector/day-selector.component';
 export * from './schedule-viewer/schedule-viewer.component';
 export * from './price/price.component';
 export * from './service-photo-popover/service-photo-popover.component';
+export * from './location-viewer/location-viewer.component';
+export * from './content-wrapper/content-wrapper.component';
