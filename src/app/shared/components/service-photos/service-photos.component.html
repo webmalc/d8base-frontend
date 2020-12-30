@@ -10,9 +10,9 @@
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
         </ion-button>
         <ion-slides class="slides" [options]="slideOptions" #slides>
-            <ion-slide *ngFor="let servicePhoto of servicePhotos" (click)="zoomPhoto(servicePhoto)" #slide>
+            <ion-slide *ngFor="let servicePhoto of servicePhotos" #slide>
                 <ion-thumbnail class="thumbnail">
-                    <ion-img spinner [src]="servicePhoto.photo_thumbnail"> </ion-img>
+                    <ion-img spinner viewOnClick [src]="servicePhoto.photo_thumbnail" [fullSizeSrc]="servicePhoto.photo"> </ion-img>
                 </ion-thumbnail>
             </ion-slide>
         </ion-slides>

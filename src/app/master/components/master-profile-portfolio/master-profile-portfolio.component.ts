@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
-import { MasterPhotosGeneratorFactoryService } from '@app/master/services/master-photos-generator-factory.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
 
 @Component({

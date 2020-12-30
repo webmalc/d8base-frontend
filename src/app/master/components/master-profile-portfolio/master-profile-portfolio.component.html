@@ -3,7 +3,7 @@
         <div class="gallery">
             <div class="gallery-element" *ngFor="let photo of masterPhotos">
                 <div class="gallery-element-container">
-                    <ion-img spinner class="ion-img" [src]="photo.photo_thumbnail" alt="{{ photo.name }}" title="{{ photo.name }}"></ion-img>
+                    <ion-img spinner viewOnClick class="ion-img" [src]="photo.photo_thumbnail" [fullSizeSrc]="photo.photo" alt="{{ photo.name }}" title="{{ photo.name }}"></ion-img>
                 </div>
             </div>
         </div>
