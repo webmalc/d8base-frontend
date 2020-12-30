@@ -142,7 +142,18 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     }
 
     public toggleUseDefaultLocation(event: CustomEvent): void {
-        this.isUseDefaultLocation = event.detail.checked;
+        const useDefaultLocation: boolean = event.detail.checked;
+        this.isUseDefaultLocation = useDefaultLocation;
+        if (useDefaultLocation) {
+            this.formService.setControlDisabled(true, this.formFields.Country);
+            this.formService.setControlDisabled(true, this.formFields.City);
+            this.formService.setControlDisabled(true, this.formFields.Address);
+        } else {
+            const isCountrySelected = Boolean(this.formService.getFormFieldValue(this.formFields.Country));
+            this.formService.setControlDisabled(false, this.formFields.Country);
+            this.formService.setControlDisabled(!isCountrySelected, this.formFields.City);
+            this.formService.setControlDisabled(false, this.formFields.Address);
+        }
     }
 
     public isClientPlaceService(): boolean {
