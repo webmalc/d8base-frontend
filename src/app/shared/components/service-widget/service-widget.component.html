@@ -35,8 +35,10 @@
                 <ion-text>{{ 'service-location.professional' | translate }}</ion-text>
             </ion-item>
             <ion-item *ngFor="let serviceLocation of service.locations" lines="none">
-                <span>{{ 'service-details.address' | translate }}:&nbsp;</span>
-                <app-location-viewer [location]="serviceLocation.location"></app-location-viewer>
+                <span>
+                    {{ 'service-details.address' | translate }}:&nbsp;
+                    <app-location-viewer [location]="serviceLocation.location"></app-location-viewer>
+                </span>
             </ion-item>
             <ion-item lines="none" *ngSwitchCase="'client'">
                 <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>

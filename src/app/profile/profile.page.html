@@ -61,14 +61,7 @@
                             routerDirection="forward">
                     <ion-icon name="create-outline"></ion-icon>
                 </ion-button>
-
-                <ion-text>
-                    <ng-container *ngIf="(defaultLocation$|async)?.city">
-                        {{(defaultLocation$|async)?.country.name}}, {{(defaultLocation$|async)?.city?.name}}
-                    </ng-container>
-                    <ng-container
-                            *ngIf="!(defaultLocation$|async)?.city">{{(defaultLocation$|async)?.country.name}}</ng-container>
-                </ion-text>
+                    <app-location-viewer [location]="defaultLocation$ | async"></app-location-viewer>
             </ion-item>
             <ion-item *ngFor="let location of (additionalLocationsList$|async)" lines="none">
                 <ion-label position="stacked">
@@ -82,9 +75,7 @@
                             routerLinkActive="active">
                     <ion-icon name="create-outline"></ion-icon>
                 </ion-button>
-                <ion-text>
-                    {{location.country.name}}, {{location.city.name}}
-                </ion-text>
+                    <app-location-viewer [location]="location"></app-location-viewer>
             </ion-item>
         </ion-item-group>
         <ion-item button
@@ -92,7 +83,7 @@
                   routerLink="location-add/" [detail]="false"
                   routerDirection="forward"
                   routerLinkActive="active">
-            <ion-icon color="secondary" name="add-circle"></ion-icon>
+            <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
             <ion-label>
                 {{'profile-page.add-new-address'|translate}}
             </ion-label>

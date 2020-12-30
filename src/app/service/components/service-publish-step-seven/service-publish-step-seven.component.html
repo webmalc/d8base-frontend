@@ -96,7 +96,7 @@
                                             [formControlName]="formFields.DefaultLocation" interface="popover"
                                             class="max-width100 no-padding-left">
                                         <ion-select-option *ngFor="let loc of defaultLocationList" [value]="loc">
-                                            {{loc.address || (loc.country.name + loc.city.name)}}
+                                            <app-location-viewer [location]="loc"></app-location-viewer>
                                         </ion-select-option>
                                     </ion-select>
                                 </ion-item>
