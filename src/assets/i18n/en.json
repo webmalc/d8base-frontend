@@ -244,7 +244,8 @@
     "schedule-title": "Service Schedule",
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
-    "instant-book-description": "Ordering of this service will be approved automatically"
+    "instant-book-description": "Ordering of this service will be approved automatically",
+    "address": "Address"
   },
   "service-publish": {
     "back-button": "Back",

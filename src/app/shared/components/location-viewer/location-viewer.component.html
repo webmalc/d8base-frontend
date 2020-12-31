@@ -1,0 +1,6 @@
+<ng-container *ngIf="locationText$ | async as locationText; else spinner">
+  {{ locationText }}
+</ng-container>
+<ng-template #spinner>
+  <ion-spinner class="spinner" name="dots"></ion-spinner>
+</ng-template>

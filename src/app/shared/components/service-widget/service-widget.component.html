@@ -34,22 +34,18 @@
                 <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
                 <ion-text>{{ 'service-location.professional' | translate }}</ion-text>
             </ion-item>
+            <ion-item *ngFor="let serviceLocation of service.locations" lines="none">
+                <span>
+                    {{ 'service-details.address' | translate }}:&nbsp;
+                    <app-location-viewer [location]="serviceLocation.location"></app-location-viewer>
+                </span>
+            </ion-item>
             <ion-item lines="none" *ngSwitchCase="'client'">
                 <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
                 <ion-text>{{ 'service-location.client' | translate }}</ion-text>
             </ion-item>
         </ng-container>
     </ion-list>
-
-    <!--        TODO: show schedule when available -->
-    <!--    <ion-list>-->
-    <!--        <ion-list-header>-->
-    <!--            <ion-label>-->
-    <!--                <h1>{{ 'service-details.schedule-title' | translate }}</h1>-->
-    <!--            </ion-label>-->
-    <!--        </ion-list-header>-->
-    <!--        <app-schedule-viewer [schedule]="service.schedule"></app-schedule-viewer>-->
-    <!--    </ion-list>-->
 
     <ion-list>
         <ion-list-header>

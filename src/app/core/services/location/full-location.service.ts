@@ -21,6 +21,13 @@ export type FullLocation = {
     district: District;
 };
 
+export interface LocationInterface {
+    id?: number;
+    country?: number;
+    city?: number;
+    address?: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -33,7 +40,7 @@ export class FullLocationService {
         private readonly districtApi: DistrictApiService
     ) {}
 
-    public getTextLocation(location: ProfessionalLocationInline): Observable<{ id: number; text: string }>  {
+    public getTextLocation(location: LocationInterface): Observable<{ id: number; text: string }>  {
         return this.getFullLocation(location).pipe(
             map(res => {
                 const textLocation = ['country', 'city']

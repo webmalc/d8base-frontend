@@ -41,13 +41,13 @@ export class LocationService {
         );
     }
 
-    public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<T[]> {
-        return this.getLocationList<T>(api);
+    public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<ClientLocationInterface[]> {
+        return this.getLocationList(api);
     }
 
-    private getLocationList<T extends ClientLocationInterface>(api: LocationApiServiceInterface, id?: number): Observable<T[]> {
+    private getLocationList(api: LocationApiServiceInterface, id?: number): Observable<ClientLocationInterface[]> {
         return api.getByClientId(id).pipe(
-            this.switch<T>()
+            map(data => data.results)
         );
     }
 
