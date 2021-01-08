@@ -1,19 +1,18 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
-import {Master} from '@app/core/models/master';
+import {ProfessionalLocationInline} from '@app/api/models/professional-location-inline';
 import {HelperService} from '@app/core/services/helper.service';
-import {Certificate} from '@app/master/models/certificate';
-import {Education} from '@app/master/models/education';
-import {Experience} from '@app/master/models/experience';
-import {MasterContact} from '@app/master/models/master-contact';
-import {MasterLocation} from '@app/master/models/master-location';
-import {PublicReview} from '@app/master/models/public-review';
-import {Tag} from '@app/master/models/tag';
-import {MasterProfileInfoGeneratorFactoryService} from '@app/master/services/master-profile-info-generator-factory.service';
-import {Country} from '@app/profile/models/country';
+import {FullLocationService} from '@app/core/services/location/full-location.service';
+import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
+import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
 import {Language} from '@app/profile/models/language';
-import {Observable} from 'rxjs';
+import {LanguagesApiService} from '@app/profile/services/languages-api.service';
+import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
+import {forkJoin, Observable} from 'rxjs';
+import {first, map, shareReplay, switchMap} from 'rxjs/operators';
+
+function isNumbers(array: any[]): array is number[] {
+    return typeof (array[0]) === 'number';
+}
 
 @Component({
     selector: 'app-master-profile-info',
@@ -22,48 +21,32 @@ import {Observable} from 'rxjs';
 })
 export class MasterProfileInfoComponent {
 
-    public editable: Observable<boolean>;
-    public master: Master;
-    public masterLocation: MasterLocation[];
-    public masterContacts: MasterContact[] = [];
-    public masterTags: Tag[];
-    public user: PartialUserInterface;
-    public userCountry: Country;
-    public userLanguages: Language[];
-    public experienceList: Experience[];
-    public educationList: Education[];
-    public certificateList: Certificate[];
-    public publicReviewList: PublicReview[];
+    public context$: Observable<MasterProfileContext>;
+    public languages$: Observable<Language[]>;
+    public locations$: Observable<{ id: number; text: string }[]>;
     public readonly editDefaultUrl = 'professional-contact-add-default/';
     public readonly editUrl = 'professional-contact-edit/';
-    public readonly addUrl = 'professional-contact-add';
-
+    public readonly addUrl = 'professional-contact-add/';
 
     constructor(
-        private readonly masterInfoGeneratorFactory: MasterProfileInfoGeneratorFactoryService,
-        private readonly route: ActivatedRoute
+        private readonly fullLocationService: FullLocationService,
+        context: MasterProfileContextService,
+        userLanguagesApi: UserLanguagesApiService,
+        languagesApi: LanguagesApiService
     ) {
-    }
-
-    public setEditable(editable: Observable<boolean>): void {
-        this.editable = editable;
-    }
-
-    public init(): void {
-        this.masterInfoGeneratorFactory.getData(parseInt(this.route.snapshot.paramMap.get('master-id'), 10)).subscribe(
-            data => {
-                this.master = data.master;
-                this.masterLocation = data.masterLocation.reverse();
-                this.masterContacts = data.masterContacts.reverse();
-                this.masterTags = data.masterTags.reverse();
-                this.user = data.user;
-                this.userCountry = data.userCountry;
-                this.userLanguages = data.userLanguages.reverse();
-                this.experienceList = data.experienceList.reverse();
-                this.certificateList = data.certificateList.reverse();
-                this.publicReviewList = data.publicReviewList.reverse();
-                this.educationList = data.educationList.reverse();
-            }
+        this.context$ = context.context$.pipe(
+            first(({user, master}) => Boolean(master) && Boolean(user))
+        );
+        this.languages$ = this.context$.pipe(
+            map(({user}) => isNumbers(user.languages) ? user.languages : user.languages.map(x => x.id)),
+            switchMap(ids => userLanguagesApi.getList(ids)),
+            switchMap(languages => languagesApi.getList(languages.map(lang => lang?.language))),
+            shareReplay(1)
+        );
+        this.locations$ = this.context$.pipe(
+            switchMap(({master}) =>
+                forkJoin(master.locations.map(x => this.fullLocationService.getTextLocation(x)))
+            )
         );
     }
 

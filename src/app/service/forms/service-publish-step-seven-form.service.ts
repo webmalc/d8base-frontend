@@ -15,11 +15,16 @@ export class ServicePublishStepSevenFormService {
         this.form = this.formBuilder.group({
             [ServicePublishStepSevenFormFields.Country]: [data?.country, Validators.required],
             [ServicePublishStepSevenFormFields.City]: [data?.city, Validators.required],
-            [ServicePublishStepSevenFormFields.Address]: [data?.address],
+            [ServicePublishStepSevenFormFields.Address]: [data?.address, Validators.required],
             [ServicePublishStepSevenFormFields.Postal]: [data?.postal_code],
             [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
             [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
-            [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false]
+            [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false],
+            [ServicePublishStepSevenFormFields.UseDefaultLocation]: [data?.use_default_location ?? false],
+            [ServicePublishStepSevenFormFields.MaxDistance]: [data?.max_distance, Validators.required],
+            [ServicePublishStepSevenFormFields.Units]: [data?.units],
+            [ServicePublishStepSevenFormFields.DefaultLocation]: [data?.default_location],
+            [ServicePublishStepSevenFormFields.InstantBooking]: [data?.is_auto_order_confirmation]
         });
     }
 

@@ -1,0 +1,115 @@
+<app-header></app-header>
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <ion-row class="ion-justify-content-center">
+            <ion-col *ngIf="context$ | async as context" appMainColumn>
+                <ion-item color="light" lines="full">
+                    <ion-buttons slot="start">
+                        <ion-button routerLink="/service/{{ context.service.id }}" routerDirection="back">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <ion-title>{{ 'order.title' | translate }}</ion-title>
+                </ion-item>
+                <ion-list>
+                    <ion-list-header class="fs20">
+                        {{ 'order.selected-service' | translate }}
+                    </ion-list-header>
+                    <app-service-widget [service]="context.service"
+                                        [master]="context.professional"></app-service-widget>
+                </ion-list>
+
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <ion-list>
+                        <ion-list-header>
+                            {{ 'order.identification' | translate }}
+                        </ion-list-header>
+                        <ion-item>
+                            <ion-label position="floating">{{
+                                'order.email' | translate
+                                }}</ion-label>
+                            <ion-input
+                                    type="email"
+                                    inputmode="email"
+                                    email
+                                    [formControl]="email"
+                            ></ion-input>
+                        </ion-item>
+                    </ion-list>
+
+                    <ion-row class="registration-form">
+                        <ion-col *ngIf="showRegistrationForm">
+                            <ng-container *ngIf="isRegistered">
+                                <ion-item>
+                                    <ion-label position="stacked" class="ion-text-wrap">
+                                        {{ 'order.registered-user' | translate }}
+                                    </ion-label>
+                                    <ion-input
+                                            type="password"
+                                            inputmode="password"
+                                            [formControl]="password"
+                                    ></ion-input>
+                                </ion-item>
+                            </ng-container>
+                            <ng-container *ngIf="!isRegistered">
+                                <ion-item>
+                                    <ion-label position="stacked" class="ion-text-wrap">
+                                        {{ 'order.new-user' | translate }}
+                                    </ion-label>
+                                    <ion-input
+                                            type="password"
+                                            inputmode="password"
+                                            [formControl]="password"
+                                    ></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="stacked" class="ion-text-wrap">
+                                        {{ 'registration-form.confirm' | translate }}
+                                    </ion-label>
+                                    <ion-input
+                                            type="password"
+                                            inputmode="password"
+                                            [formControl]="passwordConfirm"
+                                    ></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="stacked" class="ion-text-wrap">
+                                        {{ 'registration-form.name' | translate }}
+                                    </ion-label>
+                                    <ion-input [formControl]="name"
+                                    ></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="stacked" class="ion-text-wrap">
+                                        {{ 'registration-form.country' | translate }}
+                                    </ion-label>
+                                    <ionic-selectable
+                                            id="country-selectable"
+                                            itemValueField="id"
+                                            itemTextField="name"
+                                            [canSearch]="true"
+                                            [formControl]="country"
+                                            (onSearch)="countrySelectable.onCountrySearch($event)">
+                                    </ionic-selectable>
+                                </ion-item>
+                            </ng-container>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-button expand="block" color="medium" (click)="reset()" [disabled]="!showRegistrationForm">
+                                {{ 'global.back' | translate }}
+                            </ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button expand="block" type="submit" [disabled]="email.invalid || (showRegistrationForm && form.invalid)">
+                                {{'global.forward' | translate}}
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MasterProfileServicesSearchService} from '@app/master/services/master-profile-services-search.service';
+import ServiceData from '@app/core/interfaces/service-data.interface';
 import {ServicesGeneratorFactoryService} from '@app/master/services/services-generator-factory.service';
 import {Service} from '@app/service/models/service';
-import {ServiceTag} from '@app/service/models/service-tag';
 import {ServicesApiService} from '@app/service/services/services-api.service';
+import {AlertController} from '@ionic/angular';
+import {TranslateService} from '@ngx-translate/core';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-master-profile-services',
@@ -14,23 +16,21 @@ import {ServicesApiService} from '@app/service/services/services-api.service';
 export class MasterProfileServicesComponent {
 
     public searchModel: string;
-    public serviceData: { service: Service, tags?: ServiceTag[] }[] = [];
+    public serviceData$: Observable<ServiceData[]>;
     public masterId: number;
-    private serviceDefaultData: { service: Service, tags?: ServiceTag[] }[] = [];
 
     constructor(
         private readonly route: ActivatedRoute,
         private readonly servicesApi: ServicesApiService,
-        private readonly searchService: MasterProfileServicesSearchService,
-        private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService
+        private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
+        private readonly alertController: AlertController,
+        private readonly translate: TranslateService
     ) {
     }
 
     public init(): void {
         this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-        this.serviceGeneratorFactory.getServiceList(this.masterId).subscribe(
-            servicesData => this.serviceData = this.serviceDefaultData = servicesData
-        );
+        this.serviceData$ = this.serviceGeneratorFactory.getServiceList(this.masterId);
     }
 
     public enableService(service: Service): void {
@@ -41,15 +41,27 @@ export class MasterProfileServicesComponent {
         this.patchService(service, false);
     }
 
-    public search(): void {
-        if (this.searchModel.length === 0) {
-            this.serviceData = this.serviceDefaultData;
-        }
-        if (this.searchModel.length < 3) {
-            return;
-        }
+    public async deleteService(service: Service): Promise<void> {
+        const alert = await this.alertController.create({
+            message: this.translate.instant('delete-confirmation.delete-service'),
+            buttons: [
+                {
+                    text: this.translate.instant('delete-confirmation.cancel'),
+                    role: 'cancel'
+                }, {
+                    text: this.translate.instant('delete-confirmation.okay'),
+                    handler: () => {
+                        this.servicesApi.delete(service).subscribe(() => this.init());
+                    }
+                }
+            ]
+        });
 
-        this.serviceData = this.searchService.search(this.serviceDefaultData, this.searchModel);
+        await alert.present();
+    }
+
+    public search(event: CustomEvent): void {
+        this.searchModel = event.detail.value;
     }
 
     public clearSearchModel(): void {

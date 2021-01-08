@@ -1,15 +1,14 @@
-import {Injectable} from '@angular/core';
-import {once} from '@app/core/decorators/once';
-import {environment} from '@env/environment';
-import {firebase} from '@firebase/app';
+import { Injectable } from '@angular/core';
+import { once } from '@app/core/decorators/once';
+import { environment } from '@env/environment';
+import { firebase } from '@firebase/app';
 import '@firebase/messaging';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotificationWorkerService {
-
     public static isInitialized: Observable<boolean>;
     public messageReceived$: Subject<boolean> = new Subject<boolean>();
     private readonly initSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -17,7 +16,6 @@ export class NotificationWorkerService {
     constructor() {
         NotificationWorkerService.isInitialized = this.initSubject.asObservable();
     }
-
 
     public static isFirebaseSupported(): boolean {
         return firebase.messaging.isSupported();
@@ -40,12 +38,14 @@ export class NotificationWorkerService {
             });
 
             messaging.onTokenRefresh(() => {
-                messaging.getToken().then(
-                    (refreshedToken: string) => {
+                messaging
+                    .getToken()
+                    .then((refreshedToken: string) => {
                         console.warn(refreshedToken);
-                    }).catch((err) => {
-                    console.error(err);
-                });
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
             });
             resolve();
         });
@@ -53,7 +53,7 @@ export class NotificationWorkerService {
 
     public requestPermission(): Promise<void> {
         return new Promise<void>(async resolve => {
-            if (!Notification || !NotificationWorkerService.isFirebaseSupported()) {
+            if (!('Notification' in window) || !Notification || !NotificationWorkerService.isFirebaseSupported()) {
                 return resolve();
             }
             Notification.requestPermission().finally(() => {

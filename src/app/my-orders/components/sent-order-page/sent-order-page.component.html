@@ -17,7 +17,9 @@
                         <ion-list-header>
                             <ion-label>{{ 'sent_orders.order-details-subtitle' | translate }}:</ion-label>
                         </ion-list-header>
-                        <app-master-widget [master]="service.professional | masterById$ | async"></app-master-widget>
+                        <ng-container *ngIf="service.professional | masterById$ | async as master">
+                        <app-master-widget [master]="master"></app-master-widget>
+                            </ng-container>
                         <ion-item lines="none">
                             <ion-label color="primary"><b>{{ 'sent_orders.order-number' | translate }}
                                 : {{ order.id}}</b></ion-label>

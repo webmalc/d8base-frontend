@@ -1,11 +1,16 @@
-import {Component, OnDestroy} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {RegistrationService} from '@app/auth/services/registration.service';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
+import {UserLocation} from '@app/core/models/user-location';
 import {AuthenticationService} from '@app/core/services/authentication.service';
+import {HelperService} from '@app/core/services/helper.service';
 import {IsUserRegisteredApiService} from '@app/core/services/is-user-registered-api.service';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
+import {City} from '@app/profile/models/city';
+import {Country} from '@app/profile/models/country';
 import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
 import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
 import {ServicePublishStepFourFormService} from '@app/service/forms/service-publish-step-four-form.service';
@@ -13,8 +18,11 @@ import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-inte
 import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
 import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
 import {Reinitable} from '@app/shared/abstract/reinitable';
+import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
+import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
+import {IonContent} from '@ionic/angular';
 import {plainToClass} from 'class-transformer';
-import {BehaviorSubject, forkJoin, Observable, Subject, Subscription} from 'rxjs';
+import {BehaviorSubject, forkJoin, Subject} from 'rxjs';
 import {filter, first, switchMap, takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -24,9 +32,11 @@ import {filter, first, switchMap, takeUntil} from 'rxjs/operators';
 })
 export class ServicePublishStepFourComponent extends Reinitable implements OnDestroy {
 
+    public errorMessages: string[];
     public readonly formFields = ServicePublishStepFourFormFields;
     public readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public isUserExists: boolean = false;
+    @ViewChild(IonContent, {read: IonContent, static: false}) public content: IonContent;
     private readonly emailChanged$: Subject<void> = new Subject<void>();
     private readonly destroy$ = new Subject<void>();
 
@@ -38,7 +48,9 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
         public serviceStepsNavigationService: ServiceStepsNavigationService,
         private readonly registrationService: RegistrationService,
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        private readonly userManager: UserManagerService
+        private readonly userManager: UserManagerService,
+        public readonly countrySelectable: SelectableCountryOnSearchService,
+        public readonly citySelectable: SelectableCityOnSearchService
     ) {
         super();
     }
@@ -49,7 +61,17 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
         }
     }
 
+    public onCountryChange(): void {
+        this.formService.setControlDisabled(false, this.formFields.City);
+        this.formService.form.get(this.formFields.City).reset();
+    }
+
+    public getCountryValue(): Country {
+        return this.formService.getFormFieldValue(this.formFields.Country);
+    }
+
     public submitForm(): void {
+        this.errorMessages = null;
         if (this.isUserExists) {
             this.authenticationService.login(
                 {
@@ -69,11 +91,24 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
                 })
             );
         } else {
-            this.registrationService.register(plainToClass(User, this.formService.form.getRawValue())).subscribe(
+            const country = this.formService.form.get(this.formFields.Country).value as Country;
+            const city = this.formService.form.get(this.formFields.City).value as City;
+            this.registrationService.register(
+                plainToClass(User, this.formService.form.getRawValue(), {excludeExtraneousValues: true}),
+                plainToClass(UserLocation, {
+                    country: country.id,
+                    city: city.id,
+                    is_default: true
+                })
+            ).subscribe(
                 user => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishSteps.Four, {isNewMaster: true, user, isNewUser: true}
+                        ServicePublishSteps.Four, {isNewMaster: true, user, isNewUser: true, country, city}
                     ).then(() => this.serviceStepsNavigationService.next());
+                },
+                (err: HttpErrorResponse) => {
+                    this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error);
+                    this.content.scrollToTop();
                 }
             );
         }
@@ -88,7 +123,9 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
 
             return !(this.formService.form.get(this.formFields.Email).valid &&
                 this.formService.form.get(this.formFields.Password).valid &&
-                this.formService.form.get(this.formFields.Confirm).valid);
+                this.formService.form.get(this.formFields.Confirm).valid &&
+                this.formService.form.get(this.formFields.Country).value &&
+                this.formService.form.get(this.formFields.City).value);
         }
 
         return true;

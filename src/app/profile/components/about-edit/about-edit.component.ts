@@ -25,7 +25,7 @@ export class AboutEditComponent implements OnInit {
     public languages$: BehaviorSubject<Language[]> = new BehaviorSubject<Language[]>([]);
     public form: FormGroup;
     public formFields = ProfileFormFields;
-    private defaultUserLanguages: UserLanguage[];
+    private defaultUserLanguages: UserLanguage[] = [];
 
     constructor(
         private readonly userManager: UserManagerService,
@@ -67,17 +67,25 @@ export class AboutEditComponent implements OnInit {
     }
 
     public submitForm(): void {
+        let date: string;
+        if ((this.form.getRawValue()[this.formFields.Birthday] as string)) {
+            date = HelperService.fromDatetime((this.form.getRawValue()[this.formFields.Birthday] as string)).date;
+        }
         const data: Partial<User> = {
-            birthday: HelperService.fromDatetime((this.form.getRawValue()[this.formFields.Birthday] as string)).date,
-            nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country).id
+            birthday: date,
+            nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id
         };
         const userLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[])
             .map(lang => plainToClass(UserLanguage, {language: lang.code}));
 
-        this.userManager.updateUser(data).subscribe();
-        this.userLanguageApi.deleteList(this.defaultUserLanguages).pipe(
-            switchMap(_ => this.userLanguageApi.createList(userLanguages))
-        ).subscribe();
+        this.userManager.updateUser(HelperService.clear(data)).subscribe();
+        if (this.defaultUserLanguages && this.defaultUserLanguages.length) {
+            this.userLanguageApi.deleteList(this.defaultUserLanguages).pipe(
+                switchMap(_ => this.userLanguageApi.createList(userLanguages))
+            ).subscribe();
+        } else {
+            this.userLanguageApi.createList(userLanguages).subscribe();
+        }
     }
 
     private getCountry(id: number | null): Observable<Country | null> {

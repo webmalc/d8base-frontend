@@ -23,18 +23,46 @@
       "4": "Очень хорошо",
       "5": "Отлично"
     },
-    "back": "Назад",
-    "forward": "Продолжить",
+    "weekdays": {
+      "mon": "ПН",
+      "tue": "ВТ",
+      "wed": "СР",
+      "thu": "ЧТ",
+      "fri": "ПТ",
+      "sat": "СБ",
+      "sun": "ВС"
+    },
     "master": {
       "private-person": "Частное лицо"
     },
-    "save": "Сохранить",
-    "at": "в"
+    "from": "с",
+    "to": "до",
+    "at": "в",
+    "back": "Назад",
+    "forward": "Продолжить",
+    "save": "Сохранить"
+  },
+  "delete-confirmation": {
+    "delete-service": "Удалить услугу?",
+    "okay": "Удалить",
+    "cancel": "Отмена"
+  },
+  "error": {
+    "password-mismatch": "Пароли должны совпадать",
+    "password-too-short": "Пароль слишком короткий",
+    "password-numeric": "Запрещены пароли состоящие из одних только цифр"
+  },
+  "service-photos": {
+    "title": "Примеры работ"
   },
   "service-location": {
     "online": "Онлайн услуга",
     "professional": "Приём у мастера",
     "client": "Выезд к клиенту"
+  },
+  "service-payment-options": {
+    "cash": "Наличные",
+    "online": "Оплата онлайн"
   },
   "accordion": {
     "expand": "Подробнее",
@@ -71,10 +99,11 @@
     "miscellaneous": "Дополнительно"
   },
   "login-form": {
-    "login": "Логин",
+    "login": "Email",
     "password": "Пароль",
     "sign-in": "Войти",
-    "forgot-password": "Забыли пароль?"
+    "forgot-password": "Забыли пароль?",
+    "sign-up": "Регистрация"
   },
   "registration-form": {
     "email": "Email",
@@ -85,6 +114,17 @@
     "country": "Страна",
     "city": "Город",
     "register": "Зарегистрироваться"
+  },
+  "reset-password": {
+    "password": "Пароль",
+    "confirm": "Подтвердите пароль",
+    "submit": "Изменить пароль",
+    "success": "Пароль успешно изменен"
+  },
+  "password-recovery": {
+    "email": "Email",
+    "submit": "Отправить",
+    "link-sent": "Ссылка на сброс пароля была отправлена"
   },
   "login-page": {
     "incorrect-login-data": "Неправильный логин или пароль"
@@ -195,7 +235,17 @@
   "duration": {
     "days": "дни",
     "hours": "часы",
-    "minutes": "минуты"
+    "minutes": "минуты",
+    "minutes-short": "мин"
+  },
+  "service-details": {
+    "title": "Информация об услуге",
+    "location-title": "Адрес оказания услуги",
+    "schedule-title": "Время оказания услуги",
+    "payment-title": "Доступные варианты оплаты",
+    "instant-book-title": "Мгновенное подтверждение (Instant Book)",
+    "instant-book-description": "Бронирования данной услуги акцептовываются мастером автоматически и не требуют подтверждения мастером",
+    "address": "Адрес"
   },
   "service-publish": {
     "back-button": "Назад",
@@ -204,7 +254,6 @@
       "title": "Публикация услуги",
       "description": "Опубликуйте рекламу о своих услугах всего за 3 минуты и ее увидят тысячи клиентов, которые ищут Вашу услугу и Вас.",
       "subdesc": "Это бесплатно!",
-      "info": "Информация об услуге",
       "category-title": "Выберите категорию в который Вы хотите разместить свою услугу",
       "category-subtitle": "Категория услуги",
       "subcategory-title": "Выберите подкатегорию для вашей услуги",
@@ -217,13 +266,14 @@
       "service-placeholder": "Введите название услуги",
       "service-description": "Описание услуги",
       "service-description-placeholder": "Введите текст описания услуги",
-      "duration": "Продолжительность услуги",
+      "duration-and-price": "Время оказания услуги для одного клиента и её стоимость",
       "fixed-price": "Стоимость услуги фиксированная",
-      "fixed-price-title": "Стоимость услуги",
-      "start-price": "Стоимость услуги от",
-      "end-price": "Стоимость услуги до",
+      "fixed-price-title": "Стоимость",
+      "start-price": "Стоимость от",
+      "end-price": "Стоимость до",
       "second-info-row": "Хотите добавить разную стоимость в зависимости от продолжительности или места — просто добавьте еще услугу на следующем шаге.",
-      "location": "Место оказания услуги"
+      "location": "Место оказания услуги",
+      "description-error": "Минимальная длина описания 20 символов"
     },
     "step-three": {
       "title": "Хотите добавить фотографии услуги? С ними ваша услуга будет ярче!",
@@ -244,7 +294,7 @@
       "create-password": "Пожалуйста, придумайте пароль",
       "second-info-row": "После регистрации вы сможете сохранять и редактировать услугу.",
       "password-placeholder": "Введите ваш пароль",
-      "password-info": "Пароль должен состоять минимум из 6 символов",
+      "password-info": "Пароль должен состоять минимум из 8 символов",
       "password-confirm": "Введите пароль еще раз",
       "forgot-password": "Забыли пароль?",
       "user-exists": "Вы зарегистрированный пользователь.",
@@ -287,33 +337,27 @@
       "city-placeholder": "Выберите ваш город",
       "address": "Адрес",
       "address-placeholder": "Введите ваш адрес",
-      "address-required-info": "При «Прием у мастера» поле обязательно",
       "postal": "Индекс (Почтовый код)",
       "postal-placeholder": "Ваш индекс",
       "location-radius": "Выезд: ",
       "payment-title": "Оплата",
       "payment-description": "Доступные варианты оплаты для клиентов за ваши услуги",
       "payment-info": "Оплату онлайн вы сможете активировать после публикации услуги",
-      "payment-cash": "Наличные",
-      "payment-online": "Оплата онлайн",
       "departure": {
         "title": "География выезда",
-        "description": "Радиус на который Вы выезжаете от введенного адреса"
+        "description": "Радиус, в пределах которого вы выезжаете"
       },
       "location-radius-within": "В пределах города",
       "location-radius-radius": "В радиусе ",
       "timetable": {
         "title": "Время оказания услуг",
-        "mon": "ПН",
-        "tue": "ВТ",
-        "wed": "СР",
-        "thu": "ЧТ",
-        "fri": "ПТ",
-        "sat": "СБ",
-        "sun": "ВС",
         "add-new-time": "Добавить еще время",
         "popover-title": "Выберите день недели"
-      }
+      },
+      "use_default-location": "Использовать существующий адрес",
+      "select-default-location": "Выберите адрес",
+      "instant-booking": "Автоподтверждение (Instant Booking)",
+      "instant-booking-label": "Подтверждать услугу автоматически"
     },
     "final-step": {
       "title": "Поздравляем! Все готово к отправке.",
@@ -379,11 +423,11 @@
         "publish": "Опубликовать",
         "unpublish": "Снять с публикации",
         "view": "Просмотр",
-        "minutes": "мин"
+        "delete": "Удалить"
       },
       "service-presentation": {
-        "pick": "Выбрать",
-        "minutes": "мин"
+        "pick": "Дата",
+        "more-info": "Подробнее"
       },
       "services-tab": {
         "master-services": "Услуги мастера"
@@ -393,10 +437,10 @@
       "information": "Информация",
       "master-location": "Адрес мастера",
       "contacts": "Контакты",
-      "description": "Описание",
+      "description": "О мастере",
       "specialization": "Специализация",
       "tags": "Теги",
-      "about": "О себе",
+      "about": "Описание",
       "professional-experience": "Стаж работы",
       "professional-level": "Профессиональный уровень",
       "sex": "Пол",
@@ -417,7 +461,11 @@
       "certificate-url": "Ссылка на сертификат",
       "certificate-id": "ID сертификата"
     },
+    "portfolio": {
+      "gallery": "Галерея работ"
+    },
     "calendar": {
+      "schedule": "Расписание",
       "title": "Календарь"
     },
     "edit-master": {
@@ -527,11 +575,15 @@
         "online-booking": "Онлайн бронирование",
         "online-booking-desc": "Показывать предложения без онлайн бронирования",
         "instant-booking": "Мгновенное бронирование",
-        "instant-booking-desc": "Показывать только те предложения, которые можно забронировать, не доживаясь подтверждения мастера",
+        "instant-booking-desc": "Показывать только те предложения, которые можно забронировать, не дожидаясь подтверждения мастера",
         "datetime": "Дата, время",
         "availability": "Доступность сервиса",
         "price": "Стоимость услуги",
-        "apply": "Применить"
+        "apply": "Применить",
+        "date-from": "Дата с",
+        "date-to": "Дата по",
+        "price-start": "Цена с",
+        "price-end": "Цена по"
       }
     },
     "result": {
@@ -583,13 +635,13 @@
       "client-details": "Заказ услуги",
       "summary": "Заказ услуги"
     },
+    "identification": "Ваши данные",
+    "registered-user": "Вы зарегистрированный пользователь. Для&nbsp;продолжения введите свой пароль",
+    "new-user": "Введите пароль, используя который вы сможете отслеживать статус заказа",
     "title": "Заказ услуги",
     "selected-service": "Выбранная услуга",
     "order-service": "Бронировать",
     "location-header": "Место оказания услуги",
-    "location-online": "Онлайн услуга",
-    "location-professional": "Приём у мастера",
-    "location-client": "Выезд к клиенту",
     "final-step": "Для завершения бронирования осталось нажать кнопку «Бронировать».",
     "comment-header": "Комментарий к заказу",
     "date-time-header": "Дата и время услуги",
@@ -606,7 +658,9 @@
     "surname": "Фамилия",
     "email": "E-mail",
     "phone": "Телефон",
-    "is-not-for-me-description": "Введите имя, фамилию человека, который будет получателем услуги"
+    "is-not-for-me-description": "Введите имя, фамилию человека, который будет получателем услуги",
+    "success-title": "Услуга успешно опубликована.",
+    "success-description": "Так она выглядит для потенциальных клиентов:"
   },
   "flag-menu": {
     "language": "Язык интерфейса",

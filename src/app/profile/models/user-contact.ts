@@ -7,5 +7,5 @@ export class UserContact implements ClientContactInterface {
     @Expose() public contact: number;
     @Expose() public contact_code?: string;
     @Expose() public contact_display?: string;
-    @Expose() public value?: string;
+    @Expose() public value: string;
 }

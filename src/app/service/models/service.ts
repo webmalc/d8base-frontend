@@ -1,5 +1,6 @@
 import {Price} from '@app/service/models/price';
 import {Expose, Type} from 'class-transformer';
+import {ServiceLocationInline} from '../../api/models';
 
 export class Service {
     // tslint:disable:variable-name
@@ -13,4 +14,7 @@ export class Service {
     @Expose() public is_enabled: boolean;
     @Type(() => Price)
     public price: Price;
+    @Expose() public locations: ServiceLocationInline[];
+    @Expose() public is_auto_order_confirmation: boolean;
+    @Expose() public tags: { name: string }[];
 }

@@ -10,7 +10,7 @@ import {Country} from '@app/profile/models/country';
 import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 import {Observable, of} from 'rxjs';
-import {filter, map, switchMap, tap} from 'rxjs/operators';
+import {filter, first, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -49,7 +49,9 @@ export class UserManagerService {
             return of(this.user);
         }
 
-        return this.getUser().pipe(
+        return this.auth.isAuthenticated$.pipe(
+            first(),
+            switchMap(isAuth => isAuth ? this.getUser() : of(null)),
             tap((user: User) => this.user = user)
         );
     }

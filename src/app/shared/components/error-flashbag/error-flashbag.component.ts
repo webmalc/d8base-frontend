@@ -7,9 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class ErrorFlashbagComponent {
 
-    @Input() public message: string;
-
-    public isVisible(): boolean {
-        return undefined !== this.message && 0 !== this.message.length;
-    }
+    @Input() public messages: string[];
 }

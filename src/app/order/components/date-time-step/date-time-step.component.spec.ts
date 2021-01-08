@@ -1,4 +1,6 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
 import {IonicModule} from '@ionic/angular';
@@ -6,15 +8,20 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {DateTimeStepComponent} from './date-time-step.component';
 
-describe('ServiceOrderStepOneComponent', () => {
+describe('DateTimeStepComponent', () => {
     let component: DateTimeStepComponent;
     let fixture: ComponentFixture<DateTimeStepComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [DateTimeStepComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
-            providers: [OrderWizardStateService]
+            imports: [
+                IonicModule,
+                TranslateModule.forRoot(),
+                HttpClientTestingModule,
+                RouterTestingModule
+            ],
+            providers: [OrderWizardStateService, FormBuilder]
         }).compileComponents();
 
         fixture = TestBed.createComponent(DateTimeStepComponent);

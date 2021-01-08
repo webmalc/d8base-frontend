@@ -1,9 +1,13 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
+.ios {
+  --highlight-height: 2px;
+}
+
 /** Ionic CSS Variables **/
 :root {
-
   --ion-font-family: 'Roboto', sans-serif !important;
   font-family: 'Roboto', sans-serif !important;
 
@@ -97,14 +101,6 @@
 }
 
 .dark-theme {
-
-  ion-content .bgc-light-blue {
-    --ion-background-color: #121212;
-  }
-
-  .item-background-color-white {
-    --ion-item-background:#1e1e1e;
-  }
 
   --ion-color-primary: #428cff;
   --ion-color-primary-rgb: 66,140,255;

@@ -1,271 +1,216 @@
-<ion-row>
-    <ion-col class="ion-no-padding" size="12">
-        <ion-item class="master-profile-tab-title">
-            {{"master-profile.info.information"|translate}}
-        </ion-item>
-        <ion-item class="ion-item-no-side-padding">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-item class="ion-item-no-min-height pv5 master-address" lines="none">
-                    {{"master-profile.info.master-location"|translate}}
-                </ion-item>
-                <ion-item *ngFor="let masterLocation of masterLocation"
-                          class="ion-item-no-min-height ion-item-no-border width100 ion-item-no-side-padding pv10">
-                    <ion-col class="ion-no-padding">
-                        <ion-row class="ion-justify-content-between ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                {{masterLocation?.address}}
-                            </ion-item>
-                            <ion-item class="ion-item-no-border ion-align-items-center"
-                                      routerDirection="forward"
-                                      routerLink="location-edit/{{masterLocation.id}}"
-                                      routerLinkActive="active"
-                                      *ngIf="editable | async"
-                            >
-                                <ion-icon name="create-outline"></ion-icon>
-                            </ion-item>
-                        </ion-row>
-                        <ion-row class="ion-justify-content-between">
-                            <ion-item
-                                    class="ion-item-no-border ion-item-no-side-padding pl10 ion-item-no-min-height pv5 location-map-link">
-                                <ion-icon class="ion-padding-end" color="secondary"
-                                          name="location-outline"></ion-icon>
-                                {{"master-profile.info.on-map"|translate}}
-                            </ion-item>
-                        </ion-row>
-                        <ion-row class="ion-justify-content-between">
-                            <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                {{"master-profile.info.from-here"|translate}}
-                            </ion-item>
-                            <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                                0,2{{"units.0"|translate}}
-                            </ion-item>
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
-                <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
-                          routerDirection="forward"
-                          routerLink="location-add/"
-                          routerLinkActive="active">
-                    <ion-icon color="secondary" name="add-circle"></ion-icon>
-                    <ion-label class="ion-padding-start">
-                        {{'master-profile.info.add-new-address'|translate}}
-                    </ion-label>
-                </ion-item>
-                <app-collapse-item class="width100" title='{{"master-profile.info.contacts"|translate}}'>
-                    <ion-item class="ion-item-no-border ion-item-no-padding-right">
-                        <app-abstract-contacts
-                                [clientContacts]="masterContacts"
-                                addNewContactUrl="{{addUrl}}"
-                                class="width100"
-                                editContactUrl="{{editUrl}}"
-                                editDefaultContactUrl="{{editDefaultUrl}}"
-                                [interactable]="editable | async">
-                        </app-abstract-contacts>
-                    </ion-item>
-                </app-collapse-item>
-            </ion-col>
-        </ion-item>
+<ng-container *ngIf="context$ | async as context">
 
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-row class="ion-justify-content-between ion-padding-top">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        {{"master-profile.info.description"|translate}}
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-align-items-center"
-                              routerDirection="forward"
-                              routerLink="edit/{{master?.id}}"
-                              routerLinkActive="active"
-                              *ngIf="editable | async"
-                    >
-                        <ion-icon name="create-outline"></ion-icon>
-                    </ion-item>
-                </ion-row>
-                <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-desc">
-                    {{master?.description}}
-                </ion-item>
-            </ion-col>
+    <ion-list lines="none">
+        <ion-item>
+            <ion-label>
+                {{ 'master-profile.main-info.rating' | translate }}
+            </ion-label>
+            <ion-label class="ion-text-right">
+                {{ context.master.rating }}
+            </ion-label>
         </ion-item>
+        <ion-item>
+            <ion-label>
+                {{ 'master-profile.main-info.reviews' | translate }}
+            </ion-label>
+            <ion-label class="ion-text-right">
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                {{ 'master-profile.main-info.email' | translate }}
+            </ion-label>
+            <ion-icon *ngIf="context.user.is_confirmed" color="success" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon *ngIf="!context.user.is_confirmed" color="danger" name="close-circle-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="full"></ion-item>
+    </ion-list>
 
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-row class="ion-justify-content-between ion-padding-top">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        {{"master-profile.info.specialization"|translate}}
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-align-items-center"
-                              routerDirection="forward"
-                              routerLink="edit/{{master?.id}}"
-                              routerLinkActive="active"
-                              *ngIf="editable | async"
-                    >
-                        <ion-icon name="create-outline"></ion-icon>
-                    </ion-item>
-                </ion-row>
-                <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                    {{master?.name}}
-                </ion-item>
-            </ion-col>
-        </ion-item>
+    <ion-list lines="none">
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ "master-profile.info.contacts" | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <app-abstract-contacts
+                [clientContacts]="context.master.contacts"
+                addNewContactUrl="{{addUrl}}"
+                editContactUrl="{{editUrl}}"
+                editDefaultContactUrl="{{editDefaultUrl}}"
+                [interactable]="context.canEdit">
+        </app-abstract-contacts>
+    </ion-list>
 
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-row class="ion-justify-content-between ion-padding-top">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 master-address">
-                        {{"master-profile.info.tags"|translate}}
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-align-items-center"
-                              routerDirection="forward"
-                              routerLink="tags-edit/"
-                              routerLinkActive="active"
-                              *ngIf="editable | async"
-                    >
-                        <ion-icon name="create-outline"></ion-icon>
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-start ion-margin-bottom">
-                    <ion-item *ngFor="let tag of masterTags"
-                              class="ion-item-no-border ion-item-no-min-height ion-item-tag">
-                        {{tag.name}}
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+    <ion-list lines="none">
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ "master-profile.info.master-location" | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let masterLocation of locations$ | async" lines="none">
+            <ion-label>
+                {{ masterLocation.text }}
+            </ion-label>
+            <ion-button slot="end"
+                        color="medium"
+                        fill="clear"
+                        routerDirection="forward"
+                        routerLink="location-edit/{{masterLocation.id}}"
+                        routerLinkActive="active"
+                        *ngIf="context.canEdit"
+            >
+                <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
         </ion-item>
+        <ion-item *ngIf="context.canEdit" [detail]="false"
+                  routerDirection="forward"
+                  routerLink="location-add/"
+                  routerLinkActive="active">
+            <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+            <ion-label>
+                {{'master-profile.info.add-new-address'|translate}}
+            </ion-label>
+        </ion-item>
+        <ion-item lines="full"></ion-item>
+    </ion-list>
 
-        <ion-item class="ion-item-no-border ion-item-bottom-border ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <ion-row class="ion-justify-content-start ion-padding-top">
-                    <ion-item
-                            class="ion-item-no-border ion-item-no-min-height pv5 master-address ion-item-no-padding-right">
-                        {{"master-profile.info.about"|translate}}
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-between">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        {{"master-profile.info.professional-experience"|translate}}
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{master?.experience}} {{declinationYears(master?.experience) | translate}}
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-between">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        {{"master-profile.info.professional-level"|translate}}
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{"global.professional-level." + master?.level | translate}}
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-between">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        {{"master-profile.info.sex"|translate}}
-                    </ion-item>
-                    <ion-item *ngIf="user?.gender" class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{"global.sex." + user?.gender | translate}}
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-between">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        {{"master-profile.info.age"|translate}}
-                    </ion-item>
-                    <ion-item *ngIf="user?.birthday" class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{getYearsFromBirthday(user?.birthday)}} {{declinationYears(getYearsFromBirthday(user?.birthday)) | translate}}
-                    </ion-item>
-                </ion-row>
-                <ion-row class="ion-justify-content-between">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height pv5 ion-item-no-padding-right">
-                        {{"master-profile.info.nationality"|translate}}
-                    </ion-item>
-                    <ion-item *ngIf="user?.nationality" class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{userCountry?.name}}
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+    <ion-list lines="none">
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ "master-profile.info.description" | translate }}</h1>
+            </ion-label>
+            <ion-button color="medium"
+                        routerDirection="forward"
+                        routerLink="edit/{{context.master.id}}"
+                        routerLinkActive="active"
+                        *ngIf="context.canEdit"
+            >
+                <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+        </ion-list-header>
+        <ion-item>
+            <ion-label class="ion-text-wrap">
+                {{context.master.description}}
+            </ion-label>
         </ion-item>
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <app-collapse-item class="width100" title='{{"master-profile.info.experience"|translate}}'>
-                    <ion-item lines="none" class="ion-item-no-padding-right experience"
-                              *ngFor="let experience of experienceList">
-                        <app-experience [editable]="editable | async" [exp]="experience"
-                                        class="width100"></app-experience>
-                    </ion-item>
-                    <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
-                              routerDirection="forward"
-                              routerLink="experience-add/"
-                              routerLinkActive="active">
-                        <ion-icon color="secondary" name="add-circle"></ion-icon>
-                        <ion-label class="ion-padding-start">
-                            {{'master-profile.info.add-new-exp'|translate}}
-                        </ion-label>
-                    </ion-item>
-                </app-collapse-item>
-            </ion-col>
+    </ion-list>
+
+    <ion-list lines="none">
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ "master-profile.info.about" | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-item>
+            <ion-label>
+                {{"master-profile.info.professional-experience"|translate}}
+            </ion-label>
+            <ion-text *ngIf="context.master.experience">
+                {{context.master.experience}} {{declinationYears(context.master?.experience) | translate}}
+            </ion-text>
         </ion-item>
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <app-collapse-item class="width100" title='{{"master-profile.info.education"|translate}}'>
-                    <ion-item *ngFor="let education of educationList"
-                              lines="none" class="ion-item-no-padding-right experience">
-                        <app-education [education]="education" [editable]="editable | async"
-                                       class="width100"></app-education>
-                    </ion-item>
-                    <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
-                              routerDirection="forward"
-                              routerLink="education-add/"
-                              routerLinkActive="active">
-                        <ion-icon color="secondary" name="add-circle"></ion-icon>
-                        <ion-label class="ion-padding-start">
-                            {{'master-profile.info.add-new-education'|translate}}
-                        </ion-label>
-                    </ion-item>
-                </app-collapse-item>
-            </ion-col>
+        <ion-item>
+            <ion-label>
+                {{"master-profile.info.professional-level"|translate}}
+            </ion-label>
+            <ion-text>
+                {{"global.professional-level." + context.master?.level | translate}}
+            </ion-text>
         </ion-item>
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <app-collapse-item class="width100" title='{{"master-profile.info.certificates"|translate}}'>
-                    <ion-item *ngFor="let certificate of certificateList" lines="none"
-                              class="ion-item-no-padding-right experience">
-                        <app-certificate [certificate]="certificate" [editable]="editable | async"
-                                         class="width100"></app-certificate>
-                    </ion-item>
-                    <ion-item class="ion-no-padding ion-margin-start" lines="none" *ngIf="editable | async"
-                              routerDirection="forward"
-                              routerLink="certificate-add/"
-                              routerLinkActive="active">
-                        <ion-icon color="secondary" name="add-circle"></ion-icon>
-                        <ion-label class="ion-padding-start">
-                            {{'master-profile.info.add-new-certificate'|translate}}
-                        </ion-label>
-                    </ion-item>
-                </app-collapse-item>
-            </ion-col>
+        <ion-item *ngIf="context.user.gender">
+            <ion-label>
+                {{"master-profile.info.sex"|translate}}
+            </ion-label>
+            <ion-text>
+                {{"global.sex." + context.user.gender | translate}}
+            </ion-text>
         </ion-item>
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="6">
-                <ion-item class="ion-item-no-min-height pv5 master-address ion-padding-top ion-margin-bottom" lines="none">
-                    {{"master-profile.info.availability"|translate}}
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-col class="ion-no-padding" size="12">
-                        <ion-row class="availability-subtitle">
-                            {{"master-profile.info.languages"|translate}}
-                        </ion-row>
-                        <ion-row *ngFor="let lang of userLanguages"> - {{lang.name}}</ion-row>
-                    </ion-col>
-                </ion-item>
-            </ion-col>
-            <ion-col class="ion-no-padding" size="6"></ion-col>
+        <ion-item *ngIf="context.user.birthday">
+            <ion-label>
+                {{"master-profile.info.age"|translate}}
+            </ion-label>
+            <ion-text>
+                {{getYearsFromBirthday(context.user.birthday)}} {{declinationYears(getYearsFromBirthday(context.user.birthday)) | translate}}
+            </ion-text>
         </ion-item>
-        <ion-item class="ion-item-no-side-padding pv5">
-            <ion-col class="ion-no-padding" size="12">
-                <app-collapse-item class="width100" title='{{"master-profile.info.reviews"|translate}}'>
-                    <app-master-profile-review *ngFor="let review of publicReviewList"
-                                               [publicReview]="review">
-                    </app-master-profile-review>
-                </app-collapse-item>
-            </ion-col>
+        <ion-item>
+            <ion-label>
+                {{"master-profile.info.nationality"|translate}}
+            </ion-label>
+            <ion-text>
+                {{context.user.nationality}}
+            </ion-text>
         </ion-item>
-    </ion-col>
-</ion-row>
+    </ion-list>
+
+    <ion-list lines="none">
+        <ion-list-header>
+            <ion-label>
+                <h1>{{ "master-profile.info.languages" | translate }}</h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let language of languages$ | async">
+            <ion-icon name="checkmark-circle" color="success" slot="start"></ion-icon>
+            <ion-label>{{ language.name }}</ion-label>
+        </ion-item>
+        <ion-item lines="full"></ion-item>
+    </ion-list>
+
+    <app-collapse-item title='{{"master-profile.info.experience"|translate}}'>
+        <ion-item lines="none" class="ion-item-no-padding-right experience"
+                  *ngFor="let experience of context.master.experience_entries">
+            <app-experience [editable]="context.canEdit" [exp]="experience"
+                            class="width100"></app-experience>
+        </ion-item>
+        <ion-item *ngIf="context.canEdit"
+                  lines="full" [detail]="false"
+                  routerDirection="forward"
+                  routerLink="experience-add/"
+                  routerLinkActive="active">
+            <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+            <ion-label>
+                {{'master-profile.info.add-new-exp'|translate}}
+            </ion-label>
+        </ion-item>
+    </app-collapse-item>
+
+    <app-collapse-item title='{{"master-profile.info.education"|translate}}'>
+        <ion-item *ngFor="let education of context.master.educations"
+                  lines="none" class="ion-item-no-padding-right experience">
+            <app-education [education]="education" [editable]="context.canEdit"
+                           class="width100"></app-education>
+        </ion-item>
+        <ion-item *ngIf="context.canEdit"
+                  lines="full" [detail]="false"
+                  routerDirection="forward"
+                  routerLink="education-add/"
+                  routerLinkActive="active">
+            <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+            <ion-label>
+                {{'master-profile.info.add-new-education'|translate}}
+            </ion-label>
+        </ion-item>
+    </app-collapse-item>
+
+    <app-collapse-item title='{{"master-profile.info.certificates"|translate}}'>
+        <ion-item *ngFor="let certificate of context.master.certificates">
+            <app-certificate [certificate]="certificate" [editable]="context.canEdit"></app-certificate>
+        </ion-item>
+        <ion-item *ngIf="context.canEdit"
+                  lines="full" [detail]="false"
+                  routerDirection="forward"
+                  routerLink="certificate-add/"
+                  routerLinkActive="active">
+            <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+            <ion-label>
+                {{'master-profile.info.add-new-certificate'|translate}}
+            </ion-label>
+        </ion-item>
+    </app-collapse-item>
+
+    <app-collapse-item title='{{"master-profile.info.reviews"|translate}}'>
+        <ion-item *ngFor="let review of []" [detail]="false">
+
+        </ion-item>
+    </app-collapse-item>
+</ng-container>

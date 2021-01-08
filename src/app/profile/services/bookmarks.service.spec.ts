@@ -1,12 +1,12 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {fakeAsync, flush, inject, TestBed} from '@angular/core/testing';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {StorageManagerMock} from 'src/testing/mocks';
 import {asyncData} from '../../../testing/async-observable-helper';
 import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
 import {Autofixture} from '../../../testing/fixtures/generator';
 import {MasterFixture} from '../../../testing/fixtures/master-fixture';
 import {SavedProfessionalFixture} from '../../../testing/fixtures/saved-professional-fixture';
-import {MasterInterface} from '../../core/interfaces/master.interface';
 import {SavedProfessionalInterface} from '../../core/interfaces/saved-professional.interface';
 import {BookmarkMaster} from '../../core/models/bookmark-master';
 import {StorageManagerService} from '../../core/proxies/storage-manager.service';
@@ -44,7 +44,7 @@ describe('BookmarksService', () => {
         const bookmarks = autoFixture
             .createMany<SavedProfessionalInterface<number>>(SavedProfessionalFixture.create(), 3);
         const masters = autoFixture
-            .createMany<MasterInterface>(MasterFixture.create(), 3);
+            .createMany<ProfessionalList>(MasterFixture.create(), 3);
 
         const ids = [10, 20, 30];
         ids.map((value, index) => {
@@ -56,7 +56,7 @@ describe('BookmarksService', () => {
         spyOn(masterService, 'getUserLessList$').and.callFake((data) => {
             expect(bookmarks.map((bookmark) => bookmark.professional)).toEqual(data);
 
-            return asyncData<MasterInterface[]>(masters);
+            return asyncData<ProfessionalList[]>(masters);
         });
         service.getAll$().subscribe(
             (data: BookmarkMaster[]) => {
@@ -76,7 +76,7 @@ describe('BookmarksService', () => {
             .and.returnValue(asyncData<SavedProfessionalInterface<number>[]>(
             [SavedProfessionalFixture.create()]
         ));
-        spyOn(masterService, 'getUserLessList$').and.returnValue(asyncData<MasterInterface[]>([]));
+        spyOn(masterService, 'getUserLessList$').and.returnValue(asyncData<ProfessionalList[]>([]));
 
         service.getAll$().subscribe(
             (data: BookmarkMaster[]) => {
@@ -94,7 +94,7 @@ describe('BookmarksService', () => {
 
     it('should be able to create saved professional item and return filled bookmark', fakeAsync(() => {
         const saved: SavedProfessionalInterface<number> = SavedProfessionalFixture.create();
-        const master: MasterInterface = MasterFixture.create();
+        const master: ProfessionalList = MasterFixture.create();
         master.id = 333;
         saved.professional = master.id;
 

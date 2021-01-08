@@ -1,3 +1,5 @@
-<div class="error-flash" *ngIf="isVisible()">
-  {{message | translate}}
+<div class="error-flash" *ngIf="messages && messages.length">
+    <div id="error-text" *ngFor="let mes of messages">
+        {{mes | translate}}
+    </div>
 </div>

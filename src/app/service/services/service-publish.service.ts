@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Master} from '@app/core/models/master';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {User} from '@app/core/models/user';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {UserManagerService} from '@app/core/services/user-manager.service';
@@ -21,7 +21,7 @@ import {ServicePublishDataPreparerService} from '@app/service/services/service-p
 import {ServiceScheduleApiService} from '@app/service/services/service-schedule-api.service';
 import {ServicesApiService} from '@app/service/services/services-api.service';
 import {forkJoin, from, Observable, of} from 'rxjs';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {finalize, map, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class ServicePublishService {
@@ -44,7 +44,7 @@ export class ServicePublishService {
     public publish(): Observable<Service> {
         return from(this.servicePublishDataFormatter.getData()).pipe(
             switchMap(data => this.processData(data)),
-            tap(() => this.servicePublishDataHolder.reset())
+            finalize(() => this.servicePublishDataHolder.reset())
         );
     }
 
@@ -60,7 +60,7 @@ export class ServicePublishService {
                             user
                         }: ServicePublishData): Observable<Service> {
         let createdService: Service;
-        let createdMaster: Master;
+        let createdMaster: ProfessionalList;
 
         return this.createMasterUpdateUser(master, user).pipe(
             switchMap((reply) => {
@@ -74,9 +74,9 @@ export class ServicePublishService {
                 return forkJoin({
                     photosRet: this.createPhotos(servicePhotos, createdService),
                     scheduleRet: this.createSchedule(serviceSchedule, createdService),
-                    masterScheduleRet: this.createMasterSchedule(masterSchedule, master),
+                    masterScheduleRet: this.createMasterSchedule(masterSchedule, createdMaster),
                     masterLocRet: masterLocation
-                        ? !masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation)
+                        ? (!masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation))
                         : of<MasterLocation>(null),
                     priceRet: this.createPrice(servicePrice, createdService)
                 });
@@ -88,7 +88,7 @@ export class ServicePublishService {
         );
     }
 
-    private createMasterUpdateUser(master: Master, user?: User): Observable<Master> {
+    private createMasterUpdateUser(master: ProfessionalList, user?: User): Observable<ProfessionalList> {
         if (master.id) {
             return of(master);
         }
@@ -101,26 +101,25 @@ export class ServicePublishService {
         );
     }
 
-    private createService(service: Service, master: Master): Observable<Service> {
+    private createService(service: Service, master: ProfessionalList): Observable<Service> {
         return this.serviceApi.create({...service, professional: master.id});
     }
 
     private createPhotos(photos: ServicePhoto[], service: Service): Observable<ServicePhoto[]> {
-        // TODO: shouldn't mutate method's arguments
         photos.forEach(photo => photo.service = service.id);
 
         return this.servicePhotosApi.createList(photos);
     }
 
     private createSchedule(schedule: ServiceSchedule[], service: Service): Observable<ServiceSchedule[]> {
-        return this.serviceScheduleApi.createList(schedule?.map(v => ({...v, service: service.id})));
+        return this.serviceScheduleApi.createSet(schedule?.map(v => ({...v, service: service.id})));
     }
 
-    private createMasterSchedule(schedule: MasterSchedule[], master: Master): Observable<MasterSchedule[]> {
-        return this.masterScheduleApi.createList(schedule?.map(v => ({...v, professional: master.id})));
+    private createMasterSchedule(schedule: MasterSchedule[], master: ProfessionalList): Observable<MasterSchedule[]> {
+        return this.masterScheduleApi.createSet(schedule?.map(v => ({...v, professional: master.id})));
     }
 
-    private createMasterLocation(location: MasterLocation, master: Master): Observable<MasterLocation> {
+    private createMasterLocation(location: MasterLocation, master: ProfessionalList): Observable<MasterLocation> {
         return this.masterLocationApi.create({...location, professional: master.id});
     }
 

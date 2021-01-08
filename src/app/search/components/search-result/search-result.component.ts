@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Search, ServiceList} from '@app/api/models';
 import {HelperService} from '@app/core/services/helper.service';
-import {PhotoSanitizerService} from '@app/core/services/photo-sanitizer.service';
 import {Service} from '@app/service/models/service';
 
 @Component({
@@ -13,9 +12,6 @@ export class SearchResultComponent {
 
     @Input() public data: Search;
     private isMoreServicesClicked: boolean = false;
-
-    constructor(public readonly photoSanitizer: PhotoSanitizerService) {
-    }
 
     public onMoreServicesClick(): void {
         this.isMoreServicesClicked = true;
@@ -37,9 +33,7 @@ export class SearchResultComponent {
         return this.data?.professional?.company ? this.data.professional.company : 'global.professional.private-person';
     }
 
-    public getPrice(service: Service): string {
-        return service.price.is_price_fixed ?
-            Math.round(service.price.price).toString() :
-            `${Math.round(service.price.start_price)} - ${service.price.end_price}`;
+    public getPhoto(): string {
+        return this.data.professional.user?.avatar || HelperService.getNoAvatarLink();
     }
 }

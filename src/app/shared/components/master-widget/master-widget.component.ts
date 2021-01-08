@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {MasterList} from '@app/master/models/master-list';
+import {ProfessionalList} from '@app/api/models';
+import {HelperService} from '@app/core/services/helper.service';
 
 @Component({
     selector: 'app-master-widget',
@@ -7,5 +8,7 @@ import {MasterList} from '@app/master/models/master-list';
     styleUrls: ['./master-widget.component.scss']
 })
 export class MasterWidgetComponent {
-    @Input() public master: MasterList;
+    @Input() public master: ProfessionalList;
+
+    public defaultAvatar = HelperService.getNoAvatarLink();
 }

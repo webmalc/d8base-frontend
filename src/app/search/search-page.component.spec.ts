@@ -1,5 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import {SearchFilterStateService} from '@app/search/services/search-filter-state.service';
 import {IonicModule, Platform} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -13,7 +14,7 @@ describe('SearchPage', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SearchPage],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+            imports: [RouterTestingModule, IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [
                 SearchService,
                 {provide: Platform, useValue: {width: () => 1000}},

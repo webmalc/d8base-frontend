@@ -29,6 +29,6 @@ export class ServicePublishStepFiveFormService {
     }
 
     public isSubmitDisabled(): boolean {
-        return !(this.form.valid && this.form.dirty);
+        return this.form.invalid;
     }
 }

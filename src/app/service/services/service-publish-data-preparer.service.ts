@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {HelperService} from '@app/core/services/helper.service';
@@ -32,8 +33,9 @@ export class ServicePublishDataPreparerService {
 
     public async getData(): Promise<ServicePublishData> {
         const service = this.getService();
-        const serviceLocation = service.service_type === 'client' ? this.getServiceLocation() : null;
+        const serviceLocation = service.service_type !== 'online' ? this.getServiceLocation() : null;
         const masterLocation = service.service_type !== 'online' ? this.getMasterLocation() : null;
+
 
         return {
             service,
@@ -82,12 +84,13 @@ export class ServicePublishDataPreparerService {
     }
 
     private getService(): Service {
-        const stepData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
-        const service = plainToClass(Service, stepData, {excludeExtraneousValues: true});
-        service.duration = stepData.duration;
-        service.is_base_schedule = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-            .use_master_schedule || this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-            .need_to_create_master_schedule;
+        const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
+        const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+        const service = plainToClass(Service, stepTwoData, {excludeExtraneousValues: true});
+        service.duration = stepTwoData.duration;
+        service.is_base_schedule = stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule;
+        service.is_auto_order_confirmation = stepSevenData.is_auto_order_confirmation ?? false;
+        service.is_enabled = true; // always create already published service; the owner can un-publish it later
 
         return HelperService.clear(service);
     }
@@ -110,7 +113,7 @@ export class ServicePublishDataPreparerService {
         return HelperService.clear(user);
     }
 
-    private getMaster(): Master {
+    private getMaster(): ProfessionalList {
         if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster &&
             this.servicePublishDataHolder.isset(ServicePublishSteps.Final)
         ) {
@@ -139,7 +142,9 @@ export class ServicePublishDataPreparerService {
         location.city = stepData.city.id;
         location.address = stepData?.address;
         location.postal_code = stepData?.postal_code?.id;
-        location.units = parseInt(stepData.departure.units, 10);
+        if (stepData.units) {
+            location.units = parseInt(stepData.units, 10);
+        }
 
         return HelperService.clear(location);
     }
@@ -147,7 +152,7 @@ export class ServicePublishDataPreparerService {
     private getServiceLocation(): ServiceLocation {
         const location = new ServiceLocation();
         const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-        location.max_distance = stepData.departure.max_distance;
+        location.max_distance = stepData?.max_distance;
 
         return HelperService.clear(location);
     }
@@ -166,8 +171,8 @@ export class ServicePublishDataPreparerService {
         price.price = stepTwoData.price;
         price.start_price = stepTwoData.start_price;
         price.end_price = stepTwoData.end_price;
-        price.end_price_currency = stepTwoData.end_price_currency?.currency;
-        price.start_price_currency = stepTwoData.start_price_currency?.currency;
+        price.end_price_currency = stepTwoData.price_currency?.currency;
+        price.start_price_currency = stepTwoData.price_currency?.currency;
         price.price_currency = stepTwoData.price_currency?.currency;
         price.is_price_fixed = stepTwoData.is_price_fixed;
 

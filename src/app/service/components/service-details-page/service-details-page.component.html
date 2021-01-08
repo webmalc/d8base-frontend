@@ -5,18 +5,31 @@
             <ion-col appMainColumn>
                 <ion-item color="light" lines="full">
                     <ion-buttons slot="start">
-                        <ion-button routerLink="/search" routerDirection="back">
+                        <ion-button (click)="location.back()">
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <ion-title>{{ 'Информация об услуге' }}</ion-title>
+                    <ion-label>
+                        <h1>{{ 'service-details.title' | translate }}</h1>
+                    </ion-label>
                 </ion-item>
+                <app-info-row *ngIf="showSuccessOrderNotification$ | async">
+                    {{'order.success-title'|translate}}<br>
+                    {{'order.success-description'|translate}}
+                </app-info-row>
                 <ng-container *ngIf="service">
-                    <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
-                    <ion-button [routerLink]="'/order/' + service.id">Выбрать</ion-button>
+                    <app-service-widget [service]="service" [master]="master"
+                                        [alwaysExpanded]="true">
+                    </app-service-widget>
+                    <div class="ion-text-right">
+                        <ion-button color="secondary" size="default" class="ion-align-self-end"
+                                    [routerLink]="'/order/' + service.id">
+                            {{ "master-profile.services.service-presentation.pick" | translate }}
+                            <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
+                        </ion-button>
+                    </div>
                 </ng-container>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
-<app-footer></app-footer>

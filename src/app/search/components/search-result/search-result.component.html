@@ -4,7 +4,7 @@
             <ion-row class="ion-justify-content-between ion-nowrap">
                 <ion-item class="ion-item-no-border ion-item-no-side-padding">
                     <ion-item class="ion-item-no-border">
-                        <ion-img class="border-radius" src="{{photoSanitizer.sanitize(data.professional.user?.avatar)}}"
+                        <ion-img class="border-radius" [src]="getPhoto()"
                                  style="height: 100px; width: 100px"></ion-img>
                     </ion-item>
                     <ion-item class="ion-item-no-border ion-item-no-side-padding">
@@ -12,9 +12,9 @@
                             <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding">
                                 <ion-col class="ion-no-padding">
                                     <ion-item class="ion-item-no-border ion-item-no-min-height master-full-name">
-                                        {{data.professional.user.first_name}}&nbsp;{{data.professional.user.last_name}}
+                                        {{ data.professional.name }}
                                     </ion-item>
-                                    <ion-item *ngIf="data.professional?.company"
+                                    <ion-item *ngIf="data.professional.company"
                                               class="ion-item-no-border ion-item-no-min-height master-company">
                                         {{this.getCompanyName()|translate}}
                                     </ion-item>
@@ -53,23 +53,19 @@
                     {{'issuance.search-result.services'|translate}}
                 </ion-item>
                 <ion-row class="ion-justify-content-end">
-                    <ion-item *ngIf="data.professional?.level" class="ion-item-no-border master-level">
+                    <ion-item *ngIf="data.professional.level" class="ion-item-no-border master-level">
                         {{'global.professional-level.' + data.professional.level | translate}}
                     </ion-item>
                 </ion-row>
             </ion-row>
-            <ion-row *ngFor="let service of getServiceList()" class="ion-nowrap ion-justify-content-between">
-                <ion-item class="ion-item-no-border ion-item-no-min-height">
-                    <a [routerLink]="'/service/' + service?.id">
-                        {{service.name}}
-                    </a>
-                </ion-item>
-                <ion-row class="ion-justify-content-end">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height">
-                        {{getPrice(service)}}&nbsp;{{service.price.price_currency}}
-                    </ion-item>
-                </ion-row>
-            </ion-row>
+            <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
+                <ion-label>
+                    {{service.name}}
+                </ion-label>
+                <ion-note slot="end" class="ion-text-end">
+                    <app-price [price]="service.price"></app-price>
+                </ion-note>
+            </ion-item>
             <ion-row *ngIf="needToRenderMoreServicesBtn()">
                 <ion-item (click)="onMoreServicesClick()"
                           class="ion-item-no-border ion-item-no-min-height more-services cursor-pointer">
@@ -81,20 +77,25 @@
                     <ion-item class="ion-item-no-border ion-item-no-min-height master-location-title">
                         {{'issuance.search-result.address'|translate}}
                     </ion-item>
-                    <ion-item *ngFor="let loc of data.professional?.locations"
+                    <ion-item *ngFor="let loc of data.professional.locations"
                               class="ion-item-no-border ion-item-no-min-height pv5">
                         {{loc.address}}
                     </ion-item>
                 </div>
                 <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
                     <ion-item class="ion-item-no-border">
-                        <ion-button color="secondary" size="medium" [routerLink]="'/service/' + data.services[0]?.id">
+                        <ion-button color="secondary" size="medium" [routerLink]="'/professional/' + data.professional.id">
                             {{'issuance.search-result.select'|translate}}
                         </ion-button>
                     </ion-item>
                 </ion-row>
             </ion-row>
-            <ion-button class="select-button-sm" color="secondary" expand="block" fill="solid" size="medium">
+            <ion-button class="select-button-sm"
+                        color="secondary"
+                        expand="block"
+                        fill="solid"
+                        size="medium"
+                        [routerLink]="'/professional/' + data.professional.id">
                 {{'issuance.search-result.select'|translate}}
             </ion-button>
         </ion-col>

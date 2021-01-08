@@ -9,7 +9,6 @@ import {MasterProfileSubmenu} from '../../enums/master-profile-submenu';
 import {CertificatesApiService} from '../../services/certificates-api.service';
 import {EducationApiService} from '../../services/education-api.service';
 import {ExperienceApiService} from '../../services/experience-api.service';
-import {MasterProfileInfoGeneratorFactoryService} from '../../services/master-profile-info-generator-factory.service';
 import {ReviewsReadonlyApiService} from '../../services/reviews-readonly-api.service';
 import {MasterProfileFactoryComponent} from './master-profile-factory.component';
 
@@ -23,7 +22,6 @@ xdescribe('MasterProfileFactoryComponent', () => {
             declarations: [MasterProfileFactoryComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [
-                MasterProfileInfoGeneratorFactoryService,
                 ExperienceApiService,
                 EducationApiService,
                 CertificatesApiService,

@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
+import ServiceData from '@app/core/interfaces/service-data.interface';
 import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
 import {Service} from '@app/service/models/service';
 import {ServiceTag} from '@app/service/models/service-tag';
 import {ServiceTagsReadonlyApiService} from '@app/service/services/service-tags-readonly-api.service';
 import {forkJoin, Observable, of} from 'rxjs';
-import {map, mergeMap, switchMap} from 'rxjs/operators';
+import {concatAll, map, mergeMap, switchMap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -19,13 +20,17 @@ export class ServicesGeneratorFactoryService {
     ) {
     }
 
-    public getServiceList(masterId?: number): Observable<{ service: Service, tags?: ServiceTag[] }[]> {
+    public getServiceList(masterId?: number): Observable<ServiceData[]> {
         return masterId ?
-            this.servicesApi.get({professional: masterId.toString(), ordering: 'created'}).pipe(
+            this.servicesApi.get({professional: masterId.toString(), ordering: 'created', is_enabled: 'true'}).pipe(
                 switchMap(serviceList => this.combineWithTags(serviceList.results))) :
             this.masterManager.getMasterList().pipe(
-                switchMap(list => this.servicesApi.get({professional: list[0].id.toString(), ordering: 'created'}).pipe(
-                    map(masterServiceList => masterServiceList.results.map(service => ({service})).reverse())
+                map(list => forkJoin(list.map(professional =>
+                    (this.servicesApi.get({professional: professional.id.toString(), ordering: 'created'}))
+                ))),
+                concatAll(),
+                map(responses => responses.reduce(
+                    (acc: ServiceData[], response) => acc.concat(response.results.map(service => ({service}))), []
                 ))
             );
     }

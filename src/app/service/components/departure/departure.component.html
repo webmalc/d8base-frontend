@@ -3,27 +3,23 @@
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn class="ion-no-padding ion-margin-top">
             <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
+                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
                     <ion-col class="ion-no-padding">
                         <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item routerLink="/service/publish/step-seven"
+                            <ion-item routerLink="/service/publish/step-seven" [detail]="false" color="light"
                                       routerDirection="back"
                                       routerLinkActive="active" class="ion-item-no-border ion-align-items-center">
                                 <ion-icon name="arrow-back-outline"></ion-icon>
                             </ion-item>
-                            <ion-item class="ion-item-no-border">
+                            <ion-item class="ion-item-no-border" color="light">
                                 {{"service-publish.step-seven.departure.title"|translate}}
                             </ion-item>
                         </ion-row>
                     </ion-col>
                 </ion-item>
 
-                <ion-item class="ion-item-no-border ion-item-bordered-others item-background-color-white">
+                <ion-item class="ion-item-no-border ion-item-bordered-others">
                     <ion-col class="ion-padding-vertical" size="12">
-<!--                        <ion-item class="width100 ion-item-no-side-padding ion-item-no-border ion-padding-bottom">-->
-<!--                            <ion-toggle [formControlName]="formFields.NotWithinTheCity" name="radius"></ion-toggle>-->
-<!--                        </ion-item>-->
-<!--                        <ion-row *ngIf="formService.form.get(formFields.NotWithinTheCity).value">-->
                         <ion-row>
                             <ion-item class="ion-item-no-border">
                                 <div class="label-for-required-input">
@@ -33,7 +29,6 @@
                                 </div>
                             </ion-item>
                         </ion-row>
-<!--                        <ion-row *ngIf="formService.form.get(formFields.NotWithinTheCity).value">-->
                         <ion-row>
                             <ion-col size="6">
                                 <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
@@ -46,7 +41,7 @@
                                 </ion-item>
                             </ion-col>
                             <ion-col size="6">
-                                <ion-item class="ion-item-bordered">
+                                <ion-item lines="none" class="ion-item-bordered">
                                     <ion-input [formControlName]="formFields.MaxDistance" name="price" appNumbersOnly></ion-input>
                                 </ion-item>
                             </ion-col>

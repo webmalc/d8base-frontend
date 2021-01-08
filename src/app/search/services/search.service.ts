@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {MasterList} from '@app/master/models/master-list';
 import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {SearchFilterStateInterface} from '@app/search/interfaces/search-filter-state-interface';
@@ -21,7 +20,7 @@ export class SearchService {
     public search(needle: string, filters?: SearchFilterStateInterface): Observable<SearchResultsInterface[]> {
         return this.servicesApi.get().pipe(
             switchMap(services => this.masterReadonlyApi.getByEntityId(services.results[0].professional).pipe(
-                switchMap((master: MasterList) => this.masterLocationApi.getByClientId(master.id).pipe(
+                switchMap(master => this.masterLocationApi.getByClientId(master.id).pipe(
                     map(locations => ([{master, services: services.results, masterLocationList: locations.results}]))
                 ))
             ))

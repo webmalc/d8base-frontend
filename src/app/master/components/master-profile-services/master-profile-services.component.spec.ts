@@ -5,7 +5,6 @@ import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {StorageManagerMock} from 'src/testing/mocks';
 import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {MasterProfileServicesSearchService} from '../../services/master-profile-services-search.service';
 import {MasterProfileServicesComponent} from './master-profile-services.component';
 
 describe('MasterProfileServicesComponent', () => {
@@ -28,7 +27,6 @@ describe('MasterProfileServicesComponent', () => {
                         }
                     }
                 },
-                MasterProfileServicesSearchService,
                 {provide: StorageManagerService, useClass: StorageManagerMock}
             ]
         }).compileComponents();

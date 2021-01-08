@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {passwordValidators} from '@app/core/validators/password-validators';
 import {RegistrationFormFields} from '../enums/registration-form-fields';
 
 @Injectable()
@@ -20,8 +21,12 @@ export class RegistrationFormService {
         value ? control.disable() : control.enable();
     }
 
-    public isFormValid(): boolean {
-        return !this.form.valid;
+    public isFormInvalid(): boolean {
+        return this.form.invalid;
+    }
+
+    public getErrors(fieldName: string): ValidationErrors {
+        return this.form.get(fieldName).dirty ? this.form.get(fieldName).errors : null;
     }
 
     public initForm(): void {
@@ -33,8 +38,8 @@ export class RegistrationFormService {
                         '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
                 ])],
                 [RegistrationFormFields.Name]: ['', Validators.required],
-                [RegistrationFormFields.Password]: ['', Validators.required],
-                [RegistrationFormFields.Confirm]: ['', Validators.required],
+                [RegistrationFormFields.Password]: ['', passwordValidators],
+                [RegistrationFormFields.Confirm]: ['', passwordValidators],
                 [RegistrationFormFields.Country]: ['', Validators.required],
                 [RegistrationFormFields.City]: [''],
                 [RegistrationFormFields.Phone]: ['']

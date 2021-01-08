@@ -1,7 +1,7 @@
 <form *ngIf="loginFormService.form" [formGroup]="loginFormService.form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()">
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
-            <error-flashbag [message]="errorMessage"></error-flashbag>
+            <error-flashbag [messages]="errorMessages"></error-flashbag>
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -29,6 +29,18 @@
                     color="success"
                     [disabled]="loginFormService?.isFormValid()"
             >{{ 'login-form.sign-in' | translate }}</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <ion-col appMainColumn>
+            <ion-button
+                    expand="block"
+                    fill="solid"
+                    color="success"
+                    routerDirection="forward"
+                    routerLink="/auth/registration"
+                    routerLinkActive="active"
+            >{{ 'login-form.sign-up' | translate }}</ion-button>
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">

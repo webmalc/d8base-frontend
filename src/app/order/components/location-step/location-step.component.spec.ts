@@ -1,3 +1,4 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
@@ -6,14 +7,14 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {LocationStepComponent} from './location-step.component';
 
-describe('ServiceOrderStepTwoComponent', () => {
+describe('LocationStepComponent', () => {
     let component: LocationStepComponent;
     let fixture: ComponentFixture<LocationStepComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LocationStepComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
             providers: [OrderWizardStateService]
         }).compileComponents();
 

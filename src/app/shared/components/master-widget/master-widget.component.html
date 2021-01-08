@@ -1,11 +1,11 @@
 <ion-item lines="none">
-    <ion-avatar slot="start">
-        <img src="{{ master?.user.avatar_thumbnail }}" alt="avatar">
+    <ion-avatar slot="start" class="ion-align-self-start">
+        <img src="{{ master.user?.avatar_thumbnail || defaultAvatar }}" alt="avatar">
     </ion-avatar>
-    <ion-label>
-        <h3>{{ master?.name }}</h3>
+    <ion-label class="ion-text-wrap">
+        <h3>{{ master.name }}</h3>
         <p>
-            {{ master?.description }}
+            {{ master.description }}
         </p>
     </ion-label>
 </ion-item>

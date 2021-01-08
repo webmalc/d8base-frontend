@@ -4,8 +4,9 @@ import {UserSettings} from '@app/core/models/user-settings';
 import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {AuthenticationService} from '@app/core/services/authentication.service';
 import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
-import {Observable, of, ReplaySubject} from 'rxjs';
-import {first, map, switchMap, tap} from 'rxjs/operators';
+import {environment} from '@env/environment';
+import {BehaviorSubject, from, Observable, of} from 'rxjs';
+import {catchError, first, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserSettingsService {
     public currencyList = ['CAD', 'EUR', 'RUB', 'USD'];
     public unitsList = [0, 1];
     public readonly userSettings$: Observable<UserSettings | null>;
-    private readonly settings$: ReplaySubject<UserSettings | null> = new ReplaySubject<UserSettings | null>(1);
+    private readonly settings$: BehaviorSubject<UserSettings | null> = new BehaviorSubject<UserSettings | null>(null);
     private readonly STORAGE_KEY = 'user_settings';
 
     constructor(
@@ -28,80 +29,111 @@ export class UserSettingsService {
     }
 
     @once
-    public init(): void {
-        this.pullUserSettings();
+    public init(): Promise<any> {
+        return this.pullUserSettings().toPromise();
     }
 
     public setCurrency(currency: string): void {
-        this.doRequest({currency});
+        this.userSettings$.pipe(
+            first(),
+            switchMap(settings => settings && (settings.currency !== currency) ? this.doRequest({currency}) : of())
+        ).subscribe();
     }
 
     public setUserAppLang(language: string): void {
-        this.doRequest({language});
+        this.userSettings$.pipe(
+            first(),
+            switchMap(settings => settings && (settings.language !== language) ? this.doRequest({language}) : of())
+        ).subscribe();
     }
 
     public setUnits(units: number): void {
-        this.doRequest({units});
+        this.userSettings$.pipe(
+            first(),
+            switchMap(settings => settings && (settings.units !== units) ? this.doRequest({units}) : of())
+        ).subscribe();
     }
 
     public setIsLastNameHidden(isLastNameHidden: boolean): void {
-        this.doRequest({is_last_name_hidden: isLastNameHidden});
+        this.userSettings$.pipe(
+            first(),
+            switchMap(settings => settings && (settings.is_last_name_hidden !== isLastNameHidden) ?
+                this.doRequest({is_last_name_hidden: isLastNameHidden}) :
+                of()
+            )
+        ).subscribe();
     }
 
-    private doRequest(data: Partial<UserSettings>): void {
-        this.settings$.pipe(
-            first(),
-            switchMap(
-                settings => null === settings ?
-                    this.createSettings(Object.assign(new UserSettings(), data)) :
-                    this.patchSettings(Object.assign(settings, data))
-            )).subscribe();
+    private doRequest(data: Partial<UserSettings>): Observable<UserSettings> {
+        return this.getFromApi().pipe(
+            switchMap(settings => null === settings ? this.getLocalSettings() : of(settings)),
+            switchMap(settings => !settings.id ?
+                this.createSettings(Object.assign(settings, data)) :
+                this.patchSettings(Object.assign(settings, data))
+            )
+        );
     }
 
     private patchSettings(data: UserSettings): Observable<UserSettings> {
-        this.storage.set(this.STORAGE_KEY, data);
-
         return this.auth.isAuthenticated$.pipe(
             first(),
-            switchMap(isAuth => isAuth ?
-                this.userSettingsApi.patch(data).pipe(tap(model => this.settings$.next(model))) :
-                of(data).pipe(tap(_ => this.settings$.next(data)))
-            )
+            switchMap(isAuth => isAuth ? this.userSettingsApi.patch(data) : of(data)),
+            tap(settings => this.setSettings(settings))
         );
     }
 
     private createSettings(data: UserSettings): Observable<UserSettings> {
-        this.storage.set(this.STORAGE_KEY, data);
-
         return this.auth.isAuthenticated$.pipe(
             first(),
-            switchMap(isAuth => isAuth ?
-                this.userSettingsApi.create(data).pipe(tap(model => this.settings$.next(model))) :
-                of(data).pipe(tap(_ => this.settings$.next(data)))
-            )
+            switchMap(isAuth => isAuth ? this.userSettingsApi.create(data) : of(data)),
+            tap(settings => this.setSettings(settings))
         );
     }
 
-    private pullUserSettings(): void {
-        this.auth.isAuthenticated$.pipe(
+    private pullUserSettings(): Observable<any> {
+        return this.auth.isAuthenticated$.pipe(
             first(),
-            map(isAuth => !isAuth ?
-                this.pullFromStorage() :
-                this.userSettingsApi.get()
-                    .subscribe(res => 0 === res.count ? this.pullFromStorage() : this.settings$.next(res.results[0])))
-        ).subscribe();
+            switchMap(isAuth => !isAuth ? this.getLocalSettings() : this.getFromApi()),
+            switchMap(res => null === res ? this.getLocalSettings() : of(res)),
+            tap(data => this.setSettings(data))
+        );
     }
 
-    private pullFromStorage(): void {
-        this.storage.get(this.STORAGE_KEY)
-            .then(data => null === data ? this.settings$.next(this.getTemporaryDefaultSettings()) : this.settings$.next(data));
+    private getLocalSettings(): Observable<UserSettings> {
+        return this.userSettings$.pipe(
+            first(),
+            switchMap(settings => null === settings ? from(this.pullFromStorage()) : of(settings))
+        );
+    }
+
+    private setSettings(settings: UserSettings): void {
+        this.settings$.next(this.clearUserSettings(settings));
+        this.storage.set(this.STORAGE_KEY, this.clearUserSettings(settings));
+    }
+
+    private getFromApi(): Observable<UserSettings | null> {
+        return this.userSettingsApi.get().pipe(
+            map(res => 0 === res.count ? null : res.results[0]),
+            catchError(_ => of(null))
+        );
+    }
+
+    private pullFromStorage(): Promise<UserSettings> {
+        return this.storage.get(this.STORAGE_KEY)
+            .then(data => null === data ? this.getTemporaryDefaultSettings() : data);
+    }
+
+    private clearUserSettings(data: UserSettings): UserSettings {
+        data.id = undefined;
+
+        return data;
     }
 
     private getTemporaryDefaultSettings(): UserSettings {
         const model = new UserSettings();
         model.units = 0;
         model.currency = 'CAD';
-        model.language = 'en';
+        model.language = environment.default_lang;
         model.is_last_name_hidden = false;
 
         return model;

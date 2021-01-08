@@ -23,18 +23,46 @@
       "4": "Very good",
       "5": "Excellent"
     },
-    "forward": "Forward",
-    "back": "Back",
+    "weekdays": {
+      "mon": "MO",
+      "tue": "TU",
+      "wed": "WE",
+      "thu": "TH",
+      "fri": "FR",
+      "sat": "SA",
+      "sun": "SU"
+    },
     "master": {
       "private-person": "Private person"
     },
-    "save": "Save",
-    "at": "at"
+    "from": "from",
+    "to": "to",
+    "at": "at",
+    "forward": "Forward",
+    "back": "Back",
+    "save": "Save"
+  },
+  "delete-confirmation": {
+    "delete-service": "Delete service?",
+    "okay": "Okay",
+    "cancel": "Cancel"
+  },
+  "error": {
+    "password-mismatch": "Passwords mismatch",
+    "password-too-short": "Password is too short",
+    "password-numeric": "Numeric passwords are forbidden"
+  },
+  "service-photos": {
+    "title": "Photos"
   },
   "service-location": {
     "online": "Online",
     "professional": "Professional's place",
     "client": "Client's place"
+  },
+  "service-payment-options": {
+    "cash": "Cash",
+    "online": "Online"
   },
   "accordion": {
     "expand": "show more",
@@ -71,10 +99,11 @@
     "miscellaneous": "Miscellaneous"
   },
   "login-form": {
-    "login": "Login",
+    "login": "Email",
     "password": "Password",
     "sign-in": "Sign-in",
-    "forgot-password": "Forgot password?"
+    "forgot-password": "Forgot password?",
+    "sign-up": "Sign-up"
   },
   "registration-form": {
     "email": "Email",
@@ -85,6 +114,17 @@
     "country": "Country",
     "city": "City",
     "register": "Register"
+  },
+  "reset-password": {
+    "password": "Password",
+    "confirm": "Confirm password",
+    "submit": "Change password",
+    "success": "Successfully changed"
+  },
+  "password-recovery": {
+    "email": "Email",
+    "submit": "Sent reset link",
+    "link-sent": "Reset link has been sent"
   },
   "login-page": {
     "incorrect-login-data": "Incorrect login or password"
@@ -143,7 +183,7 @@
     "main-address": "Main address",
     "additional-address": "Additional address",
     "about": "About",
-    "age": "Age",
+    "age": "Birth date",
     "nationality": "Nationality",
     "languages": "Languages",
     "not-specified": "Not specified"
@@ -193,9 +233,19 @@
     "add-new": "Add new"
   },
   "duration": {
-      "days": "days",
-      "hours": "hours",
-      "minutes": "minutes"
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "minutes-short": "min"
+  },
+  "service-details": {
+    "title": "Service Information",
+    "location-title": "Service Location",
+    "schedule-title": "Service Schedule",
+    "payment-title": "Payment Options",
+    "instant-book-title": "Instant Book",
+    "instant-book-description": "Ordering of this service will be approved automatically",
+    "address": "Address"
   },
   "service-publish": {
     "back-button": "Back",
@@ -204,7 +254,6 @@
       "title": "Service publishing",
       "description": "Publish an advertisement about your services in just 3 minutes and it will be seen by thousands of customers who are looking for your service and you.",
       "subdesc": "It's free!",
-      "info": "Service information",
       "category-title": "Choose a category for your service",
       "category-subtitle": "Service category",
       "subcategory-title": "Choose a subcategory for your service",
@@ -217,13 +266,14 @@
       "service-placeholder": "Enter service name",
       "service-description": "Service description",
       "service-description-placeholder": "Enter service description",
-      "duration": "Service duration",
+      "duration-and-price": "The duration per session and its price",
       "fixed-price": "Fixed service price",
       "fixed-price-title": "Service price",
-      "start-price": "Service price from",
-      "end-price": "Service price to",
+      "start-price": "from",
+      "end-price": "to",
       "second-info-row": "If you want to add a different cost depending on the duration or place - just add another service in the next step.",
-      "location": "Service location"
+      "location": "Service location",
+      "description-error": "Description minimum length is 20 symbols"
     },
     "step-three": {
       "title": "Want to add photos of the service? With them your service will be brighter!",
@@ -244,7 +294,7 @@
       "create-password": "Please enter a new password",
       "second-info-row": "You can edit the service after the publication",
       "password-placeholder": "Enter password",
-      "password-info": "Minimum password length is 6 symbols",
+      "password-info": "Minimum password length is 8 symbols",
       "password-confirm": "Confirm password",
       "forgot-password": "Forgot?",
       "user-exists": "I am an existing user",
@@ -287,15 +337,12 @@
       "city-placeholder": "Choose city",
       "address": "Address",
       "address-placeholder": "Enter address",
-      "address-required-info": "Required when service is provided at «professional's place»",
       "postal": "Index",
       "postal-placeholder": "Index",
       "location-radius": "Attendance:",
       "payment-title": "Payment",
       "payment-description": "Payment options available",
       "payment-info": "You can activate online payments after the service publication.",
-      "payment-cash": "Cash",
-      "payment-online": "Online",
       "departure": {
         "title": "Service georgaphy",
         "description": "Max distance from the base location"
@@ -304,16 +351,13 @@
       "location-radius-radius": "Within distance",
       "timetable": {
         "title": "Service schedule",
-        "mon": "MO",
-        "tue": "TU",
-        "wed": "WE",
-        "thu": "TH",
-        "fri": "FR",
-        "sat": "SA",
-        "sun": "SU",
         "add-new-time": "Add new time",
         "popover-title": "Choose day"
-      }
+      },
+      "use_default-location": "Use existing address",
+      "select-default-location": "Select address",
+      "instant-booking": "Instant Booking",
+      "instant-booking-label": "Confirm service order automatically"
     },
     "final-step": {
       "title": "Congratulations! All set.",
@@ -379,11 +423,11 @@
         "publish": "Publish",
         "unpublish": "Unpublish",
         "view": "Review",
-        "minutes": "min"
+        "delete": "Delete"
       },
       "service-presentation": {
-        "pick": "Choice",
-        "minutes": "Min"
+        "pick": "Date",
+        "more-info": "More info"
       },
       "services-tab": {
         "master-services": "Professional services"
@@ -417,7 +461,11 @@
       "certificate-url": "Digital Certificate URL",
       "certificate-id": "Certificate ID"
     },
+    "portfolio": {
+      "gallery": "Gallery"
+    },
     "calendar": {
+      "schedule": "Schedule",
       "title": "Calendar"
     },
     "edit-master": {
@@ -531,7 +579,11 @@
         "datetime": "Date and time",
         "availability": "Service availability",
         "price": "Service price",
-        "apply": "Apply"
+        "apply": "Apply",
+        "date-from": "Date from",
+        "date-to": "Date to",
+        "price-start": "Start price",
+        "price-end": "End price"
       }
     },
     "result": {
@@ -583,13 +635,13 @@
       "client-details": "Order on behalf of",
       "summary": "Service order"
     },
+    "identification": "Your contacts",
+    "registered-user": "This email is registered. Please enter your password",
+    "new-user": "Please enter a password. You can use it to track your order status",
     "title": "Service order",
     "selected-service": "Selected service",
     "order-service": "Place order",
     "location-header": "Service location",
-    "location-online": "Online",
-    "location-professional": "Professional",
-    "location-client": "Client",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
     "comment-header": "Optional comments",
     "date-time-header": "Service date and time",
@@ -606,7 +658,9 @@
     "surname": "Surname",
     "email": "E-mail",
     "phone": "Phone",
-    "is-not-for-me-description": "Enter the name of the person who will get the service"
+    "is-not-for-me-description": "Enter the name of the person who will get the service",
+    "success-title": "The service was successfully published.",
+    "success-description": "Here's how the clients see it:"
   },
   "flag-menu": {
     "language": "Language",

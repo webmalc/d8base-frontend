@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+    <ion-row>
+        <ion-col class="ion-no-padding">
+            <ion-item lines="none" class="ion-item-bordered ion-margin-end">
+                <ion-label position="stacked">{{ 'duration.days' | translate }}</ion-label>
+                <ion-input [formControlName]="formFields.Days" name="days" type="number" min="0"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+            <ion-item lines="none" class="ion-item-bordered ion-margin-end">
+                <ion-label position="stacked">{{ 'duration.hours' | translate }}</ion-label>
+                <ion-input [formControlName]="formFields.Hours" name="hours" type="number" min="0"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+            <ion-item lines="none" class="ion-item-bordered">
+                <ion-label position="stacked">{{ 'duration.minutes' | translate }}</ion-label>
+                <ion-input [formControlName]="formFields.Minutes" name="minutes" type="number" min="0"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</form>

@@ -7,10 +7,10 @@
                 </ion-button>
             </ion-menu-toggle>
         </ion-buttons>
-        <ion-item lines="none" routerDirection="root"
+        <ion-item class="main-logo" lines="none" routerDirection="root" [detail]="false"
                   routerLink="/"
                   slot="start">
-            <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="57" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
                             7.45976C4.5997 7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419
                             29.6441C13.241 29.6441 15.3605 27.9881 16.6344
@@ -39,38 +39,40 @@
 
         <ng-container *ngIf="isAuthenticated$|async">
             <ng-container *ngIf="!(masterManager.isMaster$ | async) else master">
-                <ion-item *ngIf="isDesktop()"
+                <ion-item *ngIf="isDesktop()" [detail]="false"
                           lines="none" slot="end" routerLink="/service/publish">
                     {{'template.become-master'|translate}}
                 </ion-item>
-                <ion-item lines="none" slot="end" routerLink="/my-orders/outbox">
+                <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/outbox" [detail]="false">
                     <ion-icon class="pr5" name="calendar-outline"></ion-icon>
                     {{'template.my-orders'|translate}}
                 </ion-item>
             </ng-container>
             <ng-template #master>
-                <ion-item lines="none" slot="end" routerLink="/my-orders/inbox">
+                <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/inbox" [detail]="false">
                     <ion-icon class="pr5" name="calendar-outline"></ion-icon>
                     {{'template.my-orders'|translate}}
                 </ion-item>
             </ng-template>
         </ng-container>
 
-        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
+        <ion-item *ngIf="(isAuthenticated$|async)"
+                class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
             <ion-icon name="notifications-outline"></ion-icon>
         </ion-item>
-        <ion-item lines="none" class="ion-item-no-side-padding" slot="end">
+        <ion-item *ngIf="(isAuthenticated$|async)"
+                lines="none" class="ion-item-no-side-padding" slot="end">
             <ion-icon name="heart-outline"></ion-icon>
         </ion-item>
-        <ion-item lines="none" class="text-blue" slot="end"
+        <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
                   *ngIf="!(isAuthenticated$|async)"
                   routerLink="/auth/login"
                   routerDirection="forward"
                   routerLinkActive="active">
             {{'template.sign-in'|translate}}
         </ion-item>
-        <ion-item lines="none" class="text-blue" slot="end"
-                  *ngIf="!(isAuthenticated$|async)"
+        <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
+                  *ngIf="!(isAuthenticated$|async) && isDesktop()"
                   routerLink="/auth/registration"
                   routerLinkActive="active"
                   routerDirection="forward">

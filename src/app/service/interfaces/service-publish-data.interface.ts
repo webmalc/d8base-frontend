@@ -1,4 +1,4 @@
-import {Master} from '@app/core/models/master';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {User} from '@app/core/models/user';
 import {MasterLocation} from '@app/master/models/master-location';
 import {MasterSchedule} from '@app/master/models/master-schedule';
@@ -9,7 +9,7 @@ import {ServicePhoto} from '@app/service/models/service-photo';
 import {ServiceSchedule} from '@app/service/models/service-schedule';
 
 export default interface ServicePublishData {
-    master: Master;
+    master: ProfessionalList;
     service: Service;
     servicePhotos: ServicePhoto[];
     serviceSchedule: ServiceSchedule[];

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { passwordValidators } from '@app/core/validators/password-validators';
 import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
 
 @Injectable()
@@ -18,12 +19,21 @@ export class ServicePublishStepFourFormService {
                         '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
                         '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
                 ])],
-                [ServicePublishStepFourFormFields.Password]: [null,
-                    Validators.compose([Validators.required, Validators.minLength(6)])],
-                [ServicePublishStepFourFormFields.Confirm]: [null,
-                    Validators.compose([Validators.required, Validators.minLength(6)])]
+                [ServicePublishStepFourFormFields.Password]: [null, passwordValidators],
+                [ServicePublishStepFourFormFields.Confirm]: [null, passwordValidators],
+                [ServicePublishStepFourFormFields.Country]: [null, Validators.required],
+                [ServicePublishStepFourFormFields.City]: [null, Validators.required]
             },
             {validators: this.checkPassword});
+    }
+
+    public getFormFieldValue(formField: string): any {
+        return this.form?.get(formField)?.value;
+    }
+
+    public setControlDisabled(val: boolean, controlName: string): void {
+        const control = this.form.controls[controlName] as FormControl;
+        val ? control.disable() : control.enable();
     }
 
     public isEmailValid(): boolean {

@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {ProfessionalList} from '@app/api/models';
 import {MasterReadonlyApiCacheService} from '@app/core/services/cache';
-import {MasterList} from '@app/master/models/master-list';
 import {Observable, of} from 'rxjs';
 
 @Pipe({
@@ -13,9 +13,9 @@ export class MasterByIdPipe implements PipeTransform {
     ) {
     }
 
-    public transform(id: number): Observable<MasterList> {
+    public transform(id: number): Observable<ProfessionalList> {
         if (!id) {
-            return of<MasterList>(null);
+            return of<ProfessionalList>(null);
         }
 
         return this.serviceCache.getById(id);

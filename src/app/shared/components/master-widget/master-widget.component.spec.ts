@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {IonicModule} from '@ionic/angular';
 
 import {MasterWidgetComponent} from './master-widget.component';
@@ -15,6 +16,7 @@ describe('MasterWidgetComponent', () => {
 
         fixture = TestBed.createComponent(MasterWidgetComponent);
         component = fixture.componentInstance;
+        component.master = {} as ProfessionalList;
         fixture.detectChanges();
     }));
 

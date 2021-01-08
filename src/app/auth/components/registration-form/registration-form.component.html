@@ -1,14 +1,16 @@
-<form [formGroup]="registrationFormService.form" (ngSubmit)="submitRegistrationForm()" (keydown.enter)="submitRegistrationForm()" >
+<form [formGroup]="registrationFormService.form" (ngSubmit)="submitRegistrationForm()"
+      (keydown.enter)="submitRegistrationForm()">
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
-            <error-flashbag [message]="errorMessage"></error-flashbag>
+            <error-flashbag [messages]="errorMessages"></error-flashbag>
         </ion-col>
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <ion-item>
-                <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.email' | translate }}</ion-label>
+                <ion-label class="label-for-required-input" color="medium"
+                           position="floating">{{ 'registration-form.email' | translate }}</ion-label>
                 <ion-input type="text" name="email" [formControlName]="formFields.Email"></ion-input>
             </ion-item>
         </ion-col>
@@ -17,24 +19,33 @@
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <ion-item>
-                <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.password' | translate }}</ion-label>
+                <ion-label class="label-for-required-input" color="medium"
+                           position="floating">{{ 'registration-form.password' | translate }}</ion-label>
                 <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
             </ion-item>
+            <app-input-error-description text="error.password-too-short" *ngIf="registrationFormService.getErrors(formFields.Password)?.minlength">
+            </app-input-error-description>
+            <app-input-error-description text="error.password-numeric" *ngIf="registrationFormService.getErrors(formFields.Password)?.forbidNumericValue">
+            </app-input-error-description>
         </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <ion-item>
-                <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.confirm' | translate }}</ion-label>
+                <ion-label class="label-for-required-input" color="medium"
+                           position="floating">{{ 'registration-form.confirm' | translate }}</ion-label>
                 <ion-input type="password" name="confirm" [formControlName]="formFields.Confirm"></ion-input>
             </ion-item>
+            <app-input-error-description text="error.password-mismatch" *ngIf="registrationFormService.getErrors(formFields.Confirm)?.passwordMismatch">
+            </app-input-error-description>
         </ion-col>
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <ion-item>
-                <ion-label color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
+                <ion-label class="label-for-required-input"
+                           color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
                 <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
             </ion-item>
         </ion-col>
@@ -44,7 +55,11 @@
         <ion-col appMainColumn>
             <ion-item>
                 <ion-label color="medium" position="floating">{{ 'registration-form.phone' | translate }}</ion-label>
-                <ion-input type="text" name="phone" [formControlName]="formFields.Phone"></ion-input>
+                <ion-input (ionBlur)="onPhoneBlur($event.target.value)"
+                           (ionInput)="onPhoneInputChange($event.target.value)"
+                           (ionChange)="onPhoneChange($event.target.value)"
+                           (ionFocus)="onPhoneFocus($event.target.value)"
+                           type="text" name="phone" [formControlName]="formFields.Phone"></ion-input>
             </ion-item>
         </ion-col>
     </ion-row>
@@ -52,7 +67,8 @@
     <ion-row class="ion-justify-content-center">
         <ion-col appMainColumn>
             <ion-item>
-                <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.country' | translate }}</ion-label>
+                <ion-label class="label-for-required-input" color="medium"
+                           position="floating">{{ 'registration-form.country' | translate }}</ion-label>
                 <ionic-selectable
                         id="country-selectable"
                         itemValueField="id"
@@ -90,7 +106,7 @@
                     expand="block"
                     fill="solid"
                     color="success"
-                    [disabled]="registrationFormService.isFormValid()"
+                    [disabled]="registrationFormService.isFormInvalid()"
             >{{ 'registration-form.register' | translate }}</ion-button>
         </ion-col>
     </ion-row>

@@ -4,7 +4,7 @@ import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.i
 import {CitiesApiService} from '@app/core/services/location/cities-api.service';
 import {LocationService} from '@app/core/services/location/location.service';
 import {City} from '@app/profile/models/city';
-import {IonicModule} from '@ionic/angular';
+import {IonicModule, NavParams} from '@ionic/angular';
 import {Observable, of} from 'rxjs';
 import {CityPickerPopoverComponent} from './city-picker-popover.component';
 
@@ -44,7 +44,8 @@ describe('CityPickerPopoverComponent', () => {
                 {
                     provide: CitiesApiService,
                     useClass: CitiesApiServiceStub
-                }
+                },
+                {provide: NavParams, useValue: {get: () => null}}
             ]
         }).compileComponents();
 

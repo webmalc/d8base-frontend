@@ -16,9 +16,7 @@
 }
 
 .time-unit-disabled {
-  background-color: #E6FDFF;
-  border: 1px solid #0CD1E8;
-  --ion-background-color: #E6FDFF;
+  --ion-background-color:var(--ion-color-dark)
 }
 
 .date-row {

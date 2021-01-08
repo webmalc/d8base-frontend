@@ -5,11 +5,9 @@ export interface StepTwoDataInterface {
     description: string;
     duration: number;
     is_price_fixed: boolean;
-    price: number;
+    price: string;
     price_currency: Currency;
-    start_price_currency: Currency;
-    end_price_currency: Currency;
-    start_price: number;
-    end_price: number;
+    start_price: string;
+    end_price: string;
     service_type: string;
 }

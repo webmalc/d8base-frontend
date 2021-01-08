@@ -21,4 +21,10 @@ export class CurrencyListApiService {
             map(raw => plainToClass(Currency, raw))
         );
     }
+
+    public getByName(currency: string): Observable<Currency | null> {
+        return this.api.get<Currency[]>(this.url, {currency}).pipe(
+            map(raw => plainToClass(Currency, raw)[0])
+        );
+    }
 }

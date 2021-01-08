@@ -1,5 +1,4 @@
-import {Country} from '@app/profile/models/country';
-import {UserLanguage} from '@app/profile/models/user-language';
+import {UserLanguage} from '@app/api/models';
 import {Expose} from 'class-transformer';
 import {UserInterface} from '../interfaces/user.interface';
 
@@ -15,7 +14,7 @@ export class User implements UserInterface {
     @Expose() public phone: string;
     @Expose() public avatar: string;
     @Expose() public avatar_thumbnail: string;
-    @Expose() public gender: boolean;
+    @Expose() public gender: 0 | 1;
     @Expose() public birthday: string;
     @Expose() public nationality: number; // Country id
     @Expose() public main_language: string;

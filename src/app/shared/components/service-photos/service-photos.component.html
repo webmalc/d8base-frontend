@@ -1,0 +1,23 @@
+<ion-spinner class="spinner" name="lines"></ion-spinner>
+<ion-list class="photo-slider">
+    <ion-list-header>
+        <ion-label>
+            <h1>{{ 'service-photos.title' | translate }}</h1>
+        </ion-label>
+    </ion-list-header>
+    <div class="photo-slider-container">
+        <ion-button class="button prev-button" size="small" color="secondary" (click)="slidePrev()" *ngIf="!isNavButtonsHidden">
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-slides class="slides" [options]="slideOptions" #slides>
+            <ion-slide *ngFor="let servicePhoto of servicePhotos" #slide>
+                <ion-thumbnail class="thumbnail">
+                    <ion-img spinner viewOnClick [src]="servicePhoto.photo_thumbnail" [fullSizeSrc]="servicePhoto.photo"> </ion-img>
+                </ion-thumbnail>
+            </ion-slide>
+        </ion-slides>
+        <ion-button class="button next-button" size="small" color="secondary" (click)="slideNext()" *ngIf="!isNavButtonsHidden">
+            <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+    </div>
+</ion-list>

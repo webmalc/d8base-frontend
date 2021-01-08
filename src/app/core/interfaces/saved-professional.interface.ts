@@ -1,6 +1,6 @@
-import {MasterInterface} from '@app/core/interfaces/master.interface';
+import {ProfessionalList} from '@app/api/models';
 
-export interface SavedProfessionalInterface<T extends number | MasterInterface> {
+export interface SavedProfessionalInterface<T extends number | ProfessionalList> {
     id: number;
     note: string;
     professional: T;

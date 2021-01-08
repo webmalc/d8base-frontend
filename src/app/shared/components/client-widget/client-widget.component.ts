@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {User} from '@app/core/models/user';
+import {HelperService} from '@app/core/services/helper.service';
 
 @Component({
     selector: 'app-client-widget',
@@ -10,4 +11,5 @@ export class ClientWidgetComponent {
 
     @Input() public client: User;
 
+    public defaultAvatar = HelperService.getNoAvatarLink();
 }

@@ -33,7 +33,6 @@ export class ProfileFormService {
                 [ProfileFormFields.Patronymic]: [
                     user.patronymic,
                     [
-                        Validators.required,
                         Validators.minLength(1),
                         Validators.maxLength(20)
                     ]

@@ -14,7 +14,7 @@ import {Country} from '@app/profile/models/country';
 import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
 import {LocationApiServiceInterface} from '@app/shared/interfaces/location-api-service-interface';
 import {forkJoin, Observable} from 'rxjs';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +28,6 @@ export class LocationService {
         private readonly citiesApi: CitiesApiService,
         private readonly districtApi: DistrictApiService
     ) {
-
     }
 
     public getSingle<T extends ClientLocationInterface>(api: LocationApiServiceInterface, id: number): Observable<T> {
@@ -42,13 +41,13 @@ export class LocationService {
         );
     }
 
-    public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<T[]> {
-        return this.getLocationList<T>(api);
+    public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<ClientLocationInterface[]> {
+        return this.getLocationList(api);
     }
 
-    private getLocationList<T extends ClientLocationInterface>(api: LocationApiServiceInterface, id?: number): Observable<T[]> {
+    private getLocationList(api: LocationApiServiceInterface, id?: number): Observable<ClientLocationInterface[]> {
         return api.getByClientId(id).pipe(
-            this.switch<T>()
+            map(data => data.results)
         );
     }
 

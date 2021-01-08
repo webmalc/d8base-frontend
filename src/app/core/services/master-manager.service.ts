@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
+import {ProfessionalList} from '@app/api/models/professional-list';
 import {once} from '@app/core/decorators/once';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
 import {Master} from '@app/core/models/master';
 import {User} from '@app/core/models/user';
 import {AuthenticationService} from '@app/core/services/authentication.service';
@@ -9,7 +9,7 @@ import {MasterApiService} from '@app/master/services/master-api.service';
 import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
 import {TypeOfUser} from '@app/profile/enums/type-of-user';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -44,29 +44,25 @@ export class MasterManagerService {
         return this.userManager.becomeMaster().pipe(tap(_ => this.updateIsMaster()));
     }
 
-    public getMasterList(): Observable<Master[]> {
-        return this.masterApi.get().pipe(map((data: ApiListResponseInterface<Master>) => data.results));
+    public getMasterList(): Observable<ProfessionalList[]> {
+        return this.masterApi.get().pipe(map(data => data.results));
     }
 
     public updateMaster(master: Master): Observable<Master> {
         return this.masterApi.put(master);
     }
 
-    public createMaster(master: Master): Observable<Master> {
-        return this.masterApi.create(master);
+    public createMaster(master: ProfessionalList): Observable<ProfessionalList> {
+        return this.becomeMaster().pipe(
+            switchMap(_ => this.masterApi.create(master))
+        );
     }
 
     public getMaster(masterId?: number): Observable<Master> {
         return this.masterApi.getByEntityId(masterId);
     }
 
-    public getUserLessList$(ids: number[]): Observable<Master[]> {
+    public getUserLessList$(ids: number[]): Observable<ProfessionalList[]> {
         return this.masterReadonlyApi.getList(ids);
-    }
-
-    public getExperienceLevelList(): Observable<{ value: string, display_name: string }[]> {
-        return this.masterApi.options<{ actions: { POST: { level: { choices: { value: string, display_name: string }[] } } } }>().pipe(
-            map((data) => data.actions.POST.level.choices)
-        );
     }
 }
