@@ -56,11 +56,13 @@ export class RegistrationFormService {
         this.form.get(formField).setValue(value);
     }
 
-    private checkPassword(group: FormGroup): any {
+    private checkPassword(group: FormGroup): ValidationErrors | null {
         if (group.get(RegistrationFormFields.Password).value !== group.get(RegistrationFormFields.Confirm).value) {
             group.get(RegistrationFormFields.Confirm).setErrors({passwordMismatch: true});
-        } else {
-            return null;
+
+            return {passwordMismatch: true};
         }
+
+        return null;
     }
 }

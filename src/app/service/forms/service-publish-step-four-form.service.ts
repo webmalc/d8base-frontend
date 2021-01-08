@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { passwordValidators } from '@app/core/validators/password-validators';
 import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
 
@@ -44,11 +44,13 @@ export class ServicePublishStepFourFormService {
         return !(this.form.valid && this.form.dirty);
     }
 
-    private checkPassword(group: FormGroup): any {
+    private checkPassword(group: FormGroup): ValidationErrors | null {
         if (group.get(ServicePublishStepFourFormFields.Password).value !== group.get(ServicePublishStepFourFormFields.Confirm).value) {
             group.get(ServicePublishStepFourFormFields.Confirm).setErrors({passwordMismatch: true});
-        } else {
-            return null;
+
+            return {passwordMismatch: true};
         }
+
+        return null;
     }
 }
