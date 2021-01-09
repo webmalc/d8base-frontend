@@ -65,7 +65,7 @@ export const environment = {
         calendar: '/api/schedule/calendar/',
         service_schedule_set: '/api/accounts/service-schedule/set/',
         master_schedule_set: '/api/accounts/professional-schedule/set/',
-        url: 'http://localhost:8000'
+        url: 'http://localhost:8000',
     },
     client_id: '',
     client_secret: '',
@@ -81,19 +81,19 @@ export const environment = {
        storageBucket: '<your-storage-bucket>',
        messagingSenderId: '<your-messaging-sender-id>',
        vapidKey: '<your-valid-key>',
-       appId: '<your-app-id>'
+       appId: '<your-app-id>',
     },
     message: {
         direct_update_interval_ms: 1000,
         chat_list_update_interval_ms: 5000,
         background_update_interval_ms: 5000,
-        messages_per_page: 50
+        messages_per_page: 50,
     },
     sentry: {
         enabled: true,
-        dsn: ''
+        dsn: '',
     },
     default_calendar_interval: 15,
     calendar_day_intervals: 4,
-    default_lang: 'en'
+    default_lang: 'en',
 };
