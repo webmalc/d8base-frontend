@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ScheduleEditorFormService} from './schedule-editor-form.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ScheduleEditorFormService } from './schedule-editor-form.service';
 
 describe('ScheduleEditorFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({

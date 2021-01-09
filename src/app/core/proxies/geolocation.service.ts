@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Geolocation, GeolocationOptions, Geoposition, PositionError} from '@ionic-native/geolocation/ngx';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
+import { Observable } from 'rxjs';
 
 /**
  *  Ionic Geolocation service proxy

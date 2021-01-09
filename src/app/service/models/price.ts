@@ -1,5 +1,5 @@
-import {Price as IPrice} from '@app/api/models';
-import {Expose} from 'class-transformer';
+import { Price as IPrice } from '@app/api/models';
+import { Expose } from 'class-transformer';
 
 export class Price implements IPrice {
     @Expose() public id: number;

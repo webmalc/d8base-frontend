@@ -1,8 +1,8 @@
-import {Location} from '@angular/common';
-import {Injectable} from '@angular/core';
-import {CanActivate, UrlTree} from '@angular/router';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Observable} from 'rxjs';
+import { Location } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { CanActivate, UrlTree } from '@angular/router';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

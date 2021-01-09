@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthenticationFactory, MasterManagerService} from '@app/core/services';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {Country} from '@app/profile/models/country';
-import {MenuController, Platform} from '@ionic/angular';
-import {Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationFactory, MasterManagerService } from '@app/core/services';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { Country } from '@app/profile/models/country';
+import { MenuController, Platform } from '@ionic/angular';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',

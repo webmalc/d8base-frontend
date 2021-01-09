@@ -1,8 +1,8 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../proxies/storage-manager.service';
-import {MasterGuard} from './master.guard';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../proxies/storage-manager.service';
+import { MasterGuard } from './master.guard';
 
 describe('MasterGuard', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -11,7 +11,7 @@ describe('MasterGuard', () => {
         ],
         providers: [
             MasterGuard,
-            {provide: StorageManagerService, useClass: StorageManagerMock},
+            { provide: StorageManagerService, useClass: StorageManagerMock},
         ],
     }));
 

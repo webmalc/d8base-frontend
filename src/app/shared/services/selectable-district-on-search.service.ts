@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {DistrictApiService} from '@app/core/services/location/district-api.service';
-import {City} from '@app/profile/models/city';
-import {SelectableSearchService} from '@app/shared/abstract/selectable-search.service';
-import {IonicSelectableComponent} from 'ionic-selectable';
+import { DistrictApiService } from '@app/core/services/location/district-api.service';
+import { City } from '@app/profile/models/city';
+import { SelectableSearchService } from '@app/shared/abstract/selectable-search.service';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Injectable()
 export class SelectableDistrictOnSearchService extends SelectableSearchService {
@@ -16,7 +16,7 @@ export class SelectableDistrictOnSearchService extends SelectableSearchService {
             event.component,
             event.text,
             this.districtApi,
-            {city: city?.id.toString(10)},
+            { city: city?.id.toString(10)},
         );
     }
 }

@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {ChatsComponent} from '@app/message/components/chats/chats.component';
-import {DirectComponent} from '@app/message/components/direct/direct.component';
+import { ChatsComponent } from '@app/message/components/chats/chats.component';
+import { DirectComponent } from '@app/message/components/direct/direct.component';
 
 const routes: Routes = [
     {

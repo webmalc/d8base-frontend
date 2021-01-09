@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {ExperienceEditComponent} from './experience-edit.component';
+import { ExperienceEditComponent } from './experience-edit.component';
 
 describe('ExperienceEditComponent', () => {
     let component: ExperienceEditComponent;

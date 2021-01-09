@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ContactApiService} from './contact-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ContactApiService } from './contact-api.service';
 
 describe('ContactApiServiceService', () => {
     beforeEach(() => TestBed.configureTestingModule({

@@ -1,6 +1,6 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {IsUserRegisteredApiService} from './is-user-registered-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { IsUserRegisteredApiService } from './is-user-registered-api.service';
 
 describe('IsUserRegisteredApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

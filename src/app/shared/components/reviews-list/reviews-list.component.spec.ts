@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {ReviewsListComponent} from './reviews-list.component';
+import { ReviewsListComponent } from './reviews-list.component';
 
 describe('ReviewsListComponent', () => {
     let component: ReviewsListComponent;

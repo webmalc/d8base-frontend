@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {ProfessionalLocationInline} from '@app/api/models/professional-location-inline';
-import {HelperService} from '@app/core/services/helper.service';
-import {FullLocationService} from '@app/core/services/location/full-location.service';
+import { Component } from '@angular/core';
+import { ProfessionalLocationInline } from '@app/api/models/professional-location-inline';
+import { HelperService } from '@app/core/services/helper.service';
+import { FullLocationService } from '@app/core/services/location/full-location.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
-import {Language} from '@app/profile/models/language';
-import {LanguagesApiService} from '@app/profile/services/languages-api.service';
-import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
-import {forkJoin, Observable} from 'rxjs';
-import {first, map, shareReplay, switchMap} from 'rxjs/operators';
+import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
+import { Language } from '@app/profile/models/language';
+import { LanguagesApiService } from '@app/profile/services/languages-api.service';
+import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
+import { forkJoin, Observable } from 'rxjs';
+import { first, map, shareReplay, switchMap } from 'rxjs/operators';
 
 function isNumbers(array: any[]): array is number[] {
     return typeof (array[0]) === 'number';
@@ -35,16 +35,16 @@ export class MasterProfileInfoComponent {
         languagesApi: LanguagesApiService,
     ) {
         this.context$ = context.context$.pipe(
-            first(({user, master}) => Boolean(master) && Boolean(user)),
+            first(({ user, master}) => Boolean(master) && Boolean(user)),
         );
         this.languages$ = this.context$.pipe(
-            map(({user}) => isNumbers(user.languages) ? user.languages : user.languages.map(x => x.id)),
+            map(({ user}) => isNumbers(user.languages) ? user.languages : user.languages.map(x => x.id)),
             switchMap(ids => userLanguagesApi.getList(ids)),
             switchMap(languages => languagesApi.getList(languages.map(lang => lang?.language))),
             shareReplay(1),
         );
         this.locations$ = this.context$.pipe(
-            switchMap(({master}) =>
+            switchMap(({ master}) =>
                 forkJoin(master.locations.map(x => this.fullLocationService.getTextLocation(x))),
             ),
         );

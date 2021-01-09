@@ -1,10 +1,10 @@
-import {isPlatformServer} from '@angular/common';
-import {HttpErrorResponse} from '@angular/common/http';
-import {ErrorHandler, Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {Router} from '@angular/router';
-import {ErrorList} from '@app/core/enums/error-list';
-import {environment} from '@env/environment';
-import {ToastController} from '@ionic/angular';
+import { isPlatformServer } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandler, Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Router } from '@angular/router';
+import { ErrorList } from '@app/core/enums/error-list';
+import { environment } from '@env/environment';
+import { ToastController } from '@ionic/angular';
 import * as Sentry from '@sentry/angular';
 
 const AUTHENTICATION_ERROR = 'authentication expired';
@@ -88,7 +88,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
         if (isPlatformServer(this.platformId)) {
             console.error(message);
         } else {
-            this.toaster.create({message, duration}).then(
+            this.toaster.create({ message, duration}).then(
                 toast => toast.present(),
             );
         }

@@ -1,14 +1,14 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {of} from 'rxjs';
-import {ApiClientService} from '../../core/services/api-client.service';
-import {PasswordRecoveryService} from './password-recovery.service';
+import { of } from 'rxjs';
+import { ApiClientService } from '../../core/services/api-client.service';
+import { PasswordRecoveryService } from './password-recovery.service';
 
 describe('PasswordRecoveryService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             PasswordRecoveryService,
-            {provide: ApiClientService, useValue: {post: () => of()}},
+            { provide: ApiClientService, useValue: { post: () => of()}},
         ],
     }));
 

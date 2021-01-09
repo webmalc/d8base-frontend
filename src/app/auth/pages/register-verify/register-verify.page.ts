@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-register-verify',
@@ -21,7 +21,7 @@ export class RegisterVerifyPage implements OnInit {
         this.activatedRoute.queryParams.subscribe(
             params => {
                 this.sendVerifyRequest(
-                    {user_id: params.user_id, timestamp: params.timestamp, signature: params.signature},
+                    { user_id: params.user_id, timestamp: params.timestamp, signature: params.signature},
                 ).subscribe(
                     resp => this.success = true,
                 );

@@ -1,4 +1,4 @@
-import {Expose} from 'class-transformer';
+import { Expose } from 'class-transformer';
 
 export class Category {
     @Expose() public id: number;

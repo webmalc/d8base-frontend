@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {StepSevenHandlerService} from './step-seven-handler.service';
+import { StepSevenHandlerService } from './step-seven-handler.service';
 
 describe('StepSevenHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {StepThreeDataInterface} from '@app/service/interfaces/step-three-data-interface';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
+import { Component, OnInit } from '@angular/core';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-interface';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
 
 @Component({
     selector: 'app-service-publish-step-three',
@@ -28,7 +28,7 @@ export class ServicePublishStepThreeComponent implements OnInit {
 
     public submit(): void {
         this.servicePublishDataHolderService.setStepData<StepThreeDataInterface>(
-            ServicePublishSteps.Three, {photos: this.files},
+            ServicePublishSteps.Three, { photos: this.files},
         );
         this.serviceStepsNavigationService.next();
     }

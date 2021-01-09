@@ -1,20 +1,20 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CityPickerPopoverComponent} from '@app/auth/components/city-picker-popover/city-picker-popover.component';
-import {User} from '@app/core/models/user';
-import {UserLocation} from '@app/core/models/user-location';
-import {CitiesApiService} from '@app/core/services/location/cities-api.service';
-import {CountriesApiService} from '@app/core/services/location/countries-api.service';
-import {LocationService} from '@app/core/services/location/location.service';
-import {City} from '@app/profile/models/city';
-import {Country} from '@app/profile/models/country';
-import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {PopoverController} from '@ionic/angular';
-import {plainToClass} from 'class-transformer';
-import {BehaviorSubject} from 'rxjs';
-import {filter, first} from 'rxjs/operators';
-import {RegistrationFormFields} from '../../enums/registration-form-fields';
-import {RegistrationFormService} from '../../forms/registration-form.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CityPickerPopoverComponent } from '@app/auth/components/city-picker-popover/city-picker-popover.component';
+import { User } from '@app/core/models/user';
+import { UserLocation } from '@app/core/models/user-location';
+import { CitiesApiService } from '@app/core/services/location/cities-api.service';
+import { CountriesApiService } from '@app/core/services/location/countries-api.service';
+import { LocationService } from '@app/core/services/location/location.service';
+import { City } from '@app/profile/models/city';
+import { Country } from '@app/profile/models/country';
+import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { PopoverController } from '@ionic/angular';
+import { plainToClass } from 'class-transformer';
+import { BehaviorSubject } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
+import { RegistrationFormFields } from '../../enums/registration-form-fields';
+import { RegistrationFormService } from '../../forms/registration-form.service';
 
 @Component({
     selector: 'app-registration-form',
@@ -79,11 +79,11 @@ export class RegistrationFormComponent implements OnInit {
         }
         const formData: object = this.registrationFormService.form.getRawValue();
 
-        const user = plainToClass(User, formData, {excludeExtraneousValues: true});
+        const user = plainToClass(User, formData, { excludeExtraneousValues: true});
         const location: UserLocation = new UserLocation();
         location.country = formData[this.formFields.Country].id;
         location.city = formData[this.formFields.City]?.id;
-        this.registrationFormData.emit({user, location});
+        this.registrationFormData.emit({ user, location});
     }
 
     public onCountryChange(): void {

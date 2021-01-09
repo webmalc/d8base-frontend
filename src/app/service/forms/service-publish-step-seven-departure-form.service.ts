@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ServicePublishStepSevenDepartureFormFields} from '@app/service/enums/service-publish-step-seven-departure-form-fields';
-import {StepSevenDepartureDataInterface} from '@app/service/interfaces/step-seven-departure-data-interface';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ServicePublishStepSevenDepartureFormFields } from '@app/service/enums/service-publish-step-seven-departure-form-fields';
+import { StepSevenDepartureDataInterface } from '@app/service/interfaces/step-seven-departure-data-interface';
 
 @Injectable()
 export class ServicePublishStepSevenDepartureFormService {

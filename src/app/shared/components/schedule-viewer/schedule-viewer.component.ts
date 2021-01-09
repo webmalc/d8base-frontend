@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {AbstractSchedule} from '@app/core/models/abstract-schedule';
+import { Component, Input } from '@angular/core';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import * as ScheduleConstants from '@app/shared/components/schedule-editor/schedule.constants';
 
 @Component({

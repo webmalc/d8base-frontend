@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {DurationViewerComponent} from './duration-viewer.component';
+import { DurationViewerComponent } from './duration-viewer.component';
 
 describe('DurationViewerComponent', () => {
     let component: DurationViewerComponent;

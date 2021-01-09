@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {PluginApiService} from './plugin-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PluginApiService } from './plugin-api.service';
 
 describe('PluginApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

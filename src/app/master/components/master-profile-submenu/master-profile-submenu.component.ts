@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MasterProfileSubmenu} from '@app/master/enums/master-profile-submenu';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
 
 @Component({
     selector: 'app-master-profile-submenu',

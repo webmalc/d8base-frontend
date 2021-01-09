@@ -1,5 +1,5 @@
-import {Type} from '@angular/core';
-import {StepComponent} from '../abstract/step';
+import { Type } from '@angular/core';
+import { StepComponent } from '../abstract/step';
 
 export default interface StepModel {
     id: string;

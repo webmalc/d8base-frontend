@@ -1,14 +1,14 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {ServicePublishDataHolderService} from './service-publish-data-holder.service';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../../core/proxies/storage-manager.service';
+import { ServicePublishDataHolderService } from './service-publish-data-holder.service';
 
 describe('ServicePublishDataHolderService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock},
+            { provide: StorageManagerService, useClass: StorageManagerMock},
         ],
     }));
 

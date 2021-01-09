@@ -1,13 +1,13 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {Injectable} from '@angular/core';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ReactiveFormsModule} from '@angular/forms';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {IonicModule} from '@ionic/angular';
-import {Observable, of} from 'rxjs';
-import {Tag} from '../../models/tag';
-import {TagsApiService} from '../../services/tags-api.service';
-import {TagsSelectInputComponent} from './tags-select-input.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Injectable } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { IonicModule } from '@ionic/angular';
+import { Observable, of } from 'rxjs';
+import { Tag } from '../../models/tag';
+import { TagsApiService } from '../../services/tags-api.service';
+import { TagsSelectInputComponent } from './tags-select-input.component';
 
 describe('TagsSelectInputComponent', () => {
     let component: TagsSelectInputComponent;

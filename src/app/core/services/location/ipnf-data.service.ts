@@ -1,8 +1,8 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {IpnfResponseInterface} from '@app/auth/interfaces/location/ipnf-response.interface';
-import {IpLocation} from '@app/core/models/ip-location';
-import {AbstractIpService} from '@app/core/services/location/abstract-ip.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IpnfResponseInterface } from '@app/auth/interfaces/location/ipnf-response.interface';
+import { IpLocation } from '@app/core/models/ip-location';
+import { AbstractIpService } from '@app/core/services/location/abstract-ip.service';
 
 @Injectable()
 export class IpnfDataService extends AbstractIpService {

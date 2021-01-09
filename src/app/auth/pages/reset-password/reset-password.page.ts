@@ -1,11 +1,11 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ResetPasswordFields} from '@app/auth/enums/reset-password-fields';
-import {ResetPasswordFormService} from '@app/auth/forms/reset-password-form.service';
-import {ResetPasswordApiService} from '@app/auth/services/reset-password-api.service';
-import {HelperService} from '@app/core/services/helper.service';
-import {delay, tap} from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ResetPasswordFields } from '@app/auth/enums/reset-password-fields';
+import { ResetPasswordFormService } from '@app/auth/forms/reset-password-form.service';
+import { ResetPasswordApiService } from '@app/auth/services/reset-password-api.service';
+import { HelperService } from '@app/core/services/helper.service';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-reset-password',

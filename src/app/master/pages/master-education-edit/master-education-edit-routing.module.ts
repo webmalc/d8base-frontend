@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {MasterEducationEditPage} from './master-education-edit.page';
+import { MasterEducationEditPage } from './master-education-edit.page';
 
 const routes: Routes = [
   {

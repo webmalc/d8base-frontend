@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ServicePublishStepSevenFormFields} from '@app/service/enums/service-publish-step-seven-form-fields';
-import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
+import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 
 @Injectable()
 export class ServicePublishStepSevenFormService {

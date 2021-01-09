@@ -1,15 +1,15 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
-import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {LoginFormFields} from '../../enums/login-form-fields';
-import {LoginFormService} from '../../forms/login-form.service';
-import {Credentials} from '../../interfaces/credentials';
-import {LoginFormComponent} from './login-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LoginFormFields } from '../../enums/login-form-fields';
+import { LoginFormService } from '../../forms/login-form.service';
+import { Credentials } from '../../interfaces/credentials';
+import { LoginFormComponent } from './login-form.component';
 
 describe('LoginFormComponent', () => {
     let component: LoginFormComponent;
@@ -49,7 +49,7 @@ describe('LoginFormComponent', () => {
         spyOn((component as any).user, 'emit');
 
         fixture.debugElement.nativeElement.querySelector('ion-button').click();
-        const newUser: Credentials = {username: 'valid', password: 'valid_pass'};
+        const newUser: Credentials = { username: 'valid', password: 'valid_pass'};
         expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
     }));
 });

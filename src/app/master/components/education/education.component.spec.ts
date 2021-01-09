@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {Education} from '@app/master/models/education';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {plainToClass} from 'class-transformer';
-import {EducationComponent} from './education.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Education } from '@app/master/models/education';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { plainToClass } from 'class-transformer';
+import { EducationComponent } from './education.component';
 
 describe('EducationComponent', () => {
     let component: EducationComponent;

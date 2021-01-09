@@ -1,16 +1,16 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {ProfessionalList} from '@app/api/models/professional-list';
-import {MasterManagerService} from '@app/core/services';
-import {LoadingService} from '@app/core/services/loading.service';
-import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {ServicePublishService} from '@app/service/services/service-publish.service';
-import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
-import {Observable} from 'rxjs';
-import {finalize, map, single} from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProfessionalList } from '@app/api/models/professional-list';
+import { MasterManagerService } from '@app/core/services';
+import { LoadingService } from '@app/core/services/loading.service';
+import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { ServicePublishService } from '@app/service/services/service-publish.service';
+import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
+import { Observable } from 'rxjs';
+import { finalize, map, single } from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-final-step',
@@ -39,7 +39,7 @@ export class ServicePublishFinalStepComponent {
         const master = this.isNewMaster() ? null : await this.getMaster().toPromise();
         if (master) {
             await this.servicePublishDataHolder.assignStepData(
-                ServicePublishSteps.Final, {master},
+                ServicePublishSteps.Final, { master},
             );
         }
         this.servicePublish.publish()
@@ -48,7 +48,7 @@ export class ServicePublishFinalStepComponent {
                 finalize(() => this.loading.loadingDismiss()),
             )
             .subscribe(
-                (service) => this.router.navigate(['service', service.id], {queryParams: {from: 'publish'}}),
+                (service) => this.router.navigate(['service', service.id], { queryParams: { from: 'publish'}}),
             );
     }
 

@@ -1,4 +1,4 @@
-import {PublicReview} from '@app/master/models/public-review';
+import { PublicReview } from '@app/master/models/public-review';
 
 export interface MainInfoSectionComponentInputDataInterface {
     fullName: string;

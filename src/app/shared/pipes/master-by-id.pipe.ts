@@ -1,7 +1,7 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {ProfessionalList} from '@app/api/models';
-import {MasterReadonlyApiCacheService} from '@app/core/services/cache';
-import {Observable, of} from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
+import { ProfessionalList } from '@app/api/models';
+import { MasterReadonlyApiCacheService } from '@app/core/services/cache';
+import { Observable, of } from 'rxjs';
 
 @Pipe({
     name: 'masterById$',

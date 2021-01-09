@@ -1,15 +1,15 @@
-import {Location} from '@angular/common';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {ContactApiService} from '@app/profile/services/contact-api.service';
-import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
-import {IonicModule} from '@ionic/angular';
-import {of} from 'rxjs';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {UserContactEditComponent} from './user-contact-edit.component';
+import { Location } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { ContactApiService } from '@app/profile/services/contact-api.service';
+import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
+import { IonicModule } from '@ionic/angular';
+import { of } from 'rxjs';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { UserContactEditComponent } from './user-contact-edit.component';
 
 describe('UserContactEditComponent', () => {
     let component: UserContactEditComponent;
@@ -32,10 +32,10 @@ describe('UserContactEditComponent', () => {
                                     return '';
                                 },
                             },
-                        }, data: of({isMaster: false}),
+                        }, data: of({ isMaster: false}),
                     },
                 },
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         }).compileComponents();
 

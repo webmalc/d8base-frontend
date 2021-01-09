@@ -1,11 +1,11 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {IonicModule} from '@ionic/angular';
-import {IonicStorageModule} from '@ionic/storage';
-import {TranslateModule} from '@ngx-translate/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonicModule } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {HeaderComponent} from './header.component';
+import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
     let component: HeaderComponent;
@@ -26,7 +26,7 @@ describe('HeaderComponent', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {provide: Storage, useValue: storageMock},
+                { provide: Storage, useValue: storageMock},
             ],
         }).compileComponents();
 

@@ -1,5 +1,5 @@
-import {AbstractDatePeriodModel} from '@app/shared/models/abstract-date-period-model';
-import {Expose} from 'class-transformer';
+import { AbstractDatePeriodModel } from '@app/shared/models/abstract-date-period-model';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class Experience extends AbstractDatePeriodModel {

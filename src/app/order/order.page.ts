@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SentOrder} from '@app/core/models/sent-order';
-import {ServicesApiCache} from '@app/core/services/cache';
-import {ServicesReadonlyApiService} from '@app/core/services/services-readonly-api.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
-import {forkJoin, Subject} from 'rxjs';
-import {filter, first, map, switchMap, takeUntil} from 'rxjs/operators';
-import {OrderWizardStateService, SentOrdersApiService} from './services';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SentOrder } from '@app/core/models/sent-order';
+import { ServicesApiCache } from '@app/core/services/cache';
+import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
+import { forkJoin, Subject } from 'rxjs';
+import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
+import { OrderWizardStateService, SentOrdersApiService } from './services';
 
 @Component({
     selector: 'app-order',
@@ -49,9 +49,9 @@ export class OrderPage {
                 map((state) => {
                     return Object.values(state).reduce(
                         (acc, curr) => {
-                            return {...acc, ...curr};
+                            return { ...acc, ...curr};
                         },
-                        {service: this.serviceId},
+                        { service: this.serviceId},
                     );
                 }),
                 takeUntil(this.ngDestroy$),
@@ -62,7 +62,7 @@ export class OrderPage {
     }
 
     private createOrder(order: SentOrder): void {
-        this.ordersApi.create(order).subscribe(({id}) => {
+        this.ordersApi.create(order).subscribe(({ id}) => {
             this.router.navigate(['/', 'my-orders', 'outbox', id]);
         });
     }
@@ -80,7 +80,7 @@ export class OrderPage {
                 ),
             ),
             this.userManagerService.getCurrentUser(),
-        ]).pipe(first()).subscribe(async ([{service, professional}, client]) => {
+        ]).pipe(first()).subscribe(async ([{ service, professional}, client]) => {
                 await this.wizardState.setContext({
                     service,
                     professional,
@@ -92,7 +92,7 @@ export class OrderPage {
     private subscribeToRouteParams(): void {
         this.route.params
             .pipe(
-                map(({serviceId}) => serviceId),
+                map(({ serviceId}) => serviceId),
                 filter(serviceId => Boolean(serviceId)),
                 takeUntil(this.ngDestroy$),
             )

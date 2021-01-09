@@ -1,8 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {ProfessionalLocationInline} from '@app/api/models/professional-location-inline';
-import {FullLocationService, LocationInterface} from '@app/core/services/location/full-location.service';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { Component, Input } from '@angular/core';
+import { ProfessionalLocationInline } from '@app/api/models/professional-location-inline';
+import { FullLocationService, LocationInterface } from '@app/core/services/location/full-location.service';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-location-viewer',

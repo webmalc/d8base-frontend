@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {TranslateModule} from '@ngx-translate/core';
-import {FooterComponent} from './footer.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FooterComponent } from './footer.component';
 
 describe('AppFooterComponent', () => {
     let component: FooterComponent;

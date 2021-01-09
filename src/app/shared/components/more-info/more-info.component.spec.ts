@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {MoreInfoComponent} from './more-info.component';
+import { MoreInfoComponent } from './more-info.component';
 
 describe('MoreInfoComponent', () => {
     let component: MoreInfoComponent;

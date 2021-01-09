@@ -1,14 +1,14 @@
-import {HttpHeaders, HttpParams} from '@angular/common/http';
-import {fakeAsync, flush, TestBed} from '@angular/core/testing';
-import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
-import {Credentials} from '@app/auth/interfaces/credentials';
-import {from, Observable, of} from 'rxjs';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../proxies/storage-manager.service';
-import {ApiClientService} from './api-client.service';
-import {AuthenticationService} from './authentication.service';
-import {TokenManagerService} from './token-manager.service';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { Credentials } from '@app/auth/interfaces/credentials';
+import { from, Observable, of } from 'rxjs';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../proxies/storage-manager.service';
+import { ApiClientService } from './api-client.service';
+import { AuthenticationService } from './authentication.service';
+import { TokenManagerService } from './token-manager.service';
 
 
 class HttpMock {
@@ -54,9 +54,9 @@ describe('AuthenticationService', () => {
 
         TestBed.configureTestingModule({
             providers: [
-                {provide: ApiClientService, useClass: HttpMock},
+                { provide: ApiClientService, useClass: HttpMock},
                 TokenManagerService,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         });
 

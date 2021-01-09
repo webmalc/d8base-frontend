@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ProfessionalList} from '@app/api/models';
-import {ProfessionalsService} from '@app/api/services/professionals.service';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-service-interface';
-import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ProfessionalList } from '@app/api/models';
+import { ProfessionalsService } from '@app/api/services/professionals.service';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { ReadonlyApiServiceInterface } from '@app/core/interfaces/readonly-api-service-interface';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +14,7 @@ export class MasterReadonlyApiService implements ReadonlyApiServiceInterface<Pro
     }
 
     public get(params?: { [p: string]: string | string[] | boolean }): Observable<ApiListResponseInterface<ProfessionalList>> {
-        return this.professionalsService.professionalsProfessionalsList(params ?? {});
+        return this.professionalsService.professionalsProfessionalsList(params ?? { });
     }
 
     public getByEntityId(entityId: number): Observable<ProfessionalList> {

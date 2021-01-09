@@ -1,12 +1,12 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
-import {GcmDevice} from '@app/core/models/gcm-device';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AbstractApiService } from '@app/core/abstract/abstract-api.service';
+import { GcmDevice } from '@app/core/models/gcm-device';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

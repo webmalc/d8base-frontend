@@ -1,9 +1,9 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {IpServiceInterface} from '@app/auth/interfaces/location/ip-service.interface';
-import {IpLocation} from '@app/core/models/ip-location';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IpServiceInterface } from '@app/auth/interfaces/location/ip-service.interface';
+import { IpLocation } from '@app/core/models/ip-location';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

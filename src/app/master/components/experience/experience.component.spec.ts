@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {Experience} from '@app/master/models/experience';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {plainToClass} from 'class-transformer';
-import {ExperienceComponent} from './experience.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Experience } from '@app/master/models/experience';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { plainToClass } from 'class-transformer';
+import { ExperienceComponent } from './experience.component';
 
 describe('ExperienceComponent', () => {
     let component: ExperienceComponent;

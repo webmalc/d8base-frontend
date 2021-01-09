@@ -1,28 +1,28 @@
-import {Injectable} from '@angular/core';
-import {ProfessionalList} from '@app/api/models/professional-list';
-import {Master} from '@app/core/models/master';
-import {User} from '@app/core/models/user';
-import {HelperService} from '@app/core/services/helper.service';
-import {MasterLocation} from '@app/master/models/master-location';
-import {MasterSchedule} from '@app/master/models/master-schedule';
-import {TypeOfUser} from '@app/profile/enums/type-of-user';
-import {PaymentMethods} from '@app/service/enums/payment-methods';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {FinalStepDataInterface} from '@app/service/interfaces/final-step-data-interface';
-import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
-import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
-import {StepOneDataInterface} from '@app/service/interfaces/step-one-data-interface';
-import {StepSevenDataInterface} from '@app/service/interfaces/step-seven-data-interface';
-import {StepSixDataInterface} from '@app/service/interfaces/step-six-data-interface';
-import {StepThreeDataInterface} from '@app/service/interfaces/step-three-data-interface';
-import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
-import {Price} from '@app/service/models/price';
-import {Service} from '@app/service/models/service';
-import {ServiceLocation} from '@app/service/models/service-location';
-import {ServicePhoto} from '@app/service/models/service-photo';
-import {ServiceSchedule} from '@app/service/models/service-schedule';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {plainToClass} from 'class-transformer';
+import { Injectable } from '@angular/core';
+import { ProfessionalList } from '@app/api/models/professional-list';
+import { Master } from '@app/core/models/master';
+import { User } from '@app/core/models/user';
+import { HelperService } from '@app/core/services/helper.service';
+import { MasterLocation } from '@app/master/models/master-location';
+import { MasterSchedule } from '@app/master/models/master-schedule';
+import { TypeOfUser } from '@app/profile/enums/type-of-user';
+import { PaymentMethods } from '@app/service/enums/payment-methods';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { FinalStepDataInterface } from '@app/service/interfaces/final-step-data-interface';
+import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
+import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
+import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
+import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
+import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
+import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-interface';
+import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
+import { Price } from '@app/service/models/price';
+import { Service } from '@app/service/models/service';
+import { ServiceLocation } from '@app/service/models/service-location';
+import { ServicePhoto } from '@app/service/models/service-photo';
+import { ServiceSchedule } from '@app/service/models/service-schedule';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { plainToClass } from 'class-transformer';
 import ServicePublishData from '../interfaces/service-publish-data.interface';
 
 @Injectable()
@@ -86,7 +86,7 @@ export class ServicePublishDataPreparerService {
     private getService(): Service {
         const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
         const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-        const service = plainToClass(Service, stepTwoData, {excludeExtraneousValues: true});
+        const service = plainToClass(Service, stepTwoData, { excludeExtraneousValues: true});
         service.duration = stepTwoData.duration;
         service.is_base_schedule = stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule;
         service.is_auto_order_confirmation = stepSevenData.is_auto_order_confirmation ?? false;
@@ -184,6 +184,6 @@ export class ServicePublishDataPreparerService {
     }
 
     private getNewPhoto(photo: string): ServicePhoto {
-        return plainToClass(ServicePhoto, {photo}, {excludeExtraneousValues: true});
+        return plainToClass(ServicePhoto, { photo}, { excludeExtraneousValues: true});
     }
 }

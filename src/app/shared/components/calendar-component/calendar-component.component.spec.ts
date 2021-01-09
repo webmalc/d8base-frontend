@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {CalendarComponentComponent} from './calendar-component.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { CalendarComponentComponent } from './calendar-component.component';
 
 describe('CalendarComponentComponent', () => {
     let component: CalendarComponentComponent;
@@ -19,7 +19,7 @@ describe('CalendarComponentComponent', () => {
         fixture = TestBed.createComponent(CalendarComponentComponent);
         component = fixture.componentInstance;
         component.enabledPeriods = [
-            {start_datetime: '2020-12-03T09:00:00+01:00', end_datetime: '2020-12-03T18:00:00+01:00', professional: 1, service: null},
+            { start_datetime: '2020-12-03T09:00:00+01:00', end_datetime: '2020-12-03T18:00:00+01:00', professional: 1, service: null},
         ];
         fixture.detectChanges();
     }));

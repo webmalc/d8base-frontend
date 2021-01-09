@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {MainGuard} from '@app/core/guards/main.guard';
-import {UserContactEditComponent} from '@app/shared/components/user-contact-edit/user-contact-edit.component';
-import {MasterPage} from './master.page';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { MainGuard } from '@app/core/guards/main.guard';
+import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
+import { MasterPage } from './master.page';
 
 // tslint:disable:max-line-length
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
         path: '',
         component: MasterPage,
         pathMatch: 'full',
-        data: {editable: true},
+        data: { editable: true},
     },
     {
         path: 'add',
@@ -70,19 +70,19 @@ const routes: Routes = [
     {
         path: 'professional-contact-add-default/:default-contact-id',
         component: UserContactEditComponent,
-        data: {isMaster: true},
+        data: { isMaster: true},
     },
     {
         path: 'professional-contact-edit/:contact-id',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: {isMaster: true},
+        data: { isMaster: true},
     },
     {
         path: 'professional-contact-add',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: {isMaster: true},
+        data: { isMaster: true},
     },
     {
         path: 'master-edit',
@@ -93,7 +93,7 @@ const routes: Routes = [
         path: ':master-id', // attention, keep this path at the very bottom, because this pattern matches all URLs
         component: MasterPage,
         pathMatch: 'full',
-        data: {editable: false},
+        data: { editable: false},
     },
 ];
 

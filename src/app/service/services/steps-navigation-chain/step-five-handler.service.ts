@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {StepFourDataInterface} from '@app/service/interfaces/step-four-data-interface';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
-import {Observable, of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class StepFiveHandlerService extends AbstractHandler {

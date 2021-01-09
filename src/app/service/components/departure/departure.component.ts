@@ -1,8 +1,8 @@
-import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {ServicePublishStepSevenDepartureFormFields} from '@app/service/enums/service-publish-step-seven-departure-form-fields';
-import {ServicePublishStepSevenDepartureFormService} from '@app/service/forms/service-publish-step-seven-departure-form.service';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ServicePublishStepSevenDepartureFormFields } from '@app/service/enums/service-publish-step-seven-departure-form-fields';
+import { ServicePublishStepSevenDepartureFormService } from '@app/service/forms/service-publish-step-seven-departure-form.service';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
 @Component({
     selector: 'app-departure',
@@ -34,7 +34,7 @@ export class DepartureComponent implements OnInit {
     public submitForm(): void {
         this.servicePublishDataHolder.assignStepData(
             this.STEP,
-            {[DepartureComponent.departureDataKey]: this.formService.form.getRawValue()},
+            { [DepartureComponent.departureDataKey]: this.formService.form.getRawValue()},
         );
         this.location.back();
     }

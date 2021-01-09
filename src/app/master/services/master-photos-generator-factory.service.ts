@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {MasterPhoto} from '@app/master/models/master-photo';
-import {MasterPhotosReadonlyApiService} from '@app/master/services/master-photos-readonly-api.service';
-import {Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterPhoto } from '@app/master/models/master-photo';
+import { MasterPhotosReadonlyApiService } from '@app/master/services/master-photos-readonly-api.service';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -21,6 +21,6 @@ export class MasterPhotosGeneratorFactoryService {
     }
 
     private get(masterId: number): Observable<MasterPhoto[]> {
-        return this.masterPhotosReadonlyApi.get({professional: masterId.toString()}).pipe(map(res => res.results));
+        return this.masterPhotosReadonlyApi.get({ professional: masterId.toString()}).pipe(map(res => res.results));
     }
 }

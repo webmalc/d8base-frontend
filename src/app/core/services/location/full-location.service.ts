@@ -11,7 +11,7 @@ import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import {ProfessionalLocationInline} from '../../../api/models';
+import { ProfessionalLocationInline } from '../../../api/models';
 
 export type FullLocation = {
     country: Country;
@@ -38,7 +38,7 @@ export class FullLocationService {
         private readonly subregionApi: SubregionApiService,
         private readonly citiesApi: CitiesApiService,
         private readonly districtApi: DistrictApiService,
-    ) {}
+    ) { }
 
     public getTextLocation(location: LocationInterface): Observable<{ id: number; text: string }>  {
         return this.getFullLocation(location).pipe(

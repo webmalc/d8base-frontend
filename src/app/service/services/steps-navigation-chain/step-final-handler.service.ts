@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
-import {Observable, of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class StepFinalHandlerService extends AbstractHandler {

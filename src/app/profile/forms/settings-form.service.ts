@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {UserSettings} from '@app/core/models/user-settings';
-import {AppValidators} from '@app/core/validators/app.validators';
-import {UserSettingsFromFields} from '@app/profile/enums/user-settings-from-fields';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserSettings } from '@app/core/models/user-settings';
+import { AppValidators } from '@app/core/validators/app.validators';
+import { UserSettingsFromFields } from '@app/profile/enums/user-settings-from-fields';
 
 @Injectable()
 export class SettingsFormService {

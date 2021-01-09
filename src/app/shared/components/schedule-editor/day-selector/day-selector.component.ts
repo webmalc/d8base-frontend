@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {PopoverController} from '@ionic/angular';
+import { Component } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import * as ScheduleConstants from '../schedule.constants';
 
 /**

@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {GlobalErrorHandlerService} from '@app/core/services/global-error-handler.service';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {TranslationService} from '@app/core/services/translation.service';
-import {UserSettingsService} from '@app/shared/services/user-settings.service';
-import {Platform} from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { GlobalErrorHandlerService } from '@app/core/services/global-error-handler.service';
+import { TokenManagerService } from '@app/core/services/token-manager.service';
+import { TranslationService } from '@app/core/services/translation.service';
+import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root',

@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
-import {Message} from '@app/message/models/message';
-import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { NotificationWorkerService } from '@app/core/services/notification-worker.service';
+import { Message } from '@app/message/models/message';
+import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import Timer = NodeJS.Timer;
 
 @Injectable()

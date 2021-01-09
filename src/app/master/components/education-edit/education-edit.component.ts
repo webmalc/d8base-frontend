@@ -1,8 +1,8 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {Education} from '@app/master/models/education';
-import {AbstractEditComponent} from '@app/shared/abstract/abstract-edit-component';
-import {plainToClass} from 'class-transformer';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { Education } from '@app/master/models/education';
+import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
+import { plainToClass } from 'class-transformer';
 
 @Component({
     selector: 'app-education-edit',

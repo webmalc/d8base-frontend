@@ -1,8 +1,8 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {AbstractContactsComponent} from './abstract-contacts.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { AbstractContactsComponent } from './abstract-contacts.component';
 
 describe('AbstractContactsComponent', () => {
     let component: AbstractContactsComponent;

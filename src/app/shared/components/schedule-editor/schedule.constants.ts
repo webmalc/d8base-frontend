@@ -1,4 +1,4 @@
-import {AbstractSchedule} from '@app/core/models/abstract-schedule';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 
 export const defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 

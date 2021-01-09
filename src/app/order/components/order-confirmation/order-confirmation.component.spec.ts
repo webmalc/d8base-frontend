@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {OrderConfirmationComponent} from './order-confirmation.component';
+import { OrderConfirmationComponent } from './order-confirmation.component';
 
 describe('OrderConfirmationComponent', () => {
     let component: OrderConfirmationComponent;

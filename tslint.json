@@ -199,6 +199,13 @@
       true,
       "fit",
       "fdescribe"
+    ],
+    "whitespace": [
+      true,
+      "check-module",
+      "check-preblock",
+      "check-postbrace",
+      "check-separator"
     ]
   }
 }

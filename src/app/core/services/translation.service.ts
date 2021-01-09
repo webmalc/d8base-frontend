@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {once} from '@app/core/decorators/once';
-import {UserSettings} from '@app/core/models/user-settings';
-import {UserSettingsService} from '@app/shared/services/user-settings.service';
-import {TranslateService} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { once } from '@app/core/decorators/once';
+import { UserSettings } from '@app/core/models/user-settings';
+import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

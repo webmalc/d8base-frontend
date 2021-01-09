@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Service} from '@app/service/models/service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Service } from '@app/service/models/service';
 
 @Component({
     selector: 'app-master-profile-service-edit',

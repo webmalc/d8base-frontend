@@ -1,7 +1,7 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {MasterEditComponent} from './master-edit.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { MasterEditComponent } from './master-edit.component';
 
 describe('MasterEditComponent', () => {
     let component: MasterEditComponent;

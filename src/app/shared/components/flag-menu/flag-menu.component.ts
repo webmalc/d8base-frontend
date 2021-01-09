@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {Currency} from '@app/core/models/currency';
-import {DarkModeService} from '@app/core/services';
-import {CurrencyListApiService} from '@app/core/services/currency-list-api.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {Country} from '@app/profile/models/country';
-import {UserSettingsService} from '@app/shared/services/user-settings.service';
-import {Observable} from 'rxjs';
+import { Component } from '@angular/core';
+import { Currency } from '@app/core/models/currency';
+import { DarkModeService } from '@app/core/services';
+import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { Country } from '@app/profile/models/country';
+import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-flag-menu',

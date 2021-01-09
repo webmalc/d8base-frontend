@@ -1,11 +1,11 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Tag} from '@app/master/models/tag';
-import {TagsApiService} from '@app/master/services/tags-api.service';
-import {TagsListApiService} from '@app/master/services/tags-list-api.service';
-import {BehaviorSubject} from 'rxjs';
-import {first, tap} from 'rxjs/operators';
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { Tag } from '@app/master/models/tag';
+import { TagsApiService } from '@app/master/services/tags-api.service';
+import { TagsListApiService } from '@app/master/services/tags-list-api.service';
+import { BehaviorSubject } from 'rxjs';
+import { first, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-tags-select-input',
@@ -80,11 +80,11 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     }
 
     // tslint:disable:no-empty
-    public registerOnTouched(fn: any): void {}
+    public registerOnTouched(fn: any): void { }
 
-    public writeValue(data: string[]): void {}
+    public writeValue(data: string[]): void { }
 
-    public setDisabledState(isDisabled: boolean): void {}
+    public setDisabledState(isDisabled: boolean): void { }
 
     private isNewOptionUnique(list: string[], newOption: string): boolean {
         for (const tag of list) {

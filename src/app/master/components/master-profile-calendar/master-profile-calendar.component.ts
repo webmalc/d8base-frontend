@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractSchedule} from '@app/core/models/abstract-schedule';
-import {HelperService} from '@app/core/services/helper.service';
+import { Component, OnInit } from '@angular/core';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { HelperService } from '@app/core/services/helper.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import {MasterCalendar} from '@app/master/models/master-calendar';
-import {MasterSchedule} from '@app/master/models/master-schedule';
-import {CalendarGeneratorFactoryService} from '@app/master/services/calendar-generator-factory.service';
-import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
-import {MasterScheduleApiService} from '@app/master/services/master-schedule-api.service';
-import {BehaviorSubject, concat, Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { MasterCalendar } from '@app/master/models/master-calendar';
+import { MasterSchedule } from '@app/master/models/master-schedule';
+import { CalendarGeneratorFactoryService } from '@app/master/services/calendar-generator-factory.service';
+import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
+import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
+import { BehaviorSubject, concat, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-master-profile-calendar',

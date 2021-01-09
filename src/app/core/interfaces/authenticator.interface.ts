@@ -1,5 +1,5 @@
-import {Credentials} from '@app/auth/interfaces/credentials';
-import {Observable} from 'rxjs';
+import { Credentials } from '@app/auth/interfaces/credentials';
+import { Observable } from 'rxjs';
 
 export interface AuthenticatorInterface {
     isAuthenticated$: Observable<boolean>;

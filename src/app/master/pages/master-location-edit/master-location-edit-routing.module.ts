@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {MasterLocationEditPage} from './master-location-edit.page';
+import { MasterLocationEditPage } from './master-location-edit.page';
 
 const routes: Routes = [
   {

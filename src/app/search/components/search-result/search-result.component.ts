@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {Search, ServiceList} from '@app/api/models';
-import {HelperService} from '@app/core/services/helper.service';
-import {Service} from '@app/service/models/service';
+import { Component, Input } from '@angular/core';
+import { Search, ServiceList } from '@app/api/models';
+import { HelperService } from '@app/core/services/helper.service';
+import { Service } from '@app/service/models/service';
 
 @Component({
     selector: 'app-search-result',

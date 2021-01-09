@@ -1,8 +1,8 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {LocationViewerComponent} from './location-viewer.component';
+import { LocationViewerComponent } from './location-viewer.component';
 
 describe('LocationPresentationComponent', () => {
     let component: LocationViewerComponent;

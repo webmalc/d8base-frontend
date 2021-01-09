@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {OrderIds} from '@app/order/enums/order-ids.enum';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {filter, first, map, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { OrderIds } from '@app/order/enums/order-ids.enum';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { filter, first, map, switchMap } from 'rxjs/operators';
 import StepContext from '../interfaces/step-context.interface';
 import StepModel from '../interfaces/step-model.interface';
 import { StepsState } from '../interfaces/steps-state.type';
-import {initState, orderWizardStorageKey, ORDER_STEPS} from '../order-steps';
+import { initState, orderWizardStorageKey, ORDER_STEPS } from '../order-steps';
 
 @Injectable()
 export class OrderWizardStateService {
@@ -101,7 +101,7 @@ export class OrderWizardStateService {
     }
 
     public isLastStep(): Observable<boolean> {
-        return this.currentStep$.asObservable().pipe(map(({id}) => this.steps.ids.lastIndexOf(id) === this.steps.ids.length - 1));
+        return this.currentStep$.asObservable().pipe(map(({ id}) => this.steps.ids.lastIndexOf(id) === this.steps.ids.length - 1));
     }
 
     public isAbleToNext(): Observable<boolean> {
@@ -117,7 +117,7 @@ export class OrderWizardStateService {
     }
 
     public async setContext(context: StepContext): Promise<void> {
-        const {service, client} = context;
+        const { service, client} = context;
         this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
         const state: StepsState = await this.storage.get(this.storageKey);
         this.setPath(`order/${service?.id}`);
@@ -134,7 +134,7 @@ export class OrderWizardStateService {
     }
 
     public getFirstStep(): Observable<StepModel> {
-        const {byId, ids} = this.steps;
+        const { byId, ids} = this.steps;
 
         return of(byId[ids[0]]);
     }

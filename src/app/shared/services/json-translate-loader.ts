@@ -1,6 +1,6 @@
-import {TranslateLoader} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
-import {fromPromise} from 'rxjs/internal-compatibility';
+import { TranslateLoader } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { fromPromise } from 'rxjs/internal-compatibility';
 
 export class JsonTranslateLoader implements TranslateLoader {
     public getTranslation(lang: string): Observable<any> {

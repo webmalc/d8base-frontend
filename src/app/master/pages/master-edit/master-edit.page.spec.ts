@@ -1,11 +1,11 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ActivatedRoute} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {IonicModule} from '@ionic/angular';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {MasterEditPage} from './master-edit.page';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { IonicModule } from '@ionic/angular';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { MasterEditPage } from './master-edit.page';
 
 describe('MasterEditPage', () => {
     let component: MasterEditPage;
@@ -27,7 +27,7 @@ describe('MasterEditPage', () => {
                         },
                     },
                 },
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         }).compileComponents();
 

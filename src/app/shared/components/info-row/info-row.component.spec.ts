@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {InfoRowComponent} from './info-row.component';
+import { InfoRowComponent } from './info-row.component';
 
 describe('InfoRowComponent', () => {
     let component: InfoRowComponent;

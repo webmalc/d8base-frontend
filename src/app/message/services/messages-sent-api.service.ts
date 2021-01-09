@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {SentMessage} from '@app/message/models/sent-message';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AbstractApiService } from '@app/core/abstract/abstract-api.service';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { SentMessage } from '@app/message/models/sent-message';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MessagesSentApiService extends AbstractApiService<SentMessage> {

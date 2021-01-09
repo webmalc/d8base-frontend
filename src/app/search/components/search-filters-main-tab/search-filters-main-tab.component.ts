@@ -39,7 +39,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
         private readonly currencyListApi: CurrencyListApiService,
         private readonly userSettings: UserSettingsService,
         private readonly cd: ChangeDetectorRef,
-    ) {}
+    ) { }
 
     public ngOnInit(): void {
         this.getCategories();

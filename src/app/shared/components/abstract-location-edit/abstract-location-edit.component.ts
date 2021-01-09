@@ -1,18 +1,18 @@
-import {Location} from '@angular/common';
-import {Component, Input, OnInit} from '@angular/core';
-import {Region} from '@app/core/models/region';
-import {HelperService} from '@app/core/services/helper.service';
-import {TimezoneService} from '@app/core/services/timezone.service';
-import {City} from '@app/profile/models/city';
-import {Country} from '@app/profile/models/country';
-import {AbstractEditComponent} from '@app/shared/abstract/abstract-edit-component';
-import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
-import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {SelectableDistrictOnSearchService} from '@app/shared/services/selectable-district-on-search.service';
-import {SelectableRegionOnSearchService} from '@app/shared/services/selectable-region-on-search.service';
-import {SelectableSubregionOnSearchService} from '@app/shared/services/selectable-subregion-on-search.service';
-import {BehaviorSubject} from 'rxjs';
+import { Location } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { Region } from '@app/core/models/region';
+import { HelperService } from '@app/core/services/helper.service';
+import { TimezoneService } from '@app/core/services/timezone.service';
+import { City } from '@app/profile/models/city';
+import { Country } from '@app/profile/models/country';
+import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
+import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
+import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
+import { SelectableRegionOnSearchService } from '@app/shared/services/selectable-region-on-search.service';
+import { SelectableSubregionOnSearchService } from '@app/shared/services/selectable-subregion-on-search.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-abstract-location-edit',

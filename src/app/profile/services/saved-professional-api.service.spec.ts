@@ -1,15 +1,15 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {environment} from '@env/environment';
-import {ApiListResponseFixture} from '../../../testing/fixtures/api-list-response-fixture';
-import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
-import {Autofixture} from '../../../testing/fixtures/generator';
-import {MasterFixture} from '../../../testing/fixtures/master-fixture';
-import {SavedProfessionalFixture} from '../../../testing/fixtures/saved-professional-fixture';
-import {SavedProfessionalInterface} from '../../core/interfaces/saved-professional.interface';
-import {Master} from '../../core/models/master';
-import {SavedProfessionalApiService} from './saved-professional-api.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '@env/environment';
+import { ApiListResponseFixture } from '../../../testing/fixtures/api-list-response-fixture';
+import { BookmarkFixture } from '../../../testing/fixtures/bookmark-fixture';
+import { Autofixture } from '../../../testing/fixtures/generator';
+import { MasterFixture } from '../../../testing/fixtures/master-fixture';
+import { SavedProfessionalFixture } from '../../../testing/fixtures/saved-professional-fixture';
+import { SavedProfessionalInterface } from '../../core/interfaces/saved-professional.interface';
+import { Master } from '../../core/models/master';
+import { SavedProfessionalApiService } from './saved-professional-api.service';
 
 describe('SavedProfessionalApiService', () => {
     let service: SavedProfessionalApiService;
@@ -98,7 +98,7 @@ describe('SavedProfessionalApiService', () => {
         const request = httpTestingController
             .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}${bookmark.id}/`);
         expect(request.request.method).toBe('DELETE');
-        request.flush(null, {status: 204, statusText: ''});
+        request.flush(null, { status: 204, statusText: ''});
     });
 });
 

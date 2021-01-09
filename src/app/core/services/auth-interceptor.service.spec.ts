@@ -1,12 +1,12 @@
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {of} from 'rxjs';
-import {StorageManagerMock} from '../../../testing/mocks';
-import {ApiClientService} from './api-client.service';
-import {AuthInterceptor} from './auth-interceptor.service';
-import {TokenManagerService} from './token-manager.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { of } from 'rxjs';
+import { StorageManagerMock } from '../../../testing/mocks';
+import { ApiClientService } from './api-client.service';
+import { AuthInterceptor } from './auth-interceptor.service';
+import { TokenManagerService } from './token-manager.service';
 
 describe('AuthInterceptor', () => {
 
@@ -43,7 +43,7 @@ describe('AuthInterceptor', () => {
                     useValue: spyTokenManager,
                 },
                 AuthInterceptor,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         });
 

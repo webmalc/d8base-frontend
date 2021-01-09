@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ServicePublishStepSixFormService} from './service-publish-step-six-form.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServicePublishStepSixFormService } from './service-publish-step-six-form.service';
 
 describe('ServicePublishStepSixFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({

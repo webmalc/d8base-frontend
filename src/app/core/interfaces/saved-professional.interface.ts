@@ -1,4 +1,4 @@
-import {ProfessionalList} from '@app/api/models';
+import { ProfessionalList } from '@app/api/models';
 
 export interface SavedProfessionalInterface<T extends number | ProfessionalList> {
     id: number;

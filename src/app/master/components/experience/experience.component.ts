@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {ProfessionalExperienceInline} from '@app/api/models';
+import { Component, Input } from '@angular/core';
+import { ProfessionalExperienceInline } from '@app/api/models';
 
 @Component({
     selector: 'app-experience',

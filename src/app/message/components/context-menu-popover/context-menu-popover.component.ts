@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Message} from '@app/message/models/message';
-import {NavParams} from '@ionic/angular';
-import {BehaviorSubject} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Message } from '@app/message/models/message';
+import { NavParams } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-context-menu-popover',

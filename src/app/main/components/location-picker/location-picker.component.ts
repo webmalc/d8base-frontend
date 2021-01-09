@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {OnMapPopoverComponent} from '@app/main/components/on-map-popover/on-map-popover.component';
-import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
-import {PopoverController} from '@ionic/angular';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
+import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
     selector: 'app-location-picker',

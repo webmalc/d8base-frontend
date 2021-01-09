@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {PopoverController} from '@ionic/angular';
-import {ImageCroppedEvent} from 'ngx-image-cropper';
+import { Component, Input } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
     selector: 'app-image-crop-popover',

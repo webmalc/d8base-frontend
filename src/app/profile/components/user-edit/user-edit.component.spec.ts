@@ -1,13 +1,13 @@
-import {Location} from '@angular/common';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormBuilder} from '@angular/forms';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {IonicModule} from '@ionic/angular';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {ProfileService} from '../../services/profile.service';
-import {RegisterEmailApiService} from '../../services/register-email-api.service';
-import {UserEditComponent} from './user-edit.component';
+import { Location } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { IonicModule } from '@ionic/angular';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { ProfileService } from '../../services/profile.service';
+import { RegisterEmailApiService } from '../../services/register-email-api.service';
+import { UserEditComponent } from './user-edit.component';
 
 describe('UserEditComponent', () => {
     let component: UserEditComponent;
@@ -22,7 +22,7 @@ describe('UserEditComponent', () => {
                 Location,
                 FormBuilder,
                 RegisterEmailApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         }).compileComponents();
 

@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {CertificatesApiService} from './certificates-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CertificatesApiService } from './certificates-api.service';
 
 describe('CertificatesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

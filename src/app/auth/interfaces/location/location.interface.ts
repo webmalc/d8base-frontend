@@ -1,4 +1,4 @@
-import {Coords} from '@app/shared/interfaces/coords';
+import { Coords } from '@app/shared/interfaces/coords';
 
 export interface LocationInterface extends Coords {
     postalCode: string;

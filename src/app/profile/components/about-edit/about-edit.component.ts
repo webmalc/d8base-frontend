@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {User} from '@app/core/models/user';
-import {CountriesApiService} from '@app/core/services';
-import {HelperService} from '@app/core/services/helper.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
-import {Country} from '@app/profile/models/country';
-import {Language} from '@app/profile/models/language';
-import {UserLanguage} from '@app/profile/models/user-language';
-import {LanguagesApiService} from '@app/profile/services/languages-api.service';
-import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {plainToClass} from 'class-transformer';
-import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
-import {map, switchMap, tap} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from '@app/core/models/user';
+import { CountriesApiService } from '@app/core/services';
+import { HelperService } from '@app/core/services/helper.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
+import { Country } from '@app/profile/models/country';
+import { Language } from '@app/profile/models/language';
+import { UserLanguage } from '@app/profile/models/user-language';
+import { LanguagesApiService } from '@app/profile/services/languages-api.service';
+import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { plainToClass } from 'class-transformer';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-about-edit',
@@ -46,11 +46,11 @@ export class AboutEditComponent implements OnInit {
             usr: this.userManager.getCurrentUser(),
             usrLanguages: this.userLanguageApi.get(),
         }).pipe(
-            tap(({usr, usrLanguages}) => {
+            tap(({ usr, usrLanguages}) => {
                 this.defaultUserLanguages = userLanguages = usrLanguages.results;
                 user = usr;
             }),
-            switchMap(({usr, usrLanguages}) => this.getCountry(user.nationality)),
+            switchMap(({ usr, usrLanguages}) => this.getCountry(user.nationality)),
             switchMap((country: Country) => {
                 nationality = country;
 
@@ -76,7 +76,7 @@ export class AboutEditComponent implements OnInit {
             nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id,
         };
         const userLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[])
-            .map(lang => plainToClass(UserLanguage, {language: lang.code}));
+            .map(lang => plainToClass(UserLanguage, { language: lang.code}));
 
         this.userManager.updateUser(HelperService.clear(data)).subscribe();
         if (this.defaultUserLanguages && this.defaultUserLanguages.length) {

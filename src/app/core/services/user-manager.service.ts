@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {once} from '@app/core/decorators/once';
-import {User} from '@app/core/models/user';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {CountriesApiService} from '@app/core/services/location/countries-api.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
-import {TypeOfUser} from '@app/profile/enums/type-of-user';
-import {Country} from '@app/profile/models/country';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable, of} from 'rxjs';
-import {filter, first, map, switchMap, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { once } from '@app/core/decorators/once';
+import { User } from '@app/core/models/user';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { CountriesApiService } from '@app/core/services/location/countries-api.service';
+import { UserLocationApiService } from '@app/core/services/location/user-location-api.service';
+import { TypeOfUser } from '@app/profile/enums/type-of-user';
+import { Country } from '@app/profile/models/country';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable, of } from 'rxjs';
+import { filter, first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -64,7 +64,7 @@ export class UserManagerService {
     }
 
     public becomeMaster(): Observable<User> {
-        return this.updateUser({account_type: TypeOfUser.Master});
+        return this.updateUser({ account_type: TypeOfUser.Master});
     }
 
     private getUser(): Observable<User> {

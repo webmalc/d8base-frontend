@@ -1,8 +1,8 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {environment} from '@env/environment';
-import {forkJoin, Observable, of} from 'rxjs';
-import {mergeMap} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
+import { forkJoin, Observable, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +13,7 @@ export class ApiClientService {
     }
 
     public get<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {
-        return this.http.get<T>(this.getHost() + url, {params});
+        return this.http.get<T>(this.getHost() + url, { params});
     }
 
     public post<T, V>(url: string, data: V): Observable<T>;
@@ -25,7 +25,7 @@ export class ApiClientService {
         return this.http.put<T>(this.getHost() + url, data);
     }
 
-    public patch<T extends { id: number }>(url: string, data: object = {}): Observable<T> {
+    public patch<T extends { id: number }>(url: string, data: object = { }): Observable<T> {
         return this.http.patch<T>(this.getHost() + url, data);
     }
 

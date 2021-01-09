@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {OrderAuthenticationGuardService, OrderFirstStepGuardService} from '@app/order/guards';
-import {ClientIdentificationComponent} from './components/';
-import {ORDER_STEPS, stepsRoutes} from './order-steps';
-import {OrderPage} from './order.page';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { OrderAuthenticationGuardService, OrderFirstStepGuardService } from '@app/order/guards';
+import { ClientIdentificationComponent } from './components/';
+import { ORDER_STEPS, stepsRoutes } from './order-steps';
+import { OrderPage } from './order.page';
 
 const routes: Routes = [
     {

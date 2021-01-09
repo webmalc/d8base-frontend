@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
-import {PostalCode} from '@app/core/models/postal-code';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
+import { Injectable } from '@angular/core';
+import { AbstractReadonlyApiService } from '@app/core/abstract/abstract-readonly-api.service';
+import { PostalCode } from '@app/core/models/postal-code';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
 
 @Injectable({
     providedIn: 'root',

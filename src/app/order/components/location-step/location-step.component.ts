@@ -1,13 +1,13 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {ProfessionalLocationInline} from '@app/api/models';
-import {UserLocationApiService} from '@app/core/services';
-import {FullLocationService} from '@app/core/services/location/full-location.service';
-import {StepComponent} from '@app/order/abstract/step';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { ProfessionalLocationInline } from '@app/api/models';
+import { UserLocationApiService } from '@app/core/services';
+import { FullLocationService } from '@app/core/services/location/full-location.service';
+import { StepComponent } from '@app/order/abstract/step';
 import LocationStepData from '@app/order/interfaces/location-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
-import {forkJoin} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 export enum LocationType {
     Online = 'online',
@@ -53,7 +53,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
     protected onContextChanged(context: StepContext): void {
         super.onContextChanged(context);
-        const {service = null} = context;
+        const { service = null} = context;
         switch (service.service_type) {
             case LocationType.Online: {
                 this.locationLabel = 'service-location.online';
@@ -83,7 +83,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
     // TODO Extract getting locations out of component
     private getServiceLocations(): void {
-        const locationsObservables = this.context.service.locations.map(({location}) => {
+        const locationsObservables = this.context.service.locations.map(({ location}) => {
             return this.fullLocationService.getTextLocation(location);
         });
         forkJoin(locationsObservables)
@@ -96,7 +96,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
     private getClientLocations(): void {
         this.userLocationService.getByClientId().pipe(
-            switchMap(({results: locations}) => {
+            switchMap(({ results: locations}) => {
                 return forkJoin(
                     locations.map((location) =>
                         this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline)),

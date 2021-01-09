@@ -1,18 +1,18 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {fakeAsync, flush, inject, TestBed} from '@angular/core/testing';
-import {ProfessionalList} from '@app/api/models/professional-list';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {asyncData} from '../../../testing/async-observable-helper';
-import {BookmarkFixture} from '../../../testing/fixtures/bookmark-fixture';
-import {Autofixture} from '../../../testing/fixtures/generator';
-import {MasterFixture} from '../../../testing/fixtures/master-fixture';
-import {SavedProfessionalFixture} from '../../../testing/fixtures/saved-professional-fixture';
-import {SavedProfessionalInterface} from '../../core/interfaces/saved-professional.interface';
-import {BookmarkMaster} from '../../core/models/bookmark-master';
-import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {MasterManagerService} from '../../core/services/master-manager.service';
-import {BookmarksService} from './bookmarks.service';
-import {SavedProfessionalApiService} from './saved-professional-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
+import { ProfessionalList } from '@app/api/models/professional-list';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { asyncData } from '../../../testing/async-observable-helper';
+import { BookmarkFixture } from '../../../testing/fixtures/bookmark-fixture';
+import { Autofixture } from '../../../testing/fixtures/generator';
+import { MasterFixture } from '../../../testing/fixtures/master-fixture';
+import { SavedProfessionalFixture } from '../../../testing/fixtures/saved-professional-fixture';
+import { SavedProfessionalInterface } from '../../core/interfaces/saved-professional.interface';
+import { BookmarkMaster } from '../../core/models/bookmark-master';
+import { StorageManagerService } from '../../core/proxies/storage-manager.service';
+import { MasterManagerService } from '../../core/services/master-manager.service';
+import { BookmarksService } from './bookmarks.service';
+import { SavedProfessionalApiService } from './saved-professional-api.service';
 
 describe('BookmarksService', () => {
     let service: BookmarksService;
@@ -25,7 +25,7 @@ describe('BookmarksService', () => {
                 BookmarksService,
                 SavedProfessionalApiService,
                 MasterManagerService,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         });
     });

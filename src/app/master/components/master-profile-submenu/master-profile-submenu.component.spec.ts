@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {MasterProfileSubmenuComponent} from './master-profile-submenu.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { MasterProfileSubmenuComponent } from './master-profile-submenu.component';
 
 describe('MasterProfileSubmenuComponent', () => {
     let component: MasterProfileSubmenuComponent;

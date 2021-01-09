@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Price} from '@app/api/models/price';
+import { Component, Input } from '@angular/core';
+import { Price } from '@app/api/models/price';
 
 @Component({
     selector: 'app-price',

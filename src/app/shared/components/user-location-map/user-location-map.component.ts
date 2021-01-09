@@ -1,9 +1,9 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Coordinates} from '@app/shared/interfaces/coordinates';
-import {environment} from '@env/environment';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Coordinates } from '@app/shared/interfaces/coordinates';
+import { environment } from '@env/environment';
 import * as L from 'leaflet';
-import {LeafletMouseEvent} from 'leaflet';
+import { LeafletMouseEvent } from 'leaflet';
 
 @Component({
     selector: 'app-user-location-map',
@@ -48,7 +48,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
             return;
         }
         this.layerGroup.clearLayers();
-        (new L.Marker({lat: event.latlng.lat, lng: event.latlng.lng})
+        (new L.Marker({ lat: event.latlng.lat, lng: event.latlng.lng})
             .bindPopup('your position'))
             .addTo(this.layerGroup);
         this.layerGroup.eachLayer(
@@ -79,14 +79,14 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     }
 
     private initMap(coordinates: number[]): void {
-        let center: L.LatLngLiteral = {lat: 46.550429, lng: -30.499274};
+        let center: L.LatLngLiteral = { lat: 46.550429, lng: -30.499274};
         let zoom: number = 2;
         if (coordinates && coordinates.length === 2) {
-            center = {lat: coordinates[1], lng: coordinates[0]};
+            center = { lat: coordinates[1], lng: coordinates[0]};
             zoom = 12;
         }
         this.options = {
-            layers: [L.tileLayer(environment.map_url, {maxZoom: 18, attribution: '...'})],
+            layers: [L.tileLayer(environment.map_url, { maxZoom: 18, attribution: '...'})],
             zoom,
             center,
         };

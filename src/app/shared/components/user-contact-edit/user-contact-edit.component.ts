@@ -1,18 +1,18 @@
-import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {MasterContact} from '@app/master/models/master-contact';
-import {MasterContactsApiService} from '@app/master/services/master-contacts-api.service';
-import {Contact} from '@app/profile/models/contact';
-import {UserContact} from '@app/profile/models/user-contact';
-import {ContactApiService} from '@app/profile/services/contact-api.service';
-import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
-import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
-import {ContactsApiServiceInterface} from '@app/shared/interfaces/contacts-api-service-interface';
-import {forkJoin, Observable, of} from 'rxjs';
-import {first, map, shareReplay, switchMap} from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterContact } from '@app/master/models/master-contact';
+import { MasterContactsApiService } from '@app/master/services/master-contacts-api.service';
+import { Contact } from '@app/profile/models/contact';
+import { UserContact } from '@app/profile/models/user-contact';
+import { ContactApiService } from '@app/profile/services/contact-api.service';
+import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
+import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
+import { ContactsApiServiceInterface } from '@app/shared/interfaces/contacts-api-service-interface';
+import { forkJoin, Observable, of } from 'rxjs';
+import { first, map, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-contact-edit',
@@ -92,7 +92,7 @@ export class UserContactEditComponent implements OnInit {
 
     private createForm(contact?: ClientContactInterface): void {
         this.form = this.formBuilder.group({
-            contact: [{value: contact?.contact, disabled: Boolean(contact?.contact)}, [Validators.required]],
+            contact: [{ value: contact?.contact, disabled: Boolean(contact?.contact)}, [Validators.required]],
             value: [contact?.value, [Validators.required]],
         });
     }

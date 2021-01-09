@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {CountriesApiService} from '@app/core/services/location/countries-api.service';
-import {SelectableSearchService} from '@app/shared/abstract/selectable-search.service';
-import {IonicSelectableComponent} from 'ionic-selectable';
+import { Injectable } from '@angular/core';
+import { CountriesApiService } from '@app/core/services/location/countries-api.service';
+import { SelectableSearchService } from '@app/shared/abstract/selectable-search.service';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Injectable()
 export class SelectableCountryOnSearchService extends SelectableSearchService {
@@ -11,6 +11,6 @@ export class SelectableCountryOnSearchService extends SelectableSearchService {
     }
 
     public onCountrySearch(event: { component: IonicSelectableComponent, text: string }): void {
-        this.abstractOnSearch(event.component, event.text, this.countriesApi, {search: event.text});
+        this.abstractOnSearch(event.component, event.text, this.countriesApi, { search: event.text});
     }
 }

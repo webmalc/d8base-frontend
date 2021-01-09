@@ -1,7 +1,7 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {AbstractSchedule} from '@app/core/models/abstract-schedule';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
 @Component({
     selector: 'app-timetable',
@@ -21,7 +21,7 @@ export class TimetableComponent {
     public async saveTimetable(timetable: AbstractSchedule[]): Promise<void> {
         await this.servicePublishDataHolderService.assignStepData(
             this.STEP,
-            {timetable},
+            { timetable},
         );
         this.location.back();
     }

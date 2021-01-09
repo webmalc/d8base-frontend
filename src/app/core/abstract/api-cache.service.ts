@@ -1,5 +1,5 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export abstract class ApiCache<T> implements OnDestroy {

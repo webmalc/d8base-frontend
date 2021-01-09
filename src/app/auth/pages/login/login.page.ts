@@ -1,11 +1,11 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnDestroy} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Credentials} from '@app/auth/interfaces/credentials';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Subject} from 'rxjs';
-import {filter, takeUntil} from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Credentials } from '@app/auth/interfaces/credentials';
+import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',

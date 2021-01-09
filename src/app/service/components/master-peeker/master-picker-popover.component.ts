@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {ProfessionalList} from '@app/api/models/professional-list';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {PopoverController} from '@ionic/angular';
-import {Observable} from 'rxjs';
+import { Component } from '@angular/core';
+import { ProfessionalList } from '@app/api/models/professional-list';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-master-picker-popover',

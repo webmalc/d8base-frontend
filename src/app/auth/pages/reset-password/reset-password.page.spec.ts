@@ -1,12 +1,12 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ReactiveFormsModule} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
-import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {ResetPasswordApiService} from '../../services/reset-password-api.service';
-import {ResetPasswordPage} from './reset-password.page';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { ResetPasswordApiService } from '../../services/reset-password-api.service';
+import { ResetPasswordPage } from './reset-password.page';
 
 describe('ResetPasswordPage', () => {
     let component: ResetPasswordPage;

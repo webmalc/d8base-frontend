@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Tag} from '@app/master/models/tag';
-import {TagsApiService} from '@app/master/services/tags-api.service';
-import {forkJoin} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { Tag } from '@app/master/models/tag';
+import { TagsApiService } from '@app/master/services/tags-api.service';
+import { forkJoin } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-master-tag-edit',

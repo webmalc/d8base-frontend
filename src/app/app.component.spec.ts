@@ -1,15 +1,15 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {DarkModeService, TranslationService} from '@app/core/services';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {Platform} from '@ionic/angular';
-import {IonicStorageModule, Storage} from '@ionic/storage';
-import {TranslateModule} from '@ngx-translate/core';
-import {AppComponent} from './app.component';
-import {StorageManagerService} from './core/proxies/storage-manager.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DarkModeService, TranslationService } from '@app/core/services';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform } from '@ionic/angular';
+import { IonicStorageModule, Storage } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppComponent } from './app.component';
+import { StorageManagerService } from './core/proxies/storage-manager.service';
 
 describe('AppComponent', () => {
 
@@ -21,7 +21,7 @@ describe('AppComponent', () => {
         statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
         splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
         platformReadySpy = Promise.resolve();
-        platformSpy = jasmine.createSpyObj('Platform', {ready: platformReadySpy, is: () => true});
+        platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy, is: () => true});
 
         storageMock = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
@@ -33,10 +33,10 @@ describe('AppComponent', () => {
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
             providers: [
-                {provide: StatusBar, useValue: statusBarSpy},
-                {provide: SplashScreen, useValue: splashScreenSpy},
-                {provide: Platform, useValue: platformSpy},
-                {provide: Storage, useValue: storageMock},
+                { provide: StatusBar, useValue: statusBarSpy},
+                { provide: SplashScreen, useValue: splashScreenSpy},
+                { provide: Platform, useValue: platformSpy},
+                { provide: Storage, useValue: storageMock},
                 DarkModeService,
                 StorageManagerService,
                 TranslationService,

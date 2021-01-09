@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {DurationEditorComponent} from './duration-editor.component';
+import { DurationEditorComponent } from './duration-editor.component';
 
 describe('DurationComponent', () => {
     let component: DurationEditorComponent;

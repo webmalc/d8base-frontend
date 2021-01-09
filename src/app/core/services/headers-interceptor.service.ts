@@ -1,9 +1,9 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {environment} from '@env/environment';
-import {from, Observable, of} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { TokenManagerService } from '@app/core/services/token-manager.service';
+import { environment } from '@env/environment';
+import { from, Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 /**
  * Sets headers while requesting api endpoints
@@ -41,7 +41,7 @@ export class HeadersInterceptor implements HttpInterceptor {
                             .append('Content-Type', 'application/json');
                     }
 
-                    return next.handle(req.clone({headers}));
+                    return next.handle(req.clone({ headers}));
                 }),
             );
     }

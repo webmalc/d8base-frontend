@@ -1,10 +1,10 @@
-import {Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
-import {MasterProfileCalendarComponent} from '@app/master/components/master-profile-calendar/master-profile-calendar.component';
-import {MasterProfileInfoComponent} from '@app/master/components/master-profile-info/master-profile-info.component';
-import {MasterProfilePortfolioComponent} from '@app/master/components/master-profile-portfolio/master-profile-portfolio.component';
-import {MasterProfileServicesComponent} from '@app/master/components/master-profile-services/master-profile-services.component';
-import {MasterProfileSubmenu} from '@app/master/enums/master-profile-submenu';
-import {Observable, Subscription} from 'rxjs';
+import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { MasterProfileCalendarComponent } from '@app/master/components/master-profile-calendar/master-profile-calendar.component';
+import { MasterProfileInfoComponent } from '@app/master/components/master-profile-info/master-profile-info.component';
+import { MasterProfilePortfolioComponent } from '@app/master/components/master-profile-portfolio/master-profile-portfolio.component';
+import { MasterProfileServicesComponent } from '@app/master/components/master-profile-services/master-profile-services.component';
+import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-master-profile-factory',

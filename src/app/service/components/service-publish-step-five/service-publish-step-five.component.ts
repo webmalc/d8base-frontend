@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ServicePublishStepFiveFormFields} from '@app/service/enums/service-publish-step-five-form-fields';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {ServicePublishStepFiveFormService} from '@app/service/forms/service-publish-step-five-form.service';
-import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
+import { Component, OnInit } from '@angular/core';
+import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { ServicePublishStepFiveFormService } from '@app/service/forms/service-publish-step-five-form.service';
+import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
 
 @Component({
     selector: 'app-service-publish-step-five',
@@ -38,7 +38,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
         this.serviceStepsNavigationService.next();
     }
 
-    public onSelect(data: {addedFiles: File[]}): void {
+    public onSelect(data: { addedFiles: File[]}): void {
         this.formService.addPhoto(data.addedFiles.pop());
     }
 

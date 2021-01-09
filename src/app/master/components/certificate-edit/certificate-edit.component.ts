@@ -1,10 +1,10 @@
-import {Location} from '@angular/common';
-import {Component, SecurityContext} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {HelperService} from '@app/core/services/helper.service';
-import {Certificate} from '@app/master/models/certificate';
-import {AbstractEditComponent} from '@app/shared/abstract/abstract-edit-component';
-import {plainToClass} from 'class-transformer';
+import { Location } from '@angular/common';
+import { Component, SecurityContext } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HelperService } from '@app/core/services/helper.service';
+import { Certificate } from '@app/master/models/certificate';
+import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
+import { plainToClass } from 'class-transformer';
 
 @Component({
     selector: 'app-certificate-edit',

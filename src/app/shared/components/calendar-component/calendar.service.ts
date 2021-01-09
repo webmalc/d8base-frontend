@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HelperService} from '@app/core/services/helper.service';
-import {MasterCalendar} from '@app/master/models/master-calendar';
-import {CalendarInterval} from '@app/shared/interfaces/calendar-interval';
-import {CalendarUnit} from '@app/shared/interfaces/calendar-unit';
-import {environment} from '@env/environment';
+import { Injectable } from '@angular/core';
+import { HelperService } from '@app/core/services/helper.service';
+import { MasterCalendar } from '@app/master/models/master-calendar';
+import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
+import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class CalendarService {
@@ -31,7 +31,7 @@ export class CalendarService {
             }
             const startIntervalTimeString = HelperService.getTimeStringFromMinutes(units[0].minutes);
             const endIntervalTimeString = HelperService.getTimeStringFromMinutes(units[units.length - 1].minutes - 1);
-            calendar.push({title: `${startIntervalTimeString} - ${endIntervalTimeString}`, units});
+            calendar.push({ title: `${startIntervalTimeString} - ${endIntervalTimeString}`, units});
         }
 
         return calendar;
@@ -52,7 +52,7 @@ export class CalendarService {
         enabledPeriods.forEach(v => {
             const startTime = new Date(v.start_datetime);
             const endTime = new Date(v.end_datetime);
-            res.push({start: startTime.getHours() * 60 + startTime.getMinutes(), end: endTime.getHours() * 60 + endTime.getMinutes()});
+            res.push({ start: startTime.getHours() * 60 + startTime.getMinutes(), end: endTime.getHours() * 60 + endTime.getMinutes()});
         });
 
         return res;

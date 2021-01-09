@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {MediaLinksComponent} from './media-links.component';
+import { MediaLinksComponent } from './media-links.component';
 
 describe('MediaLinksComponent', () => {
     let component: MediaLinksComponent;

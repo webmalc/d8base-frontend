@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ApiClientService} from './api-client.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ApiClientService } from './api-client.service';
 
 describe('ApiClientService', () => {
     beforeEach(async () => TestBed.configureTestingModule({

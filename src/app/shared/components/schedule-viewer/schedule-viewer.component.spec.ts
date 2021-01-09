@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {ScheduleViewerComponent} from './schedule-viewer.component';
+import { ScheduleViewerComponent } from './schedule-viewer.component';
 
 describe('ScheduleViewerComponent', () => {
     let component: ScheduleViewerComponent;

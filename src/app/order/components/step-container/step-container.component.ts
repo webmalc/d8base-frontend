@@ -25,7 +25,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
         map(stepsState => {
             return Object.values(stepsState).reduce((acc, curr) => {
                 return { ...acc, ...curr };
-            }, {});
+            }, { });
         }),
     );
 
@@ -36,7 +36,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
         private readonly route: ActivatedRoute,
         private readonly cd: ChangeDetectorRef,
         private readonly stepComponent: StepComponent<unknown>,
-    ) {}
+    ) { }
 
     public ngOnInit(): void {
         this.subscribeAll();

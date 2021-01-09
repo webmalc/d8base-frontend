@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
-import {UserSettings} from '@app/core/models/user-settings';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AbstractApiService } from '@app/core/abstract/abstract-api.service';
+import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
+import { UserSettings } from '@app/core/models/user-settings';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

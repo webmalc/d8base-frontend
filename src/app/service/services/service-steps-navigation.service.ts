@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {ChainManagerService} from '@app/service/services/steps-navigation-chain/chain-manager.service';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChainManagerService } from '@app/service/services/steps-navigation-chain/chain-manager.service';
 
 @Injectable()
 export class ServiceStepsNavigationService {

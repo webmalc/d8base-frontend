@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {ContentWrapperComponent} from './content-wrapper.component';
+import { ContentWrapperComponent } from './content-wrapper.component';
 
 describe('ContentWrapperComponent', () => {
     let component: ContentWrapperComponent;

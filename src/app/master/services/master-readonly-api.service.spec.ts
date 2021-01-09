@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MasterReadonlyApiService} from './master-readonly-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MasterReadonlyApiService } from './master-readonly-api.service';
 
 describe('MasterReadonlyApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

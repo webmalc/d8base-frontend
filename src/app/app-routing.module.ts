@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {MainGuard} from '@app/core/guards/main.guard';
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { MainGuard } from '@app/core/guards/main.guard';
 
 const routes: Routes = [
     {

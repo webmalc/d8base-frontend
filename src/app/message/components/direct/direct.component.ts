@@ -1,14 +1,14 @@
-import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {HelperService} from '@app/core/services/helper.service';
-import {TranslationService} from '@app/core/services/translation.service';
-import {ContextMenuPopoverComponent} from '@app/message/components/context-menu-popover/context-menu-popover.component';
-import {Message} from '@app/message/models/message';
-import {DirectServiceService} from '@app/message/services/direct-service.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {IonContent, IonInfiniteScroll, Platform, PopoverController} from '@ionic/angular';
-import {Observable, Subscription} from 'rxjs';
-import {filter, first, map} from 'rxjs/operators';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HelperService } from '@app/core/services/helper.service';
+import { TranslationService } from '@app/core/services/translation.service';
+import { ContextMenuPopoverComponent } from '@app/message/components/context-menu-popover/context-menu-popover.component';
+import { Message } from '@app/message/models/message';
+import { DirectServiceService } from '@app/message/services/direct-service.service';
+import { Reinitable } from '@app/shared/abstract/reinitable';
+import { IonContent, IonInfiniteScroll, Platform, PopoverController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-direct',
@@ -18,9 +18,9 @@ import {filter, first, map} from 'rxjs/operators';
 export class DirectComponent extends Reinitable implements OnDestroy {
 
     @ViewChild(IonInfiniteScroll) public infiniteScroll: IonInfiniteScroll;
-    @ViewChild(IonContent, {read: IonContent, static: false}) public content: IonContent;
-    @ViewChild('bottomPoint', {read: ElementRef}) public bottom: ElementRef<HTMLElement>;
-    @ViewChild('sentMenu', {read: ElementRef}) public sentMenu: ElementRef<HTMLElement>;
+    @ViewChild(IonContent, { read: IonContent, static: false}) public content: IonContent;
+    @ViewChild('bottomPoint', { read: ElementRef}) public bottom: ElementRef<HTMLElement>;
+    @ViewChild('sentMenu', { read: ElementRef}) public sentMenu: ElementRef<HTMLElement>;
     public showContextIndex;
     public isUpdate: boolean = false;
     private updateMessageId: number;
@@ -53,7 +53,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
     public getDateString(datetime: string): string {
         const date = new Date(datetime.slice(0, 10));
 
-        return `${date.toLocaleString(this.trans.getCurrentLang(), {month: 'long'})}, ${date.getDate()}`;
+        return `${date.toLocaleString(this.trans.getCurrentLang(), { month: 'long'})}, ${date.getDate()}`;
     }
 
     public cancelUpdate(): void {
@@ -128,7 +128,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
         this.popoverController.create({
             component: ContextMenuPopoverComponent,
             translucent: true,
-            componentProps: {message},
+            componentProps: { message},
             animated: true,
             event,
         }).then(pop => pop.present().then(

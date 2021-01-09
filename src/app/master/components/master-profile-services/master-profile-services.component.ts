@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import ServiceData from '@app/core/interfaces/service-data.interface';
-import {ServicesGeneratorFactoryService} from '@app/master/services/services-generator-factory.service';
-import {Service} from '@app/service/models/service';
-import {ServicesApiService} from '@app/service/services/services-api.service';
-import {AlertController} from '@ionic/angular';
-import {TranslateService} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
+import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
+import { Service } from '@app/service/models/service';
+import { ServicesApiService } from '@app/service/services/services-api.service';
+import { AlertController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-master-profile-services',

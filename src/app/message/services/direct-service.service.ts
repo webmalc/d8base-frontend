@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {Message} from '@app/message/models/message';
-import {SentMessage} from '@app/message/models/sent-message';
-import {MessageListUpdaterService} from '@app/message/services/message-list-updater.service';
-import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
-import {MessagesSentApiService} from '@app/message/services/messages-sent-api.service';
-import {environment} from '@env/environment';
-import {BehaviorSubject, forkJoin, Observable, Subscription} from 'rxjs';
-import {filter, first, map, switchMap, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { Message } from '@app/message/models/message';
+import { SentMessage } from '@app/message/models/sent-message';
+import { MessageListUpdaterService } from '@app/message/services/message-list-updater.service';
+import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
+import { MessagesSentApiService } from '@app/message/services/messages-sent-api.service';
+import { environment } from '@env/environment';
+import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
+import { filter, first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class DirectServiceService {
@@ -41,7 +41,7 @@ export class DirectServiceService {
             user: this.userManager.getCurrentUser(),
             list: this.initMessagesList(),
         }).pipe(
-            map(({user}) => {
+            map(({ user}) => {
                 this.currentUserId = user.id;
                 this.subscribeToMessagesUpdate();
             }),

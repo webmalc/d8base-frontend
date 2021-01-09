@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ResetPasswordApiService} from './reset-password-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ResetPasswordApiService } from './reset-password-api.service';
 
 describe('ResetPasswordApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

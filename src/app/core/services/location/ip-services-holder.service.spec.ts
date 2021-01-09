@@ -1,9 +1,9 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {IpApiService} from './ip-api.service';
-import {IpDataService} from './ip-data.service';
-import {IpServicesHolderService} from './ip-services-holder.service';
-import {IpnfDataService} from './ipnf-data.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { IpApiService } from './ip-api.service';
+import { IpDataService } from './ip-data.service';
+import { IpServicesHolderService } from './ip-services-holder.service';
+import { IpnfDataService } from './ipnf-data.service';
 
 describe('IpServicesHolderService', () => {
     beforeEach(() => TestBed.configureTestingModule({

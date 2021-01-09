@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {CanActivate, Router, UrlTree} from '@angular/router';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, UrlTree } from '@angular/router';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
 @Injectable()
 export class ServicePublishGuardService implements CanActivate {

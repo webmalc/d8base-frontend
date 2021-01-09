@@ -1,15 +1,15 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {MasterManagerService} from '@app/core/services';
-import {ProfileService} from '@app/profile/services/profile.service';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {BehaviorSubject} from 'rxjs';
-import {StorageManagerMock} from '../../testing/mocks';
-import {ProfilePage} from './profile.page';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { MasterManagerService } from '@app/core/services';
+import { ProfileService } from '@app/profile/services/profile.service';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+import { StorageManagerMock } from '../../testing/mocks';
+import { ProfilePage } from './profile.page';
 
 class MasterManagerServiceStub {
     public isMaster$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -38,7 +38,7 @@ describe('ProfilePage', () => {
                     useClass: MasterManagerServiceStub,
                 },
                 ProfileService,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         }).compileComponents();
 

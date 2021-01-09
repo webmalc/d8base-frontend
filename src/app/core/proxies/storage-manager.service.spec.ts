@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import {IonicStorageModule} from '@ionic/storage';
-import {StorageManagerService} from './storage-manager.service';
+import { IonicStorageModule } from '@ionic/storage';
+import { StorageManagerService } from './storage-manager.service';
 
 describe('StorageManagerService', () => {
 

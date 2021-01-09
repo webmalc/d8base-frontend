@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
-import {Category} from '@app/core/models/category';
-import {Subcategory} from '@app/core/models/subcategory';
-import {CategoriesApiService} from '@app/core/services/categories-api.service';
-import {SubcategoriesApiService} from '@app/core/services/subcategories-api.service';
-import {TranslationService} from '@app/core/services/translation.service';
-import {ServicePublishStepOneFormFields} from '@app/service/enums/service-publish-step-one-form-fields';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {ServicePublishStepOneFormService} from '@app/service/forms/service-publish-step-one-form.service';
-import {StepOneDataInterface} from '@app/service/interfaces/step-one-data-interface';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {BehaviorSubject} from 'rxjs';
+import { Component } from '@angular/core';
+import { Category } from '@app/core/models/category';
+import { Subcategory } from '@app/core/models/subcategory';
+import { CategoriesApiService } from '@app/core/services/categories-api.service';
+import { SubcategoriesApiService } from '@app/core/services/subcategories-api.service';
+import { TranslationService } from '@app/core/services/translation.service';
+import { ServicePublishStepOneFormFields } from '@app/service/enums/service-publish-step-one-form-fields';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { ServicePublishStepOneFormService } from '@app/service/forms/service-publish-step-one-form.service';
+import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
+import { Reinitable } from '@app/shared/abstract/reinitable';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-service-publish-step-one',
@@ -48,7 +48,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
 
     public onCategoryChange(): void {
         this.formService.form.get(this.formFields.Subcategory).reset();
-        this.subcategoriesApi.get({category: this.formService.form.get(this.formFields.Category).value.id}).subscribe(
+        this.subcategoriesApi.get({ category: this.formService.form.get(this.formFields.Category).value.id}).subscribe(
             list => this.subcategoriesList$.next(list.results),
         );
     }

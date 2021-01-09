@@ -1,9 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {ImageCropPopoverComponent} from './image-crop-popover.component';
+import { ImageCropPopoverComponent } from './image-crop-popover.component';
 
 describe('ImageCropperComponent', () => {
     let component: ImageCropPopoverComponent;

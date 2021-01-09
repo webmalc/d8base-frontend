@@ -1,14 +1,14 @@
-import {HttpClient} from '@angular/common/http';
-import {TestBed} from '@angular/core/testing';
-import {LocationInterface} from '@app/auth/interfaces/location/location.interface';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
-import {Observable} from 'rxjs';
-import {IpApiService} from './ip-api.service';
-import {IpDataService} from './ip-data.service';
-import {IpServicesHolderService} from './ip-services-holder.service';
-import {IpnfDataService} from './ipnf-data.service';
-import {LocationService} from './location.service';
+import { HttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { LocationInterface } from '@app/auth/interfaces/location/location.interface';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { Observable } from 'rxjs';
+import { IpApiService } from './ip-api.service';
+import { IpDataService } from './ip-data.service';
+import { IpServicesHolderService } from './ip-services-holder.service';
+import { IpnfDataService } from './ipnf-data.service';
+import { LocationService } from './location.service';
 
 class HttpMock {
     public get(url: string): Observable<any> {
@@ -31,7 +31,7 @@ class HttpMock {
                     country_code: 'testCode',
                     latitude: 123,
                     longitude: 321,
-                    time_zone: {name: 'timezone'},
+                    time_zone: { name: 'timezone'},
                     city: 'test',
                     region_code: 'code',
                 };
@@ -50,9 +50,9 @@ describe('LocationService', () => {
             IpApiService,
             IpDataService,
             IpnfDataService,
-            {provide: HttpClient, useClass: HttpMock},
-            {provide: Geolocation, useValue: {getCurrentPosition: () => 'test' }},
-            {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
+            { provide: HttpClient, useClass: HttpMock},
+            { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' }},
+            { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
         ],
     }));
 

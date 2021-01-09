@@ -1,10 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {SafeResourceUrl} from '@angular/platform-browser';
-import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
-import {User} from '@app/core/models/user';
-import {HelperService} from '@app/core/services/helper.service';
-import {PublicReview} from '@app/master/models/public-review';
-import {plainToClass} from 'class-transformer';
+import { Component, Input } from '@angular/core';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { PartialUserInterface } from '@app/core/interfaces/partial-user-interface';
+import { User } from '@app/core/models/user';
+import { HelperService } from '@app/core/services/helper.service';
+import { PublicReview } from '@app/master/models/public-review';
+import { plainToClass } from 'class-transformer';
 
 @Component({
     selector: 'app-master-profile-review',
@@ -28,6 +28,6 @@ export class MasterProfileReviewComponent {
     }
 
     public getUser(): PartialUserInterface {
-        return plainToClass(User, this.publicReview.user, {excludeExtraneousValues: true});
+        return plainToClass(User, this.publicReview.user, { excludeExtraneousValues: true});
     }
 }

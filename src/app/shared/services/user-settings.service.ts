@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {once} from '@app/core/decorators/once';
-import {UserSettings} from '@app/core/models/user-settings';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {UserSettingsApiService} from '@app/core/services/user-settings-api.service';
-import {environment} from '@env/environment';
-import {BehaviorSubject, from, Observable, of} from 'rxjs';
-import {catchError, first, map, switchMap, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { once } from '@app/core/decorators/once';
+import { UserSettings } from '@app/core/models/user-settings';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { UserSettingsApiService } from '@app/core/services/user-settings-api.service';
+import { environment } from '@env/environment';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -36,21 +36,21 @@ export class UserSettingsService {
     public setCurrency(currency: string): void {
         this.userSettings$.pipe(
             first(),
-            switchMap(settings => settings && (settings.currency !== currency) ? this.doRequest({currency}) : of()),
+            switchMap(settings => settings && (settings.currency !== currency) ? this.doRequest({ currency}) : of()),
         ).subscribe();
     }
 
     public setUserAppLang(language: string): void {
         this.userSettings$.pipe(
             first(),
-            switchMap(settings => settings && (settings.language !== language) ? this.doRequest({language}) : of()),
+            switchMap(settings => settings && (settings.language !== language) ? this.doRequest({ language}) : of()),
         ).subscribe();
     }
 
     public setUnits(units: number): void {
         this.userSettings$.pipe(
             first(),
-            switchMap(settings => settings && (settings.units !== units) ? this.doRequest({units}) : of()),
+            switchMap(settings => settings && (settings.units !== units) ? this.doRequest({ units}) : of()),
         ).subscribe();
     }
 
@@ -58,7 +58,7 @@ export class UserSettingsService {
         this.userSettings$.pipe(
             first(),
             switchMap(settings => settings && (settings.is_last_name_hidden !== isLastNameHidden) ?
-                this.doRequest({is_last_name_hidden: isLastNameHidden}) :
+                this.doRequest({ is_last_name_hidden: isLastNameHidden}) :
                 of(),
             ),
         ).subscribe();

@@ -1,21 +1,21 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
 
-import {StorageManagerService} from '../proxies/storage-manager.service';
-import {DarkModeService} from './dark-mode.service';
+import { StorageManagerService } from '../proxies/storage-manager.service';
+import { DarkModeService } from './dark-mode.service';
 
 describe('DarkModeService', () => {
     let storageManagerSpy: jasmine.SpyObj<StorageManagerService>;
 
     beforeEach(() => {
         const spy = jasmine.createSpyObj(
-            'StorageManagerService', {get: Promise.resolve(null), set: null},
+            'StorageManagerService', { get: Promise.resolve(null), set: null},
         );
 
         TestBed.configureTestingModule({
             providers: [
                 DarkModeService,
-                {provide: StorageManagerService, useValue: spy},
+                { provide: StorageManagerService, useValue: spy},
             ],
         });
         storageManagerSpy = TestBed.inject(StorageManagerService) as jasmine.SpyObj<StorageManagerService>;

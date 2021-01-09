@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {ExtendedLocation} from '@app/core/models/extended-location';
-import {CurrentLocationCompilerService} from '@app/core/services/location/current-location-compiler.service';
-import {DefaultCategoryList} from '@app/main/enums/default-category-list';
-import {MainPageSearchInterface} from '@app/main/interfaces/main-page-search-interface';
-import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
-import {DefaultCategoriesFactoryService} from '@app/main/services/default-categories-factory.service';
-import {Observable} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ExtendedLocation } from '@app/core/models/extended-location';
+import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
+import { DefaultCategoryList } from '@app/main/enums/default-category-list';
+import { MainPageSearchInterface } from '@app/main/interfaces/main-page-search-interface';
+import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
+import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-main',
@@ -47,7 +47,7 @@ export class MainPage implements OnInit {
     public useCategory(categoryName: string): void {
         const cat = this.defaultCategory.getByName(categoryName);
         if (cat) {
-            this.router.navigateByUrl('/search', {state: {category: cat, location: this.searchData.location}});
+            this.router.navigateByUrl('/search', { state: { category: cat, location: this.searchData.location}});
         }
     }
 
@@ -81,7 +81,7 @@ export class MainPage implements OnInit {
     }
 
     public search(): void {
-        this.router.navigateByUrl('/search', {state: {data: this.searchData}});
+        this.router.navigateByUrl('/search', { state: { data: this.searchData}});
     }
 
     private initSearchData(): void {

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {ServicePublishStepTwoFormFields} from '@app/service/enums/service-publish-step-two-form-fields';
-import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ServicePublishStepTwoFormFields } from '@app/service/enums/service-publish-step-two-form-fields';
+import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 
 @Injectable()
 export class ServicePublishStepTwoFormService {
@@ -23,7 +23,7 @@ export class ServicePublishStepTwoFormService {
                 [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
                 [ServicePublishStepTwoFormFields.Currency]: [data?.price_currency],
             },
-            {validators: [this.checkPricesValidator]},
+            { validators: [this.checkPricesValidator]},
         );
     }
 
@@ -63,9 +63,9 @@ export class ServicePublishStepTwoFormService {
         const startPrice = parseInt(group.get(ServicePublishStepTwoFormFields.StartPrice).value, 10);
         const endPrice = parseInt(group.get(ServicePublishStepTwoFormFields.EndPrice).value, 10);
         if (startPrice > endPrice) {
-            group.get(ServicePublishStepTwoFormFields.EndPrice).setErrors({priceError: true});
+            group.get(ServicePublishStepTwoFormFields.EndPrice).setErrors({ priceError: true});
 
-            return {priceError: true};
+            return { priceError: true};
         }
 
         return null;

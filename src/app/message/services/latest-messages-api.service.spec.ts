@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {LatestMessagesApiService} from './latest-messages-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LatestMessagesApiService } from './latest-messages-api.service';
 
 describe('LatestMessagesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

@@ -1,8 +1,8 @@
-import {Region} from '@app/core/models/region';
-import {City} from '@app/profile/models/city';
-import {Country} from '@app/profile/models/country';
-import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
-import {Expose} from 'class-transformer';
+import { Region } from '@app/core/models/region';
+import { City } from '@app/profile/models/city';
+import { Country } from '@app/profile/models/country';
+import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class UserLocation implements ClientLocationInterface {

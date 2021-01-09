@@ -55,7 +55,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
         const isForMe = !data[this.formFields.IsForMe];
         this.form.patchValue(
             {
-                ...(!isForMe ? data : {}),
+                ...(!isForMe ? data : { }),
                 [this.formFields.IsForMe]: isForMe,
                 [this.formFields.Comment]: data[this.formFields.Comment],
             },
@@ -83,7 +83,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
                         ...allFields,
                         [currentField]: user?.[currentField] ?? '',
                     }),
-                    {},
+                    { },
                 ) as ClientDetailsStepData;
             });
     }

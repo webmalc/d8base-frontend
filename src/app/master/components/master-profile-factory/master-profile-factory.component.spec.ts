@@ -1,16 +1,16 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {of} from 'rxjs';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {MasterProfileSubmenu} from '../../enums/master-profile-submenu';
-import {CertificatesApiService} from '../../services/certificates-api.service';
-import {EducationApiService} from '../../services/education-api.service';
-import {ExperienceApiService} from '../../services/experience-api.service';
-import {ReviewsReadonlyApiService} from '../../services/reviews-readonly-api.service';
-import {MasterProfileFactoryComponent} from './master-profile-factory.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { MasterProfileSubmenu } from '../../enums/master-profile-submenu';
+import { CertificatesApiService } from '../../services/certificates-api.service';
+import { EducationApiService } from '../../services/education-api.service';
+import { ExperienceApiService } from '../../services/experience-api.service';
+import { ReviewsReadonlyApiService } from '../../services/reviews-readonly-api.service';
+import { MasterProfileFactoryComponent } from './master-profile-factory.component';
 
 
 xdescribe('MasterProfileFactoryComponent', () => {
@@ -25,7 +25,7 @@ xdescribe('MasterProfileFactoryComponent', () => {
                 ExperienceApiService,
                 EducationApiService,
                 CertificatesApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
                 ReviewsReadonlyApiService,
             ],
         });

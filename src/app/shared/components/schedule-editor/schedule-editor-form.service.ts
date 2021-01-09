@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, ValidationErrors} from '@angular/forms';
-import {AbstractSchedule} from '@app/core/models/abstract-schedule';
+import { Injectable } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 
-import {plainToClass} from 'class-transformer';
-import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
+import { plainToClass } from 'class-transformer';
+import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 import * as ScheduleConstants from './schedule.constants';
 
 @Injectable()
@@ -56,7 +56,7 @@ export class ScheduleEditorFormService {
     }
 
     public pushNewDay(dayCode: number): void {
-        this.formArray.push(plainToClass(AbstractSchedule, {day_of_week: dayCode, end_time: null, start_time: null, is_enabled: false}));
+        this.formArray.push(plainToClass(AbstractSchedule, { day_of_week: dayCode, end_time: null, start_time: null, is_enabled: false}));
 
         this.updateForm();
     }
@@ -95,8 +95,8 @@ export class ScheduleEditorFormService {
                             (this.timeToInt(day.end_time) < this.timeToInt(value.end_time) &&
                                 this.timeToInt(day.end_time) > this.timeToInt(value.start_time)))
                     ) {
-                        this.controls[index].controls[ScheduleEditorFormFields.EndTime].setErrors({overlaps: true});
-                        this.controls[index].controls[ScheduleEditorFormFields.StartTime].setErrors({overlaps: true});
+                        this.controls[index].controls[ScheduleEditorFormFields.EndTime].setErrors({ overlaps: true});
+                        this.controls[index].controls[ScheduleEditorFormFields.StartTime].setErrors({ overlaps: true});
                     } else if (
                         (this.controls[index].controls[ScheduleEditorFormFields.EndTime].hasError('overlaps') ||
                             this.controls[index].controls[ScheduleEditorFormFields.StartTime].hasError('overlaps')) &&
@@ -172,7 +172,7 @@ export class ScheduleEditorFormService {
             10,
         );
         if (startTime >= endTimeTime) {
-            group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.EndTime).setErrors({ timeError: true});
         }
 
         return null;
@@ -184,7 +184,7 @@ export class ScheduleEditorFormService {
                 parseInt((group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(0, 1), 10) > 2 ||
                 parseInt((group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
         ) {
-            group.get(ScheduleEditorFormFields.StartTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.StartTime).setErrors({ timeError: true});
         }
 
         return null;
@@ -196,7 +196,7 @@ export class ScheduleEditorFormService {
                 parseInt((group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(0, 1), 10) > 2 ||
                 parseInt((group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(3, 5), 10) % 15 !== 0)
         ) {
-            group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.EndTime).setErrors({ timeError: true});
         }
 
         return null;
@@ -205,7 +205,7 @@ export class ScheduleEditorFormService {
     private startTimeValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
             !group.get(ScheduleEditorFormFields.StartTime).value) {
-            group.get(ScheduleEditorFormFields.StartTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.StartTime).setErrors({ timeError: true});
         }
 
         return null;
@@ -214,7 +214,7 @@ export class ScheduleEditorFormService {
     private endTimeValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
             !group.get(ScheduleEditorFormFields.EndTime).value) {
-            group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
+            group.get(ScheduleEditorFormFields.EndTime).setErrors({ timeError: true});
         }
 
         return null;

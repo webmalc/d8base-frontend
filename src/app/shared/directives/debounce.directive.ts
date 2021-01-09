@@ -1,6 +1,6 @@
-import {Directive, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subject, Subscription} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
+import { Directive, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Directive({
     selector: '[appDebounce]',

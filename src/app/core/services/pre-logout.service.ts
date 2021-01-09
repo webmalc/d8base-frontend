@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
+import { Injectable } from '@angular/core';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
 @Injectable({
     providedIn: 'root',

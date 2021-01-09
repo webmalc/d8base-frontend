@@ -1,4 +1,4 @@
-import {Currency} from '@app/core/models/currency';
+import { Currency } from '@app/core/models/currency';
 
 export interface StepTwoDataInterface {
     name: string;

@@ -1,6 +1,6 @@
-import {Price} from '@app/service/models/price';
-import {Expose, Type} from 'class-transformer';
-import {ServiceLocationInline} from '../../api/models';
+import { Price } from '@app/service/models/price';
+import { Expose, Type } from 'class-transformer';
+import { ServiceLocationInline } from '../../api/models';
 
 export class Service {
     // tslint:disable:variable-name

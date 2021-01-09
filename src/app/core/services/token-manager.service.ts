@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
-import {once} from '@app/core/decorators/once';
-import {ErrorList} from '@app/core/enums/error-list';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {environment} from '@env/environment';
-import {Observable, Subject, timer} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { once } from '@app/core/decorators/once';
+import { ErrorList } from '@app/core/enums/error-list';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { environment } from '@env/environment';
+import { Observable, Subject, timer } from 'rxjs';
 
 function getTimestamp(offset: number = 0): number {
     return parseInt((new Date().getTime() / 1000).toFixed(0), 10) + offset;

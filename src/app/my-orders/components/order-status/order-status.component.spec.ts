@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {OrderStatusComponent} from '@app/my-orders/components';
+import { OrderStatusComponent } from '@app/my-orders/components';
 
 describe('OrderStatusComponent', () => {
     let component: OrderStatusComponent;

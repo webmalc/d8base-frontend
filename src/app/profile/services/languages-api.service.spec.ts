@@ -1,7 +1,7 @@
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {of} from 'rxjs';
-import {Language} from '../models/language';
-import {LanguagesApiService} from './languages-api.service';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { of } from 'rxjs';
+import { Language } from '../models/language';
+import { LanguagesApiService } from './languages-api.service';
 
 describe('LanguageApiService', () => {
     let apiClientServiceSpy: { get: jasmine.Spy };

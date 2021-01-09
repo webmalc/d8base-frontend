@@ -1,4 +1,4 @@
-import {RandomValuesProvider} from './random-values-provider';
+import { RandomValuesProvider } from './random-values-provider';
 
 export interface Options {
     [key: string]: string | Options;
@@ -24,7 +24,7 @@ export class Autofixture {
         let childElementTemplate;
         this.throwIfOptionsContainFieldsNotIn(template, options);
 
-        result = Object.assign({}, template);
+        result = Object.assign({ }, template);
 
         this.forEachProperty(result, (name: string) => {
             childType = this.actualTypeOfField(result, name);

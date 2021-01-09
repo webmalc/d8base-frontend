@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {Plugin} from '@app/profile/models/plugin';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { Plugin } from '@app/profile/models/plugin';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PluginApiService {

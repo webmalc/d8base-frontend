@@ -1,6 +1,6 @@
-import {OrderPostModel} from '@app/core/interfaces/order-model';
-import {OrderStatus} from '@app/core/types/order-status';
-import {Expose} from 'class-transformer';
+import { OrderPostModel } from '@app/core/interfaces/order-model';
+import { OrderStatus } from '@app/core/types/order-status';
+import { Expose } from 'class-transformer';
 
 export class SentOrder implements OrderPostModel {
     @Expose() public id: number;

@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {MainPageIconComponent} from './main-page-icon.component';
+import { MainPageIconComponent } from './main-page-icon.component';
 
 describe('MainPageIconComponent', () => {
     let component: MainPageIconComponent;

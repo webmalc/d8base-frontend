@@ -1,9 +1,9 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {PasswordRecoveryFormFields} from '@app/auth/enums/password-recovery-form-fields';
-import {PasswordRecoveryFormService} from '@app/auth/forms/password-recovery-form.service';
-import {PasswordRecoveryService} from '@app/auth/services/password-recovery.service';
-import {HelperService} from '@app/core/services/helper.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { PasswordRecoveryFormFields } from '@app/auth/enums/password-recovery-form-fields';
+import { PasswordRecoveryFormService } from '@app/auth/forms/password-recovery-form.service';
+import { PasswordRecoveryService } from '@app/auth/services/password-recovery.service';
+import { HelperService } from '@app/core/services/helper.service';
 
 @Component({
     selector: 'app-password-recovery-form',

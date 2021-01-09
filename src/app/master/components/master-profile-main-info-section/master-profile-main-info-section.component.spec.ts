@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {MasterProfileMainInfoSectionComponent} from './master-profile-main-info-section.component';
+import { MasterProfileMainInfoSectionComponent } from './master-profile-main-info-section.component';
 
 describe('MasterProfileMainInfoSectionComponent', () => {
     let component: MasterProfileMainInfoSectionComponent;

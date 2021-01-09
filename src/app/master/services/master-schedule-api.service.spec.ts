@@ -1,6 +1,6 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {MasterScheduleApiService} from './master-schedule-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { MasterScheduleApiService } from './master-schedule-api.service';
 
 describe('MasterScheduleApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

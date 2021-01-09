@@ -1,6 +1,6 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {MasterContactsReadonlyApiService} from './master-contacts-readonly-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { MasterContactsReadonlyApiService } from './master-contacts-readonly-api.service';
 
 describe('MasterContactsReadonlyApiService', () => {
     let service: MasterContactsReadonlyApiService;

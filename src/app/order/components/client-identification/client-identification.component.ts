@@ -1,19 +1,19 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {RegistrationService} from '@app/auth/services/registration.service';
-import {User} from '@app/core/models/user';
-import {UserLocation} from '@app/core/models/user-location';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {IsUserRegisteredApiService} from '@app/core/services/is-user-registered-api.service';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegistrationService } from '@app/auth/services/registration.service';
+import { User } from '@app/core/models/user';
+import { UserLocation } from '@app/core/models/user-location';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
 import { passwordValidators } from '@app/core/validators/password-validators';
-import {OrderIds} from '@app/order/enums/order-ids.enum';
+import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
-import {OrderWizardStateService} from '@app/order/services';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import { OrderWizardStateService } from '@app/order/services';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 const NEXT_STEP_ID = OrderIds.Location;
 
@@ -26,9 +26,9 @@ export class ClientIdentificationComponent {
     public context$: Observable<StepContext> = this.wizardState.getContext();
     public email = new FormControl('', Validators.required);
     public password = new FormControl('', passwordValidators);
-    public passwordConfirm = new FormControl({value: '', disabled: true}, passwordValidators);
-    public name = new FormControl({value: '', disabled: true}, Validators.required);
-    public country = new FormControl({value: '', disabled: true}, Validators.required);
+    public passwordConfirm = new FormControl({ value: '', disabled: true}, passwordValidators);
+    public name = new FormControl({ value: '', disabled: true}, Validators.required);
+    public country = new FormControl({ value: '', disabled: true}, Validators.required);
     public form = new FormGroup({
         email: this.email,
         password: this.password,
@@ -84,8 +84,8 @@ export class ClientIdentificationComponent {
             const locationData = {
                 country: this.country.value.id,
             };
-            const user = plainToClass(User, userData, {excludeExtraneousValues: true});
-            const userLocation = plainToClass(UserLocation, locationData, {excludeExtraneousValues: true});
+            const user = plainToClass(User, userData, { excludeExtraneousValues: true});
+            const userLocation = plainToClass(UserLocation, locationData, { excludeExtraneousValues: true});
             request = this.registrar.register(user, userLocation);
         }
         request.pipe(switchMap(() => this.context$)).subscribe(context =>

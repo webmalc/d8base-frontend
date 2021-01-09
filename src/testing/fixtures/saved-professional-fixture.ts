@@ -1,4 +1,4 @@
-import {SavedProfessionalInterface} from '../../app/core/interfaces/saved-professional.interface';
+import { SavedProfessionalInterface } from '../../app/core/interfaces/saved-professional.interface';
 
 export class SavedProfessionalFixture {
     public static create(): SavedProfessionalInterface<number> {

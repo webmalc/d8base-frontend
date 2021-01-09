@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {PasswordRecoveryInterface} from '@app/auth/interfaces/password-recovery.interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { PasswordRecoveryInterface } from '@app/auth/interfaces/password-recovery.interface';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ResetPasswordApiService {

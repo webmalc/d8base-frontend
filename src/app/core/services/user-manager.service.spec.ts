@@ -1,8 +1,8 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../proxies/storage-manager.service';
-import {UserManagerService} from './user-manager.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../proxies/storage-manager.service';
+import { UserManagerService } from './user-manager.service';
 
 describe('UserManagerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -11,7 +11,7 @@ describe('UserManagerService', () => {
         ],
         providers: [
             UserManagerService,
-            {provide: StorageManagerService, useClass: StorageManagerMock},
+            { provide: StorageManagerService, useClass: StorageManagerMock},
         ],
     }));
 

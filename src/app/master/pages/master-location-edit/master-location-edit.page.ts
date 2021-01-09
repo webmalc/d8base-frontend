@@ -1,13 +1,13 @@
-import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {LocationService} from '@app/core/services/location.service';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {MasterLocation} from '@app/master/models/master-location';
-import {MasterLocationApiService} from '@app/master/services/master-location-api.service';
-import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-page';
-import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
-import {plainToClass} from 'class-transformer';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { LocationService } from '@app/core/services/location.service';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterLocation } from '@app/master/models/master-location';
+import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
+import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
+import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
+import { plainToClass } from 'class-transformer';
 
 @Component({
     selector: 'app-master-location-edit',

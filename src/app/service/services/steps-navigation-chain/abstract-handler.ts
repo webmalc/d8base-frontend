@@ -1,5 +1,5 @@
-import {Handler} from '@app/service/interfaces/handler';
-import {Observable, of} from 'rxjs';
+import { Handler } from '@app/service/interfaces/handler';
+import { Observable, of } from 'rxjs';
 
 export abstract class AbstractHandler implements Handler {
 

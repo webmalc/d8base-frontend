@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {GcmDevice} from '@app/core/models/gcm-device';
-import {FcmDevicesApiService} from '@app/core/services/fcm-devices-api.service';
-import {firebase} from '@firebase/app';
+import { Injectable } from '@angular/core';
+import { GcmDevice } from '@app/core/models/gcm-device';
+import { FcmDevicesApiService } from '@app/core/services/fcm-devices-api.service';
+import { firebase } from '@firebase/app';
 
 @Injectable({
     providedIn: 'root',

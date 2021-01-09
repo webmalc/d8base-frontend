@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import ServiceData from '@app/core/interfaces/service-data.interface';
 
 @Pipe({

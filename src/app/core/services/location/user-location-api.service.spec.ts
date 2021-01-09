@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserLocationApiService } from './user-location-api.service';
 
 describe('LocationApiService', () => {

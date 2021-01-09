@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ServicePublishStepFiveFormFields} from '@app/service/enums/service-publish-step-five-form-fields';
-import {StepFiveDataInterface} from '@app/service/interfaces/step-five-data-interface';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';
+import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 
 @Injectable()
 export class ServicePublishStepFiveFormService {

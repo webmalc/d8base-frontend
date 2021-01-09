@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {HelperService} from '@app/core/services/helper.service';
-import {MainInfoSectionComponentInputDataInterface} from '@app/master/interfaces/main-info-section-component-input-data-interface';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { HelperService } from '@app/core/services/helper.service';
+import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
 
 @Component({
     selector: 'app-master-profile-main-info-section',

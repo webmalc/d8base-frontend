@@ -1,6 +1,6 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {DefaultCategoriesFactoryService} from './default-categories-factory.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { DefaultCategoriesFactoryService } from './default-categories-factory.service';
 
 describe('DefaultCategoriesFactoryService', () => {
     let service: DefaultCategoriesFactoryService;

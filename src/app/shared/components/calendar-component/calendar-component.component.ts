@@ -1,11 +1,11 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {HelperService} from '@app/core/services/helper.service';
-import {MasterCalendar} from '@app/master/models/master-calendar';
-import {CalendarInterval} from '@app/shared/interfaces/calendar-interval';
-import {CalendarUnit} from '@app/shared/interfaces/calendar-unit';
-import {environment} from '@env/environment';
-import {CalendarService} from './calendar.service';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { HelperService } from '@app/core/services/helper.service';
+import { MasterCalendar } from '@app/master/models/master-calendar';
+import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
+import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
+import { environment } from '@env/environment';
+import { CalendarService } from './calendar.service';
 
 function getCurrentDay(): Date {
     return new Date(new Date().setHours(0, 0, 0, 0));

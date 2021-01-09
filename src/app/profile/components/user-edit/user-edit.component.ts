@@ -1,13 +1,13 @@
-import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {User} from '@app/core/models/user';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
-import {ProfileFormService} from '@app/profile/forms/profile-form.service';
-import {ProfileService} from '@app/profile/services/profile.service';
-import {RegisterEmailApiService} from '@app/profile/services/register-email-api.service';
-import {plainToClass} from 'class-transformer';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { User } from '@app/core/models/user';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
+import { ProfileFormService } from '@app/profile/forms/profile-form.service';
+import { ProfileService } from '@app/profile/services/profile.service';
+import { RegisterEmailApiService } from '@app/profile/services/register-email-api.service';
+import { plainToClass } from 'class-transformer';
 
 @Component({
     selector: 'app-user-edit',
@@ -40,7 +40,7 @@ export class UserEditComponent implements OnInit {
 
     public submitForm(): void {
         this.profileService.updateUser(
-            plainToClass(User, this.form.getRawValue(), {excludeExtraneousValues: true}),
+            plainToClass(User, this.form.getRawValue(), { excludeExtraneousValues: true}),
         );
         if (this.user.email !== this.form.get(this.formFields.Email).value) {
             this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();

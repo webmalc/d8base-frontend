@@ -1,4 +1,4 @@
-import {Expose} from 'class-transformer';
+import { Expose } from 'class-transformer';
 
 export class Region {
     // tslint:disable:variable-name

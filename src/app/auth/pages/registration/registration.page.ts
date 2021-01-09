@@ -1,10 +1,10 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {RegistrationService} from '@app/auth/services/registration.service';
-import {User} from '@app/core/models/user';
-import {UserLocation} from '@app/core/models/user-location';
-import {HelperService} from '@app/core/services/helper.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { RegistrationService } from '@app/auth/services/registration.service';
+import { User } from '@app/core/models/user';
+import { UserLocation } from '@app/core/models/user-location';
+import { HelperService } from '@app/core/services/helper.service';
 
 @Component({
     selector: 'app-registration',
@@ -18,7 +18,7 @@ export class RegistrationPage {
     constructor(private readonly registrationService: RegistrationService, private readonly router: Router) {
     }
 
-    public onSubmitRegistrationForm(data: {user: User, location: UserLocation}): void {
+    public onSubmitRegistrationForm(data: { user: User, location: UserLocation}): void {
         this.errorMessages = null;
         this.registrationService.register(data.user, data.location).subscribe(
             next => {

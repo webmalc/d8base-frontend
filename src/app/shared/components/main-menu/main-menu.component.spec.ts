@@ -1,10 +1,10 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {IonicStorageModule} from '@ionic/storage';
-import {TranslateModule} from '@ngx-translate/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonicStorageModule } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {MainMenuComponent} from './main-menu.component';
+import { MainMenuComponent } from './main-menu.component';
 
 describe('MainMenuComponent', () => {
     let component: MainMenuComponent;
@@ -24,7 +24,7 @@ describe('MainMenuComponent', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {provide: Storage, useValue: storageMock},
+                { provide: Storage, useValue: storageMock},
             ],
         }).compileComponents();
 

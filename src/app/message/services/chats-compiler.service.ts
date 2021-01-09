@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HelperService} from '@app/core/services/helper.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {LatestMessageInterface} from '@app/message/interfaces/latest-message-interface';
-import {AbstractMessage} from '@app/message/models/abstract-message';
-import {LatestMessagesApiService} from '@app/message/services/latest-messages-api.service';
-import {MessagesListApiService} from '@app/message/services/messages-list-api.service';
-import {environment} from '@env/environment';
-import {map, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HelperService } from '@app/core/services/helper.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { LatestMessageInterface } from '@app/message/interfaces/latest-message-interface';
+import { AbstractMessage } from '@app/message/models/abstract-message';
+import { LatestMessagesApiService } from '@app/message/services/latest-messages-api.service';
+import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
+import { environment } from '@env/environment';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ChatsCompilerService {

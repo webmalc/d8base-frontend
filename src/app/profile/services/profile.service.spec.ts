@@ -1,9 +1,9 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {ReactiveFormsModule} from '@angular/forms';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {ProfileService} from './profile.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../../core/proxies/storage-manager.service';
+import { ProfileService } from './profile.service';
 
 
 describe('ProfileService', () => {
@@ -11,7 +11,7 @@ describe('ProfileService', () => {
         imports: [HttpClientTestingModule, ReactiveFormsModule],
         providers: [
             ProfileService,
-            {provide: StorageManagerService, useClass: StorageManagerMock},
+            { provide: StorageManagerService, useClass: StorageManagerMock},
         ],
     }));
 

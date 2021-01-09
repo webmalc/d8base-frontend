@@ -1,19 +1,19 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {DarkModeService} from '@app/core/services/dark-mode.service';
-import {FcmDeviceService} from '@app/core/services/fcm-device.service';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {environment} from '@env/environment';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {Platform} from '@ionic/angular';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
+import { DarkModeService } from '@app/core/services/dark-mode.service';
+import { FcmDeviceService } from '@app/core/services/fcm-device.service';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { NotificationWorkerService } from '@app/core/services/notification-worker.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { environment } from '@env/environment';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform } from '@ionic/angular';
 import firebase from 'firebase';
-import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',

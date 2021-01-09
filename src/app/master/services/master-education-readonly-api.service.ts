@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {Education} from '@app/master/models/education';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { Education } from '@app/master/models/education';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -20,7 +20,7 @@ export class MasterEducationReadonlyApiService {
 
     public getByMasterId(id: number): Observable<ApiListResponseInterface<Education>> {
         return this.client.get<{ educations: Education[] }>(this.getUrl() + id.toString()).pipe(
-            map(data => ({count: data.educations.length, results: data.educations, next: null, previous: null})),
+            map(data => ({ count: data.educations.length, results: data.educations, next: null, previous: null})),
         );
     }
 

@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {TranslateModule} from '@ngx-translate/core';
-import {CollapseItemComponent} from './collapse-item.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CollapseItemComponent } from './collapse-item.component';
 
 describe('CollapseItemComponent', () => {
     let component: CollapseItemComponent;

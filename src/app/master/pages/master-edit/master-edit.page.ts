@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Master} from '@app/core/models/master';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {MasterApiService} from '@app/master/services/master-api.service';
-import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-page';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Master } from '@app/core/models/master';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterApiService } from '@app/master/services/master-api.service';
+import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
 
 @Component({
     selector: 'app-master-edit-page',

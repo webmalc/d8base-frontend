@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AbstractSchedule} from '@app/core/models/abstract-schedule';
-import {PopoverController} from '@ionic/angular';
-import {DaySelectorComponent} from './day-selector/day-selector.component';
-import {ScheduleEditorFormFields} from './schedule-editor-form-fields.enum';
-import {ScheduleEditorFormService} from './schedule-editor-form.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { PopoverController } from '@ionic/angular';
+import { DaySelectorComponent } from './day-selector/day-selector.component';
+import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
+import { ScheduleEditorFormService } from './schedule-editor-form.service';
 import * as ScheduleConstants from './schedule.constants';
 
 function normalizeTimeFormat(time: string | null): string {
@@ -73,7 +73,7 @@ export class ScheduleEditorComponent {
             translucent: true,
         });
         await popover.present();
-        const {data} = await popover.onDidDismiss();
+        const { data} = await popover.onDidDismiss();
 
         if (data !== undefined) {
             this.formService.pushNewDay(data);

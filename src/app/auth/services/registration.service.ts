@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {RegistrationResponseInterface} from '@app/auth/interfaces/registration-response.interface';
-import {User} from '@app/core/models/user';
-import {UserLocation} from '@app/core/models/user-location';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {LocationService} from '@app/core/services/location/location.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { RegistrationResponseInterface } from '@app/auth/interfaces/registration-response.interface';
+import { User } from '@app/core/models/user';
+import { UserLocation } from '@app/core/models/user-location';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { LocationService } from '@app/core/services/location/location.service';
+import { UserLocationApiService } from '@app/core/services/location/user-location-api.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class RegistrationService {

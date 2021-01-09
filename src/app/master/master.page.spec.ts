@@ -1,12 +1,12 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../core/proxies/storage-manager.service';
-import {MasterPage} from './master.page';
-import {ReviewsReadonlyApiService} from './services/reviews-readonly-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../core/proxies/storage-manager.service';
+import { MasterPage } from './master.page';
+import { ReviewsReadonlyApiService } from './services/reviews-readonly-api.service';
 
 describe('MasterPage', () => {
     let component: MasterPage;
@@ -17,7 +17,7 @@ describe('MasterPage', () => {
             imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
             declarations: [MasterPage],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
                 ReviewsReadonlyApiService,
             ],
         }).compileComponents();

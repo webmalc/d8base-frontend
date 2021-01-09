@@ -1,12 +1,12 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {AuthenticationFactory} from './authentication-factory.service';
-import {AuthenticationService} from './authentication.service';
+import { AuthenticationFactory } from './authentication-factory.service';
+import { AuthenticationService } from './authentication.service';
 
 describe('AuthenticationFactoryService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            {provide: AuthenticationService, useValue: 'main'},
+            { provide: AuthenticationService, useValue: 'main'},
         ],
     }));
 

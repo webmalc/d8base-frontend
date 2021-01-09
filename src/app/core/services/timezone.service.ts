@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
-import {from, Observable, of} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { UserLocationApiService } from '@app/core/services/location/user-location-api.service';
+import { from, Observable, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

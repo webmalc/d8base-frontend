@@ -1,11 +1,11 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ActivatedRoute} from '@angular/router';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../../core/proxies/storage-manager.service';
-import {MasterProfileServicesComponent} from './master-profile-services.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../../../core/proxies/storage-manager.service';
+import { MasterProfileServicesComponent } from './master-profile-services.component';
 
 describe('MasterProfileServicesComponent', () => {
     let component: MasterProfileServicesComponent;
@@ -27,7 +27,7 @@ describe('MasterProfileServicesComponent', () => {
                         },
                     },
                 },
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         }).compileComponents();
 

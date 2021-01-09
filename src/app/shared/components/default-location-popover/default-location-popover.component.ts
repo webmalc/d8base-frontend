@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ExtendedLocation} from '@app/core/models/extended-location';
-import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {NavParams, PopoverController} from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ExtendedLocation } from '@app/core/models/extended-location';
+import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { NavParams, PopoverController } from '@ionic/angular';
 
 @Component({
     selector: 'app-default-location-popover',

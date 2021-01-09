@@ -1,10 +1,10 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerMock} from '../../../../testing/mocks';
-import {FlagMenuComponent} from './flag-menu.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { StorageManagerMock } from '../../../../testing/mocks';
+import { FlagMenuComponent } from './flag-menu.component';
 
 describe('FlagMenuComponent', () => {
     let component: FlagMenuComponent;
@@ -15,7 +15,7 @@ describe('FlagMenuComponent', () => {
             declarations: [FlagMenuComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
         }).compileComponents();
 

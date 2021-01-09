@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, UrlTree} from '@angular/router';
-import {combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {OrderWizardStateService} from '../services';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { OrderWizardStateService } from '../services';
 
 @Injectable()
 export class OrderFirstStepGuardService implements CanActivate {

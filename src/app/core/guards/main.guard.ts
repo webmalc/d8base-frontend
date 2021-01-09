@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {CanActivate, Router, UrlTree} from '@angular/router';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {Observable} from 'rxjs';
-import {first} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, UrlTree } from '@angular/router';
+import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

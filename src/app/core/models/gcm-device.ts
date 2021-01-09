@@ -1,4 +1,4 @@
-import {Expose} from 'class-transformer';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class GcmDevice {

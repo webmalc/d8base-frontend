@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
-import {Country} from '@app/profile/models/country';
-import {Coordinates} from '@app/shared/interfaces/coordinates';
-import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {NavParams, PopoverController} from '@ionic/angular';
-import {BehaviorSubject} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
+import { Country } from '@app/profile/models/country';
+import { Coordinates } from '@app/shared/interfaces/coordinates';
+import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { NavParams, PopoverController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-on-map-popover',

@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {MyOrdersPageComponent} from '@app/my-orders/my-orders-page.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { MyOrdersPageComponent } from '@app/my-orders/my-orders-page.component';
 
-import {ReceivedOrderPageComponent, SentOrderPageComponent} from './components';
+import { ReceivedOrderPageComponent, SentOrderPageComponent } from './components';
 
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
         path: 'inbox',
         pathMatch: 'full',
         component: MyOrdersPageComponent,
-        data: {isInbox: true},
+        data: { isInbox: true},
     },
     {
         path: 'inbox/:id',
@@ -25,7 +25,7 @@ const routes: Routes = [
         path: 'outbox',
         pathMatch: 'full',
         component: MyOrdersPageComponent,
-        data: {isInbox: false},
+        data: { isInbox: false},
     },
     {
         path: 'outbox/:id',

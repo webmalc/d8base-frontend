@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Category} from '@app/core/models/category';
-import {Subcategory} from '@app/core/models/subcategory';
-import {ServicePublishStepOneFormFields} from '@app/service/enums/service-publish-step-one-form-fields';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Category } from '@app/core/models/category';
+import { Subcategory } from '@app/core/models/subcategory';
+import { ServicePublishStepOneFormFields } from '@app/service/enums/service-publish-step-one-form-fields';
 
 @Injectable()
 export class ServicePublishStepOneFormService {

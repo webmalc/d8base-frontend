@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {once} from '@app/core/decorators/once';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {FcmDevicesApiService} from '@app/core/services/fcm-devices-api.service';
-import {NotificationWorkerService} from '@app/core/services/notification-worker.service';
-import {firebase} from '@firebase/app';
+import { Injectable } from '@angular/core';
+import { once } from '@app/core/decorators/once';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { FcmDevicesApiService } from '@app/core/services/fcm-devices-api.service';
+import { NotificationWorkerService } from '@app/core/services/notification-worker.service';
+import { firebase } from '@firebase/app';
 import '@firebase/messaging';
-import {filter, switchMap} from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

@@ -1,8 +1,8 @@
-import {Directive, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {switchMap} from 'rxjs/operators';
+import { Directive, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { switchMap } from 'rxjs/operators';
 
 // tslint:disable:directive-class-suffix
 @Directive()

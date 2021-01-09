@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
-import {Credentials} from '@app/auth/interfaces/credentials';
-import {LoginFormFields} from '../../enums/login-form-fields';
-import {LoginFormService} from '../../forms/login-form.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Credentials } from '@app/auth/interfaces/credentials';
+import { LoginFormFields } from '../../enums/login-form-fields';
+import { LoginFormService } from '../../forms/login-form.service';
 
 @Component({
     selector: 'app-login-form',

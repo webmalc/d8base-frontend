@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {StepThreeHandlerService} from './step-three-handler.service';
+import { StepThreeHandlerService } from './step-three-handler.service';
 
 describe('StepThreeHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({

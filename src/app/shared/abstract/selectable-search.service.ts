@@ -1,8 +1,8 @@
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-service-interface';
-import {LocationTypes} from '@app/core/types/location-types';
-import {IonicSelectableComponent} from 'ionic-selectable';
-import {Subscription} from 'rxjs';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { ReadonlyApiServiceInterface } from '@app/core/interfaces/readonly-api-service-interface';
+import { LocationTypes } from '@app/core/types/location-types';
+import { IonicSelectableComponent } from 'ionic-selectable';
+import { Subscription } from 'rxjs';
 
 export abstract class SelectableSearchService {
 

@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {ProfessionalCertificateInline} from '@app/api/models/professional-certificate-inline';
+import { Component, Input } from '@angular/core';
+import { ProfessionalCertificateInline } from '@app/api/models/professional-certificate-inline';
 
 @Component({
     selector: 'app-certificate',

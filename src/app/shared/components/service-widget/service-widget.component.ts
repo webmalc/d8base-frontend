@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {ProfessionalList} from '@app/api/models';
-import {Service} from '@app/service/models/service';
+import { Component, Input } from '@angular/core';
+import { ProfessionalList } from '@app/api/models';
+import { Service } from '@app/service/models/service';
 
 @Component({
     selector: 'app-service-widget',

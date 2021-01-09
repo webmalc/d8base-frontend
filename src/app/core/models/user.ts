@@ -1,6 +1,6 @@
-import {UserLanguage} from '@app/api/models';
-import {Expose} from 'class-transformer';
-import {UserInterface} from '../interfaces/user.interface';
+import { UserLanguage } from '@app/api/models';
+import { Expose } from 'class-transformer';
+import { UserInterface } from '../interfaces/user.interface';
 
 // tslint:disable:variable-name
 export class User implements UserInterface {

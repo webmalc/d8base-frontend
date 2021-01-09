@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
-import {ProfessionalList} from '@app/api/models/professional-list';
+import { Injectable } from '@angular/core';
+import { ProfessionalList } from '@app/api/models/professional-list';
 
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
-import {BookmarkMaster} from '@app/core/models/bookmark-master';
-import {Master} from '@app/core/models/master';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {SavedProfessionalApiService} from '@app/profile/services/saved-professional-api.service';
-import {plainToClass} from 'class-transformer';
-import {Observable, throwError} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { SavedProfessionalInterface } from '@app/core/interfaces/saved-professional.interface';
+import { BookmarkMaster } from '@app/core/models/bookmark-master';
+import { Master } from '@app/core/models/master';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { SavedProfessionalApiService } from '@app/profile/services/saved-professional-api.service';
+import { plainToClass } from 'class-transformer';
+import { Observable, throwError } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class BookmarksService {
                 map(value => {
                     rawBookmarks = value;
 
-                    return value.map(({professional}) => professional);
+                    return value.map(({ professional}) => professional);
                 }),
                 switchMap(ids => this.masterManager.getUserLessList$(ids)),
                 map((value: ProfessionalList[]) => {
@@ -56,7 +56,7 @@ export class BookmarksService {
         if (bookmark.professional === null) {
             return throwError('Cannot restore bookmark with null master');
         }
-        const newBookmark: SavedProfessionalInterface<number> = {...bookmark, ...{professional: bookmark.professional.id}};
+        const newBookmark: SavedProfessionalInterface<number> = { ...bookmark, ...{ professional: bookmark.professional.id}};
 
         return this.createBookmark(newBookmark);
     }

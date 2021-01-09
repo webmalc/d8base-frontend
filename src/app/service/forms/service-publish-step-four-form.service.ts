@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { passwordValidators } from '@app/core/validators/password-validators';
-import {ServicePublishStepFourFormFields} from '@app/service/enums/service-publish-step-four-form-fields';
+import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
 
 @Injectable()
 export class ServicePublishStepFourFormService {
@@ -24,7 +24,7 @@ export class ServicePublishStepFourFormService {
                 [ServicePublishStepFourFormFields.Country]: [null, Validators.required],
                 [ServicePublishStepFourFormFields.City]: [null, Validators.required],
             },
-            {validators: this.checkPassword});
+            { validators: this.checkPassword});
     }
 
     public getFormFieldValue(formField: string): any {
@@ -46,9 +46,9 @@ export class ServicePublishStepFourFormService {
 
     private checkPassword(group: FormGroup): ValidationErrors | null {
         if (group.get(ServicePublishStepFourFormFields.Password).value !== group.get(ServicePublishStepFourFormFields.Confirm).value) {
-            group.get(ServicePublishStepFourFormFields.Confirm).setErrors({passwordMismatch: true});
+            group.get(ServicePublishStepFourFormFields.Confirm).setErrors({ passwordMismatch: true});
 
-            return {passwordMismatch: true};
+            return { passwordMismatch: true};
         }
 
         return null;

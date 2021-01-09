@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  *  note that inner collapse html cannot contain ion-content tag

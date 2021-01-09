@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {AbstractHandler} from '@app/service/services/steps-navigation-chain/abstract-handler';
-import {Observable, of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepSixHandlerService extends AbstractHandler {

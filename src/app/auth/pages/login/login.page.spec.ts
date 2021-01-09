@@ -1,21 +1,21 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {ComponentFixture, fakeAsync, flush, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {AuthenticationService} from '@app/core/services/authentication.service';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {ApiClientServiceMock, StorageManagerMock, TokenManagerServiceMock} from 'src/testing/mocks';
-import {LoginFormComponent} from '../../components/login-form/login-form.component';
-import {LoginFormService} from '../../forms/login-form.service';
-import {Credentials} from '../../interfaces/credentials';
-import {LoginPage} from './login.page';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { TokenManagerService } from '@app/core/services/token-manager.service';
+import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { ApiClientServiceMock, StorageManagerMock, TokenManagerServiceMock } from 'src/testing/mocks';
+import { LoginFormComponent } from '../../components/login-form/login-form.component';
+import { LoginFormService } from '../../forms/login-form.service';
+import { Credentials } from '../../interfaces/credentials';
+import { LoginPage } from './login.page';
 
 describe('LoginPage', () => {
     let component: LoginPage;
@@ -34,12 +34,12 @@ describe('LoginPage', () => {
                 TranslateModule.forRoot(),
             ],
             providers: [
-                {provide: ApiClientService, useClass: ApiClientServiceMock},
+                { provide: ApiClientService, useClass: ApiClientServiceMock},
                 LoginFormService,
                 FormBuilder,
                 AuthenticationService,
-                {provide: TokenManagerService, useClass: TokenManagerServiceMock},
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: TokenManagerService, useClass: TokenManagerServiceMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
@@ -73,7 +73,7 @@ describe('LoginPage', () => {
 
     it('test invalid auth data submit', fakeAsync(() => {
 
-        const user: Credentials = {username: 'invalid', password: 'invalid'};
+        const user: Credentials = { username: 'invalid', password: 'invalid'};
 
         component.onSubmitLoginForm(user);
         flush();

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {User} from '@app/core/models/user';
-import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
-import {Language} from '@app/profile/models/language';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '@app/core/models/user';
+import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
+import { Language } from '@app/profile/models/language';
 
 @Injectable({
         providedIn: 'root',

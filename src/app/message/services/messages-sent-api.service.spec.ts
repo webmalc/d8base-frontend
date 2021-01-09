@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MessagesSentApiService} from './messages-sent-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MessagesSentApiService } from './messages-sent-api.service';
 
 describe('MessagesSentApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

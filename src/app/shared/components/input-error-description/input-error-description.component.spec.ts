@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {InputErrorDescriptionComponent} from './input-error-description.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { InputErrorDescriptionComponent } from './input-error-description.component';
 
 describe('InputErrorDescriptionComponent', () => {
     let component: InputErrorDescriptionComponent;

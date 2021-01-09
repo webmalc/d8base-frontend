@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {MainPageReviewComponent} from './main-page-review.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { MainPageReviewComponent } from './main-page-review.component';
 
 describe('MainPageReviewComponent', () => {
     let component: MainPageReviewComponent;

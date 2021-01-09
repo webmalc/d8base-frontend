@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {User} from '@app/core/models/user';
-import {LocationService} from '@app/core/services/location.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
-import {ProfileFormService} from '@app/profile/forms/profile-form.service';
-import {Language} from '@app/profile/models/language';
-import {LanguagesApiService} from '@app/profile/services/languages-api.service';
-import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '@app/core/models/user';
+import { LocationService } from '@app/core/services/location.service';
+import { UserLocationApiService } from '@app/core/services/location/user-location-api.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
+import { ProfileFormService } from '@app/profile/forms/profile-form.service';
+import { Language } from '@app/profile/models/language';
+import { LanguagesApiService } from '@app/profile/services/languages-api.service';
+import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ProfileService {

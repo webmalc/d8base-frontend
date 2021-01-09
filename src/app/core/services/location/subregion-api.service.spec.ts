@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {SubregionApiService} from './subregion-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SubregionApiService } from './subregion-api.service';
 
 describe('SubregionApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

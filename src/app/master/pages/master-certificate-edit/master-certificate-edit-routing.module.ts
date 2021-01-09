@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {MasterCertificateEditPage} from './master-certificate-edit.page';
+import { MasterCertificateEditPage } from './master-certificate-edit.page';
 
 const routes: Routes = [
   {

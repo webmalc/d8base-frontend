@@ -1,4 +1,4 @@
-import {PartialUserInterface} from '@app/core/interfaces/partial-user-interface';
+import { PartialUserInterface } from '@app/core/interfaces/partial-user-interface';
 
 export interface LatestMessageInterface {
     id: number;

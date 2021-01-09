@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {StepFinalHandlerService} from './step-final-handler.service';
+import { StepFinalHandlerService } from './step-final-handler.service';
 
 describe('StepFinalHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({

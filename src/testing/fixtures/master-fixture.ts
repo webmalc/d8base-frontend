@@ -1,4 +1,4 @@
-import {Master} from '../../app/core/models/master';
+import { Master } from '../../app/core/models/master';
 
 export class MasterFixture {
     public static create(): Master {

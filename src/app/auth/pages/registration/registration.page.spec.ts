@@ -1,29 +1,29 @@
-import {HttpClient} from '@angular/common/http';
-import {ComponentFixture, fakeAsync, flush, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
-import {User} from '@app/core/models/user';
-import {UserLocation} from '@app/core/models/user-location';
-import {IpApiService} from '@app/core/services/location/ip-api.service';
-import {IpDataService} from '@app/core/services/location/ip-data.service';
-import {IpServicesHolderService} from '@app/core/services/location/ip-services-holder.service';
-import {IpnfDataService} from '@app/core/services/location/ipnf-data.service';
-import {LocationService} from '@app/core/services/location/location.service';
-import {ErrorFlashbagComponent} from '@app/shared/components/error-flashbag/error-flashbag.component';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {LocationAccuracy} from '@ionic-native/location-accuracy/ngx';
-import {IonicModule} from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { User } from '@app/core/models/user';
+import { UserLocation } from '@app/core/models/user-location';
+import { IpApiService } from '@app/core/services/location/ip-api.service';
+import { IpDataService } from '@app/core/services/location/ip-data.service';
+import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
+import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
+import { LocationService } from '@app/core/services/location/location.service';
+import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { IonicModule } from '@ionic/angular';
 
-import {IonicStorageModule} from '@ionic/storage';
-import {TranslateModule} from '@ngx-translate/core';
-import {plainToClass} from 'class-transformer';
-import {IonicSelectableModule} from 'ionic-selectable';
-import {of} from 'rxjs';
-import {RegistrationFormComponent} from '../../components/registration-form/registration-form.component';
-import {RegistrationFormService} from '../../forms/registration-form.service';
-import {RegistrationService} from '../../services/registration.service';
-import {RegistrationPage} from './registration.page';
+import { IonicStorageModule } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
+import { plainToClass } from 'class-transformer';
+import { IonicSelectableModule } from 'ionic-selectable';
+import { of } from 'rxjs';
+import { RegistrationFormComponent } from '../../components/registration-form/registration-form.component';
+import { RegistrationFormService } from '../../forms/registration-form.service';
+import { RegistrationService } from '../../services/registration.service';
+import { RegistrationPage } from './registration.page';
 
 describe('RegistrationPage', () => {
     let component: RegistrationPage;
@@ -57,12 +57,12 @@ describe('RegistrationPage', () => {
             ],
             providers: [
                 RegistrationFormService, FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
-                {provide: IpApiService, useValue: ipServiceMock},
-                {provide: IpDataService, useValue: ipServiceMock},
-                {provide: IpnfDataService, useValue: ipServiceMock},
-                {provide: HttpClient, useValue: {post: () => of(true)}},
-                {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
-                {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
+                { provide: IpApiService, useValue: ipServiceMock},
+                { provide: IpDataService, useValue: ipServiceMock},
+                { provide: IpnfDataService, useValue: ipServiceMock},
+                { provide: HttpClient, useValue: { post: () => of(true)}},
+                { provide: Geolocation, useValue: { getCurrentPosition: () => 'test'}},
+                { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
             ],
         }).compileComponents();
 
@@ -101,8 +101,8 @@ describe('RegistrationPage', () => {
         };
 
         component.onSubmitRegistrationForm({
-            user: plainToClass(User, user, {excludeExtraneousValues: true}),
-            location: plainToClass(UserLocation, location, {excludeExtraneousValues: true}),
+            user: plainToClass(User, user, { excludeExtraneousValues: true}),
+            location: plainToClass(UserLocation, location, { excludeExtraneousValues: true}),
         });
         flush();
 

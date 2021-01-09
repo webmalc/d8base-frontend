@@ -1,9 +1,9 @@
-import {District} from '@app/core/models/district';
-import {Region} from '@app/core/models/region';
-import {Subregion} from '@app/core/models/subregion';
-import {City} from '@app/profile/models/city';
-import {Country} from '@app/profile/models/country';
-import {Coordinates} from '@app/shared/interfaces/coordinates';
+import { District } from '@app/core/models/district';
+import { Region } from '@app/core/models/region';
+import { Subregion } from '@app/core/models/subregion';
+import { City } from '@app/profile/models/city';
+import { Country } from '@app/profile/models/country';
+import { Coordinates } from '@app/shared/interfaces/coordinates';
 
 export interface ClientLocationInterface {
     id: number;

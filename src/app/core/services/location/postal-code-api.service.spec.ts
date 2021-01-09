@@ -1,6 +1,6 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {PostalCodeApiService} from './postal-code-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { PostalCodeApiService } from './postal-code-api.service';
 
 describe('PostalCodeApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

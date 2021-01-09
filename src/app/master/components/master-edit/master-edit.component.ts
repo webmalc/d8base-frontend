@@ -1,14 +1,14 @@
-import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {Master} from '@app/core/models/master';
-import {Subcategory} from '@app/core/models/subcategory';
-import {SubcategoriesApiService} from '@app/core/services/subcategories-api.service';
-import {EditMasterFormFields} from '@app/master/enums/edit-master-form-fields';
-import {AbstractEditComponent} from '@app/shared/abstract/abstract-edit-component';
-import {plainToClass} from 'class-transformer';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { Master } from '@app/core/models/master';
+import { Subcategory } from '@app/core/models/subcategory';
+import { SubcategoriesApiService } from '@app/core/services/subcategories-api.service';
+import { EditMasterFormFields } from '@app/master/enums/edit-master-form-fields';
+import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
+import { plainToClass } from 'class-transformer';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-master-edit',

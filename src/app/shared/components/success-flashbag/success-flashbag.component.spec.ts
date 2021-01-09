@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {SuccessFlashbagComponent} from './success-flashbag.component';
+import { SuccessFlashbagComponent } from './success-flashbag.component';
 
 describe('SuccessFlashbagComponent', () => {
     let component: SuccessFlashbagComponent;

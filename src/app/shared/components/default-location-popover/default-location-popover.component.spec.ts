@@ -1,13 +1,13 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ExtendedLocation} from '@app/core/models/extended-location';
-import {Country} from '@app/profile/models/country';
-import {SelectableCityOnSearchService} from '@app/shared/services/selectable-city-on-search.service';
-import {SelectableCountryOnSearchService} from '@app/shared/services/selectable-country-on-search.service';
-import {IonicModule, NavParams, PopoverController} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {plainToClass} from 'class-transformer';
-import {DefaultLocationPopoverComponent} from './default-location-popover.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ExtendedLocation } from '@app/core/models/extended-location';
+import { Country } from '@app/profile/models/country';
+import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
+import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
+import { IonicModule, NavParams, PopoverController } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { plainToClass } from 'class-transformer';
+import { DefaultLocationPopoverComponent } from './default-location-popover.component';
 
 describe('DefaultLocationPopoverComponent', () => {
     let component: DefaultLocationPopoverComponent;
@@ -20,14 +20,14 @@ describe('DefaultLocationPopoverComponent', () => {
             providers: [
                 SelectableCountryOnSearchService,
                 SelectableCityOnSearchService,
-                {provide: PopoverController, useValue: {dismiss: () => Promise.resolve()}},
+                { provide: PopoverController, useValue: { dismiss: () => Promise.resolve()}},
                 {
                     provide: NavParams, useValue: {
                         get: () => {
                             const country = new Country();
                             country.name = 'test';
 
-                            return plainToClass(ExtendedLocation, {country});
+                            return plainToClass(ExtendedLocation, { country});
                         },
                     },
                 },

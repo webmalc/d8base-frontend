@@ -1,4 +1,4 @@
-import {SearchLocationDataInterface} from '@app/main/interfaces/search-location-data-interface';
+import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 
 export interface MainPageSearchInterface {
     needle: string;

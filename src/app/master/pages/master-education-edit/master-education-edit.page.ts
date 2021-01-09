@@ -1,10 +1,10 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {Education} from '@app/master/models/education';
-import {EducationApiService} from '@app/master/services/education-api.service';
-import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-page';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { Education } from '@app/master/models/education';
+import { EducationApiService } from '@app/master/services/education-api.service';
+import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
 
 @Component({
     selector: 'app-master-education-edit',

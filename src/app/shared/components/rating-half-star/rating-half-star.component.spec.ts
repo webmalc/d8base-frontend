@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {RatingHalfStarComponent} from './rating-half-star.component';
+import { RatingHalfStarComponent } from './rating-half-star.component';
 
 describe('RatingHalfStarComponent', () => {
   let component: RatingHalfStarComponent;

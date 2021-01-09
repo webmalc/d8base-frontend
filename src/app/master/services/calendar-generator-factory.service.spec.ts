@@ -1,9 +1,9 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {CalendarApiService} from '@app/master/services/calendar-api.service';
-import {StorageManagerMock} from '../../../testing/mocks';
-import {CalendarGeneratorFactoryService} from './calendar-generator-factory.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { CalendarApiService } from '@app/master/services/calendar-api.service';
+import { StorageManagerMock } from '../../../testing/mocks';
+import { CalendarGeneratorFactoryService } from './calendar-generator-factory.service';
 
 describe('CalendarGeneratorFactoryService', () => {
     let service: CalendarGeneratorFactoryService;
@@ -13,7 +13,7 @@ describe('CalendarGeneratorFactoryService', () => {
             providers: [
                 CalendarGeneratorFactoryService,
                 CalendarApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
             ],
             imports: [HttpClientTestingModule],
         });

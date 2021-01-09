@@ -1,9 +1,9 @@
-import {HttpClientModule} from '@angular/common/http';
-import {ModuleWithProviders, NgModule} from '@angular/core';
-import {ApiConfiguration, ApiConfigurationInterface} from './api-configuration';
+import { HttpClientModule } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
-import {ProfessionalsService} from './services/professionals.service';
-import {SearchService} from './services/search.service';
+import { ProfessionalsService } from './services/professionals.service';
+import { SearchService } from './services/search.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration

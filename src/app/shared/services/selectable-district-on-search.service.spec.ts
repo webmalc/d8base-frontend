@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {SelectableDistrictOnSearchService} from './selectable-district-on-search.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SelectableDistrictOnSearchService } from './selectable-district-on-search.service';
 
 describe('SelectableDistrictOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({

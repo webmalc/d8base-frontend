@@ -1,6 +1,6 @@
-import {browser} from 'protractor';
-import {environment, testing} from '../../src/environments/environment';
-import {RegistrationPage} from './registration.po';
+import { browser } from 'protractor';
+import { environment, testing } from '../../src/environments/environment';
+import { RegistrationPage } from './registration.po';
 
 describe('Registration page', () => {
     let page: RegistrationPage;

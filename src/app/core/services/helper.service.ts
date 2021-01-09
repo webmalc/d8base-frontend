@@ -1,7 +1,7 @@
-import {ProfessionalContactInline} from '@app/api/models';
-import {Contact} from '@app/profile/models/contact';
-import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
-import {environment} from '@env/environment';
+import { ProfessionalContactInline } from '@app/api/models';
+import { Contact } from '@app/profile/models/contact';
+import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
+import { environment } from '@env/environment';
 
 export class HelperService {
 

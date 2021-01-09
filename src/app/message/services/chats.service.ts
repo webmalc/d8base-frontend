@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {AbstractMessage} from '@app/message/models/abstract-message';
-import {ChatListUpdaterService} from '@app/message/services/chat-list-updater.service';
-import {ChatsSearchService} from '@app/message/services/chats-search.service';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {filter, first, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { AbstractMessage } from '@app/message/models/abstract-message';
+import { ChatListUpdaterService } from '@app/message/services/chat-list-updater.service';
+import { ChatsSearchService } from '@app/message/services/chats-search.service';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
 
 @Injectable()
 export class ChatsService {

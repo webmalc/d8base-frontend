@@ -1,5 +1,5 @@
-import {NominatimReverseResponseInterface} from '@app/core/interfaces/nominatim-reverse-response-interface';
-import {Expose} from 'class-transformer';
+import { NominatimReverseResponseInterface } from '@app/core/interfaces/nominatim-reverse-response-interface';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class NominatimReverseResponse implements NominatimReverseResponseInterface {

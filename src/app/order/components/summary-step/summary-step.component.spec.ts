@@ -1,10 +1,10 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {OrderWizardStateService} from '@app/order/services/order-wizard-state.service';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { OrderWizardStateService } from '@app/order/services/order-wizard-state.service';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {SummaryStepComponent} from './summary-step.component';
+import { SummaryStepComponent } from './summary-step.component';
 
 describe('SummaryStepComponent', () => {
     let component: SummaryStepComponent;

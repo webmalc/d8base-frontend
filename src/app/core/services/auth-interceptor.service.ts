@@ -1,11 +1,11 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {SearchService} from '@app/api/services';
-import {AuthenticationFactory} from '@app/core/services/authentication-factory.service';
-import {HelperService} from '@app/core/services/helper.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { SearchService } from '@app/api/services';
+import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
+import { HelperService } from '@app/core/services/helper.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 /**
  *  Tries to refresh auth token if it has expired

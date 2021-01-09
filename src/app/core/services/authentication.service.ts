@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {GrantTypes} from '@app/auth/enums/grant-types';
-import {AuthResponseInterface} from '@app/auth/interfaces/auth-response.interface';
-import {Credentials} from '@app/auth/interfaces/credentials';
-import {once} from '@app/core/decorators/once';
-import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
-import {LoginDataInterface} from '@app/core/interfaces/login-data-interface';
-import {RefreshDataInterface} from '@app/core/interfaces/refresh-data-interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {PreLogoutService} from '@app/core/services/pre-logout.service';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {environment} from '@env/environment';
-import {EMPTY, from, Observable, of, ReplaySubject} from 'rxjs';
-import {first, switchMap, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { GrantTypes } from '@app/auth/enums/grant-types';
+import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { Credentials } from '@app/auth/interfaces/credentials';
+import { once } from '@app/core/decorators/once';
+import { AuthenticatorInterface } from '@app/core/interfaces/authenticator.interface';
+import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
+import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { PreLogoutService } from '@app/core/services/pre-logout.service';
+import { TokenManagerService } from '@app/core/services/token-manager.service';
+import { environment } from '@env/environment';
+import { EMPTY, from, Observable, of, ReplaySubject } from 'rxjs';
+import { first, switchMap, tap } from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -63,7 +63,7 @@ export class AuthenticationService implements AuthenticatorInterface {
         );
     }
 
-    public login({username, password}: Credentials): Observable<void> {
+    public login({ username, password}: Credentials): Observable<void> {
         return this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
             username,
             password,
@@ -94,7 +94,7 @@ export class AuthenticationService implements AuthenticatorInterface {
         return new Observable<void>(
             (subscriber) => {
                 this.tokenManager.getRefreshToken().then(refresh => {
-                    const refreshData: RefreshDataInterface = {refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
+                    const refreshData: RefreshDataInterface = { refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType};
                     this.client.post<AuthResponseInterface, RefreshDataInterface>(this.TOKEN_REFRESH_URL, refreshData).subscribe(
                         (response: AuthResponseInterface) => this.tokenManager.setTokens(response).then(
                             _ => {

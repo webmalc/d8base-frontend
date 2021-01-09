@@ -1,5 +1,5 @@
-import {HelperService} from '@app/core/services/helper.service';
-import {Expose} from 'class-transformer';
+import { HelperService } from '@app/core/services/helper.service';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class Certificate {

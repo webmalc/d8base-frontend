@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {SearchFiltersSubmenuComponent} from './search-filters-submenu.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { SearchFiltersSubmenuComponent } from './search-filters-submenu.component';
 
 describe('SearchFiltersSubmenuComponent', () => {
     let component: SearchFiltersSubmenuComponent;

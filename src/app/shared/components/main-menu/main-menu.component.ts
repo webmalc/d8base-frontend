@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {Platform} from '@ionic/angular';
-import {MainMenuItem, mainMenuItems} from './main-menu';
+import { Component, Input } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { MainMenuItem, mainMenuItems } from './main-menu';
 
 @Component({
     selector: 'app-main-menu',

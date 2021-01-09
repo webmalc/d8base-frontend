@@ -1,5 +1,5 @@
-import {BookmarkMaster} from '@app/core/models/bookmark-master';
-import {Master} from '@app/core/models/master';
+import { BookmarkMaster } from '@app/core/models/bookmark-master';
+import { Master } from '@app/core/models/master';
 
 export class BookmarkFixture {
     public static create(master: Master): BookmarkMaster {

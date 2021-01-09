@@ -1,11 +1,11 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ActivatedRoute} from '@angular/router';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {IonicModule} from '@ionic/angular';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {CertificatesApiService} from '../../services/certificates-api.service';
-import {MasterCertificateEditPage} from './master-certificate-edit.page';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { IonicModule } from '@ionic/angular';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { CertificatesApiService } from '../../services/certificates-api.service';
+import { MasterCertificateEditPage } from './master-certificate-edit.page';
 
 describe('MasterCertificateEditPage', () => {
     let component: MasterCertificateEditPage;
@@ -27,7 +27,7 @@ describe('MasterCertificateEditPage', () => {
                         },
                     },
                 },
-                {provide: StorageManagerService, useClass: StorageManagerMock},
+                { provide: StorageManagerService, useClass: StorageManagerMock},
                 CertificatesApiService,
             ],
         }).compileComponents();

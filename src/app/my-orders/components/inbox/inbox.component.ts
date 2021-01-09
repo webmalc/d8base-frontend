@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {ReceivedOrder} from '@app/core/models/received-order';
-import {Tabs} from '@app/my-orders/enums/tabs.enum';
-import {ReceivedOrdersApiService} from '@app/my-orders/services';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ReceivedOrder } from '@app/core/models/received-order';
+import { Tabs } from '@app/my-orders/enums/tabs.enum';
+import { ReceivedOrdersApiService } from '@app/my-orders/services';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-inbox',
@@ -15,7 +15,7 @@ export class InboxComponent implements OnInit, OnDestroy {
     public orders: ReceivedOrder[];
     public tabs = Tabs;
 
-    private readonly currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({status__in: 'new'});
+    private readonly currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({ status__in: 'new'});
     private readonly destroy$ = new Subject<void>();
 
     constructor(
@@ -42,13 +42,13 @@ export class InboxComponent implements OnInit, OnDestroy {
         const currentTab: Tabs = e.detail.value;
         switch (currentTab) {
             case Tabs.current:
-                this.currentFilter$.next({status__in: 'confirmed,paid'});
+                this.currentFilter$.next({ status__in: 'confirmed,paid'});
                 break;
             case Tabs.archive:
-                this.currentFilter$.next({status__in: 'completed,canceled'});
+                this.currentFilter$.next({ status__in: 'completed,canceled'});
                 break;
             default:
-                this.currentFilter$.next({status__in: 'not_confirmed'});
+                this.currentFilter$.next({ status__in: 'not_confirmed'});
                 break;
         }
     }

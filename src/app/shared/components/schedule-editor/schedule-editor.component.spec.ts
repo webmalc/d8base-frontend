@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {ScheduleEditorComponent} from './schedule-editor.component';
+import { ScheduleEditorComponent } from './schedule-editor.component';
 
 describe('ScheduleEditorComponent', () => {
     let component: ScheduleEditorComponent;

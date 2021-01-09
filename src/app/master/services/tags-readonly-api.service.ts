@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {Tag} from '@app/master/models/tag';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { Tag } from '@app/master/models/tag';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +19,7 @@ export class TagsReadonlyApiService {
 
     public getByMasterId(id: number): Observable<ApiListResponseInterface<Tag>> {
         return this.client.get<{ tags: Tag[] }>(this.getUrl() + id.toString()).pipe(
-            map(data => ({count: data.tags.length, results: data.tags, next: null, previous: null})),
+            map(data => ({ count: data.tags.length, results: data.tags, next: null, previous: null})),
         );
     }
 

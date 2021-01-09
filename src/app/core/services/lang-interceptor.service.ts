@@ -1,9 +1,9 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {UserSettingsService} from '@app/shared/services/user-settings.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
-import {first, switchMap} from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class LangInterceptorService implements HttpInterceptor {
@@ -32,7 +32,7 @@ export class LangInterceptorService implements HttpInterceptor {
                 const newUrl = `${url.origin}/${lang}${url.pathname}`;
                 const headers = req.headers.append('Accept-Language', lang);
 
-                return next.handle(req.clone({url: newUrl, headers}));
+                return next.handle(req.clone({ url: newUrl, headers}));
             }),
         );
     }

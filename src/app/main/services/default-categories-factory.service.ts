@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Category} from '@app/core/models/category';
-import {CategoriesApiService} from '@app/core/services/categories-api.service';
+import { Injectable } from '@angular/core';
+import { Category } from '@app/core/models/category';
+import { CategoriesApiService } from '@app/core/services/categories-api.service';
 
 @Injectable()
 export class DefaultCategoriesFactoryService {

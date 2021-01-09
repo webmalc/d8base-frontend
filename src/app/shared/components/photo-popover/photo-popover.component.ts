@@ -9,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 export class PhotoPopoverComponent {
     @Input() public src: string;
 
-    constructor(private readonly modalController: ModalController) {}
+    constructor(private readonly modalController: ModalController) { }
 
     public close(): void {
         this.modalController.dismiss();

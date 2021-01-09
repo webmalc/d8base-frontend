@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {City} from '@app/profile/models/city';
-import {IonItem, NavParams, PopoverController} from '@ionic/angular';
-import {BehaviorSubject} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { City } from '@app/profile/models/city';
+import { IonItem, NavParams, PopoverController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-city-picker-popover',

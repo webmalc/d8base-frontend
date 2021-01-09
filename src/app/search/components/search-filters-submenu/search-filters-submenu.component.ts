@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SearchFiltersSubmenu} from '@app/search/enums/search-filters-submenu';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SearchFiltersSubmenu } from '@app/search/enums/search-filters-submenu';
 
 @Component({
     selector: 'app-search-filters-submenu',

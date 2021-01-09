@@ -1,22 +1,22 @@
-import {Component} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {User} from '@app/core/models/user';
-import {UserLocation} from '@app/core/models/user-location';
-import {CountriesApiService} from '@app/core/services';
-import {HelperService} from '@app/core/services/helper.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
-import {Country} from '@app/profile/models/country';
-import {Language} from '@app/profile/models/language';
-import {LanguagesApiService} from '@app/profile/services/languages-api.service';
-import {ProfileService} from '@app/profile/services/profile.service';
-import {UserContactApiService} from '@app/profile/services/user-contact-api.service';
-import {UserLanguagesApiService} from '@app/profile/services/user-languages-api.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
-import {BehaviorSubject, forkJoin, of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-import {ContactApiService} from './services/contact-api.service';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { User } from '@app/core/models/user';
+import { UserLocation } from '@app/core/models/user-location';
+import { CountriesApiService } from '@app/core/services';
+import { HelperService } from '@app/core/services/helper.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
+import { Country } from '@app/profile/models/country';
+import { Language } from '@app/profile/models/language';
+import { LanguagesApiService } from '@app/profile/services/languages-api.service';
+import { ProfileService } from '@app/profile/services/profile.service';
+import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
+import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
+import { Reinitable } from '@app/shared/abstract/reinitable';
+import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
+import { BehaviorSubject, forkJoin, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ContactApiService } from './services/contact-api.service';
 
 @Component({
     selector: 'app-profile',
@@ -52,7 +52,7 @@ export class ProfilePage extends Reinitable {
 
     public saveAvatar(data: string): void {
         if (data.slice(0, 7) !== 'http://' || data.slice(0, 8) !== 'https://') {
-            this.profileService.updateUser({avatar: data});
+            this.profileService.updateUser({ avatar: data});
         }
     }
 
@@ -73,7 +73,7 @@ export class ProfilePage extends Reinitable {
                 nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),
             })),
         ).subscribe(
-            ({user, languages, nationality}) => {
+            ({ user, languages, nationality}) => {
                 this.user = user;
                 this.languages = languages;
                 this.nationality = nationality;
@@ -89,7 +89,7 @@ export class ProfilePage extends Reinitable {
             },
         );
         forkJoin([
-            this.contactsReadonlyApi.get({is_default: '1'}),
+            this.contactsReadonlyApi.get({ is_default: '1'}),
             this.contactsApi.get(),
         ]).subscribe(
             ([defaultContacts, list]) => {

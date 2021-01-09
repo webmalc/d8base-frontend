@@ -1,9 +1,9 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {RouterTestingModule} from '@angular/router/testing';
-import {of} from 'rxjs';
-import {AuthenticationService} from './authentication.service';
-import {GlobalErrorHandlerService} from './global-error-handler.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
+import { GlobalErrorHandlerService } from './global-error-handler.service';
 
 describe('GlobalErrorHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -12,7 +12,7 @@ describe('GlobalErrorHandlerService', () => {
         ],
         providers: [
             GlobalErrorHandlerService,
-            {provide: AuthenticationService, useValue: {isAuthenticated: () => of(true)}},
+            { provide: AuthenticationService, useValue: { isAuthenticated: () => of(true)}},
         ],
     }));
 

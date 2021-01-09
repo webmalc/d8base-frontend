@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {SearchFiltersAdditionalTabComponent} from './search-filters-additional-tab.component';
+import { SearchFiltersAdditionalTabComponent } from './search-filters-additional-tab.component';
 
 describe('SearchFiltersAdditionalTabComponent', () => {
     let component: SearchFiltersAdditionalTabComponent;

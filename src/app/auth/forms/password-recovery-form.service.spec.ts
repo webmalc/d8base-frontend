@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {FormBuilder} from '@angular/forms';
-import {PasswordRecoveryFormService} from './password-recovery-form.service';
+import { FormBuilder } from '@angular/forms';
+import { PasswordRecoveryFormService } from './password-recovery-form.service';
 
 describe('PasswordRecoveryFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({

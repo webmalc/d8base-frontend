@@ -1,5 +1,5 @@
-import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
-import {Expose} from 'class-transformer';
+import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class UserContact implements ClientContactInterface {

@@ -1,5 +1,5 @@
-import {ReadonlyApiServiceInterface} from '@app/core/interfaces/readonly-api-service-interface';
-import {Observable} from 'rxjs';
+import { ReadonlyApiServiceInterface } from '@app/core/interfaces/readonly-api-service-interface';
+import { Observable } from 'rxjs';
 
 export interface ApiServiceInterface<T> extends ReadonlyApiServiceInterface<T> {
     create(data: Partial<T>): Observable<T>;

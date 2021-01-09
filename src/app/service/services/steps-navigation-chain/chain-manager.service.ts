@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {Handler} from '@app/service/interfaces/handler';
-import {StepFinalHandlerService} from '@app/service/services/steps-navigation-chain/step-final-handler.service';
-import {StepFiveHandlerService} from '@app/service/services/steps-navigation-chain/step-five-handler.service';
-import {StepFourHandlerService} from '@app/service/services/steps-navigation-chain/step-four-handler.service';
-import {StepOneHandlerService} from '@app/service/services/steps-navigation-chain/step-one-handler.service';
-import {StepSevenHandlerService} from '@app/service/services/steps-navigation-chain/step-seven-handler.service';
-import {StepSixHandlerService} from '@app/service/services/steps-navigation-chain/step-six-handler.service';
-import {StepThreeHandlerService} from '@app/service/services/steps-navigation-chain/step-three-handler.service';
-import {StepTwoHandlerService} from '@app/service/services/steps-navigation-chain/step-two-handler.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Handler } from '@app/service/interfaces/handler';
+import { StepFinalHandlerService } from '@app/service/services/steps-navigation-chain/step-final-handler.service';
+import { StepFiveHandlerService } from '@app/service/services/steps-navigation-chain/step-five-handler.service';
+import { StepFourHandlerService } from '@app/service/services/steps-navigation-chain/step-four-handler.service';
+import { StepOneHandlerService } from '@app/service/services/steps-navigation-chain/step-one-handler.service';
+import { StepSevenHandlerService } from '@app/service/services/steps-navigation-chain/step-seven-handler.service';
+import { StepSixHandlerService } from '@app/service/services/steps-navigation-chain/step-six-handler.service';
+import { StepThreeHandlerService } from '@app/service/services/steps-navigation-chain/step-three-handler.service';
+import { StepTwoHandlerService } from '@app/service/services/steps-navigation-chain/step-two-handler.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ChainManagerService {

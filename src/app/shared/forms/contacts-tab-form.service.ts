@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {Contact} from '@app/profile/models/contact';
-import {ClientContactInterface} from '@app/shared/interfaces/client-contact-interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Contact } from '@app/profile/models/contact';
+import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
 
 @Injectable()
 export class ContactsTabFormService {
@@ -30,7 +30,7 @@ export class ContactsTabFormService {
     }
 
     private generate(list: Contact[], userContactList: ClientContactInterface[]): object {
-        const def = {};
+        const def = { };
         list.forEach(contact => {
             def[contact.name] = [this.getUserContactValueByName(contact.name, userContactList)];
         });

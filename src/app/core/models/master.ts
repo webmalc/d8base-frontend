@@ -1,5 +1,5 @@
-import {ProfessionalList} from '@app/api/models';
-import {Expose} from 'class-transformer';
+import { ProfessionalList } from '@app/api/models';
+import { Expose } from 'class-transformer';
 
 // tslint:disable:variable-name
 export class Master implements ProfessionalList {

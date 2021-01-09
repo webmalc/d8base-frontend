@@ -1,10 +1,10 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {Price} from '@app/service/models/price';
-import {Service} from '@app/service/models/service';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {MasterProfileServiceEditComponent} from './master-profile-service-edit.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Price } from '@app/service/models/price';
+import { Service } from '@app/service/models/service';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { MasterProfileServiceEditComponent } from './master-profile-service-edit.component';
 
 describe('MasterProfileServiceEditComponent', () => {
     let component: MasterProfileServiceEditComponent;

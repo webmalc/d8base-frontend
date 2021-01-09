@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
-import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {UserLocation} from '@app/core/models/user-location';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {LocationTypes} from '@app/core/types/location-types';
-import {City} from '@app/profile/models/city';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { AbstractReadonlyApiService } from '@app/core/abstract/abstract-readonly-api.service';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { UserLocation } from '@app/core/models/user-location';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { LocationTypes } from '@app/core/types/location-types';
+import { City } from '@app/profile/models/city';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',

@@ -1,11 +1,11 @@
-import {Location} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {UserLocation} from '@app/core/models/user-location';
-import {LocationService} from '@app/core/services/location.service';
-import {UserLocationApiService} from '@app/core/services/location/user-location-api.service';
-import {ClientLocationInterface} from '@app/shared/interfaces/client-location-interface';
-import {plainToClass} from 'class-transformer';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserLocation } from '@app/core/models/user-location';
+import { LocationService } from '@app/core/services/location.service';
+import { UserLocationApiService } from '@app/core/services/location/user-location-api.service';
+import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
+import { plainToClass } from 'class-transformer';
 
 @Component({
     selector: 'app-user-location-edit',

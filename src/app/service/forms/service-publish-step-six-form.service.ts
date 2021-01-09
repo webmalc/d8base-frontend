@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {ServicePublishStepSixFormFields} from '@app/service/enums/service-publish-step-six-form-fields';
-import {StepSixDataInterface} from '@app/service/interfaces/step-six-data-interface';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ServicePublishStepSixFormFields } from '@app/service/enums/service-publish-step-six-form-fields';
+import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
 
 @Injectable()
 export class ServicePublishStepSixFormService {
@@ -20,7 +20,7 @@ export class ServicePublishStepSixFormService {
                 [Validators.required, Validators.minLength(1), Validators.maxLength(255)],
             ],
             [ServicePublishStepSixFormFields.Level]: [data?.level],
-        }, {validators: this.companyNameValidator});
+        }, { validators: this.companyNameValidator});
     }
 
     public isSubmitDisabled(): boolean {
@@ -29,9 +29,9 @@ export class ServicePublishStepSixFormService {
 
     private companyNameValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ServicePublishStepSixFormFields.IsCompany).value && !group.get(ServicePublishStepSixFormFields.CompanyName).value) {
-            group.get(ServicePublishStepSixFormFields.CompanyName).setErrors({emptyCompanyNameError: true});
+            group.get(ServicePublishStepSixFormFields.CompanyName).setErrors({ emptyCompanyNameError: true});
 
-            return {emptyCompanyNameError: true};
+            return { emptyCompanyNameError: true};
         }
 
         return null;

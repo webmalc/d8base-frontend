@@ -1,9 +1,9 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {FormBuilder} from '@angular/forms';
-import {User} from '../../core/models/user';
-import {ProfileFormFields} from '../enums/profile-form-fields';
-import {ProfileFormService} from './profile-form.service';
+import { FormBuilder } from '@angular/forms';
+import { User } from '../../core/models/user';
+import { ProfileFormFields } from '../enums/profile-form-fields';
+import { ProfileFormService } from './profile-form.service';
 
 describe('ProfileFormService', () => {
     let service: ProfileFormService;

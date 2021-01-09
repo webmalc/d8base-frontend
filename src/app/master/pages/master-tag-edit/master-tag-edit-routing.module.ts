@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {MasterTagEditPage} from './master-tag-edit.page';
+import { MasterTagEditPage } from './master-tag-edit.page';
 
 const routes: Routes = [
   {

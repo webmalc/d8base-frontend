@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {TranslateModule} from '@ngx-translate/core';
-import {DaySelectorComponent} from './day-selector.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { DaySelectorComponent } from './day-selector.component';
 
 describe('TimetableAddTimePopoverComponent', () => {
     let component: DaySelectorComponent;

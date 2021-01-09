@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {passwordValidators} from '@app/core/validators/password-validators';
-import {RegistrationFormFields} from '../enums/registration-form-fields';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { passwordValidators } from '@app/core/validators/password-validators';
+import { RegistrationFormFields } from '../enums/registration-form-fields';
 
 @Injectable()
 export class RegistrationFormService {
@@ -44,7 +44,7 @@ export class RegistrationFormService {
                 [RegistrationFormFields.City]: [''],
                 [RegistrationFormFields.Phone]: [''],
             },
-            {validators: this.checkPassword},
+            { validators: this.checkPassword},
         );
     }
 
@@ -58,9 +58,9 @@ export class RegistrationFormService {
 
     private checkPassword(group: FormGroup): ValidationErrors | null {
         if (group.get(RegistrationFormFields.Password).value !== group.get(RegistrationFormFields.Confirm).value) {
-            group.get(RegistrationFormFields.Confirm).setErrors({passwordMismatch: true});
+            group.get(RegistrationFormFields.Confirm).setErrors({ passwordMismatch: true});
 
-            return {passwordMismatch: true};
+            return { passwordMismatch: true};
         }
 
         return null;

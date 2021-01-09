@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {ProfessionalList} from '@app/api/models/professional-list';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {SavedProfessionalInterface} from '@app/core/interfaces/saved-professional.interface';
-import {Master} from '@app/core/models/master';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {environment} from '@env/environment';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ProfessionalList } from '@app/api/models/professional-list';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { SavedProfessionalInterface } from '@app/core/interfaces/saved-professional.interface';
+import { Master } from '@app/core/models/master';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SavedProfessionalApiService {

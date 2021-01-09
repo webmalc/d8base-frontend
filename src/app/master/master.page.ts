@@ -1,17 +1,17 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ProfessionalList, UserExtended} from '@app/api/models';
-import {MasterManagerService} from '@app/core/services/master-manager.service';
-import {UserManagerService} from '@app/core/services/user-manager.service';
-import {MasterProfileSubmenu} from '@app/master/enums/master-profile-submenu';
-import {MainInfoSectionComponentInputDataInterface} from '@app/master/interfaces/main-info-section-component-input-data-interface';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProfessionalList, UserExtended } from '@app/api/models';
+import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { UserManagerService } from '@app/core/services/user-manager.service';
+import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
+import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import {MasterProfileContextService} from '@app/master/services/master-profile-context.service';
-import {MasterReadonlyApiService} from '@app/master/services/master-readonly-api.service';
-import {ReviewsReadonlyApiService} from '@app/master/services/reviews-readonly-api.service';
-import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
-import {first, map, switchMap} from 'rxjs/operators';
+import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
+import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
+import { ReviewsReadonlyApiService } from '@app/master/services/reviews-readonly-api.service';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-master',
@@ -37,8 +37,8 @@ export class MasterPage {
     ) {
         this.createContext().subscribe(context => contextService.setContext(context));
         this.mainInfoSectionData$ = contextService.context$.pipe(
-            first(({user, master}) => Boolean(user) && Boolean(master)),
-            map(({user, master}) => ({
+            first(({ user, master}) => Boolean(user) && Boolean(master)),
+            map(({ user, master}) => ({
                 fullName: master.name ?? `${user.last_name ?? ''} ${user.first_name ?? ''}`,
                 company: master.company,
                 avatar: user.avatar,
@@ -62,14 +62,14 @@ export class MasterPage {
                 ),
                 user: this.userManager.getCurrentUser(),
             }) :
-            this.masterReadonly.getByEntityId(masterId).pipe(map(res => ({master: res, user: res.user})));
+            this.masterReadonly.getByEntityId(masterId).pipe(map(res => ({ master: res, user: res.user})));
     }
 
     private createContext(): Observable<MasterProfileContext> {
         const masterId = Number.parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
 
         return this.getUserMaster(masterId).pipe(
-            map(({user, master}) => ({user, master, canEdit: Number.isNaN(masterId)})),
+            map(({ user, master}) => ({ user, master, canEdit: Number.isNaN(masterId)})),
         );
     }
 }

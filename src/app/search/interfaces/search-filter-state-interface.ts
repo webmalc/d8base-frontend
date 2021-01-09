@@ -29,5 +29,5 @@ export interface SearchFilterStateInterface {
             end: string;
         };
     };
-    additional: {};
+    additional: { };
 }

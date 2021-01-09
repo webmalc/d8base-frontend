@@ -1,5 +1,5 @@
-import {UserLanguage} from '@app/api/models';
-import {Country} from '@app/profile/models/country';
+import { UserLanguage } from '@app/api/models';
+import { Country } from '@app/profile/models/country';
 
 export interface PartialUserInterface {
     id: number;

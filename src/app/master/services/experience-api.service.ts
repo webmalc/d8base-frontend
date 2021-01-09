@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {AbstractApiService} from '@app/core/abstract/abstract-api.service';
-import {ApiListResponseInterface} from '@app/core/interfaces/api-list-response.interface';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {Experience} from '@app/master/models/experience';
-import {environment} from '@env/environment';
-import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AbstractApiService } from '@app/core/abstract/abstract-api.service';
+import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { Experience } from '@app/master/models/experience';
+import { environment } from '@env/environment';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ExperienceApiService extends AbstractApiService<Experience> implements ApiServiceInterface<Experience> {
@@ -18,7 +18,7 @@ export class ExperienceApiService extends AbstractApiService<Experience> impleme
     }
 
     public getByMasterId(masterId: number): Observable<ApiListResponseInterface<Experience>> {
-        return super.get({professional: masterId?.toString(10)});
+        return super.get({ professional: masterId?.toString(10)});
     }
 
     protected getUrl(): string {

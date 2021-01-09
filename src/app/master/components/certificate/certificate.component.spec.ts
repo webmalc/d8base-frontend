@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {Certificate} from '@app/master/models/certificate';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {plainToClass} from 'class-transformer';
-import {CertificateComponent} from './certificate.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Certificate } from '@app/master/models/certificate';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { plainToClass } from 'class-transformer';
+import { CertificateComponent } from './certificate.component';
 
 describe('CertificateComponent', () => {
     let component: CertificateComponent;

@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProfessionalEducationInline } from '@app/api/models';
-import {Education} from '@app/master/models/education';
+import { Education } from '@app/master/models/education';
 
 @Component({
     selector: 'app-education',

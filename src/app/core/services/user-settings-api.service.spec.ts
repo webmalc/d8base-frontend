@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {UserSettingsApiService} from './user-settings-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UserSettingsApiService } from './user-settings-api.service';
 
 describe('UserSettingsApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({

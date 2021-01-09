@@ -1,16 +1,16 @@
-import {Component} from '@angular/core';
-import {Currency} from '@app/core/models/currency';
-import {CurrencyListApiService} from '@app/core/services/currency-list-api.service';
-import {ServicePublishStepTwoFormFields} from '@app/service/enums/service-publish-step-two-form-fields';
-import {ServicePublishSteps} from '@app/service/enums/service-publish-steps';
-import {ServicePublishStepTwoFormService} from '@app/service/forms/service-publish-step-two-form.service';
-import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
-import {ServicePublishDataHolderService} from '@app/service/services/service-publish-data-holder.service';
-import {ServiceStepsNavigationService} from '@app/service/services/service-steps-navigation.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {UserSettingsService} from '@app/shared/services/user-settings.service';
-import {BehaviorSubject, of} from 'rxjs';
-import {first, switchMap} from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { Currency } from '@app/core/models/currency';
+import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
+import { ServicePublishStepTwoFormFields } from '@app/service/enums/service-publish-step-two-form-fields';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { ServicePublishStepTwoFormService } from '@app/service/forms/service-publish-step-two-form.service';
+import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
+import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
+import { Reinitable } from '@app/shared/abstract/reinitable';
+import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { BehaviorSubject, of } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-publish-step-two',

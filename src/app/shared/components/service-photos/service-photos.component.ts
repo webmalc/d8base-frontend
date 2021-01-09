@@ -50,7 +50,7 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
         private readonly servicesService: ServicesService,
         private readonly cd: ChangeDetectorRef,
         private readonly modalController: ModalController,
-    ) {}
+    ) { }
 
     public ngOnInit(): void {
         this.subscribeServicePhotos();

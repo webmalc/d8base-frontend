@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {ExtendedLocation} from '@app/core/models/extended-location';
-import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
-import {deserialize, serialize} from 'class-transformer';
+import { Injectable } from '@angular/core';
+import { ExtendedLocation } from '@app/core/models/extended-location';
+import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { deserialize, serialize } from 'class-transformer';
 
 @Injectable({
     providedIn: 'root',

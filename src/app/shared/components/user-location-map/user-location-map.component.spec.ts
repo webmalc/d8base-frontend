@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {UserLocationMapComponent} from './user-location-map.component';
+import { UserLocationMapComponent } from './user-location-map.component';
 
 describe('UserLocationMapComponent', () => {
     let component: UserLocationMapComponent;

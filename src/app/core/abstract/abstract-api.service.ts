@@ -1,11 +1,11 @@
-import {AbstractReadonlyApiService} from '@app/core/abstract/abstract-readonly-api.service';
-import {ApiServiceInterface} from '@app/core/interfaces/api-service-interface';
-import {ApiClientService} from '@app/core/services/api-client.service';
-import {HelperService} from '@app/core/services/helper.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { AbstractReadonlyApiService } from '@app/core/abstract/abstract-readonly-api.service';
+import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import { HelperService } from '@app/core/services/helper.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-export abstract class AbstractApiService<T extends {id: number}> extends AbstractReadonlyApiService<T>
+export abstract class AbstractApiService<T extends { id: number}> extends AbstractReadonlyApiService<T>
     implements ApiServiceInterface<T> {
 
     protected constructor(protected client: ApiClientService) {

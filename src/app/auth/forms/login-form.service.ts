@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoginFormFields} from '../enums/login-form-fields';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginFormFields } from '../enums/login-form-fields';
 
 @Injectable()
 export class LoginFormService {

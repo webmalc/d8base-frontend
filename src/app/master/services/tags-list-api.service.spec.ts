@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TagsListApiService} from './tags-list-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TagsListApiService } from './tags-list-api.service';
 
 describe('TagsListApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({

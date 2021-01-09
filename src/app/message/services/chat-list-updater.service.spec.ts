@@ -1,13 +1,13 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {NotificationWorkerService} from '../../core/services/notification-worker.service';
-import {ChatListUpdaterService} from './chat-list-updater.service';
-import {ChatsCompilerService} from './chats-compiler.service';
-import {LatestMessagesApiService} from './latest-messages-api.service';
-import {MessagesListApiService} from './messages-list-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../../core/proxies/storage-manager.service';
+import { NotificationWorkerService } from '../../core/services/notification-worker.service';
+import { ChatListUpdaterService } from './chat-list-updater.service';
+import { ChatsCompilerService } from './chats-compiler.service';
+import { LatestMessagesApiService } from './latest-messages-api.service';
+import { MessagesListApiService } from './messages-list-api.service';
 
 describe('ChatListUpdaterService', () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -20,7 +20,7 @@ describe('ChatListUpdaterService', () => {
             ChatsCompilerService,
             LatestMessagesApiService,
             MessagesListApiService,
-            {provide: StorageManagerService, useClass: StorageManagerMock},
+            { provide: StorageManagerService, useClass: StorageManagerMock},
         ],
     }));
 

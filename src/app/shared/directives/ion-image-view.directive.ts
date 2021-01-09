@@ -10,7 +10,7 @@ export class IonImageViewDirective {
     @Input() private readonly fullSizeSrc: string;
     @Input() private readonly src: string;
 
-    constructor(private readonly modalController: ModalController) {}
+    constructor(private readonly modalController: ModalController) { }
     @HostListener('click')
     private viewImage(): void {
         this.createPopover(this.fullSizeSrc ?? this.src);

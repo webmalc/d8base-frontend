@@ -1,14 +1,14 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {IonicStorageModule} from '@ionic/storage';
-import {of} from 'rxjs';
-import {LocationServiceMock, StorageManagerMock} from 'src/testing/mocks';
-import {User} from '../../core/models/user';
-import {StorageManagerService} from '../../core/proxies/storage-manager.service';
-import {ApiClientService} from '../../core/services/api-client.service';
-import {LocationService} from '../../core/services/location/location.service';
-import {AuthResponseInterface} from '../interfaces/auth-response.interface';
-import {RegistrationService} from './registration.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { IonicStorageModule } from '@ionic/storage';
+import { of } from 'rxjs';
+import { LocationServiceMock, StorageManagerMock } from 'src/testing/mocks';
+import { User } from '../../core/models/user';
+import { StorageManagerService } from '../../core/proxies/storage-manager.service';
+import { ApiClientService } from '../../core/services/api-client.service';
+import { LocationService } from '../../core/services/location/location.service';
+import { AuthResponseInterface } from '../interfaces/auth-response.interface';
+import { RegistrationService } from './registration.service';
 
 describe('RegistrationService', () => {
     const userModel = new User();
@@ -31,9 +31,9 @@ describe('RegistrationService', () => {
         ],
         providers: [
             RegistrationService,
-            {provide: StorageManagerService, useClass: StorageManagerMock},
-            {provide: LocationService, useClass: LocationServiceMock},
-            {provide: ApiClientService, useValue: {post: () => of({token: tokenData, ...userModel})}},
+            { provide: StorageManagerService, useClass: StorageManagerMock},
+            { provide: LocationService, useClass: LocationServiceMock},
+            { provide: ApiClientService, useValue: { post: () => of({ token: tokenData, ...userModel})}},
         ],
     }));
 

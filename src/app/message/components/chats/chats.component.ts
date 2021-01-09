@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {ChatsService} from '@app/message/services/chats.service';
-import {Reinitable} from '@app/shared/abstract/reinitable';
-import {IonSearchbar} from '@ionic/angular';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChatsService } from '@app/message/services/chats.service';
+import { Reinitable } from '@app/shared/abstract/reinitable';
+import { IonSearchbar } from '@ionic/angular';
 
 @Component({
     selector: 'app-chats',
