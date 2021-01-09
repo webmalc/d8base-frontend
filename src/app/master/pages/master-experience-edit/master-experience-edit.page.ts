@@ -7,34 +7,34 @@ import { ExperienceApiService } from '@app/master/services/experience-api.servic
 import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
 
 @Component({
-    selector: 'app-master-experience-edit',
-    templateUrl: './master-experience-edit.page.html',
-    styleUrls: ['./master-experience-edit.page.scss'],
+  selector: 'app-master-experience-edit',
+  templateUrl: './master-experience-edit.page.html',
+  styleUrls: ['./master-experience-edit.page.scss'],
 })
 export class MasterExperienceEditPage extends AbstractModelEditPage<Experience> {
 
-    constructor(
-        protected readonly experienceApi: ExperienceApiService,
-        protected readonly route: ActivatedRoute,
-        protected readonly masterManager: MasterManagerService,
-        protected readonly location: Location,
-    ) {
-        super(route, experienceApi, masterManager);
-    }
+  constructor(
+    protected readonly experienceApi: ExperienceApiService,
+    protected readonly route: ActivatedRoute,
+    protected readonly masterManager: MasterManagerService,
+    protected readonly location: Location,
+  ) {
+    super(route, experienceApi, masterManager);
+  }
 
-    protected afterApiCallback(): void {
-        this.location.back();
-    }
+  protected afterApiCallback(): void {
+    this.location.back();
+  }
 
-    protected getItemId(): number {
-        return parseInt(this.route.snapshot.paramMap.get('experience-id'), 10);
-    }
+  protected getItemId(): number {
+    return parseInt(this.route.snapshot.paramMap.get('experience-id'), 10);
+  }
 
-    protected getNewModel(): Experience {
-        return new Experience();
-    }
+  protected getNewModel(): Experience {
+    return new Experience();
+  }
 
-    protected isUserOnly(): boolean {
-        return false;
-    }
+  protected isUserOnly(): boolean {
+    return false;
+  }
 }

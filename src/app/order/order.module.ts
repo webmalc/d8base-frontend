@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationPageModule } from '@app/auth/pages/registration/registration.module';
 import {
-    ClientDetailsStepComponent, ClientIdentificationComponent,
-    DateTimeStepComponent,
-    LocationStepComponent,
-    OrderConfirmationComponent,
-    SummaryStepComponent,
+  ClientDetailsStepComponent, ClientIdentificationComponent,
+  DateTimeStepComponent,
+  LocationStepComponent,
+  OrderConfirmationComponent,
+  SummaryStepComponent,
 } from '@app/order/components';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
@@ -20,28 +20,28 @@ import { OrderPage } from './order.page';
 import { OrderWizardStateService } from './services';
 
 @NgModule({
-    declarations: [
-        OrderPage,
-        DateTimeStepComponent,
-        LocationStepComponent,
-        ClientDetailsStepComponent,
-        SummaryStepComponent,
-        OrderConfirmationComponent,
-        StepContainerComponent,
-        ClientIdentificationComponent,
-    ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        IonicModule,
-        TranslateModule,
-        OrderRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        IonicSelectableModule,
-        RegistrationPageModule,
-    ],
-    providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService],
+  declarations: [
+    OrderPage,
+    DateTimeStepComponent,
+    LocationStepComponent,
+    ClientDetailsStepComponent,
+    SummaryStepComponent,
+    OrderConfirmationComponent,
+    StepContainerComponent,
+    ClientIdentificationComponent,
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    IonicModule,
+    TranslateModule,
+    OrderRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    IonicSelectableModule,
+    RegistrationPageModule,
+  ],
+  providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService],
 })
 export class OrderPageModule {
 }

@@ -8,36 +8,36 @@ import { CertificatesApiService } from '../../services/certificates-api.service'
 import { MasterCertificateEditPage } from './master-certificate-edit.page';
 
 describe('MasterCertificateEditPage', () => {
-    let component: MasterCertificateEditPage;
-    let fixture: ComponentFixture<MasterCertificateEditPage>;
+  let component: MasterCertificateEditPage;
+  let fixture: ComponentFixture<MasterCertificateEditPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MasterCertificateEditPage],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
-            providers: [
-                {
-                    provide: ActivatedRoute, useValue: {
-                        snapshot: {
-                            paramMap: {
-                                get(): string {
-                                    return '';
-                                },
-                            },
-                        },
-                    },
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MasterCertificateEditPage],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute, useValue: {
+            snapshot: {
+              paramMap: {
+                get(): string {
+                  return '';
                 },
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                CertificatesApiService,
-            ],
-        }).compileComponents();
+              },
+            },
+          },
+        },
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        CertificatesApiService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MasterCertificateEditPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MasterCertificateEditPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

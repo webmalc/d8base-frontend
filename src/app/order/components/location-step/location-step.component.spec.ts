@@ -8,22 +8,22 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocationStepComponent } from './location-step.component';
 
 describe('LocationStepComponent', () => {
-    let component: LocationStepComponent;
-    let fixture: ComponentFixture<LocationStepComponent>;
+  let component: LocationStepComponent;
+  let fixture: ComponentFixture<LocationStepComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [LocationStepComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
-            providers: [OrderWizardStateService],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LocationStepComponent],
+      imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+      providers: [OrderWizardStateService],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(LocationStepComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(LocationStepComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

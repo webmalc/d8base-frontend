@@ -11,25 +11,25 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class EducationApiService extends AbstractApiService<Education> implements ApiServiceInterface<Education> {
 
-    private readonly url = environment.backend.education;
+  private readonly url = environment.backend.education;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public getByMasterId(
-        masterId: number,
-        params?: { [param: string]: string | string[]; },
-    ): Observable<ApiListResponseInterface<Education>> {
-        return super.get({ professional: masterId?.toString(10), ...params});
-    }
+  public getByMasterId(
+    masterId: number,
+    params?: { [param: string]: string | string[]; },
+  ): Observable<ApiListResponseInterface<Education>> {
+    return super.get({ professional: masterId?.toString(10), ...params });
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: Education | Education[]): Education | Education[] {
-        return plainToClass(Education, data);
-    }
+  // @ts-ignore
+  protected transform(data: Education | Education[]): Education | Education[] {
+    return plainToClass(Education, data);
+  }
 }

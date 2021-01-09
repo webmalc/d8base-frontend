@@ -1,4 +1,4 @@
 export enum TypeOfUser {
-    User = 'user',
-    Master = 'professional',
+  User = 'user',
+  Master = 'professional',
 }

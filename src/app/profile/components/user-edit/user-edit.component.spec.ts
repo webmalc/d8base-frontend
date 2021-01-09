@@ -10,28 +10,28 @@ import { RegisterEmailApiService } from '../../services/register-email-api.servi
 import { UserEditComponent } from './user-edit.component';
 
 describe('UserEditComponent', () => {
-    let component: UserEditComponent;
-    let fixture: ComponentFixture<UserEditComponent>;
+  let component: UserEditComponent;
+  let fixture: ComponentFixture<UserEditComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [UserEditComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
-            providers: [
-                ProfileService,
-                Location,
-                FormBuilder,
-                RegisterEmailApiService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [UserEditComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule],
+      providers: [
+        ProfileService,
+        Location,
+        FormBuilder,
+        RegisterEmailApiService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(UserEditComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(UserEditComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

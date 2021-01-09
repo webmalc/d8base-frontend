@@ -9,15 +9,15 @@ import { MasterCertificateEditPageRoutingModule } from './master-certificate-edi
 import { MasterCertificateEditPage } from './master-certificate-edit.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MasterCertificateEditPageRoutingModule,
-        TranslateModule,
-        SharedModule,
-    ],
-    declarations: [MasterCertificateEditPage, CertificateEditComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MasterCertificateEditPageRoutingModule,
+    TranslateModule,
+    SharedModule,
+  ],
+  declarations: [MasterCertificateEditPage, CertificateEditComponent],
 })
 export class MasterCertificateEditPageModule {
 }

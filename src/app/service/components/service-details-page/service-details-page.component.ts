@@ -9,40 +9,40 @@ import { Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-service-details-page',
-    templateUrl: './service-details-page.component.html',
-    styleUrls: ['./service-details-page.component.scss'],
+  selector: 'app-service-details-page',
+  templateUrl: './service-details-page.component.html',
+  styleUrls: ['./service-details-page.component.scss'],
 })
 export class ServiceDetailsPageComponent {
 
-    public service: Service;
-    public master: ProfessionalList;
-    public showSuccessOrderNotification$: Observable<boolean>;
+  public service: Service;
+  public master: ProfessionalList;
+  public showSuccessOrderNotification$: Observable<boolean>;
 
-    constructor(
-        public location: Location,
-        route: ActivatedRoute,
-        servicesApi: ServicesReadonlyApiService,
-        masterApi: MasterReadonlyApiService,
-    ) {
-        route.params.pipe(
-            first(params => Boolean(params?.id)),
-            switchMap(params => servicesApi.getByEntityId(params.id).pipe(
-                switchMap(service => masterApi.getByEntityId(service.professional).pipe(
-                map((master) => {
-                    return {
-                        master,
-                        service,
-                    };
-                }))),
-            )),
-        ).subscribe(({ master, service }) => {
-            this.master = master;
-            this.service = service;
-        });
-        this.showSuccessOrderNotification$ = route.queryParams.pipe(
-            first(),
-            map(params => params.from === 'publish'),
-        );
-    }
+  constructor(
+    public location: Location,
+    route: ActivatedRoute,
+    servicesApi: ServicesReadonlyApiService,
+    masterApi: MasterReadonlyApiService,
+  ) {
+    route.params.pipe(
+      first(params => Boolean(params?.id)),
+      switchMap(params => servicesApi.getByEntityId(params.id).pipe(
+        switchMap(service => masterApi.getByEntityId(service.professional).pipe(
+          map((master) => {
+            return {
+              master,
+              service,
+            };
+          }))),
+      )),
+    ).subscribe(({ master, service }) => {
+      this.master = master;
+      this.service = service;
+    });
+    this.showSuccessOrderNotification$ = route.queryParams.pipe(
+      first(),
+      map(params => params.from === 'publish'),
+    );
+  }
 }

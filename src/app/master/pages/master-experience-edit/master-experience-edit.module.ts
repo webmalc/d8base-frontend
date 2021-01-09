@@ -9,18 +9,18 @@ import { MasterExperienceEditPageRoutingModule } from './master-experience-edit-
 import { MasterExperienceEditPage } from './master-experience-edit.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        SharedModule,
-        MasterExperienceEditPageRoutingModule,
-        TranslateModule,
-    ],
-    declarations: [
-        MasterExperienceEditPage,
-        ExperienceEditComponent,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SharedModule,
+    MasterExperienceEditPageRoutingModule,
+    TranslateModule,
+  ],
+  declarations: [
+    MasterExperienceEditPage,
+    ExperienceEditComponent,
+  ],
 })
 export class MasterExperienceEditPageModule {
 }

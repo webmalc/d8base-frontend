@@ -6,24 +6,24 @@ import { StorageManagerMock } from 'src/testing/mocks';
 import { MasterPickerPopoverComponent } from './master-picker-popover.component';
 
 describe('MasterPickerPopoverComponent', () => {
-    let component: MasterPickerPopoverComponent;
-    let fixture: ComponentFixture<MasterPickerPopoverComponent>;
+  let component: MasterPickerPopoverComponent;
+  let fixture: ComponentFixture<MasterPickerPopoverComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MasterPickerPopoverComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
-            providers: [
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MasterPickerPopoverComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule],
+      providers: [
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MasterPickerPopoverComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MasterPickerPopoverComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

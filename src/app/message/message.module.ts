@@ -20,31 +20,31 @@ import { MessagePage } from './message.page';
 import { ChatsSearchService } from './services/chats-search.service';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MessagePageRoutingModule,
-        SharedModule,
-        TranslateModule,
-    ],
-    declarations: [
-        MessagePage,
-        DirectComponent,
-        ChatsComponent,
-        ContextMenuPopoverComponent,
-    ],
-    providers: [
-        ChatsCompilerService,
-        LatestMessagesApiService,
-        MessagesListApiService,
-        MessagesSentApiService,
-        MessageListUpdaterService,
-        ChatListUpdaterService,
-        DirectServiceService,
-        ChatsService,
-        ChatsSearchService,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MessagePageRoutingModule,
+    SharedModule,
+    TranslateModule,
+  ],
+  declarations: [
+    MessagePage,
+    DirectComponent,
+    ChatsComponent,
+    ContextMenuPopoverComponent,
+  ],
+  providers: [
+    ChatsCompilerService,
+    LatestMessagesApiService,
+    MessagesListApiService,
+    MessagesSentApiService,
+    MessageListUpdaterService,
+    ChatListUpdaterService,
+    DirectServiceService,
+    ChatsService,
+    ChatsSearchService,
+  ],
 })
 export class MessagePageModule {
 }

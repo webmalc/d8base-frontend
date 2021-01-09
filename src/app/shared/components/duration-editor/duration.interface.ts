@@ -1,5 +1,5 @@
 export interface Duration {
-    days: number;
-    hours: number;
-    minutes: number;
+  days: number;
+  hours: number;
+  minutes: number;
 }

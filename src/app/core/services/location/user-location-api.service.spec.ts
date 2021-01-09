@@ -5,10 +5,10 @@ import { UserLocationApiService } from './user-location-api.service';
 
 describe('LocationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-          UserLocationApiService,
-      ],
+    imports: [HttpClientTestingModule],
+    providers: [
+      UserLocationApiService,
+    ],
   }));
 
   it('should be created', () => {

@@ -8,27 +8,27 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class MasterContactsReadonlyApiService {
 
-    private readonly url = environment.backend.master_list;
+  private readonly url = environment.backend.master_list;
 
-    constructor(private readonly client: ApiClientService) {
-    }
+  constructor(private readonly client: ApiClientService) {
+  }
 
-    public getByClientId(id: number): Observable<ApiListResponseInterface<MasterContact>> {
-        return this.client.get<{ contacts: MasterContact[] }>(this.getUrl() + id.toString()).pipe(
-            map(data => ({ count: data.contacts.length, results: data.contacts, next: null, previous: null})),
-        );
-    }
+  public getByClientId(id: number): Observable<ApiListResponseInterface<MasterContact>> {
+    return this.client.get<{ contacts: MasterContact[] }>(this.getUrl() + id.toString()).pipe(
+      map(data => ({ count: data.contacts.length, results: data.contacts, next: null, previous: null })),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: MasterContact | MasterContact[]): MasterContact | MasterContact[] {
-        return plainToClass(MasterContact, data);
-    }
+  // @ts-ignore
+  protected transform(data: MasterContact | MasterContact[]): MasterContact | MasterContact[] {
+    return plainToClass(MasterContact, data);
+  }
 }

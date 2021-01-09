@@ -25,47 +25,47 @@ import { StepTwoHandlerService } from '../../services/steps-navigation-chain/ste
 import { ServicePublishStepSevenComponent } from './service-publish-step-seven.component';
 
 describe('ServicePublishStepSevenComponent', () => {
-    let component: ServicePublishStepSevenComponent;
-    let fixture: ComponentFixture<ServicePublishStepSevenComponent>;
+  let component: ServicePublishStepSevenComponent;
+  let fixture: ComponentFixture<ServicePublishStepSevenComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServicePublishStepSevenComponent],
-            imports: [
-                IonicModule.forRoot(),
-                ReactiveFormsModule,
-                FormsModule,
-                RouterTestingModule,
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-            providers: [
-                ServicePublishStepSevenFormService,
-                ServicePublishDataHolderService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                SelectableCountryOnSearchService,
-                SelectableCityOnSearchService,
-                SelectablePostalCodeOnSearchService,
-                ServiceStepsNavigationService,
-                ServicePublishAuthStateManagerService,
-                ChainManagerService,
-                StepOneHandlerService,
-                StepTwoHandlerService,
-                StepThreeHandlerService,
-                StepFourHandlerService,
-                StepFiveHandlerService,
-                StepSixHandlerService,
-                StepSevenHandlerService,
-                StepFinalHandlerService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServicePublishStepSevenComponent],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        ServicePublishStepSevenFormService,
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        SelectableCountryOnSearchService,
+        SelectableCityOnSearchService,
+        SelectablePostalCodeOnSearchService,
+        ServiceStepsNavigationService,
+        ServicePublishAuthStateManagerService,
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServicePublishStepSevenComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServicePublishStepSevenComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -10,29 +10,29 @@ import { ServicePublishDataHolderService } from '../../services/service-publish-
 import { TimetableComponent } from './timetable.component';
 
 describe('TimetableComponent', () => {
-    let component: TimetableComponent;
-    let fixture: ComponentFixture<TimetableComponent>;
+  let component: TimetableComponent;
+  let fixture: ComponentFixture<TimetableComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TimetableComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-            ],
-            providers: [
-                ServicePublishDataHolderService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TimetableComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+      ],
+      providers: [
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(TimetableComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(TimetableComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

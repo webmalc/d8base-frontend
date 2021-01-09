@@ -7,22 +7,22 @@ import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class ReviewsApiService extends AbstractApiService<Review> implements ApiServiceInterface<Review> {
 
-    private readonly URL = environment.backend.reviews;
+  private readonly URL = environment.backend.reviews;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.URL;
-    }
+  protected getUrl(): string {
+    return this.URL;
+  }
 
-    // @ts-ignore
-    protected transform(data: Review[] | Review): Review[] | Review {
-        return plainToClass(Review, data);
-    }
+  // @ts-ignore
+  protected transform(data: Review[] | Review): Review[] | Review {
+    return plainToClass(Review, data);
+  }
 }

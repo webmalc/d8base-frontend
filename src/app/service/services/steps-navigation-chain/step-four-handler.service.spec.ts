@@ -8,20 +8,20 @@ import { ServicePublishDataHolderService } from '../service-publish-data-holder.
 import { StepFourHandlerService } from './step-four-handler.service';
 
 describe('StepFourHandlerService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            HttpClientTestingModule,
-        ],
-        providers: [
-            StepFourHandlerService,
-            ServicePublishDataHolderService,
-            AuthenticationService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule,
+    ],
+    providers: [
+      StepFourHandlerService,
+      ServicePublishDataHolderService,
+      AuthenticationService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: StepFourHandlerService = TestBed.inject(StepFourHandlerService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: StepFourHandlerService = TestBed.inject(StepFourHandlerService);
+    expect(service).toBeTruthy();
+  });
 });

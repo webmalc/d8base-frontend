@@ -5,7 +5,7 @@ import { Service } from '@app/service/models/service';
 
 @Injectable()
 export class ServicesApiCache extends ApiCache<Service> {
-    constructor(protected readonly apiService: ServicesReadonlyApiService) {
-        super();
-    }
+  constructor(protected readonly apiService: ServicesReadonlyApiService) {
+    super();
+  }
 }

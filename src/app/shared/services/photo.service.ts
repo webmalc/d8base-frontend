@@ -3,14 +3,14 @@ import { Camera, CameraPhoto, CameraResultType, CameraSource } from '@capacitor/
 
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class PhotoService {
-    public createPhoto(quality: number = 100): Promise<CameraPhoto> {
-         return Camera.getPhoto({
-            resultType: CameraResultType.Uri,
-            source: CameraSource.Prompt,
-            quality,
-        });
-    }
+  public createPhoto(quality: number = 100): Promise<CameraPhoto> {
+    return Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Prompt,
+      quality,
+    });
+  }
 }

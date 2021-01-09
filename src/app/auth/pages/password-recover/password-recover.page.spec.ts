@@ -11,33 +11,33 @@ import { PasswordRecoveryService } from '../../services/password-recovery.servic
 import { PasswordRecoverPage } from './password-recover.page';
 
 describe('PasswordRecoverPage', () => {
-    let component: PasswordRecoverPage;
-    let fixture: ComponentFixture<PasswordRecoverPage>;
+  let component: PasswordRecoverPage;
+  let fixture: ComponentFixture<PasswordRecoverPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
-            providers: [
-                PasswordRecoveryService,
-                PasswordRecoveryFormService,
-                { provide: ApiClientService, useValue: { post: () => of()}},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
+      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+      providers: [
+        PasswordRecoveryService,
+        PasswordRecoveryFormService,
+        { provide: ApiClientService, useValue: { post: () => of() } },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(PasswordRecoverPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(PasswordRecoverPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    it('test nested component exists', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('app-password-recovery-form')).not.toBe(null);
-        expect(compiled.querySelector('app-password-recovery-form ion-input[name="email"]')).not.toBe(null);
-        expect(compiled.querySelector('app-password-recovery-form ion-button[type="submit"]')).not.toBe(null);
-    });
+  it('test nested component exists', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-password-recovery-form')).not.toBe(null);
+    expect(compiled.querySelector('app-password-recovery-form ion-input[name="email"]')).not.toBe(null);
+    expect(compiled.querySelector('app-password-recovery-form ion-button[type="submit"]')).not.toBe(null);
+  });
 });

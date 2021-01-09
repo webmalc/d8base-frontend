@@ -7,26 +7,26 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ServiceDetailsPageComponent } from './service-details-page.component';
 
 describe('ServiceDetailsPageComponent', () => {
-    let component: ServiceDetailsPageComponent;
-    let fixture: ComponentFixture<ServiceDetailsPageComponent>;
+  let component: ServiceDetailsPageComponent;
+  let fixture: ComponentFixture<ServiceDetailsPageComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServiceDetailsPageComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServiceDetailsPageComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServiceDetailsPageComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServiceDetailsPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

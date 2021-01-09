@@ -1,3 +1,3 @@
 export interface StepThreeDataInterface {
-    photos: File[];
+  photos: File[];
 }

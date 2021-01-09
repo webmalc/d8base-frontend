@@ -10,28 +10,28 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OrderDetailsComponent } from './order-details.component';
 
 describe('OrderDetailsComponent', () => {
-    let component: OrderDetailsComponent;
-    let fixture: ComponentFixture<OrderDetailsComponent>;
+  let component: OrderDetailsComponent;
+  let fixture: ComponentFixture<OrderDetailsComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [OrderDetailsComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
-                SharedModule,
-            ],
-            providers: [OrderWizardStateService, ServicesApiCache],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [OrderDetailsComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+        SharedModule,
+      ],
+      providers: [OrderWizardStateService, ServicesApiCache],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(OrderDetailsComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(OrderDetailsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

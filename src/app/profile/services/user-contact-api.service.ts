@@ -12,37 +12,37 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class UserContactApiService extends AbstractApiService<ClientContactInterface>
-    implements ContactsApiServiceInterface, Partial<ApiServiceInterface<UserContact>> {
+  implements ContactsApiServiceInterface, Partial<ApiServiceInterface<UserContact>> {
 
-    private readonly url = environment.backend.user_contact;
+  private readonly url = environment.backend.user_contact;
 
-    constructor(private readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(private readonly client: ApiClientService) {
+    super(client);
+  }
 
-    public getByClientId(): Observable<ApiListResponseInterface<ClientContactInterface>> {
-        return this.getCurrentClientContacts();
-    }
+  public getByClientId(): Observable<ApiListResponseInterface<ClientContactInterface>> {
+    return this.getCurrentClientContacts();
+  }
 
-    public getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>> {
-        return this.client.get<ApiListResponseInterface<UserContact>>(this.url).pipe(
-            map(response => {
-                response.results = plainToClass(UserContact, response.results);
+  public getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>> {
+    return this.client.get<ApiListResponseInterface<UserContact>>(this.url).pipe(
+      map(response => {
+        response.results = plainToClass(UserContact, response.results);
 
-                return response;
-            }),
-        );
-    }
+        return response;
+      }),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: ClientContactInterface | ClientContactInterface[]): ClientContactInterface | ClientContactInterface[] {
-        return plainToClass(UserContact, data);
-    }
+  // @ts-ignore
+  protected transform(data: ClientContactInterface | ClientContactInterface[]): ClientContactInterface | ClientContactInterface[] {
+    return plainToClass(UserContact, data);
+  }
 }

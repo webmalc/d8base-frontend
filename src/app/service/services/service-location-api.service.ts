@@ -8,18 +8,18 @@ import { plainToClass } from 'class-transformer';
 @Injectable()
 export class ServiceLocationApiService extends AbstractApiService<ServiceLocation> {
 
-    private readonly url = environment.backend.service_location;
+  private readonly url = environment.backend.service_location;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: ServiceLocation | ServiceLocation[]): ServiceLocation | ServiceLocation[] {
-        return plainToClass(ServiceLocation, data);
-    }
+  // @ts-ignore
+  protected transform(data: ServiceLocation | ServiceLocation[]): ServiceLocation | ServiceLocation[] {
+    return plainToClass(ServiceLocation, data);
+  }
 }

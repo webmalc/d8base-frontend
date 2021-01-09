@@ -11,23 +11,23 @@ import { PasswordRecoverPageRoutingModule } from './password-recover-routing.mod
 import { PasswordRecoverPage } from './password-recover.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        PasswordRecoverPageRoutingModule,
-        SharedModule,
-        ReactiveFormsModule,
-        TranslateModule,
-    ],
-    declarations: [
-        PasswordRecoverPage,
-        PasswordRecoveryFormComponent,
-    ],
-    providers: [
-        PasswordRecoveryFormService,
-        PasswordRecoveryService,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    PasswordRecoverPageRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
+  declarations: [
+    PasswordRecoverPage,
+    PasswordRecoveryFormComponent,
+  ],
+  providers: [
+    PasswordRecoveryFormService,
+    PasswordRecoveryService,
+  ],
 })
 export class PasswordRecoverPageModule {
 }

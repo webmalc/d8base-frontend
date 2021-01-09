@@ -11,67 +11,67 @@ import { BehaviorSubject, concat, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-master-profile-calendar',
-    templateUrl: './master-profile-calendar.component.html',
-    styleUrls: ['./master-profile-calendar.component.scss'],
+  selector: 'app-master-profile-calendar',
+  templateUrl: './master-profile-calendar.component.html',
+  styleUrls: ['./master-profile-calendar.component.scss'],
 })
 export class MasterProfileCalendarComponent implements OnInit {
 
-    public enabledPeriods: Observable<MasterCalendar[]>;
-    public schedule$: Observable<MasterSchedule[]>;
-    public context$: Observable<MasterProfileContext>;
+  public enabledPeriods: Observable<MasterCalendar[]>;
+  public schedule$: Observable<MasterSchedule[]>;
+  public context$: Observable<MasterProfileContext>;
 
-    private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
-    private selectedDate: Date;
+  private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
+  private selectedDate: Date;
 
-    constructor(
-        private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
-        private readonly scheduleApi: MasterScheduleApiService,
-        private readonly contextService: MasterProfileContextService,
-    ) {
-        this.enabledPeriods = this.periods.asObservable();
-        this.schedule$ = scheduleApi.get().pipe(
-            map(response => response.results),
-        );
-        this.context$ = this.contextService.context$;
-    }
+  constructor(
+    private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
+    private readonly scheduleApi: MasterScheduleApiService,
+    private readonly contextService: MasterProfileContextService,
+  ) {
+    this.enabledPeriods = this.periods.asObservable();
+    this.schedule$ = scheduleApi.get().pipe(
+      map(response => response.results),
+    );
+    this.context$ = this.contextService.context$;
+  }
 
-    public ngOnInit(): void {
-        this.updateEnabledPeriods((new Date()));
-    }
+  public ngOnInit(): void {
+    this.updateEnabledPeriods((new Date()));
+  }
 
-    public changeDate(date: Date): void {
-        this.selectedDate = date;
-        this.updateEnabledPeriods(date);
-    }
+  public changeDate(date: Date): void {
+    this.selectedDate = date;
+    this.updateEnabledPeriods(date);
+  }
 
-    public updateSchedule(newSchedules: AbstractSchedule[]): void {
-        const deleteOld$ = this.schedule$.pipe(
-            switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)),
-        );
+  public updateSchedule(newSchedules: AbstractSchedule[]): void {
+    const deleteOld$ = this.schedule$.pipe(
+      switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)),
+    );
 
-        const masterId = this.contextService.contextSnapshot.master?.id;
-        const createNew$ = this.scheduleApi.createSet(newSchedules.map(schedule => ({
-            ...schedule,
-            professional: masterId,
-            id: null,
-        })));
+    const masterId = this.contextService.contextSnapshot.master?.id;
+    const createNew$ = this.scheduleApi.createSet(newSchedules.map(schedule => ({
+      ...schedule,
+      professional: masterId,
+      id: null,
+    })));
 
-        concat(deleteOld$, createNew$)
-            .subscribe({
-                next: () => null,
-                complete: async () => {
-                    this.updateEnabledPeriods(this.selectedDate ?? new Date());
-                },
-            });
-    }
+    concat(deleteOld$, createNew$)
+      .subscribe({
+        next: () => null,
+        complete: async () => {
+          this.updateEnabledPeriods(this.selectedDate ?? new Date());
+        },
+      });
+  }
 
-    private updateEnabledPeriods(startDate: Date): void {
-        const masterId = this.contextService.contextSnapshot.master?.id;
-        this.calendarGeneratorFactory.getEnabledPeriods(
-            startDate,
-            HelperService.getDate(startDate, 1),
-            masterId,
-        ).subscribe(list => this.periods.next(list));
-    }
+  private updateEnabledPeriods(startDate: Date): void {
+    const masterId = this.contextService.contextSnapshot.master?.id;
+    this.calendarGeneratorFactory.getEnabledPeriods(
+      startDate,
+      HelperService.getDate(startDate, 1),
+      masterId,
+    ).subscribe(list => this.periods.next(list));
+  }
 }

@@ -9,27 +9,27 @@ import { map } from 'rxjs/operators';
 
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class MasterEducationReadonlyApiService {
 
-    private readonly url = environment.backend.master_list;
+  private readonly url = environment.backend.master_list;
 
-    constructor(private readonly client: ApiClientService) {
-    }
+  constructor(private readonly client: ApiClientService) {
+  }
 
-    public getByMasterId(id: number): Observable<ApiListResponseInterface<Education>> {
-        return this.client.get<{ educations: Education[] }>(this.getUrl() + id.toString()).pipe(
-            map(data => ({ count: data.educations.length, results: data.educations, next: null, previous: null})),
-        );
-    }
+  public getByMasterId(id: number): Observable<ApiListResponseInterface<Education>> {
+    return this.client.get<{ educations: Education[] }>(this.getUrl() + id.toString()).pipe(
+      map(data => ({ count: data.educations.length, results: data.educations, next: null, previous: null })),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: Education | Education[]): Education | Education[] {
-        return plainToClass(Education, data);
-    }
+  // @ts-ignore
+  protected transform(data: Education | Education[]): Education | Education[] {
+    return plainToClass(Education, data);
+  }
 }

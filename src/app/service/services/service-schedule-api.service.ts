@@ -10,25 +10,25 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class ServiceScheduleApiService extends AbstractApiService<ServiceSchedule> {
 
-    private readonly url = environment.backend.service_schedule;
-    private readonly setUrl = environment.backend.service_schedule_set;
+  private readonly url = environment.backend.service_schedule;
+  private readonly setUrl = environment.backend.service_schedule_set;
 
-    constructor(protected readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected readonly client: ApiClientService) {
+    super(client);
+  }
 
-    public createSet(data: ServiceSchedule[]): Observable<ServiceSchedule[]> {
-        return this.client.post<ServiceSchedule[], ServiceSchedule[]>(this.setUrl, data).pipe(
-            map(raw => plainToClass(ServiceSchedule, raw)),
-        );
-    }
+  public createSet(data: ServiceSchedule[]): Observable<ServiceSchedule[]> {
+    return this.client.post<ServiceSchedule[], ServiceSchedule[]>(this.setUrl, data).pipe(
+      map(raw => plainToClass(ServiceSchedule, raw)),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: ServiceSchedule | ServiceSchedule[]): ServiceSchedule | ServiceSchedule[] {
-        return plainToClass(ServiceSchedule, data);
-    }
+  // @ts-ignore
+  protected transform(data: ServiceSchedule | ServiceSchedule[]): ServiceSchedule | ServiceSchedule[] {
+    return plainToClass(ServiceSchedule, data);
+  }
 }

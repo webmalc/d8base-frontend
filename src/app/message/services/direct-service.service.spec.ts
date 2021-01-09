@@ -10,22 +10,22 @@ import { MessagesListApiService } from './messages-list-api.service';
 import { MessagesSentApiService } from './messages-sent-api.service';
 
 describe('DirectServiceService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            HttpClientTestingModule,
-        ],
-        providers: [
-            DirectServiceService,
-            MessageListUpdaterService,
-            MessagesListApiService,
-            MessagesSentApiService,
-            NotificationWorkerService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule,
+    ],
+    providers: [
+      DirectServiceService,
+      MessageListUpdaterService,
+      MessagesListApiService,
+      MessagesSentApiService,
+      NotificationWorkerService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: DirectServiceService = TestBed.inject(DirectServiceService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: DirectServiceService = TestBed.inject(DirectServiceService);
+    expect(service).toBeTruthy();
+  });
 });

@@ -7,26 +7,26 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReceivedOrderPageComponent } from './received-order-page.component';
 
 describe('ReceivedOrderPageComponent', () => {
-    let component: ReceivedOrderPageComponent;
-    let fixture: ComponentFixture<ReceivedOrderPageComponent>;
+  let component: ReceivedOrderPageComponent;
+  let fixture: ComponentFixture<ReceivedOrderPageComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ReceivedOrderPageComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ReceivedOrderPageComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ReceivedOrderPageComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ReceivedOrderPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

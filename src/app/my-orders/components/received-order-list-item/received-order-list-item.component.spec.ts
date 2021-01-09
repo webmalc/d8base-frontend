@@ -8,27 +8,27 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe('OrderListItemComponent', () => {
-    let component: ReceivedOrderListItemComponent;
-    let fixture: ComponentFixture<ReceivedOrderListItemComponent>;
+  let component: ReceivedOrderListItemComponent;
+  let fixture: ComponentFixture<ReceivedOrderListItemComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ReceivedOrderListItemComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                HttpClientTestingModule,
-                RouterTestingModule,
-            ],
-            providers: [ServicesApiCache],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ReceivedOrderListItemComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      providers: [ServicesApiCache],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ReceivedOrderListItemComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ReceivedOrderListItemComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

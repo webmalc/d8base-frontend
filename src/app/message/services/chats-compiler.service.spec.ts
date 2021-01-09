@@ -8,20 +8,20 @@ import { LatestMessagesApiService } from './latest-messages-api.service';
 import { MessagesListApiService } from './messages-list-api.service';
 
 describe('ChatsCompilerService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            HttpClientTestingModule,
-        ],
-        providers: [
-            ChatsCompilerService,
-            LatestMessagesApiService,
-            MessagesListApiService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule,
+    ],
+    providers: [
+      ChatsCompilerService,
+      LatestMessagesApiService,
+      MessagesListApiService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: ChatsCompilerService = TestBed.inject(ChatsCompilerService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: ChatsCompilerService = TestBed.inject(ChatsCompilerService);
+    expect(service).toBeTruthy();
+  });
 });

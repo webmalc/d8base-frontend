@@ -5,20 +5,20 @@ import { SelectableSearchService } from '@app/shared/abstract/selectable-search.
 import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class SelectablePostalCodeOnSearchService extends SelectableSearchService {
 
-    constructor(private readonly postalApi: PostalCodeApiService) {
-        super();
-    }
+  constructor(private readonly postalApi: PostalCodeApiService) {
+    super();
+  }
 
-    public onPostalCodeSearch(event: { component: IonicSelectableComponent, text: string }, city: City): void {
-        this.abstractOnSearch(
-            event.component,
-            event.text,
-            this.postalApi,
-            { city: city?.id.toString(10)},
-        );
-    }
+  public onPostalCodeSearch(event: { component: IonicSelectableComponent, text: string }, city: City): void {
+    this.abstractOnSearch(
+      event.component,
+      event.text,
+      this.postalApi,
+      { city: city?.id.toString(10) },
+    );
+  }
 }

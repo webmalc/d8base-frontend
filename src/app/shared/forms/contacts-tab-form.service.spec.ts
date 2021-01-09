@@ -6,10 +6,10 @@ import { ContactsTabFormService } from './contacts-tab-form.service';
 describe('ContactsTabFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-        ReactiveFormsModule,
+      ReactiveFormsModule,
     ],
     providers: [
-        ContactsTabFormService,
+      ContactsTabFormService,
     ],
   }));
 

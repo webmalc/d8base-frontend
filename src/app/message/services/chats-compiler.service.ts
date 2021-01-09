@@ -11,62 +11,62 @@ import { map, switchMap } from 'rxjs/operators';
 @Injectable()
 export class ChatsCompilerService {
 
-    constructor(
-        private readonly latestMessagesApi: LatestMessagesApiService,
-        private readonly userManager: UserManagerService,
-        private readonly messagesListApiService: MessagesListApiService,
-    ) {
-    }
+  constructor(
+    private readonly latestMessagesApi: LatestMessagesApiService,
+    private readonly userManager: UserManagerService,
+    private readonly messagesListApiService: MessagesListApiService,
+  ) {
+  }
 
-    public async generateChatList(): Promise<AbstractMessage[]> {
-        return await this.latestMessagesApi.get().pipe(
-            map(async (list: LatestMessageInterface[]) => {
-                const res: AbstractMessage[] = [];
-                for (const mes of list) {
-                    const abstractMessage: AbstractMessage = await this.getInterlocutorData(mes) as AbstractMessage;
-                    abstractMessage.body = mes.body;
-                    abstractMessage.is_read = mes.is_read;
-                    abstractMessage.created = HelperService.fromDatetime(mes.created).time;
-                    abstractMessage.unread_count = await this.getUnreadCount(mes);
-                    res.push(abstractMessage);
-                }
+  public async generateChatList(): Promise<AbstractMessage[]> {
+    return await this.latestMessagesApi.get().pipe(
+      map(async (list: LatestMessageInterface[]) => {
+        const res: AbstractMessage[] = [];
+        for (const mes of list) {
+          const abstractMessage: AbstractMessage = await this.getInterlocutorData(mes) as AbstractMessage;
+          abstractMessage.body = mes.body;
+          abstractMessage.is_read = mes.is_read;
+          abstractMessage.created = HelperService.fromDatetime(mes.created).time;
+          abstractMessage.unread_count = await this.getUnreadCount(mes);
+          res.push(abstractMessage);
+        }
 
-                return res;
-            }),
-        ).toPromise();
-    }
+        return res;
+      }),
+    ).toPromise();
+  }
 
-    private getUnreadCount(message: LatestMessageInterface): Promise<number> {
-        return this.userManager.getCurrentUser().pipe(
-            switchMap(user => this.messagesListApiService.getUnreadCount(
-                message.sender.id === user.id ? message.recipient.id : message.sender.id),
-            ),
-        ).toPromise();
-    }
+  private getUnreadCount(message: LatestMessageInterface): Promise<number> {
+    return this.userManager.getCurrentUser().pipe(
+      switchMap(user => this.messagesListApiService.getUnreadCount(
+        message.sender.id === user.id ? message.recipient.id : message.sender.id),
+      ),
+    ).toPromise();
+  }
 
-    private getInterlocutorData(message: LatestMessageInterface): Promise<Partial<AbstractMessage>> {
-        return this.userManager.getCurrentUser().pipe(
-            map(user => {
-                const data = message.sender.id !== user.id ? {
-                    interlocutor: `${message.sender.first_name} ${message.sender.last_name ?? ''}`,
-                    interlocutor_id: message.sender.id,
-                    interlocutor_avatar_thumbnail: message.sender.avatar_thumbnail,
-                } : {
-                    interlocutor: `${message.recipient.first_name} ${message.recipient.last_name ?? ''}`,
-                    interlocutor_id: message.recipient.id,
-                    interlocutor_avatar_thumbnail: message.recipient.avatar_thumbnail,
-                };
+  private getInterlocutorData(message: LatestMessageInterface): Promise<Partial<AbstractMessage>> {
+    return this.userManager.getCurrentUser().pipe(
+      map(user => {
+        const data = message.sender.id !== user.id ? {
+          interlocutor: `${message.sender.first_name} ${message.sender.last_name ?? ''}`,
+          interlocutor_id: message.sender.id,
+          interlocutor_avatar_thumbnail: message.sender.avatar_thumbnail,
+        } : {
+          interlocutor: `${message.recipient.first_name} ${message.recipient.last_name ?? ''}`,
+          interlocutor_id: message.recipient.id,
+          interlocutor_avatar_thumbnail: message.recipient.avatar_thumbnail,
+        };
 
-                data.interlocutor_avatar_thumbnail = data.interlocutor_avatar_thumbnail ?
-                    this.getHost() + data.interlocutor_avatar_thumbnail :
-                    HelperService.getNoAvatarLink();
+        data.interlocutor_avatar_thumbnail = data.interlocutor_avatar_thumbnail ?
+          this.getHost() + data.interlocutor_avatar_thumbnail :
+          HelperService.getNoAvatarLink();
 
-                return data;
-            }),
-        ).toPromise();
-    }
+        return data;
+      }),
+    ).toPromise();
+  }
 
-    private getHost(): string {
-        return environment.backend.url;
-    }
+  private getHost(): string {
+    return environment.backend.url;
+  }
 }

@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ResetPasswordApiService {
 
-    private readonly URL = environment.backend.reset_password;
+  private readonly URL = environment.backend.reset_password;
 
-    constructor(private readonly client: ApiClientService) {
-    }
+  constructor(private readonly client: ApiClientService) {
+  }
 
-    public reset(data: PasswordRecoveryInterface): Observable<PasswordRecoveryInterface> {
-        return this.client.post(this.URL, data);
-    }
+  public reset(data: PasswordRecoveryInterface): Observable<PasswordRecoveryInterface> {
+    return this.client.post(this.URL, data);
+  }
 }

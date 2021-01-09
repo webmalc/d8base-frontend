@@ -13,29 +13,29 @@ import { StorageManagerMock } from '../../../../testing/mocks';
 import { DefaultLocationPickerService } from './default-location-picker.service';
 
 describe('DefaultLocationPickerService', () => {
-    let service: DefaultLocationPickerService;
+  let service: DefaultLocationPickerService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                { provide: Geolocation, useValue: { getCurrentPosition: () => 'test'}},
-                { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
-                { provide: PopoverController, useValue: { create: () => Promise.resolve()}},
-            ],
-            imports: [
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-        });
-        service = TestBed.inject(DefaultLocationPickerService);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' } },
+        { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
+        { provide: PopoverController, useValue: { create: () => Promise.resolve() } },
+      ],
+      imports: [
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
     });
+    service = TestBed.inject(DefaultLocationPickerService);
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

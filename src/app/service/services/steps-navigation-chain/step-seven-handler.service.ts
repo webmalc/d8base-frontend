@@ -6,19 +6,19 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class StepSevenHandlerService extends AbstractHandler {
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    public handleNext(): Observable<number> {
-        return of(this.getIndex());
-    }
+  public handleNext(): Observable<number> {
+    return of(this.getIndex());
+  }
 
-    public handlePrevious(): Observable<number> {
-        return of(this.getIndex());
-    }
+  public handlePrevious(): Observable<number> {
+    return of(this.getIndex());
+  }
 
-    protected getIndex(): number {
-        return ServicePublishSteps.Seven;
-    }
+  protected getIndex(): number {
+    return ServicePublishSteps.Seven;
+  }
 }

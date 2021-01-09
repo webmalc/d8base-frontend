@@ -5,25 +5,25 @@ import { StorageManagerService } from '../proxies/storage-manager.service';
 import { MasterManagerService } from './master-manager.service';
 
 describe('MasterManagerService', () => {
-    let service: MasterManagerService;
-    let httpController: HttpTestingController;
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-            ],
-            providers: [
-                MasterManagerService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        });
-        service = TestBed.inject(MasterManagerService);
-        httpController = TestBed.inject(HttpTestingController);
+  let service: MasterManagerService;
+  let httpController: HttpTestingController;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+      ],
+      providers: [
+        MasterManagerService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
     });
+    service = TestBed.inject(MasterManagerService);
+    httpController = TestBed.inject(HttpTestingController);
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-    xit('should be some tests');
+  xit('should be some tests');
 });

@@ -7,39 +7,39 @@ import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-compon
 import { plainToClass } from 'class-transformer';
 
 @Component({
-    selector: 'app-certificate-edit',
-    templateUrl: './certificate-edit.component.html',
-    styleUrls: ['./certificate-edit.component.scss'],
+  selector: 'app-certificate-edit',
+  templateUrl: './certificate-edit.component.html',
+  styleUrls: ['./certificate-edit.component.scss'],
 })
 export class CertificateEditComponent extends AbstractEditComponent<Certificate> {
 
-    constructor(private readonly location: Location, private readonly sanitizer: DomSanitizer) {
-        super();
+  constructor(private readonly location: Location, private readonly sanitizer: DomSanitizer) {
+    super();
+  }
+
+  public locationBack(): void {
+    this.location.back();
+  }
+
+  public getPhoto(): string | SafeResourceUrl {
+    const photo: string = this.item.photo;
+    if (!photo) {
+      return HelperService.getNoAvatarLink();
     }
 
-    public locationBack(): void {
-        this.location.back();
+    return this.sanitizer.sanitize(
+      SecurityContext.RESOURCE_URL,
+      this.sanitizer.bypassSecurityTrustResourceUrl(photo),
+    );
+  }
+
+  protected transform(data: Certificate): Certificate {
+    const trans: Certificate = plainToClass(Certificate, data);
+    trans.formatDate();
+    if (trans.photo && (trans.photo.slice(0, 7) === 'http://' || trans.photo.slice(0, 8) === 'https://')) {
+      delete trans.photo;
     }
 
-    public getPhoto(): string | SafeResourceUrl {
-        const photo: string = this.item.photo;
-        if (!photo) {
-            return HelperService.getNoAvatarLink();
-        }
-
-        return this.sanitizer.sanitize(
-            SecurityContext.RESOURCE_URL,
-            this.sanitizer.bypassSecurityTrustResourceUrl(photo),
-        );
-    }
-
-    protected transform(data: Certificate): Certificate {
-        const trans: Certificate = plainToClass(Certificate, data);
-        trans.formatDate();
-        if (trans.photo && (trans.photo.slice(0, 7) === 'http://' || trans.photo.slice(0, 8) === 'https://')) {
-            delete trans.photo;
-        }
-
-        return trans;
-    }
+    return trans;
+  }
 }

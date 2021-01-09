@@ -3,11 +3,11 @@ import { ProfessionalEducationInline } from '@app/api/models';
 import { Education } from '@app/master/models/education';
 
 @Component({
-    selector: 'app-education',
-    templateUrl: './education.component.html',
-    styleUrls: ['./education.component.scss'],
+  selector: 'app-education',
+  templateUrl: './education.component.html',
+  styleUrls: ['./education.component.scss'],
 })
 export class EducationComponent {
-    @Input() public education: ProfessionalEducationInline;
-    @Input() public editable: boolean = false;
+  @Input() public education: ProfessionalEducationInline;
+  @Input() public editable: boolean = false;
 }

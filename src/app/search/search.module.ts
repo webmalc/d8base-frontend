@@ -15,24 +15,25 @@ import { SearchPage } from './search-page.component';
 import { SearchPageRoutingModule } from './search-routing.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        SearchPageRoutingModule,
-        TranslateModule,
-        SharedModule,
-        IonicSelectableModule,
-    ],
-    declarations: [
-        SearchPage,
-        SearchFiltersComponent,
-        SearchFiltersSubmenuComponent,
-        SearchFiltersMainTabComponent,
-        SearchFiltersAdditionalTabComponent,
-        SearchResultComponent,
-    ],
-    exports: [SearchFiltersComponent],
-    providers: [SearchFilterStateService],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SearchPageRoutingModule,
+    TranslateModule,
+    SharedModule,
+    IonicSelectableModule,
+  ],
+  declarations: [
+    SearchPage,
+    SearchFiltersComponent,
+    SearchFiltersSubmenuComponent,
+    SearchFiltersMainTabComponent,
+    SearchFiltersAdditionalTabComponent,
+    SearchResultComponent,
+  ],
+  exports: [SearchFiltersComponent],
+  providers: [SearchFilterStateService],
 })
-export class SearchPageModule { }
+export class SearchPageModule {
+}

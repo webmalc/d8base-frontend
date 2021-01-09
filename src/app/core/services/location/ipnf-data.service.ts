@@ -7,24 +7,24 @@ import { AbstractIpService } from '@app/core/services/location/abstract-ip.servi
 @Injectable()
 export class IpnfDataService extends AbstractIpService {
 
-    private readonly url = 'https://ip.nf/me.json';
+  private readonly url = 'https://ip.nf/me.json';
 
-    constructor(protected http: HttpClient) {
-        super(http);
-    }
+  constructor(protected http: HttpClient) {
+    super(http);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    protected transform(res: IpnfResponseInterface): IpLocation {
-        const location = new IpLocation();
-        location.postalCode = res.ip.post_code;
-        location.city = res.ip.city;
-        location.countryCode = res.ip.country_code;
-        location.latitude = parseFloat(res.ip.latitude);
-        location.longitude = parseFloat(res.ip.longitude);
+  protected transform(res: IpnfResponseInterface): IpLocation {
+    const location = new IpLocation();
+    location.postalCode = res.ip.post_code;
+    location.city = res.ip.city;
+    location.countryCode = res.ip.country_code;
+    location.latitude = parseFloat(res.ip.latitude);
+    location.longitude = parseFloat(res.ip.longitude);
 
-        return location;
-    }
+    return location;
+  }
 }

@@ -6,27 +6,27 @@ import { ErrorFlashbagComponent } from './error-flashbag.component';
 
 
 describe('ErrorFlashbagComponent', () => {
-    let component: ErrorFlashbagComponent;
-    let fixture: ComponentFixture<ErrorFlashbagComponent>;
+  let component: ErrorFlashbagComponent;
+  let fixture: ComponentFixture<ErrorFlashbagComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ErrorFlashbagComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ErrorFlashbagComponent],
+      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ErrorFlashbagComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ErrorFlashbagComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
-    it('test input', () => {
-        (component as any).messages = ['test'];
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  it('test input', () => {
+    (component as any).messages = ['test'];
 
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('div#error-text').innerText).toEqual('test');
-    });
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('div#error-text').innerText).toEqual('test');
+  });
 });

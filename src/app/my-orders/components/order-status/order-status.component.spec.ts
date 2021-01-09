@@ -4,21 +4,21 @@ import { IonicModule } from '@ionic/angular';
 import { OrderStatusComponent } from '@app/my-orders/components';
 
 describe('OrderStatusComponent', () => {
-    let component: OrderStatusComponent;
-    let fixture: ComponentFixture<OrderStatusComponent>;
+  let component: OrderStatusComponent;
+  let fixture: ComponentFixture<OrderStatusComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [OrderStatusComponent],
-            imports: [IonicModule.forRoot()],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [OrderStatusComponent],
+      imports: [IonicModule.forRoot()],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(OrderStatusComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(OrderStatusComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

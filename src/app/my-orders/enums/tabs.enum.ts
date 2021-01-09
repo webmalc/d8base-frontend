@@ -1,5 +1,5 @@
 export enum Tabs {
-    new = 'new',
-    current = 'current',
-    archive = 'archived',
+  new = 'new',
+  current = 'current',
+  archive = 'archived',
 }

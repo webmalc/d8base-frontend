@@ -4,13 +4,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReviewsApiService } from './reviews-api.service';
 
 describe('ReviewsApiService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [ReviewsApiService],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule],
+    providers: [ReviewsApiService],
+  }));
 
-    it('should be created', () => {
-        const service: ReviewsApiService = TestBed.inject(ReviewsApiService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: ReviewsApiService = TestBed.inject(ReviewsApiService);
+    expect(service).toBeTruthy();
+  });
 });

@@ -3,7 +3,7 @@ import { MasterLocation } from '@app/master/models/master-location';
 import { Service } from '@app/service/models/service';
 
 export interface SearchResultsInterface {
-    master: ProfessionalList;
-    masterLocationList?: MasterLocation[];
-    services: Service[];
+  master: ProfessionalList;
+  masterLocationList?: MasterLocation[];
+  services: Service[];
 }

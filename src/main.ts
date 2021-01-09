@@ -14,7 +14,7 @@ if (environment.sentry.enabled && environment.sentry.dsn) {
     dsn: environment.sentry.dsn,
     integrations: [
       new Integrations.BrowserTracing({
-        tracingOrigins: [ environment.origin ],
+        tracingOrigins: [environment.origin],
         routingInstrumentation: Sentry.routingInstrumentation,
       }),
     ],
@@ -28,7 +28,7 @@ if (environment.production) {
 
 document.addEventListener('DOMContentLoaded', () => {
   platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+    .catch(err => console.error(err));
 });
 
 defineCustomElements(window);

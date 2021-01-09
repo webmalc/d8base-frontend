@@ -9,35 +9,35 @@ import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
 
-    private readonly url = environment.backend.subregions;
+  private readonly url = environment.backend.subregions;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public get(
-        params: {
-            region?: string,
-            region__country?: string,
-            search?: string,
-            ordering?: string,
-            page?: string,
-            page_size?: string,
-        },
-    ): Observable<ApiListResponseInterface<Subregion>> {
-        return super.get(params);
-    }
+  public get(
+    params: {
+      region?: string,
+      region__country?: string,
+      search?: string,
+      ordering?: string,
+      page?: string,
+      page_size?: string,
+    },
+  ): Observable<ApiListResponseInterface<Subregion>> {
+    return super.get(params);
+  }
 
-    // @ts-ignore
-    protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
-        return plainToClass(Subregion, results);
-    }
+  // @ts-ignore
+  protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
+    return plainToClass(Subregion, results);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 }

@@ -11,34 +11,34 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-master-edit',
-    templateUrl: './master-edit.component.html',
-    styleUrls: ['./master-edit.component.scss'],
+  selector: 'app-master-edit',
+  templateUrl: './master-edit.component.html',
+  styleUrls: ['./master-edit.component.scss'],
 })
 export class MasterEditComponent extends AbstractEditComponent<Master> implements OnInit {
 
-    public formFields = EditMasterFormFields;
-    public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
-    public levelOptions = ['junior', 'middle', 'senior'];
+  public formFields = EditMasterFormFields;
+  public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
+  public levelOptions = ['junior', 'middle', 'senior'];
 
-    constructor(
-        private readonly subcategoriesApi: SubcategoriesApiService,
-        public readonly location: Location,
-    ) {
-        super();
-    }
+  constructor(
+    private readonly subcategoriesApi: SubcategoriesApiService,
+    public readonly location: Location,
+  ) {
+    super();
+  }
 
-    public ngOnInit(): void {
-        this.initSubcategoriesList().subscribe();
-    }
+  public ngOnInit(): void {
+    this.initSubcategoriesList().subscribe();
+  }
 
-    protected transform(data: Master): Master {
-        return plainToClass(Master, data);
-    }
+  protected transform(data: Master): Master {
+    return plainToClass(Master, data);
+  }
 
-    private initSubcategoriesList(): Observable<any> {
-        return this.subcategoriesApi.get().pipe(
-            tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)),
-        );
-    }
+  private initSubcategoriesList(): Observable<any> {
+    return this.subcategoriesApi.get().pipe(
+      tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)),
+    );
+  }
 }

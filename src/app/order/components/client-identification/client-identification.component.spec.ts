@@ -17,38 +17,38 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ClientIdentificationComponent } from './client-identification.component';
 
 describe('ClientIdentificationComponent', () => {
-    let component: ClientIdentificationComponent;
-    let fixture: ComponentFixture<ClientIdentificationComponent>;
+  let component: ClientIdentificationComponent;
+  let fixture: ComponentFixture<ClientIdentificationComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ClientIdentificationComponent],
-            imports: [
-                IonicModule.forRoot(),
-                IonicStorageModule.forRoot(),
-                TranslateModule.forRoot(),
-                HttpClientTestingModule,
-                RouterTestingModule,
-            ],
-            providers: [
-                OrderWizardStateService,
-                RegistrationService,
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                Geolocation,
-                LocationAccuracy,
-                SelectableCountryOnSearchService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ClientIdentificationComponent],
+      imports: [
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      providers: [
+        OrderWizardStateService,
+        RegistrationService,
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        Geolocation,
+        LocationAccuracy,
+        SelectableCountryOnSearchService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ClientIdentificationComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ClientIdentificationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

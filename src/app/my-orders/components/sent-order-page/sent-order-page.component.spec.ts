@@ -7,26 +7,26 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SentOrderPageComponent } from './sent-order-page.component';
 
 describe('OrderPageComponent', () => {
-    let component: SentOrderPageComponent;
-    let fixture: ComponentFixture<SentOrderPageComponent>;
+  let component: SentOrderPageComponent;
+  let fixture: ComponentFixture<SentOrderPageComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [SentOrderPageComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [SentOrderPageComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(SentOrderPageComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(SentOrderPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

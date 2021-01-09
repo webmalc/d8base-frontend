@@ -7,34 +7,34 @@ import { EducationApiService } from '@app/master/services/education-api.service'
 import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
 
 @Component({
-    selector: 'app-master-education-edit',
-    templateUrl: './master-education-edit.page.html',
-    styleUrls: ['./master-education-edit.page.scss'],
+  selector: 'app-master-education-edit',
+  templateUrl: './master-education-edit.page.html',
+  styleUrls: ['./master-education-edit.page.scss'],
 })
 export class MasterEducationEditPage extends AbstractModelEditPage<Education> {
 
-    constructor(
-        protected readonly educationApi: EducationApiService,
-        protected readonly route: ActivatedRoute,
-        protected readonly masterManager: MasterManagerService,
-        protected readonly location: Location,
-    ) {
-        super(route, educationApi, masterManager);
-    }
+  constructor(
+    protected readonly educationApi: EducationApiService,
+    protected readonly route: ActivatedRoute,
+    protected readonly masterManager: MasterManagerService,
+    protected readonly location: Location,
+  ) {
+    super(route, educationApi, masterManager);
+  }
 
-    protected afterApiCallback(): void {
-        this.location.back();
-    }
+  protected afterApiCallback(): void {
+    this.location.back();
+  }
 
-    protected getItemId(): number {
-        return parseInt(this.route.snapshot.paramMap.get('education-id'), 10);
-    }
+  protected getItemId(): number {
+    return parseInt(this.route.snapshot.paramMap.get('education-id'), 10);
+  }
 
-    protected getNewModel(): Education {
-        return new Education();
-    }
+  protected getNewModel(): Education {
+    return new Education();
+  }
 
-    protected isUserOnly(): boolean {
-        return false;
-    }
+  protected isUserOnly(): boolean {
+    return false;
+  }
 }

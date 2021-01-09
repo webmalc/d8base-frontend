@@ -10,25 +10,25 @@ import { TagsListApiService } from '../../services/tags-list-api.service';
 import { MasterTagEditPage } from './master-tag-edit.page';
 
 describe('MasterTagEditPage', () => {
-    let component: MasterTagEditPage;
-    let fixture: ComponentFixture<MasterTagEditPage>;
+  let component: MasterTagEditPage;
+  let fixture: ComponentFixture<MasterTagEditPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MasterTagEditPage, TagsSelectInputComponent],
-            imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, HttpClientTestingModule, TranslateModule.forRoot()],
-            providers: [
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                TagsListApiService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MasterTagEditPage, TagsSelectInputComponent],
+      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        TagsListApiService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MasterTagEditPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MasterTagEditPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

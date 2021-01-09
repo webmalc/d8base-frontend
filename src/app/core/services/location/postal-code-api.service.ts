@@ -6,22 +6,22 @@ import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class PostalCodeApiService extends AbstractReadonlyApiService<PostalCode> {
 
-    private readonly url = environment.backend.postal_codes;
+  private readonly url = environment.backend.postal_codes;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: PostalCode | PostalCode[]): PostalCode | PostalCode[] {
-        return plainToClass(PostalCode, data);
-    }
+  // @ts-ignore
+  protected transform(data: PostalCode | PostalCode[]): PostalCode | PostalCode[] {
+    return plainToClass(PostalCode, data);
+  }
 }

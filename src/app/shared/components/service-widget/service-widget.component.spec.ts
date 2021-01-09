@@ -6,25 +6,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ServiceWidgetComponent } from './service-widget.component';
 
 describe('ServiceWidgetComponent', () => {
-    let component: ServiceWidgetComponent;
-    let fixture: ComponentFixture<ServiceWidgetComponent>;
+  let component: ServiceWidgetComponent;
+  let fixture: ComponentFixture<ServiceWidgetComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServiceWidgetComponent],
-            imports: [
-                IonicModule,
-                TranslateModule.forRoot(),
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServiceWidgetComponent],
+      imports: [
+        IonicModule,
+        TranslateModule.forRoot(),
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServiceWidgetComponent);
-        component = fixture.componentInstance;
-        component.service = new Service();
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServiceWidgetComponent);
+    component = fixture.componentInstance;
+    component.service = new Service();
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

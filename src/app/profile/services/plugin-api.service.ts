@@ -9,24 +9,24 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class PluginApiService {
 
-    private readonly URL = environment.backend.plugin;
+  private readonly URL = environment.backend.plugin;
 
-    constructor(private readonly client: ApiClientService) {
-    }
+  constructor(private readonly client: ApiClientService) {
+  }
 
-    public getPlugin(pluginId: number): Observable<Plugin> {
-        return this.client.get(`${this.URL}/${pluginId}`).pipe(
-            map(raw => plainToClass(Plugin, raw)),
-        );
-    }
+  public getPlugin(pluginId: number): Observable<Plugin> {
+    return this.client.get(`${this.URL}/${pluginId}`).pipe(
+      map(raw => plainToClass(Plugin, raw)),
+    );
+  }
 
-    public getPlugins(): Observable<Plugin[]> {
-        return this.client.get<Plugin[]>(this.URL).pipe(
-            map(raw => plainToClass(Plugin, raw)),
-        );
-    }
+  public getPlugins(): Observable<Plugin[]> {
+    return this.client.get<Plugin[]>(this.URL).pipe(
+      map(raw => plainToClass(Plugin, raw)),
+    );
+  }
 
-    public savePlugin(plugin: Plugin | Plugin[]): Observable<Plugin | Plugin[]> {
-        return this.client.post(this.URL, plugin);
-    }
+  public savePlugin(plugin: Plugin | Plugin[]): Observable<Plugin | Plugin[]> {
+    return this.client.post(this.URL, plugin);
+  }
 }

@@ -7,24 +7,24 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class CurrencyListApiService {
 
-    private readonly url = environment.backend.rates;
+  private readonly url = environment.backend.rates;
 
-    constructor(private readonly api: ApiClientService) {
-    }
+  constructor(private readonly api: ApiClientService) {
+  }
 
-    public getList(): Observable<Currency[]> {
-        return this.api.get<Currency[]>(this.url).pipe(
-            map(raw => plainToClass(Currency, raw)),
-        );
-    }
+  public getList(): Observable<Currency[]> {
+    return this.api.get<Currency[]>(this.url).pipe(
+      map(raw => plainToClass(Currency, raw)),
+    );
+  }
 
-    public getByName(currency: string): Observable<Currency | null> {
-        return this.api.get<Currency[]>(this.url, { currency}).pipe(
-            map(raw => plainToClass(Currency, raw)[0]),
-        );
-    }
+  public getByName(currency: string): Observable<Currency | null> {
+    return this.api.get<Currency[]>(this.url, { currency }).pipe(
+      map(raw => plainToClass(Currency, raw)[0]),
+    );
+  }
 }

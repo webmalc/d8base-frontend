@@ -9,36 +9,36 @@ import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class CountriesApiService extends AbstractReadonlyApiService<Country> {
 
-    private readonly url = environment.backend.countries;
+  private readonly url = environment.backend.countries;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public get(
-        params: {
-            page_size?: string,
-            currency?: string,
-            continent?: string,
-            search?: string,
-            ordering?: string,
-            page?: string,
-            tld?: string,
-        },
-    ): Observable<ApiListResponseInterface<Country>> {
-        return super.get(params);
-    }
+  public get(
+    params: {
+      page_size?: string,
+      currency?: string,
+      continent?: string,
+      search?: string,
+      ordering?: string,
+      page?: string,
+      tld?: string,
+    },
+  ): Observable<ApiListResponseInterface<Country>> {
+    return super.get(params);
+  }
 
-    // @ts-ignore
-    protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
-        return plainToClass(Country, results);
-    }
+  // @ts-ignore
+  protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
+    return plainToClass(Country, results);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 }

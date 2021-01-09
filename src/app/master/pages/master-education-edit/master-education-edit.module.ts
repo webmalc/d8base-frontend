@@ -9,15 +9,15 @@ import { MasterEducationEditPageRoutingModule } from './master-education-edit-ro
 import { MasterEducationEditPage } from './master-education-edit.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        SharedModule,
-        MasterEducationEditPageRoutingModule,
-        TranslateModule,
-    ],
-    declarations: [MasterEducationEditPage, EducationEditComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SharedModule,
+    MasterEducationEditPageRoutingModule,
+    TranslateModule,
+  ],
+  declarations: [MasterEducationEditPage, EducationEditComponent],
 })
 export class MasterEducationEditPageModule {
 }

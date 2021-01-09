@@ -10,45 +10,45 @@ import { RegisterEmailApiService } from '@app/profile/services/register-email-ap
 import { plainToClass } from 'class-transformer';
 
 @Component({
-    selector: 'app-user-edit',
-    templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.scss'],
+  selector: 'app-user-edit',
+  templateUrl: './user-edit.component.html',
+  styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
 
-    public form: FormGroup;
-    public formFields = ProfileFormFields;
-    public user: User;
+  public form: FormGroup;
+  public formFields = ProfileFormFields;
+  public user: User;
 
-    constructor(
-        private readonly profileService: ProfileService,
-        private readonly location: Location,
-        private readonly registerEmailApi: RegisterEmailApiService,
-        private readonly formService: ProfileFormService,
-        private readonly userManager: UserManagerService,
-    ) {
-    }
+  constructor(
+    private readonly profileService: ProfileService,
+    private readonly location: Location,
+    private readonly registerEmailApi: RegisterEmailApiService,
+    private readonly formService: ProfileFormService,
+    private readonly userManager: UserManagerService,
+  ) {
+  }
 
-    public ngOnInit(): void {
-        this.userManager.getCurrentUser().subscribe(
-            user => {
-                this.user = user;
-                this.form = this.formService.createForm(user);
-            },
-        );
-    }
+  public ngOnInit(): void {
+    this.userManager.getCurrentUser().subscribe(
+      user => {
+        this.user = user;
+        this.form = this.formService.createForm(user);
+      },
+    );
+  }
 
-    public submitForm(): void {
-        this.profileService.updateUser(
-            plainToClass(User, this.form.getRawValue(), { excludeExtraneousValues: true}),
-        );
-        if (this.user.email !== this.form.get(this.formFields.Email).value) {
-            this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();
-        }
-        this.location.back();
+  public submitForm(): void {
+    this.profileService.updateUser(
+      plainToClass(User, this.form.getRawValue(), { excludeExtraneousValues: true }),
+    );
+    if (this.user.email !== this.form.get(this.formFields.Email).value) {
+      this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();
     }
+    this.location.back();
+  }
 
-    public isSubmitDisabled(): boolean {
-        return !(this.form.dirty && this.form.valid);
-    }
+  public isSubmitDisabled(): boolean {
+    return !(this.form.dirty && this.form.valid);
+  }
 }

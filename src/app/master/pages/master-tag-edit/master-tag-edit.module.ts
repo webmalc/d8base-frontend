@@ -10,17 +10,17 @@ import { MasterTagEditPageRoutingModule } from './master-tag-edit-routing.module
 import { MasterTagEditPage } from './master-tag-edit.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MasterTagEditPageRoutingModule,
-        ReactiveFormsModule,
-        SharedModule,
-        TranslateModule,
-    ],
-    declarations: [MasterTagEditPage, TagsSelectInputComponent],
-    providers: [TagsListApiService],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MasterTagEditPageRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    TranslateModule,
+  ],
+  declarations: [MasterTagEditPage, TagsSelectInputComponent],
+  providers: [TagsListApiService],
 })
 export class MasterTagEditPageModule {
 }

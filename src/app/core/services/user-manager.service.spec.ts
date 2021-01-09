@@ -5,20 +5,20 @@ import { StorageManagerService } from '../proxies/storage-manager.service';
 import { UserManagerService } from './user-manager.service';
 
 describe('UserManagerService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            HttpClientTestingModule,
-        ],
-        providers: [
-            UserManagerService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule,
+    ],
+    providers: [
+      UserManagerService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: UserManagerService = TestBed.inject(UserManagerService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: UserManagerService = TestBed.inject(UserManagerService);
+    expect(service).toBeTruthy();
+  });
 
-    xit('should be some tests');
+  xit('should be some tests');
 });

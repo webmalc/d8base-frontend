@@ -10,14 +10,14 @@ import { RegisterVerifyPageRoutingModule } from './register-verify-routing.modul
 import { RegisterVerifyPage } from './register-verify.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        SharedModule,
-        RegisterVerifyPageRoutingModule,
-    ],
-    declarations: [RegisterVerifyPage],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SharedModule,
+    RegisterVerifyPageRoutingModule,
+  ],
+  declarations: [RegisterVerifyPage],
 })
 export class RegisterVerifyPageModule {
 }

@@ -17,26 +17,26 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { RegistrationPage } from './registration.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        RegistrationPageRoutingModule,
-        SharedModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        IonicSelectableModule,
-    ],
-    declarations: [
-        RegistrationPage,
-        RegistrationFormComponent,
-        CityPickerPopoverComponent,
-    ],
-    providers: [
-        TokenManagerService,
-        RegistrationFormService,
-        RegistrationService,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RegistrationPageRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    IonicSelectableModule,
+  ],
+  declarations: [
+    RegistrationPage,
+    RegistrationFormComponent,
+    CityPickerPopoverComponent,
+  ],
+  providers: [
+    TokenManagerService,
+    RegistrationFormService,
+    RegistrationService,
+  ],
 })
 export class RegistrationPageModule {
 }

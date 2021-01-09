@@ -6,31 +6,31 @@ import { StepSevenDepartureDataInterface } from '@app/service/interfaces/step-se
 @Injectable()
 export class ServicePublishStepSevenDepartureFormService {
 
-    public form: FormGroup;
+  public form: FormGroup;
 
-    constructor(private readonly formBuilder: FormBuilder) {
-    }
+  constructor(private readonly formBuilder: FormBuilder) {
+  }
 
-    public createForm(data?: StepSevenDepartureDataInterface): void {
-        this.form = this.formBuilder.group({
-            // [ServicePublishStepSevenDepartureFormFields.NotWithinTheCity]: [data?.not_within_the_city ?? false],
-            [ServicePublishStepSevenDepartureFormFields.MaxDistance]: [data?.max_distance],
-            [ServicePublishStepSevenDepartureFormFields.Units]: [data?.units],
-        },
-            // {validators: this.maxDistanceValidator}
-            );
-    }
+  public createForm(data?: StepSevenDepartureDataInterface): void {
+    this.form = this.formBuilder.group({
+        // [ServicePublishStepSevenDepartureFormFields.NotWithinTheCity]: [data?.not_within_the_city ?? false],
+        [ServicePublishStepSevenDepartureFormFields.MaxDistance]: [data?.max_distance],
+        [ServicePublishStepSevenDepartureFormFields.Units]: [data?.units],
+      },
+      // {validators: this.maxDistanceValidator}
+    );
+  }
 
-    public isSubmitDisabled(): boolean {
-        return this.form.invalid;
-    }
+  public isSubmitDisabled(): boolean {
+    return this.form.invalid;
+  }
 
-    // private maxDistanceValidator(group: FormGroup): any {
-    //     if (group.get(ServicePublishStepSevenDepartureFormFields.NotWithinTheCity).value &&
-    //         !group.get(ServicePublishStepSevenDepartureFormFields.MaxDistance).value) {
-    //         group.get(ServicePublishStepSevenDepartureFormFields.MaxDistance).setErrors({emptyDistanceError: true});
-    //     } else {
-    //         return null;
-    //     }
-    // }
+  // private maxDistanceValidator(group: FormGroup): any {
+  //     if (group.get(ServicePublishStepSevenDepartureFormFields.NotWithinTheCity).value &&
+  //         !group.get(ServicePublishStepSevenDepartureFormFields.MaxDistance).value) {
+  //         group.get(ServicePublishStepSevenDepartureFormFields.MaxDistance).setErrors({emptyDistanceError: true});
+  //     } else {
+  //         return null;
+  //     }
+  // }
 }

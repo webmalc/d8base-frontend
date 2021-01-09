@@ -8,29 +8,29 @@ import { UserSettingsService } from '@app/shared/services/user-settings.service'
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-flag-menu',
-    templateUrl: './flag-menu.component.html',
-    styleUrls: ['./flag-menu.component.scss'],
+  selector: 'app-flag-menu',
+  templateUrl: './flag-menu.component.html',
+  styleUrls: ['./flag-menu.component.scss'],
 })
 export class FlagMenuComponent {
 
-    public country$: Observable<Country>;
-    public darkTheme$: Observable<boolean>;
-    public currencyList$: Observable<Currency[]>;
+  public country$: Observable<Country>;
+  public darkTheme$: Observable<boolean>;
+  public currencyList$: Observable<Currency[]>;
 
-    constructor(
-        public readonly userSettings: UserSettingsService,
-        private readonly darkModeService: DarkModeService,
-        userManager: UserManagerService,
-        currency: CurrencyListApiService,
-    ) {
-        this.darkTheme$ = darkModeService.darkTheme$;
-        this.country$ = userManager.getDefaultUserCountry();
-        this.currencyList$ = currency.getList();
-    }
+  constructor(
+    public readonly userSettings: UserSettingsService,
+    private readonly darkModeService: DarkModeService,
+    userManager: UserManagerService,
+    currency: CurrencyListApiService,
+  ) {
+    this.darkTheme$ = darkModeService.darkTheme$;
+    this.country$ = userManager.getDefaultUserCountry();
+    this.currencyList$ = currency.getList();
+  }
 
-    public changeMode(event: CustomEvent): void {
-        const toggle = event.target as HTMLIonToggleElement;
-        this.darkModeService.setMode(toggle.checked);
-    }
+  public changeMode(event: CustomEvent): void {
+    const toggle = event.target as HTMLIonToggleElement;
+    this.darkModeService.setMode(toggle.checked);
+  }
 }

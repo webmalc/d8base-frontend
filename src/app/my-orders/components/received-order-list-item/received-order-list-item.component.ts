@@ -6,44 +6,44 @@ import { HelperService } from '@app/core/services/helper.service';
 import { Service } from '@app/service/models/service';
 
 @Component({
-    selector: 'app-received-order-list-item',
-    templateUrl: './received-order-list-item.component.html',
-    styleUrls: ['./received-order-list-item.component.scss'],
+  selector: 'app-received-order-list-item',
+  templateUrl: './received-order-list-item.component.html',
+  styleUrls: ['./received-order-list-item.component.scss'],
 })
 export class ReceivedOrderListItemComponent {
 
-    public service: Service;
-    @Output() public accept = new EventEmitter<ReceivedOrder>();
+  public service: Service;
+  @Output() public accept = new EventEmitter<ReceivedOrder>();
 
-    private _order: ReceivedOrder;
+  private _order: ReceivedOrder;
 
-    constructor(
-        private readonly servicesCache: ServicesApiCache,
-        private readonly changeDetector: ChangeDetectorRef,
-    ) {
+  constructor(
+    private readonly servicesCache: ServicesApiCache,
+    private readonly changeDetector: ChangeDetectorRef,
+  ) {
+  }
+
+  public get order(): ReceivedOrder {
+    return this._order;
+  }
+
+  @Input()
+  public set order(order: ReceivedOrder) {
+    this._order = order;
+    if (!order) {
+      return;
     }
+    this.servicesCache.getById(order.service).subscribe(service => {
+      this.service = service;
+      this.changeDetector.markForCheck();
+    });
+  }
 
-    public get order(): ReceivedOrder {
-        return this._order;
-    }
+  public onAcceptClick(): void {
+    this.accept.emit(this.order);
+  }
 
-    @Input()
-    public set order(order: ReceivedOrder) {
-        this._order = order;
-        if (!order) {
-            return;
-        }
-        this.servicesCache.getById(order.service).subscribe(service => {
-            this.service = service;
-            this.changeDetector.markForCheck();
-        });
-    }
-
-    public onAcceptClick(): void {
-        this.accept.emit(this.order);
-    }
-
-    public getPhoto(photo: string): string | SafeResourceUrl {
-        return photo || HelperService.getNoAvatarLink();
-    }
+  public getPhoto(photo: string): string | SafeResourceUrl {
+    return photo || HelperService.getNoAvatarLink();
+  }
 }

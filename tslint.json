@@ -22,7 +22,7 @@
     "indent": [
       true,
       "spaces",
-      4
+      2
     ],
     "variable-name": {
       "options": [
@@ -204,7 +204,6 @@
       true,
       "check-module",
       "check-preblock",
-      "check-postbrace",
       "check-separator"
     ]
   }

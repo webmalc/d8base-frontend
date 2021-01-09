@@ -11,51 +11,51 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class CitiesApiService extends AbstractReadonlyApiService<City> {
 
-    private readonly url = environment.backend.cities;
+  private readonly url = environment.backend.cities;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public get(
-        params: {
-            country?: string,
-            City?: string,
-            subCity?: string,
-            timezone?: string,
-            search?: string,
-            ordering?: string,
-            page?: string,
-            page_size?: string,
-            by_name?: string,
-        },
-    ): Observable<ApiListResponseInterface<City>> {
-        return super.get(params);
-    }
+  public get(
+    params: {
+      country?: string,
+      City?: string,
+      subCity?: string,
+      timezone?: string,
+      search?: string,
+      ordering?: string,
+      page?: string,
+      page_size?: string,
+      by_name?: string,
+    },
+  ): Observable<ApiListResponseInterface<City>> {
+    return super.get(params);
+  }
 
-    public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
-        return this.client.get<ApiListResponseInterface<City>>(this.url, {
-            dist: dist.toString(10),
-            point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`,
-        }).pipe(
-            map(result => {
-                result.results = plainToClass(City, result.results);
+  public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
+    return this.client.get<ApiListResponseInterface<City>>(this.url, {
+      dist: dist.toString(10),
+      point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`,
+    }).pipe(
+      map(result => {
+        result.results = plainToClass(City, result.results);
 
-                return result;
-            }),
-        );
-    }
+        return result;
+      }),
+    );
+  }
 
-    // @ts-ignore
-    protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
-        return plainToClass(City, results);
-    }
+  // @ts-ignore
+  protected transform(results: LocationTypes[] | LocationTypes): LocationTypes | LocationTypes[] {
+    return plainToClass(City, results);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 }

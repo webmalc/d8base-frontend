@@ -30,53 +30,53 @@ import { StepTwoHandlerService } from '../../services/steps-navigation-chain/ste
 import { ServicePublishStepFourComponent } from './service-publish-step-four.component';
 
 describe('ServicePublishStepFourComponent', () => {
-    let component: ServicePublishStepFourComponent;
-    let fixture: ComponentFixture<ServicePublishStepFourComponent>;
+  let component: ServicePublishStepFourComponent;
+  let fixture: ComponentFixture<ServicePublishStepFourComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServicePublishStepFourComponent],
-            imports: [
-                IonicModule.forRoot(),
-                ReactiveFormsModule,
-                FormsModule,
-                RouterTestingModule,
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-            providers: [
-                ServicePublishStepFourFormService,
-                ServiceStepsNavigationService,
-                RegistrationService,
-                ServicePublishDataHolderService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                ChainManagerService,
-                StepOneHandlerService,
-                StepTwoHandlerService,
-                StepThreeHandlerService,
-                StepFourHandlerService,
-                StepFiveHandlerService,
-                StepSixHandlerService,
-                StepSevenHandlerService,
-                StepFinalHandlerService,
-                ServicePublishDataHolderService,
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                { provide: LocationService, useClass: LocationServiceMock},
-                { provide: TokenManagerService, useValue: TokenManagerServiceMock},
-                SelectableCountryOnSearchService,
-                SelectableCityOnSearchService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServicePublishStepFourComponent],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        ServicePublishStepFourFormService,
+        ServiceStepsNavigationService,
+        RegistrationService,
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService,
+        ServicePublishDataHolderService,
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        { provide: LocationService, useClass: LocationServiceMock },
+        { provide: TokenManagerService, useValue: TokenManagerServiceMock },
+        SelectableCountryOnSearchService,
+        SelectableCityOnSearchService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServicePublishStepFourComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServicePublishStepFourComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -15,31 +15,31 @@ import { StorageManagerMock } from '../../testing/mocks';
 import { MainPage } from './main.page';
 
 describe('MainPage', () => {
-    let component: MainPage;
-    let fixture: ComponentFixture<MainPage>;
+  let component: MainPage;
+  let fixture: ComponentFixture<MainPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MainPage],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
-            providers: [
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                { provide: Geolocation, useValue: { getCurrentPosition: () => 'test'}},
-                { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                DefaultCategoriesFactoryService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MainPage],
+      imports: [IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' } },
+        { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        DefaultCategoriesFactoryService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MainPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MainPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -5,21 +5,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InboxComponent } from './inbox.component';
 
 describe('InboxComponent', () => {
-    let component: InboxComponent;
-    let fixture: ComponentFixture<InboxComponent>;
+  let component: InboxComponent;
+  let fixture: ComponentFixture<InboxComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [InboxComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [InboxComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(InboxComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(InboxComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

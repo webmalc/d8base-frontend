@@ -16,34 +16,34 @@ import { LocationServiceMock, StorageManagerMock } from '../../../../testing/moc
 import { SearchFiltersMainTabComponent } from './search-filters-main-tab.component';
 
 describe('SearchFiltersMainTabComponent', () => {
-    let component: SearchFiltersMainTabComponent;
-    let fixture: ComponentFixture<SearchFiltersMainTabComponent>;
+  let component: SearchFiltersMainTabComponent;
+  let fixture: ComponentFixture<SearchFiltersMainTabComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [SearchFiltersMainTabComponent],
-                imports: [RouterTestingModule, IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
-                providers: [
-                    SearchFilterStateService,
-                    SelectableCountryOnSearchService,
-                    SelectableCityOnSearchService,
-                    IpServicesHolderService,
-                    IpApiService,
-                    IpDataService,
-                    IpnfDataService,
-                    { provide: LocationService, useClass: LocationServiceMock },
-                    { provide: StorageManagerService, useClass: StorageManagerMock },
-                ],
-            }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SearchFiltersMainTabComponent],
+        imports: [RouterTestingModule, IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
+        providers: [
+          SearchFilterStateService,
+          SelectableCountryOnSearchService,
+          SelectableCityOnSearchService,
+          IpServicesHolderService,
+          IpApiService,
+          IpDataService,
+          IpnfDataService,
+          { provide: LocationService, useClass: LocationServiceMock },
+          { provide: StorageManagerService, useClass: StorageManagerMock },
+        ],
+      }).compileComponents();
 
-            fixture = TestBed.createComponent(SearchFiltersMainTabComponent);
-            component = fixture.componentInstance;
-            fixture.detectChanges();
-        }),
-    );
+      fixture = TestBed.createComponent(SearchFiltersMainTabComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

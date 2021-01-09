@@ -12,28 +12,28 @@ import { StorageManagerMock } from '../../../../testing/mocks';
 import { CurrentLocationCompilerService } from './current-location-compiler.service';
 
 describe('CurrentLocationCompilerService', () => {
-    let service: CurrentLocationCompilerService;
+  let service: CurrentLocationCompilerService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                { provide: Geolocation, useValue: { getCurrentPosition: () => 'test'}},
-                { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-            imports: [
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-        });
-        service = TestBed.inject(CurrentLocationCompilerService);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' } },
+        { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+      imports: [
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
     });
+    service = TestBed.inject(CurrentLocationCompilerService);
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

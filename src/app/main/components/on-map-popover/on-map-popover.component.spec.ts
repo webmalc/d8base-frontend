@@ -7,26 +7,26 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OnMapPopoverComponent } from './on-map-popover.component';
 
 describe('OnMapPopoverComponent', () => {
-    let component: OnMapPopoverComponent;
-    let fixture: ComponentFixture<OnMapPopoverComponent>;
+  let component: OnMapPopoverComponent;
+  let fixture: ComponentFixture<OnMapPopoverComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [OnMapPopoverComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-            providers: [
-                SelectableCountryOnSearchService,
-                SelectableCityOnSearchService,
-                { provide: NavParams, useValue: { get: () => null}},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [OnMapPopoverComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        SelectableCountryOnSearchService,
+        SelectableCityOnSearchService,
+        { provide: NavParams, useValue: { get: () => null } },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(OnMapPopoverComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(OnMapPopoverComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

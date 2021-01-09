@@ -4,9 +4,13 @@ import { ClientContactInterface } from '@app/shared/interfaces/client-contact-in
 import { Observable } from 'rxjs';
 
 export interface ContactsApiServiceInterface extends ApiServiceInterface<ClientContactInterface> {
-    getByClientId(id?: number): Observable<ApiListResponseInterface<ClientContactInterface>>;
-    createList(contactsList: ClientContactInterface[]): Observable<ClientContactInterface[]>;
-    putList(contactsList: ClientContactInterface[]): Observable<ClientContactInterface[]>;
-    deleteList(contactsList: ClientContactInterface[]): Observable<any>;
-    getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>>;
+  getByClientId(id?: number): Observable<ApiListResponseInterface<ClientContactInterface>>;
+
+  createList(contactsList: ClientContactInterface[]): Observable<ClientContactInterface[]>;
+
+  putList(contactsList: ClientContactInterface[]): Observable<ClientContactInterface[]>;
+
+  deleteList(contactsList: ClientContactInterface[]): Observable<any>;
+
+  getCurrentClientContacts(): Observable<ApiListResponseInterface<ClientContactInterface>>;
 }

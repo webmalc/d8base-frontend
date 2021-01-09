@@ -5,29 +5,29 @@ import { SearchLocationDataInterface } from '@app/main/interfaces/search-locatio
 import { Tag } from '@app/master/models/tag';
 
 export interface SearchFilterStateInterface {
-    main: {
-        location: SearchLocationDataInterface;
-        radius: {
-            distance: number;
-            units: boolean;
-        };
-        category: Category[];
-        subcategory: Subcategory[];
-        tags: Tag[];
-        isOnlineBooking: boolean;
-        isInstantBooking: boolean;
-        datetime: {
-            from: string;
-            to: string;
-        };
-        isOnlineService: boolean;
-        isAtMasterLocationService: boolean;
-        isAtClientLocationService: boolean;
-        price: {
-            currency: Currency;
-            start: string;
-            end: string;
-        };
+  main: {
+    location: SearchLocationDataInterface;
+    radius: {
+      distance: number;
+      units: boolean;
     };
-    additional: { };
+    category: Category[];
+    subcategory: Subcategory[];
+    tags: Tag[];
+    isOnlineBooking: boolean;
+    isInstantBooking: boolean;
+    datetime: {
+      from: string;
+      to: string;
+    };
+    isOnlineService: boolean;
+    isAtMasterLocationService: boolean;
+    isAtClientLocationService: boolean;
+    price: {
+      currency: Currency;
+      start: string;
+      end: string;
+    };
+  };
+  additional: {};
 }

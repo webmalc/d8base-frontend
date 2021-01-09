@@ -8,28 +8,28 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class LanguagesApiService extends AbstractReadonlyApiService<Language> {
 
-    private readonly url = environment.backend.language;
+  private readonly url = environment.backend.language;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public getLanguages$(): Observable<Language[]> {
-        return this.client.get<Language[]>(this.url).pipe(
-            map(languages => plainToClass(Language, languages, { excludeExtraneousValues: true})),
-        );
-    }
+  public getLanguages$(): Observable<Language[]> {
+    return this.client.get<Language[]>(this.url).pipe(
+      map(languages => plainToClass(Language, languages, { excludeExtraneousValues: true })),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: Language | Language[]): Language | Language[] {
-        return plainToClass(Language, data);
-    }
+  // @ts-ignore
+  protected transform(data: Language | Language[]): Language | Language[] {
+    return plainToClass(Language, data);
+  }
 }

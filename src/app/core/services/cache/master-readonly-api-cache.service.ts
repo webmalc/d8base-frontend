@@ -5,7 +5,7 @@ import { MasterReadonlyApiService } from '@app/master/services/master-readonly-a
 
 @Injectable()
 export class MasterReadonlyApiCacheService extends ApiCache<ProfessionalList> {
-    constructor(protected readonly apiService: MasterReadonlyApiService) {
-        super();
-    }
+  constructor(protected readonly apiService: MasterReadonlyApiService) {
+    super();
+  }
 }

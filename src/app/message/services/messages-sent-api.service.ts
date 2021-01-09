@@ -9,22 +9,22 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class MessagesSentApiService extends AbstractApiService<SentMessage> {
 
-    private readonly url = environment.backend.messages_sent;
+  private readonly url = environment.backend.messages_sent;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public deleteById(id: number): Observable<void> {
-        return this.client.delete(`${this.getUrl() + id}/`);
-    }
+  public deleteById(id: number): Observable<void> {
+    return this.client.delete(`${this.getUrl() + id}/`);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: SentMessage | SentMessage[]): SentMessage | SentMessage[] {
-        return plainToClass(SentMessage, data);
-    }
+  // @ts-ignore
+  protected transform(data: SentMessage | SentMessage[]): SentMessage | SentMessage[] {
+    return plainToClass(SentMessage, data);
+  }
 }

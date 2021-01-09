@@ -5,18 +5,18 @@ import { ChainManagerService } from '@app/service/services/steps-navigation-chai
 @Injectable()
 export class ServiceStepsNavigationService {
 
-    constructor(private readonly router: Router, private readonly chainManager: ChainManagerService) {
-    }
+  constructor(private readonly router: Router, private readonly chainManager: ChainManagerService) {
+  }
 
-    public next(): void {
-        this.chainManager.getNextPage(this.router.url).subscribe(
-            url => this.router.navigateByUrl(url),
-        );
-    }
+  public next(): void {
+    this.chainManager.getNextPage(this.router.url).subscribe(
+      url => this.router.navigateByUrl(url),
+    );
+  }
 
-    public previous(): void {
-        this.chainManager.getPreviousPage(this.router.url).subscribe(
-            url => this.router.navigateByUrl(url),
-        );
-    }
+  public previous(): void {
+    this.chainManager.getPreviousPage(this.router.url).subscribe(
+      url => this.router.navigateByUrl(url),
+    );
+  }
 }

@@ -6,22 +6,22 @@ import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class MasterPhotosReadonlyApiService extends AbstractReadonlyApiService<MasterPhoto> {
 
-    private readonly url = environment.backend.master_photos_readonly;
+  private readonly url = environment.backend.master_photos_readonly;
 
-    constructor(protected readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected readonly client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: MasterPhoto | MasterPhoto[]): MasterPhoto | MasterPhoto[] {
-        return plainToClass(MasterPhoto, data);
-    }
+  // @ts-ignore
+  protected transform(data: MasterPhoto | MasterPhoto[]): MasterPhoto | MasterPhoto[] {
+    return plainToClass(MasterPhoto, data);
+  }
 }

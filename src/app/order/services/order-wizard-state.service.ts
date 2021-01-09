@@ -11,160 +11,160 @@ import { initState, orderWizardStorageKey, ORDER_STEPS } from '../order-steps';
 
 @Injectable()
 export class OrderWizardStateService {
-    private readonly steps = ORDER_STEPS;
+  private readonly steps = ORDER_STEPS;
 
-    private readonly currentStep$ = new BehaviorSubject<StepModel>(this.steps.byId[this.steps.ids[0]]);
-    private readonly state$ = new BehaviorSubject<StepsState>(null);
-    private readonly context$ = new BehaviorSubject<StepContext>(null);
-    private readonly reset$ = new Subject<void>();
-    private readonly submit$ = new Subject<StepsState>();
-    private readonly isStateEmpty$: Observable<boolean> = this.state$.pipe(
-        map(state => {
-            return !state || JSON.stringify(initState) === JSON.stringify(state);
-        }),
+  private readonly currentStep$ = new BehaviorSubject<StepModel>(this.steps.byId[this.steps.ids[0]]);
+  private readonly state$ = new BehaviorSubject<StepsState>(null);
+  private readonly context$ = new BehaviorSubject<StepContext>(null);
+  private readonly reset$ = new Subject<void>();
+  private readonly submit$ = new Subject<StepsState>();
+  private readonly isStateEmpty$: Observable<boolean> = this.state$.pipe(
+    map(state => {
+      return !state || JSON.stringify(initState) === JSON.stringify(state);
+    }),
+  );
+  private path: string;
+  private storageKey: string;
+
+  constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
+  }
+
+  public submit(): Observable<StepsState> {
+    return this.submit$.asObservable();
+  }
+
+  public doSubmit(): void {
+    this.submit$.next(this.state$.value);
+  }
+
+  public getCurrentStep(): Observable<StepModel> {
+    return this.currentStep$.asObservable();
+  }
+
+  public setCurrentStep(id: OrderIds): void {
+    return this.currentStep$.next(this.steps.byId[id]);
+  }
+
+  public getState(): Observable<StepsState> {
+    return this.state$.asObservable();
+  }
+
+  public getStepStateById(id: string): Observable<any> {
+    return this.getState().pipe(
+      filter(state => Boolean(state)),
+      map(state => state[id]),
     );
-    private path: string;
-    private storageKey: string;
+  }
 
-    constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
-    }
+  public getCurrentStepState(): Observable<any> {
+    return this.getStepStateById(this.getIdOfCurrentStep());
+  }
 
-    public submit(): Observable<StepsState> {
-        return this.submit$.asObservable();
-    }
+  public async setStepStateById(id: string, data: any = initState[id]): Promise<void> {
+    const newState: StepsState = {
+      ...this.state$.value,
+      [id]: data,
+    };
+    this.state$.next(newState);
+    await this.storage.set(this.storageKey, newState);
+  }
 
-    public doSubmit(): void {
-        this.submit$.next(this.state$.value);
-    }
+  public setCurrentStepState(data: any): void {
+    this.setStepStateById(this.getIdOfCurrentStep(), data);
+  }
 
-    public getCurrentStep(): Observable<StepModel> {
-        return this.currentStep$.asObservable();
-    }
+  public nextStep(): void {
+    of(1)
+      .pipe(
+        switchMap(() => this.isAbleToNext()),
+        filter(isAbleToNext => isAbleToNext),
+        first(),
+      )
+      .subscribe(() => {
+        const index = this.getIndexOfCurrentStep();
+        this.currentStep$.next(this.steps.byId[this.steps.ids[index + 1]]);
+        this.navigateToCurrentStep();
+      });
+  }
 
-    public setCurrentStep(id: OrderIds): void {
-        return this.currentStep$.next(this.steps.byId[id]);
-    }
+  public prevStep(): void {
+    of(1)
+      .pipe(
+        switchMap(() => this.isAbleToPrev()),
+        filter(isAbleToPrev => isAbleToPrev),
+      )
+      .subscribe(() => {
+        const index = this.getIndexOfCurrentStep();
+        this.currentStep$.next(this.steps.byId[this.steps.ids[index - 1]]);
+        this.navigateToCurrentStep();
+      });
+  }
 
-    public getState(): Observable<StepsState> {
-        return this.state$.asObservable();
-    }
+  public isLastStep(): Observable<boolean> {
+    return this.currentStep$.asObservable().pipe(map(({ id }) => this.steps.ids.lastIndexOf(id) === this.steps.ids.length - 1));
+  }
 
-    public getStepStateById(id: string): Observable<any> {
-        return this.getState().pipe(
-            filter(state => Boolean(state)),
-            map(state => state[id]),
-        );
-    }
+  public isAbleToNext(): Observable<boolean> {
+    return this.isLastStep().pipe(map(isLastStep => !isLastStep));
+  }
 
-    public getCurrentStepState(): Observable<any> {
-        return this.getStepStateById(this.getIdOfCurrentStep());
-    }
+  public isAbleToPrev(): Observable<boolean> {
+    return of(this.steps.ids.indexOf(this.getIdOfCurrentStep()) !== 0);
+  }
 
-    public async setStepStateById(id: string, data: any = initState[id]): Promise<void> {
-        const newState: StepsState = {
-            ...this.state$.value,
-            [id]: data,
-        };
-        this.state$.next(newState);
-        await this.storage.set(this.storageKey, newState);
-    }
+  public navigateToCurrentStep(): void {
+    this.router.navigate([this.path, this.getIdOfCurrentStep()]);
+  }
 
-    public setCurrentStepState(data: any): void {
-        this.setStepStateById(this.getIdOfCurrentStep(), data);
-    }
+  public async setContext(context: StepContext): Promise<void> {
+    const { service, client } = context;
+    this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
+    const state: StepsState = await this.storage.get(this.storageKey);
+    this.setPath(`order/${service?.id}`);
+    this.state$.next(state ?? initState);
+    this.context$.next(context);
+  }
 
-    public nextStep(): void {
-        of(1)
-            .pipe(
-                switchMap(() => this.isAbleToNext()),
-                filter(isAbleToNext => isAbleToNext),
-                first(),
-            )
-            .subscribe(() => {
-                const index = this.getIndexOfCurrentStep();
-                this.currentStep$.next(this.steps.byId[this.steps.ids[index + 1]]);
-                this.navigateToCurrentStep();
-            });
-    }
+  public getContext(): Observable<StepContext> {
+    return this.context$.asObservable().pipe(filter(context => Boolean(context)));
+  }
 
-    public prevStep(): void {
-        of(1)
-            .pipe(
-                switchMap(() => this.isAbleToPrev()),
-                filter(isAbleToPrev => isAbleToPrev),
-            )
-            .subscribe(() => {
-                const index = this.getIndexOfCurrentStep();
-                this.currentStep$.next(this.steps.byId[this.steps.ids[index - 1]]);
-                this.navigateToCurrentStep();
-            });
-    }
+  public isStateEmpty(): Observable<boolean> {
+    return this.isStateEmpty$;
+  }
 
-    public isLastStep(): Observable<boolean> {
-        return this.currentStep$.asObservable().pipe(map(({ id}) => this.steps.ids.lastIndexOf(id) === this.steps.ids.length - 1));
-    }
+  public getFirstStep(): Observable<StepModel> {
+    const { byId, ids } = this.steps;
 
-    public isAbleToNext(): Observable<boolean> {
-        return this.isLastStep().pipe(map(isLastStep => !isLastStep));
-    }
+    return of(byId[ids[0]]);
+  }
 
-    public isAbleToPrev(): Observable<boolean> {
-        return of(this.steps.ids.indexOf(this.getIdOfCurrentStep()) !== 0);
-    }
+  public setPath(path: string): void {
+    this.path = path;
+  }
 
-    public navigateToCurrentStep(): void {
-        this.router.navigate([this.path, this.getIdOfCurrentStep()]);
-    }
+  public resetWizard(): void {
+    this.clearState();
+    this.context$.next(null);
+    this.currentStep$.next(this.steps.byId[this.steps.ids[0]]);
+    this.state$.next(initState);
+    this.path = null;
+    this.reset$.next();
+  }
 
-    public async setContext(context: StepContext): Promise<void> {
-        const { service, client} = context;
-        this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
-        const state: StepsState = await this.storage.get(this.storageKey);
-        this.setPath(`order/${service?.id}`);
-        this.state$.next(state ?? initState);
-        this.context$.next(context);
-    }
+  public isReset(): Observable<void> {
+    return this.reset$.asObservable();
+  }
 
-    public getContext(): Observable<StepContext> {
-        return this.context$.asObservable().pipe(filter(context => Boolean(context)));
-    }
+  private clearState(): void {
+    this.storage.remove(this.storageKey);
+  }
 
-    public isStateEmpty(): Observable<boolean> {
-        return this.isStateEmpty$;
-    }
+  private getIdOfCurrentStep(): string {
+    return this.currentStep$.value.id;
+  }
 
-    public getFirstStep(): Observable<StepModel> {
-        const { byId, ids} = this.steps;
-
-        return of(byId[ids[0]]);
-    }
-
-    public setPath(path: string): void {
-        this.path = path;
-    }
-
-    public resetWizard(): void {
-        this.clearState();
-        this.context$.next(null);
-        this.currentStep$.next(this.steps.byId[this.steps.ids[0]]);
-        this.state$.next(initState);
-        this.path = null;
-        this.reset$.next();
-    }
-
-    public isReset(): Observable<void> {
-        return this.reset$.asObservable();
-    }
-
-    private clearState(): void {
-        this.storage.remove(this.storageKey);
-    }
-
-    private getIdOfCurrentStep(): string {
-        return this.currentStep$.value.id;
-    }
-
-    private getIndexOfCurrentStep(): number {
-        return this.steps.ids.indexOf(this.getIdOfCurrentStep());
-    }
+  private getIndexOfCurrentStep(): number {
+    return this.steps.ids.indexOf(this.getIdOfCurrentStep());
+  }
 }

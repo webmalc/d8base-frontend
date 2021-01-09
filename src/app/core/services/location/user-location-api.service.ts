@@ -11,41 +11,41 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class UserLocationApiService extends AbstractApiService<UserLocation>
-    implements LocationApiServiceInterface, ApiServiceInterface<UserLocation> {
+  implements LocationApiServiceInterface, ApiServiceInterface<UserLocation> {
 
-    private readonly URL = environment.backend.location;
+  private readonly URL = environment.backend.location;
 
-    constructor(private readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(private readonly client: ApiClientService) {
+    super(client);
+  }
 
-    public getDefaultLocation(): Observable<UserLocation> {
-        return super.get().pipe(
-            map((locationList: ApiListResponseInterface<UserLocation>) =>
-                locationList.results.filter(location => location.is_default === true)[0] as UserLocation),
-        );
-    }
+  public getDefaultLocation(): Observable<UserLocation> {
+    return super.get().pipe(
+      map((locationList: ApiListResponseInterface<UserLocation>) =>
+        locationList.results.filter(location => location.is_default === true)[0] as UserLocation),
+    );
+  }
 
-    public getByClientId(): Observable<ApiListResponseInterface<UserLocation>> {
-        return super.get();
-    }
+  public getByClientId(): Observable<ApiListResponseInterface<UserLocation>> {
+    return super.get();
+  }
 
-    public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
-        return this.client.options(this.URL).pipe(
-            map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
-                raw.actions.POST.timezone.choices),
-        );
-    }
+  public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
+    return this.client.options(this.URL).pipe(
+      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
+        raw.actions.POST.timezone.choices),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.URL;
-    }
+  protected getUrl(): string {
+    return this.URL;
+  }
 
-    // @ts-ignore
-    protected transform(data: UserLocation | UserLocation[]): UserLocation | UserLocation[] {
-        return plainToClass(UserLocation, data);
-    }
+  // @ts-ignore
+  protected transform(data: UserLocation | UserLocation[]): UserLocation | UserLocation[] {
+    return plainToClass(UserLocation, data);
+  }
 }

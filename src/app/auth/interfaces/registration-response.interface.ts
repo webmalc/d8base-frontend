@@ -2,5 +2,5 @@ import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interf
 import { UserInterface } from '@app/core/interfaces/user.interface';
 
 export interface RegistrationResponseInterface extends UserInterface {
-    token: AuthResponseInterface;
+  token: AuthResponseInterface;
 }

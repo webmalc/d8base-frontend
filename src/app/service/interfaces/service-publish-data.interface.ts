@@ -9,13 +9,13 @@ import { ServicePhoto } from '@app/service/models/service-photo';
 import { ServiceSchedule } from '@app/service/models/service-schedule';
 
 export default interface ServicePublishData {
-    master: ProfessionalList;
-    service: Service;
-    servicePhotos: ServicePhoto[];
-    serviceSchedule: ServiceSchedule[];
-    masterSchedule: MasterSchedule[];
-    serviceLocation: ServiceLocation;
-    masterLocation: MasterLocation;
-    servicePrice: Price;
-    user?: User;
+  master: ProfessionalList;
+  service: Service;
+  servicePhotos: ServicePhoto[];
+  serviceSchedule: ServiceSchedule[];
+  masterSchedule: MasterSchedule[];
+  serviceLocation: ServiceLocation;
+  masterLocation: MasterLocation;
+  servicePrice: Price;
+  user?: User;
 }

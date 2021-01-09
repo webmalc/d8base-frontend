@@ -17,29 +17,29 @@ import { StepThreeHandlerService } from './steps-navigation-chain/step-three-han
 import { StepTwoHandlerService } from './steps-navigation-chain/step-two-handler.service';
 
 describe('ServiceStepsNavigationService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            RouterTestingModule,
-            HttpClientTestingModule,
-        ],
-        providers: [
-            ServiceStepsNavigationService,
-            ChainManagerService,
-            StepOneHandlerService,
-            StepTwoHandlerService,
-            StepThreeHandlerService,
-            StepFourHandlerService,
-            StepFiveHandlerService,
-            StepSixHandlerService,
-            StepSevenHandlerService,
-            StepFinalHandlerService,
-            ServicePublishDataHolderService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      RouterTestingModule,
+      HttpClientTestingModule,
+    ],
+    providers: [
+      ServiceStepsNavigationService,
+      ChainManagerService,
+      StepOneHandlerService,
+      StepTwoHandlerService,
+      StepThreeHandlerService,
+      StepFourHandlerService,
+      StepFiveHandlerService,
+      StepSixHandlerService,
+      StepSevenHandlerService,
+      StepFinalHandlerService,
+      ServicePublishDataHolderService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: ServiceStepsNavigationService = TestBed.inject(ServiceStepsNavigationService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: ServiceStepsNavigationService = TestBed.inject(ServiceStepsNavigationService);
+    expect(service).toBeTruthy();
+  });
 });

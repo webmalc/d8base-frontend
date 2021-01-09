@@ -6,20 +6,20 @@ import { AuthenticationService } from './authentication.service';
 import { GlobalErrorHandlerService } from './global-error-handler.service';
 
 describe('GlobalErrorHandlerService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            RouterTestingModule,
-        ],
-        providers: [
-            GlobalErrorHandlerService,
-            { provide: AuthenticationService, useValue: { isAuthenticated: () => of(true)}},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      RouterTestingModule,
+    ],
+    providers: [
+      GlobalErrorHandlerService,
+      { provide: AuthenticationService, useValue: { isAuthenticated: () => of(true) } },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: GlobalErrorHandlerService = TestBed.inject(GlobalErrorHandlerService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: GlobalErrorHandlerService = TestBed.inject(GlobalErrorHandlerService);
+    expect(service).toBeTruthy();
+  });
 
-    xit('should be some tests');
+  xit('should be some tests');
 });

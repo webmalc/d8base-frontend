@@ -10,31 +10,31 @@ import { StorageManagerMock } from '../../../../testing/mocks';
 import { MasterProfileCalendarComponent } from './master-profile-calendar.component';
 
 describe('MasterProfileCalendarComponent', () => {
-    let component: MasterProfileCalendarComponent;
-    let fixture: ComponentFixture<MasterProfileCalendarComponent>;
+  let component: MasterProfileCalendarComponent;
+  let fixture: ComponentFixture<MasterProfileCalendarComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MasterProfileCalendarComponent],
-            imports: [
-                IonicModule,
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-            providers: [
-                CalendarGeneratorFactoryService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                CalendarApiService,
-                MasterProfileContextService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MasterProfileCalendarComponent],
+      imports: [
+        IonicModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        CalendarGeneratorFactoryService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        CalendarApiService,
+        MasterProfileContextService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MasterProfileCalendarComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MasterProfileCalendarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

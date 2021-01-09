@@ -7,27 +7,27 @@ import { PublicReview } from '@app/master/models/public-review';
 import { plainToClass } from 'class-transformer';
 
 @Component({
-    selector: 'app-master-profile-review',
-    templateUrl: './master-profile-review.component.html',
-    styleUrls: ['./master-profile-review.component.scss'],
+  selector: 'app-master-profile-review',
+  templateUrl: './master-profile-review.component.html',
+  styleUrls: ['./master-profile-review.component.scss'],
 })
 export class MasterProfileReviewComponent {
 
-    @Input() public publicReview: PublicReview;
+  @Input() public publicReview: PublicReview;
 
-    public getRatingTitle(): string {
-        return HelperService.getRatingTitle(this.publicReview.rating);
-    }
+  public getRatingTitle(): string {
+    return HelperService.getRatingTitle(this.publicReview.rating);
+  }
 
-    public getDate(): string {
-        return HelperService.fromDatetime(this.publicReview.created).date;
-    }
+  public getDate(): string {
+    return HelperService.fromDatetime(this.publicReview.created).date;
+  }
 
-    public getPhotoThumbnail(): string | SafeResourceUrl {
-        return this.getUser().avatar_thumbnail;
-    }
+  public getPhotoThumbnail(): string | SafeResourceUrl {
+    return this.getUser().avatar_thumbnail;
+  }
 
-    public getUser(): PartialUserInterface {
-        return plainToClass(User, this.publicReview.user, { excludeExtraneousValues: true});
-    }
+  public getUser(): PartialUserInterface {
+    return plainToClass(User, this.publicReview.user, { excludeExtraneousValues: true });
+  }
 }

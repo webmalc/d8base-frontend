@@ -12,24 +12,24 @@ import { ServicePublishService } from './service-publish.service';
 import { ServiceScheduleApiService } from './service-schedule-api.service';
 
 describe('ServicePublishService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            HttpClientTestingModule,
-        ],
-        providers: [
-            ServicePublishService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-            ServicePublishDataHolderService,
-            ServicePhotoApiService,
-            ServiceScheduleApiService,
-            ServiceLocationApiService,
-            PricesApiService,
-            ServicePublishDataPreparerService,
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule,
+    ],
+    providers: [
+      ServicePublishService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+      ServicePublishDataHolderService,
+      ServicePhotoApiService,
+      ServiceScheduleApiService,
+      ServiceLocationApiService,
+      PricesApiService,
+      ServicePublishDataPreparerService,
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: ServicePublishService = TestBed.inject(ServicePublishService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: ServicePublishService = TestBed.inject(ServicePublishService);
+    expect(service).toBeTruthy();
+  });
 });

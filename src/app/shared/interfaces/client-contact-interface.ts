@@ -1,8 +1,8 @@
 export interface ClientContactInterface {
-    id: number;
-    contact: number;
-    contact_display?: string;
-    value: string;
-    professional?: number;
-    contact_code?: string;
+  id: number;
+  contact: number;
+  contact_display?: string;
+  value: string;
+  professional?: number;
+  contact_code?: string;
 }

@@ -6,20 +6,20 @@ import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class SentOrdersApiService extends AbstractApiService<SentOrder> {
 
-    constructor(client: ApiClientService) {
-        super(client);
-    }
+  constructor(client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return environment.backend.sent_orders;
-    }
+  protected getUrl(): string {
+    return environment.backend.sent_orders;
+  }
 
-    // @ts-ignore
-    protected transform(data: SentOrder | SentOrder[]): SentOrder | SentOrder[] {
-        return plainToClass(SentOrder, data);
-    }
+  // @ts-ignore
+  protected transform(data: SentOrder | SentOrder[]): SentOrder | SentOrder[] {
+    return plainToClass(SentOrder, data);
+  }
 }

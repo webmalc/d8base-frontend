@@ -6,34 +6,34 @@ import { MasterApiService } from '@app/master/services/master-api.service';
 import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
 
 @Component({
-    selector: 'app-master-edit-page',
-    templateUrl: './master-edit.page.html',
-    styleUrls: ['./master-edit.page.scss'],
+  selector: 'app-master-edit-page',
+  templateUrl: './master-edit.page.html',
+  styleUrls: ['./master-edit.page.scss'],
 })
 export class MasterEditPage extends AbstractModelEditPage<Master> {
 
-    constructor(
-        protected readonly api: MasterApiService,
-        protected readonly route: ActivatedRoute,
-        protected readonly masterManager: MasterManagerService,
-        protected readonly router: Router,
-    ) {
-        super(route, api, masterManager);
-    }
+  constructor(
+    protected readonly api: MasterApiService,
+    protected readonly route: ActivatedRoute,
+    protected readonly masterManager: MasterManagerService,
+    protected readonly router: Router,
+  ) {
+    super(route, api, masterManager);
+  }
 
-    protected afterApiCallback(): void {
-        this.router.navigateByUrl('/professional');
-    }
+  protected afterApiCallback(): void {
+    this.router.navigateByUrl('/professional');
+  }
 
-    protected getItemId(): number {
-        return parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-    }
+  protected getItemId(): number {
+    return parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
+  }
 
-    protected getNewModel(): Master {
-        return new Master();
-    }
+  protected getNewModel(): Master {
+    return new Master();
+  }
 
-    protected isUserOnly(): boolean {
-        return true;
-    }
+  protected isUserOnly(): boolean {
+    return true;
+  }
 }

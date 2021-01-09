@@ -5,15 +5,15 @@ import { StorageManagerMock } from '../../../testing/mocks';
 import { PreLogoutService } from './pre-logout.service';
 
 describe('PreLogoutService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        providers: [
-            PreLogoutService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [
+      PreLogoutService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: PreLogoutService = TestBed.inject(PreLogoutService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: PreLogoutService = TestBed.inject(PreLogoutService);
+    expect(service).toBeTruthy();
+  });
 });

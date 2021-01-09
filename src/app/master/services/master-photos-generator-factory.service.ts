@@ -6,21 +6,21 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class MasterPhotosGeneratorFactoryService {
 
-    constructor(
-        private readonly masterPhotosReadonlyApi: MasterPhotosReadonlyApiService,
-        private readonly masterManager: MasterManagerService,
-    ) {
-    }
+  constructor(
+    private readonly masterPhotosReadonlyApi: MasterPhotosReadonlyApiService,
+    private readonly masterManager: MasterManagerService,
+  ) {
+  }
 
-    public getPhotos(masterId?: number): Observable<MasterPhoto[]> {
-        return masterId ? this.get(masterId) : this.masterManager.getMasterList().pipe(switchMap(list => this.get(list[0].id)));
-    }
+  public getPhotos(masterId?: number): Observable<MasterPhoto[]> {
+    return masterId ? this.get(masterId) : this.masterManager.getMasterList().pipe(switchMap(list => this.get(list[0].id)));
+  }
 
-    private get(masterId: number): Observable<MasterPhoto[]> {
-        return this.masterPhotosReadonlyApi.get({ professional: masterId.toString()}).pipe(map(res => res.results));
-    }
+  private get(masterId: number): Observable<MasterPhoto[]> {
+    return this.masterPhotosReadonlyApi.get({ professional: masterId.toString() }).pipe(map(res => res.results));
+  }
 }

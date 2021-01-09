@@ -10,94 +10,94 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-main',
-    templateUrl: './main.page.html',
-    styleUrls: ['./main.page.scss'],
+  selector: 'app-main',
+  templateUrl: './main.page.html',
+  styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
 
-    public searchData: MainPageSearchInterface;
-    public locationEnabled = false;
-    public defaultCategoryList = DefaultCategoryList;
+  public searchData: MainPageSearchInterface;
+  public locationEnabled = false;
+  public defaultCategoryList = DefaultCategoryList;
 
-    constructor(
-        private readonly currentLocation: CurrentLocationCompilerService,
-        private readonly router: Router,
-        private readonly defaultCategory: DefaultCategoriesFactoryService,
-    ) {
-    }
+  constructor(
+    private readonly currentLocation: CurrentLocationCompilerService,
+    private readonly router: Router,
+    private readonly defaultCategory: DefaultCategoriesFactoryService,
+  ) {
+  }
 
-    public ngOnInit(): void {
-        this.initSearchData();
-        this.getCurrentLocation().subscribe(
-            data => {
-                if (data) {
-                    this.searchData.location = {
-                        country: data.country,
-                        city: data.city,
-                        coordinates: data.coords,
-                    };
-                }
-            },
-            err => this.locationEnabled = true,
-            () => this.locationEnabled = true,
-        );
-    }
-
-    public useCategory(categoryName: string): void {
-        const cat = this.defaultCategory.getByName(categoryName);
-        if (cat) {
-            this.router.navigateByUrl('/search', { state: { category: cat, location: this.searchData.location}});
+  public ngOnInit(): void {
+    this.initSearchData();
+    this.getCurrentLocation().subscribe(
+      data => {
+        if (data) {
+          this.searchData.location = {
+            country: data.country,
+            city: data.city,
+            coordinates: data.coords,
+          };
         }
-    }
+      },
+      err => this.locationEnabled = true,
+      () => this.locationEnabled = true,
+    );
+  }
 
-    public updateCity(data: SearchLocationDataInterface): void {
-        if (data.city) {
-            this.currentLocation.getCoords(data.country, data.city).pipe(
-                filter(res => null !== res),
-            ).subscribe(
-                res => this.searchData.location = {
-                    country: data.country,
-                    city: data.city,
-                    coordinates: res,
-                },
-            );
-        } else if (data.coordinates?.latitude && data.coordinates?.longitude) {
-            this.currentLocation.getExtendedLocationByCoords(data.coordinates).pipe(
-                filter(res => null !== res),
-            ).subscribe(
-                res => this.searchData.location = {
-                    country: res.country,
-                    city: res.city,
-                    coordinates: res.coords,
-                },
-            );
-        }
+  public useCategory(categoryName: string): void {
+    const cat = this.defaultCategory.getByName(categoryName);
+    if (cat) {
+      this.router.navigateByUrl('/search', { state: { category: cat, location: this.searchData.location } });
     }
+  }
+
+  public updateCity(data: SearchLocationDataInterface): void {
+    if (data.city) {
+      this.currentLocation.getCoords(data.country, data.city).pipe(
+        filter(res => null !== res),
+      ).subscribe(
+        res => this.searchData.location = {
+          country: data.country,
+          city: data.city,
+          coordinates: res,
+        },
+      );
+    } else if (data.coordinates?.latitude && data.coordinates?.longitude) {
+      this.currentLocation.getExtendedLocationByCoords(data.coordinates).pipe(
+        filter(res => null !== res),
+      ).subscribe(
+        res => this.searchData.location = {
+          country: res.country,
+          city: res.city,
+          coordinates: res.coords,
+        },
+      );
+    }
+  }
 
 
-    public searchDisabled(): boolean {
-        return !(this.searchData.needle && true);
-    }
+  public searchDisabled(): boolean {
+    return !(this.searchData.needle && true);
+  }
 
-    public search(): void {
-        this.router.navigateByUrl('/search', { state: { data: this.searchData}});
-    }
+  public search(): void {
+    this.router.navigateByUrl('/search', { state: { data: this.searchData } });
+  }
 
-    private initSearchData(): void {
-        this.searchData = {
-            needle: undefined,
-            date: undefined,
-            time: undefined,
-            location: {
-                coordinates: undefined,
-                country: undefined,
-                city: undefined,
-            },
-        };
-    }
+  private initSearchData(): void {
+    this.searchData = {
+      needle: undefined,
+      date: undefined,
+      time: undefined,
+      location: {
+        coordinates: undefined,
+        country: undefined,
+        city: undefined,
+      },
+    };
+  }
 
-    private getCurrentLocation(): Observable<ExtendedLocation | null> {
-        return this.currentLocation.getCurrentLocation();
-    }
+  private getCurrentLocation(): Observable<ExtendedLocation | null> {
+    return this.currentLocation.getCurrentLocation();
+  }
 }

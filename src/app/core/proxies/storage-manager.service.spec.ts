@@ -20,7 +20,7 @@ describe('StorageManagerService', () => {
       StorageManagerService,
     ],
     imports: [
-        IonicStorageModule.forRoot(),
+      IonicStorageModule.forRoot(),
     ],
   }));
 

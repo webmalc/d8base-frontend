@@ -21,43 +21,43 @@ import { StepTwoHandlerService } from '../../services/steps-navigation-chain/ste
 import { ServicePublishStepFiveComponent } from './service-publish-step-five.component';
 
 describe('ServicePublishStepFiveComponent', () => {
-    let component: ServicePublishStepFiveComponent;
-    let fixture: ComponentFixture<ServicePublishStepFiveComponent>;
+  let component: ServicePublishStepFiveComponent;
+  let fixture: ComponentFixture<ServicePublishStepFiveComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServicePublishStepFiveComponent],
-            imports: [
-                IonicModule.forRoot(),
-                ReactiveFormsModule,
-                FormsModule,
-                RouterTestingModule,
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-            providers: [
-                ServicePublishStepFiveFormService,
-                ServicePublishDataHolderService,
-                ServiceStepsNavigationService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                ChainManagerService,
-                StepOneHandlerService,
-                StepTwoHandlerService,
-                StepThreeHandlerService,
-                StepFourHandlerService,
-                StepFiveHandlerService,
-                StepSixHandlerService,
-                StepSevenHandlerService,
-                StepFinalHandlerService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServicePublishStepFiveComponent],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        ServicePublishStepFiveFormService,
+        ServicePublishDataHolderService,
+        ServiceStepsNavigationService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServicePublishStepFiveComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServicePublishStepFiveComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

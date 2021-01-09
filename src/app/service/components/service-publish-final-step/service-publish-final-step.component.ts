@@ -13,52 +13,52 @@ import { Observable } from 'rxjs';
 import { finalize, map, single } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-service-publish-final-step',
-    templateUrl: './service-publish-final-step.component.html',
-    styleUrls: ['./service-publish-final-step.component.scss'],
+  selector: 'app-service-publish-final-step',
+  templateUrl: './service-publish-final-step.component.html',
+  styleUrls: ['./service-publish-final-step.component.scss'],
 })
 export class ServicePublishFinalStepComponent {
 
-    public readonly contactAddUrl: string = '/professional/professional-contact-add/';
-    public readonly contactEditUrl: string = '/professional/professional-contact-edit/';
-    public readonly contactAddDefaultUrl: string = '/professional/professional-contact-add-default/';
+  public readonly contactAddUrl: string = '/professional/professional-contact-add/';
+  public readonly contactEditUrl: string = '/professional/professional-contact-edit/';
+  public readonly contactAddDefaultUrl: string = '/professional/professional-contact-add-default/';
 
-    constructor(
-        private readonly servicePublish: ServicePublishService,
-        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
-        private readonly masterLocationApi: MasterLocationApiService,
-        private readonly router: Router,
-        private readonly masterManager: MasterManagerService,
-        private readonly loading: LoadingService,
-    ) {
-    }
+  constructor(
+    private readonly servicePublish: ServicePublishService,
+    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+    public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
+    private readonly masterLocationApi: MasterLocationApiService,
+    private readonly router: Router,
+    private readonly masterManager: MasterManagerService,
+    private readonly loading: LoadingService,
+  ) {
+  }
 
-    public async publish(): Promise<void> {
-        this.loading.presentLoading();
-        const master = this.isNewMaster() ? null : await this.getMaster().toPromise();
-        if (master) {
-            await this.servicePublishDataHolder.assignStepData(
-                ServicePublishSteps.Final, { master},
-            );
-        }
-        this.servicePublish.publish()
-            .pipe(
-                single(),
-                finalize(() => this.loading.loadingDismiss()),
-            )
-            .subscribe(
-                (service) => this.router.navigate(['service', service.id], { queryParams: { from: 'publish'}}),
-            );
+  public async publish(): Promise<void> {
+    this.loading.presentLoading();
+    const master = this.isNewMaster() ? null : await this.getMaster().toPromise();
+    if (master) {
+      await this.servicePublishDataHolder.assignStepData(
+        ServicePublishSteps.Final, { master },
+      );
     }
+    this.servicePublish.publish()
+      .pipe(
+        single(),
+        finalize(() => this.loading.loadingDismiss()),
+      )
+      .subscribe(
+        (service) => this.router.navigate(['service', service.id], { queryParams: { from: 'publish' } }),
+      );
+  }
 
-    public isNewMaster(): boolean {
-        return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four)?.isNewMaster || false;
-    }
+  public isNewMaster(): boolean {
+    return this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four)?.isNewMaster || false;
+  }
 
-    private getMaster(): Observable<ProfessionalList> {
-        return this.masterManager.getMasterList().pipe(
-            map(list => list[0]),
-        );
-    }
+  private getMaster(): Observable<ProfessionalList> {
+    return this.masterManager.getMasterList().pipe(
+      map(list => list[0]),
+    );
+  }
 }

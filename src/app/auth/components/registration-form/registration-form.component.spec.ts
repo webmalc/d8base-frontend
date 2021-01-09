@@ -27,78 +27,78 @@ import { CityPickerPopoverComponent } from '../city-picker-popover/city-picker-p
 import { RegistrationFormComponent } from './registration-form.component';
 
 describe('RegistrationFormComponent', () => {
-    let component: RegistrationFormComponent;
-    let fixture: ComponentFixture<RegistrationFormComponent>;
-    let router: Router;
+  let component: RegistrationFormComponent;
+  let fixture: ComponentFixture<RegistrationFormComponent>;
+  let router: Router;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                RegistrationFormComponent,
-                ErrorFlashbagComponent,
-                CityPickerPopoverComponent,
-            ],
-            imports: [
-                IonicModule.forRoot(),
-                ReactiveFormsModule,
-                FormsModule,
-                RouterTestingModule,
-                TranslateModule.forRoot(),
-                HttpClientTestingModule,
-                CommonModule,
-                IonicSelectableModule,
-            ],
-            providers: [
-                RegistrationFormService,
-                IpServicesHolderService,
-                IpApiService,
-                IpDataService,
-                IpnfDataService,
-                LocationAccuracy,
-                Geolocation,
-                SelectableCountryOnSearchService,
-                SelectableCityOnSearchService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        RegistrationFormComponent,
+        ErrorFlashbagComponent,
+        CityPickerPopoverComponent,
+      ],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        CommonModule,
+        IonicSelectableModule,
+      ],
+      providers: [
+        RegistrationFormService,
+        IpServicesHolderService,
+        IpApiService,
+        IpDataService,
+        IpnfDataService,
+        LocationAccuracy,
+        Geolocation,
+        SelectableCountryOnSearchService,
+        SelectableCityOnSearchService,
+      ],
+    }).compileComponents();
 
-        router = TestBed.inject(Router);
-        spyOn(router, 'navigateByUrl');
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigateByUrl');
 
-        fixture = TestBed.createComponent(RegistrationFormComponent);
-        component = fixture.componentInstance;
-        component.ngOnInit();
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(RegistrationFormComponent);
+    component = fixture.componentInstance;
+    component.ngOnInit();
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    xit('test submit registration form', () => {
-        const email = (component as any).registrationFormService.form.controls[RegistrationFormFields.Email];
-        const pwd = (component as any).registrationFormService.form.controls[RegistrationFormFields.Password];
+  xit('test submit registration form', () => {
+    const email = (component as any).registrationFormService.form.controls[RegistrationFormFields.Email];
+    const pwd = (component as any).registrationFormService.form.controls[RegistrationFormFields.Password];
 
-        email.setValue('test@test.te');
-        pwd.setValue('test');
+    email.setValue('test@test.te');
+    pwd.setValue('test');
 
-        spyOn((component as any).registrationFormData, 'emit');
+    spyOn((component as any).registrationFormData, 'emit');
 
-        fixture.debugElement.nativeElement.querySelector('ion-button').click();
+    fixture.debugElement.nativeElement.querySelector('ion-button').click();
 
-        const data = {
-            email: 'test@test.te',
-            password: 'test',
-            firstName: '',
-            phone: '',
-            city: '',
-            country: '',
-        };
+    const data = {
+      email: 'test@test.te',
+      password: 'test',
+      firstName: '',
+      phone: '',
+      city: '',
+      country: '',
+    };
 
-        expect((component as any).registrationFormData.emit)
-            .toHaveBeenCalledWith(
-                {
-                    user: plainToClass(User, data, { excludeExtraneousValues: true}),
-                    location: plainToClass(UserLocation, data, { excludeExtraneousValues: true}),
-                });
-    });
+    expect((component as any).registrationFormData.emit)
+      .toHaveBeenCalledWith(
+        {
+          user: plainToClass(User, data, { excludeExtraneousValues: true }),
+          location: plainToClass(UserLocation, data, { excludeExtraneousValues: true }),
+        });
+  });
 });

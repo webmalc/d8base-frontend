@@ -9,27 +9,27 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DateTimeStepComponent } from './date-time-step.component';
 
 describe('DateTimeStepComponent', () => {
-    let component: DateTimeStepComponent;
-    let fixture: ComponentFixture<DateTimeStepComponent>;
+  let component: DateTimeStepComponent;
+  let fixture: ComponentFixture<DateTimeStepComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [DateTimeStepComponent],
-            imports: [
-                IonicModule,
-                TranslateModule.forRoot(),
-                HttpClientTestingModule,
-                RouterTestingModule,
-            ],
-            providers: [OrderWizardStateService, FormBuilder],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [DateTimeStepComponent],
+      imports: [
+        IonicModule,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      providers: [OrderWizardStateService, FormBuilder],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(DateTimeStepComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(DateTimeStepComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

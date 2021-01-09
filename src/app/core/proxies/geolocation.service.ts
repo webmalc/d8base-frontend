@@ -6,18 +6,18 @@ import { Observable } from 'rxjs';
  *  Ionic Geolocation service proxy
  */
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class GeolocationService {
 
-    constructor(private readonly geolocation: Geolocation) {
-    }
+  constructor(private readonly geolocation: Geolocation) {
+  }
 
-    public getCurrentPosition(): Promise<Geoposition> {
-        return this.geolocation.getCurrentPosition();
-    }
+  public getCurrentPosition(): Promise<Geoposition> {
+    return this.geolocation.getCurrentPosition();
+  }
 
-    public watchPosition(options?: GeolocationOptions): Observable<Geoposition | PositionError> {
-        return this.geolocation.watchPosition(options);
-    }
+  public watchPosition(options?: GeolocationOptions): Observable<Geoposition | PositionError> {
+    return this.geolocation.watchPosition(options);
+  }
 }

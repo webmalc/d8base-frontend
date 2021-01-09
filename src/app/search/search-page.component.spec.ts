@@ -8,26 +8,26 @@ import { SearchPage } from './search-page.component';
 import { SearchService } from './services/search.service';
 
 describe('SearchPage', () => {
-    let component: SearchPage;
-    let fixture: ComponentFixture<SearchPage>;
+  let component: SearchPage;
+  let fixture: ComponentFixture<SearchPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [SearchPage],
-            imports: [RouterTestingModule, IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-            providers: [
-                SearchService,
-                { provide: Platform, useValue: { width: () => 1000}},
-                SearchFilterStateService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [SearchPage],
+      imports: [RouterTestingModule, IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        SearchService,
+        { provide: Platform, useValue: { width: () => 1000 } },
+        SearchFilterStateService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(SearchPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(SearchPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

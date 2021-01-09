@@ -7,35 +7,35 @@ import { StorageManagerMock } from 'src/testing/mocks';
 import { MasterLocationEditPage } from './master-location-edit.page';
 
 describe('MasterLocationEditPage', () => {
-    let component: MasterLocationEditPage;
-    let fixture: ComponentFixture<MasterLocationEditPage>;
+  let component: MasterLocationEditPage;
+  let fixture: ComponentFixture<MasterLocationEditPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MasterLocationEditPage],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule],
-            providers: [
-                {
-                    provide: ActivatedRoute, useValue: {
-                        snapshot: {
-                            paramMap: {
-                                get(): string {
-                                    return '';
-                                },
-                            },
-                        },
-                    },
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MasterLocationEditPage],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute, useValue: {
+            snapshot: {
+              paramMap: {
+                get(): string {
+                  return '';
                 },
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+              },
+            },
+          },
+        },
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MasterLocationEditPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MasterLocationEditPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

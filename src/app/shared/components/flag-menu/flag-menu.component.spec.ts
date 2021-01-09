@@ -7,24 +7,24 @@ import { StorageManagerMock } from '../../../../testing/mocks';
 import { FlagMenuComponent } from './flag-menu.component';
 
 describe('FlagMenuComponent', () => {
-    let component: FlagMenuComponent;
-    let fixture: ComponentFixture<FlagMenuComponent>;
+  let component: FlagMenuComponent;
+  let fixture: ComponentFixture<FlagMenuComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [FlagMenuComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-            providers: [
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [FlagMenuComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(FlagMenuComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(FlagMenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

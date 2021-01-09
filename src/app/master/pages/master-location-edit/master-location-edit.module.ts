@@ -10,14 +10,14 @@ import { SharedModule } from '@app/shared/shared.module';
 import { MasterLocationEditPage } from './master-location-edit.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MasterLocationEditPageRoutingModule,
-        SharedModule,
-    ],
-    declarations: [MasterLocationEditPage],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MasterLocationEditPageRoutingModule,
+    SharedModule,
+  ],
+  declarations: [MasterLocationEditPage],
 })
 export class MasterLocationEditPageModule {
 }

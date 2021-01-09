@@ -13,23 +13,23 @@ import { LoginPage } from './login.page';
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        LoginPageRoutingModule,
-        ReactiveFormsModule,
-        SharedModule,
-        TranslateModule,
-    ],
-    declarations: [
-        LoginPage,
-        LoginFormComponent,
-    ],
-    providers: [
-        TokenManagerService,
-        LoginFormService,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    LoginPageRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    TranslateModule,
+  ],
+  declarations: [
+    LoginPage,
+    LoginFormComponent,
+  ],
+  providers: [
+    TokenManagerService,
+    LoginFormService,
+  ],
 })
 export class LoginPageModule {
 }

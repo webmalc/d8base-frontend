@@ -12,93 +12,93 @@ import { Master } from '../../core/models/master';
 import { SavedProfessionalApiService } from './saved-professional-api.service';
 
 describe('SavedProfessionalApiService', () => {
-    let service: SavedProfessionalApiService;
-    let httpTestingController: HttpTestingController;
+  let service: SavedProfessionalApiService;
+  let httpTestingController: HttpTestingController;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-            providers: [SavedProfessionalApiService],
-        });
-        service = TestBed.inject(SavedProfessionalApiService);
-        httpTestingController = TestBed.inject(HttpTestingController);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [SavedProfessionalApiService],
     });
+    service = TestBed.inject(SavedProfessionalApiService);
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
 
-    afterEach(() => {
-        httpTestingController.verify();
-    });
+  afterEach(() => {
+    httpTestingController.verify();
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-    it('should perform getAll$ method', () => {
+  it('should perform getAll$ method', () => {
 
-        const savedFixture = SavedProfessionalFixture.create();
-        const autoFixture = new Autofixture();
-        const resultFixtures = autoFixture.createMany(savedFixture, 2);
-        const listFixture = ApiListResponseFixture
-            .create<SavedProfessionalInterface<number>>(resultFixtures);
+    const savedFixture = SavedProfessionalFixture.create();
+    const autoFixture = new Autofixture();
+    const resultFixtures = autoFixture.createMany(savedFixture, 2);
+    const listFixture = ApiListResponseFixture
+      .create<SavedProfessionalInterface<number>>(resultFixtures);
 
-        service.getAll$().subscribe(
-            data => {
-                expect(data.length).toBe(2);
-                expect(data).toEqual(resultFixtures);
-            },
-        );
+    service.getAll$().subscribe(
+      data => {
+        expect(data.length).toBe(2);
+        expect(data).toEqual(resultFixtures);
+      },
+    );
 
-        const request = httpTestingController
-            .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}`);
-        expect(request.request.method).toBe('GET');
-        request.flush(listFixture);
-    });
+    const request = httpTestingController
+      .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}`);
+    expect(request.request.method).toBe('GET');
+    request.flush(listFixture);
+  });
 
-    it ('should be able to create item', () => {
-        const master: Master = MasterFixture.create();
+  it('should be able to create item', () => {
+    const master: Master = MasterFixture.create();
 
-        const note = 'some note';
-        const answer = SavedProfessionalFixture.create();
-        answer.note = note;
-        answer.professional = master.id;
+    const note = 'some note';
+    const answer = SavedProfessionalFixture.create();
+    answer.note = note;
+    answer.professional = master.id;
 
-        service.create(answer).subscribe(
-            data => expect(data).toEqual(answer),
-        );
+    service.create(answer).subscribe(
+      data => expect(data).toEqual(answer),
+    );
 
-        const request = httpTestingController
-            .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}`);
-        expect(request.request.method).toBe('POST');
-        expect(request.request.body).toEqual(answer);
+    const request = httpTestingController
+      .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}`);
+    expect(request.request.method).toBe('POST');
+    expect(request.request.body).toEqual(answer);
 
-        request.flush(answer);
-    });
+    request.flush(answer);
+  });
 
-    it ('should be able to getById method', () => {
-        const answer = SavedProfessionalFixture.create();
+  it('should be able to getById method', () => {
+    const answer = SavedProfessionalFixture.create();
 
-        service.getById(answer.id).subscribe(
-            data => expect(data).toEqual(answer),
-        );
+    service.getById(answer.id).subscribe(
+      data => expect(data).toEqual(answer),
+    );
 
-        const request = httpTestingController
-            .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}${answer.id}/`);
-        expect(request.request.method).toBe('GET');
+    const request = httpTestingController
+      .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}${answer.id}/`);
+    expect(request.request.method).toBe('GET');
 
-        request.flush(answer);
-    });
+    request.flush(answer);
+  });
 
-    it ('should be able to remove item', () => {
-        const master = MasterFixture.create();
-        const bookmark = BookmarkFixture.create(master);
+  it('should be able to remove item', () => {
+    const master = MasterFixture.create();
+    const bookmark = BookmarkFixture.create(master);
 
-        service.remove(bookmark).subscribe(
-            data => expect(data).toBeNull(),
-        );
+    service.remove(bookmark).subscribe(
+      data => expect(data).toBeNull(),
+    );
 
-        const request = httpTestingController
-            .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}${bookmark.id}/`);
-        expect(request.request.method).toBe('DELETE');
-        request.flush(null, { status: 204, statusText: ''});
-    });
+    const request = httpTestingController
+      .expectOne(`${environment.backend.url}${environment.backend.saved_professionals}${bookmark.id}/`);
+    expect(request.request.method).toBe('DELETE');
+    request.flush(null, { status: 204, statusText: '' });
+  });
 });
 

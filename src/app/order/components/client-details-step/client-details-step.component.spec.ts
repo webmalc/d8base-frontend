@@ -12,35 +12,35 @@ import { UserManagerService } from '../../../core/services/user-manager.service'
 import { ClientDetailsStepComponent } from './client-details-step.component';
 
 describe('ClientDetailsStepComponent', () => {
-    let component: ClientDetailsStepComponent;
-    let fixture: ComponentFixture<ClientDetailsStepComponent>;
+  let component: ClientDetailsStepComponent;
+  let fixture: ComponentFixture<ClientDetailsStepComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ClientDetailsStepComponent],
-                imports: [
-                    IonicModule.forRoot(),
-                    TranslateModule.forRoot(),
-                    RouterTestingModule,
-                    IonicStorageModule.forRoot(),
-                    HttpClientTestingModule,
-                ],
-                providers: [
-                    OrderWizardStateService,
-                    UserManagerService,
-                    FormBuilder,
-                    ChangeDetectorRef,
-                ],
-            }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ClientDetailsStepComponent],
+        imports: [
+          IonicModule.forRoot(),
+          TranslateModule.forRoot(),
+          RouterTestingModule,
+          IonicStorageModule.forRoot(),
+          HttpClientTestingModule,
+        ],
+        providers: [
+          OrderWizardStateService,
+          UserManagerService,
+          FormBuilder,
+          ChangeDetectorRef,
+        ],
+      }).compileComponents();
 
-            fixture = TestBed.createComponent(ClientDetailsStepComponent);
-            component = fixture.componentInstance;
-            fixture.detectChanges();
-        }),
-    );
+      fixture = TestBed.createComponent(ClientDetailsStepComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

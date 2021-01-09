@@ -7,54 +7,54 @@ import { ProfilePage } from '@app/profile/profile.page';
 import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component : ProfilePage,
-        canActivate: [MainGuard],
-    },
-    {
-        path: 'contact-edit/:contact-id',
-        component: UserContactEditComponent,
-        canActivate: [MainGuard],
-        data: { isMaster: false},
-    },
-    {
-        path: 'contact-add',
-        component: UserContactEditComponent,
-        canActivate: [MainGuard],
-        data: { isMaster: false},
-    },
-    {
-        path: 'contact-add-default/:default-contact-id',
-        component: UserContactEditComponent,
-        canActivate: [MainGuard],
-        data: { isMaster: false},
-    },
-    {
-        path: 'location-edit/:location-id',
-        loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
-        canActivate: [MainGuard],
-    },
-    {
-        path: 'location-add',
-        loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
-        canActivate: [MainGuard],
-    },
-    {
-        path: 'edit',
-        component: UserEditComponent,
-        canActivate: [MainGuard],
-    },
-    {
-        path: 'about',
-        component: AboutEditComponent,
-        canActivate: [MainGuard],
-    },
+  {
+    path: '',
+    component: ProfilePage,
+    canActivate: [MainGuard],
+  },
+  {
+    path: 'contact-edit/:contact-id',
+    component: UserContactEditComponent,
+    canActivate: [MainGuard],
+    data: { isMaster: false },
+  },
+  {
+    path: 'contact-add',
+    component: UserContactEditComponent,
+    canActivate: [MainGuard],
+    data: { isMaster: false },
+  },
+  {
+    path: 'contact-add-default/:default-contact-id',
+    component: UserContactEditComponent,
+    canActivate: [MainGuard],
+    data: { isMaster: false },
+  },
+  {
+    path: 'location-edit/:location-id',
+    loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
+    canActivate: [MainGuard],
+  },
+  {
+    path: 'location-add',
+    loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
+    canActivate: [MainGuard],
+  },
+  {
+    path: 'edit',
+    component: UserEditComponent,
+    canActivate: [MainGuard],
+  },
+  {
+    path: 'about',
+    component: AboutEditComponent,
+    canActivate: [MainGuard],
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ProfilePageRoutingModule {
 }

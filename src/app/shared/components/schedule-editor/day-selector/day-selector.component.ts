@@ -6,18 +6,18 @@ import * as ScheduleConstants from '../schedule.constants';
  * Day of the week selection popover
  */
 @Component({
-    selector: 'app-timetable-add-time-popover',
-    templateUrl: './day-selector.component.html',
-    styleUrls: ['./day-selector.component.scss'],
+  selector: 'app-timetable-add-time-popover',
+  templateUrl: './day-selector.component.html',
+  styleUrls: ['./day-selector.component.scss'],
 })
 export class DaySelectorComponent {
 
-    public defaultWeek = ScheduleConstants.defaultWeek;
+  public defaultWeek = ScheduleConstants.defaultWeek;
 
-    constructor(private readonly popoverController: PopoverController) {
-    }
+  constructor(private readonly popoverController: PopoverController) {
+  }
 
-    public onDayClick(index: number): void {
-        this.popoverController.dismiss(index);
-    }
+  public onDayClick(index: number): void {
+    this.popoverController.dismiss(index);
+  }
 }

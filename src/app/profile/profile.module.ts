@@ -20,32 +20,32 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        ProfilePageRoutingModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        SharedModule,
-        LeafletModule,
-        IonicSelectableModule,
-    ],
-    declarations: [
-        ProfilePage,
-        UserContactEditComponent,
-        UserEditComponent,
-        AboutEditComponent,
-    ],
-    providers: [
-        PluginApiService,
-        ProfileService,
-        UserContactApiService,
-        SettingsFormService,
-        BookmarksService,
-        SavedProfessionalApiService,
-        RegisterEmailApiService,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ProfilePageRoutingModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    SharedModule,
+    LeafletModule,
+    IonicSelectableModule,
+  ],
+  declarations: [
+    ProfilePage,
+    UserContactEditComponent,
+    UserEditComponent,
+    AboutEditComponent,
+  ],
+  providers: [
+    PluginApiService,
+    ProfileService,
+    UserContactApiService,
+    SettingsFormService,
+    BookmarksService,
+    SavedProfessionalApiService,
+    RegisterEmailApiService,
+  ],
 })
 export class ProfilePageModule {
 }

@@ -5,39 +5,39 @@ import { LoginFormFields } from '../../enums/login-form-fields';
 import { LoginFormService } from '../../forms/login-form.service';
 
 @Component({
-    selector: 'app-login-form',
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss'],
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
 
-    @Input() public errorMessages: string[];
-    public readonly formFields = LoginFormFields;
-    @Output() private readonly user = new EventEmitter<Credentials>();
+  @Input() public errorMessages: string[];
+  public readonly formFields = LoginFormFields;
+  @Output() private readonly user = new EventEmitter<Credentials>();
 
-    constructor(
-        public readonly loginFormService: LoginFormService,
-        private readonly router: Router,
-    ) {
-    }
+  constructor(
+    public readonly loginFormService: LoginFormService,
+    private readonly router: Router,
+  ) {
+  }
 
-    public ngOnInit(): void {
-        this.loginFormService.initForm();
-    }
+  public ngOnInit(): void {
+    this.loginFormService.initForm();
+  }
 
-    public submitLoginForm(): void {
-        if (this.loginFormService.form.invalid) {
-            return;
-        }
-        const data = this.loginFormService.form.getRawValue();
-        const credentials = {
-            username: data[LoginFormFields.Username],
-            password: data[LoginFormFields.Password],
-        };
-        this.user.emit(credentials);
+  public submitLoginForm(): void {
+    if (this.loginFormService.form.invalid) {
+      return;
     }
+    const data = this.loginFormService.form.getRawValue();
+    const credentials = {
+      username: data[LoginFormFields.Username],
+      password: data[LoginFormFields.Password],
+    };
+    this.user.emit(credentials);
+  }
 
-    public onForgotPassword(): void {
-        this.router.navigateByUrl('/auth/password-recover');
-    }
+  public onForgotPassword(): void {
+    this.router.navigateByUrl('/auth/password-recover');
+  }
 }

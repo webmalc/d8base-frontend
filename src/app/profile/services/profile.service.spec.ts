@@ -7,18 +7,18 @@ import { ProfileService } from './profile.service';
 
 
 describe('ProfileService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, ReactiveFormsModule],
-        providers: [
-            ProfileService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule, ReactiveFormsModule],
+    providers: [
+      ProfileService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: ProfileService = TestBed.inject(ProfileService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: ProfileService = TestBed.inject(ProfileService);
+    expect(service).toBeTruthy();
+  });
 
-    xit('should do some tests');
+  xit('should do some tests');
 });

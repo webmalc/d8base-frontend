@@ -8,4 +8,4 @@ import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 
 export type StepDataInterfaceType = StepOneDataInterface | StepTwoDataInterface | StepThreeDataInterface | StepFourDataInterface |
-    StepFiveDataInterface | StepSixDataInterface | StepSevenDataInterface | FinalStepDataInterface;
+  StepFiveDataInterface | StepSixDataInterface | StepSevenDataInterface | FinalStepDataInterface;

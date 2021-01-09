@@ -9,38 +9,39 @@ import { ServicePublishDataHolderService } from '@app/service/services/service-p
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
 
 @Component({
-    selector: 'app-service-publish-step-six',
-    templateUrl: './service-publish-step-six.component.html',
-    styleUrls: ['./service-publish-step-six.component.scss'],
+  selector: 'app-service-publish-step-six',
+  templateUrl: './service-publish-step-six.component.html',
+  styleUrls: ['./service-publish-step-six.component.scss'],
 })
 export class ServicePublishStepSixComponent implements OnInit {
 
-    public formFields = ServicePublishStepSixFormFields;
-    public levelList = ['junior', 'middle', 'senior'];
+  public formFields = ServicePublishStepSixFormFields;
+  public levelList = ['junior', 'middle', 'senior'];
 
-    constructor(
-        public formService: ServicePublishStepSixFormService,
-        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        public serviceStepsNavigationService: ServiceStepsNavigationService,
-        public trans: TranslationService,
-        private readonly authStateManager: ServicePublishAuthStateManagerService,
-    ) { }
+  constructor(
+    public formService: ServicePublishStepSixFormService,
+    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+    public serviceStepsNavigationService: ServiceStepsNavigationService,
+    public trans: TranslationService,
+    private readonly authStateManager: ServicePublishAuthStateManagerService,
+  ) {
+  }
 
-    public ngOnInit(): void {
-        this.authStateManager.updateFourStepState();
-        if (this.servicePublishDataHolder.isset(ServicePublishSteps.Six)) {
-            this.formService.createForm(
-                this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six),
-            );
-        } else {
-            this.formService.createForm();
-        }
+  public ngOnInit(): void {
+    this.authStateManager.updateFourStepState();
+    if (this.servicePublishDataHolder.isset(ServicePublishSteps.Six)) {
+      this.formService.createForm(
+        this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six),
+      );
+    } else {
+      this.formService.createForm();
     }
+  }
 
-    public submitForm(): void {
-        this.servicePublishDataHolder.setStepData<StepSixDataInterface>(
-            ServicePublishSteps.Six, this.formService.form.getRawValue(),
-        );
-        this.serviceStepsNavigationService.next();
-    }
+  public submitForm(): void {
+    this.servicePublishDataHolder.setStepData<StepSixDataInterface>(
+      ServicePublishSteps.Six, this.formService.form.getRawValue(),
+    );
+    this.serviceStepsNavigationService.next();
+  }
 }

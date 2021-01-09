@@ -9,29 +9,29 @@ import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class TagsApiService extends AbstractApiService<Tag> implements ApiServiceInterface<Tag> {
 
-    private readonly url = environment.backend.professional_tags;
+  private readonly url = environment.backend.professional_tags;
 
-    constructor(private readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(private readonly client: ApiClientService) {
+    super(client);
+  }
 
-    public getByMasterId(
-        masterId: number,
-        params?: { [param: string]: string | string[]; },
-    ): Observable<ApiListResponseInterface<Tag>> {
-        return this.client.get(this.url, { professional: masterId?.toString(10), ...params});
-    }
+  public getByMasterId(
+    masterId: number,
+    params?: { [param: string]: string | string[]; },
+  ): Observable<ApiListResponseInterface<Tag>> {
+    return this.client.get(this.url, { professional: masterId?.toString(10), ...params });
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: Tag | Tag[]): Tag | Tag[] {
-        return plainToClass(Tag, data);
-    }
+  // @ts-ignore
+  protected transform(data: Tag | Tag[]): Tag | Tag[] {
+    return plainToClass(Tag, data);
+  }
 }

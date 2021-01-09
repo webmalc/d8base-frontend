@@ -11,40 +11,40 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class MasterContactsApiService extends AbstractApiService<ClientContactInterface>
-    implements ContactsApiServiceInterface {
+  implements ContactsApiServiceInterface {
 
-    private readonly url = environment.backend.professional_contact;
+  private readonly url = environment.backend.professional_contact;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public getByClientId(
-        masterId: number,
-        params?: { [param: string]: string | string[]; },
-    ): Observable<ApiListResponseInterface<MasterContact>> {
-        return super.get({ professional: masterId.toString(10), ...params});
-    }
+  public getByClientId(
+    masterId: number,
+    params?: { [param: string]: string | string[]; },
+  ): Observable<ApiListResponseInterface<MasterContact>> {
+    return super.get({ professional: masterId.toString(10), ...params });
+  }
 
-    public getCurrentClientContacts(): Observable<ApiListResponseInterface<MasterContact>> {
-        return this.client.get<ApiListResponseInterface<MasterContact>>(this.url).pipe(
-            map(response => {
-                response.results = plainToClass(MasterContact, response.results);
+  public getCurrentClientContacts(): Observable<ApiListResponseInterface<MasterContact>> {
+    return this.client.get<ApiListResponseInterface<MasterContact>>(this.url).pipe(
+      map(response => {
+        response.results = plainToClass(MasterContact, response.results);
 
-                return response;
-            }),
-        );
-    }
+        return response;
+      }),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: MasterContact | MasterContact[]): MasterContact | MasterContact[] {
-        return plainToClass(MasterContact, data);
-    }
+  // @ts-ignore
+  protected transform(data: MasterContact | MasterContact[]): MasterContact | MasterContact[] {
+    return plainToClass(MasterContact, data);
+  }
 }

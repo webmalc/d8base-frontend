@@ -4,18 +4,19 @@ import { FiltersPage } from '@app/search/pages/filters/filters.page';
 import { SearchPage } from './search-page.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: SearchPage,
-    },
-    {
-        path: 'filters',
-        component: FiltersPage,
-    },
+  {
+    path: '',
+    component: SearchPage,
+  },
+  {
+    path: 'filters',
+    component: FiltersPage,
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class SearchPageRoutingModule { }
+export class SearchPageRoutingModule {
+}

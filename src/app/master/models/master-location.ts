@@ -3,5 +3,5 @@ import { ClientLocationInterface } from '@app/shared/interfaces/client-location-
 import { Expose } from 'class-transformer';
 
 export class MasterLocation extends UserLocation implements ClientLocationInterface {
-    @Expose() public professional: number;
+  @Expose() public professional: number;
 }

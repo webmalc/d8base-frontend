@@ -10,20 +10,20 @@ import { map, switchMap } from 'rxjs/operators';
 @Injectable()
 export class SearchService {
 
-    constructor(
-        private readonly masterReadonlyApi: MasterReadonlyApiService,
-        private readonly servicesApi: ServicesApiService,
-        private readonly masterLocationApi: MasterLocationApiService,
-    ) {
-    }
+  constructor(
+    private readonly masterReadonlyApi: MasterReadonlyApiService,
+    private readonly servicesApi: ServicesApiService,
+    private readonly masterLocationApi: MasterLocationApiService,
+  ) {
+  }
 
-    public search(needle: string, filters?: SearchFilterStateInterface): Observable<SearchResultsInterface[]> {
-        return this.servicesApi.get().pipe(
-            switchMap(services => this.masterReadonlyApi.getByEntityId(services.results[0].professional).pipe(
-                switchMap(master => this.masterLocationApi.getByClientId(master.id).pipe(
-                    map(locations => ([{ master, services: services.results, masterLocationList: locations.results}])),
-                )),
-            )),
-        );
-    }
+  public search(needle: string, filters?: SearchFilterStateInterface): Observable<SearchResultsInterface[]> {
+    return this.servicesApi.get().pipe(
+      switchMap(services => this.masterReadonlyApi.getByEntityId(services.results[0].professional).pipe(
+        switchMap(master => this.masterLocationApi.getByClientId(master.id).pipe(
+          map(locations => ([{ master, services: services.results, masterLocationList: locations.results }])),
+        )),
+      )),
+    );
+  }
 }

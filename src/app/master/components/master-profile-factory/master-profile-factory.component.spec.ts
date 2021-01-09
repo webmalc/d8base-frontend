@@ -14,29 +14,29 @@ import { MasterProfileFactoryComponent } from './master-profile-factory.componen
 
 
 xdescribe('MasterProfileFactoryComponent', () => {
-    let component: MasterProfileFactoryComponent;
-    let fixture: ComponentFixture<MasterProfileFactoryComponent>;
+  let component: MasterProfileFactoryComponent;
+  let fixture: ComponentFixture<MasterProfileFactoryComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MasterProfileFactoryComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-            providers: [
-                ExperienceApiService,
-                EducationApiService,
-                CertificatesApiService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                ReviewsReadonlyApiService,
-            ],
-        });
-
-        fixture = TestBed.createComponent(MasterProfileFactoryComponent);
-        component = fixture.componentInstance;
-        component.mode = of(MasterProfileSubmenu.Info);
-        fixture.detectChanges();
-    }));
-
-    it('should create', () => { // TODO: need to pass TranslateModule into dynamically created components
-        expect(() => component).toThrow(new Error('unexpected component name'));
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MasterProfileFactoryComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        ExperienceApiService,
+        EducationApiService,
+        CertificatesApiService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ReviewsReadonlyApiService,
+      ],
     });
+
+    fixture = TestBed.createComponent(MasterProfileFactoryComponent);
+    component = fixture.componentInstance;
+    component.mode = of(MasterProfileSubmenu.Info);
+    fixture.detectChanges();
+  }));
+
+  it('should create', () => { // TODO: need to pass TranslateModule into dynamically created components
+    expect(() => component).toThrow(new Error('unexpected component name'));
+  });
 });

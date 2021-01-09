@@ -5,24 +5,24 @@ import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-compon
 import { plainToClass } from 'class-transformer';
 
 @Component({
-    selector: 'app-education-edit',
-    templateUrl: './education-edit.component.html',
-    styleUrls: ['./education-edit.component.scss'],
+  selector: 'app-education-edit',
+  templateUrl: './education-edit.component.html',
+  styleUrls: ['./education-edit.component.scss'],
 })
 export class EducationEditComponent extends AbstractEditComponent<Education> {
 
-    constructor(private readonly location: Location) {
-        super();
-    }
+  constructor(private readonly location: Location) {
+    super();
+  }
 
-    public locationBack(): void {
-        this.location.back();
-    }
+  public locationBack(): void {
+    this.location.back();
+  }
 
-    protected transform(data: Education): Education {
-        const trans: Education = plainToClass(Education, data);
-        trans.formatDates();
+  protected transform(data: Education): Education {
+    const trans: Education = plainToClass(Education, data);
+    trans.formatDates();
 
-        return trans;
-    }
+    return trans;
+  }
 }

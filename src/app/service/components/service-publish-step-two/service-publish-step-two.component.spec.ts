@@ -21,43 +21,43 @@ import { StepTwoHandlerService } from '../../services/steps-navigation-chain/ste
 import { ServicePublishStepTwoComponent } from './service-publish-step-two.component';
 
 describe('ServicePublishStepTwoComponent', () => {
-    let component: ServicePublishStepTwoComponent;
-    let fixture: ComponentFixture<ServicePublishStepTwoComponent>;
+  let component: ServicePublishStepTwoComponent;
+  let fixture: ComponentFixture<ServicePublishStepTwoComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServicePublishStepTwoComponent],
-            imports: [
-                IonicModule.forRoot(),
-                ReactiveFormsModule,
-                FormsModule,
-                RouterTestingModule,
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-            providers: [
-                ServicePublishDataHolderService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                ServicePublishStepTwoFormService,
-                ServiceStepsNavigationService,
-                ChainManagerService,
-                StepOneHandlerService,
-                StepTwoHandlerService,
-                StepThreeHandlerService,
-                StepFourHandlerService,
-                StepFiveHandlerService,
-                StepSixHandlerService,
-                StepSevenHandlerService,
-                StepFinalHandlerService,
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServicePublishStepTwoComponent],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ServicePublishStepTwoFormService,
+        ServiceStepsNavigationService,
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServicePublishStepTwoComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServicePublishStepTwoComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -3,16 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { TagsReadonlyApiService } from './tags-readonly-api.service';
 
 describe('TagsReadonlyApiService', () => {
-    let service: TagsReadonlyApiService;
+  let service: TagsReadonlyApiService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-        });
-        service = TestBed.inject(TagsReadonlyApiService);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
     });
+    service = TestBed.inject(TagsReadonlyApiService);
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

@@ -9,27 +9,27 @@ import { SavedProfessionalApiService } from '../../services/saved-professional-a
 import { AboutEditComponent } from './about-edit.component';
 
 describe('AboutEditComponent', () => {
-    let component: AboutEditComponent;
-    let fixture: ComponentFixture<AboutEditComponent>;
+  let component: AboutEditComponent;
+  let fixture: ComponentFixture<AboutEditComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [AboutEditComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, ReactiveFormsModule, FormsModule],
-            providers: [
-                SelectableCountryOnSearchService,
-                FormBuilder,
-                SavedProfessionalApiService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [AboutEditComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, ReactiveFormsModule, FormsModule],
+      providers: [
+        SelectableCountryOnSearchService,
+        FormBuilder,
+        SavedProfessionalApiService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(AboutEditComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(AboutEditComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

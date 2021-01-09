@@ -6,22 +6,22 @@ import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class UserLanguagesApiService extends AbstractApiService<UserLanguage> {
 
-    private readonly url = environment.backend.user_language;
+  private readonly url = environment.backend.user_language;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: UserLanguage | UserLanguage[]): UserLanguage | UserLanguage[] {
-        return plainToClass(UserLanguage, data);
-    }
+  // @ts-ignore
+  protected transform(data: UserLanguage | UserLanguage[]): UserLanguage | UserLanguage[] {
+    return plainToClass(UserLanguage, data);
+  }
 }

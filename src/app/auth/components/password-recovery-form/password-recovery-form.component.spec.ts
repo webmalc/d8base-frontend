@@ -11,26 +11,26 @@ import { PasswordRecoveryService } from '../../services/password-recovery.servic
 import { PasswordRecoveryFormComponent } from './password-recovery-form.component';
 
 describe('PasswordRecoveryFormComponent', () => {
-    let component: PasswordRecoveryFormComponent;
-    let fixture: ComponentFixture<PasswordRecoveryFormComponent>;
+  let component: PasswordRecoveryFormComponent;
+  let fixture: ComponentFixture<PasswordRecoveryFormComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [PasswordRecoveryFormComponent],
-            imports: [IonicModule, ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
-            providers: [
-                PasswordRecoveryFormService,
-                PasswordRecoveryService,
-                { provide: ApiClientService, useValue: { post: () => of()}},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PasswordRecoveryFormComponent],
+      imports: [IonicModule, ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+      providers: [
+        PasswordRecoveryFormService,
+        PasswordRecoveryService,
+        { provide: ApiClientService, useValue: { post: () => of() } },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(PasswordRecoveryFormComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(PasswordRecoveryFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

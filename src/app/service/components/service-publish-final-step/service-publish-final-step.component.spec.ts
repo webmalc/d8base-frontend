@@ -26,48 +26,48 @@ import { StepTwoHandlerService } from '../../services/steps-navigation-chain/ste
 import { ServicePublishFinalStepComponent } from './service-publish-final-step.component';
 
 describe('ServicePublishFinalStepComponent', () => {
-    let component: ServicePublishFinalStepComponent;
-    let fixture: ComponentFixture<ServicePublishFinalStepComponent>;
+  let component: ServicePublishFinalStepComponent;
+  let fixture: ComponentFixture<ServicePublishFinalStepComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ServicePublishFinalStepComponent],
-            imports: [
-                IonicModule.forRoot(),
-                ReactiveFormsModule,
-                FormsModule,
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
-            ],
-            providers: [
-                ServicePublishService,
-                ServiceStepsNavigationService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-                ServicePhotoApiService,
-                ServiceScheduleApiService,
-                ServiceLocationApiService,
-                PricesApiService,
-                ServicePublishDataPreparerService,
-                ChainManagerService,
-                StepOneHandlerService,
-                StepTwoHandlerService,
-                StepThreeHandlerService,
-                StepFourHandlerService,
-                StepFiveHandlerService,
-                StepSixHandlerService,
-                StepSevenHandlerService,
-                StepFinalHandlerService,
-                { provide: ServicePublishDataHolderService, useValue: { getStepData: () => ({ isNewMaster: true})}},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ServicePublishFinalStepComponent],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
+      providers: [
+        ServicePublishService,
+        ServiceStepsNavigationService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ServicePhotoApiService,
+        ServiceScheduleApiService,
+        ServiceLocationApiService,
+        PricesApiService,
+        ServicePublishDataPreparerService,
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService,
+        { provide: ServicePublishDataHolderService, useValue: { getStepData: () => ({ isNewMaster: true }) } },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ServicePublishFinalStepComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ServicePublishFinalStepComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

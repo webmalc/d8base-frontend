@@ -13,35 +13,35 @@ import { MessagesSentApiService } from '../../services/messages-sent-api.service
 import { DirectComponent } from './direct.component';
 
 describe('DirectComponent', () => {
-    let component: DirectComponent;
-    let fixture: ComponentFixture<DirectComponent>;
+  let component: DirectComponent;
+  let fixture: ComponentFixture<DirectComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [DirectComponent],
-            imports: [
-                IonicModule.forRoot(),
-                RouterTestingModule,
-                TranslateModule.forRoot(),
-                HttpClientTestingModule,
-            ],
-            providers: [
-                DirectServiceService,
-                PopoverController,
-                MessageListUpdaterService,
-                MessagesListApiService,
-                MessagesSentApiService,
-                NotificationWorkerService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [DirectComponent],
+      imports: [
+        IonicModule.forRoot(),
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+      ],
+      providers: [
+        DirectServiceService,
+        PopoverController,
+        MessageListUpdaterService,
+        MessagesListApiService,
+        MessagesSentApiService,
+        NotificationWorkerService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(DirectComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(DirectComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

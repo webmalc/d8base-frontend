@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 
 export class JsonTranslateLoader implements TranslateLoader {
-    public getTranslation(lang: string): Observable<any> {
-        return fromPromise(import(`../../../assets/i18n/${lang}.json`));
-    }
+  public getTranslation(lang: string): Observable<any> {
+    return fromPromise(import(`../../../assets/i18n/${lang}.json`));
+  }
 }

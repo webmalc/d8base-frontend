@@ -1,4 +1,4 @@
 export enum GrantTypes {
-    PasswordGrantType = 'password',
-    RefreshGrantType = 'refresh_token',
+  PasswordGrantType = 'password',
+  RefreshGrantType = 'refresh_token',
 }

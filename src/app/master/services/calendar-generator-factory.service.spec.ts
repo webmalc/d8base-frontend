@@ -6,21 +6,21 @@ import { StorageManagerMock } from '../../../testing/mocks';
 import { CalendarGeneratorFactoryService } from './calendar-generator-factory.service';
 
 describe('CalendarGeneratorFactoryService', () => {
-    let service: CalendarGeneratorFactoryService;
+  let service: CalendarGeneratorFactoryService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                CalendarGeneratorFactoryService,
-                CalendarApiService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-            imports: [HttpClientTestingModule],
-        });
-        service = TestBed.inject(CalendarGeneratorFactoryService);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        CalendarGeneratorFactoryService,
+        CalendarApiService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+      imports: [HttpClientTestingModule],
     });
+    service = TestBed.inject(CalendarGeneratorFactoryService);
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

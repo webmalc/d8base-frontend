@@ -10,22 +10,22 @@ import { LatestMessagesApiService } from './latest-messages-api.service';
 import { MessagesListApiService } from './messages-list-api.service';
 
 describe('ChatListUpdaterService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [
-            HttpClientTestingModule,
-        ],
-        providers: [
-            ChatListUpdaterService,
-            NotificationWorkerService,
-            ChatsCompilerService,
-            LatestMessagesApiService,
-            MessagesListApiService,
-            { provide: StorageManagerService, useClass: StorageManagerMock},
-        ],
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule,
+    ],
+    providers: [
+      ChatListUpdaterService,
+      NotificationWorkerService,
+      ChatsCompilerService,
+      LatestMessagesApiService,
+      MessagesListApiService,
+      { provide: StorageManagerService, useClass: StorageManagerMock },
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: ChatListUpdaterService = TestBed.inject(ChatListUpdaterService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: ChatListUpdaterService = TestBed.inject(ChatListUpdaterService);
+    expect(service).toBeTruthy();
+  });
 });

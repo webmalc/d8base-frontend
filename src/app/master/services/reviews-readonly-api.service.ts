@@ -8,18 +8,18 @@ import { plainToClass } from 'class-transformer';
 @Injectable()
 export class ReviewsReadonlyApiService extends AbstractReadonlyApiService<PublicReview> {
 
-    private readonly url = environment.backend.reviews_readonly;
+  private readonly url = environment.backend.reviews_readonly;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: PublicReview | PublicReview[]): PublicReview | PublicReview[] {
-        return plainToClass(PublicReview, data);
-    }
+  // @ts-ignore
+  protected transform(data: PublicReview | PublicReview[]): PublicReview | PublicReview[] {
+    return plainToClass(PublicReview, data);
+  }
 }

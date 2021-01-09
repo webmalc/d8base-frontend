@@ -8,28 +8,28 @@ import { first, switchMap } from 'rxjs/operators';
 @Injectable()
 export class StepFourHandlerService extends AbstractHandler {
 
-    constructor(
-        private readonly authenticationService: AuthenticationService,
-    ) {
-        super();
-    }
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+  ) {
+    super();
+  }
 
-    public handleNext(): Observable<number> {
-        return this.handle(super.handleNext.bind(this));
-    }
+  public handleNext(): Observable<number> {
+    return this.handle(super.handleNext.bind(this));
+  }
 
-    public handlePrevious(): Observable<number> {
-        return this.handle(super.handlePrevious.bind(this));
-    }
+  public handlePrevious(): Observable<number> {
+    return this.handle(super.handlePrevious.bind(this));
+  }
 
-    protected getIndex(): number {
-        return ServicePublishSteps.Four;
-    }
+  protected getIndex(): number {
+    return ServicePublishSteps.Four;
+  }
 
-    private handle(handler: () => Observable<number>): Observable<number> {
-        return this.authenticationService.isAuthenticated$.pipe(
-            first(),
-            switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
-        );
-    }
+  private handle(handler: () => Observable<number>): Observable<number> {
+    return this.authenticationService.isAuthenticated$.pipe(
+      first(),
+      switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
+    );
+  }
 }

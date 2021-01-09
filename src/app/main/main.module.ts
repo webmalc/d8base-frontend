@@ -10,15 +10,15 @@ import { DefaultCategoriesFactoryService } from '@app/main/services/default-cate
 import { SharedModule } from '@app/shared/shared.module';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
-    faCamera,
-    faGraduationCap,
-    faHome,
-    faPaintRoller,
-    faSpa,
-    faStethoscope,
-    faTableTennis,
-    faUserTie,
-    faVenusMars,
+  faCamera,
+  faGraduationCap,
+  faHome,
+  faPaintRoller,
+  faSpa,
+  faStethoscope,
+  faTableTennis,
+  faUserTie,
+  faVenusMars,
 } from '@fortawesome/free-solid-svg-icons';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,30 +27,30 @@ import { MainPageRoutingModule } from './main-routing.module';
 import { MainPage } from './main.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MainPageRoutingModule,
-        SharedModule,
-        TranslateModule,
-        FontAwesomeModule,
-        IonicSelectableModule,
-    ],
-    declarations: [
-        MainPage,
-        CategoryIconComponent,
-        MainPageIconComponent,
-        MainPageReviewComponent,
-        LocationPickerComponent,
-        OnMapPopoverComponent,
-    ],
-    providers: [
-        DefaultCategoriesFactoryService,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MainPageRoutingModule,
+    SharedModule,
+    TranslateModule,
+    FontAwesomeModule,
+    IonicSelectableModule,
+  ],
+  declarations: [
+    MainPage,
+    CategoryIconComponent,
+    MainPageIconComponent,
+    MainPageReviewComponent,
+    LocationPickerComponent,
+    OnMapPopoverComponent,
+  ],
+  providers: [
+    DefaultCategoriesFactoryService,
+  ],
 })
 export class MainPageModule {
-    constructor(lib: FaIconLibrary) {
-        lib.addIcons(faGraduationCap, faStethoscope, faSpa, faVenusMars, faPaintRoller, faHome, faCamera, faUserTie, faTableTennis);
-    }
+  constructor(lib: FaIconLibrary) {
+    lib.addIcons(faGraduationCap, faStethoscope, faSpa, faVenusMars, faPaintRoller, faHome, faCamera, faUserTie, faTableTennis);
+  }
 }

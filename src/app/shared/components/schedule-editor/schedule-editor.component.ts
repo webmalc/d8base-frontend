@@ -7,80 +7,80 @@ import { ScheduleEditorFormService } from './schedule-editor-form.service';
 import * as ScheduleConstants from './schedule.constants';
 
 function normalizeTimeFormat(time: string | null): string {
-    // convert "HH:MM:SS" to "HH:MM"
-    return time?.substr(0, 5);
+  // convert "HH:MM:SS" to "HH:MM"
+  return time?.substr(0, 5);
 }
 
 function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
-    return {
-        ...schedule,
-        start_time: normalizeTimeFormat(schedule.start_time),
-        end_time: normalizeTimeFormat(schedule.end_time),
-    };
+  return {
+    ...schedule,
+    start_time: normalizeTimeFormat(schedule.start_time),
+    end_time: normalizeTimeFormat(schedule.end_time),
+  };
 }
 
 @Component({
-    selector: 'app-schedule-editor',
-    templateUrl: './schedule-editor.component.html',
-    styleUrls: ['./schedule-editor.component.scss'],
-    providers: [ScheduleEditorFormService],
+  selector: 'app-schedule-editor',
+  templateUrl: './schedule-editor.component.html',
+  styleUrls: ['./schedule-editor.component.scss'],
+  providers: [ScheduleEditorFormService],
 })
 export class ScheduleEditorComponent {
 
-    @Input() public disabled: boolean = false;
+  @Input() public disabled: boolean = false;
 
-    @Output() public save = new EventEmitter<AbstractSchedule[]>();
+  @Output() public save = new EventEmitter<AbstractSchedule[]>();
 
-    public formFields = ScheduleEditorFormFields;
+  public formFields = ScheduleEditorFormFields;
 
-    constructor(
-        public readonly formService: ScheduleEditorFormService,
-        private readonly popoverController: PopoverController,
-    ) {
+  constructor(
+    public readonly formService: ScheduleEditorFormService,
+    private readonly popoverController: PopoverController,
+  ) {
+  }
+
+  @Input()
+  public set schedule(schedule: AbstractSchedule[]) {
+    const initialValue = schedule || ScheduleConstants.defaultSchedule;
+    this.formService.createForm(initialValue.map(normalizeScheduleFormat));
+  }
+
+  public submitForm(): void {
+    this.save.emit(this.formService.form.get(this.formFields.Timetable).value);
+  }
+
+  public onIsEnabledChange(event: CustomEvent, index: number): void {
+    this.formService.updateIsEnabled((event.detail as any).checked, index);
+  }
+
+  public onStartTimeChange(event: CustomEvent, index: number): void {
+    if (this.formService.isControlValid(this.formFields.StartTime, index)) {
+      this.formService.updateStartTime((event.detail as any).value, index);
     }
+    this.formService.checkOverlapValidity(index);
+  }
 
-    @Input()
-    public set schedule(schedule: AbstractSchedule[]) {
-        const initialValue = schedule || ScheduleConstants.defaultSchedule;
-        this.formService.createForm(initialValue.map(normalizeScheduleFormat));
+  public onEndTimeChange(event: CustomEvent, index: number): void {
+    if (this.formService.isControlValid(this.formFields.EndTime, index)) {
+      this.formService.updateEndTime((event.detail as any).value, index);
     }
+    this.formService.checkOverlapValidity(index);
+  }
 
-    public submitForm(): void {
-        this.save.emit(this.formService.form.get(this.formFields.Timetable).value);
+  public async showDaySelector(): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: DaySelectorComponent,
+      translucent: true,
+    });
+    await popover.present();
+    const { data } = await popover.onDidDismiss();
+
+    if (data !== undefined) {
+      this.formService.pushNewDay(data);
     }
+  }
 
-    public onIsEnabledChange(event: CustomEvent, index: number): void {
-        this.formService.updateIsEnabled((event.detail as any).checked, index);
-    }
-
-    public onStartTimeChange(event: CustomEvent, index: number): void {
-        if (this.formService.isControlValid(this.formFields.StartTime, index)) {
-            this.formService.updateStartTime((event.detail as any).value, index);
-        }
-        this.formService.checkOverlapValidity(index);
-    }
-
-    public onEndTimeChange(event: CustomEvent, index: number): void {
-        if (this.formService.isControlValid(this.formFields.EndTime, index)) {
-            this.formService.updateEndTime((event.detail as any).value, index);
-        }
-        this.formService.checkOverlapValidity(index);
-    }
-
-    public async showDaySelector(): Promise<void> {
-        const popover = await this.popoverController.create({
-            component: DaySelectorComponent,
-            translucent: true,
-        });
-        await popover.present();
-        const { data} = await popover.onDidDismiss();
-
-        if (data !== undefined) {
-            this.formService.pushNewDay(data);
-        }
-    }
-
-    public deleteDay(index: number): void {
-        this.formService.deleteDay(index);
-    }
+  public deleteDay(index: number): void {
+    this.formService.deleteDay(index);
+  }
 }

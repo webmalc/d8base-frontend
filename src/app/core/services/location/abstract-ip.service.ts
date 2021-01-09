@@ -6,20 +6,20 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export abstract class AbstractIpService implements IpServiceInterface {
 
-    protected constructor(protected http: HttpClient) {
-    }
+  protected constructor(protected http: HttpClient) {
+  }
 
-    public getData(): Observable<IpLocation> {
-        return this.http.get(this.getUrl()).pipe(
-            map(raw => this.transform(raw)),
-        );
-    }
+  public getData(): Observable<IpLocation> {
+    return this.http.get(this.getUrl()).pipe(
+      map(raw => this.transform(raw)),
+    );
+  }
 
-    protected abstract getUrl(): string;
+  protected abstract getUrl(): string;
 
-    protected abstract transform(res: object): IpLocation;
+  protected abstract transform(res: object): IpLocation;
 }

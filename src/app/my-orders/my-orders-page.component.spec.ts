@@ -8,29 +8,29 @@ import { StorageManagerMock } from '../../testing/mocks';
 import { MyOrdersPageComponent } from './my-orders-page.component';
 
 describe('MyOrdersPageComponent', () => {
-    let component: MyOrdersPageComponent;
-    let fixture: ComponentFixture<MyOrdersPageComponent>;
+  let component: MyOrdersPageComponent;
+  let fixture: ComponentFixture<MyOrdersPageComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MyOrdersPageComponent],
-            imports: [
-                IonicModule.forRoot(),
-                TranslateModule.forRoot(),
-                HttpClientTestingModule,
-                RouterTestingModule,
-            ],
-            providers: [
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MyOrdersPageComponent],
+      imports: [
+        IonicModule.forRoot(),
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      providers: [
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MyOrdersPageComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MyOrdersPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

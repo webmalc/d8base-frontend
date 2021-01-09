@@ -5,31 +5,31 @@ import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-register-verify',
-    templateUrl: './register-verify.page.html',
-    styleUrls: ['./register-verify.page.scss'],
+  selector: 'app-register-verify',
+  templateUrl: './register-verify.page.html',
+  styleUrls: ['./register-verify.page.scss'],
 })
 export class RegisterVerifyPage implements OnInit {
 
-    public success: boolean = false;
-    private readonly VERIFY_URL = environment.backend.verify_registration;
+  public success: boolean = false;
+  private readonly VERIFY_URL = environment.backend.verify_registration;
 
-    constructor(private readonly client: ApiClientService, private readonly activatedRoute: ActivatedRoute) {
-    }
+  constructor(private readonly client: ApiClientService, private readonly activatedRoute: ActivatedRoute) {
+  }
 
-    public ngOnInit(): void {
-        this.activatedRoute.queryParams.subscribe(
-            params => {
-                this.sendVerifyRequest(
-                    { user_id: params.user_id, timestamp: params.timestamp, signature: params.signature},
-                ).subscribe(
-                    resp => this.success = true,
-                );
-            },
+  public ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        this.sendVerifyRequest(
+          { user_id: params.user_id, timestamp: params.timestamp, signature: params.signature },
+        ).subscribe(
+          resp => this.success = true,
         );
-    }
+      },
+    );
+  }
 
-    private sendVerifyRequest(data: { user_id: string, timestamp: string, signature: string }): Observable<any> {
-        return this.client.post(this.VERIFY_URL, data);
-    }
+  private sendVerifyRequest(data: { user_id: string, timestamp: string, signature: string }): Observable<any> {
+    return this.client.post(this.VERIFY_URL, data);
+  }
 }

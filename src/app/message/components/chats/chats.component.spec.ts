@@ -15,36 +15,36 @@ import { MessagesListApiService } from '../../services/messages-list-api.service
 import { ChatsComponent } from './chats.component';
 
 describe('ChatsComponent', () => {
-    let component: ChatsComponent;
-    let fixture: ComponentFixture<ChatsComponent>;
+  let component: ChatsComponent;
+  let fixture: ComponentFixture<ChatsComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ChatsComponent],
-            imports: [
-                IonicModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
-                TranslateModule.forRoot(),
-            ],
-            providers: [
-                ChatsService,
-                ChatsCompilerService,
-                ChatListUpdaterService,
-                ChatsSearchService,
-                LatestMessagesApiService,
-                MessagesListApiService,
-                NotificationWorkerService,
-                { provide: StorageManagerService, useClass: StorageManagerMock},
-            ],
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ChatsComponent],
+      imports: [
+        IonicModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        ChatsService,
+        ChatsCompilerService,
+        ChatListUpdaterService,
+        ChatsSearchService,
+        LatestMessagesApiService,
+        MessagesListApiService,
+        NotificationWorkerService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(ChatsComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(ChatsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -11,25 +11,25 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CertificatesApiService extends AbstractApiService<Certificate> implements ApiServiceInterface<Certificate> {
 
-    private readonly url = environment.backend.certificates;
+  private readonly url = environment.backend.certificates;
 
-    constructor(protected client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected client: ApiClientService) {
+    super(client);
+  }
 
-    public getByMasterId(
-        masterId: number,
-        params?: { [param: string]: string | string[]; },
-    ): Observable<ApiListResponseInterface<Certificate>> {
-        return super.get({ professional: masterId?.toString(10), ...params});
-    }
+  public getByMasterId(
+    masterId: number,
+    params?: { [param: string]: string | string[]; },
+  ): Observable<ApiListResponseInterface<Certificate>> {
+    return super.get({ professional: masterId?.toString(10), ...params });
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: Certificate | Certificate[]): Certificate | Certificate[] {
-        return plainToClass(Certificate, data);
-    }
+  // @ts-ignore
+  protected transform(data: Certificate | Certificate[]): Certificate | Certificate[] {
+    return plainToClass(Certificate, data);
+  }
 }

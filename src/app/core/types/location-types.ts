@@ -6,4 +6,4 @@ import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
 
 export type LocationTypes = Country | Region | Subregion | PostalCode
-    | City | District | Country[] | Region[] | Subregion[] | City[] | District[] | PostalCode[];
+  | City | District | Country[] | Region[] | Subregion[] | City[] | District[] | PostalCode[];

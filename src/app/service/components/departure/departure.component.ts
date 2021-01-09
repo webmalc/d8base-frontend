@@ -5,37 +5,37 @@ import { ServicePublishStepSevenDepartureFormService } from '@app/service/forms/
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
 @Component({
-    selector: 'app-departure',
-    templateUrl: './departure.component.html',
-    styleUrls: ['./departure.component.scss'],
+  selector: 'app-departure',
+  templateUrl: './departure.component.html',
+  styleUrls: ['./departure.component.scss'],
 })
 export class DepartureComponent implements OnInit {
 
-    public static readonly departureDataKey = 'departure';
-    public readonly formFields = ServicePublishStepSevenDepartureFormFields;
-    public units: string[] = ['km', 'ml'];
-    private readonly STEP = 6;
+  public static readonly departureDataKey = 'departure';
+  public readonly formFields = ServicePublishStepSevenDepartureFormFields;
+  public units: string[] = ['km', 'ml'];
+  private readonly STEP = 6;
 
-    constructor(
-        public formService: ServicePublishStepSevenDepartureFormService,
-        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        private readonly location: Location,
-    ) {
-    }
+  constructor(
+    public formService: ServicePublishStepSevenDepartureFormService,
+    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+    private readonly location: Location,
+  ) {
+  }
 
-    public ngOnInit(): void {
-        if (this.servicePublishDataHolder.issetStepPartialData(this.STEP, DepartureComponent.departureDataKey)) {
-            this.formService.createForm(this.servicePublishDataHolder.getPartialStepData(this.STEP, DepartureComponent.departureDataKey));
-        } else {
-            this.formService.createForm();
-        }
+  public ngOnInit(): void {
+    if (this.servicePublishDataHolder.issetStepPartialData(this.STEP, DepartureComponent.departureDataKey)) {
+      this.formService.createForm(this.servicePublishDataHolder.getPartialStepData(this.STEP, DepartureComponent.departureDataKey));
+    } else {
+      this.formService.createForm();
     }
+  }
 
-    public submitForm(): void {
-        this.servicePublishDataHolder.assignStepData(
-            this.STEP,
-            { [DepartureComponent.departureDataKey]: this.formService.form.getRawValue()},
-        );
-        this.location.back();
-    }
+  public submitForm(): void {
+    this.servicePublishDataHolder.assignStepData(
+      this.STEP,
+      { [DepartureComponent.departureDataKey]: this.formService.form.getRawValue() },
+    );
+    this.location.back();
+  }
 }

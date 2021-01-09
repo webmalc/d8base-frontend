@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 
 @NgModule({
-    imports: [
-        AppModule,
-        ServerModule,
-        IonicServerModule,
-    ],
-    bootstrap: [AppComponent],
+  imports: [
+    AppModule,
+    ServerModule,
+    IonicServerModule,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppServerModule {
 }

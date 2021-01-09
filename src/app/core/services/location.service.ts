@@ -17,69 +17,69 @@ import { forkJoin, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class LocationService {
 
-    constructor(
-        private readonly countriesApi: CountriesApiService,
-        private readonly regionApi: RegionApiService,
-        private readonly subregionApi: SubregionApiService,
-        private readonly citiesApi: CitiesApiService,
-        private readonly districtApi: DistrictApiService,
-    ) {
-    }
+  constructor(
+    private readonly countriesApi: CountriesApiService,
+    private readonly regionApi: RegionApiService,
+    private readonly subregionApi: SubregionApiService,
+    private readonly citiesApi: CitiesApiService,
+    private readonly districtApi: DistrictApiService,
+  ) {
+  }
 
-    public getSingle<T extends ClientLocationInterface>(api: LocationApiServiceInterface, id: number): Observable<T> {
-        return api.getByEntityId(id).pipe(
-            map(data => {
-                return { results: [data]};
-            }),
-            this.switch<T>(),
-        ).pipe(
-            map((data: T[]) => data.pop()),
-        );
-    }
+  public getSingle<T extends ClientLocationInterface>(api: LocationApiServiceInterface, id: number): Observable<T> {
+    return api.getByEntityId(id).pipe(
+      map(data => {
+        return { results: [data] };
+      }),
+      this.switch<T>(),
+    ).pipe(
+      map((data: T[]) => data.pop()),
+    );
+  }
 
-    public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<ClientLocationInterface[]> {
-        return this.getLocationList(api);
-    }
+  public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<ClientLocationInterface[]> {
+    return this.getLocationList(api);
+  }
 
-    private getLocationList(api: LocationApiServiceInterface, id?: number): Observable<ClientLocationInterface[]> {
-        return api.getByClientId(id).pipe(
-            map(data => data.results),
-        );
-    }
+  private getLocationList(api: LocationApiServiceInterface, id?: number): Observable<ClientLocationInterface[]> {
+    return api.getByClientId(id).pipe(
+      map(data => data.results),
+    );
+  }
 
-    private switch<T extends ClientLocationInterface>(): any {
-        return switchMap((data: ApiListResponseInterface<ClientLocationInterface>) => forkJoin({
-            countries: this.countriesApi.getList(data.results.map(client => client.country as number)),
-            regions: this.regionApi.getList(data.results.map(client => client.region as number)),
-            subregions: this.subregionApi.getList(data.results.map(client => client.subregion as number)),
-            cities: this.citiesApi.getList(data.results.map(client => client.city as number)),
-            districts: this.districtApi.getList(data.results.map(client => client.district as number)),
-        }).pipe(
-            map(({ countries, regions, subregions, cities, districts}) =>
-                this.generateLocationList<T>(data.results, countries, regions, subregions, cities, districts)),
-        ));
-    }
+  private switch<T extends ClientLocationInterface>(): any {
+    return switchMap((data: ApiListResponseInterface<ClientLocationInterface>) => forkJoin({
+      countries: this.countriesApi.getList(data.results.map(client => client.country as number)),
+      regions: this.regionApi.getList(data.results.map(client => client.region as number)),
+      subregions: this.subregionApi.getList(data.results.map(client => client.subregion as number)),
+      cities: this.citiesApi.getList(data.results.map(client => client.city as number)),
+      districts: this.districtApi.getList(data.results.map(client => client.district as number)),
+    }).pipe(
+      map(({ countries, regions, subregions, cities, districts }) =>
+        this.generateLocationList<T>(data.results, countries, regions, subregions, cities, districts)),
+    ));
+  }
 
-    private generateLocationList<T extends ClientLocationInterface>(
-        clientData: ClientLocationInterface[],
-        countries: LocationTypes[],
-        regions: LocationTypes[],
-        subregions: LocationTypes[],
-        cities: LocationTypes[],
-        districts: LocationTypes[],
-    ): T[] {
-        clientData.forEach((clientLocationData, index) => {
-            clientLocationData.country = countries[index] as Country;
-            clientLocationData.region = regions[index] as Region;
-            clientLocationData.subregion = subregions[index] as Subregion;
-            clientLocationData.city = cities[index] as City;
-            clientLocationData.district = districts[index] as District;
-        });
+  private generateLocationList<T extends ClientLocationInterface>(
+    clientData: ClientLocationInterface[],
+    countries: LocationTypes[],
+    regions: LocationTypes[],
+    subregions: LocationTypes[],
+    cities: LocationTypes[],
+    districts: LocationTypes[],
+  ): T[] {
+    clientData.forEach((clientLocationData, index) => {
+      clientLocationData.country = countries[index] as Country;
+      clientLocationData.region = regions[index] as Region;
+      clientLocationData.subregion = subregions[index] as Subregion;
+      clientLocationData.city = cities[index] as City;
+      clientLocationData.district = districts[index] as District;
+    });
 
-        return clientData as T[];
-    }
+    return clientData as T[];
+  }
 }

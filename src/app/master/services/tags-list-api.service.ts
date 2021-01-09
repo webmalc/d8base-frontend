@@ -8,18 +8,18 @@ import { plainToClass } from 'class-transformer';
 @Injectable()
 export class TagsListApiService extends AbstractReadonlyApiService<Tag> {
 
-    private readonly url = environment.backend.professional_tags_list;
+  private readonly url = environment.backend.professional_tags_list;
 
-    constructor(protected readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(protected readonly client: ApiClientService) {
+    super(client);
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: Tag | Tag[]): Tag | Tag[] {
-        return plainToClass(Tag, data);
-    }
+  // @ts-ignore
+  protected transform(data: Tag | Tag[]): Tag | Tag[] {
+    return plainToClass(Tag, data);
+  }
 }

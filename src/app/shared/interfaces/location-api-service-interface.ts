@@ -4,6 +4,7 @@ import { ClientLocationInterface } from '@app/shared/interfaces/client-location-
 import { Observable } from 'rxjs';
 
 export interface LocationApiServiceInterface extends ApiServiceInterface<ClientLocationInterface> {
-    getByClientId(clientId?: number): Observable<ApiListResponseInterface<ClientLocationInterface>>;
-    getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>>;
+  getByClientId(clientId?: number): Observable<ApiListResponseInterface<ClientLocationInterface>>;
+
+  getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>>;
 }

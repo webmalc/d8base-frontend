@@ -11,37 +11,37 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class MasterLocationApiService extends AbstractApiService<MasterLocation>
-    implements LocationApiServiceInterface, ApiServiceInterface<MasterLocation> {
+  implements LocationApiServiceInterface, ApiServiceInterface<MasterLocation> {
 
-    private readonly url = environment.backend.professional_location;
+  private readonly url = environment.backend.professional_location;
 
-    constructor(private readonly client: ApiClientService) {
-        super(client);
-    }
+  constructor(private readonly client: ApiClientService) {
+    super(client);
+  }
 
-    public getByClientId(
-        clientId?: number,
-        params?: { [param: string]: string | string[]; },
-    ): Observable<ApiListResponseInterface<MasterLocation>> {
-        return super.get({ professional: clientId?.toString(10), ...params});
-    }
+  public getByClientId(
+    clientId?: number,
+    params?: { [param: string]: string | string[]; },
+  ): Observable<ApiListResponseInterface<MasterLocation>> {
+    return super.get({ professional: clientId?.toString(10), ...params });
+  }
 
-    public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
-        return this.client.options(this.url).pipe(
-            map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
-                raw.actions.POST.timezone.choices),
-        );
-    }
+  public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
+    return this.client.options(this.url).pipe(
+      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
+        raw.actions.POST.timezone.choices),
+    );
+  }
 
-    protected getUrl(): string {
-        return this.url;
-    }
+  protected getUrl(): string {
+    return this.url;
+  }
 
-    // @ts-ignore
-    protected transform(data: MasterLocation | MasterLocation[]): MasterLocation | MasterLocation[] {
-        return plainToClass(MasterLocation, data);
-    }
+  // @ts-ignore
+  protected transform(data: MasterLocation | MasterLocation[]): MasterLocation | MasterLocation[] {
+    return plainToClass(MasterLocation, data);
+  }
 }
