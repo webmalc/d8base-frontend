@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, ValidationErrors} from '@angular/forms';
 import {AbstractSchedule} from '@app/core/models/abstract-schedule';
 
 import {plainToClass} from 'class-transformer';
@@ -157,7 +157,7 @@ export class ScheduleEditorFormService {
         });
     }
 
-    private timeIntervalValidator(group: FormGroup): any {
+    private timeIntervalValidator(group: FormGroup): ValidationErrors | null {
         if (!group.get(ScheduleEditorFormFields.IsEnabled).value) {
             return;
         }
@@ -174,9 +174,11 @@ export class ScheduleEditorFormService {
         if (startTime >= endTimeTime) {
             group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
         }
+
+        return null;
     }
 
-    private startTimeFormatValidator(group: FormGroup): any {
+    private startTimeFormatValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
             ((group.get(ScheduleEditorFormFields.StartTime).value as string)?.length !== 5 ||
                 parseInt((group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(0, 1), 10) > 2 ||
@@ -184,9 +186,11 @@ export class ScheduleEditorFormService {
         ) {
             group.get(ScheduleEditorFormFields.StartTime).setErrors({timeError: true});
         }
+
+        return null;
     }
 
-    private endTimeFormatValidator(group: FormGroup): any {
+    private endTimeFormatValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
             ((group.get(ScheduleEditorFormFields.EndTime).value as string)?.length !== 5 ||
                 parseInt((group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(0, 1), 10) > 2 ||
@@ -194,19 +198,25 @@ export class ScheduleEditorFormService {
         ) {
             group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
         }
+
+        return null;
     }
 
-    private startTimeValidator(group: FormGroup): any {
+    private startTimeValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
             !group.get(ScheduleEditorFormFields.StartTime).value) {
             group.get(ScheduleEditorFormFields.StartTime).setErrors({timeError: true});
         }
+
+        return null;
     }
 
-    private endTimeValidator(group: FormGroup): any {
+    private endTimeValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ScheduleEditorFormFields.IsEnabled).value &&
             !group.get(ScheduleEditorFormFields.EndTime).value) {
             group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});
         }
+
+        return null;
     }
 }

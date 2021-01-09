@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {ServicePublishStepSixFormFields} from '@app/service/enums/service-publish-step-six-form-fields';
 import {StepSixDataInterface} from '@app/service/interfaces/step-six-data-interface';
 
@@ -27,9 +27,13 @@ export class ServicePublishStepSixFormService {
         return this.form.invalid;
     }
 
-    private companyNameValidator(group: FormGroup): any {
+    private companyNameValidator(group: FormGroup): ValidationErrors | null {
         if (group.get(ServicePublishStepSixFormFields.IsCompany).value && !group.get(ServicePublishStepSixFormFields.CompanyName).value) {
             group.get(ServicePublishStepSixFormFields.CompanyName).setErrors({emptyCompanyNameError: true});
+
+            return {emptyCompanyNameError: true};
         }
+
+        return null;
     }
 }

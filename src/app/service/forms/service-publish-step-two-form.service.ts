@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {ServicePublishStepTwoFormFields} from '@app/service/enums/service-publish-step-two-form-fields';
 import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interface';
 
@@ -59,13 +59,15 @@ export class ServicePublishStepTwoFormService {
             !group.get(ServicePublishStepTwoFormFields.EndPrice).value;
     }
 
-    private checkPricesValidator(group: FormGroup): any {
+    private checkPricesValidator(group: FormGroup): ValidationErrors | null {
         const startPrice = parseInt(group.get(ServicePublishStepTwoFormFields.StartPrice).value, 10);
         const endPrice = parseInt(group.get(ServicePublishStepTwoFormFields.EndPrice).value, 10);
         if (startPrice > endPrice) {
             group.get(ServicePublishStepTwoFormFields.EndPrice).setErrors({priceError: true});
-        } else {
-            return null;
+
+            return {priceError: true};
         }
+
+        return null;
     }
 }
