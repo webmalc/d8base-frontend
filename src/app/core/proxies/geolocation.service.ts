@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Geolocation, GeolocationOptions, Geoposition} from '@ionic-native/geolocation/ngx';
+import {Geolocation, GeolocationOptions, Geoposition, PositionError} from '@ionic-native/geolocation/ngx';
 import {Observable} from 'rxjs';
 
 /**
@@ -17,7 +17,7 @@ export class GeolocationService {
         return this.geolocation.getCurrentPosition();
     }
 
-    public watchPosition(options?: GeolocationOptions): Observable<Geoposition> {
+    public watchPosition(options?: GeolocationOptions): Observable<Geoposition | PositionError> {
         return this.geolocation.watchPosition(options);
     }
 }
