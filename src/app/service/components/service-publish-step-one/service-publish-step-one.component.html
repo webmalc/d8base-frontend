@@ -1,96 +1,96 @@
 <app-header></app-header>
 <ion-content class="ion-padding-top">
-    <ion-row class="ion-justify-content-center">
-        <ion-col appMainColumn>
-            <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
-                    <ion-col class="ion-no-padding">
-                        <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
-                            <ion-item class="ion-item-no-border fs18">
-                                <b>{{"service-publish.step-one.title" | translate}}</b>
-                            </ion-item>
-                        </ion-row>
-                        <ion-row class="ion-padding-horizontal ion-padding-bottom">
-                            {{"service-publish.step-one.description" | translate}}
-                        </ion-row>
-                        <ion-row class="ion-padding-horizontal ion-padding-bottom">
-                            {{"service-publish.step-one.subdesc" | translate}}
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
-                    <ion-col class="ion-no-padding">
-                        <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
-                                <b>
-                                    {{"service-details.title" | translate}}
-                                </b>
-                            </ion-item>
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
-                <ion-item class="ion-item-no-border ion-item-bordered-others">
-                    <ion-col class="ion-padding-vertical" size="12">
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                            <div class="label-for-required-input">
-                                {{"service-publish.step-one.category-title" | translate}}
-                            </div>
-                        </ion-item>
-                        <ion-item class="ion-item-bordered">
-                            <ion-label color="medium" position="floating">
-                                {{"service-publish.step-one.category-subtitle" | translate}}
-                            </ion-label>
-                            <ionic-selectable
-                                    itemValueField="id"
-                                    itemTextField="name"
-                                    [items]="categoriesList$|async"
-                                    [canSearch]="true"
-                                    formControlName="{{this.formFields.Category}}"
-                                    (onChange)="onCategoryChange()"
-                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
-                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
-                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                            >
-                            </ionic-selectable>
-                        </ion-item>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-padding-top">
-                            <div class="label-for-required-input">
-                                {{"service-publish.step-one.subcategory-title" | translate}}
-                            </div>
-                        </ion-item>
-                        <ion-item class="ion-item-bordered">
-                            <ion-label color="medium" position="floating">
-                                {{"service-publish.step-one.subcategory-subtitle" | translate}}
-                            </ion-label>
-                            <ionic-selectable
-                                    itemValueField="id"
-                                    itemTextField="name"
-                                    [canSearch]="true"
-                                    [items]="subcategoriesList$|async"
-                                    formControlName="{{this.formFields.Subcategory}}"
-                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
-                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
-                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
-                            >
-                            </ionic-selectable>
-                        </ion-item>
-                        <ion-row class="ion-justify-content-center">
-                            <ion-col size="6">
-                                <ion-button size="medium" color="light" class="ion-margin-top" fill="solid" expand="block">
-                                    {{"service-publish.back-button" | translate}}
-                                </ion-button>
-                            </ion-col>
-                            <ion-col size="6">
-                                <ion-button size="medium" color="secondary" type="submit" class="ion-margin-top" fill="solid"
-                                            expand="block" [disabled]="isSubmitDisabled()">
-                                    {{"service-publish.forward-button" | translate}}
-                                </ion-button>
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
-            </form>
-        </ion-col>
-    </ion-row>
-    <app-footer></app-footer>
+  <ion-row class="ion-justify-content-center">
+    <ion-col appMainColumn>
+      <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+        <ion-item class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
+          <ion-col class="ion-no-padding">
+            <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
+              <ion-item class="ion-item-no-border fs18">
+                <b>{{"service-publish.step-one.title" | translate}}</b>
+              </ion-item>
+            </ion-row>
+            <ion-row class="ion-padding-horizontal ion-padding-bottom">
+              {{"service-publish.step-one.description" | translate}}
+            </ion-row>
+            <ion-row class="ion-padding-horizontal ion-padding-bottom">
+              {{"service-publish.step-one.subdesc" | translate}}
+            </ion-row>
+          </ion-col>
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
+          <ion-col class="ion-no-padding">
+            <ion-row class="ion-justify-content-start ion-align-items-center">
+              <ion-item class="ion-item-no-border ion-item-no-side-padding" color="light">
+                <b>
+                  {{"service-details.title" | translate}}
+                </b>
+              </ion-item>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+        <ion-item class="ion-item-no-border ion-item-bordered-others">
+          <ion-col class="ion-padding-vertical" size="12">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding">
+              <div class="label-for-required-input">
+                {{"service-publish.step-one.category-title" | translate}}
+              </div>
+            </ion-item>
+            <ion-item class="ion-item-bordered">
+              <ion-label color="medium" position="floating">
+                {{"service-publish.step-one.category-subtitle" | translate}}
+              </ion-label>
+              <ionic-selectable
+                itemValueField="id"
+                itemTextField="name"
+                [items]="categoriesList$|async"
+                [canSearch]="true"
+                formControlName="{{this.formFields.Category}}"
+                (onChange)="onCategoryChange()"
+                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+              >
+              </ionic-selectable>
+            </ion-item>
+            <ion-item class="ion-item-no-border ion-item-no-side-padding ion-padding-top">
+              <div class="label-for-required-input">
+                {{"service-publish.step-one.subcategory-title" | translate}}
+              </div>
+            </ion-item>
+            <ion-item class="ion-item-bordered">
+              <ion-label color="medium" position="floating">
+                {{"service-publish.step-one.subcategory-subtitle" | translate}}
+              </ion-label>
+              <ionic-selectable
+                itemValueField="id"
+                itemTextField="name"
+                [canSearch]="true"
+                [items]="subcategoriesList$|async"
+                formControlName="{{this.formFields.Subcategory}}"
+                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}"
+              >
+              </ionic-selectable>
+            </ion-item>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="6">
+                <ion-button size="medium" color="light" class="ion-margin-top" fill="solid" expand="block">
+                  {{"service-publish.back-button" | translate}}
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button size="medium" color="secondary" type="submit" class="ion-margin-top" fill="solid"
+                            expand="block" [disabled]="isSubmitDisabled()">
+                  {{"service-publish.forward-button" | translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+      </form>
+    </ion-col>
+  </ion-row>
+  <app-footer></app-footer>
 </ion-content>

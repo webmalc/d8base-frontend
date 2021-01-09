@@ -1,103 +1,103 @@
 <ion-card class="ion-no-margin ion-no-padding card">
-    <ion-card-content class="no-horizontal-padding">
-        <ion-col class="ion-no-padding ion-no-margin">
-            <ion-row class="ion-justify-content-between ion-nowrap">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                    <ion-item class="ion-item-no-border">
-                        <ion-img class="border-radius" [src]="getPhoto()"
-                                 style="height: 100px; width: 100px"></ion-img>
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                        <div class="space-between-column">
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding">
-                                <ion-col class="ion-no-padding">
-                                    <ion-item class="ion-item-no-border ion-item-no-min-height master-full-name">
-                                        {{ data.professional.name }}
-                                    </ion-item>
-                                    <ion-item *ngIf="data.professional.company"
-                                              class="ion-item-no-border ion-item-no-min-height master-company">
-                                        {{this.getCompanyName()|translate}}
-                                    </ion-item>
-                                </ion-col>
-                            </ion-item>
-                            <ion-item class="ion-item-no-border ion-item-no-vertical-padding">
-                                <ion-row class="ion-no-padding ion-align-items-center">
-                                    <app-rating-full-star></app-rating-full-star>
-                                    <ion-item
-                                            class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ph5 master-rating">
-                                        {{data.professional.rating}}
-                                    </ion-item>
-                                    <ion-item
-                                            class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding master-reviews">
-                                        /165 {{declineReviews(165)|translate}}/
-                                    </ion-item>
-                                </ion-row>
-                            </ion-item>
-                        </div>
-                    </ion-item>
-                </ion-item>
-                <div class="space-between-column aie">
-                    <ion-item class="ion-item-no-border no-padding-left">
-                        <ion-icon name="heart-outline"></ion-icon>
-                    </ion-item>
-                    <ion-item class="ion-item-no-border no-padding-left">
-                        <ion-icon *ngIf="data.professional.user.is_confirmed" color="success"
-                                  name="checkmark-circle-outline"></ion-icon>
-                        <ion-icon *ngIf="!data.professional.user.is_confirmed" color="danger"
-                                  name="close-circle-outline"></ion-icon>
-                    </ion-item>
-                </div>
-            </ion-row>
-            <ion-row class="ion-margin-top ion-nowrap ion-justify-content-between">
-                <ion-item class="ion-item-no-border services-title">
-                    {{'issuance.search-result.services'|translate}}
-                </ion-item>
-                <ion-row class="ion-justify-content-end">
-                    <ion-item *ngIf="data.professional.level" class="ion-item-no-border master-level">
-                        {{'global.professional-level.' + data.professional.level | translate}}
-                    </ion-item>
+  <ion-card-content class="no-horizontal-padding">
+    <ion-col class="ion-no-padding ion-no-margin">
+      <ion-row class="ion-justify-content-between ion-nowrap">
+        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+          <ion-item class="ion-item-no-border">
+            <ion-img class="border-radius" [src]="getPhoto()"
+                     style="height: 100px; width: 100px"></ion-img>
+          </ion-item>
+          <ion-item class="ion-item-no-border ion-item-no-side-padding">
+            <div class="space-between-column">
+              <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding">
+                <ion-col class="ion-no-padding">
+                  <ion-item class="ion-item-no-border ion-item-no-min-height master-full-name">
+                    {{ data.professional.name }}
+                  </ion-item>
+                  <ion-item *ngIf="data.professional.company"
+                            class="ion-item-no-border ion-item-no-min-height master-company">
+                    {{this.getCompanyName()|translate}}
+                  </ion-item>
+                </ion-col>
+              </ion-item>
+              <ion-item class="ion-item-no-border ion-item-no-vertical-padding">
+                <ion-row class="ion-no-padding ion-align-items-center">
+                  <app-rating-full-star></app-rating-full-star>
+                  <ion-item
+                    class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ph5 master-rating">
+                    {{data.professional.rating}}
+                  </ion-item>
+                  <ion-item
+                    class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding master-reviews">
+                    /165 {{declineReviews(165)|translate}}/
+                  </ion-item>
                 </ion-row>
-            </ion-row>
-            <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
-                <ion-label>
-                    {{service.name}}
-                </ion-label>
-                <ion-note slot="end" class="ion-text-end">
-                    <app-price [price]="service.price"></app-price>
-                </ion-note>
-            </ion-item>
-            <ion-row *ngIf="needToRenderMoreServicesBtn()">
-                <ion-item (click)="onMoreServicesClick()"
-                          class="ion-item-no-border ion-item-no-min-height more-services cursor-pointer">
-                    {{'issuance.search-result.more'|translate}}
-                </ion-item>
-            </ion-row>
-            <ion-row class="ion-margin-top ion-justify-content-between ion-nowrap">
-                <div class="space-between-column">
-                    <ion-item class="ion-item-no-border ion-item-no-min-height master-location-title">
-                        {{'issuance.search-result.address'|translate}}
-                    </ion-item>
-                    <ion-item *ngFor="let loc of data.professional.locations"
-                              class="ion-item-no-border ion-item-no-min-height pv5">
-                        {{loc.address}}
-                    </ion-item>
-                </div>
-                <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
-                    <ion-item class="ion-item-no-border">
-                        <ion-button color="secondary" size="medium" [routerLink]="'/professional/' + data.professional.id">
-                            {{'issuance.search-result.select'|translate}}
-                        </ion-button>
-                    </ion-item>
-                </ion-row>
-            </ion-row>
-            <ion-button class="select-button-sm"
-                        color="secondary"
-                        expand="block"
-                        fill="solid"
-                        size="medium"
-                        [routerLink]="'/professional/' + data.professional.id">
-                {{'issuance.search-result.select'|translate}}
+              </ion-item>
+            </div>
+          </ion-item>
+        </ion-item>
+        <div class="space-between-column aie">
+          <ion-item class="ion-item-no-border no-padding-left">
+            <ion-icon name="heart-outline"></ion-icon>
+          </ion-item>
+          <ion-item class="ion-item-no-border no-padding-left">
+            <ion-icon *ngIf="data.professional.user.is_confirmed" color="success"
+                      name="checkmark-circle-outline"></ion-icon>
+            <ion-icon *ngIf="!data.professional.user.is_confirmed" color="danger"
+                      name="close-circle-outline"></ion-icon>
+          </ion-item>
+        </div>
+      </ion-row>
+      <ion-row class="ion-margin-top ion-nowrap ion-justify-content-between">
+        <ion-item class="ion-item-no-border services-title">
+          {{'issuance.search-result.services'|translate}}
+        </ion-item>
+        <ion-row class="ion-justify-content-end">
+          <ion-item *ngIf="data.professional.level" class="ion-item-no-border master-level">
+            {{'global.professional-level.' + data.professional.level | translate}}
+          </ion-item>
+        </ion-row>
+      </ion-row>
+      <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
+        <ion-label>
+          {{service.name}}
+        </ion-label>
+        <ion-note slot="end" class="ion-text-end">
+          <app-price [price]="service.price"></app-price>
+        </ion-note>
+      </ion-item>
+      <ion-row *ngIf="needToRenderMoreServicesBtn()">
+        <ion-item (click)="onMoreServicesClick()"
+                  class="ion-item-no-border ion-item-no-min-height more-services cursor-pointer">
+          {{'issuance.search-result.more'|translate}}
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-margin-top ion-justify-content-between ion-nowrap">
+        <div class="space-between-column">
+          <ion-item class="ion-item-no-border ion-item-no-min-height master-location-title">
+            {{'issuance.search-result.address'|translate}}
+          </ion-item>
+          <ion-item *ngFor="let loc of data.professional.locations"
+                    class="ion-item-no-border ion-item-no-min-height pv5">
+            {{loc.address}}
+          </ion-item>
+        </div>
+        <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
+          <ion-item class="ion-item-no-border">
+            <ion-button color="secondary" size="medium" [routerLink]="'/professional/' + data.professional.id">
+              {{'issuance.search-result.select'|translate}}
             </ion-button>
-        </ion-col>
-    </ion-card-content>
+          </ion-item>
+        </ion-row>
+      </ion-row>
+      <ion-button class="select-button-sm"
+                  color="secondary"
+                  expand="block"
+                  fill="solid"
+                  size="medium"
+                  [routerLink]="'/professional/' + data.professional.id">
+        {{'issuance.search-result.select'|translate}}
+      </ion-button>
+    </ion-col>
+  </ion-card-content>
 </ion-card>

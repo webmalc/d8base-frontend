@@ -1,98 +1,98 @@
 <ion-header (keydown.escape)="cancelUpdate()" class="ion-d8b-gradient-bgc">
-    <ion-item class="ion-item-no-border ion-justify-content-center ion-align-items-center">
-        <ion-row class="d8b-container chat-container width100 ion-align-items-center">
-            <ion-col size="1" class="ion-no-margin ion-no-padding">
-                <ion-item routerLink="/message"
-                          routerDirection="back"
-                          routerLinkActive="active"
-                          class="cursor-pointer ion-item-no-border ion-no-padding" style="min-width: 60px">
-                    <ion-icon color="light" name="arrow-back-outline"></ion-icon>
-                </ion-item>
-            </ion-col>
-            <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
-                <ion-item class="ion-item-no-border">
-                    <!--                    user avatar here-->
-                </ion-item>
-            </ion-col>
-        </ion-row>
-    </ion-item>
+  <ion-item class="ion-item-no-border ion-justify-content-center ion-align-items-center">
+    <ion-row class="d8b-container chat-container width100 ion-align-items-center">
+      <ion-col size="1" class="ion-no-margin ion-no-padding">
+        <ion-item routerLink="/message"
+                  routerDirection="back"
+                  routerLinkActive="active"
+                  class="cursor-pointer ion-item-no-border ion-no-padding" style="min-width: 60px">
+          <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+      <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
+        <ion-item class="ion-item-no-border">
+          <!--                    user avatar here-->
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-item>
 </ion-header>
 
 <ion-content class="ion-margin-top" id="content" [scrollEvents]="true" (click)="resetContext()">
-    <ion-infinite-scroll threshold="800px" [disabled]="true" (ionInfinite)="loadData()" position="top">
-        <ion-infinite-scroll-content
-                loadingSpinner="bubbles"
-                loadingText="{{'messages.direct.loading-text'|translate}}">
-        </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-    <ion-list class="d8b-container chat-container ion-margin-bottom">
+  <ion-infinite-scroll threshold="800px" [disabled]="true" (ionInfinite)="loadData()" position="top">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="{{'messages.direct.loading-text'|translate}}">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-list class="d8b-container chat-container ion-margin-bottom">
 
-        <div *ngFor="let message of (directService.messages$|async); let i=index">
-            <ion-row *ngIf="message.id && needToRenderDateString(i)|async"
-                     class="ion-justify-content-center ion-align-items-center ion-padding-vertical">
-                {{getDateString(message.created)}}
-            </ion-row>
-            <ion-row class="width100"
-                     *ngIf="message.sender !== directService.currentUserId && directService.currentUserId">
+    <div *ngFor="let message of (directService.messages$|async); let i=index">
+      <ion-row *ngIf="message.id && needToRenderDateString(i)|async"
+               class="ion-justify-content-center ion-align-items-center ion-padding-vertical">
+        {{getDateString(message.created)}}
+      </ion-row>
+      <ion-row class="width100"
+               *ngIf="message.sender !== directService.currentUserId && directService.currentUserId">
 
-                <div class="message-container">
-                    <div class="received-message message">
-                        <div class="message-text wrap-text">{{message.body}}</div>
-                    </div>
-                    <div class="timeline timeline-received">
-                        {{timeFromDatetime(message.created)}}
-                    </div>
-                </div>
-            </ion-row>
-            <ion-row class="width100 ion-justify-content-end" id="{{message?.id}}"
-                     *ngIf="message.sender === directService.currentUserId && directService.currentUserId">
-
-                <div class="message-container" (contextmenu)="initMessageMenuContext($event, message)">
-                    <div class="sent-message message">
-                        <div class="message-text wrap-text">{{message.body}}</div>
-                    </div>
-                    <div class="timeline timeline-sent width100" *ngIf="message.id">
-                        {{timeFromDatetime(message.created)}}
-                        <ion-icon class="checkmark" color="{{getCheckmarkColor(message)}}"
-                                  name="checkmark-done-outline"></ion-icon>
-                    </div>
-                    <div class="timeline timeline-sent width100" *ngIf="!message.id">
-                        <ion-icon name="time-outline"></ion-icon>
-                    </div>
-                </div>
-            </ion-row>
+        <div class="message-container">
+          <div class="received-message message">
+            <div class="message-text wrap-text">{{message.body}}</div>
+          </div>
+          <div class="timeline timeline-received">
+            {{timeFromDatetime(message.created)}}
+          </div>
         </div>
-        <div #bottomPoint></div>
+      </ion-row>
+      <ion-row class="width100 ion-justify-content-end" id="{{message?.id}}"
+               *ngIf="message.sender === directService.currentUserId && directService.currentUserId">
 
-    </ion-list>
+        <div class="message-container" (contextmenu)="initMessageMenuContext($event, message)">
+          <div class="sent-message message">
+            <div class="message-text wrap-text">{{message.body}}</div>
+          </div>
+          <div class="timeline timeline-sent width100" *ngIf="message.id">
+            {{timeFromDatetime(message.created)}}
+            <ion-icon class="checkmark" color="{{getCheckmarkColor(message)}}"
+                      name="checkmark-done-outline"></ion-icon>
+          </div>
+          <div class="timeline timeline-sent width100" *ngIf="!message.id">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+        </div>
+      </ion-row>
+    </div>
+    <div #bottomPoint></div>
+
+  </ion-list>
 
 </ion-content>
 <ion-footer class="ion-no-border d8b-container chat-container" (keydown.enter)="send()"
             (keydown.escape)="cancelUpdate()">
-    <ion-toolbar class="">
-        <ion-row *ngIf="isUpdate" class="ion-padding-horizontal ion-align-items-center" (click)="showUpdatingMessage()">
-            <ion-col size="1" class="cursor-pointer">
-                <ion-item class="ion-item-no-border">
-                    <ion-icon name="pencil-outline"></ion-icon>
-                </ion-item>
-            </ion-col>
-            <ion-col size="10" class="cursor-pointer" (click)="showUpdatingMessage()">
-                <ion-row>Edit message:</ion-row>
-                <ion-row class="default-message-container">{{directService.defaultUpdateMessage}}</ion-row>
-            </ion-col>
-            <ion-col size="1" class="ion-justify-content-end cursor-pointer ion-align-items-end">
-                <ion-item (click)="cancelUpdate()" class="ion-item-no-border">
-                    <ion-icon name="close-outline"></ion-icon>
-                </ion-item>
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-col class="ion-item-bordered border-radius24">
-                <ion-textarea *ngIf="!isUpdate" [(ngModel)]="directService.message" name="message"></ion-textarea>
-                <ion-textarea *ngIf="isUpdate" [(ngModel)]="directService.updateMessage.body" name="message"></ion-textarea>
-            </ion-col>
-            <ion-button (click)="send()" class="ion-margin-start"
-                        color="secondary">{{isUpdate ? 'update' : 'send'}}</ion-button>
-        </ion-row>
-    </ion-toolbar>
+  <ion-toolbar class="">
+    <ion-row *ngIf="isUpdate" class="ion-padding-horizontal ion-align-items-center" (click)="showUpdatingMessage()">
+      <ion-col size="1" class="cursor-pointer">
+        <ion-item class="ion-item-no-border">
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+      <ion-col size="10" class="cursor-pointer" (click)="showUpdatingMessage()">
+        <ion-row>Edit message:</ion-row>
+        <ion-row class="default-message-container">{{directService.defaultUpdateMessage}}</ion-row>
+      </ion-col>
+      <ion-col size="1" class="ion-justify-content-end cursor-pointer ion-align-items-end">
+        <ion-item (click)="cancelUpdate()" class="ion-item-no-border">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-between ion-align-items-center">
+      <ion-col class="ion-item-bordered border-radius24">
+        <ion-textarea *ngIf="!isUpdate" [(ngModel)]="directService.message" name="message"></ion-textarea>
+        <ion-textarea *ngIf="isUpdate" [(ngModel)]="directService.updateMessage.body" name="message"></ion-textarea>
+      </ion-col>
+      <ion-button (click)="send()" class="ion-margin-start"
+                  color="secondary">{{isUpdate ? 'update' : 'send'}}</ion-button>
+    </ion-row>
+  </ion-toolbar>
 </ion-footer>

@@ -1,17 +1,17 @@
 <ng-container *ngIf="schedule">
-    <ion-item lines="none" *ngFor="let item of schedule">
-        <ion-icon *ngIf="item.is_enabled" slot="start" name="checkmark-circle" color="success"></ion-icon>
-        <ion-icon *ngIf="!item.is_enabled" slot="start" name="close-circle"></ion-icon>
-        <ion-text>
-            {{ 'global.weekdays.' + getDayName(item.day_of_week) | translate }}
-            <ng-container *ngIf="item.start_time">
-                {{ 'global.from' | translate }}
-                {{ item.start_time }}
-            </ng-container>
-            <ng-container *ngIf="item.end_time">
-                {{ 'global.to' | translate }}
-                {{ item.end_time }}
-            </ng-container>
-        </ion-text>
-    </ion-item>
+  <ion-item lines="none" *ngFor="let item of schedule">
+    <ion-icon *ngIf="item.is_enabled" slot="start" name="checkmark-circle" color="success"></ion-icon>
+    <ion-icon *ngIf="!item.is_enabled" slot="start" name="close-circle"></ion-icon>
+    <ion-text>
+      {{ 'global.weekdays.' + getDayName(item.day_of_week) | translate }}
+      <ng-container *ngIf="item.start_time">
+        {{ 'global.from' | translate }}
+        {{ item.start_time }}
+      </ng-container>
+      <ng-container *ngIf="item.end_time">
+        {{ 'global.to' | translate }}
+        {{ item.end_time }}
+      </ng-container>
+    </ion-text>
+  </ion-item>
 </ng-container>

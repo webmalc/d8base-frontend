@@ -1,19 +1,19 @@
 <ion-segment (ionChange)="changeTab($event)" [value]="tabs.current">
-    <ion-segment-button [value]="tabs.current">
-        <ion-label>{{ 'sent_orders.currentTab' | translate }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button [value]="tabs.archive">
-        <ion-label>{{ 'sent_orders.archiveTab' | translate }}</ion-label>
-    </ion-segment-button>
+  <ion-segment-button [value]="tabs.current">
+    <ion-label>{{ 'sent_orders.currentTab' | translate }}</ion-label>
+  </ion-segment-button>
+  <ion-segment-button [value]="tabs.archive">
+    <ion-label>{{ 'sent_orders.archiveTab' | translate }}</ion-label>
+  </ion-segment-button>
 </ion-segment>
 
 <ion-list *ngIf="orders?.length > 0; else placeholder">
-    <app-sent-order-list-item *ngFor="let order of orders"
-                         [order]="order">
-    </app-sent-order-list-item>
+  <app-sent-order-list-item *ngFor="let order of orders"
+                            [order]="order">
+  </app-sent-order-list-item>
 </ion-list>
 <ng-template #placeholder>
-    <ion-item class="ion-text-center" lines="none">
-        <ion-label>{{ 'sent_orders.empty-placeholder' | translate }}</ion-label>
-    </ion-item>
+  <ion-item class="ion-text-center" lines="none">
+    <ion-label>{{ 'sent_orders.empty-placeholder' | translate }}</ion-label>
+  </ion-item>
 </ng-template>
