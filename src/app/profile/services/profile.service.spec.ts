@@ -11,8 +11,8 @@ describe('ProfileService', () => {
         imports: [HttpClientTestingModule, ReactiveFormsModule],
         providers: [
             ProfileService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

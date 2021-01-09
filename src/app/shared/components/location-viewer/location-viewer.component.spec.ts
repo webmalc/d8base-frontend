@@ -11,7 +11,7 @@ describe('LocationPresentationComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LocationViewerComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule]
+            imports: [IonicModule.forRoot(), HttpClientTestingModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LocationViewerComponent);

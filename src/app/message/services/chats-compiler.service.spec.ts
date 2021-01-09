@@ -10,14 +10,14 @@ import {MessagesListApiService} from './messages-list-api.service';
 describe('ChatsCompilerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             ChatsCompilerService,
             LatestMessagesApiService,
             MessagesListApiService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

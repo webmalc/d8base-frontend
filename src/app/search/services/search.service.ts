@@ -13,7 +13,7 @@ export class SearchService {
     constructor(
         private readonly masterReadonlyApi: MasterReadonlyApiService,
         private readonly servicesApi: ServicesApiService,
-        private readonly masterLocationApi: MasterLocationApiService
+        private readonly masterLocationApi: MasterLocationApiService,
     ) {
     }
 
@@ -21,9 +21,9 @@ export class SearchService {
         return this.servicesApi.get().pipe(
             switchMap(services => this.masterReadonlyApi.getByEntityId(services.results[0].professional).pipe(
                 switchMap(master => this.masterLocationApi.getByClientId(master.id).pipe(
-                    map(locations => ([{master, services: services.results, masterLocationList: locations.results}]))
-                ))
-            ))
+                    map(locations => ([{master, services: services.results, masterLocationList: locations.results}])),
+                )),
+            )),
         );
     }
 }

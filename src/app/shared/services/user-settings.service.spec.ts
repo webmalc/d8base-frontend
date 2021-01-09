@@ -11,8 +11,8 @@ describe('UserSettingsService', () => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         });
         service = TestBed.inject(UserSettingsService);
     });

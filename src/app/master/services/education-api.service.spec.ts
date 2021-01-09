@@ -6,11 +6,11 @@ import {EducationApiService} from './education-api.service';
 describe('EducationApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            EducationApiService
-        ]
+            EducationApiService,
+        ],
     }));
 
     it('should be created', () => {

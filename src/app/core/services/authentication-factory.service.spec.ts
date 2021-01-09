@@ -6,8 +6,8 @@ import {AuthenticationService} from './authentication.service';
 describe('AuthenticationFactoryService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            {provide: AuthenticationService, useValue: 'main'}
-        ]
+            {provide: AuthenticationService, useValue: 'main'},
+        ],
     }));
 
     it('should be created', () => {

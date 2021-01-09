@@ -23,7 +23,7 @@ export class ChainManagerService {
         '/service/publish/step-five',
         '/service/publish/step-six',
         '/service/publish/step-seven',
-        '/service/publish/final'
+        '/service/publish/final',
     ];
 
     constructor(
@@ -34,20 +34,20 @@ export class ChainManagerService {
         private readonly stepFiveHandler: StepFiveHandlerService,
         private readonly stepSixHandler: StepSixHandlerService,
         private readonly stepSevenHandler: StepSevenHandlerService,
-        private readonly finalStepHandler: StepFinalHandlerService
+        private readonly finalStepHandler: StepFinalHandlerService,
     ) {
         this.generateChain();
     }
 
     public getNextPage(url: string): Observable<string> {
         return this.chain[this.urls.indexOf(url) + 1].handleNext().pipe(
-            map(index => this.urls[index])
+            map(index => this.urls[index]),
         );
     }
 
     public getPreviousPage(url: string): Observable<string> {
         return this.chain[this.urls.indexOf(url) - 1].handlePrevious().pipe(
-            map(index => this.urls[index])
+            map(index => this.urls[index]),
         );
     }
 
@@ -65,7 +65,7 @@ export class ChainManagerService {
             this.stepFiveHandler,
             this.stepSixHandler,
             this.stepSevenHandler,
-            this.finalStepHandler
+            this.finalStepHandler,
         ];
     }
 }

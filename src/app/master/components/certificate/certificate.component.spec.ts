@@ -12,7 +12,7 @@ describe('CertificateComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CertificateComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CertificateComponent);
@@ -26,7 +26,7 @@ describe('CertificateComponent', () => {
             organization: 'test',
             certificate_id: '123',
             url: 'link.sdf',
-            photo_thumbnail: 'link.sdfsdf'
+            photo_thumbnail: 'link.sdfsdf',
         });
         fixture.detectChanges();
     }));

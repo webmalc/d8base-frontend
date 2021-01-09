@@ -15,7 +15,7 @@ import {first, switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-step-two',
     templateUrl: './service-publish-step-two.component.html',
-    styleUrls: ['./service-publish-step-two.component.scss']
+    styleUrls: ['./service-publish-step-two.component.scss'],
 })
 export class ServicePublishStepTwoComponent extends Reinitable {
 
@@ -29,14 +29,14 @@ export class ServicePublishStepTwoComponent extends Reinitable {
         public readonly formService: ServicePublishStepTwoFormService,
         public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
         private readonly currencyList: CurrencyListApiService,
-        private readonly userSettings: UserSettingsService
+        private readonly userSettings: UserSettingsService,
     ) {
         super();
     }
 
     public submitForm(): void {
         this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
-            ServicePublishSteps.Two, this.formService.form.getRawValue()
+            ServicePublishSteps.Two, this.formService.form.getRawValue(),
         );
         this.serviceStepsNavigationService.next();
     }
@@ -45,7 +45,7 @@ export class ServicePublishStepTwoComponent extends Reinitable {
         this.currencyList.getList().subscribe(data => this.currencyList$.next(data));
         if (this.servicePublishDataHolder.isset(ServicePublishSteps.Two)) {
             this.formService.createForm(
-                this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)
+                this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two),
             );
         } else {
             this.formService.createForm();
@@ -56,7 +56,7 @@ export class ServicePublishStepTwoComponent extends Reinitable {
     private initDefaultCurrency(): void {
         this.userSettings.userSettings$.pipe(
             first(),
-            switchMap(settings => settings?.currency ? this.currencyList.getByName(settings.currency) : of(null))
+            switchMap(settings => settings?.currency ? this.currencyList.getByName(settings.currency) : of(null)),
         ).subscribe(currency => {
             this.formService.form.get(this.formFields.Currency).setValue(currency);
         });

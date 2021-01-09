@@ -12,7 +12,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-user-edit',
     templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.scss']
+    styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
 
@@ -25,7 +25,7 @@ export class UserEditComponent implements OnInit {
         private readonly location: Location,
         private readonly registerEmailApi: RegisterEmailApiService,
         private readonly formService: ProfileFormService,
-        private readonly userManager: UserManagerService
+        private readonly userManager: UserManagerService,
     ) {
     }
 
@@ -34,13 +34,13 @@ export class UserEditComponent implements OnInit {
             user => {
                 this.user = user;
                 this.form = this.formService.createForm(user);
-            }
+            },
         );
     }
 
     public submitForm(): void {
         this.profileService.updateUser(
-            plainToClass(User, this.form.getRawValue(), {excludeExtraneousValues: true})
+            plainToClass(User, this.form.getRawValue(), {excludeExtraneousValues: true}),
         );
         if (this.user.email !== this.form.get(this.formFields.Email).value) {
             this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();

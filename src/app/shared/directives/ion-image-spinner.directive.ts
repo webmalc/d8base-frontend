@@ -3,7 +3,7 @@ import { IonImg } from '@ionic/angular';
 
 @Directive({
     // tslint:disable:directive-selector
-    selector: 'ion-img[spinner]'
+    selector: 'ion-img[spinner]',
 })
 export class IonImageSpinnerDirective implements AfterViewInit {
     private ionImageDisplayStyle: string;
@@ -12,7 +12,7 @@ export class IonImageSpinnerDirective implements AfterViewInit {
     constructor(
         @Host() private readonly host: ElementRef<HTMLElement>,
         private readonly ionImg: IonImg,
-        private readonly renderer: Renderer2
+        private readonly renderer: Renderer2,
     ) {}
 
     public ngAfterViewInit(): void {
@@ -47,7 +47,7 @@ export class IonImageSpinnerDirective implements AfterViewInit {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             '-webkit-transform': 'translate(-50%, -50%)',
-            '-ms-transform': 'translate(-50%, -50%)'
+            '-ms-transform': 'translate(-50%, -50%)',
         };
         Object.keys(styles).forEach(key => {
             spinnerElement.style[key] = styles[key];

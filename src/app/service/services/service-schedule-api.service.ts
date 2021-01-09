@@ -19,7 +19,7 @@ export class ServiceScheduleApiService extends AbstractApiService<ServiceSchedul
 
     public createSet(data: ServiceSchedule[]): Observable<ServiceSchedule[]> {
         return this.client.post<ServiceSchedule[], ServiceSchedule[]>(this.setUrl, data).pipe(
-            map(raw => plainToClass(ServiceSchedule, raw))
+            map(raw => plainToClass(ServiceSchedule, raw)),
         );
     }
 

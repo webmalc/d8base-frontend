@@ -12,12 +12,12 @@ import {switchMap, takeUntil} from 'rxjs/operators';
 export enum LocationType {
     Online = 'online',
     Professional = 'professional',
-    Client = 'client'
+    Client = 'client',
 }
 
 const initState: LocationStepData = {
     service_location: null,
-    client_location: null
+    client_location: null,
 };
 
 @Component({
@@ -28,9 +28,9 @@ const initState: LocationStepData = {
     providers: [
         {
             provide: StepComponent,
-            useExisting: forwardRef(() => LocationStepComponent)
-        }
-    ]
+            useExisting: forwardRef(() => LocationStepComponent),
+        },
+    ],
 })
 export class LocationStepComponent extends StepComponent<LocationStepData> {
     public locationLabel: string;
@@ -41,7 +41,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     constructor(
         private readonly fullLocationService: FullLocationService,
         private readonly userLocationService: UserLocationApiService,
-        protected readonly cd: ChangeDetectorRef
+        protected readonly cd: ChangeDetectorRef,
     ) {
         super(cd);
         this.subscribeFormControl();
@@ -99,10 +99,10 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
             switchMap(({results: locations}) => {
                 return forkJoin(
                     locations.map((location) =>
-                        this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline))
+                        this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline)),
                 );
             }),
-            takeUntil(this.ngDestroy$)
+            takeUntil(this.ngDestroy$),
         ).subscribe(locations => {
             this.locations = locations;
             this.cd.markForCheck();
@@ -120,7 +120,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
         return this.locationKey
             ? {
                 ...initState,
-                [this.locationKey]: this.formControl.value
+                [this.locationKey]: this.formControl.value,
             }
             : initState;
     }

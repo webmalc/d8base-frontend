@@ -20,11 +20,11 @@ describe('OrderPage', () => {
                 TranslateModule.forRoot(),
                 IonicStorageModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
-                OrderWizardStateService
-            ]
+                OrderWizardStateService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(OrderPage);

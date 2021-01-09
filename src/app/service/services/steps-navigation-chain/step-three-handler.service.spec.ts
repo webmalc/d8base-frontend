@@ -5,8 +5,8 @@ import {StepThreeHandlerService} from './step-three-handler.service';
 describe('StepThreeHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            StepThreeHandlerService
-        ]
+            StepThreeHandlerService,
+        ],
     }));
 
     it('should be created', () => {

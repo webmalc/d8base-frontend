@@ -6,13 +6,13 @@ import {MasterLocationEditPage} from './master-location-edit.page';
 const routes: Routes = [
   {
     path: '',
-    component: MasterLocationEditPage
-  }
+    component: MasterLocationEditPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MasterLocationEditPageRoutingModule {
 }

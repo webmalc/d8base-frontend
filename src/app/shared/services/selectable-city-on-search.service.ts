@@ -16,7 +16,7 @@ export class SelectableCityOnSearchService extends SelectableSearchService {
             event.component,
             event.text,
             this.citiesApi,
-            {by_name: event.text, country: countryValue?.id.toString(10)}
+            {by_name: event.text, country: countryValue?.id.toString(10)},
         );
     }
 }

@@ -6,11 +6,11 @@ import {ExperienceApiService} from './experience-api.service';
 describe('ExperienceApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ExperienceApiService
-        ]
+            ExperienceApiService,
+        ],
     }));
 
     it('should be created', () => {

@@ -17,7 +17,7 @@ import {Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CurrentLocationCompilerService {
 
@@ -26,7 +26,7 @@ export class CurrentLocationCompilerService {
         private readonly nominatim: NominatimService,
         private readonly countryApi: CountriesApiService,
         private readonly cityApi: CitiesApiService,
-        private readonly postalApi: PostalCodeApiService
+        private readonly postalApi: PostalCodeApiService,
     ) {
     }
 
@@ -47,19 +47,19 @@ export class CurrentLocationCompilerService {
                                 map(postal => (country !== null || city !== null || postal !== null) ?
                                     plainToClass(
                                         ExtendedLocation,
-                                        HelperService.clear({country, city, postal, coords: this.getCoordsFromNominatim(data)})
+                                        HelperService.clear({country, city, postal, coords: this.getCoordsFromNominatim(data)}),
                                     ) :
-                                    null
-                                )
-                            ))
-                    ))
-            ))
+                                    null,
+                                ),
+                            )),
+                    )),
+            )),
         );
     }
 
     public getCurrentLocation(): Observable<ExtendedLocation | null> {
         return this.location.getCurrentMergedPosition().pipe(
-            switchMap(coords => null === coords ? of(null) : this.getExtendedLocationByCoords(coords))
+            switchMap(coords => null === coords ? of(null) : this.getExtendedLocationByCoords(coords)),
         );
     }
 
@@ -69,19 +69,19 @@ export class CurrentLocationCompilerService {
 
     private getCountryByTld(tld: string): Observable<Country | null> {
         return this.countryApi.get({tld}).pipe(
-            map(res => res.count === 0 ? null : res.results.shift())
+            map(res => res.count === 0 ? null : res.results.shift()),
         );
     }
 
     private getCity(name: string, country?: Country): Observable<City | null> {
         return this.cityApi.get({by_name: name, country: country.id.toString()}).pipe(
-            map(res => res.count === 0 ? null : res.results.shift())
+            map(res => res.count === 0 ? null : res.results.shift()),
         );
     }
 
     private getPostal(postal: string, country?: Country, city?: City): Observable<PostalCode | null> {
         return this.postalApi.get({search: postal, country: country.id.toString(), city: city.id.toString()}).pipe(
-            map(res => res.count === 0 ? null : res.results.shift())
+            map(res => res.count === 0 ? null : res.results.shift()),
         );
     }
 

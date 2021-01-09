@@ -8,12 +8,12 @@ import {MasterPhotosGeneratorFactoryService} from './master-photos-generator-fac
 describe('MasterPhotosGeneratorService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             MasterPhotosGeneratorFactoryService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

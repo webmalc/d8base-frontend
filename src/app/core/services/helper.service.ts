@@ -79,7 +79,7 @@ export class HelperService {
     public static fromDatetime(datetime: string): { date: string; time: string; } {
         return {
             date: datetime.slice(0, 10),
-            time: datetime.slice(11, 16)
+            time: datetime.slice(11, 16),
         };
     }
 
@@ -133,7 +133,7 @@ export class HelperService {
             environment.backend.url + environment.backend.services_readonly,
             environment.backend.url + environment.backend.service_tag_readonly,
             environment.backend.url + environment.backend.master_photos_readonly,
-            environment.backend.url + environment.backend.calendar
+            environment.backend.url + environment.backend.calendar,
         ];
     }
 }

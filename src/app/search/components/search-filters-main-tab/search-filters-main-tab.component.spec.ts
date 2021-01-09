@@ -33,14 +33,14 @@ describe('SearchFiltersMainTabComponent', () => {
                     IpDataService,
                     IpnfDataService,
                     { provide: LocationService, useClass: LocationServiceMock },
-                    { provide: StorageManagerService, useClass: StorageManagerMock }
-                ]
+                    { provide: StorageManagerService, useClass: StorageManagerMock },
+                ],
             }).compileComponents();
 
             fixture = TestBed.createComponent(SearchFiltersMainTabComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
-        })
+        }),
     );
 
     it('should create', () => {

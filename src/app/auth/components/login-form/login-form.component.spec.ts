@@ -23,8 +23,8 @@ describe('LoginFormComponent', () => {
             imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
             providers: [
                 LoginFormService,
-                TranslateService
-            ]
+                TranslateService,
+            ],
         }).compileComponents();
 
         router = TestBed.inject(Router);

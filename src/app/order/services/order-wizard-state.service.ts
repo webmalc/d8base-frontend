@@ -21,7 +21,7 @@ export class OrderWizardStateService {
     private readonly isStateEmpty$: Observable<boolean> = this.state$.pipe(
         map(state => {
             return !state || JSON.stringify(initState) === JSON.stringify(state);
-        })
+        }),
     );
     private path: string;
     private storageKey: string;
@@ -52,7 +52,7 @@ export class OrderWizardStateService {
     public getStepStateById(id: string): Observable<any> {
         return this.getState().pipe(
             filter(state => Boolean(state)),
-            map(state => state[id])
+            map(state => state[id]),
         );
     }
 
@@ -63,7 +63,7 @@ export class OrderWizardStateService {
     public async setStepStateById(id: string, data: any = initState[id]): Promise<void> {
         const newState: StepsState = {
             ...this.state$.value,
-            [id]: data
+            [id]: data,
         };
         this.state$.next(newState);
         await this.storage.set(this.storageKey, newState);
@@ -78,7 +78,7 @@ export class OrderWizardStateService {
             .pipe(
                 switchMap(() => this.isAbleToNext()),
                 filter(isAbleToNext => isAbleToNext),
-                first()
+                first(),
             )
             .subscribe(() => {
                 const index = this.getIndexOfCurrentStep();
@@ -91,7 +91,7 @@ export class OrderWizardStateService {
         of(1)
             .pipe(
                 switchMap(() => this.isAbleToPrev()),
-                filter(isAbleToPrev => isAbleToPrev)
+                filter(isAbleToPrev => isAbleToPrev),
             )
             .subscribe(() => {
                 const index = this.getIndexOfCurrentStep();

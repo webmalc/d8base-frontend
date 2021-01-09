@@ -18,7 +18,7 @@ export class SavedProfessionalApiService {
     public getAll$(): Observable<SavedProfessionalInterface<number>[]> {
         return this.api.get<ApiListResponseInterface<SavedProfessionalInterface<number>>>(this.url)
             .pipe(
-                map((raw: ApiListResponseInterface<SavedProfessionalInterface<number>>) => raw.results)
+                map((raw: ApiListResponseInterface<SavedProfessionalInterface<number>>) => raw.results),
             );
     }
 
@@ -52,7 +52,7 @@ export class SavedProfessionalApiService {
         return {
             id: null,
             professional: masterId,
-            note
+            note,
         };
     }
 }

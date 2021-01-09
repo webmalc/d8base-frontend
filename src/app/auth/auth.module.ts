@@ -12,9 +12,9 @@ import {AuthRoutingModule} from './auth-routing.module';
         IonicModule,
         AuthRoutingModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
     ],
-    declarations: []
+    declarations: [],
 })
 export class AuthModule {
 }

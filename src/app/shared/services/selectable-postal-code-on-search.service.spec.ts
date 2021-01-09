@@ -6,11 +6,11 @@ import {SelectablePostalCodeOnSearchService} from './selectable-postal-code-on-s
 describe('SelectablePostalCodeOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            SelectablePostalCodeOnSearchService
-        ]
+            SelectablePostalCodeOnSearchService,
+        ],
     }));
 
     it('should be created', () => {

@@ -14,7 +14,7 @@ describe('ContextMenuPopoverComponent', () => {
             declarations: [ContextMenuPopoverComponent],
             imports: [
                 IonicModule.forRoot(),
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
                 {
@@ -24,10 +24,10 @@ describe('ContextMenuPopoverComponent', () => {
                             mes.is_read = false;
 
                             return mes;
-                        }
-                    }
-                }
-            ]
+                        },
+                    },
+                },
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ContextMenuPopoverComponent);

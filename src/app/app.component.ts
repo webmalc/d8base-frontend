@@ -18,7 +18,7 @@ import {filter, map} from 'rxjs/operators';
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.scss']
+    styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
     public isAuthenticated$: Observable<boolean>;
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         authenticationFactory: AuthenticationFactory,
         private readonly notificationWorker: NotificationWorkerService,
         private readonly fcmDevice: FcmDeviceService,
-        private readonly userManager: UserManagerService
+        private readonly userManager: UserManagerService,
     ) {
         this.darkTheme$ = darkModeService.darkTheme$;
         this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 }
 
                 return appTitle;
-            })
+            }),
         ).subscribe((title: string) => this.titleService.setTitle(title));
     }
 

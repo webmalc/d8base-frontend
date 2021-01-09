@@ -28,8 +28,8 @@ describe('LocationPickerComponent', () => {
                 {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
                 {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
                 {provide: PopoverController, useValue: {create: () => Promise.resolve()}},
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LocationPickerComponent);

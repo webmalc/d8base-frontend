@@ -25,26 +25,26 @@ describe('AuthInterceptor', () => {
                 getAccessToken: Promise.resolve('access_token'),
                 clear: Promise.resolve(),
                 isAccessTokenExpired: Promise.resolve(true),
-                isRefreshTokenExpired: Promise.resolve(true)
-            }
+                isRefreshTokenExpired: Promise.resolve(true),
+            },
         );
         TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
                 {
                     provide: HTTP_INTERCEPTORS,
                     useClass: AuthInterceptor,
-                    multi: true
+                    multi: true,
                 },
                 {
                     provide: TokenManagerService,
-                    useValue: spyTokenManager
+                    useValue: spyTokenManager,
                 },
                 AuthInterceptor,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         });
 
         client = TestBed.inject(ApiClientService);

@@ -10,7 +10,7 @@ describe('ScheduleViewerComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ScheduleViewerComponent],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ScheduleViewerComponent);

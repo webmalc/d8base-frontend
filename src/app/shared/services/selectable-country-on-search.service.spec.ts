@@ -6,7 +6,7 @@ import {SelectableCountryOnSearchService} from './selectable-country-on-search.s
 describe('SelectableCountryOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [SelectableCountryOnSearchService]
+        providers: [SelectableCountryOnSearchService],
     }));
 
     it('should be created', () => {

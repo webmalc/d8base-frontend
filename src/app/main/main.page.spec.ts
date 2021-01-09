@@ -30,8 +30,8 @@ describe('MainPage', () => {
                 {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
                 {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
                 {provide: StorageManagerService, useClass: StorageManagerMock},
-                DefaultCategoriesFactoryService
-            ]
+                DefaultCategoriesFactoryService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MainPage);

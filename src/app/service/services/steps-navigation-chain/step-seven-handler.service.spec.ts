@@ -5,8 +5,8 @@ import {StepSevenHandlerService} from './step-seven-handler.service';
 describe('StepSevenHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            StepSevenHandlerService
-        ]
+            StepSevenHandlerService,
+        ],
     }));
 
     it('should be created', () => {

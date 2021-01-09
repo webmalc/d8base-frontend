@@ -23,7 +23,7 @@ describe('DirectComponent', () => {
                 IonicModule.forRoot(),
                 RouterTestingModule,
                 TranslateModule.forRoot(),
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
                 DirectServiceService,
@@ -32,8 +32,8 @@ describe('DirectComponent', () => {
                 MessagesListApiService,
                 MessagesSentApiService,
                 NotificationWorkerService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(DirectComponent);

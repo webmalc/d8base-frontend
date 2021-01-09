@@ -6,7 +6,7 @@ import {SettingsFormService} from './settings-form.service';
 describe('SettingsFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [ReactiveFormsModule],
-        providers: [SettingsFormService]
+        providers: [SettingsFormService],
     }));
 
     it('should be created', () => {

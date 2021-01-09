@@ -18,7 +18,7 @@ const testData: Search = {
             is_confirmed: true,
             nationality: null,
             birthday: null,
-            languages: []
+            languages: [],
         },
         name: 'User prof',
         description: 'Desciption User prof',
@@ -41,14 +41,14 @@ const testData: Search = {
                 address: 'User Addres Lux',
                 coordinates: null,
                 units: 0,
-                timezone: null
-            }
+                timezone: null,
+            },
         ],
         experience_entries: [],
         educations: [],
         certificates: [],
         created: '2020-12-02T09:57:42.673166+01:00',
-        modified: '2020-12-02T16:38:49.335072+01:00'
+        modified: '2020-12-02T16:38:49.335072+01:00',
     },
     services: [
         {
@@ -73,18 +73,18 @@ const testData: Search = {
                 end_price_currency: 'USD',
                 is_price_fixed: true,
                 payment_methods: [
-                    'cash'
+                    'cash',
                 ],
                 modified: '2020-12-02T10:00:11.909500+01:00',
                 created_by: 1,
-                modified_by: 1
+                modified_by: 1,
             },
             tags: [],
             locations: [],
             created: '2020-12-02T10:00:11.902848+01:00',
-            modified: '2020-12-06T18:25:42.086759+01:00'
-        }
-    ]
+            modified: '2020-12-06T18:25:42.086759+01:00',
+        },
+    ],
 };
 
 describe('SearchResultComponent', () => {
@@ -94,7 +94,7 @@ describe('SearchResultComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SearchResultComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchResultComponent);

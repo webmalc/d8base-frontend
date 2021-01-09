@@ -23,12 +23,12 @@ describe('CurrentLocationCompilerService', () => {
                 IpnfDataService,
                 {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
                 {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
-                {provide: StorageManagerService, useClass: StorageManagerMock}
+                {provide: StorageManagerService, useClass: StorageManagerMock},
             ],
             imports: [
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         });
         service = TestBed.inject(CurrentLocationCompilerService);
     });

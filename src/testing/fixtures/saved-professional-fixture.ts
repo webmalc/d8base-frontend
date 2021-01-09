@@ -9,7 +9,7 @@ export class SavedProfessionalFixture {
             modified: '',
             modified_by: 0,
             note: '',
-            professional: 0
+            professional: 0,
         };
     }
 }

@@ -23,7 +23,7 @@ export class MessagesListApiService extends AbstractReadonlyApiService<Message> 
 
     public getUnreadCount(interlocutorId: number): Observable<number> {
         return super.get({is_read: 'false', sender: interlocutorId.toString(10)}).pipe(
-            map(list => list.count)
+            map(list => list.count),
         );
     }
 

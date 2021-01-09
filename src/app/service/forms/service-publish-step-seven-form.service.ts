@@ -24,7 +24,7 @@ export class ServicePublishStepSevenFormService {
             [ServicePublishStepSevenFormFields.MaxDistance]: [data?.max_distance, Validators.required],
             [ServicePublishStepSevenFormFields.Units]: [data?.units],
             [ServicePublishStepSevenFormFields.DefaultLocation]: [data?.default_location],
-            [ServicePublishStepSevenFormFields.InstantBooking]: [data?.is_auto_order_confirmation]
+            [ServicePublishStepSevenFormFields.InstantBooking]: [data?.is_auto_order_confirmation],
         });
     }
 

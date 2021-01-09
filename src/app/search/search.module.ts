@@ -22,7 +22,7 @@ import {SearchPageRoutingModule} from './search-routing.module';
         SearchPageRoutingModule,
         TranslateModule,
         SharedModule,
-        IonicSelectableModule
+        IonicSelectableModule,
     ],
     declarations: [
         SearchPage,
@@ -30,9 +30,9 @@ import {SearchPageRoutingModule} from './search-routing.module';
         SearchFiltersSubmenuComponent,
         SearchFiltersMainTabComponent,
         SearchFiltersAdditionalTabComponent,
-        SearchResultComponent
+        SearchResultComponent,
     ],
     exports: [SearchFiltersComponent],
-    providers: [SearchFilterStateService]
+    providers: [SearchFilterStateService],
 })
 export class SearchPageModule {}

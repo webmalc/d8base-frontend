@@ -8,13 +8,13 @@ import {MasterProfileCalendarComponent} from '@app/master/components/master-prof
 import {MasterProfileFactoryComponent} from '@app/master/components/master-profile-factory/master-profile-factory.component';
 import {MasterProfileInfoComponent} from '@app/master/components/master-profile-info/master-profile-info.component';
 import {
-    MasterProfileMainInfoSectionComponent
+    MasterProfileMainInfoSectionComponent,
 } from '@app/master/components/master-profile-main-info-section/master-profile-main-info-section.component';
 import {MasterProfilePortfolioComponent} from '@app/master/components/master-profile-portfolio/master-profile-portfolio.component';
 import {MasterProfileReviewComponent} from '@app/master/components/master-profile-review/master-profile-review.component';
 import {MasterProfileServiceEditComponent} from '@app/master/components/master-profile-service-edit/master-profile-service-edit.component';
 import {
-    MasterProfileServicePresentationComponent
+    MasterProfileServicePresentationComponent,
 } from '@app/master/components/master-profile-service-presentation/master-profile-service-presentation.component';
 import {MasterProfileServicesComponent} from '@app/master/components/master-profile-services/master-profile-services.component';
 import {MasterProfileSubmenuComponent} from '@app/master/components/master-profile-submenu/master-profile-submenu.component';
@@ -39,7 +39,7 @@ import {MasterPage} from './master.page';
         MasterPageRoutingModule,
         TranslateModule,
         SharedModule,
-        ServicePageModule
+        ServicePageModule,
     ],
     declarations: [
         MasterPage,
@@ -55,15 +55,15 @@ import {MasterPage} from './master.page';
         MasterProfileSubmenuComponent,
         ExperienceComponent,
         EducationComponent,
-        CertificateComponent
+        CertificateComponent,
     ],
     providers: [
         ReviewsReadonlyApiService,
         ExperienceApiService,
         EducationApiService,
         CertificatesApiService,
-        CalendarGeneratorFactoryService
-    ]
+        CalendarGeneratorFactoryService,
+    ],
 })
 export class MasterPageModule {
 }

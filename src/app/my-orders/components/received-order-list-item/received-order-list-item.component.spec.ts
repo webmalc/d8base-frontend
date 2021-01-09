@@ -18,9 +18,9 @@ describe('OrderListItemComponent', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 HttpClientTestingModule,
-                RouterTestingModule
+                RouterTestingModule,
             ],
-            providers: [ServicesApiCache]
+            providers: [ServicesApiCache],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ReceivedOrderListItemComponent);

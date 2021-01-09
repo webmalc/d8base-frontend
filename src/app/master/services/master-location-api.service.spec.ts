@@ -6,7 +6,7 @@ import {MasterLocationApiService} from './master-location-api.service';
 describe('MasterLocationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
-    providers: [MasterLocationApiService]
+    providers: [MasterLocationApiService],
   }));
 
   it('should be created', () => {

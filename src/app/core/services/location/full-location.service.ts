@@ -29,7 +29,7 @@ export interface LocationInterface {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FullLocationService {
     constructor(
@@ -37,7 +37,7 @@ export class FullLocationService {
         private readonly regionApi: RegionApiService,
         private readonly subregionApi: SubregionApiService,
         private readonly citiesApi: CitiesApiService,
-        private readonly districtApi: DistrictApiService
+        private readonly districtApi: DistrictApiService,
     ) {}
 
     public getTextLocation(location: LocationInterface): Observable<{ id: number; text: string }>  {
@@ -51,9 +51,9 @@ export class FullLocationService {
 
                 return {
                     id: location.id,
-                    text: textLocation
+                    text: textLocation,
                 };
-            })
+            }),
         );
     }
 
@@ -62,22 +62,22 @@ export class FullLocationService {
         region: regionId,
         subregion: subregionId,
         city: cityId,
-        district: districtId
+        district: districtId,
     }: ProfessionalLocationInline): Observable<FullLocation> {
         return forkJoin([
             this.countriesApi.getByEntityId(countryId).pipe(catchError(() => of(null))),
             this.regionApi.getByEntityId(regionId).pipe(catchError(() => of(null))),
             this.subregionApi.getByEntityId(subregionId).pipe(catchError(() => of(null))),
             this.citiesApi.getByEntityId(cityId).pipe(catchError(() => of(null))),
-            this.districtApi.getByEntityId(districtId).pipe(catchError(() => of(null)))
+            this.districtApi.getByEntityId(districtId).pipe(catchError(() => of(null))),
         ]).pipe(
             map(([country, region, subregion, city, district]) => ({
                 country,
                 region,
                 subregion,
                 city,
-                district
-            }))
+                district,
+            })),
         );
     }
 }

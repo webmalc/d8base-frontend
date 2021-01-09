@@ -10,7 +10,7 @@ describe('Registration page', () => {
         password: testing.registration.password,
         confirm: testing.registration.confirm,
         name: testing.registration.name,
-        phone: testing.registration.phone
+        phone: testing.registration.phone,
     };
 
     beforeEach(() => {

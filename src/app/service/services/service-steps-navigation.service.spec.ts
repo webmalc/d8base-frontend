@@ -20,7 +20,7 @@ describe('ServiceStepsNavigationService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
             RouterTestingModule,
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             ServiceStepsNavigationService,
@@ -34,8 +34,8 @@ describe('ServiceStepsNavigationService', () => {
             StepSevenHandlerService,
             StepFinalHandlerService,
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

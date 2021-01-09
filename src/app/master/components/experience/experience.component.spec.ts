@@ -12,7 +12,7 @@ describe('ExperienceComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ExperienceComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ExperienceComponent);
@@ -24,7 +24,7 @@ describe('ExperienceComponent', () => {
             company: 'test',
             is_still_here: true,
             description: 'test',
-            start_date: '2010-01-01'
+            start_date: '2010-01-01',
         });
         fixture.detectChanges();
     }));

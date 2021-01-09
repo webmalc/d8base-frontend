@@ -11,7 +11,7 @@ describe('AppFooterComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [FooterComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(FooterComponent);

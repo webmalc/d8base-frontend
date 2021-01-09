@@ -4,7 +4,7 @@ import {SearchFiltersSubmenu} from '@app/search/enums/search-filters-submenu';
 @Component({
     selector: 'app-search-filters-submenu',
     templateUrl: './search-filters-submenu.component.html',
-    styleUrls: ['./search-filters-submenu.component.scss']
+    styleUrls: ['./search-filters-submenu.component.scss'],
 })
 export class SearchFiltersSubmenuComponent implements OnInit {
 

@@ -16,68 +16,68 @@ export interface MainMenuItem {
 export const mainMenuItems: MainMenuItem[] = [
     {
         title: 'template.menu',
-        isHeader: true
+        isHeader: true,
     },
     {
         title: 'template.search',
         icon: 'search',
-        link: '/search'
+        link: '/search',
     },
     {
         title: 'template.my-orders',
         icon: 'calendar-outline',
         link: '/my-orders/inbox',
-        masterOnly: true
+        masterOnly: true,
     },
     {
         title: 'template.my-orders',
         icon: 'calendar-outline',
         link: '/my-orders/outbox',
-        clientOnly: true
+        clientOnly: true,
     },
     {
         title: 'template.sign-in',
         icon: 'log-in-outline',
         link: '/auth/login',
-        guestOnly: true
+        guestOnly: true,
     },
     {
         title: 'template.sign-up',
         icon: 'reader-outline',
         link: '/auth/registration',
-        guestOnly: true
+        guestOnly: true,
     },
     {
         title: 'template.my-profile',
         isHeader: true,
-        userOnly: true
+        userOnly: true,
     },
     {
         title: 'template.profile',
         icon: 'person-circle-outline',
         link: '/profile',
-        userOnly: true
+        userOnly: true,
     },
     {
         title: 'template.master-profile',
         icon: 'construct-outline',
         link: '/professional',
-        masterOnly: true
+        masterOnly: true,
     },
     {
         title: 'template.miscellaneous',
-        isHeader: true
+        isHeader: true,
     },
     {
         title: 'template.service',
         icon: 'medal-outline',
-        link: '/service/publish'
+        link: '/service/publish',
     },
     {
         title: 'template.logout',
         icon: 'log-out-outline',
         link: '/auth/login',
         params: { logout: '' },
-        userOnly: true
-    }
+        userOnly: true,
+    },
 ];

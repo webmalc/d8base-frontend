@@ -11,7 +11,7 @@ import {StepTwoDataInterface} from '@app/service/interfaces/step-two-data-interf
 import {StepDataInterfaceType} from '@app/service/types/step-data-interface-type';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ServicePublishDataHolderService {
 
@@ -23,7 +23,7 @@ export class ServicePublishDataHolderService {
         4?: StepFiveDataInterface,
         5?: StepSixDataInterface,
         6?: StepSevenDataInterface,
-        7?: FinalStepDataInterface
+        7?: FinalStepDataInterface,
     } = {};
     private readonly storageKey = 'service_publish_data';
 
@@ -43,7 +43,7 @@ export class ServicePublishDataHolderService {
         }
         this.stepsData[step] = {
             ...this.stepsData[step],
-            ...data
+            ...data,
         };
 
         return this.updateStorage();

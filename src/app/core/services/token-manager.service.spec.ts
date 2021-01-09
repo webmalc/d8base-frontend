@@ -13,7 +13,7 @@ describe('TokenManagerService', () => {
         expires_in: 5,
         token_type: 'Baerer',
         scope: 'read write groups',
-        refresh_token: 'refresh_token'
+        refresh_token: 'refresh_token',
     };
 
     beforeEach(() => {
@@ -24,8 +24,8 @@ describe('TokenManagerService', () => {
 
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {
@@ -43,7 +43,7 @@ describe('TokenManagerService', () => {
                     expect(token).toEqual(jasmine.objectContaining(tokenData)); // can have more fields
                     done();
                 });
-            }
+            },
         );
     });
 
@@ -56,9 +56,9 @@ describe('TokenManagerService', () => {
                     token => {
                         expect(token).toEqual('access_token');
                         done();
-                    }
+                    },
                 );
-            }
+            },
         );
     });
 
@@ -71,9 +71,9 @@ describe('TokenManagerService', () => {
                     token => {
                         expect(token).toEqual('refresh_token');
                         done();
-                    }
+                    },
                 );
-            }
+            },
         );
     });
 
@@ -87,9 +87,9 @@ describe('TokenManagerService', () => {
                         service.getAccessToken().catch(err => expect(err).toEqual(Error(ErrorList.EMPTY_TOKEN_ERROR)));
                         service.getRefreshToken().catch(err => expect(err).toEqual(Error(ErrorList.EMPTY_TOKEN_ERROR)));
                         done();
-                    }
+                    },
                 );
-            }
+            },
         );
     });
 });

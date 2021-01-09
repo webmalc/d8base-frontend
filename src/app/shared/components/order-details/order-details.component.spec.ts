@@ -21,9 +21,9 @@ describe('OrderDetailsComponent', () => {
                 TranslateModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule,
-                SharedModule
+                SharedModule,
             ],
-            providers: [OrderWizardStateService, ServicesApiCache]
+            providers: [OrderWizardStateService, ServicesApiCache],
         }).compileComponents();
 
         fixture = TestBed.createComponent(OrderDetailsComponent);

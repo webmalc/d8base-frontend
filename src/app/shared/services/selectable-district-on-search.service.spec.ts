@@ -6,7 +6,7 @@ import {SelectableDistrictOnSearchService} from './selectable-district-on-search
 describe('SelectableDistrictOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [SelectableDistrictOnSearchService]
+        providers: [SelectableDistrictOnSearchService],
     }));
 
     it('should be created', () => {

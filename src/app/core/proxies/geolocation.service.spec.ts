@@ -6,8 +6,8 @@ import {GeolocationService} from './geolocation.service';
 describe('GeolocationService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            {provide: Geolocation, useValue: {getCurrentPosition: () => Promise.resolve()}}
-        ]
+            {provide: Geolocation, useValue: {getCurrentPosition: () => Promise.resolve()}},
+        ],
     }));
 
     it('should be created', () => {

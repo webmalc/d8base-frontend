@@ -13,21 +13,21 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: `${ORDER_STEPS.ids[0]}`
+                redirectTo: `${ORDER_STEPS.ids[0]}`,
             },
             ...stepsRoutes([OrderFirstStepGuardService, OrderAuthenticationGuardService]),
             {
                 path: 'contact-info',
                 pathMatch: 'full',
-                component: ClientIdentificationComponent
-            }
-        ]
-    }
+                component: ClientIdentificationComponent,
+            },
+        ],
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class OrderRoutingModule {
 }

@@ -5,7 +5,7 @@ import * as ScheduleConstants from '@app/shared/components/schedule-editor/sched
 @Component({
     selector: 'app-schedule-viewer',
     templateUrl: './schedule-viewer.component.html',
-    styleUrls: ['./schedule-viewer.component.scss']
+    styleUrls: ['./schedule-viewer.component.scss'],
 })
 export class ScheduleViewerComponent {
     private _schedule: AbstractSchedule[];

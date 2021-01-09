@@ -9,7 +9,7 @@ import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-pa
 @Component({
     selector: 'app-master-experience-edit',
     templateUrl: './master-experience-edit.page.html',
-    styleUrls: ['./master-experience-edit.page.scss']
+    styleUrls: ['./master-experience-edit.page.scss'],
 })
 export class MasterExperienceEditPage extends AbstractModelEditPage<Experience> {
 
@@ -17,7 +17,7 @@ export class MasterExperienceEditPage extends AbstractModelEditPage<Experience> 
         protected readonly experienceApi: ExperienceApiService,
         protected readonly route: ActivatedRoute,
         protected readonly masterManager: MasterManagerService,
-        protected readonly location: Location
+        protected readonly location: Location,
     ) {
         super(route, experienceApi, masterManager);
     }

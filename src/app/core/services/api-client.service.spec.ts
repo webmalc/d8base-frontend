@@ -6,11 +6,11 @@ import {ApiClientService} from './api-client.service';
 describe('ApiClientService', () => {
     beforeEach(async () => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ApiClientService
-        ]
+            ApiClientService,
+        ],
     }));
 
     it('should be created', () => {

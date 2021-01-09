@@ -6,7 +6,7 @@ import {RegionApiService} from './region-api.service';
 describe('RegionApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [RegionApiService]
+      providers: [RegionApiService],
     }));
 
     it('should be created', () => {

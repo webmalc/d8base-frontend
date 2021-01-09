@@ -10,11 +10,11 @@ describe('TranslationService', () => {
         imports: [
             TranslateModule.forRoot(),
             IonicStorageModule.forRoot(),
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            TranslationService
-        ]
+            TranslationService,
+        ],
     }));
 
     it('should be created', () => {

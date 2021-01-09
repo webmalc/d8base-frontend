@@ -26,8 +26,8 @@ describe('AbstractLocationEditComponent', () => {
                 SelectableRegionOnSearchService,
                 SelectableSubregionOnSearchService,
                 SelectableDistrictOnSearchService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(AbstractLocationEditComponent);

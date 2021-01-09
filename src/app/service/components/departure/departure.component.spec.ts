@@ -21,8 +21,8 @@ describe('DepartureComponent', () => {
             providers: [
                 ServicePublishStepSevenDepartureFormService,
                 ServicePublishDataHolderService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(DepartureComponent);

@@ -10,13 +10,13 @@ describe('FiltersPage', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [FiltersPage],
-                imports: [IonicModule.forRoot()]
+                imports: [IonicModule.forRoot()],
             }).compileComponents();
 
             fixture = TestBed.createComponent(FiltersPage);
             component = fixture.componentInstance;
             fixture.detectChanges();
-        })
+        }),
     );
 
     it('should create', () => {

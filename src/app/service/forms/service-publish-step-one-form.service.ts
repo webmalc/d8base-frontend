@@ -14,7 +14,7 @@ export class ServicePublishStepOneFormService {
     public createForm(category?: Category, subcategory?: Subcategory): void {
         this.form = this.formBuilder.group({
             [ServicePublishStepOneFormFields.Category]: [category ?? '', Validators.required],
-            [ServicePublishStepOneFormFields.Subcategory]: [subcategory ?? '', Validators.required]
+            [ServicePublishStepOneFormFields.Subcategory]: [subcategory ?? '', Validators.required],
         });
     }
 }

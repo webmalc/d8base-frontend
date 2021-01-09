@@ -10,7 +10,7 @@ describe('SearchFiltersSubmenuComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SearchFiltersSubmenuComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchFiltersSubmenuComponent);

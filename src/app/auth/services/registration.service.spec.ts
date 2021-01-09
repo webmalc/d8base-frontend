@@ -21,20 +21,20 @@ describe('RegistrationService', () => {
         expires_in: 123,
         token_type: 'string',
         scope: 'string',
-        refresh_token: 'string'
+        refresh_token: 'string',
     };
 
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
             IonicStorageModule.forRoot(),
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             RegistrationService,
             {provide: StorageManagerService, useClass: StorageManagerMock},
             {provide: LocationService, useClass: LocationServiceMock},
-            {provide: ApiClientService, useValue: {post: () => of({token: tokenData, ...userModel})}}
-        ]
+            {provide: ApiClientService, useValue: {post: () => of({token: tokenData, ...userModel})}},
+        ],
     }));
 
     it('should be created', () => {
@@ -45,12 +45,12 @@ describe('RegistrationService', () => {
     it('test #register', (done) => {
         const service: RegistrationService = TestBed.inject(RegistrationService);
         service.register(
-            userModel
+            userModel,
         ).subscribe(
             res => {
                 expect(res).toBeTruthy();
                 done();
-            }
+            },
         );
     });
 });

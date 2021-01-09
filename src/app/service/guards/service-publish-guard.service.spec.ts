@@ -9,13 +9,13 @@ import {ServicePublishGuardService} from './service-publish-guard.service';
 describe('ServicePublishGuardService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            RouterTestingModule
+            RouterTestingModule,
         ],
         providers: [
             ServicePublishGuardService,
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

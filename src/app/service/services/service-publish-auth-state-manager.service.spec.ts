@@ -9,13 +9,13 @@ import {ServicePublishDataHolderService} from './service-publish-data-holder.ser
 describe('ServicePublishAuthStateManagerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             ServicePublishAuthStateManagerService,
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

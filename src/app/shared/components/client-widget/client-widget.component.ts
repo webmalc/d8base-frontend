@@ -5,7 +5,7 @@ import {HelperService} from '@app/core/services/helper.service';
 @Component({
     selector: 'app-client-widget',
     templateUrl: './client-widget.component.html',
-    styleUrls: ['./client-widget.component.scss']
+    styleUrls: ['./client-widget.component.scss'],
 })
 export class ClientWidgetComponent {
 

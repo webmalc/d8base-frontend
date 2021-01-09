@@ -6,11 +6,11 @@ import {ServicePublishStepFourFormService} from './service-publish-step-four-for
 describe('ServicePublishStepFourFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            ReactiveFormsModule, FormsModule
+            ReactiveFormsModule, FormsModule,
         ],
         providers: [
-            ServicePublishStepFourFormService
-        ]
+            ServicePublishStepFourFormService,
+        ],
     }));
 
     it('should be created', () => {

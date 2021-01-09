@@ -6,11 +6,11 @@ import { IpDataService } from './ip-data.service';
 describe('IpDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
     ],
     providers: [
-      IpDataService
-    ]
+      IpDataService,
+    ],
   }));
 
   it('should be created', () => {

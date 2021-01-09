@@ -6,7 +6,7 @@ import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ServiceTagsReadonlyApiService extends AbstractReadonlyApiService<ServiceTag> {
 

@@ -6,7 +6,7 @@ import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CategoriesApiService extends AbstractReadonlyApiService<Category> {
 

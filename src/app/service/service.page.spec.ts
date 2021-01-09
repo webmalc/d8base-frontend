@@ -10,7 +10,7 @@ describe('ServicePage', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ServicePage],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServicePage);

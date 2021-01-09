@@ -17,12 +17,12 @@ export class ServicePublishStepFourFormService {
                     Validators.required,
                     Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+' +
                         '(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]' +
-                        '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')
+                        '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
                 ])],
                 [ServicePublishStepFourFormFields.Password]: [null, passwordValidators],
                 [ServicePublishStepFourFormFields.Confirm]: [null, passwordValidators],
                 [ServicePublishStepFourFormFields.Country]: [null, Validators.required],
-                [ServicePublishStepFourFormFields.City]: [null, Validators.required]
+                [ServicePublishStepFourFormFields.City]: [null, Validators.required],
             },
             {validators: this.checkPassword});
     }

@@ -20,11 +20,11 @@ describe('ResetPasswordPage', () => {
                 ReactiveFormsModule,
                 RouterTestingModule,
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
-                ResetPasswordApiService
-            ]
+                ResetPasswordApiService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ResetPasswordPage);

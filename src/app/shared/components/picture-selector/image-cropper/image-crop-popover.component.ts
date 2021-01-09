@@ -5,7 +5,7 @@ import {ImageCroppedEvent} from 'ngx-image-cropper';
 @Component({
     selector: 'app-image-crop-popover',
     templateUrl: './image-crop-popover.component.html',
-    styleUrls: ['./image-crop-popover.component.scss']
+    styleUrls: ['./image-crop-popover.component.scss'],
 })
 export class ImageCropPopoverComponent {
     @Input() public image: Blob = null;

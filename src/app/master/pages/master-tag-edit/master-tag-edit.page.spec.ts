@@ -19,8 +19,8 @@ describe('MasterTagEditPage', () => {
             imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [
                 {provide: StorageManagerService, useClass: StorageManagerMock},
-                TagsListApiService
-            ]
+                TagsListApiService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterTagEditPage);

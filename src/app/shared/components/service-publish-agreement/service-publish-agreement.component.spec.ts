@@ -15,8 +15,8 @@ describe('ServicePublishAgreementComponent', () => {
             declarations: [ServicePublishAgreementComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServicePublishAgreementComponent);

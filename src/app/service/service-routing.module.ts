@@ -18,71 +18,71 @@ import {ServicePage} from './service.page';
 const routes: Routes = [
     {
         path: '',
-        component: ServicePage
+        component: ServicePage,
     },
     {
         path: 'publish',
         pathMatch: 'full',
-        redirectTo: 'publish/step-one'
+        redirectTo: 'publish/step-one',
     },
     {
         path: 'publish/step-one',
-        component: ServicePublishStepOneComponent
+        component: ServicePublishStepOneComponent,
     },
     {
         path: 'publish/step-two',
         component: ServicePublishStepTwoComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-three',
         component: ServicePublishStepThreeComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-four',
         component: ServicePublishStepFourComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-five',
         component: ServicePublishStepFiveComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-six',
         component: ServicePublishStepSixComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-seven',
         component: ServicePublishStepSevenComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-seven/timetable',
         component: TimetableComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/step-seven/departure',
         component: DepartureComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: 'publish/final',
         component: ServicePublishFinalStepComponent,
-        canActivate: [ServicePublishGuardService]
+        canActivate: [ServicePublishGuardService],
     },
     {
         path: ':id',
-        component: ServiceDetailsPageComponent
-    }
+        component: ServiceDetailsPageComponent,
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class ServicePageRoutingModule {}
 

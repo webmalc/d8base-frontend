@@ -11,7 +11,7 @@ import {switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-sent-order-list-item',
     templateUrl: './sent-order-list-item.component.html',
-    styleUrls: ['./sent-order-list-item.component.scss']
+    styleUrls: ['./sent-order-list-item.component.scss'],
 })
 export class SentOrderListItemComponent {
 
@@ -23,7 +23,7 @@ export class SentOrderListItemComponent {
     constructor(
         private readonly servicesCache: ServicesApiCache,
         private readonly changeDetector: ChangeDetectorRef,
-        private readonly masterCache: MasterReadonlyApiCacheService
+        private readonly masterCache: MasterReadonlyApiCacheService,
     ) {
     }
 
@@ -42,7 +42,7 @@ export class SentOrderListItemComponent {
                 this.service = service;
 
                 return this.masterCache.getById(service.professional);
-            })
+            }),
         ).subscribe(master => {
             this.master = master;
             this.changeDetector.markForCheck();

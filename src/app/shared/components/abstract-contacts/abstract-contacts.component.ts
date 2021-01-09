@@ -5,7 +5,7 @@ import {MediaIconFactoryService} from '@app/core/services/media-icon-factory.ser
 @Component({
     selector: 'app-abstract-contacts',
     templateUrl: './abstract-contacts.component.html',
-    styleUrls: ['./abstract-contacts.component.scss']
+    styleUrls: ['./abstract-contacts.component.scss'],
 })
 export class AbstractContactsComponent {
 

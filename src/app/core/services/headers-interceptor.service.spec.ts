@@ -17,25 +17,25 @@ describe('HeadersInterceptor', () => {
     beforeEach(() => {
         const spyTokenManager = jasmine.createSpyObj(
             'TokenManagerService', {
-                getAccessToken: () => Promise.resolve('access_token')
-            }
+                getAccessToken: () => Promise.resolve('access_token'),
+            },
         );
         TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
                 {
                     provide: HTTP_INTERCEPTORS,
                     useClass: HeadersInterceptor,
-                    multi: true
+                    multi: true,
                 },
                 {
                     provide: TokenManagerService,
-                    useValue: spyTokenManager
+                    useValue: spyTokenManager,
                 },
-                HeadersInterceptor
-            ]
+                HeadersInterceptor,
+            ],
         });
 
         client = TestBed.inject(ApiClientService) as jasmine.SpyObj<ApiClientService>;

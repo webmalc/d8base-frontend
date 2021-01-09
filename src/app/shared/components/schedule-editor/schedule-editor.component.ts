@@ -15,7 +15,7 @@ function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
     return {
         ...schedule,
         start_time: normalizeTimeFormat(schedule.start_time),
-        end_time: normalizeTimeFormat(schedule.end_time)
+        end_time: normalizeTimeFormat(schedule.end_time),
     };
 }
 
@@ -23,7 +23,7 @@ function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
     selector: 'app-schedule-editor',
     templateUrl: './schedule-editor.component.html',
     styleUrls: ['./schedule-editor.component.scss'],
-    providers: [ScheduleEditorFormService]
+    providers: [ScheduleEditorFormService],
 })
 export class ScheduleEditorComponent {
 
@@ -35,7 +35,7 @@ export class ScheduleEditorComponent {
 
     constructor(
         public readonly formService: ScheduleEditorFormService,
-        private readonly popoverController: PopoverController
+        private readonly popoverController: PopoverController,
     ) {
     }
 
@@ -70,7 +70,7 @@ export class ScheduleEditorComponent {
     public async showDaySelector(): Promise<void> {
         const popover = await this.popoverController.create({
             component: DaySelectorComponent,
-            translucent: true
+            translucent: true,
         });
         await popover.present();
         const {data} = await popover.onDidDismiss();

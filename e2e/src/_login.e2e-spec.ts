@@ -8,11 +8,11 @@ describe('Login page', () => {
 
     const wrongCredentials: Credentials = {
         username: 'test12',
-        password: 'test1'
+        password: 'test1',
     };
     const credentials: Credentials = {
         username: testing.registration.email,
-        password: testing.registration.password
+        password: testing.registration.password,
     };
 
     beforeEach(() => {

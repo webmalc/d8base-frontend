@@ -9,9 +9,9 @@ import {AppModule} from './app.module';
     imports: [
         AppModule,
         ServerModule,
-        IonicServerModule
+        IonicServerModule,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppServerModule {
 }

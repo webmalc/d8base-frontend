@@ -5,7 +5,7 @@ enum SizeAttr {
     Sm = 'size-sm',
     Md = 'size-md',
     Lg = 'size-lg',
-    Xl = 'size-xl'
+    Xl = 'size-xl',
 }
 
 const MAIN_COLUMN_SIZE = {
@@ -13,11 +13,11 @@ const MAIN_COLUMN_SIZE = {
     [SizeAttr.Sm]: 8,
     [SizeAttr.Md]: 8,
     [SizeAttr.Lg]: 7,
-    [SizeAttr.Xl]: 5
+    [SizeAttr.Xl]: 5,
 };
 
 @Directive({
-    selector: '[appMainColumn]'
+    selector: '[appMainColumn]',
 })
 export class MainColumnDirective {
     @HostBinding(`attr.${SizeAttr.Xs}`) public get sizeXs(): number {

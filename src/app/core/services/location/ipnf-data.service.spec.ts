@@ -6,11 +6,11 @@ import {IpnfDataService} from './ipnf-data.service';
 describe('IpnfDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
     ],
     providers: [
-        IpnfDataService
-    ]
+        IpnfDataService,
+    ],
   }));
 
   it('should be created', () => {

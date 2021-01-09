@@ -5,11 +5,11 @@ import {IsUserRegisteredApiService} from './is-user-registered-api.service';
 describe('IsUserRegisteredApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            IsUserRegisteredApiService
+            IsUserRegisteredApiService,
         ],
         imports: [
-            HttpClientTestingModule
-        ]
+            HttpClientTestingModule,
+        ],
     }));
 
     it('should be created', () => {

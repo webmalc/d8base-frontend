@@ -14,9 +14,9 @@ import {FiltersPage} from './filters.page';
         IonicModule,
         SharedModule,
         FiltersPageRoutingModule,
-        SearchPageModule
+        SearchPageModule,
     ],
-    declarations: [FiltersPage]
+    declarations: [FiltersPage],
 })
 export class FiltersPageModule {
 }

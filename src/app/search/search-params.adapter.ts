@@ -165,6 +165,6 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
         /**
          * multiple category IDs may be separated by commas
          */
-        categories: data?.main?.category?.map(({ id }) => id).join(',')
+        categories: data?.main?.category?.map(({ id }) => id).join(','),
     };
 };

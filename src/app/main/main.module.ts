@@ -18,7 +18,7 @@ import {
     faStethoscope,
     faTableTennis,
     faUserTie,
-    faVenusMars
+    faVenusMars,
 } from '@fortawesome/free-solid-svg-icons';
 import {IonicModule} from '@ionic/angular';
 import {TranslateModule} from '@ngx-translate/core';
@@ -35,7 +35,7 @@ import {MainPage} from './main.page';
         SharedModule,
         TranslateModule,
         FontAwesomeModule,
-        IonicSelectableModule
+        IonicSelectableModule,
     ],
     declarations: [
         MainPage,
@@ -43,11 +43,11 @@ import {MainPage} from './main.page';
         MainPageIconComponent,
         MainPageReviewComponent,
         LocationPickerComponent,
-        OnMapPopoverComponent
+        OnMapPopoverComponent,
     ],
     providers: [
-        DefaultCategoriesFactoryService
-    ]
+        DefaultCategoriesFactoryService,
+    ],
 })
 export class MainPageModule {
     constructor(lib: FaIconLibrary) {

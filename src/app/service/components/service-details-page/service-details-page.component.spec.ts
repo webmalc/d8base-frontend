@@ -17,8 +17,8 @@ describe('ServiceDetailsPageComponent', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule
-            ]
+                HttpClientTestingModule,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServiceDetailsPageComponent);

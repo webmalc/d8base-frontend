@@ -8,7 +8,7 @@ import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ContactApiService extends AbstractReadonlyApiService<Contact> {
 

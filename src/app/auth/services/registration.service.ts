@@ -18,7 +18,7 @@ export class RegistrationService {
         protected client: ApiClientService,
         private readonly locationService: LocationService,
         private readonly locationApiService: UserLocationApiService,
-        private readonly authenticationService: AuthenticationService
+        private readonly authenticationService: AuthenticationService,
     ) {
     }
 
@@ -45,13 +45,13 @@ export class RegistrationService {
                                 err => {
                                     subscriber.next(newUser as User);
                                     subscriber.complete();
-                                }
+                                },
                             );
-                        }
+                        },
                     );
-                }
+                },
             ),
-            err => subscriber.error(err)
+            err => subscriber.error(err),
         ));
     }
 }

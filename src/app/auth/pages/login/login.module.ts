@@ -20,16 +20,16 @@ import {LoginPage} from './login.page';
         LoginPageRoutingModule,
         ReactiveFormsModule,
         SharedModule,
-        TranslateModule
+        TranslateModule,
     ],
     declarations: [
         LoginPage,
-        LoginFormComponent
+        LoginFormComponent,
     ],
     providers: [
         TokenManagerService,
-        LoginFormService
-    ]
+        LoginFormService,
+    ],
 })
 export class LoginPageModule {
 }

@@ -5,8 +5,8 @@ import {ChatsSearchService} from './chats-search.service';
 describe('ChatsSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            ChatsSearchService
-        ]
+            ChatsSearchService,
+        ],
     }));
 
     it('should be created', () => {

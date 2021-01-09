@@ -3,7 +3,7 @@ import {Subject, Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Directive({
-    selector: '[appDebounce]'
+    selector: '[appDebounce]',
 })
 export class DebounceDirective implements OnInit, OnDestroy {
 

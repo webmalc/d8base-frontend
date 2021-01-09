@@ -8,13 +8,13 @@ const routes: Routes = [
     path: '',
     component: LoginPage,
     data: {
-      title: 'login'
-    }
-  }
+      title: 'login',
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class LoginPageRoutingModule {}

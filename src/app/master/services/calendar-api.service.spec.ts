@@ -8,7 +8,7 @@ describe('CalendarApiService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [CalendarApiService]
+            providers: [CalendarApiService],
         });
         service = TestBed.inject(CalendarApiService);
     });

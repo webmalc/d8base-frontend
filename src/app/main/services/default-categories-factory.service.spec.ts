@@ -8,11 +8,11 @@ describe('DefaultCategoriesFactoryService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
-                DefaultCategoriesFactoryService
-            ]
+                DefaultCategoriesFactoryService,
+            ],
         });
         service = TestBed.inject(DefaultCategoriesFactoryService);
     });

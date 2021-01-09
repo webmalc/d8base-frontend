@@ -6,11 +6,11 @@ import {MessagesListApiService} from './messages-list-api.service';
 describe('MessagesListApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            MessagesListApiService
-        ]
+            MessagesListApiService,
+        ],
     }));
 
     it('should be created', () => {

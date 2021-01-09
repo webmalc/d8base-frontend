@@ -21,8 +21,8 @@ describe('PasswordRecoverPage', () => {
             providers: [
                 PasswordRecoveryService,
                 PasswordRecoveryFormService,
-                {provide: ApiClientService, useValue: {post: () => of()}}
-            ]
+                {provide: ApiClientService, useValue: {post: () => of()}},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(PasswordRecoverPage);

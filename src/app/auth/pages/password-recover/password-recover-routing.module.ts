@@ -6,12 +6,12 @@ import { PasswordRecoverPage } from './password-recover.page';
 const routes: Routes = [
   {
     path: '',
-    component: PasswordRecoverPage
-  }
+    component: PasswordRecoverPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PasswordRecoverPageRoutingModule {}

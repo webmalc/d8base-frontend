@@ -17,8 +17,8 @@ describe('OrderPageComponent', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule
-            ]
+                HttpClientTestingModule,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SentOrderPageComponent);

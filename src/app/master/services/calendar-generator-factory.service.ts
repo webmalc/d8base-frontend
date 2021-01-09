@@ -11,7 +11,7 @@ export class CalendarGeneratorFactoryService {
 
     constructor(
         private readonly masterManager: MasterManagerService,
-        private readonly calendarApi: CalendarApiService
+        private readonly calendarApi: CalendarApiService,
     ) {
     }
 
@@ -24,7 +24,7 @@ export class CalendarGeneratorFactoryService {
         return this.calendarApi.getSchedule(
             masterId,
             DateTimeFunctions.getLocalDateString(startDate),
-            DateTimeFunctions.getLocalDateString(endDate)
+            DateTimeFunctions.getLocalDateString(endDate),
         );
     }
 }

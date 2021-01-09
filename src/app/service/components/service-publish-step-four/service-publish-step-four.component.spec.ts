@@ -42,7 +42,7 @@ describe('ServicePublishStepFourComponent', () => {
                 FormsModule,
                 RouterTestingModule,
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
                 ServicePublishStepFourFormService,
@@ -67,8 +67,8 @@ describe('ServicePublishStepFourComponent', () => {
                 {provide: LocationService, useClass: LocationServiceMock},
                 {provide: TokenManagerService, useValue: TokenManagerServiceMock},
                 SelectableCountryOnSearchService,
-                SelectableCityOnSearchService
-            ]
+                SelectableCityOnSearchService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServicePublishStepFourComponent);

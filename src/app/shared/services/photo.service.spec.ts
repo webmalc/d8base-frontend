@@ -4,7 +4,7 @@ import {PhotoService} from './photo.service';
 
 describe('PhotoService', () => {
     beforeEach(() => TestBed.configureTestingModule({
-        providers: [PhotoService]
+        providers: [PhotoService],
     }));
 
     it('should be created', () => {

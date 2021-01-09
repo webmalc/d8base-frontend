@@ -16,7 +16,7 @@ export class SelectableRegionOnSearchService extends SelectableSearchService {
             event.component,
             event.text,
             this.regionApi,
-            {country: region?.id.toString(10)}
+            {country: region?.id.toString(10)},
         );
     }
 }

@@ -25,8 +25,8 @@ describe('BookmarksService', () => {
                 BookmarksService,
                 SavedProfessionalApiService,
                 MasterManagerService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         });
     });
     beforeEach(inject([BookmarksService, SavedProfessionalApiService, MasterManagerService], (bms, sps, mms) => {
@@ -66,7 +66,7 @@ describe('BookmarksService', () => {
                         .find(saved => saved.id === bookmark.id);
                     expect(savedProf.professional).toBe(bookmark.professional.id);
                 });
-            }
+            },
         );
         flush();
     }));
@@ -74,7 +74,7 @@ describe('BookmarksService', () => {
     it('should return bookmark with professional null value even a professional is removed before', fakeAsync(() => {
         spyOn(savedService, 'getAll$')
             .and.returnValue(asyncData<SavedProfessionalInterface<number>[]>(
-            [SavedProfessionalFixture.create()]
+            [SavedProfessionalFixture.create()],
         ));
         spyOn(masterService, 'getUserLessList$').and.returnValue(asyncData<ProfessionalList[]>([]));
 
@@ -82,7 +82,7 @@ describe('BookmarksService', () => {
             (data: BookmarkMaster[]) => {
                 expect(data.length).toBe(1);
                 expect(data[0].professional).toBeNull();
-            }
+            },
         );
     }));
 
@@ -103,7 +103,7 @@ describe('BookmarksService', () => {
         service.createBookmark(saved).subscribe(
             value => {
                 expect(value).toBeInstanceOf(BookmarkMaster);
-            }
+            },
         );
         flush();
         expect(savedService.create).toHaveBeenCalled();
@@ -117,7 +117,7 @@ describe('BookmarksService', () => {
             value => value,
             err => {
                 expect(err).toEqual('Cannot restore bookmark with null master');
-            }
+            },
         );
     });
 

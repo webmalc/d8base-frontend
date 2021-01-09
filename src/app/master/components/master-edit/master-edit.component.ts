@@ -13,7 +13,7 @@ import {tap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-edit',
     templateUrl: './master-edit.component.html',
-    styleUrls: ['./master-edit.component.scss']
+    styleUrls: ['./master-edit.component.scss'],
 })
 export class MasterEditComponent extends AbstractEditComponent<Master> implements OnInit {
 
@@ -23,7 +23,7 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
 
     constructor(
         private readonly subcategoriesApi: SubcategoriesApiService,
-        public readonly location: Location
+        public readonly location: Location,
     ) {
         super();
     }
@@ -38,7 +38,7 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
 
     private initSubcategoriesList(): Observable<any> {
         return this.subcategoriesApi.get().pipe(
-            tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results))
+            tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)),
         );
     }
 }

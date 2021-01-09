@@ -15,12 +15,12 @@ import {MasterExperienceEditPage} from './master-experience-edit.page';
         IonicModule,
         SharedModule,
         MasterExperienceEditPageRoutingModule,
-        TranslateModule
+        TranslateModule,
     ],
     declarations: [
         MasterExperienceEditPage,
-        ExperienceEditComponent
-    ]
+        ExperienceEditComponent,
+    ],
 })
 export class MasterExperienceEditPageModule {
 }

@@ -19,7 +19,7 @@ export class CertificatesApiService extends AbstractApiService<Certificate> impl
 
     public getByMasterId(
         masterId: number,
-        params?: { [param: string]: string | string[]; }
+        params?: { [param: string]: string | string[]; },
     ): Observable<ApiListResponseInterface<Certificate>> {
         return super.get({professional: masterId?.toString(10), ...params});
     }

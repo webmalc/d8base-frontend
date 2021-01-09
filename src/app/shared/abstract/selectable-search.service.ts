@@ -12,7 +12,7 @@ export abstract class SelectableSearchService {
         component: IonicSelectableComponent,
         text: string,
         apiService: ReadonlyApiServiceInterface<LocationTypes>,
-        apiParams: { [param: string]: string | string[]; }
+        apiParams: { [param: string]: string | string[]; },
     ): void {
         component.startSearch();
 
@@ -37,7 +37,7 @@ export abstract class SelectableSearchService {
 
                 component.items = data.results;
                 component.endSearch();
-            }
+            },
         );
     }
 }

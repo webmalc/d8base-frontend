@@ -10,7 +10,7 @@ describe('MasterProfileMainInfoSectionComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterProfileMainInfoSectionComponent],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterProfileMainInfoSectionComponent);

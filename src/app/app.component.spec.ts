@@ -25,7 +25,7 @@ describe('AppComponent', () => {
 
         storageMock = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-            set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null))
+            set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
         };
 
         TestBed.configureTestingModule({
@@ -39,8 +39,8 @@ describe('AppComponent', () => {
                 {provide: Storage, useValue: storageMock},
                 DarkModeService,
                 StorageManagerService,
-                TranslationService
-            ]
+                TranslationService,
+            ],
         });
 
         fixture = TestBed.createComponent(AppComponent);
@@ -71,7 +71,7 @@ describe('AppComponent', () => {
         compiled.querySelectorAll('ion-select ion-select-option').forEach(
             (elem: Element) => {
                 expect(trans.getLanguagesAsArray()).toContain(elem.innerHTML.trim());
-            }
+            },
         );
     });
 

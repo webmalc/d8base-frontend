@@ -37,14 +37,14 @@ describe('RegistrationPage', () => {
                 countryCode: 'testCountry',
                 latitude: 'testLat',
                 longitude: 'testLon',
-                city: 'testCity'
-            })
+                city: 'testCity',
+            }),
         };
         TestBed.configureTestingModule({
             declarations: [
                 RegistrationPage,
                 RegistrationFormComponent,
-                ErrorFlashbagComponent
+                ErrorFlashbagComponent,
             ],
             imports: [
                 IonicModule,
@@ -53,7 +53,7 @@ describe('RegistrationPage', () => {
                 RouterTestingModule,
                 TranslateModule.forRoot(),
                 IonicSelectableModule,
-                IonicStorageModule.forRoot()
+                IonicStorageModule.forRoot(),
             ],
             providers: [
                 RegistrationFormService, FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
@@ -62,8 +62,8 @@ describe('RegistrationPage', () => {
                 {provide: IpnfDataService, useValue: ipServiceMock},
                 {provide: HttpClient, useValue: {post: () => of(true)}},
                 {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
-                {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}}
-            ]
+                {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
+            ],
         }).compileComponents();
 
         router = TestBed.inject(Router);
@@ -93,16 +93,16 @@ describe('RegistrationPage', () => {
         const user = {
             email: 'test@test.te',
             password: 'test',
-            firstName: 'test'
+            firstName: 'test',
         };
         const location = {
             country: 'testCountry',
-            city: 'testCity'
+            city: 'testCity',
         };
 
         component.onSubmitRegistrationForm({
             user: plainToClass(User, user, {excludeExtraneousValues: true}),
-            location: plainToClass(UserLocation, location, {excludeExtraneousValues: true})
+            location: plainToClass(UserLocation, location, {excludeExtraneousValues: true}),
         });
         flush();
 

@@ -14,7 +14,7 @@ export class ChatsCompilerService {
     constructor(
         private readonly latestMessagesApi: LatestMessagesApiService,
         private readonly userManager: UserManagerService,
-        private readonly messagesListApiService: MessagesListApiService
+        private readonly messagesListApiService: MessagesListApiService,
     ) {
     }
 
@@ -32,15 +32,15 @@ export class ChatsCompilerService {
                 }
 
                 return res;
-            })
+            }),
         ).toPromise();
     }
 
     private getUnreadCount(message: LatestMessageInterface): Promise<number> {
         return this.userManager.getCurrentUser().pipe(
             switchMap(user => this.messagesListApiService.getUnreadCount(
-                message.sender.id === user.id ? message.recipient.id : message.sender.id)
-            )
+                message.sender.id === user.id ? message.recipient.id : message.sender.id),
+            ),
         ).toPromise();
     }
 
@@ -50,11 +50,11 @@ export class ChatsCompilerService {
                 const data = message.sender.id !== user.id ? {
                     interlocutor: `${message.sender.first_name} ${message.sender.last_name ?? ''}`,
                     interlocutor_id: message.sender.id,
-                    interlocutor_avatar_thumbnail: message.sender.avatar_thumbnail
+                    interlocutor_avatar_thumbnail: message.sender.avatar_thumbnail,
                 } : {
                     interlocutor: `${message.recipient.first_name} ${message.recipient.last_name ?? ''}`,
                     interlocutor_id: message.recipient.id,
-                    interlocutor_avatar_thumbnail: message.recipient.avatar_thumbnail
+                    interlocutor_avatar_thumbnail: message.recipient.avatar_thumbnail,
                 };
 
                 data.interlocutor_avatar_thumbnail = data.interlocutor_avatar_thumbnail ?
@@ -62,7 +62,7 @@ export class ChatsCompilerService {
                     HelperService.getNoAvatarLink();
 
                 return data;
-            })
+            }),
         ).toPromise();
     }
 

@@ -3,7 +3,7 @@ import StepContext from '@app/order/interfaces/step-context.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
-    template: ''
+    template: '',
 })
 export abstract class StepComponent<T> implements OnDestroy {
     public outputData: T;

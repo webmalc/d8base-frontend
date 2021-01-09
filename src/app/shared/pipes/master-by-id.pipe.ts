@@ -4,12 +4,12 @@ import {MasterReadonlyApiCacheService} from '@app/core/services/cache';
 import {Observable, of} from 'rxjs';
 
 @Pipe({
-    name: 'masterById$'
+    name: 'masterById$',
 })
 export class MasterByIdPipe implements PipeTransform {
 
     constructor(
-        private readonly serviceCache: MasterReadonlyApiCacheService
+        private readonly serviceCache: MasterReadonlyApiCacheService,
     ) {
     }
 

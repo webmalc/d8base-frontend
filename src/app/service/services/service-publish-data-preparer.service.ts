@@ -46,16 +46,16 @@ export class ServicePublishDataPreparerService {
             servicePhotos: await this.getServicePhotos(),
             serviceSchedule: this.getServiceSchedule(),
             masterSchedule: this.getMasterSchedule(),
-            servicePrice: this.getServicePrice()
+            servicePrice: this.getServicePrice(),
         };
     }
 
     private getMasterSchedule(): MasterSchedule[] {
         if (this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).need_to_create_master_schedule) {
             const stepData: MasterSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
-                ServicePublishSteps.Seven
+                ServicePublishSteps.Seven,
             )?.timetable?.map(
-                raw => plainToClass(MasterSchedule, raw)
+                raw => plainToClass(MasterSchedule, raw),
             ));
 
             return !stepData ? [] : stepData;
@@ -69,9 +69,9 @@ export class ServicePublishDataPreparerService {
             return [];
         }
         const stepData: ServiceSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
-            ServicePublishSteps.Seven
+            ServicePublishSteps.Seven,
         )?.timetable?.map(
-            raw => plainToClass(ServiceSchedule, raw)
+            raw => plainToClass(ServiceSchedule, raw),
         ));
 
         return !stepData ? [] : stepData;

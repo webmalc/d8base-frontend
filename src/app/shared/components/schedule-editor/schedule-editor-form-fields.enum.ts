@@ -4,5 +4,5 @@ export enum ScheduleEditorFormFields {
     EndTime = 'end_time',
     IsEnabled = 'is_enabled',
     Day = 'day_of_week',
-    Id = 'id'
+    Id = 'id',
 }

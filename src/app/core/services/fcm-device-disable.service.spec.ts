@@ -5,11 +5,11 @@ import {FcmDeviceDisableService} from './fcm-device-disable.service';
 describe('FcmDeviceDisableService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            FcmDeviceDisableService
-        ]
+            FcmDeviceDisableService,
+        ],
     }));
 
     it('should be created', () => {

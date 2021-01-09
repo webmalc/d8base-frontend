@@ -6,11 +6,11 @@ import {ServicePhotoApiService} from './service-photo-api.service';
 describe('ServicePhotoApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ServicePhotoApiService
-        ]
+            ServicePhotoApiService,
+        ],
     }));
 
     it('should be created', () => {

@@ -10,7 +10,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-user-location-edit',
     templateUrl: './user-location-edit.page.html',
-    styleUrls: ['./user-location-edit.page.scss']
+    styleUrls: ['./user-location-edit.page.scss'],
 })
 export class UserLocationEditPage implements OnInit {
 
@@ -21,7 +21,7 @@ export class UserLocationEditPage implements OnInit {
         private readonly locationService: LocationService,
         private readonly location: Location,
         private readonly userLocationApi: UserLocationApiService,
-        private readonly route: ActivatedRoute
+        private readonly route: ActivatedRoute,
     ) {
     }
 
@@ -29,7 +29,7 @@ export class UserLocationEditPage implements OnInit {
         this.locationId = parseInt(this.route.snapshot.paramMap.get('location-id'), 10);
         if (this.locationId) {
             this.locationService.getSingle<UserLocation>(this.userLocationApi, this.locationId).subscribe(
-                location => this.userLocation = location
+                location => this.userLocation = location,
             );
         } else {
             this.userLocation = new UserLocation();

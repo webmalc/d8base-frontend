@@ -9,7 +9,7 @@ import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SubcategoriesApiService extends AbstractReadonlyApiService<Subcategory> {
 
@@ -22,7 +22,7 @@ export class SubcategoriesApiService extends AbstractReadonlyApiService<Subcateg
     public getListByCategoryId(categories: Category[]): Observable<Subcategory[]> {
         return forkJoin(categories.map(c => super.get({category: c.id.toString(10)}))).pipe(
             map(data => data.map(r => r.results)),
-            map((res: Subcategory[][]) => [].concat(...res))
+            map((res: Subcategory[][]) => [].concat(...res)),
         );
     }
 

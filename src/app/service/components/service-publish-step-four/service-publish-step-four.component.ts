@@ -28,7 +28,7 @@ import {filter, first, switchMap, takeUntil} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-step-four',
     templateUrl: './service-publish-step-four.component.html',
-    styleUrls: ['./service-publish-step-four.component.scss']
+    styleUrls: ['./service-publish-step-four.component.scss'],
 })
 export class ServicePublishStepFourComponent extends Reinitable implements OnDestroy {
 
@@ -50,7 +50,7 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         private readonly userManager: UserManagerService,
         public readonly countrySelectable: SelectableCountryOnSearchService,
-        public readonly citySelectable: SelectableCityOnSearchService
+        public readonly citySelectable: SelectableCityOnSearchService,
     ) {
         super();
     }
@@ -76,19 +76,19 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
             this.authenticationService.login(
                 {
                     username: this.formService.form.get(this.formFields.Email).value,
-                    password: this.formService.form.get(this.formFields.Password).value
-                }
+                    password: this.formService.form.get(this.formFields.Password).value,
+                },
             ).subscribe(
                 _ => forkJoin({
                     masterList: this.masterManager.getMasterList(),
-                    user: this.userManager.getCurrentUser()
+                    user: this.userManager.getCurrentUser(),
                 }).subscribe(({user, masterList}) => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishSteps.Four, {isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false}
+                        ServicePublishSteps.Four, {isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false},
                     ).then(
-                        () => this.serviceStepsNavigationService.next()
+                        () => this.serviceStepsNavigationService.next(),
                     );
-                })
+                }),
             );
         } else {
             const country = this.formService.form.get(this.formFields.Country).value as Country;
@@ -98,18 +98,18 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
                 plainToClass(UserLocation, {
                     country: country.id,
                     city: city.id,
-                    is_default: true
-                })
+                    is_default: true,
+                }),
             ).subscribe(
                 user => {
                     this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                        ServicePublishSteps.Four, {isNewMaster: true, user, isNewUser: true, country, city}
+                        ServicePublishSteps.Four, {isNewMaster: true, user, isNewUser: true, country, city},
                     ).then(() => this.serviceStepsNavigationService.next());
                 },
                 (err: HttpErrorResponse) => {
                     this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error);
                     this.content.scrollToTop();
-                }
+                },
             );
         }
     }
@@ -141,16 +141,16 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
                 () => this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
                     () => this.userManager.getCurrentUser().subscribe(
                         user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-                            ServicePublishSteps.Four, {isNewMaster: false, user, isNewUser: false}
-                        ).then(() => this.serviceStepsNavigationService.next())
-                    )
-                )
-            )
+                            ServicePublishSteps.Four, {isNewMaster: false, user, isNewUser: false},
+                        ).then(() => this.serviceStepsNavigationService.next()),
+                    ),
+                ),
+            ),
         );
         this.formService.createForm();
         this.emailChanged$.pipe(
             switchMap(() => this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)),
-            takeUntil(this.destroy$)
+            takeUntil(this.destroy$),
         ).subscribe(val => {
             this.isUserExists$.next(val);
             this.isUserExists = val;

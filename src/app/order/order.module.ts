@@ -7,7 +7,7 @@ import {
     DateTimeStepComponent,
     LocationStepComponent,
     OrderConfirmationComponent,
-    SummaryStepComponent
+    SummaryStepComponent,
 } from '@app/order/components';
 import {SharedModule} from '@app/shared/shared.module';
 import {IonicModule} from '@ionic/angular';
@@ -28,7 +28,7 @@ import {OrderWizardStateService} from './services';
         SummaryStepComponent,
         OrderConfirmationComponent,
         StepContainerComponent,
-        ClientIdentificationComponent
+        ClientIdentificationComponent,
     ],
     imports: [
         CommonModule,
@@ -39,9 +39,9 @@ import {OrderWizardStateService} from './services';
         ReactiveFormsModule,
         FormsModule,
         IonicSelectableModule,
-        RegistrationPageModule
+        RegistrationPageModule,
     ],
-    providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService]
+    providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService],
 })
 export class OrderPageModule {
 }

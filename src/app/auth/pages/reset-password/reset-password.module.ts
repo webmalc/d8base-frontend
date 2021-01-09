@@ -16,10 +16,10 @@ import {ResetPasswordPage} from './reset-password.page';
         ResetPasswordPageRoutingModule,
         ReactiveFormsModule,
         SharedModule,
-        TranslateModule
+        TranslateModule,
     ],
     declarations: [ResetPasswordPage],
-    providers: [ResetPasswordApiService]
+    providers: [ResetPasswordApiService],
 })
 export class ResetPasswordPageModule {
 }

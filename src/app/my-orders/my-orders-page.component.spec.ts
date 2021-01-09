@@ -18,11 +18,11 @@ describe('MyOrdersPageComponent', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 HttpClientTestingModule,
-                RouterTestingModule
+                RouterTestingModule,
             ],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MyOrdersPageComponent);

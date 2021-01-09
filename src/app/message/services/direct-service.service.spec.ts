@@ -12,7 +12,7 @@ import {MessagesSentApiService} from './messages-sent-api.service';
 describe('DirectServiceService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             DirectServiceService,
@@ -20,8 +20,8 @@ describe('DirectServiceService', () => {
             MessagesListApiService,
             MessagesSentApiService,
             NotificationWorkerService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

@@ -21,9 +21,9 @@ export class ServicePublishStepTwoFormService {
                 [ServicePublishStepTwoFormFields.StartPrice]: [data?.start_price],
                 [ServicePublishStepTwoFormFields.EndPrice]: [data?.end_price],
                 [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
-                [ServicePublishStepTwoFormFields.Currency]: [data?.price_currency]
+                [ServicePublishStepTwoFormFields.Currency]: [data?.price_currency],
             },
-            {validators: [this.checkPricesValidator]}
+            {validators: [this.checkPricesValidator]},
         );
     }
 

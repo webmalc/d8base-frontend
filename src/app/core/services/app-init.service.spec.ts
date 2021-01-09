@@ -18,12 +18,12 @@ describe('AppInitService', () => {
                 HttpClientTestingModule,
                 RouterTestingModule,
                 TranslateModule.forRoot(),
-                IonicStorageModule.forRoot()
+                IonicStorageModule.forRoot(),
             ],
             providers: [
                 Platform,
-                AppInitService
-            ]
+                AppInitService,
+            ],
         });
 
         trans = TestBed.inject(TranslationService);
@@ -43,7 +43,7 @@ describe('AppInitService', () => {
             res => {
                 expect((service as any).translationService.init).toHaveBeenCalled();
                 done();
-            }
+            },
         );
     });
 });

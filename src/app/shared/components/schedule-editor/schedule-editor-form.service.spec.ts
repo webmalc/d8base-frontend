@@ -6,11 +6,11 @@ import {ScheduleEditorFormService} from './schedule-editor-form.service';
 describe('ScheduleEditorFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            ReactiveFormsModule, FormsModule
+            ReactiveFormsModule, FormsModule,
         ],
         providers: [
-            ScheduleEditorFormService
-        ]
+            ScheduleEditorFormService,
+        ],
     }));
 
     it('should be created', () => {

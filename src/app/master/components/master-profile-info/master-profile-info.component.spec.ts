@@ -14,8 +14,8 @@ describe('MasterProfileInfoComponent', () => {
             declarations: [MasterProfileInfoComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [
-                MasterProfileContextService
-            ]
+                MasterProfileContextService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterProfileInfoComponent);

@@ -5,5 +5,5 @@ export enum EditMasterFormFields {
     Experience = 'experience',
     Level = 'level',
     Subcategory = 'subcategory',
-    IsAutoOrderConfirmation = 'is_auto_order_confirmation'
+    IsAutoOrderConfirmation = 'is_auto_order_confirmation',
 }

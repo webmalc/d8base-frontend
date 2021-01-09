@@ -29,13 +29,13 @@ import {ProfilePage} from './profile.page';
         ReactiveFormsModule,
         SharedModule,
         LeafletModule,
-        IonicSelectableModule
+        IonicSelectableModule,
     ],
     declarations: [
         ProfilePage,
         UserContactEditComponent,
         UserEditComponent,
-        AboutEditComponent
+        AboutEditComponent,
     ],
     providers: [
         PluginApiService,
@@ -44,8 +44,8 @@ import {ProfilePage} from './profile.page';
         SettingsFormService,
         BookmarksService,
         SavedProfessionalApiService,
-        RegisterEmailApiService
-    ]
+        RegisterEmailApiService,
+    ],
 })
 export class ProfilePageModule {
 }

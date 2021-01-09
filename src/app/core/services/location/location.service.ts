@@ -12,14 +12,14 @@ import {IpServicesHolderService} from './ip-services-holder.service';
  *  Returns user location data by ip
  */
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LocationService { // cringe
 
     constructor(
         private readonly ipServicesHolder: IpServicesHolderService,
         private readonly geolocation: Geolocation,
-        private readonly locationAccuracy: LocationAccuracy
+        private readonly locationAccuracy: LocationAccuracy,
     ) {
     }
 
@@ -28,18 +28,18 @@ export class LocationService { // cringe
             (canRequest: boolean) => canRequest ?
                 this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
                     () => this.geolocation.getCurrentPosition().then(
-                        (geo: Geoposition) => resolve({latitude: geo.coords.latitude, longitude: geo.coords.longitude})
-                    )
+                        (geo: Geoposition) => resolve({latitude: geo.coords.latitude, longitude: geo.coords.longitude}),
+                    ),
                 ).catch(_ => resolve(null)) :
                 this.geolocation.getCurrentPosition().then(
-                    (geo: Geoposition) => resolve({latitude: geo.coords.latitude, longitude: geo.coords.longitude})
-                ).catch(_ => resolve(null))
+                    (geo: Geoposition) => resolve({latitude: geo.coords.latitude, longitude: geo.coords.longitude}),
+                ).catch(_ => resolve(null)),
         ).catch(_ => resolve(null)));
     }
 
     public getCurrentMergedPosition(): Observable<Coords | null> {
         return from(this.getCurrentPosition()).pipe(
-            switchMap(data => null === data ? this.getIpLocationData() : of(data))
+            switchMap(data => null === data ? this.getIpLocationData() : of(data)),
         );
     }
 
@@ -55,24 +55,24 @@ export class LocationService { // cringe
                                     type: 'Point',
                                     coordinates: [
                                         coords.longitude,
-                                        coords.latitude
-                                    ]
+                                        coords.latitude,
+                                    ],
                                 };
                             } else if (null !== ipLocation) {
                                 location.coordinates = {
                                     type: 'Point',
                                     coordinates: [
                                         ipLocation.longitude,
-                                        ipLocation.latitude
-                                    ]
+                                        ipLocation.latitude,
+                                    ],
                                 };
                             } else {
                                 return resolve(null);
                             }
                             resolve(location);
-                        }
+                        },
                     );
-                }
+                },
             ).catch(_ => resolve(null));
         });
     }
@@ -81,7 +81,7 @@ export class LocationService { // cringe
         return onErrorResumeNext(...this.ipServicesHolder.getList().map(service => service.getData()))
             .pipe(
                 first(),
-                catchError(e => of(null))
+                catchError(e => of(null)),
             );
     }
 }

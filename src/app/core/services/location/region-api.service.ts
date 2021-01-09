@@ -8,7 +8,7 @@ import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class RegionApiService extends AbstractReadonlyApiService<Region> {
 
@@ -25,8 +25,8 @@ export class RegionApiService extends AbstractReadonlyApiService<Region> {
             search?: string,
             ordering?: string,
             page?: string,
-            page_size?: string
-        }
+            page_size?: string,
+        },
     ): Observable<ApiListResponseInterface<Region>> {
         return super.get(params);
     }

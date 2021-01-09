@@ -15,7 +15,7 @@ import {finalize, map, single} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-final-step',
     templateUrl: './service-publish-final-step.component.html',
-    styleUrls: ['./service-publish-final-step.component.scss']
+    styleUrls: ['./service-publish-final-step.component.scss'],
 })
 export class ServicePublishFinalStepComponent {
 
@@ -30,7 +30,7 @@ export class ServicePublishFinalStepComponent {
         private readonly masterLocationApi: MasterLocationApiService,
         private readonly router: Router,
         private readonly masterManager: MasterManagerService,
-        private readonly loading: LoadingService
+        private readonly loading: LoadingService,
     ) {
     }
 
@@ -39,16 +39,16 @@ export class ServicePublishFinalStepComponent {
         const master = this.isNewMaster() ? null : await this.getMaster().toPromise();
         if (master) {
             await this.servicePublishDataHolder.assignStepData(
-                ServicePublishSteps.Final, {master}
+                ServicePublishSteps.Final, {master},
             );
         }
         this.servicePublish.publish()
             .pipe(
                 single(),
-                finalize(() => this.loading.loadingDismiss())
+                finalize(() => this.loading.loadingDismiss()),
             )
             .subscribe(
-                (service) => this.router.navigate(['service', service.id], {queryParams: {from: 'publish'}})
+                (service) => this.router.navigate(['service', service.id], {queryParams: {from: 'publish'}}),
             );
     }
 
@@ -58,7 +58,7 @@ export class ServicePublishFinalStepComponent {
 
     private getMaster(): Observable<ProfessionalList> {
         return this.masterManager.getMasterList().pipe(
-            map(list => list[0])
+            map(list => list[0]),
         );
     }
 }

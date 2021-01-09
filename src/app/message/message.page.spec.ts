@@ -10,7 +10,7 @@ describe('MessagePage', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MessagePage],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MessagePage);

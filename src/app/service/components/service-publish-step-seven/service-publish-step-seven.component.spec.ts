@@ -37,7 +37,7 @@ describe('ServicePublishStepSevenComponent', () => {
                 FormsModule,
                 RouterTestingModule,
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
                 ServicePublishStepSevenFormService,
@@ -56,8 +56,8 @@ describe('ServicePublishStepSevenComponent', () => {
                 StepFiveHandlerService,
                 StepSixHandlerService,
                 StepSevenHandlerService,
-                StepFinalHandlerService
-            ]
+                StepFinalHandlerService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServicePublishStepSevenComponent);

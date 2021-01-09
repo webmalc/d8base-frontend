@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {LoadingController} from '@ionic/angular';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LoadingService {
 
@@ -11,7 +11,7 @@ export class LoadingService {
 
     public presentLoading(): void {
         this.loadingController.create().then(
-            c => c.present()
+            c => c.present(),
         );
     }
 

@@ -25,12 +25,12 @@ describe('DefaultLocationPickerService', () => {
                 {provide: StorageManagerService, useClass: StorageManagerMock},
                 {provide: Geolocation, useValue: {getCurrentPosition: () => 'test'}},
                 {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
-                {provide: PopoverController, useValue: {create: () => Promise.resolve()}}
+                {provide: PopoverController, useValue: {create: () => Promise.resolve()}},
             ],
             imports: [
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         });
         service = TestBed.inject(DefaultLocationPickerService);
     });

@@ -6,11 +6,11 @@ import {CertificatesApiService} from './certificates-api.service';
 describe('CertificatesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            CertificatesApiService
-        ]
+            CertificatesApiService,
+        ],
     }));
 
     it('should be created', () => {

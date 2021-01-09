@@ -19,14 +19,14 @@ describe('MasterProfileCalendarComponent', () => {
             imports: [
                 IonicModule,
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
                 CalendarGeneratorFactoryService,
                 {provide: StorageManagerService, useClass: StorageManagerMock},
                 CalendarApiService,
-                MasterProfileContextService
-            ]
+                MasterProfileContextService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterProfileCalendarComponent);

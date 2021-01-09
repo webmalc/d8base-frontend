@@ -15,9 +15,9 @@ import {MasterEditPage} from './master-edit.page';
         IonicModule,
         SharedModule,
         MasterEditPageRoutingModule,
-        TranslateModule
+        TranslateModule,
     ],
-    declarations: [MasterEditPage, MasterEditComponent]
+    declarations: [MasterEditPage, MasterEditComponent],
 })
 export class MasterEditPageModule {
 }

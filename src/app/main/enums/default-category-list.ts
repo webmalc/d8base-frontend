@@ -7,5 +7,5 @@ export enum DefaultCategoryList {
     Home = 'home',
     Media = 'media',
     Professional = 'professional',
-    Sport = 'sport'
+    Sport = 'sport',
 }

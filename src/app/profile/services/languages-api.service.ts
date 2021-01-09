@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LanguagesApiService extends AbstractReadonlyApiService<Language> {
 
@@ -20,7 +20,7 @@ export class LanguagesApiService extends AbstractReadonlyApiService<Language> {
 
     public getLanguages$(): Observable<Language[]> {
         return this.client.get<Language[]>(this.url).pipe(
-            map(languages => plainToClass(Language, languages, {excludeExtraneousValues: true}))
+            map(languages => plainToClass(Language, languages, {excludeExtraneousValues: true})),
         );
     }
 

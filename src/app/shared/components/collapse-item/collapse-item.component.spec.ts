@@ -11,7 +11,7 @@ describe('CollapseItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CollapseItemComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CollapseItemComponent);

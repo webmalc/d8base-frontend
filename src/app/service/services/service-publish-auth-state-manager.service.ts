@@ -12,7 +12,7 @@ export class ServicePublishAuthStateManagerService {
     constructor(
         private readonly masterManager: MasterManagerService,
         private readonly userManager: UserManagerService,
-        private readonly servicePublishDataHolder: ServicePublishDataHolderService
+        private readonly servicePublishDataHolder: ServicePublishDataHolderService,
     ) {
     }
 
@@ -20,8 +20,8 @@ export class ServicePublishAuthStateManagerService {
         if (!this.servicePublishDataHolder.isset(ServicePublishSteps.Four)) {
             this.masterManager.isMaster().subscribe(
                 isMaster => isMaster ? this.masterManager.getMasterList().subscribe(
-                    masterList => this.update((masterList as Master[]).length === 0)
-                ) : this.update(true)
+                    masterList => this.update((masterList as Master[]).length === 0),
+                ) : this.update(true),
             );
         }
     }
@@ -30,8 +30,8 @@ export class ServicePublishAuthStateManagerService {
         this.userManager.getCurrentUser().subscribe(
             user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
                 ServicePublishSteps.Four,
-                {isNewMaster, user, isNewUser: false}
-            )
+                {isNewMaster, user, isNewUser: false},
+            ),
         );
     }
 }

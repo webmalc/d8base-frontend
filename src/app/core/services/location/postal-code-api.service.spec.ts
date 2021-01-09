@@ -5,11 +5,11 @@ import {PostalCodeApiService} from './postal-code-api.service';
 describe('PostalCodeApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            PostalCodeApiService
-        ]
+            PostalCodeApiService,
+        ],
     }));
 
     it('should be created', () => {

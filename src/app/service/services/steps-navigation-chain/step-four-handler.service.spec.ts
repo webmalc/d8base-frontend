@@ -10,14 +10,14 @@ import {StepFourHandlerService} from './step-four-handler.service';
 describe('StepFourHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             StepFourHandlerService,
             ServicePublishDataHolderService,
             AuthenticationService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

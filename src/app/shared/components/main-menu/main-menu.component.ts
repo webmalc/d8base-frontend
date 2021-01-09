@@ -5,7 +5,7 @@ import {MainMenuItem, mainMenuItems} from './main-menu';
 @Component({
     selector: 'app-main-menu',
     templateUrl: './main-menu.component.html',
-    styleUrls: ['./main-menu.component.scss']
+    styleUrls: ['./main-menu.component.scss'],
 })
 export class MainMenuComponent {
     @Input() public isAuthenticated: boolean;
@@ -14,7 +14,7 @@ export class MainMenuComponent {
     public mainMenuItems = mainMenuItems;
 
     constructor(
-        private readonly platform: Platform
+        private readonly platform: Platform,
     ) {
     }
 

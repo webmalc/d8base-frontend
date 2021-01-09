@@ -26,8 +26,8 @@ xdescribe('MasterProfileFactoryComponent', () => {
                 EducationApiService,
                 CertificatesApiService,
                 {provide: StorageManagerService, useClass: StorageManagerMock},
-                ReviewsReadonlyApiService
-            ]
+                ReviewsReadonlyApiService,
+            ],
         });
 
         fixture = TestBed.createComponent(MasterProfileFactoryComponent);

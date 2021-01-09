@@ -15,9 +15,9 @@ import {MasterLocationEditPage} from './master-location-edit.page';
         FormsModule,
         IonicModule,
         MasterLocationEditPageRoutingModule,
-        SharedModule
+        SharedModule,
     ],
-    declarations: [MasterLocationEditPage]
+    declarations: [MasterLocationEditPage],
 })
 export class MasterLocationEditPageModule {
 }

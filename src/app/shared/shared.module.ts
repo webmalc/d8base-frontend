@@ -21,7 +21,7 @@ import {
     PriceComponent,
     ScheduleEditorComponent,
     ScheduleViewerComponent,
-    ServiceWidgetComponent
+    ServiceWidgetComponent,
 } from '@app/shared/components';
 import {AbstractContactsComponent} from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import {AbstractLocationEditComponent} from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -109,7 +109,7 @@ import {NumberDirective} from './directives/number.directive';
         IonImageSpinnerDirective,
         IonImageViewDirective,
         LocationViewerComponent,
-        ContentWrapperComponent
+        ContentWrapperComponent,
     ],
     exports: [
         ErrorFlashbagComponent,
@@ -153,7 +153,7 @@ import {NumberDirective} from './directives/number.directive';
         IonImageSpinnerDirective,
         IonImageViewDirective,
         LocationViewerComponent,
-        ContentWrapperComponent
+        ContentWrapperComponent,
     ],
     imports: [
         CommonModule,
@@ -165,7 +165,7 @@ import {NumberDirective} from './directives/number.directive';
         FormsModule,
         RouterModule,
         ImageCropperModule,
-        BrMaskerModule
+        BrMaskerModule,
     ],
     providers: [
         MainGuard,
@@ -175,8 +175,8 @@ import {NumberDirective} from './directives/number.directive';
         SelectableCountryOnSearchService,
         SelectableDistrictOnSearchService,
         SelectableRegionOnSearchService,
-        SelectableSubregionOnSearchService
-    ]
+        SelectableSubregionOnSearchService,
+    ],
 })
 export class SharedModule {
 }

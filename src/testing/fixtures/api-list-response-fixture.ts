@@ -6,7 +6,7 @@ export class ApiListResponseFixture {
             count: 0,
             next: null,
             previous: null,
-            results
+            results,
         };
     }
 }

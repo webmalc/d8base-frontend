@@ -36,7 +36,7 @@ describe('ServicePublishStepSixComponent', () => {
                 RouterTestingModule,
                 HttpClientTestingModule,
                 TranslateModule.forRoot(),
-                IonicSelectableModule
+                IonicSelectableModule,
             ],
             providers: [
                 ServicePublishStepSixFormService,
@@ -52,8 +52,8 @@ describe('ServicePublishStepSixComponent', () => {
                 StepFiveHandlerService,
                 StepSixHandlerService,
                 StepSevenHandlerService,
-                StepFinalHandlerService
-            ]
+                StepFinalHandlerService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServicePublishStepSixComponent);

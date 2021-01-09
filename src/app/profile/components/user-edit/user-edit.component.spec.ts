@@ -22,8 +22,8 @@ describe('UserEditComponent', () => {
                 Location,
                 FormBuilder,
                 RegisterEmailApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(UserEditComponent);

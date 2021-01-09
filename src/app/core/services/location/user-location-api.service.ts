@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserLocationApiService extends AbstractApiService<UserLocation>
     implements LocationApiServiceInterface, ApiServiceInterface<UserLocation> {
@@ -25,7 +25,7 @@ export class UserLocationApiService extends AbstractApiService<UserLocation>
     public getDefaultLocation(): Observable<UserLocation> {
         return super.get().pipe(
             map((locationList: ApiListResponseInterface<UserLocation>) =>
-                locationList.results.filter(location => location.is_default === true)[0] as UserLocation)
+                locationList.results.filter(location => location.is_default === true)[0] as UserLocation),
         );
     }
 
@@ -36,7 +36,7 @@ export class UserLocationApiService extends AbstractApiService<UserLocation>
     public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
         return this.client.options(this.URL).pipe(
             map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
-                raw.actions.POST.timezone.choices)
+                raw.actions.POST.timezone.choices),
         );
     }
 

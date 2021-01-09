@@ -21,7 +21,7 @@ import { filter, withLatestFrom } from 'rxjs/operators';
 @Component({
     selector: 'app-search-filters-main-tab',
     templateUrl: './search-filters-main-tab.component.html',
-    styleUrls: ['./search-filters-main-tab.component.scss']
+    styleUrls: ['./search-filters-main-tab.component.scss'],
 })
 export class SearchFiltersMainTabComponent implements OnInit {
     public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
@@ -38,7 +38,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
         private readonly currentLocation: CurrentLocationCompilerService,
         private readonly currencyListApi: CurrencyListApiService,
         private readonly userSettings: UserSettingsService,
-        private readonly cd: ChangeDetectorRef
+        private readonly cd: ChangeDetectorRef,
     ) {}
 
     public ngOnInit(): void {
@@ -53,11 +53,11 @@ export class SearchFiltersMainTabComponent implements OnInit {
             animated: true,
             componentProps: {
                 data: {
-                    coordinates: this.stateManager.data.main.location.coordinates
+                    coordinates: this.stateManager.data.main.location.coordinates,
                 },
-                renderCountry: false
+                renderCountry: false,
             },
-            cssClass: ['map-popover-width', 'map-popover-height']
+            cssClass: ['map-popover-width', 'map-popover-height'],
         });
         pop.onDidDismiss().then((data: { data: { coordinates: Coords } }) => {
             if (data.data?.coordinates) {
@@ -78,8 +78,8 @@ export class SearchFiltersMainTabComponent implements OnInit {
                     (this.stateManager.data.main.location = {
                         country,
                         city: event.value,
-                        coordinates: res
-                    })
+                        coordinates: res,
+                    }),
             );
     }
 
@@ -104,8 +104,8 @@ export class SearchFiltersMainTabComponent implements OnInit {
                     (this.stateManager.data.main.location = {
                         country: res.country,
                         city: res.city,
-                        coordinates: res.coords
-                    })
+                        coordinates: res.coords,
+                    }),
             );
     }
 
@@ -120,7 +120,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
             .subscribe(([currencies, settings]) => {
                 this.currencyList = currencies;
                 this.stateManager.data.main.price.currency = currencies.find(
-                    ({ currency }) => currency === settings?.currency ?? currencies[0].currency
+                    ({ currency }) => currency === settings?.currency ?? currencies[0].currency,
                 );
                 this.cd.markForCheck();
             });

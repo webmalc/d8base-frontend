@@ -5,11 +5,11 @@ import {CategoriesApiService} from './categories-api.service';
 describe('CategoriesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            CategoriesApiService
-        ]
+            CategoriesApiService,
+        ],
     }));
 
     it('should be created', () => {

@@ -18,16 +18,16 @@ import {PasswordRecoverPage} from './password-recover.page';
         PasswordRecoverPageRoutingModule,
         SharedModule,
         ReactiveFormsModule,
-        TranslateModule
+        TranslateModule,
     ],
     declarations: [
         PasswordRecoverPage,
-        PasswordRecoveryFormComponent
+        PasswordRecoveryFormComponent,
     ],
     providers: [
         PasswordRecoveryFormService,
-        PasswordRecoveryService
-    ]
+        PasswordRecoveryService,
+    ],
 })
 export class PasswordRecoverPageModule {
 }

@@ -6,11 +6,11 @@ import {UserSettingsApiService} from './user-settings-api.service';
 describe('UserSettingsApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            UserSettingsApiService
-        ]
+            UserSettingsApiService,
+        ],
     }));
 
     it('should be created', () => {

@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterCertificatesReadonlyApiService {
 
@@ -20,7 +20,7 @@ export class MasterCertificatesReadonlyApiService {
 
     public getByMasterId(id: number): Observable<ApiListResponseInterface<Certificate>> {
         return this.client.get<{ certificates: Certificate[] }>(this.getUrl() + id.toString()).pipe(
-            map(data => ({count: data.certificates.length, results: data.certificates, next: null, previous: null}))
+            map(data => ({count: data.certificates.length, results: data.certificates, next: null, previous: null})),
         );
     }
 

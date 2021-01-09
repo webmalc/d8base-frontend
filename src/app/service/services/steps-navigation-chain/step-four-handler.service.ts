@@ -9,7 +9,7 @@ import {first, switchMap} from 'rxjs/operators';
 export class StepFourHandlerService extends AbstractHandler {
 
     constructor(
-        private readonly authenticationService: AuthenticationService
+        private readonly authenticationService: AuthenticationService,
     ) {
         super();
     }
@@ -29,7 +29,7 @@ export class StepFourHandlerService extends AbstractHandler {
     private handle(handler: () => Observable<number>): Observable<number> {
         return this.authenticationService.isAuthenticated$.pipe(
             first(),
-            switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex()))
+            switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
         );
     }
 }

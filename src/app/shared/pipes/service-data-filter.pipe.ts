@@ -3,7 +3,7 @@ import ServiceData from '@app/core/interfaces/service-data.interface';
 
 @Pipe({
     name: 'serviceDataFilter',
-    pure: false
+    pure: false,
 })
 export class ServiceDataFilterPipe implements PipeTransform {
     public transform(value: ServiceData[], term: string): ServiceData[] {

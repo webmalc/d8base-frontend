@@ -4,7 +4,7 @@ import { PhotoPopoverComponent } from '../components/photo-popover/photo-popover
 
 @Directive({
     // tslint:disable:directive-selector
-    selector: 'ion-img[viewOnClick]'
+    selector: 'ion-img[viewOnClick]',
 })
 export class IonImageViewDirective {
     @Input() private readonly fullSizeSrc: string;
@@ -21,8 +21,8 @@ export class IonImageViewDirective {
             component: PhotoPopoverComponent,
             cssClass: 'modal-fullscreen',
             componentProps: {
-                src
-            }
+                src,
+            },
         });
 
         return await pop.present();

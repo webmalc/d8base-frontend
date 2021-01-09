@@ -5,7 +5,7 @@ import {MasterManagerService} from '@app/core/services/master-manager.service';
 import {Observable} from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterGuard implements CanActivate {
     constructor(private readonly masterManager: MasterManagerService, private readonly location: Location) {
@@ -22,7 +22,7 @@ export class MasterGuard implements CanActivate {
                         subscriber.next(true);
                     }
                     subscriber.complete();
-                }
+                },
             );
         });
     }

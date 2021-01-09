@@ -15,7 +15,7 @@ describe('LocationStepComponent', () => {
         TestBed.configureTestingModule({
             declarations: [LocationStepComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
-            providers: [OrderWizardStateService]
+            providers: [OrderWizardStateService],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LocationStepComponent);

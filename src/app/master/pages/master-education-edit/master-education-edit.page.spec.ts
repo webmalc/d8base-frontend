@@ -23,13 +23,13 @@ describe('MasterEducationEditPage', () => {
                             paramMap: {
                                 get(): string {
                                     return '';
-                                }
-                            }
-                        }
-                    }
+                                },
+                            },
+                        },
+                    },
                 },
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterEducationEditPage);

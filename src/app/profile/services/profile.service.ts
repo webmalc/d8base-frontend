@@ -25,7 +25,7 @@ export class ProfileService {
         private readonly languagesApi: LanguagesApiService,
         private readonly formBuilder: FormBuilder,
         private readonly locationService: LocationService,
-        private readonly userLocationApi: UserLocationApiService
+        private readonly userLocationApi: UserLocationApiService,
     ) {
     }
 
@@ -45,7 +45,7 @@ export class ProfileService {
                 });
 
                 return locationList;
-            })
+            }),
         );
     }
 
@@ -54,10 +54,10 @@ export class ProfileService {
             map(
                 user => {
                     this.avatarForm = this.formBuilder.group({
-                        [ProfileFormFields.Avatar]: [user.avatar, [Validators.required]]
+                        [ProfileFormFields.Avatar]: [user.avatar, [Validators.required]],
                     });
-                }
-            )
+                },
+            ),
         );
     }
 
@@ -67,7 +67,7 @@ export class ProfileService {
                 this.form = this.formService.createForm(user);
 
                 return of<FormGroup>(this.form);
-            })
+            }),
         );
     }
 
@@ -84,7 +84,7 @@ export class ProfileService {
             () => {
                 // TODO: show feedback about operation success
             },
-            (error) => console.error(error.error)
+            (error) => console.error(error.error),
         );
     }
 

@@ -15,9 +15,9 @@ import {RegisterVerifyPage} from './register-verify.page';
         FormsModule,
         IonicModule,
         SharedModule,
-        RegisterVerifyPageRoutingModule
+        RegisterVerifyPageRoutingModule,
     ],
-    declarations: [RegisterVerifyPage]
+    declarations: [RegisterVerifyPage],
 })
 export class RegisterVerifyPageModule {
 }

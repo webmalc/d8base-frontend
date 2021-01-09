@@ -12,14 +12,14 @@ describe('CalendarComponentComponent', () => {
             declarations: [CalendarComponentComponent],
             imports: [
                 IonicModule,
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CalendarComponentComponent);
         component = fixture.componentInstance;
         component.enabledPeriods = [
-            {start_datetime: '2020-12-03T09:00:00+01:00', end_datetime: '2020-12-03T18:00:00+01:00', professional: 1, service: null}
+            {start_datetime: '2020-12-03T09:00:00+01:00', end_datetime: '2020-12-03T18:00:00+01:00', professional: 1, service: null},
         ];
         fixture.detectChanges();
     }));

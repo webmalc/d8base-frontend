@@ -6,13 +6,13 @@ import {Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterPhotosGeneratorFactoryService {
 
     constructor(
         private readonly masterPhotosReadonlyApi: MasterPhotosReadonlyApiService,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
     }
 

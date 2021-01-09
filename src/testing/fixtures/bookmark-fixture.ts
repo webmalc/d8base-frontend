@@ -10,7 +10,7 @@ export class BookmarkFixture {
             modified: '',
             modified_by: 0,
             note: 'test note',
-            professional: master
+            professional: master,
         };
     }
 }

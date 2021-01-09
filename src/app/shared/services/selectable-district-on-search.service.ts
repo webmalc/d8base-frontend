@@ -16,7 +16,7 @@ export class SelectableDistrictOnSearchService extends SelectableSearchService {
             event.component,
             event.text,
             this.districtApi,
-            {city: city?.id.toString(10)}
+            {city: city?.id.toString(10)},
         );
     }
 }

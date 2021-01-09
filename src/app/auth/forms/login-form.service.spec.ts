@@ -7,8 +7,8 @@ describe('LoginFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             FormBuilder,
-            LoginFormService
-        ]
+            LoginFormService,
+        ],
     }));
 
     it('should be created', () => {

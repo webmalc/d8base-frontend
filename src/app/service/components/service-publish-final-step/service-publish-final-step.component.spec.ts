@@ -38,7 +38,7 @@ describe('ServicePublishFinalStepComponent', () => {
                 FormsModule,
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
                 ServicePublishService,
@@ -58,8 +58,8 @@ describe('ServicePublishFinalStepComponent', () => {
                 StepSixHandlerService,
                 StepSevenHandlerService,
                 StepFinalHandlerService,
-                {provide: ServicePublishDataHolderService, useValue: {getStepData: () => ({isNewMaster: true})}}
-            ]
+                {provide: ServicePublishDataHolderService, useValue: {getStepData: () => ({isNewMaster: true})}},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServicePublishFinalStepComponent);

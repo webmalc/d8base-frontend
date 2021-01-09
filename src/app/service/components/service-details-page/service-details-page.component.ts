@@ -11,7 +11,7 @@ import { first, map, switchMap } from 'rxjs/operators';
 @Component({
     selector: 'app-service-details-page',
     templateUrl: './service-details-page.component.html',
-    styleUrls: ['./service-details-page.component.scss']
+    styleUrls: ['./service-details-page.component.scss'],
 })
 export class ServiceDetailsPageComponent {
 
@@ -23,7 +23,7 @@ export class ServiceDetailsPageComponent {
         public location: Location,
         route: ActivatedRoute,
         servicesApi: ServicesReadonlyApiService,
-        masterApi: MasterReadonlyApiService
+        masterApi: MasterReadonlyApiService,
     ) {
         route.params.pipe(
             first(params => Boolean(params?.id)),
@@ -32,17 +32,17 @@ export class ServiceDetailsPageComponent {
                 map((master) => {
                     return {
                         master,
-                        service
+                        service,
                     };
-                })))
-            ))
+                }))),
+            )),
         ).subscribe(({ master, service }) => {
             this.master = master;
             this.service = service;
         });
         this.showSuccessOrderNotification$ = route.queryParams.pipe(
             first(),
-            map(params => params.from === 'publish')
+            map(params => params.from === 'publish'),
         );
     }
 }

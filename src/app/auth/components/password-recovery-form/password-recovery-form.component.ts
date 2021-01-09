@@ -8,7 +8,7 @@ import {HelperService} from '@app/core/services/helper.service';
 @Component({
     selector: 'app-password-recovery-form',
     templateUrl: './password-recovery-form.component.html',
-    styleUrls: ['./password-recovery-form.component.scss']
+    styleUrls: ['./password-recovery-form.component.scss'],
 })
 export class PasswordRecoveryFormComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class PasswordRecoveryFormComponent implements OnInit {
 
     constructor(
         public readonly formService: PasswordRecoveryFormService,
-        private readonly passwordRecoveryService: PasswordRecoveryService
+        private readonly passwordRecoveryService: PasswordRecoveryService,
     ) {
     }
 
@@ -31,7 +31,7 @@ export class PasswordRecoveryFormComponent implements OnInit {
         this.successMessages = null;
         this.passwordRecoveryService.recover(this.formService.form.getRawValue()).subscribe(
             next => this.successMessages = ['password-recovery.link-sent'],
-            (err: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error)
+            (err: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error),
         );
     }
 }

@@ -7,7 +7,7 @@ import {map, shareReplay} from 'rxjs/operators';
 const DARK_MODE_STORAGE_KEY = 'is_dark_mode';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class DarkModeService {
     public darkTheme$: Observable<boolean>;
@@ -18,7 +18,7 @@ export class DarkModeService {
         this.darkTheme$ =
             concat(
                 this.isDarkMode(),
-                this.darkThemeSubject
+                this.darkThemeSubject,
             ).pipe(shareReplay(1));
     }
 

@@ -8,7 +8,7 @@ import {switchMap, takeUntil} from 'rxjs/operators';
 @Component({
     selector: 'app-outbox',
     templateUrl: './outbox.component.html',
-    styleUrls: ['./outbox.component.scss']
+    styleUrls: ['./outbox.component.scss'],
 })
 export class OutboxComponent implements OnInit, OnDestroy {
 
@@ -19,14 +19,14 @@ export class OutboxComponent implements OnInit, OnDestroy {
 
     constructor(
         private readonly sentOrdersApi: SentOrdersApiService,
-        private readonly changeDetector: ChangeDetectorRef
+        private readonly changeDetector: ChangeDetectorRef,
     ) {
     }
 
     public ngOnInit(): void {
         this.currentFilter$.pipe(
             takeUntil(this.destroy$),
-            switchMap(params => this.sentOrdersApi.get(params))
+            switchMap(params => this.sentOrdersApi.get(params)),
         ).subscribe(orders => {
             this.orders = orders.results;
             this.changeDetector.markForCheck();

@@ -14,8 +14,8 @@ describe('MasterPickerPopoverComponent', () => {
             declarations: [MasterPickerPopoverComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterPickerPopoverComponent);

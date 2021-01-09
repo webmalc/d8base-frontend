@@ -8,7 +8,7 @@ import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-pa
 @Component({
     selector: 'app-master-edit-page',
     templateUrl: './master-edit.page.html',
-    styleUrls: ['./master-edit.page.scss']
+    styleUrls: ['./master-edit.page.scss'],
 })
 export class MasterEditPage extends AbstractModelEditPage<Master> {
 
@@ -16,7 +16,7 @@ export class MasterEditPage extends AbstractModelEditPage<Master> {
         protected readonly api: MasterApiService,
         protected readonly route: ActivatedRoute,
         protected readonly masterManager: MasterManagerService,
-        protected readonly router: Router
+        protected readonly router: Router,
     ) {
         super(route, api, masterManager);
     }

@@ -10,7 +10,7 @@ import {map, switchMap} from 'rxjs/operators';
     selector: 'app-order-page',
     templateUrl: './sent-order-page.component.html',
     styleUrls: ['./sent-order-page.component.scss'],
-    providers: [ServicesApiCache, MasterReadonlyApiCacheService]
+    providers: [ServicesApiCache, MasterReadonlyApiCacheService],
 })
 export class SentOrderPageComponent {
 
@@ -19,7 +19,7 @@ export class SentOrderPageComponent {
     constructor(route: ActivatedRoute, sentOrdersApi: SentOrdersApiService) {
         this.order$ = route.params.pipe(
             map(params => Number.parseInt(params.id, 10)),
-            switchMap(id => id ? sentOrdersApi.getByEntityId(id) : of<SentOrder>())
+            switchMap(id => id ? sentOrdersApi.getByEntityId(id) : of<SentOrder>()),
         );
     }
 }

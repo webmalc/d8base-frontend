@@ -15,8 +15,8 @@ describe('ImageCropperComponent', () => {
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 IonicModule.forRoot(),
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ImageCropPopoverComponent);

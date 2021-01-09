@@ -11,7 +11,7 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 @Component({
     selector: 'app-service-publish-step-six',
     templateUrl: './service-publish-step-six.component.html',
-    styleUrls: ['./service-publish-step-six.component.scss']
+    styleUrls: ['./service-publish-step-six.component.scss'],
 })
 export class ServicePublishStepSixComponent implements OnInit {
 
@@ -23,14 +23,14 @@ export class ServicePublishStepSixComponent implements OnInit {
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
         public serviceStepsNavigationService: ServiceStepsNavigationService,
         public trans: TranslationService,
-        private readonly authStateManager: ServicePublishAuthStateManagerService
+        private readonly authStateManager: ServicePublishAuthStateManagerService,
     ) { }
 
     public ngOnInit(): void {
         this.authStateManager.updateFourStepState();
         if (this.servicePublishDataHolder.isset(ServicePublishSteps.Six)) {
             this.formService.createForm(
-                this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six)
+                this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six),
             );
         } else {
             this.formService.createForm();
@@ -39,7 +39,7 @@ export class ServicePublishStepSixComponent implements OnInit {
 
     public submitForm(): void {
         this.servicePublishDataHolder.setStepData<StepSixDataInterface>(
-            ServicePublishSteps.Six, this.formService.form.getRawValue()
+            ServicePublishSteps.Six, this.formService.form.getRawValue(),
         );
         this.serviceStepsNavigationService.next();
     }

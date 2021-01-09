@@ -31,7 +31,7 @@ describe('LoginPage', () => {
                 FormsModule,
                 RouterTestingModule,
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
                 {provide: ApiClientService, useClass: ApiClientServiceMock},
@@ -39,9 +39,9 @@ describe('LoginPage', () => {
                 FormBuilder,
                 AuthenticationService,
                 {provide: TokenManagerService, useClass: TokenManagerServiceMock},
-                {provide: StorageManagerService, useClass: StorageManagerMock}
+                {provide: StorageManagerService, useClass: StorageManagerMock},
             ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
 
         router = TestBed.inject<Router>(Router);

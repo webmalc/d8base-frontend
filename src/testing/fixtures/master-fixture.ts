@@ -10,7 +10,7 @@ export class MasterFixture {
             description: '',
             experience: 0,
             subcategory: 0,
-            rating: '4'
+            rating: '4',
         };
     }
 }

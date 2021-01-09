@@ -10,7 +10,7 @@ import {switchMap, tap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-tag-edit',
     templateUrl: './master-tag-edit.page.html',
-    styleUrls: ['./master-tag-edit.page.scss']
+    styleUrls: ['./master-tag-edit.page.scss'],
 })
 export class MasterTagEditPage implements OnInit {
 
@@ -21,7 +21,7 @@ export class MasterTagEditPage implements OnInit {
     constructor(
         private readonly formBuilder: FormBuilder,
         private readonly api: TagsApiService,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
     }
 
@@ -29,11 +29,11 @@ export class MasterTagEditPage implements OnInit {
         this.masterManager.getMasterList().pipe(
             tap(list => this.masterId = list[0].id),
             switchMap(
-                list => this.api.getByMasterId(list[0].id)
-            )
+                list => this.api.getByMasterId(list[0].id),
+            ),
         ).subscribe((list: ApiListResponseInterface<Tag>) => this.defaultTags = list.results);
         this.form = this.formBuilder.group({
-            tags: ['']
+            tags: [''],
         });
     }
 
@@ -44,7 +44,7 @@ export class MasterTagEditPage implements OnInit {
 
         forkJoin([
             this.api.deleteList(defaultArr.filter(x => !selected.includes(x)).map((val: string) => this.getDefaultTagByName(val))),
-            this.api.createList(selected.filter(x => !defaultArr.includes(x)).map((val: string) => this.getNewTag(val)))
+            this.api.createList(selected.filter(x => !defaultArr.includes(x)).map((val: string) => this.getNewTag(val))),
         ]).subscribe(() => {
                 // TODO: show feedback about operation success
             });

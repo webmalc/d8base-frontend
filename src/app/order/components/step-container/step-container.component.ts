@@ -13,7 +13,7 @@ import { map, take, takeUntil } from 'rxjs/operators';
     selector: 'app-step-container',
     templateUrl: './step-container.component.html',
     styleUrls: ['./step-container.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepContainerComponent implements OnInit, OnDestroy {
     public currentStep$: Observable<StepModel> = this.wizardState.getCurrentStep();
@@ -26,7 +26,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
             return Object.values(stepsState).reduce((acc, curr) => {
                 return { ...acc, ...curr };
             }, {});
-        })
+        }),
     );
 
     private readonly ngDestroy$ = new Subject<void>();
@@ -35,7 +35,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
         private readonly wizardState: OrderWizardStateService,
         private readonly route: ActivatedRoute,
         private readonly cd: ChangeDetectorRef,
-        private readonly stepComponent: StepComponent<unknown>
+        private readonly stepComponent: StepComponent<unknown>,
     ) {}
 
     public ngOnInit(): void {

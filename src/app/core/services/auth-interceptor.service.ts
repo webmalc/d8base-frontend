@@ -14,7 +14,7 @@ import {switchMap} from 'rxjs/operators';
 export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
-        private readonly authFactory: AuthenticationFactory
+        private readonly authFactory: AuthenticationFactory,
     ) {
     }
 
@@ -38,9 +38,9 @@ export class AuthInterceptor implements HttpInterceptor {
             switchMap(
                 (isNeedToRefresh: boolean) => isNeedToRefresh ?
                     this.authFactory.getAuthenticator().refresh().pipe(
-                        switchMap(() => next.handle(req))
-                    ) : next.handle(req)
-            )
+                        switchMap(() => next.handle(req)),
+                    ) : next.handle(req),
+            ),
         );
     }
 
@@ -54,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
             environment.backend.url + environment.backend.is_user_registered,
 
             // Search should be allowed for guest users:
-            environment.backend.url + `/api${SearchService.searchListPath}`
+            environment.backend.url + `/api${SearchService.searchListPath}`,
         ];
     }
 }

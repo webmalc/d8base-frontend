@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 @Component({
     selector: 'app-register-verify',
     templateUrl: './register-verify.page.html',
-    styleUrls: ['./register-verify.page.scss']
+    styleUrls: ['./register-verify.page.scss'],
 })
 export class RegisterVerifyPage implements OnInit {
 
@@ -21,11 +21,11 @@ export class RegisterVerifyPage implements OnInit {
         this.activatedRoute.queryParams.subscribe(
             params => {
                 this.sendVerifyRequest(
-                    {user_id: params.user_id, timestamp: params.timestamp, signature: params.signature}
+                    {user_id: params.user_id, timestamp: params.timestamp, signature: params.signature},
                 ).subscribe(
-                    resp => this.success = true
+                    resp => this.success = true,
                 );
-            }
+            },
         );
     }
 

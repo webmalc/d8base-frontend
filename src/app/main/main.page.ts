@@ -12,7 +12,7 @@ import {filter} from 'rxjs/operators';
 @Component({
     selector: 'app-main',
     templateUrl: './main.page.html',
-    styleUrls: ['./main.page.scss']
+    styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
 
@@ -23,7 +23,7 @@ export class MainPage implements OnInit {
     constructor(
         private readonly currentLocation: CurrentLocationCompilerService,
         private readonly router: Router,
-        private readonly defaultCategory: DefaultCategoriesFactoryService
+        private readonly defaultCategory: DefaultCategoriesFactoryService,
     ) {
     }
 
@@ -35,12 +35,12 @@ export class MainPage implements OnInit {
                     this.searchData.location = {
                         country: data.country,
                         city: data.city,
-                        coordinates: data.coords
+                        coordinates: data.coords,
                     };
                 }
             },
             err => this.locationEnabled = true,
-            () => this.locationEnabled = true
+            () => this.locationEnabled = true,
         );
     }
 
@@ -54,23 +54,23 @@ export class MainPage implements OnInit {
     public updateCity(data: SearchLocationDataInterface): void {
         if (data.city) {
             this.currentLocation.getCoords(data.country, data.city).pipe(
-                filter(res => null !== res)
+                filter(res => null !== res),
             ).subscribe(
                 res => this.searchData.location = {
                     country: data.country,
                     city: data.city,
-                    coordinates: res
-                }
+                    coordinates: res,
+                },
             );
         } else if (data.coordinates?.latitude && data.coordinates?.longitude) {
             this.currentLocation.getExtendedLocationByCoords(data.coordinates).pipe(
-                filter(res => null !== res)
+                filter(res => null !== res),
             ).subscribe(
                 res => this.searchData.location = {
                     country: res.country,
                     city: res.city,
-                    coordinates: res.coords
-                }
+                    coordinates: res.coords,
+                },
             );
         }
     }
@@ -92,8 +92,8 @@ export class MainPage implements OnInit {
             location: {
                 coordinates: undefined,
                 country: undefined,
-                city: undefined
-            }
+                city: undefined,
+            },
         };
     }
 

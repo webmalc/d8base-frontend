@@ -7,7 +7,7 @@ import { Reinitable } from '@app/shared/abstract/reinitable';
 @Component({
     selector: 'app-master-profile-portfolio',
     templateUrl: './master-profile-portfolio.component.html',
-    styleUrls: ['./master-profile-portfolio.component.scss']
+    styleUrls: ['./master-profile-portfolio.component.scss'],
 })
 export class MasterProfilePortfolioComponent extends Reinitable {
     public masterPhotos: ProfessionalPhotoList[];

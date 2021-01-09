@@ -16,13 +16,13 @@ export class PluginApiService {
 
     public getPlugin(pluginId: number): Observable<Plugin> {
         return this.client.get(`${this.URL}/${pluginId}`).pipe(
-            map(raw => plainToClass(Plugin, raw))
+            map(raw => plainToClass(Plugin, raw)),
         );
     }
 
     public getPlugins(): Observable<Plugin[]> {
         return this.client.get<Plugin[]>(this.URL).pipe(
-            map(raw => plainToClass(Plugin, raw))
+            map(raw => plainToClass(Plugin, raw)),
         );
     }
 

@@ -15,9 +15,9 @@ import {MasterCertificateEditPage} from './master-certificate-edit.page';
         IonicModule,
         MasterCertificateEditPageRoutingModule,
         TranslateModule,
-        SharedModule
+        SharedModule,
     ],
-    declarations: [MasterCertificateEditPage, CertificateEditComponent]
+    declarations: [MasterCertificateEditPage, CertificateEditComponent],
 })
 export class MasterCertificateEditPageModule {
 }

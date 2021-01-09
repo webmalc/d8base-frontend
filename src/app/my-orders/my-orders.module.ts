@@ -4,7 +4,7 @@ import {
     OrderStatusComponent,
     ReceivedOrderListItemComponent,
     ReceivedOrderPageComponent,
-    SentOrderPageComponent
+    SentOrderPageComponent,
 } from '@app/my-orders/components';
 import {InboxComponent} from '@app/my-orders/components/inbox/inbox.component';
 import {OutboxComponent} from '@app/my-orders/components/outbox/outbox.component';
@@ -25,15 +25,15 @@ import {MyOrdersRoutingModule} from './my-orders-routing.module';
         ReceivedOrderListItemComponent,
         SentOrderListItemComponent,
         ReceivedOrderPageComponent,
-        SentOrderPageComponent
+        SentOrderPageComponent,
     ],
     imports: [
         CommonModule,
         SharedModule,
         IonicModule,
         TranslateModule,
-        MyOrdersRoutingModule
-    ]
+        MyOrdersRoutingModule,
+    ],
 })
 export class MyOrdersModule {
 }

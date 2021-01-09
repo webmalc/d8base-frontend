@@ -13,7 +13,7 @@ import {Observable, of} from 'rxjs';
 import {filter, first, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserManagerService {
 
@@ -24,14 +24,14 @@ export class UserManagerService {
         private readonly api: ApiClientService,
         private readonly auth: AuthenticationService,
         private readonly userLocationApi: UserLocationApiService,
-        private readonly countryApi: CountriesApiService
+        private readonly countryApi: CountriesApiService,
     ) {
     }
 
     @once
     public subscribeToAuthSubject(): void {
         this.auth.isAuthenticated$.pipe(filter(isAuth => isAuth === false)).subscribe(
-            _ => this.user = null
+            _ => this.user = null,
         );
     }
 
@@ -40,7 +40,7 @@ export class UserManagerService {
             filter(isAuth => isAuth),
             switchMap(_ => this.userLocationApi.getDefaultLocation()),
             filter(location => (location && location.country && true)),
-            switchMap(location => this.countryApi.getByEntityId(location.country as number))
+            switchMap(location => this.countryApi.getByEntityId(location.country as number)),
         );
     }
 
@@ -52,14 +52,14 @@ export class UserManagerService {
         return this.auth.isAuthenticated$.pipe(
             first(),
             switchMap(isAuth => isAuth ? this.getUser() : of(null)),
-            tap((user: User) => this.user = user)
+            tap((user: User) => this.user = user),
         );
     }
 
     public updateUser(user: Partial<User>): Observable<User> {
         return this.api.patch<User>(this.url, user).pipe(
             map(raw => plainToClass(User, raw)),
-            tap(usr => this.user = usr)
+            tap(usr => this.user = usr),
         );
     }
 

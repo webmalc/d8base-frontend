@@ -4,7 +4,7 @@ import {StorageManagerService} from '@app/core/proxies/storage-manager.service';
 import {deserialize, serialize} from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class DefaultLocationStorageService {
 

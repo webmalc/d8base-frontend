@@ -6,11 +6,11 @@ import {SubcategoriesApiService} from './subcategories-api.service';
 describe('SubcategoriesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            SubcategoriesApiService
-        ]
+            SubcategoriesApiService,
+        ],
     }));
 
     it('should be created', () => {

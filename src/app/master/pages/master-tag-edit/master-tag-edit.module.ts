@@ -17,10 +17,10 @@ import {MasterTagEditPage} from './master-tag-edit.page';
         MasterTagEditPageRoutingModule,
         ReactiveFormsModule,
         SharedModule,
-        TranslateModule
+        TranslateModule,
     ],
     declarations: [MasterTagEditPage, TagsSelectInputComponent],
-    providers: [TagsListApiService]
+    providers: [TagsListApiService],
 })
 export class MasterTagEditPageModule {
 }

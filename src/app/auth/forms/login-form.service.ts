@@ -17,7 +17,7 @@ export class LoginFormService {
     public initForm(): void {
         this.form = this.builder.group({
             [LoginFormFields.Username]: ['', Validators.required],
-            [LoginFormFields.Password]: ['', Validators.required]
+            [LoginFormFields.Password]: ['', Validators.required],
         });
     }
 }

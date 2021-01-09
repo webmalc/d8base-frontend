@@ -12,8 +12,8 @@ import {LeafletMouseEvent} from 'leaflet';
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => UserLocationMapComponent),
-        multi: true
-    }]
+        multi: true,
+    }],
 })
 export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
 
@@ -36,8 +36,8 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
             (new L.Marker(
                 {
                     lat: this.clientCoordinates[1],
-                    lng: this.clientCoordinates[0]
-                }
+                    lng: this.clientCoordinates[0],
+                },
             )).addTo(this.layerGroup);
         }
         this.invalidateSize();
@@ -88,14 +88,14 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
         this.options = {
             layers: [L.tileLayer(environment.map_url, {maxZoom: 18, attribution: '...'})],
             zoom,
-            center
+            center,
         };
     }
 
     private getCoordinates(coords: number[]): Coordinates {
         return {
             type: 'Point',
-            coordinates: [coords[0], coords[1]]
+            coordinates: [coords[0], coords[1]],
         };
     }
 }

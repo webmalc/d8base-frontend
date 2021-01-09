@@ -10,8 +10,8 @@ describe('ServicePublishDataPreparerService', () => {
         providers: [
             ServicePublishDataPreparerService,
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

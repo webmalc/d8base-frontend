@@ -17,7 +17,7 @@ function isNumbers(array: any[]): array is number[] {
 @Component({
     selector: 'app-master-profile-info',
     templateUrl: './master-profile-info.component.html',
-    styleUrls: ['./master-profile-info.component.scss']
+    styleUrls: ['./master-profile-info.component.scss'],
 })
 export class MasterProfileInfoComponent {
 
@@ -32,21 +32,21 @@ export class MasterProfileInfoComponent {
         private readonly fullLocationService: FullLocationService,
         context: MasterProfileContextService,
         userLanguagesApi: UserLanguagesApiService,
-        languagesApi: LanguagesApiService
+        languagesApi: LanguagesApiService,
     ) {
         this.context$ = context.context$.pipe(
-            first(({user, master}) => Boolean(master) && Boolean(user))
+            first(({user, master}) => Boolean(master) && Boolean(user)),
         );
         this.languages$ = this.context$.pipe(
             map(({user}) => isNumbers(user.languages) ? user.languages : user.languages.map(x => x.id)),
             switchMap(ids => userLanguagesApi.getList(ids)),
             switchMap(languages => languagesApi.getList(languages.map(lang => lang?.language))),
-            shareReplay(1)
+            shareReplay(1),
         );
         this.locations$ = this.context$.pipe(
             switchMap(({master}) =>
-                forkJoin(master.locations.map(x => this.fullLocationService.getTextLocation(x)))
-            )
+                forkJoin(master.locations.map(x => this.fullLocationService.getTextLocation(x))),
+            ),
         );
     }
 

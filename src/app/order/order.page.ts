@@ -13,7 +13,7 @@ import {OrderWizardStateService, SentOrdersApiService} from './services';
     selector: 'app-order',
     templateUrl: './order.page.html',
     styleUrls: ['./order.page.scss'],
-    providers: [ServicesApiCache]
+    providers: [ServicesApiCache],
 })
 export class OrderPage {
 
@@ -27,7 +27,7 @@ export class OrderPage {
         private readonly servicesApi: ServicesReadonlyApiService,
         private readonly mastersApi: MasterReadonlyApiService,
         private readonly userManagerService: UserManagerService,
-        private readonly ordersApi: SentOrdersApiService
+        private readonly ordersApi: SentOrdersApiService,
     ) {
     }
 
@@ -51,10 +51,10 @@ export class OrderPage {
                         (acc, curr) => {
                             return {...acc, ...curr};
                         },
-                        {service: this.serviceId}
+                        {service: this.serviceId},
                     );
                 }),
-                takeUntil(this.ngDestroy$)
+                takeUntil(this.ngDestroy$),
             )
             .subscribe((order: SentOrder) => {
                 this.createOrder(order);
@@ -74,17 +74,17 @@ export class OrderPage {
                     this.mastersApi.getByEntityId(service.professional).pipe(
                         map(professional => ({
                             service,
-                            professional
-                        }))
-                    )
-                )
+                            professional,
+                        })),
+                    ),
+                ),
             ),
-            this.userManagerService.getCurrentUser()
+            this.userManagerService.getCurrentUser(),
         ]).pipe(first()).subscribe(async ([{service, professional}, client]) => {
                 await this.wizardState.setContext({
                     service,
                     professional,
-                    client
+                    client,
                 });
             });
     }
@@ -94,7 +94,7 @@ export class OrderPage {
             .pipe(
                 map(({serviceId}) => serviceId),
                 filter(serviceId => Boolean(serviceId)),
-                takeUntil(this.ngDestroy$)
+                takeUntil(this.ngDestroy$),
             )
             .subscribe(serviceId => {
                 this.serviceId = serviceId;

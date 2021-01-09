@@ -8,7 +8,7 @@ import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserSettingsApiService extends AbstractApiService<UserSettings> implements ApiServiceInterface<UserSettings> {
 
@@ -22,9 +22,9 @@ export class UserSettingsApiService extends AbstractApiService<UserSettings> imp
         actions: {
             POST: {
                 language: { choices: Array<{ value: string, display_name: string }> },
-                currency: { choices: Array<{ value: string, display_name: string }> }
-            }
-        }
+                currency: { choices: Array<{ value: string, display_name: string }> },
+            },
+        },
     }> {
         return this.client.options(this.url);
     }

@@ -14,8 +14,8 @@ describe('ServiceWidgetComponent', () => {
             declarations: [ServiceWidgetComponent],
             imports: [
                 IonicModule,
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ServiceWidgetComponent);

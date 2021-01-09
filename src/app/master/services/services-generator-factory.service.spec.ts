@@ -8,12 +8,12 @@ import {ServicesGeneratorFactoryService} from './services-generator-factory.serv
 describe('ServicesGeneratorFactoryService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             ServicesGeneratorFactoryService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

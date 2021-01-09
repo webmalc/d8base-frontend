@@ -8,5 +8,5 @@ export enum ProfileFormFields {
     Birthday = 'birthday',
     Languages = 'languages',
     Nationality = 'nationality',
-    Avatar = 'avatar'
+    Avatar = 'avatar',
 }

@@ -9,14 +9,14 @@ import {forkJoin, Observable, of} from 'rxjs';
 import {concatAll, map, mergeMap, switchMap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ServicesGeneratorFactoryService {
 
     constructor(
         private readonly servicesApi: ServicesReadonlyApiService,
         private readonly serviceTagsReadonlyApi: ServiceTagsReadonlyApiService,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
     }
 
@@ -26,12 +26,12 @@ export class ServicesGeneratorFactoryService {
                 switchMap(serviceList => this.combineWithTags(serviceList.results))) :
             this.masterManager.getMasterList().pipe(
                 map(list => forkJoin(list.map(professional =>
-                    (this.servicesApi.get({professional: professional.id.toString(), ordering: 'created'}))
+                    (this.servicesApi.get({professional: professional.id.toString(), ordering: 'created'})),
                 ))),
                 concatAll(),
                 map(responses => responses.reduce(
-                    (acc: ServiceData[], response) => acc.concat(response.results.map(service => ({service}))), []
-                ))
+                    (acc: ServiceData[], response) => acc.concat(response.results.map(service => ({service}))), [],
+                )),
             );
     }
 
@@ -39,9 +39,9 @@ export class ServicesGeneratorFactoryService {
         return of(serviceList).pipe(
             mergeMap(services => forkJoin(
                 [...services.map(service => this.serviceTagsReadonlyApi.get({service: service.id.toString()}).pipe(
-                    map(res => ({service, tags: res.results}))
-                ))]
-            ))
+                    map(res => ({service, tags: res.results})),
+                ))],
+            )),
         );
     }
 }

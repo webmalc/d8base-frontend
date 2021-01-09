@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserContactApiService extends AbstractApiService<ClientContactInterface>
     implements ContactsApiServiceInterface, Partial<ApiServiceInterface<UserContact>> {
@@ -33,7 +33,7 @@ export class UserContactApiService extends AbstractApiService<ClientContactInter
                 response.results = plainToClass(UserContact, response.results);
 
                 return response;
-            })
+            }),
         );
     }
 

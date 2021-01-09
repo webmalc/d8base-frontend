@@ -6,13 +6,13 @@ import {UserLocationEditPage} from './user-location-edit.page';
 const routes: Routes = [
   {
     path: '',
-    component: UserLocationEditPage
-  }
+    component: UserLocationEditPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class UserLocationEditPageRoutingModule {
 }

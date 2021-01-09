@@ -19,12 +19,12 @@ describe('TimetableComponent', () => {
             imports: [
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
-                RouterTestingModule
+                RouterTestingModule,
             ],
             providers: [
                 ServicePublishDataHolderService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(TimetableComponent);

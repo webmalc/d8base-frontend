@@ -18,7 +18,7 @@ import {StepTwoHandlerService} from './step-two-handler.service';
 describe('ChainManagerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             ChainManagerService,
@@ -32,8 +32,8 @@ describe('ChainManagerService', () => {
             StepFinalHandlerService,
             ServicePublishDataHolderService,
             AuthenticationService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

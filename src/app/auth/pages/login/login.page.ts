@@ -10,7 +10,7 @@ import {filter, takeUntil} from 'rxjs/operators';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
-    styleUrls: ['./login.page.scss']
+    styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnDestroy {
     public errorMessages: string[];
@@ -20,11 +20,11 @@ export class LoginPage implements OnDestroy {
         private readonly authFactory: AuthenticationFactory,
         private readonly router: Router,
         route: ActivatedRoute,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
         route.queryParams.pipe(
             filter(params => params?.hasOwnProperty('logout')),
-            takeUntil(this.destroy$)
+            takeUntil(this.destroy$),
         ).subscribe(() => this.logout());
     }
 
@@ -45,7 +45,7 @@ export class LoginPage implements OnDestroy {
                 } else {
                     throw error;
                 }
-            }
+            },
         );
     }
 

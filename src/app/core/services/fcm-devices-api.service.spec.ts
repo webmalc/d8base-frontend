@@ -5,11 +5,11 @@ import {FcmDevicesApiService} from './fcm-devices-api.service';
 describe('FcmDevicesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            FcmDevicesApiService
-        ]
+            FcmDevicesApiService,
+        ],
     }));
 
     it('should be created', () => {

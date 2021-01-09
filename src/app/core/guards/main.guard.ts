@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {first} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MainGuard implements CanActivate {
 
@@ -22,7 +22,7 @@ export class MainGuard implements CanActivate {
                 () => {
                     subscriber.next(this.router.parseUrl('/auth/login'));
                     subscriber.complete();
-                }
+                },
             );
         });
     }

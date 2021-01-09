@@ -15,10 +15,10 @@ if (environment.sentry.enabled && environment.sentry.dsn) {
     integrations: [
       new Integrations.BrowserTracing({
         tracingOrigins: [ environment.origin ],
-        routingInstrumentation: Sentry.routingInstrumentation
-      })
+        routingInstrumentation: Sentry.routingInstrumentation,
+      }),
     ],
-    tracesSampleRate: 1.0
+    tracesSampleRate: 1.0,
   });
 }
 

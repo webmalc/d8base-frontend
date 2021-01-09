@@ -33,14 +33,14 @@ export class LangInterceptorService implements HttpInterceptor {
                 const headers = req.headers.append('Accept-Language', lang);
 
                 return next.handle(req.clone({url: newUrl, headers}));
-            })
+            }),
         );
     }
 
     private getExcludedUrls(): string[] {
         return [
             environment.backend.url + environment.backend.auth,
-            environment.backend.url + environment.backend.refresh
+            environment.backend.url + environment.backend.refresh,
         ];
     }
 }

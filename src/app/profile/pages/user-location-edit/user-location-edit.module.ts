@@ -15,9 +15,9 @@ import {UserLocationEditPage} from './user-location-edit.page';
     FormsModule,
     IonicModule,
     UserLocationEditPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  declarations: [UserLocationEditPage]
+  declarations: [UserLocationEditPage],
 })
 export class UserLocationEditPageModule {
 }

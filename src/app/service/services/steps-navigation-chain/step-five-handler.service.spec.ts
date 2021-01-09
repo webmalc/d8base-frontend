@@ -10,8 +10,8 @@ describe('StepFiveHandlerService', () => {
         providers: [
             StepFiveHandlerService,
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

@@ -6,7 +6,7 @@ import {MainInfoSectionComponentInputDataInterface} from '@app/master/interfaces
     selector: 'app-master-profile-main-info-section',
     templateUrl: './master-profile-main-info-section.component.html',
     styleUrls: ['./master-profile-main-info-section.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MasterProfileMainInfoSectionComponent {
     @Input() public sectionData: MainInfoSectionComponentInputDataInterface;

@@ -24,7 +24,7 @@ export class ScheduleEditorFormService {
         this.formArray = [];
         this.toDelete = [];
         this.form = this.formBuilder.group({
-            timetable: this.formBuilder.array([])
+            timetable: this.formBuilder.array([]),
         });
         this.fillTimeTable(timetable);
     }
@@ -51,7 +51,7 @@ export class ScheduleEditorFormService {
 
     public pushDay(dayCode: number, startTime: string = null, endTime: string = null, isEnabled: boolean = false, id: number = null): void {
         (this.form.get(ScheduleEditorFormFields.Timetable) as FormArray).push(
-            this.getFormGroup(dayCode, startTime, endTime, isEnabled, id)
+            this.getFormGroup(dayCode, startTime, endTime, isEnabled, id),
         );
     }
 
@@ -138,22 +138,22 @@ export class ScheduleEditorFormService {
         startTime: string = null,
         endTime: string = null,
         isEnabled: boolean = false,
-        id: number = null
+        id: number = null,
     ): FormGroup {
         return this.formBuilder.group({
             [ScheduleEditorFormFields.Day]: [dayCode],
             [ScheduleEditorFormFields.StartTime]: [startTime],
             [ScheduleEditorFormFields.EndTime]: [endTime],
             [ScheduleEditorFormFields.IsEnabled]: [isEnabled],
-            [ScheduleEditorFormFields.Id]: [id]
+            [ScheduleEditorFormFields.Id]: [id],
         }, {
             validators: [
                 this.startTimeValidator,
                 this.endTimeValidator,
                 this.startTimeFormatValidator,
                 this.endTimeFormatValidator,
-                this.timeIntervalValidator
-            ]
+                this.timeIntervalValidator,
+            ],
         });
     }
 
@@ -164,12 +164,12 @@ export class ScheduleEditorFormService {
         const startTime = parseInt(
             (group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(0, 2) +
             (group.get(ScheduleEditorFormFields.StartTime).value as string)?.slice(3, 5),
-            10
+            10,
         );
         const endTimeTime = parseInt(
             (group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(0, 2) +
             (group.get(ScheduleEditorFormFields.EndTime).value as string)?.slice(3, 5),
-            10
+            10,
         );
         if (startTime >= endTimeTime) {
             group.get(ScheduleEditorFormFields.EndTime).setErrors({timeError: true});

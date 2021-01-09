@@ -6,13 +6,13 @@ import {MasterEducationEditPage} from './master-education-edit.page';
 const routes: Routes = [
   {
     path: '',
-    component: MasterEducationEditPage
-  }
+    component: MasterEducationEditPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MasterEducationEditPageRoutingModule {
 }

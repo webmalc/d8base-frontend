@@ -10,7 +10,7 @@ describe('UserLocationMapComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [UserLocationMapComponent],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(UserLocationMapComponent);

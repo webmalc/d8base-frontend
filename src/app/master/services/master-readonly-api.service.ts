@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterReadonlyApiService implements ReadonlyApiServiceInterface<ProfessionalList> {
     constructor(private readonly professionalsService: ProfessionalsService) {

@@ -14,8 +14,8 @@ import {first, tap} from 'rxjs/operators';
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => TagsSelectInputComponent),
-        multi: true
-    }]
+        multi: true,
+    }],
 })
 export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
 
@@ -28,25 +28,25 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
         private readonly api: TagsApiService,
         private readonly formBuilder: FormBuilder,
         private readonly tagsListApi: TagsListApiService,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
     }
 
     public ngOnInit(): void {
         this.masterManager.getMasterList().pipe(
-            tap(list => this.masterId = list[0].id)
+            tap(list => this.masterId = list[0].id),
         ).subscribe(
             _ => {
                 this.tagsListApi.get().subscribe(
-                    data => this.tagsList$.next(this.getTagNamesArray(data.results))
+                    data => this.tagsList$.next(this.getTagNamesArray(data.results)),
                 );
                 this.api.getByMasterId(this.masterId).subscribe(
                     data => {
                         this.createForm(data.results);
                         this.onChange(this.form.get('tagSelect').value);
-                    }
+                    },
                 );
-            }
+            },
         );
     }
 
@@ -56,7 +56,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
             return;
         }
         this.tagsList$.pipe(
-            first()
+            first(),
         ).subscribe(
             list => {
                 this.form.get('tagInput').setValue('');
@@ -67,7 +67,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
                     selectedOptions.push(newOption);
                     this.form.controls.tagSelect.patchValue(selectedOptions);
                 }
-            }
+            },
         ).unsubscribe();
     }
 
@@ -99,7 +99,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     private createForm(currentTags: Tag[]): any {
         this.form = this.formBuilder.group({
             tagSelect: [this.getTagNamesArray(currentTags)],
-            tagInput: ['']
+            tagInput: [''],
         });
     }
 

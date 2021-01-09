@@ -16,7 +16,7 @@ export class BookmarksService {
 
     constructor(
         private readonly savedService: SavedProfessionalApiService,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
     }
 
@@ -33,7 +33,7 @@ export class BookmarksService {
                 switchMap(ids => this.masterManager.getUserLessList$(ids)),
                 map((value: ProfessionalList[]) => {
                     return this.fill(rawBookmarks, value);
-                })
+                }),
             );
     }
 
@@ -48,7 +48,7 @@ export class BookmarksService {
                     return savedProfessional.professional;
                 }),
                 switchMap(id => this.masterManager.getUserLessList$([id])),
-                map(masters => this.fill([rawBookmark], masters).pop())
+                map(masters => this.fill([rawBookmark], masters).pop()),
             );
     }
 

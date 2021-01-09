@@ -6,7 +6,7 @@ import {TagsApiService} from './tags-api.service';
 describe('TagsApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [TagsApiService]
+        providers: [TagsApiService],
     }));
 
     it('should be created', () => {

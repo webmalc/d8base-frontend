@@ -7,8 +7,8 @@ describe('CountriesApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [
-        CountriesApiService
-    ]
+        CountriesApiService,
+    ],
   }));
 
   it('should be created', () => {

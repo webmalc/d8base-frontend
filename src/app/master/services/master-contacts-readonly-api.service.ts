@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterContactsReadonlyApiService {
 
@@ -19,7 +19,7 @@ export class MasterContactsReadonlyApiService {
 
     public getByClientId(id: number): Observable<ApiListResponseInterface<MasterContact>> {
         return this.client.get<{ contacts: MasterContact[] }>(this.getUrl() + id.toString()).pipe(
-            map(data => ({count: data.contacts.length, results: data.contacts, next: null, previous: null}))
+            map(data => ({count: data.contacts.length, results: data.contacts, next: null, previous: null})),
         );
     }
 

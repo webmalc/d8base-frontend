@@ -20,9 +20,9 @@ function getCurrentDay(): Date {
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => CalendarComponentComponent),
-            multi: true
-        }
-    ]
+            multi: true,
+        },
+    ],
 })
 export class CalendarComponentComponent implements ControlValueAccessor {
 

@@ -21,7 +21,7 @@ class CitiesApiServiceStub {
             count: 0,
             next: null,
             previous: null,
-            results: []
+            results: [],
         };
 
         return of(response);
@@ -39,14 +39,14 @@ describe('CityPickerPopoverComponent', () => {
             providers: [
                 {
                     provide: LocationService,
-                    useClass: LocationServiceStub
+                    useClass: LocationServiceStub,
                 },
                 {
                     provide: CitiesApiService,
-                    useClass: CitiesApiServiceStub
+                    useClass: CitiesApiServiceStub,
                 },
-                {provide: NavParams, useValue: {get: () => null}}
-            ]
+                {provide: NavParams, useValue: {get: () => null}},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CityPickerPopoverComponent);

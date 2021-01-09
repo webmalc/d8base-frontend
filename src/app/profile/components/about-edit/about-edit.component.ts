@@ -18,7 +18,7 @@ import {map, switchMap, tap} from 'rxjs/operators';
 @Component({
     selector: 'app-about-edit',
     templateUrl: './about-edit.component.html',
-    styleUrls: ['./about-edit.component.scss']
+    styleUrls: ['./about-edit.component.scss'],
 })
 export class AboutEditComponent implements OnInit {
 
@@ -33,7 +33,7 @@ export class AboutEditComponent implements OnInit {
         public readonly languagesApi: LanguagesApiService,
         private readonly formBuilder: FormBuilder,
         private readonly userLanguageApi: UserLanguagesApiService,
-        private readonly countriesApi: CountriesApiService
+        private readonly countriesApi: CountriesApiService,
     ) {
     }
 
@@ -44,7 +44,7 @@ export class AboutEditComponent implements OnInit {
 
         forkJoin({
             usr: this.userManager.getCurrentUser(),
-            usrLanguages: this.userLanguageApi.get()
+            usrLanguages: this.userLanguageApi.get(),
         }).pipe(
             tap(({usr, usrLanguages}) => {
                 this.defaultUserLanguages = userLanguages = usrLanguages.results;
@@ -55,14 +55,14 @@ export class AboutEditComponent implements OnInit {
                 nationality = country;
 
                 return this.userLanguagesToLanguages(userLanguages);
-            })
+            }),
         ).subscribe((languages) => this.form = this.formBuilder.group({
             [this.formFields.Birthday]: [user.birthday],
             [this.formFields.Nationality]: [nationality],
-            [this.formFields.Languages]: [languages]
+            [this.formFields.Languages]: [languages],
         }));
         this.languagesApi.getLanguages$().subscribe(
-            langs => this.languages$.next(langs)
+            langs => this.languages$.next(langs),
         );
     }
 
@@ -73,7 +73,7 @@ export class AboutEditComponent implements OnInit {
         }
         const data: Partial<User> = {
             birthday: date,
-            nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id
+            nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id,
         };
         const userLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[])
             .map(lang => plainToClass(UserLanguage, {language: lang.code}));
@@ -81,7 +81,7 @@ export class AboutEditComponent implements OnInit {
         this.userManager.updateUser(HelperService.clear(data)).subscribe();
         if (this.defaultUserLanguages && this.defaultUserLanguages.length) {
             this.userLanguageApi.deleteList(this.defaultUserLanguages).pipe(
-                switchMap(_ => this.userLanguageApi.createList(userLanguages))
+                switchMap(_ => this.userLanguageApi.createList(userLanguages)),
             ).subscribe();
         } else {
             this.userLanguageApi.createList(userLanguages).subscribe();
@@ -94,7 +94,7 @@ export class AboutEditComponent implements OnInit {
 
     private userLanguagesToLanguages(list: UserLanguage[]): Observable<Language[]> {
         return this.languages$.pipe(
-            map(languages => list.map(userLanguage => languages.find(elem => userLanguage.language === elem.code)))
+            map(languages => list.map(userLanguage => languages.find(elem => userLanguage.language === elem.code))),
         );
     }
 }

@@ -12,8 +12,8 @@ xdescribe('SearchFiltersComponent', () => {
             declarations: [SearchFiltersComponent],
             imports: [IonicModule.forRoot()],
             providers: [
-                SearchFilterStateService
-            ]
+                SearchFilterStateService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchFiltersComponent);

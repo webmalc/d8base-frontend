@@ -17,7 +17,7 @@ function isTokenError(error: Error): boolean {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class GlobalErrorHandlerService implements ErrorHandler {
 
@@ -25,7 +25,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
     constructor(private readonly toaster: ToastController,
                 private readonly router: Router,
-                @Inject(PLATFORM_ID) private readonly platformId: object
+                @Inject(PLATFORM_ID) private readonly platformId: object,
     ) {
     }
 
@@ -89,7 +89,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
             console.error(message);
         } else {
             this.toaster.create({message, duration}).then(
-                toast => toast.present()
+                toast => toast.present(),
             );
         }
     }

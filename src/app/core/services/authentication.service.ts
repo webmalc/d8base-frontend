@@ -17,7 +17,7 @@ import {first, switchMap, tap} from 'rxjs/operators';
  *  Main authentication service
  */
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AuthenticationService implements AuthenticatorInterface {
 
@@ -29,7 +29,7 @@ export class AuthenticationService implements AuthenticatorInterface {
     constructor(
         private readonly tokenManager: TokenManagerService,
         private readonly client: ApiClientService,
-        private readonly preLogout: PreLogoutService
+        private readonly preLogout: PreLogoutService,
     ) {
         this.isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
     }
@@ -43,9 +43,9 @@ export class AuthenticationService implements AuthenticatorInterface {
                         switchMap(isNeed => isNeed ?
                             this.refresh().pipe(
                                 tap(() => resolve()),
-                                tap(_ => this.isAuthenticatedSubject$.next(!isExp))
-                            ) : of(this.isAuthenticatedSubject$.next(!isExp))
-                        )
+                                tap(_ => this.isAuthenticatedSubject$.next(!isExp)),
+                            ) : of(this.isAuthenticatedSubject$.next(!isExp)),
+                        ),
                     ).subscribe(
                         () => null,
                         _ => this.isAuthenticatedSubject$.next(false));
@@ -56,10 +56,10 @@ export class AuthenticationService implements AuthenticatorInterface {
             .finally(
                 () => {
                     this.tokenManager.isExpired$.subscribe(isExpired => this.isAuthenticated$.pipe(first()).subscribe(
-                        previousIsAuthStatus => isExpired === previousIsAuthStatus ? this.isAuthenticatedSubject$.next(!isExpired) : EMPTY
+                        previousIsAuthStatus => isExpired === previousIsAuthStatus ? this.isAuthenticatedSubject$.next(!isExpired) : EMPTY,
                     ));
                     resolve();
-                })
+                }),
         );
     }
 
@@ -69,10 +69,10 @@ export class AuthenticationService implements AuthenticatorInterface {
             password,
             grant_type: GrantTypes.PasswordGrantType,
             client_id: environment.client_id,
-            client_secret: environment.client_secret
+            client_secret: environment.client_secret,
         }).pipe(
             switchMap(result => from(this.tokenManager.setTokens(result))),
-            tap(() => this.isAuthenticatedSubject$.next(true))
+            tap(() => this.isAuthenticatedSubject$.next(true)),
         );
     }
 
@@ -100,12 +100,12 @@ export class AuthenticationService implements AuthenticatorInterface {
                             _ => {
                                 subscriber.next();
                                 subscriber.complete();
-                            }
+                            },
                         ),
-                        _ => EMPTY
+                        _ => EMPTY,
                     );
                 }).catch(err => subscriber.error(err));
-            }
+            },
         );
     }
 }

@@ -19,9 +19,9 @@ describe('DateTimeStepComponent', () => {
                 IonicModule,
                 TranslateModule.forRoot(),
                 HttpClientTestingModule,
-                RouterTestingModule
+                RouterTestingModule,
             ],
-            providers: [OrderWizardStateService, FormBuilder]
+            providers: [OrderWizardStateService, FormBuilder],
         }).compileComponents();
 
         fixture = TestBed.createComponent(DateTimeStepComponent);

@@ -13,7 +13,7 @@ import {map, switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-master-profile-calendar',
     templateUrl: './master-profile-calendar.component.html',
-    styleUrls: ['./master-profile-calendar.component.scss']
+    styleUrls: ['./master-profile-calendar.component.scss'],
 })
 export class MasterProfileCalendarComponent implements OnInit {
 
@@ -27,11 +27,11 @@ export class MasterProfileCalendarComponent implements OnInit {
     constructor(
         private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
         private readonly scheduleApi: MasterScheduleApiService,
-        private readonly contextService: MasterProfileContextService
+        private readonly contextService: MasterProfileContextService,
     ) {
         this.enabledPeriods = this.periods.asObservable();
         this.schedule$ = scheduleApi.get().pipe(
-            map(response => response.results)
+            map(response => response.results),
         );
         this.context$ = this.contextService.context$;
     }
@@ -47,14 +47,14 @@ export class MasterProfileCalendarComponent implements OnInit {
 
     public updateSchedule(newSchedules: AbstractSchedule[]): void {
         const deleteOld$ = this.schedule$.pipe(
-            switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules))
+            switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)),
         );
 
         const masterId = this.contextService.contextSnapshot.master?.id;
         const createNew$ = this.scheduleApi.createSet(newSchedules.map(schedule => ({
             ...schedule,
             professional: masterId,
-            id: null
+            id: null,
         })));
 
         concat(deleteOld$, createNew$)
@@ -62,7 +62,7 @@ export class MasterProfileCalendarComponent implements OnInit {
                 next: () => null,
                 complete: async () => {
                     this.updateEnabledPeriods(this.selectedDate ?? new Date());
-                }
+                },
             });
     }
 
@@ -71,7 +71,7 @@ export class MasterProfileCalendarComponent implements OnInit {
         this.calendarGeneratorFactory.getEnabledPeriods(
             startDate,
             HelperService.getDate(startDate, 1),
-            masterId
+            masterId,
         ).subscribe(list => this.periods.next(list));
     }
 }

@@ -28,10 +28,10 @@ describe('DefaultLocationPopoverComponent', () => {
                             country.name = 'test';
 
                             return plainToClass(ExtendedLocation, {country});
-                        }
-                    }
-                }
-            ]
+                        },
+                    },
+                },
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(DefaultLocationPopoverComponent);

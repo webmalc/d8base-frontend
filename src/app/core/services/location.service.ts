@@ -17,7 +17,7 @@ import {forkJoin, Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LocationService {
 
@@ -26,7 +26,7 @@ export class LocationService {
         private readonly regionApi: RegionApiService,
         private readonly subregionApi: SubregionApiService,
         private readonly citiesApi: CitiesApiService,
-        private readonly districtApi: DistrictApiService
+        private readonly districtApi: DistrictApiService,
     ) {
     }
 
@@ -35,9 +35,9 @@ export class LocationService {
             map(data => {
                 return {results: [data]};
             }),
-            this.switch<T>()
+            this.switch<T>(),
         ).pipe(
-            map((data: T[]) => data.pop())
+            map((data: T[]) => data.pop()),
         );
     }
 
@@ -47,7 +47,7 @@ export class LocationService {
 
     private getLocationList(api: LocationApiServiceInterface, id?: number): Observable<ClientLocationInterface[]> {
         return api.getByClientId(id).pipe(
-            map(data => data.results)
+            map(data => data.results),
         );
     }
 
@@ -57,10 +57,10 @@ export class LocationService {
             regions: this.regionApi.getList(data.results.map(client => client.region as number)),
             subregions: this.subregionApi.getList(data.results.map(client => client.subregion as number)),
             cities: this.citiesApi.getList(data.results.map(client => client.city as number)),
-            districts: this.districtApi.getList(data.results.map(client => client.district as number))
+            districts: this.districtApi.getList(data.results.map(client => client.district as number)),
         }).pipe(
             map(({countries, regions, subregions, cities, districts}) =>
-                this.generateLocationList<T>(data.results, countries, regions, subregions, cities, districts))
+                this.generateLocationList<T>(data.results, countries, regions, subregions, cities, districts)),
         ));
     }
 
@@ -70,7 +70,7 @@ export class LocationService {
         regions: LocationTypes[],
         subregions: LocationTypes[],
         cities: LocationTypes[],
-        districts: LocationTypes[]
+        districts: LocationTypes[],
     ): T[] {
         clientData.forEach((clientLocationData, index) => {
             clientLocationData.country = countries[index] as Country;

@@ -25,7 +25,7 @@ export class AppValidators {
         return (control: FormControl): ValidationErrors | null => {
             if (control.value && !params.includes(control.value)) {
                 return {
-                    restrictEnum: true
+                    restrictEnum: true,
                 };
             }
 
@@ -39,7 +39,7 @@ export class AppValidators {
                 for (const value of control.value) {
                     if (!params.includes(value)) {
                         return {
-                            restrictEnumArray: true
+                            restrictEnumArray: true,
                         };
                     }
                 }
@@ -52,7 +52,7 @@ export class AppValidators {
     public static forbidNumericValue(control: FormControl): ValidationErrors | null {
         if (control.value && /^([0-9]*)$/.test(control.value)) {
             return {
-                forbidNumericValue: true
+                forbidNumericValue: true,
             };
         }
 

@@ -9,7 +9,7 @@ import {ServiceStepsNavigationService} from '@app/service/services/service-steps
 @Component({
     selector: 'app-service-publish-step-five',
     templateUrl: './service-publish-step-five.component.html',
-    styleUrls: ['./service-publish-step-five.component.scss']
+    styleUrls: ['./service-publish-step-five.component.scss'],
 })
 export class ServicePublishStepFiveComponent implements OnInit {
 
@@ -18,13 +18,13 @@ export class ServicePublishStepFiveComponent implements OnInit {
     constructor(
         public formService: ServicePublishStepFiveFormService,
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        public serviceStepsNavigationService: ServiceStepsNavigationService
+        public serviceStepsNavigationService: ServiceStepsNavigationService,
     ) { }
 
     public ngOnInit(): void {
         if (this.servicePublishDataHolder.isset(ServicePublishSteps.Five)) {
             this.formService.createForm(
-                this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five)
+                this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five),
             );
         } else {
             this.formService.createForm();
@@ -33,7 +33,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
 
     public submitForm(): void {
         this.servicePublishDataHolder.setStepData<StepFiveDataInterface>(
-            ServicePublishSteps.Five, this.formService.form.getRawValue()
+            ServicePublishSteps.Five, this.formService.form.getRawValue(),
         );
         this.serviceStepsNavigationService.next();
     }

@@ -30,9 +30,9 @@ function durationFromMinutes(minutes: number): Duration {
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => DurationEditorComponent),
-            multi: true
-        }
-    ]
+            multi: true,
+        },
+    ],
 })
 export class DurationEditorComponent implements ControlValueAccessor, OnDestroy {
     public isDisabled: boolean;
@@ -79,7 +79,7 @@ export class DurationEditorComponent implements ControlValueAccessor, OnDestroy 
         this.form = new FormGroup({
             [DurationFormFields.Days]: new FormControl(),
             [DurationFormFields.Hours]: new FormControl(),
-            [DurationFormFields.Minutes]: new FormControl()
+            [DurationFormFields.Minutes]: new FormControl(),
         });
     }
 

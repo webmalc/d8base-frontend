@@ -8,35 +8,35 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'outbox'
+        redirectTo: 'outbox',
     },
     {
         path: 'inbox',
         pathMatch: 'full',
         component: MyOrdersPageComponent,
-        data: {isInbox: true}
+        data: {isInbox: true},
     },
     {
         path: 'inbox/:id',
         pathMatch: 'full',
-        component: ReceivedOrderPageComponent
+        component: ReceivedOrderPageComponent,
     },
     {
         path: 'outbox',
         pathMatch: 'full',
         component: MyOrdersPageComponent,
-        data: {isInbox: false}
+        data: {isInbox: false},
     },
     {
         path: 'outbox/:id',
         pathMatch: 'full',
-        component: SentOrderPageComponent
-    }
+        component: SentOrderPageComponent,
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class MyOrdersRoutingModule {
 }

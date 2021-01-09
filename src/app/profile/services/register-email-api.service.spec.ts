@@ -7,8 +7,8 @@ describe('RegisterEmailApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
         providers: [
-            RegisterEmailApiService
-        ]
+            RegisterEmailApiService,
+        ],
     }));
 
     it('should be created', () => {

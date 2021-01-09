@@ -8,13 +8,13 @@ import '@firebase/messaging';
 import {filter, switchMap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FcmDeviceService {
 
     constructor(
         private readonly fcmDevicesApi: FcmDevicesApiService,
-        private readonly auth: AuthenticationService
+        private readonly auth: AuthenticationService,
     ) {
     }
 
@@ -24,8 +24,8 @@ export class FcmDeviceService {
             filter(isInited => isInited),
             switchMap(() => this.auth.isAuthenticated$.pipe(
                 filter(isAuth => isAuth),
-                switchMap(() => this.saveTokenOrUpdateActivity()))
-            )
+                switchMap(() => this.saveTokenOrUpdateActivity())),
+            ),
         ).subscribe();
     }
 

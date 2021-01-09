@@ -13,9 +13,9 @@ describe('CalendarGeneratorFactoryService', () => {
             providers: [
                 CalendarGeneratorFactoryService,
                 CalendarApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
+                {provide: StorageManagerService, useClass: StorageManagerMock},
             ],
-            imports: [HttpClientTestingModule]
+            imports: [HttpClientTestingModule],
         });
         service = TestBed.inject(CalendarGeneratorFactoryService);
     });

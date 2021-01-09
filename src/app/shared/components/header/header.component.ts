@@ -9,7 +9,7 @@ import {map, switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
     public isAuthenticated$: Observable<boolean>;
@@ -20,14 +20,14 @@ export class HeaderComponent implements OnInit {
         private readonly platform: Platform,
         private readonly menuController: MenuController,
         authenticationFactory: AuthenticationFactory,
-        private readonly userManager: UserManagerService
+        private readonly userManager: UserManagerService,
     ) {
         this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
     }
 
     public ngOnInit(): void {
         this.countryCode$ = this.isAuthenticated$.pipe(switchMap(
-            isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry())
+            isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry()),
         ), map(c => c.code.toLowerCase()));
     }
 

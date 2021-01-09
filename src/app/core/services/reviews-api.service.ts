@@ -7,7 +7,7 @@ import {environment} from '@env/environment';
 import {plainToClass} from 'class-transformer';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ReviewsApiService extends AbstractApiService<Review> implements ApiServiceInterface<Review> {
 

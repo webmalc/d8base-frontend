@@ -15,8 +15,8 @@ export class ServicePublishStepSevenDepartureFormService {
         this.form = this.formBuilder.group({
             // [ServicePublishStepSevenDepartureFormFields.NotWithinTheCity]: [data?.not_within_the_city ?? false],
             [ServicePublishStepSevenDepartureFormFields.MaxDistance]: [data?.max_distance],
-            [ServicePublishStepSevenDepartureFormFields.Units]: [data?.units]
-        }
+            [ServicePublishStepSevenDepartureFormFields.Units]: [data?.units],
+        },
             // {validators: this.maxDistanceValidator}
             );
     }

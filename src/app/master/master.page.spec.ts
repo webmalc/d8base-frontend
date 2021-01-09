@@ -18,8 +18,8 @@ describe('MasterPage', () => {
             declarations: [MasterPage],
             providers: [
                 {provide: StorageManagerService, useClass: StorageManagerMock},
-                ReviewsReadonlyApiService
-            ]
+                ReviewsReadonlyApiService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterPage);

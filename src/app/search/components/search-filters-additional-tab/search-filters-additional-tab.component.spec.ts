@@ -10,7 +10,7 @@ describe('SearchFiltersAdditionalTabComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SearchFiltersAdditionalTabComponent],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchFiltersAdditionalTabComponent);

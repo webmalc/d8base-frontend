@@ -29,7 +29,7 @@ import {first, map, switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-service-publish-step-seven',
     templateUrl: './service-publish-step-seven.component.html',
-    styleUrls: ['./service-publish-step-seven.component.scss']
+    styleUrls: ['./service-publish-step-seven.component.scss'],
 })
 export class ServicePublishStepSevenComponent extends Reinitable {
 
@@ -54,7 +54,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         private readonly masterManager: MasterManagerService,
         private readonly userSetting: UserSettingsService,
         private readonly extendedLocation: LocationService,
-        private readonly masterLocation: MasterLocationApiService
+        private readonly masterLocation: MasterLocationApiService,
     ) {
         super();
     }
@@ -83,9 +83,9 @@ export class ServicePublishStepSevenComponent extends Reinitable {
             (
                 !this.formService.form.get(ServicePublishStepSevenFormFields.UseMasterSchedule).value &&
                 (JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
-                    ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
+                    ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable,
                 )) === '{}' || JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
-                    ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable
+                    ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable,
                 )) === undefined)
             ) || (
                 this.renderLocation() && !this.isUseDefaultLocation &&
@@ -205,8 +205,8 @@ export class ServicePublishStepSevenComponent extends Reinitable {
         this.masterManager.getMasterList().pipe(
             switchMap(list => list.length > 0 ?
                 this.extendedLocation.getList<MasterLocation>(this.masterLocation) :
-                of(null)
-            )
+                of(null),
+            ),
         ).subscribe((res: MasterLocation[]) => {
             if (res && res.length > 0) {
                 const defaultLocations = this.getCorrectLocations(res);
@@ -224,7 +224,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
                 if (this.checkDefaultLocation(loc)) {
                     ret.push(loc);
                 }
-            }
+            },
         );
 
         return ret;
@@ -242,16 +242,16 @@ export class ServicePublishStepSevenComponent extends Reinitable {
 
     private initDefaultUnits(): void {
         this.userSetting.userSettings$.pipe(
-            first()
+            first(),
         ).subscribe(settings => this.formService.form.get(this.formFields.Units).setValue(settings?.units));
     }
 
     private initSchedules(stepData: StepSevenDataInterface): void {
         this.masterManager.getMasterList().pipe(
             switchMap(list => list.length > 0 ?
-                this.masterScheduleApi.get({professional: list[0].id.toString()}) : of(null)
+                this.masterScheduleApi.get({professional: list[0].id.toString()}) : of(null),
             ),
-            map((res: ApiListResponseInterface<MasterSchedule>) => null === res ? [] : res.results)
+            map((res: ApiListResponseInterface<MasterSchedule>) => null === res ? [] : res.results),
         ).subscribe(masterSchedule => {
             this.masterSchedules = masterSchedule;
             const masterHasSchedules = this.masterSchedules.length > 0;

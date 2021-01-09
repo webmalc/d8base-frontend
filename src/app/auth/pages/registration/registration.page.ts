@@ -9,7 +9,7 @@ import {HelperService} from '@app/core/services/helper.service';
 @Component({
     selector: 'app-registration',
     templateUrl: './registration.page.html',
-    styleUrls: ['./registration.page.scss']
+    styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage {
 
@@ -26,7 +26,7 @@ export class RegistrationPage {
             },
             (err: HttpErrorResponse) => {
                 this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error);
-            }
+            },
         );
     }
 }

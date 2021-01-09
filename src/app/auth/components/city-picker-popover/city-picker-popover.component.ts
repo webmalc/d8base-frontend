@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-city-picker-popover',
     templateUrl: './city-picker-popover.component.html',
-    styleUrls: ['./city-picker-popover.component.scss']
+    styleUrls: ['./city-picker-popover.component.scss'],
 })
 export class CityPickerPopoverComponent implements OnInit {
 
@@ -14,7 +14,7 @@ export class CityPickerPopoverComponent implements OnInit {
 
     constructor(
         private readonly navParams: NavParams,
-        private readonly pop: PopoverController
+        private readonly pop: PopoverController,
     ) {
     }
 

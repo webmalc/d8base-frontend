@@ -12,7 +12,7 @@ describe('EducationComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [EducationComponent],
-            imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(EducationComponent);
@@ -25,7 +25,7 @@ describe('EducationComponent', () => {
             field_of_study: 'test',
             is_still_here: true,
             description: 'desc',
-            start_date: '2010-01-01'
+            start_date: '2010-01-01',
         });
         fixture.detectChanges();
     }));

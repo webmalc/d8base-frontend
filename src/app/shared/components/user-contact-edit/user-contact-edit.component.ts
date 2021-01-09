@@ -17,7 +17,7 @@ import {first, map, shareReplay, switchMap} from 'rxjs/operators';
 @Component({
     selector: 'app-user-contact-edit',
     templateUrl: './user-contact-edit.component.html',
-    styleUrls: ['./user-contact-edit.component.scss']
+    styleUrls: ['./user-contact-edit.component.scss'],
 })
 export class UserContactEditComponent implements OnInit {
 
@@ -36,7 +36,7 @@ export class UserContactEditComponent implements OnInit {
         private readonly contactsApi: ContactApiService,
         private readonly formBuilder: FormBuilder,
         public readonly location: Location,
-        private readonly masterManager: MasterManagerService
+        private readonly masterManager: MasterManagerService,
     ) {
     }
 
@@ -55,7 +55,7 @@ export class UserContactEditComponent implements OnInit {
         forkJoin([
             selectOptions$,
             (this.contactId ? this.clientContactsApiService.getByEntityId(this.contactId)
-                : of<ClientContactInterface>(newContact))
+                : of<ClientContactInterface>(newContact)),
         ]).pipe(first())
             .subscribe(([options, contact]) => {
                 this.selectOptions = options;
@@ -78,14 +78,14 @@ export class UserContactEditComponent implements OnInit {
         const request = this.contactId
             ? this.clientContactsApiService.put({
                 ...this.contact,
-                ...updatedValues
+                ...updatedValues,
             })
             : this.getNewClientContactModel().pipe(
                 switchMap(contact => this.clientContactsApiService.create({
                         ...contact,
-                        ...updatedValues
-                    })
-                )
+                        ...updatedValues,
+                    }),
+                ),
             );
         request.subscribe(() => this.location.back());
     }
@@ -93,7 +93,7 @@ export class UserContactEditComponent implements OnInit {
     private createForm(contact?: ClientContactInterface): void {
         this.form = this.formBuilder.group({
             contact: [{value: contact?.contact, disabled: Boolean(contact?.contact)}, [Validators.required]],
-            value: [contact?.value, [Validators.required]]
+            value: [contact?.value, [Validators.required]],
         });
     }
 
@@ -105,7 +105,7 @@ export class UserContactEditComponent implements OnInit {
                     contact.professional = list[0].id;
 
                     return contact;
-                })
+                }),
             );
         }
 

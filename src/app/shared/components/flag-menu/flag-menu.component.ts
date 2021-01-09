@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 @Component({
     selector: 'app-flag-menu',
     templateUrl: './flag-menu.component.html',
-    styleUrls: ['./flag-menu.component.scss']
+    styleUrls: ['./flag-menu.component.scss'],
 })
 export class FlagMenuComponent {
 
@@ -22,7 +22,7 @@ export class FlagMenuComponent {
         public readonly userSettings: UserSettingsService,
         private readonly darkModeService: DarkModeService,
         userManager: UserManagerService,
-        currency: CurrencyListApiService
+        currency: CurrencyListApiService,
     ) {
         this.darkTheme$ = darkModeService.darkTheme$;
         this.country$ = userManager.getDefaultUserCountry();

@@ -6,5 +6,5 @@ export enum ServicePublishSteps {
     Five = 4,
     Six = 5,
     Seven = 6,
-    Final = 7
+    Final = 7,
 }

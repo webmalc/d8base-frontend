@@ -5,7 +5,7 @@ import {SelectableSearchService} from '@app/shared/abstract/selectable-search.se
 import {IonicSelectableComponent} from 'ionic-selectable';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SelectablePostalCodeOnSearchService extends SelectableSearchService {
 
@@ -18,7 +18,7 @@ export class SelectablePostalCodeOnSearchService extends SelectableSearchService
             event.component,
             event.text,
             this.postalApi,
-            {city: city?.id.toString(10)}
+            {city: city?.id.toString(10)},
         );
     }
 }

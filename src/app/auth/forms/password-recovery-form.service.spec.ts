@@ -7,8 +7,8 @@ describe('PasswordRecoveryFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             FormBuilder,
-            PasswordRecoveryFormService
-        ]
+            PasswordRecoveryFormService,
+        ],
     }));
 
     it('should be created', () => {

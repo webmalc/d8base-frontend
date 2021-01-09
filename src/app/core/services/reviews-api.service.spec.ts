@@ -6,7 +6,7 @@ import {ReviewsApiService} from './reviews-api.service';
 describe('ReviewsApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [ReviewsApiService]
+        providers: [ReviewsApiService],
     }));
 
     it('should be created', () => {

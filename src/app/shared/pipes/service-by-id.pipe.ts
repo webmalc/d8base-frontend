@@ -4,12 +4,12 @@ import {Service} from '@app/service/models/service';
 import {Observable, of} from 'rxjs';
 
 @Pipe({
-    name: 'serviceById$'
+    name: 'serviceById$',
 })
 export class ServiceByIdPipe implements PipeTransform {
 
     constructor(
-        private readonly serviceCache: ServicesApiCache
+        private readonly serviceCache: ServicesApiCache,
     ) {
     }
 

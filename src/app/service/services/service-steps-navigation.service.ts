@@ -10,13 +10,13 @@ export class ServiceStepsNavigationService {
 
     public next(): void {
         this.chainManager.getNextPage(this.router.url).subscribe(
-            url => this.router.navigateByUrl(url)
+            url => this.router.navigateByUrl(url),
         );
     }
 
     public previous(): void {
         this.chainManager.getPreviousPage(this.router.url).subscribe(
-            url => this.router.navigateByUrl(url)
+            url => this.router.navigateByUrl(url),
         );
     }
 }

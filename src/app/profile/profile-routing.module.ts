@@ -10,51 +10,51 @@ const routes: Routes = [
     {
         path: '',
         component : ProfilePage,
-        canActivate: [MainGuard]
+        canActivate: [MainGuard],
     },
     {
         path: 'contact-edit/:contact-id',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: {isMaster: false}
+        data: {isMaster: false},
     },
     {
         path: 'contact-add',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: {isMaster: false}
+        data: {isMaster: false},
     },
     {
         path: 'contact-add-default/:default-contact-id',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: {isMaster: false}
+        data: {isMaster: false},
     },
     {
         path: 'location-edit/:location-id',
         loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
-        canActivate: [MainGuard]
+        canActivate: [MainGuard],
     },
     {
         path: 'location-add',
         loadChildren: () => import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
-        canActivate: [MainGuard]
+        canActivate: [MainGuard],
     },
     {
         path: 'edit',
         component: UserEditComponent,
-        canActivate: [MainGuard]
+        canActivate: [MainGuard],
     },
     {
         path: 'about',
         component: AboutEditComponent,
-        canActivate: [MainGuard]
-    }
+        canActivate: [MainGuard],
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class ProfilePageRoutingModule {
 }

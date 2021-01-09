@@ -9,8 +9,8 @@ describe('DefaultLocationStorageService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         });
         service = TestBed.inject(DefaultLocationStorageService);
     });

@@ -18,7 +18,7 @@ import { searchFilterStateInterfaceToSearchListParamsAdapter } from './search-pa
     selector: 'app-search',
     templateUrl: './search-page.component.html',
     styleUrls: ['./search-page.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPage extends Reinitable implements OnDestroy, OnInit {
     public searchNeedle: string;
@@ -32,7 +32,7 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
         public readonly platform: Platform,
         private readonly location: Location,
         private readonly state: SearchFilterStateService,
-        private readonly cd: ChangeDetectorRef
+        private readonly cd: ChangeDetectorRef,
     ) {
         super();
     }
@@ -79,7 +79,7 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
             .searchList({ ...params, query: this.searchNeedle ?? '' })
             .pipe(
                 map((response: PaginatedResult) => response.results),
-                takeUntil(this.ngDestroy$)
+                takeUntil(this.ngDestroy$),
             )
             .subscribe((results: Search[]) => {
                 this.searchResult = results;

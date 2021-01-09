@@ -24,20 +24,20 @@ describe('ClientDetailsStepComponent', () => {
                     TranslateModule.forRoot(),
                     RouterTestingModule,
                     IonicStorageModule.forRoot(),
-                    HttpClientTestingModule
+                    HttpClientTestingModule,
                 ],
                 providers: [
                     OrderWizardStateService,
                     UserManagerService,
                     FormBuilder,
-                    ChangeDetectorRef
-                ]
+                    ChangeDetectorRef,
+                ],
             }).compileComponents();
 
             fixture = TestBed.createComponent(ClientDetailsStepComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
-        })
+        }),
     );
 
     it('should create', () => {

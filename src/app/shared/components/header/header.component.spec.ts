@@ -14,7 +14,7 @@ describe('HeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         const storageMock: Partial<Storage> = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-            set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null))
+            set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
         };
         TestBed.configureTestingModule({
             declarations: [HeaderComponent],
@@ -23,11 +23,11 @@ describe('HeaderComponent', () => {
                 IonicStorageModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
-                {provide: Storage, useValue: storageMock}
-            ]
+                {provide: Storage, useValue: storageMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(HeaderComponent);

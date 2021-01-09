@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
  *  Ionic Geolocation service proxy
  */
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class GeolocationService {
 

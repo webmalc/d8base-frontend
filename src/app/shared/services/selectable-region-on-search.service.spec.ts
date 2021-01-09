@@ -6,7 +6,7 @@ import {SelectableRegionOnSearchService} from './selectable-region-on-search.ser
 describe('SelectableRegionOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [SelectableRegionOnSearchService]
+        providers: [SelectableRegionOnSearchService],
     }));
 
     it('should be created', () => {

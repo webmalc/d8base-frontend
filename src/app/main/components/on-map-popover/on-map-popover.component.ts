@@ -10,7 +10,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-on-map-popover',
     templateUrl: './on-map-popover.component.html',
-    styleUrls: ['./on-map-popover.component.scss']
+    styleUrls: ['./on-map-popover.component.scss'],
 })
 export class OnMapPopoverComponent implements OnInit {
 
@@ -23,7 +23,7 @@ export class OnMapPopoverComponent implements OnInit {
         public readonly countrySelectable: SelectableCountryOnSearchService,
         public readonly citySelectable: SelectableCityOnSearchService,
         private readonly navParams: NavParams,
-        private readonly popover: PopoverController
+        private readonly popover: PopoverController,
     ) {
     }
 
@@ -52,7 +52,7 @@ export class OnMapPopoverComponent implements OnInit {
         if (data.coordinates && data.coordinates.length === 2) {
             this.data.coordinates = {
                 latitude: data.coordinates[1],
-                longitude: data.coordinates[0]
+                longitude: data.coordinates[0],
             };
         } else {
             this.data.coordinates = undefined;
@@ -64,7 +64,7 @@ export class OnMapPopoverComponent implements OnInit {
         if (this.mapCoords?.coordinates && this.mapCoords.coordinates.length === 2) {
             this.data.coordinates = {
                 latitude: this.mapCoords.coordinates[1],
-                longitude: this.mapCoords.coordinates[0]
+                longitude: this.mapCoords.coordinates[0],
             };
         } else {
             this.data.coordinates = undefined;

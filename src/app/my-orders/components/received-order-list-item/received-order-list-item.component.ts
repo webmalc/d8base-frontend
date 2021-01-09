@@ -8,7 +8,7 @@ import {Service} from '@app/service/models/service';
 @Component({
     selector: 'app-received-order-list-item',
     templateUrl: './received-order-list-item.component.html',
-    styleUrls: ['./received-order-list-item.component.scss']
+    styleUrls: ['./received-order-list-item.component.scss'],
 })
 export class ReceivedOrderListItemComponent {
 
@@ -19,7 +19,7 @@ export class ReceivedOrderListItemComponent {
 
     constructor(
         private readonly servicesCache: ServicesApiCache,
-        private readonly changeDetector: ChangeDetectorRef
+        private readonly changeDetector: ChangeDetectorRef,
     ) {
     }
 

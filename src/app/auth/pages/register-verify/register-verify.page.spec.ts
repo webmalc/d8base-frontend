@@ -14,8 +14,8 @@ describe('RegisterVerifyPage', () => {
             imports: [
                 IonicModule,
                 HttpClientTestingModule,
-                RouterTestingModule
-            ]
+                RouterTestingModule,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(RegisterVerifyPage);

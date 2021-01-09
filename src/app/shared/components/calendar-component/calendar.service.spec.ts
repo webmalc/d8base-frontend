@@ -7,7 +7,7 @@ describe('CalendarService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [CalendarService]
+            providers: [CalendarService],
         });
         service = TestBed.inject(CalendarService);
     });

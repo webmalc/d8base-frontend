@@ -17,7 +17,7 @@ describe('LanguageApiService', () => {
         languagesApiService.getLanguages$().subscribe(
             languages => {
                 expect(languages).toEqual([]);
-            }
+            },
         );
     });
 
@@ -32,12 +32,12 @@ describe('LanguageApiService', () => {
             [
                 {
                     code: 'ru',
-                    name: 'russian'
+                    name: 'russian',
                 },
                 {
                     code: 'en',
-                    name: 'english'
-                }
+                    name: 'english',
+                },
             ];
 
         apiClientServiceSpy.get.and.returnValue(of(data));
@@ -45,9 +45,9 @@ describe('LanguageApiService', () => {
             languages => {
                 expect(languages).toEqual([
                     language1,
-                    language2
+                    language2,
                 ]);
-            }
+            },
         );
     });
 });

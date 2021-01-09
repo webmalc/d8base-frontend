@@ -15,9 +15,9 @@ import { takeUntil } from 'rxjs/operators';
     providers: [
         {
             provide: StepComponent,
-            useExisting: forwardRef(() => ClientDetailsStepComponent)
-        }
-    ]
+            useExisting: forwardRef(() => ClientDetailsStepComponent),
+        },
+    ],
 })
 export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepData> implements OnInit {
     public formFields = OrderClientDetailsFormFields;
@@ -27,7 +27,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
         [this.formFields.LastName]: [''],
         [this.formFields.Email]: [''],
         [this.formFields.Phone]: ['', Validators.required],
-        [this.formFields.Comment]: ['']
+        [this.formFields.Comment]: [''],
     });
 
     private readonly userFields = [this.formFields.FirstName, this.formFields.LastName, this.formFields.Email, this.formFields.Phone];
@@ -37,7 +37,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     constructor(
         private readonly userManager: UserManagerService,
         private readonly fb: FormBuilder,
-        protected readonly cd: ChangeDetectorRef
+        protected readonly cd: ChangeDetectorRef,
     ) {
         super(cd);
     }
@@ -57,8 +57,8 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
             {
                 ...(!isForMe ? data : {}),
                 [this.formFields.IsForMe]: isForMe,
-                [this.formFields.Comment]: data[this.formFields.Comment]
-            }
+                [this.formFields.Comment]: data[this.formFields.Comment],
+            },
         );
         this.disableUserFields(isForMe);
     }
@@ -81,9 +81,9 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
                 this.currentUserForm = this.userFields.reduce(
                     (allFields, currentField) => ({
                         ...allFields,
-                        [currentField]: user?.[currentField] ?? ''
+                        [currentField]: user?.[currentField] ?? '',
                     }),
-                    {}
+                    {},
                 ) as ClientDetailsStepData;
             });
     }
@@ -99,7 +99,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
         return {
             ...this.currentUserForm,
             ...this.form.value,
-            [this.formFields.IsForMe]: !this.form.get(this.formFields.IsForMe).value
+            [this.formFields.IsForMe]: !this.form.get(this.formFields.IsForMe).value,
         };
     }
 

@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 @Component({
     selector: 'app-master-picker-popover',
     templateUrl: './master-picker-popover.component.html',
-    styleUrls: ['./master-picker-popover.component.scss']
+    styleUrls: ['./master-picker-popover.component.scss'],
 })
 export class MasterPickerPopoverComponent {
 

@@ -5,8 +5,8 @@ import {ProfileFormFields} from '@app/profile/enums/profile-form-fields';
 import {Language} from '@app/profile/models/language';
 
 @Injectable({
-        providedIn: 'root'
-    }
+        providedIn: 'root',
+    },
 )
 export class ProfileFormService {
 
@@ -19,36 +19,36 @@ export class ProfileFormService {
                     user.first_name, [
                         Validators.required,
                         Validators.minLength(1),
-                        Validators.maxLength(20)
-                    ]
+                        Validators.maxLength(20),
+                    ],
                 ],
                 [ProfileFormFields.LastName]: [
                     user.last_name,
                     [
                         Validators.required,
                         Validators.minLength(1),
-                        Validators.maxLength(20)
-                    ]
+                        Validators.maxLength(20),
+                    ],
                 ],
                 [ProfileFormFields.Patronymic]: [
                     user.patronymic,
                     [
                         Validators.minLength(1),
-                        Validators.maxLength(20)
-                    ]
+                        Validators.maxLength(20),
+                    ],
                 ],
                 [ProfileFormFields.Email]: [
                     user.email,
                     [
                         Validators.required,
-                        Validators.email
-                    ]
+                        Validators.email,
+                    ],
                 ],
                 [ProfileFormFields.Gender]: [
                     user.gender?.toString(),
-                    [Validators.required]
-                ]
-            }
+                    [Validators.required],
+                ],
+            },
         );
     }
 }

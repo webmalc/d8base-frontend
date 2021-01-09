@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterScheduleApiService extends AbstractApiService<MasterSchedule> {
 
@@ -21,7 +21,7 @@ export class MasterScheduleApiService extends AbstractApiService<MasterSchedule>
 
     public createSet(data: MasterSchedule[]): Observable<MasterSchedule[]> {
         return this.client.post<MasterSchedule[], MasterSchedule[]>(this.setUrl, data).pipe(
-            map(raw => plainToClass(MasterSchedule, raw))
+            map(raw => plainToClass(MasterSchedule, raw)),
         );
     }
 

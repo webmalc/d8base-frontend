@@ -3,7 +3,7 @@ import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interfa
 import {AuthenticationService} from '@app/core/services/authentication.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AuthenticationFactory {
 

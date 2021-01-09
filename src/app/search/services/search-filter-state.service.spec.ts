@@ -6,8 +6,8 @@ describe('SearchFilterStateService', () => {
     beforeEach(() =>
         TestBed.configureTestingModule({
             imports: [RouterTestingModule],
-            providers: [SearchFilterStateService]
-        })
+            providers: [SearchFilterStateService],
+        }),
     );
 
     it('should be created', () => {

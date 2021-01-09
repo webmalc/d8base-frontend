@@ -3,5 +3,5 @@ export enum ServicePublishStepFourFormFields {
     Password = 'password',
     Confirm = 'password_confirm',
     Country = 'country',
-    City = 'city'
+    City = 'city',
 }

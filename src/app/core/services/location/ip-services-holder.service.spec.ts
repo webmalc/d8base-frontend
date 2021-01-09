@@ -8,14 +8,14 @@ import {IpnfDataService} from './ipnf-data.service';
 describe('IpServicesHolderService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             IpServicesHolderService,
             IpApiService,
             IpDataService,
-            IpnfDataService
-        ]
+            IpnfDataService,
+        ],
     }));
 
     it('should be created', () => {

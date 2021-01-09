@@ -42,13 +42,13 @@ export class HeadersInterceptor implements HttpInterceptor {
                     }
 
                     return next.handle(req.clone({headers}));
-                })
+                }),
             );
     }
 
     private getAuthUrls(): string[] {
         return [
-            environment.backend.url + environment.backend.refresh
+            environment.backend.url + environment.backend.refresh,
         ];
     }
 }

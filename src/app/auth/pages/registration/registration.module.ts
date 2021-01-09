@@ -25,18 +25,18 @@ import {RegistrationPage} from './registration.page';
         SharedModule,
         ReactiveFormsModule,
         TranslateModule,
-        IonicSelectableModule
+        IonicSelectableModule,
     ],
     declarations: [
         RegistrationPage,
         RegistrationFormComponent,
-        CityPickerPopoverComponent
+        CityPickerPopoverComponent,
     ],
     providers: [
         TokenManagerService,
         RegistrationFormService,
-        RegistrationService
-    ]
+        RegistrationService,
+    ],
 })
 export class RegistrationPageModule {
 }

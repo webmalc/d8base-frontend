@@ -16,7 +16,7 @@ export class UserLocation implements ClientLocationInterface {
     @Expose() public address: string;
     @Expose() public coordinates: {
         type: string,
-        coordinates: number[]
+        coordinates: number[],
     };
     @Expose() public units: number;
     @Expose() public timezone: string;

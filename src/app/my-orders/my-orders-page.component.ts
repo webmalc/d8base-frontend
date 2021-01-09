@@ -10,20 +10,20 @@ import {map} from 'rxjs/operators';
     selector: 'app-my-orders-page',
     templateUrl: './my-orders-page.component.html',
     styleUrls: ['./my-orders-page.component.scss'],
-    providers: [ServicesApiCache, MasterReadonlyApiCacheService]
+    providers: [ServicesApiCache, MasterReadonlyApiCacheService],
 })
 export class MyOrdersPageComponent {
     public state$: Observable<{ isMaster: boolean, isInbox: boolean }>;
 
     constructor(
         masterManager: MasterManagerService,
-        route: ActivatedRoute
+        route: ActivatedRoute,
     ) {
         this.state$ = combineLatest([
             masterManager.isMaster$.asObservable(),
-            route.data
+            route.data,
         ]).pipe(
-            map(([isMaster, data]) => ({isMaster, isInbox: data.isInbox}))
+            map(([isMaster, data]) => ({isMaster, isInbox: data.isInbox})),
         );
     }
 }

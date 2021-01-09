@@ -19,23 +19,23 @@ export class SettingsFormService {
         return this.form = this.formBuilder.group({
             [UserSettingsFromFields.Language]: [
                 userSettings?.language, [
-                    AppValidators.restrictEnum(this.languages?.map(lang => lang.value))
-                ]
+                    AppValidators.restrictEnum(this.languages?.map(lang => lang.value)),
+                ],
             ],
             [UserSettingsFromFields.Currency]: [
                 userSettings?.currency, [
-                    AppValidators.restrictEnum(this.currency?.map(cur => cur.value))
-                ]
+                    AppValidators.restrictEnum(this.currency?.map(cur => cur.value)),
+                ],
             ],
             [UserSettingsFromFields.Units]: [
-                userSettings?.units?.toString(10)
-            ]
+                userSettings?.units?.toString(10),
+            ],
         });
     }
 
     public setLists(
         languagesList: Array<{ value: string, display_name: string }>,
-        currencyList: Array<{ value: string, display_name: string }>
+        currencyList: Array<{ value: string, display_name: string }>,
     ): void {
         this.languages = languagesList;
         this.currency = currencyList;

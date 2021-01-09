@@ -18,7 +18,7 @@ describe('SavedProfessionalApiService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [SavedProfessionalApiService]
+            providers: [SavedProfessionalApiService],
         });
         service = TestBed.inject(SavedProfessionalApiService);
         httpTestingController = TestBed.inject(HttpTestingController);
@@ -44,7 +44,7 @@ describe('SavedProfessionalApiService', () => {
             data => {
                 expect(data.length).toBe(2);
                 expect(data).toEqual(resultFixtures);
-            }
+            },
         );
 
         const request = httpTestingController
@@ -62,7 +62,7 @@ describe('SavedProfessionalApiService', () => {
         answer.professional = master.id;
 
         service.create(answer).subscribe(
-            data => expect(data).toEqual(answer)
+            data => expect(data).toEqual(answer),
         );
 
         const request = httpTestingController
@@ -77,7 +77,7 @@ describe('SavedProfessionalApiService', () => {
         const answer = SavedProfessionalFixture.create();
 
         service.getById(answer.id).subscribe(
-            data => expect(data).toEqual(answer)
+            data => expect(data).toEqual(answer),
         );
 
         const request = httpTestingController
@@ -92,7 +92,7 @@ describe('SavedProfessionalApiService', () => {
         const bookmark = BookmarkFixture.create(master);
 
         service.remove(bookmark).subscribe(
-            data => expect(data).toBeNull()
+            data => expect(data).toBeNull(),
         );
 
         const request = httpTestingController

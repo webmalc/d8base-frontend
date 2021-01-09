@@ -9,7 +9,7 @@ import {BehaviorSubject, from, Observable, of} from 'rxjs';
 import {catchError, first, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserSettingsService {
 
@@ -23,7 +23,7 @@ export class UserSettingsService {
     constructor(
         private readonly userSettingsApi: UserSettingsApiService,
         private readonly storage: StorageManagerService,
-        private readonly auth: AuthenticationService
+        private readonly auth: AuthenticationService,
     ) {
         this.userSettings$ = this.settings$.asObservable();
     }
@@ -36,21 +36,21 @@ export class UserSettingsService {
     public setCurrency(currency: string): void {
         this.userSettings$.pipe(
             first(),
-            switchMap(settings => settings && (settings.currency !== currency) ? this.doRequest({currency}) : of())
+            switchMap(settings => settings && (settings.currency !== currency) ? this.doRequest({currency}) : of()),
         ).subscribe();
     }
 
     public setUserAppLang(language: string): void {
         this.userSettings$.pipe(
             first(),
-            switchMap(settings => settings && (settings.language !== language) ? this.doRequest({language}) : of())
+            switchMap(settings => settings && (settings.language !== language) ? this.doRequest({language}) : of()),
         ).subscribe();
     }
 
     public setUnits(units: number): void {
         this.userSettings$.pipe(
             first(),
-            switchMap(settings => settings && (settings.units !== units) ? this.doRequest({units}) : of())
+            switchMap(settings => settings && (settings.units !== units) ? this.doRequest({units}) : of()),
         ).subscribe();
     }
 
@@ -59,8 +59,8 @@ export class UserSettingsService {
             first(),
             switchMap(settings => settings && (settings.is_last_name_hidden !== isLastNameHidden) ?
                 this.doRequest({is_last_name_hidden: isLastNameHidden}) :
-                of()
-            )
+                of(),
+            ),
         ).subscribe();
     }
 
@@ -69,8 +69,8 @@ export class UserSettingsService {
             switchMap(settings => null === settings ? this.getLocalSettings() : of(settings)),
             switchMap(settings => !settings.id ?
                 this.createSettings(Object.assign(settings, data)) :
-                this.patchSettings(Object.assign(settings, data))
-            )
+                this.patchSettings(Object.assign(settings, data)),
+            ),
         );
     }
 
@@ -78,7 +78,7 @@ export class UserSettingsService {
         return this.auth.isAuthenticated$.pipe(
             first(),
             switchMap(isAuth => isAuth ? this.userSettingsApi.patch(data) : of(data)),
-            tap(settings => this.setSettings(settings))
+            tap(settings => this.setSettings(settings)),
         );
     }
 
@@ -86,7 +86,7 @@ export class UserSettingsService {
         return this.auth.isAuthenticated$.pipe(
             first(),
             switchMap(isAuth => isAuth ? this.userSettingsApi.create(data) : of(data)),
-            tap(settings => this.setSettings(settings))
+            tap(settings => this.setSettings(settings)),
         );
     }
 
@@ -95,14 +95,14 @@ export class UserSettingsService {
             first(),
             switchMap(isAuth => !isAuth ? this.getLocalSettings() : this.getFromApi()),
             switchMap(res => null === res ? this.getLocalSettings() : of(res)),
-            tap(data => this.setSettings(data))
+            tap(data => this.setSettings(data)),
         );
     }
 
     private getLocalSettings(): Observable<UserSettings> {
         return this.userSettings$.pipe(
             first(),
-            switchMap(settings => null === settings ? from(this.pullFromStorage()) : of(settings))
+            switchMap(settings => null === settings ? from(this.pullFromStorage()) : of(settings)),
         );
     }
 
@@ -114,7 +114,7 @@ export class UserSettingsService {
     private getFromApi(): Observable<UserSettings | null> {
         return this.userSettingsApi.get().pipe(
             map(res => 0 === res.count ? null : res.results[0]),
-            catchError(_ => of(null))
+            catchError(_ => of(null)),
         );
     }
 

@@ -5,7 +5,7 @@ import { SearchFilterStateService } from '@app/search/services/search-filter-sta
 @Component({
     selector: 'app-search-filters',
     templateUrl: './search-filters.component.html',
-    styleUrls: ['./search-filters.component.scss']
+    styleUrls: ['./search-filters.component.scss'],
 })
 export class SearchFiltersComponent {
     public defaultTab: string = SearchFiltersSubmenu.Main;

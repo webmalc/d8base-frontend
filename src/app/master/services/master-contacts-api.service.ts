@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterContactsApiService extends AbstractApiService<ClientContactInterface>
     implements ContactsApiServiceInterface {
@@ -24,7 +24,7 @@ export class MasterContactsApiService extends AbstractApiService<ClientContactIn
 
     public getByClientId(
         masterId: number,
-        params?: { [param: string]: string | string[]; }
+        params?: { [param: string]: string | string[]; },
     ): Observable<ApiListResponseInterface<MasterContact>> {
         return super.get({professional: masterId.toString(10), ...params});
     }
@@ -35,7 +35,7 @@ export class MasterContactsApiService extends AbstractApiService<ClientContactIn
                 response.results = plainToClass(MasterContact, response.results);
 
                 return response;
-            })
+            }),
         );
     }
 

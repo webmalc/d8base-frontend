@@ -14,7 +14,7 @@ describe('SummaryStepComponent', () => {
         TestBed.configureTestingModule({
             declarations: [SummaryStepComponent],
             imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
-            providers: [OrderWizardStateService]
+            providers: [OrderWizardStateService],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SummaryStepComponent);

@@ -30,7 +30,7 @@ class HttpMock {
                 expires_in: 3600,
                 token_type: 'Bearer',
                 scope: 'read write groups',
-                refresh_token: 'refreshedRefreshToken'
+                refresh_token: 'refreshedRefreshToken',
             });
         }
 
@@ -39,7 +39,7 @@ class HttpMock {
             expires_in: 3600,
             token_type: 'Bearer',
             scope: 'read write groups',
-            refresh_token: 'refresh_token'
+            refresh_token: 'refresh_token',
         });
     }
 }
@@ -56,8 +56,8 @@ describe('AuthenticationService', () => {
             providers: [
                 {provide: ApiClientService, useClass: HttpMock},
                 TokenManagerService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         });
 
         service = TestBed.inject(AuthenticationService);
@@ -72,7 +72,7 @@ describe('AuthenticationService', () => {
     xit('test #login', (done) => {
         const credentials: Credentials = {
             username: 'test_user',
-            password: 'test_pass'
+            password: 'test_pass',
         };
 
         service.login(credentials).subscribe(
@@ -81,9 +81,9 @@ describe('AuthenticationService', () => {
                     token => {
                         expect(token).toEqual('access_token');
                         done();
-                    }
+                    },
                 );
-            }
+            },
         );
     });
 
@@ -93,14 +93,14 @@ describe('AuthenticationService', () => {
             expires_in: 3600,
             token_type: 'Bearer',
             scope: 'read write groups',
-            refresh_token: 'refresh_token'
+            refresh_token: 'refresh_token',
         }).then(
             _ => ((service as any).tokenManager as any).needToRefresh().then(
                 res => {
                     expect(res).toBeFalse();
                     done();
-                }
-            )
+                },
+            ),
         );
     });
 
@@ -110,7 +110,7 @@ describe('AuthenticationService', () => {
             expires_in: 3600,
             token_type: 'Bearer',
             scope: 'read write groups',
-            refresh_token: 'refresh_token'
+            refresh_token: 'refresh_token',
         })).subscribe();
         flush();
         service.refresh().subscribe();
@@ -119,12 +119,12 @@ describe('AuthenticationService', () => {
         (service as any).tokenManager.getAccessToken().then(
             token => {
                 expect(token).toEqual('refreshedAccessToken');
-            }
+            },
         );
         (service as any).tokenManager.getRefreshToken().then(
             token => {
                 expect(token).toEqual('refreshedRefreshToken');
-            }
+            },
         );
     }));
 
@@ -134,7 +134,7 @@ describe('AuthenticationService', () => {
             expires_in: 3600,
             token_type: 'Baerer',
             scope: 'read write groups',
-            refresh_token: 'refresh_token'
+            refresh_token: 'refresh_token',
         })
             .then(
                 _ => {
@@ -144,11 +144,11 @@ describe('AuthenticationService', () => {
                                 res => {
                                     expect(res).toBeFalse();
                                     done();
-                                }
+                                },
                             );
-                        }
+                        },
                     );
-                }
+                },
             );
     });
 });

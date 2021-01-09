@@ -8,21 +8,21 @@ const routes: Routes = [
     {
         path: '',
         redirectTo: 'list',
-        pathMatch: 'full'
+        pathMatch: 'full',
     },
     {
         path: 'list',
-        component: ChatsComponent
+        component: ChatsComponent,
     },
     {
         path: 'chat/:interlocutor-id',
-        component: DirectComponent
-    }
+        component: DirectComponent,
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class MessagePageRoutingModule {
 }

@@ -22,16 +22,16 @@ export class MessageListUpdaterService {
         this.destroy();
 
         return NotificationWorkerService.isFirebaseSupported() ? this.notificationWorker.messageReceived$.pipe(
-            switchMap(() => this.getMessageList(interlocutorId))
+            switchMap(() => this.getMessageList(interlocutorId)),
         ) : new Observable<ApiListResponseInterface<Message>>(
             subscriber => {
                 this.timer = setInterval(() => this.messagesListApi.getByInterlocutor(
-                    interlocutorId, this.messagesPerPage
+                    interlocutorId, this.messagesPerPage,
                 ).subscribe(
                     data => subscriber.next(data),
-                    err => console.error(err)
+                    err => console.error(err),
                 ), this.updateInterval);
-            }
+            },
         );
     }
 

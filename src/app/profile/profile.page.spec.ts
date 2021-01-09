@@ -30,16 +30,16 @@ describe('ProfilePage', () => {
                 TranslateModule.forRoot(),
                 HttpClientTestingModule,
                 ReactiveFormsModule,
-                FormsModule
+                FormsModule,
             ],
             providers: [
                 {
                     provide: MasterManagerService,
-                    useClass: MasterManagerServiceStub
+                    useClass: MasterManagerServiceStub,
                 },
                 ProfileService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ProfilePage);

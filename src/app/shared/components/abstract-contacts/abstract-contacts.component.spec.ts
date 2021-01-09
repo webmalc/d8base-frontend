@@ -11,7 +11,7 @@ describe('AbstractContactsComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [AbstractContactsComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(AbstractContactsComponent);

@@ -20,7 +20,7 @@ describe('TagsSelectInputComponent', () => {
                 count: 0,
                 previous: null,
                 next: null,
-                results: []
+                results: [],
             };
 
             return of(data);
@@ -34,9 +34,9 @@ describe('TagsSelectInputComponent', () => {
             providers: [
                 {
                     provide: TagsApiService,
-                    useClass: TagsApiServiceStub
-                }
-            ]
+                    useClass: TagsApiServiceStub,
+                },
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(TagsSelectInputComponent);

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class IsUserRegisteredApiService {
 
@@ -17,7 +17,7 @@ export class IsUserRegisteredApiService {
     public isEmailRegistered(email: string): Observable<boolean> {
         // @ts-ignore
         return this.client.post<{ is_registered: boolean }>(this.url, {email}).pipe(
-            map((val: { is_registered: boolean }) => val.is_registered)
+            map((val: { is_registered: boolean }) => val.is_registered),
         );
     }
 }

@@ -30,13 +30,13 @@ describe('UserContactEditComponent', () => {
                             paramMap: {
                                 get(): string {
                                     return '';
-                                }
-                            }
-                        }, data: of({isMaster: false})
-                    }
+                                },
+                            },
+                        }, data: of({isMaster: false}),
+                    },
                 },
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(UserContactEditComponent);

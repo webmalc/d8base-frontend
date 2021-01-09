@@ -7,12 +7,12 @@ import {MessagesListApiService} from './messages-list-api.service';
 describe('MessageListUpdaterService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             MessageListUpdaterService,
-            MessagesListApiService
-        ]
+            MessagesListApiService,
+        ],
     }));
 
     it('should be created', () => {

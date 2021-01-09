@@ -13,7 +13,7 @@ describe('MainMenuComponent', () => {
     beforeEach(waitForAsync(() => {
         const storageMock: Partial<Storage> = {
             get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-            set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null))
+            set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
         };
         TestBed.configureTestingModule({
             declarations: [MainMenuComponent],
@@ -21,11 +21,11 @@ describe('MainMenuComponent', () => {
                 RouterTestingModule,
                 IonicStorageModule.forRoot(),
                 TranslateModule.forRoot(),
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ],
             providers: [
-                {provide: Storage, useValue: storageMock}
-            ]
+                {provide: Storage, useValue: storageMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MainMenuComponent);

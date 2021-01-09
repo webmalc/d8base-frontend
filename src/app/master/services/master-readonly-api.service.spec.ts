@@ -6,11 +6,11 @@ import {MasterReadonlyApiService} from './master-readonly-api.service';
 describe('MasterReadonlyApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            MasterReadonlyApiService
-        ]
+            MasterReadonlyApiService,
+        ],
     }));
 
     it('should be created', () => {

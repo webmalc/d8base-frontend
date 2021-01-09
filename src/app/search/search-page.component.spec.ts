@@ -18,8 +18,8 @@ describe('SearchPage', () => {
             providers: [
                 SearchService,
                 {provide: Platform, useValue: {width: () => 1000}},
-                SearchFilterStateService
-            ]
+                SearchFilterStateService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchPage);

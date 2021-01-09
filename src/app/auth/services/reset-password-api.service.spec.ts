@@ -6,11 +6,11 @@ import {ResetPasswordApiService} from './reset-password-api.service';
 describe('ResetPasswordApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ResetPasswordApiService
-        ]
+            ResetPasswordApiService,
+        ],
     }));
 
     it('should be created', () => {

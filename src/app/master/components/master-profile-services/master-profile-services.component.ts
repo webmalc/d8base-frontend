@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 @Component({
     selector: 'app-master-profile-services',
     templateUrl: './master-profile-services.component.html',
-    styleUrls: ['./master-profile-services.component.scss']
+    styleUrls: ['./master-profile-services.component.scss'],
 })
 export class MasterProfileServicesComponent {
 
@@ -24,7 +24,7 @@ export class MasterProfileServicesComponent {
         private readonly servicesApi: ServicesApiService,
         private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
         private readonly alertController: AlertController,
-        private readonly translate: TranslateService
+        private readonly translate: TranslateService,
     ) {
     }
 
@@ -47,14 +47,14 @@ export class MasterProfileServicesComponent {
             buttons: [
                 {
                     text: this.translate.instant('delete-confirmation.cancel'),
-                    role: 'cancel'
+                    role: 'cancel',
                 }, {
                     text: this.translate.instant('delete-confirmation.okay'),
                     handler: () => {
                         this.servicesApi.delete(service).subscribe(() => this.init());
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         });
 
         await alert.present();

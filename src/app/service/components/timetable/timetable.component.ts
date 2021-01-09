@@ -6,7 +6,7 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 @Component({
     selector: 'app-timetable',
     templateUrl: './timetable.component.html',
-    styleUrls: ['./timetable.component.scss']
+    styleUrls: ['./timetable.component.scss'],
 })
 export class TimetableComponent {
 
@@ -14,14 +14,14 @@ export class TimetableComponent {
 
     constructor(
         public servicePublishDataHolderService: ServicePublishDataHolderService,
-        public location: Location
+        public location: Location,
     ) {
     }
 
     public async saveTimetable(timetable: AbstractSchedule[]): Promise<void> {
         await this.servicePublishDataHolderService.assignStepData(
             this.STEP,
-            {timetable}
+            {timetable},
         );
         this.location.back();
     }

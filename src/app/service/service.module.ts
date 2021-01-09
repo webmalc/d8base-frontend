@@ -63,7 +63,7 @@ import {ServicePage} from './service.page';
         IonicSelectableModule,
         NgxDropzoneModule,
         BrMaskerModule,
-        RegistrationPageModule
+        RegistrationPageModule,
     ],
     declarations: [
         ServicePage,
@@ -78,7 +78,7 @@ import {ServicePage} from './service.page';
         DepartureComponent,
         ServicePublishFinalStepComponent,
         MasterPickerPopoverComponent,
-        ServiceDetailsPageComponent
+        ServiceDetailsPageComponent,
     ],
     providers: [
         PricesApiService,
@@ -108,7 +108,7 @@ import {ServicePage} from './service.page';
         StepSevenHandlerService,
         StepFinalHandlerService,
         ServicePublishAuthStateManagerService,
-        ServicePublishGuardService
-    ]
+        ServicePublishGuardService,
+    ],
 })
 export class ServicePageModule {}

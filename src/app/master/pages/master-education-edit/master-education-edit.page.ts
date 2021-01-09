@@ -9,7 +9,7 @@ import {AbstractModelEditPage} from '@app/shared/abstract/abstract-model-edit-pa
 @Component({
     selector: 'app-master-education-edit',
     templateUrl: './master-education-edit.page.html',
-    styleUrls: ['./master-education-edit.page.scss']
+    styleUrls: ['./master-education-edit.page.scss'],
 })
 export class MasterEducationEditPage extends AbstractModelEditPage<Education> {
 
@@ -17,7 +17,7 @@ export class MasterEducationEditPage extends AbstractModelEditPage<Education> {
         protected readonly educationApi: EducationApiService,
         protected readonly route: ActivatedRoute,
         protected readonly masterManager: MasterManagerService,
-        protected readonly location: Location
+        protected readonly location: Location,
     ) {
         super(route, educationApi, masterManager);
     }

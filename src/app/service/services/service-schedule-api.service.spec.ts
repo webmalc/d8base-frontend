@@ -6,11 +6,11 @@ import {ServiceScheduleApiService} from './service-schedule-api.service';
 describe('ServiceScheduleApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ServiceScheduleApiService
-        ]
+            ServiceScheduleApiService,
+        ],
     }));
 
     it('should be created', () => {

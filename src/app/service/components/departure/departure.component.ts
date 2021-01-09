@@ -7,7 +7,7 @@ import {ServicePublishDataHolderService} from '@app/service/services/service-pub
 @Component({
     selector: 'app-departure',
     templateUrl: './departure.component.html',
-    styleUrls: ['./departure.component.scss']
+    styleUrls: ['./departure.component.scss'],
 })
 export class DepartureComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class DepartureComponent implements OnInit {
     constructor(
         public formService: ServicePublishStepSevenDepartureFormService,
         private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-        private readonly location: Location
+        private readonly location: Location,
     ) {
     }
 
@@ -34,7 +34,7 @@ export class DepartureComponent implements OnInit {
     public submitForm(): void {
         this.servicePublishDataHolder.assignStepData(
             this.STEP,
-            {[DepartureComponent.departureDataKey]: this.formService.form.getRawValue()}
+            {[DepartureComponent.departureDataKey]: this.formService.form.getRawValue()},
         );
         this.location.back();
     }

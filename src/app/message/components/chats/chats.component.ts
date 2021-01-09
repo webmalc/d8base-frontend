@@ -8,7 +8,7 @@ import {IonSearchbar} from '@ionic/angular';
     selector: 'app-chats',
     templateUrl: './chats.component.html',
     styleUrls: ['./chats.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsComponent extends Reinitable implements OnDestroy {
 
@@ -16,7 +16,7 @@ export class ChatsComponent extends Reinitable implements OnDestroy {
 
     constructor(
         public chatsService: ChatsService,
-        private readonly router: Router
+        private readonly router: Router,
     ) {
         super();
     }
@@ -39,7 +39,7 @@ export class ChatsComponent extends Reinitable implements OnDestroy {
 
     protected init(): void {
         this.chatsService.initChatList().subscribe(
-            _ => this.chatsService.subscribeToChatListUpdates()
+            _ => this.chatsService.subscribeToChatListUpdates(),
         );
         this.searchbar.value = '';
     }

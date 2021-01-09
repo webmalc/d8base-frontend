@@ -9,14 +9,14 @@ import {Observable} from 'rxjs';
 import {filter, first} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class DefaultLocationPickerService {
 
     constructor(
         private readonly currentLocationCompilerService: CurrentLocationCompilerService,
         private readonly defaultLocationStorage: DefaultLocationStorageService,
-        private readonly popover: PopoverController
+        private readonly popover: PopoverController,
     ) {
     }
 
@@ -26,10 +26,10 @@ export class DefaultLocationPickerService {
             data => {
                 if (null === data) {
                     this.getDefaultLocation().pipe(first(), filter(loc => null !== loc)).subscribe(
-                        locationData => this.initPopover(locationData)
+                        locationData => this.initPopover(locationData),
                     );
                 }
-            }
+            },
         );
     }
 
@@ -38,10 +38,10 @@ export class DefaultLocationPickerService {
             component: DefaultLocationPopoverComponent,
             translucent: true,
             animated: true,
-            componentProps: {data}
+            componentProps: {data},
         });
         pop.onDidDismiss().then(
-            result => this.defaultLocationStorage.setDefaultLocation(result.data ?? data)
+            result => this.defaultLocationStorage.setDefaultLocation(result.data ?? data),
         );
         await pop.present();
     }

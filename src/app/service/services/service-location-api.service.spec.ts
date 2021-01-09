@@ -6,11 +6,11 @@ import {ServiceLocationApiService} from './service-location-api.service';
 describe('ServiceLocationApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ServiceLocationApiService
-        ]
+            ServiceLocationApiService,
+        ],
     }));
 
     it('should be created', () => {

@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export abstract class AbstractIpService implements IpServiceInterface {
 
@@ -15,7 +15,7 @@ export abstract class AbstractIpService implements IpServiceInterface {
 
     public getData(): Observable<IpLocation> {
         return this.http.get(this.getUrl()).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 

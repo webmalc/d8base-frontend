@@ -16,8 +16,8 @@ describe('MasterProfileServiceEditComponent', () => {
             imports: [
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
-                RouterTestingModule
-            ]
+                RouterTestingModule,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterProfileServiceEditComponent);

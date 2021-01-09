@@ -20,8 +20,8 @@ describe('AboutEditComponent', () => {
                 SelectableCountryOnSearchService,
                 FormBuilder,
                 SavedProfessionalApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(AboutEditComponent);

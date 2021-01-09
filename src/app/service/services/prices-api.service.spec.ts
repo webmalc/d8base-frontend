@@ -6,11 +6,11 @@ import {PricesApiService} from './prices-api.service';
 describe('PricesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            PricesApiService
-        ]
+            PricesApiService,
+        ],
     }));
 
     it('should be created', () => {

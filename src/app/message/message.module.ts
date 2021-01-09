@@ -26,13 +26,13 @@ import {ChatsSearchService} from './services/chats-search.service';
         IonicModule,
         MessagePageRoutingModule,
         SharedModule,
-        TranslateModule
+        TranslateModule,
     ],
     declarations: [
         MessagePage,
         DirectComponent,
         ChatsComponent,
-        ContextMenuPopoverComponent
+        ContextMenuPopoverComponent,
     ],
     providers: [
         ChatsCompilerService,
@@ -43,8 +43,8 @@ import {ChatsSearchService} from './services/chats-search.service';
         ChatListUpdaterService,
         DirectServiceService,
         ChatsService,
-        ChatsSearchService
-    ]
+        ChatsSearchService,
+    ],
 })
 export class MessagePageModule {
 }

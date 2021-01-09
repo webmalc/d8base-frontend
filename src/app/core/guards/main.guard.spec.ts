@@ -12,8 +12,8 @@ describe('MainGuard', () => {
             providers: [
                 MainGuard,
                 {provide: AuthenticationService, useValue: {isAuthenticated : () => of(true)} },
-                {provide: Router, useValue: {parseUrl: (data) => data}}
-            ]
+                {provide: Router, useValue: {parseUrl: (data) => data}},
+            ],
         });
         guard = TestBed.inject(MainGuard);
     });
@@ -27,7 +27,7 @@ describe('MainGuard', () => {
             res => {
                 expect(res).toBe(true);
                 done();
-            }
+            },
         );
     });
     it('test canActivate login redirect', (done) => {
@@ -36,7 +36,7 @@ describe('MainGuard', () => {
             (res: UrlTree) => {
                 expect(res.toString()).toBe('/auth/login');
                 done();
-            }
+            },
         );
     });
 });

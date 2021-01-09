@@ -6,7 +6,7 @@ import {SelectableCityOnSearchService} from './selectable-city-on-search.service
 describe('SelectableCityOnSearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [SelectableCityOnSearchService]
+        providers: [SelectableCityOnSearchService],
     }));
 
     it('should be created', () => {

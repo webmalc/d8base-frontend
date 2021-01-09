@@ -28,9 +28,9 @@ export class StepSixHandlerService extends AbstractHandler {
         return this.masterManager.isMaster().pipe(
             switchMap(
                 isMaster => isMaster ? this.masterManager.getMasterList().pipe(
-                    switchMap(list => list.length !== 0 ? handler() : of(this.getIndex()))
-                ) : of(this.getIndex())
-            )
+                    switchMap(list => list.length !== 0 ? handler() : of(this.getIndex())),
+                ) : of(this.getIndex()),
+            ),
         );
     }
 }

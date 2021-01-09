@@ -6,7 +6,7 @@ import {SubregionApiService} from './subregion-api.service';
 describe('SubregionApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [SubregionApiService]
+        providers: [SubregionApiService],
     }));
 
     it('should be created', () => {

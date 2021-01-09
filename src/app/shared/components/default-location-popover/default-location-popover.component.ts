@@ -7,7 +7,7 @@ import {NavParams, PopoverController} from '@ionic/angular';
 @Component({
     selector: 'app-default-location-popover',
     templateUrl: './default-location-popover.component.html',
-    styleUrls: ['./default-location-popover.component.scss']
+    styleUrls: ['./default-location-popover.component.scss'],
 })
 export class DefaultLocationPopoverComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class DefaultLocationPopoverComponent implements OnInit {
         private readonly navParams: NavParams,
         private readonly popoverController: PopoverController,
         public readonly countrySelectable: SelectableCountryOnSearchService,
-        public readonly citySelectable: SelectableCityOnSearchService
+        public readonly citySelectable: SelectableCityOnSearchService,
     ) {
     }
 

@@ -7,5 +7,5 @@ export enum ServicePublishStepTwoFormFields {
     EndPrice = 'end_price',
     IsPriceFixed = 'is_price_fixed',
     FixedPrice = 'price',
-    Location = 'service_type'
+    Location = 'service_type',
 }

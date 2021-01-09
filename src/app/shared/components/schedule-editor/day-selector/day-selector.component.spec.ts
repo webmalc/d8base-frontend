@@ -13,8 +13,8 @@ describe('TimetableAddTimePopoverComponent', () => {
             declarations: [DaySelectorComponent],
             imports: [
                 IonicModule.forRoot(),
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(DaySelectorComponent);

@@ -17,13 +17,13 @@ import {switchMap} from 'rxjs/operators';
     providers: [
         {
             provide: StepComponent,
-            useExisting: forwardRef(() => DateTimeStepComponent)
-        }
-    ]
+            useExisting: forwardRef(() => DateTimeStepComponent),
+        },
+    ],
 })
 export class DateTimeStepComponent extends StepComponent<DateTimeStepData> implements OnInit {
     public readonly form = this.fb.group({
-        datetime: [null, Validators.required]
+        datetime: [null, Validators.required],
     });
     public displayedCalendars$: Observable<MasterCalendar[]>;
 
@@ -73,7 +73,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
 
                 return (!masterId || !serviceId) ? of(null) :
                     this.calendarApi.getSchedule(masterId, startDate.toISOString(), endDate.toISOString(), serviceId);
-            })
+            }),
         );
     }
 

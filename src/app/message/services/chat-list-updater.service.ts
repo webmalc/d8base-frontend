@@ -15,7 +15,7 @@ export class ChatListUpdaterService {
 
     constructor(
         private readonly chatsCompilerService: ChatsCompilerService,
-        private readonly notificationWorker: NotificationWorkerService
+        private readonly notificationWorker: NotificationWorkerService,
     ) {
     }
 
@@ -23,13 +23,13 @@ export class ChatListUpdaterService {
         this.destroy();
 
         return NotificationWorkerService.isFirebaseSupported() ? this.notificationWorker.messageReceived$.pipe(
-            switchMap(() => this.getChatList())
+            switchMap(() => this.getChatList()),
         ) : new Observable<AbstractMessage[]>(
             subscriber => {
                 this.timer = setInterval(() => this.chatsCompilerService.generateChatList().then(
-                    (chatList: AbstractMessage[]) => subscriber.next(chatList)
+                    (chatList: AbstractMessage[]) => subscriber.next(chatList),
                 ), this.updateInterval);
-            }
+            },
         );
     }
 

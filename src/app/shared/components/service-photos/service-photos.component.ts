@@ -10,7 +10,7 @@ import {
     OnInit,
     QueryList,
     ViewChild,
-    ViewChildren
+    ViewChildren,
 } from '@angular/core';
 import { ServicePhotoList } from '@app/api/models';
 import { ServicesService } from '@app/api/services';
@@ -24,7 +24,7 @@ const spaceBetweenSlides: number = 16;
     selector: 'app-service-photos',
     templateUrl: './service-photos.component.html',
     styleUrls: ['./service-photos.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() public serviceId: number;
@@ -35,7 +35,7 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
         slidesPerGroup: 3,
         loop: false,
         centeredSlides: false,
-        spaceBetween: spaceBetweenSlides
+        spaceBetween: spaceBetweenSlides,
     };
     public isNextButtonDisabled$: Observable<boolean>;
     public isPrevButtonDisabled$: Observable<boolean>;
@@ -49,7 +49,7 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
     constructor(
         private readonly servicesService: ServicesService,
         private readonly cd: ChangeDetectorRef,
-        private readonly modalController: ModalController
+        private readonly modalController: ModalController,
     ) {}
 
     public ngOnInit(): void {
@@ -76,7 +76,7 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
     private initNavigationButtonsAbility(): void {
         this.isPrevButtonDisabled$ = this.slides.ionSlideDidChange.pipe(
             switchMap(() => from(this.slides.isBeginning())),
-            startWith(true)
+            startWith(true),
         );
         this.isNextButtonDisabled$ = this.slides.ionSlideDidChange.pipe(switchMap(() => from(this.slides.isEnd())));
     }
@@ -89,7 +89,7 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
                 finalize(() => {
                     this.isLoading = false;
                     this.cd.markForCheck();
-                })
+                }),
             )
             .subscribe(res => {
                 this.isLoading = false;

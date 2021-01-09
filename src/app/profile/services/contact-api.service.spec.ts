@@ -6,7 +6,7 @@ import {ContactApiService} from './contact-api.service';
 describe('ContactApiServiceService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [ContactApiService]
+        providers: [ContactApiService],
     }));
 
     it('should be created', () => {

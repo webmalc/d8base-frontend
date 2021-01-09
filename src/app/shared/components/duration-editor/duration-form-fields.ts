@@ -1,5 +1,5 @@
 export enum DurationFormFields {
     Days = 'days',
     Hours = 'hours',
-    Minutes = 'minutes'
+    Minutes = 'minutes',
 }

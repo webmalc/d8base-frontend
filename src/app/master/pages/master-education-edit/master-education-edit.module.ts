@@ -15,9 +15,9 @@ import {MasterEducationEditPage} from './master-education-edit.page';
         IonicModule,
         SharedModule,
         MasterEducationEditPageRoutingModule,
-        TranslateModule
+        TranslateModule,
     ],
-    declarations: [MasterEducationEditPage, EducationEditComponent]
+    declarations: [MasterEducationEditPage, EducationEditComponent],
 })
 export class MasterEducationEditPageModule {
 }

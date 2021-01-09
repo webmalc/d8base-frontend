@@ -13,8 +13,8 @@ import {ImageCropPopoverComponent} from './image-cropper/image-crop-popover.comp
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => PictureSelectorComponent),
-        multi: true
-    }]
+        multi: true,
+    }],
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
 
@@ -29,7 +29,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     constructor(
         private readonly photoService: PhotoService,
         private readonly fileService: FileService,
-        private readonly popoverController: PopoverController
+        private readonly popoverController: PopoverController,
     ) {
     }
 
@@ -85,9 +85,9 @@ export class PictureSelectorComponent implements ControlValueAccessor {
             component: ImageCropPopoverComponent,
             componentProps: {
                 image,
-                callback
+                callback,
             },
-            cssClass: 'popover-big'
+            cssClass: 'popover-big',
         });
         await popover.present();
     }

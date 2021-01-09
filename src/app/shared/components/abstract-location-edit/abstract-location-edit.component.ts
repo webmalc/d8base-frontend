@@ -17,7 +17,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-abstract-location-edit',
     templateUrl: './abstract-location-edit.component.html',
-    styleUrls: ['./abstract-location-edit.component.scss']
+    styleUrls: ['./abstract-location-edit.component.scss'],
 })
 export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit {
 
@@ -36,7 +36,7 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
         public readonly citySelectable: SelectableCityOnSearchService,
         public readonly regionSelectable: SelectableRegionOnSearchService,
         public readonly selectableSubregion: SelectableSubregionOnSearchService,
-        public readonly districtSelectable: SelectableDistrictOnSearchService
+        public readonly districtSelectable: SelectableDistrictOnSearchService,
     ) {
         super();
     }
@@ -44,7 +44,7 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
     public ngOnInit(): void {
         this.processDisabledFields(this.item);
         this.timezone.getTimezoneList().subscribe(
-            data => this.timezoneList$.next(data)
+            data => this.timezoneList$.next(data),
         );
     }
 

@@ -37,14 +37,14 @@ export class ServicePublishService {
         private readonly masterLocationApi: MasterLocationApiService,
         private readonly servicePriceApi: PricesApiService,
         private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
-        private readonly masterScheduleApi: MasterScheduleApiService
+        private readonly masterScheduleApi: MasterScheduleApiService,
     ) {
     }
 
     public publish(): Observable<Service> {
         return from(this.servicePublishDataFormatter.getData()).pipe(
             switchMap(data => this.processData(data)),
-            finalize(() => this.servicePublishDataHolder.reset())
+            finalize(() => this.servicePublishDataHolder.reset()),
         );
     }
 
@@ -57,7 +57,7 @@ export class ServicePublishService {
                             serviceLocation,
                             masterLocation,
                             servicePrice,
-                            user
+                            user,
                         }: ServicePublishData): Observable<Service> {
         let createdService: Service;
         let createdMaster: ProfessionalList;
@@ -78,13 +78,13 @@ export class ServicePublishService {
                     masterLocRet: masterLocation
                         ? (!masterLocation.id ? this.createMasterLocation(masterLocation, createdMaster) : of(masterLocation))
                         : of<MasterLocation>(null),
-                    priceRet: this.createPrice(servicePrice, createdService)
+                    priceRet: this.createPrice(servicePrice, createdService),
                 });
             }),
             switchMap(({masterLocRet}) => (serviceLocation && masterLocRet)
                 ? this.createServiceLocation(serviceLocation, createdService, masterLocRet)
                 : of(null)),
-            map(() => createdService)
+            map(() => createdService),
         );
     }
 
@@ -95,9 +95,9 @@ export class ServicePublishService {
 
         return forkJoin({
             updatedUser: user ? this.userManager.updateUser(user) : of(null),
-            createdMaster: this.masterManager.createMaster(master)
+            createdMaster: this.masterManager.createMaster(master),
         }).pipe(
-            map(({createdMaster}) => createdMaster)
+            map(({createdMaster}) => createdMaster),
         );
     }
 

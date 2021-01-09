@@ -22,14 +22,14 @@ describe('MasterCertificateEditPage', () => {
                             paramMap: {
                                 get(): string {
                                     return '';
-                                }
-                            }
-                        }
-                    }
+                                },
+                            },
+                        },
+                    },
                 },
                 {provide: StorageManagerService, useClass: StorageManagerMock},
-                CertificatesApiService
-            ]
+                CertificatesApiService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterCertificateEditPage);

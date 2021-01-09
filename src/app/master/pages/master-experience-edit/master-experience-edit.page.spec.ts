@@ -22,14 +22,14 @@ describe('MasterExperienceEditPage', () => {
                             paramMap: {
                                 get(): string {
                                     return '';
-                                }
-                            }
-                        }
-                    }
+                                },
+                            },
+                        },
+                    },
                 },
                 ExperienceApiService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterExperienceEditPage);

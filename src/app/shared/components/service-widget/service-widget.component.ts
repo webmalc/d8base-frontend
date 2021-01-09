@@ -5,7 +5,7 @@ import {Service} from '@app/service/models/service';
 @Component({
     selector: 'app-service-widget',
     templateUrl: './service-widget.component.html',
-    styleUrls: ['./service-widget.component.scss']
+    styleUrls: ['./service-widget.component.scss'],
 })
 export class ServiceWidgetComponent {
     @Input() public service: Service;

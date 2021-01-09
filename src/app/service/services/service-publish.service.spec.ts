@@ -14,7 +14,7 @@ import {ServiceScheduleApiService} from './service-schedule-api.service';
 describe('ServicePublishService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
             ServicePublishService,
@@ -24,8 +24,8 @@ describe('ServicePublishService', () => {
             ServiceScheduleApiService,
             ServiceLocationApiService,
             PricesApiService,
-            ServicePublishDataPreparerService
-        ]
+            ServicePublishDataPreparerService,
+        ],
     }));
 
     it('should be created', () => {

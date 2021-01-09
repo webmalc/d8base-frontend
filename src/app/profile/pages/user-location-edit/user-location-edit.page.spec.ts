@@ -19,12 +19,12 @@ describe('UserLocationEditPage', () => {
                             paramMap: {
                                 get(): string {
                                     return '';
-                                }
-                            }
-                        }
-                    }
-                }
-            ]
+                                },
+                            },
+                        },
+                    },
+                },
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(UserLocationEditPage);

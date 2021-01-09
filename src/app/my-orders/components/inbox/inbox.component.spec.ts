@@ -11,7 +11,7 @@ describe('InboxComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [InboxComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(InboxComponent);

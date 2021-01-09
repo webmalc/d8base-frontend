@@ -11,7 +11,7 @@ describe('OutboxComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [OutboxComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()]
+            imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(OutboxComponent);

@@ -3,7 +3,7 @@ export interface IpDataResponseInterface {
     country_code: string;
     city: string;
     time_zone: {
-        name: string
+        name: string,
     };
     region_code: string;
     latitude: string;

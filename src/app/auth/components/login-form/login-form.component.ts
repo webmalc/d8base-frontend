@@ -7,7 +7,7 @@ import {LoginFormService} from '../../forms/login-form.service';
 @Component({
     selector: 'app-login-form',
     templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss']
+    styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class LoginFormComponent implements OnInit {
 
     constructor(
         public readonly loginFormService: LoginFormService,
-        private readonly router: Router
+        private readonly router: Router,
     ) {
     }
 
@@ -32,7 +32,7 @@ export class LoginFormComponent implements OnInit {
         const data = this.loginFormService.form.getRawValue();
         const credentials = {
             username: data[LoginFormFields.Username],
-            password: data[LoginFormFields.Password]
+            password: data[LoginFormFields.Password],
         };
         this.user.emit(credentials);
     }

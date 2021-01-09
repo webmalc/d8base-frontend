@@ -13,7 +13,7 @@ import {filter, first, map} from 'rxjs/operators';
 @Component({
     selector: 'app-direct',
     templateUrl: './direct.component.html',
-    styleUrls: ['./direct.component.scss']
+    styleUrls: ['./direct.component.scss'],
 })
 export class DirectComponent extends Reinitable implements OnDestroy {
 
@@ -32,7 +32,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
         public directService: DirectServiceService,
         private readonly platform: Platform,
         private readonly popoverController: PopoverController,
-        private readonly trans: TranslationService
+        private readonly trans: TranslationService,
     ) {
         super();
     }
@@ -46,7 +46,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
                 }
 
                 return messageList[messageIndex].created.slice(0, 10) !== messageList[messageIndex - 1].created.slice(0, 10);
-            })
+            }),
         );
     }
 
@@ -117,7 +117,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
 
     protected init(): void {
         this.directService.init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10)).subscribe(
-            _ => this.subscribeToNextApiPageUpdate()
+            _ => this.subscribeToNextApiPageUpdate(),
         );
         this.directService.messagesListUpdated.subscribe(_ => this.scrollToBottom());
         this.directService.newMessageSent.subscribe(_ => this.scrollToBottom(true));
@@ -130,7 +130,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
             translucent: true,
             componentProps: {message},
             animated: true,
-            event
+            event,
         }).then(pop => pop.present().then(
             () => {
                 this.deleteSubscription = ContextMenuPopoverComponent.delete$.pipe(filter(mes => mes !== null), first()).subscribe(
@@ -138,7 +138,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
                         this.directService.delete(mes).subscribe();
                         this.popoverController.dismiss();
                         this.deleteSubscription.unsubscribe();
-                    }
+                    },
                 );
                 this.updateSubscription = ContextMenuPopoverComponent.update$.pipe(filter(mes => mes !== null), first()).subscribe(
                     (mes: Message) => {
@@ -148,9 +148,9 @@ export class DirectComponent extends Reinitable implements OnDestroy {
                         this.updateMessageId = mes.id;
                         this.popoverController.dismiss();
                         this.updateSubscription.unsubscribe();
-                    }
+                    },
                 );
-            }
+            },
         ));
 
     }

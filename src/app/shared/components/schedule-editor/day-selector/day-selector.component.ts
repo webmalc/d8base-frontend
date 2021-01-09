@@ -8,7 +8,7 @@ import * as ScheduleConstants from '../schedule.constants';
 @Component({
     selector: 'app-timetable-add-time-popover',
     templateUrl: './day-selector.component.html',
-    styleUrls: ['./day-selector.component.scss']
+    styleUrls: ['./day-selector.component.scss'],
 })
 export class DaySelectorComponent {
 

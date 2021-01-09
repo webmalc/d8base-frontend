@@ -14,7 +14,7 @@ export class ChatsService {
 
     constructor(
         private readonly chatListUpdater: ChatListUpdaterService,
-        private readonly search: ChatsSearchService
+        private readonly search: ChatsSearchService,
     ) {
     }
 
@@ -36,7 +36,7 @@ export class ChatsService {
 
     public initChatList(): Observable<any> {
         return this.chatListUpdater.getChatList().pipe(
-            map(list => this.setLists(list))
+            map(list => this.setLists(list)),
         );
     }
 
@@ -44,7 +44,7 @@ export class ChatsService {
         this.unsubscribeFromUpdates();
         this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe(
             (newList: AbstractMessage[]) => this.isNeedToUpdate(newList).pipe(filter(isNeed => true === isNeed))
-                .subscribe(_ => this.setLists(newList))
+                .subscribe(_ => this.setLists(newList)),
         );
     }
 
@@ -79,8 +79,8 @@ export class ChatsService {
                     }
 
                     return false;
-                }
-            )
+                },
+            ),
         );
     }
 }

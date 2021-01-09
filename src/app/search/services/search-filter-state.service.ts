@@ -37,11 +37,11 @@ export class SearchFilterStateService {
                 location: {
                     country: undefined,
                     city: undefined,
-                    coordinates: undefined
+                    coordinates: undefined,
                 },
                 radius: {
                     distance: undefined,
-                    units: undefined
+                    units: undefined,
                 },
                 category: undefined,
                 subcategory: undefined,
@@ -50,7 +50,7 @@ export class SearchFilterStateService {
                 isInstantBooking: undefined,
                 datetime: {
                     from: undefined,
-                    to: undefined
+                    to: undefined,
                 },
                 isOnlineService: undefined,
                 isAtMasterLocationService: undefined,
@@ -58,10 +58,10 @@ export class SearchFilterStateService {
                 price: {
                     currency: undefined,
                     start: undefined,
-                    end: undefined
-                }
+                    end: undefined,
+                },
             },
-            additional: undefined
+            additional: undefined,
         };
     }
 }

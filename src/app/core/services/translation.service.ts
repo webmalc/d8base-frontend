@@ -7,26 +7,26 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class TranslationService {
 
     public static readonly DIR = './assets/i18n/';
     public readonly LANGUAGES = {
         ru: 'ru',
-        en: 'en'
+        en: 'en',
     };
 
     constructor(
         private readonly translator: TranslateService,
-        private readonly userSettings: UserSettingsService
+        private readonly userSettings: UserSettingsService,
     ) {
     }
 
     @once
     public init(): void {
         this.getSettings().subscribe(
-            lang => this.setLang(lang)
+            lang => this.setLang(lang),
         );
     }
 
@@ -48,7 +48,7 @@ export class TranslationService {
 
     private getSettings(): Observable<string | null> {
         return this.userSettings.userSettings$.pipe(
-            map((data: UserSettings) => data?.language as string)
+            map((data: UserSettings) => data?.language as string),
         );
     }
 }

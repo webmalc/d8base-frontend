@@ -8,48 +8,48 @@ export const defaultSchedule: AbstractSchedule[] = [
         is_enabled: true,
         start_time: '09:00:00',
         end_time: '18:00:00',
-        id: null
+        id: null,
     },
     {
         day_of_week: 1,
         is_enabled: true,
         start_time: '09:00:00',
         end_time: '18:00:00',
-        id: null
+        id: null,
     },
     {
         day_of_week: 2,
         is_enabled: true,
         start_time: '09:00:00',
         end_time: '18:00:00',
-        id: null
+        id: null,
     },
     {
         day_of_week: 3,
         is_enabled: true,
         start_time: '09:00:00',
         end_time: '18:00:00',
-        id: null
+        id: null,
     },
     {
         day_of_week: 4,
         is_enabled: true,
         start_time: '09:00:00',
         end_time: '18:00:00',
-        id: null
+        id: null,
     },
     {
         day_of_week: 5,
         is_enabled: false,
         start_time: null,
         end_time: null,
-        id: null
+        id: null,
     },
     {
         day_of_week: 6,
         is_enabled: false,
         start_time: null,
         end_time: null,
-        id: null
-    }
+        id: null,
+    },
 ];

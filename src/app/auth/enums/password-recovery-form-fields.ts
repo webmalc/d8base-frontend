@@ -1,3 +1,3 @@
 export enum PasswordRecoveryFormFields {
-    Login = 'login'
+    Login = 'login',
 }

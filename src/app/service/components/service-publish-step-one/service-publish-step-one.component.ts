@@ -16,7 +16,7 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
     selector: 'app-service-publish-step-one',
     templateUrl: './service-publish-step-one.component.html',
-    styleUrls: ['./service-publish-step-one.component.scss']
+    styleUrls: ['./service-publish-step-one.component.scss'],
 })
 export class ServicePublishStepOneComponent extends Reinitable {
 
@@ -30,7 +30,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
         public formService: ServicePublishStepOneFormService,
         private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
         private readonly serviceStepsNavigationService: ServiceStepsNavigationService,
-        public trans: TranslationService
+        public trans: TranslationService,
     ) {
         super();
     }
@@ -40,8 +40,8 @@ export class ServicePublishStepOneComponent extends Reinitable {
             ServicePublishSteps.One,
             {
                 category: this.formService.form.get(this.formFields.Category).value,
-                subcategory: this.formService.form.get(this.formFields.Subcategory).value
-            }
+                subcategory: this.formService.form.get(this.formFields.Subcategory).value,
+            },
         );
         this.serviceStepsNavigationService.next();
     }
@@ -49,7 +49,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
     public onCategoryChange(): void {
         this.formService.form.get(this.formFields.Subcategory).reset();
         this.subcategoriesApi.get({category: this.formService.form.get(this.formFields.Category).value.id}).subscribe(
-            list => this.subcategoriesList$.next(list.results)
+            list => this.subcategoriesList$.next(list.results),
         );
     }
 
@@ -59,7 +59,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
 
     protected init(): void {
         this.categoriesApi.get().subscribe(
-            list => this.categoriesList$.next(list.results)
+            list => this.categoriesList$.next(list.results),
         );
 
         if (this.servicePublishDataHolderService.isset(ServicePublishSteps.One)) {

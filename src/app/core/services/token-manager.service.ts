@@ -11,7 +11,7 @@ function getTimestamp(offset: number = 0): number {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class TokenManagerService {
 
@@ -27,7 +27,7 @@ export class TokenManagerService {
     @once
     public init(): void {
         timer(0, 1000).subscribe(() => this.isRefreshTokenExpired().then(isExp => this.isExpSubject$.next(isExp)).catch(
-            _ => this.isExpSubject$.next(true)
+            _ => this.isExpSubject$.next(true),
         ));
     }
 
@@ -44,7 +44,7 @@ export class TokenManagerService {
                     }
                     this.tokenData = tokenData;
                     resolve(this.tokenData.access_token);
-                }
+                },
             );
         });
     }
@@ -61,7 +61,7 @@ export class TokenManagerService {
         this.tokenData = {
             ...data,
             access_expire: getTimestamp(data.expires_in),
-            refresh_expire: getTimestamp(environment.refresh_token_expire_time)
+            refresh_expire: getTimestamp(environment.refresh_token_expire_time),
         };
 
         return this.storage.set(this.TOKEN_DATA_STORAGE_KEY, this.tokenData);
@@ -80,7 +80,7 @@ export class TokenManagerService {
                     this.isRefreshTokenExpired()
                         .then(isExpired => !isExpired ? resolve(true) : reject(Error(ErrorList.REFRESH_TOKEN_EXPIRED_ERROR)))
                         .catch(err => reject(err)) :
-                    resolve(false)
+                    resolve(false),
             ).catch(err => reject(err));
         });
     }
@@ -100,7 +100,7 @@ export class TokenManagerService {
 
         return new Promise(resolve => {
             this.storage.get(this.TOKEN_DATA_STORAGE_KEY).then(
-                (tokenData: AuthResponseInterface) => resolve(tokenData)
+                (tokenData: AuthResponseInterface) => resolve(tokenData),
             );
         });
     }
@@ -110,7 +110,7 @@ export class TokenManagerService {
             this.getTokenData().then(
                 (tokenData: AuthResponseInterface) => tokenData && tokenData[tokenType] ?
                     resolve(getTimestamp() >= tokenData[tokenType]) :
-                    reject(Error(ErrorList.EMPTY_TOKEN_ERROR))
+                    reject(Error(ErrorList.EMPTY_TOKEN_ERROR)),
             );
         });
     }

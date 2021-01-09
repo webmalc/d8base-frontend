@@ -6,7 +6,7 @@ import '@firebase/messaging';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class NotificationWorkerService {
     public static isInitialized: Observable<boolean>;

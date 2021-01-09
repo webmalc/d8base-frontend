@@ -10,7 +10,7 @@ export class IpServicesHolderService {
     constructor(
         private readonly ipApi: IpApiService,
         private readonly ipData: IpDataService,
-        private readonly ipNf: IpnfDataService
+        private readonly ipNf: IpnfDataService,
     ) {
     }
 
@@ -18,7 +18,7 @@ export class IpServicesHolderService {
         return [
             this.ipData,
             this.ipApi,
-            this.ipNf
+            this.ipNf,
         ];
     }
 }

@@ -28,7 +28,7 @@ describe('ClientIdentificationComponent', () => {
                 IonicStorageModule.forRoot(),
                 TranslateModule.forRoot(),
                 HttpClientTestingModule,
-                RouterTestingModule
+                RouterTestingModule,
             ],
             providers: [
                 OrderWizardStateService,
@@ -39,8 +39,8 @@ describe('ClientIdentificationComponent', () => {
                 IpnfDataService,
                 Geolocation,
                 LocationAccuracy,
-                SelectableCountryOnSearchService
-            ]
+                SelectableCountryOnSearchService,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ClientIdentificationComponent);

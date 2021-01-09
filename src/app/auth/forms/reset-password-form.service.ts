@@ -4,7 +4,7 @@ import {ResetPasswordFields} from '@app/auth/enums/reset-password-fields';
 import {passwordValidators} from '@app/core/validators/password-validators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ResetPasswordFormService {
 
@@ -16,7 +16,7 @@ export class ResetPasswordFormService {
     public initForm(): void {
         this.form = this.builder.group({
                 [ResetPasswordFields.Password]: ['', passwordValidators],
-                [ResetPasswordFields.Confirm]: ['', passwordValidators]
+                [ResetPasswordFields.Confirm]: ['', passwordValidators],
             },
             {validators: this.checkPassword});
     }

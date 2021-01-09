@@ -7,8 +7,8 @@ describe('PluginApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
         providers: [
-            PluginApiService
-        ]
+            PluginApiService,
+        ],
     }));
 
     it('should be created', () => {

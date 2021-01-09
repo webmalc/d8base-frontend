@@ -16,11 +16,11 @@ const initURI: string = 'https://picture0.example.com' as const;
     template: `
         <div [formGroup]="form">
             <app-picture-selector formControlName="avatar" [camera]="true" [fileSystem]="true"></app-picture-selector>
-        </div>`
+        </div>`,
 })
 class AppTestFormControlComponent {
     public form: FormGroup = new FormGroup({
-        avatar: new FormControl(initURI)
+        avatar: new FormControl(initURI),
     });
 }
 
@@ -36,7 +36,7 @@ describe('PictureSelectorComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PictureSelectorComponent, AppTestFormControlComponent],
-            imports: [IonicModule, ReactiveFormsModule]
+            imports: [IonicModule, ReactiveFormsModule],
         });
         wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
         wrapperComponent = wrapperFixture.componentInstance;

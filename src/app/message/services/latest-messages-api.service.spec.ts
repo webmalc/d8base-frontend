@@ -6,11 +6,11 @@ import {LatestMessagesApiService} from './latest-messages-api.service';
 describe('LatestMessagesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            LatestMessagesApiService
-        ]
+            LatestMessagesApiService,
+        ],
     }));
 
     it('should be created', () => {

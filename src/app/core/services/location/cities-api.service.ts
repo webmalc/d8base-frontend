@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CitiesApiService extends AbstractReadonlyApiService<City> {
 
@@ -31,8 +31,8 @@ export class CitiesApiService extends AbstractReadonlyApiService<City> {
             ordering?: string,
             page?: string,
             page_size?: string,
-            by_name?: string
-        }
+            by_name?: string,
+        },
     ): Observable<ApiListResponseInterface<City>> {
         return super.get(params);
     }
@@ -40,13 +40,13 @@ export class CitiesApiService extends AbstractReadonlyApiService<City> {
     public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
         return this.client.get<ApiListResponseInterface<City>>(this.url, {
             dist: dist.toString(10),
-            point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`
+            point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`,
         }).pipe(
             map(result => {
                 result.results = plainToClass(City, result.results);
 
                 return result;
-            })
+            }),
         );
     }
 

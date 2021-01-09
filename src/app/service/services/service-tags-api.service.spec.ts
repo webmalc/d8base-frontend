@@ -6,11 +6,11 @@ import {ServiceTagsApiService} from './service-tags-api.service';
 describe('ServiceTagsApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ServiceTagsApiService
-        ]
+            ServiceTagsApiService,
+        ],
     }));
 
     it('should be created', () => {

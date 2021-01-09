@@ -6,11 +6,11 @@ import {MasterPhotosApiService} from './master-photos-api.service';
 describe('MasterPhotosApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            MasterPhotosApiService
-        ]
+            MasterPhotosApiService,
+        ],
     }));
 
     it('should be created', () => {

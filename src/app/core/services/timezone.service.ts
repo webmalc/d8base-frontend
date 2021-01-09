@@ -5,7 +5,7 @@ import {from, Observable, of} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class TimezoneService {
 
@@ -18,12 +18,12 @@ export class TimezoneService {
             switchMap((data: { value: string, display_name: string }[]) => {
                 if (data === null) {
                     return this.userLocationApiService.getTimeZoneList().pipe(
-                        tap(list => this.storageManager.set(this.STORAGE_KEY, list))
+                        tap(list => this.storageManager.set(this.STORAGE_KEY, list)),
                     );
                 }
 
                 return of(data);
-            })
+            }),
         );
     }
 }

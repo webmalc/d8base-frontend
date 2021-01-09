@@ -21,7 +21,7 @@ import {ContactApiService} from './services/contact-api.service';
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.page.html',
-    styleUrls: ['./profile.page.scss']
+    styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage extends Reinitable {
 
@@ -41,7 +41,7 @@ export class ProfilePage extends Reinitable {
         private readonly contactsReadonlyApi: ContactApiService,
         private readonly countriesApi: CountriesApiService,
         private readonly userLanguagesApi: UserLanguagesApiService,
-        private readonly languagesApi: LanguagesApiService
+        private readonly languagesApi: LanguagesApiService,
     ) {
         super();
     }
@@ -62,35 +62,35 @@ export class ProfilePage extends Reinitable {
 
     protected init(): void {
         this.profileService.createProfileForm$().subscribe(
-            form => this.form = form
+            form => this.form = form,
         );
         this.userManager.getCurrentUser().pipe(
             switchMap(user => forkJoin({
                 user: of(user),
                 languages: this.userLanguagesApi.getList(user.languages as number[]).pipe(
-                    switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language)))
+                    switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language))),
                 ),
-                nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null)
-            }))
+                nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),
+            })),
         ).subscribe(
             ({user, languages, nationality}) => {
                 this.user = user;
                 this.languages = languages;
                 this.nationality = nationality;
-            }
+            },
         );
         this.profileService.createAvatarForm().subscribe(
-            () => this.onAvatarChange()
+            () => this.onAvatarChange(),
         );
         this.profileService.initLocation().subscribe(
             locationList => {
                 this.defaultLocation$.next(locationList.pop() as UserLocation);
                 this.additionalLocationsList$.next(locationList as UserLocation[]);
-            }
+            },
         );
         forkJoin([
             this.contactsReadonlyApi.get({is_default: '1'}),
-            this.contactsApi.get()
+            this.contactsApi.get(),
         ]).subscribe(
             ([defaultContacts, list]) => {
                 const emptyDefaultContacts = defaultContacts.results.filter(c => !list.results.some(x => x.contact === c.id));
@@ -101,18 +101,18 @@ export class ProfilePage extends Reinitable {
                             contact: c.id,
                             contact_code: c.code,
                             contact_display: c.name,
-                            value: ''
+                            value: '',
                         }
                     )),
-                    ...list.results
+                    ...list.results,
                 ];
-            }
+            },
         );
     }
 
     private onAvatarChange(): void {
         this.profileService.avatarForm.get(ProfileFormFields.Avatar).statusChanges.subscribe(
-            _ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value)
+            _ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value),
         );
     }
 }

@@ -6,11 +6,11 @@ import {MessagesSentApiService} from './messages-sent-api.service';
 describe('MessagesSentApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            MessagesSentApiService
-        ]
+            MessagesSentApiService,
+        ],
     }));
 
     it('should be created', () => {

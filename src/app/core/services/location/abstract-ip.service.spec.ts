@@ -6,7 +6,7 @@ import {AbstractIpService} from './abstract-ip.service';
 describe('AbstractIpService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: []
+        providers: [],
     }));
 
     it('should be created', () => {

@@ -7,8 +7,8 @@ describe('IpApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       {provide: HttpClient, useValue: { post: () => undefined }},
-      IpApiService
-    ]
+      IpApiService,
+    ],
   }));
 
   it('should be created', () => {

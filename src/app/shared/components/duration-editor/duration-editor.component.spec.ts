@@ -16,8 +16,8 @@ describe('DurationComponent', () => {
                 IonicModule.forRoot(),
                 ReactiveFormsModule,
                 FormsModule,
-                TranslateModule.forRoot()
-            ]
+                TranslateModule.forRoot(),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(DurationEditorComponent);

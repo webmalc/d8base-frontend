@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CurrencyListApiService {
 
@@ -18,13 +18,13 @@ export class CurrencyListApiService {
 
     public getList(): Observable<Currency[]> {
         return this.api.get<Currency[]>(this.url).pipe(
-            map(raw => plainToClass(Currency, raw))
+            map(raw => plainToClass(Currency, raw)),
         );
     }
 
     public getByName(currency: string): Observable<Currency | null> {
         return this.api.get<Currency[]>(this.url, {currency}).pipe(
-            map(raw => plainToClass(Currency, raw)[0])
+            map(raw => plainToClass(Currency, raw)[0]),
         );
     }
 }

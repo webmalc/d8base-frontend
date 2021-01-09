@@ -16,11 +16,11 @@ class HttpMock {
             return new Observable<any>(
                 subscriber => {
                     const data = {
-                        error: true
+                        error: true,
                     };
                     subscriber.next(data);
                     subscriber.complete();
-                }
+                },
             );
         }
 
@@ -33,11 +33,11 @@ class HttpMock {
                     longitude: 321,
                     time_zone: {name: 'timezone'},
                     city: 'test',
-                    region_code: 'code'
+                    region_code: 'code',
                 };
                 subscriber.next(data);
                 subscriber.complete();
-            }
+            },
         );
     }
 }
@@ -52,8 +52,8 @@ describe('LocationService', () => {
             IpnfDataService,
             {provide: HttpClient, useClass: HttpMock},
             {provide: Geolocation, useValue: {getCurrentPosition: () => 'test' }},
-            {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}}
-        ]
+            {provide: LocationAccuracy, useValue: {canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test'}},
+        ],
     }));
 
     it('should be created', () => {
@@ -73,7 +73,7 @@ describe('LocationService', () => {
                 expect(returnData.city).toBe('test');
                 expect(returnData.regionCode).toBe('code');
                 done();
-            }
+            },
         );
     });
 });

@@ -25,7 +25,7 @@ describe('ChatsComponent', () => {
                 IonicModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule,
-                TranslateModule.forRoot()
+                TranslateModule.forRoot(),
             ],
             providers: [
                 ChatsService,
@@ -35,8 +35,8 @@ describe('ChatsComponent', () => {
                 LatestMessagesApiService,
                 MessagesListApiService,
                 NotificationWorkerService,
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ChatsComponent);

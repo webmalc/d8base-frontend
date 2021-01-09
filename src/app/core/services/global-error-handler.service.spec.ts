@@ -8,12 +8,12 @@ import {GlobalErrorHandlerService} from './global-error-handler.service';
 describe('GlobalErrorHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            RouterTestingModule
+            RouterTestingModule,
         ],
         providers: [
             GlobalErrorHandlerService,
-            {provide: AuthenticationService, useValue: {isAuthenticated: () => of(true)}}
-        ]
+            {provide: AuthenticationService, useValue: {isAuthenticated: () => of(true)}},
+        ],
     }));
 
     it('should be created', () => {

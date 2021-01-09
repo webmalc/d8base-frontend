@@ -5,11 +5,11 @@ import {MasterScheduleApiService} from './master-schedule-api.service';
 describe('MasterScheduleApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            MasterScheduleApiService
-        ]
+            MasterScheduleApiService,
+        ],
     }));
 
     it('should be created', () => {

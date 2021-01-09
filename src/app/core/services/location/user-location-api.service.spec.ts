@@ -7,8 +7,8 @@ describe('LocationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-          UserLocationApiService
-      ]
+          UserLocationApiService,
+      ],
   }));
 
   it('should be created', () => {

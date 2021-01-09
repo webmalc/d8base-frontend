@@ -16,8 +16,8 @@ describe('ScheduleEditorComponent', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 ReactiveFormsModule,
-                FormsModule
-            ]
+                FormsModule,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ScheduleEditorComponent);

@@ -17,7 +17,7 @@ export class SelectableSubregionOnSearchService extends SelectableSearchService 
             event.component,
             event.text,
             this.subregionApi,
-            {country: country?.id.toString(10), region: region?.id.toString(10)}
+            {country: country?.id.toString(10), region: region?.id.toString(10)},
         );
     }
 }

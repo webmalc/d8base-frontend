@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ServicesApiService extends AbstractApiService<Service> {
 
@@ -21,7 +21,7 @@ export class ServicesApiService extends AbstractApiService<Service> {
     public getServiceTypeList(): Observable<{ value: string, display_name: string }[]> {
         return super.options<{ actions: { POST: { service_type: { choices: { value: string, display_name: string }[] } } } }>().pipe(
             map(data =>
-                data.actions.POST.service_type.choices)
+                data.actions.POST.service_type.choices),
         );
     }
 

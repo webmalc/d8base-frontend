@@ -20,7 +20,7 @@ const NEXT_STEP_ID = OrderIds.Location;
 @Component({
     selector: 'app-client-identification',
     templateUrl: './client-identification.component.html',
-    styleUrls: ['./client-identification.component.scss']
+    styleUrls: ['./client-identification.component.scss'],
 })
 export class ClientIdentificationComponent {
     public context$: Observable<StepContext> = this.wizardState.getContext();
@@ -34,7 +34,7 @@ export class ClientIdentificationComponent {
         password: this.password,
         passwordConfirm: this.passwordConfirm,
         name: this.name,
-        country: this.country
+        country: this.country,
     });
     public isRegistered;
     public showRegistrationForm = false;
@@ -45,7 +45,7 @@ export class ClientIdentificationComponent {
         private readonly registrationChecker: IsUserRegisteredApiService,
         private readonly authenticator: AuthenticationService,
         private readonly registrar: RegistrationService,
-        private readonly router: Router
+        private readonly router: Router,
     ) {
     }
 
@@ -72,17 +72,17 @@ export class ClientIdentificationComponent {
         if (this.isRegistered) {
             request = this.authenticator.login({
                 username: this.email.value,
-                password: this.password.value
+                password: this.password.value,
             });
         } else {
             const userData = {
                 first_name: this.name.value,
                 email: this.email.value,
                 password: this.password.value,
-                password_confirm: this.passwordConfirm.value
+                password_confirm: this.passwordConfirm.value,
             };
             const locationData = {
-                country: this.country.value.id
+                country: this.country.value.id,
             };
             const user = plainToClass(User, userData, {excludeExtraneousValues: true});
             const userLocation = plainToClass(UserLocation, locationData, {excludeExtraneousValues: true});

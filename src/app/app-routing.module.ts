@@ -6,42 +6,42 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./main/main.module').then(m => m.MainPageModule),
-        pathMatch: 'full'
+        pathMatch: 'full',
     },
     {
         path: 'auth',
-        loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule)
+        loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule),
     },
     {
         path: 'profile',
         loadChildren: () => import('src/app/profile/profile.module').then(m => m.ProfilePageModule),
-        canActivate: [MainGuard]
+        canActivate: [MainGuard],
     },
     {
         path: 'professional',
-        loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule)
+        loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule),
     },
     {
         path: 'service',
-        loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule)
+        loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule),
     },
     {
         path: 'message',
         loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule),
-        canActivate: [MainGuard]
+        canActivate: [MainGuard],
     },
     {
         path: 'search',
-        loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule)
+        loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule),
     },
     {
         path: 'order',
-        loadChildren: () => import('./order/order.module').then(m => m.OrderPageModule)
+        loadChildren: () => import('./order/order.module').then(m => m.OrderPageModule),
     },
     {
         path: 'my-orders',
-        loadChildren: () => import('./my-orders/my-orders.module').then(m => m.MyOrdersModule)
-    }
+        loadChildren: () => import('./my-orders/my-orders.module').then(m => m.MyOrdersModule),
+    },
 ];
 
 @NgModule({
@@ -50,10 +50,10 @@ const routes: Routes = [
     preloadingStrategy: PreloadAllModules,
     initialNavigation: 'enabled',
     paramsInheritanceStrategy: 'always',
-    relativeLinkResolution: 'legacy'
-})
+    relativeLinkResolution: 'legacy',
+}),
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

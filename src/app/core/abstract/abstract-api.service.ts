@@ -14,19 +14,19 @@ export abstract class AbstractApiService<T extends {id: number}> extends Abstrac
 
     public create(data: Partial<T>): Observable<T> {
         return this.client.post<T, Partial<T>>(this.getUrl(), HelperService.clear(data)).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 
     public patch(data: T, key?: string | number): Observable<T> {
         return this.client.patch<T>(`${this.getUrl() + (key ? key : data.id)}/`, HelperService.clear(data)).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 
     public put(data: T): Observable<T> {
         return this.client.put<T>(`${this.getUrl()}${data.id}/`, HelperService.clear(data)).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 
@@ -36,19 +36,19 @@ export abstract class AbstractApiService<T extends {id: number}> extends Abstrac
 
     public createList(data: T[]): Observable<T[]> {
         return this.client.createList<T>(data, this.getUrl()).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 
     public patchList(data: T[]): Observable<T[]> {
         return this.client.patchList<T>(data, this.getUrl()).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 
     public putList(data: T[]): Observable<T[]> {
         return this.client.putList<T>(data, this.getUrl()).pipe(
-            map(raw => this.transform(raw))
+            map(raw => this.transform(raw)),
         );
     }
 

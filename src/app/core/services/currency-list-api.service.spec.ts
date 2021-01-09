@@ -5,11 +5,11 @@ import {CurrencyListApiService} from './currency-list-api.service';
 describe('CurrencyListApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            CurrencyListApiService
-        ]
+            CurrencyListApiService,
+        ],
     }));
 
     it('should be created', () => {

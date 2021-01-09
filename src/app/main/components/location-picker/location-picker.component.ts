@@ -7,7 +7,7 @@ import {PopoverController} from '@ionic/angular';
     selector: 'app-location-picker',
     templateUrl: './location-picker.component.html',
     styleUrls: ['./location-picker.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationPickerComponent {
 
@@ -27,10 +27,10 @@ export class LocationPickerComponent {
                 data: {
                     coordinates: this.locationData?.coordinates,
                     country: this.locationData?.country,
-                    city: this.locationData?.city
-                }
+                    city: this.locationData?.city,
+                },
             },
-            cssClass: ['map-popover-width', 'map-popover-city-height']
+            cssClass: ['map-popover-width', 'map-popover-city-height'],
         });
         pop.onDidDismiss().then(
             (data: { data: SearchLocationDataInterface }) => {
@@ -45,7 +45,7 @@ export class LocationPickerComponent {
                         this.emitter.emit(data.data);
                     }
                 }
-            }
+            },
         );
 
         return await pop.present();

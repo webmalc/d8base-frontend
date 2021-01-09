@@ -6,11 +6,11 @@ import {ServicePublishStepOneFormService} from './service-publish-step-one-form.
 describe('ServicePublishStepOneFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            ReactiveFormsModule, FormsModule
+            ReactiveFormsModule, FormsModule,
         ],
         providers: [
-            ServicePublishStepOneFormService
-        ]
+            ServicePublishStepOneFormService,
+        ],
     }));
 
     it('should be created', () => {

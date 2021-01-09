@@ -8,8 +8,8 @@ describe('PreLogoutService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             PreLogoutService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

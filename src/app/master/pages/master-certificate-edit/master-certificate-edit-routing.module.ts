@@ -6,13 +6,13 @@ import {MasterCertificateEditPage} from './master-certificate-edit.page';
 const routes: Routes = [
   {
     path: '',
-    component: MasterCertificateEditPage
-  }
+    component: MasterCertificateEditPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MasterCertificateEditPageRoutingModule {
 }

@@ -26,7 +26,7 @@ export class CalendarService {
             for (let j = i * this.minutesInInterval; j <= (i + 1) * this.minutesInInterval; j += interval) {
                 units.push({
                     minutes: j,
-                    enabled: this.checkIfTimeDisabled(openedPeriodArray, j)
+                    enabled: this.checkIfTimeDisabled(openedPeriodArray, j),
                 });
             }
             const startIntervalTimeString = HelperService.getTimeStringFromMinutes(units[0].minutes);

@@ -6,11 +6,11 @@ import {ReviewsReadonlyApiService} from './reviews-readonly-api.service';
 describe('ReviewsReadonlyApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            ReviewsReadonlyApiService
-        ]
+            ReviewsReadonlyApiService,
+        ],
     }));
 
     it('should be created', () => {

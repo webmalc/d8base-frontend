@@ -7,8 +7,8 @@ describe('RegistrationFormService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             FormBuilder,
-            RegistrationFormService
-        ]
+            RegistrationFormService,
+        ],
     }));
 
     it('should be created', () => {

@@ -17,9 +17,9 @@ export class ServicePublishStepSixFormService {
             [ServicePublishStepSixFormFields.CompanyName]: [data?.company_name],
             [ServicePublishStepSixFormFields.Description]: [data?.description],
             [ServicePublishStepSixFormFields.Specialization]: [data?.name,
-                [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
+                [Validators.required, Validators.minLength(1), Validators.maxLength(255)],
             ],
-            [ServicePublishStepSixFormFields.Level]: [data?.level]
+            [ServicePublishStepSixFormFields.Level]: [data?.level],
         }, {validators: this.companyNameValidator});
     }
 

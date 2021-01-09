@@ -12,7 +12,7 @@ import {plainToClass} from 'class-transformer';
 @Component({
     selector: 'app-master-location-edit',
     templateUrl: './master-location-edit.page.html',
-    styleUrls: ['./master-location-edit.page.scss']
+    styleUrls: ['./master-location-edit.page.scss'],
 })
 export class MasterLocationEditPage extends AbstractModelEditPage<MasterLocation> implements OnInit {
 
@@ -22,7 +22,7 @@ export class MasterLocationEditPage extends AbstractModelEditPage<MasterLocation
         protected readonly location: Location,
         protected readonly masterLocationApi: MasterLocationApiService,
         protected readonly route: ActivatedRoute,
-        protected readonly masterManager: MasterManagerService
+        protected readonly masterManager: MasterManagerService,
     ) {
         super(route, masterLocationApi, masterManager);
     }
@@ -31,7 +31,7 @@ export class MasterLocationEditPage extends AbstractModelEditPage<MasterLocation
         this.itemId = this.getItemId();
         if (this.itemId) {
             this.locationService.getSingle<MasterLocation>(this.masterLocationApi, this.itemId).subscribe(
-                location => this.item = location
+                location => this.item = location,
             );
         } else {
             this.item = this.getNewModel();

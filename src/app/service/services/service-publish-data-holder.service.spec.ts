@@ -8,8 +8,8 @@ describe('ServicePublishDataHolderService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             ServicePublishDataHolderService,
-            {provide: StorageManagerService, useClass: StorageManagerMock}
-        ]
+            {provide: StorageManagerService, useClass: StorageManagerMock},
+        ],
     }));
 
     it('should be created', () => {

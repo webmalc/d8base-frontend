@@ -17,7 +17,7 @@ export class ContactsTabFormService {
 
     public createForm(contactList: Contact[], userContactList: ClientContactInterface[]): FormGroup {
         return this.form = this.formBuilder.group(
-            this.generate(contactList, userContactList)
+            this.generate(contactList, userContactList),
         );
     }
 

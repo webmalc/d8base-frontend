@@ -9,9 +9,9 @@ import { StepComponent } from '@app/order/abstract/step';
     providers: [
         {
             provide: StepComponent,
-            useExisting: forwardRef(() => SummaryStepComponent)
-        }
-    ]
+            useExisting: forwardRef(() => SummaryStepComponent),
+        },
+    ],
 })
 export class SummaryStepComponent extends StepComponent<void> implements OnInit {
     public ngOnInit(): void {

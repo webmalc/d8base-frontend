@@ -17,7 +17,7 @@ import {first, map, switchMap} from 'rxjs/operators';
     selector: 'app-master',
     templateUrl: './master.page.html',
     styleUrls: ['./master.page.scss'],
-    providers: [MasterProfileContextService]
+    providers: [MasterProfileContextService],
 })
 export class MasterPage {
 
@@ -33,7 +33,7 @@ export class MasterPage {
         private readonly reviewsReadonly: ReviewsReadonlyApiService,
         private readonly route: ActivatedRoute,
         private readonly masterReadonly: MasterReadonlyApiService,
-        contextService: MasterProfileContextService
+        contextService: MasterProfileContextService,
     ) {
         this.createContext().subscribe(context => contextService.setContext(context));
         this.mainInfoSectionData$ = contextService.context$.pipe(
@@ -44,7 +44,7 @@ export class MasterPage {
                 avatar: user.avatar,
                 rating: master.rating,
                 reviews: [],
-                is_confirmed: user.is_confirmed
+                is_confirmed: user.is_confirmed,
             })));
         this.editable$ = contextService.context$.pipe(map(context => context?.canEdit));
     }
@@ -58,9 +58,9 @@ export class MasterPage {
             forkJoin({
                 master: this.masterManager.getMasterList().pipe(
                     map(list => list[0]),
-                    switchMap(master => this.masterReadonly.getByEntityId(master.id))
+                    switchMap(master => this.masterReadonly.getByEntityId(master.id)),
                 ),
-                user: this.userManager.getCurrentUser()
+                user: this.userManager.getCurrentUser(),
             }) :
             this.masterReadonly.getByEntityId(masterId).pipe(map(res => ({master: res, user: res.user})));
     }
@@ -69,7 +69,7 @@ export class MasterPage {
         const masterId = Number.parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
 
         return this.getUserMaster(masterId).pipe(
-            map(({user, master}) => ({user, master, canEdit: Number.isNaN(masterId)}))
+            map(({user, master}) => ({user, master, canEdit: Number.isNaN(masterId)})),
         );
     }
 }

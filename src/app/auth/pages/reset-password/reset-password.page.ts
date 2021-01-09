@@ -10,7 +10,7 @@ import {delay, tap} from 'rxjs/operators';
 @Component({
     selector: 'app-reset-password',
     templateUrl: './reset-password.page.html',
-    styleUrls: ['./reset-password.page.scss']
+    styleUrls: ['./reset-password.page.scss'],
 })
 export class ResetPasswordPage implements OnInit {
 
@@ -22,7 +22,7 @@ export class ResetPasswordPage implements OnInit {
         public formService: ResetPasswordFormService,
         private readonly activatedRoute: ActivatedRoute,
         private readonly api: ResetPasswordApiService,
-        private readonly router: Router
+        private readonly router: Router,
     ) {
     }
 
@@ -37,13 +37,13 @@ export class ResetPasswordPage implements OnInit {
                 password: this.formService.form.get(ResetPasswordFields.Password).value,
                 user_id: params.user_id,
                 timestamp: params.timestamp,
-                signature: params.signature
+                signature: params.signature,
             }).pipe(
                 tap(_ => this.successMessages = ['reset-password.success']),
-                delay(800)
+                delay(800),
             ).subscribe(
                 _ => this.router.navigateByUrl('/auth/login'),
-                (error: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(error.error)
+                (error: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(error.error),
             );
         });
     }

@@ -10,7 +10,7 @@ describe('MasterEditComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MasterEditComponent],
-            imports: [IonicModule.forRoot(), HttpClientTestingModule]
+            imports: [IonicModule.forRoot(), HttpClientTestingModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MasterEditComponent);

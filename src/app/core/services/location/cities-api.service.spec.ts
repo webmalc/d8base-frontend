@@ -6,7 +6,7 @@ import {CitiesApiService} from './cities-api.service';
 describe('CitiesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [CitiesApiService]
+        providers: [CitiesApiService],
     }));
 
     it('should be created', () => {

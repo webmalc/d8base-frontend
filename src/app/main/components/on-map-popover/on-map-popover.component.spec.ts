@@ -17,8 +17,8 @@ describe('OnMapPopoverComponent', () => {
             providers: [
                 SelectableCountryOnSearchService,
                 SelectableCityOnSearchService,
-                {provide: NavParams, useValue: {get: () => null}}
-            ]
+                {provide: NavParams, useValue: {get: () => null}},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(OnMapPopoverComponent);

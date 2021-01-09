@@ -6,11 +6,11 @@ import {UserLanguagesApiService} from './user-languages-api.service';
 describe('UserLanguagesApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            UserLanguagesApiService
-        ]
+            UserLanguagesApiService,
+        ],
     }));
 
     it('should be created', () => {

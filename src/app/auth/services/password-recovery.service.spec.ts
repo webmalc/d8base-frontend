@@ -8,8 +8,8 @@ describe('PasswordRecoveryService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
             PasswordRecoveryService,
-            {provide: ApiClientService, useValue: {post: () => of()}}
-        ]
+            {provide: ApiClientService, useValue: {post: () => of()}},
+        ],
     }));
 
     it('should be created', () => {

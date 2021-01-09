@@ -6,11 +6,11 @@ import {MasterContactsApiService} from './master-contacts-api.service';
 describe('MasterContactsApiService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            MasterContactsApiService
-        ]
+            MasterContactsApiService,
+        ],
     }));
 
     it('should be created', () => {

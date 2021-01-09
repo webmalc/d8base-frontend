@@ -8,16 +8,16 @@ describe('TimezoneService', () => {
     let storageManagerSpy: jasmine.SpyObj<StorageManagerService>;
     beforeEach(() => {
         const spy = jasmine.createSpyObj(
-            'StorageManagerService', {get: Promise.resolve(null), set: null}
+            'StorageManagerService', {get: Promise.resolve(null), set: null},
         );
         TestBed.configureTestingModule({
             providers: [
                 TimezoneService,
-                {provide: StorageManagerService, useValue: spy}
+                {provide: StorageManagerService, useValue: spy},
             ],
             imports: [
-                HttpClientTestingModule
-            ]
+                HttpClientTestingModule,
+            ],
 
         });
         storageManagerSpy = TestBed.inject(StorageManagerService) as jasmine.SpyObj<StorageManagerService>;

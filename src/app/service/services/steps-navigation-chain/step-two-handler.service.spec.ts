@@ -5,8 +5,8 @@ import {StepTwoHandlerService} from './step-two-handler.service';
 describe('StepTwoHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            StepTwoHandlerService
-        ]
+            StepTwoHandlerService,
+        ],
     }));
 
     it('should be created', () => {

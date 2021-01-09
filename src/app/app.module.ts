@@ -48,49 +48,49 @@ import { AppComponent } from './app.component';
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useClass: JsonTranslateLoader
-            }
+                useClass: JsonTranslateLoader,
+            },
         }),
         SharedModule,
-        ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` })
+        ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
     ],
     providers: [
         {
             provide: APP_INITIALIZER,
             useFactory: (initService: AppInitService) => () => initService.init(),
             multi: true,
-            deps: [AppInitService, Sentry.TraceService]
+            deps: [AppInitService, Sentry.TraceService],
         },
         StatusBar,
         SplashScreen,
         Title,
         {
             provide: RouteReuseStrategy,
-            useClass: IonicRouteStrategy
+            useClass: IonicRouteStrategy,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
-            multi: true
+            multi: true,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeadersInterceptor,
-            multi: true
+            multi: true,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LangInterceptorService,
-            multi: true
+            multi: true,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TimezoneInterceptor,
-            multi: true
+            multi: true,
         },
         {
             provide: ErrorHandler,
-            useClass: GlobalErrorHandlerService
+            useClass: GlobalErrorHandlerService,
         },
         Geolocation,
         GeolocationService,
@@ -107,15 +107,15 @@ import { AppComponent } from './app.component';
                     ? LocationAccuracy
                     : {
                           request: () => Promise.resolve(true),
-                          canRequest: () => Promise.resolve()
+                          canRequest: () => Promise.resolve(),
                       },
-            deps: [Platform]
+            deps: [Platform],
         },
         {
             provide: Sentry.TraceService,
-            deps: [Router]
-        }
+            deps: [Router],
+        },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

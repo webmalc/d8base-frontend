@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CalendarApiService {
 
@@ -21,12 +21,12 @@ export class CalendarApiService {
         masterId: number,
         startTime: string,
         endTime: string,
-        serviceId?: number
+        serviceId?: number,
     ): Observable<MasterCalendar[]> {
         return this.client.get(this.getUrl(), HelperService.clear(
-            {professional: masterId?.toString(), service: serviceId?.toString(), start_datetime: startTime, end_datetime: endTime}
+            {professional: masterId?.toString(), service: serviceId?.toString(), start_datetime: startTime, end_datetime: endTime},
         )).pipe(
-            map((raw: MasterCalendar[]) => this.transform(raw))
+            map((raw: MasterCalendar[]) => this.transform(raw)),
         );
     }
 

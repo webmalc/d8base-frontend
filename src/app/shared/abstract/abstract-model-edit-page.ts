@@ -14,7 +14,7 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
     protected constructor(
         protected readonly route: ActivatedRoute,
         protected readonly api: ApiServiceInterface<T>,
-        protected readonly masterManager?: MasterManagerService
+        protected readonly masterManager?: MasterManagerService,
     ) {
     }
 
@@ -22,7 +22,7 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
         this.itemId = this.getItemId();
         if (this.itemId) {
             this.api.getByEntityId(this.itemId).subscribe(
-                experience => this.item = experience
+                experience => this.item = experience,
             );
         } else {
             this.item = this.getNewModel();
@@ -39,8 +39,8 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
                         item.professional = list[0].id;
 
                         return this.api.create(item);
-                    }
-                )
+                    },
+                ),
             ).subscribe(() => this.afterApiCallback()));
     }
 

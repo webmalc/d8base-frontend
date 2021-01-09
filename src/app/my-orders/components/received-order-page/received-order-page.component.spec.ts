@@ -17,8 +17,8 @@ describe('ReceivedOrderPageComponent', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule
-            ]
+                HttpClientTestingModule,
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ReceivedOrderPageComponent);

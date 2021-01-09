@@ -9,14 +9,14 @@ describe('DarkModeService', () => {
 
     beforeEach(() => {
         const spy = jasmine.createSpyObj(
-            'StorageManagerService', {get: Promise.resolve(null), set: null}
+            'StorageManagerService', {get: Promise.resolve(null), set: null},
         );
 
         TestBed.configureTestingModule({
             providers: [
                 DarkModeService,
-                {provide: StorageManagerService, useValue: spy}
-            ]
+                {provide: StorageManagerService, useValue: spy},
+            ],
         });
         storageManagerSpy = TestBed.inject(StorageManagerService) as jasmine.SpyObj<StorageManagerService>;
     });

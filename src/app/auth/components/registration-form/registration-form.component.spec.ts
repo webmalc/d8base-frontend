@@ -36,7 +36,7 @@ describe('RegistrationFormComponent', () => {
             declarations: [
                 RegistrationFormComponent,
                 ErrorFlashbagComponent,
-                CityPickerPopoverComponent
+                CityPickerPopoverComponent,
             ],
             imports: [
                 IonicModule.forRoot(),
@@ -46,7 +46,7 @@ describe('RegistrationFormComponent', () => {
                 TranslateModule.forRoot(),
                 HttpClientTestingModule,
                 CommonModule,
-                IonicSelectableModule
+                IonicSelectableModule,
             ],
             providers: [
                 RegistrationFormService,
@@ -57,8 +57,8 @@ describe('RegistrationFormComponent', () => {
                 LocationAccuracy,
                 Geolocation,
                 SelectableCountryOnSearchService,
-                SelectableCityOnSearchService
-            ]
+                SelectableCityOnSearchService,
+            ],
         }).compileComponents();
 
         router = TestBed.inject(Router);
@@ -91,14 +91,14 @@ describe('RegistrationFormComponent', () => {
             firstName: '',
             phone: '',
             city: '',
-            country: ''
+            country: '',
         };
 
         expect((component as any).registrationFormData.emit)
             .toHaveBeenCalledWith(
                 {
                     user: plainToClass(User, data, {excludeExtraneousValues: true}),
-                    location: plainToClass(UserLocation, data, {excludeExtraneousValues: true})
+                    location: plainToClass(UserLocation, data, {excludeExtraneousValues: true}),
                 });
     });
 });

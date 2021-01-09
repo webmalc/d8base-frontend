@@ -9,7 +9,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FcmDevicesApiService extends AbstractApiService<GcmDevice> {
 
@@ -29,7 +29,7 @@ export class FcmDevicesApiService extends AbstractApiService<GcmDevice> {
                 data.active = false;
 
                 return super.patch(data, data.registration_id);
-            })
+            }),
         );
     }
 
@@ -53,7 +53,7 @@ export class FcmDevicesApiService extends AbstractApiService<GcmDevice> {
                     return super.create(gcmDevice);
                 }
                 throwError('error while saving gcm device');
-            })
+            }),
         );
     }
 

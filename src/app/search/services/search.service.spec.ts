@@ -6,11 +6,11 @@ import {SearchService} from './search.service';
 describe('SearchService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientTestingModule
+            HttpClientTestingModule,
         ],
         providers: [
-            SearchService
-        ]
+            SearchService,
+        ],
     }));
 
     it('should be created', () => {

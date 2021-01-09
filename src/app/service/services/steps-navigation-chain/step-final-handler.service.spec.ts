@@ -5,8 +5,8 @@ import {StepFinalHandlerService} from './step-final-handler.service';
 describe('StepFinalHandlerService', () => {
     beforeEach(() => TestBed.configureTestingModule({
         providers: [
-            StepFinalHandlerService
-        ]
+            StepFinalHandlerService,
+        ],
     }));
 
     it('should be created', () => {

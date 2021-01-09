@@ -10,7 +10,7 @@ describe('SuccessFlashbagComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SuccessFlashbagComponent],
-            imports: [IonicModule.forRoot()]
+            imports: [IonicModule.forRoot()],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SuccessFlashbagComponent);

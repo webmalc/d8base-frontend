@@ -8,15 +8,15 @@ import {map} from 'rxjs/operators';
 export class OrderAuthenticationGuardService implements CanActivate {
     constructor(
         private readonly authService: AuthenticationService,
-        private readonly router: Router
+        private readonly router: Router,
     ) {
     }
 
     public canActivate(
-        route: ActivatedRouteSnapshot
+        route: ActivatedRouteSnapshot,
     ): Observable<boolean | UrlTree> {
         return combineLatest([
-            this.authService.isAuthenticated$
+            this.authService.isAuthenticated$,
         ]).pipe(
             map(([isAuth]) => {
                 if (isAuth) {
@@ -25,9 +25,9 @@ export class OrderAuthenticationGuardService implements CanActivate {
                 const serviceId = route.params.serviceId;
 
                 return this.router.parseUrl(
-                    `order/${serviceId}/contact-info`
+                    `order/${serviceId}/contact-info`,
                 );
-            })
+            }),
         );
     }
 }

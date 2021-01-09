@@ -15,8 +15,8 @@ describe('FlagMenuComponent', () => {
             declarations: [FlagMenuComponent],
             imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
             providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock}
-            ]
+                {provide: StorageManagerService, useClass: StorageManagerMock},
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(FlagMenuComponent);

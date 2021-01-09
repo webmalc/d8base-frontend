@@ -9,7 +9,7 @@ import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
 
@@ -26,8 +26,8 @@ export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
             search?: string,
             ordering?: string,
             page?: string,
-            page_size?: string
-        }
+            page_size?: string,
+        },
     ): Observable<ApiListResponseInterface<Subregion>> {
         return super.get(params);
     }

@@ -4,7 +4,7 @@ import {Service} from '@app/service/models/service';
 @Component({
     selector: 'app-master-profile-service-edit',
     templateUrl: './master-profile-service-edit.component.html',
-    styleUrls: ['./master-profile-service-edit.component.scss']
+    styleUrls: ['./master-profile-service-edit.component.scss'],
 })
 export class MasterProfileServiceEditComponent {
 

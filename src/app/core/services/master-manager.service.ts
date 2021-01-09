@@ -12,7 +12,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MasterManagerService {
 
@@ -22,7 +22,7 @@ export class MasterManagerService {
         private readonly userManager: UserManagerService,
         private readonly auth: AuthenticationService,
         private readonly masterApi: MasterApiService,
-        private readonly masterReadonlyApi: MasterReadonlyApiService
+        private readonly masterReadonlyApi: MasterReadonlyApiService,
     ) {
     }
 
@@ -54,7 +54,7 @@ export class MasterManagerService {
 
     public createMaster(master: ProfessionalList): Observable<ProfessionalList> {
         return this.becomeMaster().pipe(
-            switchMap(_ => this.masterApi.create(master))
+            switchMap(_ => this.masterApi.create(master)),
         );
     }
 
