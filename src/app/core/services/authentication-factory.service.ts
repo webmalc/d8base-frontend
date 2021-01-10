@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {AuthenticatorInterface} from '@app/core/interfaces/authenticator.interface';
-import {AuthenticationService} from '@app/core/services/authentication.service';
+import { Injectable } from '@angular/core';
+import { AuthenticatorInterface } from '@app/core/interfaces/authenticator.interface';
+import { AuthenticationService } from '@app/core/services/authentication.service';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationFactory {
 
-    constructor(private readonly mainAuthenticator: AuthenticationService) {
-    }
+  constructor(private readonly mainAuthenticator: AuthenticationService) {
+  }
 
-    public getAuthenticator(): AuthenticatorInterface {
-        return this.mainAuthenticator;
-    }
+  public getAuthenticator(): AuthenticatorInterface {
+    return this.mainAuthenticator;
+  }
 }

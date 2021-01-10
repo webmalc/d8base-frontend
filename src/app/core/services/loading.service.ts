@@ -1,21 +1,21 @@
-import {Injectable} from '@angular/core';
-import {LoadingController} from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoadingService {
 
-    constructor(private readonly loadingController: LoadingController) {
-    }
+  constructor(private readonly loadingController: LoadingController) {
+  }
 
-    public presentLoading(): void {
-        this.loadingController.create().then(
-            c => c.present()
-        );
-    }
+  public presentLoading(): void {
+    this.loadingController.create().then(
+      c => c.present(),
+    );
+  }
 
-    public loadingDismiss(): void {
-        this.loadingController.dismiss();
-    }
+  public loadingDismiss(): void {
+    this.loadingController.dismiss();
+  }
 }

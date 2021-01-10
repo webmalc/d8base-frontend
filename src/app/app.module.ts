@@ -1,14 +1,14 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserModule, Title} from '@angular/platform-browser';
-import {Router, RouteReuseStrategy} from '@angular/router';
-import {ErrorHandlingModule} from '@app/core/error-handling/error-handling.module';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { Router, RouteReuseStrategy } from '@angular/router';
+import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
 import { GeolocationService } from '@app/core/proxies/geolocation.service';
 import { AppInitService } from '@app/core/services/app-init.service';
 import { AuthInterceptor } from '@app/core/services/auth-interceptor.service';
 import { FcmDeviceService } from '@app/core/services/fcm-device.service';
-import {  HeadersInterceptor } from '@app/core/services/headers-interceptor.service';
+import { HeadersInterceptor } from '@app/core/services/headers-interceptor.service';
 import { LangInterceptorService } from '@app/core/services/lang-interceptor.service';
 import { IpApiService } from '@app/core/services/location/ip-api.service';
 import { IpDataService } from '@app/core/services/location/ip-data.service';
@@ -16,10 +16,10 @@ import { IpServicesHolderService } from '@app/core/services/location/ip-services
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { LocationService } from '@app/core/services/location/location.service';
 import { TimezoneInterceptor } from '@app/core/services/timezone-interceptor.service';
-import {JsonTranslateLoader} from '@app/shared/services/json-translate-loader';
-import {SharedModule} from '@app/shared/shared.module';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
-import {environment} from '@env/environment';
+import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
+import { SharedModule } from '@app/shared/shared.module';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { environment } from '@env/environment';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -48,46 +48,46 @@ import { AppComponent } from './app.component';
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useClass: JsonTranslateLoader
-            }
+                useClass: JsonTranslateLoader,
+            },
         }),
         SharedModule,
         ErrorHandlingModule,
-        ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` })
+        ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
     ],
     providers: [
         {
             provide: APP_INITIALIZER,
             useFactory: (initService: AppInitService) => () => initService.init(),
             multi: true,
-            deps: [AppInitService, Sentry.TraceService]
+            deps: [AppInitService, Sentry.TraceService],
         },
         StatusBar,
         SplashScreen,
         Title,
         {
             provide: RouteReuseStrategy,
-            useClass: IonicRouteStrategy
+            useClass: IonicRouteStrategy,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
-            multi: true
+            multi: true,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeadersInterceptor,
-            multi: true
+            multi: true,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LangInterceptorService,
-            multi: true
+            multi: true,
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TimezoneInterceptor,
-            multi: true
+            multi: true,
         },
         Geolocation,
         GeolocationService,
@@ -104,15 +104,16 @@ import { AppComponent } from './app.component';
                     ? LocationAccuracy
                     : {
                           request: () => Promise.resolve(true),
-                          canRequest: () => Promise.resolve()
+                          canRequest: () => Promise.resolve(),
                       },
-            deps: [Platform]
+            deps: [Platform],
         },
         {
             provide: Sentry.TraceService,
-            deps: [Router]
-        }
+            deps: [Router],
+        },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

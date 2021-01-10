@@ -1,4 +1,4 @@
 export enum ServicePublishStepOneFormFields {
-    Category = 'category',
-    Subcategory = 'subcategory'
+  Category = 'category',
+  Subcategory = 'subcategory',
 }

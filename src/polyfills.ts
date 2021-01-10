@@ -73,3 +73,5 @@ import 'core-js/es7/reflect'; // required for class-transformer @Type()
 
 // aws-sdk requires global to exist
 (window as any).global = window;
+
+import 'reflect-metadata'; // Reflect.getMetadata for SSR

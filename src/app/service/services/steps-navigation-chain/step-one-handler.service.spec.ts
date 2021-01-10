@@ -1,16 +1,16 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {StepOneHandlerService} from './step-one-handler.service';
+import { StepOneHandlerService } from './step-one-handler.service';
 
 describe('StepOneHandlerService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        providers: [
-            StepOneHandlerService
-        ]
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [
+      StepOneHandlerService,
+    ],
+  }));
 
-    it('should be created', () => {
-        const service: StepOneHandlerService = TestBed.inject(StepOneHandlerService);
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    const service: StepOneHandlerService = TestBed.inject(StepOneHandlerService);
+    expect(service).toBeTruthy();
+  });
 });

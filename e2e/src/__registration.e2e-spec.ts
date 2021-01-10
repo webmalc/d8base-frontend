@@ -1,6 +1,6 @@
-import {browser} from 'protractor';
-import {environment, testing} from '../../src/environments/environment';
-import {RegistrationPage} from './registration.po';
+import { browser } from 'protractor';
+import { environment, testing } from '../../src/environments/environment';
+import { RegistrationPage } from './registration.po';
 
 describe('Registration page', () => {
     let page: RegistrationPage;
@@ -10,7 +10,7 @@ describe('Registration page', () => {
         password: testing.registration.password,
         confirm: testing.registration.confirm,
         name: testing.registration.name,
-        phone: testing.registration.phone
+        phone: testing.registration.phone,
     };
 
     beforeEach(() => {

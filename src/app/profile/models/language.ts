@@ -1,6 +1,6 @@
-import {Expose} from 'class-transformer';
+import { Expose } from 'class-transformer';
 
 export class Language {
-    @Expose() public code: string;
-    @Expose() public name: string;
+  @Expose() public code: string;
+  @Expose() public name: string;
 }

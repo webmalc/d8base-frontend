@@ -1,87 +1,87 @@
 <ion-row class="ion-justify-content-center" *ngIf="item">
-    <ion-col appMainColumn class="ion-no-padding ion-margin-top">
-        <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
-            <ion-col class="ion-no-padding">
-                <ion-row class="ion-justify-content-start ion-align-items-center">
-                    <ion-item (click)="location.back()"
-                              routerDirection="back"
-                              color="light"
-                              routerLinkActive="active"
-                              class="ion-activatable cursor-pointer ion-item-no-border ion-align-items-center">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                    </ion-item>
-                    <ion-item class="ion-item-no-border" color="light">
-                        {{'master-profile.edit-master.title'|translate}}
-                    </ion-item>
-                </ion-row>
-            </ion-col>
+  <ion-col appMainColumn class="ion-no-padding ion-margin-top">
+    <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
+      <ion-col class="ion-no-padding">
+        <ion-row class="ion-justify-content-start ion-align-items-center">
+          <ion-item (click)="location.back()"
+                    routerDirection="back"
+                    color="light"
+                    routerLinkActive="active"
+                    class="ion-activatable cursor-pointer ion-item-no-border ion-align-items-center">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </ion-item>
+          <ion-item class="ion-item-no-border" color="light">
+            {{'master-profile.edit-master.title'|translate}}
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-item>
+    <ion-item class="ion-item-no-border ion-item-bordered-others">
+      <ion-col class="ion-padding-vertical" size="12">
+        <ion-item>
+          <ion-label color="medium" position="floating">
+            {{'master-profile.edit-master.name'|translate}}
+          </ion-label>
+          <ion-input type="text" name="first_name"
+                     [placeholder]="'master-profile.edit-master.name-placeholder'|translate"
+                     [(ngModel)]="item.name"></ion-input>
         </ion-item>
-        <ion-item class="ion-item-no-border ion-item-bordered-others">
-            <ion-col class="ion-padding-vertical" size="12">
-                <ion-item>
-                    <ion-label color="medium" position="floating">
-                        {{'master-profile.edit-master.name'|translate}}
-                    </ion-label>
-                    <ion-input type="text" name="first_name"
-                               [placeholder]="'master-profile.edit-master.name-placeholder'|translate"
-                               [(ngModel)]="item.name"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="medium" position="floating">
-                        {{'master-profile.edit-master.description'|translate}}
-                    </ion-label>
-                    <ion-input type="text" name="last_name"
-                               [placeholder]="'master-profile.edit-master.description-placeholder'|translate"
-                               [(ngModel)]="item.description"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="medium" position="floating">
-                        {{'master-profile.edit-master.company'|translate}}
-                    </ion-label>
-                    <ion-input type="text" name="patronymic"
-                               [placeholder]="'master-profile.edit-master.company-placeholder'|translate"
-                               [(ngModel)]="item.company"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="medium" position="floating">
-                        {{'master-profile.edit-master.experience'|translate}}
-                    </ion-label>
-                    <ion-input type="text" name="patronymic"
-                               [placeholder]="'master-profile.edit-master.experience-placeholder'|translate"
-                               [(ngModel)]="item.experience"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="medium" position="floating">
-                        {{'master-profile.edit-master.level'|translate}}
-                    </ion-label>
-                    <ion-select
-                            [placeholder]="'master-profile.edit-master.level-placeholder'|translate"
-                            [(ngModel)]="item.level"
-                            interface="popover">
-                        <ion-select-option *ngFor="let level of levelOptions" value="{{level}}">
-                            {{level}}
-                        </ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="medium" position="floating">
-                        {{'master-profile.edit-master.subcategory'|translate}}
-                    </ion-label>
-                    <ion-select
-                            [(ngModel)]="item.subcategory"
-                            interface="popover"
-                            [placeholder]="'master-profile.edit-master.subcategory-placeholder'|translate">
-                        <ion-select-option *ngFor="let subcategory of subcategoriesList$ | async"
-                                           [value]="subcategory.id">
-                            {{subcategory.name}}
-                        </ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-button (click)="save()" color="secondary"
-                            class="ion-margin-top" fill="solid" expand="block">
-                    {{'master-profile.edit-master.save'|translate}}
-                </ion-button>
-            </ion-col>
+        <ion-item>
+          <ion-label color="medium" position="floating">
+            {{'master-profile.edit-master.description'|translate}}
+          </ion-label>
+          <ion-input type="text" name="last_name"
+                     [placeholder]="'master-profile.edit-master.description-placeholder'|translate"
+                     [(ngModel)]="item.description"></ion-input>
         </ion-item>
-    </ion-col>
+        <ion-item>
+          <ion-label color="medium" position="floating">
+            {{'master-profile.edit-master.company'|translate}}
+          </ion-label>
+          <ion-input type="text" name="patronymic"
+                     [placeholder]="'master-profile.edit-master.company-placeholder'|translate"
+                     [(ngModel)]="item.company"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium" position="floating">
+            {{'master-profile.edit-master.experience'|translate}}
+          </ion-label>
+          <ion-input type="text" name="patronymic"
+                     [placeholder]="'master-profile.edit-master.experience-placeholder'|translate"
+                     [(ngModel)]="item.experience"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium" position="floating">
+            {{'master-profile.edit-master.level'|translate}}
+          </ion-label>
+          <ion-select
+            [placeholder]="'master-profile.edit-master.level-placeholder'|translate"
+            [(ngModel)]="item.level"
+            interface="popover">
+            <ion-select-option *ngFor="let level of levelOptions" value="{{level}}">
+              {{level}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium" position="floating">
+            {{'master-profile.edit-master.subcategory'|translate}}
+          </ion-label>
+          <ion-select
+            [(ngModel)]="item.subcategory"
+            interface="popover"
+            [placeholder]="'master-profile.edit-master.subcategory-placeholder'|translate">
+            <ion-select-option *ngFor="let subcategory of subcategoriesList$ | async"
+                               [value]="subcategory.id">
+              {{subcategory.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button (click)="save()" color="secondary"
+                    class="ion-margin-top" fill="solid" expand="block">
+          {{'master-profile.edit-master.save'|translate}}
+        </ion-button>
+      </ion-col>
+    </ion-item>
+  </ion-col>
 </ion-row>

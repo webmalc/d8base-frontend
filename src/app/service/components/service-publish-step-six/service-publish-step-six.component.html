@@ -1,100 +1,100 @@
 <app-header></app-header>
 <ion-content class="ion-padding-top">
-    <ion-row class="ion-justify-content-center">
-        <ion-col appMainColumn>
-            <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-                <ion-item class="ion-item-no-border ion-item-bordered-first">
-                    <ion-col class="ion-no-padding ion-padding-vertical">
-                        <ion-row class="ion-justify-content-start ion-align-items-center">
-                            <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
-                                <b>
-                                    {{"service-publish.step-six.title"|translate}}
-                                </b>
-                            </ion-item>
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
-                <app-info-row>
-                    {{"service-publish.step-six.first-info-row"|translate}}
-                </app-info-row>
-                <ion-item class="ion-item-no-border ion-item-bordered-others">
-                    <ion-col class="ion-padding-vertical" size="12">
-                        <ion-row>
-                            <ion-item class="width100 ion-item-no-side-padding ion-item-no-border ion-padding-vertical">
-                                <ion-toggle name="is-company" [formControlName]="formFields.IsCompany"></ion-toggle>
-                            </ion-item>
-                        </ion-row>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding"
-                                  *ngIf="formService.form.get(formFields.IsCompany).value">
-                            <div class="label-for-required-input">
-                                {{"service-publish.step-six.company-title"|translate}}
-                            </div>
-                        </ion-item>
-                        <ion-item class="ion-item-bordered ion-margin-bottom"
-                                  *ngIf="formService.form.get(formFields.IsCompany).value">
-                            <ion-label color="medium" position="floating">
-                                {{"service-publish.step-six.company-placeholder"|translate}}
-                            </ion-label>
-                            <ion-input type="text" name="company-name"
-                                       [formControlName]="formFields.CompanyName"></ion-input>
-                        </ion-item>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
-                            {{"service-publish.step-six.description"|translate}}
-                        </ion-item>
-                        <ion-item class="ion-item-bordered">
-                            <ion-label color="medium" position="floating">
-                                {{"service-publish.step-six.description-placeholder"|translate}}
-                            </ion-label>
-                            <ion-textarea rows="4" type="text" name="description"
-                                          [formControlName]="formFields.Description"></ion-textarea>
-                        </ion-item>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
-                            <div class="label-for-required-input">
-                                {{"service-publish.step-six.specialization"|translate}}
-                            </div>
-                        </ion-item>
-                        <ion-item class="ion-item-bordered">
-                            <ion-label color="medium" position="floating">
-                                {{"service-publish.step-six.specialization-placeholder"|translate}}
-                            </ion-label>
-                            <ion-input type="text" name="description"
-                                       [formControlName]="formFields.Specialization"></ion-input>
-                        </ion-item>
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
-                            {{"service-publish.step-six.level" | translate}}
-                        </ion-item>
-                        <ion-item class="ion-item-bordered">
-                            <ion-label color="medium" position="floating">
-                                {{"service-publish.step-six.level" | translate}}
-                            </ion-label>
-                            <ionic-selectable
-                                    [items]="levelList"
-                                    formControlName="{{formFields.Level}}"
-                                    closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
-                                    searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
-                                    searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}">
-                            </ionic-selectable>
-                        </ion-item>
-                        <ion-row class="ion-justify-content-center">
-                            <ion-col size="6">
-                                <ion-button color="light"
-                                            size="medium"
-                                            (click)="serviceStepsNavigationService.previous()"
-                                            class="ion-margin-top" fill="solid" expand="block">
-                                    {{"service-publish.back-button" | translate}}
-                                </ion-button>
-                            </ion-col>
-                            <ion-col size="6">
-                                <ion-button size="medium" color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
-                                            class="ion-margin-top" fill="solid" expand="block">
-                                    {{"service-publish.forward-button" | translate}}
-                                </ion-button>
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
-                </ion-item>
-            </form>
-        </ion-col>
-    </ion-row>
-    <app-footer></app-footer>
+  <ion-row class="ion-justify-content-center">
+    <ion-col appMainColumn>
+      <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+        <ion-item class="ion-item-no-border ion-item-bordered-first">
+          <ion-col class="ion-no-padding ion-padding-vertical">
+            <ion-row class="ion-justify-content-start ion-align-items-center">
+              <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
+                <b>
+                  {{"service-publish.step-six.title"|translate}}
+                </b>
+              </ion-item>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+        <app-info-row>
+          {{"service-publish.step-six.first-info-row"|translate}}
+        </app-info-row>
+        <ion-item class="ion-item-no-border ion-item-bordered-others">
+          <ion-col class="ion-padding-vertical" size="12">
+            <ion-row>
+              <ion-item class="width100 ion-item-no-side-padding ion-item-no-border ion-padding-vertical">
+                <ion-toggle name="is-company" [formControlName]="formFields.IsCompany"></ion-toggle>
+              </ion-item>
+            </ion-row>
+            <ion-item class="ion-item-no-border ion-item-no-side-padding"
+                      *ngIf="formService.form.get(formFields.IsCompany).value">
+              <div class="label-for-required-input">
+                {{"service-publish.step-six.company-title"|translate}}
+              </div>
+            </ion-item>
+            <ion-item class="ion-item-bordered ion-margin-bottom"
+                      *ngIf="formService.form.get(formFields.IsCompany).value">
+              <ion-label color="medium" position="floating">
+                {{"service-publish.step-six.company-placeholder"|translate}}
+              </ion-label>
+              <ion-input type="text" name="company-name"
+                         [formControlName]="formFields.CompanyName"></ion-input>
+            </ion-item>
+            <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+              {{"service-publish.step-six.description"|translate}}
+            </ion-item>
+            <ion-item class="ion-item-bordered">
+              <ion-label color="medium" position="floating">
+                {{"service-publish.step-six.description-placeholder"|translate}}
+              </ion-label>
+              <ion-textarea rows="4" type="text" name="description"
+                            [formControlName]="formFields.Description"></ion-textarea>
+            </ion-item>
+            <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+              <div class="label-for-required-input">
+                {{"service-publish.step-six.specialization"|translate}}
+              </div>
+            </ion-item>
+            <ion-item class="ion-item-bordered">
+              <ion-label color="medium" position="floating">
+                {{"service-publish.step-six.specialization-placeholder"|translate}}
+              </ion-label>
+              <ion-input type="text" name="description"
+                         [formControlName]="formFields.Specialization"></ion-input>
+            </ion-item>
+            <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+              {{"service-publish.step-six.level" | translate}}
+            </ion-item>
+            <ion-item class="ion-item-bordered">
+              <ion-label color="medium" position="floating">
+                {{"service-publish.step-six.level" | translate}}
+              </ion-label>
+              <ionic-selectable
+                [items]="levelList"
+                formControlName="{{formFields.Level}}"
+                closeButtonText="{{trans.trans('ion-selectable.close-button-text') | async}}"
+                searchFailText="{{trans.trans('ion-selectable.search-fail-text') | async}}"
+                searchPlaceholder="{{trans.trans('ion-selectable.search-text') | async}}">
+              </ionic-selectable>
+            </ion-item>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="6">
+                <ion-button color="light"
+                            size="medium"
+                            (click)="serviceStepsNavigationService.previous()"
+                            class="ion-margin-top" fill="solid" expand="block">
+                  {{"service-publish.back-button" | translate}}
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button size="medium" color="secondary" type="submit" [disabled]="formService.isSubmitDisabled()"
+                            class="ion-margin-top" fill="solid" expand="block">
+                  {{"service-publish.forward-button" | translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+      </form>
+    </ion-col>
+  </ion-row>
+  <app-footer></app-footer>
 </ion-content>

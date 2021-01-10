@@ -1,49 +1,49 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {Platform} from '@ionic/angular';
-import {IonicStorageModule} from '@ionic/storage';
-import {TranslateModule} from '@ngx-translate/core';
-import {AppInitService} from './app-init.service';
-import {TranslationService} from './translation.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Platform } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppInitService } from './app-init.service';
+import { TranslationService } from './translation.service';
 
 describe('AppInitService', () => {
 
-    let trans: TranslationService;
+  let trans: TranslationService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                RouterTestingModule,
-                TranslateModule.forRoot(),
-                IonicStorageModule.forRoot()
-            ],
-            providers: [
-                Platform,
-                AppInitService
-            ]
-        });
-
-        trans = TestBed.inject(TranslationService);
-
-        spyOn(trans, 'init');
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+        IonicStorageModule.forRoot(),
+      ],
+      providers: [
+        Platform,
+        AppInitService,
+      ],
     });
 
-    it('should be created', () => {
-        const service: AppInitService = TestBed.inject(AppInitService);
-        expect(service).toBeTruthy();
-    });
+    trans = TestBed.inject(TranslationService);
 
-    it('test translate service init', (done) => {
-        const service: AppInitService = TestBed.inject(AppInitService);
+    spyOn(trans, 'init');
+  });
 
-        service.init().then(
-            res => {
-                expect((service as any).translationService.init).toHaveBeenCalled();
-                done();
-            }
-        );
-    });
+  it('should be created', () => {
+    const service: AppInitService = TestBed.inject(AppInitService);
+    expect(service).toBeTruthy();
+  });
+
+  it('test translate service init', (done) => {
+    const service: AppInitService = TestBed.inject(AppInitService);
+
+    service.init().then(
+      res => {
+        expect((service as any).translationService.init).toHaveBeenCalled();
+        done();
+      },
+    );
+  });
 });

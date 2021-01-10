@@ -1,6 +1,6 @@
-import {browser} from 'protractor';
-import {environment, testing} from '../../src/environments/environment';
-import {ProfilePage} from './profile.po';
+import { browser } from 'protractor';
+import { environment, testing } from '../../src/environments/environment';
+import { ProfilePage } from './profile.po';
 
 describe('Profile page', () => {
     let page: ProfilePage;

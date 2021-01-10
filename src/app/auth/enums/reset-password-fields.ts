@@ -1,4 +1,4 @@
 export enum ResetPasswordFields {
-    Password = 'password',
-    Confirm = 'confirm'
+  Password = 'password',
+  Confirm = 'confirm',
 }

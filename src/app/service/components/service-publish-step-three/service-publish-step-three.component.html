@@ -1,77 +1,77 @@
 <app-header></app-header>
 <ion-content class="ion-padding-top">
-    <ion-row class="ion-justify-content-center">
-        <ion-col appMainColumn>
-            <ion-item class="ion-item-no-border ion-item-bordered-first ion-padding-vertical">
-                <ion-col class="ion-no-padding">
-                    <ion-row class="ion-justify-content-start ion-align-items-center ">
-                        <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
-                            <b>
-                                {{"service-publish.step-three.title" | translate}}
-                            </b>
-                        </ion-item>
-                    </ion-row>
-                </ion-col>
+  <ion-row class="ion-justify-content-center">
+    <ion-col appMainColumn>
+      <ion-item class="ion-item-no-border ion-item-bordered-first ion-padding-vertical">
+        <ion-col class="ion-no-padding">
+          <ion-row class="ion-justify-content-start ion-align-items-center ">
+            <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
+              <b>
+                {{"service-publish.step-three.title" | translate}}
+              </b>
             </ion-item>
-            <app-info-row>
-                {{"service-publish.step-three.first-info-row"|translate}}
-            </app-info-row>
-            <ion-item
-                    class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
-                <ion-col class="ion-no-padding">
-                    <ion-item class="ion-item-no-border ion-margin-top">
-                        <b>
-                            {{"service-publish.step-three.photos"|translate}}
-                        </b>
-                    </ion-item>
-                    <ion-item class="ion-margin-bottom ion-item-no-border">
-                        <ngx-dropzone class="width100" [accept]="'image/*'" (change)="onSelect($event)">
-                            <ngx-dropzone-label>
-                                <ion-row>
-                                    {{"service-publish.step-three.dropzone-label"|translate}}
-                                </ion-row>
-                                <ion-row class="ion-justify-content-center">
-                                    <ion-item class="ion-item-no-border">
-                                        <ion-icon name="download-outline"></ion-icon>
-                                    </ion-item>
-                                </ion-row>
-                            </ngx-dropzone-label>
-                            <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable]="true"
-                                                        (removed)="onRemove(f)">
-                            </ngx-dropzone-image-preview>
-                        </ngx-dropzone>
-                    </ion-item>
-                    <ion-item class="ion-item-no-border ion-margin-top">
-                        <b>
-                            {{"service-publish.step-three.add-new-service"|translate}}
-                        </b>
-                    </ion-item>
-                </ion-col>
-            </ion-item>
-            <app-info-row>
-                {{"service-publish.step-three.second-info-row"|translate}}
-            </app-info-row>
-            <ion-item class="ion-item-no-border ion-item-bordered-first ion-no-side-padding">
-                <ion-col class="ion-no-padding">
-                    <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
-                        <ion-col size="6">
-                            <ion-button size="medium" color="light" class="ion-margin-top"
-                                        (click)="serviceStepsNavigationService.previous()"
-                                        fill="solid" expand="block">
-                                {{"service-publish.back-button" | translate}}
-                            </ion-button>
-                        </ion-col>
-                        <ion-col size="6">
-                            <ion-button size="medium" color="secondary" type="submit" (click)="submit()"
-                                        class="ion-margin-top" fill="solid" expand="block">
-                                {{"service-publish.forward-button" | translate}}
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-
-                </ion-col>
-            </ion-item>
+          </ion-row>
         </ion-col>
-    </ion-row>
-    <app-footer></app-footer>
+      </ion-item>
+      <app-info-row>
+        {{"service-publish.step-three.first-info-row"|translate}}
+      </app-info-row>
+      <ion-item
+        class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
+        <ion-col class="ion-no-padding">
+          <ion-item class="ion-item-no-border ion-margin-top">
+            <b>
+              {{"service-publish.step-three.photos"|translate}}
+            </b>
+          </ion-item>
+          <ion-item class="ion-margin-bottom ion-item-no-border">
+            <ngx-dropzone class="width100" [accept]="'image/*'" (change)="onSelect($event)">
+              <ngx-dropzone-label>
+                <ion-row>
+                  {{"service-publish.step-three.dropzone-label"|translate}}
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-item class="ion-item-no-border">
+                    <ion-icon name="download-outline"></ion-icon>
+                  </ion-item>
+                </ion-row>
+              </ngx-dropzone-label>
+              <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable]="true"
+                                          (removed)="onRemove(f)">
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </ion-item>
+          <ion-item class="ion-item-no-border ion-margin-top">
+            <b>
+              {{"service-publish.step-three.add-new-service"|translate}}
+            </b>
+          </ion-item>
+        </ion-col>
+      </ion-item>
+      <app-info-row>
+        {{"service-publish.step-three.second-info-row"|translate}}
+      </app-info-row>
+      <ion-item class="ion-item-no-border ion-item-bordered-first ion-no-side-padding">
+        <ion-col class="ion-no-padding">
+          <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
+            <ion-col size="6">
+              <ion-button size="medium" color="light" class="ion-margin-top"
+                          (click)="serviceStepsNavigationService.previous()"
+                          fill="solid" expand="block">
+                {{"service-publish.back-button" | translate}}
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button size="medium" color="secondary" type="submit" (click)="submit()"
+                          class="ion-margin-top" fill="solid" expand="block">
+                {{"service-publish.forward-button" | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <app-footer></app-footer>
 </ion-content>

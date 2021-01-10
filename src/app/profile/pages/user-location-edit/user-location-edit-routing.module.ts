@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {UserLocationEditPage} from './user-location-edit.page';
+import { UserLocationEditPage } from './user-location-edit.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserLocationEditPage
-  }
+    component: UserLocationEditPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class UserLocationEditPageRoutingModule {
 }

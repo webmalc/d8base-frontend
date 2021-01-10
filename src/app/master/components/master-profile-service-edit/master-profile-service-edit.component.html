@@ -1,50 +1,50 @@
 <ion-card>
-    <ion-card-content>
-        <ion-item lines="none">
-            <ion-text slot="start" color="dark">
-                {{service.name}}
-            </ion-text>
-            <ion-note slot="end">
-                <app-price [price]="service?.price"></app-price>
-                <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
-            </ion-note>
-        </ion-item>
-        <ion-item lines="none">
-            <ion-label *ngIf="service.is_enabled">
-                <p>
-                    <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>
-                    {{"master-profile.services.service-edit.published"|translate}}
-                </p>
-                <p>
-                    <a class="text-grey cursor-pointer" (click)="onIsEnabled(false)">
-                        {{"master-profile.services.service-edit.unpublish"|translate}}
-                    </a>
-                </p>
-            </ion-label>
-            <ion-label *ngIf="!service.is_enabled">
-                <p>
-                    <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
-                    {{"master-profile.services.service-edit.not-published"|translate}}
-                </p>
-                <p>
-                    <a class="text-color-success cursor-pointer" (click)="onIsEnabled(true)">
-                        {{"master-profile.services.service-edit.publish"|translate}}
-                    </a>
-                </p>
-                <p>
-                    <a class="text-color-danger cursor-pointer" (click)="delete()">
-                        {{"master-profile.services.service-edit.delete"|translate}}
-                    </a>
-                </p>
-            </ion-label>
-            <ion-note slot="end">
-                <h2>
-                    <a [routerLink]="'/service/' + service.id">
-                        <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>
-                        {{ "master-profile.services.service-edit.view" | translate }}
-                    </a>
-                </h2>
-            </ion-note>
-        </ion-item>
-    </ion-card-content>
+  <ion-card-content>
+    <ion-item lines="none">
+      <ion-text slot="start" color="dark">
+        {{service.name}}
+      </ion-text>
+      <ion-note slot="end">
+        <app-price [price]="service?.price"></app-price>
+        <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label *ngIf="service.is_enabled">
+        <p>
+          <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>
+          {{"master-profile.services.service-edit.published"|translate}}
+        </p>
+        <p>
+          <a class="text-grey cursor-pointer" (click)="onIsEnabled(false)">
+            {{"master-profile.services.service-edit.unpublish"|translate}}
+          </a>
+        </p>
+      </ion-label>
+      <ion-label *ngIf="!service.is_enabled">
+        <p>
+          <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
+          {{"master-profile.services.service-edit.not-published"|translate}}
+        </p>
+        <p>
+          <a class="text-color-success cursor-pointer" (click)="onIsEnabled(true)">
+            {{"master-profile.services.service-edit.publish"|translate}}
+          </a>
+        </p>
+        <p>
+          <a class="text-color-danger cursor-pointer" (click)="delete()">
+            {{"master-profile.services.service-edit.delete"|translate}}
+          </a>
+        </p>
+      </ion-label>
+      <ion-note slot="end">
+        <h2>
+          <a [routerLink]="'/service/' + service.id">
+            <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>
+            {{ "master-profile.services.service-edit.view" | translate }}
+          </a>
+        </h2>
+      </ion-note>
+    </ion-item>
+  </ion-card-content>
 </ion-card>

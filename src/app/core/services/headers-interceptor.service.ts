@@ -1,9 +1,9 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {TokenManagerService} from '@app/core/services/token-manager.service';
-import {environment} from '@env/environment';
-import {from, Observable, of} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { TokenManagerService } from '@app/core/services/token-manager.service';
+import { environment } from '@env/environment';
+import { from, Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 /**
  * Sets headers while requesting api endpoints
@@ -11,44 +11,44 @@ import {catchError, switchMap} from 'rxjs/operators';
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
 
-    constructor(private readonly tokenManager: TokenManagerService) {
+  constructor(private readonly tokenManager: TokenManagerService) {
+  }
+
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    try {
+      const url = new URL(req.url);
+      if (url.origin !== environment.backend.url) {
+        return next.handle(req);
+      }
+    } catch (e) {
+      return next.handle(req);
     }
 
-    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        try {
-            const url = new URL(req.url);
-            if (url.origin !== environment.backend.url) {
-                return next.handle(req);
-            }
-        } catch (e) {
-            return next.handle(req);
-        }
+    // TODO: don't ask for token if not needed
+    return from(this.tokenManager.getAccessToken())
+      .pipe(
+        catchError(_ => {
+          return of('');
+        }),
+        switchMap(token => {
+          let headers;
+          if (this.getAuthUrls().includes(req.url)) {
+            headers = req.headers.append('Authorization', 'Basic ' +
+              btoa(`${environment.client_id}:${environment.client_secret}`))
+              .append('Content-Type', 'application/json');
+          } else if (token) {
+            headers = req.headers.append('Authorization', 'Bearer ' + token)
+              .append('Content-Type', 'application/json');
+          }
 
-        // TODO: don't ask for token if not needed
-        return from(this.tokenManager.getAccessToken())
-            .pipe(
-                catchError(_ => {
-                    return of('');
-                }),
-                switchMap(token => {
-                    let headers;
-                    if (this.getAuthUrls().includes(req.url)) {
-                        headers = req.headers.append('Authorization', 'Basic ' +
-                            btoa(`${environment.client_id}:${environment.client_secret}`))
-                            .append('Content-Type', 'application/json');
-                    } else if (token) {
-                        headers = req.headers.append('Authorization', 'Bearer ' + token)
-                            .append('Content-Type', 'application/json');
-                    }
+          return next.handle(req.clone({ headers }));
+        }),
+      );
+  }
 
-                    return next.handle(req.clone({headers}));
-                })
-            );
-    }
-
-    private getAuthUrls(): string[] {
-        return [
-            environment.backend.url + environment.backend.refresh
-        ];
-    }
+  private getAuthUrls(): string[] {
+    return [
+      environment.backend.url + environment.backend.refresh,
+    ];
+  }
 }

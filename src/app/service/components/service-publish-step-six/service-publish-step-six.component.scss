@@ -10,9 +10,11 @@ ion-toggle {
   --handle-background: #fff;
   --handle-background-checked: #fff;
 }
+
 ion-toggle.toggle-checked {
   --handle-border-radius: 14px;
 }
+
 ion-toggle::before {
   position: absolute;
   top: 22px;
@@ -22,6 +24,7 @@ ion-toggle::before {
   font-size: 16px;
   z-index: 1;
 }
+
 ion-toggle::after {
   position: absolute;
   top: 22px;

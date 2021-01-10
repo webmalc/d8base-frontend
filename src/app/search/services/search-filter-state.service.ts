@@ -6,62 +6,62 @@ import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class SearchFilterStateService {
-    public data: SearchFilterStateInterface = this.getDefaultData();
-    private readonly doSearch$ = new ReplaySubject<void>(1);
+  public data: SearchFilterStateInterface = this.getDefaultData();
+  private readonly doSearch$ = new ReplaySubject<void>(1);
 
-    public get isDoingSearch$(): Observable<void> {
-        return this.doSearch$.asObservable();
-    }
+  public get isDoingSearch$(): Observable<void> {
+    return this.doSearch$.asObservable();
+  }
 
-    constructor(private readonly router: Router) {
-        this.doSearch$.subscribe(() => {
-            this.router.navigate(['/search']);
-        });
-    }
+  constructor(private readonly router: Router) {
+    this.doSearch$.subscribe(() => {
+      this.router.navigate(['/search']);
+    });
+  }
 
-    public doSearch(): void {
-        return this.doSearch$.next();
-    }
+  public doSearch(): void {
+    return this.doSearch$.next();
+  }
 
-    public setLocationData(data: SearchLocationDataInterface): void {
-        this.data.main.location = data;
-    }
+  public setLocationData(data: SearchLocationDataInterface): void {
+    this.data.main.location = data;
+  }
 
-    public clear(): void {
-        this.data = this.getDefaultData();
-    }
+  public clear(): void {
+    this.data = this.getDefaultData();
+  }
 
-    private getDefaultData(): SearchFilterStateInterface {
-        return {
-            main: {
-                location: {
-                    country: undefined,
-                    city: undefined,
-                    coordinates: undefined
-                },
-                radius: {
-                    distance: undefined,
-                    units: undefined
-                },
-                category: undefined,
-                subcategory: undefined,
-                tags: undefined,
-                isOnlineBooking: undefined,
-                isInstantBooking: undefined,
-                datetime: {
-                    from: undefined,
-                    to: undefined
-                },
-                isOnlineService: undefined,
-                isAtMasterLocationService: undefined,
-                isAtClientLocationService: undefined,
-                price: {
-                    currency: undefined,
-                    start: undefined,
-                    end: undefined
-                }
-            },
-            additional: undefined
-        };
-    }
+  private getDefaultData(): SearchFilterStateInterface {
+    return {
+      main: {
+        location: {
+          country: undefined,
+          city: undefined,
+          coordinates: undefined,
+        },
+        radius: {
+          distance: undefined,
+          units: undefined,
+        },
+        category: undefined,
+        subcategory: undefined,
+        tags: undefined,
+        isOnlineBooking: undefined,
+        isInstantBooking: undefined,
+        datetime: {
+          from: undefined,
+          to: undefined,
+        },
+        isOnlineService: undefined,
+        isAtMasterLocationService: undefined,
+        isAtClientLocationService: undefined,
+        price: {
+          currency: undefined,
+          start: undefined,
+          end: undefined,
+        },
+      },
+      additional: undefined,
+    };
+  }
 }

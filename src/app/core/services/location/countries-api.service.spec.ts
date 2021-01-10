@@ -1,14 +1,14 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {CountriesApiService} from './countries-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CountriesApiService } from './countries-api.service';
 
 describe('CountriesApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [
-        CountriesApiService
-    ]
+      CountriesApiService,
+    ],
   }));
 
   it('should be created', () => {

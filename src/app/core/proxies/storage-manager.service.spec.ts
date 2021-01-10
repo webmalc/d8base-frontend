@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import {IonicStorageModule} from '@ionic/storage';
-import {StorageManagerService} from './storage-manager.service';
+import { IonicStorageModule } from '@ionic/storage';
+import { StorageManagerService } from './storage-manager.service';
 
 describe('StorageManagerService', () => {
 
@@ -10,18 +10,18 @@ describe('StorageManagerService', () => {
   beforeEach(() => {
     storageMock = {
       get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null))
+      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
     };
   });
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       { provide: Storage, useValue: storageMock },
-      StorageManagerService
+      StorageManagerService,
     ],
     imports: [
-        IonicStorageModule.forRoot()
-    ]
+      IonicStorageModule.forRoot(),
+    ],
   }));
 
   it('should be created', () => {

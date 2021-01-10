@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {RatingHalfStarComponent} from './rating-half-star.component';
+import { RatingHalfStarComponent } from './rating-half-star.component';
 
 describe('RatingHalfStarComponent', () => {
   let component: RatingHalfStarComponent;
@@ -10,7 +10,7 @@ describe('RatingHalfStarComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RatingHalfStarComponent],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RatingHalfStarComponent);

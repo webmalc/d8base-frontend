@@ -1,0 +1,13 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+root = true
+
+[*.ts]
+indent_style = space
+indent_size = 2
+ij_typescript_force_quote_style = true
+
+[*.{html, scss}]
+indent_style = space
+indent_size = 2
+ij_html_quote_style = double

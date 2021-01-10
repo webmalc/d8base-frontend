@@ -6,12 +6,13 @@ import { RegistrationPage } from './registration.page';
 const routes: Routes = [
   {
     path: '',
-    component: RegistrationPage
-  }
+    component: RegistrationPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class RegistrationPageRoutingModule {}
+export class RegistrationPageRoutingModule {
+}
