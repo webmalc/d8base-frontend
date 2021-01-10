@@ -1,12 +1,13 @@
-<ion-item [detail]="false" button color="light" [class.ion-item-no-side-padding]="noSidePadding" [lines]="collapsed ? 'full' : 'none'" (click)="collapse()">
-    <ion-label *ngIf="titleBold">
-        <b>{{title | translate}}</b>
-    </ion-label>
-    <ion-label *ngIf="!titleBold">
-        {{title | translate}}
-    </ion-label>
-    <ion-icon slot="end" name="{{collapsed ? arrowDown : arrowUp}}"></ion-icon>
+<ion-item [detail]="false" button color="light" [class.ion-item-no-side-padding]="noSidePadding"
+          [lines]="collapsed ? 'full' : 'none'" (click)="collapse()">
+  <ion-label *ngIf="titleBold">
+    <b>{{title | translate}}</b>
+  </ion-label>
+  <ion-label *ngIf="!titleBold">
+    {{title | translate}}
+  </ion-label>
+  <ion-icon slot="end" name="{{collapsed ? arrowDown : arrowUp}}"></ion-icon>
 </ion-item>
 <div *ngIf="!collapsed">
-    <ng-content></ng-content>
+  <ng-content></ng-content>
 </div>

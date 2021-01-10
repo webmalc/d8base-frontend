@@ -19,11 +19,10 @@
       true,
       2
     ],
-    "newline-before-return": true,
     "indent": [
       true,
       "spaces",
-      4
+      2
     ],
     "variable-name": {
       "options": [
@@ -166,8 +165,7 @@
     "trailing-comma": [
       true,
       {
-        "multiline": "never",
-        "singleline": "never"
+        "multiline": "always"
       }
     ],
     "no-output-on-prefix": true,
@@ -201,6 +199,12 @@
       true,
       "fit",
       "fdescribe"
+    ],
+    "whitespace": [
+      true,
+      "check-module",
+      "check-preblock",
+      "check-separator"
     ]
   }
 }

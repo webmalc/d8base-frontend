@@ -1,5 +1,5 @@
 export enum UserSettingsFromFields {
-    Language = 'language',
-    Currency = 'currency',
-    Units = 'units'
+  Language = 'language',
+  Currency = 'currency',
+  Units = 'units',
 }

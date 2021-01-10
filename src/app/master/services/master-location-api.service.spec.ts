@@ -1,12 +1,12 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MasterLocationApiService} from './master-location-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MasterLocationApiService } from './master-location-api.service';
 
 describe('MasterLocationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
-    providers: [MasterLocationApiService]
+    providers: [MasterLocationApiService],
   }));
 
   it('should be created', () => {

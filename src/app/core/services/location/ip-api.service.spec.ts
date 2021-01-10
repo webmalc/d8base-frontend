@@ -1,14 +1,14 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClient} from '@angular/common/http';
-import {IpApiService} from './ip-api.service';
+import { HttpClient } from '@angular/common/http';
+import { IpApiService } from './ip-api.service';
 
 describe('IpApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      {provide: HttpClient, useValue: { post: () => undefined }},
-      IpApiService
-    ]
+      { provide: HttpClient, useValue: { post: () => undefined } },
+      IpApiService,
+    ],
   }));
 
   it('should be created', () => {

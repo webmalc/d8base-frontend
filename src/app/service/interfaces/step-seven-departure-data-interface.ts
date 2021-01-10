@@ -1,4 +1,4 @@
 export interface StepSevenDepartureDataInterface {
-    max_distance: number;
-    units: string;
+  max_distance: number;
+  units: string;
 }

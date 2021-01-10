@@ -1,4 +1,4 @@
 export interface CalendarUnit {
-    minutes: number;
-    enabled: boolean;
+  minutes: number;
+  enabled: boolean;
 }

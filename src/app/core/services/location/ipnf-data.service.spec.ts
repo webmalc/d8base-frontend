@@ -1,16 +1,16 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {IpnfDataService} from './ipnf-data.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { IpnfDataService } from './ipnf-data.service';
 
 describe('IpnfDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-        HttpClientTestingModule
+      HttpClientTestingModule,
     ],
     providers: [
-        IpnfDataService
-    ]
+      IpnfDataService,
+    ],
   }));
 
   it('should be created', () => {

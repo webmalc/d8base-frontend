@@ -6,12 +6,13 @@ import { RegisterVerifyPage } from './register-verify.page';
 const routes: Routes = [
   {
     path: '',
-    component: RegisterVerifyPage
-  }
+    component: RegisterVerifyPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class RegisterVerifyPageRoutingModule {}
+export class RegisterVerifyPageRoutingModule {
+}

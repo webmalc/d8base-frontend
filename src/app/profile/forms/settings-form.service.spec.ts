@@ -1,17 +1,17 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {ReactiveFormsModule} from '@angular/forms';
-import {SettingsFormService} from './settings-form.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SettingsFormService } from './settings-form.service';
 
 describe('SettingsFormService', () => {
-    beforeEach(() => TestBed.configureTestingModule({
-        imports: [ReactiveFormsModule],
-        providers: [SettingsFormService]
-    }));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [ReactiveFormsModule],
+    providers: [SettingsFormService],
+  }));
 
-    it('should be created', () => {
-        const service: SettingsFormService = TestBed.inject(SettingsFormService);
-        expect(service).toBeTruthy();
-    });
-    xit('should be some tests');
+  it('should be created', () => {
+    const service: SettingsFormService = TestBed.inject(SettingsFormService);
+    expect(service).toBeTruthy();
+  });
+  xit('should be some tests');
 });

@@ -1,4 +1,4 @@
 export enum SearchFiltersSubmenu {
-    Main = 'main',
-    Additional = 'additional'
+  Main = 'main',
+  Additional = 'additional',
 }

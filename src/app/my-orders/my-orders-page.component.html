@@ -1,27 +1,29 @@
 <app-header></app-header>
 <ion-content *ngIf="state$ | async as state">
-    <ion-grid class="ion-no-padding">
-        <ion-row class="ion-justify-content-center">
-            <ion-col appMainColumn>
-                <ion-item color="light" lines="full">
-                    <ion-buttons slot="start">
-                        <ion-button routerLink="/" routerDirection="back">
-                            <ion-icon name="arrow-back-outline"></ion-icon>
-                        </ion-button>
-                    </ion-buttons>
-                    <ion-title>{{ 'received_orders.title' | translate }}</ion-title>
-                    <ion-badge *ngIf="state.isInbox && state.isMaster" class="orders-type" color="medium">{{'orders-type.received'|translate}}</ion-badge>
-                    <ion-badge *ngIf="!state.isInbox && state.isMaster" class="orders-type" color="medium">{{'orders-type.sent'|translate}}</ion-badge>
-                    <ion-buttons *ngIf="state.isMaster" class="ion-margin-start">
-                        <ion-button [routerLink]="state.isInbox ? '/my-orders/outbox' : '/my-orders/inbox'">
-                            <ion-icon name="swap-horizontal-outline"></ion-icon>
-                        </ion-button>
-                    </ion-buttons>
-                </ion-item>
-                <app-inbox *ngIf="state.isInbox && state.isMaster"></app-inbox>
-                <app-outbox *ngIf="!state.isInbox"></app-outbox>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-col appMainColumn>
+        <ion-item color="light" lines="full">
+          <ion-buttons slot="start">
+            <ion-button routerLink="/" routerDirection="back">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'received_orders.title' | translate }}</ion-title>
+          <ion-badge *ngIf="state.isInbox && state.isMaster" class="orders-type"
+                     color="medium">{{'orders-type.received'|translate}}</ion-badge>
+          <ion-badge *ngIf="!state.isInbox && state.isMaster" class="orders-type"
+                     color="medium">{{'orders-type.sent'|translate}}</ion-badge>
+          <ion-buttons *ngIf="state.isMaster" class="ion-margin-start">
+            <ion-button [routerLink]="state.isInbox ? '/my-orders/outbox' : '/my-orders/inbox'">
+              <ion-icon name="swap-horizontal-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <app-inbox *ngIf="state.isInbox && state.isMaster"></app-inbox>
+        <app-outbox *ngIf="!state.isInbox"></app-outbox>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 <app-footer></app-footer>

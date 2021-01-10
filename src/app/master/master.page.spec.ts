@@ -1,35 +1,35 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {IonicModule} from '@ionic/angular';
-import {TranslateModule} from '@ngx-translate/core';
-import {StorageManagerMock} from 'src/testing/mocks';
-import {StorageManagerService} from '../core/proxies/storage-manager.service';
-import {MasterPage} from './master.page';
-import {ReviewsReadonlyApiService} from './services/reviews-readonly-api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { StorageManagerMock } from 'src/testing/mocks';
+import { StorageManagerService } from '../core/proxies/storage-manager.service';
+import { MasterPage } from './master.page';
+import { ReviewsReadonlyApiService } from './services/reviews-readonly-api.service';
 
 describe('MasterPage', () => {
-    let component: MasterPage;
-    let fixture: ComponentFixture<MasterPage>;
+  let component: MasterPage;
+  let fixture: ComponentFixture<MasterPage>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
-            declarations: [MasterPage],
-            providers: [
-                {provide: StorageManagerService, useClass: StorageManagerMock},
-                ReviewsReadonlyApiService
-            ]
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
+      declarations: [MasterPage],
+      providers: [
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ReviewsReadonlyApiService,
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(MasterPage);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    }));
+    fixture = TestBed.createComponent(MasterPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    xit('should be some tests');
+  xit('should be some tests');
 });

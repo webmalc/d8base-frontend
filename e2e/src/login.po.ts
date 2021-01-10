@@ -1,6 +1,6 @@
-import {Credentials} from '@app/auth/interfaces/credentials';
-import {browser, by, element, ElementFinder} from 'protractor';
-import {promise} from 'selenium-webdriver';
+import { Credentials } from '@app/auth/interfaces/credentials';
+import { browser, by, element, ElementFinder } from 'protractor';
+import { promise } from 'selenium-webdriver';
 
 export class LoginPage {
     public navigateTo(): any {

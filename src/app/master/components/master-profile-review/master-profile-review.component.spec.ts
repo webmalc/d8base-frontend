@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {MasterProfileReviewComponent} from './master-profile-review.component';
+import { MasterProfileReviewComponent } from './master-profile-review.component';
 
 describe('MasterProfileReviewComponent', () => {
   let component: MasterProfileReviewComponent;
@@ -10,7 +10,7 @@ describe('MasterProfileReviewComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MasterProfileReviewComponent],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MasterProfileReviewComponent);

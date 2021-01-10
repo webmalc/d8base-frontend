@@ -1,8 +1,8 @@
 export abstract class Reinitable {
 
-    public ionViewDidEnter(): void {
-        this.init();
-    }
+  public ionViewDidEnter(): void {
+    this.init();
+  }
 
-    protected abstract init(): any;
+  protected abstract init(): any;
 }

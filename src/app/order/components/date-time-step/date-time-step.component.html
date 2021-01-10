@@ -1,17 +1,17 @@
 <app-step-container>
-    <ion-list>
-        <ion-list-header class="fs20">
-            <ion-label>{{ 'order.date-time-header' | translate }}</ion-label>
-        </ion-list-header>
-        <ion-item>
-            <ion-label>
-                {{ 'order.date-time-subheader' | translate }}
-            </ion-label>
-        </ion-item>
-        <app-calendar-component
-                [formControl]="form.get('datetime')"
-                (newDate)="showCalendarForDate($event)"
-                [enabledPeriods]="displayedCalendars$ | async">
-        </app-calendar-component>
-    </ion-list>
+  <ion-list>
+    <ion-list-header class="fs20">
+      <ion-label>{{ 'order.date-time-header' | translate }}</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        {{ 'order.date-time-subheader' | translate }}
+      </ion-label>
+    </ion-item>
+    <app-calendar-component
+      [formControl]="form.get('datetime')"
+      (newDate)="showCalendarForDate($event)"
+      [enabledPeriods]="displayedCalendars$ | async">
+    </app-calendar-component>
+  </ion-list>
 </app-step-container>

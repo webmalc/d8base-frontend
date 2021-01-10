@@ -1,6 +1,6 @@
 export enum MasterProfileSubmenu {
-    Services = 'services',
-    Info = 'info',
-    Calendar = 'calendar',
-    Portfolio = 'portfolio'
+  Services = 'services',
+  Info = 'info',
+  Calendar = 'calendar',
+  Portfolio = 'portfolio',
 }

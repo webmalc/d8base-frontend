@@ -1,57 +1,57 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-item lines="none">
-            <ion-icon name="globe-outline" slot="start"></ion-icon>
-            <ion-label>{{(country$ | async)?.name}}</ion-label>
-        </ion-item>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-icon name="globe-outline" slot="start"></ion-icon>
+      <ion-label>{{(country$ | async)?.name}}</ion-label>
+    </ion-item>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list class="ion-no-padding">
-        <ion-item class="ion-activatable cursor-pointer">
-            {{'flag-menu.language' | translate}}:
-            <ion-select (ionChange)="userSettings.setUserAppLang($event.detail.value)"
-                        [ngModel]="(userSettings.userSettings$ | async)?.language"
-                        interface="alert"
-            >
-                <ion-select-option *ngFor="let lang of userSettings.langList" value="{{ lang }}">
-                    {{ lang }}
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item class="ion-activatable cursor-pointer">
-            {{'flag-menu.currency' | translate}}:
-            <ion-select (ionChange)="userSettings.setCurrency($event.detail.value)"
-                        [ngModel]="(userSettings.userSettings$ | async)?.currency"
-                        interface="alert"
-                        property="currency"
-            >
-                <ion-select-option *ngFor="let currency of (currencyList$ | async)"
-                                   value="{{ currency.currency }}">
-                    {{ currency.currency | titlecase }}
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item class="ion-activatable cursor-pointer">
-            {{'flag-menu.units' | translate}}:
-            <ion-select (ionChange)="userSettings.setUnits($event.detail.value)"
-                        [ngModel]="(userSettings.userSettings$ | async)?.units?.toString()"
-                        interface="alert"
-            >
-                <ion-select-option *ngFor="let unit of userSettings.unitsList" value="{{ unit }}">
-                    {{ 'units.' + unit | translate | titlecase }}
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item class="ion-activatable cursor-pointer">
-            {{'flag-menu.hide-last-name' | translate}}:
-            <ion-toggle (ionChange)="userSettings.setIsLastNameHidden($event.detail.checked)"
-                        [ngModel]="(userSettings.userSettings$ | async)?.is_last_name_hidden"
-            ></ion-toggle>
-        </ion-item>
-        <ion-item class="ion-activatable cursor-pointer">
-            {{'flag-menu.dark-theme' | translate}}:
-            <ion-toggle (ionChange)="changeMode($event)" [checked]="darkTheme$ | async"></ion-toggle>
-        </ion-item>
-    </ion-list>
+  <ion-list class="ion-no-padding">
+    <ion-item class="ion-activatable cursor-pointer">
+      {{'flag-menu.language' | translate}}:
+      <ion-select (ionChange)="userSettings.setUserAppLang($event.detail.value)"
+                  [ngModel]="(userSettings.userSettings$ | async)?.language"
+                  interface="alert"
+      >
+        <ion-select-option *ngFor="let lang of userSettings.langList" value="{{ lang }}">
+          {{ lang }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="ion-activatable cursor-pointer">
+      {{'flag-menu.currency' | translate}}:
+      <ion-select (ionChange)="userSettings.setCurrency($event.detail.value)"
+                  [ngModel]="(userSettings.userSettings$ | async)?.currency"
+                  interface="alert"
+                  property="currency"
+      >
+        <ion-select-option *ngFor="let currency of (currencyList$ | async)"
+                           value="{{ currency.currency }}">
+          {{ currency.currency | titlecase }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="ion-activatable cursor-pointer">
+      {{'flag-menu.units' | translate}}:
+      <ion-select (ionChange)="userSettings.setUnits($event.detail.value)"
+                  [ngModel]="(userSettings.userSettings$ | async)?.units?.toString()"
+                  interface="alert"
+      >
+        <ion-select-option *ngFor="let unit of userSettings.unitsList" value="{{ unit }}">
+          {{ 'units.' + unit | translate | titlecase }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="ion-activatable cursor-pointer">
+      {{'flag-menu.hide-last-name' | translate}}:
+      <ion-toggle (ionChange)="userSettings.setIsLastNameHidden($event.detail.checked)"
+                  [ngModel]="(userSettings.userSettings$ | async)?.is_last_name_hidden"
+      ></ion-toggle>
+    </ion-item>
+    <ion-item class="ion-activatable cursor-pointer">
+      {{'flag-menu.dark-theme' | translate}}:
+      <ion-toggle (ionChange)="changeMode($event)" [checked]="darkTheme$ | async"></ion-toggle>
+    </ion-item>
+  </ion-list>
 </ion-content>

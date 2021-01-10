@@ -34,88 +34,89 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
-        IonicSelectableModule,
-        IonicModule.forRoot(),
-        IonicStorageModule.forRoot(),
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        FormsModule,
-        LeafletModule.forRoot(),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: JsonTranslateLoader
-            }
-        }),
-        SharedModule,
-        ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` })
-    ],
-    providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (initService: AppInitService) => () => initService.init(),
-            multi: true,
-            deps: [AppInitService, Sentry.TraceService]
-        },
-        StatusBar,
-        SplashScreen,
-        Title,
-        {
-            provide: RouteReuseStrategy,
-            useClass: IonicRouteStrategy
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HeadersInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: LangInterceptorService,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TimezoneInterceptor,
-            multi: true
-        },
-        {
-            provide: ErrorHandler,
-            useClass: GlobalErrorHandlerService
-        },
-        Geolocation,
-        GeolocationService,
-        LocationService,
-        IpServicesHolderService,
-        IpApiService,
-        IpDataService,
-        IpnfDataService,
-        FcmDeviceService,
-        {
-            provide: LocationAccuracy,
-            useFactory: (platform: Platform) =>
-                !platform.is('desktop')
-                    ? LocationAccuracy
-                    : {
-                          request: () => Promise.resolve(true),
-                          canRequest: () => Promise.resolve()
-                      },
-            deps: [Platform]
-        },
-        {
-            provide: Sentry.TraceService,
-            deps: [Router]
-        }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    IonicSelectableModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    LeafletModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: JsonTranslateLoader,
+      },
+    }),
+    SharedModule,
+    ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
+  ],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (initService: AppInitService) => () => initService.init(),
+      multi: true,
+      deps: [AppInitService, Sentry.TraceService],
+    },
+    StatusBar,
+    SplashScreen,
+    Title,
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeadersInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LangInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimezoneInterceptor,
+      multi: true,
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandlerService,
+    },
+    Geolocation,
+    GeolocationService,
+    LocationService,
+    IpServicesHolderService,
+    IpApiService,
+    IpDataService,
+    IpnfDataService,
+    FcmDeviceService,
+    {
+      provide: LocationAccuracy,
+      useFactory: (platform: Platform) =>
+        !platform.is('desktop')
+          ? LocationAccuracy
+          : {
+            request: () => Promise.resolve(true),
+            canRequest: () => Promise.resolve(),
+          },
+      deps: [Platform],
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

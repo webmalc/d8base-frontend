@@ -1,17 +1,17 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-toggle menu="main-menu" [autoHide]="false">
-                <ion-button (click)="toggleMenu('main-menu')">
-                    <ion-icon slot="icon-only" name="menu"></ion-icon>
-                </ion-button>
-            </ion-menu-toggle>
-        </ion-buttons>
-        <ion-item class="main-logo" lines="none" routerDirection="root" [detail]="false"
-                  routerLink="/"
-                  slot="start">
-            <svg width="57" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle menu="main-menu" [autoHide]="false">
+        <ion-button (click)="toggleMenu('main-menu')">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-item class="main-logo" lines="none" routerDirection="root" [detail]="false"
+              routerLink="/"
+              slot="start">
+      <svg width="57" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408
                             7.45976C4.5997 7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419
                             29.6441C13.241 29.6441 15.3605 27.9881 16.6344
                             26.1462H16.7077V28.9643H21.1609V1.13798H16.3075V10.2778ZM10.6875 24.9086C7.22085
@@ -33,61 +33,61 @@
                             13.247 63.973 7.45976 56.9269 7.45976ZM56.4196 24.9086C52.8796 24.9086 50.3994
                             21.9743 50.3994 18.2905C50.3994 14.7577 53.0994 12.1953 56.4196 12.1953C59.9201
                             12.1953 62.1466 14.9378 62.1466 18.5868C62.1466 22.1602 59.8863 24.9086 56.4196
-                            24.9086Z" fill="#0CD1E8"/>
-            </svg>
-        </ion-item>
+                            24.9086Z" fill="#0CD1E8" />
+      </svg>
+    </ion-item>
 
-        <ng-container *ngIf="isAuthenticated$|async">
-            <ng-container *ngIf="!(masterManager.isMaster$ | async) else master">
-                <ion-item *ngIf="isDesktop()" [detail]="false"
-                          lines="none" slot="end" routerLink="/service/publish">
-                    {{'template.become-master'|translate}}
-                </ion-item>
-                <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/outbox" [detail]="false">
-                    <ion-icon class="pr5" name="calendar-outline"></ion-icon>
-                    {{'template.my-orders'|translate}}
-                </ion-item>
-            </ng-container>
-            <ng-template #master>
-                <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/inbox" [detail]="false">
-                    <ion-icon class="pr5" name="calendar-outline"></ion-icon>
-                    {{'template.my-orders'|translate}}
-                </ion-item>
-            </ng-template>
-        </ng-container>
+    <ng-container *ngIf="isAuthenticated$|async">
+      <ng-container *ngIf="!(masterManager.isMaster$ | async) else master">
+        <ion-item *ngIf="isDesktop()" [detail]="false"
+                  lines="none" slot="end" routerLink="/service/publish">
+          {{'template.become-master'|translate}}
+        </ion-item>
+        <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/outbox" [detail]="false">
+          <ion-icon class="pr5" name="calendar-outline"></ion-icon>
+          {{'template.my-orders'|translate}}
+        </ion-item>
+      </ng-container>
+      <ng-template #master>
+        <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/inbox" [detail]="false">
+          <ion-icon class="pr5" name="calendar-outline"></ion-icon>
+          {{'template.my-orders'|translate}}
+        </ion-item>
+      </ng-template>
+    </ng-container>
 
-        <ion-item *ngIf="(isAuthenticated$|async)"
-                class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
-            <ion-icon name="notifications-outline"></ion-icon>
-        </ion-item>
-        <ion-item *ngIf="(isAuthenticated$|async)"
-                lines="none" class="ion-item-no-side-padding" slot="end">
-            <ion-icon name="heart-outline"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
-                  *ngIf="!(isAuthenticated$|async)"
-                  routerLink="/auth/login"
-                  routerDirection="forward"
-                  routerLinkActive="active">
-            {{'template.sign-in'|translate}}
-        </ion-item>
-        <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
-                  *ngIf="!(isAuthenticated$|async) && isDesktop()"
-                  routerLink="/auth/registration"
-                  routerLinkActive="active"
-                  routerDirection="forward">
-            {{'template.sign-up'|translate}}
-        </ion-item>
-        <ion-buttons slot="end">
-            <ion-menu-toggle menu="flag-menu">
-                <ion-button>
+    <ion-item *ngIf="(isAuthenticated$|async)"
+              class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
+      <ion-icon name="notifications-outline"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="(isAuthenticated$|async)"
+              lines="none" class="ion-item-no-side-padding" slot="end">
+      <ion-icon name="heart-outline"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
+              *ngIf="!(isAuthenticated$|async)"
+              routerLink="/auth/login"
+              routerDirection="forward"
+              routerLinkActive="active">
+      {{'template.sign-in'|translate}}
+    </ion-item>
+    <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
+              *ngIf="!(isAuthenticated$|async) && isDesktop()"
+              routerLink="/auth/registration"
+              routerLinkActive="active"
+              routerDirection="forward">
+      {{'template.sign-up'|translate}}
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-menu-toggle menu="flag-menu">
+        <ion-button>
                     <span *ngIf="(countryCode$ | async) else defaultCountry"
                           class="flag-icon flag-icon-{{countryCode$ | async}}"></span>
-                    <ng-template #defaultCountry>
-                        <span class="flag-icon flag-icon-{{getTemporaryDefaultCountry().code}}"></span>
-                    </ng-template>
-                </ion-button>
-            </ion-menu-toggle>
-        </ion-buttons>
-    </ion-toolbar>
+          <ng-template #defaultCountry>
+            <span class="flag-icon flag-icon-{{getTemporaryDefaultCountry().code}}"></span>
+          </ng-template>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>

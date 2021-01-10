@@ -1,4 +1,4 @@
-import {browser, by, element, ElementFinder} from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 export class RegistrationPage {
     public navigateTo(): any {
@@ -10,7 +10,7 @@ export class RegistrationPage {
         password: string,
         confirm: string,
         name: string,
-        phone: string
+        phone: string,
     }): Promise<void> {
         await element(by.css('ion-input[name="email"] input')).sendKeys(data.email);
         await element(by.css('ion-input[name="password"] input')).sendKeys(data.password);
