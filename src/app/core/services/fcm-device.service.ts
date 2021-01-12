@@ -30,7 +30,7 @@ export class FcmDeviceService {
   }
 
   private async saveTokenOrUpdateActivity(): Promise<void> {
-    if (firebase.messaging.isSupported() && Notification.permission === 'granted') {
+    if (NotificationWorkerService.isFirebaseSupported()) {
       this.fcmDevicesApi.saveTokenOrUpdateActivity(await firebase.messaging().getToken()).subscribe();
     }
   }

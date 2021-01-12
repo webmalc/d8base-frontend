@@ -18,7 +18,7 @@ export class NotificationWorkerService {
   }
 
   public static isFirebaseSupported(): boolean {
-    return firebase.messaging.isSupported();
+    return firebase.messaging.isSupported() && Notification.permission === 'granted';
   }
 
   @once

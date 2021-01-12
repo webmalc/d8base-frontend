@@ -4,14 +4,13 @@ import { NotificationWorkerService } from '@app/core/services/notification-worke
 import { Message } from '@app/message/models/message';
 import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
 import { environment } from '@env/environment';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import Timer = NodeJS.Timer;
+import { Observable, Subject } from 'rxjs';
+import { delay, repeat, switchMap, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class MessageListUpdaterService {
 
-  private timer: Timer;
+  private readonly destroy$ = new Subject<void>();
   private readonly updateInterval: number = environment.message.direct_update_interval_ms;
   private readonly messagesPerPage: number = environment.message.messages_per_page;
 
@@ -21,18 +20,17 @@ export class MessageListUpdaterService {
   public receiveUpdates(interlocutorId: number): Observable<ApiListResponseInterface<Message>> {
     this.destroy();
 
-    return NotificationWorkerService.isFirebaseSupported() ? this.notificationWorker.messageReceived$.pipe(
-      switchMap(() => this.getMessageList(interlocutorId)),
-    ) : new Observable<ApiListResponseInterface<Message>>(
-      subscriber => {
-        this.timer = setInterval(() => this.messagesListApi.getByInterlocutor(
-          interlocutorId, this.messagesPerPage,
-        ).subscribe(
-          data => subscriber.next(data),
-          err => console.error(err),
-        ), this.updateInterval);
-      },
-    );
+    return NotificationWorkerService.isFirebaseSupported() ?
+      this.notificationWorker.messageReceived$.pipe(
+        switchMap(() => this.getMessageList(interlocutorId)),
+        takeUntil(this.destroy$),
+      ) :
+      this.getMessageList(interlocutorId).pipe(
+        delay(this.updateInterval),
+        repeat(),
+        switchMap(_ => this.getMessageList(interlocutorId)),
+        takeUntil(this.destroy$),
+      );
   }
 
   public getMessageList(interlocutorId: number, page?: number): Observable<ApiListResponseInterface<Message>> {
@@ -40,8 +38,6 @@ export class MessageListUpdaterService {
   }
 
   public destroy(): void {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
+    this.destroy$.next();
   }
 }

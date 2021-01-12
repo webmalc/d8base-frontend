@@ -3,15 +3,14 @@ import { NotificationWorkerService } from '@app/core/services/notification-worke
 import { AbstractMessage } from '@app/message/models/abstract-message';
 import { ChatsCompilerService } from '@app/message/services/chats-compiler.service';
 import { environment } from '@env/environment';
-import { from, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import Timer = NodeJS.Timer;
+import { from, Observable, Subject } from 'rxjs';
+import { delay, repeat, switchMap, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class ChatListUpdaterService {
 
-  private timer: Timer;
   private readonly updateInterval: number = environment.message.chat_list_update_interval_ms;
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private readonly chatsCompilerService: ChatsCompilerService,
@@ -22,15 +21,17 @@ export class ChatListUpdaterService {
   public receiveUpdates(): Observable<AbstractMessage[]> {
     this.destroy();
 
-    return NotificationWorkerService.isFirebaseSupported() ? this.notificationWorker.messageReceived$.pipe(
-      switchMap(() => this.getChatList()),
-    ) : new Observable<AbstractMessage[]>(
-      subscriber => {
-        this.timer = setInterval(() => this.chatsCompilerService.generateChatList().then(
-          (chatList: AbstractMessage[]) => subscriber.next(chatList),
-        ), this.updateInterval);
-      },
-    );
+    return NotificationWorkerService.isFirebaseSupported() ?
+      this.notificationWorker.messageReceived$.pipe(
+        switchMap(() => this.getChatList()),
+        takeUntil(this.destroy$),
+      ) :
+      this.getChatList().pipe(
+        delay(this.updateInterval),
+        repeat(),
+        switchMap(_ => this.getChatList()),
+        takeUntil(this.destroy$),
+      );
   }
 
   public getChatList(): Observable<AbstractMessage[]> {
@@ -38,8 +39,6 @@ export class ChatListUpdaterService {
   }
 
   public destroy(): void {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
+    this.destroy$.next();
   }
 }
