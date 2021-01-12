@@ -21,7 +21,7 @@
   </ion-header>
   <ion-list class="d8b-container">
     <ion-label *ngIf="!(chatsService.chatList$|async).length">
-      chat list is empty
+      {{'messages.chat-list-page.empty-list'|translate}}
     </ion-label>
     <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey"
               *ngFor="let chat of (chatsService.chatList$|async)">
