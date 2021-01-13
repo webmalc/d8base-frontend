@@ -31,7 +31,6 @@ import { DefaultLocationPopoverComponent } from '@app/shared/components/default-
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { FlagMenuComponent } from '@app/shared/components/flag-menu/flag-menu.component';
 import { InfoRowComponent } from '@app/shared/components/info-row/info-row.component';
-import { InputErrorDescriptionComponent } from '@app/shared/components/input-error-description/input-error-description.component';
 import { MediaLinksComponent } from '@app/shared/components/media-links/media-links.component';
 import { PictureSelectorComponent } from '@app/shared/components/picture-selector/picture-selector.component';
 import { RatingFullStarComponent } from '@app/shared/components/rating-full-star/rating-full-star.component';
@@ -54,6 +53,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrMaskerModule } from 'br-mask';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
 import { ImageCropPopoverComponent } from './components/picture-selector/image-cropper/image-crop-popover.component';
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import { DebounceDirective } from './directives/debounce.directive';
@@ -102,7 +102,7 @@ import { NumberDirective } from './directives/number.directive';
     ServiceDataFilterPipe,
     ScheduleViewerComponent,
     DurationViewerComponent,
-    InputErrorDescriptionComponent,
+    FormControlErrorComponent,
     SuccessFlashbagComponent,
     ServicePhotosComponent,
     PhotoPopoverComponent,
@@ -146,7 +146,7 @@ import { NumberDirective } from './directives/number.directive';
     ServiceDataFilterPipe,
     ScheduleViewerComponent,
     DurationViewerComponent,
-    InputErrorDescriptionComponent,
+    FormControlErrorComponent,
     SuccessFlashbagComponent,
     ServicePhotosComponent,
     PhotoPopoverComponent,
@@ -178,5 +178,4 @@ import { NumberDirective } from './directives/number.directive';
     SelectableSubregionOnSearchService,
   ],
 })
-export class SharedModule {
-}
+export class SharedModule {}

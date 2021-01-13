@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { InputErrorDescriptionComponent } from './input-error-description.component';
+import { FormControlErrorComponent } from './form-control-error.component';
 
-describe('InputErrorDescriptionComponent', () => {
-  let component: InputErrorDescriptionComponent;
-  let fixture: ComponentFixture<InputErrorDescriptionComponent>;
+describe('FormControlErrorComponent', () => {
+  let component: FormControlErrorComponent;
+  let fixture: ComponentFixture<FormControlErrorComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [InputErrorDescriptionComponent],
+      declarations: [FormControlErrorComponent],
       imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InputErrorDescriptionComponent);
+    fixture = TestBed.createComponent(FormControlErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

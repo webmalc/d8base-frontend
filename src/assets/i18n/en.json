@@ -47,11 +47,6 @@
     "okay": "Okay",
     "cancel": "Cancel"
   },
-  "error": {
-    "password-mismatch": "Passwords mismatch",
-    "password-too-short": "Password is too short",
-    "password-numeric": "Numeric passwords are forbidden"
-  },
   "service-photos": {
     "title": "Photos"
   },
@@ -707,5 +702,12 @@
   "orders-type": {
     "sent": "Sent",
     "received": "Received"
+  },
+  "form-errors": {
+    "minlength": "Field value needs length at least {{ requiredLength }} symbols. Current length is {{ actualLength }}.",
+    "maxlength": "Maximum length of field's value haven't to exceed {{ requiredLength }} symbols. Current length is {{ actualLength }}.",
+    "email": "Email is invalid.",
+    "forbidNumericValue": "Field value can't contain numbers only.",
+    "passwordMismatch": "Passwords are mismatch."
   }
 }
