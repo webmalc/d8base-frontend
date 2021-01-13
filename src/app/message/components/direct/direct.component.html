@@ -1,4 +1,5 @@
-<ion-header (keydown.escape)="cancelUpdate()" class="ion-d8b-gradient-bgc">
+<app-header></app-header>
+<ion-toolbar (keydown.escape)="cancelUpdate()" class="ion-d8b-gradient-bgc">
   <ion-item class="ion-item-no-border ion-justify-content-center ion-align-items-center">
     <ion-row class="d8b-container chat-container width100 ion-align-items-center">
       <ion-col size="1" class="ion-no-margin ion-no-padding">
@@ -16,8 +17,7 @@
       </ion-col>
     </ion-row>
   </ion-item>
-</ion-header>
-
+</ion-toolbar>
 <ion-content class="ion-margin-top" id="content" [scrollEvents]="true" (click)="resetContext()">
   <ion-infinite-scroll threshold="800px" [disabled]="true" (ionInfinite)="loadData()" position="top">
     <ion-infinite-scroll-content
@@ -69,7 +69,7 @@
 </ion-content>
 <ion-footer class="ion-no-border d8b-container chat-container" (keydown.enter)="send()"
             (keydown.escape)="cancelUpdate()">
-  <ion-toolbar class="">
+  <ion-toolbar>
     <ion-row *ngIf="isUpdate" class="ion-padding-horizontal ion-align-items-center" (click)="showUpdatingMessage()">
       <ion-col size="1" class="cursor-pointer">
         <ion-item class="ion-item-no-border">
