@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
   providers: [ServicesApiCache, MasterReadonlyApiCacheService],
 })
 export class MyOrdersPageComponent {
-  public state$: Observable<{ isMaster: boolean, isInbox: boolean }>;
+  public state$: Observable<{ isMaster: boolean; isInbox: boolean }>;
 
   constructor(
     masterManager: MasterManagerService,

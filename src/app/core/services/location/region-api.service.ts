@@ -20,12 +20,12 @@ export class RegionApiService extends AbstractReadonlyApiService<Region> {
 
   public get(
     params: {
-      country?: string,
-      code?: string,
-      search?: string,
-      ordering?: string,
-      page?: string,
-      page_size?: string,
+      country?: string;
+      code?: string;
+      search?: string;
+      ordering?: string;
+      page?: string;
+      page_size?: string;
     },
   ): Observable<ApiListResponseInterface<Region>> {
     return super.get(params);

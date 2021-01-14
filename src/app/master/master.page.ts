@@ -53,7 +53,7 @@ export class MasterPage {
     this.tab.next(tab);
   }
 
-  private getUserMaster(masterId: number): Observable<{ user: UserExtended, master: ProfessionalList }> {
+  private getUserMaster(masterId: number): Observable<{ user: UserExtended; master: ProfessionalList }> {
     return Number.isNaN(masterId) ?
       forkJoin({
         master: this.masterManager.getMasterList().pipe(

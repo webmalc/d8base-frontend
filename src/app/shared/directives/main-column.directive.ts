@@ -1,5 +1,6 @@
 import { Directive, HostBinding } from '@angular/core';
 
+/* eslint-disable no-shadow */
 enum SizeAttr {
   Xs = 'size-xs',
   Sm = 'size-sm',

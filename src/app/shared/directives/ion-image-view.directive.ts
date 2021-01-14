@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { PhotoPopoverComponent } from '../components/photo-popover/photo-popover.component';
 
 @Directive({
-  // tslint:disable:directive-selector
+  /* eslint-disable @angular-eslint/directive-selector */
   selector: 'ion-img[viewOnClick]',
 })
 export class IonImageViewDirective {

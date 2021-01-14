@@ -3,7 +3,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Coordinates } from '@app/shared/interfaces/coordinates';
 import { environment } from '@env/environment';
 import * as L from 'leaflet';
-import { LeafletMouseEvent } from 'leaflet';
 
 @Component({
   selector: 'app-user-location-map',
@@ -43,7 +42,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     this.invalidateSize();
   }
 
-  public onMapClick(event: LeafletMouseEvent): void {
+  public onMapClick(event: L.LeafletMouseEvent): void {
     if (!this.interactive) {
       return;
     }
@@ -64,7 +63,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  // tslint:disable:no-empty
+  /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
   public registerOnTouched(fn: any): void {
   }
 

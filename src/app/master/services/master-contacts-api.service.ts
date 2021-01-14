@@ -24,7 +24,7 @@ export class MasterContactsApiService extends AbstractApiService<ClientContactIn
 
   public getByClientId(
     masterId: number,
-    params?: { [param: string]: string | string[]; },
+    params?: { [param: string]: string | string[] },
   ): Observable<ApiListResponseInterface<MasterContact>> {
     return super.get({ professional: masterId.toString(10), ...params });
   }

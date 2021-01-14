@@ -1,0 +1,185 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "src/assets/**/*",
+    "src/environments/**/*",
+    "src/testing/**/*",
+    "src/app/api/**/*",
+    "src/*.ts",
+    "*.spec.ts",
+    "*.html"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "plugins": [
+        "eslint-plugin-react"
+      ],
+      "rules": {
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          {
+            "suffixes": [
+              "Page",
+              "Component"
+            ]
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "constructors": "no-public"
+            }
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "error",
+        "@typescript-eslint/no-inferrable-types": [
+          "off",
+          {
+            "ignoreParameters": true
+          }
+        ],
+        "@typescript-eslint/no-this-alias": "error",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-readonly": "error",
+        "@typescript-eslint/type-annotation-spacing": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/naming-convention": "off", // TODO set to "error"
+        "@typescript-eslint/member-delimiter-style": "error",
+        "@typescript-eslint/no-unused-expressions": "off", // TODO set to "error"
+        "@typescript-eslint/member-ordering": [
+          "error",
+          { "default": [
+            "public-static-field",
+            "protected-static-field",
+            "private-static-field",
+            "public-instance-field",
+            "protected-instance-field",
+            "private-instance-field",
+            "public-constructor",
+            "protected-constructor",
+            "private-constructor",
+            "public-static-method",
+            "protected-static-method",
+            "private-static-method",
+            "public-instance-method",
+            "protected-instance-method",
+            "private-instance-method"
+          ]}
+        ],
+        "@typescript-eslint/no-invalid-this": "off", // TODO set to "error"
+        "@typescript-eslint/prefer-literal-enum-member": "error",
+        "arrow-parens": [
+          "off",
+          "always"
+        ],
+        "brace-style": [
+          "off",
+          "off"
+        ],
+        "comma-dangle": [
+          "error",
+          "always-multiline"
+        ],
+        "complexity": "error",
+        "default-case": "error",
+        "eol-last": "off",
+        "eqeqeq": [
+          "error",
+          "always"
+        ],
+        "import/order": "error",
+        "linebreak-style": "off",
+        "max-classes-per-file": [
+          "error",
+          1
+        ],
+        "max-lines": [
+          "error",
+          300
+        ],
+        "new-parens": "off",
+        "newline-per-chained-call": "off",
+        "no-duplicate-case": "error",
+        "no-duplicate-imports": "error",
+        "no-empty": "error",
+        "no-extra-bind": "error",
+        "no-extra-semi": "off",
+        "no-invalid-this": "off",
+        "no-irregular-whitespace": "error",
+        "no-multiple-empty-lines": [
+          "error",
+          {
+            "max": 2
+          }
+        ],
+        "no-plusplus": [
+          "error",
+          {
+            "allowForLoopAfterthoughts": true
+          }
+        ],
+        "no-redeclare": "error",
+        "no-template-curly-in-string": "error",
+        "no-useless-constructor": "off",
+        "no-shadow": "off", // TODO set to "error"? ts enums issue
+        "one-var": [
+          "off",
+          "never"
+        ],
+        "prefer-template": "error",
+        "react/jsx-curly-spacing": "off",
+        "react/jsx-equals-spacing": "off",
+        "react/jsx-wrap-multilines": "off",
+        "space-before-function-paren": "off",
+        "space-in-parens": [
+          "off",
+          "never"
+        ],
+        "no-underscore-dangle": "off",
+        "prefer-arrow/prefer-arrow-functions": "off"
+      }
+    }
+// TODO: uncomment and fix templates
+//    {
+//      "files": [
+//        "*.html"
+//      ],
+//      "extends": [
+//        "plugin:@angular-eslint/template/recommended"
+//      ],
+//      "rules": {}
+//    }
+  ]
+}

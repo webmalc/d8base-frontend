@@ -31,9 +31,7 @@ export class BookmarksService {
           return value.map(({ professional }) => professional);
         }),
         switchMap(ids => this.masterManager.getUserLessList$(ids)),
-        map((value: ProfessionalList[]) => {
-          return this.fill(rawBookmarks, value);
-        }),
+        map((value: ProfessionalList[]) => this.fill(rawBookmarks, value)),
       );
   }
 

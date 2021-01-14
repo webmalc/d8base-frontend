@@ -14,7 +14,7 @@ class LocationServiceStub {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 class CitiesApiServiceStub {
   public getByLocation(): Observable<ApiListResponseInterface<City>> {
     const response: ApiListResponseInterface<City> = {

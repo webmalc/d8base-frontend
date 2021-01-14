@@ -4,7 +4,7 @@ import { MainGuard } from '@app/core/guards/main.guard';
 import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
 import { MasterPage } from './master.page';
 
-// tslint:disable:max-line-length
+/* eslint-disable max-len */
 const routes: Routes = [
   {
     path: '',

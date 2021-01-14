@@ -146,7 +146,7 @@ export class DirectServiceService {
 
       return;
     }
-    const nextPageIndex = parseInt((new URL(nextPageResponse + '/')).searchParams.get('page'), 10);
+    const nextPageIndex = parseInt((new URL(`${nextPageResponse  }/`)).searchParams.get('page'), 10);
     if (nextPageIndex) {
       this.hasNextApiPage.next(true);
       this.currentMessagesApiPage = nextPageIndex - 1;

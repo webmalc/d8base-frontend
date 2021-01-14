@@ -60,8 +60,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   public submitForm(): void {
-    let data: StepSevenDataInterface;
-    data = this.formService.form.getRawValue();
+    const data: StepSevenDataInterface = this.formService.form.getRawValue();
     data.need_to_create_master_schedule = !this.renderUseMasterSchedule;
     if (!this.renderUseMasterSchedule) {
       data.use_master_schedule = true;

@@ -10,7 +10,7 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
   protected constructor(protected client: ApiClientService) {
   }
 
-  public get(params?: { [param: string]: string | string[]; }): Observable<ApiListResponseInterface<T>> {
+  public get(params?: { [param: string]: string | string[] }): Observable<ApiListResponseInterface<T>> {
     return this.client.get(this.getUrl(), HelperService.clear(params)).pipe(
       map((raw: ApiListResponseInterface<T>) => {
         raw.results = this.transform(raw.results);
@@ -32,7 +32,7 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
     );
   }
 
-  public options<Q>(params?: { [param: string]: string | string[]; }): Observable<Q> {
+  public options<Q>(params?: { [param: string]: string | string[] }): Observable<Q> {
     return this.client.options<Q>(this.getUrl(), params);
   }
 

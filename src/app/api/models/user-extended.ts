@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { UserLanguage } from './user-language';
 export interface UserExtended {
     avatar?: string;

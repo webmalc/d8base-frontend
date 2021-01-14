@@ -21,10 +21,10 @@ export class UserSettingsApiService extends AbstractApiService<UserSettings> imp
   public getOptions(): Observable<{
     actions: {
       POST: {
-        language: { choices: Array<{ value: string, display_name: string }> },
-        currency: { choices: Array<{ value: string, display_name: string }> },
-      },
-    },
+        language: { choices: Array<{ value: string; display_name: string }> };
+        currency: { choices: Array<{ value: string; display_name: string }> };
+      };
+    };
   }> {
     return this.client.options(this.url);
   }

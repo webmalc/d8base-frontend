@@ -12,7 +12,7 @@ export class SelectableSubregionOnSearchService extends SelectableSearchService 
     super();
   }
 
-  public onSubregionSearch(event: { component: IonicSelectableComponent, text: string }, country: Country, region: Region): void {
+  public onSubregionSearch(event: { component: IonicSelectableComponent; text: string }, country: Country, region: Region): void {
     this.abstractOnSearch(
       event.component,
       event.text,

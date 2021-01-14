@@ -21,11 +21,11 @@ export class DistrictApiService extends AbstractReadonlyApiService<District> {
 
   public get(
     params: {
-      District?: string,
-      search?: string,
-      ordering?: string,
-      page?: string,
-      page_size?: string,
+      District?: string;
+      search?: string;
+      ordering?: string;
+      page?: string;
+      page_size?: string;
     },
   ): Observable<ApiListResponseInterface<District>> {
     return super.get(params);

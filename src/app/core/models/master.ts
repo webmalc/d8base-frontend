@@ -1,7 +1,7 @@
 import { ProfessionalList } from '@app/api/models';
 import { Expose } from 'class-transformer';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class Master implements ProfessionalList {
   @Expose() public id: number;
   @Expose() public name: string;

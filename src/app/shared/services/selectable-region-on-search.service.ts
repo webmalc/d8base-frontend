@@ -11,7 +11,7 @@ export class SelectableRegionOnSearchService extends SelectableSearchService {
     super();
   }
 
-  public onRegionSearch(event: { component: IonicSelectableComponent, text: string }, region: Region): void {
+  public onRegionSearch(event: { component: IonicSelectableComponent; text: string }, region: Region): void {
     this.abstractOnSearch(
       event.component,
       event.text,

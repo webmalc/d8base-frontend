@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Host, Renderer2 } from '@angular/
 import { IonImg } from '@ionic/angular';
 
 @Directive({
-  // tslint:disable:directive-selector
+  /* eslint-disable @angular-eslint/directive-selector */
   selector: 'ion-img[spinner]',
 })
 export class IonImageSpinnerDirective implements AfterViewInit {

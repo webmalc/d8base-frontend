@@ -34,7 +34,7 @@ export class ChatsComponent extends Reinitable implements OnDestroy {
   }
 
   public onChatClick(interlocutorId: number): void {
-    this.router.navigateByUrl('/message/chat/' + interlocutorId);
+    this.router.navigateByUrl(`/message/chat/${  interlocutorId}`);
   }
 
   protected init(): void {

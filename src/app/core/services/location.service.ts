@@ -32,9 +32,7 @@ export class LocationService {
 
   public getSingle<T extends ClientLocationInterface>(api: LocationApiServiceInterface, id: number): Observable<T> {
     return api.getByEntityId(id).pipe(
-      map(data => {
-        return { results: [data] };
-      }),
+      map(data => ({ results: [data] })),
       this.switch<T>(),
     ).pipe(
       map((data: T[]) => data.pop()),

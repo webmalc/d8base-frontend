@@ -12,7 +12,7 @@ export class ApiClientService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public get<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {
+  public get<T>(url: string, params?: { [param: string]: string | string[] }): Observable<T> {
     return this.http.get<T>(this.getHost() + url, { params });
   }
 
@@ -29,11 +29,11 @@ export class ApiClientService {
     return this.http.patch<T>(this.getHost() + url, data);
   }
 
-  public delete(url: string, params?: { [param: string]: string | string[]; }): Observable<any> {
+  public delete(url: string, params?: { [param: string]: string | string[] }): Observable<any> {
     return this.http.delete(this.getHost() + url, params);
   }
 
-  public options<T>(url: string, params?: { [param: string]: string | string[]; }): Observable<T> {
+  public options<T>(url: string, params?: { [param: string]: string | string[] }): Observable<T> {
     return this.http.options<T>(this.getHost() + url, params);
   }
 

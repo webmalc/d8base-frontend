@@ -45,18 +45,14 @@ export const ORDER_STEPS: StepsModel = {
   ids: [OrderIds.Date, OrderIds.ClientDetails, OrderIds.Location, OrderIds.Summary],
 };
 
-export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => {
-  return { ...acc, [curr]: null };
-}, {});
+export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ...acc, [curr]: null }), {});
 
 export const orderWizardStorageKey = 'orderWizardStorageKey';
 
 export const stepsRoutes = (guards: Type<CanActivate>[]) => Object.values(ORDER_STEPS.byId)
-  .map(({ component, needGuards, id }) => {
-    return {
+  .map(({ component, needGuards, id }) => ({
       path: `${id}`,
       pathMatch: 'full',
       canActivate: needGuards ? guards : null,
       component,
-    };
-  });
+    }));

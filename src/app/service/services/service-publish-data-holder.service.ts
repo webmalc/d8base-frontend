@@ -16,14 +16,14 @@ import { StepDataInterfaceType } from '@app/service/types/step-data-interface-ty
 export class ServicePublishDataHolderService {
 
   private stepsData: {
-    0?: StepOneDataInterface,
-    1?: StepTwoDataInterface,
-    2?: StepThreeDataInterface,
-    3?: StepFourDataInterface,
-    4?: StepFiveDataInterface,
-    5?: StepSixDataInterface,
-    6?: StepSevenDataInterface,
-    7?: FinalStepDataInterface,
+    0?: StepOneDataInterface;
+    1?: StepTwoDataInterface;
+    2?: StepThreeDataInterface;
+    3?: StepFourDataInterface;
+    4?: StepFiveDataInterface;
+    5?: StepSixDataInterface;
+    6?: StepSevenDataInterface;
+    7?: FinalStepDataInterface;
   } = {};
   private readonly storageKey = 'service_publish_data';
 

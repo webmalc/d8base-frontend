@@ -8,8 +8,8 @@ import { UserSettingsFromFields } from '@app/profile/enums/user-settings-from-fi
 export class SettingsFormService {
 
   public form: FormGroup;
-  public languages: Array<{ value: string, display_name: string }>;
-  public currency: Array<{ value: string, display_name: string }>;
+  public languages: Array<{ value: string; display_name: string }>;
+  public currency: Array<{ value: string; display_name: string }>;
   public units = ['metric', 'imperial/US'];
 
   constructor(private readonly formBuilder: FormBuilder) {
@@ -34,8 +34,8 @@ export class SettingsFormService {
   }
 
   public setLists(
-    languagesList: Array<{ value: string, display_name: string }>,
-    currencyList: Array<{ value: string, display_name: string }>,
+    languagesList: Array<{ value: string; display_name: string }>,
+    currencyList: Array<{ value: string; display_name: string }>,
   ): void {
     this.languages = languagesList;
     this.currency = currencyList;

@@ -4,7 +4,7 @@ import { Master } from '@app/core/models/master';
 import { Expose } from 'class-transformer';
 
 export class BookmarkMaster implements SavedProfessionalInterface<ProfessionalList> {
-  // tslint:disable:variable-name
+  /* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
   @Expose() public created: string;
   @Expose() public created_by: number;
   @Expose() public id: number;

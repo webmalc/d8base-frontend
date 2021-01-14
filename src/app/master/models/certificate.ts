@@ -1,7 +1,7 @@
 import { HelperService } from '@app/core/services/helper.service';
 import { Expose } from 'class-transformer';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class Certificate {
   @Expose() public id: number;
   @Expose() public professional: number;

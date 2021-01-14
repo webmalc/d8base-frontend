@@ -21,7 +21,7 @@ export class TagsApiService extends AbstractApiService<Tag> implements ApiServic
 
   public getByMasterId(
     masterId: number,
-    params?: { [param: string]: string | string[]; },
+    params?: { [param: string]: string | string[] },
   ): Observable<ApiListResponseInterface<Tag>> {
     return this.client.get(this.url, { professional: masterId?.toString(10), ...params });
   }

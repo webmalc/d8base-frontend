@@ -79,7 +79,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  // tslint:disable:no-empty
+  /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
   public registerOnTouched(fn: any): void {
   }
 

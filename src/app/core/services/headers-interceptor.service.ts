@@ -27,17 +27,15 @@ export class HeadersInterceptor implements HttpInterceptor {
     // TODO: don't ask for token if not needed
     return from(this.tokenManager.getAccessToken())
       .pipe(
-        catchError(_ => {
-          return of('');
-        }),
+        catchError(_ => of('')),
         switchMap(token => {
           let headers;
           if (this.getAuthUrls().includes(req.url)) {
-            headers = req.headers.append('Authorization', 'Basic ' +
-              btoa(`${environment.client_id}:${environment.client_secret}`))
+            headers = req.headers.append('Authorization', `Basic ${
+              btoa(`${environment.client_id}:${environment.client_secret}`)}`)
               .append('Content-Type', 'application/json');
           } else if (token) {
-            headers = req.headers.append('Authorization', 'Bearer ' + token)
+            headers = req.headers.append('Authorization', `Bearer ${  token}`)
               .append('Content-Type', 'application/json');
           }
 

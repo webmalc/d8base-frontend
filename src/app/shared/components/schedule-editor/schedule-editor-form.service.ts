@@ -16,7 +16,7 @@ export class ScheduleEditorFormService {
   constructor(private readonly formBuilder: FormBuilder) {
   }
 
-  get controls(): FormGroup[] {
+  public get controls(): FormGroup[] {
     return (this.form.controls.timetable as FormArray).controls as FormGroup[];
   }
 

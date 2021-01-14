@@ -20,7 +20,7 @@ export class CalendarService {
       return null;
     }
     const calendar: CalendarInterval[] = [];
-    const openedPeriodArray: { start: number, end: number }[] = this.generateEnabledPeriodsArray(enabledPeriods);
+    const openedPeriodArray: { start: number; end: number }[] = this.generateEnabledPeriodsArray(enabledPeriods);
     for (let i = 0; i < this.intervals; i += 1) {
       const units: CalendarUnit[] = [];
       for (let j = i * this.minutesInInterval; j <= (i + 1) * this.minutesInInterval; j += interval) {
@@ -37,7 +37,7 @@ export class CalendarService {
     return calendar;
   }
 
-  private checkIfTimeDisabled(enabledPeriods: { start: number, end: number }[], time: number): boolean {
+  private checkIfTimeDisabled(enabledPeriods: { start: number; end: number }[], time: number): boolean {
     for (const period of enabledPeriods) {
       if (time > period.start && time < period.end) {
         return true;
@@ -47,7 +47,7 @@ export class CalendarService {
     return false;
   }
 
-  private generateEnabledPeriodsArray(enabledPeriods: MasterCalendar[]): { start: number, end: number }[] {
+  private generateEnabledPeriodsArray(enabledPeriods: MasterCalendar[]): { start: number; end: number }[] {
     const res = [];
     enabledPeriods.forEach(v => {
       const startTime = new Date(v.start_datetime);

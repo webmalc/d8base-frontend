@@ -21,13 +21,13 @@ export class CountriesApiService extends AbstractReadonlyApiService<Country> {
 
   public get(
     params: {
-      page_size?: string,
-      currency?: string,
-      continent?: string,
-      search?: string,
-      ordering?: string,
-      page?: string,
-      tld?: string,
+      page_size?: string;
+      currency?: string;
+      continent?: string;
+      search?: string;
+      ordering?: string;
+      page?: string;
+      tld?: string;
     },
   ): Observable<ApiListResponseInterface<Country>> {
     return super.get(params);

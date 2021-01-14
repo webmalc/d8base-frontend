@@ -13,7 +13,7 @@ export class SelectablePostalCodeOnSearchService extends SelectableSearchService
     super();
   }
 
-  public onPostalCodeSearch(event: { component: IonicSelectableComponent, text: string }, city: City): void {
+  public onPostalCodeSearch(event: { component: IonicSelectableComponent; text: string }, city: City): void {
     this.abstractOnSearch(
       event.component,
       event.text,

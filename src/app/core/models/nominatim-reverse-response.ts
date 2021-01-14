@@ -1,7 +1,7 @@
 import { NominatimReverseResponseInterface } from '@app/core/interfaces/nominatim-reverse-response-interface';
 import { Expose } from 'class-transformer';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class NominatimReverseResponse implements NominatimReverseResponseInterface {
   @Expose() public error?: string;
   @Expose() public place_id: number;
@@ -30,7 +30,7 @@ export class NominatimReverseResponse implements NominatimReverseResponseInterfa
     state: string;
     country: string;
     postcode: string;
-    country_code: string
+    country_code: string;
   };
   @Expose() public boundingbox: number[];
 

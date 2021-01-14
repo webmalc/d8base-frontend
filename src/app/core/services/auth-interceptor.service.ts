@@ -54,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
       environment.backend.url + environment.backend.is_user_registered,
 
       // Search should be allowed for guest users:
-      environment.backend.url + `/api${SearchService.searchListPath}`,
+      `${environment.backend.url  }/api${SearchService.searchListPath}`,
     ];
   }
 }

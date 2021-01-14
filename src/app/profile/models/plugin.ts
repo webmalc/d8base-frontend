@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 
 export class Plugin {
-  // tslint:disable:variable-name
+  /* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
   @Expose() public id: number;
   @Expose() public title?: string;
   @Expose() public description?: string;

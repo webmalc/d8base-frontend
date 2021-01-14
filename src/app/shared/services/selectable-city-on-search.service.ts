@@ -11,7 +11,7 @@ export class SelectableCityOnSearchService extends SelectableSearchService {
     super();
   }
 
-  public onCitySearch(event: { component: IonicSelectableComponent, text: string }, countryValue: Country): void {
+  public onCitySearch(event: { component: IonicSelectableComponent; text: string }, countryValue: Country): void {
     this.abstractOnSearch(
       event.component,
       event.text,

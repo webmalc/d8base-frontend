@@ -14,7 +14,7 @@ export class FormControlErrorComponent implements OnInit {
   @Input() public filterErrors: string[] = ['required'];
   @Input() public showErrors: string[] = null;
   @Input() public readonly errorDescriptions: { key: string };
-  @Input() set controlName(name: string) {
+  @Input() public set controlName(name: string) {
     this.control = this.controlContainer?.control.get(name);
   }
   public errors: Observable<{ key: string; param: any }[]>;
