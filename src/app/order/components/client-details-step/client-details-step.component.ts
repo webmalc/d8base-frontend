@@ -25,7 +25,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     [this.formFields.IsForMe]: [false],
     [this.formFields.FirstName]: ['', Validators.required],
     [this.formFields.LastName]: [''],
-    [this.formFields.Email]: [''],
+    [this.formFields.Email]: ['', Validators.email],
     [this.formFields.Phone]: ['', Validators.required],
     [this.formFields.Comment]: [''],
   });

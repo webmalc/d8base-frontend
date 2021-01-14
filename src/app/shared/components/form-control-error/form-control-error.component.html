@@ -1,0 +1,3 @@
+<ion-label class="error-desc ion-text-wrap">
+  <div *ngFor="let error of errors | async">{{ error.key| translate:error.param }}</div>
+</ion-label>

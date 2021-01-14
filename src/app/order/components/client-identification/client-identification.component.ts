@@ -24,7 +24,7 @@ const NEXT_STEP_ID = OrderIds.Location;
 })
 export class ClientIdentificationComponent {
   public context$: Observable<StepContext> = this.wizardState.getContext();
-  public email = new FormControl('', Validators.required);
+  public email = new FormControl('', Validators.compose([Validators.required, Validators.email]));
   public password = new FormControl('', passwordValidators);
   public passwordConfirm = new FormControl({ value: '', disabled: true }, passwordValidators);
   public name = new FormControl({ value: '', disabled: true }, Validators.required);
