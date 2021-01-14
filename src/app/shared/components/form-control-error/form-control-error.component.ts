@@ -22,7 +22,7 @@ export class FormControlErrorComponent implements OnInit {
   constructor(@Optional() @SkipSelf() private readonly controlContainer: ControlContainer) {}
 
   public ngOnInit(): void {
-    this.errors = this.control.statusChanges.pipe(
+    this.errors = this.control?.statusChanges.pipe(
       map(() =>
         this.control.dirty && this.control.errors
           ? Object.keys(this.control.errors)
