@@ -674,12 +674,15 @@
     "currentTab": "Текущие",
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",
-    "accept-order": "Принять заказ",
+    "accept": "Принять",
+    "discard": "Отклонить",
+    "view": "Подробнее",
     "order-details-title": "Детали заказа",
     "order-details-subtitle": "Вас забронировали",
     "order-number": "Номер бронирования",
     "ordered-service": "Забронированная услуга",
-    "order-details": "Детали бронирования"
+    "order-details": "Детали бронирования",
+    "discard-confirmation": "Отклонить? Заказ будет перемещён в архив"
   },
   "sent_orders": {
     "title": "Мои заказы",

@@ -14,6 +14,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyOrdersPageComponent } from './my-orders-page.component';
 import { MyOrdersRoutingModule } from './my-orders-routing.module';
+import { ReceiverOrderStatusController } from './services';
 
 
 @NgModule({
@@ -33,6 +34,9 @@ import { MyOrdersRoutingModule } from './my-orders-routing.module';
     IonicModule,
     TranslateModule,
     MyOrdersRoutingModule,
+  ],
+  providers: [
+    ReceiverOrderStatusController,
   ],
 })
 export class MyOrdersModule {

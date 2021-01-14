@@ -1,5 +1,5 @@
 <ng-container *ngIf="order">
-  <ion-card [routerLink]="['/my-orders', 'inbox', order.id]" class="ion-no-margin mv5">
+  <ion-card class="ion-no-margin mv5">
     <ion-item lines="none">
       <ion-label slot="start">
         <div>{{ order.start_datetime | date:'mediumDate'}}</div>
@@ -24,10 +24,18 @@
       </ion-label>
     </ion-item>
 
-    <ng-container *ngIf="order.status === 'not_confirmed'">
-      <ion-button color="success" (click)="onAcceptClick()">
-        {{ 'received_orders.accept-order' | translate }}
+    <ion-item lines="none">
+      <ion-button [routerLink]="['/my-orders', 'inbox', order.id]">
+        {{ 'received_orders.view' | translate }}
       </ion-button>
-    </ng-container>
+      <ng-container *ngIf="order.status === 'not_confirmed'">
+        <ion-button slot="end" color="danger" (click)="onDiscardClick()">
+          {{ 'received_orders.discard' | translate }}
+        </ion-button>
+        <ion-button slot="end" color="success" (click)="onAcceptClick()">
+          {{ 'received_orders.accept' | translate }}
+        </ion-button>
+      </ng-container>
+    </ion-item>
   </ion-card>
 </ng-container>

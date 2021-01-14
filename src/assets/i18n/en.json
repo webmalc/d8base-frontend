@@ -674,12 +674,15 @@
     "currentTab": "Current",
     "archiveTab": "Archived",
     "empty-placeholder": "empty",
-    "accept-order": "Accept order",
+    "accept": "Accept",
+    "discard": "Discard",
+    "view": "View details",
     "order-details-title": "Order details",
     "order-details-subtitle": "The service was ordered",
     "order-number": "Order number",
     "ordered-service": "Ordered service",
-    "order-details": "Order details"
+    "order-details": "Order details",
+    "discard-confirmation": "Discard? The order will be archived"
   },
   "sent_orders": {
     "title": "My orders",

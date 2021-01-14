@@ -3,6 +3,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { ReceivedOrder } from '@app/core/models/received-order';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { HelperService } from '@app/core/services/helper.service';
+import { ReceiverOrderStatusController } from '@app/my-orders/services';
 import { Service } from '@app/service/models/service';
 
 @Component({
@@ -13,13 +14,14 @@ import { Service } from '@app/service/models/service';
 export class ReceivedOrderListItemComponent {
 
   public service: Service;
-  @Output() public accept = new EventEmitter<ReceivedOrder>();
+  @Output() public statusChanged = new EventEmitter<void>();
 
   private _order: ReceivedOrder;
 
   constructor(
     private readonly servicesCache: ServicesApiCache,
     private readonly changeDetector: ChangeDetectorRef,
+    private readonly orderStatusController: ReceiverOrderStatusController,
   ) {
   }
 
@@ -39,8 +41,14 @@ export class ReceivedOrderListItemComponent {
     });
   }
 
-  public onAcceptClick(): void {
-    this.accept.emit(this.order);
+  public async onAcceptClick(): Promise<void> {
+    await this.orderStatusController.acceptOrder(this.order);
+    this.statusChanged.emit();
+  }
+
+  public async onDiscardClick(): Promise<void> {
+    await this.orderStatusController.discardOrder(this.order);
+    this.statusChanged.emit();
   }
 
   public getPhoto(photo: string): string | SafeResourceUrl {
