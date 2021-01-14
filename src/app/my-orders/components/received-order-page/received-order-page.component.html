@@ -43,6 +43,17 @@
           <app-order-details [order]="order"></app-order-details>
         </ion-list>
 
+        <ion-item lines="none">
+          <ng-container *ngIf="order.status === 'not_confirmed'">
+            <ion-button slot="end" color="danger" (click)="onDiscardClick(order)">
+              {{ 'received_orders.discard' | translate }}
+            </ion-button>
+            <ion-button slot="end" color="success" (click)="onAcceptClick(order)">
+              {{ 'received_orders.accept' | translate }}
+            </ion-button>
+          </ng-container>
+        </ion-item>
+
       </ion-col>
     </ion-row>
   </ion-grid>

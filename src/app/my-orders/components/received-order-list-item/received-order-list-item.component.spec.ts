@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ServicesApiCache } from '@app/core/services/cache';
 
 import { ReceivedOrderListItemComponent } from '@app/my-orders/components';
+import { ReceiverOrderStatusController } from '@app/my-orders/services';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -20,7 +21,7 @@ describe('OrderListItemComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
       ],
-      providers: [ServicesApiCache],
+      providers: [ServicesApiCache, ReceiverOrderStatusController],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ReceivedOrderListItemComponent);
