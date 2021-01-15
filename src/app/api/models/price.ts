@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface Price {
     created_by?: number;
     end_price?: null | string;

@@ -83,9 +83,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
   // TODO Extract getting locations out of component
   private getServiceLocations(): void {
-    const locationsObservables = this.context.service.locations.map(({ location }) => {
-      return this.fullLocationService.getTextLocation(location);
-    });
+    const locationsObservables = this.context.service.locations.map(({ location }) => this.fullLocationService.getTextLocation(location));
     forkJoin(locationsObservables)
       .pipe(takeUntil(this.ngDestroy$))
       .subscribe(locations => {
@@ -96,12 +94,10 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
   private getClientLocations(): void {
     this.userLocationService.getByClientId().pipe(
-      switchMap(({ results: locations }) => {
-        return forkJoin(
+      switchMap(({ results: locations }) => forkJoin(
           locations.map((location) =>
             this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline)),
-        );
-      }),
+        )),
       takeUntil(this.ngDestroy$),
     ).subscribe(locations => {
       this.locations = locations;

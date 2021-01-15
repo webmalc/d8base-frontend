@@ -19,9 +19,7 @@ export class OrderWizardStateService {
   private readonly reset$ = new Subject<void>();
   private readonly submit$ = new Subject<StepsState>();
   private readonly isStateEmpty$: Observable<boolean> = this.state$.pipe(
-    map(state => {
-      return !state || JSON.stringify(initState) === JSON.stringify(state);
-    }),
+    map(state => !state || JSON.stringify(initState) === JSON.stringify(state)),
   );
   private path: string;
   private storageKey: string;

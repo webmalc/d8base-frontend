@@ -4,7 +4,7 @@ import { Country } from '@app/profile/models/country';
 import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
 import { Expose } from 'class-transformer';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class UserLocation implements ClientLocationInterface {
   @Expose() public id: number;
   @Expose() public country?: number | Country;
@@ -15,8 +15,8 @@ export class UserLocation implements ClientLocationInterface {
   @Expose() public postal_code: number;
   @Expose() public address: string;
   @Expose() public coordinates: {
-    type: string,
-    coordinates: number[],
+    type: string;
+    coordinates: number[];
   };
   @Expose() public units: number;
   @Expose() public timezone: string;

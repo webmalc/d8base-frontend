@@ -11,7 +11,7 @@ export class ContactsTabFormService {
   constructor(private readonly formBuilder: FormBuilder) {
   }
 
-  get controls(): string[] {
+  public get controls(): string[] {
     return Object.keys(this.form.controls);
   }
 

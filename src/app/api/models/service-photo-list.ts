@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ServicePhotoList {
     created?: string;
     description?: null | string;

@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ProfessionalPhotoList {
     created?: string;
     description?: null | string;

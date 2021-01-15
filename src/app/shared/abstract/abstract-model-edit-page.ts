@@ -4,7 +4,7 @@ import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface'
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { switchMap } from 'rxjs/operators';
 
-// tslint:disable:directive-class-suffix
+/* eslint-disable @angular-eslint/directive-class-suffix */
 @Directive()
 export abstract class AbstractModelEditPage<T> implements OnInit {
 

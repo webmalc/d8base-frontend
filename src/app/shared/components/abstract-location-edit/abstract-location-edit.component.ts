@@ -22,8 +22,8 @@ import { BehaviorSubject } from 'rxjs';
 export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit {
 
   @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
-  public timezoneList$: BehaviorSubject<Array<{ value: string, display_name: string }>> =
-    new BehaviorSubject<Array<{ value: string, display_name: string }>>(null);
+  public timezoneList$: BehaviorSubject<Array<{ value: string; display_name: string }>> =
+    new BehaviorSubject<Array<{ value: string; display_name: string }>>(null);
   public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public isRegionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public isSubregionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

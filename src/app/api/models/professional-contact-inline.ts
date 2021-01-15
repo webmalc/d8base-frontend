@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ProfessionalContactInline {
     contact: number;
     contact_display?: string;

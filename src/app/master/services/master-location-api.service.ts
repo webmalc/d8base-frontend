@@ -24,14 +24,14 @@ export class MasterLocationApiService extends AbstractApiService<MasterLocation>
 
   public getByClientId(
     clientId?: number,
-    params?: { [param: string]: string | string[]; },
+    params?: { [param: string]: string | string[] },
   ): Observable<ApiListResponseInterface<MasterLocation>> {
     return super.get({ professional: clientId?.toString(10), ...params });
   }
 
-  public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
+  public getTimeZoneList(): Observable<Array<{ value: string; display_name: string }>> {
     return this.client.options(this.url).pipe(
-      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
+      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string; display_name: string }> } } } }) =>
         raw.actions.POST.timezone.choices),
     );
   }

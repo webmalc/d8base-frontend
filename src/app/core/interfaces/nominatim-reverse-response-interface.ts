@@ -26,7 +26,7 @@ export interface NominatimReverseResponseInterface {
     state: string;
     country: string;
     postcode: string;
-    country_code: string
+    country_code: string;
   };
   boundingbox: number[];
 }

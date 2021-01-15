@@ -21,12 +21,12 @@ export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
 
   public get(
     params: {
-      region?: string,
-      region__country?: string,
-      search?: string,
-      ordering?: string,
-      page?: string,
-      page_size?: string,
+      region?: string;
+      region__country?: string;
+      search?: string;
+      ordering?: string;
+      page?: string;
+      page_size?: string;
     },
   ): Observable<ApiListResponseInterface<Subregion>> {
     return super.get(params);

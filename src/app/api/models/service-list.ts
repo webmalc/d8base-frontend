@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { ServiceLocationInline } from './service-location-inline';
 import { Price } from './price';
 import { ServiceTagList } from './service-tag-list';

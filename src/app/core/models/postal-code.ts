@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 
 export class PostalCode {
-  // tslint:disable:variable-name
+  /* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
   @Expose() public id: number;
   @Expose() public slug: string;
   @Expose() public name: string;

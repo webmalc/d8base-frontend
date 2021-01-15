@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '@app/shared/shared.module';
 import { UserLocationEditPageRoutingModule } from './user-location-edit-routing.module';
 
-import { SharedModule } from '@app/shared/shared.module';
 import { UserLocationEditPage } from './user-location-edit.page';
 
 @NgModule({

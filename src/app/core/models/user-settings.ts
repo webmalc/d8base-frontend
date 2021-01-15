@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class UserSettings {
   @Expose() public id: number;
   @Expose() public units: number;

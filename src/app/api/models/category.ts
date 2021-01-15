@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface Category {
     code?: null | string;
     description?: null | string;

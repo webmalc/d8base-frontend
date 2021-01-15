@@ -19,14 +19,14 @@ export class ContactApiService extends AbstractReadonlyApiService<Contact> {
   }
 
   public get(params?: {
-    by_country?: string,
+    by_country?: string;
     countries?: string;
-    excluded_countries?: string,
-    search?: string,
-    ordering?: string,
-    page?: string,
-    page_size?: string,
-    is_default?: string,
+    excluded_countries?: string;
+    search?: string;
+    ordering?: string;
+    page?: string;
+    page_size?: string;
+    is_default?: string;
   }): Observable<ApiListResponseInterface<Contact>> {
     return super.get(params);
   }

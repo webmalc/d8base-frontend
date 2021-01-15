@@ -18,7 +18,7 @@ export class UserSettingsService {
   public unitsList = [0, 1];
   public readonly userSettings$: Observable<UserSettings | null>;
   private readonly settings$: BehaviorSubject<UserSettings | null> = new BehaviorSubject<UserSettings | null>(null);
-  private readonly STORAGE_KEY = 'user_settings';
+  private readonly storageKey = 'user_settings';
 
   constructor(
     private readonly userSettingsApi: UserSettingsApiService,
@@ -108,7 +108,7 @@ export class UserSettingsService {
 
   private setSettings(settings: UserSettings): void {
     this.settings$.next(this.clearUserSettings(settings));
-    this.storage.set(this.STORAGE_KEY, this.clearUserSettings(settings));
+    this.storage.set(this.storageKey, this.clearUserSettings(settings));
   }
 
   private getFromApi(): Observable<UserSettings | null> {
@@ -119,7 +119,7 @@ export class UserSettingsService {
   }
 
   private pullFromStorage(): Promise<UserSettings> {
-    return this.storage.get(this.STORAGE_KEY)
+    return this.storage.get(this.storageKey)
       .then(data => null === data ? this.getTemporaryDefaultSettings() : data);
   }
 

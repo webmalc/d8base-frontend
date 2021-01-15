@@ -18,7 +18,7 @@ export class RegistrationPage {
   constructor(private readonly registrationService: RegistrationService, private readonly router: Router) {
   }
 
-  public onSubmitRegistrationForm(data: { user: User, location: UserLocation }): void {
+  public onSubmitRegistrationForm(data: { user: User; location: UserLocation }): void {
     this.errorMessages = null;
     this.registrationService.register(data.user, data.location).subscribe(
       next => {

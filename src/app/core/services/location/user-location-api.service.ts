@@ -33,9 +33,9 @@ export class UserLocationApiService extends AbstractApiService<UserLocation>
     return super.get();
   }
 
-  public getTimeZoneList(): Observable<Array<{ value: string, display_name: string }>> {
+  public getTimeZoneList(): Observable<Array<{ value: string; display_name: string }>> {
     return this.client.options(this.URL).pipe(
-      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string, display_name: string }> } } } }) =>
+      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string; display_name: string }> } } } }) =>
         raw.actions.POST.timezone.choices),
     );
   }

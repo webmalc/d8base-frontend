@@ -35,7 +35,7 @@ export class ServicesGeneratorFactoryService {
       );
   }
 
-  private combineWithTags(serviceList: Service[]): Observable<{ service: Service, tags: ServiceTag[] }[]> {
+  private combineWithTags(serviceList: Service[]): Observable<{ service: Service; tags: ServiceTag[] }[]> {
     return of(serviceList).pipe(
       mergeMap(services => forkJoin(
         [...services.map(service => this.serviceTagsReadonlyApi.get({ service: service.id.toString() }).pipe(

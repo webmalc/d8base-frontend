@@ -10,7 +10,7 @@ export class SelectableCountryOnSearchService extends SelectableSearchService {
     super();
   }
 
-  public onCountrySearch(event: { component: IonicSelectableComponent, text: string }): void {
+  public onCountrySearch(event: { component: IonicSelectableComponent; text: string }): void {
     this.abstractOnSearch(event.component, event.text, this.countriesApi, { search: event.text });
   }
 }

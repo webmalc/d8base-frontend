@@ -22,11 +22,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
   public isLastStep$: Observable<boolean> = this.wizardState.isLastStep();
   public context$: Observable<StepContext> = this.wizardState.getContext();
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
-    map(stepsState => {
-      return Object.values(stepsState).reduce((acc, curr) => {
-        return { ...acc, ...curr };
-      }, {});
-    }),
+    map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})),
   );
 
   private readonly ngDestroy$ = new Subject<void>();

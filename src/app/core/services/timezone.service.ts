@@ -14,9 +14,9 @@ export class TimezoneService {
   constructor(private readonly storageManager: StorageManagerService, private readonly userLocationApiService: UserLocationApiService) {
   }
 
-  public getTimezoneList(): Observable<{ value: string, display_name: string }[]> {
+  public getTimezoneList(): Observable<{ value: string; display_name: string }[]> {
     return from(this.storageManager.get(this.STORAGE_KEY)).pipe(
-      switchMap((data: { value: string, display_name: string }[]) => {
+      switchMap((data: { value: string; display_name: string }[]) => {
         if (data === null) {
           return this.userLocationApiService.getTimeZoneList().pipe(
             tap(list => this.storageManager.set(this.STORAGE_KEY, list)),

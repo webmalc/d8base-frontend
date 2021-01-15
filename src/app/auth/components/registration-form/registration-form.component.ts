@@ -26,7 +26,8 @@ export class RegistrationFormComponent implements OnInit {
   @Input() public errorMessages: string[];
   public readonly formFields = RegistrationFormFields;
   public supposedCities$: BehaviorSubject<City> = new BehaviorSubject<City>(null);
-  @Output() private readonly registrationFormData = new EventEmitter<{ user: User, location: UserLocation }>();
+  @Output() public readonly registrationFormData = new EventEmitter<{ user: User; location: UserLocation }>();
+
   private readonly distance = 15000;
 
   constructor(
@@ -55,7 +56,7 @@ export class RegistrationFormComponent implements OnInit {
   public onPhoneInputChange(phone: string): void {
     const inputNumericVal = phone.replace(/\D/g, '');
     let inputNewValue = '';
-    inputNewValue += '+' + inputNumericVal;
+    inputNewValue += `+${  inputNumericVal}`;
 
     this.registrationFormService.setFormFiledValue(this.formFields.Phone, inputNewValue);
   }

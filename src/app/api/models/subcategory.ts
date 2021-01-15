@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface Subcategory {
     category: number;
     code?: null | string;

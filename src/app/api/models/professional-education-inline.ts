@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ProfessionalEducationInline {
     deegree?: null | string;
     description?: null | string;

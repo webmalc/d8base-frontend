@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { ProfessionalLocationInline } from './professional-location-inline';
 export interface ServiceLocationInline {
     created?: string;

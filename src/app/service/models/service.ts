@@ -3,7 +3,7 @@ import { Expose, Type } from 'class-transformer';
 import { ServiceLocationInline } from '../../api/models';
 
 export class Service {
-  // tslint:disable:variable-name
+  /* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
   @Expose() public id: number;
   @Expose() public professional: number;
   @Expose() public name: string;

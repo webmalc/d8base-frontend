@@ -1,7 +1,7 @@
 import { AbstractDatePeriodModel } from '@app/shared/models/abstract-date-period-model';
 import { Expose } from 'class-transformer';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class Experience extends AbstractDatePeriodModel {
   @Expose() public id: number;
   @Expose() public professional: number;

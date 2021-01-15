@@ -9,7 +9,7 @@ export class RegistrationFormService {
 
   constructor(private readonly builder: FormBuilder) {}
 
-  get form(): FormGroup {
+  public get form(): FormGroup {
     return this._form;
   }
 

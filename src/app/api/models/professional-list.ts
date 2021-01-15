@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { ProfessionalCertificateInline } from './professional-certificate-inline';
 import { ProfessionalContactInline } from './professional-contact-inline';
 import { ProfessionalEducationInline } from './professional-education-inline';

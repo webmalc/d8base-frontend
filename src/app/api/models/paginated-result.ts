@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { Search } from './search';
 export interface PaginatedResult {
     count?: number;

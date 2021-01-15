@@ -29,7 +29,7 @@ export class RegisterVerifyPage implements OnInit {
     );
   }
 
-  private sendVerifyRequest(data: { user_id: string, timestamp: string, signature: string }): Observable<any> {
+  private sendVerifyRequest(data: { user_id: string; timestamp: string; signature: string }): Observable<any> {
     return this.client.post(this.VERIFY_URL, data);
   }
 }

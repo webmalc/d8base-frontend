@@ -2,7 +2,7 @@ import { UserLanguage } from '@app/api/models';
 import { Expose } from 'class-transformer';
 import { UserInterface } from '../interfaces/user.interface';
 
-// tslint:disable:variable-name
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class User implements UserInterface {
   @Expose() public id: number;
   @Expose() public first_name: string;

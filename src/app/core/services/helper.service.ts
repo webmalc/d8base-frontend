@@ -5,7 +5,7 @@ import { environment } from '@env/environment';
 
 export class HelperService {
 
-  public static getErrorListFromHttpErrorResponse(errorList: { [param: string]: string[] | string; }): string[] {
+  public static getErrorListFromHttpErrorResponse(errorList: { [param: string]: string[] | string }): string[] {
     const result: string[] = [];
     for (const errorListElement in errorList) {
       if (errorList.hasOwnProperty(errorListElement)) {
@@ -31,8 +31,8 @@ export class HelperService {
   public static getTimeStringFromMinutes(minutes: number): string {
     const hours = Math.floor(minutes / 60);
     const mins = minutes - hours * 60;
-    const hoursStr = /^\d$/.test(hours.toString()) ? '0' + hours.toString() : hours;
-    const minsStr = /^\d$/.test(mins.toString()) ? '0' + mins.toString() : mins;
+    const hoursStr = /^\d$/.test(hours.toString()) ? `0${  hours.toString()}` : hours;
+    const minsStr = /^\d$/.test(mins.toString()) ? `0${  mins.toString()}` : mins;
 
     return `${hoursStr}:${minsStr}`;
   }
@@ -72,11 +72,11 @@ export class HelperService {
   }
 
   public static getRatingTitle(rating: number): string {
-    return 'global.rating.' + Math.round(rating).toString(10);
+    return `global.rating.${  Math.round(rating).toString(10)}`;
   }
 
 
-  public static fromDatetime(datetime: string): { date: string; time: string; } {
+  public static fromDatetime(datetime: string): { date: string; time: string } {
     return {
       date: datetime.slice(0, 10),
       time: datetime.slice(11, 16),

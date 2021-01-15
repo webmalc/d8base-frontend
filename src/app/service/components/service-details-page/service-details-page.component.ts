@@ -29,12 +29,10 @@ export class ServiceDetailsPageComponent {
       first(params => Boolean(params?.id)),
       switchMap(params => servicesApi.getByEntityId(params.id).pipe(
         switchMap(service => masterApi.getByEntityId(service.professional).pipe(
-          map((master) => {
-            return {
+          map((master) => ({
               master,
               service,
-            };
-          }))),
+            })))),
       )),
     ).subscribe(({ master, service }) => {
       this.master = master;

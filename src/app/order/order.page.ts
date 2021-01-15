@@ -46,14 +46,10 @@ export class OrderPage {
     this.wizardState
       .submit()
       .pipe(
-        map((state) => {
-          return Object.values(state).reduce(
-            (acc, curr) => {
-              return { ...acc, ...curr };
-            },
+        map((state) => Object.values(state).reduce(
+            (acc, curr) => ({ ...acc, ...curr }),
             { service: this.serviceId },
-          );
-        }),
+          )),
         takeUntil(this.ngDestroy$),
       )
       .subscribe((order: SentOrder) => {
