@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '@app/core/models/user';
 import { CountriesApiService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
@@ -25,7 +26,7 @@ export class AboutEditComponent implements OnInit {
   public languages$: BehaviorSubject<Language[]> = new BehaviorSubject<Language[]>([]);
   public form: FormGroup;
   public formFields = ProfileFormFields;
-  private defaultUserLanguages: UserLanguage[] = [];
+  private oldLanguages: UserLanguage[] = [];
 
   constructor(
     private readonly userManager: UserManagerService,
@@ -34,27 +35,27 @@ export class AboutEditComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly userLanguageApi: UserLanguagesApiService,
     private readonly countriesApi: CountriesApiService,
+    private readonly router: Router,
   ) {
   }
 
   public ngOnInit(): void {
     let user: User;
     let nationality: Country;
-    let userLanguages: UserLanguage[];
 
     forkJoin({
-      usr: this.userManager.getCurrentUser(),
-      usrLanguages: this.userLanguageApi.get(),
+      currentUser: this.userManager.getCurrentUser(),
+      userLanguages: this.userLanguageApi.get(),
     }).pipe(
-      tap(({ usr, usrLanguages }) => {
-        this.defaultUserLanguages = userLanguages = usrLanguages.results;
-        user = usr;
+      tap(({ currentUser, userLanguages }) => {
+        this.oldLanguages = userLanguages.results;
+        user = currentUser;
       }),
-      switchMap(({ usr, usrLanguages }) => this.getCountry(user.nationality)),
+      switchMap(({ currentUser, userLanguages }) => this.getCountry(user.nationality)),
       switchMap((country: Country) => {
         nationality = country;
 
-        return this.userLanguagesToLanguages(userLanguages);
+        return this.userLanguagesToLanguages(this.oldLanguages);
       }),
     ).subscribe((languages) => this.form = this.formBuilder.group({
       [this.formFields.Birthday]: [user.birthday],
@@ -62,7 +63,7 @@ export class AboutEditComponent implements OnInit {
       [this.formFields.Languages]: [languages],
     }));
     this.languagesApi.getLanguages$().subscribe(
-      langs => this.languages$.next(langs),
+      languages => this.languages$.next(languages),
     );
   }
 
@@ -75,17 +76,23 @@ export class AboutEditComponent implements OnInit {
       birthday: date,
       nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id,
     };
-    const userLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[])
+
+    const newLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[])
       .map(lang => plainToClass(UserLanguage, { language: lang.code }));
 
-    this.userManager.updateUser(HelperService.clear(data)).subscribe();
-    if (this.defaultUserLanguages && this.defaultUserLanguages.length) {
-      this.userLanguageApi.deleteList(this.defaultUserLanguages).pipe(
-        switchMap(_ => this.userLanguageApi.createList(userLanguages)),
-      ).subscribe();
-    } else {
-      this.userLanguageApi.createList(userLanguages).subscribe();
-    }
+    const updateUser$ = this.userManager.updateUser(HelperService.clear(data));
+
+    const updateLanguages$ = (this.oldLanguages && this.oldLanguages.length) ?
+      this.userLanguageApi.deleteList(this.oldLanguages).pipe(
+        switchMap(_ => this.userLanguageApi.createList(newLanguages)),
+      ) : this.userLanguageApi.createList(newLanguages);
+
+    forkJoin([
+      updateLanguages$,
+      updateUser$,
+    ]).subscribe(() => {
+      this.router.navigate(['/profile']);
+    });
   }
 
   private getCountry(id: number | null): Observable<Country | null> {

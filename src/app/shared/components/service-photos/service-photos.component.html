@@ -1,5 +1,5 @@
 <ion-spinner class="spinner" name="lines"></ion-spinner>
-<ion-list class="photo-slider">
+<ion-list class="photo-slider" *ngIf="servicePhotos?.length > 0">
   <ion-list-header>
     <ion-label>
       <h1>{{ 'service-photos.title' | translate }}</h1>

@@ -6,8 +6,7 @@
     "src/testing/**/*",
     "src/app/api/**/*",
     "src/*.ts",
-    "*.spec.ts",
-    "*.html"
+    "*.spec.ts"
   ],
   "overrides": [
     {
@@ -26,9 +25,7 @@
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
-      "plugins": [
-        "eslint-plugin-react"
-      ],
+      "plugins": [],
       "rules": {
         "@angular-eslint/component-class-suffix": [
           "error",
@@ -170,16 +167,15 @@
         "no-underscore-dangle": "off",
         "prefer-arrow/prefer-arrow-functions": "off"
       }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
     }
-// TODO: uncomment and fix templates
-//    {
-//      "files": [
-//        "*.html"
-//      ],
-//      "extends": [
-//        "plugin:@angular-eslint/template/recommended"
-//      ],
-//      "rules": {}
-//    }
   ]
 }

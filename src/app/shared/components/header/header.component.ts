@@ -3,8 +3,9 @@ import { AuthenticationFactory, MasterManagerService } from '@app/core/services'
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { Country } from '@app/profile/models/country';
 import { MenuController, Platform } from '@ionic/angular';
-import { Observable, of } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import HeaderContext from './header-context.interface';
 
 @Component({
   selector: 'app-header',
@@ -12,17 +13,25 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public isAuthenticated$: Observable<boolean>;
   public countryCode$: Observable<string>;
+  public context$: Observable<HeaderContext>;
+
+  private readonly isAuthenticated$: Observable<boolean>;
 
   constructor(
-    public readonly masterManager: MasterManagerService,
     private readonly platform: Platform,
     private readonly menuController: MenuController,
-    authenticationFactory: AuthenticationFactory,
     private readonly userManager: UserManagerService,
+    authenticationFactory: AuthenticationFactory,
+    masterManager: MasterManagerService,
   ) {
     this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
+    this.context$ = combineLatest([
+      this.isAuthenticated$,
+      masterManager.isMaster$,
+    ]).pipe(
+      map(([isAuthenticated, isMaster]) => ({isAuthenticated, isMaster})),
+    );
   }
 
   public ngOnInit(): void {

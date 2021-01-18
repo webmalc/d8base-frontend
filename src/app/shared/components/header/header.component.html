@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="context$ | async as context">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-toggle menu="main-menu" [autoHide]="false">
@@ -37,8 +37,8 @@
       </svg>
     </ion-item>
 
-    <ng-container *ngIf="isAuthenticated$|async">
-      <ng-container *ngIf="!(masterManager.isMaster$ | async) else master">
+    <ng-container *ngIf="context.isAuthenticated">
+      <ng-container *ngIf="!context.isMaster else master">
         <ion-item *ngIf="isDesktop()" [detail]="false"
                   lines="none" slot="end" routerLink="/service/publish">
           {{'template.become-master'|translate}}
@@ -56,23 +56,23 @@
       </ng-template>
     </ng-container>
 
-    <ion-item *ngIf="(isAuthenticated$|async)"
+    <ion-item *ngIf="context.isAuthenticated"
               class="ion-item-no-border ion-item-no-side-padding ion-padding-end" slot="end">
       <ion-icon name="notifications-outline"></ion-icon>
     </ion-item>
-    <ion-item *ngIf="(isAuthenticated$|async)"
+    <ion-item *ngIf="context.isAuthenticated"
               lines="none" class="ion-item-no-side-padding" slot="end">
       <ion-icon name="heart-outline"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
-              *ngIf="!(isAuthenticated$|async)"
+              *ngIf="!context.isAuthenticated"
               routerLink="/auth/login"
               routerDirection="forward"
               routerLinkActive="active">
       {{'template.sign-in'|translate}}
     </ion-item>
     <ion-item lines="none" class="text-blue" slot="end" [detail]="false"
-              *ngIf="!(isAuthenticated$|async) && isDesktop()"
+              *ngIf="!context.isAuthenticated && isDesktop()"
               routerLink="/auth/registration"
               routerLinkActive="active"
               routerDirection="forward">
