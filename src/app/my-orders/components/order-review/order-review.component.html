@@ -1,0 +1,60 @@
+<app-header></app-header>
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-col appMainColumn>
+        <ion-item color="light" lines="full">
+          <ion-buttons slot="start">
+            <ion-button routerLink="/" routerDirection="back">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'order-review.title' | translate }}</ion-title>
+        </ion-item>
+        <ion-item *ngIf="professional" class="professional ion-item-no-border ion-item-no-side-padding">
+          <ion-icon name="heart-outline" class="like"></ion-icon>
+          <div class="content">
+            <ion-img class="avatar" [src]="professional.user?.avatar || defaultAvatar" style="height: 100px; width: 100px"></ion-img>
+            <div class="info">
+              <div class="title">
+                <ion-item class="full-name ion-item-no-border ion-item-no-min-height fs16">
+                  {{ professional.name }}
+                </ion-item>
+                <ion-item *ngIf="professional.company" class="company ion-item-no-border ion-item-no-min-height fs13">
+                  {{ professional.company || 'global.professional.private-person' | translate }}
+                </ion-item>
+              </div>
+              <div *ngIf="professional?.rating" class="rating">
+                <ion-item class="star-rating ion-item-no-border ion-item-no-min-height">
+                  <ion-icon name="star" class="star fs20"></ion-icon>
+                  <b>{{ professional?.rating }}</b>
+                </ion-item>
+                <ion-item *ngIf="reviewsCount" class="reviews ion-item-no-border ion-item-no-min-height fs13">
+                  {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
+                </ion-item>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+        <app-rating-picker [formControl]="reviewForm.get('rating')"></app-rating-picker>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">{{ 'order-review.description' | translate }}</ion-label>
+            <ion-textarea [formControl]="reviewForm.get('description')"></ion-textarea>
+          </ion-item>
+          <app-form-control-error [control]="reviewForm.get('description')"> </app-form-control-error>
+        </ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="medium" routerLink="/" routerDirection="back">
+              {{ 'global.back' | translate }}
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" [disabled]="reviewForm.invalid" (click)="sendReview()">{{ 'order-review.send' | translate }}</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

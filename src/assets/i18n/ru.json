@@ -704,6 +704,11 @@
     "archived": "Архивирован",
     "completed": "Выполнен"
   },
+  "order-review": {
+    "title": "Оцените полученную услугу",
+    "description": "Отзыв",
+    "send": "Отправить"
+  },
   "orders-type": {
     "sent": "Отправленные",
     "received": "Полученные"

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
+  OrderReviewComponent,
   OrderStatusComponent,
   ReceivedOrderListItemComponent,
   ReceivedOrderPageComponent,
@@ -12,10 +14,10 @@ import { SentOrderListItemComponent } from '@app/my-orders/components/sent-order
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { RatingPickerComponent } from './components/rating-picker/rating-picker.component';
 import { MyOrdersPageComponent } from './my-orders-page.component';
 import { MyOrdersRoutingModule } from './my-orders-routing.module';
 import { ReceiverOrderStatusController } from './services';
-
 
 @NgModule({
   declarations: [
@@ -27,17 +29,10 @@ import { ReceiverOrderStatusController } from './services';
     SentOrderListItemComponent,
     ReceivedOrderPageComponent,
     SentOrderPageComponent,
+    OrderReviewComponent,
+    RatingPickerComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    IonicModule,
-    TranslateModule,
-    MyOrdersRoutingModule,
-  ],
-  providers: [
-    ReceiverOrderStatusController,
-  ],
+  imports: [CommonModule, SharedModule, IonicModule, TranslateModule, MyOrdersRoutingModule, ReactiveFormsModule],
+  providers: [ReceiverOrderStatusController],
 })
-export class MyOrdersModule {
-}
+export class MyOrdersModule {}

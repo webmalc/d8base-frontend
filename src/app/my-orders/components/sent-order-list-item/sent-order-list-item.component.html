@@ -1,10 +1,14 @@
 <ion-card class="ion-no-margin mv5" [routerLink]="['/my-orders', 'outbox', order.id]">
   <ion-item lines="none">
-    <ion-label slot="start">
+    <ion-label>
       <div><b>{{ order.start_datetime | date:'mediumDate'}}</b></div>
       <div><b>{{ order.start_datetime | date:'hh:mm'}} — {{ order.end_datetime | date:'hh:mm'}}</b></div>
     </ion-label>
-    <app-order-status [status]="order.status" slot="end"></app-order-status>
+    <ion-label *ngIf="order.status === 'completed'">
+      <a [routerLink]="['/my-orders', 'review', order.id]" (click)="$event.stopPropagation()">Оставить отзыв</a>
+    </ion-label>
+
+    <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
   <ion-item *ngIf="master" lines="none">
     <ion-avatar slot="start">

@@ -1,0 +1,26 @@
+.star-container {
+  $background-opacity: 0.1;
+  display: flex;
+  align-items: center;
+  --min-height: 40px;
+  --background-hover: var(--ion-color-warning-tint);
+  --background-hover-opacity: #{$background-opacity};
+  &.selected {
+    --background: rgba(var(--ion-color-warning-tint-rgb), #{$background-opacity});
+    .star-label {
+      font-weight: bold;
+    }
+  }
+
+  .star-label {
+    width: 40%;
+  }
+
+  .star-rating {
+    margin-left: 5px;
+  }
+}
+
+.star {
+  color: var(--ion-color-warning);
+}

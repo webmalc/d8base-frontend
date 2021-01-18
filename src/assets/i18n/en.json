@@ -704,6 +704,11 @@
     "archived": "Archived",
     "completed": "Completed"
   },
+  "order-review": {
+    "title": "Order review",
+    "description": "Review",
+    "send": "Send"
+  },
   "orders-type": {
     "sent": "Sent",
     "received": "Received"

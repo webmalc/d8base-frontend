@@ -1,0 +1,54 @@
+.professional {
+  margin: 20px 12px;
+  box-shadow: 0px 2px 8px #979797;
+  border-radius: 9px;
+  --inner-padding-top: 0px;
+  position: relative;
+  .like {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+  }
+  .content {
+    margin: 20px 12px;
+    display: flex;
+    .avatar {
+      border-radius: 9px;
+      overflow: hidden;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .title {
+        display: flex;
+        flex-direction: column;
+        .full-name {
+          color: var(--ion-color-dark);
+          font-weight: bold;
+          padding-bottom: 9px;
+        }
+        .company {
+          color: var(--ion-color-medium);
+        }
+      }
+      .rating {
+        display: flex;
+        flex-direction: column;
+        .star-rating {
+          padding-bottom: 5px;
+          .star {
+            padding-right: 5px;
+          }
+        }
+        .reviews {
+          color: var(--ion-color-primary);
+        }
+      }
+    }
+  }
+}
+
+.star {
+  color: var(--ion-color-warning);
+}

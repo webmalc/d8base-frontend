@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MyOrdersPageComponent } from '@app/my-orders/my-orders-page.component';
 
 import { ReceivedOrderPageComponent, SentOrderPageComponent } from './components';
+import { OrderReviewComponent } from './components/order-review/order-review.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'outbox/:id',
     pathMatch: 'full',
     component: SentOrderPageComponent,
+  },
+  {
+    path: 'review/:orderId',
+    pathMatch: 'full',
+    component: OrderReviewComponent,
   },
 ];
 
