@@ -22,8 +22,9 @@ import { SelectableCityOnSearchService } from '@app/shared/services/selectable-c
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { IonContent } from '@ionic/angular';
 import { plainToClass } from 'class-transformer';
-import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
-import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, Subject } from 'rxjs';
+import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
+import ServicePublishStepFourContext from './service-publish-step-four-context.interface';
 
 @Component({
   selector: 'app-service-publish-step-four',
@@ -32,11 +33,12 @@ import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
 })
 export class ServicePublishStepFourComponent extends Reinitable implements OnDestroy {
 
+  public context$: Observable<ServicePublishStepFourContext>;
   public errorMessages: string[];
   public readonly formFields = ServicePublishStepFourFormFields;
-  public readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserExists: boolean = false;
   @ViewChild(IonContent, { read: IonContent, static: false }) public content: IonContent;
+  private readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly emailChanged$: Subject<void> = new Subject<void>();
   private readonly destroy$ = new Subject<void>();
 
@@ -53,6 +55,12 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
     public readonly citySelectable: SelectableCityOnSearchService,
   ) {
     super();
+    this.context$ = combineLatest([
+      authenticationService.isAuthenticated$,
+      this.isUserExists$,
+    ]).pipe(
+      map(([isAuthenticated, isUserExists]) => ({isAuthenticated, isUserExists})),
+    );
   }
 
   public onEmailChange(): void {
