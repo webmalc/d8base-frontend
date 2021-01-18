@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ResetPassword {
   password: string;
   signature: string;

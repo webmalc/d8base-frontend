@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface Review {
   created?: string;
   created_by?: number;

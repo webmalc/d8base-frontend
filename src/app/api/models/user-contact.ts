@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface UserContact {
   contact: number;
   contact_code?: string;

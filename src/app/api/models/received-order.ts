@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { UserExtended } from './user-extended';
 import { UserLocationInline } from './user-location-inline';
 export interface ReceivedOrder {

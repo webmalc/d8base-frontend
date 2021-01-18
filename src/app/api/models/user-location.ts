@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface UserLocation {
   address?: null | string;
   city?: null | number;

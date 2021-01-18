@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface SentOrder {
   client_location?: null | number;
   created?: string;

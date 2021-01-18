@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface DefaultRegisterUser {
   account_type?: 'user' | 'professional';
   avatar?: null | string;

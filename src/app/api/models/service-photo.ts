@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ServicePhoto {
   created?: string;
   created_by?: number;

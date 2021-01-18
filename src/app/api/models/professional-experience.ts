@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ProfessionalExperience {
   company: string;
   created?: string;

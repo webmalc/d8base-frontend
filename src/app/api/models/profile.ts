@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface Profile {
   account_type?: 'user' | 'professional';
   avatar?: string;

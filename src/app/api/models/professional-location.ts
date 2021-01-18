@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ProfessionalLocation {
   address?: null | string;
   city?: null | number;

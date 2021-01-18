@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export interface ProfessionalCertificate {
   certificate_id?: null | string;
   created?: string;
