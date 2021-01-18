@@ -465,20 +465,20 @@
       "title": "Календарь"
     },
     "edit-master": {
-      "title": "Main",
-      "name": "Expertise area",
-      "name-placeholder": "Enter expertise area",
-      "description": "Description",
-      "description-placeholder": "Enter description",
-      "company": "Company",
-      "company-placeholder": "Enter company name",
-      "experience": "Experience",
-      "experience-placeholder": "Enter experience",
-      "level": "Expertise level",
-      "level-placeholder": "Select expertise level",
-      "subcategory": "Subcategory",
-      "subcategory-placeholder": "Select subcategory",
-      "save": "Save"
+      "title": "Основное",
+      "name": "Специализация",
+      "name-placeholder": "Введите Вашу специализацию",
+      "description": "Описание",
+      "description-placeholder": "Введите описание",
+      "company": "Организация",
+      "company-placeholder": "Введите организацию",
+      "experience": "Опыт работы",
+      "experience-placeholder": "Введите опыт работы",
+      "level": "Профессиональный уровень",
+      "level-placeholder": "Выберите профессиональный уровень",
+      "subcategory": "Подкатегория",
+      "subcategory-placeholder": "Выберите подкатегорию",
+      "save": "Сохранить"
     }
   },
   "location-edit-page": {
