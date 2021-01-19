@@ -50,7 +50,7 @@ export class MasterProfileCalendarComponent implements OnInit {
       switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)),
     );
 
-    const masterId = this.contextService.contextSnapshot.master?.id;
+    const masterId = this.contextService.contextSnapshot?.master.id;
     const createNew$ = this.scheduleApi.createSet(newSchedules.map(schedule => ({
       ...schedule,
       professional: masterId,
@@ -67,7 +67,7 @@ export class MasterProfileCalendarComponent implements OnInit {
   }
 
   private updateEnabledPeriods(startDate: Date): void {
-    const masterId = this.contextService.contextSnapshot.master?.id;
+    const masterId = this.contextService.contextSnapshot?.master.id;
     this.calendarGeneratorFactory.getEnabledPeriods(
       startDate,
       HelperService.getDate(startDate, 1),

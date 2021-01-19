@@ -66,11 +66,11 @@ export class FullLocationService {
                             district: districtId,
                           }: ProfessionalLocationInline): Observable<FullLocation> {
     return forkJoin([
-      this.countriesApi.getByEntityId(countryId).pipe(catchError(() => of(null))),
-      this.regionApi.getByEntityId(regionId).pipe(catchError(() => of(null))),
-      this.subregionApi.getByEntityId(subregionId).pipe(catchError(() => of(null))),
-      this.citiesApi.getByEntityId(cityId).pipe(catchError(() => of(null))),
-      this.districtApi.getByEntityId(districtId).pipe(catchError(() => of(null))),
+      countryId ? this.countriesApi.getByEntityId(countryId).pipe(catchError(() => of(null))) : of(),
+      regionId ? this.regionApi.getByEntityId(regionId).pipe(catchError(() => of(null))) : of(),
+      subregionId ? this.subregionApi.getByEntityId(subregionId).pipe(catchError(() => of(null))) : of(),
+      cityId ? this.citiesApi.getByEntityId(cityId).pipe(catchError(() => of(null))) : of(),
+      districtId ? this.districtApi.getByEntityId(districtId).pipe(catchError(() => of(null))) : of(),
     ]).pipe(
       map(([country, region, subregion, city, district]) => ({
         country,

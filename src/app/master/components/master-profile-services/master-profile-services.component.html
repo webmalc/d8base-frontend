@@ -1,6 +1,7 @@
+<ng-container *ngIf="context$ | async as context">
 <ion-row *ngIf="serviceData$ | async as serviceData">
   <ion-col class="ion-no-padding" size="12">
-    <ion-item class="ion-item-no-border ion-item-bottom-border ion-justify-content-start">
+    <ion-item>
       <ion-label color="medium" position="floating">
         <ion-icon name="search-outline"></ion-icon>
         {{"master-profile.services.services-tab.master-services"|translate}}
@@ -9,20 +10,17 @@
       </ion-input>
     </ion-item>
 
-    <ion-item
-      class="ion-item-no-border ion-item-bottom-border ion-justify-content-start master-profile-tab-title ion-margin-top">
+    <ion-item>
       {{"master-profile.services.services-tab.master-services"|translate}}&nbsp;({{serviceData.length}})
     </ion-item>
 
-    <ion-list *ngIf="masterId"
-              class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-item-no-vertical-padding">
+    <ion-list *ngIf="!context.canEdit">
       <app-master-profile-service-presentation *ngFor="let service of serviceData | serviceDataFilter:searchModel"
                                                [serviceData]="service"
                                                class="pv5">
       </app-master-profile-service-presentation>
     </ion-list>
-    <ion-list *ngIf="!masterId"
-              class="ion-item-no-border ion-item-no-min-height ion-item-no-side-padding ion-item-no-vertical-padding">
+    <ion-list *ngIf="context.canEdit">
       <app-master-profile-service-edit *ngFor="let service of serviceData | serviceDataFilter:searchModel"
                                        (enableService)="enableService($event)"
                                        (disableService)="disableService($event)"
@@ -33,3 +31,4 @@
     </ion-list>
   </ion-col>
 </ion-row>
+</ng-container>
