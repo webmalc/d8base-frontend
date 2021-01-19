@@ -37,7 +37,7 @@ export class MasterPage {
   ) {
     this.createContext().subscribe(context => contextService.setContext(context));
     this.mainInfoSectionData$ = contextService.context$.pipe(
-      first(({ user, master }) => Boolean(user) && Boolean(master)),
+      first(context => Boolean(context?.user) && Boolean(context?.master)),
       map(({ user, master }) => ({
         fullName: master.name ?? `${user.last_name ?? ''} ${user.first_name ?? ''}`,
         company: master.company,
@@ -69,7 +69,11 @@ export class MasterPage {
     const masterId = Number.parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
 
     return this.getUserMaster(masterId).pipe(
-      map(({ user, master }) => ({ user, master, canEdit: Number.isNaN(masterId) })),
+      map(({ user, master }) => ({
+        user,
+        master,
+        canEdit: Number.isNaN(masterId) || masterId === master.id,
+      })),
     );
   }
 }

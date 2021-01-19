@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import ServiceData from '@app/core/interfaces/service-data.interface';
+import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
+import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import { Service } from '@app/service/models/service';
 import { ServicesApiService } from '@app/service/services/services-api.service';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-services',
@@ -17,20 +19,22 @@ export class MasterProfileServicesComponent {
 
   public searchModel: string;
   public serviceData$: Observable<ServiceData[]>;
-  public masterId: number;
+  public context$: Observable<MasterProfileContext>;
+
+  private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(
-    private readonly route: ActivatedRoute,
     private readonly servicesApi: ServicesApiService,
     private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
     private readonly alertController: AlertController,
     private readonly translate: TranslateService,
+    contextService: MasterProfileContextService,
   ) {
-  }
-
-  public init(): void {
-    this.masterId = parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-    this.serviceData$ = this.serviceGeneratorFactory.getServiceList(this.masterId);
+    this.context$ = contextService.context$;
+    this.serviceData$ = combineLatest([this.context$, this.refresh$]).pipe(
+      first(([context]) => !!context.master),
+      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.master.id)),
+    );
   }
 
   public enableService(service: Service): void {
@@ -51,7 +55,7 @@ export class MasterProfileServicesComponent {
         }, {
           text: this.translate.instant('delete-confirmation.okay'),
           handler: () => {
-            this.servicesApi.delete(service).subscribe(() => this.init());
+            this.servicesApi.delete(service).subscribe(() => this.refresh$.next());
           },
         },
       ],
@@ -70,6 +74,6 @@ export class MasterProfileServicesComponent {
 
   public patchService(service: Service, isEnabled: boolean): void {
     service.is_enabled = isEnabled;
-    this.servicesApi.patch(service).subscribe(() => this.init());
+    this.servicesApi.patch(service).subscribe(() => this.refresh$.next());
   }
 }

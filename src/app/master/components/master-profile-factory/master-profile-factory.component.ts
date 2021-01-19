@@ -41,13 +41,12 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
       case MasterProfileSubmenu.Services:
         const serviceComponentFactory =
           this.componentFactoryResolver.resolveComponentFactory<MasterProfileServicesComponent>(MasterProfileServicesComponent);
-        const servicesC = this.viewContainerRef.createComponent<MasterProfileServicesComponent>(serviceComponentFactory);
-        servicesC.instance.init();
+        this.viewContainerRef.createComponent<MasterProfileServicesComponent>(serviceComponentFactory);
         break;
       case MasterProfileSubmenu.Info:
         const infoComponentFactory =
           this.componentFactoryResolver.resolveComponentFactory<MasterProfileInfoComponent>(MasterProfileInfoComponent);
-        const infoC = this.viewContainerRef.createComponent<MasterProfileInfoComponent>(infoComponentFactory);
+        this.viewContainerRef.createComponent<MasterProfileInfoComponent>(infoComponentFactory);
         break;
       case MasterProfileSubmenu.Calendar:
         const calendarComponentFactory =
@@ -57,8 +56,7 @@ export class MasterProfileFactoryComponent implements OnInit, OnDestroy {
       case MasterProfileSubmenu.Portfolio:
         const portfolioComponentFactory =
           this.componentFactoryResolver.resolveComponentFactory<MasterProfilePortfolioComponent>(MasterProfilePortfolioComponent);
-        const portC = this.viewContainerRef.createComponent<MasterProfilePortfolioComponent>(portfolioComponentFactory);
-        portC.instance.init();
+        this.viewContainerRef.createComponent<MasterProfilePortfolioComponent>(portfolioComponentFactory);
         break;
       default:
         throw Error('unexpected component name');

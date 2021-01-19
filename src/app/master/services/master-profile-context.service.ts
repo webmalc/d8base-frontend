@@ -5,7 +5,7 @@ import MasterProfileContext from '../interfaces/master-profile-context.interface
 @Injectable()
 export class MasterProfileContextService {
   public context$: Observable<MasterProfileContext>;
-  private readonly contextSubject$ = new BehaviorSubject<MasterProfileContext>({});
+  private readonly contextSubject$ = new BehaviorSubject<MasterProfileContext>(null);
 
   constructor() {
     this.context$ = this.contextSubject$.asObservable();

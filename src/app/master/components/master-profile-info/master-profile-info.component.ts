@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ProfessionalLocationInline } from '@app/api/models/professional-location-inline';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
@@ -35,7 +34,7 @@ export class MasterProfileInfoComponent {
     languagesApi: LanguagesApiService,
   ) {
     this.context$ = context.context$.pipe(
-      first(({ user, master }) => Boolean(master) && Boolean(user)),
+      first(context => Boolean(context?.master) && Boolean(context?.user)),
     );
     this.languages$ = this.context$.pipe(
       map(({ user }) => isNumbers(user.languages) ? user.languages : user.languages.map(x => x.id)),

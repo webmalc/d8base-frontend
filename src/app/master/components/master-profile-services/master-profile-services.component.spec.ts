@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
@@ -16,6 +17,7 @@ describe('MasterProfileServicesComponent', () => {
       declarations: [MasterProfileServicesComponent],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
+        MasterProfileContextService,
         {
           provide: ActivatedRoute, useValue: {
             snapshot: {
