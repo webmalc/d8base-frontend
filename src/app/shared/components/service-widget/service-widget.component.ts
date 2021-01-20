@@ -13,8 +13,4 @@ export class ServiceWidgetComponent {
   @Input() public master: ProfessionalList;
 
   @Input() public alwaysExpanded = false;
-
-  public hasPaymentMethod(method: 'cash' | 'online'): boolean {
-    return this.service.price?.payment_methods.includes(method);
-  }
 }

@@ -76,7 +76,19 @@ const routes: Routes = [
     canActivate: [ServicePublishGuardService],
   },
   {
-    path: 'edit/:id',
+    path: ':id/edit',
+    component: ServiceEditorPageComponent,
+  },
+  {
+    path: ':id/edit/info',
+    component: ServiceEditorPageComponent,
+  },
+  {
+    path: ':id/edit/address',
+    component: ServiceEditorPageComponent,
+  },
+  {
+    path: ':id/edit/schedule',
     component: ServiceEditorPageComponent,
   },
   {

@@ -25,26 +25,7 @@
         <h1>{{ 'service-details.location-title' | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <ng-container [ngSwitch]="service.service_type">
-      <ion-item lines="none" *ngSwitchCase="'online'">
-        <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
-        <ion-text>{{ 'service-location.online' | translate }}</ion-text>
-      </ion-item>
-      <ion-item lines="none" *ngSwitchCase="'professional'">
-        <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
-        <ion-text>{{ 'service-location.professional' | translate }}</ion-text>
-      </ion-item>
-      <ion-item *ngFor="let serviceLocation of service.locations" lines="none">
-                <span>
-                    {{ 'service-details.address' | translate }}:&nbsp;
-                    <app-location-viewer [location]="serviceLocation.location"></app-location-viewer>
-                </span>
-      </ion-item>
-      <ion-item lines="none" *ngSwitchCase="'client'">
-        <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
-        <ion-text>{{ 'service-location.client' | translate }}</ion-text>
-      </ion-item>
-    </ng-container>
+    <app-service-location [service]="service"></app-service-location>
   </ion-list>
 
   <ion-list>
@@ -53,14 +34,7 @@
         <h1>{{ 'service-details.payment-title' | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <ion-item lines="none" *ngIf="hasPaymentMethod('cash')">
-      <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
-      <ion-text>{{ 'service-payment-options.cash' | translate }}</ion-text>
-    </ion-item>
-    <ion-item lines="none" *ngIf="hasPaymentMethod('online')">
-      <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
-      <ion-text>{{ 'service-payment-options.online' | translate }}</ion-text>
-    </ion-item>
+    <app-service-payment-options [price]="service.price"></app-service-payment-options>
   </ion-list>
 
   <ion-list *ngIf="service.is_auto_order_confirmation">

@@ -13,6 +13,7 @@ import {
   FooterComponent,
   HeaderComponent,
   LocationViewerComponent,
+  LoadingIndicatorComponent,
   MainMenuComponent,
   MasterWidgetComponent,
   MoreInfoComponent,
@@ -22,6 +23,8 @@ import {
   ScheduleEditorComponent,
   ScheduleViewerComponent,
   ServiceWidgetComponent,
+  ServiceLocationComponent,
+  ServicePaymentOptionsComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { AbstractLocationEditComponent } from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -110,6 +113,9 @@ import { NumberDirective } from './directives/number.directive';
     IonImageViewDirective,
     LocationViewerComponent,
     ContentWrapperComponent,
+    ServiceLocationComponent,
+    LoadingIndicatorComponent,
+    ServicePaymentOptionsComponent,
   ],
   exports: [
     ErrorFlashbagComponent,
@@ -154,6 +160,9 @@ import { NumberDirective } from './directives/number.directive';
     IonImageViewDirective,
     LocationViewerComponent,
     ContentWrapperComponent,
+    ServiceLocationComponent,
+    LoadingIndicatorComponent,
+    ServicePaymentOptionsComponent,
   ],
   imports: [
     CommonModule,

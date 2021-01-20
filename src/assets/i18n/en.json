@@ -240,7 +240,8 @@
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
     "instant-book-description": "Ordering of this service will be approved automatically",
-    "address": "Address"
+    "address": "Address",
+    "edit": "Service edit"
   },
   "service-publish": {
     "back-button": "Back",

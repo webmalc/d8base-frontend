@@ -15,3 +15,6 @@ export * from './price/price.component';
 export * from './photo-popover/photo-popover.component';
 export * from './location-viewer/location-viewer.component';
 export * from './content-wrapper/content-wrapper.component';
+export * from './service-location/service-location.component';
+export * from './loading-indicator/loading-indicator.component';
+export * from './service-payment-options/service-payment-options.component';
