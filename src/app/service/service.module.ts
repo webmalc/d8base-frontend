@@ -48,6 +48,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrMaskerModule } from 'br-mask';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ServiceEditorPageComponent } from './components/service-editor-page/service-editor-page.component';
 import { ServicePageRoutingModule } from './service-routing.module';
 import { ServicePage } from './service.page';
 
@@ -79,6 +80,7 @@ import { ServicePage } from './service.page';
     ServicePublishFinalStepComponent,
     MasterPickerPopoverComponent,
     ServiceDetailsPageComponent,
+    ServiceEditorPageComponent,
   ],
   providers: [
     PricesApiService,

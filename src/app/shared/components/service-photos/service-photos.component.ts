@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ServicePhotoList } from '@app/api/models';
 import { ServicesService } from '@app/api/services';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { IonSlides } from '@ionic/angular';
 import { from, Observable, Subject } from 'rxjs';
 import { finalize, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -40,16 +40,15 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
   public isNextButtonDisabled$: Observable<boolean>;
   public isPrevButtonDisabled$: Observable<boolean>;
   @HostBinding('class.nav-buttons-hidden') public isNavButtonsHidden: boolean = true;
+  @ViewChildren('slide', { read: ElementRef }) public readonly slideList: QueryList<ElementRef>;
   @HostBinding('class.loading') private isLoading: boolean = false;
   @ViewChild('slides', { static: false }) private readonly slides: IonSlides;
   @ViewChild('slides', { read: ElementRef }) private readonly slidesElementRef: ElementRef;
-  @ViewChildren('slide', { read: ElementRef }) private readonly slideList: QueryList<ElementRef>;
   private readonly ngDestroy$ = new Subject<void>();
 
   constructor(
     private readonly servicesService: ServicesService,
     private readonly cd: ChangeDetectorRef,
-    private readonly modalController: ModalController,
   ) {
   }
 
@@ -75,6 +74,9 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   private initNavigationButtonsAbility(): void {
+    if (!this.slides) {
+      return;
+    }
     this.isPrevButtonDisabled$ = this.slides.ionSlideDidChange.pipe(
       switchMap(() => from(this.slides.isBeginning())),
       startWith(true),

@@ -69,7 +69,7 @@ export class MasterPage {
       map((master) => ({
         user: master.user,
         master,
-        canEdit: Number.isNaN(masterId) || masterId === master.id,
+        canEdit: Number.isNaN(masterId),
       })),
     );
   }
