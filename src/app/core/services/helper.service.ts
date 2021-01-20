@@ -1,6 +1,5 @@
 import { ProfessionalContactInline } from '@app/api/models';
 import { Contact } from '@app/profile/models/contact';
-import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
 import { environment } from '@env/environment';
 
 export class HelperService {
@@ -121,18 +120,14 @@ export class HelperService {
       environment.backend.url + environment.backend.cities,
       environment.backend.url + environment.backend.districts,
       environment.backend.url + environment.backend.postal_codes,
-      environment.backend.url + environment.backend.category,
-      environment.backend.url + environment.backend.subcategory,
       environment.backend.url + environment.backend.auth,
       environment.backend.url + environment.backend.reset_password_link,
       environment.backend.url + environment.backend.reset_password,
-      environment.backend.url + environment.backend.master_list,
       environment.backend.url + environment.backend.language,
       environment.backend.url + environment.backend.reviews_readonly,
       environment.backend.url + environment.backend.contact,
       environment.backend.url + environment.backend.services_readonly,
       environment.backend.url + environment.backend.service_tag_readonly,
-      environment.backend.url + environment.backend.master_photos_readonly,
       environment.backend.url + environment.backend.calendar,
     ];
   }

@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { TagsSelectInputComponent } from '../../components/tags-select-input/tags-select-input.component';
-import { TagsListApiService } from '../../services/tags-list-api.service';
 import { MasterTagEditPage } from './master-tag-edit.page';
 
 describe('MasterTagEditPage', () => {
@@ -19,7 +18,6 @@ describe('MasterTagEditPage', () => {
       imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
         { provide: StorageManagerService, useClass: StorageManagerMock },
-        TagsListApiService,
       ],
     }).compileComponents();
 

@@ -1,9 +1,10 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ProfessionalTagList } from '@app/api/models';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { Tag } from '@app/master/models/tag';
 import { TagsApiService } from '@app/master/services/tags-api.service';
-import { TagsListApiService } from '@app/master/services/tags-list-api.service';
+import { ProfessionalsService } from '@app/api/services';
 import { BehaviorSubject } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 
@@ -27,7 +28,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
   constructor(
     private readonly api: TagsApiService,
     private readonly formBuilder: FormBuilder,
-    private readonly tagsListApi: TagsListApiService,
+    private readonly professionalsApi: ProfessionalsService,
     private readonly masterManager: MasterManagerService,
   ) {
   }
@@ -37,7 +38,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
       tap(list => this.masterId = list[0].id),
     ).subscribe(
       _ => {
-        this.tagsListApi.get().subscribe(
+        this.professionalsApi.professionalsTagsList({}).subscribe(
           data => this.tagsList$.next(this.getTagNamesArray(data.results)),
         );
         this.api.getByMasterId(this.masterId).subscribe(
@@ -106,7 +107,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  private getTagNamesArray(tags: Tag[]): string[] {
+  private getTagNamesArray(tags: ProfessionalTagList[]): string[] {
     const arr: string[] = [];
     tags.forEach(tag => arr.push(tag.name));
 

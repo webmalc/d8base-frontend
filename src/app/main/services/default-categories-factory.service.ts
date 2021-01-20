@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Category } from '@app/core/models/category';
-import { CategoriesApiService } from '@app/core/services/categories-api.service';
+import { Category } from '@app/api/models';
+import { ProfessionalsService } from '@app/api/services';
 
 @Injectable()
 export class DefaultCategoriesFactoryService {
 
   private list: Category[];
 
-  constructor(private readonly categoryApi: CategoriesApiService) {
-    this.categoryApi.get().subscribe(res => this.list = res.results);
+  constructor(private readonly professionalsApi: ProfessionalsService) {
+    this.professionalsApi.professionalsCategoriesList({}).subscribe(res => this.list = res.results);
   }
 
   public getByName(name: string): Category | null {

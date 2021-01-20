@@ -1,11 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category } from '@app/core/models/category';
+import { Category, Subcategory } from '@app/api/models';
 import { Currency } from '@app/core/models/currency';
-import { Subcategory } from '@app/core/models/subcategory';
-import { CategoriesApiService } from '@app/core/services/categories-api.service';
+import { ProfessionalsService } from '@app/api/services';
 import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
-import { SubcategoriesApiService } from '@app/core/services/subcategories-api.service';
 import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
@@ -15,7 +13,7 @@ import { SelectableCityOnSearchService } from '@app/shared/services/selectable-c
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { PopoverController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { filter, withLatestFrom } from 'rxjs/operators';
 
 @Component({
@@ -29,8 +27,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
   public currencyList: Currency[] = [];
 
   constructor(
-    private readonly subcategoriesApi: SubcategoriesApiService,
-    private readonly categoriesApi: CategoriesApiService,
+    private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
     public readonly countrySelectable: SelectableCountryOnSearchService,
     public readonly citySelectable: SelectableCityOnSearchService,
@@ -92,8 +89,9 @@ export class SearchFiltersMainTabComponent implements OnInit {
     this.stateManager.data.main.location.city = undefined;
   }
 
-  public initSubcategories(cat: Category[]): void {
-    this.subcategoriesApi.getListByCategoryId(cat).subscribe(data => this.subcategoriesList$.next(data));
+  public initSubcategories(categories: Category[]): void {
+    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id))).pipe(
+    ).subscribe(data => this.subcategoriesList$.next(data));
   }
 
   private updateCity(coords: Coords): void {
@@ -111,7 +109,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
   }
 
   private getCategories(): void {
-    this.categoriesApi.get().subscribe(results => this.categoryList$.next(results.results));
+    this.professionalsApi.professionalsCategoriesList({}).subscribe(results => this.categoryList$.next(results.results));
   }
 
   private getCurrencies(): void {
