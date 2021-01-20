@@ -165,7 +165,13 @@
           "never"
         ],
         "no-underscore-dangle": "off",
-        "prefer-arrow/prefer-arrow-functions": "off"
+        "prefer-arrow/prefer-arrow-functions": "off",
+        "no-console": [
+          "error",
+          {
+            "allow": ["warn", "error"]
+          }
+        ]
       }
     },
     {
