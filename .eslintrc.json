@@ -5,8 +5,7 @@
     "src/environments/**/*",
     "src/testing/**/*",
     "src/app/api/**/*",
-    "src/*.ts",
-    "*.spec.ts"
+    "src/*.ts"
   ],
   "overrides": [
     {
@@ -171,6 +170,17 @@
           {
             "allow": ["warn", "error"]
           }
+        ],
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "CallExpression[callee.name='fdescribe']",
+                "message": "fdescribe is forbidden"
+            },
+            {
+                "selector": "CallExpression[callee.name='fit']",
+                "message": "fit is forbidden"
+            }
         ]
       }
     },

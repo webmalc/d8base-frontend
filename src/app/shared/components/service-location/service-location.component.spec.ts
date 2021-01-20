@@ -4,14 +4,14 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ServiceLocationComponent } from './service-location.component';
 
-fdescribe('ServiceLocationComponent', () => {
+describe('ServiceLocationComponent', () => {
   let component: ServiceLocationComponent;
   let fixture: ComponentFixture<ServiceLocationComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ServiceLocationComponent ],
-      imports: [IonicModule.forRoot(), TranslateModule.forRoot()]
+      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServiceLocationComponent);

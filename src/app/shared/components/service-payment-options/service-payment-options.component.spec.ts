@@ -10,7 +10,7 @@ describe('ServicePaymentOptionsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ServicePaymentOptionsComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServicePaymentOptionsComponent);
