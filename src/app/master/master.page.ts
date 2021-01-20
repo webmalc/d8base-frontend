@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProfessionalList, UserExtended } from '@app/api/models';
+import { ProfessionalList } from '@app/api/models';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
@@ -10,7 +10,7 @@ import MasterProfileContext from '@app/master/interfaces/master-profile-context.
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import { ReviewsReadonlyApiService } from '@app/master/services/reviews-readonly-api.service';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -53,24 +53,21 @@ export class MasterPage {
     this.tab.next(tab);
   }
 
-  private getUserMaster(masterId: number): Observable<{ user: UserExtended; master: ProfessionalList }> {
+  private getMaster(masterId: number): Observable<ProfessionalList> {
     return Number.isNaN(masterId) ?
-      forkJoin({
-        master: this.masterManager.getMasterList().pipe(
-          map(list => list[0]),
-          switchMap(master => this.masterReadonly.getByEntityId(master.id)),
-        ),
-        user: this.userManager.getCurrentUser(),
-      }) :
-      this.masterReadonly.getByEntityId(masterId).pipe(map(res => ({ master: res, user: res.user })));
+      this.masterManager.getMasterList().pipe(
+        map(list => list[0]),
+        switchMap(master => this.masterReadonly.getByEntityId(master.id)),
+      ) :
+      this.masterReadonly.getByEntityId(masterId);
   }
 
   private createContext(): Observable<MasterProfileContext> {
     const masterId = Number.parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
 
-    return this.getUserMaster(masterId).pipe(
-      map(({ user, master }) => ({
-        user,
+    return this.getMaster(masterId).pipe(
+      map((master) => ({
+        user: master.user,
         master,
         canEdit: Number.isNaN(masterId) || masterId === master.id,
       })),

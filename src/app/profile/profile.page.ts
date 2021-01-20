@@ -15,7 +15,7 @@ import { UserLanguagesApiService } from '@app/profile/services/user-languages-ap
 import { Reinitable } from '@app/shared/abstract/reinitable';
 import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
 import { BehaviorSubject, forkJoin, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { ContactApiService } from './services/contact-api.service';
 
 @Component({
@@ -67,7 +67,7 @@ export class ProfilePage extends Reinitable {
     this.userManager.getCurrentUser().pipe(
       switchMap(user => forkJoin({
         user: of(user),
-        languages: this.userLanguagesApi.getList(user.languages as number[]).pipe(
+        languages: this.userLanguagesApi.getList(user.languages).pipe(
           switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language))),
         ),
         nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),

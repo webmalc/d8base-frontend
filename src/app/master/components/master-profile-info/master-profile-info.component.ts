@@ -7,11 +7,7 @@ import { Language } from '@app/profile/models/language';
 import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
 import { forkJoin, Observable } from 'rxjs';
-import { first, map, shareReplay, switchMap } from 'rxjs/operators';
-
-function isNumbers(array: any[]): array is number[] {
-  return typeof (array[0]) === 'number';
-}
+import { first, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-info',
@@ -37,9 +33,7 @@ export class MasterProfileInfoComponent {
       first(context => Boolean(context?.master) && Boolean(context?.user)),
     );
     this.languages$ = this.context$.pipe(
-      map(({ user }) => isNumbers(user.languages) ? user.languages : user.languages.map(x => x.id)),
-      switchMap(ids => userLanguagesApi.getList(ids)),
-      switchMap(languages => languagesApi.getList(languages.map(lang => lang?.language))),
+      switchMap(({ user }) => languagesApi.getList(user.languages.map(lang => lang?.language))),
       shareReplay(1),
     );
     this.locations$ = this.context$.pipe(
