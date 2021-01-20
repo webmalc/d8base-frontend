@@ -4,7 +4,7 @@ import MasterProfileContext from '@app/master/interfaces/master-profile-context.
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import { Service } from '@app/service/models/service';
-import { ServicesApiService } from '@app/service/services/services-api.service';
+import { ServicesApiService } from '@app/core/services/services-api.service';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';

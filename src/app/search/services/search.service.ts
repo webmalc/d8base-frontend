@@ -3,7 +3,7 @@ import { MasterLocationApiService } from '@app/master/services/master-location-a
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 import { SearchResultsInterface } from '@app/search/interfaces/search-results-interface';
-import { ServicesApiService } from '@app/service/services/services-api.service';
+import { ServicesApiService } from '@app/core/services/services-api.service';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 

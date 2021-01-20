@@ -6,13 +6,13 @@ import { StorageManagerService } from '@app/core/proxies/storage-manager.service
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { PricesApiService } from '../../services/prices-api.service';
-import { ServiceLocationApiService } from '../../services/service-location-api.service';
-import { ServicePhotoApiService } from '../../services/service-photo-api.service';
+import { PricesApiService } from '../../../core/services/prices-api.service';
+import { ServiceLocationApiService } from '../../../core/services/service-location-api.service';
+import { ServicePhotoApiService } from '../../../core/services/service-photo-api.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '../../services/service-publish-data-preparer.service';
 import { ServicePublishService } from '../../services/service-publish.service';
-import { ServiceScheduleApiService } from '../../services/service-schedule-api.service';
+import { ServiceScheduleApiService } from '../../../core/services/service-schedule-api.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
 import { StepFinalHandlerService } from '../../services/steps-navigation-chain/step-final-handler.service';

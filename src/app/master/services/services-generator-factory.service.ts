@@ -4,7 +4,7 @@ import { MasterManagerService } from '@app/core/services/master-manager.service'
 import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
 import { Service } from '@app/service/models/service';
 import { ServiceTag } from '@app/service/models/service-tag';
-import { ServiceTagsReadonlyApiService } from '@app/service/services/service-tags-readonly-api.service';
+import { ServiceTagsReadonlyApiService } from '@app/core/services/service-tags-readonly-api.service';
 import { forkJoin, Observable, of } from 'rxjs';
 import { concatAll, map, mergeMap, switchMap } from 'rxjs/operators';
 

@@ -13,13 +13,13 @@ import { Service } from '@app/service/models/service';
 import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePhoto } from '@app/service/models/service-photo';
 import { ServiceSchedule } from '@app/service/models/service-schedule';
-import { PricesApiService } from '@app/service/services/prices-api.service';
-import { ServiceLocationApiService } from '@app/service/services/service-location-api.service';
-import { ServicePhotoApiService } from '@app/service/services/service-photo-api.service';
+import { PricesApiService } from '@app/core/services/prices-api.service';
+import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
+import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
-import { ServiceScheduleApiService } from '@app/service/services/service-schedule-api.service';
-import { ServicesApiService } from '@app/service/services/services-api.service';
+import { ServiceScheduleApiService } from '@app/core/services/service-schedule-api.service';
+import { ServicesApiService } from '@app/core/services/services-api.service';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
 
