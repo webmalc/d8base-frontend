@@ -67,7 +67,7 @@
     </ion-item-divider>
 <!--    <app-schedule-viewer [schedule]="schedule$ | async"></app-schedule-viewer>-->
     <ion-item lines="none">
-      <ion-label>Опубликовано</ion-label>
+      <ion-label>{{ 'master-profile.services.service-edit.published' | translate }}</ion-label>
       <ion-toggle [ngModel]="service.is_enabled" (ngModelChange)="setIsEnabled(service, $event)"></ion-toggle>
     </ion-item>
     <ion-button *ngIf="!service.is_enabled" color="danger" expand="block" (click)="deleteService(service)">
