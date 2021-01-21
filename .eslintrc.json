@@ -5,8 +5,7 @@
     "src/environments/**/*",
     "src/testing/**/*",
     "src/app/api/**/*",
-    "src/*.ts",
-    "*.spec.ts"
+    "src/*.ts"
   ],
   "overrides": [
     {
@@ -165,7 +164,24 @@
           "never"
         ],
         "no-underscore-dangle": "off",
-        "prefer-arrow/prefer-arrow-functions": "off"
+        "prefer-arrow/prefer-arrow-functions": "off",
+        "no-console": [
+          "error",
+          {
+            "allow": ["warn", "error"]
+          }
+        ],
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "CallExpression[callee.name='fdescribe']",
+                "message": "fdescribe is forbidden"
+            },
+            {
+                "selector": "CallExpression[callee.name='fit']",
+                "message": "fit is forbidden"
+            }
+        ]
       }
     },
     {

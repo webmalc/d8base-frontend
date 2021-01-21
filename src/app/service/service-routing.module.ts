@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
 import { ServiceDetailsPageComponent } from '@app/service/components/service-details-page/service-details-page.component';
+import { ServiceEditorPageComponent } from '@app/service/components/service-editor-page/service-editor-page.component';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import { ServicePublishStepFiveComponent } from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import { ServicePublishStepFourComponent } from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
@@ -13,6 +14,11 @@ import { ServicePublishStepThreeComponent } from '@app/service/components/servic
 import { ServicePublishStepTwoComponent } from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
+import {
+  ServiceInfoEditComponent,
+  ServiceLocationEditComponent,
+  ServiceScheduleEditComponent,
+} from './components/service-editor-page';
 import { ServicePage } from './service.page';
 
 const routes: Routes = [
@@ -73,6 +79,22 @@ const routes: Routes = [
     path: 'publish/final',
     component: ServicePublishFinalStepComponent,
     canActivate: [ServicePublishGuardService],
+  },
+  {
+    path: ':id/edit',
+    component: ServiceEditorPageComponent,
+  },
+  {
+    path: ':id/edit/info',
+    component: ServiceInfoEditComponent,
+  },
+  {
+    path: ':id/edit/location',
+    component: ServiceLocationEditComponent,
+  },
+  {
+    path: ':id/edit/schedule',
+    component: ServiceScheduleEditComponent,
   },
   {
     path: ':id',

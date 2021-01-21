@@ -67,7 +67,7 @@ export class ProfilePage extends Reinitable {
     this.userManager.getCurrentUser().pipe(
       switchMap(user => forkJoin({
         user: of(user),
-        languages: this.userLanguagesApi.getList(user.languages as number[]).pipe(
+        languages: this.userLanguagesApi.getList(user.languages).pipe(
           switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language))),
         ),
         nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),

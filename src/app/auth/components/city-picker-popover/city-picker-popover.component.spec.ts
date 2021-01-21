@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
@@ -14,7 +15,6 @@ class LocationServiceStub {
   }
 }
 
-// eslint-disable-next-line max-classes-per-file
 class CitiesApiServiceStub {
   public getByLocation(): Observable<ApiListResponseInterface<City>> {
     const response: ApiListResponseInterface<City> = {

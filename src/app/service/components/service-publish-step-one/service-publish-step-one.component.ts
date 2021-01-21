@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Category } from '@app/core/models/category';
-import { Subcategory } from '@app/core/models/subcategory';
-import { CategoriesApiService } from '@app/core/services/categories-api.service';
-import { SubcategoriesApiService } from '@app/core/services/subcategories-api.service';
+import { ProfessionalsService } from '@app/api/services';
+import { Category, Subcategory } from '@app/api/models';
 import { TranslationService } from '@app/core/services/translation.service';
 import { ServicePublishStepOneFormFields } from '@app/service/enums/service-publish-step-one-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
@@ -25,8 +23,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
   public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
 
   constructor(
-    private readonly categoriesApi: CategoriesApiService,
-    private readonly subcategoriesApi: SubcategoriesApiService,
+    private readonly professionalsApi: ProfessionalsService,
     public formService: ServicePublishStepOneFormService,
     private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
     private readonly serviceStepsNavigationService: ServiceStepsNavigationService,
@@ -48,7 +45,9 @@ export class ServicePublishStepOneComponent extends Reinitable {
 
   public onCategoryChange(): void {
     this.formService.form.get(this.formFields.Subcategory).reset();
-    this.subcategoriesApi.get({ category: this.formService.form.get(this.formFields.Category).value.id }).subscribe(
+    this.professionalsApi.professionalsSubcategoriesList({
+      category: this.formService.form.get(this.formFields.Category).value.id,
+    }).subscribe(
       list => this.subcategoriesList$.next(list.results),
     );
   }
@@ -58,7 +57,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
   }
 
   protected init(): void {
-    this.categoriesApi.get().subscribe(
+    this.professionalsApi.professionalsCategoriesList({}).subscribe(
       list => this.categoriesList$.next(list.results),
     );
 

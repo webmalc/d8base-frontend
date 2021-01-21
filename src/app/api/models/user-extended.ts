@@ -12,7 +12,7 @@ export interface UserExtended {
      * is account confirmed?
      */
     is_confirmed?: boolean;
-    languages?: Array<UserLanguage> | number[];
+    languages?: Array<UserLanguage>;
     last_name?: string;
     nationality?: null | number;
 }

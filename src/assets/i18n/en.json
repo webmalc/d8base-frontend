@@ -240,7 +240,8 @@
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
     "instant-book-description": "Ordering of this service will be approved automatically",
-    "address": "Address"
+    "address": "Address",
+    "edit": "Service edit"
   },
   "service-publish": {
     "back-button": "Back",
@@ -418,8 +419,9 @@
         "not-published": "Service not published",
         "publish": "Publish",
         "unpublish": "Unpublish",
-        "view": "Review",
-        "delete": "Delete"
+        "edit": "Edit",
+        "delete": "Delete",
+        "view": "View as user"
       },
       "service-presentation": {
         "pick": "Date",

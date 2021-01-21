@@ -53,7 +53,7 @@ describe('HeadersInterceptor', () => {
 
     client.get('/test/').subscribe();
     tick();
-    const req = httpMock.expectOne(environment.backend.url + '/test/');
+    const req = httpMock.expectOne(`${environment.backend.url  }/test/`);
     tick();
     expect(req.request.headers.has('Authorization')).toEqual(true);
     expect(req.request.headers.get('Authorization')).toEqual('Bearer access_token');

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { Master } from '@app/core/models/master';
 import { Subcategory } from '@app/core/models/subcategory';
-import { SubcategoriesApiService } from '@app/core/services/subcategories-api.service';
+import { ProfessionalsService } from '@app/api/services';
 import { EditMasterFormFields } from '@app/master/enums/edit-master-form-fields';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { plainToClass } from 'class-transformer';
@@ -22,7 +22,7 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
   public levelOptions = ['junior', 'middle', 'senior'];
 
   constructor(
-    private readonly subcategoriesApi: SubcategoriesApiService,
+    private readonly professionalsApi: ProfessionalsService,
     public readonly location: Location,
   ) {
     super();
@@ -37,7 +37,7 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
   }
 
   private initSubcategoriesList(): Observable<any> {
-    return this.subcategoriesApi.get().pipe(
+    return this.professionalsApi.professionalsSubcategoriesList({}).pipe(
       tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)),
     );
   }

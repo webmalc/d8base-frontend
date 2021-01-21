@@ -1,0 +1,8 @@
+<ion-item lines="none" *ngIf="hasPaymentMethod('cash')">
+  <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+  <ion-text>{{ 'service-payment-options.cash' | translate }}</ion-text>
+</ion-item>
+<ion-item lines="none" *ngIf="hasPaymentMethod('online')">
+  <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+  <ion-text>{{ 'service-payment-options.online' | translate }}</ion-text>
+</ion-item>
