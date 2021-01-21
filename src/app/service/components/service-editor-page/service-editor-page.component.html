@@ -48,10 +48,10 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <app-service-location [service]="service"></app-service-location>
+    <app-service-location [service]="service.id | serviceById$ | async"></app-service-location>
     <ion-item lines="full">
       <ion-label>{{'service-details.instant-book-title' | translate}}</ion-label>
-      <ion-toggle [ngModel]="service.is_auto_order_confirmation" (ngModelChange)="setAutoConfirmation($event)"></ion-toggle>
+      <ion-toggle [ngModel]="service.is_auto_order_confirmation" (ngModelChange)="setAutoConfirmation(service, $event)"></ion-toggle>
     </ion-item>
 
     <ion-item-divider color="light">
@@ -68,10 +68,14 @@
 <!--    <app-schedule-viewer [schedule]="schedule$ | async"></app-schedule-viewer>-->
     <ion-item lines="none">
       <ion-label>Опубликовано</ion-label>
-      <ion-toggle [ngModel]="service.is_enabled" (ngModelChange)="setIsEnabled($event)"></ion-toggle>
+      <ion-toggle [ngModel]="service.is_enabled" (ngModelChange)="setIsEnabled(service, $event)"></ion-toggle>
     </ion-item>
-    <ion-button color="danger" expand="block" *ngIf="!service.is_enabled">Удалить</ion-button>
-    <ion-button color="secondary" expand="block" [routerLink]="'/service/' + service.id">Просмотр</ion-button>
+    <ion-button *ngIf="!service.is_enabled" color="danger" expand="block" (click)="deleteService(service)">
+      {{ 'master-profile.services.service-edit.delete' | translate }}
+    </ion-button>
+    <ion-button color="secondary" expand="block" [routerLink]="'/service/' + service.id">
+      {{ 'master-profile.services.service-edit.view' | translate }}
+    </ion-button>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

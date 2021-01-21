@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import ServiceData from '@app/core/interfaces/service-data.interface';
+import { ServiceOperationsService } from '@app/core/services/service-operations.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import { Service } from '@app/service/models/service';
-import { ServicesApiService } from '@app/core/services/services-api.service';
-import { AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 
@@ -24,10 +22,8 @@ export class MasterProfileServicesComponent {
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(
-    private readonly servicesApi: ServicesApiService,
     private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
-    private readonly alertController: AlertController,
-    private readonly translate: TranslateService,
+    private readonly serviceOperations: ServiceOperationsService,
     contextService: MasterProfileContextService,
   ) {
     this.context$ = contextService.context$;
@@ -38,30 +34,15 @@ export class MasterProfileServicesComponent {
   }
 
   public enableService(service: Service): void {
-    this.patchService(service, true);
+    this.serviceOperations.enableService(service).subscribe(() => this.refresh$.next());
   }
 
   public disableService(service: Service): void {
-    this.patchService(service, false);
+    this.serviceOperations.disableService(service).subscribe(() => this.refresh$.next());
   }
 
-  public async deleteService(service: Service): Promise<void> {
-    const alert = await this.alertController.create({
-      message: this.translate.instant('delete-confirmation.delete-service'),
-      buttons: [
-        {
-          text: this.translate.instant('delete-confirmation.cancel'),
-          role: 'cancel',
-        }, {
-          text: this.translate.instant('delete-confirmation.okay'),
-          handler: () => {
-            this.servicesApi.delete(service).subscribe(() => this.refresh$.next());
-          },
-        },
-      ],
-    });
-
-    await alert.present();
+  public deleteService(service: Service): void {
+    this.serviceOperations.deleteService(service).subscribe(() => this.refresh$.next());
   }
 
   public search(event: CustomEvent): void {
@@ -70,10 +51,5 @@ export class MasterProfileServicesComponent {
 
   public clearSearchModel(): void {
     this.searchModel = '';
-  }
-
-  public patchService(service: Service, isEnabled: boolean): void {
-    service.is_enabled = isEnabled;
-    this.servicesApi.patch(service).subscribe(() => this.refresh$.next());
   }
 }

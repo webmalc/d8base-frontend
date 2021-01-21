@@ -14,6 +14,11 @@ import { ServicePublishStepThreeComponent } from '@app/service/components/servic
 import { ServicePublishStepTwoComponent } from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
+import {
+  ServiceInfoEditComponent,
+  ServiceLocationEditComponent,
+  ServiceScheduleEditComponent,
+} from './components/service-editor-page';
 import { ServicePage } from './service.page';
 
 const routes: Routes = [
@@ -81,15 +86,15 @@ const routes: Routes = [
   },
   {
     path: ':id/edit/info',
-    component: ServiceEditorPageComponent,
+    component: ServiceInfoEditComponent,
   },
   {
-    path: ':id/edit/address',
-    component: ServiceEditorPageComponent,
+    path: ':id/edit/location',
+    component: ServiceLocationEditComponent,
   },
   {
     path: ':id/edit/schedule',
-    component: ServiceEditorPageComponent,
+    component: ServiceScheduleEditComponent,
   },
   {
     path: ':id',

@@ -4,15 +4,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ServiceEditorPageComponent } from './service-editor-page.component';
+import { ServiceLocationEditComponent } from './service-location-edit.component';
 
-describe('ServiceEditorPageComponent', () => {
-  let component: ServiceEditorPageComponent;
-  let fixture: ComponentFixture<ServiceEditorPageComponent>;
+describe('ServiceLocationEditComponent', () => {
+  let component: ServiceLocationEditComponent;
+  let fixture: ComponentFixture<ServiceLocationEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ServiceEditorPageComponent],
+      declarations: [ ServiceLocationEditComponent ],
       imports: [
         TranslateModule.forRoot(),
         IonicModule.forRoot(),
@@ -21,7 +21,7 @@ describe('ServiceEditorPageComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ServiceEditorPageComponent);
+    fixture = TestBed.createComponent(ServiceLocationEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

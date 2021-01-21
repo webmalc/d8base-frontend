@@ -5,6 +5,11 @@ import { RegistrationPageModule } from '@app/auth/pages/registration/registratio
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
 import { MasterPickerPopoverComponent } from '@app/service/components/master-peeker/master-picker-popover.component';
 import { ServiceDetailsPageComponent } from '@app/service/components/service-details-page/service-details-page.component';
+import {
+  ServiceInfoEditComponent,
+  ServiceLocationEditComponent,
+  ServiceScheduleEditComponent,
+} from '@app/service/components/service-editor-page';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import { ServicePublishStepFiveComponent } from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import { ServicePublishStepFourComponent } from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
@@ -81,6 +86,9 @@ import { ServicePage } from './service.page';
     MasterPickerPopoverComponent,
     ServiceDetailsPageComponent,
     ServiceEditorPageComponent,
+    ServiceInfoEditComponent,
+    ServiceLocationEditComponent,
+    ServiceScheduleEditComponent,
   ],
   providers: [
     PricesApiService,
