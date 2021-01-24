@@ -2,21 +2,21 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { IonicModule } from '@ionic/angular';
 
-import { MasterWidgetComponent } from './master-widget.component';
+import { ProfessionalCardComponent } from './professional-card.component';
 
-describe('MasterWidgetComponent', () => {
-  let component: MasterWidgetComponent;
-  let fixture: ComponentFixture<MasterWidgetComponent>;
+describe('ProfessionalCardComponent', () => {
+  let component: ProfessionalCardComponent;
+  let fixture: ComponentFixture<ProfessionalCardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MasterWidgetComponent],
+      declarations: [ProfessionalCardComponent],
       imports: [IonicModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterWidgetComponent);
+    fixture = TestBed.createComponent(ProfessionalCardComponent);
     component = fixture.componentInstance;
-    component.master = {} as ProfessionalList;
+    component.professional = {} as ProfessionalList;
     fixture.detectChanges();
   }));
 

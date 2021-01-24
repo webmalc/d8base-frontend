@@ -1,0 +1,25 @@
+<div class="content">
+  <ion-img class="avatar" [src]="professional.user?.avatar || defaultAvatar"></ion-img>
+  <div class="info">
+    <div class="title">
+      <ion-item class="full-name ion-item-no-border ion-item-no-min-height fs16">
+        {{ professional.name }}
+      </ion-item>
+      <ion-item *ngIf="professional.company" class="company ion-item-no-border ion-item-no-min-height fs13">
+        {{ professional.company || 'global.professional.private-person' | translate }}
+      </ion-item>
+    </div>
+    <div *ngIf="professional?.rating" class="rating">
+      <ion-item class="star-rating ion-item-no-border ion-item-no-min-height">
+        <ion-icon name="star" class="star fs20"></ion-icon>
+        <b>{{ professional?.rating }}</b>
+      </ion-item>
+
+      <ion-item class="reviews ion-item-no-border ion-item-no-min-height fs13" detail="false">
+        <a *ngIf="reviewsCount" [routerLink]="'/reviews/' + professional?.id" (click)="$event.stopPropagation()">
+          {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
+        </a>
+      </ion-item>
+    </div>
+  </div>
+</div>

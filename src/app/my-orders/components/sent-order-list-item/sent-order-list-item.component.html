@@ -4,24 +4,10 @@
       <div><b>{{ order.start_datetime | date:'mediumDate'}}</b></div>
       <div><b>{{ order.start_datetime | date:'hh:mm'}} — {{ order.end_datetime | date:'hh:mm'}}</b></div>
     </ion-label>
-    <ion-label *ngIf="order.status === 'completed'">
-      <a [routerLink]="['/my-orders', 'review', order.id]" (click)="$event.stopPropagation()">Оставить отзыв</a>
-    </ion-label>
-
     <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
   <ion-item *ngIf="master" lines="none">
-    <ion-avatar slot="start">
-      <ion-img alt="avatar" [src]="getPhoto(master.user?.avatar_thumbnail)"></ion-img>
-    </ion-avatar>
-    <ion-label>
-      <div><b>{{ master.user.first_name }} {{ master.user.last_name }}</b></div>
-      <div class="mv5">{{master.company}}</div>
-      <div *ngIf="master.rating">
-        <app-rating-full-star></app-rating-full-star>
-        <b>{{master.rating}}</b>
-      </div>
-    </ion-label>
+    <app-professional-card [professional]="master"></app-professional-card>
   </ion-item>
   <ion-item *ngIf="service" lines="none">
     <ion-label class="ion-text-wrap">
