@@ -1,37 +1,36 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { MyOrdersModule } from '@app/my-orders/my-orders.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { OrderReviewComponent } from './order-review.component';
+import { ReviewsListComponent } from './reviews-list.component';
 
-describe('OrderReviewComponent', () => {
-  let component: OrderReviewComponent;
-  let fixture: ComponentFixture<OrderReviewComponent>;
+describe('ReviewsListComponent', () => {
+  let component: ReviewsListComponent;
+  let fixture: ComponentFixture<ReviewsListComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [OrderReviewComponent],
-        imports: [
-          IonicModule.forRoot(),
-          HttpClientTestingModule,
-          RouterTestingModule,
-          ReactiveFormsModule,
-          FormsModule,
-          TranslateModule.forRoot(),
-          MyOrdersModule,
-        ],
+        declarations: [ReviewsListComponent],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot(), SharedModule, RouterTestingModule],
         providers: [
           { provide: StorageManagerService, useClass: StorageManagerMock },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              params: of({ professionalId: 3 }),
+            },
+          },
         ],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(OrderReviewComponent);
+      fixture = TestBed.createComponent(ReviewsListComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

@@ -704,9 +704,13 @@
     "archived": "Архивирован",
     "completed": "Выполнен"
   },
-  "order-review": {
-    "title": "Оцените полученную услугу",
+  "reviews": {
+    "title": "Отзывы",
+    "edit-review": "Отправить отзыв",
+    "send-review": "Отправить отзыв",
     "description": "Отзыв",
+    "date": "Дата",
+    "professional-comment": "Ответ мастера",
     "send": "Отправить"
   },
   "orders-type": {

@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyOrdersPageComponent } from '@app/my-orders/my-orders-page.component';
-
 import { ReceivedOrderPageComponent, SentOrderPageComponent } from './components';
-import { OrderReviewComponent } from './components/order-review/order-review.component';
 
 const routes: Routes = [
   {
@@ -33,16 +31,10 @@ const routes: Routes = [
     pathMatch: 'full',
     component: SentOrderPageComponent,
   },
-  {
-    path: 'review/:orderId',
-    pathMatch: 'full',
-    component: OrderReviewComponent,
-  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MyOrdersRoutingModule {
-}
+export class MyOrdersRoutingModule {}

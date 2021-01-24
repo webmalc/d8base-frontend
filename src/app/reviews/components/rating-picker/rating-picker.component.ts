@@ -1,32 +1,24 @@
-import { ChangeDetectionStrategy, Component, forwardRef, OnInit, Optional, Self } from '@angular/core';
-import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Optional, Self } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rating-picker',
   templateUrl: './rating-picker.component.html',
   styleUrls: ['./rating-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => RatingPickerComponent),
-  //     multi: true,
-  //   },
-  // ],
 })
-export class RatingPickerComponent implements OnInit, ControlValueAccessor {
+export class RatingPickerComponent implements ControlValueAccessor {
   public readonly ratings: number[] = [1, 2, 3, 4, 5];
   public selectedRating: number;
   public disabled: boolean = false;
-  constructor(@Optional() @Self() public ngControl: NgControl) {
+
+  constructor(@Optional() @Self() public ngControl: NgControl, private readonly cd: ChangeDetectorRef) {
     if (ngControl) {
       ngControl.valueAccessor = this;
     }
   }
 
-  ngOnInit() {}
-
-  public onChange: (rate: number) => void = () => {
+  public onChange: (rating: number) => void = () => {
     return;
   };
 
@@ -36,6 +28,7 @@ export class RatingPickerComponent implements OnInit, ControlValueAccessor {
 
   public writeValue(rating: number): void {
     this.selectedRating = this.ratings.includes(rating) ? rating : null;
+    this.cd.markForCheck();
   }
 
   public registerOnChange(onChange: (rating: number) => void): void {

@@ -1,7 +1,5 @@
 .star-container {
   $background-opacity: 0.1;
-  display: flex;
-  align-items: center;
   --min-height: 40px;
   --background-hover: var(--ion-color-warning-tint);
   --background-hover-opacity: #{$background-opacity};
@@ -13,7 +11,7 @@
   }
 
   .star-label {
-    width: 40%;
+    // width: 40%;
   }
 
   .star-rating {

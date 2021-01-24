@@ -1,0 +1,40 @@
+<app-header></app-header>
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-col appMainColumn>
+        <ion-item color="light" lines="full">
+          <ion-buttons slot="start">
+            <ion-button routerLink=".." routerDirection="back">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'reviews.edit-review' | translate }}</ion-title>
+        </ion-item>
+        <ion-item *ngIf="professional$ | async as professional" class="professional ion-item-no-border ion-item-no-side-padding">
+          <app-professional-card [professional]="professional"></app-professional-card>
+        </ion-item>
+        <app-rating-picker [formControl]="reviewForm.get('rating')" ngDefaultControl ></app-rating-picker>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">{{ 'reviews.description' | translate }}</ion-label>
+            <ion-textarea [formControl]="reviewForm.get('description')" auto-grow="true"></ion-textarea>
+          </ion-item>
+          <app-form-control-error [control]="reviewForm.get('description')"> </app-form-control-error>
+        </ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="medium" routerLink=".." routerDirection="back">
+              {{ 'global.back' | translate }}
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" [disabled]="reviewForm.invalid" (click)="sendReview()">{{
+              'reviews.send' | translate
+            }}</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

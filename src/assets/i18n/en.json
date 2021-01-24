@@ -704,9 +704,13 @@
     "archived": "Archived",
     "completed": "Completed"
   },
-  "order-review": {
-    "title": "Order review",
+  "reviews": {
+    "title": "Reviews",
+    "edit-review": "Send review",
+    "send-review": "Send review",
     "description": "Review",
+    "date": "Date",
+    "professional-comment": "Professional comment",
     "send": "Send"
   },
   "orders-type": {

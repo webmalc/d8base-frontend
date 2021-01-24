@@ -6,7 +6,7 @@
   (click)="selectRating(rating)"
   [ngClass]="{ selected: selectedRating === rating }"
 >
-  <ion-label class="star-label">{{ 'global.rating.' + rating | translate }}</ion-label>
+  <ion-label slot="start" class="star-label">{{ 'global.rating.' + rating | translate }}</ion-label>
   <ng-container *ngFor="let star of ratings">
     <ion-icon *ngIf="star <= rating" name="star" class="star star-rating fs20"></ion-icon>
   </ng-container>
