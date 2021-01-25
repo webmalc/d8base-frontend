@@ -4,7 +4,7 @@ export * from './main-menu/main-menu.component';
 export * from './duration-editor/duration-editor.component';
 export * from './duration-viewer/duration-viewer.component';
 export * from './service-widget/service-widget.component';
-export * from './master-widget/master-widget.component';
+export * from './professional-card/professional-card.component';
 export * from './more-info/more-info.component';
 export * from './order-details/order-details.component';
 export * from './client-widget/client-widget.component';

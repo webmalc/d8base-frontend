@@ -15,11 +15,11 @@ import {
   LocationViewerComponent,
   LoadingIndicatorComponent,
   MainMenuComponent,
-  MasterWidgetComponent,
   MoreInfoComponent,
   OrderDetailsComponent,
   PhotoPopoverComponent,
   PriceComponent,
+  ProfessionalCardComponent,
   ScheduleEditorComponent,
   ScheduleViewerComponent,
   ServiceWidgetComponent,
@@ -40,7 +40,6 @@ import { PictureSelectorComponent } from '@app/shared/components/picture-selecto
 import { RatingFullStarComponent } from '@app/shared/components/rating-full-star/rating-full-star.component';
 import { RatingHalfStarComponent } from '@app/shared/components/rating-half-star/rating-half-star.component';
 import { RatingComponent } from '@app/shared/components/rating/rating.component';
-import { ReviewsListComponent } from '@app/shared/components/reviews-list/reviews-list.component';
 import { ServicePublishAgreementComponent } from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
@@ -72,7 +71,6 @@ import { NumberDirective } from './directives/number.directive';
     PictureSelectorComponent,
     DebounceDirective,
     UserLocationMapComponent,
-    ReviewsListComponent,
     MediaLinksComponent,
     HeaderComponent,
     FooterComponent,
@@ -91,7 +89,7 @@ import { NumberDirective } from './directives/number.directive';
     ServiceWidgetComponent,
     DefaultLocationPopoverComponent,
     MoreInfoComponent,
-    MasterWidgetComponent,
+    ProfessionalCardComponent,
     DefaultLocationPopoverComponent,
     FlagMenuComponent,
     CalendarComponentComponent,
@@ -123,7 +121,6 @@ import { NumberDirective } from './directives/number.directive';
     ErrorFlashbagComponent,
     PictureSelectorComponent,
     DebounceDirective,
-    ReviewsListComponent,
     MediaLinksComponent,
     HeaderComponent,
     FooterComponent,
@@ -146,7 +143,7 @@ import { NumberDirective } from './directives/number.directive';
     MainColumnDirective,
     OrderDetailsComponent,
     ClientWidgetComponent,
-    MasterWidgetComponent,
+    ProfessionalCardComponent,
     ServiceByIdPipe,
     MasterByIdPipe,
     ScheduleEditorComponent,

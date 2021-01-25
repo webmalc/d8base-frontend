@@ -6,19 +6,7 @@
     </ion-label>
     <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
-  <ion-item *ngIf="master" lines="none">
-    <ion-avatar slot="start">
-      <ion-img alt="avatar" [src]="getPhoto(master.user?.avatar_thumbnail)"></ion-img>
-    </ion-avatar>
-    <ion-label>
-      <div><b>{{ master.user.first_name }} {{ master.user.last_name }}</b></div>
-      <div class="mv5">{{master.company}}</div>
-      <div *ngIf="master.rating">
-        <app-rating-full-star></app-rating-full-star>
-        <b>{{master.rating}}</b>
-      </div>
-    </ion-label>
-  </ion-item>
+  <app-professional-card *ngIf="master" [professional]="master" class="ion-padding-horizontal"></app-professional-card>
   <ion-item *ngIf="service" lines="none">
     <ion-label class="ion-text-wrap">
       {{ service.name }}
