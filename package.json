@@ -16,7 +16,7 @@
     "serve:ssr": "node dist/app-server/main.js",
     "build:ssr": "ng build --prod && ng run app:server:production",
     "prerender": "ng run app:prerender",
-    "generate:api": "./node_modules/.bin/ng-swagger-gen -c ./ng-swagger-gen.json && prettier --write ./src/app/api"
+    "generate:api": "./node_modules/.bin/ng-swagger-gen -c ./ng-swagger-gen.json"
   },
   "private": true,
   "dependencies": {

@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
  * Global configuration for Api services
  */
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiConfiguration {
-    rootUrl: string = 'http://localhost:8000/api';
+  rootUrl: string = 'http://localhost:8000/en/api';
 }
 
 export interface ApiConfigurationInterface {
-    rootUrl?: string;
+  rootUrl?: string;
 }

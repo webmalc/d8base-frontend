@@ -704,6 +704,15 @@
     "archived": "Архивирован",
     "completed": "Выполнен"
   },
+  "reviews": {
+    "title": "Отзывы",
+    "edit-review": "Отправить отзыв",
+    "send-review": "Отправить отзыв",
+    "description": "Отзыв",
+    "date": "Дата",
+    "professional-comment": "Ответ мастера",
+    "send": "Отправить"
+  },
   "orders-type": {
     "sent": "Отправленные",
     "received": "Полученные"

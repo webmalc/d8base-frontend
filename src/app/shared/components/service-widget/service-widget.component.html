@@ -9,7 +9,7 @@
     <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
   </ion-note>
 </ion-item>
-<app-master-widget *ngIf="master" [master]="master"></app-master-widget>
+<app-professional-card *ngIf="master" [professional]="master"></app-professional-card>
 <app-more-info *ngIf="!alwaysExpanded else serviceDetails">
   <ng-container *ngTemplateOutlet="serviceDetails"></ng-container>
 </app-more-info>
