@@ -11,11 +11,15 @@
           </ion-buttons>
           <ion-title>{{ 'reviews.title' | translate }}</ion-title>
         </ion-item>
-        <ion-item *ngIf="professional$ | async as professional" class="professional ion-item-no-border ion-item-no-side-padding">
-          <app-professional-card [professional]="professional"></app-professional-card>
-        </ion-item>
+        <app-professional-card
+          *ngIf="professional$ | async as professional"
+          [professional]="professional"
+          class="professional"
+        ></app-professional-card>
         <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center ion-item-no-border">
-          <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{ 'reviews.send-review' | translate }}</a>
+          <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
+            'reviews.send-review' | translate
+          }}</a>
         </ion-item>
         <ion-card *ngFor="let review of reviews" class="review">
           <ion-item class="ion-item-no-border">
@@ -28,7 +32,9 @@
             </ion-label>
             <span *ngIf="reviewCountryCodes" class="flag-icon flag-icon-{{ reviewCountryCodes[review.user.nationality] || 'ca' }}"></span>
           </ion-item>
-          <ion-item class="ion-item-no-border review-date">{{ 'reviews.date' | translate }} {{ review.created | date: 'longDate' }} </ion-item>
+          <ion-item class="ion-item-no-border review-date"
+            >{{ 'reviews.date' | translate }} {{ review.created | date: 'longDate' }}
+          </ion-item>
           <ion-item class="ion-item-no-border rating">
             <ion-label class="star-label" slot="start">{{ 'global.rating.' + review.rating | translate }}</ion-label>
             <ng-container *ngFor="let star of ratings">

@@ -1,49 +1,51 @@
-.like {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-}
-.content {
-  display: flex;
-  .avatar {
-    border-radius: 9px;
-    overflow: hidden;
-    height: 100px;
-    width: 100px;
+:host {
+  display: block;
+  .like {
+    position: absolute;
+    top: 7px;
+    right: 7px;
   }
-  .info {
+  .content {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .title {
-      display: flex;
-      flex-direction: column;
-      .full-name {
-        color: var(--ion-color-dark);
-        font-weight: bold;
-        padding-bottom: 9px;
-      }
-      .company {
-        color: var(--ion-color-medium);
-      }
+    .avatar {
+      border-radius: 9px;
+      overflow: hidden;
+      height: 100px;
+      width: 100px;
     }
-    .rating {
+    .info {
       display: flex;
       flex-direction: column;
-      .star-rating {
-        padding-bottom: 5px;
-        .star {
-          padding-right: 5px;
+      justify-content: space-between;
+      .title {
+        display: flex;
+        flex-direction: column;
+        .full-name {
+          color: var(--ion-color-dark);
+          font-weight: bold;
+          padding-bottom: 9px;
+        }
+        .company {
+          color: var(--ion-color-medium);
         }
       }
-      .reviews {
-        color: var(--ion-color-primary);
-        // --background-hover: var(--ion-background-color);
+      .rating {
+        display: flex;
+        flex-direction: column;
+        .star-rating {
+          padding-bottom: 5px;
+          .star {
+            padding-right: 5px;
+          }
+        }
+        .reviews {
+          color: var(--ion-color-primary);
+        }
       }
     }
   }
-}
 
-.star {
-  color: var(--ion-color-warning);
+  .star {
+    color: var(--ion-color-warning);
+  }
 }

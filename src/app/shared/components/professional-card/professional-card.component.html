@@ -5,9 +5,9 @@
       <ion-item class="full-name ion-item-no-border ion-item-no-min-height fs16">
         {{ professional.name }}
       </ion-item>
-      <ion-item *ngIf="professional.company" class="company ion-item-no-border ion-item-no-min-height fs13">
+      <div *ngIf="professional.company" class="company ion-padding-horizontal fs13">
         {{ professional.company || 'global.professional.private-person' | translate }}
-      </ion-item>
+      </div>
     </div>
     <div *ngIf="professional?.rating" class="rating">
       <ion-item class="star-rating ion-item-no-border ion-item-no-min-height">

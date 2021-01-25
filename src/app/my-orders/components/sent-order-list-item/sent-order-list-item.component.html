@@ -6,9 +6,7 @@
     </ion-label>
     <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
-  <ion-item *ngIf="master" lines="none">
-    <app-professional-card [professional]="master"></app-professional-card>
-  </ion-item>
+  <app-professional-card *ngIf="master" [professional]="master" class="ion-padding-horizontal"></app-professional-card>
   <ion-item *ngIf="service" lines="none">
     <ion-label class="ion-text-wrap">
       {{ service.name }}
