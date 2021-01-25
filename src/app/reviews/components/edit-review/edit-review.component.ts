@@ -42,7 +42,7 @@ export class EditReviewComponent {
   });
 
   private reviewSaveEndpoint: (data: Review) => Observable<Review>;
-  private readonly ngDestroy$ = new Subject<void>();
+  private readonly ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private readonly accountsService: AccountsService,
@@ -58,8 +58,7 @@ export class EditReviewComponent {
   }
 
   public ionViewDidLeave(): void {
-    this.ngDestroy$.next();
-    this.ngDestroy$.complete();
+    this.ngUnsubscribe$.next();
   }
 
   public declineReviews(num: number): string {
@@ -75,7 +74,7 @@ export class EditReviewComponent {
             professional: professionalId,
           }),
         ),
-        takeUntil(this.ngDestroy$),
+        takeUntil(this.ngUnsubscribe$),
       )
       .subscribe(() => {
         this.location.back();
@@ -83,7 +82,7 @@ export class EditReviewComponent {
   }
 
   private initForm(): void {
-    this.userReview$.pipe(takeUntil(this.ngDestroy$)).subscribe(review => {
+    this.userReview$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(review => {
       this.reviewSaveEndpoint = review
         ? (data: Review) => this.accountsService.accountsReviewsUpdate({ data, id: review.id })
         : (data: Review) => this.accountsService.accountsReviewsCreate(data);
