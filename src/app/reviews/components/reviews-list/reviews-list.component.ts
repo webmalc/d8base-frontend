@@ -5,8 +5,8 @@ import { AccountsService, LocationService, ProfessionalsService, ServicesService
 import { CommunicationService } from '@app/api/services/communication.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
-import { forkJoin, Observable, of } from 'rxjs';
-import { filter, map, share, switchMap } from 'rxjs/operators';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
+import { filter, map, share, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reviews-list',
@@ -58,6 +58,7 @@ export class ReviewsListComponent {
   );
 
   public reviewCountryCodes: { [nationality: number]: string };
+  private readonly ngDestroy$ = new Subject<void>();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -72,6 +73,11 @@ export class ReviewsListComponent {
 
   public ionViewWillEnter(): void {
     this.subscribeReviewCountryCodes();
+  }
+
+  public ionViewDidLeave(): void {
+    this.ngDestroy$.next();
+    this.ngDestroy$.complete();
   }
 
   private subscribeReviewCountryCodes(): void {
@@ -93,6 +99,7 @@ export class ReviewsListComponent {
             }),
           );
         }),
+        takeUntil(this.ngDestroy$),
       )
       .subscribe(reviewCountryCodes => {
         this.reviewCountryCodes = reviewCountryCodes;

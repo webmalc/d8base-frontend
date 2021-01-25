@@ -1,20 +1,20 @@
 import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList, Review, ServiceList } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { HelperService } from '@app/core/services/helper.service';
-import { Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-review',
   templateUrl: './edit-review.component.html',
   styleUrls: ['./edit-review.component.scss'],
 })
-export class EditReviewComponent implements OnInit {
+export class EditReviewComponent {
   public readonly professionalId$: Observable<number> = this.activatedRoute.params.pipe(
     map(({ professionalId }) => professionalId),
     filter(professionalId => Boolean(professionalId)),
@@ -42,6 +42,7 @@ export class EditReviewComponent implements OnInit {
   });
 
   private reviewSaveEndpoint: (data: Review) => Observable<Review>;
+  private readonly ngDestroy$ = new Subject<void>();
 
   constructor(
     private readonly accountsService: AccountsService,
@@ -52,8 +53,13 @@ export class EditReviewComponent implements OnInit {
     private readonly cd: ChangeDetectorRef,
   ) {}
 
-  public ngOnInit(): void {
+  public ionViewWillEnter(): void {
     this.initForm();
+  }
+
+  public ionViewDidLeave(): void {
+    this.ngDestroy$.next();
+    this.ngDestroy$.complete();
   }
 
   public declineReviews(num: number): string {
@@ -69,6 +75,7 @@ export class EditReviewComponent implements OnInit {
             professional: professionalId,
           }),
         ),
+        takeUntil(this.ngDestroy$),
       )
       .subscribe(() => {
         this.location.back();
@@ -76,7 +83,7 @@ export class EditReviewComponent implements OnInit {
   }
 
   private initForm(): void {
-    this.userReview$.subscribe(review => {
+    this.userReview$.pipe(takeUntil(this.ngDestroy$)).subscribe(review => {
       this.reviewSaveEndpoint = review
         ? (data: Review) => this.accountsService.accountsReviewsUpdate({ data, id: review.id })
         : (data: Review) => this.accountsService.accountsReviewsCreate(data);
