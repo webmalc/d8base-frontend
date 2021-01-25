@@ -6,7 +6,7 @@ import { DepartureComponent } from '@app/service/components/departure/departure.
 import { MasterPickerPopoverComponent } from '@app/service/components/master-peeker/master-picker-popover.component';
 import { ServiceDetailsPageComponent } from '@app/service/components/service-details-page/service-details-page.component';
 import {
-  ServiceInfoEditComponent,
+  ServiceInfoEditorComponent,
   ServiceLocationEditComponent,
   ServiceScheduleEditComponent,
 } from '@app/service/components/service-editor-page';
@@ -86,7 +86,7 @@ import { ServicePage } from './service.page';
     MasterPickerPopoverComponent,
     ServiceDetailsPageComponent,
     ServiceEditorPageComponent,
-    ServiceInfoEditComponent,
+    ServiceInfoEditorComponent,
     ServiceLocationEditComponent,
     ServiceScheduleEditComponent,
   ],

@@ -34,7 +34,7 @@
         <h1>{{ 'service-details.payment-title' | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <app-service-payment-options [price]="service.price"></app-service-payment-options>
+    <app-payment-method-viewer [price]="service.price"></app-payment-method-viewer>
   </ion-list>
 
   <ion-list *ngIf="service.is_auto_order_confirmation">

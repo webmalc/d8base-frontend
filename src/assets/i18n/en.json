@@ -241,7 +241,11 @@
     "instant-book-title": "Instant Book",
     "instant-book-description": "Ordering of this service will be approved automatically",
     "address": "Address",
-    "edit": "Service edit"
+    "edit": "Service edit",
+    "name": "Title",
+    "description": "Description",
+    "duration-and-price": "Duration and price",
+    "payment-methods": "Payment options"
   },
   "service-publish": {
     "back-button": "Back",
