@@ -91,13 +91,7 @@ export class ReviewsListComponent {
             ...uniqueNationalities.map(nationality =>
               this.locationService.locationCountriesRead(nationality).pipe(map(country => ({ nationality, code: country.tld }))),
             ),
-          ]).pipe(
-            map(val => {
-              return val.reduce((acc, curr) => {
-                return { ...acc, [curr.nationality]: curr.code };
-              }, {});
-            }),
-          );
+          ]).pipe(map(nationalityMapToCode => nationalityMapToCode.reduce((acc, curr) => ({ ...acc, [curr.nationality]: curr.code }), {})));
         }),
         takeUntil(this.ngDestroy$),
       )
