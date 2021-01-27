@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Service } from '@app/service/models/service';
+import { Service } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
-import { ServicesApiService } from './services-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServiceOperationsService {
   constructor(
-    private readonly servicesApi: ServicesApiService,
+    private readonly api: AccountsService,
     private readonly alertController: AlertController,
     private readonly translate: TranslateService,
   ) {
@@ -25,7 +25,11 @@ export class ServiceOperationsService {
     return this.patchService(service, { is_enabled: false });
   }
 
-  public deleteService(service: Service): Observable<void> {
+  public setAutoConfirm(service: Service, autoConfirm: boolean) {
+    return this.patchService(service, { is_auto_order_confirmation: autoConfirm });
+  }
+
+  public deleteService(id: number): Observable<void> {
     return new Observable<void>(subscriber => {
       const alertPromise = this.alertController.create({
         message: this.translate.instant('delete-confirmation.delete-service'),
@@ -36,7 +40,7 @@ export class ServiceOperationsService {
           }, {
             text: this.translate.instant('delete-confirmation.okay'),
             handler: () => {
-              this.servicesApi.delete(service).subscribe(() => {
+              this.api.accountsServicesDelete(id).subscribe(() => {
                 subscriber.next();
                 subscriber.complete();
               });
@@ -49,9 +53,12 @@ export class ServiceOperationsService {
   }
 
   private patchService(service: Service, changes: Partial<Service>): Observable<void> {
-    return this.servicesApi.patch({
-      ...service,
-      ...changes,
+    return this.api.accountsServicesUpdate({
+      id: service.id,
+      data: {
+        ...service,
+        ...changes,
+      },
     }).pipe(mapTo(void 0));
   }
 }

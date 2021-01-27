@@ -1,14 +1,15 @@
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { ProfessionalSchedule } from '@app/api/models';
 
 export const defaultWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-export const defaultSchedule: AbstractSchedule[] = [
+export const defaultSchedule: ProfessionalSchedule[] = [
   {
     day_of_week: 0,
     is_enabled: true,
     start_time: '09:00:00',
     end_time: '18:00:00',
     id: null,
+    professional: null,
   },
   {
     day_of_week: 1,
@@ -16,6 +17,7 @@ export const defaultSchedule: AbstractSchedule[] = [
     start_time: '09:00:00',
     end_time: '18:00:00',
     id: null,
+    professional: null,
   },
   {
     day_of_week: 2,
@@ -23,6 +25,7 @@ export const defaultSchedule: AbstractSchedule[] = [
     start_time: '09:00:00',
     end_time: '18:00:00',
     id: null,
+    professional: null,
   },
   {
     day_of_week: 3,
@@ -30,6 +33,7 @@ export const defaultSchedule: AbstractSchedule[] = [
     start_time: '09:00:00',
     end_time: '18:00:00',
     id: null,
+    professional: null,
   },
   {
     day_of_week: 4,
@@ -37,6 +41,7 @@ export const defaultSchedule: AbstractSchedule[] = [
     start_time: '09:00:00',
     end_time: '18:00:00',
     id: null,
+    professional: null,
   },
   {
     day_of_week: 5,
@@ -44,6 +49,7 @@ export const defaultSchedule: AbstractSchedule[] = [
     start_time: null,
     end_time: null,
     id: null,
+    professional: null,
   },
   {
     day_of_week: 6,
@@ -51,5 +57,6 @@ export const defaultSchedule: AbstractSchedule[] = [
     start_time: null,
     end_time: null,
     id: null,
+    professional: null,
   },
 ];

@@ -1,0 +1,18 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'client'">
+    <ion-item-divider color="light">{{ 'service-details.location.service-geography' | translate }}</ion-item-divider>
+    <ion-item>
+      <ion-label position="floating">
+        {{ 'service-details.location.attendance-distance' | translate }}
+      </ion-label>
+      <ion-input type="number" [value]="1" (ionChange)="enterDistance($event)">
+      </ion-input>
+    </ion-item>
+    <ion-item-divider>{{ 'service-details.location.from' | translate }}</ion-item-divider>
+    <app-location-selector [service]="service" (selectedLocationId)="selectLocationId($event)"></app-location-selector>
+  </ng-container>
+  <ng-container *ngSwitchCase="'professional'">
+    <ion-item-divider color="light">{{ 'service-details.location.choose-address' | translate }}</ion-item-divider>
+    <app-location-selector [service]="service" (selectedLocationId)="selectLocationId($event)"></app-location-selector>
+  </ng-container>
+</ng-container>

@@ -57,7 +57,7 @@
   },
   "service-payment-options": {
     "cash": "Cash",
-    "online": "Online"
+    "online": "Online payment"
   },
   "accordion": {
     "expand": "show more",
@@ -245,7 +245,14 @@
     "name": "Title",
     "description": "Description",
     "duration-and-price": "Duration and price",
-    "payment-methods": "Payment options"
+    "payment-methods": "Payment options",
+    "is-base-schedule": "The base professional schedule is used",
+    "location": {
+      "service-geography": "Service geography",
+      "attendance-distance": "Attendance distance",
+      "from": "from",
+      "choose-address": "Choose address"
+    }
   },
   "service-publish": {
     "back-button": "Back",

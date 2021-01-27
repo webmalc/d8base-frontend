@@ -1,6 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -19,6 +20,7 @@ describe('ServiceInfoEditComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
       ],
+      providers: [ServiceEditorDepsService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServiceInfoEditorComponent);

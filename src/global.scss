@@ -356,9 +356,15 @@
   --ion-padding: 0;
 }
 
+.preserve-line-breaks {
+  white-space: pre-line;
+}
+
 section {
   margin-top: 1rem;
-  header {
-    font-weight: bold;
-  }
+}
+
+header {
+  padding-left: 1rem;
+  font-weight: bold;
 }

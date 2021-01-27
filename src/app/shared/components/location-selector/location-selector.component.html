@@ -1,0 +1,10 @@
+<ion-radio-group *ngIf="context$ | async as context"
+                 [value]="context.initialLocation?.location"
+                 (ionChange)="onChange($event)">
+  <ion-item *ngFor="let location of context.professionalLocations">
+    <ion-label class="ion-text-wrap">
+      <app-location-viewer [location]="location"></app-location-viewer>
+    </ion-label>
+    <ion-radio [value]="location.id"></ion-radio>
+  </ion-item>
+</ion-radio-group>

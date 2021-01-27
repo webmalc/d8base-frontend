@@ -1,9 +1,9 @@
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ServicesApiService } from '@app/core/services/services-api.service';
-import { Service } from '@app/service/models/service';
-import { Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Service } from '@app/api/models';
+import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
+import { combineLatest, Observable } from 'rxjs';
+import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 import ServiceEditorContext from './service-editor-context.interface';
 
 export abstract class ServiceEditor {
@@ -11,13 +11,15 @@ export abstract class ServiceEditor {
 
   protected constructor(
     route: ActivatedRoute,
-    private readonly router: Router,
-    private readonly servicesApi: ServicesApiService,
+    private readonly deps: ServiceEditorDepsService,
   ) {
-    this.context$ = route.params.pipe(
+    const service$ = route.params.pipe(
       filter(params => !!params.id),
-      switchMap(params => servicesApi.getByEntityId(params.id)),
-      map(service => ({ service, form: this.createForm(service) })),
+      switchMap(params => deps.api.accountsServicesRead(params.id)),
+    );
+    this.context$ = combineLatest([service$]).pipe(
+      map(([service]) => ({ service, form: this.createForm(service) })),
+      shareReplay(1),
     );
   }
 
@@ -30,9 +32,9 @@ export abstract class ServiceEditor {
   };
 
   protected saveAndReturn(service: Service): void {
-    this.servicesApi.put(service).subscribe(() =>
-      this.router.navigate(this.getServicePageUrl(service.id)),
-    );
+    this.deps.api.accountsServicesUpdate({ id: service.id, data: service }).subscribe(() => {
+      this.deps.router.navigate(this.getServicePageUrl(service.id));
+    });
   }
 
   protected abstract createForm(service: Service): FormGroup;

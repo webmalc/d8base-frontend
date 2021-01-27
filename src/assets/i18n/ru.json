@@ -245,7 +245,14 @@
     "name": "Название",
     "description": "Описание",
     "duration-and-price": "Длительность и цена",
-    "payment-methods": "Варианты оплаты"
+    "payment-methods": "Варианты оплаты",
+    "is-base-schedule": "Используется базовое расписание мастера",
+    "location": {
+      "service-geography": "География предоставления услуги",
+      "attendance-distance": "Выезд на дистанцию до",
+      "from": "от адреса",
+      "choose-address": "Выберите адрес"
+    }
   },
   "service-publish": {
     "back-button": "Назад",

@@ -25,6 +25,8 @@ import {
   ServiceWidgetComponent,
   ServiceLocationComponent,
   PaymentMethodViewerComponent,
+  PriceEditorComponent,
+  LocationSelectorComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { AbstractLocationEditComponent } from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -116,6 +118,8 @@ import { NumberDirective } from './directives/number.directive';
     LoadingIndicatorComponent,
     PaymentMethodViewerComponent,
     PaymentMethodEditorComponent,
+    PriceEditorComponent,
+    LocationSelectorComponent,
   ],
   exports: [
     ErrorFlashbagComponent,
@@ -163,6 +167,8 @@ import { NumberDirective } from './directives/number.directive';
     LoadingIndicatorComponent,
     PaymentMethodViewerComponent,
     PaymentMethodEditorComponent,
+    PriceEditorComponent,
+    LocationSelectorComponent,
   ],
   imports: [
     CommonModule,

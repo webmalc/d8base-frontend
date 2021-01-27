@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import * as ScheduleConstants from '@app/shared/components/schedule-editor/schedule.constants';
+import { ProfessionalSchedule } from '@app/api/models';
+import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 
 @Component({
   selector: 'app-schedule-viewer',
@@ -8,14 +8,14 @@ import * as ScheduleConstants from '@app/shared/components/schedule-editor/sched
   styleUrls: ['./schedule-viewer.component.scss'],
 })
 export class ScheduleViewerComponent {
-  private _schedule: AbstractSchedule[];
+  private _schedule: ProfessionalSchedule[];
 
-  public get schedule(): AbstractSchedule[] {
+  public get schedule(): ProfessionalSchedule[] {
     return this._schedule;
   }
 
   @Input()
-  public set schedule(schedule: AbstractSchedule[]) {
+  public set schedule(schedule: ProfessionalSchedule[]) {
     this._schedule = schedule.filter(x => x.is_enabled);
   }
 

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ServicesApiService } from '@app/core/services/services-api.service';
-import { ServiceSchedule } from '@app/service/models/service-schedule';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { AccountsService, ServicesService } from '@app/api/services';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceOperationsService } from '@app/core/services/service-operations.service';
-import { Service } from '@app/service/models/service';
+import { ProfessionalSchedule, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
 
 @Component({
@@ -16,18 +15,25 @@ import { ServicesApiCache } from '@app/core/services/cache';
 })
 export class ServiceEditorPageComponent {
   public service$: Observable<Service>;
-  public schedule$: Observable<ServiceSchedule>; // no backend yet
+  public schedule$: Observable<ProfessionalSchedule[]>;
 
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(
     private readonly serviceOperations: ServiceOperationsService,
     route: ActivatedRoute,
-    servicesApi: ServicesApiService,
+    api: AccountsService,
+    apiReadonly: ServicesService,
   ) {
     this.service$ = combineLatest([route.params, this.refresh$]).pipe(
       filter(([params]) => !!params.id),
-      switchMap(([params]) => servicesApi.getByEntityId(params.id)),
+      switchMap(([params]) => apiReadonly.servicesServicesRead(params.id)),
+      shareReplay(1),
+    );
+    this.schedule$ = this.service$.pipe(
+      switchMap(service => service.is_base_schedule
+        ? api.accountsProfessionalScheduleList({}).pipe(map(response => response.results))
+        : of<ProfessionalSchedule[]>([])),
     );
   }
 
@@ -37,10 +43,10 @@ export class ServiceEditorPageComponent {
   }
 
   public setAutoConfirmation(service: Service, autoConfirm: boolean): void {
-    //
+    this.serviceOperations.setAutoConfirm(service, autoConfirm).subscribe(() => this.refresh$.next());
   }
 
   public deleteService(service: Service): void {
-    this.serviceOperations.deleteService(service).subscribe(() => this.refresh$.next());
+    this.serviceOperations.deleteService(service.id).subscribe(() => this.refresh$.next());
   }
 }

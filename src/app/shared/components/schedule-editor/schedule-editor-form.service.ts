@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { ProfessionalSchedule } from '@app/api/models';
 
-import { plainToClass } from 'class-transformer';
+import * as ScheduleConstants from '../../../core/constants/schedule.constants';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
-import * as ScheduleConstants from './schedule.constants';
 
 @Injectable()
 export class ScheduleEditorFormService {
 
   public form: FormGroup;
-  public formArray: AbstractSchedule[] = [];
-  public toDelete: AbstractSchedule[] = [];
+  public formArray: ProfessionalSchedule[] = [];
+  public toDelete: ProfessionalSchedule[] = [];
 
   constructor(private readonly formBuilder: FormBuilder) {
   }
@@ -20,7 +19,7 @@ export class ScheduleEditorFormService {
     return (this.form.controls.timetable as FormArray).controls as FormGroup[];
   }
 
-  public createForm(timetable: AbstractSchedule[]): void {
+  public createForm(timetable: ProfessionalSchedule[]): void {
     this.formArray = [];
     this.toDelete = [];
     this.form = this.formBuilder.group({
@@ -55,8 +54,14 @@ export class ScheduleEditorFormService {
     );
   }
 
-  public pushNewDay(dayCode: number): void {
-    this.formArray.push(plainToClass(AbstractSchedule, { day_of_week: dayCode, end_time: null, start_time: null, is_enabled: false }));
+  public pushNewDay(dayCode: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
+    this.formArray.push( {
+      professional: null,
+      day_of_week: dayCode,
+      end_time: null,
+      start_time: null,
+      is_enabled: false,
+    });
 
     this.updateForm();
   }
@@ -128,7 +133,7 @@ export class ScheduleEditorFormService {
     this.formArray = this.formArray?.sort((a, b) => a.day_of_week > b.day_of_week ? 1 : -1);
   }
 
-  private fillTimeTable(timetable: AbstractSchedule[]): void {
+  private fillTimeTable(timetable: ProfessionalSchedule[]): void {
     this.formArray = timetable;
     this.updateForm();
   }

@@ -101,20 +101,20 @@
         <h1>{{ "master-profile.info.about" | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <ion-item>
+    <ion-item *ngIf="context.master.experience">
       <ion-label>
         {{"master-profile.info.professional-experience"|translate}}
       </ion-label>
-      <ion-text *ngIf="context.master.experience">
-        {{context.master.experience}} {{declinationYears(context.master?.experience) | translate}}
+      <ion-text>
+        {{context.master.experience}} {{declinationYears(context.master.experience) | translate}}
       </ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="context.master.level">
       <ion-label>
         {{"master-profile.info.professional-level"|translate}}
       </ion-label>
       <ion-text>
-        {{"global.professional-level." + context.master?.level | translate}}
+        {{"global.professional-level." + context.master.level | translate}}
       </ion-text>
     </ion-item>
     <ion-item *ngIf="context.user.gender">
@@ -133,7 +133,7 @@
         {{getYearsFromBirthday(context.user.birthday)}} {{declinationYears(getYearsFromBirthday(context.user.birthday)) | translate}}
       </ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="context.user.nationality">
       <ion-label>
         {{"master-profile.info.nationality"|translate}}
       </ion-label>

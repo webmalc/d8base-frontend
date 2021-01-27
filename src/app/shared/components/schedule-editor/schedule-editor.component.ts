@@ -1,17 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ProfessionalSchedule } from '@app/api/models';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { PopoverController } from '@ionic/angular';
+import * as ScheduleConstants from '../../../core/constants/schedule.constants';
 import { DaySelectorComponent } from './day-selector/day-selector.component';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 import { ScheduleEditorFormService } from './schedule-editor-form.service';
-import * as ScheduleConstants from './schedule.constants';
 
 function normalizeTimeFormat(time: string | null): string {
   // convert "HH:MM:SS" to "HH:MM"
   return time?.substr(0, 5);
 }
 
-function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
+function normalizeScheduleFormat(schedule: ProfessionalSchedule): ProfessionalSchedule {
   return {
     ...schedule,
     start_time: normalizeTimeFormat(schedule.start_time),
@@ -40,7 +41,7 @@ export class ScheduleEditorComponent {
   }
 
   @Input()
-  public set schedule(schedule: AbstractSchedule[]) {
+  public set schedule(schedule: ProfessionalSchedule[]) {
     const initialValue = schedule || ScheduleConstants.defaultSchedule;
     this.formService.createForm(initialValue.map(normalizeScheduleFormat));
   }

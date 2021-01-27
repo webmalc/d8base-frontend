@@ -53,45 +53,7 @@
               </ion-row>
               <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
             </ion-col>
-
-            <ion-item class="ion-item-bordered">
-
-              <ng-container *ngIf="formService.form.get(formFields.IsPriceFixed).value">
-                <ion-label position="stacked">{{'service-publish.step-two.fixed-price-title'|translate}}</ion-label>
-                <ion-input [formControlName]="formFields.FixedPrice" appNumbersOnly
-                           name="price"></ion-input>
-              </ng-container>
-              <ng-container *ngIf="!formService.form.get(formFields.IsPriceFixed).value">
-                <ion-label position="stacked">
-                  {{"service-publish.step-two.start-price"|translate}}
-                </ion-label>
-                <ion-input name="price" appNumbersOnly
-                           [formControlName]="formFields.StartPrice"></ion-input>
-                <ion-label position="stacked">
-                  {{"service-publish.step-two.end-price"|translate}}
-                </ion-label>
-                <ion-input [formControlName]="formFields.EndPrice" appNumbersOnly
-                           name="price"></ion-input>
-              </ng-container>
-
-              <ionic-selectable
-                slot="end"
-                itemValueField="currency"
-                itemTextField="title"
-                [canSearch]="true"
-                [items]="currencyList$|async"
-                [formControlName]="this.formFields.Currency"
-                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-                searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
-              </ionic-selectable>
-            </ion-item>
-
-            <ion-item lines="none">
-              {{"service-publish.step-two.fixed-price"|translate}}
-              <ion-checkbox slot="end" [formControlName]="formFields.IsPriceFixed"></ion-checkbox>
-            </ion-item>
-
+            <app-price-editor [formControlName]="formFields.Price"></app-price-editor>
           </ion-col>
         </ion-item>
 
@@ -102,15 +64,15 @@
         <ion-item class="ion-item-no-border ion-item-bordered-others">
           <ion-col class="ion-padding-vertical" size="12">
             <ion-list>
+              <ion-list-header class="ion-item-bottom-border ion-item-no-side-padding">
+                <ion-item class="ion-item-no-border ion-item-no-side-padding">
+                  <div class="label-for-required-input">
+                    {{"service-publish.step-two.location"|translate}}
+                  </div>
+                </ion-item>
+              </ion-list-header>
               <ion-radio-group [formControlName]="formFields.Location">
-                <ion-list-header class="ion-item-bottom-border ion-item-no-side-padding">
-                  <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                    <div class="label-for-required-input">
-                      {{"service-publish.step-two.location"|translate}}
-                    </div>
-                  </ion-item>
-                </ion-list-header>
-                <ion-item *ngFor="let type of serviceTypeList">
+                <ion-item *ngFor="let type of serviceTypes">
                   <ion-label>{{"service-location." + type|translate}}</ion-label>
                   <ion-radio value="{{type}}"></ion-radio>
                 </ion-item>

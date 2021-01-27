@@ -4,13 +4,12 @@
     <ion-text>{{ 'service-location.online' | translate }}</ion-text>
   </ion-item>
   <ion-item lines="none" *ngSwitchCase="'professional'">
-    <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+    <ion-icon slot="start" name="location-outline" color="primary"></ion-icon>
     <ion-text>{{ 'service-location.professional' | translate }}</ion-text>
   </ion-item>
   <ion-item *ngFor="let serviceLocation of service?.locations" lines="none">
     <ion-icon slot="start"></ion-icon>
     <ion-text>
-      {{ 'service-details.address' | translate }}:&nbsp;
       <app-location-viewer [location]="serviceLocation.location"></app-location-viewer>
     </ion-text>
   </ion-item>

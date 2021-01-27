@@ -18,3 +18,5 @@ export * from './content-wrapper/content-wrapper.component';
 export * from './service-location/service-location.component';
 export * from './loading-indicator/loading-indicator.component';
 export * from './service-payment-options/payment-method-viewer.component';
+export * from './price-editor/price-editor.component';
+export * from './location-selector/location-selector.component';
