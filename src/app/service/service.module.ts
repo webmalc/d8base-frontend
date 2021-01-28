@@ -5,7 +5,6 @@ import { RegistrationPageModule } from '@app/auth/pages/registration/registratio
 import { PricesApiService } from '@app/core/services/prices-api.service';
 import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
 import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
-import { ServiceScheduleApiService } from '@app/core/services/service-schedule-api.service';
 import { ServiceTagsApiService } from '@app/core/services/service-tags-api.service';
 import { ServicesApiService } from '@app/core/services/services-api.service';
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
@@ -107,7 +106,6 @@ import { ServicePage } from './service.page';
     ServicePublishStepSixFormService,
     ServicePublishStepSevenFormService,
     ServicePublishStepSevenDepartureFormService,
-    ServiceScheduleApiService,
     ServiceStepsNavigationService,
     ServicePublishService,
     ServicePublishDataPreparerService,

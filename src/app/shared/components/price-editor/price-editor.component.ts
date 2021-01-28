@@ -1,10 +1,13 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Price } from '@app/api/models';
+import { Currency } from '@app/core/models/currency';
 import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
+
+const defaultValue: Partial<Price> = { is_price_fixed: true };
 
 @Component({
   selector: 'app-price-editor',
@@ -22,11 +25,12 @@ export class PriceEditorComponent implements ControlValueAccessor {
 
   public currency$: Observable<{ list; default }>;
   public isPriceFixed$ = new BehaviorSubject<boolean>(true);
-  public initialValues: Partial<Price> = {};
-  public initialCurrency: string;
+  public initialValues: Partial<Price> = defaultValue;
 
-  private value: any;
+  private currencyCode: string;
+  private value: Partial<Price> = defaultValue;
   private onChange: (value: any) => void;
+  private onTouched: () => void;
 
   constructor(
     private readonly currencyApi: CurrencyListApiService,
@@ -48,19 +52,21 @@ export class PriceEditorComponent implements ControlValueAccessor {
   }
 
   public registerOnTouched(fn: any): void {
-    // do nothing
+    this.onTouched = fn;
   }
 
   public writeValue(value: Price): void {
     this.value = value;
-    this.initialValues = {
-      ...value,
-    };
-    this.initialCurrency = value?.price_currency ?? value?.start_price_currency;
+    if (value) {
+      this.initialValues = {
+        ...value,
+      };
+    }
+    this.currencyCode = value?.price_currency ?? value?.start_price_currency;
+    this.isPriceFixed$.next(value?.is_price_fixed ?? true);
   }
 
-  public writeField(field: string, event: CustomEvent) {
-    const value: string = event.detail.value;
+  public writeField<T>(field: string, value: T) {
     this.value = {
       ...this.value,
       [field]: value,
@@ -68,7 +74,24 @@ export class PriceEditorComponent implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
+  public setCurrency(currency: Currency) {
+    const code = currency.currency;
+    this.currencyCode = code;
+    if (!this.value.is_price_fixed) {
+      this.writeField('start_price_currency', code);
+      this.writeField('end_price_currency', code);
+    } else {
+      this.writeField('price_currency', code);
+    }
+  }
+
   public toggleFixedPrice(event: CustomEvent) {
-    this.isPriceFixed$.next(event.detail.checked);
+    const isPriceFixed: boolean = event.detail.checked;
+    this.isPriceFixed$.next(isPriceFixed);
+    this.writeField('is_price_fixed', isPriceFixed);
+  }
+
+  public getInitialCurrency(list: Currency[]): Currency {
+    return list.find(c => c.currency === this.currencyCode);
   }
 }

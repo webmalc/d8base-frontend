@@ -158,7 +158,7 @@ export class ServicePublishDataPreparerService {
   }
 
   private getServicePrice(): Price {
-    const price = new Price();
+    let price = new Price();
     price.payment_methods = [];
     const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
@@ -168,13 +168,10 @@ export class ServicePublishDataPreparerService {
     if (stepSevenData.payment_online) {
       price.payment_methods.push(PaymentMethods.Online);
     }
-    price.price = stepTwoData.price;
-    price.start_price = stepTwoData.start_price;
-    price.end_price = stepTwoData.end_price;
-    price.end_price_currency = stepTwoData.price_currency?.currency;
-    price.start_price_currency = stepTwoData.price_currency?.currency;
-    price.price_currency = stepTwoData.price_currency?.currency;
-    price.is_price_fixed = stepTwoData.is_price_fixed;
+    price = {
+      ...price,
+      ...stepTwoData.price,
+    };
 
     return HelperService.clear(price);
   }

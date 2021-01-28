@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountsService, ServicesService } from '@app/api/services';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceOperationsService } from '@app/core/services/service-operations.service';
@@ -15,7 +16,7 @@ import { ServicesApiCache } from '@app/core/services/cache';
 })
 export class ServiceEditorPageComponent {
   public service$: Observable<Service>;
-  public schedule$: Observable<ProfessionalSchedule[]>;
+  public schedule$: Observable<AbstractSchedule[]>;
 
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
@@ -33,7 +34,8 @@ export class ServiceEditorPageComponent {
     this.schedule$ = this.service$.pipe(
       switchMap(service => service.is_base_schedule
         ? api.accountsProfessionalScheduleList({}).pipe(map(response => response.results))
-        : of<ProfessionalSchedule[]>([])),
+        : api.accountsServiceScheduleList({ service: service.id.toString() }).pipe(map(response => response.results)),
+      ),
     );
   }
 

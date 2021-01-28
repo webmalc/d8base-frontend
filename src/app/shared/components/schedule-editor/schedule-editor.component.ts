@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProfessionalSchedule } from '@app/api/models';
+import { ProfessionalSchedule, ServiceSchedule } from '@app/api/models';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { PopoverController } from '@ionic/angular';
 import * as ScheduleConstants from '../../../core/constants/schedule.constants';
@@ -12,7 +12,7 @@ function normalizeTimeFormat(time: string | null): string {
   return time?.substr(0, 5);
 }
 
-function normalizeScheduleFormat(schedule: ProfessionalSchedule): ProfessionalSchedule {
+function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
   return {
     ...schedule,
     start_time: normalizeTimeFormat(schedule.start_time),
@@ -41,7 +41,7 @@ export class ScheduleEditorComponent {
   }
 
   @Input()
-  public set schedule(schedule: ProfessionalSchedule[]) {
+  public set schedule(schedule: AbstractSchedule[]) {
     const initialValue = schedule || ScheduleConstants.defaultSchedule;
     this.formService.createForm(initialValue.map(normalizeScheduleFormat));
   }

@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="service?.service_type">
   <ion-item lines="none" *ngSwitchCase="'online'">
-    <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+    <ion-icon slot="start" name="globe-outline" color="primary"></ion-icon>
     <ion-text>{{ 'service-location.online' | translate }}</ion-text>
   </ion-item>
   <ion-item lines="none" *ngSwitchCase="'professional'">
@@ -14,7 +14,7 @@
     </ion-text>
   </ion-item>
   <ion-item lines="none" *ngSwitchCase="'client'">
-    <ion-icon slot="start" name="checkmark-circle" color="success"></ion-icon>
+    <ion-icon slot="start" name="location-outline" color="primary"></ion-icon>
     <ion-text>{{ 'service-location.client' | translate }}</ion-text>
   </ion-item>
   <app-loading-indicator *ngSwitchDefault></app-loading-indicator>

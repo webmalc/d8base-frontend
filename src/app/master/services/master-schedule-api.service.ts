@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class MasterScheduleApiService extends AbstractApiService<MasterSchedule> {
+export class MasterScheduleApiService extends AbstractApiService<Required<Pick<MasterSchedule, 'id'>>> {
 
   private readonly url = environment.backend.master_schedule;
   private readonly setUrl = environment.backend.master_schedule_set;

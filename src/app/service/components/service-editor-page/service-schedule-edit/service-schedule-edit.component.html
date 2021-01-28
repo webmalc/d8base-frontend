@@ -11,6 +11,15 @@
     </ion-item>
 
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
+      <ion-item>
+        <ion-label>
+          is_base_schedule
+        </ion-label>
+        <ion-checkbox formControlName="is_base_schedule" (ngModelChange)="toggleScheduleEditor($event)"></ion-checkbox>
+      </ion-item>
+
+      <app-schedule-editor *ngIf="showScheduleEditor" [schedule]="schedule$ | async"></app-schedule-editor>
+
     </form>
 
   </app-content-wrapper>

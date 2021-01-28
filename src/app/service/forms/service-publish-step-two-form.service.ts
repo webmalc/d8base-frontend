@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Price } from '@app/api/models';
+import { minimumDescriptionLength } from '@app/core/constants/service.constants';
 import { ServicePublishStepTwoFormFields } from '@app/service/enums/service-publish-step-two-form-fields';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 
@@ -14,9 +16,9 @@ export class ServicePublishStepTwoFormService {
   public createForm(data?: StepTwoDataInterface): void {
     this.form = this.formBuilder.group({
         [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
-        [ServicePublishStepTwoFormFields.Description]: [data?.description, Validators.minLength(20)],
+        [ServicePublishStepTwoFormFields.Description]: [data?.description, Validators.minLength(minimumDescriptionLength)],
         [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
-        [ServicePublishStepTwoFormFields.Price]: [null],
+        [ServicePublishStepTwoFormFields.Price]: [data?.price],
         [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
       },
       { validators: [this.checkPricesValidator] },
@@ -25,10 +27,6 @@ export class ServicePublishStepTwoFormService {
 
   public isSubmitDisabled(): boolean {
     return this.form.invalid;
-  }
-
-  private fixedPriceValidator(group: FormGroup): boolean {
-    return true;
   }
 
   private checkPricesValidator(group: FormGroup): ValidationErrors | null {
