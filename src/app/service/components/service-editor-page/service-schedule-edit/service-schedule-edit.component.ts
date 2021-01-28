@@ -42,10 +42,6 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
     this.saveAndReturn(newService);
   }
 
-  public toggleScheduleEditor(showScheduleEditor: boolean) {
-    this.showScheduleEditor = showScheduleEditor;
-  }
-
   protected createForm(service: Service): FormGroup {
     this.showScheduleEditor = service.is_base_schedule;
     return new FormGroup({
