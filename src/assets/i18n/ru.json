@@ -718,10 +718,13 @@
   "reviews": {
     "title": "Отзывы",
     "edit-review": "Отправить отзыв",
+    "edit-comment": "Оставить комментарий",
     "send-review": "Отправить отзыв",
     "description": "Отзыв",
     "date": "Дата",
     "professional-comment": "Ответ мастера",
+    "yours-comment": "Ваш ответ",
+    "all-reviews": "Все отзывы",
     "send": "Отправить"
   },
   "orders-type": {

@@ -1,0 +1,52 @@
+<ion-card class="review">
+  <ion-item class="ion-item-no-border">
+    <ion-avatar class="avatar" slot="start">
+      <ion-img [src]="review?.user.avatar_thumbnail || defaultAvatar"></ion-img>
+    </ion-avatar>
+    <ion-label>
+      {{ review?.user.first_name }}
+      {{ review?.user.last_name }}
+    </ion-label>
+    <span *ngIf="countryCode | async as countryCode" class="flag-icon flag-icon-{{ countryCode || 'ca' }}"></span>
+  </ion-item>
+  <ion-item class="ion-item-no-border review-date">{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }} </ion-item>
+  <ion-item class="ion-item-no-border rating">
+    <ion-label class="star-label" slot="start">{{ 'global.rating.' + review?.rating | translate }}</ion-label>
+    <ng-container *ngFor="let star of ratings">
+      <ion-icon *ngIf="star <= review?.rating" name="star" class="star star-rating fs20"></ion-icon>
+    </ng-container>
+  </ion-item>
+  <div class="description ion-padding-horizontal ion-padding-bottom fs16">{{ review?.description }}</div>
+  <ng-container *ngIf="showComment">
+    <ng-container *ngIf="isAbleToEditComment | async; else notProfessionalComment">
+      <ion-item class="comment-label ion-item-no-border">
+        <ion-label>{{ 'reviews.yours-comment' | translate }}</ion-label>
+        <ion-button
+          routerLink="/reviews/{{ review?.professional }}/edit-comment/{{ review?.id }}"
+          [state]="{ review: review }"
+          color="medium"
+          fill="clear"
+        >
+          <ion-icon slot="end" name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="review?.comment" class="comment ion-item-no-border">
+        <div class="ion-padding-vertical">
+          {{ review?.comment?.description }}
+        </div>
+      </ion-item>
+    </ng-container>
+    <ng-template #notProfessionalComment>
+      <ng-container *ngIf="review?.comment">
+        <ion-item class="comment-label ion-item-no-border">
+          <ion-label>{{ 'reviews.professional-comment' | translate }}</ion-label>
+        </ion-item>
+        <ion-item class="comment ion-item-no-border">
+          <div class="ion-padding-vertical">
+            {{ review?.comment?.description }}
+          </div>
+        </ion-item>
+      </ng-container>
+    </ng-template>
+  </ng-container>
+</ion-card>
