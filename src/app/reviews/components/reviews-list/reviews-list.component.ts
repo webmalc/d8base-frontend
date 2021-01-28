@@ -1,12 +1,12 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList, ReviewList } from '@app/api/models';
-import { AccountsService, LocationService, ProfessionalsService, ServicesService } from '@app/api/services';
+import { AccountsService, ProfessionalsService, ServicesService } from '@app/api/services';
 import { CommunicationService } from '@app/api/services/communication.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
-import { forkJoin, Observable, of, Subject } from 'rxjs';
-import { filter, map, share, switchMap, takeUntil } from 'rxjs/operators';
+import { NavController } from '@ionic/angular';
+import { forkJoin, Observable, of } from 'rxjs';
+import { filter, map, share, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reviews-list',
@@ -14,8 +14,6 @@ import { filter, map, share, switchMap, takeUntil } from 'rxjs/operators';
   styleUrls: ['./reviews-list.component.scss'],
 })
 export class ReviewsListComponent {
-  public readonly ratings: number[] = [1, 2, 3, 4, 5];
-  public defaultAvatar = HelperService.getNoAvatarLink();
   public readonly professionalId$: Observable<number> = this.activatedRoute.params.pipe(
     map(({ professionalId }) => professionalId),
     filter(professionalId => Boolean(professionalId)),
@@ -58,7 +56,6 @@ export class ReviewsListComponent {
   );
 
   public reviewCountryCodes: { [nationality: number]: string };
-  private readonly ngDestroy$ = new Subject<void>();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -66,38 +63,11 @@ export class ReviewsListComponent {
     private readonly communicationService: CommunicationService,
     private readonly professionalsService: ProfessionalsService,
     private readonly servicesService: ServicesService,
-    private readonly locationService: LocationService,
     private readonly userManagerService: UserManagerService,
-    private readonly cd: ChangeDetectorRef,
+    private readonly navCtrl: NavController,
   ) {}
 
-  public ionViewWillEnter(): void {
-    this.subscribeReviewCountryCodes();
-  }
-
-  public ionViewDidLeave(): void {
-    this.ngDestroy$.next();
-    this.ngDestroy$.complete();
-  }
-
-  private subscribeReviewCountryCodes(): void {
-    this.reviews$
-      .pipe(
-        switchMap(reviews => {
-          const uniqueNationalities = [...new Set(reviews.map(review => review.user.nationality))].filter(nationality =>
-            Boolean(nationality),
-          );
-          return forkJoin([
-            ...uniqueNationalities.map(nationality =>
-              this.locationService.locationCountriesRead(nationality).pipe(map(country => ({ nationality, code: country.tld }))),
-            ),
-          ]).pipe(map(nationalityMapToCode => nationalityMapToCode.reduce((acc, curr) => ({ ...acc, [curr.nationality]: curr.code }), {})));
-        }),
-        takeUntil(this.ngDestroy$),
-      )
-      .subscribe(reviewCountryCodes => {
-        this.reviewCountryCodes = reviewCountryCodes;
-        this.cd.markForCheck();
-      });
+  public back(): void {
+    this.navCtrl.back();
   }
 }
