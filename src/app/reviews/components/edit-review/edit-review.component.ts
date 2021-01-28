@@ -1,11 +1,11 @@
-import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList, Review, ServiceList } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { HelperService } from '@app/core/services/helper.service';
+import { NavController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
   templateUrl: './edit-review.component.html',
   styleUrls: ['./edit-review.component.scss'],
 })
-export class EditReviewComponent {
+export class EditReviewComponent implements OnInit, OnDestroy {
   public readonly professionalId$: Observable<number> = this.activatedRoute.params.pipe(
     map(({ professionalId }) => professionalId),
     filter(professionalId => Boolean(professionalId)),
@@ -48,16 +48,16 @@ export class EditReviewComponent {
     private readonly accountsService: AccountsService,
     private readonly professionalsService: ProfessionalsService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly location: Location,
+    private readonly navCtrl: NavController,
     private readonly fb: FormBuilder,
     private readonly cd: ChangeDetectorRef,
   ) {}
 
-  public ionViewWillEnter(): void {
+  public ngOnInit(): void {
     this.initForm();
   }
 
-  public ionViewDidLeave(): void {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
   }
 
@@ -77,8 +77,12 @@ export class EditReviewComponent {
         takeUntil(this.ngUnsubscribe$),
       )
       .subscribe(() => {
-        this.location.back();
+        this.back();
       });
+  }
+
+  public back(): void {
+    this.navCtrl.back();
   }
 
   private initForm(): void {

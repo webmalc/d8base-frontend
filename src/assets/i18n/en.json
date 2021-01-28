@@ -707,10 +707,13 @@
   "reviews": {
     "title": "Reviews",
     "edit-review": "Send review",
+    "edit-comment": "Comment review",
     "send-review": "Send review",
     "description": "Review",
     "date": "Date",
     "professional-comment": "Professional comment",
+    "yours-comment": "Yours comment",
+    "all-reviews": "All reviews",
     "send": "Send"
   },
   "orders-type": {

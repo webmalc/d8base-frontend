@@ -1,0 +1,29 @@
+.review {
+  margin: 0;
+  box-shadow: none;
+  border-bottom: solid 1px var(--ion-color-medium);
+  border-radius: 0;
+  padding: 28px 0 24px 0;
+  .review-date {
+    --color: var(--ion-color-medium);
+  }
+  .rating {
+    font-weight: 700;
+  }
+  .comment-label {
+    font-weight: 700;
+  }
+  .comment {
+    --background: var(--ion-color-light);
+    --color: var(--ion-color-medium-shade);
+    .comment-content {
+      padding: 12px 0;
+    }
+  }
+  .star {
+    color: var(--ion-color-warning);
+  }
+  .star-rating {
+    margin-left: 5px;
+  }
+}

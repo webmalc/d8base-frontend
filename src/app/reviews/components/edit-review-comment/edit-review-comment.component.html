@@ -9,21 +9,20 @@
               <ion-icon name="arrow-back-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
-          <ion-title>{{ 'reviews.edit-review' | translate }}</ion-title>
+          <ion-title>{{ 'reviews.edit-comment' | translate }}</ion-title>
         </ion-item>
         <app-professional-card
           *ngIf="professional$ | async as professional"
           [professional]="professional"
           class="professional"
         ></app-professional-card>
-
-        <app-rating-picker [formControl]="reviewForm.get('rating')" ngDefaultControl></app-rating-picker>
+        <app-review-card *ngIf="review$ | async as review" [review]="review" [showComment]="false"></app-review-card>
         <ion-list>
           <ion-item>
-            <ion-label position="floating">{{ 'reviews.description' | translate }}</ion-label>
-            <ion-textarea [formControl]="reviewForm.get('description')" auto-grow="true"></ion-textarea>
+            <ion-label position="floating">{{ 'reviews.yours-comment' | translate }}</ion-label>
+            <ion-textarea [formControl]="reviewCommentForm.get('description')" auto-grow="true"></ion-textarea>
           </ion-item>
-          <app-form-control-error [control]="reviewForm.get('description')"> </app-form-control-error>
+          <app-form-control-error [control]="reviewCommentForm.get('description')"> </app-form-control-error>
         </ion-list>
         <ion-row>
           <ion-col>
@@ -32,7 +31,9 @@
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button expand="block" [disabled]="reviewForm.invalid" (click)="sendReview()">{{ 'reviews.send' | translate }}</ion-button>
+            <ion-button expand="block" [disabled]="reviewCommentForm.invalid" (click)="sendReview()">{{
+              'reviews.send' | translate
+            }}</ion-button>
           </ion-col>
         </ion-row>
       </ion-col>
