@@ -26,6 +26,7 @@ import { EducationApiService } from '@app/master/services/education-api.service'
 import { ExperienceApiService } from '@app/master/services/experience-api.service';
 import { ReviewsReadonlyApiService } from '@app/master/services/reviews-readonly-api.service';
 import { ReviewsModule } from '@app/reviews/reviews.module';
+import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import { ServicePageModule } from '@app/service/service.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
@@ -66,6 +67,7 @@ import { MasterPage } from './master.page';
     EducationApiService,
     CertificatesApiService,
     CalendarGeneratorFactoryService,
+    ServicesGeneratorFactoryService,
   ],
 })
 export class MasterPageModule {

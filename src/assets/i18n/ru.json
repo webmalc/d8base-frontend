@@ -241,7 +241,18 @@
     "instant-book-title": "Мгновенное подтверждение (Instant Book)",
     "instant-book-description": "Бронирования данной услуги акцептовываются мастером автоматически и не требуют подтверждения мастером",
     "address": "Адрес",
-    "edit": "Редактирование услуги"
+    "edit": "Редактирование услуги",
+    "name": "Название",
+    "description": "Описание",
+    "duration-and-price": "Длительность и цена",
+    "payment-methods": "Варианты оплаты",
+    "is-base-schedule": "Используется базовое расписание мастера",
+    "location": {
+      "service-geography": "География предоставления услуги",
+      "attendance-distance": "Выезд на дистанцию до",
+      "from": "от адреса",
+      "choose-address": "Выберите адрес"
+    }
   },
   "service-publish": {
     "back-button": "Назад",

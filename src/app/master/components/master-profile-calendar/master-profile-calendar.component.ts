@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountsService } from '@app/api/services';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { HelperService } from '@app/core/services/helper.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
 import { MasterCalendar } from '@app/master/models/master-calendar';
-import { MasterSchedule } from '@app/master/models/master-schedule';
+import { ProfessionalSchedule } from '@app/api/models';
 import { CalendarGeneratorFactoryService } from '@app/master/services/calendar-generator-factory.service';
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
@@ -18,7 +19,7 @@ import { map, switchMap } from 'rxjs/operators';
 export class MasterProfileCalendarComponent implements OnInit {
 
   public enabledPeriods: Observable<MasterCalendar[]>;
-  public schedule$: Observable<MasterSchedule[]>;
+  public schedule$: Observable<ProfessionalSchedule[]>;
   public context$: Observable<MasterProfileContext>;
 
   private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
@@ -27,10 +28,11 @@ export class MasterProfileCalendarComponent implements OnInit {
   constructor(
     private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
     private readonly scheduleApi: MasterScheduleApiService,
+    private readonly api: AccountsService,
     private readonly contextService: MasterProfileContextService,
   ) {
     this.enabledPeriods = this.periods.asObservable();
-    this.schedule$ = scheduleApi.get().pipe(
+    this.schedule$ = api.accountsProfessionalScheduleList({}).pipe(
       map(response => response.results),
     );
     this.context$ = this.contextService.context$;

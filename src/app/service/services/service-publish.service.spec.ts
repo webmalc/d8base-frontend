@@ -6,7 +6,6 @@ import { StorageManagerService } from '../../core/proxies/storage-manager.servic
 import { PricesApiService } from '../../core/services/prices-api.service';
 import { ServiceLocationApiService } from '../../core/services/service-location-api.service';
 import { ServicePhotoApiService } from '../../core/services/service-photo-api.service';
-import { ServiceScheduleApiService } from '../../core/services/service-schedule-api.service';
 import { ServicePublishDataHolderService } from './service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from './service-publish-data-preparer.service';
 import { ServicePublishService } from './service-publish.service';
@@ -21,7 +20,6 @@ describe('ServicePublishService', () => {
       { provide: StorageManagerService, useClass: StorageManagerMock },
       ServicePublishDataHolderService,
       ServicePhotoApiService,
-      ServiceScheduleApiService,
       ServiceLocationApiService,
       PricesApiService,
       ServicePublishDataPreparerService,

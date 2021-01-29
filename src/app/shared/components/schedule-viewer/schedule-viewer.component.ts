@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ProfessionalSchedule } from '@app/api/models';
+import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import * as ScheduleConstants from '@app/shared/components/schedule-editor/schedule.constants';
 
 @Component({
   selector: 'app-schedule-viewer',

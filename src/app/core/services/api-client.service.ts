@@ -45,10 +45,10 @@ export class ApiClientService {
     );
   }
 
-  public deleteList<T extends { id: number }>(dataList: T[], url: string): Observable<any> {
-    return 0 === dataList.length ? of([]) : of(dataList).pipe(
+  public deleteList(ids: number[], url: string): Observable<any> {
+    return 0 === ids.length ? of([]) : of(ids).pipe(
       mergeMap((list) => forkJoin(
-        [...list.map((value: { id: number }) => this.delete(`${url + value.id}/`))],
+        [...list.map(id => this.delete(`${url + id}/`))],
       )),
     );
   }

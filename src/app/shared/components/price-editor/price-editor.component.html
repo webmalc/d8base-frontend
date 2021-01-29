@@ -1,0 +1,52 @@
+<ng-container *ngIf="currency$ | async as currency else loading">
+  <ion-item class="ion-item-bordered">
+    <ng-container *ngIf="isPriceFixed$ | async else priceInterval">
+      <ion-label position="stacked">{{'service-publish.step-two.fixed-price-title'|translate}}</ion-label>
+      <ion-input appNumbersOnly
+                 [value]="initialValues.price"
+                 (ionChange)="writeField('price', $event.detail.value)">
+      </ion-input>
+    </ng-container>
+    <ng-template #priceInterval>
+      <ion-label position="stacked">
+        {{"service-publish.step-two.start-price"|translate}}
+      </ion-label>
+      <ion-input appNumbersOnly
+                 [value]="initialValues.start_price"
+                 (ionChange)="writeField('start_price', $event.detail.value)">
+      </ion-input>
+      <ion-label position="stacked">
+        {{"service-publish.step-two.end-price"|translate}}
+      </ion-label>
+      <ion-input appNumbersOnly
+                 [value]="initialValues.end_price"
+                 (ionChange)="writeField('end_price', $event.detail.value)">
+      </ion-input>
+    </ng-template>
+
+    <ionic-selectable
+      slot="end"
+      itemValueField="currency"
+      itemTextField="title"
+      [ngModel]="getInitialCurrency(currency.list) || currency.default"
+      [canSearch]="true"
+      [items]="currency.list"
+      (ngModelChange)="setCurrency($event)"
+      closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+      searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
+      searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
+    </ionic-selectable>
+
+  </ion-item>
+
+  <ion-item lines="none" class="ion-item-no-side-padding">
+    {{"service-publish.step-two.fixed-price"|translate}}
+    <ion-checkbox slot="end"
+                  [checked]="initialValues.is_price_fixed"
+                  (ionChange)="toggleFixedPrice($event)">
+    </ion-checkbox>
+  </ion-item>
+</ng-container>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

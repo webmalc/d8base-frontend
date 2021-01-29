@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 
-import { plainToClass } from 'class-transformer';
+import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
-import * as ScheduleConstants from './schedule.constants';
 
 @Injectable()
 export class ScheduleEditorFormService {
@@ -55,8 +54,13 @@ export class ScheduleEditorFormService {
     );
   }
 
-  public pushNewDay(dayCode: number): void {
-    this.formArray.push(plainToClass(AbstractSchedule, { day_of_week: dayCode, end_time: null, start_time: null, is_enabled: false }));
+  public pushNewDay(dayCode: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
+    this.formArray.push( {
+      day_of_week: dayCode,
+      end_time: null,
+      start_time: null,
+      is_enabled: false,
+    });
 
     this.updateForm();
   }

@@ -12,7 +12,6 @@ import { ServicePhotoApiService } from '../../../core/services/service-photo-api
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '../../services/service-publish-data-preparer.service';
 import { ServicePublishService } from '../../services/service-publish.service';
-import { ServiceScheduleApiService } from '../../../core/services/service-schedule-api.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
 import { StepFinalHandlerService } from '../../services/steps-navigation-chain/step-final-handler.service';
@@ -45,7 +44,6 @@ describe('ServicePublishFinalStepComponent', () => {
         ServiceStepsNavigationService,
         { provide: StorageManagerService, useClass: StorageManagerMock },
         ServicePhotoApiService,
-        ServiceScheduleApiService,
         ServiceLocationApiService,
         PricesApiService,
         ServicePublishDataPreparerService,

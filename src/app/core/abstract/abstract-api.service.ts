@@ -52,7 +52,7 @@ export abstract class AbstractApiService<T extends { id: number }> extends Abstr
     );
   }
 
-  public deleteList(data: T[]): Observable<any> {
-    return this.client.deleteList(data, this.getUrl());
+  public deleteList(data: { id?: number }[]): Observable<any> {
+    return this.client.deleteList(data.map(x => x.id), this.getUrl());
   }
 }

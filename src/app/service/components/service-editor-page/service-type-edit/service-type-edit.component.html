@@ -1,0 +1,31 @@
+<app-header></app-header>
+<ion-content *ngIf="context$ | async as context">
+  <app-content-wrapper>
+    <ion-item color="light" lines="full">
+      <ion-buttons slot="start">
+        <ion-button [routerLink]="getServicePageUrl(context.service.id)" routerDirection="back">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{'service-details.location-title' | translate}}</ion-title>
+    </ion-item>
+
+    <form [formGroup]="context.form" (ngSubmit)="submit(context)">
+      <ion-radio-group formControlName="service_type">
+        <ion-item *ngFor="let type of serviceTypes" lines="full">
+          <ion-label>{{"service-location." + type|translate}}</ion-label>
+          <ion-radio value="{{type}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <app-service-location-editor [type]="(type$ | async) || context.service.service_type"
+                                   [service]="context.service">
+      </app-service-location-editor>
+
+      <ion-button type="submit" expand="block" [disabled]="context.form.invalid">
+        {{'global.save' | translate}}
+      </ion-button>
+    </form>
+
+  </app-content-wrapper>
+  <app-footer></app-footer>
+</ion-content>

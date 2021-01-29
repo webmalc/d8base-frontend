@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProfessionalList } from '@app/api/models/professional-list';
+import { AccountsService } from '@app/api/services';
+import { ServiceSchedule } from '@app/api/models';
 import { User } from '@app/core/models/user';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
@@ -12,13 +14,11 @@ import { Price } from '@app/service/models/price';
 import { Service } from '@app/service/models/service';
 import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePhoto } from '@app/service/models/service-photo';
-import { ServiceSchedule } from '@app/service/models/service-schedule';
 import { PricesApiService } from '@app/core/services/prices-api.service';
 import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
 import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
-import { ServiceScheduleApiService } from '@app/core/services/service-schedule-api.service';
 import { ServicesApiService } from '@app/core/services/services-api.service';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class ServicePublishService {
     private readonly userManager: UserManagerService,
     private readonly serviceApi: ServicesApiService,
     private readonly servicePhotosApi: ServicePhotoApiService,
-    private readonly serviceScheduleApi: ServiceScheduleApiService,
+    private readonly api: AccountsService,
     private readonly serviceLocationApi: ServiceLocationApiService,
     private readonly masterLocationApi: MasterLocationApiService,
     private readonly servicePriceApi: PricesApiService,
@@ -112,7 +112,9 @@ export class ServicePublishService {
   }
 
   private createSchedule(schedule: ServiceSchedule[], service: Service): Observable<ServiceSchedule[]> {
-    return this.serviceScheduleApi.createSet(schedule?.map(v => ({ ...v, service: service.id })));
+    // TODO: remove explicit casting when swagger is fixed
+    const data = schedule?.map(v => ({ ...v, service: service.id })) as unknown as ServiceSchedule;
+    return this.api.accountsServiceScheduleSet(data) as unknown as Observable<ServiceSchedule[]>;
   }
 
   private createMasterSchedule(schedule: MasterSchedule[], master: ProfessionalList): Observable<MasterSchedule[]> {

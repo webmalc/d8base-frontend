@@ -1,5 +1,4 @@
-import { Service } from '@app/service/models/service';
-import { ServiceTag } from '@app/service/models/service-tag';
+import { Service, ServiceTag } from '@app/api/models';
 
 export default interface ServiceData {
   service: Service;

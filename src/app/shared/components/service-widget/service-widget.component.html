@@ -5,18 +5,20 @@
     </h1>
   </ion-label>
   <ion-note slot="end">
-    <app-price [price]="service.price"></app-price>
+    <ion-label>
+      <app-price [price]="service.price"></app-price>
+    </ion-label>
     <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
   </ion-note>
 </ion-item>
-<app-professional-card *ngIf="master" [professional]="master"></app-professional-card>
+<app-professional-card *ngIf="master" class="ion-padding" [professional]="master"></app-professional-card>
 <app-more-info *ngIf="!alwaysExpanded else serviceDetails">
   <ng-container *ngTemplateOutlet="serviceDetails"></ng-container>
 </app-more-info>
 
 <ng-template #serviceDetails>
   <ion-item lines="none">
-    <p>{{ service.description }}</p>
+    <div class="preserve-line-breaks">{{ service.description }}</div>
   </ion-item>
   <app-service-photos [serviceId]="service.id"></app-service-photos>
   <ion-list>
@@ -34,7 +36,7 @@
         <h1>{{ 'service-details.payment-title' | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <app-service-payment-options [price]="service.price"></app-service-payment-options>
+    <app-payment-method-viewer [price]="service.price"></app-payment-method-viewer>
   </ion-list>
 
   <ion-list *ngIf="service.is_auto_order_confirmation">

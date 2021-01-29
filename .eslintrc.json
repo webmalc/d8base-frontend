@@ -96,6 +96,7 @@
         ],
         "@typescript-eslint/no-invalid-this": "off", // TODO set to "error"
         "@typescript-eslint/prefer-literal-enum-member": "error",
+        "@typescript-eslint/explicit-function-return-type": "off", // TODO set to "error"
         "arrow-parens": [
           "off",
           "always"

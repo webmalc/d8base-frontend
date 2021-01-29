@@ -1,15 +1,27 @@
 <app-header></app-header>
-<ion-content *ngIf="service$ | async as service">
+<ion-content *ngIf="context$ | async as context">
   <app-content-wrapper>
-    <ion-item lines="full">
+    <ion-item color="light" lines="full">
       <ion-buttons slot="start">
-        <ion-button [routerLink]="'/service/' + service.id + '/edit'" routerDirection="back">
+        <ion-button [routerLink]="getServicePageUrl(context.service.id)" routerDirection="back">
           <ion-icon name="arrow-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>{{ 'service-details.edit' | translate }}</ion-title>
+      <ion-title>{{'service-details.schedule-title' | translate}}</ion-title>
     </ion-item>
 
+    <form [formGroup]="context.form" (ngSubmit)="submit(context)">
+      <ion-item>
+        <ion-label>
+          {{ 'service-details.is-base-schedule' | translate }}
+        </ion-label>
+        <ion-checkbox formControlName="is_base_schedule"></ion-checkbox>
+      </ion-item>
+      <app-schedule-editor *ngIf="!context.form.controls.is_base_schedule.value"
+                           [schedule]="schedule$ | async">
+      </app-schedule-editor>
+    </form>
+
   </app-content-wrapper>
+  <app-footer></app-footer>
 </ion-content>
-<app-footer></app-footer>

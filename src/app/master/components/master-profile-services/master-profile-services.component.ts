@@ -4,7 +4,7 @@ import { ServiceOperationsService } from '@app/core/services/service-operations.
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
-import { Service } from '@app/service/models/service';
+import { Service } from '@app/api/models';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 
@@ -42,7 +42,7 @@ export class MasterProfileServicesComponent {
   }
 
   public deleteService(service: Service): void {
-    this.serviceOperations.deleteService(service).subscribe(() => this.refresh$.next());
+    this.serviceOperations.deleteService(service.id).subscribe(() => this.refresh$.next());
   }
 
   public search(event: CustomEvent): void {

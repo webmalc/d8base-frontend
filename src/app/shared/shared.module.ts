@@ -24,7 +24,9 @@ import {
   ScheduleViewerComponent,
   ServiceWidgetComponent,
   ServiceLocationComponent,
-  ServicePaymentOptionsComponent,
+  PaymentMethodViewerComponent,
+  PriceEditorComponent,
+  LocationSelectorComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { AbstractLocationEditComponent } from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -35,6 +37,7 @@ import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/er
 import { FlagMenuComponent } from '@app/shared/components/flag-menu/flag-menu.component';
 import { InfoRowComponent } from '@app/shared/components/info-row/info-row.component';
 import { MediaLinksComponent } from '@app/shared/components/media-links/media-links.component';
+import { PaymentMethodEditorComponent } from '@app/shared/components/payment-method-editor/payment-method-editor.component';
 import { PictureSelectorComponent } from '@app/shared/components/picture-selector/picture-selector.component';
 import { RatingFullStarComponent } from '@app/shared/components/rating-full-star/rating-full-star.component';
 import { RatingHalfStarComponent } from '@app/shared/components/rating-half-star/rating-half-star.component';
@@ -113,7 +116,10 @@ import { NumberDirective } from './directives/number.directive';
     ContentWrapperComponent,
     ServiceLocationComponent,
     LoadingIndicatorComponent,
-    ServicePaymentOptionsComponent,
+    PaymentMethodViewerComponent,
+    PaymentMethodEditorComponent,
+    PriceEditorComponent,
+    LocationSelectorComponent,
   ],
   exports: [
     ErrorFlashbagComponent,
@@ -159,7 +165,10 @@ import { NumberDirective } from './directives/number.directive';
     ContentWrapperComponent,
     ServiceLocationComponent,
     LoadingIndicatorComponent,
-    ServicePaymentOptionsComponent,
+    PaymentMethodViewerComponent,
+    PaymentMethodEditorComponent,
+    PriceEditorComponent,
+    LocationSelectorComponent,
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { Search } from '../../../api/models';
+import { Search } from '@app/api/models';
 import { SearchResultComponent } from './search-result.component';
 
 const testData: Search = {
