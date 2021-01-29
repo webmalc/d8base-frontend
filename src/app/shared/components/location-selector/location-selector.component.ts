@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Service, ProfessionalLocation } from '@app/api/models';
+import { Service } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { forkJoin, Observable, ReplaySubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';

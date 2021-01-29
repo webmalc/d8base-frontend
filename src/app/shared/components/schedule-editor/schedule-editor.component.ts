@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProfessionalSchedule, ServiceSchedule } from '@app/api/models';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { PopoverController } from '@ionic/angular';
-import * as ScheduleConstants from '../../../core/constants/schedule.constants';
+import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 import { DaySelectorComponent } from './day-selector/day-selector.component';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 import { ScheduleEditorFormService } from './schedule-editor-form.service';

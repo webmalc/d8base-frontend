@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
-import { ProfessionalSchedule } from '@app/api/models';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 
-import * as ScheduleConstants from '../../../core/constants/schedule.constants';
+import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 
 @Injectable()

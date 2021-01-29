@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from '@app/api/models';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';

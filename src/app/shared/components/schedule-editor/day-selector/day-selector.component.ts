@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import * as ScheduleConstants from '../../../../core/constants/schedule.constants';
+import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 
 /**
  * Day of the week selection popover

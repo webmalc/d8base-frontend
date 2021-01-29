@@ -18,10 +18,9 @@ export class ServicePublishStepTwoFormService {
         [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
         [ServicePublishStepTwoFormFields.Description]: [data?.description, Validators.minLength(minimumDescriptionLength)],
         [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
-        [ServicePublishStepTwoFormFields.Price]: [data?.price],
+        [ServicePublishStepTwoFormFields.Price]: [data?.price, this.checkPricesValidator],
         [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
       },
-      { validators: [this.checkPricesValidator] },
     );
   }
 
@@ -29,9 +28,9 @@ export class ServicePublishStepTwoFormService {
     return this.form.invalid;
   }
 
-  private checkPricesValidator(group: FormGroup): ValidationErrors | null {
-    const startPrice = 1;
-    const endPrice = 2;
+  private checkPricesValidator(price: Price): ValidationErrors | null {
+    const startPrice = price.start_price;
+    const endPrice = price.end_price;
     if (startPrice > endPrice) {
       return { priceError: true };
     }
