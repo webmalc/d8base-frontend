@@ -56,21 +56,14 @@ export class PriceEditorComponent implements ControlValueAccessor {
   }
 
   public writeValue(value: Price): void {
-    this.value = value;
-    if (value) {
-      this.initialValues = {
-        ...value,
-      };
-    }
+    this.value = value ?? defaultValue;
+    this.initialValues = value ? { ...value } : defaultValue;
     this.currencyCode = value?.price_currency ?? value?.start_price_currency;
-    this.isPriceFixed$.next(value?.is_price_fixed ?? true);
+    this.isPriceFixed$.next(this.initialValues.is_price_fixed);
   }
 
-  public writeField<T>(field: string, value: T) {
-    this.value = {
-      ...this.value,
-      [field]: value,
-    };
+  public changeField<T>(field: string, value: T) {
+    this.writeField(field, value);
     this.onChange(this.value);
   }
 
@@ -91,7 +84,17 @@ export class PriceEditorComponent implements ControlValueAccessor {
     this.writeField('is_price_fixed', isPriceFixed);
   }
 
-  public getInitialCurrency(list: Currency[]): Currency {
-    return list.find(c => c.currency === this.currencyCode);
+  public getInitialCurrency(list: Currency[], defaultCurrency: Currency): Currency {
+    const result = list.find(c => c.currency === this.currencyCode) ?? defaultCurrency;
+    this.setCurrency(result);
+
+    return result;
+  }
+
+  private writeField<T>(field: string, value: T) {
+    this.value = {
+      ...this.value,
+      [field]: value,
+    };
   }
 }

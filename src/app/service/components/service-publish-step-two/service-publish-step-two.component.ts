@@ -26,8 +26,8 @@ export class ServicePublishStepTwoComponent extends Reinitable {
     super();
   }
 
-  public submitForm(): void {
-    this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
+  public async submitForm(): Promise<void> {
+    await this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
       ServicePublishSteps.Two, this.formService.form.getRawValue(),
     );
     this.serviceStepsNavigationService.next();

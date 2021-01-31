@@ -4,7 +4,7 @@
       <ion-label position="stacked">{{'service-publish.step-two.fixed-price-title'|translate}}</ion-label>
       <ion-input appNumbersOnly
                  [value]="initialValues.price"
-                 (ionChange)="writeField('price', $event.detail.value)">
+                 (ionChange)="changeField('price', $event.detail.value)">
       </ion-input>
     </ng-container>
     <ng-template #priceInterval>
@@ -13,14 +13,14 @@
       </ion-label>
       <ion-input appNumbersOnly
                  [value]="initialValues.start_price"
-                 (ionChange)="writeField('start_price', $event.detail.value)">
+                 (ionChange)="changeField('start_price', $event.detail.value)">
       </ion-input>
       <ion-label position="stacked">
         {{"service-publish.step-two.end-price"|translate}}
       </ion-label>
       <ion-input appNumbersOnly
                  [value]="initialValues.end_price"
-                 (ionChange)="writeField('end_price', $event.detail.value)">
+                 (ionChange)="changeField('end_price', $event.detail.value)">
       </ion-input>
     </ng-template>
 
@@ -28,7 +28,7 @@
       slot="end"
       itemValueField="currency"
       itemTextField="title"
-      [ngModel]="getInitialCurrency(currency.list) || currency.default"
+      [ngModel]="getInitialCurrency(currency.list, currency.default)"
       [canSearch]="true"
       [items]="currency.list"
       (ngModelChange)="setCurrency($event)"
