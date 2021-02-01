@@ -1,6 +1,6 @@
 <ng-container *ngIf="context$ | async as context">
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
-    <ion-item class="ion-margin-bottom ion-item-no-border">
+    <div class="ion-margin-bottom">
       <ngx-dropzone class="width100" [accept]="'image/*'" (change)="dropzoneOnSelect($event)">
         <ngx-dropzone-label>
           <ion-row>
@@ -15,7 +15,7 @@
         <ngx-dropzone-image-preview *ngFor="let file of files" [file]="file" [removable]="true" (removed)="dropzoneOnRemove(file)">
         </ngx-dropzone-image-preview>
       </ngx-dropzone>
-    </ion-item>
+    </div>
   </ion-row>
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
     <ion-button color="secondary" [disabled]="!files.length" (click)="addImages()">add new photo</ion-button>

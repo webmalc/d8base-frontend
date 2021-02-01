@@ -75,10 +75,10 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
       });
   }
 
-  private addPhotos(photosToAdd: ProfessionalPhotoList[]) {
+  private addPhotos(photosToAdd: ProfessionalPhotoList[]): void {
     this.photos$.next([...photosToAdd, ...(this.photos$.value ?? [])]);
   }
-  private removePhotos(photoIdsToRemove: number[]) {
+  private removePhotos(photoIdsToRemove: number[]): void {
     this.photos$.next(this.photos$.value.filter(({ id }) => !photoIdsToRemove.includes(id)));
   }
   private dropzoneClear(): void {
