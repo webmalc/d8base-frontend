@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
-import { ServiceDetailsPageComponent } from '@app/service/components/service-details-page/service-details-page.component';
+import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
 import { ServiceEditorPageComponent } from '@app/service/components/service-editor-page/service-editor-page.component';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import { ServicePublishStepFiveComponent } from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
@@ -98,7 +98,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: ServiceDetailsPageComponent,
+    component: ServiceViewerPageComponent,
   },
 ];
 
