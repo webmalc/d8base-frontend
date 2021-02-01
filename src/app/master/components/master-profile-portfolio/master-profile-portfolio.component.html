@@ -1,7 +1,27 @@
 <ng-container *ngIf="context$ | async as context">
-  <ng-container *ngIf="masterPhotos$ | async as masterPhotos">
-    <ion-row *ngIf="masterPhotos.length > 0"
-             class="ion-wrap ion-align-items-start ion-margin-bottom ion-justify-content-center">
+  <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
+    <ion-item class="ion-margin-bottom ion-item-no-border">
+      <ngx-dropzone class="width100" [accept]="'image/*'" (change)="dropzoneOnSelect($event)">
+        <ngx-dropzone-label>
+          <ion-row>
+            {{ 'service-publish.step-three.dropzone-label' | translate }}
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-item class="ion-item-no-border">
+              <ion-icon name="download-outline"></ion-icon>
+            </ion-item>
+          </ion-row>
+        </ngx-dropzone-label>
+        <ngx-dropzone-image-preview *ngFor="let file of files" [file]="file" [removable]="true" (removed)="dropzoneOnRemove(file)">
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+    </ion-item>
+  </ion-row>
+  <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
+    <ion-button color="secondary" [disabled]="!files.length" (click)="addImages()">add new photo</ion-button>
+  </ion-row>
+  <ng-container *ngIf="photos$ | async as masterPhotos">
+    <ion-row *ngIf="masterPhotos.length > 0" class="ion-wrap ion-align-items-start ion-margin-bottom ion-justify-content-center">
       <ion-list lines="none">
         <ion-list-header>
           <ion-label>
@@ -21,6 +41,9 @@
                   alt="{{ photo.name }}"
                   title="{{ photo.name }}"
                 ></ion-img>
+                <ion-button *ngIf="context.canEdit" class="delete-button" fill="clear" color="secondary" (click)="removeImage(photo.id)">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
               </div>
             </div>
           </div>
@@ -28,7 +51,4 @@
       </ion-list>
     </ion-row>
   </ng-container>
-  <ion-row *ngIf="context.canEdit">
-    <ion-button color="secondary">add new photo</ion-button>
-  </ion-row>
 </ng-container>
