@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Price, Service } from '@app/api/models';
+import { minimumDescriptionLength } from '@app/core/constants/service.constants';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';
@@ -42,7 +43,7 @@ export class ServiceInfoEditorComponent extends ServiceEditor {
   protected createForm(service: Service): FormGroup {
     return new FormGroup({
       [this.formFields.name]: new FormControl(service.name, Validators.required),
-      [this.formFields.description]: new FormControl(service.description, Validators.maxLength(20)),
+      [this.formFields.description]: new FormControl(service.description, Validators.minLength(minimumDescriptionLength)),
       [this.formFields.duration]: new FormControl(service.duration, Validators.required),
       [this.formFields.price]: new FormControl(service.price, Validators.required),
       [this.formFields.paymentMethods]: new FormControl(service.price.payment_methods, Validators.required),
