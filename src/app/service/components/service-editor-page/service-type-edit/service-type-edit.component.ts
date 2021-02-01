@@ -33,7 +33,10 @@ export class ServiceTypeEditComponent extends ServiceEditor {
       ...service,
       service_type,
     };
-    this.saveAndReturn(newService);
+    const sources = [
+      this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+    ];
+    this.saveAndReturn(sources);
   }
 
   protected createForm(service: Service): FormGroup {
