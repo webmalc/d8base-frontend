@@ -39,7 +39,10 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
       ...service,
       is_base_schedule,
     };
-    this.saveAndReturn(newService);
+    const sources = [
+      this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+    ];
+    this.saveAndReturn(sources);
   }
 
   protected createForm(service: Service): FormGroup {

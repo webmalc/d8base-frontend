@@ -22,6 +22,7 @@ export class ServiceInfoEditorComponent extends ServiceEditor {
   public submit({ form, service }: ServiceEditorContext): void {
     const { name, description, duration, price, paymentMethods } = form.value;
     const newPrice: Price = {
+      ...service.price,
       ...price,
       payment_methods: paymentMethods,
     };
@@ -30,9 +31,12 @@ export class ServiceInfoEditorComponent extends ServiceEditor {
       name,
       description,
       duration,
-      price: newPrice,
     };
-    this.saveAndReturn(newService);
+    const sources = [
+      this.deps.api.accountsServicePricesUpdate({ id: newPrice.id, data: newPrice }),
+      this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+    ];
+    this.saveAndReturn(sources);
   }
 
   protected createForm(service: Service): FormGroup {
