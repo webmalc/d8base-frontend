@@ -31,6 +31,7 @@ import { ServicePageModule } from '@app/service/service.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MasterPageRoutingModule } from './master-routing.module';
 import { MasterPage } from './master.page';
 
@@ -44,6 +45,7 @@ import { MasterPage } from './master.page';
     SharedModule,
     ServicePageModule,
     ReviewsModule,
+    NgxDropzoneModule,
   ],
   declarations: [
     MasterPage,

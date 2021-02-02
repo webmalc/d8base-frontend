@@ -8,8 +8,8 @@ import { ServicePhotoApiService } from '@app/core/services/service-photo-api.ser
 import { ServiceTagsApiService } from '@app/core/services/service-tags-api.service';
 import { ServicesApiService } from '@app/core/services/services-api.service';
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
-import { MasterPickerPopoverComponent } from '@app/service/components/master-peeker/master-picker-popover.component';
-import { ServiceDetailsPageComponent } from '@app/service/components/service-details-page/service-details-page.component';
+import { MasterPickerPopoverComponent } from '@app/service/components/master-picker/master-picker-popover.component';
+import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
 import {
   ServiceInfoEditorComponent,
   ServiceScheduleEditComponent,
@@ -85,7 +85,7 @@ import { ServicePage } from './service.page';
     DepartureComponent,
     ServicePublishFinalStepComponent,
     MasterPickerPopoverComponent,
-    ServiceDetailsPageComponent,
+    ServiceViewerPageComponent,
     ServiceEditorPageComponent,
     ServiceInfoEditorComponent,
     ServiceTypeEditComponent,

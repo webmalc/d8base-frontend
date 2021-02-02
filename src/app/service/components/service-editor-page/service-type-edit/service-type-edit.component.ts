@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Service } from '@app/api/models';
+import { Service, ServiceLocation } from '@app/api/models';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
-import { Observable } from 'rxjs';
+import { concat, forkJoin, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
@@ -27,18 +27,31 @@ export class ServiceTypeEditComponent extends ServiceEditor {
   }
 
   public submit({ form, service }: ServiceEditorContext): void {
-    const { service_type } = form.value;
-
+    const { service_type, location } = form.value;
+    const deleteOldLocation$ = this.deps.api.accountsServiceLocationsList({ service: service.id.toString() }).pipe(
+      switchMap(locations => locations.count > 0
+        ? forkJoin(locations.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
+        : of<null>(void 0),
+      ),
+    );
+    const createNewLocation$ = service_type === 'online'
+      ? of<ServiceLocation>(void 0)
+      : this.deps.api.accountsServiceLocationsCreate(location);
     const newService: Service = {
       ...service,
       service_type,
     };
-    this.saveAndReturn(newService);
+    const sources = [
+      concat(deleteOldLocation$, createNewLocation$),
+      this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+    ];
+    this.saveAndReturn(sources);
   }
 
   protected createForm(service: Service): FormGroup {
     return new FormGroup({
       service_type: new FormControl(service.service_type, Validators.required),
+      location: new FormControl(),
     });
   }
 }

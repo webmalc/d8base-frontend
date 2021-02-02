@@ -24,7 +24,7 @@ export class ServiceLocationEditorComponent implements ControlValueAccessor {
   private onChange: (value: ServiceLocation) => void;
   private onTouched: () => void;
   private locationId: number;
-  private maxDistance: number;
+  private maxDistance: number = 0; // required
 
   public registerOnChange(fn: any): void {
     this.onChange = fn;
