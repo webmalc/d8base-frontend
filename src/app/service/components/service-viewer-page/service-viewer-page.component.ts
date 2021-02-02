@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-service-details-page',
-  templateUrl: './service-details-page.component.html',
-  styleUrls: ['./service-details-page.component.scss'],
+  selector: 'app-service-viewer-page',
+  templateUrl: './service-viewer-page.component.html',
+  styleUrls: ['./service-viewer-page.component.scss'],
 })
-export class ServiceDetailsPageComponent {
+export class ServiceViewerPageComponent {
 
   public service: Service;
   public master: ProfessionalList;

@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service } from '@app/api/models';
 import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
-import { combineLatest, forkJoin, Observable } from 'rxjs';
+import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap, take } from 'rxjs/operators';
 import ServiceEditorContext from './service-editor-context.interface';
 
@@ -18,7 +18,10 @@ export abstract class ServiceEditor {
       switchMap(params => deps.api.accountsServicesRead(params.id)),
     );
     this.context$ = combineLatest([service$]).pipe(
-      map(([service]) => ({ service, form: this.createForm(service) })),
+      switchMap(([service]) => forkJoin({
+        service: of(service),
+        form: this.createForm$(service),
+      })),
       shareReplay(1),
     );
   }
@@ -40,5 +43,11 @@ export abstract class ServiceEditor {
     });
   }
 
-  protected abstract createForm(service: Service): FormGroup;
+  protected createForm$(service: Service): Observable<FormGroup> {
+    return of(this.createForm(service));
+  }
+
+  protected createForm(service: Service): FormGroup {
+    return new FormGroup({});
+  }
 }

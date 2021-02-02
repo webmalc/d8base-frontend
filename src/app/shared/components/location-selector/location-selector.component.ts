@@ -2,7 +2,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Service } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { forkJoin, Observable, ReplaySubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import LocationSelectorContext from './location-selector-context.interface';
 
 @Component({
@@ -41,9 +41,16 @@ export class LocationSelectorComponent {
   @Input()
   public set service(service: Service) {
     this.service$.next(service);
+    this.emitInitialValue();
   }
 
   public onChange(event: CustomEvent): void {
     this.selectedLocationId.emit(event.detail.value);
+  }
+
+  private emitInitialValue() {
+    // selectedLocationId has to emit the initial value
+    this.context$.pipe(take(1)).subscribe(context =>
+      this.selectedLocationId.emit(context.initialLocation.location));
   }
 }
