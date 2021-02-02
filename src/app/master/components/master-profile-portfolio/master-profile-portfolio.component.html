@@ -1,10 +1,10 @@
 <ng-container *ngIf="context$ | async as context">
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
     <div class="ion-margin-bottom">
-      <ngx-dropzone class="width100" [accept]="'image/*'" (change)="dropzoneOnSelect($event)">
+      <ngx-dropzone class="width100" [accept]="'image/*'" [disabled]="isDropzoneDisabled" (change)="dropzoneOnSelect($event)">
         <ngx-dropzone-label>
           <ion-row>
-            {{ 'service-publish.step-three.dropzone-label' | translate }}
+            {{ 'global.dropzone-label' | translate }}
           </ion-row>
           <ion-row class="ion-justify-content-center">
             <ion-item class="ion-item-no-border">
@@ -18,7 +18,7 @@
     </div>
   </ion-row>
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
-    <ion-button color="secondary" [disabled]="!files.length" (click)="addImages()">add new photo</ion-button>
+    <ion-button color="secondary" [disabled]="isAddPhotoButtonDisabled" (click)="addImages()">{{ 'master-profile.portfolio.add-photo' | translate }}</ion-button>
   </ion-row>
   <ng-container *ngIf="photos$ | async as masterPhotos">
     <ion-row *ngIf="masterPhotos.length > 0" class="ion-wrap ion-align-items-start ion-margin-bottom ion-justify-content-center">
@@ -41,8 +41,8 @@
                   alt="{{ photo.name }}"
                   title="{{ photo.name }}"
                 ></ion-img>
-                <ion-button *ngIf="context.canEdit" class="delete-button" fill="clear" color="secondary" (click)="removeImage(photo.id)">
-                  <ion-icon name="close-circle-outline"></ion-icon>
+                <ion-button *ngIf="context.canEdit" class="delete-button" fill="clear" color="danger" (click)="removeImage(photo.id)">
+                  <ion-icon name="close-circle"></ion-icon>
                 </ion-button>
               </div>
             </div>
