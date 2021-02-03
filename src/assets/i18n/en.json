@@ -1,5 +1,6 @@
 {
   "global": {
+    "dropzone-label": "Click or move photos to this area",
     "professional-level": {
       "junior": "Junior",
       "middle": "Middle",
@@ -286,7 +287,6 @@
       "title": "Want to add photos of the service? With them your service will be brighter!",
       "first-info-row": "Do not know which photo to choose - feel free to go to the next step! You can easily add and update photos at any time!",
       "photos": "Add service photos",
-      "dropzone-label": "Move service photos to this area or upload them",
       "add-new-service": "Want to add another service?",
       "second-info-row": "You can always add any number of services later.",
       "add-new-service-button": "Add another service"
@@ -471,7 +471,8 @@
       "certificate-id": "Certificate ID"
     },
     "portfolio": {
-      "gallery": "Gallery"
+      "gallery": "Gallery",
+      "add-photo": "Upload new photo"
     },
     "calendar": {
       "schedule": "Schedule",
