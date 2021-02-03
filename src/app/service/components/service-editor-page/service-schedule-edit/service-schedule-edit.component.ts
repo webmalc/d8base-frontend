@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ProfessionalSchedule, Service, ServiceSchedule } from '@app/api/models';
-import { Observable } from 'rxjs';
+import { Service, ServiceSchedule } from '@app/api/models';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { concat, forkJoin, Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
@@ -33,13 +34,25 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
   }
 
   public submit({ form, service }: ServiceEditorContext): void {
-    const { is_base_schedule } = form.value;
+    const { is_base_schedule, schedule } = form.value;
+    const newSchedule: ServiceSchedule[] = schedule.map(s => ({ ...s, service: service.id }));
+
+    const deleteOldSchedule$ = this.deps.api.accountsServiceScheduleList({ service: service.id.toString() }).pipe(
+      switchMap(schedules => schedules.count > 0
+        ? forkJoin(schedules.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
+        : of<null>(void 0),
+      ),
+    );
+    const createNewSchedule$ = is_base_schedule
+      ? of<any>(void 0)
+      : this.deps.api.accountsServiceScheduleSet(newSchedule as unknown as ServiceSchedule); // TODO needs backend fix
 
     const newService: Service = {
       ...service,
       is_base_schedule,
     };
     const sources = [
+      concat(deleteOldSchedule$, createNewSchedule$),
       this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
     ];
     this.saveAndReturn(sources);
@@ -49,6 +62,7 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
     this.showScheduleEditor = service.is_base_schedule;
     return new FormGroup({
       is_base_schedule: new FormControl(service.is_base_schedule),
+      schedule: new FormControl(),
     });
   }
 }
