@@ -29,11 +29,10 @@
           </ion-label>
         </ion-list-header>
         <ion-item class="photo-container ion-item-no-border ion-item-no-side-padding pv5 ph5">
-          <div class="gallery">
+          <div class="gallery" viewImageSlider>
             <div class="gallery-element" *ngFor="let photo of masterPhotos">
               <div class="gallery-element-container">
                 <ion-img
-                  spinner
                   viewOnClick
                   class="ion-img"
                   [src]="photo.photo_thumbnail"

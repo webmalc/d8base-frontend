@@ -63,6 +63,7 @@ import { ImageCropPopoverComponent } from './components/picture-selector/image-c
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import { DebounceDirective } from './directives/debounce.directive';
 import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
+import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { MainColumnDirective } from './directives/main-column.directive';
 import { NumberDirective } from './directives/number.directive';
@@ -120,6 +121,7 @@ import { NumberDirective } from './directives/number.directive';
     PaymentMethodEditorComponent,
     PriceEditorComponent,
     LocationSelectorComponent,
+    IonImageViewSliderDirective,
   ],
   exports: [
     ErrorFlashbagComponent,
@@ -169,6 +171,7 @@ import { NumberDirective } from './directives/number.directive';
     PaymentMethodEditorComponent,
     PriceEditorComponent,
     LocationSelectorComponent,
+    IonImageViewSliderDirective,
   ],
   imports: [
     CommonModule,

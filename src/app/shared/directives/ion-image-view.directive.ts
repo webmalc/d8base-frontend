@@ -1,32 +1,23 @@
 import { Directive, HostListener, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { PhotoPopoverComponent } from '../components/photo-popover/photo-popover.component';
+import { Observable, Subject } from 'rxjs';
 
 @Directive({
   /* eslint-disable @angular-eslint/directive-selector */
-  selector: 'ion-img[viewOnClick]',
+  selector: '[viewOnClick]',
 })
 export class IonImageViewDirective {
-  @Input() private readonly fullSizeSrc: string;
-  @Input() private readonly src: string;
+  @Input() public readonly fullSizeSrc: string;
+  @Input() public readonly src: string;
+  private readonly clickSubject = new Subject<void>();
 
-  constructor(private readonly modalController: ModalController) {
+  @HostListener('click', ['$event'])
+  private viewImage(event: MouseEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.clickSubject.next();
   }
 
-  @HostListener('click')
-  private viewImage(): void {
-    this.createPopover(this.fullSizeSrc ?? this.src);
-  }
-
-  private async createPopover(src: string): Promise<void> {
-    const pop = await this.modalController.create({
-      component: PhotoPopoverComponent,
-      cssClass: 'modal-fullscreen',
-      componentProps: {
-        src,
-      },
-    });
-
-    return await pop.present();
+  public get imageClick(): Observable<void> {
+    return this.clickSubject.asObservable();
   }
 }

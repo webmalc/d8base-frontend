@@ -4,15 +4,38 @@
   display: flex;
   justify-content: center;
 
-  .button {
+  .close-button {
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 100;
   }
 
   .image {
-    object-fit: contain;
+    object-fit: scale-down;
     height: 100%;
     width: 100%;
+  }
+
+  &.nav-buttons-hidden .nav-button {
+    display: none;
+  }
+
+  .nav-button {
+    --padding-start: 0;
+    --padding-end: 0;
+    --opacity: 0.8;
+    z-index: 10;
+    top: 50%;
+  }
+
+  .prev-button {
+    position: absolute;
+    left: 0;
+  }
+
+  .next-button {
+    position: absolute;
+    right: 0;
   }
 }
