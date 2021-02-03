@@ -29,7 +29,7 @@ class SearchService extends __BaseService {
    *
    * - `subregion`: subregion ID
    *
-   * - `subcategories`: multiple subcategory IDs may be separated by commas
+   * - `subcategories`: multiple subcategory IDs separated by commas
    *
    * - `start_price`: start price value (12.35)
    *
@@ -52,6 +52,8 @@ class SearchService extends __BaseService {
    * - `postal_code`: postal code ID
    *
    * - `payment_methods`: multiple methods may be separated by commas
+   *
+   * - `page`: A page number within the paginated result set.
    *
    * - `only_with_reviews`:
    *
@@ -109,6 +111,7 @@ class SearchService extends __BaseService {
     if (params.priceCurrency != null) __params = __params.set('price_currency', params.priceCurrency.toString());
     if (params.postalCode != null) __params = __params.set('postal_code', params.postalCode.toString());
     if (params.paymentMethods != null) __params = __params.set('payment_methods', params.paymentMethods.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
     if (params.onlyWithReviews != null) __params = __params.set('only_with_reviews', params.onlyWithReviews.toString());
     if (params.onlyWithPhotos != null) __params = __params.set('only_with_photos', params.onlyWithPhotos.toString());
     if (params.onlyWithFixedPrice != null) __params = __params.set('only_with_fixed_price', params.onlyWithFixedPrice.toString());
@@ -153,7 +156,7 @@ class SearchService extends __BaseService {
    *
    * - `subregion`: subregion ID
    *
-   * - `subcategories`: multiple subcategory IDs may be separated by commas
+   * - `subcategories`: multiple subcategory IDs separated by commas
    *
    * - `start_price`: start price value (12.35)
    *
@@ -176,6 +179,8 @@ class SearchService extends __BaseService {
    * - `postal_code`: postal code ID
    *
    * - `payment_methods`: multiple methods may be separated by commas
+   *
+   * - `page`: A page number within the paginated result set.
    *
    * - `only_with_reviews`:
    *
@@ -240,7 +245,7 @@ module SearchService {
     subregion?: number;
 
     /**
-     * multiple subcategory IDs may be separated by commas
+     * multiple subcategory IDs separated by commas
      */
     subcategories?: string;
 
@@ -298,6 +303,11 @@ module SearchService {
      * multiple methods may be separated by commas
      */
     paymentMethods?: string;
+
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
     onlyWithReviews?: boolean;
     onlyWithPhotos?: boolean;
     onlyWithFixedPrice?: boolean;

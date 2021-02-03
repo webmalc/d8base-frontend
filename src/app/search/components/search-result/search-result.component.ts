@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Search, ServiceList } from '@app/api/models';
 import { HelperService } from '@app/core/services/helper.service';
-import { Service } from '@app/service/models/service';
 
 @Component({
   selector: 'app-search-result',
@@ -9,7 +8,6 @@ import { Service } from '@app/service/models/service';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent {
-
   @Input() public data: Search;
   private isMoreServicesClicked: boolean = false;
 
@@ -22,7 +20,7 @@ export class SearchResultComponent {
   }
 
   public needToRenderMoreServicesBtn(): boolean {
-    return (this.data.services.length > 3 && !this.isMoreServicesClicked);
+    return this.data.services.length > 3 && !this.isMoreServicesClicked;
   }
 
   public getServiceList(): ServiceList[] {

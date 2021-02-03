@@ -8,11 +8,11 @@ export interface UserExtended {
   gender?: null | 0 | 1;
   id?: number;
 
-    /**
-     * is account confirmed?
-     */
-    is_confirmed?: boolean;
-    languages?: Array<UserLanguage>;
-    last_name?: string;
-    nationality?: null | number;
+  /**
+   * is account confirmed?
+   */
+  is_confirmed?: boolean;
+  languages?: Array<UserLanguage>;
+  last_name?: string;
+  nationality?: null | number;
 }

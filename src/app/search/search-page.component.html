@@ -70,16 +70,16 @@
                 <ion-icon class="ion-no-margin ion-margin-start" name="swap-vertical-outline"></ion-icon>
               </ion-item>
             </ion-row>
-            <ion-item
-              *ngIf="searchResultTitle && searchResult?.length"
-              class="search-title ion-item-no-border ion-margin-bottom"
-            >
-              {{ searchResult.length }}&nbsp;{{ declineProposal(searchResult.length) | translate }}&nbsp; "{{
-              searchResultTitle
-              }}"&nbsp;{{ declineIsWaiting(searchResult.length) | translate }}&nbsp;
+            <ion-item *ngIf="searchResultTitle && searchResult?.length" class="search-title ion-item-no-border ion-margin-bottom">
+              {{ searchResult.length }}&nbsp;{{ declineProposal(searchResult.length) | translate }}&nbsp; "{{ searchResultTitle }}"&nbsp;{{
+                declineIsWaiting(searchResult.length) | translate
+              }}&nbsp;
               {{ 'issuance.result.you' | translate }}
             </ion-item>
             <app-search-result *ngFor="let res of searchResult" [data]="res" class="search-result"></app-search-result>
+            <ion-infinite-scroll disabled="true" threshold="100px" (ionInfinite)="loadMore($event)">
+              <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
           </ion-col>
         </ion-row>
       </ion-col>
