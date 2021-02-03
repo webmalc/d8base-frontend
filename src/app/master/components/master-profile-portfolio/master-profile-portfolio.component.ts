@@ -103,8 +103,6 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
   }
 
   private disableDropzone(disabled: boolean = true): void {
-    console.log('disableDropzone', disabled);
-    
     this.isDropzoneDisabled = disabled;
   }
 }
