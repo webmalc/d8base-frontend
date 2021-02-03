@@ -21,7 +21,7 @@ import { searchFilterStateInterfaceToSearchListParamsAdapter } from './search-pa
 })
 export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   public searchNeedle: string;
-  public searchResult: Search[] = [];
+  public searchResult: Search[];
   public searchResultTitle: string;
 
   @ViewChild(IonInfiniteScroll) private readonly infiniteScroll: IonInfiniteScroll;
