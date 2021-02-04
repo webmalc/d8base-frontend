@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpHandler, HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
@@ -56,29 +56,4 @@ describe('AuthInterceptor', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  // Argument of type '{ access_token: string; refresh_token: string; }'
-  //     is not assignable to parameter of type 'AuthResponseInterface | AsymmetricMatcher<any>'.
-  // it('should save new tokens if access token has expired', fakeAsync(() => {
-  //     tokenManager.needToRefresh.and.returnValue(Promise.resolve(true));
-  //     tokenManager.getRefreshToken.and.returnValue(Promise.resolve('refresh_token'));
-  //     tokenManager.setTokens.and.returnValue(Promise.resolve(true));
-  //
-  //     client.get('/test/').subscribe();
-  //     tick();
-  //     httpMock.expectOne(environment.backend.url + environment.backend.refresh)
-  //         .flush({access_token: 'test', refresh_token: 'test2'});
-  //     tick();
-  //     expect(tokenManager.setTokens).toHaveBeenCalledWith({access_token: 'test', refresh_token: 'test2'});
-  // }));
-
-  it('should not refresh if access token hasn\'t expired', fakeAsync(() => {
-    // (tokenManager as any).needToRefresh.and.returnValue(Promise.resolve(false));
-    tokenManager.getRefreshToken.and.returnValue(Promise.resolve('refresh_token'));
-    tokenManager.setTokens.and.returnValue(Promise.resolve());
-
-    client.get('/test/').subscribe();
-    tick();
-    expect(tokenManager.setTokens).not.toHaveBeenCalled();
-  }));
 });

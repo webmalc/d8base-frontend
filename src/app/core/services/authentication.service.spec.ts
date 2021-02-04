@@ -4,6 +4,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { Credentials } from '@app/auth/interfaces/credentials';
 import { from, Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { StorageManagerService } from '../proxies/storage-manager.service';
 import { ApiClientService } from './api-client.service';
@@ -61,8 +62,6 @@ describe('AuthenticationService', () => {
     });
 
     service = TestBed.inject(AuthenticationService);
-    TestBed.inject(TokenManagerService).init();
-    service.init();
   });
 
   it('should be created', () => {
@@ -95,12 +94,10 @@ describe('AuthenticationService', () => {
       scope: 'read write groups',
       refresh_token: 'refresh_token',
     }).then(
-      _ => ((service as any).tokenManager as any).needToRefresh().then(
-        res => {
-          expect(res).toBeFalse();
-          done();
-        },
-      ),
+      _ => service.isAuthenticated$.pipe(take(1)).subscribe(isAuthenticated => {
+        expect(isAuthenticated).toBeTrue();
+        done();
+      }),
     );
   });
 

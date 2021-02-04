@@ -65,7 +65,7 @@ describe('ServicePublishStepFourComponent', () => {
         IpDataService,
         IpnfDataService,
         { provide: LocationService, useClass: LocationServiceMock },
-        { provide: TokenManagerService, useValue: TokenManagerServiceMock },
+        { provide: TokenManagerService, useClass: TokenManagerServiceMock },
         SelectableCountryOnSearchService,
         SelectableCityOnSearchService,
       ],

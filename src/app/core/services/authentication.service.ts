@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { Credentials } from '@app/auth/interfaces/credentials';
-import { once } from '@app/core/decorators/once';
-import { AuthenticatorInterface } from '@app/core/interfaces/authenticator.interface';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
 import { ApiClientService } from '@app/core/services/api-client.service';
 import { PreLogoutService } from '@app/core/services/pre-logout.service';
 import { TokenManagerService } from '@app/core/services/token-manager.service';
 import { environment } from '@env/environment';
-import { EMPTY, from, Observable, of, ReplaySubject } from 'rxjs';
-import { first, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, EMPTY, from, Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -19,10 +17,11 @@ import { first, switchMap, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService implements AuthenticatorInterface {
+export class AuthenticationService {
 
   public readonly isAuthenticated$: Observable<boolean>;
-  private readonly isAuthenticatedSubject$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+
+  private readonly isAuthenticatedSubject$ = new BehaviorSubject<boolean>(false);
   private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
   private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
@@ -32,35 +31,13 @@ export class AuthenticationService implements AuthenticatorInterface {
     private readonly preLogout: PreLogoutService,
   ) {
     this.isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
+    this.tokenManager.getAccessToken().then(
+      token => this.isAuthenticatedSubject$.next(Boolean(token)),
+    );
   }
 
-  @once
-  public init(): Promise<void> {
-    return new Promise<void>(resolve => this.tokenManager.isRefreshTokenExpired()
-      .then(isExp => {
-        if (!isExp) {
-          return this.needToRefresh().pipe(
-            switchMap(isNeed => isNeed ?
-              this.refresh().pipe(
-                tap(() => resolve()),
-                tap(_ => this.isAuthenticatedSubject$.next(!isExp)),
-              ) : of(this.isAuthenticatedSubject$.next(!isExp)),
-            ),
-          ).subscribe(
-            () => null,
-            _ => this.isAuthenticatedSubject$.next(false));
-        }
-        this.isAuthenticatedSubject$.next(!isExp);
-      })
-      .catch(_ => this.isAuthenticatedSubject$.next(false))
-      .finally(
-        () => {
-          this.tokenManager.isExpired$.subscribe(isExpired => this.isAuthenticated$.pipe(first()).subscribe(
-            previousIsAuthStatus => isExpired === previousIsAuthStatus ? this.isAuthenticatedSubject$.next(!isExpired) : EMPTY,
-          ));
-          resolve();
-        }),
-    );
+  public get isAuthenticated(): boolean {
+    return this.isAuthenticatedSubject$.value;
   }
 
   public login({ username, password }: Credentials): Observable<void> {
@@ -74,10 +51,6 @@ export class AuthenticationService implements AuthenticatorInterface {
       switchMap(result => from(this.tokenManager.setTokens(result))),
       tap(() => this.isAuthenticatedSubject$.next(true)),
     );
-  }
-
-  public needToRefresh(): Observable<boolean> {
-    return from(this.tokenManager.needToRefresh());
   }
 
   public logout(): Observable<void> {

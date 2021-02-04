@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
 import { DarkModeService } from '@app/core/services/dark-mode.service';
 import { FcmDeviceService } from '@app/core/services/fcm-device.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
@@ -14,6 +13,7 @@ import { Platform } from '@ionic/angular';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { AuthenticationService } from './core/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -33,13 +33,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     private readonly titleService: Title,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-    authenticationFactory: AuthenticationFactory,
+    authenticator: AuthenticationService,
     private readonly notificationWorker: NotificationWorkerService,
     private readonly fcmDevice: FcmDeviceService,
     private readonly userManager: UserManagerService,
   ) {
     this.darkTheme$ = darkModeService.darkTheme$;
-    this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
+    this.isAuthenticated$ = authenticator.isAuthenticated$;
     this.initializeApp();
   }
 

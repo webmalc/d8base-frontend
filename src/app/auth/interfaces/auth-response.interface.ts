@@ -4,6 +4,4 @@ export interface AuthResponseInterface {
   token_type: string;
   scope: string;
   refresh_token: string;
-  access_expire?: number;
-  refresh_expire?: number;
 }

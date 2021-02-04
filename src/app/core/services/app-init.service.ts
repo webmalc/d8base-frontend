@@ -22,9 +22,7 @@ export class AppInitService {
   public init(): Promise<any> {
     return new Promise<any>(resolve => {
       this.platform.ready().then(async () => {
-        this.tokenManager.init();
         Promise.all([
-          this.auth.init(),
           this.userSettings.init(),
         ]).finally(() => resolve());
         this.translationService.init();
