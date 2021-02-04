@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { TokenManagerService } from '@app/core/services/token-manager.service';
 import { environment } from '@env/environment';
 import { from, Observable, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 /**
  * Sets headers while requesting api endpoints
@@ -27,7 +27,6 @@ export class HeadersInterceptor implements HttpInterceptor {
     // TODO: don't ask for token if not needed
     return from(this.tokenManager.getAccessToken())
       .pipe(
-        catchError(_ => of('')),
         switchMap(token => {
           let headers;
           if (this.getAuthUrls().includes(req.url)) {

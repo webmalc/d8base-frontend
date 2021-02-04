@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationFactory, MasterManagerService } from '@app/core/services';
+import { AuthenticationService, MasterManagerService } from '@app/core/services';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { Country } from '@app/profile/models/country';
 import { MenuController, Platform } from '@ionic/angular';
@@ -22,10 +22,10 @@ export class HeaderComponent implements OnInit {
     private readonly platform: Platform,
     private readonly menuController: MenuController,
     private readonly userManager: UserManagerService,
-    authenticationFactory: AuthenticationFactory,
+    authenticator: AuthenticationService,
     masterManager: MasterManagerService,
   ) {
-    this.isAuthenticated$ = authenticationFactory.getAuthenticator().isAuthenticated$;
+    this.isAuthenticated$ = authenticator.isAuthenticated$;
     this.context$ = combineLatest([
       this.isAuthenticated$,
       masterManager.isMaster$,

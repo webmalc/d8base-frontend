@@ -1,60 +1,54 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SearchService } from '@app/api/services';
-import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
-import { HelperService } from '@app/core/services/helper.service';
+import { AuthenticationService } from '@app/core/services';
 import { environment } from '@env/environment';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize, share, switchMap } from 'rxjs/operators';
+
+const HTTP_UNAUTHORIZED = 401;
 
 /**
  *  Tries to refresh auth token if it has expired
  */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private refresh$: Observable<void> | null = null;
 
   constructor(
-    private readonly authFactory: AuthenticationFactory,
+    private readonly authenticator: AuthenticationService,
   ) {
   }
 
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    try {
-      const url = new URL(req.url);
-      if (url.origin !== environment.backend.url) {
-        return next.handle(req);
-      }
-    } catch (e) {
-      return next.handle(req);
+  public intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler,
+    forceRefresh?: boolean,
+  ): Observable<HttpEvent<any>> {
+    const handleRequestErrors = () =>
+      next.handle(request).pipe(
+        catchError(error => {
+          if (
+            error.status === HTTP_UNAUTHORIZED &&
+            this.authenticator.isAuthenticated &&
+            !forceRefresh
+          ) {
+            return this.intercept(request, next, true);
+          }
+          return throwError(error);
+        }),
+      );
+
+    if ((forceRefresh) && !this.refresh$) {
+      this.refresh$ = this.authenticator.refresh().pipe(
+        finalize(() => (this.refresh$ = null)),
+        share(),
+      );
     }
-    if (
-      this.getRestrictedUrls().includes(req.url) ||
-      (req.method === 'GET' && HelperService.isNoAuthGetUrl(req.url))
-    ) {
-      return next.handle(req);
-    }
 
-    return this.authFactory.getAuthenticator().needToRefresh().pipe(
-      switchMap(
-        (isNeedToRefresh: boolean) => isNeedToRefresh ?
-          this.authFactory.getAuthenticator().refresh().pipe(
-            switchMap(() => next.handle(req)),
-          ) : next.handle(req),
-      ),
-    );
-  }
-
-  private getRestrictedUrls(): string[] {
-    return [
-      environment.backend.url + environment.backend.refresh,
-      environment.backend.url + environment.backend.register,
-      environment.backend.url + environment.backend.auth,
-      environment.backend.url + environment.backend.reset_password,
-      environment.backend.url + environment.backend.reset_password_link,
-      environment.backend.url + environment.backend.is_user_registered,
-
-      // Search should be allowed for guest users:
-      `${environment.backend.url  }/api${SearchService.searchListPath}`,
-    ];
+    return !this.refresh$ || request.url.endsWith(environment.backend.refresh)
+      ? handleRequestErrors()
+      : this.refresh$.pipe(
+        switchMap(() => handleRequestErrors()),
+      );
   }
 }

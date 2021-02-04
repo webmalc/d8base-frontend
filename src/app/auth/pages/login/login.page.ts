@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Credentials } from '@app/auth/interfaces/credentials';
-import { AuthenticationFactory } from '@app/core/services/authentication-factory.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class LoginPage implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   constructor(
-    private readonly authFactory: AuthenticationFactory,
+    private readonly authenticator: AuthenticationService,
     private readonly router: Router,
     route: ActivatedRoute,
     private readonly masterManager: MasterManagerService,
@@ -34,7 +34,7 @@ export class LoginPage implements OnDestroy {
   }
 
   public onSubmitLoginForm(user: Credentials): void {
-    this.authFactory.getAuthenticator().login(user).subscribe(
+    this.authenticator.login(user).subscribe(
       _ => {
         this.masterManager.updateIsMaster();
         this.router.navigateByUrl('/profile');
@@ -50,7 +50,7 @@ export class LoginPage implements OnDestroy {
   }
 
   private logout(): void {
-    this.authFactory.getAuthenticator().logout().subscribe(() => {
+    this.authenticator.logout().subscribe(() => {
       this.masterManager.updateIsMaster();
       this.router.navigateByUrl('/auth/login');
     });

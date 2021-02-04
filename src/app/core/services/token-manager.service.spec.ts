@@ -76,20 +76,4 @@ describe('TokenManagerService', () => {
       },
     );
   });
-
-  it('test #clear', (done) => {
-    const service: TokenManagerService = TestBed.inject(TokenManagerService);
-
-    service.setTokens(tokenData).then(
-      _ => {
-        service.clear().then(
-          () => {
-            service.getAccessToken().catch(err => expect(err).toEqual(Error(ErrorList.EMPTY_TOKEN_ERROR)));
-            service.getRefreshToken().catch(err => expect(err).toEqual(Error(ErrorList.EMPTY_TOKEN_ERROR)));
-            done();
-          },
-        );
-      },
-    );
-  });
 });
