@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { AccountsService } from '@app/api/services';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { HelperService } from '@app/core/services/helper.service';
@@ -21,6 +22,7 @@ export class MasterProfileCalendarComponent implements OnInit {
   public enabledPeriods: Observable<MasterCalendar[]>;
   public schedule$: Observable<ProfessionalSchedule[]>;
   public context$: Observable<MasterProfileContext>;
+  public scheduleEditor = new FormControl();
 
   private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
   private selectedDate: Date;
@@ -47,7 +49,8 @@ export class MasterProfileCalendarComponent implements OnInit {
     this.updateEnabledPeriods(date);
   }
 
-  public updateSchedule(newSchedules: AbstractSchedule[]): void {
+  public updateSchedule(): void {
+    const newSchedules: AbstractSchedule[] = this.scheduleEditor.value ?? [];
     const deleteOld$ = this.schedule$.pipe(
       switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)),
     );

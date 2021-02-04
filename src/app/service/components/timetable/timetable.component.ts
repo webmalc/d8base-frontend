@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
@@ -9,6 +10,7 @@ import { ServicePublishDataHolderService } from '@app/service/services/service-p
   styleUrls: ['./timetable.component.scss'],
 })
 export class TimetableComponent {
+  public scheduleEditor = new FormControl();
 
   private readonly STEP = 6;
 
@@ -18,7 +20,8 @@ export class TimetableComponent {
   ) {
   }
 
-  public async saveTimetable(timetable: AbstractSchedule[]): Promise<void> {
+  public async saveTimetable(): Promise<void> {
+    const timetable: AbstractSchedule[] = this.scheduleEditor.value ?? [];
     await this.servicePublishDataHolderService.assignStepData(
       this.STEP,
       { timetable },

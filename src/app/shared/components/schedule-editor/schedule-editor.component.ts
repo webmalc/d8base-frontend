@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import { PopoverController } from '@ionic/angular';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as ScheduleConstants from '@app/core/constants/schedule.constants';
+import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { NgDestroyService } from '@app/core/services';
+import { PopoverController } from '@ionic/angular';
+import { takeUntil } from 'rxjs/operators';
 import { DaySelectorComponent } from './day-selector/day-selector.component';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 import { ScheduleEditorFormService } from './schedule-editor-form.service';
@@ -23,34 +26,39 @@ function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
   selector: 'app-schedule-editor',
   templateUrl: './schedule-editor.component.html',
   styleUrls: ['./schedule-editor.component.scss'],
-  providers: [ScheduleEditorFormService],
+  providers: [
+    ScheduleEditorFormService,
+    NgDestroyService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScheduleEditorComponent),
+      multi: true,
+    },
+
+  ],
 })
-export class ScheduleEditorComponent {
+
+export class ScheduleEditorComponent implements ControlValueAccessor {
 
   @Input() public disabled: boolean = false;
 
-  @Output() public save = new EventEmitter<AbstractSchedule[]>();
-
   public formFields = ScheduleEditorFormFields;
+
+  private onChange: (value: AbstractSchedule[]) => void;
+  private onTouched: () => void;
 
   constructor(
     public readonly formService: ScheduleEditorFormService,
     private readonly popoverController: PopoverController,
+    private readonly ngDestroy$: NgDestroyService,
   ) {
+    this.subOnValueChanges();
   }
 
   @Input()
   public set schedule(schedule: AbstractSchedule[]) {
-    const initialValue = schedule || ScheduleConstants.defaultSchedule;
-    this.formService.createForm(initialValue.map(normalizeScheduleFormat));
-  }
-
-  public submitForm(): void {
-    this.save.emit(this.formService.form.get(this.formFields.Timetable).value);
-  }
-
-  public onIsEnabledChange(event: CustomEvent, index: number): void {
-    this.formService.updateIsEnabled((event.detail as any).checked, index);
+    const initialValue = schedule ?? ScheduleConstants.defaultSchedule;
+    this.formService.fillTimeTable(initialValue.map(normalizeScheduleFormat));
   }
 
   public onStartTimeChange(event: CustomEvent, index: number): void {
@@ -82,5 +90,31 @@ export class ScheduleEditorComponent {
 
   public deleteDay(index: number): void {
     this.formService.deleteDay(index);
+  }
+
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  public writeValue(value: AbstractSchedule[]): void {
+    this.schedule = value;
+  }
+
+  public setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
+
+  private subOnValueChanges() {
+    this.formService.valueChanges.pipe(
+      takeUntil(this.ngDestroy$),
+    ).subscribe(timetable => {
+      if (this.onChange) {
+        this.onChange(timetable);
+      }
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CertificateComponent } from '@app/master/components/certificate/certificate.component';
 import { EducationComponent } from '@app/master/components/education/education.component';
 import { ExperienceComponent } from '@app/master/components/experience/experience.component';
@@ -41,11 +41,12 @@ import { MasterPage } from './master.page';
     FormsModule,
     IonicModule,
     MasterPageRoutingModule,
-    TranslateModule,
+    NgxDropzoneModule,
+    ReactiveFormsModule,
+    ReviewsModule,
     SharedModule,
     ServicePageModule,
-    ReviewsModule,
-    NgxDropzoneModule,
+    TranslateModule,
   ],
   declarations: [
     MasterPage,
