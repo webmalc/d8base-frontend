@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
 import { ServicePublishStepSixFormFields } from '@app/service/enums/service-publish-step-six-form-fields';
 import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
 
@@ -11,29 +11,24 @@ export class ServicePublishStepSixFormService {
   constructor(private readonly formBuilder: FormBuilder) {
   }
 
+  private static companyNameValidator(group: FormGroup): ValidationErrors | null {
+    const invalid = group.get(ServicePublishStepSixFormFields.IsCompany).value === 'company'
+      && !group.get(ServicePublishStepSixFormFields.CompanyName).value;
+
+    return invalid ? { emptyCompanyNameError: true } : null;
+  }
+
   public createForm(data?: StepSixDataInterface): void {
     this.form = this.formBuilder.group({
-      [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ?? false, Validators.required],
+      [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ? 'company' : 'person'],
       [ServicePublishStepSixFormFields.CompanyName]: [data?.company_name],
       [ServicePublishStepSixFormFields.Description]: [data?.description],
-      [ServicePublishStepSixFormFields.Specialization]: [data?.name,
-        [Validators.required, Validators.minLength(1), Validators.maxLength(255)],
-      ],
+      [ServicePublishStepSixFormFields.Specialization]: [data?.name],
       [ServicePublishStepSixFormFields.Level]: [data?.level],
-    }, { validators: this.companyNameValidator });
+    }, { validators: ServicePublishStepSixFormService.companyNameValidator });
   }
 
   public isSubmitDisabled(): boolean {
     return this.form.invalid;
-  }
-
-  private companyNameValidator(group: FormGroup): ValidationErrors | null {
-    if (group.get(ServicePublishStepSixFormFields.IsCompany).value && !group.get(ServicePublishStepSixFormFields.CompanyName).value) {
-      group.get(ServicePublishStepSixFormFields.CompanyName).setErrors({ emptyCompanyNameError: true });
-
-      return { emptyCompanyNameError: true };
-    }
-
-    return null;
   }
 }

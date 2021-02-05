@@ -121,11 +121,12 @@ export class ServicePublishDataPreparerService {
     }
     const master = new Master();
     const stepOneData = this.servicePublishDataHolder.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
+    const stepFiveData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
     const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six);
     master.subcategory = stepOneData.subcategory.id;
-    master.company = stepSixData?.company_name;
+    master.company = stepSixData?.is_company === 'company' ? stepSixData?.company_name : null;
     master.description = stepSixData?.description;
-    master.name = stepSixData?.name;
+    master.name = stepSixData?.name || `${stepFiveData.first_name} ${stepFiveData.last_name}`;
     master.level = stepSixData?.level;
 
     return HelperService.clear(master);
