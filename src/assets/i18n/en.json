@@ -329,7 +329,9 @@
       "description-placeholder": "This text will be displayed as a part of the search result",
       "specialization": "Specialization",
       "specialization-placeholder": "Specialization",
-      "level": "Level"
+      "level": "Level",
+      "person": "Private person",
+      "company": "Company"
     },
     "step-seven": {
       "timetable-desc": "Set the service schedule",
