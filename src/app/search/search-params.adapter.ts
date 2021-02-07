@@ -50,7 +50,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional start age
      */
-    startAge: void 0,
+    startAge: data?.additional?.startAge,
 
     /**
      * multiple types may be separated by commas
@@ -65,7 +65,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional rating
      */
-    rating: void 0,
+    rating: data?.additional?.rating,
 
     /**
      * search term query param
@@ -75,7 +75,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional level
      */
-    professionalLevel: void 0,
+    professionalLevel: data?.additional?.professionalLevel?.value,
 
     /**
      * price currency (usd)
@@ -90,17 +90,17 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * multiple methods may be separated by commas
      */
-    paymentMethods: void 0,
-    onlyWithReviews: void 0,
-    onlyWithPhotos: void 0,
-    onlyWithFixedPrice: void 0,
-    onlyWithCertificates: void 0,
+    paymentMethods: data?.additional?.paymentMethods?.map(({ value }) => value).join(', '),
+    onlyWithReviews: data?.additional?.onlyWithReviews,
+    onlyWithPhotos: data?.additional?.onlyWithPhotos,
+    onlyWithFixedPrice: data?.additional?.onlyWithFixedPrice,
+    onlyWithCertificates: data?.additional?.onlyWithCertificates,
     onlyWithAutoOrderConfirmation: data.main.isInstantBooking,
 
     /**
      * multiple country IDs may be separated by commas
      */
-    nationalities: void 0,
+    nationalities: data?.additional?.nationalities?.map(({ id }) => id).join(', '),
 
     /**
      * max distance
@@ -120,7 +120,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * multiple values may be separated by commas
      */
-    languages: void 0,
+    languages: data?.additional?.languages?.map(({ code }) => code).join(', '),
 
     /**
      * male: 0,                 female: 1
@@ -130,7 +130,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional experience
      */
-    experience: void 0,
+    experience: data?.additional?.experience,
 
     /**
      * end price value (16.50)
@@ -145,7 +145,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional end age
      */
-    endAge: void 0,
+    endAge: data?.additional?.endAge,
 
     /**
      * district ID

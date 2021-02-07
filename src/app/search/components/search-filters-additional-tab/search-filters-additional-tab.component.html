@@ -1,3 +1,119 @@
-<p>
-  issuance-filters-additional-tab works!
-</p>
+<ion-row class="width100">
+  <ion-col class="ion-padding-vertical ph5">
+    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+      {{ 'issuance.filters.additional.rating' | translate }}
+    </ion-item>
+    <app-rating-picker [(ngModel)]="stateManager.data.additional.rating"></app-rating-picker>
+
+    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        {{ 'issuance.filters.additional.only-with-reviews' | translate }}
+      </ion-item>
+      <ion-item class="ion-item-no-border">
+        <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithReviews" class="ion-no-margin"></ion-checkbox>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        {{ 'issuance.filters.additional.only-with-photos' | translate }}
+      </ion-item>
+      <ion-item class="ion-item-no-border">
+        <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithPhotos" class="ion-no-margin"></ion-checkbox>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
+      </ion-item>
+      <ion-item class="ion-item-no-border">
+        <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithFixedPrice" class="ion-no-margin"></ion-checkbox>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
+      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        {{ 'issuance.filters.additional.only-with-certificates' | translate }}
+      </ion-item>
+      <ion-item class="ion-item-no-border">
+        <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithCertificates" class="ion-no-margin"></ion-checkbox>
+      </ion-item>
+    </ion-row>
+    <app-collapse-item [noSidePadding]="true" class="width100" title="{{ 'issuance.filters.additional.age' | translate }}">
+      <ion-item>
+        <ion-label position="floating">{{ 'issuance.filters.additional.start-age' | translate }}</ion-label>
+        <ion-input [(ngModel)]="stateManager.data.additional.startAge" appNumbersOnly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{ 'issuance.filters.additional.end-age' | translate }}</ion-label>
+        <ion-input [(ngModel)]="stateManager.data.additional.endAge" appNumbersOnly></ion-input>
+      </ion-item>
+    </app-collapse-item>
+    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+      {{ 'issuance.filters.additional.nationalities' | translate }}
+    </ion-item>
+    <ion-item class="ion-item-bordered">
+      <ion-label color="medium" position="floating">
+        {{ 'issuance.filters.additional.nationalities-placeholder' | translate }}
+      </ion-label>
+      <ionic-selectable
+        (onSearch)="countrySelectable.onCountrySearch($event)"
+        [(ngModel)]="stateManager.data.additional.nationalities"
+        [canSearch]="true"
+        [isMultiple]="true"
+        itemTextField="name"
+        itemValueField="id"
+      >
+      </ionic-selectable>
+    </ion-item>
+    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+      {{ 'issuance.filters.additional.languages' | translate }}
+    </ion-item>
+    <ion-item class="ion-item-bordered">
+      <ion-label color="medium" position="floating">
+        {{ 'issuance.filters.additional.languages-placeholder' | translate }}
+      </ion-label>
+      <ionic-selectable
+        [items]="languages$ | async"
+        [(ngModel)]="stateManager.data.additional.languages"
+        [isMultiple]="true"
+        itemTextField="name"
+        itemValueField="code"
+      >
+      </ionic-selectable>
+    </ion-item>
+    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+      {{ 'issuance.filters.additional.professional-level' | translate }}
+    </ion-item>
+    <ion-item class="ion-item-bordered">
+      <ion-label color="medium" position="floating">
+        {{ 'issuance.filters.additional.professional-level-placeholder' | translate }}
+      </ion-label>
+      <ionic-selectable
+        [items]="professionalLevels"
+        [(ngModel)]="stateManager.data.additional.professionalLevel"
+        itemTextField="name"
+        itemValueField="value"
+      >
+      </ionic-selectable>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{ 'issuance.filters.additional.experience' | translate }}</ion-label>
+      <ion-input [(ngModel)]="stateManager.data.additional.experience" appNumbersOnly></ion-input>
+    </ion-item>
+    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+      {{ 'issuance.filters.additional.payment-methods' | translate }}
+    </ion-item>
+    <ion-item class="ion-item-bordered">
+      <ion-label color="medium" position="floating">
+        {{ 'issuance.filters.additional.payment-methods-placeholder' | translate }}
+      </ion-label>
+      <ionic-selectable
+        [items]="paymentMethods"
+        [(ngModel)]="stateManager.data.additional.paymentMethods"
+        [isMultiple]="true"
+        itemTextField="name"
+        itemValueField="value"
+      >
+      </ionic-selectable>
+    </ion-item>
+  </ion-col>
+</ion-row>

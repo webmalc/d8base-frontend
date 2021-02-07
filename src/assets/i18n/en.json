@@ -594,6 +594,25 @@
         "date-to": "Date to",
         "price-start": "Start price",
         "price-end": "End price"
+      },
+      "additional": {
+        "rating": "Professional rating",
+        "only-with-photos": "Only with photos",
+        "only-with-reviews": "Only with reviews",
+        "only-with-fixed-price": "Only with fixed price",
+        "only-with-certificates": "Only with certificates",
+        "nationalities": "Nationalities",
+        "nationalities-placeholder": "Select nationality",
+        "languages": "Languages",
+        "languages-placeholder": "Select language",
+        "experience": "Experience",
+        "age": "Возраст",
+        "start-age": "Age start",
+        "end-age": "Age end",
+        "professional-level": "Professional level",
+        "professional-level-placeholder": "Select professional level",
+        "payment-methods": "Payment method",
+        "payment-methods-placeholder": "Select payment method"
       }
     },
     "result": {
