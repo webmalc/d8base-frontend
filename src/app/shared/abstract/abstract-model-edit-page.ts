@@ -31,7 +31,7 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
 
   public save(item: T): void {
     this.itemId ?
-      this.api.patch(item).subscribe(() => this.afterApiCallback()) :
+      this.api.patch(item).subscribe((entity: T) => this.afterApiCallback(entity)) :
       (this.isUserOnly() ? this.api.create(item) : this.masterManager.getMasterList().pipe(
         switchMap(
           list => {
@@ -54,6 +54,6 @@ export abstract class AbstractModelEditPage<T> implements OnInit {
 
   protected abstract getItemId(): number;
 
-  protected abstract afterApiCallback(): void;
+  protected abstract afterApiCallback(entity?: T): void;
 }
 
