@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList } from '@app/api/models';
+import { NgDestroyService } from '@app/core/services';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
 import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
@@ -9,13 +10,13 @@ import MasterProfileContext from '@app/master/interfaces/master-profile-context.
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, first, map, switchMap } from 'rxjs/operators';
+import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master',
   templateUrl: './master.page.html',
   styleUrls: ['./master.page.scss'],
-  providers: [MasterProfileContextService],
+  providers: [MasterProfileContextService, NgDestroyService],
 })
 export class MasterPage {
   public defaultTab: string = MasterProfileSubmenu.Info;
@@ -28,6 +29,7 @@ export class MasterPage {
     private readonly masterManager: MasterManagerService,
     private readonly route: ActivatedRoute,
     private readonly masterReadonly: MasterReadonlyApiService,
+    private readonly ngDestroy$: NgDestroyService,
     contextService: MasterProfileContextService,
   ) {
     this.createContext().subscribe(context => contextService.setContext(context));
@@ -47,6 +49,7 @@ export class MasterPage {
       .pipe(
         map(() => window.history.state?.master),
         filter(master => Boolean(master)),
+        takeUntil(this.ngDestroy$),
       )
       .subscribe(master => {
         contextService.setContext({ ...contextService.contextSnapshot, master: { ...contextService.contextSnapshot.master, ...master } });
