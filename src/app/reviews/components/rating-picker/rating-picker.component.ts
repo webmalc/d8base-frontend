@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Optional, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -42,7 +42,7 @@ export class RatingPickerComponent implements ControlValueAccessor {
   }
 
   public selectRating(rating: number): void {
-    this.selectedRating = rating;
+    this.selectedRating = rating !== this.selectedRating ? rating : null;
     this.onChange(this.selectedRating);
   }
 }

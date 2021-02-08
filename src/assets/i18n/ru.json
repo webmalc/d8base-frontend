@@ -596,6 +596,25 @@
         "date-to": "Дата по",
         "price-start": "Цена с",
         "price-end": "Цена по"
+      },
+      "additional": {
+        "rating": "Рейтинг",
+        "only-with-photos": "Только с фото",
+        "only-with-reviews": "Только с отзывами",
+        "only-with-fixed-price": "Только с фиксированной ценой",
+        "only-with-certificates": "Только сертифицированные",
+        "nationalities": "Национальность",
+        "nationality-placeholder": "Выберите национальность",
+        "languages": "Владение языком",
+        "language-placeholder": "Выберите язык",
+        "experience": "Опыт",
+        "age": "Возраст",
+        "start-age": "Возраст с",
+        "end-age": "Возраст по",
+        "professioanl-level": "Профессиональный уровень",
+        "professioanl-level-placeholder": "Выберите профессиональный уровень",
+        "payment-methods": "Способ оплаты",
+        "payment-methods-placeholder": "Выберите способ оплаты"
       }
     },
     "result": {

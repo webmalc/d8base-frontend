@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReviewsModule } from '@app/reviews/reviews.module';
 import {
   SearchFiltersAdditionalTabComponent,
-} from '@app/search/components/search-filters-additional-tab/search-filters-additional-tab.component';
+ } from '@app/search/components/search-filters-additional-tab/search-filters-additional-tab.component';
 import { SearchFiltersMainTabComponent } from '@app/search/components/search-filters-main-tab/search-filters-main-tab.component';
 import { SearchFiltersSubmenuComponent } from '@app/search/components/search-filters-submenu/search-filters-submenu.component';
 import { SearchFiltersComponent } from '@app/search/components/search-filters/search-filters.component';
@@ -25,6 +26,8 @@ import { SearchPageRoutingModule } from './search-routing.module';
     TranslateModule,
     SharedModule,
     IonicSelectableModule,
+    ReviewsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     SearchPage,
@@ -37,5 +40,4 @@ import { SearchPageRoutingModule } from './search-routing.module';
   exports: [SearchFiltersComponent],
   providers: [SearchFilterStateService],
 })
-export class SearchPageModule {
-}
+export class SearchPageModule {}

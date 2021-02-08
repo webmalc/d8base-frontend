@@ -61,7 +61,20 @@ export class SearchFilterStateService {
           end: undefined,
         },
       },
-      additional: undefined,
+      additional: {
+        rating: undefined,
+        professionalLevel: undefined,
+        paymentMethods: undefined,
+        onlyWithReviews: undefined,
+        onlyWithPhotos: undefined,
+        onlyWithFixedPrice: undefined,
+        onlyWithCertificates: undefined,
+        nationalities: undefined,
+        languages: undefined,
+        experience: undefined,
+        startAge: undefined,
+        endAge: undefined,
+      },
     };
   }
 }

@@ -1,3 +1,4 @@
+import { Country } from '@app/api/models';
 import { Category } from '@app/core/models/category';
 import { Currency } from '@app/core/models/currency';
 import { Subcategory } from '@app/core/models/subcategory';
@@ -29,5 +30,18 @@ export interface SearchFilterStateInterface {
       end: string;
     };
   };
-  additional: {};
+  additional: {
+    rating: number;
+    professionalLevel: { value: 'junior' | 'middle' | 'senior' };
+    paymentMethods: { value: 'cash' | 'online' }[];
+    onlyWithReviews: boolean;
+    onlyWithPhotos: boolean;
+    onlyWithFixedPrice: boolean;
+    onlyWithCertificates: boolean;
+    nationalities: Country[];
+    languages: { code: string; name: string }[];
+    experience: number;
+    startAge: number;
+    endAge: number;
+  };
 }

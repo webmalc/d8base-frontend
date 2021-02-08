@@ -29,6 +29,12 @@
   --service-photo-thumb-size: 72px;
 }
 
+.title {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
 .label-for-required-input::after {
   content: "*";
   color: red;
