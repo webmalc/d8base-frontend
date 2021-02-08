@@ -1,39 +1,39 @@
 <ion-row class="width100">
   <ion-col class="ion-padding-vertical ph5">
-    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+    <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.rating' | translate }}
     </ion-item>
     <app-rating-picker [(ngModel)]="stateManager.data.additional.rating"></app-rating-picker>
 
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+      <ion-item class="ion-item-no-side-padding"  lines="none" >
         {{ 'issuance.filters.additional.only-with-reviews' | translate }}
       </ion-item>
-      <ion-item class="ion-item-no-border">
+      <ion-item lines="none" >
         <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithReviews" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+      <ion-item class="ion-item-no-side-padding"  lines="none" >
         {{ 'issuance.filters.additional.only-with-photos' | translate }}
       </ion-item>
-      <ion-item class="ion-item-no-border">
+      <ion-item lines="none" >
         <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithPhotos" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+      <ion-item class="ion-item-no-side-padding"  lines="none" >
         {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
       </ion-item>
-      <ion-item class="ion-item-no-border">
+      <ion-item lines="none" >
         <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithFixedPrice" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+      <ion-item class="ion-item-no-side-padding"  lines="none" >
         {{ 'issuance.filters.additional.only-with-certificates' | translate }}
       </ion-item>
-      <ion-item class="ion-item-no-border">
+      <ion-item lines="none" >
         <ion-checkbox [(ngModel)]="stateManager.data.additional.onlyWithCertificates" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
@@ -47,7 +47,7 @@
         <ion-input [(ngModel)]="stateManager.data.additional.endAge" appNumbersOnly></ion-input>
       </ion-item>
     </app-collapse-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+    <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.nationalities' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -64,7 +64,7 @@
       >
       </ionic-selectable>
     </ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+    <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.languages' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -80,7 +80,7 @@
       >
       </ionic-selectable>
     </ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+    <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.professional-level' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -99,7 +99,7 @@
       <ion-label position="floating">{{ 'issuance.filters.additional.experience' | translate }}</ion-label>
       <ion-input [(ngModel)]="stateManager.data.additional.experience" appNumbersOnly></ion-input>
     </ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding bold-title">
+    <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.payment-methods' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
