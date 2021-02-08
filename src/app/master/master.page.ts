@@ -3,15 +3,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList } from '@app/api/models';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
 import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
 import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
-import { ReviewsReadonlyApiService } from '@app/master/services/reviews-readonly-api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { first, map, switchMap } from 'rxjs/operators';
+import { filter, first, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master',
@@ -20,7 +18,6 @@ import { first, map, switchMap } from 'rxjs/operators';
   providers: [MasterProfileContextService],
 })
 export class MasterPage {
-
   public defaultTab: string = MasterProfileSubmenu.Info;
   public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
   public mainInfoSectionData$: Observable<MainInfoSectionComponentInputDataInterface>;
@@ -29,8 +26,6 @@ export class MasterPage {
   constructor(
     public readonly location: Location,
     private readonly masterManager: MasterManagerService,
-    private readonly userManager: UserManagerService,
-    private readonly reviewsReadonly: ReviewsReadonlyApiService,
     private readonly route: ActivatedRoute,
     private readonly masterReadonly: MasterReadonlyApiService,
     contextService: MasterProfileContextService,
@@ -45,8 +40,17 @@ export class MasterPage {
         rating: master.rating,
         reviews: [],
         is_confirmed: user.is_confirmed,
-      })));
+      })),
+    );
     this.editable$ = contextService.context$.pipe(map(context => context?.canEdit));
+    this.route.paramMap
+      .pipe(
+        map(() => window.history.state?.master),
+        filter(master => Boolean(master)),
+      )
+      .subscribe(master => {
+        contextService.setContext({ ...contextService.contextSnapshot, master: { ...contextService.contextSnapshot.master, ...master } });
+      });
   }
 
   public selectTab(tab: string): void {
@@ -54,19 +58,19 @@ export class MasterPage {
   }
 
   private getMaster(masterId: number): Observable<ProfessionalList> {
-    return Number.isNaN(masterId) ?
-      this.masterManager.getMasterList().pipe(
-        map(list => list[0]),
-        switchMap(master => this.masterReadonly.getByEntityId(master.id)),
-      ) :
-      this.masterReadonly.getByEntityId(masterId);
+    return Number.isNaN(masterId)
+      ? this.masterManager.getMasterList().pipe(
+          map(list => list[0]),
+          switchMap(master => this.masterReadonly.getByEntityId(master.id)),
+        )
+      : this.masterReadonly.getByEntityId(masterId);
   }
 
   private createContext(): Observable<MasterProfileContext> {
     const masterId = Number.parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
 
     return this.getMaster(masterId).pipe(
-      map((master) => ({
+      map(master => ({
         user: master.user,
         master,
         canEdit: Number.isNaN(masterId),

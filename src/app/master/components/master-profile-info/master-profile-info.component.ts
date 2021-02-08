@@ -8,7 +8,7 @@ import { MasterProfileContextService } from '@app/master/services/master-profile
 import { Language } from '@app/profile/models/language';
 import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import { forkJoin, Observable } from 'rxjs';
-import { first, map, share, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, first, map, share, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-info',
@@ -33,7 +33,7 @@ export class MasterProfileInfoComponent {
     private readonly context: MasterProfileContextService,
     languagesApi: LanguagesApiService,
   ) {
-    this.context$ = context.context$.pipe(first(context => Boolean(context?.master) && Boolean(context?.user)));
+    this.context$ = context.context$.pipe(filter(context => Boolean(context?.master) && Boolean(context?.user)));
 
     this.languages$ = this.context$.pipe(
       switchMap(({ user }) => languagesApi.getList(user.languages.map(lang => lang?.language))),

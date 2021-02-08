@@ -11,7 +11,6 @@ import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-
   styleUrls: ['./master-edit.page.scss'],
 })
 export class MasterEditPage extends AbstractModelEditPage<Master> {
-
   constructor(
     protected readonly api: MasterApiService,
     protected readonly route: ActivatedRoute,
@@ -21,8 +20,8 @@ export class MasterEditPage extends AbstractModelEditPage<Master> {
     super(route, api, masterManager);
   }
 
-  protected afterApiCallback(): void {
-    this.router.navigateByUrl('/professional');
+  protected afterApiCallback(master?: Master): void {
+    this.router.navigateByUrl('/professional', { state: { master } });
   }
 
   protected getItemId(): number {
