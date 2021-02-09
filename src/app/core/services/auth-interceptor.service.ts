@@ -1,11 +1,10 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HTTP_UNAUTHORIZED } from '@app/core/constants/http.constants';
 import { AuthenticationService } from '@app/core/services';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, share, switchMap } from 'rxjs/operators';
-
-const HTTP_UNAUTHORIZED = 401;
 
 /**
  *  Tries to refresh auth token if it has expired
