@@ -1,6 +1,7 @@
 <ng-container [ngSwitch]="status">
-  <ion-badge *ngSwitchCase="'new'" color="warning">{{ 'order-status.pending' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'not_confirmed'" color="light">{{ 'order-status.pending' | translate }}</ion-badge>
   <ion-badge *ngSwitchCase="'confirmed'" color="success">{{ 'order-status.accepted' | translate }}</ion-badge>
-  <ion-badge *ngSwitchCase="'archived'" color="dark">{{ 'order-status.archived' | translate }}</ion-badge>
-  <ion-badge *ngSwitchCase="'completed'" color="medium">{{ 'order-status.completed' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'paid'" color="success">{{ 'order-status.paid' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'completed'" color="dark">{{ 'order-status.completed' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'canceled'" color="danger">{{ 'order-status.canceled' | translate }}</ion-badge>
 </ng-container>

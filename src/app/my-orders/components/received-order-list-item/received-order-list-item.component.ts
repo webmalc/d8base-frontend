@@ -1,17 +1,18 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { ReceivedOrder } from '@app/core/models/received-order';
+import { ReceivedOrder } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { HelperService } from '@app/core/services/helper.service';
 import { ReceiverOrderStatusController } from '@app/my-orders/services';
 import { Service } from '@app/service/models/service';
+import { OrderListItem } from '../abstract/order-list-item';
 
 @Component({
   selector: 'app-received-order-list-item',
   templateUrl: './received-order-list-item.component.html',
   styleUrls: ['./received-order-list-item.component.scss'],
 })
-export class ReceivedOrderListItemComponent {
+export class ReceivedOrderListItemComponent extends OrderListItem {
 
   public service: Service;
   @Output() public statusChanged = new EventEmitter<void>();
@@ -23,6 +24,7 @@ export class ReceivedOrderListItemComponent {
     private readonly changeDetector: ChangeDetectorRef,
     private readonly orderStatusController: ReceiverOrderStatusController,
   ) {
+    super();
   }
 
   public get order(): ReceivedOrder {
@@ -41,14 +43,16 @@ export class ReceivedOrderListItemComponent {
     });
   }
 
-  public async onAcceptClick(): Promise<void> {
-    await this.orderStatusController.acceptOrder(this.order);
-    this.statusChanged.emit();
+  public onAcceptClick(): Promise<void> {
+    return this.perform(() => this.orderStatusController.acceptOrder(this.order));
   }
 
-  public async onDiscardClick(): Promise<void> {
-    await this.orderStatusController.discardOrder(this.order);
-    this.statusChanged.emit();
+  public onDiscardClick(): Promise<void> {
+    return this.perform(() => this.orderStatusController.discardOrder(this.order));
+  }
+
+  public onCompleteClick(): Promise<void> {
+    return this.perform(() => this.orderStatusController.completeOrder(this.order));
   }
 
   public getPhoto(photo: string): string | SafeResourceUrl {

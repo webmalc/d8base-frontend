@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReceivedOrder } from '@app/core/models/received-order';
+import { ReceivedOrder } from '@app/api/models';
+import { AccountsService } from '@app/api/services/accounts.service';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { ReceivedOrdersApiService, ReceiverOrderStatusController } from '@app/my-orders/services';
+import { ReceiverOrderStatusController } from '@app/my-orders/services';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -19,11 +20,11 @@ export class ReceivedOrderPageComponent {
   constructor(
     private readonly  orderStatusController: ReceiverOrderStatusController,
     route: ActivatedRoute,
-    receivedOrdersApi: ReceivedOrdersApiService,
+    api: AccountsService,
   ) {
     this.order$ = route.params.pipe(
       map(params => Number.parseInt(params.id, 10)),
-      switchMap(id => id ? receivedOrdersApi.getByEntityId(id) : of<ReceivedOrder>()),
+      switchMap(id => id ? api.accountsOrdersReceivedRead(id) : of<ReceivedOrder>()),
     );
   }
 

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ReceivedOrder } from '@app/core/models/received-order';
+import { AccountsService } from '@app/api/services';
+import { ReceivedOrder } from '@app/api/models';
 import { OrderStatus } from '@app/core/types/order-status';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { ReceivedOrdersApiService } from './received-orders-api.service';
 
 @Injectable()
 export class ReceiverOrderStatusController {
   constructor(
-    private readonly receivedOrdersApi: ReceivedOrdersApiService,
+    private readonly api: AccountsService,
     private readonly alertController: AlertController,
     private readonly translate: TranslateService,
   ) {
@@ -16,6 +16,10 @@ export class ReceiverOrderStatusController {
 
   public async acceptOrder(order: ReceivedOrder): Promise<void> {
     await this.setStatus(order, 'confirmed');
+  }
+
+  public async completeOrder(order: ReceivedOrder): Promise<void> {
+    await this.setStatus(order, 'completed');
   }
 
   public async discardOrder(order: ReceivedOrder): Promise<void> {
@@ -49,6 +53,9 @@ export class ReceiverOrderStatusController {
       status,
     };
 
-    return this.receivedOrdersApi.patch(acceptedOrder).toPromise();
+    return this.api.accountsOrdersReceivedPartialUpdate({
+      id: acceptedOrder.id,
+      data: acceptedOrder,
+    }).toPromise();
   }
 }

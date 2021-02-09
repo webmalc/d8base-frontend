@@ -711,6 +711,7 @@
     "empty-placeholder": "Заказов нет",
     "accept": "Принять",
     "discard": "Отклонить",
+    "complete": "Завершить",
     "view": "Подробнее",
     "order-details-title": "Детали заказа",
     "order-details-subtitle": "Вас забронировали",
@@ -728,14 +729,17 @@
     "order-details-subtitle": "Вы забронировали",
     "order-number": "Номер бронирования",
     "ordered-service": "Забронированная услуга",
-    "order-details": "Детали бронирования"
+    "order-details": "Детали бронирования",
+    "view": "Подробнее",
+    "discard": "Отменить"
   },
   "order-status": {
     "title": "Статус заказа",
     "pending": "Ожидает",
     "accepted": "Подтверждён",
-    "archived": "Архивирован",
-    "completed": "Выполнен"
+    "paid": "Оплачен",
+    "completed": "Выполнен",
+    "canceled": "Отменён"
   },
   "reviews": {
     "title": "Отзывы",

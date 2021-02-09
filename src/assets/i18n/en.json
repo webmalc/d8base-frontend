@@ -711,6 +711,7 @@
     "empty-placeholder": "empty",
     "accept": "Accept",
     "discard": "Discard",
+    "complete": "Complete",
     "view": "View details",
     "order-details-title": "Order details",
     "order-details-subtitle": "The service was ordered",
@@ -728,14 +729,17 @@
     "order-details-subtitle": "Your order",
     "order-number": "Order number",
     "ordered-service": "Ordered service",
-    "order-details": "Order details"
+    "order-details": "Order details",
+    "view": "View details",
+    "discard": "Cancel"
   },
   "order-status": {
     "title": "Order status",
     "pending": "Pending",
     "accepted": "Accepted",
-    "archived": "Archived",
-    "completed": "Completed"
+    "paid": "Paid",
+    "completed": "Completed",
+    "canceled": "Canceled"
   },
   "reviews": {
     "title": "Reviews",

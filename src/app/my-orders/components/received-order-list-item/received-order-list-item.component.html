@@ -23,8 +23,8 @@
     </ion-label>
   </ion-item>
 
-  <ion-item lines="none">
-    <ion-button [routerLink]="['/my-orders', 'inbox', order.id]">
+  <ion-item lines="none" *ngIf="!pending; else loading">
+    <ion-button [routerLink]="['/my-orders', 'inbox', order.id]" color="secondary">
       {{ 'received_orders.view' | translate }}
     </ion-button>
     <ng-container *ngIf="order.status === 'not_confirmed'">
@@ -35,5 +35,13 @@
         {{ 'received_orders.accept' | translate }}
       </ion-button>
     </ng-container>
+    <ng-container *ngIf="order.status === 'confirmed' || order.status === 'paid'">
+      <ion-button slot="end" (click)="onCompleteClick()">
+        {{ 'received_orders.complete' | translate }}
+      </ion-button>
+    </ng-container>
   </ion-item>
+  <ng-template #loading>
+    <app-loading-indicator></app-loading-indicator>
+  </ng-template>
 </ion-card>
