@@ -74,8 +74,7 @@
                         </svg>
                       </ion-col>
                       <ion-col class="gender-control ion-margin-end">
-                        <ion-radio name="male" value="{{ 0 | number}}"
-                                   color="secondary"></ion-radio>
+                        <ion-radio name="male" value="{{ 0 | number}}"></ion-radio>
                       </ion-col>
                       <ion-col class="gender-icon">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
@@ -102,8 +101,7 @@
                         </svg>
                       </ion-col>
                       <ion-col class="gender-control">
-                        <ion-radio name="female" value="{{ 1 | number}}"
-                                   color="secondary"></ion-radio>
+                        <ion-radio name="female" value="{{ 1 | number}}"></ion-radio>
                       </ion-col>
                     </ion-row>
                   </ion-radio-group>
@@ -118,7 +116,7 @@
                          formControlName="{{formFields.Email}}">
               </ion-input>
             </ion-item>
-            <ion-button [disabled]="isSubmitDisabled()" color="secondary" type="submit"
+            <ion-button [disabled]="isSubmitDisabled()" type="submit"
                         class="ion-margin-top" fill="solid" expand="block">
               {{'profile-form.button'| translate}}
             </ion-button>

@@ -1,10 +1,10 @@
 <ion-list lines="none">
   <ion-item *ngFor="let contact of clientContacts">
-    <ion-icon name="{{ getContactIcon(contact.contact_display) }}"></ion-icon>
+    <ion-icon name="{{ getContactIcon(contact.contact_display) }}" color="secondary"></ion-icon>
     <ion-label color="medium" class="ion-padding-start">
       {{ contact.contact_display }}
     </ion-label>
-    <ion-text color="primary">
+    <ion-text color="secondary">
       {{ contact.value || '—' }}
     </ion-text>
     <ion-button *ngIf="interactable && contact.id"
@@ -21,13 +21,6 @@
     </ion-button>
   </ion-item>
 </ion-list>
-<ion-item *ngIf="interactable"
-          id="add-new-contact" [detail]="false"
-          routerDirection="forward" lines="none"
-          routerLink="{{addNewContactUrl}}"
-          routerLinkActive="active">
-  <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
-  <ion-label>
-    {{'contact-edit-page.add-new'|translate}}
-  </ion-label>
-</ion-item>
+<app-add-button *ngIf="interactable" [routerLink]="addNewContactUrl">
+  {{'contact-edit-page.add-new'|translate}}
+</app-add-button>

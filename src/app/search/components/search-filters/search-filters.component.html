@@ -19,7 +19,7 @@
 <ion-col [ngSwitch]="tab" size="12">
   <app-search-filters-main-tab *ngSwitchCase="tabs.Main"></app-search-filters-main-tab>
   <app-search-filters-additional-tab *ngSwitchCase="tabs.Additional"></app-search-filters-additional-tab>
-  <ion-button (click)="submitFilters()" class="ion-margin-top" color="secondary" expand="block" fill="solid"
+  <ion-button (click)="submitFilters()" class="ion-margin-top" expand="block" fill="solid"
               size="medium">
     {{"issuance.filters.main-tab.apply"|translate}}
   </ion-button>

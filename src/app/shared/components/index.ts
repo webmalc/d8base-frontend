@@ -20,3 +20,4 @@ export * from './loading-indicator/loading-indicator.component';
 export * from './service-payment-options/payment-method-viewer.component';
 export * from './price-editor/price-editor.component';
 export * from './location-selector/location-selector.component';
+export * from './add-button/add-button.component';

@@ -1,6 +1,6 @@
 <ng-container *ngIf="schedule">
   <ion-item lines="none" *ngFor="let item of schedule">
-    <ion-icon *ngIf="item.is_enabled" slot="start" name="time-outline" color="primary"></ion-icon>
+    <ion-icon *ngIf="item.is_enabled" slot="start" name="time-outline" color="secondary"></ion-icon>
     <ion-icon *ngIf="!item.is_enabled" slot="start" name="close-circle"></ion-icon>
     <ion-text>
       {{ 'global.weekdays.' + getDayName(item.day_of_week) | translate }}

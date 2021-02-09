@@ -23,12 +23,7 @@
       <ion-input style="display: none" formControlName="{{formFields.Id}}"></ion-input>
     </ion-item>
   </ion-item-group>
-  <ng-container *ngIf="!disabled">
-    <ion-item button lines="none" (click)="showDaySelector()">
-      <ion-icon color="secondary" name="add-circle"></ion-icon>
-      <ion-label class="ion-padding-start">
-        {{'service-publish.step-seven.timetable.add-new-time'|translate}}
-      </ion-label>
-    </ion-item>
-  </ng-container>
+  <app-add-button *ngIf="!disabled" (click)="showDaySelector()">
+    {{'service-publish.step-seven.timetable.add-new-time'|translate}}
+  </app-add-button>
 </form>

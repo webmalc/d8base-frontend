@@ -366,6 +366,10 @@
   white-space: pre-line;
 }
 
+.background-color-white {
+  --ion-background-color: var(--ion-color-light);
+}
+
 section {
   margin-top: 1rem;
 }

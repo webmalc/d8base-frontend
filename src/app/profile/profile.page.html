@@ -78,16 +78,9 @@
         <app-location-viewer [location]="location"></app-location-viewer>
       </ion-item>
     </ion-item-group>
-    <ion-item button
-              lines="none"
-              routerLink="location-add/" [detail]="false"
-              routerDirection="forward"
-              routerLinkActive="active">
-      <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
-      <ion-label>
-        {{'profile-page.add-new-address'|translate}}
-      </ion-label>
-    </ion-item>
+    <app-add-button routerLink="location-add/">
+      {{'profile-page.add-new-address'|translate}}
+    </app-add-button>
 
     <ion-item-divider color="light">
       <ion-label>

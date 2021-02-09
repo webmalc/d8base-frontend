@@ -38,7 +38,7 @@
         </div>
         <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
           <ion-item class="ion-item-no-border">
-            <ion-button color="secondary" size="medium" [routerLink]="'/professional/' + data.professional.id">
+            <ion-button size="medium" [routerLink]="'/professional/' + data.professional.id">
               {{ 'issuance.search-result.select' | translate }}
             </ion-button>
           </ion-item>
@@ -46,7 +46,6 @@
       </ion-row>
       <ion-button
         class="select-button-sm"
-        color="secondary"
         expand="block"
         fill="solid"
         size="medium"
