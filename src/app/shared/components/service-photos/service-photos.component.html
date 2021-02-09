@@ -6,7 +6,7 @@
     </ion-label>
   </ion-list-header>
   <div class="photo-slider-container">
-    <ion-button class="button prev-button" size="small" color="secondary" (click)="slidePrev()" *ngIf="!isNavButtonsHidden">
+    <ion-button class="button prev-button" size="small" (click)="slidePrev()" *ngIf="!isNavButtonsHidden">
       <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-slides class="slides" viewImageSlider [options]="slideOptions" #slides>
@@ -16,7 +16,7 @@
         </ion-thumbnail>
       </ion-slide>
     </ion-slides>
-    <ion-button class="button next-button" size="small" color="secondary" (click)="slideNext()" *ngIf="!isNavButtonsHidden">
+    <ion-button class="button next-button" size="small" (click)="slideNext()" *ngIf="!isNavButtonsHidden">
       <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
     </ion-button>
   </div>

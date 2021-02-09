@@ -65,7 +65,7 @@
       </ion-button>
     </ion-item>
     <ion-item *ngIf="context.canEdit" [detail]="false" routerDirection="forward" routerLink="location-add/" routerLinkActive="active">
-      <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
       <ion-label>
         {{ 'master-profile.info.add-new-address' | translate }}
       </ion-label>
@@ -168,7 +168,7 @@
       routerLink="experience-add/"
       routerLinkActive="active"
     >
-      <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
       <ion-label>
         {{ 'master-profile.info.add-new-exp' | translate }}
       </ion-label>
@@ -187,7 +187,7 @@
       routerLink="education-add/"
       routerLinkActive="active"
     >
-      <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
       <ion-label>
         {{ 'master-profile.info.add-new-education' | translate }}
       </ion-label>
@@ -206,7 +206,7 @@
       routerLink="certificate-add/"
       routerLinkActive="active"
     >
-      <ion-icon slot="start" color="secondary" name="add-circle"></ion-icon>
+      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
       <ion-label>
         {{ 'master-profile.info.add-new-certificate' | translate }}
       </ion-label>
@@ -217,6 +217,6 @@
     <ng-container *ngFor="let review of reviews$ | async">
       <app-review-card [review]="review"></app-review-card>
     </ng-container>
-    <a [routerLink]="['/reviews', context.master.id]" color="primary">{{ 'reviews.all-reviews' | translate }}</a>
+    <a [routerLink]="['/reviews', context.master.id]">{{ 'reviews.all-reviews' | translate }}</a>
   </app-collapse-item>
 </ng-container>

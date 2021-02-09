@@ -19,6 +19,8 @@ export class MediaIconFactoryService {
         return 'call-outline';
       case 'whatsapp':
         return 'logo-whatsapp';
+      case 'E-mail':
+        return 'mail-outline';
       default:
         return 'reader-outline';
     }

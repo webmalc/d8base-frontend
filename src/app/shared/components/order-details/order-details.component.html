@@ -1,5 +1,5 @@
 <ion-item *ngIf="order?.start_datetime" lines="none">
-  <ion-icon slot="start" name="calendar-outline" color="secondary" class="ion-align-self-start"></ion-icon>
+  <ion-icon slot="start" name="calendar-outline" class="ion-align-self-start"></ion-icon>
   <ion-label>
     <b>
       {{ order.start_datetime | date:'fullDate' }}
@@ -10,12 +10,12 @@
 </ion-item>
 
 <ion-item *ngIf="(order?.service | serviceById$ | async) as service" lines="none">
-  <ion-icon slot="start" name="location-outline" color="secondary" class="ion-align-self-start"></ion-icon>
+  <ion-icon slot="start" name="location-outline" class="ion-align-self-start"></ion-icon>
   <p><b>{{ 'service-location.' + service.service_type | translate }}</b></p>
 </ion-item>
 
 <ion-item *ngIf="order?.first_name" lines="none">
-  <ion-icon slot="start" name="person-circle-outline" color="secondary" class="ion-align-self-start"></ion-icon>
+  <ion-icon slot="start" name="person-circle-outline" class="ion-align-self-start"></ion-icon>
   <ion-label>
     <h2><b>{{ 'order.client-details' | translate }}</b></h2>
     <div>

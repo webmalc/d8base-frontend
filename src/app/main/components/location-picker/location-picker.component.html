@@ -5,6 +5,6 @@
   <ion-label *ngIf="getLocationString() !== null" class="ion-margin-start location-title">
     {{'main-page.current-location'|translate}}: {{getLocationString()}}
   </ion-label>
-  <ion-icon (click)="initPopover()" *ngIf="enabled" class="ion-no-margin" color="secondary" name="location-outline"
+  <ion-icon (click)="initPopover()" *ngIf="enabled" class="ion-no-margin" name="location-outline"
             slot="end"></ion-icon>
 </ion-item>
