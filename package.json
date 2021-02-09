@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:staging": "ng serve --configuration=staging",
     "build": "ng build",
     "test": "ng test --reporters=dots",
     "testnb": "ng test --browsers='ChromeHeadless'",
