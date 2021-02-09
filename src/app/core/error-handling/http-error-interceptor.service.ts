@@ -2,13 +2,19 @@ import { isPlatformServer } from '@angular/common';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import * as HttpCodes from '@app/core/constants/http.constants';
 import { environment } from '@env/environment';
 import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import * as ErrorMessages from './error-messages';
 
 const ERROR_TOAST_DURATION_MS = 3000;
+
+function isFiltered(response: HttpErrorResponse): boolean {
+  return !response.url.startsWith(environment.backend.url);
+}
 
 /**
  * Shows error messages from server
@@ -18,6 +24,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private readonly toaster: ToastController,
     private readonly router: Router,
+    private readonly translate: TranslateService,
     @Inject(PLATFORM_ID) private readonly platformId: object,
   ) {
   }
@@ -35,37 +42,51 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   private handleHttpErrorResponse(response: HttpErrorResponse): void {
-    if (400 === response.status) {
-      const error = response.error;
-      const all = error.error?.__all__ || error.__all__;
-      const messages: string[] = Array.isArray(all)
-        ? all
-        : error.error_description ? [error.error_description] : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
-      if (messages.length > 0) {
-        messages.forEach(message => this.showMessage(message));
-      } else {
-        this.showMessage(response.message);
-      }
-
+    if (isFiltered(response)) {
       return;
     }
 
-    if (401 === response.status || 'invalid_grant' === response.message) {
-      if (response.url.endsWith(environment.backend.refresh)) {
-        this.showMessage(ErrorMessages.AUTHENTICATION_ERROR);
-        this.router.navigateByUrl('/auth/login'); // TODO maintain SRP
-      }
+    if (
+      HttpCodes.HTTP_UNAUTHORIZED === response.status ||
+      (HttpCodes.HTTP_BAD_REQUEST === response.status && 'invalid_grant' === response.error?.error)
+    ) {
+      this.handleUnauthorizedResponse();
+      return;
+    }
 
+    if (HttpCodes.HTTP_BAD_REQUEST === response.status) {
+      this.handleBadRequestResponse(response);
       return;
     }
 
     if (5 === Math.floor(response.status / 100)) {
-      this.showMessage(ErrorMessages.GENERIC_SERVER_ERROR);
-
+      this.handleServerErrorResponse();
       return;
     }
 
-    this.showMessage(response.message || ErrorMessages.UNKNOWN_ERROR);
+    this.showMessage(response.message || this.translate.instant(ErrorMessages.UNKNOWN_ERROR));
+  }
+
+  private handleBadRequestResponse(response: HttpErrorResponse): void {
+    const error = response.error;
+    const all = error.error?.__all__ || error.__all__;
+    const messages: string[] = Array.isArray(all)
+      ? all
+      : error.error_description ? [error.error_description] : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
+    if (messages.length > 0) {
+      messages.forEach(message => this.showMessage(message));
+    } else {
+      this.showMessage(response.message);
+    }
+  }
+
+  private handleUnauthorizedResponse(): void {
+    this.showMessage(this.translate.instant(ErrorMessages.AUTHENTICATION_ERROR));
+    this.router.navigateByUrl('/auth/login');
+  }
+
+  private handleServerErrorResponse(): void {
+    this.showMessage(this.translate.instant(ErrorMessages.GENERIC_SERVER_ERROR));
   }
 
   private showMessage(message: string, duration: number = ERROR_TOAST_DURATION_MS): void {

@@ -1,3 +1,3 @@
-export const AUTHENTICATION_ERROR = 'authentication expired';
-export const GENERIC_SERVER_ERROR = 'server error';
-export const UNKNOWN_ERROR = 'unexpected error';
+export const AUTHENTICATION_ERROR = 'server-errors.unauthorized';
+export const GENERIC_SERVER_ERROR = 'server-errors.generic';
+export const UNKNOWN_ERROR = 'server-errors.unknown';
