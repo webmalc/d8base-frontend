@@ -1,41 +1,39 @@
-<ng-container *ngIf="order">
-  <ion-card class="ion-no-margin mv5">
-    <ion-item lines="none">
-      <ion-label slot="start">
-        <div>{{ order.start_datetime | date:'mediumDate'}}</div>
-        <div>{{ order.start_datetime | date:'hh:mm'}} — {{ order.end_datetime | date:'hh:mm'}}</div>
-      </ion-label>
-      <app-order-status [status]="order.status" slot="end"></app-order-status>
-    </ion-item>
+<ion-card *ngIf="order">
+  <ion-item lines="none">
+    <ion-label>
+      <div>{{ order.start_datetime | date: 'mediumDate' }}</div>
+      <div>{{ order.start_datetime | date: 'hh:mm' }} — {{ order.end_datetime | date: 'hh:mm' }}</div>
+    </ion-label>
+    <app-order-status [status]="order.status"></app-order-status>
+  </ion-item>
 
-    <ion-item lines="none">
-      <ion-avatar slot="start">
-        <ion-img alt="avatar" [src]="getPhoto(order.client?.avatar_thumbnail)"></ion-img>
-      </ion-avatar>
-      <ion-label>
-        {{ order.client.first_name }}
-        {{ order.client.last_name }}
-      </ion-label>
-    </ion-item>
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <ion-img alt="avatar" [src]="getPhoto(order.client?.avatar_thumbnail)"></ion-img>
+    </ion-avatar>
+    <ion-label>
+      {{ order.client.first_name }}
+      {{ order.client.last_name }}
+    </ion-label>
+  </ion-item>
 
-    <ion-item lines="none" *ngIf="service">
-      <ion-label>
-        {{ service.name }}
-      </ion-label>
-    </ion-item>
+  <ion-item lines="none">
+    <ion-label class="ion-text-wrap">
+      {{ service?.name }}
+    </ion-label>
+  </ion-item>
 
-    <ion-item lines="none">
-      <ion-button [routerLink]="['/my-orders', 'inbox', order.id]">
-        {{ 'received_orders.view' | translate }}
+  <ion-item lines="none">
+    <ion-button [routerLink]="['/my-orders', 'inbox', order.id]">
+      {{ 'received_orders.view' | translate }}
+    </ion-button>
+    <ng-container *ngIf="order.status === 'not_confirmed'">
+      <ion-button slot="end" color="danger" (click)="onDiscardClick()">
+        {{ 'received_orders.discard' | translate }}
       </ion-button>
-      <ng-container *ngIf="order.status === 'not_confirmed'">
-        <ion-button slot="end" color="danger" (click)="onDiscardClick()">
-          {{ 'received_orders.discard' | translate }}
-        </ion-button>
-        <ion-button slot="end" color="success" (click)="onAcceptClick()">
-          {{ 'received_orders.accept' | translate }}
-        </ion-button>
-      </ng-container>
-    </ion-item>
-  </ion-card>
-</ng-container>
+      <ion-button slot="end" color="success" (click)="onAcceptClick()">
+        {{ 'received_orders.accept' | translate }}
+      </ion-button>
+    </ng-container>
+  </ion-item>
+</ion-card>
