@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MainGuard } from '@app/core/guards/main.guard';
 import { TokenManagerService } from '@app/core/services/token-manager.service';
 import {
+  AddButtonComponent,
   ClientWidgetComponent,
   ContentWrapperComponent,
   DaySelectorComponent,
@@ -70,6 +71,7 @@ import { NumberDirective } from './directives/number.directive';
 
 @NgModule({
   declarations: [
+    AddButtonComponent,
     ErrorFlashbagComponent,
     PictureSelectorComponent,
     DebounceDirective,
@@ -124,6 +126,7 @@ import { NumberDirective } from './directives/number.directive';
     IonImageViewSliderDirective,
   ],
   exports: [
+    AddButtonComponent,
     ErrorFlashbagComponent,
     PictureSelectorComponent,
     DebounceDirective,

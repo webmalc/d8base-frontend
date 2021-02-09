@@ -64,12 +64,9 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item>
-    <ion-item *ngIf="context.canEdit" [detail]="false" routerDirection="forward" routerLink="location-add/" routerLinkActive="active">
-      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
-      <ion-label>
-        {{ 'master-profile.info.add-new-address' | translate }}
-      </ion-label>
-    </ion-item>
+    <app-add-button *ngIf="context.canEdit" routerLink="location-add/">
+      {{ 'master-profile.info.add-new-address' | translate }}
+    </app-add-button>
     <ion-item lines="full"></ion-item>
   </ion-list>
 
@@ -105,16 +102,14 @@
       <ion-label>
         {{ 'master-profile.info.professional-experience' | translate }}
       </ion-label>
-      <ion-text>
-        {{context.master.experience}} {{declinationYears(context.master.experience) | translate}}
-      </ion-text>
+      <ion-text> {{ context.master.experience }} {{ declinationYears(context.master.experience) | translate }} </ion-text>
     </ion-item>
     <ion-item *ngIf="context.master.level">
       <ion-label>
         {{ 'master-profile.info.professional-level' | translate }}
       </ion-label>
       <ion-text>
-        {{"global.professional-level." + context.master.level | translate}}
+        {{ 'global.professional-level.' + context.master.level | translate }}
       </ion-text>
     </ion-item>
     <ion-item *ngIf="context.user.gender">
@@ -160,57 +155,27 @@
     <ion-item lines="none" class="ion-item-no-padding-right experience" *ngFor="let experience of context.master.experience_entries">
       <app-experience [editable]="context.canEdit" [exp]="experience" class="width100"></app-experience>
     </ion-item>
-    <ion-item
-      *ngIf="context.canEdit"
-      lines="full"
-      [detail]="false"
-      routerDirection="forward"
-      routerLink="experience-add/"
-      routerLinkActive="active"
-    >
-      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
-      <ion-label>
-        {{ 'master-profile.info.add-new-exp' | translate }}
-      </ion-label>
-    </ion-item>
+    <app-add-button *ngIf="context.canEdit" routerLink="experience-add/">
+      {{ 'master-profile.info.add-new-exp' | translate }}
+    </app-add-button>
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.education' | translate }}">
     <ion-item *ngFor="let education of context.master.educations" lines="none" class="ion-item-no-padding-right experience">
       <app-education [education]="education" [editable]="context.canEdit" class="width100"></app-education>
     </ion-item>
-    <ion-item
-      *ngIf="context.canEdit"
-      lines="full"
-      [detail]="false"
-      routerDirection="forward"
-      routerLink="education-add/"
-      routerLinkActive="active"
-    >
-      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
-      <ion-label>
-        {{ 'master-profile.info.add-new-education' | translate }}
-      </ion-label>
-    </ion-item>
+    <app-add-button *ngIf="context.canEdit" routerLink="education-add/">
+      {{ 'master-profile.info.add-new-education' | translate }}
+    </app-add-button>
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.certificates' | translate }}">
     <ion-item *ngFor="let certificate of context.master.certificates">
       <app-certificate [certificate]="certificate" [editable]="context.canEdit"></app-certificate>
     </ion-item>
-    <ion-item
-      *ngIf="context.canEdit"
-      lines="full"
-      [detail]="false"
-      routerDirection="forward"
-      routerLink="certificate-add/"
-      routerLinkActive="active"
-    >
-      <ion-icon slot="start" name="add-circle" color="primary"></ion-icon>
-      <ion-label>
-        {{ 'master-profile.info.add-new-certificate' | translate }}
-      </ion-label>
-    </ion-item>
+    <app-add-button *ngIf="context.canEdit" routerLink="certificate-add/">
+      {{ 'master-profile.info.add-new-education' | translate }}
+    </app-add-button>
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.reviews' | translate }}">
