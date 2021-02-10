@@ -25,17 +25,20 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const handleRequestErrors = () =>
       next.handle(request).pipe(
-        catchError(error => {
-          if (
-            error.status === HTTP_UNAUTHORIZED &&
-            this.authenticator.isAuthenticated &&
-            !forceRefresh
-          ) {
-            return this.intercept(request, next, true);
-          }
-          return throwError(error);
-        }),
+        catchError(error =>
+          this.authenticator.isAuthenticated$.pipe(
+            switchMap(isAuthenticated =>
+              (
+                error.status === HTTP_UNAUTHORIZED &&
+                isAuthenticated &&
+                !forceRefresh
+              ) ? this.intercept(request, next, true)
+                : throwError(error),
+            ),
+          ),
+        ),
       );
+
 
     if ((forceRefresh) && !this.refresh$) {
       this.refresh$ = this.authenticator.refresh().pipe(

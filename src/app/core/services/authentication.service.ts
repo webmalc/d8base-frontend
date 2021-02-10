@@ -8,7 +8,7 @@ import { ApiClientService } from '@app/core/services/api-client.service';
 import { PreLogoutService } from '@app/core/services/pre-logout.service';
 import { TokenManagerService } from '@app/core/services/token-manager.service';
 import { environment } from '@env/environment';
-import { BehaviorSubject, EMPTY, from, Observable } from 'rxjs';
+import { EMPTY, from, Observable, ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 /**
@@ -21,7 +21,7 @@ export class AuthenticationService {
 
   public readonly isAuthenticated$: Observable<boolean>;
 
-  private readonly isAuthenticatedSubject$ = new BehaviorSubject<boolean>(false);
+  private readonly isAuthenticatedSubject$ = new ReplaySubject<boolean>(1);
   private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
   private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
 
@@ -34,10 +34,6 @@ export class AuthenticationService {
     this.tokenManager.getAccessToken().then(
       token => this.isAuthenticatedSubject$.next(Boolean(token)),
     );
-  }
-
-  public get isAuthenticated(): boolean {
-    return this.isAuthenticatedSubject$.value;
   }
 
   public login({ username, password }: Credentials): Observable<void> {
