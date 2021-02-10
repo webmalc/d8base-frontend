@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SentOrder } from '@app/core/models/sent-order';
 import { StepComponent } from '@app/order/abstract/step';
@@ -6,7 +6,7 @@ import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import StepModel from '@app/order/interfaces/step-model.interface';
 import { OrderWizardStateService } from '@app/order/services';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -24,6 +24,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
     map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})),
   );
+  public isWizardDisabled = new BehaviorSubject<boolean>(false);
 
   private readonly ngDestroy$ = new Subject<void>();
 
@@ -33,6 +34,10 @@ export class StepContainerComponent implements OnInit, OnDestroy {
     private readonly cd: ChangeDetectorRef,
     private readonly stepComponent: StepComponent<unknown>,
   ) {
+  }
+
+  @Input() public set disabled(value: boolean) {
+    this.isWizardDisabled.next(value);
   }
 
   public ngOnInit(): void {

@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MasterManagerService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarApiService } from '@app/master/services/calendar-api.service';
 import { StepComponent } from '@app/order/abstract/step';
 import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-date-time-step',
@@ -22,18 +23,26 @@ import { switchMap } from 'rxjs/operators';
   ],
 })
 export class DateTimeStepComponent extends StepComponent<DateTimeStepData> implements OnInit {
-  public readonly form = this.fb.group({
-    datetime: [null, Validators.required],
+  public readonly formControl = new FormControl(null, Validators.required);
+  public readonly form = new FormGroup({
+    datetime: this.formControl,
   });
   public displayedCalendars$: Observable<MasterCalendar[]>;
+  public isMyService$: Observable<boolean>;
 
   private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());
+  private readonly professional$ = new BehaviorSubject<number>(NaN);
 
   constructor(
-    private readonly fb: FormBuilder,
     private readonly calendarApi: CalendarApiService,
-    protected readonly cd: ChangeDetectorRef) {
+    protected readonly cd: ChangeDetectorRef,
+    masterManager: MasterManagerService,
+  ) {
     super(cd);
+    this.isMyService$ = masterManager.getMasterList().pipe(
+      switchMap(masters => combineLatest([of(masters), this.professional$])),
+      map(([masters, professional]) => masters.some(m => m.id === professional)),
+    );
   }
 
   public ngOnInit(): void {
@@ -62,6 +71,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   protected onContextChanged(context: StepContext): void {
     super.onContextChanged(context);
     this.updateCalendars();
+    this.updateServiceProfessional(context.service.professional);
   }
 
   private updateCalendars(): void {
@@ -75,6 +85,10 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
           this.calendarApi.getSchedule(masterId, startDate.toISOString(), endDate.toISOString(), serviceId);
       }),
     );
+  }
+
+  private updateServiceProfessional(professional: number) {
+    this.professional$.next(professional);
   }
 
   private subscribeFormStatus(): void {
