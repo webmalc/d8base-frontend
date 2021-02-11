@@ -29,7 +29,7 @@ export class ChatListUpdaterService {
       this.getChatList().pipe(
         delay(this.updateInterval),
         repeat(),
-        switchMap(_ => this.getChatList()),
+        switchMap(() => this.getChatList()),
         takeUntil(this.destroy$),
       );
   }

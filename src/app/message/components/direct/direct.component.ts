@@ -135,7 +135,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
       () => {
         this.deleteSubscription = ContextMenuPopoverComponent.delete$.pipe(filter(mes => mes !== null), first()).subscribe(
           (mes: Message) => {
-            this.directService.delete(mes).subscribe();
+            this.directService.delete(mes);
             this.popoverController.dismiss();
             this.deleteSubscription.unsubscribe();
           },

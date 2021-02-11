@@ -86,8 +86,11 @@ export class DirectServiceService {
     );
   }
 
-  public delete(message: Message): Observable<void> {
-    return this.messagesSentApi.deleteById(message.id);
+  public delete(message: Message): void {
+    const { id } =  message;
+    this.messagesSentApi.deleteById(id).subscribe(() => {
+      this.messages$.next(this.messages$.value.filter((oldMessage) => oldMessage.id !== id));
+    });
   }
 
   public update(id: number): void {

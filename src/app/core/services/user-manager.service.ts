@@ -30,15 +30,15 @@ export class UserManagerService {
 
   @once
   public subscribeToAuthSubject(): void {
-    this.auth.isAuthenticated$.pipe(filter(isAuth => isAuth === false)).subscribe(
-      _ => this.user = null,
+    this.auth.isAuthenticated$.pipe(filter(isAuth => !isAuth)).subscribe(
+      () => this.user = null,
     );
   }
 
   public getDefaultUserCountry(): Observable<Country> {
     return this.auth.isAuthenticated$.pipe(
       filter(isAuth => isAuth),
-      switchMap(_ => this.userLocationApi.getDefaultLocation()),
+      switchMap(() => this.userLocationApi.getDefaultLocation()),
       filter(location => (location && location.country && true)),
       switchMap(location => this.countryApi.getByEntityId(location.country as number)),
     );

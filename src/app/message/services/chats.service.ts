@@ -43,8 +43,8 @@ export class ChatsService {
   public subscribeToChatListUpdates(): void {
     this.unsubscribeFromUpdates();
     this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe(
-      (newList: AbstractMessage[]) => this.isNeedToUpdate(newList).pipe(filter(isNeed => true === isNeed))
-        .subscribe(_ => this.setLists(newList)),
+      (newList: AbstractMessage[]) => this.isNeedToUpdate(newList).pipe(filter(isNeed => isNeed))
+        .subscribe(() => this.setLists(newList)),
     );
   }
 

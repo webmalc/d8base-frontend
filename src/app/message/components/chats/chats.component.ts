@@ -39,7 +39,7 @@ export class ChatsComponent extends Reinitable implements OnDestroy {
 
   protected init(): void {
     this.chatsService.initChatList().subscribe(
-      _ => this.chatsService.subscribeToChatListUpdates(),
+      () => this.chatsService.subscribeToChatListUpdates(),
     );
     this.searchbar.value = '';
   }
