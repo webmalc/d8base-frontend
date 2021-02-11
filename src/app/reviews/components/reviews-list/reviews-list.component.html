@@ -1,30 +1,27 @@
 <app-header></app-header>
 <ion-content *ngIf="reviews$ | async as reviews">
-  <ion-grid class="ion-no-padding">
-    <ion-row class="ion-justify-content-center">
-      <ion-col appMainColumn>
-        <ion-item color="light" lines="full">
-          <ion-buttons slot="start">
-            <ion-button (click)="back()">
-              <ion-icon name="arrow-back-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-          <ion-title>{{ 'reviews.title' | translate }}</ion-title>
-        </ion-item>
-        <app-professional-card
-          *ngIf="professional$ | async as professional"
-          [professional]="professional"
-          class="professional"
-        ></app-professional-card>
-        <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center ion-item-no-border">
-          <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
-            'reviews.send-review' | translate
-          }}</a>
-        </ion-item>
-        <ng-container *ngFor="let review of reviews">
-          <app-review-card [review]="review"></app-review-card>
-        </ng-container>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-content-wrapper>
+    <ion-item color="light" lines="full">
+      <ion-buttons slot="start">
+        <ion-button (click)="back()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{ 'reviews.title' | translate }}</ion-title>
+    </ion-item>
+    <app-professional-card
+      *ngIf="professional$ | async as professional"
+      [professional]="professional"
+      class="professional"
+    ></app-professional-card>
+    <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center ion-item-no-border">
+      <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
+        'reviews.send-review' | translate
+      }}</a>
+    </ion-item>
+    <ng-container *ngFor="let review of reviews">
+      <app-review-card [review]="review"></app-review-card>
+    </ng-container>
+  </app-content-wrapper>
+  <app-footer></app-footer>
 </ion-content>

@@ -1,54 +1,48 @@
 <app-header></app-header>
-<ion-content class="ion-padding-top">
-  <ion-row class="ion-justify-content-center">
-    <ion-col appMainColumn>
-      <ion-item
-        class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding">
-        <ion-col class="ion-no-padding">
-          <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
-            <ion-item class="ion-item-no-border fs18">
-              <b>
-                {{"service-publish.final-step.title" | translate}}
-              </b>
-            </ion-item>
-          </ion-row>
-        </ion-col>
-      </ion-item>
-      <app-info-row class="ion-margin-bottom">
-        {{"service-publish.final-step.first-info-row"|translate}}
-      </app-info-row>
+<ion-content>
+  <app-content-wrapper>
+    <ion-item lines="none" class="fs18">
+      <ion-text>
+        <b>{{ 'service-publish.final-step.title' | translate }}</b>
+      </ion-text>
+    </ion-item>
+    <app-info-row class="ion-margin-bottom">
+      {{ 'service-publish.final-step.first-info-row' | translate }}
+    </app-info-row>
 
-      <app-abstract-contacts
-        *ngIf="!isNewMaster()"
-        [interactable]="true"
-        [addNewContactUrl]="contactAddUrl"
-        [editContactUrl]="contactEditUrl"
-        [editDefaultContactUrl]="contactAddDefaultUrl"
-      ></app-abstract-contacts>
+    <app-abstract-contacts
+      *ngIf="!isNewMaster()"
+      [interactable]="true"
+      [addNewContactUrl]="contactAddUrl"
+      [editContactUrl]="contactEditUrl"
+      [editDefaultContactUrl]="contactAddDefaultUrl"
+    ></app-abstract-contacts>
 
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
-        <ion-col size="12" class="ion-align-items-center ion-justify-content-center">
-          <ion-button color="light"
-                      size="medium"
-                      (click)="serviceStepsNavigationService.previous()"
-                      class="ion-margin-top" fill="solid" expand="block">
-            {{"service-publish.back-button" | translate}}
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button
+            color="light"
+            size="medium"
+            (click)="serviceStepsNavigationService.previous()"
+            class="ion-margin-top"
+            fill="solid"
+            expand="block"
+          >
+            {{ 'service-publish.back-button' | translate }}
           </ion-button>
-          <ion-button (click)="publish()"
-                      color="success"
-                      size="medium"
-                      class="ion-margin-top" fill="solid" expand="block">
-            {{"service-publish.final-step.publish" | translate}}
-          </ion-button>
-
         </ion-col>
-      </ion-item>
+        <ion-col size="6">
+          <ion-button (click)="publish()" color="success" size="medium" class="ion-margin-top" fill="solid" expand="block">
+            {{ 'service-publish.final-step.publish' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
-        <app-service-publish-agreement></app-service-publish-agreement>
-      </ion-item>
-
-    </ion-col>
-  </ion-row>
+    <ion-item lines="none">
+      <app-service-publish-agreement></app-service-publish-agreement>
+    </ion-item>
+  </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

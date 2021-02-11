@@ -1,7 +1,7 @@
-.item-background-color-green {
-  --ion-item-background: #E7FEF1;
+:host {
+  display: block;
 }
 
-.min-width24 {
-  min-width: 24px;
+.item-background-color-green {
+  --ion-item-background: #E7FEF1;
 }

@@ -1,9 +1,8 @@
-<div style="height: 100%; width: 100%"
-     *ngIf="options"
-     leaflet
-     [leafletOptions]="options"
-     (leafletClick)="onMapClick($event)"
-     (leafletMapReady)="onMapReady($event)"
->
-</div>
-
+<div
+  *ngIf="options"
+  class="full-size"
+  leaflet
+  [leafletOptions]="options"
+  (leafletClick)="onMapClick($event)"
+  (leafletMapReady)="onMapReady($event)"
+></div>

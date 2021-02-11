@@ -1,4 +1,6 @@
 <app-header></app-header>
 <ion-content>
-  <app-login-form [errorMessages]="errorMessages" (user)="onSubmitLoginForm($event)"></app-login-form>
+  <app-content-wrapper>
+    <app-login-form [errorMessages]="errorMessages" (user)="onSubmitLoginForm($event)"></app-login-form>
+  </app-content-wrapper>
 </ion-content>
