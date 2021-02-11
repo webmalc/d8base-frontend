@@ -625,7 +625,8 @@
       "services": "Professional service(s)",
       "more": "More services",
       "address": "Professional location",
-      "select": "Select"
+      "select": "Select",
+      "chat": "Chat"
     }
   },
   "main-page": {
