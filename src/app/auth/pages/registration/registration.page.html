@@ -1,5 +1,9 @@
 <app-header></app-header>
 <ion-content>
-  <app-registration-form [errorMessages]="errorMessages"
-                         (registrationFormData)="onSubmitRegistrationForm($event)"></app-registration-form>
+  <app-content-wrapper>
+    <app-registration-form
+      [errorMessages]="errorMessages"
+      (registrationFormData)="onSubmitRegistrationForm($event)"
+    ></app-registration-form>
+  </app-content-wrapper>
 </ion-content>

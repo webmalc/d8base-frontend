@@ -1,154 +1,133 @@
-<ion-row *ngIf="item" class="ion-justify-content-center">
-  <ion-col appMainColumn
-           class="ion-no-padding ion-margin-top">
-    <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
-      <ion-col class="ion-no-padding">
-        <ion-row class="ion-justify-content-start ion-align-items-center">
-          <ion-item (click)="locationBack()" color="light"
-                    class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer"
-                    routerDirection="back" routerLinkActive="active">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </ion-item>
-          <ion-item class="ion-item-no-border" color="light">
-            {{"location-edit-page.address"|translate}}
-          </ion-item>
-        </ion-row>
-      </ion-col>
-    </ion-item>
-    <ion-item class="ion-item-no-border ion-item-bordered-others">
-      <ion-col class="ion-padding-vertical" size="12">
-        <ion-item>
-          <ion-label class="label-for-required-input" color="medium" position="floating">
-            {{"location-edit-page.country"|translate}}
-          </ion-label>
-          <ionic-selectable
-            (onChange)="onCountryChange()"
-            (onSearch)="countrySelectable.onCountrySearch($event)"
-            [(ngModel)]="item.country"
-            [canSearch]="true"
-            itemTextField="name"
-            itemValueField="id"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <ion-item>
-          <ion-label color="medium" position="floating">
-            {{"location-edit-page.region"|translate}}
-          </ion-label>
-          <ionic-selectable
-            (onChange)="onRegionChange()"
-            (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
-            [(ngModel)]="item.region"
-            [canSearch]="true"
-            [isEnabled]="isRegionEnabled$|async"
-            itemTextField="name"
-            itemValueField="id"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <ion-item>
-          <ion-label color="medium" position="floating">
-            {{"location-edit-page.subregion"|translate}}
-          </ion-label>
-          <ionic-selectable
-            (onSearch)="selectableSubregion.onSubregionSearch(
-                                                $event,
-                                                getCountryValue(),
-                                                getRegionValue())"
-            [(ngModel)]="item.subregion"
-            [canSearch]="true"
-            [isEnabled]="isSubregionEnabled$|async"
-            itemTextField="name"
-            itemValueField="id"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label-for-required-input" color="medium" position="floating">
-            {{"location-edit-page.city"|translate}}
-          </ion-label>
-          <ionic-selectable
-            (onChange)="onCityChange()"
-            (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
-            [(ngModel)]="item.city"
-            [canSearch]="true"
-            [isEnabled]="isCityEnabled$|async"
-            itemTextField="name"
-            itemValueField="id"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <ion-item>
-          <ion-label color="medium" position="floating">
-            {{"location-edit-page.district"|translate}}
-          </ion-label>
-          <ionic-selectable
-            (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
-            [(ngModel)]="item.district"
-            [canSearch]="true"
-            [isEnabled]="isDistrictEnabled$|async"
-            itemTextField="name"
-            itemValueField="id"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <app-user-location-map
-          [(ngModel)]="item.coordinates"
-          [clientCoordinates]="item.coordinates?.coordinates"
+<ng-container *ngIf="item; else loading">
+  <ion-item color="light">
+    <ion-col class="ion-no-padding">
+      <ion-row class="ion-justify-content-start ion-align-items-center">
+        <ion-item
+          (click)="locationBack()"
+          color="light"
+          class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer"
+          routerDirection="back"
+          routerLinkActive="active"
         >
-        </app-user-location-map>
-        <ion-item>
-          <ion-label color="medium"
-                     position="floating">
-            {{"location-edit-page.postal-code"|translate}}
-          </ion-label>
-          <ion-input [(ngModel)]="item.postal_code"
-                     name="phone" type="text">
-          </ion-input>
+          <ion-icon name="arrow-back-outline"></ion-icon>
         </ion-item>
-        <ion-item>
-          <ion-label color="medium"
-                     position="floating">
-            {{"location-edit-page.address"|translate}}
-          </ion-label>
-          <ion-input [(ngModel)]="item.address" name="first_name" type="text">
-          </ion-input>
+        <ion-item class="ion-item-no-border" color="light">
+          {{ 'location-edit-page.address' | translate }}
         </ion-item>
-        <ion-item>
-          <ion-label color="medium" position="floating">
-            {{"location-edit-page.timezone"|translate}}
-          </ion-label>
-          <ionic-selectable
-            [(ngModel)]="item.timezone"
-            [canSearch]="true"
-            [items]="timezoneList$ | async"
-            itemTextField="display_name"
-            itemValueField="value"
-          >
-          </ionic-selectable>
-        </ion-item>
-
-        <ion-row class="ion-justify-content-center ion-margin-top">
-          <ion-col size="6">
-            <ion-button
-              (click)="delete()"
-              *ngIf="!item.is_default && item.id"
-              color="light"
-              expand="block"
-              fill="solid"
-              size="medium"
-            >
-              {{"location-edit-page.remove-location"|translate}}
-            </ion-button>
-          </ion-col>
-          <ion-col size="6">
-            <ion-button (click)="save()" expand="block" fill="solid" size="medium">
-              {{"location-edit-page.save-location"|translate}}
-            </ion-button>
-          </ion-col>
-        </ion-row>
-
-      </ion-col>
-    </ion-item>
-  </ion-col>
-</ion-row>
+      </ion-row>
+    </ion-col>
+  </ion-item>
+  <ion-item>
+    <ion-label class="label-for-required-input" color="medium" position="floating">
+      {{ 'location-edit-page.country' | translate }}
+    </ion-label>
+    <ionic-selectable
+      (onChange)="onCountryChange()"
+      (onSearch)="countrySelectable.onCountrySearch($event)"
+      [(ngModel)]="item.country"
+      [canSearch]="true"
+      itemTextField="name"
+      itemValueField="id"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label color="medium" position="floating">
+      {{ 'location-edit-page.region' | translate }}
+    </ion-label>
+    <ionic-selectable
+      (onChange)="onRegionChange()"
+      (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
+      [(ngModel)]="item.region"
+      [canSearch]="true"
+      [isEnabled]="isRegionEnabled$ | async"
+      itemTextField="name"
+      itemValueField="id"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label color="medium" position="floating">
+      {{ 'location-edit-page.subregion' | translate }}
+    </ion-label>
+    <ionic-selectable
+      (onSearch)="selectableSubregion.onSubregionSearch($event, getCountryValue(), getRegionValue())"
+      [(ngModel)]="item.subregion"
+      [canSearch]="true"
+      [isEnabled]="isSubregionEnabled$ | async"
+      itemTextField="name"
+      itemValueField="id"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label class="label-for-required-input" color="medium" position="floating">
+      {{ 'location-edit-page.city' | translate }}
+    </ion-label>
+    <ionic-selectable
+      (onChange)="onCityChange()"
+      (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
+      [(ngModel)]="item.city"
+      [canSearch]="true"
+      [isEnabled]="isCityEnabled$ | async"
+      itemTextField="name"
+      itemValueField="id"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label color="medium" position="floating">
+      {{ 'location-edit-page.district' | translate }}
+    </ion-label>
+    <ionic-selectable
+      (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
+      [(ngModel)]="item.district"
+      [canSearch]="true"
+      [isEnabled]="isDistrictEnabled$ | async"
+      itemTextField="name"
+      itemValueField="id"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <app-user-location-map [(ngModel)]="item.coordinates" [clientCoordinates]="item.coordinates?.coordinates"></app-user-location-map>
+  <ion-item>
+    <ion-label color="medium" position="floating">
+      {{ 'location-edit-page.postal-code' | translate }}
+    </ion-label>
+    <ion-input [(ngModel)]="item.postal_code" name="phone" type="text"> </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="medium" position="floating">
+      {{ 'location-edit-page.address' | translate }}
+    </ion-label>
+    <ion-input [(ngModel)]="item.address" name="first_name" type="text"> </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="medium" position="floating">
+      {{ 'location-edit-page.timezone' | translate }}
+    </ion-label>
+    <ionic-selectable
+      [(ngModel)]="item.timezone"
+      [canSearch]="true"
+      [items]="timezoneList$ | async"
+      itemTextField="display_name"
+      itemValueField="value"
+    >
+    </ionic-selectable>
+  </ion-item>
+  <ion-row class="ion-justify-content-center ion-margin-top">
+    <ion-col size="6">
+      <ion-button (click)="delete()" *ngIf="!item.is_default && item.id" color="light" expand="block" fill="solid" size="medium">
+        {{ 'location-edit-page.remove-location' | translate }}
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button (click)="save()" expand="block" fill="solid" size="medium">
+        {{ 'location-edit-page.save-location' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ng-container>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

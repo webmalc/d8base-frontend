@@ -1,103 +1,92 @@
 <app-header></app-header>
-<ion-content class="ion-padding-top">
-  <ion-row class="ion-justify-content-center">
-    <ion-col appMainColumn>
-      <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-        <ion-item class="ion-item-no-border ion-item-bordered-first">
-          <ion-col class="ion-no-padding">
-            <ion-row class="ion-justify-content-start ion-align-items-center ion-padding-vertical">
-              <ion-item class="ion-item-no-border ion-item-no-side-padding fs18">
-                <b>
-                  {{"service-publish.step-two.title"|translate}}
-                </b>
-              </ion-item>
-            </ion-row>
-          </ion-col>
+<ion-content>
+  <app-content-wrapper>
+    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+      <ion-item class="fs18" lines="none">
+          <ion-text>
+            <b>{{ 'service-publish.step-two.title' | translate }}</b>
+          </ion-text>
         </ion-item>
-
-        <app-info-row>
-          {{"service-publish.step-two.first-info-row"|translate}}
-        </app-info-row>
-
-        <ion-item class="ion-item-no-border ion-item-bordered-others">
-          <ion-col class="ion-padding-vertical" size="12">
-            <ion-item class="ion-item-no-border ion-item-no-side-padding">
-              <div class="label-for-required-input">
-                {{"service-publish.step-two.service-title"|translate}}
-              </div>
-            </ion-item>
-            <ion-item class="ion-item-bordered">
-              <ion-label color="medium" position="floating">
-                {{"service-publish.step-two.service-placeholder"|translate}}
-              </ion-label>
-              <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
-            </ion-item>
-            <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
-              {{"service-publish.step-two.service-description"|translate}}
-            </ion-item>
-            <ion-item class="ion-item-bordered">
-              <ion-label color="medium" position="floating">
-                {{"service-publish.step-two.service-description-placeholder"|translate}}
-              </ion-label>
-              <ion-textarea rows="4" type="text" name="description"
-                            [formControlName]="formFields.Description"></ion-textarea>
-            </ion-item>
-            <app-form-control-error [controlName]="formFields.Description"></app-form-control-error>
-            <ion-col size="12">
-              <ion-row>
-                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                  <div class="label-for-required-input">
-                    {{"service-publish.step-two.duration-and-price"|translate}}
-                  </div>
-                </ion-item>
-              </ion-row>
-              <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
-            </ion-col>
-            <app-price-editor [formControlName]="formFields.Price"></app-price-editor>
-          </ion-col>
-        </ion-item>
-
-        <app-info-row>
-          {{"service-publish.step-two.second-info-row"|translate}}
-        </app-info-row>
-
-        <ion-item class="ion-item-no-border ion-item-bordered-others">
-          <ion-col class="ion-padding-vertical" size="12">
-            <ion-list>
-              <ion-list-header class="ion-item-bottom-border ion-item-no-side-padding">
-                <ion-item class="ion-item-no-border ion-item-no-side-padding">
-                  <div class="label-for-required-input">
-                    {{"service-publish.step-two.location"|translate}}
-                  </div>
-                </ion-item>
-              </ion-list-header>
-              <ion-radio-group [formControlName]="formFields.Location">
-                <ion-item *ngFor="let type of serviceTypes">
-                  <ion-label>{{"service-location." + type|translate}}</ion-label>
-                  <ion-radio value="{{type}}"></ion-radio>
-                </ion-item>
-              </ion-radio-group>
-            </ion-list>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size="6">
-                <ion-button size="medium" color="light"
-                            (click)="serviceStepsNavigationService.previous()"
-                            class="ion-margin-top" fill="solid" expand="block">
-                  {{"service-publish.back-button" | translate}}
-                </ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button size="medium" type="submit"
-                            [disabled]="formService.isSubmitDisabled()"
-                            class="ion-margin-top" fill="solid" expand="block">
-                  {{"service-publish.forward-button" | translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-item>
-      </form>
-    </ion-col>
-  </ion-row>
+      <app-info-row>
+        {{ 'service-publish.step-two.first-info-row' | translate }}
+      </app-info-row>
+      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        <div class="label-for-required-input">
+          {{ 'service-publish.step-two.service-title' | translate }}
+        </div>
+      </ion-item>
+      <ion-item class="ion-item-bordered">
+        <ion-label color="medium" position="floating">
+          {{ 'service-publish.step-two.service-placeholder' | translate }}
+        </ion-label>
+        <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
+      </ion-item>
+      <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+        {{ 'service-publish.step-two.service-description' | translate }}
+      </ion-item>
+      <ion-item class="ion-item-bordered">
+        <ion-label color="medium" position="floating">
+          {{ 'service-publish.step-two.service-description-placeholder' | translate }}
+        </ion-label>
+        <ion-textarea rows="4" type="text" name="description" [formControlName]="formFields.Description"></ion-textarea>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.Description"></app-form-control-error>
+      <ion-col size="12">
+        <ion-row>
+          <ion-item class="ion-item-no-border ion-item-no-side-padding">
+            <div class="label-for-required-input">
+              {{ 'service-publish.step-two.duration-and-price' | translate }}
+            </div>
+          </ion-item>
+        </ion-row>
+        <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
+      </ion-col>
+      <app-price-editor [formControlName]="formFields.Price"></app-price-editor>
+      <app-info-row>
+        {{ 'service-publish.step-two.second-info-row' | translate }}
+      </app-info-row>
+      <ion-list>
+        <ion-list-header class="ion-item-bottom-border ion-item-no-side-padding">
+          <ion-item class="ion-item-no-border ion-item-no-side-padding">
+            <div class="label-for-required-input">
+              {{ 'service-publish.step-two.location' | translate }}
+            </div>
+          </ion-item>
+        </ion-list-header>
+        <ion-radio-group [formControlName]="formFields.Location">
+          <ion-item *ngFor="let type of serviceTypes">
+            <ion-label>{{ 'service-location.' + type | translate }}</ion-label>
+            <ion-radio value="{{ type }}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6">
+          <ion-button
+            size="medium"
+            color="light"
+            (click)="serviceStepsNavigationService.previous()"
+            class="ion-margin-top"
+            fill="solid"
+            expand="block"
+          >
+            {{ 'service-publish.back-button' | translate }}
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button
+            size="medium"
+            type="submit"
+            [disabled]="formService.isSubmitDisabled()"
+            class="ion-margin-top"
+            fill="solid"
+            expand="block"
+          >
+            {{ 'service-publish.forward-button' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

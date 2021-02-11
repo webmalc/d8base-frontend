@@ -1,194 +1,161 @@
 <app-header></app-header>
-<ion-content class="ion-padding-top" *ngIf="context$ | async as context">
-  <ion-row class="ion-justify-content-center">
-    <ion-col appMainColumn>
-      <ion-row class="ion-justify-content-start ion-align-items-center">
-        <ion-item class="ion-item-no-border fs18">
-          <error-flashbag [messages]="errorMessages"></error-flashbag>
-        </ion-item>
-      </ion-row>
+<ion-content>
+  <app-content-wrapper>
+    <ng-container *ngIf="context$ | async as context; else loading">
+      <ion-item lines="none" class="fs18" *ngIf="errorMessages?.length">
+        <error-flashbag [messages]="errorMessages"></error-flashbag>
+      </ion-item>
       <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-        <ion-item
-          class="ion-item-no-border ion-item-bordered-first ion-item-no-side-padding ion-padding-vertical">
-          <ion-col class="ion-no-padding">
-            <ion-row class="ion-justify-content-start ion-align-items-center">
-              <ion-item class="ion-item-no-border fs18">
-                <b>
-                  {{"service-publish.step-four.title" | translate}}
-                </b>
-              </ion-item>
-            </ion-row>
-            <ion-row class="ion-justify-content-start ion-align-items-center">
-              <ion-item class="ion-item-no-border fs18">
-                <b>
-                  {{"service-publish.step-four.subtitle" | translate}}
-                </b>
-              </ion-item>
-            </ion-row>
-          </ion-col>
+        <ion-item lines="none" class="fs18">
+          <ion-text>
+            <p>
+              <b>{{ 'service-publish.step-four.title' | translate }}</b>
+            </p>
+            <p>{{ 'service-publish.step-four.subtitle' | translate }}</p>
+          </ion-text>
         </ion-item>
         <app-info-row>
-          {{"service-publish.step-four.first-info-row"|translate}}
+          {{ 'service-publish.step-four.first-info-row' | translate }}
         </app-info-row>
-        <ion-item class="ion-item-no-border">
-          <ion-col class="ion-padding-vertical" size="12">
-            <ion-item class="ion-item-no-border ion-item-no-side-padding">
-              <div class="label-for-required-input">
-                {{"service-publish.step-four.email-title"|translate}}
-              </div>
-            </ion-item>
-            <ion-item class="ion-item-bordered">
-              <ion-label color="medium" position="floating">
-                {{"service-publish.step-four.email-placeholder"|translate}}
-              </ion-label>
-              <ion-input (ionChange)="onEmailChange()"
-                         type="text" name="name" [formControlName]="formFields.Email"></ion-input>
-            </ion-item>
-            <!--newUser-->
-            <ion-item *ngIf="!context.isAuthenticated &&
-                         !context.isUserExists && formService.isEmailValid()"
-                      class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
-              {{"service-publish.step-four.new-user"|translate}}
-            </ion-item>
-            <ion-item *ngIf="!context.isAuthenticated &&
-                         !context.isUserExists && formService.isEmailValid()"
-                      class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
-              <div class="label-for-required-input">
-                {{"service-publish.step-four.create-password"|translate}}
-              </div>
-            </ion-item>
-            <!--/newUser-->
-            <!--userExists-->
-            <ion-item *ngIf="!context.isAuthenticated &&
-                         context.isUserExists && formService.isEmailValid()"
-                      class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
-              {{"service-publish.step-four.user-exists"|translate}}
-            </ion-item>
-            <ion-item *ngIf="!context.isAuthenticated &&
-                         context.isUserExists && formService.isEmailValid()"
-                      class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
-              <div class="label-for-required-input">
-                {{"service-publish.step-four.enter-password"|translate}}
-              </div>
-            </ion-item>
-            <!--/userExists-->
-          </ion-col>
+        <ion-item lines="none">
+          <div class="label-for-required-input">
+            {{ 'service-publish.step-four.email-title' | translate }}
+          </div>
         </ion-item>
-        <app-info-row *ngIf="!context.isAuthenticated &&
-                 !context.isUserExists && formService.isEmailValid()">
-          {{"service-publish.step-four.second-info-row"|translate}}
-        </app-info-row>
-        <ion-item *ngIf="!context.isAuthenticated &&
-                 !context.isUserExists && formService.isEmailValid()"
-                  class="ion-item-no-border">
-          <ion-col class="ion-padding-vertical" size="12">
-            <ion-item class="ion-item-bordered ion-margin-top">
-              <ion-label color="medium" position="floating" class="label-for-required-input">
-                {{"service-publish.step-four.password-placeholder"|translate}}
-              </ion-label>
-              <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
-            </ion-item>
-            <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
-              {{"service-publish.step-four.password-info"|translate}}
-            </ion-item>
-            <ion-item class="ion-item-bordered ion-margin-top">
-              <ion-label color="medium" position="floating" class="label-for-required-input">
-                {{"service-publish.step-four.password-confirm"|translate}}
-              </ion-label>
-              <ion-input type="password" name="name" [formControlName]="formFields.Confirm"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-item>
-        <ion-item *ngIf="!context.isAuthenticated &&
-                 context.isUserExists && formService.isEmailValid()"
-                  class="ion-item-no-border">
-          <ion-col class="ion-padding-vertical" size="12">
-            <ion-item class="ion-item-bordered ion-margin-top">
-              <ion-label color="medium" position="floating" class="label-for-required-input">
-                {{"service-publish.step-four.password-placeholder"|translate}}
-              </ion-label>
-              <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
-            </ion-item>
-            <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
-              <a routerLink="/auth/password-recover" routerDirection="forward">
-                {{"service-publish.step-four.forgot-password"|translate}}
-              </a>
-            </ion-item>
-          </ion-col>
+        <ion-item class="ion-item-bordered">
+          <ion-label color="medium" position="floating">
+            {{ 'service-publish.step-four.email-placeholder' | translate }}
+          </ion-label>
+          <ion-input (ionChange)="onEmailChange()" type="text" name="name" [formControlName]="formFields.Email"></ion-input>
         </ion-item>
 
-        <ion-item class="ion-item-no-border" *ngIf="!context.isAuthenticated &&
-                 !context.isUserExists && formService.isEmailValid()">
-          <ion-col size="12">
-            <ion-item class="ion-item-no-border">
-              <div class="label-for-required-input">
-                <b>
-                  {{"service-publish.step-seven.country-title" | translate}}
-                </b>
-              </div>
-            </ion-item>
-            <ion-item class="ion-item-bordered">
-              <ion-label color="medium" position="floating">
-                {{"service-publish.step-seven.country-placeholder" | translate}}
-              </ion-label>
-              <ionic-selectable
-                itemValueField="id"
-                itemTextField="name"
-                [canSearch]="true"
-                formControlName="{{formFields.Country}}"
-                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-                searchPlaceholder="{{'ion-selectable.search-text' | translate}}"
-                (onSearch)="countrySelectable.onCountrySearch($event)"
-                (onChange)="onCountryChange()">
-              </ionic-selectable>
-            </ion-item>
-            <ion-item class="ion-item-no-border">
-              <div class="label-for-required-input">
-                <b>
-                  {{"service-publish.step-seven.city-title" | translate}}
-                </b>
-              </div>
-            </ion-item>
-            <ion-item class="ion-item-bordered">
-              <ion-label color="medium" position="floating">
-                {{"service-publish.step-seven.city-placeholder" | translate}}
-              </ion-label>
-              <ionic-selectable
-                itemValueField="id"
-                itemTextField="name"
-                [canSearch]="true"
-                formControlName="{{formFields.City}}"
-                closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-                searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-                searchPlaceholder="{{'ion-selectable.search-text' | translate}}"
-                (onSearch)="citySelectable.onCitySearch($event, getCountryValue())">
-              </ionic-selectable>
-            </ion-item>
-          </ion-col>
+        <!--newUser-->
+        <ion-item lines="none" *ngIf="!context.isAuthenticated && !context.isUserExists && formService.isEmailValid()" class="fs13">
+          <ion-text>
+            <div>{{ 'service-publish.step-four.new-user' | translate }}</div>
+            <div>{{ 'service-publish.step-four.create-password' | translate }}</div>
+          </ion-text>
         </ion-item>
+        <!--/newUser-->
 
-        <ion-item class="ion-item-no-border">
-          <ion-col class="ion-padding-vertical" size="12">
-            <ion-row class="ion-justify-content-center">
-              <ion-col size="6">
-                <ion-button size="medium" color="light"
-                            (click)="serviceStepsNavigationService.previous()"
-                            class="ion-margin-top" fill="solid" expand="block">
-                  {{"service-publish.back-button" | translate}}
-                </ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button size="medium" type="submit" [disabled]="isSubmitDisabled()"
-                            class="ion-margin-top" fill="solid" expand="block">
-                  {{"service-publish.forward-button" | translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-col>
+        <!--userExists-->
+        <ion-item lines="none" *ngIf="!context.isAuthenticated && context.isUserExists && formService.isEmailValid()" class="fs13">
+          <ion-text>
+            <div>{{ 'service-publish.step-four.user-exists' | translate }}</div>
+            <div>{{ 'service-publish.step-four.enter-password' | translate }}</div>
+          </ion-text>
         </ion-item>
+        <!--/userExists-->
+
+        <ng-container *ngIf="!context.isAuthenticated && !context.isUserExists && formService.isEmailValid()">
+          <ion-item class="ion-item-bordered ion-margin-top">
+            <ion-label color="medium" position="floating" class="label-for-required-input">
+              {{ 'service-publish.step-four.password-placeholder' | translate }}
+            </ion-label>
+            <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
+          </ion-item>
+          <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+            {{ 'service-publish.step-four.password-info' | translate }}
+          </ion-item>
+          <ion-item class="ion-item-bordered ion-margin-top">
+            <ion-label color="medium" position="floating" class="label-for-required-input">
+              {{ 'service-publish.step-four.password-confirm' | translate }}
+            </ion-label>
+            <ion-input type="password" name="name" [formControlName]="formFields.Confirm"></ion-input>
+          </ion-item>
+          <app-info-row class="ion-margin-top">
+            {{ 'service-publish.step-four.second-info-row' | translate }}
+          </app-info-row>
+        </ng-container>
+
+        <ng-container *ngIf="!context.isAuthenticated && context.isUserExists && formService.isEmailValid()">
+          <ion-item class="ion-item-bordered ion-margin-top">
+            <ion-label color="medium" position="floating" class="label-for-required-input">
+              {{ 'service-publish.step-four.password-placeholder' | translate }}
+            </ion-label>
+            <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
+          </ion-item>
+          <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+            <a routerLink="/auth/password-recover" routerDirection="forward">
+              {{ 'service-publish.step-four.forgot-password' | translate }}
+            </a>
+          </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="!context.isAuthenticated && !context.isUserExists && formService.isEmailValid()">
+          <ion-item class="ion-item-no-border">
+            <div class="label-for-required-input">
+              <b>
+                {{ 'service-publish.step-seven.country-title' | translate }}
+              </b>
+            </div>
+          </ion-item>
+          <ion-item class="ion-item-bordered">
+            <ion-label color="medium" position="floating">
+              {{ 'service-publish.step-seven.country-placeholder' | translate }}
+            </ion-label>
+            <ionic-selectable
+              itemValueField="id"
+              itemTextField="name"
+              [canSearch]="true"
+              formControlName="{{ formFields.Country }}"
+              closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
+              searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
+              searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
+              (onSearch)="countrySelectable.onCountrySearch($event)"
+              (onChange)="onCountryChange()"
+            >
+            </ionic-selectable>
+          </ion-item>
+          <ion-item class="ion-item-no-border">
+            <div class="label-for-required-input">
+              <b>
+                {{ 'service-publish.step-seven.city-title' | translate }}
+              </b>
+            </div>
+          </ion-item>
+          <ion-item class="ion-item-bordered">
+            <ion-label color="medium" position="floating">
+              {{ 'service-publish.step-seven.city-placeholder' | translate }}
+            </ion-label>
+            <ionic-selectable
+              itemValueField="id"
+              itemTextField="name"
+              [canSearch]="true"
+              formControlName="{{ formFields.City }}"
+              closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
+              searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
+              searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
+              (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
+            >
+            </ionic-selectable>
+          </ion-item>
+        </ng-container>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="6">
+            <ion-button
+              size="medium"
+              color="light"
+              (click)="serviceStepsNavigationService.previous()"
+              class="ion-margin-top"
+              fill="solid"
+              expand="block"
+            >
+              {{ 'service-publish.back-button' | translate }}
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button size="medium" type="submit" [disabled]="isSubmitDisabled()" class="ion-margin-top" fill="solid" expand="block">
+              {{ 'service-publish.forward-button' | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </form>
-    </ion-col>
-  </ion-row>
+    </ng-container>
+    <ng-template #loading>
+      <app-loading-indicator></app-loading-indicator>
+    </ng-template>
+  </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

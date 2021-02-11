@@ -1,8 +1,6 @@
 <app-header></app-header>
 <ion-content>
-  <app-certificate-edit
-    (deleteEmitter)="delete($event)"
-    (saveEmitter)="save($event)"
-    [item]="item">
-  </app-certificate-edit>
+  <app-content-wrapper>
+    <app-certificate-edit (deleteEmitter)="delete($event)" (saveEmitter)="save($event)" [item]="item"></app-certificate-edit>
+  </app-content-wrapper>
 </ion-content>

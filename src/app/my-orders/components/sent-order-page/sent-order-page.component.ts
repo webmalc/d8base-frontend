@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-order-page',
+  selector: 'app-sent-order-page',
   templateUrl: './sent-order-page.component.html',
   styleUrls: ['./sent-order-page.component.scss'],
   providers: [ServicesApiCache, MasterReadonlyApiCacheService],
