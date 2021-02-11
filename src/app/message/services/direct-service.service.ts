@@ -7,15 +7,14 @@ import { MessageListUpdaterService } from '@app/message/services/message-list-up
 import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
 import { MessagesSentApiService } from '@app/message/services/messages-sent-api.service';
 import { environment } from '@env/environment';
-import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class DirectServiceService {
-
   public messagesListUpdated: BehaviorSubject<void> = new BehaviorSubject<void>(null);
   public newMessageSent: BehaviorSubject<void> = new BehaviorSubject<void>(null);
-  public messages$: BehaviorSubject<Message[]> = new BehaviorSubject([]);
+  public messages$: BehaviorSubject<Message[]> = new BehaviorSubject(null);
   public hasNextApiPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public currentUserId: number;
   public interlocutorId: number;
@@ -31,18 +30,15 @@ export class DirectServiceService {
     private readonly messageListUpdater: MessageListUpdaterService,
     private readonly messagesListApi: MessagesListApiService,
     private readonly messagesSentApi: MessagesSentApiService,
-  ) {
-  }
+  ) {}
 
   public init(interlocutorId: number): Observable<void> {
     this.interlocutorId = interlocutorId;
-
-    return forkJoin({
-      user: this.userManager.getCurrentUser(),
-      list: this.initMessagesList(),
-    }).pipe(
-      map(({ user }) => {
-        this.currentUserId = user.id;
+    this.userManager.getCurrentUser().subscribe(user => {
+      this.currentUserId = user.id;
+    });
+    return this.initMessagesList().pipe(
+      tap(() => {
         this.subscribeToMessagesUpdate();
       }),
     );
@@ -52,7 +48,7 @@ export class DirectServiceService {
     return this.messageListUpdater.getMessageList(this.interlocutorId, this.currentMessagesApiPage + 1).pipe(
       tap((resp: ApiListResponseInterface<Message>) => this.handleNextApiPage(resp.next)),
       switchMap((resp: ApiListResponseInterface<Message>) => this.extendMessagesList(resp.results)),
-      tap(_ => this.messagesListUpdated.next()),
+      tap(() => this.messagesListUpdated.next()),
     );
   }
 
@@ -78,28 +74,24 @@ export class DirectServiceService {
       return;
     }
     this.pushNewMessage();
-    this.messagesSentApi.create(this.generateSentMessage()).subscribe(
-      _ => {
-        this.updateMessageList();
-        this.clearMessage();
-      },
-    );
+    this.messagesSentApi.create(this.generateSentMessage()).subscribe(() => {
+      this.updateMessageList();
+      this.clearMessage();
+    });
   }
 
   public delete(message: Message): void {
-    const { id } =  message;
+    const { id } = message;
     this.messagesSentApi.deleteById(id).subscribe(() => {
-      this.messages$.next(this.messages$.value.filter((oldMessage) => oldMessage.id !== id));
+      this.messages$.next(this.messages$.value.filter(oldMessage => oldMessage.id !== id));
     });
   }
 
   public update(id: number): void {
-    this.messagesSentApi.patch(this.generateUpdateSentMessage()).subscribe(
-      _ => {
-        this.messagesListUpdated.next();
-        this.clearMessage();
-      },
-    );
+    this.messagesSentApi.patch(this.generateUpdateSentMessage()).subscribe(() => {
+      this.messagesListUpdated.next();
+      this.clearMessage();
+    });
   }
 
   private generateUpdateSentMessage(): SentMessage {
@@ -113,34 +105,34 @@ export class DirectServiceService {
   private extendMessagesList(list: Message[]): Observable<void> {
     return this.messages$.pipe(
       first(),
-      map(currentList => this.setList([...(list.reverse()), ...currentList])),
+      map(currentList => this.setList([...list.reverse(), ...currentList])),
     );
   }
 
   private subscribeToMessagesUpdate(): void {
-    this.messagesSubscription = this.messageListUpdater.receiveUpdates(this.interlocutorId).subscribe(
-      (data: ApiListResponseInterface<Message>) => this.isNeedToUpdate(data.results.reverse()).pipe(
-        filter(isNeed => isNeed),
-      ).subscribe(_ => this.updateMessageList(data.results)),
-    );
+    this.messagesSubscription = this.messageListUpdater
+      .receiveUpdates(this.interlocutorId)
+      .subscribe((data: ApiListResponseInterface<Message>) =>
+        this.isNeedToUpdate(data.results.reverse())
+          .pipe(filter(isNeed => isNeed))
+          .subscribe(() => this.updateMessageList(data.results)),
+      );
   }
 
   private pushNewMessage(): void {
-    this.messages$.pipe(
-      first(),
-    ).subscribe(
-      (list: Message[]) => {
-        list.push(this.generateNewMessage());
-        this.messages$.next(list);
-        this.newMessageSent.next();
-      },
-    );
+    this.messages$.pipe(first()).subscribe((list: Message[]) => {
+      list.push(this.generateNewMessage());
+      this.messages$.next(list);
+      this.newMessageSent.next();
+    });
   }
 
   private updateMessageList(list?: Message[]): void {
-    list ? this.setList(list) : this.messagesListApi.getByInterlocutor(this.interlocutorId, this.messagesPerPage).subscribe(
-      listApiResponse => this.setList(listApiResponse.results.reverse()),
-    );
+    list
+      ? this.setList(list)
+      : this.messagesListApi
+          .getByInterlocutor(this.interlocutorId, this.messagesPerPage)
+          .subscribe(listApiResponse => this.setList(listApiResponse.results.reverse()));
   }
 
   private handleNextApiPage(nextPageResponse: string): void {
@@ -149,7 +141,7 @@ export class DirectServiceService {
 
       return;
     }
-    const nextPageIndex = parseInt((new URL(`${nextPageResponse  }/`)).searchParams.get('page'), 10);
+    const nextPageIndex = parseInt(new URL(`${nextPageResponse}/`).searchParams.get('page'), 10);
     if (nextPageIndex) {
       this.hasNextApiPage.next(true);
       this.currentMessagesApiPage = nextPageIndex - 1;
@@ -180,7 +172,7 @@ export class DirectServiceService {
     return this.messageListUpdater.getMessageList(this.interlocutorId).pipe(
       tap((resp: ApiListResponseInterface<Message>) => this.handleNextApiPage(resp.next)),
       tap((resp: ApiListResponseInterface<Message>) => this.messages$.next(resp.results.reverse())),
-      tap(_ => this.messagesListUpdated.next()),
+      tap(() => this.messagesListUpdated.next()),
     );
   }
 
@@ -193,23 +185,22 @@ export class DirectServiceService {
     return this.messages$.pipe(
       first(),
       map((currentList: Message[]) => currentList.slice(-this.messagesPerPage)),
-      map(
-        (currentList: Message[]) => {
-          if (newList.length !== currentList.length) {
+      map((currentList: Message[]) => {
+        if (newList.length !== currentList.length) {
+          return true;
+        }
+        for (let i = 0; i < newList.length; i += 1) {
+          if (
+            newList[i].body !== currentList[i].body ||
+            newList[i].is_read !== currentList[i].is_read ||
+            newList[i].created !== currentList[i].created
+          ) {
             return true;
           }
-          for (let i = 0; i < newList.length; i += 1) {
-            if ((newList[i].body !== currentList[i].body) ||
-              (newList[i].is_read !== currentList[i].is_read) ||
-              (newList[i].created !== currentList[i].created)
-            ) {
-              return true;
-            }
-          }
+        }
 
-          return false;
-        },
-      ),
+        return false;
+      }),
     );
   }
 }
