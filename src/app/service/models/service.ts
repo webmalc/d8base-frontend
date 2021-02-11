@@ -9,7 +9,7 @@ export class Service {
   @Expose() public name: string;
   @Expose() public description: string;
   @Expose() public duration: number;
-  @Expose() public service_type: string;
+  @Expose() public service_type: 'online' | 'professional' | 'client';
   @Expose() public is_base_schedule: boolean;
   @Expose() public is_enabled: boolean;
   @Type(() => Price)

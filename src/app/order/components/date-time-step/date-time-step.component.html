@@ -1,4 +1,4 @@
-<app-step-container>
+<app-step-container [isWizardDisabled]="isMyService$ | async">
   <ion-list>
     <ion-list-header class="fs20">
       <ion-label>{{ 'order.date-time-header' | translate }}</ion-label>
@@ -9,7 +9,7 @@
       </ion-label>
     </ion-item>
     <app-calendar-component
-      [formControl]="form.get('datetime')"
+      [formControl]="formControl"
       (newDate)="showCalendarForDate($event)"
       [enabledPeriods]="displayedCalendars$ | async">
     </app-calendar-component>

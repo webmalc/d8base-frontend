@@ -1,38 +1,39 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { SafeResourceUrl } from '@angular/platform-browser';
-import { ProfessionalList } from '@app/api/models';
-import { SentOrder } from '@app/core/models/sent-order';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ProfessionalList, SentOrder, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { MasterReadonlyApiCacheService } from '@app/core/services/cache/master-readonly-api-cache.service';
-import { HelperService } from '@app/core/services/helper.service';
-import { Service } from '@app/service/models/service';
+import { SentOrderStatusController } from '@app/my-orders/services';
 import { switchMap } from 'rxjs/operators';
+import { OrderListItem } from '../abstract/order-list-item';
 
 @Component({
   selector: 'app-sent-order-list-item',
   templateUrl: './sent-order-list-item.component.html',
   styleUrls: ['./sent-order-list-item.component.scss'],
 })
-export class SentOrderListItemComponent {
+export class SentOrderListItemComponent extends OrderListItem {
 
   public service: Service;
   public master: ProfessionalList;
+  @Output() public statusChanged = new EventEmitter<void>();
 
-  private _order: Partial<SentOrder>;
+  private _order: SentOrder;
 
   constructor(
     private readonly servicesCache: ServicesApiCache,
     private readonly changeDetector: ChangeDetectorRef,
     private readonly masterCache: MasterReadonlyApiCacheService,
+    private readonly orderStatusController: SentOrderStatusController,
   ) {
+    super();
   }
 
-  public get order(): Partial<SentOrder> {
-    return this._order || {};
+  public get order(): SentOrder {
+    return this._order || {} as SentOrder;
   }
 
   @Input()
-  public set order(order: Partial<SentOrder>) {
+  public set order(order: SentOrder) {
     this._order = order;
     if (!order) {
       return;
@@ -49,7 +50,7 @@ export class SentOrderListItemComponent {
     });
   }
 
-  public getPhoto(photo: string): string | SafeResourceUrl {
-    return photo || HelperService.getNoAvatarLink();
+  public onDiscardClick(): Promise<void> {
+    return this.perform(() => this.orderStatusController.discardOrder(this.order));
   }
 }

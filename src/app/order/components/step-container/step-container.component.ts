@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SentOrder } from '@app/core/models/sent-order';
 import { StepComponent } from '@app/order/abstract/step';
@@ -24,6 +24,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
     map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})),
   );
+  @Input() public isWizardDisabled: boolean = false;
 
   private readonly ngDestroy$ = new Subject<void>();
 

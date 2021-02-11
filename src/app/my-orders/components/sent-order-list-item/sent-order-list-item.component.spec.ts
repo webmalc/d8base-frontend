@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MasterReadonlyApiCacheService, ServicesApiCache } from '@app/core/services/cache';
 import { ServicesApiService } from '@app/core/services/services-api.service';
+import { SentOrderStatusController } from '@app/my-orders/services';
 
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,7 +22,12 @@ describe('SentOrderListItemComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
       ],
-      providers: [ServicesApiService, ServicesApiCache, MasterReadonlyApiCacheService],
+      providers: [
+        ServicesApiService,
+        ServicesApiCache,
+        SentOrderStatusController,
+        MasterReadonlyApiCacheService,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SentOrderListItemComponent);

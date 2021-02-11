@@ -1,10 +1,7 @@
 <ng-container [ngSwitch]="status">
-  <ion-button *ngSwitchCase="'new'" [disabled]="true"
-              class="opacity-full" color="warning">{{ 'order-status.pending' | translate }}</ion-button>
-  <ion-button *ngSwitchCase="'confirmed'" [disabled]="true"
-              class="opacity-full" color="success">{{ 'order-status.accepted' | translate }}</ion-button>
-  <ion-button *ngSwitchCase="'archived'" [disabled]="true"
-              class="opacity-full" color="dark">{{ 'order-status.archived' | translate }}</ion-button>
-  <ion-button *ngSwitchCase="'completed'" [disabled]="true"
-              class="opacity-full" color="medium">{{'order-status.completed'|translate}}</ion-button>
+  <ion-badge *ngSwitchCase="'not_confirmed'" color="light">{{ 'order-status.pending' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'confirmed'" color="success">{{ 'order-status.accepted' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'paid'" color="success">{{ 'order-status.paid' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'completed'" color="dark">{{ 'order-status.completed' | translate }}</ion-badge>
+  <ion-badge *ngSwitchCase="'canceled'" color="danger">{{ 'order-status.canceled' | translate }}</ion-badge>
 </ng-container>

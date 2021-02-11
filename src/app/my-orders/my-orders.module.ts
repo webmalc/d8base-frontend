@@ -15,7 +15,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyOrdersPageComponent } from './my-orders-page.component';
 import { MyOrdersRoutingModule } from './my-orders-routing.module';
-import { ReceiverOrderStatusController } from './services';
+import { ReceiverOrderStatusController, SentOrderStatusController } from './services';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,6 @@ import { ReceiverOrderStatusController } from './services';
     SentOrderPageComponent,
   ],
   imports: [CommonModule, SharedModule, IonicModule, TranslateModule, MyOrdersRoutingModule, ReactiveFormsModule],
-  providers: [ReceiverOrderStatusController],
+  providers: [ReceiverOrderStatusController, SentOrderStatusController],
 })
 export class MyOrdersModule {}
