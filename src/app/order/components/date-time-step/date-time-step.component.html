@@ -1,4 +1,4 @@
-<app-step-container [disabled]="isMyService$ | async">
+<app-step-container [isWizardDisabled]="isMyService$ | async">
   <ion-list>
     <ion-list-header class="fs20">
       <ion-label>{{ 'order.date-time-header' | translate }}</ion-label>

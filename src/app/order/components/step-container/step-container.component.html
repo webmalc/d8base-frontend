@@ -30,7 +30,7 @@
         </ng-container>
       </ion-col>
       <ion-col>
-        <ng-container *ngIf="(isWizardDisabled | async) === false">
+        <ng-container *ngIf="!isWizardDisabled">
           <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">{{
             'order.order-service' | translate
           }}</ion-button>

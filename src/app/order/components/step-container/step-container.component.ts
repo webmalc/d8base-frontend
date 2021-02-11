@@ -6,7 +6,7 @@ import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import StepModel from '@app/order/interfaces/step-model.interface';
 import { OrderWizardStateService } from '@app/order/services';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +24,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
     map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})),
   );
-  public isWizardDisabled = new BehaviorSubject<boolean>(false);
+  @Input() public isWizardDisabled: boolean = false;
 
   private readonly ngDestroy$ = new Subject<void>();
 
@@ -34,10 +34,6 @@ export class StepContainerComponent implements OnInit, OnDestroy {
     private readonly cd: ChangeDetectorRef,
     private readonly stepComponent: StepComponent<unknown>,
   ) {
-  }
-
-  @Input() public set disabled(value: boolean) {
-    this.isWizardDisabled.next(value);
   }
 
   public ngOnInit(): void {
