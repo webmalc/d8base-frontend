@@ -37,9 +37,9 @@ function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
 
   ],
 })
-
 export class ScheduleEditorComponent implements ControlValueAccessor {
 
+  // TODO remove Input(), use setDisabledState()
   @Input() public disabled: boolean = false;
 
   public formFields = ScheduleEditorFormFields;
@@ -57,6 +57,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
 
   @Input()
   public set schedule(schedule: AbstractSchedule[]) {
+    // TODO remove Input(), use only writeValue()
     const initialValue = schedule ?? ScheduleConstants.defaultSchedule;
     this.formService.fillTimeTable(initialValue.map(normalizeScheduleFormat));
   }
@@ -101,6 +102,9 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
   }
 
   public writeValue(value: AbstractSchedule[]): void {
+    if (!value) {
+      return;
+    }
     this.schedule = value;
   }
 
