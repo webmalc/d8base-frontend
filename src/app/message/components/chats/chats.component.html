@@ -11,35 +11,43 @@
         </ion-col>
         <ion-col [sizeXs]="11" [sizeLg]="4" [offsetLg]="3" [offsetXs]="0" class="ion-no-margin ion-no-padding">
           <ion-item class="ion-item-no-border">
-            <ion-searchbar animated (ionChange)="search($event.target.value)" debounce="200"
-                           (ionCancel)="search('')" (keydown.escape)="search('')"
-                           placeholder="{{'messages.chat-list-page.search'|translate}}"></ion-searchbar>
+            <ion-searchbar
+              animated
+              (ionChange)="search($event.target.value)"
+              debounce="200"
+              (ionCancel)="search('')"
+              (keydown.escape)="search('')"
+              placeholder="{{ 'messages.chat-list-page.search' | translate }}"
+            ></ion-searchbar>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-header>
   <ion-list class="d8b-container">
-    <ion-label *ngIf="!(chatsService.chatList$|async).length">
-      {{'messages.chat-list-page.empty-list'|translate}}
+    <ion-label *ngIf="!(chatsService.chatList$ | async).length">
+      {{ 'messages.chat-list-page.empty-list' | translate }}
     </ion-label>
-    <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey"
-              *ngFor="let chat of (chatsService.chatList$|async)">
+    <ion-item
+      (click)="onChatClick(chat.interlocutor_id)"
+      class="cursor-pointer hover-bg-dark-grey"
+      *ngFor="let chat of chatsService.chatList$ | async"
+    >
       <ion-avatar slot="start">
-        <img src="{{chat.interlocutor_avatar_thumbnail}}">
+        <img src="{{ chat.interlocutor_avatar_thumbnail }}" />
       </ion-avatar>
       <ion-col size="10">
         <ion-row>
           <ion-label>
             <h3>
-              {{chat.interlocutor}}
+              {{ chat.interlocutor }}
             </h3>
           </ion-label>
         </ion-row>
         <ion-row>
           <ion-label>
             <p>
-              {{chat.body}}
+              {{ chat.body }}
             </p>
           </ion-label>
         </ion-row>
@@ -48,14 +56,15 @@
         <ion-row class="ion-justify-content-end">
           <ion-label>
             <p>
-              {{chat.created}}
-            <p>
-          </ion-label>
+              {{ chat.created }}
+            </p>
+            <p></p
+          ></ion-label>
         </ion-row>
         <ion-row class="ion-justify-content-end">
-                    <span class="messages-count" *ngIf="chat.unread_count">
-                        {{chat.unread_count}}
-                    </span>
+          <span class="messages-count" *ngIf="chat.unread_count">
+            {{ chat.unread_count }}
+          </span>
         </ion-row>
       </ion-col>
     </ion-item>

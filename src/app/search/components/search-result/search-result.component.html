@@ -38,8 +38,8 @@
         </div>
         <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
           <ion-item class="ion-item-no-border">
-            <ion-button size="medium" [routerLink]="'/professional/' + data.professional.id">
-              {{ 'issuance.search-result.select' | translate }}
+            <ion-button size="medium" [routerLink]="'/message/chat/' + data.professional.id">
+              {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
             </ion-button>
           </ion-item>
         </ion-row>

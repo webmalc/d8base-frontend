@@ -16,7 +16,6 @@ import { filter, first, map } from 'rxjs/operators';
   styleUrls: ['./direct.component.scss'],
 })
 export class DirectComponent extends Reinitable implements OnDestroy {
-
   @ViewChild(IonInfiniteScroll) public infiniteScroll: IonInfiniteScroll;
   @ViewChild(IonContent, { read: IonContent, static: false }) public content: IonContent;
   @ViewChild('bottomPoint', { read: ElementRef }) public bottom: ElementRef<HTMLElement>;
@@ -98,7 +97,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   }
 
   public loadData(): void {
-    this.directService.appendNextApiPage().subscribe(_ => this.infiniteScroll.complete());
+    this.directService.appendNextApiPage().subscribe(() => this.infiniteScroll.complete());
   }
 
   public send(): void {
@@ -116,43 +115,50 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   }
 
   protected init(): void {
-    this.directService.init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10)).subscribe(
-      _ => this.subscribeToNextApiPageUpdate(),
-    );
-    this.directService.messagesListUpdated.subscribe(_ => this.scrollToBottom());
-    this.directService.newMessageSent.subscribe(_ => this.scrollToBottom(true));
+    this.directService
+      .init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10))
+      .subscribe(() => this.subscribeToNextApiPageUpdate());
+    this.directService.messagesListUpdated.subscribe(() => this.scrollToBottom());
+    this.directService.newMessageSent.subscribe(() => this.scrollToBottom(true));
   }
 
   private initContextMenuPopover(message: Message, event: MouseEvent): void {
     this.updateMessageId = undefined;
-    this.popoverController.create({
-      component: ContextMenuPopoverComponent,
-      translucent: true,
-      componentProps: { message },
-      animated: true,
-      event,
-    }).then(pop => pop.present().then(
-      () => {
-        this.deleteSubscription = ContextMenuPopoverComponent.delete$.pipe(filter(mes => mes !== null), first()).subscribe(
-          (mes: Message) => {
-            this.directService.delete(mes).subscribe();
-            this.popoverController.dismiss();
-            this.deleteSubscription.unsubscribe();
-          },
-        );
-        this.updateSubscription = ContextMenuPopoverComponent.update$.pipe(filter(mes => mes !== null), first()).subscribe(
-          (mes: Message) => {
-            this.isUpdate = true;
-            this.directService.updateMessage = mes;
-            this.directService.defaultUpdateMessage = mes.body;
-            this.updateMessageId = mes.id;
-            this.popoverController.dismiss();
-            this.updateSubscription.unsubscribe();
-          },
-        );
-      },
-    ));
-
+    this.popoverController
+      .create({
+        component: ContextMenuPopoverComponent,
+        translucent: true,
+        componentProps: { message },
+        animated: true,
+        event,
+      })
+      .then(pop =>
+        pop.present().then(() => {
+          this.deleteSubscription = ContextMenuPopoverComponent.delete$
+            .pipe(
+              filter(mes => mes !== null),
+              first(),
+            )
+            .subscribe((mes: Message) => {
+              this.directService.delete(mes);
+              this.popoverController.dismiss();
+              this.deleteSubscription.unsubscribe();
+            });
+          this.updateSubscription = ContextMenuPopoverComponent.update$
+            .pipe(
+              filter(mes => mes !== null),
+              first(),
+            )
+            .subscribe((mes: Message) => {
+              this.isUpdate = true;
+              this.directService.updateMessage = mes;
+              this.directService.defaultUpdateMessage = mes.body;
+              this.updateMessageId = mes.id;
+              this.popoverController.dismiss();
+              this.updateSubscription.unsubscribe();
+            });
+        }),
+      );
   }
 
   private subscribeToNextApiPageUpdate(): void {
@@ -163,9 +169,12 @@ export class DirectComponent extends Reinitable implements OnDestroy {
 
   private scrollToBottom(force: boolean = false): void {
     if (
-      this.bottom && !force &&
-      !(this.bottom.nativeElement.getBoundingClientRect().top >= 0 &&
-        this.bottom.nativeElement.getBoundingClientRect().top <= this.platform.height())
+      this.bottom &&
+      !force &&
+      !(
+        this.bottom.nativeElement.getBoundingClientRect().top >= 0 &&
+        this.bottom.nativeElement.getBoundingClientRect().top <= this.platform.height()
+      )
     ) {
       return;
     }
