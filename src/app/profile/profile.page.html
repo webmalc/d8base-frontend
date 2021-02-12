@@ -5,12 +5,7 @@
       <ion-row class="ion-justify-content-center">
         <ion-col [sizeXs]="10" [sizeSm]="8" [sizeMd]="6" [sizeLg]="4" [sizeXl]="4">
           <ion-img class="border-img" [src]="getAvatar()"></ion-img>
-          <app-picture-selector
-            [camera]="true"
-            [fileSystem]="true"
-            [formControlName]="formFields.Avatar"
-          >
-          </app-picture-selector>
+          <app-picture-selector [camera]="true" [fileSystem]="true" [formControlName]="formFields.Avatar"> </app-picture-selector>
         </ion-col>
       </ion-row>
     </form>
@@ -19,16 +14,11 @@
       <ion-label>
         <h1>{{'profile-form.main'|translate}}</h1>
       </ion-label>
-      <ion-button slot="end"
-                  color="medium"
-                  fill="clear"
-                  routerLink="edit/">
+      <ion-button slot="end" color="medium" fill="clear" routerLink="edit/">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item *ngIf="user?.first_name || user?.last_name" lines="none">
-      {{user?.first_name}} {{user?.last_name}}
-    </ion-item>
+    <ion-item *ngIf="user?.first_name || user?.last_name" lines="none"> {{user?.first_name}} {{user?.last_name}} </ion-item>
     <ion-item lines="none">
       <ion-icon class="pr5" name="mail-outline"></ion-icon>
       <ion-label>Email</ion-label>
@@ -40,10 +30,8 @@
         <h1>{{'profile-form.contacts'|translate}}</h1>
       </ion-label>
     </ion-item-divider>
-    <app-abstract-contacts [clientContacts]="contacts"
-                           [interactable]="true">
+    <app-abstract-contacts *ngIf="contacts$ | async as contacts; else loader" [clientContacts]="contacts" [interactable]="true">
     </app-abstract-contacts>
-
     <ion-item-divider color="light">
       <ion-label>
         <h1>{{'profile-page.your-address'|translate}}</h1>
@@ -51,67 +39,59 @@
     </ion-item-divider>
     <ion-item-group>
       <ion-item lines="none">
-        <ion-label position="stacked">
-          {{'profile-page.main-address'|translate}}
-        </ion-label>
-        <ion-button slot="end"
-                    fill="clear"
-                    color="medium"
-                    routerLink="location-edit/{{(defaultLocation$ | async)?.id}}"
-                    routerDirection="forward">
+        <ion-label position="stacked"> {{'profile-page.main-address'|translate}} </ion-label>
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="medium"
+          routerLink="location-edit/{{(defaultLocation$ | async)?.id}}"
+          routerDirection="forward"
+        >
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <app-location-viewer [location]="defaultLocation$ | async"></app-location-viewer>
       </ion-item>
       <ion-item *ngFor="let location of (additionalLocationsList$|async)" lines="none">
-        <ion-label position="stacked">
-          {{'profile-page.additional-address'|translate}}
-        </ion-label>
-        <ion-button slot="end"
-                    fill="clear"
-                    color="medium"
-                    routerLink="location-edit/{{location.id}}"
-                    routerDirection="forward"
-                    routerLinkActive="active">
+        <ion-label position="stacked"> {{'profile-page.additional-address'|translate}} </ion-label>
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="medium"
+          routerLink="location-edit/{{location.id}}"
+          routerDirection="forward"
+          routerLinkActive="active"
+        >
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <app-location-viewer [location]="location"></app-location-viewer>
       </ion-item>
     </ion-item-group>
-    <app-add-button routerLink="location-add/">
-      {{'profile-page.add-new-address'|translate}}
-    </app-add-button>
+    <app-add-button routerLink="location-add/"> {{'profile-page.add-new-address'|translate}} </app-add-button>
 
     <ion-item-divider color="light">
       <ion-label>
         <h1>{{'profile-page.about'|translate}}</h1>
       </ion-label>
-      <ion-button slot="end"
-                  color="medium"
-                  fill="clear"
-                  routerLink="about/">
+      <ion-button slot="end" color="medium" fill="clear" routerLink="about/">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
     <ion-item lines="none">
-      <ion-label>
-        {{'profile-page.age'|translate}}
-      </ion-label>
+      <ion-label> {{'profile-page.age'|translate}} </ion-label>
       {{user?.birthday || ('profile-page.not-specified'|translate)}}
     </ion-item>
     <ion-item lines="none">
-      <ion-label>
-        {{'profile-page.nationality'|translate}}
-      </ion-label>
+      <ion-label> {{'profile-page.nationality'|translate}} </ion-label>
       {{nationality?.name || ('profile-page.not-specified'|translate)}}
     </ion-item>
     <ion-item lines="none">
-      <ion-label class="ion-item-no-border ion-align-items-center">
-        {{'profile-page.languages'|translate}}
-      </ion-label>
+      <ion-label class="ion-item-no-border ion-align-items-center"> {{'profile-page.languages'|translate}} </ion-label>
       {{languagesList}}
     </ion-item>
-
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>
+
+<ng-template #loader>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>
