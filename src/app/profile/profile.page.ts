@@ -14,8 +14,8 @@ import { UserContactApiService } from '@app/profile/services/user-contact-api.se
 import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
 import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
-import { BehaviorSubject, forkJoin, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { ContactApiService } from './services/contact-api.service';
 
 @Component({
@@ -24,13 +24,12 @@ import { ContactApiService } from './services/contact-api.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage extends Reinitable {
-
   public form: FormGroup;
   public formFields = ProfileFormFields;
   public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
   public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
   public user: User;
-  public contacts: ClientContactInterface[] = [];
+  public contacts$: Observable<ClientContactInterface[]>;
   public nationality: Country | null;
   public languages: Language[];
 
@@ -61,58 +60,52 @@ export class ProfilePage extends Reinitable {
   }
 
   protected init(): void {
-    this.profileService.createProfileForm$().subscribe(
-      form => this.form = form,
-    );
-    this.userManager.getCurrentUser().pipe(
-      switchMap(user => forkJoin({
-        user: of(user),
-        languages: this.userLanguagesApi.getList(user.languages).pipe(
-          switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language))),
+    this.profileService.createProfileForm$().subscribe(form => (this.form = form));
+    this.userManager
+      .getCurrentUser()
+      .pipe(
+        switchMap(user =>
+          forkJoin({
+            user: of(user),
+            languages: this.userLanguagesApi
+              .getList(user.languages)
+              .pipe(switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language)))),
+            nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),
+          }),
         ),
-        nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),
-      })),
-    ).subscribe(
-      ({ user, languages, nationality }) => {
+      )
+      .subscribe(({ user, languages, nationality }) => {
         this.user = user;
         this.languages = languages;
         this.nationality = nationality;
-      },
-    );
-    this.profileService.createAvatarForm().subscribe(
-      () => this.onAvatarChange(),
-    );
-    this.profileService.initLocation().subscribe(
-      locationList => {
-        this.defaultLocation$.next(locationList.pop() as UserLocation);
-        this.additionalLocationsList$.next(locationList as UserLocation[]);
-      },
-    );
-    forkJoin([
-      this.contactsReadonlyApi.get({ is_default: '1' }),
-      this.contactsApi.get(),
-    ]).subscribe(
-      ([defaultContacts, list]) => {
+      });
+    this.profileService.createAvatarForm().subscribe(() => this.onAvatarChange());
+    this.profileService.initLocation().subscribe(locationList => {
+      this.defaultLocation$.next(locationList.pop() as UserLocation);
+      this.additionalLocationsList$.next(locationList as UserLocation[]);
+    });
+
+    this.contacts$ = forkJoin([this.contactsReadonlyApi.get({ is_default: '1' }), this.contactsApi.get()]).pipe(
+      map(([defaultContacts, list]) => {
         const emptyDefaultContacts = defaultContacts.results.filter(c => !list.results.some(x => x.contact === c.id));
-        this.contacts = [
-          ...emptyDefaultContacts.map(c => (
-            {
-              id: null,
-              contact: c.id,
-              contact_code: c.code,
-              contact_display: c.name,
-              value: '',
-            }
-          )),
+        return [
+          ...emptyDefaultContacts.map(c => ({
+            id: null,
+            contact: c.id,
+            contact_code: c.code,
+            contact_display: c.name,
+            value: '',
+          })),
           ...list.results,
         ];
-      },
+      }),
+      catchError(() => of([])),
     );
   }
 
   private onAvatarChange(): void {
-    this.profileService.avatarForm.get(ProfileFormFields.Avatar).statusChanges.subscribe(
-      _ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value),
-    );
+    this.profileService.avatarForm
+      .get(ProfileFormFields.Avatar)
+      .statusChanges.subscribe(_ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value));
   }
 }
