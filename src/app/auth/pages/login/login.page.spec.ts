@@ -1,17 +1,10 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { ApiClientService } from '@app/core/services/api-client.service';
-import { AuthenticationService } from '@app/core/services/authentication.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { ApiClientServiceMock, StorageManagerMock } from 'src/testing/mocks';
-import { ComponentTestingModule } from '../../../../testing/component-testing.module';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ApiClientServiceMock } from 'src/testing/mocks';
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { LoginFormService } from '../../forms/login-form.service';
 import { Credentials } from '../../interfaces/credentials';
@@ -26,8 +19,7 @@ describe('LoginPage', () => {
     TestBed.configureTestingModule({
       declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent],
       imports: [
-        TranslateModule.forRoot(),
-        IonicModule.forRoot(),
+        ...ROOT_MODULES,
         ComponentTestingModule,
       ],
       providers: [

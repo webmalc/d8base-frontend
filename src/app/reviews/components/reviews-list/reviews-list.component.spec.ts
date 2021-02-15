@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { ComponentTestingModule } from '../../../../testing/component-testing.module';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { ReviewsListComponent } from './reviews-list.component';
 
 describe('ReviewsListComponent', () => {
@@ -14,6 +14,7 @@ describe('ReviewsListComponent', () => {
       TestBed.configureTestingModule({
         declarations: [ReviewsListComponent],
         imports: [
+          ...ROOT_MODULES,
           ComponentTestingModule,
         ],
         providers: [

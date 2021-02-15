@@ -1,15 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { SharedModule } from '@app/shared/shared.module';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
-import { ComponentTestingModule } from '../../../../testing/component-testing.module';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { EditReviewCommentComponent } from './edit-review-comment.component';
 
 describe('EditReviewCommentComponent', () => {
@@ -22,8 +14,7 @@ describe('EditReviewCommentComponent', () => {
       TestBed.configureTestingModule({
         declarations: [EditReviewCommentComponent],
         imports: [
-          IonicModule.forRoot(),
-          TranslateModule.forRoot(),
+          ...ROOT_MODULES,
           ComponentTestingModule,
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
