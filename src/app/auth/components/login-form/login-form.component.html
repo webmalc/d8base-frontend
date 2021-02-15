@@ -1,13 +1,16 @@
-<form *ngIf="loginFormService.form" [formGroup]="loginFormService.form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()">
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()">
+  <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
   <ion-item>
     <ion-label color="medium" position="floating">{{ 'login-form.login' | translate }}</ion-label>
     <ion-input type="text" name="email" [formControlName]="formFields.Username"></ion-input>
   </ion-item>
+  <app-form-control-error [controlName]="formFields.Username"> </app-form-control-error>
   <ion-item>
     <ion-label color="medium" position="floating">{{ 'login-form.password' | translate }}</ion-label>
     <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
   </ion-item>
-  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="loginFormService?.isFormValid()">{{
+  <app-form-control-error [controlName]="formFields.Password"> </app-form-control-error>
+  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="form.invalid">{{
     'login-form.sign-in' | translate
   }}</ion-button>
   <ion-button
