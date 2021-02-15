@@ -4,50 +4,18 @@ import { Profile } from '@app/api/models';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 
 @Injectable({
-    providedIn: 'root',
-  },
-)
+  providedIn: 'root',
+})
 export class ProfileFormService {
-
-  constructor(private readonly formBuilder: FormBuilder) {
-  }
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   public createForm(user: Profile): FormGroup {
     return this.formBuilder.group({
-        [ProfileFormFields.FirstName]: [
-          user.first_name, [
-            Validators.required,
-            Validators.minLength(1),
-            Validators.maxLength(20),
-          ],
-        ],
-        [ProfileFormFields.LastName]: [
-          user.last_name,
-          [
-            Validators.required,
-            Validators.minLength(1),
-            Validators.maxLength(20),
-          ],
-        ],
-        [ProfileFormFields.Patronymic]: [
-          user.patronymic,
-          [
-            Validators.minLength(1),
-            Validators.maxLength(20),
-          ],
-        ],
-        [ProfileFormFields.Email]: [
-          user.email,
-          [
-            Validators.required,
-            Validators.email,
-          ],
-        ],
-        [ProfileFormFields.Gender]: [
-          user.gender?.toString(),
-          [Validators.required],
-        ],
-      },
-    );
+      [ProfileFormFields.FirstName]: [user.first_name, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      [ProfileFormFields.LastName]: [user.last_name, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      [ProfileFormFields.Patronymic]: [user.patronymic, [Validators.minLength(1), Validators.maxLength(20)]],
+      [ProfileFormFields.Email]: [user.email, [Validators.required, Validators.email]],
+      [ProfileFormFields.Gender]: [user.gender?.toString()],
+    });
   }
 }

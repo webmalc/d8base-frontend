@@ -11,7 +11,6 @@ import { HelperService } from '@app/core/services/helper.service';
   styleUrls: ['./password-recovery-form.component.scss'],
 })
 export class PasswordRecoveryFormComponent implements OnInit {
-
   public errorMessages: string[];
   public successMessages: string[];
   public readonly formFields = PasswordRecoveryFormFields;
@@ -19,8 +18,7 @@ export class PasswordRecoveryFormComponent implements OnInit {
   constructor(
     public readonly formService: PasswordRecoveryFormService,
     private readonly passwordRecoveryService: PasswordRecoveryService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.formService.initForm();
@@ -29,9 +27,15 @@ export class PasswordRecoveryFormComponent implements OnInit {
   public recover(): any {
     this.errorMessages = null;
     this.successMessages = null;
-    this.passwordRecoveryService.recover(this.formService.form.getRawValue()).subscribe(
-      next => this.successMessages = ['password-recovery.link-sent'],
-      (err: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error),
+    const email = this.formService.form.getRawValue();
+    this.formService.form.reset();
+    this.passwordRecoveryService.recover(email).subscribe(
+      () => {
+        this.successMessages = ['password-recovery.link-sent'];
+      },
+      (err: HttpErrorResponse) => {
+        this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error);
+      },
     );
   }
 }
