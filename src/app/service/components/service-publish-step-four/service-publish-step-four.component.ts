@@ -1,11 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { RegistrationService } from '@app/auth/services/registration.service';
-import { Master } from '@app/core/models/master';
-import { User } from '@app/core/models/user';
-import { UserLocation } from '@app/core/models/user-location';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
@@ -21,8 +16,7 @@ import { Reinitable } from '@app/shared/abstract/reinitable';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { IonContent } from '@ionic/angular';
-import { plainToClass } from 'class-transformer';
-import { BehaviorSubject, combineLatest, forkJoin, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
 import ServicePublishStepFourContext from './service-publish-step-four-context.interface';
 
@@ -59,7 +53,7 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
       authenticationService.isAuthenticated$,
       this.isUserExists$,
     ]).pipe(
-      map(([isAuthenticated, isUserExists]) => ({isAuthenticated, isUserExists})),
+      map(([isAuthenticated, isUserExists]) => ({ isAuthenticated, isUserExists })),
     );
   }
 
@@ -86,40 +80,22 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
           username: this.formService.form.get(this.formFields.Email).value,
           password: this.formService.form.get(this.formFields.Password).value,
         },
-      ).subscribe(
-        _ => forkJoin({
-          masterList: this.masterManager.getMasterList(),
-          user: this.userManager.getCurrentUser(),
-        }).subscribe(({ user, masterList }) => {
-          this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-            ServicePublishSteps.Four, { isNewMaster: (masterList as Master[]).length === 0, user, isNewUser: false },
-          ).then(
-            () => this.serviceStepsNavigationService.next(),
-          );
-        }),
       );
     } else {
       const country = this.formService.form.get(this.formFields.Country).value as Country;
       const city = this.formService.form.get(this.formFields.City).value as City;
       this.registrationService.register(
-        plainToClass(User, this.formService.form.getRawValue(), { excludeExtraneousValues: true }),
-        plainToClass(UserLocation, {
-          country: country.id,
-          city: city.id,
-          is_default: true,
-        }),
-      ).subscribe(
-        user => {
-          this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-            ServicePublishSteps.Four, { isNewMaster: true, user, isNewUser: true, country, city },
-          ).then(() => this.serviceStepsNavigationService.next());
-        },
-        (err: HttpErrorResponse) => {
-          this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error);
-          this.content.scrollToTop();
+        this.formService.form.getRawValue(),
+        {
+          location: {
+            country: country.id,
+            city: city.id,
+            is_default: true,
+          },
         },
       );
     }
+    this.serviceStepsNavigationService.next();
   }
 
   public isSubmitDisabled(): boolean {
@@ -145,7 +121,7 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
 
   protected init(): void {
     this.authenticationService.isAuthenticated$.pipe(first(), filter(val => true === val)).subscribe(
-      () => this.masterManager.isMaster().pipe(filter(val => true === val)).subscribe(
+      () => this.masterManager.isMaster$.pipe(filter(val => true === val)).subscribe(
         () => this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
           () => this.userManager.getCurrentUser().subscribe(
             user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(

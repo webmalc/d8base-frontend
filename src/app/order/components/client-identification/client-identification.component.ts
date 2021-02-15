@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
-import { User } from '@app/core/models/user';
-import { UserLocation } from '@app/core/models/user-location';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
 import { passwordValidators } from '@app/core/validators/password-validators';
@@ -11,9 +10,10 @@ import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { OrderWizardStateService } from '@app/order/services';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { plainToClass } from 'class-transformer';
+import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 
 const NEXT_STEP_ID = OrderIds.Location;
 
@@ -38,6 +38,9 @@ export class ClientIdentificationComponent {
   });
   public isRegistered;
   public showRegistrationForm = false;
+
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
 
   constructor(
     public readonly countrySelectable: SelectableCountryOnSearchService,
@@ -68,9 +71,8 @@ export class ClientIdentificationComponent {
       return;
     }
 
-    let request: Observable<any>;
     if (this.isRegistered) {
-      request = this.authenticator.login({
+      this.authenticator.login({
         username: this.email.value,
         password: this.password.value,
       });
@@ -84,11 +86,12 @@ export class ClientIdentificationComponent {
       const locationData = {
         country: this.country.value.id,
       };
-      const user = plainToClass(User, userData, { excludeExtraneousValues: true });
-      const userLocation = plainToClass(UserLocation, locationData, { excludeExtraneousValues: true });
-      request = this.registrar.register(user, userLocation);
+      this.registrar.register(userData, { location: locationData });
     }
-    request.pipe(switchMap(() => this.context$)).subscribe(context =>
+    this.profile$.pipe(
+      first(x => !!x),
+      switchMap(() => this.context$),
+    ).subscribe(context =>
       this.router.navigate(['/', 'order', context.service.id, NEXT_STEP_ID]));
   }
 

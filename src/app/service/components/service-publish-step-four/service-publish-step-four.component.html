@@ -2,9 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <ng-container *ngIf="context$ | async as context; else loading">
-      <ion-item lines="none" class="fs18" *ngIf="errorMessages?.length">
-        <error-flashbag [messages]="errorMessages"></error-flashbag>
-      </ion-item>
+      <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
       <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
         <ion-item lines="none" class="fs18">
           <ion-text>

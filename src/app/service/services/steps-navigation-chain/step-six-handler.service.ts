@@ -3,7 +3,7 @@ import { MasterManagerService } from '@app/core/services/master-manager.service'
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepSixHandlerService extends AbstractHandler {
@@ -25,7 +25,8 @@ export class StepSixHandlerService extends AbstractHandler {
   }
 
   private handle(handler: () => Observable<number>): Observable<number> {
-    return this.masterManager.isMaster().pipe(
+    return this.masterManager.isMaster$.pipe(
+      first(),
       switchMap(
         isMaster => isMaster ? this.masterManager.getMasterList().pipe(
           switchMap(list => list.length !== 0 ? handler() : of(this.getIndex())),

@@ -1,22 +1,25 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { HTTP_UNAUTHORIZED } from '@app/core/constants/http.constants';
-import { AuthenticationService } from '@app/core/services';
+import { RefreshTokens } from '@app/store/current-user/current-user.actions';
+import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
-import { Observable, throwError } from 'rxjs';
-import { catchError, finalize, share, switchMap } from 'rxjs/operators';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
+import { Select } from '@ngxs/store';
+import { concat, Observable, throwError } from 'rxjs';
+import { catchError, distinct, filter, finalize, first, ignoreElements, share, switchMap, take, tap } from 'rxjs/operators';
 
 /**
  *  Tries to refresh auth token if it has expired
  */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private refresh$: Observable<void> | null = null;
 
-  constructor(
-    private readonly authenticator: AuthenticationService,
-  ) {
-  }
+  @Select(CurrentUserSelectors.tokens)
+  public readonly tokens$: Observable<AuthResponseInterface>;
+
+  private refresh$: Observable<never>;
 
   public intercept(
     request: HttpRequest<any>,
@@ -26,11 +29,12 @@ export class AuthInterceptor implements HttpInterceptor {
     const handleRequestErrors = () =>
       next.handle(request).pipe(
         catchError(error =>
-          this.authenticator.isAuthenticated$.pipe(
-            switchMap(isAuthenticated =>
+          this.tokens$.pipe(
+            first(),
+            switchMap(tokens =>
               (
                 error.status === HTTP_UNAUTHORIZED &&
-                isAuthenticated &&
+                tokens?.access_token &&
                 !forceRefresh
               ) ? this.intercept(request, next, true)
                 : throwError(error),
@@ -41,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
     if ((forceRefresh) && !this.refresh$) {
-      this.refresh$ = this.authenticator.refresh().pipe(
+      this.refresh$ = this.refresh().pipe(
         finalize(() => (this.refresh$ = null)),
         share(),
       );
@@ -49,8 +53,31 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return !this.refresh$ || request.url.endsWith(environment.backend.refresh)
       ? handleRequestErrors()
-      : this.refresh$.pipe(
-        switchMap(() => handleRequestErrors()),
-      );
+      : concat(this.refresh$, handleRequestErrors());
+  }
+
+  /**
+   * Calls the RefreshTokens action
+   * Returns a new Observable, which completes when tokens$ change
+   */
+  private refresh(): Observable<never> {
+    let firstRun = true;
+    return this.tokens$.pipe(
+      filter(x => !!x),
+      distinct(),
+      take(2),
+      tap(() => {
+        if (firstRun) {
+          firstRun = false;
+          this.refreshTokens();
+        }
+      }),
+      ignoreElements(),
+    );
+  }
+
+  @Dispatch()
+  private refreshTokens(): RefreshTokens {
+    return new RefreshTokens();
   }
 }

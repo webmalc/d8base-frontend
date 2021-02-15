@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MainGuard } from '@app/core/guards/main.guard';
-import { TokenManagerService } from '@app/core/services/token-manager.service';
 import {
   AddButtonComponent,
   ClientWidgetComponent,
@@ -187,7 +186,6 @@ import { NumberDirective } from './directives/number.directive';
   ],
   providers: [
     MainGuard,
-    TokenManagerService,
     ContactsTabFormService,
     SelectableCityOnSearchService,
     SelectableCountryOnSearchService,

@@ -1,5 +1,5 @@
-<div class="error-flash" *ngIf="messages && messages.length">
-  <div id="error-text" *ngFor="let mes of messages">
-    {{mes | translate}}
-  </div>
-</div>
+<ion-item lines="none" color="danger" *ngIf="messages && messages.length">
+  <ion-text>
+    <div *ngFor="let mes of messages">{{ mes | translate }}</div>
+  </ion-text>
+</ion-item>

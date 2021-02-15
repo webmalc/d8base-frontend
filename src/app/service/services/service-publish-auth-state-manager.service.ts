@@ -5,6 +5,7 @@ import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { first } from 'rxjs/operators';
 
 @Injectable()
 export class ServicePublishAuthStateManagerService {
@@ -18,7 +19,7 @@ export class ServicePublishAuthStateManagerService {
 
   public updateFourStepState(): void {
     if (!this.servicePublishDataHolder.isset(ServicePublishSteps.Four)) {
-      this.masterManager.isMaster().subscribe(
+      this.masterManager.isMaster$.pipe(first()).subscribe(
         isMaster => isMaster ? this.masterManager.getMasterList().subscribe(
           masterList => this.update((masterList as Master[]).length === 0),
         ) : this.update(true),

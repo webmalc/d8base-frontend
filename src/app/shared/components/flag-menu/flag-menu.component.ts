@@ -16,6 +16,7 @@ export class FlagMenuComponent {
 
   public country$: Observable<Country>;
   public darkTheme$: Observable<boolean>;
+
   public currencyList$: Observable<Currency[]>;
 
   constructor(

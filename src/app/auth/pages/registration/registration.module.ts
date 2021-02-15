@@ -9,7 +9,6 @@ import { CityPickerPopoverComponent } from '@app/auth/components/city-picker-pop
 import { RegistrationFormComponent } from '@app/auth/components/registration-form/registration-form.component';
 import { RegistrationFormService } from '@app/auth/forms/registration-form.service';
 import { RegistrationService } from '@app/auth/services/registration.service';
-import { TokenManagerService } from '@app/core/services/token-manager.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
@@ -33,7 +32,6 @@ import { RegistrationPage } from './registration.page';
     CityPickerPopoverComponent,
   ],
   providers: [
-    TokenManagerService,
     RegistrationFormService,
     RegistrationService,
   ],

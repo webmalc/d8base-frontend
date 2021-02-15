@@ -6,17 +6,6 @@
         <b>{{ 'service-publish.final-step.title' | translate }}</b>
       </ion-text>
     </ion-item>
-    <app-info-row class="ion-margin-bottom">
-      {{ 'service-publish.final-step.first-info-row' | translate }}
-    </app-info-row>
-
-    <app-abstract-contacts
-      *ngIf="!isNewMaster()"
-      [interactable]="true"
-      [addNewContactUrl]="contactAddUrl"
-      [editContactUrl]="contactEditUrl"
-      [editDefaultContactUrl]="contactAddDefaultUrl"
-    ></app-abstract-contacts>
 
     <ion-grid>
       <ion-row>

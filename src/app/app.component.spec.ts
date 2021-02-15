@@ -1,13 +1,12 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { DarkModeService, TranslationService } from '@app/core/services';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
-import { IonicStorageModule, Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule } from '../testing/component-testing.module';
 import { AppComponent } from './app.component';
 import { StorageManagerService } from './core/proxies/storage-manager.service';
 
@@ -31,7 +30,10 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [RouterTestingModule, IonicStorageModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
+      imports: [
+        TranslateModule.forRoot(),
+        ComponentTestingModule,
+      ],
       providers: [
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
@@ -70,7 +72,7 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     compiled.querySelectorAll('ion-select ion-select-option').forEach(
       (elem: Element) => {
-        expect(trans.getLanguagesAsArray()).toContain(elem.innerHTML.trim());
+        expect(['ru', 'en']).toContain(elem.innerHTML.trim());
       },
     );
   });

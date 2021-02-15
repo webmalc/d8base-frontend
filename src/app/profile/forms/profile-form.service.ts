@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '@app/core/models/user';
+import { Profile } from '@app/api/models';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
-import { Language } from '@app/profile/models/language';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +12,7 @@ export class ProfileFormService {
   constructor(private readonly formBuilder: FormBuilder) {
   }
 
-  public createForm(user: User): FormGroup {
+  public createForm(user: Profile): FormGroup {
     return this.formBuilder.group({
         [ProfileFormFields.FirstName]: [
           user.first_name, [

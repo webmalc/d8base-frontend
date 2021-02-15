@@ -9,12 +9,11 @@ import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { LocationService } from '@app/core/services/location/location.service';
-import { TokenManagerService } from '@app/core/services/token-manager.service';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { LocationServiceMock, StorageManagerMock, TokenManagerServiceMock } from 'src/testing/mocks';
+import { LocationServiceMock, StorageManagerMock } from 'src/testing/mocks';
 import { ServicePublishStepFourFormService } from '../../forms/service-publish-step-four-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -65,7 +64,6 @@ describe('ServicePublishStepFourComponent', () => {
         IpDataService,
         IpnfDataService,
         { provide: LocationService, useClass: LocationServiceMock },
-        { provide: TokenManagerService, useClass: TokenManagerServiceMock },
         SelectableCountryOnSearchService,
         SelectableCityOnSearchService,
       ],

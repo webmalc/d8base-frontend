@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
-import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
 import { Observable, of } from 'rxjs';
@@ -27,8 +26,7 @@ export class StepFiveHandlerService extends AbstractHandler {
   }
 
   private handle(handler: () => Observable<number>): Observable<number> {
-    if ((this.servicePublishDataHolderService.isset(ServicePublishSteps.Four) &&
-      !this.servicePublishDataHolderService.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewUser) ||
+    if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Four) &&
       !this.servicePublishDataHolderService.isset(ServicePublishSteps.Four)) {
       return handler();
     }

@@ -17,5 +17,4 @@ export default interface ServicePublishData {
   serviceLocation: ServiceLocation;
   masterLocation: MasterLocation;
   servicePrice: Price;
-  user?: User;
 }

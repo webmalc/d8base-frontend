@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractReadonlyApiService } from '@app/core/abstract/abstract-readonly-api.service';
+import { coordinatesToString } from '@app/core/functions/location.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { UserLocation } from '@app/core/models/user-location';
 import { ApiClientService } from '@app/core/services/api-client.service';
@@ -40,7 +41,7 @@ export class CitiesApiService extends AbstractReadonlyApiService<City> {
   public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
     return this.client.get<ApiListResponseInterface<City>>(this.url, {
       dist: dist.toString(10),
-      point: `${location.coordinates.coordinates[1]},${location.coordinates.coordinates[0]}`,
+      point: coordinatesToString(location.coordinates),
     }).pipe(
       map(result => {
         result.results = plainToClass(City, result.results);

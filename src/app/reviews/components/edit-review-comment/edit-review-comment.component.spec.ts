@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule } from '../../../../testing/component-testing.module';
 import { EditReviewCommentComponent } from './edit-review-comment.component';
 
 describe('EditReviewCommentComponent', () => {
@@ -21,14 +23,10 @@ describe('EditReviewCommentComponent', () => {
         declarations: [EditReviewCommentComponent],
         imports: [
           IonicModule.forRoot(),
-          HttpClientTestingModule,
-          RouterTestingModule,
-          ReactiveFormsModule,
-          FormsModule,
           TranslateModule.forRoot(),
-          SharedModule,
+          ComponentTestingModule,
         ],
-        providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();
       router = TestBed.inject(Router);
       spyOn(router, 'getCurrentNavigation').and.returnValue({ extras: { state: { review: null } } } as any);

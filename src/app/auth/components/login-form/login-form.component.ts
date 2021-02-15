@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Credentials } from '@app/auth/interfaces/credentials';
 import { LoginFormFields } from '../../enums/login-form-fields';
@@ -11,13 +11,11 @@ import { LoginFormService } from '../../forms/login-form.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  @Input() public errorMessages: string[];
   public readonly formFields = LoginFormFields;
   @Output() public readonly user = new EventEmitter<Credentials>();
 
   constructor(
     public readonly loginFormService: LoginFormService,
-    private readonly router: Router,
   ) {
   }
 
@@ -35,9 +33,5 @@ export class LoginFormComponent implements OnInit {
       password: data[LoginFormFields.Password],
     };
     this.user.emit(credentials);
-  }
-
-  public onForgotPassword(): void {
-    this.router.navigateByUrl('/auth/password-recover');
   }
 }

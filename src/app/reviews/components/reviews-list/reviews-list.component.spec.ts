@@ -1,13 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { SharedModule } from '@app/shared/shared.module';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule } from '../../../../testing/component-testing.module';
 import { ReviewsListComponent } from './reviews-list.component';
 
 describe('ReviewsListComponent', () => {
@@ -18,9 +13,10 @@ describe('ReviewsListComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ReviewsListComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot(), SharedModule, RouterTestingModule],
+        imports: [
+          ComponentTestingModule,
+        ],
         providers: [
-          { provide: StorageManagerService, useClass: StorageManagerMock },
           {
             provide: ActivatedRoute,
             useValue: {
@@ -28,6 +24,7 @@ describe('ReviewsListComponent', () => {
             },
           },
         ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ReviewsListComponent);

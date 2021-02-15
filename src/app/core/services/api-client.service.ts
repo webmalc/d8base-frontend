@@ -18,6 +18,7 @@ export class ApiClientService {
 
   public post<T, V>(url: string, data: V): Observable<T>;
   public post<T>(url: string, data: T): Observable<T> {
+    console.log('post')
     return this.http.post<T>(this.getHost() + url, data);
   }
 

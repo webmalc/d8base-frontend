@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { User } from '@app/core/models/user';
+import { Profile } from '@app/api/models';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderClientDetailsFormFields } from '@app/order/enums/order-client-details-form';
@@ -77,7 +77,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     this.userManager
       .getCurrentUser()
       .pipe(takeUntil(this.ngDestroy$))
-      .subscribe((user: User) => {
+      .subscribe((user: Profile) => {
         this.currentUserForm = this.userFields.reduce(
           (allFields, currentField) => ({
             ...allFields,
