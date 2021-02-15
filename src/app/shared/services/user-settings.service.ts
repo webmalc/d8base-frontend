@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { UserSettings } from '@app/core/models/user-settings';
-import { ChangeUserSettings } from '@app/store/current-user/current-user.actions';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import { UserSettings } from '@app/api/models';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -17,9 +17,9 @@ export class UserSettingsService {
 
   public readonly userSettings$: Observable<UserSettings>;
 
-  public langList = ['en', 'ru'];
-  public currencyList = ['CAD', 'EUR', 'RUB', 'USD'];
-  public unitsList = [0, 1];
+  public langList: Array<UserSettings['language']> = ['en', 'ru'];
+  public currencyList: Array<UserSettings['currency']> = ['CAD', 'EUR', 'RUB', 'USD'];
+  public unitsList: Array<UserSettings['units']> = [0, 1];
 
   constructor() {
     this.userSettings$ = this.settings$.pipe(
@@ -29,17 +29,17 @@ export class UserSettingsService {
   }
 
   @Dispatch()
-  public setCurrency(currency: 'CAD' | 'EUR' | 'RUB' | 'USD'): ChangeUserSettings {
-    return new ChangeUserSettings({ currency });
+  public setCurrency(currency: UserSettings['currency']): CurrentUserActions.ChangeUserSettings {
+    return new CurrentUserActions.ChangeUserSettings({ currency });
   }
 
   @Dispatch()
-  public setLanguage(language: 'en' | 'ru'): ChangeUserSettings {
-    return new ChangeUserSettings({ language });
+  public setLanguage(language: UserSettings['language']): CurrentUserActions.ChangeUserSettings {
+    return new CurrentUserActions.ChangeUserSettings({ language });
   }
 
   @Dispatch()
-  public setUnits(units: 0 | 1): ChangeUserSettings {
-    return new ChangeUserSettings({ units });
+  public setUnits(units: UserSettings['units']): CurrentUserActions.ChangeUserSettings {
+    return new CurrentUserActions.ChangeUserSettings({ units });
   }
 }

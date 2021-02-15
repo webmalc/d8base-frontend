@@ -2,8 +2,8 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { HTTP_UNAUTHORIZED } from '@app/core/constants/http.constants';
-import { RefreshTokens } from '@app/store/current-user/current-user.actions';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
@@ -77,7 +77,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   @Dispatch()
-  private refreshTokens(): RefreshTokens {
-    return new RefreshTokens();
+  private refreshTokens(): CurrentUserActions.RefreshTokens {
+    return new CurrentUserActions.RefreshTokens();
   }
 }

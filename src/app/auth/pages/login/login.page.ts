@@ -4,10 +4,10 @@ import { Profile } from '@app/api/models';
 import { Credentials } from '@app/auth/interfaces/credentials';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { Country } from '@app/profile/models/country';
-import { UpdateProfile } from '@app/store/current-user/current-user.actions';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
@@ -25,7 +25,7 @@ export class UserManagerService {
   }
 
   @Dispatch()
-  public updateUser(profile: Partial<Profile>): UpdateProfile {
-    return new UpdateProfile(profile);
+  public updateUser(profile: Partial<Profile>): CurrentUserActions.UpdateProfile {
+    return new CurrentUserActions.UpdateProfile(profile);
   }
 }

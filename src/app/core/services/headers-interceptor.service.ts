@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';

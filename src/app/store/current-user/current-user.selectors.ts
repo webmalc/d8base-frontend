@@ -1,10 +1,10 @@
-import { ProfessionalList, Profile, User, UserSettings } from '@app/api/models';
+import { ProfessionalList, Profile, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { Selector } from '@ngxs/store';
 import { CurrentUserStateModel } from './current-user-state.model';
 import { CurrentUserState } from './current-user.state';
 
-export class CurrentUserSelectors {
+export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static isMaster(data: CurrentUserStateModel): boolean {
     return data.profile?.account_type === 'professional';

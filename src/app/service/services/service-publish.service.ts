@@ -19,7 +19,7 @@ import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePhoto } from '@app/service/models/service-photo';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { finalize, first, map, switchMap, tap } from 'rxjs/operators';

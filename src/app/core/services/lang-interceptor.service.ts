@@ -1,8 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserSettings } from '@app/api/models';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';

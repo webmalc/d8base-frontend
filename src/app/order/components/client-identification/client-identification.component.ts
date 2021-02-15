@@ -10,7 +10,7 @@ import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { OrderWizardStateService } from '@app/order/services';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';

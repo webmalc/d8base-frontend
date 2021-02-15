@@ -6,7 +6,7 @@ import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterApiService } from '@app/master/services/master-api.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
-import { CurrentUserSelectors } from '@app/store/current-user/current-user.selectors';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
