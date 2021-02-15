@@ -35,9 +35,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.countryCode$ = this.isAuthenticated$.pipe(switchMap(
-    //   isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry()),
-    // ), map(c => c.code.toLowerCase()));
+    this.countryCode$ = this.isAuthenticated$.pipe(switchMap(
+      isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry()),
+    ), map(c => c.code.toLowerCase()));
   }
 
   public isDesktop(): boolean {

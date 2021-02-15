@@ -76,10 +76,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    // this.platform.ready().then(async () => {
-    //   await this.notificationWorker.init();
-    //   await this.notificationWorker.requestPermission();
-    //   this.fcmDevice.subscribeToAuth();
-    // });
+    this.platform.ready().then(async () => {
+      await this.notificationWorker.init();
+      await this.notificationWorker.requestPermission();
+      this.fcmDevice.subscribeToAuth();
+    });
   }
 }
