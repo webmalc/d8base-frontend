@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Profile } from '@app/api/models';
-import { Country } from '@app/profile/models/country';
+import { Profile, UserLocation } from '@app/api/models';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 @Injectable({
@@ -14,11 +13,10 @@ import { first } from 'rxjs/operators';
 export class UserManagerService {
 
   @Select(CurrentUserSelectors.profile)
-  public profile$: Observable<any>;
+  public profile$: Observable<Profile>;
 
-  public getDefaultUserCountry(): Observable<Country> {
-    return of(null); // TODO is it needed?
-  }
+  @Select(CurrentUserSelectors.defaultLocation)
+  public defaultLocation$: Observable<UserLocation>;
 
   public getCurrentUser(): Observable<Profile> {
     return this.profile$.pipe(first());

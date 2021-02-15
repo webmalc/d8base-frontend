@@ -1,5 +1,6 @@
-import { ProfessionalList, Profile, UserSettings } from '@app/api/models';
+import { ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { defaultLocation } from '@app/store/current-user/current-user.constants';
 import { Selector } from '@ngxs/store';
 import { CurrentUserStateModel } from './current-user-state.model';
 import { CurrentUserState } from './current-user.state';
@@ -23,6 +24,11 @@ export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static professional(data: CurrentUserStateModel): ProfessionalList | null {
     return data.professionals[0];
+  }
+
+  @Selector([CurrentUserState])
+  public static defaultLocation(data: CurrentUserStateModel): UserLocation {
+    return !data.locations ? null : data.locations[0] ?? defaultLocation;
   }
 
   @Selector([CurrentUserState])

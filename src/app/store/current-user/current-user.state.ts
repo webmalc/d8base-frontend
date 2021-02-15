@@ -21,7 +21,6 @@ import { defaultState, guestState } from './current-user.constants';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
-const USER_SETTINGS_STORAGE_KEY = 'user_settings';
 
 @State<CurrentUserStateModel>({
   name: 'currentUser',
@@ -122,7 +121,17 @@ export class CurrentUserState implements NgxsOnInit {
       mergeMap(() => dispatch([
         new CurrentUserActions.LoadSettings(),
         new CurrentUserActions.LoadProfessionals(),
+        new CurrentUserActions.LoadUserLocations(),
       ])),
+    );
+  }
+
+  @Action(CurrentUserActions.LoadUserLocations)
+  public loadUserLocations({ patchState }: StateContext<CurrentUserStateModel>) {
+    return this.api.accountsLocationsList({}).pipe(
+      tap(response => {
+        patchState({ locations: response.results });
+      }),
     );
   }
 

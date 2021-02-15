@@ -2,7 +2,9 @@
   <ion-toolbar>
     <ion-item lines="none">
       <ion-icon name="globe-outline" slot="start"></ion-icon>
-      <ion-label>{{(country$ | async)?.name}}</ion-label>
+      <ion-label>
+        <app-location-viewer type="short" [location]="defaultLocation$ | async"></app-location-viewer>
+      </ion-label>
     </ion-item>
   </ion-toolbar>
 </ion-header>

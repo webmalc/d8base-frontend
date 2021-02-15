@@ -1,6 +1,11 @@
-<ng-container *ngIf="locationText$ | async as locationText; else spinner">
-  {{ locationText }}
+<ng-container *ngIf="type === 'flag'">
+  <span *ngIf="countryCode$ | async" class="flag-icon flag-icon-{{ countryCode$ | async }}"></span>
 </ng-container>
-<ng-template #spinner>
-  <ion-spinner class="spinner" name="dots"></ion-spinner>
-</ng-template>
+
+<ng-container *ngIf="type === 'full' || type === 'short'">
+  <ng-container *ngIf="locationText$ | async as locationText">
+    {{ locationText }}
+  </ng-container>
+</ng-container>
+
+<ion-spinner name="dots" *ngIf="(pending$ | async) === true"></ion-spinner>

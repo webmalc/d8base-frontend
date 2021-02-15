@@ -29,6 +29,10 @@ export class LoadProfile {
   public static readonly type = '[CurrentUser] Load user profile';
 }
 
+export class LoadUserLocations {
+  public static readonly type = '[CurrentUser] Load user locations';
+}
+
 export class LoadProfessionals {
   public static readonly type = '[CurrentUser] Load professionals list';
 }

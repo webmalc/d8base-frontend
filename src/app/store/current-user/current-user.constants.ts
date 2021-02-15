@@ -1,4 +1,4 @@
-import { UserSettings } from '@app/api/models';
+import { UserLocation, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { CurrentUserStateModel } from './current-user-state.model';
 
@@ -7,6 +7,7 @@ export const defaultState: CurrentUserStateModel = {
   tokens: null,
   professionals: null,
   settings: null,
+  locations: null,
   errors: null,
 };
 
@@ -22,7 +23,11 @@ export const defaultSettings: UserSettings = {
   units: 0,
   currency: 'CAD',
   language: 'en',
-  is_last_name_hidden: false,
+};
+
+export const defaultLocation: UserLocation = {
+  country: null,
+  city: null,
 };
 
 export const guestState: CurrentUserStateModel = {
@@ -30,5 +35,6 @@ export const guestState: CurrentUserStateModel = {
   tokens: emptyTokens,
   professionals: [],
   settings: defaultSettings,
+  locations: [],
   errors: [],
 };

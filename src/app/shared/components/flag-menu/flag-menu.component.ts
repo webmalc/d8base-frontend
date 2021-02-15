@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { UserLocation } from '@app/api/models';
 import { Currency } from '@app/core/models/currency';
 import { DarkModeService } from '@app/core/services';
 import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
-import { Country } from '@app/profile/models/country';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-flag-menu',
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class FlagMenuComponent {
 
-  public country$: Observable<Country>;
+  public defaultLocation$: Observable<UserLocation>;
   public darkTheme$: Observable<boolean>;
 
   public currencyList$: Observable<Currency[]>;
@@ -26,7 +27,7 @@ export class FlagMenuComponent {
     currency: CurrencyListApiService,
   ) {
     this.darkTheme$ = darkModeService.darkTheme$;
-    this.country$ = userManager.getDefaultUserCountry();
+    this.defaultLocation$ = userManager.defaultLocation$.pipe(filter(x => !!x));
     this.currencyList$ = currency.getList();
   }
 

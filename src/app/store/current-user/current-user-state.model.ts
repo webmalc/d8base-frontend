@@ -1,4 +1,4 @@
-import { ProfessionalList, Profile, UserSettings } from '@app/api/models';
+import { ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 
 export interface CurrentUserStateModel {
@@ -6,6 +6,7 @@ export interface CurrentUserStateModel {
   tokens: AuthResponseInterface;
   professionals: ProfessionalList[];
   settings: UserSettings;
+  locations: UserLocation[];
 
   errors: string[];
 }
