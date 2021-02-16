@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { Credentials } from '@app/auth/interfaces/credentials';
-import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
-import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
-import { PreLogoutService } from '@app/core/services/pre-logout.service';
-import { TokenManagerService } from '@app/core/services/token-manager.service';
-import { environment } from '@env/environment';
-import { EMPTY, from, Observable, ReplaySubject } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { filter, map, shareReplay } from 'rxjs/operators';
 
 /**
  *  Main authentication service
@@ -19,62 +16,31 @@ import { switchMap, tap } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-  public readonly isAuthenticated$: Observable<boolean>;
+  public isAuthenticated$: Observable<boolean>;
 
-  private readonly isAuthenticatedSubject$ = new ReplaySubject<boolean>(1);
-  private readonly TOKEN_OBTAIN_URL = environment.backend.auth;
-  private readonly TOKEN_REFRESH_URL = environment.backend.refresh;
+  @Select(CurrentUserSelectors.tokens)
+  public readonly tokens$: Observable<AuthResponseInterface>;
 
-  constructor(
-    private readonly tokenManager: TokenManagerService,
-    private readonly client: ApiClientService,
-    private readonly preLogout: PreLogoutService,
-  ) {
-    this.isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
-    this.tokenManager.getAccessToken().then(
-      token => this.isAuthenticatedSubject$.next(Boolean(token)),
+  constructor() {
+    this.isAuthenticated$ = this.tokens$.pipe(
+      filter(tokens => !!tokens),
+      map(tokens => !!tokens.access_token),
+      shareReplay(1),
     );
   }
 
-  public login({ username, password }: Credentials): Observable<void> {
-    return this.client.post<AuthResponseInterface, LoginDataInterface>(this.TOKEN_OBTAIN_URL, {
-      username,
-      password,
-      grant_type: GrantTypes.PasswordGrantType,
-      client_id: environment.client_id,
-      client_secret: environment.client_secret,
-    }).pipe(
-      switchMap(result => from(this.tokenManager.setTokens(result))),
-      tap(() => this.isAuthenticatedSubject$.next(true)),
-    );
+  @Dispatch()
+  public login(credentials: Credentials): CurrentUserActions.Login {
+    return new CurrentUserActions.Login(credentials);
   }
 
-  public logout(): Observable<void> {
-    return from(this.preLogout.run()
-      .then(() => this.tokenManager.clear())
-      .then(() => this.isAuthenticatedSubject$.next(false)));
+  @Dispatch()
+  public logout(): CurrentUserActions.Logout {
+    return new CurrentUserActions.Logout();
   }
 
-  public authenticateWithToken(token: AuthResponseInterface): Promise<void> {
-    return this.tokenManager.setTokens(token).then(_ => this.isAuthenticatedSubject$.next(true));
-  }
-
-  public refresh(): Observable<void> {
-    return new Observable<void>(
-      (subscriber) => {
-        this.tokenManager.getRefreshToken().then(refresh => {
-          const refreshData: RefreshDataInterface = { refresh_token: refresh, grant_type: GrantTypes.RefreshGrantType };
-          this.client.post<AuthResponseInterface, RefreshDataInterface>(this.TOKEN_REFRESH_URL, refreshData).subscribe(
-            (response: AuthResponseInterface) => this.tokenManager.setTokens(response).then(
-              _ => {
-                subscriber.next();
-                subscriber.complete();
-              },
-            ),
-            _ => EMPTY,
-          );
-        }).catch(err => subscriber.error(err));
-      },
-    );
+  @Dispatch()
+  public authenticateWithToken(token: AuthResponseInterface): CurrentUserActions.AuthenticateWithToken {
+    return new CurrentUserActions.AuthenticateWithToken(token);
   }
 }

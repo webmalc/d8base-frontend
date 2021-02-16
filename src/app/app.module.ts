@@ -1,11 +1,10 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router, RouteReuseStrategy } from '@angular/router';
 import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
 import { GeolocationService } from '@app/core/proxies/geolocation.service';
-import { AppInitService } from '@app/core/services/app-init.service';
 import { AuthInterceptor } from '@app/core/services/auth-interceptor.service';
 import { FcmDeviceService } from '@app/core/services/fcm-device.service';
 import { HeadersInterceptor } from '@app/core/services/headers-interceptor.service';
@@ -32,18 +31,15 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from './store/store.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    IonicSelectableModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
+    StoreModule.forRoot(),
     LeafletModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -51,17 +47,16 @@ import { AppComponent } from './app.component';
         useClass: JsonTranslateLoader,
       },
     }),
+    ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    IonicSelectableModule,
     SharedModule,
     ErrorHandlingModule,
-    ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (initService: AppInitService) => () => initService.init(),
-      multi: true,
-      deps: [AppInitService, Sentry.TraceService],
-    },
     StatusBar,
     SplashScreen,
     Title,

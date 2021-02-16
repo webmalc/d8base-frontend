@@ -20,7 +20,7 @@ export class MyOrdersPageComponent {
     route: ActivatedRoute,
   ) {
     this.state$ = combineLatest([
-      masterManager.isMaster$.asObservable(),
+      masterManager.isMaster$,
       route.data,
     ]).pipe(
       map(([isMaster, data]) => ({ isMaster, isInbox: data.isInbox })),

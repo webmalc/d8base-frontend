@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ProfessionalList } from '@app/api/models/professional-list';
-import { Master } from '@app/core/models/master';
-import { User } from '@app/core/models/user';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterLocation } from '@app/master/models/master-location';
 import { MasterSchedule } from '@app/master/models/master-schedule';
-import { TypeOfUser } from '@app/profile/enums/type-of-user';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { FinalStepDataInterface } from '@app/service/interfaces/final-step-data-interface';
 import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
-import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
@@ -41,8 +37,7 @@ export class ServicePublishDataPreparerService {
       service,
       serviceLocation,
       masterLocation,
-      master: this.getMaster(),
-      user: await this.getUser(),
+      master: this.getNewMaster(),
       servicePhotos: await this.getServicePhotos(),
       serviceSchedule: this.getServiceSchedule(),
       masterSchedule: this.getMasterSchedule(),
@@ -95,41 +90,18 @@ export class ServicePublishDataPreparerService {
     return HelperService.clear(service);
   }
 
-  private async getUser(): Promise<User | null> {
-    if (this.servicePublishDataHolder.isset(ServicePublishSteps.Four) &&
-      !this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewUser) {
-      return null;
-    }
-    const stepData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
-    const user = new User();
-    user.first_name = stepData.first_name;
-    user.last_name = stepData.last_name;
-    user.gender = stepData.gender;
-    if (stepData._avatar) {
-      user.avatar = await HelperService.getImgBase64(stepData._avatar);
-    }
-    user.account_type = TypeOfUser.Master;
-
-    return HelperService.clear(user);
-  }
-
-  private getMaster(): ProfessionalList {
-    if (!this.servicePublishDataHolder.getStepData<StepFourDataInterface>(ServicePublishSteps.Four).isNewMaster &&
-      this.servicePublishDataHolder.isset(ServicePublishSteps.Final)
-    ) {
-      return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).master;
-    }
-    const master = new Master();
+  private getNewMaster(): ProfessionalList {
     const stepOneData = this.servicePublishDataHolder.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
     const stepFiveData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
     const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six);
-    master.subcategory = stepOneData.subcategory.id;
-    master.company = stepSixData?.is_company === 'company' ? stepSixData?.company_name : null;
-    master.description = stepSixData?.description;
-    master.name = stepSixData?.name || `${stepFiveData.first_name} ${stepFiveData.last_name}`;
-    master.level = stepSixData?.level;
 
-    return HelperService.clear(master);
+    return {
+      subcategory: stepOneData.subcategory.id,
+      company: stepSixData?.is_company === 'company' ? stepSixData?.company_name : null,
+      description: stepSixData?.description,
+      name: stepSixData?.name || `${stepFiveData.first_name} ${stepFiveData.last_name}`,
+      level: stepSixData?.level,
+    };
   }
 
   private getMasterLocation(): MasterLocation {

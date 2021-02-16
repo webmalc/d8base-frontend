@@ -24,9 +24,9 @@ describe('ErrorFlashbagComponent', () => {
     expect(component).toBeTruthy();
   });
   it('test input', () => {
-    (component as any).messages = ['test'];
+    (component as any).messages = ['AAA-test-ZZZ'];
 
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('div#error-text').innerText).toEqual('test');
+    expect(fixture.nativeElement.querySelector('ion-text>div').innerText).toEqual('AAA-test-ZZZ');
   });
 });

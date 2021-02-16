@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'error-flashbag',
+  selector: 'app-error-flashbag',
   templateUrl: './error-flashbag.component.html',
   styleUrls: ['./error-flashbag.component.scss'],
 })

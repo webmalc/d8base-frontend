@@ -1,6 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-login-form [errorMessages]="errorMessages" (user)="onSubmitLoginForm($event)"></app-login-form>
+    <app-error-flashbag [messages]="errorMessages$ | async"></app-error-flashbag>
+    <app-login-form (user)="onSubmitLoginForm($event)"></app-login-form>
   </app-content-wrapper>
 </ion-content>

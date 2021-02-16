@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '@app/core/models/user';
+import { Profile } from '@app/api/models';
 import { LocationService } from '@app/core/services/location.service';
 import { UserLocationApiService } from '@app/core/services/location/user-location-api.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileFormService } from '@app/profile/forms/profile-form.service';
-import { Language } from '@app/profile/models/language';
 import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Injectable()
@@ -17,7 +16,6 @@ export class ProfileService {
 
   public form: FormGroup;
   public avatarForm: FormGroup;
-  private readonly languages$: BehaviorSubject<Language[]>;
 
   constructor(
     private readonly userManager: UserManagerService,
@@ -71,24 +69,11 @@ export class ProfileService {
     );
   }
 
-  public getLanguages$(): Observable<Language[]> {
-    if (this.languages$) {
-      return this.languages$;
-    }
-
-    return this.languagesApi.getLanguages$();
+  public updateUser(user: Partial<Profile>): void {
+    this.userManager.updateUser(user);
   }
 
-  public updateUser(user: Partial<User>): void {
-    this.userManager.updateUser(user).pipe().subscribe(
-      () => {
-        // TODO: show feedback about operation success
-      },
-      (error) => console.error(error.error),
-    );
-  }
-
-  private getUser$(): Observable<User> {
+  private getUser$(): Observable<Profile> {
     return this.userManager.getCurrentUser();
   }
 }

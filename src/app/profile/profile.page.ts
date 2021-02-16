@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { User } from '@app/core/models/user';
+import { Profile } from '@app/api/models';
 import { UserLocation } from '@app/core/models/user-location';
 import { CountriesApiService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
@@ -28,7 +28,7 @@ export class ProfilePage extends Reinitable {
   public formFields = ProfileFormFields;
   public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
   public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
-  public user: User;
+  public user: Profile;
   public contacts$: Observable<ClientContactInterface[]>;
   public nationality: Country | null;
   public languages: Language[];

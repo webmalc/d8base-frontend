@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { TranslationService } from '@app/core/services';
 import { DarkModeService } from '@app/core/services/dark-mode.service';
 import { FcmDeviceService } from '@app/core/services/fcm-device.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
@@ -10,6 +11,7 @@ import { environment } from '@env/environment';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -37,6 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private readonly notificationWorker: NotificationWorkerService,
     private readonly fcmDevice: FcmDeviceService,
     private readonly userManager: UserManagerService,
+    private readonly translationService: TranslationService, // TODO has to be instantiated
   ) {
     this.darkTheme$ = darkModeService.darkTheme$;
     this.isAuthenticated$ = authenticator.isAuthenticated$;
@@ -69,8 +72,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.userManager.subscribeToAuthSubject();
-      this.masterManager.subscribeToAuth();
     });
   }
 

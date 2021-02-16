@@ -22,10 +22,10 @@ export type FullLocation = {
 };
 
 export interface LocationInterface {
+  address?: null | string;
+  city?: null | number;
+  country?: null | number;
   id?: number;
-  country?: number;
-  city?: number;
-  address?: string;
 }
 
 @Injectable({
@@ -41,18 +41,36 @@ export class FullLocationService {
   ) {
   }
 
-  public getTextLocation(location: LocationInterface): Observable<{ id: number; text: string }> {
+  public getCountryCode(location: LocationInterface): Observable<string> {
+    const countryId = location?.country;
+    return !countryId ? of(null) :
+      this.countriesApi.getByEntityId(countryId).pipe(
+        map(country => country.code),
+        catchError(() => of(null)),
+      );
+  }
+
+  public getTextLocation(
+    location: LocationInterface,
+    shortFormat: boolean = false,
+  ): Observable<{ id: number; text: string }> {
+    if (!location) {
+      return of({
+        id: null,
+        text: null,
+      });
+    }
+
     return this.getFullLocation(location).pipe(
       map(res => {
-        const textLocation = ['country', 'city']
-          .map(key => res?.[key]?.name)
-          .concat(location.address)
-          .filter(value => Boolean(value))
-          .join(', ');
+        let locationElements = ['country', 'city'].map(key => res?.[key]?.name);
+        if (!shortFormat) {
+          locationElements = locationElements.concat(location.address);
+        }
 
         return {
           id: location.id,
-          text: textLocation,
+          text: locationElements.filter(value => Boolean(value)).join(', '),
         };
       }),
     );

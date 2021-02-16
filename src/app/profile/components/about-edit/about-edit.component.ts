@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '@app/core/models/user';
+import { Profile } from '@app/api/models';
 import { CountriesApiService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
@@ -40,7 +40,7 @@ export class AboutEditComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    let user: User;
+    let user: Profile;
     let nationality: Country;
 
     forkJoin({
@@ -72,7 +72,7 @@ export class AboutEditComponent implements OnInit {
     if ((this.form.getRawValue()[this.formFields.Birthday] as string)) {
       date = HelperService.fromDatetime((this.form.getRawValue()[this.formFields.Birthday] as string)).date;
     }
-    const data: Partial<User> = {
+    const data: Partial<Profile> = {
       birthday: date,
       nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id,
     };
@@ -80,7 +80,7 @@ export class AboutEditComponent implements OnInit {
     const newLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[])
       .map(lang => plainToClass(UserLanguage, { language: lang.code }));
 
-    const updateUser$ = this.userManager.updateUser(HelperService.clear(data));
+    const updateUser$ = this.userManager.updateUser(data);
 
     const updateLanguages$ = (this.oldLanguages && this.oldLanguages.length) ?
       this.userLanguageApi.deleteList(this.oldLanguages).pipe(

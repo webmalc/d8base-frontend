@@ -1,5 +1,4 @@
 <form *ngIf="loginFormService.form" [formGroup]="loginFormService.form" (ngSubmit)="submitLoginForm()" (keydown.enter)="submitLoginForm()">
-  <error-flashbag [messages]="errorMessages"></error-flashbag>
   <ion-item>
     <ion-label color="medium" position="floating">{{ 'login-form.login' | translate }}</ion-label>
     <ion-input type="text" name="email" [formControlName]="formFields.Username"></ion-input>
@@ -20,5 +19,5 @@
     routerLinkActive="active"
     >{{ 'login-form.sign-up' | translate }}</ion-button
   >
-  <ion-button expand="block" fill="solid" (click)="onForgotPassword()">{{ 'login-form.forgot-password' | translate }}</ion-button>
+  <ion-button expand="block" fill="solid" routerLink="/auth/password-recover">{{ 'login-form.forgot-password' | translate }}</ion-button>
 </form>

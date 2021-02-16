@@ -128,7 +128,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   public getCityValue(): City {
-    return this.servicePublishDataHolderService.getStepData<StepFourDataInterface>(ServicePublishSteps.Four)?.city;
+    return null; // TODO use current user's city
   }
 
   public onThisPageDataChange(): void {

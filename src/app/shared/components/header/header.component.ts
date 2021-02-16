@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserLocation } from '@app/api/models';
 import { AuthenticationService, MasterManagerService } from '@app/core/services';
 import { UserManagerService } from '@app/core/services/user-manager.service';
-import { Country } from '@app/profile/models/country';
 import { MenuController, Platform } from '@ionic/angular';
-import { combineLatest, Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import HeaderContext from './header-context.interface';
 
 @Component({
@@ -12,16 +12,16 @@ import HeaderContext from './header-context.interface';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  public countryCode$: Observable<string>;
+export class HeaderComponent {
   public context$: Observable<HeaderContext>;
+  public defaultLocation$: Observable<UserLocation>;
 
   private readonly isAuthenticated$: Observable<boolean>;
 
   constructor(
     private readonly platform: Platform,
     private readonly menuController: MenuController,
-    private readonly userManager: UserManagerService,
+    userManager: UserManagerService,
     authenticator: AuthenticationService,
     masterManager: MasterManagerService,
   ) {
@@ -32,12 +32,7 @@ export class HeaderComponent implements OnInit {
     ]).pipe(
       map(([isAuthenticated, isMaster]) => ({isAuthenticated, isMaster})),
     );
-  }
-
-  public ngOnInit(): void {
-    this.countryCode$ = this.isAuthenticated$.pipe(switchMap(
-      isAuth => isAuth ? this.userManager.getDefaultUserCountry() : of(this.getTemporaryDefaultCountry()),
-    ), map(c => c.code.toLowerCase()));
+    this.defaultLocation$ = userManager.defaultLocation$.pipe(filter(x => !!x));
   }
 
   public isDesktop(): boolean {
@@ -54,12 +49,5 @@ export class HeaderComponent implements OnInit {
         menu.disabled = !menu.disabled;
       }
     });
-  }
-
-  public getTemporaryDefaultCountry(): Country {
-    const model = new Country();
-    model.code = 'ca';
-
-    return model;
   }
 }

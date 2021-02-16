@@ -13,7 +13,7 @@ import * as ErrorMessages from './error-messages';
 const ERROR_TOAST_DURATION_MS = 3000;
 
 function isFiltered(response: HttpErrorResponse): boolean {
-  return !response.url.startsWith(environment.backend.url);
+  return !response.url?.startsWith(environment.backend.url);
 }
 
 /**

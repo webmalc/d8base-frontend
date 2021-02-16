@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginFormComponent } from '@app/auth/components/login-form/login-form.component';
 import { LoginFormService } from '@app/auth/forms/login-form.service';
-import { TokenManagerService } from '@app/core/services/token-manager.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,7 +26,6 @@ import { LoginPage } from './login.page';
     LoginFormComponent,
   ],
   providers: [
-    TokenManagerService,
     LoginFormService,
   ],
 })

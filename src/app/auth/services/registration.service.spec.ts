@@ -1,21 +1,22 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { IonicStorageModule } from '@ionic/storage';
+import { DefaultRegisterUser } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
+import { ApiClientService } from '@app/core/services/api-client.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Store } from '@ngxs/store';
 import { of } from 'rxjs';
-import { LocationServiceMock, StorageManagerMock } from 'src/testing/mocks';
-import { User } from '../../core/models/user';
-import { StorageManagerService } from '../../core/proxies/storage-manager.service';
-import { ApiClientService } from '../../core/services/api-client.service';
-import { LocationService } from '../../core/services/location/location.service';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { AuthResponseInterface } from '../interfaces/auth-response.interface';
 import { RegistrationService } from './registration.service';
 
 describe('RegistrationService', () => {
-  const userModel = new User();
-  userModel.first_name = 'name';
-  userModel.last_name = 'lastName';
-  userModel.password = 'pass';
-  userModel.password_confirm = 'pass';
+  const userModel: DefaultRegisterUser = {
+    email: 'user@example.com',
+    first_name: 'name',
+    last_name: 'lastName',
+    password: 'pass',
+    password_confirm: 'pass',
+  };
   const tokenData: AuthResponseInterface = {
     access_token: 'string',
     expires_in: 123,
@@ -26,14 +27,19 @@ describe('RegistrationService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-      IonicStorageModule.forRoot(),
-      HttpClientTestingModule,
+      ...ROOT_MODULES,
+      ComponentTestingModule,
     ],
     providers: [
       RegistrationService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-      { provide: LocationService, useClass: LocationServiceMock },
-      { provide: ApiClientService, useValue: { post: () => of({ token: tokenData, ...userModel }) } },
+      {
+        provide: AccountsService,
+        useValue: {
+          accountsProfileList: () => of([{ id: 1, email: 'tester' }]),
+          accountsRegisterCreate: () => of(tokenData),
+        },
+      },
+      { provide: ApiClientService, useValue: { post: () => of(tokenData) } },
     ],
   }));
 
@@ -44,13 +50,18 @@ describe('RegistrationService', () => {
 
   it('test #register', (done) => {
     const service: RegistrationService = TestBed.inject(RegistrationService);
+    const store: Store = TestBed.inject(Store);
+
+    store.select(CurrentUserSelectors.profile)
+      .subscribe(
+        profile => {
+          // TODO check profile
+          done();
+        },
+      );
+
     service.register(
       userModel,
-    ).subscribe(
-      res => {
-        expect(res).toBeTruthy();
-        done();
-      },
     );
   });
 });

@@ -1,15 +1,17 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { UserSettings } from '@app/api/models';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class LangInterceptorService implements HttpInterceptor {
 
-  constructor(private readonly settings: UserSettingsService) {
-  }
+  @Select(CurrentUserSelectors.settings)
+  public readonly settings$: Observable<UserSettings>;
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     try {
@@ -24,7 +26,7 @@ export class LangInterceptorService implements HttpInterceptor {
       return next.handle(req);
     }
 
-    return this.settings.userSettings$.pipe(
+    return this.settings$.pipe(
       first(),
       switchMap(settings => {
         const url = new URL(req.url);

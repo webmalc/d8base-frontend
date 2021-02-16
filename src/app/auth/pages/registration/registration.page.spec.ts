@@ -3,8 +3,6 @@ import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angu
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { User } from '@app/core/models/user';
-import { UserLocation } from '@app/core/models/user-location';
 import { IpApiService } from '@app/core/services/location/ip-api.service';
 import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
@@ -17,7 +15,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
-import { plainToClass } from 'class-transformer';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { of } from 'rxjs';
 import { RegistrationFormComponent } from '../../components/registration-form/registration-form.component';
@@ -93,16 +90,17 @@ describe('RegistrationPage', () => {
     const user = {
       email: 'test@test.te',
       password: 'test',
+      password_confirm: 'test',
       firstName: 'test',
     };
     const location = {
-      country: 'testCountry',
-      city: 'testCity',
+      country: 1,
+      city: 1,
     };
 
     component.onSubmitRegistrationForm({
-      user: plainToClass(User, user, { excludeExtraneousValues: true }),
-      location: plainToClass(UserLocation, location, { excludeExtraneousValues: true }),
+      user,
+      location,
     });
     flush();
 

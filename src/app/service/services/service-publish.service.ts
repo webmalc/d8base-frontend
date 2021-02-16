@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { ServiceSchedule } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services';
-import { ServiceSchedule } from '@app/api/models';
-import { User } from '@app/core/models/user';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { PricesApiService } from '@app/core/services/prices-api.service';
+import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
+import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
+import { ServicesApiService } from '@app/core/services/services-api.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterLocation } from '@app/master/models/master-location';
 import { MasterSchedule } from '@app/master/models/master-schedule';
@@ -14,17 +17,18 @@ import { Price } from '@app/service/models/price';
 import { Service } from '@app/service/models/service';
 import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePhoto } from '@app/service/models/service-photo';
-import { PricesApiService } from '@app/core/services/prices-api.service';
-import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
-import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
-import { ServicesApiService } from '@app/core/services/services-api.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
 import { forkJoin, from, Observable, of } from 'rxjs';
-import { finalize, map, switchMap } from 'rxjs/operators';
+import { finalize, first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ServicePublishService {
+
+  @Select(CurrentUserSelectors.professional)
+  public professional$: Observable<ProfessionalList>;
 
   constructor(
     private readonly servicePublishDataHolder: ServicePublishDataHolderService,
@@ -57,20 +61,23 @@ export class ServicePublishService {
                         serviceLocation,
                         masterLocation,
                         servicePrice,
-                        user,
                       }: ServicePublishData): Observable<Service> {
     let createdService: Service;
     let createdMaster: ProfessionalList;
 
-    return this.createMasterUpdateUser(master, user).pipe(
-      switchMap((reply) => {
-        createdMaster = reply;
-
-        return this.createService(service, createdMaster);
+    return this.professional$.pipe(
+      tap(professional => {
+        if (!professional) {
+          this.masterManager.createMaster(master);
+        }
+      }),
+      first(x => !!x),
+      switchMap(master => {
+        createdMaster = master;
+        return this.createService(service, master);
       }),
       switchMap(reply => {
         createdService = reply;
-
         return forkJoin({
           photosRet: this.createPhotos(servicePhotos, createdService),
           scheduleRet: this.createSchedule(serviceSchedule, createdService),
@@ -85,19 +92,6 @@ export class ServicePublishService {
         ? this.createServiceLocation(serviceLocation, createdService, masterLocRet)
         : of(null)),
       map(() => createdService),
-    );
-  }
-
-  private createMasterUpdateUser(master: ProfessionalList, user?: User): Observable<ProfessionalList> {
-    if (master.id) {
-      return of(master);
-    }
-
-    return forkJoin({
-      updatedUser: user ? this.userManager.updateUser(user) : of(null),
-      createdMaster: this.masterManager.createMaster(master),
-    }).pipe(
-      map(({ createdMaster }) => createdMaster),
     );
   }
 
