@@ -32,7 +32,6 @@ export class ServicePublishDataPreparerService {
     const serviceLocation = service.service_type !== 'online' ? this.getServiceLocation() : null;
     const masterLocation = service.service_type !== 'online' ? this.getMasterLocation() : null;
 
-
     return {
       service,
       serviceLocation,
@@ -95,7 +94,7 @@ export class ServicePublishDataPreparerService {
     const stepFiveData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
     const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six);
 
-    return {
+    return !this.servicePublishDataHolder.isset(ServicePublishSteps.Five) ? null : {
       subcategory: stepOneData.subcategory.id,
       company: stepSixData?.is_company === 'company' ? stepSixData?.company_name : null,
       description: stepSixData?.description,
