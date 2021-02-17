@@ -1,30 +1,29 @@
+<ion-item color="light">
+  <ion-col class="ion-no-padding">
+    <ion-row class="ion-justify-content-start ion-align-items-center">
+      <ion-item
+        (click)="locationBack()"
+        color="light"
+        class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer"
+        routerDirection="back"
+        routerLinkActive="active"
+      >
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-item>
+      <ion-item class="ion-item-no-border" color="light">
+        {{ 'location-edit-page.address' | translate }}
+      </ion-item>
+    </ion-row>
+  </ion-col>
+</ion-item>
 <ng-container *ngIf="item; else loading">
-  <ion-item color="light">
-    <ion-col class="ion-no-padding">
-      <ion-row class="ion-justify-content-start ion-align-items-center">
-        <ion-item
-          (click)="locationBack()"
-          color="light"
-          class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer"
-          routerDirection="back"
-          routerLinkActive="active"
-        >
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-item>
-        <ion-item class="ion-item-no-border" color="light">
-          {{ 'location-edit-page.address' | translate }}
-        </ion-item>
-      </ion-row>
-    </ion-col>
-  </ion-item>
   <ion-item>
     <ion-label class="label-for-required-input" color="medium" position="floating">
       {{ 'location-edit-page.country' | translate }}
     </ion-label>
     <ionic-selectable
-      (onChange)="onCountryChange()"
       (onSearch)="countrySelectable.onCountrySearch($event)"
-      [(ngModel)]="item.country"
+      [formControl]="form.get(formFields.country)"
       [canSearch]="true"
       itemTextField="name"
       itemValueField="id"
@@ -36,11 +35,9 @@
       {{ 'location-edit-page.region' | translate }}
     </ion-label>
     <ionic-selectable
-      (onChange)="onRegionChange()"
-      (onSearch)="regionSelectable.onRegionSearch($event, this.getRegionValue())"
-      [(ngModel)]="item.region"
+      (onSearch)="regionSelectable.onRegionSearch($event, form.get(formFields.country).value)"
+      [formControl]="form.get(formFields.region)"
       [canSearch]="true"
-      [isEnabled]="isRegionEnabled$ | async"
       itemTextField="name"
       itemValueField="id"
     >
@@ -51,10 +48,9 @@
       {{ 'location-edit-page.subregion' | translate }}
     </ion-label>
     <ionic-selectable
-      (onSearch)="selectableSubregion.onSubregionSearch($event, getCountryValue(), getRegionValue())"
-      [(ngModel)]="item.subregion"
+      (onSearch)="selectableSubregion.onSubregionSearch($event, form.get(formFields.country).value, form.get(formFields.region).value)"
+      [formControl]="form.get(formFields.subregion)"
       [canSearch]="true"
-      [isEnabled]="isSubregionEnabled$ | async"
       itemTextField="name"
       itemValueField="id"
     >
@@ -65,11 +61,9 @@
       {{ 'location-edit-page.city' | translate }}
     </ion-label>
     <ionic-selectable
-      (onChange)="onCityChange()"
-      (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
-      [(ngModel)]="item.city"
+      (onSearch)="citySelectable.onCitySearch($event, form.get(formFields.country).value)"
+      [formControl]="form.get(formFields.city)"
       [canSearch]="true"
-      [isEnabled]="isCityEnabled$ | async"
       itemTextField="name"
       itemValueField="id"
     >
@@ -80,34 +74,34 @@
       {{ 'location-edit-page.district' | translate }}
     </ion-label>
     <ionic-selectable
-      (onSearch)="districtSelectable.onDistrictSearch($event, getCityValue())"
-      [(ngModel)]="item.district"
+      (onSearch)="districtSelectable.onDistrictSearch($event, form.get(formFields.city).value)"
+      [formControl]="form.get(formFields.district)"
       [canSearch]="true"
-      [isEnabled]="isDistrictEnabled$ | async"
       itemTextField="name"
       itemValueField="id"
     >
     </ionic-selectable>
   </ion-item>
-  <app-user-location-map [(ngModel)]="item.coordinates" [clientCoordinates]="item.coordinates?.coordinates"></app-user-location-map>
+  <app-user-location-map [formControl]="form.get(formFields.coordinates)" [clientCoordinates]="item.coordinates?.coordinates">
+  </app-user-location-map>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.postal-code' | translate }}
     </ion-label>
-    <ion-input [(ngModel)]="item.postal_code" name="phone" type="text"> </ion-input>
+    <ion-input [formControl]="form.get(formFields.postal_code)" name="phone" type="text"> </ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.address' | translate }}
     </ion-label>
-    <ion-input [(ngModel)]="item.address" name="first_name" type="text"> </ion-input>
+    <ion-input [formControl]="form.get(formFields.address)" name="first_name" type="text"> </ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.timezone' | translate }}
     </ion-label>
     <ionic-selectable
-      [(ngModel)]="item.timezone"
+      [formControl]="form.get(formFields.timezone)"
       [canSearch]="true"
       [items]="timezoneList$ | async"
       itemTextField="display_name"
@@ -122,7 +116,7 @@
       </ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button (click)="save()" expand="block" fill="solid" size="medium">
+      <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
         {{ 'location-edit-page.save-location' | translate }}
       </ion-button>
     </ion-col>

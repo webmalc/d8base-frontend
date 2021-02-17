@@ -1,10 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Region } from '@app/core/models/region';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from '@app/core/services/helper.service';
 import { TimezoneService } from '@app/core/services/timezone.service';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
@@ -14,20 +12,44 @@ import { SelectableRegionOnSearchService } from '@app/shared/services/selectable
 import { SelectableSubregionOnSearchService } from '@app/shared/services/selectable-subregion-on-search.service';
 import { BehaviorSubject } from 'rxjs';
 
+enum LocationFormFields {
+  country = 'country',
+  region = 'region',
+  subregion = 'subregion',
+  city = 'city',
+  district = 'district',
+  coordinates = 'coordinates',
+  postal_code = 'postal_code',
+  address = 'address',
+  timezone = 'timezone',
+}
+
 @Component({
   selector: 'app-abstract-location-edit',
   templateUrl: './abstract-location-edit.component.html',
   styleUrls: ['./abstract-location-edit.component.scss'],
 })
-export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit {
-
+export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit, OnChanges {
+  public readonly formFields = LocationFormFields;
   @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
-  public timezoneList$: BehaviorSubject<Array<{ value: string; display_name: string }>> =
-    new BehaviorSubject<Array<{ value: string; display_name: string }>>(null);
+  public timezoneList$: BehaviorSubject<Array<{ value: string; display_name: string }>> = new BehaviorSubject<
+    Array<{ value: string; display_name: string }>
+  >(null);
   public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public isRegionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public isSubregionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public isCityEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public form: FormGroup = this.fb.group({
+    [this.formFields.country]: [null, Validators.required],
+    [this.formFields.region]: [{ value: null, disabled: true }],
+    [this.formFields.subregion]: [{ value: null, disabled: true }],
+    [this.formFields.city]: [{ value: null, disabled: true }, Validators.required],
+    [this.formFields.district]: [{ value: null, disabled: true }],
+    [this.formFields.coordinates]: [null],
+    [this.formFields.postal_code]: [null],
+    [this.formFields.address]: [null],
+    [this.formFields.timezone]: [null],
+  });
 
   constructor(
     protected readonly location: Location,
@@ -37,74 +59,55 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
     public readonly regionSelectable: SelectableRegionOnSearchService,
     public readonly selectableSubregion: SelectableSubregionOnSearchService,
     public readonly districtSelectable: SelectableDistrictOnSearchService,
+    public readonly fb: FormBuilder,
   ) {
     super();
   }
 
   public ngOnInit(): void {
-    this.processDisabledFields(this.item);
-    this.timezone.getTimezoneList().subscribe(
-      data => this.timezoneList$.next(data),
-    );
+    this.handleControls();
+    this.timezone.getTimezoneList().subscribe(data => this.timezoneList$.next(data));
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.item) {
+      this.form.patchValue(this.item ?? {});
+    }
   }
 
   public locationBack(): void {
     this.location.back();
   }
 
-  public onCityChange(): void {
-    this.isDistrictEnabled$.next(true);
-  }
-
-  public onRegionChange(): void {
-    this.isSubregionEnabled$.next(true);
-  }
-
-  public onCountryChange(): void {
-    this.isCityEnabled$.next(true);
-    this.isRegionEnabled$.next(true);
-  }
-
-  public getCountryValue(): Country {
-    return this.item?.country as Country;
-  }
-
-  public getRegionValue(): Region {
-    return this.item?.region as Region;
-  }
-
-  public getCityValue(): City {
-    return this.item?.city as City;
-  }
-
   protected transform(data: any): ClientLocationInterface {
-    const model = this.transformFn(data);
-    model.city = data.city?.id ?? undefined;
-    model.country = data.country?.id ?? undefined;
-    model.region = data.region?.id ?? undefined;
-    model.subregion = data.subregion?.id ?? undefined;
-    model.district = data.district?.id ?? undefined;
-    model.timezone = data.timezone?.value ?? undefined;
-    model.is_default = data.is_default?.value ?? undefined;
+    const model = this.transformFn({ ...data, ...this.form.value });
+
+    [this.formFields.country, this.formFields.region, this.formFields.subregion, this.formFields.city, this.formFields.district].forEach(
+      (field: string) => {
+        model[field] = this.form.value[field]?.id ?? undefined;
+      },
+    );
+
+    [this.formFields.timezone, 'is_default'].forEach(field => {
+      model[field] = this.form.value[field]?.value ?? undefined;
+    });
 
     return HelperService.clear<ClientLocationInterface>(model);
   }
 
-  private processDisabledFields(location?: ClientLocationInterface): void {
-    if (!this.item) {
-      return;
-    }
-    if (!location?.country) {
-      this.isCityEnabled$.next(false);
-      this.isRegionEnabled$.next(false);
-      this.isSubregionEnabled$.next(false);
-      this.isDistrictEnabled$.next(false);
-    }
-    if (!location?.region) {
-      this.isSubregionEnabled$.next(false);
-    }
-    if (!location?.city) {
-      this.isDistrictEnabled$.next(false);
-    }
+  private handleControls(): void {
+    this.handleControlChanges(this.formFields.country, [this.formFields.region, this.formFields.city]);
+    this.handleControlChanges(this.formFields.region, [this.formFields.subregion]);
+    this.handleControlChanges(this.formFields.city, [this.formFields.district]);
+  }
+
+  private handleControlChanges(handledControl: string, controls: string[]): void {
+    this.form.get(handledControl).valueChanges.subscribe(value => {
+      const action = !value ? 'disable' : 'enable';
+      controls.forEach(control => {
+        this.form.get(control)[action]();
+        this.form.get(control).reset();
+      });
+    });
   }
 }
