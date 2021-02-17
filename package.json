@@ -8,7 +8,7 @@
     "start": "ng serve",
     "start:staging": "ng serve --configuration=staging",
     "build": "ng build",
-    "test": "ng test --code-coverage --watch=false",
+    "test": "ng test --watch=false",
     "test:details": "ng test --reporters=spec --watch=false",
     "testnb": "ng test --browsers='ChromeHeadless'",
     "lint": "ng lint",

@@ -1,11 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { ServicePublishStepOneFormService } from '../../forms/service-publish-step-one-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -28,18 +23,13 @@ describe('ServicePublishStepOneComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepOneComponent],
       imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
+        ...ROOT_MODULES,
+        ComponentTestingModule,
       ],
       providers: [
         ServicePublishStepOneFormService,
         ServicePublishDataHolderService,
         ServiceStepsNavigationService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
         ChainManagerService,
         StepOneHandlerService,
         StepTwoHandlerService,
@@ -50,6 +40,7 @@ describe('ServicePublishStepOneComponent', () => {
         StepSevenHandlerService,
         StepFinalHandlerService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServicePublishStepOneComponent);

@@ -1,11 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { ServicePublishStepFiveFormService } from '../../forms/service-publish-step-five-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -28,18 +24,14 @@ describe('ServicePublishStepFiveComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepFiveComponent],
       imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
+        ...ROOT_MODULES,
+        ComponentTestingModule,
+        NgxDropzoneModule,
       ],
       providers: [
         ServicePublishStepFiveFormService,
         ServicePublishDataHolderService,
         ServiceStepsNavigationService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
         ChainManagerService,
         StepOneHandlerService,
         StepTwoHandlerService,
@@ -50,6 +42,7 @@ describe('ServicePublishStepFiveComponent', () => {
         StepSevenHandlerService,
         StepFinalHandlerService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServicePublishStepFiveComponent);

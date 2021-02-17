@@ -1,19 +1,11 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { RegistrationService } from '@app/auth/services/registration.service';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IpApiService } from '@app/core/services/location/ip-api.service';
-import { IpDataService } from '@app/core/services/location/ip-data.service';
-import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
-import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { LocationService } from '@app/core/services/location/location.service';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { LocationServiceMock, StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { LocationServiceMock } from 'src/testing/mocks';
 import { ServicePublishStepFourFormService } from '../../forms/service-publish-step-four-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -36,19 +28,14 @@ describe('ServicePublishStepFourComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepFourComponent],
       imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
+        ...ROOT_MODULES,
+        ComponentTestingModule,
       ],
       providers: [
         ServicePublishStepFourFormService,
         ServiceStepsNavigationService,
         RegistrationService,
         ServicePublishDataHolderService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
         ChainManagerService,
         StepOneHandlerService,
         StepTwoHandlerService,
@@ -59,14 +46,11 @@ describe('ServicePublishStepFourComponent', () => {
         StepSevenHandlerService,
         StepFinalHandlerService,
         ServicePublishDataHolderService,
-        IpServicesHolderService,
-        IpApiService,
-        IpDataService,
-        IpnfDataService,
         { provide: LocationService, useClass: LocationServiceMock },
         SelectableCountryOnSearchService,
         SelectableCityOnSearchService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServicePublishStepFourComponent);

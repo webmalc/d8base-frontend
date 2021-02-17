@@ -1,14 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { ServicePublishStepSevenFormService } from '../../forms/service-publish-step-seven-form.service';
 import { ServicePublishAuthStateManagerService } from '../../services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
@@ -32,17 +26,12 @@ describe('ServicePublishStepSevenComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepSevenComponent],
       imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
+        ...ROOT_MODULES,
+        ComponentTestingModule,
       ],
       providers: [
         ServicePublishStepSevenFormService,
         ServicePublishDataHolderService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
         SelectableCountryOnSearchService,
         SelectableCityOnSearchService,
         SelectablePostalCodeOnSearchService,
