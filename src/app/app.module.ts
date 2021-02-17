@@ -46,6 +46,7 @@ import { StoreModule } from './store/store.module';
         provide: TranslateLoader,
         useClass: JsonTranslateLoader,
       },
+      defaultLanguage: 'en',
     }),
     ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
     AppRoutingModule,

@@ -41,7 +41,8 @@
     "at": "at",
     "forward": "Forward",
     "back": "Back",
-    "save": "Save"
+    "save": "Save",
+    "not-specified": "Not specified"
   },
   "delete-confirmation": {
     "delete-service": "Delete service?",

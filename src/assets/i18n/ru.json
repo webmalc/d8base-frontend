@@ -41,7 +41,8 @@
     "at": "в",
     "back": "Назад",
     "forward": "Продолжить",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "not-specified": "Не указано"
   },
   "delete-confirmation": {
     "delete-service": "Удалить услугу?",

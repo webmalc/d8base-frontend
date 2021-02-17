@@ -2,11 +2,14 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Profile } from '@app/api/models';
-import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileFormService } from '@app/profile/forms/profile-form.service';
 import { ProfileService } from '@app/profile/services/profile.service';
 import { RegisterEmailApiService } from '@app/profile/services/register-email-api.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-edit',
@@ -19,22 +22,26 @@ export class UserEditComponent implements OnInit {
   public formFields = ProfileFormFields;
   public user: Profile;
 
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
+
   constructor(
     private readonly profileService: ProfileService,
     private readonly location: Location,
     private readonly registerEmailApi: RegisterEmailApiService,
     private readonly formService: ProfileFormService,
-    private readonly userManager: UserManagerService,
   ) {
   }
 
   public ngOnInit(): void {
-    this.userManager.getCurrentUser().subscribe(
-      user => {
-        this.user = user;
-        this.form = this.formService.createForm(user);
-      },
-    );
+    this.profile$
+      .pipe(first(x => !!x))
+      .subscribe(
+        user => {
+          this.user = user;
+          this.form = this.formService.createForm(user);
+        },
+      );
   }
 
   public submitForm(): void {
