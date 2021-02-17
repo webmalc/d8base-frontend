@@ -30,12 +30,14 @@
           </ion-select-option>
         </ion-select>
       </ion-item>
+      <app-form-control-error [controlName]="'contact'"> </app-form-control-error>
       <ion-item>
         <ion-label class="label-for-required-input" color="medium" position="floating">
           {{ 'contact-edit-page.enter-contact' | translate }}
         </ion-label>
         <ion-input type="text" name="contact-value" formControlName="value"></ion-input>
       </ion-item>
+      <app-form-control-error [controlName]="'value'"> </app-form-control-error>
       <ion-row class="ion-justify-content-center ion-margin-top">
         <ion-col size="6">
           <ion-button *ngIf="canDelete" (click)="deleteContact()" size="medium" color="danger" expand="block" fill="solid">
@@ -43,7 +45,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button size="medium" color="secondary" expand="block" fill="solid" type="submit">
+          <ion-button [disabled]="form.invalid || form.pristine" size="medium" expand="block" fill="solid" type="submit">
             {{ 'contact-edit-page.save' | translate }}
           </ion-button>
         </ion-col>
