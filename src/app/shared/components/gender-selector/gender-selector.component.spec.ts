@@ -1,26 +1,22 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 
-import { HeaderComponent } from './header.component';
+import { GenderSelectorComponent } from './gender-selector.component';
 
-describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+describe('GenderSelectorComponent', () => {
+  let component: GenderSelectorComponent;
+  let fixture: ComponentFixture<GenderSelectorComponent>;
 
   beforeEach(waitForAsync(() => {
-    const storageMock: Partial<Storage> = {
-      get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
-    };
     TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
+      declarations: [ GenderSelectorComponent ],
       imports: [
         ...ROOT_MODULES,
         ComponentTestingModule,
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(GenderSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
