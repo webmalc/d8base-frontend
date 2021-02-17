@@ -20,35 +20,38 @@
   <ion-item class="ion-item-no-border ion-item-bordered-others">
     <ion-col class="ion-padding-vertical" size="12">
       <ion-item>
-        <ion-label color="medium" position="floating">
+        <ion-label color="medium" position="floating" class="label-for-required-input">
           {{ 'certificates-edit-page.name' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.name" name="name" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.name)" name="name" type="text"></ion-input>
       </ion-item>
+      <app-form-control-error [control]="form.get(formFields.name)"> </app-form-control-error>
+
       <ion-item>
-        <ion-label color="medium" position="floating">
+        <ion-label color="medium" position="floating" class="label-for-required-input" s>
           {{ 'certificates-edit-page.organization' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.organization" name="organization" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.organization)" name="organization" type="text"></ion-input>
       </ion-item>
+      <app-form-control-error [control]="form.get(formFields.organization)"> </app-form-control-error>
 
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'certificates-edit-page.date' | translate }}
         </ion-label>
-        <ion-datetime [(ngModel)]="item.date" display-format="YYYY-MM-DD"></ion-datetime>
+        <ion-datetime [formControl]="form.get(formFields.date)" display-format="YYYY-MM-DD"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'certificates-edit-page.certificate-id' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.certificate_id" name="certificate_id" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.certificate_id)" name="certificate_id" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'certificates-edit-page.certificate-link' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.url" name="url" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.url)" name="url" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
@@ -57,7 +60,7 @@
         <ion-thumbnail class="app-thumb-mr100">
           <ion-img [src]="getPhoto()"></ion-img>
         </ion-thumbnail>
-        <app-picture-selector [(ngModel)]="item.photo" [camera]="true" [fileSystem]="true"> </app-picture-selector>
+        <app-picture-selector [formControl]="form.get(formFields.photo)" [camera]="true" [fileSystem]="true"> </app-picture-selector>
       </ion-item>
       <ion-row class="ion-justify-content-center ion-margin-top">
         <ion-col size="6">
@@ -66,7 +69,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button (click)="save()" expand="block" fill="solid" size="medium">
+          <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
             {{ 'certificates-edit-page.save' | translate }}
           </ion-button>
         </ion-col>
