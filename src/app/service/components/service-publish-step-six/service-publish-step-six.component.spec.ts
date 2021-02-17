@@ -1,12 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { IonicSelectableModule } from 'ionic-selectable';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { ServicePublishStepSixFormService } from '../../forms/service-publish-step-six-form.service';
 import { ServicePublishAuthStateManagerService } from '../../services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
@@ -30,20 +23,14 @@ describe('ServicePublishStepSixComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepSixComponent],
       imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-        IonicSelectableModule,
+        ...ROOT_MODULES,
+        ComponentTestingModule,
       ],
       providers: [
         ServicePublishStepSixFormService,
         ServicePublishDataHolderService,
         ServiceStepsNavigationService,
         ServicePublishAuthStateManagerService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
         ChainManagerService,
         StepOneHandlerService,
         StepTwoHandlerService,
