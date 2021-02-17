@@ -56,7 +56,6 @@ import { BrMaskerModule } from 'br-mask';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ServicePageRoutingModule } from './service-routing.module';
-import { ServicePage } from './service.page';
 
 @NgModule({
   imports: [
@@ -73,7 +72,6 @@ import { ServicePage } from './service.page';
     RegistrationPageModule,
   ],
   declarations: [
-    ServicePage,
     ServicePublishStepOneComponent,
     ServicePublishStepTwoComponent,
     ServicePublishStepThreeComponent,

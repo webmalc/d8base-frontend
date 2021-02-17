@@ -1,8 +1,18 @@
 <ion-row class="ion-padding-vertical ion-justify-content-center ion-item-no-side-padding">
-  <ion-col size="12" class="agreement-text ion-padding-horizontal" *ngIf="trans.getCurrentLang() === 'ru'">
-    Нажимая клавишу «Добавить объявление», вы принимаете условия
-    <a routerLink="/" routerDirection="forward" routerLinkActive="active">Пользовательского соглашения</a>,
-    ознакомились
-    с <a routerLink="/" routerDirection="forward" routerLinkActive="active">Правилами</a> и принимаете их.
+  <ion-col size="12" class="agreement-text ion-padding-horizontal">
+    {{ 'agreement.part-1' | translate: { publish: 'service-publish.final-step.publish' | translate } }}
+
+    <a routerLink="/">
+      {{ 'agreement.eula' | translate }}
+    </a>,
+
+    {{ 'agreement.part-2' | translate }}
+
+    <a routerLink="/">
+      {{ 'agreement.rules' | translate }}
+    </a>
+
+    {{ 'agreement.part-3' | translate }}
+
   </ion-col>
 </ion-row>

@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
-import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
+import { first, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepFiveHandlerService extends AbstractHandler {
 
-  constructor(
-    private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
-  ) {
-    super();
-  }
+  @Select(CurrentUserSelectors.isMaster)
+  public isMaster$: Observable<boolean>;
 
   public handleNext(): Observable<number> {
     return this.handle(super.handleNext.bind(this));
@@ -26,11 +25,9 @@ export class StepFiveHandlerService extends AbstractHandler {
   }
 
   private handle(handler: () => Observable<number>): Observable<number> {
-    if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Four) &&
-      !this.servicePublishDataHolderService.isset(ServicePublishSteps.Four)) {
-      return handler();
-    }
-
-    return of(this.getIndex());
+    return this.isMaster$.pipe(
+      first(),
+      mergeMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
+    );
   }
 }

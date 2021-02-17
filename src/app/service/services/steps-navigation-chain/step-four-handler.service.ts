@@ -3,7 +3,7 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { AbstractHandler } from '@app/service/services/steps-navigation-chain/abstract-handler';
 import { Observable, of } from 'rxjs';
-import { first, switchMap } from 'rxjs/operators';
+import { first, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepFourHandlerService extends AbstractHandler {
@@ -29,7 +29,7 @@ export class StepFourHandlerService extends AbstractHandler {
   private handle(handler: () => Observable<number>): Observable<number> {
     return this.authenticationService.isAuthenticated$.pipe(
       first(),
-      switchMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
+      mergeMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
     );
   }
 }

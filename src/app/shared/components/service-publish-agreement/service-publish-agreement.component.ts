@@ -7,7 +7,4 @@ import { TranslationService } from '@app/core/services/translation.service';
   styleUrls: ['./service-publish-agreement.component.scss'],
 })
 export class ServicePublishAgreementComponent {
-
-  constructor(public trans: TranslationService) {
-  }
 }
