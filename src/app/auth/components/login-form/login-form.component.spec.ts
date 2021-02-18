@@ -7,7 +7,6 @@ import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/er
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LoginFormFields } from '../../enums/login-form-fields';
-import { LoginFormService } from '../../forms/login-form.service';
 import { Credentials } from '../../interfaces/credentials';
 import { LoginFormComponent } from './login-form.component';
 
@@ -17,40 +16,40 @@ describe('LoginFormComponent', () => {
   let router: Router;
   // Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.
   // But if remove 'forRoot()' - test submit login form don't pass. Magick!
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginFormComponent, ErrorFlashbagComponent],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
-      providers: [
-        LoginFormService,
-        TranslateService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginFormComponent, ErrorFlashbagComponent],
+        imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+        providers: [TranslateService],
+      }).compileComponents();
 
-    router = TestBed.inject(Router);
-    spyOn(router, 'navigateByUrl');
+      router = TestBed.inject(Router);
+      spyOn(router, 'navigateByUrl');
 
-    fixture = TestBed.createComponent(LoginFormComponent);
-    component = fixture.componentInstance;
-    component.ngOnInit();
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(LoginFormComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
-    expect((component as any).loginFormService.form.valid).toBeFalsy();
+    expect(component.form.valid).toBeFalsy();
   });
 
-  it('test submit login form', waitForAsync(() => {
-    const username = component.loginFormService.form.controls[LoginFormFields.Username];
-    const password = component.loginFormService.form.controls[LoginFormFields.Password];
-    password.setValue('valid_pass');
-    username.setValue('valid');
+  it(
+    'test submit login form',
+    waitForAsync(() => {
+      const username = component.form.controls[LoginFormFields.Username];
+      const password = component.form.controls[LoginFormFields.Password];
+      password.setValue('valid_pass');
+      username.setValue('valid');
 
-    spyOn((component as any).user, 'emit');
+      spyOn((component as any).user, 'emit');
 
-    fixture.debugElement.nativeElement.querySelector('ion-button').click();
-    const newUser: Credentials = { username: 'valid', password: 'valid_pass' };
-    expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
-  }));
+      fixture.debugElement.nativeElement.querySelector('ion-button').click();
+      const newUser: Credentials = { username: 'valid', password: 'valid_pass' };
+      expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
+    }),
+  );
 });
-
