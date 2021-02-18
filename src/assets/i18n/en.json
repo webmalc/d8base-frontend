@@ -765,7 +765,8 @@
     "email": "Email is invalid.",
     "forbidNumericValue": "Field value can't contain numbers only.",
     "passwordMismatch": "Passwords are mismatch.",
-    "required": "Field is required."
+    "required": "Field is required.",
+    "priceError": "Price 'from' must be less of price 'to'."
   },
   "server-errors": {
     "unauthorized": "Access denied",

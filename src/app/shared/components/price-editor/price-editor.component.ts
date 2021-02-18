@@ -22,7 +22,6 @@ const defaultValue: Partial<Price> = { is_price_fixed: true };
   ],
 })
 export class PriceEditorComponent implements ControlValueAccessor {
-
   public currency$: Observable<{ list; default }>;
   public isPriceFixed$ = new BehaviorSubject<boolean>(true);
   public initialValues: Partial<Price> = defaultValue;
@@ -32,19 +31,14 @@ export class PriceEditorComponent implements ControlValueAccessor {
   private onChange: (value: any) => void;
   private onTouched: () => void;
 
-  constructor(
-    private readonly currencyApi: CurrencyListApiService,
-    private readonly userSettings: UserSettingsService,
-  ) {
+  constructor(currencyApi: CurrencyListApiService, private readonly userSettings: UserSettingsService) {
     this.currency$ = forkJoin([
       currencyApi.getList(),
       this.userSettings.userSettings$.pipe(
         first(x => !!x),
         map(settings => settings.currency),
       ),
-    ]).pipe(
-      map(([list, defaultCurrency]) => ({ list, default: list.find(x => x.currency === defaultCurrency) })),
-    );
+    ]).pipe(map(([list, defaultCurrency]) => ({ list, default: list.find(x => x.currency === defaultCurrency) })));
   }
 
   public registerOnChange(fn: any): void {

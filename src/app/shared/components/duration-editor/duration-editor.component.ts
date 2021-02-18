@@ -14,9 +14,9 @@ function minutesFromDuration({ days, hours, minutes }: Duration): number {
 }
 
 function durationFromMinutes(minutes: number): Duration {
-  const days = (minutes - minutes % MINUTES_IN_DAY) / MINUTES_IN_DAY;
+  const days = (minutes - (minutes % MINUTES_IN_DAY)) / MINUTES_IN_DAY;
   minutes = minutes - days * MINUTES_IN_DAY;
-  const hours = (minutes - minutes % MINUTES_IN_HOUR) / MINUTES_IN_HOUR;
+  const hours = (minutes - (minutes % MINUTES_IN_HOUR)) / MINUTES_IN_HOUR;
   minutes = minutes - hours * MINUTES_IN_HOUR;
 
   return { days, hours, minutes };
@@ -65,7 +65,6 @@ export class DurationEditorComponent implements ControlValueAccessor, OnDestroy 
   public writeValue(value: number): void {
     if (!value) {
       this.form.reset({}, { emitEvent: false });
-
       return;
     }
     this.form.setValue(durationFromMinutes(value), { emitEvent: false });
@@ -84,9 +83,10 @@ export class DurationEditorComponent implements ControlValueAccessor, OnDestroy 
   }
 
   private subscribeOnFormValueChanges(): void {
-    this.form.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(value => this.onChange(minutesFromDuration(value)));
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+      const duration = minutesFromDuration(value);
+      this.onChange(duration ? duration : null);
+    });
   }
 
   private onChange: (v: number) => void = () => null;
