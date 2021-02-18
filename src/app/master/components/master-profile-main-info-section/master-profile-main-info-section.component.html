@@ -1,9 +1,9 @@
 <ion-row *ngIf="sectionData">
   <ion-col class="ion-no-padding">
-    <ion-item class="fullName ion-item-no-border ion-item-no-min-height pv5">
+    <ion-item class="fullName ion-item-no-min-height pv5" lines="none">
       {{sectionData.fullName}}
     </ion-item>
-    <ion-item *ngIf="sectionData.company" class="companyName ion-item-no-border ion-item-no-min-height pv5">
+    <ion-item *ngIf="sectionData.company" class="companyName ion-item-no-min-height pv5" lines="none">
       {{sectionData.company}}
     </ion-item>
     <ion-item lines="none" class="ion-item-no-min-height pv5">

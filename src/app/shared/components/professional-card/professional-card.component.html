@@ -2,7 +2,7 @@
   <ion-img class="avatar" [src]="professional.user?.avatar || defaultAvatar"></ion-img>
   <div class="info">
     <div class="title">
-      <ion-item [routerLink]="'/professional/' + professional.id" class="full-name ion-item-no-border ion-item-no-min-height fs16">
+      <ion-item [routerLink]="'/professional/' + professional.id" class="full-name ion-item-no-min-height fs16" lines="none">
         {{ professional.name }}
       </ion-item>
       <div *ngIf="professional.company" class="company ion-padding-horizontal fs13">
@@ -10,12 +10,12 @@
       </div>
     </div>
     <div *ngIf="professional?.rating" class="rating">
-      <ion-item class="star-rating ion-item-no-border ion-item-no-min-height">
+      <ion-item class="star-rating ion-item-no-min-height" lines="none">
         <ion-icon name="star" class="star fs20"></ion-icon>
         <b>{{ professional?.rating }}</b>
       </ion-item>
 
-      <ion-item class="reviews ion-item-no-border ion-item-no-min-height fs13" detail="false">
+      <ion-item class="reviews ion-item-no-min-height fs13" detail="false" lines="none">
         <a *ngIf="reviewsCount" [routerLink]="'/reviews/' + professional?.id" (click)="$event.stopPropagation()">
           {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
         </a>

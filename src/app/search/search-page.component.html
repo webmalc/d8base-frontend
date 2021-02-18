@@ -70,7 +70,7 @@
                 <ion-icon class="ion-no-margin ion-margin-start" name="swap-vertical-outline"></ion-icon>
               </ion-item>
             </ion-row>
-            <ion-item *ngIf="searchResultTitle && searchResult?.length" class="search-title ion-item-no-border ion-margin-bottom">
+            <ion-item *ngIf="searchResultTitle && searchResult?.length" class="search-title ion-margin-bottom" lines="none">
               {{ searchResult.length }}&nbsp;{{ declineProposal(searchResult.length) | translate }}&nbsp; "{{ searchResultTitle }}"&nbsp;{{
                 declineIsWaiting(searchResult.length) | translate
               }}&nbsp;

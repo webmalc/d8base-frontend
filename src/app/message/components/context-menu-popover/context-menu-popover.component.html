@@ -15,7 +15,7 @@
   <ion-row class="ion-justify-content-between ion-align-items-center ion-item-bottom-border cursor-pointer bg-hover"
            (click)="delete()" *ngIf="!message.is_read">
     <ion-col size="9" class="ion-no-padding">
-      <ion-item class="red ion-item-no-border bg-hover no-padding-right">
+      <ion-item class="red bg-hover no-padding-right" lines="none">
         {{'messages.context-menu.delete-from-me'|translate}}
       </ion-item>
     </ion-col>
@@ -28,7 +28,7 @@
   <ion-row class="ion-justify-content-between ion-align-items-center cursor-pointer bg-hover"
            (click)="delete()" *ngIf="message.is_read">
     <ion-col size="9" class="ion-no-padding">
-      <ion-item class="red ion-item-no-border bg-hover no-padding-right">
+      <ion-item class="red bg-hover no-padding-right" lines="none">
         {{'messages.context-menu.delete-from-me'|translate}}
       </ion-item>
     </ion-col>
@@ -41,7 +41,7 @@
   <ion-row class="ion-justify-content-between ion-align-items-center cursor-pointer bg-hover"
            (click)="delete()" *ngIf="!message.is_read">
     <ion-col size="9" class="ion-no-padding">
-      <ion-item class="red ion-item-no-border bg-hover no-padding-right">
+      <ion-item class="red bg-hover no-padding-right" lines="none">
         {{'messages.context-menu.delete'|translate}}
       </ion-item>
     </ion-col>
