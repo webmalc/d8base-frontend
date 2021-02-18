@@ -2,50 +2,50 @@
   <ion-col class="ion-no-padding ion-margin-bottom">
     <ion-row class="ion-align-items-center ion-justify-content-between width100">
       <ion-item
-        class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height">
+        lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height">
         <ion-item
-          class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height ion-padding-end">
+          lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height ion-padding-end">
           <ion-avatar>
             <ion-img [src]="getPhotoThumbnail()"></ion-img>
           </ion-avatar>
         </ion-item>
         <ion-item
-          class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height">
+          lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height">
           {{getUser().first_name}}
         </ion-item>
       </ion-item>
       <ion-item
-        class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height">
+        lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height">
         flag
       </ion-item>
     </ion-row>
     <ion-row>
-      <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding grey-text">
+      <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding grey-text">
         {{"master-review.created-time"|translate}}: {{getDate()}}
       </ion-item>
     </ion-row>
     <ion-row>
       <ion-item
-        class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height ion-margin-top mb10 title">
+        lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height ion-margin-top mb10 title">
         {{getRatingTitle()|translate}}&nbsp;
         <app-rating [rating]="publicReview.rating" class="ion-margin-start"></app-rating>
       </ion-item>
     </ion-row>
     <ion-row>
       <ion-item
-        class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height ion-margin-bottom grey-text">
+        lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height ion-margin-bottom grey-text">
         {{publicReview.description}}
       </ion-item>
     </ion-row>
     <ion-row *ngIf="publicReview.comment">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding width100">
+      <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding width100">
         <ion-col class="ion-no-padding">
           <ion-row class="ion-align-items-center ion-justify-content-between width100 mb10">
             {{"master-review.answer"|translate}}
           </ion-row>
           <ion-row>
             <ion-item
-              class="ion-item-no-border ion-item-no-side-padding ion-item-no-vertical-padding review-comment width100">
+              lines="none" class="ion-item-no-side-padding ion-item-no-vertical-padding review-comment width100">
               {{publicReview.comment.description}}
             </ion-item>
           </ion-row>

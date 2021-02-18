@@ -17,7 +17,7 @@
     </ion-row>
     <ion-row *ngIf="!needToRenderFilters()" class="ion-justify-content-around ion-margin-top">
       <ion-item
-        class="ion-item-no-border cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
+        lines="none" class="cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
         routerDirection="forward"
         routerLink="filters/"
         routerLinkActive="active"
@@ -26,7 +26,7 @@
         <ion-icon class="ion-no-margin ion-margin-start" name="funnel-outline"></ion-icon>
       </ion-item>
       <ion-item
-        class="ion-item-no-border cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
+        lines="none" class="cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
       >
         {{ 'issuance.result.sort' | translate }}
         <ion-icon class="ion-no-margin ion-margin-start" name="swap-vertical-outline"></ion-icon>
@@ -64,7 +64,7 @@
           >
             <ion-row *ngIf="searchResultTitle && searchResult?.length">
               <ion-item
-                class="ion-item-no-border cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
+                lines="none" class="cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
               >
                 {{ 'issuance.result.sort' | translate }}
                 <ion-icon class="ion-no-margin ion-margin-start" name="swap-vertical-outline"></ion-icon>

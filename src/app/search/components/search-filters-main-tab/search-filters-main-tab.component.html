@@ -1,6 +1,6 @@
 <ion-row class="width100">
   <ion-col class="ion-padding-vertical ph5">
-    <ion-item class="ion-item-no-border ion-item-no-side-padding title">
+    <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.country' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -17,7 +17,7 @@
       >
       </ionic-selectable>
     </ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding title">
+    <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.city' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -35,7 +35,7 @@
       >
       </ionic-selectable>
     </ion-item>
-    <!-- <ion-item (click)="initLocationPopover()" class="ion-item-no-border ion-item-no-side-padding cursor-pointer">
+    <!-- <ion-item (click)="initLocationPopover()" lines="none" class="ion-item-no-side-padding cursor-pointer">
         <ion-icon class="ion-padding-end" color="secondary" name="location-outline"></ion-icon>
         {{"issuance.filters.main-tab.on-map"|translate}}
     </ion-item>
@@ -46,9 +46,9 @@
         <ion-input [(ngModel)]="stateManager.data.main.radius.distance" appNumbersOnly></ion-input>
     </ion-item> -->
     <ion-item
-      class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding title">
+    <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.categories' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -69,7 +69,7 @@
       >
       </ionic-selectable>
     </ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding title">
+    <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.subcategories' | translate }}
     </ion-item>
     <ion-item class="ion-item-bordered">
@@ -91,19 +91,19 @@
       </ionic-selectable>
     </ion-item>
     <ion-item
-      class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
-    <!-- <ion-item class="ion-item-no-border ion-item-no-side-padding title">
+    <!-- <ion-item lines="none" class="ion-item-no-side-padding title">
         {{"issuance.filters.main-tab.tags"|translate}}
     </ion-item>
     <ion-row class="ion-justify-content-start">
         <ion-item *ngFor="let tag of stateManager.data.main.tags"
-                  class="ion-item-no-border ion-item-no-min-height ion-item-tag">
+                  lines="none" class="ion-item-no-min-height ion-item-tag">
             {{tag.name}}
         </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center">
-        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        <ion-item lines="none" class="ion-item-no-side-padding">
             <ion-button color="secondary">
                 <ion-icon class="ion-padding-end" color="light" name="add-circle"></ion-icon>
                 {{"issuance.filters.main-tab.add"|translate}}
@@ -111,16 +111,16 @@
         </ion-item>
     </ion-row> -->
     <!-- <ion-item
-            class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
+            lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-top ion-nowrap">
-        <ion-item class="ion-item-no-border ion-item-no-side-padding">
+        <ion-item lines="none" class="ion-item-no-side-padding">
             <ion-col>
                 <ion-item
-                        class="ion-item-no-border ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
+                        lines="none" class="ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
                     {{"issuance.filters.main-tab.online-booking"|translate}}
                 </ion-item>
                 <ion-item
-                        class="ion-item-no-border ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
+                        lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
                     {{"issuance.filters.main-tab.online-booking-desc"|translate}}
                 </ion-item>
             </ion-col>
@@ -132,14 +132,14 @@
         </ion-row>
     </ion-row> -->
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+      <ion-item lines="none" class="ion-item-no-side-padding">
         <ion-col>
           <ion-item
-            class="ion-item-no-border ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
+            lines="none" class="ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
             {{ 'issuance.filters.main-tab.instant-booking' | translate }}
           </ion-item>
           <ion-item
-            class="ion-item-no-border ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
+            lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
             {{ 'issuance.filters.main-tab.instant-booking-desc' | translate }}
           </ion-item>
         </ion-col>
@@ -151,10 +151,10 @@
       </ion-row>
     </ion-row>
     <ion-item
-      class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
     <ion-item
-      class="ion-item-no-border ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
+      lines="none" class="ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
       <app-collapse-item [noSidePadding]="true" class="width100"
                          title="{{ 'issuance.filters.main-tab.datetime' | translate }}">
         <ion-item>
@@ -177,11 +177,11 @@
         </ion-item>
       </app-collapse-item>
     </ion-item>
-    <ion-item class="ion-item-no-border ion-item-no-side-padding">
+    <ion-item lines="none" class="ion-item-no-side-padding">
       {{ 'issuance.filters.main-tab.availability' | translate }}
     </ion-item>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
+      <ion-item lines="none" class="ion-item-no-side-padding availability-title">
         {{ 'service-location.online' | translate }}
       </ion-item>
       <ion-row class="ion-justify-content-end">
@@ -191,7 +191,7 @@
       </ion-row>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
+      <ion-item lines="none" class="ion-item-no-side-padding availability-title">
         {{ 'service-location.professional' | translate }}
       </ion-item>
       <ion-item lines="none">
@@ -200,7 +200,7 @@
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-border ion-item-no-side-padding availability-title">
+      <ion-item lines="none" class="ion-item-no-side-padding availability-title">
         {{ 'service-location.client' | translate }}
       </ion-item>
       <ion-item lines="none">
@@ -209,13 +209,13 @@
       </ion-item>
     </ion-row>
     <ion-item
-      class="ion-item-no-border ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
     <ion-item
-      class="ion-item-no-border ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
+      lines="none" class="ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
       <app-collapse-item [noSidePadding]="true" class="width100"
                          title="{{ 'issuance.filters.main-tab.price' | translate }}">
-        <ion-item class="ion-item-no-border ion-item-bordered ion-item-bottom-border">
+        <ion-item lines="none" class="ion-item-bordered ion-item-bottom-border">
           <ionic-selectable
             itemValueField="currency"
             itemTextField="title"
