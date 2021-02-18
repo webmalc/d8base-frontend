@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { EditReviewCommentComponent } from './edit-review-comment.component';
 
 describe('EditReviewCommentComponent', () => {
@@ -14,7 +14,7 @@ describe('EditReviewCommentComponent', () => {
       TestBed.configureTestingModule({
         declarations: [EditReviewCommentComponent],
         imports: [
-          ...ROOT_MODULES,
+          ...RootModules(),
           ComponentTestingModule,
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],

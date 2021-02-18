@@ -4,7 +4,7 @@ import { RegistrationService } from '@app/auth/services/registration.service';
 import { LocationService } from '@app/core/services/location/location.service';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { LocationServiceMock } from 'src/testing/mocks';
 import { ServicePublishStepFourFormService } from '../../forms/service-publish-step-four-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
@@ -28,7 +28,7 @@ describe('ServicePublishStepFourComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepFourComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
       providers: [

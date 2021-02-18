@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { UserManagerService } from '@app/core/services/user-manager.service';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { UserManagerMock } from 'src/testing/mocks/user-manager-mock.spec';
 import { ProfileService } from '../../services/profile.service';
 import { RegisterEmailApiService } from '../../services/register-email-api.service';
@@ -17,7 +17,7 @@ describe('UserEditComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UserEditComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
       providers: [

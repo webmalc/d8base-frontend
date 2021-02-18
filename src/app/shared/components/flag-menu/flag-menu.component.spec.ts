@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { FlagMenuComponent } from './flag-menu.component';
 
 describe('FlagMenuComponent', () => {
@@ -10,7 +10,7 @@ describe('FlagMenuComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FlagMenuComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
     }).compileComponents();
