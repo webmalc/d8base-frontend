@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 
 import { OrderStatusComponent } from '@app/my-orders/components';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 describe('OrderStatusComponent', () => {
   let component: OrderStatusComponent;
@@ -10,7 +10,10 @@ describe('OrderStatusComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [OrderStatusComponent],
-      imports: [IonicModule.forRoot()],
+      imports: [
+        ...RootModules(),
+        ComponentTestingModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrderStatusComponent);

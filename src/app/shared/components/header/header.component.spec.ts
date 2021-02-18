@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 import { HeaderComponent } from './header.component';
 
@@ -8,14 +8,10 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(waitForAsync(() => {
-    const storageMock: Partial<Storage> = {
-      get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
-    };
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
     }).compileComponents();

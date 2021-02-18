@@ -15,14 +15,26 @@ import { Storage } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from './mocks';
 
-export const ROOT_MODULES = [
-  IonicModule.forRoot(),
+let ionicModuleImported = false;
+export const RootModules = () => {
+  if (ionicModuleImported) {
+    return [...ROOT_MODULES];
+  }
+  ionicModuleImported = true;
+  return [
+    IonicModule.forRoot(),
+    ...ROOT_MODULES
+  ];
+}
+
+const ROOT_MODULES = [
   TranslateModule.forRoot(),
   StoreModule.forRoot(),
 ];
 
 @NgModule({
   imports: [
+    IonicModule,
     HttpClientTestingModule,
     RouterTestingModule,
     SharedModule,

@@ -5,7 +5,7 @@ import { ApiClientService } from '@app/core/services/api-client.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Store } from '@ngxs/store';
 import { of } from 'rxjs';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { AuthResponseInterface } from '../interfaces/auth-response.interface';
 import { RegistrationService } from './registration.service';
 
@@ -27,7 +27,7 @@ describe('RegistrationService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-      ...ROOT_MODULES,
+      ...RootModules(),
       ComponentTestingModule,
     ],
     providers: [

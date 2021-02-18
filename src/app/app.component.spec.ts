@@ -4,7 +4,7 @@ import { TranslationService } from '@app/core/services';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -26,8 +26,8 @@ describe('AppComponent', () => {
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
-          ...ROOT_MODULES,
-          ComponentTestingModule,
+        ...RootModules(),
+        ComponentTestingModule,
       ],
       providers: [
         { provide: StatusBar, useValue: statusBarSpy },

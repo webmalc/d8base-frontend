@@ -3,7 +3,7 @@ import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angu
 import { Router } from '@angular/router';
 import { ApiClientService } from '@app/core/services/api-client.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ApiClientServiceMock } from 'src/testing/mocks';
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { LoginFormService } from '../../forms/login-form.service';
@@ -19,7 +19,7 @@ describe('LoginPage', () => {
     TestBed.configureTestingModule({
       declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
       providers: [

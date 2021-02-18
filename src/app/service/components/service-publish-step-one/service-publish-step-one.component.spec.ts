@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishStepOneFormService } from '../../forms/service-publish-step-one-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -23,7 +23,7 @@ describe('ServicePublishStepOneComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepOneComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
       providers: [
