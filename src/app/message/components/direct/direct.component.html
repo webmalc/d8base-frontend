@@ -14,7 +14,7 @@
         </ion-item>
       </ion-col>
       <ion-col sizeXs="11" sizeLg="4" offsetLg="3" offsetXs="0" class="ion-no-margin ion-no-padding">
-        <ion-item class="ion-item-no-border">
+        <ion-item lines="none">
           <!--                    user avatar here-->
         </ion-item>
       </ion-col>
@@ -70,7 +70,7 @@
   <ion-toolbar>
     <ion-row *ngIf="isUpdate" class="ion-padding-horizontal ion-align-items-center" (click)="showUpdatingMessage()">
       <ion-col size="1" class="cursor-pointer">
-        <ion-item class="ion-item-no-border">
+        <ion-item lines="none">
           <ion-icon name="pencil-outline"></ion-icon>
         </ion-item>
       </ion-col>
@@ -79,7 +79,7 @@
         <ion-row class="default-message-container">{{ directService.defaultUpdateMessage }}</ion-row>
       </ion-col>
       <ion-col size="1" class="ion-justify-content-end cursor-pointer ion-align-items-end">
-        <ion-item (click)="cancelUpdate()" class="ion-item-no-border">
+        <ion-item (click)="cancelUpdate()" lines="none">
           <ion-icon name="close-outline"></ion-icon>
         </ion-item>
       </ion-col>

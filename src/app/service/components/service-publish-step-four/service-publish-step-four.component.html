@@ -81,7 +81,7 @@
         </ng-container>
 
         <ng-container *ngIf="!context.isAuthenticated && !context.isUserExists && formService.isEmailValid()">
-          <ion-item class="ion-item-no-border">
+          <ion-item lines="none">
             <div class="label-for-required-input">
               <b>
                 {{ 'service-publish.step-seven.country-title' | translate }}
@@ -105,7 +105,7 @@
             >
             </ionic-selectable>
           </ion-item>
-          <ion-item class="ion-item-no-border">
+          <ion-item lines="none">
             <div class="label-for-required-input">
               <b>
                 {{ 'service-publish.step-seven.city-title' | translate }}
