@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishAgreementComponent } from './service-publish-agreement.component';
 
 describe('ServicePublishAgreementComponent', () => {
@@ -10,7 +10,7 @@ describe('ServicePublishAgreementComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishAgreementComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
     }).compileComponents();

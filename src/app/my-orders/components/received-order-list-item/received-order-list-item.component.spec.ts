@@ -1,14 +1,11 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ServicesApiCache } from '@app/core/services/cache';
 
 import { ReceivedOrderListItemComponent } from '@app/my-orders/components';
 import { ReceiverOrderStatusController } from '@app/my-orders/services';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
-describe('OrderListItemComponent', () => {
+describe('ReceivedOrderListItemComponent', () => {
   let component: ReceivedOrderListItemComponent;
   let fixture: ComponentFixture<ReceivedOrderListItemComponent>;
 
@@ -16,10 +13,8 @@ describe('OrderListItemComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ReceivedOrderListItemComponent],
       imports: [
-        IonicModule.forRoot(),
-        TranslateModule.forRoot(),
-        HttpClientTestingModule,
-        RouterTestingModule,
+        ...RootModules(),
+        ComponentTestingModule,
       ],
       providers: [ServicesApiCache, ReceiverOrderStatusController],
     }).compileComponents();

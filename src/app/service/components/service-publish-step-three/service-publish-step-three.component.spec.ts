@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
@@ -21,7 +21,7 @@ describe('ServicePublishStepThreeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ServicePublishStepThreeComponent],
       imports: [
-        ...ROOT_MODULES,
+        ...RootModules(),
         ComponentTestingModule,
       ],
       providers: [

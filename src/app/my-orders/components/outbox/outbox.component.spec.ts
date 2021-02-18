@@ -1,7 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { OutboxComponent } from './outbox.component';
 
 describe('OutboxComponent', () => {
@@ -11,7 +9,10 @@ describe('OutboxComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [OutboxComponent],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+      imports: [
+        ...RootModules(),
+        ComponentTestingModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OutboxComponent);
