@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { Observable, of } from 'rxjs';
@@ -35,8 +35,7 @@ describe('AuthenticationService', () => {
 
   beforeEach(() => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule,
-      platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
     TestBed.configureTestingModule({
       providers: [
@@ -52,16 +51,19 @@ describe('AuthenticationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('test #isAuthenticated', (done) => {
-    service.authenticateWithToken({
-      access_token: 'access_token',
-      expires_in: 3600,
-      token_type: 'Bearer',
-      scope: 'read write groups',
-      refresh_token: 'refresh_token',
-    });
-    service.isAuthenticated$.pipe(first(x => !!x)).subscribe(() => {
-      done();
-    });
-  });
+  it(
+    'test #isAuthenticated',
+    waitForAsync(done => {
+      service.authenticateWithToken({
+        access_token: 'access_token',
+        expires_in: 3600,
+        token_type: 'Bearer',
+        scope: 'read write groups',
+        refresh_token: 'refresh_token',
+      });
+      service.isAuthenticated$.pipe(first(x => !!x)).subscribe(() => {
+        done();
+      });
+    }),
+  );
 });

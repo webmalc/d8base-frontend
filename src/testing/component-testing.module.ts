@@ -35,15 +35,8 @@ const ROOT_MODULES = [
 ];
 
 @NgModule({
-  imports: [
-    IonicModule,
-    HttpClientTestingModule,
-    RouterTestingModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
   exports: [
+    IonicModule,
     HttpClientTestingModule,
     RouterTestingModule,
     SharedModule,
