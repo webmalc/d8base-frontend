@@ -1,11 +1,9 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { LoginFormFields } from '../../enums/login-form-fields';
 import { Credentials } from '../../interfaces/credentials';
 import { LoginFormComponent } from './login-form.component';
@@ -14,13 +12,14 @@ describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let router: Router;
-  // Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.
+  // Ionic Angular was already initialized. Make sure IonicModule is just called once.
   // But if remove 'forRoot()' - test submit login form don't pass. Magick!
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         declarations: [LoginFormComponent, ErrorFlashbagComponent],
-        imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+        imports: [...ROOT_MODULES, ComponentTestingModule],
         providers: [TranslateService],
       }).compileComponents();
 
@@ -42,13 +41,13 @@ describe('LoginFormComponent', () => {
     waitForAsync(() => {
       const username = component.form.controls[LoginFormFields.Username];
       const password = component.form.controls[LoginFormFields.Password];
-      password.setValue('valid_pass');
-      username.setValue('valid');
+      password.setValue('Q3Bds56jkADCC323dfsa');
+      username.setValue('d8b@d8b.com');
 
       spyOn((component as any).user, 'emit');
 
-      fixture.debugElement.nativeElement.querySelector('ion-button').click();
-      const newUser: Credentials = { username: 'valid', password: 'valid_pass' };
+      fixture.debugElement.nativeElement.querySelector('ion-button[type="submit"]').click();
+      const newUser: Credentials = { username: 'd8b@d8b.com', password: 'Q3Bds56jkADCC323dfsa' };
       expect((component as any).user.emit).toHaveBeenCalledWith(newUser);
     }),
   );

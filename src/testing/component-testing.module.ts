@@ -13,16 +13,25 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxsModule } from '@ngxs/store';
 import { StorageManagerMock } from './mocks';
 
 export const ROOT_MODULES = [
   IonicModule.forRoot(),
   TranslateModule.forRoot(),
   StoreModule.forRoot(),
+  NgxsModule.forRoot([])
 ];
 
 @NgModule({
   imports: [
+    HttpClientTestingModule,
+    RouterTestingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
     HttpClientTestingModule,
     RouterTestingModule,
     SharedModule,

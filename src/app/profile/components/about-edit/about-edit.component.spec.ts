@@ -7,6 +7,7 @@ import { SelectableCountryOnSearchService } from '@app/shared/services/selectabl
 import { IonicModule } from '@ionic/angular';
 import { Actions, NgxsModule } from '@ngxs/store';
 import { InternalActions } from '@ngxs/store/src/actions-stream';
+import { ComponentTestingModule, ROOT_MODULES } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { SavedProfessionalApiService } from '../../services/saved-professional-api.service';
 import { AboutEditComponent } from './about-edit.component';
@@ -19,14 +20,7 @@ describe('AboutEditComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [AboutEditComponent],
-        imports: [
-          IonicModule.forRoot(),
-          HttpClientTestingModule,
-          RouterTestingModule,
-          ReactiveFormsModule,
-          FormsModule,
-          NgxsModule.forRoot([]),
-        ],
+        imports: [...ROOT_MODULES, ComponentTestingModule],
         providers: [
           Actions,
           SelectableCountryOnSearchService,
