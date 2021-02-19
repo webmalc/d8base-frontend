@@ -8,7 +8,7 @@ export abstract class SelectableSearchService {
 
   private searchSubscription: Subscription = null;
 
-  public abstractOnSearch<T>(
+  protected abstractOnSearch<T>(
     component: IonicSelectableComponent,
     text: string,
     apiService: ReadonlyApiServiceInterface<LocationTypes>,

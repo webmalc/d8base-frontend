@@ -1,5 +1,4 @@
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
+import { City, Country } from '@app/api/models';
 import { Coords } from '@app/shared/interfaces/coords';
 
 export interface SearchLocationDataInterface {

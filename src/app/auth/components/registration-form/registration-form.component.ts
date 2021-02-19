@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CityPickerPopoverComponent } from '@app/auth/components/city-picker-popover/city-picker-popover.component';
 import { User } from '@app/core/models/user';
 import { UserLocation } from '@app/core/models/user-location';
+import { CountriesApiCache } from '@app/core/services/cache';
 import { CitiesApiService } from '@app/core/services/location/cities-api.service';
-import { CountriesApiService } from '@app/core/services/location/countries-api.service';
-import { LocationService } from '@app/core/services/location/location.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
@@ -44,11 +44,11 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly countriesApi: CountriesApiService,
+    private readonly countriesApi: CountriesApiCache,
     private readonly popoverController: PopoverController,
     public readonly countrySelectable: SelectableCountryOnSearchService,
     public readonly citySelectable: SelectableCityOnSearchService,
-    private readonly locationService: LocationService,
+    private readonly locationService: CurrentPositionService,
     private readonly citiesApi: CitiesApiService,
   ) {}
 

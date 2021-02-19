@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
-import { CountriesApiService } from '@app/core/services';
+import { CountriesApiCache } from '@app/core/services/cache';
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
@@ -37,7 +37,7 @@ export class AboutEditComponent implements OnInit {
     public readonly languagesApi: LanguagesApiService,
     private readonly formBuilder: FormBuilder,
     private readonly userLanguageApi: UserLanguagesApiService,
-    private readonly countriesApi: CountriesApiService,
+    private readonly countriesApi: CountriesApiCache,
     private readonly router: Router,
     private readonly actions$: Actions,
   ) {}
@@ -100,7 +100,7 @@ export class AboutEditComponent implements OnInit {
   }
 
   private getCountry(id: number | null): Observable<Country | null> {
-    return id ? this.countriesApi.getByEntityId(id.toString()) : of(null);
+    return id ? this.countriesApi.getByEntityId(id) : of(null);
   }
 
   private userLanguagesToLanguages(list: UserLanguage[]): Observable<Language[]> {

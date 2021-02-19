@@ -14,7 +14,7 @@ import { IpServicesHolderService } from './ip-services-holder.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LocationService { // cringe
+export class CurrentPositionService { // cringe
 
   constructor(
     private readonly ipServicesHolder: IpServicesHolderService,

@@ -1,6 +1,5 @@
 import { ProfessionalContactInline } from '@app/api/models';
 import { Contact } from '@app/profile/models/contact';
-import { environment } from '@env/environment';
 
 export class HelperService {
 
@@ -34,16 +33,6 @@ export class HelperService {
     const minsStr = /^\d$/.test(mins.toString()) ? `0${  mins.toString()}` : mins;
 
     return `${hoursStr}:${minsStr}`;
-  }
-
-  public static isNoAuthGetUrl(url: string): boolean {
-    for (const noAuthUrl of HelperService.getNoAuthGetEndpoints()) {
-      if (url.includes(noAuthUrl)) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   public static clear<T>(obj: T): T {
@@ -109,26 +98,5 @@ export class HelperService {
     const ageDate = new Date(ageDifMs);
 
     return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
-  private static getNoAuthGetEndpoints(): string[] {
-    return [
-      environment.backend.url + environment.backend.rates,
-      environment.backend.url + environment.backend.countries,
-      environment.backend.url + environment.backend.regions,
-      environment.backend.url + environment.backend.subregions,
-      environment.backend.url + environment.backend.cities,
-      environment.backend.url + environment.backend.districts,
-      environment.backend.url + environment.backend.postal_codes,
-      environment.backend.url + environment.backend.auth,
-      environment.backend.url + environment.backend.reset_password_link,
-      environment.backend.url + environment.backend.reset_password,
-      environment.backend.url + environment.backend.language,
-      environment.backend.url + environment.backend.reviews_readonly,
-      environment.backend.url + environment.backend.contact,
-      environment.backend.url + environment.backend.services_readonly,
-      environment.backend.url + environment.backend.service_tag_readonly,
-      environment.backend.url + environment.backend.calendar,
-    ];
   }
 }

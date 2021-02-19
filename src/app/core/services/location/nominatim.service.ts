@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { City, Country, PostalCode } from '@app/api/models';
 import { ErrorList } from '@app/core/enums/error-list';
 import { NominatimReverseResponseInterface } from '@app/core/interfaces/nominatim-reverse-response-interface';
 import { NominatimSearchResponseInterface } from '@app/core/interfaces/nominatim-search-response-interface';
 import { NominatimReverseResponse } from '@app/core/models/nominatim-reverse-response';
-import { PostalCode } from '@app/core/models/postal-code';
 import { HelperService } from '@app/core/services/helper.service';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
 import { Coords } from '@app/shared/interfaces/coords';
 import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';

@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MasterReadonlyApiCacheService, ServicesApiCache } from '@app/core/services/cache';
+import { ProfessionalsApiCache, ServicesApiCache } from '@app/core/services/cache';
 import { ServicesApiService } from '@app/core/services/services-api.service';
 import { SentOrderStatusController } from '@app/my-orders/services';
 
@@ -26,7 +26,7 @@ describe('SentOrderListItemComponent', () => {
         ServicesApiService,
         ServicesApiCache,
         SentOrderStatusController,
-        MasterReadonlyApiCacheService,
+        ProfessionalsApiCache,
       ],
     }).compileComponents();
 

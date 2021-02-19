@@ -30,7 +30,7 @@ export class MasterLocationEditPage extends AbstractModelEditPage<MasterLocation
   public ngOnInit(): void {
     this.itemId = this.getItemId();
     if (this.itemId) {
-      this.locationService.getSingle<MasterLocation>(this.masterLocationApi, this.itemId).subscribe(
+      this.masterLocationApi.getByEntityId(this.itemId).subscribe(
         location => this.item = location,
       );
     } else {

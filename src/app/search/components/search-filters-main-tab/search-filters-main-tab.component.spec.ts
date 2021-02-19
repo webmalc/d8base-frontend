@@ -6,7 +6,7 @@ import { IpApiService } from '@app/core/services/location/ip-api.service';
 import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
-import { LocationService } from '@app/core/services/location/location.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
@@ -32,7 +32,7 @@ describe('SearchFiltersMainTabComponent', () => {
           IpApiService,
           IpDataService,
           IpnfDataService,
-          { provide: LocationService, useClass: LocationServiceMock },
+          { provide: CurrentPositionService, useClass: LocationServiceMock },
           { provide: StorageManagerService, useClass: StorageManagerMock },
         ],
       }).compileComponents();

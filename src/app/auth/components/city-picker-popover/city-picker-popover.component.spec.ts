@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { CitiesApiService } from '@app/core/services/location/cities-api.service';
-import { LocationService } from '@app/core/services/location/location.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { City } from '@app/profile/models/city';
 import { IonicModule, NavParams } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
@@ -38,7 +38,7 @@ describe('CityPickerPopoverComponent', () => {
       imports: [IonicModule, HttpClientTestingModule],
       providers: [
         {
-          provide: LocationService,
+          provide: CurrentPositionService,
           useClass: LocationServiceStub,
         },
         {

@@ -1,6 +1,5 @@
 import { PostalCode } from '@app/core/models/postal-code';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
+import { Country, City } from '@app/api/models';
 import { Coords } from '@app/shared/interfaces/coords';
 import { Expose } from 'class-transformer';
 

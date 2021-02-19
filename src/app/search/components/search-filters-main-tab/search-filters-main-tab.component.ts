@@ -1,12 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category, Subcategory } from '@app/api/models';
-import { Currency } from '@app/core/models/currency';
+import { Category, City, Country, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
+import { Currency } from '@app/core/models/currency';
 import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
 import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Coords } from '@app/shared/interfaces/coords';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
