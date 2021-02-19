@@ -1,5 +1,5 @@
 <ion-card class="review">
-  <ion-item class="ion-item-no-border">
+  <ion-item lines="none">
     <ion-avatar class="avatar" slot="start">
       <ion-img [src]="review?.user.avatar_thumbnail || defaultAvatar"></ion-img>
     </ion-avatar>
@@ -9,8 +9,8 @@
     </ion-label>
     <span *ngIf="countryCode | async as countryCode" class="flag-icon flag-icon-{{ countryCode || 'ca' }}"></span>
   </ion-item>
-  <ion-item class="ion-item-no-border review-date">{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }} </ion-item>
-  <ion-item class="ion-item-no-border rating">
+  <ion-item lines="none" class="review-date">{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }} </ion-item>
+  <ion-item lines="none" class="rating">
     <ion-label class="star-label" slot="start">{{ 'global.rating.' + review?.rating | translate }}</ion-label>
     <ng-container *ngFor="let star of ratings">
       <ion-icon *ngIf="star <= review?.rating" name="star" class="star star-rating fs20"></ion-icon>

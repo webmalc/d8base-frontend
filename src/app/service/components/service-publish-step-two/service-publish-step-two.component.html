@@ -10,7 +10,7 @@
       <app-info-row>
         {{ 'service-publish.step-two.first-info-row' | translate }}
       </app-info-row>
-      <ion-item class="ion-item-no-border ion-item-no-side-padding">
+      <ion-item lines="none" class="ion-item-no-side-padding">
         <div class="label-for-required-input">
           {{ 'service-publish.step-two.service-title' | translate }}
         </div>
@@ -22,7 +22,7 @@
         <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
       </ion-item>
       <app-form-control-error [controlName]="formFields.Name"> </app-form-control-error>
-      <ion-item class="ion-item-no-border ion-item-no-side-padding ion-margin-top">
+      <ion-item lines="none" class="ion-item-no-side-padding ion-margin-top">
         {{ 'service-publish.step-two.service-description' | translate }}
       </ion-item>
       <ion-item class="ion-item-bordered">
@@ -34,7 +34,7 @@
       <app-form-control-error [controlName]="formFields.Description"></app-form-control-error>
       <ion-col size="12">
         <ion-row>
-          <ion-item class="ion-item-no-border ion-item-no-side-padding">
+          <ion-item lines="none" class="ion-item-no-side-padding">
             <div class="label-for-required-input">
               {{ 'service-publish.step-two.duration-and-price' | translate }}
             </div>
@@ -50,7 +50,7 @@
       </app-info-row>
       <ion-list>
         <ion-list-header class="ion-item-bottom-border ion-item-no-side-padding">
-          <ion-item class="ion-item-no-border ion-item-no-side-padding">
+          <ion-item lines="none" class="ion-item-no-side-padding">
             <div class="label-for-required-input">
               {{ 'service-publish.step-two.location' | translate }}
             </div>

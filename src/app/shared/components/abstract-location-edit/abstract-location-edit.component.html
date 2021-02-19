@@ -4,13 +4,14 @@
       <ion-item
         (click)="locationBack()"
         color="light"
-        class="ion-item-no-border ion-align-items-center ion-activatable cursor-pointer"
+        lines="none"
+        class="ion-align-items-center ion-activatable cursor-pointer"
         routerDirection="back"
         routerLinkActive="active"
       >
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-item>
-      <ion-item class="ion-item-no-border" color="light">
+      <ion-item lines="none" color="light">
         {{ 'location-edit-page.address' | translate }}
       </ion-item>
     </ion-row>

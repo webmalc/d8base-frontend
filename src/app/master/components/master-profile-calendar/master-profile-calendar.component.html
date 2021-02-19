@@ -18,7 +18,7 @@
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <ion-item class="ion-item-no-border ion-item-bottom-border master-profile-tab-title">
+      <ion-item lines="none" class="ion-item-bottom-border master-profile-tab-title">
         {{ 'master-profile.calendar.title' | translate }}
       </ion-item>
       <app-calendar-component (newDate)="changeDate($event)" [disabled]="true" [enabledPeriods]="enabledPeriods | async">

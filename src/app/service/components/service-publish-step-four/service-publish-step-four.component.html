@@ -52,7 +52,7 @@
             </ion-label>
             <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
           </ion-item>
-          <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+          <ion-item lines="none" class="ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
             {{ 'service-publish.step-four.password-info' | translate }}
           </ion-item>
           <ion-item class="ion-item-bordered ion-margin-top">
@@ -73,7 +73,7 @@
             </ion-label>
             <ion-input type="password" name="name" [formControlName]="formFields.Password"></ion-input>
           </ion-item>
-          <ion-item class="ion-item-no-border ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
+          <ion-item lines="none" class="ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
             <a routerLink="/auth/password-recover" routerDirection="forward">
               {{ 'service-publish.step-four.forgot-password' | translate }}
             </a>
@@ -81,7 +81,7 @@
         </ng-container>
 
         <ng-container *ngIf="!context.isAuthenticated && !context.isUserExists && formService.isEmailValid()">
-          <ion-item class="ion-item-no-border">
+          <ion-item lines="none">
             <div class="label-for-required-input">
               <b>
                 {{ 'service-publish.step-seven.country-title' | translate }}
@@ -105,7 +105,7 @@
             >
             </ionic-selectable>
           </ion-item>
-          <ion-item class="ion-item-no-border">
+          <ion-item lines="none">
             <div class="label-for-required-input">
               <b>
                 {{ 'service-publish.step-seven.city-title' | translate }}

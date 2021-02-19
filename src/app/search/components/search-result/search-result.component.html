@@ -5,11 +5,11 @@
         <app-professional-card *ngIf="data.professional" [professional]="data.professional" class="ion-margin-horizontal"></app-professional-card>
       </ion-row>
       <ion-row class="ion-margin-top ion-nowrap ion-justify-content-between">
-        <ion-item class="ion-item-no-border services-title">
+        <ion-item lines="none" class="services-title">
           {{ 'issuance.search-result.services' | translate }}
         </ion-item>
         <ion-row class="ion-justify-content-end">
-          <ion-item *ngIf="data.professional.level" class="ion-item-no-border master-level">
+          <ion-item *ngIf="data.professional.level" lines="none" class="master-level">
             {{ 'global.professional-level.' + data.professional.level | translate }}
           </ion-item>
         </ion-row>
@@ -23,21 +23,21 @@
         </ion-note>
       </ion-item>
       <ion-row *ngIf="needToRenderMoreServicesBtn()">
-        <ion-item (click)="onMoreServicesClick()" class="ion-item-no-border ion-item-no-min-height more-services cursor-pointer">
+        <ion-item (click)="onMoreServicesClick()" lines="none" class="ion-item-no-min-height more-services cursor-pointer">
           {{ 'issuance.search-result.more' | translate }}
         </ion-item>
       </ion-row>
       <ion-row class="ion-margin-top ion-justify-content-between ion-nowrap">
         <div class="space-between-column">
-          <ion-item class="ion-item-no-border ion-item-no-min-height master-location-title">
+          <ion-item lines="none" class="ion-item-no-min-height master-location-title">
             {{ 'issuance.search-result.address' | translate }}
           </ion-item>
-          <ion-item *ngFor="let loc of data.professional.locations" class="ion-item-no-border ion-item-no-min-height pv5">
+          <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5">
             {{ loc.address }}
           </ion-item>
         </div>
         <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
-          <ion-item class="ion-item-no-border">
+          <ion-item lines="none">
             <ion-button size="medium" [routerLink]="'/message/chat/' + data.professional.user.id">
               {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
             </ion-button>

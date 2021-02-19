@@ -2,11 +2,11 @@
 <ion-content>
   <app-content-wrapper>
     <form *ngIf="form" [formGroup]="form">
-      <ion-item class="ion-item-no-border ion-item-bordered-first" color="light">
+      <ion-item lines="none" class="ion-item-bordered-first" color="light">
         <ion-col class="ion-no-padding">
           <ion-row class="ion-justify-content-start ion-align-items-center">
             <ion-item
-              class="ion-item-no-border ion-align-items-center"
+              lines="none" class="ion-align-items-center"
               routerDirection="back"
               [detail]="false"
               color="light"
@@ -15,13 +15,13 @@
             >
               <ion-icon name="arrow-back-outline"></ion-icon>
             </ion-item>
-            <ion-item class="ion-item-no-border" color="light">
+            <ion-item lines="none" color="light">
               {{ 'profile-edit.about' | translate }}
             </ion-item>
           </ion-row>
         </ion-col>
       </ion-item>
-      <ion-item class="ion-item-no-border ion-item-bordered-others">
+      <ion-item lines="none" class="ion-item-bordered-others">
         <ion-col class="ion-padding-vertical" size="12">
           <ion-item>
             <ion-label color="medium" position="floating">

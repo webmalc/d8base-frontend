@@ -1,6 +1,6 @@
 <ion-footer class="ion-no-border">
   <ion-toolbar class="d8b-container" color="secondary">
-    <ion-item slot="start" color="secondary" class="ion-item-no-border">
+    <ion-item slot="start" color="secondary" lines="none">
       <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408 7.45976C4.5997
                     7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419 29.6441C13.241 29.6441 15.3605
@@ -26,7 +26,7 @@
                     24.9086Z" fill="white" />
       </svg>
     </ion-item>
-    <ion-item class="ion-item-no-border fs18" color="secondary" slot="end">
+    <ion-item lines="none" class="fs18" color="secondary" slot="end">
       Booking made simple
     </ion-item>
   </ion-toolbar>
@@ -47,12 +47,12 @@
     </ion-item>
   </ion-toolbar>
   <ion-toolbar class="d8b-container footer-min-height" *ngIf="!platform.is('desktop')">
-    <ion-item class="footer-min-height ion-item-no-border ion-item-no-side-padding" slot="start">
+    <ion-item class="footer-min-height ion-item-no-side-padding" slot="start" lines="none">
       <app-media-links class="footer-min-height"></app-media-links>
     </ion-item>
   </ion-toolbar>
   <ion-toolbar class="d8b-container footer-min-height ion-padding-bottom">
-    <ion-item class="footer-min-height ion-item-no-border footer-copy" slot="start">
+    <ion-item class="footer-min-height footer-copy" slot="start" lines="none">
       &copy; 2020 d8base | All rights reserved
     </ion-item>
   </ion-toolbar>
