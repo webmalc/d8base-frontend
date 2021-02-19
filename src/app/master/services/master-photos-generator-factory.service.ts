@@ -21,6 +21,6 @@ export class MasterPhotosGeneratorFactoryService {
   }
 
   private get(masterId: number): Observable<ProfessionalPhotoList[]> {
-    return this.professionalsApi.professionalsProfessionalPhotosList({ professional: masterId.toString() }).pipe(map(res => res.results));
+    return this.professionalsApi.professionalsProfessionalPhotosList({ professional: masterId }).pipe(map(res => res.results));
   }
 }

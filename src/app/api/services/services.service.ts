@@ -328,8 +328,8 @@ module ServicesService {
    * Parameters for servicesServicePhotosList
    */
   export interface ServicesServicePhotosListParams {
-    serviceProfessional?: string;
-    service?: string;
+    serviceProfessional?: number;
+    service?: number;
 
     /**
      * A search term.
@@ -361,7 +361,7 @@ module ServicesService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.

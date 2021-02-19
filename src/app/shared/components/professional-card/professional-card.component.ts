@@ -25,7 +25,7 @@ export class ProfessionalCardComponent implements OnInit {
   }
 
   private getReviewsCount(): void {
-    this.communicationService.communicationReviewsList({ professional: `${this.professional.id}`, pageSize: 1 }).subscribe(reviews => {
+    this.communicationService.communicationReviewsList({ professional: this.professional.id, pageSize: 1 }).subscribe(reviews => {
       this.reviewsCount = reviews.count;
       this.cd.markForCheck();
     });

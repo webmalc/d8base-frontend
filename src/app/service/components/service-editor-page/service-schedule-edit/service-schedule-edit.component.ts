@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceSchedule } from '@app/api/models';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { concat, forkJoin, Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
@@ -24,7 +23,7 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
     this.schedule$ = this.context$.pipe(
       switchMap(context =>
         deps.api.accountsServiceScheduleList({
-            service: context.service.id.toString(),
+            service: context.service.id,
           },
         ),
       ),
@@ -37,7 +36,7 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
     const { is_base_schedule, schedule } = form.value;
     const newSchedule: ServiceSchedule[] = schedule.map(s => ({ ...s, service: service.id }));
 
-    const deleteOldSchedule$ = this.deps.api.accountsServiceScheduleList({ service: service.id.toString() }).pipe(
+    const deleteOldSchedule$ = this.deps.api.accountsServiceScheduleList({ service: service.id }).pipe(
       switchMap(schedules => schedules.count > 0
         ? forkJoin(schedules.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
         : of<null>(void 0),
@@ -45,7 +44,7 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
     );
     const createNewSchedule$ = is_base_schedule
       ? of<any>(void 0)
-      : this.deps.api.accountsServiceScheduleSet(newSchedule as unknown as ServiceSchedule); // TODO needs backend fix
+      : this.deps.api.accountsServiceScheduleSet(newSchedule);
 
     const newService: Service = {
       ...service,

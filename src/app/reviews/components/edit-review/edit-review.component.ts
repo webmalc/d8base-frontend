@@ -23,7 +23,7 @@ export class EditReviewComponent implements OnInit, OnDestroy {
   public readonly userReview$: Observable<Review> = this.professionalId$.pipe(
     switchMap(professionalId =>
       this.accountsService.accountsReviewsList({
-        professional: `${professionalId}`,
+        professional: professionalId,
       }),
     ),
     map(({ results }) => results[0]),

@@ -562,7 +562,7 @@ module ProfessionalsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -584,8 +584,8 @@ module ProfessionalsService {
    * Parameters for professionalsProfessionalsList
    */
   export interface ProfessionalsProfessionalsListParams {
-    subcategoryCategory?: string;
-    subcategory?: string;
+    subcategoryCategory?: number;
+    subcategory?: number;
 
     /**
      * A search term.
@@ -639,7 +639,7 @@ module ProfessionalsService {
      * Which field to use when ordering the results.
      */
     ordering?: string;
-    category?: string;
+    category?: number;
   }
 
   /**

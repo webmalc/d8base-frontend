@@ -21,7 +21,7 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
 
   private readonly masterPhotos$: Observable<ProfessionalPhotoList[]> = this.context$.pipe(
     first(context => !!context?.master),
-    switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: `${context.master.id}` })),
+    switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.master.id })),
     map(data => data.results),
   );
   private readonly ngUnsubscribe$ = new Subject<void>();

@@ -44,7 +44,7 @@ export class EditReviewCommentComponent implements OnInit, OnDestroy {
   public readonly professionalComment$: Observable<ReviewComment> = this.reviewId$.pipe(
     switchMap(reviewId =>
       this.accountsService.accountsReviewCommentsList({
-        review: `${reviewId}`,
+        review: reviewId,
       }),
     ),
     map(({ results }) => results[0]),
