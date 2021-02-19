@@ -1,12 +1,4 @@
-<ion-item lines="none">
-  <ion-label class="ion-text-wrap ion-align-self-start">
-    {{serviceData.service.name}}
-  </ion-label>
-  <ion-label slot="end" class="ion-text-right">
-    <app-price [price]="serviceData.service.price"></app-price>
-    <app-duration-viewer [duration]="serviceData.service.duration"></app-duration-viewer>
-  </ion-label>
-</ion-item>
+<app-service-title [service]="serviceData.service"></app-service-title>
 <ion-item lines="none" *ngIf="serviceData.service.description">
   <ion-note>
     {{serviceData.service.description}}
