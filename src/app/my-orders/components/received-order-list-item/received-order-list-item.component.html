@@ -17,11 +17,7 @@
     </ion-label>
   </ion-item>
 
-  <ion-item lines="none">
-    <ion-label class="ion-text-wrap">
-      {{ service?.name }}
-    </ion-label>
-  </ion-item>
+  <app-service-title [service]="service"></app-service-title>
 
   <ion-item lines="none" *ngIf="!pending; else loading">
     <ion-button [routerLink]="['/my-orders', 'inbox', order.id]" color="secondary">

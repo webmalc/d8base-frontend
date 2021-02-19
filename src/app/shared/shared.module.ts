@@ -27,6 +27,7 @@ import {
   ScheduleEditorComponent,
   ScheduleViewerComponent,
   ServiceLocationComponent,
+  ServiceTitleComponent,
   ServiceWidgetComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -123,6 +124,7 @@ import { NumberDirective } from './directives/number.directive';
     LocationSelectorComponent,
     IonImageViewSliderDirective,
     GenderSelectorComponent,
+    ServiceTitleComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -174,6 +176,7 @@ import { NumberDirective } from './directives/number.directive';
     LocationSelectorComponent,
     IonImageViewSliderDirective,
     GenderSelectorComponent,
+    ServiceTitleComponent,
   ],
   imports: [
     CommonModule,
@@ -197,4 +200,5 @@ import { NumberDirective } from './directives/number.directive';
     SelectableSubregionOnSearchService,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

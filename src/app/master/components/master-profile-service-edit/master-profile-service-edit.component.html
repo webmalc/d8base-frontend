@@ -1,14 +1,6 @@
 <ion-card>
   <ion-card-content>
-    <ion-item lines="none">
-      <ion-text slot="start" color="dark">
-        {{service.name}}
-      </ion-text>
-      <ion-note slot="end">
-        <app-price [price]="service?.price"></app-price>
-        <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
-      </ion-note>
-    </ion-item>
+    <app-service-title [service]="service"></app-service-title>
     <ion-item lines="none">
       <ion-label *ngIf="service.is_enabled">
         <p>

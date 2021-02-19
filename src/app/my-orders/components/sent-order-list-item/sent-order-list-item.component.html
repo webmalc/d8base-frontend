@@ -7,15 +7,7 @@
     <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
   <app-professional-card *ngIf="master" [professional]="master" class="ion-padding-horizontal"></app-professional-card>
-  <ion-item *ngIf="service" lines="none">
-    <ion-label class="ion-text-wrap">
-      {{ service.name }}
-    </ion-label>
-    <ion-label class="text-end" slot="end">
-      <app-price [price]="service?.price"></app-price>
-      <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
-    </ion-label>
-  </ion-item>
+  <app-service-title [service]="service"></app-service-title>
   <ion-item lines="none" *ngIf="!pending; else loading">
     <ion-button [routerLink]="['/my-orders', 'outbox', order.id]" color="secondary">
       {{ 'sent_orders.view' | translate }}
