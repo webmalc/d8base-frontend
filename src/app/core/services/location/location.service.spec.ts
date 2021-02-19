@@ -8,7 +8,7 @@ import { IpApiService } from './ip-api.service';
 import { IpDataService } from './ip-data.service';
 import { IpServicesHolderService } from './ip-services-holder.service';
 import { IpnfDataService } from './ipnf-data.service';
-import { LocationService } from './location.service';
+import { CurrentPositionService } from './current-position.service';
 
 class HttpMock {
   public get(url: string): Observable<any> {
@@ -45,7 +45,7 @@ class HttpMock {
 describe('LocationService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      LocationService,
+      CurrentPositionService,
       IpServicesHolderService,
       IpApiService,
       IpDataService,
@@ -57,11 +57,11 @@ describe('LocationService', () => {
   }));
 
   it('should be created', () => {
-    const service: LocationService = TestBed.inject(LocationService);
+    const service: CurrentPositionService = TestBed.inject(CurrentPositionService);
     expect(service).toBeTruthy();
   });
   it('should be do some work', (done) => {
-    const service: LocationService = TestBed.inject(LocationService);
+    const service: CurrentPositionService = TestBed.inject(CurrentPositionService);
 
     service.getIpLocationData().subscribe(
       (returnData: LocationInterface) => {

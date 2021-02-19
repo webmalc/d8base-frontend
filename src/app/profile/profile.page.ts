@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Profile } from '@app/api/models';
 import { UserLocation } from '@app/core/models/user-location';
-import { CountriesApiService } from '@app/core/services';
+import { CountriesApiCache } from '@app/core/services/cache';
 import { HelperService } from '@app/core/services/helper.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
@@ -38,7 +38,7 @@ export class ProfilePage extends Reinitable {
     private readonly userManager: UserManagerService,
     private readonly contactsApi: UserContactApiService,
     private readonly contactsReadonlyApi: ContactApiService,
-    private readonly countriesApi: CountriesApiService,
+    private readonly countriesApi: CountriesApiCache,
     private readonly userLanguagesApi: UserLanguagesApiService,
     private readonly languagesApi: LanguagesApiService,
   ) {

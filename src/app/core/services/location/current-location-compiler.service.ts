@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
+import { City, Country, PostalCode } from '@app/api/models';
+import { LocationService } from '@app/api/services';
 import { NominatimReverseResponseInterface } from '@app/core/interfaces/nominatim-reverse-response-interface';
 import { ExtendedLocation } from '@app/core/models/extended-location';
 import { NominatimReverseResponse } from '@app/core/models/nominatim-reverse-response';
-import { PostalCode } from '@app/core/models/postal-code';
 import { HelperService } from '@app/core/services/helper.service';
-import { CitiesApiService } from '@app/core/services/location/cities-api.service';
-import { CountriesApiService } from '@app/core/services/location/countries-api.service';
-import { LocationService } from '@app/core/services/location/location.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { NominatimService } from '@app/core/services/location/nominatim.service';
-import { PostalCodeApiService } from '@app/core/services/location/postal-code-api.service';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
 import { Coords } from '@app/shared/interfaces/coords';
 import { plainToClass } from 'class-transformer';
 import { Observable, of } from 'rxjs';
@@ -22,11 +18,9 @@ import { map, switchMap } from 'rxjs/operators';
 export class CurrentLocationCompilerService {
 
   constructor(
-    private readonly location: LocationService,
+    private readonly location: CurrentPositionService,
     private readonly nominatim: NominatimService,
-    private readonly countryApi: CountriesApiService,
-    private readonly cityApi: CitiesApiService,
-    private readonly postalApi: PostalCodeApiService,
+    private readonly locationApi: LocationService,
   ) {
   }
 
@@ -68,19 +62,19 @@ export class CurrentLocationCompilerService {
   }
 
   private getCountryByTld(tld: string): Observable<Country | null> {
-    return this.countryApi.get({ tld }).pipe(
+    return this.locationApi.locationCountriesList({ tld }).pipe(
       map(res => res.count === 0 ? null : res.results.shift()),
     );
   }
 
   private getCity(name: string, country?: Country): Observable<City | null> {
-    return this.cityApi.get({ by_name: name, country: country.id.toString() }).pipe(
+    return this.locationApi.locationCitesList({ search: name, country: country.id.toString() }).pipe(
       map(res => res.count === 0 ? null : res.results.shift()),
     );
   }
 
   private getPostal(postal: string, country?: Country, city?: City): Observable<PostalCode | null> {
-    return this.postalApi.get({ search: postal, country: country.id.toString(), city: city.id.toString() }).pipe(
+    return this.locationApi.locationPostalCodesList({ search: postal, country: country.id.toString(), city: city.id.toString() }).pipe(
       map(res => res.count === 0 ? null : res.results.shift()),
     );
   }

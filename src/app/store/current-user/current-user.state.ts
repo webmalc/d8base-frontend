@@ -7,7 +7,7 @@ import { coordinatesToString } from '@app/core/functions/location.functions';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
 import { ApiClientService } from '@app/core/services/api-client.service';
-import { LocationService } from '@app/core/services/location/location.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { environment } from '@env/environment';
 import { Storage } from '@ionic/storage';
@@ -33,7 +33,7 @@ export class CurrentUserState implements NgxsOnInit {
     private readonly storage: Storage,
     private readonly client: ApiClientService,
     private readonly servicePublicationState: ServicePublishDataHolderService,
-    private readonly locationService: LocationService,
+    private readonly locationService: CurrentPositionService,
   ) {
   }
 

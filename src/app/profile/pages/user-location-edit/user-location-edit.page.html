@@ -2,7 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <app-abstract-location-edit
-      (deleteEmitter)="delete($event)"
+      (deleteEmitter)="delete($event.id)"
       (saveEmitter)="save($event)"
       [item]="userLocation"
       [transformFn]="transform"

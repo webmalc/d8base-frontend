@@ -7,7 +7,7 @@ import { IpApiService } from '@app/core/services/location/ip-api.service';
 import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
-import { LocationService } from '@app/core/services/location/location.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
@@ -52,7 +52,7 @@ describe('RegistrationPage', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
-        FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
+        FormBuilder, RegistrationService, CurrentPositionService, IpServicesHolderService,
         { provide: IpApiService, useValue: ipServiceMock },
         { provide: IpDataService, useValue: ipServiceMock },
         { provide: IpnfDataService, useValue: ipServiceMock },
