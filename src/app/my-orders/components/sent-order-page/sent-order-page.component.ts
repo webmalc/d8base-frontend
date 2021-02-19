@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SentOrder } from '@app/core/models/sent-order';
-import { MasterReadonlyApiCacheService, ServicesApiCache } from '@app/core/services/cache';
+import { ProfessionalsApiCache, ServicesApiCache } from '@app/core/services/cache';
 import { SentOrdersApiService } from '@app/order/services';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { map, switchMap } from 'rxjs/operators';
   selector: 'app-sent-order-page',
   templateUrl: './sent-order-page.component.html',
   styleUrls: ['./sent-order-page.component.scss'],
-  providers: [ServicesApiCache, MasterReadonlyApiCacheService],
+  providers: [ServicesApiCache, ProfessionalsApiCache],
 })
 export class SentOrderPageComponent {
 

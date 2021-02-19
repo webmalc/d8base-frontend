@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { Service } from '@app/service/models/service';
+import { Service } from '@app/api/models';
 import { Observable, of } from 'rxjs';
 
 @Pipe({
@@ -18,6 +18,6 @@ export class ServiceByIdPipe implements PipeTransform {
       return of<Service>(null);
     }
 
-    return this.serviceCache.getById(id);
+    return this.serviceCache.getByEntityId(id);
   }
 }

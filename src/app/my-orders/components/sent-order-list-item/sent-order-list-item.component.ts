@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProfessionalList, SentOrder, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { MasterReadonlyApiCacheService } from '@app/core/services/cache/master-readonly-api-cache.service';
+import { ProfessionalsApiCache } from '@app/core/services/cache/professionals-api-cache.service';
 import { SentOrderStatusController } from '@app/my-orders/services';
 import { switchMap } from 'rxjs/operators';
 import { OrderListItem } from '../abstract/order-list-item';
@@ -22,7 +22,7 @@ export class SentOrderListItemComponent extends OrderListItem {
   constructor(
     private readonly servicesCache: ServicesApiCache,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly masterCache: MasterReadonlyApiCacheService,
+    private readonly masterCache: ProfessionalsApiCache,
     private readonly orderStatusController: SentOrderStatusController,
   ) {
     super();
@@ -38,11 +38,11 @@ export class SentOrderListItemComponent extends OrderListItem {
     if (!order) {
       return;
     }
-    this.servicesCache.getById(order.service).pipe(
+    this.servicesCache.getByEntityId(order.service).pipe(
       switchMap(service => {
         this.service = service;
 
-        return this.masterCache.getById(service.professional);
+        return this.masterCache.getByEntityId(service.professional);
       }),
     ).subscribe(master => {
       this.master = master;

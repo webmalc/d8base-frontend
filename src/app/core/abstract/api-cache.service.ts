@@ -1,16 +1,21 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable()
 export abstract class ApiCache<T> implements OnDestroy {
-  protected abstract apiService: { getByEntityId: (id: number) => Observable<T> };
-  private readonly cache = new Map<number, T>();
+  protected abstract read: (id: number) => Observable<T>;
+  private readonly cache = new Map<number, Observable<T>>();
 
   public ngOnDestroy(): void {
     this.cache.clear();
   }
 
-  public getById(id: number): Observable<T> {
-    return this.cache.has(id) ? of(this.cache.get(id)) : this.apiService.getByEntityId(id);
+  public getByEntityId(id: number): Observable<T> {
+    if (!this.cache.has(id)) {
+      this.cache.set(id, this.read(id).pipe(shareReplay(1)));
+    }
+
+    return this.cache.get(id);
   }
 }

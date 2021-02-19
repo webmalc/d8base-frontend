@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
-import { MasterReadonlyApiCacheService } from '@app/core/services/cache';
+import { ProfessionalsApiCache } from '@app/core/services/cache';
 import { Observable, of } from 'rxjs';
 
 @Pipe({
@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 export class MasterByIdPipe implements PipeTransform {
 
   constructor(
-    private readonly serviceCache: MasterReadonlyApiCacheService,
+    private readonly serviceCache: ProfessionalsApiCache,
   ) {
   }
 
@@ -18,6 +18,6 @@ export class MasterByIdPipe implements PipeTransform {
       return of<ProfessionalList>(null);
     }
 
-    return this.serviceCache.getById(id);
+    return this.serviceCache.getByEntityId(id);
   }
 }
