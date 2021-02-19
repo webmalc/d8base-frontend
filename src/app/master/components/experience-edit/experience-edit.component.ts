@@ -1,9 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgDestroyService } from '@app/core/services';
 import { Experience } from '@app/master/models/experience';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { plainToClass } from 'class-transformer';
+import { takeUntil } from 'rxjs/operators';
 
 enum ExperienceFormFields {
   title = 'title',
@@ -17,6 +19,7 @@ enum ExperienceFormFields {
   selector: 'app-experience-edit',
   templateUrl: './experience-edit.component.html',
   styleUrls: ['./experience-edit.component.scss'],
+  providers: [NgDestroyService],
 })
 export class ExperienceEditComponent extends AbstractEditComponent<Experience> implements OnInit, OnChanges {
   public readonly formFields = ExperienceFormFields;
@@ -29,7 +32,7 @@ export class ExperienceEditComponent extends AbstractEditComponent<Experience> i
     [this.formFields.description]: [null],
   });
 
-  constructor(private readonly location: Location, private readonly fb: FormBuilder) {
+  constructor(private readonly location: Location, private readonly fb: FormBuilder, private readonly destroy$: NgDestroyService) {
     super();
   }
 
@@ -55,12 +58,15 @@ export class ExperienceEditComponent extends AbstractEditComponent<Experience> i
   }
 
   private handleIsStillHereControl(): void {
-    this.form.get(this.formFields.is_still_here).valueChanges.subscribe(value => {
-      const action = value ? 'disable' : 'enable';
-      [this.formFields.end_date].forEach(control => {
-        this.form.get(control)[action]();
-        this.form.get(control).reset();
+    this.form
+      .get(this.formFields.is_still_here)
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        const action = value ? 'disable' : 'enable';
+        [this.formFields.end_date].forEach(control => {
+          this.form.get(control)[action]();
+          this.form.get(control).reset();
+        });
       });
-    });
   }
 }
