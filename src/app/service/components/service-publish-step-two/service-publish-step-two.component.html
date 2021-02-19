@@ -21,6 +21,7 @@
         </ion-label>
         <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
       </ion-item>
+      <app-form-control-error [controlName]="formFields.Name"> </app-form-control-error>
       <ion-item lines="none" class="ion-item-no-side-padding ion-margin-top">
         {{ 'service-publish.step-two.service-description' | translate }}
       </ion-item>
@@ -40,8 +41,10 @@
           </ion-item>
         </ion-row>
         <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
+        <app-form-control-error [controlName]="formFields.Duration"></app-form-control-error>
       </ion-col>
       <app-price-editor [formControlName]="formFields.Price"></app-price-editor>
+      <app-form-control-error [controlName]="formFields.Price"></app-form-control-error>
       <app-info-row>
         {{ 'service-publish.step-two.second-info-row' | translate }}
       </app-info-row>
@@ -60,6 +63,7 @@
           </ion-item>
         </ion-radio-group>
       </ion-list>
+      <app-form-control-error [controlName]="formFields.Location"></app-form-control-error>
       <ion-row class="ion-justify-content-center">
         <ion-col size="6">
           <ion-button

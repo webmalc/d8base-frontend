@@ -18,7 +18,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { of } from 'rxjs';
 import { RegistrationFormComponent } from '../../components/registration-form/registration-form.component';
-import { RegistrationFormService } from '../../forms/registration-form.service';
 import { RegistrationService } from '../../services/registration.service';
 import { RegistrationPage } from './registration.page';
 
@@ -53,7 +52,7 @@ describe('RegistrationPage', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
-        RegistrationFormService, FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
+        FormBuilder, RegistrationService, LocationService, IpServicesHolderService,
         { provide: IpApiService, useValue: ipServiceMock },
         { provide: IpDataService, useValue: ipServiceMock },
         { provide: IpnfDataService, useValue: ipServiceMock },

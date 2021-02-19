@@ -1,4 +1,4 @@
-<form [formGroup]="registrationFormService.form" (ngSubmit)="submitRegistrationForm()" (keydown.enter)="submitRegistrationForm()">
+<form [formGroup]="form" (ngSubmit)="submitRegistrationForm()" (keydown.enter)="submitRegistrationForm()">
   <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
   <ion-item>
     <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.email' | translate }}</ion-label>
@@ -17,11 +17,12 @@
     <ion-input type="password" name="confirm" [formControlName]="formFields.Confirm"></ion-input>
   </ion-item>
   <app-form-control-error [controlName]="formFields.Confirm"> </app-form-control-error>
-  <app-form-control-error [control]="registrationFormService.form" [showErrors]="['passwordMismatch']"> </app-form-control-error>
+  <app-form-control-error [control]="form" [showErrors]="['passwordMismatch']"> </app-form-control-error>
   <ion-item>
     <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
     <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
   </ion-item>
+  <app-form-control-error [controlName]="formFields.Name"> </app-form-control-error>
   <ion-item>
     <ion-label color="medium" position="floating">{{ 'registration-form.phone' | translate }}</ion-label>
     <ion-input
@@ -55,11 +56,11 @@
       itemTextField="name"
       [canSearch]="true"
       [formControlName]="formFields.City"
-      (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
+      (onSearch)="citySelectable.onCitySearch($event, form.get(formFields.Country).value)"
     >
     </ionic-selectable>
   </ion-item>
-  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="registrationFormService.isFormInvalid()">{{
+  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="form.invalid">{{
     'registration-form.register' | translate
   }}</ion-button>
 </form>

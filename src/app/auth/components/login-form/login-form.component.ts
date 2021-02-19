@@ -1,37 +1,29 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Credentials } from '@app/auth/interfaces/credentials';
 import { LoginFormFields } from '../../enums/login-form-fields';
-import { LoginFormService } from '../../forms/login-form.service';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent implements OnInit {
-
+export class LoginFormComponent {
+  public form: FormGroup = this.fb.group({
+    [LoginFormFields.Username]: ['', [Validators.required, Validators.email]],
+    [LoginFormFields.Password]: ['', Validators.required],
+  });
+  @Input() public errorMessages: string[];
   public readonly formFields = LoginFormFields;
   @Output() public readonly user = new EventEmitter<Credentials>();
 
-  constructor(
-    public readonly loginFormService: LoginFormService,
-  ) {
-  }
-
-  public ngOnInit(): void {
-    this.loginFormService.initForm();
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   public submitLoginForm(): void {
-    if (this.loginFormService.form.invalid) {
+    if (this.form.invalid) {
       return;
     }
-    const data = this.loginFormService.form.getRawValue();
-    const credentials = {
-      username: data[LoginFormFields.Username],
-      password: data[LoginFormFields.Password],
-    };
-    this.user.emit(credentials);
+
+    this.user.emit(this.form.value);
   }
 }

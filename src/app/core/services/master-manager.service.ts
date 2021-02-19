@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
 import { Master } from '@app/core/models/master';
-import { AuthenticationService } from '@app/core/services/authentication.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterApiService } from '@app/master/services/master-api.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
@@ -16,17 +14,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class MasterManagerService {
-
   @Select(CurrentUserSelectors.isMaster)
   public isMaster$: Observable<boolean>;
 
-  constructor(
-    private readonly userManager: UserManagerService,
-    private readonly auth: AuthenticationService,
-    private readonly masterApi: MasterApiService,
-    private readonly masterReadonlyApi: MasterReadonlyApiService,
-  ) {
-  }
+  constructor(private readonly masterApi: MasterApiService, private readonly masterReadonlyApi: MasterReadonlyApiService) {}
 
   public getMasterList(): Observable<ProfessionalList[]> {
     return this.masterApi.get().pipe(map(data => data.results));

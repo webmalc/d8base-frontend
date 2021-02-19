@@ -1,59 +1,62 @@
+<ion-item lines="none" class="ion-item-bordered-first" color="light">
+  <ion-col class="ion-no-padding">
+    <ion-row class="ion-justify-content-start ion-align-items-center">
+      <ion-item
+        (click)="locationBack()"
+        color="light"
+        lines="none" class="ion-align-items-center ion-activatable cursor-pointer"
+        routerDirection="back"
+        routerLinkActive="active"
+      >
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" color="light">
+        {{ 'experience-edit-page.back' | translate }}
+      </ion-item>
+    </ion-row>
+  </ion-col>
+</ion-item>
 <ng-container *ngIf="item">
-  <ion-item lines="none" class="ion-item-bordered-first" color="light">
-    <ion-col class="ion-no-padding">
-      <ion-row class="ion-justify-content-start ion-align-items-center">
-        <ion-item
-          (click)="locationBack()"
-          color="light"
-          lines="none" class="ion-align-items-center ion-activatable cursor-pointer"
-          routerDirection="back"
-          routerLinkActive="active"
-        >
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" color="light">
-          {{ 'experience-edit-page.back' | translate }}
-        </ion-item>
-      </ion-row>
-    </ion-col>
-  </ion-item>
   <ion-item lines="none" class="ion-item-bordered-others">
     <ion-col class="ion-padding-vertical" size="12">
       <ion-item>
-        <ion-label color="medium" position="floating">
+        <ion-label color="medium" position="floating" class="label-for-required-input">
           {{ 'experience-edit-page.title' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.title" name="title" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.title)" name="title" type="text"></ion-input>
       </ion-item>
+      <app-form-control-error [control]="form.get(formFields.title)"> </app-form-control-error>
+
       <ion-item>
-        <ion-label color="medium" position="floating">
+        <ion-label color="medium" position="floating" class="label-for-required-input">
           {{ 'experience-edit-page.company' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.company" name="company" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.company)" name="company" type="text"></ion-input>
       </ion-item>
+      <app-form-control-error [control]="form.get(formFields.company)"> </app-form-control-error>
       <ion-item lines="none" class="ion-item-bottom-border width100">
         <ion-label color="medium">
           {{ 'experience-edit-page.is-still-here' | translate }}
         </ion-label>
-        <ion-toggle slot="end" [(ngModel)]="item.is_still_here"></ion-toggle>
+        <ion-toggle slot="end" [formControl]="form.get(formFields.is_still_here)"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'experience-edit-page.start-date' | translate }}
         </ion-label>
-        <ion-datetime [(ngModel)]="item.start_date" display-format="YYYY-MM-DD"></ion-datetime>
+        <ion-datetime [formControl]="form.get(formFields.start_date)" display-format="YYYY-MM-DD"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'experience-edit-page.end-date' | translate }}
         </ion-label>
-        <ion-datetime [(ngModel)]="item.end_date" display-format="YYYY-MM-DD"></ion-datetime>
+        <ion-datetime [formControl]="form.get(formFields.end_date)" display-format="YYYY-MM-DD"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'experience-edit-page.description' | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="item.description" name="title" type="text"></ion-input>
+        <ion-input [formControl]="form.get(formFields.description)" name="title" type="text"></ion-input>
       </ion-item>
       <ion-row class="ion-justify-content-center ion-margin-top">
         <ion-col size="6">
@@ -62,7 +65,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button (click)="save()" expand="block" fill="solid" size="medium">
+          <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
             {{ 'experience-edit-page.save' | translate }}
           </ion-button>
         </ion-col>

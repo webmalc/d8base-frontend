@@ -22,7 +22,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { plainToClass } from 'class-transformer';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
-import { RegistrationFormService } from '../../forms/registration-form.service';
 import { CityPickerPopoverComponent } from '../city-picker-popover/city-picker-popover.component';
 import { RegistrationFormComponent } from './registration-form.component';
 
@@ -49,7 +48,6 @@ describe('RegistrationFormComponent', () => {
         IonicSelectableModule,
       ],
       providers: [
-        RegistrationFormService,
         IpServicesHolderService,
         IpApiService,
         IpDataService,

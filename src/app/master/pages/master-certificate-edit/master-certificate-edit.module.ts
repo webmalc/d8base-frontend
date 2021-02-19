@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CertificateEditComponent } from '@app/master/components/certificate-edit/certificate-edit.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { MasterCertificateEditPage } from './master-certificate-edit.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     MasterCertificateEditPageRoutingModule,
     TranslateModule,

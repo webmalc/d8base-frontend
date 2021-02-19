@@ -34,6 +34,7 @@
               formControlName="{{ formFields.FirstName }}"
             ></ion-input>
           </ion-item>
+          <app-form-control-error [controlName]="formFields.FirstName"> </app-form-control-error>
           <ion-item>
             <ion-label class="label-for-required-input" color="medium" position="floating">{{
               'profile-form.fields.surname' | translate
@@ -45,6 +46,7 @@
               formControlName="{{ formFields.LastName }}"
             ></ion-input>
           </ion-item>
+          <app-form-control-error [controlName]="formFields.LastName"> </app-form-control-error>
           <ion-item>
             <ion-label color="medium" position="floating">{{ 'profile-form.fields.patronymic' | translate }}</ion-label>
             <ion-input
@@ -54,6 +56,7 @@
               formControlName="{{ formFields.Patronymic }}"
             ></ion-input>
           </ion-item>
+          <app-form-control-error [controlName]="formFields.Patronymic"> </app-form-control-error>
           <app-gender-selector [formControlName]="formFields.Gender"></app-gender-selector>
           <ion-item>
             <ion-label class="label-for-required-input" color="medium" position="floating">
@@ -67,7 +70,8 @@
             >
             </ion-input>
           </ion-item>
-          <ion-button [disabled]="isSubmitDisabled()" type="submit" class="ion-margin-top" fill="solid" expand="block">
+          <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
+          <ion-button [disabled]="form.invalid || form.pristine" type="submit" class="ion-margin-top" fill="solid" expand="block">
             {{ 'profile-form.button' | translate }}
           </ion-button>
         </ion-col>
