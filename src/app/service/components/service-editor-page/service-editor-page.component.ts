@@ -34,7 +34,7 @@ export class ServiceEditorPageComponent {
     this.schedule$ = this.service$.pipe(
       switchMap(service => service.is_base_schedule
         ? api.accountsProfessionalScheduleList({}).pipe(map(response => response.results))
-        : api.accountsServiceScheduleList({ service: service.id.toString() }).pipe(map(response => response.results)),
+        : api.accountsServiceScheduleList({ service: service.id }).pipe(map(response => response.results)),
       ),
     );
   }

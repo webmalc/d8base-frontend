@@ -25,10 +25,10 @@ export class LocationSelectorComponent {
     this.context$ = this.service$.pipe(
       switchMap(service => forkJoin({
         allLocations: api.accountsProfessionalLocationsList({
-          professional: service.professional.toString(),
+          professional: service.professional,
         }),
         initialLocations: api.accountsServiceLocationsList({
-          service: service.id.toString(),
+          service: service.id,
         }),
       })),
       map(data => ({

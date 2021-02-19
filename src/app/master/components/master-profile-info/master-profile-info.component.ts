@@ -49,7 +49,7 @@ export class MasterProfileInfoComponent {
       switchMap(professional =>
         this.communicationService.communicationReviewsList({
           pageSize: 5,
-          professional: `${professional.id}`,
+          professional: professional.id,
         }),
       ),
       share(),

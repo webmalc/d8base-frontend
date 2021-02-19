@@ -18,7 +18,7 @@ export class ServicesGeneratorFactoryService {
   public getServiceList(masterId?: number): Observable<ServiceData[]> {
     return this.api.accountsServicesList(
       {
-        professional: masterId.toString(),
+        professional: masterId,
         ordering: 'created',
         isEnabled: 'true',
       },

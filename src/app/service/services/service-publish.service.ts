@@ -106,9 +106,8 @@ export class ServicePublishService {
   }
 
   private createSchedule(schedule: ServiceSchedule[], service: Service): Observable<ServiceSchedule[]> {
-    // TODO: remove explicit casting when swagger is fixed
-    const data = schedule?.map(v => ({ ...v, service: service.id })) as unknown as ServiceSchedule;
-    return this.api.accountsServiceScheduleSet(data) as unknown as Observable<ServiceSchedule[]>;
+    const data = schedule?.map(v => ({ ...v, service: service.id }));
+    return this.api.accountsServiceScheduleSet(data);
   }
 
   private createMasterSchedule(schedule: MasterSchedule[], master: ProfessionalList): Observable<MasterSchedule[]> {

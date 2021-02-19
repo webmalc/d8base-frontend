@@ -28,7 +28,7 @@ export class ServiceTypeEditComponent extends ServiceEditor {
 
   public submit({ form, service }: ServiceEditorContext): void {
     const { service_type, location } = form.value;
-    const deleteOldLocation$ = this.deps.api.accountsServiceLocationsList({ service: service.id.toString() }).pipe(
+    const deleteOldLocation$ = this.deps.api.accountsServiceLocationsList({ service: service.id }).pipe(
       switchMap(locations => locations.count > 0
         ? forkJoin(locations.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
         : of<null>(void 0),

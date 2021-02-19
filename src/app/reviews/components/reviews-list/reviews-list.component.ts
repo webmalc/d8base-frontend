@@ -26,7 +26,7 @@ export class ReviewsListComponent {
   public readonly reviews$: Observable<ReviewList[]> = this.professionalId$.pipe(
     switchMap(professionalId =>
       this.communicationService.communicationReviewsList({
-        professional: `${professionalId}`,
+        professional: professionalId,
       }),
     ),
     map(({ results }) => results),
@@ -44,7 +44,7 @@ export class ReviewsListComponent {
                   .accountsOrdersSentList({ statusIn: 'completed' })
                   .pipe(map(({ results: orders }) => orders.map(({ service }) => service))),
                 this.servicesService
-                  .servicesServicesList({ professional: `${professionalId}` })
+                  .servicesServicesList({ professional: professionalId })
                   .pipe(map(({ results: services }) => services.map(({ id }) => id))),
               ]),
             ),
