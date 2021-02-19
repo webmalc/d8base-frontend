@@ -4,7 +4,6 @@ import { shareReplay } from 'rxjs/operators';
 
 @Injectable()
 export abstract class ApiCache<T> implements OnDestroy {
-  protected abstract read: (id: number) => Observable<T>;
   private readonly cache = new Map<number, Observable<T>>();
 
   public ngOnDestroy(): void {
@@ -18,4 +17,6 @@ export abstract class ApiCache<T> implements OnDestroy {
 
     return this.cache.get(id);
   }
+
+  protected abstract read(id: number): Observable<T>;
 }
