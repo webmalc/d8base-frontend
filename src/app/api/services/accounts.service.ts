@@ -3816,10 +3816,10 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * Set the schedules.
+   * Set the professional schedules.
    * @param data undefined
    */
-  accountsProfessionalScheduleSetResponse(data: ProfessionalSchedule): __Observable<__StrictHttpResponse<ProfessionalSchedule>> {
+  accountsProfessionalScheduleSetResponse(data: Array<ProfessionalSchedule>): __Observable<__StrictHttpResponse<Array<ProfessionalSchedule>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -3837,17 +3837,17 @@ class AccountsService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<ProfessionalSchedule>;
+        return _r as __StrictHttpResponse<Array<ProfessionalSchedule>>;
       })
     );
   }
   /**
-   * Set the schedules.
+   * Set the professional schedules.
    * @param data undefined
    */
-  accountsProfessionalScheduleSet(data: ProfessionalSchedule): __Observable<ProfessionalSchedule> {
+  accountsProfessionalScheduleSet(data: Array<ProfessionalSchedule>): __Observable<Array<ProfessionalSchedule>> {
     return this.accountsProfessionalScheduleSetResponse(data).pipe(
-      __map(_r => _r.body as ProfessionalSchedule)
+      __map(_r => _r.body as Array<ProfessionalSchedule>)
     );
   }
 
@@ -6830,10 +6830,10 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * Set the schedules.
+   * Set the service schedules.
    * @param data undefined
    */
-  accountsServiceScheduleSetResponse(data: ServiceSchedule): __Observable<__StrictHttpResponse<ServiceSchedule>> {
+  accountsServiceScheduleSetResponse(data: Array<ServiceSchedule>): __Observable<__StrictHttpResponse<Array<ServiceSchedule>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -6851,17 +6851,17 @@ class AccountsService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<ServiceSchedule>;
+        return _r as __StrictHttpResponse<Array<ServiceSchedule>>;
       })
     );
   }
   /**
-   * Set the schedules.
+   * Set the service schedules.
    * @param data undefined
    */
-  accountsServiceScheduleSet(data: ServiceSchedule): __Observable<ServiceSchedule> {
+  accountsServiceScheduleSet(data: Array<ServiceSchedule>): __Observable<Array<ServiceSchedule>> {
     return this.accountsServiceScheduleSetResponse(data).pipe(
-      __map(_r => _r.body as ServiceSchedule)
+      __map(_r => _r.body as Array<ServiceSchedule>)
     );
   }
 
@@ -7905,7 +7905,7 @@ module AccountsService {
      * Which field to use when ordering the results.
      */
     ordering?: string;
-    contact?: string;
+    contact?: number;
   }
 
   /**
@@ -8108,7 +8108,7 @@ module AccountsService {
     startDatetimeGte?: string;
     startDatetimeGt?: string;
     startDatetime?: string;
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -8236,7 +8236,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8287,7 +8287,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8339,7 +8339,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8390,7 +8390,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8441,7 +8441,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8492,7 +8492,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8543,7 +8543,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8594,7 +8594,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8647,7 +8647,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8760,7 +8760,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    review?: string;
+    review?: number;
 
     /**
      * Number of results to return per page.
@@ -8814,7 +8814,7 @@ module AccountsService {
      */
     search?: string;
     rating?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.
@@ -8912,7 +8912,7 @@ module AccountsService {
    * Parameters for accountsServiceClosedPeriodsList
    */
   export interface AccountsServiceClosedPeriodsListParams {
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -8964,7 +8964,7 @@ module AccountsService {
    * Parameters for accountsServiceLocationsList
    */
   export interface AccountsServiceLocationsListParams {
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -9015,7 +9015,7 @@ module AccountsService {
    * Parameters for accountsServicePhotosList
    */
   export interface AccountsServicePhotosListParams {
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -9066,7 +9066,7 @@ module AccountsService {
    * Parameters for accountsServicePricesList
    */
   export interface AccountsServicePricesListParams {
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -9118,7 +9118,7 @@ module AccountsService {
    * Parameters for accountsServiceScheduleList
    */
   export interface AccountsServiceScheduleListParams {
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -9171,7 +9171,7 @@ module AccountsService {
    * Parameters for accountsServiceTagsList
    */
   export interface AccountsServiceTagsListParams {
-    service?: string;
+    service?: number;
 
     /**
      * A search term.
@@ -9227,7 +9227,7 @@ module AccountsService {
      * A search term.
      */
     search?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.

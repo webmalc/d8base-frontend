@@ -15,6 +15,7 @@ export interface SentOrder {
   price_currency?: string;
   service: number;
   service_location?: null | number;
+  source?: 'online' | 'manual';
   start_datetime: string;
   status?: 'not_confirmed' | 'confirmed' | 'paid' | 'completed' | 'canceled';
 }

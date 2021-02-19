@@ -1093,13 +1093,13 @@ module CommunicationService {
    * Parameters for communicationMessagesListList
    */
   export interface CommunicationMessagesListListParams {
-    sender?: string;
+    sender?: number;
 
     /**
      * A search term.
      */
     search?: string;
-    recipient?: string;
+    recipient?: number;
 
     /**
      * Number of results to return per page.
@@ -1116,14 +1116,14 @@ module CommunicationService {
      */
     ordering?: string;
     isRead?: string;
-    interlocutor?: string;
+    interlocutor?: number;
   }
 
   /**
    * Parameters for communicationMessagesReceivedList
    */
   export interface CommunicationMessagesReceivedListParams {
-    sender?: string;
+    sender?: number;
 
     /**
      * A search term.
@@ -1156,7 +1156,7 @@ module CommunicationService {
      * A search term.
      */
     search?: string;
-    recipient?: string;
+    recipient?: number;
 
     /**
      * Number of results to return per page.
@@ -1203,7 +1203,7 @@ module CommunicationService {
    * Parameters for communicationMessagesSuggestedList
    */
   export interface CommunicationMessagesSuggestedListParams {
-    subcategory?: string;
+    subcategory?: number;
 
     /**
      * A search term.
@@ -1237,7 +1237,7 @@ module CommunicationService {
      */
     search?: string;
     rating?: string;
-    professional?: string;
+    professional?: number;
 
     /**
      * Number of results to return per page.

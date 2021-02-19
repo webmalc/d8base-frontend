@@ -12,6 +12,7 @@ import { City } from '../models/city';
 import { Continent } from '../models/continent';
 import { Country } from '../models/country';
 import { District } from '../models/district';
+import { Language } from '../models/language';
 import { PostalCode } from '../models/postal-code';
 import { Region } from '../models/region';
 import { Subregion } from '../models/subregion';
@@ -588,7 +589,7 @@ class LocationService extends __BaseService {
   /**
    * Return a list of all languages.
    */
-  locationLanguagesListResponse(): __Observable<__StrictHttpResponse<null>> {
+  locationLanguagesListResponse(): __Observable<__StrictHttpResponse<Array<Language>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -605,16 +606,16 @@ class LocationService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<Array<Language>>;
       })
     );
   }
   /**
    * Return a list of all languages.
    */
-  locationLanguagesList(): __Observable<null> {
+  locationLanguagesList(): __Observable<Array<Language>> {
     return this.locationLanguagesListResponse().pipe(
-      __map(_r => _r.body as null)
+      __map(_r => _r.body as Array<Language>)
     );
   }
 
@@ -622,7 +623,7 @@ class LocationService extends __BaseService {
    * Return a language object.
    * @param id undefined
    */
-  locationLanguagesReadResponse(id: string): __Observable<__StrictHttpResponse<null>> {
+  locationLanguagesReadResponse(id: string): __Observable<__StrictHttpResponse<Language>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -640,7 +641,7 @@ class LocationService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<Language>;
       })
     );
   }
@@ -648,9 +649,9 @@ class LocationService extends __BaseService {
    * Return a language object.
    * @param id undefined
    */
-  locationLanguagesRead(id: string): __Observable<null> {
+  locationLanguagesRead(id: string): __Observable<Language> {
     return this.locationLanguagesReadResponse(id).pipe(
-      __map(_r => _r.body as null)
+      __map(_r => _r.body as Language)
     );
   }
 
@@ -1090,7 +1091,7 @@ module LocationService {
      */
     ordering?: string;
     currency?: string;
-    continent?: string;
+    continent?: number;
     code3?: string;
     code?: string;
   }
@@ -1177,7 +1178,7 @@ module LocationService {
      * Which field to use when ordering the results.
      */
     ordering?: string;
-    country?: string;
+    country?: number;
     code?: string;
   }
 
@@ -1190,8 +1191,8 @@ module LocationService {
      * A search term.
      */
     search?: string;
-    regionCountry?: string;
-    region?: string;
+    regionCountry?: number;
+    region?: number;
 
     /**
      * Number of results to return per page.
