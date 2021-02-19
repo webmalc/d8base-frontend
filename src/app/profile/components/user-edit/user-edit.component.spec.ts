@@ -25,7 +25,6 @@ describe('UserEditComponent', () => {
         Location,
         FormBuilder,
         RegisterEmailApiService,
-        { provide: UserManagerService, useClass: UserManagerMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

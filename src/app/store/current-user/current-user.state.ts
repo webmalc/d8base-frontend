@@ -181,19 +181,12 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.UpdateProfile)
   public updateProfile(
-    { getState, patchState }: StateContext<CurrentUserStateModel>,
+    { patchState }: StateContext<CurrentUserStateModel>,
     { changes }: CurrentUserActions.ChangeUserSettings,
   ) {
-    const profile = getState().profile;
-    if (!profile) {
-      throw new Error('UpdateProfile error: empty profile');
-    }
-    patchState({
-      settings: {
-        ...profile,
-        ...changes,
-      },
-    });
+    return this.api.accountsProfilePartialUpdate(changes).pipe(
+      tap(profile => patchState({ profile })),
+    );
   }
 
   @Action(CurrentUserActions.RefreshTokens)

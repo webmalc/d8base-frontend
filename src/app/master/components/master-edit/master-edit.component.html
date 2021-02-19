@@ -27,7 +27,7 @@
           type="text"
           name="first_name"
           [placeholder]="'master-profile.edit-master.name-placeholder' | translate"
-          [(ngModel)]="item.name"
+          [formControl]="form.get(formFields.name)"
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -38,7 +38,7 @@
           type="text"
           name="last_name"
           [placeholder]="'master-profile.edit-master.description-placeholder' | translate"
-          [(ngModel)]="item.description"
+          [formControl]="form.get(formFields.description)"
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -49,7 +49,7 @@
           type="text"
           name="patronymic"
           [placeholder]="'master-profile.edit-master.company-placeholder' | translate"
-          [(ngModel)]="item.company"
+          [formControl]="form.get(formFields.company)"
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -60,14 +60,14 @@
           type="text"
           name="patronymic"
           [placeholder]="'master-profile.edit-master.experience-placeholder' | translate"
-          [(ngModel)]="item.experience"
+          [formControl]="form.get(formFields.experience)"
         ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'master-profile.edit-master.level' | translate }}
         </ion-label>
-        <ion-select [placeholder]="'master-profile.edit-master.level-placeholder' | translate" [(ngModel)]="item.level" interface="popover">
+        <ion-select [placeholder]="'master-profile.edit-master.level-placeholder' | translate" [formControl]="form.get(formFields.level)" interface="popover">
           <ion-select-option *ngFor="let level of levelOptions" value="{{ level }}">
             {{ level }}
           </ion-select-option>
@@ -78,7 +78,7 @@
           {{ 'master-profile.edit-master.subcategory' | translate }}
         </ion-label>
         <ion-select
-          [(ngModel)]="item.subcategory"
+          [formControl]="form.get(formFields.subcategory)"
           interface="popover"
           [placeholder]="'master-profile.edit-master.subcategory-placeholder' | translate"
         >
@@ -87,7 +87,7 @@
           </ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button (click)="save()" class="ion-margin-top" fill="solid" expand="block">
+      <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" class="ion-margin-top" fill="solid" expand="block">
         {{ 'master-profile.edit-master.save' | translate }}
       </ion-button>
     </ion-col>

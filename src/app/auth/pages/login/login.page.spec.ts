@@ -6,7 +6,6 @@ import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/er
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ApiClientServiceMock } from 'src/testing/mocks';
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
-import { LoginFormService } from '../../forms/login-form.service';
 import { Credentials } from '../../interfaces/credentials';
 import { LoginPage } from './login.page';
 
@@ -24,7 +23,6 @@ describe('LoginPage', () => {
       ],
       providers: [
         { provide: ApiClientService, useClass: ApiClientServiceMock },
-        LoginFormService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

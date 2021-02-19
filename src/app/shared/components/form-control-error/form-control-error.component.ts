@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class FormControlErrorComponent implements OnInit {
   @Input() public control: AbstractControl;
-  @Input() public filterErrors: string[] = ['required'];
+  @Input() public filterErrors: string[] = [];
   @Input() public showErrors: string[] = null;
   @Input() public readonly errorDescriptions: { key: string };
   @Input() public set controlName(name: string) {
