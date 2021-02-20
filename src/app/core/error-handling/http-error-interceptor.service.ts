@@ -71,7 +71,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     const error = response.error;
     const all = error.error?.__all__ || error.__all__;
     const messages: string[] = Array.isArray(all)
-      ? all
+      ? all : Array.isArray(error.password) ? error.password
       : error.error_description ? [error.error_description] : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
     if (messages.length > 0) {
       messages.forEach(message => this.showMessage(message));

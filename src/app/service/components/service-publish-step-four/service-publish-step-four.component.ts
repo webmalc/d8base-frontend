@@ -1,23 +1,20 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
-import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { ServicePublishStepFourFormService } from '@app/service/forms/service-publish-step-four-form.service';
-import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
-import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { Reinitable } from '@app/shared/abstract/reinitable';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { IonContent } from '@ionic/angular';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
+import { first, map, switchMap, takeUntil } from 'rxjs/operators';
 import ServicePublishStepFourContext from './service-publish-step-four-context.interface';
 
 @Component({
@@ -25,13 +22,15 @@ import ServicePublishStepFourContext from './service-publish-step-four-context.i
   templateUrl: './service-publish-step-four.component.html',
   styleUrls: ['./service-publish-step-four.component.scss'],
 })
-export class ServicePublishStepFourComponent extends Reinitable implements OnDestroy {
+export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
+
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
 
   public context$: Observable<ServicePublishStepFourContext>;
   public errorMessages: string[];
   public readonly formFields = ServicePublishStepFourFormFields;
   public isUserExists: boolean = false;
-  @ViewChild(IonContent, { read: IonContent, static: false }) public content: IonContent;
   private readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly emailChanged$: Subject<void> = new Subject<void>();
   private readonly destroy$ = new Subject<void>();
@@ -43,18 +42,16 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
     public authenticationService: AuthenticationService,
     public serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly registrationService: RegistrationService,
-    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-    private readonly userManager: UserManagerService,
     public readonly countrySelectable: SelectableCountryOnSearchService,
     public readonly citySelectable: SelectableCityOnSearchService,
   ) {
-    super();
     this.context$ = combineLatest([
       authenticationService.isAuthenticated$,
       this.isUserExists$,
     ]).pipe(
       map(([isAuthenticated, isUserExists]) => ({ isAuthenticated, isUserExists })),
     );
+    this.subscribeOnProfile();
   }
 
   public onEmailChange(): void {
@@ -84,8 +81,11 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
     } else {
       const country = this.formService.form.get(this.formFields.Country).value as Country;
       const city = this.formService.form.get(this.formFields.City).value as City;
-      this.registrationService.register(
-        this.formService.form.getRawValue(),
+      this.registrationService.register({
+          email: this.formService.form.get(this.formFields.Email).value,
+          password: this.formService.form.get(this.formFields.Password).value,
+          password_confirm: this.formService.form.get(this.formFields.Confirm).value,
+        },
         {
           location: {
             country: country.id,
@@ -95,7 +95,6 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
         },
       );
     }
-    this.serviceStepsNavigationService.next();
   }
 
   public isSubmitDisabled(): boolean {
@@ -119,18 +118,7 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
     this.destroy$.next();
   }
 
-  protected init(): void {
-    this.authenticationService.isAuthenticated$.pipe(first(), filter(val => true === val)).subscribe(
-      () => this.masterManager.isMaster$.pipe(filter(val => true === val)).subscribe(
-        () => this.masterManager.getMasterList().pipe(filter(data => data.length !== 0)).subscribe(
-          () => this.userManager.getCurrentUser().subscribe(
-            user => this.servicePublishDataHolder.setStepData<StepFourDataInterface>(
-              ServicePublishSteps.Four, { isNewMaster: false, user, isNewUser: false },
-            ).then(() => this.serviceStepsNavigationService.next()),
-          ),
-        ),
-      ),
-    );
+  public ngOnInit(): void {
     this.formService.createForm();
     this.emailChanged$.pipe(
       switchMap(() => this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)),
@@ -139,5 +127,11 @@ export class ServicePublishStepFourComponent extends Reinitable implements OnDes
       this.isUserExists$.next(val);
       this.isUserExists = val;
     });
+  }
+
+  private subscribeOnProfile(): void {
+    this.profile$.pipe(
+      first(x => !!x),
+    ).subscribe(() => this.serviceStepsNavigationService.next());
   }
 }
