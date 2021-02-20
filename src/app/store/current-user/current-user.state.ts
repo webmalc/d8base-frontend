@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Profile, UserLocation } from '@app/api/models';
+import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
-import { coordinatesToString } from '@app/core/functions/location.functions';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
 import { ApiClientService } from '@app/core/services/api-client.service';
@@ -198,11 +197,10 @@ export class CurrentUserState implements NgxsOnInit {
   ): Observable<any> {
     return from(this.locationService.getMergedLocationData()).pipe(
       switchMap(userLocation => {
-        const newLocation = { ...location };
         // TODO add coordinates like this:
-        // const newLocation: UserLocation = userLocation
-        //   ? { ...location, coordinates: coordinatesToString(userLocation.coordinates) }
-        //   : { ...location };
+        const newLocation: any = userLocation // TODO fix swagger
+          ? { ...location, coordinates: userLocation.coordinates }
+          : { ...location };
         return this.api.accountsLocationsCreate(newLocation).pipe(
           tap(location => {
             const locations = [...getState().locations] ?? [];
