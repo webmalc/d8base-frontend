@@ -72,3 +72,10 @@ export class UpdateProfile {
   constructor(public changes: Partial<Profile>) {
   }
 }
+
+export class CreateUserLocation {
+  public static readonly type = '[CurrentUser] Create user location';
+
+  constructor(public location: UserLocation) {
+  }
+}

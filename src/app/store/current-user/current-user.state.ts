@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Profile, UserLocation } from '@app/api/models';
+import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
-import { coordinatesToString } from '@app/core/functions/location.functions';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
 import { ApiClientService } from '@app/core/services/api-client.service';
@@ -12,7 +11,7 @@ import { ServicePublishDataHolderService } from '@app/service/services/service-p
 import { environment } from '@env/environment';
 import { Storage } from '@ionic/storage';
 import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
-import { forkJoin, from, Observable, of, throwError } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { CurrentUserStateModel } from './current-user-state.model';
@@ -61,33 +60,37 @@ export class CurrentUserState implements NgxsOnInit {
     { credentials }: CurrentUserActions.Login,
   ): Observable<any> {
     setState(defaultState);
-    return this.client.post<AuthResponseInterface, LoginDataInterface>(TOKEN_OBTAIN_URL, {
-      username: credentials.username,
-      password: credentials.password,
-      grant_type: GrantTypes.PasswordGrantType,
-      client_id: environment.client_id,
-      client_secret: environment.client_secret,
-    }).pipe(
-      catchError(error => {
-        if (400 === error.status && error.error.error === 'invalid_grant') {
-          patchState({ errors: ['login-page.incorrect-login-data'] });
-          return of(null);
-        }
-        return throwError(error);
-      }),
-      switchMap(result => from(this.storage.set(TOKEN_DATA_STORAGE_KEY, result))),
-      tap(tokens => {
-        patchState({ tokens });
-      }),
-      mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())),
-    );
+    return this.client
+      .post<AuthResponseInterface, LoginDataInterface>(TOKEN_OBTAIN_URL, {
+        username: credentials.username,
+        password: credentials.password,
+        grant_type: GrantTypes.PasswordGrantType,
+        client_id: environment.client_id,
+        client_secret: environment.client_secret,
+      })
+      .pipe(
+        catchError(error => {
+          if (400 === error.status && error.error.error === 'invalid_grant') {
+            patchState({ errors: ['login-page.incorrect-login-data'] });
+            return of(null);
+          }
+          return throwError(error);
+        }),
+        switchMap(result => from(this.storage.set(TOKEN_DATA_STORAGE_KEY, result))),
+        tap(tokens => {
+          patchState({ tokens });
+        }),
+        mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())),
+      );
   }
 
   @Action(CurrentUserActions.Logout)
   public logout({ setState }: StateContext<CurrentUserStateModel>): Observable<any> {
-    return from(this.servicePublicationState.reset()
-      .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
-      .then(() => setState(guestState)),
+    return from(
+      this.servicePublicationState
+        .reset()
+        .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
+        .then(() => setState(guestState)),
     );
   }
 
@@ -98,7 +101,7 @@ export class CurrentUserState implements NgxsOnInit {
   ): Observable<any> {
     return from(this.storage.set(TOKEN_DATA_STORAGE_KEY, tokens)).pipe(
       tap(tokens => patchState({ tokens })),
-      mergeMap(() => dispatch(new CurrentUserActions.LoadProfile)),
+      mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())),
     );
   }
 
@@ -107,9 +110,7 @@ export class CurrentUserState implements NgxsOnInit {
     { patchState, dispatch }: StateContext<CurrentUserStateModel>,
     { master }: CurrentUserActions.CreateProfessional,
   ) {
-    return this.api.accountsProfessionalsCreate(master).pipe(
-      mergeMap(() => dispatch(new CurrentUserActions.LoadProfile)),
-    );
+    return this.api.accountsProfessionalsCreate(master).pipe(mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())));
   }
 
   @Action(CurrentUserActions.LoadProfile)
@@ -118,11 +119,13 @@ export class CurrentUserState implements NgxsOnInit {
       tap(profile => {
         patchState({ profile: profile as Profile }); // TODO fix swagger
       }),
-      mergeMap(() => dispatch([
-        new CurrentUserActions.LoadSettings(),
-        new CurrentUserActions.LoadProfessionals(),
-        new CurrentUserActions.LoadUserLocations(),
-      ])),
+      mergeMap(() =>
+        dispatch([
+          new CurrentUserActions.LoadSettings(),
+          new CurrentUserActions.LoadProfessionals(),
+          new CurrentUserActions.LoadUserLocations(),
+        ]),
+      ),
     );
   }
 
@@ -137,31 +140,22 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.LoadProfessionals)
   public loadProfessionals({ patchState }: StateContext<CurrentUserStateModel>) {
-    return this.api.accountsProfessionalsList({}).pipe(
-      tap(response => patchState({ professionals: response.results })),
-    );
+    return this.api.accountsProfessionalsList({}).pipe(tap(response => patchState({ professionals: response.results })));
   }
 
   @Action(CurrentUserActions.LoadSettings)
   public loadSettings({ patchState }: StateContext<CurrentUserStateModel>) {
-    return this.api.accountsSettingsList({}).pipe(
-      tap(response => patchState({ settings: response.results[0] })),
-    );
+    return this.api.accountsSettingsList({}).pipe(tap(response => patchState({ settings: response.results[0] })));
   }
 
   @Action(CurrentUserActions.Register)
-  public register(
-    { dispatch }: StateContext<CurrentUserStateModel>,
-    { user, userData }: CurrentUserActions.Register,
-  ) {
-    const locationRequest = userData?.location
-      ? this.createLocation(userData.location)
-      : of();
-    return forkJoin([this.api.accountsRegisterCreate(user), locationRequest]).pipe(
-      mergeMap(([user]) => dispatch(new CurrentUserActions.Login({
-        username: user.email,
-        password: user.password,
-      }))),
+  public register({ dispatch }: StateContext<CurrentUserStateModel>, { user, userData }: CurrentUserActions.Register) {
+    return this.api.accountsRegisterCreate(user).pipe(
+      // TODO fix swagger; returned user contains the "token" field
+      mergeMap((user: any) => dispatch(new CurrentUserActions.AuthenticateWithToken(user.token))),
+      mergeMap(() => (
+        userData?.location ? dispatch(new CurrentUserActions.CreateUserLocation(userData.location)) : of()),
+      ),
     );
   }
 
@@ -180,13 +174,8 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.UpdateProfile)
-  public updateProfile(
-    { patchState }: StateContext<CurrentUserStateModel>,
-    { changes }: CurrentUserActions.ChangeUserSettings,
-  ) {
-    return this.api.accountsProfilePartialUpdate(changes).pipe(
-      tap(profile => patchState({ profile })),
-    );
+  public updateProfile({ patchState }: StateContext<CurrentUserStateModel>, { changes }: CurrentUserActions.ChangeUserSettings) {
+    return this.api.accountsProfilePartialUpdate(changes).pipe(tap(profile => patchState({ profile })));
   }
 
   @Action(CurrentUserActions.RefreshTokens)
@@ -196,18 +185,29 @@ export class CurrentUserState implements NgxsOnInit {
       refresh_token: tokens.refresh_token,
       grant_type: GrantTypes.RefreshGrantType,
     };
-    return this.client.post<AuthResponseInterface, RefreshDataInterface>(environment.backend.refresh, refreshData).pipe(
-      tap(tokens => patchState({ tokens })),
-    );
+    return this.client
+      .post<AuthResponseInterface, RefreshDataInterface>(environment.backend.refresh, refreshData)
+      .pipe(tap(tokens => patchState({ tokens })));
   }
 
-  private createLocation(location: UserLocation): Observable<any> {
+  @Action(CurrentUserActions.CreateUserLocation)
+  private createLocation(
+    { getState, patchState }: StateContext<CurrentUserStateModel>,
+    { location }: CurrentUserActions.CreateUserLocation,
+  ): Observable<any> {
     return from(this.locationService.getMergedLocationData()).pipe(
       switchMap(userLocation => {
-        const newLocation: UserLocation = userLocation
-          ? { ...location, coordinates: coordinatesToString(userLocation.coordinates) }
+        // TODO add coordinates like this:
+        const newLocation: any = userLocation // TODO fix swagger
+          ? { ...location, coordinates: userLocation.coordinates }
           : { ...location };
-        return this.api.accountsLocationsCreate(newLocation);
+        return this.api.accountsLocationsCreate(newLocation).pipe(
+          tap(location => {
+            const locations = [...getState().locations] ?? [];
+            locations.push(location);
+            patchState({ locations });
+          }),
+        );
       }),
     );
   }
