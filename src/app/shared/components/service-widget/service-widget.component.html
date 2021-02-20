@@ -1,16 +1,4 @@
-<ion-item lines="none">
-  <ion-label class="ion-text-wrap">
-    <h1>
-      {{ service.name }}
-    </h1>
-  </ion-label>
-  <ion-note slot="end">
-    <ion-label>
-      <app-price [price]="service.price"></app-price>
-    </ion-label>
-    <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
-  </ion-note>
-</ion-item>
+<app-service-title [service]="service"></app-service-title>
 <app-professional-card *ngIf="master" class="ion-padding" [professional]="master"></app-professional-card>
 <app-more-info *ngIf="!alwaysExpanded else serviceDetails">
   <ng-container *ngTemplateOutlet="serviceDetails"></ng-container>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Service } from '@app/api/models';
-import { AccountsService } from '@app/api/services';
+import { ServicesService } from '@app/api/services';
 import ServiceData from '@app/core/interfaces/service-data.interface';
 import { ServiceTagsReadonlyApiService } from '@app/core/services/service-tags-readonly-api.service';
 import { forkJoin, Observable, of } from 'rxjs';
@@ -10,13 +10,13 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 export class ServicesGeneratorFactoryService {
 
   constructor(
-    private readonly api: AccountsService,
+    private readonly api: ServicesService,
     private readonly serviceTagsReadonlyApi: ServiceTagsReadonlyApiService,
   ) {
   }
 
   public getServiceList(masterId?: number): Observable<ServiceData[]> {
-    return this.api.accountsServicesList(
+    return this.api.servicesServicesList(
       {
         professional: masterId,
         ordering: 'created',
