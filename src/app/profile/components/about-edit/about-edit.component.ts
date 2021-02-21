@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
 import { CountriesApiCache } from '@app/core/services/cache';
+import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
 import { Language } from '@app/profile/models/language';
 import { UserLanguage } from '@app/profile/models/user-language';
-import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
@@ -16,7 +16,7 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
 import { plainToClass } from 'class-transformer';
-import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -27,14 +27,14 @@ import { first, map, switchMap } from 'rxjs/operators';
 export class AboutEditComponent implements OnInit {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
-  public languages$: BehaviorSubject<Language[]> = new BehaviorSubject<Language[]>([]);
+  public languages$ = this.languagesApiCache.list();
   public form: FormGroup;
   public formFields = ProfileFormFields;
   private oldLanguages: UserLanguage[] = [];
 
   constructor(
     public readonly countriesSearch: SelectableCountryOnSearchService,
-    public readonly languagesApi: LanguagesApiService,
+    public readonly languagesApiCache: LanguagesApiCache,
     private readonly formBuilder: FormBuilder,
     private readonly userLanguageApi: UserLanguagesApiService,
     private readonly countriesApi: CountriesApiCache,
@@ -65,7 +65,6 @@ export class AboutEditComponent implements OnInit {
           [this.formFields.Languages]: [languages],
         });
       });
-    this.languagesApi.getLanguages$().subscribe(languages => this.languages$.next(languages));
   }
 
   @Dispatch()
