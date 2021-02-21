@@ -75,15 +75,15 @@ export class AboutEditComponent implements OnInit {
 
   public submitForm(): void {
     let date: string;
-    if (this.form.getRawValue()[this.formFields.Birthday] as string) {
-      date = HelperService.fromDatetime(this.form.getRawValue()[this.formFields.Birthday] as string).date;
+    if (this.form.value[this.formFields.Birthday]) {
+      date = HelperService.fromDatetime(this.form.value[this.formFields.Birthday]).date;
     }
     const data: Partial<Profile> = {
       birthday: date,
-      nationality: (this.form.getRawValue()[this.formFields.Nationality] as Country)?.id,
+      nationality: this.form.value[this.formFields.Nationality]?.id,
     };
 
-    const newLanguages: UserLanguage[] = (this.form.getRawValue()[this.formFields.Languages] as Language[]).map(lang =>
+    const newLanguages: UserLanguage[] = this.form.value[this.formFields.Languages].map(lang =>
       plainToClass(UserLanguage, { language: lang.code }),
     );
 
