@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Profile } from '@app/api/models';
+import { Profile, UserLanguage } from '@app/api/models';
 import { UserLocation } from '@app/core/models/user-location';
 import { CountriesApiCache } from '@app/core/services/cache';
+import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
-import { Language } from '@app/profile/models/language';
-import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import { ProfileService } from '@app/profile/services/profile.service';
 import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
-import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
 import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
-import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
+import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
+import { Select } from '@ngxs/store';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, of } from 'rxjs';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { ContactApiService } from './services/contact-api.service';
 
 @Component({
@@ -24,6 +27,12 @@ import { ContactApiService } from './services/contact-api.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage extends Reinitable {
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
+
+  @Select(UserLanguagesSelectors.entities)
+  public userLanguages$: Observable<UserLanguage[]>;
+
   public form: FormGroup;
   public formFields = ProfileFormFields;
   public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
@@ -31,22 +40,16 @@ export class ProfilePage extends Reinitable {
   public user: Profile;
   public contacts$: Observable<ClientContactInterface[]>;
   public nationality: Country | null;
-  public languages: Language[];
+  public languagesAsString$: Observable<string>;
 
   constructor(
     public readonly profileService: ProfileService,
-    private readonly userManager: UserManagerService,
     private readonly contactsApi: UserContactApiService,
     private readonly contactsReadonlyApi: ContactApiService,
     private readonly countriesApi: CountriesApiCache,
-    private readonly userLanguagesApi: UserLanguagesApiService,
-    private readonly languagesApi: LanguagesApiService,
+    private readonly languagesApiCache: LanguagesApiCache,
   ) {
     super();
-  }
-
-  public get languagesList(): string {
-    return this.languages?.map(x => x.name).join(', ') || '';
   }
 
   public saveAvatar(data: string): void {
@@ -60,23 +63,22 @@ export class ProfilePage extends Reinitable {
   }
 
   protected init(): void {
+    this.loadUserLanguages();
+    this.getUserLanguagesAsString();
+
     this.profileService.createProfileForm$().subscribe(form => (this.form = form));
-    this.userManager
-      .getCurrentUser()
+    this.profile$
       .pipe(
+        filter(user => !!user),
         switchMap(user =>
           forkJoin({
             user: of(user),
-            languages: this.userLanguagesApi
-              .getList(user.languages)
-              .pipe(switchMap(userLanguages => this.languagesApi.getList(userLanguages.map(lang => lang?.language)))),
             nationality: user.nationality ? this.countriesApi.getByEntityId(user.nationality) : of(null),
           }),
         ),
       )
-      .subscribe(({ user, languages, nationality }) => {
+      .subscribe(({ user, nationality }) => {
         this.user = user;
-        this.languages = languages;
         this.nationality = nationality;
       });
     this.profileService.createAvatarForm().subscribe(() => this.onAvatarChange());
@@ -103,9 +105,25 @@ export class ProfilePage extends Reinitable {
     );
   }
 
+  @Dispatch()
+  private loadUserLanguages(): UserLanguagesActions.LoadAllUserLanguages {
+    return new UserLanguagesActions.LoadAllUserLanguages();
+  }
+
   private onAvatarChange(): void {
     this.profileService.avatarForm
       .get(ProfileFormFields.Avatar)
       .statusChanges.subscribe(_ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value));
+  }
+
+  private getUserLanguagesAsString(): void {
+    this.languagesAsString$ = combineLatest([this.userLanguages$, this.languagesApiCache.list()]).pipe(
+      map(([userLanguages, languages]) =>
+        languages
+            .filter(({ code }) => userLanguages.map(({ language }) => language).includes(code as UserLanguage['language']))
+            .map(({ name }) => name)
+            .join(', '),
+      ),
+    );
   }
 }

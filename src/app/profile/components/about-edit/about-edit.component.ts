@@ -1,23 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Profile } from '@app/api/models';
+import { Language, Profile, UserLanguage } from '@app/api/models';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
-import { Language } from '@app/profile/models/language';
-import { UserLanguage } from '@app/profile/models/user-language';
-import { UserLanguagesApiService } from '@app/profile/services/user-languages-api.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
+import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
-import { plainToClass } from 'class-transformer';
-import { forkJoin, Observable, of } from 'rxjs';
-import { first, map, switchMap } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of } from 'rxjs';
+import { filter, first, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-about-edit',
@@ -27,33 +25,35 @@ import { first, map, switchMap } from 'rxjs/operators';
 export class AboutEditComponent implements OnInit {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
+
+  @Select(UserLanguagesSelectors.entities)
+  public userLanguages$: Observable<UserLanguage[]>;
+
   public languages$ = this.languagesApiCache.list();
   public form: FormGroup;
   public formFields = ProfileFormFields;
-  private oldLanguages: UserLanguage[] = [];
 
   constructor(
     public readonly countriesSearch: SelectableCountryOnSearchService,
     public readonly languagesApiCache: LanguagesApiCache,
     private readonly formBuilder: FormBuilder,
-    private readonly userLanguageApi: UserLanguagesApiService,
     private readonly countriesApi: CountriesApiCache,
     private readonly router: Router,
     private readonly actions$: Actions,
   ) {}
 
   public ngOnInit(): void {
+    this.loadUserLanguages();
+
     this.profile$
       .pipe(
         first(profile => !!profile),
         switchMap((user: Profile) =>
-          forkJoin([
+          combineLatest([
             this.getCountry(user.nationality),
-            this.userLanguageApi.get().pipe(
-              switchMap(({ results }) => {
-                this.oldLanguages = results;
-                return this.userLanguagesToLanguages(results).pipe(first());
-              }),
+            this.userLanguages$.pipe(
+              filter(userLanguages => !!userLanguages),
+              switchMap(userLanguages => this.userLanguagesToLanguages(userLanguages).pipe(first())),
             ),
           ]).pipe(map(([nationality, languages]) => ({ user, nationality, languages }))),
         ),
@@ -72,6 +72,16 @@ export class AboutEditComponent implements OnInit {
     return new CurrentUserActions.UpdateProfile(profile);
   }
 
+  @Dispatch()
+  public loadUserLanguages(): UserLanguagesActions.LoadAllUserLanguages {
+    return new UserLanguagesActions.LoadAllUserLanguages();
+  }
+
+  @Dispatch()
+  public updateUserLanguages(newUserLanguages: UserLanguage[]): UserLanguagesActions.UpdateUserLanguagesList {
+    return new UserLanguagesActions.UpdateUserLanguagesList(newUserLanguages);
+  }
+
   public submitForm(): void {
     let date: string;
     if (this.form.value[this.formFields.Birthday]) {
@@ -82,16 +92,16 @@ export class AboutEditComponent implements OnInit {
       nationality: this.form.value[this.formFields.Nationality]?.id,
     };
 
-    const newLanguages: UserLanguage[] = this.form.value[this.formFields.Languages].map(lang =>
-      plainToClass(UserLanguage, { language: lang.code }),
-    );
+    // TODO: Fix swagger model Language, replace code: string -> UserLanguage['language'] type
+    const newLanguages: UserLanguage[] = (this.form.value[this.formFields.Languages] as Language[]).map(({ code }) => ({
+      language: code as UserLanguage['language'],
+    }));
+
+    this.updateUserLanguages(newLanguages);
+    const updateLanguages$ = this.actions$.pipe(ofActionSuccessful(UserLanguagesActions.UpdateUserLanguagesList), first());
 
     this.updateUser(data);
-    const updateUser$ = this.actions$.pipe(first(), ofActionSuccessful(CurrentUserActions.UpdateProfile));
-
-    const updateLanguages$ = this.oldLanguages?.length
-      ? this.userLanguageApi.deleteList(this.oldLanguages).pipe(switchMap(() => this.userLanguageApi.createList(newLanguages)))
-      : this.userLanguageApi.createList(newLanguages);
+    const updateUser$ = this.actions$.pipe(ofActionSuccessful(CurrentUserActions.UpdateProfile), first());
 
     forkJoin([updateLanguages$, updateUser$]).subscribe(() => {
       this.router.navigate(['/profile']);

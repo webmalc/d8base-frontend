@@ -1,0 +1,121 @@
+import { Injectable } from '@angular/core';
+import { UserLanguage } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
+import { Action, State, StateContext } from '@ngxs/store';
+import { forkJoin, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+import * as UserLanguageActions from './user-language.actions';
+
+type EntityState<T> = {
+  byId: { [key: number]: T };
+  ids: number[];
+  page?: number;
+  next?: string;
+};
+const uniqueArray = (arr: number[]): number[] => [...new Set(arr)];
+const getByIdFromArray = <T extends { id?: number }>(arr: T[]): EntityState<T>['byId'] =>
+  arr.reduce((acc, curr) => ({ ...acc, [curr.id]: curr }), {});
+
+export const EmptyEntityState: EntityState<UserLanguage> = {
+  byId: {},
+  ids: [],
+};
+
+export type UserLanguageStateModel = EntityState<UserLanguage>;
+
+@Injectable()
+@State<UserLanguageStateModel>({
+  name: 'UserLanguage',
+  defaults: EmptyEntityState,
+})
+export class UserLanguageState {
+  constructor(private readonly accountsService: AccountsService) {}
+
+  @Action(UserLanguageActions.LoadAllUserLanguages)
+  public loadAllUserLanguages(
+    { setState, getState }: StateContext<UserLanguageStateModel>,
+    { next }: UserLanguageActions.LoadAllUserLanguages,
+  ) {
+    const { page = 1 } = getState();
+    const nextPage = next ? page + 1 : 1;
+    return this.accountsService.accountsLanguagesList({ page: nextPage }).pipe(
+      tap(({ results, next }) => {
+        const { ids, byId } = getState();
+        const loadedUserLanguages: EntityState<UserLanguage>['byId'] = getByIdFromArray<UserLanguage>(results);
+        setState({
+          page: nextPage,
+          ids: uniqueArray([...ids, ...results.map(({ id }) => id)]),
+          byId: { ...byId, ...loadedUserLanguages },
+          next,
+        });
+      }),
+    );
+  }
+
+  @Action(UserLanguageActions.CreateUserLanguage)
+  public createUserLanguage(
+    { setState, getState }: StateContext<UserLanguageStateModel>,
+    { userLanguage }: UserLanguageActions.CreateUserLanguage,
+  ) {
+    return this.accountsService.accountsLanguagesCreate(userLanguage).pipe(
+      tap(newUserLanguage => {
+        const { ids, byId } = getState();
+        setState({
+          ids: uniqueArray([...ids, newUserLanguage.id]),
+          byId: { ...byId, [newUserLanguage.id]: userLanguage },
+        });
+      }),
+    );
+  }
+
+  @Action(UserLanguageActions.DeleteUserLanguage)
+  public loadUserLanguage(
+    { setState, getState }: StateContext<UserLanguageStateModel>,
+    { id: idToLoad }: UserLanguageActions.LoadUserLanguage,
+  ) {
+    return this.accountsService.accountsLanguagesRead(idToLoad).pipe(
+      tap(userLanguage => {
+        const { ids, byId } = getState();
+        setState({
+          ids: uniqueArray([...ids, idToLoad]),
+          byId: { ...byId, [idToLoad]: userLanguage },
+        });
+      }),
+    );
+  }
+
+  @Action(UserLanguageActions.DeleteUserLanguage)
+  public deleteUserLanguage(
+    { setState, getState }: StateContext<UserLanguageStateModel>,
+    { id: idToDelete }: UserLanguageActions.DeleteUserLanguage,
+  ) {
+    return this.accountsService.accountsLanguagesDelete(idToDelete).pipe(
+      tap(() => {
+        const { ids, byId } = getState();
+        const { [idToDelete]: userLanguageToDelete, ...updatedUserLanguages } = byId;
+        setState({
+          ids: ids.filter(id => id !== idToDelete),
+          byId: updatedUserLanguages,
+        });
+      }),
+    );
+  }
+
+  @Action(UserLanguageActions.UpdateUserLanguagesList)
+  public updateUserLanguages(
+    { setState, getState }: StateContext<UserLanguageStateModel>,
+    { newUserLanguages }: UserLanguageActions.UpdateUserLanguagesList,
+  ) {
+    const { ids } = getState();
+    const deleteLanguages$ = forkJoin(ids.length ? ids.map(id => this.accountsService.accountsLanguagesDelete(id)) : of(0));
+    const createLanguages$ = forkJoin(newUserLanguages.map(({ language }) => this.accountsService.accountsLanguagesCreate({ language })));
+    return deleteLanguages$.pipe(
+      switchMap(() => createLanguages$),
+      tap(createdLanguages => {
+        const ids = createdLanguages.map(({ id }) => id);
+        const byId = getByIdFromArray<UserLanguage>(createdLanguages);
+        setState({ byId, ids });
+      }),
+    );
+  }
+}

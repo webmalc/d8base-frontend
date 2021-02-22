@@ -86,7 +86,7 @@
     </ion-item>
     <ion-item lines="none">
       <ion-label lines="none" class="ion-align-items-center"> {{'profile-page.languages'|translate}} </ion-label>
-      {{languagesList}}
+      {{ languagesAsString$ | async }}
     </ion-item>
   </app-content-wrapper>
   <app-footer></app-footer>
