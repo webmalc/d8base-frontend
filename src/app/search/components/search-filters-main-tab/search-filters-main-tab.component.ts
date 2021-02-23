@@ -91,7 +91,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
 
   public initSubcategories(categories: Category[]): void {
     forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id)))
-      .pipe()
       .subscribe(data => this.subcategoriesList$.next(data));
   }
 
@@ -128,7 +127,8 @@ export class SearchFiltersMainTabComponent implements OnInit {
 
   private setMinMaxDates(): void {
     const now = new Date(Date.now());
+    const limitOfYearsInFuture = 5;
     this.minDate = now.toISOString();
-    this.maxDate = new Date(now.setFullYear(now.getFullYear() + 5)).toISOString();
+    this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
   }
 }
