@@ -1,5 +1,5 @@
 <app-header></app-header>
-<ion-content *ngIf="reviews$ | async as reviews">
+<ion-content>
   <app-content-wrapper>
     <ion-item color="light" lines="full">
       <ion-buttons slot="start">
@@ -10,18 +10,21 @@
       <ion-title>{{ 'reviews.title' | translate }}</ion-title>
     </ion-item>
     <app-professional-card
-      *ngIf="professional$ | async as professional"
+      *ngIf="professional$ | async as professional; else loading"
       [professional]="professional"
       class="professional"
     ></app-professional-card>
-    <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center ion-item-no-border">
-      <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
-        'reviews.send-review' | translate
-      }}</a>
-    </ion-item>
-    <ng-container *ngFor="let review of reviews">
-      <app-review-card [review]="review"></app-review-card>
+    <ng-container *ngIf="reviews$ | async as reviews; else loading">
+      <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center ion-item-no-border">
+        <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
+          'reviews.send-review' | translate
+        }}</a>
+      </ion-item>
+      <app-review-cards [reviews]="reviews"></app-review-cards>
     </ng-container>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

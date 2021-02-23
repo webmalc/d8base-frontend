@@ -179,9 +179,12 @@
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.reviews' | translate }}">
-    <ng-container *ngFor="let review of reviews$ | async">
-      <app-review-card [review]="review"></app-review-card>
-    </ng-container>
-    <a [routerLink]="['/reviews', context.master.id]">{{ 'reviews.all-reviews' | translate }}</a>
+    <ng-container *ngIf="reviews$ | async as reviews"> </ng-container>
+    <app-review-cards [reviews]="reviews$ | async"></app-review-cards>
+    <ion-item class="ion-text-center ion-item-no-border">
+      <a [routerLink]="['/reviews', context.master.id]" class="ion-text-center ion-item-no-border">{{
+        'reviews.all-reviews' | translate
+      }}</a>
+    </ion-item>
   </app-collapse-item>
 </ng-container>
