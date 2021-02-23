@@ -9,7 +9,6 @@ import { MasterProfileSubmenu } from '../../enums/master-profile-submenu';
 import { CertificatesApiService } from '../../services/certificates-api.service';
 import { EducationApiService } from '../../services/education-api.service';
 import { ExperienceApiService } from '../../services/experience-api.service';
-import { ReviewsReadonlyApiService } from '../../services/reviews-readonly-api.service';
 import { MasterProfileFactoryComponent } from './master-profile-factory.component';
 
 
@@ -26,7 +25,6 @@ xdescribe('MasterProfileFactoryComponent', () => {
         EducationApiService,
         CertificatesApiService,
         { provide: StorageManagerService, useClass: StorageManagerMock },
-        ReviewsReadonlyApiService,
       ],
     });
 
