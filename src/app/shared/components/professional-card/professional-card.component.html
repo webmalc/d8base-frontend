@@ -2,9 +2,9 @@
   <ion-img class="avatar" [src]="professional.user?.avatar || defaultAvatar"></ion-img>
   <div class="info">
     <div class="title">
-      <ion-item [routerLink]="'/professional/' + professional.id" class="full-name ion-item-no-min-height fs16" lines="none" detail="false">
+      <a [routerLink]="'/professional/' + professional.id" class="ion-padding-horizontal fs16" lines="none">
         {{ professional.name }}
-      </ion-item>
+      </a>
       <div *ngIf="professional.company" class="company ion-padding-horizontal fs13">
         {{ professional.company || 'global.professional.private-person' | translate }}
       </div>
