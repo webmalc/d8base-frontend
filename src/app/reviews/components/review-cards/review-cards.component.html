@@ -1,0 +1,10 @@
+<ng-container *ngIf="reviews?.length; else noReviews">
+  <ng-container *ngFor="let review of reviews">
+    <app-review-card [review]="review"></app-review-card>
+  </ng-container>
+</ng-container>
+<ng-template #noReviews>
+  <ion-item class="ion-text-center ion-item-no-border">
+    {{ 'reviews.no-reviews' | translate }}
+  </ion-item>
+</ng-template>
