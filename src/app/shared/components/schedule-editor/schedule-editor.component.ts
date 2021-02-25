@@ -1,33 +1,22 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormArray, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { NgDestroyService } from '@app/core/services';
 import { PopoverController } from '@ionic/angular';
 import { takeUntil } from 'rxjs/operators';
 import { DaySelectorComponent } from './day-selector/day-selector.component';
+import { createFormGroup, normalizeScheduleFormat } from './functions';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
-import { ScheduleEditorFormService } from './schedule-editor-form.service';
 
-function normalizeTimeFormat(time: string | null): string {
-  // convert "HH:MM:SS" to "HH:MM"
-  return time?.substr(0, 5);
-}
-
-function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
-  return {
-    ...schedule,
-    start_time: normalizeTimeFormat(schedule.start_time),
-    end_time: normalizeTimeFormat(schedule.end_time),
-  };
-}
+const DEFAULT_START_TIME = '09:00';
+const DEFAULT_END_TIME = '18:00';
 
 @Component({
   selector: 'app-schedule-editor',
   templateUrl: './schedule-editor.component.html',
   styleUrls: ['./schedule-editor.component.scss'],
   providers: [
-    ScheduleEditorFormService,
     NgDestroyService,
     {
       provide: NG_VALUE_ACCESSOR,
@@ -42,38 +31,32 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
   // TODO remove Input(), use setDisabledState()
   @Input() public disabled: boolean = false;
 
+  public timetable: FormArray;
   public formFields = ScheduleEditorFormFields;
 
   private onChange: (value: AbstractSchedule[]) => void;
   private onTouched: () => void;
 
   constructor(
-    public readonly formService: ScheduleEditorFormService,
     private readonly popoverController: PopoverController,
     private readonly ngDestroy$: NgDestroyService,
   ) {
-    this.subOnValueChanges();
+    this.initializeTimetable();
   }
 
   @Input()
   public set schedule(schedule: AbstractSchedule[]) {
     // TODO remove Input(), use only writeValue()
     const initialValue = schedule ?? ScheduleConstants.defaultSchedule;
-    this.formService.fillTimeTable(initialValue.map(normalizeScheduleFormat));
+    this.fillFromSchedules(initialValue.map(normalizeScheduleFormat));
   }
 
-  public onStartTimeChange(event: CustomEvent, index: number): void {
-    if (this.formService.isControlValid(this.formFields.StartTime, index)) {
-      this.formService.updateStartTime((event.detail as any).value, index);
-    }
-    this.formService.checkOverlapValidity(index);
+  public get controls(): FormGroup[] {
+    return this.timetable.controls as FormGroup[];
   }
 
-  public onEndTimeChange(event: CustomEvent, index: number): void {
-    if (this.formService.isControlValid(this.formFields.EndTime, index)) {
-      this.formService.updateEndTime((event.detail as any).value, index);
-    }
-    this.formService.checkOverlapValidity(index);
+  public getDayByIndex(i: number): string {
+    return ScheduleConstants.defaultWeek[i];
   }
 
   public async showDaySelector(): Promise<void> {
@@ -85,12 +68,15 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
     const { data } = await popover.onDidDismiss();
 
     if (data !== undefined) {
-      this.formService.pushNewDay(data);
+      this.addNewFormGroup(data, DEFAULT_START_TIME, DEFAULT_END_TIME);
     }
   }
 
   public deleteDay(index: number): void {
-    this.formService.deleteDay(index);
+    if (this.onTouched) {
+      this.onTouched();
+    }
+    this.controls.splice(index, 1);
   }
 
   public registerOnChange(fn: any): void {
@@ -112,13 +98,24 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  private subOnValueChanges() {
-    this.formService.valueChanges.pipe(
+  private initializeTimetable(): void {
+    this.timetable = new FormArray([]);
+    this.timetable.valueChanges.pipe(
       takeUntil(this.ngDestroy$),
-    ).subscribe(timetable => {
+    ).subscribe((timetable: AbstractSchedule[]) => {
       if (this.onChange) {
         this.onChange(timetable);
       }
     });
+  }
+
+  private fillFromSchedules(schedules: AbstractSchedule[]): void {
+    this.timetable.clear();
+    schedules.forEach(data => this.addNewFormGroup(data.day_of_week, data.start_time, data.end_time));
+  }
+
+  private addNewFormGroup(dayCode: number, startTime: string = null, endTime: string = null): void {
+    const newFormGroup = createFormGroup({ dayCode, startTime, endTime });
+    this.timetable.push(newFormGroup);
   }
 }

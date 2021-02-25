@@ -1,29 +1,19 @@
-<form *ngIf="formService.form" [formGroup]="formService.form">
-  <ion-item-group formArrayName="{{formFields.Timetable}}">
-    <ion-item [formGroupName]="i" *ngFor="let row of formService.controls; let i = index">
-      <ion-label class="ion-padding-start">
-        {{"global.weekdays." + formService.getDayByIndex(row.controls[formFields.Day].value)|translate}}
-      </ion-label>
-      <ion-input class="ion-text-center"
-                 placeholder="00:00"
-                 formControlName="{{formFields.StartTime}}"
-                 [brmasker]="{mask: '00:00', type:'num', len: 5}"
-                 (ionChange)="onStartTimeChange($event, i)">
-      </ion-input>
-      <ion-label>—</ion-label>
-      <ion-input class="ion-text-center"
-                 placeholder="00:00"
-                 formControlName="{{formFields.EndTime}}"
-                 [brmasker]="{mask: '00:00', type:'num', len: 5}"
-                 (ionChange)="onEndTimeChange($event, i)">
-      </ion-input>
-      <ion-button color="medium" fill="clear" (click)="deleteDay(i)" *ngIf="!disabled">
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-button>
-      <ion-input style="display: none" formControlName="{{formFields.Id}}"></ion-input>
-    </ion-item>
-  </ion-item-group>
-  <app-add-button *ngIf="!disabled" (click)="showDaySelector()">
-    {{'service-publish.step-seven.timetable.add-new-time'|translate}}
-  </app-add-button>
-</form>
+<ion-item [formGroup]="row" *ngFor="let row of controls; let i = index">
+  <ion-label slot="start">
+    {{ 'global.weekdays.' + getDayByIndex(row.controls[formFields.Day].value) | translate }}
+  </ion-label>
+  <ion-item lines="none">
+    <ion-label position="stacked">{{ 'global.from' | translate }}</ion-label>
+    <ion-input class="ion-text-center" type="time" [formControlName]="formFields.StartTime"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label position="stacked">{{ 'global.to' | translate }}</ion-label>
+    <ion-input class="ion-text-center" type="time" [formControlName]="formFields.EndTime"></ion-input>
+  </ion-item>
+  <ion-button color="medium" fill="clear" slot="end" (click)="deleteDay(i)" *ngIf="!disabled">
+    <ion-icon name="trash-outline"></ion-icon>
+  </ion-button>
+</ion-item>
+<app-add-button *ngIf="!disabled" (click)="showDaySelector()">
+  {{ 'service-publish.step-seven.timetable.add-new-time' | translate }}
+</app-add-button>

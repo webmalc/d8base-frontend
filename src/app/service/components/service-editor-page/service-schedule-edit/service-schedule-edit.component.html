@@ -11,7 +11,7 @@
     </ion-item>
 
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
-      <ion-item>
+      <ion-item lines="full">
         <ion-label>
           {{ 'service-details.is-base-schedule' | translate }}
         </ion-label>
@@ -22,7 +22,7 @@
                            formControlName="schedule">
       </app-schedule-editor>
 
-      <ion-button type="submit" expand="block" [disabled]="context.form.invalid">
+      <ion-button type="submit" expand="block" [disabled]="context.form.invalid || pending">
         {{ 'global.save' | translate }}
       </ion-button>
     </form>

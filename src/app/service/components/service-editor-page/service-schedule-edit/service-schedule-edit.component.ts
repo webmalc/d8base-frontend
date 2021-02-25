@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceSchedule } from '@app/api/models';
 import { concat, forkJoin, Observable, of } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { last, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';
@@ -14,7 +14,6 @@ import { ServiceEditorDepsService } from '../service-editor-deps.service';
   styleUrls: ['./service-schedule-edit.component.scss'],
 })
 export class ServiceScheduleEditComponent extends ServiceEditor {
-
   public schedule$: Observable<ServiceSchedule[]>;
   public showScheduleEditor: boolean;
 
@@ -38,9 +37,10 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
 
     const deleteOldSchedule$ = this.deps.api.accountsServiceScheduleList({ service: service.id }).pipe(
       switchMap(schedules => schedules.count > 0
-        ? forkJoin(schedules.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
+        ? forkJoin(schedules.results.map(l => this.deps.api.accountsServiceScheduleDelete(l.id)))
         : of<null>(void 0),
       ),
+      last(),
     );
     const createNewSchedule$ = is_base_schedule
       ? of<any>(void 0)
@@ -51,8 +51,11 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
       is_base_schedule,
     };
     const sources = [
-      concat(deleteOldSchedule$, createNewSchedule$),
-      this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+      concat(
+        // must save the "is_base_schedule" flag before saving the schedules
+        this.deps.api.accountsServicesUpdate({ id: service.id, data: newService })),
+      deleteOldSchedule$,
+      createNewSchedule$,
     ];
     this.saveAndReturn(sources);
   }

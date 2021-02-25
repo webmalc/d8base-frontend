@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from '@app/api/models';
 import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
 import { combineLatest, forkJoin, Observable, of } from 'rxjs';
-import { filter, map, shareReplay, switchMap, take } from 'rxjs/operators';
+import { filter, finalize, map, shareReplay, switchMap, take } from 'rxjs/operators';
 import ServiceEditorContext from './service-editor-context.interface';
 
 export abstract class ServiceEditor {
   public context$: Observable<ServiceEditorContext>;
+  public pending: boolean = false;
 
   protected constructor(
     route: ActivatedRoute,
@@ -35,10 +36,12 @@ export abstract class ServiceEditor {
   };
 
   protected saveAndReturn(sources: Observable<any>[]): void {
+    this.pending = true;
     forkJoin([
       this.context$.pipe(map(c => c.service), take(1)),
       ...sources,
-    ]).subscribe(([service]) => {
+    ]).pipe(finalize(() => this.pending = false))
+      .subscribe(([service]) => {
       this.deps.router.navigate(this.getServicePageUrl(service.id));
     });
   }
