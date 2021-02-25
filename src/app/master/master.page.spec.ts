@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { StorageManagerService } from '../core/proxies/storage-manager.service';
 import { MasterPage } from './master.page';
-import { ReviewsReadonlyApiService } from './services/reviews-readonly-api.service';
 
 describe('MasterPage', () => {
   let component: MasterPage;
@@ -18,7 +17,6 @@ describe('MasterPage', () => {
       declarations: [MasterPage],
       providers: [
         { provide: StorageManagerService, useClass: StorageManagerMock },
-        ReviewsReadonlyApiService,
       ],
     }).compileComponents();
 

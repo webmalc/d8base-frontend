@@ -40,7 +40,6 @@ export class MasterPage {
         company: master.company,
         avatar: user.avatar,
         rating: master.rating,
-        reviews: [],
         is_confirmed: user.is_confirmed,
       })),
     );

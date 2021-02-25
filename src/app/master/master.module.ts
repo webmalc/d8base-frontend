@@ -11,7 +11,6 @@ import {
   MasterProfileMainInfoSectionComponent,
 } from '@app/master/components/master-profile-main-info-section/master-profile-main-info-section.component';
 import { MasterProfilePortfolioComponent } from '@app/master/components/master-profile-portfolio/master-profile-portfolio.component';
-import { MasterProfileReviewComponent } from '@app/master/components/master-profile-review/master-profile-review.component';
 import {
   MasterProfileServiceEditComponent,
 } from '@app/master/components/master-profile-service-edit/master-profile-service-edit.component';
@@ -24,7 +23,6 @@ import { CalendarGeneratorFactoryService } from '@app/master/services/calendar-g
 import { CertificatesApiService } from '@app/master/services/certificates-api.service';
 import { EducationApiService } from '@app/master/services/education-api.service';
 import { ExperienceApiService } from '@app/master/services/experience-api.service';
-import { ReviewsReadonlyApiService } from '@app/master/services/reviews-readonly-api.service';
 import { ReviewsModule } from '@app/reviews/reviews.module';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import { ServicePageModule } from '@app/service/service.module';
@@ -57,7 +55,6 @@ import { MasterPage } from './master.page';
     MasterProfilePortfolioComponent,
     MasterProfileMainInfoSectionComponent,
     MasterProfileServicePresentationComponent,
-    MasterProfileReviewComponent,
     MasterProfileServiceEditComponent,
     MasterProfileSubmenuComponent,
     ExperienceComponent,
@@ -65,7 +62,6 @@ import { MasterPage } from './master.page';
     CertificateComponent,
   ],
   providers: [
-    ReviewsReadonlyApiService,
     ExperienceApiService,
     EducationApiService,
     CertificatesApiService,
