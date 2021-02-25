@@ -163,6 +163,8 @@
             placeholder="{{ 'order.not-selected' | translate }}"
             display-format="MMM DD, YYYY HH:mm"
             picker-format="MMM DD, YYYY HH:mm"
+            [min]="minDate"
+            [max]="maxDate"
             [(ngModel)]="stateManager.data.main.datetime.from"
           ></ion-datetime>
         </ion-item>
@@ -172,6 +174,8 @@
             placeholder="{{ 'order.not-selected' | translate }}"
             display-format="MMM DD, YYYY HH:mm"
             picker-format="MMM DD, YYYY HH:mm"
+            [min]="minDate"
+            [max]="maxDate"
             [(ngModel)]="stateManager.data.main.datetime.to"
           ></ion-datetime>
         </ion-item>
