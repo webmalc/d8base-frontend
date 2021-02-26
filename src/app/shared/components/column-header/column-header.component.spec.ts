@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { ContentWrapperComponent } from '../content-wrapper/content-wrapper.component';
 import { ColumnHeaderComponent } from './column-header.component';
 
 describe('ColumnHeaderComponent', () => {
@@ -11,12 +10,11 @@ describe('ColumnHeaderComponent', () => {
   let fixture: ComponentFixture<ColumnHeaderComponent>;
   let location: Location;
   let router: Router;
-  const testRoute = 'testRoute';
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ColumnHeaderComponent, ContentWrapperComponent],
+        declarations: [ColumnHeaderComponent],
         imports: [
           ...RootModules(),
           ComponentTestingModule,

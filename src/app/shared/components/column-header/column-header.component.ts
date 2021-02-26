@@ -6,7 +6,6 @@ import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-column-header',
   templateUrl: './column-header.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnHeaderComponent {
   @Input() public title: string;
