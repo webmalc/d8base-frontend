@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Profile, UserLanguage } from '@app/api/models';
 import { UserLocation } from '@app/core/models/user-location';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { HelperService } from '@app/core/services/helper.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
 import { ProfileService } from '@app/profile/services/profile.service';
@@ -26,7 +25,7 @@ import { ContactApiService } from './services/contact-api.service';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage extends Reinitable {
+export class ProfilePage extends Reinitable implements OnInit {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
@@ -50,6 +49,10 @@ export class ProfilePage extends Reinitable {
     private readonly languagesApiCache: LanguagesApiCache,
   ) {
     super();
+  }
+
+  public ngOnInit(): void {
+    this.languagesAsString$ = this.getUserLanguagesAsString();
   }
 
   public saveAvatar(data: string): void {
@@ -116,8 +119,8 @@ export class ProfilePage extends Reinitable {
       .statusChanges.subscribe(_ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value));
   }
 
-  private getUserLanguagesAsString(): void {
-    this.languagesAsString$ = combineLatest([this.userLanguages$, this.languagesApiCache.list()]).pipe(
+  private getUserLanguagesAsString(): Observable<string> {
+    return combineLatest([this.userLanguages$, this.languagesApiCache.list()]).pipe(
       map(([userLanguages, languages]) =>
         languages
             .filter(({ code }) => userLanguages.map(({ language }) => language).includes(code as UserLanguage['language']))

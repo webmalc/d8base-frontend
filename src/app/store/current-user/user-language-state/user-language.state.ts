@@ -9,8 +9,6 @@ import * as UserLanguageActions from './user-language.actions';
 type EntityState<T> = {
   byId: { [key: number]: T };
   ids: number[];
-  page?: number;
-  next?: string;
 };
 const uniqueArray = (arr: number[]): number[] => [...new Set(arr)];
 const getByIdFromArray = <T extends { id?: number }>(arr: T[]): EntityState<T>['byId'] =>
@@ -33,20 +31,14 @@ export class UserLanguageState {
 
   @Action(UserLanguageActions.LoadAllUserLanguages)
   public loadAllUserLanguages(
-    { setState, getState }: StateContext<UserLanguageStateModel>,
-    { next }: UserLanguageActions.LoadAllUserLanguages,
+    { setState }: StateContext<UserLanguageStateModel>,
   ) {
-    const { page = 1 } = getState();
-    const nextPage = next ? page + 1 : 1;
-    return this.accountsService.accountsLanguagesList({ page: nextPage }).pipe(
-      tap(({ results, next }) => {
-        const { ids, byId } = getState();
-        const loadedUserLanguages: EntityState<UserLanguage>['byId'] = getByIdFromArray<UserLanguage>(results);
+    return this.accountsService.accountsLanguagesList({}).pipe(
+      tap(({ results }) => {
+        const byId: EntityState<UserLanguage>['byId'] = getByIdFromArray<UserLanguage>(results);
         setState({
-          page: nextPage,
-          ids: uniqueArray([...ids, ...results.map(({ id }) => id)]),
-          byId: { ...byId, ...loadedUserLanguages },
-          next,
+          ids: uniqueArray([...results.map(({ id }) => id)]),
+          byId,
         });
       }),
     );
