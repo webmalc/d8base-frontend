@@ -6,6 +6,7 @@ import { MainGuard } from '@app/core/guards/main.guard';
 import {
   AddButtonComponent,
   ClientWidgetComponent,
+  ColumnHeaderComponent,
   ContentWrapperComponent,
   DaySelectorComponent,
   DurationEditorComponent,
@@ -57,7 +58,6 @@ import { SelectableSubregionOnSearchService } from '@app/shared/services/selecta
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { BrMaskerModule } from 'br-mask';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
@@ -125,6 +125,7 @@ import { NumberDirective } from './directives/number.directive';
     IonImageViewSliderDirective,
     GenderSelectorComponent,
     ServiceTitleComponent,
+    ColumnHeaderComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -177,6 +178,7 @@ import { NumberDirective } from './directives/number.directive';
     IonImageViewSliderDirective,
     GenderSelectorComponent,
     ServiceTitleComponent,
+    ColumnHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -199,5 +201,4 @@ import { NumberDirective } from './directives/number.directive';
     SelectableSubregionOnSearchService,
   ],
 })
-export class SharedModule {
-}
+export class SharedModule {}
