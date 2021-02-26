@@ -6,10 +6,9 @@ import { UserLocationApiService } from '@app/core/services/location/user-locatio
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileFormService } from '@app/profile/forms/profile-form.service';
-import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ProfileService {
@@ -20,7 +19,6 @@ export class ProfileService {
   constructor(
     private readonly userManager: UserManagerService,
     private readonly formService: ProfileFormService,
-    private readonly languagesApi: LanguagesApiService,
     private readonly formBuilder: FormBuilder,
     private readonly locationService: LocationService,
     private readonly userLocationApi: UserLocationApiService,
@@ -74,6 +72,6 @@ export class ProfileService {
   }
 
   private getUser$(): Observable<Profile> {
-    return this.userManager.getCurrentUser();
+    return this.userManager.getCurrentUser().pipe(filter(user => !!user));
   }
 }

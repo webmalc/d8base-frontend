@@ -17,6 +17,7 @@ import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
 import { defaultState, guestState } from './current-user.constants';
+import { UserLanguageState } from './user-language-state/user-language.state';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
@@ -24,6 +25,7 @@ const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 @State<CurrentUserStateModel>({
   name: 'currentUser',
   defaults: defaultState,
+  children: [UserLanguageState],
 })
 @Injectable()
 export class CurrentUserState implements NgxsOnInit {
@@ -41,11 +43,11 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.Initialize)
-  public initialize({ patchState, setState, dispatch }: StateContext<CurrentUserStateModel>): Observable<any> {
+  public initialize({ patchState, dispatch }: StateContext<CurrentUserStateModel>): Observable<any> {
     return from(this.storage.get(TOKEN_DATA_STORAGE_KEY)).pipe(
       tap(tokens => {
         if (!tokens) {
-          setState(guestState);
+          patchState(guestState);
         } else {
           patchState({ tokens });
           dispatch(new CurrentUserActions.LoadProfile());
@@ -56,10 +58,10 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.Login)
   public login(
-    { setState, patchState, dispatch }: StateContext<CurrentUserStateModel>,
+    { patchState, dispatch }: StateContext<CurrentUserStateModel>,
     { credentials }: CurrentUserActions.Login,
   ): Observable<any> {
-    setState(defaultState);
+    patchState(defaultState);
     return this.client
       .post<AuthResponseInterface, LoginDataInterface>(TOKEN_OBTAIN_URL, {
         username: credentials.username,
@@ -85,12 +87,12 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.Logout)
-  public logout({ setState }: StateContext<CurrentUserStateModel>): Observable<any> {
+  public logout({ patchState }: StateContext<CurrentUserStateModel>): Observable<any> {
     return from(
       this.servicePublicationState
         .reset()
         .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
-        .then(() => setState(guestState)),
+        .then(() => patchState(guestState)),
     );
   }
 
@@ -107,7 +109,7 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.CreateProfessional)
   public createProfessional(
-    { patchState, dispatch }: StateContext<CurrentUserStateModel>,
+    { dispatch }: StateContext<CurrentUserStateModel>,
     { master }: CurrentUserActions.CreateProfessional,
   ) {
     return this.api.accountsProfessionalsCreate(master).pipe(mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())));
