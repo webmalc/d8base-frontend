@@ -70,7 +70,6 @@ export class EditReviewCommentComponent implements OnInit, OnDestroy {
     private readonly communicationService: CommunicationService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
-    private readonly location: Location,
     private readonly fb: FormBuilder,
     private readonly cd: ChangeDetectorRef,
     private readonly navCtrl: NavController,
@@ -96,7 +95,7 @@ export class EditReviewCommentComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe$),
       )
       .subscribe(() => {
-        this.location.back();
+        this.back();
       });
   }
 

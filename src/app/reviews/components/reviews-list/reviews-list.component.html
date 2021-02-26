@@ -1,14 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ion-item color="light" lines="full">
-      <ion-buttons slot="start">
-        <ion-button (click)="back()">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>{{ 'reviews.title' | translate }}</ion-title>
-    </ion-item>
+    <app-column-header [title]="'reviews.title' | translate"></app-column-header>
     <app-professional-card
       *ngIf="professional$ | async as professional; else loading"
       [professional]="professional"

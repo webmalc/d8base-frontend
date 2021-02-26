@@ -1,15 +1,8 @@
 <app-header></app-header>
 <ion-content>
-  <app-content-wrapper *ngIf="context$ | async as context">
-    <ion-item color="light" lines="full">
-      <ion-buttons slot="start">
-        <ion-button routerLink="/service/{{ context?.service.id }}" routerDirection="back">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>{{ (currentStep$ | async).title | translate }}</ion-title>
-    </ion-item>
-    <ion-row>
+  <app-content-wrapper >
+    <app-column-header [title]="(currentStep$ | async).title | translate"></app-column-header>
+    <ion-row *ngIf="context$ | async as context">
       <ion-col>
         <ion-list>
           <ion-list-header class="fs20">

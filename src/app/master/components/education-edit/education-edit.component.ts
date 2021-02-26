@@ -46,10 +46,6 @@ export class EducationEditComponent extends AbstractEditComponent<Education> imp
     }
   }
 
-  public locationBack(): void {
-    this.location.back();
-  }
-
   protected transform(data: Education): Education {
     const trans: Education = plainToClass(Education, { ...data, ...this.form.getRawValue() });
     trans.formatDates();

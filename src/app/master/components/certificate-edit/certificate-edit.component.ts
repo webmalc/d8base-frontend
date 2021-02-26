@@ -41,9 +41,6 @@ export class CertificateEditComponent extends AbstractEditComponent<Certificate>
       this.form.patchValue(this.item ?? {});
     }
   }
-  public locationBack(): void {
-    this.location.back();
-  }
 
   public getPhoto(): string | SafeResourceUrl {
     const photo: string = this.form.get(this.formFields.photo).value;
