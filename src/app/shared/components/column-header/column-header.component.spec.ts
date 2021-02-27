@@ -32,20 +32,6 @@ describe('ColumnHeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render title', () => {
-    const titleText = 'Title';
-    const titleText2 = '02Title02';
-    const titleElement = fixture.debugElement.query(By.css('ion-title'));
-
-    component.title = titleText;
-    fixture.detectChanges();
-    expect(titleElement.nativeElement.textContent).toBe(titleText);
-
-    component.title = titleText2;
-    fixture.detectChanges();
-    expect(titleElement.nativeElement.textContent).toBe(titleText2);
-  });
-
   it('should navigate to default fallback and location.back', () => {
     const previousLocationFallback = component.previousLocationFallback;
 

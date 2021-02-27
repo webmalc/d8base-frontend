@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [title]="'reviews.edit-review' | translate"></app-column-header>
+    <app-column-header>{{ 'reviews.edit-review' | translate }}</app-column-header>
     <app-professional-card
       *ngIf="professional$ | async as professional"
       [professional]="professional"

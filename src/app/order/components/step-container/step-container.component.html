@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
-  <app-content-wrapper >
-    <app-column-header [title]="(currentStep$ | async).title | translate"></app-column-header>
+  <app-content-wrapper>
+    <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
     <ion-row *ngIf="context$ | async as context">
       <ion-col>
         <ion-list>

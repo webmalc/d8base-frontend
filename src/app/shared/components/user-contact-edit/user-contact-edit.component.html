@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [title]="'contact-edit-page.contacts' | translate"></app-column-header>
+    <app-column-header>{{ 'contact-edit-page.contacts' | translate }}</app-column-header>
     <form [formGroup]="form" *ngIf="form; else loading" (submit)="submitForm()">
       <ion-item>
         <ion-label class="label-for-required-input" color="medium" position="floating">

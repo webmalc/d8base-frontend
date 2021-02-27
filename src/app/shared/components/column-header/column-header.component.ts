@@ -8,9 +8,8 @@ import { NavController } from '@ionic/angular';
   templateUrl: './column-header.component.html',
 })
 export class ColumnHeaderComponent {
-  @Input() public title: string;
   @Input() public previousLocationFallback: string = '/';
-  public isNeedToUseFallback: boolean;
+  private isNeedToUseFallback: boolean;
 
   constructor(private readonly location: Location, private readonly router: Router, private readonly navCtrl: NavController) {
     this.isNeedToUseFallback = !this.router.navigated;
