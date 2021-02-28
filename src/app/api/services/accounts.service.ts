@@ -138,6 +138,7 @@ class AccountsService extends __BaseService {
   static readonly accountsProfessionalTagsDeletePath = '/accounts/professional-tags/{id}/';
   static readonly accountsProfessionalsListPath = '/accounts/professionals/';
   static readonly accountsProfessionalsCreatePath = '/accounts/professionals/';
+  static readonly accountsProfessionalsCanReviewReadPath = '/accounts/professionals/can-review/{id}/';
   static readonly accountsProfessionalsReadPath = '/accounts/professionals/{id}/';
   static readonly accountsProfessionalsUpdatePath = '/accounts/professionals/{id}/';
   static readonly accountsProfessionalsPartialUpdatePath = '/accounts/professionals/{id}/';
@@ -4359,6 +4360,42 @@ class AccountsService extends __BaseService {
   accountsProfessionalsCreate(data: Professional): __Observable<Professional> {
     return this.accountsProfessionalsCreateResponse(data).pipe(
       __map(_r => _r.body as Professional)
+    );
+  }
+
+  /**
+   * Return true if user can review professional.
+   * @param id undefined
+   */
+  accountsProfessionalsCanReviewReadResponse(id: string): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/professionals/can-review/${encodeURIComponent(id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * Return true if user can review professional.
+   * @param id undefined
+   */
+  accountsProfessionalsCanReviewRead(id: string): __Observable<null> {
+    return this.accountsProfessionalsCanReviewReadResponse(id).pipe(
+      __map(_r => _r.body as null)
     );
   }
 
