@@ -1,25 +1,8 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
+    <app-column-header>{{ 'contact-edit-page.contacts' | translate }}</app-column-header>
     <form [formGroup]="form" *ngIf="form; else loading" (submit)="submitForm()">
-      <ion-item lines="none" class="ion-item-bordered-first" color="light">
-        <ion-col class="ion-no-padding">
-          <ion-row class="ion-justify-content-start ion-align-items-center">
-            <ion-item
-              (click)="location.back()"
-              routerDirection="back"
-              color="light"
-              routerLinkActive="active"
-              lines="none" class="ion-align-items-center ion-activatable cursor-pointer"
-            >
-              <ion-icon name="arrow-back-outline"></ion-icon>
-            </ion-item>
-            <ion-item lines="none" color="light">
-              {{ 'contact-edit-page.contacts' | translate }}
-            </ion-item>
-          </ion-row>
-        </ion-col>
-      </ion-item>
       <ion-item>
         <ion-label class="label-for-required-input" color="medium" position="floating">
           {{ 'contact-edit-page.choice-contact' | translate }}

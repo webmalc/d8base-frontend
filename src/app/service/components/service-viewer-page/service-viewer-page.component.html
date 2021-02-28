@@ -1,21 +1,12 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ion-item color="light" lines="full">
-      <ion-buttons slot="start">
-        <ion-button (click)="location.back()">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-label>
-        <h1>{{ 'service-details.title' | translate }}</h1>
-      </ion-label>
-    </ion-item>
+    <app-column-header>{{ 'service-details.title' | translate }}</app-column-header>
     <app-info-row *ngIf="showSuccessOrderNotification$ | async">
-      {{ 'order.success-title' | translate }}<br>
+      {{ 'order.success-title' | translate }}<br />
       {{ 'order.success-description' | translate }}
     </app-info-row>
-    <ng-container *ngIf="service">
+    <ng-container *ngIf="service; else loading">
       <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
       <div class="ion-text-right">
         <ion-button size="default" class="ion-align-self-end" [routerLink]="'/order/' + service.id">
@@ -26,3 +17,6 @@
     </ng-container>
   </app-content-wrapper>
 </ion-content>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

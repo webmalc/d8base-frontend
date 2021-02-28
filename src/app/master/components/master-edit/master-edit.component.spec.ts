@@ -1,7 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { MasterEditComponent } from './master-edit.component';
 
 describe('MasterEditComponent', () => {
@@ -12,7 +11,7 @@ describe('MasterEditComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MasterEditComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [FormBuilder],
       }).compileComponents();
 

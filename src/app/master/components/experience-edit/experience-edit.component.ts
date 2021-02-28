@@ -46,10 +46,6 @@ export class ExperienceEditComponent extends AbstractEditComponent<Experience> i
     }
   }
 
-  public locationBack(): void {
-    this.location.back();
-  }
-
   protected transform(data: Experience): Experience {
     const transData: Experience = plainToClass(Experience, { ...data, ...this.form.getRawValue() });
     transData.formatDates();

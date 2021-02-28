@@ -75,10 +75,6 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
     }
   }
 
-  public locationBack(): void {
-    this.location.back();
-  }
-
   protected transform(data: any): ClientLocationInterface {
     const model = this.transformFn({ ...data, ...this.form.value });
 
