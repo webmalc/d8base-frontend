@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FullLocationService, LocationInterface } from '@app/core/services/location/full-location.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { finalize, map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs/operators';
 
 const DEFAULT_FLAG = 'ca';
 
@@ -16,7 +16,7 @@ export class LocationViewerComponent {
 
   public locationText$: Observable<string>;
   public countryCode$: Observable<string>;
-  public pending$ = new BehaviorSubject(false);
+  public pending$: Observable<boolean>;
 
   private readonly locationSubject = new BehaviorSubject<LocationInterface>(null);
 
@@ -27,13 +27,13 @@ export class LocationViewerComponent {
     );
 
     this.locationText$ = this.locationSubject.pipe(
-      switchMap(location => {
-        this.pending$.next(true);
-        return locationService.getTextLocation(location, this.type === 'short').pipe(
-          finalize(() => this.pending$.next(false)),
-        );
-      }),
+      switchMap(location => locationService.getTextLocation(location, this.type === 'short')),
       map(result => result?.text),
+      startWith(''),
+    );
+
+    this.pending$ = combineLatest([this.locationSubject, this.locationText$]).pipe(
+      map(([location, text]) => location && !text),
     );
   }
 
