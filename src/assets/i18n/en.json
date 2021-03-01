@@ -771,8 +771,7 @@
   },
   "server-errors": {
     "unauthorized": "Access denied",
-    "generic": "The server is temporarily unavailable",
-    "unknown": "Unknown error"
+    "generic": "The server is temporarily unavailable"
   },
   "agreement": {
     "part-1": "By pressing the '{{ publish }}' button, you confirm you've accepted",
