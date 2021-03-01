@@ -17,7 +17,7 @@
       <ng-content></ng-content>
       <ion-row>
         <ion-col>
-          <ng-container *ngIf="!(isPrevDisabled$ | async)">
+          <ng-container *ngIf="(isPrevDisabled$ | async) === false">
             <ion-button expand="block" color="medium" (click)="prevStep()">
               {{ 'global.back' | translate }}
             </ion-button>

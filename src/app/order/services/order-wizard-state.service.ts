@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiceList } from '@app/api/models';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { filter, first, map, switchMap } from 'rxjs/operators';
 import StepContext from '../interfaces/step-context.interface';
 import StepModel from '../interfaces/step-model.interface';
+import StepsModel from '../interfaces/steps-model.interface';
 import { StepsState } from '../interfaces/steps-state.type';
 import { initState, orderWizardStorageKey, ORDER_STEPS } from '../order-steps';
 
 @Injectable()
 export class OrderWizardStateService {
-  private readonly steps = ORDER_STEPS;
+  private steps: StepsModel = ORDER_STEPS;
 
   private readonly currentStep$ = new BehaviorSubject<StepModel>(this.steps.byId[this.steps.ids[0]]);
   private readonly state$ = new BehaviorSubject<StepsState>(null);
@@ -24,8 +26,7 @@ export class OrderWizardStateService {
   private path: string;
   private storageKey: string;
 
-  constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
-  }
+  constructor(private readonly router: Router, private readonly storage: StorageManagerService) {}
 
   public submit(): Observable<StepsState> {
     return this.submit$.asObservable();
@@ -119,6 +120,7 @@ export class OrderWizardStateService {
     this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
     const state: StepsState = await this.storage.get(this.storageKey);
     this.setPath(`order/${service?.id}`);
+    this.steps = this.getSteps(context);
     this.state$.next(state ?? initState);
     this.context$.next(context);
   }
@@ -164,5 +166,17 @@ export class OrderWizardStateService {
 
   private getIndexOfCurrentStep(): number {
     return this.steps.ids.indexOf(this.getIdOfCurrentStep());
+  }
+
+  private getSteps(context: StepContext): StepsModel {
+    const { service } = context;
+    const onlineServiceType: ServiceList['service_type'] = 'online';
+    if (service.service_type === onlineServiceType) {
+      return {
+        ...ORDER_STEPS,
+        ids: ORDER_STEPS.ids.filter(id => id !== OrderIds.Location),
+      };
+    }
+    return ORDER_STEPS;
   }
 }
