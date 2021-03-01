@@ -2,38 +2,43 @@
 <ion-content>
   <app-content-wrapper>
     <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
-    <ion-row *ngIf="context$ | async as context">
-      <ion-col>
-        <ion-list>
-          <ion-list-header class="fs20">
-            {{ 'order.selected-service' | translate }}
-          </ion-list-header>
-          <app-service-widget [service]="context?.service" [master]="context.professional"></app-service-widget>
-          <app-order-details [order]="orderDetailsState$ | async"></app-order-details>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ng-content></ng-content>
-    <ion-row>
-      <ion-col>
-        <ng-container *ngIf="(isPrevDisabled$ | async) === false">
-          <ion-button expand="block" color="medium" (click)="prevStep()">
-            {{ 'global.back' | translate }}
-          </ion-button>
-        </ng-container>
-      </ion-col>
-      <ion-col>
-        <ng-container *ngIf="!isWizardDisabled">
-          <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">{{
-            'order.order-service' | translate
-          }}</ion-button>
-          <ng-template #isNotLastStep>
-            <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">{{
-              'global.forward' | translate
+    <ng-container *ngIf="context$ | async as context; else loading">
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-list-header class="fs20">
+              {{ 'order.selected-service' | translate }}
+            </ion-list-header>
+            <app-service-widget [service]="context?.service" [master]="context.professional"></app-service-widget>
+            <app-order-details [order]="orderDetailsState$ | async"></app-order-details>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ng-content></ng-content>
+      <ion-row>
+        <ion-col>
+          <ng-container *ngIf="!(isPrevDisabled$ | async)">
+            <ion-button expand="block" color="medium" (click)="prevStep()">
+              {{ 'global.back' | translate }}
+            </ion-button>
+          </ng-container>
+        </ion-col>
+        <ion-col>
+          <ng-container *ngIf="!isWizardDisabled">
+            <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">{{
+              'order.order-service' | translate
             }}</ion-button>
-          </ng-template>
-        </ng-container>
-      </ion-col>
-    </ion-row>
+            <ng-template #isNotLastStep>
+              <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">{{
+                'global.forward' | translate
+              }}</ion-button>
+            </ng-template>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ng-container>
   </app-content-wrapper>
 </ion-content>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>
