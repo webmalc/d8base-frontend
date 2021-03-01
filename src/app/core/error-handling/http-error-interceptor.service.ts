@@ -3,6 +3,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import * as HttpCodes from '@app/core/constants/http.constants';
+import { Predicate } from '@app/core/types/common-types';
 import { environment } from '@env/environment';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,8 +13,13 @@ import * as ErrorMessages from './error-messages';
 
 const ERROR_TOAST_DURATION_MS = 3000;
 
+const filters: Predicate<HttpErrorResponse>[] = [
+  (response) => !response.url?.startsWith(environment.backend.url),
+  (response) => response.status === HttpCodes.HTTP_NOT_FOUND,
+];
+
 function isFiltered(response: HttpErrorResponse): boolean {
-  return !response.url?.startsWith(environment.backend.url);
+  return filters.some(f => f(response));
 }
 
 /**
@@ -59,12 +65,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       return;
     }
 
-    if (5 === Math.floor(response.status / 100)) {
-      this.handleServerErrorResponse();
-      return;
-    }
-
-    this.showMessage(response.message || this.translate.instant(ErrorMessages.UNKNOWN_ERROR));
+    this.handleServerErrorResponse();
   }
 
   private handleBadRequestResponse(response: HttpErrorResponse): void {
