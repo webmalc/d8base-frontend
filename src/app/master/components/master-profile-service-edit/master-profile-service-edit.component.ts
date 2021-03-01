@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Service } from '@app/service/models/service';
+import { ServiceList } from '@app/api/models';
 
 @Component({
   selector: 'app-master-profile-service-edit',
@@ -8,10 +8,10 @@ import { Service } from '@app/service/models/service';
 })
 export class MasterProfileServiceEditComponent {
 
-  @Input() public service: Service;
-  @Output() public enableService: EventEmitter<Service> = new EventEmitter<Service>();
-  @Output() public disableService: EventEmitter<Service> = new EventEmitter<Service>();
-  @Output() public deleteService: EventEmitter<Service> = new EventEmitter<Service>();
+  @Input() public service: ServiceList;
+  @Output() public enableService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
+  @Output() public disableService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
+  @Output() public deleteService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
 
   public onIsEnabled(isEnabled: boolean): void {
     isEnabled ? this.enableService.emit(this.service) : this.disableService.emit(this.service);

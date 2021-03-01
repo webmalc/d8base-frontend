@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProfessionalList } from '@app/api/models';
-import { Service } from '@app/service/models/service';
+import { ProfessionalList, ServiceList } from '@app/api/models';
 
 @Component({
   selector: 'app-service-widget',
@@ -8,7 +7,7 @@ import { Service } from '@app/service/models/service';
   styleUrls: ['./service-widget.component.scss'],
 })
 export class ServiceWidgetComponent {
-  @Input() public service: Service;
+  @Input() public service: ServiceList;
 
   @Input() public master: ProfessionalList;
 

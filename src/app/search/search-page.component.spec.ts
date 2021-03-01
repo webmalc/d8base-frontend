@@ -1,11 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SearchService } from '@app/api/services';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { IonicModule, Platform } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchPage } from './search-page.component';
-import { SearchService } from './services/search.service';
 
 describe('SearchPage', () => {
   let component: SearchPage;

@@ -1,8 +1,7 @@
-import { ProfessionalList, Profile } from '@app/api/models';
-import { Service } from '@app/service/models/service';
+import { ProfessionalList, Profile, ServiceList } from '@app/api/models';
 
 export default interface StepContext {
   professional: ProfessionalList;
   client: Profile;
-  service: Service;
+  service: ServiceList;
 }
