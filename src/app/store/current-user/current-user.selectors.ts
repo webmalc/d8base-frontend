@@ -23,7 +23,7 @@ export default class CurrentUserSelectors {
 
   @Selector([CurrentUserState])
   public static professional(data: CurrentUserStateModel): ProfessionalList | null {
-    return data.professionals[0];
+    return data.professionals?.[0] ?? null;
   }
 
   @Selector([CurrentUserState])
@@ -39,5 +39,11 @@ export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static errors(data: CurrentUserStateModel): string[] {
     return data.errors;
+  }
+
+  @Selector([CurrentUserState])
+  public static isAuthenticated(data: CurrentUserStateModel): boolean {
+    const { tokens } = data;
+    return Boolean(tokens.access_token);
   }
 }

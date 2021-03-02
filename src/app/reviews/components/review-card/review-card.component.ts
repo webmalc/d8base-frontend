@@ -18,16 +18,16 @@ export class ReviewCardComponent {
   public set review(review: ReviewList) {
     this._review = review;
     if (review) {
-      this.countryCode = this.reviewsService.getReviewCountryCodeByNationality(this.review.user.nationality);
-      this.isAbleToEditComment = this.reviewsService.getIsInProfessionalIds(this.review.professional);
+      this.countryCode$ = this.reviewsService.getReviewCountryCodeByNationality(this.review.user.nationality);
+      this.isAbleToEditComment$ = this.reviewsService.isCurrentProfessional(this.review.professional);
     }
   }
 
   @Input() public showComment: boolean = true;
-  public isAbleToEditComment: Observable<boolean>;
+  public isAbleToEditComment$: Observable<boolean>;
   public readonly ratings: number[] = [1, 2, 3, 4, 5];
   public defaultAvatar = HelperService.getNoAvatarLink();
-  public countryCode: Observable<string>;
+  public countryCode$: Observable<string>;
   private _review: ReviewList;
 
   constructor(public readonly reviewsService: ReviewsService) {}
