@@ -83,11 +83,12 @@ export class OrderPage {
       this.profile$,
       this.currentProfessional$,
     ]).pipe(first()).subscribe(async ([{ service, professional }, client, currentProfessional]) => {
+      const isSelfOrder = professional.id === currentProfessional.id;
       await this.wizardState.setContext({
         service,
         professional,
         client,
-        currentProfessional,
+        isSelfOrder,
       });
     });
   }

@@ -121,7 +121,6 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
   }
 
   private setSelfOrder():void {
-    const { professional, currentProfessional } = this.context;
-    this.isSelfOrder = professional.id === currentProfessional.id;
+    this.isSelfOrder = this.context.isSelfOrder;
   }
 }
