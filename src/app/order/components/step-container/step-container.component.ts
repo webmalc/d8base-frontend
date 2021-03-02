@@ -24,7 +24,6 @@ export class StepContainerComponent implements OnInit, OnDestroy {
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
     map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})),
   );
-  @Input() public isWizardDisabled: boolean = false;
 
   private readonly ngDestroy$ = new Subject<void>();
 

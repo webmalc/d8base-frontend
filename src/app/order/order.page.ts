@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServicesService } from '@app/api/services';
-import { SentOrder } from '@app/core/models/sent-order';
+import { ProfessionalList, Profile, SentOrder } from '@app/api/models';
+import { AccountsService, ProfessionalsService, ServicesService } from '@app/api/services';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { UserManagerService } from '@app/core/services/user-manager.service';
-import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
-import { forkJoin, Subject } from 'rxjs';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
-import { OrderWizardStateService, SentOrdersApiService } from './services';
+import { OrderWizardStateService } from './services';
+
 
 @Component({
   selector: 'app-order',
@@ -16,6 +17,11 @@ import { OrderWizardStateService, SentOrdersApiService } from './services';
   providers: [ServicesApiCache],
 })
 export class OrderPage {
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
+
+  @Select(CurrentUserSelectors.professional)
+  public currentProfessional$: Observable<ProfessionalList>;
 
   private readonly ngDestroy$ = new Subject<void>();
   private serviceId: number;
@@ -25,9 +31,8 @@ export class OrderPage {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly servicesApi: ServicesService,
-    private readonly mastersApi: MasterReadonlyApiService,
-    private readonly userManagerService: UserManagerService,
-    private readonly ordersApi: SentOrdersApiService,
+    private readonly professionalsServiceApi: ProfessionalsService,
+    private readonly accountsServiceApi: AccountsService,
   ) {
   }
 
@@ -58,16 +63,16 @@ export class OrderPage {
   }
 
   private createOrder(order: SentOrder): void {
-    this.ordersApi.create(order).subscribe(({ id }) => {
+    this.accountsServiceApi.accountsOrdersSentCreate(order).subscribe(({ id }) => {
       this.router.navigate(['/', 'my-orders', 'outbox', id]);
     });
   }
 
   private setContext(serviceId: number): void {
-    forkJoin([
+    combineLatest([
       this.servicesApi.servicesServicesRead(serviceId).pipe(
         switchMap(service =>
-          this.mastersApi.getByEntityId(service.professional).pipe(
+          this.professionalsServiceApi.professionalsProfessionalsRead(service.professional).pipe(
             map(professional => ({
               service,
               professional,
@@ -75,12 +80,15 @@ export class OrderPage {
           ),
         ),
       ),
-      this.userManagerService.getCurrentUser(),
-    ]).pipe(first()).subscribe(async ([{ service, professional }, client]) => {
+      this.profile$,
+      this.currentProfessional$,
+    ]).pipe(first()).subscribe(async ([{ service, professional }, client, currentProfessional]) => {
+      const isSelfOrder = professional.id === currentProfessional.id;
       await this.wizardState.setContext({
         service,
         professional,
         client,
+        isSelfOrder,
       });
     });
   }
