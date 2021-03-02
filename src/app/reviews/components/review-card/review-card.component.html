@@ -7,7 +7,7 @@
       {{ review?.user.first_name }}
       {{ review?.user.last_name }}
     </ion-label>
-    <span *ngIf="countryCode | async as countryCode" class="flag-icon flag-icon-{{ countryCode || 'ca' }}"></span>
+    <span *ngIf="countryCode$ | async as countryCode" class="flag-icon flag-icon-{{ countryCode || 'ca' }}"></span>
   </ion-item>
   <ion-item lines="none" class="review-date">{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }} </ion-item>
   <ion-item lines="none" class="rating">
@@ -18,7 +18,7 @@
   </ion-item>
   <div class="description ion-padding-horizontal ion-padding-bottom fs16">{{ review?.description }}</div>
   <ng-container *ngIf="showComment">
-    <ng-container *ngIf="isAbleToEditComment | async; else notProfessionalComment">
+    <ng-container *ngIf="isAbleToEditComment$ | async; else notProfessionalComment">
       <ion-item class="comment-label ion-item-no-border">
         <ion-label>{{ 'reviews.yours-comment' | translate }}</ion-label>
         <ion-button
