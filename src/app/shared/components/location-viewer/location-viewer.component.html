@@ -6,6 +6,5 @@
   <ng-container *ngIf="locationText$ | async as locationText">
     {{ locationText }}
   </ng-container>
+  <ion-spinner name="dots" *ngIf="(pending$ | async) === true"></ion-spinner>
 </ng-container>
-
-<ion-spinner name="dots" *ngIf="(pending$ | async) === true"></ion-spinner>
