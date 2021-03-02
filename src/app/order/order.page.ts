@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ServicesService } from '@app/api/services';
 import { SentOrder } from '@app/core/models/sent-order';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
 import { forkJoin, Subject } from 'rxjs';
@@ -24,7 +24,7 @@ export class OrderPage {
     private readonly wizardState: OrderWizardStateService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly servicesApi: ServicesReadonlyApiService,
+    private readonly servicesApi: ServicesService,
     private readonly mastersApi: MasterReadonlyApiService,
     private readonly userManagerService: UserManagerService,
     private readonly ordersApi: SentOrdersApiService,
@@ -65,7 +65,7 @@ export class OrderPage {
 
   private setContext(serviceId: number): void {
     forkJoin([
-      this.servicesApi.getByEntityId(serviceId).pipe(
+      this.servicesApi.servicesServicesRead(serviceId).pipe(
         switchMap(service =>
           this.mastersApi.getByEntityId(service.professional).pipe(
             map(professional => ({

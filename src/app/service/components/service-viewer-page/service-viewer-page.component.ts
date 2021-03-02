@@ -1,10 +1,9 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProfessionalList } from '@app/api/models';
-import { ServicesReadonlyApiService } from '@app/core/services/services-readonly-api.service';
+import { ProfessionalList, ServiceList } from '@app/api/models';
+import { ServicesService } from '@app/api/services';
 import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
-import { Service } from '@app/service/models/service';
 import { Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
@@ -15,19 +14,19 @@ import { first, map, switchMap } from 'rxjs/operators';
 })
 export class ServiceViewerPageComponent {
 
-  public service: Service;
+  public service: ServiceList;
   public master: ProfessionalList;
   public showSuccessOrderNotification$: Observable<boolean>;
 
   constructor(
     public location: Location,
     route: ActivatedRoute,
-    servicesApi: ServicesReadonlyApiService,
+    servicesApi: ServicesService,
     masterApi: MasterReadonlyApiService,
   ) {
     route.params.pipe(
       first(params => Boolean(params?.id)),
-      switchMap(params => servicesApi.getByEntityId(params.id).pipe(
+      switchMap(params => servicesApi.servicesServicesRead(params.id).pipe(
         switchMap(service => masterApi.getByEntityId(service.professional).pipe(
           map((master) => ({
               master,

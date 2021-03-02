@@ -24,9 +24,6 @@ describe('LoginFormComponent', () => {
         providers: [TranslateService],
       }).compileComponents();
 
-      router = TestBed.inject(Router);
-      spyOn(router, 'navigateByUrl');
-
       fixture = TestBed.createComponent(LoginFormComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
@@ -34,6 +31,7 @@ describe('LoginFormComponent', () => {
   );
 
   it('should create', () => {
+    expect(component).toBeTruthy();
     expect(component.form.valid).toBeFalsy();
   });
 
@@ -43,11 +41,11 @@ describe('LoginFormComponent', () => {
       [LoginFormFields.Password]: 'Q3Bds56jkADCC323dfsa',
     };
     component.form.setValue(user);
+    fixture.detectChanges();
 
     spyOn(component.user, 'emit');
 
     fixture.debugElement.nativeElement.querySelector('[type="submit"]').click();
-    fixture.detectChanges();
     expect(component.user.emit).toHaveBeenCalledWith(user);
   });
 });

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Service } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterLocation } from '@app/master/models/master-location';
@@ -13,7 +14,6 @@ import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-inte
 import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-interface';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { Price } from '@app/service/models/price';
-import { Service } from '@app/service/models/service';
 import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePhoto } from '@app/service/models/service-photo';
 import { ServiceSchedule } from '@app/service/models/service-schedule';
@@ -77,14 +77,15 @@ export class ServicePublishDataPreparerService {
     return HelperService.clearArray(await this.generateServicePhotos(data));
   }
 
-  private getService(): Service {
+  private getService(): Omit<Service, 'professional'> {
     const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-    const service = plainToClass(Service, stepTwoData, { excludeExtraneousValues: true });
-    service.duration = stepTwoData.duration;
-    service.is_base_schedule = stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule;
-    service.is_auto_order_confirmation = stepSevenData.is_auto_order_confirmation ?? false;
-    service.is_enabled = true; // always create already published service; the owner can un-publish it later
+    const service = {
+      ...stepTwoData,
+      is_base_schedule: stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule,
+      is_auto_order_confirmation: stepSevenData.is_auto_order_confirmation ?? false,
+      is_enabled: true, // always create already published service; the owner can un-publish it later
+    };
 
     return HelperService.clear(service);
   }

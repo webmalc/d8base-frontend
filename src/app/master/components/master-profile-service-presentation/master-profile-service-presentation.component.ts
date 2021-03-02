@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Service } from '@app/service/models/service';
+import { ServiceList } from '@app/api/models';
 import { ServiceTag } from '@app/service/models/service-tag';
 
 @Component({
@@ -8,5 +8,5 @@ import { ServiceTag } from '@app/service/models/service-tag';
   styleUrls: ['./master-profile-service-presentation.component.scss'],
 })
 export class MasterProfileServicePresentationComponent {
-  @Input() public serviceData: { service: Service; tags?: ServiceTag[] };
+  @Input() public serviceData: { service: ServiceList; tags?: ServiceTag[] };
 }
