@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ServiceList } from '@app/api/models';
+import { Service } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterLocation } from '@app/master/models/master-location';
@@ -77,7 +77,7 @@ export class ServicePublishDataPreparerService {
     return HelperService.clearArray(await this.generateServicePhotos(data));
   }
 
-  private getService(): Omit<ServiceList, 'professional'> {
+  private getService(): Omit<Service, 'professional'> {
     const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
     const service = {

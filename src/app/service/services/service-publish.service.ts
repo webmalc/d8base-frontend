@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ServiceList, ServiceSchedule } from '@app/api/models';
+import { Service, ServiceList, ServiceSchedule } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { PricesApiService } from '@app/core/services/prices-api.service';
 import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
 import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MasterLocation } from '@app/master/models/master-location';
 import { MasterSchedule } from '@app/master/models/master-schedule';
 import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
@@ -92,7 +91,7 @@ export class ServicePublishService {
     );
   }
 
-  private createService(service: Omit<ServiceList, 'professional'>, master: ProfessionalList): Observable<ServiceList> {
+  private createService(service: Omit<Service, 'professional'>, master: ProfessionalList): Observable<Service> {
     return this.accountsApi.accountsServicesCreate({ ...service, professional: master.id });
   }
 
