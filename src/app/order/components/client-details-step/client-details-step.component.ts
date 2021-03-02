@@ -5,6 +5,7 @@ import { UserManagerService } from '@app/core/services/user-manager.service';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderClientDetailsFormFields } from '@app/order/enums/order-client-details-form';
 import { ClientDetailsStepData } from '@app/order/interfaces/client-details-step-data.type';
+import StepContext from '@app/order/interfaces/step-context.interface';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -29,6 +30,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     [this.formFields.Phone]: ['', Validators.required],
     [this.formFields.Comment]: [''],
   });
+  public isSelfOrder: boolean = false;
 
   private readonly userFields = [this.formFields.FirstName, this.formFields.LastName, this.formFields.Email, this.formFields.Phone];
 
@@ -61,6 +63,11 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
       },
     );
     this.disableUserFields(isForMe);
+  }
+
+  protected onContextChanged(context: StepContext): void {
+    super.onContextChanged(context);
+    this.setSelfOrder();
   }
 
   private subscribeIsForMeControl(): void {
@@ -111,5 +118,10 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
         this.form.get(control).enable({ emitEvent: false });
       }
     });
+  }
+
+  private setSelfOrder():void {
+    const { professional, currentProfessional } = this.context;
+    this.isSelfOrder = professional.id === currentProfessional.id;
   }
 }

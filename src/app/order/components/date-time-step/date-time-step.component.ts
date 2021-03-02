@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MasterManagerService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarApiService } from '@app/master/services/calendar-api.service';
 import { StepComponent } from '@app/order/abstract/step';
 import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-date-time-step',
@@ -28,7 +27,6 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     datetime: this.formControl,
   });
   public displayedCalendars$: Observable<MasterCalendar[]>;
-  public isMyService$: Observable<boolean>;
 
   private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());
   private readonly professional$ = new BehaviorSubject<number>(NaN);
@@ -36,13 +34,8 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   constructor(
     private readonly calendarApi: CalendarApiService,
     protected readonly cd: ChangeDetectorRef,
-    masterManager: MasterManagerService,
   ) {
     super(cd);
-    this.isMyService$ = masterManager.getMasterList().pipe(
-      switchMap(masters => combineLatest([of(masters), this.professional$])),
-      map(([masters, professional]) => masters.some(m => m.id === professional)),
-    );
   }
 
   public ngOnInit(): void {

@@ -4,4 +4,5 @@ export default interface StepContext {
   professional: ProfessionalList;
   client: Profile;
   service: ServiceList;
+  currentProfessional: ProfessionalList;
 }
