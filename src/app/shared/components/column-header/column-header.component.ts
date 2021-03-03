@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-column-header',
@@ -11,7 +10,7 @@ export class ColumnHeaderComponent {
   @Input() public previousLocationFallback: string = '/';
   private isNeedToUseFallback: boolean;
 
-  constructor(private readonly location: Location, private readonly router: Router, private readonly navCtrl: NavController) {
+  constructor(private readonly location: Location, private readonly router: Router) {
     this.isNeedToUseFallback = !this.router.navigated;
   }
 

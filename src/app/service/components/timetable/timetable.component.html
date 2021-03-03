@@ -1,24 +1,9 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ion-item color="light">
-      <ion-col class="ion-no-padding">
-        <ion-row class="ion-justify-content-start ion-align-items-center">
-          <ion-item
-            routerLink="/service/publish/step-seven"
-            routerDirection="back"
-            routerLinkActive="active"
-            lines="none" class="ion-align-items-center"
-            color="light"
-          >
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </ion-item>
-          <ion-item lines="none" color="light">
-            {{ 'service-publish.step-seven.timetable.title' | translate }}
-          </ion-item>
-        </ion-row>
-      </ion-col>
-    </ion-item>
+    <app-column-header [previousLocationFallback]="'/service/publish/step-seven'">{{
+      'service-publish.step-seven.timetable.title' | translate
+    }}</app-column-header>
     <app-schedule-editor [formControl]="scheduleEditor"></app-schedule-editor>
     <ion-button type="submit" expand="block" [disabled]="scheduleEditor.invalid" (click)="saveTimetable()">
       {{ 'global.save' | translate }}
