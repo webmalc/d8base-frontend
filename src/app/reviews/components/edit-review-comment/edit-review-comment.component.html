@@ -3,11 +3,11 @@
   <app-content-wrapper>
     <app-column-header>{{ 'reviews.edit-comment' | translate }}</app-column-header>
     <app-professional-card
-      *ngIf="professional$ | async as professional"
+      *ngIf="professional$ | async as professional; else loading"
       [professional]="professional"
       class="professional"
     ></app-professional-card>
-    <app-review-card *ngIf="review$ | async as review" [review]="review" [showComment]="false"></app-review-card>
+    <app-review-card *ngIf="review$ | async as review; else loading" [review]="review" [showComment]="false"></app-review-card>
     <ion-list>
       <ion-item>
         <ion-label position="floating">{{ 'reviews.yours-comment' | translate }}</ion-label>
@@ -22,10 +22,13 @@
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button expand="block" [disabled]="reviewCommentForm.invalid" (click)="sendReview()">{{
+        <ion-button expand="block" [disabled]="reviewCommentForm.invalid || reviewCommentForm.pristine" (click)="sendReview()">{{
           'reviews.send' | translate
         }}</ion-button>
       </ion-col>
     </ion-row>
   </app-content-wrapper>
 </ion-content>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

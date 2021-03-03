@@ -1,6 +1,6 @@
 <app-step-container>
   <form [formGroup]="form">
-    <ion-item lines="none">
+    <ion-item lines="none" *ngIf="!isSelfOrder">
       <ion-label>{{ 'order.is-for-me' | translate }}</ion-label>
       <ion-checkbox [formControlName]="formFields.IsForMe"></ion-checkbox>
     </ion-item>
