@@ -1,60 +1,47 @@
 <app-column-header>{{ 'education-edit-page.back' | translate }}</app-column-header>
-<ng-container *ngIf="item">
+<form [formGroup]="form" (ngSubmit)="onSave()" *ngIf="item else loading">
   <ion-item>
     <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'education-edit-page.university' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.university)" name="title" type="text"></ion-input>
+    <ion-input [formControlName]="formFields.university" name="title" type="text"></ion-input>
   </ion-item>
-  <app-form-control-error [control]="form.get(formFields.university)"> </app-form-control-error>
+  <app-form-control-error [controlName]="formFields.university"> </app-form-control-error>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'education-edit-page.degree' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.deegree)" name="photo" type="text"></ion-input>
+    <ion-input [formControlName]="formFields.degree" name="photo" type="text"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'education-edit-page.field-of-study' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.field_of_study)" name="link" type="text"></ion-input>
-  </ion-item>
-  <ion-item lines="none" class="ion-item-bottom-border">
-    <ion-label color="medium">
-      {{ 'education-edit-page.is-still-here' | translate }}
-    </ion-label>
-    <ion-checkbox [formControl]="form.get(formFields.is_still_here)"></ion-checkbox>
+    <ion-input [formControlName]="formFields.field_of_study" name="link" type="text"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'education-edit-page.start-date' | translate }}
-    </ion-label>
-    <ion-datetime [formControl]="form.get(formFields.start_date)" display-format="YYYY-MM-DD"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'education-edit-page.end-date' | translate }}
-    </ion-label>
-    <ion-datetime [formControl]="form.get(formFields.end_date)" display-format="YYYY-MM-DD"></ion-datetime>
-  </ion-item>
+  <app-date-interval-editor [formControlName]="formFields.interval"></app-date-interval-editor>
+  <app-form-control-error [controlName]="formFields.interval"> </app-form-control-error>
 
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'education-edit-page.description' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.description)" name="title" type="text"></ion-input>
+    <ion-input [formControlName]="formFields.description" name="title" type="text"></ion-input>
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">
     <ion-col size="6">
-      <ion-button (click)="delete()" *ngIf="item.id" color="light" expand="block" fill="solid" size="medium">
+      <ion-button (click)="onDelete()" *ngIf="item.id" color="light" expand="block" fill="solid" size="medium">
         {{ 'education-edit-page.remove' | translate }}
       </ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
+      <ion-button type="submit" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
         {{ 'education-edit-page.save' | translate }}
       </ion-button>
     </ion-col>
   </ion-row>
-</ng-container>
+</form>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

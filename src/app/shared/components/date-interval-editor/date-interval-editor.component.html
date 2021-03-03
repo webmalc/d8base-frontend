@@ -1,0 +1,18 @@
+<ion-item>
+  <ion-label color="medium" position="fixed">
+    {{ 'experience-edit-page.start-date' | translate }}
+  </ion-label>
+  <ion-input type="month" [value]="startDate" (ionBlur)="setTouched()" (ionChange)="setStartDate($event)"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label color="medium" position="fixed">
+    {{ 'experience-edit-page.end-date' | translate }}
+  </ion-label>
+  <ion-input type="month" [value]="endDate" [disabled]="isOngoing" (ionBlur)="setTouched()" (ionChange)="setEndDate($event)"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>
+    {{ 'experience-edit-page.is-still-here' | translate }}
+  </ion-label>
+  <ion-checkbox slot="end" (ionChange)="toggleOngoing($event)"></ion-checkbox>
+</ion-item>
