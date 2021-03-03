@@ -3,7 +3,6 @@ import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
@@ -38,7 +37,6 @@ export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
   constructor(
     public formService: ServicePublishStepFourFormService,
     private readonly isRegisteredApi: IsUserRegisteredApiService,
-    private readonly masterManager: MasterManagerService,
     public authenticationService: AuthenticationService,
     public serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly registrationService: RegistrationService,
