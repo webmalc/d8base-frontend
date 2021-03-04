@@ -7,18 +7,7 @@
     <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
 
-  <ng-container *ngTemplateOutlet="client; context: { $implicit: order.source === 'manual' ? order : order.client }"></ng-container>
-  <ng-template #client let-client>
-    <ion-item lines="none">
-      <ion-avatar slot="start">
-        <ion-img alt="avatar" [src]="getPhoto(client?.avatar_thumbnail)"></ion-img>
-      </ion-avatar>
-      <ion-label>
-        {{ client.first_name }}
-        {{ client.last_name }}
-      </ion-label>
-    </ion-item>
-  </ng-template>
+  <app-client-widget [client]="order.client"></app-client-widget>
 
   <app-service-title [service]="service"></app-service-title>
 
