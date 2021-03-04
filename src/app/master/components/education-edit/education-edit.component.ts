@@ -1,65 +1,78 @@
-import { Location } from '@angular/common';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Education } from '@app/master/models/education';
-import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
-import { plainToClass } from 'class-transformer';
+import { ProfessionalEducation } from '@app/api/models';
+import DateInterval from '@app/shared/components/date-interval-editor/date-interval.interface';
+import * as DateIntervalValidators from '@app/shared/components/date-interval-editor/date-interval.validators';
+import { EducationFormFields } from './education-form-fields.enum';
 
-enum EducationFormFields {
-  university = 'university',
-  deegree = 'deegree',
-  field_of_study = 'field_of_study',
-  is_still_here = 'is_still_here',
-  start_date = 'start_date',
-  end_date = 'end_date',
-  description = 'description',
-}
+import EducationFormValue from './education-form-value.interface';
 
 @Component({
   selector: 'app-education-edit',
   templateUrl: './education-edit.component.html',
   styleUrls: ['./education-edit.component.scss'],
 })
-export class EducationEditComponent extends AbstractEditComponent<Education> implements OnInit, OnChanges {
+export class EducationEditComponent {
+  @Output() public save = new EventEmitter<ProfessionalEducation>();
+  @Output() public delete = new EventEmitter<ProfessionalEducation>();
+
   public readonly formFields = EducationFormFields;
-  public form: FormGroup = this.fb.group({
-    [this.formFields.university]: [null, Validators.required],
-    [this.formFields.deegree]: [null],
-    [this.formFields.field_of_study]: [null],
-    [this.formFields.is_still_here]: [null],
-    [this.formFields.start_date]: [null],
-    [this.formFields.end_date]: [null],
-    [this.formFields.description]: [null],
-  });
+  public form: FormGroup;
 
-  constructor(private readonly location: Location, private readonly fb: FormBuilder) {
-    super();
-  }
+  private initialValue: ProfessionalEducation;
 
-  public ngOnInit(): void {
-    this.handleIsStillHereControl();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.item) {
-      this.form.patchValue(this.item ?? {});
-    }
-  }
-
-  protected transform(data: Education): Education {
-    const trans: Education = plainToClass(Education, { ...data, ...this.form.getRawValue() });
-    trans.formatDates();
-
-    return trans;
-  }
-
-  private handleIsStillHereControl(): void {
-    this.form.get(this.formFields.is_still_here).valueChanges.subscribe(value => {
-      const action = value ? 'disable' : 'enable';
-      [this.formFields.end_date].forEach(control => {
-        this.form.get(control)[action]();
-        this.form.get(control).reset();
-      });
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      [this.formFields.university]: [null, Validators.required],
+      [this.formFields.degree]: [null],
+      [this.formFields.field_of_study]: [null],
+      [this.formFields.interval]: [null, DateIntervalValidators.ongoingValidator],
+      [this.formFields.description]: [null],
     });
+  }
+
+  public get item() {
+    return this.initialValue;
+  }
+
+  @Input()
+  public set item(value: ProfessionalEducation) {
+    const interval: DateInterval = !value?.start_date ? null : {
+      startDate: value.start_date,
+      endDate: value.end_date,
+      isOngoing: value.is_still_here,
+    };
+
+    const formValue: EducationFormValue = {
+      [this.formFields.university]: value?.university,
+      [this.formFields.degree]: value?.deegree,
+      [this.formFields.field_of_study]: value?.field_of_study,
+      [this.formFields.interval]: interval,
+      [this.formFields.description]: value?.description,
+    };
+    this.form.patchValue(formValue);
+    this.initialValue = value;
+  }
+
+  public onSave(): void {
+    this.save.emit(this.getEducation());
+  }
+
+  public onDelete(): void {
+    this.delete.emit(this.initialValue);
+  }
+
+  private getEducation(): ProfessionalEducation {
+    const formValue: EducationFormValue = this.form.value;
+    return {
+      ...this.initialValue,
+      university: formValue.university,
+      deegree: formValue.degree,
+      field_of_study: formValue.field_of_study,
+      start_date: formValue.interval?.startDate,
+      end_date: formValue.interval?.endDate,
+      is_still_here: formValue.interval?.isOngoing,
+      description: formValue.description,
+    };
   }
 }

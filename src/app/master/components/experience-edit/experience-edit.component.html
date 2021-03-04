@@ -1,54 +1,41 @@
 <app-column-header>{{ 'experience-edit-page.back' | translate }}</app-column-header>
-<ng-container *ngIf="item">
+<form [formGroup]="form" (ngSubmit)="onSave()" *ngIf="item else loading">
   <ion-item>
     <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'experience-edit-page.title' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.title)" name="title" type="text"></ion-input>
+    <ion-input [formControlName]="formFields.title" name="title" type="text"></ion-input>
   </ion-item>
-  <app-form-control-error [control]="form.get(formFields.title)"> </app-form-control-error>
+  <app-form-control-error [controlName]="formFields.title"> </app-form-control-error>
 
   <ion-item>
     <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'experience-edit-page.company' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.company)" name="company" type="text"></ion-input>
+    <ion-input [formControlName]="formFields.company" name="company" type="text"></ion-input>
   </ion-item>
-  <app-form-control-error [control]="form.get(formFields.company)"> </app-form-control-error>
-  <ion-item lines="none" class="ion-item-bottom-border width100">
-    <ion-label color="medium">
-      {{ 'experience-edit-page.is-still-here' | translate }}
-    </ion-label>
-    <ion-toggle slot="end" [formControl]="form.get(formFields.is_still_here)"></ion-toggle>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'experience-edit-page.start-date' | translate }}
-    </ion-label>
-    <ion-datetime [formControl]="form.get(formFields.start_date)" display-format="YYYY-MM-DD"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'experience-edit-page.end-date' | translate }}
-    </ion-label>
-    <ion-datetime [formControl]="form.get(formFields.end_date)" display-format="YYYY-MM-DD"></ion-datetime>
-  </ion-item>
+  <app-form-control-error [controlName]="formFields.company"> </app-form-control-error>
+  <app-date-interval-editor [formControlName]="formFields.interval"></app-date-interval-editor>
+  <app-form-control-error [controlName]="formFields.interval"> </app-form-control-error>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'experience-edit-page.description' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.description)" name="title" type="text"></ion-input>
+    <ion-input [formControlName]="formFields.description" name="title" type="text"></ion-input>
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">
     <ion-col size="6">
-      <ion-button (click)="delete()" *ngIf="item.id" color="light" expand="block" fill="solid" size="medium">
+      <ion-button (click)="onDelete()" *ngIf="item.id" color="light" expand="block" fill="solid" size="medium">
         {{ 'experience-edit-page.remove' | translate }}
       </ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
+      <ion-button type="submit" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
         {{ 'experience-edit-page.save' | translate }}
       </ion-button>
     </ion-col>
   </ion-row>
-</ng-container>
+</form>
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

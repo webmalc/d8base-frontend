@@ -1,6 +1,6 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-experience-edit (deleteEmitter)="delete($event)" (saveEmitter)="save($event)" [item]="item"></app-experience-edit>
+    <app-experience-edit (delete)="delete($event)" (save)='save($event)' [item]="item"></app-experience-edit>
   </app-content-wrapper>
 </ion-content>

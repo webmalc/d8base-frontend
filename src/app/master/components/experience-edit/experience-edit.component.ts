@@ -1,68 +1,75 @@
-import { Location } from '@angular/common';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgDestroyService } from '@app/core/services';
-import { Experience } from '@app/master/models/experience';
-import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
-import { plainToClass } from 'class-transformer';
-import { takeUntil } from 'rxjs/operators';
+import { ProfessionalExperience } from '@app/api/models';
+import DateInterval from '@app/shared/components/date-interval-editor/date-interval.interface';
+import * as DateIntervalValidators from '@app/shared/components/date-interval-editor/date-interval.validators';
 
-enum ExperienceFormFields {
-  title = 'title',
-  company = 'company',
-  is_still_here = 'is_still_here',
-  start_date = 'start_date',
-  end_date = 'end_date',
-  description = 'description',
-}
+import { ExperienceFormFields } from './experience-form-fields.enum';
+import ExperienceFormValue from './experience-form-value.interface';
+
 @Component({
   selector: 'app-experience-edit',
   templateUrl: './experience-edit.component.html',
   styleUrls: ['./experience-edit.component.scss'],
-  providers: [NgDestroyService],
 })
-export class ExperienceEditComponent extends AbstractEditComponent<Experience> implements OnInit, OnChanges {
+export class ExperienceEditComponent {
+  @Output() public save = new EventEmitter<ProfessionalExperience>();
+  @Output() public delete = new EventEmitter<ProfessionalExperience>();
+
   public readonly formFields = ExperienceFormFields;
-  public form: FormGroup = this.fb.group({
-    [this.formFields.title]: [null, Validators.required],
-    [this.formFields.company]: [null, Validators.required],
-    [this.formFields.is_still_here]: [null],
-    [this.formFields.start_date]: [null],
-    [this.formFields.end_date]: [null],
-    [this.formFields.description]: [null],
-  });
+  public form: FormGroup;
 
-  constructor(private readonly location: Location, private readonly fb: FormBuilder, private readonly destroy$: NgDestroyService) {
-    super();
+  private initialValue: ProfessionalExperience;
+
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      [this.formFields.title]: [null, Validators.required],
+      [this.formFields.company]: [null, Validators.required],
+      [this.formFields.interval]: [null, DateIntervalValidators.ongoingValidator],
+      [this.formFields.description]: [null],
+    });
   }
 
-  public ngOnInit(): void {
-    this.handleIsStillHereControl();
+  @Input()
+  public set item(value: ProfessionalExperience) {
+    const interval: DateInterval = !value?.start_date ? null : {
+      startDate: value.start_date,
+      endDate: value.end_date,
+      isOngoing: value.is_still_here,
+    };
+
+    const formValue: ExperienceFormValue = {
+      [this.formFields.title]: value?.title,
+      [this.formFields.company]: value?.company,
+      [this.formFields.interval]: interval,
+      [this.formFields.description]: value?.description,
+    };
+    this.form.patchValue(formValue);
+    this.initialValue = value;
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.item) {
-      this.form.patchValue(this.item ?? {});
-    }
+  public get item() {
+    return this.initialValue;
   }
 
-  protected transform(data: Experience): Experience {
-    const transData: Experience = plainToClass(Experience, { ...data, ...this.form.getRawValue() });
-    transData.formatDates();
-
-    return transData;
+  public onSave(): void {
+    this.save.emit(this.getExperience());
   }
 
-  private handleIsStillHereControl(): void {
-    this.form
-      .get(this.formFields.is_still_here)
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        const action = value ? 'disable' : 'enable';
-        [this.formFields.end_date].forEach(control => {
-          this.form.get(control)[action]();
-          this.form.get(control).reset();
-        });
-      });
+  public onDelete(): void {
+    this.delete.emit(this.initialValue);
+  }
+
+  private getExperience(): ProfessionalExperience {
+    const formValue: ExperienceFormValue = this.form.value;
+    return {
+      ...this.initialValue,
+      title: formValue.title,
+      company: formValue.company,
+      start_date: formValue.interval?.startDate,
+      end_date: formValue.interval?.endDate,
+      is_still_here: formValue.interval?.isOngoing,
+      description: formValue.description,
+    };
   }
 }

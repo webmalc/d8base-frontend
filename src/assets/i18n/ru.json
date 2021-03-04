@@ -526,7 +526,7 @@
   },
   "experience-edit-page": {
     "back": "Назад",
-    "title": "Название",
+    "title": "Название должности",
     "company": "Организация",
     "is-still-here": "По настоящее время",
     "start-date": "с",
@@ -767,7 +767,9 @@
     "forbidNumericValue": "Поле не должно содержать только числа.",
     "passwordMismatch": "Пароли не совпадают.",
     "required": "Поле обязателно для заполнения.",
-    "priceError": "Цена 'от' должна быть меньше цены 'до'."
+    "priceError": "Цена 'от' должна быть меньше цены 'до'.",
+    "emptyEndDate": "Не указана дата окончания",
+    "emptyStartDate": "Не указана дата начала"
   },
   "server-errors": {
     "unauthorized": "Доступ запрещён",

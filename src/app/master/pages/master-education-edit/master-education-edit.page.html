@@ -1,6 +1,6 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-education-edit (deleteEmitter)="delete($event)" (saveEmitter)="save($event)" [item]="item"> </app-education-edit>
+    <app-education-edit (delete)="delete($event)" (save)="save($event)" [item]="item"> </app-education-edit>
   </app-content-wrapper>
 </ion-content>
