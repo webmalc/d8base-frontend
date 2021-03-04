@@ -1,45 +1,39 @@
 <app-header></app-header>
 <ion-content *ngIf="context$ | async as context">
   <app-content-wrapper>
-    <ion-item color="light" lines="full">
-      <ion-buttons slot="start">
-        <ion-button [routerLink]="getServicePageUrl(context.service.id)" routerDirection="back">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>{{'service-details.title' | translate}}</ion-title>
-    </ion-item>
-
+    <app-column-header [previousLocationFallback]="getServicePageUrl(context.service.id)">{{
+      'service-details.title' | translate
+    }}</app-column-header>
+    <app-column-header [previousLocationFallback]="getServicePageUrl(context.service.id)">{{
+      'service-details.location-title' | translate
+    }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
-
       <section>
-        <header>{{'service-details.name'|translate}}</header>
+        <header>{{ 'service-details.name' | translate }}</header>
         <ion-item>
           <ion-input [formControlName]="formFields.name"></ion-input>
         </ion-item>
       </section>
 
       <section>
-        <header>{{'service-details.description'|translate}}</header>
+        <header>{{ 'service-details.description' | translate }}</header>
         <ion-item>
           <ion-textarea [autoGrow]="true" [formControlName]="formFields.description"></ion-textarea>
         </ion-item>
       </section>
       <section>
-        <header>{{'service-details.duration-and-price'|translate}}</header>
+        <header>{{ 'service-details.duration-and-price' | translate }}</header>
         <app-duration-editor class="ion-margin" [formControlName]="formFields.duration"></app-duration-editor>
         <app-price-editor class="ion-margin" [formControlName]="formFields.price"></app-price-editor>
       </section>
 
       <section>
-        <header>{{'service-details.payment-methods'|translate}}</header>
+        <header>{{ 'service-details.payment-methods' | translate }}</header>
         <app-payment-method-editor [formControlName]="formFields.paymentMethods"></app-payment-method-editor>
       </section>
 
-      <ion-button type="submit" expand="block">{{'global.save' | translate}}</ion-button>
-
+      <ion-button type="submit" expand="block">{{ 'global.save' | translate }}</ion-button>
     </form>
-
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

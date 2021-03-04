@@ -1,14 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper *ngIf="context$ | async as context">
-    <ion-item color="light" lines="full">
-      <ion-buttons slot="start">
-        <ion-button routerLink="/service/{{ context.service.id }}" routerDirection="back">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>{{ 'order.title' | translate }}</ion-title>
-    </ion-item>
+    <app-column-header [previousLocationFallback]="'/service/' + context.service.id">{{ 'order.title' | translate }}</app-column-header>
     <ion-list>
       <ion-list-header class="fs20">
         {{ 'order.selected-service' | translate }}
