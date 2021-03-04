@@ -7,15 +7,7 @@
     <app-order-status [status]="order.status"></app-order-status>
   </ion-item>
 
-  <ion-item lines="none">
-    <ion-avatar slot="start">
-      <ion-img alt="avatar" [src]="getPhoto(order.client?.avatar_thumbnail)"></ion-img>
-    </ion-avatar>
-    <ion-label>
-      {{ order.client.first_name }}
-      {{ order.client.last_name }}
-    </ion-label>
-  </ion-item>
+  <app-client-widget [client]="order.client"></app-client-widget>
 
   <app-service-title [service]="service"></app-service-title>
 

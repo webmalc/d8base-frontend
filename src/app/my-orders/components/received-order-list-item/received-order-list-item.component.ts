@@ -12,7 +12,6 @@ import { OrderListItem } from '../abstract/order-list-item';
   styleUrls: ['./received-order-list-item.component.scss'],
 })
 export class ReceivedOrderListItemComponent extends OrderListItem {
-
   public service: Service;
   @Output() public statusChanged = new EventEmitter<void>();
 
@@ -36,6 +35,17 @@ export class ReceivedOrderListItemComponent extends OrderListItem {
     if (!order) {
       return;
     }
+
+    if (order?.source === 'manual') {
+      this._order.client = {
+        ...order.client,
+        first_name: order.first_name,
+        last_name: order.last_name,
+        avatar_thumbnail: null,
+        avatar: null,
+      };
+    }
+
     this.servicesCache.getByEntityId(order.service).subscribe(service => {
       this.service = service;
       this.changeDetector.markForCheck();

@@ -9,7 +9,6 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderWizardStateService } from './services';
 
-
 @Component({
   selector: 'app-order',
   templateUrl: './order.page.html',
@@ -25,6 +24,7 @@ export class OrderPage {
 
   private readonly ngDestroy$ = new Subject<void>();
   private serviceId: number;
+  private isSelfOrder: boolean = false;
 
   constructor(
     private readonly wizardState: OrderWizardStateService,
@@ -33,8 +33,7 @@ export class OrderPage {
     private readonly servicesApi: ServicesService,
     private readonly professionalsServiceApi: ProfessionalsService,
     private readonly accountsServiceApi: AccountsService,
-  ) {
-  }
+  ) {}
 
   public ionViewWillEnter(): void {
     this.subscribeToRouteParams();
@@ -51,10 +50,11 @@ export class OrderPage {
     this.wizardState
       .submit()
       .pipe(
-        map((state) => Object.values(state).reduce(
-            (acc, curr) => ({ ...acc, ...curr }),
-            { service: this.serviceId },
-          )),
+        map(state =>
+          Object.values(state).reduce((acc, curr) => ({ ...acc, ...curr }), {
+            service: this.serviceId,
+          }),
+        ),
         takeUntil(this.ngDestroy$),
       )
       .subscribe((order: SentOrder) => {
@@ -63,7 +63,11 @@ export class OrderPage {
   }
 
   private createOrder(order: SentOrder): void {
-    this.accountsServiceApi.accountsOrdersSentCreate(order).subscribe(({ id }) => {
+    const orderCreateParams: SentOrder = {
+      ...order,
+      ...(this.isSelfOrder ? { source: 'manual' } : {}),
+    };
+    this.accountsServiceApi.accountsOrdersSentCreate(orderCreateParams).subscribe(({ id }) => {
       this.router.navigate(['/', 'my-orders', 'outbox', id]);
     });
   }
@@ -82,15 +86,17 @@ export class OrderPage {
       ),
       this.profile$,
       this.currentProfessional$,
-    ]).pipe(first()).subscribe(async ([{ service, professional }, client, currentProfessional]) => {
-      const isSelfOrder = professional.id === currentProfessional.id;
-      await this.wizardState.setContext({
-        service,
-        professional,
-        client,
-        isSelfOrder,
+    ])
+      .pipe(first())
+      .subscribe(async ([{ service, professional }, client, currentProfessional]) => {
+        this.isSelfOrder = professional.id === currentProfessional.id;
+        await this.wizardState.setContext({
+          service,
+          professional,
+          client,
+          isSelfOrder: this.isSelfOrder,
+        });
       });
-    });
   }
 
   private subscribeToRouteParams(): void {
