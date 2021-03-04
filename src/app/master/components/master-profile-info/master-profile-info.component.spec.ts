@@ -1,8 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { MasterProfileInfoComponent } from './master-profile-info.component';
 
 describe('MasterProfileInfoComponent', () => {
@@ -12,9 +9,9 @@ describe('MasterProfileInfoComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MasterProfileInfoComponent],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-      providers: [
-        MasterProfileContextService,
+      imports: [
+        ...RootModules(),
+        ComponentTestingModule,
       ],
     }).compileComponents();
 

@@ -4,11 +4,13 @@ import { CommunicationService } from '@app/api/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { Language } from '@app/profile/models/language';
 import { LanguagesApiService } from '@app/profile/services/languages-api.service';
+import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
+import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
+import { Select } from '@ngxs/store';
 import { forkJoin, Observable } from 'rxjs';
-import { filter, first, map, share, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, map, share, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-info',
@@ -16,9 +18,9 @@ import { filter, first, map, share, shareReplay, switchMap } from 'rxjs/operator
   styleUrls: ['./master-profile-info.component.scss'],
 })
 export class MasterProfileInfoComponent {
-  public context$: Observable<MasterProfileContext> = this.context.context$.pipe(
-    first(context => Boolean(context?.master) && Boolean(context?.user)),
-  );
+  @Select(ProfessionalPageSelectors.context)
+  public context$: Observable<ProfessionalPageStateModel>;
+  public contextFiltered$: Observable<MasterProfileContext>;
   public languages$: Observable<Language[]>;
   public locations$: Observable<{ id: number; text: string }[]>;
   public readonly editDefaultUrl = 'professional-contact-add-default/';
@@ -30,21 +32,20 @@ export class MasterProfileInfoComponent {
   constructor(
     private readonly fullLocationService: FullLocationService,
     private readonly communicationService: CommunicationService,
-    private readonly context: MasterProfileContextService,
     languagesApi: LanguagesApiService,
   ) {
-    this.context$ = context.context$.pipe(filter(context => Boolean(context?.master) && Boolean(context?.user)));
+    this.contextFiltered$ = this.context$.pipe(filter(context => Boolean(context?.master) && Boolean(context?.user)));
 
-    this.languages$ = this.context$.pipe(
+    this.languages$ = this.contextFiltered$.pipe(
       switchMap(({ user }) => languagesApi.getList(user.languages.map(lang => lang?.language))),
       shareReplay(1),
     );
 
-    this.locations$ = this.context$.pipe(
+    this.locations$ = this.contextFiltered$.pipe(
       switchMap(({ master }) => forkJoin(master.locations.map(x => this.fullLocationService.getTextLocation(x)))),
     );
 
-    const reviews$ = this.context$.pipe(
+    const reviews$ = this.contextFiltered$.pipe(
       map(({ master }) => master),
       switchMap(professional =>
         this.communicationService.communicationReviewsList({

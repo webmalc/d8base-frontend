@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
 import { HelperService } from '@app/core/services/helper.service';
-import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
+import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
+import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
+import { Select } from '@ngxs/store';
 import { BehaviorSubject, forkJoin, from, Observable, Subject } from 'rxjs';
 import { concatMap, finalize, first, map, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -14,23 +15,24 @@ import { concatMap, finalize, first, map, switchMap, takeUntil } from 'rxjs/oper
 })
 export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
   public readonly files: File[] = [];
-  public readonly context$: Observable<MasterProfileContext> = this.contextService.context$;
+
+  @Select(ProfessionalPageSelectors.context)
+  public context$: Observable<ProfessionalPageStateModel>;
+
   public readonly photos$: BehaviorSubject<ProfessionalPhotoList[]> = new BehaviorSubject(null);
   public isAddPhotoButtonDisabled: boolean = true;
   public isDropzoneDisabled: boolean = false;
 
-  private readonly masterPhotos$: Observable<ProfessionalPhotoList[]> = this.context$.pipe(
-    first(context => !!context?.master),
-    switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.master.id })),
-    map(data => data.results),
-  );
+  private readonly masterPhotos$: Observable<ProfessionalPhotoList[]>;
   private readonly ngUnsubscribe$ = new Subject<void>();
 
-  constructor(
-    private readonly contextService: MasterProfileContextService,
-    private readonly professionalsService: ProfessionalsService,
-    private readonly accountsService: AccountsService,
-  ) {}
+  constructor(private readonly professionalsService: ProfessionalsService, private readonly accountsService: AccountsService) {
+    this.masterPhotos$ = this.context$.pipe(
+      first(context => !!context?.master),
+      switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.master.id })),
+      map(data => data.results),
+    );
+  }
 
   public ngOnInit(): void {
     this.masterPhotos$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(photosToAdd => {

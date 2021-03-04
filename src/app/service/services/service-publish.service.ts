@@ -23,7 +23,7 @@ import { finalize, first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ServicePublishService {
-  @Select(CurrentUserSelectors.professional)
+  @Select(CurrentUserSelectors.defaultProfessional)
   public professional$: Observable<ProfessionalList>;
 
   constructor(

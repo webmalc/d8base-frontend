@@ -2,8 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList, ServiceList } from '@app/api/models';
-import { ServicesService } from '@app/api/services';
-import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
+import { ProfessionalsService, ServicesService } from '@app/api/services';
 import { Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
@@ -22,12 +21,12 @@ export class ServiceViewerPageComponent {
     public location: Location,
     route: ActivatedRoute,
     servicesApi: ServicesService,
-    masterApi: MasterReadonlyApiService,
+    masterApi: ProfessionalsService,
   ) {
     route.params.pipe(
       first(params => Boolean(params?.id)),
       switchMap(params => servicesApi.servicesServicesRead(params.id).pipe(
-        switchMap(service => masterApi.getByEntityId(service.professional).pipe(
+        switchMap(service => masterApi.professionalsProfessionalsRead(service.professional).pipe(
           map((master) => ({
               master,
               service,

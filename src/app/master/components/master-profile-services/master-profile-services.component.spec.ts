@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,7 +17,6 @@ describe('MasterProfileServicesComponent', () => {
       declarations: [MasterProfileServicesComponent],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
-        MasterProfileContextService,
         ServicesGeneratorFactoryService,
         {
           provide: ActivatedRoute, useValue: {

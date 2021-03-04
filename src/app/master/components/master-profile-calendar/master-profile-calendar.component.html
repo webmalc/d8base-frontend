@@ -7,7 +7,7 @@
           [schedule]="schedule"
           [formControl]="scheduleEditor"
         ></app-schedule-editor>
-        <ion-button type="submit" expand="block" [disabled]="scheduleEditor.invalid" (click)="updateSchedule()">
+        <ion-button type="submit" expand="block" [disabled]="scheduleEditor.invalid" (click)="updateSchedule(context.master.id)">
           {{ 'global.save' | translate }}
         </ion-button>
         <ng-template #scheduleViewer>
@@ -21,7 +21,7 @@
       <ion-item lines="none" class="ion-item-bottom-border master-profile-tab-title">
         {{ 'master-profile.calendar.title' | translate }}
       </ion-item>
-      <app-calendar-component (newDate)="changeDate($event)" [disabled]="true" [enabledPeriods]="enabledPeriods | async">
+      <app-calendar-component (newDate)="changeDate($event, context.master.id)" [disabled]="true" [enabledPeriods]="enabledPeriods | async">
       </app-calendar-component>
     </ion-col>
   </ion-row>

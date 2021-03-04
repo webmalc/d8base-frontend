@@ -21,9 +21,13 @@ export default class CurrentUserSelectors {
     return data.tokens;
   }
 
-  // TODO return ProfessionalList[] or null if not loaded yet
   @Selector([CurrentUserState])
-  public static professional(data: CurrentUserStateModel): ProfessionalList | null {
+  public static professionals(data: CurrentUserStateModel): ProfessionalList[] | null {
+    return data.professionals;
+  }
+
+  @Selector([CurrentUserState])
+  public static defaultProfessional(data: CurrentUserStateModel): ProfessionalList | null {
     return data.professionals?.[0] ?? null;
   }
 

@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs/operators';
 /* eslint-disable @angular-eslint/directive-class-suffix */
 @Directive()
 export abstract class AbstractModelEditPage<T> implements OnInit {
-  @Select(CurrentUserSelectors.professional)
+  @Select(CurrentUserSelectors.defaultProfessional)
   public professional$: Observable<ProfessionalList>;
 
   public item: T;

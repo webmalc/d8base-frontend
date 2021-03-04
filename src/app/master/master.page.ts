@@ -1,22 +1,23 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProfessionalList } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
 import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
-import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
-import { MasterReadonlyApiService } from '@app/master/services/master-readonly-api.service';
+import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
+import * as ProfessionalPageActions from '@app/store/professional-page/professional-page.actions';
+import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
+import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
+import { first, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master',
   templateUrl: './master.page.html',
   styleUrls: ['./master.page.scss'],
-  providers: [MasterProfileContextService, NgDestroyService],
+  providers: [NgDestroyService],
 })
 export class MasterPage {
   public defaultTab: string = MasterProfileSubmenu.Info;
@@ -24,16 +25,19 @@ export class MasterPage {
   public mainInfoSectionData$: Observable<MainInfoSectionComponentInputDataInterface>;
   public editable$: Observable<boolean>;
 
+  @Select(ProfessionalPageSelectors.context)
+  public context$: Observable<ProfessionalPageStateModel>;
+
   constructor(
     public readonly location: Location,
     private readonly masterManager: MasterManagerService,
     private readonly route: ActivatedRoute,
-    private readonly masterReadonly: MasterReadonlyApiService,
     private readonly ngDestroy$: NgDestroyService,
-    contextService: MasterProfileContextService,
   ) {
-    this.createContext().subscribe(context => contextService.setContext(context));
-    this.mainInfoSectionData$ = contextService.context$.pipe(
+    this.route.paramMap
+        .pipe(takeUntil(ngDestroy$))
+        .subscribe(paramsMap => this.loadProfessionalById(paramsMap.get('master-id')));
+    this.mainInfoSectionData$ = this.context$.pipe(
       first(context => Boolean(context?.user) && Boolean(context?.master)),
       map(({ user, master }) => ({
         fullName: master.name ?? `${user.last_name ?? ''} ${user.first_name ?? ''}`,
@@ -43,40 +47,15 @@ export class MasterPage {
         is_confirmed: user.is_confirmed,
       })),
     );
-    this.editable$ = contextService.context$.pipe(map(context => context?.canEdit));
-    this.route.paramMap
-      .pipe(
-        map(() => window.history.state?.master),
-        filter(master => Boolean(master)),
-        takeUntil(this.ngDestroy$),
-      )
-      .subscribe(master => {
-        contextService.setContext({ ...contextService.contextSnapshot, master: { ...contextService.contextSnapshot.master, ...master } });
-      });
+    this.editable$ = this.context$.pipe(map(context => context?.canEdit));
   }
 
   public selectTab(tab: string): void {
     this.tab.next(tab);
   }
 
-  private getMaster(masterId: number): Observable<ProfessionalList> {
-    return Number.isNaN(masterId)
-      ? this.masterManager.getMasterList().pipe(
-          map(list => list[0]),
-          switchMap(master => this.masterReadonly.getByEntityId(master.id)),
-        )
-      : this.masterReadonly.getByEntityId(masterId);
-  }
-
-  private createContext(): Observable<MasterProfileContext> {
-    const masterId = Number.parseInt(this.route.snapshot.paramMap.get('master-id'), 10);
-
-    return this.getMaster(masterId).pipe(
-      map(master => ({
-        user: master.user,
-        master,
-        canEdit: Number.isNaN(masterId),
-      })),
-    );
+  @Dispatch()
+  private loadProfessionalById(masterId: string): ProfessionalPageActions.LoadProfessionalById {
+    return new ProfessionalPageActions.LoadProfessionalById(masterId);
   }
 }

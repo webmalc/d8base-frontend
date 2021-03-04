@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ReviewsService {
-  @Select(CurrentUserSelectors.professional)
+  @Select(CurrentUserSelectors.defaultProfessional)
   private readonly professional$: Observable<ProfessionalList>;
 
   private reviewCountryCodes: { [nationality: number]: string } = {};
