@@ -3,7 +3,6 @@ import { ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
-import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
 import { Language } from '@app/profile/models/language';
 import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
@@ -20,7 +19,7 @@ import { filter, map, share, shareReplay, switchMap } from 'rxjs/operators';
 export class MasterProfileInfoComponent {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
-  public contextFiltered$: Observable<MasterProfileContext>;
+  public contextFiltered$: Observable<ProfessionalPageStateModel>;
   public languages$: Observable<Language[]>;
   public locations$: Observable<{ id: number; text: string }[]>;
   public readonly editDefaultUrl = 'professional-contact-add-default/';
@@ -34,7 +33,7 @@ export class MasterProfileInfoComponent {
     private readonly communicationService: CommunicationService,
     languagesApi: LanguagesApiService,
   ) {
-    this.contextFiltered$ = this.context$.pipe(filter(context => Boolean(context?.master) && Boolean(context?.user)));
+    this.contextFiltered$ = this.context$.pipe(filter(context => Boolean(context?.professional) && Boolean(context?.user)));
 
     this.languages$ = this.contextFiltered$.pipe(
       switchMap(({ user }) => languagesApi.getList(user.languages.map(lang => lang?.language))),
@@ -42,11 +41,11 @@ export class MasterProfileInfoComponent {
     );
 
     this.locations$ = this.contextFiltered$.pipe(
-      switchMap(({ master }) => forkJoin(master.locations.map(x => this.fullLocationService.getTextLocation(x)))),
+      switchMap(({ professional }) => forkJoin(professional.locations.map(x => this.fullLocationService.getTextLocation(x)))),
     );
 
     const reviews$ = this.contextFiltered$.pipe(
-      map(({ master }) => master),
+      map(({ professional }) => professional),
       switchMap(professional =>
         this.communicationService.communicationReviewsList({
           pageSize: 5,

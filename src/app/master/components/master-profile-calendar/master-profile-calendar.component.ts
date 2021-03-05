@@ -43,8 +43,8 @@ export class MasterProfileCalendarComponent implements OnInit {
 
   public ngOnInit(): void {
     this.context$
-      .pipe(first(context => !!context.master))
-      .subscribe(context => this.updateEnabledPeriods(new Date(), context.master.id));
+      .pipe(first(context => !!context?.professional))
+      .subscribe(context => this.updateEnabledPeriods(new Date(), context.professional.id));
   }
 
   public changeDate(date: Date, masterId: number): void {

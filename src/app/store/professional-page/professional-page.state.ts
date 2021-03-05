@@ -1,44 +1,46 @@
 import { Injectable } from '@angular/core';
-import { ProfessionalList } from '@app/api/models';
+import { Profile } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
-import { Action, State, StateContext } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Action, Select, State, StateContext } from '@ngxs/store';
+import { forkJoin, Observable } from 'rxjs';
+import { first, tap } from 'rxjs/operators';
+import { defaultState } from './professional-page.constants';
 
 import ProfessionalPageStateModel from './professional-page-state.model';
 import * as ProfessionalPageActions from './professional-page.actions';
 
 @State<ProfessionalPageStateModel>({
   name: 'professionalPage',
-  defaults: null,
+  defaults: defaultState,
 })
 @Injectable()
 export class ProfessionalPageState {
-  constructor(private readonly api: AccountsService, private readonly professionalsApi: ProfessionalsService) {}
+
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
+
+  constructor(private readonly api: AccountsService, private readonly professionalsApi: ProfessionalsService) {
+  }
 
   @Action(ProfessionalPageActions.LoadProfessionalById)
   public loadMaster(
-    { setState, patchState, dispatch }: StateContext<ProfessionalPageStateModel>,
+    { setState }: StateContext<ProfessionalPageStateModel>,
     { masterId }: ProfessionalPageActions.LoadProfessionalById,
   ): Observable<any> {
     const masterIdNumber = Number.parseInt(masterId, 10);
-    return this.getMaster(masterIdNumber).pipe(
-      tap(master =>
+    setState(defaultState);
+    return forkJoin([
+      this.profile$.pipe(first(x => !!x)),
+      this.professionalsApi.professionalsProfessionalsRead(masterIdNumber),
+    ]).pipe(
+      tap(([profile, professional]) =>
         setState({
-          user: master.user,
-          master,
-          canEdit: Number.isNaN(masterId),
+          user: professional.user,
+          professional,
+          canEdit: professional.user.id === profile.id,
         }),
       ),
     );
-  }
-
-  private getMaster(masterId: number): Observable<ProfessionalList> {
-    return Number.isNaN(masterId)
-      ? this.api.accountsProfessionalsList({}).pipe(
-          map(list => list[0]),
-          switchMap(master => this.professionalsApi.professionalsProfessionalsRead(master.id)),
-        )
-      : this.professionalsApi.professionalsProfessionalsRead(masterId);
   }
 }

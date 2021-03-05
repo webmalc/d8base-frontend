@@ -29,8 +29,8 @@ export class MasterProfileServicesComponent {
     private readonly serviceOperations: ServiceOperationsService,
   ) {
     this.serviceData$ = combineLatest([this.context$, this.refresh$]).pipe(
-      first(([context]) => !!context.master),
-      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.master.id)),
+      first(([context]) => !!context.professional),
+      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id)),
     );
   }
 

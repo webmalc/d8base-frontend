@@ -1,10 +1,10 @@
-<ion-row *ngIf="sectionData">
+<ion-row *ngIf="context">
   <ion-col class="ion-no-padding">
     <ion-item class="fullName ion-item-no-min-height pv5" lines="none">
-      {{sectionData.fullName}}
+      {{ context.professional.name }}
     </ion-item>
-    <ion-item *ngIf="sectionData.company" class="companyName ion-item-no-min-height pv5" lines="none">
-      {{sectionData.company}}
+    <ion-item *ngIf="context.professional.company" class="companyName ion-item-no-min-height pv5" lines="none">
+      {{context.professional.company}}
     </ion-item>
     <ion-item lines="none" class="ion-item-no-min-height pv5">
       <ion-img [src]="getAvatar()"></ion-img>

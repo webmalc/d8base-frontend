@@ -4,14 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { NgDestroyService } from '@app/core/services';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { MasterProfileSubmenu } from '@app/master/enums/master-profile-submenu';
-import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import * as ProfessionalPageActions from '@app/store/professional-page/professional-page.actions';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { first, map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master',
@@ -22,7 +21,6 @@ import { first, map, takeUntil } from 'rxjs/operators';
 export class MasterPage {
   public defaultTab: string = MasterProfileSubmenu.Info;
   public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
-  public mainInfoSectionData$: Observable<MainInfoSectionComponentInputDataInterface>;
   public editable$: Observable<boolean>;
 
   @Select(ProfessionalPageSelectors.context)
@@ -37,16 +35,6 @@ export class MasterPage {
     this.route.paramMap
         .pipe(takeUntil(ngDestroy$))
         .subscribe(paramsMap => this.loadProfessionalById(paramsMap.get('master-id')));
-    this.mainInfoSectionData$ = this.context$.pipe(
-      first(context => Boolean(context?.user) && Boolean(context?.master)),
-      map(({ user, master }) => ({
-        fullName: master.name ?? `${user.last_name ?? ''} ${user.first_name ?? ''}`,
-        company: master.company,
-        avatar: user.avatar,
-        rating: master.rating,
-        is_confirmed: user.is_confirmed,
-      })),
-    );
     this.editable$ = this.context$.pipe(map(context => context?.canEdit));
   }
 

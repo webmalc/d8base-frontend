@@ -28,8 +28,8 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
 
   constructor(private readonly professionalsService: ProfessionalsService, private readonly accountsService: AccountsService) {
     this.masterPhotos$ = this.context$.pipe(
-      first(context => !!context?.master),
-      switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.master.id })),
+      first(context => !!context?.professional),
+      switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.professional.id })),
       map(data => data.results),
     );
   }
@@ -67,11 +67,11 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
     this.context$
       .pipe(
         first(),
-        concatMap(({ master }) =>
+        concatMap(({ professional }) =>
           forkJoin([
             ...this.files.map(file =>
               from(HelperService.getImgBase64(file)).pipe(
-                switchMap(photo => this.accountsService.accountsProfessionalPhotosCreate({ professional: master.id, photo })),
+                switchMap(photo => this.accountsService.accountsProfessionalPhotosCreate({ professional: professional.id, photo })),
               ),
             ),
           ]),
