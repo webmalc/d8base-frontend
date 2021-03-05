@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { Service } from '@app/api/models';
 import ServiceData from '@app/core/interfaces/service-data.interface';
 import { ServiceOperationsService } from '@app/core/services/service-operations.service';
-import MasterProfileContext from '@app/master/interfaces/master-profile-context.interface';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
-import { Service } from '@app/api/models';
+import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
+import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
+import { Select } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 
@@ -17,19 +18,19 @@ export class MasterProfileServicesComponent {
 
   public searchModel: string;
   public serviceData$: Observable<ServiceData[]>;
-  public context$: Observable<MasterProfileContext>;
+
+  @Select(ProfessionalPageSelectors.context)
+  public context$: Observable<ProfessionalPageStateModel>;
 
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(
     private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
     private readonly serviceOperations: ServiceOperationsService,
-    contextService: MasterProfileContextService,
   ) {
-    this.context$ = contextService.context$;
     this.serviceData$ = combineLatest([this.context$, this.refresh$]).pipe(
-      first(([context]) => !!context.master),
-      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.master.id)),
+      first(([context]) => !!context.professional),
+      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id)),
     );
   }
 

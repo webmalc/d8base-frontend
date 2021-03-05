@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { MasterProfileContextService } from '@app/master/services/master-profile-context.service';
 import { IonicModule } from '@ionic/angular';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { MasterProfilePortfolioComponent } from './master-profile-portfolio.component';
@@ -16,7 +15,6 @@ describe('MasterProfilePortfolioComponent', () => {
       declarations: [MasterProfilePortfolioComponent],
       imports: [IonicModule.forRoot(), HttpClientTestingModule],
       providers: [
-        MasterProfileContextService,
         {
           provide: ActivatedRoute, useValue: {
             snapshot: {

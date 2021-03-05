@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainGuard } from '@app/core/guards/main.guard';
 import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
 import { MasterPage } from './master.page';
+import { ProfessionalGuard } from './professional.guard';
 
-/* eslint-disable max-len */
 const routes: Routes = [
   {
     path: '',
     component: MasterPage,
     pathMatch: 'full',
-    data: { editable: true },
+    canActivate: [ProfessionalGuard],
   },
   {
     path: 'add',
@@ -54,12 +54,14 @@ const routes: Routes = [
   },
   {
     path: 'certificate-add',
-    loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module').then(m => m.MasterCertificateEditPageModule),
+    loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module')
+      .then(m => m.MasterCertificateEditPageModule),
     pathMatch: 'full',
   },
   {
     path: 'certificate-edit/:certificate-id',
-    loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module').then(m => m.MasterCertificateEditPageModule),
+    loadChildren: () => import('./pages/master-certificate-edit/master-certificate-edit.module')
+      .then(m => m.MasterCertificateEditPageModule),
     pathMatch: 'full',
   },
   {
@@ -93,7 +95,6 @@ const routes: Routes = [
     path: ':master-id', // attention, keep this path at the very bottom, because this pattern matches all URLs
     component: MasterPage,
     pathMatch: 'full',
-    data: { editable: false },
   },
 ];
 

@@ -32,6 +32,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MasterPageRoutingModule } from './master-routing.module';
 import { MasterPage } from './master.page';
+import { ProfessionalGuard } from './professional.guard';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { MasterPage } from './master.page';
     CertificatesApiService,
     CalendarGeneratorFactoryService,
     ServicesGeneratorFactoryService,
+    ProfessionalGuard,
   ],
 })
 export class MasterPageModule {

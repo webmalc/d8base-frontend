@@ -1,7 +1,7 @@
 import { ProfessionalList, UserExtended } from '@app/api/models';
 
-export default interface MasterProfileContext {
+export default interface ProfessionalPageStateModel {
   user?: UserExtended;
-  master?: ProfessionalList;
+  professional?: ProfessionalList;
   canEdit?: boolean;
 }

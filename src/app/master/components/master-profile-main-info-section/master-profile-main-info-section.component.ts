@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HelperService } from '@app/core/services/helper.service';
-import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfaces/main-info-section-component-input-data-interface';
+import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 
 @Component({
   selector: 'app-master-profile-main-info-section',
@@ -9,17 +9,9 @@ import { MainInfoSectionComponentInputDataInterface } from '@app/master/interfac
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MasterProfileMainInfoSectionComponent {
-  @Input() public sectionData: MainInfoSectionComponentInputDataInterface;
+  @Input() public context: ProfessionalPageStateModel;
 
   public getAvatar(): string {
-    return this.sectionData?.avatar ? this.sectionData.avatar : HelperService.getNoAvatarLink();
-  }
-
-  public declinationReviews(num: number): string {
-    return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
-  }
-
-  public ratingToNumber(): number {
-    return parseFloat(this.sectionData.rating);
+    return this.context?.user?.avatar ? this.context.user.avatar : HelperService.getNoAvatarLink();
   }
 }

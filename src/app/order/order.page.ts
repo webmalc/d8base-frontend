@@ -19,7 +19,7 @@ export class OrderPage {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
-  @Select(CurrentUserSelectors.professional)
+  @Select(CurrentUserSelectors.defaultProfessional)
   public currentProfessional$: Observable<ProfessionalList>;
 
   private readonly ngDestroy$ = new Subject<void>();
