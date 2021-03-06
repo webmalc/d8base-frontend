@@ -7,13 +7,10 @@
   </ion-segment-button>
 </ion-segment>
 
-<ion-list *ngIf="orders?.length > 0; else placeholder">
-  <app-sent-order-list-item *ngFor="let order of orders"
-                            [order]="order">
-  </app-sent-order-list-item>
+<ion-list>
+  <app-infinite-scroll-container [doLoad$]="doLoad$" [emptyText]="'sent_orders.empty-placeholder' | translate">
+    <ng-template appInfiniteScrollItem let-item>
+      <app-sent-order-list-item [order]="item"> </app-sent-order-list-item>
+    </ng-template>
+  </app-infinite-scroll-container>
 </ion-list>
-<ng-template #placeholder>
-  <ion-item class="ion-text-center" lines="none">
-    <ion-label>{{ 'sent_orders.empty-placeholder' | translate }}</ion-label>
-  </ion-item>
-</ng-template>

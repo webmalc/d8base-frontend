@@ -10,21 +10,10 @@
   </ion-segment-button>
 </ion-segment>
 
-<ng-container *ngIf="orders; else spinner">
-  <ion-list *ngIf="orders.length > 0; else placeholder">
-    <app-received-order-list-item *ngFor="let order of orders"
-                                  [order]="order"
-                                  (statusChanged)="refresh()">
-    </app-received-order-list-item>
-  </ion-list>
-</ng-container>
-<ng-template #spinner>
-  <div class="ion-text-center ion-margin-top">
-    <ion-spinner color="medium"></ion-spinner>
-  </div>
-</ng-template>
-<ng-template #placeholder>
-  <ion-item class="ion-text-center" lines="none">
-    <ion-label>{{ 'received_orders.empty-placeholder' | translate }}</ion-label>
-  </ion-item>
-</ng-template>
+<ion-list>
+  <app-infinite-scroll-container [doLoad$]="doLoad$" [emptyText]="'received_orders.empty-placeholder' | translate">
+    <ng-template appInfiniteScrollItem let-item>
+      <app-received-order-list-item [order]="item" (statusChanged)="refresh()"> </app-received-order-list-item>
+    </ng-template>
+  </app-infinite-scroll-container>
+</ion-list>

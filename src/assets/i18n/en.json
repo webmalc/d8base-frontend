@@ -564,6 +564,7 @@
   },
   "issuance": {
     "search-placeholder": "Find service/professional",
+    "search-empty": "Nothing found",
     "filters": {
       "title": "Filters",
       "reset": "Reset",
@@ -710,7 +711,7 @@
     "newTab": "New",
     "currentTab": "Current",
     "archiveTab": "Archived",
-    "empty-placeholder": "empty",
+    "empty-placeholder": "There is no orders",
     "accept": "Accept",
     "discard": "Discard",
     "complete": "Complete",
@@ -726,7 +727,7 @@
     "title": "My orders",
     "currentTab": "Current",
     "archiveTab": "Archived",
-    "empty-placeholder": "empty",
+    "empty-placeholder": "There is no orders",
     "order-details-title": "Order details",
     "order-details-subtitle": "Your order",
     "order-number": "Order number",

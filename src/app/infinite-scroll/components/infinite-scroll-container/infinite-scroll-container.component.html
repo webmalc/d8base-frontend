@@ -1,0 +1,21 @@
+<ng-container *ngIf="!isLoading; else loading">
+  <ng-container *ngIf="!wasLoadAttempted || results?.length; else emptyList">
+    <ng-container *ngFor="let item of results" [ngTemplateOutlet]="infiniteScrollItem" [ngTemplateOutletContext]="{ $implicit: item }">
+    </ng-container>
+  </ng-container>
+  <ng-template #emptyList>
+    <ion-item class="ion-text-center" lines="none">
+      {{ emptyText }}
+    </ion-item>
+  </ng-template>
+  <ng-content></ng-content>
+</ng-container>
+
+<ion-infinite-scroll disabled="true" threshold="100px" (ionInfinite)="loadMore($event)">
+  <ng-container [ngTemplateOutlet]="loading"> </ng-container>
+</ion-infinite-scroll>
+
+<ng-template #loading>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>
+

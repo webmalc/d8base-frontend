@@ -1,13 +1,14 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '@app/core/models/category';
 import { HelperService } from '@app/core/services/helper.service';
+import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { MainPageSearchInterface } from '@app/main/interfaces/main-page-search-interface';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
-import { IonInfiniteScroll, Platform } from '@ionic/angular';
-import { Subject } from 'rxjs';
+import { Platform } from '@ionic/angular';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Search } from '../api/models';
 import { SearchService } from '../api/services';
@@ -24,13 +25,17 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   public searchResult: Search[];
   public searchResultTitle: string;
 
-  @ViewChild(IonInfiniteScroll) private readonly infiniteScroll: IonInfiniteScroll;
-  private pageCounter: number = 1;
+  public readonly doLoad$ = new Subject<InfiniteScrollData<SearchService.SearchListParams, Search>>();
+  private readonly apiRequestFunction: (
+    params: SearchService.SearchListParams,
+  ) => Observable<PaginatedResult<Search>> = this.search.searchList.bind(this.search);
+  private params: SearchService.SearchListParams;
+
   private readonly ngUnsubscribe$ = new Subject<void>();
 
   constructor(
-    private readonly search: SearchService,
     public readonly platform: Platform,
+    private readonly search: SearchService,
     private readonly location: Location,
     private readonly state: SearchFilterStateService,
     private readonly cd: ChangeDetectorRef,
@@ -47,6 +52,11 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   public ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
+  }
+
+  public onLoadResults(event): void {
+    this.searchResult = event;
+    this.cd.markForCheck();
   }
 
   public init(): void {
@@ -75,46 +85,14 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   }
 
   public doSearch(): void {
-    this.resetPageCounter();
-    this.loadData();
+    this.params = { ...searchFilterStateInterfaceToSearchListParamsAdapter(this.state.data), query: this.searchNeedle ?? '' };
+    this.doLoad$.next({
+      params: this.params,
+      apiRequestFunction: this.apiRequestFunction,
+    });
   }
 
   public onSubmit(): void {
     this.doSearch();
-  }
-
-  public loadMore(infiniteScroll?): void {
-    this.incrementPageCounter();
-    this.loadData(infiniteScroll);
-  }
-
-  public loadData(infiniteScroll?): void {
-    const params = searchFilterStateInterfaceToSearchListParamsAdapter(this.state.data);
-    this.search
-      .searchList({ ...params, query: this.searchNeedle ?? '', page: this.pageCounter })
-      .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(response => {
-        const { results, next } = response;
-        this.searchResult = this.searchResult.concat(results);
-        if (infiniteScroll) {
-          infiniteScroll.target.complete();
-        }
-        this.searchResultTitle = this.searchNeedle;
-        this.disabelInfiniteScroll(!next);
-        this.cd.detectChanges();
-      });
-  }
-
-  private disabelInfiniteScroll(disabled: boolean = true) {
-    this.infiniteScroll.disabled = disabled;
-  }
-
-  private resetPageCounter(): void {
-    this.pageCounter = 1;
-    this.searchResult = [];
-  }
-
-  private incrementPageCounter(): void {
-    this.pageCounter += 1;
   }
 }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from '@app/infinite-scroll/infinite-scroll.module';
 import { ReviewsModule } from '@app/reviews/reviews.module';
 import {
   SearchFiltersAdditionalTabComponent,
@@ -28,6 +29,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
     IonicSelectableModule,
     ReviewsModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
   ],
   declarations: [
     SearchPage,
