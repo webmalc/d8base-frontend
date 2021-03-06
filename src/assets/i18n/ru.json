@@ -564,6 +564,7 @@
   },
   "issuance": {
     "search-placeholder": "Найти услугу/специалиста",
+    "search-empty": "Ничего не найдено",
     "filters": {
       "title": "Фильтры",
       "reset": "Сбросить",

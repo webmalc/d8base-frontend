@@ -564,6 +564,7 @@
   },
   "issuance": {
     "search-placeholder": "Find service/professional",
+    "search-empty": "Nothing found",
     "filters": {
       "title": "Filters",
       "reset": "Reset",
