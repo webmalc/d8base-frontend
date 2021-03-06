@@ -1,40 +1,41 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ReceivedOrder } from '@app/core/models/received-order';
-import { OrderStatus } from '@app/core/types/order-status';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { ReceivedOrder } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
+import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { Tabs } from '@app/my-orders/enums/tabs.enum';
-import { ReceivedOrdersApiService } from '@app/my-orders/services';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
-const DEFAULT_ORDER_STATUS: OrderStatus = 'not_confirmed';
+const DEFAULT_ORDER_STATUS: ReceivedOrder['status']  = 'not_confirmed';
 
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.scss'],
 })
-export class InboxComponent implements OnInit, OnDestroy {
-
+export class InboxComponent implements AfterViewInit, OnDestroy {
   public orders: ReceivedOrder[];
   public tabs = Tabs;
 
-  private readonly currentFilter$ = new BehaviorSubject<{ [param: string]: string }>({ status__in: DEFAULT_ORDER_STATUS });
+  public readonly doLoad$ = new Subject<InfiniteScrollData<AccountsService.AccountsOrdersReceivedListParams, ReceivedOrder>>();
+  private readonly apiRequestFunction: (
+    params: AccountsService.AccountsOrdersReceivedListParams,
+  ) => Observable<PaginatedResult<ReceivedOrder>> = this.accountsService.accountsOrdersReceivedList.bind(this.accountsService);
+
+  private readonly currentFilter$ = new BehaviorSubject<AccountsService.AccountsOrdersReceivedListParams>({
+    statusIn: DEFAULT_ORDER_STATUS,
+  });
   private readonly destroy$ = new Subject<void>();
 
-  constructor(
-    private readonly receivedOrdersApi: ReceivedOrdersApiService,
-    private readonly changeDetector: ChangeDetectorRef,
-  ) {
-  }
+  constructor(private readonly accountsService: AccountsService) {}
 
-  public ngOnInit(): void {
-    this.currentFilter$.pipe(
-      switchMap(params => this.receivedOrdersApi.get(params)),
-      takeUntil(this.destroy$),
-    ).subscribe(orders => {
-      this.orders = orders.results;
-      this.changeDetector.markForCheck();
-    });
+  public ngAfterViewInit(): void {
+    this.currentFilter$
+      .pipe(
+        map(params => ({ params, apiRequestFunction: this.apiRequestFunction })),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(this.doLoad$);
   }
 
   public ngOnDestroy(): void {
@@ -46,13 +47,13 @@ export class InboxComponent implements OnInit, OnDestroy {
     const currentTab: Tabs = e.detail.value;
     switch (currentTab) {
       case Tabs.current:
-        this.currentFilter$.next({ status__in: 'confirmed,paid' });
+        this.currentFilter$.next({ statusIn: 'confirmed,paid' });
         break;
       case Tabs.archive:
-        this.currentFilter$.next({ status__in: 'completed,canceled' });
+        this.currentFilter$.next({ statusIn: 'completed,canceled' });
         break;
       default:
-        this.currentFilter$.next({ status__in: 'not_confirmed' });
+        this.currentFilter$.next({ statusIn: 'not_confirmed' });
         break;
     }
   }

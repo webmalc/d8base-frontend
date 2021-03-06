@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from '@app/infinite-scroll/infinite-scroll.module';
 import {
   OrderStatusComponent,
   ReceivedOrderListItemComponent,
@@ -28,7 +29,7 @@ import { ReceiverOrderStatusController, SentOrderStatusController } from './serv
     ReceivedOrderPageComponent,
     SentOrderPageComponent,
   ],
-  imports: [CommonModule, SharedModule, IonicModule, TranslateModule, MyOrdersRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, SharedModule, IonicModule, TranslateModule, MyOrdersRoutingModule, ReactiveFormsModule, InfiniteScrollModule],
   providers: [ReceiverOrderStatusController, SentOrderStatusController],
 })
 export class MyOrdersModule {}
