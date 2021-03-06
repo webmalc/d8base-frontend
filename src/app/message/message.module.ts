@@ -41,7 +41,6 @@ import { ChatsSearchService } from './services/chats-search.service';
     MessagesSentApiService,
     MessageListUpdaterService,
     ChatListUpdaterService,
-    DirectServiceService,
     ChatsService,
     ChatsSearchService,
   ],

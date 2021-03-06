@@ -34,9 +34,12 @@ export class DirectServiceService {
 
   public init(interlocutorId: number): Observable<void> {
     this.interlocutorId = interlocutorId;
-    this.userManager.getCurrentUser().subscribe(user => {
-      this.currentUserId = user.id;
-    });
+    this.userManager
+      .getCurrentUser()
+      .pipe(filter(user => Boolean(user)))
+      .subscribe(user => {
+        this.currentUserId = user?.id;
+      });
     return this.initMessagesList().pipe(
       tap(() => {
         this.subscribeToMessagesUpdate();

@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { HelperService } from '@app/core/services/helper.service';
 import { TranslationService } from '@app/core/services/translation.service';
 import { ContextMenuPopoverComponent } from '@app/message/components/context-menu-popover/context-menu-popover.component';
+import { AbstractMessage } from '@app/message/models/abstract-message';
 import { Message } from '@app/message/models/message';
+import { ChatsService } from '@app/message/services/chats.service';
 import { DirectServiceService } from '@app/message/services/direct-service.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
 import { IonContent, IonInfiniteScroll, Platform, PopoverController } from '@ionic/angular';
@@ -14,6 +16,7 @@ import { filter, first, map } from 'rxjs/operators';
   selector: 'app-direct',
   templateUrl: './direct.component.html',
   styleUrls: ['./direct.component.scss'],
+  providers: [DirectServiceService],
 })
 export class DirectComponent extends Reinitable implements OnDestroy {
   @ViewChild(IonInfiniteScroll) public infiniteScroll: IonInfiniteScroll;
@@ -22,6 +25,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   @ViewChild('sentMenu', { read: ElementRef }) public sentMenu: ElementRef<HTMLElement>;
   public showContextIndex;
   public isUpdate: boolean = false;
+  public interlocutorData$: Observable<AbstractMessage>;
   private updateMessageId: number;
   private deleteSubscription: Subscription;
   private updateSubscription: Subscription;
@@ -29,6 +33,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   constructor(
     private readonly route: ActivatedRoute,
     public directService: DirectServiceService,
+    public chatsService: ChatsService,
     private readonly platform: Platform,
     private readonly popoverController: PopoverController,
     private readonly trans: TranslationService,
@@ -115,9 +120,10 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   }
 
   protected init(): void {
-    this.directService
-      .init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10))
-      .subscribe(() => this.subscribeToNextApiPageUpdate());
+    this.directService.init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10)).subscribe(() => {
+      this.subscribeToNextApiPageUpdate();
+      this.setInterLocutorData();
+    });
     this.directService.messagesListUpdated.subscribe(() => this.scrollToBottom());
     this.directService.newMessageSent.subscribe(() => this.scrollToBottom(true));
   }
@@ -179,5 +185,12 @@ export class DirectComponent extends Reinitable implements OnDestroy {
       return;
     }
     setTimeout(() => this.content.scrollToBottom(), 50);
+  }
+
+  private setInterLocutorData(): void {
+    this.interlocutorData$ = this.chatsService.chatList$.pipe(
+      filter(chatList => Boolean(chatList?.length)),
+      map(chatList => chatList.find(({ interlocutor_id }) => interlocutor_id === this.directService.interlocutorId)),
+    );
   }
 }

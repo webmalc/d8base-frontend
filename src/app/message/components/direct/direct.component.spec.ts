@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { NotificationWorkerService } from '@app/core/services/notification-worker.service';
+import { MessagePageModule } from '@app/message/message.module';
 import { IonicModule, PopoverController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
@@ -24,6 +25,7 @@ describe('DirectComponent', () => {
         RouterTestingModule,
         TranslateModule.forRoot(),
         HttpClientTestingModule,
+        MessagePageModule,
       ],
       providers: [
         DirectServiceService,

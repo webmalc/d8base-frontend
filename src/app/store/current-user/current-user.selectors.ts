@@ -49,6 +49,6 @@ export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static isAuthenticated(data: CurrentUserStateModel): boolean {
     const { tokens } = data;
-    return Boolean(tokens.access_token);
+    return Boolean(tokens?.access_token);
   }
 }

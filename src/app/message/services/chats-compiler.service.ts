@@ -6,7 +6,7 @@ import { AbstractMessage } from '@app/message/models/abstract-message';
 import { LatestMessagesApiService } from '@app/message/services/latest-messages-api.service';
 import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
 import { environment } from '@env/environment';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ChatsCompilerService {
@@ -38,6 +38,7 @@ export class ChatsCompilerService {
 
   private getUnreadCount(message: LatestMessageInterface): Promise<number> {
     return this.userManager.getCurrentUser().pipe(
+      filter((user) => Boolean(user)),
       switchMap(user => this.messagesListApiService.getUnreadCount(
         message.sender.id === user.id ? message.recipient.id : message.sender.id),
       ),
@@ -46,6 +47,7 @@ export class ChatsCompilerService {
 
   private getInterlocutorData(message: LatestMessageInterface): Promise<Partial<AbstractMessage>> {
     return this.userManager.getCurrentUser().pipe(
+      filter((user) => Boolean(user)),
       map(user => {
         const data = message.sender.id !== user.id ? {
           interlocutor: `${message.sender.first_name} ${message.sender.last_name ?? ''}`,
