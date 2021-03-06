@@ -82,15 +82,10 @@
             <app-infinite-scroll-container
               [doLoad$]="doLoad$"
               (loadResults)="onLoadResults($event)"
+              [emptyText]="'issuance.search-empty' | translate"
             >
               <ng-template appInfiniteScrollItem let-item>
                 <app-search-result [data]="item" class="search-result"></app-search-result>
-              </ng-template>
-              <ng-template appInfiniteScrollLoading>
-                <app-loading-indicator></app-loading-indicator>
-              </ng-template>
-              <ng-template appInfiniteScrollEmptyList>
-                {{ 'issuance.search-empty' | translate }}
               </ng-template>
             </app-infinite-scroll-container>
           </ion-col>

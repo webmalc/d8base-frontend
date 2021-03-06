@@ -11,9 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgDestroyService } from '@app/core/services';
-import { InfiniteScrollEmptyListDirective } from '@app/infinite-scroll/directives/infinite-scroll-empty-list.directive';
 import { InfiniteScrollItemDirective } from '@app/infinite-scroll/directives/infinite-scroll-item.directive';
-import { InfiniteScrollLoadingDirective } from '@app/infinite-scroll/directives/infinite-scroll-loading.directive';
 import { InfiniteScrollData, PaginatedResult, Params } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { asyncScheduler, Observable } from 'rxjs';
@@ -30,14 +28,11 @@ export class InfiniteScrollContainerComponent<T> implements OnInit {
   public isLoading: boolean = false;
   public wasLoadAttempted: boolean = false;
   @Input() public doLoad$: Observable<InfiniteScrollData<Params, T>>;
+  @Input() public emptyText: string;
   @Output() public loadResults = new EventEmitter<T[]>();
 
   @ContentChild(InfiniteScrollItemDirective, { static: false, read: TemplateRef })
-  public readonly InfiniteScrollItem: TemplateRef<any> | null = null;
-  @ContentChild(InfiniteScrollLoadingDirective, { static: false, read: TemplateRef })
-  public readonly InfiniteScrollLoading: TemplateRef<any> | null = null;
-  @ContentChild(InfiniteScrollEmptyListDirective, { static: false, read: TemplateRef })
-  public readonly InfiniteScrollEmptyList: TemplateRef<any> | null = null;
+  public readonly infiniteScrollItem: TemplateRef<any> | null = null;
 
   @ViewChild(IonInfiniteScroll) private readonly infiniteScroll: IonInfiniteScroll;
   private requestParams: Params = {};

@@ -8,17 +8,9 @@
 </ion-segment>
 
 <ion-list>
-  <app-infinite-scroll-container [doLoad$]="doLoad$">
+  <app-infinite-scroll-container [doLoad$]="doLoad$" [emptyText]="'sent_orders.empty-placeholder' | translate">
     <ng-template appInfiniteScrollItem let-item>
       <app-sent-order-list-item [order]="item"> </app-sent-order-list-item>
-    </ng-template>
-    <ng-template appInfiniteScrollLoading>
-      <app-loading-indicator></app-loading-indicator>
-    </ng-template>
-    <ng-template appInfiniteScrollEmptyList>
-      <ion-item class="ion-text-center" lines="none">
-        <ion-label>{{ 'sent_orders.empty-placeholder' | translate }}</ion-label>
-      </ion-item>
     </ng-template>
   </app-infinite-scroll-container>
 </ion-list>
