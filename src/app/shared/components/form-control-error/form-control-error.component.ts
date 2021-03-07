@@ -1,7 +1,19 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, Optional, SkipSelf } from '@angular/core';
-import { AbstractControl, ControlContainer } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
+import { flatten } from '@app/core/functions/array.functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+function getControlErrors(control: AbstractControl): { key: string; param: any }[] {
+  const childrenErrors = (control instanceof FormGroup)
+    ? flatten(Object.values(control.controls).map(control => getControlErrors(control))) : [];
+
+  const parentErrors = (control.errors ? Object.keys(control.errors) : []).map(
+    key => ({ key, param: control.errors[key] }),
+  );
+
+  return childrenErrors.concat(parentErrors);
+}
 
 @Component({
   selector: 'app-form-control-error',
@@ -14,24 +26,27 @@ export class FormControlErrorComponent implements OnInit {
   @Input() public filterErrors: string[] = [];
   @Input() public showErrors: string[] = null;
   @Input() public readonly errorDescriptions: { key: string };
-  @Input() public set controlName(name: string) {
-    this.control = this.controlContainer?.control.get(name);
-  }
   public errors: Observable<{ key: string; param: any }[]>;
 
-  constructor(@Optional() @SkipSelf() private readonly controlContainer: ControlContainer) {}
+  constructor(@Optional() @SkipSelf() private readonly controlContainer: ControlContainer) {
+  }
+
+  @Input()
+  public set controlName(name: string) {
+    this.control = this.controlContainer?.control.get(name);
+  }
 
   public ngOnInit(): void {
     this.errors = this.control?.statusChanges.pipe(
       map(() =>
-        this.control.dirty && this.control.errors
-          ? Object.keys(this.control.errors)
-              .filter(key => !this.filterErrors.includes(key))
-              .filter(key => !Boolean(this.showErrors?.length) || this.showErrors.includes(key))
-              .map(key => ({
-                key: this.errorDescriptions?.[key] ?? `form-errors.${key}`,
-                param: this.control.errors[key],
-              }))
+        this.control.dirty && this.control.invalid
+          ? getControlErrors(this.control)
+            .filter(e => !this.filterErrors.includes(e.key))
+            .filter(e => !Boolean(this.showErrors?.length) || this.showErrors.includes(e.key))
+            .map(e => ({
+              key: this.errorDescriptions?.[e.key] ?? `form-errors.${e.key}`,
+              param: e.param,
+            }))
           : [],
       ),
     );

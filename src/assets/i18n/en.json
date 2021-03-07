@@ -770,7 +770,8 @@
     "required": "Field is required.",
     "priceError": "Price 'from' must be less of price 'to'.",
     "emptyEndDate": "End date not specified",
-    "emptyStartDate": "Start date not specified"
+    "emptyStartDate": "Start date not specified",
+    "timeError": "Invalid time"
   },
   "server-errors": {
     "unauthorized": "Access denied",
