@@ -15,8 +15,15 @@
         </ion-item>
       </ion-col>
       <ion-col sizeXs="11" sizeLg="4" offsetLg="3" offsetXs="0" class="ion-no-margin ion-no-padding">
-        <ion-item lines="none">
-          <!--                    user avatar here-->
+        <ion-item lines="none" *ngIf="interlocutorData$ | async as interlocutorData">
+          <ion-avatar slot="start">
+            <img src="{{ interlocutorData?.interlocutor_avatar_thumbnail }}" alt="avatar">
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              {{ interlocutorData?.interlocutor }}
+            </h3>
+          </ion-label>
         </ion-item>
       </ion-col>
     </ion-row>

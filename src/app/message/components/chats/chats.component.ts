@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatsService } from '@app/message/services/chats.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
@@ -10,14 +10,10 @@ import { IonSearchbar } from '@ionic/angular';
   styleUrls: ['./chats.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatsComponent extends Reinitable implements OnDestroy {
-
+export class ChatsComponent extends Reinitable {
   @ViewChild(IonSearchbar) public searchbar: IonSearchbar;
 
-  constructor(
-    public chatsService: ChatsService,
-    private readonly router: Router,
-  ) {
+  constructor(public chatsService: ChatsService, private readonly router: Router) {
     super();
   }
 
@@ -25,22 +21,11 @@ export class ChatsComponent extends Reinitable implements OnDestroy {
     this.chatsService.doSearch(data);
   }
 
-  public ionViewDidLeave(): void {
-    this.ngOnDestroy();
-  }
-
-  public ngOnDestroy(): void {
-    this.chatsService.destroy();
-  }
-
   public onChatClick(interlocutorId: number): void {
-    this.router.navigateByUrl(`/message/chat/${  interlocutorId}`);
+    this.router.navigateByUrl(`/message/chat/${interlocutorId}`);
   }
 
   protected init(): void {
-    this.chatsService.initChatList().subscribe(
-      () => this.chatsService.subscribeToChatListUpdates(),
-    );
     this.searchbar.value = '';
   }
 }

@@ -2,20 +2,31 @@ import { Injectable } from '@angular/core';
 import { AbstractMessage } from '@app/message/models/abstract-message';
 import { ChatListUpdaterService } from '@app/message/services/chat-list-updater.service';
 import { ChatsSearchService } from '@app/message/services/chats-search.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
+import { filter, first, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ChatsService {
+  @Select(CurrentUserSelectors.isAuthenticated)
+  public isAuthenticated$: Observable<boolean>;
 
   public chatList$: BehaviorSubject<AbstractMessage[]> = new BehaviorSubject<AbstractMessage[]>([]);
   private defaultChatList: AbstractMessage[] = [];
   private chatsSubscription: Subscription;
 
-  constructor(
-    private readonly chatListUpdater: ChatListUpdaterService,
-    private readonly search: ChatsSearchService,
-  ) {
+  constructor(private readonly chatListUpdater: ChatListUpdaterService, private readonly search: ChatsSearchService) {
+    this.isAuthenticated$
+      .pipe(
+        filter(isAuthenticated => Boolean(isAuthenticated)),
+        switchMap(() => this.initChatList()),
+      )
+      .subscribe(() => this.subscribeToChatListUpdates());
+    this.isAuthenticated$.pipe(filter(isAuthenticated => !isAuthenticated)).subscribe(() => {
+      this.unsubscribeFromUpdates();
+      this.setLists([]);
+    });
   }
 
   public doSearch(value: string): void {
@@ -35,15 +46,14 @@ export class ChatsService {
   }
 
   public initChatList(): Observable<any> {
-    return this.chatListUpdater.getChatList().pipe(
-      map(list => this.setLists(list)),
-    );
+    return this.chatListUpdater.getChatList().pipe(map(list => this.setLists(list)));
   }
 
   public subscribeToChatListUpdates(): void {
     this.unsubscribeFromUpdates();
-    this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe(
-      (newList: AbstractMessage[]) => this.isNeedToUpdate(newList).pipe(filter(isNeed => isNeed))
+    this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe((newList: AbstractMessage[]) =>
+      this.isNeedToUpdate(newList)
+        .pipe(filter(isNeed => isNeed))
         .subscribe(() => this.setLists(newList)),
     );
   }
@@ -63,24 +73,23 @@ export class ChatsService {
   private isNeedToUpdate(chatList: AbstractMessage[]): Observable<boolean> {
     return this.chatList$.pipe(
       first(),
-      map(
-        (defaultList: AbstractMessage[]) => {
-          if (defaultList.length !== chatList.length) {
+      map((defaultList: AbstractMessage[]) => {
+        if (defaultList.length !== chatList.length) {
+          return true;
+        }
+        for (let i = 0; i < chatList.length; i += 1) {
+          if (
+            chatList[i].interlocutor_id !== defaultList[i].interlocutor_id ||
+            chatList[i].is_read !== defaultList[i].is_read ||
+            chatList[i].body !== defaultList[i].body ||
+            chatList[i].unread_count !== defaultList[i].unread_count
+          ) {
             return true;
           }
-          for (let i = 0; i < chatList.length; i += 1) {
-            if (chatList[i].interlocutor_id !== defaultList[i].interlocutor_id ||
-              chatList[i].is_read !== defaultList[i].is_read ||
-              chatList[i].body !== defaultList[i].body ||
-              chatList[i].unread_count !== defaultList[i].unread_count
-            ) {
-              return true;
-            }
-          }
+        }
 
-          return false;
-        },
-      ),
+        return false;
+      }),
     );
   }
 }
