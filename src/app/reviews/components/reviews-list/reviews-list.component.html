@@ -8,7 +8,7 @@
       class="professional"
     ></app-professional-card>
     <ng-container *ngIf="reviews$ | async as reviews; else loading">
-      <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center ion-item-no-border">
+      <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center" lines="none">
         <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
           'reviews.send-review' | translate
         }}</a>
