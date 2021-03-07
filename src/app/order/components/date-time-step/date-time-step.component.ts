@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HelperService } from '@app/core/services/helper.service';
+import { addDays, getLocalDateString } from '@app/core/functions/datetime.functions';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarApiService } from '@app/master/services/calendar-api.service';
 import { StepComponent } from '@app/order/abstract/step';
@@ -72,10 +72,10 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
       switchMap(startDate => {
         const masterId = this.context?.professional.id;
         const serviceId = this.context?.service.id;
-        const endDate = HelperService.getDate(startDate, 1);
+        const endDate = addDays(startDate, 1);
 
         return (!masterId || !serviceId) ? of(null) :
-          this.calendarApi.getSchedule(masterId, startDate.toISOString(), endDate.toISOString(), serviceId);
+          this.calendarApi.getSchedule(masterId, getLocalDateString(startDate), getLocalDateString(endDate), serviceId);
       }),
     );
   }

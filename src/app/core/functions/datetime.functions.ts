@@ -1,5 +1,30 @@
 // TODO use moment.js for datetime formatting
 
+export function addMinutes(date: Date, minutes: number): Date {
+  return new Date(date.getTime() + minutes * 60000);
+}
+
+export function addDays(date: Date, days: number) {
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() + days); // getDate() increments month if necessary
+    return newDate;
+}
+
+export function getMilliseconds(value: { minutes: number }): number {
+  const { minutes } = value;
+  return minutes * 60000;
+}
+
+export function getDay(date: Date): Date {
+  const result = new Date(date);
+  result.setHours(0, 0, 0, 0);
+  return result;
+}
+
+export function getCurrentDay(): Date {
+  return getDay(new Date());
+}
+
 export function getLocalDateString(date: Date | string): string {
   if (!date) {
     return null;
