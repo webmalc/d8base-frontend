@@ -46,6 +46,7 @@ const routes: Routes = [
     path: 'reviews',
     loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule),
   },
+  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({
