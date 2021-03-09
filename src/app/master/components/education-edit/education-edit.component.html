@@ -1,5 +1,5 @@
 <app-column-header>{{ 'education-edit-page.back' | translate }}</app-column-header>
-<form [formGroup]="form" (ngSubmit)="onSave()" *ngIf="item else loading">
+<form [formGroup]="form" (ngSubmit)="onSave()" *appIfSpinner="item">
   <ion-item>
     <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'education-edit-page.university' | translate }}
@@ -42,6 +42,3 @@
     </ion-col>
   </ion-row>
 </form>
-<ng-template #loading>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>

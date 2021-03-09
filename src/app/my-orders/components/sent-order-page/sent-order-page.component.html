@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ng-container *ngIf="order$ | async as order; else loading">
+    <ng-container *appIfSpinner="order$ | async as order">
       <ion-item color="light" lines="full">
         <ion-buttons slot="start">
           <ion-button routerLink="/my-orders/outbox" routerDirection="back">
@@ -46,9 +46,6 @@
         <app-order-details [order]="order"></app-order-details>
       </ion-list>
     </ng-container>
-    <ng-template #loading>
-      <app-loading-indicator></app-loading-indicator>
-    </ng-template>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

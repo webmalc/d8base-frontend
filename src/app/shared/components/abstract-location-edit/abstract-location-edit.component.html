@@ -1,5 +1,5 @@
 <app-column-header>{{ 'location-edit-page.address' | translate }}</app-column-header>
-<ng-container *ngIf="item; else loading">
+<ng-container *appIfSpinner="item">
   <ion-item>
     <ion-label class="label-for-required-input" color="medium" position="floating">
       {{ 'location-edit-page.country' | translate }}
@@ -105,6 +105,3 @@
     </ion-col>
   </ion-row>
 </ng-container>
-<ng-template #loading>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>

@@ -11,7 +11,7 @@
 
   <app-service-title [service]="service"></app-service-title>
 
-  <ion-item lines="none" *ngIf="!pending; else loading">
+  <ion-item lines="none" *appIfSpinner="!pending">
     <ion-button [routerLink]="['/my-orders', 'inbox', order.id]" color="secondary">
       {{ 'received_orders.view' | translate }}
     </ion-button>
@@ -29,7 +29,4 @@
       </ion-button>
     </ng-container>
   </ion-item>
-  <ng-template #loading>
-    <app-loading-indicator></app-loading-indicator>
-  </ng-template>
 </ion-card>
