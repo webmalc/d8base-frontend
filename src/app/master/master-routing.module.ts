@@ -81,19 +81,16 @@ const routes: Routes = [
       {
         path: 'professional-contact-add-default/:default-contact-id',
         component: UserContactEditComponent,
-        data: { isMaster: true },
       },
       {
         path: 'professional-contact-edit/:contact-id',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: { isMaster: true },
       },
       {
         path: 'professional-contact-add',
         component: UserContactEditComponent,
         canActivate: [MainGuard],
-        data: { isMaster: true },
       },
       {
         path: 'master-edit',
