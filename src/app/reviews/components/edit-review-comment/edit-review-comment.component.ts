@@ -99,7 +99,7 @@ export class EditReviewCommentComponent implements OnInit, OnDestroy {
       });
   }
 
-  public back(): void {
+  private back(): void {
     this.navCtrl.back();
   }
 
