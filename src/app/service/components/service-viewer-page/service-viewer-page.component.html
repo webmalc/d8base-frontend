@@ -6,7 +6,7 @@
       {{ 'order.success-title' | translate }}<br />
       {{ 'order.success-description' | translate }}
     </app-info-row>
-    <ng-container *ngIf="service; else loading">
+    <ng-container *appIfSpinner="service">
       <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
       <div class="ion-text-right">
         <ion-button size="default" class="ion-align-self-end" [routerLink]="'/order/' + service.id">
@@ -17,6 +17,3 @@
     </ng-container>
   </app-content-wrapper>
 </ion-content>
-<ng-template #loading>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>

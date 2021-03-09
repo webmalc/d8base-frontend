@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ng-container *ngIf="state$ | async as state; else loading">
+    <ng-container *appIfSpinner="state$ | async as state">
       <ion-item color="light" lines="full">
         <ion-buttons slot="start">
           <ion-button routerLink="/" routerDirection="back">
@@ -24,9 +24,6 @@
       <app-inbox *ngIf="state.isInbox && state.isMaster"></app-inbox>
       <app-outbox *ngIf="!state.isInbox"></app-outbox>
     </ng-container>
-    <ng-template #loading>
-      <app-loading-indicator></app-loading-indicator>
-    </ng-template>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

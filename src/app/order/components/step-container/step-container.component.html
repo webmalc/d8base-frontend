@@ -2,7 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
-    <ng-container *ngIf="context$ | async as context; else loading">
+    <ng-container *appIfSpinner="context$ | async as context">
       <ion-row>
         <ion-col>
           <ion-list>
@@ -37,6 +37,3 @@
     </ng-container>
   </app-content-wrapper>
 </ion-content>
-<ng-template #loading>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>

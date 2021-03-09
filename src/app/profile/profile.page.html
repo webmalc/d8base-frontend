@@ -30,7 +30,7 @@
         <h1>{{'profile-form.contacts'|translate}}</h1>
       </ion-label>
     </ion-item-divider>
-    <app-abstract-contacts *ngIf="contacts$ | async as contacts; else loader" [clientContacts]="contacts" [interactable]="true">
+    <app-abstract-contacts *appIfSpinner="contacts$ | async as contacts" [clientContacts]="contacts" [interactable]="true">
     </app-abstract-contacts>
     <ion-item-divider color="light">
       <ion-label>
@@ -91,7 +91,3 @@
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>
-
-<ng-template #loader>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>

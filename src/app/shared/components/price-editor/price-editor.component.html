@@ -1,4 +1,4 @@
-<ng-container *ngIf="currency$ | async as currency; else loading">
+<ng-container *appIfSpinner="currency$ | async as currency">
   <ion-item class="ion-item-bordered">
     <ng-container *ngIf="isPriceFixed$ | async; else priceInterval">
       <ion-label position="stacked">{{ 'service-publish.step-two.fixed-price-title' | translate }}</ion-label>
@@ -36,6 +36,3 @@
     <ion-checkbox slot="end" [checked]="initialValues.is_price_fixed" (ionChange)="toggleFixedPrice($event)"> </ion-checkbox>
   </ion-item>
 </ng-container>
-<ng-template #loading>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>
