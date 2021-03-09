@@ -10,8 +10,9 @@
     </ion-item>
     <app-calendar-component
       [formControl]="formControl"
-      (newDate)="showCalendarForDate($event)"
-      [enabledPeriods]="displayedCalendars$ | async">
+      [enabledPeriods]="displayedCalendars$ | async"
+      [serviceDuration]="60"
+      (newDate)="showCalendarForDate($event)">
     </app-calendar-component>
   </ion-list>
 </app-step-container>

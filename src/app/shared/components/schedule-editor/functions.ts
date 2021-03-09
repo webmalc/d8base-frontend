@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 import * as CustomValidators from './custom-validators';
@@ -28,14 +28,12 @@ export function createFormGroup(options: { dayCode: number; startTime?: string; 
   const { dayCode, startTime, endTime } = options;
   return new FormGroup({
     [ScheduleEditorFormFields.Day]: new FormControl(dayCode),
-    [ScheduleEditorFormFields.StartTime]: new FormControl(startTime),
-    [ScheduleEditorFormFields.EndTime]: new FormControl(endTime),
+    [ScheduleEditorFormFields.StartTime]: new FormControl(startTime,
+      [Validators.required, CustomValidators.timeFormatValidator]),
+    [ScheduleEditorFormFields.EndTime]: new FormControl(endTime,
+      [Validators.required, CustomValidators.timeFormatValidator]),
   }, {
     validators: [
-      CustomValidators.startTimeValidator,
-      CustomValidators.endTimeValidator,
-      CustomValidators.startTimeFormatValidator,
-      CustomValidators.endTimeFormatValidator,
       CustomValidators.timeIntervalValidator,
     ],
   });
