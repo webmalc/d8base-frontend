@@ -771,7 +771,8 @@
     "priceError": "Цена 'от' должна быть меньше цены 'до'.",
     "emptyEndDate": "Не указана дата окончания",
     "emptyStartDate": "Не указана дата начала",
-    "timeError": "Ошибка указания времени"
+    "timeIntervalError": "Количество минут должно быть кратно {{ interval }}",
+    "timeCausalityError": "Время окончания должно быть больше, чем время начала"
   },
   "server-errors": {
     "unauthorized": "Доступ запрещён",

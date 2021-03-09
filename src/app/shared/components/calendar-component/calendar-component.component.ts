@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { addDays, getCurrentDay, getDay, getMilliseconds } from '@app/core/functions/datetime.functions';
+import { addDays, getCurrentDay, stripTime, getMilliseconds } from '@app/core/functions/datetime.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
@@ -67,7 +67,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
       this.selectedDate = null;
       return;
     }
-    const startDate = getDay(date);
+    const startDate = stripTime(date);
     this.date = startDate;
 
     // TODO: extract to function or use a library

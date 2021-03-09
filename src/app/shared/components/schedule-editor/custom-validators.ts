@@ -17,18 +17,14 @@ export function timeIntervalValidator(group: FormGroup): ValidationErrors | null
   const endTime = group.get(ScheduleEditorFormFields.EndTime).value as string;
   const startTimeMinutes = getHoursNumber(startTime) * 60 + getMinutesNumber(startTime);
   const endTimeMinutes = getHoursNumber(endTime) * 60 + getMinutesNumber(endTime);
-  return (startTimeMinutes >= endTimeMinutes) ? { timeError: true } : null;
+  return (startTimeMinutes >= endTimeMinutes) ? { timeCausalityError: true } : null;
 }
 
 export function timeFormatValidator(control: FormControl): ValidationErrors | null {
   const time: string = control.value;
   if (!time) {
-    return { timeError: true };
+    return null;
   }
 
-  if (getMinutesNumber(time) % CALENDAR_INTERVAL !== 0) {
-    return { timeError: true };
-  }
-
-  return null;
+  return getMinutesNumber(time) % CALENDAR_INTERVAL !== 0 ? { timeIntervalError: { interval: CALENDAR_INTERVAL }} : null;
 }

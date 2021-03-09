@@ -1,10 +1,10 @@
-// TODO use moment.js for datetime formatting
+// TODO use moment.js or date-fns for datetime formatting/transforming
 
 export function addMinutes(date: Date, minutes: number): Date {
   return new Date(date.getTime() + minutes * 60000);
 }
 
-export function addDays(date: Date, days: number) {
+export function addDays(date: Date, days: number): Date {
     const newDate = new Date(date);
     newDate.setDate(date.getDate() + days); // getDate() increments month if necessary
     return newDate;
@@ -15,14 +15,14 @@ export function getMilliseconds(value: { minutes: number }): number {
   return minutes * 60000;
 }
 
-export function getDay(date: Date): Date {
+export function stripTime(date: Date): Date {
   const result = new Date(date);
   result.setHours(0, 0, 0, 0);
   return result;
 }
 
 export function getCurrentDay(): Date {
-  return getDay(new Date());
+  return stripTime(new Date());
 }
 
 export function getLocalDateString(date: Date | string): string {

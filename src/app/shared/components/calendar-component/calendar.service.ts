@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addMinutes, getDay } from '@app/core/functions/datetime.functions';
+import { addMinutes, stripTime } from '@app/core/functions/datetime.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
@@ -27,7 +27,7 @@ export class CalendarService {
     }
     const calendar: CalendarInterval[] = [];
     const openedPeriodArray: Interval[] = this.generateEnabledPeriodsArray(enabledPeriods);
-    const day = getDay(openedPeriodArray[0].start);
+    const day = stripTime(openedPeriodArray[0].start);
 
     for (let intervals = 0; intervals < this.intervals; intervals += 1) {
       const units: CalendarUnit[] = [];

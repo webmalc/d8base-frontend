@@ -1,21 +1,25 @@
 <ng-container *ngFor="let row of controls; let i = index">
-  <div [formGroup]="row" class="date-row">
-    <ion-label slot="start" class="ion-padding-horizontal">
-      {{ 'global.weekdays.' + getDayByIndex(row.controls[formFields.Day].value) | translate }}
-    </ion-label>
-    <ion-item>
-      <ion-label position="stacked">{{ 'global.from' | translate }}</ion-label>
-      <ion-input class="ion-text-center" type="time" [formControlName]="formFields.StartTime"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">{{ 'global.to' | translate }}</ion-label>
-      <ion-input class="ion-text-center" type="time" [formControlName]="formFields.EndTime"></ion-input>
-    </ion-item>
-    <ion-button color="medium" fill="clear" (click)="deleteDay(i)" *ngIf="!disabled">
-      <ion-icon name="trash-outline"></ion-icon>
-    </ion-button>
-  </div>
-  <app-form-control-error [control]="row"></app-form-control-error>
+  <ng-container [formGroup]="row">
+    <div class="date-row">
+      <ion-label slot="start" class="ion-padding-horizontal">
+        {{ 'global.weekdays.' + getDayByIndex(row.controls[formFields.Day].value) | translate }}
+      </ion-label>
+      <ion-item>
+        <ion-label position="stacked">{{ 'global.from' | translate }}</ion-label>
+        <ion-input class="ion-text-center" type="time" [formControlName]="formFields.StartTime"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{ 'global.to' | translate }}</ion-label>
+        <ion-input class="ion-text-center" type="time" [formControlName]="formFields.EndTime"></ion-input>
+      </ion-item>
+      <ion-button color="medium" fill="clear" (click)="deleteDay(i)" *ngIf="!disabled">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <app-form-control-error [controlName]="formFields.StartTime"></app-form-control-error>
+    <app-form-control-error [controlName]="formFields.EndTime"></app-form-control-error>
+    <app-form-control-error [control]="row"></app-form-control-error>
+  </ng-container>
 </ng-container>
 <app-add-button *ngIf="!disabled" (click)="showDaySelector()">
   {{ 'service-publish.step-seven.timetable.add-new-time' | translate }}
