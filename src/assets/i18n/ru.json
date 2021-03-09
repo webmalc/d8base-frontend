@@ -471,7 +471,8 @@
       "add-new-education": "Добавить образование",
       "add-new-certificate": "Добавить сертификат",
       "certificate-url": "Ссылка на сертификат",
-      "certificate-id": "ID сертификата"
+      "certificate-id": "ID сертификата",
+      "no-data": "Нет данных"
     },
     "portfolio": {
       "gallery": "Галерея работ",

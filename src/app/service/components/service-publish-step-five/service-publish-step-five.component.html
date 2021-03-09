@@ -49,7 +49,7 @@
           {{ 'service-publish.step-five.add-photo-title' | translate }}
         </b>
       </ion-item>
-      <ion-item class="ion-margin-bottom ion-item-no-border">
+      <ion-item class="ion-margin-bottom" lines="none">
         <ngx-dropzone (change)="onSelect($event)" [multiple]="false" class="width100" [accept]="'image/*'">
           <ngx-dropzone-label>
             <ion-row>

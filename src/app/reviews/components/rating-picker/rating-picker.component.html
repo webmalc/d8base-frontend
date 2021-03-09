@@ -1,6 +1,7 @@
 <ion-item
   *ngFor="let rating of ratings"
-  class="star-container ion-item-no-border"
+  class="star-container"
+  lines="none"
   button="true"
   detail="false"
   (click)="selectRating(rating)"

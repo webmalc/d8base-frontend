@@ -155,18 +155,20 @@
   </ion-list>
 
   <app-collapse-item title="{{ 'master-profile.info.experience' | translate }}">
-    <ion-item lines="none" class="ion-item-no-padding-right experience" *ngFor="let experience of context.professional.experience_entries">
+    <ion-item lines="none" class="ion-item-no-padding-right" *ngFor="let experience of context.professional.experience_entries">
       <app-experience [editable]="context.canEdit" [exp]="experience" class="width100"></app-experience>
     </ion-item>
+    <ng-container *ngIf="!context.professional.experience_entries.length" [ngTemplateOutlet]="noData"> </ng-container>
     <app-add-button *ngIf="context.canEdit" routerLink="experience-add/">
       {{ 'master-profile.info.add-new-exp' | translate }}
     </app-add-button>
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.education' | translate }}">
-    <ion-item *ngFor="let education of context.professional.educations" lines="none" class="ion-item-no-padding-right experience">
+    <ion-item *ngFor="let education of context.professional.educations" lines="none" class="ion-item-no-padding-right">
       <app-education [education]="education" [editable]="context.canEdit" class="width100"></app-education>
     </ion-item>
+    <ng-container *ngIf="!context.professional.educations.length" [ngTemplateOutlet]="noData"> </ng-container>
     <app-add-button *ngIf="context.canEdit" routerLink="education-add/">
       {{ 'master-profile.info.add-new-education' | translate }}
     </app-add-button>
@@ -176,18 +178,24 @@
     <ion-item *ngFor="let certificate of context.professional.certificates">
       <app-certificate [certificate]="certificate" [editable]="context.canEdit"></app-certificate>
     </ion-item>
+    <ng-container *ngIf="!context.professional.certificates.length" [ngTemplateOutlet]="noData"> </ng-container>
     <app-add-button *ngIf="context.canEdit" routerLink="certificate-add/">
       {{ 'master-profile.info.add-new-certificate' | translate }}
     </app-add-button>
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.reviews' | translate }}">
-    <ng-container *ngIf="reviews$ | async as reviews"> </ng-container>
     <app-review-cards [reviews]="reviews$ | async"></app-review-cards>
-    <ion-item class="ion-text-center ion-item-no-border">
-      <a [routerLink]="['/reviews', context.professional.id]" class="ion-text-center ion-item-no-border">{{
+    <ion-item class="ion-text-center" lines="none">
+      <a [routerLink]="['/reviews', context.professional.id]" class="ion-text-center" lines="none">{{
         'reviews.all-reviews' | translate
       }}</a>
     </ion-item>
   </app-collapse-item>
 </ng-container>
+
+<ng-template #noData>
+  <ion-item class="ion-text-center" lines="none">
+    {{ 'master-profile.info.no-data' | translate }}
+  </ion-item>
+</ng-template>

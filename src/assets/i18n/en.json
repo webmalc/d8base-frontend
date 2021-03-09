@@ -471,7 +471,8 @@
       "add-new-education": "Add new education",
       "add-new-certificate": "Add new certificate",
       "certificate-url": "Digital Certificate URL",
-      "certificate-id": "Certificate ID"
+      "certificate-id": "Certificate ID",
+      "no-data": "There is no data"
     },
     "portfolio": {
       "gallery": "Gallery",
