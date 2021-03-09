@@ -69,6 +69,7 @@ import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directi
 import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
+import { IfSpinnerDirective } from './directives/if-spinner.directive';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { NumberDirective } from './directives/number.directive';
     ServiceTitleComponent,
     ColumnHeaderComponent,
     DateIntervalEditorComponent,
+    IfSpinnerDirective,
   ],
   exports: [
     AddButtonComponent,
@@ -182,6 +184,7 @@ import { NumberDirective } from './directives/number.directive';
     ServiceTitleComponent,
     ColumnHeaderComponent,
     DateIntervalEditorComponent,
+    IfSpinnerDirective,
   ],
   imports: [
     CommonModule,

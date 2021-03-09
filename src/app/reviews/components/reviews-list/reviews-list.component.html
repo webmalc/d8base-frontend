@@ -3,11 +3,11 @@
   <app-content-wrapper>
     <app-column-header>{{ 'reviews.title' | translate }}</app-column-header>
     <app-professional-card
-      *ngIf="professional$ | async as professional; else loading"
+      *appIfSpinner="professional$ | async as professional"
       [professional]="professional"
       class="professional"
     ></app-professional-card>
-    <ng-container *ngIf="reviews$ | async as reviews; else loading">
+    <ng-container *appIfSpinner="reviews$ | async as reviews">
       <ion-item *ngIf="isAbleToReview$ | async" class="edit-review ion-text-center" lines="none">
         <a [routerLink]="['/reviews', professionalId$ | async, 'edit-review']" (click)="$event.stopPropagation()">{{
           'reviews.send-review' | translate
@@ -18,6 +18,3 @@
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>
-<ng-template #loading>
-  <app-loading-indicator></app-loading-indicator>
-</ng-template>
