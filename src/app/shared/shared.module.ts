@@ -195,6 +195,7 @@ import { NumberDirective } from './directives/number.directive';
     ImageCropperModule,
   ],
   providers: [
+    // TODO Create core module and move providers into it
     MainGuard,
     ContactsTabFormService,
     SelectableCityOnSearchService,

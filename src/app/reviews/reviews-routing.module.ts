@@ -28,7 +28,6 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: ':professionalId',
   },
-  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({
