@@ -22,7 +22,7 @@ jobs:
               run: git status
 
             - name: Install
-              run: npm install
+              run: npm ci
 
             - name: copy env file
               run: |
