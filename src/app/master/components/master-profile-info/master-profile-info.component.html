@@ -97,6 +97,9 @@
       <ion-label>
         <h1>{{ 'master-profile.info.about' | translate }}</h1>
       </ion-label>
+      <ion-button *ngIf="context.canEdit" color="medium" fill="clear" routerLink="/profile/about">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
     </ion-list-header>
     <ion-item *ngIf="context.professional.experience">
       <ion-label>
