@@ -37,7 +37,7 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     this.masterManager.getMasterList().pipe(
       tap(list => this.masterId = list[0].id),
     ).subscribe(
-      _ => {
+      () => {
         this.professionalsApi.professionalsTagsList({}).subscribe(
           data => this.tagsList$.next(this.getTagNamesArray(data.results)),
         );

@@ -116,7 +116,7 @@ export class ProfilePage extends Reinitable implements OnInit {
   private onAvatarChange(): void {
     this.profileService.avatarForm
       .get(ProfileFormFields.Avatar)
-      .statusChanges.subscribe(_ => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value));
+      .statusChanges.subscribe(() => this.saveAvatar(this.profileService.avatarForm.get(ProfileFormFields.Avatar).value));
   }
 
   private getUserLanguagesAsString(): Observable<string> {
