@@ -15,7 +15,7 @@ import { InfiniteScrollItemDirective } from '@app/infinite-scroll/directives/inf
 import { InfiniteScrollData, PaginatedResult, Params } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { asyncScheduler, Observable } from 'rxjs';
-import { observeOn, takeUntil } from 'rxjs/operators';
+import { finalize, observeOn, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-infinite-scroll-container',
@@ -47,7 +47,7 @@ export class InfiniteScrollContainerComponent<T> implements OnInit {
       this.requestParams = params;
       this.apiRequestFunction = apiRequestFunction;
 
-      this.isLoading = true;
+      this.showSpinner();
       this.wasLoadAttempted = true;
       this.firstLoad();
 
@@ -67,7 +67,13 @@ export class InfiniteScrollContainerComponent<T> implements OnInit {
 
   private loadData(infiniteScroll?): void {
     this.apiRequestFunction({ ...this.requestParams, page: this.pageCounter })
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        finalize(() => {
+          this.hideSpinner();
+          this.cd.markForCheck();
+        }),
+        takeUntil(this.destroy$),
+      )
       .subscribe(response => {
         const { results, next } = response;
         this.results = this.results.concat(results);
@@ -76,7 +82,6 @@ export class InfiniteScrollContainerComponent<T> implements OnInit {
           infiniteScroll.target.complete();
         }
         this.disabelInfiniteScroll(!next);
-        this.isLoading = false;
         this.cd.markForCheck();
       });
   }
@@ -92,5 +97,13 @@ export class InfiniteScrollContainerComponent<T> implements OnInit {
 
   private incrementPageCounter(): void {
     this.pageCounter += 1;
+  }
+
+  private showSpinner(): void {
+    this.isLoading = true;
+  }
+
+  private hideSpinner(): void {
+    this.isLoading = false;
   }
 }
