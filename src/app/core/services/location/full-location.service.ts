@@ -69,7 +69,7 @@ export class FullLocationService {
     );
   }
 
-  private getFullLocation({
+  public getFullLocation({
     country: countryId,
     region: regionId,
     subregion: subregionId,
