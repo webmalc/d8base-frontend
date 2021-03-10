@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProfessionalLocationInline } from '@app/api/models';
 import { HelperService } from '@app/core/services/helper.service';
+import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { TimezoneService } from '@app/core/services/timezone.service';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
@@ -59,6 +61,7 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
     public readonly regionSelectable: SelectableRegionOnSearchService,
     public readonly selectableSubregion: SelectableSubregionOnSearchService,
     public readonly districtSelectable: SelectableDistrictOnSearchService,
+    public readonly fullLocationService: FullLocationService,
     public readonly fb: FormBuilder,
   ) {
     super();
@@ -71,7 +74,13 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.item) {
-      this.form.patchValue(this.item ?? {});
+      if (this.item) {
+        this.fullLocationService.getFullLocation((this.item as unknown) as ProfessionalLocationInline).subscribe(fullLocation => {
+          this.form.patchValue({ ...this.item, ...fullLocation });
+        });
+      } else {
+        this.form.patchValue({});
+      }
     }
   }
 
