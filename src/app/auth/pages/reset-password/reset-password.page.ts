@@ -39,10 +39,10 @@ export class ResetPasswordPage implements OnInit {
         timestamp: params.timestamp,
         signature: params.signature,
       }).pipe(
-        tap(_ => this.successMessages = ['reset-password.success']),
+        tap(() => this.successMessages = ['reset-password.success']),
         delay(800),
       ).subscribe(
-        _ => this.router.navigateByUrl('/auth/login'),
+        () => this.router.navigateByUrl('/auth/login'),
         (error: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(error.error),
       );
     });

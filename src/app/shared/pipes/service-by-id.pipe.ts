@@ -1,23 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { ServicesApiCache } from '@app/core/services/cache';
+import { Pipe } from '@angular/core';
 import { Service } from '@app/api/models';
-import { Observable, of } from 'rxjs';
+import { ServicesApiCache } from '@app/core/services/cache';
+import { EntityById } from '@app/shared/pipes/entity-by-id';
 
 @Pipe({
   name: 'serviceById$',
 })
-export class ServiceByIdPipe implements PipeTransform {
-
-  constructor(
-    private readonly serviceCache: ServicesApiCache,
-  ) {
-  }
-
-  public transform(id: number): Observable<Service> {
-    if (!id) {
-      return of<Service>(null);
-    }
-
-    return this.serviceCache.getByEntityId(id);
+export class ServiceByIdPipe extends EntityById<Service> {
+  constructor(servicesCache: ServicesApiCache) {
+    super();
+    this.entityCache = servicesCache;
   }
 }

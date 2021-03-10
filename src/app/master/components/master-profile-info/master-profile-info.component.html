@@ -136,7 +136,7 @@
         {{ 'master-profile.info.nationality' | translate }}
       </ion-label>
       <ion-text>
-        {{ context.user.nationality }}
+        {{ (context.user.nationality | countryById$ | async)?.name }}
       </ion-text>
     </ion-item>
   </ion-list>

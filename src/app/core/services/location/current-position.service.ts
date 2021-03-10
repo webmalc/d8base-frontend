@@ -30,11 +30,11 @@ export class CurrentPositionService { // cringe
           () => this.geolocation.getCurrentPosition().then(
             (geo: Geoposition) => resolve({ latitude: geo.coords.latitude, longitude: geo.coords.longitude }),
           ),
-        ).catch(_ => resolve(null)) :
+        ).catch(() => resolve(null)) :
         this.geolocation.getCurrentPosition().then(
           (geo: Geoposition) => resolve({ latitude: geo.coords.latitude, longitude: geo.coords.longitude }),
-        ).catch(_ => resolve(null)),
-    ).catch(_ => resolve(null)));
+        ).catch(() => resolve(null)),
+    ).catch(() => resolve(null)));
   }
 
   public getCurrentMergedPosition(): Observable<Coords | null> {
@@ -73,7 +73,7 @@ export class CurrentPositionService { // cringe
             },
           );
         },
-      ).catch(_ => resolve(null));
+      ).catch(() => resolve(null));
     });
   }
 

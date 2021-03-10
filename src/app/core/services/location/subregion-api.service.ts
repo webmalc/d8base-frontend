@@ -22,6 +22,7 @@ export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
   public get(
     params: {
       region?: string;
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       region__country?: string;
       search?: string;
       ordering?: string;

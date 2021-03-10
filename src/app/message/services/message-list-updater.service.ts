@@ -28,7 +28,7 @@ export class MessageListUpdaterService {
       this.getMessageList(interlocutorId).pipe(
         delay(this.updateInterval),
         repeat(),
-        switchMap(_ => this.getMessageList(interlocutorId)),
+        switchMap(() => this.getMessageList(interlocutorId)),
         takeUntil(this.destroy$),
       );
   }

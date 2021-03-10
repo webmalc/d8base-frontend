@@ -50,7 +50,7 @@ import { ServicePublishAgreementComponent } from '@app/shared/components/service
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
 import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
-import { MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe } from '@app/shared/pipes';
+import { MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe, CountryByIdPipe } from '@app/shared/pipes';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
@@ -130,6 +130,7 @@ import { IfSpinnerDirective } from './directives/if-spinner.directive';
     ColumnHeaderComponent,
     DateIntervalEditorComponent,
     IfSpinnerDirective,
+    CountryByIdPipe,
   ],
   exports: [
     AddButtonComponent,
@@ -185,6 +186,7 @@ import { IfSpinnerDirective } from './directives/if-spinner.directive';
     ColumnHeaderComponent,
     DateIntervalEditorComponent,
     IfSpinnerDirective,
+    CountryByIdPipe,
   ],
   imports: [
     CommonModule,
