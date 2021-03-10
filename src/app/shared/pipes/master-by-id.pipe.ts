@@ -1,23 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
 import { ProfessionalsApiCache } from '@app/core/services/cache';
-import { Observable, of } from 'rxjs';
+import { EntityById } from './entity-by-id';
 
 @Pipe({
   name: 'masterById$',
 })
-export class MasterByIdPipe implements PipeTransform {
-
-  constructor(
-    private readonly serviceCache: ProfessionalsApiCache,
-  ) {
-  }
-
-  public transform(id: number): Observable<ProfessionalList> {
-    if (!id) {
-      return of<ProfessionalList>(null);
-    }
-
-    return this.serviceCache.getByEntityId(id);
+export class MasterByIdPipe extends EntityById<ProfessionalList> {
+  constructor(professionalsCache: ProfessionalsApiCache) {
+    super();
+    this.entityCache = professionalsCache;
   }
 }
