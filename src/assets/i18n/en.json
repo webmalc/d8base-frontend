@@ -42,7 +42,8 @@
     "forward": "Forward",
     "back": "Back",
     "save": "Save",
-    "not-specified": "Not specified"
+    "not-specified": "Not specified",
+    "page-not-found": "Page not found"
   },
   "delete-confirmation": {
     "delete-service": "Delete service?",

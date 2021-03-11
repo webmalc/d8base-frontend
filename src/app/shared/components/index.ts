@@ -25,3 +25,4 @@ export * from './gender-selector/gender-selector.component';
 export * from './service-title/service-title.component';
 export * from './column-header/column-header.component';
 export * from './date-interval-editor/date-interval-editor.component';
+export * from './not-found-page/not-found-page.component';
