@@ -8,7 +8,7 @@
       </ion-menu-toggle>
     </ion-buttons>
     <ion-item class="main-logo" lines="none" routerDirection="root" [detail]="false" routerLink="/" slot="start">
-      <img src="assets/images/logo.svg" alt="">
+      <img src="assets/images/logo.svg" alt="" />
     </ion-item>
 
     <ng-container *ngIf="context.isAuthenticated">
@@ -29,8 +29,11 @@
       </ng-template>
     </ng-container>
 
-    <ion-item *ngIf="context.isAuthenticated" detail="false" routerLink="/message" lines="none" class="ion-item-no-side-padding ion-padding-end" slot="end">
-      <ion-icon name="chatbubbles-outline"></ion-icon>
+    <ion-item *ngIf="context.isAuthenticated" detail="false" routerLink="/message" lines="none" slot="end">
+      <ion-icon name="chatbubbles-outline"> </ion-icon>
+      <ng-container *ngIf="countOfUnreadMessages$ | async as count">
+        <ion-badge color="danger">{{ count }}</ion-badge>
+      </ng-container>
     </ion-item>
     <ion-item
       lines="none"

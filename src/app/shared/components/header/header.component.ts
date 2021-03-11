@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserLocation } from '@app/api/models';
 import { AuthenticationService, MasterManagerService } from '@app/core/services';
+import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MenuController, Platform } from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
@@ -15,12 +16,14 @@ import HeaderContext from './header-context.interface';
 export class HeaderComponent {
   public context$: Observable<HeaderContext>;
   public defaultLocation$: Observable<UserLocation>;
+  public countOfUnreadMessages$ = this.unreadMessagesService.unreadMessagesCount();
 
   private readonly isAuthenticated$: Observable<boolean>;
 
   constructor(
     private readonly platform: Platform,
     private readonly menuController: MenuController,
+    public readonly unreadMessagesService: UnreadMessagesService,
     userManager: UserManagerService,
     authenticator: AuthenticationService,
     masterManager: MasterManagerService,
