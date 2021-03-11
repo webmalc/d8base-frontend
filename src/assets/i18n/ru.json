@@ -42,7 +42,8 @@
     "back": "Назад",
     "forward": "Продолжить",
     "save": "Сохранить",
-    "not-specified": "Не указано"
+    "not-specified": "Не указано",
+    "page-not-found": "Страница не найдена"
   },
   "delete-confirmation": {
     "delete-service": "Удалить услугу?",
