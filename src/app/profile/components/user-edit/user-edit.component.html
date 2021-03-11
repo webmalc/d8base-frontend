@@ -3,58 +3,52 @@
   <app-content-wrapper>
     <app-column-header [previousLocationFallback]="'/profile'">{{ 'profile-main-edit.main' | translate }}</app-column-header>
     <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
-
-        <ion-item>
-          <ion-label class="label-for-required-input" color="medium" position="floating">{{
-            'profile-form.fields.name' | translate
-          }}</ion-label>
-          <ion-input
-            type="text"
-            name="first_name"
-            [placeholder]="'profile-form.placeholders.name' | translate"
-            formControlName="{{ formFields.FirstName }}"
-          ></ion-input>
-        </ion-item>
-        <app-form-control-error [controlName]="formFields.FirstName"> </app-form-control-error>
-        <ion-item>
-          <ion-label class="label-for-required-input" color="medium" position="floating">{{
-            'profile-form.fields.surname' | translate
-          }}</ion-label>
-          <ion-input
-            type="text"
-            name="last_name"
-            [placeholder]="'profile-form.placeholders.surname' | translate"
-            formControlName="{{ formFields.LastName }}"
-          ></ion-input>
-        </ion-item>
-        <app-form-control-error [controlName]="formFields.LastName"> </app-form-control-error>
-        <ion-item>
-          <ion-label color="medium" position="floating">{{ 'profile-form.fields.patronymic' | translate }}</ion-label>
-          <ion-input
-            type="text"
-            name="patronymic"
-            [placeholder]="'profile-form.placeholders.patronymic' | translate"
-            formControlName="{{ formFields.Patronymic }}"
-          ></ion-input>
-        </ion-item>
-        <app-form-control-error [controlName]="formFields.Patronymic"> </app-form-control-error>
-        <app-gender-selector [formControlName]="formFields.Gender"></app-gender-selector>
-        <ion-item>
-          <ion-label class="label-for-required-input" color="medium" position="floating">
-            {{ 'profile-form.fields.email' | translate }}
-          </ion-label>
-          <ion-input
-            type="text"
-            name="email"
-            [placeholder]="'profile-form.placeholders.email' | translate"
-            formControlName="{{ formFields.Email }}"
-          >
-          </ion-input>
-        </ion-item>
-        <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
-        <ion-button [disabled]="form.invalid || form.pristine" type="submit" class="ion-margin-top" fill="solid" expand="block">
-          {{ 'profile-form.button' | translate }}
-        </ion-button>
+      <ion-item>
+        <ion-label class="label-for-required-input" color="medium" position="floating">
+          {{ 'profile-form.fields.name' | translate }}
+        </ion-label>
+        <ion-input
+          type="text"
+          name="first_name"
+          formControlName="{{ formFields.FirstName }}"
+        ></ion-input>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.FirstName"> </app-form-control-error>
+      <ion-item>
+        <ion-label class="label-for-required-input" color="medium" position="floating">
+          {{ 'profile-form.fields.surname' | translate }}</ion-label>
+        <ion-input
+          type="text"
+          name="last_name"
+          formControlName="{{ formFields.LastName }}"
+        ></ion-input>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.LastName"> </app-form-control-error>
+      <ion-item>
+        <ion-label color="medium" position="floating">{{ 'profile-form.fields.patronymic' | translate }}</ion-label>
+        <ion-input
+          type="text"
+          name="patronymic"
+          formControlName="{{ formFields.Patronymic }}"
+        ></ion-input>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.Patronymic"> </app-form-control-error>
+      <app-gender-selector [formControlName]="formFields.Gender"></app-gender-selector>
+      <ion-item>
+        <ion-label class="label-for-required-input" color="medium" position="floating">
+          {{ 'profile-form.fields.email' | translate }}
+        </ion-label>
+        <ion-input
+          type="text"
+          name="email"
+          formControlName="{{ formFields.Email }}"
+        >
+        </ion-input>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
+      <ion-button [disabled]="form.invalid || form.pristine" type="submit" class="ion-margin-top" fill="solid" expand="block">
+        {{ 'profile-form.button' | translate }}
+      </ion-button>
     </form>
   </app-content-wrapper>
   <app-footer></app-footer>

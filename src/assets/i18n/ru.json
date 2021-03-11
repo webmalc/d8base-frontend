@@ -165,13 +165,10 @@
       "main_language": "Язык общения",
       "languages": "Доп. языки"
     },
-    "button": "Сохранить"
-  },
-  "profile-page": {
+    "button": "Сохранить",
     "profile": "Профиль",
     "settings": "Настройки",
     "plugins": "Плагины",
-    "contacts": "Контакты",
     "education": "Образование",
     "bookmark": "Избранное",
     "add-new-contact": "Добавить еще контакт",
@@ -179,11 +176,11 @@
     "your-address": "Ваш адрес",
     "main-address": "Основной адрес",
     "additional-address": "Дополнительный адрес",
-    "about": "О себе",
     "age": "Дата рождения",
     "nationality": "Национальность",
     "languages": "Языки общения",
-    "not-specified": "Не указано"
+    "not-specified": "Не указано",
+    "email": "E-меил подтвержден"
   },
   "profile-main-edit": {
     "main": "Основное"
@@ -424,8 +421,7 @@
     },
     "main-info": {
       "rating": "Рейтинг мастера",
-      "reviews": "Отзывы",
-      "email": "E-меил подтвержден"
+      "reviews": "Отзывы"
     },
     "services": {
       "service-edit": {
@@ -449,10 +445,10 @@
       "information": "Информация",
       "master-location": "Адрес мастера",
       "contacts": "Контакты",
-      "description": "О мастере",
+      "description": "Описание",
       "specialization": "Специализация",
       "tags": "Теги",
-      "about": "Описание",
+      "about": "О мастере",
       "professional-experience": "Стаж работы",
       "professional-level": "Профессиональный уровень",
       "sex": "Пол",
@@ -472,7 +468,7 @@
       "add-new-certificate": "Добавить сертификат",
       "certificate-url": "Ссылка на сертификат",
       "certificate-id": "ID сертификата",
-      "no-data": "Нет данных"
+      "no-data": "Не указано"
     },
     "portfolio": {
       "gallery": "Галерея работ",
@@ -484,14 +480,14 @@
     },
     "edit-master": {
       "title": "Основное",
-      "name": "Имя",
-      "name-placeholder": "Введите имя",
-      "description": "Описание (специализация)",
-      "description-placeholder": "Введите описание (специализацию)",
+      "name": "Специализация",
+      "name-placeholder": "Введите специализацию",
+      "description": "Описание",
+      "description-placeholder": "Введите описание",
       "company": "Организация",
       "company-placeholder": "Введите организацию",
-      "experience": "Опыт работы",
-      "experience-placeholder": "Введите опыт работы",
+      "experience": "Стаж работы",
+      "experience-placeholder": "Введите стаж работы",
       "level": "Профессиональный уровень",
       "level-placeholder": "Выберите профессиональный уровень",
       "subcategory": "Подкатегория",

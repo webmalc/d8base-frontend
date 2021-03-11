@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { UserExtended } from '@app/api/models';
 import { HelperService } from '@app/core/services/helper.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 
@@ -11,7 +12,11 @@ import ProfessionalPageStateModel from '@app/store/professional-page/professiona
 export class MasterProfileMainInfoSectionComponent {
   @Input() public context: ProfessionalPageStateModel;
 
-  public getAvatar(): string {
-    return this.context?.user?.avatar ? this.context.user.avatar : HelperService.getNoAvatarLink();
+  public getName(user: UserExtended): string {
+    return user ? `${user.first_name} ${user.last_name}` : '';
+  }
+
+  public getAvatar(user: UserExtended): string {
+    return user?.avatar ? user.avatar : HelperService.getNoAvatarLink();
   }
 }

@@ -1,13 +1,11 @@
-<ion-row *ngIf="context">
-  <ion-col class="ion-no-padding">
-    <ion-item class="fullName ion-item-no-min-height pv5" lines="none">
-      {{ context.professional.name }}
-    </ion-item>
-    <ion-item *ngIf="context.professional.company" class="companyName ion-item-no-min-height pv5" lines="none">
-      {{context.professional.company}}
-    </ion-item>
-    <ion-item lines="none" class="ion-item-no-min-height pv5">
-      <ion-img [src]="getAvatar()"></ion-img>
-    </ion-item>
-  </ion-col>
-</ion-row>
+<ng-container *ngIf="context">
+  <ion-item lines="none">
+    <ion-label>
+      <h1>{{ getName(context.user) }}</h1>
+      <ion-note>{{context.professional.name}}</ion-note>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-img [src]="getAvatar(context.user)"></ion-img>
+  </ion-item>
+</ng-container>
