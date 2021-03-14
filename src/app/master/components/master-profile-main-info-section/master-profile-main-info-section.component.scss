@@ -6,7 +6,7 @@
 }
 
 .companyName {
-  color: #989AA2;
+  color: var(--ion-color-medium);
   font-size: 14px;
   line-height: 18px;
   font-style: normal;
@@ -15,6 +15,6 @@
 .other-text {
   font-size: 16px;
   line-height: 20px;
-  color: #222428;
+  color: var(--ion-color-dark);
   font-style: normal;
 }

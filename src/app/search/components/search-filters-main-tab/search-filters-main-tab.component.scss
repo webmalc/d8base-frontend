@@ -1,7 +1,7 @@
 .pricetags-text {
   font-size: 14px;
   line-height: 18px;
-  color: #3880ff;
+  color: var(--ion-color-primary);
 }
 
 .order-type-block-title {
@@ -14,10 +14,10 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  color: #989aa2;
+  color: var(--ion-color-medium);
 }
 
 .availability-title {
   font-size: 16px;
-  color: #989aa2;
+  color: var(--ion-color-medium);
 }

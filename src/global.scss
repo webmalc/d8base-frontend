@@ -106,7 +106,7 @@
 }
 
 .text-secondary {
-  color: #3880ff;
+  color: var(--ion-color-primary);
 }
 
 .space-between-column {
@@ -196,11 +196,11 @@
 }
 
 .ion-d8b-gradient-bgc {
-  --ion-background-color: linear-gradient(0deg, #0CD1E8 11.37%, #3880FF 125.68%);
+  --ion-background-color: linear-gradient(0deg, var(--ion-color-secondary) 11.37%, var(--ion-color-primary) 125.68%);
 }
 
 .d8b-gradient-bgc {
-  background: linear-gradient(0deg, #0CD1E8 11.37%, #3880FF 125.68%);
+  background: linear-gradient(0deg, var(--ion-color-secondary) 11.37%, var(--ion-color-primary) 125.68%);
 }
 
 .d8b-container {
@@ -222,7 +222,7 @@
 }
 
 .text-blue {
-  color: #3880FF;
+  color: var(--ion-color-primary);
 }
 
 .no-padding-right {
@@ -236,7 +236,7 @@
 }
 
 .base-blue {
-  color: #0CD1E8;
+  color: var(--ion-color-secondary);
 }
 
 .ion-item-bordered-first {
@@ -244,11 +244,11 @@
 }
 
 .text-red {
-  color: #F04141;
+  color: var(--ion-color-danger);
 }
 
 .text-grey {
-  color: #86888F;
+  color: var(--ion-color-medium-shade);
 }
 
 .ion-item-bordered-others {
