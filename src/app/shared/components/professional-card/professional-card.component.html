@@ -2,11 +2,11 @@
   <ion-img class="avatar" [src]="professional.user?.avatar || defaultAvatar"></ion-img>
   <div class="info">
     <div class="title">
-      <a [routerLink]="'/professional/' + professional.id" class="ion-padding-horizontal fs16" lines="none">
-        {{ professional.name }}
+      <a [routerLink]="'/professional/' + professional.id" class="ion-padding-horizontal fs16">
+        {{ getName() }}
       </a>
-      <div *ngIf="professional.company" class="company ion-padding-horizontal fs13">
-        {{ professional.company || 'global.professional.private-person' | translate }}
+      <div class="company ion-padding-horizontal fs13">
+        {{ professional.name }}
       </div>
     </div>
     <div *ngIf="professional?.rating" class="rating">
