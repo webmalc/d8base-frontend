@@ -5,7 +5,6 @@ import { CertificateComponent } from '@app/master/components/certificate/certifi
 import { EducationComponent } from '@app/master/components/education/education.component';
 import { ExperienceComponent } from '@app/master/components/experience/experience.component';
 import { MasterProfileCalendarComponent } from '@app/master/components/master-profile-calendar/master-profile-calendar.component';
-import { MasterProfileFactoryComponent } from '@app/master/components/master-profile-factory/master-profile-factory.component';
 import { MasterProfileInfoComponent } from '@app/master/components/master-profile-info/master-profile-info.component';
 import {
   MasterProfileMainInfoSectionComponent,
@@ -49,7 +48,6 @@ import { ProfessionalGuard } from './professional.guard';
   ],
   declarations: [
     MasterPage,
-    MasterProfileFactoryComponent,
     MasterProfileInfoComponent,
     MasterProfileServicesComponent,
     MasterProfileCalendarComponent,

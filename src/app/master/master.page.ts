@@ -20,8 +20,9 @@ import { map, takeUntil } from 'rxjs/operators';
 })
 export class MasterPage {
   public defaultTab: string = MasterProfileSubmenu.Info;
-  public tab: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
+  public tab$: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
   public editable$: Observable<boolean>;
+  public menu = MasterProfileSubmenu;
 
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
@@ -39,7 +40,7 @@ export class MasterPage {
   }
 
   public selectTab(tab: string): void {
-    this.tab.next(tab);
+    this.tab$.next(tab);
   }
 
   @Dispatch()

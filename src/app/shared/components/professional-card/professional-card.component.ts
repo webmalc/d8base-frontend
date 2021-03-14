@@ -20,6 +20,11 @@ export class ProfessionalCardComponent implements OnInit {
     this.getReviewsCount();
   }
 
+  public getName(): string {
+    const user = this.professional.user;
+    return user ? `${user.first_name} ${user.last_name}` : '';
+  }
+
   public declineReviews(num: number): string {
     return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
   }

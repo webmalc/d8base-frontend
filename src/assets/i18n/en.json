@@ -166,13 +166,10 @@
       "main_language": "Main Language",
       "languages": "Additional Language"
     },
-    "button": "Save"
-  },
-  "profile-page": {
+    "button": "Save",
     "profile": "Profile",
     "settings": "Settings",
     "plugins": "Plugins",
-    "contacts": "Contacts",
     "education": "Education",
     "bookmark": "Bookmarks",
     "add-new-contact": "Add new contact",
@@ -180,11 +177,11 @@
     "your-address": "Your address",
     "main-address": "Main address",
     "additional-address": "Additional address",
-    "about": "About",
     "age": "Birth date",
     "nationality": "Nationality",
     "languages": "Languages",
-    "not-specified": "Not specified"
+    "not-specified": "Not specified",
+    "email": "Email confirmed"
   },
   "profile-main-edit": {
     "main": "Main info"
@@ -425,8 +422,7 @@
     },
     "main-info": {
       "rating": "Professional rating",
-      "reviews": "Reviews",
-      "email": "Email confirmed"
+      "reviews": "Reviews"
     },
     "services": {
       "service-edit": {
@@ -473,7 +469,7 @@
       "add-new-certificate": "Add new certificate",
       "certificate-url": "Digital Certificate URL",
       "certificate-id": "Certificate ID",
-      "no-data": "There is no data"
+      "no-data": "Not specified"
     },
     "portfolio": {
       "gallery": "Gallery",
@@ -485,10 +481,10 @@
     },
     "edit-master": {
       "title": "Main",
-      "name": "Name",
-      "name-placeholder": "Enter name",
-      "description": "Description (expertise area)",
-      "description-placeholder": "Enter description (expertise area)",
+      "name": "Expertise area",
+      "name-placeholder": "Enter expertise area",
+      "description": "Description",
+      "description-placeholder": "Enter description",
       "company": "Company",
       "company-placeholder": "Enter company name",
       "experience": "Experience",
