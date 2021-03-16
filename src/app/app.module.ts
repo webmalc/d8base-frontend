@@ -5,15 +5,16 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router, RouteReuseStrategy } from '@angular/router';
 import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
 import { GeolocationService } from '@app/core/proxies/geolocation.service';
+import { LoadingIndicatorService, PlatformService, TitleService, TranslationService } from '@app/core/services';
 import { AuthInterceptor } from '@app/core/services/auth-interceptor.service';
 import { FcmDeviceService } from '@app/core/services/fcm-device.service';
 import { HeadersInterceptor } from '@app/core/services/headers-interceptor.service';
 import { LangInterceptorService } from '@app/core/services/lang-interceptor.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { IpApiService } from '@app/core/services/location/ip-api.service';
 import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
-import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { TimezoneInterceptor } from '@app/core/services/timezone-interceptor.service';
 import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
 import { SharedModule } from '@app/shared/shared.module';
@@ -112,4 +113,13 @@ import { StoreModule } from './store/store.module';
   bootstrap: [AppComponent],
 })
 export class AppModule {
+  // https://stackoverflow.com/questions/41215226/
+  // instantiating necessary services:
+  constructor(
+    private readonly platformService: PlatformService,
+    private readonly titleService: TitleService,
+    private readonly loadingIndicatorService: LoadingIndicatorService,
+    private readonly translationService: TranslationService,
+  ) {
+  }
 }

@@ -1,38 +1,20 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslationService } from '@app/core/services';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Storage } from '@ionic/storage';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
 
-  let statusBarSpy, splashScreenSpy;
-  let storageMock: Partial<Storage>;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(waitForAsync(() => {
-    statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
-    splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
-
-    storageMock = {
-      get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
-    };
-
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
         ...RootModules(),
         ComponentTestingModule,
-      ],
-      providers: [
-        { provide: StatusBar, useValue: statusBarSpy },
-        { provide: SplashScreen, useValue: splashScreenSpy },
-        { provide: Storage, useValue: storageMock },
       ],
     });
 
@@ -42,11 +24,6 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it('should initialize the app', async () => {
-    expect(statusBarSpy.styleDefault).toHaveBeenCalled();
-    expect(splashScreenSpy.hide).toHaveBeenCalled();
   });
 
   it('should be light mode by default', () => {
@@ -65,7 +42,4 @@ describe('AppComponent', () => {
       },
     );
   });
-
-  // TODO: add more tests!
-
 });
