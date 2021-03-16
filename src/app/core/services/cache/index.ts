@@ -5,3 +5,5 @@ export * from './regions-api-cache.service';
 export * from './subregion-api-cache.service';
 export * from './district-api-cache.service';
 export * from './cities-api-cache.service';
+export * from './languages-api-cache.service';
+export * from './user-languages-api-cache.service';

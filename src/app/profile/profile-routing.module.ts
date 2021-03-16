@@ -4,6 +4,7 @@ import { MainGuard } from '@app/core/guards/main.guard';
 import { AboutEditComponent } from '@app/profile/components/about-edit/about-edit.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
 import { ProfilePage } from '@app/profile/profile.page';
+import { ProfileResolver } from '@app/profile/profile.resolver';
 import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
 
 const routes: Routes = [
@@ -11,6 +12,9 @@ const routes: Routes = [
     path: '',
     component: ProfilePage,
     canActivate: [MainGuard],
+    resolve: {
+      profile: ProfileResolver,
+    },
   },
   {
     path: 'contact-edit/:contact-id',

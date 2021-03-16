@@ -32,6 +32,7 @@ import {
   ServiceWidgetComponent,
   DateIntervalEditorComponent,
   NotFoundPageComponent,
+  LanguageComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { AbstractLocationEditComponent } from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -133,6 +134,7 @@ import { IfSpinnerDirective } from './directives/if-spinner.directive';
     IfSpinnerDirective,
     CountryByIdPipe,
     NotFoundPageComponent,
+    LanguageComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -190,6 +192,7 @@ import { IfSpinnerDirective } from './directives/if-spinner.directive';
     IfSpinnerDirective,
     CountryByIdPipe,
     NotFoundPageComponent,
+    LanguageComponent,
   ],
   imports: [
     CommonModule,

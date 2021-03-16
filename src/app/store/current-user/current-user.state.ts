@@ -13,6 +13,7 @@ import { Storage } from '@ionic/storage';
 import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
+import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
 
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
@@ -126,6 +127,7 @@ export class CurrentUserState implements NgxsOnInit {
           new CurrentUserActions.LoadSettings(),
           new CurrentUserActions.LoadProfessionals(),
           new CurrentUserActions.LoadUserLocations(),
+          new UserLanguagesActions.LoadAllUserLanguages(),
         ]),
       ),
     );

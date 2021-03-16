@@ -139,10 +139,7 @@
           <h1>{{ 'master-profile.info.languages' | translate }}</h1>
         </ion-label>
       </ion-list-header>
-      <ion-item *ngFor="let language of languages$ | async">
-        <ion-icon name="checkmark-circle" color="success" slot="start"></ion-icon>
-        <ion-label>{{ language.name }}</ion-label>
-      </ion-item>
+      <app-language *ngFor="let language of context.user.languages" [language]="language"></app-language>
     </ion-list>
   </app-collapse-item>
 
