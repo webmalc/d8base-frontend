@@ -1,0 +1,6 @@
+<ion-button fill="clear" *ngIf="showProfessionalSaved$ | async" (click)="clicks$.next()">
+  <ion-icon *ngIf="isProfessionalSaved$ | async; else notSaved" color="danger" name="heart"></ion-icon>
+  <ng-template #notSaved>
+    <ion-icon color="medium" name="heart-outline"></ion-icon>
+  </ng-template>
+</ion-button>
