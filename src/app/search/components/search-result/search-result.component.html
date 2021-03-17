@@ -35,8 +35,10 @@
       <ion-item lines="none" class="ion-item-no-min-height master-location-title">
         {{ 'issuance.search-result.address' | translate }}
       </ion-item>
-      <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5 capitalize-first-letter">
-        {{ loc.address }}
+      <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5">
+        <ion-label class="capitalize-first-letter ion-text-wrap">
+          {{ loc.address }}
+        </ion-label>
       </ion-item>
     </div>
     <div class="bottom-buttons ion-padding-horizontal">

@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { Certificate } from '@app/master/models/certificate';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
@@ -49,7 +50,7 @@ export class CertificateEditComponent extends AbstractEditComponent<Certificate>
 
   protected transform(data: Certificate): Certificate {
     const trans: Certificate = plainToClass(Certificate, { ...data, ...this.form.getRawValue() });
-    trans.formatDate();
+    trans.date = fromDatetime(trans.date).date;
     if (trans.photo && (trans.photo.slice(0, 7) === 'http://' || trans.photo.slice(0, 8) === 'https://')) {
       delete trans.photo;
     }

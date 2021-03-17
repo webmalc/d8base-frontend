@@ -63,14 +63,6 @@ export class HelperService {
     return `global.rating.${  Math.round(rating).toString(10)}`;
   }
 
-
-  public static fromDatetime(datetime: string): { date: string; time: string } {
-    return {
-      date: datetime.slice(0, 10),
-      time: datetime.slice(11, 16),
-    };
-  }
-
   public static getNoAvatarLink(): string {
     return 'assets/images/profile/noavatar.jpeg';
   }
