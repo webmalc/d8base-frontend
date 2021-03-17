@@ -14,8 +14,9 @@ import * as ErrorMessages from './error-messages';
 const ERROR_TOAST_DURATION_MS = 3000;
 
 const filters: Predicate<HttpErrorResponse>[] = [
-  (response) => !response.url?.startsWith(environment.backend.url),
-  (response) => response.status === HttpCodes.HTTP_NOT_FOUND,
+  response => !response.url?.startsWith(environment.backend.url),
+  response => response.status === HttpCodes.HTTP_NOT_FOUND,
+  response => response.status === HttpCodes.HTTP_BAD_REQUEST && response.url.includes(environment.backend.messages_list),
 ];
 
 function isFiltered(response: HttpErrorResponse): boolean {
@@ -32,13 +33,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     private readonly router: Router,
     private readonly translate: TranslateService,
     @Inject(PLATFORM_ID) private readonly platformId: object,
-  ) {
-  }
+  ) {}
 
-  public intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+  public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
         this.handleHttpErrorResponse(httpErrorResponse);
@@ -72,8 +69,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     const error = response.error;
     const all = error.error?.__all__ || error.__all__;
     const messages: string[] = Array.isArray(all)
-      ? all : Array.isArray(error.password) ? error.password
-      : error.error_description ? [error.error_description] : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
+      ? all
+      : Array.isArray(error.password)
+      ? error.password
+      : error.error_description
+      ? [error.error_description]
+      : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
     if (messages.length > 0) {
       messages.forEach(message => this.showMessage(message));
     } else {
@@ -94,9 +95,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     if (isPlatformServer(this.platformId)) {
       console.error(message);
     } else {
-      this.toaster.create({ message, duration }).then(
-        toast => toast.present(),
-      );
+      this.toaster.create({ message, duration }).then(toast => toast.present());
     }
   }
 }
