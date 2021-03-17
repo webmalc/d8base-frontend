@@ -5,9 +5,9 @@ export function addMinutes(date: Date, minutes: number): Date {
 }
 
 export function addDays(date: Date, days: number): Date {
-    const newDate = new Date(date);
-    newDate.setDate(date.getDate() + days); // getDate() increments month if necessary
-    return newDate;
+  const newDate = new Date(date);
+  newDate.setDate(date.getDate() + days); // getDate() increments month if necessary
+  return newDate;
 }
 
 export function getMilliseconds(value: { minutes: number }): number {
@@ -47,6 +47,13 @@ export function getMonthDateString(date: Date | string): string {
   }
 
   return `${date.getFullYear()}-${getMonthNumberFormatted(date)}`;
+}
+
+export function fromDatetime(datetime: string): { date: string; time: string } {
+  return datetime ? {
+    date: datetime.slice(0, 10),
+    time: datetime.slice(11, 16),
+  } : { date: null, time: null };
 }
 
 function getMonthNumberFormatted(date: Date): string {

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { TranslationService } from '@app/core/services/translation.service';
 import { ContextMenuPopoverComponent } from '@app/message/components/context-menu-popover/context-menu-popover.component';
@@ -112,7 +113,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   }
 
   public timeFromDatetime(datetime: string): string {
-    return HelperService.fromDatetime(datetime).time;
+    return fromDatetime(datetime).time;
   }
 
   public getCheckmarkColor(message: Message): string {

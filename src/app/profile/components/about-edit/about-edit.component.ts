@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Language, Profile, UserLanguage } from '@app/api/models';
+import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { HelperService } from '@app/core/services/helper.service';
@@ -85,7 +86,7 @@ export class AboutEditComponent implements OnInit {
   public submitForm(): void {
     let date: string;
     if (this.form.value[this.formFields.Birthday]) {
-      date = HelperService.fromDatetime(this.form.value[this.formFields.Birthday]).date;
+      date = fromDatetime(this.form.value[this.formFields.Birthday]).date;
     }
     const data: Partial<Profile> = {
       birthday: date,

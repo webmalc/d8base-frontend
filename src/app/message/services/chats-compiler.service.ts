@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { LatestMessageInterface } from '@app/message/interfaces/latest-message-interface';
@@ -26,7 +27,7 @@ export class ChatsCompilerService {
           const abstractMessage: AbstractMessage = await this.getInterlocutorData(mes) as AbstractMessage;
           abstractMessage.body = mes.body;
           abstractMessage.is_read = mes.is_read;
-          abstractMessage.created = HelperService.fromDatetime(mes.created).time;
+          abstractMessage.created = fromDatetime(mes.created).time;
           abstractMessage.unread_count = await this.getUnreadCount(mes);
           res.push(abstractMessage);
         }
