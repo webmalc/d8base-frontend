@@ -17,6 +17,11 @@ export default class CurrentUserSelectors {
   }
 
   @Selector([CurrentUserState])
+  public static userId(data: CurrentUserStateModel): Profile['id'] | null {
+    return data.profile?.id;
+  }
+
+  @Selector([CurrentUserState])
   public static tokens(data: CurrentUserStateModel): AuthResponseInterface | null {
     return data.tokens;
   }

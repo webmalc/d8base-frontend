@@ -1,58 +1,52 @@
 <ion-card class="ion-no-margin ion-no-padding card">
   <ion-card-content class="no-horizontal-padding">
-    <ion-col class="ion-no-padding ion-no-margin">
-      <ion-row class="ion-justify-content-between ion-nowrap">
-        <app-professional-card *ngIf="data.professional" [professional]="data.professional" class="ion-margin-horizontal"></app-professional-card>
-      </ion-row>
-      <ion-row class="ion-margin-top ion-nowrap ion-justify-content-between">
-        <ion-item lines="none" class="services-title">
-          {{ 'issuance.search-result.services' | translate }}
-        </ion-item>
-        <ion-row class="ion-justify-content-end">
-          <ion-item *ngIf="data.professional.level" lines="none" class="master-level">
-            {{ 'global.professional-level.' + data.professional.level | translate }}
-          </ion-item>
-        </ion-row>
-      </ion-row>
-      <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
-        <ion-label>
-          {{ service.name }}
-        </ion-label>
-        <ion-note slot="end" class="ion-text-end">
-          <app-price [price]="service.price"></app-price>
-        </ion-note>
+    <app-professional-card
+      *ngIf="data.professional"
+      [professional]="data.professional"
+      class="ion-padding-horizontal"
+    ></app-professional-card>
+    <ion-item class="ion-margin-top ion-nowrap ion-justify-content-between" lines="none">
+      <ion-label class="services-title">
+        {{ 'issuance.search-result.services' | translate }}
+      </ion-label>
+      <ion-note *ngIf="data.professional.level" slot="end" class="master-level">
+        {{ 'global.professional-level.' + data.professional.level | translate }}
+      </ion-note>
+    </ion-item>
+    <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
+      <ion-label>
+        {{ service.name }}
+      </ion-label>
+      <ion-note slot="end">
+        <app-price [price]="service.price"></app-price>
+      </ion-note>
+    </ion-item>
+
+    <ion-item
+      *ngIf="needToRenderMoreServicesBtn()"
+      (click)="onMoreServicesClick()"
+      lines="none"
+      class="ion-item-no-min-height more-services cursor-pointer"
+    >
+      {{ 'issuance.search-result.more' | translate }}
+    </ion-item>
+
+    <div *ngIf="data.professional.locations.length" class="space-between-column">
+      <ion-item lines="none" class="ion-item-no-min-height master-location-title">
+        {{ 'issuance.search-result.address' | translate }}
       </ion-item>
-      <ion-row *ngIf="needToRenderMoreServicesBtn()">
-        <ion-item (click)="onMoreServicesClick()" lines="none" class="ion-item-no-min-height more-services cursor-pointer">
-          {{ 'issuance.search-result.more' | translate }}
-        </ion-item>
-      </ion-row>
-      <ion-row class="ion-margin-top ion-justify-content-between ion-nowrap">
-        <div class="space-between-column">
-          <ion-item lines="none" class="ion-item-no-min-height master-location-title">
-            {{ 'issuance.search-result.address' | translate }}
-          </ion-item>
-          <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5">
-            {{ loc.address }}
-          </ion-item>
-        </div>
-        <ion-row class="ion-justify-content-end ion-align-items-center select-button-lg">
-          <ion-item lines="none">
-            <ion-button size="medium" [routerLink]="'/message/chat/' + data.professional.user.id">
-              {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
-            </ion-button>
-          </ion-item>
-        </ion-row>
-      </ion-row>
+      <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5">
+        {{ loc.address }}
+      </ion-item>
+    </div>
+    <div class="bottom-buttons ion-padding-horizontal">
       <ion-button
-        class="select-button-sm"
-        expand="block"
-        fill="solid"
+        *ngIf="(userId$ | async) !== data.professional.user.id"
         size="medium"
-        [routerLink]="'/professional/' + data.professional.id"
+        [routerLink]="'/message/chat/' + data.professional.user.id"
       >
-        {{ 'issuance.search-result.select' | translate }}
+        {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
       </ion-button>
-    </ion-col>
+    </div>
   </ion-card-content>
 </ion-card>

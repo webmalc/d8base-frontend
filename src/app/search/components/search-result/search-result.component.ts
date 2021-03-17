@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Search, ServiceList } from '@app/api/models';
+import { Profile, Search, ServiceList } from '@app/api/models';
 import { HelperService } from '@app/core/services/helper.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-result',
@@ -8,6 +11,9 @@ import { HelperService } from '@app/core/services/helper.service';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent {
+  @Select(CurrentUserSelectors.userId)
+  public userId$: Observable<Profile['id']>;
+
   @Input() public data: Search;
   private isMoreServicesClicked: boolean = false;
 

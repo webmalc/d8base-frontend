@@ -1,0 +1,21 @@
+<app-header></app-header>
+<ion-content>
+  <app-content-wrapper>
+    <app-column-header>{{ 'saved-professionals.title' | translate }}</app-column-header>
+    <ng-container *appIfSpinner="savedProfessionals$ | async as savedProfessionals">
+      <ng-container *ngIf="savedProfessionals.length; else empty">
+        <app-professional-card
+          *ngFor="let savedProfessional of savedProfessionals"
+          [professional]="savedProfessional"
+          class="professional"
+        ></app-professional-card>
+      </ng-container>
+      <ng-template #empty>
+        <ion-item class="ion-text-center" lines="none">
+          {{ 'saved-professionals.empty' | translate }}
+        </ion-item>
+      </ng-template>
+    </ng-container>
+  </app-content-wrapper>
+  <app-footer></app-footer>
+</ion-content>

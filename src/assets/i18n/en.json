@@ -742,6 +742,10 @@
     "completed": "Completed",
     "canceled": "Canceled"
   },
+  "saved-professionals": {
+    "title": "Favorites",
+    "empty": "There is no favorites"
+  },
   "reviews": {
     "title": "Reviews",
     "edit-review": "Send review",
