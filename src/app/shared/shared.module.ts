@@ -32,6 +32,7 @@ import {
   ServiceLocationComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
+  LanguageComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { AbstractLocationEditComponent } from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
@@ -134,6 +135,7 @@ import { NumberDirective } from './directives/number.directive';
     IfSpinnerDirective,
     CountryByIdPipe,
     NotFoundPageComponent,
+    LanguageComponent,
     SavedProfessionalToggleComponent,
   ],
   exports: [
@@ -192,6 +194,7 @@ import { NumberDirective } from './directives/number.directive';
     IfSpinnerDirective,
     CountryByIdPipe,
     NotFoundPageComponent,
+    LanguageComponent,
     SavedProfessionalToggleComponent,
   ],
   imports: [

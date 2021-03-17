@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutEditComponent } from '@app/profile/components/about-edit/about-edit.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
-import { SettingsFormService } from '@app/profile/forms/settings-form.service';
 import { PluginApiService } from '@app/profile/services/plugin-api.service';
 import { ProfileService } from '@app/profile/services/profile.service';
 import { RegisterEmailApiService } from '@app/profile/services/register-email-api.service';
@@ -40,7 +39,6 @@ import { ProfilePage } from './profile.page';
     PluginApiService,
     ProfileService,
     UserContactApiService,
-    SettingsFormService,
     SavedProfessionalApiService,
     RegisterEmailApiService,
   ],

@@ -1,14 +1,12 @@
 <app-header></app-header>
-<ion-content>
+<ion-content *ngIf="profile$ | async as user">
   <app-content-wrapper>
-    <form *ngIf="profileService.avatarForm" [formGroup]="profileService.avatarForm">
-      <ion-row class="ion-justify-content-center">
-        <ion-col [sizeXs]="10" [sizeSm]="8" [sizeMd]="6" [sizeLg]="4" [sizeXl]="4">
-          <ion-img class="border-img" [src]="getAvatar()"></ion-img>
-          <app-picture-selector [camera]="true" [fileSystem]="true" [formControlName]="formFields.Avatar"> </app-picture-selector>
-        </ion-col>
-      </ion-row>
-    </form>
+    <ion-row class="ion-justify-content-center">
+      <ion-col [sizeXs]="10" [sizeSm]="8" [sizeMd]="6" [sizeLg]="4" [sizeXl]="4">
+        <ion-img class="border-img" [src]="avatar$ | async"></ion-img>
+        <app-picture-selector [camera]="true" [fileSystem]="true" [formControl]="avatarSelector"></app-picture-selector>
+      </ion-col>
+    </ion-row>
 
     <ion-item-divider color="light">
       <ion-label>
@@ -18,16 +16,14 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item *ngIf="user?.first_name || user?.last_name" lines="none"> {{user?.first_name}} {{user?.last_name}} </ion-item>
+    <ion-item *ngIf="user?.first_name || user?.last_name" lines="none">{{user?.first_name}} {{user?.last_name}}</ion-item>
     <ion-item lines="none">
       <ion-icon class="pr5" name="mail-outline"></ion-icon>
       <ion-label>Email</ion-label>
       {{user?.email}}
     </ion-item>
     <ion-item>
-      <ion-label>
-        {{ 'profile-form.email' | translate }}
-      </ion-label>
+      <ion-label> {{ 'profile-form.email' | translate }} </ion-label>
       <ion-icon *ngIf="user?.is_confirmed" color="success" name="checkmark-circle-outline" slot="end"></ion-icon>
       <ion-icon *ngIf="!user?.is_confirmed" color="danger" name="close-circle-outline" slot="end"></ion-icon>
     </ion-item>
@@ -52,7 +48,6 @@
           fill="clear"
           color="medium"
           routerLink="location-edit/{{(defaultLocation$ | async)?.id}}"
-          routerDirection="forward"
         >
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
@@ -65,8 +60,6 @@
           fill="clear"
           color="medium"
           routerLink="location-edit/{{location.id}}"
-          routerDirection="forward"
-          routerLinkActive="active"
         >
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
@@ -84,17 +77,19 @@
       </ion-button>
     </ion-item-divider>
     <ion-item lines="none">
-      <ion-label> {{'profile-form.age'|translate}} </ion-label>
+      <ion-label>{{'profile-form.age'|translate}}</ion-label>
       {{user?.birthday || ('profile-form.not-specified'|translate)}}
     </ion-item>
     <ion-item lines="none">
-      <ion-label> {{'profile-form.nationality'|translate}} </ion-label>
-      {{nationality?.name || ('profile-form.not-specified'|translate)}}
+      <ion-label>{{'profile-form.nationality'|translate}}</ion-label>
+      {{(user.nationality | countryById$ | async)?.name || ('profile-form.not-specified'|translate)}}
     </ion-item>
-    <ion-item lines="none">
-      <ion-label lines="none" class="ion-align-items-center"> {{'profile-form.languages'|translate}} </ion-label>
-      {{ languagesAsString$ | async }}
+    <ion-item lines="none" *ngIf="user.languages?.length">
+      <ion-label>
+        <h1>{{'profile-form.languages'|translate}}:</h1>
+      </ion-label>
     </ion-item>
+    <app-language *ngFor="let languageId of user.languages" [languageId]="languageId"></app-language>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

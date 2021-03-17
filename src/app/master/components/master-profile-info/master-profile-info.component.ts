@@ -4,12 +4,11 @@ import { CommunicationService } from '@app/api/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { Language } from '@app/profile/models/language';
-import { LanguagesApiService } from '@app/profile/services/languages-api.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
 import { forkJoin, Observable } from 'rxjs';
-import { filter, map, share, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, map, share, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-info',
@@ -31,14 +30,8 @@ export class MasterProfileInfoComponent {
   constructor(
     private readonly fullLocationService: FullLocationService,
     private readonly communicationService: CommunicationService,
-    languagesApi: LanguagesApiService,
   ) {
     this.contextFiltered$ = this.context$.pipe(filter(context => Boolean(context?.professional) && Boolean(context?.user)));
-
-    this.languages$ = this.contextFiltered$.pipe(
-      switchMap(({ user }) => languagesApi.getList(user.languages.map(lang => lang?.language))),
-      shareReplay(1),
-    );
 
     this.locations$ = this.contextFiltered$.pipe(
       switchMap(({ professional }) => forkJoin(professional.locations.map(x => this.fullLocationService.getTextLocation(x)))),
