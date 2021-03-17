@@ -24,6 +24,12 @@ export const mainMenuItems: MainMenuItem[] = [
     link: '/search',
   },
   {
+    title: 'template.favorites',
+    icon: 'heart-outline',
+    link: '/saved-professionals',
+    userOnly: true,
+  },
+  {
     title: 'template.my-orders',
     icon: 'calendar-outline',
     link: '/my-orders/inbox',

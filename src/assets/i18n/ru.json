@@ -742,6 +742,10 @@
     "completed": "Выполнен",
     "canceled": "Отменён"
   },
+  "saved-professionals": {
+    "title": "Избранное",
+    "empty": "Список пуст"
+  },
   "reviews": {
     "title": "Отзывы",
     "edit-review": "Отправить отзыв",

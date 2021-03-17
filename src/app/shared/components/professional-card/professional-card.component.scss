@@ -1,17 +1,14 @@
 :host {
-  display: block;
-  .like {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-  }
+  display: flex;
+  position: relative;
+  justify-content: space-between;
   .content {
     display: flex;
     .avatar {
       border-radius: 9px;
       overflow: hidden;
-      height: 100px;
-      width: 100px;
+      --size: 100px;
+      flex-shrink: 0;
     }
     .info {
       display: flex;

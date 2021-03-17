@@ -1,5 +1,7 @@
 <div class="content">
-  <ion-img class="avatar" [src]="professional.user?.avatar || defaultAvatar"></ion-img>
+  <ion-thumbnail class="avatar">
+    <ion-img [src]="professional.user?.avatar || defaultAvatar"></ion-img>
+  </ion-thumbnail>
   <div class="info">
     <div class="title">
       <a [routerLink]="'/professional/' + professional.id" class="ion-padding-horizontal fs16">
@@ -23,3 +25,4 @@
     </div>
   </div>
 </div>
+<app-saved-professional-toggle [professionalId]="professional.id" class="like"></app-saved-professional-toggle>

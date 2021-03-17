@@ -8,6 +8,7 @@ import {
   ClientWidgetComponent,
   ColumnHeaderComponent,
   ContentWrapperComponent,
+  DateIntervalEditorComponent,
   DaySelectorComponent,
   DurationEditorComponent,
   DurationViewerComponent,
@@ -19,6 +20,7 @@ import {
   LocationViewerComponent,
   MainMenuComponent,
   MoreInfoComponent,
+  NotFoundPageComponent,
   OrderDetailsComponent,
   PaymentMethodViewerComponent,
   PhotoPopoverComponent,
@@ -30,8 +32,6 @@ import {
   ServiceLocationComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
-  DateIntervalEditorComponent,
-  NotFoundPageComponent,
   LanguageComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
@@ -52,7 +52,7 @@ import { ServicePublishAgreementComponent } from '@app/shared/components/service
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
 import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
-import { MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe, CountryByIdPipe } from '@app/shared/pipes';
+import { CountryByIdPipe, MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe } from '@app/shared/pipes';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
@@ -65,13 +65,14 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
 import { ImageCropPopoverComponent } from './components/picture-selector/image-cropper/image-crop-popover.component';
+import { SavedProfessionalToggleComponent } from './components/saved-professional-toggle/saved-professional-toggle.component';
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import { DebounceDirective } from './directives/debounce.directive';
+import { IfSpinnerDirective } from './directives/if-spinner.directive';
 import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
 import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
-import { IfSpinnerDirective } from './directives/if-spinner.directive';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { IfSpinnerDirective } from './directives/if-spinner.directive';
     CountryByIdPipe,
     NotFoundPageComponent,
     LanguageComponent,
+    SavedProfessionalToggleComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -193,6 +195,7 @@ import { IfSpinnerDirective } from './directives/if-spinner.directive';
     CountryByIdPipe,
     NotFoundPageComponent,
     LanguageComponent,
+    SavedProfessionalToggleComponent,
   ],
   imports: [
     CommonModule,

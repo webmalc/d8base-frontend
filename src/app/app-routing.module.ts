@@ -47,6 +47,11 @@ const routes: Routes = [
     path: 'reviews',
     loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule),
   },
+  {
+    path: 'saved-professionals',
+    loadChildren: () => import('./saved-professionals/saved-professionals.module').then(m => m.SavedProfessionalsModule),
+    canActivate: [MainGuard],
+  },
   { path: '**', component: NotFoundPageComponent },
 ];
 

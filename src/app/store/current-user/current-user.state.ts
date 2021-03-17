@@ -17,7 +17,9 @@ import * as UserLanguagesActions from '@app/store/current-user/user-language-sta
 
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
+import * as SavedUserProfessionalsActions from './saved-professionals/saved-professionals.actions';
 import { defaultState, guestState } from './current-user.constants';
+import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
@@ -26,7 +28,7 @@ const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 @State<CurrentUserStateModel>({
   name: 'currentUser',
   defaults: defaultState,
-  children: [UserLanguageState],
+  children: [UserLanguageState, UserSavedProfessionalState],
 })
 @Injectable()
 export class CurrentUserState implements NgxsOnInit {
@@ -88,12 +90,12 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.Logout)
-  public logout({ patchState }: StateContext<CurrentUserStateModel>): Observable<any> {
+  public logout({ setState }: StateContext<CurrentUserStateModel>): Observable<any> {
     return from(
       this.servicePublicationState
         .reset()
         .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
-        .then(() => patchState(guestState)),
+        .then(() => setState(guestState)),
     );
   }
 
@@ -128,6 +130,7 @@ export class CurrentUserState implements NgxsOnInit {
           new CurrentUserActions.LoadProfessionals(),
           new CurrentUserActions.LoadUserLocations(),
           new UserLanguagesActions.LoadAllUserLanguages(),
+          new SavedUserProfessionalsActions.LoadAllUserSavedProfessionals(),
         ]),
       ),
     );
