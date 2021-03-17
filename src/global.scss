@@ -361,6 +361,10 @@
   --ion-background-color: var(--ion-color-light);
 }
 
+.capitalize-first-letter:first-letter {
+  text-transform: uppercase;
+}
+
 section {
   margin-top: 1rem;
 }

@@ -6,7 +6,7 @@
 
 <ng-template #serviceDetails>
   <ion-item lines="none">
-    <div class="preserve-line-breaks">{{ service.description }}</div>
+    <div class="preserve-line-breaks capitalize-first-letter">{{ service.description }}</div>
   </ion-item>
   <app-service-photos [serviceId]="service.id"></app-service-photos>
   <ion-list>
