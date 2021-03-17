@@ -14,7 +14,7 @@
       </ion-note>
     </ion-item>
     <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
-      <ion-label>
+      <ion-label class="capitalize-first-letter">
         {{ service.name }}
       </ion-label>
       <ion-note slot="end">
@@ -35,7 +35,7 @@
       <ion-item lines="none" class="ion-item-no-min-height master-location-title">
         {{ 'issuance.search-result.address' | translate }}
       </ion-item>
-      <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5">
+      <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5 capitalize-first-letter">
         {{ loc.address }}
       </ion-item>
     </div>
