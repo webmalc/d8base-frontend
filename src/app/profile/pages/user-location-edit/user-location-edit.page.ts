@@ -28,6 +28,8 @@ export class UserLocationEditPage implements OnInit {
       this.api.accountsLocationsRead(this.locationId).subscribe(
         location => this.userLocation = location,
       );
+    } else {
+      this.userLocation = {};
     }
   }
 
