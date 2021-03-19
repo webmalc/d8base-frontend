@@ -42,6 +42,7 @@
     "back": "Назад",
     "forward": "Продолжить",
     "save": "Сохранить",
+    "cancel": "Отмена",
     "not-specified": "Не указано",
     "page-not-found": "Страница не найдена"
   },
@@ -499,10 +500,10 @@
   "location-edit-page": {
     "address": "Адрес",
     "country": "Страна",
-    "region": "Регион",
-    "subregion": "Субрегион",
+    "region": "Область",
+    "subregion": "Подобласть",
     "city": "Город",
-    "district": "Область",
+    "district": "Район",
     "postal-code": "Индекс",
     "timezone": "Временная зона",
     "remove-location": "Удалить",

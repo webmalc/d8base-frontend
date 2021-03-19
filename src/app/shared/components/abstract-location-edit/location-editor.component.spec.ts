@@ -11,16 +11,16 @@ import { SelectableCountryOnSearchService } from '../../services/selectable-coun
 import { SelectableDistrictOnSearchService } from '../../services/selectable-district-on-search.service';
 import { SelectableRegionOnSearchService } from '../../services/selectable-region-on-search.service';
 import { SelectableSubregionOnSearchService } from '../../services/selectable-subregion-on-search.service';
-import { AbstractLocationEditComponent } from './abstract-location-edit.component';
+import { LocationEditorComponent } from './location-editor.component';
 
 describe('AbstractLocationEditComponent', () => {
-  let component: AbstractLocationEditComponent;
-  let fixture: ComponentFixture<AbstractLocationEditComponent>;
+  let component: LocationEditorComponent;
+  let fixture: ComponentFixture<LocationEditorComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [AbstractLocationEditComponent],
+        declarations: [LocationEditorComponent],
         imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
         providers: [
           FormBuilder,
@@ -34,7 +34,7 @@ describe('AbstractLocationEditComponent', () => {
         ],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(AbstractLocationEditComponent);
+      fixture = TestBed.createComponent(LocationEditorComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

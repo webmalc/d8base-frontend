@@ -33,9 +33,14 @@ import {
   ServiceTitleComponent,
   ServiceWidgetComponent,
   LanguageComponent,
+  CountrySelectorComponent,
+  CitySelectorComponent,
+  RegionSelectorComponent,
+  SubregionSelectorComponent,
+  DistrictSelectorComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
-import { AbstractLocationEditComponent } from '@app/shared/components/abstract-location-edit/abstract-location-edit.component';
+import { LocationEditorComponent } from '@app/shared/components/abstract-location-edit/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
 import { DefaultLocationPopoverComponent } from '@app/shared/components/default-location-popover/default-location-popover.component';
@@ -90,7 +95,7 @@ import { NumberDirective } from './directives/number.directive';
     NumberDirective,
     ServicePublishAgreementComponent,
     AbstractContactsComponent,
-    AbstractLocationEditComponent,
+    LocationEditorComponent,
     RatingComponent,
     RatingFullStarComponent,
     RatingHalfStarComponent,
@@ -137,6 +142,11 @@ import { NumberDirective } from './directives/number.directive';
     NotFoundPageComponent,
     LanguageComponent,
     SavedProfessionalToggleComponent,
+    CountrySelectorComponent,
+    CitySelectorComponent,
+    RegionSelectorComponent,
+    SubregionSelectorComponent,
+    DistrictSelectorComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -153,7 +163,7 @@ import { NumberDirective } from './directives/number.directive';
     NumberDirective,
     ServicePublishAgreementComponent,
     AbstractContactsComponent,
-    AbstractLocationEditComponent,
+    LocationEditorComponent,
     RatingComponent,
     RatingFullStarComponent,
     RatingHalfStarComponent,

@@ -27,11 +27,11 @@ enum LocationFormFields {
 }
 
 @Component({
-  selector: 'app-abstract-location-edit',
-  templateUrl: './abstract-location-edit.component.html',
-  styleUrls: ['./abstract-location-edit.component.scss'],
+  selector: 'app-location-editor',
+  templateUrl: './location-editor.component.html',
+  styleUrls: ['./location-editor.component.scss'],
 })
-export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit, OnChanges {
+export class LocationEditorComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit, OnChanges {
   public readonly formFields = LocationFormFields;
   @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
   public timezoneList$: BehaviorSubject<Array<{ value: string; display_name: string }>> = new BehaviorSubject<

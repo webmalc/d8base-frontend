@@ -1,11 +1,11 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-abstract-location-edit
+    <app-location-editor
       (deleteEmitter)="delete($event.id)"
       (saveEmitter)="save($event)"
       [item]="userLocation"
       [transformFn]="transform"
-    ></app-abstract-location-edit>
+    ></app-location-editor>
   </app-content-wrapper>
 </ion-content>
