@@ -7,11 +7,6 @@ import { FullLocationService } from '@app/core/services/location/full-location.s
 import { TimezoneService } from '@app/core/services/timezone.service';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
-import { SelectableRegionOnSearchService } from '@app/shared/services/selectable-region-on-search.service';
-import { SelectableSubregionOnSearchService } from '@app/shared/services/selectable-subregion-on-search.service';
 import { BehaviorSubject } from 'rxjs';
 
 enum LocationFormFields {
@@ -27,20 +22,16 @@ enum LocationFormFields {
 }
 
 @Component({
-  selector: 'app-abstract-location-edit',
-  templateUrl: './abstract-location-edit.component.html',
-  styleUrls: ['./abstract-location-edit.component.scss'],
+  selector: 'app-location-editor',
+  templateUrl: './location-editor.component.html',
+  styleUrls: ['./location-editor.component.scss'],
 })
-export class AbstractLocationEditComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit, OnChanges {
+export class LocationEditorComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit, OnChanges {
   public readonly formFields = LocationFormFields;
   @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
   public timezoneList$: BehaviorSubject<Array<{ value: string; display_name: string }>> = new BehaviorSubject<
     Array<{ value: string; display_name: string }>
   >(null);
-  public isDistrictEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public isRegionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public isSubregionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public isCityEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public form: FormGroup = this.fb.group({
     [this.formFields.country]: [null, Validators.required],
     [this.formFields.region]: [{ value: null, disabled: true }],
@@ -56,11 +47,6 @@ export class AbstractLocationEditComponent extends AbstractEditComponent<ClientL
   constructor(
     protected readonly location: Location,
     protected readonly timezone: TimezoneService,
-    public readonly countrySelectable: SelectableCountryOnSearchService,
-    public readonly citySelectable: SelectableCityOnSearchService,
-    public readonly regionSelectable: SelectableRegionOnSearchService,
-    public readonly selectableSubregion: SelectableSubregionOnSearchService,
-    public readonly districtSelectable: SelectableDistrictOnSearchService,
     public readonly fullLocationService: FullLocationService,
     public readonly fb: FormBuilder,
   ) {

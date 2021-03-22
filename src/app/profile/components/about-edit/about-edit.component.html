@@ -13,19 +13,7 @@
           formControlName="{{ this.formFields.Birthday }}"
         ></ion-datetime>
       </ion-item>
-      <ion-item>
-        <ion-label color="medium" position="floating">
-          {{ 'profile-edit.nationality' | translate }}
-        </ion-label>
-        <ionic-selectable
-          (onSearch)="countriesSearch.onCountrySearch($event)"
-          [canSearch]="true"
-          formControlName="{{ this.formFields.Nationality }}"
-          itemTextField="name"
-          itemValueField="id"
-        >
-        </ionic-selectable>
-      </ion-item>
+      <app-country-selector formControlName="{{ this.formFields.Nationality }}"></app-country-selector>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'profile-edit.languages' | translate }}

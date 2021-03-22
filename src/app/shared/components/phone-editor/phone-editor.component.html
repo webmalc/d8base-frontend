@@ -1,0 +1,10 @@
+<ion-item>
+  <ion-label color="medium" position="floating">{{ 'registration-form.phone' | translate }}</ion-label>
+  <ion-input
+    (ionBlur)="onPhoneBlur($event.target.value)"
+    (ionInput)="onPhoneInputChange($event.target.value)"
+    (ionChange)="onPhoneChange($event.target.value)"
+    (ionFocus)="onPhoneFocus($event.target.value)"
+    [formControl]="innerControl"
+  ></ion-input>
+</ion-item>

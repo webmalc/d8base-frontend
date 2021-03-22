@@ -42,6 +42,7 @@
     "forward": "Forward",
     "back": "Back",
     "save": "Save",
+    "cancel": "Cancel",
     "not-specified": "Not specified",
     "page-not-found": "Page not found"
   },
