@@ -27,4 +27,5 @@ export * from './column-header/column-header.component';
 export * from './date-interval-editor/date-interval-editor.component';
 export * from './not-found-page/not-found-page.component';
 export * from './language/language.component';
-export * from './abstract-location-edit';
+export * from './location-editor';
+export * from './phone-editor/phone-editor.component';

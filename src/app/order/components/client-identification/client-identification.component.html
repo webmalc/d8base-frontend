@@ -49,20 +49,7 @@
               </ion-label>
               <ion-input [formControl]="name"></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="stacked" class="ion-text-wrap">
-                {{ 'registration-form.country' | translate }}
-              </ion-label>
-              <ionic-selectable
-                id="country-selectable"
-                itemValueField="id"
-                itemTextField="name"
-                [canSearch]="true"
-                [formControl]="country"
-                (onSearch)="countrySelectable.onCountrySearch($event)"
-              >
-              </ionic-selectable>
-            </ion-item>
+            <app-country-selector [formControl]="country"></app-country-selector>
           </ng-container>
         </ion-col>
       </ion-row>

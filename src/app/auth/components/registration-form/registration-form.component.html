@@ -22,44 +22,10 @@
     <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
     <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
   </ion-item>
-  <app-form-control-error [controlName]="formFields.Name"> </app-form-control-error>
-  <ion-item>
-    <ion-label color="medium" position="floating">{{ 'registration-form.phone' | translate }}</ion-label>
-    <ion-input
-      (ionBlur)="onPhoneBlur($event.target.value)"
-      (ionInput)="onPhoneInputChange($event.target.value)"
-      (ionChange)="onPhoneChange($event.target.value)"
-      (ionFocus)="onPhoneFocus($event.target.value)"
-      type="text"
-      name="phone"
-      [formControlName]="formFields.Phone"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.country' | translate }}</ion-label>
-    <ionic-selectable
-      id="country-selectable"
-      itemValueField="id"
-      itemTextField="name"
-      [canSearch]="true"
-      [formControlName]="formFields.Country"
-      (onSearch)="countrySelectable.onCountrySearch($event)"
-      (onChange)="onCountryChange()"
-    >
-    </ionic-selectable>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium" position="floating">{{ 'registration-form.city' | translate }}</ion-label>
-    <ionic-selectable
-      id="city-selectable"
-      itemValueField="id"
-      itemTextField="name"
-      [canSearch]="true"
-      [formControlName]="formFields.City"
-      (onSearch)="citySelectable.onCitySearch($event, form.get(formFields.Country).value)"
-    >
-    </ionic-selectable>
-  </ion-item>
+  <app-form-control-error [controlName]="formFields.Name"></app-form-control-error>
+  <app-phone-editor [formControlName]="formFields.Phone"></app-phone-editor>
+  <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
+  <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value"></app-city-selector>
   <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="form.invalid">{{
     'registration-form.register' | translate
   }}</ion-button>

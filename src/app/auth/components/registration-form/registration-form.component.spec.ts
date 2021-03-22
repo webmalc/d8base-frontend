@@ -1,28 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { User } from '@app/core/models/user';
 import { UserLocation } from '@app/core/models/user-location';
-import { IpApiService } from '@app/core/services/location/ip-api.service';
-import { IpDataService } from '@app/core/services/location/ip-data.service';
-import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
-import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-// https://github.com/angular/angularfire/issues/1259#issuecomment-549745894
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
 import { plainToClass } from 'class-transformer';
-import { IonicSelectableModule } from 'ionic-selectable';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
-import { CityPickerPopoverComponent } from '../city-picker-popover/city-picker-popover.component';
 import { RegistrationFormComponent } from './registration-form.component';
 
 describe('RegistrationFormComponent', () => {
@@ -35,27 +18,10 @@ describe('RegistrationFormComponent', () => {
       declarations: [
         RegistrationFormComponent,
         ErrorFlashbagComponent,
-        CityPickerPopoverComponent,
       ],
       imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule,
-        TranslateModule.forRoot(),
-        HttpClientTestingModule,
-        CommonModule,
-        IonicSelectableModule,
-      ],
-      providers: [
-        IpServicesHolderService,
-        IpApiService,
-        IpDataService,
-        IpnfDataService,
-        LocationAccuracy,
-        Geolocation,
-        SelectableCountryOnSearchService,
-        SelectableCityOnSearchService,
+        ...RootModules(),
+        ComponentTestingModule,
       ],
     }).compileComponents();
 
@@ -64,7 +30,6 @@ describe('RegistrationFormComponent', () => {
 
     fixture = TestBed.createComponent(RegistrationFormComponent);
     component = fixture.componentInstance;
-    component.ngOnInit();
     fixture.detectChanges();
   }));
 

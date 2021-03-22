@@ -38,9 +38,10 @@ import {
   RegionSelectorComponent,
   SubregionSelectorComponent,
   DistrictSelectorComponent,
+  PhoneEditorComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
-import { LocationEditorComponent } from '@app/shared/components/abstract-location-edit/location-editor.component';
+import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
 import { DefaultLocationPopoverComponent } from '@app/shared/components/default-location-popover/default-location-popover.component';
@@ -147,6 +148,7 @@ import { NumberDirective } from './directives/number.directive';
     RegionSelectorComponent,
     SubregionSelectorComponent,
     DistrictSelectorComponent,
+    PhoneEditorComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -206,6 +208,9 @@ import { NumberDirective } from './directives/number.directive';
     NotFoundPageComponent,
     LanguageComponent,
     SavedProfessionalToggleComponent,
+    CountrySelectorComponent,
+    CitySelectorComponent,
+    PhoneEditorComponent,
   ],
   imports: [
     CommonModule,
