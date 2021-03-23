@@ -1,12 +1,12 @@
-import { Location } from '@angular/common';
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { Certificate } from '@app/master/models/certificate';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 enum CertificateFormFields {
   name = 'name',
@@ -33,19 +33,21 @@ export class CertificateEditComponent extends AbstractEditComponent<Certificate>
     [this.formFields.photo]: [null],
   });
 
-  constructor(private readonly location: Location, private readonly fb: FormBuilder) {
+  public photo$: Observable<string>;
+
+  constructor(private readonly fb: FormBuilder) {
     super();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.item) {
-      this.form.patchValue(this.item ?? {});
+      const item = this.item ?? {};
+      this.form.patchValue(item);
+      this.photo$ = this.form.valueChanges.pipe(
+        startWith(item),
+        map(formValue => formValue[this.formFields.photo] || HelperService.getNoAvatarLink()),
+      );
     }
-  }
-
-  public getPhoto(): string | SafeResourceUrl {
-    const photo: string = this.form.get(this.formFields.photo).value;
-    return photo ?? HelperService.getNoAvatarLink();
   }
 
   protected transform(data: Certificate): Certificate {
