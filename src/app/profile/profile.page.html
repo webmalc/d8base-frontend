@@ -1,12 +1,12 @@
 <app-header></app-header>
 <ion-content *ngIf="profile$ | async as user">
   <app-content-wrapper>
-    <ion-row class="ion-justify-content-center">
-      <ion-col [sizeXs]="10" [sizeSm]="8" [sizeMd]="6" [sizeLg]="4" [sizeXl]="4">
-        <ion-img class="border-img" [src]="avatar$ | async"></ion-img>
-        <app-picture-selector [camera]="true" [fileSystem]="true" [formControl]="avatarSelector"></app-picture-selector>
-      </ion-col>
-    </ion-row>
+    <div class="thumbnail-container">
+      <ion-thumbnail class="profile-thumbnail">
+        <ion-img [src]="avatar$ | async"></ion-img>
+      </ion-thumbnail>
+      <app-picture-selector [camera]="true" [fileSystem]="true" [formControl]="avatarSelector"></app-picture-selector>
+    </div>
 
     <ion-item-divider color="light">
       <ion-label>
@@ -22,7 +22,7 @@
       <ion-label>Email</ion-label>
       {{user?.email}}
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label> {{ 'profile-form.email' | translate }} </ion-label>
       <ion-icon *ngIf="user?.is_confirmed" color="success" name="checkmark-circle-outline" slot="end"></ion-icon>
       <ion-icon *ngIf="!user?.is_confirmed" color="danger" name="close-circle-outline" slot="end"></ion-icon>
@@ -43,24 +43,14 @@
     <ion-item-group>
       <ion-item lines="none">
         <ion-label position="stacked"> {{'profile-form.main-address'|translate}} </ion-label>
-        <ion-button
-          slot="end"
-          fill="clear"
-          color="medium"
-          routerLink="location-edit/{{(defaultLocation$ | async)?.id}}"
-        >
+        <ion-button slot="end" fill="clear" color="medium" routerLink="location-edit/{{(defaultLocation$ | async)?.id}}">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <app-location-viewer [location]="defaultLocation$ | async"></app-location-viewer>
       </ion-item>
       <ion-item *ngFor="let location of (additionalLocationsList$|async)" lines="none">
         <ion-label position="stacked"> {{'profile-form.additional-address'|translate}} </ion-label>
-        <ion-button
-          slot="end"
-          fill="clear"
-          color="medium"
-          routerLink="location-edit/{{location.id}}"
-        >
+        <ion-button slot="end" fill="clear" color="medium" routerLink="location-edit/{{location.id}}">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <app-location-viewer [location]="location"></app-location-viewer>
