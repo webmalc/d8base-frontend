@@ -5,7 +5,7 @@
       <ion-thumbnail class="profile-thumbnail">
         <ion-img [src]="avatar$ | async"></ion-img>
       </ion-thumbnail>
-      <app-picture-selector [camera]="true" [fileSystem]="true" [formControl]="avatarSelector"></app-picture-selector>
+      <app-picture-selector [formControl]="avatarSelector"></app-picture-selector>
     </div>
 
     <ion-item-divider color="light">

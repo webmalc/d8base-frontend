@@ -1,5 +1,5 @@
-<app-column-header>{{ 'certificates-edit-page.back' | translate }}</app-column-header>
-<ng-container *ngIf="item">
+<app-column-header [previousLocationFallback]="'/professional'">{{ 'certificates-edit-page.back' | translate }}</app-column-header>
+<ng-container *appIfSpinner="item; ">
   <ion-item>
     <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'certificates-edit-page.name' | translate }}
@@ -39,9 +39,9 @@
       {{ 'certificates-edit-page.certificate-photo' | translate }}
     </ion-label>
     <ion-thumbnail class="app-thumb-mr100">
-      <ion-img [src]="getPhoto()"></ion-img>
+      <ion-img [src]="photo$ | async"></ion-img>
     </ion-thumbnail>
-    <app-picture-selector [formControl]="form.get(formFields.photo)" [camera]="true" [fileSystem]="true"> </app-picture-selector>
+    <app-picture-selector [formControl]="form.get(formFields.photo)" [cropAfterSelect]="false"> </app-picture-selector>
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">
     <ion-col size="6">

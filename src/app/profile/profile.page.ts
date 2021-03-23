@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Profile, UserLanguage } from '@app/api/models';
 import { UserLocation } from '@app/core/models/user-location';
 import { NgDestroyService } from '@app/core/services';
+import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileService } from '@app/profile/services/profile.service';
 import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
@@ -44,7 +45,7 @@ export class ProfilePage {
   ) {
     this.avatar$ = this.profile$.pipe(
       filter(x => !!x),
-      map(profile => profile.avatar),
+      map(profile => profile.avatar || HelperService.getNoAvatarLink()),
     );
     this.contacts$ = this.getContacts();
     this.subOnAvatarChange();
