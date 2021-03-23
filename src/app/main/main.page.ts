@@ -6,6 +6,7 @@ import { DefaultCategoryList } from '@app/main/enums/default-category-list';
 import { MainPageSearchInterface } from '@app/main/interfaces/main-page-search-interface';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
+import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -15,7 +16,6 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-
   public searchData: MainPageSearchInterface;
   public locationEnabled = false;
   public defaultCategoryList = DefaultCategoryList;
@@ -24,6 +24,7 @@ export class MainPage implements OnInit {
     private readonly currentLocation: CurrentLocationCompilerService,
     private readonly router: Router,
     private readonly defaultCategory: DefaultCategoriesFactoryService,
+    public readonly stateManager: SearchFilterStateService,
   ) {
   }
 
@@ -74,7 +75,6 @@ export class MainPage implements OnInit {
       );
     }
   }
-
 
   public searchDisabled(): boolean {
     return !(this.searchData.needle && true);
