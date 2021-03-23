@@ -4,9 +4,11 @@ import { SearchLocationDataInterface } from '@app/main/interfaces/search-locatio
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 import { Observable, ReplaySubject } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SearchFilterStateService {
   public data: SearchFilterStateInterface = this.getDefaultData();
+  public minDate: string;
+  public maxDate: string;
   private readonly doSearch$ = new ReplaySubject<void>(1);
 
   public get isDoingSearch$(): Observable<void> {
@@ -17,6 +19,7 @@ export class SearchFilterStateService {
     this.doSearch$.subscribe(() => {
       this.router.navigate(['/search']);
     });
+    this.setMinMaxDates();
   }
 
   public doSearch(): void {
@@ -29,6 +32,13 @@ export class SearchFilterStateService {
 
   public clear(): void {
     this.data = this.getDefaultData();
+  }
+
+  private setMinMaxDates(): void {
+    const now = new Date(Date.now());
+    const limitOfYearsInFuture = 5;
+    this.minDate = now.toISOString();
+    this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
   }
 
   private getDefaultData(): SearchFilterStateInterface {

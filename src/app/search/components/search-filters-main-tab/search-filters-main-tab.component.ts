@@ -23,8 +23,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
   public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
   public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
   public currencyList: Currency[] = [];
-  public minDate: string;
-  public maxDate: string;
 
   constructor(
     private readonly professionalsApi: ProfessionalsService,
@@ -41,7 +39,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
   public ngOnInit(): void {
     this.getCategories();
     this.getCurrencies();
-    this.setMinMaxDates();
   }
 
   public async initLocationPopover(): Promise<void> {
@@ -123,12 +120,5 @@ export class SearchFiltersMainTabComponent implements OnInit {
         );
         this.cd.markForCheck();
       });
-  }
-
-  private setMinMaxDates(): void {
-    const now = new Date(Date.now());
-    const limitOfYearsInFuture = 5;
-    this.minDate = now.toISOString();
-    this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
   }
 }

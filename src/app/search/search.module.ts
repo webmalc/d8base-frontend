@@ -40,6 +40,5 @@ import { SearchPageRoutingModule } from './search-routing.module';
     SearchResultComponent,
   ],
   exports: [SearchFiltersComponent],
-  providers: [SearchFilterStateService],
 })
 export class SearchPageModule {}
