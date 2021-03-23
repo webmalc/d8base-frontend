@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { HelperService } from '@app/core/services/helper.service';
 import { FileService } from '@app/shared/services/file.service';
 import { PhotoService } from '@app/shared/services/photo.service';
 import { CameraPhoto } from '@capacitor/core';
@@ -10,16 +11,18 @@ import { ImageCropPopoverComponent } from './image-cropper/image-crop-popover.co
   selector: 'app-picture-selector',
   templateUrl: './picture-selector.component.html',
   styleUrls: ['./picture-selector.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => PictureSelectorComponent),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => PictureSelectorComponent),
+      multi: true,
+    },
+  ],
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
-
   @Input() public camera: boolean = true;
   @Input() public fileSystem: boolean = true;
+  @Input() public cropAfterSelect: boolean = true;
   @ViewChild('file', { read: ElementRef }) public fileInput: ElementRef<IonInput>;
   @Output() public value: EventEmitter<string> = new EventEmitter<string>();
 
@@ -27,11 +30,8 @@ export class PictureSelectorComponent implements ControlValueAccessor {
   private onChange: (fn: any) => void;
 
   constructor(
-    private readonly photoService: PhotoService,
-    private readonly fileService: FileService,
     private readonly popoverController: PopoverController,
-  ) {
-  }
+  ) {}
 
   public async openAndSelectFile(): Promise<void> {
     const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement();
@@ -39,26 +39,17 @@ export class PictureSelectorComponent implements ControlValueAccessor {
   }
 
   public onFileSelected(event: Event): Promise<void> {
-    const file = (event.target as HTMLInputElement).files[0];
+    const file: File = (event.target as HTMLInputElement).files[0];
     if (!file) {
-
+      return Promise.reject();
+    }
+    if (!this.cropAfterSelect) {
+      HelperService.getImgBase64(file).then((base64) => {
+        this.setUri(base64);
+      });
       return Promise.resolve();
-    }
-
+     }
     return this.cropAndSave(file);
-  }
-
-  public async createCameraSnap(): Promise<void> {
-    let oldUri: string;
-    try {
-      oldUri = this.uri;
-      this.clearUri();
-      const cameraPhoto: CameraPhoto = await this.photoService.createPhoto();
-      const blob = await fetch(cameraPhoto.webPath).then(r => r.blob());
-      await this.cropAndSave(blob);
-    } catch (error) {
-      this.setUri(oldUri);
-    }
   }
 
   public registerOnChange(fn: any): void {
@@ -75,6 +66,10 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
   public writeValue(uri: string): void {
     this.uri = uri;
+  }
+
+  public onDelete(): void {
+    this.clearUri();
   }
 
   private async cropAndSave(image: Blob): Promise<void> {
