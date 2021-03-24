@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
+import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
 import { City } from '@app/profile/models/city';
@@ -8,8 +9,6 @@ import { Country } from '@app/profile/models/country';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
 import { ServicePublishStepFourFormService } from '@app/service/forms/service-publish-step-four-form.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
@@ -20,8 +19,9 @@ import ServicePublishStepFourContext from './service-publish-step-four-context.i
   selector: 'app-service-publish-step-four',
   templateUrl: './service-publish-step-four.component.html',
   styleUrls: ['./service-publish-step-four.component.scss'],
+  providers: [NgDestroyService],
 })
-export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
+export class ServicePublishStepFourComponent implements OnInit {
 
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
@@ -32,16 +32,14 @@ export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
   public isUserExists: boolean = false;
   private readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly emailChanged$: Subject<void> = new Subject<void>();
-  private readonly destroy$ = new Subject<void>();
 
   constructor(
     public formService: ServicePublishStepFourFormService,
-    private readonly isRegisteredApi: IsUserRegisteredApiService,
-    public authenticationService: AuthenticationService,
     public serviceStepsNavigationService: ServiceStepsNavigationService,
+    private readonly authenticationService: AuthenticationService,
+    private readonly isRegisteredApi: IsUserRegisteredApiService,
     private readonly registrationService: RegistrationService,
-    public readonly countrySelectable: SelectableCountryOnSearchService,
-    public readonly citySelectable: SelectableCityOnSearchService,
+    private readonly destroy$: NgDestroyService,
   ) {
     this.context$ = combineLatest([
       authenticationService.isAuthenticated$,
@@ -56,11 +54,6 @@ export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
     if (this.formService.isEmailValid()) {
       this.emailChanged$.next();
     }
-  }
-
-  public onCountryChange(): void {
-    this.formService.setControlDisabled(false, this.formFields.City);
-    this.formService.form.get(this.formFields.City).reset();
   }
 
   public getCountryValue(): Country {
@@ -112,12 +105,19 @@ export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-  }
-
   public ngOnInit(): void {
     this.formService.createForm();
+    this.subscribeOnCountryChanges();
+    this.subscribeOnEmailChanges();
+  }
+
+  private subscribeOnProfile(): void {
+    this.profile$.pipe(
+      first(x => !!x),
+    ).subscribe(() => this.serviceStepsNavigationService.next());
+  }
+
+  private subscribeOnEmailChanges(): void {
     this.emailChanged$.pipe(
       switchMap(() => this.isRegisteredApi.isEmailRegistered(this.formService.form.get(this.formFields.Email).value)),
       takeUntil(this.destroy$),
@@ -127,9 +127,14 @@ export class ServicePublishStepFourComponent implements OnInit, OnDestroy {
     });
   }
 
-  private subscribeOnProfile(): void {
-    this.profile$.pipe(
-      first(x => !!x),
-    ).subscribe(() => this.serviceStepsNavigationService.next());
+  private subscribeOnCountryChanges(): void {
+    this.formService.form.get(this.formFields.Country).valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onCountryChanged());
+  }
+
+  private onCountryChanged(): void {
+    this.formService.setControlDisabled(false, this.formFields.City);
+    this.formService.form.get(this.formFields.City).reset();
   }
 }

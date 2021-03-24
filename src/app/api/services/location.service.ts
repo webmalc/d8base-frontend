@@ -22,8 +22,8 @@ import { Subregion } from '../models/subregion';
 class LocationService extends __BaseService {
   static readonly locationAlternativeNamesListPath = '/location/alternative-names/';
   static readonly locationAlternativeNamesReadPath = '/location/alternative-names/{id}/';
-  static readonly locationCitesListPath = '/location/cites/';
-  static readonly locationCitesReadPath = '/location/cites/{id}/';
+  static readonly locationCitesListPath = '/location/cities/';
+  static readonly locationCitesReadPath = '/location/cities/{id}/';
   static readonly locationContinentsListPath = '/location/continents/';
   static readonly locationContinentsReadPath = '/location/continents/{id}/';
   static readonly locationCountriesListPath = '/location/countries/';
@@ -204,7 +204,7 @@ class LocationService extends __BaseService {
     if (params.byName != null) __params = __params.set('by_name', params.byName.toString());
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/cites/`,
+      this.rootUrl + `/location/cities/`,
       __body,
       {
         headers: __headers,
@@ -258,7 +258,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/cites/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/cities/${encodeURIComponent(id)}/`,
       __body,
       {
         headers: __headers,
