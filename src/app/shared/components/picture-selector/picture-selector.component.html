@@ -1,18 +1,10 @@
 <ion-buttons class="ion-justify-content-center">
-  <ion-item lines="none" class="ion-item-default-bgc" *ngIf="fileSystem">
-    <ion-button appDebounce (debounceClick)="openAndSelectFile()" id="file-button">
-      <ion-icon class="file-picker-icon" name="folder-outline"></ion-icon>
+  <ion-item lines="none" class="ion-item-default-bgc">
+    <ion-button appDebounce (debounceClick)="inputFile.click()" id="file-button">
+      <ion-icon name="camera-outline"></ion-icon>
     </ion-button>
-    <ion-input
-      accept="image/x-png,image/gif,image/jpeg"
-      (change)="onFileSelected($event)"
-      #file
-      class="file-picker-input"
-      name="file"
-      type="file"
-      id="file-picker"
-    ></ion-input>
-    <ion-button id="camera-button" type="button" (click)="onDelete()">
+    <input type="file" #inputFile class="file-picker-input" accept="image/x-png,image/gif,image/jpeg" (change)="onFileSelected($event)" />
+    <ion-button (click)="onDelete()">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
   </ion-item>

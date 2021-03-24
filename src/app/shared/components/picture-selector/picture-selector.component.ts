@@ -1,10 +1,7 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HelperService } from '@app/core/services/helper.service';
-import { FileService } from '@app/shared/services/file.service';
-import { PhotoService } from '@app/shared/services/photo.service';
-import { CameraPhoto } from '@capacitor/core';
-import { IonInput, PopoverController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { ImageCropPopoverComponent } from './image-cropper/image-crop-popover.component';
 
 @Component({
@@ -20,10 +17,7 @@ import { ImageCropPopoverComponent } from './image-cropper/image-crop-popover.co
   ],
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
-  @Input() public camera: boolean = true;
-  @Input() public fileSystem: boolean = true;
   @Input() public cropAfterSelect: boolean = true;
-  @ViewChild('file', { read: ElementRef }) public fileInput: ElementRef<IonInput>;
   @Output() public value: EventEmitter<string> = new EventEmitter<string>();
 
   public uri: string | null;
@@ -32,11 +26,6 @@ export class PictureSelectorComponent implements ControlValueAccessor {
   constructor(
     private readonly popoverController: PopoverController,
   ) {}
-
-  public async openAndSelectFile(): Promise<void> {
-    const input: HTMLInputElement = await this.fileInput.nativeElement.getInputElement();
-    input.click();
-  }
 
   public onFileSelected(event: Event): Promise<void> {
     const file: File = (event.target as HTMLInputElement).files[0];
