@@ -20,7 +20,7 @@ export class ServicePublishStepFourFormService {
         [ServicePublishStepFourFormFields.Password]: [null, passwordValidators],
         [ServicePublishStepFourFormFields.Confirm]: [null, passwordValidators],
         [ServicePublishStepFourFormFields.Country]: [null, Validators.required],
-        [ServicePublishStepFourFormFields.City]: [null, Validators.required],
+        [ServicePublishStepFourFormFields.City]: [{ value: null, disabled: true }, Validators.required],
       },
       { validators: confirmPasswordValidator(ServicePublishStepFourFormFields.Password, ServicePublishStepFourFormFields.Confirm) });
   }
