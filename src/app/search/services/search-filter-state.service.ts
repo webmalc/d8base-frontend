@@ -30,6 +30,10 @@ export class SearchFilterStateService {
     this.data.main.location = data;
   }
 
+  public setDate(datetime: SearchFilterStateInterface['main']['datetime']): void {
+    this.data.main.datetime = datetime;
+  }
+
   public clear(): void {
     this.data = this.getDefaultData();
   }

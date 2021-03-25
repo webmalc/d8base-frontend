@@ -60,12 +60,15 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   }
 
   public init(): void {
-    if (this.location.getState().hasOwnProperty('data')) {
-      this.state.setLocationData((this.location.getState() as { data: MainPageSearchInterface }).data.location);
-      this.searchNeedle = (this.location.getState() as { data: MainPageSearchInterface }).data.needle;
+    const state = this.location.getState();
+    if (state.hasOwnProperty('data')) {
+      const data = (state as { data: MainPageSearchInterface }).data;
+      this.state.setLocationData(data.location);
+      this.state.setDate(data.datetime);
+      this.searchNeedle = data.needle;
       this.doSearch();
-    } else if (this.location.getState().hasOwnProperty('category') && this.location.getState().hasOwnProperty('location')) {
-      const data = this.location.getState() as { category: Category; location: SearchLocationDataInterface };
+    } else if (state.hasOwnProperty('category') && state.hasOwnProperty('location')) {
+      const data = state as { category: Category; location: SearchLocationDataInterface };
       this.state.setLocationData(data.location);
       this.state.data.main.category = [data.category];
       this.doSearch();

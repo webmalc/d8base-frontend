@@ -87,8 +87,10 @@ export class MainPage implements OnInit {
   private initSearchData(): void {
     this.searchData = {
       needle: undefined,
-      date: undefined,
-      time: undefined,
+      datetime: {
+        from: undefined,
+        to: undefined,
+      },
       location: {
         coordinates: undefined,
         country: undefined,
