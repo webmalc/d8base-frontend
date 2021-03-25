@@ -632,6 +632,8 @@
   },
   "main-page": {
     "search-placeholder": "Find service",
+    "date-from": "Date from",
+    "date-to": "Date to",
     "any-date": "Any date",
     "any-time": "Any time",
     "current-location": "Current location",
