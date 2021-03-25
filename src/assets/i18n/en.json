@@ -440,7 +440,8 @@
         "more-info": "More info"
       },
       "services-tab": {
-        "master-services": "Professional services"
+        "master-services": "Professional services",
+        "add-new-service": "add new service"
       }
     },
     "info": {

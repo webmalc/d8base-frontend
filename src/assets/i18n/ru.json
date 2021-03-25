@@ -440,7 +440,8 @@
         "more-info": "Подробнее"
       },
       "services-tab": {
-        "master-services": "Услуги мастера"
+        "master-services": "Услуги мастера",
+        "add-new-service": "добавить услугу"
       }
     },
     "info": {
