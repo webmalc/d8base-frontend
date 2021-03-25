@@ -2,7 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <app-column-header [previousLocationFallback]="'/profile'">{{ 'profile-edit.about' | translate }}</app-column-header>
-    <form *ngIf="form" [formGroup]="form">
+    <form *appIfSpinner="form" [formGroup]="form">
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'profile-edit.birthday' | translate }}
