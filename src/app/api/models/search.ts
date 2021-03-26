@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { ProfessionalList } from './professional-list';
+import { SearchProfessional } from './search-professional';
 import { ServiceList } from './service-list';
 export interface Search {
-  professional?: ProfessionalList;
+  professional?: SearchProfessional;
   services?: Array<ServiceList>;
 }

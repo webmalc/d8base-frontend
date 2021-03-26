@@ -65,7 +65,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional rating
      */
-    rating: data?.additional?.rating,
+    ratingFrom: data?.additional?.rating,
 
     /**
      * search term query param

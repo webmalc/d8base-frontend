@@ -21,6 +21,7 @@ import { ProfessionalEducation } from '../models/professional-education';
 import { ProfessionalExperience } from '../models/professional-experience';
 import { ProfessionalLocation } from '../models/professional-location';
 import { ProfessionalPhoto } from '../models/professional-photo';
+import { ProfessionalSchedulePeriod } from '../models/professional-schedule-period';
 import { ProfessionalSchedule } from '../models/professional-schedule';
 import { ProfessionalTag } from '../models/professional-tag';
 import { Professional } from '../models/professional';
@@ -36,6 +37,7 @@ import { ServiceClosedPeriod } from '../models/service-closed-period';
 import { ServiceLocation } from '../models/service-location';
 import { ServicePhoto } from '../models/service-photo';
 import { Price } from '../models/price';
+import { ServiceSchedulePeriod } from '../models/service-schedule-period';
 import { ServiceSchedule } from '../models/service-schedule';
 import { ServiceTag } from '../models/service-tag';
 import { Service } from '../models/service';
@@ -123,6 +125,12 @@ class AccountsService extends __BaseService {
   static readonly accountsProfessionalPhotosUpdatePath = '/accounts/professional-photos/{id}/';
   static readonly accountsProfessionalPhotosPartialUpdatePath = '/accounts/professional-photos/{id}/';
   static readonly accountsProfessionalPhotosDeletePath = '/accounts/professional-photos/{id}/';
+  static readonly accountsProfessionalSchedulePeriodsListPath = '/accounts/professional-schedule-periods/';
+  static readonly accountsProfessionalSchedulePeriodsCreatePath = '/accounts/professional-schedule-periods/';
+  static readonly accountsProfessionalSchedulePeriodsReadPath = '/accounts/professional-schedule-periods/{id}/';
+  static readonly accountsProfessionalSchedulePeriodsUpdatePath = '/accounts/professional-schedule-periods/{id}/';
+  static readonly accountsProfessionalSchedulePeriodsPartialUpdatePath = '/accounts/professional-schedule-periods/{id}/';
+  static readonly accountsProfessionalSchedulePeriodsDeletePath = '/accounts/professional-schedule-periods/{id}/';
   static readonly accountsProfessionalScheduleListPath = '/accounts/professional-schedule/';
   static readonly accountsProfessionalScheduleCreatePath = '/accounts/professional-schedule/';
   static readonly accountsProfessionalScheduleSetPath = '/accounts/professional-schedule/set/';
@@ -195,6 +203,12 @@ class AccountsService extends __BaseService {
   static readonly accountsServicePricesUpdatePath = '/accounts/service-prices/{id}/';
   static readonly accountsServicePricesPartialUpdatePath = '/accounts/service-prices/{id}/';
   static readonly accountsServicePricesDeletePath = '/accounts/service-prices/{id}/';
+  static readonly accountsServiceSchedulePeriodsListPath = '/accounts/service-schedule-periods/';
+  static readonly accountsServiceSchedulePeriodsCreatePath = '/accounts/service-schedule-periods/';
+  static readonly accountsServiceSchedulePeriodsReadPath = '/accounts/service-schedule-periods/{id}/';
+  static readonly accountsServiceSchedulePeriodsUpdatePath = '/accounts/service-schedule-periods/{id}/';
+  static readonly accountsServiceSchedulePeriodsPartialUpdatePath = '/accounts/service-schedule-periods/{id}/';
+  static readonly accountsServiceSchedulePeriodsDeletePath = '/accounts/service-schedule-periods/{id}/';
   static readonly accountsServiceScheduleListPath = '/accounts/service-schedule/';
   static readonly accountsServiceScheduleCreatePath = '/accounts/service-schedule/';
   static readonly accountsServiceScheduleSetPath = '/accounts/service-schedule/set/';
@@ -1377,7 +1391,7 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param params The `AccountsService.AccountsOrdersReceivedListParams` containing the following parameters:
    *
    * - `status__in`: Multiple values may be separated by commas.
@@ -1391,6 +1405,8 @@ class AccountsService extends __BaseService {
    * - `start_datetime__gt`:
    *
    * - `start_datetime`:
+   *
+   * - `source__in`: Multiple values may be separated by commas.
    *
    * - `service`:
    *
@@ -1424,6 +1440,7 @@ class AccountsService extends __BaseService {
     if (params.startDatetimeGte != null) __params = __params.set('start_datetime__gte', params.startDatetimeGte.toString());
     if (params.startDatetimeGt != null) __params = __params.set('start_datetime__gt', params.startDatetimeGt.toString());
     if (params.startDatetime != null) __params = __params.set('start_datetime', params.startDatetime.toString());
+    if (params.sourceIn != null) __params = __params.set('source__in', params.sourceIn.toString());
     if (params.service != null) __params = __params.set('service', params.service.toString());
     if (params.search != null) __params = __params.set('search', params.search.toString());
     if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
@@ -1453,7 +1470,7 @@ class AccountsService extends __BaseService {
     );
   }
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param params The `AccountsService.AccountsOrdersReceivedListParams` containing the following parameters:
    *
    * - `status__in`: Multiple values may be separated by commas.
@@ -1467,6 +1484,8 @@ class AccountsService extends __BaseService {
    * - `start_datetime__gt`:
    *
    * - `start_datetime`:
+   *
+   * - `source__in`: Multiple values may be separated by commas.
    *
    * - `service`:
    *
@@ -1497,7 +1516,7 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param id A unique integer value identifying this order.
    */
   accountsOrdersReceivedReadResponse(id: number): __Observable<__StrictHttpResponse<ReceivedOrder>> {
@@ -1523,7 +1542,7 @@ class AccountsService extends __BaseService {
     );
   }
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param id A unique integer value identifying this order.
    */
   accountsOrdersReceivedRead(id: number): __Observable<ReceivedOrder> {
@@ -1533,7 +1552,7 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param params The `AccountsService.AccountsOrdersReceivedUpdateParams` containing the following parameters:
    *
    * - `id`: A unique integer value identifying this order.
@@ -1564,7 +1583,7 @@ class AccountsService extends __BaseService {
     );
   }
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param params The `AccountsService.AccountsOrdersReceivedUpdateParams` containing the following parameters:
    *
    * - `id`: A unique integer value identifying this order.
@@ -1578,7 +1597,7 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param params The `AccountsService.AccountsOrdersReceivedPartialUpdateParams` containing the following parameters:
    *
    * - `id`: A unique integer value identifying this order.
@@ -1609,7 +1628,7 @@ class AccountsService extends __BaseService {
     );
   }
   /**
-   * The received messages viewset.
+   * The received orders viewset.
    * @param params The `AccountsService.AccountsOrdersReceivedPartialUpdateParams` containing the following parameters:
    *
    * - `id`: A unique integer value identifying this order.
@@ -1637,6 +1656,8 @@ class AccountsService extends __BaseService {
    * - `start_datetime__gt`:
    *
    * - `start_datetime`:
+   *
+   * - `source__in`: Multiple values may be separated by commas.
    *
    * - `search`: A search term.
    *
@@ -1668,6 +1689,7 @@ class AccountsService extends __BaseService {
     if (params.startDatetimeGte != null) __params = __params.set('start_datetime__gte', params.startDatetimeGte.toString());
     if (params.startDatetimeGt != null) __params = __params.set('start_datetime__gt', params.startDatetimeGt.toString());
     if (params.startDatetime != null) __params = __params.set('start_datetime', params.startDatetime.toString());
+    if (params.sourceIn != null) __params = __params.set('source__in', params.sourceIn.toString());
     if (params.search != null) __params = __params.set('search', params.search.toString());
     if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
     if (params.page != null) __params = __params.set('page', params.page.toString());
@@ -1710,6 +1732,8 @@ class AccountsService extends __BaseService {
    * - `start_datetime__gt`:
    *
    * - `start_datetime`:
+   *
+   * - `source__in`: Multiple values may be separated by commas.
    *
    * - `search`: A search term.
    *
@@ -3711,6 +3735,279 @@ class AccountsService extends __BaseService {
   }
 
   /**
+   * The professional schedule period viewset.
+   * @param params The `AccountsService.AccountsProfessionalSchedulePeriodsListParams` containing the following parameters:
+   *
+   * - `start_date`:
+   *
+   * - `search`: A search term.
+   *
+   * - `professional`:
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `is_enabled`:
+   *
+   * - `end_date`:
+   */
+  accountsProfessionalSchedulePeriodsListResponse(params: AccountsService.AccountsProfessionalSchedulePeriodsListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSchedulePeriod>}>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.startDate != null) __params = __params.set('start_date', params.startDate.toString());
+    if (params.search != null) __params = __params.set('search', params.search.toString());
+    if (params.professional != null) __params = __params.set('professional', params.professional.toString());
+    if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    if (params.isEnabled != null) __params = __params.set('is_enabled', params.isEnabled.toString());
+    if (params.endDate != null) __params = __params.set('end_date', params.endDate.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/professional-schedule-periods/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSchedulePeriod>}>;
+      })
+    );
+  }
+  /**
+   * The professional schedule period viewset.
+   * @param params The `AccountsService.AccountsProfessionalSchedulePeriodsListParams` containing the following parameters:
+   *
+   * - `start_date`:
+   *
+   * - `search`: A search term.
+   *
+   * - `professional`:
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `is_enabled`:
+   *
+   * - `end_date`:
+   */
+  accountsProfessionalSchedulePeriodsList(params: AccountsService.AccountsProfessionalSchedulePeriodsListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSchedulePeriod>}> {
+    return this.accountsProfessionalSchedulePeriodsListResponse(params).pipe(
+      __map(_r => _r.body as {count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSchedulePeriod>})
+    );
+  }
+
+  /**
+   * The professional schedule period viewset.
+   * @param data undefined
+   */
+  accountsProfessionalSchedulePeriodsCreateResponse(data: ProfessionalSchedulePeriod): __Observable<__StrictHttpResponse<ProfessionalSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = data;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/accounts/professional-schedule-periods/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The professional schedule period viewset.
+   * @param data undefined
+   */
+  accountsProfessionalSchedulePeriodsCreate(data: ProfessionalSchedulePeriod): __Observable<ProfessionalSchedulePeriod> {
+    return this.accountsProfessionalSchedulePeriodsCreateResponse(data).pipe(
+      __map(_r => _r.body as ProfessionalSchedulePeriod)
+    );
+  }
+
+  /**
+   * The professional schedule period viewset.
+   * @param id A unique integer value identifying this professional schedule period.
+   */
+  accountsProfessionalSchedulePeriodsReadResponse(id: number): __Observable<__StrictHttpResponse<ProfessionalSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The professional schedule period viewset.
+   * @param id A unique integer value identifying this professional schedule period.
+   */
+  accountsProfessionalSchedulePeriodsRead(id: number): __Observable<ProfessionalSchedulePeriod> {
+    return this.accountsProfessionalSchedulePeriodsReadResponse(id).pipe(
+      __map(_r => _r.body as ProfessionalSchedulePeriod)
+    );
+  }
+
+  /**
+   * The professional schedule period viewset.
+   * @param params The `AccountsService.AccountsProfessionalSchedulePeriodsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional schedule period.
+   *
+   * - `data`:
+   */
+  accountsProfessionalSchedulePeriodsUpdateResponse(params: AccountsService.AccountsProfessionalSchedulePeriodsUpdateParams): __Observable<__StrictHttpResponse<ProfessionalSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(params.id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The professional schedule period viewset.
+   * @param params The `AccountsService.AccountsProfessionalSchedulePeriodsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional schedule period.
+   *
+   * - `data`:
+   */
+  accountsProfessionalSchedulePeriodsUpdate(params: AccountsService.AccountsProfessionalSchedulePeriodsUpdateParams): __Observable<ProfessionalSchedulePeriod> {
+    return this.accountsProfessionalSchedulePeriodsUpdateResponse(params).pipe(
+      __map(_r => _r.body as ProfessionalSchedulePeriod)
+    );
+  }
+
+  /**
+   * The professional schedule period viewset.
+   * @param params The `AccountsService.AccountsProfessionalSchedulePeriodsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional schedule period.
+   *
+   * - `data`:
+   */
+  accountsProfessionalSchedulePeriodsPartialUpdateResponse(params: AccountsService.AccountsProfessionalSchedulePeriodsPartialUpdateParams): __Observable<__StrictHttpResponse<ProfessionalSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(params.id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The professional schedule period viewset.
+   * @param params The `AccountsService.AccountsProfessionalSchedulePeriodsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional schedule period.
+   *
+   * - `data`:
+   */
+  accountsProfessionalSchedulePeriodsPartialUpdate(params: AccountsService.AccountsProfessionalSchedulePeriodsPartialUpdateParams): __Observable<ProfessionalSchedulePeriod> {
+    return this.accountsProfessionalSchedulePeriodsPartialUpdateResponse(params).pipe(
+      __map(_r => _r.body as ProfessionalSchedulePeriod)
+    );
+  }
+
+  /**
+   * The professional schedule period viewset.
+   * @param id A unique integer value identifying this professional schedule period.
+   */
+  accountsProfessionalSchedulePeriodsDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * The professional schedule period viewset.
+   * @param id A unique integer value identifying this professional schedule period.
+   */
+  accountsProfessionalSchedulePeriodsDelete(id: number): __Observable<null> {
+    return this.accountsProfessionalSchedulePeriodsDeleteResponse(id).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
    * The professional schedule viewset.
    * @param params The `AccountsService.AccountsProfessionalScheduleListParams` containing the following parameters:
    *
@@ -4526,7 +4823,7 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * The professional viewset.
+   * Delete model action.
    * @param id A unique integer value identifying this professional.
    */
   accountsProfessionalsDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
@@ -4552,7 +4849,7 @@ class AccountsService extends __BaseService {
     );
   }
   /**
-   * The professional viewset.
+   * Delete model action.
    * @param id A unique integer value identifying this professional.
    */
   accountsProfessionalsDelete(id: number): __Observable<null> {
@@ -6761,6 +7058,279 @@ class AccountsService extends __BaseService {
   }
 
   /**
+   * The service schedule period viewset.
+   * @param params The `AccountsService.AccountsServiceSchedulePeriodsListParams` containing the following parameters:
+   *
+   * - `start_date`:
+   *
+   * - `service`:
+   *
+   * - `search`: A search term.
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `is_enabled`:
+   *
+   * - `end_date`:
+   */
+  accountsServiceSchedulePeriodsListResponse(params: AccountsService.AccountsServiceSchedulePeriodsListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ServiceSchedulePeriod>}>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.startDate != null) __params = __params.set('start_date', params.startDate.toString());
+    if (params.service != null) __params = __params.set('service', params.service.toString());
+    if (params.search != null) __params = __params.set('search', params.search.toString());
+    if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    if (params.isEnabled != null) __params = __params.set('is_enabled', params.isEnabled.toString());
+    if (params.endDate != null) __params = __params.set('end_date', params.endDate.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/service-schedule-periods/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ServiceSchedulePeriod>}>;
+      })
+    );
+  }
+  /**
+   * The service schedule period viewset.
+   * @param params The `AccountsService.AccountsServiceSchedulePeriodsListParams` containing the following parameters:
+   *
+   * - `start_date`:
+   *
+   * - `service`:
+   *
+   * - `search`: A search term.
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `is_enabled`:
+   *
+   * - `end_date`:
+   */
+  accountsServiceSchedulePeriodsList(params: AccountsService.AccountsServiceSchedulePeriodsListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<ServiceSchedulePeriod>}> {
+    return this.accountsServiceSchedulePeriodsListResponse(params).pipe(
+      __map(_r => _r.body as {count: number, next?: null | string, previous?: null | string, results: Array<ServiceSchedulePeriod>})
+    );
+  }
+
+  /**
+   * The service schedule period viewset.
+   * @param data undefined
+   */
+  accountsServiceSchedulePeriodsCreateResponse(data: ServiceSchedulePeriod): __Observable<__StrictHttpResponse<ServiceSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = data;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/accounts/service-schedule-periods/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ServiceSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The service schedule period viewset.
+   * @param data undefined
+   */
+  accountsServiceSchedulePeriodsCreate(data: ServiceSchedulePeriod): __Observable<ServiceSchedulePeriod> {
+    return this.accountsServiceSchedulePeriodsCreateResponse(data).pipe(
+      __map(_r => _r.body as ServiceSchedulePeriod)
+    );
+  }
+
+  /**
+   * The service schedule period viewset.
+   * @param id A unique integer value identifying this service schedule period.
+   */
+  accountsServiceSchedulePeriodsReadResponse(id: number): __Observable<__StrictHttpResponse<ServiceSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ServiceSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The service schedule period viewset.
+   * @param id A unique integer value identifying this service schedule period.
+   */
+  accountsServiceSchedulePeriodsRead(id: number): __Observable<ServiceSchedulePeriod> {
+    return this.accountsServiceSchedulePeriodsReadResponse(id).pipe(
+      __map(_r => _r.body as ServiceSchedulePeriod)
+    );
+  }
+
+  /**
+   * The service schedule period viewset.
+   * @param params The `AccountsService.AccountsServiceSchedulePeriodsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this service schedule period.
+   *
+   * - `data`:
+   */
+  accountsServiceSchedulePeriodsUpdateResponse(params: AccountsService.AccountsServiceSchedulePeriodsUpdateParams): __Observable<__StrictHttpResponse<ServiceSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(params.id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ServiceSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The service schedule period viewset.
+   * @param params The `AccountsService.AccountsServiceSchedulePeriodsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this service schedule period.
+   *
+   * - `data`:
+   */
+  accountsServiceSchedulePeriodsUpdate(params: AccountsService.AccountsServiceSchedulePeriodsUpdateParams): __Observable<ServiceSchedulePeriod> {
+    return this.accountsServiceSchedulePeriodsUpdateResponse(params).pipe(
+      __map(_r => _r.body as ServiceSchedulePeriod)
+    );
+  }
+
+  /**
+   * The service schedule period viewset.
+   * @param params The `AccountsService.AccountsServiceSchedulePeriodsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this service schedule period.
+   *
+   * - `data`:
+   */
+  accountsServiceSchedulePeriodsPartialUpdateResponse(params: AccountsService.AccountsServiceSchedulePeriodsPartialUpdateParams): __Observable<__StrictHttpResponse<ServiceSchedulePeriod>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(params.id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ServiceSchedulePeriod>;
+      })
+    );
+  }
+  /**
+   * The service schedule period viewset.
+   * @param params The `AccountsService.AccountsServiceSchedulePeriodsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this service schedule period.
+   *
+   * - `data`:
+   */
+  accountsServiceSchedulePeriodsPartialUpdate(params: AccountsService.AccountsServiceSchedulePeriodsPartialUpdateParams): __Observable<ServiceSchedulePeriod> {
+    return this.accountsServiceSchedulePeriodsPartialUpdateResponse(params).pipe(
+      __map(_r => _r.body as ServiceSchedulePeriod)
+    );
+  }
+
+  /**
+   * The service schedule period viewset.
+   * @param id A unique integer value identifying this service schedule period.
+   */
+  accountsServiceSchedulePeriodsDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(id)}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * The service schedule period viewset.
+   * @param id A unique integer value identifying this service schedule period.
+   */
+  accountsServiceSchedulePeriodsDelete(id: number): __Observable<null> {
+    return this.accountsServiceSchedulePeriodsDeleteResponse(id).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
    * The service schedule viewset.
    * @param params The `AccountsService.AccountsServiceScheduleListParams` containing the following parameters:
    *
@@ -7555,7 +8125,7 @@ class AccountsService extends __BaseService {
   }
 
   /**
-   * The service viewset.
+   * Delete model action.
    * @param id A unique integer value identifying this service.
    */
   accountsServicesDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
@@ -7581,7 +8151,7 @@ class AccountsService extends __BaseService {
     );
   }
   /**
-   * The service viewset.
+   * Delete model action.
    * @param id A unique integer value identifying this service.
    */
   accountsServicesDelete(id: number): __Observable<null> {
@@ -8145,6 +8715,11 @@ module AccountsService {
     startDatetimeGte?: string;
     startDatetimeGt?: string;
     startDatetime?: string;
+
+    /**
+     * Multiple values may be separated by commas.
+     */
+    sourceIn?: string;
     service?: number;
 
     /**
@@ -8212,6 +8787,11 @@ module AccountsService {
     startDatetimeGte?: string;
     startDatetimeGt?: string;
     startDatetime?: string;
+
+    /**
+     * Multiple values may be separated by commas.
+     */
+    sourceIn?: string;
 
     /**
      * A search term.
@@ -8620,6 +9200,60 @@ module AccountsService {
      */
     id: number;
     data: ProfessionalPhoto;
+  }
+
+  /**
+   * Parameters for accountsProfessionalSchedulePeriodsList
+   */
+  export interface AccountsProfessionalSchedulePeriodsListParams {
+    startDate?: string;
+
+    /**
+     * A search term.
+     */
+    search?: string;
+    professional?: number;
+
+    /**
+     * Number of results to return per page.
+     */
+    pageSize?: number;
+
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+
+    /**
+     * Which field to use when ordering the results.
+     */
+    ordering?: string;
+    isEnabled?: string;
+    endDate?: string;
+  }
+
+  /**
+   * Parameters for accountsProfessionalSchedulePeriodsUpdate
+   */
+  export interface AccountsProfessionalSchedulePeriodsUpdateParams {
+
+    /**
+     * A unique integer value identifying this professional schedule period.
+     */
+    id: number;
+    data: ProfessionalSchedulePeriod;
+  }
+
+  /**
+   * Parameters for accountsProfessionalSchedulePeriodsPartialUpdate
+   */
+  export interface AccountsProfessionalSchedulePeriodsPartialUpdateParams {
+
+    /**
+     * A unique integer value identifying this professional schedule period.
+     */
+    id: number;
+    data: ProfessionalSchedulePeriod;
   }
 
   /**
@@ -9149,6 +9783,60 @@ module AccountsService {
      */
     id: number;
     data: Price;
+  }
+
+  /**
+   * Parameters for accountsServiceSchedulePeriodsList
+   */
+  export interface AccountsServiceSchedulePeriodsListParams {
+    startDate?: string;
+    service?: number;
+
+    /**
+     * A search term.
+     */
+    search?: string;
+
+    /**
+     * Number of results to return per page.
+     */
+    pageSize?: number;
+
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+
+    /**
+     * Which field to use when ordering the results.
+     */
+    ordering?: string;
+    isEnabled?: string;
+    endDate?: string;
+  }
+
+  /**
+   * Parameters for accountsServiceSchedulePeriodsUpdate
+   */
+  export interface AccountsServiceSchedulePeriodsUpdateParams {
+
+    /**
+     * A unique integer value identifying this service schedule period.
+     */
+    id: number;
+    data: ServiceSchedulePeriod;
+  }
+
+  /**
+   * Parameters for accountsServiceSchedulePeriodsPartialUpdate
+   */
+  export interface AccountsServiceSchedulePeriodsPartialUpdateParams {
+
+    /**
+     * A unique integer value identifying this service schedule period.
+     */
+    id: number;
+    data: ServiceSchedulePeriod;
   }
 
   /**

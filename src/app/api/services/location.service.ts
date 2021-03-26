@@ -22,8 +22,8 @@ import { Subregion } from '../models/subregion';
 class LocationService extends __BaseService {
   static readonly locationAlternativeNamesListPath = '/location/alternative-names/';
   static readonly locationAlternativeNamesReadPath = '/location/alternative-names/{id}/';
-  static readonly locationCitesListPath = '/location/cities/';
-  static readonly locationCitesReadPath = '/location/cities/{id}/';
+  static readonly locationCitiesListPath = '/location/cities/';
+  static readonly locationCitiesReadPath = '/location/cities/{id}/';
   static readonly locationContinentsListPath = '/location/continents/';
   static readonly locationContinentsReadPath = '/location/continents/{id}/';
   static readonly locationCountriesListPath = '/location/countries/';
@@ -169,7 +169,7 @@ class LocationService extends __BaseService {
 
   /**
    * The City viewset.
-   * @param params The `LocationService.LocationCitesListParams` containing the following parameters:
+   * @param params The `LocationService.LocationCitiesListParams` containing the following parameters:
    *
    * - `timezone`:
    *
@@ -189,7 +189,7 @@ class LocationService extends __BaseService {
    *
    * - `by_name`:
    */
-  locationCitesListResponse(params: LocationService.LocationCitesListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<City>}>> {
+  locationCitiesListResponse(params: LocationService.LocationCitiesListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<City>}>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -221,7 +221,7 @@ class LocationService extends __BaseService {
   }
   /**
    * The City viewset.
-   * @param params The `LocationService.LocationCitesListParams` containing the following parameters:
+   * @param params The `LocationService.LocationCitiesListParams` containing the following parameters:
    *
    * - `timezone`:
    *
@@ -241,8 +241,8 @@ class LocationService extends __BaseService {
    *
    * - `by_name`:
    */
-  locationCitesList(params: LocationService.LocationCitesListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<City>}> {
-    return this.locationCitesListResponse(params).pipe(
+  locationCitiesList(params: LocationService.LocationCitiesListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<City>}> {
+    return this.locationCitiesListResponse(params).pipe(
       __map(_r => _r.body as {count: number, next?: null | string, previous?: null | string, results: Array<City>})
     );
   }
@@ -251,7 +251,7 @@ class LocationService extends __BaseService {
    * The City viewset.
    * @param id A unique integer value identifying this city.
    */
-  locationCitesReadResponse(id: number): __Observable<__StrictHttpResponse<City>> {
+  locationCitiesReadResponse(id: number): __Observable<__StrictHttpResponse<City>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -277,8 +277,8 @@ class LocationService extends __BaseService {
    * The City viewset.
    * @param id A unique integer value identifying this city.
    */
-  locationCitesRead(id: number): __Observable<City> {
-    return this.locationCitesReadResponse(id).pipe(
+  locationCitiesRead(id: number): __Observable<City> {
+    return this.locationCitiesReadResponse(id).pipe(
       __map(_r => _r.body as City)
     );
   }
@@ -1009,9 +1009,9 @@ module LocationService {
   }
 
   /**
-   * Parameters for locationCitesList
+   * Parameters for locationCitiesList
    */
-  export interface LocationCitesListParams {
+  export interface LocationCitiesListParams {
     timezone?: string;
     subregion?: string;
 
