@@ -6,7 +6,7 @@ import { ProfessionalExperienceInline } from './professional-experience-inline';
 import { ProfessionalLocationInline } from './professional-location-inline';
 import { ProfessionalTagList } from './professional-tag-list';
 import { UserExtended } from './user-extended';
-export interface ProfessionalList {
+export interface SearchProfessional {
   certificates?: Array<ProfessionalCertificateInline>;
   company?: null | string;
   contacts?: Array<ProfessionalContactInline>;
@@ -16,6 +16,7 @@ export interface ProfessionalList {
   experience?: null | number;
   experience_entries?: Array<ProfessionalExperienceInline>;
   id?: number;
+  is_saved: boolean;
   level?: null | 'junior' | 'middle' | 'senior';
   locations?: Array<ProfessionalLocationInline>;
   modified?: string;

@@ -68,7 +68,7 @@ export class CurrentLocationCompilerService {
   }
 
   private getCity(name: string, country?: Country): Observable<City | null> {
-    return this.locationApi.locationCitesList({ search: name, country: country.id.toString() }).pipe(
+    return this.locationApi.locationCitiesList({ search: name, country: country.id.toString() }).pipe(
       map(res => res.count === 0 ? null : res.results.shift()),
     );
   }

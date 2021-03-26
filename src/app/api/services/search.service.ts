@@ -41,7 +41,9 @@ class SearchService extends __BaseService {
    *
    * - `region`: region ID
    *
-   * - `rating`: professional rating
+   * - `rating_to`: professional rating to
+   *
+   * - `rating_from`: professional rating from
    *
    * - `query`: search term query param
    *
@@ -105,7 +107,8 @@ class SearchService extends __BaseService {
     if (params.startAge != null) __params = __params.set('start_age', params.startAge.toString());
     if (params.serviceTypes != null) __params = __params.set('service_types', params.serviceTypes.toString());
     if (params.region != null) __params = __params.set('region', params.region.toString());
-    if (params.rating != null) __params = __params.set('rating', params.rating.toString());
+    if (params.ratingTo != null) __params = __params.set('rating_to', params.ratingTo.toString());
+    if (params.ratingFrom != null) __params = __params.set('rating_from', params.ratingFrom.toString());
     if (params.query != null) __params = __params.set('query', params.query.toString());
     if (params.professionalLevel != null) __params = __params.set('professional_level', params.professionalLevel.toString());
     if (params.priceCurrency != null) __params = __params.set('price_currency', params.priceCurrency.toString());
@@ -168,7 +171,9 @@ class SearchService extends __BaseService {
    *
    * - `region`: region ID
    *
-   * - `rating`: professional rating
+   * - `rating_to`: professional rating to
+   *
+   * - `rating_from`: professional rating from
    *
    * - `query`: search term query param
    *
@@ -275,9 +280,14 @@ module SearchService {
     region?: number;
 
     /**
-     * professional rating
+     * professional rating to
      */
-    rating?: number;
+    ratingTo?: number;
+
+    /**
+     * professional rating from
+     */
+    ratingFrom?: number;
 
     /**
      * search term query param

@@ -13,6 +13,6 @@ export class CitiesApiCache extends ApiCache<City> {
   }
 
   protected read(id: number): Observable<City> {
-    return this.locationService.locationCitesRead(id);
+    return this.locationService.locationCitiesRead(id);
   }
 }
