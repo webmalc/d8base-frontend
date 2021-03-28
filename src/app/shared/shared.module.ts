@@ -39,6 +39,7 @@ import {
   SubregionSelectorComponent,
   DistrictSelectorComponent,
   PhoneEditorComponent,
+  ImageCarouselComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
@@ -149,6 +150,7 @@ import { NumberDirective } from './directives/number.directive';
     SubregionSelectorComponent,
     DistrictSelectorComponent,
     PhoneEditorComponent,
+    ImageCarouselComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -211,6 +213,7 @@ import { NumberDirective } from './directives/number.directive';
     CountrySelectorComponent,
     CitySelectorComponent,
     PhoneEditorComponent,
+    ImageCarouselComponent,
   ],
   imports: [
     CommonModule,
