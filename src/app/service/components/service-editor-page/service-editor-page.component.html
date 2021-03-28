@@ -1,6 +1,10 @@
 <app-header></app-header>
 <ion-content *ngIf="service$ | async as service">
   <app-content-wrapper>
+    <app-info-row *ngIf="showSuccessOrderNotification$ | async">
+      {{ 'order.success-title' | translate }}
+    </app-info-row>
+
     <ion-item lines="none">
       <ion-buttons slot="start">
         <ion-button routerLink="/professional" routerDirection="back">

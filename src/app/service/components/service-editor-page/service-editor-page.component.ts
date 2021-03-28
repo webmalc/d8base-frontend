@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AccountsService, ServicesService } from '@app/api/services';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceOperationsService } from '@app/core/services/service-operations.service';
 import { ProfessionalSchedule, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
@@ -17,6 +17,7 @@ import { ServicesApiCache } from '@app/core/services/cache';
 export class ServiceEditorPageComponent {
   public service$: Observable<Service>;
   public schedule$: Observable<AbstractSchedule[]>;
+  public showSuccessOrderNotification$: Observable<boolean>;
 
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
@@ -36,6 +37,10 @@ export class ServiceEditorPageComponent {
         ? api.accountsProfessionalScheduleList({}).pipe(map(response => response.results))
         : api.accountsServiceScheduleList({ service: service.id }).pipe(map(response => response.results)),
       ),
+    );
+    this.showSuccessOrderNotification$ = route.queryParams.pipe(
+      first(),
+      map(params => params.from === 'publish'),
     );
   }
 
