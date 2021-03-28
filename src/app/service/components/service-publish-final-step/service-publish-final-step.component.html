@@ -7,6 +7,8 @@
       </ion-text>
     </ion-item>
 
+    <app-service-widget *ngIf="service" [service]="service" [alwaysExpanded]="true"></app-service-widget>
+
     <ion-grid>
       <ion-row>
         <ion-col size="6">
