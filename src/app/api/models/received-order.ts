@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { UserExtended } from './user-extended';
+import { ReceivedOrderClient } from './received-order-client';
 import { UserLocationInline } from './user-location-inline';
 export interface ReceivedOrder {
-  client?: UserExtended;
+  client?: ReceivedOrderClient;
   client_location?: UserLocationInline;
   created?: string;
   duration?: string;

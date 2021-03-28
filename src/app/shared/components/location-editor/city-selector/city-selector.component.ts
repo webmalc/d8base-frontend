@@ -29,7 +29,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
     super();
     this.items$ = this.country$.pipe(
       switchMap(country => country
-        ? this.locationApi.locationCitesList({ pageSize: PAGE_SIZE, country: `${country.id}` })
+        ? this.locationApi.locationCitiesList({ pageSize: PAGE_SIZE, country: `${country.id}` })
         : of({ results: [] }),
       ),
       map(x => x.results),

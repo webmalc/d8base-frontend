@@ -16,23 +16,27 @@
         <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="6">
           <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
             <ion-datetime
-              [(ngModel)]="searchData.date"
-              class="width100"
-              display-format="MMM DD, YYYY"
-              [min]="stateManager.minDate"
-              [max]="stateManager.maxDate"
-              [placeholder]="'main-page.any-date' | translate"
-            ></ion-datetime>
+            [placeholder]="'main-page.date-from' | translate"
+            display-format="MMM DD, YYYY HH:mm"
+            picker-format="MMM DD, YYYY HH:mm"
+            [min]="stateManager.minDate"
+            [max]="stateManager.maxDate"
+            [(ngModel)]="searchData.datetime.from"
+            class="width100"
+          ></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="6">
           <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
             <ion-datetime
-              [(ngModel)]="searchData.time"
-              display-format="HH:mm"
-              picker-format="HH:mm"
-              [placeholder]="'main-page.any-time' | translate"
-            ></ion-datetime>
+            [placeholder]="'main-page.date-to' | translate"
+            display-format="MMM DD, YYYY HH:mm"
+            picker-format="MMM DD, YYYY HH:mm"
+            [min]="stateManager.minDate"
+            [max]="stateManager.maxDate"
+            [(ngModel)]="searchData.datetime.to"
+            class="width100"
+          ></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">

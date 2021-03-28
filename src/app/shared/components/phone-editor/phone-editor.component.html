@@ -1,10 +1,29 @@
-<ion-item>
-  <ion-label color="medium" position="floating">{{ 'registration-form.phone' | translate }}</ion-label>
-  <ion-input
-    (ionBlur)="onPhoneBlur($event.target.value)"
-    (ionInput)="onPhoneInputChange($event.target.value)"
-    (ionChange)="onPhoneChange($event.target.value)"
-    (ionFocus)="onPhoneFocus($event.target.value)"
-    [formControl]="innerControl"
-  ></ion-input>
-</ion-item>
+<div class="phone-input-container">
+  <ion-item class="country-selector">
+    <ion-label color="medium" position="floating">
+      {{ title | translate }}
+    </ion-label>
+    <ionic-selectable
+      [formControl]="countryControl"
+      [items]="countries$ | async"
+      [canSearch]="true"
+      [shouldFocusSearchbar]="true"
+      [hasVirtualScroll]="true"
+      [title]="title"
+      [closeButtonText]="'global.cancel' | translate"
+      itemTextField="name"
+      itemValueField="id"
+    >
+      <ng-template ionicSelectableValueTemplate let-value="value">
+        <span class="flag-icon flag-icon-{{ value?.tld }}"></span> {{ plusSignEnforce(value?.phone) }}</ng-template
+      >
+      <ng-template ionicSelectableItemTemplate let-item="item">
+        <div><span class="flag-icon flag-icon-{{ item?.tld }}"></span> {{ item?.name }} {{ plusSignEnforce(item?.phone) }}</div>
+      </ng-template>
+    </ionic-selectable>
+  </ion-item>
+  <ion-item class="phone-input">
+    <ion-label color="medium" position="floating">{{ 'registration-form.phone' | translate }}</ion-label>
+    <ion-input [formControl]="phoneControl" inputmode="decimal" appNumbersOnly></ion-input>
+  </ion-item>
+</div>

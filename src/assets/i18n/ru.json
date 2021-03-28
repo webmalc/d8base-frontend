@@ -633,6 +633,8 @@
   },
   "main-page": {
     "search-placeholder": "Найти услугу",
+    "date-from": "Дата от",
+    "date-to": "Дата до",
     "any-date": "Любая дата",
     "any-time": "Любое время",
     "current-location": "Текущее местоположение",

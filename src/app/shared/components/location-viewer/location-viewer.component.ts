@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FullLocationService, LocationInterface } from '@app/core/services/location/full-location.service';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 
 const DEFAULT_FLAG = 'ca';
 

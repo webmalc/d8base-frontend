@@ -8,7 +8,7 @@ export abstract class ItemSelectorControl<T> implements ControlValueAccessor {
   public disabled: boolean;
   public required: boolean;
 
-  public change(event: {component: unknown; value: T}) {
+  public change(event: { component: unknown; value: T }) {
     this.onChange(event.value);
   }
 
