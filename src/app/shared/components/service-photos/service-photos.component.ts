@@ -85,6 +85,9 @@ export class ServicePhotosComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   private subscribeServicePhotos(): void {
+    if (!this.serviceId) {
+      return;
+    }
     this.isLoading = true;
     this.servicesService
       .servicesServicePhotosList({ service: this.serviceId })
