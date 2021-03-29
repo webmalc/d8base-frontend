@@ -33,8 +33,8 @@ export class ServicePublishStepThreeComponent implements OnInit {
     this.serviceStepsNavigationService.next();
   }
 
-  public onSelect(data: { addedFiles: File[] }): void {
-    this.files.push(...data.addedFiles);
+  public onSelect(files: File[]): void {
+    this.files = this.files.concat(files);
   }
 
   public onRemove(data: File): void {

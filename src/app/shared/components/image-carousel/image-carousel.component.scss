@@ -5,6 +5,8 @@
 .thumbnail {
   --size: var(--service-photo-thumb-size);
   --border-radius: 5px;
+  background: var(--ion-color-light);
+  cursor: pointer;
 }
 
 .nav-buttons-hidden .button {
@@ -46,4 +48,14 @@
 
 .swiper-slide {
   width: var(--service-photo-thumb-size);
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ion-icon {
+    font-size: 3rem;
+    color: var(--ion-color-white);
+  }
 }

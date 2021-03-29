@@ -3,8 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Input,
+  Output,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -17,6 +19,13 @@ import Photo from './photo.interface';
 
 const spaceBetweenSlides: number = 16;
 
+const toBase64 = file => new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = error => reject(error);
+});
+
 @Component({
   selector: 'app-image-carousel',
   templateUrl: './image-carousel.component.html',
@@ -24,11 +33,20 @@ const spaceBetweenSlides: number = 16;
   providers: [NgDestroyService],
 })
 export class ImageCarouselComponent implements AfterViewInit {
+  @Input()
+  public editable: boolean = false;
+
+  @Output()
+  public add = new EventEmitter<File[]>();
+
   @ViewChild('slides', { static: false })
   public readonly slides: IonSlides;
 
   @ViewChild('slides', { read: ElementRef })
   public readonly slidesElementRef: ElementRef;
+
+  @ViewChild('input', { static: true })
+  public readonly input: ElementRef<HTMLInputElement>;
 
   @ViewChildren('slide', { read: ElementRef })
   public readonly slideList: QueryList<ElementRef>;
@@ -55,6 +73,21 @@ export class ImageCarouselComponent implements AfterViewInit {
   }
 
   @Input()
+  public set files(files: File[]) {
+    const getPhotos = files.map(async file => {
+      const src = await toBase64(file);
+      return {
+        photo: src,
+        photo_thumbnail: src,
+      };
+    });
+    Promise.all(getPhotos).then(photos => {
+      this.photos = photos;
+      this.cd.markForCheck();
+    });
+  }
+
+  @Input()
   public set photos(value: Photo[]) {
     this._photos = value;
     this.subscribeSlideListChanges();
@@ -66,6 +99,19 @@ export class ImageCarouselComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.initNavigationButtonsAvailability();
+  }
+
+  public showFileSelectionDialog(): void {
+    this.input.nativeElement.value = '';
+    this.input.nativeElement.click();
+  }
+
+  public addFiles(event: Event): void {
+    const eventTarget = event.target as HTMLInputElement;
+    const fileList: FileList = eventTarget.files;
+    if (fileList?.length) {
+      this.add.emit(Array.from(fileList));
+    }
   }
 
   public slideNext(): void {
