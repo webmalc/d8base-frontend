@@ -1,8 +1,8 @@
-<ng-container *ngFor="let row of controls; let i = index">
-  <ng-container [formGroup]="row">
+<ng-container *ngFor="let dayForm of controls; let dayIndex = index">
+  <ng-container [formGroup]="dayForm">
     <div class="date-row">
       <ion-label slot="start" class="ion-padding-horizontal">
-        {{ 'global.weekdays.' + getDayByIndex(row.controls[formFields.Day].value) | translate }}
+        {{ 'global.weekdays.' + getDayByIndex(dayForm.controls[formFields.Day].value) | translate }}
       </ion-label>
       <ion-item>
         <ion-label position="stacked">{{ 'global.from' | translate }}</ion-label>
@@ -12,13 +12,13 @@
         <ion-label position="floating">{{ 'global.to' | translate }}</ion-label>
         <ion-input class="ion-text-center" type="time" [formControlName]="formFields.EndTime"></ion-input>
       </ion-item>
-      <ion-button color="medium" fill="clear" (click)="deleteDay(i)" *ngIf="!disabled">
+      <ion-button color="medium" fill="clear" (click)="deleteDay(dayIndex)" *ngIf="!disabled">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
     </div>
     <app-form-control-error [controlName]="formFields.StartTime"></app-form-control-error>
     <app-form-control-error [controlName]="formFields.EndTime"></app-form-control-error>
-    <app-form-control-error [control]="row"></app-form-control-error>
+    <app-form-control-error [control]="dayForm"></app-form-control-error>
   </ng-container>
 </ng-container>
 <app-add-button *ngIf="!disabled" (click)="showDaySelector()">

@@ -76,7 +76,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
     if (this.onTouched) {
       this.onTouched();
     }
-    this.controls.splice(index, 1);
+    this.timetable.removeAt(index);
   }
 
   public registerOnChange(fn: any): void {
