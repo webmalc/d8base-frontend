@@ -16,7 +16,7 @@
         <ion-label *ngIf="!chatList.length">
           {{ 'messages.chat-list-page.empty-list' | translate }}
         </ion-label>
-        <ion-item (click)="onChatClick(chat.interlocutor_id)" class="cursor-pointer hover-bg-dark-grey" *ngFor="let chat of chatList">
+        <ion-item (click)="onChatClick(chat.interlocutor_id)" button *ngFor="let chat of chatList">
           <ion-avatar slot="start">
             <img src="{{ chat.interlocutor_avatar_thumbnail }}" />
           </ion-avatar>
@@ -28,7 +28,7 @@
             </ion-label>
             <ion-label>
               <p>
-                {{ chat.body }}
+                {{ chat.body | slice:0:30 }}
               </p>
             </ion-label>
           </div>
@@ -38,9 +38,9 @@
                 {{ chat.created }}
               </p>
             </ion-label>
-            <span class="messages-count" *ngIf="chat.unread_count">
+            <ion-badge *ngIf="chat.unread_count">
               {{ chat.unread_count }}
-            </span>
+            </ion-badge>
           </div>
         </ion-item>
       </ion-list>

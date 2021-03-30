@@ -89,7 +89,7 @@
 }
 
 .sent-message {
-  background-color: #3171E0;
+  background-color: var(--ion-color-primary-shade);
   color: white;
 }
 
@@ -103,7 +103,7 @@
   top: 0;
   bottom: auto;
   border: 26px solid;
-  border-color: #3171E0 transparent transparent transparent;
+  border-color: var(--ion-color-primary-shade) transparent transparent transparent;
 }
 
 .message-text {
@@ -138,4 +138,43 @@
   width: 20px;
   margin-left: 4px;
   margin-bottom: 4px;
+}
+
+:host {
+  display: flex;
+  min-height: 100%;
+  .content-grid {
+    margin: 0;
+    --ion-grid-padding: 0;
+    --ion-grid-column-padding-xs: 0;
+    --ion-grid-column-padding-sm: 1rem;
+    --ion-grid-column-padding-md: 1rem;
+    --ion-grid-column-padding-lg: 1rem;
+    --ion-grid-column-padding-xl: 2rem;
+    background-color: var(--ion-color-light);
+    .content-row {
+      height: 100%;
+      .content-col {
+        background: var(--ion-background-color);
+        padding-top: 0;
+        padding-bottom: 16px;
+      }
+    }
+  }
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  position:relative;
+  height: 100%;
+  .messages-header {
+    flex: 0 1 auto;
+  }
+  .messages-content {
+    flex: 1 1 auto;
+  }
+  .messages-footer {
+    flex: 0 1 auto;
+  }
 }
