@@ -381,10 +381,12 @@
   "messages": {
     "chat-list-page": {
       "search": "Поиск контакта",
-      "empty-list": "Список диалогов пуст"
+      "empty-list": "Список диалогов пуст",
+      "messages": "Сообщения"
     },
     "direct": {
-      "loading-text": "Загружаем больше сообщений..."
+      "loading-text": "Загружаем больше сообщений...",
+      "edit-message": "Редактировать сообщение"
     },
     "context-menu": {
       "edit": "Редактировать",
