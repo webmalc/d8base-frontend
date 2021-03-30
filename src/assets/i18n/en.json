@@ -381,7 +381,8 @@
   "messages": {
     "chat-list-page": {
       "search": "Search contact",
-      "empty-list": "Chat list is empty"
+      "empty-list": "Chat list is empty",
+      "messages": "Chat"
     },
     "direct": {
       "loading-text": "Loading more messages..."
