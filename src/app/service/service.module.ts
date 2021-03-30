@@ -53,7 +53,6 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrMaskerModule } from 'br-mask';
 import { IonicSelectableModule } from 'ionic-selectable';
-import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ServicePageRoutingModule } from './service-routing.module';
 
 @NgModule({
@@ -66,7 +65,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ReactiveFormsModule,
     TranslateModule,
     IonicSelectableModule,
-    NgxDropzoneModule,
     BrMaskerModule,
     RegistrationPageModule,
   ],

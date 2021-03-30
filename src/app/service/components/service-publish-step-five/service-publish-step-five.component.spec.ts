@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishStepFiveFormService } from '../../forms/service-publish-step-five-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
@@ -26,7 +25,6 @@ describe('ServicePublishStepFiveComponent', () => {
       imports: [
         ...RootModules(),
         ComponentTestingModule,
-        NgxDropzoneModule,
       ],
       providers: [
         ServicePublishStepFiveFormService,

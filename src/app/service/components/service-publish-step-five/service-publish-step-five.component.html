@@ -49,27 +49,12 @@
           {{ 'service-publish.step-five.add-photo-title' | translate }}
         </b>
       </ion-item>
-      <ion-item class="ion-margin-bottom" lines="none">
-        <ngx-dropzone (change)="onSelect($event)" [multiple]="false" class="width100" [accept]="'image/*'">
-          <ngx-dropzone-label>
-            <ion-row>
-              {{ 'global.dropzone-label' | translate }}
-            </ion-row>
-            <ion-row class="ion-justify-content-center">
-              <ion-item lines="none">
-                <ion-icon name="download-outline"></ion-icon>
-              </ion-item>
-            </ion-row>
-          </ngx-dropzone-label>
-          <ngx-dropzone-image-preview
-            (removed)="onRemove()"
-            [file]="formService?.form.get(formFields.Avatar).value"
-            *ngIf="formService?.form.get(formFields.Avatar).value"
-            [removable]="true"
-          >
-          </ngx-dropzone-image-preview>
-        </ngx-dropzone>
-      </ion-item>
+    <ion-item lines="none">
+      <ion-thumbnail>
+        <ion-img [src]="avatar"></ion-img>
+      </ion-thumbnail>
+      <app-picture-selector [formControl]="formService?.form.get(formFields.Avatar)"></app-picture-selector>
+    </ion-item>
       <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
         <ion-col size="6">
           <ion-button
