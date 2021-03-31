@@ -2,10 +2,10 @@
   <ion-button class="button prev-button" size="small" (click)="slidePrev()" *ngIf="!isNavButtonsHidden">
     <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
   </ion-button>
-  <ion-slides class="slides" viewImageSlider [options]="slideOptions" #slides>
+  <ion-slides class="slides" appViewImageSlider [options]="slideOptions" (delete)="delete($event)" #slides>
     <ion-slide *ngFor="let photo of photos" #slide>
       <ion-thumbnail class="thumbnail">
-        <ion-img viewOnClick [src]="photo.photo_thumbnail" [fullSizeSrc]="photo.photo"></ion-img>
+        <ion-img appViewOnClick [src]="photo.photo_thumbnail" [fullSizeSrc]="photo.photo"></ion-img>
       </ion-thumbnail>
     </ion-slide>
     <ion-slide *ngIf="editable" (click)="showFileSelectionDialog()" #slide>

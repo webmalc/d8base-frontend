@@ -21,6 +21,10 @@ export class PhotoPopoverComponent {
     this.modalController.dismiss();
   }
 
+  public delete(): void {
+    this.modalController.dismiss({ delete: true });
+  }
+
   public slideNext(): void {
     this.photoIndex += 1;
     this.cd.markForCheck();

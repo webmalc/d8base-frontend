@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, ContentChildren, Directive, OnDestroy, QueryList } from '@angular/core';
+import { AfterViewInit, ContentChildren, Directive, EventEmitter, OnDestroy, Output, QueryList } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { merge, Subject } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -6,11 +6,11 @@ import { PhotoPopoverComponent } from '../components/photo-popover/photo-popover
 import { IonImageViewDirective } from './ion-image-view.directive';
 
 @Directive({
-  /* eslint-disable @angular-eslint/directive-selector */
-  selector: '[viewImageSlider]',
+  selector: '[appViewImageSlider]',
 })
 export class IonImageViewSliderDirective implements OnDestroy, AfterViewInit {
-  @ContentChildren(IonImageViewDirective, { descendants: true }) private readonly imageViews!: QueryList<IonImageViewDirective>;
+  @ContentChildren(IonImageViewDirective, { descendants: true }) public readonly imageViews!: QueryList<IonImageViewDirective>;
+  @Output() public delete = new EventEmitter<number>();
   private readonly ngUnsubscribe$ = new Subject<void>();
 
   constructor(private readonly modalController: ModalController) {}
@@ -32,6 +32,12 @@ export class IonImageViewSliderDirective implements OnDestroy, AfterViewInit {
         photos,
         photoIndex,
       },
+    });
+
+    pop.onDidDismiss().then(data => {
+      if (data.data.delete) {
+        this.delete.emit(photoIndex);
+      }
     });
 
     return await pop.present();

@@ -20,10 +20,10 @@ import Photo from './photo.interface';
 const spaceBetweenSlides: number = 16;
 
 const toBase64 = file => new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = error => reject(error);
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result as string);
+  reader.onerror = error => reject(error);
 });
 
 @Component({
@@ -38,6 +38,9 @@ export class ImageCarouselComponent implements AfterViewInit {
 
   @Output()
   public add = new EventEmitter<File[]>();
+
+  @Output()
+  public remove = new EventEmitter<number>();
 
   @ViewChild('slides', { static: false })
   public readonly slides: IonSlides;
@@ -87,14 +90,14 @@ export class ImageCarouselComponent implements AfterViewInit {
     });
   }
 
+  public get photos(): Photo[] {
+    return this._photos;
+  }
+
   @Input()
   public set photos(value: Photo[]) {
     this._photos = value;
     this.subscribeSlideListChanges();
-  }
-
-  public get photos(): Photo[] {
-    return this._photos;
   }
 
   public ngAfterViewInit(): void {
@@ -120,6 +123,10 @@ export class ImageCarouselComponent implements AfterViewInit {
 
   public slidePrev(): void {
     this.slides.slidePrev();
+  }
+
+  public delete(index: number): void {
+    this.remove.emit(index);
   }
 
   private initNavigationButtonsAvailability(): void {

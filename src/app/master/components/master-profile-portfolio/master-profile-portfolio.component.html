@@ -15,11 +15,11 @@
           </ion-label>
         </ion-list-header>
         <ion-item class="photo-container ion-item-no-side-padding pv5 ph5" lines="none">
-          <div class="gallery" viewImageSlider>
+          <div class="gallery" appViewImageSlider>
             <div class="gallery-element" *ngFor="let photo of masterPhotos">
               <div class="gallery-element-container">
                 <ion-img
-                  viewOnClick
+                  appViewOnClick
                   class="ion-img"
                   [src]="photo.photo_thumbnail"
                   [fullSizeSrc]="photo.photo"

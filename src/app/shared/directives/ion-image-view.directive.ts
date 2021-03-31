@@ -2,12 +2,12 @@ import { Directive, HostListener, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Directive({
-  /* eslint-disable @angular-eslint/directive-selector */
-  selector: '[viewOnClick]',
+  selector: '[appViewOnClick]',
 })
 export class IonImageViewDirective {
   @Input() public readonly fullSizeSrc: string;
   @Input() public readonly src: string;
+
   private readonly clickSubject = new Subject<void>();
 
   @HostListener('click', ['$event'])
