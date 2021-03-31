@@ -23,6 +23,8 @@ export class LoginPage {
   @Select(CurrentUserSelectors.errors)
   public errorMessages$: Observable<string[]>;
 
+  private redirectTo: string = '/profile';
+
   constructor(
     private readonly authenticator: AuthenticationService,
     private readonly router: Router,
@@ -47,12 +49,21 @@ export class LoginPage {
       filter(params => params?.hasOwnProperty('logout')),
       takeUntil(this.destroy$),
     ).subscribe(() => this.logout());
+
+    this.route.queryParams
+    .pipe(
+        filter(params => params?.hasOwnProperty('redirectTo')),
+        takeUntil(this.destroy$),
+    )
+    .subscribe(({ redirectTo }) => {
+        this.redirectTo = redirectTo;
+    });
   }
 
   private subOnProfile() {
     this.profile$.pipe(
       filter(x => !!x),
       takeUntil(this.destroy$),
-    ).subscribe(() => this.router.navigateByUrl('/profile'));
+    ).subscribe(() => this.router.navigateByUrl(this.redirectTo));
   }
 }
