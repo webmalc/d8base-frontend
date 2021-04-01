@@ -8,6 +8,7 @@ import { ServiceOperationsService } from '@app/core/services/service-operations.
 import { Service, ServicePhoto } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { HelperService } from '@app/core/services/helper.service';
+import { fileToBase64 } from '@app/core/functions/file.functions';
 
 @Component({
   selector: 'app-service-editor-page',
@@ -64,8 +65,8 @@ export class ServiceEditorPageComponent {
     this.serviceOperations.deleteService(service.id).subscribe(() => this.refresh$.next());
   }
 
-  public async addPhotos(files: File[], service): Promise<void> {
-    const requests$ = files.map(file => this.addPhoto$(file, service));
+  public async addPhotos(files: File[], service: Service): Promise<void> {
+    const requests$ = files.map(file => this.addPhoto$(file, service.id));
     await Promise.all(requests$);
     this.refresh$.next();
   }
@@ -77,11 +78,11 @@ export class ServiceEditorPageComponent {
     ).subscribe(() => this.refresh$.next());
   }
 
-  private async addPhoto$(file: File, service): Promise<void> {
-    const photo = await HelperService.getImgBase64(file);
+  private async addPhoto$(file: File, serviceId: number): Promise<void> {
+    const photo = await fileToBase64(file);
     const servicePhoto: ServicePhoto = {
       photo,
-      service: service.id,
+      service: serviceId,
     };
     await this.api.accountsServicePhotosCreate(servicePhoto).toPromise();
   }

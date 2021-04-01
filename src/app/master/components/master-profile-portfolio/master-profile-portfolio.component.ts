@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
+import { fileToBase64 } from '@app/core/functions/file.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
@@ -70,7 +71,7 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
         concatMap(({ professional }) =>
           forkJoin([
             ...this.files.map(file =>
-              from(HelperService.getImgBase64(file)).pipe(
+              from(fileToBase64(file)).pipe(
                 switchMap(photo => this.accountsService.accountsProfessionalPhotosCreate({ professional: professional.id, photo })),
               ),
             ),

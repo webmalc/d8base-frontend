@@ -51,14 +51,6 @@ export class HelperService {
     return arr;
   }
 
-  public static getImgBase64(file: Blob | File): Promise<string> {
-    return new Promise<string>(resolve => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-    });
-  }
-
   public static getRatingTitle(rating: number): string {
     return `global.rating.${  Math.round(rating).toString(10)}`;
   }

@@ -11,6 +11,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { fileToBase64 } from '@app/core/functions/file.functions';
 import { NgDestroyService } from '@app/core/services';
 import { IonSlides } from '@ionic/angular';
 import { from, Observable } from 'rxjs';
@@ -18,13 +19,6 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import Photo from './photo.interface';
 
 const spaceBetweenSlides: number = 16;
-
-const toBase64 = file => new Promise<string>((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result as string);
-  reader.onerror = error => reject(error);
-});
 
 @Component({
   selector: 'app-image-carousel',
@@ -78,7 +72,7 @@ export class ImageCarouselComponent implements AfterViewInit {
   @Input()
   public set files(files: File[]) {
     const getPhotos = files.map(async file => {
-      const src = await toBase64(file);
+      const src = await fileToBase64(file);
       return {
         photo: src,
         photo_thumbnail: src,

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { HelperService } from '@app/core/services/helper.service';
+import { fileToBase64 } from '@app/core/functions/file.functions';
 import { PopoverController } from '@ionic/angular';
 import { ImageCropPopoverComponent } from './image-cropper/image-crop-popover.component';
 
@@ -33,7 +33,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
       return Promise.reject();
     }
     if (!this.cropAfterSelect) {
-      HelperService.getImgBase64(file).then((base64) => {
+      fileToBase64(file).then((base64) => {
         this.setUri(base64);
       });
       return Promise.resolve();
