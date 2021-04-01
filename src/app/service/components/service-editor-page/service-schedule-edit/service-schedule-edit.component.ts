@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceSchedule } from '@app/api/models';
-import { concat, forkJoin, Observable, of } from 'rxjs';
-import { last, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { concat, Observable, of } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';
@@ -22,9 +22,8 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
     this.schedule$ = this.context$.pipe(
       switchMap(context =>
         deps.api.accountsServiceScheduleList({
-            service: context.service.id,
-          },
-        ),
+          service: context.service.id,
+        }),
       ),
       map(response => response.results),
       shareReplay(1),
@@ -33,29 +32,20 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
 
   public submit({ form, service }: ServiceEditorContext): void {
     const { is_base_schedule, schedule } = form.value;
-    const newSchedule: ServiceSchedule[] = schedule.map(s => ({ ...s, service: service.id }));
-
-    const deleteOldSchedule$ = this.deps.api.accountsServiceScheduleList({ service: service.id }).pipe(
-      switchMap(schedules => schedules.count > 0
-        ? forkJoin(schedules.results.map(l => this.deps.api.accountsServiceScheduleDelete(l.id)))
-        : of<null>(void 0),
-      ),
-      last(),
-    );
-    const createNewSchedule$ = is_base_schedule
-      ? of<any>(void 0)
-      : this.deps.api.accountsServiceScheduleSet(newSchedule);
+    const newSchedule: ServiceSchedule[] = schedule?.map(s => ({ ...s, service: service.id }));
+    const createNewSchedule$ = is_base_schedule ? of<any>(void 0) : this.deps.api.accountsServiceScheduleSet(newSchedule);
 
     const newService: Service = {
       ...service,
       is_base_schedule,
     };
+
     const sources = [
       concat(
         // must save the "is_base_schedule" flag before saving the schedules
-        this.deps.api.accountsServicesUpdate({ id: service.id, data: newService })),
-      deleteOldSchedule$,
-      createNewSchedule$,
+        this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+        createNewSchedule$,
+      ),
     ];
     this.saveAndReturn(sources);
   }

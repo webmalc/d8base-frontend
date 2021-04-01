@@ -12,7 +12,7 @@ export class ChatsService {
   @Select(CurrentUserSelectors.isAuthenticated)
   public isAuthenticated$: Observable<boolean>;
 
-  public chatList$: BehaviorSubject<AbstractMessage[]> = new BehaviorSubject<AbstractMessage[]>([]);
+  public chatList$: BehaviorSubject<AbstractMessage[]> = new BehaviorSubject<AbstractMessage[]>(null);
   private defaultChatList: AbstractMessage[] = [];
   private chatsSubscription: Subscription;
 
