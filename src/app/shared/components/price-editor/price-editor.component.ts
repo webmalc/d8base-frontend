@@ -1,8 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Price } from '@app/api/models';
-import { Currency } from '@app/core/models/currency';
-import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
+import { Price, Rate } from '@app/api/models';
+import { RatesApiCache } from '@app/core/services/cache';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -31,9 +30,9 @@ export class PriceEditorComponent implements ControlValueAccessor {
   private onChange: (value: any) => void;
   private onTouched: () => void;
 
-  constructor(currencyApi: CurrencyListApiService, private readonly userSettings: UserSettingsService) {
+  constructor(ratesApi: RatesApiCache, private readonly userSettings: UserSettingsService) {
     this.currency$ = forkJoin([
-      currencyApi.getList(),
+      ratesApi.list(),
       this.userSettings.userSettings$.pipe(
         first(x => !!x),
         map(settings => settings.currency),
@@ -61,8 +60,8 @@ export class PriceEditorComponent implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
-  public setCurrency(currency: Currency) {
-    const code = currency.currency;
+  public setCurrency(rate: Rate) {
+    const code = rate.currency;
     this.currencyCode = code;
     if (!this.value.is_price_fixed) {
       this.writeField('start_price_currency', code);
@@ -78,7 +77,7 @@ export class PriceEditorComponent implements ControlValueAccessor {
     this.writeField('is_price_fixed', isPriceFixed);
   }
 
-  public getInitialCurrency(list: Currency[], defaultCurrency: Currency): Currency {
+  public getInitialCurrency(list: Rate[], defaultCurrency: Rate): Rate {
     const result = list.find(c => c.currency === this.currencyCode) ?? defaultCurrency;
     this.setCurrency(result);
 

@@ -10,15 +10,13 @@ export class Initialize {
 export class Login {
   public static readonly type = '[CurrentUser] User logs in using name and password';
 
-  constructor(public credentials: { username: string; password: string }) {
-  }
+  constructor(public credentials: { username: string; password: string }) {}
 }
 
 export class AuthenticateWithToken {
   public static readonly type = '[CurrentUser] User logs in using existing token data';
 
-  constructor(public tokens: AuthResponseInterface) {
-  }
+  constructor(public tokens: AuthResponseInterface) {}
 }
 
 export class RefreshTokens {
@@ -41,18 +39,31 @@ export class LoadSettings {
   public static readonly type = '[CurrentUser] Load user settings';
 }
 
+export class SaveSettings {
+  public static readonly type = '[CurrentUser] Save user settings';
+
+  constructor(public newSettings: Partial<UserSettings>) {}
+}
+export class RestoreSettingsLocal {
+  public static readonly type = '[CurrentUser] Restore from storage user settings';
+}
+
+export class StoreSettingsLocal {
+  public static readonly type = '[CurrentUser] Store to storage user settings';
+
+  constructor(public newSettings: Partial<UserSettings>) {}
+}
+
 export class CreateProfessional {
   public static readonly type = '[CurrentUser] Add new professional to current user';
 
-  constructor(public master: ProfessionalList) {
-  }
+  constructor(public master: ProfessionalList) {}
 }
 
 export class Register {
   public static readonly type = '[CurrentUser] Register user with the provided data';
 
-  constructor(public user: DefaultRegisterUser, public userData?: { location: UserLocation }) {
-  }
+  constructor(public user: DefaultRegisterUser, public userData?: { location: UserLocation }) {}
 }
 
 export class Logout {
@@ -60,22 +71,19 @@ export class Logout {
 }
 
 export class ChangeUserSettings {
-  public static readonly type = '[CurrentUser] User changes their settings';
+  public static readonly type = '[CurrentUser] Change user settings';
 
-  constructor(public changes: Partial<UserSettings>) {
-  }
+  constructor(public changes: Partial<UserSettings>) {}
 }
 
 export class UpdateProfile {
-  public static readonly type = '[CurrentUser] User changes their profile';
+  public static readonly type = '[CurrentUser] Change user profile';
 
-  constructor(public changes: Partial<Profile>) {
-  }
+  constructor(public changes: Partial<Profile>) {}
 }
 
 export class CreateUserLocation {
   public static readonly type = '[CurrentUser] Create user location';
 
-  constructor(public location: UserLocation) {
-  }
+  constructor(public location: UserLocation) {}
 }

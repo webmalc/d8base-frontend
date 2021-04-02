@@ -37,7 +37,6 @@ export class TranslationService {
   private subOnUserSettings() {
     this.userSettings.userSettings$.pipe(
       map(settings => settings.language),
-      distinct(),
     ).subscribe(language => this.setLang(language));
   }
 }

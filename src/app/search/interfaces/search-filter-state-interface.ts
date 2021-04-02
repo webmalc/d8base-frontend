@@ -1,6 +1,5 @@
-import { Country } from '@app/api/models';
+import { Country, Rate } from '@app/api/models';
 import { Category } from '@app/core/models/category';
-import { Currency } from '@app/core/models/currency';
 import { Subcategory } from '@app/core/models/subcategory';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { Tag } from '@app/master/models/tag';
@@ -25,7 +24,7 @@ export interface SearchFilterStateInterface {
     isAtMasterLocationService: boolean;
     isAtClientLocationService: boolean;
     price: {
-      currency: Currency;
+      currency: Rate;
       start: string;
       end: string;
     };

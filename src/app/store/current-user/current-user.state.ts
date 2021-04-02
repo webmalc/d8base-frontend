@@ -21,9 +21,11 @@ import * as SavedUserProfessionalsActions from './saved-professionals/saved-prof
 import { defaultState, guestState } from './current-user.constants';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
+import CurrentUserSelectors from './current-user.selectors';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
+const USER_SETTINGS_STORAGE_KEY = 'user_settings';
 
 @State<CurrentUserStateModel>({
   name: 'currentUser',
@@ -38,8 +40,7 @@ export class CurrentUserState implements NgxsOnInit {
     private readonly client: ApiClientService,
     private readonly servicePublicationState: ServicePublishDataHolderService,
     private readonly locationService: CurrentPositionService,
-  ) {
-  }
+  ) {}
 
   public ngxsOnInit(context: StateContext<CurrentUserStateModel>): void {
     context.dispatch(new CurrentUserActions.Initialize());
@@ -51,6 +52,7 @@ export class CurrentUserState implements NgxsOnInit {
       tap(tokens => {
         if (!tokens) {
           patchState(guestState);
+          dispatch(new CurrentUserActions.RestoreSettingsLocal());
         } else {
           patchState({ tokens });
           dispatch(new CurrentUserActions.LoadProfile());
@@ -90,12 +92,13 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.Logout)
-  public logout({ setState }: StateContext<CurrentUserStateModel>): Observable<any> {
+  public logout({ setState, getState }: StateContext<CurrentUserStateModel>): Observable<any> {
+    const { settings } = getState();
     return from(
       this.servicePublicationState
         .reset()
         .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
-        .then(() => setState(guestState)),
+        .then(() => setState({ ...guestState, settings })),
     );
   }
 
@@ -115,7 +118,9 @@ export class CurrentUserState implements NgxsOnInit {
     { dispatch }: StateContext<CurrentUserStateModel>,
     { master }: CurrentUserActions.CreateProfessional,
   ) {
-    return this.api.accountsProfessionalsCreate(master).pipe(mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())));
+    return this.api
+      .accountsProfessionalsCreate(master)
+      .pipe(mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())));
   }
 
   @Action(CurrentUserActions.LoadProfile)
@@ -147,12 +152,9 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.LoadProfessionals)
   public loadProfessionals({ patchState }: StateContext<CurrentUserStateModel>) {
-    return this.api.accountsProfessionalsList({}).pipe(tap(response => patchState({ professionals: response.results })));
-  }
-
-  @Action(CurrentUserActions.LoadSettings)
-  public loadSettings({ patchState }: StateContext<CurrentUserStateModel>) {
-    return this.api.accountsSettingsList({}).pipe(tap(response => patchState({ settings: response.results[0] })));
+    return this.api
+      .accountsProfessionalsList({})
+      .pipe(tap(response => patchState({ professionals: response.results })));
   }
 
   @Action(CurrentUserActions.Register)
@@ -160,28 +162,72 @@ export class CurrentUserState implements NgxsOnInit {
     return this.api.accountsRegisterCreate(user).pipe(
       // TODO fix swagger; returned user contains the "token" field
       mergeMap((user: any) => dispatch(new CurrentUserActions.AuthenticateWithToken(user.token))),
-      mergeMap(() => (
-        userData?.location ? dispatch(new CurrentUserActions.CreateUserLocation(userData.location)) : of()),
+      mergeMap(() =>
+        userData?.location ? dispatch(new CurrentUserActions.CreateUserLocation(userData.location)) : of(),
       ),
     );
   }
 
+  @Action(CurrentUserActions.LoadSettings)
+  public loadSettings({ patchState, dispatch }: StateContext<CurrentUserStateModel>) {
+    return this.api.accountsSettingsList({}).pipe(
+      tap(response => {
+        const settings = response.results[0];
+        dispatch(new CurrentUserActions.StoreSettingsLocal(settings));
+        patchState({ settings });
+      }),
+    );
+  }
+
+  @Action(CurrentUserActions.RestoreSettingsLocal)
+  public restoreSettings({ patchState }: StateContext<CurrentUserStateModel>) {
+    return from(this.storage.get(USER_SETTINGS_STORAGE_KEY)).pipe(tap(settings => patchState({ settings })));
+  }
+
   @Action(CurrentUserActions.ChangeUserSettings)
   public changeUserSettings(
-    { getState, patchState }: StateContext<CurrentUserStateModel>,
+    { getState, patchState, dispatch }: StateContext<CurrentUserStateModel>,
     { changes }: CurrentUserActions.ChangeUserSettings,
   ) {
-    const settings = getState().settings;
-    patchState({
-      settings: {
-        ...settings,
-        ...changes,
-      },
-    });
+    const state = getState();
+    const isAuthentificated = CurrentUserSelectors.isAuthenticated(state);
+    const { settings } = state;
+
+    const newSettings = {
+      ...settings,
+      ...changes,
+    };
+
+    if (isAuthentificated) {
+      dispatch(new CurrentUserActions.SaveSettings(newSettings));
+    }
+    dispatch(new CurrentUserActions.StoreSettingsLocal(newSettings));
+
+    patchState({ settings: newSettings });
+  }
+
+  @Action(CurrentUserActions.SaveSettings)
+  public saveUserSettings({}: StateContext<CurrentUserStateModel>, { newSettings }: CurrentUserActions.SaveSettings) {
+    const id = newSettings.id;
+    const saveSettings$ = id
+      ? this.api.accountsSettingsUpdate({ id, data: newSettings })
+      : this.api.accountsSettingsCreate(newSettings);
+    return saveSettings$;
+  }
+
+  @Action(CurrentUserActions.StoreSettingsLocal)
+  public storeUserSettings(
+    {}: StateContext<CurrentUserStateModel>,
+    { newSettings }: CurrentUserActions.StoreSettingsLocal,
+  ) {
+    return from(this.storage.set(USER_SETTINGS_STORAGE_KEY, newSettings));
   }
 
   @Action(CurrentUserActions.UpdateProfile)
-  public updateProfile({ patchState }: StateContext<CurrentUserStateModel>, { changes }: CurrentUserActions.ChangeUserSettings) {
+  public updateProfile(
+    { patchState }: StateContext<CurrentUserStateModel>,
+    { changes }: CurrentUserActions.ChangeUserSettings,
+  ) {
     return this.api.accountsProfilePartialUpdate(changes).pipe(tap(profile => patchState({ profile })));
   }
 
