@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ServiceList } from '@app/api/models';
-import { ServiceTag } from '@app/service/models/service-tag';
+import { ServiceList, ServiceTag } from '@app/api/models';
 
 @Component({
-  selector: 'app-master-profile-service-presentation',
+  selector: 'service-viewer',
   templateUrl: './master-profile-service-presentation.component.html',
   styleUrls: ['./master-profile-service-presentation.component.scss'],
 })

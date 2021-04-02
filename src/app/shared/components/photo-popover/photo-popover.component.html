@@ -1,5 +1,5 @@
 <div class="close-button">
-  <ion-button fill="clear" (click)="delete()">
+  <ion-button *ngIf="canDelete" fill="clear" (click)="delete()">
     <ion-icon name="trash-outline"></ion-icon>
   </ion-button>
   <ion-button fill="clear" (click)="close()">

@@ -98,11 +98,6 @@ export class ImageCarouselComponent implements AfterViewInit {
     this.initNavigationButtonsAvailability();
   }
 
-  public showFileSelectionDialog(): void {
-    this.input.nativeElement.value = '';
-    this.input.nativeElement.click();
-  }
-
   public addFiles(event: Event): void {
     const eventTarget = event.target as HTMLInputElement;
     const fileList: FileList = eventTarget.files;

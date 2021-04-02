@@ -443,7 +443,8 @@
       },
       "services-tab": {
         "master-services": "Услуги мастера",
-        "add-new-service": "добавить услугу"
+        "add-new-service": "Добавить услугу",
+        "search-placeholder": "Поиск по названию"
       }
     },
     "info": {

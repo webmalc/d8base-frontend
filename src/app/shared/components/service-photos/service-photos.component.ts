@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ServicePhotoList } from '@app/api/models';
 import { ServicesService } from '@app/api/services';
 import { finalize } from 'rxjs/operators';
@@ -12,7 +12,6 @@ import { finalize } from 'rxjs/operators';
 export class ServicePhotosComponent implements OnInit {
   @Input() public serviceId: number;
   public servicePhotos: ServicePhotoList[] = [];
-  public isLoading: boolean = false;
 
   constructor(
     private readonly servicesService: ServicesService,
@@ -28,17 +27,14 @@ export class ServicePhotosComponent implements OnInit {
     if (!this.serviceId) {
       return;
     }
-    this.isLoading = true;
     this.servicesService
       .servicesServicePhotosList({ service: this.serviceId })
       .pipe(
         finalize(() => {
-          this.isLoading = false;
           this.cd.markForCheck();
         }),
       )
       .subscribe(res => {
-        this.isLoading = false;
         this.servicePhotos = res.results;
         this.cd.markForCheck();
       });

@@ -443,7 +443,8 @@
       },
       "services-tab": {
         "master-services": "Professional services",
-        "add-new-service": "add new service"
+        "add-new-service": "Add new service",
+        "search-placeholder": "Search by name"
       }
     },
     "info": {
