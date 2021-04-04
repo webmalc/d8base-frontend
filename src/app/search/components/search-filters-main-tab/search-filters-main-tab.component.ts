@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category, City, Country, Subcategory } from '@app/api/models';
+import { Category, City, Country, Rate, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
-import { Currency } from '@app/core/models/currency';
-import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
+import { RatesApiCache } from '@app/core/services/cache';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
 import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
@@ -22,7 +21,7 @@ import { filter, withLatestFrom } from 'rxjs/operators';
 export class SearchFiltersMainTabComponent implements OnInit {
   public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
   public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
-  public currencyList: Currency[] = [];
+  public rates: Rate[] = [];
 
   constructor(
     private readonly professionalsApi: ProfessionalsService,
@@ -31,14 +30,14 @@ export class SearchFiltersMainTabComponent implements OnInit {
     public readonly citySelectable: SelectableCityOnSearchService,
     private readonly pop: PopoverController,
     private readonly currentLocation: CurrentLocationCompilerService,
-    private readonly currencyListApi: CurrencyListApiService,
+    private readonly ratesApiCache: RatesApiCache,
     private readonly userSettings: UserSettingsService,
     private readonly cd: ChangeDetectorRef,
   ) {}
 
   public ngOnInit(): void {
-    this.getCategories();
-    this.getCurrencies();
+    this.subscribeCategories();
+    this.subscribeRates();
   }
 
   public async initLocationPopover(): Promise<void> {
@@ -87,8 +86,9 @@ export class SearchFiltersMainTabComponent implements OnInit {
   }
 
   public initSubcategories(categories: Category[]): void {
-    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id)))
-      .subscribe(data => this.subcategoriesList$.next(data));
+    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id))).subscribe(data =>
+      this.subcategoriesList$.next(data),
+    );
   }
 
   private updateCity(coords: Coords): void {
@@ -105,18 +105,20 @@ export class SearchFiltersMainTabComponent implements OnInit {
       );
   }
 
-  private getCategories(): void {
-    this.professionalsApi.professionalsCategoriesList({}).subscribe(results => this.categoryList$.next(results.results));
+  private subscribeCategories(): void {
+    this.professionalsApi
+      .professionalsCategoriesList({})
+      .subscribe(results => this.categoryList$.next(results.results));
   }
 
-  private getCurrencies(): void {
-    this.currencyListApi
-      .getList()
+  private subscribeRates(): void {
+    this.ratesApiCache
+      .list()
       .pipe(withLatestFrom(this.userSettings.userSettings$))
-      .subscribe(([currencies, settings]) => {
-        this.currencyList = currencies;
-        this.stateManager.data.main.price.currency = currencies.find(
-          ({ currency }) => currency === settings?.currency ?? currencies[0].currency,
+      .subscribe(([rates, settings]) => {
+        this.rates = rates;
+        this.stateManager.data.main.price.currency = rates.find(
+          ({ currency }) => currency === settings?.currency ?? rates[0].currency,
         );
         this.cd.markForCheck();
       });

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { UserLocation } from '@app/api/models';
-import { Currency } from '@app/core/models/currency';
+import { Rate, UserLocation } from '@app/api/models';
 import { DarkModeService } from '@app/core/services';
-import { CurrencyListApiService } from '@app/core/services/currency-list-api.service';
+import { RatesApiCache } from '@app/core/services/cache';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { Observable } from 'rxjs';
@@ -14,21 +13,19 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./flag-menu.component.scss'],
 })
 export class FlagMenuComponent {
-
   public defaultLocation$: Observable<UserLocation>;
   public darkTheme$: Observable<boolean>;
-
-  public currencyList$: Observable<Currency[]>;
+  public rateList$: Observable<Rate[]>;
 
   constructor(
-    public readonly userSettings: UserSettingsService,
+    public readonly userSettingsService: UserSettingsService,
     private readonly darkModeService: DarkModeService,
     userManager: UserManagerService,
-    currency: CurrencyListApiService,
+    rates: RatesApiCache,
   ) {
     this.darkTheme$ = darkModeService.darkTheme$;
     this.defaultLocation$ = userManager.defaultLocation$.pipe(filter(x => !!x));
-    this.currencyList$ = currency.getList();
+    this.rateList$ = rates.list();
   }
 
   public changeMode(event: CustomEvent): void {
