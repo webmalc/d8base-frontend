@@ -1,8 +1,10 @@
-<ion-list class="photo-slider" *appIfSpinner="servicePhotos?.length > 0">
-  <ion-list-header>
-    <ion-label>
-      <h1>{{ 'service-photos.title' | translate }}</h1>
-    </ion-label>
-  </ion-list-header>
-  <app-image-carousel [photos]="servicePhotos"></app-image-carousel>
-</ion-list>
+<ng-container *appIfSpinner="servicePhotos">
+  <ion-list class="photo-slider" *appIfSpinner="servicePhotos.length > 0">
+    <ion-list-header>
+      <ion-label>
+        <h1>{{ 'service-photos.title' | translate }}</h1>
+      </ion-label>
+    </ion-list-header>
+    <app-image-carousel [photos]="servicePhotos"></app-image-carousel>
+  </ion-list>
+</ng-container>
