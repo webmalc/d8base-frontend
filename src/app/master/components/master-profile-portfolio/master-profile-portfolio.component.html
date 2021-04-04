@@ -4,7 +4,8 @@
     </div>
   </ion-row>
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
-    <ion-button [disabled]="isAddPhotoButtonDisabled" (click)="addImages()">{{ 'master-profile.portfolio.add-photo' | translate }}</ion-button>
+    <input type="file" accept="image/*" multiple class="hidden" (change)="addImages($event)" #input />
+    <ion-button [disabled]="pending$ | async" (click)="input.click()">{{ 'master-profile.portfolio.add-photo' | translate }}</ion-button>
   </ion-row>
   <ng-container *ngIf="photos$ | async as masterPhotos">
     <ion-row *ngIf="masterPhotos.length > 0" class="ion-wrap ion-align-items-start ion-margin-bottom ion-justify-content-center">
