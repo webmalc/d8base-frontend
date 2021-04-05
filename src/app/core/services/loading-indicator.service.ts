@@ -7,7 +7,7 @@ import { MAX_DELAY_MS } from '@app/core//constants/ui.constants';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingIndicatorService {
-  private loading: HTMLIonLoadingElement;
+  private loading: Promise<HTMLIonLoadingElement>;
 
   constructor(
     private readonly router: Router,
@@ -27,15 +27,17 @@ export class LoadingIndicatorService {
 
   private async showLoadingIndicator(): Promise<void> {
     if (!this.loading) {
-      this.loading = await this.loadingController.create();
-      await this.loading.present();
+      this.loading = this.loadingController.create();
+      const indicator = await this.loading;
+      await indicator.present();
     }
   }
 
   private async hideLoadingIndicator(): Promise<void> {
     if (this.loading) {
-      await this.loading.dismiss();
+      const indicator = await this.loading;
       this.loading = null;
+      await indicator.dismiss();
     }
   }
 }
