@@ -705,7 +705,10 @@
     "currency": "Валюта",
     "units": "Kм / Мили",
     "hide-last-name": "Скрывать фамилию",
-    "dark-theme": "Темная тема"
+    "dark-theme": "Темная тема",
+    "first-day-of-week": "Первый день недели",
+    "monday": "Понедельник",
+    "sunday": "Воскресенье"
   },
   "calendar": {
     "timezone": "Часовой пояс"
