@@ -3,8 +3,6 @@ import { FullLocationService, LocationInterface } from '@app/core/services/locat
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 
-const DEFAULT_FLAG = 'ca';
-
 @Component({
   selector: 'app-location-viewer',
   templateUrl: './location-viewer.component.html',
@@ -12,20 +10,14 @@ const DEFAULT_FLAG = 'ca';
 })
 export class LocationViewerComponent {
 
-  @Input() public type: 'full' | 'short' | 'flag' = 'full';
+  @Input() public type: 'full' | 'short' = 'full';
 
   public locationText$: Observable<string>;
-  public countryCode$: Observable<string>;
   public pending$: Observable<boolean>;
 
   private readonly locationSubject = new BehaviorSubject<LocationInterface>(null);
 
   constructor(private readonly locationService: FullLocationService) {
-    this.countryCode$ = this.locationSubject.pipe(
-      switchMap(location => this.locationService.getCountryCode(location)),
-      map(code => code?.toLowerCase() ?? DEFAULT_FLAG),
-    );
-
     this.locationText$ = this.locationSubject.pipe(
       switchMap(location => locationService.getTextLocation(location, this.type === 'short')),
       map(result => result?.text),

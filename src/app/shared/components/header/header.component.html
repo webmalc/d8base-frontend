@@ -29,12 +29,12 @@
       </ng-template>
     </ng-container>
 
-    <ion-item *ngIf="context.isAuthenticated" detail="false" routerLink="/message" lines="none" slot="end">
-      <ion-icon name="chatbubbles-outline"> </ion-icon>
-      <ng-container *ngIf="countOfUnreadMessages$ | async as count">
-        <ion-badge color="danger">{{ count }}</ion-badge>
-      </ng-container>
-    </ion-item>
+    <ion-buttons *ngIf="context.isAuthenticated" routerLink="/message" slot="end">
+      <ion-button>
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+        <ion-badge *ngIf="countOfUnreadMessages$ | async as count" color="danger">{{ count }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
     <ion-item
       lines="none"
       class="text-blue"
@@ -62,7 +62,7 @@
     <ion-buttons slot="end">
       <ion-menu-toggle menu="flag-menu">
         <ion-button>
-          <app-location-viewer type="flag" [location]="defaultLocation$ | async"></app-location-viewer>
+          <app-country-flag *ngIf="currentLanguage$ | async as currentLanguage" [lang]="currentLanguage"></app-country-flag>
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>

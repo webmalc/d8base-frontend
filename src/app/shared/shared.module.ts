@@ -40,6 +40,7 @@ import {
   DistrictSelectorComponent,
   PhoneEditorComponent,
   ImageCarouselComponent,
+  CountryFlagComponent,
 } from '@app/shared/components';
 import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
@@ -151,6 +152,7 @@ import { NumberDirective } from './directives/number.directive';
     DistrictSelectorComponent,
     PhoneEditorComponent,
     ImageCarouselComponent,
+    CountryFlagComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -214,6 +216,7 @@ import { NumberDirective } from './directives/number.directive';
     CitySelectorComponent,
     PhoneEditorComponent,
     ImageCarouselComponent,
+    CountryFlagComponent,
   ],
   imports: [
     CommonModule,
