@@ -15,7 +15,6 @@ export class ServiceViewerPageComponent {
 
   public service: ServiceList;
   public master: ProfessionalList;
-  public showSuccessOrderNotification$: Observable<boolean>;
 
   constructor(
     public location: Location,
@@ -36,9 +35,5 @@ export class ServiceViewerPageComponent {
       this.master = master;
       this.service = service;
     });
-    this.showSuccessOrderNotification$ = route.queryParams.pipe(
-      first(),
-      map(params => params.from === 'publish'),
-    );
   }
 }

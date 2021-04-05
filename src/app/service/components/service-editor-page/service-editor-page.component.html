@@ -1,6 +1,10 @@
 <app-header></app-header>
 <ion-content *ngIf="service$ | async as service">
   <app-content-wrapper>
+    <app-info-row *ngIf="showSuccessOrderNotification$ | async">
+      {{ 'order.success-title' | translate }}
+    </app-info-row>
+
     <ion-item lines="none">
       <ion-buttons slot="start">
         <ion-button routerLink="/professional" routerDirection="back">
@@ -12,12 +16,9 @@
 
     <ion-item-divider color="light">
       <ion-label>
-        <h1>{{'service-details.title' | translate}}</h1>
+        <h1>{{ 'service-details.title' | translate }}</h1>
       </ion-label>
-      <ion-button slot="end"
-                  color="medium"
-                  fill="clear"
-                  [routerLink]="'/service/' + service.id + '/edit/info'">
+      <ion-button slot="end" color="medium" fill="clear" [routerLink]="'/service/' + service.id + '/edit/info'">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
@@ -38,15 +39,19 @@
     <ion-item class="ion-margin-bottom" lines="none">
       <ion-text class="preserve-line-breaks">{{ service.description }}</ion-text>
     </ion-item>
+    <app-image-carousel
+      class="ion-margin-bottom"
+      [photos]="photos$ | async"
+      [editable]="true"
+      (add)="addPhotos($event, service)"
+      (remove)="removePhoto($event)"
+    ></app-image-carousel>
 
     <ion-item-divider color="light">
       <ion-label>
-        <h1>{{'service-details.location-title' | translate}}</h1>
+        <h1>{{ 'service-details.location-title' | translate }}</h1>
       </ion-label>
-      <ion-button slot="end"
-                  color="medium"
-                  fill="clear"
-                  [routerLink]="'/service/' + service.id + '/edit/location'">
+      <ion-button slot="end" color="medium" fill="clear" [routerLink]="'/service/' + service.id + '/edit/location'">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
@@ -54,25 +59,19 @@
 
     <ion-item-divider color="light">
       <ion-label>
-        <h1>{{'service-details.schedule-title' | translate}}</h1>
+        <h1>{{ 'service-details.schedule-title' | translate }}</h1>
       </ion-label>
-      <ion-button slot="end"
-                  color="medium"
-                  fill="clear"
-                  [routerLink]="'/service/' + service.id + '/edit/schedule'">
+      <ion-button slot="end" color="medium" fill="clear" [routerLink]="'/service/' + service.id + '/edit/schedule'">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item *ngIf="service.is_base_schedule" lines="none">
-      {{ 'service-details.is-base-schedule' | translate }}:
-    </ion-item>
+    <ion-item *ngIf="service.is_base_schedule" lines="none"> {{ 'service-details.is-base-schedule' | translate }}: </ion-item>
     <ng-container *ngIf="schedule$ | async as schedule">
       <app-schedule-viewer [schedule]="schedule"></app-schedule-viewer>
     </ng-container>
     <ion-item lines="none">
-      <ion-label>{{'service-details.instant-book-title' | translate}}</ion-label>
-      <ion-toggle [ngModel]="service.is_auto_order_confirmation"
-                  (ngModelChange)="setAutoConfirmation(service, $event)"></ion-toggle>
+      <ion-label>{{ 'service-details.instant-book-title' | translate }}</ion-label>
+      <ion-toggle [ngModel]="service.is_auto_order_confirmation" (ngModelChange)="setAutoConfirmation(service, $event)"></ion-toggle>
     </ion-item>
     <ion-item lines="none">
       <ion-label>{{ 'master-profile.services.service-edit.published' | translate }}</ion-label>

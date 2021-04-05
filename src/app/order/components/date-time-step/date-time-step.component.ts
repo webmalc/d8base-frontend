@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ScheduleService } from '@app/api/services';
 import { addDays, getLocalDateString } from '@app/core/functions/datetime.functions';
 import { MasterCalendar } from '@app/master/models/master-calendar';
-import { CalendarApiService } from '@app/master/services/calendar-api.service';
 import { StepComponent } from '@app/order/abstract/step';
 import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
@@ -32,7 +32,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   private readonly professional$ = new BehaviorSubject<number>(NaN);
 
   constructor(
-    private readonly calendarApi: CalendarApiService,
+    private readonly scheduleApi: ScheduleService,
     protected readonly cd: ChangeDetectorRef,
   ) {
     super(cd);
@@ -75,7 +75,12 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
         const endDate = addDays(startDate, 1);
 
         return (!masterId || !serviceId) ? of(null) :
-          this.calendarApi.getSchedule(masterId, getLocalDateString(startDate), getLocalDateString(endDate), serviceId);
+          this.scheduleApi.scheduleCalendarList({
+            professional: masterId?.toString(),
+            service: serviceId?.toString(),
+            startDatetime: getLocalDateString(startDate),
+            endDatetime: getLocalDateString(endDate),
+          });
       }),
     );
   }

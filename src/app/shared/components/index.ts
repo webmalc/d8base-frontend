@@ -29,3 +29,4 @@ export * from './not-found-page/not-found-page.component';
 export * from './language/language.component';
 export * from './location-editor';
 export * from './phone-editor/phone-editor.component';
+export * from './image-carousel/image-carousel.component';

@@ -1,6 +1,11 @@
-<ion-button class="close-button" fill="clear" (click)="close()">
-  <ion-icon name="close-circle-outline"></ion-icon>
-</ion-button>
+<div class="close-button">
+  <ion-button *ngIf="canDelete" fill="clear" (click)="delete()">
+    <ion-icon name="trash-outline"></ion-icon>
+  </ion-button>
+  <ion-button fill="clear" (click)="close()">
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-button>
+</div>
 <ion-button class="nav-button prev-button" size="small" (click)="slidePrev()" *ngIf="photoIndex > 0">
   <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
 </ion-button>

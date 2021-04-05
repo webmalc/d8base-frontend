@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class PhotoPopoverComponent {
   @Input() public photos: string[];
   @Input() public photoIndex: number = 0;
+  @Input() public canDelete: boolean = false;
 
   public isNextButtonDisabled$: Observable<boolean>;
   public isPrevButtonDisabled$: Observable<boolean>;
@@ -19,6 +20,10 @@ export class PhotoPopoverComponent {
 
   public close(): void {
     this.modalController.dismiss();
+  }
+
+  public delete(): void {
+    this.modalController.dismiss({ delete: true });
   }
 
   public slideNext(): void {

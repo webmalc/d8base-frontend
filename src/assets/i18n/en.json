@@ -442,7 +442,9 @@
         "more-info": "More info"
       },
       "services-tab": {
-        "master-services": "Professional services"
+        "master-services": "Professional services",
+        "add-new-service": "Add new service",
+        "search-placeholder": "Search by name"
       }
     },
     "info": {
@@ -696,8 +698,7 @@
     "email": "E-mail",
     "phone": "Phone",
     "is-not-for-me-description": "Enter the name of the person who will get the service",
-    "success-title": "The service was successfully published.",
-    "success-description": "Here's how the clients see it:"
+    "success-title": "The service was successfully published."
   },
   "flag-menu": {
     "language": "Language",

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
+import { HelperService } from '@app/core/services/helper.service';
 import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { ServicePublishStepFiveFormService } from '@app/service/forms/service-publish-step-five-form.service';
@@ -49,6 +50,10 @@ export class ServicePublishStepFiveComponent implements OnInit {
         this.formService.createForm(stepFiveInitData);
       });
     }
+  }
+
+  public get avatar(): string {
+    return this.formService?.form.get(this.formFields.Avatar).value || HelperService.getNoAvatarLink();
   }
 
   public submitForm(): void {

@@ -1,24 +1,11 @@
 <ng-container *ngIf="context$ | async as context">
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
     <div class="ion-margin-bottom">
-      <ngx-dropzone class="width100" [accept]="'image/*'" [disabled]="isDropzoneDisabled" (change)="dropzoneOnSelect($event)">
-        <ngx-dropzone-label>
-          <ion-row>
-            {{ 'global.dropzone-label' | translate }}
-          </ion-row>
-          <ion-row class="ion-justify-content-center">
-            <ion-item lines="none">
-              <ion-icon name="download-outline"></ion-icon>
-            </ion-item>
-          </ion-row>
-        </ngx-dropzone-label>
-        <ngx-dropzone-image-preview *ngFor="let file of files" [file]="file" [removable]="true" (removed)="dropzoneOnRemove(file)">
-        </ngx-dropzone-image-preview>
-      </ngx-dropzone>
     </div>
   </ion-row>
   <ion-row *ngIf="context.canEdit" class="ion-wrap ion-align-items-start ion-justify-content-center">
-    <ion-button [disabled]="isAddPhotoButtonDisabled" (click)="addImages()">{{ 'master-profile.portfolio.add-photo' | translate }}</ion-button>
+    <input type="file" accept="image/*" multiple class="hidden" (change)="addImages($event)" #input />
+    <ion-button [disabled]="pending$ | async" (click)="input.click()">{{ 'master-profile.portfolio.add-photo' | translate }}</ion-button>
   </ion-row>
   <ng-container *ngIf="photos$ | async as masterPhotos">
     <ion-row *ngIf="masterPhotos.length > 0" class="ion-wrap ion-align-items-start ion-margin-bottom ion-justify-content-center">
@@ -29,11 +16,11 @@
           </ion-label>
         </ion-list-header>
         <ion-item class="photo-container ion-item-no-side-padding pv5 ph5" lines="none">
-          <div class="gallery" viewImageSlider>
+          <div class="gallery" appViewImageSlider>
             <div class="gallery-element" *ngFor="let photo of masterPhotos">
               <div class="gallery-element-container">
                 <ion-img
-                  viewOnClick
+                  appViewOnClick
                   class="ion-img"
                   [src]="photo.photo_thumbnail"
                   [fullSizeSrc]="photo.photo"

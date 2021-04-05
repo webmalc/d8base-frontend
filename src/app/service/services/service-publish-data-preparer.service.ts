@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Service } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
+import { fileToBase64 } from '@app/core/functions/file.functions';
 import { HelperService } from '@app/core/services/helper.service';
 import { MasterLocation } from '@app/master/models/master-location';
 import { MasterSchedule } from '@app/master/models/master-schedule';
@@ -150,7 +151,7 @@ export class ServicePublishDataPreparerService {
   }
 
   private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {
-    return await Promise.all([...data.photos.map(async val => this.getNewPhoto(await HelperService.getImgBase64(val)))]);
+    return await Promise.all([...data.photos.map(async val => this.getNewPhoto(await fileToBase64(val)))]);
   }
 
   private getNewPhoto(photo: string): ServicePhoto {

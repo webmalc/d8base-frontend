@@ -28,7 +28,6 @@ import { ServicePageModule } from '@app/service/service.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MasterPageRoutingModule } from './master-routing.module';
 import { MasterPage } from './master.page';
 import { ProfessionalGuard } from './professional.guard';
@@ -39,7 +38,6 @@ import { ProfessionalGuard } from './professional.guard';
     FormsModule,
     IonicModule,
     MasterPageRoutingModule,
-    NgxDropzoneModule,
     ReactiveFormsModule,
     ReviewsModule,
     SharedModule,

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ServiceList } from '@app/api/models';
 
 @Component({
-  selector: 'app-master-profile-service-edit',
+  selector: 'service-editor',
   templateUrl: './master-profile-service-edit.component.html',
   styleUrls: ['./master-profile-service-edit.component.scss'],
 })

@@ -1,34 +1,41 @@
 <ng-container *ngIf="context$ | async as context">
-<ion-row *ngIf="serviceData$ | async as serviceData">
-  <ion-col class="ion-no-padding" size="12">
-    <ion-item>
-      <ion-label color="medium" position="floating">
-        <ion-icon name="search-outline"></ion-icon>
-        {{"master-profile.services.services-tab.master-services"|translate}}
-      </ion-label>
-      <ion-input (ionChange)="search($event)" (keydown.escape)="clearSearchModel()" [value]="searchModel">
-      </ion-input>
-    </ion-item>
+  <ion-row *ngIf="serviceData$ | async as serviceData">
+    <ion-col class="ion-no-padding" size="12">
+      <ion-item>
+        <ion-label color="medium" position="floating">
+          <ion-icon name="search-outline"></ion-icon>
+          {{ 'master-profile.services.services-tab.search-placeholder' | translate }}
+        </ion-label>
+        <ion-input (ionChange)="search($event)" (keydown.escape)="clearSearchModel()" [value]="searchModel"> </ion-input>
+      </ion-item>
 
-    <ion-item>
-      {{"master-profile.services.services-tab.master-services"|translate}}&nbsp;({{serviceData.length}})
-    </ion-item>
+      <ion-item lines="none">
+        {{ 'master-profile.services.services-tab.master-services' | translate }}&nbsp;({{ serviceData.length }})
+      </ion-item>
 
-    <ion-list *ngIf="!context.canEdit">
-      <app-master-profile-service-presentation *ngFor="let service of serviceData | serviceDataFilter:searchModel"
-                                               [serviceData]="service"
-                                               class="pv5">
-      </app-master-profile-service-presentation>
-    </ion-list>
-    <ion-list *ngIf="context.canEdit">
-      <app-master-profile-service-edit *ngFor="let service of serviceData | serviceDataFilter:searchModel"
-                                       (enableService)="enableService($event)"
-                                       (disableService)="disableService($event)"
-                                       (deleteService)="deleteService($event)"
-                                       [service]="service.service"
-                                       class="pv5">
-      </app-master-profile-service-edit>
-    </ion-list>
-  </ion-col>
-</ion-row>
+      <ion-list *ngIf="!context.canEdit">
+        <service-viewer *ngFor="let service of serviceData | serviceDataFilter: searchModel" [serviceData]="service" class="pv5">
+        </service-viewer>
+      </ion-list>
+      <ion-list *ngIf="context.canEdit">
+        <service-editor
+          *ngFor="let service of serviceData | serviceDataFilter: searchModel"
+          (enableService)="enableService($event)"
+          (disableService)="disableService($event)"
+          (deleteService)="deleteService($event)"
+          [service]="service.service"
+          class="pv5"
+        >
+        </service-editor>
+        <ion-card routerLink="/service/publish">
+          <ion-card-content>
+            <div class="add-new-service-card">
+              <ion-icon name="add-circle-outline" class="ion-padding-end"></ion-icon>
+              {{ 'master-profile.services.services-tab.add-new-service' | translate }}
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 </ng-container>

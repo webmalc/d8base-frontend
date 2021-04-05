@@ -1,32 +1,34 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
-import { HelperService } from '@app/core/services/helper.service';
+import { fileToBase64 } from '@app/core/functions/file.functions';
+import { NgDestroyService } from '@app/core/services';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
-import { BehaviorSubject, forkJoin, from, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, from, Observable } from 'rxjs';
 import { concatMap, finalize, first, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-portfolio',
   templateUrl: './master-profile-portfolio.component.html',
   styleUrls: ['./master-profile-portfolio.component.scss'],
+  providers: [NgDestroyService],
 })
-export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
-  public readonly files: File[] = [];
-
+export class MasterProfilePortfolioComponent implements OnInit {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
   public readonly photos$: BehaviorSubject<ProfessionalPhotoList[]> = new BehaviorSubject(null);
-  public isAddPhotoButtonDisabled: boolean = true;
-  public isDropzoneDisabled: boolean = false;
+  public readonly pending$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private readonly masterPhotos$: Observable<ProfessionalPhotoList[]>;
-  private readonly ngUnsubscribe$ = new Subject<void>();
 
-  constructor(private readonly professionalsService: ProfessionalsService, private readonly accountsService: AccountsService) {
+  constructor(
+    private readonly professionalsService: ProfessionalsService,
+    private readonly accountsService: AccountsService,
+    private readonly ngUnsubscribe$: NgDestroyService,
+  ) {
     this.masterPhotos$ = this.context$.pipe(
       first(context => !!context?.professional),
       switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.professional.id })),
@@ -40,44 +42,34 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
     });
   }
 
-  public ngOnDestroy(): void {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
-  }
-
-  public dropzoneOnSelect(data: { addedFiles: File[] }): void {
-    this.files.push(...data.addedFiles);
-    this.disableAddPhotoButton(!this.files.length);
-  }
-
-  public dropzoneOnRemove(data: File): void {
-    this.files.splice(this.files.indexOf(data), 1);
-    this.disableAddPhotoButton(!this.files.length);
-  }
-
   public removeImage(photoId: number): void {
     this.accountsService.accountsProfessionalPhotosDelete(photoId).subscribe(() => {
       this.removePhotos([photoId]);
     });
   }
 
-  public addImages(): void {
-    this.disableAddPhotoButton();
-    this.disableDropzone();
+  public addImages(event: Event): void {
+    const eventTarget = event.target as HTMLInputElement;
+    const fileList: FileList = eventTarget.files;
+    if (!fileList?.length) {
+      return;
+    }
+    const files = Array.from(fileList);
+    this.pending$.next(true);
     this.context$
       .pipe(
         first(),
         concatMap(({ professional }) =>
           forkJoin([
-            ...this.files.map(file =>
-              from(HelperService.getImgBase64(file)).pipe(
+            ...files.map(file =>
+              from(fileToBase64(file)).pipe(
                 switchMap(photo => this.accountsService.accountsProfessionalPhotosCreate({ professional: professional.id, photo })),
               ),
             ),
           ]),
         ),
         finalize(() => {
-          this.dropzoneClear();
+          this.pending$.next(false);
         }),
         takeUntil(this.ngUnsubscribe$),
       )
@@ -92,19 +84,5 @@ export class MasterProfilePortfolioComponent implements OnInit, OnDestroy {
 
   private removePhotos(photoIdsToRemove: number[]): void {
     this.photos$.next(this.photos$.value.filter(({ id }) => !photoIdsToRemove.includes(id)));
-  }
-
-  private dropzoneClear(): void {
-    this.files.splice(0, this.files.length);
-    this.disableAddPhotoButton();
-    this.disableDropzone(false);
-  }
-
-  private disableAddPhotoButton(disabled: boolean = true): void {
-    this.isAddPhotoButtonDisabled = disabled;
-  }
-
-  private disableDropzone(disabled: boolean = true): void {
-    this.isDropzoneDisabled = disabled;
   }
 }

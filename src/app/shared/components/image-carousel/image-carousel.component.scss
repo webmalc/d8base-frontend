@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.thumbnail {
+  --size: var(--service-photo-thumb-size);
+  --border-radius: 5px;
+  background: var(--ion-color-light);
+  cursor: pointer;
+}
+
+.nav-buttons-hidden .button {
+  display: none;
+}
+
+.photo-slider-container {
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  .button {
+    --padding-start: 0;
+    --padding-end: 0;
+    --opacity: 0.8;
+    z-index: 10;
+  }
+
+  .prev-button {
+    position: absolute;
+    left: 0;
+  }
+
+  .next-button {
+    position: absolute;
+    right: 0;
+  }
+
+  .slides {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.photo-slider {
+  display: block;
+}
+
+.swiper-slide {
+  width: var(--service-photo-thumb-size);
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ion-icon {
+    font-size: 3rem;
+    color: var(--ion-background-color);
+  }
+}

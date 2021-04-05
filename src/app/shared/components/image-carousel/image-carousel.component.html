@@ -1,0 +1,21 @@
+<div class="photo-slider-container">
+  <ion-button class="button prev-button" size="small" (click)="slidePrev()" *ngIf="!isNavButtonsHidden">
+    <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+  </ion-button>
+  <ion-slides class="slides" appViewImageSlider [options]="slideOptions" [canDelete]="editable" (delete)="delete($event)" #slides>
+    <ion-slide *ngFor="let photo of photos" #slide>
+      <ion-thumbnail class="thumbnail">
+        <ion-img appViewOnClick [src]="photo.photo_thumbnail" [fullSizeSrc]="photo.photo"></ion-img>
+      </ion-thumbnail>
+    </ion-slide>
+    <ion-slide *ngIf="editable" (click)="input.click()" #slide>
+      <ion-thumbnail class="thumbnail add-button">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-thumbnail>
+    </ion-slide>
+    <input type="file" accept="image/*" multiple class="hidden" (change)="addFiles($event)" #input />
+  </ion-slides>
+  <ion-button class="button next-button" size="small" (click)="slideNext()" *ngIf="!isNavButtonsHidden">
+    <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+  </ion-button>
+</div>

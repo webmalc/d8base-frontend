@@ -14,22 +14,7 @@
         {{ 'service-publish.step-three.photos' | translate }}
       </b>
     </ion-item>
-    <ion-item class="ion-margin-bottom" lines="none">
-      <ngx-dropzone class="width100" [accept]="'image/*'" (change)="onSelect($event)">
-        <ngx-dropzone-label>
-          <ion-row>
-            {{ 'global.dropzone-label' | translate }}
-          </ion-row>
-          <ion-row class="ion-justify-content-center">
-            <ion-item lines="none">
-              <ion-icon name="download-outline"></ion-icon>
-            </ion-item>
-          </ion-row>
-        </ngx-dropzone-label>
-        <ngx-dropzone-image-preview *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-image-preview>
-      </ngx-dropzone>
-    </ion-item>
+    <app-image-carousel [files]="files" [editable]="true" (add)="onSelect($event)"></app-image-carousel>
     <ion-col class="ion-no-padding">
       <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
         <ion-col size="6">

@@ -442,7 +442,9 @@
         "more-info": "Подробнее"
       },
       "services-tab": {
-        "master-services": "Услуги мастера"
+        "master-services": "Услуги мастера",
+        "add-new-service": "Добавить услугу",
+        "search-placeholder": "Поиск по названию"
       }
     },
     "info": {
@@ -696,8 +698,7 @@
     "email": "E-mail",
     "phone": "Телефон",
     "is-not-for-me-description": "Введите имя, фамилию человека, который будет получателем услуги",
-    "success-title": "Услуга успешно опубликована.",
-    "success-description": "Так она выглядит для потенциальных клиентов:"
+    "success-title": "Услуга успешно опубликована."
   },
   "flag-menu": {
     "language": "Язык интерфейса",
