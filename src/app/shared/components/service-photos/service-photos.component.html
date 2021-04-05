@@ -1,5 +1,5 @@
 <ng-container *appIfSpinner="servicePhotos">
-  <ion-list class="photo-slider" *appIfSpinner="servicePhotos.length > 0">
+  <ion-list class="photo-slider" *ngIf="servicePhotos.length > 0">
     <ion-list-header>
       <ion-label>
         <h1>{{ 'service-photos.title' | translate }}</h1>
