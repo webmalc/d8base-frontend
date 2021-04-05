@@ -95,7 +95,8 @@
     "terms-of-use": "Пользовательское соглашение",
     "service": "Публикация услуги",
     "preferences": "Настройки системы",
-    "miscellaneous": "Дополнительно"
+    "miscellaneous": "Дополнительно",
+    "dark-theme": "Темная тема"
   },
   "login-form": {
     "login": "Email",
@@ -704,8 +705,6 @@
     "language": "Язык интерфейса",
     "currency": "Валюта",
     "units": "Kм / Мили",
-    "hide-last-name": "Скрывать фамилию",
-    "dark-theme": "Темная тема",
     "first-day-of-week": "Первый день недели",
     "monday": "Понедельник",
     "sunday": "Воскресенье"
