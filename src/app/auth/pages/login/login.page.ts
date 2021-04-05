@@ -62,7 +62,7 @@ export class LoginPage {
 
   private subOnProfile() {
     this.profile$.pipe(
-      filter(x => !!x),
+      filter(profile => !!profile?.account_type),
       takeUntil(this.destroy$),
     ).subscribe(() => this.router.navigateByUrl(this.redirectTo));
   }
