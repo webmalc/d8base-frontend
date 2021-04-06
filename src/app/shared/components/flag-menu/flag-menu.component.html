@@ -9,47 +9,58 @@
   </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="userSettingsService.userSettings$ | async as userSettings">
-  <ion-list class="ion-no-padding">
-    <ion-item class="ion-activatable cursor-pointer">
-      {{ 'flag-menu.language' | translate }}:
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        {{ 'flag-menu.language' | translate }}:
+      </ion-label>
       <ion-select
         (ionChange)="userSettingsService.setLanguage($event.detail.value)"
         [value]="userSettings?.language"
-        interface="alert"
       >
         <ion-select-option *ngFor="let lang of userSettingsService.langList" value="{{ lang }}">
           {{ lang }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="rateList$ | async as rateList" class="ion-activatable cursor-pointer">
-      {{ 'flag-menu.currency' | translate }}:
+    <ion-item *appIfSpinner="rateList$ | async as rateList">
+      <ion-label>
+        {{ 'flag-menu.currency' | translate }}:
+      </ion-label>
       <ion-select
         (ionChange)="userSettingsService.setCurrency($event.detail.value)"
         [value]="userSettings?.currency"
-        interface="alert"
-        property="currency"
       >
         <ion-select-option *ngFor="let rate of rateList" [value]="rate.currency">
-          {{ rate.currency | titlecase }}
+          {{ rate.currency }} ({{ rate.sign }})
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item class="ion-activatable cursor-pointer">
-      {{ 'flag-menu.units' | translate }}:
+    <ion-item>
+      <ion-label>
+        {{ 'flag-menu.units' | translate }}:
+      </ion-label>
       <ion-select
         (ionChange)="userSettingsService.setUnits($event.detail.value)"
         [value]="userSettings?.units"
-        interface="alert"
       >
         <ion-select-option *ngFor="let unit of userSettingsService.unitsList" [value]="unit">
           {{ 'units.' + unit | translate | titlecase }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item class="ion-activatable cursor-pointer">
-      {{ 'flag-menu.dark-theme' | translate }}:
-      <ion-toggle (ionChange)="changeMode($event)" [checked]="darkTheme$ | async"></ion-toggle>
+    <ion-item>
+      <ion-label>
+        {{ 'flag-menu.first-day-of-week' | translate }}:
+      </ion-label>
+      <ion-select
+        (ionChange)="userSettingsService.setFirstDayOfWeek($event.detail.value)"
+        [value]="userSettings?.is_monday_start_of_a_week"
+      >
+        <ion-select-option *ngFor="let day of userSettingsService.firstDayOfWeekList" [value]="day">
+          {{ (day ? 'flag-menu.monday' : 'flag-menu.sunday') | translate }}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 </ion-content>

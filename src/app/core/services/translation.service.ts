@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { distinct, map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +14,14 @@ export class TranslationService {
     ru: 'ru',
     en: 'en',
   };
+  public readonly currentLanguage$: Observable<string>;
 
   constructor(
     private readonly translator: TranslateService,
     private readonly userSettings: UserSettingsService,
   ) {
     this.subOnUserSettings();
+    this.currentLanguage$ = translator.onLangChange.pipe(map(x => x.lang), shareReplay(1));
   }
 
   public setLang(lang: string): void {

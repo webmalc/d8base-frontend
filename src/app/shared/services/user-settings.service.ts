@@ -20,6 +20,7 @@ export class UserSettingsService {
   public langList: Array<UserSettings['language']> = ['en', 'ru'];
   public currencyList: Array<UserSettings['currency']> = ['CAD', 'EUR', 'RUB', 'USD'];
   public unitsList: Array<UserSettings['units']> = [0, 1];
+  public firstDayOfWeekList: Array<UserSettings['is_monday_start_of_a_week']> = [false, true];
 
   constructor() {
     this.userSettings$ = this.settings$.pipe(
@@ -41,5 +42,10 @@ export class UserSettingsService {
   @Dispatch()
   public setUnits(units: UserSettings['units']): CurrentUserActions.ChangeUserSettings {
     return new CurrentUserActions.ChangeUserSettings({ units });
+  }
+
+  @Dispatch()
+  public setFirstDayOfWeek(is_monday_start_of_a_week: UserSettings['is_monday_start_of_a_week']): CurrentUserActions.ChangeUserSettings {
+    return new CurrentUserActions.ChangeUserSettings({ is_monday_start_of_a_week });
   }
 }

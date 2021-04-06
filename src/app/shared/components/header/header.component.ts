@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { UserLocation } from '@app/api/models';
-import { AuthenticationService, MasterManagerService } from '@app/core/services';
+import { AuthenticationService, MasterManagerService, TranslationService } from '@app/core/services';
 import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MenuController, Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import HeaderContext from './header-context.interface';
 
 @Component({
@@ -15,7 +15,7 @@ import HeaderContext from './header-context.interface';
 })
 export class HeaderComponent {
   public context$: Observable<HeaderContext>;
-  public defaultLocation$: Observable<UserLocation>;
+  public currentLanguage$: Observable<string>;
   public countOfUnreadMessages$ = this.unreadMessagesService.unreadMessagesCount();
 
   private readonly isAuthenticated$: Observable<boolean>;
@@ -27,6 +27,7 @@ export class HeaderComponent {
     userManager: UserManagerService,
     authenticator: AuthenticationService,
     masterManager: MasterManagerService,
+    translation: TranslationService,
   ) {
     this.isAuthenticated$ = authenticator.isAuthenticated$;
     this.context$ = combineLatest([
@@ -35,7 +36,7 @@ export class HeaderComponent {
     ]).pipe(
       map(([isAuthenticated, isMaster]) => ({isAuthenticated, isMaster})),
     );
-    this.defaultLocation$ = userManager.defaultLocation$.pipe(filter(x => !!x));
+    this.currentLanguage$ = translation.currentLanguage$;
   }
 
   public isDesktop(): boolean {
