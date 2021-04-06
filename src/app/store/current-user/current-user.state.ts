@@ -21,11 +21,15 @@ import * as SavedUserProfessionalsActions from './saved-professionals/saved-prof
 import { defaultState, guestState } from './current-user.constants';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
-import CurrentUserSelectors from './current-user.selectors';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 const USER_SETTINGS_STORAGE_KEY = 'user_settings';
+
+export const isAuthenticated = (state: CurrentUserStateModel): boolean => {
+  const { tokens } = state;
+  return Boolean(tokens?.access_token);
+};
 
 @State<CurrentUserStateModel>({
   name: 'currentUser',
@@ -190,7 +194,7 @@ export class CurrentUserState implements NgxsOnInit {
     { changes }: CurrentUserActions.ChangeUserSettings,
   ) {
     const state = getState();
-    const isAuthentificated = CurrentUserSelectors.isAuthenticated(state);
+    const isAuthentificated = isAuthenticated(state);
     const { settings } = state;
 
     const newSettings = {

@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ProfessionalLocationInline } from '@app/api/models';
+import { City, ProfessionalLocationInline } from '@app/api/models';
 import { District } from '@app/core/models/district';
 import { Region } from '@app/core/models/region';
 import { Subregion } from '@app/core/models/subregion';
-import { CitiesApiCache, CountriesApiCache, DistrictsApiCache, RegionsApiCache, SubregionsApiCache } from '@app/core/services/cache';
-import { City } from '@app/profile/models/city';
+import {
+  CitiesApiCache,
+  CountriesApiCache,
+  DistrictsApiCache,
+  RegionsApiCache,
+  SubregionsApiCache,
+} from '@app/core/services/cache';
 import { Country } from '@app/profile/models/country';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -46,7 +51,10 @@ export class FullLocationService {
         );
   }
 
-  public getTextLocation(location: LocationInterface, shortFormat: boolean = false): Observable<{ id: number; text: string }> {
+  public getTextLocation(
+    location: LocationInterface,
+    shortFormat: boolean = false,
+  ): Observable<{ id: number; text: string }> {
     if (!location) {
       return of({
         id: null,

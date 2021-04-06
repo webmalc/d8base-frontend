@@ -3,7 +3,7 @@ import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interf
 import { defaultLocation } from '@app/store/current-user/current-user.constants';
 import { Selector } from '@ngxs/store';
 import { CurrentUserStateModel } from './current-user-state.model';
-import { CurrentUserState } from './current-user.state';
+import { CurrentUserState, isAuthenticated } from './current-user.state';
 
 export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
@@ -53,7 +53,6 @@ export default class CurrentUserSelectors {
 
   @Selector([CurrentUserState])
   public static isAuthenticated(data: CurrentUserStateModel): boolean {
-    const { tokens } = data;
-    return Boolean(tokens?.access_token);
+    return isAuthenticated(data);
   }
 }
