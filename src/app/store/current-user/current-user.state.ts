@@ -18,7 +18,7 @@ import * as UserLanguagesActions from '@app/store/current-user/user-language-sta
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
 import * as SavedUserProfessionalsActions from './saved-professionals/saved-professionals.actions';
-import { defaultState, guestState } from './current-user.constants';
+import { notLoadedState, guestState } from './current-user.constants';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
 import CurrentUserSelectors from './current-user.selectors';
@@ -29,7 +29,7 @@ const USER_SETTINGS_STORAGE_KEY = 'user_settings';
 
 @State<CurrentUserStateModel>({
   name: 'currentUser',
-  defaults: defaultState,
+  defaults: notLoadedState,
   children: [UserLanguageState, UserSavedProfessionalState],
 })
 @Injectable()
@@ -66,7 +66,7 @@ export class CurrentUserState implements NgxsOnInit {
     { patchState, dispatch }: StateContext<CurrentUserStateModel>,
     { credentials }: CurrentUserActions.Login,
   ): Observable<any> {
-    patchState(defaultState);
+    patchState(notLoadedState);
     return this.client
       .post<AuthResponseInterface, LoginDataInterface>(TOKEN_OBTAIN_URL, {
         username: credentials.username,

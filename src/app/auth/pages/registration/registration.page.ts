@@ -22,7 +22,7 @@ export class RegistrationPage {
 
   constructor(private readonly registrationService: RegistrationService, private readonly router: Router) {
     this.profile$.pipe(
-      first(x => !!x),
+      first(profile => !!profile?.account_type),
     ).subscribe(() => this.router.navigateByUrl('/profile'));
   }
 
