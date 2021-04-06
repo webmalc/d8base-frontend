@@ -28,7 +28,6 @@ import { ServicePublishStepTwoComponent } from '@app/service/components/service-
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishStepFiveFormService } from '@app/service/forms/service-publish-step-five-form.service';
 import { ServicePublishStepFourFormService } from '@app/service/forms/service-publish-step-four-form.service';
-import { ServicePublishStepOneFormService } from '@app/service/forms/service-publish-step-one-form.service';
 import { ServicePublishStepSevenDepartureFormService } from '@app/service/forms/service-publish-step-seven-departure-form.service';
 import { ServicePublishStepSevenFormService } from '@app/service/forms/service-publish-step-seven-form.service';
 import { ServicePublishStepSixFormService } from '@app/service/forms/service-publish-step-six-form.service';
@@ -93,7 +92,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceLocationApiService,
     ServicePhotoApiService,
     ServicePublishDataHolderService,
-    ServicePublishStepOneFormService,
     ServicePublishStepTwoFormService,
     ServicePublishStepFourFormService,
     ServicePublishStepFiveFormService,
