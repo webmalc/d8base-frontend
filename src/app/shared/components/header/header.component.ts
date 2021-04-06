@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService, MasterManagerService } from '@app/core/services';
+import { AuthenticationService, MasterManagerService, TranslationService } from '@app/core/services';
 import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MenuController, Platform } from '@ionic/angular';
@@ -27,7 +27,7 @@ export class HeaderComponent {
     userManager: UserManagerService,
     authenticator: AuthenticationService,
     masterManager: MasterManagerService,
-    translation: TranslateService,
+    translation: TranslationService,
   ) {
     this.isAuthenticated$ = authenticator.isAuthenticated$;
     this.context$ = combineLatest([
@@ -36,7 +36,7 @@ export class HeaderComponent {
     ]).pipe(
       map(([isAuthenticated, isMaster]) => ({isAuthenticated, isMaster})),
     );
-    this.currentLanguage$ = translation.onLangChange.pipe(map(x => x.lang));
+    this.currentLanguage$ = translation.currentLanguage$;
   }
 
   public isDesktop(): boolean {
