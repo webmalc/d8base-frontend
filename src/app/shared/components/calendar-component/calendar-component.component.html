@@ -15,7 +15,7 @@
     </div>
   </ion-item>
 </ion-row>
-<ng-container *ngIf="calendarIntervals else loader">
+<ng-container *appIfSpinner="isLoadingEnabledPeriods">
   <app-collapse-item *ngFor="let interval of calendarIntervals"
                      [collapsed]="false" [titleBold]="false"
                      title="{{interval.title}}">
@@ -29,8 +29,3 @@
     </ion-row>
   </app-collapse-item>
 </ng-container>
-<ng-template #loader>
-  <ion-row class="ion-justify-content-center">
-    <ion-spinner color="light"></ion-spinner>
-  </ion-row>
-</ng-template>

@@ -23,11 +23,11 @@ export class MasterProfileCalendarComponent implements OnInit {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
-  public enabledPeriods: Observable<MasterCalendar[]>;
+  public enabledPeriods$: Observable<MasterCalendar[]>;
   public schedule$: Observable<ProfessionalSchedule[]>;
   public scheduleEditor = new FormControl();
 
-  private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>([]);
+  private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>(null);
   private selectedDate: Date;
 
   constructor(
@@ -35,7 +35,7 @@ export class MasterProfileCalendarComponent implements OnInit {
     private readonly scheduleApi: MasterScheduleApiService,
     private readonly api: AccountsService,
   ) {
-    this.enabledPeriods = this.periods.asObservable();
+    this.enabledPeriods$ = this.periods.asObservable();
     this.schedule$ = api.accountsProfessionalScheduleList({}).pipe(
       map(response => response.results),
     );
