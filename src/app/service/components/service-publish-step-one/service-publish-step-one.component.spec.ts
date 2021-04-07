@@ -1,7 +1,6 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { ServicePublishStepOneFormService } from '../../forms/service-publish-step-one-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
@@ -21,13 +20,12 @@ describe('ServicePublishStepOneComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ServicePublishStepOneComponent],
+      declarations: [ServicePublishStepOneComponent, IonicSelectableComponent],
       imports: [
         ...RootModules(),
         ComponentTestingModule,
       ],
       providers: [
-        ServicePublishStepOneFormService,
         ServicePublishDataHolderService,
         ServiceStepsNavigationService,
         ChainManagerService,
@@ -40,7 +38,6 @@ describe('ServicePublishStepOneComponent', () => {
         StepSevenHandlerService,
         StepFinalHandlerService,
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ServicePublishStepOneComponent);

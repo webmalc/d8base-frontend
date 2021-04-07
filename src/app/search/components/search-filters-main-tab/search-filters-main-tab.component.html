@@ -9,7 +9,10 @@
       </ion-label>
       <ionic-selectable
         (onChange)="onCountryChange()"
-        (onSearch)="countrySelectable.onCountrySearch($event)"
+        [items]="countries$ | async"
+        [canSearch]="true"
+        [shouldFocusSearchbar]="true"
+        [hasVirtualScroll]="true"
         [(ngModel)]="stateManager.data.main.location.country"
         [canSearch]="true"
         itemTextField="name"

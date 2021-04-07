@@ -1,43 +1,55 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category, City, Country, Rate, Subcategory } from '@app/api/models';
+import { Category, City, Country, Rate, Subcategory, UserLocation } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
-import { RatesApiCache } from '@app/core/services/cache';
+import { NgDestroyService } from '@app/core/services';
+import { CountriesApiCache, RatesApiCache } from '@app/core/services/cache';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
+import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
+import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Coords } from '@app/shared/interfaces/coords';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { PopoverController } from '@ionic/angular';
-import { BehaviorSubject, forkJoin } from 'rxjs';
-import { filter, withLatestFrom } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { filter, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-filters-main-tab',
   templateUrl: './search-filters-main-tab.component.html',
   styleUrls: ['./search-filters-main-tab.component.scss'],
+  providers: [NgDestroyService],
 })
 export class SearchFiltersMainTabComponent implements OnInit {
+  @Select(CurrentUserSelectors.defaultLocation)
+  public defaultLocation$: Observable<UserLocation>;
+
+  public countries$ = this.countriesApi.list();
   public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
   public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
   public rates: Rate[] = [];
 
   constructor(
+    private readonly fullLocationService: FullLocationService,
+    private readonly countriesApi: CountriesApiCache,
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
-    public readonly countrySelectable: SelectableCountryOnSearchService,
     public readonly citySelectable: SelectableCityOnSearchService,
     private readonly pop: PopoverController,
     private readonly currentLocation: CurrentLocationCompilerService,
     private readonly ratesApiCache: RatesApiCache,
     private readonly userSettings: UserSettingsService,
     private readonly cd: ChangeDetectorRef,
+    private readonly destroy$: NgDestroyService,
   ) {}
 
   public ngOnInit(): void {
     this.subscribeCategories();
     this.subscribeRates();
+    this.subscribeLocationFromUserProfile();
   }
 
   public async initLocationPopover(): Promise<void> {
@@ -120,6 +132,27 @@ export class SearchFiltersMainTabComponent implements OnInit {
         this.stateManager.data.main.price.currency = rates.find(
           ({ currency }) => currency === settings?.currency ?? rates[0].currency,
         );
+        this.cd.markForCheck();
+      });
+  }
+
+  private subscribeLocationFromUserProfile(): void {
+    this.defaultLocation$
+      .pipe(
+        filter(defaultLocation => Boolean(defaultLocation)),
+        switchMap(defaultLocation => this.fullLocationService.getFullLocation(defaultLocation)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(fullLocation => {
+        const locationData: SearchLocationDataInterface = {
+          country: fullLocation.country,
+          city: fullLocation.city,
+          coordinates: null,
+        };
+        this.stateManager.setLocationData(locationData);
+        setTimeout(() => {
+          this.cd.detectChanges();
+        }, 0);
         this.cd.markForCheck();
       });
   }

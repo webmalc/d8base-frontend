@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
       <div>
         <ion-item class="fs18" lines="none">
           <ion-text>
@@ -36,11 +36,11 @@
               itemTextField="name"
               [items]="categoriesList$ | async"
               [canSearch]="true"
-              formControlName="{{ this.formFields.Category }}"
+              [formControlName]="formFields.Category"
               (onChange)="onCategoryChange()"
-              closeButtonText="{{ trans.trans('ion-selectable.close-button-text') | async }}"
-              searchFailText="{{ trans.trans('ion-selectable.search-fail-text') | async }}"
-              searchPlaceholder="{{ trans.trans('ion-selectable.search-text') | async }}"
+              [closeButtonText]="trans.trans('ion-selectable.close-button-text') | async"
+              [searchFailText]="trans.trans('ion-selectable.search-fail-text') | async"
+              [searchPlaceholder]="trans.trans('ion-selectable.search-text') | async"
             >
             </ionic-selectable>
           </ion-item>
@@ -58,10 +58,10 @@
               itemTextField="name"
               [canSearch]="true"
               [items]="subcategoriesList$ | async"
-              formControlName="{{ this.formFields.Subcategory }}"
-              closeButtonText="{{ trans.trans('ion-selectable.close-button-text') | async }}"
-              searchFailText="{{ trans.trans('ion-selectable.search-fail-text') | async }}"
-              searchPlaceholder="{{ trans.trans('ion-selectable.search-text') | async }}"
+              [formControlName]="formFields.Subcategory"
+              [closeButtonText]="trans.trans('ion-selectable.close-button-text') | async"
+              [searchFailText]="trans.trans('ion-selectable.search-fail-text') | async"
+              [searchPlaceholder]="trans.trans('ion-selectable.search-text') | async"
             >
             </ionic-selectable>
           </ion-item>

@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Country } from '@app/api/models';
-import { LocationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
-import { map, takeUntil } from 'rxjs/operators';
+import { CountriesApiCache } from '@app/core/services/cache';
+import { takeUntil } from 'rxjs/operators';
 
-const PAGE_SIZE = 250;
 const DEFAULT_COUNTRY: Partial<Country> = { id: 6251999, name: 'Canada', tld: 'ca', phone: '+1' };
 @Component({
   selector: 'app-phone-editor',
@@ -25,12 +24,12 @@ export class PhoneEditorComponent implements ControlValueAccessor {
   public phoneControl = new FormControl();
   public countryControl = new FormControl(DEFAULT_COUNTRY);
   public previousPhoneValue: string = '';
-  public countries$ = this.locationApi.locationCountriesList({ pageSize: PAGE_SIZE }).pipe(map(x => x.results));
+  public countries$ = this.countriesApi.list();
   public title = 'location-edit-page.country';
   private onChange: (value: string) => void;
 
   constructor(
-    private readonly locationApi: LocationService,
+    private readonly countriesApi: CountriesApiCache,
     private readonly ngDestroy$: NgDestroyService,
     private readonly cd: ChangeDetectorRef,
   ) {
