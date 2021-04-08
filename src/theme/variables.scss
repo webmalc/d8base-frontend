@@ -82,6 +82,14 @@
   --ion-color-light-contrast-rgb: 34, 36, 40;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #a2a4ab;
+
+  /** pale versions of primary colors (not used by Ionic) **/
+  --color-primary-pale: #E6FDFF;
+  --color-secondary-pale: #EEF5FF;
+  --color-tetriary-pale: #F5EFFF;
+  --color-success-pale: #E7FEF1;
+  --color-warning-pale: #FFFBE9;
+  --color-danger-pale: #FFEFF0;
 }
 
 .dark-theme {
@@ -147,6 +155,8 @@
   --ion-color-light-contrast-rgb: 255, 255, 255;
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
+
+  --color-success-pale: #273E31;
 }
 
 /*
