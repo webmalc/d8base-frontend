@@ -30,6 +30,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   @Input() public disabled: boolean;
   @Output() public newDate: EventEmitter<Date> = new EventEmitter<Date>();
   public calendarIntervals: CalendarInterval[];
+  public isLoadingEnabledPeriods: boolean = false;
 
   // currently viewed day:
   public date: Date = getCurrentDay();
@@ -47,6 +48,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
 
   @Input()
   public set enabledPeriods(list: MasterCalendar[]) {
+    this.isLoadingEnabledPeriods = Boolean(list);
     this.calendarIntervals = this.calendar.generate(CALENDAR_INTERVAL, list);
   }
 
