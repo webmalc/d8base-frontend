@@ -7,7 +7,7 @@ import ProfessionalPageStateModel from '@app/store/professional-page/professiona
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { first, switchMap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-services',
@@ -29,8 +29,8 @@ export class MasterProfileServicesComponent {
     private readonly serviceOperations: ServiceOperationsService,
   ) {
     this.serviceData$ = combineLatest([this.context$, this.refresh$]).pipe(
-      first(([context]) => !!context.professional),
-      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id)),
+      filter(([context]) => !!context.professional),
+      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id, !context.canEdit)),
     );
   }
 

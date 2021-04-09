@@ -15,14 +15,18 @@ export class ServicesGeneratorFactoryService {
   ) {
   }
 
-  public getServiceList(masterId?: number): Observable<ServiceData[]> {
-    return this.api.servicesServicesList(
-      {
-        professional: masterId,
-        ordering: 'created',
+  public getServiceList(masterId: number, showOnlyEnabled: boolean = false): Observable<ServiceData[]> {
+    let params: ServicesService.ServicesServicesListParams = {
+      professional: masterId,
+      ordering: 'created',
+    };
+    if (showOnlyEnabled) {
+      params = {
+        ...params,
         isEnabled: 'true',
-      },
-    ).pipe(
+      };
+    }
+    return this.api.servicesServicesList(params).pipe(
       switchMap(serviceList => this.combineWithTags(serviceList.results)),
     );
   }
