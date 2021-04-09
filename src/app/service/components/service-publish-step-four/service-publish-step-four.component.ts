@@ -113,7 +113,7 @@ export class ServicePublishStepFourComponent implements OnInit {
 
   private subscribeOnProfile(): void {
     this.profile$.pipe(
-      first(x => !!x),
+      first(profile => !!profile?.account_type),
     ).subscribe(() => this.serviceStepsNavigationService.next());
   }
 
