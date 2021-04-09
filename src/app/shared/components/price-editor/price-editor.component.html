@@ -1,19 +1,19 @@
 <ng-container *appIfSpinner="currency$ | async as currency">
   <ion-item class="ion-item-bordered">
-    <ng-container *ngIf="isPriceFixed$ | async; else priceInterval">
+    <ng-container *ngIf="value.is_price_fixed; else priceInterval">
       <ion-label position="stacked">{{ 'service-publish.step-two.fixed-price-title' | translate }}</ion-label>
-      <ion-input appNumbersOnly [value]="initialValues.price" (ionChange)="changeField('price', $event.detail.value)"> </ion-input>
+      <ion-input appNumbersOnly [value]="value.price" (ionChange)="changeField('price', $event.detail.value)"> </ion-input>
     </ng-container>
     <ng-template #priceInterval>
       <ion-label position="stacked">
         {{ 'service-publish.step-two.start-price' | translate }}
       </ion-label>
-      <ion-input appNumbersOnly [value]="initialValues.start_price" (ionChange)="changeField('start_price', $event.detail.value)">
+      <ion-input appNumbersOnly [value]="value.start_price" (ionChange)="changeField('start_price', $event.detail.value)">
       </ion-input>
       <ion-label position="stacked">
         {{ 'service-publish.step-two.end-price' | translate }}
       </ion-label>
-      <ion-input appNumbersOnly [value]="initialValues.end_price" (ionChange)="changeField('end_price', $event.detail.value)"> </ion-input>
+      <ion-input appNumbersOnly [value]="value.end_price" (ionChange)="changeField('end_price', $event.detail.value)"> </ion-input>
     </ng-template>
 
     <ionic-selectable
@@ -33,6 +33,6 @@
 
   <ion-item lines="none" class="ion-item-no-side-padding">
     {{ 'service-publish.step-two.fixed-price' | translate }}
-    <ion-checkbox slot="end" [checked]="initialValues.is_price_fixed" (ionChange)="toggleFixedPrice($event)"> </ion-checkbox>
+    <ion-checkbox slot="end" [checked]="value.is_price_fixed"  (ionChange)="toggleFixedPrice($event)"> </ion-checkbox>
   </ion-item>
 </ng-container>
