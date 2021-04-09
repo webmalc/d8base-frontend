@@ -30,7 +30,7 @@ export class MasterProfileServicesComponent {
   ) {
     this.serviceData$ = combineLatest([this.context$, this.refresh$]).pipe(
       first(([context]) => !!context.professional),
-      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id)),
+      switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id, !context.canEdit)),
     );
   }
 
