@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Price, Rate } from '@app/api/models';
 import { RatesApiCache } from '@app/core/services/cache';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
 const defaultValue: Partial<Price> = { is_price_fixed: true };
@@ -22,11 +22,8 @@ const defaultValue: Partial<Price> = { is_price_fixed: true };
 })
 export class PriceEditorComponent implements ControlValueAccessor {
   public currency$: Observable<{ list; default }>;
-  public isPriceFixed$ = new BehaviorSubject<boolean>(true);
-  public initialValues: Partial<Price> = defaultValue;
-
+  public value: Partial<Price> = defaultValue;
   private currencyCode: string;
-  private value: Partial<Price> = defaultValue;
   private onChange: (value: any) => void;
   private onTouched: () => void;
 
@@ -50,12 +47,10 @@ export class PriceEditorComponent implements ControlValueAccessor {
 
   public writeValue(value: Price): void {
     this.value = value ?? defaultValue;
-    this.initialValues = value ? { ...value } : defaultValue;
     this.currencyCode = value?.price_currency ?? value?.start_price_currency;
-    this.isPriceFixed$.next(this.initialValues.is_price_fixed);
   }
 
-  public changeField<T>(field: string, value: T) {
+  public changeField<T>(field: keyof Price, value: T) {
     this.writeField(field, value);
     this.onChange(this.value);
   }
@@ -73,8 +68,8 @@ export class PriceEditorComponent implements ControlValueAccessor {
 
   public toggleFixedPrice(event: CustomEvent) {
     const isPriceFixed: boolean = event.detail.checked;
-    this.isPriceFixed$.next(isPriceFixed);
     this.writeField('is_price_fixed', isPriceFixed);
+    this.onChange(this.value);
   }
 
   public getInitialCurrency(list: Rate[], defaultCurrency: Rate): Rate {
@@ -84,7 +79,7 @@ export class PriceEditorComponent implements ControlValueAccessor {
     return result;
   }
 
-  private writeField<T>(field: string, value: T) {
+  private writeField<T>(field: keyof Price, value: T) {
     this.value = {
       ...this.value,
       [field]: value,

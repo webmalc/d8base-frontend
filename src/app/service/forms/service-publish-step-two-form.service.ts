@@ -14,7 +14,10 @@ export class ServicePublishStepTwoFormService {
   public createForm(data?: StepTwoDataInterface): void {
     this.form = this.formBuilder.group({
       [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
-      [ServicePublishStepTwoFormFields.Description]: [data?.description, Validators.minLength(minimumDescriptionLength)],
+      [ServicePublishStepTwoFormFields.Description]: [
+        data?.description,
+        Validators.minLength(minimumDescriptionLength),
+      ],
       [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
       [ServicePublishStepTwoFormFields.Price]: [data?.price, this.checkPricesValidator],
       [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
@@ -26,10 +29,15 @@ export class ServicePublishStepTwoFormService {
   }
 
   private checkPricesValidator(control: AbstractControl): ValidationErrors | null {
-    const startPrice = control?.value?.start_price;
-    const endPrice = control?.value?.end_price;
-    if (startPrice > endPrice) {
-      return { priceError: true };
+    const value = control.value as Partial<Price>;
+    const isPriceFixed = value?.is_price_fixed;
+    if (!isPriceFixed) {
+      const startPrice = value?.start_price;
+      const endPrice = value?.end_price;
+
+      if (parseFloat(startPrice) >= parseFloat(endPrice)) {
+        return { priceError: true };
+      }
     }
 
     return null;
