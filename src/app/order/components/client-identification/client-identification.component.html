@@ -18,6 +18,7 @@
           <ion-label position="floating">{{ 'order.email' | translate }}</ion-label>
           <ion-input type="email" inputmode="email" [formControl]="email"></ion-input>
         </ion-item>
+        <app-form-control-error [control]="email"> </app-form-control-error>
       </ion-list>
 
       <ion-row class="registration-form">
@@ -37,18 +38,22 @@
               </ion-label>
               <ion-input type="password" inputmode="password" [formControl]="password"></ion-input>
             </ion-item>
+            <app-form-control-error [control]="password"> </app-form-control-error>
             <ion-item>
               <ion-label position="stacked" class="ion-text-wrap">
                 {{ 'registration-form.confirm' | translate }}
               </ion-label>
               <ion-input type="password" inputmode="password" [formControl]="passwordConfirm"></ion-input>
             </ion-item>
+            <app-form-control-error [control]="passwordConfirm"> </app-form-control-error>
+            <app-form-control-error [control]="form"> </app-form-control-error>
             <ion-item>
               <ion-label position="stacked" class="ion-text-wrap">
                 {{ 'registration-form.name' | translate }}
               </ion-label>
               <ion-input [formControl]="name"></ion-input>
             </ion-item>
+            <app-form-control-error [control]="name"> </app-form-control-error>
             <app-country-selector [formControl]="country"></app-country-selector>
           </ng-container>
         </ion-col>
