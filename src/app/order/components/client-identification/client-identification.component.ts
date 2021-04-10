@@ -5,7 +5,7 @@ import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
-import { passwordValidators } from '@app/core/validators/password-validators';
+import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { OrderWizardStateService } from '@app/order/services';
@@ -35,7 +35,7 @@ export class ClientIdentificationComponent {
     passwordConfirm: this.passwordConfirm,
     name: this.name,
     country: this.country,
-  });
+  }, confirmPasswordValidator('password', 'passwordConfirm'));
   public isRegistered;
   public showRegistrationForm = false;
 
