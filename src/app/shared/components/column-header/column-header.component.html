@@ -1,4 +1,4 @@
-<ion-item color="light" lines="full">
+<ion-item [color]="transparent ? '' : 'light'" [lines]="transparent ? 'none' : 'full'">
   <ion-buttons slot="start">
     <ion-button id="backButton" (click)="back()" routerDirection="back" slot="start">
       <ion-icon name="arrow-back-outline"></ion-icon>
