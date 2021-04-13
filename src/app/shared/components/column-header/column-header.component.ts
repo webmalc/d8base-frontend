@@ -7,16 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './column-header.component.html',
 })
 export class ColumnHeaderComponent {
-  @Input() public previousLocationFallback: string = '/';
-  private isNeedToUseFallback: boolean;
+  @Input()
+  public previousLocationFallback: string = '/';
+
+  @Input()
+  public transparent: boolean = false;
+
+  private useFallback: boolean;
 
   constructor(private readonly location: Location, private readonly router: Router) {
-    this.isNeedToUseFallback = !this.router.navigated;
+    this.useFallback = !this.router.navigated;
   }
 
   public back(): void {
-    if (this.isNeedToUseFallback) {
-      this.isNeedToUseFallback = false;
+    if (this.useFallback) {
+      this.useFallback = false;
       this.router.navigateByUrl(this.previousLocationFallback);
     } else {
       this.location.back();
