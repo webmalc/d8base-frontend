@@ -59,7 +59,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       animated: true,
       componentProps: {
         data: {
-          coordinates: this.stateManager.data.location.coordinates,
+          coordinates: this.stateManager.searchForm.get('location').get('coordinates'),
         },
         renderCountry: false,
       },
@@ -79,22 +79,21 @@ export class SearchFiltersMainTabComponent implements OnInit {
     this.currentLocation
       .getCoords(country, event.value)
       .pipe(filter(data => null !== data))
-      .subscribe(
-        res =>
-          (this.stateManager.data.location = {
-            country,
-            city: event.value,
-            coordinates: res,
-          }),
-      );
+      .subscribe(res => {
+        this.stateManager.searchForm.get('location').setValue({
+          country,
+          city: event.value,
+          coordinates: res,
+        });
+      });
   }
 
   public getCountryValue(): Country | null {
-    return this.stateManager.data.location.country;
+    return this.stateManager.searchForm.get('location').get('country').value;
   }
 
   public onCountryChange(): void {
-    this.stateManager.data.location.city = undefined;
+    this.stateManager.searchForm.get('location').get('city').reset();
   }
 
   public initSubcategories(categories: Category[]): void {
@@ -107,14 +106,13 @@ export class SearchFiltersMainTabComponent implements OnInit {
     this.currentLocation
       .getExtendedLocationByCoords(coords)
       .pipe(filter(res => null !== res))
-      .subscribe(
-        res =>
-          (this.stateManager.data.location = {
-            country: res.country,
-            city: res.city,
-            coordinates: res.coords,
-          }),
-      );
+      .subscribe(res => {
+        this.stateManager.searchForm.get('location').setValue({
+          country: res.country,
+          city: res.city,
+          coordinates: res.coords,
+        });
+      });
   }
 
   private subscribeCategories(): void {
@@ -129,9 +127,10 @@ export class SearchFiltersMainTabComponent implements OnInit {
       .pipe(withLatestFrom(this.userSettings.userSettings$))
       .subscribe(([rates, settings]) => {
         this.rates = rates;
-        this.stateManager.data.price.currency = rates.find(
-          ({ currency }) => currency === settings?.currency ?? rates[0].currency,
-        );
+        this.stateManager.searchForm
+          .get('price')
+          .get('currency')
+          .setValue(rates.find(({ currency }) => currency === settings?.currency ?? rates[0].currency));
         this.cd.markForCheck();
       });
   }
@@ -150,9 +149,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
           coordinates: null,
         };
         this.stateManager.setLocationData(locationData);
-        setTimeout(() => {
-          this.cd.detectChanges();
-        }, 0);
         this.cd.markForCheck();
       });
   }

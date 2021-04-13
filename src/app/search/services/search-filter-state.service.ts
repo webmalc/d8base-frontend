@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
@@ -6,7 +7,44 @@ import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SearchFilterStateService {
-  public data: SearchFilterStateInterface = this.getDefaultData();
+  public searchForm: FormGroup = this.fb.group({
+    query: null,
+    location: this.fb.group({
+      country: null,
+      city: null,
+      coordinates: null,
+    }),
+    category: null,
+    subcategory: null,
+    tags: null,
+    isOnlineBooking: null,
+    isInstantBooking: null,
+    datetime: this.fb.group({
+      from: null,
+      to: null,
+    }),
+    isOnlineService: null,
+    isAtMasterLocationService: null,
+    isAtClientLocationService: null,
+    price: this.fb.group({
+      currency: null,
+      start: null,
+      end: null,
+    }),
+    rating: null,
+    professionalLevel: null,
+    paymentMethods: null,
+    onlyWithReviews: null,
+    onlyWithPhotos: null,
+    onlyWithFixedPrice: null,
+    onlyWithCertificates: null,
+    nationalities: null,
+    languages: null,
+    experience: null,
+    startAge: null,
+    endAge: null,
+  });
+
   public minDate: string;
   public maxDate: string;
   private readonly doSearch$ = new ReplaySubject<void>(1);
@@ -15,7 +53,7 @@ export class SearchFilterStateService {
     return this.doSearch$.asObservable();
   }
 
-  constructor(private readonly router: Router) {
+  constructor(private readonly router: Router, private readonly fb: FormBuilder) {
     this.doSearch$.subscribe(() => {
       this.router.navigate(['/search']);
     });
@@ -27,15 +65,15 @@ export class SearchFilterStateService {
   }
 
   public setLocationData(data: SearchLocationDataInterface): void {
-    this.data.location = data;
+    this.searchForm.get('location').setValue(data);
   }
 
   public setDate(datetime: SearchFilterStateInterface['datetime']): void {
-    this.data.datetime = datetime;
+    this.searchForm.get('datetime').setValue(datetime);
   }
 
   public clear(): void {
-    this.data = this.getDefaultData();
+    this.searchForm.reset();
   }
 
   private setMinMaxDates(): void {
@@ -43,49 +81,5 @@ export class SearchFilterStateService {
     const limitOfYearsInFuture = 5;
     this.minDate = now.toISOString();
     this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
-  }
-
-  private getDefaultData(): SearchFilterStateInterface {
-    return {
-      location: {
-        country: undefined,
-        city: undefined,
-        coordinates: undefined,
-      },
-      radius: {
-        distance: undefined,
-        units: undefined,
-      },
-      category: undefined,
-      subcategory: undefined,
-      tags: undefined,
-      isOnlineBooking: undefined,
-      isInstantBooking: undefined,
-      datetime: {
-        from: undefined,
-        to: undefined,
-      },
-      isOnlineService: undefined,
-      isAtMasterLocationService: undefined,
-      isAtClientLocationService: undefined,
-      price: {
-        currency: undefined,
-        start: undefined,
-        end: undefined,
-      },
-
-      rating: undefined,
-      professionalLevel: undefined,
-      paymentMethods: undefined,
-      onlyWithReviews: undefined,
-      onlyWithPhotos: undefined,
-      onlyWithFixedPrice: undefined,
-      onlyWithCertificates: undefined,
-      nationalities: undefined,
-      languages: undefined,
-      experience: undefined,
-      startAge: undefined,
-      endAge: undefined,
-    };
   }
 }

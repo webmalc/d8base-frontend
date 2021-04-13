@@ -41,6 +41,7 @@ export class StateInterfaceAdapter {
               )
             : void 0;
           const searchFilterState: SearchFilterStateInterface = {
+            query: params?.query,
             location: {
               country,
               city,

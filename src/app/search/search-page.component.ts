@@ -21,7 +21,6 @@ import { searchFilterStateInterfaceToSearchListParamsAdapter } from './search-pa
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPage extends Reinitable implements OnDestroy, OnInit {
-  public searchNeedle: string;
   public searchResult: Search[];
   public searchResultTitle: string;
 
@@ -35,9 +34,9 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
 
   constructor(
     public readonly platform: Platform,
+    public readonly state: SearchFilterStateService,
     private readonly search: SearchService,
     private readonly location: Location,
-    private readonly state: SearchFilterStateService,
     private readonly cd: ChangeDetectorRef,
   ) {
     super();
@@ -65,12 +64,12 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
       const data = (state as { data: MainPageSearchInterface }).data;
       this.state.setLocationData(data.location);
       this.state.setDate(data.datetime);
-      this.searchNeedle = data.needle;
+      this.state.searchForm.get('query').setValue(data.needle);
       this.doSearch();
     } else if (state.hasOwnProperty('category') && state.hasOwnProperty('location')) {
       const data = state as { category: Category; location: SearchLocationDataInterface };
       this.state.setLocationData(data.location);
-      this.state.data.category = [data.category];
+      this.state.searchForm.get('category').setValue([data.category]);
       this.doSearch();
     }
   }
@@ -88,7 +87,7 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   }
 
   public doSearch(): void {
-    this.params = { ...searchFilterStateInterfaceToSearchListParamsAdapter(this.state.data), query: this.searchNeedle ?? '' };
+    this.params = { ...searchFilterStateInterfaceToSearchListParamsAdapter(this.state.searchForm.value) };
     this.doLoad$.next({
       params: this.params,
       apiRequestFunction: this.apiRequestFunction,

@@ -3,14 +3,14 @@
     <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.rating' | translate }}
     </ion-item>
-    <app-rating-picker [(ngModel)]="stateManager.data.rating"></app-rating-picker>
+    <app-rating-picker [formControl]="stateManager.searchForm.get('rating')"></app-rating-picker>
 
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
       <ion-item class="ion-item-no-side-padding"  lines="none" >
         {{ 'issuance.filters.additional.only-with-reviews' | translate }}
       </ion-item>
       <ion-item lines="none" >
-        <ion-checkbox [(ngModel)]="stateManager.data.onlyWithReviews" class="ion-no-margin"></ion-checkbox>
+        <ion-checkbox [formControl]="stateManager.searchForm.get('onlyWithReviews')" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
@@ -18,7 +18,7 @@
         {{ 'issuance.filters.additional.only-with-photos' | translate }}
       </ion-item>
       <ion-item lines="none" >
-        <ion-checkbox [(ngModel)]="stateManager.data.onlyWithPhotos" class="ion-no-margin"></ion-checkbox>
+        <ion-checkbox [formControl]="stateManager.searchForm.get('onlyWithPhotos')" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
@@ -26,7 +26,7 @@
         {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
       </ion-item>
       <ion-item lines="none" >
-        <ion-checkbox [(ngModel)]="stateManager.data.onlyWithFixedPrice" class="ion-no-margin"></ion-checkbox>
+        <ion-checkbox [formControl]="stateManager.searchForm.get('onlyWithFixedPrice')" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
@@ -34,17 +34,17 @@
         {{ 'issuance.filters.additional.only-with-certificates' | translate }}
       </ion-item>
       <ion-item lines="none" >
-        <ion-checkbox [(ngModel)]="stateManager.data.onlyWithCertificates" class="ion-no-margin"></ion-checkbox>
+        <ion-checkbox [formControl]="stateManager.searchForm.get('onlyWithCertificates')" class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
     <app-collapse-item [noSidePadding]="true" class="width100" title="{{ 'issuance.filters.additional.age' | translate }}">
       <ion-item>
         <ion-label position="floating">{{ 'issuance.filters.additional.start-age' | translate }}</ion-label>
-        <ion-input [(ngModel)]="stateManager.data.startAge" appNumbersOnly></ion-input>
+        <ion-input [formControl]="stateManager.searchForm.get('startAge')" appNumbersOnly></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">{{ 'issuance.filters.additional.end-age' | translate }}</ion-label>
-        <ion-input [(ngModel)]="stateManager.data.endAge" appNumbersOnly></ion-input>
+        <ion-input [formControl]="stateManager.searchForm.get('endAge')" appNumbersOnly></ion-input>
       </ion-item>
     </app-collapse-item>
     <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
@@ -56,7 +56,7 @@
       </ion-label>
       <ionic-selectable
         (onSearch)="countrySelectable.onCountrySearch($event)"
-        [(ngModel)]="stateManager.data.nationalities"
+        [formControl]="stateManager.searchForm.get('nationalities')"
         [canSearch]="true"
         [isMultiple]="true"
         itemTextField="name"
@@ -73,7 +73,7 @@
       </ion-label>
       <ionic-selectable
         [items]="languages$ | async"
-        [(ngModel)]="stateManager.data.languages"
+        [formControl]="stateManager.searchForm.get('languages')"
         [isMultiple]="true"
         itemTextField="name"
         itemValueField="code"
@@ -89,7 +89,7 @@
       </ion-label>
       <ionic-selectable
         [items]="professionalLevels"
-        [(ngModel)]="stateManager.data.professionalLevel"
+        [formControl]="stateManager.searchForm.get('professionalLevel')"
         itemTextField="name"
         itemValueField="value"
       >
@@ -97,7 +97,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">{{ 'issuance.filters.additional.experience' | translate }}</ion-label>
-      <ion-input [(ngModel)]="stateManager.data.experience" appNumbersOnly></ion-input>
+      <ion-input [formControl]="stateManager.searchForm.get('experience')" appNumbersOnly></ion-input>
     </ion-item>
     <ion-item class="ion-item-no-side-padding fs16 title"  lines="none" >
       {{ 'issuance.filters.additional.payment-methods' | translate }}
@@ -108,7 +108,7 @@
       </ion-label>
       <ionic-selectable
         [items]="paymentMethods"
-        [(ngModel)]="stateManager.data.paymentMethods"
+        [formControl]="stateManager.searchForm.get('paymentMethods')"
         [isMultiple]="true"
         itemTextField="name"
         itemValueField="value"

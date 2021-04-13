@@ -70,7 +70,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * search term query param
      */
-    query: void 0,
+    query: data?.query,
 
     /**
      * professional level

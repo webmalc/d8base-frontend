@@ -4,6 +4,7 @@ import { SearchLocationDataInterface } from '@app/main/interfaces/search-locatio
 import { Tag } from '@app/master/models/tag';
 
 export interface SearchFilterStateInterface {
+  query: string;
   location: SearchLocationDataInterface;
   radius: {
     distance: number;
