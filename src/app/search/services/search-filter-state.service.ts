@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 import { Observable, ReplaySubject } from 'rxjs';
+import { searchFilterStateInterfaceToSearchListParamsAdapter } from '../search-params.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class SearchFilterStateService {
@@ -55,7 +56,8 @@ export class SearchFilterStateService {
 
   constructor(private readonly router: Router, private readonly fb: FormBuilder) {
     this.doSearch$.subscribe(() => {
-      this.router.navigate(['/search']);
+      const queryParams = searchFilterStateInterfaceToSearchListParamsAdapter(this.searchForm.value);
+      this.router.navigate(['/search'], { queryParams });
     });
     this.setMinMaxDates();
   }

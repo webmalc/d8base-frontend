@@ -13,8 +13,10 @@ const serviceTypes = (data: SearchFilterStateInterface): string => {
     types.push('client');
   }
 
-  return types.join(',');
+  return types.join(',') || null;
 };
+
+const stringOrNull = (value: number): string | null => value ? `${ value }` : null;
 
 export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: SearchFilterStateInterface): SearchService.SearchListParams => {
   if (!data) {
@@ -110,12 +112,12 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * longitude (-79.3849)
      */
-    longitude: `${data?.location?.coordinates?.longitude}`,
+    longitude: stringOrNull(data?.location?.coordinates?.longitude),
 
     /**
      * latitude (43.6529)
      */
-    latitude: `${data?.location?.coordinates?.latitude}`,
+    latitude: stringOrNull(data?.location?.coordinates?.latitude),
 
     /**
      * multiple values may be separated by commas

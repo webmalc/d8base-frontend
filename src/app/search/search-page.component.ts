@@ -65,12 +65,12 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
       this.state.setLocationData(data.location);
       this.state.setDate(data.datetime);
       this.state.searchForm.get('query').setValue(data.needle);
-      this.doSearch();
+      this.state.doSearch();
     } else if (state.hasOwnProperty('category') && state.hasOwnProperty('location')) {
       const data = state as { category: Category; location: SearchLocationDataInterface };
       this.state.setLocationData(data.location);
       this.state.searchForm.get('category').setValue([data.category]);
-      this.doSearch();
+      this.state.doSearch();
     }
   }
 
@@ -87,7 +87,7 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   }
 
   public doSearch(): void {
-    this.params = { ...searchFilterStateInterfaceToSearchListParamsAdapter(this.state.searchForm.value) };
+    this.params = searchFilterStateInterfaceToSearchListParamsAdapter(this.state.searchForm.value);
     this.doLoad$.next({
       params: this.params,
       apiRequestFunction: this.apiRequestFunction,
@@ -95,6 +95,6 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
   }
 
   public onSubmit(): void {
-    this.doSearch();
+    this.state.doSearch();
   }
 }
