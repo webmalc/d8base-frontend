@@ -1,17 +1,16 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { FormBuilder } from '@angular/forms';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { IpApiService } from '@app/core/services/location/ip-api.service';
 import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
-import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { IonicSelectableComponent } from 'ionic-selectable';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { LocationServiceMock, StorageManagerMock } from '../../../../testing/mocks';
 import { SearchFiltersMainTabComponent } from './search-filters-main-tab.component';
 
@@ -22,8 +21,8 @@ describe('SearchFiltersMainTabComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [SearchFiltersMainTabComponent],
-        imports: [RouterTestingModule, IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule],
+        declarations: [SearchFiltersMainTabComponent, IonicSelectableComponent],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           SearchFilterStateService,
           SelectableCountryOnSearchService,
@@ -34,6 +33,7 @@ describe('SearchFiltersMainTabComponent', () => {
           IpnfDataService,
           { provide: CurrentPositionService, useClass: LocationServiceMock },
           { provide: StorageManagerService, useClass: StorageManagerMock },
+          FormBuilder,
         ],
       }).compileComponents();
 

@@ -1,11 +1,10 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { FormBuilder } from '@angular/forms';
+import { RatingPickerComponent } from '@app/reviews/components/rating-picker/rating-picker.component';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-
+import { IonicSelectableComponent } from 'ionic-selectable';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SearchFiltersAdditionalTabComponent } from './search-filters-additional-tab.component';
 
 describe('SearchFiltersAdditionalTabComponent', () => {
@@ -15,9 +14,9 @@ describe('SearchFiltersAdditionalTabComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [SearchFiltersAdditionalTabComponent],
-        imports: [TranslateModule.forRoot(), IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
-        providers: [SelectableCountryOnSearchService, SearchFilterStateService],
+        declarations: [SearchFiltersAdditionalTabComponent, IonicSelectableComponent, RatingPickerComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [SelectableCountryOnSearchService, SearchFilterStateService, FormBuilder],
       }).compileComponents();
 
       fixture = TestBed.createComponent(SearchFiltersAdditionalTabComponent);

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchFilterStateService } from './search-filter-state.service';
 
@@ -6,7 +7,7 @@ describe('SearchFilterStateService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      providers: [SearchFilterStateService],
+      providers: [SearchFilterStateService, FormBuilder],
     }),
   );
 
