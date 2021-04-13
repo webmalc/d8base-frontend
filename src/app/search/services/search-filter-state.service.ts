@@ -27,11 +27,11 @@ export class SearchFilterStateService {
   }
 
   public setLocationData(data: SearchLocationDataInterface): void {
-    this.data.main.location = data;
+    this.data.location = data;
   }
 
-  public setDate(datetime: SearchFilterStateInterface['main']['datetime']): void {
-    this.data.main.datetime = datetime;
+  public setDate(datetime: SearchFilterStateInterface['datetime']): void {
+    this.data.datetime = datetime;
   }
 
   public clear(): void {
@@ -47,48 +47,45 @@ export class SearchFilterStateService {
 
   private getDefaultData(): SearchFilterStateInterface {
     return {
-      main: {
-        location: {
-          country: undefined,
-          city: undefined,
-          coordinates: undefined,
-        },
-        radius: {
-          distance: undefined,
-          units: undefined,
-        },
-        category: undefined,
-        subcategory: undefined,
-        tags: undefined,
-        isOnlineBooking: undefined,
-        isInstantBooking: undefined,
-        datetime: {
-          from: undefined,
-          to: undefined,
-        },
-        isOnlineService: undefined,
-        isAtMasterLocationService: undefined,
-        isAtClientLocationService: undefined,
-        price: {
-          currency: undefined,
-          start: undefined,
-          end: undefined,
-        },
+      location: {
+        country: undefined,
+        city: undefined,
+        coordinates: undefined,
       },
-      additional: {
-        rating: undefined,
-        professionalLevel: undefined,
-        paymentMethods: undefined,
-        onlyWithReviews: undefined,
-        onlyWithPhotos: undefined,
-        onlyWithFixedPrice: undefined,
-        onlyWithCertificates: undefined,
-        nationalities: undefined,
-        languages: undefined,
-        experience: undefined,
-        startAge: undefined,
-        endAge: undefined,
+      radius: {
+        distance: undefined,
+        units: undefined,
       },
+      category: undefined,
+      subcategory: undefined,
+      tags: undefined,
+      isOnlineBooking: undefined,
+      isInstantBooking: undefined,
+      datetime: {
+        from: undefined,
+        to: undefined,
+      },
+      isOnlineService: undefined,
+      isAtMasterLocationService: undefined,
+      isAtClientLocationService: undefined,
+      price: {
+        currency: undefined,
+        start: undefined,
+        end: undefined,
+      },
+
+      rating: undefined,
+      professionalLevel: undefined,
+      paymentMethods: undefined,
+      onlyWithReviews: undefined,
+      onlyWithPhotos: undefined,
+      onlyWithFixedPrice: undefined,
+      onlyWithCertificates: undefined,
+      nationalities: undefined,
+      languages: undefined,
+      experience: undefined,
+      startAge: undefined,
+      endAge: undefined,
     };
   }
 }

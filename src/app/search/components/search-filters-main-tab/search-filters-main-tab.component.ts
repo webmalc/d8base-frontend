@@ -59,7 +59,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       animated: true,
       componentProps: {
         data: {
-          coordinates: this.stateManager.data.main.location.coordinates,
+          coordinates: this.stateManager.data.location.coordinates,
         },
         renderCountry: false,
       },
@@ -81,7 +81,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       .pipe(filter(data => null !== data))
       .subscribe(
         res =>
-          (this.stateManager.data.main.location = {
+          (this.stateManager.data.location = {
             country,
             city: event.value,
             coordinates: res,
@@ -90,11 +90,11 @@ export class SearchFiltersMainTabComponent implements OnInit {
   }
 
   public getCountryValue(): Country | null {
-    return this.stateManager.data.main.location.country;
+    return this.stateManager.data.location.country;
   }
 
   public onCountryChange(): void {
-    this.stateManager.data.main.location.city = undefined;
+    this.stateManager.data.location.city = undefined;
   }
 
   public initSubcategories(categories: Category[]): void {
@@ -109,7 +109,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       .pipe(filter(res => null !== res))
       .subscribe(
         res =>
-          (this.stateManager.data.main.location = {
+          (this.stateManager.data.location = {
             country: res.country,
             city: res.city,
             coordinates: res.coords,
@@ -129,7 +129,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       .pipe(withLatestFrom(this.userSettings.userSettings$))
       .subscribe(([rates, settings]) => {
         this.rates = rates;
-        this.stateManager.data.main.price.currency = rates.find(
+        this.stateManager.data.price.currency = rates.find(
           ({ currency }) => currency === settings?.currency ?? rates[0].currency,
         );
         this.cd.markForCheck();

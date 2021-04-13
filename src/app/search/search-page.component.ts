@@ -70,7 +70,7 @@ export class SearchPage extends Reinitable implements OnDestroy, OnInit {
     } else if (state.hasOwnProperty('category') && state.hasOwnProperty('location')) {
       const data = state as { category: Category; location: SearchLocationDataInterface };
       this.state.setLocationData(data.location);
-      this.state.data.main.category = [data.category];
+      this.state.data.category = [data.category];
       this.doSearch();
     }
   }

@@ -3,6 +3,6 @@ import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter
 
 export interface MainPageSearchInterface {
   needle: string;
-  datetime: SearchFilterStateInterface['main']['datetime'];
+  datetime: SearchFilterStateInterface['datetime'];
   location: SearchLocationDataInterface;
 }

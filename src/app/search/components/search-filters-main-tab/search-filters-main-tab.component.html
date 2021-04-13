@@ -13,7 +13,7 @@
         [canSearch]="true"
         [shouldFocusSearchbar]="true"
         [hasVirtualScroll]="true"
-        [(ngModel)]="stateManager.data.main.location.country"
+        [(ngModel)]="stateManager.data.location.country"
         [canSearch]="true"
         itemTextField="name"
         itemValueField="id"
@@ -30,9 +30,9 @@
       <ionic-selectable
         (onChange)="onCityChange($event)"
         (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
-        [(ngModel)]="stateManager.data.main.location.city"
+        [(ngModel)]="stateManager.data.location.city"
         [canSearch]="true"
-        [isEnabled]="stateManager.data.main.location.country && true"
+        [isEnabled]="stateManager.data.location.country && true"
         itemTextField="name"
         itemValueField="id"
       >
@@ -60,7 +60,7 @@
       </ion-label>
       <ionic-selectable
         (onChange)="initSubcategories($event.value)"
-        [(ngModel)]="stateManager.data.main.category"
+        [(ngModel)]="stateManager.data.category"
         [canSearch]="true"
         [isMultiple]="true"
         [items]="categoryList$ | async"
@@ -80,7 +80,7 @@
         {{ 'issuance.filters.main-tab.subcategories-select' | translate }}
       </ion-label>
       <ionic-selectable
-        [(ngModel)]="stateManager.data.main.subcategory"
+        [(ngModel)]="stateManager.data.subcategory"
         [canSearch]="true"
         [isEnabled]="(subcategoriesList$ | async).length && true"
         [isMultiple]="true"
@@ -149,7 +149,7 @@
       </ion-item>
       <ion-row class="ion-justify-content-end">
         <ion-item lines="none">
-          <ion-checkbox [(ngModel)]="stateManager.data.main.isInstantBooking"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="stateManager.data.isInstantBooking"></ion-checkbox>
         </ion-item>
       </ion-row>
     </ion-row>
@@ -168,7 +168,7 @@
             picker-format="MMM DD, YYYY HH:mm"
             [min]="stateManager.minDate"
             [max]="stateManager.maxDate"
-            [(ngModel)]="stateManager.data.main.datetime.from"
+            [(ngModel)]="stateManager.data.datetime.from"
           ></ion-datetime>
         </ion-item>
         <ion-item>
@@ -179,7 +179,7 @@
             picker-format="MMM DD, YYYY HH:mm"
             [min]="stateManager.minDate"
             [max]="stateManager.maxDate"
-            [(ngModel)]="stateManager.data.main.datetime.to"
+            [(ngModel)]="stateManager.data.datetime.to"
           ></ion-datetime>
         </ion-item>
       </app-collapse-item>
@@ -193,7 +193,7 @@
       </ion-item>
       <ion-row class="ion-justify-content-end">
         <ion-item lines="none">
-          <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineService" class="ion-no-margin"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="stateManager.data.isOnlineService" class="ion-no-margin"></ion-checkbox>
         </ion-item>
       </ion-row>
     </ion-row>
@@ -202,7 +202,7 @@
         {{ 'service-location.professional' | translate }}
       </ion-item>
       <ion-item lines="none">
-        <ion-checkbox [(ngModel)]="stateManager.data.main.isAtMasterLocationService"
+        <ion-checkbox [(ngModel)]="stateManager.data.isAtMasterLocationService"
                       class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
@@ -211,7 +211,7 @@
         {{ 'service-location.client' | translate }}
       </ion-item>
       <ion-item lines="none">
-        <ion-checkbox [(ngModel)]="stateManager.data.main.isAtClientLocationService"
+        <ion-checkbox [(ngModel)]="stateManager.data.isAtClientLocationService"
                       class="ion-no-margin"></ion-checkbox>
       </ion-item>
     </ion-row>
@@ -228,7 +228,7 @@
             itemTextField="title"
             [canSearch]="true"
             [items]="rates"
-            [(ngModel)]="stateManager.data.main.price.currency"
+            [(ngModel)]="stateManager.data.price.currency"
             closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
             searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
             searchPlaceholder="{{'ion-selectable.search-text' | translate}}"
@@ -237,11 +237,11 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">{{ 'issuance.filters.main-tab.price-start' | translate }}</ion-label>
-          <ion-input appNumbersOnly [(ngModel)]="stateManager.data.main.price.start"></ion-input>
+          <ion-input appNumbersOnly [(ngModel)]="stateManager.data.price.start"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">{{ 'issuance.filters.main-tab.price-end' | translate }}</ion-label>
-          <ion-input appNumbersOnly [(ngModel)]="stateManager.data.main.price.end"></ion-input>
+          <ion-input appNumbersOnly [(ngModel)]="stateManager.data.price.end"></ion-input>
         </ion-item>
       </app-collapse-item>
     </ion-item>

@@ -3,13 +3,13 @@ import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter
 
 const serviceTypes = (data: SearchFilterStateInterface): string => {
   const types = [];
-  if (data.main.isOnlineService) {
+  if (data.isOnlineService) {
     types.push('online');
   }
-  if (data.main.isAtMasterLocationService) {
+  if (data.isAtMasterLocationService) {
     types.push('professional');
   }
-  if (data.main.isAtClientLocationService) {
+  if (data.isAtClientLocationService) {
     types.push('client');
   }
 
@@ -35,22 +35,22 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * multiple subcategory IDs may be separated by commas
      */
-    subcategories: data?.main?.subcategory?.map(({ id }) => id).join(','),
+    subcategories: data?.subcategory?.map(({ id }) => id).join(','),
 
     /**
      * start price value (12.35)
      */
-    startPrice: data?.main?.price.start,
+    startPrice: data?.price.start,
 
     /**
      * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
      */
-    startDatetime: data?.main?.datetime.from,
+    startDatetime: data?.datetime.from,
 
     /**
      * professional start age
      */
-    startAge: data?.additional?.startAge,
+    startAge: data?.startAge,
 
     /**
      * multiple types may be separated by commas
@@ -65,7 +65,7 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional rating
      */
-    ratingFrom: data?.additional?.rating,
+    ratingFrom: data?.rating,
 
     /**
      * search term query param
@@ -75,12 +75,12 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional level
      */
-    professionalLevel: data?.additional?.professionalLevel?.value,
+    professionalLevel: data?.professionalLevel?.value,
 
     /**
      * price currency (usd)
      */
-    priceCurrency: data?.main?.price?.currency?.currency,
+    priceCurrency: data?.price?.currency?.currency,
 
     /**
      * postal code ID
@@ -90,37 +90,37 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * multiple methods may be separated by commas
      */
-    paymentMethods: data?.additional?.paymentMethods?.map(({ value }) => value).join(', '),
-    onlyWithReviews: data?.additional?.onlyWithReviews,
-    onlyWithPhotos: data?.additional?.onlyWithPhotos,
-    onlyWithFixedPrice: data?.additional?.onlyWithFixedPrice,
-    onlyWithCertificates: data?.additional?.onlyWithCertificates,
-    onlyWithAutoOrderConfirmation: data.main.isInstantBooking,
+    paymentMethods: data?.paymentMethods?.map(({ value }) => value).join(', '),
+    onlyWithReviews: data?.onlyWithReviews,
+    onlyWithPhotos: data?.onlyWithPhotos,
+    onlyWithFixedPrice: data?.onlyWithFixedPrice,
+    onlyWithCertificates: data?.onlyWithCertificates,
+    onlyWithAutoOrderConfirmation: data.isInstantBooking,
 
     /**
      * multiple country IDs may be separated by commas
      */
-    nationalities: data?.additional?.nationalities?.map(({ id }) => id).join(', '),
+    nationalities: data?.nationalities?.map(({ id }) => id).join(', '),
 
     /**
      * max distance
      */
-    maxDistance: data?.main?.radius?.distance,
+    maxDistance: data?.radius?.distance,
 
     /**
      * longitude (-79.3849)
      */
-    longitude: `${data?.main?.location?.coordinates?.longitude}`,
+    longitude: `${data?.location?.coordinates?.longitude}`,
 
     /**
      * latitude (43.6529)
      */
-    latitude: `${data?.main?.location?.coordinates?.latitude}`,
+    latitude: `${data?.location?.coordinates?.latitude}`,
 
     /**
      * multiple values may be separated by commas
      */
-    languages: data?.additional?.languages?.map(({ code }) => code).join(', '),
+    languages: data?.languages?.map(({ code }) => code).join(', '),
 
     /**
      * male: 0,                 female: 1
@@ -130,22 +130,22 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * professional experience
      */
-    experience: data?.additional?.experience,
+    experience: data?.experience,
 
     /**
      * end price value (16.50)
      */
-    endPrice: data?.main?.price.end,
+    endPrice: data?.price.end,
 
     /**
      * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
      */
-    endDatetime: data?.main?.datetime.to,
+    endDatetime: data?.datetime.to,
 
     /**
      * professional end age
      */
-    endAge: data?.additional?.endAge,
+    endAge: data?.endAge,
 
     /**
      * district ID
@@ -155,16 +155,16 @@ export const searchFilterStateInterfaceToSearchListParamsAdapter = (data: Search
     /**
      * country ID
      */
-    country: data?.main?.location?.country?.id,
+    country: data?.location?.country?.id,
 
     /**
      * city ID
      */
-    city: data?.main?.location?.city?.id,
+    city: data?.location?.city?.id,
 
     /**
      * multiple category IDs may be separated by commas
      */
-    categories: data?.main?.category?.map(({ id }) => id).join(','),
+    categories: data?.category?.map(({ id }) => id).join(','),
   };
 };
