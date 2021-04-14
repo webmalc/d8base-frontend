@@ -4,6 +4,7 @@ import { SearchService } from '@app/api/services';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Platform } from '@ionic/angular';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
+import { StateInterfaceAdapter } from './search-interface-adapter.service';
 import { SearchPage } from './search-page.component';
 
 describe('SearchPage', () => {
@@ -20,6 +21,7 @@ describe('SearchPage', () => {
           { provide: Platform, useValue: { width: () => 1000, is: () => false } },
           SearchFilterStateService,
           FormBuilder,
+          StateInterfaceAdapter,
         ],
       }).compileComponents();
 

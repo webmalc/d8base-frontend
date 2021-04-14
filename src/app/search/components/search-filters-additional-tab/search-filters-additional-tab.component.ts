@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LocationService } from '@app/api/services';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';

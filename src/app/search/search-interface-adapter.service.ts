@@ -19,7 +19,7 @@ export class StateInterfaceAdapter {
     params: SearchService.SearchListParams,
   ): Observable<SearchFilterStateInterface> {
     if (!params) {
-      return;
+      return of();
     }
 
     return combineLatest(Object.values(this.getExpandedParams(params))).pipe(
@@ -31,7 +31,7 @@ export class StateInterfaceAdapter {
           Subcategory[],
           Language[],
         ]) => {
-          const country = this.isCountryNeed(params) ? countries.find(({ id }) => id === params.country) : void 0;
+          const country = this.isCountryNeed(params) ? countries.find(({ id }) => Number(id) === Number(params.country)) : void 0;
           const nationalities = this.isNationalitiesNeed(params)
             ? countries.filter(({ id }) =>
                 params.nationalities
@@ -54,8 +54,8 @@ export class StateInterfaceAdapter {
               distance: params?.maxDistance,
               units: void 0,
             },
-            category: categories,
-            subcategory: subcategories,
+            category: this.emptyArrayToUndefined(categories),
+            subcategory: this.emptyArrayToUndefined(subcategories),
             tags: void 0,
             isOnlineBooking: void 0,
             isInstantBooking: params?.onlyWithAutoOrderConfirmation,
@@ -71,17 +71,17 @@ export class StateInterfaceAdapter {
               start: params?.startPrice,
               end: params?.endPrice,
             },
-            rating: params?.ratingFrom,
-            professionalLevel: { value: params?.professionalLevel },
+            rating: params?.ratingFrom ? Number(params?.ratingFrom) : void 0,
+            professionalLevel: params?.professionalLevel ? { value: params?.professionalLevel } : void 0,
             paymentMethods: params?.paymentMethods
-              .split(',')
+              ?.split(',')
               .map((paymentMethod: 'cash' | 'online') => ({ value: paymentMethod })),
             onlyWithReviews: params?.onlyWithReviews,
             onlyWithPhotos: params?.onlyWithPhotos,
             onlyWithFixedPrice: params?.onlyWithFixedPrice,
             onlyWithCertificates: params?.onlyWithCertificates,
-            nationalities,
-            languages,
+            nationalities: this.emptyArrayToUndefined(nationalities),
+            languages: this.emptyArrayToUndefined(languages),
             experience: params?.experience,
             startAge: params?.startAge,
             endAge: params?.endAge,
@@ -144,5 +144,9 @@ export class StateInterfaceAdapter {
 
   private isLanguagesNeed({ languages }: SearchService.SearchListParams): boolean {
     return Boolean(languages);
+  }
+
+  private emptyArrayToUndefined<T>(arr: T[]): T[] | undefined {
+    return arr?.length ? arr : void 0;
   }
 }
