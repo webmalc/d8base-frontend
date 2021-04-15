@@ -32,7 +32,7 @@ export class SearchFilterStateConverter {
   constructor(
     private readonly countriesApiCache: CountriesApiCache,
     private readonly languagesApiCache: LanguagesApiCache,
-    private readonly citiApiCache: CitiesApiCache,
+    private readonly citiesApiCache: CitiesApiCache,
     private readonly professionalsApi: ProfessionalsService,
   ) {}
 
@@ -275,7 +275,7 @@ export class SearchFilterStateConverter {
   ] {
     return [
       params?.country || params?.nationalities ? this.countriesApiCache.list() : of([]),
-      params?.city ? this.citiApiCache.getByEntityId(params.city) : of(void 0),
+      params?.city ? this.citiesApiCache.getByEntityId(params.city) : of(void 0),
       params?.categories ? this.getCategories(params.categories.split(',').map(idStr => parseInt(idStr, 10))) : of([]),
       params?.subcategories
         ? this.getSubcategories(params.subcategories.split(',').map(idStr => parseInt(idStr, 10)))
