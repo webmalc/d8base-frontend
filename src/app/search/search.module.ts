@@ -13,9 +13,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
-import { StateInterfaceAdapter } from './search-interface-adapter.service';
+import { SearchFilterStateConverter } from './services/search-filter-state-converter.service';
 import { SearchPage } from './search-page.component';
 import { SearchPageRoutingModule } from './search-routing.module';
+import { SearchFilterStateService } from './services/search-filter-state.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,6 @@ import { SearchPageRoutingModule } from './search-routing.module';
     SearchResultComponent,
   ],
   exports: [SearchFiltersComponent],
-  providers: [StateInterfaceAdapter],
+  providers: [SearchFilterStateService, SearchFilterStateConverter],
 })
 export class SearchPageModule {}

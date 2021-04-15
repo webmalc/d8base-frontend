@@ -16,8 +16,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
 import { Search, UserLocation } from '../api/models';
 import { SearchService } from '../api/services';
-import { StateInterfaceAdapter } from './search-interface-adapter.service';
-import { searchFilterStateInterfaceToSearchListParamsAdapter } from './search-params.adapter';
+import { SearchFilterStateConverter } from './services/search-filter-state-converter.service';
 
 @Component({
   selector: 'app-search',
@@ -47,7 +46,7 @@ export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
     private readonly cd: ChangeDetectorRef,
     private readonly route: ActivatedRoute,
     private readonly ngUnsubscribe$: NgDestroyService,
-    private readonly stateInterfaceAdapter: StateInterfaceAdapter,
+    private readonly searchFilterStateConverter: SearchFilterStateConverter,
   ) {
     super();
   }
@@ -102,7 +101,7 @@ export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
   }
 
   public doSearch(): void {
-    this.params = searchFilterStateInterfaceToSearchListParamsAdapter(this.state.searchForm.value);
+    this.params = this.searchFilterStateConverter.getSearchListParams(this.state.searchForm.value);
     this.doLoad$.next({
       params: this.params,
       apiRequestFunction: this.apiRequestFunction,
@@ -126,7 +125,7 @@ export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
           }
           return of(params) ;
         }),
-        switchMap((params) => this.stateInterfaceAdapter.getSearchFilterStateInterfaceFromSearchListParams(params)),
+        switchMap((params) => this.searchFilterStateConverter.getSearchFilterState(params)),
         takeUntil(this.ngUnsubscribe$),
       )
       .subscribe(params => {

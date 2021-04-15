@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 import { Observable, ReplaySubject } from 'rxjs';
-import { searchFilterStateInterfaceToSearchListParamsAdapter } from '../search-params.adapter';
+import { SearchFilterStateConverter } from './search-filter-state-converter.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SearchFilterStateService {
   public searchForm: FormGroup = this.fb.group({
     query: null,
@@ -54,9 +54,13 @@ export class SearchFilterStateService {
     return this.doSearch$.asObservable();
   }
 
-  constructor(private readonly router: Router, private readonly fb: FormBuilder) {
+  constructor(
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    private readonly searchFilterStateConverter: SearchFilterStateConverter,
+  ) {
     this.doSearch$.subscribe(() => {
-      const queryParams = searchFilterStateInterfaceToSearchListParamsAdapter(this.searchForm.value);
+      const queryParams = this.searchFilterStateConverter.getSearchListParams(this.searchForm.value);
       this.router.navigate(['/search'], { queryParams });
     });
     this.setMinMaxDates();
