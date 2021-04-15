@@ -4,46 +4,49 @@ import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 import { Observable, ReplaySubject } from 'rxjs';
+import { SearchFilterFormFields, SearchFilterFormGroups } from '../const/search-filters-form';
 import { SearchFilterStateConverter } from './search-filter-state-converter.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SearchFilterStateService {
+  public formFields = SearchFilterFormFields;
+  public formGroups = SearchFilterFormGroups;
   public searchForm: FormGroup = this.fb.group({
-    query: null,
-    location: this.fb.group({
-      country: null,
-      city: null,
-      coordinates: null,
+    [this.formFields.query]: null,
+    [this.formGroups.location]: this.fb.group({
+      [this.formFields.location.country]: null,
+      [this.formFields.location.city]: null,
+      [this.formFields.location.coordinates]: null,
     }),
-    category: null,
-    subcategory: null,
-    tags: null,
-    isOnlineBooking: null,
-    isInstantBooking: null,
-    datetime: this.fb.group({
-      from: null,
-      to: null,
+    [this.formFields.category]: null,
+    [this.formFields.subcategory]: null,
+    [this.formFields.tags]: null,
+    [this.formFields.isOnlineBooking]: null,
+    [this.formFields.isInstantBooking]: null,
+    [this.formGroups.datetime]: this.fb.group({
+      [this.formFields.datetime.from]: null,
+      [this.formFields.datetime.to]: null,
     }),
-    isOnlineService: null,
-    isAtMasterLocationService: null,
-    isAtClientLocationService: null,
-    price: this.fb.group({
-      currency: null,
-      start: null,
-      end: null,
+    [this.formFields.isOnlineService]: null,
+    [this.formFields.isAtMasterLocationService]: null,
+    [this.formFields.isAtClientLocationService]: null,
+    [this.formGroups.price]: this.fb.group({
+      [this.formFields.price.currency]: null,
+      [this.formFields.price.start]: null,
+      [this.formFields.price.end]: null,
     }),
-    rating: null,
-    professionalLevel: null,
-    paymentMethods: null,
-    onlyWithReviews: null,
-    onlyWithPhotos: null,
-    onlyWithFixedPrice: null,
-    onlyWithCertificates: null,
-    nationalities: null,
-    languages: null,
-    experience: null,
-    startAge: null,
-    endAge: null,
+    [this.formFields.rating]: null,
+    [this.formFields.professionalLevel]: null,
+    [this.formFields.paymentMethods]: null,
+    [this.formFields.onlyWithReviews]: null,
+    [this.formFields.onlyWithPhotos]: null,
+    [this.formFields.onlyWithFixedPrice]: null,
+    [this.formFields.onlyWithCertificates]: null,
+    [this.formFields.nationalities]: null,
+    [this.formFields.languages]: null,
+    [this.formFields.experience]: null,
+    [this.formFields.startAge]: null,
+    [this.formFields.endAge]: null,
   });
 
   public minDate: string;

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category, City, Country, Rate, Subcategory } from '@app/api/models';
+import { Category, Rate, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache, RatesApiCache } from '@app/core/services/cache';
@@ -10,8 +10,8 @@ import { Coords } from '@app/shared/interfaces/coords';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { PopoverController } from '@ionic/angular';
-import { BehaviorSubject, forkJoin } from 'rxjs';
-import { filter, withLatestFrom } from 'rxjs/operators';
+import { forkJoin, Observable } from 'rxjs';
+import { filter, map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-filters-main-tab',
@@ -21,10 +21,21 @@ import { filter, withLatestFrom } from 'rxjs/operators';
 })
 export class SearchFiltersMainTabComponent implements OnInit {
   public countries$ = this.countriesApi.list();
-  public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
-  public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
+  public categoryList$: Observable<Category[]> = this.professionalsApi
+    .professionalsCategoriesList({})
+    .pipe(map(({ results }) => results));
+  public subcategoriesList: Subcategory[];
   public rates: Rate[] = [];
 
+  public get formFields() {
+    return this.stateManager.formFields;
+  }
+  public get formGroups() {
+    return this.stateManager.formGroups;
+  }
+  public get form() {
+    return this.stateManager.searchForm;
+  }
   constructor(
     private readonly countriesApi: CountriesApiCache,
     private readonly professionalsApi: ProfessionalsService,
@@ -35,11 +46,12 @@ export class SearchFiltersMainTabComponent implements OnInit {
     private readonly ratesApiCache: RatesApiCache,
     private readonly userSettings: UserSettingsService,
     private readonly cd: ChangeDetectorRef,
+    private readonly destroy$: NgDestroyService,
   ) {}
 
   public ngOnInit(): void {
-    this.subscribeCategories();
     this.subscribeRates();
+    this.detectChangesForIonicSelectable();
   }
 
   public async initLocationPopover(): Promise<void> {
@@ -49,7 +61,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       animated: true,
       componentProps: {
         data: {
-          coordinates: this.stateManager.searchForm.get('location').get('coordinates'),
+          coordinates: this.form.get([this.formGroups.location, this.formFields.location.coordinates]),
         },
         renderCountry: false,
       },
@@ -64,40 +76,30 @@ export class SearchFiltersMainTabComponent implements OnInit {
     return await pop.present();
   }
 
-  public onCityChange(event: { value: City }): void {
-    const country: Country | null = this.getCountryValue();
-    this.currentLocation
-      .getCoords(country, event.value)
-      .pipe(filter(data => null !== data))
-      .subscribe(res => {
-        this.stateManager.searchForm.get('location').setValue({
-          country,
-          city: event.value,
-          coordinates: res,
-        });
-      });
-  }
-
-  public getCountryValue(): Country | null {
-    return this.stateManager.searchForm.get('location').get('country').value;
-  }
-
   public onCountryChange(): void {
-    this.stateManager.searchForm.get('location').get('city').reset();
+    this.form.get([this.formGroups.location, this.formFields.location.city]).reset();
   }
 
   public initSubcategories(categories: Category[]): void {
-    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id))).subscribe(data =>
-      this.subcategoriesList$.next(data),
-    );
+    this.subcategoriesList = null;
+    this.form.get(this.formFields.subcategory).reset();
+    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id)))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(subcategoriesList => {
+        this.subcategoriesList = subcategoriesList;
+        this.cd.detectChanges();
+      });
   }
 
   private updateCity(coords: Coords): void {
     this.currentLocation
       .getExtendedLocationByCoords(coords)
-      .pipe(filter(res => null !== res))
+      .pipe(
+        filter(res => null !== res),
+        takeUntil(this.destroy$),
+      )
       .subscribe(res => {
-        this.stateManager.searchForm.get('location').setValue({
+        this.form.get(this.formGroups.location).setValue({
           country: res.country,
           city: res.city,
           coordinates: res.coords,
@@ -105,23 +107,22 @@ export class SearchFiltersMainTabComponent implements OnInit {
       });
   }
 
-  private subscribeCategories(): void {
-    this.professionalsApi
-      .professionalsCategoriesList({})
-      .subscribe(results => this.categoryList$.next(results.results));
-  }
-
   private subscribeRates(): void {
     this.ratesApiCache
       .list()
-      .pipe(withLatestFrom(this.userSettings.userSettings$))
+      .pipe(withLatestFrom(this.userSettings.userSettings$), takeUntil(this.destroy$))
       .subscribe(([rates, settings]) => {
         this.rates = rates;
-        this.stateManager.searchForm
-          .get('price')
-          .get('currency')
+        this.form
+          .get([this.formGroups.price, this.formFields.price.currency])
           .setValue(rates.find(({ currency }) => currency === settings?.currency ?? rates[0].currency));
         this.cd.markForCheck();
       });
+  }
+
+  private detectChangesForIonicSelectable(): void {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cd.detectChanges();
+    });
   }
 }

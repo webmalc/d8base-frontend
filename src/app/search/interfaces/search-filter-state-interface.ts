@@ -6,10 +6,6 @@ import { Tag } from '@app/master/models/tag';
 export interface SearchFilterStateInterface {
   query: string;
   location: SearchLocationDataInterface;
-  radius: {
-    distance: number;
-    units: boolean;
-  };
   category: Category[];
   subcategory: Subcategory[];
   tags: Tag[];

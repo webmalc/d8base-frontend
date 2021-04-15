@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryIconComponent } from '@app/main/components/category-icon/category-icon.component';
 import { LocationPickerComponent } from '@app/main/components/location-picker/location-picker.component';
 import { MainPageIconComponent } from '@app/main/components/main-page-icon/main-page-icon.component';
@@ -36,6 +36,7 @@ import { MainPage } from './main.page';
     TranslateModule,
     FontAwesomeModule,
     IonicSelectableModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     MainPage,

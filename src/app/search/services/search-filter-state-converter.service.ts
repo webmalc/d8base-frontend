@@ -27,7 +27,7 @@ const stringOrNull = (value: number): string | null => (value ? `${value}` : nul
 
 const emptyArrayToUndefined = <T>(arr: T[]): T[] | undefined => (arr?.length ? arr : void 0);
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SearchFilterStateConverter {
   constructor(
     private readonly countriesApiCache: CountriesApiCache,
@@ -41,7 +41,7 @@ export class SearchFilterStateConverter {
       return of();
     }
 
-    return combineLatest(Object.values(this.getExpandedParams(params))).pipe(
+    return combineLatest(this.getExpandedParams(params)).pipe(
       map(
         ([countries, city, categories, subcategories, languages]: [
           Country[],
@@ -68,10 +68,6 @@ export class SearchFilterStateConverter {
                 latitude: parseFloat(params?.latitude),
                 longitude: parseFloat(params?.longitude),
               },
-            },
-            radius: {
-              distance: params?.maxDistance,
-              units: void 0,
             },
             category: emptyArrayToUndefined(categories),
             subcategory: emptyArrayToUndefined(subcategories),
@@ -200,7 +196,7 @@ export class SearchFilterStateConverter {
       /**
        * max distance
        */
-      maxDistance: data?.radius?.distance,
+      maxDistance: void 0,
 
       /**
        * longitude (-79.3849)
