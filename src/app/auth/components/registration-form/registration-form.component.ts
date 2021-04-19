@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '@app/core/models/user';
-import { UserLocation } from '@app/core/models/user-location';
+import { DefaultRegisterUser, UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
-import { plainToClass } from 'class-transformer';
 import { takeUntil } from 'rxjs/operators';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
 
@@ -18,7 +16,8 @@ export class RegistrationFormComponent {
   public form: FormGroup = this.fb.group(
     {
       [RegistrationFormFields.Email]: ['', [Validators.required, Validators.email]],
-      [RegistrationFormFields.Name]: ['', Validators.required],
+      [RegistrationFormFields.FirstName]: ['', Validators.required],
+      [RegistrationFormFields.LastName]: [''],
       [RegistrationFormFields.Password]: ['', passwordValidators],
       [RegistrationFormFields.Confirm]: ['', passwordValidators],
       [RegistrationFormFields.Country]: ['', Validators.required],
@@ -33,7 +32,9 @@ export class RegistrationFormComponent {
   public errorMessages: string[];
 
   @Output()
-  public readonly registrationFormData = new EventEmitter<{ user: User; location: UserLocation }>();
+  public readonly registrationFormData = new EventEmitter<{ user: DefaultRegisterUser; location: UserLocation }>();
+
+  private _pending: boolean = false;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -42,16 +43,38 @@ export class RegistrationFormComponent {
     this.subscribeOnCountryChanges();
   }
 
+  public get pending(): boolean {
+    return this._pending;
+  }
+
+  @Input()
+  public set pending(value: boolean) {
+    this._pending = value;
+    if (value) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
   public submitRegistrationForm(): void {
     if (this.form.invalid) {
       return;
     }
     const formData: object = this.form.getRawValue();
 
-    const user = plainToClass(User, formData, { excludeExtraneousValues: true });
-    const location: UserLocation = new UserLocation();
-    location.country = formData[this.formFields.Country].id;
-    location.city = formData[this.formFields.City]?.id;
+    const user: DefaultRegisterUser = {
+      first_name: formData[this.formFields.FirstName],
+      last_name: formData[this.formFields.LastName],
+      email: formData[this.formFields.Email],
+      password: formData[this.formFields.Password],
+      password_confirm: formData[this.formFields.Confirm],
+      phone: formData[this.formFields.Phone],
+    };
+    const location: UserLocation = {
+      country: formData[this.formFields.Country].id,
+      city: formData[this.formFields.City]?.id,
+    };
     this.registrationFormData.emit({ user, location });
   }
 

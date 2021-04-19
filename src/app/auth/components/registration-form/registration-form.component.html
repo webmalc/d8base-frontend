@@ -1,32 +1,48 @@
 <form [formGroup]="form" (ngSubmit)="submitRegistrationForm()" (keydown.enter)="submitRegistrationForm()">
   <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
   <ion-item>
-    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
-    <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
+    <ion-label class="label-for-required-input" color="medium" position="floating">
+      {{ 'registration-form.name' | translate }}
+    </ion-label>
+    <ion-input type="text" name="name" [formControlName]="formFields.FirstName"></ion-input>
   </ion-item>
-  <app-form-control-error [controlName]="formFields.Name"></app-form-control-error>
   <ion-item>
-    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.email' | translate }}</ion-label>
+    <ion-label color="medium" position="floating">
+      {{ 'registration-form.last-name' | translate }}
+    </ion-label>
+    <ion-input type="text" name="name" [formControlName]="formFields.LastName"></ion-input>
+  </ion-item>
+  <app-form-control-error [controlName]="formFields.FirstName"></app-form-control-error>
+  <app-form-control-error [controlName]="formFields.LastName"></app-form-control-error>
+  <ion-item>
+    <ion-label class="label-for-required-input" color="medium" position="floating">
+      {{ 'registration-form.email' | translate }}
+    </ion-label>
     <ion-input type="text" name="email" [formControlName]="formFields.Email"></ion-input>
   </ion-item>
-  <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
+  <app-form-control-error [controlName]="formFields.Email"></app-form-control-error>
   <ion-item>
-    <ion-label class="label-for-required-input" color="medium" position="floating">{{
-      'registration-form.password' | translate
-    }}</ion-label>
+    <ion-label class="label-for-required-input" color="medium" position="floating">
+      {{ 'registration-form.password' | translate }}
+    </ion-label>
     <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
   </ion-item>
-  <app-form-control-error [controlName]="formFields.Password"> </app-form-control-error>
+  <app-form-control-error [controlName]="formFields.Password"></app-form-control-error>
   <ion-item>
-    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.confirm' | translate }}</ion-label>
+    <ion-label class="label-for-required-input" color="medium" position="floating">
+      {{ 'registration-form.confirm' | translate }}
+    </ion-label>
     <ion-input type="password" name="confirm" [formControlName]="formFields.Confirm"></ion-input>
   </ion-item>
-  <app-form-control-error [controlName]="formFields.Confirm"> </app-form-control-error>
-  <app-form-control-error [control]="form" [showErrors]="['passwordMismatch']"> </app-form-control-error>
+  <app-form-control-error [controlName]="formFields.Confirm"></app-form-control-error>
+  <app-form-control-error [control]="form" [showErrors]="['passwordMismatch']"></app-form-control-error>
   <app-phone-editor [formControlName]="formFields.Phone"></app-phone-editor>
   <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
-  <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value"></app-city-selector>
-  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="form.invalid">{{
-    'registration-form.register' | translate
-  }}</ion-button>
+  <app-city-selector
+    [formControlName]="formFields.City"
+    [country]="form.controls[formFields.Country].value"
+  ></app-city-selector>
+  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="pending || form.invalid">
+    {{ 'registration-form.register' | translate }}
+  </ion-button>
 </form>
