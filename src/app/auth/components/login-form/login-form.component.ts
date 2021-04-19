@@ -13,11 +13,26 @@ export class LoginFormComponent {
     [LoginFormFields.Username]: ['', [Validators.required, Validators.email]],
     [LoginFormFields.Password]: ['', Validators.required],
   });
-  @Input() public errorMessages: string[];
   public readonly formFields = LoginFormFields;
   @Output() public readonly user = new EventEmitter<Credentials>();
+  private _pending: boolean;
 
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder) {
+  }
+
+  public get pending(): boolean {
+    return this._pending;
+  }
+
+  @Input()
+  public set pending(value: boolean) {
+    this._pending = value;
+    if (value) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
 
   public submitLoginForm(): void {
     if (this.form.invalid) {

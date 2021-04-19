@@ -4,9 +4,10 @@ import { Profile } from '@app/api/models';
 import { Credentials } from '@app/auth/interfaces/credentials';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -23,6 +24,8 @@ export class LoginPage {
   @Select(CurrentUserSelectors.errors)
   public errorMessages$: Observable<string[]>;
 
+  public readonly pending$ = new BehaviorSubject<boolean>(false);
+
   private redirectTo: string = '/profile';
 
   constructor(
@@ -30,13 +33,19 @@ export class LoginPage {
     private readonly router: Router,
     private readonly destroy$: NgDestroyService,
     private readonly route: ActivatedRoute,
+    private readonly store: Store,
   ) {
     this.subOnQueryParams();
-    this.subOnProfile();
   }
 
   public onSubmitLoginForm(user: Credentials): void {
-    this.authenticator.login(user);
+    this.pending$.next(true);
+    this.store.dispatch(new CurrentUserActions.Login(user))
+      .subscribe(
+        () => this.router.navigateByUrl(this.redirectTo),
+        () => this.pending$.next(false),
+        () => this.pending$.next(false),
+      );
   }
 
   private async logout(): Promise<void> {
@@ -51,19 +60,12 @@ export class LoginPage {
     ).subscribe(() => this.logout());
 
     this.route.queryParams
-    .pipe(
+      .pipe(
         filter(params => params?.hasOwnProperty('redirectTo')),
         takeUntil(this.destroy$),
-    )
-    .subscribe(({ redirectTo }) => {
+      )
+      .subscribe(({ redirectTo }) => {
         this.redirectTo = redirectTo;
-    });
-  }
-
-  private subOnProfile() {
-    this.profile$.pipe(
-      filter(profile => !!profile?.account_type),
-      takeUntil(this.destroy$),
-    ).subscribe(() => this.router.navigateByUrl(this.redirectTo));
+      });
   }
 }

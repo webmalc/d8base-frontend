@@ -83,7 +83,6 @@ export class CurrentUserState implements NgxsOnInit {
         catchError(error => {
           if (400 === error.status && error.error.error === 'invalid_grant') {
             patchState({ errors: ['login-page.incorrect-login-data'] });
-            return of(null);
           }
           return throwError(error);
         }),
