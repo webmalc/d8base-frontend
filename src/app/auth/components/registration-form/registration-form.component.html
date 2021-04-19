@@ -1,6 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="submitRegistrationForm()" (keydown.enter)="submitRegistrationForm()">
   <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
   <ion-item>
+    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
+    <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
+  </ion-item>
+  <app-form-control-error [controlName]="formFields.Name"></app-form-control-error>
+  <ion-item>
     <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.email' | translate }}</ion-label>
     <ion-input type="text" name="email" [formControlName]="formFields.Email"></ion-input>
   </ion-item>
@@ -18,11 +23,6 @@
   </ion-item>
   <app-form-control-error [controlName]="formFields.Confirm"> </app-form-control-error>
   <app-form-control-error [control]="form" [showErrors]="['passwordMismatch']"> </app-form-control-error>
-  <ion-item>
-    <ion-label class="label-for-required-input" color="medium" position="floating">{{ 'registration-form.name' | translate }}</ion-label>
-    <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
-  </ion-item>
-  <app-form-control-error [controlName]="formFields.Name"></app-form-control-error>
   <app-phone-editor [formControlName]="formFields.Phone"></app-phone-editor>
   <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
   <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value"></app-city-selector>
