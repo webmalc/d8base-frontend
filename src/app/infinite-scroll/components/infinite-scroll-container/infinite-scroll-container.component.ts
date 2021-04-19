@@ -92,6 +92,7 @@ export class InfiniteScrollContainerComponent<T> implements OnInit {
   private resetPageCounter(): void {
     this.pageCounter = 1;
     this.results = [];
+    this.disabelInfiniteScroll();
     this.loadResults.emit(this.results);
   }
 

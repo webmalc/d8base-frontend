@@ -195,7 +195,7 @@
             itemTextField="title"
             [canSearch]="true"
             [canClear]="true"
-            [items]="rates"
+            [items]="rates$ | async"
             [formControl]="form.get([formGroups.price, formFields.price.currency])"
             closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
             searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"

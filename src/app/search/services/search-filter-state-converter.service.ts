@@ -161,7 +161,7 @@ export class SearchFilterStateConverter {
       /**
        * search term query param
        */
-      query: data?.query,
+      query: data?.query || null,
 
       /**
        * professional level

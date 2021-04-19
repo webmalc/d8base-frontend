@@ -25,7 +25,7 @@ import { SearchFilterStateConverter } from './services/search-filter-state-conve
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NgDestroyService],
 })
-export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
+export class SearchPage implements OnInit, AfterViewInit {
   @Select(CurrentUserSelectors.defaultLocation)
   public defaultLocation$: Observable<UserLocation>;
 
@@ -47,9 +47,7 @@ export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly ngUnsubscribe$: NgDestroyService,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
-  ) {
-    super();
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.state.isDoingSearch$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(() => {
@@ -64,20 +62,6 @@ export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
   public onLoadResults(event): void {
     this.searchResult = event;
     this.cd.markForCheck();
-  }
-
-  public init(): void {
-    const state = this.location.getState();
-    if (state.hasOwnProperty('data')) {
-      const data = (state as { data: MainPageSearchInterface }).data;
-      this.state.setDate(data.datetime);
-      this.state.searchForm.get('query').setValue(data.needle);
-      this.state.doSearch();
-    } else if (state.hasOwnProperty('category') && state.hasOwnProperty('location')) {
-      const data = state as { category: Category; location: SearchLocationDataInterface };
-      this.state.searchForm.get('category').setValue([data.category]);
-      this.state.doSearch();
-    }
   }
 
   public declineIsWaiting(num: number): string {
@@ -119,13 +103,11 @@ export class SearchPage extends Reinitable implements OnInit, AfterViewInit {
         switchMap(params => {
           const isParamsEmpty = !Object.keys(params).length;
           if (isParamsEmpty) {
-            return this.defaultLocation$.pipe(
-              filter(defaultLocation => Boolean(defaultLocation)),
-            );
+            return this.defaultLocation$.pipe(filter(defaultLocation => Boolean(defaultLocation)));
           }
-          return of(params) ;
+          return of(params);
         }),
-        switchMap((params) => this.searchFilterStateConverter.getSearchFilterState(params)),
+        switchMap(params => this.searchFilterStateConverter.getSearchFilterState(params)),
         takeUntil(this.ngUnsubscribe$),
       )
       .subscribe(params => {

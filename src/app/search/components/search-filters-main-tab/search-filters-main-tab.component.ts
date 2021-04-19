@@ -8,10 +8,9 @@ import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-ma
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Coords } from '@app/shared/interfaces/coords';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import { PopoverController } from '@ionic/angular';
 import { forkJoin, Observable } from 'rxjs';
-import { filter, map, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-filters-main-tab',
@@ -25,7 +24,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
     .professionalsCategoriesList({})
     .pipe(map(({ results }) => results));
   public subcategoriesList: Subcategory[];
-  public rates: Rate[] = [];
+  public rates$: Observable<Rate[]> = this.ratesApiCache.list();
 
   public get formFields() {
     return this.stateManager.formFields;
@@ -44,13 +43,11 @@ export class SearchFiltersMainTabComponent implements OnInit {
     private readonly pop: PopoverController,
     private readonly currentLocation: CurrentLocationCompilerService,
     private readonly ratesApiCache: RatesApiCache,
-    private readonly userSettings: UserSettingsService,
     private readonly cd: ChangeDetectorRef,
     private readonly destroy$: NgDestroyService,
   ) {}
 
   public ngOnInit(): void {
-    this.subscribeRates();
     this.detectChangesForIonicSelectable();
   }
 
@@ -104,19 +101,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
           city: res.city,
           coordinates: res.coords,
         });
-      });
-  }
-
-  private subscribeRates(): void {
-    this.ratesApiCache
-      .list()
-      .pipe(withLatestFrom(this.userSettings.userSettings$), takeUntil(this.destroy$))
-      .subscribe(([rates, settings]) => {
-        this.rates = rates;
-        this.form
-          .get([this.formGroups.price, this.formFields.price.currency])
-          .setValue(rates.find(({ currency }) => currency === settings?.currency ?? rates[0].currency));
-        this.cd.markForCheck();
       });
   }
 
