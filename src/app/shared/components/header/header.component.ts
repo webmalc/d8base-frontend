@@ -3,7 +3,6 @@ import { AuthenticationService, MasterManagerService, TranslationService } from 
 import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import { MenuController, Platform } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import HeaderContext from './header-context.interface';

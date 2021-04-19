@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,11 @@ export class TranslationService {
     private readonly userSettings: UserSettingsService,
   ) {
     this.subOnUserSettings();
-    this.currentLanguage$ = translator.onLangChange.pipe(map(x => x.lang), shareReplay(1));
+    this.currentLanguage$ = translator.onLangChange.pipe(
+      map(x => x.lang),
+      startWith(environment.default_lang),
+      shareReplay(1),
+    );
   }
 
   public setLang(lang: string): void {
