@@ -5,7 +5,7 @@
       <ion-row class="ion-justify-content-center ion-margin-vertical main-title"> Booking made simple </ion-row>
       <ion-row>
         <ion-searchbar
-          [(ngModel)]="searchData.needle"
+          [formControl]="form.get(formFields.query)"
           animated
           class="main-page-search"
           color="light"
@@ -21,7 +21,7 @@
             picker-format="MMM DD, YYYY HH:mm"
             [min]="stateManager.minDate"
             [max]="stateManager.maxDate"
-            [(ngModel)]="searchData.datetime.from"
+            [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
             class="width100"
           ></ion-datetime>
           </ion-item>
@@ -34,7 +34,7 @@
             picker-format="MMM DD, YYYY HH:mm"
             [min]="stateManager.minDate"
             [max]="stateManager.maxDate"
-            [(ngModel)]="searchData.datetime.to"
+            [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
             class="width100"
           ></ion-datetime>
           </ion-item>
@@ -44,7 +44,7 @@
             <app-location-picker
               (emitter)="updateCity($event)"
               [enabled]="locationEnabled"
-              [locationData]="searchData.location"
+              [locationData]="form.get(formGroups.location).value"
               class="menu-item width100"
             ></app-location-picker>
           </ion-row>

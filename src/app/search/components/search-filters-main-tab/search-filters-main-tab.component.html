@@ -13,8 +13,9 @@
         [canSearch]="true"
         [shouldFocusSearchbar]="true"
         [hasVirtualScroll]="true"
-        [(ngModel)]="stateManager.data.main.location.country"
+        [formControl]="form.get([formGroups.location, formFields.location.country])"
         [canSearch]="true"
+        [canClear]="true"
         itemTextField="name"
         itemValueField="id"
       >
@@ -28,28 +29,21 @@
         {{ 'issuance.filters.main-tab.city-placeholder' | translate }}
       </ion-label>
       <ionic-selectable
-        (onChange)="onCityChange($event)"
-        (onSearch)="citySelectable.onCitySearch($event, this.getCountryValue())"
-        [(ngModel)]="stateManager.data.main.location.city"
+        (onSearch)="
+          citySelectable.onCitySearch($event, form.get([formGroups.location, formFields.location.country]).value)
+        "
+        [formControl]="form.get([formGroups.location, formFields.location.city])"
         [canSearch]="true"
-        [isEnabled]="stateManager.data.main.location.country && true"
+        [canClear]="true"
+        [isEnabled]="!!form.get([formGroups.location, formFields.location.country]).value"
         itemTextField="name"
         itemValueField="id"
       >
       </ionic-selectable>
     </ion-item>
-    <!-- <ion-item (click)="initLocationPopover()" lines="none" class="ion-item-no-side-padding cursor-pointer">
-        <ion-icon class="ion-padding-end" color="secondary" name="location-outline"></ion-icon>
-        {{"issuance.filters.main-tab.on-map"|translate}}
-    </ion-item>
-    <ion-item class="ion-item-bordered">
-        <ion-label color="medium" position="floating">
-            {{"issuance.filters.main-tab.radius"|translate}}
-        </ion-label>
-        <ion-input [(ngModel)]="stateManager.data.main.radius.distance" appNumbersOnly></ion-input>
-    </ion-item> -->
     <ion-item
-      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none"
+      class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
     <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.categories' | translate }}
@@ -60,8 +54,9 @@
       </ion-label>
       <ionic-selectable
         (onChange)="initSubcategories($event.value)"
-        [(ngModel)]="stateManager.data.main.category"
+        [formControl]="form.get(formFields.category)"
         [canSearch]="true"
+        [canClear]="true"
         [isMultiple]="true"
         [items]="categoryList$ | async"
         closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
@@ -80,11 +75,12 @@
         {{ 'issuance.filters.main-tab.subcategories-select' | translate }}
       </ion-label>
       <ionic-selectable
-        [(ngModel)]="stateManager.data.main.subcategory"
+        [formControl]="form.get(formFields.subcategory)"
         [canSearch]="true"
-        [isEnabled]="(subcategoriesList$ | async).length && true"
+        [canClear]="true"
+        [isEnabled]="!!form.get(formFields.category).value && !!subcategoriesList?.length"
         [isMultiple]="true"
-        [items]="subcategoriesList$ | async"
+        [items]="subcategoriesList"
         closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
         itemTextField="name"
         itemValueField="id"
@@ -94,72 +90,36 @@
       </ionic-selectable>
     </ion-item>
     <ion-item
-      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none"
+      class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
-    <!-- <ion-item lines="none" class="ion-item-no-side-padding title">
-        {{"issuance.filters.main-tab.tags"|translate}}
-    </ion-item>
-    <ion-row class="ion-justify-content-start">
-        <ion-item *ngFor="let tag of stateManager.data.main.tags"
-                  lines="none" class="ion-item-no-min-height ion-item-tag">
-            {{tag.name}}
-        </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-between ion-align-items-center">
-        <ion-item lines="none" class="ion-item-no-side-padding">
-            <ion-button color="secondary">
-                <ion-icon class="ion-padding-end" color="light" name="add-circle"></ion-icon>
-                {{"issuance.filters.main-tab.add"|translate}}
-            </ion-button>
-        </ion-item>
-    </ion-row> -->
-    <!-- <ion-item
-            lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"></ion-item>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-margin-top ion-nowrap">
-        <ion-item lines="none" class="ion-item-no-side-padding">
-            <ion-col>
-                <ion-item
-                        lines="none" class="ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
-                    {{"issuance.filters.main-tab.online-booking"|translate}}
-                </ion-item>
-                <ion-item
-                        lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
-                    {{"issuance.filters.main-tab.online-booking-desc"|translate}}
-                </ion-item>
-            </ion-col>
-        </ion-item>
-        <ion-row class="ion-justify-content-end">
-            <ion-item lines="none">
-                <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineBooking"></ion-checkbox>
-            </ion-item>
-        </ion-row>
-    </ion-row> -->
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
       <ion-item lines="none" class="ion-item-no-side-padding">
         <ion-col>
-          <ion-item
-            lines="none" class="ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
+          <ion-item lines="none" class="ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
             {{ 'issuance.filters.main-tab.instant-booking' | translate }}
           </ion-item>
-          <ion-item
-            lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
+          <ion-item lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
             {{ 'issuance.filters.main-tab.instant-booking-desc' | translate }}
           </ion-item>
         </ion-col>
       </ion-item>
       <ion-row class="ion-justify-content-end">
         <ion-item lines="none">
-          <ion-checkbox [(ngModel)]="stateManager.data.main.isInstantBooking"></ion-checkbox>
+          <ion-checkbox [formControl]="form.get(formFields.isInstantBooking)"></ion-checkbox>
         </ion-item>
       </ion-row>
     </ion-row>
     <ion-item
-      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none"
+      class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
-    <ion-item
-      lines="none" class="ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
-      <app-collapse-item [noSidePadding]="true" class="width100"
-                         title="{{ 'issuance.filters.main-tab.datetime' | translate }}">
+    <ion-item lines="none" class="ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
+      <app-collapse-item
+        [noSidePadding]="true"
+        class="width100"
+        title="{{ 'issuance.filters.main-tab.datetime' | translate }}"
+      >
         <ion-item>
           <ion-label>{{ 'issuance.filters.main-tab.date-from' | translate }}</ion-label>
           <ion-datetime
@@ -168,7 +128,7 @@
             picker-format="MMM DD, YYYY HH:mm"
             [min]="stateManager.minDate"
             [max]="stateManager.maxDate"
-            [(ngModel)]="stateManager.data.main.datetime.from"
+            [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
           ></ion-datetime>
         </ion-item>
         <ion-item>
@@ -179,7 +139,7 @@
             picker-format="MMM DD, YYYY HH:mm"
             [min]="stateManager.minDate"
             [max]="stateManager.maxDate"
-            [(ngModel)]="stateManager.data.main.datetime.to"
+            [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
           ></ion-datetime>
         </ion-item>
       </app-collapse-item>
@@ -193,7 +153,7 @@
       </ion-item>
       <ion-row class="ion-justify-content-end">
         <ion-item lines="none">
-          <ion-checkbox [(ngModel)]="stateManager.data.main.isOnlineService" class="ion-no-margin"></ion-checkbox>
+          <ion-checkbox [formControl]="form.get(formFields.isOnlineService)" class="ion-no-margin"></ion-checkbox>
         </ion-item>
       </ion-row>
     </ion-row>
@@ -202,8 +162,10 @@
         {{ 'service-location.professional' | translate }}
       </ion-item>
       <ion-item lines="none">
-        <ion-checkbox [(ngModel)]="stateManager.data.main.isAtMasterLocationService"
-                      class="ion-no-margin"></ion-checkbox>
+        <ion-checkbox
+          [formControl]="form.get(formFields.isAtMasterLocationService)"
+          class="ion-no-margin"
+        ></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
@@ -211,37 +173,43 @@
         {{ 'service-location.client' | translate }}
       </ion-item>
       <ion-item lines="none">
-        <ion-checkbox [(ngModel)]="stateManager.data.main.isAtClientLocationService"
-                      class="ion-no-margin"></ion-checkbox>
+        <ion-checkbox
+          [formControl]="form.get(formFields.isAtClientLocationService)"
+          class="ion-no-margin"
+        ></ion-checkbox>
       </ion-item>
     </ion-row>
     <ion-item
-      lines="none" class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
+      lines="none"
+      class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
-    <ion-item
-      lines="none" class="ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
-      <app-collapse-item [noSidePadding]="true" class="width100"
-                         title="{{ 'issuance.filters.main-tab.price' | translate }}">
+    <ion-item lines="none" class="ion-item-no-side-padding ion-item-bottom-border ion-padding-bottom ion-padding-end">
+      <app-collapse-item
+        [noSidePadding]="true"
+        class="width100"
+        title="{{ 'issuance.filters.main-tab.price' | translate }}"
+      >
         <ion-item lines="none" class="ion-item-bordered ion-item-bottom-border">
           <ionic-selectable
             itemValueField="currency"
             itemTextField="title"
             [canSearch]="true"
-            [items]="rates"
-            [(ngModel)]="stateManager.data.main.price.currency"
-            closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
-            searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-            searchPlaceholder="{{'ion-selectable.search-text' | translate}}"
+            [canClear]="true"
+            [items]="rates$ | async"
+            [formControl]="form.get([formGroups.price, formFields.price.currency])"
+            closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
+            searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
+            searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
           >
           </ionic-selectable>
         </ion-item>
         <ion-item>
           <ion-label position="floating">{{ 'issuance.filters.main-tab.price-start' | translate }}</ion-label>
-          <ion-input appNumbersOnly [(ngModel)]="stateManager.data.main.price.start"></ion-input>
+          <ion-input appNumbersOnly [formControl]="form.get([formGroups.price, formFields.price.start])"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">{{ 'issuance.filters.main-tab.price-end' | translate }}</ion-label>
-          <ion-input appNumbersOnly [(ngModel)]="stateManager.data.main.price.end"></ion-input>
+          <ion-input appNumbersOnly [formControl]="form.get([formGroups.price, formFields.price.end])"></ion-input>
         </ion-item>
       </app-collapse-item>
     </ion-item>

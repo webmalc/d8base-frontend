@@ -1,21 +1,16 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category, City, Country, Rate, Subcategory, UserLocation } from '@app/api/models';
+import { Category, Rate, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache, RatesApiCache } from '@app/core/services/cache';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
-import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
-import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Coords } from '@app/shared/interfaces/coords';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
-import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { PopoverController } from '@ionic/angular';
-import { Select } from '@ngxs/store';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { filter, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { forkJoin, Observable } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-filters-main-tab',
@@ -24,16 +19,23 @@ import { filter, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
   providers: [NgDestroyService],
 })
 export class SearchFiltersMainTabComponent implements OnInit {
-  @Select(CurrentUserSelectors.defaultLocation)
-  public defaultLocation$: Observable<UserLocation>;
-
   public countries$ = this.countriesApi.list();
-  public categoryList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
-  public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
-  public rates: Rate[] = [];
+  public categoryList$: Observable<Category[]> = this.professionalsApi
+    .professionalsCategoriesList({})
+    .pipe(map(({ results }) => results));
+  public subcategoriesList: Subcategory[];
+  public rates$: Observable<Rate[]> = this.ratesApiCache.list();
 
+  public get formFields() {
+    return this.stateManager.formFields;
+  }
+  public get formGroups() {
+    return this.stateManager.formGroups;
+  }
+  public get form() {
+    return this.stateManager.searchForm;
+  }
   constructor(
-    private readonly fullLocationService: FullLocationService,
     private readonly countriesApi: CountriesApiCache,
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
@@ -41,15 +43,12 @@ export class SearchFiltersMainTabComponent implements OnInit {
     private readonly pop: PopoverController,
     private readonly currentLocation: CurrentLocationCompilerService,
     private readonly ratesApiCache: RatesApiCache,
-    private readonly userSettings: UserSettingsService,
     private readonly cd: ChangeDetectorRef,
     private readonly destroy$: NgDestroyService,
   ) {}
 
   public ngOnInit(): void {
-    this.subscribeCategories();
-    this.subscribeRates();
-    this.subscribeLocationFromUserProfile();
+    this.detectChangesForIonicSelectable();
   }
 
   public async initLocationPopover(): Promise<void> {
@@ -59,7 +58,7 @@ export class SearchFiltersMainTabComponent implements OnInit {
       animated: true,
       componentProps: {
         data: {
-          coordinates: this.stateManager.data.main.location.coordinates,
+          coordinates: this.form.get([this.formGroups.location, this.formFields.location.coordinates]),
         },
         renderCountry: false,
       },
@@ -74,86 +73,40 @@ export class SearchFiltersMainTabComponent implements OnInit {
     return await pop.present();
   }
 
-  public onCityChange(event: { value: City }): void {
-    const country: Country | null = this.getCountryValue();
-    this.currentLocation
-      .getCoords(country, event.value)
-      .pipe(filter(data => null !== data))
-      .subscribe(
-        res =>
-          (this.stateManager.data.main.location = {
-            country,
-            city: event.value,
-            coordinates: res,
-          }),
-      );
-  }
-
-  public getCountryValue(): Country | null {
-    return this.stateManager.data.main.location.country;
-  }
-
   public onCountryChange(): void {
-    this.stateManager.data.main.location.city = undefined;
+    this.form.get([this.formGroups.location, this.formFields.location.city]).reset();
   }
 
   public initSubcategories(categories: Category[]): void {
-    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id))).subscribe(data =>
-      this.subcategoriesList$.next(data),
-    );
+    this.subcategoriesList = null;
+    this.form.get(this.formFields.subcategory).reset();
+    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id)))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(subcategoriesList => {
+        this.subcategoriesList = subcategoriesList;
+        this.cd.detectChanges();
+      });
   }
 
   private updateCity(coords: Coords): void {
     this.currentLocation
       .getExtendedLocationByCoords(coords)
-      .pipe(filter(res => null !== res))
-      .subscribe(
-        res =>
-          (this.stateManager.data.main.location = {
-            country: res.country,
-            city: res.city,
-            coordinates: res.coords,
-          }),
-      );
-  }
-
-  private subscribeCategories(): void {
-    this.professionalsApi
-      .professionalsCategoriesList({})
-      .subscribe(results => this.categoryList$.next(results.results));
-  }
-
-  private subscribeRates(): void {
-    this.ratesApiCache
-      .list()
-      .pipe(withLatestFrom(this.userSettings.userSettings$))
-      .subscribe(([rates, settings]) => {
-        this.rates = rates;
-        this.stateManager.data.main.price.currency = rates.find(
-          ({ currency }) => currency === settings?.currency ?? rates[0].currency,
-        );
-        this.cd.markForCheck();
-      });
-  }
-
-  private subscribeLocationFromUserProfile(): void {
-    this.defaultLocation$
       .pipe(
-        filter(defaultLocation => Boolean(defaultLocation)),
-        switchMap(defaultLocation => this.fullLocationService.getFullLocation(defaultLocation)),
+        filter(res => null !== res),
         takeUntil(this.destroy$),
       )
-      .subscribe(fullLocation => {
-        const locationData: SearchLocationDataInterface = {
-          country: fullLocation.country,
-          city: fullLocation.city,
-          coordinates: null,
-        };
-        this.stateManager.setLocationData(locationData);
-        setTimeout(() => {
-          this.cd.detectChanges();
-        }, 0);
-        this.cd.markForCheck();
+      .subscribe(res => {
+        this.form.get(this.formGroups.location).setValue({
+          country: res.country,
+          city: res.city,
+          coordinates: res.coords,
+        });
       });
+  }
+
+  private detectChangesForIonicSelectable(): void {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cd.detectChanges();
+    });
   }
 }

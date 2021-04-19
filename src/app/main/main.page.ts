@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ExtendedLocation } from '@app/core/models/extended-location';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
 import { DefaultCategoryList } from '@app/main/enums/default-category-list';
@@ -20,83 +19,82 @@ export class MainPage implements OnInit {
   public locationEnabled = false;
   public defaultCategoryList = DefaultCategoryList;
 
-  constructor(
-    private readonly currentLocation: CurrentLocationCompilerService,
-    private readonly router: Router,
-    private readonly defaultCategory: DefaultCategoriesFactoryService,
-    public readonly stateManager: SearchFilterStateService,
-  ) {
+  public get formFields() {
+    return this.stateManager.formFields;
+  }
+  public get formGroups() {
+    return this.stateManager.formGroups;
+  }
+  public get form() {
+    return this.stateManager.searchForm;
   }
 
+  constructor(
+    private readonly currentLocation: CurrentLocationCompilerService,
+    private readonly defaultCategory: DefaultCategoriesFactoryService,
+    public readonly stateManager: SearchFilterStateService,
+  ) {}
+
   public ngOnInit(): void {
-    this.initSearchData();
     this.getCurrentLocation().subscribe(
       data => {
         if (data) {
-          this.searchData.location = {
+          this.form.get(this.formGroups.location).setValue({
             country: data.country,
             city: data.city,
             coordinates: data.coords,
-          };
+          });
         }
       },
-      err => this.locationEnabled = true,
-      () => this.locationEnabled = true,
+      err => {
+        this.locationEnabled = true;
+      },
+      () => {
+        this.locationEnabled = true;
+      },
     );
   }
 
   public useCategory(categoryName: string): void {
     const cat = this.defaultCategory.getByName(categoryName);
     if (cat) {
-      this.router.navigateByUrl('/search', { state: { category: cat, location: this.searchData.location } });
+      this.form.get(this.formFields.category).setValue(cat);
     }
+    this.search();
   }
 
   public updateCity(data: SearchLocationDataInterface): void {
     if (data.city) {
-      this.currentLocation.getCoords(data.country, data.city).pipe(
-        filter(res => null !== res),
-      ).subscribe(
-        res => this.searchData.location = {
-          country: data.country,
-          city: data.city,
-          coordinates: res,
-        },
-      );
+      this.currentLocation
+        .getCoords(data.country, data.city)
+        .pipe(filter(res => null !== res))
+        .subscribe(res => {
+          this.form.get(this.formGroups.location).setValue({
+            country: data.country,
+            city: data.city,
+            coordinates: res,
+          });
+        });
     } else if (data.coordinates?.latitude && data.coordinates?.longitude) {
-      this.currentLocation.getExtendedLocationByCoords(data.coordinates).pipe(
-        filter(res => null !== res),
-      ).subscribe(
-        res => this.searchData.location = {
-          country: res.country,
-          city: res.city,
-          coordinates: res.coords,
-        },
-      );
+      this.currentLocation
+        .getExtendedLocationByCoords(data.coordinates)
+        .pipe(filter(res => null !== res))
+        .subscribe(res => {
+          this.form.get(this.formGroups.location).setValue({
+            country: res.country,
+            city: res.city,
+            coordinates: res.coords,
+          });
+        });
     }
   }
 
   public searchDisabled(): boolean {
-    return !(this.searchData.needle && true);
+    return !(this.form.get(this.formFields.query).value);
   }
 
   public search(): void {
-    this.router.navigateByUrl('/search', { state: { data: this.searchData } });
-  }
-
-  private initSearchData(): void {
-    this.searchData = {
-      needle: undefined,
-      datetime: {
-        from: undefined,
-        to: undefined,
-      },
-      location: {
-        coordinates: undefined,
-        country: undefined,
-        city: undefined,
-      },
-    };
+    this.stateManager.doSearch();
   }
 
   private getCurrentLocation(): Observable<ExtendedLocation | null> {

@@ -5,7 +5,7 @@
       <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size="6" size-sm="10" size-xs="11">
         <form (ngSubmit)="onSubmit()" action="">
           <ion-searchbar
-            [(ngModel)]="searchNeedle"
+            [formControl]="state.searchForm.get('query')"
             name="search"
             animated
             class="ion-margin-vertical"
