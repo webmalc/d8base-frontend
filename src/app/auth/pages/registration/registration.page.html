@@ -3,6 +3,7 @@
   <app-content-wrapper>
     <app-registration-form
       [errorMessages]="errorMessages$ | async"
+      [pending]="pending$ | async"
       (registrationFormData)="onSubmitRegistrationForm($event)"
     ></app-registration-form>
   </app-content-wrapper>

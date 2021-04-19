@@ -1,23 +1,18 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { TagsSelectInputComponent } from '../../components/tags-select-input/tags-select-input.component';
 import { MasterTagEditPage } from './master-tag-edit.page';
 
-describe('MasterTagEditPage', () => {
+xdescribe('MasterTagEditPage', () => {
   let component: MasterTagEditPage;
   let fixture: ComponentFixture<MasterTagEditPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MasterTagEditPage, TagsSelectInputComponent],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, HttpClientTestingModule, TranslateModule.forRoot()],
-      providers: [
-        { provide: StorageManagerService, useClass: StorageManagerMock },
+      imports: [
+        ...RootModules(),
+        ComponentTestingModule,
       ],
     }).compileComponents();
 
