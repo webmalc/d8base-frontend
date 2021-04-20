@@ -1,6 +1,14 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <div *ngIf="success">Successfully confirmed</div>
+    <app-column-header [previousLocationFallback]="'/'">
+      {{ 'registration-verification.confirmation' | translate }}
+    </app-column-header>
+    <ion-item *ngIf="success; else failure" lines="none">
+      {{ 'registration-verification.success' | translate }}
+    </ion-item>
+    <ng-template #failure>
+      <ion-item lines="none"> {{ 'registration-verification.failure' | translate }} </ion-item>
+    </ng-template>
   </app-content-wrapper>
 </ion-content>

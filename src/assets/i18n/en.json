@@ -46,6 +46,11 @@
     "not-specified": "Not specified",
     "page-not-found": "Page not found"
   },
+  "registration-verification": {
+    "confirmation": "Registration confirmation",
+    "success": "Registration successfully confirmed",
+    "failure": "Registration not confirmed"
+  },
   "delete-confirmation": {
     "delete-service": "Delete service?",
     "okay": "Okay",
@@ -110,7 +115,7 @@
     "password": "Password",
     "confirm": "Confirm password",
     "name": "First name",
-    "lsat-name": "Last name",
+    "last-name": "Last name",
     "phone": "Phone number",
     "country": "Country",
     "city": "City",
@@ -315,6 +320,7 @@
       "company-placeholder": "Company name",
       "name-title": "First name",
       "name-placeholder": "Enter your first name",
+      "last-name": "Last name",
       "last-name-title": "Last name",
       "last-name-placeholder": "Enter your last name",
       "gender": "Sex",
