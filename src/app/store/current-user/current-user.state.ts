@@ -121,9 +121,10 @@ export class CurrentUserState implements NgxsOnInit {
     { dispatch }: StateContext<CurrentUserStateModel>,
     { master }: CurrentUserActions.CreateProfessional,
   ) {
-    return this.api
-      .accountsProfessionalsCreate(master)
-      .pipe(mergeMap(() => dispatch(new CurrentUserActions.LoadProfile())));
+    return this.api.accountsProfilePartialUpdate({ account_type: 'professional' }).pipe(
+      switchMap(() => this.api.accountsProfessionalsCreate(master)),
+      switchMap(() => dispatch(new CurrentUserActions.LoadProfile())),
+    );
   }
 
   @Action(CurrentUserActions.LoadProfile)
