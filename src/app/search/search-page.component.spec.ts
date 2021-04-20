@@ -1,10 +1,11 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { SearchService } from '@app/api/services';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Platform } from '@ionic/angular';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { SearchFilterStateConverter } from './services/search-filter-state-converter.service';
 import { SearchPage } from './search-page.component';
 
 describe('SearchPage', () => {
@@ -15,13 +16,16 @@ describe('SearchPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [SearchPage],
-        imports: [...RootModules(), ComponentTestingModule],
+        imports: [
+          ...RootModules(),
+          ComponentTestingModule,
+          RouterTestingModule.withRoutes([{ path: 'search', component: AppTestComponent }]),
+        ],
         providers: [
           SearchService,
-          { provide: Platform, useValue: { width: () => 1000, is: () => false } },
+          { provide: Platform, useValue: { width: () => 1000, is: () => true } },
           SearchFilterStateService,
           FormBuilder,
-          SearchFilterStateConverter,
         ],
       }).compileComponents();
 
@@ -35,3 +39,10 @@ describe('SearchPage', () => {
     expect(component).toBeTruthy();
   });
 });
+
+@Component({
+  selector: 'app-test',
+  template: ``,
+})
+class AppTestComponent {
+}

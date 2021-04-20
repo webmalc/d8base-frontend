@@ -42,7 +42,6 @@ export class SearchPage implements OnInit, AfterViewInit {
     public readonly platform: Platform,
     public readonly state: SearchFilterStateService,
     private readonly search: SearchService,
-    private readonly location: Location,
     private readonly cd: ChangeDetectorRef,
     private readonly route: ActivatedRoute,
     private readonly ngUnsubscribe$: NgDestroyService,
