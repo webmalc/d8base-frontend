@@ -13,7 +13,7 @@
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-thumbnail>
     </ion-slide>
-    <input type="file" accept="image/*" multiple class="hidden" (change)="addFiles($event)" #input />
+    <input type="file" multiple class="hidden" [accept]="acceptedImageTypes" (change)="addFiles($event)" #input />
   </ion-slides>
   <ion-button class="button next-button" size="small" (click)="slideNext()" *ngIf="!isNavButtonsHidden">
     <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>

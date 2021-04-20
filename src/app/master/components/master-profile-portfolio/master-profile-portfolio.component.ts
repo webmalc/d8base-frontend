@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
+import { acceptedMimeTypes } from '@app/core/constants/image.constants';
 import { fileToBase64 } from '@app/core/functions/file.functions';
 import { NgDestroyService } from '@app/core/services';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
@@ -21,6 +22,7 @@ export class MasterProfilePortfolioComponent implements OnInit {
 
   public readonly photos$: BehaviorSubject<ProfessionalPhotoList[]> = new BehaviorSubject(null);
   public readonly pending$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly acceptedImageTypes = acceptedMimeTypes;
 
   private readonly masterPhotos$: Observable<ProfessionalPhotoList[]>;
 

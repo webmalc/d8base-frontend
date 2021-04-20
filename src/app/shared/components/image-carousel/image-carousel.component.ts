@@ -11,6 +11,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { acceptedMimeTypes } from '@app/core/constants/image.constants';
 import { fileToBase64 } from '@app/core/functions/file.functions';
 import { NgDestroyService } from '@app/core/services';
 import { IonSlides } from '@ionic/angular';
@@ -61,6 +62,8 @@ export class ImageCarouselComponent implements AfterViewInit {
   };
   public isNextButtonDisabled$: Observable<boolean>;
   public isPrevButtonDisabled$: Observable<boolean>;
+  public readonly acceptedImageTypes = acceptedMimeTypes;
+
   private _photos: Photo[];
 
   constructor(
