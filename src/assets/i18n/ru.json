@@ -46,6 +46,11 @@
     "not-specified": "Не указано",
     "page-not-found": "Страница не найдена"
   },
+  "registration-verification": {
+    "confirmation": "Подтверждение регистрации",
+    "success": "Регистрация успешно подтверждена",
+    "failure": "Регистрация не подтверждена"
+  },
   "delete-confirmation": {
     "delete-service": "Удалить услугу?",
     "okay": "Удалить",
