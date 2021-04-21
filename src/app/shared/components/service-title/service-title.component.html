@@ -1,13 +1,11 @@
 <ion-item lines="none" *ngIf="service">
-  <ion-label class="ion-text-wrap">
-    <h1 class="capitalize-first-letter">
+  <ion-label class="ion-align-self-start ion-text-wrap">
+    <h2 class="capitalize-first-letter">
       {{ service.name }}
-    </h1>
+    </h2>
   </ion-label>
-  <ion-note slot="end">
-    <ion-label>
-      <app-price [price]="service.price"></app-price>
-    </ion-label>
+  <ion-label class="ion-align-self-start ion-text-wrap ion-text-end">
+    <app-price [price]="service.price"></app-price>
     <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
-  </ion-note>
+  </ion-label>
 </ion-item>
