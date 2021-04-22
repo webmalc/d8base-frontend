@@ -1,18 +1,14 @@
 <ng-container *ngIf="context$ | async as context">
-  <ion-row *ngIf="schedule$ | async as schedule">
+  <ion-row *ngIf="context.canEdit">
     <ion-col size="12">
       <app-collapse-item title="{{ 'master-profile.calendar.schedule' | translate }}">
         <app-schedule-editor
-          *ngIf="context.canEdit; else scheduleViewer"
-          [schedule]="schedule"
+          [schedule]="schedule$ | async"
           [formControl]="scheduleEditor"
         ></app-schedule-editor>
         <ion-button type="submit" expand="block" [disabled]="scheduleEditor.invalid" (click)="updateSchedule(context.professional.id)">
           {{ 'global.save' | translate }}
         </ion-button>
-        <ng-template #scheduleViewer>
-          <app-schedule-viewer [schedule]="schedule"> </app-schedule-viewer>
-        </ng-template>
       </app-collapse-item>
     </ion-col>
   </ion-row>
