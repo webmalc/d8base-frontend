@@ -81,6 +81,7 @@ import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directi
 import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
+import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +154,7 @@ import { NumberDirective } from './directives/number.directive';
     PhoneEditorComponent,
     ImageCarouselComponent,
     CountryFlagComponent,
+    ContactEditComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -217,6 +219,7 @@ import { NumberDirective } from './directives/number.directive';
     PhoneEditorComponent,
     ImageCarouselComponent,
     CountryFlagComponent,
+    ContactEditComponent,
   ],
   imports: [
     CommonModule,
