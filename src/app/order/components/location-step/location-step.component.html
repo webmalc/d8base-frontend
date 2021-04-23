@@ -1,9 +1,12 @@
 <app-step-container>
+  <ion-item lines="none">
+    <ion-label>{{ locationLabel | translate }}</ion-label>
+  </ion-item>
   <ion-list>
     <ion-list-header class="fs20">
-      <ion-label>{{ 'order.location-header' | translate }}: {{ locationLabel | translate }}</ion-label>
+      <ion-label>{{ 'order.location-header' | translate }}:</ion-label>
     </ion-list-header>
-    <ion-radio-group *ngIf="locations.length" [formControl]="formControl">
+    <ion-radio-group *ngIf="locations.length else noLocationsError" [formControl]="formControl">
       <ion-item *ngFor="let location of locations">
         <ion-label>{{ location.text }}</ion-label>
         <ion-radio slot="start" [value]="location.id"></ion-radio>
@@ -11,3 +14,10 @@
     </ion-radio-group>
   </ion-list>
 </app-step-container>
+<ng-template #noLocationsError>
+  <ion-item color="danger" lines="none">
+    <ion-label class="ion-text-wrap">
+      {{ 'order.professional-address-error' | translate }}
+    </ion-label>
+  </ion-item>
+</ng-template>

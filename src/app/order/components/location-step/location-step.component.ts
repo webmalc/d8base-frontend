@@ -48,7 +48,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
   }
 
   protected onStateChanged(data: LocationStepData): void {
-    this.formControl.setValue(data?.[this.locationKey]);
+    this.setFormControlValue(data?.[this.locationKey]);
   }
 
   protected onContextChanged(context: StepContext): void {
@@ -73,12 +73,17 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
         this.locationLabel = 'service-location.client';
         this.locationKey = 'client_location';
         this.getClientLocations();
-
         break;
       }
       default:
         break;
     }
+  }
+
+  private setFormControlValue(value: any): void {
+    setTimeout(() => {
+      this.formControl.setValue(value);
+    });
   }
 
   // TODO Extract getting locations out of component
@@ -88,6 +93,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
       .pipe(takeUntil(this.ngDestroy$))
       .subscribe(locations => {
         this.locations = locations;
+        this.setFormControlValue(locations[0]?.id);
         this.cd.markForCheck();
       });
   }
@@ -95,12 +101,13 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
   private getClientLocations(): void {
     this.userLocationService.getByClientId().pipe(
       switchMap(({ results: locations }) => forkJoin(
-          locations.map((location) =>
-            this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline)),
-        )),
+        locations.map((location) =>
+          this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline)),
+      )),
       takeUntil(this.ngDestroy$),
     ).subscribe(locations => {
       this.locations = locations;
+      this.setFormControlValue(locations[0]?.id);
       this.cd.markForCheck();
     });
   }

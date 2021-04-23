@@ -688,7 +688,7 @@
     "title": "Service order",
     "selected-service": "Selected service",
     "order-service": "Place order",
-    "location-header": "Service location",
+    "location-header": "Choose the service location",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
     "comment-header": "Optional comments",
     "date-time-header": "Service date and time",
@@ -706,7 +706,8 @@
     "email": "E-mail",
     "phone": "Phone",
     "is-not-for-me-description": "Enter the name of the person who will get the service",
-    "success-title": "The service was successfully published."
+    "success-title": "The service was successfully published.",
+    "professional-address-error": "Can't proceed — the service is \"at professional's place\", but the professional has no location specified."
   },
   "flag-menu": {
     "language": "Language",
