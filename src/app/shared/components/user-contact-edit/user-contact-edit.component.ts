@@ -1,114 +1,109 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
-import { MasterContact } from '@app/master/models/master-contact';
-import { MasterContactsApiService } from '@app/master/services/master-contacts-api.service';
-import { Contact } from '@app/profile/models/contact';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Contact, Country } from '@app/api/models';
+import { NgDestroyService } from '@app/core/services';
+import { ContactsApiCache } from '@app/core/services/cache';
 import { UserContact } from '@app/profile/models/user-contact';
-import { ContactApiService } from '@app/profile/services/contact-api.service';
-import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
-import { ClientContactInterface } from '@app/shared/interfaces/client-contact-interface';
-import { ContactsApiServiceInterface } from '@app/shared/interfaces/contacts-api-service-interface';
-import { forkJoin, Observable, of } from 'rxjs';
-import { first, map, shareReplay, switchMap } from 'rxjs/operators';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import * as UserContactActions from '@app/store/current-user/user-contacts/user-contacts.actions';
+import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
+import { Dispatch } from '@ngxs-labs/dispatch-decorator';
+import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-contact-edit',
   templateUrl: './user-contact-edit.component.html',
   styleUrls: ['./user-contact-edit.component.scss'],
+  providers: [NgDestroyService],
 })
 export class UserContactEditComponent implements OnInit {
+  @Select(UserContactSelectors.contacts)
+  public contacts$: Observable<UserContact[]>;
+
+  @Select(CurrentUserSelectors.profileCountry)
+  public profileCountry$: Observable<Country['id']>;
 
   public selectOptions: Contact[];
-  public form: FormGroup;
 
-  private contact: ClientContactInterface;
-  private isMaster: boolean;
-  private clientContactsApiService: ContactsApiServiceInterface;
+  public contact$: Observable<UserContact>;
+  public contactItems$: Observable<Contact[]>;
+
   private contactId: number;
 
   constructor(
-    private readonly userContactApiService: UserContactApiService,
-    private readonly masterContactApiService: MasterContactsApiService,
     private readonly route: ActivatedRoute,
-    private readonly contactsApi: ContactApiService,
-    private readonly formBuilder: FormBuilder,
-    public readonly location: Location,
-    private readonly masterManager: MasterManagerService,
-  ) {
-  }
-
-  public get canDelete(): boolean {
-    return Boolean(this.contact?.id); // TODO check is default
-  }
+    private readonly router: Router,
+    private readonly actions$: Actions,
+    private readonly destroy$: NgDestroyService,
+    private readonly contactsApiCache: ContactsApiCache,
+  ) {}
 
   public ngOnInit(): void {
     const snapshot = this.route.snapshot;
-    this.isMaster = snapshot.data?.isMaster;
     this.contactId = parseInt(snapshot.paramMap.get('contact-id'), 10);
     const defaultContactId = parseInt(snapshot.paramMap.get('default-contact-id'), 10);
-    const newContact = defaultContactId ? { contact: defaultContactId, id: null, value: '' } : null;
-    this.clientContactsApiService = this.isMaster ? this.masterContactApiService : this.userContactApiService;
-    const selectOptions$ = this.contactsApi.get().pipe(map(response => response.results), shareReplay(1));
-    forkJoin([
-      selectOptions$,
-      (this.contactId ? this.clientContactsApiService.getByEntityId(this.contactId)
-        : of<ClientContactInterface>(newContact)),
-    ]).pipe(first())
-      .subscribe(([options, contact]) => {
-        this.selectOptions = options;
-        this.contact = contact;
-        this.createForm(contact);
-      });
+    const newContact = { contact: defaultContactId, id: null, value: '' };
+
+    this.contact$ = this.contacts$.pipe(
+      filter(contacts => Boolean(contacts)),
+      map(
+        contacts =>
+          contacts?.find(({ id }) => this.contactId === id) || newContact,
+      ),
+    );
+
+    this.subscribeToActionSuccess();
+    this.initContactItems();
   }
 
-  public deleteContact(): void {
-    if (this.contactId) {
-      this.clientContactsApiService.delete(this.contact).subscribe(() => {
-        // TODO: show feedback about operation success
-      });
+  @Dispatch()
+  public deleteContactAction(id: UserContact['id']): UserContactActions.DeleteUserContact {
+    return new UserContactActions.DeleteUserContact(id);
+  }
+
+  @Dispatch()
+  public createContactAction(contact: UserContact): UserContactActions.CreateUserContact {
+    return new UserContactActions.CreateUserContact(contact);
+  }
+
+  @Dispatch()
+  public updateContactAction(contact: UserContact): UserContactActions.UpdateUserContact {
+    return new UserContactActions.UpdateUserContact(contact);
+  }
+
+  public deleteContact(id: UserContact['id']): void {
+    this.deleteContactAction(id);
+  }
+
+  public saveContact(contact: UserContact): void {
+    if (contact.id) {
+      this.updateContactAction(contact);
+    } else {
+      this.createContactAction(contact);
     }
-    this.location.back();
   }
 
-  public submitForm(): void {
-    const updatedValues = this.form.getRawValue();
-    const request = this.contactId
-      ? this.clientContactsApiService.put({
-        ...this.contact,
-        ...updatedValues,
-      })
-      : this.getNewClientContactModel().pipe(
-        switchMap(contact => this.clientContactsApiService.create({
-            ...contact,
-            ...updatedValues,
-          }),
+  private initContactItems(): void {
+    this.contactItems$ = this.profileCountry$.pipe(
+      filter(country => Boolean(country)),
+      switchMap(profileCountry => this.contactsApiCache.listByCountry(profileCountry)),
+    );
+  }
+
+  private subscribeToActionSuccess(): void {
+    this.actions$
+      .pipe(
+        ofActionSuccessful(
+          UserContactActions.CreateUserContact,
+          UserContactActions.DeleteUserContact,
+          UserContactActions.UpdateUserContact,
         ),
-      );
-    request.subscribe(() => this.location.back());
-  }
-
-  private createForm(contact?: ClientContactInterface): void {
-    this.form = this.formBuilder.group({
-      contact: [{ value: contact?.contact, disabled: Boolean(contact?.contact) }, [Validators.required]],
-      value: [contact?.value, [Validators.required]],
-    });
-  }
-
-  private getNewClientContactModel(): Observable<ClientContactInterface> {
-    if (this.isMaster) {
-      return this.masterManager.getMasterList().pipe(
-        map(list => {
-          const contact = new MasterContact();
-          contact.professional = list[0].id;
-
-          return contact;
-        }),
-      );
-    }
-
-    return of(new UserContact());
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        this.router.navigate(['/profile']);
+      });
   }
 }

@@ -20,19 +20,16 @@ const routes: Routes = [
     path: 'contact-edit/:contact-id',
     component: UserContactEditComponent,
     canActivate: [MainGuard],
-    data: { isMaster: false },
   },
   {
     path: 'contact-add',
     component: UserContactEditComponent,
     canActivate: [MainGuard],
-    data: { isMaster: false },
   },
   {
     path: 'contact-add-default/:default-contact-id',
     component: UserContactEditComponent,
     canActivate: [MainGuard],
-    data: { isMaster: false },
   },
   {
     path: 'location-edit/:location-id',

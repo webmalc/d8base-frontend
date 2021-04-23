@@ -1,10 +1,9 @@
-import { ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
+import { Country, ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { defaultLocation } from '@app/store/current-user/current-user.constants';
 import { Selector } from '@ngxs/store';
 import { CurrentUserStateModel } from './current-user-state.model';
 import { CurrentUserState, isAuthenticated } from './current-user.state';
-import { Country } from '@app/api/models';
 
 export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
