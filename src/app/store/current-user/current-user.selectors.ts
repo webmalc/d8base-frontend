@@ -4,6 +4,7 @@ import { defaultLocation } from '@app/store/current-user/current-user.constants'
 import { Selector } from '@ngxs/store';
 import { CurrentUserStateModel } from './current-user-state.model';
 import { CurrentUserState, isAuthenticated } from './current-user.state';
+import { Country } from '@app/api/models';
 
 export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
@@ -54,5 +55,10 @@ export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static isAuthenticated(data: CurrentUserStateModel): boolean {
     return isAuthenticated(data);
+  }
+
+  @Selector([CurrentUserSelectors.defaultLocation])
+  public static profileCountry(data: UserLocation): Country['id'] {
+    return data?.country;
   }
 }

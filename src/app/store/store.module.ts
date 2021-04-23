@@ -5,6 +5,7 @@ import { NgxsDispatchPluginModule } from '@ngxs-labs/dispatch-decorator';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UserSavedProfessionalState } from './current-user/saved-professionals/saved-professionals.state';
+import { UserContactState } from './current-user/user-contacts/user-contacts.state';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { UserSavedProfessionalState } from './current-user/saved-professionals/s
       UserLanguageState,
       ProfessionalPageState,
       UserSavedProfessionalState,
+      UserContactState,
     ], {
       developmentMode: !environment.production,
       selectorOptions: { suppressErrors: false },
