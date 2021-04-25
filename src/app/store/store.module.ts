@@ -6,6 +6,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UserSavedProfessionalState } from './current-user/saved-professionals/saved-professionals.state';
 import { UserContactState } from './current-user/user-contacts/user-contacts.state';
+import { ProfessionalContactState } from './professional-page/professional-contacts/professional-contacts.state';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { UserContactState } from './current-user/user-contacts/user-contacts.sta
       ProfessionalPageState,
       UserSavedProfessionalState,
       UserContactState,
+      ProfessionalContactState,
     ], {
       developmentMode: !environment.production,
       selectorOptions: { suppressErrors: false },
