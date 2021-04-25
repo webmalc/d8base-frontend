@@ -4,8 +4,8 @@
       {{ 'contact-edit-page.choice-contact' | translate }}
     </ion-label>
     <ion-select interface="popover" formControlName="contact" name="contact">
-      <ion-select-option *ngFor="let contact of contactItems" [value]="contact?.id">
-        {{ contact?.name }}
+      <ion-select-option *ngFor="let contactItem of contactItems" [value]="contactItem?.id">
+        {{ contactItem?.name }}
       </ion-select-option>
     </ion-select>
   </ion-item>

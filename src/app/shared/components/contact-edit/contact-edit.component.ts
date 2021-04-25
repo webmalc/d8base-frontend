@@ -1,13 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Contact, ProfessionalContact } from '@app/api/models';
-import { ContactsService } from '@app/api/services';
-import { ContactsApiCache } from '@app/core/services/cache';
-import { UserContact } from '@app/profile/models/user-contact';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Contact } from '@app/api/models';
+import { ContactUnion } from '@app/core/models/contact-union';
 
-type ContactUnion = UserContact | ProfessionalContact;
 
 @Component({
   selector: 'app-contact-edit',
