@@ -18,8 +18,8 @@
       </ion-item>
 
       <ion-item class="reviews ion-item-no-min-height fs13" detail="false" lines="none">
-        <a *ngIf="reviewsCount" [routerLink]="'/reviews/' + professional?.id" (click)="$event.stopPropagation()">
-          {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
+        <a [routerLink]="'/reviews/' + professional?.id" (click)="$event.stopPropagation()">
+          {{ professional?.reviews_count }} {{ declineReviews(professional?.reviews_count) | translate }}
         </a>
       </ion-item>
     </div>
