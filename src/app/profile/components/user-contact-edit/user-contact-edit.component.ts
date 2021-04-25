@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Contact, Country } from '@app/api/models';
+import { Contact, Country, UserContact } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsApiCache } from '@app/core/services/cache';
-import { UserContact } from '@app/profile/models/user-contact';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import * as UserContactActions from '@app/store/current-user/user-contacts/user-contacts.actions';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
