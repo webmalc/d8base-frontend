@@ -31,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MasterPageRoutingModule } from './master-routing.module';
 import { MasterPage } from './master.page';
 import { ProfessionalGuard } from './professional.guard';
+import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { ProfessionalGuard } from './professional.guard';
     ExperienceComponent,
     EducationComponent,
     CertificateComponent,
+    ProfessionalContactEditComponent,
   ],
   providers: [
     ExperienceApiService,
