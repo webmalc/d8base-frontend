@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Contact, Profile, UserContact, UserLanguage } from '@app/api/models';
+import { Profile, UserContact, UserLanguage } from '@app/api/models';
 import { UserLocation } from '@app/core/models/user-location';
 import { NgDestroyService } from '@app/core/services';
-import { ContactsApiCache } from '@app/core/services/cache';
+import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileService } from '@app/profile/services/profile.service';
@@ -11,8 +11,8 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
 import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
 import { Select } from '@ngxs/store';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { Country } from './models/country';
 
 @Component({
@@ -45,7 +45,7 @@ export class ProfilePage {
 
   constructor(
     public readonly profileService: ProfileService,
-    private readonly contactsApiCache: ContactsApiCache,
+    private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly ngDestroy$: NgDestroyService,
   ) {
     this.avatar$ = this.profile$.pipe(
@@ -71,26 +71,6 @@ export class ProfilePage {
   }
 
   private initContactsWithDefault(): void {
-    this.contactsWithDefault$ = combineLatest([
-      this.contacts$,
-      this.profileCountry$.pipe(
-        filter(country => Boolean(country)),
-        switchMap(profileCountry => this.contactsApiCache.listDefaultByCountry(profileCountry)),
-      ),
-    ]).pipe(map(([userContacts, defaultContacts]) => this.mergeUserWithDefaultContacts(userContacts, defaultContacts)));
-  }
-
-  private mergeUserWithDefaultContacts(userContacts: UserContact[], defaultContacts: Contact[]): UserContact[] {
-    const emptyDefaultContacts: UserContact[] = defaultContacts
-      .filter(defaultContact => !userContacts?.some(({ contact }) => contact === defaultContact.id))
-      .map(defaultContact => ({
-        id: null,
-        contact: defaultContact.id,
-        contact_code: defaultContact.code,
-        contact_display: defaultContact.name,
-        value: '',
-      }));
-
-    return [...emptyDefaultContacts, ...userContacts];
+    this.contactsWithDefault$ = this.contactsMergeToDefaultService.contactsMergedWithDefault(this.contacts$);
   }
 }

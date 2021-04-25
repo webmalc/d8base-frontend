@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { ReviewList } from '@app/api/models';
+import { Country, ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
+import { ContactUnion } from '@app/core/models/contact-union';
+import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { Language } from '@app/profile/models/language';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
+import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
@@ -18,6 +23,15 @@ import { filter, map, share, switchMap } from 'rxjs/operators';
 export class MasterProfileInfoComponent {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
+
+  @Select(ProfessionalContactSelectors.contacts)
+  public contacts$: Observable<ProfessionalContactStateModel>;
+
+  @Select(CurrentUserSelectors.profileCountry)
+  public profileCountry$: Observable<Country['id']>;
+
+  public contactsWithDefault$: Observable<ContactUnion[]>;
+
   public contextFiltered$: Observable<ProfessionalPageStateModel>;
   public languages$: Observable<Language[]>;
   public locations$: Observable<{ id: number; text: string }[]>;
@@ -30,11 +44,16 @@ export class MasterProfileInfoComponent {
   constructor(
     private readonly fullLocationService: FullLocationService,
     private readonly communicationService: CommunicationService,
+    private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
   ) {
-    this.contextFiltered$ = this.context$.pipe(filter(context => Boolean(context?.professional) && Boolean(context?.user)));
+    this.contextFiltered$ = this.context$.pipe(
+      filter(context => Boolean(context?.professional) && Boolean(context?.user)),
+    );
 
     this.locations$ = this.contextFiltered$.pipe(
-      switchMap(({ professional }) => forkJoin(professional.locations.map(x => this.fullLocationService.getTextLocation(x)))),
+      switchMap(({ professional }) =>
+        forkJoin(professional.locations.map(x => this.fullLocationService.getTextLocation(x))),
+      ),
     );
 
     const reviews$ = this.contextFiltered$.pipe(
@@ -50,6 +69,8 @@ export class MasterProfileInfoComponent {
 
     this.reviews$ = reviews$.pipe(map(({ results }) => results));
     this.reviewsCount$ = reviews$.pipe(map(({ count }) => count));
+
+    this.initContactsWithDefault();
   }
 
   public declinationYears(num: number): string {
@@ -58,5 +79,9 @@ export class MasterProfileInfoComponent {
 
   public getYearsFromBirthday(birthday: string): number {
     return HelperService.calculateAge(birthday);
+  }
+
+  private initContactsWithDefault(): void {
+    this.contactsWithDefault$ = this.contactsMergeToDefaultService.contactsMergedWithDefault(this.contacts$);
   }
 }
