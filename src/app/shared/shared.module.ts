@@ -42,7 +42,7 @@ import {
   ImageCarouselComponent,
   CountryFlagComponent,
 } from '@app/shared/components';
-import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
+import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
@@ -82,6 +82,7 @@ import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
+import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import { ContactEditComponent } from './components/contact-edit/contact-edit.com
     InfoRowComponent,
     NumberDirective,
     ServicePublishAgreementComponent,
-    AbstractContactsComponent,
+    ContactsViewComponent,
     LocationEditorComponent,
     RatingComponent,
     RatingFullStarComponent,
@@ -155,6 +156,7 @@ import { ContactEditComponent } from './components/contact-edit/contact-edit.com
     ImageCarouselComponent,
     CountryFlagComponent,
     ContactEditComponent,
+    ContactsEditComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -170,7 +172,7 @@ import { ContactEditComponent } from './components/contact-edit/contact-edit.com
     InfoRowComponent,
     NumberDirective,
     ServicePublishAgreementComponent,
-    AbstractContactsComponent,
+    ContactsViewComponent,
     LocationEditorComponent,
     RatingComponent,
     RatingFullStarComponent,
@@ -220,6 +222,7 @@ import { ContactEditComponent } from './components/contact-edit/contact-edit.com
     ImageCarouselComponent,
     CountryFlagComponent,
     ContactEditComponent,
+    ContactsEditComponent,
   ],
   imports: [
     CommonModule,
