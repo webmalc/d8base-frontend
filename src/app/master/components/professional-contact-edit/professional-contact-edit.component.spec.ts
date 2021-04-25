@@ -5,19 +5,19 @@ import { ActivatedRoute } from '@angular/router';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { ContactApiService } from '@app/profile/services/contact-api.service';
 import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
-import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
-import { of } from 'rxjs';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
+import { ProfessionalContactEditComponent } from './professional-contact-edit.component';
 
-describe('UserContactEditComponent', () => {
-  let component: UserContactEditComponent;
-  let fixture: ComponentFixture<UserContactEditComponent>;
+
+describe('ProfessionalContactEditComponent', () => {
+  let component: ProfessionalContactEditComponent;
+  let fixture: ComponentFixture<ProfessionalContactEditComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [UserContactEditComponent],
+        declarations: [ProfessionalContactEditComponent],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
           UserContactApiService,
@@ -40,7 +40,7 @@ describe('UserContactEditComponent', () => {
         ],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(UserContactEditComponent);
+      fixture = TestBed.createComponent(ProfessionalContactEditComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),
