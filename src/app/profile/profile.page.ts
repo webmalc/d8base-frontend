@@ -13,7 +13,6 @@ import UserLanguagesSelectors from '@app/store/current-user/user-language-state/
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { Country } from './models/country';
 
 @Component({
   selector: 'app-profile',
@@ -30,9 +29,6 @@ export class ProfilePage {
 
   @Select(UserContactSelectors.contacts)
   public contacts$: Observable<UserContact[]>;
-
-  @Select(CurrentUserSelectors.profileCountry)
-  public profileCountry$: Observable<Country['id']>;
 
   public contactsWithDefault$: Observable<UserContact[]>;
 

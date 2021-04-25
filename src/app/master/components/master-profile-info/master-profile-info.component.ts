@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { Country, ReviewList } from '@app/api/models';
+import { ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { Language } from '@app/profile/models/language';
-import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
@@ -26,9 +25,6 @@ export class MasterProfileInfoComponent {
 
   @Select(ProfessionalContactSelectors.contacts)
   public contacts$: Observable<ProfessionalContactStateModel>;
-
-  @Select(CurrentUserSelectors.profileCountry)
-  public profileCountry$: Observable<Country['id']>;
 
   public contactsWithDefault$: Observable<ContactUnion[]>;
 
