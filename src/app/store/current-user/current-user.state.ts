@@ -21,6 +21,8 @@ import * as SavedUserProfessionalsActions from './saved-professionals/saved-prof
 import { notLoadedState, guestState } from './current-user.constants';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
+import { UserContactState } from './user-contacts/user-contacts.state';
+import * as UserContactActions from './user-contacts/user-contacts.actions';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
@@ -34,7 +36,7 @@ export const isAuthenticated = (state: CurrentUserStateModel): boolean => {
 @State<CurrentUserStateModel>({
   name: 'currentUser',
   defaults: notLoadedState,
-  children: [UserLanguageState, UserSavedProfessionalState],
+  children: [UserLanguageState, UserSavedProfessionalState, UserContactState],
 })
 @Injectable()
 export class CurrentUserState implements NgxsOnInit {
@@ -140,6 +142,7 @@ export class CurrentUserState implements NgxsOnInit {
           new CurrentUserActions.LoadUserLocations(),
           new UserLanguagesActions.LoadAllUserLanguages(),
           new SavedUserProfessionalsActions.LoadAllUserSavedProfessionals(),
+          new UserContactActions.LoadAllUserContacts(),
         ]),
       ),
     );

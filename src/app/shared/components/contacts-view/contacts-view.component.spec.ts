@@ -2,19 +2,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { AbstractContactsComponent } from './abstract-contacts.component';
+import { ContactsViewComponent } from './contacts-view.component';
 
-describe('AbstractContactsComponent', () => {
-  let component: AbstractContactsComponent;
-  let fixture: ComponentFixture<AbstractContactsComponent>;
+describe('ContactsViewComponent', () => {
+  let component: ContactsViewComponent;
+  let fixture: ComponentFixture<ContactsViewComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AbstractContactsComponent],
+      declarations: [ContactsViewComponent],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AbstractContactsComponent);
+    fixture = TestBed.createComponent(ContactsViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

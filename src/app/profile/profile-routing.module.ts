@@ -5,7 +5,7 @@ import { AboutEditComponent } from '@app/profile/components/about-edit/about-edi
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
 import { ProfilePage } from '@app/profile/profile.page';
 import { ProfileResolver } from '@app/profile/profile.resolver';
-import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
+import { UserContactEditComponent } from './components/user-contact-edit/user-contact-edit.component';
 
 const routes: Routes = [
   {
@@ -20,19 +20,16 @@ const routes: Routes = [
     path: 'contact-edit/:contact-id',
     component: UserContactEditComponent,
     canActivate: [MainGuard],
-    data: { isMaster: false },
   },
   {
     path: 'contact-add',
     component: UserContactEditComponent,
     canActivate: [MainGuard],
-    data: { isMaster: false },
   },
   {
     path: 'contact-add-default/:default-contact-id',
     component: UserContactEditComponent,
     canActivate: [MainGuard],
-    data: { isMaster: false },
   },
   {
     path: 'location-edit/:location-id',
