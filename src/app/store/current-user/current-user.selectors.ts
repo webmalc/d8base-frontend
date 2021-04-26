@@ -1,4 +1,4 @@
-import { ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
+import { Country, ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { defaultLocation } from '@app/store/current-user/current-user.constants';
 import { Selector } from '@ngxs/store';
@@ -54,5 +54,10 @@ export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static isAuthenticated(data: CurrentUserStateModel): boolean {
     return isAuthenticated(data);
+  }
+
+  @Selector([CurrentUserSelectors.defaultLocation])
+  public static profileCountry(data: UserLocation): Country['id'] {
+    return data?.country;
   }
 }

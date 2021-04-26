@@ -33,8 +33,10 @@
         <h1>{{'profile-form.contacts'|translate}}</h1>
       </ion-label>
     </ion-item-divider>
-    <app-abstract-contacts *appIfSpinner="contacts$ | async as contacts" [clientContacts]="contacts" [interactable]="true">
-    </app-abstract-contacts>
+    <app-contacts-edit
+      *appIfSpinner="contactsWithDefault$ | async as contacts"
+      [contacts]="contacts"
+    ></app-contacts-edit>
     <ion-item-divider color="light">
       <ion-label>
         <h1>{{'profile-form.your-address'|translate}}</h1>

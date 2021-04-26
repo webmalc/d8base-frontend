@@ -24,14 +24,18 @@
         <h1>{{ 'master-profile.info.contacts' | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <app-abstract-contacts
-      [clientContacts]="context.professional.contacts"
+    <ng-container *ngIf="context.canEdit; else viewContacts">
+      <app-contacts-edit
+      *appIfSpinner="contactsWithDefault$ | async as contacts"
+      [contacts]="contacts"
       addNewContactUrl="{{ addUrl }}"
       editContactUrl="{{ editUrl }}"
       editDefaultContactUrl="{{ editDefaultUrl }}"
-      [interactable]="context.canEdit"
-    >
-    </app-abstract-contacts>
+      ></app-contacts-edit>
+    </ng-container>
+    <ng-template #viewContacts>
+      <app-contacts-view [contacts]="context.professional.contacts"> </app-contacts-view>
+    </ng-template>
   </ion-list>
 
   <ion-list lines="none">

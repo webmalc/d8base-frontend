@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '@app/api/models';
-import { AccountsService, ProfessionalsService } from '@app/api/services';
+import { ProfessionalsService } from '@app/api/services';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Action, Select, State, StateContext } from '@ngxs/store';
 import { forkJoin, Observable } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
-import { defaultState } from './professional-page.constants';
-
+import * as ProfessionalContactActions from './professional-contacts/professional-contacts.actions';
+import { ProfessionalContactState } from './professional-contacts/professional-contacts.state';
 import ProfessionalPageStateModel from './professional-page-state.model';
 import * as ProfessionalPageActions from './professional-page.actions';
+import { defaultState } from './professional-page.constants';
 
 @State<ProfessionalPageStateModel>({
   name: 'professionalPage',
   defaults: defaultState,
+  children: [ProfessionalContactState],
 })
 @Injectable()
 export class ProfessionalPageState {
-
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
-  constructor(private readonly api: AccountsService, private readonly professionalsApi: ProfessionalsService) {
-  }
+  constructor(private readonly professionalsApi: ProfessionalsService) {}
 
   @Action(ProfessionalPageActions.LoadProfessionalById)
   public loadMaster(
-    { setState }: StateContext<ProfessionalPageStateModel>,
+    { setState, dispatch }: StateContext<ProfessionalPageStateModel>,
     { masterId }: ProfessionalPageActions.LoadProfessionalById,
   ): Observable<any> {
     const masterIdNumber = Number.parseInt(masterId, 10);
@@ -34,13 +34,17 @@ export class ProfessionalPageState {
       this.profile$.pipe(first(x => !!x)),
       this.professionalsApi.professionalsProfessionalsRead(masterIdNumber),
     ]).pipe(
-      tap(([profile, professional]) =>
+      tap(([profile, professional]) => {
+        const canEdit = professional.user.id === profile.id;
+        if (canEdit) {
+          dispatch(new ProfessionalContactActions.LoadAllProfessionalContacts());
+        }
         setState({
           user: professional.user,
           professional,
-          canEdit: professional.user.id === profile.id,
-        }),
-      ),
+          canEdit,
+        });
+      }),
     );
   }
 }

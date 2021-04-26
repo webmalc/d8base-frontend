@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainGuard } from '@app/core/guards/main.guard';
 import { ProfessionalResolver } from '@app/master/professional.resolver';
-import { UserContactEditComponent } from '@app/shared/components/user-contact-edit/user-contact-edit.component';
+import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
+
 import { MasterPage } from './master.page';
 import { ProfessionalGuard } from './professional.guard';
 
@@ -22,6 +23,9 @@ const routes: Routes = [
   },
   {
     path: ':master-id',
+    resolve: {
+      context: ProfessionalResolver,
+    },
     children: [
       {
         path: 'add',
@@ -84,16 +88,17 @@ const routes: Routes = [
       },
       {
         path: 'professional-contact-add-default/:default-contact-id',
-        component: UserContactEditComponent,
+        component: ProfessionalContactEditComponent,
+        canActivate: [MainGuard],
       },
       {
         path: 'professional-contact-edit/:contact-id',
-        component: UserContactEditComponent,
+        component: ProfessionalContactEditComponent,
         canActivate: [MainGuard],
       },
       {
         path: 'professional-contact-add',
-        component: UserContactEditComponent,
+        component: ProfessionalContactEditComponent,
         canActivate: [MainGuard],
       },
       {

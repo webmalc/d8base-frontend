@@ -42,7 +42,7 @@ import {
   ImageCarouselComponent,
   CountryFlagComponent,
 } from '@app/shared/components';
-import { AbstractContactsComponent } from '@app/shared/components/abstract-contacts/abstract-contacts.component';
+import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
@@ -81,6 +81,8 @@ import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directi
 import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
+import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
+import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +99,7 @@ import { NumberDirective } from './directives/number.directive';
     InfoRowComponent,
     NumberDirective,
     ServicePublishAgreementComponent,
-    AbstractContactsComponent,
+    ContactsViewComponent,
     LocationEditorComponent,
     RatingComponent,
     RatingFullStarComponent,
@@ -153,6 +155,8 @@ import { NumberDirective } from './directives/number.directive';
     PhoneEditorComponent,
     ImageCarouselComponent,
     CountryFlagComponent,
+    ContactEditComponent,
+    ContactsEditComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -168,7 +172,7 @@ import { NumberDirective } from './directives/number.directive';
     InfoRowComponent,
     NumberDirective,
     ServicePublishAgreementComponent,
-    AbstractContactsComponent,
+    ContactsViewComponent,
     LocationEditorComponent,
     RatingComponent,
     RatingFullStarComponent,
@@ -217,6 +221,8 @@ import { NumberDirective } from './directives/number.directive';
     PhoneEditorComponent,
     ImageCarouselComponent,
     CountryFlagComponent,
+    ContactEditComponent,
+    ContactsEditComponent,
   ],
   imports: [
     CommonModule,
