@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { City, ProfessionalLocationInline } from '@app/api/models';
+import { City } from '@app/api/models';
 import { District } from '@app/core/models/district';
 import { Region } from '@app/core/models/region';
 import { Subregion } from '@app/core/models/subregion';
@@ -83,7 +83,13 @@ export class FullLocationService {
     subregion: subregionId,
     city: cityId,
     district: districtId,
-  }: ProfessionalLocationInline): Observable<FullLocation> {
+  }: {
+    country?: number;
+    region?: number;
+    subregion?: number;
+    city?: number;
+    district?: number;
+  }): Observable<FullLocation> {
     return forkJoin([
       countryId ? this.countriesApi.getByEntityId(countryId).pipe(catchError(() => of(null))) : of(null),
       regionId ? this.regionApi.getByEntityId(regionId).pipe(catchError(() => of(null))) : of(null),

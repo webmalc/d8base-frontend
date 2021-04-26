@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ProfessionalLocationInline } from '@app/api/models';
+import { AccountsService } from '@app/api/services/accounts.service';
 import { UserLocationApiService } from '@app/core/services';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { StepComponent } from '@app/order/abstract/step';
 import LocationStepData from '@app/order/interfaces/location-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
+import { LocationEditorPopoverComponent } from '@app/shared/components';
+import { PopoverController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
@@ -34,17 +37,36 @@ const initState: LocationStepData = {
 })
 export class LocationStepComponent extends StepComponent<LocationStepData> {
   public locationLabel: string;
-  public locations: { id: number; text: string }[] = [];
+  public locations: { id: number; text: string }[];
   public formControl = new FormControl('', Validators.required);
   private locationKey: string;
 
   constructor(
     private readonly fullLocationService: FullLocationService,
     private readonly userLocationService: UserLocationApiService,
+    private readonly popoverController: PopoverController,
+    private readonly api: AccountsService,
     protected readonly cd: ChangeDetectorRef,
   ) {
     super(cd);
     this.subscribeFormControl();
+  }
+
+  public get hasLocations(): boolean {
+    return Boolean(this.locations?.length) || this.context.service.service_type !== 'professional';
+  }
+
+  public get canAddLocation(): boolean {
+    return this.context.service.service_type === 'client';
+  }
+
+  public async addNewLocation(): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: LocationEditorPopoverComponent,
+    });
+    await popover.present();
+    const { data } = await popover.onDidDismiss();
+    this.api.accountsLocationsCreate(data).subscribe(() => this.loadLocations());
   }
 
   protected onStateChanged(data: LocationStepData): void {
@@ -53,11 +75,23 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
   protected onContextChanged(context: StepContext): void {
     super.onContextChanged(context);
-    const { service = null } = context;
+    this.loadLocations();
+  }
+
+  private setFormControlValue(value: any): void {
+    setTimeout(() => {
+      this.formControl.setValue(value);
+    });
+  }
+
+  private loadLocations(): void {
+    this.locations = null;
+    const { service = null } = this.context;
     switch (service.service_type) {
       case LocationType.Online: {
         this.locationLabel = 'service-location.online';
         this.locationKey = null;
+        this.locations = [];
         setTimeout(() => {
           this.formControl.setValue('online');
         });
@@ -78,12 +112,6 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
       default:
         break;
     }
-  }
-
-  private setFormControlValue(value: any): void {
-    setTimeout(() => {
-      this.formControl.setValue(value);
-    });
   }
 
   // TODO Extract getting locations out of component

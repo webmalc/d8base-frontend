@@ -1,13 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfessionalLocationInline } from '@app/api/models';
+import { UserLocation } from '@app/api/models';
+import { NgDestroyService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { TimezoneService } from '@app/core/services/timezone.service';
-import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
-import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 enum LocationFormFields {
   country = 'country',
@@ -21,17 +21,23 @@ enum LocationFormFields {
   timezone = 'timezone',
 }
 
+interface Timezone {
+  value: string;
+  display_name: string;
+}
+
 @Component({
   selector: 'app-location-editor',
   templateUrl: './location-editor.component.html',
   styleUrls: ['./location-editor.component.scss'],
+  providers: [NgDestroyService],
 })
-export class LocationEditorComponent extends AbstractEditComponent<ClientLocationInterface> implements OnInit, OnChanges {
+export class LocationEditorComponent implements OnInit {
+  @Output() public saveEmitter = new EventEmitter<UserLocation>();
+  @Output() public deleteEmitter = new EventEmitter<UserLocation>();
+
   public readonly formFields = LocationFormFields;
-  @Input() public transformFn: (data: ClientLocationInterface) => ClientLocationInterface;
-  public timezoneList$: BehaviorSubject<Array<{ value: string; display_name: string }>> = new BehaviorSubject<
-    Array<{ value: string; display_name: string }>
-  >(null);
+  public timezoneList$ = new BehaviorSubject<Timezone[]>(null);
   public form: FormGroup = this.fb.group({
     [this.formFields.country]: [null, Validators.required],
     [this.formFields.region]: [{ value: null, disabled: true }],
@@ -44,13 +50,30 @@ export class LocationEditorComponent extends AbstractEditComponent<ClientLocatio
     [this.formFields.timezone]: [null],
   });
 
+  private _item: Partial<UserLocation> = {};
+
   constructor(
     protected readonly location: Location,
     protected readonly timezone: TimezoneService,
     public readonly fullLocationService: FullLocationService,
     public readonly fb: FormBuilder,
-  ) {
-    super();
+    private readonly $ngDestroy: NgDestroyService,
+  ) {}
+
+  public get item(): Partial<UserLocation> {
+    return this._item;
+  }
+
+  @Input()
+  public set item(item: Partial<UserLocation>) {
+    this._item = item;
+    if (item) {
+      this.fullLocationService.getFullLocation(item).subscribe(fullLocation => {
+        this.form.patchValue({ ...item, ...fullLocation });
+      });
+    } else {
+      this.form.patchValue({});
+    }
   }
 
   public ngOnInit(): void {
@@ -58,47 +81,50 @@ export class LocationEditorComponent extends AbstractEditComponent<ClientLocatio
     this.timezone.getTimezoneList().subscribe(data => this.timezoneList$.next(data));
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.item) {
-      if (this.item) {
-        this.fullLocationService.getFullLocation((this.item as unknown) as ProfessionalLocationInline).subscribe(fullLocation => {
-          this.form.patchValue({ ...this.item, ...fullLocation });
-        });
-      } else {
-        this.form.patchValue({});
-      }
-    }
+  public save(): void {
+    this.saveEmitter.emit(this.transform(this.item));
   }
 
-  protected transform(data: any): ClientLocationInterface {
-    const model = this.transformFn({ ...data, ...this.form.value });
+  public delete(): void {
+    this.deleteEmitter.emit(this.transform(this.item));
+  }
 
-    [this.formFields.country, this.formFields.region, this.formFields.subregion, this.formFields.city, this.formFields.district].forEach(
-      (field: string) => {
-        model[field] = this.form.value[field]?.id ?? undefined;
-      },
-    );
+  protected transform(data: any): UserLocation {
+    const model = { ...data, ...this.form.value };
+
+    [
+      this.formFields.country,
+      this.formFields.region,
+      this.formFields.subregion,
+      this.formFields.city,
+      this.formFields.district,
+    ].forEach((field: string) => {
+      model[field] = this.form.value[field]?.id ?? undefined;
+    });
 
     [this.formFields.timezone, 'is_default'].forEach(field => {
       model[field] = this.form.value[field]?.value ?? undefined;
     });
 
-    return HelperService.clear<ClientLocationInterface>(model);
+    return HelperService.clear<UserLocation>(model);
   }
 
   private handleControls(): void {
-    this.handleControlChanges(this.formFields.country, [this.formFields.region, this.formFields.city]);
-    this.handleControlChanges(this.formFields.region, [this.formFields.subregion]);
-    this.handleControlChanges(this.formFields.city, [this.formFields.district]);
+    this.disableDependentControls(this.formFields.country, [this.formFields.region, this.formFields.city]);
+    this.disableDependentControls(this.formFields.region, [this.formFields.subregion]);
+    this.disableDependentControls(this.formFields.city, [this.formFields.district]);
   }
 
-  private handleControlChanges(handledControl: string, controls: string[]): void {
-    this.form.get(handledControl).valueChanges.subscribe(value => {
-      const action = !value ? 'disable' : 'enable';
-      controls.forEach(control => {
-        this.form.get(control)[action]();
-        this.form.get(control).reset();
+  private disableDependentControls(control: string, dependedControls: string[]): void {
+    this.form
+      .get(control)
+      .valueChanges.pipe(takeUntil(this.$ngDestroy))
+      .subscribe(value => {
+        const action = !value ? 'disable' : 'enable';
+        dependedControls.forEach(control => {
+          this.form.get(control)[action]();
+          this.form.get(control).reset();
+        });
       });
-    });
   }
 }

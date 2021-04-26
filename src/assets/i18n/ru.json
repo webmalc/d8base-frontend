@@ -180,8 +180,6 @@
     "plugins": "Плагины",
     "education": "Образование",
     "bookmark": "Избранное",
-    "add-new-contact": "Добавить еще контакт",
-    "add-new-address": "Добавить еще адрес",
     "your-address": "Ваш адрес",
     "main-address": "Основной адрес",
     "additional-address": "Дополнительный адрес",
@@ -233,7 +231,9 @@
     "no-bookmarks": "В ваших закладках пусто"
   },
   "list-item": {
-    "add-new": "Добавить еще"
+    "add-new": "Добавить",
+    "add-new-contact": "Добавить новый контакт",
+    "add-new-address": "Добавить новый адрес"
   },
   "duration": {
     "days": "дни",
@@ -476,7 +476,6 @@
       "reviews": "Отзывы",
       "on-map": "Смотреть на карте",
       "from-here": "От заданного адреса",
-      "add-new-address": "Добавить еще адрес",
       "add-new-exp": "Добавить опыт работы",
       "add-new-education": "Добавить образование",
       "add-new-certificate": "Добавить сертификат",

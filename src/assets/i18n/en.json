@@ -180,8 +180,6 @@
     "plugins": "Plugins",
     "education": "Education",
     "bookmark": "Bookmarks",
-    "add-new-contact": "Add new contact",
-    "add-new-address": "Add new address",
     "your-address": "Your address",
     "main-address": "Main address",
     "additional-address": "Additional address",
@@ -233,7 +231,8 @@
     "no-bookmarks": "There's no bookmarks yet"
   },
   "list-item": {
-    "add-new": "Add new"
+    "add-new": "Add new",
+    "add-new-address": "Add new address"
   },
   "duration": {
     "days": "days",
@@ -476,7 +475,6 @@
       "reviews": "Reviews",
       "on-map": "Trace on map",
       "from-here": "From target address",
-      "add-new-address": "Add one more address",
       "add-new-exp": "Add new qualification",
       "add-new-education": "Add new education",
       "add-new-certificate": "Add new certificate",

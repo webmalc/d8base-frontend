@@ -33,10 +33,6 @@ export class UserLocationEditPage implements OnInit {
     }
   }
 
-  public transform(data: ClientLocationInterface): ClientLocationInterface {
-    return data;
-  }
-
   public save(item: UserLocation): void {
     if (this.locationId) {
       this.api.accountsLocationsUpdate({ id: this.locationId, data: item })
