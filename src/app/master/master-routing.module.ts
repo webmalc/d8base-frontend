@@ -15,18 +15,15 @@ const routes: Routes = [
   },
   {
     path: ':master-id',
-    component: MasterPage,
-    pathMatch: 'full',
-    resolve: {
-      context: ProfessionalResolver,
-    },
-  },
-  {
-    path: ':master-id',
     resolve: {
       context: ProfessionalResolver,
     },
     children: [
+      {
+        path: '',
+        component: MasterPage,
+        pathMatch: 'full',
+      },
       {
         path: 'add',
         loadChildren: () => import('./pages/master-edit/master-edit.module').then(m => m.MasterEditPageModule),
