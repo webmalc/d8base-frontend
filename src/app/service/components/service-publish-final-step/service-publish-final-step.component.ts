@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfessionalList, ServiceList } from '@app/api/models';
+import { ProfessionalList, ServiceList, ServiceLocationInline } from '@app/api/models';
 import { MasterManagerService } from '@app/core/services';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
@@ -34,9 +34,19 @@ export class ServicePublishFinalStepComponent {
   public ionViewDidEnter(): void {
     this.service = null;
     this.servicePublishDataFormatter.getData().then(data => {
+      const serviceLocation: ServiceLocationInline = {
+        id: data.serviceLocation.id,
+        max_distance: data.serviceLocation.max_distance,
+        location: {
+          country: data.masterLocation.country as number,
+          city: data.masterLocation.city as number,
+          address: data.masterLocation.address,
+        },
+      };
       this.service = {
         ...data.service,
         price: data.servicePrice,
+        locations: [serviceLocation],
         professional: 1,
       };
     });

@@ -20,7 +20,7 @@ export class ServicePublishStepSixFormService {
 
   public createForm(data?: StepSixDataInterface): void {
     this.form = this.formBuilder.group({
-      [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ? 'company' : 'person'],
+      [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ?? 'person'],
       [ServicePublishStepSixFormFields.CompanyName]: [data?.company_name],
       [ServicePublishStepSixFormFields.Description]: [data?.description],
       [ServicePublishStepSixFormFields.Specialization]: [data?.name],

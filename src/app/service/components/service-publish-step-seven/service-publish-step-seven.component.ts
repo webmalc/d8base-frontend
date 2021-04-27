@@ -7,19 +7,16 @@ import { MasterSchedule } from '@app/master/models/master-schedule';
 import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
 import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
 import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
 import { ServicePublishStepSevenTimetableFormFields } from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { ServicePublishStepSevenFormService } from '@app/service/forms/service-publish-step-seven-form.service';
-import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { ServicePublishAuthStateManagerService } from '@app/service/services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
 import { Reinitable } from '@app/shared/abstract/reinitable';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
@@ -46,7 +43,6 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     public readonly formService: ServicePublishStepSevenFormService,
     public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
     public readonly countrySelectable: SelectableCountryOnSearchService,
-    public readonly citySelectable: SelectableCityOnSearchService,
     public readonly postalSelectable: SelectablePostalCodeOnSearchService,
     public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly authStateManager: ServicePublishAuthStateManagerService,
@@ -113,18 +109,6 @@ export class ServicePublishStepSevenComponent extends Reinitable {
 
   public useMasterSchedule(): boolean {
     return this.formService.getFormFieldValue(this.formFields.UseMasterSchedule) as boolean;
-  }
-
-  public onCountryChange(): void {
-    this.formService.setControlDisabled(false, this.formFields.City);
-  }
-
-  public onCityChange(): void {
-    this.formService.setControlDisabled(false, this.formFields.Postal);
-  }
-
-  public getCountryValue(): Country {
-    return this.formService.getFormFieldValue(this.formFields.Country);
   }
 
   public getCityValue(): City {
