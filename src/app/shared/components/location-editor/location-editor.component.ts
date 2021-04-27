@@ -33,8 +33,8 @@ interface Timezone {
   providers: [NgDestroyService],
 })
 export class LocationEditorComponent implements OnInit {
-  @Output() public saveEmitter = new EventEmitter<UserLocation>();
-  @Output() public deleteEmitter = new EventEmitter<UserLocation>();
+  @Output() public save = new EventEmitter<UserLocation>();
+  @Output() public delete = new EventEmitter<UserLocation>();
 
   public readonly formFields = LocationFormFields;
   public timezoneList$ = new BehaviorSubject<Timezone[]>(null);
@@ -81,12 +81,12 @@ export class LocationEditorComponent implements OnInit {
     this.timezone.getTimezoneList().subscribe(data => this.timezoneList$.next(data));
   }
 
-  public save(): void {
-    this.saveEmitter.emit(this.transform(this.item));
+  public emitSave(): void {
+    this.save.emit(this.transform(this.item));
   }
 
-  public delete(): void {
-    this.deleteEmitter.emit(this.transform(this.item));
+  public emitDelete(): void {
+    this.delete.emit(this.transform(this.item));
   }
 
   protected transform(data: any): UserLocation {
@@ -110,18 +110,18 @@ export class LocationEditorComponent implements OnInit {
   }
 
   private handleControls(): void {
-    this.disableDependentControls(this.formFields.country, [this.formFields.region, this.formFields.city]);
-    this.disableDependentControls(this.formFields.region, [this.formFields.subregion]);
-    this.disableDependentControls(this.formFields.city, [this.formFields.district]);
+    this.handleDependentControls(this.formFields.country, [this.formFields.region, this.formFields.city]);
+    this.handleDependentControls(this.formFields.region, [this.formFields.subregion]);
+    this.handleDependentControls(this.formFields.city, [this.formFields.district]);
   }
 
-  private disableDependentControls(control: string, dependedControls: string[]): void {
+  private handleDependentControls(control: string, dependentControls: string[]): void {
     this.form
       .get(control)
       .valueChanges.pipe(takeUntil(this.$ngDestroy))
       .subscribe(value => {
         const action = !value ? 'disable' : 'enable';
-        dependedControls.forEach(control => {
+        dependentControls.forEach(control => {
           this.form.get(control)[action]();
           this.form.get(control).reset();
         });

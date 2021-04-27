@@ -2,8 +2,8 @@
 <ion-content>
   <app-content-wrapper>
     <app-location-editor
-      (deleteEmitter)="delete($event.id)"
-      (saveEmitter)="save($event)"
+      (delete)="delete($event.id)"
+      (save)='save($event)'
       [item]="userLocation"
     ></app-location-editor>
   </app-content-wrapper>
