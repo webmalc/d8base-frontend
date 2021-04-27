@@ -28,12 +28,13 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   @Input() public timezone: string = Intl.DateTimeFormat().resolvedOptions().timeZone;
   @Input() public serviceDuration: number;
   @Input() public disabled: boolean;
+  @Input() public initialDate: Date;
   @Output() public newDate: EventEmitter<Date> = new EventEmitter<Date>();
   public calendarIntervals: CalendarInterval[];
   public isLoadingEnabledPeriods: boolean = false;
 
   // currently viewed day:
-  public date: Date = getCurrentDay();
+  public date: Date;
 
   // if user made a choice, selected date and time:
   public selectedDate: Date;
@@ -42,6 +43,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
 
   private onChange: (value: Date) => void;
   private onTouched: () => void;
+
 
   constructor(private readonly calendar: CalendarService) {
   }
@@ -64,6 +66,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   public writeValue(date: Date): void {
     if (!date) {
       this.date = getCurrentDay();
+      this.newDate.emit(this.date);
       this.selectedStartTime = null;
       this.selectedEndTime = null;
       this.selectedDate = null;
@@ -71,6 +74,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
     }
     const startDate = stripTime(date);
     this.date = startDate;
+    this.newDate.emit(this.date);
 
     // TODO: extract to function or use a library
     const minutes = Math.floor((date.getTime() - startDate.getTime()) / 60000);

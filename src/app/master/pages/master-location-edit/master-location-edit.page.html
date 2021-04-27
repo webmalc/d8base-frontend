@@ -2,10 +2,9 @@
 <ion-content>
   <app-content-wrapper>
     <app-location-editor
-      (deleteEmitter)="delete($event)"
-      (saveEmitter)="save($event)"
+      (delete)="delete($event)"
+      (save)='save($event)'
       [item]="item"
-      [transformFn]="transform"
     ></app-location-editor>
   </app-content-wrapper>
 </ion-content>

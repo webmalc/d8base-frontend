@@ -180,8 +180,6 @@
     "plugins": "Плагины",
     "education": "Образование",
     "bookmark": "Избранное",
-    "add-new-contact": "Добавить еще контакт",
-    "add-new-address": "Добавить еще адрес",
     "your-address": "Ваш адрес",
     "main-address": "Основной адрес",
     "additional-address": "Дополнительный адрес",
@@ -233,7 +231,9 @@
     "no-bookmarks": "В ваших закладках пусто"
   },
   "list-item": {
-    "add-new": "Добавить еще"
+    "add-new": "Добавить",
+    "add-new-contact": "Добавить новый контакт",
+    "add-new-address": "Добавить новый адрес"
   },
   "duration": {
     "days": "дни",
@@ -320,6 +320,7 @@
       "company-placeholder": "Название компании",
       "name-title": "Имя",
       "name-placeholder": "Введите ваше имя",
+      "last-name": "Введите вашу фамилию",
       "last-name-title": "Фамилия",
       "last-name-placeholder": "Введите вашу фамилию",
       "gender": "Пол",
@@ -475,7 +476,6 @@
       "reviews": "Отзывы",
       "on-map": "Смотреть на карте",
       "from-here": "От заданного адреса",
-      "add-new-address": "Добавить еще адрес",
       "add-new-exp": "Добавить опыт работы",
       "add-new-education": "Добавить образование",
       "add-new-certificate": "Добавить сертификат",
@@ -687,7 +687,7 @@
     "title": "Заказ услуги",
     "selected-service": "Выбранная услуга",
     "order-service": "Бронировать",
-    "location-header": "Место оказания услуги",
+    "location-header": "Выберите место оказания услуги",
     "final-step": "Для завершения бронирования осталось нажать кнопку «Бронировать».",
     "comment-header": "Комментарий к заказу",
     "date-time-header": "Дата и время услуги",
@@ -705,7 +705,8 @@
     "email": "E-mail",
     "phone": "Телефон",
     "is-not-for-me-description": "Введите имя, фамилию человека, который будет получателем услуги",
-    "success-title": "Услуга успешно опубликована."
+    "success-title": "Услуга успешно опубликована.",
+    "professional-address-error": "Продолжение невозможно — у услуги выбрано \"прием у мастера\", но мастер не указал ни одного адреса."
   },
   "flag-menu": {
     "language": "Язык интерфейса",

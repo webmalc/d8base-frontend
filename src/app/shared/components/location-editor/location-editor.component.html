@@ -5,8 +5,6 @@
   <app-subregion-selector [formControl]="form.get(formFields.subregion)" [region]="form.get(formFields.region).value"></app-subregion-selector>
   <app-city-selector [formControl]="form.get(formFields.city)" [country]="form.get(formFields.country).value"></app-city-selector>
   <app-district-selector [formControl]="form.get(formFields.district)" [city]="form.get(formFields.city).value"></app-district-selector>
-  <app-user-location-map [formControl]="form.get(formFields.coordinates)" [clientCoordinates]="item.coordinates?.coordinates">
-  </app-user-location-map>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.postal-code' | translate }}
@@ -34,12 +32,12 @@
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">
     <ion-col size="6">
-      <ion-button (click)="delete()" *ngIf="!item.is_default && item.id" color="light" expand="block" fill="solid" size="medium">
+      <ion-button (click)="emitDelete()" *ngIf="!item.is_default && item.id" color="light" expand="block" fill="solid" size="medium">
         {{ 'location-edit-page.remove-location' | translate }}
       </ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
+      <ion-button (click)="emitSave()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
         {{ 'location-edit-page.save-location' | translate }}
       </ion-button>
     </ion-col>

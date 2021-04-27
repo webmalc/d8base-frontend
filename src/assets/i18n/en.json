@@ -180,8 +180,6 @@
     "plugins": "Plugins",
     "education": "Education",
     "bookmark": "Bookmarks",
-    "add-new-contact": "Add new contact",
-    "add-new-address": "Add new address",
     "your-address": "Your address",
     "main-address": "Main address",
     "additional-address": "Additional address",
@@ -233,7 +231,8 @@
     "no-bookmarks": "There's no bookmarks yet"
   },
   "list-item": {
-    "add-new": "Add new"
+    "add-new": "Add new",
+    "add-new-address": "Add new address"
   },
   "duration": {
     "days": "days",
@@ -476,7 +475,6 @@
       "reviews": "Reviews",
       "on-map": "Trace on map",
       "from-here": "From target address",
-      "add-new-address": "Add one more address",
       "add-new-exp": "Add new qualification",
       "add-new-education": "Add new education",
       "add-new-certificate": "Add new certificate",
@@ -688,7 +686,7 @@
     "title": "Service order",
     "selected-service": "Selected service",
     "order-service": "Place order",
-    "location-header": "Service location",
+    "location-header": "Choose the service location",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
     "comment-header": "Optional comments",
     "date-time-header": "Service date and time",
@@ -706,7 +704,8 @@
     "email": "E-mail",
     "phone": "Phone",
     "is-not-for-me-description": "Enter the name of the person who will get the service",
-    "success-title": "The service was successfully published."
+    "success-title": "The service was successfully published.",
+    "professional-address-error": "Can't proceed — the service is \"at professional's place\", but the professional has no location specified."
   },
   "flag-menu": {
     "language": "Language",

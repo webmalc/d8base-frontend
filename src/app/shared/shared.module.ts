@@ -41,6 +41,7 @@ import {
   PhoneEditorComponent,
   ImageCarouselComponent,
   CountryFlagComponent,
+  LocationEditorPopoverComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
@@ -157,6 +158,7 @@ import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.
     CountryFlagComponent,
     ContactEditComponent,
     ContactsEditComponent,
+    LocationEditorPopoverComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -223,6 +225,7 @@ import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.
     CountryFlagComponent,
     ContactEditComponent,
     ContactsEditComponent,
+    LocationEditorPopoverComponent,
   ],
   imports: [
     CommonModule,
