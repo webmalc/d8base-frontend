@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Credentials } from '@app/auth/interfaces/credentials';
+import { AppValidators } from '@app/core/validators/app.validators';
 import { LoginFormFields } from '../../enums/login-form-fields';
 
 @Component({
@@ -10,7 +11,7 @@ import { LoginFormFields } from '../../enums/login-form-fields';
 })
 export class LoginFormComponent {
   public form: FormGroup = this.fb.group({
-    [LoginFormFields.Username]: ['', [Validators.required, Validators.email]],
+    [LoginFormFields.Username]: ['', [Validators.required, AppValidators.email]],
     [LoginFormFields.Password]: ['', Validators.required],
   });
   public readonly formFields = LoginFormFields;

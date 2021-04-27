@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DefaultRegisterUser, UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
+import { AppValidators } from '@app/core/validators/app.validators';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
 import { takeUntil } from 'rxjs/operators';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
@@ -15,7 +16,7 @@ import { RegistrationFormFields } from '../../enums/registration-form-fields';
 export class RegistrationFormComponent {
   public form: FormGroup = this.fb.group(
     {
-      [RegistrationFormFields.Email]: ['', [Validators.required, Validators.email]],
+      [RegistrationFormFields.Email]: ['', [Validators.required, AppValidators.email]],
       [RegistrationFormFields.FirstName]: ['', Validators.required],
       [RegistrationFormFields.LastName]: [''],
       [RegistrationFormFields.Password]: ['', passwordValidators],
