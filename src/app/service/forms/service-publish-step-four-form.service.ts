@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AppValidators } from '@app/core/validators/app.validators';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
 
@@ -15,7 +16,7 @@ export class ServicePublishStepFourFormService {
     this.form = this.formBuilder.group({
         [ServicePublishStepFourFormFields.Email]: [null, Validators.compose([
           Validators.required,
-          Validators.email,
+          AppValidators.email,
         ])],
         [ServicePublishStepFourFormFields.Password]: [null, passwordValidators],
         [ServicePublishStepFourFormFields.Confirm]: [null, passwordValidators],

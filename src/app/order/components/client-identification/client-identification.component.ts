@@ -5,6 +5,7 @@ import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
+import { AppValidators } from '@app/core/validators/app.validators';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
@@ -24,7 +25,7 @@ const NEXT_STEP_ID = OrderIds.Location;
 })
 export class ClientIdentificationComponent {
   public context$: Observable<StepContext> = this.wizardState.getContext();
-  public email = new FormControl('', Validators.compose([Validators.required, Validators.email]));
+  public email = new FormControl('', Validators.compose([Validators.required, AppValidators.email]));
   public password = new FormControl('', passwordValidators);
   public passwordConfirm = new FormControl({ value: '', disabled: true }, passwordValidators);
   public name = new FormControl({ value: '', disabled: true }, Validators.required);
