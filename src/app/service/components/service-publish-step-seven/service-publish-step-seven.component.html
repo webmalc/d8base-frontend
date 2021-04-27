@@ -78,81 +78,11 @@
         </ng-container>
 
         <ng-container *ngIf="!isUseDefaultLocation">
-          <ion-item lines="none">
-            <div class="label-for-required-input">
-              <b>
-                {{ 'service-publish.step-seven.country-title' | translate }}
-              </b>
-            </div>
-          </ion-item>
-
-          <ion-item class="ion-item-bordered">
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.country-placeholder' | translate }}
-            </ion-label>
-            <ionic-selectable
-              itemValueField="id"
-              itemTextField="name"
-              [canSearch]="true"
-              formControlName="{{ formFields.Country }}"
-              closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
-              searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
-              searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
-              (onSearch)="countrySelectable.onCountrySearch($event)"
-              (onChange)="onCountryChange(); onThisPageDataChange()"
-            >
-            </ionic-selectable>
-          </ion-item>
-          <ion-item lines="none">
-            <div class="label-for-required-input">
-              <b>
-                {{ 'service-publish.step-seven.city-title' | translate }}
-              </b>
-            </div>
-          </ion-item>
-          <ion-item class="ion-item-bordered">
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.city-placeholder' | translate }}
-            </ion-label>
-            <ionic-selectable
-              itemValueField="id"
-              itemTextField="name"
-              [canSearch]="true"
-              formControlName="{{ formFields.City }}"
-              closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
-              searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
-              searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
-              (onSearch)="citySelectable.onCitySearch($event, getCountryValue())"
-              (onChange)="onCityChange(); onThisPageDataChange()"
-            >
-            </ionic-selectable>
-          </ion-item>
-
-          <ion-item lines="none">
-            <div class="label-for-required-input">
-              <b>
-                {{ 'service-publish.step-seven.address' | translate }}
-              </b>
-            </div>
-          </ion-item>
-          <ion-item class="ion-item-bordered">
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.address-placeholder' | translate }}
-            </ion-label>
-            <ion-textarea
-              rows="4"
-              type="text"
-              name="address"
-              (ionChange)="onThisPageDataChange()"
-              [formControlName]="formFields.Address"
-            ></ion-textarea>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>
-              <b>{{ 'service-publish.step-seven.postal' | translate }}</b>
-            </ion-label>
-          </ion-item>
-          <ion-item class="ion-item-bordered">
+          <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
+          <app-city-selector [formControlName]="formFields.City"
+                             [country]="formService.form.controls[formFields.Country].value">
+          </app-city-selector>
+          <ion-item>
             <ion-label color="medium" position="floating">
               {{ 'service-publish.step-seven.postal-placeholder' | translate }}
             </ion-label>
@@ -169,6 +99,18 @@
               (onChange)="onThisPageDataChange()"
             >
             </ionic-selectable>
+          </ion-item>
+          <ion-item>
+            <ion-label color="medium" position="floating">
+              {{ 'service-publish.step-seven.address-placeholder' | translate }}
+            </ion-label>
+            <ion-textarea
+              rows="4"
+              type="text"
+              name="address"
+              (ionChange)="onThisPageDataChange()"
+              [formControlName]="formFields.Address"
+            ></ion-textarea>
           </ion-item>
         </ng-container>
 
