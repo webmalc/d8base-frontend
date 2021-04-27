@@ -55,9 +55,10 @@
         {{ 'issuance.filters.additional.nationalities-placeholder' | translate }}
       </ion-label>
       <ionic-selectable
-        (onSearch)="countrySelectable.onCountrySearch($event)"
+        [items]="countries$ | async"
         [formControl]="form.get(formFields.nationalities)"
         [canSearch]="true"
+        [canClear]="true"
         [isMultiple]="true"
         itemTextField="name"
         itemValueField="id"
