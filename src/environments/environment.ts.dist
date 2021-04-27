@@ -4,7 +4,7 @@ export const environment = {
     backend: {
         auth: '/api/auth/token/',
         certificate: '',
-        cities: '/api/location/cites/',
+        cities: '/api/location/cities/',
         communication_messages_received: '/api/communication/messages/received/',
         communication_messages_sent: '/api/communication/messages/sent/',
         communication_devices_fcm: '/api/communication/devices/fcm/',
