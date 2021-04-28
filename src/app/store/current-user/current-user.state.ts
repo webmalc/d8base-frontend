@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Profile } from '@app/api/models';
+import { Profile, VerifyEmail } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
@@ -23,6 +23,7 @@ import { UserSavedProfessionalState } from './saved-professionals/saved-professi
 import { UserLanguageState } from './user-language-state/user-language.state';
 import { UserContactState } from './user-contacts/user-contacts.state';
 import * as UserContactActions from './user-contacts/user-contacts.actions';
+import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
@@ -232,10 +233,58 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.UpdateProfile)
   public updateProfile(
-    { patchState }: StateContext<CurrentUserStateModel>,
-    { changes }: CurrentUserActions.ChangeUserSettings,
+    { patchState, dispatch, getState }: StateContext<CurrentUserStateModel>,
+    { changes }: CurrentUserActions.UpdateProfile,
   ) {
-    return this.api.accountsProfilePartialUpdate(changes).pipe(tap(profile => patchState({ profile })));
+    const { profile } = getState();
+    const existingEmail = profile.email;
+    const newEmail = changes.email;
+    return this.api.accountsProfilePartialUpdate(changes).pipe(
+      tap(profile => {
+        patchState({ profile });
+      }),
+      mergeMap(() => {
+        if (existingEmail !== newEmail) {
+          return dispatch(new CurrentUserActions.RegisterNewEmail(newEmail));
+        }
+        return of();
+      }),
+    );
+  }
+
+  @Action(CurrentUserActions.RegisterNewEmail)
+  public registerNewEmail({}: StateContext<CurrentUserStateModel>, { newEmail }: CurrentUserActions.RegisterNewEmail) {
+    return this.api.accountsRegisterEmailCreate({ email: newEmail });
+  }
+
+  @Action(CurrentUserActions.ResendEmailVerification)
+  public resendEmailVerification() {
+    return this.api.accountsResendVerifyRegistrationCreate();
+  }
+
+  @Action(CurrentUserActions.VerifyEmailAction)
+  public verifyEmail(
+    { patchState, getState }: StateContext<CurrentUserStateModel>,
+    { verifyEmail }: CurrentUserActions.VerifyEmailAction,
+  ) {
+    const { profile } = getState();
+    const { email, user_id } = verifyEmail;
+
+    if (profile.id !== parseInt(user_id, 10)) {
+      throw Error('Try to change another\'s user email');
+    }
+
+    return this.api.accountsVerifyEmailCreate(verifyEmail).pipe(
+      tap(() => {
+        patchState({
+          profile: {
+            ...profile,
+            email,
+            is_confirmed: true,
+          },
+        });
+      }),
+    );
   }
 
   @Action(CurrentUserActions.RefreshTokens)
