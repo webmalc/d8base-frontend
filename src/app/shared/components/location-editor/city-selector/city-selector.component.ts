@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ItemSelectorControl } from '../item-selector-control';
 
-const PAGE_SIZE = 1000;
+const PAGE_SIZE = 20000; // TODO: implement pagination
 
 @Component({
   selector: 'app-city-selector',
