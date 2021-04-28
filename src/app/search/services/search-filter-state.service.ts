@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
-import { Observable, ReplaySubject } from 'rxjs';
+import { asyncScheduler, Observable, queueScheduler, ReplaySubject } from 'rxjs';
+import { debounce, debounceTime, observeOn } from 'rxjs/operators';
 import { SearchFilterFormFields, SearchFilterFormGroups } from '../const/search-filters-form';
 import { SearchFilterStateConverter } from './search-filter-state-converter.service';
 
@@ -62,7 +63,7 @@ export class SearchFilterStateService {
     private readonly fb: FormBuilder,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
   ) {
-    this.doSearch$.subscribe(() => {
+    this.doSearch$.pipe(debounceTime(200)).subscribe(() => {
       const queryParams = this.searchFilterStateConverter.getSearchListParams(this.searchForm.value);
       this.router.navigate(['/search'], { queryParams });
     });
