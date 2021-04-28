@@ -1,5 +1,6 @@
+/*eslint max-lines: ["error", 500]*/
 import { Injectable } from '@angular/core';
-import { Profile, VerifyEmail } from '@app/api/models';
+import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
@@ -8,22 +9,21 @@ import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interfac
 import { ApiClientService } from '@app/core/services/api-client.service';
 import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
 import { environment } from '@env/environment';
 import { Storage } from '@ionic/storage';
 import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
-import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
-
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
+import { guestState, notLoadedState } from './current-user.constants';
 import * as SavedUserProfessionalsActions from './saved-professionals/saved-professionals.actions';
-import { notLoadedState, guestState } from './current-user.constants';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
-import { UserLanguageState } from './user-language-state/user-language.state';
-import { UserContactState } from './user-contacts/user-contacts.state';
 import * as UserContactActions from './user-contacts/user-contacts.actions';
-import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
+import { UserContactState } from './user-contacts/user-contacts.state';
+import { UserLanguageState } from './user-language-state/user-language.state';
+
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
