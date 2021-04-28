@@ -16,7 +16,7 @@ export class MainGuard implements CanActivate {
         if (isAuthenticated) {
           return true;
         }
-        return this.router.parseUrl(`/auth/login?redirectTo=${state.url}`);
+        return this.router.parseUrl(`/auth/login?redirectTo=${encodeURIComponent(state.url)}`);
       }),
     );
   }
