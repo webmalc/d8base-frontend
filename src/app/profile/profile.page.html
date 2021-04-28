@@ -27,6 +27,9 @@
       <ion-icon *ngIf="user?.is_confirmed" color="success" name="checkmark-circle-outline" slot="end"></ion-icon>
       <ion-icon *ngIf="!user?.is_confirmed" color="danger" name="close-circle-outline" slot="end"></ion-icon>
     </ion-item>
+    <app-info-row  *ngIf="newEmailRegistered$ | async as newEmail">
+      {{ 'profile-form.email-change.email-registered' | translate: { newEmail: newEmail } }}
+    </app-info-row>
 
     <ion-item-divider color="light">
       <ion-label>

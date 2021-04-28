@@ -1,14 +1,13 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileFormService } from '@app/profile/forms/profile-form.service';
-import { RegisterEmailApiService } from '@app/profile/services/register-email-api.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
-import { Select } from '@ngxs/store';
+import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -26,9 +25,9 @@ export class UserEditComponent implements OnInit {
   public profile$: Observable<Profile>;
 
   constructor(
-    private readonly location: Location,
-    private readonly registerEmailApi: RegisterEmailApiService,
     private readonly formService: ProfileFormService,
+    private readonly actions$: Actions,
+    private readonly router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -44,10 +43,13 @@ export class UserEditComponent implements OnInit {
   }
 
   public submitForm(): void {
+    this.form.disable();
+
     this.updateUser(this.form.getRawValue());
-    if (this.user.email !== this.form.get(this.formFields.Email).value) {
-      this.registerEmailApi.post(this.form.get(this.formFields.Email).value).subscribe();
-    }
-    this.location.back();
+
+    this.actions$.pipe(ofActionSuccessful(CurrentUserActions.UpdateProfile), first()).subscribe(() => {
+      this.form.enable();
+      this.router.navigate(['/profile']);
+    });
   }
 }
