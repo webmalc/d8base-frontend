@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { VerifyEmail } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
-import { Dispatch } from '@ngxs-labs/dispatch-decorator';
-import { Actions, ofActionErrored, ofActionSuccessful } from '@ngxs/store';
-import { first, takeUntil } from 'rxjs/operators';
+import { Store } from '@ngxs/store';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-change-email',
@@ -20,37 +19,33 @@ export class ChangeEmailComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly actions$: Actions,
+    private readonly store: Store,
     private readonly destroy$: NgDestroyService,
     private readonly cd: ChangeDetectorRef,
   ) {}
 
   public ngOnInit(): void {
-    this.actions$.pipe(ofActionErrored(CurrentUserActions.VerifyEmailAction), first()).subscribe(() => {
-      this.success = false;
-      this.resetLoading();
-      this.cd.markForCheck();
-    });
-
-    this.actions$
-      .pipe(ofActionSuccessful(CurrentUserActions.VerifyEmailAction), first())
-      .subscribe((action: CurrentUserActions.VerifyEmailAction) => {
-        this.newEmail = action.verifyEmail.email;
-        this.success = true;
-        this.resetLoading();
-        this.cd.markForCheck();
+    this.route.queryParams
+      .pipe(
+        switchMap((params: VerifyEmail) => {
+          this.setLoading();
+          this.newEmail = params?.email;
+          return this.store.dispatch(new CurrentUserActions.VerifyEmailAction(params));
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe({
+        next: () => {
+          this.success = true;
+          this.resetLoading();
+          this.cd.markForCheck();
+        },
+        error: () => {
+          this.success = false;
+          this.resetLoading();
+          this.cd.markForCheck();
+        },
       });
-
-    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: VerifyEmail) => {
-      this.setLoading();
-      this.verifyEmail(params);
-      this.cd.markForCheck();
-    });
-  }
-
-  @Dispatch()
-  public verifyEmail(verifyEmail: VerifyEmail): CurrentUserActions.VerifyEmailAction {
-    return new CurrentUserActions.VerifyEmailAction(verifyEmail);
   }
 
   private setLoading(): void {

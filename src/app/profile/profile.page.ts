@@ -7,13 +7,13 @@ import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileService } from '@app/profile/services/profile.service';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
 import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
 import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, first, map, takeUntil } from 'rxjs/operators';
-import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -33,8 +33,8 @@ export class ProfilePage {
 
   public newEmailRegistered$: Observable<CurrentUserActions.RegisterNewEmail['newEmail']> = this.actions$.pipe(
     ofActionSuccessful(CurrentUserActions.RegisterNewEmail),
-    first(),
     map((action: CurrentUserActions.RegisterNewEmail) => action.newEmail),
+    takeUntil(this.ngDestroy$),
   );
 
   public contactsWithDefault$: Observable<UserContact[]>;

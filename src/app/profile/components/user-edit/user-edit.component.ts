@@ -6,8 +6,7 @@ import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileFormService } from '@app/profile/forms/profile-form.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
-import { Dispatch } from '@ngxs-labs/dispatch-decorator';
-import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -26,8 +25,8 @@ export class UserEditComponent implements OnInit {
 
   constructor(
     private readonly formService: ProfileFormService,
-    private readonly actions$: Actions,
     private readonly router: Router,
+    private readonly store: Store,
   ) {}
 
   public ngOnInit(): void {
@@ -37,17 +36,10 @@ export class UserEditComponent implements OnInit {
     });
   }
 
-  @Dispatch()
-  public updateUser(profile: Partial<Profile>): CurrentUserActions.UpdateProfile {
-    return new CurrentUserActions.UpdateProfile(profile);
-  }
-
   public submitForm(): void {
     this.form.disable();
 
-    this.updateUser(this.form.getRawValue());
-
-    this.actions$.pipe(ofActionSuccessful(CurrentUserActions.UpdateProfile), first()).subscribe(() => {
+    this.store.dispatch(new CurrentUserActions.UpdateProfile(this.form.getRawValue())).subscribe(() => {
       this.form.enable();
       this.router.navigate(['/profile']);
     });
