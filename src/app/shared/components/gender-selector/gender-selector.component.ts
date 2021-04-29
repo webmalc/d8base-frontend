@@ -18,8 +18,8 @@ type Gender = Profile['gender'];
 
 })
 export class GenderSelectorComponent implements ControlValueAccessor {
-
   public defaultValue: Gender = null;
+  public disabled: boolean;
 
   private onChange: (value: Gender) => void;
   private onTouched: () => void;
@@ -34,6 +34,10 @@ export class GenderSelectorComponent implements ControlValueAccessor {
 
   public writeValue(value: Gender): void {
     this.defaultValue = value;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   public change(event: CustomEvent): void {

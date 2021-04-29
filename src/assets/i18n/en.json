@@ -187,7 +187,13 @@
     "nationality": "Nationality",
     "languages": "Languages",
     "not-specified": "Not specified",
-    "email": "Email confirmed"
+    "email": "Email confirmed",
+    "email-change" : {
+      "email-registered": "Email change confirmation were sent to '{{ newEmail }}'",
+      "email-verified-success": "Email changed to '{{ newEmail }}'",
+      "email-verified-failure": "Email not changed",
+      "email-verification-title": "Email verification"
+    }
   },
   "profile-main-edit": {
     "main": "Main info"

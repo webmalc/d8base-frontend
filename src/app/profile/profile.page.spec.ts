@@ -7,7 +7,9 @@ import { MasterManagerService } from '@app/core/services';
 import { ProfileService } from '@app/profile/services/profile.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { Actions } from '@ngxs/store';
 import { BehaviorSubject } from 'rxjs';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from '../../testing/mocks';
 import { ProfilePage } from './profile.page';
 
@@ -20,32 +22,28 @@ describe('ProfilePage', () => {
   let fixture: ComponentFixture<ProfilePage>;
   let masterService;
 
-  beforeEach(waitForAsync(() => {
-    masterService = jasmine.createSpyObj('MasterManagerService', ['isMaster']);
-    TestBed.configureTestingModule({
-      declarations: [ProfilePage],
-      imports: [
-        IonicModule.forRoot(),
-        RouterTestingModule,
-        TranslateModule.forRoot(),
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
-      ],
-      providers: [
-        {
-          provide: MasterManagerService,
-          useClass: MasterManagerServiceStub,
-        },
-        ProfileService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      masterService = jasmine.createSpyObj('MasterManagerService', ['isMaster']);
+      TestBed.configureTestingModule({
+        declarations: [ProfilePage],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          Actions,
+          {
+            provide: MasterManagerService,
+            useClass: MasterManagerServiceStub,
+          },
+          ProfileService,
+          { provide: StorageManagerService, useClass: StorageManagerMock },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ProfilePage);
-    component = fixture.componentInstance;
-    masterService = TestBed.inject(MasterManagerService);
-  }));
+      fixture = TestBed.createComponent(ProfilePage);
+      component = fixture.componentInstance;
+      masterService = TestBed.inject(MasterManagerService);
+    }),
+  );
   it('should create', () => {
     expect(component).toBeDefined();
   });
