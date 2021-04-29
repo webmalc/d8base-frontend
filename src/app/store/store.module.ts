@@ -6,6 +6,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UserSavedProfessionalState } from './current-user/saved-professionals/saved-professionals.state';
 import { UserContactState } from './current-user/user-contacts/user-contacts.state';
+import { UserLocationState } from './current-user/user-locations/user-locations.state';
 import { ProfessionalContactState } from './professional-page/professional-contacts/professional-contacts.state';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ProfessionalContactState } from './professional-page/professional-conta
       ProfessionalPageState,
       UserSavedProfessionalState,
       UserContactState,
+      UserLocationState,
       ProfessionalContactState,
     ], {
       developmentMode: !environment.production,

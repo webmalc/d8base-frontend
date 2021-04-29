@@ -23,6 +23,7 @@ import { UserSavedProfessionalState } from './saved-professionals/saved-professi
 import * as UserContactActions from './user-contacts/user-contacts.actions';
 import { UserContactState } from './user-contacts/user-contacts.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
+import { UserLocationState } from './user-locations/user-locations.state';
 
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
@@ -37,7 +38,7 @@ export const isAuthenticated = (state: CurrentUserStateModel): boolean => {
 @State<CurrentUserStateModel>({
   name: 'currentUser',
   defaults: notLoadedState,
-  children: [UserLanguageState, UserSavedProfessionalState, UserContactState],
+  children: [UserLanguageState, UserSavedProfessionalState, UserContactState, UserLocationState],
 })
 @Injectable()
 export class CurrentUserState implements NgxsOnInit {
