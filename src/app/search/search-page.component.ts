@@ -8,7 +8,7 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import { Platform } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { Observable, of, Subject } from 'rxjs';
-import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
+import { first, switchMap, takeUntil } from 'rxjs/operators';
 import { Search, UserLocation } from '../api/models';
 import { SearchService } from '../api/services';
 import { SearchFilterStateConverter } from './services/search-filter-state-converter.service';
@@ -97,12 +97,11 @@ export class SearchPage implements OnInit, AfterViewInit {
         switchMap(params => {
           const isParamsEmpty = !Object.keys(params).length;
           if (isParamsEmpty) {
-            return this.defaultLocation$.pipe(filter(defaultLocation => Boolean(defaultLocation)));
+            return this.defaultLocation$.pipe(first(defaultLocation => Boolean(defaultLocation)));
           }
           return of(params);
         }),
         switchMap(params => this.searchFilterStateConverter.getSearchFilterState(params)),
-        takeUntil(this.ngUnsubscribe$),
       )
       .subscribe(params => {
         this.state.searchForm.patchValue(params);

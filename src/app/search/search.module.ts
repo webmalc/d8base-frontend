@@ -16,7 +16,6 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { SearchFilterStateConverter } from './services/search-filter-state-converter.service';
 import { SearchPage } from './search-page.component';
 import { SearchPageRoutingModule } from './search-routing.module';
-import { SearchFilterStateService } from './services/search-filter-state.service';
 
 @NgModule({
   imports: [
@@ -40,6 +39,6 @@ import { SearchFilterStateService } from './services/search-filter-state.service
     SearchResultComponent,
   ],
   exports: [SearchFiltersComponent],
-  providers: [SearchFilterStateService, SearchFilterStateConverter],
+  providers: [SearchFilterStateConverter],
 })
 export class SearchPageModule {}
