@@ -18,7 +18,7 @@ import { map, take, takeUntil } from 'rxjs/operators';
 export class StepContainerComponent implements OnInit, OnDestroy {
   public currentStep$: Observable<StepModel> = this.wizardState.getCurrentStep();
   public isNextDisabled$: Observable<boolean> = this.stepComponent.isValid$.pipe(map(value => !value));
-  public isPrevDisabled$: Observable<boolean> = this.wizardState.isAbleToPrev().pipe(map(value => !value));
+  public isPrevDisabled$: Observable<boolean> = this.wizardState.isFirstStep().pipe(map(value => !value));
   public isLastStep$: Observable<boolean> = this.wizardState.isLastStep();
   public context$: Observable<StepContext> = this.wizardState.getContext();
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(

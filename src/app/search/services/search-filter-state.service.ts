@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { SearchFilterFormFields, SearchFilterFormGroups } from '../const/search-filters-form';
 import { SearchFilterStateConverter } from './search-filter-state-converter.service';
 
@@ -51,7 +51,7 @@ export class SearchFilterStateService {
 
   public minDate: string;
   public maxDate: string;
-  private readonly doSearch$ = new ReplaySubject<void>(1);
+  private readonly doSearch$ = new Subject<void>();
 
   public get isDoingSearch$(): Observable<void> {
     return this.doSearch$.asObservable();

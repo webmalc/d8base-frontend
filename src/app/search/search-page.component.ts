@@ -1,14 +1,9 @@
-import { Location } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from '@app/core/models/category';
 import { NgDestroyService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
-import { MainPageSearchInterface } from '@app/main/interfaces/main-page-search-interface';
-import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import { Reinitable } from '@app/shared/abstract/reinitable';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Platform } from '@ionic/angular';
 import { Select } from '@ngxs/store';

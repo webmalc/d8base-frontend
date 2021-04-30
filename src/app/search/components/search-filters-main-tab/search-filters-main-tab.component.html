@@ -10,7 +10,6 @@
       <ionic-selectable
         (onChange)="onCountryChange()"
         [items]="countries$ | async"
-        [canSearch]="true"
         [shouldFocusSearchbar]="true"
         [hasVirtualScroll]="true"
         [formControl]="form.get([formGroups.location, formFields.location.country])"
