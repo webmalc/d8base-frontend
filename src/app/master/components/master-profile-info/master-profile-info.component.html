@@ -26,11 +26,11 @@
     </ion-list-header>
     <ng-container *ngIf="context.canEdit; else viewContacts">
       <app-contacts-edit
-      *appIfSpinner="contactsWithDefault$ | async as contacts"
-      [contacts]="contacts"
-      addNewContactUrl="{{ addUrl }}"
-      editContactUrl="{{ editUrl }}"
-      editDefaultContactUrl="{{ editDefaultUrl }}"
+        *appIfSpinner="contactsWithDefault$ | async as contacts"
+        [contacts]="contacts"
+        addNewContactUrl="{{ addUrl }}"
+        editContactUrl="{{ editUrl }}"
+        editDefaultContactUrl="{{ editDefaultUrl }}"
       ></app-contacts-edit>
     </ng-container>
     <ng-template #viewContacts>
@@ -44,25 +44,27 @@
         <h1>{{ 'master-profile.info.master-location' | translate }}</h1>
       </ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let masterLocation of locations$ | async" lines="none">
-      <ion-label>
-        {{ masterLocation.text }}
-      </ion-label>
-      <ion-button
-        slot="end"
-        color="medium"
-        fill="clear"
-        routerDirection="forward"
-        routerLink="location-edit/{{ masterLocation.id }}"
-        routerLinkActive="active"
-        *ngIf="context.canEdit"
-      >
-        <ion-icon name="create-outline"></ion-icon>
-      </ion-button>
-    </ion-item>
-    <app-add-button *ngIf="context.canEdit" routerLink="location-add/">
-      {{ 'list-item.add-new-address' | translate }}
-    </app-add-button>
+    <ng-container *ngIf="context.canEdit; else viewLocations">
+      <ion-item *ngFor="let location of editableLocations$ | async" lines="none">
+        <ion-button
+          slot="end"
+          color="medium"
+          fill="clear"
+          routerDirection="forward"
+          routerLink="location-edit/{{ location.id }}"
+          routerLinkActive="active"
+        >
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <app-location-viewer [location]="location"></app-location-viewer>
+      </ion-item>
+      <app-add-button routerLink="location-add/"> {{ 'list-item.add-new-address' | translate }} </app-add-button>
+    </ng-container>
+    <ng-template #viewLocations>
+      <ion-item *ngFor="let location of context.professional.locations" lines="none">
+        <app-location-viewer [location]="location"></app-location-viewer>
+      </ion-item>
+    </ng-template>
   </ion-list>
 
   <app-collapse-item title="{{ 'master-profile.info.about' | translate }}">
@@ -90,7 +92,9 @@
         <ion-label>
           {{ 'master-profile.info.professional-experience' | translate }}
         </ion-label>
-        <ion-text> {{ context.professional.experience }} {{ declinationYears(context.professional.experience) | translate }} </ion-text>
+        <ion-text>
+          {{ context.professional.experience }} {{ declinationYears(context.professional.experience) | translate }}
+        </ion-text>
       </ion-item>
       <ion-item *ngIf="context.professional.level">
         <ion-label>
@@ -124,7 +128,8 @@
           {{ 'master-profile.info.age' | translate }}
         </ion-label>
         <ion-text>
-          {{ getYearsFromBirthday(context.user.birthday) }} {{ declinationYears(getYearsFromBirthday(context.user.birthday)) | translate }}
+          {{ getYearsFromBirthday(context.user.birthday) }}
+          {{ declinationYears(getYearsFromBirthday(context.user.birthday)) | translate }}
         </ion-text>
       </ion-item>
       <ion-item *ngIf="context.user.nationality">
@@ -148,8 +153,11 @@
   </app-collapse-item>
 
   <app-collapse-item title="{{ 'master-profile.info.experience' | translate }}">
-    <ion-item lines="none" class="ion-item-no-padding-right"
-              *ngFor="let experience of context.professional.experience_entries">
+    <ion-item
+      lines="none"
+      class="ion-item-no-padding-right"
+      *ngFor="let experience of context.professional.experience_entries"
+    >
       <app-experience [editable]="context.canEdit" [exp]="experience" class="width100"></app-experience>
     </ion-item>
     <ng-container *ngIf="!context.professional.experience_entries.length" [ngTemplateOutlet]="noData"></ng-container>

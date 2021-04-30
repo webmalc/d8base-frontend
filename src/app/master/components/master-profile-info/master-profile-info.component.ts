@@ -8,6 +8,8 @@ import { FullLocationService } from '@app/core/services/location/full-location.s
 import { Language } from '@app/profile/models/language';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
+import ProfessionalLocationSelectors from '@app/store/professional-page/professional-locations/professional-locations.selectors';
+import { ProfessionalLocationStateModel } from '@app/store/professional-page/professional-locations/professional-locations.state';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
@@ -25,6 +27,9 @@ export class MasterProfileInfoComponent {
 
   @Select(ProfessionalContactSelectors.contacts)
   public contacts$: Observable<ProfessionalContactStateModel>;
+
+  @Select(ProfessionalLocationSelectors.locations)
+  public editableLocations$: Observable<ProfessionalLocationStateModel>;
 
   public contactsWithDefault$: Observable<ContactUnion[]>;
 

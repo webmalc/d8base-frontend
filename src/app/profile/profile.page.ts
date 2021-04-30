@@ -50,8 +50,6 @@ export class ProfilePage {
   public avatarSelector = new FormControl();
 
   public formFields = ProfileFormFields;
-  // public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
-  // public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
 
   constructor(
     public readonly profileService: ProfileService,
@@ -64,7 +62,6 @@ export class ProfilePage {
       map(profile => profile.avatar || HelperService.getNoAvatarLink()),
     );
     this.subOnAvatarChange();
-    // this.initLocation();
     this.initContactsWithDefault();
   }
 
@@ -73,13 +70,6 @@ export class ProfilePage {
       .pipe(takeUntil(this.ngDestroy$))
       .subscribe(avatar => this.profileService.updateUser({ avatar }));
   }
-
-  // private initLocation(): void {
-  //   this.profileService.initLocation().subscribe(locationList => {
-  //     this.defaultLocation$.next(locationList.pop() as UserLocation);
-  //     this.additionalLocationsList$.next(locationList as UserLocation[]);
-  //   });
-  // }
 
   private initContactsWithDefault(): void {
     this.contactsWithDefault$ = this.contactsMergeToDefaultService.contactsMergedWithDefault(this.contacts$);

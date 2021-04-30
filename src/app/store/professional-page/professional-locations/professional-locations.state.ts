@@ -61,10 +61,10 @@ export class ProfessionalLocationState {
   @Action(ProfessionalLocationActions.DeleteProfessionalLocation)
   public deleteProfessionalLocation(
     { setState, getState }: StateContext<ProfessionalLocationStateModel>,
-    { locationId: LocationIdToDelete }: ProfessionalLocationActions.DeleteProfessionalLocation,
+    { locationId: locationIdToDelete }: ProfessionalLocationActions.DeleteProfessionalLocation,
   ) {
     const locations = getState();
-    const idToDelete = locations.find(({ id }) => id === LocationIdToDelete)?.id;
+    const idToDelete = locations.find(({ id }) => id === locationIdToDelete)?.id;
     return this.accountsService.accountsProfessionalLocationsDelete(idToDelete).pipe(
       tap(() => {
         setState(locations.filter(({ id }) => id !== idToDelete));
