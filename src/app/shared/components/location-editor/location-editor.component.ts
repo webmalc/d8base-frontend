@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserLocation } from '@app/api/models';
@@ -53,12 +52,13 @@ export class LocationEditorComponent implements OnInit {
   private _item: Partial<UserLocation> = {};
 
   constructor(
-    protected readonly location: Location,
     protected readonly timezone: TimezoneService,
     public readonly fullLocationService: FullLocationService,
     public readonly fb: FormBuilder,
-    private readonly $ngDestroy: NgDestroyService,
-  ) {}
+    private readonly destroy$: NgDestroyService,
+  ) {
+    this.handleControls();
+  }
 
   public get item(): Partial<UserLocation> {
     return this._item;
@@ -77,7 +77,6 @@ export class LocationEditorComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.handleControls();
     this.timezone.getTimezoneList().subscribe(data => this.timezoneList$.next(data));
   }
 
@@ -118,7 +117,7 @@ export class LocationEditorComponent implements OnInit {
   private handleDependentControls(control: string, dependentControls: string[]): void {
     this.form
       .get(control)
-      .valueChanges.pipe(takeUntil(this.$ngDestroy))
+      .valueChanges.pipe(takeUntil(this.destroy$))
       .subscribe(value => {
         const action = !value ? 'disable' : 'enable';
         dependentControls.forEach(control => {
