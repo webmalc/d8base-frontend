@@ -1,3 +1,4 @@
+/*eslint max-lines: ["error", 500]*/
 import { Injectable } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
@@ -8,21 +9,21 @@ import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interfac
 import { ApiClientService } from '@app/core/services/api-client.service';
 import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
 import { environment } from '@env/environment';
 import { Storage } from '@ionic/storage';
 import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
-import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
-
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
+import { guestState, notLoadedState } from './current-user.constants';
 import * as SavedUserProfessionalsActions from './saved-professionals/saved-professionals.actions';
-import { notLoadedState, guestState } from './current-user.constants';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
-import { UserLanguageState } from './user-language-state/user-language.state';
-import { UserContactState } from './user-contacts/user-contacts.state';
 import * as UserContactActions from './user-contacts/user-contacts.actions';
+import { UserContactState } from './user-contacts/user-contacts.state';
+import { UserLanguageState } from './user-language-state/user-language.state';
+
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
@@ -232,10 +233,58 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.UpdateProfile)
   public updateProfile(
-    { patchState }: StateContext<CurrentUserStateModel>,
-    { changes }: CurrentUserActions.ChangeUserSettings,
+    { patchState, dispatch, getState }: StateContext<CurrentUserStateModel>,
+    { changes }: CurrentUserActions.UpdateProfile,
   ) {
-    return this.api.accountsProfilePartialUpdate(changes).pipe(tap(profile => patchState({ profile })));
+    const { profile } = getState();
+    const existingEmail = profile.email;
+    const newEmail = changes.email;
+    return this.api.accountsProfilePartialUpdate(changes).pipe(
+      tap(profile => {
+        patchState({ profile });
+      }),
+      mergeMap(() => {
+        if (existingEmail !== newEmail) {
+          return dispatch(new CurrentUserActions.RegisterNewEmail(newEmail));
+        }
+        return of();
+      }),
+    );
+  }
+
+  @Action(CurrentUserActions.RegisterNewEmail)
+  public registerNewEmail({}: StateContext<CurrentUserStateModel>, { newEmail }: CurrentUserActions.RegisterNewEmail) {
+    return this.api.accountsRegisterEmailCreate({ email: newEmail });
+  }
+
+  @Action(CurrentUserActions.ResendEmailVerification)
+  public resendEmailVerification() {
+    return this.api.accountsResendVerifyRegistrationCreate();
+  }
+
+  @Action(CurrentUserActions.VerifyEmailAction)
+  public verifyEmail(
+    { patchState, getState }: StateContext<CurrentUserStateModel>,
+    { verifyEmail }: CurrentUserActions.VerifyEmailAction,
+  ) {
+    const { profile } = getState();
+    const { email, user_id } = verifyEmail;
+
+    if (profile.id !== parseInt(user_id, 10)) {
+      throw Error('Try to change another\'s user email');
+    }
+
+    return this.api.accountsVerifyEmailCreate(verifyEmail).pipe(
+      tap(() => {
+        patchState({
+          profile: {
+            ...profile,
+            email,
+            is_confirmed: true,
+          },
+        });
+      }),
+    );
   }
 
   @Action(CurrentUserActions.RefreshTokens)

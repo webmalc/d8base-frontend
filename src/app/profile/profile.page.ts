@@ -7,10 +7,11 @@ import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ProfileService } from '@app/profile/services/profile.service';
+import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
 import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
-import { Select } from '@ngxs/store';
+import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
@@ -30,6 +31,12 @@ export class ProfilePage {
   @Select(UserContactSelectors.contacts)
   public contacts$: Observable<UserContact[]>;
 
+  public newEmailRegistered$: Observable<CurrentUserActions.RegisterNewEmail['newEmail']> = this.actions$.pipe(
+    ofActionSuccessful(CurrentUserActions.RegisterNewEmail),
+    map((action: CurrentUserActions.RegisterNewEmail) => action.newEmail),
+    takeUntil(this.ngDestroy$),
+  );
+
   public contactsWithDefault$: Observable<UserContact[]>;
 
   public avatar$: Observable<string>;
@@ -43,6 +50,7 @@ export class ProfilePage {
     public readonly profileService: ProfileService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly ngDestroy$: NgDestroyService,
+    private readonly actions$: Actions,
   ) {
     this.avatar$ = this.profile$.pipe(
       filter(x => !!x),

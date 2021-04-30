@@ -1,7 +1,14 @@
 /* eslint-disable max-classes-per-file */
 
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
-import { DefaultRegisterUser, ProfessionalList, Profile, UserContact, UserLocation, UserSettings } from '@app/api/models';
+import {
+  DefaultRegisterUser,
+  ProfessionalList,
+  Profile,
+  UserLocation,
+  UserSettings,
+  VerifyEmail,
+} from '@app/api/models';
 
 export class Initialize {
   public static readonly type = '[CurrentUser] Try to authorize using a saved token';
@@ -87,18 +94,19 @@ export class CreateUserLocation {
 
   constructor(public location: UserLocation) {}
 }
-export class CreateUserContact {
-  public static readonly type = '[CurrentUser] Create user contact';
 
-  constructor(public сontact: UserContact) {}
+export class RegisterNewEmail {
+  public static readonly type = '[CurrentUser] Register new email';
+
+  constructor(public newEmail: Profile['email']) {}
 }
-export class DeleteUserContact {
-  public static readonly type = '[CurrentUser] Delete user contact';
 
-  constructor(public id: UserContact['id']) {}
+export class ResendEmailVerification {
+  public static readonly type = '[CurrentUser] Resend email verification';
 }
-export class UpdateUserContact {
-  public static readonly type = '[CurrentUser] Update user contact';
 
-  constructor(public сontact: Partial<UserContact>) {}
+export class VerifyEmailAction {
+  public static readonly type = '[CurrentUser] Verify email';
+
+  constructor(public verifyEmail: VerifyEmail) {}
 }

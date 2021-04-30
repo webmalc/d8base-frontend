@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { MainGuard } from './main.guard';
 
-const redirectTargetUrl = '/redirect-target';
+const redirectTargetUrl = 'redirect-target';
 const routeMock: any = { snapshot: {}};
 const routeStateMock: any = { snapshot: {}, url: redirectTargetUrl };
 

@@ -1,0 +1,16 @@
+<app-header></app-header>
+<ion-content>
+  <app-content-wrapper>
+    <app-column-header [previousLocationFallback]="'/profile'">
+      {{ 'profile-form.email-change.email-verification-title' | translate }}
+    </app-column-header>
+    <ng-container *appIfSpinner="!isLoading">
+      <ion-item *ngIf="success; else failure" lines="none">
+        {{ 'profile-form.email-change.email-verified-success' | translate: { newEmail: newEmail } }}
+      </ion-item>
+      <ng-template #failure>
+        <ion-item lines="none"> {{ 'profile-form.email-change.email-verified-failure' | translate }} </ion-item>
+      </ng-template>
+    </ng-container>
+  </app-content-wrapper>
+</ion-content>

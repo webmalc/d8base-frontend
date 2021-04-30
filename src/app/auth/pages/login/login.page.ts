@@ -65,7 +65,7 @@ export class LoginPage {
         takeUntil(this.destroy$),
       )
       .subscribe(({ redirectTo }) => {
-        this.redirectTo = redirectTo;
+        this.redirectTo = decodeURIComponent(redirectTo);
       });
   }
 }

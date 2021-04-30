@@ -26,17 +26,18 @@ export class NotificationWorkerService {
     return new Promise<void>(async resolve => {
       const registration = await navigator.serviceWorker?.register('../../../firebase-messaging-sw.js');
       if (!NotificationWorkerService.isFirebaseSupported()) {
-        resolve();
+        console.warn('Firebase is not supported.');
 
+        resolve();
         return;
       }
+      console.warn('Firebase is supported.');
       const messaging = firebase.messaging();
       messaging.useServiceWorker(registration);
       messaging.usePublicVapidKey(environment.firebaseConfig.vapidKey);
       messaging.onMessage((payload: { notification: { click_action: string } }) => {
         this.messageReceived$.next(true);
       });
-
       messaging.onTokenRefresh(() => {
         messaging
           .getToken()

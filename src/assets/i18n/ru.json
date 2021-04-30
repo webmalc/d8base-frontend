@@ -187,7 +187,13 @@
     "nationality": "Национальность",
     "languages": "Языки общения",
     "not-specified": "Не указано",
-    "email": "E-меил подтвержден"
+    "email": "E-меил подтвержден",
+    "email-change" : {
+      "email-registered": "Письмо с подтверждением нового адреса электронной почты было направлено на '{{ newEmail }}'",
+      "email-verified-success": "Адрес электронной почты изменен на '{{ newEmail }}'",
+      "email-verified-failure": "Адрес электронной почты не удалось изменить",
+      "email-verification-title": "Проверка изменения адреса электронной почты"
+    }
   },
   "profile-main-edit": {
     "main": "Основное"
