@@ -6,7 +6,9 @@ import { Action, Select, State, StateContext } from '@ngxs/store';
 import { forkJoin, Observable } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import * as ProfessionalContactActions from './professional-contacts/professional-contacts.actions';
+import * as ProfessionalLocationActions from './professional-locations/professional-locations.actions';
 import { ProfessionalContactState } from './professional-contacts/professional-contacts.state';
+import { ProfessionalLocationState } from './professional-locations/professional-locations.state';
 import ProfessionalPageStateModel from './professional-page-state.model';
 import * as ProfessionalPageActions from './professional-page.actions';
 import { defaultState } from './professional-page.constants';
@@ -14,7 +16,7 @@ import { defaultState } from './professional-page.constants';
 @State<ProfessionalPageStateModel>({
   name: 'professionalPage',
   defaults: defaultState,
-  children: [ProfessionalContactState],
+  children: [ProfessionalContactState, ProfessionalLocationState],
 })
 @Injectable()
 export class ProfessionalPageState {
@@ -38,6 +40,7 @@ export class ProfessionalPageState {
         const canEdit = professional.user.id === profile.id;
         if (canEdit) {
           dispatch(new ProfessionalContactActions.LoadAllProfessionalContacts());
+          dispatch(new ProfessionalLocationActions.LoadAllProfessionalLocations());
         }
         setState({
           user: professional.user,

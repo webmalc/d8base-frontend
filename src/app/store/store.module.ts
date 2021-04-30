@@ -8,6 +8,7 @@ import { UserSavedProfessionalState } from './current-user/saved-professionals/s
 import { UserContactState } from './current-user/user-contacts/user-contacts.state';
 import { UserLocationState } from './current-user/user-locations/user-locations.state';
 import { ProfessionalContactState } from './professional-page/professional-contacts/professional-contacts.state';
+import { ProfessionalLocationState } from './professional-page/professional-locations/professional-locations.state';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { ProfessionalContactState } from './professional-page/professional-conta
       UserContactState,
       UserLocationState,
       ProfessionalContactState,
+      ProfessionalLocationState,
     ], {
       developmentMode: !environment.production,
       selectorOptions: { suppressErrors: false },
