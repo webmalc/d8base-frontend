@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Profile, UserLocation } from '@app/api/models';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -15,7 +16,7 @@ export class UserManagerService {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
-  @Select(CurrentUserSelectors.defaultLocation)
+  @Select(UserLocationSelectors.defaultLocation)
   public defaultLocation$: Observable<UserLocation>;
 
   public getCurrentUser(): Observable<Profile> {

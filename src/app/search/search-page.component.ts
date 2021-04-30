@@ -4,7 +4,7 @@ import { NgDestroyService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Platform } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { Observable, of, Subject } from 'rxjs';
@@ -21,7 +21,7 @@ import { SearchFilterStateConverter } from './services/search-filter-state-conve
   providers: [NgDestroyService],
 })
 export class SearchPage implements OnInit, AfterViewInit {
-  @Select(CurrentUserSelectors.defaultLocation)
+  @Select(UserLocationSelectors.defaultLocation)
   public defaultLocation$: Observable<UserLocation>;
 
   public searchResult: Search[];

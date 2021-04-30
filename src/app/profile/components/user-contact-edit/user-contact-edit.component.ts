@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Contact, Country, UserContact } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsApiCache } from '@app/core/services/cache';
-import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import * as UserContactActions from '@app/store/current-user/user-contacts/user-contacts.actions';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
 import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ export class UserContactEditComponent implements OnInit {
   @Select(UserContactSelectors.contacts)
   public contacts$: Observable<UserContact[]>;
 
-  @Select(CurrentUserSelectors.profileCountry)
+  @Select(UserLocationSelectors.defaultCountry)
   public profileCountry$: Observable<Country['id']>;
 
   public selectOptions: Contact[];

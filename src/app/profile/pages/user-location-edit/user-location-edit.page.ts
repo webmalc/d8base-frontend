@@ -1,48 +1,69 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserLocation } from '@app/api/models';
-import { AccountsService } from '@app/api/services';
-import { ClientLocationInterface } from '@app/shared/interfaces/client-location-interface';
+import { NgDestroyService } from '@app/core/services';
+import * as UserLocationActions from '@app/store/current-user/user-locations/user-locations.actions';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
+import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-location-edit',
   templateUrl: './user-location-edit.page.html',
   styleUrls: ['./user-location-edit.page.scss'],
+  providers: [NgDestroyService],
 })
 export class UserLocationEditPage implements OnInit {
+  @Select(UserLocationSelectors.locations)
+  public locations$: Observable<UserLocation[]>;
 
-  public userLocation: UserLocation;
+  public location$: Observable<UserLocation>;
   private locationId: number;
 
   constructor(
-    private readonly api: AccountsService,
-    private readonly location: Location,
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly actions$: Actions,
+    private readonly destroy$: NgDestroyService,
     private readonly route: ActivatedRoute,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.locationId = parseInt(this.route.snapshot.paramMap.get('location-id'), 10);
-    if (this.locationId) {
-      this.api.accountsLocationsRead(this.locationId).subscribe(
-        location => this.userLocation = location,
-      );
-    } else {
-      this.userLocation = {};
-    }
+
+    this.location$ = this.locations$.pipe(
+      filter(locations => Boolean(locations)),
+      map(locations => locations?.find(({ id }) => this.locationId === id) || {}),
+    );
+
+    this.subscribeToActionSuccess();
   }
 
-  public save(item: UserLocation): void {
+  public save(location: UserLocation): void {
     if (this.locationId) {
-      this.api.accountsLocationsUpdate({ id: this.locationId, data: item })
-        .subscribe(() => this.location.back());
-      return;
+      this.store.dispatch(new UserLocationActions.UpdateUserLocation(location));
+    } else {
+      this.store.dispatch(new UserLocationActions.CreateUserLocation(location));
     }
-    this.api.accountsLocationsCreate(item).subscribe(() => this.location.back());
   }
 
   public delete(id: number): void {
-    this.api.accountsLocationsDelete(id).subscribe(() => this.location.back());
+    this.store.dispatch(new UserLocationActions.DeleteUserLocation(id));
+  }
+
+  private subscribeToActionSuccess(): void {
+    this.actions$
+      .pipe(
+        ofActionSuccessful(
+          UserLocationActions.CreateUserLocation,
+          UserLocationActions.DeleteUserLocation,
+          UserLocationActions.UpdateUserLocation,
+        ),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        this.router.navigate(['/profile']);
+      });
   }
 }

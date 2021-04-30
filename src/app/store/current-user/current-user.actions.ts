@@ -34,10 +34,6 @@ export class LoadProfile {
   public static readonly type = '[CurrentUser] Load user profile';
 }
 
-export class LoadUserLocations {
-  public static readonly type = '[CurrentUser] Load user locations';
-}
-
 export class LoadProfessionals {
   public static readonly type = '[CurrentUser] Load professionals list';
 }
@@ -87,12 +83,6 @@ export class UpdateProfile {
   public static readonly type = '[CurrentUser] Change user profile';
 
   constructor(public changes: Partial<Profile>) {}
-}
-
-export class CreateUserLocation {
-  public static readonly type = '[CurrentUser] Create user location';
-
-  constructor(public location: UserLocation) {}
 }
 
 export class RegisterNewEmail {

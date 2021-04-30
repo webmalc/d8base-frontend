@@ -1,6 +1,5 @@
-import { Country, ProfessionalList, Profile, UserLocation, UserSettings } from '@app/api/models';
+import { ProfessionalList, Profile, UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
-import { defaultLocation } from '@app/store/current-user/current-user.constants';
 import { Selector } from '@ngxs/store';
 import { CurrentUserStateModel } from './current-user-state.model';
 import { CurrentUserState, isAuthenticated } from './current-user.state';
@@ -37,11 +36,6 @@ export default class CurrentUserSelectors {
   }
 
   @Selector([CurrentUserState])
-  public static defaultLocation(data: CurrentUserStateModel): UserLocation {
-    return !data.locations ? null : data.locations[0] ?? defaultLocation;
-  }
-
-  @Selector([CurrentUserState])
   public static settings(data: CurrentUserStateModel): UserSettings {
     return data.settings;
   }
@@ -54,10 +48,5 @@ export default class CurrentUserSelectors {
   @Selector([CurrentUserState])
   public static isAuthenticated(data: CurrentUserStateModel): boolean {
     return isAuthenticated(data);
-  }
-
-  @Selector([CurrentUserSelectors.defaultLocation])
-  public static profileCountry(data: UserLocation): Country['id'] {
-    return data?.country;
   }
 }

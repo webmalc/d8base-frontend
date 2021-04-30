@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Contact, Country, ProfessionalContact, ProfessionalList } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsApiCache } from '@app/core/services/cache';
-import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import * as ProfessionalContactActions from '@app/store/professional-page/professional-contacts/professional-contacts.actions';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
@@ -22,7 +22,7 @@ export class ProfessionalContactEditComponent implements OnInit {
   @Select(ProfessionalContactSelectors.contacts)
   public contacts$: Observable<ProfessionalContact[]>;
 
-  @Select(CurrentUserSelectors.profileCountry)
+  @Select(UserLocationSelectors.defaultCountry)
   public profileCountry$: Observable<Country['id']>;
 
   @Select(ProfessionalPageSelectors.professional)

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Contact, Country } from '@app/api/models';
-import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { ContactsApiCache } from './cache';
   providedIn: 'root',
 })
 export class ContactsMergeToDefaultService {
-  @Select(CurrentUserSelectors.profileCountry)
+  @Select(UserLocationSelectors.defaultCountry)
   public profileCountry$: Observable<Country['id']>;
 
   constructor(private readonly contactsApiCache: ContactsApiCache) {}

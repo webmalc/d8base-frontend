@@ -3,8 +3,8 @@
   <app-content-wrapper>
     <app-location-editor
       (delete)="delete($event.id)"
-      (save)='save($event)'
-      [item]="userLocation"
+      (save)="save($event)"
+      [item]="location$ | async"
     ></app-location-editor>
   </app-content-wrapper>
 </ion-content>
