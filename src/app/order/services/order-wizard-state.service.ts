@@ -86,9 +86,8 @@ export class OrderWizardStateService {
   }
 
   public isFirstStep(): Observable<boolean> {
-    return this.currentStepId$.asObservable().pipe(
+    return this.currentStepId$.pipe(
       map(id => this.steps.ids.indexOf(id) === 0),
-      first(),
     );
   }
 
