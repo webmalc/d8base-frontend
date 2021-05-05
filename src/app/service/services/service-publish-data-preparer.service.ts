@@ -8,7 +8,6 @@ import { MasterSchedule } from '@app/master/models/master-schedule';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { FinalStepDataInterface } from '@app/service/interfaces/final-step-data-interface';
-import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
@@ -93,14 +92,13 @@ export class ServicePublishDataPreparerService {
 
   private getNewMaster(): ProfessionalList {
     const stepOneData = this.servicePublishDataHolder.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
-    const stepFiveData = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
     const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six);
 
     return !this.servicePublishDataHolder.isset(ServicePublishSteps.Five) ? null : {
       subcategory: stepOneData.subcategory.id,
       company: stepSixData?.is_company === 'company' ? stepSixData?.company_name : null,
       description: stepSixData?.description,
-      name: stepSixData?.name || `${stepFiveData.first_name} ${stepFiveData.last_name}`,
+      name: stepSixData?.name,
       level: stepSixData?.level,
     };
   }

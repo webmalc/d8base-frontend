@@ -3,7 +3,7 @@ import { Category, City, Country, Language, Subcategory } from '@app/api/models'
 import { ProfessionalsService, SearchService } from '@app/api/services';
 import { CitiesApiCache, CountriesApiCache, LanguagesApiCache } from '@app/core/services/cache';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
-import { combineLatest, forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const serviceTypesParams = (data: SearchFilterStateInterface): string => {
@@ -41,7 +41,7 @@ export class SearchFilterStateConverter {
       return of();
     }
 
-    return combineLatest(this.getExpandedParams(params)).pipe(
+    return forkJoin(this.getExpandedParams(params)).pipe(
       map(
         ([countries, city, categories, subcategories, languages]: [
           Country[],

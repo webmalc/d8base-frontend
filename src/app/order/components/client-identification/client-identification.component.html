@@ -1,7 +1,8 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper *ngIf="context$ | async as context">
-    <app-column-header [previousLocationFallback]="'/service/' + context.service.id">{{ 'order.title' | translate }}</app-column-header>
+    <app-column-header
+      [previousLocationFallback]="'/service/' + context.service.id">{{ 'order.title' | translate }}</app-column-header>
     <ion-list>
       <ion-list-header class="fs20">
         {{ 'order.selected-service' | translate }}
@@ -18,46 +19,50 @@
           <ion-label position="floating">{{ 'order.email' | translate }}</ion-label>
           <ion-input type="email" inputmode="email" [formControl]="email"></ion-input>
         </ion-item>
-        <app-form-control-error [control]="email"> </app-form-control-error>
+        <app-form-control-error [control]="email"></app-form-control-error>
       </ion-list>
 
-      <ion-row class="registration-form">
-        <ion-col *ngIf="showRegistrationForm">
-          <ng-container *ngIf="isRegistered">
-            <ion-item>
-              <ion-label position="stacked" class="ion-text-wrap">
-                {{ 'order.registered-user' | translate }}
-              </ion-label>
-              <ion-input type="password" inputmode="password" [formControl]="password"></ion-input>
-            </ion-item>
-          </ng-container>
-          <ng-container *ngIf="!isRegistered">
-            <ion-item>
-              <ion-label position="stacked" class="ion-text-wrap">
-                {{ 'order.new-user' | translate }}
-              </ion-label>
-              <ion-input type="password" inputmode="password" [formControl]="password"></ion-input>
-            </ion-item>
-            <app-form-control-error [control]="password"> </app-form-control-error>
-            <ion-item>
-              <ion-label position="stacked" class="ion-text-wrap">
-                {{ 'registration-form.confirm' | translate }}
-              </ion-label>
-              <ion-input type="password" inputmode="password" [formControl]="passwordConfirm"></ion-input>
-            </ion-item>
-            <app-form-control-error [control]="passwordConfirm"> </app-form-control-error>
-            <app-form-control-error [control]="form"> </app-form-control-error>
-            <ion-item>
-              <ion-label position="stacked" class="ion-text-wrap">
-                {{ 'registration-form.name' | translate }}
-              </ion-label>
-              <ion-input [formControl]="name"></ion-input>
-            </ion-item>
-            <app-form-control-error [control]="name"> </app-form-control-error>
-            <app-country-selector [formControl]="country"></app-country-selector>
-          </ng-container>
-        </ion-col>
-      </ion-row>
+      <div class="registration-form">
+        <ng-container *ngIf="showRegistrationForm && isRegistered">
+          <ion-item>
+            <ion-label position="stacked" class="ion-text-wrap">
+              {{ 'order.registered-user' | translate }}
+            </ion-label>
+            <ion-input type="password" inputmode="password" [formControl]="password"></ion-input>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngIf="showRegistrationForm && !isRegistered">
+          <ion-item>
+            <ion-label position="stacked" class="ion-text-wrap label-for-required-input">
+              {{ 'order.new-user' | translate }}
+            </ion-label>
+            <ion-input type="password" inputmode="password" [formControl]="password"></ion-input>
+          </ion-item>
+          <app-form-control-error [control]="password"></app-form-control-error>
+          <ion-item>
+            <ion-label position="stacked" class="ion-text-wrap label-for-required-input">
+              {{ 'registration-form.confirm' | translate }}
+            </ion-label>
+            <ion-input type="password" inputmode="password" [formControl]="passwordConfirm"></ion-input>
+          </ion-item>
+          <app-form-control-error [control]="passwordConfirm"></app-form-control-error>
+          <app-form-control-error [control]="form"></app-form-control-error>
+          <app-country-selector [formControl]="country"></app-country-selector>
+          <ion-item>
+            <ion-label position="floating" class="ion-text-wrap label-for-required-input">
+              {{ 'registration-form.name' | translate }}
+            </ion-label>
+            <ion-input [formControl]="name"></ion-input>
+          </ion-item>
+          <app-form-control-error [control]="name"></app-form-control-error>
+          <ion-item>
+            <ion-label position="floating" class="ion-text-wrap">
+              {{ 'registration-form.last-name' | translate }}
+            </ion-label>
+            <ion-input [formControl]="lastName"></ion-input>
+          </ion-item>
+        </ng-container>
+      </div>
 
       <ion-row>
         <ion-col>

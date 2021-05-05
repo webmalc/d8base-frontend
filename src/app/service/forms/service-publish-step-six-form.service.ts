@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ServicePublishStepSixFormFields } from '@app/service/enums/service-publish-step-six-form-fields';
 import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
 
@@ -23,7 +23,7 @@ export class ServicePublishStepSixFormService {
       [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ?? 'person'],
       [ServicePublishStepSixFormFields.CompanyName]: [data?.company_name],
       [ServicePublishStepSixFormFields.Description]: [data?.description],
-      [ServicePublishStepSixFormFields.Specialization]: [data?.name],
+      [ServicePublishStepSixFormFields.Specialization]: [data?.name, Validators.required],
       [ServicePublishStepSixFormFields.Level]: [data?.level],
     }, { validators: ServicePublishStepSixFormService.companyNameValidator });
   }
