@@ -6,7 +6,7 @@ import * as UserLocationActions from '@app/store/current-user/user-locations/use
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-location-edit',
@@ -19,7 +19,10 @@ export class UserLocationEditPage implements OnInit {
   public locations$: Observable<UserLocation[]>;
 
   public location$: Observable<UserLocation>;
-  private locationId: number;
+
+  private readonly locationId$: Observable<number> = this.route.params.pipe(
+    map(params => parseInt(params['location-id'], 10)),
+  );
 
   constructor(
     private readonly store: Store,
@@ -30,22 +33,24 @@ export class UserLocationEditPage implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.locationId = parseInt(this.route.snapshot.paramMap.get('location-id'), 10);
-
     this.location$ = this.locations$.pipe(
       filter(locations => Boolean(locations)),
-      map(locations => locations?.find(({ id }) => this.locationId === id) || {}),
+      withLatestFrom(this.locationId$),
+      map(([locations, locationId]) => locations?.find(({ id }) => locationId === id) || {}),
+      takeUntil(this.destroy$),
     );
 
     this.subscribeToActionSuccess();
   }
 
   public save(location: UserLocation): void {
-    if (this.locationId) {
-      this.store.dispatch(new UserLocationActions.UpdateUserLocation(location));
-    } else {
-      this.store.dispatch(new UserLocationActions.CreateUserLocation(location));
-    }
+    this.locationId$.pipe(takeUntil(this.destroy$)).subscribe(locationId => {
+      if (locationId) {
+        this.store.dispatch(new UserLocationActions.UpdateUserLocation(location));
+      } else {
+        this.store.dispatch(new UserLocationActions.CreateUserLocation(location));
+      }
+    });
   }
 
   public delete(id: number): void {

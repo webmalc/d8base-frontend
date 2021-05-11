@@ -1,17 +1,13 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfessionalList, ProfessionalLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
-import { LocationService } from '@app/core/services/location.service';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
-import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
 import * as ProfessionalLocationActions from '@app/store/professional-page/professional-locations/professional-locations.actions';
 import ProfessionalLocationSelectors from '@app/store/professional-page/professional-locations/professional-locations.selectors';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { filter, map, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-location-edit',
@@ -26,7 +22,6 @@ export class MasterLocationEditPage implements OnInit {
   @Select(ProfessionalLocationSelectors.locations)
   public locations$: Observable<ProfessionalLocation[]>;
 
-  public locationId: ProfessionalLocation['id'];
   public location$: Observable<ProfessionalLocation>;
 
   constructor(
@@ -38,14 +33,17 @@ export class MasterLocationEditPage implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.locationId = this.getItemId();
-
     this.location$ = this.locations$.pipe(
       filter(locations => Boolean(locations)),
-      withLatestFrom(this.professional$),
-      map(
-        ([locations, professional]) =>
-          locations?.find(({ id }) => this.locationId === id) || { professional: professional?.id },
+      switchMap(locations =>
+        combineLatest([this.professional$, this.route.params]).pipe(
+          map(
+            ([professional, params]) =>
+              locations?.find(({ id }) => parseInt(params['location-id'], 10) === id) || {
+                professional: professional?.id,
+              },
+          ),
+        ),
       ),
     );
 
@@ -62,10 +60,6 @@ export class MasterLocationEditPage implements OnInit {
 
   public delete(id: ProfessionalLocation['id']): void {
     this.store.dispatch(new ProfessionalLocationActions.DeleteProfessionalLocation(id));
-  }
-
-  private getItemId(): number {
-    return parseInt(this.route.snapshot.paramMap.get('location-id'), 10);
   }
 
   private subscribeToActionSuccess(): void {

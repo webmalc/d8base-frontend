@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { UserLocationEditPage } from './user-location-edit.page';
 
@@ -16,12 +17,9 @@ describe('UserLocationEditPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              snapshot: {
-                paramMap: {
-                  get(): string {
-                    return '';
-                  },
-                },
+              params: {
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                pipe: () => of(),
               },
             },
           },
