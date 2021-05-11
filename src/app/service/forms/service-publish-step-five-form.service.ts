@@ -14,7 +14,7 @@ export class ServicePublishStepFiveFormService {
   public createForm(data?: StepFiveDataInterface): void {
     this.form = this.formBuilder.group({
       [ServicePublishStepFiveFormFields.FirstName]: [data?.first_name, Validators.required],
-      [ServicePublishStepFiveFormFields.LastName]: [data?.last_name, Validators.required],
+      [ServicePublishStepFiveFormFields.LastName]: [data?.last_name ?? ''],
       [ServicePublishStepFiveFormFields.Gender]: [data?.gender ?? null],
       [ServicePublishStepFiveFormFields.Avatar]: [data?._avatar],
     });

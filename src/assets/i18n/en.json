@@ -238,6 +238,7 @@
   },
   "list-item": {
     "add-new": "Add new",
+    "add-new-contact": "Add new contact",
     "add-new-address": "Add new address"
   },
   "duration": {
@@ -309,8 +310,11 @@
       "first-info-row": "Enter address for e-mail notifications.",
       "email-title": "Your Email",
       "email-placeholder": "Enter Email",
-      "new-user": "You are new user",
-      "create-password": "Please think of a password for your account",
+      "new-user": "You are a new user",
+      "name-title": "Please introduce yourself",
+      "first-name-placeholder": "First name",
+      "last-name-placeholder": "Last name (optional)",
+      "create-password": "Think of a password for your account",
       "second-info-row": "You can edit the service after the publication",
       "password-placeholder": "Enter password",
       "password-info": "Minimum password length is 8 symbols",

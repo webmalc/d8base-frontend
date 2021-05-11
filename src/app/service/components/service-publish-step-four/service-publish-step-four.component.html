@@ -33,6 +33,23 @@
             <ion-item lines="none" class="fs13">
               <ion-text>
                 <div>{{ 'service-publish.step-four.new-user' | translate }}</div>
+                <div>{{ 'service-publish.step-four.name-title' | translate }}</div>
+              </ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label color="medium" position="floating" class="label-for-required-input">
+                {{ 'service-publish.step-four.first-name-placeholder' | translate }}
+              </ion-label>
+              <ion-input [formControlName]="formFields.FirstName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="medium" position="floating">
+                {{ 'service-publish.step-four.last-name-placeholder' | translate }}
+              </ion-label>
+              <ion-input [formControlName]="formFields.LastName"></ion-input>
+            </ion-item>
+            <ion-item lines="none" class="fs13">
+              <ion-text>
                 <div>{{ 'service-publish.step-four.create-password' | translate }}</div>
               </ion-text>
             </ion-item>
