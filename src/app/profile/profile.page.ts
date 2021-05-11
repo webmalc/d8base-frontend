@@ -11,8 +11,9 @@ import * as CurrentUserActions from '@app/store/current-user/current-user.action
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
 import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -31,6 +32,12 @@ export class ProfilePage {
   @Select(UserContactSelectors.contacts)
   public contacts$: Observable<UserContact[]>;
 
+  @Select(UserLocationSelectors.defaultLocation)
+  public defaultLocation$: Observable<UserLocation[]>;
+
+  @Select(UserLocationSelectors.additionalLocations)
+  public additionalLocationsList$: Observable<UserLocation[]>;
+
   public newEmailRegistered$: Observable<CurrentUserActions.RegisterNewEmail['newEmail']> = this.actions$.pipe(
     ofActionSuccessful(CurrentUserActions.RegisterNewEmail),
     map((action: CurrentUserActions.RegisterNewEmail) => action.newEmail),
@@ -43,8 +50,6 @@ export class ProfilePage {
   public avatarSelector = new FormControl();
 
   public formFields = ProfileFormFields;
-  public defaultLocation$: BehaviorSubject<UserLocation> = new BehaviorSubject<UserLocation>(null);
-  public additionalLocationsList$: BehaviorSubject<UserLocation[]> = new BehaviorSubject<UserLocation[]>([]);
 
   constructor(
     public readonly profileService: ProfileService,
@@ -57,7 +62,6 @@ export class ProfilePage {
       map(profile => profile.avatar || HelperService.getNoAvatarLink()),
     );
     this.subOnAvatarChange();
-    this.initLocation();
     this.initContactsWithDefault();
   }
 
@@ -65,13 +69,6 @@ export class ProfilePage {
     this.avatarSelector.valueChanges
       .pipe(takeUntil(this.ngDestroy$))
       .subscribe(avatar => this.profileService.updateUser({ avatar }));
-  }
-
-  private initLocation(): void {
-    this.profileService.initLocation().subscribe(locationList => {
-      this.defaultLocation$.next(locationList.pop() as UserLocation);
-      this.additionalLocationsList$.next(locationList as UserLocation[]);
-    });
   }
 
   private initContactsWithDefault(): void {

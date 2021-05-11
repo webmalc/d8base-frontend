@@ -6,7 +6,6 @@ export interface CurrentUserStateModel {
   tokens: AuthResponseInterface;
   professionals: ProfessionalList[];
   settings: UserSettings;
-  locations: UserLocation[];
 
   errors: string[];
 }

@@ -1,36 +1,36 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { of } from 'rxjs';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { UserLocationEditPage } from './user-location-edit.page';
 
 describe('UserLocationEditPage', () => {
   let component: UserLocationEditPage;
   let fixture: ComponentFixture<UserLocationEditPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [UserLocationEditPage],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute, useValue: {
-            snapshot: {
-              paramMap: {
-                get(): string {
-                  return '';
-                },
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [UserLocationEditPage],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              params: {
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                pipe: () => of(),
               },
             },
           },
-        },
-      ],
-    }).compileComponents();
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(UserLocationEditPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(UserLocationEditPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

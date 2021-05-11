@@ -15,6 +15,14 @@ const routes: Routes = [
   },
   {
     path: ':master-id',
+    pathMatch: 'full',
+    component: MasterPage,
+    resolve: {
+      context: ProfessionalResolver,
+    },
+  },
+  {
+    path: ':master-id',
     resolve: {
       context: ProfessionalResolver,
     },

@@ -23,6 +23,8 @@ import { UserSavedProfessionalState } from './saved-professionals/saved-professi
 import * as UserContactActions from './user-contacts/user-contacts.actions';
 import { UserContactState } from './user-contacts/user-contacts.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
+import { UserLocationState } from './user-locations/user-locations.state';
+import * as UserLocationActions from './user-locations/user-locations.actions';
 
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
@@ -37,7 +39,7 @@ export const isAuthenticated = (state: CurrentUserStateModel): boolean => {
 @State<CurrentUserStateModel>({
   name: 'currentUser',
   defaults: notLoadedState,
-  children: [UserLanguageState, UserSavedProfessionalState, UserContactState],
+  children: [UserLanguageState, UserSavedProfessionalState, UserContactState, UserLocationState],
 })
 @Injectable()
 export class CurrentUserState implements NgxsOnInit {
@@ -140,21 +142,12 @@ export class CurrentUserState implements NgxsOnInit {
         dispatch([
           new CurrentUserActions.LoadSettings(),
           new CurrentUserActions.LoadProfessionals(),
-          new CurrentUserActions.LoadUserLocations(),
+          new UserLocationActions.LoadAllUserLocations(),
           new UserLanguagesActions.LoadAllUserLanguages(),
           new SavedUserProfessionalsActions.LoadAllUserSavedProfessionals(),
           new UserContactActions.LoadAllUserContacts(),
         ]),
       ),
-    );
-  }
-
-  @Action(CurrentUserActions.LoadUserLocations)
-  public loadUserLocations({ patchState }: StateContext<CurrentUserStateModel>) {
-    return this.api.accountsLocationsList({}).pipe(
-      tap(response => {
-        patchState({ locations: response.results });
-      }),
     );
   }
 
@@ -171,7 +164,7 @@ export class CurrentUserState implements NgxsOnInit {
       // TODO fix swagger; returned user contains the "token" field
       mergeMap((user: any) => dispatch(new CurrentUserActions.AuthenticateWithToken(user.token))),
       mergeMap(() =>
-        userData?.location ? dispatch(new CurrentUserActions.CreateUserLocation(userData.location)) : of(),
+        userData?.location ? dispatch(new UserLocationActions.CreateUserLocation(userData.location)) : of(),
       ),
     );
   }
@@ -297,27 +290,5 @@ export class CurrentUserState implements NgxsOnInit {
     return this.client
       .post<AuthResponseInterface, RefreshDataInterface>(environment.backend.refresh, refreshData)
       .pipe(tap(tokens => patchState({ tokens })));
-  }
-
-  @Action(CurrentUserActions.CreateUserLocation)
-  private createLocation(
-    { getState, patchState }: StateContext<CurrentUserStateModel>,
-    { location }: CurrentUserActions.CreateUserLocation,
-  ): Observable<any> {
-    return from(this.locationService.getMergedLocationData()).pipe(
-      switchMap(userLocation => {
-        // TODO add coordinates like this:
-        const newLocation: any = userLocation // TODO fix swagger
-          ? { ...location, coordinates: userLocation.coordinates }
-          : { ...location };
-        return this.api.accountsLocationsCreate(newLocation).pipe(
-          tap(location => {
-            const locations = [...getState().locations] ?? [];
-            locations.push(location);
-            patchState({ locations });
-          }),
-        );
-      }),
-    );
   }
 }

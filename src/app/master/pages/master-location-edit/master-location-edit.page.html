@@ -2,9 +2,9 @@
 <ion-content>
   <app-content-wrapper>
     <app-location-editor
-      (delete)="delete($event)"
+      (delete)="delete($event.id)"
       (save)='save($event)'
-      [item]="item"
+      [item]="location$ | async"
     ></app-location-editor>
   </app-content-wrapper>
 </ion-content>

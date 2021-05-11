@@ -7,7 +7,6 @@ export const notLoadedState: CurrentUserStateModel = {
   tokens: null,
   professionals: null,
   settings: null,
-  locations: null,
   errors: null,
 };
 
@@ -25,16 +24,10 @@ export const defaultSettings: UserSettings = {
   language: 'en',
 };
 
-export const defaultLocation: UserLocation = {
-  country: null,
-  city: null,
-};
-
 export const guestState: CurrentUserStateModel = {
   profile: {},
   tokens: emptyTokens,
   professionals: [],
   settings: defaultSettings,
-  locations: [],
   errors: [],
 };
