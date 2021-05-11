@@ -3,6 +3,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import * as HttpCodes from '@app/core/constants/http.constants';
+import { AuthenticationService } from '@app/core/services';
 import { Predicate } from '@app/core/types/common-types';
 import { environment } from '@env/environment';
 import { ToastController } from '@ionic/angular';
@@ -32,6 +33,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     private readonly toaster: ToastController,
     private readonly router: Router,
     private readonly translate: TranslateService,
+    private readonly auth: AuthenticationService,
     @Inject(PLATFORM_ID) private readonly platformId: object,
   ) {}
 
@@ -84,6 +86,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
   private handleUnauthorizedResponse(): void {
     this.showMessage(this.translate.instant(ErrorMessages.AUTHENTICATION_ERROR));
+    this.auth.logout(); // delete invalid credentials
     this.router.navigateByUrl('/auth/login');
   }
 

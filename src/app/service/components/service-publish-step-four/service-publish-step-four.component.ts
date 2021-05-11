@@ -73,6 +73,8 @@ export class ServicePublishStepFourComponent implements OnInit {
       const country = this.formService.form.get(this.formFields.Country).value as Country;
       const city = this.formService.form.get(this.formFields.City).value as City;
       this.registrationService.register({
+          first_name: this.formService.form.get(this.formFields.FirstName).value,
+          last_name: this.formService.form.get(this.formFields.LastName).value,
           email: this.formService.form.get(this.formFields.Email).value,
           password: this.formService.form.get(this.formFields.Password).value,
           password_confirm: this.formService.form.get(this.formFields.Confirm).value,
@@ -96,6 +98,7 @@ export class ServicePublishStepFourComponent implements OnInit {
       }
 
       return !(this.formService.form.get(this.formFields.Email).valid &&
+        this.formService.form.get(this.formFields.FirstName).valid &&
         this.formService.form.get(this.formFields.Password).valid &&
         this.formService.form.get(this.formFields.Confirm).valid &&
         this.formService.form.get(this.formFields.Country).value &&
