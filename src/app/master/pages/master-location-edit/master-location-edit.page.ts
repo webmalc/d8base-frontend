@@ -45,7 +45,7 @@ export class MasterLocationEditPage implements OnInit {
       withLatestFrom(this.professional$),
       map(
         ([locations, professional]) =>
-          locations?.find(({ id }) => this.locationId === id) || { professional: professional.id },
+          locations?.find(({ id }) => this.locationId === id) || { professional: professional?.id },
       ),
     );
 
