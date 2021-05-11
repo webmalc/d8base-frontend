@@ -11,6 +11,8 @@ import { first } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserManagerService {
+  @Select(CurrentUserSelectors.isAuthenticated)
+  public isAuthenticated$: Observable<boolean>;
 
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
