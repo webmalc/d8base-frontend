@@ -23,23 +23,13 @@
     <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.city' | translate }}
     </ion-item>
-    <ion-item class="ion-item-bordered">
-      <ion-label color="medium" position="floating">
-        {{ 'issuance.filters.main-tab.city-placeholder' | translate }}
-      </ion-label>
-      <ionic-selectable
-        (onSearch)="
-          citySelectable.onCitySearch($event, form.get([formGroups.location, formFields.location.country]).value)
-        "
-        [formControl]="form.get([formGroups.location, formFields.location.city])"
-        [canSearch]="true"
-        [canClear]="true"
-        [isEnabled]="!!form.get([formGroups.location, formFields.location.country]).value"
-        itemTextField="name"
-        itemValueField="id"
-      >
-      </ionic-selectable>
-    </ion-item>
+    <app-city-selector
+      [formControl]="form.get([formGroups.location, formFields.location.city])"
+      [country]="form.get([formGroups.location, formFields.location.country]).value"
+      [required]="false"
+      [itemClass]="'ion-item-bordered'"
+      [title]="'issuance.filters.main-tab.city-placeholder'"
+    ></app-city-selector>
     <ion-item
       lines="none"
       class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
