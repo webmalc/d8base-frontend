@@ -4,7 +4,7 @@ import { UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { TimezoneService } from '@app/core/services/timezone.service';
-import { shareReplay, takeUntil } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 
 enum LocationFormFields {
   country = 'country',
@@ -58,10 +58,7 @@ export class LocationEditorComponent {
   constructor(
     protected readonly timezoneService: TimezoneService,
     public readonly fullLocationService: FullLocationService,
-    private readonly destroy$: NgDestroyService,
-  ) {
-    this.handleControls();
-  }
+  ) {}
 
   public get item(): Partial<UserLocation> {
     return this._item;
@@ -103,24 +100,5 @@ export class LocationEditorComponent {
       timezone: this.timezone.value?.value,
       is_default: this.isDefault.value,
     };
-  }
-
-  private handleControls(): void {
-    this.handleDependentControls(this.formFields.country, [this.formFields.region, this.formFields.city]);
-    this.handleDependentControls(this.formFields.region, [this.formFields.subregion]);
-    this.handleDependentControls(this.formFields.city, [this.formFields.district]);
-  }
-
-  private handleDependentControls(control: string, dependentControls: string[]): void {
-    this.form
-      .get(control)
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        const action = !value ? 'disable' : 'enable';
-        dependentControls.forEach(control => {
-          this.form.get(control)[action]();
-          this.form.get(control).reset();
-        });
-      });
   }
 }

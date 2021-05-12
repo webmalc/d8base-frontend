@@ -1,17 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DefaultRegisterUser, UserLocation } from '@app/api/models';
-import { NgDestroyService } from '@app/core/services';
 import { AppValidators } from '@app/core/validators/app.validators';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
-import { takeUntil } from 'rxjs/operators';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.scss'],
-  providers: [NgDestroyService],
 })
 export class RegistrationFormComponent {
   public form: FormGroup = this.fb.group(
@@ -21,8 +18,8 @@ export class RegistrationFormComponent {
       [RegistrationFormFields.LastName]: [''],
       [RegistrationFormFields.Password]: ['', passwordValidators],
       [RegistrationFormFields.Confirm]: ['', passwordValidators],
-      [RegistrationFormFields.Country]: ['', Validators.required],
-      [RegistrationFormFields.City]: [{ value: '', disabled: true }],
+      [RegistrationFormFields.Country]: [null, Validators.required],
+      [RegistrationFormFields.City]: [null, Validators.required],
       [RegistrationFormFields.Phone]: [''],
     },
     { validators: confirmPasswordValidator(RegistrationFormFields.Password, RegistrationFormFields.Confirm) },
@@ -39,10 +36,7 @@ export class RegistrationFormComponent {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly $ngDestroy: NgDestroyService,
-  ) {
-    this.subscribeOnCountryChanges();
-  }
+  ) {}
 
   public get pending(): boolean {
     return this._pending;
@@ -77,27 +71,5 @@ export class RegistrationFormComponent {
       city: formData[this.formFields.City]?.id,
     };
     this.registrationFormData.emit({ user, location });
-  }
-
-  private subscribeOnCountryChanges() {
-    this.form.get(this.formFields.Country).valueChanges
-      .pipe(
-        takeUntil(this.$ngDestroy),
-      )
-      .subscribe(value => this.onCountryChange(value));
-  }
-
-  private onCountryChange(value: any): void {
-    this.setCityDisabled(!value);
-    this.form.get(this.formFields.City).setValue(null);
-  }
-
-  private setCityDisabled(value: boolean = true): void {
-    const control = this.form.get(this.formFields.City);
-    if (value) {
-      control.disable();
-    } else {
-      control.enable();
-    }
   }
 }

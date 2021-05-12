@@ -7,7 +7,7 @@
     [(ngModel)]="initialValue"
     [title]="title"
     [items]="items"
-    [disabled]="disabled"
+    [disabled]="disabled || (hasData$ | async) === false"
     [canSearch]="true"
     [shouldFocusSearchbar]="true"
     [hasInfiniteScroll]="true"

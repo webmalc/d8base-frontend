@@ -16,7 +16,7 @@ export class SearchFilterStateService {
     [this.formFields.query]: null,
     [this.formGroups.location]: this.fb.group({
       [this.formFields.location.country]: null,
-      [this.formFields.location.city]: { value: null, disabled: true },
+      [this.formFields.location.city]: null,
       [this.formFields.location.coordinates]: null,
     }),
     [this.formFields.category]: null,
@@ -68,7 +68,6 @@ export class SearchFilterStateService {
       this.router.navigate(['/search'], { queryParams });
     });
     this.setMinMaxDates();
-    this.handleCountryControl();
   }
 
   public doSearch(): void {
@@ -92,16 +91,5 @@ export class SearchFilterStateService {
     const limitOfYearsInFuture = 5;
     this.minDate = now.toISOString();
     this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
-  }
-
-  private handleCountryControl(): void {
-    const cityControl = this.searchForm.get([this.formGroups.location, this.formFields.location.city]);
-    this.searchForm.get([this.formGroups.location, this.formFields.location.country]).valueChanges.subscribe((value) => {
-      if (value) {
-        cityControl.enable();
-      } else {
-        cityControl.disable();
-      }
-    });
   }
 }

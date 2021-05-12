@@ -26,6 +26,7 @@ export class RegionSelectorComponent extends ItemSelectorControl<Region> {
 
   constructor(private readonly locationApi: LocationService) {
     super();
+    this.hasData$ = this.country$.pipe(map(x => !!x));
     this.items$ = this.country$.pipe(
       switchMap(country => country
         ? this.locationApi.locationRegionsList({ pageSize: PAGE_SIZE, country: country.id })

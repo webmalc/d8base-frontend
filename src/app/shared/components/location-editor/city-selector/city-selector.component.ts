@@ -5,7 +5,7 @@ import { LocationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { concatMap, debounceTime, distinctUntilChanged, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ItemSelectorControl } from '../item-selector-control';
 
 @Component({
@@ -43,6 +43,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
     private readonly destroy$: NgDestroyService,
   ) {
     super();
+    this.hasData$ = this.country$.pipe(map(x => !!x));
     this.subscribeToCountry();
   }
 

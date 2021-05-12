@@ -110,7 +110,6 @@ export class ServicePublishStepFourComponent implements OnInit {
 
   public ngOnInit(): void {
     this.formService.createForm();
-    this.subscribeOnCountryChanges();
     this.subscribeOnEmailChanges();
   }
 
@@ -128,16 +127,5 @@ export class ServicePublishStepFourComponent implements OnInit {
       this.isUserExists$.next(val);
       this.isUserExists = val;
     });
-  }
-
-  private subscribeOnCountryChanges(): void {
-    this.formService.form.get(this.formFields.Country).valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.onCountryChanged());
-  }
-
-  private onCountryChanged(): void {
-    this.formService.setControlDisabled(false, this.formFields.City);
-    this.formService.form.get(this.formFields.City).reset();
   }
 }

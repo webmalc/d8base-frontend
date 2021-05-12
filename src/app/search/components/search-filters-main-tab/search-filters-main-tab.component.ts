@@ -7,7 +7,6 @@ import { CurrentLocationCompilerService } from '@app/core/services/location/curr
 import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 import { Coords } from '@app/shared/interfaces/coords';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { PopoverController } from '@ionic/angular';
 import { forkJoin, Observable } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
@@ -39,7 +38,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
     private readonly countriesApi: CountriesApiCache,
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
-    public readonly citySelectable: SelectableCityOnSearchService,
     private readonly pop: PopoverController,
     private readonly currentLocation: CurrentLocationCompilerService,
     private readonly ratesApiCache: RatesApiCache,
