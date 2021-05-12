@@ -37,7 +37,7 @@ export class ServicePublishStepThreeComponent implements OnInit {
     this.files = this.files.concat(files);
   }
 
-  public onRemove(data: File): void {
-    this.files.splice(this.files.indexOf(data), 1);
+  public onRemove(index: number): void {
+    this.files = [...this.files.slice(0, index), ...this.files.slice(index + 1)];
   }
 }
