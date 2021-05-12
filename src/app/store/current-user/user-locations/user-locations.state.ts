@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserLocation } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { Action, State, StateContext } from '@ngxs/store';
-import { tap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import * as UserLocationActions from './user-locations.actions';
 
 export const emptyUserLocationState: UserLocation[] = null;
@@ -41,20 +41,11 @@ export class UserLocationState {
 
   @Action(UserLocationActions.UpdateUserLocation)
   public updateUserLocation(
-    { setState, getState }: StateContext<UserLocationStateModel>,
+    { dispatch }: StateContext<UserLocationStateModel>,
     { location }: UserLocationActions.UpdateUserLocation,
   ) {
     return this.accountsService.accountsLocationsUpdate({ id: location.id, data: location }).pipe(
-      tap(() => {
-        const locations = getState();
-        const updatedLocations = locations.map(existingLocation => {
-          if (existingLocation.id === location.id) {
-            return location;
-          }
-          return existingLocation;
-        });
-        setState(updatedLocations);
-      }),
+      mergeMap(() => dispatch(new UserLocationActions.LoadAllUserLocations())),
     );
   }
 

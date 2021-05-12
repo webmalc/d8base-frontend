@@ -26,6 +26,7 @@ export class SubregionSelectorComponent extends ItemSelectorControl<Subregion> {
 
   constructor(private readonly locationApi: LocationService) {
     super();
+    this.hasData$ = this.region$.pipe(map(x => !!x));
     this.items$ = this.region$.pipe(
       switchMap(region => region
         ? this.locationApi.locationSubregionsList({ pageSize: PAGE_SIZE, region: region.id })

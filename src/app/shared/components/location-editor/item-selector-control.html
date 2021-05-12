@@ -5,7 +5,7 @@
   <ionic-selectable
     [(ngModel)]="initialValue"
     [items]="items$ | async"
-    [disabled]="disabled"
+    [disabled]="disabled || (hasData$ | async) === false"
     [canSearch]="true"
     [shouldFocusSearchbar]="true"
     [hasVirtualScroll]="true"

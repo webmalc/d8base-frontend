@@ -132,9 +132,8 @@ export class ServicePublishStepSevenComponent extends Reinitable {
       this.formService.setControlDisabled(true, this.formFields.City);
       this.formService.setControlDisabled(true, this.formFields.Address);
     } else {
-      const isCountrySelected = Boolean(this.formService.getFormFieldValue(this.formFields.Country));
       this.formService.setControlDisabled(false, this.formFields.Country);
-      this.formService.setControlDisabled(!isCountrySelected, this.formFields.City);
+      this.formService.setControlDisabled(false, this.formFields.City);
       this.formService.setControlDisabled(false, this.formFields.Address);
     }
   }
@@ -156,8 +155,6 @@ export class ServicePublishStepSevenComponent extends Reinitable {
       this.formService.createForm(stepData);
     } else {
       this.formService.createForm();
-      this.formService.setControlDisabled(true, this.formFields.City);
-      this.formService.setControlDisabled(true, this.formFields.Postal);
     }
     this.disableIrrelevantControls();
     this.initDefaultUnits();
@@ -172,6 +169,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
       this.formService.setControlDisabled(true, this.formFields.Country);
       this.formService.setControlDisabled(true, this.formFields.City);
       this.formService.setControlDisabled(true, this.formFields.Address);
+      this.formService.setControlDisabled(true, this.formFields.Postal);
     }
     if (serviceType !== 'client') {
       this.formService.setControlDisabled(true, this.formFields.MaxDistance);

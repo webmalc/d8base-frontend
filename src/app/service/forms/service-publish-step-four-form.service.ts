@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppValidators } from '@app/core/validators/app.validators';
 import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
@@ -30,11 +30,6 @@ export class ServicePublishStepFourFormService {
 
   public getFormFieldValue(formField: string): any {
     return this.form?.get(formField)?.value;
-  }
-
-  public setControlDisabled(val: boolean, controlName: string): void {
-    const control = this.form.controls[controlName] as FormControl;
-    val ? control.disable() : control.enable();
   }
 
   public isEmailValid(): boolean {

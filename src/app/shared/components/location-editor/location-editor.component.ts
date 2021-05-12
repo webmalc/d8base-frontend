@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
-import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { TimezoneService } from '@app/core/services/timezone.service';
-import { BehaviorSubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 
 enum LocationFormFields {
   country = 'country',
@@ -18,11 +16,7 @@ enum LocationFormFields {
   postal_code = 'postal_code',
   address = 'address',
   timezone = 'timezone',
-}
-
-interface Timezone {
-  value: string;
-  display_name: string;
+  is_default = 'is_default',
 }
 
 @Component({
@@ -31,34 +25,40 @@ interface Timezone {
   styleUrls: ['./location-editor.component.scss'],
   providers: [NgDestroyService],
 })
-export class LocationEditorComponent implements OnInit {
+export class LocationEditorComponent {
   @Output() public save = new EventEmitter<UserLocation>();
   @Output() public delete = new EventEmitter<UserLocation>();
 
   public readonly formFields = LocationFormFields;
-  public timezoneList$ = new BehaviorSubject<Timezone[]>(null);
-  public form: FormGroup = this.fb.group({
-    [this.formFields.country]: [null, Validators.required],
-    [this.formFields.region]: [{ value: null, disabled: true }],
-    [this.formFields.subregion]: [{ value: null, disabled: true }],
-    [this.formFields.city]: [{ value: null, disabled: true }, Validators.required],
-    [this.formFields.district]: [{ value: null, disabled: true }],
-    [this.formFields.coordinates]: [null],
-    [this.formFields.postal_code]: [null],
-    [this.formFields.address]: [null],
-    [this.formFields.timezone]: [null],
+  public timezoneList$ = this.timezoneService.getTimezoneList().pipe(shareReplay(1));
+  public country = new FormControl(null, [Validators.required]);
+  public region = new FormControl(null);
+  public subregion = new FormControl(null);
+  public city = new FormControl(null, [Validators.required]);
+  public district = new FormControl(null);
+  public coordinates = new FormControl(null);
+  public postal = new FormControl(null);
+  public address = new FormControl(null);
+  public timezone = new FormControl(null);
+  public isDefault = new FormControl(null);
+  public form = new FormGroup({
+    [this.formFields.country]: this.country,
+    [this.formFields.region]: this.region,
+    [this.formFields.subregion]: this.subregion,
+    [this.formFields.city]: this.city,
+    [this.formFields.district]: this.district,
+    [this.formFields.postal_code]: this.postal,
+    [this.formFields.address]: this.address,
+    [this.formFields.timezone]: this.timezone,
+    [this.formFields.is_default]: this.isDefault,
   });
 
   private _item: Partial<UserLocation> = {};
 
   constructor(
-    protected readonly timezone: TimezoneService,
+    protected readonly timezoneService: TimezoneService,
     public readonly fullLocationService: FullLocationService,
-    public readonly fb: FormBuilder,
-    private readonly destroy$: NgDestroyService,
-  ) {
-    this.handleControls();
-  }
+  ) {}
 
   public get item(): Partial<UserLocation> {
     return this._item;
@@ -69,15 +69,14 @@ export class LocationEditorComponent implements OnInit {
     this._item = item;
     if (item) {
       this.fullLocationService.getFullLocation(item).subscribe(fullLocation => {
-        this.form.patchValue({ ...item, ...fullLocation });
+        this.form.patchValue({ ...item, ...fullLocation, [this.formFields.is_default]: item.is_default });
+        if (item.is_default) {
+          this.isDefault.disable();
+        }
       });
     } else {
       this.form.patchValue({});
     }
-  }
-
-  public ngOnInit(): void {
-    this.timezone.getTimezoneList().subscribe(data => this.timezoneList$.next(data));
   }
 
   public emitSave(): void {
@@ -88,42 +87,18 @@ export class LocationEditorComponent implements OnInit {
     this.delete.emit(this.transform(this.item));
   }
 
-  protected transform(data: any): UserLocation {
-    const model = { ...data, ...this.form.value };
-
-    [
-      this.formFields.country,
-      this.formFields.region,
-      this.formFields.subregion,
-      this.formFields.city,
-      this.formFields.district,
-    ].forEach((field: string) => {
-      model[field] = this.form.value[field]?.id ?? undefined;
-    });
-
-    [this.formFields.timezone, 'is_default'].forEach(field => {
-      model[field] = this.form.value[field]?.value ?? undefined;
-    });
-
-    return HelperService.clear<UserLocation>(model);
-  }
-
-  private handleControls(): void {
-    this.handleDependentControls(this.formFields.country, [this.formFields.region, this.formFields.city]);
-    this.handleDependentControls(this.formFields.region, [this.formFields.subregion]);
-    this.handleDependentControls(this.formFields.city, [this.formFields.district]);
-  }
-
-  private handleDependentControls(control: string, dependentControls: string[]): void {
-    this.form
-      .get(control)
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        const action = !value ? 'disable' : 'enable';
-        dependentControls.forEach(control => {
-          this.form.get(control)[action]();
-          this.form.get(control).reset();
-        });
-      });
+  private transform(data: Partial<UserLocation>): UserLocation {
+    return {
+      ...data,
+      country: this.country.value?.id,
+      region: this.region.value?.id,
+      subregion: this.subregion.value?.id,
+      city: this.city.value?.id,
+      district: this.district.value?.id,
+      postal_code: this.postal.value?.id,
+      address: this.address.value,
+      timezone: this.timezone.value?.value,
+      is_default: this.isDefault.value,
+    };
   }
 }
