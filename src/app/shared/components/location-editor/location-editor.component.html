@@ -1,34 +1,38 @@
 <app-column-header>{{ 'location-edit-page.address' | translate }}</app-column-header>
 <ng-container *appIfSpinner="item">
-  <app-country-selector [formControl]="form.get(formFields.country)"></app-country-selector>
-  <app-region-selector [formControl]="form.get(formFields.region)" [country]="form.get(formFields.country).value"></app-region-selector>
-  <app-subregion-selector [formControl]="form.get(formFields.subregion)" [region]="form.get(formFields.region).value"></app-subregion-selector>
-  <app-city-selector [formControl]="form.get(formFields.city)" [country]="form.get(formFields.country).value"></app-city-selector>
-  <app-district-selector [formControl]="form.get(formFields.district)" [city]="form.get(formFields.city).value"></app-district-selector>
+  <app-country-selector [formControl]="country"></app-country-selector>
+  <app-region-selector [formControl]="region" [country]="country.value"></app-region-selector>
+  <app-subregion-selector [formControl]="subregion" [region]="region.value"></app-subregion-selector>
+  <app-city-selector [formControl]="city" [country]="country.value"></app-city-selector>
+  <app-district-selector [formControl]="district" [city]="city.value"></app-district-selector>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.postal-code' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.postal_code)" name="phone" type="text"> </ion-input>
+    <ion-input [formControl]="postal" name="phone" type="text"> </ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.address' | translate }}
     </ion-label>
-    <ion-input [formControl]="form.get(formFields.address)" name="first_name" type="text"> </ion-input>
+    <ion-input [formControl]="address" name="first_name" type="text"> </ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.timezone' | translate }}
     </ion-label>
     <ionic-selectable
-      [formControl]="form.get(formFields.timezone)"
+      [formControl]="timezone"
       [canSearch]="true"
       [items]="timezoneList$ | async"
       itemTextField="display_name"
       itemValueField="value"
     >
     </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label>Сделать адресом по умолчанию</ion-label>
+    <ion-checkbox [formControl]="isDefault"></ion-checkbox>
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">
     <ion-col size="6">
