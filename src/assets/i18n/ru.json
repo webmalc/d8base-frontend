@@ -1,6 +1,5 @@
 {
   "global": {
-    "dropzone-label": "Кликните сюда либо переместите фотографии в эту область",
     "professional-level": {
       "junior": "Начальный",
       "middle": "Средний",
@@ -803,6 +802,9 @@
   "server-errors": {
     "unauthorized": "Доступ запрещён",
     "generic": "Сервер временно недоступен"
+  },
+  "client-errors": {
+    "file-is-too-big": "Размер файла слишком большой"
   },
   "agreement": {
     "part-1": "Нажимая клавишу «{{ publish }}», вы принимаете условия",

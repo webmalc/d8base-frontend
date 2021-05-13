@@ -1,18 +1,13 @@
-import { isPlatformServer } from '@angular/common';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as HttpCodes from '@app/core/constants/http.constants';
-import { AuthenticationService } from '@app/core/services';
+import { AuthenticationService, ToastService } from '@app/core/services';
 import { Predicate } from '@app/core/types/common-types';
 import { environment } from '@env/environment';
-import { ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import * as ErrorMessages from './error-messages';
-
-const ERROR_TOAST_DURATION_MS = 3000;
 
 const filters: Predicate<HttpErrorResponse>[] = [
   response => !response.url?.startsWith(environment.backend.url),
@@ -30,11 +25,9 @@ function isFiltered(response: HttpErrorResponse): boolean {
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
-    private readonly toaster: ToastController,
+    private readonly toast: ToastService,
     private readonly router: Router,
-    private readonly translate: TranslateService,
     private readonly auth: AuthenticationService,
-    @Inject(PLATFORM_ID) private readonly platformId: object,
   ) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -78,27 +71,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       ? [error.error_description]
       : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
     if (messages.length > 0) {
-      messages.forEach(message => this.showMessage(message));
+      messages.forEach(message => this.toast.showError(message));
     } else {
-      this.showMessage(response.message);
+      this.toast.showError(response.message);
     }
   }
 
   private handleUnauthorizedResponse(): void {
-    this.showMessage(this.translate.instant(ErrorMessages.AUTHENTICATION_ERROR));
+    this.toast.showError(ErrorMessages.AUTHENTICATION_ERROR, {translate: true});
     this.auth.logout(); // delete invalid credentials
     this.router.navigateByUrl('/auth/login');
   }
 
   private handleServerErrorResponse(): void {
-    this.showMessage(this.translate.instant(ErrorMessages.GENERIC_SERVER_ERROR));
-  }
-
-  private showMessage(message: string, duration: number = ERROR_TOAST_DURATION_MS): void {
-    if (isPlatformServer(this.platformId)) {
-      console.error(message);
-    } else {
-      this.toaster.create({ message, duration }).then(toast => toast.present());
-    }
+    this.toast.showError(ErrorMessages.GENERIC_SERVER_ERROR, {translate: true});
   }
 }

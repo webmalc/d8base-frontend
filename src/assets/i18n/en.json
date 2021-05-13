@@ -1,6 +1,5 @@
 {
   "global": {
-    "dropzone-label": "Click or move photos to this area",
     "professional-level": {
       "junior": "Junior",
       "middle": "Middle",
@@ -803,6 +802,9 @@
   "server-errors": {
     "unauthorized": "Access denied",
     "generic": "The server is temporarily unavailable"
+  },
+  "client-errors": {
+    "file-is-too-big": "File is too big"
   },
   "agreement": {
     "part-1": "By pressing the '{{ publish }}' button, you confirm you've accepted",
