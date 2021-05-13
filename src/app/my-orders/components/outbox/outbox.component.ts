@@ -1,10 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { SentOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { Tabs } from '@app/my-orders/enums/tabs.enum';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
+import { asyncScheduler, BehaviorSubject, Observable, Subject } from 'rxjs';
+import { filter, map, observeOn, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-outbox',
@@ -12,6 +14,9 @@ import { map, takeUntil } from 'rxjs/operators';
   styleUrls: ['./outbox.component.scss'],
 })
 export class OutboxComponent implements AfterViewInit, OnDestroy {
+  @Select(CurrentUserSelectors.isAuthenticated)
+  public isAuthenticated$: Observable<boolean>;
+
   public tabs = Tabs;
   public orders: SentOrder[];
 
@@ -25,12 +30,16 @@ export class OutboxComponent implements AfterViewInit, OnDestroy {
   });
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private readonly accountsService: AccountsService, private readonly changeDetector: ChangeDetectorRef) {}
+  constructor(private readonly accountsService: AccountsService) {}
 
   public ngAfterViewInit(): void {
-    this.currentFilter$
+    this.isAuthenticated$
       .pipe(
-        map(params => ({ params, apiRequestFunction: this.apiRequestFunction })),
+        filter(isAuthenticated => Boolean(isAuthenticated)),
+        observeOn(asyncScheduler),
+        switchMap(() =>
+          this.currentFilter$.pipe(map(params => ({ params, apiRequestFunction: this.apiRequestFunction }))),
+        ),
         takeUntil(this.destroy$),
       )
       .subscribe(this.doLoad$);

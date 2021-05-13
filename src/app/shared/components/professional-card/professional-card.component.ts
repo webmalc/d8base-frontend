@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
-import { CommunicationService } from '@app/api/services';
 import { HelperService } from '@app/core/services/helper.service';
 
 @Component({
