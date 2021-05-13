@@ -14,63 +14,77 @@ import { ServicePublishStepTwoComponent } from '@app/service/components/service-
 import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
-import { ServiceInfoEditorComponent, ServiceScheduleEditComponent, ServiceTypeEditComponent } from './components/service-editor-page';
+import {
+  ServiceInfoEditorComponent,
+  ServiceScheduleEditComponent,
+  ServiceTypeEditComponent,
+} from './components/service-editor-page';
+import { ServicePublishWrapperComponent } from './components/service-publish-wrapper/service-publish-wrapper.component';
+import { ServicePublishResetStateService } from './guards/service-publish-reset-state.service';
 
 const routes: Routes = [
   {
     path: 'publish',
-    pathMatch: 'full',
-    redirectTo: 'publish/step-one',
+    canDeactivate: [ServicePublishResetStateService],
+    component: ServicePublishWrapperComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'step-one',
+      },
+      {
+        path: 'step-one',
+        component: ServicePublishStepOneComponent,
+      },
+      {
+        path: 'step-two',
+        component: ServicePublishStepTwoComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-three',
+        component: ServicePublishStepThreeComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-four',
+        component: ServicePublishStepFourComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-five',
+        component: ServicePublishStepFiveComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-six',
+        component: ServicePublishStepSixComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-seven',
+        component: ServicePublishStepSevenComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-seven/timetable',
+        component: TimetableComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'step-seven/departure',
+        component: DepartureComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+      {
+        path: 'final',
+        component: ServicePublishFinalStepComponent,
+        canActivate: [ServicePublishGuardService],
+      },
+    ],
   },
-  {
-    path: 'publish/step-one',
-    component: ServicePublishStepOneComponent,
-  },
-  {
-    path: 'publish/step-two',
-    component: ServicePublishStepTwoComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-three',
-    component: ServicePublishStepThreeComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-four',
-    component: ServicePublishStepFourComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-five',
-    component: ServicePublishStepFiveComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-six',
-    component: ServicePublishStepSixComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-seven',
-    component: ServicePublishStepSevenComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-seven/timetable',
-    component: TimetableComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/step-seven/departure',
-    component: DepartureComponent,
-    canActivate: [ServicePublishGuardService],
-  },
-  {
-    path: 'publish/final',
-    component: ServicePublishFinalStepComponent,
-    canActivate: [ServicePublishGuardService],
-  },
+
   {
     path: ':id/edit',
     component: ServiceEditorPageComponent,
@@ -97,6 +111,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ServicePageRoutingModule {
-}
-
+export class ServicePageRoutingModule {}
