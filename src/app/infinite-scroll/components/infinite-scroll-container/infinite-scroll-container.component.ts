@@ -14,7 +14,7 @@ import { InfiniteScrollItemDirective } from '@app/infinite-scroll/directives/inf
 import { InfiniteScrollData, Params } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { concatMap, finalize, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { concatMap, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-infinite-scroll-container',
