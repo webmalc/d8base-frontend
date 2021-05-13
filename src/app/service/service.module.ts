@@ -8,13 +8,12 @@ import { ServicePhotoApiService } from '@app/core/services/service-photo-api.ser
 import { ServiceTagsApiService } from '@app/core/services/service-tags-api.service';
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
 import { MasterPickerPopoverComponent } from '@app/service/components/master-picker/master-picker-popover.component';
-import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
 import {
+  ServiceEditorPageComponent,
   ServiceInfoEditorComponent,
+  ServiceLocationEditorComponent,
   ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
-  ServiceEditorPageComponent,
-  ServiceLocationEditorComponent,
 } from '@app/service/components/service-editor-page';
 import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
@@ -25,6 +24,8 @@ import { ServicePublishStepSevenComponent } from '@app/service/components/servic
 import { ServicePublishStepSixComponent } from '@app/service/components/service-publish-step-six/service-publish-step-six.component';
 import { ServicePublishStepThreeComponent } from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
 import { ServicePublishStepTwoComponent } from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
+import { ServicePublishWrapperComponent } from '@app/service/components/service-publish-wrapper/service-publish-wrapper.component';
+import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishStepFiveFormService } from '@app/service/forms/service-publish-step-five-form.service';
 import { ServicePublishStepFourFormService } from '@app/service/forms/service-publish-step-four-form.service';
@@ -52,6 +53,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrMaskerModule } from 'br-mask';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { ServicePublishResetStateService } from './guards/service-publish-reset-state.service';
 import { ServicePageRoutingModule } from './service-routing.module';
 
 @NgModule({
@@ -85,6 +87,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceTypeEditComponent,
     ServiceScheduleEditComponent,
     ServiceLocationEditorComponent,
+    ServicePublishWrapperComponent,
   ],
   providers: [
     PricesApiService,
@@ -113,7 +116,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServicePublishAuthStateManagerService,
     ServicePublishGuardService,
     ServiceEditorDepsService,
+    ServicePublishResetStateService,
   ],
 })
-export class ServicePageModule {
-}
+export class ServicePageModule {}
