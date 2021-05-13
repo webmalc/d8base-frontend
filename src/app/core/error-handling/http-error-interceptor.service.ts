@@ -12,7 +12,9 @@ import * as ErrorMessages from './error-messages';
 const filters: Predicate<HttpErrorResponse>[] = [
   response => !response.url?.startsWith(environment.backend.url),
   response => response.status === HttpCodes.HTTP_NOT_FOUND,
-  response => response.status === HttpCodes.HTTP_BAD_REQUEST && response.url.includes(environment.backend.messages_list),
+  response => HttpCodes.HTTP_BAD_REQUEST === response.status && 'invalid_grant' === response.error?.error,
+  response =>
+    response.status === HttpCodes.HTTP_BAD_REQUEST && response.url.includes(environment.backend.messages_list),
 ];
 
 function isFiltered(response: HttpErrorResponse): boolean {
@@ -44,10 +46,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       return;
     }
 
-    if (
-      HttpCodes.HTTP_UNAUTHORIZED === response.status ||
-      (HttpCodes.HTTP_BAD_REQUEST === response.status && 'invalid_grant' === response.error?.error)
-    ) {
+    if (HttpCodes.HTTP_UNAUTHORIZED === response.status) {
       this.handleUnauthorizedResponse();
       return;
     }
@@ -78,12 +77,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   private handleUnauthorizedResponse(): void {
-    this.toast.showError(ErrorMessages.AUTHENTICATION_ERROR, {translate: true});
+    this.toast.showError(ErrorMessages.AUTHENTICATION_ERROR, { translate: true });
     this.auth.logout(); // delete invalid credentials
     this.router.navigateByUrl('/auth/login');
   }
 
   private handleServerErrorResponse(): void {
-    this.toast.showError(ErrorMessages.GENERIC_SERVER_ERROR, {translate: true});
+    this.toast.showError(ErrorMessages.GENERIC_SERVER_ERROR, { translate: true });
   }
 }
