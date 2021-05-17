@@ -42,13 +42,10 @@
       </ion-item>
     </div>
     <div class="bottom-buttons ion-padding-horizontal">
-      <ion-button
+      <app-chat-button
         *ngIf="(userId$ | async) !== data.professional.user.id"
-        size="medium"
-        [routerLink]="'/message/chat/' + data.professional.user.id"
-      >
-        {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
-      </ion-button>
+        [userId]="data.professional.user.id"
+      ></app-chat-button>
     </div>
   </ion-card-content>
 </ion-card>

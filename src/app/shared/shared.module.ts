@@ -84,6 +84,7 @@ import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
 import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
+import { ChatButtonComponent } from './components/chat-button/chat-button.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.
     ContactEditComponent,
     ContactsEditComponent,
     LocationEditorPopoverComponent,
+    ChatButtonComponent,
   ],
   exports: [
     AddButtonComponent,
@@ -226,6 +228,7 @@ import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.
     ContactEditComponent,
     ContactsEditComponent,
     LocationEditorPopoverComponent,
+    ChatButtonComponent,
   ],
   imports: [
     CommonModule,
