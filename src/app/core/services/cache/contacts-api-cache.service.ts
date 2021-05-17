@@ -27,7 +27,7 @@ export class ContactsApiCache {
   public listByCountry(countryId: number): Observable<Contact[]> {
     if (countryId !== this.countryId) {
       this.countryId = countryId;
-      this.listByCountryCache$ = this.contactsService.contactsContactsList({ countries: `${countryId}` }).pipe(
+      this.listByCountryCache$ = this.contactsService.contactsContactsList({ byCountry: countryId }).pipe(
         map(({ results }) => results),
         shareReplay(1),
       );
