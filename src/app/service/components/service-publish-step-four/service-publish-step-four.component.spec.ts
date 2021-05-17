@@ -6,7 +6,6 @@ import { SelectableCityOnSearchService } from '@app/shared/services/selectable-c
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { LocationServiceMock } from 'src/testing/mocks';
-import { ServicePublishStepFourFormService } from '../../forms/service-publish-step-four-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
@@ -32,7 +31,6 @@ describe('ServicePublishStepFourComponent', () => {
         ComponentTestingModule,
       ],
       providers: [
-        ServicePublishStepFourFormService,
         ServiceStepsNavigationService,
         RegistrationService,
         ServicePublishDataHolderService,

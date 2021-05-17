@@ -3,7 +3,7 @@
   <app-content-wrapper>
     <ng-container *appIfSpinner="context$ | async as context">
       <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
-      <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+      <form [formGroup]="form" (submit)="submitForm()">
         <ion-item lines="none" class="fs18">
           <ion-text>
             <p>
@@ -28,7 +28,7 @@
         </ion-item>
         <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
 
-        <ng-container *ngIf="!context.isAuthenticated && formService.isEmailValid()">
+        <ng-container *ngIf="!context.isAuthenticated && isEmailValid()">
           <ng-container *ngIf="!context.isUserExists">
             <ion-item lines="none" class="fs13">
               <ion-text>
@@ -59,7 +59,7 @@
               </ion-label>
               <ion-input type="password" [formControlName]="formFields.Password"></ion-input>
             </ion-item>
-            <app-form-control-error [controlName]="formFields.Password"> </app-form-control-error>
+            <app-form-control-error [controlName]="formFields.Password"></app-form-control-error>
             <ion-item>
               <ion-label color="medium" position="floating" class="label-for-required-input">
                 {{ 'service-publish.step-four.password-confirm' | translate }}
@@ -67,9 +67,9 @@
               <ion-input type="password" [formControlName]="formFields.Confirm"></ion-input>
             </ion-item>
             <app-form-control-error [controlName]="formFields.Confirm"></app-form-control-error>
-            <app-form-control-error [control]="formService.form"> </app-form-control-error>
+            <app-form-control-error [control]="form"> </app-form-control-error>
             <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
-            <app-city-selector [formControlName]="formFields.City" [country]="formService.form.controls[formFields.Country].value"></app-city-selector>
+            <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value"></app-city-selector>
           </ng-container>
           <ng-container *ngIf="context.isUserExists">
             <ion-item lines="none" class="fs13">
@@ -84,6 +84,7 @@
               </ion-label>
               <ion-input type="password" [formControlName]="formFields.Password"></ion-input>
             </ion-item>
+            <app-form-control-error [controlName]="formFields.Password"></app-form-control-error>
             <ion-item lines="none" class="ion-item-no-side-padding fs13 ion-item-no-min-height pt10">
               <a routerLink="/auth/password-recover" routerDirection="forward">
                 {{ 'service-publish.step-four.forgot-password' | translate }}
