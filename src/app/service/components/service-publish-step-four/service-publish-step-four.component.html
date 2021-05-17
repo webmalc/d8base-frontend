@@ -3,7 +3,7 @@
   <app-content-wrapper>
     <ng-container *appIfSpinner="context$ | async as context">
       <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
-      <form [formGroup]="form" (submit)="submitForm()">
+      <form [formGroup]="form" (submit)="submitForm(context.isUserExisting)">
         <ion-item lines="none" class="fs18">
           <ion-text>
             <p>
@@ -29,7 +29,7 @@
         <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
 
         <ng-container *ngIf="!context.isAuthenticated && isEmailValid()">
-          <ng-container *ngIf="!context.isUserExists">
+          <ng-container *ngIf="!context.isUserExisting">
             <ion-item lines="none" class="fs13">
               <ion-text>
                 <div>{{ 'service-publish.step-four.new-user' | translate }}</div>
@@ -71,7 +71,7 @@
             <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
             <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value"></app-city-selector>
           </ng-container>
-          <ng-container *ngIf="context.isUserExists">
+          <ng-container *ngIf="context.isUserExisting">
             <ion-item lines="none" class="fs13">
               <ion-text>
                 <div>{{ 'service-publish.step-four.user-exists' | translate }}</div>
