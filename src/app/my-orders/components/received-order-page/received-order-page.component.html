@@ -16,6 +16,7 @@
           <ion-label>{{ 'received_orders.order-details-subtitle' | translate }}:</ion-label>
         </ion-list-header>
         <app-client-widget [client]="order.client"></app-client-widget>
+        <app-chat-button *ngIf="(userId$ | async) !== order.client.id" [userId]="order.client.id"></app-chat-button>
         <ion-item lines="none">
           <ion-label color="secondary">{{ 'received_orders.order-number' | translate }} : {{ order.id }}</ion-label>
         </ion-item>
