@@ -2,7 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <ng-container *appIfSpinner="context$ | async as context">
-      <app-error-flashbag [messages]="errorMessages"></app-error-flashbag>
+      <app-error-flashbag [messages]="errorMessages$ | async"></app-error-flashbag>
       <form [formGroup]="form" (submit)="submitForm(context.isUserExisting)">
         <ion-item lines="none" class="fs18">
           <ion-text>

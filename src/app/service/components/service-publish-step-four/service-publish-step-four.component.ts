@@ -30,9 +30,11 @@ export class ServicePublishStepFourComponent {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
+  @Select(CurrentUserSelectors.errors)
+  public errorMessages$: Observable<string[]>;
+
   public form: FormGroup;
   public context$: Observable<ServicePublishStepFourContext>;
-  public errorMessages: string[];
   public readonly formFields = ServicePublishStepFourFormFields;
   private readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly emailChanged$: Subject<void> = new Subject<void>();
@@ -67,7 +69,6 @@ export class ServicePublishStepFourComponent {
   }
 
   public submitForm(userExists: boolean): void {
-    this.errorMessages = null;
     if (userExists) {
       this.authenticationService.login(
         {
