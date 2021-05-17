@@ -237,7 +237,7 @@ export class CurrentUserState implements NgxsOnInit {
         patchState({ profile });
       }),
       mergeMap(() => {
-        if (existingEmail !== newEmail) {
+        if (newEmail && existingEmail !== newEmail) {
           return dispatch(new CurrentUserActions.RegisterNewEmail(newEmail));
         }
         return of();
