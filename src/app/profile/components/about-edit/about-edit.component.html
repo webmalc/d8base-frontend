@@ -13,7 +13,7 @@
           formControlName="{{ this.formFields.Birthday }}"
         ></ion-datetime>
       </ion-item>
-      <app-country-selector formControlName="{{ this.formFields.Nationality }}"></app-country-selector>
+      <app-country-selector [title]="'profile-edit.nationality' | translate" [required]="false" formControlName="{{ this.formFields.Nationality }}"></app-country-selector>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'profile-edit.languages' | translate }}
