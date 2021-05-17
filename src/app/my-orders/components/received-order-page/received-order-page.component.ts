@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReceivedOrder } from '@app/api/models';
+import { Profile, ReceivedOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ReceiverOrderStatusController } from '@app/my-orders/services';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -14,6 +16,8 @@ import { map, switchMap } from 'rxjs/operators';
   providers: [ServicesApiCache],
 })
 export class ReceivedOrderPageComponent {
+  @Select(CurrentUserSelectors.userId)
+  public userId$: Observable<Profile['id']>;
 
   public order$: Observable<ReceivedOrder>;
 
