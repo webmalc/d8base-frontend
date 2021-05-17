@@ -77,7 +77,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
               if (!search) {
                 params = { ...params, ordering: '-population' };
               } else {
-                params = { ...params, search: this.prepareTextToSearch(search) };
+                params = { ...params, byName: this.prepareTextToSearch(search) };
               }
 
               return this.loadMore$.pipe(
