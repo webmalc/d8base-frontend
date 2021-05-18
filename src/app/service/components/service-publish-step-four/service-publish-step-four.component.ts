@@ -14,8 +14,10 @@ import { ServiceStepsNavigationService } from '@app/service/services/service-ste
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { first, map, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, first, map, switchMap, takeUntil } from 'rxjs/operators';
 import ServicePublishStepFourContext from './service-publish-step-four-context.interface';
+
+const DEBOUNCE_DURATION_MS = 500;
 
 @Component({
   selector: 'app-service-publish-step-four',
@@ -28,11 +30,12 @@ export class ServicePublishStepFourComponent {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
+  @Select(CurrentUserSelectors.errors)
+  public errorMessages$: Observable<string[]>;
+
   public form: FormGroup;
   public context$: Observable<ServicePublishStepFourContext>;
-  public errorMessages: string[];
   public readonly formFields = ServicePublishStepFourFormFields;
-  public isUserExists: boolean = false;
   private readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly emailChanged$: Subject<void> = new Subject<void>();
 
@@ -48,7 +51,7 @@ export class ServicePublishStepFourComponent {
       authenticationService.isAuthenticated$,
       this.isUserExists$,
     ]).pipe(
-      map(([isAuthenticated, isUserExists]) => ({ isAuthenticated, isUserExists })),
+      map(([isAuthenticated, isUserExisting]) => ({ isAuthenticated, isUserExisting })),
     );
     this.form = this.createForm();
     this.subscribeOnEmailChanges();
@@ -65,34 +68,35 @@ export class ServicePublishStepFourComponent {
     return this.form.controls[ServicePublishStepFourFormFields.Email].valid;
   }
 
-  public submitForm(): void {
-    this.errorMessages = null;
-    if (this.isUserExists) {
+  public submitForm(userExists: boolean): void {
+    if (userExists) {
       this.authenticationService.login(
         {
           username: this.form.get(this.formFields.Email).value,
           password: this.form.get(this.formFields.Password).value,
         },
       );
-    } else {
-      const country = this.form.get(this.formFields.Country).value as Country;
-      const city = this.form.get(this.formFields.City).value as City;
-      this.registrationService.register({
-          first_name: this.form.get(this.formFields.FirstName).value,
-          last_name: this.form.get(this.formFields.LastName).value,
-          email: this.form.get(this.formFields.Email).value,
-          password: this.form.get(this.formFields.Password).value,
-          password_confirm: this.form.get(this.formFields.Confirm).value,
-        },
-        {
-          location: {
-            country: country.id,
-            city: city.id,
-            is_default: true,
-          },
-        },
-      );
+      return;
     }
+
+    const country = this.form.get(this.formFields.Country).value as Country;
+    const city = this.form.get(this.formFields.City).value as City;
+    this.registrationService.register({
+        first_name: this.form.get(this.formFields.FirstName).value,
+        last_name: this.form.get(this.formFields.LastName).value,
+        email: this.form.get(this.formFields.Email).value,
+        password: this.form.get(this.formFields.Password).value,
+        password_confirm: this.form.get(this.formFields.Confirm).value,
+      },
+      {
+        location: {
+          country: country.id,
+          city: city.id,
+          is_default: true,
+        },
+      },
+    );
+
   }
 
   public isSubmitDisabled(): boolean {
@@ -101,16 +105,16 @@ export class ServicePublishStepFourComponent {
 
   private createForm(): FormGroup {
     return this.formBuilder.group({
-        [ServicePublishStepFourFormFields.Email]: [null, Validators.compose([
+        [this.formFields.Email]: [null, Validators.compose([
           Validators.required,
           AppValidators.email,
         ])],
-        [ServicePublishStepFourFormFields.FirstName]: ['', Validators.required],
-        [ServicePublishStepFourFormFields.LastName]: [''],
-        [ServicePublishStepFourFormFields.Password]: ['', passwordValidators],
-        [ServicePublishStepFourFormFields.Confirm]: ['', passwordValidators],
-        [ServicePublishStepFourFormFields.Country]: [null, Validators.required],
-        [ServicePublishStepFourFormFields.City]: [null, Validators.required],
+        [this.formFields.FirstName]: ['', Validators.required],
+        [this.formFields.LastName]: [''],
+        [this.formFields.Password]: ['', passwordValidators],
+        [this.formFields.Confirm]: ['', passwordValidators],
+        [this.formFields.Country]: [null, Validators.required],
+        [this.formFields.City]: [null, Validators.required],
       },
       { validators: confirmPasswordValidator(ServicePublishStepFourFormFields.Password, ServicePublishStepFourFormFields.Confirm) });
   }
@@ -123,11 +127,28 @@ export class ServicePublishStepFourComponent {
 
   private subscribeOnEmailChanges(): void {
     this.emailChanged$.pipe(
+      debounceTime(DEBOUNCE_DURATION_MS),
       switchMap(() => this.isRegisteredApi.isEmailRegistered(this.form.get(this.formFields.Email).value)),
       takeUntil(this.destroy$),
-    ).subscribe(val => {
-      this.isUserExists$.next(val);
-      this.isUserExists = val;
+    ).subscribe(existingUser => {
+      this.isUserExists$.next(existingUser);
+      this.switchUserMode(existingUser);
+    });
+  }
+
+  private switchUserMode(existingUser: boolean): void {
+    [
+      this.form.controls[this.formFields.FirstName],
+      this.form.controls[this.formFields.LastName],
+      this.form.controls[this.formFields.Confirm],
+      this.form.controls[this.formFields.Country],
+      this.form.controls[this.formFields.City],
+    ].forEach(control => {
+      if (existingUser) {
+        control.disable();
+      } else {
+        control.enable();
+      }
     });
   }
 }

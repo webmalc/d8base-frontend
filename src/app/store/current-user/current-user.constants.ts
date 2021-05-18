@@ -1,4 +1,4 @@
-import { UserLocation, UserSettings } from '@app/api/models';
+import { UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
 import { CurrentUserStateModel } from './current-user-state.model';
 
