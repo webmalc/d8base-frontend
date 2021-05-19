@@ -100,3 +100,9 @@ export class VerifyEmailAction {
 
   constructor(public verifyEmail: VerifyEmail) {}
 }
+
+export class UpdateAvatar {
+  public static readonly type = '[CurrentUser] Update Avatar';
+
+  constructor(public avatar: Profile['avatar']) {}
+}

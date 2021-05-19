@@ -20,6 +20,7 @@ const MAX_SIZE = 1048576; // 1mb
   ],
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
+  @Input() public disabled: boolean = false;
   @Input() public cropAfterSelect: boolean = true;
   @Output() public value: EventEmitter<string> = new EventEmitter<string>();
 
@@ -59,7 +60,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    // can't be disabled
+    this.disabled = isDisabled;
   }
 
   public writeValue(uri: string): void {

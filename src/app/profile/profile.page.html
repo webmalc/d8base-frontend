@@ -6,7 +6,7 @@
     </app-info-row>
     <div class="thumbnail-container">
       <ion-thumbnail class="profile-thumbnail">
-        <ion-img [src]="avatar$ | async"></ion-img>
+        <ion-img *appIfSpinner="(avatarLoading$ | async) === false" [src]="avatar$ | async"></ion-img>
       </ion-thumbnail>
       <app-picture-selector [formControl]="avatarSelector"></app-picture-selector>
     </div>

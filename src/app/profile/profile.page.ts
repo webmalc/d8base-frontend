@@ -12,9 +12,9 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
 import UserLanguagesSelectors from '@app/store/current-user/user-language-state/user-language.selectors';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
-import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, finalize, map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -47,6 +47,7 @@ export class ProfilePage {
   public contactsWithDefault$: Observable<UserContact[]>;
 
   public avatar$: Observable<string>;
+  public avatarLoading$ = new BehaviorSubject<boolean>(false);
   public avatarSelector = new FormControl();
 
   public formFields = ProfileFormFields;
@@ -56,6 +57,7 @@ export class ProfilePage {
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly ngDestroy$: NgDestroyService,
     private readonly actions$: Actions,
+    private readonly store: Store,
   ) {
     this.avatar$ = this.profile$.pipe(
       filter(x => !!x),
@@ -67,8 +69,29 @@ export class ProfilePage {
 
   private subOnAvatarChange(): void {
     this.avatarSelector.valueChanges
-      .pipe(takeUntil(this.ngDestroy$))
-      .subscribe(avatar => this.profileService.updateUser({ avatar }));
+      .pipe(
+        switchMap((avatar: Profile['avatar']) => {
+          this.setAvatarLoading();
+          return this.store.dispatch(new CurrentUserActions.UpdateAvatar(avatar));
+        }),
+        takeUntil(this.ngDestroy$),
+        finalize(() => {
+          this.setAvatarLoading(false);
+        }),
+        )
+        .subscribe(() => {
+          this.setAvatarLoading(false);
+      });
+  }
+
+  private setAvatarLoading(isLoading: boolean = true): void {
+    if (isLoading) {
+      this.avatarSelector.disable({ emitEvent: false });
+    } else {
+      this.avatarSelector.enable({ emitEvent: false });
+    }
+
+    this.avatarLoading$.next(isLoading);
   }
 
   private initContactsWithDefault(): void {
