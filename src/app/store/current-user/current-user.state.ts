@@ -245,6 +245,18 @@ export class CurrentUserState implements NgxsOnInit {
     );
   }
 
+  @Action(CurrentUserActions.UpdateAvatar)
+  public updateAvatar(
+    { patchState }: StateContext<CurrentUserStateModel>,
+    { avatar }: CurrentUserActions.UpdateAvatar,
+  ) {
+    return this.api.accountsProfilePartialUpdate({ avatar }).pipe(
+      tap(profile => {
+        patchState({ profile });
+      }),
+    );
+  }
+
   @Action(CurrentUserActions.RegisterNewEmail)
   public registerNewEmail({}: StateContext<CurrentUserStateModel>, { newEmail }: CurrentUserActions.RegisterNewEmail) {
     return this.api.accountsRegisterEmailCreate({ email: newEmail });
