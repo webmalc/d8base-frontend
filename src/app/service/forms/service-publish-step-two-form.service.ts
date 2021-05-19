@@ -35,9 +35,17 @@ export class ServicePublishStepTwoFormService {
       const startPrice = value?.start_price;
       const endPrice = value?.end_price;
 
+      if (!startPrice && !endPrice) {
+        return { required: true };
+      }
+
       if (parseFloat(startPrice) >= parseFloat(endPrice)) {
         return { priceError: true };
       }
+    }
+
+    if (!value?.price) {
+      return { required: true };
     }
 
     return null;
