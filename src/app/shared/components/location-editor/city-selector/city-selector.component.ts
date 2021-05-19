@@ -8,6 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ItemSelectorControl } from '../item-selector-control';
 
+const ITEM_HEIGHT = 47;
+
 @Component({
   selector: 'app-city-selector',
   templateUrl: './city-selector.component.html',
@@ -81,15 +83,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
               }
 
               return this.loadMore$.pipe(
-                concatMap((infiniteScroll?: boolean) =>
-                  this.locationApi.locationCitiesList({ ...params, page: this.pageCounter }).pipe(
-                    tap(() => {
-                      if (infiniteScroll) {
-                        this.selectableComponent.endInfiniteScroll();
-                      }
-                    }),
-                  ),
-                ),
+                concatMap(() => this.locationApi.locationCitiesList({ ...params, page: this.pageCounter })),
               );
             }),
           ),
@@ -98,12 +92,25 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
       )
       .subscribe({
         next: paginatedResult => {
-          const { results, next } = paginatedResult;
+          const { results, next, previous } = paginatedResult;
 
           this.incrementPageCounter();
           this.disableInfiniteScroll(!next);
-          this.selectableComponent.endSearch();
           this.appendItems(results);
+
+          if (previous) {
+            this.selectableComponent._modalComponent._content.scrollY = false;
+            this.selectableComponent.endInfiniteScroll();
+
+            // BUG ionic selectable resets scroll to top after infinite loading
+            setTimeout(() => {
+              this.selectableComponent._modalComponent._content.scrollY = true;
+              this.selectableComponent._modalComponent._content.scrollToBottom();
+              this.selectableComponent._modalComponent._content.scrollByPoint(0, -(results.length * ITEM_HEIGHT), 0);
+            });
+          } else {
+            this.selectableComponent.endSearch();
+          }
 
           this.cd.markForCheck();
         },
