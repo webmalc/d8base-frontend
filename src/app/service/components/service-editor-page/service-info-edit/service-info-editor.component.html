@@ -13,12 +13,6 @@
       </section>
 
       <section>
-        <header>{{ 'service-details.description' | translate }}</header>
-        <ion-item>
-          <ion-textarea [autoGrow]="true" [formControlName]="formFields.description"></ion-textarea>
-        </ion-item>
-      </section>
-      <section>
         <header>{{ 'service-details.duration-and-price' | translate }}</header>
         <app-duration-editor class="ion-margin" [formControlName]="formFields.duration"></app-duration-editor>
         <app-price-editor class="ion-margin" [formControlName]="formFields.price"></app-price-editor>

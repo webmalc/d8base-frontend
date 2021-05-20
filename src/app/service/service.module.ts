@@ -14,6 +14,7 @@ import {
   ServiceLocationEditorComponent,
   ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
+  ServiceDetailsEditComponent,
 } from '@app/service/components/service-editor-page';
 import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
@@ -87,6 +88,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceScheduleEditComponent,
     ServiceLocationEditorComponent,
     ServicePublishWrapperComponent,
+    ServiceDetailsEditComponent,
   ],
   providers: [
     PricesApiService,

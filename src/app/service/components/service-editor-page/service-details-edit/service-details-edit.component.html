@@ -1,0 +1,31 @@
+<app-header></app-header>
+<ion-content *ngIf="context$ | async as context">
+  <app-content-wrapper>
+    <app-column-header [previousLocationFallback]="getServicePageUrl(context.service.id)">{{
+      'service-details.description-title' | translate
+      }}</app-column-header>
+    <form [formGroup]="context.form" (ngSubmit)="submit(context)">
+      <section>
+        <header>{{ 'service-details.description' | translate }}</header>
+        <ion-item>
+          <ion-textarea [autoGrow]="true" formControlName="description"></ion-textarea>
+        </ion-item>
+      </section>
+
+      <section>
+        <header>{{ 'service-details.photos' | translate }}</header>
+        <app-image-carousel
+          *appIfSpinner="photos$ | async as photos"
+          class="ion-margin-vertical"
+          [photos]="photos"
+          [editable]="true"
+          (add)="addPhotos($event, context.service)"
+          (remove)="removePhoto($event)"
+        ></app-image-carousel>
+      </section>
+
+      <ion-button type="submit" expand="block">{{ 'global.save' | translate }}</ion-button>
+    </form>
+  </app-content-wrapper>
+  <app-footer></app-footer>
+</ion-content>

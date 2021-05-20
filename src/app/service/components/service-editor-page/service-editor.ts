@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from '@app/api/models';
 import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
 import { combineLatest, forkJoin, Observable, of } from 'rxjs';
-import { filter, finalize, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
+import { filter, finalize, map, shareReplay, switchMap, take } from 'rxjs/operators';
 import ServiceEditorContext from './service-editor-context.interface';
 
 export abstract class ServiceEditor {
@@ -27,12 +27,8 @@ export abstract class ServiceEditor {
     );
   }
 
-  public getServicePageUrl(serviceId: number): any[] {
-    return [
-      '/service',
-      serviceId,
-      'edit',
-    ];
+  public getServicePageUrl(serviceId: number): string {
+    return `/service/${serviceId}/edit`;
   };
 
   protected saveAndReturn(sources: Observable<any>[]): void {
@@ -42,7 +38,7 @@ export abstract class ServiceEditor {
       ...sources,
     ]).pipe(finalize(() => this.pending = false))
       .subscribe(([service]) => {
-      this.deps.router.navigate(this.getServicePageUrl(service.id));
+      this.deps.router.navigateByUrl(this.getServicePageUrl(service.id));
     });
   }
 

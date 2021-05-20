@@ -29,15 +29,22 @@
       </ion-note>
     </ion-item>
     <app-payment-method-viewer [price]="service.price"></app-payment-method-viewer>
+
+    <ion-item-divider color="light">
+      <ion-label>
+        <h1>{{ 'service-details.description-title' | translate }}</h1>
+      </ion-label>
+      <ion-button slot="end" color="medium" fill="clear" [routerLink]="'/service/' + service.id + '/edit/description'">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item-divider>
     <ion-item class="ion-margin-bottom" lines="none">
       <ion-text class="preserve-line-breaks">{{ service.description }}</ion-text>
     </ion-item>
     <app-image-carousel
+      *appIfSpinner="photos$ | async as photos"
       class="ion-margin-bottom"
-      [photos]="photos$ | async"
-      [editable]="true"
-      (add)="addPhotos($event, service)"
-      (remove)="removePhoto($event)"
+      [photos]="photos"
     ></app-image-carousel>
 
     <ion-item-divider color="light">

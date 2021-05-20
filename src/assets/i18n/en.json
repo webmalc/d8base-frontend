@@ -250,6 +250,7 @@
     "title": "Service Information",
     "location-title": "Service Location",
     "schedule-title": "Service Schedule",
+    "description-title": "Service Description",
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
     "instant-book-description": "Ordering of this service will be approved automatically",
@@ -258,6 +259,7 @@
     "name": "Title",
     "description": "Description",
     "duration-and-price": "Duration and price",
+    "photos": "Photos",
     "payment-methods": "Payment options",
     "is-base-schedule": "The base professional schedule is used",
     "location": {

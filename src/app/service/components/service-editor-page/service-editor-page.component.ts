@@ -64,26 +64,4 @@ export class ServiceEditorPageComponent {
   public deleteService(service: Service): void {
     this.serviceOperations.deleteService(service.id).subscribe(() => this.refresh$.next());
   }
-
-  public async addPhotos(files: File[], service: Service): Promise<void> {
-    const requests$ = files.map(file => this.addPhoto$(file, service.id));
-    await Promise.all(requests$);
-    this.refresh$.next();
-  }
-
-  public removePhoto(index: number) {
-    this.photos$.pipe(
-      first(),
-      mergeMap(photos => this.api.accountsServicePhotosDelete(photos[index].id)),
-    ).subscribe(() => this.refresh$.next());
-  }
-
-  private async addPhoto$(file: File, serviceId: number): Promise<void> {
-    const photo = await fileToBase64(file);
-    const servicePhoto: ServicePhoto = {
-      photo,
-      service: serviceId,
-    };
-    await this.api.accountsServicePhotosCreate(servicePhoto).toPromise();
-  }
 }
