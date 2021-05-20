@@ -9,6 +9,7 @@
     [items]="items"
     [disabled]="disabled || (hasData$ | async) === false"
     [canSearch]="true"
+    [canClear]="true"
     [shouldFocusSearchbar]="true"
     [hasInfiniteScroll]="true"
     [closeButtonText]="'global.cancel' | translate"

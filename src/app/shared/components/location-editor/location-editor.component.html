@@ -1,9 +1,9 @@
 <app-column-header>{{ 'location-edit-page.address' | translate }}</app-column-header>
 <ng-container *appIfSpinner="item">
-  <app-country-selector [formControl]="country"></app-country-selector>
+  <app-country-selector [formControl]="country" [required]="true"></app-country-selector>
   <app-region-selector [formControl]="region" [country]="country.value"></app-region-selector>
   <app-subregion-selector [formControl]="subregion" [region]="region.value"></app-subregion-selector>
-  <app-city-selector [formControl]="city" [country]="country.value"></app-city-selector>
+  <app-city-selector [formControl]="city" [country]="country.value" [required]="true"></app-city-selector>
   <app-district-selector [formControl]="district" [city]="city.value"></app-district-selector>
   <ion-item>
     <ion-label color="medium" position="floating">
@@ -24,6 +24,7 @@
     <ionic-selectable
       [formControl]="timezone"
       [canSearch]="true"
+      [canClear]="true"
       [items]="timezoneList$ | async"
       itemTextField="display_name"
       itemValueField="value"

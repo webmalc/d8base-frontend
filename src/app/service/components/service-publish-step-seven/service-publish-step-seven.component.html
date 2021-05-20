@@ -70,7 +70,11 @@
               </b>
             </div>
           </ion-item>
-          <ion-select [formControlName]="formFields.DefaultLocation" interface="popover" class="max-width100 no-padding-left">
+          <ion-select
+            [formControlName]="formFields.DefaultLocation"
+            interface="popover"
+            class="max-width100 no-padding-left"
+          >
             <ion-select-option *ngFor="let loc of defaultLocationList" [value]="loc">
               <app-location-viewer [location]="loc"></app-location-viewer>
             </ion-select-option>
@@ -78,9 +82,12 @@
         </ng-container>
 
         <ng-container *ngIf="!isUseDefaultLocation">
-          <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
-          <app-city-selector [formControlName]="formFields.City"
-                             [country]="formService.form.controls[formFields.Country].value">
+          <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
+          <app-city-selector
+            [formControlName]="formFields.City"
+            [country]="formService.form.controls[formFields.Country].value"
+            [required]="true"
+          >
           </app-city-selector>
           <ion-item>
             <ion-label color="medium" position="floating">
@@ -91,6 +98,7 @@
               itemValueField="id"
               itemTextField="code"
               [canSearch]="true"
+              [canClear]="true"
               formControlName="{{ formFields.Postal }}"
               closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
               searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
@@ -125,7 +133,11 @@
           <ion-row>
             <ion-col size="6">
               <ion-item lines="none" class="ion-item-bordered">
-                <ion-select [formControlName]="formFields.Units" interface="popover" class="max-width100 no-padding-left">
+                <ion-select
+                  [formControlName]="formFields.Units"
+                  interface="popover"
+                  class="max-width100 no-padding-left"
+                >
                   <ion-select-option *ngFor="let val of units; let i = index" [value]="i">
                     {{ 'units.' + i | translate }}
                   </ion-select-option>
@@ -183,7 +195,14 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button size="medium" type="submit" [disabled]="isSubmitDisabled()" class="ion-margin-top" fill="solid" expand="block">
+          <ion-button
+            size="medium"
+            type="submit"
+            [disabled]="isSubmitDisabled()"
+            class="ion-margin-top"
+            fill="solid"
+            expand="block"
+          >
             {{ 'service-publish.forward-button' | translate }}
           </ion-button>
         </ion-col>

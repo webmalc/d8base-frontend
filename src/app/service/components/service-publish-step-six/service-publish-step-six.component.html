@@ -62,10 +62,11 @@
         </ion-label>
         <ionic-selectable
           [items]="levelList"
-          formControlName="{{ formFields.Level }}"
-          closeButtonText="{{ trans.trans('ion-selectable.close-button-text') | async }}"
-          searchFailText="{{ trans.trans('ion-selectable.search-fail-text') | async }}"
-          searchPlaceholder="{{ trans.trans('ion-selectable.search-text') | async }}"
+          [canClear]="true"
+          [formControlName]="formFields.Level"
+          [closeButtonText]="trans.trans('ion-selectable.close-button-text') | async"
+          [searchFailText]="trans.trans('ion-selectable.search-fail-text') | async"
+          [searchPlaceholder]="trans.trans('ion-selectable.search-text') | async"
         >
         </ionic-selectable>
       </ion-item>
