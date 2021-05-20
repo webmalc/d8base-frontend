@@ -14,7 +14,7 @@ import UserLanguagesSelectors from '@app/store/current-user/user-language-state/
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, finalize, map, switchMap, takeUntil } from 'rxjs/operators';
+import { filter, finalize, map, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -44,6 +44,8 @@ export class ProfilePage {
     takeUntil(this.ngDestroy$),
   );
 
+  public emailVerificationSent$: Observable<CurrentUserActions.ResendEmailVerification>;
+
   public contactsWithDefault$: Observable<UserContact[]>;
 
   public avatar$: Observable<string>;
@@ -51,7 +53,6 @@ export class ProfilePage {
   public avatarSelector = new FormControl();
 
   public formFields = ProfileFormFields;
-
   constructor(
     public readonly profileService: ProfileService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
@@ -64,7 +65,21 @@ export class ProfilePage {
       map(profile => profile.avatar || HelperService.getNoAvatarLink()),
     );
     this.subOnAvatarChange();
+    this.subOnEmailVerificationSent();
     this.initContactsWithDefault();
+  }
+
+  public sendConfirmationEmail(): void {
+    this.store.dispatch(new CurrentUserActions.ResendEmailVerification());
+  }
+
+  private subOnEmailVerificationSent(): void {
+    this.emailVerificationSent$ = this.actions$.pipe(
+      ofActionSuccessful(CurrentUserActions.ResendEmailVerification),
+      withLatestFrom(this.profile$),
+      map(([ ,profile]) => profile.email),
+      takeUntil(this.ngDestroy$),
+    );
   }
 
   private subOnAvatarChange(): void {
@@ -78,9 +93,9 @@ export class ProfilePage {
         finalize(() => {
           this.setAvatarLoading(false);
         }),
-        )
-        .subscribe(() => {
-          this.setAvatarLoading(false);
+      )
+      .subscribe(() => {
+        this.setAvatarLoading(false);
       });
   }
 
