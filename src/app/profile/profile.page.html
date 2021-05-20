@@ -1,8 +1,11 @@
 <app-header></app-header>
 <ion-content *ngIf="profile$ | async as user">
   <app-content-wrapper>
-    <app-info-row  *ngIf="newEmailRegistered$ | async as newEmail">
+    <app-info-row *ngIf="newEmailRegistered$ | async as newEmail">
       {{ 'profile-form.email-change.email-registered' | translate: { newEmail: newEmail } }}
+    </app-info-row>
+    <app-info-row *ngIf="emailVerificationSent$ | async as email">
+      {{ 'profile-form.email-verification-sent' | translate: { email: email } }}
     </app-info-row>
     <div class="thumbnail-container">
       <ion-thumbnail class="profile-thumbnail">
@@ -19,16 +22,25 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item *ngIf="user?.first_name || user?.last_name" lines="none">{{user?.first_name}} {{user?.last_name}}</ion-item>
+    <ion-item *ngIf="user?.first_name || user?.last_name" lines="none">
+      {{user?.first_name}} {{user?.last_name}}
+    </ion-item>
     <ion-item lines="none">
       <ion-icon class="pr5" name="mail-outline"></ion-icon>
       <ion-label>Email</ion-label>
       {{user?.email}}
     </ion-item>
     <ion-item lines="none">
-      <ion-label> {{ 'profile-form.email' | translate }} </ion-label>
-      <ion-icon *ngIf="user?.is_confirmed" color="success" name="checkmark-circle-outline" slot="end"></ion-icon>
-      <ion-icon *ngIf="!user?.is_confirmed" color="danger" name="close-circle-outline" slot="end"></ion-icon>
+      <ng-container *ngIf="!user?.is_confirmed">
+        <ion-label class="cursor-pointer" color="primary" [appDebounce]="5000" (debounceClick)="sendConfirmationEmail()">
+          {{ 'profile-form.email-not-confirmed' | translate }}
+        </ion-label>
+        <ion-icon color="danger" name="close-circle-outline" slot="end"></ion-icon>
+      </ng-container>
+      <ng-container *ngIf="user?.is_confirmed">
+        <ion-label> {{ 'profile-form.email' | translate }} </ion-label>
+        <ion-icon color="success" name="checkmark-circle-outline" slot="end"></ion-icon>
+      </ng-container>
     </ion-item>
     <ion-item-divider color="light">
       <ion-label>
@@ -47,7 +59,12 @@
     <ion-item-group>
       <ion-item lines="none">
         <ion-label position="stacked"> {{'profile-form.main-address'|translate}} </ion-label>
-        <ion-button slot="end" fill="clear" color="medium" routerLink="location-edit/{{(defaultLocation$ | async)?.id}}">
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="medium"
+          routerLink="location-edit/{{(defaultLocation$ | async)?.id}}"
+        >
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <app-location-viewer [location]="defaultLocation$ | async"></app-location-viewer>

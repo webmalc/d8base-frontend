@@ -187,6 +187,8 @@
     "languages": "Languages",
     "not-specified": "Not specified",
     "email": "Email confirmed",
+    "email-not-confirmed": "Email NOT confirmed",
+    "email-verification-sent": "Verification of email is sent to '{{ email }}'",
     "email-change" : {
       "email-registered": "Email change confirmation were sent to '{{ newEmail }}'",
       "email-verified-success": "Email changed to '{{ newEmail }}'",
