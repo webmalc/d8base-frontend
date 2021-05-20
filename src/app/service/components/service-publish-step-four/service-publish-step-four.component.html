@@ -68,8 +68,8 @@
             </ion-item>
             <app-form-control-error [controlName]="formFields.Confirm"></app-form-control-error>
             <app-form-control-error [control]="form"> </app-form-control-error>
-            <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
-            <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value"></app-city-selector>
+            <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
+            <app-city-selector [formControlName]="formFields.City" [country]="form.controls[formFields.Country].value" [required]="true"></app-city-selector>
           </ng-container>
           <ng-container *ngIf="context.isUserExisting">
             <ion-item lines="none" class="fs13">

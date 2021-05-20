@@ -3,32 +3,20 @@
     <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.country' | translate }}
     </ion-item>
-    <ion-item class="ion-item-bordered">
-      <ion-label color="medium" position="floating">
-        {{ 'issuance.filters.main-tab.country-placeholder' | translate }}
-      </ion-label>
-      <ionic-selectable
-        (onChange)="onCountryChange()"
-        [items]="countries$ | async"
-        [shouldFocusSearchbar]="true"
-        [hasVirtualScroll]="true"
-        [formControl]="form.get([formGroups.location, formFields.location.country])"
-        [canSearch]="true"
-        [canClear]="true"
-        itemTextField="name"
-        itemValueField="id"
-      >
-      </ionic-selectable>
-    </ion-item>
+    <app-country-selector
+      [formControl]="form.get([formGroups.location, formFields.location.country])"
+      [title]="'issuance.filters.main-tab.country-placeholder' | translate"
+      [itemClass]="'ion-item-bordered'"
+    >
+    </app-country-selector>
     <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.city' | translate }}
     </ion-item>
     <app-city-selector
       [formControl]="form.get([formGroups.location, formFields.location.city])"
       [country]="form.get([formGroups.location, formFields.location.country]).value"
-      [required]="false"
       [itemClass]="'ion-item-bordered'"
-      [title]="'issuance.filters.main-tab.city-placeholder'"
+      [title]="'issuance.filters.main-tab.city-placeholder' | translate"
     ></app-city-selector>
     <ion-item
       lines="none"

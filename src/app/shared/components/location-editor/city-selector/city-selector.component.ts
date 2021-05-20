@@ -5,7 +5,7 @@ import { LocationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { concatMap, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import { ItemSelectorControl } from '../item-selector-control';
 
 const ITEM_HEIGHT = 47;
@@ -30,7 +30,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
   public set country(value: Country) {
     this.country$.next(value);
   }
-  @Input() public required = true;
+  @Input() public required = false;
   @Input() public itemClass: string;
   @ViewChild('selectableComponent') public selectableComponent: IonicSelectableComponent;
 
@@ -62,8 +62,12 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
     this.country$
       .pipe(
         filter(country => Boolean(country)),
-        switchMap(country =>
-          this.search$.pipe(
+        switchMap(country => {
+          if (!this.isCityInCountry(country?.id)) {
+            this.resetValue();
+          }
+
+          return this.search$.pipe(
             debounceTime(500),
             distinctUntilChanged(),
             switchMap(search => {
@@ -86,8 +90,8 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
                 concatMap(() => this.locationApi.locationCitiesList({ ...params, page: this.pageCounter })),
               );
             }),
-          ),
-        ),
+          );
+        }),
         takeUntil(this.destroy$),
       )
       .subscribe({
@@ -125,6 +129,10 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
       });
   }
 
+  private isCityInCountry(countryId: Country['id']): boolean {
+    return countryId === this.initialValue?.country;
+  }
+
   private prepareTextToSearch(text: string): string {
     return text.trim().toLowerCase();
   }
@@ -139,6 +147,10 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
 
   private resetItems(): void {
     this.items = [];
+  }
+
+  private resetValue(): void {
+    this.change({ component: this.selectableComponent, value: void 0 });
   }
 
   private appendItems(itemsAddition: City[]): void {

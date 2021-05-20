@@ -1,7 +1,9 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/profile'">{{ 'profile-edit.about' | translate }}</app-column-header>
+    <app-column-header [previousLocationFallback]="'/profile'">
+      {{ 'profile-edit.about' | translate }}
+    </app-column-header>
     <form *appIfSpinner="form" [formGroup]="form">
       <ion-item>
         <ion-label color="medium" position="floating">
@@ -13,7 +15,10 @@
           formControlName="{{ this.formFields.Birthday }}"
         ></ion-datetime>
       </ion-item>
-      <app-country-selector [title]="'profile-edit.nationality' | translate" [required]="false" formControlName="{{ this.formFields.Nationality }}"></app-country-selector>
+      <app-country-selector
+        [title]="'profile-edit.nationality' | translate"
+        [formControlName]="this.formFields.Nationality"
+      ></app-country-selector>
       <ion-item>
         <ion-label color="medium" position="floating">
           {{ 'profile-edit.languages' | translate }}
@@ -21,14 +26,21 @@
         <ionic-selectable
           [canSearch]="true"
           [isMultiple]="true"
+          [canClear]="true"
           [items]="languages$ | async"
-          formControlName="{{ this.formFields.Languages }}"
+          [formControlName]="this.formFields.Languages"
           itemTextField="name"
           itemValueField="code"
         >
         </ionic-selectable>
       </ion-item>
-      <ion-button [disabled]="form.invalid || form.pristine" class="ion-margin-top" (click)="submitForm()" expand="block" fill="solid">
+      <ion-button
+        [disabled]="form.invalid || form.pristine"
+        class="ion-margin-top"
+        (click)="submitForm()"
+        expand="block"
+        fill="solid"
+      >
         {{ 'profile-edit.save' | translate }}
       </ion-button>
     </form>

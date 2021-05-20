@@ -6,7 +6,7 @@ import { ItemSelectorControl } from '../item-selector-control';
 
 @Component({
   selector: 'app-country-selector',
-  templateUrl: '../item-selector-control.html',
+  templateUrl: './country-selector.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,7 +18,9 @@ import { ItemSelectorControl } from '../item-selector-control';
 export class CountrySelectorComponent extends ItemSelectorControl<Country> {
   public items$ = this.countriesApi.list();
   @Input() public title = 'location-edit-page.country';
-  @Input() public required = true;
+  @Input() public required = false;
+  @Input() public itemClass: string;
+  @Input() public isMultiple: boolean = false;
   constructor(private readonly countriesApi: CountriesApiCache) {
     super();
   }

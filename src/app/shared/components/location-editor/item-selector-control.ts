@@ -11,6 +11,7 @@ export abstract class ItemSelectorControl<T> implements ControlValueAccessor {
   public hasData$: Observable<boolean> = of(true).pipe(shareReplay(1));
 
   public change(event: { component: unknown; value: T }) {
+    this.initialValue = event.value;
     this.onChange(event.value);
   }
 

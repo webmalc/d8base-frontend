@@ -71,10 +71,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
     return await pop.present();
   }
 
-  public onCountryChange(): void {
-    this.form.get([this.formGroups.location, this.formFields.location.city]).reset();
-  }
-
   public initSubcategories(categories: Category[]): void {
     this.subcategoriesList = null;
     this.form.get(this.formFields.subcategory).reset();

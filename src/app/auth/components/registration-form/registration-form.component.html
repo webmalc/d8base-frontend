@@ -37,10 +37,11 @@
   <app-form-control-error [controlName]="formFields.Confirm"></app-form-control-error>
   <app-form-control-error [control]="form" [showErrors]="['passwordMismatch']"></app-form-control-error>
   <app-phone-editor [formControlName]="formFields.Phone"></app-phone-editor>
-  <app-country-selector [formControlName]="formFields.Country"></app-country-selector>
+  <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
   <app-city-selector
     [formControlName]="formFields.City"
     [country]="form.controls[formFields.Country].value"
+    [required]="true"
   ></app-city-selector>
   <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="pending || form.invalid">
     {{ 'registration-form.register' | translate }}

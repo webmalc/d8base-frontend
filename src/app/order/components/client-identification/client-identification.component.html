@@ -47,7 +47,7 @@
           </ion-item>
           <app-form-control-error [control]="passwordConfirm"></app-form-control-error>
           <app-form-control-error [control]="form"></app-form-control-error>
-          <app-country-selector [formControl]="country"></app-country-selector>
+          <app-country-selector [formControl]="country" [required]="true"></app-country-selector>
           <ion-item>
             <ion-label position="floating" class="ion-text-wrap label-for-required-input">
               {{ 'registration-form.name' | translate }}
