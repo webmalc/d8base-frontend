@@ -15,6 +15,7 @@ import { ServiceViewerPageComponent } from '@app/service/components/service-view
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
 import {
+  ServiceDetailsEditComponent,
   ServiceInfoEditorComponent,
   ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
@@ -100,6 +101,10 @@ const routes: Routes = [
   {
     path: ':id/edit/schedule',
     component: ServiceScheduleEditComponent,
+  },
+  {
+    path: ':id/edit/description',
+    component: ServiceDetailsEditComponent,
   },
   {
     path: ':id',

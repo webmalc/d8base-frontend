@@ -23,7 +23,7 @@ const defaultValue: Partial<Price> = { is_price_fixed: true };
 export class PriceEditorComponent implements ControlValueAccessor {
   public currency$: Observable<{ list; default }>;
   public value: Partial<Price> = defaultValue;
-  private currencyCode: string;
+
   private onChange: (value: any) => void;
   private onTouched: () => void;
 
@@ -47,42 +47,33 @@ export class PriceEditorComponent implements ControlValueAccessor {
 
   public writeValue(value: Price): void {
     this.value = value ?? defaultValue;
-    this.currencyCode = value?.price_currency ?? value?.start_price_currency;
   }
 
   public changeField<T>(field: keyof Price, value: T) {
-    this.writeField(field, value);
+    this.value = {
+      ...this.value,
+      [field]: value,
+    };
     this.onChange(this.value);
   }
 
   public setCurrency(rate: Rate) {
     const code = rate.currency;
-    this.currencyCode = code;
     if (!this.value.is_price_fixed) {
-      this.writeField('start_price_currency', code);
-      this.writeField('end_price_currency', code);
+      this.changeField('start_price_currency', code);
+      this.changeField('end_price_currency', code);
     } else {
-      this.writeField('price_currency', code);
+      this.changeField('price_currency', code);
     }
   }
 
   public toggleFixedPrice(event: CustomEvent) {
     const isPriceFixed: boolean = event.detail.checked;
-    this.writeField('is_price_fixed', isPriceFixed);
-    this.onChange(this.value);
+    this.changeField('is_price_fixed', isPriceFixed);
   }
 
   public getInitialCurrency(list: Rate[], defaultCurrency: Rate): Rate {
-    const result = list.find(c => c.currency === this.currencyCode) ?? defaultCurrency;
-    this.setCurrency(result);
-
-    return result;
-  }
-
-  private writeField<T>(field: keyof Price, value: T) {
-    this.value = {
-      ...this.value,
-      [field]: value,
-    };
+    const currencyCode = this.value?.price_currency ?? this.value?.start_price_currency;
+    return list.find(c => c.currency === currencyCode) ?? defaultCurrency;
   }
 }
