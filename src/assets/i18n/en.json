@@ -264,10 +264,11 @@
     "photos": "Photos",
     "payment-methods": "Payment options",
     "is-base-schedule": "The base professional schedule is used",
+    "service-type": "Service location",
     "location": {
       "service-geography": "Service geography",
       "attendance-distance": "Attendance distance",
-      "from": "from",
+      "from": "From",
       "choose-address": "Choose address"
     }
   },

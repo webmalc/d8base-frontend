@@ -264,10 +264,11 @@
     "duration-and-price": "Длительность и цена",
     "payment-methods": "Варианты оплаты",
     "is-base-schedule": "Используется базовое расписание мастера",
+    "service-type": "Место оказания услуги",
     "location": {
       "service-geography": "География предоставления услуги",
       "attendance-distance": "Выезд на дистанцию до",
-      "from": "от адреса",
+      "from": "От адреса",
       "choose-address": "Выберите адрес"
     }
   },

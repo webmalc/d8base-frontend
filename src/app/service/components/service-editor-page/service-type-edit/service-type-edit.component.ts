@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceLocation } from '@app/api/models';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
+import { LocationEditorPopoverComponent } from '@app/shared/components';
+import { PopoverController } from '@ionic/angular';
 import { concat, forkJoin, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
