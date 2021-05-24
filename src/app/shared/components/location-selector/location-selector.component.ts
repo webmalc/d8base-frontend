@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Service } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { forkJoin, Observable, ReplaySubject } from 'rxjs';
+import { forkJoin, Observable, of, ReplaySubject } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import LocationSelectorContext from './location-selector-context.interface';
 
@@ -30,10 +30,15 @@ export class LocationSelectorComponent {
         initialLocations: api.accountsServiceLocationsList({
           service: service.id,
         }),
+        service: of(service.id),
       })),
       map(data => ({
         professionalLocations: data.allLocations.results,
-        initialLocation: data.initialLocations.results[0],
+        initialLocation: data.initialLocations.results[0] ?? {
+          max_distance: 0,
+          service: data.service,
+          location: data.allLocations.results[0]?.id,
+        },
       })),
     );
   }

@@ -3,23 +3,29 @@
   <app-content-wrapper>
     <app-column-header [previousLocationFallback]="getServicePageUrl(context.service.id)">{{
       'service-details.location-title' | translate
-    }}</app-column-header>
+      }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
-      <ion-radio-group formControlName="service_type">
-        <ion-item *ngFor="let type of serviceTypes" lines="full">
-          <ion-label>{{ 'service-location.' + type | translate }}</ion-label>
-          <ion-radio value="{{ type }}"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-      <app-service-location-editor
-        [type]="(type$ | async) || context.service.service_type"
-        [service]="context.service"
-        formControlName="location"
-      >
-      </app-service-location-editor>
-      <ion-button type="submit" expand="block" [disabled]="context.form.invalid">
-        {{ 'global.save' | translate }}
-      </ion-button>
+      <section>
+        <header>{{ 'service-details.service-type' | translate }}</header>
+        <ion-radio-group formControlName="service_type">
+          <ion-item *ngFor="let type of serviceTypes" lines="full">
+            <ion-label>{{ 'service-location.' + type | translate }}</ion-label>
+            <ion-radio value="{{ type }}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </section>
+
+      <section>
+        <app-service-location-editor
+          [type]="(type$ | async) || context.service.service_type"
+          [service]="context.service"
+          formControlName="location"
+        >
+        </app-service-location-editor>
+        <ion-button type="submit" expand="block" [disabled]="context.form.invalid">
+          {{ 'global.save' | translate }}
+        </ion-button>
+      </section>
     </form>
   </app-content-wrapper>
   <app-footer></app-footer>

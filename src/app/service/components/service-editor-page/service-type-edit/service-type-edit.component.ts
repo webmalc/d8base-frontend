@@ -49,9 +49,13 @@ export class ServiceTypeEditComponent extends ServiceEditor {
   }
 
   protected createForm(service: Service): FormGroup {
+    const checkMaxDistance = (control: FormControl) => {
+      const location: ServiceLocation = control.value;
+      return location?.max_distance ? null : { required: true };
+    };
     return new FormGroup({
       service_type: new FormControl(service.service_type, Validators.required),
-      location: new FormControl(),
+      location: new FormControl(null, checkMaxDistance),
     });
   }
 }
