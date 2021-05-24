@@ -1,14 +1,14 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
+import { ScheduleUnion } from '@app/core/models/schedule-union';
 import * as CustomValidators from './custom-validators';
+import { ScheduleEditorFormFields } from './schedule-editor-form-fields.enum';
 
 function normalizeTimeFormat(time: string | null): string {
   // convert "HH:MM:SS" to "HH:MM"
   return time?.substr(0, 5);
 }
 
-export function normalizeScheduleFormat(schedule: AbstractSchedule): AbstractSchedule {
+export function normalizeScheduleFormat(schedule: ScheduleUnion): ScheduleUnion {
   return {
     ...schedule,
     start_time: normalizeTimeFormat(schedule.start_time),
