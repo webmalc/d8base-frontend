@@ -43,8 +43,9 @@
         <app-duration-editor [formControlName]="formFields.Duration"></app-duration-editor>
         <app-form-control-error [controlName]="formFields.Duration"></app-form-control-error>
       </ion-col>
-      <app-price-editor [formControlName]="formFields.Price"></app-price-editor>
-      <app-form-control-error [controlName]="formFields.Price"></app-form-control-error>
+      <app-price-editor [formControlName]="formFields.Price">
+        <app-form-control-error [controlName]="formFields.Price" errors></app-form-control-error>
+      </app-price-editor>
       <app-info-row>
         {{ 'service-publish.step-two.second-info-row' | translate }}
       </app-info-row>
