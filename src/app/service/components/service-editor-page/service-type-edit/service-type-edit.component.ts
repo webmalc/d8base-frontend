@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceLocation } from '@app/api/models';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
+import { LocationEditorPopoverComponent } from '@app/shared/components';
+import { PopoverController } from '@ionic/angular';
 import { concat, forkJoin, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
@@ -49,13 +51,9 @@ export class ServiceTypeEditComponent extends ServiceEditor {
   }
 
   protected createForm(service: Service): FormGroup {
-    const checkMaxDistance = (control: FormControl) => {
-      const location: ServiceLocation = control.value;
-      return location?.max_distance ? null : { required: true };
-    };
     return new FormGroup({
       service_type: new FormControl(service.service_type, Validators.required),
-      location: new FormControl(null, checkMaxDistance),
+      location: new FormControl(),
     });
   }
 }

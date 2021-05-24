@@ -7,4 +7,7 @@
     </ion-label>
     <ion-radio [value]="location.id"></ion-radio>
   </ion-item>
+  <app-add-button (click)="addNewLocation(context)">
+    {{ 'list-item.add-new-address' | translate }}
+  </app-add-button>
 </ion-radio-group>

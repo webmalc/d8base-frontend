@@ -1,8 +1,10 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Service } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { forkJoin, Observable, of, ReplaySubject } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { LocationEditorPopoverComponent } from '@app/shared/components';
+import { PopoverController } from '@ionic/angular';
+import { combineLatest, forkJoin, Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { map, startWith, switchMap, take } from 'rxjs/operators';
 import LocationSelectorContext from './location-selector-context.interface';
 
 @Component({
@@ -18,25 +20,31 @@ export class LocationSelectorComponent {
   public context$: Observable<LocationSelectorContext>;
   @Output() public selectedLocationId = new EventEmitter<number>();
   private readonly service$ = new ReplaySubject<Service>(1);
+  private readonly refresh$ = new Subject<void>();
 
   constructor(
-    api: AccountsService,
+    private readonly api: AccountsService,
+    private readonly popoverController: PopoverController,
   ) {
-    this.context$ = this.service$.pipe(
-      switchMap(service => forkJoin({
+    this.context$ = combineLatest([
+      this.service$,
+      this.refresh$.pipe((startWith(null))),
+    ]).pipe(
+      switchMap(([service]) => forkJoin({
         allLocations: api.accountsProfessionalLocationsList({
           professional: service.professional,
         }),
         initialLocations: api.accountsServiceLocationsList({
           service: service.id,
         }),
-        service: of(service.id),
+        service: of(service),
       })),
       map(data => ({
+        service: data.service,
         professionalLocations: data.allLocations.results,
         initialLocation: data.initialLocations.results[0] ?? {
           max_distance: 0,
-          service: data.service,
+          service: data.service.id,
           location: data.allLocations.results[0]?.id,
         },
       })),
@@ -51,6 +59,20 @@ export class LocationSelectorComponent {
 
   public onChange(event: CustomEvent): void {
     this.selectedLocationId.emit(event.detail.value);
+  }
+
+  // TODO use shared service/state when working with locations
+  public async addNewLocation(context: LocationSelectorContext): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: LocationEditorPopoverComponent,
+    });
+    await popover.present();
+    const result = await popover.onDidDismiss();
+    const newLocation = {
+      ...result.data,
+      professional: context.service.professional,
+    };
+    this.api.accountsProfessionalLocationsCreate(newLocation).subscribe(() => this.refresh$.next());
   }
 
   private emitInitialValue() {
