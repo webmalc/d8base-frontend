@@ -24,7 +24,7 @@ export class FormControlErrorComponent implements OnInit {
   public ngOnInit(): void {
     this.errors = this.control?.statusChanges.pipe(
       map(() =>
-        this.control.touched && this.control.errors
+        this.control.dirty && this.control.errors
           ? Object.keys(this.control.errors)
               .filter(key => !this.filterErrors.includes(key))
               .filter(key => !Boolean(this.showErrors?.length) || this.showErrors.includes(key))

@@ -30,7 +30,7 @@
     >
     </ionic-selectable>
   </ion-item>
-
+  <ng-content select="[errors]"></ng-content>
   <ion-item lines="none" class="ion-item-no-side-padding">
     {{ 'service-publish.step-two.fixed-price' | translate }}
     <ion-checkbox slot="end" [checked]="value.is_price_fixed"  (ionChange)="toggleFixedPrice($event)"> </ion-checkbox>
