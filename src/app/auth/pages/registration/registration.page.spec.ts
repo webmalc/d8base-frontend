@@ -77,26 +77,26 @@ describe('RegistrationPage', () => {
   });
   xit('test nested component exists', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('app-registration-form')).not.toBe(null, "Form shouldn't be null");
+    expect(compiled.querySelector('app-registration-form')).not.toBe(null, 'Form shouldn\'t be null');
     expect(compiled.querySelector('app-registration-form ion-input[name="email"]')).not.toBe(
       null,
-      "Email shouldn't be null",
+      'Email shouldn\'t be null',
     );
     expect(compiled.querySelector('app-registration-form ion-input[name="password"]')).not.toBe(
       null,
-      "Password shouldn't be null",
+      'Password shouldn\'t be null',
     );
     expect(compiled.querySelector('app-registration-form ion-input[name="confirm"]')).not.toBe(
       null,
-      "Confirm shouldn't be null",
+      'Confirm shouldn\'t be null',
     );
     expect(compiled.querySelector('app-registration-form ion-input[name="name"]')).not.toBe(
       null,
-      "Name shouldn't be null",
+      'Name shouldn\'t be null',
     );
     expect(compiled.querySelector('app-registration-form ion-input[name="phone"]')).not.toBe(
       null,
-      "Phone shouldn't be null",
+      'Phone shouldn\'t be null',
     );
     // expect(compiled.querySelector('app-registration-form ion-input[name="country"]')).not.toBe(null, 'Country shouldn\'t be null');
     // expect(compiled.querySelector('app-registration-form ion-input[name="city"]')).not.toBe(null, 'City shouldn\'t be null');
