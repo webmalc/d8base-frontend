@@ -12,7 +12,12 @@ const mockDeafultState = {
   isAuthenticated: undefined,
 };
 
-const mockMessages: { count: number; next?: null | string; previous?: null | string; results: Array<ReceivedMessage> } = {
+const mockMessages: {
+  count: number;
+  next?: null | string;
+  previous?: null | string;
+  results: Array<ReceivedMessage>;
+} = {
   count: 2,
   results: [
     {

@@ -7,19 +7,18 @@ describe('PhoneEditorComponent', () => {
   let component: PhoneEditorComponent;
   let fixture: ComponentFixture<PhoneEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PhoneEditorComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PhoneEditorComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(PhoneEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(PhoneEditorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

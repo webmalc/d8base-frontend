@@ -9,7 +9,7 @@ describe('ServicePaymentOptionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaymentMethodViewerComponent ],
+      declarations: [PaymentMethodViewerComponent],
       imports: [IonicModule.forRoot()],
     }).compileComponents();
 

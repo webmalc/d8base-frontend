@@ -30,13 +30,7 @@ import { ProfilePage } from './profile.page';
     LeafletModule,
     IonicSelectableModule,
   ],
-  declarations: [
-    ProfilePage,
-    UserContactEditComponent,
-    UserEditComponent,
-    AboutEditComponent,
-    ChangeEmailComponent,
-  ],
+  declarations: [ProfilePage, UserContactEditComponent, UserEditComponent, AboutEditComponent, ChangeEmailComponent],
   providers: [
     PluginApiService,
     ProfileService,
@@ -45,5 +39,4 @@ import { ProfilePage } from './profile.page';
     RegisterEmailApiService,
   ],
 })
-export class ProfilePageModule {
-}
+export class ProfilePageModule {}

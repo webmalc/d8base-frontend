@@ -22,7 +22,10 @@ export class UnreadMessagesService {
     results: Array<ReceivedMessage>;
   }>;
 
-  constructor(private readonly communicationService: CommunicationService, private readonly notificationWorker: NotificationWorkerService) {
+  constructor(
+    private readonly communicationService: CommunicationService,
+    private readonly notificationWorker: NotificationWorkerService,
+  ) {
     this.initUnreadMessages();
   }
 
@@ -36,7 +39,7 @@ export class UnreadMessagesService {
   }
 
   public unreadMessagesCount(): Observable<number> {
-    return this.unreadMessages$.pipe(map((response) => response?.count));
+    return this.unreadMessages$.pipe(map(response => response?.count));
   }
 
   private initUnreadMessages(): void {

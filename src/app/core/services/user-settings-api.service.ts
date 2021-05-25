@@ -10,8 +10,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class UserSettingsApiService extends AbstractApiService<UserSettings> implements ApiServiceInterface<UserSettings> {
-
+export class UserSettingsApiService
+  extends AbstractApiService<UserSettings>
+  implements ApiServiceInterface<UserSettings> {
   private readonly url = environment.backend.user_settings;
 
   constructor(protected client: ApiClientService) {

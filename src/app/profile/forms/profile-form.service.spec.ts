@@ -9,9 +9,7 @@ describe('ProfileFormService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        FormBuilder,
-      ],
+      providers: [FormBuilder],
     });
     service = TestBed.inject(ProfileFormService);
   });

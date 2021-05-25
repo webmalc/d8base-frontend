@@ -5,20 +5,16 @@ import { ClientContactInterface } from '@app/shared/interfaces/client-contact-in
 
 @Injectable()
 export class ContactsTabFormService {
-
   public form: FormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder) {
-  }
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   public get controls(): string[] {
     return Object.keys(this.form.controls);
   }
 
   public createForm(contactList: Contact[], userContactList: ClientContactInterface[]): FormGroup {
-    return this.form = this.formBuilder.group(
-      this.generate(contactList, userContactList),
-    );
+    return (this.form = this.formBuilder.group(this.generate(contactList, userContactList)));
   }
 
   public fillForm(data: ClientContactInterface[]): void {

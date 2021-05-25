@@ -7,16 +7,18 @@ describe('SearchFiltersSubmenuComponent', () => {
   let component: SearchFiltersSubmenuComponent;
   let fixture: ComponentFixture<SearchFiltersSubmenuComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SearchFiltersSubmenuComponent],
-      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SearchFiltersSubmenuComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchFiltersSubmenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(SearchFiltersSubmenuComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

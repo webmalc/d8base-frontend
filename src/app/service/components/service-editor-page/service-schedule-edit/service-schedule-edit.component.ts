@@ -33,7 +33,9 @@ export class ServiceScheduleEditComponent extends ServiceEditor {
   public submit({ form, service }: ServiceEditorContext): void {
     const { is_base_schedule, schedule } = form.value;
     const newSchedule: ServiceSchedule[] = schedule?.map(s => ({ ...s, service: service.id }));
-    const createNewSchedule$ = is_base_schedule ? of<any>(void 0) : this.deps.api.accountsServiceScheduleSet(newSchedule);
+    const createNewSchedule$ = is_base_schedule
+      ? of<any>(void 0)
+      : this.deps.api.accountsServiceScheduleSet(newSchedule);
 
     const newService: Service = {
       ...service,

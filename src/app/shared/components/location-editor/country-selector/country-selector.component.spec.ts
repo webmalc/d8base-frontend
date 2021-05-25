@@ -7,19 +7,18 @@ describe('CountrySelectorComponent', () => {
   let component: CountrySelectorComponent;
   let fixture: ComponentFixture<CountrySelectorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [CountrySelectorComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [CountrySelectorComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(CountrySelectorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(CountrySelectorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

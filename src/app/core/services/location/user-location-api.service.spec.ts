@@ -4,12 +4,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserLocationApiService } from './user-location-api.service';
 
 describe('LocationApiService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
-    providers: [
-      UserLocationApiService,
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [UserLocationApiService],
+    }),
+  );
 
   it('should be created', () => {
     const service: UserLocationApiService = TestBed.inject(UserLocationApiService);

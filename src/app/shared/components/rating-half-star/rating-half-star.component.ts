@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './rating-half-star.component.html',
   styleUrls: ['./rating-half-star.component.scss'],
 })
-export class RatingHalfStarComponent {
-}
+export class RatingHalfStarComponent {}

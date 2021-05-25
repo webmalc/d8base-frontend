@@ -33,6 +33,8 @@ export class ReviewsService {
   }
 
   private getCountryCode(nationality: number): Observable<{ [nationality: number]: string }> {
-    return this.locationService.locationCountriesRead(nationality).pipe(map(country => ({ [nationality]: country.tld })));
+    return this.locationService
+      .locationCountriesRead(nationality)
+      .pipe(map(country => ({ [nationality]: country.tld })));
   }
 }

@@ -12,8 +12,7 @@ export abstract class StepComponent<T> implements OnDestroy {
 
   protected readonly ngDestroy$ = new Subject<void>();
 
-  constructor(protected readonly cd: ChangeDetectorRef) {
-  }
+  constructor(protected readonly cd: ChangeDetectorRef) {}
 
   public ngOnDestroy(): void {
     this.ngDestroy$.next();

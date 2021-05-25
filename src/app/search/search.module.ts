@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from '@app/infinite-scroll/infinite-scroll.module';
 import { ReviewsModule } from '@app/reviews/reviews.module';
-import { SearchFiltersAdditionalTabComponent }
-  from '@app/search/components/search-filters-additional-tab/search-filters-additional-tab.component';
+import {
+  SearchFiltersAdditionalTabComponent,
+} from '@app/search/components/search-filters-additional-tab/search-filters-additional-tab.component';
 import { SearchFiltersMainTabComponent } from '@app/search/components/search-filters-main-tab/search-filters-main-tab.component';
 import { SearchFiltersSubmenuComponent } from '@app/search/components/search-filters-submenu/search-filters-submenu.component';
 import { SearchFiltersComponent } from '@app/search/components/search-filters/search-filters.component';

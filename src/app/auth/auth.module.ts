@@ -6,15 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, AuthRoutingModule, ReactiveFormsModule, SharedModule],
   declarations: [],
 })
-export class AuthModule {
-}
+export class AuthModule {}

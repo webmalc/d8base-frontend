@@ -8,16 +8,18 @@ describe('ServiceLocationComponent', () => {
   let component: ServiceLocationComponent;
   let fixture: ComponentFixture<ServiceLocationComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ServiceLocationComponent ],
-      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServiceLocationComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServiceLocationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServiceLocationComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

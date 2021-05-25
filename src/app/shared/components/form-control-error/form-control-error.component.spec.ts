@@ -7,16 +7,18 @@ describe('FormControlErrorComponent', () => {
   let component: FormControlErrorComponent;
   let fixture: ComponentFixture<FormControlErrorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [FormControlErrorComponent],
-      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [FormControlErrorComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(FormControlErrorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(FormControlErrorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -50,10 +50,12 @@ export function getMonthDateString(date: Date | string): string {
 }
 
 export function fromDatetime(datetime: string): { date: string; time: string } {
-  return datetime ? {
-    date: datetime.slice(0, 10),
-    time: datetime.slice(11, 16),
-  } : { date: null, time: null };
+  return datetime
+    ? {
+        date: datetime.slice(0, 10),
+        time: datetime.slice(11, 16),
+      }
+    : { date: null, time: null };
 }
 
 function getMonthNumberFormatted(date: Date): string {

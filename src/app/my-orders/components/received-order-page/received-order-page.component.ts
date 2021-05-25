@@ -22,13 +22,13 @@ export class ReceivedOrderPageComponent {
   public order$: Observable<ReceivedOrder>;
 
   constructor(
-    private readonly  orderStatusController: ReceiverOrderStatusController,
+    private readonly orderStatusController: ReceiverOrderStatusController,
     route: ActivatedRoute,
     api: AccountsService,
   ) {
     this.order$ = route.params.pipe(
       map(params => Number.parseInt(params.id, 10)),
-      switchMap(id => id ? api.accountsOrdersReceivedRead(id) : of<ReceivedOrder>()),
+      switchMap(id => (id ? api.accountsOrdersReceivedRead(id) : of<ReceivedOrder>())),
     );
   }
 

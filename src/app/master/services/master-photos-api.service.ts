@@ -9,7 +9,6 @@ import { plainToClass } from 'class-transformer';
   providedIn: 'root',
 })
 export class MasterPhotosApiService extends AbstractApiService<MasterPhoto> {
-
   private readonly url = environment.backend.master_photos;
 
   constructor(protected client: ApiClientService) {

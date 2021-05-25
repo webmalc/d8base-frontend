@@ -11,23 +11,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RegionApiService extends AbstractReadonlyApiService<Region> {
-
   private readonly url = environment.backend.regions;
 
   constructor(protected client: ApiClientService) {
     super(client);
   }
 
-  public get(
-    params: {
-      country?: string;
-      code?: string;
-      search?: string;
-      ordering?: string;
-      page?: string;
-      page_size?: string;
-    },
-  ): Observable<ApiListResponseInterface<Region>> {
+  public get(params: {
+    country?: string;
+    code?: string;
+    search?: string;
+    ordering?: string;
+    page?: string;
+    page_size?: string;
+  }): Observable<ApiListResponseInterface<Region>> {
     return super.get(params);
   }
 

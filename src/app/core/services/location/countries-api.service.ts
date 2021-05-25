@@ -12,24 +12,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CountriesApiService extends AbstractReadonlyApiService<Country> {
-
   private readonly url = environment.backend.countries;
 
   constructor(protected client: ApiClientService) {
     super(client);
   }
 
-  public get(
-    params: {
-      page_size?: string;
-      currency?: string;
-      continent?: string;
-      search?: string;
-      ordering?: string;
-      page?: string;
-      tld?: string;
-    },
-  ): Observable<ApiListResponseInterface<Country>> {
+  public get(params: {
+    page_size?: string;
+    currency?: string;
+    continent?: string;
+    search?: string;
+    ordering?: string;
+    page?: string;
+    tld?: string;
+  }): Observable<ApiListResponseInterface<Country>> {
     return super.get(params);
   }
 

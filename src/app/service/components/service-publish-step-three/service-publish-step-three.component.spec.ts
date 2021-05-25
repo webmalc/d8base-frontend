@@ -17,32 +17,31 @@ describe('ServicePublishStepThreeComponent', () => {
   let component: ServicePublishStepThreeComponent;
   let fixture: ComponentFixture<ServicePublishStepThreeComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServicePublishStepThreeComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        ServicePublishDataHolderService,
-        ChainManagerService,
-        StepOneHandlerService,
-        StepTwoHandlerService,
-        StepThreeHandlerService,
-        StepFourHandlerService,
-        StepFiveHandlerService,
-        StepSixHandlerService,
-        StepSevenHandlerService,
-        StepFinalHandlerService,
-        ServiceStepsNavigationService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServicePublishStepThreeComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          ServicePublishDataHolderService,
+          ChainManagerService,
+          StepOneHandlerService,
+          StepTwoHandlerService,
+          StepThreeHandlerService,
+          StepFourHandlerService,
+          StepFiveHandlerService,
+          StepSixHandlerService,
+          StepSevenHandlerService,
+          StepFinalHandlerService,
+          ServiceStepsNavigationService,
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServicePublishStepThreeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServicePublishStepThreeComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

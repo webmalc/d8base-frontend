@@ -1,5 +1,4 @@
 export class StorageManagerMock {
-
   private readonly data: object = {
     api_token: null,
     refresh_token: null,

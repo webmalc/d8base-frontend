@@ -10,13 +10,11 @@ import { PopoverController } from '@ionic/angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationPickerComponent {
-
   @Input() public enabled: boolean = false;
   @Input() public locationData: SearchLocationDataInterface;
   @Output() public emitter: EventEmitter<SearchLocationDataInterface> = new EventEmitter<SearchLocationDataInterface>();
 
-  constructor(private readonly pop: PopoverController) {
-  }
+  constructor(private readonly pop: PopoverController) {}
 
   public async initPopover(): Promise<void> {
     const pop = await this.pop.create({
@@ -32,21 +30,21 @@ export class LocationPickerComponent {
       },
       cssClass: ['map-popover-width', 'map-popover-city-height'],
     });
-    pop.onDidDismiss().then(
-      (data: { data: SearchLocationDataInterface }) => {
-        if (data.data) {
-          if (data.data?.city?.id !== this.locationData?.city?.id) {
-            data.data.coordinates = undefined;
-            this.emitter.emit(data.data);
-          } else if (data.data?.coordinates?.longitude !== this.locationData?.coordinates?.longitude ||
-            data.data?.coordinates?.latitude !== this.locationData?.coordinates?.latitude) {
-            data.data.country = undefined;
-            data.data.city = undefined;
-            this.emitter.emit(data.data);
-          }
+    pop.onDidDismiss().then((data: { data: SearchLocationDataInterface }) => {
+      if (data.data) {
+        if (data.data?.city?.id !== this.locationData?.city?.id) {
+          data.data.coordinates = undefined;
+          this.emitter.emit(data.data);
+        } else if (
+          data.data?.coordinates?.longitude !== this.locationData?.coordinates?.longitude ||
+          data.data?.coordinates?.latitude !== this.locationData?.coordinates?.latitude
+        ) {
+          data.data.country = undefined;
+          data.data.city = undefined;
+          this.emitter.emit(data.data);
         }
-      },
-    );
+      }
+    });
 
     return await pop.present();
   }

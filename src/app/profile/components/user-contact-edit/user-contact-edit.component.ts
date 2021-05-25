@@ -47,10 +47,7 @@ export class UserContactEditComponent implements OnInit {
 
     this.contact$ = this.contacts$.pipe(
       filter(contacts => Boolean(contacts)),
-      map(
-        contacts =>
-          contacts?.find(({ id }) => this.contactId === id) || newContact,
-      ),
+      map(contacts => contacts?.find(({ id }) => this.contactId === id) || newContact),
     );
 
     this.subscribeToActionSuccess();

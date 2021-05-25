@@ -7,16 +7,16 @@ import { ServicePublishDataHolderService } from '../service-publish-data-holder.
 import { StepSixHandlerService } from './step-six-handler.service';
 
 describe('StepSixHandlerService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      StepSixHandlerService,
-      ServicePublishDataHolderService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        StepSixHandlerService,
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: StepSixHandlerService = TestBed.inject(StepSixHandlerService);

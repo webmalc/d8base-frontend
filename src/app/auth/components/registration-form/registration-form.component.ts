@@ -34,9 +34,7 @@ export class RegistrationFormComponent {
 
   private _pending: boolean = false;
 
-  constructor(
-    private readonly fb: FormBuilder,
-  ) {}
+  constructor(private readonly fb: FormBuilder) {}
 
   public get pending(): boolean {
     return this._pending;

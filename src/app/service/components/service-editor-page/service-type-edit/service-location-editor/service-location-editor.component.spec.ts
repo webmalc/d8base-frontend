@@ -8,16 +8,18 @@ describe('ServiceLocationEditorComponent', () => {
   let component: ServiceLocationEditorComponent;
   let fixture: ComponentFixture<ServiceLocationEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServiceLocationEditorComponent],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServiceLocationEditorComponent],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServiceLocationEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServiceLocationEditorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

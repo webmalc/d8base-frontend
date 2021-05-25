@@ -26,15 +26,20 @@ export function timeToInt(time: string): number {
 
 export function createFormGroup(options: { dayCode: number; startTime?: string; endTime?: string }): FormGroup {
   const { dayCode, startTime, endTime } = options;
-  return new FormGroup({
-    [ScheduleEditorFormFields.Day]: new FormControl(dayCode),
-    [ScheduleEditorFormFields.StartTime]: new FormControl(startTime,
-      [Validators.required, CustomValidators.timeFormatValidator]),
-    [ScheduleEditorFormFields.EndTime]: new FormControl(endTime,
-      [Validators.required, CustomValidators.timeFormatValidator]),
-  }, {
-    validators: [
-      CustomValidators.timeIntervalValidator,
-    ],
-  });
+  return new FormGroup(
+    {
+      [ScheduleEditorFormFields.Day]: new FormControl(dayCode),
+      [ScheduleEditorFormFields.StartTime]: new FormControl(startTime, [
+        Validators.required,
+        CustomValidators.timeFormatValidator,
+      ]),
+      [ScheduleEditorFormFields.EndTime]: new FormControl(endTime, [
+        Validators.required,
+        CustomValidators.timeFormatValidator,
+      ]),
+    },
+    {
+      validators: [CustomValidators.timeIntervalValidator],
+    },
+  );
 }

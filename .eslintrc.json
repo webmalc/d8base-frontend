@@ -115,11 +115,10 @@
             ]
           }
         ],
-        "@typescript-eslint/no-invalid-this": "off",
-        // TODO set to "error"
+        "@typescript-eslint/no-invalid-this": "off", // TODO set to "error"
         "@typescript-eslint/prefer-literal-enum-member": "error",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        // TODO set to "error"
+        "@typescript-eslint/explicit-function-return-type": "off", // TODO set to "error"
+        "@typescript-eslint/quotes": ["error", "single", { "avoidEscape": true }],
         "arrow-parens": ["off", "always"],
         "brace-style": ["off", "off"],
         "comma-dangle": ["error", "always-multiline"],

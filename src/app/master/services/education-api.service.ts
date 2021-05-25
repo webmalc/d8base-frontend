@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class EducationApiService extends AbstractApiService<Education> implements ApiServiceInterface<Education> {
-
   private readonly url = environment.backend.education;
 
   constructor(protected client: ApiClientService) {

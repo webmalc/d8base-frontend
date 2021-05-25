@@ -33,7 +33,12 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
   });
   public isSelfOrder: boolean = false;
 
-  private readonly userFields = [this.formFields.FirstName, this.formFields.LastName, this.formFields.Email, this.formFields.Phone];
+  private readonly userFields = [
+    this.formFields.FirstName,
+    this.formFields.LastName,
+    this.formFields.Email,
+    this.formFields.Phone,
+  ];
 
   private currentUserForm: ClientDetailsStepData;
 
@@ -56,13 +61,11 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
       return;
     }
     const isForMe = !data[this.formFields.IsForMe];
-    this.form.patchValue(
-      {
-        ...(!isForMe ? data : {}),
-        [this.formFields.IsForMe]: isForMe,
-        [this.formFields.Comment]: data[this.formFields.Comment],
-      },
-    );
+    this.form.patchValue({
+      ...(!isForMe ? data : {}),
+      [this.formFields.IsForMe]: isForMe,
+      [this.formFields.Comment]: data[this.formFields.Comment],
+    });
     this.disableUserFields(isForMe);
   }
 
@@ -121,7 +124,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     });
   }
 
-  private setSelfOrder():void {
+  private setSelfOrder(): void {
     this.isSelfOrder = this.context.isSelfOrder;
   }
 }

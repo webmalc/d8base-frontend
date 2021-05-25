@@ -11,11 +11,9 @@ import * as ScheduleConstants from '@app/core/constants/schedule.constants';
   styleUrls: ['./day-selector.component.scss'],
 })
 export class DaySelectorComponent {
-
   public defaultWeek = ScheduleConstants.defaultWeek;
 
-  constructor(private readonly popoverController: PopoverController) {
-  }
+  constructor(private readonly popoverController: PopoverController) {}
 
   public onDayClick(index: number): void {
     this.popoverController.dismiss(index);

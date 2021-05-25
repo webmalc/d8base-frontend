@@ -12,7 +12,6 @@ import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-
   styleUrls: ['./master-education-edit.page.scss'],
 })
 export class MasterEducationEditPage extends AbstractModelEditPage<Education> {
-
   constructor(
     protected readonly educationApi: EducationApiService,
     protected readonly route: ActivatedRoute,

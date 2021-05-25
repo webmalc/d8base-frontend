@@ -18,10 +18,6 @@ import { MasterExperienceEditPage } from './master-experience-edit.page';
     MasterExperienceEditPageRoutingModule,
     TranslateModule,
   ],
-  declarations: [
-    MasterExperienceEditPage,
-    ExperienceEditComponent,
-  ],
+  declarations: [MasterExperienceEditPage, ExperienceEditComponent],
 })
-export class MasterExperienceEditPageModule {
-}
+export class MasterExperienceEditPageModule {}

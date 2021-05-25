@@ -7,16 +7,16 @@ import { ServicePublishDataHolderService } from '../services/service-publish-dat
 import { ServicePublishGuardService } from './service-publish-guard.service';
 
 describe('ServicePublishGuardService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      RouterTestingModule,
-    ],
-    providers: [
-      ServicePublishGuardService,
-      ServicePublishDataHolderService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      providers: [
+        ServicePublishGuardService,
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: ServicePublishGuardService = TestBed.inject(ServicePublishGuardService);

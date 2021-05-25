@@ -11,19 +11,19 @@ describe('PriceEditorComponent', () => {
   let component: PriceEditorComponent;
   let fixture: ComponentFixture<PriceEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PriceEditorComponent],
-      imports: [TranslateModule.forRoot(), IonicModule.forRoot(), HttpClientTestingModule],
-      providers: [
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PriceEditorComponent],
+        imports: [TranslateModule.forRoot(), IonicModule.forRoot(), HttpClientTestingModule],
+        providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(PriceEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(PriceEditorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

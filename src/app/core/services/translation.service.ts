@@ -9,7 +9,6 @@ import { map, shareReplay, startWith } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class TranslationService {
-
   public static readonly DIR = './assets/i18n/';
   public readonly LANGUAGES = {
     ru: 'ru',
@@ -17,10 +16,7 @@ export class TranslationService {
   };
   public readonly currentLanguage$: Observable<string>;
 
-  constructor(
-    private readonly translator: TranslateService,
-    private readonly userSettings: UserSettingsService,
-  ) {
+  constructor(private readonly translator: TranslateService, private readonly userSettings: UserSettingsService) {
     this.subOnUserSettings();
     this.currentLanguage$ = translator.onLangChange.pipe(
       map(x => x.lang),
@@ -42,8 +38,8 @@ export class TranslationService {
   }
 
   private subOnUserSettings() {
-    this.userSettings.userSettings$.pipe(
-      map(settings => settings.language),
-    ).subscribe(language => this.setLang(language));
+    this.userSettings.userSettings$
+      .pipe(map(settings => settings.language))
+      .subscribe(language => this.setLang(language));
   }
 }

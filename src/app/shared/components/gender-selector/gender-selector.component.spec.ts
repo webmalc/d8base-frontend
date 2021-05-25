@@ -7,19 +7,18 @@ describe('GenderSelectorComponent', () => {
   let component: GenderSelectorComponent;
   let fixture: ComponentFixture<GenderSelectorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [GenderSelectorComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [GenderSelectorComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(GenderSelectorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(GenderSelectorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

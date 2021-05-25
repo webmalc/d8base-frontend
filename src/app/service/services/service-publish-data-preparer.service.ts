@@ -23,9 +23,7 @@ import ServicePublishData from '../interfaces/service-publish-data.interface';
 
 @Injectable()
 export class ServicePublishDataPreparerService {
-
-  constructor(private readonly servicePublishDataHolder: ServicePublishDataHolderService) {
-  }
+  constructor(private readonly servicePublishDataHolder: ServicePublishDataHolderService) {}
 
   public async getData(): Promise<ServicePublishData> {
     const service = this.getService();
@@ -45,12 +43,15 @@ export class ServicePublishDataPreparerService {
   }
 
   private getMasterSchedule(): MasterSchedule[] {
-    if (this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).need_to_create_master_schedule) {
-      const stepData: MasterSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
-        ServicePublishSteps.Seven,
-      )?.timetable?.map(
-        raw => plainToClass(MasterSchedule, raw),
-      ));
+    if (
+      this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
+        .need_to_create_master_schedule
+    ) {
+      const stepData: MasterSchedule[] = HelperService.clearArray(
+        this.servicePublishDataHolder
+          .getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
+          ?.timetable?.map(raw => plainToClass(MasterSchedule, raw)),
+      );
 
       return !stepData ? [] : stepData;
     }
@@ -59,14 +60,16 @@ export class ServicePublishDataPreparerService {
   }
 
   private getServiceSchedule(): ServiceSchedule[] {
-    if (this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).use_master_schedule) {
+    if (
+      this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).use_master_schedule
+    ) {
       return [];
     }
-    const stepData: ServiceSchedule[] = HelperService.clearArray(this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(
-      ServicePublishSteps.Seven,
-    )?.timetable?.map(
-      raw => plainToClass(ServiceSchedule, raw),
-    ));
+    const stepData: ServiceSchedule[] = HelperService.clearArray(
+      this.servicePublishDataHolder
+        .getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
+        ?.timetable?.map(raw => plainToClass(ServiceSchedule, raw)),
+    );
 
     return !stepData ? [] : stepData;
   }
@@ -94,19 +97,24 @@ export class ServicePublishDataPreparerService {
     const stepOneData = this.servicePublishDataHolder.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
     const stepSixData = this.servicePublishDataHolder.getStepData<StepSixDataInterface>(ServicePublishSteps.Six);
 
-    return !this.servicePublishDataHolder.isset(ServicePublishSteps.Five) ? null : {
-      subcategory: stepOneData.subcategory.id,
-      company: stepSixData?.is_company === 'company' ? stepSixData?.company_name : null,
-      description: stepSixData?.description,
-      name: stepSixData?.name,
-      level: stepSixData?.level,
-    };
+    return !this.servicePublishDataHolder.isset(ServicePublishSteps.Five)
+      ? null
+      : {
+          subcategory: stepOneData.subcategory.id,
+          company: stepSixData?.is_company === 'company' ? stepSixData?.company_name : null,
+          description: stepSixData?.description,
+          name: stepSixData?.name,
+          level: stepSixData?.level,
+        };
   }
 
   private getMasterLocation(): MasterLocation {
-    if (this.servicePublishDataHolder.isset(ServicePublishSteps.Final) &&
-      this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).masterLocation) {
-      return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).masterLocation;
+    if (
+      this.servicePublishDataHolder.isset(ServicePublishSteps.Final) &&
+      this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).masterLocation
+    ) {
+      return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final)
+        .masterLocation;
     }
     const location = new MasterLocation();
     const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);

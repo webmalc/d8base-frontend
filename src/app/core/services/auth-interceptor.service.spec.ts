@@ -7,16 +7,13 @@ import { ApiClientService } from './api-client.service';
 import { AuthInterceptor } from './auth-interceptor.service';
 
 describe('AuthInterceptor', () => {
-
   let client: ApiClientService;
   let service: AuthInterceptor;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
+      imports: [HttpClientTestingModule],
       providers: [
         {
           provide: HTTP_INTERCEPTORS,

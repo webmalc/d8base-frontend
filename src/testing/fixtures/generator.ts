@@ -28,21 +28,21 @@ export class Autofixture {
 
     this.forEachProperty(result, (name: string) => {
       childType = this.actualTypeOfField(result, name);
-      childOptions = options && options[name] as Options;
-      childSpec = (options && options[name] as string) || typeof result[name][0];
+      childOptions = options && (options[name] as Options);
+      childSpec = (options && (options[name] as string)) || typeof result[name][0];
 
       switch (childSpec) {
-        case('skip'):
+        case 'skip':
           delete result[name];
           break;
-        case('actualObject'):
+        case 'actualObject':
           result[name] = this.create(result[name], childOptions);
           break;
-        case('arrayOfObjects'):
+        case 'arrayOfObjects':
           childElementTemplate = result[name][0];
           result[name] = this.createMany(childElementTemplate, elementCount, childOptions);
           break;
-        case('arrayOfPrimitives'):
+        case 'arrayOfPrimitives':
           result[name] = this.createManyPrimitiveFromSpec(elementCount, childSpec);
           break;
         default:
@@ -176,10 +176,8 @@ export class Autofixture {
   }
 
   private parseNumberSpec(spec: string): () => number {
-
-    const parsedSpec = this.parseSimpleNumericalSpec(spec) ||
-      this.parseAsOnesidedSpec(spec) ||
-      this.parseAsTwosidedSpec(spec);
+    const parsedSpec =
+      this.parseSimpleNumericalSpec(spec) || this.parseAsOnesidedSpec(spec) || this.parseAsTwosidedSpec(spec);
 
     if (parsedSpec) {
       return parsedSpec;

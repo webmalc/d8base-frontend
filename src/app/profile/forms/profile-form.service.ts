@@ -12,8 +12,14 @@ export class ProfileFormService {
 
   public createForm(user: Profile): FormGroup {
     return this.formBuilder.group({
-      [ProfileFormFields.FirstName]: [user.first_name, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      [ProfileFormFields.LastName]: [user.last_name, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      [ProfileFormFields.FirstName]: [
+        user.first_name,
+        [Validators.required, Validators.minLength(1), Validators.maxLength(20)],
+      ],
+      [ProfileFormFields.LastName]: [
+        user.last_name,
+        [Validators.required, Validators.minLength(1), Validators.maxLength(20)],
+      ],
       [ProfileFormFields.Patronymic]: [user.patronymic, [Validators.minLength(1), Validators.maxLength(20)]],
       [ProfileFormFields.Email]: [user.email, [Validators.required, AppValidators.email]],
       [ProfileFormFields.Gender]: [user.gender?.toString()],

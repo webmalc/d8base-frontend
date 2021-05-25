@@ -10,14 +10,7 @@ import { UserLocationEditPageRoutingModule } from './user-location-edit-routing.
 import { UserLocationEditPage } from './user-location-edit.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    UserLocationEditPageRoutingModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, UserLocationEditPageRoutingModule, SharedModule],
   declarations: [UserLocationEditPage],
 })
-export class UserLocationEditPageModule {
-}
+export class UserLocationEditPageModule {}

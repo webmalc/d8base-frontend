@@ -7,5 +7,12 @@ import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-inte
 import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-interface';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 
-export type StepDataInterfaceType = StepOneDataInterface | StepTwoDataInterface | StepThreeDataInterface | StepFourDataInterface |
-  StepFiveDataInterface | StepSixDataInterface | StepSevenDataInterface | FinalStepDataInterface;
+export type StepDataInterfaceType =
+  | StepOneDataInterface
+  | StepTwoDataInterface
+  | StepThreeDataInterface
+  | StepFourDataInterface
+  | StepFiveDataInterface
+  | StepSixDataInterface
+  | StepSevenDataInterface
+  | FinalStepDataInterface;

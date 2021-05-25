@@ -8,20 +8,19 @@ describe('LocationEditorPopoverComponent', () => {
   let component: LocationEditorPopoverComponent;
   let fixture: ComponentFixture<LocationEditorPopoverComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LocationEditorPopoverComponent ],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LocationEditorPopoverComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(LocationEditorPopoverComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(LocationEditorPopoverComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -77,7 +77,7 @@ export class ProfilePage {
     this.emailVerificationSent$ = this.actions$.pipe(
       ofActionSuccessful(CurrentUserActions.ResendEmailVerification),
       withLatestFrom(this.profile$),
-      map(([ ,profile]) => profile.email),
+      map(([, profile]) => profile.email),
       takeUntil(this.ngDestroy$),
     );
   }

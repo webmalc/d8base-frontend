@@ -25,10 +25,7 @@ describe('CurrentLocationCompilerService', () => {
         { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
         { provide: StorageManagerService, useClass: StorageManagerMock },
       ],
-      imports: [
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-      ],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
     });
     service = TestBed.inject(CurrentLocationCompilerService);
   });

@@ -11,19 +11,19 @@ describe('MasterPage', () => {
   let component: MasterPage;
   let fixture: ComponentFixture<MasterPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
-      declarations: [MasterPage],
-      providers: [
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
+        declarations: [MasterPage],
+        providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

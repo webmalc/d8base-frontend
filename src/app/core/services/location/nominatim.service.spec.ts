@@ -9,12 +9,8 @@ describe('NominatimService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
+      imports: [HttpClientTestingModule],
+      providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
     });
     service = TestBed.inject(NominatimService);
   });

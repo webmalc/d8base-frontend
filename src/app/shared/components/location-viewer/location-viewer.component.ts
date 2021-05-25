@@ -9,7 +9,6 @@ import { map, startWith, switchMap } from 'rxjs/operators';
   styleUrls: ['./location-viewer.component.scss'],
 })
 export class LocationViewerComponent {
-
   @Input() public type: 'full' | 'short' = 'full';
 
   public locationText$: Observable<string>;

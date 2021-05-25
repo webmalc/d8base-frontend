@@ -13,7 +13,6 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./on-map-popover.component.scss'],
 })
 export class OnMapPopoverComponent implements OnInit {
-
   public isCityEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public data: SearchLocationDataInterface;
   public renderCountry: boolean = true;
@@ -24,8 +23,7 @@ export class OnMapPopoverComponent implements OnInit {
     public readonly citySelectable: SelectableCityOnSearchService,
     private readonly navParams: NavParams,
     private readonly popover: PopoverController,
-  ) {
-  }
+  ) {}
 
   public formatCoords(): number[] {
     return this.data.coordinates ? [this.data.coordinates.longitude, this.data.coordinates.latitude] : null;

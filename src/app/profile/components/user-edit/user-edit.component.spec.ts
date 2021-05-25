@@ -13,26 +13,20 @@ describe('UserEditComponent', () => {
   let component: UserEditComponent;
   let fixture: ComponentFixture<UserEditComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [UserEditComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        ProfileService,
-        Location,
-        FormBuilder,
-        RegisterEmailApiService,
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [UserEditComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [ProfileService, Location, FormBuilder, RegisterEmailApiService],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(UserEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(UserEditComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

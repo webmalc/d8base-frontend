@@ -36,13 +36,14 @@ export class ServiceEditorPageComponent {
       shareReplay(1),
     );
     this.schedule$ = this.service$.pipe(
-      switchMap(service => service.is_base_schedule
-        ? api.accountsProfessionalScheduleList({}).pipe(map(response => response.results))
-        : api.accountsServiceScheduleList({ service: service.id }).pipe(map(response => response.results)),
+      switchMap(service =>
+        service.is_base_schedule
+          ? api.accountsProfessionalScheduleList({}).pipe(map(response => response.results))
+          : api.accountsServiceScheduleList({ service: service.id }).pipe(map(response => response.results)),
       ),
     );
     this.photos$ = this.service$.pipe(
-      switchMap(service => api.accountsServicePhotosList({service: service.id})),
+      switchMap(service => api.accountsServicePhotosList({ service: service.id })),
       map(response => response.results),
       shareReplay(1),
     );
@@ -53,7 +54,9 @@ export class ServiceEditorPageComponent {
   }
 
   public setIsEnabled(service: Service, isEnabled: boolean): void {
-    const operation = isEnabled ? this.serviceOperations.enableService(service) : this.serviceOperations.disableService(service);
+    const operation = isEnabled
+      ? this.serviceOperations.enableService(service)
+      : this.serviceOperations.disableService(service);
     operation.subscribe(() => this.refresh$.next());
   }
 

@@ -9,13 +9,11 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./context-menu-popover.component.scss'],
 })
 export class ContextMenuPopoverComponent implements OnDestroy, OnInit {
-
   public static delete$: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
   public static update$: BehaviorSubject<Message> = new BehaviorSubject<Message>(null);
   public message: Message;
 
-  constructor(private readonly navParams: NavParams) {
-  }
+  constructor(private readonly navParams: NavParams) {}
 
   public ngOnInit(): void {
     this.init();

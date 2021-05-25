@@ -12,25 +12,24 @@ import { filter, first } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DefaultLocationPickerService {
-
   constructor(
     private readonly currentLocationCompilerService: CurrentLocationCompilerService,
     private readonly defaultLocationStorage: DefaultLocationStorageService,
     private readonly popover: PopoverController,
-  ) {
-  }
+  ) {}
 
   @once
   public init(): void {
-    this.defaultLocationStorage.getDefaultLocation().then(
-      data => {
-        if (null === data) {
-          this.getDefaultLocation().pipe(first(), filter(loc => null !== loc)).subscribe(
-            locationData => this.initPopover(locationData),
-          );
-        }
-      },
-    );
+    this.defaultLocationStorage.getDefaultLocation().then(data => {
+      if (null === data) {
+        this.getDefaultLocation()
+          .pipe(
+            first(),
+            filter(loc => null !== loc),
+          )
+          .subscribe(locationData => this.initPopover(locationData));
+      }
+    });
   }
 
   private async initPopover(data: ExtendedLocation): Promise<void> {
@@ -40,9 +39,7 @@ export class DefaultLocationPickerService {
       animated: true,
       componentProps: { data },
     });
-    pop.onDidDismiss().then(
-      result => this.defaultLocationStorage.setDefaultLocation(result.data ?? data),
-    );
+    pop.onDidDismiss().then(result => this.defaultLocationStorage.setDefaultLocation(result.data ?? data));
     await pop.present();
   }
 

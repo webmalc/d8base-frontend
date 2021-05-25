@@ -15,7 +15,6 @@ type Gender = Profile['gender'];
       multi: true,
     },
   ],
-
 })
 export class GenderSelectorComponent implements ControlValueAccessor {
   public defaultValue: Gender = null;

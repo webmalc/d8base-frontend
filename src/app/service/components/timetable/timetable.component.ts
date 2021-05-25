@@ -14,18 +14,11 @@ export class TimetableComponent {
 
   private readonly STEP = 6;
 
-  constructor(
-    public servicePublishDataHolderService: ServicePublishDataHolderService,
-    public location: Location,
-  ) {
-  }
+  constructor(public servicePublishDataHolderService: ServicePublishDataHolderService, public location: Location) {}
 
   public async saveTimetable(): Promise<void> {
     const timetable: AbstractSchedule[] = this.scheduleEditor.value ?? [];
-    await this.servicePublishDataHolderService.assignStepData(
-      this.STEP,
-      { timetable },
-    );
+    await this.servicePublishDataHolderService.assignStepData(this.STEP, { timetable });
     this.location.back();
   }
 }

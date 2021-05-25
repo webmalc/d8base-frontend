@@ -27,14 +27,17 @@ export class ClientIdentificationComponent {
   public name = new FormControl({ value: '', disabled: true }, Validators.required);
   public lastName = new FormControl({ value: '', disabled: true });
   public country = new FormControl({ value: '', disabled: true }, Validators.required);
-  public form = new FormGroup({
-    email: this.email,
-    password: this.password,
-    passwordConfirm: this.passwordConfirm,
-    name: this.name,
-    lastName: this.lastName,
-    country: this.country,
-  }, confirmPasswordValidator('password', 'passwordConfirm'));
+  public form = new FormGroup(
+    {
+      email: this.email,
+      password: this.password,
+      passwordConfirm: this.passwordConfirm,
+      name: this.name,
+      lastName: this.lastName,
+      country: this.country,
+    },
+    confirmPasswordValidator('password', 'passwordConfirm'),
+  );
   public isRegistered;
   public showRegistrationForm = false;
 
@@ -47,8 +50,7 @@ export class ClientIdentificationComponent {
     private readonly registrationChecker: IsUserRegisteredApiService,
     private readonly authenticator: AuthenticationService,
     private readonly registrar: RegistrationService,
-  ) {
-  }
+  ) {}
 
   public submit(): void {
     if (this.form.invalid) {
@@ -90,9 +92,7 @@ export class ClientIdentificationComponent {
       };
       this.registrar.register(userData, { location: locationData });
     }
-    this.profile$.pipe(
-      first(profile => !!profile?.account_type),
-    ).subscribe(() => this.wizardState.nextStep());
+    this.profile$.pipe(first(profile => !!profile?.account_type)).subscribe(() => this.wizardState.nextStep());
   }
 
   public reset(): void {

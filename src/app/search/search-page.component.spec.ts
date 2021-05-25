@@ -42,7 +42,6 @@ describe('SearchPage', () => {
 
 @Component({
   selector: 'app-test',
-  template: ``,
+  template: '',
 })
-class AppTestComponent {
-}
+class AppTestComponent {}

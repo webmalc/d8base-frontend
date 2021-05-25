@@ -8,16 +8,18 @@ describe('ContactsViewComponent', () => {
   let component: ContactsViewComponent;
   let fixture: ComponentFixture<ContactsViewComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ContactsViewComponent],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ContactsViewComponent],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ContactsViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ContactsViewComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

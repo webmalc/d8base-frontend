@@ -11,22 +11,19 @@ describe('ServiceInfoEditComponent', () => {
   let component: ServiceInfoEditorComponent;
   let fixture: ComponentFixture<ServiceInfoEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ServiceInfoEditorComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        IonicModule.forRoot(),
-        RouterTestingModule,
-        HttpClientTestingModule,
-      ],
-      providers: [ServiceEditorDepsService],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServiceInfoEditorComponent],
+        imports: [TranslateModule.forRoot(), IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+        providers: [ServiceEditorDepsService],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServiceInfoEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServiceInfoEditorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

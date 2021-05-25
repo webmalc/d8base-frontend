@@ -9,7 +9,6 @@ import { plainToClass } from 'class-transformer';
   providedIn: 'root',
 })
 export class PostalCodeApiService extends AbstractReadonlyApiService<PostalCode> {
-
   private readonly url = environment.backend.postal_codes;
 
   constructor(protected client: ApiClientService) {

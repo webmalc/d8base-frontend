@@ -8,17 +8,11 @@ import { IonicSelectableComponent } from 'ionic-selectable';
   providedIn: 'root',
 })
 export class SelectablePostalCodeOnSearchService extends SelectableSearchService {
-
   constructor(private readonly postalApi: PostalCodeApiService) {
     super();
   }
 
   public onPostalCodeSearch(event: { component: IonicSelectableComponent; text: string }, city: City): void {
-    this.abstractOnSearch(
-      event.component,
-      event.text,
-      this.postalApi,
-      { city: city?.id.toString(10) },
-    );
+    this.abstractOnSearch(event.component, event.text, this.postalApi, { city: city?.id.toString(10) });
   }
 }

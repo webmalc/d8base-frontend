@@ -12,7 +12,6 @@ import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-
   styleUrls: ['./master-certificate-edit.page.scss'],
 })
 export class MasterCertificateEditPage extends AbstractModelEditPage<Certificate> {
-
   constructor(
     protected readonly route: ActivatedRoute,
     protected readonly location: Location,

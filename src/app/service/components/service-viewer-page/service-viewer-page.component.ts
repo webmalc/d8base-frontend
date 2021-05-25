@@ -12,7 +12,6 @@ import { first, map, switchMap } from 'rxjs/operators';
   styleUrls: ['./service-viewer-page.component.scss'],
 })
 export class ServiceViewerPageComponent {
-
   public service: ServiceList;
   public master: ProfessionalList;
 
@@ -22,18 +21,25 @@ export class ServiceViewerPageComponent {
     servicesApi: ServicesService,
     masterApi: ProfessionalsService,
   ) {
-    route.params.pipe(
-      first(params => Boolean(params?.id)),
-      switchMap(params => servicesApi.servicesServicesRead(params.id).pipe(
-        switchMap(service => masterApi.professionalsProfessionalsRead(service.professional).pipe(
-          map((master) => ({
-              master,
-              service,
-            })))),
-      )),
-    ).subscribe(({ master, service }) => {
-      this.master = master;
-      this.service = service;
-    });
+    route.params
+      .pipe(
+        first(params => Boolean(params?.id)),
+        switchMap(params =>
+          servicesApi.servicesServicesRead(params.id).pipe(
+            switchMap(service =>
+              masterApi.professionalsProfessionalsRead(service.professional).pipe(
+                map(master => ({
+                  master,
+                  service,
+                })),
+              ),
+            ),
+          ),
+        ),
+      )
+      .subscribe(({ master, service }) => {
+        this.master = master;
+        this.service = service;
+      });
   }
 }

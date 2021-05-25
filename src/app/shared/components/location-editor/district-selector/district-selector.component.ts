@@ -21,16 +21,17 @@ const PAGE_SIZE = 1000;
 })
 export class DistrictSelectorComponent extends ItemSelectorControl<District> {
   public items$: Observable<District[]>;
-  public title ='location-edit-page.district';
+  public title = 'location-edit-page.district';
   private readonly city$ = new BehaviorSubject<City>(null);
 
   constructor(private readonly locationApi: LocationService) {
     super();
     this.hasData$ = this.city$.pipe(map(x => !!x));
     this.items$ = this.city$.pipe(
-      switchMap(city => city
-        ? this.locationApi.locationDistrictsList({ pageSize: PAGE_SIZE, city: `${city.id}` })
-        : of({ results: [] }),
+      switchMap(city =>
+        city
+          ? this.locationApi.locationDistrictsList({ pageSize: PAGE_SIZE, city: `${city.id}` })
+          : of({ results: [] }),
       ),
       map(x => x.results),
     );

@@ -14,7 +14,6 @@ import { Reinitable } from '@app/shared/abstract/reinitable';
   styleUrls: ['./service-publish-step-two.component.scss'],
 })
 export class ServicePublishStepTwoComponent extends Reinitable {
-
   public readonly serviceTypes = serviceTypes;
   public readonly formFields = ServicePublishStepTwoFormFields;
 
@@ -28,7 +27,8 @@ export class ServicePublishStepTwoComponent extends Reinitable {
 
   public async submitForm(): Promise<void> {
     await this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
-      ServicePublishSteps.Two, this.formService.form.getRawValue(),
+      ServicePublishSteps.Two,
+      this.formService.form.getRawValue(),
     );
     this.serviceStepsNavigationService.next();
   }

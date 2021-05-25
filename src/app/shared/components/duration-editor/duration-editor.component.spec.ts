@@ -9,21 +9,18 @@ describe('DurationComponent', () => {
   let component: DurationEditorComponent;
   let fixture: ComponentFixture<DurationEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [DurationEditorComponent],
-      imports: [
-        IonicModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-        TranslateModule.forRoot(),
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DurationEditorComponent],
+        imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, TranslateModule.forRoot()],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(DurationEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(DurationEditorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -39,7 +36,7 @@ describe('DurationComponent', () => {
   it('convert duration in dd:hh:mm to minutes', () => {
     component.form.controls.days.setValue(1);
     component.form.controls.hours.setValue(2);
-    component.registerOnChange((v) => expect(v).toEqual(1563));
+    component.registerOnChange(v => expect(v).toEqual(1563));
     component.form.controls.minutes.setValue(3);
   });
 });

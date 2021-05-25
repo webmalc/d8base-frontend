@@ -32,11 +32,13 @@ export class ExperienceEditComponent {
 
   @Input()
   public set item(value: ProfessionalExperience) {
-    const interval: DateInterval = !value?.start_date ? null : {
-      startDate: value.start_date,
-      endDate: value.end_date,
-      isOngoing: value.is_still_here,
-    };
+    const interval: DateInterval = !value?.start_date
+      ? null
+      : {
+          startDate: value.start_date,
+          endDate: value.end_date,
+          isOngoing: value.is_still_here,
+        };
 
     const formValue: ExperienceFormValue = {
       [this.formFields.title]: value?.title,

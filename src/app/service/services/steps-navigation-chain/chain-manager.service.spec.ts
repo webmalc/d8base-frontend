@@ -16,25 +16,25 @@ import { StepThreeHandlerService } from './step-three-handler.service';
 import { StepTwoHandlerService } from './step-two-handler.service';
 
 describe('ChainManagerService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      ChainManagerService,
-      StepOneHandlerService,
-      StepTwoHandlerService,
-      StepThreeHandlerService,
-      StepFourHandlerService,
-      StepFiveHandlerService,
-      StepSixHandlerService,
-      StepSevenHandlerService,
-      StepFinalHandlerService,
-      ServicePublishDataHolderService,
-      AuthenticationService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        ChainManagerService,
+        StepOneHandlerService,
+        StepTwoHandlerService,
+        StepThreeHandlerService,
+        StepFourHandlerService,
+        StepFiveHandlerService,
+        StepSixHandlerService,
+        StepSevenHandlerService,
+        StepFinalHandlerService,
+        ServicePublishDataHolderService,
+        AuthenticationService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: ChainManagerService = TestBed.inject(ChainManagerService);

@@ -16,32 +16,34 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class NominatimService {
-
   private readonly REVERSE_URL = environment.nominatim_reverse_url;
   private readonly SEARCH_URL = environment.nominatim_search_url;
 
-  constructor(private readonly http: HttpClient) {
-  }
+  constructor(private readonly http: HttpClient) {}
 
   public reverse(coords: Coords): Observable<NominatimReverseResponse | null> {
-    return this.http.get<NominatimReverseResponseInterface | null>(
-      this.REVERSE_URL,
-      {
+    return this.http
+      .get<NominatimReverseResponseInterface | null>(this.REVERSE_URL, {
         headers: { 'accept-language': 'en' },
         params: { lat: coords.latitude.toString(), lon: coords.longitude.toString(), format: 'jsonv2' },
-      },
-    ).pipe(
-      map(r => r.error === ErrorList.NOMINATIM_CANNOT_REVERSE_ERROR ? null : plainToClass(NominatimReverseResponse, r)),
-    );
+      })
+      .pipe(
+        map(r =>
+          r.error === ErrorList.NOMINATIM_CANNOT_REVERSE_ERROR ? null : plainToClass(NominatimReverseResponse, r),
+        ),
+      );
   }
 
   public search(county: Country, city?: City, postal?: PostalCode): Observable<Coords | null> {
-    return this.http.get<NominatimSearchResponseInterface[] | null>(
-      this.SEARCH_URL,
-      { params: HelperService.clear({ country: county?.name, city: city?.name, postalcode: postal?.code, format: 'jsonv2' }) },
-    ).pipe(
-      map(r => r.length === 0 ? null : { latitude: parseFloat(r[0].lat), longitude: parseFloat(r[0].lon) },
-      ),
-    );
+    return this.http
+      .get<NominatimSearchResponseInterface[] | null>(this.SEARCH_URL, {
+        params: HelperService.clear({
+          country: county?.name,
+          city: city?.name,
+          postalcode: postal?.code,
+          format: 'jsonv2',
+        }),
+      })
+      .pipe(map(r => (r.length === 0 ? null : { latitude: parseFloat(r[0].lat), longitude: parseFloat(r[0].lon) })));
   }
 }

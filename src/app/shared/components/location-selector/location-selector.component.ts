@@ -16,29 +16,24 @@ import LocationSelectorContext from './location-selector-context.interface';
  * Professional location selector
  */
 export class LocationSelectorComponent {
-
   public context$: Observable<LocationSelectorContext>;
   @Output() public selectedLocationId = new EventEmitter<number>();
   private readonly service$ = new ReplaySubject<Service>(1);
   private readonly refresh$ = new Subject<void>();
 
-  constructor(
-    private readonly api: AccountsService,
-    private readonly popoverController: PopoverController,
-  ) {
-    this.context$ = combineLatest([
-      this.service$,
-      this.refresh$.pipe((startWith(null))),
-    ]).pipe(
-      switchMap(([service]) => forkJoin({
-        allLocations: api.accountsProfessionalLocationsList({
-          professional: service.professional,
+  constructor(private readonly api: AccountsService, private readonly popoverController: PopoverController) {
+    this.context$ = combineLatest([this.service$, this.refresh$.pipe(startWith(null))]).pipe(
+      switchMap(([service]) =>
+        forkJoin({
+          allLocations: api.accountsProfessionalLocationsList({
+            professional: service.professional,
+          }),
+          initialLocations: api.accountsServiceLocationsList({
+            service: service.id,
+          }),
+          service: of(service),
         }),
-        initialLocations: api.accountsServiceLocationsList({
-          service: service.id,
-        }),
-        service: of(service),
-      })),
+      ),
       map(data => ({
         service: data.service,
         professionalLocations: data.allLocations.results,
@@ -77,7 +72,6 @@ export class LocationSelectorComponent {
 
   private emitInitialValue() {
     // selectedLocationId has to emit the initial value
-    this.context$.pipe(take(1)).subscribe(context =>
-      this.selectedLocationId.emit(context.initialLocation.location));
+    this.context$.pipe(take(1)).subscribe(context => this.selectedLocationId.emit(context.initialLocation.location));
   }
 }

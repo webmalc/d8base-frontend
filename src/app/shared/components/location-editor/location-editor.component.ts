@@ -116,10 +116,12 @@ export class LocationEditorComponent {
   private setTimezoneFromCity(): void {
     this.timezoneList$
       .pipe(
-        switchMap(timezoneList => this.city.valueChanges.pipe(
+        switchMap(timezoneList =>
+          this.city.valueChanges.pipe(
             startWith(this.city.value),
             map(city => timezoneList?.find(fullTimezone => fullTimezone.value === city?.timezone)),
-          )),
+          ),
+        ),
         takeUntil(this.destroy$),
       )
       .subscribe(timezone => {

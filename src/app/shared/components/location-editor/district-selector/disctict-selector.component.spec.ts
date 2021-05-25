@@ -7,19 +7,18 @@ describe('DistrictSelectorComponent', () => {
   let component: DistrictSelectorComponent;
   let fixture: ComponentFixture<DistrictSelectorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [DistrictSelectorComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DistrictSelectorComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(DistrictSelectorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(DistrictSelectorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

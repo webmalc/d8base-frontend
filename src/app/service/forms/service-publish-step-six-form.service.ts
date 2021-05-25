@@ -5,27 +5,29 @@ import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-inte
 
 @Injectable()
 export class ServicePublishStepSixFormService {
-
   public form: FormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder) {
-  }
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   private static companyNameValidator(group: FormGroup): ValidationErrors | null {
-    const invalid = group.get(ServicePublishStepSixFormFields.IsCompany).value === 'company'
-      && !group.get(ServicePublishStepSixFormFields.CompanyName).value;
+    const invalid =
+      group.get(ServicePublishStepSixFormFields.IsCompany).value === 'company' &&
+      !group.get(ServicePublishStepSixFormFields.CompanyName).value;
 
     return invalid ? { emptyCompanyNameError: true } : null;
   }
 
   public createForm(data?: StepSixDataInterface): void {
-    this.form = this.formBuilder.group({
-      [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ?? 'person'],
-      [ServicePublishStepSixFormFields.CompanyName]: [data?.company_name],
-      [ServicePublishStepSixFormFields.Description]: [data?.description],
-      [ServicePublishStepSixFormFields.Specialization]: [data?.name, Validators.required],
-      [ServicePublishStepSixFormFields.Level]: [data?.level],
-    }, { validators: ServicePublishStepSixFormService.companyNameValidator });
+    this.form = this.formBuilder.group(
+      {
+        [ServicePublishStepSixFormFields.IsCompany]: [data?.is_company ?? 'person'],
+        [ServicePublishStepSixFormFields.CompanyName]: [data?.company_name],
+        [ServicePublishStepSixFormFields.Description]: [data?.description],
+        [ServicePublishStepSixFormFields.Specialization]: [data?.name, Validators.required],
+        [ServicePublishStepSixFormFields.Level]: [data?.level],
+      },
+      { validators: ServicePublishStepSixFormService.companyNameValidator },
+    );
   }
 
   public isSubmitDisabled(): boolean {

@@ -23,38 +23,37 @@ describe('ServicePublishStepFourComponent', () => {
   let component: ServicePublishStepFourComponent;
   let fixture: ComponentFixture<ServicePublishStepFourComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServicePublishStepFourComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        ServiceStepsNavigationService,
-        RegistrationService,
-        ServicePublishDataHolderService,
-        ChainManagerService,
-        StepOneHandlerService,
-        StepTwoHandlerService,
-        StepThreeHandlerService,
-        StepFourHandlerService,
-        StepFiveHandlerService,
-        StepSixHandlerService,
-        StepSevenHandlerService,
-        StepFinalHandlerService,
-        ServicePublishDataHolderService,
-        { provide: CurrentPositionService, useClass: LocationServiceMock },
-        SelectableCountryOnSearchService,
-        SelectableCityOnSearchService,
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServicePublishStepFourComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          ServiceStepsNavigationService,
+          RegistrationService,
+          ServicePublishDataHolderService,
+          ChainManagerService,
+          StepOneHandlerService,
+          StepTwoHandlerService,
+          StepThreeHandlerService,
+          StepFourHandlerService,
+          StepFiveHandlerService,
+          StepSixHandlerService,
+          StepSevenHandlerService,
+          StepFinalHandlerService,
+          ServicePublishDataHolderService,
+          { provide: CurrentPositionService, useClass: LocationServiceMock },
+          SelectableCountryOnSearchService,
+          SelectableCityOnSearchService,
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServicePublishStepFourComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServicePublishStepFourComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

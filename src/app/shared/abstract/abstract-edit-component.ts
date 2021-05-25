@@ -3,7 +3,6 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 /* eslint-disable @angular-eslint/directive-class-suffix */
 @Directive()
 export abstract class AbstractEditComponent<T> {
-
   @Output() public saveEmitter: EventEmitter<T> = new EventEmitter<T>();
   @Output() public deleteEmitter: EventEmitter<T> = new EventEmitter<T>();
   @Input() public item: T;

@@ -46,12 +46,20 @@ import { MainPage } from './main.page';
     LocationPickerComponent,
     OnMapPopoverComponent,
   ],
-  providers: [
-    DefaultCategoriesFactoryService,
-  ],
+  providers: [DefaultCategoriesFactoryService],
 })
 export class MainPageModule {
   constructor(lib: FaIconLibrary) {
-    lib.addIcons(faGraduationCap, faStethoscope, faSpa, faVenusMars, faPaintRoller, faHome, faCamera, faUserTie, faTableTennis);
+    lib.addIcons(
+      faGraduationCap,
+      faStethoscope,
+      faSpa,
+      faVenusMars,
+      faPaintRoller,
+      faHome,
+      faCamera,
+      faUserTie,
+      faTableTennis,
+    );
   }
 }

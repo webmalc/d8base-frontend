@@ -7,19 +7,19 @@ xdescribe('SearchFiltersComponent', () => {
   let component: SearchFiltersComponent;
   let fixture: ComponentFixture<SearchFiltersComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SearchFiltersComponent],
-      imports: [IonicModule.forRoot()],
-      providers: [
-        SearchFilterStateService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SearchFiltersComponent],
+        imports: [IonicModule.forRoot()],
+        providers: [SearchFilterStateService],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchFiltersComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(SearchFiltersComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

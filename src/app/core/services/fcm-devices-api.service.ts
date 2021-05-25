@@ -12,7 +12,6 @@ import { catchError, switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FcmDevicesApiService extends AbstractApiService<GcmDevice> {
-
   private readonly url = environment.backend.fcm_devices;
   private readonly cloudMessageType = 'FCM';
 

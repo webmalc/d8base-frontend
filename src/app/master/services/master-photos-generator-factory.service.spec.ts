@@ -6,15 +6,15 @@ import { StorageManagerService } from '../../core/proxies/storage-manager.servic
 import { MasterPhotosGeneratorFactoryService } from './master-photos-generator-factory.service';
 
 describe('MasterPhotosGeneratorService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      MasterPhotosGeneratorFactoryService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        MasterPhotosGeneratorFactoryService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: MasterPhotosGeneratorFactoryService = TestBed.inject(MasterPhotosGeneratorFactoryService);

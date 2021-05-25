@@ -28,9 +28,10 @@ export class RegionSelectorComponent extends ItemSelectorControl<Region> {
     super();
     this.hasData$ = this.country$.pipe(map(x => !!x));
     this.items$ = this.country$.pipe(
-      switchMap(country => country
-        ? this.locationApi.locationRegionsList({ pageSize: PAGE_SIZE, country: country.id })
-        : of({ results: [] }),
+      switchMap(country =>
+        country
+          ? this.locationApi.locationRegionsList({ pageSize: PAGE_SIZE, country: country.id })
+          : of({ results: [] }),
       ),
       map(x => x.results),
     );

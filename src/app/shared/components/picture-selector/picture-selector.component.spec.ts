@@ -9,10 +9,9 @@ const initURI: string = 'https://picture0.example.com' as const;
 
 @Component({
   selector: 'app-test-picture-selector',
-  template: `
-        <div [formGroup]="form">
-            <app-picture-selector formControlName="avatar"></app-picture-selector>
-        </div>`,
+  template: ` <div [formGroup]="form">
+    <app-picture-selector formControlName="avatar"></app-picture-selector>
+  </div>`,
 })
 class AppTestFormControlComponent {
   public form: FormGroup = new FormGroup({
@@ -21,7 +20,6 @@ class AppTestFormControlComponent {
 }
 
 describe('PictureSelectorComponent', () => {
-
   let wrapperComponent: AppTestFormControlComponent;
   let wrapperFixture: ComponentFixture<AppTestFormControlComponent>;
   let component: PictureSelectorComponent;
@@ -30,10 +28,7 @@ describe('PictureSelectorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PictureSelectorComponent, AppTestFormControlComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
+      imports: [...RootModules(), ComponentTestingModule],
     });
     wrapperFixture = TestBed.createComponent(AppTestFormControlComponent);
     wrapperComponent = wrapperFixture.componentInstance;

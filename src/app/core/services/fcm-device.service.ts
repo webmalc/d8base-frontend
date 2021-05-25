@@ -11,22 +11,21 @@ import { filter, switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FcmDeviceService {
-
-  constructor(
-    private readonly fcmDevicesApi: FcmDevicesApiService,
-    private readonly auth: AuthenticationService,
-  ) {
-  }
+  constructor(private readonly fcmDevicesApi: FcmDevicesApiService, private readonly auth: AuthenticationService) {}
 
   @once
   public subscribeToAuth(): void {
-    NotificationWorkerService.isInitialized.pipe(
-      filter(isInited => isInited),
-      switchMap(() => this.auth.isAuthenticated$.pipe(
-        filter(isAuth => isAuth),
-        switchMap(() => this.saveTokenOrUpdateActivity())),
-      ),
-    ).subscribe();
+    NotificationWorkerService.isInitialized
+      .pipe(
+        filter(isInited => isInited),
+        switchMap(() =>
+          this.auth.isAuthenticated$.pipe(
+            filter(isAuth => isAuth),
+            switchMap(() => this.saveTokenOrUpdateActivity()),
+          ),
+        ),
+      )
+      .subscribe();
   }
 
   private async saveTokenOrUpdateActivity(): Promise<void> {

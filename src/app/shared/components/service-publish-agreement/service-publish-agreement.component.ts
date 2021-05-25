@@ -6,5 +6,4 @@ import { TranslationService } from '@app/core/services/translation.service';
   templateUrl: './service-publish-agreement.component.html',
   styleUrls: ['./service-publish-agreement.component.scss'],
 })
-export class ServicePublishAgreementComponent {
-}
+export class ServicePublishAgreementComponent {}

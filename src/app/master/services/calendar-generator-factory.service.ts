@@ -8,16 +8,12 @@ import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class CalendarGeneratorFactoryService {
-
-  constructor(
-    private readonly masterManager: MasterManagerService,
-    private readonly calendarApi: CalendarApiService,
-  ) {
-  }
+  constructor(private readonly masterManager: MasterManagerService, private readonly calendarApi: CalendarApiService) {}
 
   public getEnabledPeriods(startDate: Date, endDate: Date, masterId?: number): Observable<MasterCalendar[]> {
-    return masterId ? this.get(startDate, endDate, masterId) : this.masterManager.getMasterList()
-      .pipe(switchMap(list => this.get(startDate, endDate, list[0].id)));
+    return masterId
+      ? this.get(startDate, endDate, masterId)
+      : this.masterManager.getMasterList().pipe(switchMap(list => this.get(startDate, endDate, list[0].id)));
   }
 
   private get(startDate: Date, endDate: Date, masterId: number): Observable<MasterCalendar[]> {

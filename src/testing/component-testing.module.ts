@@ -21,26 +21,13 @@ export const RootModules = () => {
     return [...ROOT_MODULES];
   }
   ionicModuleImported = true;
-  return [
-    IonicModule.forRoot(),
-    ...ROOT_MODULES
-  ];
-}
+  return [IonicModule.forRoot(), ...ROOT_MODULES];
+};
 
-const ROOT_MODULES = [
-  TranslateModule.forRoot(),
-  StoreModule.forRoot(),
-];
+const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot()];
 
 @NgModule({
-  exports: [
-    IonicModule,
-    HttpClientTestingModule,
-    RouterTestingModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  exports: [IonicModule, HttpClientTestingModule, RouterTestingModule, SharedModule, FormsModule, ReactiveFormsModule],
   providers: [
     // mocks:
     { provide: Storage, useClass: StorageManagerMock },
@@ -54,5 +41,4 @@ const ROOT_MODULES = [
     LocationAccuracy,
   ],
 })
-export class ComponentTestingModule {
-}
+export class ComponentTestingModule {}

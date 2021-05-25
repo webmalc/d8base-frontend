@@ -13,11 +13,7 @@ export class ServicePhotosComponent implements OnInit {
   @Input() public serviceId: number;
   public servicePhotos: ServicePhotoList[] = [];
 
-  constructor(
-    private readonly servicesService: ServicesService,
-    private readonly cd: ChangeDetectorRef,
-  ) {
-  }
+  constructor(private readonly servicesService: ServicesService, private readonly cd: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.subscribeServicePhotos();

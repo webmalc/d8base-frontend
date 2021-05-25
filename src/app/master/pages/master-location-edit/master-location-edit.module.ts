@@ -10,14 +10,7 @@ import { MasterLocationEditPageRoutingModule } from './master-location-edit-rout
 import { MasterLocationEditPage } from './master-location-edit.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MasterLocationEditPageRoutingModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, MasterLocationEditPageRoutingModule, SharedModule],
   declarations: [MasterLocationEditPage],
 })
-export class MasterLocationEditPageModule {
-}
+export class MasterLocationEditPageModule {}

@@ -6,17 +6,11 @@ import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Injectable()
 export class SelectableRegionOnSearchService extends SelectableSearchService {
-
   constructor(private readonly regionApi: RegionApiService) {
     super();
   }
 
   public onRegionSearch(event: { component: IonicSelectableComponent; text: string }, region: Region): void {
-    this.abstractOnSearch(
-      event.component,
-      event.text,
-      this.regionApi,
-      { country: region?.id.toString(10) },
-    );
+    this.abstractOnSearch(event.component, event.text, this.regionApi, { country: region?.id.toString(10) });
   }
 }

@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './loading-indicator.component.html',
   styleUrls: ['./loading-indicator.component.scss'],
 })
-export class LoadingIndicatorComponent {
-}
+export class LoadingIndicatorComponent {}

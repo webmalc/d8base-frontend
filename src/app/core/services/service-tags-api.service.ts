@@ -9,7 +9,6 @@ import { plainToClass } from 'class-transformer';
   providedIn: 'root',
 })
 export class ServiceTagsApiService extends AbstractApiService<ServiceTag> {
-
   private readonly url = environment.backend.service_tag;
 
   constructor(protected client: ApiClientService) {
@@ -24,5 +23,4 @@ export class ServiceTagsApiService extends AbstractApiService<ServiceTag> {
   protected transform(data: ServiceTag | ServiceTag[]): ServiceTag | ServiceTag[] {
     return plainToClass(ServiceTag, data);
   }
-
 }

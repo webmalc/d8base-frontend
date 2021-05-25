@@ -13,7 +13,6 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ChainManagerService {
-
   private chain: Handler[] = [];
   private readonly urls: string[] = [
     '/service/publish/step-one',
@@ -40,22 +39,29 @@ export class ChainManagerService {
   }
 
   public getNextPage(url: string): Observable<string> {
-    return this.chain[this.urls.indexOf(url) + 1].handleNext().pipe(
-      map(index => this.urls[index]),
-    );
+    return this.chain[this.urls.indexOf(url) + 1].handleNext().pipe(map(index => this.urls[index]));
   }
 
   public getPreviousPage(url: string): Observable<string> {
-    return this.chain[this.urls.indexOf(url) - 1].handlePrevious().pipe(
-      map(index => this.urls[index]),
-    );
+    return this.chain[this.urls.indexOf(url) - 1].handlePrevious().pipe(map(index => this.urls[index]));
   }
 
   private generateChain(): void {
-    this.stepOneHandler.setNext(this.stepTwoHandler).setNext(this.stepThreeHandler).setNext(this.stepFourHandler)
-      .setNext(this.stepFiveHandler).setNext(this.stepSixHandler).setNext(this.stepSevenHandler).setNext(this.finalStepHandler);
-    this.finalStepHandler.setPrevious(this.stepSevenHandler).setPrevious(this.stepSixHandler).setPrevious(this.stepFiveHandler)
-      .setPrevious(this.stepFourHandler).setPrevious(this.stepThreeHandler).setPrevious(this.stepTwoHandler)
+    this.stepOneHandler
+      .setNext(this.stepTwoHandler)
+      .setNext(this.stepThreeHandler)
+      .setNext(this.stepFourHandler)
+      .setNext(this.stepFiveHandler)
+      .setNext(this.stepSixHandler)
+      .setNext(this.stepSevenHandler)
+      .setNext(this.finalStepHandler);
+    this.finalStepHandler
+      .setPrevious(this.stepSevenHandler)
+      .setPrevious(this.stepSixHandler)
+      .setPrevious(this.stepFiveHandler)
+      .setPrevious(this.stepFourHandler)
+      .setPrevious(this.stepThreeHandler)
+      .setPrevious(this.stepTwoHandler)
       .setPrevious(this.stepOneHandler);
     this.chain = [
       this.stepOneHandler,

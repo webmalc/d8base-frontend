@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './password-recover.page.html',
   styleUrls: ['./password-recover.page.scss'],
 })
-export class PasswordRecoverPage {
-}
+export class PasswordRecoverPage {}

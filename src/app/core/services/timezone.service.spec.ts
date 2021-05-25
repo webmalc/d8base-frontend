@@ -7,18 +7,10 @@ import { TimezoneService } from './timezone.service';
 describe('TimezoneService', () => {
   let storageManagerSpy: jasmine.SpyObj<StorageManagerService>;
   beforeEach(() => {
-    const spy = jasmine.createSpyObj(
-      'StorageManagerService', { get: Promise.resolve(null), set: null },
-    );
+    const spy = jasmine.createSpyObj('StorageManagerService', { get: Promise.resolve(null), set: null });
     TestBed.configureTestingModule({
-      providers: [
-        TimezoneService,
-        { provide: StorageManagerService, useValue: spy },
-      ],
-      imports: [
-        HttpClientTestingModule,
-      ],
-
+      providers: [TimezoneService, { provide: StorageManagerService, useValue: spy }],
+      imports: [HttpClientTestingModule],
     });
     storageManagerSpy = TestBed.inject(StorageManagerService) as jasmine.SpyObj<StorageManagerService>;
   });

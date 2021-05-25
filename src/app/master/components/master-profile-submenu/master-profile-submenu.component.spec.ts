@@ -7,16 +7,18 @@ describe('MasterProfileSubmenuComponent', () => {
   let component: MasterProfileSubmenuComponent;
   let fixture: ComponentFixture<MasterProfileSubmenuComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterProfileSubmenuComponent],
-      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MasterProfileSubmenuComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterProfileSubmenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterProfileSubmenuComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

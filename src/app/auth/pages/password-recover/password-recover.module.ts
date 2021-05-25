@@ -20,14 +20,7 @@ import { PasswordRecoverPage } from './password-recover.page';
     ReactiveFormsModule,
     TranslateModule,
   ],
-  declarations: [
-    PasswordRecoverPage,
-    PasswordRecoveryFormComponent,
-  ],
-  providers: [
-    PasswordRecoveryFormService,
-    PasswordRecoveryService,
-  ],
+  declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
+  providers: [PasswordRecoveryFormService, PasswordRecoveryService],
 })
-export class PasswordRecoverPageModule {
-}
+export class PasswordRecoverPageModule {}

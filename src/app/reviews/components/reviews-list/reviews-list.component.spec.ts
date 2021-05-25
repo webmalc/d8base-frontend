@@ -13,10 +13,7 @@ describe('ReviewsListComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ReviewsListComponent],
-        imports: [
-          ...RootModules(),
-          ComponentTestingModule,
-        ],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           {
             provide: ActivatedRoute,

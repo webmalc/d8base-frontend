@@ -15,7 +15,6 @@ import { filter, map, shareReplay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthenticationService {
-
   public isAuthenticated$: Observable<boolean>;
 
   @Select(CurrentUserSelectors.tokens)

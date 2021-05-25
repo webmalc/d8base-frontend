@@ -9,14 +9,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export abstract class AbstractIpService implements IpServiceInterface {
-
-  protected constructor(protected http: HttpClient) {
-  }
+  protected constructor(protected http: HttpClient) {}
 
   public getData(): Observable<IpLocation> {
-    return this.http.get(this.getUrl()).pipe(
-      map(raw => this.transform(raw)),
-    );
+    return this.http.get(this.getUrl()).pipe(map(raw => this.transform(raw)));
   }
 
   protected abstract getUrl(): string;

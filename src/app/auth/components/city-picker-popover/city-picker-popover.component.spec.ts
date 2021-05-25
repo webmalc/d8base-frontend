@@ -32,27 +32,29 @@ describe('CityPickerPopoverComponent', () => {
   let component: CityPickerPopoverComponent;
   let fixture: ComponentFixture<CityPickerPopoverComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [CityPickerPopoverComponent],
-      imports: [IonicModule, HttpClientTestingModule],
-      providers: [
-        {
-          provide: CurrentPositionService,
-          useClass: LocationServiceStub,
-        },
-        {
-          provide: CitiesApiService,
-          useClass: CitiesApiServiceStub,
-        },
-        { provide: NavParams, useValue: { get: () => null } },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [CityPickerPopoverComponent],
+        imports: [IonicModule, HttpClientTestingModule],
+        providers: [
+          {
+            provide: CurrentPositionService,
+            useClass: LocationServiceStub,
+          },
+          {
+            provide: CitiesApiService,
+            useClass: CitiesApiServiceStub,
+          },
+          { provide: NavParams, useValue: { get: () => null } },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(CityPickerPopoverComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(CityPickerPopoverComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

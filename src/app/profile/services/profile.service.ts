@@ -10,15 +10,13 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProfileService {
-
   public form: FormGroup;
 
   constructor(
     private readonly userManager: UserManagerService,
     private readonly locationService: LocationService,
     private readonly userLocationApi: UserLocationApiService,
-  ) {
-  }
+  ) {}
 
   public initLocation(): Observable<ClientLocationInterface[]> {
     return this.locationService.getList(this.userLocationApi).pipe(

@@ -7,19 +7,18 @@ xdescribe('MasterTagEditPage', () => {
   let component: MasterTagEditPage;
   let fixture: ComponentFixture<MasterTagEditPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterTagEditPage, TagsSelectInputComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MasterTagEditPage, TagsSelectInputComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterTagEditPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterTagEditPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

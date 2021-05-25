@@ -28,9 +28,10 @@ export class SubregionSelectorComponent extends ItemSelectorControl<Subregion> {
     super();
     this.hasData$ = this.region$.pipe(map(x => !!x));
     this.items$ = this.region$.pipe(
-      switchMap(region => region
-        ? this.locationApi.locationSubregionsList({ pageSize: PAGE_SIZE, region: region.id })
-        : of({ results: [] }),
+      switchMap(region =>
+        region
+          ? this.locationApi.locationSubregionsList({ pageSize: PAGE_SIZE, region: region.id })
+          : of({ results: [] }),
       ),
       map(x => x.results),
     );

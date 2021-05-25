@@ -49,10 +49,10 @@ export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ..
 
 export const orderWizardStorageKey = 'orderWizardStorageKey';
 
-export const stepsRoutes = (guards: Type<CanActivate>[]) => Object.values(ORDER_STEPS.byId)
-  .map(({ component, needGuards, id }) => ({
-      path: `${id}`,
-      pathMatch: 'full',
-      canActivate: needGuards ? guards : null,
-      component,
-    }));
+export const stepsRoutes = (guards: Type<CanActivate>[]) =>
+  Object.values(ORDER_STEPS.byId).map(({ component, needGuards, id }) => ({
+    path: `${id}`,
+    pathMatch: 'full',
+    canActivate: needGuards ? guards : null,
+    component,
+  }));

@@ -12,7 +12,6 @@ import { OrderListItem } from '../abstract/order-list-item';
   styleUrls: ['./sent-order-list-item.component.scss'],
 })
 export class SentOrderListItemComponent extends OrderListItem {
-
   public service: Service;
   public master: ProfessionalList;
   @Output() public statusChanged = new EventEmitter<void>();
@@ -29,7 +28,7 @@ export class SentOrderListItemComponent extends OrderListItem {
   }
 
   public get order(): SentOrder {
-    return this._order || {} as SentOrder;
+    return this._order || ({} as SentOrder);
   }
 
   @Input()
@@ -38,16 +37,19 @@ export class SentOrderListItemComponent extends OrderListItem {
     if (!order) {
       return;
     }
-    this.servicesCache.getByEntityId(order.service).pipe(
-      switchMap(service => {
-        this.service = service;
+    this.servicesCache
+      .getByEntityId(order.service)
+      .pipe(
+        switchMap(service => {
+          this.service = service;
 
-        return this.masterCache.getByEntityId(service.professional);
-      }),
-    ).subscribe(master => {
-      this.master = master;
-      this.changeDetector.markForCheck();
-    });
+          return this.masterCache.getByEntityId(service.professional);
+        }),
+      )
+      .subscribe(master => {
+        this.master = master;
+        this.changeDetector.markForCheck();
+      });
   }
 
   public onDiscardClick(): Promise<void> {

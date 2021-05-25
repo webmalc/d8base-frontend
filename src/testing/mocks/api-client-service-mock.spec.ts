@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 
 export class ApiClientServiceMock {
-  public post(url: string, data: { username: string, password: string }): Observable<any> {
+  public post(url: string, data: { username: string; password: string }): Observable<any> {
     if (data.username === 'valid' && data.password === 'valid_pass') {
       return of(true);
     }

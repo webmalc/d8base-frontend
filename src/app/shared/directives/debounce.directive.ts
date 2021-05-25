@@ -12,9 +12,7 @@ export class DebounceDirective implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   public ngOnInit(): void {
-    this.subscription = this.clicks
-      .pipe(throttleTime(this.appDebounce))
-      .subscribe(e => this.debounceClick.emit(e));
+    this.subscription = this.clicks.pipe(throttleTime(this.appDebounce)).subscribe(e => this.debounceClick.emit(e));
   }
 
   public ngOnDestroy(): void {

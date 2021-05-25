@@ -23,22 +23,22 @@ export class ServiceTypeEditComponent extends ServiceEditor {
 
   constructor(route: ActivatedRoute, deps: ServiceEditorDepsService) {
     super(route, deps);
-    this.type$ = this.context$.pipe(
-      switchMap(context => context.form.controls.service_type.valueChanges),
-    );
+    this.type$ = this.context$.pipe(switchMap(context => context.form.controls.service_type.valueChanges));
   }
 
   public submit({ form, service }: ServiceEditorContext): void {
     const { service_type, location } = form.value;
-    const deleteOldLocation$ = this.deps.api.accountsServiceLocationsList({ service: service.id }).pipe(
-      switchMap(locations => locations.count > 0
-        ? forkJoin(locations.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
-        : of<null>(void 0),
-      ),
-    );
-    const createNewLocation$ = service_type === 'online'
-      ? of<ServiceLocation>(void 0)
-      : this.deps.api.accountsServiceLocationsCreate(location);
+    const deleteOldLocation$ = this.deps.api
+      .accountsServiceLocationsList({ service: service.id })
+      .pipe(
+        switchMap(locations =>
+          locations.count > 0
+            ? forkJoin(locations.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
+            : of<null>(void 0),
+        ),
+      );
+    const createNewLocation$ =
+      service_type === 'online' ? of<ServiceLocation>(void 0) : this.deps.api.accountsServiceLocationsCreate(location);
     const newService: Service = {
       ...service,
       service_type,

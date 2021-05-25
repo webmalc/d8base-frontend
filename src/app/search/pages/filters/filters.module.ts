@@ -8,15 +8,7 @@ import { FiltersPageRoutingModule } from './filters-routing.module';
 import { FiltersPage } from './filters.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SharedModule,
-    FiltersPageRoutingModule,
-    SearchPageModule,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, SharedModule, FiltersPageRoutingModule, SearchPageModule],
   declarations: [FiltersPage],
 })
-export class FiltersPageModule {
-}
+export class FiltersPageModule {}

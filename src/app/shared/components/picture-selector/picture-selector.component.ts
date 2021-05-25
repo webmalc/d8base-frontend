@@ -28,10 +28,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
   private onChange: (fn: any) => void;
   private onTouched: (fn: any) => void;
 
-  constructor(
-    private readonly toastService: ToastService,
-    private readonly popoverController: PopoverController,
-  ) {}
+  constructor(private readonly toastService: ToastService, private readonly popoverController: PopoverController) {}
 
   public onFileSelected(event: Event): Promise<void> {
     const file: File = (event.target as HTMLInputElement).files[0];
@@ -43,7 +40,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
       return Promise.resolve();
     }
     if (!this.cropAfterSelect) {
-      fileToBase64(file).then((base64) => {
+      fileToBase64(file).then(base64 => {
         this.setUri(base64);
       });
       return Promise.resolve();

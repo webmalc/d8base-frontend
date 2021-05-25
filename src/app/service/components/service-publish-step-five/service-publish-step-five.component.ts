@@ -30,8 +30,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
     private readonly servicePublishDataHolder: ServicePublishDataHolderService,
     public serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly destroy$: NgDestroyService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     if (this.servicePublishDataHolder.isset(ServicePublishSteps.Five)) {
@@ -39,7 +38,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
         this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five),
       );
     } else {
-      this.profile$.pipe(takeUntil(this.destroy$)).subscribe((profile) => {
+      this.profile$.pipe(takeUntil(this.destroy$)).subscribe(profile => {
         const { first_name, last_name, gender } = profile ?? {};
         const stepFiveInitData: StepFiveDataInterface = {
           first_name,
@@ -58,7 +57,8 @@ export class ServicePublishStepFiveComponent implements OnInit {
 
   public submitForm(): void {
     this.servicePublishDataHolder.setStepData<StepFiveDataInterface>(
-      ServicePublishSteps.Five, this.formService.form.getRawValue(),
+      ServicePublishSteps.Five,
+      this.formService.form.getRawValue(),
     );
     this.serviceStepsNavigationService.next();
   }

@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ContactApiService extends AbstractReadonlyApiService<Contact> {
-
   private readonly url = environment.backend.contact;
 
   constructor(protected client: ApiClientService) {

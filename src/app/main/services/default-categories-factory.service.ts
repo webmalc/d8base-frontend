@@ -4,11 +4,10 @@ import { ProfessionalsService } from '@app/api/services';
 
 @Injectable()
 export class DefaultCategoriesFactoryService {
-
   private list: Category[];
 
   constructor(private readonly professionalsApi: ProfessionalsService) {
-    this.professionalsApi.professionalsCategoriesList({}).subscribe(res => this.list = res.results);
+    this.professionalsApi.professionalsCategoriesList({}).subscribe(res => (this.list = res.results));
   }
 
   public getByName(name: string): Category | null {

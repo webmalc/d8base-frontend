@@ -12,14 +12,15 @@ import { first, tap } from 'rxjs/operators';
   selector: 'app-tags-select-input',
   templateUrl: './tags-select-input.component.html',
   styleUrls: ['./tags-select-input.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TagsSelectInputComponent),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TagsSelectInputComponent),
+      multi: true,
+    },
+  ],
 })
 export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
-
   public tagsList$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public masterId: number;
   public form: FormGroup;
@@ -30,25 +31,21 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     private readonly formBuilder: FormBuilder,
     private readonly professionalsApi: ProfessionalsService,
     private readonly masterManager: MasterManagerService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
-    this.masterManager.getMasterList().pipe(
-      tap(list => this.masterId = list[0].id),
-    ).subscribe(
-      () => {
-        this.professionalsApi.professionalsTagsList({}).subscribe(
-          data => this.tagsList$.next(this.getTagNamesArray(data.results)),
-        );
-        this.api.getByMasterId(this.masterId).subscribe(
-          data => {
-            this.createForm(data.results);
-            this.onChange(this.form.get('tagSelect').value);
-          },
-        );
-      },
-    );
+    this.masterManager
+      .getMasterList()
+      .pipe(tap(list => (this.masterId = list[0].id)))
+      .subscribe(() => {
+        this.professionalsApi
+          .professionalsTagsList({})
+          .subscribe(data => this.tagsList$.next(this.getTagNamesArray(data.results)));
+        this.api.getByMasterId(this.masterId).subscribe(data => {
+          this.createForm(data.results);
+          this.onChange(this.form.get('tagSelect').value);
+        });
+      });
   }
 
   public addTag(): void {
@@ -56,10 +53,9 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
     if (!newOption) {
       return;
     }
-    this.tagsList$.pipe(
-      first(),
-    ).subscribe(
-      list => {
+    this.tagsList$
+      .pipe(first())
+      .subscribe(list => {
         this.form.get('tagInput').setValue('');
         if (this.isNewOptionUnique(list, newOption)) {
           list.push(newOption);
@@ -68,8 +64,8 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
           selectedOptions.push(newOption);
           this.form.controls.tagSelect.patchValue(selectedOptions);
         }
-      },
-    ).unsubscribe();
+      })
+      .unsubscribe();
   }
 
   public selectChange(): void {
@@ -81,14 +77,11 @@ export class TagsSelectInputComponent implements OnInit, ControlValueAccessor {
   }
 
   /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
-  public registerOnTouched(fn: any): void {
-  }
+  public registerOnTouched(fn: any): void {}
 
-  public writeValue(data: string[]): void {
-  }
+  public writeValue(data: string[]): void {}
 
-  public setDisabledState(isDisabled: boolean): void {
-  }
+  public setDisabledState(isDisabled: boolean): void {}
 
   private isNewOptionUnique(list: string[], newOption: string): boolean {
     for (const tag of list) {

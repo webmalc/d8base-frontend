@@ -1,5 +1,4 @@
 export abstract class Reinitable {
-
   public ionViewWillEnter(): void {
     this.init();
   }

@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './rating-full-star.component.html',
   styleUrls: ['./rating-full-star.component.scss'],
 })
-export class RatingFullStarComponent {
-}
+export class RatingFullStarComponent {}

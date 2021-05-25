@@ -13,8 +13,7 @@ export class ImageCropPopoverComponent {
 
   private croppedImage: string;
 
-  constructor(private readonly popoverController: PopoverController) {
-  }
+  constructor(private readonly popoverController: PopoverController) {}
 
   public save(): void {
     this.callback(this.croppedImage);

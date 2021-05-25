@@ -12,19 +12,22 @@ import { ProfessionalLocationState } from './professional-page/professional-loca
 
 @NgModule({
   imports: [
-    NgxsModule.forRoot([
-      CurrentUserState,
-      UserLanguageState,
-      ProfessionalPageState,
-      UserSavedProfessionalState,
-      UserContactState,
-      UserLocationState,
-      ProfessionalContactState,
-      ProfessionalLocationState,
-    ], {
-      developmentMode: !environment.production,
-      selectorOptions: { suppressErrors: false },
-    }),
+    NgxsModule.forRoot(
+      [
+        CurrentUserState,
+        UserLanguageState,
+        ProfessionalPageState,
+        UserSavedProfessionalState,
+        UserContactState,
+        UserLocationState,
+        ProfessionalContactState,
+        ProfessionalLocationState,
+      ],
+      {
+        developmentMode: !environment.production,
+        selectorOptions: { suppressErrors: false },
+      },
+    ),
     NgxsDispatchPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot({
       name: 'd8b store',

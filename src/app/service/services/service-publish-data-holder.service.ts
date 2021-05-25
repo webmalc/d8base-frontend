@@ -14,7 +14,6 @@ import { StepDataInterfaceType } from '@app/service/types/step-data-interface-ty
   providedIn: 'root',
 })
 export class ServicePublishDataHolderService {
-
   private stepsData: {
     0?: StepOneDataInterface;
     1?: StepTwoDataInterface;

@@ -14,26 +14,23 @@ describe('LoginPage', () => {
   let fixture: ComponentFixture<LoginPage>;
   let router: Router;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        { provide: ApiClientService, useClass: ApiClientServiceMock },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginPage, LoginFormComponent, ErrorFlashbagComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [{ provide: ApiClientService, useClass: ApiClientServiceMock }],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
 
-    router = TestBed.inject<Router>(Router);
-    spyOn(router, 'navigateByUrl');
+      router = TestBed.inject<Router>(Router);
+      spyOn(router, 'navigateByUrl');
 
-    fixture = TestBed.createComponent(LoginPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(LoginPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -46,7 +43,6 @@ describe('LoginPage', () => {
   });
 
   it('test invalid auth data submit', fakeAsync(() => {
-
     const user: Credentials = { username: 'invalid', password: 'invalid' };
 
     component.onSubmitLoginForm(user);

@@ -6,7 +6,6 @@ import { AbstractIpService } from '@app/core/services/location/abstract-ip.servi
 
 @Injectable()
 export class IpnfDataService extends AbstractIpService {
-
   private readonly url = 'https://ip.nf/me.json';
 
   constructor(protected http: HttpClient) {

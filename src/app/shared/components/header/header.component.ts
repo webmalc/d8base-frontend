@@ -29,11 +29,8 @@ export class HeaderComponent {
     translation: TranslationService,
   ) {
     this.isAuthenticated$ = authenticator.isAuthenticated$;
-    this.context$ = combineLatest([
-      this.isAuthenticated$,
-      masterManager.isMaster$,
-    ]).pipe(
-      map(([isAuthenticated, isMaster]) => ({isAuthenticated, isMaster})),
+    this.context$ = combineLatest([this.isAuthenticated$, masterManager.isMaster$]).pipe(
+      map(([isAuthenticated, isMaster]) => ({ isAuthenticated, isMaster })),
     );
     this.currentLanguage$ = translation.currentLanguage$;
   }

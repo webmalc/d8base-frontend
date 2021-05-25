@@ -8,7 +8,6 @@ import { first, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepFiveHandlerService extends AbstractHandler {
-
   @Select(CurrentUserSelectors.isMaster)
   public isMaster$: Observable<boolean>;
 
@@ -27,7 +26,7 @@ export class StepFiveHandlerService extends AbstractHandler {
   private handle(handler: () => Observable<number>): Observable<number> {
     return this.isMaster$.pipe(
       first(),
-      mergeMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
+      mergeMap(isAuthenticated => (isAuthenticated ? handler() : of(this.getIndex()))),
     );
   }
 }

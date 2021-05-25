@@ -7,7 +7,6 @@ import { ServiceList } from '@app/api/models';
   styleUrls: ['./master-profile-service-edit.component.scss'],
 })
 export class MasterProfileServiceEditComponent {
-
   @Input() public service: ServiceList;
   @Output() public enableService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
   @Output() public disableService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();

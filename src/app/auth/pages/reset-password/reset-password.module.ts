@@ -21,5 +21,4 @@ import { ResetPasswordPage } from './reset-password.page';
   declarations: [ResetPasswordPage],
   providers: [ResetPasswordApiService],
 })
-export class ResetPasswordPageModule {
-}
+export class ResetPasswordPageModule {}

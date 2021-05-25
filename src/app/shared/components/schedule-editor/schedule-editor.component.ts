@@ -23,11 +23,9 @@ const DEFAULT_END_TIME = '18:00';
       useExisting: forwardRef(() => ScheduleEditorComponent),
       multi: true,
     },
-
   ],
 })
 export class ScheduleEditorComponent implements ControlValueAccessor {
-
   // TODO remove Input(), use setDisabledState()
   @Input() public disabled: boolean = false;
 
@@ -37,10 +35,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
   private onChange: (value: AbstractSchedule[]) => void;
   private onTouched: () => void;
 
-  constructor(
-    private readonly popoverController: PopoverController,
-    private readonly ngDestroy$: NgDestroyService,
-  ) {
+  constructor(private readonly popoverController: PopoverController, private readonly ngDestroy$: NgDestroyService) {
     this.initializeTimetable();
   }
 
@@ -100,9 +95,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
 
   private initializeTimetable(): void {
     this.timetable = new FormArray([]);
-    this.timetable.valueChanges.pipe(
-      takeUntil(this.ngDestroy$),
-    ).subscribe((timetable: AbstractSchedule[]) => {
+    this.timetable.valueChanges.pipe(takeUntil(this.ngDestroy$)).subscribe((timetable: AbstractSchedule[]) => {
       if (this.onChange) {
         this.onChange(timetable);
       }

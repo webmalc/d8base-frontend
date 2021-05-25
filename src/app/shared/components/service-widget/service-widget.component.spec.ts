@@ -3,7 +3,6 @@ import { ServiceList } from '@app/api/models';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServiceWidgetComponent } from './service-widget.component';
 
-
 describe('ServiceWidgetComponent', () => {
   let component: ServiceWidgetComponent;
   let fixture: ComponentFixture<ServiceWidgetComponent>;

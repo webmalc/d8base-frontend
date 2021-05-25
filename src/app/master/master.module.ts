@@ -69,5 +69,4 @@ import { ProfessionalContactEditComponent } from './components/professional-cont
     ProfessionalGuard,
   ],
 })
-export class MasterPageModule {
-}
+export class MasterPageModule {}

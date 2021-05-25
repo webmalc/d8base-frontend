@@ -31,10 +31,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());
   private readonly professional$ = new BehaviorSubject<number>(NaN);
 
-  constructor(
-    private readonly scheduleApi: ScheduleService,
-    protected readonly cd: ChangeDetectorRef,
-  ) {
+  constructor(private readonly scheduleApi: ScheduleService, protected readonly cd: ChangeDetectorRef) {
     super(cd);
   }
 
@@ -74,13 +71,14 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
         const serviceId = this.context?.service.id;
         const endDate = addDays(startDate, 1);
 
-        return (!masterId || !serviceId) ? of(null) :
-          this.scheduleApi.scheduleCalendarList({
-            professional: masterId?.toString(),
-            service: serviceId?.toString(),
-            startDatetime: getLocalDateString(startDate),
-            endDatetime: getLocalDateString(endDate),
-          });
+        return !masterId || !serviceId
+          ? of(null)
+          : this.scheduleApi.scheduleCalendarList({
+              professional: masterId?.toString(),
+              service: serviceId?.toString(),
+              startDatetime: getLocalDateString(startDate),
+              endDatetime: getLocalDateString(endDate),
+            });
       }),
     );
   }

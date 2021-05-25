@@ -24,7 +24,6 @@ const CALENDAR_INTERVAL = environment.default_calendar_interval;
   ],
 })
 export class CalendarComponentComponent implements ControlValueAccessor {
-
   @Input() public timezone: string = Intl.DateTimeFormat().resolvedOptions().timeZone;
   @Input() public serviceDuration: number;
   @Input() public disabled: boolean;
@@ -44,9 +43,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   private onChange: (value: Date) => void;
   private onTouched: () => void;
 
-
-  constructor(private readonly calendar: CalendarService) {
-  }
+  constructor(private readonly calendar: CalendarService) {}
 
   @Input()
   public set enabledPeriods(list: MasterCalendar[]) {

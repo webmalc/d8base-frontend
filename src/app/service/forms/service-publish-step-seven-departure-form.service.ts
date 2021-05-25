@@ -5,14 +5,13 @@ import { StepSevenDepartureDataInterface } from '@app/service/interfaces/step-se
 
 @Injectable()
 export class ServicePublishStepSevenDepartureFormService {
-
   public form: FormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder) {
-  }
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   public createForm(data?: StepSevenDepartureDataInterface): void {
-    this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group(
+      {
         // [ServicePublishStepSevenDepartureFormFields.NotWithinTheCity]: [data?.not_within_the_city ?? false],
         [ServicePublishStepSevenDepartureFormFields.MaxDistance]: [data?.max_distance],
         [ServicePublishStepSevenDepartureFormFields.Units]: [data?.units],

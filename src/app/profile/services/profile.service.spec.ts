@@ -5,15 +5,13 @@ import { StorageManagerMock } from 'src/testing/mocks';
 import { StorageManagerService } from '../../core/proxies/storage-manager.service';
 import { ProfileService } from './profile.service';
 
-
 describe('ProfileService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule, ReactiveFormsModule],
-    providers: [
-      ProfileService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      providers: [ProfileService, { provide: StorageManagerService, useClass: StorageManagerMock }],
+    }),
+  );
 
   it('should be created', () => {
     const service: ProfileService = TestBed.inject(ProfileService);

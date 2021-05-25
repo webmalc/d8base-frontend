@@ -29,9 +29,11 @@ export class UserSavedProfessionalsListComponent implements OnInit {
           return of(null);
         }
         const previousProfessionalIds: number[] = this.professionals?.map(({ id }) => id) ?? [];
-        const professionalIdsToAdd: number[] = professionalIds?.filter(id => !previousProfessionalIds.includes(id)) ?? [];
+        const professionalIdsToAdd: number[] =
+          professionalIds?.filter(id => !previousProfessionalIds.includes(id)) ?? [];
 
-        const professionals: ProfessionalList[] = this.professionals?.filter(({ id }) => professionalIds.includes(id)) ?? [];
+        const professionals: ProfessionalList[] =
+          this.professionals?.filter(({ id }) => professionalIds.includes(id)) ?? [];
 
         if (professionalIdsToAdd.length) {
           return this.professionalsService

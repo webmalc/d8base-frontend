@@ -9,7 +9,6 @@ import { plainToClass } from 'class-transformer';
   providedIn: 'root',
 })
 export class ServiceTagsReadonlyApiService extends AbstractReadonlyApiService<ServiceTag> {
-
   private readonly url = environment.backend.service_tag_readonly;
 
   constructor(protected client: ApiClientService) {

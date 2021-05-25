@@ -30,7 +30,15 @@ import { ReviewsService } from './services/reviews.service';
     ReviewCardComponent,
     ReviewCardsComponent,
   ],
-  imports: [CommonModule, SharedModule, IonicModule, TranslateModule, ReviewsRoutingModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    IonicModule,
+    TranslateModule,
+    ReviewsRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   providers: [ReviewsService],
 })
 export class ReviewsModule {}

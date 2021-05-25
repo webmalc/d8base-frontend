@@ -10,7 +10,6 @@ import { ComponentTestingModule, RootModules } from 'src/testing/component-testi
 import { StorageManagerMock } from 'src/testing/mocks';
 import { ContactEditComponent } from './contact-edit.component';
 
-
 describe('ContactEditComponent', () => {
   let component: ContactEditComponent;
   let fixture: ComponentFixture<ContactEditComponent>;
@@ -20,9 +19,7 @@ describe('ContactEditComponent', () => {
       TestBed.configureTestingModule({
         declarations: [ContactEditComponent],
         imports: [...RootModules(), ComponentTestingModule],
-        providers: [
-          FormBuilder,
-        ],
+        providers: [FormBuilder],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ContactEditComponent);

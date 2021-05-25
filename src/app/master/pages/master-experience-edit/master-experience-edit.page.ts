@@ -12,7 +12,6 @@ import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-
   styleUrls: ['./master-experience-edit.page.scss'],
 })
 export class MasterExperienceEditPage extends AbstractModelEditPage<Experience> {
-
   constructor(
     protected readonly experienceApi: ExperienceApiService,
     protected readonly route: ActivatedRoute,

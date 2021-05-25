@@ -37,11 +37,13 @@ export class EducationEditComponent {
 
   @Input()
   public set item(value: ProfessionalEducation) {
-    const interval: DateInterval = !value?.start_date ? null : {
-      startDate: value.start_date,
-      endDate: value.end_date,
-      isOngoing: value.is_still_here,
-    };
+    const interval: DateInterval = !value?.start_date
+      ? null
+      : {
+          startDate: value.start_date,
+          endDate: value.end_date,
+          isOngoing: value.is_still_here,
+        };
 
     const formValue: EducationFormValue = {
       [this.formFields.university]: value?.university,

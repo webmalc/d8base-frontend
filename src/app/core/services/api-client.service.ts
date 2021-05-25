@@ -8,9 +8,7 @@ import { mergeMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiClientService {
-
-  constructor(private readonly http: HttpClient) {
-  }
+  constructor(private readonly http: HttpClient) {}
 
   public get<T>(url: string, params?: { [param: string]: string | string[] }): Observable<T> {
     return this.http.get<T>(this.getHost() + url, { params });
@@ -38,43 +36,37 @@ export class ApiClientService {
   }
 
   public getList<T>(ids: (number | string)[], url: string): Observable<T[]> {
-    return 0 === ids.length ? of([]) : of(ids).pipe(
-      mergeMap((list) => forkJoin(
-        [...list.map(id => id ? this.get<T>(`${url}${id}/`) : of(null))],
-      )),
-    );
+    return 0 === ids.length
+      ? of([])
+      : of(ids).pipe(mergeMap(list => forkJoin([...list.map(id => (id ? this.get<T>(`${url}${id}/`) : of(null)))])));
   }
 
   public deleteList(ids: number[], url: string): Observable<any> {
-    return 0 === ids.length ? of([]) : of(ids).pipe(
-      mergeMap((list) => forkJoin(
-        [...list.map(id => this.delete(`${url + id}/`))],
-      )),
-    );
+    return 0 === ids.length
+      ? of([])
+      : of(ids).pipe(mergeMap(list => forkJoin([...list.map(id => this.delete(`${url + id}/`))])));
   }
 
   public putList<T extends { id: number }>(dataList: T[], url: string): Observable<T[]> {
-    return 0 === dataList.length ? of([]) : of(dataList).pipe(
-      mergeMap((list) => forkJoin(
-        [...list.map((value: T) => this.put<T>(`${url}${value.id}/`, value))],
-      )),
-    );
+    return 0 === dataList.length
+      ? of([])
+      : of(dataList).pipe(
+          mergeMap(list => forkJoin([...list.map((value: T) => this.put<T>(`${url}${value.id}/`, value))])),
+        );
   }
 
   public patchList<T extends { id: number }>(dataList: T[], url: string): Observable<T[]> {
-    return 0 === dataList.length ? of([]) : of(dataList).pipe(
-      mergeMap((list) => forkJoin(
-        [...list.map((value: T) => this.patch<T>(`${url}${value.id}/`, value))],
-      )),
-    );
+    return 0 === dataList.length
+      ? of([])
+      : of(dataList).pipe(
+          mergeMap(list => forkJoin([...list.map((value: T) => this.patch<T>(`${url}${value.id}/`, value))])),
+        );
   }
 
   public createList<T>(dataList: T[], url: string): Observable<T[]> {
-    return 0 === dataList.length ? of([]) : of(dataList).pipe(
-      mergeMap((list) => forkJoin(
-        [...list.map((value: T) => this.post<T, T>(url, value))],
-      )),
-    );
+    return 0 === dataList.length
+      ? of([])
+      : of(dataList).pipe(mergeMap(list => forkJoin([...list.map((value: T) => this.post<T, T>(url, value))])));
   }
 
   private getHost(): string {

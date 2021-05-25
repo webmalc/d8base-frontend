@@ -12,31 +12,34 @@ describe('MasterProfileServicesComponent', () => {
   let component: MasterProfileServicesComponent;
   let fixture: ComponentFixture<MasterProfileServicesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterProfileServicesComponent],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
-      providers: [
-        ServicesGeneratorFactoryService,
-        {
-          provide: ActivatedRoute, useValue: {
-            snapshot: {
-              paramMap: {
-                get(): string {
-                  return '';
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MasterProfileServicesComponent],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+        providers: [
+          ServicesGeneratorFactoryService,
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              snapshot: {
+                paramMap: {
+                  get(): string {
+                    return '';
+                  },
                 },
               },
             },
           },
-        },
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+          { provide: StorageManagerService, useClass: StorageManagerMock },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterProfileServicesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterProfileServicesComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -9,7 +9,6 @@ import { plainToClass } from 'class-transformer';
   providedIn: 'root',
 })
 export class SentOrdersApiService extends AbstractApiService<SentOrder> {
-
   constructor(client: ApiClientService) {
     super(client);
   }

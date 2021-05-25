@@ -13,25 +13,21 @@ describe('RegistrationFormComponent', () => {
   let fixture: ComponentFixture<RegistrationFormComponent>;
   let router: Router;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        RegistrationFormComponent,
-        ErrorFlashbagComponent,
-      ],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegistrationFormComponent, ErrorFlashbagComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+      }).compileComponents();
 
-    router = TestBed.inject(Router);
-    spyOn(router, 'navigateByUrl');
+      router = TestBed.inject(Router);
+      spyOn(router, 'navigateByUrl');
 
-    fixture = TestBed.createComponent(RegistrationFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(RegistrationFormComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -57,11 +53,9 @@ describe('RegistrationFormComponent', () => {
       country: '',
     };
 
-    expect((component as any).registrationFormData.emit)
-      .toHaveBeenCalledWith(
-        {
-          user: plainToClass(User, data, { excludeExtraneousValues: true }),
-          location: plainToClass(UserLocation, data, { excludeExtraneousValues: true }),
-        });
+    expect((component as any).registrationFormData.emit).toHaveBeenCalledWith({
+      user: plainToClass(User, data, { excludeExtraneousValues: true }),
+      location: plainToClass(UserLocation, data, { excludeExtraneousValues: true }),
+    });
   });
 });
