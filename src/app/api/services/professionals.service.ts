@@ -45,6 +45,8 @@ class ProfessionalsService extends __BaseService {
    * - `page`: A page number within the paginated result set.
    *
    * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `code__isnull`:
    */
   professionalsCategoriesListResponse(params: ProfessionalsService.ProfessionalsCategoriesListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<Category>}>> {
     let __params = this.newParams();
@@ -54,6 +56,7 @@ class ProfessionalsService extends __BaseService {
     if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
     if (params.page != null) __params = __params.set('page', params.page.toString());
     if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    if (params.codeIsnull != null) __params = __params.set('code__isnull', params.codeIsnull.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/professionals/categories/`,
@@ -82,6 +85,8 @@ class ProfessionalsService extends __BaseService {
    * - `page`: A page number within the paginated result set.
    *
    * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `code__isnull`:
    */
   professionalsCategoriesList(params: ProfessionalsService.ProfessionalsCategoriesListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<Category>}> {
     return this.professionalsCategoriesListResponse(params).pipe(
@@ -349,6 +354,8 @@ class ProfessionalsService extends __BaseService {
    *
    * - `ordering`: Which field to use when ordering the results.
    *
+   * - `code__isnull`:
+   *
    * - `category`:
    */
   professionalsSubcategoriesListResponse(params: ProfessionalsService.ProfessionalsSubcategoriesListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<Subcategory>}>> {
@@ -359,6 +366,7 @@ class ProfessionalsService extends __BaseService {
     if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
     if (params.page != null) __params = __params.set('page', params.page.toString());
     if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    if (params.codeIsnull != null) __params = __params.set('code__isnull', params.codeIsnull.toString());
     if (params.category != null) __params = __params.set('category', params.category.toString());
     let req = new HttpRequest<any>(
       'GET',
@@ -388,6 +396,8 @@ class ProfessionalsService extends __BaseService {
    * - `page`: A page number within the paginated result set.
    *
    * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `code__isnull`:
    *
    * - `category`:
    */
@@ -551,6 +561,7 @@ module ProfessionalsService {
      * Which field to use when ordering the results.
      */
     ordering?: string;
+    codeIsnull?: string;
   }
 
   /**
@@ -639,6 +650,7 @@ module ProfessionalsService {
      * Which field to use when ordering the results.
      */
     ordering?: string;
+    codeIsnull?: string;
     category?: number;
   }
 

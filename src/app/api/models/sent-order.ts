@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Phone } from './phone';
 export interface SentOrder {
   client_location?: null | number;
   created?: string;
@@ -11,6 +12,7 @@ export interface SentOrder {
   modified?: string;
   note?: null | string;
   phone?: null | string;
+  phone_extended?: Phone;
   price_amount?: string;
   price_currency?: string;
   service: number;

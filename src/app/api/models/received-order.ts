@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { ReceivedOrderClient } from './received-order-client';
 import { UserLocationInline } from './user-location-inline';
+import { Phone } from './phone';
 export interface ReceivedOrder {
   client?: ReceivedOrderClient;
   client_location?: UserLocationInline;
@@ -14,6 +15,7 @@ export interface ReceivedOrder {
   modified?: string;
   note?: null | string;
   phone?: null | string;
+  phone_extended?: Phone;
   price?: null | string;
   price_currency?: string;
   service: number;
