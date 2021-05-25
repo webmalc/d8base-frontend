@@ -25,6 +25,7 @@ export class MasterProfileCalendarComponent implements OnInit {
   public enabledPeriods$: Observable<MasterCalendar[]>;
   public schedule$: Observable<ProfessionalSchedule[]>;
   public scheduleEditor = new FormControl();
+  public readonly formControl = new FormControl({ value: null, disabled: true });
 
   private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>(null);
   private selectedDate: Date;

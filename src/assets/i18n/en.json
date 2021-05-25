@@ -730,7 +730,8 @@
     "sunday": "Sunday"
   },
   "calendar": {
-    "timezone": "Timezone"
+    "timezone": "Timezone",
+    "day-off": "Day off"
   },
   "received_orders": {
     "title": "My orders",
