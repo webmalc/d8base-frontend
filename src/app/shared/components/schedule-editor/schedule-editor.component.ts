@@ -31,7 +31,7 @@ const DEFAULT_END_TIME = '18:00';
 })
 export class ScheduleEditorComponent implements ControlValueAccessor {
   @Select(CurrentUserSelectors.isMondayFirstDayOfWeek)
-  public isMondayFirstDayOfWeek$: Observable<UserSettings['is_monday_start_of_a_week']>;
+  public isMondayFirstDayOfWeek$: Observable<boolean>;
 
   // TODO remove Input(), use setDisabledState()
   @Input() public disabled: boolean = false;

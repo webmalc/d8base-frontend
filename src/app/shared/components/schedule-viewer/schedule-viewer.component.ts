@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { UserSettings } from '@app/api/models';
 import * as ScheduleConstants from '@app/core/constants/schedule.constants';
-import { dayOfWeekSorter, mondayOrSundayOrder, MONDAY_ORDER, ScheduleUnion, SUNDAY_ORDER } from '@app/core/models/schedule-union';
+import { dayOfWeekSorter, mondayOrSundayOrder, ScheduleUnion } from '@app/core/models/schedule-union';
 import { NgDestroyService } from '@app/core/services';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
@@ -16,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ScheduleViewerComponent {
   @Select(CurrentUserSelectors.isMondayFirstDayOfWeek)
-  public isMondayFirstDayOfWeek$: Observable<UserSettings['is_monday_start_of_a_week']>;
+  public isMondayFirstDayOfWeek$: Observable<boolean>;
 
   private _schedule: ScheduleUnion[];
 

@@ -51,7 +51,7 @@ export default class CurrentUserSelectors {
   }
 
   @Selector([CurrentUserSelectors.settings])
-  public static isMondayFirstDayOfWeek(data: UserSettings): UserSettings['is_monday_start_of_a_week'] {
+  public static isMondayFirstDayOfWeek(data: UserSettings): boolean {
     return data?.is_monday_start_of_a_week ?? true;
   }
 }
