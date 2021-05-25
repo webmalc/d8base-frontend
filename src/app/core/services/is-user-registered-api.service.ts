@@ -13,9 +13,8 @@ export class IsUserRegisteredApiService {
   constructor(private readonly client: ApiClientService) {}
 
   public isEmailRegistered(email: string): Observable<boolean> {
-    // @ts-ignore
     return this.client
-      .post<{ is_registered: boolean }>(this.url, { email })
-      .pipe(map((val: { is_registered: boolean }) => val.is_registered));
+      .post<{ is_registered: boolean }, { email: string }>(this.url, { email })
+      .pipe(map(val => val.is_registered));
   }
 }
