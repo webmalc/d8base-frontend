@@ -75,7 +75,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
     const interval = setInterval(() => {
       if (i < 0) {
         clearInterval(interval);
-        messageElement.style.backgroundColor = `rgba(12,209,232,0)`;
+        messageElement.style.backgroundColor = 'rgba(12,209,232,0)';
 
         return;
       }
