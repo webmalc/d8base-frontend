@@ -98,6 +98,9 @@ export class CalendarComponentComponent implements ControlValueAccessor {
    * Change currently viewed day
    */
   public changeDate(offset: number): void {
+    if (!this.date) {
+      return;
+    }
     const newDate = addDays(this.date, offset);
     this.newDate.emit(newDate);
     this.date = newDate;

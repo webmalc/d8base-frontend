@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Service } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { LocationEditorPopoverComponent } from '@app/shared/components';
+import { LocationEditorPopoverComponent } from '@app/shared/components/location-editor-popover/location-editor-popover.component';
 import { PopoverController } from '@ionic/angular';
 import { combineLatest, forkJoin, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { map, startWith, switchMap, take } from 'rxjs/operators';

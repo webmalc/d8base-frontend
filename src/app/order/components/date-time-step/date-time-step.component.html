@@ -11,7 +11,7 @@
     <app-calendar-component
       [formControl]="formControl"
       [enabledPeriods]="displayedCalendars$ | async"
-      [serviceDuration]="60"
+      [serviceDuration]="duration"
       (newDate)="showCalendarForDate($event)">
     </app-calendar-component>
   </ion-list>

@@ -730,7 +730,8 @@
     "sunday": "Воскресенье"
   },
   "calendar": {
-    "timezone": "Часовой пояс"
+    "timezone": "Часовой пояс",
+    "day-off": "Нерабочий день"
   },
   "received_orders": {
     "title": "Мои заказы",

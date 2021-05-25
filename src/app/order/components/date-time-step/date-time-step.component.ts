@@ -27,6 +27,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     datetime: this.formControl,
   });
   public displayedCalendars$: Observable<MasterCalendar[]>;
+  public duration: number;
 
   private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());
   private readonly professional$ = new BehaviorSubject<number>(NaN);
@@ -62,6 +63,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     super.onContextChanged(context);
     this.updateCalendars();
     this.updateServiceProfessional(context.service.professional);
+    this.duration = context.service.duration;
   }
 
   private updateCalendars(): void {
