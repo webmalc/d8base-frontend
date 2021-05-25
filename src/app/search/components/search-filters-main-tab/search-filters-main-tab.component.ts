@@ -18,7 +18,6 @@ import { filter, map, takeUntil } from 'rxjs/operators';
   providers: [NgDestroyService],
 })
 export class SearchFiltersMainTabComponent implements OnInit {
-  public countries$ = this.countriesApi.list();
   public categoryList$: Observable<Category[]> = this.professionalsApi
     .professionalsCategoriesList({})
     .pipe(map(({ results }) => results));
@@ -74,10 +73,10 @@ export class SearchFiltersMainTabComponent implements OnInit {
   public initSubcategories(categories: Category[]): void {
     this.subcategoriesList = null;
     this.form.get(this.formFields.subcategory).reset();
-    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesRead(c.id)))
+    forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesList({ category: c.id })))
       .pipe(takeUntil(this.destroy$))
       .subscribe(subcategoriesList => {
-        this.subcategoriesList = subcategoriesList;
+        this.subcategoriesList = subcategoriesList.reduce((all, v) => all.concat(v.results), []);
         this.cd.detectChanges();
       });
   }
