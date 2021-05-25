@@ -1,24 +1,36 @@
 import { Component, Input } from '@angular/core';
-import { ProfessionalSchedule } from '@app/api/models';
 import * as ScheduleConstants from '@app/core/constants/schedule.constants';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { dayOfWeekSorter, mondayOrSundayOrder, ScheduleUnion } from '@app/core/models/schedule-union';
+import { NgDestroyService } from '@app/core/services';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-schedule-viewer',
   templateUrl: './schedule-viewer.component.html',
   styleUrls: ['./schedule-viewer.component.scss'],
+  providers: [NgDestroyService],
 })
 export class ScheduleViewerComponent {
-  private _schedule: AbstractSchedule[];
+  @Select(CurrentUserSelectors.isMondayFirstDayOfWeek)
+  public isMondayFirstDayOfWeek$: Observable<boolean>;
 
-  public get schedule(): AbstractSchedule[] {
+  private _schedule: ScheduleUnion[];
+
+  public get schedule(): ScheduleUnion[] {
     return this._schedule;
   }
 
   @Input()
-  public set schedule(schedule: AbstractSchedule[]) {
-    this._schedule = schedule.filter(x => x.is_enabled);
+  public set schedule(schedule: ScheduleUnion[]) {
+    this.isMondayFirstDayOfWeek$.pipe(takeUntil(this.destroy$)).subscribe(isMondayFirstDayOfWeek => {
+      this._schedule = schedule.filter(x => x.is_enabled).sort(dayOfWeekSorter(mondayOrSundayOrder(isMondayFirstDayOfWeek)));
+    });
   }
+
+  constructor(private readonly destroy$: NgDestroyService) {}
 
   public getDayName(index: number): string {
     return ScheduleConstants.defaultWeek[index];

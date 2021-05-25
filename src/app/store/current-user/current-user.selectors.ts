@@ -49,4 +49,9 @@ export default class CurrentUserSelectors {
   public static isAuthenticated(data: CurrentUserStateModel): boolean {
     return isAuthenticated(data);
   }
+
+  @Selector([CurrentUserSelectors.settings])
+  public static isMondayFirstDayOfWeek(data: UserSettings): boolean {
+    return data?.is_monday_start_of_a_week ?? true;
+  }
 }

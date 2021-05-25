@@ -1,9 +1,13 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormArray, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { UserSettings } from '@app/api/models';
 import * as ScheduleConstants from '@app/core/constants/schedule.constants';
-import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { dayOfWeekSorter, mondayOrSundayOrder, ScheduleUnion } from '@app/core/models/schedule-union';
 import { NgDestroyService } from '@app/core/services';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { PopoverController } from '@ionic/angular';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DaySelectorComponent } from './day-selector/day-selector.component';
 import { createFormGroup, normalizeScheduleFormat } from './functions';
@@ -26,13 +30,16 @@ const DEFAULT_END_TIME = '18:00';
   ],
 })
 export class ScheduleEditorComponent implements ControlValueAccessor {
+  @Select(CurrentUserSelectors.isMondayFirstDayOfWeek)
+  public isMondayFirstDayOfWeek$: Observable<boolean>;
+
   // TODO remove Input(), use setDisabledState()
   @Input() public disabled: boolean = false;
 
   public timetable: FormArray;
   public formFields = ScheduleEditorFormFields;
 
-  private onChange: (value: AbstractSchedule[]) => void;
+  private onChange: (value: ScheduleUnion[]) => void;
   private onTouched: () => void;
 
   constructor(private readonly popoverController: PopoverController, private readonly ngDestroy$: NgDestroyService) {
@@ -40,10 +47,14 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
   }
 
   @Input()
-  public set schedule(schedule: AbstractSchedule[]) {
+  public set schedule(schedule: ScheduleUnion[]) {
     // TODO remove Input(), use only writeValue()
-    const initialValue = schedule ?? ScheduleConstants.defaultSchedule;
-    this.fillFromSchedules(initialValue.map(normalizeScheduleFormat));
+    this.isMondayFirstDayOfWeek$.pipe(takeUntil(this.ngDestroy$)).subscribe(isMondayFirstDayOfWeek => {
+      const initialValue = (schedule ?? ScheduleConstants.defaultSchedule)
+        .map(normalizeScheduleFormat)
+        .sort(dayOfWeekSorter(mondayOrSundayOrder(isMondayFirstDayOfWeek)));
+      this.fillFromSchedules(initialValue);
+    });
   }
 
   public get controls(): FormGroup[] {
@@ -82,7 +93,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  public writeValue(value: AbstractSchedule[]): void {
+  public writeValue(value: ScheduleUnion[]): void {
     if (!value) {
       return;
     }
@@ -95,14 +106,14 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
 
   private initializeTimetable(): void {
     this.timetable = new FormArray([]);
-    this.timetable.valueChanges.pipe(takeUntil(this.ngDestroy$)).subscribe((timetable: AbstractSchedule[]) => {
+    this.timetable.valueChanges.pipe(takeUntil(this.ngDestroy$)).subscribe((timetable: ScheduleUnion[]) => {
       if (this.onChange) {
         this.onChange(timetable);
       }
     });
   }
 
-  private fillFromSchedules(schedules: AbstractSchedule[]): void {
+  private fillFromSchedules(schedules: ScheduleUnion[]): void {
     this.timetable.clear();
     schedules.forEach(data => this.addNewFormGroup(data.day_of_week, data.start_time, data.end_time));
   }
