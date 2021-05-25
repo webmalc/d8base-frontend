@@ -9,7 +9,6 @@ import { ComponentTestingModule, RootModules } from 'src/testing/component-testi
 import { StorageManagerMock } from 'src/testing/mocks';
 import { ProfessionalContactEditComponent } from './professional-contact-edit.component';
 
-
 describe('ProfessionalContactEditComponent', () => {
   let component: ProfessionalContactEditComponent;
   let fixture: ComponentFixture<ProfessionalContactEditComponent>;

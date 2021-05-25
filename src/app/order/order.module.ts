@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationPageModule } from '@app/auth/pages/registration/registration.module';
 import {
-  ClientDetailsStepComponent, ClientIdentificationComponent,
+  ClientDetailsStepComponent,
+  ClientIdentificationComponent,
   DateTimeStepComponent,
   LocationStepComponent,
   OrderConfirmationComponent,
@@ -43,5 +44,4 @@ import { OrderWizardStateService } from './services';
   ],
   providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService],
 })
-export class OrderPageModule {
-}
+export class OrderPageModule {}

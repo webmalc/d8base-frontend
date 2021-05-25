@@ -13,9 +13,9 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class MasterLocationApiService extends AbstractApiService<MasterLocation>
+export class MasterLocationApiService
+  extends AbstractApiService<MasterLocation>
   implements LocationApiServiceInterface, ApiServiceInterface<MasterLocation> {
-
   private readonly url = environment.backend.professional_location;
 
   constructor(private readonly client: ApiClientService) {
@@ -30,10 +30,14 @@ export class MasterLocationApiService extends AbstractApiService<MasterLocation>
   }
 
   public getTimeZoneList(): Observable<Array<{ value: string; display_name: string }>> {
-    return this.client.options(this.url).pipe(
-      map((raw: { actions: { POST: { timezone: { choices: Array<{ value: string; display_name: string }> } } } }) =>
-        raw.actions.POST.timezone.choices),
-    );
+    return this.client
+      .options(this.url)
+      .pipe(
+        map(
+          (raw: { actions: { POST: { timezone: { choices: Array<{ value: string; display_name: string }> } } } }) =>
+            raw.actions.POST.timezone.choices,
+        ),
+      );
   }
 
   protected getUrl(): string {

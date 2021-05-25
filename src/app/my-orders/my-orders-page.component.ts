@@ -15,14 +15,8 @@ import { map } from 'rxjs/operators';
 export class MyOrdersPageComponent {
   public state$: Observable<{ isMaster: boolean; isInbox: boolean }>;
 
-  constructor(
-    masterManager: MasterManagerService,
-    route: ActivatedRoute,
-  ) {
-    this.state$ = combineLatest([
-      masterManager.isMaster$,
-      route.data,
-    ]).pipe(
+  constructor(masterManager: MasterManagerService, route: ActivatedRoute) {
+    this.state$ = combineLatest([masterManager.isMaster$, route.data]).pipe(
       map(([isMaster, data]) => ({ isMaster, isInbox: data.isInbox })),
     );
   }

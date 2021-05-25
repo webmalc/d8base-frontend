@@ -7,8 +7,7 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./location-editor-popover.component.scss'],
 })
 export class LocationEditorPopoverComponent {
-
-  constructor(private readonly popoverController: PopoverController) { }
+  constructor(private readonly popoverController: PopoverController) {}
 
   public save(data): void {
     this.popoverController.dismiss(data);

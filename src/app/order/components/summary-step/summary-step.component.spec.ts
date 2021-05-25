@@ -10,17 +10,19 @@ describe('SummaryStepComponent', () => {
   let component: SummaryStepComponent;
   let fixture: ComponentFixture<SummaryStepComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SummaryStepComponent],
-      imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
-      providers: [OrderWizardStateService],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SummaryStepComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
+        providers: [OrderWizardStateService],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(SummaryStepComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(SummaryStepComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

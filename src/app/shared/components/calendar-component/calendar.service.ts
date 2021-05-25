@@ -13,7 +13,6 @@ interface Interval {
 
 @Injectable()
 export class CalendarService {
-
   private readonly minutesInDay = 1440;
   private readonly intervals = environment.calendar_day_intervals;
   private readonly minutesInInterval = this.minutesInDay / this.intervals;
@@ -31,7 +30,11 @@ export class CalendarService {
 
     for (let intervals = 0; intervals < this.intervals; intervals += 1) {
       const units: CalendarUnit[] = [];
-      for (let minutes = intervals * this.minutesInInterval; minutes <= (intervals + 1) * this.minutesInInterval; minutes += interval) {
+      for (
+        let minutes = intervals * this.minutesInInterval;
+        minutes <= (intervals + 1) * this.minutesInInterval;
+        minutes += interval
+      ) {
         units.push({
           minutes,
           enabled: this.isEnabled(openedPeriodArray, day, minutes),

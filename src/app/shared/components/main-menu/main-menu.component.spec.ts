@@ -10,28 +10,28 @@ describe('MainMenuComponent', () => {
   let component: MainMenuComponent;
   let fixture: ComponentFixture<MainMenuComponent>;
 
-  beforeEach(waitForAsync(() => {
-    const storageMock: Partial<Storage> = {
-      get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
-    };
-    TestBed.configureTestingModule({
-      declarations: [MainMenuComponent],
-      imports: [
-        RouterTestingModule,
-        IonicStorageModule.forRoot(),
-        TranslateModule.forRoot(),
-        HttpClientTestingModule,
-      ],
-      providers: [
-        { provide: Storage, useValue: storageMock },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      const storageMock: Partial<Storage> = {
+        get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
+        set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
+      };
+      TestBed.configureTestingModule({
+        declarations: [MainMenuComponent],
+        imports: [
+          RouterTestingModule,
+          IonicStorageModule.forRoot(),
+          TranslateModule.forRoot(),
+          HttpClientTestingModule,
+        ],
+        providers: [{ provide: Storage, useValue: storageMock }],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MainMenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MainMenuComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -9,13 +9,8 @@ describe('LangInterceptorService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        LangInterceptorService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-      imports: [
-        HttpClientTestingModule,
-      ],
+      providers: [LangInterceptorService, { provide: StorageManagerService, useClass: StorageManagerMock }],
+      imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(LangInterceptorService);
   });

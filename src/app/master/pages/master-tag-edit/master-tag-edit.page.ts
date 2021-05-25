@@ -13,7 +13,6 @@ import { switchMap, tap } from 'rxjs/operators';
   styleUrls: ['./master-tag-edit.page.scss'],
 })
 export class MasterTagEditPage implements OnInit {
-
   public masterId: number;
   public form: FormGroup;
   private defaultTags: Tag[];
@@ -22,28 +21,29 @@ export class MasterTagEditPage implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly api: TagsApiService,
     private readonly masterManager: MasterManagerService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
-    this.masterManager.getMasterList().pipe(
-      tap(list => this.masterId = list[0].id),
-      switchMap(
-        list => this.api.getByMasterId(list[0].id),
-      ),
-    ).subscribe((list: ApiListResponseInterface<Tag>) => this.defaultTags = list.results);
+    this.masterManager
+      .getMasterList()
+      .pipe(
+        tap(list => (this.masterId = list[0].id)),
+        switchMap(list => this.api.getByMasterId(list[0].id)),
+      )
+      .subscribe((list: ApiListResponseInterface<Tag>) => (this.defaultTags = list.results));
     this.form = this.formBuilder.group({
       tags: [''],
     });
   }
 
   public submitForm(): void {
-
     const defaultArr: string[] = this.getTagNamesArray(this.defaultTags);
     const selected: string[] = this.form.get('tags').value;
 
     forkJoin([
-      this.api.deleteList(defaultArr.filter(x => !selected.includes(x)).map((val: string) => this.getDefaultTagByName(val))),
+      this.api.deleteList(
+        defaultArr.filter(x => !selected.includes(x)).map((val: string) => this.getDefaultTagByName(val)),
+      ),
       this.api.createList(selected.filter(x => !defaultArr.includes(x)).map((val: string) => this.getNewTag(val))),
     ]).subscribe(() => {
       // TODO: show feedback about operation success

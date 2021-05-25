@@ -9,21 +9,18 @@ describe('ScheduleEditorComponent', () => {
   let component: ScheduleEditorComponent;
   let fixture: ComponentFixture<ScheduleEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ScheduleEditorComponent],
-      imports: [
-        IonicModule.forRoot(),
-        TranslateModule.forRoot(),
-        ReactiveFormsModule,
-        FormsModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ScheduleEditorComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot(), ReactiveFormsModule, FormsModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ScheduleEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ScheduleEditorComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

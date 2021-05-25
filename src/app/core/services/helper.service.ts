@@ -2,7 +2,6 @@ import { ProfessionalContactInline } from '@app/api/models';
 import { Contact } from '@app/profile/models/contact';
 
 export class HelperService {
-
   public static getErrorListFromHttpErrorResponse(errorList: { [param: string]: string[] | string }): string[] {
     const result: string[] = [];
     for (const errorListElement in errorList) {
@@ -10,8 +9,8 @@ export class HelperService {
         if (Array.isArray(errorList[errorListElement])) {
           result.push(...errorList[errorListElement]);
         }
-        if ((typeof errorList[errorListElement] === 'string' || errorList[errorListElement] instanceof String)) {
-          result.push((errorList[errorListElement] as string));
+        if (typeof errorList[errorListElement] === 'string' || errorList[errorListElement] instanceof String) {
+          result.push(errorList[errorListElement] as string);
         }
       }
     }
@@ -29,8 +28,8 @@ export class HelperService {
   public static getTimeStringFromMinutes(minutes: number): string {
     const hours = Math.floor(minutes / 60);
     const mins = minutes - hours * 60;
-    const hoursStr = /^\d$/.test(hours.toString()) ? `0${  hours.toString()}` : hours;
-    const minsStr = /^\d$/.test(mins.toString()) ? `0${  mins.toString()}` : mins;
+    const hoursStr = /^\d$/.test(hours.toString()) ? `0${hours.toString()}` : hours;
+    const minsStr = /^\d$/.test(mins.toString()) ? `0${mins.toString()}` : mins;
 
     return `${hoursStr}:${minsStr}`;
   }
@@ -52,7 +51,7 @@ export class HelperService {
   }
 
   public static getRatingTitle(rating: number): string {
-    return `global.rating.${  Math.round(rating).toString(10)}`;
+    return `global.rating.${Math.round(rating).toString(10)}`;
   }
 
   public static getNoAvatarLink(): string {
@@ -60,7 +59,7 @@ export class HelperService {
   }
 
   public static declination(num: number, words: string[]): string {
-    return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+    return words[num % 100 > 4 && num % 100 < 20 ? 2 : [2, 0, 1, 1, 1, 2][num % 10 < 5 ? num % 10 : 5]];
   }
 
   public static calculateContacts(contacts: Contact[], userContacts: ProfessionalContactInline[]): Contact[] {
@@ -78,7 +77,7 @@ export class HelperService {
   }
 
   public static calculateAge(birthday: string): number {
-    const ageDifMs = Date.now() - (new Date(birthday)).getTime();
+    const ageDifMs = Date.now() - new Date(birthday).getTime();
     const ageDate = new Date(ageDifMs);
 
     return Math.abs(ageDate.getUTCFullYear() - 1970);

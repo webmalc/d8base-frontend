@@ -20,5 +20,4 @@ import { MasterEducationEditPage } from './master-education-edit.page';
   ],
   declarations: [MasterEducationEditPage, EducationEditComponent],
 })
-export class MasterEducationEditPageModule {
-}
+export class MasterEducationEditPageModule {}

@@ -7,7 +7,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingComponent {
-
   @Input() public rating: number;
 
   public generateRatingArray(): number[] {
@@ -20,6 +19,6 @@ export class RatingComponent {
   }
 
   public needToRenderHalf(): boolean {
-    return this.rating && (this.rating - Math.floor(this.rating) !== 0);
+    return this.rating && this.rating - Math.floor(this.rating) !== 0;
   }
 }

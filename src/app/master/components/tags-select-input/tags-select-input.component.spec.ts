@@ -27,22 +27,24 @@ describe('TagsSelectInputComponent', () => {
     }
   }
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [IonicModule, HttpClientTestingModule, ReactiveFormsModule],
-      declarations: [TagsSelectInputComponent],
-      providers: [
-        {
-          provide: TagsApiService,
-          useClass: TagsApiServiceStub,
-        },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [IonicModule, HttpClientTestingModule, ReactiveFormsModule],
+        declarations: [TagsSelectInputComponent],
+        providers: [
+          {
+            provide: TagsApiService,
+            useClass: TagsApiServiceStub,
+          },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(TagsSelectInputComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(TagsSelectInputComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   /** @see AppTestFormControlComponent  ??? Probably needs to create the wrapper fake component because this is a NG_VALUE_ACCESSOR */
   xit('should create', () => {

@@ -9,28 +9,29 @@ import { delay, repeat, switchMap, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class MessageListUpdaterService {
-
   private readonly destroy$ = new Subject<void>();
   private readonly updateInterval: number = environment.message.direct_update_interval_ms;
   private readonly messagesPerPage: number = environment.message.messages_per_page;
 
-  constructor(private readonly messagesListApi: MessagesListApiService, private readonly notificationWorker: NotificationWorkerService) {
-  }
+  constructor(
+    private readonly messagesListApi: MessagesListApiService,
+    private readonly notificationWorker: NotificationWorkerService,
+  ) {}
 
   public receiveUpdates(interlocutorId: number): Observable<ApiListResponseInterface<Message>> {
     this.destroy();
 
-    return NotificationWorkerService.isFirebaseSupported() ?
-      this.notificationWorker.messageReceived$.pipe(
-        switchMap(() => this.getMessageList(interlocutorId)),
-        takeUntil(this.destroy$),
-      ) :
-      this.getMessageList(interlocutorId).pipe(
-        delay(this.updateInterval),
-        repeat(),
-        switchMap(() => this.getMessageList(interlocutorId)),
-        takeUntil(this.destroy$),
-      );
+    return NotificationWorkerService.isFirebaseSupported()
+      ? this.notificationWorker.messageReceived$.pipe(
+          switchMap(() => this.getMessageList(interlocutorId)),
+          takeUntil(this.destroy$),
+        )
+      : this.getMessageList(interlocutorId).pipe(
+          delay(this.updateInterval),
+          repeat(),
+          switchMap(() => this.getMessageList(interlocutorId)),
+          takeUntil(this.destroy$),
+        );
   }
 
   public getMessageList(interlocutorId: number, page?: number): Observable<ApiListResponseInterface<Message>> {

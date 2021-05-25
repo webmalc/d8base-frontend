@@ -20,5 +20,4 @@ import { MasterEditPage } from './master-edit.page';
   ],
   declarations: [MasterEditPage, MasterEditComponent],
 })
-export class MasterEditPageModule {
-}
+export class MasterEditPageModule {}

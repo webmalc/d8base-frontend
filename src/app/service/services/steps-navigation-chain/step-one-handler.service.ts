@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class StepOneHandlerService extends AbstractHandler {
-
   constructor() {
     super();
   }

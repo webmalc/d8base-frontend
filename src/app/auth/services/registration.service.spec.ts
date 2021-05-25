@@ -25,43 +25,37 @@ describe('RegistrationService', () => {
     refresh_token: 'string',
   };
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      ...RootModules(),
-      ComponentTestingModule,
-    ],
-    providers: [
-      RegistrationService,
-      {
-        provide: AccountsService,
-        useValue: {
-          accountsProfileList: () => of([{ id: 1, email: 'tester' }]),
-          accountsRegisterCreate: () => of(tokenData),
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [...RootModules(), ComponentTestingModule],
+      providers: [
+        RegistrationService,
+        {
+          provide: AccountsService,
+          useValue: {
+            accountsProfileList: () => of([{ id: 1, email: 'tester' }]),
+            accountsRegisterCreate: () => of(tokenData),
+          },
         },
-      },
-      { provide: ApiClientService, useValue: { post: () => of(tokenData) } },
-    ],
-  }));
+        { provide: ApiClientService, useValue: { post: () => of(tokenData) } },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: RegistrationService = TestBed.inject(RegistrationService);
     expect(service).toBeTruthy();
   });
 
-  it('test #register', (done) => {
+  it('test #register', done => {
     const service: RegistrationService = TestBed.inject(RegistrationService);
     const store: Store = TestBed.inject(Store);
 
-    store.select(CurrentUserSelectors.profile)
-      .subscribe(
-        profile => {
-          // TODO check profile
-          done();
-        },
-      );
+    store.select(CurrentUserSelectors.profile).subscribe(profile => {
+      // TODO check profile
+      done();
+    });
 
-    service.register(
-      userModel,
-    );
+    service.register(userModel);
   });
 });

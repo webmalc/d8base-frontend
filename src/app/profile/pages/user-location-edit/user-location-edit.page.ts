@@ -22,11 +22,7 @@ export class UserLocationEditPage implements OnInit {
     map(params => parseInt(params['location-id'], 10)),
   );
 
-  constructor(
-    private readonly store: Store,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute,
-  ) {}
+  constructor(private readonly store: Store, private readonly router: Router, private readonly route: ActivatedRoute) {}
 
   public ngOnInit(): void {
     this.location$ = this.locations$.pipe(
@@ -44,8 +40,7 @@ export class UserLocationEditPage implements OnInit {
   }
 
   public delete(id: number): void {
-    this.store.dispatch(new UserLocationActions.DeleteUserLocation(id))
-      .subscribe(() => this.navigateToProfile());
+    this.store.dispatch(new UserLocationActions.DeleteUserLocation(id)).subscribe(() => this.navigateToProfile());
   }
 
   private navigateToProfile(): void {

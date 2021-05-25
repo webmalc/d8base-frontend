@@ -1,10 +1,19 @@
-import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouterEvent } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  RouterEvent,
+} from '@angular/router';
 
 export function isNavigationEvent(routerEvent: RouterEvent): boolean {
-  return routerEvent instanceof NavigationStart ||
+  return (
+    routerEvent instanceof NavigationStart ||
     routerEvent instanceof NavigationEnd ||
     routerEvent instanceof NavigationCancel ||
-    routerEvent instanceof NavigationError;
+    routerEvent instanceof NavigationError
+  );
 }
 
 export function getLastChild(route: ActivatedRoute): ActivatedRoute {

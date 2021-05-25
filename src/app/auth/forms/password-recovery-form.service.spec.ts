@@ -4,12 +4,11 @@ import { FormBuilder } from '@angular/forms';
 import { PasswordRecoveryFormService } from './password-recovery-form.service';
 
 describe('PasswordRecoveryFormService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      FormBuilder,
-      PasswordRecoveryFormService,
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [FormBuilder, PasswordRecoveryFormService],
+    }),
+  );
 
   it('should be created', () => {
     const service: PasswordRecoveryFormService = TestBed.inject(PasswordRecoveryFormService);

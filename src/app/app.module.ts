@@ -100,9 +100,9 @@ import { StoreModule } from './store/store.module';
         !platform.is('desktop')
           ? LocationAccuracy
           : {
-            request: () => Promise.resolve(true),
-            canRequest: () => Promise.resolve(),
-          },
+              request: () => Promise.resolve(true),
+              canRequest: () => Promise.resolve(),
+            },
       deps: [Platform],
     },
     {
@@ -120,6 +120,5 @@ export class AppModule {
     private readonly titleService: TitleService,
     private readonly loadingIndicatorService: LoadingIndicatorService,
     private readonly translationService: TranslationService,
-  ) {
-  }
+  ) {}
 }

@@ -85,7 +85,9 @@ export class ServicePublishService {
         });
       }),
       switchMap(({ masterLocRet }) =>
-        serviceLocation && masterLocRet ? this.createServiceLocation(serviceLocation, createdService, masterLocRet) : of(null),
+        serviceLocation && masterLocRet
+          ? this.createServiceLocation(serviceLocation, createdService, masterLocRet)
+          : of(null),
       ),
       map(() => createdService),
     );
@@ -117,7 +119,11 @@ export class ServicePublishService {
     return this.servicePriceApi.create({ ...price, service: service.id });
   }
 
-  private createServiceLocation(location: ServiceLocation, service: ServiceList, masterLoc: MasterLocation): Observable<ServiceLocation> {
+  private createServiceLocation(
+    location: ServiceLocation,
+    service: ServiceList,
+    masterLoc: MasterLocation,
+  ): Observable<ServiceLocation> {
     return this.serviceLocationApi.create({ ...location, location: masterLoc.id, service: service.id });
   }
 }

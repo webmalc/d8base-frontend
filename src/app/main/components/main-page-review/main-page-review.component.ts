@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './main-page-review.component.html',
   styleUrls: ['./main-page-review.component.scss'],
 })
-export class MainPageReviewComponent {
-}
+export class MainPageReviewComponent {}

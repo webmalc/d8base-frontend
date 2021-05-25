@@ -26,7 +26,6 @@ import { UserLanguageState } from './user-language-state/user-language.state';
 import { UserLocationState } from './user-locations/user-locations.state';
 import * as UserLocationActions from './user-locations/user-locations.actions';
 
-
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
 const USER_SETTINGS_STORAGE_KEY = 'user_settings';
@@ -276,7 +275,7 @@ export class CurrentUserState implements NgxsOnInit {
     const { email, user_id } = verifyEmail;
 
     if (profile.id !== parseInt(user_id, 10)) {
-      throw Error('Try to change another\'s user email');
+      throw Error("Try to change another's user email");
     }
 
     return this.api.accountsVerifyEmailCreate(verifyEmail).pipe(

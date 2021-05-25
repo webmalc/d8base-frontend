@@ -5,10 +5,7 @@ import { OrderStatus } from '@app/core/types/order-status';
 
 @Injectable()
 export class SentOrderStatusController {
-  constructor(
-    private readonly api: AccountsService,
-  ) {
-  }
+  constructor(private readonly api: AccountsService) {}
 
   public async discardOrder(order: SentOrder): Promise<void> {
     await this.setStatus(order, 'canceled');
@@ -20,9 +17,11 @@ export class SentOrderStatusController {
       status,
     };
 
-    return this.api.accountsOrdersSentPartialUpdate({
-      id: acceptedOrder.id,
-      data: acceptedOrder,
-    }).toPromise();
+    return this.api
+      .accountsOrdersSentPartialUpdate({
+        id: acceptedOrder.id,
+        data: acceptedOrder,
+      })
+      .toPromise();
   }
 }

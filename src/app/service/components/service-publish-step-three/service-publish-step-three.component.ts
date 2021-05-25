@@ -10,26 +10,25 @@ import { ServiceStepsNavigationService } from '@app/service/services/service-ste
   styleUrls: ['./service-publish-step-three.component.scss'],
 })
 export class ServicePublishStepThreeComponent implements OnInit {
-
   public files: File[] = [];
 
   constructor(
     private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
     public serviceStepsNavigationService: ServiceStepsNavigationService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Three)) {
-      this.files =
-        this.servicePublishDataHolderService.getStepData<StepThreeDataInterface>(ServicePublishSteps.Three).photos;
+      this.files = this.servicePublishDataHolderService.getStepData<StepThreeDataInterface>(
+        ServicePublishSteps.Three,
+      ).photos;
     }
   }
 
   public submit(): void {
-    this.servicePublishDataHolderService.setStepData<StepThreeDataInterface>(
-      ServicePublishSteps.Three, { photos: this.files },
-    );
+    this.servicePublishDataHolderService.setStepData<StepThreeDataInterface>(ServicePublishSteps.Three, {
+      photos: this.files,
+    });
     this.serviceStepsNavigationService.next();
   }
 

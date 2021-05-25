@@ -8,14 +8,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LocationService {
-
-  public getList<T extends ClientLocationInterface>(api: LocationApiServiceInterface): Observable<ClientLocationInterface[]> {
+  public getList<T extends ClientLocationInterface>(
+    api: LocationApiServiceInterface,
+  ): Observable<ClientLocationInterface[]> {
     return this.getLocationList(api);
   }
 
   private getLocationList(api: LocationApiServiceInterface, id?: number): Observable<ClientLocationInterface[]> {
-    return api.getByClientId(id).pipe(
-      map(data => data.results),
-    );
+    return api.getByClientId(id).pipe(map(data => data.results));
   }
 }

@@ -17,7 +17,6 @@ import { finalize, map, single } from 'rxjs/operators';
   styleUrls: ['./service-publish-final-step.component.scss'],
 })
 export class ServicePublishFinalStepComponent {
-
   public service: ServiceList;
 
   constructor(
@@ -28,8 +27,7 @@ export class ServicePublishFinalStepComponent {
     private readonly masterManager: MasterManagerService,
     private readonly loading: LoadingService,
     private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
-  ) {
-  }
+  ) {}
 
   public ionViewDidEnter(): void {
     this.service = null;
@@ -56,23 +54,20 @@ export class ServicePublishFinalStepComponent {
     this.loading.presentLoading();
     const master = await this.getMaster().toPromise();
     if (master) {
-      await this.servicePublishDataHolder.assignStepData(
-        ServicePublishSteps.Final, { master },
-      );
+      await this.servicePublishDataHolder.assignStepData(ServicePublishSteps.Final, { master });
     }
-    this.servicePublish.publish()
+    this.servicePublish
+      .publish()
       .pipe(
         single(),
         finalize(() => this.loading.loadingDismiss()),
       )
-      .subscribe(
-        (service) => this.router.navigate(['service', service.id, 'edit'], { queryParams: { from: 'publish' } }),
+      .subscribe(service =>
+        this.router.navigate(['service', service.id, 'edit'], { queryParams: { from: 'publish' } }),
       );
   }
 
   private getMaster(): Observable<ProfessionalList> {
-    return this.masterManager.getMasterList().pipe(
-      map(list => list[0]),
-    );
+    return this.masterManager.getMasterList().pipe(map(list => list[0]));
   }
 }

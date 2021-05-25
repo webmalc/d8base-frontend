@@ -8,7 +8,6 @@ import { HelperService } from '@app/core/services/helper.service';
   styleUrls: ['./client-widget.component.scss'],
 })
 export class ClientWidgetComponent {
-
   @Input() public client: User;
 
   public defaultAvatar = HelperService.getNoAvatarLink();

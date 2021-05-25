@@ -12,25 +12,25 @@ describe('ResetPasswordPage', () => {
   let component: ResetPasswordPage;
   let fixture: ComponentFixture<ResetPasswordPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ResetPasswordPage, ErrorFlashbagComponent],
-      imports: [
-        IonicModule,
-        ReactiveFormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-      ],
-      providers: [
-        ResetPasswordApiService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ResetPasswordPage, ErrorFlashbagComponent],
+        imports: [
+          IonicModule,
+          ReactiveFormsModule,
+          RouterTestingModule,
+          HttpClientTestingModule,
+          TranslateModule.forRoot(),
+        ],
+        providers: [ResetPasswordApiService],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ResetPasswordPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ResetPasswordPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

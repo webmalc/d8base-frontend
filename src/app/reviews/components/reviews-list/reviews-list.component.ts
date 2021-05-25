@@ -53,7 +53,9 @@ export class ReviewsListComponent {
               ]),
             ),
             map(([completedServices, professionalServices]) =>
-              Boolean(completedServices.filter(completedService => professionalServices.includes(completedService)).length),
+              Boolean(
+                completedServices.filter(completedService => professionalServices.includes(completedService)).length,
+              ),
             ),
           ),
     ),

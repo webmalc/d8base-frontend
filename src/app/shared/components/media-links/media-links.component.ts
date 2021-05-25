@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './media-links.component.html',
   styleUrls: ['./media-links.component.scss'],
 })
-export class MediaLinksComponent {
-}
+export class MediaLinksComponent {}

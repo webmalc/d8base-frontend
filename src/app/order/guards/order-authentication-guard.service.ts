@@ -6,27 +6,17 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class OrderAuthenticationGuardService implements CanActivate {
-  constructor(
-    private readonly authService: AuthenticationService,
-    private readonly router: Router,
-  ) {
-  }
+  constructor(private readonly authService: AuthenticationService, private readonly router: Router) {}
 
-  public canActivate(
-    route: ActivatedRouteSnapshot,
-  ): Observable<boolean | UrlTree> {
-    return combineLatest([
-      this.authService.isAuthenticated$,
-    ]).pipe(
+  public canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
+    return combineLatest([this.authService.isAuthenticated$]).pipe(
       map(([isAuth]) => {
         if (isAuth) {
           return true;
         }
         const serviceId = route.params.serviceId;
 
-        return this.router.parseUrl(
-          `order/${serviceId}/contact-info`,
-        );
+        return this.router.parseUrl(`order/${serviceId}/contact-info`);
       }),
     );
   }

@@ -26,7 +26,6 @@ const DEBOUNCE_DURATION_MS = 500;
   providers: [NgDestroyService],
 })
 export class ServicePublishStepFourComponent {
-
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
@@ -47,10 +46,7 @@ export class ServicePublishStepFourComponent {
     private readonly registrationService: RegistrationService,
     private readonly destroy$: NgDestroyService,
   ) {
-    this.context$ = combineLatest([
-      authenticationService.isAuthenticated$,
-      this.isUserExists$,
-    ]).pipe(
+    this.context$ = combineLatest([authenticationService.isAuthenticated$, this.isUserExists$]).pipe(
       map(([isAuthenticated, isUserExisting]) => ({ isAuthenticated, isUserExisting })),
     );
     this.form = this.createForm();
@@ -70,18 +66,17 @@ export class ServicePublishStepFourComponent {
 
   public submitForm(userExists: boolean): void {
     if (userExists) {
-      this.authenticationService.login(
-        {
-          username: this.form.get(this.formFields.Email).value,
-          password: this.form.get(this.formFields.Password).value,
-        },
-      );
+      this.authenticationService.login({
+        username: this.form.get(this.formFields.Email).value,
+        password: this.form.get(this.formFields.Password).value,
+      });
       return;
     }
 
     const country = this.form.get(this.formFields.Country).value as Country;
     const city = this.form.get(this.formFields.City).value as City;
-    this.registrationService.register({
+    this.registrationService.register(
+      {
         first_name: this.form.get(this.formFields.FirstName).value,
         last_name: this.form.get(this.formFields.LastName).value,
         email: this.form.get(this.formFields.Email).value,
@@ -96,7 +91,6 @@ export class ServicePublishStepFourComponent {
         },
       },
     );
-
   }
 
   public isSubmitDisabled(): boolean {
@@ -104,11 +98,9 @@ export class ServicePublishStepFourComponent {
   }
 
   private createForm(): FormGroup {
-    return this.formBuilder.group({
-        [this.formFields.Email]: [null, Validators.compose([
-          Validators.required,
-          AppValidators.email,
-        ])],
+    return this.formBuilder.group(
+      {
+        [this.formFields.Email]: [null, Validators.compose([Validators.required, AppValidators.email])],
         [this.formFields.FirstName]: ['', Validators.required],
         [this.formFields.LastName]: [''],
         [this.formFields.Password]: ['', passwordValidators],
@@ -116,24 +108,32 @@ export class ServicePublishStepFourComponent {
         [this.formFields.Country]: [null, Validators.required],
         [this.formFields.City]: [null, Validators.required],
       },
-      { validators: confirmPasswordValidator(ServicePublishStepFourFormFields.Password, ServicePublishStepFourFormFields.Confirm) });
+      {
+        validators: confirmPasswordValidator(
+          ServicePublishStepFourFormFields.Password,
+          ServicePublishStepFourFormFields.Confirm,
+        ),
+      },
+    );
   }
 
   private subscribeOnProfile(): void {
-    this.profile$.pipe(
-      first(profile => !!profile?.account_type),
-    ).subscribe(() => this.serviceStepsNavigationService.next());
+    this.profile$
+      .pipe(first(profile => !!profile?.account_type))
+      .subscribe(() => this.serviceStepsNavigationService.next());
   }
 
   private subscribeOnEmailChanges(): void {
-    this.emailChanged$.pipe(
-      debounceTime(DEBOUNCE_DURATION_MS),
-      switchMap(() => this.isRegisteredApi.isEmailRegistered(this.form.get(this.formFields.Email).value)),
-      takeUntil(this.destroy$),
-    ).subscribe(existingUser => {
-      this.isUserExists$.next(existingUser);
-      this.switchUserMode(existingUser);
-    });
+    this.emailChanged$
+      .pipe(
+        debounceTime(DEBOUNCE_DURATION_MS),
+        switchMap(() => this.isRegisteredApi.isEmailRegistered(this.form.get(this.formFields.Email).value)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(existingUser => {
+        this.isUserExists$.next(existingUser);
+        this.switchUserMode(existingUser);
+      });
   }
 
   private switchUserMode(existingUser: boolean): void {

@@ -6,7 +6,6 @@ import { AbstractIpService } from '@app/core/services/location/abstract-ip.servi
 
 @Injectable()
 export class IpDataService extends AbstractIpService {
-
   private readonly url = 'https://api.ipdata.co/?api-key=650902cc01a9a3a7cff619b38c0c9ef70b8faf08522fb680d0bd0abd';
 
   constructor(protected http: HttpClient) {

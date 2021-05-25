@@ -6,19 +6,10 @@ import { OrderWizardStateService } from '../services';
 
 @Injectable()
 export class OrderFirstStepGuardService implements CanActivate {
-  constructor(
-    private readonly wizardState: OrderWizardStateService,
-    private readonly router: Router,
-  ) {
-  }
+  constructor(private readonly wizardState: OrderWizardStateService, private readonly router: Router) {}
 
-  public canActivate(
-    route: ActivatedRouteSnapshot,
-  ): Observable<boolean | UrlTree> {
-    return combineLatest([
-      this.wizardState.isStateEmpty(),
-      this.wizardState.getFirstStep(),
-    ]).pipe(
+  public canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
+    return combineLatest([this.wizardState.isStateEmpty(), this.wizardState.getFirstStep()]).pipe(
       map(([isEmptyState, firstStep]) => {
         const routeStepId = route.url[0]?.path;
         const serviceId = route.params.serviceId;
@@ -26,9 +17,7 @@ export class OrderFirstStepGuardService implements CanActivate {
           return true;
         }
 
-        return this.router.parseUrl(
-          `order/${serviceId}/${firstStep.id}`,
-        );
+        return this.router.parseUrl(`order/${serviceId}/${firstStep.id}`);
       }),
     );
   }

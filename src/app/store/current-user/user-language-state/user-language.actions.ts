@@ -25,7 +25,7 @@ export class UpdateUserLanguage {
 }
 
 export class UpdateUserLanguagesList {
-  public static readonly type = '[UserLanguage] Update user language\'s list';
+  public static readonly type = "[UserLanguage] Update user language's list";
 
   constructor(public newUserLanguages: UserLanguage[]) {}
 }

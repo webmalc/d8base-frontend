@@ -8,20 +8,19 @@ describe('ServiceDetailsEditComponent', () => {
   let component: ServiceDetailsEditComponent;
   let fixture: ComponentFixture<ServiceDetailsEditComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ServiceDetailsEditComponent ],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [ServiceEditorDepsService],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServiceDetailsEditComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [ServiceEditorDepsService],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServiceDetailsEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServiceDetailsEditComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

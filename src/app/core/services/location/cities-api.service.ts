@@ -15,40 +15,39 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CitiesApiService extends AbstractReadonlyApiService<City> {
-
   private readonly url = environment.backend.cities;
 
   constructor(protected client: ApiClientService) {
     super(client);
   }
 
-  public get(
-    params: {
-      country?: string;
-      City?: string;
-      subCity?: string;
-      timezone?: string;
-      search?: string;
-      ordering?: string;
-      page?: string;
-      page_size?: string;
-      by_name?: string;
-    },
-  ): Observable<ApiListResponseInterface<City>> {
+  public get(params: {
+    country?: string;
+    City?: string;
+    subCity?: string;
+    timezone?: string;
+    search?: string;
+    ordering?: string;
+    page?: string;
+    page_size?: string;
+    by_name?: string;
+  }): Observable<ApiListResponseInterface<City>> {
     return super.get(params);
   }
 
   public getByLocation(dist: number, location: UserLocation): Observable<ApiListResponseInterface<City>> {
-    return this.client.get<ApiListResponseInterface<City>>(this.url, {
-      dist: dist.toString(10),
-      point: coordinatesToString(location.coordinates),
-    }).pipe(
-      map(result => {
-        result.results = plainToClass(City, result.results);
+    return this.client
+      .get<ApiListResponseInterface<City>>(this.url, {
+        dist: dist.toString(10),
+        point: coordinatesToString(location.coordinates),
+      })
+      .pipe(
+        map(result => {
+          result.results = plainToClass(City, result.results);
 
-        return result;
-      }),
-    );
+          return result;
+        }),
+      );
   }
 
   // @ts-ignore

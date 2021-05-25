@@ -11,31 +11,34 @@ describe('MasterExperienceEditPage', () => {
   let component: MasterExperienceEditPage;
   let fixture: ComponentFixture<MasterExperienceEditPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterExperienceEditPage],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute, useValue: {
-            snapshot: {
-              paramMap: {
-                get(): string {
-                  return '';
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MasterExperienceEditPage],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              snapshot: {
+                paramMap: {
+                  get(): string {
+                    return '';
+                  },
                 },
               },
             },
           },
-        },
-        ExperienceApiService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+          ExperienceApiService,
+          { provide: StorageManagerService, useClass: StorageManagerMock },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterExperienceEditPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterExperienceEditPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

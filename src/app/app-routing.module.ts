@@ -49,7 +49,8 @@ const routes: Routes = [
   },
   {
     path: 'saved-professionals',
-    loadChildren: () => import('./saved-professionals/saved-professionals.module').then(m => m.SavedProfessionalsModule),
+    loadChildren: () =>
+      import('./saved-professionals/saved-professionals.module').then(m => m.SavedProfessionalsModule),
     canActivate: [MainGuard],
   },
   { path: '**', component: NotFoundPageComponent },
@@ -66,5 +67,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

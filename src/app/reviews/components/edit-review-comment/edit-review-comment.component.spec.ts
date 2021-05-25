@@ -13,10 +13,7 @@ describe('EditReviewCommentComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [EditReviewCommentComponent],
-        imports: [
-          ...RootModules(),
-          ComponentTestingModule,
-        ],
+        imports: [...RootModules(), ComponentTestingModule],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();
       router = TestBed.inject(Router);

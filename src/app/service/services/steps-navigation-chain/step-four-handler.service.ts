@@ -7,10 +7,7 @@ import { first, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepFourHandlerService extends AbstractHandler {
-
-  constructor(
-    private readonly authenticationService: AuthenticationService,
-  ) {
+  constructor(private readonly authenticationService: AuthenticationService) {
     super();
   }
 
@@ -29,7 +26,7 @@ export class StepFourHandlerService extends AbstractHandler {
   private handle(handler: () => Observable<number>): Observable<number> {
     return this.authenticationService.isAuthenticated$.pipe(
       first(),
-      mergeMap(isAuthenticated => isAuthenticated ? handler() : of(this.getIndex())),
+      mergeMap(isAuthenticated => (isAuthenticated ? handler() : of(this.getIndex()))),
     );
   }
 }

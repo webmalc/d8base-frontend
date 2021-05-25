@@ -12,7 +12,6 @@ import { first, map, switchMap } from 'rxjs/operators';
  */
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
-
   @Select(CurrentUserSelectors.tokens)
   public tokens$: Observable<AuthResponseInterface>;
 
@@ -28,23 +27,21 @@ export class HeadersInterceptor implements HttpInterceptor {
 
     const isTokensRequest = req.url === environment.backend.url + environment.backend.auth;
     const isRefreshRequest = req.url === environment.backend.url + environment.backend.refresh;
-    return this.tokens$
-      .pipe(
-        first(tokens => isTokensRequest || Boolean(tokens)),
-        map(tokens => tokens?.access_token),
-        switchMap(token => {
-          let headers;
-          if (isRefreshRequest) {
-            headers = req.headers.append('Authorization', `Basic ${
-              btoa(`${environment.client_id}:${environment.client_secret}`)}`)
-              .append('Content-Type', 'application/json');
-          } else if (token) {
-            headers = req.headers.append('Authorization', `Bearer ${token}`)
-              .append('Content-Type', 'application/json');
-          }
+    return this.tokens$.pipe(
+      first(tokens => isTokensRequest || Boolean(tokens)),
+      map(tokens => tokens?.access_token),
+      switchMap(token => {
+        let headers;
+        if (isRefreshRequest) {
+          headers = req.headers
+            .append('Authorization', `Basic ${btoa(`${environment.client_id}:${environment.client_secret}`)}`)
+            .append('Content-Type', 'application/json');
+        } else if (token) {
+          headers = req.headers.append('Authorization', `Bearer ${token}`).append('Content-Type', 'application/json');
+        }
 
-          return next.handle(req.clone({ headers }));
-        }),
-      );
+        return next.handle(req.clone({ headers }));
+      }),
+    );
   }
 }

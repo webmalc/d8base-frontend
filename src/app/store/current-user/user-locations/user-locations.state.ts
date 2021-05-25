@@ -44,9 +44,9 @@ export class UserLocationState {
     { dispatch }: StateContext<UserLocationStateModel>,
     { location }: UserLocationActions.UpdateUserLocation,
   ) {
-    return this.accountsService.accountsLocationsUpdate({ id: location.id, data: location }).pipe(
-      mergeMap(() => dispatch(new UserLocationActions.LoadAllUserLocations())),
-    );
+    return this.accountsService
+      .accountsLocationsUpdate({ id: location.id, data: location })
+      .pipe(mergeMap(() => dispatch(new UserLocationActions.LoadAllUserLocations())));
   }
 
   @Action(UserLocationActions.DeleteUserLocation)

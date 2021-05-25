@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './message.page.html',
   styleUrls: ['./message.page.scss'],
 })
-export class MessagePage {
-}
+export class MessagePage {}

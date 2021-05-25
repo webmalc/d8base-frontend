@@ -7,16 +7,16 @@ import { ServicePublishAuthStateManagerService } from './service-publish-auth-st
 import { ServicePublishDataHolderService } from './service-publish-data-holder.service';
 
 describe('ServicePublishAuthStateManagerService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      ServicePublishAuthStateManagerService,
-      ServicePublishDataHolderService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        ServicePublishAuthStateManagerService,
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: ServicePublishAuthStateManagerService = TestBed.inject(ServicePublishAuthStateManagerService);

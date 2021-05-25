@@ -9,7 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./collapse-item.component.scss'],
 })
 export class CollapseItemComponent {
-
   @Input() public title: string;
   @Input() public noSidePadding: boolean = false;
   @Input() public titleBold: boolean = true;

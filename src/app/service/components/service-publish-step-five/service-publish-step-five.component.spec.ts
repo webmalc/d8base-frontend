@@ -19,34 +19,33 @@ describe('ServicePublishStepFiveComponent', () => {
   let component: ServicePublishStepFiveComponent;
   let fixture: ComponentFixture<ServicePublishStepFiveComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServicePublishStepFiveComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        ServicePublishStepFiveFormService,
-        ServicePublishDataHolderService,
-        ServiceStepsNavigationService,
-        ChainManagerService,
-        StepOneHandlerService,
-        StepTwoHandlerService,
-        StepThreeHandlerService,
-        StepFourHandlerService,
-        StepFiveHandlerService,
-        StepSixHandlerService,
-        StepSevenHandlerService,
-        StepFinalHandlerService,
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServicePublishStepFiveComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          ServicePublishStepFiveFormService,
+          ServicePublishDataHolderService,
+          ServiceStepsNavigationService,
+          ChainManagerService,
+          StepOneHandlerService,
+          StepTwoHandlerService,
+          StepThreeHandlerService,
+          StepFourHandlerService,
+          StepFiveHandlerService,
+          StepSixHandlerService,
+          StepSevenHandlerService,
+          StepFinalHandlerService,
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServicePublishStepFiveComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServicePublishStepFiveComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -6,16 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from './translation.service';
 
 describe('TranslationService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      TranslateModule.forRoot(),
-      IonicStorageModule.forRoot(),
-      HttpClientTestingModule,
-    ],
-    providers: [
-      TranslationService,
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot(), IonicStorageModule.forRoot(), HttpClientTestingModule],
+      providers: [TranslationService],
+    }),
+  );
 
   it('should be created', () => {
     const service: TranslationService = TestBed.inject(TranslationService);

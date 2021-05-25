@@ -9,20 +9,19 @@ describe('ReceivedOrderListItemComponent', () => {
   let component: ReceivedOrderListItemComponent;
   let fixture: ComponentFixture<ReceivedOrderListItemComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ReceivedOrderListItemComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [ServicesApiCache, ReceiverOrderStatusController],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ReceivedOrderListItemComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [ServicesApiCache, ReceiverOrderStatusController],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ReceivedOrderListItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ReceivedOrderListItemComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

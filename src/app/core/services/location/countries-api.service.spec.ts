@@ -4,12 +4,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CountriesApiService } from './countries-api.service';
 
 describe('CountriesApiService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
-    providers: [
-      CountriesApiService,
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [CountriesApiService],
+    }),
+  );
 
   it('should be created', () => {
     const service: CountriesApiService = TestBed.inject(CountriesApiService);

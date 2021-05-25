@@ -12,7 +12,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage {
-
   @Select(CurrentUserSelectors.errors)
   public errorMessages$: Observable<string[]>;
 
@@ -22,11 +21,10 @@ export class RegistrationPage {
 
   public onSubmitRegistrationForm(data: { user: DefaultRegisterUser; location: UserLocation }): void {
     this.pending$.next(true);
-    this.store.dispatch(new CurrentUserActions.Register(data.user, { location: data.location }))
-      .subscribe(
-        () => this.router.navigateByUrl('/profile'),
-        () => this.pending$.next(false),
-        () => this.pending$.next(false),
-      );
+    this.store.dispatch(new CurrentUserActions.Register(data.user, { location: data.location })).subscribe(
+      () => this.router.navigateByUrl('/profile'),
+      () => this.pending$.next(false),
+      () => this.pending$.next(false),
+    );
   }
 }

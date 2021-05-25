@@ -11,7 +11,6 @@ import { filter, shareReplay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserSettingsService {
-
   @Select(CurrentUserSelectors.settings)
   public readonly settings$: Observable<UserSettings | null>;
 
@@ -45,7 +44,9 @@ export class UserSettingsService {
   }
 
   @Dispatch()
-  public setFirstDayOfWeek(is_monday_start_of_a_week: UserSettings['is_monday_start_of_a_week']): CurrentUserActions.ChangeUserSettings {
+  public setFirstDayOfWeek(
+    is_monday_start_of_a_week: UserSettings['is_monday_start_of_a_week'],
+  ): CurrentUserActions.ChangeUserSettings {
     return new CurrentUserActions.ChangeUserSettings({ is_monday_start_of_a_week });
   }
 }

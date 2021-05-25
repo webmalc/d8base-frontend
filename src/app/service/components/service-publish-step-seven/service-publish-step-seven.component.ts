@@ -29,7 +29,6 @@ import { first, map, switchMap } from 'rxjs/operators';
   styleUrls: ['./service-publish-step-seven.component.scss'],
 })
 export class ServicePublishStepSevenComponent extends Reinitable {
-
   public formFields = ServicePublishStepSevenFormFields;
   public renderUseMasterSchedule: boolean = false;
   public defaultLocationList: MasterLocation[];
@@ -70,37 +69,45 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   public isSubmitDisabled(): boolean {
-    return (this.formService.form.invalid) ||
-      (
-        !this.formService.form.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.PaymentCash).value
-      ) ||
-      (
-        !this.formService.form.get(ServicePublishStepSevenFormFields.UseMasterSchedule).value &&
-        (JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
-          ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable,
-        )) === '{}' || JSON.stringify(this.servicePublishDataHolderService.getPartialStepData(
-          ServicePublishSteps.Seven, ServicePublishStepSevenTimetableFormFields.Timetable,
-        )) === undefined)
-      ) || (
-        this.renderLocation() && !this.isUseDefaultLocation &&
+    return (
+      this.formService.form.invalid ||
+      (!this.formService.form.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
+        !this.formService.form.get(ServicePublishStepSevenFormFields.PaymentCash).value) ||
+      (!this.formService.form.get(ServicePublishStepSevenFormFields.UseMasterSchedule).value &&
+        (JSON.stringify(
+          this.servicePublishDataHolderService.getPartialStepData(
+            ServicePublishSteps.Seven,
+            ServicePublishStepSevenTimetableFormFields.Timetable,
+          ),
+        ) === '{}' ||
+          JSON.stringify(
+            this.servicePublishDataHolderService.getPartialStepData(
+              ServicePublishSteps.Seven,
+              ServicePublishStepSevenTimetableFormFields.Timetable,
+            ),
+          ) === undefined)) ||
+      (this.renderLocation() &&
+        !this.isUseDefaultLocation &&
         !this.formService.form.get(ServicePublishStepSevenFormFields.Country).value &&
         !this.formService.form.get(ServicePublishStepSevenFormFields.City).value &&
         !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value &&
         !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value
-      ) || (
-        this.isClientPlaceService() && !this.isUseDefaultLocation &&
+        !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value) ||
+      (this.isClientPlaceService() &&
+        !this.isUseDefaultLocation &&
         !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value
-      ) || (
-        this.isMasterPlaceService() && !this.isUseDefaultLocation &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value
-      );
+        !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value) ||
+      (this.isMasterPlaceService() &&
+        !this.isUseDefaultLocation &&
+        !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value)
+    );
   }
 
   public renderLocation(): boolean {
-    return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type !== 'online';
+    return (
+      this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type !==
+      'online'
+    );
   }
 
   public useDefaultLocation(): boolean {
@@ -139,17 +146,25 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   public isClientPlaceService(): boolean {
-    return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type === 'client';
+    return (
+      this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type ===
+      'client'
+    );
   }
 
   public isMasterPlaceService(): boolean {
-    return this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type === 'professional';
+    return (
+      this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type ===
+      'professional'
+    );
   }
 
   protected init(): void {
     this.authStateManager.updateFourStepState();
     this.initMasterLocation();
-    const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(
+      ServicePublishSteps.Seven,
+    );
     this.initSchedules(stepData);
     if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Seven)) {
       this.formService.createForm(stepData);
@@ -183,30 +198,30 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   private initMasterLocation(): void {
-    this.masterManager.getMasterList().pipe(
-      switchMap(list => list.length > 0 ?
-        this.extendedLocation.getList<MasterLocation>(this.masterLocation) :
-        of(null),
-      ),
-    ).subscribe((res: MasterLocation[]) => {
-      if (res && res.length > 0) {
-        const defaultLocations = this.getCorrectLocations(res);
-        if (defaultLocations.length > 0) {
-          this.defaultLocationList = defaultLocations;
+    this.masterManager
+      .getMasterList()
+      .pipe(
+        switchMap(list =>
+          list.length > 0 ? this.extendedLocation.getList<MasterLocation>(this.masterLocation) : of(null),
+        ),
+      )
+      .subscribe((res: MasterLocation[]) => {
+        if (res && res.length > 0) {
+          const defaultLocations = this.getCorrectLocations(res);
+          if (defaultLocations.length > 0) {
+            this.defaultLocationList = defaultLocations;
+          }
         }
-      }
-    });
+      });
   }
 
   private getCorrectLocations(locations: MasterLocation[]): MasterLocation[] {
     const ret: MasterLocation[] = [];
-    locations.forEach(
-      loc => {
-        if (this.checkDefaultLocation(loc)) {
-          ret.push(loc);
-        }
-      },
-    );
+    locations.forEach(loc => {
+      if (this.checkDefaultLocation(loc)) {
+        ret.push(loc);
+      }
+    });
 
     return ret;
   }
@@ -222,32 +237,35 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   private initDefaultUnits(): void {
-    this.userSetting.userSettings$.pipe(
-      first(),
-    ).subscribe(settings => this.formService.form.get(this.formFields.Units).setValue(settings?.units));
+    this.userSetting.userSettings$
+      .pipe(first())
+      .subscribe(settings => this.formService.form.get(this.formFields.Units).setValue(settings?.units));
   }
 
   private initSchedules(stepData: StepSevenDataInterface): void {
-    this.masterManager.getMasterList().pipe(
-      switchMap(list => list.length > 0 ?
-        this.masterScheduleApi.get({ professional: list[0].id.toString() }) : of(null),
-      ),
-      map((res: ApiListResponseInterface<MasterSchedule>) => null === res ? [] : res.results),
-    ).subscribe(masterSchedule => {
-      this.masterSchedules = masterSchedule;
-      const masterHasSchedules = this.masterSchedules.length > 0;
-      this.renderUseMasterSchedule = masterHasSchedules;
-      if (stepData?.timetable?.length) {
-        if (stepData.use_master_schedule) {
-          this.masterSchedules = stepData.timetable;
+    this.masterManager
+      .getMasterList()
+      .pipe(
+        switchMap(list =>
+          list.length > 0 ? this.masterScheduleApi.get({ professional: list[0].id.toString() }) : of(null),
+        ),
+        map((res: ApiListResponseInterface<MasterSchedule>) => (null === res ? [] : res.results)),
+      )
+      .subscribe(masterSchedule => {
+        this.masterSchedules = masterSchedule;
+        const masterHasSchedules = this.masterSchedules.length > 0;
+        this.renderUseMasterSchedule = masterHasSchedules;
+        if (stepData?.timetable?.length) {
+          if (stepData.use_master_schedule) {
+            this.masterSchedules = stepData.timetable;
+          } else {
+            this.serviceSchedules = stepData.timetable;
+          }
+          this.selectedSchedules = stepData.timetable;
         } else {
-          this.serviceSchedules = stepData.timetable;
+          this.selectedSchedules = masterSchedule;
+          this.formService.form.get(this.formFields.UseMasterSchedule).setValue(masterHasSchedules);
         }
-        this.selectedSchedules = stepData.timetable;
-      } else {
-        this.selectedSchedules = masterSchedule;
-        this.formService.form.get(this.formFields.UseMasterSchedule).setValue(masterHasSchedules);
-      }
-    });
+      });
   }
 }

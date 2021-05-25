@@ -20,20 +20,8 @@ import { MessagePage } from './message.page';
 import { ChatsSearchService } from './services/chats-search.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MessagePageRoutingModule,
-    SharedModule,
-    TranslateModule,
-  ],
-  declarations: [
-    MessagePage,
-    DirectComponent,
-    ChatsComponent,
-    ContextMenuPopoverComponent,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, MessagePageRoutingModule, SharedModule, TranslateModule],
+  declarations: [MessagePage, DirectComponent, ChatsComponent, ContextMenuPopoverComponent],
   providers: [
     ChatsCompilerService,
     LatestMessagesApiService,
@@ -45,5 +33,4 @@ import { ChatsSearchService } from './services/chats-search.service';
     ChatsSearchService,
   ],
 })
-export class MessagePageModule {
-}
+export class MessagePageModule {}

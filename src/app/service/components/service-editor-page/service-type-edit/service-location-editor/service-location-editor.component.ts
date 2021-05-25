@@ -16,7 +16,6 @@ import { ServiceType } from '@app/core/types/service-types';
   ],
 })
 export class ServiceLocationEditorComponent implements ControlValueAccessor {
-
   @Input() public type: ServiceType;
 
   @Input() public service: Service;

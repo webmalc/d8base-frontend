@@ -14,8 +14,7 @@ export class ServiceOperationsService {
     private readonly api: AccountsService,
     private readonly alertController: AlertController,
     private readonly translate: TranslateService,
-  ) {
-  }
+  ) {}
 
   public enableService(service: Service): Observable<void> {
     return this.patchService(service, { is_enabled: true });
@@ -37,7 +36,8 @@ export class ServiceOperationsService {
           {
             text: this.translate.instant('delete-confirmation.cancel'),
             role: 'cancel',
-          }, {
+          },
+          {
             text: this.translate.instant('delete-confirmation.okay'),
             handler: () => {
               this.api.accountsServicesDelete(id).subscribe(() => {
@@ -53,12 +53,14 @@ export class ServiceOperationsService {
   }
 
   private patchService(service: Service, changes: Partial<Service>): Observable<void> {
-    return this.api.accountsServicesUpdate({
-      id: service.id,
-      data: {
-        ...service,
-        ...changes,
-      },
-    }).pipe(mapTo(void 0));
+    return this.api
+      .accountsServicesUpdate({
+        id: service.id,
+        data: {
+          ...service,
+          ...changes,
+        },
+      })
+      .pipe(mapTo(void 0));
   }
 }

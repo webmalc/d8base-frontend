@@ -7,7 +7,5 @@ import { ServiceList } from '@app/api/models';
   styleUrls: ['./service-location.component.scss'],
 })
 export class ServiceLocationComponent {
-
   @Input() public service: ServiceList;
-
 }

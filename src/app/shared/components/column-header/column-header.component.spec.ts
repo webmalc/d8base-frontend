@@ -15,10 +15,7 @@ describe('ColumnHeaderComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ColumnHeaderComponent],
-        imports: [
-          ...RootModules(),
-          ComponentTestingModule,
-        ],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
       location = TestBed.inject(Location);
       router = TestBed.inject(Router);
@@ -45,6 +42,5 @@ describe('ColumnHeaderComponent', () => {
 
     buttonElement.nativeElement.click();
     expect(locationBackSpy).toHaveBeenCalled();
-
   });
 });

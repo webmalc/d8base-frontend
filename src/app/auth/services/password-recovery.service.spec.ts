@@ -5,12 +5,11 @@ import { ApiClientService } from '../../core/services/api-client.service';
 import { PasswordRecoveryService } from './password-recovery.service';
 
 describe('PasswordRecoveryService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      PasswordRecoveryService,
-      { provide: ApiClientService, useValue: { post: () => of() } },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [PasswordRecoveryService, { provide: ApiClientService, useValue: { post: () => of() } }],
+    }),
+  );
 
   it('should be created', () => {
     const service: PasswordRecoveryService = TestBed.inject(PasswordRecoveryService);

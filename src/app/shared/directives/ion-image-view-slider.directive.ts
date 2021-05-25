@@ -11,14 +11,12 @@ import { IonImageViewDirective } from './ion-image-view.directive';
   providers: [NgDestroyService],
 })
 export class IonImageViewSliderDirective implements AfterViewInit {
-  @ContentChildren(IonImageViewDirective, { descendants: true }) public readonly imageViews!: QueryList<IonImageViewDirective>;
+  @ContentChildren(IonImageViewDirective, { descendants: true })
+  public readonly imageViews!: QueryList<IonImageViewDirective>;
   @Input() public canDelete: boolean;
   @Output() public delete = new EventEmitter<number>();
 
-  constructor(
-    private readonly modalController: ModalController,
-    private readonly ngDestroy$: NgDestroyService,
-  ) {}
+  constructor(private readonly modalController: ModalController, private readonly ngDestroy$: NgDestroyService) {}
 
   public ngAfterViewInit(): void {
     this.subscribeImagesClicks();
@@ -48,7 +46,9 @@ export class IonImageViewSliderDirective implements AfterViewInit {
     this.imageViews.changes
       .pipe(
         startWith(0),
-        switchMap(() => merge(...this.imageViews.map((imageView, index) => imageView.imageClick.pipe(map(() => index))))),
+        switchMap(() =>
+          merge(...this.imageViews.map((imageView, index) => imageView.imageClick.pipe(map(() => index)))),
+        ),
         takeUntil(this.ngDestroy$),
       )
       .subscribe(photoIndex => {

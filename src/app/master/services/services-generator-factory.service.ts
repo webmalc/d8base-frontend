@@ -8,12 +8,10 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ServicesGeneratorFactoryService {
-
   constructor(
     private readonly api: ServicesService,
     private readonly serviceTagsReadonlyApi: ServiceTagsReadonlyApiService,
-  ) {
-  }
+  ) {}
 
   public getServiceList(masterId: number, showOnlyEnabled: boolean = false): Observable<ServiceData[]> {
     let params: ServicesService.ServicesServicesListParams = {
@@ -26,18 +24,22 @@ export class ServicesGeneratorFactoryService {
         isEnabled: 'true',
       };
     }
-    return this.api.servicesServicesList(params).pipe(
-      switchMap(serviceList => this.combineWithTags(serviceList.results)),
-    );
+    return this.api
+      .servicesServicesList(params)
+      .pipe(switchMap(serviceList => this.combineWithTags(serviceList.results)));
   }
 
   private combineWithTags(serviceList: Service[]): Observable<ServiceData[]> {
     return of(serviceList).pipe(
-      mergeMap(services => forkJoin(
-        [...services.map(service => this.serviceTagsReadonlyApi.get({ service: service.id.toString() }).pipe(
-          map(res => ({ service, tags: res.results })),
-        ))],
-      )),
+      mergeMap(services =>
+        forkJoin([
+          ...services.map(service =>
+            this.serviceTagsReadonlyApi
+              .get({ service: service.id.toString() })
+              .pipe(map(res => ({ service, tags: res.results }))),
+          ),
+        ]),
+      ),
     );
   }
 }

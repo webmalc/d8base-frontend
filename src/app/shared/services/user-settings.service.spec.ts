@@ -10,9 +10,7 @@ describe('UserSettingsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
+      providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
     });
     service = TestBed.inject(UserSettingsService);
   });

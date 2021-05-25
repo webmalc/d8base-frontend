@@ -7,9 +7,7 @@ import { firebase } from '@firebase/app';
   providedIn: 'root',
 })
 export class FcmDeviceDisableService {
-
-  constructor(private readonly fcmDevicesApi: FcmDevicesApiService) {
-  }
+  constructor(private readonly fcmDevicesApi: FcmDevicesApiService) {}
 
   public async disableDevice(): Promise<GcmDevice> {
     const token = await firebase.messaging().getToken();

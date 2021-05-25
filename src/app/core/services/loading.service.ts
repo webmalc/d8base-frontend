@@ -5,14 +5,10 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class LoadingService {
-
-  constructor(private readonly loadingController: LoadingController) {
-  }
+  constructor(private readonly loadingController: LoadingController) {}
 
   public presentLoading(): void {
-    this.loadingController.create().then(
-      c => c.present(),
-    );
+    this.loadingController.create().then(c => c.present());
   }
 
   public loadingDismiss(): void {

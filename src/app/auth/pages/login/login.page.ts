@@ -17,7 +17,6 @@ import { filter, takeUntil } from 'rxjs/operators';
   providers: [NgDestroyService],
 })
 export class LoginPage {
-
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
@@ -40,12 +39,11 @@ export class LoginPage {
 
   public onSubmitLoginForm(user: Credentials): void {
     this.pending$.next(true);
-    this.store.dispatch(new CurrentUserActions.Login(user))
-      .subscribe(
-        () => this.router.navigateByUrl(this.redirectTo),
-        () => this.pending$.next(false),
-        () => this.pending$.next(false),
-      );
+    this.store.dispatch(new CurrentUserActions.Login(user)).subscribe(
+      () => this.router.navigateByUrl(this.redirectTo),
+      () => this.pending$.next(false),
+      () => this.pending$.next(false),
+    );
   }
 
   private async logout(): Promise<void> {
@@ -54,10 +52,12 @@ export class LoginPage {
   }
 
   private subOnQueryParams() {
-    this.route.queryParams.pipe(
-      filter(params => params?.hasOwnProperty('logout')),
-      takeUntil(this.destroy$),
-    ).subscribe(() => this.logout());
+    this.route.queryParams
+      .pipe(
+        filter(params => params?.hasOwnProperty('logout')),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.logout());
 
     this.route.queryParams
       .pipe(

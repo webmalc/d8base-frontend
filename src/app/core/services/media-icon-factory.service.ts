@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class MediaIconFactoryService {
-
   public static getIcon(media: string): string {
     switch (media) {
       case 'facebook':

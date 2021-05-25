@@ -9,7 +9,6 @@ import { first, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class LangInterceptorService implements HttpInterceptor {
-
   @Select(CurrentUserSelectors.settings)
   public readonly settings$: Observable<UserSettings>;
 
@@ -40,9 +39,6 @@ export class LangInterceptorService implements HttpInterceptor {
   }
 
   private getExcludedUrls(): string[] {
-    return [
-      environment.backend.url + environment.backend.auth,
-      environment.backend.url + environment.backend.refresh,
-    ];
+    return [environment.backend.url + environment.backend.auth, environment.backend.url + environment.backend.refresh];
   }
 }

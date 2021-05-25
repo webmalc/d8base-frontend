@@ -11,10 +11,7 @@ describe('EditReviewComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [EditReviewComponent],
-        imports: [
-          ...RootModules(),
-          ComponentTestingModule,
-        ],
+        imports: [...RootModules(), ComponentTestingModule],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();
 

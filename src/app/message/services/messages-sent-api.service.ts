@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class MessagesSentApiService extends AbstractApiService<SentMessage> {
-
   private readonly url = environment.backend.messages_sent;
 
   constructor(protected client: ApiClientService) {

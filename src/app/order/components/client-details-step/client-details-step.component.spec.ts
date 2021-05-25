@@ -26,12 +26,7 @@ describe('ClientDetailsStepComponent', () => {
           IonicStorageModule.forRoot(),
           HttpClientTestingModule,
         ],
-        providers: [
-          OrderWizardStateService,
-          UserManagerService,
-          FormBuilder,
-          ChangeDetectorRef,
-        ],
+        providers: [OrderWizardStateService, UserManagerService, FormBuilder, ChangeDetectorRef],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ClientDetailsStepComponent);

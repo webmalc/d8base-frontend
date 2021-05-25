@@ -66,11 +66,7 @@ export class ImageCarouselComponent implements AfterViewInit {
 
   private _photos: Photo[];
 
-  constructor(
-    private readonly ngDestroy$: NgDestroyService,
-    private readonly cd: ChangeDetectorRef,
-  ) {
-  }
+  constructor(private readonly ngDestroy$: NgDestroyService, private readonly cd: ChangeDetectorRef) {}
 
   @Input()
   public set files(files: File[]) {
@@ -138,7 +134,10 @@ export class ImageCarouselComponent implements AfterViewInit {
       setTimeout(() => {
         const allSlidesWidth = slideList
           .map(({ nativeElement }) => nativeElement.clientWidth)
-          .reduce((accWidth: number, currentWidth: number) => accWidth + currentWidth + spaceBetweenSlides, -spaceBetweenSlides);
+          .reduce(
+            (accWidth: number, currentWidth: number) => accWidth + currentWidth + spaceBetweenSlides,
+            -spaceBetweenSlides,
+          );
         this.isNavButtonsHidden = !allSlidesWidth || this.slidesElementRef.nativeElement.clientWidth > allSlidesWidth;
         this.cd.markForCheck();
       });

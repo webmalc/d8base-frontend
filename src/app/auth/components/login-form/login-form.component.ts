@@ -18,8 +18,7 @@ export class LoginFormComponent {
   @Output() public readonly user = new EventEmitter<Credentials>();
   private _pending: boolean;
 
-  constructor(private readonly fb: FormBuilder) {
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   public get pending(): boolean {
     return this._pending;

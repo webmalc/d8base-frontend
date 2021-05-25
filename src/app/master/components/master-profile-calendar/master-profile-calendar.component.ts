@@ -19,7 +19,6 @@ import { first, map, switchMap } from 'rxjs/operators';
   styleUrls: ['./master-profile-calendar.component.scss'],
 })
 export class MasterProfileCalendarComponent implements OnInit {
-
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
@@ -36,9 +35,7 @@ export class MasterProfileCalendarComponent implements OnInit {
     private readonly api: AccountsService,
   ) {
     this.enabledPeriods$ = this.periods.asObservable();
-    this.schedule$ = api.accountsProfessionalScheduleList({}).pipe(
-      map(response => response.results),
-    );
+    this.schedule$ = api.accountsProfessionalScheduleList({}).pipe(map(response => response.results));
   }
 
   public ngOnInit(): void {
@@ -54,30 +51,27 @@ export class MasterProfileCalendarComponent implements OnInit {
 
   public updateSchedule(masterId: number): void {
     const newSchedules: AbstractSchedule[] = this.scheduleEditor.value ?? [];
-    const deleteOld$ = this.schedule$.pipe(
-      switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)),
+    const deleteOld$ = this.schedule$.pipe(switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)));
+
+    const createNew$ = this.scheduleApi.createSet(
+      newSchedules.map(schedule => ({
+        ...schedule,
+        professional: masterId,
+        id: null,
+      })),
     );
 
-    const createNew$ = this.scheduleApi.createSet(newSchedules.map(schedule => ({
-      ...schedule,
-      professional: masterId,
-      id: null,
-    })));
-
-    concat(deleteOld$, createNew$)
-      .subscribe({
-        next: () => null,
-        complete: async () => {
-          this.updateEnabledPeriods(this.selectedDate ?? new Date(), masterId);
-        },
-      });
+    concat(deleteOld$, createNew$).subscribe({
+      next: () => null,
+      complete: async () => {
+        this.updateEnabledPeriods(this.selectedDate ?? new Date(), masterId);
+      },
+    });
   }
 
   private updateEnabledPeriods(startDate: Date, masterId): void {
-    this.calendarGeneratorFactory.getEnabledPeriods(
-      startDate,
-      HelperService.getDate(startDate, 1),
-      masterId,
-    ).subscribe(list => this.periods.next(list));
+    this.calendarGeneratorFactory
+      .getEnabledPeriods(startDate, HelperService.getDate(startDate, 1), masterId)
+      .subscribe(list => this.periods.next(list));
   }
 }

@@ -21,9 +21,9 @@ export class StepContainerComponent implements OnInit, OnDestroy {
   public isPrevDisabled$: Observable<boolean> = this.wizardState.isFirstStep();
   public isLastStep$: Observable<boolean> = this.wizardState.isLastStep();
   public context$: Observable<StepContext> = this.wizardState.getContext();
-  public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState.getState().pipe(
-    map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})),
-  );
+  public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState
+    .getState()
+    .pipe(map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})));
 
   private readonly ngDestroy$ = new Subject<void>();
 
@@ -32,8 +32,7 @@ export class StepContainerComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly cd: ChangeDetectorRef,
     private readonly stepComponent: StepComponent<unknown>,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.subscribeAll();

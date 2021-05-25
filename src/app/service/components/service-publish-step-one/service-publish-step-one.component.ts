@@ -79,7 +79,10 @@ export class ServicePublishStepOneComponent extends Reinitable {
   private subscribeProfessionalSubcategory(): void {
     this.defaultProfessional$
       .pipe(
-        filter(defaultProfessional => Boolean(defaultProfessional) && !this.servicePublishDataHolderService.isset(ServicePublishSteps.One)),
+        filter(
+          defaultProfessional =>
+            Boolean(defaultProfessional) && !this.servicePublishDataHolderService.isset(ServicePublishSteps.One),
+        ),
         map(({ subcategory }) => subcategory),
         switchMap(subcategoryId => this.professionalsApi.professionalsSubcategoriesRead(subcategoryId)),
         switchMap((subcategory: Subcategory) =>

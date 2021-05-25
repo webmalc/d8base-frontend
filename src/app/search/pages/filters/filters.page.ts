@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './filters.page.html',
   styleUrls: ['./filters.page.scss'],
 })
-export class FiltersPage {
-}
+export class FiltersPage {}

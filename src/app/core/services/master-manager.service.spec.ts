@@ -9,13 +9,8 @@ describe('MasterManagerService', () => {
   let httpController: HttpTestingController;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        MasterManagerService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
+      imports: [HttpClientTestingModule],
+      providers: [MasterManagerService, { provide: StorageManagerService, useClass: StorageManagerMock }],
     });
     service = TestBed.inject(MasterManagerService);
     httpController = TestBed.inject(HttpTestingController);

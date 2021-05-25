@@ -68,7 +68,8 @@ describe('IfSpinnerDirective', () => {
   it(
     'should handle nested appIfSpinner correctly',
     waitForAsync(() => {
-      const template = '<div *appIfSpinner="booleanCondition"><span *appIfSpinner="nestedBooleanCondition">hello</span></div>';
+      const template =
+        '<div *appIfSpinner="booleanCondition"><span *appIfSpinner="nestedBooleanCondition">hello</span></div>';
 
       fixture = createTestComponent(template);
 

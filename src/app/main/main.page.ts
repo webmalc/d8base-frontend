@@ -90,7 +90,7 @@ export class MainPage implements OnInit {
   }
 
   public searchDisabled(): boolean {
-    return !(this.form.get(this.formFields.query).value);
+    return !this.form.get(this.formFields.query).value;
   }
 
   public search(): void {

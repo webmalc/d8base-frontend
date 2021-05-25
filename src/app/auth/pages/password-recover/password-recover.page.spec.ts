@@ -14,21 +14,29 @@ describe('PasswordRecoverPage', () => {
   let component: PasswordRecoverPage;
   let fixture: ComponentFixture<PasswordRecoverPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
-      providers: [
-        PasswordRecoveryService,
-        PasswordRecoveryFormService,
-        { provide: ApiClientService, useValue: { post: () => of() } },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
+        imports: [
+          IonicModule.forRoot(),
+          ReactiveFormsModule,
+          FormsModule,
+          RouterTestingModule,
+          TranslateModule.forRoot(),
+        ],
+        providers: [
+          PasswordRecoveryService,
+          PasswordRecoveryFormService,
+          { provide: ApiClientService, useValue: { post: () => of() } },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(PasswordRecoverPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(PasswordRecoverPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -5,11 +5,9 @@ import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-
 
 @Injectable()
 export class ServicePublishStepSevenFormService {
-
   public form: FormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder) {
-  }
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   public createForm(data?: StepSevenDataInterface): void {
     this.form = this.formBuilder.group({

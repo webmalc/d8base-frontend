@@ -13,9 +13,9 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class MasterContactsApiService extends AbstractApiService<ClientContactInterface>
+export class MasterContactsApiService
+  extends AbstractApiService<ClientContactInterface>
   implements ContactsApiServiceInterface {
-
   private readonly url = environment.backend.professional_contact;
 
   constructor(protected client: ApiClientService) {

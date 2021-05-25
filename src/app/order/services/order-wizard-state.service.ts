@@ -28,7 +28,10 @@ export class OrderWizardStateService {
   private readonly filteredContext$: Observable<StepContext>;
 
   constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
-    this.filteredContext$ = this.context$.asObservable().pipe(filter(context => Boolean(context)), shareReplay(1));
+    this.filteredContext$ = this.context$.asObservable().pipe(
+      filter(context => Boolean(context)),
+      shareReplay(1),
+    );
   }
 
   public submit(): Observable<StepsState> {
@@ -86,9 +89,7 @@ export class OrderWizardStateService {
   }
 
   public isFirstStep(): Observable<boolean> {
-    return this.currentStepId$.pipe(
-      map(id => this.steps.ids.indexOf(id) === 0),
-    );
+    return this.currentStepId$.pipe(map(id => this.steps.ids.indexOf(id) === 0));
   }
 
   public async setContext(context: StepContext): Promise<void> {
@@ -138,14 +139,12 @@ export class OrderWizardStateService {
   }
 
   private goToStep(offset: number): void {
-    this.currentStepId$
-      .pipe(first())
-      .subscribe(currentStepId => {
-        const index = this.steps.ids.indexOf(currentStepId);
-        const nextStepId = this.steps.ids[index + offset];
-        this.currentStepId$.next(nextStepId);
-        this.router.navigate([this.path, nextStepId]);
-      });
+    this.currentStepId$.pipe(first()).subscribe(currentStepId => {
+      const index = this.steps.ids.indexOf(currentStepId);
+      const nextStepId = this.steps.ids[index + offset];
+      this.currentStepId$.next(nextStepId);
+      this.router.navigate([this.path, nextStepId]);
+    });
   }
 
   private clearState(): void {

@@ -30,5 +30,4 @@ export class LanguagesApiCache {
   private read(id: string): Observable<Language> {
     return this.locationService.locationLanguagesRead(id);
   }
-
 }

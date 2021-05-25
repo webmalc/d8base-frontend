@@ -9,8 +9,9 @@ import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class CertificatesApiService extends AbstractApiService<Certificate> implements ApiServiceInterface<Certificate> {
-
+export class CertificatesApiService
+  extends AbstractApiService<Certificate>
+  implements ApiServiceInterface<Certificate> {
   private readonly url = environment.backend.certificates;
 
   constructor(protected client: ApiClientService) {

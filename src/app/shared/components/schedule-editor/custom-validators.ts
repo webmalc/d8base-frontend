@@ -17,7 +17,7 @@ export function timeIntervalValidator(group: FormGroup): ValidationErrors | null
   const endTime = group.get(ScheduleEditorFormFields.EndTime).value as string;
   const startTimeMinutes = getHoursNumber(startTime) * 60 + getMinutesNumber(startTime);
   const endTimeMinutes = getHoursNumber(endTime) * 60 + getMinutesNumber(endTime);
-  return (startTimeMinutes >= endTimeMinutes) ? { timeCausalityError: true } : null;
+  return startTimeMinutes >= endTimeMinutes ? { timeCausalityError: true } : null;
 }
 
 export function timeFormatValidator(control: FormControl): ValidationErrors | null {
@@ -26,5 +26,7 @@ export function timeFormatValidator(control: FormControl): ValidationErrors | nu
     return null;
   }
 
-  return getMinutesNumber(time) % CALENDAR_INTERVAL !== 0 ? { timeIntervalError: { interval: CALENDAR_INTERVAL }} : null;
+  return getMinutesNumber(time) % CALENDAR_INTERVAL !== 0
+    ? { timeIntervalError: { interval: CALENDAR_INTERVAL } }
+    : null;
 }

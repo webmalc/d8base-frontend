@@ -3,6 +3,5 @@
 export class LoadProfessionalById {
   public static readonly type = '[ProfessionalPage] Load professional by its id';
 
-  constructor(public masterId: string) {
-  }
+  constructor(public masterId: string) {}
 }

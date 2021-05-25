@@ -12,14 +12,12 @@ import { map } from 'rxjs/operators';
 export class SavedProfessionalApiService {
   private readonly url: string = environment.backend.saved_professionals;
 
-  constructor(private readonly api: ApiClientService) {
-  }
+  constructor(private readonly api: ApiClientService) {}
 
   public getAll$(): Observable<SavedProfessionalInterface<number>[]> {
-    return this.api.get<ApiListResponseInterface<SavedProfessionalInterface<number>>>(this.url)
-      .pipe(
-        map((raw: ApiListResponseInterface<SavedProfessionalInterface<number>>) => raw.results),
-      );
+    return this.api
+      .get<ApiListResponseInterface<SavedProfessionalInterface<number>>>(this.url)
+      .pipe(map((raw: ApiListResponseInterface<SavedProfessionalInterface<number>>) => raw.results));
   }
 
   public create(savedProfessional: SavedProfessionalInterface<number>): Observable<SavedProfessionalInterface<number>> {

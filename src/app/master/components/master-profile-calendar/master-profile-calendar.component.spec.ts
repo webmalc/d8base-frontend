@@ -12,25 +12,23 @@ describe('MasterProfileCalendarComponent', () => {
   let component: MasterProfileCalendarComponent;
   let fixture: ComponentFixture<MasterProfileCalendarComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterProfileCalendarComponent],
-      imports: [
-        IonicModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-      ],
-      providers: [
-        CalendarGeneratorFactoryService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-        CalendarApiService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MasterProfileCalendarComponent],
+        imports: [IonicModule, HttpClientTestingModule, TranslateModule.forRoot()],
+        providers: [
+          CalendarGeneratorFactoryService,
+          { provide: StorageManagerService, useClass: StorageManagerMock },
+          CalendarApiService,
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterProfileCalendarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterProfileCalendarComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

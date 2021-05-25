@@ -12,24 +12,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SubregionApiService extends AbstractReadonlyApiService<Subregion> {
-
   private readonly url = environment.backend.subregions;
 
   constructor(protected client: ApiClientService) {
     super(client);
   }
 
-  public get(
-    params: {
-      region?: string;
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      region__country?: string;
-      search?: string;
-      ordering?: string;
-      page?: string;
-      page_size?: string;
-    },
-  ): Observable<ApiListResponseInterface<Subregion>> {
+  public get(params: {
+    region?: string;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    region__country?: string;
+    search?: string;
+    ordering?: string;
+    page?: string;
+    page_size?: string;
+  }): Observable<ApiListResponseInterface<Subregion>> {
     return super.get(params);
   }
 

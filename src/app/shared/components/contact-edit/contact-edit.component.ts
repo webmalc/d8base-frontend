@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contact } from '@app/api/models';
 import { ContactUnion } from '@app/core/models/contact-union';
 
-
 @Component({
   selector: 'app-contact-edit',
   templateUrl: './contact-edit.component.html',

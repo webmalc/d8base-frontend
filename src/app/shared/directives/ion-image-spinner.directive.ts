@@ -13,8 +13,7 @@ export class IonImageSpinnerDirective implements AfterViewInit {
     @Host() private readonly host: ElementRef<HTMLElement>,
     private readonly ionImg: IonImg,
     private readonly renderer: Renderer2,
-  ) {
-  }
+  ) {}
 
   public ngAfterViewInit(): void {
     this.ionImg.ionImgWillLoad.subscribe(() => {

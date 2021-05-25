@@ -16,10 +16,7 @@ export class MainMenuComponent {
   public mainMenuItems = mainMenuItems;
   public darkTheme$: Observable<boolean>;
 
-  constructor(
-    private readonly platform: Platform,
-    private readonly darkModeService: DarkModeService,
-  ) {
+  constructor(private readonly platform: Platform, private readonly darkModeService: DarkModeService) {
     this.darkTheme$ = darkModeService.darkTheme$;
   }
 

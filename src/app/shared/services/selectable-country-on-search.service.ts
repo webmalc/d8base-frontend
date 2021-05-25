@@ -5,7 +5,6 @@ import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Injectable()
 export class SelectableCountryOnSearchService extends SelectableSearchService {
-
   constructor(public countriesApi: CountriesApiService) {
     super();
   }

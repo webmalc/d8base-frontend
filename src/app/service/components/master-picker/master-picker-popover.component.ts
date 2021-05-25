@@ -10,11 +10,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./master-picker-popover.component.scss'],
 })
 export class MasterPickerPopoverComponent {
-
   public masterList$: Observable<ProfessionalList[]>;
 
-  constructor(private readonly popoverController: PopoverController,
-              masterManager: MasterManagerService) {
+  constructor(private readonly popoverController: PopoverController, masterManager: MasterManagerService) {
     this.masterList$ = masterManager.getMasterList();
   }
 

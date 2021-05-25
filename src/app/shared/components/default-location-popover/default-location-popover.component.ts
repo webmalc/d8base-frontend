@@ -10,7 +10,6 @@ import { NavParams, PopoverController } from '@ionic/angular';
   styleUrls: ['./default-location-popover.component.scss'],
 })
 export class DefaultLocationPopoverComponent implements OnInit {
-
   public locationData: ExtendedLocation;
   public showPicker: boolean = false;
   public cityDisabled: boolean;
@@ -20,8 +19,7 @@ export class DefaultLocationPopoverComponent implements OnInit {
     private readonly popoverController: PopoverController,
     public readonly countrySelectable: SelectableCountryOnSearchService,
     public readonly citySelectable: SelectableCityOnSearchService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.locationData = this.navParams.get<ExtendedLocation>('data');

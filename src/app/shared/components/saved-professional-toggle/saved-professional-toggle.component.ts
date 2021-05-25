@@ -37,7 +37,9 @@ export class SavedProfessionalToggleComponent implements OnInit {
   }
 
   private initIsProfessionalSaved(): void {
-    this.isProfessionalSaved$ = this.professionalsIds$.pipe(map(savedProfessionals => savedProfessionals?.includes(this.professionalId)));
+    this.isProfessionalSaved$ = this.professionalsIds$.pipe(
+      map(savedProfessionals => savedProfessionals?.includes(this.professionalId)),
+    );
   }
 
   private initShowProfessionalSaved(): void {
@@ -52,7 +54,9 @@ export class SavedProfessionalToggleComponent implements OnInit {
         withLatestFrom(this.isProfessionalSaved$),
         exhaustMap(([, isProfessionalSaved]) => {
           if (isProfessionalSaved) {
-            return this.store.dispatch(new UserSavedProfessionalActions.DeleteUserSavedProfessional(this.professionalId));
+            return this.store.dispatch(
+              new UserSavedProfessionalActions.DeleteUserSavedProfessional(this.professionalId),
+            );
           }
           return this.store.dispatch(new UserSavedProfessionalActions.CreateUserSavedProfessional(this.professionalId));
         }),

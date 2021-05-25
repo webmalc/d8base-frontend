@@ -9,20 +9,16 @@ import { MAX_DELAY_MS } from '@app/core//constants/ui.constants';
 export class LoadingIndicatorService {
   private loading: Promise<HTMLIonLoadingElement>;
 
-  constructor(
-    private readonly router: Router,
-    private readonly loadingController: LoadingController,
-  ) {
+  constructor(private readonly router: Router, private readonly loadingController: LoadingController) {
     this.subscribeOnLoading();
   }
 
   private subscribeOnLoading(): void {
-    this.router.events.pipe(
-      filter(isNavigationEvent),
-      debounceTime(MAX_DELAY_MS),
-    ).subscribe(async (routerEvent: RouterEvent) =>
-      (routerEvent instanceof NavigationStart) ? await this.showLoadingIndicator() : await this.hideLoadingIndicator(),
-    );
+    this.router.events
+      .pipe(filter(isNavigationEvent), debounceTime(MAX_DELAY_MS))
+      .subscribe(async (routerEvent: RouterEvent) =>
+        routerEvent instanceof NavigationStart ? await this.showLoadingIndicator() : await this.hideLoadingIndicator(),
+      );
   }
 
   private async showLoadingIndicator(): Promise<void> {

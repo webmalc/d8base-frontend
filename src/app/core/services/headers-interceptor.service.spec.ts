@@ -5,16 +5,13 @@ import { ApiClientService } from './api-client.service';
 import { HeadersInterceptor } from './headers-interceptor.service';
 
 describe('HeadersInterceptor', () => {
-
   let client: jasmine.SpyObj<ApiClientService>;
   let service: HeadersInterceptor;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
+      imports: [HttpClientTestingModule],
       providers: [
         {
           provide: HTTP_INTERCEPTORS,

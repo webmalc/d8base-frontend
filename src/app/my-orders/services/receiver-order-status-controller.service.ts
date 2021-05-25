@@ -11,8 +11,7 @@ export class ReceiverOrderStatusController {
     private readonly api: AccountsService,
     private readonly alertController: AlertController,
     private readonly translate: TranslateService,
-  ) {
-  }
+  ) {}
 
   public async acceptOrder(order: ReceivedOrder): Promise<void> {
     await this.setStatus(order, 'confirmed');
@@ -23,7 +22,7 @@ export class ReceiverOrderStatusController {
   }
 
   public async discardOrder(order: ReceivedOrder): Promise<void> {
-    return new Promise(async (resolve) => {
+    return new Promise(async resolve => {
       const alert = await this.alertController.create({
         message: this.translate.instant('received_orders.discard-confirmation'),
         buttons: [
@@ -33,7 +32,8 @@ export class ReceiverOrderStatusController {
             handler: () => {
               resolve();
             },
-          }, {
+          },
+          {
             text: this.translate.instant('global.yn.y'),
             handler: async () => {
               await this.setStatus(order, 'canceled');
@@ -53,9 +53,11 @@ export class ReceiverOrderStatusController {
       status,
     };
 
-    return this.api.accountsOrdersReceivedPartialUpdate({
-      id: acceptedOrder.id,
-      data: acceptedOrder,
-    }).toPromise();
+    return this.api
+      .accountsOrdersReceivedPartialUpdate({
+        id: acceptedOrder.id,
+        data: acceptedOrder,
+      })
+      .toPromise();
   }
 }

@@ -6,7 +6,6 @@ import { AbstractIpService } from '@app/core/services/location/abstract-ip.servi
 
 @Injectable()
 export class IpApiService extends AbstractIpService {
-
   private readonly url = 'https://ipapi.co/json/';
 
   constructor(protected http: HttpClient) {

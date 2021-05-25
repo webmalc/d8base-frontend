@@ -6,17 +6,12 @@ import { IpServicesHolderService } from './ip-services-holder.service';
 import { IpnfDataService } from './ipnf-data.service';
 
 describe('IpServicesHolderService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      IpServicesHolderService,
-      IpApiService,
-      IpDataService,
-      IpnfDataService,
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [IpServicesHolderService, IpApiService, IpDataService, IpnfDataService],
+    }),
+  );
 
   it('should be created', () => {
     const service: IpServicesHolderService = TestBed.inject(IpServicesHolderService);

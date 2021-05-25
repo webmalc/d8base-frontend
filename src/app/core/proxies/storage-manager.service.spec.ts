@@ -4,7 +4,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StorageManagerService } from './storage-manager.service';
 
 describe('StorageManagerService', () => {
-
   let storageMock: Partial<Storage>;
 
   beforeEach(() => {
@@ -14,15 +13,12 @@ describe('StorageManagerService', () => {
     };
   });
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      { provide: Storage, useValue: storageMock },
-      StorageManagerService,
-    ],
-    imports: [
-      IonicStorageModule.forRoot(),
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [{ provide: Storage, useValue: storageMock }, StorageManagerService],
+      imports: [IonicStorageModule.forRoot()],
+    }),
+  );
 
   it('should be created', () => {
     const service: StorageManagerService = TestBed.inject(StorageManagerService);

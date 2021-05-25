@@ -99,7 +99,10 @@ export class AboutEditComponent implements OnInit {
     }));
 
     this.updateUserLanguages(newLanguages);
-    const updateLanguages$ = this.actions$.pipe(ofActionSuccessful(UserLanguagesActions.UpdateUserLanguagesList), first());
+    const updateLanguages$ = this.actions$.pipe(
+      ofActionSuccessful(UserLanguagesActions.UpdateUserLanguagesList),
+      first(),
+    );
 
     this.updateUser(data);
     const updateUser$ = this.actions$.pipe(ofActionSuccessful(CurrentUserActions.UpdateProfile), first());
@@ -114,6 +117,8 @@ export class AboutEditComponent implements OnInit {
   }
 
   private userLanguagesToLanguages(list: UserLanguage[]): Observable<Language[]> {
-    return this.languages$.pipe(map(languages => list.map(userLanguage => languages.find(elem => userLanguage.language === elem.code))));
+    return this.languages$.pipe(
+      map(languages => list.map(userLanguage => languages.find(elem => userLanguage.language === elem.code))),
+    );
   }
 }

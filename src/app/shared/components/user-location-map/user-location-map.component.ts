@@ -8,14 +8,15 @@ import * as L from 'leaflet';
   selector: 'app-user-location-map',
   templateUrl: './user-location-map.component.html',
   styleUrls: ['./user-location-map.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => UserLocationMapComponent),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => UserLocationMapComponent),
+      multi: true,
+    },
+  ],
 })
 export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
-
   public options: L.MapOptions;
   @Input() public clientCoordinates: number[];
   @Input() public interactive: boolean = true;
@@ -32,12 +33,10 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     this.map = map;
     this.layerGroup = L.layerGroup().addTo(this.map);
     if (this.clientCoordinates && this.clientCoordinates.length === 2) {
-      (new L.Marker(
-        {
-          lat: this.clientCoordinates[1],
-          lng: this.clientCoordinates[0],
-        },
-      )).addTo(this.layerGroup);
+      new L.Marker({
+        lat: this.clientCoordinates[1],
+        lng: this.clientCoordinates[0],
+      }).addTo(this.layerGroup);
     }
     this.invalidateSize();
   }
@@ -47,16 +46,13 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
       return;
     }
     this.layerGroup.clearLayers();
-    (new L.Marker({ lat: event.latlng.lat, lng: event.latlng.lng })
-      .bindPopup('your position'))
-      .addTo(this.layerGroup);
-    this.layerGroup.eachLayer(
-      (layer: L.Layer) => {
-        const cords: number[] = [];
-        cords[0] = (((layer as any)._latlng) as L.LatLng).lng;
-        cords[1] = (((layer as any)._latlng) as L.LatLng).lat;
-        this.onChange(this.getCoordinates(cords));
-      });
+    new L.Marker({ lat: event.latlng.lat, lng: event.latlng.lng }).bindPopup('your position').addTo(this.layerGroup);
+    this.layerGroup.eachLayer((layer: L.Layer) => {
+      const cords: number[] = [];
+      cords[0] = ((layer as any)._latlng as L.LatLng).lng;
+      cords[1] = ((layer as any)._latlng as L.LatLng).lat;
+      this.onChange(this.getCoordinates(cords));
+    });
   }
 
   public registerOnChange(fn: any): void {
@@ -64,14 +60,11 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
   }
 
   /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
-  public registerOnTouched(fn: any): void {
-  }
+  public registerOnTouched(fn: any): void {}
 
-  public writeValue(data: string[]): void {
-  }
+  public writeValue(data: string[]): void {}
 
-  public setDisabledState(isDisabled: boolean): void {
-  }
+  public setDisabledState(isDisabled: boolean): void {}
 
   private invalidateSize(): void {
     setTimeout(() => this.map?.invalidateSize(true), this.MAGIC_NUMBER);

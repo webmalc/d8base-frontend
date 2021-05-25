@@ -17,15 +17,11 @@ import { ServiceEditorDepsService } from '../service-editor-deps.service';
   styleUrls: ['./service-details-edit.component.scss'],
 })
 export class ServiceDetailsEditComponent extends ServiceEditor {
-
   public photos$: Observable<ServicePhoto[]>;
 
   private readonly refreshPhotos$ = new Subject<void>();
 
-  constructor(
-    private readonly api: AccountsService,
-    route: ActivatedRoute,
-    deps: ServiceEditorDepsService) {
+  constructor(private readonly api: AccountsService, route: ActivatedRoute, deps: ServiceEditorDepsService) {
     super(route, deps);
     this.photos$ = this.context$.pipe(
       take(1),
@@ -42,10 +38,12 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
   }
 
   public removePhoto(index: number) {
-    this.photos$.pipe(
-      first(),
-      mergeMap(photos => this.api.accountsServicePhotosDelete(photos[index].id)),
-    ).subscribe(() => this.refreshPhotos$.next());
+    this.photos$
+      .pipe(
+        first(),
+        mergeMap(photos => this.api.accountsServicePhotosDelete(photos[index].id)),
+      )
+      .subscribe(() => this.refreshPhotos$.next());
   }
 
   public submit({ form, service }: ServiceEditorContext): void {

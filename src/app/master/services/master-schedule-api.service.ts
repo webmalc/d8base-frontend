@@ -11,7 +11,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class MasterScheduleApiService extends AbstractApiService<Required<Pick<MasterSchedule, 'id'>>> {
-
   private readonly url = environment.backend.master_schedule;
   private readonly setUrl = environment.backend.master_schedule_set;
 
@@ -20,9 +19,9 @@ export class MasterScheduleApiService extends AbstractApiService<Required<Pick<M
   }
 
   public createSet(data: MasterSchedule[]): Observable<MasterSchedule[]> {
-    return this.client.post<MasterSchedule[], MasterSchedule[]>(this.setUrl, data).pipe(
-      map(raw => plainToClass(MasterSchedule, raw)),
-    );
+    return this.client
+      .post<MasterSchedule[], MasterSchedule[]>(this.setUrl, data)
+      .pipe(map(raw => plainToClass(MasterSchedule, raw)));
   }
 
   protected getUrl(): string {
@@ -30,7 +29,7 @@ export class MasterScheduleApiService extends AbstractApiService<Required<Pick<M
   }
 
   // @ts-ignore
-  protected transform(data: (MasterSchedule | MasterSchedule[])): (MasterSchedule | MasterSchedule[]) {
+  protected transform(data: MasterSchedule | MasterSchedule[]): MasterSchedule | MasterSchedule[] {
     return plainToClass(MasterSchedule, data);
   }
 }

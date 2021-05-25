@@ -3,9 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { FileService } from './file.service';
 
 describe('FileService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [FileService],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [FileService],
+    }),
+  );
 
   it('should be created', () => {
     const service: FileService = TestBed.inject(FileService);
@@ -13,5 +15,4 @@ describe('FileService', () => {
   });
 
   xit('should be some tests');
-
 });

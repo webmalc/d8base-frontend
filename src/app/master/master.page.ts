@@ -23,9 +23,7 @@ export class MasterPage {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
-  constructor(
-    public readonly location: Location,
-  ) {
+  constructor(public readonly location: Location) {
     this.editable$ = this.context$.pipe(map(context => context?.canEdit));
   }
 

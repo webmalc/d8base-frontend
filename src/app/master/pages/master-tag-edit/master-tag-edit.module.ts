@@ -20,5 +20,4 @@ import { MasterTagEditPage } from './master-tag-edit.page';
   ],
   declarations: [MasterTagEditPage, TagsSelectInputComponent],
 })
-export class MasterTagEditPageModule {
-}
+export class MasterTagEditPageModule {}

@@ -33,7 +33,9 @@ export class MasterProfilePortfolioComponent implements OnInit {
   ) {
     this.masterPhotos$ = this.context$.pipe(
       first(context => !!context?.professional),
-      switchMap(context => this.professionalsService.professionalsProfessionalPhotosList({ professional: context.professional.id })),
+      switchMap(context =>
+        this.professionalsService.professionalsProfessionalPhotosList({ professional: context.professional.id }),
+      ),
       map(data => data.results),
     );
   }
@@ -65,7 +67,9 @@ export class MasterProfilePortfolioComponent implements OnInit {
           forkJoin([
             ...files.map(file =>
               from(fileToBase64(file)).pipe(
-                switchMap(photo => this.accountsService.accountsProfessionalPhotosCreate({ professional: professional.id, photo })),
+                switchMap(photo =>
+                  this.accountsService.accountsProfessionalPhotosCreate({ professional: professional.id, photo }),
+                ),
               ),
             ),
           ]),

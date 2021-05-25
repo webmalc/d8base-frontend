@@ -10,21 +10,18 @@ describe('ServiceEditorPageComponent', () => {
   let component: ServiceEditorPageComponent;
   let fixture: ComponentFixture<ServiceEditorPageComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServiceEditorPageComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        IonicModule.forRoot(),
-        RouterTestingModule,
-        HttpClientTestingModule,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServiceEditorPageComponent],
+        imports: [TranslateModule.forRoot(), IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServiceEditorPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServiceEditorPageComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

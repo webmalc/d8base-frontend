@@ -11,11 +11,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CalendarApiService {
-
   private readonly url = environment.backend.calendar;
 
-  constructor(private readonly client: ApiClientService) {
-  }
+  constructor(private readonly client: ApiClientService) {}
 
   public getSchedule(
     masterId: number,
@@ -23,11 +21,17 @@ export class CalendarApiService {
     endTime: string,
     serviceId?: number,
   ): Observable<MasterCalendar[]> {
-    return this.client.get(this.getUrl(), HelperService.clear(
-      { professional: masterId?.toString(), service: serviceId?.toString(), start_datetime: startTime, end_datetime: endTime },
-    )).pipe(
-      map((raw: MasterCalendar[]) => this.transform(raw)),
-    );
+    return this.client
+      .get(
+        this.getUrl(),
+        HelperService.clear({
+          professional: masterId?.toString(),
+          service: serviceId?.toString(),
+          start_datetime: startTime,
+          end_datetime: endTime,
+        }),
+      )
+      .pipe(map((raw: MasterCalendar[]) => this.transform(raw)));
   }
 
   protected getUrl(): string {

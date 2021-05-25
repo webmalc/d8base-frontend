@@ -14,9 +14,9 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class UserContactApiService extends AbstractApiService<ClientContactInterface>
+export class UserContactApiService
+  extends AbstractApiService<ClientContactInterface>
   implements ContactsApiServiceInterface, Partial<ApiServiceInterface<UserContact>> {
-
   private readonly url = environment.backend.user_contact;
 
   constructor(private readonly client: ApiClientService) {
@@ -42,7 +42,9 @@ export class UserContactApiService extends AbstractApiService<ClientContactInter
   }
 
   // @ts-ignore
-  protected transform(data: ClientContactInterface | ClientContactInterface[]): ClientContactInterface | ClientContactInterface[] {
+  protected transform(
+    data: ClientContactInterface | ClientContactInterface[],
+  ): ClientContactInterface | ClientContactInterface[] {
     return plainToClass(UserContact, data);
   }
 }

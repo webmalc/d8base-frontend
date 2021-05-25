@@ -11,37 +11,34 @@ import { ComponentTestingModule, RootModules } from 'src/testing/component-testi
 
 // TODO check for availability on staging
 xdescribe('PlatformService', () => {
-
   let statusBarSpy, splashScreenSpy;
   let storageMock: Partial<Storage>;
   let httpTestingController: HttpTestingController;
 
-  beforeEach(waitForAsync(() => {
-    statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
-    splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
+  beforeEach(
+    waitForAsync(() => {
+      statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
+      splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
 
-    storageMock = {
-      get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
-    };
+      storageMock = {
+        get: jasmine.createSpy('get').and.returnValue(Promise.resolve(null)),
+        set: jasmine.createSpy('set').and.returnValue(Promise.resolve(null)),
+      };
 
-    TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-        AppModule,
-      ],
-      providers: [
-        PlatformService,
-        { provide: StatusBar, useValue: statusBarSpy },
-        { provide: SplashScreen, useValue: splashScreenSpy },
-        { provide: Storage, useValue: storageMock },
-      ],
-    });
-    httpTestingController = TestBed.get(HttpTestingController);
-  }));
+      TestBed.configureTestingModule({
+        declarations: [AppComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        imports: [...RootModules(), ComponentTestingModule, AppModule],
+        providers: [
+          PlatformService,
+          { provide: StatusBar, useValue: statusBarSpy },
+          { provide: SplashScreen, useValue: splashScreenSpy },
+          { provide: Storage, useValue: storageMock },
+        ],
+      });
+      httpTestingController = TestBed.get(HttpTestingController);
+    }),
+  );
 
   it('should initialize the app', async () => {
     const app = TestBed.createComponent(AppComponent);

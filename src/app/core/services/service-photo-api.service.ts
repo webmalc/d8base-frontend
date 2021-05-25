@@ -7,7 +7,6 @@ import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class ServicePhotoApiService extends AbstractApiService<ServicePhoto> {
-
   private readonly url = environment.backend.service_photo;
 
   constructor(protected client: ApiClientService) {

@@ -5,7 +5,6 @@ import { IonicSelectableComponent } from 'ionic-selectable';
 import { Subscription } from 'rxjs';
 
 export abstract class SelectableSearchService {
-
   private searchSubscription: Subscription = null;
 
   protected abstractOnSearch<T>(
@@ -29,15 +28,13 @@ export abstract class SelectableSearchService {
       return;
     }
 
-    this.searchSubscription = apiService.get(apiParams).subscribe(
-      (data: ApiListResponseInterface<LocationTypes>) => {
-        if (this.searchSubscription.closed) {
-          return;
-        }
+    this.searchSubscription = apiService.get(apiParams).subscribe((data: ApiListResponseInterface<LocationTypes>) => {
+      if (this.searchSubscription.closed) {
+        return;
+      }
 
-        component.items = data.results;
-        component.endSearch();
-      },
-    );
+      component.items = data.results;
+      component.endSearch();
+    });
   }
 }

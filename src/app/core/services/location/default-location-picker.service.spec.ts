@@ -27,10 +27,7 @@ describe('DefaultLocationPickerService', () => {
         { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
         { provide: PopoverController, useValue: { create: () => Promise.resolve() } },
       ],
-      imports: [
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-      ],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
     });
     service = TestBed.inject(DefaultLocationPickerService);
   });

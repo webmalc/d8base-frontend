@@ -7,7 +7,6 @@ import { first, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class StepSixHandlerService extends AbstractHandler {
-
   constructor(private readonly masterManager: MasterManagerService) {
     super();
   }
@@ -27,10 +26,12 @@ export class StepSixHandlerService extends AbstractHandler {
   private handle(handler: () => Observable<number>): Observable<number> {
     return this.masterManager.isMaster$.pipe(
       first(),
-      switchMap(
-        isMaster => isMaster ? this.masterManager.getMasterList().pipe(
-          switchMap(list => list.length !== 0 ? handler() : of(this.getIndex())),
-        ) : of(this.getIndex()),
+      switchMap(isMaster =>
+        isMaster
+          ? this.masterManager
+              .getMasterList()
+              .pipe(switchMap(list => (list.length !== 0 ? handler() : of(this.getIndex()))))
+          : of(this.getIndex()),
       ),
     );
   }

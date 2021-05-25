@@ -15,11 +15,7 @@ export class DarkModeService {
   private readonly darkThemeSubject = new Subject<boolean>();
 
   constructor(private readonly storage: StorageManagerService) {
-    this.darkTheme$ =
-      concat(
-        this.isDarkMode(),
-        this.darkThemeSubject,
-      ).pipe(shareReplay(1));
+    this.darkTheme$ = concat(this.isDarkMode(), this.darkThemeSubject).pipe(shareReplay(1));
   }
 
   public setMode(isDark: boolean): void {

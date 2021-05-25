@@ -12,8 +12,7 @@ export class SearchFiltersComponent {
   public tabs = SearchFiltersSubmenu;
   public tab: string = this.defaultTab;
 
-  constructor(public readonly filtersStateManager: SearchFilterStateService, private readonly cd: ChangeDetectorRef) {
-  }
+  constructor(public readonly filtersStateManager: SearchFilterStateService, private readonly cd: ChangeDetectorRef) {}
 
   public submitFilters(): void {
     this.filtersStateManager.doSearch();

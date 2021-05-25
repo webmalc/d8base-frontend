@@ -9,14 +9,9 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./city-picker-popover.component.scss'],
 })
 export class CityPickerPopoverComponent implements OnInit {
-
   public list$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
 
-  constructor(
-    private readonly navParams: NavParams,
-    private readonly pop: PopoverController,
-  ) {
-  }
+  constructor(private readonly navParams: NavParams, private readonly pop: PopoverController) {}
 
   public ngOnInit(): void {
     this.list$.next(this.navParams.get<City[]>('data'));

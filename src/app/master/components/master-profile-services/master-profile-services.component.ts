@@ -15,7 +15,6 @@ import { filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./master-profile-services.component.scss'],
 })
 export class MasterProfileServicesComponent {
-
   public searchModel: string;
   public serviceData$: Observable<ServiceData[]>;
 

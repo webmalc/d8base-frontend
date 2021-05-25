@@ -24,7 +24,7 @@ export class SentOrderPageComponent {
   constructor(route: ActivatedRoute, sentOrdersApi: SentOrdersApiService) {
     this.order$ = route.params.pipe(
       map(params => Number.parseInt(params.id, 10)),
-      switchMap(id => id ? sentOrdersApi.getByEntityId(id) : of<SentOrder>()),
+      switchMap(id => (id ? sentOrdersApi.getByEntityId(id) : of<SentOrder>())),
     );
   }
 }

@@ -30,9 +30,7 @@ export class UserLanguageState {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Action(UserLanguageActions.LoadAllUserLanguages)
-  public loadAllUserLanguages(
-    { setState }: StateContext<UserLanguageStateModel>,
-  ) {
+  public loadAllUserLanguages({ setState }: StateContext<UserLanguageStateModel>) {
     return this.accountsService.accountsLanguagesList({}).pipe(
       tap(({ results }) => {
         const byId: EntityState<UserLanguage>['byId'] = getByIdFromArray<UserLanguage>(results);
@@ -99,8 +97,12 @@ export class UserLanguageState {
     { newUserLanguages }: UserLanguageActions.UpdateUserLanguagesList,
   ) {
     const { ids } = getState();
-    const deleteLanguages$ = forkJoin(ids.length ? ids.map(id => this.accountsService.accountsLanguagesDelete(id)) : of(0));
-    const createLanguages$ = forkJoin(newUserLanguages.map(({ language }) => this.accountsService.accountsLanguagesCreate({ language })));
+    const deleteLanguages$ = forkJoin(
+      ids.length ? ids.map(id => this.accountsService.accountsLanguagesDelete(id)) : of(0),
+    );
+    const createLanguages$ = forkJoin(
+      newUserLanguages.map(({ language }) => this.accountsService.accountsLanguagesCreate({ language })),
+    );
     return deleteLanguages$.pipe(
       switchMap(() => createLanguages$),
       tap(createdLanguages => {

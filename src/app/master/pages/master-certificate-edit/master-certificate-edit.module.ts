@@ -20,5 +20,4 @@ import { MasterCertificateEditPage } from './master-certificate-edit.page';
   ],
   declarations: [MasterCertificateEditPage, CertificateEditComponent],
 })
-export class MasterCertificateEditPageModule {
-}
+export class MasterCertificateEditPageModule {}

@@ -20,35 +20,33 @@ describe('ServicePublishStepSixComponent', () => {
   let component: ServicePublishStepSixComponent;
   let fixture: ComponentFixture<ServicePublishStepSixComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServicePublishStepSixComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-        IonicSelectableModule,
-      ],
-      providers: [
-        ServicePublishStepSixFormService,
-        ServicePublishDataHolderService,
-        ServiceStepsNavigationService,
-        ServicePublishAuthStateManagerService,
-        ChainManagerService,
-        StepOneHandlerService,
-        StepTwoHandlerService,
-        StepThreeHandlerService,
-        StepFourHandlerService,
-        StepFiveHandlerService,
-        StepSixHandlerService,
-        StepSevenHandlerService,
-        StepFinalHandlerService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServicePublishStepSixComponent],
+        imports: [...RootModules(), ComponentTestingModule, IonicSelectableModule],
+        providers: [
+          ServicePublishStepSixFormService,
+          ServicePublishDataHolderService,
+          ServiceStepsNavigationService,
+          ServicePublishAuthStateManagerService,
+          ChainManagerService,
+          StepOneHandlerService,
+          StepTwoHandlerService,
+          StepThreeHandlerService,
+          StepFourHandlerService,
+          StepFiveHandlerService,
+          StepSixHandlerService,
+          StepSevenHandlerService,
+          StepFinalHandlerService,
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServicePublishStepSixComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServicePublishStepSixComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

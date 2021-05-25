@@ -22,37 +22,36 @@ describe('ServicePublishStepSevenComponent', () => {
   let component: ServicePublishStepSevenComponent;
   let fixture: ComponentFixture<ServicePublishStepSevenComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServicePublishStepSevenComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        ServicePublishStepSevenFormService,
-        ServicePublishDataHolderService,
-        SelectableCountryOnSearchService,
-        SelectableCityOnSearchService,
-        SelectablePostalCodeOnSearchService,
-        ServiceStepsNavigationService,
-        ServicePublishAuthStateManagerService,
-        ChainManagerService,
-        StepOneHandlerService,
-        StepTwoHandlerService,
-        StepThreeHandlerService,
-        StepFourHandlerService,
-        StepFiveHandlerService,
-        StepSixHandlerService,
-        StepSevenHandlerService,
-        StepFinalHandlerService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServicePublishStepSevenComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          ServicePublishStepSevenFormService,
+          ServicePublishDataHolderService,
+          SelectableCountryOnSearchService,
+          SelectableCityOnSearchService,
+          SelectablePostalCodeOnSearchService,
+          ServiceStepsNavigationService,
+          ServicePublishAuthStateManagerService,
+          ChainManagerService,
+          StepOneHandlerService,
+          StepTwoHandlerService,
+          StepThreeHandlerService,
+          StepFourHandlerService,
+          StepFiveHandlerService,
+          StepSixHandlerService,
+          StepSevenHandlerService,
+          StepFinalHandlerService,
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServicePublishStepSevenComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServicePublishStepSevenComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

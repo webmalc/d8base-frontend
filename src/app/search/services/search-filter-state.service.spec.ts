@@ -12,7 +12,7 @@ describe('SearchFilterStateService', () => {
       imports: [RouterTestingModule, HttpClientTestingModule],
       providers: [SearchFilterStateService, FormBuilder],
     }),
-    httpMock = TestBed.inject(HttpTestingController);
+      (httpMock = TestBed.inject(HttpTestingController));
   });
 
   it('should be created', () => {

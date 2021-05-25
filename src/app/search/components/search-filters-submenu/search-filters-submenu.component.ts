@@ -7,7 +7,6 @@ import { SearchFiltersSubmenu } from '@app/search/enums/search-filters-submenu';
   styleUrls: ['./search-filters-submenu.component.scss'],
 })
 export class SearchFiltersSubmenuComponent implements OnInit {
-
   @Input() public defaultTab: string;
   @Output() public selectedTab: EventEmitter<string> = new EventEmitter<string>();
   public readonly submenu = SearchFiltersSubmenu;

@@ -5,18 +5,13 @@ import { AppValidators } from '@app/core/validators/app.validators';
 
 @Injectable()
 export class PasswordRecoveryFormService {
-
   public form: FormGroup;
 
-  constructor(private readonly builder: FormBuilder) {
-  }
+  constructor(private readonly builder: FormBuilder) {}
 
   public initForm(): void {
     this.form = this.builder.group({
-      [PasswordRecoveryFormFields.Login]: ['', Validators.compose([
-        Validators.required,
-        AppValidators.email,
-      ])],
+      [PasswordRecoveryFormFields.Login]: ['', Validators.compose([Validators.required, AppValidators.email])],
     });
   }
 }

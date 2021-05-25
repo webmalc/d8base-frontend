@@ -6,13 +6,15 @@ import { ServicePublishDataHolderService } from './service-publish-data-holder.s
 import { ServicePublishDataPreparerService } from './service-publish-data-preparer.service';
 
 describe('ServicePublishDataPreparerService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      ServicePublishDataPreparerService,
-      ServicePublishDataHolderService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [
+        ServicePublishDataPreparerService,
+        ServicePublishDataHolderService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: ServicePublishDataPreparerService = TestBed.inject(ServicePublishDataPreparerService);

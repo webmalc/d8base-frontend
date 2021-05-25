@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TagsApiService extends AbstractApiService<Tag> implements ApiServiceInterface<Tag> {
-
   private readonly url = environment.backend.professional_tags;
 
   constructor(private readonly client: ApiClientService) {

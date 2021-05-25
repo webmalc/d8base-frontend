@@ -13,25 +13,19 @@ describe('DateTimeStepComponent', () => {
   let component: DateTimeStepComponent;
   let fixture: ComponentFixture<DateTimeStepComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [DateTimeStepComponent],
-      imports: [
-        IonicModule,
-        TranslateModule.forRoot(),
-        HttpClientTestingModule,
-        RouterTestingModule,
-      ],
-      providers: [
-        OrderWizardStateService,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DateTimeStepComponent],
+        imports: [IonicModule, TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+        providers: [OrderWizardStateService, { provide: StorageManagerService, useClass: StorageManagerMock }],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(DateTimeStepComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(DateTimeStepComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

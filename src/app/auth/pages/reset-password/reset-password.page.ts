@@ -13,7 +13,6 @@ import { delay, tap } from 'rxjs/operators';
   styleUrls: ['./reset-password.page.scss'],
 })
 export class ResetPasswordPage implements OnInit {
-
   public formFields = ResetPasswordFields;
   public errorMessages: string[];
   public successMessages: string[];
@@ -23,8 +22,7 @@ export class ResetPasswordPage implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly api: ResetPasswordApiService,
     private readonly router: Router,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.formService.initForm();
@@ -33,19 +31,22 @@ export class ResetPasswordPage implements OnInit {
   public reset(): any {
     this.errorMessages = null;
     this.activatedRoute.queryParams.subscribe(params => {
-      this.api.reset({
-        password: this.formService.form.get(ResetPasswordFields.Password).value,
-        user_id: params.user_id,
-        timestamp: params.timestamp,
-        signature: params.signature,
-      }).pipe(
-        tap(() => this.successMessages = ['reset-password.success']),
-        delay(800),
-      ).subscribe(
-        () => this.router.navigateByUrl('/auth/login'),
-        (error: HttpErrorResponse) => this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(error.error),
-      );
+      this.api
+        .reset({
+          password: this.formService.form.get(ResetPasswordFields.Password).value,
+          user_id: params.user_id,
+          timestamp: params.timestamp,
+          signature: params.signature,
+        })
+        .pipe(
+          tap(() => (this.successMessages = ['reset-password.success'])),
+          delay(800),
+        )
+        .subscribe(
+          () => this.router.navigateByUrl('/auth/login'),
+          (error: HttpErrorResponse) =>
+            (this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(error.error)),
+        );
     });
   }
-
 }

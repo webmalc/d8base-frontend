@@ -7,6 +7,5 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  constructor(public readonly platform: Platform) {
-  }
+  constructor(public readonly platform: Platform) {}
 }

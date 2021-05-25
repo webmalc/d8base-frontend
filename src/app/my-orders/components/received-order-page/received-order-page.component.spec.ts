@@ -11,22 +11,19 @@ describe('ReceivedOrderPageComponent', () => {
   let component: ReceivedOrderPageComponent;
   let fixture: ComponentFixture<ReceivedOrderPageComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ReceivedOrderPageComponent],
-      imports: [
-        IonicModule.forRoot(),
-        TranslateModule.forRoot(),
-        RouterTestingModule,
-        HttpClientTestingModule,
-      ],
-      providers: [ReceiverOrderStatusController],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ReceivedOrderPageComponent],
+        imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+        providers: [ReceiverOrderStatusController],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ReceivedOrderPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ReceivedOrderPageComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

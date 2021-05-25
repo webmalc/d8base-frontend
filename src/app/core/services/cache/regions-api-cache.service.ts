@@ -14,5 +14,5 @@ export class RegionsApiCache extends ApiCache<Region> {
 
   protected read(id: number): Observable<Region> {
     return this.locationService.locationRegionsRead(id);
-  };
+  }
 }

@@ -18,32 +18,31 @@ describe('ServicePublishStepOneComponent', () => {
   let component: ServicePublishStepOneComponent;
   let fixture: ComponentFixture<ServicePublishStepOneComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ServicePublishStepOneComponent, IonicSelectableComponent],
-      imports: [
-        ...RootModules(),
-        ComponentTestingModule,
-      ],
-      providers: [
-        ServicePublishDataHolderService,
-        ServiceStepsNavigationService,
-        ChainManagerService,
-        StepOneHandlerService,
-        StepTwoHandlerService,
-        StepThreeHandlerService,
-        StepFourHandlerService,
-        StepFiveHandlerService,
-        StepSixHandlerService,
-        StepSevenHandlerService,
-        StepFinalHandlerService,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ServicePublishStepOneComponent, IonicSelectableComponent],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [
+          ServicePublishDataHolderService,
+          ServiceStepsNavigationService,
+          ChainManagerService,
+          StepOneHandlerService,
+          StepTwoHandlerService,
+          StepThreeHandlerService,
+          StepFourHandlerService,
+          StepFiveHandlerService,
+          StepSixHandlerService,
+          StepSevenHandlerService,
+          StepFinalHandlerService,
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ServicePublishStepOneComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(ServicePublishStepOneComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

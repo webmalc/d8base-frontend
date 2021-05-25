@@ -61,8 +61,8 @@ export class MasterEditComponent extends AbstractEditComponent<Master> implement
   }
 
   private initSubcategoriesList(): Observable<any> {
-    return this.professionalsApi.professionalsSubcategoriesList({}).pipe(
-      tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)),
-    );
+    return this.professionalsApi
+      .professionalsSubcategoriesList({})
+      .pipe(tap((data: ApiListResponseInterface<Subcategory>) => this.subcategoriesList$.next(data.results)));
   }
 }

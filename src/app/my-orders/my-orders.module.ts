@@ -29,7 +29,15 @@ import { ReceiverOrderStatusController, SentOrderStatusController } from './serv
     ReceivedOrderPageComponent,
     SentOrderPageComponent,
   ],
-  imports: [CommonModule, SharedModule, IonicModule, TranslateModule, MyOrdersRoutingModule, ReactiveFormsModule, InfiniteScrollModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    IonicModule,
+    TranslateModule,
+    MyOrdersRoutingModule,
+    ReactiveFormsModule,
+    InfiniteScrollModule,
+  ],
   providers: [ReceiverOrderStatusController, SentOrderStatusController],
 })
 export class MyOrdersModule {}

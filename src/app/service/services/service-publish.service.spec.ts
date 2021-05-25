@@ -11,20 +11,20 @@ import { ServicePublishDataPreparerService } from './service-publish-data-prepar
 import { ServicePublishService } from './service-publish.service';
 
 describe('ServicePublishService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      ServicePublishService,
-      { provide: StorageManagerService, useClass: StorageManagerMock },
-      ServicePublishDataHolderService,
-      ServicePhotoApiService,
-      ServiceLocationApiService,
-      PricesApiService,
-      ServicePublishDataPreparerService,
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        ServicePublishService,
+        { provide: StorageManagerService, useClass: StorageManagerMock },
+        ServicePublishDataHolderService,
+        ServicePhotoApiService,
+        ServiceLocationApiService,
+        PricesApiService,
+        ServicePublishDataPreparerService,
+      ],
+    }),
+  );
 
   it('should be created', () => {
     const service: ServicePublishService = TestBed.inject(ServicePublishService);

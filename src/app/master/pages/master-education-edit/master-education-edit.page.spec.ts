@@ -11,31 +11,34 @@ describe('MasterEducationEditPage', () => {
   let component: MasterEducationEditPage;
   let fixture: ComponentFixture<MasterEducationEditPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MasterEducationEditPage],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule],
-      providers: [
-        EducationApiService,
-        {
-          provide: ActivatedRoute, useValue: {
-            snapshot: {
-              paramMap: {
-                get(): string {
-                  return '';
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MasterEducationEditPage],
+        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+        providers: [
+          EducationApiService,
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              snapshot: {
+                paramMap: {
+                  get(): string {
+                    return '';
+                  },
                 },
               },
             },
           },
-        },
-        { provide: StorageManagerService, useClass: StorageManagerMock },
-      ],
-    }).compileComponents();
+          { provide: StorageManagerService, useClass: StorageManagerMock },
+        ],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(MasterEducationEditPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(MasterEducationEditPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }),
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();
