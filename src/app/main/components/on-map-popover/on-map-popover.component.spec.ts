@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { IonicModule, NavParams } from '@ionic/angular';
@@ -19,6 +20,7 @@ describe('OnMapPopoverComponent', () => {
           SelectableCountryOnSearchService,
           SelectableCityOnSearchService,
           { provide: NavParams, useValue: { get: () => null } },
+          FormBuilder,
         ],
       }).compileComponents();
 

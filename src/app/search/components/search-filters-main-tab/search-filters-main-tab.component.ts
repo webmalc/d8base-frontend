@@ -34,7 +34,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
     return this.stateManager.searchForm;
   }
   constructor(
-    private readonly countriesApi: CountriesApiCache,
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
     private readonly pop: PopoverController,
