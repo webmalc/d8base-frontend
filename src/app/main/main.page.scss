@@ -63,3 +63,8 @@ ion-searchbar {
     width: 100%;
   }
 }
+
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Phone } from './phone';
 export interface Profile {
   account_type?: 'user' | 'professional';
   avatar?: string;
@@ -20,4 +21,5 @@ export interface Profile {
   nationality?: null | number;
   patronymic?: null | string;
   phone?: null | string;
+  phone_extended?: Phone;
 }

@@ -6,6 +6,7 @@ export { OrderReminder } from './models/order-reminder';
 export { UserContactInline } from './models/user-contact-inline';
 export { ReceivedOrderClient } from './models/received-order-client';
 export { UserLocationInline } from './models/user-location-inline';
+export { Phone } from './models/phone';
 export { ReceivedOrder } from './models/received-order';
 export { SentOrder } from './models/sent-order';
 export { ProfessionalCertificate } from './models/professional-certificate';
