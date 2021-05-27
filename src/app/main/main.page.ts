@@ -3,7 +3,6 @@ import { Category, UserLocation, UserSettings } from '@app/api/models';
 import { ExtendedLocation } from '@app/core/models/extended-location';
 import { NgDestroyService } from '@app/core/services';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
-import { DefaultCategoryList } from '@app/main/enums/default-category-list';
 import { MainPageSearchInterface } from '@app/main/interfaces/main-page-search-interface';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
@@ -14,6 +13,7 @@ import UserLocationSelectors from '@app/store/current-user/user-locations/user-l
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
+import { convertCategoryCodeToFaIconCode } from './enums/default-category-list';
 
 @Component({
   selector: 'app-main',
@@ -31,7 +31,6 @@ export class MainPage implements OnInit {
 
   public searchData: MainPageSearchInterface;
   public locationEnabled = false;
-  public defaultCategoryList = DefaultCategoryList;
 
   public get formFields() {
     return this.stateManager.formFields;
@@ -78,6 +77,7 @@ export class MainPage implements OnInit {
       map(settings => settings.language),
       distinctUntilChanged(),
       switchMap(() => this.defaultCategory.getList()),
+      map((categories) => categories.map((category) => ({ ...category, code: convertCategoryCodeToFaIconCode(category.code) }))),
       shareReplay(1),
     );
   }

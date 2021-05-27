@@ -14,8 +14,8 @@ export class DefaultCategoriesFactoryService {
 
   public getList(): Observable<Category[]> {
     return this.professionalsApi
-    .professionalsCategoriesList({ codeIsnull: `${false}` })
-    .pipe(map(response => response.results));
+      .professionalsCategoriesList({ codeIsnull: `${false}` })
+      .pipe(map(response => response.results));
   }
 
   public getByName(name: string): Category | null {

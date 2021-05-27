@@ -78,6 +78,7 @@
           *ngFor="let category of defaultCategories"
           [icon]="category.code"
           [text]="category.name"
+          (click)="searchByCategory(category)"
           size="2x"
         ></app-category-icon>
       </ion-row>

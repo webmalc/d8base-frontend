@@ -10,13 +10,14 @@ import { DefaultCategoriesFactoryService } from '@app/main/services/default-cate
 import { SharedModule } from '@app/shared/shared.module';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
+  faBriefcase,
   faCamera,
   faGraduationCap,
   faHome,
   faPaintRoller,
   faSpa,
   faStethoscope,
-  faTableTennis,
+  faTools,
   faUserTie,
   faVenusMars,
 } from '@fortawesome/free-solid-svg-icons';
@@ -59,7 +60,8 @@ export class MainPageModule {
       faHome,
       faCamera,
       faUserTie,
-      faTableTennis,
+      faBriefcase,
+      faTools,
     );
   }
 }
