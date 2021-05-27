@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLocation } from '@app/api/models';
+import { Category, UserLocation, UserSettings } from '@app/api/models';
 import { ExtendedLocation } from '@app/core/models/extended-location';
 import { NgDestroyService } from '@app/core/services';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
@@ -9,10 +9,11 @@ import { SearchLocationDataInterface } from '@app/main/interfaces/search-locatio
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterStateConverter } from '@app/search/services/search-filter-state-converter.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -23,6 +24,10 @@ import { filter, switchMap, takeUntil } from 'rxjs/operators';
 export class MainPage implements OnInit {
   @Select(UserLocationSelectors.defaultLocation)
   public defaultLocation$: Observable<UserLocation>;
+  @Select(CurrentUserSelectors.settings)
+  public settings$: Observable<UserSettings>;
+
+  public defaultCategories$: Observable<Category[]>;
 
   public searchData: MainPageSearchInterface;
   public locationEnabled = false;
@@ -58,14 +63,23 @@ export class MainPage implements OnInit {
         }
         this.locationEnabled = true;
       });
+
+    this.initDefaultCategories();
   }
 
-  public useCategory(categoryName: string): void {
-    const cat = this.defaultCategory.getByName(categoryName);
-    if (cat) {
-      this.form.get(this.formFields.category).setValue(cat);
-    }
+  public searchByCategory(category: Category): void {
+    this.form.get(this.formFields.category).setValue([category]);
     this.search();
+  }
+
+  public initDefaultCategories(): void {
+    this.defaultCategories$ = this.settings$.pipe(
+      filter(settings => Boolean(settings)),
+      map(settings => settings.language),
+      distinctUntilChanged(),
+      switchMap(() => this.defaultCategory.getList()),
+      shareReplay(1),
+    );
   }
 
   public updateCity(data: SearchLocationDataInterface): void {
