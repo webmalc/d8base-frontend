@@ -59,15 +59,20 @@ export class SearchFilterStateConverter {
                   .includes(id),
               )
             : void 0;
+          const coordinates =
+            params?.latitude && params?.longitude
+              ? {
+                  latitude: parseFloat(params?.latitude),
+                  longitude: parseFloat(params?.longitude),
+                }
+              : null;
+
           const searchFilterState: SearchFilterStateInterface = {
             query: params?.query,
             location: {
               country,
               city,
-              coordinates: {
-                latitude: parseFloat(params?.latitude),
-                longitude: parseFloat(params?.longitude),
-              },
+              coordinates,
             },
             category: emptyArrayToUndefined(categories),
             subcategory: emptyArrayToUndefined(subcategories),

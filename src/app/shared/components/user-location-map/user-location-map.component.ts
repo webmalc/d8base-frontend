@@ -18,11 +18,12 @@ import * as L from 'leaflet';
 })
 export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
   public options: L.MapOptions;
-  @Input() public clientCoordinates: number[];
+  public clientCoordinates: number[];
   @Input() public interactive: boolean = true;
   private map: L.Map;
   private layerGroup: L.LayerGroup;
   private onChange: (fn: any) => void;
+  private onTouch: (fn: any) => void;
   private readonly MAGIC_NUMBER = 200;
 
   public ngOnInit(): void {
@@ -59,11 +60,15 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
-  public registerOnTouched(fn: any): void {}
+  public registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
 
-  public writeValue(data: string[]): void {}
+  public writeValue(data: number[]): void {
+    this.clientCoordinates = data;
+  }
 
+    /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
   public setDisabledState(isDisabled: boolean): void {}
 
   private invalidateSize(): void {

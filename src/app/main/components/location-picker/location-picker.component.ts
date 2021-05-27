@@ -17,6 +17,9 @@ export class LocationPickerComponent {
   constructor(private readonly pop: PopoverController) {}
 
   public async initPopover(): Promise<void> {
+    if(!this.enabled) {
+      return;
+    }
     const pop = await this.pop.create({
       component: OnMapPopoverComponent,
       translucent: true,
@@ -28,7 +31,7 @@ export class LocationPickerComponent {
           city: this.locationData?.city,
         },
       },
-      cssClass: ['map-popover-width', 'map-popover-city-height'],
+      cssClass: ['map-popover-width'],
     });
     pop.onDidDismiss().then((data: { data: SearchLocationDataInterface }) => {
       if (data.data) {
