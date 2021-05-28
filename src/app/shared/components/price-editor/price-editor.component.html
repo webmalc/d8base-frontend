@@ -20,7 +20,7 @@
       slot="end"
       itemValueField="currency"
       itemTextField="title"
-      [ngModel]="getInitialCurrency(currency.list, currency.default)"
+      [ngModel]="displayedCurrency"
       [canSearch]="true"
       [items]="currency.list"
       (ngModelChange)="setCurrency($event)"
