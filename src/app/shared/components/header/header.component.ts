@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthenticationService, MasterManagerService, TranslationService } from '@app/core/services';
+import { AuthenticationService, MasterManagerService } from '@app/core/services';
 import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { MenuController, Platform } from '@ionic/angular';
+import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import HeaderContext from './header-context.interface';
@@ -14,7 +15,10 @@ import HeaderContext from './header-context.interface';
 })
 export class HeaderComponent {
   public context$: Observable<HeaderContext>;
+
+  @Select(CurrentUserSelectors.language)
   public currentLanguage$: Observable<string>;
+
   public countOfUnreadMessages$ = this.unreadMessagesService.unreadMessagesCount();
 
   private readonly isAuthenticated$: Observable<boolean>;
@@ -23,16 +27,13 @@ export class HeaderComponent {
     private readonly platform: Platform,
     private readonly menuController: MenuController,
     public readonly unreadMessagesService: UnreadMessagesService,
-    userManager: UserManagerService,
     authenticator: AuthenticationService,
     masterManager: MasterManagerService,
-    translation: TranslationService,
   ) {
     this.isAuthenticated$ = authenticator.isAuthenticated$;
     this.context$ = combineLatest([this.isAuthenticated$, masterManager.isMaster$]).pipe(
       map(([isAuthenticated, isMaster]) => ({ isAuthenticated, isMaster })),
     );
-    this.currentLanguage$ = translation.currentLanguage$;
   }
 
   public isDesktop(): boolean {

@@ -181,7 +181,13 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(CurrentUserActions.RestoreSettingsLocal)
   public restoreSettings({ patchState }: StateContext<CurrentUserStateModel>) {
-    return from(this.storage.get(USER_SETTINGS_STORAGE_KEY)).pipe(tap(settings => patchState({ settings })));
+    return from(this.storage.get(USER_SETTINGS_STORAGE_KEY)).pipe(
+      tap(settings => {
+        if (settings) {
+          patchState({ settings });
+        }
+      }),
+    );
   }
 
   @Action(CurrentUserActions.ChangeUserSettings)

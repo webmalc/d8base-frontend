@@ -1,5 +1,6 @@
 import { UserSettings } from '@app/api/models';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { environment } from '@env/environment';
 import { CurrentUserStateModel } from './current-user-state.model';
 
 export const notLoadedState: CurrentUserStateModel = {
@@ -21,7 +22,7 @@ export const emptyTokens: AuthResponseInterface = {
 export const defaultSettings: UserSettings = {
   units: 0,
   currency: 'CAD',
-  language: 'en',
+  language: environment.default_lang as UserSettings['language'],
 };
 
 export const guestState: CurrentUserStateModel = {

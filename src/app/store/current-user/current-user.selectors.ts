@@ -40,6 +40,11 @@ export default class CurrentUserSelectors {
     return data.settings;
   }
 
+  @Selector([CurrentUserSelectors.settings])
+  public static language(data: UserSettings): string {
+    return data.language;
+  }
+
   @Selector([CurrentUserState])
   public static errors(data: CurrentUserStateModel): string[] {
     return data.errors;
