@@ -33,12 +33,12 @@ export class ServicePublishFinalStepComponent {
     this.service = null;
     this.servicePublishDataFormatter.getData().then(data => {
       const serviceLocation: ServiceLocationInline = {
-        id: data.serviceLocation.id,
-        max_distance: data.serviceLocation.max_distance,
+        id: data.serviceLocation?.id,
+        max_distance: data.serviceLocation?.max_distance,
         location: {
-          country: data.masterLocation.country as number,
-          city: data.masterLocation.city as number,
-          address: data.masterLocation.address,
+          country: data.masterLocation?.country as number,
+          city: data.masterLocation?.city as number,
+          address: data.masterLocation?.address,
         },
       };
       this.service = {

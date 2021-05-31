@@ -4,39 +4,34 @@
       {{ 'issuance.filters.additional.rating' | translate }}
     </ion-item>
     <app-rating-picker [formControl]="form.get(formFields.rating)"></app-rating-picker>
-
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-side-padding" lines="none">
-        {{ 'issuance.filters.additional.only-with-reviews' | translate }}
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox [formControl]="form.get(formFields.onlyWithReviews)" class="ion-no-margin"></ion-checkbox>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-side-padding" lines="none">
-        {{ 'issuance.filters.additional.only-with-photos' | translate }}
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox [formControl]="form.get(formFields.onlyWithPhotos)" class="ion-no-margin"></ion-checkbox>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-side-padding" lines="none">
-        {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox [formControl]="form.get(formFields.onlyWithFixedPrice)" class="ion-no-margin"></ion-checkbox>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item class="ion-item-no-side-padding" lines="none">
-        {{ 'issuance.filters.additional.only-with-certificates' | translate }}
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox [formControl]="form.get(formFields.onlyWithCertificates)" class="ion-no-margin"></ion-checkbox>
-      </ion-item>
-    </ion-row>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'issuance.filters.additional.only-with-reviews' | translate }}</ion-label>
+      <ion-checkbox
+        [formControl]="form.get(formFields.onlyWithReviews)"
+        class="ion-no-margin"
+        slot="end"
+      ></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'issuance.filters.additional.only-with-photos' | translate }}</ion-label>
+      <ion-checkbox [formControl]="form.get(formFields.onlyWithPhotos)" class="ion-no-margin" slot="end"></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'issuance.filters.additional.only-with-fixed-price' | translate }}</ion-label>
+      <ion-checkbox
+        [formControl]="form.get(formFields.onlyWithFixedPrice)"
+        class="ion-no-margin"
+        slot="end"
+      ></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'issuance.filters.additional.only-with-certificates' | translate }}</ion-label>
+      <ion-checkbox
+        [formControl]="form.get(formFields.onlyWithCertificates)"
+        class="ion-no-margin"
+        slot="end"
+      ></ion-checkbox>
+    </ion-item>
     <app-collapse-item
       [noSidePadding]="true"
       class="width100"

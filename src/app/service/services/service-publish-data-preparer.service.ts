@@ -151,6 +151,7 @@ export class ServicePublishDataPreparerService {
     price = {
       ...price,
       ...stepTwoData.price,
+      payment_methods: price.payment_methods,
     };
 
     return HelperService.clear(price);

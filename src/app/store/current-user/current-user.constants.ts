@@ -3,11 +3,17 @@ import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interf
 import { environment } from '@env/environment';
 import { CurrentUserStateModel } from './current-user-state.model';
 
+export const defaultSettings: UserSettings = {
+  units: 0,
+  currency: 'CAD',
+  language: environment.default_lang as UserSettings['language'],
+};
+
 export const notLoadedState: CurrentUserStateModel = {
   profile: null,
   tokens: null,
   professionals: null,
-  settings: null,
+  settings: defaultSettings,
   errors: null,
 };
 
@@ -19,11 +25,6 @@ export const emptyTokens: AuthResponseInterface = {
   refresh_token: null,
 };
 
-export const defaultSettings: UserSettings = {
-  units: 0,
-  currency: 'CAD',
-  language: environment.default_lang as UserSettings['language'],
-};
 
 export const guestState: CurrentUserStateModel = {
   profile: {},
