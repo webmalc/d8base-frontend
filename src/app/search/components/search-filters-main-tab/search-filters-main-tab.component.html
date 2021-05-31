@@ -70,23 +70,13 @@
       lines="none"
       class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
     ></ion-item>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item lines="none" class="ion-item-no-side-padding">
-        <ion-col>
-          <ion-item lines="none" class="ion-item-no-side-padding order-type-block-title ion-item-no-min-height pv5">
-            {{ 'issuance.filters.main-tab.instant-booking' | translate }}
-          </ion-item>
-          <ion-item lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
-            {{ 'issuance.filters.main-tab.instant-booking-desc' | translate }}
-          </ion-item>
-        </ion-col>
-      </ion-item>
-      <ion-row class="ion-justify-content-end">
-        <ion-item lines="none">
-          <ion-checkbox [formControl]="form.get(formFields.isInstantBooking)"></ion-checkbox>
-        </ion-item>
-      </ion-row>
-    </ion-row>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'issuance.filters.main-tab.instant-booking' | translate }}</ion-label>
+      <ion-checkbox [formControl]="form.get(formFields.isInstantBooking)" slot="end"></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" class="ion-item-no-side-padding order-type-block-desc ion-item-no-min-height pv5">
+      {{ 'issuance.filters.main-tab.instant-booking-desc' | translate }}
+    </ion-item>
     <ion-item
       lines="none"
       class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
@@ -121,41 +111,33 @@
         </ion-item>
       </app-collapse-item>
     </ion-item>
-    <ion-item lines="none" class="ion-item-no-side-padding">
+    <ion-item lines="none" class="ion-item-no-side-padding title">
       {{ 'issuance.filters.main-tab.availability' | translate }}
     </ion-item>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item lines="none" class="ion-item-no-side-padding availability-title">
-        {{ 'service-location.online' | translate }}
-      </ion-item>
-      <ion-row class="ion-justify-content-end">
-        <ion-item lines="none">
-          <ion-checkbox [formControl]="form.get(formFields.isOnlineService)" class="ion-no-margin"></ion-checkbox>
-        </ion-item>
-      </ion-row>
-    </ion-row>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item lines="none" class="ion-item-no-side-padding availability-title">
-        {{ 'service-location.professional' | translate }}
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox
-          [formControl]="form.get(formFields.isAtMasterLocationService)"
-          class="ion-no-margin"
-        ></ion-checkbox>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-between ion-align-items-center ion-nowrap">
-      <ion-item lines="none" class="ion-item-no-side-padding availability-title">
-        {{ 'service-location.client' | translate }}
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox
-          [formControl]="form.get(formFields.isAtClientLocationService)"
-          class="ion-no-margin"
-        ></ion-checkbox>
-      </ion-item>
-    </ion-row>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'service-location.online' | translate }}</ion-label>
+      <ion-checkbox
+        [formControl]="form.get(formFields.isOnlineService)"
+        class="ion-no-margin"
+        slot="end"
+      ></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'service-location.professional' | translate }}</ion-label>
+      <ion-checkbox
+        [formControl]="form.get(formFields.isAtMasterLocationService)"
+        class="ion-no-margin"
+        slot="end"
+      ></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" class="ion-item-no-side-padding">
+      <ion-label>{{ 'service-location.client' | translate }}</ion-label>
+      <ion-checkbox
+        [formControl]="form.get(formFields.isAtClientLocationService)"
+        class="ion-no-margin"
+        slot="end"
+      ></ion-checkbox>
+    </ion-item>
     <ion-item
       lines="none"
       class="ion-item-no-side-padding ion-margin-top ion-item-bottom-border ion-item-no-min-height"
