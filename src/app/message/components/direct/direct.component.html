@@ -15,9 +15,15 @@
             </ion-label>
           </ng-container>
         </app-column-header>
-        <ion-content class="messages-content ion-margin-top" id="content" [scrollEvents]="true" (click)="resetContext()">
+        <ion-content
+          class="messages-content ion-margin-top"
+          id="content"
+          [scrollEvents]="true"
+          (click)="resetContext()"
+        >
           <ion-infinite-scroll threshold="800px" [disabled]="true" (ionInfinite)="loadData()" position="top">
-            <ion-infinite-scroll-content loadingText="{{ 'messages.direct.loading-text' | translate }}"> </ion-infinite-scroll-content>
+            <ion-infinite-scroll-content loadingText="{{ 'messages.direct.loading-text' | translate }}">
+            </ion-infinite-scroll-content>
           </ion-infinite-scroll>
           <ion-list class="ion-margin-bottom">
             <div *ngFor="let message of directService.messages$ | async; let i = index">
@@ -27,7 +33,10 @@
               >
                 {{ getDateString(message.created) }}
               </ion-row>
-              <ion-row class="width100" *ngIf="message.sender !== directService.currentUserId && directService.currentUserId">
+              <ion-row
+                class="width100"
+                *ngIf="message.sender !== directService.currentUserId && directService.currentUserId"
+              >
                 <div class="message-container">
                   <div class="received-message message">
                     <div class="message-text wrap-text">{{ message.body }}</div>
@@ -48,7 +57,11 @@
                   </div>
                   <div class="timeline timeline-sent width100" *ngIf="message.id">
                     {{ timeFromDatetime(message.created) }}
-                    <ion-icon class="checkmark" color="{{ getCheckmarkColor(message) }}" name="checkmark-done-outline"></ion-icon>
+                    <ion-icon
+                      class="checkmark"
+                      color="{{ getCheckmarkColor(message) }}"
+                      name="checkmark-done-outline"
+                    ></ion-icon>
                   </div>
                   <div class="timeline timeline-sent width100" *ngIf="!message.id">
                     <ion-icon name="time-outline"></ion-icon>
@@ -60,7 +73,11 @@
           </ion-list>
         </ion-content>
         <ion-toolbar class="messages-footer" (keydown.enter)="send()" (keydown.escape)="cancelUpdate()">
-          <ion-row *ngIf="isUpdate" class="ion-padding-horizontal ion-align-items-center" (click)="showUpdatingMessage()">
+          <ion-row
+            *ngIf="isUpdate"
+            class="ion-padding-horizontal ion-align-items-center"
+            (click)="showUpdatingMessage()"
+          >
             <ion-col size="1" class="cursor-pointer">
               <ion-item lines="none">
                 <ion-icon name="pencil-outline"></ion-icon>
@@ -79,7 +96,11 @@
           <ion-row class="ion-justify-content-between ion-align-items-center">
             <ion-col class="ion-item-bordered border-radius24">
               <ion-textarea *ngIf="!isUpdate" [(ngModel)]="directService.message" name="message"></ion-textarea>
-              <ion-textarea *ngIf="isUpdate" [(ngModel)]="directService.updateMessage.body" name="message"></ion-textarea>
+              <ion-textarea
+                *ngIf="isUpdate"
+                [(ngModel)]="directService.updateMessage.body"
+                name="message"
+              ></ion-textarea>
             </ion-col>
             <ion-button
               (click)="send()"

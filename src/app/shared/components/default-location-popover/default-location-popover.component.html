@@ -1,57 +1,59 @@
 <ion-card class="ion-no-margin">
   <ion-card-header *ngIf="!showPicker">
-    <ion-card-title>{{'default-location.title'|translate}}</ion-card-title>
-    <ion-card-subtitle>{{locationData.getLocationAsString()}}</ion-card-subtitle>
+    <ion-card-title>{{ 'default-location.title' | translate }}</ion-card-title>
+    <ion-card-subtitle>{{ locationData.getLocationAsString() }}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content *ngIf="!showPicker">
     <ion-row class="ion-justify-content-center">
-      <ion-button (click)="emit()" expand="block" fill="solid">{{'global.yn.y'|translate}}</ion-button>
-      <ion-button (click)="toggleMode()" expand="block" fill="solid">{{'global.yn.n'|translate}}</ion-button>
+      <ion-button (click)="emit()" expand="block" fill="solid">{{ 'global.yn.y' | translate }}</ion-button>
+      <ion-button (click)="toggleMode()" expand="block" fill="solid">{{ 'global.yn.n' | translate }}</ion-button>
     </ion-row>
   </ion-card-content>
 
   <ion-card-header *ngIf="showPicker">
-    <ion-card-title>{{'default-location.select'|translate}}</ion-card-title>
+    <ion-card-title>{{ 'default-location.select' | translate }}</ion-card-title>
   </ion-card-header>
   <ion-card-content *ngIf="showPicker">
     <ion-row class="ion-justify-content-center">
       <ion-item class="ion-item-bordered width100">
         <ion-label color="medium" position="floating">
-          {{'default-location.country'|translate}}
+          {{ 'default-location.country' | translate }}
         </ion-label>
         <ionic-selectable
           (onChange)="onCountryChange()"
           (onSearch)="countrySelectable.onCountrySearch($event)"
           [(ngModel)]="locationData.country"
           [canSearch]="true"
-          closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+          closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
           itemTextField="name"
           itemValueField="id"
-          searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-          searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
+          searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
+          searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
+        >
         </ionic-selectable>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-item class="ion-item-bordered width100">
         <ion-label color="medium" position="floating">
-          {{'default-location.city'|translate}}
+          {{ 'default-location.city' | translate }}
         </ion-label>
         <ionic-selectable
           (onSearch)="citySelectable.onCitySearch($event, locationData.country)"
           [(ngModel)]="locationData.city"
           [canSearch]="true"
           [disabled]="cityDisabled"
-          closeButtonText="{{'ion-selectable.close-button-text' | translate}}"
+          closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
           itemTextField="name"
           itemValueField="id"
-          searchFailText="{{'ion-selectable.search-fail-text' | translate}}"
-          searchPlaceholder="{{'ion-selectable.search-text' | translate}}">
+          searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
+          searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
+        >
         </ionic-selectable>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-button (click)="emit()" expand="block" fill="solid">{{'default-location.save'|translate}}</ion-button>
+      <ion-button (click)="emit()" expand="block" fill="solid">{{ 'default-location.save' | translate }}</ion-button>
     </ion-row>
   </ion-card-content>
 </ion-card>

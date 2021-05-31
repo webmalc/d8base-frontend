@@ -6,8 +6,7 @@
       <ion-label position="floating" class="label-for-required-input">
         {{ 'service-details.location.attendance-distance' | translate }}
       </ion-label>
-      <ion-input type="number" min="0" max="9999" (ionChange)="enterDistance($event)">
-      </ion-input>
+      <ion-input type="number" min="0" max="9999" (ionChange)="enterDistance($event)"> </ion-input>
     </ion-item>
   </ng-container>
   <ng-container *ngSwitchCase="'professional'">

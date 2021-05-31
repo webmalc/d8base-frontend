@@ -1,18 +1,34 @@
 <ion-row class="row">
-  <ion-item (click)="selectTab(submenu.Services)" [class.active]="activeTab === submenu.Services"
-            lines="none" class="master-submenu-font cursor-pointer">
-    {{"master-profile.submenu.services"|translate}}
+  <ion-item
+    (click)="selectTab(submenu.Services)"
+    [class.active]="activeTab === submenu.Services"
+    lines="none"
+    class="master-submenu-font cursor-pointer"
+  >
+    {{ 'master-profile.submenu.services' | translate }}
   </ion-item>
-  <ion-item (click)="selectTab(submenu.Info)" [class.active]="activeTab === submenu.Info"
-            lines="none" class="master-submenu-font cursor-pointer">
-    {{"master-profile.submenu.info"|translate}}
+  <ion-item
+    (click)="selectTab(submenu.Info)"
+    [class.active]="activeTab === submenu.Info"
+    lines="none"
+    class="master-submenu-font cursor-pointer"
+  >
+    {{ 'master-profile.submenu.info' | translate }}
   </ion-item>
-  <ion-item (click)="selectTab(submenu.Calendar)" [class.active]="activeTab === submenu.Calendar"
-            lines="none" class="master-submenu-font cursor-pointer">
-    {{"master-profile.submenu.calendar"|translate}}
+  <ion-item
+    (click)="selectTab(submenu.Calendar)"
+    [class.active]="activeTab === submenu.Calendar"
+    lines="none"
+    class="master-submenu-font cursor-pointer"
+  >
+    {{ 'master-profile.submenu.calendar' | translate }}
   </ion-item>
-  <ion-item (click)="selectTab(submenu.Portfolio)" [class.active]="activeTab === submenu.Portfolio"
-            lines="none" class="master-submenu-font cursor-pointer">
-    {{"master-profile.submenu.portfolio"|translate}}
+  <ion-item
+    (click)="selectTab(submenu.Portfolio)"
+    [class.active]="activeTab === submenu.Portfolio"
+    lines="none"
+    class="master-submenu-font cursor-pointer"
+  >
+    {{ 'master-profile.submenu.portfolio' | translate }}
   </ion-item>
 </ion-row>

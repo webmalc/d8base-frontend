@@ -32,7 +32,12 @@
     </ion-item>
     <ion-item lines="none">
       <ng-container *ngIf="!user?.is_confirmed">
-        <ion-label class="cursor-pointer" color="primary" [appDebounce]="5000" (debounceClick)="sendConfirmationEmail()">
+        <ion-label
+          class="cursor-pointer"
+          color="primary"
+          [appDebounce]="5000"
+          (debounceClick)="sendConfirmationEmail()"
+        >
           {{ 'profile-form.email-not-confirmed' | translate }}
         </ion-label>
         <ion-icon color="danger" name="close-circle-outline" slot="end"></ion-icon>

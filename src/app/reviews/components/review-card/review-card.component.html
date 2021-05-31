@@ -9,7 +9,9 @@
     </ion-label>
     <span *ngIf="countryCode$ | async as countryCode" class="flag-icon flag-icon-{{ countryCode || 'ca' }}"></span>
   </ion-item>
-  <ion-item lines="none" class="review-date">{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }} </ion-item>
+  <ion-item lines="none" class="review-date"
+    >{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }}
+  </ion-item>
   <ion-item lines="none" class="rating">
     <ion-label class="star-label" slot="start">{{ 'global.rating.' + review?.rating | translate }}</ion-label>
     <ng-container *ngFor="let star of ratings">

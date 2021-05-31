@@ -1,4 +1,6 @@
-<app-column-header [previousLocationFallback]="'/professional'">{{ 'master-profile.edit-master.title' | translate }}</app-column-header>
+<app-column-header [previousLocationFallback]="'/professional'">
+  {{ 'master-profile.edit-master.title' | translate }}
+</app-column-header>
 <ng-container class="ion-justify-content-center" *ngIf="item">
   <ion-item>
     <ion-label color="medium" position="floating">
@@ -73,7 +75,13 @@
       </ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" class="ion-margin-top" fill="solid" expand="block">
+  <ion-button
+    (click)="save()"
+    [disabled]="form.invalid || form.pristine"
+    class="ion-margin-top"
+    fill="solid"
+    expand="block"
+  >
     {{ 'master-profile.edit-master.save' | translate }}
   </ion-button>
 </ng-container>

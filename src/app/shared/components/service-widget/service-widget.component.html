@@ -1,6 +1,6 @@
 <app-service-title [service]="service"></app-service-title>
 <app-professional-card *ngIf="master" class="ion-padding" [professional]="master"></app-professional-card>
-<app-more-info *ngIf="!alwaysExpanded else serviceDetails">
+<app-more-info *ngIf="!alwaysExpanded; else serviceDetails">
   <ng-container *ngTemplateOutlet="serviceDetails"></ng-container>
 </app-more-info>
 

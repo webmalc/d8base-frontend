@@ -6,7 +6,8 @@
           <ion-icon name="search-outline"></ion-icon>
           {{ 'master-profile.services.services-tab.search-placeholder' | translate }}
         </ion-label>
-        <ion-input (ionChange)="search($event)" (keydown.escape)="clearSearchModel()" [value]="searchModel"> </ion-input>
+        <ion-input (ionChange)="search($event)" (keydown.escape)="clearSearchModel()" [value]="searchModel">
+        </ion-input>
       </ion-item>
 
       <ion-item lines="none">
@@ -14,7 +15,11 @@
       </ion-item>
 
       <ion-list *ngIf="!context.canEdit">
-        <service-viewer *ngFor="let service of serviceData | serviceDataFilter: searchModel" [serviceData]="service" class="pv5">
+        <service-viewer
+          *ngFor="let service of serviceData | serviceDataFilter: searchModel"
+          [serviceData]="service"
+          class="pv5"
+        >
         </service-viewer>
       </ion-list>
       <ion-list *ngIf="context.canEdit">

@@ -11,16 +11,17 @@
         </ion-label>
         <ion-checkbox formControlName="is_base_schedule"></ion-checkbox>
       </ion-item>
-      <app-schedule-editor *ngIf="!context.form.controls.is_base_schedule.value"
-                           [schedule]="schedule$ | async"
-                           formControlName="schedule">
+      <app-schedule-editor
+        *ngIf="!context.form.controls.is_base_schedule.value"
+        [schedule]="schedule$ | async"
+        formControlName="schedule"
+      >
       </app-schedule-editor>
 
       <ion-button type="submit" expand="block" [disabled]="context.form.invalid || pending">
         {{ 'global.save' | translate }}
       </ion-button>
     </form>
-
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

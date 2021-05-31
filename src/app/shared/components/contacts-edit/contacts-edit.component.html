@@ -7,20 +7,10 @@
     <ion-text color="secondary">
       {{ contact.value || '—' }}
     </ion-text>
-    <ion-button
-      *ngIf="contact.id"
-      slot="end"
-      fill="clear"
-      routerLink="{{ editContactUrl + contact.id }}"
-    >
+    <ion-button *ngIf="contact.id" slot="end" fill="clear" routerLink="{{ editContactUrl + contact.id }}">
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
-    <ion-button
-      *ngIf="!contact.id"
-      slot="end"
-      fill="clear"
-      routerLink="{{ editDefaultContactUrl + contact.contact }}"
-    >
+    <ion-button *ngIf="!contact.id" slot="end" fill="clear" routerLink="{{ editDefaultContactUrl + contact.contact }}">
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
   </ion-item>

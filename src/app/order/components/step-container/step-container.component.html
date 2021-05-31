@@ -24,13 +24,13 @@
           </ng-container>
         </ion-col>
         <ion-col>
-          <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">{{
-            'order.order-service' | translate
-          }}</ion-button>
+          <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">
+            {{ 'order.order-service' | translate }}
+          </ion-button>
           <ng-template #isNotLastStep>
-            <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">{{
-              'global.forward' | translate
-            }}</ion-button>
+            <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">
+              {{ 'global.forward' | translate }}
+            </ion-button>
           </ng-template>
         </ion-col>
       </ion-row>

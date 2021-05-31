@@ -1,5 +1,7 @@
-<app-column-header [previousLocationFallback]="'/professional'">{{ 'certificates-edit-page.back' | translate }}</app-column-header>
-<ng-container *appIfSpinner="item; ">
+<app-column-header [previousLocationFallback]="'/professional'">
+  {{ 'certificates-edit-page.back' | translate }}
+</app-column-header>
+<ng-container *appIfSpinner="item">
   <ion-item>
     <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'certificates-edit-page.name' | translate }}

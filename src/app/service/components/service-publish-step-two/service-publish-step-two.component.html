@@ -3,10 +3,10 @@
   <app-content-wrapper>
     <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
       <ion-item class="fs18" lines="none">
-          <ion-text>
-            <b>{{ 'service-publish.step-two.title' | translate }}</b>
-          </ion-text>
-        </ion-item>
+        <ion-text>
+          <b>{{ 'service-publish.step-two.title' | translate }}</b>
+        </ion-text>
+      </ion-item>
       <app-info-row>
         {{ 'service-publish.step-two.first-info-row' | translate }}
       </app-info-row>

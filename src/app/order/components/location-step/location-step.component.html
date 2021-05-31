@@ -7,7 +7,7 @@
       <ion-label>{{ 'order.location-header' | translate }}:</ion-label>
     </ion-list-header>
     <ng-container *appIfSpinner="locations">
-      <ion-radio-group *ngIf="hasLocations else noLocationsError" [formControl]="formControl">
+      <ion-radio-group *ngIf="hasLocations; else noLocationsError" [formControl]="formControl">
         <ion-item *ngFor="let location of locations">
           <ion-label>{{ location.text }}</ion-label>
           <ion-radio slot="start" [value]="location.id"></ion-radio>

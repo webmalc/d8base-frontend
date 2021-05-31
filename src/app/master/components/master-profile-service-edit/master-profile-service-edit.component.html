@@ -4,34 +4,34 @@
     <ion-label *ngIf="service.is_enabled">
       <p>
         <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>
-        {{"master-profile.services.service-edit.published"|translate}}
+        {{ 'master-profile.services.service-edit.published' | translate }}
       </p>
       <p>
         <a class="text-grey cursor-pointer" (click)="onIsEnabled(false)">
-          {{"master-profile.services.service-edit.unpublish"|translate}}
+          {{ 'master-profile.services.service-edit.unpublish' | translate }}
         </a>
       </p>
     </ion-label>
     <ion-label *ngIf="!service.is_enabled">
       <p>
         <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
-        {{"master-profile.services.service-edit.not-published"|translate}}
+        {{ 'master-profile.services.service-edit.not-published' | translate }}
       </p>
       <p>
         <a class="text-color-success cursor-pointer" (click)="onIsEnabled(true)">
-          {{"master-profile.services.service-edit.publish"|translate}}
+          {{ 'master-profile.services.service-edit.publish' | translate }}
         </a>
       </p>
       <p>
         <a class="text-color-danger cursor-pointer" (click)="delete()">
-          {{"master-profile.services.service-edit.delete"|translate}}
+          {{ 'master-profile.services.service-edit.delete' | translate }}
         </a>
       </p>
     </ion-label>
     <ion-label slot="end">
       <a [routerLink]="'/service/' + service.id + '/edit'">
         <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>
-        {{ "master-profile.services.service-edit.edit" | translate }}
+        {{ 'master-profile.services.service-edit.edit' | translate }}
       </a>
     </ion-label>
   </ion-item>

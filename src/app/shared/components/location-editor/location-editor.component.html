@@ -37,12 +37,25 @@
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">
     <ion-col size="6">
-      <ion-button (click)="emitDelete()" *ngIf="!item.is_default && item.id" color="light" expand="block" fill="solid" size="medium">
+      <ion-button
+        (click)="emitDelete()"
+        *ngIf="!item.is_default && item.id"
+        color="light"
+        expand="block"
+        fill="solid"
+        size="medium"
+      >
         {{ 'location-edit-page.remove-location' | translate }}
       </ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button (click)="emitSave()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
+      <ion-button
+        (click)="emitSave()"
+        [disabled]="form.invalid || form.pristine"
+        expand="block"
+        fill="solid"
+        size="medium"
+      >
         {{ 'location-edit-page.save-location' | translate }}
       </ion-button>
     </ion-col>

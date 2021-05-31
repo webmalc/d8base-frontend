@@ -3,7 +3,7 @@
   <app-content-wrapper>
     <app-location-editor
       (delete)="delete($event.id)"
-      (save)='save($event)'
+      (save)="save($event)"
       [item]="location$ | async"
     ></app-location-editor>
   </app-content-wrapper>

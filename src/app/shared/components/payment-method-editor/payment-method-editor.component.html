@@ -1,8 +1,8 @@
 <ion-item lines="full">
-  <ion-label>{{"service-payment-options.cash"|translate}}</ion-label>
+  <ion-label>{{ 'service-payment-options.cash' | translate }}</ion-label>
   <ion-checkbox [checked]="checked.cash" (ionChange)="toggle('cash', $event)"></ion-checkbox>
 </ion-item>
 <ion-item lines="full">
-  <ion-label>{{"service-payment-options.online"|translate}}</ion-label>
+  <ion-label>{{ 'service-payment-options.online' | translate }}</ion-label>
   <ion-checkbox [checked]="checked.online" (ionChange)="toggle('online', $event)"></ion-checkbox>
 </ion-item>

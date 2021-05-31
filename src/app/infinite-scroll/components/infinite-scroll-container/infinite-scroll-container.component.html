@@ -1,6 +1,10 @@
 <ng-container *ngIf="!isLoading; else loading">
   <ng-container *ngIf="!wasLoadAttempted || results?.length; else emptyList">
-    <ng-container *ngFor="let item of results" [ngTemplateOutlet]="infiniteScrollItem" [ngTemplateOutletContext]="{ $implicit: item }">
+    <ng-container
+      *ngFor="let item of results"
+      [ngTemplateOutlet]="infiniteScrollItem"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    >
     </ng-container>
   </ng-container>
   <ng-template #emptyList>
@@ -18,4 +22,3 @@
 <ng-template #loading>
   <app-loading-indicator></app-loading-indicator>
 </ng-template>
-
