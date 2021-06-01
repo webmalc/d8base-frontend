@@ -11,7 +11,7 @@
       <ion-thumbnail class="profile-thumbnail">
         <ion-img *appIfSpinner="(avatarLoading$ | async) === false" [src]="avatar$ | async"></ion-img>
       </ion-thumbnail>
-      <app-picture-selector [formControl]="avatarSelector"></app-picture-selector>
+      <app-picture-selector [formControl]="avatarSelector" [cropAfterSelect]="true"></app-picture-selector>
     </div>
 
     <ion-item-divider color="light">

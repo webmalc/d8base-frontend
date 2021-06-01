@@ -1,11 +1,13 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fileToBase64 } from '@app/core/functions/file.functions';
 import { ToastService } from '@app/core/services';
 import { PopoverController } from '@ionic/angular';
 import { ImageCropPopoverComponent } from './image-cropper/image-crop-popover.component';
 
-const MAX_SIZE = 1048576; // 1mb
+// max unprocessed file size in bytes
+// has to be big enough to accommodate images from a hi-res camera
+const MAX_SIZE = 5000000;
 
 @Component({
   selector: 'app-picture-selector',
@@ -21,31 +23,29 @@ const MAX_SIZE = 1048576; // 1mb
 })
 export class PictureSelectorComponent implements ControlValueAccessor {
   @Input() public disabled: boolean = false;
-  @Input() public cropAfterSelect: boolean = true;
-  @Output() public value: EventEmitter<string> = new EventEmitter<string>();
+  @Input() public cropAfterSelect: boolean = false;
 
   public uri: string | null;
+
   private onChange: (fn: any) => void;
   private onTouched: (fn: any) => void;
 
   constructor(private readonly toastService: ToastService, private readonly popoverController: PopoverController) {}
 
-  public onFileSelected(event: Event): Promise<void> {
+  public onFileSelected(event: Event) {
     const file: File = (event.target as HTMLInputElement).files[0];
     if (!file) {
-      return Promise.resolve();
+      return;
     }
     if (file.size > MAX_SIZE) {
       this.toastService.showError('client-errors.file-is-too-big', { translate: true });
-      return Promise.resolve();
+      return;
     }
-    if (!this.cropAfterSelect) {
-      fileToBase64(file).then(base64 => {
-        this.setUri(base64);
-      });
-      return Promise.resolve();
+    if (this.cropAfterSelect) {
+      this.cropAndSave(file);
+    } else {
+      this.save(file);
     }
-    return this.cropAndSave(file);
   }
 
   public registerOnChange(fn: any): void {
@@ -68,7 +68,13 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     this.clearUri();
   }
 
-  private async cropAndSave(image: Blob): Promise<void> {
+  private save(image: File) {
+    fileToBase64(image).then(base64 => {
+      this.setUri(base64);
+    });
+  }
+
+  private async cropAndSave(image: File): Promise<void> {
     const callback = (base64: string) => {
       this.setUri(base64);
     };
@@ -90,6 +96,5 @@ export class PictureSelectorComponent implements ControlValueAccessor {
   private setUri(uri: string): void {
     this.uri = uri;
     this.onChange(uri);
-    this.value.emit(uri);
   }
 }

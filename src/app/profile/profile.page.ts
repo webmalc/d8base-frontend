@@ -6,7 +6,6 @@ import { NgDestroyService } from '@app/core/services';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
-import { ProfileService } from '@app/profile/services/profile.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
@@ -54,7 +53,6 @@ export class ProfilePage {
 
   public formFields = ProfileFormFields;
   constructor(
-    public readonly profileService: ProfileService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly ngDestroy$: NgDestroyService,
     private readonly actions$: Actions,

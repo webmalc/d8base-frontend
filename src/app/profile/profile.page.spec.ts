@@ -1,12 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { MasterManagerService } from '@app/core/services';
-import { ProfileService } from '@app/profile/services/profile.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
 import { Actions } from '@ngxs/store';
 import { BehaviorSubject } from 'rxjs';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
@@ -34,7 +28,6 @@ describe('ProfilePage', () => {
             provide: MasterManagerService,
             useClass: MasterManagerServiceStub,
           },
-          ProfileService,
           { provide: StorageManagerService, useClass: StorageManagerMock },
         ],
       }).compileComponents();
