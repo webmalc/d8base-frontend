@@ -1,6 +1,3 @@
-import { ProfessionalContactInline } from '@app/api/models';
-import { Contact } from '@app/profile/models/contact';
-
 export class HelperService {
   public static getErrorListFromHttpErrorResponse(errorList: { [param: string]: string[] | string }): string[] {
     const result: string[] = [];
@@ -50,30 +47,12 @@ export class HelperService {
     return arr;
   }
 
-  public static getRatingTitle(rating: number): string {
-    return `global.rating.${Math.round(rating).toString(10)}`;
-  }
-
   public static getNoAvatarLink(): string {
     return 'assets/images/profile/noavatar.jpeg';
   }
 
   public static declination(num: number, words: string[]): string {
     return words[num % 100 > 4 && num % 100 < 20 ? 2 : [2, 0, 1, 1, 1, 2][num % 10 < 5 ? num % 10 : 5]];
-  }
-
-  public static calculateContacts(contacts: Contact[], userContacts: ProfessionalContactInline[]): Contact[] {
-    const ret = [];
-    del: for (const c of contacts) {
-      for (const uc of userContacts) {
-        if (c.id === uc.contact) {
-          continue del;
-        }
-      }
-      ret.push(c);
-    }
-
-    return ret;
   }
 
   public static calculateAge(birthday: string): number {

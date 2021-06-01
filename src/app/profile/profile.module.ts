@@ -5,7 +5,6 @@ import { AboutEditComponent } from '@app/profile/components/about-edit/about-edi
 import { ChangeEmailComponent } from '@app/profile/components/change-email/change-email.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
 import { PluginApiService } from '@app/profile/services/plugin-api.service';
-import { ProfileService } from '@app/profile/services/profile.service';
 import { RegisterEmailApiService } from '@app/profile/services/register-email-api.service';
 import { SavedProfessionalApiService } from '@app/profile/services/saved-professional-api.service';
 import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
@@ -33,7 +32,6 @@ import { ProfilePage } from './profile.page';
   declarations: [ProfilePage, UserContactEditComponent, UserEditComponent, AboutEditComponent, ChangeEmailComponent],
   providers: [
     PluginApiService,
-    ProfileService,
     UserContactApiService,
     SavedProfessionalApiService,
     RegisterEmailApiService,

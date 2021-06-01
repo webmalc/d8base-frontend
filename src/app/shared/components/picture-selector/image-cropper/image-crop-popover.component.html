@@ -1,7 +1,13 @@
 <image-cropper
   [imageFile]="image"
-  [maintainAspectRatio]="true"
-  [aspectRatio]="1"
+  [format]="format"
+  [resizeToWidth]="avatarSize"
+  [resizeToHeight]="avatarSize"
+  [cropperMinWidth]="avatarSize"
+  [cropperMinHeight]="avatarSize"
+  maintainAspectRatio="1"
+  aspectRatio="1"
+  onlyScaleDown="1"
   (imageCropped)="onImageCropped($event)"
   (loadImageFailed)="onLoadFailed()"
 ></image-cropper>
