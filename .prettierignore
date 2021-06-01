@@ -37,4 +37,8 @@ local.karma.conf.js
 /resources/
 android/
 config.xml
-src/firebase-messaging-sw.js.dist
+/src/app/api
+*.dist
+*.png
+*.jpeg
+*.svg

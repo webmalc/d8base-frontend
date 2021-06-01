@@ -3,12 +3,7 @@
   <app-content-wrapper>
     <app-error-flashbag [messages]="errorMessages$ | async"></app-error-flashbag>
     <app-login-form [pending]="pending$ | async" (user)="onSubmitLoginForm($event)"></app-login-form>
-    <ion-button
-      expand="block"
-      fill="solid"
-      color="success"
-      routerLink="/auth/registration"
-    >
+    <ion-button expand="block" fill="solid" color="success" routerLink="/auth/registration">
       {{ 'login-form.sign-up' | translate }}
     </ion-button>
     <ion-button expand="block" fill="solid" routerLink="/auth/password-recover">

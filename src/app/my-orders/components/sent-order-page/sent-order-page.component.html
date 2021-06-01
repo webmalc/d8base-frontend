@@ -20,7 +20,10 @@
             *ngIf="service.professional | masterById$ | async as professional"
             [professional]="professional"
           ></app-professional-card>
-          <app-chat-button *ngIf="(userId$ | async) !== service.professional" [userId]="service.professional"></app-chat-button>
+          <app-chat-button
+            *ngIf="(userId$ | async) !== service.professional"
+            [userId]="service.professional"
+          ></app-chat-button>
           <ion-item lines="none">
             <ion-label color="secondary">
               <b>{{ 'sent_orders.order-number' | translate }} : {{ order.id }}</b>

@@ -62,7 +62,10 @@
     <ion-buttons slot="end">
       <ion-menu-toggle menu="flag-menu">
         <ion-button>
-          <app-country-flag *ngIf="currentLanguage$ | async as currentLanguage" [lang]="currentLanguage"></app-country-flag>
+          <app-country-flag
+            *ngIf="currentLanguage$ | async as currentLanguage"
+            [lang]="currentLanguage"
+          ></app-country-flag>
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>

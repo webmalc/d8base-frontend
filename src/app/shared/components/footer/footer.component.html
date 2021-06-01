@@ -2,7 +2,8 @@
   <ion-toolbar class="d8b-container" color="secondary">
     <ion-item slot="start" color="secondary" lines="none">
       <svg width="67" height="30" viewBox="0 0 67 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408 7.45976C4.5997
+        <path
+          d="M16.3075 10.2778H16.2342C15.648 9.56315 13.8611 7.45976 10.1408 7.45976C4.5997
                     7.45976 0 12.0849 0 18.6275C0 24.9841 4.5997 29.6441 9.99419 29.6441C13.241 29.6441 15.3605
                     27.9881 16.6344 26.1462H16.7077V28.9643H21.1609V1.13798H16.3075V10.2778ZM10.6875 24.9086C7.22085
                     24.9086 4.84772 22.1602 4.84772 18.5519C4.84772 14.7519 7.40123 12.1953 10.6875 12.1953C14.0809
@@ -23,19 +24,19 @@
                     63.973 7.45976 56.9269 7.45976ZM56.4196 24.9086C52.8796 24.9086 50.3994 21.9743
                     50.3994 18.2905C50.3994 14.7577 53.0994 12.1953 56.4196 12.1953C59.9201 12.1953
                     62.1466 14.9378 62.1466 18.5868C62.1466 22.1602 59.8863 24.9086 56.4196
-                    24.9086Z" fill="white" />
+                    24.9086Z"
+          fill="white"
+        />
       </svg>
     </ion-item>
-    <ion-item lines="none" class="fs18" color="secondary" slot="end">
-      Booking made simple
-    </ion-item>
+    <ion-item lines="none" class="fs18" color="secondary" slot="end"> Booking made simple </ion-item>
   </ion-toolbar>
   <ion-toolbar class="d8b-container fs16 footer-min-height">
     <ion-item class="footer-min-height" lines="none" slot="start">
-      {{'template.about'|translate}}
+      {{ 'template.about' | translate }}
     </ion-item>
     <ion-item class="footer-min-height" lines="none" slot="start">
-      {{'template.support'|translate}}
+      {{ 'template.support' | translate }}
     </ion-item>
     <ion-item class="footer-min-height" lines="none" slot="end" *ngIf="platform.is('desktop')">
       <app-media-links class="footer-min-height"></app-media-links>
@@ -43,7 +44,7 @@
   </ion-toolbar>
   <ion-toolbar class="d8b-container fs16 footer-min-height ion-no-margin ion-no-padding">
     <ion-item class="footer-min-height" lines="none" slot="start">
-      {{'template.terms-of-use'|translate}}
+      {{ 'template.terms-of-use' | translate }}
     </ion-item>
   </ion-toolbar>
   <ion-toolbar class="d8b-container footer-min-height" *ngIf="!platform.is('desktop')">

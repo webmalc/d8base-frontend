@@ -65,13 +65,18 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item *ngIf="service.is_base_schedule" lines="none"> {{ 'service-details.is-base-schedule' | translate }}: </ion-item>
+    <ion-item *ngIf="service.is_base_schedule" lines="none">
+      {{ 'service-details.is-base-schedule' | translate }}:
+    </ion-item>
     <ng-container *ngIf="schedule$ | async as schedule">
       <app-schedule-viewer [schedule]="schedule"></app-schedule-viewer>
     </ng-container>
     <ion-item lines="none">
       <ion-label>{{ 'service-details.instant-book-title' | translate }}</ion-label>
-      <ion-toggle [ngModel]="service.is_auto_order_confirmation" (ngModelChange)="setAutoConfirmation(service, $event)"></ion-toggle>
+      <ion-toggle
+        [ngModel]="service.is_auto_order_confirmation"
+        (ngModelChange)="setAutoConfirmation(service, $event)"
+      ></ion-toggle>
     </ion-item>
     <ion-item lines="none">
       <ion-label>{{ 'master-profile.services.service-edit.published' | translate }}</ion-label>

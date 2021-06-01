@@ -1,10 +1,18 @@
 <ion-row class="ion-justify-content-around">
-  <ion-item (click)="selectTab(submenu.Main)" [class.active]="activeTab === submenu.Main"
-            lines="none" class="cursor-pointer">
-    {{"issuance.filters.submenu.main"|translate}}
+  <ion-item
+    (click)="selectTab(submenu.Main)"
+    [class.active]="activeTab === submenu.Main"
+    lines="none"
+    class="cursor-pointer"
+  >
+    {{ 'issuance.filters.submenu.main' | translate }}
   </ion-item>
-  <ion-item (click)="selectTab(submenu.Additional)" [class.active]="activeTab === submenu.Additional"
-            lines="none" class="cursor-pointer">
-    {{"issuance.filters.submenu.additional"|translate}}
+  <ion-item
+    (click)="selectTab(submenu.Additional)"
+    [class.active]="activeTab === submenu.Additional"
+    lines="none"
+    class="cursor-pointer"
+  >
+    {{ 'issuance.filters.submenu.additional' | translate }}
   </ion-item>
 </ion-row>

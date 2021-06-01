@@ -1,19 +1,25 @@
 <ion-row class="ion-justify-content-between ion-align-items-center">
-  <ion-note color="medium" *ngIf="!exp.is_still_here">{{exp.start_date}} - {{exp.end_date}}</ion-note>
-  <ion-note color="medium" *ngIf="exp.is_still_here">{{exp.start_date}}
-    - {{'global.experience-dates.until-now'|translate}}</ion-note>
+  <ion-note color="medium" *ngIf="!exp.is_still_here">{{ exp.start_date }} - {{ exp.end_date }}</ion-note>
+  <ion-note color="medium" *ngIf="exp.is_still_here">
+    {{ exp.start_date }} - {{ 'global.experience-dates.until-now' | translate }}
+  </ion-note>
   <ion-buttons *ngIf="editable">
-    <ion-button size="medium" routerDirection="forward"
-                routerLink="experience-edit/{{exp.id}}"
-                routerLinkActive="active">
+    <ion-button
+      size="medium"
+      routerDirection="forward"
+      routerLink="experience-edit/{{ exp.id }}"
+      routerLinkActive="active"
+    >
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
   </ion-buttons>
 </ion-row>
 <ion-label>
-  <div><b>{{exp.title}}</b></div>
-  <div>{{exp.company}}</div>
+  <div>
+    <b>{{ exp.title }}</b>
+  </div>
+  <div>{{ exp.company }}</div>
 </ion-label>
 <ion-label class="ion-text-wrap ion-margin-vertical">
-  {{exp.description}}
+  {{ exp.description }}
 </ion-label>

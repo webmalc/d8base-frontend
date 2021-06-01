@@ -3,7 +3,13 @@
     <ion-button appDebounce [disabled]="disabled" (debounceClick)="inputFile.click()" id="file-button">
       <ion-icon name="camera-outline"></ion-icon>
     </ion-button>
-    <input type="file" #inputFile class="file-picker-input" accept="image/x-png,image/gif,image/jpeg" (change)="onFileSelected($event)" />
+    <input
+      type="file"
+      #inputFile
+      class="file-picker-input"
+      accept="image/x-png,image/gif,image/jpeg"
+      (change)="onFileSelected($event)"
+    />
     <ion-button [disabled]="disabled" (click)="onDelete()">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-button>

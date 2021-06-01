@@ -1,7 +1,7 @@
 <app-service-title [service]="serviceData.service"></app-service-title>
 <ion-item lines="none" *ngIf="serviceData.service.description">
   <ion-note>
-    {{serviceData.service.description}}
+    {{ serviceData.service.description }}
   </ion-note>
 </ion-item>
 <ion-item lines="none" *ngIf="serviceData.service.tags?.length">
@@ -11,10 +11,10 @@
 </ion-item>
 <ion-item lines="full">
   <ion-label slot="start" color="primary" class="cursor-pointer" [routerLink]="'/service/' + serviceData.service.id">
-    {{ "master-profile.services.service-presentation.more-info" | translate }}
+    {{ 'master-profile.services.service-presentation.more-info' | translate }}
   </ion-label>
   <ion-button size="default" slot="end" [routerLink]="'/order/' + serviceData.service.id">
-    {{ "master-profile.services.service-presentation.pick" | translate }}
+    {{ 'master-profile.services.service-presentation.pick' | translate }}
     <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
   </ion-button>
 </ion-item>

@@ -2,7 +2,9 @@
 
 <ion-content class="ion-margin-top">
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/professional'">{{ 'messages.chat-list-page.messages' | translate }}</app-column-header>
+    <app-column-header [previousLocationFallback]="'/professional'">
+      {{ 'messages.chat-list-page.messages' | translate }}
+    </app-column-header>
     <ion-searchbar
       animated
       (ionChange)="search($event.target.value)"
@@ -28,7 +30,7 @@
             </ion-label>
             <ion-label>
               <p>
-                {{ chat.body | slice:0:30 }}
+                {{ chat.body | slice: 0:30 }}
               </p>
             </ion-label>
           </div>

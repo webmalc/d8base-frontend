@@ -12,7 +12,8 @@
       [formControl]="formControl"
       [enabledPeriods]="displayedCalendars$ | async"
       [serviceDuration]="duration"
-      (newDate)="showCalendarForDate($event)">
+      (newDate)="showCalendarForDate($event)"
+    >
     </app-calendar-component>
   </ion-list>
 </app-step-container>

@@ -1,18 +1,25 @@
 <ion-row class="ion-justify-content-between ion-align-items-center">
-  <ion-label><b>{{certificate.name}}</b></ion-label>
+  <ion-label>
+    <b>{{ certificate.name }}</b>
+  </ion-label>
   <ion-buttons *ngIf="editable">
-    <ion-button size="medium" routerDirection="forward"
-                routerLink="certificate-edit/{{certificate.id}}"
-                routerLinkActive="active">
+    <ion-button
+      size="medium"
+      routerDirection="forward"
+      routerLink="certificate-edit/{{ certificate.id }}"
+      routerLinkActive="active"
+    >
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
   </ion-buttons>
 </ion-row>
-<ion-label color="medium">{{certificate.date}}</ion-label>
+<ion-label color="medium">{{ certificate.date }}</ion-label>
 <ion-img class="certificate" *ngIf="certificate.photo" [src]="certificate.photo"></ion-img>
 <ion-label class="ion-text-wrap ion-margin-bottom">
-  <div *ngIf="certificate.url" class="mb10">{{'master-profile.info.certificate-url'|translate}}: <a
-    href="{{certificate.url}}">{{certificate.url}}</a></div>
-  <div *ngIf="certificate.certificate_id">{{'master-profile.info.certificate-id'|translate}}
-    : {{certificate.certificate_id}}</div>
+  <div *ngIf="certificate.url" class="mb10">
+    {{ 'master-profile.info.certificate-url' | translate }}: <a href="{{ certificate.url }}">{{ certificate.url }}</a>
+  </div>
+  <div *ngIf="certificate.certificate_id">
+    {{ 'master-profile.info.certificate-id' | translate }} : {{ certificate.certificate_id }}
+  </div>
 </ion-label>

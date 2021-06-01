@@ -8,7 +8,13 @@
   <ion-label color="medium" position="fixed">
     {{ 'experience-edit-page.end-date' | translate }}
   </ion-label>
-  <ion-input type="month" [value]="endDate" [disabled]="isOngoing" (ionBlur)="setTouched()" (ionChange)="setEndDate($event)"></ion-input>
+  <ion-input
+    type="month"
+    [value]="endDate"
+    [disabled]="isOngoing"
+    (ionBlur)="setTouched()"
+    (ionChange)="setEndDate($event)"
+  ></ion-input>
 </ion-item>
 <ion-item>
   <ion-label>

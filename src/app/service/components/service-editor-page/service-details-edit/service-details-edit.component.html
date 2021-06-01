@@ -3,7 +3,7 @@
   <app-content-wrapper>
     <app-column-header [previousLocationFallback]="getServicePageUrl(context.service.id)">{{
       'service-details.description-title' | translate
-      }}</app-column-header>
+    }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
       <section>
         <header>{{ 'service-details.description' | translate }}</header>

@@ -1,9 +1,12 @@
 <ion-list class="context">
-  <ion-row class="ion-justify-content-between ion-align-items-center ion-item-bottom-border cursor-pointer bg-hover"
-           (click)="update()" *ngIf="!message.is_read">
+  <ion-row
+    class="ion-justify-content-between ion-align-items-center ion-item-bottom-border cursor-pointer bg-hover"
+    (click)="update()"
+    *ngIf="!message.is_read"
+  >
     <ion-col size="9" class="ion-no-padding">
       <ion-item lines="none" class="bg-hover no-padding-right">
-        {{'messages.context-menu.edit'|translate}}
+        {{ 'messages.context-menu.edit' | translate }}
       </ion-item>
     </ion-col>
     <ion-col size="3" class="ion-no-padding">
@@ -12,11 +15,14 @@
       </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-between ion-align-items-center ion-item-bottom-border cursor-pointer bg-hover"
-           (click)="delete()" *ngIf="!message.is_read">
+  <ion-row
+    class="ion-justify-content-between ion-align-items-center ion-item-bottom-border cursor-pointer bg-hover"
+    (click)="delete()"
+    *ngIf="!message.is_read"
+  >
     <ion-col size="9" class="ion-no-padding">
       <ion-item class="red bg-hover no-padding-right" lines="none">
-        {{'messages.context-menu.delete-from-me'|translate}}
+        {{ 'messages.context-menu.delete-from-me' | translate }}
       </ion-item>
     </ion-col>
     <ion-col size="3" class="ion-no-padding">
@@ -25,11 +31,14 @@
       </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-between ion-align-items-center cursor-pointer bg-hover"
-           (click)="delete()" *ngIf="message.is_read">
+  <ion-row
+    class="ion-justify-content-between ion-align-items-center cursor-pointer bg-hover"
+    (click)="delete()"
+    *ngIf="message.is_read"
+  >
     <ion-col size="9" class="ion-no-padding">
       <ion-item class="red bg-hover no-padding-right" lines="none">
-        {{'messages.context-menu.delete-from-me'|translate}}
+        {{ 'messages.context-menu.delete-from-me' | translate }}
       </ion-item>
     </ion-col>
     <ion-col size="3" class="ion-no-padding">
@@ -38,11 +47,14 @@
       </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-between ion-align-items-center cursor-pointer bg-hover"
-           (click)="delete()" *ngIf="!message.is_read">
+  <ion-row
+    class="ion-justify-content-between ion-align-items-center cursor-pointer bg-hover"
+    (click)="delete()"
+    *ngIf="!message.is_read"
+  >
     <ion-col size="9" class="ion-no-padding">
       <ion-item class="red bg-hover no-padding-right" lines="none">
-        {{'messages.context-menu.delete'|translate}}
+        {{ 'messages.context-menu.delete' | translate }}
       </ion-item>
     </ion-col>
     <ion-col size="3" class="ion-no-padding">
