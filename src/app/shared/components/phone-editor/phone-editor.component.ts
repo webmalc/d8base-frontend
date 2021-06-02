@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Country } from '@app/api/models';
+import { Country, Phone } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache } from '@app/core/services/cache';
-import { combineLatest } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 const DEFAULT_COUNTRY: Partial<Country> = { id: 6251999, name: 'Canada', tld: 'ca', phone: '+1' };
 @Component({
@@ -27,6 +27,7 @@ export class PhoneEditorComponent implements ControlValueAccessor {
   public previousPhoneValue: string = '';
   public countries$ = this.countriesApi.list();
   public title = 'location-edit-page.country';
+  private readonly writeValue$ = new BehaviorSubject<Phone>(null);
   private onChange: (value: string) => void;
   private onTouch: (value: string) => void;
 
@@ -35,8 +36,9 @@ export class PhoneEditorComponent implements ControlValueAccessor {
     private readonly ngDestroy$: NgDestroyService,
     private readonly cd: ChangeDetectorRef,
   ) {
-    this.subscribeCountryCodeControlValueChanges();
     this.subscribeControlValuesChanges();
+    this.subscribeWriteValue();
+
   }
 
   public registerOnChange(fn: any): void {
@@ -57,18 +59,30 @@ export class PhoneEditorComponent implements ControlValueAccessor {
     }
   }
 
-  public writeValue(value: string): void {
-    // do nothing
+  public writeValue(value: any): void {
+    if (this.isPhone(value)) {
+      this.writeValue$.next(value);
+    }
   }
 
-  public plusSignEnforce(countryPhone: Country['phone']): string {
+  public plusSignEnforce(countryPhone: string): string {
     return !countryPhone?.length || countryPhone?.includes('+') ? countryPhone : `+${countryPhone}`;
   }
 
-  private subscribeCountryCodeControlValueChanges(): void {
-    this.countryControl.valueChanges.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
-      this.cd.markForCheck();
-    });
+  private subscribeWriteValue(): void {
+    this.countries$
+      .pipe(
+        switchMap(countries => this.writeValue$.pipe(map(value => ({ countries, value })))),
+        takeUntil(this.ngDestroy$),
+      )
+      .subscribe(({ countries, value }) => {
+        const country = countries.find(country => country.tld === `${value.region_code}`);
+        this.countryControl.setValue(country, { emitEvent: false });
+
+        const countryCode = this.plusSignEnforce(country.phone.replace(/[^0-9]+/g, ''));
+        const nationalNumber = value.phone.slice(countryCode.length);
+        this.phoneControl.setValue(nationalNumber, { emitEvent: false });
+      });
   }
 
   private subscribeControlValuesChanges(): void {
@@ -77,7 +91,7 @@ export class PhoneEditorComponent implements ControlValueAccessor {
       this.phoneControl.valueChanges.pipe(startWith(this.phoneControl.value)),
     ])
       .pipe(takeUntil(this.ngDestroy$))
-      .subscribe(([country, phone]) => {
+      .subscribe(([country, phone]: [Country, string]) => {
         const countryCode = this.plusSignEnforce(country.phone);
         const value: string = phone && country ? `${countryCode}${phone}` : '';
         if (this.onChange) {
@@ -85,5 +99,9 @@ export class PhoneEditorComponent implements ControlValueAccessor {
         }
         this.cd.markForCheck();
       });
+  }
+
+  private isPhone(value: any): value is Phone {
+    return value && 'region_code' in value;
   }
 }

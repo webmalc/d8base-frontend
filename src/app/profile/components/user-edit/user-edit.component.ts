@@ -37,11 +37,15 @@ export class UserEditComponent implements OnInit {
   }
 
   public submitForm(): void {
-    this.form.disable();
-
-    this.store.dispatch(new CurrentUserActions.UpdateProfile(this.form.getRawValue())).subscribe(() => {
-      this.form.enable();
-      this.router.navigate(['/profile']);
+    this.form.disable({ emitEvent: false });
+    this.store.dispatch(new CurrentUserActions.UpdateProfile(this.form.getRawValue())).subscribe({
+      next: () => {
+        this.form.enable({ emitEvent: false });
+        this.router.navigate(['/profile']);
+      },
+      error: () => {
+        this.form.enable({ emitEvent: false });
+      },
     });
   }
 }
