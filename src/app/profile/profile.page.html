@@ -25,6 +25,11 @@
     <ion-item *ngIf="user?.first_name || user?.last_name" lines="none">
       {{user?.first_name}} {{user?.last_name}}
     </ion-item>
+    <ion-item *ngIf="user?.phone" lines="none">
+      <ion-icon class="pr5" name="call-outline"></ion-icon>
+      <ion-label>{{ 'profile-form.phone' | translate }}</ion-label>
+      {{user?.phone}}
+    </ion-item>
     <ion-item lines="none">
       <ion-icon class="pr5" name="mail-outline"></ion-icon>
       <ion-label>Email</ion-label>

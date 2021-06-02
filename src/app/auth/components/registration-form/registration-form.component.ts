@@ -20,7 +20,7 @@ export class RegistrationFormComponent {
       [RegistrationFormFields.Confirm]: ['', passwordValidators],
       [RegistrationFormFields.Country]: [null, Validators.required],
       [RegistrationFormFields.City]: [null, Validators.required],
-      [RegistrationFormFields.Phone]: [''],
+      [RegistrationFormFields.Phone]: [null],
     },
     { validators: confirmPasswordValidator(RegistrationFormFields.Password, RegistrationFormFields.Confirm) },
   );

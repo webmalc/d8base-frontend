@@ -25,6 +25,7 @@
       </ion-item>
       <app-form-control-error [controlName]="formFields.Patronymic"> </app-form-control-error>
       <app-gender-selector [formControlName]="formFields.Gender"></app-gender-selector>
+      <app-phone-editor [formControlName]="formFields.Phone"></app-phone-editor>
       <ion-item>
         <ion-label class="label-for-required-input" color="medium" position="floating">
           {{ 'profile-form.fields.email' | translate }}

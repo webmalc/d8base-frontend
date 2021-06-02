@@ -22,6 +22,7 @@ export class ProfileFormService {
       ],
       [ProfileFormFields.Patronymic]: [user.patronymic, [Validators.minLength(1), Validators.maxLength(20)]],
       [ProfileFormFields.Email]: [user.email, [Validators.required, AppValidators.email]],
+      [ProfileFormFields.Phone]: [user.phone_extended],
       [ProfileFormFields.Gender]: [user.gender?.toString()],
     });
   }
