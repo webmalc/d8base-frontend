@@ -61,7 +61,13 @@ import { ServicePublishAgreementComponent } from '@app/shared/components/service
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
 import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
-import { CountryByIdPipe, MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe } from '@app/shared/pipes';
+import {
+  CountryByIdPipe,
+  IfSpinnerStatePipe,
+  MasterByIdPipe,
+  ServiceByIdPipe,
+  ServiceDataFilterPipe,
+} from '@app/shared/pipes';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
@@ -85,6 +91,7 @@ import { NumberDirective } from './directives/number.directive';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
 import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
 import { ChatButtonComponent } from './components/chat-button/chat-button.component';
+import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +126,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
     ClientWidgetComponent,
     ServiceByIdPipe,
     MasterByIdPipe,
+    IfSpinnerStatePipe,
     ScheduleEditorComponent,
     DaySelectorComponent,
     PriceComponent,
@@ -135,6 +143,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
     ContentWrapperComponent,
     ServiceLocationComponent,
     LoadingIndicatorComponent,
+    LoadingErrorComponent,
     PaymentMethodViewerComponent,
     PaymentMethodEditorComponent,
     PriceEditorComponent,
@@ -191,6 +200,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
     ProfessionalCardComponent,
     ServiceByIdPipe,
     MasterByIdPipe,
+    IfSpinnerStatePipe,
     ScheduleEditorComponent,
     PriceComponent,
     ServiceDataFilterPipe,
@@ -206,6 +216,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
     ContentWrapperComponent,
     ServiceLocationComponent,
     LoadingIndicatorComponent,
+    LoadingErrorComponent,
     PaymentMethodViewerComponent,
     PaymentMethodEditorComponent,
     PriceEditorComponent,

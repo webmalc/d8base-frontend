@@ -808,6 +808,7 @@
   },
   "server-errors": {
     "unauthorized": "Доступ запрещён",
+    "temporarily-unavailable": "Сервер временно недоступен. Попробуйте обновить страницу.",
     "generic": "Сервер временно недоступен"
   },
   "client-errors": {

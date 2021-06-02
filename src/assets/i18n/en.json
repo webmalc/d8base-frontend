@@ -808,6 +808,7 @@
   },
   "server-errors": {
     "unauthorized": "Access denied",
+    "temporarily-unavailable": "The server is temporarily unavailable. Try refreshing the page.",
     "generic": "The server is temporarily unavailable"
   },
   "client-errors": {
