@@ -61,13 +61,7 @@ import { ServicePublishAgreementComponent } from '@app/shared/components/service
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
 import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
-import {
-  CountryByIdPipe,
-  IfSpinnerStatePipe,
-  MasterByIdPipe,
-  ServiceByIdPipe,
-  ServiceDataFilterPipe,
-} from '@app/shared/pipes';
+import { CountryByIdPipe, MasterByIdPipe, ServiceByIdPipe, ServiceDataFilterPipe } from '@app/shared/pipes';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
@@ -83,7 +77,6 @@ import { ImageCropPopoverComponent } from './components/picture-selector/image-c
 import { SavedProfessionalToggleComponent } from './components/saved-professional-toggle/saved-professional-toggle.component';
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
 import { DebounceDirective } from './directives/debounce.directive';
-import { IfSpinnerDirective } from './directives/if-spinner.directive';
 import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directive';
 import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
@@ -92,6 +85,8 @@ import { ContactEditComponent } from './components/contact-edit/contact-edit.com
 import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
 import { ChatButtonComponent } from './components/chat-button/chat-button.component';
 import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
+import { IfSpinnerModule } from './if-spinner/if-spinner.module';
+import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
 
 @NgModule({
   declarations: [
@@ -126,7 +121,6 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     ClientWidgetComponent,
     ServiceByIdPipe,
     MasterByIdPipe,
-    IfSpinnerStatePipe,
     ScheduleEditorComponent,
     DaySelectorComponent,
     PriceComponent,
@@ -153,7 +147,6 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     ServiceTitleComponent,
     ColumnHeaderComponent,
     DateIntervalEditorComponent,
-    IfSpinnerDirective,
     CountryByIdPipe,
     NotFoundPageComponent,
     LanguageComponent,
@@ -172,6 +165,7 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     ChatButtonComponent,
   ],
   exports: [
+    IfSpinnerModule,
     AddButtonComponent,
     ErrorFlashbagComponent,
     PictureSelectorComponent,
@@ -200,7 +194,6 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     ProfessionalCardComponent,
     ServiceByIdPipe,
     MasterByIdPipe,
-    IfSpinnerStatePipe,
     ScheduleEditorComponent,
     PriceComponent,
     ServiceDataFilterPipe,
@@ -226,7 +219,6 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     ServiceTitleComponent,
     ColumnHeaderComponent,
     DateIntervalEditorComponent,
-    IfSpinnerDirective,
     CountryByIdPipe,
     NotFoundPageComponent,
     LanguageComponent,
@@ -251,6 +243,7 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     ReactiveFormsModule,
     LeafletModule,
     ImageCropperModule,
+    IfSpinnerModule,
   ],
   providers: [
     // TODO Create core module and move providers into it
@@ -261,6 +254,13 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
     SelectableDistrictOnSearchService,
     SelectableRegionOnSearchService,
     SelectableSubregionOnSearchService,
+    {
+      provide: IF_SPINNER_MODULE_CONFIG_TOKEN,
+      useValue: {
+        errorComponent: LoadingErrorComponent,
+        loadingComponent: LoadingIndicatorComponent,
+      },
+    },
   ],
 })
 export class SharedModule {}
