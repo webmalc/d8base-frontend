@@ -1,6 +1,9 @@
 /* eslint-disable max-classes-per-file */
 import { ComponentFactoryResolver, Directive, Input, TemplateRef, ViewContainerRef, ViewRef } from '@angular/core';
+import { isIfSpinnerState } from '@app/core/functions/if-spinner.functions';
+import { ContentState } from '@app/core/types/if-spinner.types';
 import { LoadingIndicatorComponent } from '../components';
+import { LoadingErrorComponent } from '../components/loading-error/loading-error.component';
 
 export class IfSpinnerContext<T = unknown> {
   public $implicit: T = null;
@@ -35,21 +38,54 @@ export class IfSpinnerDirective<T> {
   }
 
   private updateView() {
-    if (this.context.$implicit) {
-      if (!this.viewRef) {
-        this.viewContainerRef.clear();
-        if (this.thenTemplateRef) {
-          this.viewRef = this.viewContainerRef.createEmbeddedView(this.thenTemplateRef, this.context);
+    if (isIfSpinnerState<T>(this.context.$implicit)) {
+      switch (this.context.$implicit.state) {
+        case ContentState.LOADING: {
+          this.showLoadingState();
+          return;
+        }
+        case ContentState.ERROR: {
+          this.showErrorState();
+          return;
+        }
+        case ContentState.LOADED:
+        default: {
+          this.showLoadedState();
+          return;
         }
       }
+    }
+
+    if (this.context.$implicit) {
+      this.showLoadedState();
     } else {
-      this.viewRef = null;
+      this.showLoadingState();
+    }
+  }
+
+  private showLoadingState(): void {
+    this.viewRef = null;
+    this.viewContainerRef.clear();
+    if (this.fallbackTemplateRef) {
+      this.viewContainerRef.createEmbeddedView(this.fallbackTemplateRef);
+    } else {
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(LoadingIndicatorComponent);
+      this.viewContainerRef.createComponent<LoadingIndicatorComponent>(componentFactory);
+    }
+  }
+
+  private showErrorState(): void {
+    this.viewRef = null;
+    this.viewContainerRef.clear();
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(LoadingErrorComponent);
+    this.viewContainerRef.createComponent<LoadingErrorComponent>(componentFactory);
+  }
+
+  private showLoadedState(): void {
+    if (!this.viewRef) {
       this.viewContainerRef.clear();
-      if (this.fallbackTemplateRef) {
-        this.viewContainerRef.createEmbeddedView(this.fallbackTemplateRef);
-      } else {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(LoadingIndicatorComponent);
-        this.viewContainerRef.createComponent<LoadingIndicatorComponent>(componentFactory);
+      if (this.thenTemplateRef) {
+        this.viewRef = this.viewContainerRef.createEmbeddedView(this.thenTemplateRef, this.context);
       }
     }
   }
