@@ -11,10 +11,11 @@ import {
 } from '@angular/core';
 import { NgDestroyService } from '@app/core/services';
 import { InfiniteScrollItemDirective } from '@app/infinite-scroll/directives/infinite-scroll-item.directive';
-import { InfiniteScrollData, Params } from '@app/infinite-scroll/models/infinite-scroll.model';
+import { InfiniteScrollData, PaginatedResult, Params } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { concatMap, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, concatMap, switchMap, takeUntil, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-infinite-scroll-container',
@@ -34,54 +35,49 @@ export class InfiniteScrollContainerComponent<T> {
   public isLoading: boolean = false;
   public wasLoadAttempted: boolean = false;
   @Input() public set doLoad$(value: Observable<InfiniteScrollData<Params, T>>) {
-    value
-      ?.pipe(
-        switchMap(data => {
-          const { params, apiRequestFunction } = data;
+    const value$ = value?.pipe(
+      switchMap(data => {
+        const { params, apiRequestFunction } = data;
 
-          this.resetPageCounter();
-          this.disableInfiniteScroll();
-          this.showSpinner();
-          this.wasLoadAttempted = true;
+        this.resetPageCounter();
+        this.disableInfiniteScroll();
+        this.showSpinner();
+        this.wasLoadAttempted = true;
 
-          this.resetResults();
+        this.resetResults();
 
-          return this.loadMore$.pipe(
-            concatMap((infiniteScroll?) => {
-              this.cd.markForCheck();
-              return apiRequestFunction({ ...params, page: this.pageCounter }).pipe(
-                tap(() => {
-                  if (infiniteScroll) {
-                    infiniteScroll.target.complete();
-                  }
-                }),
-              );
-            }),
-            takeUntil(this.destroy$),
-          );
-        }),
-      )
-      .subscribe({
-        next: paginatedResult => {
-          const { results, next } = paginatedResult;
+        return this.loadMore$.pipe(
+          concatMap((infiniteScroll?) => {
+            this.cd.markForCheck();
+            return apiRequestFunction({ ...params, page: this.pageCounter }).pipe(
+              tap(() => {
+                if (infiniteScroll) {
+                  infiniteScroll.target.complete();
+                }
+              }),
+            );
+          }),
+        );
+      }),
+      catchError(() => {
+        this.hideSpinner();
+        this.cd.markForCheck();
+        return value$;
+      }),
+      takeUntil(this.destroy$),
+    );
 
-          this.incrementPageCounter();
-          this.disableInfiniteScroll(!next);
-          this.hideSpinner();
+    value$.subscribe((paginatedResult: PaginatedResult<T>) => {
+      const { results, next } = paginatedResult;
 
-          this.appendResults(results);
+      this.incrementPageCounter();
+      this.disableInfiniteScroll(!next);
+      this.hideSpinner();
 
-          this.cd.markForCheck();
-        },
-        error: () => {
-          this.hideSpinner();
-          this.cd.markForCheck();
-        },
-        complete: () => {
-          this.hideSpinner();
-          this.cd.markForCheck();
-        },
-      });
+      this.appendResults(results);
+
+      this.cd.markForCheck();
+    });
   }
   @Input() public emptyText: string;
   @Output() public loadResults = new EventEmitter<T[]>();
