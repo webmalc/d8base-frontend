@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchService } from '@app/api/services';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import { Platform } from '@ionic/angular';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SearchPage } from './search-page.component';
 
@@ -23,9 +21,7 @@ describe('SearchPage', () => {
         ],
         providers: [
           SearchService,
-          { provide: Platform, useValue: { width: () => 1000, is: () => true } },
           SearchFilterStateService,
-          FormBuilder,
         ],
       }).compileComponents();
 

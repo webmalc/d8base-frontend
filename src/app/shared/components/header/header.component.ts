@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthenticationService, MasterManagerService } from '@app/core/services';
+import { AuthenticationService, MasterManagerService, PlatformService } from '@app/core/services';
 import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
-import { MenuController, Platform } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,7 +24,7 @@ export class HeaderComponent {
   private readonly isAuthenticated$: Observable<boolean>;
 
   constructor(
-    private readonly platform: Platform,
+    private readonly platformService: PlatformService,
     private readonly menuController: MenuController,
     public readonly unreadMessagesService: UnreadMessagesService,
     authenticator: AuthenticationService,
@@ -37,7 +37,7 @@ export class HeaderComponent {
   }
 
   public isDesktop(): boolean {
-    return this.platform.is('desktop');
+    return this.platformService.isDesktop();
   }
 
   /**
