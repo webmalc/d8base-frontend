@@ -77,7 +77,9 @@ export class MainPage implements OnInit {
       map(settings => settings.language),
       distinctUntilChanged(),
       switchMap(() => this.defaultCategory.getList()),
-      map((categories) => categories.map((category) => ({ ...category, code: convertCategoryCodeToFaIconCode(category.code) }))),
+      map(categories =>
+        categories.map(category => ({ ...category, code: convertCategoryCodeToFaIconCode(category.code) })),
+      ),
       shareReplay(1),
     );
   }

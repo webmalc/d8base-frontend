@@ -1,8 +1,8 @@
 import { Observable, ObservableInput, of, pipe, UnaryFunction } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
-import { ContentState, ErrorState, IfSpinnerState, LoadedState, LoadingState } from '../types/if-spinner.types';
+import { ContentState, ErrorState, IfSpinnerState, LoadedState, LoadingState } from '../models/if-spinner.model';
 
-export const ifSpinnerOperator = <T>(): UnaryFunction<Observable<T>, Observable<IfSpinnerState<T>>> =>
+export const convertToIfSpinnerState = <T>(): UnaryFunction<Observable<T>, Observable<IfSpinnerState<T>>> =>
   pipe(
     map<T, LoadedState<T>>((data: T) => ({
       state: ContentState.LOADED,
