@@ -62,9 +62,14 @@ export class LocationSelectorComponent {
       component: LocationEditorPopoverComponent,
     });
     await popover.present();
-    const result = await popover.onDidDismiss();
+
+    const { data } = await popover.onDidDismiss();
+    if (!data) {
+      return;
+    }
+
     const newLocation = {
-      ...result.data,
+      ...data,
       professional: context.service.professional,
     };
     this.api.accountsProfessionalLocationsCreate(newLocation).subscribe(() => this.refresh$.next());
