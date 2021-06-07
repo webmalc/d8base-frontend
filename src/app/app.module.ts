@@ -1,8 +1,6 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router, RouteReuseStrategy } from '@angular/router';
@@ -36,6 +34,8 @@ import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import * as Sentry from '@sentry/angular';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
 import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,6 +59,7 @@ import { StoreModule } from './store/store.module';
     ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
     SharedModule,
     ErrorHandlingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireMessagingModule,
     AppRoutingModule,
@@ -119,11 +120,11 @@ import { StoreModule } from './store/store.module';
 export class AppModule {
   // https://stackoverflow.com/questions/41215226/
   constructor(
-    platformService: PlatformService,
-    titleService: TitleService,
-    loadingIndicatorService: LoadingIndicatorService,
-    translationService: TranslationService,
-    firebaseService: FirebaseService,
+    private readonly _platformService: PlatformService,
+    private readonly _titleService: TitleService,
+    private readonly _loadingIndicatorService: LoadingIndicatorService,
+    private readonly _translationService: TranslationService,
+    private readonly _firebaseService: FirebaseService,
   ) {
     // instantiating necessary services
   }
