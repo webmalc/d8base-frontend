@@ -16,14 +16,13 @@
           <ion-list-header>
             <ion-label>{{ 'sent_orders.order-details-subtitle' | translate }}:</ion-label>
           </ion-list-header>
-          <app-professional-card
-            *ngIf="service.professional | masterById$ | async as professional"
-            [professional]="professional"
-          ></app-professional-card>
-          <app-chat-button
-            *ngIf="(userId$ | async) !== service.professional"
-            [userId]="service.professional"
-          ></app-chat-button>
+          <ng-container *ngIf="service.professional | masterById$ | async as professional">
+            <app-professional-card [professional]="professional"></app-professional-card>
+            <app-chat-button
+              *ngIf="(userId$ | async) !== service.professional"
+              [userId]="professional.user.id"
+            ></app-chat-button>
+          </ng-container>
           <ion-item lines="none">
             <ion-label color="secondary">
               <b>{{ 'sent_orders.order-number' | translate }} : {{ order.id }}</b>
