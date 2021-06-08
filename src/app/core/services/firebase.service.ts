@@ -46,7 +46,7 @@ export class FirebaseService {
       .communicationDevicesFcmRead(registrationId)
       .pipe(
         catchError((error: HttpErrorResponse) =>
-          error ? this.communicationsApi.communicationDevicesFcmCreate(newDevice(registrationId)) : throwError(error),
+          error.status === 404 ? this.communicationsApi.communicationDevicesFcmCreate(newDevice(registrationId)) : throwError(error),
         ),
         switchMap(device =>
           device.active
