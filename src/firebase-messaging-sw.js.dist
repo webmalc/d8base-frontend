@@ -1,0 +1,15 @@
+importScripts('https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.7/firebase-messaging.js');
+
+// https://firebase.google.com/docs/web/setup#config-object
+firebase.initializeApp({
+  apiKey: 'api-key',
+  authDomain: 'd8base-stage.firebaseapp.com',
+  databaseURL: 'https://project-id.firebaseio.com',
+  projectId: 'd8base-stage',
+  storageBucket: 'd8base-stage.appspot.com',
+  messagingSenderId: '176704150790',
+  appId: 'app-id',
+});
+
+const messaging = firebase.messaging();
