@@ -801,10 +801,11 @@
     "passwordMismatch": "Passwords are mismatch.",
     "required": "Field is required.",
     "priceError": "Price 'from' must be less of price 'to'.",
-    "emptyEndDate": "End date not specified",
-    "emptyStartDate": "Start date not specified",
-    "timeIntervalError": "Minutes must be a multiple of {{ interval }}",
-    "timeCausalityError": "Start time must precede end time"
+    "emptyEndDate": "End date not specified.",
+    "emptyStartDate": "Start date not specified.",
+    "timeIntervalError": "Minutes must be a multiple of {{ interval }}.",
+    "timeCausalityError": "Start time must precede end time.",
+    "whitespaces": "The field can't contain spaces."
   },
   "server-errors": {
     "unauthorized": "Access denied",
