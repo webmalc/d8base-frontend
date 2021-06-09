@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DefaultRegisterUser, UserLocation } from '@app/api/models';
-import { AppValidators } from '@app/core/validators/app.validators';
-import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
+import * as AppValidators from '@app/core/validators';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
 
 @Component({
@@ -16,13 +15,13 @@ export class RegistrationFormComponent {
       [RegistrationFormFields.Email]: ['', [Validators.required, AppValidators.email]],
       [RegistrationFormFields.FirstName]: ['', Validators.required],
       [RegistrationFormFields.LastName]: [''],
-      [RegistrationFormFields.Password]: ['', passwordValidators],
-      [RegistrationFormFields.Confirm]: ['', passwordValidators],
+      [RegistrationFormFields.Password]: ['', AppValidators.passwordValidators],
+      [RegistrationFormFields.Confirm]: ['', AppValidators.passwordValidators],
       [RegistrationFormFields.Country]: [null, Validators.required],
       [RegistrationFormFields.City]: [null, Validators.required],
       [RegistrationFormFields.Phone]: [null],
     },
-    { validators: confirmPasswordValidator(RegistrationFormFields.Password, RegistrationFormFields.Confirm) },
+    { validators: AppValidators.confirmPasswordValidator(RegistrationFormFields.Password, RegistrationFormFields.Confirm) },
   );
   public readonly formFields = RegistrationFormFields;
 

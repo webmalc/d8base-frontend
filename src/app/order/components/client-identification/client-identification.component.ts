@@ -4,8 +4,7 @@ import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
-import { AppValidators } from '@app/core/validators/app.validators';
-import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
+import * as AppValidators from '@app/core/validators';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { OrderWizardStateService } from '@app/order/services';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
@@ -22,8 +21,8 @@ import { first } from 'rxjs/operators';
 export class ClientIdentificationComponent {
   public context$: Observable<StepContext> = this.wizardState.getContext();
   public email = new FormControl('', Validators.compose([Validators.required, AppValidators.email]));
-  public password = new FormControl({ value: '', disabled: true }, passwordValidators);
-  public passwordConfirm = new FormControl({ value: '', disabled: true }, passwordValidators);
+  public password = new FormControl({ value: '', disabled: true }, AppValidators.passwordValidators);
+  public passwordConfirm = new FormControl({ value: '', disabled: true }, AppValidators.passwordValidators);
   public name = new FormControl({ value: '', disabled: true }, Validators.required);
   public lastName = new FormControl({ value: '', disabled: true });
   public country = new FormControl({ value: '', disabled: true }, Validators.required);
@@ -36,7 +35,7 @@ export class ClientIdentificationComponent {
       lastName: this.lastName,
       country: this.country,
     },
-    confirmPasswordValidator('password', 'passwordConfirm'),
+    AppValidators.confirmPasswordValidator('password', 'passwordConfirm'),
   );
   public isRegistered;
   public showRegistrationForm = false;

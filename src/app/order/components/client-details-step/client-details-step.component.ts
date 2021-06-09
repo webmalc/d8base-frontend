@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnIn
 import { FormBuilder, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
 import { UserManagerService } from '@app/core/services/user-manager.service';
-import { AppValidators } from '@app/core/validators/app.validators';
+import * as AppValidators from '@app/core/validators';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderClientDetailsFormFields } from '@app/order/enums/order-client-details-form';
 import { ClientDetailsStepData } from '@app/order/interfaces/client-details-step-data.type';
