@@ -67,6 +67,15 @@ export class SearchFilterStateConverter {
                 }
               : null;
 
+          const price =
+            params?.priceCurrency && (params?.startPrice || params?.endPrice)
+              ? {
+                  currency: { currency: params?.priceCurrency, value: void 0 },
+                  ...(params?.startPrice ? { start: params?.startPrice } : null),
+                  ...(params?.endPrice ? { end: params?.endPrice } : null),
+                }
+              : null;
+
           const searchFilterState: SearchFilterStateInterface = {
             query: params?.query,
             location: {
@@ -86,11 +95,7 @@ export class SearchFilterStateConverter {
             isOnlineService: hasWord(params?.serviceTypes, 'online'),
             isAtMasterLocationService: hasWord(params?.serviceTypes, 'professional'),
             isAtClientLocationService: hasWord(params?.serviceTypes, 'client'),
-            price: {
-              currency: { currency: params?.priceCurrency, value: void 0 },
-              start: params?.startPrice,
-              end: params?.endPrice,
-            },
+            ...(price ? { price } : null),
             rating: params?.ratingFrom ? Number(params?.ratingFrom) : void 0,
             professionalLevel: params?.professionalLevel ? { value: params?.professionalLevel } : void 0,
             paymentMethods: params?.paymentMethods

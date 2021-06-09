@@ -33,8 +33,8 @@ export class SearchFilterStateService {
     [this.formFields.isAtClientLocationService]: null,
     [this.formGroups.price]: this.fb.group({
       [this.formFields.price.currency]: null,
-      [this.formFields.price.start]: null,
-      [this.formFields.price.end]: null,
+      [this.formFields.price.start]: { value: null, disabled: true },
+      [this.formFields.price.end]: { value: null, disabled: true },
     }),
     [this.formFields.rating]: null,
     [this.formFields.professionalLevel]: null,
@@ -68,6 +68,7 @@ export class SearchFilterStateService {
       this.router.navigate(['/search'], { queryParams });
     });
     this.setMinMaxDates();
+    this.handleCurrencySelectorChanges();
   }
 
   public doSearch(): void {
@@ -91,5 +92,28 @@ export class SearchFilterStateService {
     const limitOfYearsInFuture = 5;
     this.minDate = now.toISOString();
     this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
+  }
+
+  private handleCurrencySelectorChanges(): void {
+    const priceInputs = [
+      this.searchForm.get([this.formGroups.price, this.formFields.price.start]),
+      this.searchForm.get([this.formGroups.price, this.formFields.price.end]),
+    ];
+
+    this.searchForm
+      .get([this.formGroups.price, this.formFields.price.currency])
+      .valueChanges
+      .subscribe(value => {
+        if (!value) {
+          priceInputs.forEach(input => {
+            input.reset();
+            input.disable();
+          });
+          return;
+        }
+        priceInputs.forEach(input => {
+          input.enable();
+        });
+      });
   }
 }

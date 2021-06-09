@@ -18,10 +18,10 @@ export interface SearchFilterStateInterface {
   isOnlineService: boolean;
   isAtMasterLocationService: boolean;
   isAtClientLocationService: boolean;
-  price: {
+  price?: {
     currency: Rate;
-    start: string;
-    end: string;
+    start?: string;
+    end?: string;
   };
   rating: number;
   professionalLevel: { value: 'junior' | 'middle' | 'senior' };
