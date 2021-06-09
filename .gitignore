@@ -20,6 +20,7 @@ npm-debug.log*
 src/environments/environment.ts
 src/environments/environment.prod.ts
 src/environments/environment.staging.ts
+src/firebase-messaging-sw.js
 
 /.idea
 /.ionic
@@ -42,4 +43,3 @@ local.karma.conf.js
 /resources/
 android/
 config.xml
-src/firebase-messaging-sw.js.dist

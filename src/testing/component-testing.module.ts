@@ -10,6 +10,8 @@ import { SharedModule } from '@app/shared/shared.module';
 import { StoreModule } from '@app/store/store.module';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,6 +41,8 @@ const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot()];
     IpnfDataService,
     Geolocation,
     LocationAccuracy,
+    SplashScreen,
+    StatusBar,
   ],
 })
 export class ComponentTestingModule {}

@@ -9,3 +9,4 @@ export * from './loading-indicator.service';
 export * from './title.service';
 export * from './platform.service';
 export * from './toast.service';
+export * from './firebase.service';
