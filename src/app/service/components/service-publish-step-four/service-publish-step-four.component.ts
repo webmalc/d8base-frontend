@@ -5,8 +5,7 @@ import { RegistrationService } from '@app/auth/services/registration.service';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
-import { AppValidators } from '@app/core/validators/app.validators';
-import { confirmPasswordValidator, passwordValidators } from '@app/core/validators/password-validators';
+import * as AppValidators from '@app/core/validators';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
@@ -103,13 +102,13 @@ export class ServicePublishStepFourComponent {
         [this.formFields.Email]: [null, Validators.compose([Validators.required, AppValidators.email])],
         [this.formFields.FirstName]: ['', Validators.required],
         [this.formFields.LastName]: [''],
-        [this.formFields.Password]: ['', passwordValidators],
-        [this.formFields.Confirm]: ['', passwordValidators],
+        [this.formFields.Password]: ['', AppValidators.passwordValidators],
+        [this.formFields.Confirm]: ['', AppValidators.passwordValidators],
         [this.formFields.Country]: [null, Validators.required],
         [this.formFields.City]: [null, Validators.required],
       },
       {
-        validators: confirmPasswordValidator(
+        validators: AppValidators.confirmPasswordValidator(
           ServicePublishStepFourFormFields.Password,
           ServicePublishStepFourFormFields.Confirm,
         ),

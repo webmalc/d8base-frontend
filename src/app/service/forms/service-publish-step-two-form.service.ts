@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Price } from '@app/api/models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { minimumDescriptionLength } from '@app/core/constants/service.constants';
 import { ServicePublishStepTwoFormFields } from '@app/service/enums/service-publish-step-two-form-fields';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
+import * as AppValidators from '@app/core/validators';
 
 @Injectable()
 export class ServicePublishStepTwoFormService {
@@ -19,35 +19,12 @@ export class ServicePublishStepTwoFormService {
         Validators.minLength(minimumDescriptionLength),
       ],
       [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
-      [ServicePublishStepTwoFormFields.Price]: [data?.price, this.checkPricesValidator],
+      [ServicePublishStepTwoFormFields.Price]: [data?.price, AppValidators.price],
       [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
     });
   }
 
   public isSubmitDisabled(): boolean {
     return this.form.invalid;
-  }
-
-  private checkPricesValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value as Partial<Price>;
-    const isPriceFixed = value?.is_price_fixed;
-    if (!isPriceFixed) {
-      const startPrice = value?.start_price;
-      const endPrice = value?.end_price;
-
-      if (!startPrice && !endPrice) {
-        return { required: true };
-      }
-
-      if (parseFloat(startPrice) >= parseFloat(endPrice)) {
-        return { priceError: true };
-      }
-    }
-
-    if (!value?.price) {
-      return { required: true };
-    }
-
-    return null;
   }
 }
