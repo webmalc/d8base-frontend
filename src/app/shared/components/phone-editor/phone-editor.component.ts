@@ -25,7 +25,13 @@ export class PhoneEditorComponent implements ControlValueAccessor {
   public phoneControl = new FormControl();
   public countryControl = new FormControl(DEFAULT_COUNTRY);
   public previousPhoneValue: string = '';
-  public countries$ = this.countriesApi.list();
+  public countries$ = this.countriesApi
+    .list()
+    .pipe(
+      map(countries =>
+        countries.map(country => ({ ...country, name: `${country.name} ${this.plusSignEnforce(country.phone)}` })),
+      ),
+    );
   public title = 'location-edit-page.country';
   private readonly writeValue$ = new BehaviorSubject<Phone>(null);
   private onChange: (value: string) => void;
@@ -38,7 +44,6 @@ export class PhoneEditorComponent implements ControlValueAccessor {
   ) {
     this.subscribeControlValuesChanges();
     this.subscribeWriteValue();
-
   }
 
   public registerOnChange(fn: any): void {
