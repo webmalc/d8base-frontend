@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { FormControlErrorComponent } from '@app/shared/components/form-control-error/form-control-error.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,9 +11,6 @@ import { LoginFormComponent } from './login-form.component';
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
-  let router: Router;
-  // Ionic Angular was already initialized. Make sure IonicModule is just called once.
-  // But if remove 'forRoot()' - test submit login form don't pass. Magick!
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -45,7 +41,9 @@ describe('LoginFormComponent', () => {
 
     spyOn(component.user, 'emit');
 
-    fixture.debugElement.nativeElement.querySelector('[type="submit"]').click();
-    expect(component.user.emit).toHaveBeenCalledWith(user);
+    const submitButton: HTMLIonButtonElement = fixture.debugElement.nativeElement.querySelector('[type="submit"]');
+    expect(submitButton).toBeTruthy();
+    submitButton.click();
+    expect(component.user.emit).toHaveBeenCalledOnceWith(user);
   });
 });
