@@ -6,6 +6,7 @@ import { NgDestroyService } from '@app/core/services';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { normalizeString } from '@app/core/functions/string.functions';
 import { ItemSelectorControl } from '../item-selector-control';
 
 const ITEM_HEIGHT = 47;
@@ -83,7 +84,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
               if (!search) {
                 params = { ...params, ordering: '-population' };
               } else {
-                params = { ...params, byName: this.prepareTextToSearch(search) };
+                params = { ...params, byName: normalizeString(search) };
               }
 
               return this.loadMore$.pipe(
@@ -131,10 +132,6 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
 
   private isCityInCountry(countryId: Country['id']): boolean {
     return countryId === this.initialValue?.country;
-  }
-
-  private prepareTextToSearch(text: string): string {
-    return text.trim().toLowerCase();
   }
 
   private resetPageCounter(): void {

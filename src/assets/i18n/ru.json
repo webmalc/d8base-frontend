@@ -801,10 +801,11 @@
     "passwordMismatch": "Пароли не совпадают.",
     "required": "Поле обязательно для заполнения.",
     "priceError": "Цена 'от' должна быть меньше цены 'до'.",
-    "emptyEndDate": "Не указана дата окончания",
-    "emptyStartDate": "Не указана дата начала",
-    "timeIntervalError": "Количество минут должно быть кратно {{ interval }}",
-    "timeCausalityError": "Время окончания должно быть больше, чем время начала"
+    "emptyEndDate": "Не указана дата окончания.",
+    "emptyStartDate": "Не указана дата начала.",
+    "timeIntervalError": "Количество минут должно быть кратно {{ interval }}.",
+    "timeCausalityError": "Время окончания должно быть больше, чем время начала.",
+    "whitespaces": "Поле не должно содержать пробелы."
   },
   "server-errors": {
     "unauthorized": "Доступ запрещён",
