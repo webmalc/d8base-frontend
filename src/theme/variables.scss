@@ -4,7 +4,6 @@
   @return red($hex), green($hex), blue($hex);
 }
 
-
 /** Ionic CSS Variables **/
 :root {
   --ion-background-color: #ffffff;
@@ -84,12 +83,12 @@
   --ion-color-light-tint: #a2a4ab;
 
   /** pale versions of primary colors (not used by Ionic) **/
-  --color-primary-pale: #E6FDFF;
-  --color-secondary-pale: #EEF5FF;
-  --color-tetriary-pale: #F5EFFF;
-  --color-success-pale: #E7FEF1;
-  --color-warning-pale: #FFFBE9;
-  --color-danger-pale: #FFEFF0;
+  --color-primary-pale: #e6fdff;
+  --color-secondary-pale: #eef5ff;
+  --color-tetriary-pale: #f5efff;
+  --color-success-pale: #e7fef1;
+  --color-warning-pale: #fffbe9;
+  --color-danger-pale: #ffeff0;
 }
 
 .dark-theme {
@@ -156,7 +155,7 @@
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
 
-  --color-success-pale: #273E31;
+  --color-success-pale: #273e31;
 }
 
 /*

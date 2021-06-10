@@ -19,10 +19,7 @@ describe('SearchPage', () => {
           ComponentTestingModule,
           RouterTestingModule.withRoutes([{ path: 'search', component: AppTestComponent }]),
         ],
-        providers: [
-          SearchService,
-          SearchFilterStateService,
-        ],
+        providers: [SearchService, SearchFilterStateService],
       }).compileComponents();
 
       fixture = TestBed.createComponent(SearchPage);

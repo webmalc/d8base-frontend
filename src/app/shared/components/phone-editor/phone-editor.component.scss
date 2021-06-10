@@ -1,11 +1,11 @@
 .phone-input-container {
-    display: flex;
-    justify-content: flex-start;
-    align-content: stretch;
-    .country-selector {
-        flex-grow: 1;
-    }
-    .phone-input {
-        flex-grow: 3;
-    }
+  display: flex;
+  justify-content: flex-start;
+  align-content: stretch;
+  .country-selector {
+    flex-grow: 1;
+  }
+  .phone-input {
+    flex-grow: 3;
+  }
 }

@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { LoadingErrorComponent } from './loading-error.component';
 
-
 describe('LoadingErrorComponent', () => {
   let component: LoadingErrorComponent;
   let fixture: ComponentFixture<LoadingErrorComponent>;

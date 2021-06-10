@@ -7,4 +7,3 @@ export interface IfSpinnerConfigurationInterface {
 export const IF_SPINNER_MODULE_CONFIG_TOKEN = new InjectionToken<IfSpinnerConfigurationInterface>(
   'IfSpinner module config token',
 );
-

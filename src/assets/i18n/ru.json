@@ -190,7 +190,7 @@
     "email": "E-меил подтвержден",
     "email-not-confirmed": "E-меил НЕ подтвержден",
     "email-verification-sent": "Подтверждение адреса электронной почты отправлено на '{{ email }}'",
-    "email-change" : {
+    "email-change": {
       "email-registered": "Письмо с подтверждением нового адреса электронной почты было направлено на '{{ newEmail }}'",
       "email-verified-success": "Адрес электронной почты изменен на '{{ newEmail }}'",
       "email-verified-failure": "Адрес электронной почты не удалось изменить",

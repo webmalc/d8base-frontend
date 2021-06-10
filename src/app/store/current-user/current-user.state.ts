@@ -47,7 +47,6 @@ export class CurrentUserState implements NgxsOnInit {
     private readonly storage: Storage,
     private readonly client: ApiClientService,
     private readonly servicePublicationState: ServicePublishDataHolderService,
-    private readonly locationService: CurrentPositionService,
   ) {}
 
   public ngxsOnInit(context: StateContext<CurrentUserStateModel>): void {
@@ -281,7 +280,7 @@ export class CurrentUserState implements NgxsOnInit {
     const { email, user_id } = verifyEmail;
 
     if (profile.id !== parseInt(user_id, 10)) {
-      throw Error('Try to change another\'s user email');
+      throw Error("Try to change another's user email");
     }
 
     return this.api.accountsVerifyEmailCreate(verifyEmail).pipe(

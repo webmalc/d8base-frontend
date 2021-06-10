@@ -30,11 +30,6 @@ import { ProfilePage } from './profile.page';
     IonicSelectableModule,
   ],
   declarations: [ProfilePage, UserContactEditComponent, UserEditComponent, AboutEditComponent, ChangeEmailComponent],
-  providers: [
-    PluginApiService,
-    UserContactApiService,
-    SavedProfessionalApiService,
-    RegisterEmailApiService,
-  ],
+  providers: [PluginApiService, UserContactApiService, SavedProfessionalApiService, RegisterEmailApiService],
 })
 export class ProfilePageModule {}

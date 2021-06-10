@@ -73,7 +73,10 @@
       <ion-row class="ion-justify-content-center subtitle-bold ion-padding-vertical ion-margin-top">
         {{'main-page.service-categories'|translate}}
       </ion-row>
-      <ion-row *appIfSpinner="defaultCategories$ | ifSpinnerErrorState | async as defaultCategories" class="categories-container">
+      <ion-row
+        *appIfSpinner="defaultCategories$ | ifSpinnerErrorState | async as defaultCategories"
+        class="categories-container"
+      >
         <app-category-icon
           *ngFor="let category of defaultCategories"
           [icon]="category.code"

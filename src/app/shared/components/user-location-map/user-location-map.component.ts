@@ -68,7 +68,7 @@ export class UserLocationMapComponent implements OnInit, ControlValueAccessor {
     this.clientCoordinates = data;
   }
 
-    /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
+  /* eslint-disable no-empty, @typescript-eslint/no-empty-function */
   public setDisabledState(isDisabled: boolean): void {}
 
   private invalidateSize(): void {

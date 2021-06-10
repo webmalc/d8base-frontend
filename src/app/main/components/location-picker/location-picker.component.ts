@@ -17,7 +17,7 @@ export class LocationPickerComponent {
   constructor(private readonly pop: PopoverController) {}
 
   public async initPopover(): Promise<void> {
-    if(!this.enabled) {
+    if (!this.enabled) {
       return;
     }
     const pop = await this.pop.create({

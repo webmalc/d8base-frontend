@@ -21,7 +21,12 @@ export class RegistrationFormComponent {
       [RegistrationFormFields.City]: [null, Validators.required],
       [RegistrationFormFields.Phone]: [null],
     },
-    { validators: AppValidators.confirmPasswordValidator(RegistrationFormFields.Password, RegistrationFormFields.Confirm) },
+    {
+      validators: AppValidators.confirmPasswordValidator(
+        RegistrationFormFields.Password,
+        RegistrationFormFields.Confirm,
+      ),
+    },
   );
   public readonly formFields = RegistrationFormFields;
 
