@@ -8,6 +8,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { of, throwError } from 'rxjs';
 import { GCMDevice } from '@app/api/models/gcmdevice';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CurrentUser } from '@app/store/facades';
 
 function newDevice(registrationId: string): GCMDevice {
   return {
@@ -25,18 +26,19 @@ export class FirebaseService {
     private readonly swPush: SwPush,
     private readonly swUpdate: SwUpdate,
     private readonly communicationsApi: CommunicationService,
+    private readonly currentUser: CurrentUser,
     @Inject(WINDOW) private readonly window: Window,
   ) {
-    this.requestPermission();
+    this.subscribeToUser();
     this.subscribeToMessages();
     this.subscribeToSwUpdate();
   }
 
-  private requestPermission(): void {
-    this.firebaseMessaging.requestToken.subscribe(
+  private subscribeToUser(): void {
+    this.currentUser.whenAuthenticated$.pipe(switchMap(() => this.firebaseMessaging.requestToken)).subscribe(
       token => this.updateFcmInfo(token),
       error => {
-        console.error('Firebase initialization failed!', error.message);
+        console.warn('Firebase initialization failed.', error.message);
       },
     );
   }
@@ -46,7 +48,9 @@ export class FirebaseService {
       .communicationDevicesFcmRead(registrationId)
       .pipe(
         catchError((error: HttpErrorResponse) =>
-          error.status === 404 ? this.communicationsApi.communicationDevicesFcmCreate(newDevice(registrationId)) : throwError(error),
+          error.status === 404
+            ? this.communicationsApi.communicationDevicesFcmCreate(newDevice(registrationId))
+            : throwError(error),
         ),
         switchMap(device =>
           device.active
