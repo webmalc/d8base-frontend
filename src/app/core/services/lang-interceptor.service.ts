@@ -1,6 +1,5 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserSettings } from '@app/api/models';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
 import { Select } from '@ngxs/store';
@@ -9,8 +8,8 @@ import { first, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class LangInterceptorService implements HttpInterceptor {
-  @Select(CurrentUserSelectors.settings)
-  public readonly settings$: Observable<UserSettings>;
+  @Select(CurrentUserSelectors.language)
+  public readonly language$: Observable<string>;
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     try {
@@ -25,11 +24,11 @@ export class LangInterceptorService implements HttpInterceptor {
       return next.handle(req);
     }
 
-    return this.settings$.pipe(
-      first(),
-      switchMap(settings => {
+    return this.language$.pipe(
+      first(language => Boolean(language)),
+      switchMap(language => {
         const url = new URL(req.url);
-        const lang = settings?.language || environment.default_lang;
+        const lang = language;
         const newUrl = `${url.origin}/${lang}${url.pathname}`;
         const headers = req.headers.append('Accept-Language', lang);
 
@@ -39,6 +38,11 @@ export class LangInterceptorService implements HttpInterceptor {
   }
 
   private getExcludedUrls(): string[] {
-    return [environment.backend.url + environment.backend.auth, environment.backend.url + environment.backend.refresh];
+    return [
+      environment.backend.url + environment.backend.auth,
+      environment.backend.url + environment.backend.refresh,
+      environment.backend.url + environment.backend.user_settings,
+      environment.backend.url + environment.backend.user,
+    ];
   }
 }

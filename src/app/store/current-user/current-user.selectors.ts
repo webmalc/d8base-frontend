@@ -42,7 +42,7 @@ export default class CurrentUserSelectors {
 
   @Selector([CurrentUserSelectors.settings])
   public static language(data: UserSettings): string {
-    return data.language;
+    return data?.language;
   }
 
   @Selector([CurrentUserState])

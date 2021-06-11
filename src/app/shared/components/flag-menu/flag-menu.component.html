@@ -12,7 +12,7 @@
   <ion-list>
     <ion-item>
       <ion-label> {{ 'flag-menu.language' | translate }}: </ion-label>
-      <ion-select (ionChange)="userSettingsService.setLanguage($event.detail.value)" [value]="userSettings?.language">
+      <ion-select [formControl]="languageControl">
         <ion-select-option *ngFor="let lang of userSettingsService.langList" value="{{ lang }}">
           {{ lang }}
         </ion-select-option>
@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item *appIfSpinner="rateList$ | async as rateList">
       <ion-label> {{ 'flag-menu.currency' | translate }}: </ion-label>
-      <ion-select (ionChange)="userSettingsService.setCurrency($event.detail.value)" [value]="userSettings?.currency">
+      <ion-select [formControl]="form.controls[formFields.currency]">
         <ion-select-option *ngFor="let rate of rateList" [value]="rate.currency">
           {{ rate.currency }} ({{ rate.sign }})
         </ion-select-option>
@@ -28,7 +28,7 @@
     </ion-item>
     <ion-item>
       <ion-label> {{ 'flag-menu.units' | translate }}: </ion-label>
-      <ion-select (ionChange)="userSettingsService.setUnits($event.detail.value)" [value]="userSettings?.units">
+      <ion-select [formControl]="form.controls[formFields.units]">
         <ion-select-option *ngFor="let unit of userSettingsService.unitsList" [value]="unit">
           {{ 'units.' + unit | translate | titlecase }}
         </ion-select-option>
@@ -36,10 +36,7 @@
     </ion-item>
     <ion-item>
       <ion-label> {{ 'flag-menu.first-day-of-week' | translate }}: </ion-label>
-      <ion-select
-        (ionChange)="userSettingsService.setFirstDayOfWeek($event.detail.value)"
-        [value]="userSettings?.is_monday_start_of_a_week"
-      >
+      <ion-select [formControl]="form.controls[formFields.is_monday_start_of_a_week]">
         <ion-select-option *ngFor="let day of userSettingsService.firstDayOfWeekList" [value]="day">
           {{ (day ? 'flag-menu.monday' : 'flag-menu.sunday') | translate }}
         </ion-select-option>

@@ -79,6 +79,12 @@ export class ChangeUserSettings {
   constructor(public changes: Partial<UserSettings>) {}
 }
 
+export class ChangeUserSettingsLanguage {
+  public static readonly type = '[CurrentUser] Change user settings language';
+
+  constructor(public newLanguage: UserSettings['language']) {}
+}
+
 export class UpdateProfile {
   public static readonly type = '[CurrentUser] Change user profile';
 

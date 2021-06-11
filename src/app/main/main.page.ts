@@ -24,8 +24,8 @@ import { convertCategoryCodeToFaIconCode } from './enums/default-category-list';
 export class MainPage implements OnInit {
   @Select(UserLocationSelectors.defaultLocation)
   public defaultLocation$: Observable<UserLocation>;
-  @Select(CurrentUserSelectors.settings)
-  public settings$: Observable<UserSettings>;
+  @Select(CurrentUserSelectors.language)
+  public language$: Observable<string>;
 
   public defaultCategories$: Observable<Category[]>;
 
@@ -72,9 +72,8 @@ export class MainPage implements OnInit {
   }
 
   public initDefaultCategories(): void {
-    this.defaultCategories$ = this.settings$.pipe(
-      filter(settings => Boolean(settings)),
-      map(settings => settings.language),
+    this.defaultCategories$ = this.language$.pipe(
+      filter(language => Boolean(language)),
       distinctUntilChanged(),
       switchMap(() => this.defaultCategory.getList()),
       map(categories =>
