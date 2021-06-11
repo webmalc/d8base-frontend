@@ -30,14 +30,12 @@ export class ServicePublishAuthStateManagerService {
   }
 
   private update(isNewMaster: boolean): void {
-    this.userManager
-      .getCurrentUser()
-      .subscribe(user =>
-        this.servicePublishDataHolder.setStepData<StepFourDataInterface>(ServicePublishSteps.Four, {
-          isNewMaster,
-          user,
-          isNewUser: false,
-        }),
-      );
+    this.userManager.getCurrentUser().subscribe(user =>
+      this.servicePublishDataHolder.setStepData<StepFourDataInterface>(ServicePublishSteps.Four, {
+        isNewMaster,
+        user,
+        isNewUser: false,
+      }),
+    );
   }
 }

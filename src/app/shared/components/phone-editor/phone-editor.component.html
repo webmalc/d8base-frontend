@@ -18,9 +18,7 @@
         <span class="flag-icon flag-icon-{{ value?.tld }}"></span> {{ plusSignEnforce(value?.phone) }}</ng-template
       >
       <ng-template ionicSelectableItemTemplate let-item="item">
-        <div>
-          <span class="flag-icon flag-icon-{{ item?.tld }}"></span> {{ item?.name }}
-        </div>
+        <div><span class="flag-icon flag-icon-{{ item?.tld }}"></span> {{ item?.name }}</div>
       </ng-template>
     </ionic-selectable>
   </ion-item>

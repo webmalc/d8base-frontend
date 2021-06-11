@@ -16,7 +16,6 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, concatMap, switchMap, takeUntil, tap } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-infinite-scroll-container',
   templateUrl: './infinite-scroll-container.component.html',

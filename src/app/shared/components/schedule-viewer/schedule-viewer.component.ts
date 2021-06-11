@@ -26,7 +26,9 @@ export class ScheduleViewerComponent {
   @Input()
   public set schedule(schedule: ScheduleUnion[]) {
     this.isMondayFirstDayOfWeek$.pipe(takeUntil(this.destroy$)).subscribe(isMondayFirstDayOfWeek => {
-      this._schedule = schedule.filter(x => x.is_enabled).sort(dayOfWeekSorter(mondayOrSundayOrder(isMondayFirstDayOfWeek)));
+      this._schedule = schedule
+        .filter(x => x.is_enabled)
+        .sort(dayOfWeekSorter(mondayOrSundayOrder(isMondayFirstDayOfWeek)));
     });
   }
 

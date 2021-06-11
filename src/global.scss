@@ -10,20 +10,20 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
 :root {
   --service-photo-thumb-size: 72px;
@@ -36,13 +36,13 @@
 }
 
 .label-for-required-input::after {
-  content: "*";
+  content: '*';
   color: red;
-  margin-left: .1em;
+  margin-left: 0.1em;
 }
 
 .ion-item-default-bgc {
-  --background: var(--ion-background-color)
+  --background: var(--ion-background-color);
 }
 
 .map-popover-width {
@@ -315,8 +315,8 @@
   --inner-padding-start: 0;
   --padding-start: 0;
   padding: 8px 12px;
-  background-color: #EEF5FF;
-  --ion-item-background: #EEF5FF;
+  background-color: #eef5ff;
+  --ion-item-background: #eef5ff;
   border-radius: 16px;
   margin: 2px 7px;
   font-size: 12px;

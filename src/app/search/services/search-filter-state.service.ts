@@ -100,20 +100,17 @@ export class SearchFilterStateService {
       this.searchForm.get([this.formGroups.price, this.formFields.price.end]),
     ];
 
-    this.searchForm
-      .get([this.formGroups.price, this.formFields.price.currency])
-      .valueChanges
-      .subscribe(value => {
-        if (!value) {
-          priceInputs.forEach(input => {
-            input.reset();
-            input.disable();
-          });
-          return;
-        }
+    this.searchForm.get([this.formGroups.price, this.formFields.price.currency]).valueChanges.subscribe(value => {
+      if (!value) {
         priceInputs.forEach(input => {
-          input.enable();
+          input.reset();
+          input.disable();
         });
+        return;
+      }
+      priceInputs.forEach(input => {
+        input.enable();
       });
+    });
   }
 }

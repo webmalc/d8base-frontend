@@ -25,7 +25,6 @@ export const emptyTokens: AuthResponseInterface = {
   refresh_token: null,
 };
 
-
 export const guestState: CurrentUserStateModel = {
   profile: {},
   tokens: emptyTokens,
