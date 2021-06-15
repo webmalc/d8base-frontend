@@ -9,20 +9,20 @@ export const defaultSettings: UserSettings = {
   language: environment.default_lang as UserSettings['language'],
 };
 
-export const notLoadedState: CurrentUserStateModel = {
-  profile: null,
-  tokens: null,
-  professionals: null,
-  settings: defaultSettings,
-  errors: null,
-};
-
 export const emptyTokens: AuthResponseInterface = {
   access_token: null,
   expires_in: 0,
   token_type: null,
   scope: null,
   refresh_token: null,
+};
+
+export const notLoadedState: CurrentUserStateModel = {
+  profile: null,
+  tokens: emptyTokens,
+  professionals: null,
+  settings: { ...defaultSettings, language: null },
+  errors: null,
 };
 
 export const guestState: CurrentUserStateModel = {

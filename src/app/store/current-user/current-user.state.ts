@@ -1,19 +1,19 @@
 /*eslint max-lines: ["error", 500]*/
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { GrantTypes } from '@app/auth/enums/grant-types';
 import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { WINDOW } from '@app/core/injection-tokens';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
 import { ApiClientService } from '@app/core/services/api-client.service';
-import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
 import { environment } from '@env/environment';
 import { Storage } from '@ionic/storage';
 import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
-import { from, Observable, of, throwError } from 'rxjs';
+import { forkJoin, from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
@@ -23,8 +23,8 @@ import { UserSavedProfessionalState } from './saved-professionals/saved-professi
 import * as UserContactActions from './user-contacts/user-contacts.actions';
 import { UserContactState } from './user-contacts/user-contacts.state';
 import { UserLanguageState } from './user-language-state/user-language.state';
-import { UserLocationState } from './user-locations/user-locations.state';
 import * as UserLocationActions from './user-locations/user-locations.actions';
+import { UserLocationState } from './user-locations/user-locations.state';
 
 const TOKEN_OBTAIN_URL = environment.backend.auth;
 const TOKEN_DATA_STORAGE_KEY = 'api_token_data';
@@ -47,6 +47,7 @@ export class CurrentUserState implements NgxsOnInit {
     private readonly storage: Storage,
     private readonly client: ApiClientService,
     private readonly servicePublicationState: ServicePublishDataHolderService,
+    @Inject(WINDOW) private readonly window: Window,
   ) {}
 
   public ngxsOnInit(context: StateContext<CurrentUserStateModel>): void {
@@ -58,7 +59,6 @@ export class CurrentUserState implements NgxsOnInit {
     return from(this.storage.get(TOKEN_DATA_STORAGE_KEY)).pipe(
       tap(tokens => {
         if (!tokens) {
-          patchState(guestState);
           dispatch(new CurrentUserActions.RestoreSettingsLocal());
         } else {
           patchState({ tokens });
@@ -183,7 +183,9 @@ export class CurrentUserState implements NgxsOnInit {
     return from(this.storage.get(USER_SETTINGS_STORAGE_KEY)).pipe(
       tap(settings => {
         if (settings) {
-          patchState({ settings });
+          patchState({ ...guestState, settings });
+        } else {
+          patchState(guestState);
         }
       }),
     );
@@ -209,6 +211,30 @@ export class CurrentUserState implements NgxsOnInit {
     dispatch(new CurrentUserActions.StoreSettingsLocal(newSettings));
 
     patchState({ settings: newSettings });
+  }
+
+  @Action(CurrentUserActions.ChangeUserSettingsLanguage)
+  public saveUserSettingsLanguage(
+    { getState, dispatch, patchState }: StateContext<CurrentUserStateModel>,
+    { newLanguage }: CurrentUserActions.ChangeUserSettingsLanguage,
+  ) {
+    const state = getState();
+    const isAuthentificated = isAuthenticated(state);
+    const { settings } = state;
+    const id = settings?.id;
+    const newSettings = { ...settings, language: newLanguage };
+    patchState({ settings: newSettings });
+
+    const saveLanguage$ = id
+      ? this.api.accountsSettingsUpdate({ id, data: newSettings })
+      : this.api.accountsSettingsCreate(newSettings);
+
+    forkJoin([
+      dispatch(new CurrentUserActions.StoreSettingsLocal(newSettings)),
+      ...(isAuthentificated ? [saveLanguage$] : []),
+    ]).subscribe(() => {
+      this.window.location.reload();
+    });
   }
 
   @Action(CurrentUserActions.SaveSettings)

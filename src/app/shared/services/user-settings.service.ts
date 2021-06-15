@@ -29,24 +29,12 @@ export class UserSettingsService {
   }
 
   @Dispatch()
-  public setCurrency(currency: UserSettings['currency']): CurrentUserActions.ChangeUserSettings {
-    return new CurrentUserActions.ChangeUserSettings({ currency });
+  public saveSettings(newSettings: Partial<UserSettings>): CurrentUserActions.ChangeUserSettings {
+    return new CurrentUserActions.ChangeUserSettings(newSettings);
   }
 
   @Dispatch()
-  public setLanguage(language: UserSettings['language']): CurrentUserActions.ChangeUserSettings {
-    return new CurrentUserActions.ChangeUserSettings({ language });
-  }
-
-  @Dispatch()
-  public setUnits(units: UserSettings['units']): CurrentUserActions.ChangeUserSettings {
-    return new CurrentUserActions.ChangeUserSettings({ units });
-  }
-
-  @Dispatch()
-  public setFirstDayOfWeek(
-    is_monday_start_of_a_week: UserSettings['is_monday_start_of_a_week'],
-  ): CurrentUserActions.ChangeUserSettings {
-    return new CurrentUserActions.ChangeUserSettings({ is_monday_start_of_a_week });
+  public saveSettingsLanguage(newLanguage: UserSettings['language']): CurrentUserActions.ChangeUserSettingsLanguage {
+    return new CurrentUserActions.ChangeUserSettingsLanguage(newLanguage);
   }
 }
