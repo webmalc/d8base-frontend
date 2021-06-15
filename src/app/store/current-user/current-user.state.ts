@@ -173,7 +173,11 @@ export class CurrentUserState implements NgxsOnInit {
       tap(response => {
         const settings = response.results[0];
         dispatch(new CurrentUserActions.StoreSettingsLocal(settings));
-        patchState({ settings });
+        if (settings) {
+          patchState({ settings });
+        } else {
+          patchState({ settings: guestState.settings });
+        }
       }),
     );
   }
