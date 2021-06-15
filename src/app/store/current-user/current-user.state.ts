@@ -59,7 +59,6 @@ export class CurrentUserState implements NgxsOnInit {
     return from(this.storage.get(TOKEN_DATA_STORAGE_KEY)).pipe(
       tap(tokens => {
         if (!tokens) {
-          // patchState(guestState);
           dispatch(new CurrentUserActions.RestoreSettingsLocal());
         } else {
           patchState({ tokens });
@@ -184,7 +183,7 @@ export class CurrentUserState implements NgxsOnInit {
     return from(this.storage.get(USER_SETTINGS_STORAGE_KEY)).pipe(
       tap(settings => {
         if (settings) {
-          patchState({ settings });
+          patchState({ ...guestState, settings });
         } else {
           patchState(guestState);
         }
@@ -232,7 +231,7 @@ export class CurrentUserState implements NgxsOnInit {
 
     forkJoin([
       dispatch(new CurrentUserActions.StoreSettingsLocal(newSettings)),
-      ...isAuthentificated ? [saveLanguage$] : [],
+      ...(isAuthentificated ? [saveLanguage$] : []),
     ]).subscribe(() => {
       this.window.location.reload();
     });

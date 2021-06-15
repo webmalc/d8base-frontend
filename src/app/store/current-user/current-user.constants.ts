@@ -21,10 +21,9 @@ export const notLoadedState: CurrentUserStateModel = {
   profile: null,
   tokens: emptyTokens,
   professionals: null,
-  settings: null,
+  settings: { ...defaultSettings, language: null },
   errors: null,
 };
-
 
 export const guestState: CurrentUserStateModel = {
   profile: {},

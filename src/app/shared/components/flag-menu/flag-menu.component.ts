@@ -13,7 +13,7 @@ enum FlagMenuFormFields {
   currency = 'currency',
   units = 'units',
   is_monday_start_of_a_week = 'is_monday_start_of_a_week',
-};
+}
 
 @Component({
   selector: 'app-flag-menu',
@@ -47,20 +47,20 @@ export class FlagMenuComponent {
   }
 
   private subscribeUserSettings(): void {
-    this.userSettingsService.userSettings$.pipe(takeUntil(this.destroy$)).subscribe((userSettings) => {
+    this.userSettingsService.userSettings$.pipe(takeUntil(this.destroy$)).subscribe(userSettings => {
       this.form.patchValue(userSettings, { emitEvent: false });
       this.languageControl.setValue(userSettings.language, { emitEvent: false });
     });
   }
 
   private subscribeFormValueChanges(): void {
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((changes) => {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(changes => {
       this.userSettingsService.saveSettings(changes);
     });
   }
 
   private subscribeLanguageControlValueChanges(): void {
-    this.languageControl.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((changes) => {
+    this.languageControl.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(changes => {
       this.userSettingsService.saveSettingsLanguage(changes);
     });
   }
