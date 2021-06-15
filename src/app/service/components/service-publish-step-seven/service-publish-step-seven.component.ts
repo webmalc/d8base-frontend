@@ -165,12 +165,12 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(
       ServicePublishSteps.Seven,
     );
-    this.initSchedules(stepData);
     if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Seven)) {
       this.formService.createForm(stepData);
     } else {
       this.formService.createForm();
     }
+    this.initSchedules(stepData);
     this.disableIrrelevantControls();
     this.initDefaultUnits();
     this.initMaxDistance();
