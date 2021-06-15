@@ -19,7 +19,7 @@ export const emptyTokens: AuthResponseInterface = {
 
 export const notLoadedState: CurrentUserStateModel = {
   profile: null,
-  tokens: emptyTokens,
+  tokens: null,
   professionals: null,
   settings: { ...defaultSettings, language: null },
   errors: null,
