@@ -13,7 +13,7 @@
       (keydown.escape)="search('')"
       placeholder="{{ 'messages.chat-list-page.search' | translate }}"
     ></ion-searchbar>
-    <ng-container *appIfSpinner="chatsService.chatList$ | ifSpinnerErrorState | async as chatList">
+    <ng-container *appIfSpinner="chatsService.chatList$ | async as chatList">
       <ion-list>
         <ion-label *ngIf="!chatList.length">
           {{ 'messages.chat-list-page.empty-list' | translate }}
