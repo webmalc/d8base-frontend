@@ -24,8 +24,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   @ViewChild(IonContent, { read: IonContent, static: false }) public content: IonContent;
   @ViewChild('bottomPoint', { read: ElementRef }) public bottom: ElementRef<HTMLElement>;
   @ViewChild('sentMenu', { read: ElementRef }) public sentMenu: ElementRef<HTMLElement>;
-  public showContextIndex;
-  public isUpdate: boolean = false;
+  public editingMode: boolean = false;
   public interlocutorData$: Observable<AbstractMessage>;
   private updateMessageId: number;
   private deleteSubscription: Subscription;
@@ -62,8 +61,8 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   }
 
   public cancelUpdate(): void {
-    if (this.isUpdate) {
-      this.isUpdate = false;
+    if (this.editingMode) {
+      this.editingMode = false;
       this.directService.clearMessage();
     }
   }
@@ -82,10 +81,6 @@ export class DirectComponent extends Reinitable implements OnDestroy {
       messageElement.style.backgroundColor = `rgba(12,209,232,${i})`;
       i -= 0.05;
     }, 100);
-  }
-
-  public resetContext(): void {
-    this.showContextIndex = undefined;
   }
 
   public initMessageMenuContext(event: MouseEvent, message: Message): void {
@@ -107,8 +102,8 @@ export class DirectComponent extends Reinitable implements OnDestroy {
   }
 
   public send(): void {
-    this.isUpdate ? this.directService.update(this.updateMessageId) : this.directService.send();
-    this.isUpdate = false;
+    this.editingMode ? this.directService.update(this.updateMessageId) : this.directService.send();
+    this.editingMode = false;
     this.updateMessageId = undefined;
   }
 
@@ -157,7 +152,7 @@ export class DirectComponent extends Reinitable implements OnDestroy {
               first(),
             )
             .subscribe((mes: Message) => {
-              this.isUpdate = true;
+              this.editingMode = true;
               this.directService.updateMessage = mes;
               this.directService.defaultUpdateMessage = mes.body;
               this.updateMessageId = mes.id;
