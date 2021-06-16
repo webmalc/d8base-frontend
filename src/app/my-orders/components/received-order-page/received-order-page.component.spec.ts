@@ -3,7 +3,6 @@ import { ReceiverOrderStatusController } from '@app/my-orders/services';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ReceivedOrderPageComponent } from './received-order-page.component';
 
-
 describe('ReceivedOrderPageComponent', () => {
   let component: ReceivedOrderPageComponent;
   let fixture: ComponentFixture<ReceivedOrderPageComponent>;

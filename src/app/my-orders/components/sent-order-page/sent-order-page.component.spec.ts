@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SentOrderPageComponent } from './sent-order-page.component';
 
-
 describe('SentOrderPageComponent', () => {
   let component: SentOrderPageComponent;
   let fixture: ComponentFixture<SentOrderPageComponent>;

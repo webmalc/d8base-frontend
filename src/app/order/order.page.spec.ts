@@ -3,7 +3,6 @@ import { OrderWizardStateService } from '@app/order/services/order-wizard-state.
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { OrderPage } from './order.page';
 
-
 describe('OrderPage', () => {
   let component: OrderPage;
   let fixture: ComponentFixture<OrderPage>;
