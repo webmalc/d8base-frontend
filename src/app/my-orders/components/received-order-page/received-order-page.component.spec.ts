@@ -1,11 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ReceiverOrderStatusController } from '@app/my-orders/services';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ReceivedOrderPageComponent } from './received-order-page.component';
+
 
 describe('ReceivedOrderPageComponent', () => {
   let component: ReceivedOrderPageComponent;
@@ -15,7 +12,7 @@ describe('ReceivedOrderPageComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ReceivedOrderPageComponent],
-        imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [ReceiverOrderStatusController],
       }).compileComponents();
 

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 
 import { PriceEditorComponent } from './price-editor.component';
@@ -15,7 +16,7 @@ describe('PriceEditorComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PriceEditorComponent],
-        imports: [TranslateModule.forRoot(), IonicModule.forRoot(), HttpClientTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
       }).compileComponents();
 

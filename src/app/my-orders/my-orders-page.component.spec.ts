@@ -1,9 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from '../../testing/mocks';
 import { MyOrdersPageComponent } from './my-orders-page.component';
 
@@ -15,7 +12,7 @@ describe('MyOrdersPageComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MyOrdersPageComponent],
-        imports: [IonicModule.forRoot(), TranslateModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
       }).compileComponents();
 
