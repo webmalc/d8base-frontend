@@ -2,7 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
-    <ng-container *appIfSpinner="context$ | async as context">
+    <ng-container *appIfSpinner="context$ | ifSpinnerErrorState | async as context">
       <ion-row>
         <ion-col>
           <ion-list>

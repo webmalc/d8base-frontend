@@ -1,4 +1,4 @@
-<ng-container *appIfSpinner="currency$ | async as currency">
+<ng-container *appIfSpinner="currency$ | ifSpinnerErrorState | async as currency">
   <ion-item class="ion-item-bordered">
     <ng-container *ngIf="value.is_price_fixed; else priceInterval">
       <ion-label position="stacked">{{ 'service-publish.step-two.fixed-price-title' | translate }}</ion-label>

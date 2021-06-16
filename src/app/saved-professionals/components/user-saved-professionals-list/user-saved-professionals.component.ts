@@ -35,7 +35,7 @@ export class UserSavedProfessionalsListComponent implements OnInit {
         const professionals: ProfessionalList[] =
           this.professionals?.filter(({ id }) => professionalIds.includes(id)) ?? [];
 
-        if (professionalIdsToAdd.length) {
+        if (professionalIdsToAdd?.length) {
           return this.professionalsService
             .professionalsProfessionalsList({
               pkIn: (professionalIdsToAdd.join(',') as unknown) as number, // TODO fix swagger

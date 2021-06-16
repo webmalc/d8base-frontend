@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ng-container *appIfSpinner="order$ | async as order">
+    <ng-container *appIfSpinner="order$ | ifSpinnerErrorState | async as order">
       <ion-item color="light" lines="full">
         <ion-buttons slot="start">
           <ion-button routerLink="/my-orders/inbox" routerDirection="back">

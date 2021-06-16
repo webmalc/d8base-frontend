@@ -1,10 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
 import { NotificationWorkerService } from '@app/core/services/notification-worker.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { ChatListUpdaterService } from '../../services/chat-list-updater.service';
 import { ChatsCompilerService } from '../../services/chats-compiler.service';
@@ -22,7 +19,7 @@ describe('ChatsComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ChatsComponent],
-        imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule, TranslateModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           ChatsService,
           ChatsCompilerService,

@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ng-container *appIfSpinner="state$ | async as state">
+    <ng-container *appIfSpinner="state$ | ifSpinnerErrorState | async as state">
       <ion-item color="light" lines="full">
         <ion-buttons slot="start">
           <ion-button routerLink="/" routerDirection="back">
