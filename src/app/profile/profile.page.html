@@ -58,7 +58,7 @@
       </ion-label>
     </ion-item-divider>
     <app-contacts-edit
-      *appIfSpinner="contactsWithDefault$ | async as contacts"
+      *appIfSpinner="contactsWithDefault$  | ifSpinnerErrorState | async as contacts"
       [contacts]="contacts"
     ></app-contacts-edit>
     <ion-item-divider color="light">

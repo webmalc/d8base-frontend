@@ -5,7 +5,7 @@
       'contact-edit-page.contacts' | translate
     }}</app-column-header>
     <app-contact-edit
-      *appIfSpinner="contactItems$ | async as contactItems"
+      *appIfSpinner="contactItems$  | ifSpinnerErrorState | async as contactItems"
       [contact]="contact$ | async"
       [contactItems]="contactItems"
       (delete)="deleteContact($event)"

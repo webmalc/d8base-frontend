@@ -26,7 +26,7 @@
     </ion-list-header>
     <ng-container *ngIf="context.canEdit; else viewContacts">
       <app-contacts-edit
-        *appIfSpinner="contactsWithDefault$ | async as contacts"
+        *appIfSpinner="contactsWithDefault$ | ifSpinnerErrorState | async as contacts"
         [contacts]="contacts"
         addNewContactUrl="{{ addUrl }}"
         editContactUrl="{{ editUrl }}"

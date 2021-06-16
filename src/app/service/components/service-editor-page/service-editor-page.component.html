@@ -42,7 +42,7 @@
       <ion-text class="preserve-line-breaks">{{ service.description }}</ion-text>
     </ion-item>
     <app-image-carousel
-      *appIfSpinner="photos$ | async as photos"
+      *appIfSpinner="photos$ | ifSpinnerErrorState | async as photos"
       class="ion-margin-bottom"
       [photos]="photos"
     ></app-image-carousel>

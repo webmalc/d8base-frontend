@@ -2,7 +2,7 @@
 <ion-content>
   <app-content-wrapper>
     <app-column-header>{{ 'saved-professionals.title' | translate }}</app-column-header>
-    <ng-container *appIfSpinner="savedProfessionals$ | async as savedProfessionals">
+    <ng-container *appIfSpinner="savedProfessionals$ | ifSpinnerErrorState | async as savedProfessionals">
       <ng-container *ngIf="savedProfessionals.length; else empty">
         <app-professional-card
           *ngFor="let savedProfessional of savedProfessionals"
