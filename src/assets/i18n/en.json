@@ -412,8 +412,7 @@
     },
     "context-menu": {
       "edit": "Edit",
-      "delete-from-me": "Delete from me",
-      "delete": "Delete from me and from "
+      "delete": "Delete"
     }
   },
   "declination": {

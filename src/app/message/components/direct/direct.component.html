@@ -2,83 +2,78 @@
 <app-column-header [previousLocationFallback]="'/message'">
   <ng-container *ngIf="interlocutorData$ | async as interlocutorData">
     <ion-avatar slot="start">
-      <img src="{{ interlocutorData?.interlocutor_avatar_thumbnail }}" alt="avatar" />
+      <img [src]="getAvatar(interlocutorData)" alt="{{ interlocutorData.first_name }}" />
     </ion-avatar>
     <ion-label>
       <h3>
-        {{ interlocutorData?.interlocutor }}
+        {{ interlocutorData.first_name }}
+        {{ interlocutorData.last_name }}
       </h3>
     </ion-label>
   </ng-container>
 </app-column-header>
-<ion-content [scrollEvents]="true">
+<ion-content [scrollEvents]="true" #content>
   <app-content-wrapper>
     <div class="messages-container">
-      <ion-infinite-scroll threshold="800px" [disabled]="true" (ionInfinite)="loadData()" position="top">
+      <ion-infinite-scroll threshold="800px" [disabled]="true" position="top">
         <ion-infinite-scroll-content loadingText="{{ 'messages.direct.loading-text' | translate }}">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-      <div *ngFor="let message of directService.messages$ | async; let i = index">
-        <div class="ion-text-center" *ngIf="message.id && needToRenderDateString(i) | async">
-          {{ getDateString(message.created) }}
+      <div *ngFor="let chatItem of chat$ | async; trackBy: getChatItemId" #item>
+        <div class="ion-text-center" *ngIf="chatItem.type === 'date-separator'">
+          {{ chatItem.timestamp | date: 'MMMM d' }}
         </div>
-        <ng-container *ngIf="message.sender !== directService.currentUserId && directService.currentUserId">
-          <div class="message-container">
-            <div class="received-message message">
-              <div class="message-text">{{ message.body }}</div>
-            </div>
-            <div class="timestamp timestamp-received">
-              {{ timeFromDatetime(message.created) }}
-            </div>
+        <div class="message-container" *ngIf="chatItem.type === 'received'">
+          <div class="received-message message">
+            <div class="message-text">{{ chatItem.body }}</div>
           </div>
-        </ng-container>
-        <ng-container id="{{ message?.id }}"
-                      *ngIf="message.sender === directService.currentUserId && directService.currentUserId">
-          <div class="message-container" (contextmenu)="initMessageMenuContext($event, message)">
-            <div class="sent-message message">
-              <div class="message-text">{{ message.body }}</div>
-            </div>
-            <div class="timestamp timestamp-sent width100" *ngIf="message.id">
-              {{ timeFromDatetime(message.created) }}
-              <ion-icon
-                class="checkmark"
-                color="{{ getCheckmarkColor(message) }}"
-                name="checkmark-done-outline"
-              ></ion-icon>
-            </div>
-            <div class="timestamp timestamp-sent width100" *ngIf="!message.id">
-              <ion-icon name="time-outline"></ion-icon>
-            </div>
+          <div class="timestamp timestamp-received">
+            {{ chatItem.timestamp | date: 'shortTime' }}
           </div>
-        </ng-container>
+        </div>
+        <div
+          class="message-container"
+          id="{{ chatItem?.id }}"
+          *ngIf="chatItem.type === 'sent'"
+          (contextmenu)="showContextMenu($event, chatItem)"
+        >
+          <div class="sent-message message">
+            <div class="message-text">{{ chatItem.body }}</div>
+          </div>
+          <div class="timestamp timestamp-sent width100" *ngIf="chatItem.id">
+            {{ chatItem.timestamp | date: 'shortTime' }}
+            <ion-icon
+              class="checkmark"
+              color="success"
+              name="checkmark-done-outline"
+              *ngIf="chatItem.state === 'read'"
+            ></ion-icon>
+            <ion-icon
+              class="checkmark"
+              color="dark"
+              name="checkmark-done-outline"
+              *ngIf="chatItem.state === 'received'"
+            ></ion-icon>
+          </div>
+          <div class="timestamp timestamp-sent width100" *ngIf="!chatItem.id">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+        </div>
       </div>
-      <div #bottomPoint></div>
     </div>
   </app-content-wrapper>
 </ion-content>
 <ion-footer class="ion-no-border">
   <app-content-wrapper [preservePaddings]="true" style="overflow-y: scroll">
-    <ion-item
-      *ngIf="editingMode"
-      (click)="showUpdatingMessage()">
+    <ion-item *ngIf="editingMode">
       <ion-icon name="pencil-outline" slot="start"></ion-icon>
       <ion-label>{{ 'messages.direct.edit-message' | translate }}</ion-label>
-      <ion-icon name="close-outline" slot="end" (click)="cancelUpdate()"></ion-icon>
+      <ion-icon name="close-outline" slot="end" (click)="resetInput()"></ion-icon>
     </ion-item>
     <form (ngSubmit)="send()">
       <ion-item class="ion-item-bordered border-radius24">
-        <ion-input *ngIf="!editingMode" [(ngModel)]="directService.message" name="message"></ion-input>
-        <ion-input
-          *ngIf="editingMode"
-          [(ngModel)]="directService.updateMessage.body"
-          name="message"
-        ></ion-input>
-        <ion-button
-          type="submit"
-          fill="clear"
-          size="default"
-          [disabled]="editingMode ? !directService.updateMessage.body?.length : !directService.message?.length"
-        >
+        <ion-input [formControl]="formControl" name="message"></ion-input>
+        <ion-button type="submit" fill="clear" size="default" [disabled]="formControl.invalid">
           <ion-icon name="send-sharp"></ion-icon>
         </ion-button>
       </ion-item>

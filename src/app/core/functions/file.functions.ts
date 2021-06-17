@@ -6,3 +6,7 @@ export function fileToBase64(file: Blob) {
     reader.onerror = error => reject(error);
   });
 }
+
+export function getNoAvatarLink(): string {
+    return 'assets/images/profile/noavatar.jpeg';
+}

@@ -1,3 +1,5 @@
+import { getNoAvatarLink } from '../functions/file.functions';
+
 export class HelperService {
   public static getErrorListFromHttpErrorResponse(errorList: { [param: string]: string[] | string }): string[] {
     const result: string[] = [];
@@ -48,7 +50,7 @@ export class HelperService {
   }
 
   public static getNoAvatarLink(): string {
-    return 'assets/images/profile/noavatar.jpeg';
+    return getNoAvatarLink();
   }
 
   public static declination(num: number, words: string[]): string {

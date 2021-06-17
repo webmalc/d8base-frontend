@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList, Review, ServiceList } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { NavController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
@@ -35,7 +34,6 @@ export class EditReviewComponent implements OnInit, OnDestroy {
   );
   public readonly rates: number[] = [1, 2, 3, 4, 5];
   public selectedRate: number;
-  public defaultAvatar = HelperService.getNoAvatarLink();
   public reviewForm: FormGroup = this.fb.group({
     description: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
     rating: [null, Validators.required],
@@ -59,10 +57,6 @@ export class EditReviewComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
-  }
-
-  public declineReviews(num: number): string {
-    return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
   }
 
   public sendReview(): void {

@@ -5,7 +5,6 @@ import { StorageManagerMock } from 'src/testing/mocks';
 import { StorageManagerService } from '../../core/proxies/storage-manager.service';
 import { NotificationWorkerService } from '../../core/services/notification-worker.service';
 import { DirectServiceService } from './direct-service.service';
-import { MessageListUpdaterService } from './message-list-updater.service';
 import { MessagesListApiService } from './messages-list-api.service';
 import { MessagesSentApiService } from './messages-sent-api.service';
 
@@ -15,7 +14,6 @@ describe('DirectServiceService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         DirectServiceService,
-        MessageListUpdaterService,
         MessagesListApiService,
         MessagesSentApiService,
         NotificationWorkerService,

@@ -412,8 +412,7 @@
     },
     "context-menu": {
       "edit": "Редактировать",
-      "delete-from-me": "Удалить у меня",
-      "delete": "Удалить у меня и у "
+      "delete": "Удалить"
     }
   },
   "declination": {

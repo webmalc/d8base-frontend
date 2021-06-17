@@ -1,192 +1,120 @@
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { fromDatetime } from '@app/core/functions/datetime.functions';
-import { HelperService } from '@app/core/services/helper.service';
-import { TranslationService } from '@app/core/services/translation.service';
-import { ContextMenuPopoverComponent } from '@app/message/components/context-menu-popover/context-menu-popover.component';
-import { AbstractMessage } from '@app/message/models/abstract-message';
-import { Message } from '@app/message/models/message';
+import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { NgDestroyService } from '@app/core/services';
+import { ChatItem } from '@app/message/components/direct/chat-item.interface';
+import { ContextMenuPopoverComponent } from '@app/message/components/direct/context-menu-popover/context-menu-popover.component';
+import { MessageAction } from '@app/message/components/direct/message-action.interface';
+import { Interlocutor } from '@app/message/components/interlocutor.interface';
 import { ChatsService } from '@app/message/services/chats.service';
 import { DirectServiceService } from '@app/message/services/direct-service.service';
-import { Reinitable } from '@app/shared/abstract/reinitable';
-import { IonContent, IonInfiniteScroll, Platform, PopoverController } from '@ionic/angular';
-import { Observable, Subscription } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
+import { IonContent, Platform, PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { finalize, first, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-direct',
   templateUrl: './direct.component.html',
   styleUrls: ['./direct.component.scss'],
-  providers: [DirectServiceService],
+  providers: [DirectServiceService, NgDestroyService],
 })
-export class DirectComponent extends Reinitable implements OnDestroy {
-  @ViewChild(IonInfiniteScroll) public infiniteScroll: IonInfiniteScroll;
-  @ViewChild(IonContent, { read: IonContent, static: false }) public content: IonContent;
-  @ViewChild('bottomPoint', { read: ElementRef }) public bottom: ElementRef<HTMLElement>;
-  @ViewChild('sentMenu', { read: ElementRef }) public sentMenu: ElementRef<HTMLElement>;
+export class DirectComponent implements AfterViewInit {
+  @ViewChild('content', { static: false }) public ionContent: IonContent;
+  @ViewChildren('item') public itemElements: QueryList<any>;
+
+  public formControl = new FormControl('', Validators.required);
   public editingMode: boolean = false;
-  public interlocutorData$: Observable<AbstractMessage>;
-  private updateMessageId: number;
-  private deleteSubscription: Subscription;
-  private updateSubscription: Subscription;
+  public interlocutorData$: Observable<Interlocutor>;
+  public chat$: Observable<ChatItem[]>;
+
+  private editedMessageId: number;
 
   constructor(
-    private readonly route: ActivatedRoute,
     public directService: DirectServiceService,
     public chatsService: ChatsService,
     private readonly platform: Platform,
     private readonly popoverController: PopoverController,
-    private readonly trans: TranslationService,
+    private readonly ngDestroy$: NgDestroyService,
+    route: ActivatedRoute,
   ) {
-    super();
+    this.chat$ = directService.chat$;
+    this.interlocutorData$ = directService.interlocutor$;
+    this.subscribeToRouteParams(route.paramMap);
   }
 
-  public needToRenderDateString(messageIndex: number): Observable<boolean> {
-    return this.directService.messages$.pipe(
-      first(),
-      map(messageList => {
-        if (messageIndex === 0) {
-          return true;
-        }
-
-        return messageList[messageIndex].created.slice(0, 10) !== messageList[messageIndex - 1].created.slice(0, 10);
-      }),
-    );
+  public ngAfterViewInit(): void {
+    this.itemElements.changes.pipe(takeUntil(this.ngDestroy$)).subscribe(() => this.ionContent.scrollToBottom());
   }
 
-  public getDateString(datetime: string): string {
-    const date = new Date(datetime.slice(0, 10));
-
-    return `${date.toLocaleString(this.trans.getCurrentLang(), { month: 'long' })}, ${date.getDate()}`;
-  }
-
-  public cancelUpdate(): void {
-    if (this.editingMode) {
-      this.editingMode = false;
-      this.directService.clearMessage();
-    }
-  }
-
-  public showUpdatingMessage(): void {
-    const messageElement = document.getElementById(this.directService.updateMessage.id.toString(10));
-    this.content.scrollToPoint(null, messageElement.offsetTop);
-    let i = 0.6;
-    const interval = setInterval(() => {
-      if (i < 0) {
-        clearInterval(interval);
-        messageElement.style.backgroundColor = 'rgba(12,209,232,0)';
-
-        return;
-      }
-      messageElement.style.backgroundColor = `rgba(12,209,232,${i})`;
-      i -= 0.05;
-    }, 100);
-  }
-
-  public initMessageMenuContext(event: MouseEvent, message: Message): void {
+  public async showContextMenu(event: MouseEvent, chatItem: ChatItem): Promise<void> {
     event.preventDefault();
-    this.initContextMenuPopover(message, event);
-  }
-
-  public ionViewDidLeave(): void {
-    this.ngOnDestroy();
-  }
-
-  public ngOnDestroy(): void {
-    this.deleteSubscription?.unsubscribe();
-    this.updateSubscription?.unsubscribe();
-  }
-
-  public loadData(): void {
-    this.directService.appendNextApiPage().subscribe(() => this.infiniteScroll.complete());
+    await this.showActionsPopover(chatItem, event);
   }
 
   public send(): void {
-    this.editingMode ? this.directService.update(this.updateMessageId) : this.directService.send();
-    this.editingMode = false;
-    this.updateMessageId = undefined;
-  }
-
-  public timeFromDatetime(datetime: string): string {
-    return fromDatetime(datetime).time;
-  }
-
-  public getCheckmarkColor(message: Message): string {
-    return message.is_read ? 'success' : 'dark';
-  }
-
-  protected init(): void {
-    this.directService.init(parseInt(this.route.snapshot.paramMap.get('interlocutor-id'), 10)).subscribe(() => {
-      this.subscribeToNextApiPageUpdate();
-      this.setInterLocutorData();
-    });
-    this.directService.messagesListUpdated.subscribe(() => this.scrollToBottom());
-    this.directService.newMessageSent.subscribe(() => this.scrollToBottom(true));
-  }
-
-  private initContextMenuPopover(message: Message, event: MouseEvent): void {
-    this.updateMessageId = undefined;
-    this.popoverController
-      .create({
-        component: ContextMenuPopoverComponent,
-        translucent: true,
-        componentProps: { message },
-        animated: true,
-        event,
-      })
-      .then(pop =>
-        pop.present().then(() => {
-          this.deleteSubscription = ContextMenuPopoverComponent.delete$
-            .pipe(
-              filter(mes => mes !== null),
-              first(),
-            )
-            .subscribe((mes: Message) => {
-              this.directService.delete(mes);
-              this.popoverController.dismiss();
-              this.deleteSubscription.unsubscribe();
-            });
-          this.updateSubscription = ContextMenuPopoverComponent.update$
-            .pipe(
-              filter(mes => mes !== null),
-              first(),
-            )
-            .subscribe((mes: Message) => {
-              this.editingMode = true;
-              this.directService.updateMessage = mes;
-              this.directService.defaultUpdateMessage = mes.body;
-              this.updateMessageId = mes.id;
-              this.popoverController.dismiss();
-              this.updateSubscription.unsubscribe();
-            });
-        }),
-      );
-  }
-
-  private subscribeToNextApiPageUpdate(): void {
-    this.directService.hasNextApiPage.subscribe(hasNext => {
-      this.infiniteScroll.disabled = !hasNext;
-    });
-  }
-
-  private scrollToBottom(force: boolean = false): void {
-    if (
-      this.bottom &&
-      !force &&
-      !(
-        this.bottom.nativeElement.getBoundingClientRect().top >= 0 &&
-        this.bottom.nativeElement.getBoundingClientRect().top <= this.platform.height()
+    const value = this.formControl.value;
+    this.formControl.disable();
+    this.interlocutorData$
+      .pipe(
+        first(),
+        finalize(() => this.formControl.enable()),
       )
-    ) {
+      .subscribe(data => {
+        this.editingMode
+          ? this.directService.edit(data.id, this.editedMessageId, value)
+          : this.directService.send(data.id, value);
+        this.resetInput();
+      });
+  }
+
+  public resetInput(): void {
+    this.editingMode = false;
+    this.editedMessageId = undefined;
+    this.formControl.reset();
+  }
+
+  public getAvatar(interlocutor: Interlocutor): string {
+    return interlocutor.avatar_thumbnail ?? getNoAvatarLink();
+  }
+
+  public getChatItemId(index: number, item: ChatItem): string {
+    return item.id;
+  }
+
+  private async showActionsPopover(message: ChatItem, event: MouseEvent): Promise<void> {
+    const pop = await this.popoverController.create({
+      component: ContextMenuPopoverComponent,
+      translucent: true,
+      componentProps: { message },
+      animated: true,
+      event,
+    });
+    await pop.present();
+    const eventDetail = await pop.onDidDismiss();
+    const action: MessageAction = eventDetail.data;
+    await this.doContextAction(action);
+    await this.popoverController.dismiss();
+  }
+
+  private subscribeToRouteParams(paramMap$: Observable<ParamMap>): void {
+    const interlocutorId$ = paramMap$.pipe(map(paramMap => Number.parseInt(paramMap.get('interlocutor-id'), 10)));
+    interlocutorId$.pipe(takeUntil(this.ngDestroy$)).subscribe(interlocutorId => {
+      this.directService.setInterlocutorId(interlocutorId);
+    });
+  }
+
+  private async doContextAction(action: MessageAction): Promise<void> {
+    if (!action) {
       return;
     }
-    setTimeout(() => this.content.scrollToBottom(), 50);
-  }
-
-  private setInterLocutorData(): void {
-    this.interlocutorData$ = this.chatsService.chatList$.pipe(
-      filter(chatList => Boolean(chatList?.length)),
-      map(chatList => chatList.find(({ interlocutor_id }) => interlocutor_id === this.directService.interlocutorId)),
-    );
+    if (action.actionType === 'edit') {
+      this.editingMode = true;
+      this.editedMessageId = action.messageId;
+      this.formControl.setValue(action.messageBody);
+    }
+    if (action.actionType === 'delete') {
+      this.directService.delete(action.messageId);
+    }
   }
 }

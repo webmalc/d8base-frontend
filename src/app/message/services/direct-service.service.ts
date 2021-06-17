@@ -1,209 +1,87 @@
 import { Injectable } from '@angular/core';
-import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
-import { UserManagerService } from '@app/core/services/user-manager.service';
-import { Message } from '@app/message/models/message';
-import { SentMessage } from '@app/message/models/sent-message';
-import { MessageListUpdaterService } from '@app/message/services/message-list-updater.service';
-import { MessagesListApiService } from '@app/message/services/messages-list-api.service';
-import { MessagesSentApiService } from '@app/message/services/messages-sent-api.service';
+import { Message, SentMessage } from '@app/api/models';
+import { CommunicationService } from '@app/api/services';
+import { NgDestroyService } from '@app/core/services';
+import { ChatItem } from '@app/message/components/direct/chat-item.interface';
+import { Interlocutor } from '@app/message/components/interlocutor.interface';
 import { environment } from '@env/environment';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, first, map, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, interval, Observable, ReplaySubject } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
+
+function getChatItem(message: Message, senderId: number): ChatItem {
+  const type = message.sender === senderId ? 'received' : 'sent';
+  const state = message.is_read ? 'read' : 'received';
+  return {
+    id: `${type}|${message.id}|${state}`,
+    messageId: message.id,
+    body: message.body,
+    type,
+    timestamp: new Date(message.created),
+    state,
+  };
+}
+
+function getChatItems(messages: Message[], senderId: number): ChatItem[] {
+  return messages.map(m => getChatItem(m, senderId));
+}
 
 @Injectable()
 export class DirectServiceService {
-  public messagesListUpdated: BehaviorSubject<void> = new BehaviorSubject<void>(null);
-  public newMessageSent: BehaviorSubject<void> = new BehaviorSubject<void>(null);
-  public messages$: BehaviorSubject<Message[]> = new BehaviorSubject(null);
-  public hasNextApiPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public currentUserId: number;
-  public interlocutorId: number;
-  public message: string;
-  public defaultUpdateMessage: string;
-  public updateMessage: Message;
-  private messagesSubscription: Subscription;
-  private currentMessagesApiPage: number = 1;
-  private readonly messagesPerPage: number = environment.message.messages_per_page;
+  private readonly _interlocutor$ = new ReplaySubject<Interlocutor>(1);
+  private readonly _fetchMessages$ = new ReplaySubject<void>(1);
+  private readonly _chat$: Observable<ChatItem[]>;
 
-  constructor(
-    private readonly userManager: UserManagerService,
-    private readonly messageListUpdater: MessageListUpdaterService,
-    private readonly messagesListApi: MessagesListApiService,
-    private readonly messagesSentApi: MessagesSentApiService,
-  ) {}
-
-  public init(interlocutorId: number): Observable<void> {
-    this.interlocutorId = interlocutorId;
-    this.userManager
-      .getCurrentUser()
-      .pipe(filter(user => Boolean(user)))
-      .subscribe(user => {
-        this.currentUserId = user?.id;
-      });
-    return this.initMessagesList().pipe(
-      tap(() => {
-        this.subscribeToMessagesUpdate();
-      }),
+  constructor(private readonly api: CommunicationService, private readonly ngDestroy$: NgDestroyService) {
+    this._chat$ = combineLatest([this._interlocutor$, this._fetchMessages$]).pipe(
+      switchMap(([interlocutor]) =>
+        this.api
+          .communicationMessagesListList({ interlocutor: interlocutor.id })
+          .pipe(map(response => getChatItems(response.results, interlocutor.id).reverse())),
+      ),
     );
+    this._fetchMessages$.next();
+    this.subscribeToNotifications();
   }
 
-  public appendNextApiPage(): Observable<void> {
-    return this.messageListUpdater.getMessageList(this.interlocutorId, this.currentMessagesApiPage + 1).pipe(
-      tap((resp: ApiListResponseInterface<Message>) => this.handleNextApiPage(resp.next)),
-      switchMap((resp: ApiListResponseInterface<Message>) => this.extendMessagesList(resp.results)),
-      tap(() => this.messagesListUpdated.next()),
-    );
+  public get chat$(): Observable<ChatItem[]> {
+    return this._chat$;
   }
 
-  public destroy(): void {
-    this.messagesSubscription.unsubscribe();
-    this.messageListUpdater.destroy();
-    this.messages$.next([]);
+  public get interlocutor$(): Observable<Interlocutor> {
+    return this._interlocutor$;
   }
 
-  public clearMessage(): void {
-    this.message = null;
-    this.defaultUpdateMessage = null;
-    this.updateMessage = null;
-  }
-
-  public setMessageText(message: string): void {
-    this.message = message;
-    this.defaultUpdateMessage = message;
-  }
-
-  public send(): void {
-    if (!this.message) {
-      return;
-    }
-    this.pushNewMessage();
-    this.messagesSentApi.create(this.generateSentMessage()).subscribe(() => {
-      this.updateMessageList();
-      this.clearMessage();
+  public setInterlocutorId(interlocutorId: number): void {
+    this.api.communicationMessagesLatestList().subscribe((allChats: any[]) => {
+      const thisChat = allChats.find(c => c.recipient.id === interlocutorId);
+      this._interlocutor$.next(thisChat ? thisChat.recipient : { id: interlocutorId });
     });
   }
 
-  public delete(message: Message): void {
-    const { id } = message;
-    this.messagesSentApi.deleteById(id).subscribe(() => {
-      this.messages$.next(this.messages$.value.filter(oldMessage => oldMessage.id !== id));
-    });
+  public send(recipient: number, body: string): void {
+    const message: SentMessage = {
+      recipient,
+      body,
+    };
+    this.api.communicationMessagesSentCreate(message).subscribe(() => this._fetchMessages$.next());
   }
 
-  public update(id: number): void {
-    this.messagesSentApi.patch(this.generateUpdateSentMessage()).subscribe(() => {
-      this.messagesListUpdated.next();
-      this.clearMessage();
-    });
+  public delete(messageId: number): void {
+    this.api.communicationMessagesSentDelete(messageId).subscribe(() => this._fetchMessages$.next());
   }
 
-  private generateUpdateSentMessage(): SentMessage {
-    const message = new SentMessage();
-    message.id = this.updateMessage.id;
-    message.body = this.updateMessage.body;
-
-    return message;
+  public edit(recipient: number, id: number, newBody: string): void {
+    const data: SentMessage = {
+      recipient,
+      body: newBody,
+    };
+    this.api.communicationMessagesSentUpdate({ id, data }).subscribe(() => this._fetchMessages$.next());
   }
 
-  private extendMessagesList(list: Message[]): Observable<void> {
-    return this.messages$.pipe(
-      first(),
-      map(currentList => this.setList([...list.reverse(), ...currentList])),
-    );
-  }
-
-  private subscribeToMessagesUpdate(): void {
-    this.messagesSubscription = this.messageListUpdater
-      .receiveUpdates(this.interlocutorId)
-      .subscribe((data: ApiListResponseInterface<Message>) =>
-        this.isNeedToUpdate(data.results.reverse())
-          .pipe(filter(isNeed => isNeed))
-          .subscribe(() => this.updateMessageList(data.results)),
-      );
-  }
-
-  private pushNewMessage(): void {
-    this.messages$.pipe(first()).subscribe((list: Message[]) => {
-      list.push(this.generateNewMessage());
-      this.messages$.next(list);
-      this.newMessageSent.next();
-    });
-  }
-
-  private updateMessageList(list?: Message[]): void {
-    list
-      ? this.setList(list)
-      : this.messagesListApi
-          .getByInterlocutor(this.interlocutorId, this.messagesPerPage)
-          .subscribe(listApiResponse => this.setList(listApiResponse.results.reverse()));
-  }
-
-  private handleNextApiPage(nextPageResponse: string): void {
-    if (!nextPageResponse) {
-      this.hasNextApiPage.next(false);
-
-      return;
-    }
-    const nextPageIndex = parseInt(new URL(`${nextPageResponse}/`).searchParams.get('page'), 10);
-    if (nextPageIndex) {
-      this.hasNextApiPage.next(true);
-      this.currentMessagesApiPage = nextPageIndex - 1;
-    } else {
-      this.hasNextApiPage.next(false);
-    }
-  }
-
-  private generateSentMessage(): SentMessage {
-    const message = new SentMessage();
-    message.recipient = this.interlocutorId;
-    message.body = this.message.trim();
-
-    return message;
-  }
-
-  private generateNewMessage(): Message {
-    const mes = new Message();
-    mes.is_read = false;
-    mes.body = this.message;
-    mes.sender = this.currentUserId;
-    mes.recipient = this.interlocutorId;
-
-    return mes;
-  }
-
-  private initMessagesList(): Observable<any> {
-    return this.messageListUpdater.getMessageList(this.interlocutorId).pipe(
-      tap((resp: ApiListResponseInterface<Message>) => this.handleNextApiPage(resp.next)),
-      tap((resp: ApiListResponseInterface<Message>) => this.messages$.next(resp.results.reverse())),
-      tap(() => this.messagesListUpdated.next()),
-    );
-  }
-
-  private setList(list: Message[]): void {
-    this.messages$.next(list);
-    this.messagesListUpdated.next();
-  }
-
-  private isNeedToUpdate(newList: Message[]): Observable<boolean> {
-    return this.messages$.pipe(
-      first(),
-      map((currentList: Message[]) => currentList.slice(-this.messagesPerPage)),
-      map((currentList: Message[]) => {
-        if (newList.length !== currentList.length) {
-          return true;
-        }
-        for (let i = 0; i < newList.length; i += 1) {
-          if (
-            newList[i].body !== currentList[i].body ||
-            newList[i].is_read !== currentList[i].is_read ||
-            newList[i].created !== currentList[i].created
-          ) {
-            return true;
-          }
-        }
-
-        return false;
-      }),
-    );
+  private subscribeToNotifications(): void {
+    // TODO use notifications service
+    interval(environment.message.direct_update_interval_ms)
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe(() => this._fetchMessages$.next());
   }
 }
