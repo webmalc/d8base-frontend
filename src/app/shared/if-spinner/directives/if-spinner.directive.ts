@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { isIfSpinnerState } from '@app/shared/if-spinner/utils/if-spinner.functions';
 import { IfSpinnerConfigurationInterface, IF_SPINNER_MODULE_CONFIG_TOKEN } from '../if-spinner.config';
-import { ContentState } from '../models/if-spinner.model';
+import { ContentState, IfSpinnerState } from '../models/if-spinner.model';
 
 export class IfSpinnerContext<T = unknown> {
   public $implicit: T = null;
@@ -22,7 +22,7 @@ export class IfSpinnerContext<T = unknown> {
 @Directive({
   selector: '[appIfSpinner]',
 })
-export class IfSpinnerDirective<T> {
+export class IfSpinnerDirective<T = unknown> {
   @Input()
   public set appIfSpinnerLoadingTemplate(templateRef: TemplateRef<IfSpinnerContext<T>> | null) {
     this.loadingTemplateRef = templateRef;
@@ -34,10 +34,18 @@ export class IfSpinnerDirective<T> {
     this.updateView();
   }
   @Input()
-  public set appIfSpinner(condition: T) {
-    this.context.$implicit = this.context.appIfSpinner = condition;
+  public set appIfSpinner(condition: T | IfSpinnerState<T>) {
+    if (isIfSpinnerState<T>(condition)) {
+      this.state = condition.state;
+      this.context.$implicit = this.context.appIfSpinner =
+        condition.state === ContentState.LOADED ? condition.data : void 0;
+    } else {
+      this.state = void 0;
+      this.context.$implicit = this.context.appIfSpinner = condition;
+    }
     this.updateView();
   }
+  private state: ContentState;
   private context: IfSpinnerContext<T> = new IfSpinnerContext<T>();
   private loadingTemplateRef: TemplateRef<IfSpinnerContext<T>> | null = null;
   private errorTemplateRef: TemplateRef<IfSpinnerContext<T>> | null = null;
@@ -54,10 +62,8 @@ export class IfSpinnerDirective<T> {
   }
 
   private updateView() {
-    const context = this.context.$implicit;
-
-    if (isIfSpinnerState<T>(context)) {
-      switch (context.state) {
+    if (this.state) {
+      switch (this.state) {
         case ContentState.LOADING: {
           this.showLoadingState();
           return;
@@ -68,17 +74,13 @@ export class IfSpinnerDirective<T> {
         }
         case ContentState.LOADED:
         default: {
-          const unpackedContext: IfSpinnerContext<T> = {
-            $implicit: context.data,
-            appIfSpinner: context.data,
-          };
-          this.showLoadedState(unpackedContext);
+          this.showLoadedState();
           return;
         }
       }
     }
 
-    if (context) {
+    if (this.context.$implicit) {
       this.showLoadedState();
     } else {
       this.showLoadingState();
@@ -107,12 +109,25 @@ export class IfSpinnerDirective<T> {
     this.showState(this.errorTemplateRef, this.config?.errorComponent);
   }
 
-  private showLoadedState(context?: IfSpinnerContext<T>): void {
+  private showLoadedState(): void {
     if (!this.viewRef) {
       this.viewContainerRef.clear();
       if (this.loadedTemplateRef) {
-        this.viewRef = this.viewContainerRef.createEmbeddedView(this.loadedTemplateRef, context ?? this.context);
+        this.viewRef = this.viewContainerRef.createEmbeddedView(this.loadedTemplateRef, this.context);
       }
     }
+  }
+
+  // https://angular.io/guide/structural-directives#improving-template-type-checking-for-custom-directives
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/member-ordering
+  public static ngTemplateGuard_appIfSpinner: 'binding';
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public static ngTemplateContextGuard<T>(
+    dir: IfSpinnerDirective<T>,
+    ctx: any,
+  ): ctx is IfSpinnerContext<Exclude<T, false | 0 | '' | null | undefined>> {
+    return true;
   }
 }
