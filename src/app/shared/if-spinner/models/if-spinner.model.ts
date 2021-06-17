@@ -1,5 +1,5 @@
 export enum ContentState {
-  LOADING,
+  LOADING = 1,
   LOADED,
   ERROR,
 }
