@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <ion-content class="ion-margin-top">
   <app-content-wrapper>
     <app-column-header [previousLocationFallback]="'/professional'">
@@ -13,14 +12,14 @@
       (keydown.escape)="search('')"
       placeholder="{{ 'messages.chat-list-page.search' | translate }}"
     ></ion-searchbar>
-    <ng-container *appIfSpinner="chatsService.chatList$ | async as chatList">
+    <ng-container *appIfSpinner="chatList$ | async as chatList">
       <ion-list>
         <ion-label *ngIf="!chatList.length">
           {{ 'messages.chat-list-page.empty-list' | translate }}
         </ion-label>
-        <ion-item (click)="onChatClick(chat.interlocutor_id)" button *ngFor="let chat of chatList">
+        <ion-item button [routerLink]="'/message/chat/' + chat.interlocutor_id" *ngFor="let chat of chatList">
           <ion-avatar slot="start">
-            <img src="{{ chat.interlocutor_avatar_thumbnail }}" />
+            <img src="{{ chat.interlocutor_avatar_thumbnail }}" alt=""/>
           </ion-avatar>
           <div>
             <ion-label>

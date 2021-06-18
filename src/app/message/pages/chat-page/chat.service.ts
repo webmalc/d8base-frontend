@@ -1,32 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Message, SentMessage } from '@app/api/models';
+import { SentMessage } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
-import { ChatItem } from '@app/message/components/direct/chat-item.interface';
-import { Interlocutor } from '@app/message/components/interlocutor.interface';
+import { Interlocutor } from '@app/message/shared/interlocutor.interface';
 import { environment } from '@env/environment';
 import { combineLatest, interval, Observable, ReplaySubject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
-function getChatItem(message: Message, senderId: number): ChatItem {
-  const type = message.sender === senderId ? 'received' : 'sent';
-  const state = message.is_read ? 'read' : 'received';
-  return {
-    id: `${type}|${message.id}|${state}`,
-    messageId: message.id,
-    body: message.body,
-    type,
-    timestamp: new Date(message.created),
-    state,
-  };
-}
-
-function getChatItems(messages: Message[], senderId: number): ChatItem[] {
-  return messages.map(m => getChatItem(m, senderId));
-}
+import { getChatItems } from './chat-item.functions';
+import { ChatItem } from './chat-item.interface';
 
 @Injectable()
-export class DirectServiceService {
+export class ChatService {
   private readonly _interlocutor$ = new ReplaySubject<Interlocutor>(1);
   private readonly _fetchMessages$ = new ReplaySubject<void>(1);
   private readonly _chat$: Observable<ChatItem[]>;

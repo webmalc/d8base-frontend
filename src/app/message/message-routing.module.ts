@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ChatsComponent } from '@app/message/components/chats/chats.component';
-import { DirectComponent } from '@app/message/components/direct/direct.component';
+import { ChatsListPageComponent, ChatPageComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -12,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'list',
-    component: ChatsComponent,
+    component: ChatsListPageComponent,
   },
   {
     path: 'chat/:interlocutor-id',
-    component: DirectComponent,
+    component: ChatPageComponent,
   },
 ];
 

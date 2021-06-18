@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractMessage } from '@app/message/models/abstract-message';
+import { AbstractMessage } from '@app/message/shared/abstract-message';
 
 @Injectable()
 export class ChatsSearchService {

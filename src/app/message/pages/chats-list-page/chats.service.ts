@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AbstractMessage } from '@app/message/models/abstract-message';
-import { ChatListUpdaterService } from '@app/message/services/chat-list-updater.service';
-import { ChatsSearchService } from '@app/message/services/chats-search.service';
+import { AbstractMessage } from '@app/message/shared/abstract-message';
+import { ChatListUpdaterService } from '@app/message/pages/chats-list-page/chat-list-updater.service';
+import { ChatsSearchService } from '@app/message/pages/chats-list-page/chats-search.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';

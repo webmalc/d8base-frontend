@@ -3,23 +3,23 @@ import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { getNoAvatarLink } from '@app/core/functions/file.functions';
 import { NgDestroyService } from '@app/core/services';
-import { ChatItem } from '@app/message/components/direct/chat-item.interface';
-import { ContextMenuPopoverComponent } from '@app/message/components/direct/context-menu-popover/context-menu-popover.component';
-import { MessageAction } from '@app/message/components/direct/message-action.interface';
-import { Interlocutor } from '@app/message/components/interlocutor.interface';
-import { ChatsService } from '@app/message/services/chats.service';
-import { DirectServiceService } from '@app/message/services/direct-service.service';
+import { Interlocutor } from '@app/message/shared/interlocutor.interface';
 import { IonContent, Platform, PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize, first, map, takeUntil } from 'rxjs/operators';
+import { ChatItem } from './chat-item.interface';
+
+import { ContextMenuPopoverComponent } from './context-menu-popover/context-menu-popover.component';
+import { ChatService } from './chat.service';
+import { MessageAction } from './message-action.interface';
 
 @Component({
-  selector: 'app-direct',
-  templateUrl: './direct.component.html',
-  styleUrls: ['./direct.component.scss'],
-  providers: [DirectServiceService, NgDestroyService],
+  selector: 'app-chat-page',
+  templateUrl: './chat-page.component.html',
+  styleUrls: ['./chat-page.component.scss'],
+  providers: [ChatService, NgDestroyService],
 })
-export class DirectComponent implements AfterViewInit {
+export class ChatPageComponent implements AfterViewInit {
   @ViewChild('content', { static: false }) public ionContent: IonContent;
   @ViewChildren('item') public itemElements: QueryList<any>;
 
@@ -31,8 +31,7 @@ export class DirectComponent implements AfterViewInit {
   private editedMessageId: number;
 
   constructor(
-    public directService: DirectServiceService,
-    public chatsService: ChatsService,
+    public directService: ChatService,
     private readonly platform: Platform,
     private readonly popoverController: PopoverController,
     private readonly ngDestroy$: NgDestroyService,

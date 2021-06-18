@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule, NavParams } from '@ionic/angular';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { Message } from '../../../models/message';
+import { Message } from '../../../shared/message';
 import { ContextMenuPopoverComponent } from './context-menu-popover.component';
 
 describe('ContextMenuPopoverComponent', () => {

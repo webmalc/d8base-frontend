@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ChatItem } from '@app/message/components/direct/chat-item.interface';
 import { NavParams, PopoverController } from '@ionic/angular';
+
+import { ChatItem } from '../chat-item.interface';
 import { MessageAction } from '../message-action.interface';
 
 @Component({

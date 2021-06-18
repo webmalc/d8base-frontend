@@ -8,5 +8,5 @@ export function fileToBase64(file: Blob) {
 }
 
 export function getNoAvatarLink(): string {
-    return 'assets/images/profile/noavatar.jpeg';
+  return 'assets/images/profile/noavatar.jpeg';
 }
