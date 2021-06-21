@@ -44,6 +44,11 @@ export class FirebaseService {
   }
 
   private updateFcmInfo(registrationId: string): void {
+    if (!registrationId) {
+      console.error('Registration id is not correct.');
+      return;
+    }
+
     this.communicationsApi
       .communicationDevicesFcmRead(registrationId)
       .pipe(
