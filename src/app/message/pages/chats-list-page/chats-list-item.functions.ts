@@ -1,13 +1,22 @@
+import { ReceivedMessage } from '@app/api/models';
 import { ExpandedMessage } from '@app/message/shared/expanded-message.interface';
 import { ChatsListItem } from './chats-list-item.interface';
 
-export function getChatListItems(messages: ExpandedMessage[], myId: number): ChatsListItem[] {
-  return messages.map(m => getChatListItem(m, myId));
+type NumberMap = { [key: number]: number };
+
+export function getChatListItems(
+  messages: ExpandedMessage[],
+  unread: ReceivedMessage[],
+  myId: number,
+): ChatsListItem[] {
+  const unreadMap: NumberMap = {};
+  unread.forEach(mes => (unreadMap[mes.sender] = (unreadMap[mes.sender] ?? 0) + 1));
+  return messages.map(m => getChatListItem(m, unreadMap, myId));
 }
 
-function getChatListItem(message: ExpandedMessage, myId: number): ChatsListItem {
+function getChatListItem(message: ExpandedMessage, unreadMap: NumberMap, myId: number): ChatsListItem {
   const interlocutor = message.sender.id === myId ? message.recipient : message.sender;
-  const unreadCount = 0; // TODO fill unread count
+  const unreadCount = unreadMap[interlocutor.id] ?? 0;
   return {
     trackById: `${interlocutor.id}|${unreadCount}`,
     interlocutorId: interlocutor.id,

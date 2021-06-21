@@ -6,7 +6,7 @@ import { IntervalService } from '@app/message/shared/interval.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { environment } from '@env/environment';
 import { Select } from '@ngxs/store';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, Observable } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { getChatListItems } from './chats-list-item.functions';
@@ -28,7 +28,10 @@ export class ChatsService {
   ) {
     this.chatList$ = combineLatest([this.profile$, this._fetchMessages$]).pipe(
       switchMap(([profile]) =>
-        this.api.communicationMessagesLatestList().pipe(map(response => getChatListItems(response, profile.id))),
+        forkJoin([
+          this.api.communicationMessagesLatestList(), // TODO use shared service for this
+          this.api.communicationMessagesReceivedList({ isRead: 'false' }),
+        ]).pipe(map(([response, unread]) => getChatListItems(response, unread.results, profile.id))),
       ),
     );
     this._fetchMessages$.next();
