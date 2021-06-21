@@ -1,5 +1,8 @@
+/**
+ * Chat message representation model
+ */
 export interface ChatItem {
-  id: string;
+  trackById: string;
   messageId: number;
   type: 'sent' | 'received' | 'date-separator';
   timestamp: Date;

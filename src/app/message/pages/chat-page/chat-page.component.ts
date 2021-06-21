@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { getNoAvatarLink } from '@app/core/functions/file.functions';
 import { NgDestroyService } from '@app/core/services';
 import { Interlocutor } from '@app/message/shared/interlocutor.interface';
-import { IonContent, Platform, PopoverController } from '@ionic/angular';
+import { IonContent, PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize, first, map, takeUntil } from 'rxjs/operators';
 import { ChatItem } from './chat-item.interface';
@@ -31,19 +31,18 @@ export class ChatPageComponent implements AfterViewInit {
   private editedMessageId: number;
 
   constructor(
-    public directService: ChatService,
-    private readonly platform: Platform,
+    private readonly chatService: ChatService,
     private readonly popoverController: PopoverController,
     private readonly ngDestroy$: NgDestroyService,
     route: ActivatedRoute,
   ) {
-    this.chat$ = directService.chat$;
-    this.interlocutorData$ = directService.interlocutor$;
+    this.chat$ = this.chatService.chat$;
+    this.interlocutorData$ = this.chatService.interlocutor$;
     this.subscribeToRouteParams(route.paramMap);
   }
 
   public ngAfterViewInit(): void {
-    this.itemElements.changes.pipe(takeUntil(this.ngDestroy$)).subscribe(() => this.ionContent.scrollToBottom());
+    this.itemElements?.changes.pipe(takeUntil(this.ngDestroy$)).subscribe(() => this.ionContent.scrollToBottom());
   }
 
   public async showContextMenu(event: MouseEvent, chatItem: ChatItem): Promise<void> {
@@ -61,8 +60,8 @@ export class ChatPageComponent implements AfterViewInit {
       )
       .subscribe(data => {
         this.editingMode
-          ? this.directService.edit(data.id, this.editedMessageId, value)
-          : this.directService.send(data.id, value);
+          ? this.chatService.edit(data.id, this.editedMessageId, value)
+          : this.chatService.send(data.id, value);
         this.resetInput();
       });
   }
@@ -77,8 +76,8 @@ export class ChatPageComponent implements AfterViewInit {
     return interlocutor.avatar_thumbnail ?? getNoAvatarLink();
   }
 
-  public getChatItemId(index: number, item: ChatItem): string {
-    return item.id;
+  public getTrackById(index: number, item: ChatItem): string {
+    return item.trackById;
   }
 
   private async showActionsPopover(message: ChatItem, event: MouseEvent): Promise<void> {
@@ -99,7 +98,7 @@ export class ChatPageComponent implements AfterViewInit {
   private subscribeToRouteParams(paramMap$: Observable<ParamMap>): void {
     const interlocutorId$ = paramMap$.pipe(map(paramMap => Number.parseInt(paramMap.get('interlocutor-id'), 10)));
     interlocutorId$.pipe(takeUntil(this.ngDestroy$)).subscribe(interlocutorId => {
-      this.directService.setInterlocutorId(interlocutorId);
+      this.chatService.setInterlocutorId(interlocutorId);
     });
   }
 
@@ -113,7 +112,7 @@ export class ChatPageComponent implements AfterViewInit {
       this.formControl.setValue(action.messageBody);
     }
     if (action.actionType === 'delete') {
-      this.directService.delete(action.messageId);
+      this.chatService.delete(action.messageId);
     }
   }
 }

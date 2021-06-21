@@ -3,8 +3,9 @@ import { SentMessage } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { Interlocutor } from '@app/message/shared/interlocutor.interface';
+import { IntervalService } from '@app/message/shared/interval.service';
 import { environment } from '@env/environment';
-import { combineLatest, interval, Observable, ReplaySubject } from 'rxjs';
+import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { getChatItems } from './chat-item.functions';
@@ -16,7 +17,11 @@ export class ChatService {
   private readonly _fetchMessages$ = new ReplaySubject<void>(1);
   private readonly _chat$: Observable<ChatItem[]>;
 
-  constructor(private readonly api: CommunicationService, private readonly ngDestroy$: NgDestroyService) {
+  constructor(
+    private readonly api: CommunicationService,
+    private readonly interval: IntervalService,
+    private readonly ngDestroy$: NgDestroyService,
+  ) {
     this._chat$ = combineLatest([this._interlocutor$, this._fetchMessages$]).pipe(
       switchMap(([interlocutor]) =>
         this.api
@@ -65,7 +70,8 @@ export class ChatService {
 
   private subscribeToNotifications(): void {
     // TODO use notifications service
-    interval(environment.message.direct_update_interval_ms)
+    this.interval
+      .ticks(environment.message.direct_update_interval_ms)
       .pipe(takeUntil(this.ngDestroy$))
       .subscribe(() => this._fetchMessages$.next());
   }

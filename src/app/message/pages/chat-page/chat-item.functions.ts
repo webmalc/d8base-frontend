@@ -9,7 +9,7 @@ function getChatItem(message: Message, senderId: number): ChatItem {
   const type = message.sender === senderId ? 'received' : 'sent';
   const state = message.is_read ? 'read' : 'received';
   return {
-    id: `${type}|${message.id}|${state}`,
+    trackById: `${type}|${message.id}|${state}`,
     messageId: message.id,
     body: message.body,
     type,

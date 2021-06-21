@@ -17,30 +17,34 @@
         <ion-label *ngIf="!chatList.length">
           {{ 'messages.chat-list-page.empty-list' | translate }}
         </ion-label>
-        <ion-item button [routerLink]="'/message/chat/' + chat.interlocutor_id" *ngFor="let chat of chatList">
+        <ion-item
+          button
+          [routerLink]="'/message/chat/' + chat.interlocutorId"
+          *ngFor="let chat of chatList | substringFilter: 'interlocutorName':searchString; trackBy: getTrackById"
+        >
           <ion-avatar slot="start">
-            <img src="{{ chat.interlocutor_avatar_thumbnail }}" alt=""/>
+            <img [src]="getAvatar(chat)" [alt]="chat.interlocutorName" />
           </ion-avatar>
           <div>
             <ion-label>
               <h3>
-                {{ chat.interlocutor }}
+                {{ chat.interlocutorName }}
               </h3>
             </ion-label>
             <ion-label>
               <p>
-                {{ chat.body | slice: 0:30 }}
+                {{ chat.lastMessageText | slice: 0:30 }}
               </p>
             </ion-label>
           </div>
           <div slot="end">
             <ion-label>
               <p>
-                {{ chat.created }}
+                {{ chat.created | date: 'short' }}
               </p>
             </ion-label>
-            <ion-badge *ngIf="chat.unread_count">
-              {{ chat.unread_count }}
+            <ion-badge *ngIf="chat.unreadCount">
+              {{ chat.unreadCount }}
             </ion-badge>
           </div>
         </ion-item>

@@ -1,8 +1,10 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule, NavParams } from '@ionic/angular';
+import { MessagePageModule } from '@app/message/message.module';
+import { NavParams } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
+import { ChatItem } from '../chat-item.interface';
 
-import { TranslateModule } from '@ngx-translate/core';
-import { Message } from '../../../shared/message';
 import { ContextMenuPopoverComponent } from './context-menu-popover.component';
 
 describe('ContextMenuPopoverComponent', () => {
@@ -12,17 +14,21 @@ describe('ContextMenuPopoverComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ContextMenuPopoverComponent],
-        imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule, MessagePageModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         providers: [
           {
             provide: NavParams,
             useValue: {
               get: () => {
-                const mes = new Message();
-                mes.is_read = false;
+                const message: ChatItem = {
+                  trackById: '11',
+                  messageId: 11,
+                  type: 'sent',
+                  timestamp: new Date('2021-01-01'),
+                };
 
-                return mes;
+                return message;
               },
             },
           },

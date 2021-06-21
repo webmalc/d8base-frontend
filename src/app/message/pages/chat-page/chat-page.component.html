@@ -19,7 +19,7 @@
         <ion-infinite-scroll-content loadingText="{{ 'messages.direct.loading-text' | translate }}">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-      <div *ngFor="let chatItem of chat$ | async; trackBy: getChatItemId" #item>
+      <div *ngFor="let chatItem of chat$ | async; trackBy: getTrackById" #item>
         <div class="ion-text-center" *ngIf="chatItem.type === 'date-separator'">
           {{ chatItem.timestamp | date: 'MMMM d' }}
         </div>
@@ -33,14 +33,14 @@
         </div>
         <div
           class="message-container"
-          id="{{ chatItem?.id }}"
+          id="{{ chatItem?.trackById }}"
           *ngIf="chatItem.type === 'sent'"
           (contextmenu)="showContextMenu($event, chatItem)"
         >
           <div class="sent-message message">
             <div class="message-text">{{ chatItem.body }}</div>
           </div>
-          <div class="timestamp timestamp-sent width100" *ngIf="chatItem.id">
+          <div class="timestamp timestamp-sent width100" *ngIf="chatItem.state">
             {{ chatItem.timestamp | date: 'shortTime' }}
             <ion-icon
               class="checkmark"
@@ -55,7 +55,7 @@
               *ngIf="chatItem.state === 'received'"
             ></ion-icon>
           </div>
-          <div class="timestamp timestamp-sent width100" *ngIf="!chatItem.id">
+          <div class="timestamp timestamp-sent width100" *ngIf="!chatItem.state">
             <ion-icon name="time-outline"></ion-icon>
           </div>
         </div>

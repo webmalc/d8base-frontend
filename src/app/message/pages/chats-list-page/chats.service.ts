@@ -1,95 +1,45 @@
 import { Injectable } from '@angular/core';
-import { AbstractMessage } from '@app/message/shared/abstract-message';
-import { ChatListUpdaterService } from '@app/message/pages/chats-list-page/chat-list-updater.service';
-import { ChatsSearchService } from '@app/message/pages/chats-list-page/chats-search.service';
+import { Profile } from '@app/api/models';
+import { CommunicationService } from '@app/api/services';
+import { NgDestroyService } from '@app/core/services';
+import { IntervalService } from '@app/message/shared/interval.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import { environment } from '@env/environment';
 import { Select } from '@ngxs/store';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, first, map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
+
+import { getChatListItems } from './chats-list-item.functions';
+import { ChatsListItem } from './chats-list-item.interface';
 
 @Injectable()
 export class ChatsService {
-  @Select(CurrentUserSelectors.isAuthenticated)
-  public isAuthenticated$: Observable<boolean>;
+  public chatList$: Observable<ChatsListItem[]>;
 
-  public chatList$: BehaviorSubject<AbstractMessage[]> = new BehaviorSubject<AbstractMessage[]>(null);
-  private defaultChatList: AbstractMessage[] = [];
-  private chatsSubscription: Subscription;
+  @Select(CurrentUserSelectors.profile)
+  public profile$: Observable<Profile>;
 
-  constructor(private readonly chatListUpdater: ChatListUpdaterService, private readonly search: ChatsSearchService) {
-    this.isAuthenticated$
-      .pipe(
-        filter(isAuthenticated => Boolean(isAuthenticated)),
-        switchMap(() => this.initChatList()),
-      )
-      .subscribe(() => this.subscribeToChatListUpdates());
-    this.isAuthenticated$.pipe(filter(isAuthenticated => !isAuthenticated)).subscribe(() => {
-      this.unsubscribeFromUpdates();
-      this.setLists([]);
-    });
-  }
+  private readonly _fetchMessages$ = new BehaviorSubject<void>(void 0);
 
-  public doSearch(value: string): void {
-    if ('' === value) {
-      this.subscribeToChatListUpdates();
-      this.chatList$.next(this.defaultChatList);
-    } else {
-      this.unsubscribeFromUpdates();
-      this.chatList$.next(this.search.search(this.defaultChatList, value));
-    }
-  }
-
-  public destroy(): void {
-    this.unsubscribeFromUpdates();
-    this.chatListUpdater.destroy();
-    this.chatList$.next([]);
-  }
-
-  public initChatList(): Observable<any> {
-    return this.chatListUpdater.getChatList().pipe(map(list => this.setLists(list)));
-  }
-
-  public subscribeToChatListUpdates(): void {
-    this.unsubscribeFromUpdates();
-    this.chatsSubscription = this.chatListUpdater.receiveUpdates().subscribe((newList: AbstractMessage[]) =>
-      this.isNeedToUpdate(newList)
-        .pipe(filter(isNeed => isNeed))
-        .subscribe(() => this.setLists(newList)),
+  constructor(
+    private readonly api: CommunicationService,
+    private readonly interval: IntervalService,
+    private readonly ngDestroy$: NgDestroyService,
+  ) {
+    this.chatList$ = combineLatest([this.profile$, this._fetchMessages$]).pipe(
+      switchMap(([profile]) =>
+        this.api.communicationMessagesLatestList().pipe(map(response => getChatListItems(response, profile.id))),
+      ),
     );
+    this._fetchMessages$.next();
+    this.subscribeToNotifications();
   }
 
-  private unsubscribeFromUpdates(): void {
-    if (this.chatsSubscription) {
-      this.chatsSubscription.unsubscribe();
-    }
-    this.chatsSubscription = undefined;
-  }
-
-  private setLists(data: AbstractMessage[]): void {
-    this.chatList$.next(data);
-    this.defaultChatList = data;
-  }
-
-  private isNeedToUpdate(chatList: AbstractMessage[]): Observable<boolean> {
-    return this.chatList$.pipe(
-      first(),
-      map((defaultList: AbstractMessage[]) => {
-        if (defaultList.length !== chatList.length) {
-          return true;
-        }
-        for (let i = 0; i < chatList.length; i += 1) {
-          if (
-            chatList[i].interlocutor_id !== defaultList[i].interlocutor_id ||
-            chatList[i].is_read !== defaultList[i].is_read ||
-            chatList[i].body !== defaultList[i].body ||
-            chatList[i].unread_count !== defaultList[i].unread_count
-          ) {
-            return true;
-          }
-        }
-
-        return false;
-      }),
-    );
+  private subscribeToNotifications(): void {
+    // TODO use notifications service
+    this.interval
+      .ticks(environment.message.chat_list_update_interval_ms)
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe(() => this._fetchMessages$.next());
   }
 }
