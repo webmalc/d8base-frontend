@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SentMessage } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
-import { Interlocutor } from '@app/message/shared/interlocutor.interface';
+import { Interlocutor } from '@app/message/interfaces/interlocutor.interface';
 import { IntervalService } from '@app/shared/services/interval.service';
 import { environment } from '@env/environment';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';

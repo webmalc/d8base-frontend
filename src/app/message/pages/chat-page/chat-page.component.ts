@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { getNoAvatarLink } from '@app/core/functions/file.functions';
 import { NgDestroyService } from '@app/core/services';
-import { Interlocutor } from '@app/message/shared/interlocutor.interface';
+import { Interlocutor } from '@app/message/interfaces/interlocutor.interface';
 import { IonContent, PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize, first, map, takeUntil } from 'rxjs/operators';

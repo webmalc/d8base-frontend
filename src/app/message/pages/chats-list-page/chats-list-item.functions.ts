@@ -1,5 +1,5 @@
 import { ReceivedMessage } from '@app/api/models';
-import { ExpandedMessage } from '@app/message/shared/expanded-message.interface';
+import { ExpandedMessage } from '@app/message/interfaces/expanded-message.interface';
 import { ChatsListItem } from './chats-list-item.interface';
 
 type NumberMap = { [key: number]: number };
