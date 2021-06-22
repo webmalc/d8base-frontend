@@ -13,8 +13,8 @@ export class RegistrationFormComponent {
   public form: FormGroup = this.fb.group(
     {
       [RegistrationFormFields.Email]: ['', [Validators.required, AppValidators.email]],
-      [RegistrationFormFields.FirstName]: ['', Validators.required],
-      [RegistrationFormFields.LastName]: [''],
+      [RegistrationFormFields.FirstName]: ['', AppValidators.firstNameValidators],
+      [RegistrationFormFields.LastName]: ['', AppValidators.lastNameValidators],
       [RegistrationFormFields.Password]: ['', AppValidators.passwordValidators],
       [RegistrationFormFields.Confirm]: ['', AppValidators.passwordValidators],
       [RegistrationFormFields.Country]: [null, Validators.required],
