@@ -672,14 +672,7 @@
     "category-home": "Home",
     "category-photo": "Media",
     "category-pro": "Professional",
-    "category-sport": "Sport",
-    "counter-text": "The number of professionals and services offered on the portal",
-    "download": "Download application",
-    "three-steps": "Just 3 steps",
-    "registration": "Registration",
-    "search": "Search",
-    "bingo": "Bingo",
-    "reviews": "Reviews"
+    "category-sport": "Sport"
   },
   "default-location": {
     "title": "Is it your current location",

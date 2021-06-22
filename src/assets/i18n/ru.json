@@ -672,14 +672,7 @@
     "category-home": "Дом",
     "category-photo": "Фото и видео",
     "category-pro": "Профи",
-    "category-sport": "Спорт",
-    "counter-text": "Количество мастеров и услуг предлагаемых на портале",
-    "download": "Скачать приложение",
-    "three-steps": "Всего 3 шага",
-    "registration": "Регистрация",
-    "search": "Поиск",
-    "bingo": "Бинго",
-    "reviews": "Отзывы"
+    "category-sport": "Спорт"
   },
   "default-location": {
     "title": "Это Ваше текущее местоположение",
