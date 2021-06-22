@@ -408,7 +408,8 @@
     },
     "direct": {
       "loading-text": "Loading more messages...",
-      "edit-message": "Edit messge"
+      "edit-message": "Edit message",
+      "empty-chat-placeholder": "You haven't any message history with this person yet. Send a first one to begin."
     },
     "context-menu": {
       "edit": "Edit",

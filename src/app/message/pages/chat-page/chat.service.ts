@@ -5,8 +5,8 @@ import { NgDestroyService } from '@app/core/services';
 import { Interlocutor } from '@app/message/interfaces/interlocutor.interface';
 import { IntervalService } from '@app/shared/services/interval.service';
 import { environment } from '@env/environment';
-import { combineLatest, Observable, ReplaySubject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, Observable, of, ReplaySubject } from 'rxjs';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { getChatItems } from './chat-item.functions';
 import { ChatItem } from './chat-item.interface';
@@ -24,9 +24,10 @@ export class ChatService {
   ) {
     this._chat$ = combineLatest([this._interlocutor$, this._fetchMessages$]).pipe(
       switchMap(([interlocutor]) =>
-        this.api
-          .communicationMessagesListList({ interlocutor: interlocutor.id })
-          .pipe(map(response => getChatItems(response.results, interlocutor.id).reverse())),
+        this.api.communicationMessagesListList({ interlocutor: interlocutor.id }).pipe(
+          catchError(() => of({ results: [] })),
+          map(response => getChatItems(response.results, interlocutor.id).reverse()),
+        ),
       ),
     );
     this._fetchMessages$.next();

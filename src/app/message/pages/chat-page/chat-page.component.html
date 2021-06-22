@@ -14,12 +14,15 @@
 </app-column-header>
 <ion-content [scrollEvents]="true" #content>
   <app-content-wrapper>
-    <div class="messages-container">
+    <div class="messages-container" *appIfSpinner="chat$ | async as chatItems">
       <ion-infinite-scroll threshold="800px" [disabled]="true" position="top">
         <ion-infinite-scroll-content loadingText="{{ 'messages.direct.loading-text' | translate }}">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-      <div *ngFor="let chatItem of chat$ | async; trackBy: getTrackById" #item>
+      <div *ngIf="!chatItems?.length" class="placeholder">
+        {{ 'messages.direct.empty-chat-placeholder' | translate }}
+      </div>
+      <div *ngFor="let chatItem of chatItems; trackBy: getTrackById" #item>
         <div class="ion-text-center" *ngIf="chatItem.type === 'date-separator'">
           {{ chatItem.timestamp | date: 'MMMM d' }}
         </div>
