@@ -1,0 +1,14 @@
+<ion-list class="context">
+  <ion-item *ngIf="chatItem.state === 'received'" button (click)="edit()" lines="full">
+    <ion-label>
+      {{ 'messages.context-menu.edit' | translate }}
+    </ion-label>
+    <ion-icon name="create-outline"></ion-icon>
+  </ion-item>
+  <ion-item button (click)="delete()" lines="full">
+    <ion-label color="danger">
+      {{ 'messages.context-menu.delete' | translate }}
+    </ion-label>
+    <ion-icon name="trash-outline" color="danger"></ion-icon>
+  </ion-item>
+</ion-list>

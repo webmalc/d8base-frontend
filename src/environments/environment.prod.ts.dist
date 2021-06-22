@@ -81,7 +81,6 @@ export const environment = {
     message: {
         direct_update_interval_ms: 10000,
         chat_list_update_interval_ms: 10000,
-        background_update_interval_ms: 10000,
         messages_per_page: 50,
     },
     sentry: {

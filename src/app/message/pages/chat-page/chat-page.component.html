@@ -1,0 +1,85 @@
+<app-header></app-header>
+<app-column-header [previousLocationFallback]="'/message'">
+  <ng-container *ngIf="interlocutorData$ | async as interlocutorData">
+    <ion-avatar slot="start">
+      <img [src]="getAvatar(interlocutorData)" alt="{{ interlocutorData.first_name }}" />
+    </ion-avatar>
+    <ion-label>
+      <h3>
+        {{ interlocutorData.first_name }}
+        {{ interlocutorData.last_name }}
+      </h3>
+    </ion-label>
+  </ng-container>
+</app-column-header>
+<ion-content [scrollEvents]="true" #content>
+  <app-content-wrapper>
+    <div class="messages-container" *appIfSpinner="chat$ | async as chatItems">
+      <ion-infinite-scroll threshold="800px" [disabled]="true" position="top">
+        <ion-infinite-scroll-content loadingText="{{ 'messages.direct.loading-text' | translate }}">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="!chatItems?.length" class="placeholder">
+        {{ 'messages.direct.empty-chat-placeholder' | translate }}
+      </div>
+      <div *ngFor="let chatItem of chatItems; trackBy: getTrackById" #item>
+        <div class="ion-text-center" *ngIf="chatItem.type === 'date-separator'">
+          {{ chatItem.timestamp | date: 'MMMM d' }}
+        </div>
+        <div class="message-container" *ngIf="chatItem.type === 'received'">
+          <div class="received-message message">
+            <div class="message-text">{{ chatItem.body }}</div>
+          </div>
+          <div class="timestamp timestamp-received">
+            {{ chatItem.timestamp | date: 'shortTime' }}
+          </div>
+        </div>
+        <div
+          class="message-container"
+          id="{{ chatItem?.trackById }}"
+          *ngIf="chatItem.type === 'sent'"
+          (contextmenu)="showContextMenu($event, chatItem)"
+        >
+          <div class="sent-message message">
+            <div class="message-text">{{ chatItem.body }}</div>
+          </div>
+          <div class="timestamp timestamp-sent width100" *ngIf="chatItem.state">
+            {{ chatItem.timestamp | date: 'shortTime' }}
+            <ion-icon
+              class="checkmark"
+              color="success"
+              name="checkmark-done-outline"
+              *ngIf="chatItem.state === 'read'"
+            ></ion-icon>
+            <ion-icon
+              class="checkmark"
+              color="dark"
+              name="checkmark-done-outline"
+              *ngIf="chatItem.state === 'received'"
+            ></ion-icon>
+          </div>
+          <div class="timestamp timestamp-sent width100" *ngIf="!chatItem.state">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-content-wrapper>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <app-content-wrapper [preservePaddings]="true" style="overflow-y: scroll">
+    <ion-item *ngIf="editingMode">
+      <ion-icon name="pencil-outline" slot="start"></ion-icon>
+      <ion-label>{{ 'messages.direct.edit-message' | translate }}</ion-label>
+      <ion-icon name="close-outline" slot="end" (click)="resetInput()"></ion-icon>
+    </ion-item>
+    <form (ngSubmit)="send()">
+      <ion-item class="ion-item-bordered border-radius24">
+        <ion-input [formControl]="formControl" name="message"></ion-input>
+        <ion-button type="submit" fill="clear" size="default" [disabled]="formControl.invalid">
+          <ion-icon name="send-sharp"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </form>
+  </app-content-wrapper>
+</ion-footer>

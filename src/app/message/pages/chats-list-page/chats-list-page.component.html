@@ -1,0 +1,55 @@
+<app-header></app-header>
+<ion-content class="ion-margin-top">
+  <app-content-wrapper>
+    <app-column-header [previousLocationFallback]="'/professional'">
+      {{ 'messages.chat-list-page.messages' | translate }}
+    </app-column-header>
+    <ion-searchbar
+      animated
+      (ionChange)="search($event.target.value)"
+      debounce="200"
+      (ionCancel)="search('')"
+      (keydown.escape)="search('')"
+      placeholder="{{ 'messages.chat-list-page.search' | translate }}"
+    ></ion-searchbar>
+    <ng-container *appIfSpinner="chatList$ | async as chatList">
+      <ion-list>
+        <ion-label *ngIf="!chatList.length">
+          {{ 'messages.chat-list-page.empty-list' | translate }}
+        </ion-label>
+        <ion-item
+          button
+          [routerLink]="'/message/chat/' + chat.interlocutorId"
+          *ngFor="let chat of chatList | substringFilter: 'interlocutorName':searchString; trackBy: getTrackById"
+        >
+          <ion-avatar slot="start">
+            <img [src]="getAvatar(chat)" [alt]="chat.interlocutorName" />
+          </ion-avatar>
+          <div>
+            <ion-label>
+              <h3>
+                {{ chat.interlocutorName }}
+              </h3>
+            </ion-label>
+            <ion-label>
+              <p>
+                {{ chat.lastMessageText | slice: 0:30 }}
+              </p>
+            </ion-label>
+          </div>
+          <div slot="end">
+            <ion-label>
+              <p>
+                {{ chat.created | date: 'short' }}
+              </p>
+            </ion-label>
+            <ion-badge *ngIf="chat.unreadCount">
+              {{ chat.unreadCount }}
+            </ion-badge>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </app-content-wrapper>
+  <app-footer></app-footer>
+</ion-content>
