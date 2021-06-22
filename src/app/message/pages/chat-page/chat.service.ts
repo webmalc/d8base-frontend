@@ -3,7 +3,7 @@ import { SentMessage } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { Interlocutor } from '@app/message/shared/interlocutor.interface';
-import { IntervalService } from '@app/message/shared/interval.service';
+import { IntervalService } from '@app/shared/services/interval.service';
 import { environment } from '@env/environment';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';

@@ -8,7 +8,6 @@ import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { MessagePageRoutingModule } from './message-routing.module';
-import { IntervalService } from './shared/interval.service';
 
 @NgModule({
   imports: [
@@ -21,6 +20,5 @@ import { IntervalService } from './shared/interval.service';
     TranslateModule,
   ],
   declarations: [ChatPageComponent, ChatsListPageComponent, ContextMenuPopoverComponent],
-  providers: [IntervalService],
 })
 export class MessagePageModule {}

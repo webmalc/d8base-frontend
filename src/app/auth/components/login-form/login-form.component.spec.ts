@@ -44,6 +44,7 @@ describe('LoginFormComponent', () => {
     const submitButton: HTMLIonButtonElement = fixture.debugElement.nativeElement.querySelector('[type="submit"]');
     expect(submitButton).toBeTruthy();
     submitButton.click();
+    fixture.detectChanges();
     expect(component.user.emit).toHaveBeenCalledOnceWith(user);
   });
 });

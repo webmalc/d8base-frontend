@@ -2,20 +2,26 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MainGuard } from '@app/core/guards/main.guard';
 import {
   AddButtonComponent,
+  CitySelectorComponent,
   ClientWidgetComponent,
   ColumnHeaderComponent,
   ContentWrapperComponent,
+  CountryFlagComponent,
+  CountrySelectorComponent,
   DateIntervalEditorComponent,
   DaySelectorComponent,
+  DistrictSelectorComponent,
   DurationEditorComponent,
   DurationViewerComponent,
   FooterComponent,
   GenderSelectorComponent,
   HeaderComponent,
+  ImageCarouselComponent,
+  LanguageComponent,
   LoadingIndicatorComponent,
+  LocationEditorPopoverComponent,
   LocationSelectorComponent,
   LocationViewerComponent,
   MainMenuComponent,
@@ -23,25 +29,18 @@ import {
   NotFoundPageComponent,
   OrderDetailsComponent,
   PaymentMethodViewerComponent,
+  PhoneEditorComponent,
   PhotoPopoverComponent,
   PriceComponent,
   PriceEditorComponent,
   ProfessionalCardComponent,
+  RegionSelectorComponent,
   ScheduleEditorComponent,
   ScheduleViewerComponent,
   ServiceLocationComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
-  LanguageComponent,
-  CountrySelectorComponent,
-  CitySelectorComponent,
-  RegionSelectorComponent,
   SubregionSelectorComponent,
-  DistrictSelectorComponent,
-  PhoneEditorComponent,
-  ImageCarouselComponent,
-  CountryFlagComponent,
-  LocationEditorPopoverComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
@@ -78,6 +77,8 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NewMessagesNotificationService } from '@app/shared/services/new-messages-notification.service';
+import { IntervalService } from '@app/shared/services/interval.service';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
 import { ImageCropPopoverComponent } from './components/picture-selector/image-cropper/image-crop-popover.component';
 import { SavedProfessionalToggleComponent } from './components/saved-professional-toggle/saved-professional-toggle.component';
@@ -255,13 +256,14 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
   ],
   providers: [
     // TODO Create core module and move providers into it
-    MainGuard,
     ContactsTabFormService,
     SelectableCityOnSearchService,
     SelectableCountryOnSearchService,
     SelectableDistrictOnSearchService,
     SelectableRegionOnSearchService,
     SelectableSubregionOnSearchService,
+    NewMessagesNotificationService,
+    IntervalService,
     {
       provide: IF_SPINNER_MODULE_CONFIG_TOKEN,
       useValue: {

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthenticationService, MasterManagerService, PlatformService } from '@app/core/services';
-import { UnreadMessagesService } from '@app/core/services/unread-messages.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { MenuController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { NewMessagesNotificationService } from '@app/shared/services/new-messages-notification.service';
 import HeaderContext from './header-context.interface';
 
 @Component({
@@ -19,14 +19,14 @@ export class HeaderComponent {
   @Select(CurrentUserSelectors.language)
   public currentLanguage$: Observable<string>;
 
-  public countOfUnreadMessages$ = this.unreadMessagesService.unreadMessagesCount();
+  public countOfUnreadMessages$ = this.unreadMessagesService.unreadMessages$.pipe(map(response => response.count));
 
   private readonly isAuthenticated$: Observable<boolean>;
 
   constructor(
     private readonly platformService: PlatformService,
     private readonly menuController: MenuController,
-    public readonly unreadMessagesService: UnreadMessagesService,
+    public readonly unreadMessagesService: NewMessagesNotificationService,
     authenticator: AuthenticationService,
     masterManager: MasterManagerService,
   ) {

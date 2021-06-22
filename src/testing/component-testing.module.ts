@@ -16,6 +16,8 @@ import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from './mocks';
+import { IntervalService } from '@app/shared/services/interval.service';
+import { of } from 'rxjs';
 
 let ionicModuleImported = false;
 export const RootModules = () => {
@@ -33,6 +35,12 @@ const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot()];
   providers: [
     // mocks:
     { provide: Storage, useClass: StorageManagerMock },
+    {
+      provide: IntervalService,
+      useValue: {
+        ticks: () => of(void 0),
+      },
+    },
 
     // Location service deps:
     IpServicesHolderService,
