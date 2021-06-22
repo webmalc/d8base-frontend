@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { FormControlErrorComponent } from '@app/shared/components/form-control-error/form-control-error.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,7 +31,7 @@ describe('LoginFormComponent', () => {
     expect(component.form.valid).toBeFalsy();
   });
 
-  it('test submit login form', () => {
+  it('test submit login form', fakeAsync(() => {
     const user: Credentials = {
       [LoginFormFields.Username]: 'd8b@d8b.com',
       [LoginFormFields.Password]: 'Q3Bds56jkADCC323dfsa',
@@ -45,6 +45,7 @@ describe('LoginFormComponent', () => {
     expect(submitButton).toBeTruthy();
     submitButton.click();
     fixture.detectChanges();
+    flush();
     expect(component.user.emit).toHaveBeenCalledOnceWith(user);
-  });
+  }));
 });
