@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { SearchFiltersSubmenu } from '@app/search/enums/search-filters-submenu';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
 
@@ -8,6 +8,7 @@ import { SearchFilterStateService } from '@app/search/services/search-filter-sta
   styleUrls: ['./search-filters.component.scss'],
 })
 export class SearchFiltersComponent {
+  @Input() public showBackButton: boolean = false;
   public defaultTab: string = SearchFiltersSubmenu.Main;
   public tabs = SearchFiltersSubmenu;
   public tab: string = this.defaultTab;
