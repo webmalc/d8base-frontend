@@ -11,7 +11,7 @@
     "test": "ng test --watch=false",
     "test:details": "ng test --reporters=spec --watch=false",
     "testnb": "ng test --browsers='ChromeHeadless'",
-    "lint": "ng lint && prettier --check 'src/**/*'",
+    "lint": "ng lint && prettier --check \"src/**/*\"",
     "e2e": "ng e2e",
     "doc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s -r 9099",
     "dev:ssr": "ng run app:serve-ssr",

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
+import * as AppValidators from '@app/core/validators';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
-import { ProfileFormService } from '@app/profile/forms/profile-form.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select, Store } from '@ngxs/store';
@@ -24,7 +24,7 @@ export class UserEditComponent implements OnInit {
   public profile$: Observable<Profile>;
 
   constructor(
-    private readonly formService: ProfileFormService,
+    private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly store: Store,
   ) {}
@@ -32,7 +32,7 @@ export class UserEditComponent implements OnInit {
   public ngOnInit(): void {
     this.profile$.pipe(first(x => !!x)).subscribe(user => {
       this.user = user;
-      this.form = this.formService.createForm(user);
+      this.form = this.createForm(user);
     });
   }
 
@@ -46,6 +46,17 @@ export class UserEditComponent implements OnInit {
       error: () => {
         this.form.enable({ emitEvent: false });
       },
+    });
+  }
+
+  private createForm(user: Profile): FormGroup {
+    return this.formBuilder.group({
+      [ProfileFormFields.FirstName]: [user.first_name, AppValidators.firstNameValidators],
+      [ProfileFormFields.LastName]: [user.last_name, AppValidators.lastNameValidators],
+      [ProfileFormFields.Patronymic]: [user.patronymic, Validators.maxLength(30)],
+      [ProfileFormFields.Email]: [user.email, [Validators.required, AppValidators.email]],
+      [ProfileFormFields.Phone]: [user.phone_extended],
+      [ProfileFormFields.Gender]: [user.gender?.toString()],
     });
   }
 }

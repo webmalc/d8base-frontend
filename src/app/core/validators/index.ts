@@ -10,6 +10,9 @@ export * from './price.validator';
 const MINIMUM_PASSWORD_LENGTH = 8;
 const MAXIMUM_PASSWORD_LENGTH = 50;
 
+const MAXIMUM_FIRST_NAME_LENGTH = 30;
+const MAXIMUM_LAST_NAME_LENGTH = 150;
+
 export const passwordValidators = Validators.compose([
   Validators.required,
   Validators.minLength(MINIMUM_PASSWORD_LENGTH),
@@ -17,3 +20,10 @@ export const passwordValidators = Validators.compose([
   noWhitespaces,
   forbidNumericValue,
 ]);
+
+export const firstNameValidators = Validators.compose([
+  Validators.required,
+  Validators.maxLength(MAXIMUM_FIRST_NAME_LENGTH),
+]);
+
+export const lastNameValidators = Validators.compose([Validators.maxLength(MAXIMUM_LAST_NAME_LENGTH)]);

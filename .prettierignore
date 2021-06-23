@@ -42,3 +42,4 @@ config.xml
 *.png
 *.jpeg
 *.svg
+/src/assets
