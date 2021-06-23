@@ -3,7 +3,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { RegisterEmailApiService } from '../../services/register-email-api.service';
 import { UserEditComponent } from './user-edit.component';
 
 describe('UserEditComponent', () => {
@@ -15,7 +14,7 @@ describe('UserEditComponent', () => {
       TestBed.configureTestingModule({
         declarations: [UserEditComponent],
         imports: [...RootModules(), ComponentTestingModule],
-        providers: [Location, FormBuilder, RegisterEmailApiService],
+        providers: [Location, FormBuilder],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();
 

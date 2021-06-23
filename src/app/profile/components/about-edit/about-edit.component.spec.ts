@@ -5,7 +5,6 @@ import { SelectableCountryOnSearchService } from '@app/shared/services/selectabl
 import { Actions } from '@ngxs/store';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { SavedProfessionalApiService } from '../../services/saved-professional-api.service';
 import { AboutEditComponent } from './about-edit.component';
 
 describe('AboutEditComponent', () => {
@@ -21,7 +20,6 @@ describe('AboutEditComponent', () => {
           Actions,
           SelectableCountryOnSearchService,
           FormBuilder,
-          SavedProfessionalApiService,
           { provide: StorageManagerService, useClass: StorageManagerMock },
         ],
       }).compileComponents();

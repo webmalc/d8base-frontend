@@ -4,10 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutEditComponent } from '@app/profile/components/about-edit/about-edit.component';
 import { ChangeEmailComponent } from '@app/profile/components/change-email/change-email.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
-import { PluginApiService } from '@app/profile/services/plugin-api.service';
-import { RegisterEmailApiService } from '@app/profile/services/register-email-api.service';
-import { SavedProfessionalApiService } from '@app/profile/services/saved-professional-api.service';
-import { UserContactApiService } from '@app/profile/services/user-contact-api.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
@@ -30,6 +26,5 @@ import { ProfilePage } from './profile.page';
     IonicSelectableModule,
   ],
   declarations: [ProfilePage, UserContactEditComponent, UserEditComponent, AboutEditComponent, ChangeEmailComponent],
-  providers: [PluginApiService, UserContactApiService, SavedProfessionalApiService, RegisterEmailApiService],
 })
 export class ProfilePageModule {}
