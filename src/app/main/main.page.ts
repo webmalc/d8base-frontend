@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category, UserLocation, UserSettings } from '@app/api/models';
-import { ExtendedLocation } from '@app/core/models/extended-location';
+import { Category, UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
-import { MainPageSearchInterface } from '@app/main/interfaces/main-page-search-interface';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterStateConverter } from '@app/search/services/search-filter-state-converter.service';
@@ -29,18 +27,7 @@ export class MainPage implements OnInit {
 
   public defaultCategories$: Observable<Category[]>;
 
-  public searchData: MainPageSearchInterface;
   public locationEnabled = false;
-
-  public get formFields() {
-    return this.stateManager.formFields;
-  }
-  public get formGroups() {
-    return this.stateManager.formGroups;
-  }
-  public get form() {
-    return this.stateManager.searchForm;
-  }
 
   constructor(
     private readonly currentLocation: CurrentLocationCompilerService,
@@ -49,6 +36,18 @@ export class MainPage implements OnInit {
     private readonly destroy$: NgDestroyService,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
   ) {}
+
+  public get formFields() {
+    return this.stateManager.formFields;
+  }
+
+  public get formGroups() {
+    return this.stateManager.formGroups;
+  }
+
+  public get form() {
+    return this.stateManager.searchForm;
+  }
 
   public ngOnInit(): void {
     this.defaultLocation$
@@ -115,9 +114,5 @@ export class MainPage implements OnInit {
 
   public search(): void {
     this.stateManager.doSearch();
-  }
-
-  private getCurrentLocation(): Observable<ExtendedLocation | null> {
-    return this.currentLocation.getCurrentLocation();
   }
 }

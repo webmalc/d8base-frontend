@@ -69,11 +69,11 @@
     </ion-col>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-align-items-center">
-    <ion-col class="ion-no-padding" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
-      <ion-row class="ion-justify-content-center subtitle-bold ion-padding-vertical ion-margin-top">
+    <ion-col class="ion-padding-bottom" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
+      <ion-row class="ion-justify-content-center subtitle-bold ion-padding-vertical">
         {{'main-page.service-categories'|translate}}
       </ion-row>
-      <ion-row
+      <div
         *appIfSpinner="defaultCategories$ | ifSpinnerErrorState | async as defaultCategories"
         class="categories-container"
       >
@@ -84,51 +84,7 @@
           (click)="searchByCategory(category)"
           size="2x"
         ></app-category-icon>
-      </ion-row>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
-    <ion-col size-lg="4" size-md="6" size-sm="8" size-xl="3" size-xs="11">
-      <ion-row class="ion-justify-content-center counter"> 2300 </ion-row>
-      <ion-row class="ion-justify-content-center counter-text ion-text-center ion-padding-bottom">
-        {{'main-page.counter-text'|translate}}
-      </ion-row>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
-    <ion-col class="ion-padding-vertical" size-lg="5" size-md="7" size-sm="9" size-xl="4" size-xs="11">
-      <ion-button class="ion-margin-vertical download-btn-text" expand="block" fill="solid" size="large">
-        {{'main-page.download'|translate}}
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
-    <ion-col class="ion-no-padding" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
-      <ion-row class="ion-justify-content-center ion-margin-vertical ion-padding-vertical subtitle-bold">
-        {{'main-page.three-steps'|translate}}
-      </ion-row>
-      <ion-row class="ion-justify-content-around">
-        <app-main-page-icon class="bingo-text" text="{{'main-page.registration'|translate}}">
-          <div class="bingo">1</div>
-        </app-main-page-icon>
-        <app-main-page-icon class="bingo-text" text="{{'main-page.search'|translate}}">
-          <div class="bingo">2</div>
-        </app-main-page-icon>
-        <app-main-page-icon class="bingo-text" text="{{'main-page.bingo'|translate}}">
-          <div class="bingo">3</div>
-        </app-main-page-icon>
-      </ion-row>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
-    <ion-col class="ion-no-padding" size-lg="10" size-md="10" size-sm="11" size-xl="10" size-xs="12">
-      <ion-row class="ion-justify-content-center subtitle-bold ion-padding-vertical">
-        {{'main-page.reviews'|translate}}
-      </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <app-main-page-review class="review-size"></app-main-page-review>
-        <app-main-page-review class="review-size"></app-main-page-review>
-      </ion-row>
+      </div>
     </ion-col>
   </ion-row>
   <app-footer></app-footer>
