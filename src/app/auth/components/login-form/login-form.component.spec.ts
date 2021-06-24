@@ -46,6 +46,6 @@ describe('LoginFormComponent', () => {
     submitButton.click();
     fixture.detectChanges();
     flush();
-    expect(component.user.emit).toHaveBeenCalledOnceWith(user);
+    expect(component.user.emit).toHaveBeenCalledWith(user);
   }));
 });

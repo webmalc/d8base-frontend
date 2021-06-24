@@ -22,17 +22,6 @@ export class UserLocationApiService
     super(client);
   }
 
-  public getDefaultLocation(): Observable<UserLocation> {
-    return super
-      .get()
-      .pipe(
-        map(
-          (locationList: ApiListResponseInterface<UserLocation>) =>
-            locationList.results.filter(location => location.is_default === true)[0] as UserLocation,
-        ),
-      );
-  }
-
   public getByClientId(): Observable<ApiListResponseInterface<UserLocation>> {
     return super.get();
   }

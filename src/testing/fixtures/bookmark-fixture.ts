@@ -1,8 +1,7 @@
-import { BookmarkMaster } from '@app/core/models/bookmark-master';
 import { Master } from '@app/core/models/master';
 
 export class BookmarkFixture {
-  public static create(master: Master): BookmarkMaster {
+  public static create(master: Master) {
     return {
       id: 1,
       created: '',
