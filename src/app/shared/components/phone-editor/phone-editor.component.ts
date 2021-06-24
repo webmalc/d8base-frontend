@@ -3,7 +3,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 import { Country, Phone } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache } from '@app/core/services/cache';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 const DEFAULT_COUNTRY: Partial<Country> = { id: 6251999, name: 'Canada', tld: 'ca', phone: '+1' };
@@ -33,7 +33,7 @@ export class PhoneEditorComponent implements ControlValueAccessor {
       ),
     );
   public title = 'location-edit-page.country';
-  private readonly writeValue$ = new BehaviorSubject<Phone>(null);
+  private readonly writeValue$ = new Subject<Phone>();
   private onChange: (value: string) => void;
   private onTouch: (value: string) => void;
 
@@ -75,12 +75,9 @@ export class PhoneEditorComponent implements ControlValueAccessor {
   }
 
   private subscribeWriteValue(): void {
-    this.countries$
-      .pipe(
-        switchMap(countries => this.writeValue$.pipe(map(value => ({ countries, value })))),
-        takeUntil(this.ngDestroy$),
-      )
-      .subscribe(({ countries, value }) => {
+    combineLatest([this.countries$, this.writeValue$])
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe(([countries, value]) => {
         const country = countries.find(country => country.tld === `${value.region_code}`);
         this.countryControl.setValue(country, { emitEvent: false });
 
