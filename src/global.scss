@@ -336,6 +336,10 @@
   --height: 90%;
 }
 
+.popover-medium {
+  --width: 50%;
+}
+
 .modal-fullscreen {
   --width: 100%;
   --height: 100%;
@@ -369,11 +373,9 @@
   display: none;
 }
 
-section {
-  margin-top: 1rem;
-}
-
 header {
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
   padding-left: 1rem;
   font-weight: bold;
 }

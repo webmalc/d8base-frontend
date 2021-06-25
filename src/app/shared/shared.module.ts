@@ -18,6 +18,7 @@ import {
   FooterComponent,
   GenderSelectorComponent,
   HeaderComponent,
+  HintComponent,
   ImageCarouselComponent,
   LanguageComponent,
   LoadingIndicatorComponent,
@@ -59,6 +60,7 @@ import { RatingComponent } from '@app/shared/components/rating/rating.component'
 import { ServicePublishAgreementComponent } from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
+import { HintDirective } from '@app/shared/directives';
 import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
 import {
   CountryByIdPipe,
@@ -94,6 +96,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
 import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
 import { IfSpinnerModule } from './if-spinner/if-spinner.module';
 import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
+import { HintPopoverComponent } from './components/hint-popover/hint-popover.component';
 
 @NgModule({
   declarations: [
@@ -171,6 +174,9 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     LocationEditorPopoverComponent,
     ChatButtonComponent,
     SubstringFilterPipe,
+    HintDirective,
+    HintComponent,
+    HintPopoverComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -241,6 +247,8 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     LocationEditorPopoverComponent,
     ChatButtonComponent,
     SubstringFilterPipe,
+    HintDirective,
+    HintComponent,
   ],
   imports: [
     CommonModule,
