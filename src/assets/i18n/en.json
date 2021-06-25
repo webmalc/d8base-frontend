@@ -534,6 +534,8 @@
     "remove-location": "Remove location",
     "save-location": "Save location"
   },
+  "category": "Select category",
+  "subcategory": "Select subcategory",
   "contact-edit-page": {
     "contacts": "Contacts",
     "choice-contact": "Select contact",

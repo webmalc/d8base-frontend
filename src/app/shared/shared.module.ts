@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
   AddButtonComponent,
+  CategorySelectorComponent,
   CitySelectorComponent,
   ClientWidgetComponent,
   ColumnHeaderComponent,
@@ -40,6 +41,7 @@ import {
   ServiceLocationComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
+  SubcategorySelectorComponent,
   SubregionSelectorComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
@@ -171,6 +173,8 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     LocationEditorPopoverComponent,
     ChatButtonComponent,
     SubstringFilterPipe,
+    CategorySelectorComponent,
+    SubcategorySelectorComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -241,6 +245,8 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     LocationEditorPopoverComponent,
     ChatButtonComponent,
     SubstringFilterPipe,
+    CategorySelectorComponent,
+    SubcategorySelectorComponent,
   ],
   imports: [
     CommonModule,

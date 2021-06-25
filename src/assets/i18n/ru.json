@@ -534,6 +534,8 @@
     "remove-location": "Удалить",
     "save-location": "Сохранить"
   },
+  "category": "Выберите категорию",
+  "subcategory": "Выберите подкатегорию",
   "contact-edit-page": {
     "contacts": "Контактные данные",
     "choice-contact": "Выберите контакт",
