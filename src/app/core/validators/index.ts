@@ -6,6 +6,7 @@ export * from './email.validator';
 export * from './password-validators';
 export * from './non-numeric.validator';
 export * from './price.validator';
+export * from './payment-methods.validator';
 
 const MINIMUM_PASSWORD_LENGTH = 8;
 const MAXIMUM_PASSWORD_LENGTH = 50;
