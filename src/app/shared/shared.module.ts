@@ -17,6 +17,7 @@ import {
   DurationEditorComponent,
   DurationViewerComponent,
   FooterComponent,
+  FullPriceControlComponent,
   GenderSelectorComponent,
   HeaderComponent,
   ImageCarouselComponent,
@@ -175,6 +176,7 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     SubstringFilterPipe,
     CategorySelectorComponent,
     SubcategorySelectorComponent,
+    FullPriceControlComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -247,6 +249,7 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     SubstringFilterPipe,
     CategorySelectorComponent,
     SubcategorySelectorComponent,
+    FullPriceControlComponent,
   ],
   imports: [
     CommonModule,
