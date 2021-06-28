@@ -32,3 +32,4 @@ export * from './phone-editor/phone-editor.component';
 export * from './image-carousel/image-carousel.component';
 export * from './country-flag/country-flag.component';
 export * from './location-editor-popover/location-editor-popover.component';
+export * from './hint/hint.component';
