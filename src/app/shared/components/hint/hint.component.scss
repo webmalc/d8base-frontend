@@ -1,11 +1,5 @@
-:host {
-  display: block;
-  position: relative;
-}
-
 .hint {
-  position: absolute;
-  right: -1.2rem;
-  top: 1.2rem;
-  cursor: pointer;
+  z-index: 3;
+  position: absolute; // make it clickable
+  cursor: help;
 }

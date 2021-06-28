@@ -55,15 +55,13 @@
   >
   </ionic-selectable>
 </ion-item>
-<app-hint hint="{{ 'issuance.filters.main-tab.instant-booking-desc' | translate }}">
-  <ion-item lines="full">
-    <ion-label>
-      {{ 'issuance.filters.main-tab.instant-booking' | translate }}
-    </ion-label>
-    <ion-checkbox [formControl]="form.get(formFields.isInstantBooking)"></ion-checkbox>
-  </ion-item>
-</app-hint>
-
+<ion-item lines="full">
+  <ion-label>
+    {{ 'issuance.filters.main-tab.instant-booking' | translate }}
+    <app-hint hint="{{ 'issuance.filters.main-tab.instant-booking-desc' | translate }}"></app-hint>
+  </ion-label>
+  <ion-checkbox [formControl]="form.get(formFields.isInstantBooking)"></ion-checkbox>
+</ion-item>
 <app-collapse-item title="{{ 'issuance.filters.main-tab.datetime' | translate }}">
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-from' | translate }}</ion-label>
