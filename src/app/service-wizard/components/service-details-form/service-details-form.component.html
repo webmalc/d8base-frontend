@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <ion-item lines="none">
+    <ion-text>
+      <b>{{ 'service-publish.step-three.title' | translate }}</b>
+    </ion-text>
+  </ion-item>
+  <app-info-row>
+    {{ 'service-publish.step-three.first-info-row' | translate }}
+  </app-info-row>
+  <section>
+    <header>{{ 'service-details.description' | translate }}</header>
+    <ion-item>
+      <ion-textarea [autoGrow]="true" [formControlName]="formFields.description"></ion-textarea>
+    </ion-item>
+    <app-form-control-error [controlName]="formFields.description"></app-form-control-error>
+  </section>
+
+  <section>
+    <header>{{ 'service-details.photos' | translate }}</header>
+    <app-image-carousel
+      class="ion-margin-vertical"
+      [files]="this.files"
+      [editable]="true"
+      (add)="onSelect($event)"
+      (remove)="onRemove($event)"
+    ></app-image-carousel>
+  </section>
+</form>

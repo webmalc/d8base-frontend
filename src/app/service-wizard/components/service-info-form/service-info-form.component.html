@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <section>
+    <header class="label-for-required-input">{{ 'service-details.name' | translate }}</header>
+    <ion-item>
+      <ion-input [formControlName]="formFields.name"></ion-input>
+    </ion-item>
+  </section>
+  <section>
+    <header class="label-for-required-input">{{ 'service-details.duration-and-price' | translate }}</header>
+    <app-duration-editor class="ion-margin" [formControlName]="formFields.duration">
+      <app-form-control-error [controlName]="formFields.duration" errors> </app-form-control-error>
+    </app-duration-editor>
+    <app-full-price-control [formControlName]="formFields.price">
+      <app-form-control-error [controlName]="formFields.price" [filterErrors]="['paymentMethodsRequired']" priceErrors></app-form-control-error>
+      <app-form-control-error [controlName]="formFields.price" [showErrors]="['paymentMethodsRequired']" paymentMethodsErrors></app-form-control-error>
+    </app-full-price-control>
+  </section>
+</form>

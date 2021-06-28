@@ -21,6 +21,7 @@ import {
   GenderSelectorComponent,
   HeaderComponent,
   ImageCarouselComponent,
+  ImagesControlComponent,
   LanguageComponent,
   LoadingIndicatorComponent,
   LocationEditorPopoverComponent,
@@ -177,6 +178,7 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     CategorySelectorComponent,
     SubcategorySelectorComponent,
     FullPriceControlComponent,
+    ImagesControlComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -250,6 +252,7 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     CategorySelectorComponent,
     SubcategorySelectorComponent,
     FullPriceControlComponent,
+    ImagesControlComponent,
   ],
   imports: [
     CommonModule,

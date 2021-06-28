@@ -70,13 +70,13 @@ export class ImageCarouselComponent implements AfterViewInit {
 
   @Input()
   public set files(files: File[]) {
-    const getPhotos = files.map(async file => {
+    const getPhotos = files?.map(async file => {
       const src = await fileToBase64(file);
       return {
         photo: src,
         photo_thumbnail: src,
       };
-    });
+    }) ?? [];
     Promise.all(getPhotos).then(photos => {
       this.photos = photos;
       this.cd.markForCheck();
