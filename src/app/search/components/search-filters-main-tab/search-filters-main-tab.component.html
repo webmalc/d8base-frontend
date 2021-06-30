@@ -66,16 +66,18 @@
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-from' | translate }}</ion-label>
     <ion-input
-      type="datetime-local"
-      placeholder="{{ 'order.not-selected' | translate }}"
+      type="date"
+      [min]="stateManager.minDate"
+      [max]="stateManager.maxDate"
       [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
     ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-to' | translate }}</ion-label>
     <ion-input
-      type="datetime-local"
-      placeholder="{{ 'order.not-selected' | translate }}"
+      type="date"
+      [min]="stateManager.minDate"
+      [max]="stateManager.maxDate"
       [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
     ></ion-input>
   </ion-item>

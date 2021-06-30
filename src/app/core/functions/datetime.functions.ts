@@ -21,6 +21,12 @@ export function stripTime(date: Date): Date {
   return result;
 }
 
+export function setDayEndTime(date: Date): Date {
+  const result = new Date(date);
+  result.setHours(23, 59, 59, 999);
+  return result;
+}
+
 export function getCurrentDay(): Date {
   return stripTime(new Date());
 }
@@ -35,6 +41,18 @@ export function getLocalDateString(date: Date | string): string {
   }
 
   return `${date.getFullYear()}-${getMonthNumberFormatted(date)}-${date.getDate()}`;
+}
+
+export function getLocalDateTimeString(date: Date): string {
+  if (!date) {
+    return null;
+  }
+
+  // 'YYYY-MM-DDTHH:mm:ss'
+  return (
+    `${date.getFullYear()}-${getMonthNumberFormatted(date)}-${date.getDate()}` +
+    `T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  );
 }
 
 export function getMonthDateString(date: Date | string): string {
@@ -56,6 +74,19 @@ export function fromDatetime(datetime: string): { date: string; time: string } {
         time: datetime.slice(11, 16),
       }
     : { date: null, time: null };
+}
+
+/**
+ * make 'from' start of the day and 'to' end of the day
+ * don't allow 'from' being in the past
+ */
+export function alignTimeInterval(fromStr: string, toStr: string): { startDatetime: string; endDatetime: string } {
+  const from = stripTime(new Date(fromStr));
+  const to = setDayEndTime(new Date(toStr));
+  const current = addMinutes(new Date(), 1);
+  const startDatetime = fromStr ? getLocalDateTimeString(from > current ? from : current) : null;
+  const endDatetime = toStr ? getLocalDateTimeString(to) : null;
+  return { startDatetime, endDatetime };
 }
 
 function getMonthNumberFormatted(date: Date): string {
