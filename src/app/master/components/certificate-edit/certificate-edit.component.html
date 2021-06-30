@@ -11,7 +11,7 @@
   <app-form-control-error [control]="form.get(formFields.name)"> </app-form-control-error>
 
   <ion-item>
-    <ion-label color="medium" position="floating" class="label-for-required-input" s>
+    <ion-label color="medium" position="floating" class="label-for-required-input">
       {{ 'certificates-edit-page.organization' | translate }}
     </ion-label>
     <ion-input [formControl]="form.get(formFields.organization)" name="organization" type="text"></ion-input>
@@ -19,10 +19,10 @@
   <app-form-control-error [control]="form.get(formFields.organization)"> </app-form-control-error>
 
   <ion-item>
-    <ion-label color="medium" position="floating">
+    <ion-label color="medium" position="stacked">
       {{ 'certificates-edit-page.date' | translate }}
     </ion-label>
-    <ion-datetime [formControl]="form.get(formFields.date)" display-format="YYYY-MM-DD"></ion-datetime>
+    <ion-input type="date" [formControl]="form.get(formFields.date)"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">

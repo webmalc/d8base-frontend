@@ -6,14 +6,10 @@
     </app-column-header>
     <form *appIfSpinner="form" [formGroup]="form">
       <ion-item>
-        <ion-label color="medium" position="floating">
+        <ion-label color="medium" position="stacked">
           {{ 'profile-edit.birthday' | translate }}
         </ion-label>
-        <ion-datetime
-          display-format="YYYY-MM-DD"
-          picker-format="YYYY-MM-DD"
-          formControlName="{{ this.formFields.Birthday }}"
-        ></ion-datetime>
+        <ion-input type="date" formControlName="{{ this.formFields.Birthday }}"></ion-input>
       </ion-item>
       <app-country-selector
         [title]="'profile-edit.nationality' | translate"

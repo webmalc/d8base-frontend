@@ -1,15 +1,4 @@
-<ion-item
-  class="cursor-pointer ion-item-no-min-width ion-item-no-min-height"
-  lines="none"
-  color="light"
-  [disabled]="!enabled"
-  (click)="initPopover()"
->
-  <ion-label *ngIf="!getLocationString()" class="ion-margin-start location-title">
-    {{ 'main-page.current-location' | translate }}
-  </ion-label>
-  <ion-label *ngIf="getLocationString() !== null" class="ion-margin-start location-title">
-    {{ 'main-page.current-location' | translate }}: {{ getLocationString() }}
-  </ion-label>
-  <ion-icon *ngIf="enabled" class="ion-no-margin" name="location-outline" slot="end"></ion-icon>
+<ion-item lines="none" color="light" class="height100" [disabled]="!enabled" (click)="initPopover()">
+  <ion-label color="medium"> {{ 'main-page.current-location' | translate }}: {{ getLocationString() }}</ion-label>
+  <ion-icon *ngIf="enabled" name="location-outline" slot="end"></ion-icon>
 </ion-item>
