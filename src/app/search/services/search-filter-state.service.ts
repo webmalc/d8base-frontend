@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { getLocalDateString } from '@app/core/functions/datetime.functions';
 import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { SearchFilterFormFields, SearchFilterFormGroups } from '../const/search-filters-form';
 import { SearchFilterStateConverter } from './search-filter-state-converter.service';
+
+/**
+ * Search for services up to 2 years in future
+ */
+const FUTURE_TIMESPAN_YEARS = 2;
+
+const DEBOUNCE_DURATION_MS = 200;
 
 @Injectable({ providedIn: 'root' })
 export class SearchFilterStateService {
@@ -54,21 +62,21 @@ export class SearchFilterStateService {
   public maxDate: string;
   private readonly doSearch$ = new Subject<void>();
 
-  public get isDoingSearch$(): Observable<void> {
-    return this.doSearch$.asObservable();
-  }
-
   constructor(
     private readonly router: Router,
     private readonly fb: FormBuilder,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
   ) {
-    this.doSearch$.pipe(debounceTime(200)).subscribe(() => {
+    this.doSearch$.pipe(debounceTime(DEBOUNCE_DURATION_MS)).subscribe(() => {
       const queryParams = this.searchFilterStateConverter.getSearchListParams(this.searchForm.value);
       this.router.navigate(['/search'], { queryParams });
     });
     this.setMinMaxDates();
     this.handleCurrencySelectorChanges();
+  }
+
+  public get isDoingSearch$(): Observable<void> {
+    return this.doSearch$.asObservable();
   }
 
   public doSearch(): void {
@@ -89,9 +97,8 @@ export class SearchFilterStateService {
 
   private setMinMaxDates(): void {
     const now = new Date(Date.now());
-    const limitOfYearsInFuture = 5;
-    this.minDate = now.toISOString();
-    this.maxDate = new Date(now.setFullYear(now.getFullYear() + limitOfYearsInFuture)).toISOString();
+    this.minDate = getLocalDateString(now);
+    this.maxDate = getLocalDateString(new Date(now.setFullYear(now.getFullYear() + FUTURE_TIMESPAN_YEARS)));
   }
 
   private handleCurrencySelectorChanges(): void {

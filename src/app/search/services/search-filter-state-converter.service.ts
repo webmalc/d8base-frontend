@@ -88,10 +88,7 @@ export class SearchFilterStateConverter {
             tags: void 0,
             isOnlineBooking: void 0,
             isInstantBooking: params?.onlyWithAutoOrderConfirmation,
-            datetime: {
-              from: params?.startDatetime,
-              to: params?.endDatetime,
-            },
+            datetime: { from: params?.startDatetime, to: params?.endDatetime },
             isOnlineService: hasWord(params?.serviceTypes, 'online'),
             isAtMasterLocationService: hasWord(params?.serviceTypes, 'professional'),
             isAtClientLocationService: hasWord(params?.serviceTypes, 'client'),
@@ -146,7 +143,7 @@ export class SearchFilterStateConverter {
       /**
        * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
        */
-      startDatetime: data?.datetime.from,
+      startDatetime: data.datetime.from,
 
       /**
        * professional start age
@@ -241,7 +238,7 @@ export class SearchFilterStateConverter {
       /**
        * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
        */
-      endDatetime: data?.datetime.to,
+      endDatetime: data.datetime.to,
 
       /**
        * professional end age
