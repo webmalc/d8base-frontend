@@ -65,25 +65,19 @@
 <app-collapse-item title="{{ 'issuance.filters.main-tab.datetime' | translate }}">
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-from' | translate }}</ion-label>
-    <ion-datetime
+    <ion-input
+      type="datetime-local"
       placeholder="{{ 'order.not-selected' | translate }}"
-      display-format="MMM DD, YYYY HH:mm"
-      picker-format="MMM DD, YYYY HH:mm"
-      [min]="stateManager.minDate"
-      [max]="stateManager.maxDate"
       [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
-    ></ion-datetime>
+    ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-to' | translate }}</ion-label>
-    <ion-datetime
+    <ion-input
+      type="datetime-local"
       placeholder="{{ 'order.not-selected' | translate }}"
-      display-format="MMM DD, YYYY HH:mm"
-      picker-format="MMM DD, YYYY HH:mm"
-      [min]="stateManager.minDate"
-      [max]="stateManager.maxDate"
       [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
-    ></ion-datetime>
+    ></ion-input>
   </ion-item>
 </app-collapse-item>
 <app-collapse-item title="{{ 'issuance.filters.main-tab.availability' | translate }}">
