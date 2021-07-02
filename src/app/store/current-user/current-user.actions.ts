@@ -9,6 +9,7 @@ import {
   UserSettings,
   VerifyEmail,
 } from '@app/api/models';
+import { LoaderAction } from '../loader/types/loader-action.type';
 
 export class Initialize {
   public static readonly type = '[CurrentUser] Try to authorize using a saved token';
@@ -30,8 +31,9 @@ export class RefreshTokens {
   public static readonly type = '[CurrentUser] Refresh authentication tokens';
 }
 
-export class LoadProfile {
+export class LoadProfile implements LoaderAction {
   public static readonly type = '[CurrentUser] Load user profile';
+  public readonly loaderKey = LoadProfile.type;
 }
 
 export class LoadProfessionals {

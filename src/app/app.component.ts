@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { DarkModeService } from '@app/core/services/dark-mode.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import LoaderSelectors from './store/loader/loader.selectors';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  @Select(LoaderSelectors.isLoaderShown)
+  public isLoaderShown$: Observable<boolean>;
   public isAuthenticated$: Observable<boolean>;
   public darkTheme$: Observable<boolean>;
 
