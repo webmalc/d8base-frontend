@@ -63,6 +63,7 @@ import { UserLocationMapComponent } from '@app/shared/components/user-location-m
 import { HintDirective } from '@app/shared/directives';
 import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
 import {
+  CityByIdPipe,
   CountryByIdPipe,
   MasterByIdPipe,
   ServiceByIdPipe,
@@ -177,6 +178,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     HintDirective,
     HintComponent,
     HintPopoverComponent,
+    CityByIdPipe,
   ],
   exports: [
     IfSpinnerModule,
@@ -249,6 +251,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     SubstringFilterPipe,
     HintDirective,
     HintComponent,
+    CityByIdPipe,
   ],
   imports: [
     CommonModule,

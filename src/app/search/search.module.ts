@@ -7,6 +7,7 @@ import { SearchFiltersMainTabComponent } from '@app/search/components/search-fil
 import { SearchFiltersSubmenuComponent } from '@app/search/components/search-filters-submenu/search-filters-submenu.component';
 import { SearchFiltersComponent } from '@app/search/components/search-filters/search-filters.component';
 import { SearchResultComponent } from '@app/search/components/search-result/search-result.component';
+import { ServiceLinkComponent } from '@app/search/components/search-result/service-title/service-link.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -36,6 +37,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
     SearchFiltersMainTabComponent,
     SearchFiltersAdditionalTabComponent,
     SearchResultComponent,
+    ServiceLinkComponent,
   ],
   exports: [SearchFiltersComponent],
   providers: [SearchFilterStateConverter],

@@ -108,10 +108,6 @@ export class MainPage implements OnInit {
     }
   }
 
-  public searchDisabled(): boolean {
-    return !this.form.get(this.formFields.query).value;
-  }
-
   public search(): void {
     this.stateManager.doSearch();
   }

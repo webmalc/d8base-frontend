@@ -29,12 +29,6 @@
   --service-photo-thumb-size: 72px;
 }
 
-.title {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: bold;
-}
-
 .label-for-required-input::after {
   content: '*';
   color: red;
@@ -136,7 +130,7 @@
 }
 
 .fs20 {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .fs13 {
@@ -147,8 +141,8 @@
   padding-top: 10px;
 }
 
-.mb10 {
-  margin-bottom: 10px;
+.mb1 {
+  margin-bottom: 1rem;
 }
 
 .pl5 {
@@ -212,13 +206,6 @@
     padding-right: 3%;
     padding-left: 3%;
   }
-}
-
-.no-horizontal-padding {
-  padding-right: 0;
-  padding-left: 0;
-  --padding-end: 0;
-  --padding-start: 0;
 }
 
 .text-blue {
@@ -378,4 +365,8 @@ header {
   margin-bottom: 0.2rem;
   padding-left: 1rem;
   font-weight: bold;
+}
+
+a {
+  text-decoration: none;
 }

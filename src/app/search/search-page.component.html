@@ -5,8 +5,7 @@
       <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size="6" size-sm="10" size-xs="11">
         <form (ngSubmit)="onSubmit()" action="">
           <ion-searchbar
-            [formControl]="state.searchForm.get('query')"
-            name="search"
+            [formControl]="state.searchForm.controls.query"
             animated
             class="ion-margin-vertical"
             color="light"
@@ -82,7 +81,7 @@
               [emptyText]="'issuance.search-empty' | translate"
             >
               <ng-template appInfiniteScrollItem let-item>
-                <app-search-result [data]="item" class="search-result"></app-search-result>
+                <app-search-result [data]="item" class="ion-margin-bottom"></app-search-result>
               </ng-template>
             </app-infinite-scroll-container>
           </ion-col>

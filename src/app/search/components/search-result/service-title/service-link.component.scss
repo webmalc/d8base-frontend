@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  text-align: end;
+}
+
+.price-divider {
+  flex: 1;
+  border-bottom: var(--ion-color-medium) dashed 1px;
+  margin: 0 0.25em;
+}

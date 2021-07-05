@@ -1,47 +1,28 @@
 <ion-card class="ion-no-margin ion-no-padding card">
-  <ion-card-content class="no-horizontal-padding">
-    <app-professional-card
-      *ngIf="data.professional"
-      [professional]="data.professional"
-      class="ion-padding-horizontal"
-    ></app-professional-card>
-    <ion-item class="ion-margin-top ion-nowrap ion-justify-content-between" lines="none">
-      <ion-label class="services-title">
-        {{ 'issuance.search-result.services' | translate }}
-      </ion-label>
-      <ion-note *ngIf="data.professional.level" slot="end" class="master-level">
-        {{ 'global.professional-level.' + data.professional.level | translate }}
-      </ion-note>
-    </ion-item>
-    <ion-item *ngFor="let service of getServiceList()" [routerLink]="'/service/' + service?.id" lines="none">
-      <ion-label class="capitalize-first-letter">
-        {{ service.name }}
-      </ion-label>
-      <ion-note slot="end">
-        <app-price [price]="service.price"></app-price>
-      </ion-note>
-    </ion-item>
-
-    <ion-item
+  <ion-card-content>
+    <app-professional-card *ngIf="data.professional" [professional]="data.professional"></app-professional-card>
+    <div class="section-title">
+      {{ 'issuance.search-result.services' | translate }}
+    </div>
+    <app-service-link *ngFor="let service of getServiceList()" [service]="service"></app-service-link>
+    <a
       *ngIf="needToRenderMoreServicesBtn()"
       (click)="onMoreServicesClick()"
-      lines="none"
       class="ion-item-no-min-height more-services cursor-pointer"
     >
       {{ 'issuance.search-result.more' | translate }}
-    </ion-item>
+    </a>
 
-    <div *ngIf="data.professional.locations.length" class="space-between-column">
-      <ion-item lines="none" class="ion-item-no-min-height master-location-title">
+    <div *ngIf="data.professional.locations.length">
+      <div class="section-title">
         {{ 'issuance.search-result.address' | translate }}
-      </ion-item>
-      <ion-item *ngFor="let loc of data.professional.locations" lines="none" class="ion-item-no-min-height pv5">
-        <ion-label class="capitalize-first-letter ion-text-wrap">
-          {{ loc.address }}
-        </ion-label>
-      </ion-item>
+      </div>
+      <div *ngFor="let loc of data.professional.locations" class="capitalize-first-letter ion-text-wrap">
+        {{ loc.address }}
+        ({{ (loc.city | cityById$ | async)?.name }}, {{ (loc.country | countryById$ | async)?.name }})
+      </div>
     </div>
-    <div class="bottom-buttons ion-padding-horizontal">
+    <div class="bottom-buttons">
       <app-chat-button
         *ngIf="(userId$ | async) !== data.professional.user.id"
         [userId]="data.professional.user.id"
