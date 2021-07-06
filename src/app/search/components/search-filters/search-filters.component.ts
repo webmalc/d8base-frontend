@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { SearchFiltersSubmenu } from '@app/search/enums/search-filters-submenu';
+import { Component, Input } from '@angular/core';
+import { SearchFiltersSubmenu } from '@app/search/components/search-filters/search-filters-submenu.enum';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchQueryService } from '@app/search/services/search-query.service';
 
 @Component({
   selector: 'app-search-filters',
@@ -13,18 +14,16 @@ export class SearchFiltersComponent {
   public tabs = SearchFiltersSubmenu;
   public tab: string = this.defaultTab;
 
-  constructor(public readonly filtersStateManager: SearchFilterStateService, private readonly cd: ChangeDetectorRef) {}
+  constructor(
+    private readonly filtersStateManager: SearchFilterStateService,
+    private readonly query: SearchQueryService,
+  ) {}
 
   public submitFilters(): void {
-    this.filtersStateManager.doSearch();
+    this.query.searchByFormValue(this.filtersStateManager.searchForm.value);
   }
 
   public setTab(tab: string): void {
     this.tab = tab;
-  }
-
-  public resetFilters(): void {
-    this.filtersStateManager.clear();
-    this.cd.detectChanges();
   }
 }

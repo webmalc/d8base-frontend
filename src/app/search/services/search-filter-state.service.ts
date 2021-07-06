@@ -1,20 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { getLocalDateString } from '@app/core/functions/datetime.functions';
-import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { SearchFilterFormFields, SearchFilterFormGroups } from '../const/search-filters-form';
-import { SearchFilterStateConverter } from './search-filter-state-converter.service';
 
 /**
  * Search for services up to 2 years in future
  */
 const FUTURE_TIMESPAN_YEARS = 2;
-
-const DEBOUNCE_DURATION_MS = 200;
 
 @Injectable({ providedIn: 'root' })
 export class SearchFilterStateService {
@@ -60,31 +53,10 @@ export class SearchFilterStateService {
 
   public minDate: string;
   public maxDate: string;
-  private readonly doSearch$ = new Subject<void>();
 
-  constructor(
-    private readonly router: Router,
-    private readonly fb: FormBuilder,
-    private readonly searchFilterStateConverter: SearchFilterStateConverter,
-  ) {
-    this.doSearch$.pipe(debounceTime(DEBOUNCE_DURATION_MS)).subscribe(() => {
-      const queryParams = this.searchFilterStateConverter.getSearchListParams(this.searchForm.value);
-      this.router.navigate(['/search'], { queryParams });
-    });
+  constructor(private readonly fb: FormBuilder) {
     this.setMinMaxDates();
     this.handleCurrencySelectorChanges();
-  }
-
-  public get isDoingSearch$(): Observable<void> {
-    return this.doSearch$.asObservable();
-  }
-
-  public doSearch(): void {
-    return this.doSearch$.next();
-  }
-
-  public setLocationData(data: SearchLocationDataInterface): void {
-    this.searchForm.get('location').setValue(data);
   }
 
   public setDate(datetime: SearchFilterStateInterface['datetime']): void {

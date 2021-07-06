@@ -2,14 +2,10 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Category, Rate, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
-import { CountriesApiCache, RatesApiCache } from '@app/core/services/cache';
-import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
-import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
+import { RatesApiCache } from '@app/core/services/cache';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import { Coords } from '@app/shared/interfaces/coords';
-import { PopoverController } from '@ionic/angular';
 import { forkJoin, Observable } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-filters-main-tab',
@@ -36,8 +32,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
   constructor(
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
-    private readonly pop: PopoverController,
-    private readonly currentLocation: CurrentLocationCompilerService,
     private readonly ratesApiCache: RatesApiCache,
     private readonly cd: ChangeDetectorRef,
     private readonly destroy$: NgDestroyService,
@@ -45,28 +39,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
 
   public ngOnInit(): void {
     this.detectChangesForIonicSelectable();
-  }
-
-  public async initLocationPopover(): Promise<void> {
-    const pop = await this.pop.create({
-      component: OnMapPopoverComponent,
-      translucent: true,
-      animated: true,
-      componentProps: {
-        data: {
-          coordinates: this.form.get([this.formGroups.location, this.formFields.location.coordinates]),
-        },
-        renderCountry: false,
-      },
-      cssClass: ['map-popover-width', 'map-popover-height'],
-    });
-    pop.onDidDismiss().then((data: { data: { coordinates: Coords } }) => {
-      if (data.data?.coordinates) {
-        this.updateCity(data.data.coordinates);
-      }
-    });
-
-    return await pop.present();
   }
 
   public initSubcategories(categories: Category[]): void {
@@ -77,22 +49,6 @@ export class SearchFiltersMainTabComponent implements OnInit {
       .subscribe(subcategoriesList => {
         this.subcategoriesList = subcategoriesList.reduce((all, v) => all.concat(v.results), []);
         this.cd.detectChanges();
-      });
-  }
-
-  private updateCity(coords: Coords): void {
-    this.currentLocation
-      .getExtendedLocationByCoords(coords)
-      .pipe(
-        filter(res => null !== res),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(res => {
-        this.form.get(this.formGroups.location).setValue({
-          country: res.country,
-          city: res.city,
-          coordinates: res.coords,
-        });
       });
   }
 

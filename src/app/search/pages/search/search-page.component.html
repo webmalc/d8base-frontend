@@ -1,11 +1,11 @@
 <app-header></app-header>
-<ion-content class="background-color-white">
+<ion-content>
   <ion-grid class="ion-no-padding">
     <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center ion-no-padding">
       <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size="6" size-sm="10" size-xs="11">
-        <form (ngSubmit)="onSubmit()" action="">
+        <form [formGroup]="state.searchForm" (ngSubmit)="onSubmit()" action="">
           <ion-searchbar
-            [formControl]="state.searchForm.controls.query"
+            [formControlName]="state.formFields.query"
             animated
             class="ion-margin-vertical"
             color="light"
@@ -20,7 +20,7 @@
         class="cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
         routerDirection="forward"
         routerLink="filters/"
-        routerLinkActive="active"
+        [detail]="false"
       >
         {{ 'issuance.filters.title' | translate }}
         <ion-icon class="ion-no-margin ion-margin-start" name="funnel-outline"></ion-icon>
@@ -56,25 +56,11 @@
             size-xl="5"
             size-xs="12"
           >
-            <ion-row *ngIf="searchResultTitle && searchResult?.length">
-              <ion-item
-                lines="none"
-                class="cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
-              >
-                {{ 'issuance.result.sort' | translate }}
-                <ion-icon class="ion-no-margin ion-margin-start" name="swap-vertical-outline"></ion-icon>
-              </ion-item>
-            </ion-row>
-            <ion-item
-              *ngIf="searchResultTitle && searchResult?.length"
-              class="search-title ion-margin-bottom"
-              lines="none"
-            >
-              {{ searchResult.length }}&nbsp;{{ declineProposal(searchResult.length) | translate }}&nbsp; "{{
-                searchResultTitle
-              }}"&nbsp;{{ declineIsWaiting(searchResult.length) | translate }}&nbsp;
-              {{ 'issuance.result.you' | translate }}
-            </ion-item>
+            <app-applied-filters
+              [params]="params"
+              (deleteFilter)="deleteFilter($event)"
+              class="ion-margin-bottom"
+            ></app-applied-filters>
             <app-infinite-scroll-container
               [doLoad$]="doLoad$"
               (loadResults)="onLoadResults($event)"

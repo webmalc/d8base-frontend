@@ -21,7 +21,6 @@ export class SearchFiltersAdditionalTabComponent implements OnInit {
     value,
     name: this.translate.instant(`service-payment-options.${value}`),
   }));
-  public countries$ = this.countriesApiCache.list();
 
   public get formFields() {
     return this.stateManager.formFields;
@@ -34,8 +33,8 @@ export class SearchFiltersAdditionalTabComponent implements OnInit {
   }
   constructor(
     private readonly countriesApiCache: CountriesApiCache,
-    public readonly stateManager: SearchFilterStateService,
-    public readonly languagesApiCache: LanguagesApiCache,
+    private readonly stateManager: SearchFilterStateService,
+    private readonly languagesApiCache: LanguagesApiCache,
     private readonly translate: TranslateService,
     private readonly cd: ChangeDetectorRef,
     private readonly destroy$: NgDestroyService,

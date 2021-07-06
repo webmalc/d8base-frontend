@@ -6,6 +6,7 @@ import { SearchLocationDataInterface } from '@app/main/interfaces/search-locatio
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterStateConverter } from '@app/search/services/search-filter-state-converter.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchQueryService } from '@app/search/services/search-query.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
@@ -33,6 +34,7 @@ export class MainPage implements OnInit {
     private readonly currentLocation: CurrentLocationCompilerService,
     private readonly defaultCategory: DefaultCategoriesFactoryService,
     public readonly stateManager: SearchFilterStateService,
+    public readonly query: SearchQueryService,
     private readonly destroy$: NgDestroyService,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
   ) {}
@@ -109,6 +111,6 @@ export class MainPage implements OnInit {
   }
 
   public search(): void {
-    this.stateManager.doSearch();
+    this.query.searchByFormValue(this.stateManager.searchForm.value);
   }
 }

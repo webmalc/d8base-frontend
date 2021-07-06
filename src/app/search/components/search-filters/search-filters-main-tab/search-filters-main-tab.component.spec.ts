@@ -11,7 +11,7 @@ import { SelectableCityOnSearchService } from '@app/shared/services/selectable-c
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { LocationServiceMock, StorageManagerMock } from '../../../../testing/mocks';
+import { LocationServiceMock, StorageManagerMock } from '../../../../../testing/mocks';
 import { SearchFiltersMainTabComponent } from './search-filters-main-tab.component';
 
 describe('SearchFiltersMainTabComponent', () => {

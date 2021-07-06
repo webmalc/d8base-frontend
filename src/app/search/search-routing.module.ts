@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FiltersPage } from '@app/search/pages/filters/filters.page';
-import { SearchPage } from './search-page.component';
+import { SearchPage } from './pages/search/search-page.component';
+import { SearchPageGuard } from './search-page.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: SearchPage,
+    canActivate: [SearchPageGuard],
   },
   {
     path: 'filters',

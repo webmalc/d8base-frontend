@@ -325,6 +325,8 @@
 
 .popover-medium {
   --width: 50%;
+  --ion-background-color: var(--ion-color-secondary);
+  --ion-color: var(--ion-color-secondary-contrast);
 }
 
 .modal-fullscreen {
