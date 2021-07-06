@@ -4,3 +4,5 @@ export * from './service-data-filter.pipe';
 export * from './country-by-id.pipe';
 export * from './substring-filter.pipe';
 export * from './city-by-id.pipe';
+export * from './category-by-id.pipe';
+export * from './subcategory-by-id.pipe';

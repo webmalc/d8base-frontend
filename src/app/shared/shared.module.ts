@@ -69,6 +69,8 @@ import {
   ServiceByIdPipe,
   ServiceDataFilterPipe,
   SubstringFilterPipe,
+  CategoryByIdPipe,
+  SubcategoryByIdPipe,
 } from '@app/shared/pipes';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
@@ -179,6 +181,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     HintComponent,
     HintPopoverComponent,
     CityByIdPipe,
+    CategoryByIdPipe,
+    SubcategoryByIdPipe,
   ],
   exports: [
     IfSpinnerModule,
@@ -252,6 +256,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     HintDirective,
     HintComponent,
     CityByIdPipe,
+    CategoryByIdPipe,
+    SubcategoryByIdPipe,
   ],
   imports: [
     CommonModule,

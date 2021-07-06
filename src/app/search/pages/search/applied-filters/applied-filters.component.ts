@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchService } from '@app/api/services';
+import { SearchFilter } from '@app/search/interfaces/search-filter.interface';
 
 @Component({
   selector: 'app-applied-filters',
@@ -9,16 +10,20 @@ import { SearchService } from '@app/api/services';
 export class AppliedFiltersComponent {
   @Output()
   public deleteFilter = new EventEmitter<string>();
-  private _filters: { name: string; value: any }[];
+  private _filters: SearchFilter[];
 
   @Input()
   public set params(params: SearchService.SearchListParams) {
     this._filters = Object.entries(params ?? {})
-      .map(f => ({ name: f[0], value: f[1] }))
+      .map(f => {
+        const name = (f[0] as unknown) as SearchFilter['name'];
+        const value = f[1];
+        return { name, value };
+      })
       .filter(f => !!f.value);
   }
 
-  public get filters(): any[] {
+  public get filters(): SearchFilter[] {
     return this._filters;
   }
 
