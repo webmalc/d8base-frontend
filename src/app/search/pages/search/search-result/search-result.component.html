@@ -1,0 +1,32 @@
+<ion-card class="ion-no-margin ion-no-padding card">
+  <ion-card-content>
+    <app-professional-card *ngIf="data.professional" [professional]="data.professional"></app-professional-card>
+    <div class="section-title">
+      {{ 'issuance.search-result.services' | translate }}
+    </div>
+    <app-service-link *ngFor="let service of getServiceList()" [service]="service"></app-service-link>
+    <a
+      *ngIf="needToRenderMoreServicesBtn()"
+      (click)="onMoreServicesClick()"
+      class="ion-item-no-min-height more-services cursor-pointer"
+    >
+      {{ 'issuance.search-result.more' | translate }}
+    </a>
+
+    <div *ngIf="data.professional.locations.length">
+      <div class="section-title">
+        {{ 'issuance.search-result.address' | translate }}
+      </div>
+      <div *ngFor="let loc of data.professional.locations" class="capitalize-first-letter ion-text-wrap">
+        {{ loc.address }}
+        ({{ (loc.city | cityById$ | async)?.name }}, {{ (loc.country | countryById$ | async)?.name }})
+      </div>
+    </div>
+    <div class="bottom-buttons">
+      <app-chat-button
+        *ngIf="(userId$ | async) !== data.professional.user.id"
+        [userId]="data.professional.user.id"
+      ></app-chat-button>
+    </div>
+  </ion-card-content>
+</ion-card>

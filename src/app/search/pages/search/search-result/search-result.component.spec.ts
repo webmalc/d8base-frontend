@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
 import { Search } from '@app/api/models';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SearchResultComponent } from './search-result.component';
 
 const testData: Search = {
@@ -256,7 +254,7 @@ describe('SearchResultComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [SearchResultComponent],
-        imports: [IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(SearchResultComponent);

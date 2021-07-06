@@ -48,7 +48,7 @@
           </ion-row>
           <ion-row class="ion-justify-content-center ion-margin-vertical">
             <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-              <ion-button type="submit" [disabled]="searchDisabled()" expand="block" fill="solid" size="medium">
+              <ion-button type="submit" expand="block" fill="solid" size="medium">
                 {{'main-page.find-btn'|translate}}
               </ion-button>
             </ion-col>
@@ -64,7 +64,7 @@
       </ion-row>
       <div
         *appIfSpinner="defaultCategories$ | ifSpinnerErrorState | async as defaultCategories"
-        class="categories-container"
+        class="categories-container ion-margin-bottom"
       >
         <app-category-icon
           *ngFor="let category of defaultCategories"
