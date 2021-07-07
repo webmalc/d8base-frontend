@@ -32,7 +32,6 @@ import { ServicePublishStepFiveFormService } from '@app/service/forms/service-pu
 import { ServicePublishStepSevenDepartureFormService } from '@app/service/forms/service-publish-step-seven-departure-form.service';
 import { ServicePublishStepSevenFormService } from '@app/service/forms/service-publish-step-seven-form.service';
 import { ServicePublishStepSixFormService } from '@app/service/forms/service-publish-step-six-form.service';
-import { ServicePublishStepTwoFormService } from '@app/service/forms/service-publish-step-two-form.service';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
 import { ServicePublishAuthStateManagerService } from '@app/service/services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
@@ -96,7 +95,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceLocationApiService,
     ServicePhotoApiService,
     ServicePublishDataHolderService,
-    ServicePublishStepTwoFormService,
     ServicePublishStepFiveFormService,
     ServicePublishStepSixFormService,
     ServicePublishStepSevenFormService,

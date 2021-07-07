@@ -6,7 +6,6 @@ import { StorageManagerService } from '@app/core/proxies/storage-manager.service
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { ServicePublishStepTwoFormService } from '../../forms/service-publish-step-two-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
@@ -39,7 +38,6 @@ describe('ServicePublishStepTwoComponent', () => {
         providers: [
           ServicePublishDataHolderService,
           { provide: StorageManagerService, useClass: StorageManagerMock },
-          ServicePublishStepTwoFormService,
           ServiceStepsNavigationService,
           ChainManagerService,
           StepOneHandlerService,

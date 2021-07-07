@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServicePhoto } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { minimumDescriptionLength } from '@app/core/constants/service.constants';
+import * as AppValidators from '@app/core/validators';
 import { fileToBase64 } from '@app/core/functions/file.functions';
 import ServiceEditorContext from '@app/service/components/service-editor-page/service-editor-context.interface';
 import { Observable, Subject } from 'rxjs';
@@ -61,7 +61,7 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
 
   protected createForm(service: Service): FormGroup {
     return new FormGroup({
-      description: new FormControl(service.description, Validators.minLength(minimumDescriptionLength)),
+      description: new FormControl(service.description, AppValidators.descriptionValidator),
     });
   }
 

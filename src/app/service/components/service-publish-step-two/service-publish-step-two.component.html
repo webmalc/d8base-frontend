@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+    <form [formGroup]="form" (submit)="submitForm()">
       <ion-item class="fs18" lines="none">
         <ion-text>
           <b>{{ 'service-publish.step-two.title' | translate }}</b>
@@ -82,7 +82,6 @@
           <ion-button
             size="medium"
             type="submit"
-            [disabled]="formService.isSubmitDisabled()"
             class="ion-margin-top"
             fill="solid"
             expand="block"
