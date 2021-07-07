@@ -3,11 +3,13 @@
     <ion-img [src]="professional.user?.avatar || defaultAvatar"></ion-img>
   </ion-thumbnail>
   <div class="info">
-    <div class="title">
-      <a [routerLink]="'/professional/' + professional.id" class="ion-padding-horizontal fs16 capitalize-first-letter">
-        {{ getName() }}
-      </a>
-      <div class="company ion-padding-horizontal fs13 capitalize-first-letter">
+    <div class="ion-padding-horizontal">
+      <div class="title capitalize-first-letter">
+        <a [routerLink]="'/professional/' + professional.id">
+          {{ getName() }}
+        </a>
+      </div>
+      <div class="subtitle capitalize-first-letter">
         {{ professional.name }}
       </div>
     </div>

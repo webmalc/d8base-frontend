@@ -16,7 +16,7 @@
 <ion-label color="medium">{{ certificate.date }}</ion-label>
 <ion-img class="certificate" *ngIf="certificate.photo" [src]="certificate.photo"></ion-img>
 <ion-label class="ion-text-wrap ion-margin-bottom">
-  <div *ngIf="certificate.url" class="mb10">
+  <div *ngIf="certificate.url" class="mb1">
     {{ 'master-profile.info.certificate-url' | translate }}: <a href="{{ certificate.url }}">{{ certificate.url }}</a>
   </div>
   <div *ngIf="certificate.certificate_id">
