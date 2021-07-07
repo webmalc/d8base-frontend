@@ -18,7 +18,8 @@
     "serve:ssr": "node dist/app-server/main.js",
     "build:ssr": "ng build --prod && ng run app:server:production",
     "prerender": "ng run app:prerender",
-    "generate:api": "./node_modules/.bin/ng-swagger-gen -c ./ng-swagger-gen.json"
+    "generate:api": "./node_modules/.bin/ng-swagger-gen -c ./ng-swagger-gen.json",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -108,6 +109,7 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
+    "husky": "^7.0.0",
     "jasmine-core": "^3.6.0",
     "jasmine-spec-reporter": "^6.0.0",
     "karma": "^6.1.1",
@@ -116,6 +118,7 @@
     "karma-jasmine": "^4.0.1",
     "karma-jasmine-html-reporter": "^1.5.4",
     "karma-spec-reporter": "0.0.32",
+    "lint-staged": "^11.0.0",
     "ng-swagger-gen": "^2.3.0",
     "prettier": "2.2.1",
     "protractor": "^7.0.0",
@@ -136,5 +139,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": []
+  },
+  "lint-staged": {
+    "*.{js,ts,json,html}": "prettier --write"
   }
 }
