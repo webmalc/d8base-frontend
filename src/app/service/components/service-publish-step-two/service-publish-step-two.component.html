@@ -21,7 +21,7 @@
         </ion-label>
         <ion-input type="text" name="name" [formControlName]="formFields.Name"></ion-input>
       </ion-item>
-      <app-form-control-error [controlName]="formFields.Name"> </app-form-control-error>
+      <app-form-control-error [controlName]="formFields.Name"></app-form-control-error>
       <ion-item lines="none" class="ion-item-no-side-padding ion-margin-top">
         {{ 'service-publish.step-two.service-description' | translate }}
       </ion-item>
@@ -79,13 +79,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button
-            size="medium"
-            type="submit"
-            class="ion-margin-top"
-            fill="solid"
-            expand="block"
-          >
+          <ion-button size="medium" type="submit" class="ion-margin-top" fill="solid" expand="block">
             {{ 'service-publish.forward-button' | translate }}
           </ion-button>
         </ion-col>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
+import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
@@ -64,6 +65,12 @@ export class ServicePublishStepFourComponent {
   }
 
   public submitForm(userExists: boolean): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      updateAllValueAndValidity(this.form);
+      return;
+    }
+
     if (userExists) {
       this.authenticationService.login({
         username: this.form.get(this.formFields.Email).value,
@@ -90,10 +97,6 @@ export class ServicePublishStepFourComponent {
         },
       },
     );
-  }
-
-  public isSubmitDisabled(): boolean {
-    return this.form.invalid;
   }
 
   private createForm(): FormGroup {

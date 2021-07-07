@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+    <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
       <ion-row class="ion-justify-content-start ion-align-items-center">
         <ion-item lines="none" class="ion-item-no-side-padding fs18">
           <b>
@@ -53,7 +53,7 @@
         <ion-thumbnail>
           <ion-img [src]="avatar"></ion-img>
         </ion-thumbnail>
-        <app-picture-selector [formControl]="formService?.form.get(formFields.Avatar)"></app-picture-selector>
+        <app-picture-selector [formControl]="form?.controls[formFields.Avatar]"></app-picture-selector>
       </ion-item>
       <ion-row class="ion-justify-content-center ion-padding-horizontal ion-padding-bottom">
         <ion-col size="6">
@@ -69,14 +69,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button
-            size="medium"
-            type="submit"
-            [disabled]="formService.isSubmitDisabled()"
-            class="ion-margin-top"
-            fill="solid"
-            expand="block"
-          >
+          <ion-button size="medium" type="submit" class="ion-margin-top" fill="solid" expand="block">
             {{ 'service-publish.forward-button' | translate }}
           </ion-button>
         </ion-col>

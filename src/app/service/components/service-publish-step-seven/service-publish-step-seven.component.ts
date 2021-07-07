@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { LocationService } from '@app/core/services/location.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
@@ -8,15 +10,12 @@ import { MasterLocationApiService } from '@app/master/services/master-location-a
 import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
 import { City } from '@app/profile/models/city';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
-import { ServicePublishStepSevenTimetableFormFields } from '@app/service/enums/service-publish-step-seven-timetable-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
-import { ServicePublishStepSevenFormService } from '@app/service/forms/service-publish-step-seven-form.service';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { ServicePublishAuthStateManagerService } from '@app/service/services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { Reinitable } from '@app/shared/abstract/reinitable';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
@@ -28,7 +27,8 @@ import { first, map, switchMap } from 'rxjs/operators';
   templateUrl: './service-publish-step-seven.component.html',
   styleUrls: ['./service-publish-step-seven.component.scss'],
 })
-export class ServicePublishStepSevenComponent extends Reinitable {
+export class ServicePublishStepSevenComponent {
+  public form: FormGroup;
   public formFields = ServicePublishStepSevenFormFields;
   public renderUseMasterSchedule: boolean = false;
   public defaultLocationList: MasterLocation[];
@@ -39,11 +39,11 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   public units: string[] = ['km', 'ml'];
 
   constructor(
-    public readonly formService: ServicePublishStepSevenFormService,
     public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
     public readonly countrySelectable: SelectableCountryOnSearchService,
     public readonly postalSelectable: SelectablePostalCodeOnSearchService,
     public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
+    private readonly formBuilder: FormBuilder,
     private readonly authStateManager: ServicePublishAuthStateManagerService,
     private readonly masterScheduleApi: MasterScheduleApiService,
     private readonly masterManager: MasterManagerService,
@@ -51,56 +51,27 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     private readonly extendedLocation: LocationService,
     private readonly masterLocation: MasterLocationApiService,
   ) {
-    super();
+    this.init();
   }
 
   public submitForm(): void {
-    const data: StepSevenDataInterface = this.formService.form.getRawValue();
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      updateAllValueAndValidity(this.form);
+      return;
+    }
+
+    const data: StepSevenDataInterface = this.form.getRawValue();
     data.need_to_create_master_schedule = !this.renderUseMasterSchedule;
     if (!this.renderUseMasterSchedule) {
       data.use_master_schedule = true;
     }
     if (this.isUseDefaultLocation) {
-      const masterLocation: MasterLocation = this.formService.form.get(this.formFields.DefaultLocation).value;
+      const masterLocation: MasterLocation = this.form.get(this.formFields.DefaultLocation).value;
       this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Final, { masterLocation });
     }
     this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
     this.serviceStepsNavigationService.next();
-  }
-
-  public isSubmitDisabled(): boolean {
-    return (
-      this.formService.form.invalid ||
-      (!this.formService.form.get(ServicePublishStepSevenFormFields.PaymentOnline).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.PaymentCash).value) ||
-      (!this.formService.form.get(ServicePublishStepSevenFormFields.UseMasterSchedule).value &&
-        (JSON.stringify(
-          this.servicePublishDataHolderService.getPartialStepData(
-            ServicePublishSteps.Seven,
-            ServicePublishStepSevenTimetableFormFields.Timetable,
-          ),
-        ) === '{}' ||
-          JSON.stringify(
-            this.servicePublishDataHolderService.getPartialStepData(
-              ServicePublishSteps.Seven,
-              ServicePublishStepSevenTimetableFormFields.Timetable,
-            ),
-          ) === undefined)) ||
-      (this.renderLocation() &&
-        !this.isUseDefaultLocation &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.Country).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.City).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value) ||
-      (this.isClientPlaceService() &&
-        !this.isUseDefaultLocation &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.Units).value &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.MaxDistance).value) ||
-      (this.isMasterPlaceService() &&
-        !this.isUseDefaultLocation &&
-        !this.formService.form.get(ServicePublishStepSevenFormFields.Address).value)
-    );
   }
 
   public renderLocation(): boolean {
@@ -111,11 +82,11 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   public useDefaultLocation(): boolean {
-    return this.formService.getFormFieldValue(this.formFields.UseDefaultLocation) as boolean;
+    return this.getFormFieldValue(this.formFields.UseDefaultLocation) as boolean;
   }
 
   public useMasterSchedule(): boolean {
-    return this.formService.getFormFieldValue(this.formFields.UseMasterSchedule) as boolean;
+    return this.getFormFieldValue(this.formFields.UseMasterSchedule) as boolean;
   }
 
   public getCityValue(): City {
@@ -123,7 +94,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   }
 
   public onThisPageDataChange(): void {
-    this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, this.formService.form.getRawValue());
+    this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, this.form.getRawValue());
   }
 
   public toggleUseMasterSchedule(event: CustomEvent): void {
@@ -135,40 +106,33 @@ export class ServicePublishStepSevenComponent extends Reinitable {
     const useDefaultLocation: boolean = event.detail.checked;
     this.isUseDefaultLocation = useDefaultLocation;
     if (useDefaultLocation) {
-      this.formService.setControlDisabled(true, this.formFields.Country);
-      this.formService.setControlDisabled(true, this.formFields.City);
-      this.formService.setControlDisabled(true, this.formFields.Address);
+      this.setControlDisabled(true, this.formFields.Country);
+      this.setControlDisabled(true, this.formFields.City);
+      this.setControlDisabled(true, this.formFields.Address);
     } else {
-      this.formService.setControlDisabled(false, this.formFields.Country);
-      this.formService.setControlDisabled(false, this.formFields.City);
-      this.formService.setControlDisabled(false, this.formFields.Address);
+      this.setControlDisabled(false, this.formFields.Country);
+      this.setControlDisabled(false, this.formFields.City);
+      this.setControlDisabled(false, this.formFields.Address);
     }
   }
 
   public isClientPlaceService(): boolean {
     return (
-      this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type ===
+      this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type ===
       'client'
     );
   }
 
-  public isMasterPlaceService(): boolean {
-    return (
-      this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two).service_type ===
-      'professional'
-    );
-  }
-
-  protected init(): void {
+  private init(): void {
     this.authStateManager.updateFourStepState();
     this.initMasterLocation();
     const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(
       ServicePublishSteps.Seven,
     );
     if (this.servicePublishDataHolderService.isset(ServicePublishSteps.Seven)) {
-      this.formService.createForm(stepData);
+      this.createForm(stepData);
     } else {
-      this.formService.createForm();
+      this.createForm();
     }
     this.initSchedules(stepData);
     this.disableIrrelevantControls();
@@ -178,22 +142,22 @@ export class ServicePublishStepSevenComponent extends Reinitable {
 
   private disableIrrelevantControls(): void {
     const stepData = this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
-    const serviceType = stepData.service_type;
+    const serviceType = stepData?.service_type;
 
     if (serviceType === 'online') {
-      this.formService.setControlDisabled(true, this.formFields.Country);
-      this.formService.setControlDisabled(true, this.formFields.City);
-      this.formService.setControlDisabled(true, this.formFields.Address);
-      this.formService.setControlDisabled(true, this.formFields.Postal);
+      this.setControlDisabled(true, this.formFields.Country);
+      this.setControlDisabled(true, this.formFields.City);
+      this.setControlDisabled(true, this.formFields.Address);
+      this.setControlDisabled(true, this.formFields.Postal);
     }
     if (serviceType !== 'client') {
-      this.formService.setControlDisabled(true, this.formFields.MaxDistance);
+      this.setControlDisabled(true, this.formFields.MaxDistance);
     }
   }
 
   private initMaxDistance(): void {
     if (!this.isClientPlaceService()) {
-      this.formService.form.get(this.formFields.MaxDistance).setValue(0);
+      this.form.get(this.formFields.MaxDistance).setValue(0);
     }
   }
 
@@ -239,7 +203,7 @@ export class ServicePublishStepSevenComponent extends Reinitable {
   private initDefaultUnits(): void {
     this.userSetting.userSettings$
       .pipe(first())
-      .subscribe(settings => this.formService.form.get(this.formFields.Units).setValue(settings?.units));
+      .subscribe(settings => this.form.get(this.formFields.Units).setValue(settings?.units));
   }
 
   private initSchedules(stepData: StepSevenDataInterface): void {
@@ -264,8 +228,34 @@ export class ServicePublishStepSevenComponent extends Reinitable {
           this.selectedSchedules = stepData.timetable;
         } else {
           this.selectedSchedules = masterSchedule;
-          this.formService.form.get(this.formFields.UseMasterSchedule).setValue(masterHasSchedules);
+          this.form.get(this.formFields.UseMasterSchedule).setValue(masterHasSchedules);
         }
       });
+  }
+
+  private createForm(data?: StepSevenDataInterface): void {
+    this.form = this.formBuilder.group({
+      [ServicePublishStepSevenFormFields.Country]: [data?.country, Validators.required],
+      [ServicePublishStepSevenFormFields.City]: [data?.city, Validators.required],
+      [ServicePublishStepSevenFormFields.Address]: [data?.address, Validators.required],
+      [ServicePublishStepSevenFormFields.Postal]: [data?.postal_code],
+      [ServicePublishStepSevenFormFields.PaymentCash]: [data?.payment_cash ?? false],
+      [ServicePublishStepSevenFormFields.PaymentOnline]: [data?.payment_online ?? false],
+      [ServicePublishStepSevenFormFields.UseMasterSchedule]: [data?.use_master_schedule ?? false],
+      [ServicePublishStepSevenFormFields.UseDefaultLocation]: [data?.use_default_location ?? false],
+      [ServicePublishStepSevenFormFields.MaxDistance]: [data?.max_distance, Validators.required],
+      [ServicePublishStepSevenFormFields.Units]: [data?.units],
+      [ServicePublishStepSevenFormFields.DefaultLocation]: [data?.default_location],
+      [ServicePublishStepSevenFormFields.InstantBooking]: [data?.is_auto_order_confirmation],
+    });
+  }
+
+  private getFormFieldValue(formField: string): any {
+    return this.form?.get(formField)?.value;
+  }
+
+  private setControlDisabled(val: boolean, controlName: string): void {
+    const control = this.form.controls[controlName] as FormControl;
+    val ? control.disable() : control.enable();
   }
 }

@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+    <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
       <ion-item lines="none" class="fs18">
         <ion-text>
           <b>{{ 'service-publish.step-seven.title' | translate }}</b>
@@ -83,12 +83,14 @@
 
         <ng-container *ngIf="!isUseDefaultLocation">
           <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
+          <app-form-control-error [controlName]="formFields.Country"></app-form-control-error>
           <app-city-selector
             [formControlName]="formFields.City"
-            [country]="formService.form.controls[formFields.Country].value"
+            [country]="form.controls[formFields.Country].value"
             [required]="true"
           >
           </app-city-selector>
+          <app-form-control-error [controlName]="formFields.City"></app-form-control-error>
           <ion-item>
             <ion-label color="medium" position="floating">
               {{ 'service-publish.step-seven.postal-placeholder' | translate }}
@@ -120,6 +122,7 @@
               [formControlName]="formFields.Address"
             ></ion-textarea>
           </ion-item>
+          <app-form-control-error [controlName]="formFields.Address"></app-form-control-error>
         </ng-container>
 
         <ng-container *ngIf="isClientPlaceService()">
@@ -161,7 +164,7 @@
       <ion-list (change)="onThisPageDataChange()">
         <ion-list-header class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
           <ion-item lines="none">
-            <div class="label-for-required-input">
+            <div>
               <b>
                 {{ 'service-publish.step-seven.payment-description' | translate }}
               </b>
@@ -195,14 +198,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button
-            size="medium"
-            type="submit"
-            [disabled]="isSubmitDisabled()"
-            class="ion-margin-top"
-            fill="solid"
-            expand="block"
-          >
+          <ion-button size="medium" type="submit" class="ion-margin-top" fill="solid" expand="block">
             {{ 'service-publish.forward-button' | translate }}
           </ion-button>
         </ion-col>

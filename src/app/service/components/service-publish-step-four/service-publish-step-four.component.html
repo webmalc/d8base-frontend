@@ -31,7 +31,7 @@
             [formControlName]="formFields.Email"
           ></ion-input>
         </ion-item>
-        <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
+        <app-form-control-error [controlName]="formFields.Email"></app-form-control-error>
 
         <ng-container *ngIf="!context.isAuthenticated && isEmailValid()">
           <ng-container *ngIf="!context.isUserExisting">
@@ -47,12 +47,14 @@
               </ion-label>
               <ion-input [formControlName]="formFields.FirstName"></ion-input>
             </ion-item>
+            <app-form-control-error [controlName]="formFields.FirstName"></app-form-control-error>
             <ion-item>
               <ion-label color="medium" position="floating">
                 {{ 'service-publish.step-four.last-name-placeholder' | translate }}
               </ion-label>
               <ion-input [formControlName]="formFields.LastName"></ion-input>
             </ion-item>
+            <app-form-control-error [controlName]="formFields.LastName"></app-form-control-error>
             <ion-item lines="none" class="fs13">
               <ion-text>
                 <div>{{ 'service-publish.step-four.create-password' | translate }}</div>
@@ -74,11 +76,13 @@
             <app-form-control-error [controlName]="formFields.Confirm"></app-form-control-error>
             <app-form-control-error [control]="form"> </app-form-control-error>
             <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
+            <app-form-control-error [controlName]="formFields.Country"></app-form-control-error>
             <app-city-selector
               [formControlName]="formFields.City"
               [country]="form.controls[formFields.Country].value"
               [required]="true"
             ></app-city-selector>
+            <app-form-control-error [controlName]="formFields.City"></app-form-control-error>
           </ng-container>
           <ng-container *ngIf="context.isUserExisting">
             <ion-item lines="none" class="fs13">
@@ -116,14 +120,7 @@
             </ion-button>
           </ion-col>
           <ion-col size="6">
-            <ion-button
-              size="medium"
-              type="submit"
-              [disabled]="isSubmitDisabled()"
-              class="ion-margin-top"
-              fill="solid"
-              expand="block"
-            >
+            <ion-button size="medium" type="submit" class="ion-margin-top" fill="solid" expand="block">
               {{ 'service-publish.forward-button' | translate }}
             </ion-button>
           </ion-col>

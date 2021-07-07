@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
+import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
-import { ServicePublishStepFiveFormService } from '@app/service/forms/service-publish-step-five-form.service';
 import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
@@ -23,20 +24,23 @@ export class ServicePublishStepFiveComponent implements OnInit {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
+  public form: FormGroup;
   public readonly formFields = ServicePublishStepFiveFormFields;
 
   constructor(
-    public formService: ServicePublishStepFiveFormService,
-    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
     public serviceStepsNavigationService: ServiceStepsNavigationService,
+    private readonly formBuilder: FormBuilder,
+    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
     private readonly destroy$: NgDestroyService,
   ) {}
 
+  public get avatar(): string {
+    return this.form?.get(this.formFields.Avatar).value || HelperService.getNoAvatarLink();
+  }
+
   public ngOnInit(): void {
     if (this.servicePublishDataHolder.isset(ServicePublishSteps.Five)) {
-      this.formService.createForm(
-        this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five),
-      );
+      this.createForm(this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five));
     } else {
       this.profile$.pipe(takeUntil(this.destroy$)).subscribe(profile => {
         const { first_name, last_name, gender } = profile ?? {};
@@ -46,28 +50,28 @@ export class ServicePublishStepFiveComponent implements OnInit {
           gender,
           _avatar: null,
         };
-        this.formService.createForm(stepFiveInitData);
+        this.createForm(stepFiveInitData);
       });
     }
   }
 
-  public get avatar(): string {
-    return this.formService?.form.get(this.formFields.Avatar).value || HelperService.getNoAvatarLink();
-  }
-
   public submitForm(): void {
-    this.servicePublishDataHolder.setStepData<StepFiveDataInterface>(
-      ServicePublishSteps.Five,
-      this.formService.form.getRawValue(),
-    );
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      updateAllValueAndValidity(this.form);
+      return;
+    }
+
+    this.servicePublishDataHolder.setStepData<StepFiveDataInterface>(ServicePublishSteps.Five, this.form.getRawValue());
     this.serviceStepsNavigationService.next();
   }
 
-  public onSelect(data: { addedFiles: File[] }): void {
-    this.formService.addPhoto(data.addedFiles.pop());
-  }
-
-  public onRemove(): void {
-    this.formService.deletePhoto();
+  private createForm(data?: StepFiveDataInterface): void {
+    this.form = this.formBuilder.group({
+      [ServicePublishStepFiveFormFields.FirstName]: [data?.first_name, Validators.required],
+      [ServicePublishStepFiveFormFields.LastName]: [data?.last_name ?? ''],
+      [ServicePublishStepFiveFormFields.Gender]: [data?.gender ?? null],
+      [ServicePublishStepFiveFormFields.Avatar]: [data?._avatar],
+    });
   }
 }
