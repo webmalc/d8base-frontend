@@ -36,18 +36,18 @@
           <h1>{{ 'service-publish.step-seven.instant-booking' | translate }}</h1>
         </ion-label>
       </ion-item-divider>
-      <ion-item lines="full">
+      <ion-item lines="none">
         <ion-label>{{ 'service-publish.step-seven.instant-booking-label' | translate }}</ion-label>
         <ion-checkbox slot="end" [formControlName]="formFields.InstantBooking"></ion-checkbox>
       </ion-item>
-      <ng-container *ngIf="hasLocation">
+      <ng-container *ngIf="needsLocation">
         <ion-item-divider color="light">
           <ion-label>
             <h1>{{ 'service-publish.step-seven.location-title' | translate }}</h1>
           </ion-label>
         </ion-item-divider>
 
-        <ion-item lines="none" *ngIf="defaultLocationList?.length > 0">
+        <ion-item lines="none" *ngIf="hasMasterLocations">
           <ion-label>
             {{ 'service-publish.step-seven.use_default-location' | translate }}
           </ion-label>
@@ -58,7 +58,6 @@
           >
           </ion-checkbox>
         </ion-item>
-
         <ng-container *ngIf="useDefaultLocation; else locationEditor">
           <ion-radio-group [formControlName]="formFields.DefaultLocation">
             <ion-item *ngFor="let location of defaultLocationList" lines="full">
@@ -71,36 +70,6 @@
 
           <app-form-control-error [controlName]="formFields.DefaultLocation"></app-form-control-error>
         </ng-container>
-
-        <ng-template #locationEditor>
-          <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
-          <app-form-control-error [controlName]="formFields.Country"></app-form-control-error>
-          <app-city-selector
-            [formControlName]="formFields.City"
-            [country]="form.controls[formFields.Country].value"
-            [required]="true"
-          >
-          </app-city-selector>
-          <app-form-control-error [controlName]="formFields.City"></app-form-control-error>
-          <app-postal-code-selector
-            [formControlName]="formFields.Postal"
-            [countryId]="form.controls[formFields.Country].value?.id"
-            [cityId]="form.controls[formFields.City].value?.id"
-          ></app-postal-code-selector>
-          <ion-item>
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.address-placeholder' | translate }}
-            </ion-label>
-            <ion-textarea
-              rows="4"
-              type="text"
-              name="address"
-              (ionChange)="updateStepData()"
-              [formControlName]="formFields.Address"
-            ></ion-textarea>
-          </ion-item>
-          <app-form-control-error [controlName]="formFields.Address"></app-form-control-error>
-        </ng-template>
 
         <ng-container *ngIf="isClientPlaceService()">
           <ion-item lines="none">
@@ -132,6 +101,36 @@
           </ion-row>
         </ng-container>
       </ng-container>
+
+      <ng-template #locationEditor>
+        <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
+        <app-form-control-error [controlName]="formFields.Country"></app-form-control-error>
+        <app-city-selector
+          [formControlName]="formFields.City"
+          [country]="form.controls[formFields.Country].value"
+          [required]="true"
+        >
+        </app-city-selector>
+        <app-form-control-error [controlName]="formFields.City"></app-form-control-error>
+        <app-postal-code-selector
+          [formControlName]="formFields.Postal"
+          [countryId]="form.controls[formFields.Country].value?.id"
+          [cityId]="form.controls[formFields.City].value?.id"
+        ></app-postal-code-selector>
+        <ion-item class="ion-margin-bottom">
+          <ion-label color="medium" position="floating">
+            {{ 'service-publish.step-seven.address-placeholder' | translate }}
+          </ion-label>
+          <ion-textarea
+            rows="4"
+            type="text"
+            name="address"
+            (ionChange)="updateStepData()"
+            [formControlName]="formFields.Address"
+          ></ion-textarea>
+        </ion-item>
+        <app-form-control-error [controlName]="formFields.Address"></app-form-control-error>
+      </ng-template>
 
       <ion-item-divider color="light">
         <ion-label>

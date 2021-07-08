@@ -73,11 +73,15 @@ export class ServicePublishStepSevenComponent {
     return this.form.controls[this.formFields.UseDefaultLocation].value;
   }
 
-  public get hasLocation(): boolean {
+  public get needsLocation(): boolean {
     return (
       this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type !==
       'online'
     );
+  }
+
+  public get hasMasterLocations(): boolean {
+    return Boolean(this.defaultLocationList?.length);
   }
 
   public submitForm(): void {
@@ -167,20 +171,9 @@ export class ServicePublishStepSevenComponent {
     if (serviceType !== 'client') {
       this.setControlDisabled(true, this.formFields.MaxDistance);
     }
-    const useDefaultLocation = stepSevenData?.use_default_location ?? true;
+    const useDefaultLocation = this.hasMasterLocations && (stepSevenData?.use_default_location ?? true);
     this.form.controls[this.formFields.UseDefaultLocation].setValue(useDefaultLocation);
-
-    // console.log('default_location', stepSevenData?.default_location);
-    // this.form.controls[this.formFields.DefaultLocation].setValue(stepSevenData?.default_location);
-
-    // const default_location = stepSevenData?.default_location;
-    // this.form.patchValue({ default_location });
-
     this.disableIrrelevantControls(useDefaultLocation);
-
-    // setTimeout(() => this.cd.markForCheck(), 0);
-
-    // this.cd.markForCheck()
   }
 
   private initMaxDistance(): void {
