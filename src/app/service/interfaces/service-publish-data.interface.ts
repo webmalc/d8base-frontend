@@ -1,10 +1,8 @@
-import { ServiceList } from '@app/api/models';
+import { ProfessionalLocation, ServiceList, ServicePhoto } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
-import { MasterLocation } from '@app/master/models/master-location';
 import { MasterSchedule } from '@app/master/models/master-schedule';
 import { Price } from '@app/service/models/price';
 import { ServiceLocation } from '@app/service/models/service-location';
-import { ServicePhoto } from '@app/service/models/service-photo';
 import { ServiceSchedule } from '@app/service/models/service-schedule';
 
 export default interface ServicePublishData {
@@ -14,6 +12,6 @@ export default interface ServicePublishData {
   serviceSchedule: ServiceSchedule[];
   masterSchedule: MasterSchedule[];
   serviceLocation: ServiceLocation;
-  masterLocation: MasterLocation;
+  masterLocation: ProfessionalLocation; // has empty 'id' if new
   servicePrice: Price;
 }
