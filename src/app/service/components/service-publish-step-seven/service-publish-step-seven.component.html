@@ -1,8 +1,8 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
-      <ion-item lines="none" class="fs18">
+    <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
+      <ion-item lines="none" class="fs18 ion-margin-vertical">
         <ion-text>
           <b>{{ 'service-publish.step-seven.title' | translate }}</b>
         </ion-text>
@@ -12,19 +12,18 @@
           <h1>{{ 'service-publish.step-seven.timetable-title' | translate }}</h1>
         </ion-label>
       </ion-item-divider>
-      <ng-container *ngIf="renderUseMasterSchedule">
+      <ng-container *ngIf="masterHasSchedules">
         <ion-item lines="none">
           {{ 'service-publish.step-seven.use-base-timetable' | translate }}
           <ion-checkbox
             slot="end"
             formControlName="{{ formFields.UseMasterSchedule }}"
-            [value]="useMasterSchedule()"
             (ionChange)="toggleUseMasterSchedule($event)"
           >
           </ion-checkbox>
         </ion-item>
       </ng-container>
-      <ng-container *ngIf="!useMasterSchedule()" class="ion-justify-content-between ion-align-items-center">
+      <ng-container *ngIf="!useMasterSchedule" class="ion-justify-content-between ion-align-items-center">
         <ion-item lines="none" button routerLink="timetable">
           {{ 'service-publish.step-seven.timetable-desc' | translate }}
           <ion-icon slot="end" name="create-outline"></ion-icon>
@@ -37,89 +36,39 @@
           <h1>{{ 'service-publish.step-seven.instant-booking' | translate }}</h1>
         </ion-label>
       </ion-item-divider>
-      <ion-item lines="full">
+      <ion-item lines="none">
         <ion-label>{{ 'service-publish.step-seven.instant-booking-label' | translate }}</ion-label>
         <ion-checkbox slot="end" [formControlName]="formFields.InstantBooking"></ion-checkbox>
       </ion-item>
-      <ng-container *ngIf="renderLocation()">
+      <ng-container *ngIf="needsLocation">
         <ion-item-divider color="light">
           <ion-label>
             <h1>{{ 'service-publish.step-seven.location-title' | translate }}</h1>
           </ion-label>
         </ion-item-divider>
 
-        <ng-container *ngIf="defaultLocationList?.length > 0">
-          <ion-item lines="none">
+        <ion-item lines="none" *ngIf="hasMasterLocations">
+          <ion-label>
             {{ 'service-publish.step-seven.use_default-location' | translate }}
-          </ion-item>
-          <ion-item lines="none">
-            <ion-toggle
-              formControlName="{{ formFields.UseDefaultLocation }}"
-              [value]="useDefaultLocation()"
-              (ionChange)="toggleUseDefaultLocation($event)"
-            >
-            </ion-toggle>
-          </ion-item>
-        </ng-container>
-
-        <ng-container *ngIf="isUseDefaultLocation">
-          <ion-item lines="none">
-            <div class="label-for-required-input">
-              <b>
-                {{ 'service-publish.step-seven.select-default-location' | translate }}
-              </b>
-            </div>
-          </ion-item>
-          <ion-select
-            [formControlName]="formFields.DefaultLocation"
-            interface="popover"
-            class="max-width100 no-padding-left"
+          </ion-label>
+          <ion-checkbox
+            formControlName="{{ formFields.UseDefaultLocation }}"
+            [value]="useDefaultLocation"
+            (ionChange)="toggleUseDefaultLocation($event)"
           >
-            <ion-select-option *ngFor="let loc of defaultLocationList" [value]="loc">
-              <app-location-viewer [location]="loc"></app-location-viewer>
-            </ion-select-option>
-          </ion-select>
-        </ng-container>
+          </ion-checkbox>
+        </ion-item>
+        <ng-container *ngIf="useDefaultLocation; else locationEditor">
+          <ion-radio-group [formControlName]="formFields.DefaultLocation">
+            <ion-item *ngFor="let location of defaultLocationList" lines="full">
+              <ion-label class="ion-text-wrap">
+                <app-location-viewer [location]="location"></app-location-viewer>
+              </ion-label>
+              <ion-radio [value]="location.id"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
 
-        <ng-container *ngIf="!isUseDefaultLocation">
-          <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
-          <app-city-selector
-            [formControlName]="formFields.City"
-            [country]="formService.form.controls[formFields.Country].value"
-            [required]="true"
-          >
-          </app-city-selector>
-          <ion-item>
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.postal-placeholder' | translate }}
-            </ion-label>
-
-            <ionic-selectable
-              itemValueField="id"
-              itemTextField="code"
-              [canSearch]="true"
-              [canClear]="true"
-              formControlName="{{ formFields.Postal }}"
-              closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
-              searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
-              searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
-              (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())"
-              (onChange)="onThisPageDataChange()"
-            >
-            </ionic-selectable>
-          </ion-item>
-          <ion-item>
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.address-placeholder' | translate }}
-            </ion-label>
-            <ion-textarea
-              rows="4"
-              type="text"
-              name="address"
-              (ionChange)="onThisPageDataChange()"
-              [formControlName]="formFields.Address"
-            ></ion-textarea>
-          </ion-item>
+          <app-form-control-error [controlName]="formFields.DefaultLocation"></app-form-control-error>
         </ng-container>
 
         <ng-container *ngIf="isClientPlaceService()">
@@ -153,20 +102,48 @@
         </ng-container>
       </ng-container>
 
+      <ng-template #locationEditor>
+        <app-country-selector [formControlName]="formFields.Country" [required]="true"></app-country-selector>
+        <app-form-control-error [controlName]="formFields.Country"></app-form-control-error>
+        <app-city-selector
+          [formControlName]="formFields.City"
+          [country]="form.controls[formFields.Country].value"
+          [required]="true"
+        >
+        </app-city-selector>
+        <app-form-control-error [controlName]="formFields.City"></app-form-control-error>
+        <app-postal-code-selector
+          [formControlName]="formFields.Postal"
+          [countryId]="form.controls[formFields.Country].value?.id"
+          [cityId]="form.controls[formFields.City].value?.id"
+        ></app-postal-code-selector>
+        <ion-item class="ion-margin-bottom">
+          <ion-label color="medium" position="floating">
+            {{ 'service-publish.step-seven.address-placeholder' | translate }}
+          </ion-label>
+          <ion-textarea
+            rows="4"
+            type="text"
+            name="address"
+            (ionChange)="updateStepData()"
+            [formControlName]="formFields.Address"
+          ></ion-textarea>
+        </ion-item>
+        <app-form-control-error [controlName]="formFields.Address"></app-form-control-error>
+      </ng-template>
+
       <ion-item-divider color="light">
         <ion-label>
           <h1>{{ 'service-publish.step-seven.payment-title' | translate }}</h1>
         </ion-label>
       </ion-item-divider>
-      <ion-list (change)="onThisPageDataChange()">
-        <ion-list-header class="ion-no-padding ion-item-bottom-border ion-padding-bottom ion-item-no-side-padding">
-          <ion-item lines="none">
-            <div class="label-for-required-input">
-              <b>
-                {{ 'service-publish.step-seven.payment-description' | translate }}
-              </b>
-            </div>
-          </ion-item>
+      <ion-list (change)="updateStepData()">
+        <ion-list-header>
+          <ion-label>
+            <b>
+              {{ 'service-publish.step-seven.payment-description' | translate }}
+            </b>
+          </ion-label>
         </ion-list-header>
         <ion-item>
           <ion-label>{{ 'service-payment-options.cash' | translate }}</ion-label>
@@ -195,14 +172,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button
-            size="medium"
-            type="submit"
-            [disabled]="isSubmitDisabled()"
-            class="ion-margin-top"
-            fill="solid"
-            expand="block"
-          >
+          <ion-button size="medium" type="submit" class="ion-margin-top" fill="solid" expand="block">
             {{ 'service-publish.forward-button' | translate }}
           </ion-button>
         </ion-col>

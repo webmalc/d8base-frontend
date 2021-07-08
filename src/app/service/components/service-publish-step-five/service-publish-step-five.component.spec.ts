@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { ServicePublishStepFiveFormService } from '../../forms/service-publish-step-five-form.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
@@ -25,7 +24,6 @@ describe('ServicePublishStepFiveComponent', () => {
         declarations: [ServicePublishStepFiveComponent],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
-          ServicePublishStepFiveFormService,
           ServicePublishDataHolderService,
           ServiceStepsNavigationService,
           ChainManagerService,

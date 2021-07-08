@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category, ProfessionalList, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
+import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { TranslationService } from '@app/core/services/translation.service';
 import { ServicePublishStepOneFormFields } from '@app/service/enums/service-publish-step-one-form-fields';
@@ -9,7 +10,6 @@ import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { Reinitable } from '@app/shared/abstract/reinitable';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -21,7 +21,7 @@ import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
   styleUrls: ['./service-publish-step-one.component.scss'],
   providers: [NgDestroyService],
 })
-export class ServicePublishStepOneComponent extends Reinitable {
+export class ServicePublishStepOneComponent {
   @Select(CurrentUserSelectors.defaultProfessional)
   public defaultProfessional$: Observable<ProfessionalList>;
 
@@ -30,7 +30,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
     [ServicePublishStepOneFormFields.Category]: ['', Validators.required],
     [ServicePublishStepOneFormFields.Subcategory]: ['', Validators.required],
   });
-  public categoriesList$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
+  public categoriesList$: Observable<Category[]>;
   public subcategoriesList$: BehaviorSubject<Subcategory[]> = new BehaviorSubject<Subcategory[]>([]);
 
   constructor(
@@ -41,12 +41,21 @@ export class ServicePublishStepOneComponent extends Reinitable {
     private readonly destroy$: NgDestroyService,
     private readonly formBuilder: FormBuilder,
   ) {
-    super();
+    this.categoriesList$ = this.professionalsApi
+      .professionalsCategoriesList({})
+      .pipe(map(response => response.results));
+    this.fillFormValue();
     this.subscribeProfessionalSubcategory();
   }
 
-  public submitForm(): void {
-    this.servicePublishDataHolderService.setStepData<StepOneDataInterface>(ServicePublishSteps.One, {
+  public async submitForm(): Promise<void> {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      updateAllValueAndValidity(this.form);
+      return;
+    }
+
+    await this.servicePublishDataHolderService.setStepData<StepOneDataInterface>(ServicePublishSteps.One, {
       category: this.form.get(this.formFields.Category).value,
       subcategory: this.form.get(this.formFields.Subcategory).value,
     });
@@ -63,13 +72,7 @@ export class ServicePublishStepOneComponent extends Reinitable {
       .subscribe(list => this.subcategoriesList$.next(list.results));
   }
 
-  public isSubmitDisabled(): boolean {
-    return this.form.invalid;
-  }
-
-  protected init(): void {
-    this.professionalsApi.professionalsCategoriesList({}).subscribe(list => this.categoriesList$.next(list.results));
-
+  private fillFormValue(): void {
     if (this.servicePublishDataHolderService.isset(ServicePublishSteps.One)) {
       const stepData = this.servicePublishDataHolderService.getStepData<StepOneDataInterface>(ServicePublishSteps.One);
       this.form.patchValue(stepData);

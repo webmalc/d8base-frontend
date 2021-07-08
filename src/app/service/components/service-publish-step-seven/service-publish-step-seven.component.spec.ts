@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
+import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { ServicePublishStepSevenFormService } from '../../forms/service-publish-step-seven-form.service';
 import { ServicePublishAuthStateManagerService } from '../../services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -25,10 +25,9 @@ describe('ServicePublishStepSevenComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ServicePublishStepSevenComponent],
+        declarations: [ServicePublishStepSevenComponent, IonicSelectableComponent],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
-          ServicePublishStepSevenFormService,
           ServicePublishDataHolderService,
           SelectableCountryOnSearchService,
           SelectableCityOnSearchService,

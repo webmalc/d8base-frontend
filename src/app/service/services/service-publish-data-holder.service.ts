@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { FinalStepDataInterface } from '@app/service/interfaces/final-step-data-interface';
 import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
@@ -22,7 +21,6 @@ export class ServicePublishDataHolderService {
     4?: StepFiveDataInterface;
     5?: StepSixDataInterface;
     6?: StepSevenDataInterface;
-    7?: FinalStepDataInterface;
   } = {};
   private readonly storageKey = 'service_publish_data';
 

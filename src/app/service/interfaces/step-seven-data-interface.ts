@@ -1,5 +1,4 @@
 import { PostalCode } from '@app/core/models/postal-code';
-import { MasterLocation } from '@app/master/models/master-location';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';
 import { ServiceTimetableInterface } from '@app/service/interfaces/service-timetable-interface';
@@ -16,6 +15,6 @@ export interface StepSevenDataInterface extends ServiceTimetableInterface {
   use_master_schedule: boolean;
   max_distance: number;
   units: string;
-  default_location: MasterLocation;
+  default_location: number;
   is_auto_order_confirmation?: boolean;
 }

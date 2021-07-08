@@ -11,3 +11,4 @@ export * from './rates-api-cache.service';
 export * from './contacts-api-cache.service';
 export * from './categories-api-cache.service';
 export * from './subcategories-api-cache.service';
+export * from './postal-code-api-cache.service';

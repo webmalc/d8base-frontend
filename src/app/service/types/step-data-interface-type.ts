@@ -1,4 +1,3 @@
-import { FinalStepDataInterface } from '@app/service/interfaces/final-step-data-interface';
 import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
@@ -14,5 +13,4 @@ export type StepDataInterfaceType =
   | StepFourDataInterface
   | StepFiveDataInterface
   | StepSixDataInterface
-  | StepSevenDataInterface
-  | FinalStepDataInterface;
+  | StepSevenDataInterface;

@@ -1,0 +1,21 @@
+<ion-item [ngClass]="itemClass">
+  <ion-label [class.label-for-required-input]="required" color="medium" position="floating">
+    {{ title | translate }}
+  </ion-label>
+  <ionic-selectable
+    [(ngModel)]="initialValue"
+    [items]="items$ | async"
+    [disabled]="disabled || (hasData$ | async) === false"
+    [canSearch]="true"
+    [canClear]="true"
+    [shouldFocusSearchbar]="true"
+    [hasVirtualScroll]="true"
+    [title]="title"
+    [closeButtonText]="'global.cancel' | translate"
+    [isMultiple]="isMultiple"
+    (onChange)="change($event)"
+    itemTextField="code"
+    itemValueField="id"
+  >
+  </ionic-selectable>
+</ion-item>

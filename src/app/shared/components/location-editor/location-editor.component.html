@@ -5,12 +5,11 @@
   <app-subregion-selector [formControl]="subregion" [region]="region.value"></app-subregion-selector>
   <app-city-selector [formControl]="city" [country]="country.value" [required]="true"></app-city-selector>
   <app-district-selector [formControl]="district" [city]="city.value"></app-district-selector>
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'location-edit-page.postal-code' | translate }}
-    </ion-label>
-    <ion-input [formControl]="postal" name="phone" type="text"> </ion-input>
-  </ion-item>
+  <app-postal-code-selector
+    [formControl]="postal"
+    [countryId]="country.value?.id"
+    [cityId]="city.value?.id"
+  ></app-postal-code-selector>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.address' | translate }}
@@ -32,7 +31,7 @@
     </ionic-selectable>
   </ion-item>
   <ion-item>
-    <ion-label>Сделать адресом по умолчанию</ion-label>
+    <ion-label>{{ 'location-edit-page.make-default' | translate }}</ion-label>
     <ion-checkbox [formControl]="isDefault"></ion-checkbox>
   </ion-item>
   <ion-row class="ion-justify-content-center ion-margin-top">

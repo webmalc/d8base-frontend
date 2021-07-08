@@ -532,7 +532,8 @@
     "postal-code": "Zip code",
     "timezone": "Time zone",
     "remove-location": "Remove location",
-    "save-location": "Save location"
+    "save-location": "Save location",
+    "make-default": "Make default"
   },
   "contact-edit-page": {
     "contacts": "Contacts",
