@@ -532,7 +532,8 @@
     "postal-code": "Индекс",
     "timezone": "Временная зона",
     "remove-location": "Удалить",
-    "save-location": "Сохранить"
+    "save-location": "Сохранить",
+    "make-default": "Сделать адресом по умолчанию"
   },
   "contact-edit-page": {
     "contacts": "Контактные данные",

@@ -4,7 +4,7 @@ import { UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { TimezoneService } from '@app/core/services/timezone.service';
-import { filter, first, map, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { map, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 enum LocationFormFields {
   country = 'country',
@@ -91,7 +91,8 @@ export class LocationEditorComponent {
   }
 
   public emitSave(): void {
-    this.save.emit(this.transform(this.item));
+    const test = this.transform(this.item);
+    this.save.emit(test);
   }
 
   public emitDelete(): void {
@@ -99,14 +100,15 @@ export class LocationEditorComponent {
   }
 
   private transform(data: Partial<UserLocation>): UserLocation {
+    // we should send null value explicitly, or Django doesn't update the value
     return {
       ...data,
       country: this.country.value?.id,
-      region: this.region.value?.id,
-      subregion: this.subregion.value?.id,
+      region: this.region.value?.id ?? null,
+      subregion: this.subregion.value?.id ?? null,
       city: this.city.value?.id,
-      district: this.district.value?.id,
-      postal_code: this.postal.value?.id,
+      district: this.district.value?.id ?? null,
+      postal_code: this.postal.value?.id ?? null,
       address: this.address.value,
       timezone: this.timezone.value?.value,
       is_default: this.isDefault.value,

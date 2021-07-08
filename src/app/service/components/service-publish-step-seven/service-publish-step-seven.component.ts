@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserLocation } from '@app/api/models';
 import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { LocationService } from '@app/core/services/location.service';
@@ -8,7 +9,6 @@ import { MasterLocation } from '@app/master/models/master-location';
 import { MasterSchedule } from '@app/master/models/master-schedule';
 import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
 import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
-import { City } from '@app/profile/models/city';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
@@ -19,7 +19,9 @@ import { ServiceStepsNavigationService } from '@app/service/services/service-ste
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
-import { of } from 'rxjs';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
+import { Select } from '@ngxs/store';
+import { Observable, of } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -37,6 +39,9 @@ export class ServicePublishStepSevenComponent {
   public masterSchedules = [];
   public serviceSchedules = [];
   public units: string[] = ['km', 'ml'];
+
+  @Select(UserLocationSelectors.defaultLocation)
+  public userLocation: Observable<UserLocation>;
 
   constructor(
     public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
@@ -87,10 +92,6 @@ export class ServicePublishStepSevenComponent {
 
   public useMasterSchedule(): boolean {
     return this.getFormFieldValue(this.formFields.UseMasterSchedule) as boolean;
-  }
-
-  public getCityValue(): City {
-    return null; // TODO use current user's city
   }
 
   public onThisPageDataChange(): void {

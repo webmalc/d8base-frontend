@@ -42,6 +42,7 @@ import {
   ServiceTitleComponent,
   ServiceWidgetComponent,
   SubregionSelectorComponent,
+  PostalCodeSelectorComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
@@ -183,6 +184,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     CityByIdPipe,
     CategoryByIdPipe,
     SubcategoryByIdPipe,
+    PostalCodeSelectorComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -258,6 +260,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     CityByIdPipe,
     CategoryByIdPipe,
     SubcategoryByIdPipe,
+    PostalCodeSelectorComponent,
   ],
   imports: [
     CommonModule,

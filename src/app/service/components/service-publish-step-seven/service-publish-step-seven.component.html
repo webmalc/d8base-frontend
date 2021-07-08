@@ -91,25 +91,11 @@
           >
           </app-city-selector>
           <app-form-control-error [controlName]="formFields.City"></app-form-control-error>
-          <ion-item>
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-seven.postal-placeholder' | translate }}
-            </ion-label>
-
-            <ionic-selectable
-              itemValueField="id"
-              itemTextField="code"
-              [canSearch]="true"
-              [canClear]="true"
-              formControlName="{{ formFields.Postal }}"
-              closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
-              searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
-              searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
-              (onSearch)="postalSelectable.onPostalCodeSearch($event, getCityValue())"
-              (onChange)="onThisPageDataChange()"
-            >
-            </ionic-selectable>
-          </ion-item>
+          <app-postal-code-selector
+            [formControlName]="formFields.Postal"
+            [countryId]="form.controls[formFields.Country].value?.id"
+            [cityId]="form.controls[formFields.City].value?.id"
+          ></app-postal-code-selector>
           <ion-item>
             <ion-label color="medium" position="floating">
               {{ 'service-publish.step-seven.address-placeholder' | translate }}
