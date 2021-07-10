@@ -3,8 +3,8 @@ import { MAX_DELAY_MS } from '@app/core//constants/ui.constants';
 import LoaderSelectors from '@app/store/loader/loader.selectors';
 import { LoadingController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+import { audit, distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingIndicatorService {
@@ -19,7 +19,7 @@ export class LoadingIndicatorService {
       .select(LoaderSelectors.isLoaderShown)
       .pipe(
         distinctUntilChanged(),
-        switchMap(isLoaderShown => of(isLoaderShown).pipe(debounceTime(isLoaderShown ? MAX_DELAY_MS : 0))),
+        audit(isLoaderShown => (isLoaderShown ? timer(MAX_DELAY_MS) : of(true))),
       )
       .subscribe(async isLoaderShown => {
         isLoaderShown ? await this.showLoadingIndicator() : await this.hideLoadingIndicator();
