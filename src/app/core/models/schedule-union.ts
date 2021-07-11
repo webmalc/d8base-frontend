@@ -1,6 +1,6 @@
-import { ProfessionalSchedule, ServiceSchedule } from '@app/api/models';
+import { ServiceSchedule } from '@app/api/models';
 
-export type ScheduleUnion = Partial<ProfessionalSchedule> | Partial<ServiceSchedule>;
+export type ScheduleUnion = Omit<ServiceSchedule, 'service'>;
 
 type DayOrder = Readonly<ScheduleUnion['day_of_week'][]>;
 

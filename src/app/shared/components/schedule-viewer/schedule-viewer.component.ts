@@ -17,7 +17,7 @@ export class ScheduleViewerComponent {
   @Select(CurrentUserSelectors.isMondayFirstDayOfWeek)
   public isMondayFirstDayOfWeek$: Observable<boolean>;
 
-  private _schedule: ScheduleUnion[];
+  private _schedule: ScheduleUnion[] = [];
 
   public get schedule(): ScheduleUnion[] {
     return this._schedule;
@@ -26,7 +26,7 @@ export class ScheduleViewerComponent {
   @Input()
   public set schedule(schedule: ScheduleUnion[]) {
     this.isMondayFirstDayOfWeek$.pipe(takeUntil(this.destroy$)).subscribe(isMondayFirstDayOfWeek => {
-      this._schedule = schedule
+      this._schedule = (schedule ?? [])
         .filter(x => x.is_enabled)
         .sort(dayOfWeekSorter(mondayOrSundayOrder(isMondayFirstDayOfWeek)));
     });
