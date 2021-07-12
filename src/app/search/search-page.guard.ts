@@ -19,7 +19,11 @@ export class SearchPageGuard implements CanActivate {
     return isParamsEmpty
       ? this.defaultLocation$.pipe(
           first(defaultLocation => Boolean(defaultLocation)),
-          map(location => this.router.parseUrl(`/search?country=${location.country}&city=${location.city}`)),
+          map(location =>
+            !!location.country && !!location.city
+              ? this.router.parseUrl(`/search?country=${location.country}&city=${location.city}`)
+              : true,
+          ),
         )
       : of(true);
   }
