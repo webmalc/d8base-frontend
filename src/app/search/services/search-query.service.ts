@@ -31,11 +31,11 @@ export class SearchQueryService {
     this.setSearchParams(params);
   }
 
-  public deleteSearchParam(key: string) {
+  public setSearchParam(key: string, value: string): void {
     const newParams = {
       ...this.params$.value,
+      [key]: value,
     };
-    newParams[key] = null;
     this.setSearchParams(newParams);
   }
 

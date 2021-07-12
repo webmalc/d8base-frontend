@@ -7,7 +7,9 @@ import { ReviewsModule } from '@app/reviews/reviews.module';
 import { SearchFiltersMainTabComponent } from '@app/search/components/search-filters/search-filters-main-tab/search-filters-main-tab.component';
 import { SearchFiltersSubmenuComponent } from '@app/search/components/search-filters/search-filters-submenu/search-filters-submenu.component';
 import { SearchFiltersComponent } from '@app/search/components/search-filters/search-filters.component';
-import { FilterChipComponent } from '@app/search/pages/search/applied-filters/filter-chip/filter-chip.component';
+import { CategoryChipsComponent } from '@app/search/pages/search/applied-filters/category-chips/category-chips.component';
+import { ChipComponent } from '@app/search/pages/search/applied-filters/chip/chip.component';
+import { ServiceTypeChipsComponent } from '@app/search/pages/search/applied-filters/service-type-chips/service-type-chips.component';
 import { SearchResultComponent } from '@app/search/pages/search/search-result/search-result.component';
 import { ServiceLinkComponent } from '@app/search/pages/search/search-result/service-title/service-link.component';
 import { SharedModule } from '@app/shared/shared.module';
@@ -45,7 +47,9 @@ import { SearchFilterStateConverter } from './services/search-filter-state-conve
     SearchResultComponent,
     ServiceLinkComponent,
     AppliedFiltersComponent,
-    FilterChipComponent,
+    ChipComponent,
+    CategoryChipsComponent,
+    ServiceTypeChipsComponent,
   ],
   exports: [SearchFiltersComponent],
   providers: [SearchFilterStateConverter, SearchPageGuard],

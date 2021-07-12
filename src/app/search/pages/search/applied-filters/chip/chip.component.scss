@@ -1,0 +1,7 @@
+:host {
+  display: contents;
+}
+
+:host-context(.bold) {
+  font-weight: bold;
+}

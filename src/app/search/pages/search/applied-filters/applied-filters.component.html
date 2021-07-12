@@ -1,1 +1,82 @@
-<app-filter-chip *ngFor="let filter of filters" [filter]="filter" (delete)="delete(filter.name)"></app-filter-chip>
+<ng-container *ngFor="let filter of filters" [ngSwitch]="filter.name">
+  <!-- main -->
+  <app-chip *ngSwitchCase="fields.country" (delete)="delete(filter.name)">
+    {{ (filter.value | countryById$ | async)?.name }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.city" class="bold" (delete)="delete(filter.name)">
+    <b>{{ (filter.value | cityById$ | async)?.name }}</b>
+  </app-chip>
+  <app-category-chips
+    *ngSwitchCase="fields.categories"
+    [categoryIds]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  ></app-category-chips>
+  <app-category-chips
+    *ngSwitchCase="fields.subcategories"
+    [subcategoryIds]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  ></app-category-chips>
+  <app-chip *ngSwitchCase="fields.onlyWithAutoOrderConfirmation" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.instant-booking' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.startDatetime" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.date-from' | translate }}
+    {{ filter.value?.replace('T', ' ') | date: 'short' }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.endDatetime" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.date-to' | translate }}
+    {{ filter.value?.replace('T', ' ') | date: 'short' }}
+  </app-chip>
+  <app-service-type-chips
+    *ngSwitchCase="fields.serviceTypes"
+    [serviceTypes]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  ></app-service-type-chips>
+  <app-chip *ngSwitchCase="fields.startPrice" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.price-start' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.endPrice" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.price-end' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.priceCurrency" (delete)="delete([fields.startPrice, fields.endPrice])">
+    {{ 'flag-menu.currency' | translate }} {{ filter.value }}
+  </app-chip>
+
+  <!-- additional -->
+  <app-chip *ngSwitchCase="fields.ratingFrom">
+    {{ 'issuance.filters.additional.rating' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithReviews">
+    {{ 'issuance.filters.additional.only-with-reviews' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithPhotos">
+    {{ 'issuance.filters.additional.only-with-photos' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithFixedPrice">
+    {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithCertificates">
+    {{ 'issuance.filters.additional.only-with-certificates' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.startAge">
+    {{ 'issuance.filters.additional.start-age' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.endAge">
+    {{ 'issuance.filters.additional.end-age' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.nationalities">
+    {{ 'issuance.filters.additional.nationalities' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.languages">
+    {{ 'issuance.filters.additional.languages' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.professionalLevel">
+    {{ 'global.professional-level.' + filter.value | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.experience">
+    {{ 'issuance.filters.additional.experience' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.paymentMethods">
+    {{ 'issuance.filters.additional.payment-methods' | translate }}
+  </app-chip>
+</ng-container>
