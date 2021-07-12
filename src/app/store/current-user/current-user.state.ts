@@ -17,7 +17,7 @@ import { forkJoin, from, Observable, of, throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { CurrentUserStateModel } from './current-user-state.model';
 import * as CurrentUserActions from './current-user.actions';
-import { guestState, notLoadedState } from './current-user.constants';
+import { emptyTokens, guestState, notLoadedState } from './current-user.constants';
 import * as SavedUserProfessionalsActions from './saved-professionals/saved-professionals.actions';
 import { UserSavedProfessionalState } from './saved-professionals/saved-professionals.state';
 import * as UserContactActions from './user-contacts/user-contacts.actions';
@@ -333,8 +333,13 @@ export class CurrentUserState implements NgxsOnInit {
       refresh_token: tokens.refresh_token,
       grant_type: GrantTypes.RefreshGrantType,
     };
-    return this.client
-      .post<AuthResponseInterface, RefreshDataInterface>(environment.backend.refresh, refreshData)
-      .pipe(tap(tokens => patchState({ tokens })));
+    return this.client.post<AuthResponseInterface, RefreshDataInterface>(environment.backend.refresh, refreshData).pipe(
+      tap(tokens => patchState({ tokens })),
+      catchError(response => {
+        console.warn('Got error:', response.error);
+        patchState({ tokens: emptyTokens });
+        return of();
+      }),
+    );
   }
 }
