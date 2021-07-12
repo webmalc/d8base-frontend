@@ -27,6 +27,18 @@ export class AppliedFiltersComponent {
     startPrice: 'startPrice',
     endPrice: 'endPrice',
     priceCurrency: 'priceCurrency',
+    ratingFrom: 'ratingFrom',
+    onlyWithReviews: 'onlyWithReviews',
+    onlyWithPhotos: 'onlyWithPhotos',
+    onlyWithFixedPrice: 'onlyWithFixedPrice',
+    onlyWithCertificates: 'onlyWithCertificates',
+    startAge: 'startAge',
+    endAge: 'endAge',
+    nationalities: 'nationalities',
+    languages: 'languages',
+    professionalLevel: 'professionalLevel',
+    experience: 'experience',
+    paymentMethods: 'paymentMethods',
   };
 
   private _filters: SearchFilter[];

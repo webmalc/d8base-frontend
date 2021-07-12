@@ -16,7 +16,6 @@ describe('FilterChipComponent', () => {
 
       fixture = TestBed.createComponent(ChipComponent);
       component = fixture.componentInstance;
-      component.filter = {};
       fixture.detectChanges();
     }),
   );

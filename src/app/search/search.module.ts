@@ -35,7 +35,7 @@ import { SearchFilterStateConverter } from './services/search-filter-state-conve
     IonicSelectableModule,
     ReviewsModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
   declarations: [
     SearchPage,
@@ -49,10 +49,9 @@ import { SearchFilterStateConverter } from './services/search-filter-state-conve
     AppliedFiltersComponent,
     ChipComponent,
     CategoryChipsComponent,
-    ServiceTypeChipsComponent
+    ServiceTypeChipsComponent,
   ],
   exports: [SearchFiltersComponent],
-  providers: [SearchFilterStateConverter, SearchPageGuard]
+  providers: [SearchFilterStateConverter, SearchPageGuard],
 })
-export class SearchPageModule {
-}
+export class SearchPageModule {}

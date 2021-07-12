@@ -43,7 +43,40 @@
   </app-chip>
 
   <!-- additional -->
-
-  <!-- default -->
-  <app-chip *ngSwitchDefault (delete)="delete(filter.name)">{{ filter.name }}: {{ filter.value }}</app-chip>
+  <app-chip *ngSwitchCase="fields.ratingFrom">
+    {{ 'issuance.filters.additional.rating' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithReviews">
+    {{ 'issuance.filters.additional.only-with-reviews' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithPhotos">
+    {{ 'issuance.filters.additional.only-with-photos' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithFixedPrice">
+    {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.onlyWithCertificates">
+    {{ 'issuance.filters.additional.only-with-certificates' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.startAge">
+    {{ 'issuance.filters.additional.start-age' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.endAge">
+    {{ 'issuance.filters.additional.end-age' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.nationalities">
+    {{ 'issuance.filters.additional.nationalities' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.languages">
+    {{ 'issuance.filters.additional.languages' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.professionalLevel">
+    {{ 'global.professional-level.' + filter.value | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.experience">
+    {{ 'issuance.filters.additional.experience' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.paymentMethods">
+    {{ 'issuance.filters.additional.payment-methods' | translate }}
+  </app-chip>
 </ng-container>

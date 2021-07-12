@@ -4,7 +4,7 @@ import { toArray } from '@app/core/functions/string.functions';
 @Component({
   selector: 'app-service-type-chips',
   templateUrl: './service-type-chips.component.html',
-  styleUrls: ['./service-type-chips.component.scss']
+  styleUrls: ['./service-type-chips.component.scss'],
 })
 export class ServiceTypeChipsComponent {
   public chips: string[];
