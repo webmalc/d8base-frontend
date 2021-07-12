@@ -1,13 +1,13 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserLocation } from '@app/api/models';
+import { ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models';
 import { defaultSchedule } from '@app/core/constants/schedule.constants';
 import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { ScheduleUnion } from '@app/core/models/schedule-union';
 import { LocationService } from '@app/core/services/location.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { MasterLocation } from '@app/master/models/master-location';
-import { MasterSchedule } from '@app/master/models/master-schedule';
 import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
 import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
@@ -34,15 +34,15 @@ export class ServicePublishStepSevenComponent {
   public form: FormGroup;
   public formFields = ServicePublishStepSevenFormFields;
   public defaultLocationList: MasterLocation[];
-  public selectedSchedules = defaultSchedule;
+  public selectedSchedules: ScheduleUnion[];
   public units: string[] = ['km', 'ml'];
-  public masterHasSchedules: boolean;
+  public masterExists: boolean;
 
   @Select(UserLocationSelectors.defaultLocation)
   public userLocation: Observable<UserLocation>;
 
-  private masterSchedules = [];
-  private serviceSchedules = [];
+  private masterSchedules: ScheduleUnion[];
+  private serviceSchedules: ScheduleUnion[];
 
   constructor(
     public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
@@ -84,23 +84,20 @@ export class ServicePublishStepSevenComponent {
     return Boolean(this.defaultLocationList?.length);
   }
 
-  public submitForm(): void {
+  public async submitForm(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       updateAllValueAndValidity(this.form);
       return;
     }
 
-    const data: StepSevenDataInterface = this.form.getRawValue();
-    data.need_to_create_master_schedule = !this.useMasterSchedule;
-    if (!this.useMasterSchedule) {
-      data.use_master_schedule = true;
-    }
-    if (this.setServiceLocationByType) {
-      const masterLocation: MasterLocation = this.form.get(this.formFields.DefaultLocation).value;
-      this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Final, { masterLocation });
-    }
-    this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
+    const data: StepSevenDataInterface = {
+      ...this.form.getRawValue(),
+      timetable: [...this.selectedSchedules],
+      need_to_create_master_schedule: !this.masterExists,
+      use_master_schedule: this.useMasterSchedule || !this.masterExists,
+    };
+    await this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
     this.serviceStepsNavigationService.next();
   }
 
@@ -114,8 +111,7 @@ export class ServicePublishStepSevenComponent {
   }
 
   public toggleUseDefaultLocation(event: CustomEvent): void {
-    const useDefaultLocation: boolean = event.detail.checked;
-    this.disableIrrelevantControls(useDefaultLocation);
+    this.disableIrrelevantControls({ useDefaultLocation: event.detail.checked });
   }
 
   public isClientPlaceService(): boolean {
@@ -125,17 +121,36 @@ export class ServicePublishStepSevenComponent {
     );
   }
 
-  private disableIrrelevantControls(useDefaultLocation: boolean): void {
-    if (useDefaultLocation) {
+  public test(obj: any): string {
+    return JSON.stringify(obj);
+  }
+
+  private disableIrrelevantControls(options: {
+    useDefaultLocation?: boolean;
+    serviceType?: ServiceList['service_type'];
+  }): void {
+    const { useDefaultLocation, serviceType } = options;
+    if (useDefaultLocation === true) {
       this.setControlDisabled(false, this.formFields.DefaultLocation);
       this.setControlDisabled(true, this.formFields.Country);
       this.setControlDisabled(true, this.formFields.City);
       this.setControlDisabled(true, this.formFields.Address);
-    } else {
+    }
+    if (useDefaultLocation === false) {
       this.setControlDisabled(true, this.formFields.DefaultLocation);
       this.setControlDisabled(false, this.formFields.Country);
       this.setControlDisabled(false, this.formFields.City);
       this.setControlDisabled(false, this.formFields.Address);
+    }
+    if (serviceType === 'online') {
+      this.setControlDisabled(true, this.formFields.Country);
+      this.setControlDisabled(true, this.formFields.City);
+      this.setControlDisabled(true, this.formFields.Address);
+      this.setControlDisabled(true, this.formFields.Postal);
+      this.setControlDisabled(true, this.formFields.DefaultLocation);
+    }
+    if (serviceType !== 'client') {
+      this.setControlDisabled(true, this.formFields.MaxDistance);
     }
   }
 
@@ -159,21 +174,13 @@ export class ServicePublishStepSevenComponent {
   private setServiceLocationByType(stepSevenData: StepSevenDataInterface): void {
     const stepData = this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const serviceType = stepData?.service_type;
-
+    this.disableIrrelevantControls({ serviceType });
     if (serviceType === 'online') {
-      this.setControlDisabled(true, this.formFields.Country);
-      this.setControlDisabled(true, this.formFields.City);
-      this.setControlDisabled(true, this.formFields.Address);
-      this.setControlDisabled(true, this.formFields.Postal);
-      this.setControlDisabled(true, this.formFields.DefaultLocation);
       return;
-    }
-    if (serviceType !== 'client') {
-      this.setControlDisabled(true, this.formFields.MaxDistance);
     }
     const useDefaultLocation = this.hasMasterLocations && (stepSevenData?.use_default_location ?? true);
     this.form.controls[this.formFields.UseDefaultLocation].setValue(useDefaultLocation);
-    this.disableIrrelevantControls(useDefaultLocation);
+    this.disableIrrelevantControls({ useDefaultLocation });
   }
 
   private initMaxDistance(): void {
@@ -234,17 +241,18 @@ export class ServicePublishStepSevenComponent {
         switchMap(list =>
           list.length > 0 ? this.masterScheduleApi.get({ professional: list[0].id.toString() }) : of(null),
         ),
-        map((res: ApiListResponseInterface<MasterSchedule>) => (null === res ? [] : res.results)),
+        map((response: ApiListResponseInterface<ProfessionalSchedule>) => response?.results),
       )
       .subscribe(masterSchedule => {
-        this.masterSchedules = masterSchedule;
-        this.masterHasSchedules = this.masterSchedules.length > 0;
-        this.useMasterSchedule = this.masterHasSchedules;
+        this.masterSchedules = masterSchedule ?? [];
+        this.masterExists = !!masterSchedule;
+        this.useMasterSchedule = this.masterSchedules.length > 0;
         if (stepData?.timetable?.length) {
-          this.selectedSchedules = stepData.timetable;
-          this.serviceSchedules = stepData.timetable;
+          this.selectedSchedules = [...stepData.timetable];
+          this.serviceSchedules = [...stepData.timetable];
         } else {
-          this.selectedSchedules = masterSchedule;
+          this.serviceSchedules = [...defaultSchedule];
+          this.selectedSchedules = [...(this.useMasterSchedule ? this.masterSchedules : this.serviceSchedules)];
         }
         this.cd.markForCheck();
       });

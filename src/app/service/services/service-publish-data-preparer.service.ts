@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ProfessionalLocation, Service, ServicePhoto } from '@app/api/models';
+import { ProfessionalLocation, ProfessionalSchedule, Service, ServicePhoto, ServiceSchedule } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { fileToBase64 } from '@app/core/functions/file.functions';
 import { HelperService } from '@app/core/services/helper.service';
-import { MasterSchedule } from '@app/master/models/master-schedule';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
@@ -14,9 +13,7 @@ import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { Price } from '@app/service/models/price';
 import { ServiceLocation } from '@app/service/models/service-location';
-import { ServiceSchedule } from '@app/service/models/service-schedule';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
-import { plainToClass } from 'class-transformer';
 import ServicePublishData from '../interfaces/service-publish-data.interface';
 
 @Injectable()
@@ -38,41 +35,21 @@ export class ServicePublishDataPreparerService {
       master: this.getNewMaster(),
       servicePhotos: await this.getServicePhotos(),
       serviceSchedule: this.getServiceSchedule(),
-      masterSchedule: this.getMasterSchedule(),
+      masterSchedule: this.getProfessionalSchedule(),
       servicePrice: this.getServicePrice(),
     };
   }
 
-  private getMasterSchedule(): MasterSchedule[] {
-    if (
-      this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-        .need_to_create_master_schedule
-    ) {
-      const stepData: MasterSchedule[] = HelperService.clearArray(
-        this.servicePublishDataHolder
-          .getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-          ?.timetable?.map(raw => plainToClass(MasterSchedule, raw)),
-      );
-
-      return !stepData ? [] : stepData;
-    }
-
-    return [];
+  private getProfessionalSchedule(): ProfessionalSchedule[] | null {
+    const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    return stepData.need_to_create_master_schedule
+      ? stepData?.timetable?.map(s => ({ ...s, professional: NaN })) ?? []
+      : null;
   }
 
-  private getServiceSchedule(): ServiceSchedule[] {
-    if (
-      this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).use_master_schedule
-    ) {
-      return [];
-    }
-    const stepData: ServiceSchedule[] = HelperService.clearArray(
-      this.servicePublishDataHolder
-        .getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-        ?.timetable?.map(raw => plainToClass(ServiceSchedule, raw)),
-    );
-
-    return !stepData ? [] : stepData;
+  private getServiceSchedule(): ServiceSchedule[] | null {
+    const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    return stepData.use_master_schedule ? null : stepData?.timetable?.map(s => ({ ...s, service: NaN })) ?? [];
   }
 
   private async getServicePhotos(): Promise<ServicePhoto[]> {
