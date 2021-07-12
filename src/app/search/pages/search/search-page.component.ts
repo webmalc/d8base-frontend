@@ -60,7 +60,11 @@ export class SearchPage implements AfterViewInit {
   }
 
   public deleteFilter(key: string): void {
-    this.query.deleteSearchParam(key);
+    this.query.setSearchParam(key, null);
+  }
+
+  public editFilter(options: { key: string; value: string }): void {
+    this.query.setSearchParam(options.key, options.value);
   }
 
   private runSearchQuery(params: SearchService.SearchListParams): void {

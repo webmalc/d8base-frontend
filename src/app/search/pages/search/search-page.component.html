@@ -59,6 +59,7 @@
             <app-applied-filters
               [params]="params"
               (deleteFilter)="deleteFilter($event)"
+              (updateFilter)="editFilter($event)"
               class="ion-margin-bottom"
             ></app-applied-filters>
             <app-infinite-scroll-container

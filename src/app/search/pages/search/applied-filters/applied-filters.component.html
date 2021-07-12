@@ -1,1 +1,49 @@
-<app-filter-chip *ngFor="let filter of filters" [filter]="filter" (delete)="delete(filter.name)"></app-filter-chip>
+<ng-container *ngFor="let filter of filters" [ngSwitch]="filter.name">
+  <!-- main -->
+  <app-chip *ngSwitchCase="fields.country" (delete)="delete(filter.name)">
+    {{ (filter.value | countryById$ | async)?.name }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.city" class="bold" (delete)="delete(filter.name)">
+    <b>{{ (filter.value | cityById$ | async)?.name }}</b>
+  </app-chip>
+  <app-category-chips
+    *ngSwitchCase="fields.categories"
+    [categoryIds]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  ></app-category-chips>
+  <app-category-chips
+    *ngSwitchCase="fields.subcategories"
+    [subcategoryIds]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  ></app-category-chips>
+  <app-chip *ngSwitchCase="fields.onlyWithAutoOrderConfirmation" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.instant-booking' | translate }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.startDatetime" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.date-from' | translate }}
+    {{ filter.value?.replace('T', ' ') | date: 'short' }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.endDatetime" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.date-to' | translate }}
+    {{ filter.value?.replace('T', ' ') | date: 'short' }}
+  </app-chip>
+  <app-service-type-chips
+    *ngSwitchCase="fields.serviceTypes"
+    [serviceTypes]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  ></app-service-type-chips>
+  <app-chip *ngSwitchCase="fields.startPrice" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.price-start' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.endPrice" (delete)="delete(filter.name)">
+    {{ 'issuance.filters.main-tab.price-end' | translate }} {{ filter.value }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.priceCurrency" (delete)="delete([fields.startPrice, fields.endPrice])">
+    {{ 'flag-menu.currency' | translate }} {{ filter.value }}
+  </app-chip>
+
+  <!-- additional -->
+
+  <!-- default -->
+  <app-chip *ngSwitchDefault (delete)="delete(filter.name)">{{ filter.name }}: {{ filter.value }}</app-chip>
+</ng-container>

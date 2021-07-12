@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchService } from '@app/api/services';
+import { fromArray, toArray } from '@app/core/functions/string.functions';
 import { SearchFilter } from '@app/search/interfaces/search-filter.interface';
 
 @Component({
@@ -10,6 +11,24 @@ import { SearchFilter } from '@app/search/interfaces/search-filter.interface';
 export class AppliedFiltersComponent {
   @Output()
   public deleteFilter = new EventEmitter<string>();
+
+  @Output()
+  public updateFilter = new EventEmitter<{ key: string; value: string }>();
+
+  public fields: { [key in keyof SearchService.SearchListParams]: keyof SearchService.SearchListParams } = {
+    country: 'country',
+    city: 'city',
+    categories: 'categories',
+    subcategories: 'subcategories',
+    onlyWithAutoOrderConfirmation: 'onlyWithAutoOrderConfirmation',
+    startDatetime: 'startDatetime',
+    endDatetime: 'endDatetime',
+    serviceTypes: 'serviceTypes',
+    startPrice: 'startPrice',
+    endPrice: 'endPrice',
+    priceCurrency: 'priceCurrency',
+  };
+
   private _filters: SearchFilter[];
 
   @Input()
@@ -27,7 +46,18 @@ export class AppliedFiltersComponent {
     return this._filters;
   }
 
-  public delete(key: string): void {
-    this.deleteFilter.emit(key);
+  public delete(keys: string | string[], values: string = '', valueToRemove: string = ''): void {
+    const keysArray = typeof keys === 'string' ? [keys] : keys;
+    if (valueToRemove) {
+      const key = keysArray[0];
+      const newValue = fromArray(toArray(values).filter(s => s !== valueToRemove));
+      if (newValue) {
+        this.updateFilter.emit({ key, value: newValue });
+      } else {
+        this.deleteFilter.emit(key);
+      }
+    } else {
+      keysArray.forEach(key => this.deleteFilter.emit(key));
+    }
   }
 }

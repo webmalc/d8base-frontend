@@ -1,0 +1,6 @@
+<app-chip *ngFor="let categoryId of categories" (delete)="onDelete(categoryId)">
+  {{ (categoryId | categoryById$ | async)?.name }}
+</app-chip>
+<app-chip *ngFor="let subcategoryId of subcategories" (delete)="onDelete(subcategoryId)">
+  {{ (subcategoryId | subcategoryById$ | async)?.name }}
+</app-chip>
