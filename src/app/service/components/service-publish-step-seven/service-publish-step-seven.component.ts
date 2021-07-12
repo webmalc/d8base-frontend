@@ -95,7 +95,7 @@ export class ServicePublishStepSevenComponent {
       ...this.form.getRawValue(),
       timetable: [...this.selectedSchedules],
       need_to_create_master_schedule: !this.masterExists,
-      use_master_schedule: this.useMasterSchedule,
+      use_master_schedule: this.useMasterSchedule || !this.masterExists,
     };
     await this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
     this.serviceStepsNavigationService.next();
