@@ -149,7 +149,7 @@ export class ServicePublishStepSevenComponent {
       this.setControlDisabled(true, this.formFields.Postal);
       this.setControlDisabled(true, this.formFields.DefaultLocation);
     }
-    if (serviceType !== 'client') {
+    if (serviceType === 'professional' || serviceType === 'online') {
       this.setControlDisabled(true, this.formFields.MaxDistance);
     }
   }
