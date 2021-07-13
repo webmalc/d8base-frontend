@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { UserLocation } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
+import { CurrentLocationService } from '@app/core/services/current-location.service';
 import { Action, State, StateContext } from '@ngxs/store';
 import { mergeMap, tap } from 'rxjs/operators';
 import * as UserLocationActions from './user-locations.actions';
 
-export const emptyUserLocationState: UserLocation[] = null;
+export const emptyUserLocationState: UserLocationStateModel = {};
 
-export type UserLocationStateModel = UserLocation[];
+export type UserLocationStateModel = {
+  guessedLocation?: UserLocation;
+  savedLocations?: UserLocation[];
+};
 
 @Injectable()
 @State<UserLocationStateModel>({
@@ -15,26 +19,29 @@ export type UserLocationStateModel = UserLocation[];
   defaults: emptyUserLocationState,
 })
 export class UserLocationState {
-  constructor(private readonly accountsService: AccountsService) {}
+  constructor(
+    private readonly accountsService: AccountsService,
+    private readonly currentLocationService: CurrentLocationService,
+  ) {}
 
   @Action(UserLocationActions.LoadAllUserLocations)
-  public loadAllUserLocations({ setState }: StateContext<UserLocationStateModel>) {
+  public loadAllUserLocations({ patchState }: StateContext<UserLocationStateModel>) {
     return this.accountsService.accountsLocationsList({}).pipe(
       tap(({ results }) => {
-        setState(results);
+        patchState({ savedLocations: results });
       }),
     );
   }
 
   @Action(UserLocationActions.CreateUserLocation)
   public createUserLocation(
-    { setState, getState }: StateContext<UserLocationStateModel>,
+    { patchState, getState }: StateContext<UserLocationStateModel>,
     { location }: UserLocationActions.CreateUserLocation,
   ) {
     return this.accountsService.accountsLocationsCreate(location).pipe(
       tap(newUserLocation => {
-        const locations = getState();
-        setState(locations.concat(newUserLocation));
+        const locations = getState().savedLocations ?? [];
+        patchState({ savedLocations: locations.concat(newUserLocation) });
       }),
     );
   }
@@ -51,15 +58,29 @@ export class UserLocationState {
 
   @Action(UserLocationActions.DeleteUserLocation)
   public deleteUserLocation(
-    { setState, getState }: StateContext<UserLocationStateModel>,
+    { patchState, getState }: StateContext<UserLocationStateModel>,
     { locationId: LocationIdToDelete }: UserLocationActions.DeleteUserLocation,
   ) {
-    const Locations = getState();
+    const Locations = getState().savedLocations ?? [];
     const idToDelete = Locations.find(({ id }) => id === LocationIdToDelete)?.id;
     return this.accountsService.accountsLocationsDelete(idToDelete).pipe(
       tap(() => {
-        setState(Locations.filter(({ id }) => id !== idToDelete));
+        patchState({ savedLocations: Locations.filter(({ id }) => id !== idToDelete) });
       }),
+    );
+  }
+
+  @Action(UserLocationActions.GuessCurrentLocation)
+  public guessCurrentLocation({ patchState }: StateContext<UserLocationStateModel>) {
+    return this.currentLocationService.guessLocation().pipe(
+      tap(location =>
+        patchState({
+          guessedLocation: {
+            country: location?.country?.id,
+            city: location?.city?.id,
+          },
+        }),
+      ),
     );
   }
 }

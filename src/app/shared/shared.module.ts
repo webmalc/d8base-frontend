@@ -43,12 +43,12 @@ import {
   ServiceWidgetComponent,
   SubregionSelectorComponent,
   PostalCodeSelectorComponent,
+  OnMapPopoverComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
-import { DefaultLocationPopoverComponent } from '@app/shared/components/default-location-popover/default-location-popover.component';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { FlagMenuComponent } from '@app/shared/components/flag-menu/flag-menu.component';
 import { InfoRowComponent } from '@app/shared/components/info-row/info-row.component';
@@ -62,7 +62,6 @@ import { ServicePublishAgreementComponent } from '@app/shared/components/service
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
 import { HintDirective } from '@app/shared/directives';
-import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
 import {
   CityByIdPipe,
   CountryByIdPipe,
@@ -73,7 +72,6 @@ import {
   CategoryByIdPipe,
   SubcategoryByIdPipe,
 } from '@app/shared/pipes';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
 import { SelectableRegionOnSearchService } from '@app/shared/services/selectable-region-on-search.service';
@@ -125,10 +123,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     DurationEditorComponent,
     ImageCropPopoverComponent,
     ServiceWidgetComponent,
-    DefaultLocationPopoverComponent,
     MoreInfoComponent,
     ProfessionalCardComponent,
-    DefaultLocationPopoverComponent,
     FlagMenuComponent,
     CalendarComponentComponent,
     OrderDetailsComponent,
@@ -185,6 +181,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     CategoryByIdPipe,
     SubcategoryByIdPipe,
     PostalCodeSelectorComponent,
+    OnMapPopoverComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -208,7 +205,6 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     RatingHalfStarComponent,
     DurationEditorComponent,
     ServiceWidgetComponent,
-    DefaultLocationPopoverComponent,
     FlagMenuComponent,
     CalendarComponentComponent,
     OrderDetailsComponent,
@@ -261,6 +257,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     CategoryByIdPipe,
     SubcategoryByIdPipe,
     PostalCodeSelectorComponent,
+    OnMapPopoverComponent,
   ],
   imports: [
     CommonModule,
@@ -276,8 +273,6 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
   ],
   providers: [
     // TODO Create core module and move providers into it
-    ContactsTabFormService,
-    SelectableCityOnSearchService,
     SelectableCountryOnSearchService,
     SelectableDistrictOnSearchService,
     SelectableRegionOnSearchService,

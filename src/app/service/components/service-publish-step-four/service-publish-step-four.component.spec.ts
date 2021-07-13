@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { CurrentPositionService } from '@app/core/services/location/current-position.service';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { LocationServiceMock } from 'src/testing/mocks';
@@ -44,7 +43,6 @@ describe('ServicePublishStepFourComponent', () => {
           ServicePublishDataHolderService,
           { provide: CurrentPositionService, useClass: LocationServiceMock },
           SelectableCountryOnSearchService,
-          SelectableCityOnSearchService,
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();

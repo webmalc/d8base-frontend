@@ -5,7 +5,6 @@ import { CategoryIconComponent } from '@app/main/components/category-icon/catego
 import { LocationPickerComponent } from '@app/main/components/location-picker/location-picker.component';
 import { MainPageIconComponent } from '@app/main/components/main-page-icon/main-page-icon.component';
 import { MainPageReviewComponent } from '@app/main/components/main-page-review/main-page-review.component';
-import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -45,7 +44,6 @@ import { MainPage } from './main.page';
     MainPageIconComponent,
     MainPageReviewComponent,
     LocationPickerComponent,
-    OnMapPopoverComponent,
   ],
   providers: [DefaultCategoriesFactoryService],
 })

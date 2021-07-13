@@ -814,5 +814,9 @@
     "eula": "the EULA",
     "part-2": ", have read and and accepted",
     "rules": "the rules"
+  },
+  "city-confirmation": {
+    "title": "Are you in {{city}}?",
+    "choose": "No, let me choose"
   }
 }
