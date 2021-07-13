@@ -1,4 +1,4 @@
-<ion-app *ngIf="(isLoaderShown$ | async) === false" [ngClass]="{ 'dark-theme': darkTheme$ | async }">
+<ion-app [ngClass]="{ 'dark-theme': darkTheme$ | async }">
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" menuId="main-menu" side="start">
       <app-main-menu [isAuthenticated]="isAuthenticated$ | async" [isMaster]="masterManager.isMaster$ | async">
