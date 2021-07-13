@@ -7,7 +7,6 @@ import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
@@ -26,7 +25,6 @@ describe('SearchFiltersMainTabComponent', () => {
         providers: [
           SearchFilterStateService,
           SelectableCountryOnSearchService,
-          SelectableCityOnSearchService,
           IpServicesHolderService,
           IpApiService,
           IpDataService,

@@ -1,0 +1,12 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <app-country-selector [formControl]="country"></app-country-selector>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <app-city-selector [formControl]="city" [country]="country.value"></app-city-selector>
+    </ion-col>
+  </ion-row>
+</ion-grid>

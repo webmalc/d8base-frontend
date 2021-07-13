@@ -1,4 +1,4 @@
-/*eslint max-lines: ["error", 500]*/
+/* eslint-disable max-lines */
 import { Inject, Injectable } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
@@ -59,7 +59,7 @@ export class CurrentUserState implements NgxsOnInit {
     return from(this.storage.get(TOKEN_DATA_STORAGE_KEY)).pipe(
       tap(tokens => {
         if (!tokens) {
-          dispatch(new CurrentUserActions.RestoreSettingsLocal());
+          dispatch([new CurrentUserActions.RestoreSettingsLocal(), new UserLocationActions.GuessCurrentLocation()]);
         } else {
           patchState({ tokens });
           dispatch(new CurrentUserActions.LoadProfile());
@@ -244,10 +244,9 @@ export class CurrentUserState implements NgxsOnInit {
   @Action(CurrentUserActions.SaveSettings)
   public saveUserSettings({}: StateContext<CurrentUserStateModel>, { newSettings }: CurrentUserActions.SaveSettings) {
     const id = newSettings.id;
-    const saveSettings$ = id
+    return id
       ? this.api.accountsSettingsUpdate({ id, data: newSettings })
       : this.api.accountsSettingsCreate(newSettings);
-    return saveSettings$;
   }
 
   @Action(CurrentUserActions.StoreSettingsLocal)

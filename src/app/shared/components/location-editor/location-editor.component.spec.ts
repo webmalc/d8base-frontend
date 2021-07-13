@@ -6,7 +6,6 @@ import { TimezoneService } from '@app/core/services/timezone.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { SelectableCityOnSearchService } from '../../services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '../../services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '../../services/selectable-district-on-search.service';
 import { SelectableRegionOnSearchService } from '../../services/selectable-region-on-search.service';
@@ -26,7 +25,6 @@ describe('AbstractLocationEditComponent', () => {
           FormBuilder,
           TimezoneService,
           SelectableCountryOnSearchService,
-          SelectableCityOnSearchService,
           SelectableRegionOnSearchService,
           SelectableSubregionOnSearchService,
           SelectableDistrictOnSearchService,
