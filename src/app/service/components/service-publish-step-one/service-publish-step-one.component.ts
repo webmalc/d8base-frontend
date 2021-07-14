@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category, ProfessionalList, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
-import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { TranslationService } from '@app/core/services/translation.service';
 import { ServicePublishStepOneFormFields } from '@app/service/enums/service-publish-step-one-form-fields';
@@ -49,9 +49,7 @@ export class ServicePublishStepOneComponent {
   }
 
   public async submitForm(): Promise<void> {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      updateAllValueAndValidity(this.form);
+    if (isFormInvalid(this.form)) {
       return;
     }
 

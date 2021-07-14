@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models';
 import { defaultSchedule } from '@app/core/constants/schedule.constants';
-import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { ScheduleUnion } from '@app/core/models/schedule-union';
 import { LocationService } from '@app/core/services/location.service';
@@ -81,9 +81,7 @@ export class ServicePublishStepSevenComponent {
   }
 
   public async submitForm(): Promise<void> {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      updateAllValueAndValidity(this.form);
+    if (isFormInvalid(this.form)) {
       return;
     }
 

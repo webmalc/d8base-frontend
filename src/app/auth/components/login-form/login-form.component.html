@@ -9,7 +9,7 @@
     <ion-input type="password" name="password" [formControlName]="formFields.Password"></ion-input>
   </ion-item>
   <app-form-control-error [controlName]="formFields.Password"> </app-form-control-error>
-  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="pending || form.invalid">
+  <ion-button type="submit" expand="block" fill="solid" color="success" [disabled]="pending">
     {{ 'login-form.sign-in' | translate }}
   </ion-button>
 </form>

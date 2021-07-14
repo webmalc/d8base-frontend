@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
-import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { HelperService } from '@app/core/services/helper.service';
 import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';
@@ -56,9 +56,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
   }
 
   public submitForm(): void {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      updateAllValueAndValidity(this.form);
+    if (isFormInvalid(this.form)) {
       return;
     }
 
