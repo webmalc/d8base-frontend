@@ -88,7 +88,6 @@ export class ProfessionalContactEditComponent implements OnInit {
 
   private initContactItems(): void {
     this.contactItems$ = this.profileCountry$.pipe(
-      filter(country => Boolean(country)),
       switchMap(profileCountry => this.contactsApiCache.listByCountry(profileCountry)),
     );
   }

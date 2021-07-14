@@ -1,7 +1,8 @@
 <app-header></app-header>
 <ion-toolbar class="ion-item-border-top ion-item-bottom-border">
-  <ion-row>
+  <ion-row class="ion-align-items-center">
     <ion-col
+      class="ion-no-padding"
       offset-xl="2"
       offset-lg="1"
       offset-md="0"
@@ -11,7 +12,7 @@
       size-lg="2"
       size-md="2"
       size-sm="3"
-      size-xs="2"
+      size-xs="0"
     >
       <ion-item lines="none" detail="false" button (click)="location.back()">
         <ion-icon class="ph5" name="arrow-back-outline"></ion-icon>
@@ -28,7 +29,7 @@
       size-lg="6"
       size-md="6"
       size-sm="9"
-      size-xs="10"
+      size-xs="12"
     >
       <app-master-profile-submenu
         (selectedTab)="selectTab($event)"
@@ -37,7 +38,7 @@
     </ion-col>
   </ion-row>
 </ion-toolbar>
-<ion-content class="">
+<ion-content>
   <ion-row class="ion-margin-bottom">
     <ion-col class="ion-no-padding" size="12">
       <ion-row class="ion-margin-top ion-justify-content-center">
