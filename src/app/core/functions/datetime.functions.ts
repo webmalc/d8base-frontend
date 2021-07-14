@@ -48,11 +48,15 @@ export function getLocalDateTimeString(date: Date): string {
     return null;
   }
 
+  const YYYY = date.getFullYear();
+  const MM = getMonthNumberFormatted(date);
+  const DD = padWithZero(date.getDate());
+  const HH = padWithZero(date.getHours());
+  const mm = padWithZero(date.getMinutes());
+  const ss = padWithZero(date.getSeconds());
+
   // 'YYYY-MM-DDTHH:mm:ss'
-  return (
-    `${date.getFullYear()}-${getMonthNumberFormatted(date)}-${date.getDate()}` +
-    `T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-  );
+  return `${YYYY}-${MM}-${DD}T${HH}:${mm}:${ss}`;
 }
 
 export function getMonthDateString(date: Date | string): string {
@@ -91,5 +95,9 @@ export function alignTimeInterval(fromStr: string, toStr: string): { startDateti
 
 function getMonthNumberFormatted(date: Date): string {
   const month = date.getMonth() + 1;
-  return `00${month}`.slice(-2);
+  return padWithZero(month);
+}
+
+function padWithZero(value: number, size: number = 2): string {
+  return value.toString().padStart(size, '0');
 }
