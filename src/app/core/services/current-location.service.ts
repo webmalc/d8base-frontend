@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
-import { City, Country } from '@app/api/models';
 import { GuessLocationByIpService } from '@app/core/services/guess-location-by-ip.service';
 import { OnMapPopoverComponent } from '@app/shared/components/on-map-popover/on-map-popover.component';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { concat, from, Observable } from 'rxjs';
 import { first, mergeMap } from 'rxjs/operators';
-
-interface Resolved {
-  country: Country;
-  city: City;
-}
+import { ResolvedUserLocation } from '../interfaces/user-location.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +18,7 @@ export class CurrentLocationService {
     private readonly translator: TranslateService,
   ) {}
 
-  public guessLocation(): Observable<Resolved> {
+  public guessLocation(): Observable<ResolvedUserLocation> {
     const guesses$ = concat([
       this.guessByIp.guess(),
       // TODO add more guess methods
@@ -36,7 +31,7 @@ export class CurrentLocationService {
     );
   }
 
-  private async confirmLocation(guessedLocation: Resolved): Promise<Resolved> {
+  private async confirmLocation(guessedLocation: ResolvedUserLocation): Promise<ResolvedUserLocation> {
     const { city } = guessedLocation;
     const alert = await this.alertController.create({
       subHeader: this.translator.instant('city-confirmation.title', { city: city.name }),
@@ -58,7 +53,7 @@ export class CurrentLocationService {
     return null;
   }
 
-  private async specifyNewLocation(guessedLocation: Resolved): Promise<Resolved> {
+  private async specifyNewLocation(guessedLocation: ResolvedUserLocation): Promise<ResolvedUserLocation> {
     const { country, city } = guessedLocation;
     const popover = await this.popoverController.create({
       component: OnMapPopoverComponent,
