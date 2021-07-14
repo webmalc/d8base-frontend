@@ -43,7 +43,8 @@
     "save": "Сохранить",
     "cancel": "Отмена",
     "not-specified": "Не указано",
-    "page-not-found": "Страница не найдена"
+    "page-not-found": "Страница не найдена",
+    "clear": "Очистить"
   },
   "registration-verification": {
     "confirmation": "Подтверждение регистрации",

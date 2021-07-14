@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
 import { UserLocation } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
+import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
+import { Storage } from '@ionic/storage';
 import { CurrentLocationService } from '@app/core/services/current-location.service';
 import { Action, State, StateContext } from '@ngxs/store';
-import { mergeMap, tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import * as UserLocationActions from './user-locations.actions';
+
+const USER_LOCATION_STORAGE_KEY = 'user_location';
 
 export const emptyUserLocationState: UserLocationStateModel = {};
 
-export type UserLocationStateModel = {
+export interface UserLocationStateModel {
   guessedLocation?: UserLocation;
   savedLocations?: UserLocation[];
-};
+}
+
+interface UserLocationStorageModel {
+  location: ResolvedUserLocation;
+}
 
 @Injectable()
 @State<UserLocationStateModel>({
@@ -22,6 +31,7 @@ export class UserLocationState {
   constructor(
     private readonly accountsService: AccountsService,
     private readonly currentLocationService: CurrentLocationService,
+    private readonly storage: Storage,
   ) {}
 
   @Action(UserLocationActions.LoadAllUserLocations)
@@ -72,7 +82,17 @@ export class UserLocationState {
 
   @Action(UserLocationActions.GuessCurrentLocation)
   public guessCurrentLocation({ patchState }: StateContext<UserLocationStateModel>) {
-    return this.currentLocationService.guessLocation().pipe(
+    const getSaved$ = from(this.storage.get(USER_LOCATION_STORAGE_KEY)) as Observable<UserLocationStorageModel>;
+    const save$ = (model: UserLocationStorageModel) => from(this.storage.set(USER_LOCATION_STORAGE_KEY, model));
+    const guessAndSave$ = this.currentLocationService
+      .guessLocation()
+      .pipe(
+        mergeMap(location =>
+          location ? save$({ location }).pipe(map(() => location)) : of<ResolvedUserLocation>(null),
+        ),
+      );
+    return getSaved$.pipe(
+      mergeMap(savedModel => (savedModel?.location ? of(savedModel.location) : guessAndSave$)),
       tap(location =>
         patchState({
           guessedLocation: {

@@ -1,55 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { NgDestroyService } from '@app/core/services/ng-destroy.service';
-import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
-import * as Geo from '@app/core/functions/geo.functions';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
 import { NavParams, PopoverController } from '@ionic/angular';
-import { merge } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-on-map-popover',
   templateUrl: './on-map-popover.component.html',
   styleUrls: ['./on-map-popover.component.scss'],
-  providers: [NgDestroyService],
 })
-export class OnMapPopoverComponent implements OnInit {
-  public city = this.fb.control(null);
-  public country = this.fb.control(null);
-  public coordinates = this.fb.control(null);
+export class OnMapPopoverComponent {
+  public city: FormControl;
+  public country: FormControl;
 
-  public data: SearchLocationDataInterface;
+  public data: ResolvedUserLocation;
 
   constructor(
     private readonly navParams: NavParams,
     private readonly popover: PopoverController,
     private readonly fb: FormBuilder,
-    private readonly destroy$: NgDestroyService,
-  ) {}
-
-  public ngOnInit(): void {
-    this.initData();
-    this.subscribeControlChanges();
+  ) {
+    const data = this.navParams.get<ResolvedUserLocation>('data');
+    this.city = this.fb.control(data?.city);
+    this.country = this.fb.control(data?.country);
   }
 
-  private subscribeControlChanges(): void {
-    merge(this.city.valueChanges.pipe(filter(city => Boolean(city))), this.coordinates.valueChanges)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(async () => {
-        const returnData: SearchLocationDataInterface = {
-          city: this.city.value,
-          country: this.country.value,
-          coordinates: Geo.convertCoordsFromMap(this.coordinates.value?.coordinates),
-        };
+  public async submit(): Promise<void> {
+    const returnData: ResolvedUserLocation = {
+      city: this.city.value,
+      country: this.country.value,
+    };
 
-        await this.popover.dismiss(returnData);
-      });
+    await this.popover.dismiss(returnData);
   }
 
-  private initData(): void {
-    const data = this.navParams.get<SearchLocationDataInterface>('data');
-    this.country.setValue(data?.country, { emitEvent: false });
-    this.city.setValue(data?.city, { emitEvent: false });
-    this.coordinates.setValue(Geo.convertCoordsToMap(data?.coordinates), { emitEvent: false });
+  public async dismiss(): Promise<void> {
+    await this.popover.dismiss();
   }
 }

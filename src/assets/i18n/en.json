@@ -43,7 +43,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "not-specified": "Not specified",
-    "page-not-found": "Page not found"
+    "page-not-found": "Page not found",
+    "clear": "Clear"
   },
   "registration-verification": {
     "confirmation": "Registration confirmation",

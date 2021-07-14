@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category, UserLocation } from '@app/api/models';
+import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
 import { NgDestroyService } from '@app/core/services';
-import { CurrentLocationCompilerService } from '@app/core/services/location/current-location-compiler.service';
-import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterStateConverter } from '@app/search/services/search-filter-state-converter.service';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
@@ -31,7 +30,6 @@ export class MainPage implements OnInit {
   public locationEnabled = false;
 
   constructor(
-    private readonly currentLocation: CurrentLocationCompilerService,
     private readonly defaultCategory: DefaultCategoriesFactoryService,
     public readonly stateManager: SearchFilterStateService,
     public readonly query: SearchQueryService,
@@ -84,29 +82,13 @@ export class MainPage implements OnInit {
     );
   }
 
-  public updateCity(data: SearchLocationDataInterface): void {
-    if (data.city) {
-      this.currentLocation
-        .getCoords(data.country, data.city)
-        .pipe(filter(res => null !== res))
-        .subscribe(res => {
-          this.form.get(this.formGroups.location).setValue({
-            country: data.country,
-            city: data.city,
-            coordinates: res,
-          });
-        });
-    } else if (data.coordinates?.latitude && data.coordinates?.longitude) {
-      this.currentLocation
-        .getExtendedLocationByCoords(data.coordinates)
-        .pipe(filter(res => null !== res))
-        .subscribe(res => {
-          this.form.get(this.formGroups.location).setValue({
-            country: res.country,
-            city: res.city,
-            coordinates: res.coords,
-          });
-        });
+  public updateLocation(location: ResolvedUserLocation): void {
+    if (location) {
+      this.form.controls[this.formGroups.location].setValue({
+        country: location.country,
+        city: location.city,
+        coordinates: null,
+      });
     }
   }
 

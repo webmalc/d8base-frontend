@@ -40,9 +40,9 @@
             <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
               <app-location-picker
                 class="main-page-filter"
-                (emitter)="updateCity($event)"
+                (emitter)="updateLocation($event)"
                 [enabled]="locationEnabled"
-                [locationData]="form.get(formGroups.location).value"
+                [locationData]="form.controls[formGroups.location].value"
               ></app-location-picker>
             </ion-col>
           </ion-row>
