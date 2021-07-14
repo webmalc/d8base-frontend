@@ -9,4 +9,16 @@
       <app-city-selector [formControl]="city" [country]="country.value"></app-city-selector>
     </ion-col>
   </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button color="primary" size="block" (click)="submit()">
+        {{ 'global.save' | translate }}
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button color="light" size="block" (click)="dismiss()">
+        {{ 'global.cancel' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-grid>
