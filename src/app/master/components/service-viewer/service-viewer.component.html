@@ -1,0 +1,20 @@
+<app-service-title [service]="service"></app-service-title>
+<ion-item lines="none" *ngIf="service.description">
+  <ion-note>
+    {{ service.description }}
+  </ion-note>
+</ion-item>
+<ion-item lines="none" *ngIf="service.tags?.length">
+  <ion-chip *ngFor="let tag of service.tags">
+    <ion-label>{{ tag.name }}</ion-label>
+  </ion-chip>
+</ion-item>
+<ion-item lines="full">
+  <ion-label slot="start" color="primary" class="cursor-pointer" [routerLink]="'/service/' + service.id">
+    {{ 'master-profile.services.service-presentation.more-info' | translate }}
+  </ion-label>
+  <ion-button size="default" slot="end" [routerLink]="'/order/' + service.id">
+    {{ 'master-profile.services.service-presentation.pick' | translate }}
+    <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
+  </ion-button>
+</ion-item>

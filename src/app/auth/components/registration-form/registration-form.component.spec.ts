@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { User } from '@app/core/models/user';
-import { UserLocation } from '@app/core/models/user-location';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { plainToClass } from 'class-transformer';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
 import { RegistrationFormComponent } from './registration-form.component';
@@ -44,18 +41,21 @@ describe('RegistrationFormComponent', () => {
 
     fixture.debugElement.nativeElement.querySelector('ion-button').click();
 
-    const data = {
+    const testUser = {
       email: 'test@test.te',
       password: 'test',
       firstName: '',
       phone: '',
+    };
+
+    const testLocation = {
       city: '',
       country: '',
     };
 
     expect((component as any).registrationFormData.emit).toHaveBeenCalledWith({
-      user: plainToClass(User, data, { excludeExtraneousValues: true }),
-      location: plainToClass(UserLocation, data, { excludeExtraneousValues: true }),
+      user: testUser,
+      location: testLocation,
     });
   });
 });

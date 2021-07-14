@@ -17,8 +17,6 @@ import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-inte
 import { ServicePublishAuthStateManagerService } from '@app/service/services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
@@ -46,8 +44,6 @@ export class ServicePublishStepSevenComponent {
 
   constructor(
     public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
-    public readonly countrySelectable: SelectableCountryOnSearchService,
-    public readonly postalSelectable: SelectablePostalCodeOnSearchService,
     public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly formBuilder: FormBuilder,
     private readonly authStateManager: ServicePublishAuthStateManagerService,

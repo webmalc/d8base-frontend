@@ -2,10 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationPageModule } from '@app/auth/pages/registration/registration.module';
-import { PricesApiService } from '@app/core/services/prices-api.service';
-import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
-import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
-import { ServiceTagsApiService } from '@app/core/services/service-tags-api.service';
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
 import { MasterPickerPopoverComponent } from '@app/service/components/master-picker/master-picker-popover.component';
 import {
@@ -87,10 +83,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceDetailsEditComponent,
   ],
   providers: [
-    PricesApiService,
-    ServiceTagsApiService,
-    ServiceLocationApiService,
-    ServicePhotoApiService,
     ServicePublishDataHolderService,
     ServicePublishStepSevenDepartureFormService,
     ServiceStepsNavigationService,

@@ -23,7 +23,7 @@ import { MasterPageRoutingModule } from './master-routing.module';
 import { MasterPage } from './master.page';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
-import { MasterProfileMainInfoSectionComponent, MasterProfileServicePresentationComponent } from './components';
+import { MasterProfileMainInfoSectionComponent, ServiceViewerComponent } from './components';
 import { MasterProfileServiceEditComponent } from './components/master-profile-service-edit/master-profile-service-edit.component';
 
 @NgModule({
@@ -45,7 +45,7 @@ import { MasterProfileServiceEditComponent } from './components/master-profile-s
     MasterProfileCalendarComponent,
     MasterProfilePortfolioComponent,
     MasterProfileMainInfoSectionComponent,
-    MasterProfileServicePresentationComponent,
+    ServiceViewerComponent,
     MasterProfileServiceEditComponent,
     MasterProfileSubmenuComponent,
     ExperienceComponent,

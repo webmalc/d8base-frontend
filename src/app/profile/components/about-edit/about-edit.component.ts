@@ -5,10 +5,8 @@ import { Language, Profile, UserLanguage } from '@app/api/models';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
@@ -35,7 +33,6 @@ export class AboutEditComponent implements OnInit {
   public formFields = ProfileFormFields;
 
   constructor(
-    public readonly countriesSearch: SelectableCountryOnSearchService,
     public readonly languagesApiCache: LanguagesApiCache,
     private readonly formBuilder: FormBuilder,
     private readonly countriesApi: CountriesApiCache,

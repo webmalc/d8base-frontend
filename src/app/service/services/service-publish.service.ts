@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
+  Price,
   ProfessionalLocation,
   ProfessionalSchedule,
   Service,
   ServiceList,
+  ServiceLocation,
   ServicePhoto,
   ServiceSchedule,
 } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
-import { PricesApiService } from '@app/core/services/prices-api.service';
-import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
-import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
 import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
 import ServicePublishData from '@app/service/interfaces/service-publish-data.interface';
-import { Price } from '@app/service/models/price';
-import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -33,11 +30,8 @@ export class ServicePublishService {
     private readonly servicePublishDataHolder: ServicePublishDataHolderService,
     private readonly masterManager: MasterManagerService,
     private readonly accountsApi: AccountsService,
-    private readonly servicePhotosApi: ServicePhotoApiService,
     private readonly api: AccountsService,
-    private readonly serviceLocationApi: ServiceLocationApiService,
     private readonly masterLocationApi: MasterLocationApiService,
-    private readonly servicePriceApi: PricesApiService,
     private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
   ) {}
 
@@ -132,7 +126,7 @@ export class ServicePublishService {
   }
 
   private createPrice(price: Price, service: ServiceList): Observable<Price> {
-    return this.servicePriceApi.create({ ...price, service: service.id });
+    return this.accountsApi.accountsServicePricesCreate({ ...price, service: service.id });
   }
 
   private createServiceLocation(
@@ -140,6 +134,10 @@ export class ServicePublishService {
     service: ServiceList,
     masterLoc: ProfessionalLocation,
   ): Observable<ServiceLocation> {
-    return this.serviceLocationApi.create({ ...location, location: masterLoc.id, service: service.id });
+    return this.accountsApi.accountsServiceLocationsCreate({
+      ...location,
+      location: masterLoc.id,
+      service: service.id,
+    });
   }
 }

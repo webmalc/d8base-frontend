@@ -72,10 +72,6 @@ import {
   CategoryByIdPipe,
   SubcategoryByIdPipe,
 } from '@app/shared/pipes';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
-import { SelectableRegionOnSearchService } from '@app/shared/services/selectable-region-on-search.service';
-import { SelectableSubregionOnSearchService } from '@app/shared/services/selectable-subregion-on-search.service';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -273,10 +269,6 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
   ],
   providers: [
     // TODO Create core module and move providers into it
-    SelectableCountryOnSearchService,
-    SelectableDistrictOnSearchService,
-    SelectableRegionOnSearchService,
-    SelectableSubregionOnSearchService,
     NewMessagesNotificationService,
     IntervalService,
     {
