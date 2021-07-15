@@ -6,8 +6,8 @@ import {environment} from '@env/environment';
 })
 export class MediaIconFactoryService {
   public static getIcon(media: string): string {
-    const contacts: object = environment.contacts;
+    const contacts = environment.contacts;
 
-    return contacts[media] ?? contacts['default'];
+    return contacts[media] ?? contacts.default;
   }
 }
