@@ -98,7 +98,6 @@ export const environment = {
     phone: 'call-outline',
     whatsapp: 'logo-whatsapp',
     email: 'mail-outline',
-    default: 'reader-outline',
   },
 };
 
