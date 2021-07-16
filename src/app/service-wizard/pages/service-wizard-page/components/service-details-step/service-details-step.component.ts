@@ -45,7 +45,7 @@ export class ServiceDetailsStepComponent extends ServiceStepComponent<ServiceDet
   }
 
   private subscribeFormStatus(): void {
-    this.form.statusChanges.pipe(startWith(this.form.status),takeUntil(this.ngDestroy$)).subscribe(() => {
+    this.form.statusChanges.pipe(startWith(this.form.status), takeUntil(this.ngDestroy$)).subscribe(() => {
       this.outputData = this.form.valid ? this.getStepState() : null;
       this.isValid$.next(this.form.valid);
     });

@@ -12,7 +12,13 @@
           </ng-container>
         </ion-col>
         <ion-col>
-          <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()"  [disabled]="isNextDisabled$ | async">
+          <ion-button
+            *ngIf="isLastStep$ | async; else isNotLastStep"
+            expand="block"
+            color="success"
+            (click)="submit()"
+            [disabled]="isNextDisabled$ | async"
+          >
             {{ 'service-wizard.publish' | translate }}
           </ion-button>
           <ng-template #isNotLastStep>

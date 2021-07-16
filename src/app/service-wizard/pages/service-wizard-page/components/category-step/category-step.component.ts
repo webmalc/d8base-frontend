@@ -7,7 +7,6 @@ import { CategoryStepData } from '../../interfaces/category-step-data.interface'
 import { ServiceStepContext } from '../../interfaces/step-context.interface';
 import { ServiceStepComponent } from '../step/step';
 
-
 @Component({
   selector: 'app-category-step',
   templateUrl: './category-step.component.html',

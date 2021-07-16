@@ -57,7 +57,7 @@ export class ServiceWizardPage {
     this.store
       .select(CurrentUserSelectors.defaultProfessional)
       .pipe(
-        filter((defaultProfessional) => Boolean(defaultProfessional)),
+        filter(defaultProfessional => Boolean(defaultProfessional)),
         take(1),
         map(({ subcategory }) => subcategory),
         switchMap(subcategoryId => this.professionalsService.professionalsSubcategoriesRead(subcategoryId)),

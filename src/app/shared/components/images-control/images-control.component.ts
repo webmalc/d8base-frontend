@@ -21,7 +21,7 @@ interface ImageControlDiff {
     NgDestroyService,
   ],
 })
-export class ImagesControlComponent implements ControlValueAccessor, OnInit {
+export class ImagesControlComponent implements ControlValueAccessor {
   public imageControlDiff: ImageControlDiff = { add: [], remove: [] };
   public photos: string[];
   public initialPhotos: string[];
@@ -30,8 +30,6 @@ export class ImagesControlComponent implements ControlValueAccessor, OnInit {
   private onTouched: () => void;
 
   constructor(private readonly destroy$: NgDestroyService) {}
-
-  public ngOnInit(): void {}
 
   public registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -45,9 +43,12 @@ export class ImagesControlComponent implements ControlValueAccessor, OnInit {
     this.initialPhotos = this.photos = photos;
   }
 
-  public async onSelect(files: File[]): Promise<void> {}
+  public async onSelect(files: File[]): Promise<void> {
+    // TODO add an image
+  }
 
   public onRemove(index: number): void {
+    // TODO remove an image
     // this.files = [...this.files.slice(0, index), ...this.files.slice(index + 1)];
   }
 }

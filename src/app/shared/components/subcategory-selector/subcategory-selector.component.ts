@@ -88,7 +88,9 @@ export class SubcategorySelectorComponent extends ItemSelectorControl<Subcategor
               }
 
               return this.loadMore$.pipe(
-                concatMap(() => this.professionalsService.professionalsSubcategoriesList({ ...params, page: this.pageCounter })),
+                concatMap(() =>
+                  this.professionalsService.professionalsSubcategoriesList({ ...params, page: this.pageCounter }),
+                ),
               );
             }),
           );

@@ -11,8 +11,16 @@
       <app-form-control-error [controlName]="formFields.duration" errors> </app-form-control-error>
     </app-duration-editor>
     <app-full-price-control [formControlName]="formFields.price">
-      <app-form-control-error [controlName]="formFields.price" [filterErrors]="['paymentMethodsRequired']" priceErrors></app-form-control-error>
-      <app-form-control-error [controlName]="formFields.price" [showErrors]="['paymentMethodsRequired']" paymentMethodsErrors></app-form-control-error>
+      <app-form-control-error
+        [controlName]="formFields.price"
+        [filterErrors]="['paymentMethodsRequired']"
+        priceErrors
+      ></app-form-control-error>
+      <app-form-control-error
+        [controlName]="formFields.price"
+        [showErrors]="['paymentMethodsRequired']"
+        paymentMethodsErrors
+      ></app-form-control-error>
     </app-full-price-control>
   </section>
 </form>

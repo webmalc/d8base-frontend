@@ -44,8 +44,11 @@ export class ServiceDetailsFormComponent {
   }
 
   private subscribePhotosControl(): void {
-    this.form.get(this.formFields.photos).valueChanges.pipe(takeUntil(this.destroy$)).subscribe((files) => {
-      this.files = files;
-    });
+    this.form
+      .get(this.formFields.photos)
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe(files => {
+        this.files = files;
+      });
   }
 }
