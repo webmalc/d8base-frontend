@@ -23,9 +23,6 @@ import { switchMap } from 'rxjs/operators';
 })
 export class DateTimeStepComponent extends StepComponent<DateTimeStepData> implements OnInit {
   public readonly formControl = new FormControl(null, Validators.required);
-  public readonly form = new FormGroup({
-    datetime: this.formControl,
-  });
   public displayedCalendars$: Observable<MasterCalendar[]>;
   public duration: number;
 
@@ -34,6 +31,9 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
 
   constructor(private readonly scheduleApi: ScheduleService, protected readonly cd: ChangeDetectorRef) {
     super(cd);
+    this.form = new FormGroup({
+      datetime: this.formControl,
+    });
   }
 
   public ngOnInit(): void {
@@ -92,7 +92,6 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   private subscribeFormStatus(): void {
     this.form.statusChanges.subscribe(() => {
       this.outputData = this.form.valid ? this.getStepState() : null;
-      this.isValid$.next(this.form.valid);
     });
   }
 

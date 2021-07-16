@@ -16,6 +16,7 @@
       <app-add-button *ngIf="canAddLocation" (click)="addNewLocation()">
         {{ 'list-item.add-new-address' | translate }}
       </app-add-button>
+      <app-form-control-error [control]="formControl"></app-form-control-error>
     </ng-container>
   </ion-list>
 </app-step-container>

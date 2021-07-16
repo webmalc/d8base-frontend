@@ -5,10 +5,12 @@ type FormControlWithChildren = FormGroup | FormArray;
 /*
  * Returns `true` if the FormGroup is invalid and updates its children's validity
  */
-export function isFormInvalid(form: FormGroup): boolean {
+export function isFormInvalid(form: AbstractControl): boolean {
   if (form.invalid) {
     form.markAllAsTouched();
-    updateAllValueAndValidity(form);
+    if (hasChildren(form)) {
+      updateAllValueAndValidity(form);
+    }
     return true;
   }
   return false;

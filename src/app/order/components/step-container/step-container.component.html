@@ -17,7 +17,7 @@
       <ng-content></ng-content>
       <ion-row>
         <ion-col>
-          <ng-container *ngIf="(isPrevDisabled$ | async) === false">
+          <ng-container *ngIf="(isFirstStep$ | async) === false">
             <ion-button expand="block" color="medium" (click)="prevStep()">
               {{ 'global.back' | translate }}
             </ion-button>
@@ -28,7 +28,7 @@
             {{ 'order.order-service' | translate }}
           </ion-button>
           <ng-template #isNotLastStep>
-            <ion-button expand="block" (click)="nextStep()" [disabled]="isNextDisabled$ | async">
+            <ion-button expand="block" (click)="nextStep()">
               {{ 'global.forward' | translate }}
             </ion-button>
           </ng-template>
