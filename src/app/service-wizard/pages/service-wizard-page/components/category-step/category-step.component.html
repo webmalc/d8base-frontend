@@ -1,0 +1,43 @@
+<app-service-step-container>
+  <form [formGroup]="form">
+    <div>
+      <ion-item class="fs18" lines="none">
+        <ion-text>
+          <b>{{ 'service-publish.step-one.title' | translate }}</b>
+        </ion-text>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-text>
+          <p>{{ 'service-publish.step-one.description' | translate }}</p>
+          <p>{{ 'service-publish.step-one.subdesc' | translate }}</p>
+        </ion-text>
+      </ion-item>
+    </div>
+    <ion-item color="light">
+      <b>
+        {{ 'service-details.title' | translate }}
+      </b>
+    </ion-item>
+    <div>
+      <ion-col class="ion-padding-vertical" size="12">
+        <ion-item lines="none" class="ion-item-no-side-padding">
+          {{ 'service-publish.step-one.category-title' | translate }}
+        </ion-item>
+        <app-category-selector
+          [title]="'service-publish.step-one.category-subtitle' | translate"
+          [formControlName]="formFields.Category"
+          [required]="true"
+        ></app-category-selector>
+        <ion-item lines="none" class="ion-item-no-side-padding ion-padding-top">
+          {{ 'service-publish.step-one.subcategory-title' | translate }}
+        </ion-item>
+        <app-subcategory-selector
+          [title]="'service-publish.step-one.subcategory-subtitle' | translate"
+          [formControlName]="formFields.Subcategory"
+          [category]="form.controls[formFields.Category].value"
+          [required]="true"
+        ></app-subcategory-selector>
+      </ion-col>
+    </div>
+  </form>
+</app-service-step-container>

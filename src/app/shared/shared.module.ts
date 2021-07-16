@@ -1,9 +1,11 @@
+/* eslint-disable max-lines */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
   AddButtonComponent,
+  CategorySelectorComponent,
   CitySelectorComponent,
   ClientWidgetComponent,
   ColumnHeaderComponent,
@@ -16,10 +18,12 @@ import {
   DurationEditorComponent,
   DurationViewerComponent,
   FooterComponent,
+  FullPriceControlComponent,
   GenderSelectorComponent,
   HeaderComponent,
   HintComponent,
   ImageCarouselComponent,
+  ImagesControlComponent,
   LanguageComponent,
   LoadingIndicatorComponent,
   LocationEditorPopoverComponent,
@@ -41,6 +45,7 @@ import {
   ServiceLocationComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
+  SubcategorySelectorComponent,
   SubregionSelectorComponent,
   PostalCodeSelectorComponent,
   OnMapPopoverComponent,
@@ -178,6 +183,10 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     SubcategoryByIdPipe,
     PostalCodeSelectorComponent,
     OnMapPopoverComponent,
+    CategorySelectorComponent,
+    SubcategorySelectorComponent,
+    FullPriceControlComponent,
+    ImagesControlComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -254,6 +263,10 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     SubcategoryByIdPipe,
     PostalCodeSelectorComponent,
     OnMapPopoverComponent,
+    CategorySelectorComponent,
+    SubcategorySelectorComponent,
+    FullPriceControlComponent,
+    ImagesControlComponent,
   ],
   imports: [
     CommonModule,
