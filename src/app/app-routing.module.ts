@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MainGuard } from '@app/core/guards/main.guard';
+import { ServiceWizardPath } from './service-wizard/const/service-wizard-path.const';
 import { NotFoundPageComponent } from './shared/components';
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'service',
     loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule),
+  },
+  {
+    path: ServiceWizardPath,
+    loadChildren: () => import('./service-wizard/service-wizard.module').then(m => m.ServiceWizardModule),
   },
   {
     path: 'message',

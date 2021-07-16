@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+  <app-price-editor class="ion-margin" [formControlName]="formFields.price">
+    <app-form-control-error [controlName]="formFields.price" errors></app-form-control-error>
+  </app-price-editor>
+  <ion-item>
+    <label>{{ 'service-details.payment-methods' | translate }}</label>
+  </ion-item>
+  <app-payment-method-editor [formControlName]="formFields.paymentMethods"></app-payment-method-editor>
+  <app-form-control-error [controlName]="formFields.paymentMethods"></app-form-control-error>
+</form>

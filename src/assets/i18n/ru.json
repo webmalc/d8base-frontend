@@ -536,6 +536,8 @@
     "save-location": "Сохранить",
     "make-default": "Сделать адресом по умолчанию"
   },
+  "category": "Выберите категорию",
+  "subcategory": "Выберите подкатегорию",
   "contact-edit-page": {
     "contacts": "Контактные данные",
     "choice-contact": "Выберите контакт",

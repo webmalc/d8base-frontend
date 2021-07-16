@@ -27,7 +27,9 @@ export class PaymentMethodEditorComponent implements ControlValueAccessor {
     } else {
       this.value.delete(method);
     }
-    this.onChange([...this.value.values()]);
+
+    const values = this.value.size ? [...this.value.values()] : null;
+    this.onChange(values);
   }
 
   public registerOnChange(fn: any): void {

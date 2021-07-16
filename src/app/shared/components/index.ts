@@ -34,3 +34,7 @@ export * from './country-flag/country-flag.component';
 export * from './location-editor-popover/location-editor-popover.component';
 export * from './hint/hint.component';
 export * from './on-map-popover/on-map-popover.component';
+export * from './category-selector/category-selector.component';
+export * from './subcategory-selector/subcategory-selector.component';
+export * from './full-price-control/full-price-control.component';
+export * from './images-control/images-control.component';
