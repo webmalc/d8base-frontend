@@ -43,7 +43,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "not-specified": "Not specified",
-    "page-not-found": "Page not found"
+    "page-not-found": "Page not found",
+    "clear": "Clear"
   },
   "registration-verification": {
     "confirmation": "Registration confirmation",
@@ -571,7 +572,8 @@
     "postal-code": "Zip code",
     "timezone": "Time zone",
     "remove-location": "Remove location",
-    "save-location": "Save location"
+    "save-location": "Save location",
+    "make-default": "Make default"
   },
   "category": "Select category",
   "subcategory": "Select subcategory",
@@ -854,5 +856,9 @@
     "eula": "the EULA",
     "part-2": ", have read and and accepted",
     "rules": "the rules"
+  },
+  "city-confirmation": {
+    "title": "Are you in {{city}}?",
+    "choose": "No, let me choose"
   }
 }

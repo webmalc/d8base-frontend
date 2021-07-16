@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { OnMapPopoverComponent } from '@app/main/components/on-map-popover/on-map-popover.component';
-import { SearchLocationDataInterface } from '@app/main/interfaces/search-location-data-interface';
+import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
+import { OnMapPopoverComponent } from '@app/shared/components/on-map-popover/on-map-popover.component';
 import { PopoverController } from '@ionic/angular';
 
 @Component({
@@ -11,8 +11,8 @@ import { PopoverController } from '@ionic/angular';
 })
 export class LocationPickerComponent {
   @Input() public enabled: boolean = false;
-  @Input() public locationData: SearchLocationDataInterface;
-  @Output() public emitter: EventEmitter<SearchLocationDataInterface> = new EventEmitter<SearchLocationDataInterface>();
+  @Input() public locationData: ResolvedUserLocation;
+  @Output() public emitter: EventEmitter<ResolvedUserLocation> = new EventEmitter<ResolvedUserLocation>();
 
   constructor(private readonly pop: PopoverController) {}
 
@@ -26,24 +26,15 @@ export class LocationPickerComponent {
       animated: true,
       componentProps: {
         data: {
-          coordinates: this.locationData?.coordinates,
           country: this.locationData?.country,
           city: this.locationData?.city,
         },
       },
       cssClass: ['map-popover-width'],
     });
-    pop.onDidDismiss().then((data: { data: SearchLocationDataInterface }) => {
+    pop.onDidDismiss().then((data: { data: ResolvedUserLocation }) => {
       if (data.data) {
         if (data.data?.city?.id !== this.locationData?.city?.id) {
-          data.data.coordinates = undefined;
-          this.emitter.emit(data.data);
-        } else if (
-          data.data?.coordinates?.longitude !== this.locationData?.coordinates?.longitude ||
-          data.data?.coordinates?.latitude !== this.locationData?.coordinates?.latitude
-        ) {
-          data.data.country = undefined;
-          data.data.city = undefined;
           this.emitter.emit(data.data);
         }
       }

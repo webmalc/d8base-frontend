@@ -23,3 +23,7 @@ export class DeleteUserLocation {
 
   constructor(public locationId: UserLocation['id']) {}
 }
+
+export class GuessCurrentLocation {
+  public static readonly type = '[UserLocation] Guess current location';
+}

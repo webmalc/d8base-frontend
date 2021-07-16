@@ -1,5 +1,5 @@
-import { ServiceSchedule } from '@app/service/models/service-schedule';
+import { ScheduleUnion } from '@app/core/models/schedule-union';
 
 export interface ServiceTimetableInterface {
-  timetable: [ServiceSchedule];
+  timetable: ScheduleUnion[];
 }

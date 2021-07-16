@@ -1,24 +1,29 @@
 import { Injectable } from '@angular/core';
-import { NavigationStart, Router, RouterEvent } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-import { debounceTime, filter } from 'rxjs/operators';
-import { isNavigationEvent } from '@app/core/functions/navigation.functions';
 import { MAX_DELAY_MS } from '@app/core//constants/ui.constants';
+import LoaderSelectors from '@app/store/loader/loader.selectors';
+import { LoadingController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { of, timer } from 'rxjs';
+import { audit, distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingIndicatorService {
   private loading: Promise<HTMLIonLoadingElement>;
 
-  constructor(private readonly router: Router, private readonly loadingController: LoadingController) {
-    this.subscribeOnLoading();
+  constructor(private readonly loadingController: LoadingController, private readonly store: Store) {
+    this.subscribeLoaderState();
   }
 
-  private subscribeOnLoading(): void {
-    this.router.events
-      .pipe(filter(isNavigationEvent), debounceTime(MAX_DELAY_MS))
-      .subscribe(async (routerEvent: RouterEvent) =>
-        routerEvent instanceof NavigationStart ? await this.showLoadingIndicator() : await this.hideLoadingIndicator(),
-      );
+  private subscribeLoaderState(): void {
+    this.store
+      .select(LoaderSelectors.isLoaderShown)
+      .pipe(
+        distinctUntilChanged(),
+        audit(isLoaderShown => (isLoaderShown ? timer(MAX_DELAY_MS) : of(true))),
+      )
+      .subscribe(async isLoaderShown => {
+        isLoaderShown ? await this.showLoadingIndicator() : await this.hideLoadingIndicator();
+      });
   }
 
   private async showLoadingIndicator(): Promise<void> {

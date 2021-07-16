@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Service } from '@app/api/models';
+import { ProfessionalLocation, ProfessionalSchedule, Service, ServicePhoto, ServiceSchedule } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
+import { AccountsService } from '@app/api/services/accounts.service';
 import { fileToBase64 } from '@app/core/functions/file.functions';
 import { HelperService } from '@app/core/services/helper.service';
-import { MasterLocation } from '@app/master/models/master-location';
-import { MasterSchedule } from '@app/master/models/master-schedule';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
-import { FinalStepDataInterface } from '@app/service/interfaces/final-step-data-interface';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
@@ -15,20 +13,20 @@ import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { Price } from '@app/service/models/price';
 import { ServiceLocation } from '@app/service/models/service-location';
-import { ServicePhoto } from '@app/service/models/service-photo';
-import { ServiceSchedule } from '@app/service/models/service-schedule';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
-import { plainToClass } from 'class-transformer';
 import ServicePublishData from '../interfaces/service-publish-data.interface';
 
 @Injectable()
 export class ServicePublishDataPreparerService {
-  constructor(private readonly servicePublishDataHolder: ServicePublishDataHolderService) {}
+  constructor(
+    private readonly servicePublishDataHolder: ServicePublishDataHolderService,
+    private readonly api: AccountsService,
+  ) {}
 
   public async getData(): Promise<ServicePublishData> {
     const service = this.getService();
     const serviceLocation = service.service_type !== 'online' ? this.getServiceLocation() : null;
-    const masterLocation = service.service_type !== 'online' ? this.getMasterLocation() : null;
+    const masterLocation = service.service_type !== 'online' ? await this.getMasterLocation() : null;
 
     return {
       service,
@@ -37,47 +35,26 @@ export class ServicePublishDataPreparerService {
       master: this.getNewMaster(),
       servicePhotos: await this.getServicePhotos(),
       serviceSchedule: this.getServiceSchedule(),
-      masterSchedule: this.getMasterSchedule(),
+      masterSchedule: this.getProfessionalSchedule(),
       servicePrice: this.getServicePrice(),
     };
   }
 
-  private getMasterSchedule(): MasterSchedule[] {
-    if (
-      this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-        .need_to_create_master_schedule
-    ) {
-      const stepData: MasterSchedule[] = HelperService.clearArray(
-        this.servicePublishDataHolder
-          .getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-          ?.timetable?.map(raw => plainToClass(MasterSchedule, raw)),
-      );
-
-      return !stepData ? [] : stepData;
-    }
-
-    return [];
+  private getProfessionalSchedule(): ProfessionalSchedule[] | null {
+    const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    return stepData.need_to_create_master_schedule
+      ? stepData?.timetable?.map(s => ({ ...s, professional: NaN })) ?? []
+      : null;
   }
 
-  private getServiceSchedule(): ServiceSchedule[] {
-    if (
-      this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven).use_master_schedule
-    ) {
-      return [];
-    }
-    const stepData: ServiceSchedule[] = HelperService.clearArray(
-      this.servicePublishDataHolder
-        .getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven)
-        ?.timetable?.map(raw => plainToClass(ServiceSchedule, raw)),
-    );
-
-    return !stepData ? [] : stepData;
+  private getServiceSchedule(): ServiceSchedule[] | null {
+    const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    return stepData.use_master_schedule ? null : stepData?.timetable?.map(s => ({ ...s, service: NaN })) ?? [];
   }
 
   private async getServicePhotos(): Promise<ServicePhoto[]> {
     const data = this.servicePublishDataHolder.getStepData<StepThreeDataInterface>(ServicePublishSteps.Three);
-
-    return HelperService.clearArray(await this.generateServicePhotos(data));
+    return await this.generateServicePhotos(data);
   }
 
   private getService(): Omit<Service, 'professional'> {
@@ -108,25 +85,24 @@ export class ServicePublishDataPreparerService {
         };
   }
 
-  private getMasterLocation(): MasterLocation {
-    if (
-      this.servicePublishDataHolder.isset(ServicePublishSteps.Final) &&
-      this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final).masterLocation
-    ) {
-      return this.servicePublishDataHolder.getStepData<FinalStepDataInterface>(ServicePublishSteps.Final)
-        .masterLocation;
-    }
-    const location = new MasterLocation();
+  private async getMasterLocation(): Promise<ProfessionalLocation> {
     const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-    location.country = stepData.country.id;
-    location.city = stepData.city.id;
-    location.address = stepData?.address;
-    location.postal_code = stepData?.postal_code?.id;
+    if (stepData.use_default_location && stepData.default_location) {
+      const id = stepData.default_location;
+      return this.api.accountsProfessionalLocationsRead(id).toPromise();
+    }
+    const location: ProfessionalLocation = {
+      country: stepData.country.id,
+      city: stepData.city.id,
+      address: stepData?.address,
+      postal_code: stepData?.postal_code?.id,
+      professional: null, // not created yet
+    };
     if (stepData.units) {
-      location.units = parseInt(stepData.units, 10);
+      location.units = stepData.units === '1' ? 1 : 0;
     }
 
-    return HelperService.clear(location);
+    return location;
   }
 
   private getServiceLocation(): ServiceLocation {
@@ -158,10 +134,6 @@ export class ServicePublishDataPreparerService {
   }
 
   private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {
-    return await Promise.all([...data.photos.map(async val => this.getNewPhoto(await fileToBase64(val)))]);
-  }
-
-  private getNewPhoto(photo: string): ServicePhoto {
-    return plainToClass(ServicePhoto, { photo }, { excludeExtraneousValues: true });
+    return await Promise.all([...data.photos.map(async val => ({ service: null, photo: await fileToBase64(val) }))]);
   }
 }

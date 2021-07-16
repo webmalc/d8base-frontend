@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
+    <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
       <ion-item lines="none" class="ion-item-no-side-padding fs18">
         <b>
           {{ 'service-publish.step-six.title' | translate }}
@@ -20,7 +20,7 @@
         </ion-segment-button>
       </ion-segment>
 
-      <ng-container *ngIf="formService.form.get(formFields.IsCompany).value === 'company'">
+      <ng-container *ngIf="form.get(formFields.IsCompany).value === 'company'">
         <ion-item lines="none" class="ion-item-no-side-padding">
           <div class="label-for-required-input">
             {{ 'service-publish.step-six.company-title' | translate }}
@@ -53,6 +53,7 @@
         </ion-label>
         <ion-input type="text" name="description" [formControlName]="formFields.Specialization"></ion-input>
       </ion-item>
+      <app-form-control-error [controlName]="formFields.Specialization"></app-form-control-error>
       <ion-item lines="none" class="ion-item-no-side-padding ion-margin-top">
         {{ 'service-publish.step-six.level' | translate }}
       </ion-item>
@@ -84,14 +85,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button
-            size="medium"
-            type="submit"
-            [disabled]="formService.isSubmitDisabled()"
-            class="ion-margin-top"
-            fill="solid"
-            expand="block"
-          >
+          <ion-button size="medium" type="submit" class="ion-margin-top" fill="solid" expand="block">
             {{ 'service-publish.forward-button' | translate }}
           </ion-button>
         </ion-col>

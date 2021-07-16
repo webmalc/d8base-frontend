@@ -1,45 +1,57 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
 import { serviceTypes } from '@app/core/types/service-types';
+import * as AppValidators from '@app/core/validators';
 import { ServicePublishStepTwoFormFields } from '@app/service/enums/service-publish-step-two-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
-import { ServicePublishStepTwoFormService } from '@app/service/forms/service-publish-step-two-form.service';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { Reinitable } from '@app/shared/abstract/reinitable';
 
 @Component({
   selector: 'app-service-publish-step-two',
   templateUrl: './service-publish-step-two.component.html',
   styleUrls: ['./service-publish-step-two.component.scss'],
 })
-export class ServicePublishStepTwoComponent extends Reinitable {
+export class ServicePublishStepTwoComponent {
   public readonly serviceTypes = serviceTypes;
   public readonly formFields = ServicePublishStepTwoFormFields;
+  public form: FormGroup;
 
   constructor(
     private readonly servicePublishDataHolder: ServicePublishDataHolderService,
-    public readonly formService: ServicePublishStepTwoFormService,
     public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
+    private readonly formBuilder: FormBuilder,
   ) {
-    super();
+    if (this.servicePublishDataHolder.isset(ServicePublishSteps.Two)) {
+      this.createForm(this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two));
+    } else {
+      this.createForm();
+    }
   }
 
   public async submitForm(): Promise<void> {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      updateAllValueAndValidity(this.form);
+      return;
+    }
+
     await this.servicePublishDataHolder.setStepData<StepTwoDataInterface>(
       ServicePublishSteps.Two,
-      this.formService.form.getRawValue(),
+      this.form.getRawValue(),
     );
     this.serviceStepsNavigationService.next();
   }
 
-  protected init(): void {
-    if (this.servicePublishDataHolder.isset(ServicePublishSteps.Two)) {
-      this.formService.createForm(
-        this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two),
-      );
-    } else {
-      this.formService.createForm();
-    }
+  private createForm(data?: StepTwoDataInterface): void {
+    this.form = this.formBuilder.group({
+      [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
+      [ServicePublishStepTwoFormFields.Description]: [data?.description, AppValidators.descriptionValidator],
+      [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
+      [ServicePublishStepTwoFormFields.Price]: [data?.price, AppValidators.price],
+      [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
+    });
   }
 }

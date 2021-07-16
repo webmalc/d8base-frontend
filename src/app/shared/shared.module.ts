@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import {
   FullPriceControlComponent,
   GenderSelectorComponent,
   HeaderComponent,
+  HintComponent,
   ImageCarouselComponent,
   ImagesControlComponent,
   LanguageComponent,
@@ -45,12 +47,13 @@ import {
   ServiceWidgetComponent,
   SubcategorySelectorComponent,
   SubregionSelectorComponent,
+  PostalCodeSelectorComponent,
+  OnMapPopoverComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
-import { DefaultLocationPopoverComponent } from '@app/shared/components/default-location-popover/default-location-popover.component';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { FlagMenuComponent } from '@app/shared/components/flag-menu/flag-menu.component';
 import { InfoRowComponent } from '@app/shared/components/info-row/info-row.component';
@@ -63,15 +66,17 @@ import { RatingComponent } from '@app/shared/components/rating/rating.component'
 import { ServicePublishAgreementComponent } from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
-import { ContactsTabFormService } from '@app/shared/forms/contacts-tab-form.service';
+import { HintDirective } from '@app/shared/directives';
 import {
+  CityByIdPipe,
   CountryByIdPipe,
   MasterByIdPipe,
   ServiceByIdPipe,
   ServiceDataFilterPipe,
   SubstringFilterPipe,
+  CategoryByIdPipe,
+  SubcategoryByIdPipe,
 } from '@app/shared/pipes';
-import { SelectableCityOnSearchService } from '@app/shared/services/selectable-city-on-search.service';
 import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { SelectableDistrictOnSearchService } from '@app/shared/services/selectable-district-on-search.service';
 import { SelectableRegionOnSearchService } from '@app/shared/services/selectable-region-on-search.service';
@@ -98,6 +103,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
 import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
 import { IfSpinnerModule } from './if-spinner/if-spinner.module';
 import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
+import { HintPopoverComponent } from './components/hint-popover/hint-popover.component';
 
 @NgModule({
   declarations: [
@@ -122,10 +128,8 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     DurationEditorComponent,
     ImageCropPopoverComponent,
     ServiceWidgetComponent,
-    DefaultLocationPopoverComponent,
     MoreInfoComponent,
     ProfessionalCardComponent,
-    DefaultLocationPopoverComponent,
     FlagMenuComponent,
     CalendarComponentComponent,
     OrderDetailsComponent,
@@ -175,6 +179,14 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     LocationEditorPopoverComponent,
     ChatButtonComponent,
     SubstringFilterPipe,
+    HintDirective,
+    HintComponent,
+    HintPopoverComponent,
+    CityByIdPipe,
+    CategoryByIdPipe,
+    SubcategoryByIdPipe,
+    PostalCodeSelectorComponent,
+    OnMapPopoverComponent,
     CategorySelectorComponent,
     SubcategorySelectorComponent,
     FullPriceControlComponent,
@@ -202,7 +214,6 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     RatingHalfStarComponent,
     DurationEditorComponent,
     ServiceWidgetComponent,
-    DefaultLocationPopoverComponent,
     FlagMenuComponent,
     CalendarComponentComponent,
     OrderDetailsComponent,
@@ -249,6 +260,13 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
     LocationEditorPopoverComponent,
     ChatButtonComponent,
     SubstringFilterPipe,
+    HintDirective,
+    HintComponent,
+    CityByIdPipe,
+    CategoryByIdPipe,
+    SubcategoryByIdPipe,
+    PostalCodeSelectorComponent,
+    OnMapPopoverComponent,
     CategorySelectorComponent,
     SubcategorySelectorComponent,
     FullPriceControlComponent,
@@ -268,8 +286,6 @@ import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
   ],
   providers: [
     // TODO Create core module and move providers into it
-    ContactsTabFormService,
-    SelectableCityOnSearchService,
     SelectableCountryOnSearchService,
     SelectableDistrictOnSearchService,
     SelectableRegionOnSearchService,

@@ -1,72 +1,61 @@
 <app-header></app-header>
 <ion-content class="background-color-white">
   <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
-    <ion-col
-      class="ion-d8b-gradient-bgc ion-padding-vertical"
-      size-lg="9"
-      size-md="11"
-      size-sm="11"
-      size-xl="8"
-      size-xs="12"
-    >
+    <div class="ion-d8b-gradient-bgc ion-padding-vertical">
       <form [formGroup]="form" (ngSubmit)="search()">
-        <ion-row class="ion-justify-content-center ion-margin-vertical main-title"> Booking made simple </ion-row>
-        <ion-row>
-          <ion-searchbar
-            [formControl]="form.get(formFields.query)"
-            animated
-            class="main-page-search"
-            color="light"
-            [placeholder]="'main-page.search-placeholder' | translate"
-          ></ion-searchbar>
-        </ion-row>
-        <ion-row>
-          <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="6">
-            <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
-              <ion-datetime
-                [placeholder]="'main-page.date-from' | translate"
-                display-format="MMM DD, YYYY HH:mm"
-                picker-format="MMM DD, YYYY HH:mm"
-                [min]="stateManager.minDate"
-                [max]="stateManager.maxDate"
-                [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
-                class="width100"
-              ></ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="6">
-            <ion-item class="ion-item-no-min-width ion-item-no-min-height menu-item" color="light">
-              <ion-datetime
-                [placeholder]="'main-page.date-to' | translate"
-                display-format="MMM DD, YYYY HH:mm"
-                picker-format="MMM DD, YYYY HH:mm"
-                [min]="stateManager.minDate"
-                [max]="stateManager.maxDate"
-                [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
-                class="width100"
-              ></ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
-            <ion-row>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
+          <ion-row>
+            <ion-searchbar
+              [formControl]="form.get(formFields.query)"
+              animated
+              class="main-page-search"
+              color="light"
+              [placeholder]="'main-page.search-placeholder' | translate"
+            ></ion-searchbar>
+          </ion-row>
+          <ion-row>
+            <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="12">
+              <ion-item color="light" class="main-page-filter">
+                <ion-label position="stacked">{{ 'main-page.date-from' | translate }}</ion-label>
+                <ion-input
+                  type="date"
+                  [min]="stateManager.minDate"
+                  [max]="stateManager.maxDate"
+                  [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="12">
+              <ion-item color="light" class="main-page-filter">
+                <ion-label position="stacked">{{ 'main-page.date-to' | translate }}</ion-label>
+                <ion-input
+                  type="date"
+                  [min]="stateManager.minDate"
+                  [max]="stateManager.maxDate"
+                  [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
               <app-location-picker
-                (emitter)="updateCity($event)"
+                class="main-page-filter"
+                (emitter)="updateLocation($event)"
                 [enabled]="locationEnabled"
-                [locationData]="form.get(formGroups.location).value"
-                class="menu-item width100"
+                [locationData]="form.controls[formGroups.location].value"
               ></app-location-picker>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center ion-margin-vertical">
-          <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-            <ion-button type="submit" [disabled]="searchDisabled()" expand="block" fill="solid" size="medium">
-              {{'main-page.find-btn'|translate}}
-            </ion-button>
-          </ion-col>
-        </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center ion-margin-vertical">
+            <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
+              <ion-button type="submit" expand="block" fill="solid" size="medium">
+                {{'main-page.find-btn'|translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </form>
-    </ion-col>
+    </div>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col class="ion-padding-bottom" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
@@ -75,7 +64,7 @@
       </ion-row>
       <div
         *appIfSpinner="defaultCategories$ | ifSpinnerErrorState | async as defaultCategories"
-        class="categories-container"
+        class="categories-container ion-margin-bottom"
       >
         <app-category-icon
           *ngFor="let category of defaultCategories"

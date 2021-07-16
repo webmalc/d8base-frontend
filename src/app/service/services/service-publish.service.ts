@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Service, ServiceList, ServiceSchedule } from '@app/api/models';
+import {
+  ProfessionalLocation,
+  ProfessionalSchedule,
+  Service,
+  ServiceList,
+  ServicePhoto,
+  ServiceSchedule,
+} from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
 import { PricesApiService } from '@app/core/services/prices-api.service';
 import { ServiceLocationApiService } from '@app/core/services/service-location-api.service';
 import { ServicePhotoApiService } from '@app/core/services/service-photo-api.service';
-import { MasterLocation } from '@app/master/models/master-location';
-import { MasterSchedule } from '@app/master/models/master-schedule';
 import { MasterLocationApiService } from '@app/master/services/master-location-api.service';
-import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
 import ServicePublishData from '@app/service/interfaces/service-publish-data.interface';
 import { Price } from '@app/service/models/price';
 import { ServiceLocation } from '@app/service/models/service-location';
-import { ServicePhoto } from '@app/service/models/service-photo';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -36,17 +39,16 @@ export class ServicePublishService {
     private readonly masterLocationApi: MasterLocationApiService,
     private readonly servicePriceApi: PricesApiService,
     private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
-    private readonly masterScheduleApi: MasterScheduleApiService,
   ) {}
 
   public publish(): Observable<ServiceList> {
     return from(this.servicePublishDataFormatter.getData()).pipe(
-      switchMap(data => this.processData(data)),
+      switchMap(data => this.createEntities(data)),
       finalize(() => this.servicePublishDataHolder.reset()),
     );
   }
 
-  private processData({
+  private createEntities({
     master,
     service,
     servicePhotos,
@@ -74,13 +76,13 @@ export class ServicePublishService {
         createdService = reply;
         return forkJoin({
           photosRet: this.createPhotos(servicePhotos, createdService),
-          scheduleRet: this.createSchedule(serviceSchedule, createdService),
+          scheduleRet: this.createServiceSchedule(serviceSchedule, createdService),
           masterScheduleRet: this.createMasterSchedule(masterSchedule, createdMaster),
           masterLocRet: masterLocation
             ? !masterLocation.id
               ? this.createMasterLocation(masterLocation, createdMaster)
               : of(masterLocation)
-            : of<MasterLocation>(null),
+            : of<ProfessionalLocation>(null),
           priceRet: this.createPrice(servicePrice, createdService),
         });
       }),
@@ -98,21 +100,35 @@ export class ServicePublishService {
   }
 
   private createPhotos(photos: ServicePhoto[], service: ServiceList): Observable<ServicePhoto[]> {
+    if (!photos.length) {
+      return of([]);
+    }
     photos.forEach(photo => (photo.service = service.id));
-    return this.servicePhotosApi.createList(photos);
+    return forkJoin(photos.map(photo => this.api.accountsServicePhotosCreate(photo)));
   }
 
-  private createSchedule(schedule: ServiceSchedule[], service: ServiceList): Observable<ServiceSchedule[]> {
-    const data = schedule?.map(v => ({ ...v, service: service.id }));
-    return this.api.accountsServiceScheduleSet(data);
+  private createServiceSchedule(schedule: ServiceSchedule[], service: ServiceList): Observable<ServiceSchedule[]> {
+    if (!schedule?.length) {
+      return of([]);
+    }
+    return this.api.accountsServiceScheduleSet(schedule?.map(v => ({ ...v, service: service.id })));
   }
 
-  private createMasterSchedule(schedule: MasterSchedule[], master: ProfessionalList): Observable<MasterSchedule[]> {
-    return this.masterScheduleApi.createSet(schedule?.map(v => ({ ...v, professional: master.id })));
+  private createMasterSchedule(
+    schedule: ProfessionalSchedule[],
+    master: ProfessionalList,
+  ): Observable<ProfessionalSchedule[]> {
+    if (!schedule?.length) {
+      return of([]);
+    }
+    return this.api.accountsProfessionalScheduleSet(schedule?.map(v => ({ ...v, professional: master.id })));
   }
 
-  private createMasterLocation(location: MasterLocation, master: ProfessionalList): Observable<MasterLocation> {
-    return this.masterLocationApi.create({ ...location, professional: master.id });
+  private createMasterLocation(
+    location: ProfessionalLocation,
+    master: ProfessionalList,
+  ): Observable<ProfessionalLocation> {
+    return this.api.accountsProfessionalLocationsCreate({ ...location, professional: master.id });
   }
 
   private createPrice(price: Price, service: ServiceList): Observable<Price> {
@@ -122,7 +138,7 @@ export class ServicePublishService {
   private createServiceLocation(
     location: ServiceLocation,
     service: ServiceList,
-    masterLoc: MasterLocation,
+    masterLoc: ProfessionalLocation,
   ): Observable<ServiceLocation> {
     return this.serviceLocationApi.create({ ...location, location: masterLoc.id, service: service.id });
   }

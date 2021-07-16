@@ -2,7 +2,7 @@ import { Country, UserLocation } from '@app/api/models';
 import { Selector } from '@ngxs/store';
 import { UserLocationState, UserLocationStateModel } from './user-locations.state';
 
-export const defaultLocation: UserLocation = {
+export const emptyLocation: UserLocation = {
   country: null,
   city: null,
 };
@@ -10,17 +10,19 @@ export const defaultLocation: UserLocation = {
 export default class UserLocationSelectors {
   @Selector([UserLocationState])
   public static locations(data: UserLocationStateModel): UserLocation[] {
-    return data ?? [];
+    return data.savedLocations ?? [];
+  }
+
+  @Selector([UserLocationState])
+  public static defaultLocation(data: UserLocationStateModel): UserLocation {
+    const savedLocation = data.savedLocations && data.savedLocations[0];
+    return savedLocation ?? data.guessedLocation ?? emptyLocation;
   }
 
   @Selector([UserLocationSelectors.locations])
-  public static defaultLocation(data: UserLocation[]): UserLocation {
-    return data[0] ?? defaultLocation;
-  }
-
-  @Selector([UserLocationSelectors.locations])
-  public static additionalLocations(data: UserLocation[]): UserLocation[] {
-    return data?.slice(1);
+  public static additionalLocations(locations: UserLocation[]): UserLocation[] {
+    // TODO remove this selector
+    return locations?.slice(1);
   }
 
   @Selector([UserLocationSelectors.defaultLocation])

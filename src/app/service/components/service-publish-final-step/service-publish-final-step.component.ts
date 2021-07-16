@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfessionalList, ServiceList, ServiceLocationInline } from '@app/api/models';
+import { ServiceList, ServiceLocationInline } from '@app/api/models';
+import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { MasterManagerService } from '@app/core/services';
 import { LoadingService } from '@app/core/services/loading.service';
-import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
 import { ServicePublishService } from '@app/service/services/service-publish.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { Observable } from 'rxjs';
-import { finalize, map, single } from 'rxjs/operators';
+import { finalize, single } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-publish-final-step',
   templateUrl: './service-publish-final-step.component.html',
   styleUrls: ['./service-publish-final-step.component.scss'],
 })
-export class ServicePublishFinalStepComponent {
+export class ServicePublishFinalStepComponent implements IonViewDidEnter {
   public service: ServiceList;
 
   constructor(
@@ -26,12 +25,12 @@ export class ServicePublishFinalStepComponent {
     private readonly router: Router,
     private readonly masterManager: MasterManagerService,
     private readonly loading: LoadingService,
-    private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
+    private readonly servicePublishDataPreparer: ServicePublishDataPreparerService,
   ) {}
 
   public ionViewDidEnter(): void {
     this.service = null;
-    this.servicePublishDataFormatter.getData().then(data => {
+    this.servicePublishDataPreparer.getData().then(data => {
       const serviceLocation: ServiceLocationInline = {
         id: data.serviceLocation?.id,
         max_distance: data.serviceLocation?.max_distance,
@@ -50,12 +49,8 @@ export class ServicePublishFinalStepComponent {
     });
   }
 
-  public async publish(): Promise<void> {
+  public publish(): void {
     this.loading.presentLoading();
-    const master = await this.getMaster().toPromise();
-    if (master) {
-      await this.servicePublishDataHolder.assignStepData(ServicePublishSteps.Final, { master });
-    }
     this.servicePublish
       .publish()
       .pipe(
@@ -65,9 +60,5 @@ export class ServicePublishFinalStepComponent {
       .subscribe(service =>
         this.router.navigate(['service', service.id, 'edit'], { queryParams: { from: 'publish' } }),
       );
-  }
-
-  private getMaster(): Observable<ProfessionalList> {
-    return this.masterManager.getMasterList().pipe(map(list => list[0]));
   }
 }

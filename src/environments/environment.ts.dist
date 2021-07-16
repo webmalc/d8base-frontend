@@ -90,6 +90,15 @@ export const environment = {
   default_calendar_interval: 15,
   calendar_day_intervals: 4,
   default_lang: 'en',
+  contacts: {
+    facebook: 'logo-facebook',
+    instagram: 'logo-instagram',
+    web: 'globe-outline',
+    skype: 'logo-skype',
+    phone: 'call-outline',
+    whatsapp: 'logo-whatsapp',
+    email: 'mail-outline',
+  },
 };
 
 export const testing = {

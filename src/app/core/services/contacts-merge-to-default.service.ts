@@ -20,7 +20,6 @@ export class ContactsMergeToDefaultService {
     return combineLatest([
       contacts$,
       this.profileCountry$.pipe(
-        filter(country => Boolean(country)),
         switchMap(profileCountry => this.contactsApiCache.listDefaultByCountry(profileCountry)),
       ),
     ]).pipe(map(([contacts, defaultContacts]) => this.mergeUserWithDefaultContacts(contacts, defaultContacts)));

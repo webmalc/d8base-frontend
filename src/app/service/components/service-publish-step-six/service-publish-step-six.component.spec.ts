@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { ServicePublishStepSixFormService } from '../../forms/service-publish-step-six-form.service';
 import { ServicePublishAuthStateManagerService } from '../../services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
@@ -26,7 +25,6 @@ describe('ServicePublishStepSixComponent', () => {
         declarations: [ServicePublishStepSixComponent],
         imports: [...RootModules(), ComponentTestingModule, IonicSelectableModule],
         providers: [
-          ServicePublishStepSixFormService,
           ServicePublishDataHolderService,
           ServiceStepsNavigationService,
           ServicePublishAuthStateManagerService,

@@ -1,8 +1,8 @@
-.location-title {
-  opacity: 0.4;
-  max-width: 70%;
+:host {
+  display: block;
 }
 
-ion-select {
-  width: 100%;
+.height100 {
+  --min-height: 100%;
+  height: 100%;
 }
