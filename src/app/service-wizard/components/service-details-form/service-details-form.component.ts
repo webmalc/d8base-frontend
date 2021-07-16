@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { minimumDescriptionLength } from '@app/core/constants/service.constants';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgDestroyService } from '@app/core/services';
+import { descriptionValidator } from '@app/core/validators';
 import { takeUntil } from 'rxjs/operators';
 import { ServiceDetailsFormFields } from '../../enums/service-details.form-fields';
 
@@ -20,7 +20,7 @@ export class ServiceDetailsFormComponent {
 
   public createForm(): FormGroup {
     this.form = this.fb.group({
-      [this.formFields.description]: [null, Validators.minLength(minimumDescriptionLength)],
+      [this.formFields.description]: [null, descriptionValidator],
       [this.formFields.photos]: [],
     });
 

@@ -1,5 +1,3 @@
-import { ServiceWizardPath } from '@app/service-wizard/const/service-wizard-path.const';
-
 export interface MainMenuItem {
   title: string;
   icon?: string;
@@ -80,11 +78,6 @@ export const mainMenuItems: MainMenuItem[] = [
     title: 'template.service',
     icon: 'medal-outline',
     link: '/service/publish',
-  },
-  {
-    title: 'Service Wizard',
-    icon: 'medal-outline',
-    link: `${ServiceWizardPath}`,
   },
   {
     title: 'template.logout',
