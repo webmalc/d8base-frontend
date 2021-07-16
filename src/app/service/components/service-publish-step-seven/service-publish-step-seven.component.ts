@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models';
 import { defaultSchedule } from '@app/core/constants/schedule.constants';
-import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { ScheduleUnion } from '@app/core/models/schedule-union';
 import { LocationService } from '@app/core/services/location.service';
@@ -17,8 +17,6 @@ import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-inte
 import { ServicePublishAuthStateManagerService } from '@app/service/services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
 import { UserSettingsService } from '@app/shared/services/user-settings.service';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
@@ -46,8 +44,6 @@ export class ServicePublishStepSevenComponent {
 
   constructor(
     public readonly servicePublishDataHolderService: ServicePublishDataHolderService,
-    public readonly countrySelectable: SelectableCountryOnSearchService,
-    public readonly postalSelectable: SelectablePostalCodeOnSearchService,
     public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly formBuilder: FormBuilder,
     private readonly authStateManager: ServicePublishAuthStateManagerService,
@@ -85,9 +81,7 @@ export class ServicePublishStepSevenComponent {
   }
 
   public async submitForm(): Promise<void> {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      updateAllValueAndValidity(this.form);
+    if (isFormInvalid(this.form)) {
       return;
     }
 

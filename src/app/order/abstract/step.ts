@@ -1,23 +1,14 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import StepContext from '@app/order/interfaces/step-context.interface';
-import { BehaviorSubject, Subject } from 'rxjs';
 
-@Component({
-  template: '',
-})
-export abstract class StepComponent<T> implements OnDestroy {
+export abstract class StepComponent<T> {
   public outputData: T;
-  public isValid$ = new BehaviorSubject<boolean>(false);
+  public form: FormGroup;
+
   protected context: StepContext = null;
 
-  protected readonly ngDestroy$ = new Subject<void>();
-
-  constructor(protected readonly cd: ChangeDetectorRef) {}
-
-  public ngOnDestroy(): void {
-    this.ngDestroy$.next();
-    this.ngDestroy$.complete();
-  }
+  protected constructor(protected readonly cd: ChangeDetectorRef) {}
 
   public setState(state: T): void {
     this.onStateChanged(state);

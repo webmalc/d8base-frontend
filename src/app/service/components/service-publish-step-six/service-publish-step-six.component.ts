@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { TranslationService } from '@app/core/services/translation.service';
 import { companyNameValidator } from '@app/core/validators';
 import { ServicePublishStepSixFormFields } from '@app/service/enums/service-publish-step-six-form-fields';
@@ -38,9 +38,7 @@ export class ServicePublishStepSixComponent implements OnInit {
   }
 
   public async submitForm(): Promise<void> {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      updateAllValueAndValidity(this.form);
+    if (isFormInvalid(this.form)) {
       return;
     }
 

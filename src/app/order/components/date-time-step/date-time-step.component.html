@@ -3,8 +3,8 @@
     <ion-list-header class="fs20">
       <ion-label>{{ 'order.date-time-header' | translate }}</ion-label>
     </ion-list-header>
-    <ion-item>
-      <ion-label>
+    <ion-item lines="none">
+      <ion-label class="label-for-required-input">
         {{ 'order.date-time-subheader' | translate }}
       </ion-label>
     </ion-item>
@@ -15,5 +15,6 @@
       (newDate)="showCalendarForDate($event)"
     >
     </app-calendar-component>
+    <app-form-control-error [control]="formControl"></app-form-control-error>
   </ion-list>
 </app-step-container>

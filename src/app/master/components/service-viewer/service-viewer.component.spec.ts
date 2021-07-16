@@ -1,20 +1,21 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ServiceList } from '@app/api/models';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { MasterProfileServicePresentationComponent } from './master-profile-service-presentation.component';
+
+import { ServiceViewerComponent } from './service-viewer.component';
 
 describe('MasterProfileServicePresentationComponent', () => {
-  let component: MasterProfileServicePresentationComponent;
-  let fixture: ComponentFixture<MasterProfileServicePresentationComponent>;
+  let component: ServiceViewerComponent;
+  let fixture: ComponentFixture<ServiceViewerComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [MasterProfileServicePresentationComponent],
+        declarations: [ServiceViewerComponent],
         imports: [RootModules(), ComponentTestingModule],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(MasterProfileServicePresentationComponent);
+      fixture = TestBed.createComponent(ServiceViewerComponent);
       component = fixture.componentInstance;
       const service: ServiceList = {
         professional: 1,
@@ -28,7 +29,7 @@ describe('MasterProfileServicePresentationComponent', () => {
           service: 1,
         },
       };
-      component.serviceData = { service };
+      component.service = service;
       fixture.detectChanges();
     }),
   );

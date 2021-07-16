@@ -6,9 +6,6 @@ import { StorageManagerService } from '@app/core/proxies/storage-manager.service
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { PricesApiService } from '../../../core/services/prices-api.service';
-import { ServiceLocationApiService } from '../../../core/services/service-location-api.service';
-import { ServicePhotoApiService } from '../../../core/services/service-photo-api.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '../../services/service-publish-data-preparer.service';
 import { ServicePublishService } from '../../services/service-publish.service';
@@ -44,9 +41,6 @@ describe('ServicePublishFinalStepComponent', () => {
           ServicePublishService,
           ServiceStepsNavigationService,
           { provide: StorageManagerService, useClass: StorageManagerMock },
-          ServicePhotoApiService,
-          ServiceLocationApiService,
-          PricesApiService,
           ServicePublishDataPreparerService,
           ChainManagerService,
           StepOneHandlerService,

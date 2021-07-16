@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfessionalLocationInline } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { UserLocationApiService } from '@app/core/services';
+import { NgDestroyService, UserLocationApiService } from '@app/core/services';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import { StepComponent } from '@app/order/abstract/step';
 import LocationStepData from '@app/order/interfaces/location-step-data.interface';
@@ -33,6 +33,7 @@ const initState: LocationStepData = {
       provide: StepComponent,
       useExisting: forwardRef(() => LocationStepComponent),
     },
+    NgDestroyService,
   ],
 })
 export class LocationStepComponent extends StepComponent<LocationStepData> {
@@ -42,13 +43,17 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
   private locationKey: string;
 
   constructor(
+    protected readonly cd: ChangeDetectorRef,
     private readonly fullLocationService: FullLocationService,
     private readonly userLocationService: UserLocationApiService,
     private readonly popoverController: PopoverController,
     private readonly api: AccountsService,
-    protected readonly cd: ChangeDetectorRef,
+    private readonly ngDestroy$: NgDestroyService,
   ) {
     super(cd);
+    this.form = new FormGroup({
+      location: this.formControl,
+    });
     this.subscribeFormControl();
   }
 
@@ -152,7 +157,6 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
   private subscribeFormControl(): void {
     this.formControl.statusChanges.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
       this.outputData = this.formControl.valid ? this.getStepState() : null;
-      this.isValid$.next(this.formControl.valid);
     });
   }
 

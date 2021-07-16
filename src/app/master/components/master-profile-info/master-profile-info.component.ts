@@ -5,7 +5,6 @@ import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
-import { Language } from '@app/profile/models/language';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
 import ProfessionalLocationSelectors from '@app/store/professional-page/professional-locations/professional-locations.selectors';
@@ -34,7 +33,6 @@ export class MasterProfileInfoComponent {
   public contactsWithDefault$: Observable<ContactUnion[]>;
 
   public contextFiltered$: Observable<ProfessionalPageStateModel>;
-  public languages$: Observable<Language[]>;
   public locations$: Observable<{ id: number; text: string }[]>;
   public readonly editDefaultUrl = 'professional-contact-add-default/';
   public readonly editUrl = 'professional-contact-edit/';

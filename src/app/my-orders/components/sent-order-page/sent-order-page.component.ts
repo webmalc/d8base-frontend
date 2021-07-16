@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Profile } from '@app/api/models';
-import { SentOrder } from '@app/core/models/sent-order';
+import { Profile, SentOrder } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
 import { ProfessionalsApiCache, ServicesApiCache } from '@app/core/services/cache';
-import { SentOrdersApiService } from '@app/order/services';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
@@ -21,10 +20,10 @@ export class SentOrderPageComponent {
 
   public order$: Observable<SentOrder>;
 
-  constructor(route: ActivatedRoute, sentOrdersApi: SentOrdersApiService) {
+  constructor(route: ActivatedRoute, api: AccountsService) {
     this.order$ = route.params.pipe(
       map(params => Number.parseInt(params.id, 10)),
-      switchMap(id => (id ? sentOrdersApi.getByEntityId(id) : of<SentOrder>())),
+      switchMap(id => (id ? api.accountsOrdersSentRead(id) : of<SentOrder>())),
     );
   }
 }

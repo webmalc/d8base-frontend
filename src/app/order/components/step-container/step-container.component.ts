@@ -1,49 +1,49 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { SentOrder } from '@app/core/models/sent-order';
+import { NgDestroyService } from '@app/core/services';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import StepModel from '@app/order/interfaces/step-model.interface';
 import { OrderWizardStateService } from '@app/order/services';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-step-container',
   templateUrl: './step-container.component.html',
   styleUrls: ['./step-container.component.scss'],
+  providers: [NgDestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StepContainerComponent implements OnInit, OnDestroy {
+export class StepContainerComponent implements OnInit {
   public currentStep$: Observable<StepModel> = this.wizardState.getCurrentStep();
-  public isNextDisabled$: Observable<boolean> = this.stepComponent.isValid$.pipe(map(value => !value));
-  public isPrevDisabled$: Observable<boolean> = this.wizardState.isFirstStep();
+  public isFirstStep$: Observable<boolean> = this.wizardState.isFirstStep();
   public isLastStep$: Observable<boolean> = this.wizardState.isLastStep();
   public context$: Observable<StepContext> = this.wizardState.getContext();
   public orderDetailsState$: Observable<Partial<SentOrder>> = this.wizardState
     .getState()
     .pipe(map(stepsState => Object.values(stepsState).reduce((acc, curr) => ({ ...acc, ...curr }), {})));
 
-  private readonly ngDestroy$ = new Subject<void>();
-
   constructor(
     private readonly wizardState: OrderWizardStateService,
     private readonly route: ActivatedRoute,
     private readonly cd: ChangeDetectorRef,
     private readonly stepComponent: StepComponent<unknown>,
+    private readonly ngDestroy$: NgDestroyService,
   ) {}
 
   public ngOnInit(): void {
     this.subscribeAll();
   }
 
-  public ngOnDestroy(): void {
-    this.ngDestroy$.next();
-    this.ngDestroy$.complete();
-  }
-
   public nextStep(): void {
+    if (this.stepComponent.form ? isFormInvalid(this.stepComponent.form) : false) {
+      return;
+    }
+
     this.wizardState.setCurrentStepState(this.stepComponent.outputData);
     this.wizardState.nextStep();
   }

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
+import { NgDestroyService } from '@app/core/services';
 import { UserManagerService } from '@app/core/services/user-manager.service';
 import * as AppValidators from '@app/core/validators';
 import { StepComponent } from '@app/order/abstract/step';
@@ -19,18 +20,12 @@ import { takeUntil } from 'rxjs/operators';
       provide: StepComponent,
       useExisting: forwardRef(() => ClientDetailsStepComponent),
     },
+    NgDestroyService,
   ],
 })
 export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepData> implements OnInit {
   public formFields = OrderClientDetailsFormFields;
-  public form = this.fb.group({
-    [this.formFields.IsForMe]: [false],
-    [this.formFields.FirstName]: ['', Validators.required],
-    [this.formFields.LastName]: [''],
-    [this.formFields.Email]: ['', AppValidators.email],
-    [this.formFields.Phone]: ['', Validators.required],
-    [this.formFields.Comment]: [''],
-  });
+
   public isSelfOrder: boolean = false;
 
   private readonly userFields = [
@@ -43,11 +38,20 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
   private currentUserForm: ClientDetailsStepData;
 
   constructor(
+    protected readonly cd: ChangeDetectorRef,
     private readonly userManager: UserManagerService,
     private readonly fb: FormBuilder,
-    protected readonly cd: ChangeDetectorRef,
+    private readonly ngDestroy$: NgDestroyService,
   ) {
     super(cd);
+    this.form = this.fb.group({
+      [this.formFields.IsForMe]: [false],
+      [this.formFields.FirstName]: ['', Validators.required],
+      [this.formFields.LastName]: [''],
+      [this.formFields.Email]: ['', AppValidators.email],
+      [this.formFields.Phone]: ['', Validators.required],
+      [this.formFields.Comment]: [''],
+    });
   }
 
   public ngOnInit(): void {
@@ -102,7 +106,6 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
   private subscribeFormStatus(): void {
     this.form.statusChanges.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
       this.outputData = this.form.valid ? this.getStepState() : null;
-      this.isValid$.next(this.form.valid);
     });
   }
 

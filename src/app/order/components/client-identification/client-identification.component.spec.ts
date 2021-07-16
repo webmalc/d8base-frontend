@@ -7,7 +7,6 @@ import { IpDataService } from '@app/core/services/location/ip-data.service';
 import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
 import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { OrderWizardStateService } from '@app/order/services';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { IonicModule } from '@ionic/angular';
@@ -40,7 +39,6 @@ describe('ClientIdentificationComponent', () => {
           IpnfDataService,
           Geolocation,
           LocationAccuracy,
-          SelectableCountryOnSearchService,
         ],
       }).compileComponents();
 

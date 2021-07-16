@@ -7,7 +7,6 @@ import { IsUserRegisteredApiService } from '@app/core/services/is-user-registere
 import * as AppValidators from '@app/core/validators';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { OrderWizardStateService } from '@app/order/services';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -44,7 +43,6 @@ export class ClientIdentificationComponent {
   public profile$: Observable<Profile>;
 
   constructor(
-    public readonly countrySelectable: SelectableCountryOnSearchService,
     private readonly wizardState: OrderWizardStateService,
     private readonly registrationChecker: IsUserRegisteredApiService,
     private readonly authenticator: AuthenticationService,

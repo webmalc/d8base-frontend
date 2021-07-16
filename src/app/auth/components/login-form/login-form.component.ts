@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Credentials } from '@app/auth/interfaces/credentials';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import * as AppValidators from '@app/core/validators';
 import { LoginFormFields } from '../../enums/login-form-fields';
 
@@ -35,7 +36,7 @@ export class LoginFormComponent {
   }
 
   public submitLoginForm(): void {
-    if (this.form.invalid) {
+    if (isFormInvalid(this.form)) {
       return;
     }
 

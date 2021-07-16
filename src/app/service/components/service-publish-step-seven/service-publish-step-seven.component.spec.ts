@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SelectableCountryOnSearchService } from '@app/shared/services/selectable-country-on-search.service';
-import { SelectablePostalCodeOnSearchService } from '@app/shared/services/selectable-postal-code-on-search.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishAuthStateManagerService } from '../../services/service-publish-auth-state-manager.service';
@@ -28,8 +26,6 @@ describe('ServicePublishStepSevenComponent', () => {
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
           ServicePublishDataHolderService,
-          SelectableCountryOnSearchService,
-          SelectablePostalCodeOnSearchService,
           ServiceStepsNavigationService,
           ServicePublishAuthStateManagerService,
           ChainManagerService,

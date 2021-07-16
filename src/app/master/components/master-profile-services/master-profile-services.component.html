@@ -1,5 +1,5 @@
 <ng-container *ngIf="context$ | async as context">
-  <ion-row *ngIf="serviceData$ | async as serviceData">
+  <ion-row *ngIf="serviceList$ | async as serviceList">
     <ion-col class="ion-no-padding" size="12">
       <ion-item>
         <ion-label color="medium" position="floating">
@@ -11,24 +11,24 @@
       </ion-item>
 
       <ion-item lines="none">
-        {{ 'master-profile.services.services-tab.master-services' | translate }}&nbsp;({{ serviceData.length }})
+        {{ 'master-profile.services.services-tab.master-services' | translate }}&nbsp;({{ serviceList.length }})
       </ion-item>
 
       <ion-list *ngIf="!context.canEdit">
         <service-viewer
-          *ngFor="let service of serviceData | serviceDataFilter: searchModel"
-          [serviceData]="service"
+          *ngFor="let service of serviceList | serviceDataFilter: searchModel"
+          [service]="service"
           class="pv5"
         >
         </service-viewer>
       </ion-list>
       <ion-list *ngIf="context.canEdit">
         <service-editor
-          *ngFor="let service of serviceData | serviceDataFilter: searchModel"
+          *ngFor="let service of serviceList | serviceDataFilter: searchModel"
           (enableService)="enableService($event)"
           (disableService)="disableService($event)"
           (deleteService)="deleteService($event)"
-          [service]="service.service"
+          [service]="service"
           class="pv5"
         >
         </service-editor>

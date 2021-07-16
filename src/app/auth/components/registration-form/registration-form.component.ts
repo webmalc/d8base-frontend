@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DefaultRegisterUser, UserLocation } from '@app/api/models';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import * as AppValidators from '@app/core/validators';
 import { RegistrationFormFields } from '../../enums/registration-form-fields';
 
@@ -55,7 +56,7 @@ export class RegistrationFormComponent {
   }
 
   public submitRegistrationForm(): void {
-    if (this.form.invalid) {
+    if (isFormInvalid(this.form)) {
       return;
     }
     const formData: object = this.form.getRawValue();

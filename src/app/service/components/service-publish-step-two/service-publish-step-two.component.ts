@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { updateAllValueAndValidity } from '@app/core/functions/form.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { serviceTypes } from '@app/core/types/service-types';
 import * as AppValidators from '@app/core/validators';
 import { ServicePublishStepTwoFormFields } from '@app/service/enums/service-publish-step-two-form-fields';
@@ -32,9 +32,7 @@ export class ServicePublishStepTwoComponent {
   }
 
   public async submitForm(): Promise<void> {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      updateAllValueAndValidity(this.form);
+    if (isFormInvalid(this.form)) {
       return;
     }
 

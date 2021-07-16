@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Service } from '@app/api/models';
-import ServiceData from '@app/core/interfaces/service-data.interface';
+import { Service, ServiceList } from '@app/api/models';
 import { ServiceOperationsService } from '@app/core/services/service-operations.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
@@ -16,7 +15,7 @@ import { filter, switchMap } from 'rxjs/operators';
 })
 export class MasterProfileServicesComponent {
   public searchModel: string;
-  public serviceData$: Observable<ServiceData[]>;
+  public serviceList$: Observable<ServiceList[]>;
 
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
@@ -27,7 +26,7 @@ export class MasterProfileServicesComponent {
     private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
     private readonly serviceOperations: ServiceOperationsService,
   ) {
-    this.serviceData$ = combineLatest([this.context$, this.refresh$]).pipe(
+    this.serviceList$ = combineLatest([this.context$, this.refresh$]).pipe(
       filter(([context]) => !!context.professional),
       switchMap(([context]) => this.serviceGeneratorFactory.getServiceList(context.professional.id, !context.canEdit)),
     );
