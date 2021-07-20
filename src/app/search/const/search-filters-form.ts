@@ -1,54 +1,24 @@
-import { SearchFilterStateInterface } from '../interfaces/search-filter-state-interface';
+import { SearchFilterFormValue } from '../interfaces/search-filter-form-value.interface';
 
-type SubTypeObject<T> = Pick<
-  T,
-  {
-    [K in keyof Partial<T>]: T[K] extends object ? K : never;
-  }[keyof T]
->;
-
-type ObjectKeys<T> = {
-  readonly [K in keyof Partial<SubTypeObject<T>>]: K;
-};
-
-type FormGroupNames = Required<Pick<ObjectKeys<SearchFilterStateInterface>, 'location' | 'datetime' | 'price'>>;
-
-type FormFieldsNames<T> = {
-  readonly [K in keyof Required<T>]: K extends keyof FormGroupNames ? FormFieldsNames<T[K]> : K;
-};
-
-type FormFieldsType = FormFieldsNames<SearchFilterStateInterface>;
-
-export const SearchFilterFormGroups: FormGroupNames = {
-  location: 'location',
-  datetime: 'datetime',
-  price: 'price',
-};
-
-export const SearchFilterFormFields: FormFieldsType = {
+export const SearchFilterFormFields: { [key in keyof SearchFilterFormValue]: string } = {
   query: 'query',
-  location: {
-    country: 'country',
-    city: 'city',
-    coordinates: 'coordinates',
-  },
+  country: 'country',
+  city: 'city',
   category: 'category',
   subcategory: 'subcategory',
   tags: 'tags',
   isOnlineBooking: 'isOnlineBooking',
   isInstantBooking: 'isInstantBooking',
-  datetime: {
-    from: 'from',
-    to: 'to',
-  },
+  dateFrom: 'dateFrom',
+  dateTo: 'dateTo',
+  timeFrom: 'timeFrom',
+  timeTo: 'timeTo',
   isOnlineService: 'isOnlineService',
   isAtMasterLocationService: 'isAtMasterLocationService',
   isAtClientLocationService: 'isAtClientLocationService',
-  price: {
-    currency: 'currency',
-    start: 'start',
-    end: 'end',
-  },
+  priceCurrency: 'priceCurrency',
+  priceStart: 'priceStart',
+  priceEnd: 'priceEnd',
   rating: 'rating',
   professionalLevel: 'professionalLevel',
   paymentMethods: 'paymentMethods',

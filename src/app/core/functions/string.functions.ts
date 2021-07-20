@@ -15,3 +15,7 @@ export function toArray(value: string): string[] {
 export function fromArray(value: string[]): string {
   return value.join(SEPARATOR);
 }
+
+export function hasWord(data: string, word: string): boolean {
+  return data?.split(',').includes(word);
+}

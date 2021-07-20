@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { City, Country } from '@app/api/models';
 import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
 import { OnMapPopoverComponent } from '@app/shared/components/on-map-popover/on-map-popover.component';
 import { PopoverController } from '@ionic/angular';
@@ -11,7 +12,8 @@ import { PopoverController } from '@ionic/angular';
 })
 export class LocationPickerComponent {
   @Input() public enabled: boolean = false;
-  @Input() public locationData: ResolvedUserLocation;
+  @Input() public country: Country;
+  @Input() public city: City;
   @Output() public emitter: EventEmitter<ResolvedUserLocation> = new EventEmitter<ResolvedUserLocation>();
 
   constructor(private readonly pop: PopoverController) {}
@@ -26,15 +28,15 @@ export class LocationPickerComponent {
       animated: true,
       componentProps: {
         data: {
-          country: this.locationData?.country,
-          city: this.locationData?.city,
+          country: this.country,
+          city: this.city,
         },
       },
       cssClass: ['map-popover-width'],
     });
     pop.onDidDismiss().then((data: { data: ResolvedUserLocation }) => {
       if (data.data) {
-        if (data.data?.city?.id !== this.locationData?.city?.id) {
+        if (data.data?.city?.id !== this.city?.id) {
           this.emitter.emit(data.data);
         }
       }
@@ -44,17 +46,17 @@ export class LocationPickerComponent {
   }
 
   public getLocationString(): string | null {
-    if (!this.locationData) {
+    if (!(this.country && this.city)) {
       return null;
     }
-    if (this.locationData.country && this.locationData.city) {
-      return `${this.locationData.country.name}, ${this.locationData.city.name}`;
+    if (this.country && this.city) {
+      return `${this.country.name}, ${this.city.name}`;
     }
-    if (this.locationData.country) {
-      return this.locationData.country.name;
+    if (this.country) {
+      return this.country.name;
     }
-    if (this.locationData.city) {
-      return this.locationData.city.name;
+    if (this.city) {
+      return this.city.name;
     }
 
     return null;

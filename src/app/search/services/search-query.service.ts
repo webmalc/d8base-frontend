@@ -4,7 +4,7 @@ import { SearchService } from '@app/api/services';
 import { SearchFilterStateConverter } from '@app/search/services/search-filter-state-converter.service';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { SearchFilterStateInterface } from '../interfaces/search-filter-state-interface';
+import { SearchFilterFormValue } from '../interfaces/search-filter-form-value.interface';
 
 const DEBOUNCE_DURATION_MS = 200;
 
@@ -26,7 +26,7 @@ export class SearchQueryService {
       });
   }
 
-  public searchByFormValue(formValue: SearchFilterStateInterface): void {
+  public searchByFormValue(formValue: SearchFilterFormValue): void {
     const params = this.searchFilterStateConverter.getSearchListParams(formValue);
     this.setSearchParams(params);
   }

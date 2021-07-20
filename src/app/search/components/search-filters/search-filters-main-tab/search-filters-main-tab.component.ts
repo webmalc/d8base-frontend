@@ -23,12 +23,11 @@ export class SearchFiltersMainTabComponent implements OnInit {
   public get formFields() {
     return this.stateManager.formFields;
   }
-  public get formGroups() {
-    return this.stateManager.formGroups;
-  }
+
   public get form() {
     return this.stateManager.searchForm;
   }
+
   constructor(
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
