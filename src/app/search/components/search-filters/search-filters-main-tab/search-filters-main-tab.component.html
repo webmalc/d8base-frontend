@@ -72,6 +72,11 @@
       [formControl]="form.controls[formFields.dateFrom]"
     ></ion-input>
   </ion-item>
+  <ion-item [hidden]="!form.controls[formFields.dateFrom].value">
+    <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
+    <ion-label>{{ 'issuance.filters.main-tab.time-from' | translate }}</ion-label>
+    <ion-input type="time" [formControl]="form.controls[formFields.timeFrom]"></ion-input>
+  </ion-item>
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-to' | translate }}</ion-label>
     <ion-input
@@ -80,6 +85,15 @@
       [max]="stateManager.maxDate"
       [formControl]="form.controls[formFields.dateTo]"
     ></ion-input>
+  </ion-item>
+  <ion-item [hidden]="!form.controls[formFields.dateTo].value">
+    <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
+    <ion-label>{{ 'issuance.filters.main-tab.time-to' | translate }}</ion-label>
+    <ion-input type="time" [formControl]="form.controls[formFields.timeTo]"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{ 'issuance.filters.main-tab.exact-interval' | translate }}</ion-label>
+    <ion-checkbox></ion-checkbox>
   </ion-item>
 </app-collapse-item>
 <app-collapse-item title="{{ 'issuance.filters.main-tab.availability' | translate }}">

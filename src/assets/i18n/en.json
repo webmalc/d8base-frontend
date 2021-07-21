@@ -663,8 +663,11 @@
         "apply": "Apply",
         "date-from": "Date from",
         "date-to": "Date to",
+        "time-from": "Exact start time",
+        "time-to": "Exact end time",
         "price-start": "Start price",
-        "price-end": "End price"
+        "price-end": "End price",
+        "exact-interval": "Exact time interval"
       },
       "additional": {
         "rating": "Professional rating",

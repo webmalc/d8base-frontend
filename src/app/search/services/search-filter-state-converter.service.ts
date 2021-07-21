@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Category, City, Country, Language, Subcategory } from '@app/api/models';
 import { ProfessionalsService, SearchService } from '@app/api/services';
 import { emptyArrayToUndefined } from '@app/core/functions/array.functions';
+import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { hasWord } from '@app/core/functions/string.functions';
 import { CitiesApiCache, CountriesApiCache, LanguagesApiCache } from '@app/core/services/cache';
 import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const serviceTypesParams = (data: SearchFilterFormValue): string => {
+function serviceTypesParams(data: SearchFilterFormValue): string {
   const types = [];
   if (data.isOnlineService) {
     types.push('online');
@@ -21,7 +22,18 @@ const serviceTypesParams = (data: SearchFilterFormValue): string => {
   }
 
   return types.join(',') || null;
-};
+}
+
+function getTimeStamp(dateStr: string, timeStr: string, defaultTime: string): string {
+  if (!dateStr) {
+    return '';
+  }
+
+  return timeStr ? `${dateStr}T${timeStr}` : `${dateStr}T${defaultTime}`;
+}
+
+const DAY_START_TIME = '00:00';
+const DAY_END_TIME = '23:00';
 
 @Injectable({ providedIn: 'root' })
 export class SearchFilterStateConverter {
@@ -64,6 +76,8 @@ export class SearchFilterStateConverter {
                 }
               : null;
 
+          const startDatetime = fromDatetime(params?.startDatetime);
+          const endDatetime = fromDatetime(params?.endDatetime);
           const searchFilterState: SearchFilterFormValue = {
             query: params?.query,
             country,
@@ -73,8 +87,10 @@ export class SearchFilterStateConverter {
             tags: void 0,
             isOnlineBooking: void 0,
             isInstantBooking: params?.onlyWithAutoOrderConfirmation,
-            dateFrom: params?.startDatetime,
-            dateTo: params?.endDatetime,
+            dateFrom: startDatetime.date,
+            dateTo: endDatetime.date,
+            timeFrom: startDatetime.time,
+            timeTo: endDatetime.time,
             isOnlineService: hasWord(params?.serviceTypes, 'online'),
             isAtMasterLocationService: hasWord(params?.serviceTypes, 'professional'),
             isAtClientLocationService: hasWord(params?.serviceTypes, 'client'),
@@ -108,149 +124,38 @@ export class SearchFilterStateConverter {
     }
 
     return {
-      /**
-       * multiple values may be separated by commas
-       */
       tags: void 0,
-
-      /**
-       * subregion ID
-       */
       subregion: void 0,
-
-      /**
-       * multiple subcategory IDs may be separated by commas
-       */
       subcategories: data.subcategory?.map(({ id }) => id).join(','),
-
-      /**
-       * start price value (12.35)
-       */
       startPrice: data.priceStart,
-
-      /**
-       * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
-       */
-      startDatetime: data.dateFrom,
-
-      /**
-       * professional start age
-       */
+      startDatetime: getTimeStamp(data.dateFrom, data.timeFrom, DAY_START_TIME) || null,
       startAge: data.startAge,
-
-      /**
-       * multiple types may be separated by commas
-       */
       serviceTypes: serviceTypesParams(data),
-
-      /**
-       * region ID
-       */
       region: void 0,
-
-      /**
-       * professional rating
-       */
       ratingFrom: data.rating,
-
-      /**
-       * search term query param
-       */
       query: data.query || null,
-
-      /**
-       * professional level
-       */
       professionalLevel: data.professionalLevel?.value,
-
-      /**
-       * price currency (usd)
-       */
       priceCurrency: data.priceCurrency?.currency,
-
-      /**
-       * postal code ID
-       */
       postalCode: void 0,
-
-      /**
-       * multiple methods may be separated by commas
-       */
       paymentMethods: data?.paymentMethods?.map(({ value }) => value).join(', '),
       onlyWithReviews: data?.onlyWithReviews || null,
       onlyWithPhotos: data?.onlyWithPhotos || null,
       onlyWithFixedPrice: data?.onlyWithFixedPrice || null,
       onlyWithCertificates: data?.onlyWithCertificates || null,
       onlyWithAutoOrderConfirmation: data.isInstantBooking || null,
-
-      /**
-       * multiple country IDs may be separated by commas
-       */
       nationalities: data?.nationalities?.map(({ id }) => id).join(', '),
-
-      /**
-       * max distance
-       */
       maxDistance: void 0,
-
-      /**
-       * longitude (-79.3849)
-       */
-      longitude: '',
-
-      /**
-       * latitude (43.6529)
-       */
-      latitude: '',
-
-      /**
-       * multiple values may be separated by commas
-       */
+      longitude: null,
+      latitude: null,
       languages: data.languages?.map(({ code }) => code).join(', '),
-
-      /**
-       * male: 0, female: 1
-       */
       gender: void 0,
-
-      /**
-       * professional experience
-       */
       experience: data?.experience,
-
-      /**
-       * end price value (16.50)
-       */
       endPrice: data.priceEnd,
-
-      /**
-       * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
-       */
-      endDatetime: data.dateTo,
-
-      /**
-       * professional end age
-       */
+      endDatetime: getTimeStamp(data.dateTo, data.timeTo, DAY_END_TIME) || null,
       endAge: data.endAge,
-
-      /**
-       * district ID
-       */
       district: void 0,
-
-      /**
-       * country ID
-       */
       country: data.country?.id,
-
-      /**
-       * city ID
-       */
       city: data.city?.id,
-
-      /**
-       * multiple category IDs may be separated by commas
-       */
       categories: data?.category?.map(({ id }) => id).join(','),
     };
   }

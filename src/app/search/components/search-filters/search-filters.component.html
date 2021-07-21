@@ -26,3 +26,8 @@
   <app-search-filters-main-tab *ngSwitchCase="tabs.Main"></app-search-filters-main-tab>
   <app-search-filters-additional-tab *ngSwitchCase="tabs.Additional"></app-search-filters-additional-tab>
 </ion-col>
+<ion-item lines="none">
+  <ion-button (click)="submitFilters()" color="primary" size="medium" slot="end">
+    {{ 'issuance.filters.main-tab.apply' | translate }}
+  </ion-button>
+</ion-item>

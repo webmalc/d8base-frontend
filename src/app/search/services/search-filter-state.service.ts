@@ -22,6 +22,8 @@ export class SearchFilterStateService {
     [this.formFields.isInstantBooking]: null,
     [this.formFields.dateFrom]: null,
     [this.formFields.dateTo]: null,
+    [this.formFields.timeFrom]: null,
+    [this.formFields.timeTo]: null,
     [this.formFields.isOnlineService]: null,
     [this.formFields.isAtMasterLocationService]: null,
     [this.formFields.isAtClientLocationService]: null,
