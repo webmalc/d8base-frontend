@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Category, City, Country, Language, Subcategory } from '@app/api/models';
 import { ProfessionalsService, SearchService } from '@app/api/services';
+import { emptyArrayToUndefined } from '@app/core/functions/array.functions';
+import { fromDatetime } from '@app/core/functions/datetime.functions';
+import { hasWord } from '@app/core/functions/string.functions';
 import { CitiesApiCache, CountriesApiCache, LanguagesApiCache } from '@app/core/services/cache';
-import { SearchFilterStateInterface } from '@app/search/interfaces/search-filter-state-interface';
+import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const serviceTypesParams = (data: SearchFilterStateInterface): string => {
+function serviceTypesParams(data: SearchFilterFormValue): string {
   const types = [];
   if (data.isOnlineService) {
     types.push('online');
@@ -19,13 +22,18 @@ const serviceTypesParams = (data: SearchFilterStateInterface): string => {
   }
 
   return types.join(',') || null;
-};
+}
 
-const hasWord = (data: string, word: string): boolean => data?.split(',').includes(word);
+function getTimeStamp(dateStr: string, timeStr: string, defaultTime: string): string {
+  if (!dateStr) {
+    return '';
+  }
 
-const stringOrNull = (value: number): string | null => (value ? `${value}` : null);
+  return timeStr ? `${dateStr}T${timeStr}` : `${dateStr}T${defaultTime}`;
+}
 
-const emptyArrayToUndefined = <T>(arr: T[]): T[] | undefined => (arr?.length ? arr : void 0);
+const DAY_START_TIME = '00:00';
+const DAY_END_TIME = '23:00';
 
 @Injectable({ providedIn: 'root' })
 export class SearchFilterStateConverter {
@@ -36,7 +44,7 @@ export class SearchFilterStateConverter {
     private readonly professionalsApi: ProfessionalsService,
   ) {}
 
-  public getSearchFilterState(params: SearchService.SearchListParams): Observable<SearchFilterStateInterface> {
+  public getSearchFilterState(params: SearchService.SearchListParams): Observable<SearchFilterFormValue> {
     if (!params) {
       return of();
     }
@@ -59,14 +67,6 @@ export class SearchFilterStateConverter {
                   .includes(id),
               )
             : void 0;
-          const coordinates =
-            params?.latitude && params?.longitude
-              ? {
-                  latitude: parseFloat(params?.latitude),
-                  longitude: parseFloat(params?.longitude),
-                }
-              : null;
-
           const price =
             params?.priceCurrency && (params?.startPrice || params?.endPrice)
               ? {
@@ -76,23 +76,27 @@ export class SearchFilterStateConverter {
                 }
               : null;
 
-          const searchFilterState: SearchFilterStateInterface = {
+          const startDatetime = fromDatetime(params?.startDatetime);
+          const endDatetime = fromDatetime(params?.endDatetime);
+          const searchFilterState: SearchFilterFormValue = {
             query: params?.query,
-            location: {
-              country,
-              city,
-              coordinates,
-            },
+            country,
+            city,
             category: emptyArrayToUndefined(categories),
             subcategory: emptyArrayToUndefined(subcategories),
             tags: void 0,
             isOnlineBooking: void 0,
             isInstantBooking: params?.onlyWithAutoOrderConfirmation,
-            datetime: { from: params?.startDatetime, to: params?.endDatetime },
+            dateFrom: startDatetime.date,
+            dateTo: endDatetime.date,
+            timeFrom: startDatetime.time,
+            timeTo: endDatetime.time,
             isOnlineService: hasWord(params?.serviceTypes, 'online'),
             isAtMasterLocationService: hasWord(params?.serviceTypes, 'professional'),
             isAtClientLocationService: hasWord(params?.serviceTypes, 'client'),
-            ...(price ? { price } : null),
+            priceStart: price?.start,
+            priceEnd: price?.end,
+            priceCurrency: price?.currency,
             rating: params?.ratingFrom ? Number(params?.ratingFrom) : void 0,
             professionalLevel: params?.professionalLevel ? { value: params?.professionalLevel } : void 0,
             paymentMethods: params?.paymentMethods
@@ -114,155 +118,44 @@ export class SearchFilterStateConverter {
     );
   }
 
-  public getSearchListParams(data: SearchFilterStateInterface): SearchService.SearchListParams {
+  public getSearchListParams(data: SearchFilterFormValue): SearchService.SearchListParams {
     if (!data) {
       return;
     }
 
     return {
-      /**
-       * multiple values may be separated by commas
-       */
       tags: void 0,
-
-      /**
-       * subregion ID
-       */
       subregion: void 0,
-
-      /**
-       * multiple subcategory IDs may be separated by commas
-       */
-      subcategories: data?.subcategory?.map(({ id }) => id).join(','),
-
-      /**
-       * start price value (12.35)
-       */
-      startPrice: data?.price.start,
-
-      /**
-       * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
-       */
-      startDatetime: data.datetime.from,
-
-      /**
-       * professional start age
-       */
-      startAge: data?.startAge,
-
-      /**
-       * multiple types may be separated by commas
-       */
+      subcategories: data.subcategory?.map(({ id }) => id).join(','),
+      startPrice: data.priceStart,
+      startDatetime: getTimeStamp(data.dateFrom, data.timeFrom, DAY_START_TIME) || null,
+      startAge: data.startAge,
       serviceTypes: serviceTypesParams(data),
-
-      /**
-       * region ID
-       */
       region: void 0,
-
-      /**
-       * professional rating
-       */
-      ratingFrom: data?.rating,
-
-      /**
-       * search term query param
-       */
-      query: data?.query || null,
-
-      /**
-       * professional level
-       */
-      professionalLevel: data?.professionalLevel?.value,
-
-      /**
-       * price currency (usd)
-       */
-      priceCurrency: data?.price?.currency?.currency,
-
-      /**
-       * postal code ID
-       */
+      ratingFrom: data.rating,
+      query: data.query || null,
+      professionalLevel: data.professionalLevel?.value,
+      priceCurrency: data.priceCurrency?.currency,
       postalCode: void 0,
-
-      /**
-       * multiple methods may be separated by commas
-       */
       paymentMethods: data?.paymentMethods?.map(({ value }) => value).join(', '),
       onlyWithReviews: data?.onlyWithReviews || null,
       onlyWithPhotos: data?.onlyWithPhotos || null,
       onlyWithFixedPrice: data?.onlyWithFixedPrice || null,
       onlyWithCertificates: data?.onlyWithCertificates || null,
       onlyWithAutoOrderConfirmation: data.isInstantBooking || null,
-
-      /**
-       * multiple country IDs may be separated by commas
-       */
       nationalities: data?.nationalities?.map(({ id }) => id).join(', '),
-
-      /**
-       * max distance
-       */
       maxDistance: void 0,
-
-      /**
-       * longitude (-79.3849)
-       */
-      longitude: stringOrNull(data?.location?.coordinates?.longitude),
-
-      /**
-       * latitude (43.6529)
-       */
-      latitude: stringOrNull(data?.location?.coordinates?.latitude),
-
-      /**
-       * multiple values may be separated by commas
-       */
-      languages: data?.languages?.map(({ code }) => code).join(', '),
-
-      /**
-       * male: 0,                 female: 1
-       */
+      longitude: null,
+      latitude: null,
+      languages: data.languages?.map(({ code }) => code).join(', '),
       gender: void 0,
-
-      /**
-       * professional experience
-       */
       experience: data?.experience,
-
-      /**
-       * end price value (16.50)
-       */
-      endPrice: data?.price.end,
-
-      /**
-       * YYYY-MM-DDTHH:mm:ss (2020-08-23T16:19:43)
-       */
-      endDatetime: data.datetime.to,
-
-      /**
-       * professional end age
-       */
-      endAge: data?.endAge,
-
-      /**
-       * district ID
-       */
+      endPrice: data.priceEnd,
+      endDatetime: getTimeStamp(data.dateTo, data.timeTo, DAY_END_TIME) || null,
+      endAge: data.endAge,
       district: void 0,
-
-      /**
-       * country ID
-       */
-      country: data?.location?.country?.id,
-
-      /**
-       * city ID
-       */
-      city: data?.location?.city?.id,
-
-      /**
-       * multiple category IDs may be separated by commas
-       */
+      country: data.country?.id,
+      city: data.city?.id,
       categories: data?.category?.map(({ id }) => id).join(','),
     };
   }

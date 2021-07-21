@@ -22,7 +22,7 @@
                   type="date"
                   [min]="stateManager.minDate"
                   [max]="stateManager.maxDate"
-                  [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
+                  [formControl]="form.controls[formFields.dateFrom]"
                 ></ion-input>
               </ion-item>
             </ion-col>
@@ -33,7 +33,7 @@
                   type="date"
                   [min]="stateManager.minDate"
                   [max]="stateManager.maxDate"
-                  [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
+                  [formControl]="form.controls[formFields.dateTo]"
                 ></ion-input>
               </ion-item>
             </ion-col>
@@ -42,7 +42,8 @@
                 class="main-page-filter"
                 (emitter)="updateLocation($event)"
                 [enabled]="locationEnabled"
-                [locationData]="form.controls[formGroups.location].value"
+                [country]="form.controls[formFields.country]"
+                [city]="form.controls[formFields.city]"
               ></app-location-picker>
             </ion-col>
           </ion-row>

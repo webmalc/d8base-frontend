@@ -41,10 +41,6 @@ export class MainPage implements OnInit {
     return this.stateManager.formFields;
   }
 
-  public get formGroups() {
-    return this.stateManager.formGroups;
-  }
-
   public get form() {
     return this.stateManager.searchForm;
   }
@@ -52,12 +48,13 @@ export class MainPage implements OnInit {
   public ngOnInit(): void {
     this.defaultLocation$
       .pipe(
-        switchMap(params => this.searchFilterStateConverter.getSearchFilterState(params)),
+        switchMap(userLocation => this.searchFilterStateConverter.getSearchFilterState(userLocation)),
         takeUntil(this.destroy$),
       )
-      .subscribe(data => {
-        if (data) {
-          this.form.get(this.formGroups.location).patchValue(data.location);
+      .subscribe(formValue => {
+        if (formValue) {
+          this.form.controls[this.formFields.country].setValue(formValue.country);
+          this.form.controls[this.formFields.city].setValue(formValue.city);
         }
         this.locationEnabled = true;
       });
@@ -84,11 +81,8 @@ export class MainPage implements OnInit {
 
   public updateLocation(location: ResolvedUserLocation): void {
     if (location) {
-      this.form.controls[this.formGroups.location].setValue({
-        country: location.country,
-        city: location.city,
-        coordinates: null,
-      });
+      this.form.controls[this.formFields.country].setValue(location.country);
+      this.form.controls[this.formFields.city].setValue(location.city);
     }
   }
 

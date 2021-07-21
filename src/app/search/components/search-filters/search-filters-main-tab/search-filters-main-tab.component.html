@@ -1,6 +1,6 @@
 <header>{{ 'issuance.filters.main-tab.country' | translate }}</header>
 <app-country-selector
-  [formControl]="form.get([formGroups.location, formFields.location.country])"
+  [formControl]="form.controls[formFields.country]"
   [title]="'issuance.filters.main-tab.country-placeholder' | translate"
   [itemClass]="'ion-item-bordered'"
 >
@@ -8,8 +8,8 @@
 
 <header>{{ 'issuance.filters.main-tab.city' | translate }}</header>
 <app-city-selector
-  [formControl]="form.get([formGroups.location, formFields.location.city])"
-  [country]="form.get([formGroups.location, formFields.location.country]).value"
+  [formControl]="form.controls[formFields.city]"
+  [country]="form.controls[formFields.country].value"
   [itemClass]="'ion-item-bordered'"
   [title]="'issuance.filters.main-tab.city-placeholder' | translate"
 ></app-city-selector>
@@ -69,8 +69,13 @@
       type="date"
       [min]="stateManager.minDate"
       [max]="stateManager.maxDate"
-      [formControl]="form.get([formGroups.datetime, formFields.datetime.from])"
+      [formControl]="form.controls[formFields.dateFrom]"
     ></ion-input>
+  </ion-item>
+  <ion-item [hidden]="!form.controls[formFields.dateFrom].value">
+    <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
+    <ion-label>{{ 'issuance.filters.main-tab.time-from' | translate }}</ion-label>
+    <ion-input type="time" [formControl]="form.controls[formFields.timeFrom]"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>{{ 'issuance.filters.main-tab.date-to' | translate }}</ion-label>
@@ -78,8 +83,17 @@
       type="date"
       [min]="stateManager.minDate"
       [max]="stateManager.maxDate"
-      [formControl]="form.get([formGroups.datetime, formFields.datetime.to])"
+      [formControl]="form.controls[formFields.dateTo]"
     ></ion-input>
+  </ion-item>
+  <ion-item [hidden]="!form.controls[formFields.dateTo].value">
+    <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
+    <ion-label>{{ 'issuance.filters.main-tab.time-to' | translate }}</ion-label>
+    <ion-input type="time" [formControl]="form.controls[formFields.timeTo]"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{ 'issuance.filters.main-tab.exact-interval' | translate }}</ion-label>
+    <ion-checkbox></ion-checkbox>
   </ion-item>
 </app-collapse-item>
 <app-collapse-item title="{{ 'issuance.filters.main-tab.availability' | translate }}">
@@ -116,7 +130,7 @@
       [canSearch]="true"
       [canClear]="true"
       [items]="rates$ | async"
-      [formControl]="form.get([formGroups.price, formFields.price.currency])"
+      [formControl]="form.controls[formFields.priceCurrency]"
       closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
       searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
       searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
@@ -125,10 +139,10 @@
   </ion-item>
   <ion-item>
     <ion-label position="floating">{{ 'issuance.filters.main-tab.price-start' | translate }}</ion-label>
-    <ion-input appNumbersOnly [formControl]="form.get([formGroups.price, formFields.price.start])"></ion-input>
+    <ion-input appNumbersOnly [formControl]="form.controls[formFields.priceStart]"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">{{ 'issuance.filters.main-tab.price-end' | translate }}</ion-label>
-    <ion-input appNumbersOnly [formControl]="form.get([formGroups.price, formFields.price.end])"></ion-input>
+    <ion-input appNumbersOnly [formControl]="form.controls[formFields.priceEnd]"></ion-input>
   </ion-item>
 </app-collapse-item>

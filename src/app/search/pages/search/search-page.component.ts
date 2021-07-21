@@ -2,7 +2,6 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } 
 import { ActivatedRoute, Params } from '@angular/router';
 import { Search } from '@app/api/models';
 import { SearchService } from '@app/api/services';
-import { alignTimeInterval } from '@app/core/functions/datetime.functions';
 import { NgDestroyService } from '@app/core/services';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
@@ -68,11 +67,8 @@ export class SearchPage implements AfterViewInit {
   }
 
   private runSearchQuery(params: SearchService.SearchListParams): void {
-    const { startDatetime, endDatetime } = alignTimeInterval(params.startDatetime, params.endDatetime);
     this.params = {
       ...params,
-      startDatetime,
-      endDatetime,
     };
     this.doLoad$.next({
       params: this.params,

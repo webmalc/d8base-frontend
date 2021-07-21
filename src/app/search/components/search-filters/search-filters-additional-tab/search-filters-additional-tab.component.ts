@@ -13,10 +13,12 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SearchFiltersAdditionalTabComponent implements OnInit {
   public readonly languages$ = this.languagesApiCache.list();
+
   public readonly professionalLevels: { value: string; name: string }[] = ['junior', 'middle', 'senior'].map(value => ({
     value,
     name: this.translate.instant(`global.professional-level.${value}`),
   }));
+
   public readonly paymentMethods: { value: string; name: string }[] = ['cash', 'online'].map(value => ({
     value,
     name: this.translate.instant(`service-payment-options.${value}`),
@@ -25,12 +27,11 @@ export class SearchFiltersAdditionalTabComponent implements OnInit {
   public get formFields() {
     return this.stateManager.formFields;
   }
-  public get formGroups() {
-    return this.stateManager.formGroups;
-  }
+
   public get form() {
     return this.stateManager.searchForm;
   }
+
   constructor(
     private readonly countriesApiCache: CountriesApiCache,
     private readonly stateManager: SearchFilterStateService,
