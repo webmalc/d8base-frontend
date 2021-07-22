@@ -1,6 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormArray, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UserSettings } from '@app/api/models';
 import * as ScheduleConstants from '@app/core/constants/schedule.constants';
 import { dayOfWeekSorter, mondayOrSundayOrder, ScheduleUnion } from '@app/core/models/schedule-union';
 import { NgDestroyService } from '@app/core/services';
@@ -106,9 +105,9 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
 
   private initializeTimetable(): void {
     this.timetable = new FormArray([]);
-    this.timetable.valueChanges.pipe(takeUntil(this.ngDestroy$)).subscribe((timetable: ScheduleUnion[]) => {
+    this.timetable.valueChanges.pipe(takeUntil(this.ngDestroy$)).subscribe((schedules: ScheduleUnion[]) => {
       if (this.onChange) {
-        this.onChange(timetable);
+        this.onChange(schedules.map(schedule => ({ ...schedule, is_enabled: true })));
       }
     });
   }

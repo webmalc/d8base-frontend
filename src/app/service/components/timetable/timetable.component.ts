@@ -1,7 +1,10 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
+import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
+import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 
 @Component({
@@ -9,16 +12,23 @@ import { ServicePublishDataHolderService } from '@app/service/services/service-p
   templateUrl: './timetable.component.html',
   styleUrls: ['./timetable.component.scss'],
 })
-export class TimetableComponent {
+export class TimetableComponent implements IonViewDidEnter {
   public scheduleEditor = new FormControl();
 
-  private readonly STEP = 6;
+  constructor(
+    private readonly servicePublishDataHolderService: ServicePublishDataHolderService,
+    private readonly location: Location,
+  ) {}
 
-  constructor(public servicePublishDataHolderService: ServicePublishDataHolderService, public location: Location) {}
+  public ionViewDidEnter(): void {
+    const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    const { timetable } = stepData;
+    this.scheduleEditor.setValue(timetable);
+  }
 
   public async saveTimetable(): Promise<void> {
     const timetable: AbstractSchedule[] = this.scheduleEditor.value ?? [];
-    await this.servicePublishDataHolderService.assignStepData(this.STEP, { timetable });
+    await this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, { timetable });
     this.location.back();
   }
 }
