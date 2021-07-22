@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceList, ServiceLocationInline } from '@app/api/models';
+import { ServiceList } from '@app/api/models';
+import { ServiceLocationInline } from '@app/api/models/service-location-inline';
 import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { MasterManagerService } from '@app/core/services';
 import { LoadingService } from '@app/core/services/loading.service';

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReviewList } from '@app/api/models';
 import { HelperService } from '@app/core/services/helper.service';
 import { ReviewsService } from '@app/reviews/services/reviews.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-review-card',
@@ -18,7 +18,7 @@ export class ReviewCardComponent {
   public set review(review: ReviewList) {
     this._review = review;
     if (review) {
-      this.countryCode$ = this.reviewsService.getReviewCountryCodeByNationality(this.review.user.nationality);
+      this.countryCode$ = of(this.review.user.country);
       this.isAbleToEditComment$ = this.reviewsService.isCurrentProfessional(this.review.professional);
     }
   }

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { UserContactInline } from './user-contact-inline';
 import { UserLanguage } from './user-language';
+import { Country } from './country';
 export interface ReceivedOrderClient {
   avatar?: string;
   avatar_thumbnail?: string;
@@ -17,6 +18,6 @@ export interface ReceivedOrderClient {
   is_confirmed?: boolean;
   languages?: Array<UserLanguage>;
   last_name?: string;
-  nationality?: null | number;
+  nationality?: Country;
   phone?: null | string;
 }

@@ -6291,6 +6291,8 @@ class AccountsService extends __BaseService {
    * - `page`: A page number within the paginated result set.
    *
    * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `is_enabled`:
    */
   accountsServiceLocationsListResponse(params: AccountsService.AccountsServiceLocationsListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ServiceLocation>}>> {
     let __params = this.newParams();
@@ -6301,6 +6303,7 @@ class AccountsService extends __BaseService {
     if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
     if (params.page != null) __params = __params.set('page', params.page.toString());
     if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    if (params.isEnabled != null) __params = __params.set('is_enabled', params.isEnabled.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/accounts/service-locations/`,
@@ -6331,6 +6334,8 @@ class AccountsService extends __BaseService {
    * - `page`: A page number within the paginated result set.
    *
    * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `is_enabled`:
    */
   accountsServiceLocationsList(params: AccountsService.AccountsServiceLocationsListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<ServiceLocation>}> {
     return this.accountsServiceLocationsListResponse(params).pipe(
@@ -9656,6 +9661,7 @@ module AccountsService {
      * Which field to use when ordering the results.
      */
     ordering?: string;
+    isEnabled?: string;
   }
 
   /**
