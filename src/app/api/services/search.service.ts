@@ -79,7 +79,13 @@ class SearchService extends __BaseService {
    *
    * - `gender`: male: 0,                 female: 1
    *
+   * - `experience_to`: professional experience to
+   *
+   * - `experience_from`: professional experience from
+   *
    * - `experience`: professional experience
+   *
+   * - `exact_datetime`: Search for available slots encompassing dates
    *
    * - `end_price`: end price value (16.50)
    *
@@ -126,7 +132,10 @@ class SearchService extends __BaseService {
     if (params.latitude != null) __params = __params.set('latitude', params.latitude.toString());
     if (params.languages != null) __params = __params.set('languages', params.languages.toString());
     if (params.gender != null) __params = __params.set('gender', params.gender.toString());
+    if (params.experienceTo != null) __params = __params.set('experience_to', params.experienceTo.toString());
+    if (params.experienceFrom != null) __params = __params.set('experience_from', params.experienceFrom.toString());
     if (params.experience != null) __params = __params.set('experience', params.experience.toString());
+    if (params.exactDatetime != null) __params = __params.set('exact_datetime', params.exactDatetime.toString());
     if (params.endPrice != null) __params = __params.set('end_price', params.endPrice.toString());
     if (params.endDatetime != null) __params = __params.set('end_datetime', params.endDatetime.toString());
     if (params.endAge != null) __params = __params.set('end_age', params.endAge.toString());
@@ -209,7 +218,13 @@ class SearchService extends __BaseService {
    *
    * - `gender`: male: 0,                 female: 1
    *
+   * - `experience_to`: professional experience to
+   *
+   * - `experience_from`: professional experience from
+   *
    * - `experience`: professional experience
+   *
+   * - `exact_datetime`: Search for available slots encompassing dates
    *
    * - `end_price`: end price value (16.50)
    *
@@ -355,9 +370,24 @@ module SearchService {
     gender?: 0 | 1;
 
     /**
+     * professional experience to
+     */
+    experienceTo?: number;
+
+    /**
+     * professional experience from
+     */
+    experienceFrom?: number;
+
+    /**
      * professional experience
      */
     experience?: number;
+
+    /**
+     * Search for available slots encompassing dates
+     */
+    exactDatetime?: boolean;
 
     /**
      * end price value (16.50)

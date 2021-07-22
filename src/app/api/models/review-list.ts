@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { ReviewCommentInline } from './review-comment-inline';
-import { User } from './user';
+import { ReducedUser } from './reduced-user';
 export interface ReviewList {
   comment?: ReviewCommentInline;
   created?: string;
@@ -10,5 +10,5 @@ export interface ReviewList {
   professional: number;
   rating: 1 | 2 | 3 | 4 | 5;
   title?: null | string;
-  user?: User;
+  user?: ReducedUser;
 }

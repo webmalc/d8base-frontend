@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { UserLanguage } from './user-language';
+import { Country } from './country';
 export interface UserExtended {
   avatar?: string;
   avatar_thumbnail?: string;
@@ -14,5 +15,5 @@ export interface UserExtended {
   is_confirmed?: boolean;
   languages?: Array<UserLanguage>;
   last_name?: string;
-  nationality?: null | number;
+  nationality?: Country;
 }
