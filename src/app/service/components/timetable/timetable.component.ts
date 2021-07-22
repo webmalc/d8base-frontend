@@ -21,7 +21,9 @@ export class TimetableComponent implements IonViewDidEnter {
   ) {}
 
   public ionViewDidEnter(): void {
-    const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
+    const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(
+      ServicePublishSteps.Seven,
+    );
     const { timetable } = stepData;
     this.scheduleEditor.setValue(timetable);
   }
