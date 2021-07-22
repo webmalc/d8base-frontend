@@ -4,6 +4,7 @@ import { ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models
 import { defaultSchedule } from '@app/core/constants/schedule.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
+import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { ScheduleUnion } from '@app/core/models/schedule-union';
 import { LocationService } from '@app/core/services/location.service';
 import { MasterManagerService } from '@app/core/services/master-manager.service';
@@ -28,7 +29,7 @@ import { first, map, switchMap } from 'rxjs/operators';
   templateUrl: './service-publish-step-seven.component.html',
   styleUrls: ['./service-publish-step-seven.component.scss'],
 })
-export class ServicePublishStepSevenComponent {
+export class ServicePublishStepSevenComponent implements IonViewDidEnter {
   public form: FormGroup;
   public formFields = ServicePublishStepSevenFormFields;
   public defaultLocationList: MasterLocation[];
@@ -80,6 +81,18 @@ export class ServicePublishStepSevenComponent {
     return Boolean(this.defaultLocationList?.length);
   }
 
+  public ionViewDidEnter(): void {
+    // schedule could be updated so we re-read it just in case
+    const stepData = this.servicePublishDataHolderService.getStepData<StepSevenDataInterface>(
+      ServicePublishSteps.Seven,
+    );
+    if (!this.useMasterSchedule) {
+      this.selectedSchedules = [...stepData?.timetable];
+      this.serviceSchedules = [...stepData?.timetable];
+    }
+    // TODO use the reactive approach instead
+  }
+
   public async submitForm(): Promise<void> {
     if (isFormInvalid(this.form)) {
       return;
@@ -113,10 +126,6 @@ export class ServicePublishStepSevenComponent {
       this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two)?.service_type ===
       'client'
     );
-  }
-
-  public test(obj: any): string {
-    return JSON.stringify(obj);
   }
 
   private disableIrrelevantControls(options: {
@@ -240,7 +249,7 @@ export class ServicePublishStepSevenComponent {
       .subscribe(masterSchedule => {
         this.masterSchedules = masterSchedule ?? [];
         this.masterExists = !!masterSchedule;
-        this.useMasterSchedule = this.masterSchedules.length > 0;
+        this.useMasterSchedule = stepData?.use_master_schedule ?? this.masterSchedules.length > 0;
         if (stepData?.timetable?.length) {
           this.selectedSchedules = [...stepData.timetable];
           this.serviceSchedules = [...stepData.timetable];
@@ -248,7 +257,9 @@ export class ServicePublishStepSevenComponent {
           this.serviceSchedules = [...defaultSchedule];
           this.selectedSchedules = [...(this.useMasterSchedule ? this.masterSchedules : this.serviceSchedules)];
         }
-        this.cd.markForCheck();
+        this.servicePublishDataHolderService
+          .assignStepData(ServicePublishSteps.Seven, { timetable: [...this.serviceSchedules] })
+          .then(() => this.cd.markForCheck());
       });
   }
 

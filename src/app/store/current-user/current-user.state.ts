@@ -98,13 +98,13 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.Logout)
-  public logout({ setState, getState }: StateContext<CurrentUserStateModel>): Observable<any> {
+  public logout({ patchState, getState }: StateContext<CurrentUserStateModel>): Observable<any> {
     const { settings } = getState();
     return from(
       this.servicePublicationState
         .reset()
         .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
-        .then(() => setState({ ...guestState, settings })),
+        .then(() => patchState({ ...guestState, settings })),
     );
   }
 
