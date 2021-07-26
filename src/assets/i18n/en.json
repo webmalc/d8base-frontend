@@ -487,6 +487,7 @@
     },
     "main-info": {
       "rating": "Professional rating",
+      "no-rating": "Not rated",
       "reviews": "Reviews"
     },
     "services": {

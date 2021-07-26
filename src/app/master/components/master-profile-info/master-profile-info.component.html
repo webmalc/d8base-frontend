@@ -1,22 +1,32 @@
 <ng-container *ngIf="context$ | async as context">
-  <ion-list lines="none" *ngIf="reviewsCount$ | async as reviewsCount">
-    <ion-item>
+  <section *ngIf="reviewsCount$ | async as reviewsCount; else noReviews">
+    <ion-item lines="none">
       <ion-label>
         {{ 'master-profile.main-info.rating' | translate }}
       </ion-label>
-      <ion-note slot="end">
-        {{ context.professional.rating }}
-      </ion-note>
+      <app-rating slot="end" [rating]="context.professional.rating"></app-rating>
     </ion-item>
-    <ion-item button [routerLink]="['/reviews', context.professional.id]">
+    <ion-item lines="none" button [routerLink]="['/reviews', context.professional.id]">
       <ion-label>
         {{ 'master-profile.main-info.reviews' | translate }}
       </ion-label>
-      <ion-note slot="end" color="primary">
-        {{ reviewsCount }}
-      </ion-note>
+      <ion-label slot="end" color="primary" class="ion-text-end">
+        {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
+      </ion-label>
     </ion-item>
-  </ion-list>
+  </section>
+  <ng-template #noReviews>
+    <section>
+      <ion-item lines="none">
+        <ion-label>
+          {{ 'master-profile.main-info.rating' | translate }}
+        </ion-label>
+        <ion-label slot="end" color="medium" class="ion-text-end">
+          {{ 'master-profile.main-info.no-rating' | translate }}
+        </ion-label>
+      </ion-item>
+    </section>
+  </ng-template>
 
   <ion-list lines="none">
     <ion-list-header>
@@ -34,7 +44,7 @@
       ></app-contacts-edit>
     </ng-container>
     <ng-template #viewContacts>
-      <app-contacts-view [contacts]="context.professional.contacts"> </app-contacts-view>
+      <app-contacts-view [contacts]="context.professional.contacts"></app-contacts-view>
     </ng-template>
   </ion-list>
 
@@ -137,7 +147,7 @@
           {{ 'master-profile.info.nationality' | translate }}
         </ion-label>
         <ion-text>
-          {{ (context.user.nationality | countryById$ | async)?.name }}
+          {{ context.user.nationality.name }}
         </ion-text>
       </ion-item>
     </ion-list>

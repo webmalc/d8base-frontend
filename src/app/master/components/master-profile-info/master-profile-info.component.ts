@@ -80,6 +80,10 @@ export class MasterProfileInfoComponent {
     return HelperService.calculateAge(birthday);
   }
 
+  public declineReviews(num: number): string {
+    return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
+  }
+
   private initContactsWithDefault(): void {
     this.contactsWithDefault$ = this.contactsMergeToDefaultService.contactsMergedWithDefault(this.contacts$);
   }
