@@ -93,11 +93,8 @@ export const environment = {
   contacts: {
     facebook: 'logo-facebook',
     instagram: 'logo-instagram',
-    web: 'globe-outline',
     skype: 'logo-skype',
-    phone: 'call-outline',
     whatsapp: 'logo-whatsapp',
-    email: 'mail-outline',
   },
 };
 
