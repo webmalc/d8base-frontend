@@ -362,11 +362,16 @@
   display: none;
 }
 
-header {
-  margin-top: 1rem;
-  margin-bottom: 0.2rem;
-  padding-left: 1rem;
-  font-weight: bold;
+section {
+  margin-bottom: 1rem;
+}
+
+section:not(:last-of-type) {
+  border-bottom: 1px solid var(--ion-color-light);
+}
+
+ion-list:not(:last-of-type) {
+  border-bottom: 1px solid var(--ion-color-light);
 }
 
 a {

@@ -1,4 +1,4 @@
-<header>{{ 'issuance.filters.main-tab.country' | translate }}</header>
+<app-section-heading>{{ 'issuance.filters.main-tab.country' | translate }}</app-section-heading>
 <app-country-selector
   [formControl]="form.controls[formFields.country]"
   [title]="'issuance.filters.main-tab.country-placeholder' | translate"
@@ -6,7 +6,7 @@
 >
 </app-country-selector>
 
-<header>{{ 'issuance.filters.main-tab.city' | translate }}</header>
+<app-section-heading>{{ 'issuance.filters.main-tab.city' | translate }}</app-section-heading>
 <app-city-selector
   [formControl]="form.controls[formFields.city]"
   [country]="form.controls[formFields.country].value"
@@ -14,7 +14,7 @@
   [title]="'issuance.filters.main-tab.city-placeholder' | translate"
 ></app-city-selector>
 
-<header>{{ 'issuance.filters.main-tab.categories' | translate }}</header>
+<app-section-heading>{{ 'issuance.filters.main-tab.categories' | translate }}</app-section-heading>
 <ion-item class="ion-item-bordered">
   <ion-label color="medium" position="floating">
     {{ 'issuance.filters.main-tab.categories-select' | translate }}
@@ -35,7 +35,7 @@
   </ionic-selectable>
 </ion-item>
 
-<header>{{ 'issuance.filters.main-tab.subcategories' | translate }}</header>
+<app-section-heading>{{ 'issuance.filters.main-tab.subcategories' | translate }}</app-section-heading>
 <ion-item class="ion-item-bordered">
   <ion-label color="medium" position="floating">
     {{ 'issuance.filters.main-tab.subcategories-select' | translate }}

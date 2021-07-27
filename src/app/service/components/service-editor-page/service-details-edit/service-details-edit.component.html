@@ -6,14 +6,14 @@
     }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
       <section>
-        <header>{{ 'service-details.description' | translate }}</header>
+        <app-section-heading>{{ 'service-details.description' | translate }}</app-section-heading>
         <ion-item>
           <ion-textarea [autoGrow]="true" formControlName="description"></ion-textarea>
         </ion-item>
       </section>
 
       <section>
-        <header>{{ 'service-details.photos' | translate }}</header>
+        <app-section-heading>{{ 'service-details.photos' | translate }}</app-section-heading>
         <app-image-carousel
           *appIfSpinner="photos$ | async as photos"
           class="ion-margin-vertical"

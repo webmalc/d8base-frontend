@@ -14,7 +14,7 @@
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
   </ion-item>
+  <app-add-button [routerLink]="addNewContactUrl">
+    {{ 'contact-edit-page.add-new' | translate }}
+  </app-add-button>
 </ion-list>
-<app-add-button [routerLink]="addNewContactUrl">
-  {{ 'contact-edit-page.add-new' | translate }}
-</app-add-button>
