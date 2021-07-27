@@ -6,7 +6,7 @@
     }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
       <section>
-        <header>{{ 'service-details.service-type' | translate }}</header>
+        <app-section-heading>{{ 'service-details.service-type' | translate }}</app-section-heading>
         <ion-radio-group formControlName="service_type">
           <ion-item *ngFor="let type of serviceTypes" lines="full">
             <ion-label>{{ 'service-location.' + type | translate }}</ion-label>

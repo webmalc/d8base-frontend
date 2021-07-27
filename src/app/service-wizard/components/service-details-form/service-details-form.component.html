@@ -8,7 +8,7 @@
     {{ 'service-publish.step-three.first-info-row' | translate }}
   </app-info-row>
   <section>
-    <header>{{ 'service-details.description' | translate }}</header>
+    <app-section-heading>{{ 'service-details.description' | translate }}</app-section-heading>
     <ion-item>
       <ion-textarea [autoGrow]="true" [formControlName]="formFields.description"></ion-textarea>
     </ion-item>
@@ -16,7 +16,7 @@
   </section>
 
   <section>
-    <header>{{ 'service-details.photos' | translate }}</header>
+    <app-section-heading>{{ 'service-details.photos' | translate }}</app-section-heading>
     <app-image-carousel
       class="ion-margin-vertical"
       [files]="this.files"

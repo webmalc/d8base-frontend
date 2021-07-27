@@ -13,17 +13,13 @@
         {{ professional.name }}
       </div>
     </div>
-    <div *ngIf="professional?.rating" class="rating">
-      <ion-item class="star-rating ion-item-no-min-height" lines="none">
-        <ion-icon name="star" class="star fs20"></ion-icon>
-        <b>{{ professional?.rating }}</b>
-      </ion-item>
-
-      <ion-item class="reviews ion-item-no-min-height fs13" detail="false" lines="none">
+    <div *ngIf="professional?.rating" class="ion-padding-start">
+      <app-rating [rating]="professional.rating"></app-rating>
+      <div class="reviews">
         <a [routerLink]="'/reviews/' + professional?.id" (click)="$event.stopPropagation()">
           {{ professional?.reviews_count }} {{ declineReviews(professional?.reviews_count) | translate }}
         </a>
-      </ion-item>
+      </div>
     </div>
   </div>
 </div>

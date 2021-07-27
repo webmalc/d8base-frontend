@@ -6,20 +6,20 @@
     }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
       <section>
-        <header>{{ 'service-details.name' | translate }}</header>
+        <app-section-heading>{{ 'service-details.name' | translate }}</app-section-heading>
         <ion-item>
           <ion-input [formControlName]="formFields.name"></ion-input>
         </ion-item>
       </section>
 
       <section>
-        <header>{{ 'service-details.duration-and-price' | translate }}</header>
+        <app-section-heading>{{ 'service-details.duration-and-price' | translate }}</app-section-heading>
         <app-duration-editor class="ion-margin" [formControlName]="formFields.duration"></app-duration-editor>
         <app-price-editor class="ion-margin" [formControlName]="formFields.price"></app-price-editor>
       </section>
 
       <section>
-        <header>{{ 'service-details.payment-methods' | translate }}</header>
+        <app-section-heading>{{ 'service-details.payment-methods' | translate }}</app-section-heading>
         <app-payment-method-editor [formControlName]="formFields.paymentMethods"></app-payment-method-editor>
       </section>
 

@@ -6,9 +6,18 @@ import { environment } from '@env/environment';
 })
 export class MediaIconFactoryService {
   public static getIcon(media: string): string {
-    const contacts = environment.contacts;
-    const defaultLogo = 'reader-outline';
+    const contacts = {
+      facebook: 'logo-facebook',
+      instagram: 'logo-instagram',
+      skype: 'logo-skype',
+      whatsapp: 'logo-whatsapp',
+      phone: 'call-outline',
+      email: 'mail-outline',
+      web: 'globe-outline',
+      default: 'reader-outline',
+      ...environment.contacts,
+    };
 
-    return contacts[media] ?? defaultLogo;
+    return contacts[media.toLowerCase()] ?? contacts.default;
   }
 }

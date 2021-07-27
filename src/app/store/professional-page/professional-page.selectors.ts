@@ -11,6 +11,6 @@ export default class ProfessionalPageSelectors {
 
   @Selector([ProfessionalPageState])
   public static professional(data: ProfessionalPageStateModel): ProfessionalList {
-    return data.professional;
+    return data?.professional;
   }
 }
