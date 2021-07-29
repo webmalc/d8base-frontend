@@ -13,18 +13,20 @@ import { CalendarGeneratorFactoryService } from '@app/master/services/calendar-g
 import { CertificatesApiService } from '@app/master/services/certificates-api.service';
 import { EducationApiService } from '@app/master/services/education-api.service';
 import { ExperienceApiService } from '@app/master/services/experience-api.service';
-import { ReviewsModule } from '@app/reviews/reviews.module';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
+import { ReviewsModule } from '@app/reviews/reviews.module';
 import { ServicePageModule } from '@app/service/service.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { MasterProfileMainInfoSectionComponent } from './components';
+// eslint-disable-next-line max-len
+import { MasterProfileServiceEditComponent } from './components/master-profile-services/master-profile-service-edit/master-profile-service-edit.component';
+import { ServiceViewerComponent } from './components/master-profile-services/service-viewer/service-viewer.component';
+import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
 import { MasterPageRoutingModule } from './master-routing.module';
 import { MasterPage } from './master.page';
 import { ProfessionalGuard } from './professional.guard';
-import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
-import { MasterProfileMainInfoSectionComponent, ServiceViewerComponent } from './components';
-import { MasterProfileServiceEditComponent } from './components/master-profile-service-edit/master-profile-service-edit.component';
 
 @NgModule({
   imports: [

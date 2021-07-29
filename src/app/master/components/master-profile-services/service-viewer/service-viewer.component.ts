@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ServiceList } from '@app/api/models';
 
 @Component({
-  selector: 'service-viewer',
+  selector: 'app-service-viewer',
   templateUrl: './service-viewer.component.html',
   styleUrls: ['./service-viewer.component.scss'],
 })

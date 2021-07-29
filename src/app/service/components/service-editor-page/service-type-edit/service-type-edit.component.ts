@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceLocation } from '@app/api/models';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
-import { LocationEditorPopoverComponent } from '@app/shared/components';
-import { PopoverController } from '@ionic/angular';
 import { concat, forkJoin, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
@@ -28,23 +26,15 @@ export class ServiceTypeEditComponent extends ServiceEditor {
 
   public submit({ form, service }: ServiceEditorContext): void {
     const { service_type, location } = form.value;
-    const deleteOldLocation$ = this.deps.api
-      .accountsServiceLocationsList({ service: service.id })
-      .pipe(
-        switchMap(locations =>
-          locations.count > 0
-            ? forkJoin(locations.results.map(l => this.deps.api.accountsServiceLocationsDelete(l.id)))
-            : of<null>(void 0),
-        ),
-      );
-    const createNewLocation$ =
-      service_type === 'online' ? of<ServiceLocation>(void 0) : this.deps.api.accountsServiceLocationsCreate(location);
+    const disableOldLocation$ = this.disableServiceLocations(service.id);
+    const enableNewLocation$ =
+      service_type === 'online' ? of<ServiceLocation>(void 0) : this.createLocation(service.id, location);
     const newService: Service = {
       ...service,
       service_type,
     };
     const sources = [
-      concat(deleteOldLocation$, createNewLocation$),
+      concat(disableOldLocation$, enableNewLocation$),
       this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
     ];
     this.saveAndReturn(sources);
@@ -55,5 +45,42 @@ export class ServiceTypeEditComponent extends ServiceEditor {
       service_type: new FormControl(service.service_type, Validators.required),
       location: new FormControl(),
     });
+  }
+
+  private disableServiceLocations(serviceId: number): Observable<ServiceLocation[]> {
+    return this.deps.api.accountsServiceLocationsList({ service: serviceId }).pipe(
+      switchMap(locations =>
+        locations.count > 0
+          ? forkJoin(
+              locations.results.map(location =>
+                this.deps.api.accountsServiceLocationsUpdate({
+                  id: location.id,
+                  data: {
+                    ...location,
+                    is_enabled: false,
+                  },
+                }),
+              ),
+            )
+          : of<ServiceLocation[]>([]),
+      ),
+    );
+  }
+
+  /*
+   * Creates a new location or enables it if already exists
+   */
+  private createLocation(
+    serviceId: number,
+    location: { location: number; max_distance: number; service: number },
+  ): Observable<ServiceLocation> {
+    const create$ = this.deps.api.accountsServiceLocationsCreate(location);
+    const update$ = (l: ServiceLocation) => this.deps.api.accountsServiceLocationsUpdate({ id: l.id, data: l });
+    return this.deps.api.accountsServiceLocationsList({ service: serviceId }).pipe(
+      switchMap(locations => {
+        const oldLocation = locations.results.find(l => l.location === location.location);
+        return oldLocation ? update$({ ...oldLocation, is_enabled: true }) : create$;
+      }),
+    );
   }
 }
