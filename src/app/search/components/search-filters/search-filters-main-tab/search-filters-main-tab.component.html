@@ -92,30 +92,25 @@
     <ion-input type="time" [formControl]="form.controls[formFields.timeTo]"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>{{ 'issuance.filters.main-tab.exact-interval' | translate }}</ion-label>
-    <ion-checkbox></ion-checkbox>
+    <ion-label>
+      {{ 'issuance.filters.main-tab.exact-interval' | translate }}
+      <app-hint hint="{{ 'issuance.filters.main-tab.exact-interval-desc' | translate }}"></app-hint>
+    </ion-label>
+    <ion-checkbox [formControl]="form.controls[formFields.exactDatetime]"></ion-checkbox>
   </ion-item>
 </app-collapse-item>
 <app-collapse-item title="{{ 'issuance.filters.main-tab.availability' | translate }}">
   <ion-item lines="none">
     <ion-label>{{ 'service-location.online' | translate }}</ion-label>
-    <ion-checkbox [formControl]="form.get(formFields.isOnlineService)" class="ion-no-margin" slot="end"></ion-checkbox>
+    <ion-checkbox [formControl]="form.get(formFields.isOnlineService)" slot="end"></ion-checkbox>
   </ion-item>
   <ion-item lines="none">
     <ion-label>{{ 'service-location.professional' | translate }}</ion-label>
-    <ion-checkbox
-      [formControl]="form.get(formFields.isAtMasterLocationService)"
-      class="ion-no-margin"
-      slot="end"
-    ></ion-checkbox>
+    <ion-checkbox [formControl]="form.get(formFields.isAtMasterLocationService)" slot="end"></ion-checkbox>
   </ion-item>
   <ion-item lines="none">
     <ion-label>{{ 'service-location.client' | translate }}</ion-label>
-    <ion-checkbox
-      [formControl]="form.get(formFields.isAtClientLocationService)"
-      class="ion-no-margin"
-      slot="end"
-    ></ion-checkbox>
+    <ion-checkbox [formControl]="form.get(formFields.isAtClientLocationService)" slot="end"></ion-checkbox>
   </ion-item>
   <ion-item
     lines="none"

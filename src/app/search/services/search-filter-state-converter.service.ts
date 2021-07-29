@@ -108,9 +108,10 @@ export class SearchFilterStateConverter {
             onlyWithCertificates: params?.onlyWithCertificates,
             nationalities: emptyArrayToUndefined(nationalities),
             languages: emptyArrayToUndefined(languages),
-            experience: params?.experience,
+            experience: params?.experienceFrom,
             startAge: params?.startAge,
             endAge: params?.endAge,
+            exactDatetime: params?.exactDatetime,
           };
           return searchFilterState;
         },
@@ -149,7 +150,7 @@ export class SearchFilterStateConverter {
       latitude: null,
       languages: data.languages?.map(({ code }) => code).join(', '),
       gender: void 0,
-      experience: data?.experience,
+      experienceFrom: data?.experience,
       endPrice: data.priceEnd,
       endDatetime: getTimeStamp(data.dateTo, data.timeTo, DAY_END_TIME) || null,
       endAge: data.endAge,
@@ -157,6 +158,7 @@ export class SearchFilterStateConverter {
       country: data.country?.id,
       city: data.city?.id,
       categories: data?.category?.map(({ id }) => id).join(','),
+      exactDatetime: data?.exactDatetime,
     };
   }
 

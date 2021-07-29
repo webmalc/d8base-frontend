@@ -668,7 +668,8 @@
         "time-to": "Время окончания",
         "price-start": "Цена с",
         "price-end": "Цена по",
-        "exact-interval": "Забронировать мастера на весь указанный интервал"
+        "exact-interval": "Интервал целиком",
+        "exact-interval-desc": "Забронировать мастера на весь указанный интервал"
       },
       "additional": {
         "rating": "Рейтинг",
@@ -677,9 +678,9 @@
         "only-with-fixed-price": "Только с фиксированной ценой",
         "only-with-certificates": "Только сертифицированные",
         "nationalities": "Национальность",
-        "nationalities-placeholder": "Выберите национальность",
+        "nationalities-placeholder": "Выберите страну",
         "languages": "Владение языком",
-        "languages-placeholder": "Выберите язык",
+        "languages-placeholder": "Выберите языки",
         "experience": "Опыт",
         "age": "Возраст",
         "start-age": "Возраст с",

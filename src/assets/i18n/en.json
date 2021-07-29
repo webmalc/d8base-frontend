@@ -668,7 +668,8 @@
         "time-to": "Exact end time",
         "price-start": "Start price",
         "price-end": "End price",
-        "exact-interval": "Exact time interval"
+        "exact-interval": "Exact time interval",
+        "exact-interval-desc": "The professional must be available at the exact time interval specified"
       },
       "additional": {
         "rating": "Professional rating",
@@ -677,9 +678,9 @@
         "only-with-fixed-price": "Only with fixed price",
         "only-with-certificates": "Only with certificates",
         "nationalities": "Nationalities",
-        "nationalities-placeholder": "Select nationality",
+        "nationalities-placeholder": "Select a country",
         "languages": "Languages",
-        "languages-placeholder": "Select language",
+        "languages-placeholder": "Choose languages",
         "experience": "Experience",
         "age": "Age",
         "start-age": "Age start",
