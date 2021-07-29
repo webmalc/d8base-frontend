@@ -108,7 +108,7 @@ export class SearchFilterStateConverter {
             onlyWithCertificates: params?.onlyWithCertificates,
             nationalities: emptyArrayToUndefined(nationalities),
             languages: emptyArrayToUndefined(languages),
-            experience: params?.experience,
+            experience: params?.experienceFrom,
             startAge: params?.startAge,
             endAge: params?.endAge,
           };
@@ -149,7 +149,7 @@ export class SearchFilterStateConverter {
       latitude: null,
       languages: data.languages?.map(({ code }) => code).join(', '),
       gender: void 0,
-      experience: data?.experience,
+      experienceFrom: data?.experience,
       endPrice: data.priceEnd,
       endDatetime: getTimeStamp(data.dateTo, data.timeTo, DAY_END_TIME) || null,
       endAge: data.endAge,
