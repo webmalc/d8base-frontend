@@ -31,4 +31,5 @@ export const SearchFilterFormFields: { [key in keyof SearchFilterFormValue]: str
   experience: 'experience',
   startAge: 'startAge',
   endAge: 'endAge',
+  exactDatetime: 'exactDatetime',
 };

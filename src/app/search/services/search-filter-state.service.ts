@@ -42,6 +42,7 @@ export class SearchFilterStateService {
     [this.formFields.experience]: null,
     [this.formFields.startAge]: null,
     [this.formFields.endAge]: null,
+    [this.formFields.exactDatetime]: null,
   });
 
   public minDate: string;

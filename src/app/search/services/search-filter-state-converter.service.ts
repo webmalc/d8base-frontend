@@ -111,6 +111,7 @@ export class SearchFilterStateConverter {
             experience: params?.experienceFrom,
             startAge: params?.startAge,
             endAge: params?.endAge,
+            exactDatetime: params?.exactDatetime,
           };
           return searchFilterState;
         },
@@ -157,6 +158,7 @@ export class SearchFilterStateConverter {
       country: data.country?.id,
       city: data.city?.id,
       categories: data?.category?.map(({ id }) => id).join(','),
+      exactDatetime: data?.exactDatetime,
     };
   }
 

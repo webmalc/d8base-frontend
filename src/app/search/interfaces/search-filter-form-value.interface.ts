@@ -32,4 +32,5 @@ export interface SearchFilterFormValue {
   experience?: number;
   startAge?: number;
   endAge?: number;
+  exactDatetime?: boolean;
 }

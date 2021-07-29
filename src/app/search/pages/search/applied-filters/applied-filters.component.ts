@@ -39,6 +39,7 @@ export class AppliedFiltersComponent {
     professionalLevel: 'professionalLevel',
     experience: 'experience',
     paymentMethods: 'paymentMethods',
+    exactDatetime: 'exactDatetime',
   };
 
   private _filters: SearchFilter[];
