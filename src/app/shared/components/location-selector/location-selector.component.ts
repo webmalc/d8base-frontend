@@ -3,8 +3,8 @@ import { Service } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { LocationEditorPopoverComponent } from '@app/shared/components/location-editor-popover/location-editor-popover.component';
 import { PopoverController } from '@ionic/angular';
-import { combineLatest, forkJoin, Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { map, startWith, switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, of, ReplaySubject } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 import LocationSelectorContext from './location-selector-context.interface';
 
 @Component({
@@ -19,10 +19,10 @@ export class LocationSelectorComponent {
   public context$: Observable<LocationSelectorContext>;
   @Output() public selectedLocationId = new EventEmitter<number>();
   private readonly service$ = new ReplaySubject<Service>(1);
-  private readonly refresh$ = new Subject<void>();
+  private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(private readonly api: AccountsService, private readonly popoverController: PopoverController) {
-    this.context$ = combineLatest([this.service$, this.refresh$.pipe(startWith(null))]).pipe(
+    this.context$ = combineLatest([this.service$, this.refresh$]).pipe(
       switchMap(([service]) =>
         forkJoin({
           allLocations: api.accountsProfessionalLocationsList({
@@ -37,7 +37,7 @@ export class LocationSelectorComponent {
       map(data => ({
         service: data.service,
         professionalLocations: data.allLocations.results,
-        initialLocation: data.initialLocations.results[0] ?? {
+        initialLocation: data.initialLocations.results.filter(location => location.is_enabled)[0] ?? {
           max_distance: 0,
           service: data.service.id,
           location: data.allLocations.results[0]?.id,
