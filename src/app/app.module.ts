@@ -1,9 +1,10 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router, RouteReuseStrategy } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
 import { GeolocationService } from '@app/core/proxies/geolocation.service';
 import {
@@ -34,12 +35,17 @@ import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import * as Sentry from '@sentry/angular';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { registerLocaleData } from '@angular/common';
+import localeRussia from '@angular/common/locales/ru';
+import localeCanada from '@angular/common/locales/en-CA';
 
 import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from './store/store.module';
+
+registerLocaleData(localeRussia, 'ru');
+registerLocaleData(localeCanada, 'en-CA');
 
 @NgModule({
   declarations: [AppComponent],
@@ -113,6 +119,10 @@ import { StoreModule } from './store/store.module';
     {
       provide: Sentry.TraceService,
       deps: [Router],
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'en-CA',
     },
   ],
   bootstrap: [AppComponent],
