@@ -1,14 +1,12 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { StorageManagerMock } from '../../../testing/mocks';
-import { ApiClientService } from './api-client.service';
-import { AuthInterceptor } from './auth-interceptor.service';
+import { ApiClientService } from '../api-client.service';
+import { HeadersInterceptor } from './headers-interceptor.service';
 
-describe('AuthInterceptor', () => {
-  let client: ApiClientService;
-  let service: AuthInterceptor;
+describe('HeadersInterceptor', () => {
+  let client: jasmine.SpyObj<ApiClientService>;
+  let service: HeadersInterceptor;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -17,16 +15,15 @@ describe('AuthInterceptor', () => {
       providers: [
         {
           provide: HTTP_INTERCEPTORS,
-          useClass: AuthInterceptor,
+          useClass: HeadersInterceptor,
           multi: true,
         },
-        AuthInterceptor,
-        { provide: StorageManagerService, useClass: StorageManagerMock },
+        HeadersInterceptor,
       ],
     });
 
-    client = TestBed.inject(ApiClientService);
-    service = TestBed.inject(AuthInterceptor);
+    client = TestBed.inject(ApiClientService) as jasmine.SpyObj<ApiClientService>;
+    service = TestBed.inject(HeadersInterceptor);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
