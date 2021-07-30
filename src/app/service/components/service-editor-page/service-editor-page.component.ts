@@ -4,7 +4,7 @@ import { Service, ServicePhoto } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { ServiceOperationsService } from '@app/core/services/service-operations.service';
+import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
 
@@ -23,7 +23,7 @@ export class ServiceEditorPageComponent {
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(
-    private readonly serviceOperations: ServiceOperationsService,
+    private readonly serviceOperations: ServiceManagerService,
     route: ActivatedRoute,
     private readonly api: AccountsService,
     apiReadonly: ServicesService,

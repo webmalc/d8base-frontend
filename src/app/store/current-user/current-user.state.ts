@@ -7,7 +7,7 @@ import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interf
 import { WINDOW } from '@app/core/injection-tokens';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
 import { environment } from '@env/environment';

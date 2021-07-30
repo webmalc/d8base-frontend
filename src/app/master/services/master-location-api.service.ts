@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractApiService } from '@app/core/abstract/abstract-api.service';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { MasterLocation } from '@app/master/models/master-location';
 import { LocationApiServiceInterface } from '@app/shared/interfaces/location-api-service-interface';
 import { environment } from '@env/environment';

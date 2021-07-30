@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
 
-import { StorageManagerService } from '../proxies/storage-manager.service';
+import { StorageManagerService } from '../../proxies/storage-manager.service';
 import { DarkModeService } from './dark-mode.service';
 
 describe('DarkModeService', () => {

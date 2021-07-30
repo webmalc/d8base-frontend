@@ -3,7 +3,7 @@ import { UserLocation } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
 import { Storage } from '@ionic/storage';
-import { CurrentLocationService } from '@app/core/services/current-location.service';
+import { CurrentLocationService } from '@app/core/services/location/current-location.service';
 import { Action, State, StateContext } from '@ngxs/store';
 import { from, Observable, of } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';

@@ -1,7 +1,7 @@
 import { AbstractReadonlyApiService } from '@app/core/abstract/abstract-readonly-api.service';
 import { removeNullProperties } from '@app/core/functions/object.functions';
 import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

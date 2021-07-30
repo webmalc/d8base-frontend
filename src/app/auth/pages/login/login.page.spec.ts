@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ApiClientServiceMock } from 'src/testing/mocks';

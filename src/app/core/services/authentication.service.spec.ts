@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { StorageManagerService } from '../proxies/storage-manager.service';
-import { ApiClientService } from './api-client.service';
+import { ApiClientService } from './api/api-client.service';
 import { AuthenticationService } from './authentication.service';
 
 class HttpMock {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { DarkModeService } from '@app/core/services/dark-mode.service';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { DarkModeService } from '@app/core/services/user-interface/dark-mode.service';
+import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import LoaderSelectors from './store/loader/loader.selectors';

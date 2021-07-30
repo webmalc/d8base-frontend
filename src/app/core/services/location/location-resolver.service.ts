@@ -32,7 +32,7 @@ export interface LocationInterface {
 @Injectable({
   providedIn: 'root',
 })
-export class FullLocationService {
+export class LocationResolverService {
   constructor(
     private readonly countriesApi: CountriesApiCache,
     private readonly regionApi: RegionsApiCache,

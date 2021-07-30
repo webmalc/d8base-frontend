@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
-import { FullLocationService } from '@app/core/services/location/full-location.service';
+import { LocationResolverService } from '@app/core/services/location/location-resolver.service';
 import { map, takeUntil } from 'rxjs/operators';
 
 enum LocationFormFields {
@@ -53,7 +53,10 @@ export class LocationEditorComponent {
 
   private _item: Partial<UserLocation> = {};
 
-  constructor(public readonly fullLocationService: FullLocationService, private readonly destroy$: NgDestroyService) {
+  constructor(
+    public readonly fullLocationService: LocationResolverService,
+    private readonly destroy$: NgDestroyService,
+  ) {
     this.setTimezoneFromCity();
   }
 

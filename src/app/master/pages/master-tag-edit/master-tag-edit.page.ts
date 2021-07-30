@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import { Tag } from '@app/master/models/tag';
 import { TagsApiService } from '@app/master/services/tags-api.service';
 import { forkJoin } from 'rxjs';

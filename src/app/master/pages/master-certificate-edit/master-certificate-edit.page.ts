@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import { Certificate } from '@app/master/models/certificate';
 import { CertificatesApiService } from '@app/master/services/certificates-api.service';
 import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';

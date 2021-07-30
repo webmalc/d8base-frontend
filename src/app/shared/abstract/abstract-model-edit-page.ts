@@ -2,7 +2,7 @@ import { Directive, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList } from '@app/api/models';
 import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';

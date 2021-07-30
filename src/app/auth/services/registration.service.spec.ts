@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { DefaultRegisterUser } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Store } from '@ngxs/store';
 import { of } from 'rxjs';

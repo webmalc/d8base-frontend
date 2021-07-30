@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PasswordRecoveryInterface } from '@app/auth/interfaces/password-recovery.interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 

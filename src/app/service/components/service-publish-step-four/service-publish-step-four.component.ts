@@ -5,7 +5,7 @@ import { RegistrationService } from '@app/auth/services/registration.service';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { IsUserRegisteredApiService } from '@app/core/services/is-user-registered-api.service';
+import { IsUserRegisteredApiService } from '@app/core/services/api/is-user-registered-api.service';
 import * as AppValidators from '@app/core/validators';
 import { City } from '@app/profile/models/city';
 import { Country } from '@app/profile/models/country';

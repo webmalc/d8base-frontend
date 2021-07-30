@@ -1,7 +1,7 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ProfessionalTagList } from '@app/api/models';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
+import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import { Tag } from '@app/master/models/tag';
 import { TagsApiService } from '@app/master/services/tags-api.service';
 import { ProfessionalsService } from '@app/api/services';

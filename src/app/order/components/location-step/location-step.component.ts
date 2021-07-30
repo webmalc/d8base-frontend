@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfessionalLocationInline } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { NgDestroyService } from '@app/core/services';
-import { FullLocationService } from '@app/core/services/location/full-location.service';
+import { LocationResolverService } from '@app/core/services/location/location-resolver.service';
 import { StepComponent } from '@app/order/abstract/step';
 import LocationStepData from '@app/order/interfaces/location-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
@@ -44,7 +44,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
 
   constructor(
     protected readonly cd: ChangeDetectorRef,
-    private readonly fullLocationService: FullLocationService,
+    private readonly fullLocationService: LocationResolverService,
     private readonly popoverController: PopoverController,
     private readonly api: AccountsService,
     private readonly ngDestroy$: NgDestroyService,

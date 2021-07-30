@@ -1,7 +1,7 @@
 import { removeNullProperties } from '@app/core/functions/object.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { ReadonlyApiServiceInterface } from '@app/core/interfaces/readonly-api-service-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

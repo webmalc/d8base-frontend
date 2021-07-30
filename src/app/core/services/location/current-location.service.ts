@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { GuessLocationByIpService } from '@app/core/services/guess-location-by-ip.service';
+import { GuessLocationByIpService } from '@app/core/services/location/guess-location-by-ip.service';
 import { OnMapPopoverComponent } from '@app/shared/components/on-map-popover/on-map-popover.component';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { concat, from, Observable } from 'rxjs';
 import { first, mergeMap } from 'rxjs/operators';
-import { ResolvedUserLocation } from '../interfaces/user-location.interface';
+import { ResolvedUserLocation } from '../../interfaces/user-location.interface';
 
 @Injectable({
   providedIn: 'root',

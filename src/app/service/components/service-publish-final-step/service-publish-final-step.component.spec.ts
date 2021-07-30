@@ -23,10 +23,7 @@ describe('ServicePublishFinalStepComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ServicePublishFinalStepComponent],
-        imports: [
-          ...RootModules(),
-          ComponentTestingModule,
-        ],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           ServicePublishService,
           ServiceStepsNavigationService,

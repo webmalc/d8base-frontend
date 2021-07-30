@@ -4,7 +4,7 @@ import { ProfessionalList, Profile, ReviewList } from '@app/api/models';
 import { AccountsService, ProfessionalsService, ServicesService } from '@app/api/services';
 import { CommunicationService } from '@app/api/services/communication.service';
 import { NgDestroyService } from '@app/core/services';
-import { UserManagerService } from '@app/core/services/user-manager.service';
+import { UserManagerService } from '@app/core/services/managers/user-manager.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { NavController } from '@ionic/angular';
 import { Select } from '@ngxs/store';

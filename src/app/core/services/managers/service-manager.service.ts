@@ -9,7 +9,7 @@ import { mapTo } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceOperationsService {
+export class ServiceManagerService {
   constructor(
     private readonly api: AccountsService,
     private readonly alertController: AlertController,

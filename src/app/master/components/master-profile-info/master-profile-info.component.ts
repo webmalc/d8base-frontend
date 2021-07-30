@@ -5,7 +5,7 @@ import { calculateAge } from '@app/core/functions/datetime.functions';
 import { declination } from '@app/core/functions/string.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
-import { FullLocationService } from '@app/core/services/location/full-location.service';
+import { LocationResolverService } from '@app/core/services/location/location-resolver.service';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
 import ProfessionalLocationSelectors from '@app/store/professional-page/professional-locations/professional-locations.selectors';
@@ -42,7 +42,7 @@ export class MasterProfileInfoComponent {
   public readonly reviewsCount$: Observable<number>;
 
   constructor(
-    private readonly fullLocationService: FullLocationService,
+    private readonly fullLocationService: LocationResolverService,
     private readonly communicationService: CommunicationService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
   ) {
