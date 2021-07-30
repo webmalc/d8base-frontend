@@ -3,7 +3,7 @@ import { Category, Rate, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { RatesApiCache } from '@app/core/services/cache';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { forkJoin, Observable } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 

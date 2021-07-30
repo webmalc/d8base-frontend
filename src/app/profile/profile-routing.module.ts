@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainGuard } from '@app/core/guards/main.guard';
+import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
 import { AboutEditComponent } from '@app/profile/components/about-edit/about-edit.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
 import { ProfilePage } from '@app/profile/profile.page';
@@ -11,7 +11,7 @@ import { UserContactEditComponent } from './components/user-contact-edit/user-co
 const routes: Routes = [
   {
     path: '',
-    canActivate: [MainGuard],
+    canActivate: [MustBeAuthorizedGuard],
     resolve: {
       profile: ProfileResolver,
     },
@@ -20,49 +20,49 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: ProfilePage,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'contact-edit/:contact-id',
         component: UserContactEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'contact-add',
         component: UserContactEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'contact-add-default/:default-contact-id',
         component: UserContactEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'location-edit/:location-id',
         loadChildren: () =>
           import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'location-add',
         loadChildren: () =>
           import('./pages/user-location-edit/user-location-edit.module').then(m => m.UserLocationEditPageModule),
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'edit',
         component: UserEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'about',
         component: AboutEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'change-email',
         component: ChangeEmailComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
     ],
   },

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UserExtended } from '@app/api/models';
-import { HelperService } from '@app/core/services/helper.service';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 
 @Component({
@@ -17,6 +17,6 @@ export class MasterProfileMainInfoSectionComponent {
   }
 
   public getAvatar(user: UserExtended): string {
-    return user?.avatar ? user.avatar : HelperService.getNoAvatarLink();
+    return user?.avatar ? user.avatar : getNoAvatarLink();
   }
 }

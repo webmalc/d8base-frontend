@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../../core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services';
+
 import { ServicePublishAuthStateManagerService } from './service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from './service-publish-data-holder.service';
 
 describe('ServicePublishAuthStateManagerService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [...RootModules(), ComponentTestingModule],
       providers: [
         ServicePublishAuthStateManagerService,
         ServicePublishDataHolderService,

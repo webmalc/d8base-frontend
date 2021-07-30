@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AbstractApiService } from '@app/core/abstract/abstract-api.service';
 import { Master } from '@app/core/models/master';
-import { ApiClientService } from '@app/core/services/api-client.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MasterApiService extends AbstractApiService<Master> {
   private readonly url = environment.backend.master;
 

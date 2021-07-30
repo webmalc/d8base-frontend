@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { NgDestroyService } from '@app/core/services';
 import { Interlocutor } from '@app/message/interfaces/interlocutor.interface';
 import { IonContent, PopoverController } from '@ionic/angular';

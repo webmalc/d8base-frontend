@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Service, ServicePhoto } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, first, map, mergeMap, shareReplay, switchMap } from 'rxjs/operators';
-import { ServiceOperationsService } from '@app/core/services/service-operations.service';
-import { Service, ServicePhoto } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { HelperService } from '@app/core/services/helper.service';
-import { fileToBase64 } from '@app/core/functions/file.functions';
+import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-editor-page',
@@ -25,7 +23,7 @@ export class ServiceEditorPageComponent {
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(
-    private readonly serviceOperations: ServiceOperationsService,
+    private readonly serviceOperations: ServiceManagerService,
     route: ActivatedRoute,
     private readonly api: AccountsService,
     apiReadonly: ServicesService,

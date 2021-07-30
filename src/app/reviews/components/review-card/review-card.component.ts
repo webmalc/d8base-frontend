@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReviewList } from '@app/api/models';
-import { HelperService } from '@app/core/services/helper.service';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { ReviewsService } from '@app/reviews/services/reviews.service';
 import { Observable, of } from 'rxjs';
 
@@ -26,7 +26,7 @@ export class ReviewCardComponent {
   @Input() public showComment: boolean = true;
   public isAbleToEditComment$: Observable<boolean>;
   public readonly ratings: number[] = [1, 2, 3, 4, 5];
-  public defaultAvatar = HelperService.getNoAvatarLink();
+  public defaultAvatar = getNoAvatarLink();
   public countryCode$: Observable<string>;
   private _review: ReviewList;
 

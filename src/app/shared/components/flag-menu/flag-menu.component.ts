@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Rate, UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { RatesApiCache } from '@app/core/services/cache';
-import { UserManagerService } from '@app/core/services/user-manager.service';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { UserManagerService } from '@app/core/services/managers/user-manager.service';
+import { UserSettingsService } from '@app/core/services/facades/user-settings.service';
 import { Observable } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 

@@ -5,9 +5,7 @@ import * as ProfessionalActions from '@app/store/professional-page/professional-
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ProfessionalResolver implements Resolve<ProfessionalPageStateModel> {
   constructor(private readonly store: Store) {}
 

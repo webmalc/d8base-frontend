@@ -7,9 +7,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 const PAGE_SIZE = 250;
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CountriesApiCache extends ApiCache<Country> {
   private readonly listCache: Observable<Country[]>;
   constructor(private readonly locationService: LocationService) {

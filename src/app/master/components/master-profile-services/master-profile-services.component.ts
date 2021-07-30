@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Service, ServiceList } from '@app/api/models';
-import { ServiceOperationsService } from '@app/core/services/service-operations.service';
+import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
@@ -24,7 +24,7 @@ export class MasterProfileServicesComponent {
 
   constructor(
     private readonly serviceGeneratorFactory: ServicesGeneratorFactoryService,
-    private readonly serviceOperations: ServiceOperationsService,
+    private readonly serviceOperations: ServiceManagerService,
   ) {
     this.serviceList$ = combineLatest([this.context$, this.refresh$]).pipe(
       filter(([context]) => !!context.professional),

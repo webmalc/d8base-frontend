@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainGuard } from '@app/core/guards/main.guard';
+import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
 import { ProfessionalResolver } from '@app/master/professional.resolver';
 import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
 
-import { MasterPage } from './master.page';
+import { ProfessionalPage } from './professional-page.component';
 import { ProfessionalGuard } from './professional.guard';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: ':master-id',
     pathMatch: 'full',
-    component: MasterPage,
+    component: ProfessionalPage,
     resolve: {
       context: ProfessionalResolver,
     },
@@ -29,7 +29,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MasterPage,
+        component: ProfessionalPage,
         pathMatch: 'full',
       },
       {
@@ -103,25 +103,19 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'tags-edit',
-        loadChildren: () =>
-          import('./pages/master-tag-edit/master-tag-edit.module').then(m => m.MasterTagEditPageModule),
-        pathMatch: 'full',
-      },
-      {
         path: 'professional-contact-add-default/:default-contact-id',
         component: ProfessionalContactEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'professional-contact-edit/:contact-id',
         component: ProfessionalContactEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'professional-contact-add',
         component: ProfessionalContactEditComponent,
-        canActivate: [MainGuard],
+        canActivate: [MustBeAuthorizedGuard],
       },
       {
         path: 'master-edit',

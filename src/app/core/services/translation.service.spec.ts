@@ -1,14 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { IonicStorageModule } from '@ionic/storage';
-import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from './translation.service';
 
 describe('TranslationService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), IonicStorageModule.forRoot(), HttpClientTestingModule],
+      imports: [...RootModules(), ComponentTestingModule],
       providers: [TranslationService],
     }),
   );

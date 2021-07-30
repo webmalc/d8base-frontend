@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { IonicModule } from '@ionic/angular';
 import { SearchFiltersComponent } from './search-filters.component';
 

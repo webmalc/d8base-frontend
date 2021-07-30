@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { LoaderEffects } from '@app/core/services/facades/loader.effects';
 import { Action, State, StateContext } from '@ngxs/store';
 import { LoaderStateModel } from './loader-state.model';
 import * as LoaderActions from './loader.actions';
 import { defaultLoaderState } from './loader.constants';
-import { LoaderEffects } from './loader.effects';
 
 @State<LoaderStateModel>({
   name: 'Loader',

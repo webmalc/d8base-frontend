@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addMinutes, stripTime } from '@app/core/functions/datetime.functions';
-import { HelperService } from '@app/core/services/helper.service';
+import { addMinutes, getTimeStringFromMinutes, stripTime } from '@app/core/functions/datetime.functions';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
 import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
@@ -40,8 +39,8 @@ export class CalendarService {
           enabled: this.isEnabled(openedPeriodArray, day, minutes),
         });
       }
-      const startIntervalTimeString = HelperService.getTimeStringFromMinutes(units[0].minutes);
-      const endIntervalTimeString = HelperService.getTimeStringFromMinutes(units[units.length - 1].minutes - 1);
+      const startIntervalTimeString = getTimeStringFromMinutes(units[0].minutes);
+      const endIntervalTimeString = getTimeStringFromMinutes(units[units.length - 1].minutes - 1);
       calendar.push({ title: `${startIntervalTimeString} - ${endIntervalTimeString}`, units });
     }
 

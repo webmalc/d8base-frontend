@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
-import { HelperService } from '@app/core/services/helper.service';
 import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
@@ -35,7 +35,7 @@ export class ServicePublishStepFiveComponent implements OnInit {
   ) {}
 
   public get avatar(): string {
-    return this.form?.get(this.formFields.Avatar).value || HelperService.getNoAvatarLink();
+    return this.form?.get(this.formFields.Avatar).value || getNoAvatarLink();
   }
 
   public ngOnInit(): void {

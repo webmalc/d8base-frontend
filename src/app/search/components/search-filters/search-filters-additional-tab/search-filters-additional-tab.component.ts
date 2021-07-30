@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache } from '@app/core/services/cache/countries-api-cache.service';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
 @Component({

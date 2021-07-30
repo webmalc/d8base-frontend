@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { NgDestroyService } from '@app/core/services';
 import { ChatsListService } from '@app/message/pages/chats-list-page/chats-list.service';
 import { Observable } from 'rxjs';

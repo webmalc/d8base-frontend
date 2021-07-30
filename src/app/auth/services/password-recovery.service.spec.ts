@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { of } from 'rxjs';
-import { ApiClientService } from '../../core/services/api-client.service';
+import { ApiClientService } from '../../core/services/api/api-client.service';
 import { PasswordRecoveryService } from './password-recovery.service';
 
 describe('PasswordRecoveryService', () => {

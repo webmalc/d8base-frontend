@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RatingPickerComponent } from '@app/reviews/components/rating-picker/rating-picker.component';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SearchFiltersAdditionalTabComponent } from './search-filters-additional-tab.component';

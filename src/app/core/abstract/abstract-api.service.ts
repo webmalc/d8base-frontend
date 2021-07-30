@@ -1,7 +1,7 @@
 import { AbstractReadonlyApiService } from '@app/core/abstract/abstract-readonly-api.service';
+import { removeNullProperties } from '@app/core/functions/object.functions';
 import { ApiServiceInterface } from '@app/core/interfaces/api-service-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
-import { HelperService } from '@app/core/services/helper.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -14,19 +14,19 @@ export abstract class AbstractApiService<T extends { id: number }>
 
   public create(data: Partial<T>): Observable<T> {
     return this.client
-      .post<T, Partial<T>>(this.getUrl(), HelperService.clear(data))
+      .post<T, Partial<T>>(this.getUrl(), removeNullProperties(data))
       .pipe(map(raw => this.transform(raw)));
   }
 
   public patch(data: T, key?: string | number): Observable<T> {
     return this.client
-      .patch<T>(`${this.getUrl() + (key ? key : data.id)}/`, HelperService.clear(data))
+      .patch<T>(`${this.getUrl() + (key ? key : data.id)}/`, removeNullProperties(data))
       .pipe(map(raw => this.transform(raw)));
   }
 
   public put(data: T): Observable<T> {
     return this.client
-      .put<T>(`${this.getUrl()}${data.id}/`, HelperService.clear(data))
+      .put<T>(`${this.getUrl()}${data.id}/`, removeNullProperties(data))
       .pipe(map(raw => this.transform(raw)));
   }
 

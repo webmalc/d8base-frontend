@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
@@ -9,9 +9,7 @@ import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { StepDataInterfaceType } from '@app/service/types/step-data-interface-type';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ServicePublishDataHolderService {
   private stepsData: {
     0?: StepOneDataInterface;

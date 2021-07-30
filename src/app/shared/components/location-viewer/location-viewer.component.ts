@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FullLocationService, LocationInterface } from '@app/core/services/location/full-location.service';
+import { LocationResolverService, LocationInterface } from '@app/core/services/location/location-resolver.service';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class LocationViewerComponent {
 
   private readonly locationSubject = new BehaviorSubject<LocationInterface>(null);
 
-  constructor(private readonly locationService: FullLocationService) {
+  constructor(private readonly locationService: LocationResolverService) {
     this.locationText$ = this.locationSubject.pipe(
       switchMap(location => locationService.getTextLocation(location, this.type === 'short')),
       map(result => result?.text),

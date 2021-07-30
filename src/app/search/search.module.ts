@@ -22,7 +22,6 @@ import { AppliedFiltersComponent } from './pages/search/applied-filters/applied-
 import { SearchPage } from './pages/search/search-page.component';
 import { SearchPageGuard } from './search-page.guard';
 import { SearchPageRoutingModule } from './search-routing.module';
-import { SearchFilterStateConverter } from './services/search-filter-state-converter.service';
 
 @NgModule({
   imports: [
@@ -52,6 +51,6 @@ import { SearchFilterStateConverter } from './services/search-filter-state-conve
     ServiceTypeChipsComponent,
   ],
   exports: [SearchFiltersComponent],
-  providers: [SearchFilterStateConverter, SearchPageGuard],
+  providers: [SearchPageGuard],
 })
 export class SearchPageModule {}

@@ -1,6 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 import { LocationViewerComponent } from './location-viewer.component';
 
@@ -12,7 +11,7 @@ describe('LocationPresentationComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [LocationViewerComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(LocationViewerComponent);

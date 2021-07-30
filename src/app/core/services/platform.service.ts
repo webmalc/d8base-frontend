@@ -3,7 +3,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class PlatformService {
   constructor(
     private readonly platform: Platform,

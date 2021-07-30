@@ -2,10 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IpApiService } from '@app/core/services/location/ip-api.service';
-import { IpDataService } from '@app/core/services/location/ip-data.service';
-import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
-import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { StoreModule } from '@app/store/store.module';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -18,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from './mocks';
 import { IntervalService } from '@app/shared/services/interval.service';
 import { of } from 'rxjs';
+import { CoreModule } from '@app/core/core.module';
 
 let ionicModuleImported = false;
 export const RootModules = () => {
@@ -28,7 +25,7 @@ export const RootModules = () => {
   return [IonicModule.forRoot(), ...ROOT_MODULES];
 };
 
-const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot()];
+const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot(), CoreModule];
 
 @NgModule({
   exports: [IonicModule, HttpClientTestingModule, RouterTestingModule, SharedModule, FormsModule, ReactiveFormsModule],
@@ -43,10 +40,6 @@ const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot()];
     },
 
     // Location service deps:
-    IpServicesHolderService,
-    IpApiService,
-    IpDataService,
-    IpnfDataService,
     Geolocation,
     LocationAccuracy,
     SplashScreen,

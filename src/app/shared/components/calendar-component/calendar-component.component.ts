@@ -1,7 +1,12 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { addDays, getCurrentDay, stripTime, getMilliseconds } from '@app/core/functions/datetime.functions';
-import { HelperService } from '@app/core/services/helper.service';
+import {
+  addDays,
+  getCurrentDay,
+  getMilliseconds,
+  getTimeStringFromMinutes,
+  stripTime,
+} from '@app/core/functions/datetime.functions';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
 import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
@@ -91,7 +96,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   }
 
   public getTimeStringFromMinutes(minutes: number): string {
-    return HelperService.getTimeStringFromMinutes(minutes);
+    return getTimeStringFromMinutes(minutes);
   }
 
   /**

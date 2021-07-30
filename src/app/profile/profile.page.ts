@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Profile, UserContact, UserLanguage } from '@app/api/models';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { UserLocation } from '@app/core/models/user-location';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -60,7 +60,7 @@ export class ProfilePage {
   ) {
     this.avatar$ = this.profile$.pipe(
       filter(x => !!x),
-      map(profile => profile.avatar || HelperService.getNoAvatarLink()),
+      map(profile => profile.avatar || getNoAvatarLink()),
     );
     this.subOnAvatarChange();
     this.subOnEmailVerificationSent();

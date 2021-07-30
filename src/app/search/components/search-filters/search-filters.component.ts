@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SearchFiltersSubmenu } from '@app/search/components/search-filters/search-filters-submenu.enum';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import { SearchQueryService } from '@app/search/services/search-query.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
+import { SearchQueryService } from '@app/core/services/search/search-query.service';
 
 @Component({
   selector: 'app-search-filters',

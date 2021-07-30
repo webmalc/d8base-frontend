@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { MasterManagerService } from '@app/core/services';
 import { Actions } from '@ngxs/store';
 import { BehaviorSubject } from 'rxjs';

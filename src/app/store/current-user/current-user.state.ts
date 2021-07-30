@@ -7,8 +7,7 @@ import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interf
 import { WINDOW } from '@app/core/injection-tokens';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
-import { ApiClientService } from '@app/core/services/api-client.service';
-import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { ApiClientService } from '@app/core/services/api/api-client.service';
 import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
 import { environment } from '@env/environment';
 import { Storage } from '@ionic/storage';
@@ -46,7 +45,6 @@ export class CurrentUserState implements NgxsOnInit {
     private readonly api: AccountsService,
     private readonly storage: Storage,
     private readonly client: ApiClientService,
-    private readonly servicePublicationState: ServicePublishDataHolderService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -100,12 +98,7 @@ export class CurrentUserState implements NgxsOnInit {
   @Action(CurrentUserActions.Logout)
   public logout({ patchState, getState }: StateContext<CurrentUserStateModel>): Observable<any> {
     const { settings } = getState();
-    return from(
-      this.servicePublicationState
-        .reset()
-        .then(() => this.storage.remove(TOKEN_DATA_STORAGE_KEY))
-        .then(() => patchState({ ...guestState, settings })),
-    );
+    return from(this.storage.remove(TOKEN_DATA_STORAGE_KEY).then(() => patchState({ ...guestState, settings })));
   }
 
   @Action(CurrentUserActions.AuthenticateWithToken)

@@ -1,9 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegistrationService } from '@app/auth/services/registration.service';
-import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { LocationServiceMock } from 'src/testing/mocks';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';
 import { ChainManagerService } from '../../services/steps-navigation-chain/chain-manager.service';
@@ -40,7 +38,6 @@ describe('ServicePublishStepFourComponent', () => {
           StepSevenHandlerService,
           StepFinalHandlerService,
           ServicePublishDataHolderService,
-          { provide: CurrentPositionService, useClass: LocationServiceMock },
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       }).compileComponents();

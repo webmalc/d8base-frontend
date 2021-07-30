@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Master } from '@app/core/models/master';
-import { MasterManagerService } from '@app/core/services/master-manager.service';
-import { UserManagerService } from '@app/core/services/user-manager.service';
+import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
+import { UserManagerService } from '@app/core/services/managers/user-manager.service';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepFourDataInterface } from '@app/service/interfaces/step-four-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';

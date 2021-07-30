@@ -6,9 +6,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ProfileResolver implements Resolve<Profile> {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;

@@ -4,8 +4,10 @@ import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interf
 import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../proxies/storage-manager.service';
-import { ApiClientService } from './api-client.service';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
+
+import { StorageManagerService } from './storage-manager.service';
+import { ApiClientService } from './api/api-client.service';
 import { AuthenticationService } from './authentication.service';
 
 class HttpMock {
@@ -38,6 +40,7 @@ describe('AuthenticationService', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
     TestBed.configureTestingModule({
+      imports: [...RootModules(), ComponentTestingModule],
       providers: [
         { provide: ApiClientService, useClass: HttpMock },
         { provide: StorageManagerService, useClass: StorageManagerMock },
@@ -51,19 +54,16 @@ describe('AuthenticationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it(
-    'test #isAuthenticated',
-    waitForAsync(done => {
-      service.authenticateWithToken({
-        access_token: 'access_token',
-        expires_in: 3600,
-        token_type: 'Bearer',
-        scope: 'read write groups',
-        refresh_token: 'refresh_token',
-      });
-      service.isAuthenticated$.pipe(first(x => !!x)).subscribe(() => {
-        done();
-      });
-    }),
-  );
+  it('test #isAuthenticated', async done => {
+    service.authenticateWithToken({
+      access_token: 'access_token',
+      expires_in: 3600,
+      token_type: 'Bearer',
+      scope: 'read write groups',
+      refresh_token: 'refresh_token',
+    });
+    service.isAuthenticated$.pipe(first(x => !!x)).subscribe(() => {
+      done();
+    });
+  });
 });

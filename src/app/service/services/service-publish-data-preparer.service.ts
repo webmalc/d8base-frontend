@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ProfessionalLocation, ProfessionalSchedule, Service, ServicePhoto, ServiceSchedule } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { fileToBase64 } from '@app/core/functions/file.functions';
-import { HelperService } from '@app/core/services/helper.service';
+import { fileToBase64 } from '@app/core/functions/media.functions';
+import { removeNullProperties } from '@app/core/functions/object.functions';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
@@ -67,7 +67,7 @@ export class ServicePublishDataPreparerService {
       is_enabled: true, // always create already published service; the owner can un-publish it later
     };
 
-    return HelperService.clear(service);
+    return removeNullProperties(service);
   }
 
   private getNewMaster(): ProfessionalList {
@@ -110,7 +110,7 @@ export class ServicePublishDataPreparerService {
     const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
     location.max_distance = stepData?.max_distance;
 
-    return HelperService.clear(location);
+    return removeNullProperties(location);
   }
 
   private getServicePrice(): Price {
@@ -130,7 +130,7 @@ export class ServicePublishDataPreparerService {
       payment_methods: price.payment_methods,
     };
 
-    return HelperService.clear(price);
+    return removeNullProperties(price);
   }
 
   private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {

@@ -3,13 +3,11 @@ import { Contact, Country } from '@app/api/models';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { ContactUnion } from '../models/contact-union';
 import { ContactsApiCache } from './cache';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ContactsMergeToDefaultService {
   @Select(UserLocationSelectors.defaultCountry)
   public profileCountry$: Observable<Country['id']>;

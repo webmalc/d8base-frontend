@@ -4,9 +4,7 @@ import { ProfessionalsService } from '@app/api/services';
 import { ApiCache } from '@app/core/abstract/api-cache.service';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class SubcategoriesApiCache extends ApiCache<Subcategory> {
   constructor(private readonly professionalsService: ProfessionalsService) {
     super();

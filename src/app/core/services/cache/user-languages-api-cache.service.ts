@@ -4,9 +4,7 @@ import { AccountsService } from '@app/api/services';
 import { ApiCache } from '@app/core/abstract/api-cache.service';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UserLanguagesApiCache extends ApiCache<UserLanguage> {
   constructor(private readonly api: AccountsService) {
     super();

@@ -7,7 +7,7 @@ import { OrderWizardStateService } from '@app/order/services/order-wizard-state.
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserManagerService } from '../../../core/services/user-manager.service';
+import { UserManagerService } from '../../../core/services/managers/user-manager.service';
 
 import { ClientDetailsStepComponent } from './client-details-step.component';
 

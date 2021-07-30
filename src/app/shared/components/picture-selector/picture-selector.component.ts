@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fileToBase64 } from '@app/core/functions/file.functions';
+import { fileToBase64 } from '@app/core/functions/media.functions';
 import { ToastService } from '@app/core/services';
 import { PopoverController } from '@ionic/angular';
 import { ImageCropPopoverComponent } from './image-cropper/image-crop-popover.component';
