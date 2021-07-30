@@ -2,10 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RegistrationService } from '@app/auth/services/registration.service';
-import { IpApiService } from '@app/core/services/location/ip-api.service';
-import { IpDataService } from '@app/core/services/location/ip-data.service';
-import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
-import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { OrderWizardStateService } from '@app/order/services';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
@@ -30,16 +26,7 @@ describe('ClientIdentificationComponent', () => {
           HttpClientTestingModule,
           RouterTestingModule,
         ],
-        providers: [
-          OrderWizardStateService,
-          RegistrationService,
-          IpServicesHolderService,
-          IpApiService,
-          IpDataService,
-          IpnfDataService,
-          Geolocation,
-          LocationAccuracy,
-        ],
+        providers: [OrderWizardStateService, RegistrationService, Geolocation, LocationAccuracy],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ClientIdentificationComponent);

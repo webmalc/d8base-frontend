@@ -3,11 +3,6 @@ import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angu
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IpApiService } from '@app/core/services/location/ip-api.service';
-import { IpDataService } from '@app/core/services/location/ip-data.service';
-import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
-import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
-import { CurrentPositionService } from '@app/core/services/location/current-position.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
@@ -28,16 +23,6 @@ describe('RegistrationPage', () => {
 
   beforeEach(
     waitForAsync(() => {
-      const ipServiceMock = {
-        getData: () =>
-          Promise.resolve({
-            postalCode: 'testCode',
-            countryCode: 'testCountry',
-            latitude: 'testLat',
-            longitude: 'testLon',
-            city: 'testCity',
-          }),
-      };
       TestBed.configureTestingModule({
         declarations: [RegistrationPage, RegistrationFormComponent, ErrorFlashbagComponent],
         imports: [
@@ -52,11 +37,6 @@ describe('RegistrationPage', () => {
         providers: [
           FormBuilder,
           RegistrationService,
-          CurrentPositionService,
-          IpServicesHolderService,
-          { provide: IpApiService, useValue: ipServiceMock },
-          { provide: IpDataService, useValue: ipServiceMock },
-          { provide: IpnfDataService, useValue: ipServiceMock },
           { provide: HttpClient, useValue: { post: () => of(true) } },
           { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' } },
           { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },

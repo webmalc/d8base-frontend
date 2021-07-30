@@ -1,11 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '../../services/service-publish-data-preparer.service';
 import { ServicePublishService } from '../../services/service-publish.service';
@@ -30,17 +24,12 @@ describe('ServicePublishFinalStepComponent', () => {
       TestBed.configureTestingModule({
         declarations: [ServicePublishFinalStepComponent],
         imports: [
-          IonicModule.forRoot(),
-          ReactiveFormsModule,
-          FormsModule,
-          TranslateModule.forRoot(),
-          RouterTestingModule,
-          HttpClientTestingModule,
+          ...RootModules(),
+          ComponentTestingModule,
         ],
         providers: [
           ServicePublishService,
           ServiceStepsNavigationService,
-          { provide: StorageManagerService, useClass: StorageManagerMock },
           ServicePublishDataPreparerService,
           ChainManagerService,
           StepOneHandlerService,

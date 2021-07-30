@@ -17,11 +17,6 @@ import {
   TitleService,
   TranslationService,
 } from '@app/core/services';
-import { CurrentPositionService } from '@app/core/services/location/current-position.service';
-import { IpApiService } from '@app/core/services/location/ip-api.service';
-import { IpDataService } from '@app/core/services/location/ip-data.service';
-import { IpServicesHolderService } from '@app/core/services/location/ip-services-holder.service';
-import { IpnfDataService } from '@app/core/services/location/ipnf-data.service';
 import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -77,11 +72,6 @@ registerLocaleData(localeCanada, 'en-CA');
     },
     Geolocation,
     GeolocationService,
-    CurrentPositionService,
-    IpServicesHolderService,
-    IpApiService,
-    IpDataService,
-    IpnfDataService,
     {
       provide: LocationAccuracy,
       useFactory: (platform: Platform) =>
