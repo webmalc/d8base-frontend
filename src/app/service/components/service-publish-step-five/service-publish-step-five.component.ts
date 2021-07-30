@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { ServicePublishStepFiveFormFields } from '@app/service/enums/service-publish-step-five-form-fields';

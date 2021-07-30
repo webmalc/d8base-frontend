@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
 import { acceptedMimeTypes } from '@app/core/constants/image.constants';
-import { fileToBase64 } from '@app/core/functions/file.functions';
+import { fileToBase64 } from '@app/core/functions/media.functions';
 import { NgDestroyService } from '@app/core/services';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';

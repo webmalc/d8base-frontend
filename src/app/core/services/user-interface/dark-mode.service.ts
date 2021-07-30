@@ -6,9 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 const DARK_MODE_STORAGE_KEY = 'is_dark_mode';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class DarkModeService {
   public darkTheme$: Observable<boolean>;
 

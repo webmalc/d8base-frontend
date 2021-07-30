@@ -4,9 +4,7 @@ import { RatesService } from '@app/api/services';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class RatesApiCache {
   private readonly cache = new Map<number, Observable<Rate>>();
   private readonly listCache: Observable<Rate[]>;

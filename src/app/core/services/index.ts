@@ -8,4 +8,12 @@ export * from './title.service';
 export * from './platform.service';
 export * from './user-interface/toast.service';
 export * from './firebase.service';
+export * from './managers/service-manager.service';
+export * from './managers/user-manager.service';
 export * from './location/current-location.service';
+export * from './location/guess-location-by-ip.service';
+export * from './location/location-resolver.service';
+export * from './location/location.service';
+
+export * from './api/api-client.service';
+export * from './api/is-user-registered-api.service';

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ProfessionalContactInline } from '@app/api/models/professional-contact-inline';
-import { MediaIconFactoryService } from '@app/core/services/media-icon-factory.service';
+import { getContactIconName } from '@app/core/functions/media.functions';
 
 @Component({
   selector: 'app-contacts-view',
@@ -11,6 +11,6 @@ export class ContactsViewComponent {
   @Input() public contacts: ProfessionalContactInline[];
 
   public getContactIcon(contactDisplay: string): string {
-    return MediaIconFactoryService.getIcon(contactDisplay);
+    return getContactIconName(contactDisplay);
   }
 }

@@ -4,9 +4,7 @@ import { LocationApiServiceInterface } from '@app/shared/interfaces/location-api
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class LocationService {
   public getList<T extends ClientLocationInterface>(
     api: LocationApiServiceInterface,

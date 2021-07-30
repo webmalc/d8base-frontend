@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { declination } from '@app/core/functions/string.functions';
 
 @Component({

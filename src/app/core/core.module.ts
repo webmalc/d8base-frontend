@@ -7,6 +7,39 @@ import {
   LangInterceptorService,
   TimezoneInterceptor,
 } from '@app/core/services/interceptors';
+import {
+  FirebaseService,
+  LoadingIndicatorService,
+  PlatformService,
+  TitleService,
+  TranslationService,
+  DarkModeService,
+  AuthenticationService,
+  ToastService,
+  CurrentLocationService,
+  MasterManagerService,
+  ServiceManagerService,
+  UserManagerService,
+  GuessLocationByIpService,
+  LocationResolverService,
+  LocationService,
+  ApiClientService,
+  IsUserRegisteredApiService,
+} from '@app/core/services';
+import {
+  CategoriesApiCache,
+  CitiesApiCache,
+  ContactsApiCache,
+  CountriesApiCache,
+  DistrictsApiCache,
+  LanguagesApiCache,
+  PostalCodeApiCache,
+  RatesApiCache,
+  RegionsApiCache,
+  SubcategoriesApiCache,
+  SubregionsApiCache,
+  UserLanguagesApiCache,
+} from '@app/core/services/cache';
 
 @NgModule({
   providers: [
@@ -30,10 +63,51 @@ import {
       useClass: TimezoneInterceptor,
       multi: true,
     },
+    FirebaseService,
+    LoadingIndicatorService,
+    PlatformService,
+    TitleService,
+    TranslationService,
+
+    DarkModeService,
+    AuthenticationService,
+    ToastService,
+    CurrentLocationService,
+    MasterManagerService,
+    ServiceManagerService,
+    UserManagerService,
+    GuessLocationByIpService,
+    LocationResolverService,
+    LocationService,
+
+    ApiClientService,
+    IsUserRegisteredApiService,
+
+    CategoriesApiCache,
+    CitiesApiCache,
+    ContactsApiCache,
+    CountriesApiCache,
+    DistrictsApiCache,
+    LanguagesApiCache,
+    PostalCodeApiCache,
+    RatesApiCache,
+    RegionsApiCache,
+    SubcategoriesApiCache,
+    SubregionsApiCache,
+    UserLanguagesApiCache,
   ],
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(
+    // instantiating necessary services
+    private readonly _platformService: PlatformService,
+    private readonly _titleService: TitleService,
+    private readonly _loadingIndicatorService: LoadingIndicatorService,
+    private readonly _translationService: TranslationService,
+    private readonly _firebaseService: FirebaseService,
+    // checking if the Core module is already loaded
+    @Optional() @SkipSelf() parentModule: CoreModule,
+  ) {
     throwIfAlreadyLoaded(parentModule);
   }
 }

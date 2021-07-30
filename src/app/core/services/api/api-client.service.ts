@@ -4,9 +4,7 @@ import { environment } from '@env/environment';
 import { forkJoin, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ApiClientService {
   constructor(private readonly http: HttpClient) {}
 

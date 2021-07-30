@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { getLastChild } from '@app/core/functions/navigation.functions';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TitleService {
   constructor(
     private readonly router: Router,

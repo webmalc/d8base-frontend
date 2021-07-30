@@ -7,9 +7,7 @@ import { concat, from, Observable } from 'rxjs';
 import { first, mergeMap } from 'rxjs/operators';
 import { ResolvedUserLocation } from '../../interfaces/user-location.interface';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CurrentLocationService {
   constructor(
     private readonly guessByIp: GuessLocationByIpService,

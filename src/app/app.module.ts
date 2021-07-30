@@ -10,13 +10,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { CoreModule } from '@app/core/core.module';
 import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
 import { GeolocationService } from '@app/core/proxies/geolocation.service';
-import {
-  FirebaseService,
-  LoadingIndicatorService,
-  PlatformService,
-  TitleService,
-  TranslationService,
-} from '@app/core/services';
 import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -94,15 +87,4 @@ registerLocaleData(localeCanada, 'en-CA');
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  // https://stackoverflow.com/questions/41215226/
-  constructor(
-    private readonly _platformService: PlatformService,
-    private readonly _titleService: TitleService,
-    private readonly _loadingIndicatorService: LoadingIndicatorService,
-    private readonly _translationService: TranslationService,
-    private readonly _firebaseService: FirebaseService,
-  ) {
-    // instantiating necessary services
-  }
-}
+export class AppModule {}

@@ -11,9 +11,7 @@ import { filter, map, shareReplay } from 'rxjs/operators';
 /**
  *  Main authentication service
  */
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthenticationService {
   public isAuthenticated$: Observable<boolean>;
 

@@ -25,9 +25,7 @@ interface SourceData {
   status: string;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GuessLocationByIpService {
   constructor(private readonly http: HttpClient, private readonly api: LocationService) {}
 

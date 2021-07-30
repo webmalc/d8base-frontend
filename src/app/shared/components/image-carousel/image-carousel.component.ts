@@ -12,7 +12,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { acceptedMimeTypes } from '@app/core/constants/image.constants';
-import { fileToBase64 } from '@app/core/functions/file.functions';
+import { fileToBase64 } from '@app/core/functions/media.functions';
 import { NgDestroyService } from '@app/core/services';
 import { IonSlides } from '@ionic/angular';
 import { from, Observable } from 'rxjs';

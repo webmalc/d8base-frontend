@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { normalizeString } from '@app/core/functions/string.functions';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class IsUserRegisteredApiService {
   private readonly url = environment.backend.is_user_registered;
 

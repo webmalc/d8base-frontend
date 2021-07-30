@@ -4,9 +4,7 @@ import { LocationService } from '@app/api/services';
 import { ApiCache } from '@app/core/abstract/api-cache.service';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class PostalCodeApiCache extends ApiCache<PostalCode> {
   constructor(private readonly locationService: LocationService) {
     super();

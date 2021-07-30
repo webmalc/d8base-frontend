@@ -18,7 +18,7 @@ function newDevice(registrationId: string): GCMDevice {
   };
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FirebaseService {
   constructor(
     private readonly firebaseMessaging: AngularFireMessaging,

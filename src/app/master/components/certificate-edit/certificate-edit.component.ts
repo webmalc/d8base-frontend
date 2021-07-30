@@ -1,7 +1,7 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { Certificate } from '@app/master/models/certificate';
 import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
 import { plainToClass } from 'class-transformer';

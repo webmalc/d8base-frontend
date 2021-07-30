@@ -4,9 +4,7 @@ import { ContactsService } from '@app/api/services';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ContactsApiCache {
   private readonly cache = new Map<string, Observable<Contact>>();
   private readonly listCache$: Observable<Contact[]>;

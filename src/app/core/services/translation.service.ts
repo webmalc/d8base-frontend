@@ -4,9 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TranslationService {
   constructor(private readonly translator: TranslateService, private readonly userSettings: UserSettingsService) {
     this.subOnUserSettings();

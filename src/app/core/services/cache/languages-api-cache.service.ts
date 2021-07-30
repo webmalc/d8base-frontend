@@ -4,9 +4,7 @@ import { LocationService } from '@app/api/services';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class LanguagesApiCache {
   private readonly cache = new Map<string, Observable<Language>>();
   private readonly listCache: Observable<Language[]>;

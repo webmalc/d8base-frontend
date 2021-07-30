@@ -6,7 +6,7 @@ import { Store } from '@ngxs/store';
 import { of, timer } from 'rxjs';
 import { audit, distinctUntilChanged } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class LoadingIndicatorService {
   private loading: Promise<HTMLIonLoadingElement>;
 

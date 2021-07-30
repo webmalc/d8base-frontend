@@ -8,9 +8,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UserManagerService {
   @Select(CurrentUserSelectors.isAuthenticated)
   public isAuthenticated$: Observable<boolean>;

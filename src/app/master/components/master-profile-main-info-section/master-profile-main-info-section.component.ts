@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UserExtended } from '@app/api/models';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 
 @Component({

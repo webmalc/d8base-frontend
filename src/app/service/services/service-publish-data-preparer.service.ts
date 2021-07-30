@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProfessionalLocation, ProfessionalSchedule, Service, ServicePhoto, ServiceSchedule } from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { fileToBase64 } from '@app/core/functions/file.functions';
+import { fileToBase64 } from '@app/core/functions/media.functions';
 import { removeNullProperties } from '@app/core/functions/object.functions';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';

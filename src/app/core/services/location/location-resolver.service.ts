@@ -29,9 +29,7 @@ export interface LocationInterface {
   id?: number;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class LocationResolverService {
   constructor(
     private readonly countriesApi: CountriesApiCache,

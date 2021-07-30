@@ -10,9 +10,7 @@ interface ToastServiceParams {
 
 const ERROR_TOAST_DURATION_MS = 3000;
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ToastService {
   constructor(
     private readonly toastController: ToastController,

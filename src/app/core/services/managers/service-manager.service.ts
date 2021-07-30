@@ -6,9 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ServiceManagerService {
   constructor(
     private readonly api: AccountsService,

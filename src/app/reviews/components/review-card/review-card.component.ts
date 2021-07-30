@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReviewList } from '@app/api/models';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { ReviewsService } from '@app/reviews/services/reviews.service';
 import { Observable, of } from 'rxjs';
 

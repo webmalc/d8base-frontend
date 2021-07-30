@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { getContactIconName } from '@app/core/functions/media.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
-import { MediaIconFactoryService } from '@app/core/services/media-icon-factory.service';
 
 @Component({
   selector: 'app-contacts-edit',
@@ -15,6 +15,6 @@ export class ContactsEditComponent {
   @Input() public contacts: ContactUnion[];
 
   public getContactIcon(contactDisplay: string): string {
-    return MediaIconFactoryService.getIcon(contactDisplay);
+    return getContactIconName(contactDisplay);
   }
 }

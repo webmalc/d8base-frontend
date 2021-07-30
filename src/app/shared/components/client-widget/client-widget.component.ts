@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ReducedUser } from '@app/api/models';
-import { getNoAvatarLink } from '@app/core/functions/file.functions';
+import { getNoAvatarLink } from '@app/core/functions/media.functions';
 
 @Component({
   selector: 'app-client-widget',

@@ -7,9 +7,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MasterManagerService {
   @Select(CurrentUserSelectors.isMaster)
   public isMaster$: Observable<boolean>;
