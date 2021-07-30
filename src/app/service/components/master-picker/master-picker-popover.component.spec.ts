@@ -1,7 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { MasterPickerPopoverComponent } from './master-picker-popover.component';
 
@@ -13,7 +12,7 @@ describe('MasterPickerPopoverComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MasterPickerPopoverComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
       }).compileComponents();
 

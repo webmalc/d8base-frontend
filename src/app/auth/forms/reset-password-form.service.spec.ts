@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-
-import { ReactiveFormsModule } from '@angular/forms';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ResetPasswordFormService } from './reset-password-form.service';
 
 describe('ResetPasswordFormService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
+      imports: [...RootModules(), ComponentTestingModule],
+      providers: [ResetPasswordFormService],
     }),
   );
 

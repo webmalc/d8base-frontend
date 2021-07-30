@@ -1,7 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { StorageManagerMock } from '../../../../testing/mocks';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
+import { StorageManagerMock } from 'src/testing/mocks';
+
 import { UserSettingsService } from './user-settings.service';
 
 describe('UserSettingsService', () => {
@@ -9,7 +10,7 @@ describe('UserSettingsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [...RootModules(), ComponentTestingModule],
       providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
     });
     service = TestBed.inject(UserSettingsService);

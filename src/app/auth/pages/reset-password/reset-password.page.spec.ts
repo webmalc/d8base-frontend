@@ -1,10 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ResetPasswordFormService } from '@app/auth/forms/reset-password-form.service';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
+
 import { ResetPasswordApiService } from '../../services/reset-password-api.service';
 import { ResetPasswordPage } from './reset-password.page';
 
@@ -16,14 +14,8 @@ describe('ResetPasswordPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ResetPasswordPage, ErrorFlashbagComponent],
-        imports: [
-          IonicModule,
-          ReactiveFormsModule,
-          RouterTestingModule,
-          HttpClientTestingModule,
-          TranslateModule.forRoot(),
-        ],
-        providers: [ResetPasswordApiService],
+        imports: [...RootModules(), ComponentTestingModule],
+        providers: [ResetPasswordApiService, ResetPasswordFormService],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ResetPasswordPage);

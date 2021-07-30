@@ -1,9 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { LocationEditorComponent } from './location-editor.component';
 
@@ -15,7 +13,7 @@ describe('AbstractLocationEditComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [LocationEditorComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [FormBuilder, { provide: StorageManagerService, useClass: StorageManagerMock }],
       }).compileComponents();
 

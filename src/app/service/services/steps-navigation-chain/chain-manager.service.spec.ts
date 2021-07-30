@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuthenticationService, StorageManagerService } from '@app/core/services';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../../../core/services/storage-manager.service';
-import { AuthenticationService } from '../../../core/services/authentication.service';
+
 import { ServicePublishDataHolderService } from '../service-publish-data-holder.service';
 import { ChainManagerService } from './chain-manager.service';
 import { StepFinalHandlerService } from './step-final-handler.service';
@@ -18,7 +17,7 @@ import { StepTwoHandlerService } from './step-two-handler.service';
 describe('ChainManagerService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [...RootModules(), ComponentTestingModule],
       providers: [
         ChainManagerService,
         StepOneHandlerService,

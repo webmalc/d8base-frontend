@@ -1,10 +1,10 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
+import { MasterApiService } from '@app/master/services/master-api.service';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
+
 import { MasterEditPage } from './master-edit.page';
 
 describe('MasterEditPage', () => {
@@ -15,7 +15,7 @@ describe('MasterEditPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MasterEditPage],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
@@ -30,6 +30,7 @@ describe('MasterEditPage', () => {
             },
           },
           { provide: StorageManagerService, useClass: StorageManagerMock },
+          MasterApiService,
         ],
       }).compileComponents();
 

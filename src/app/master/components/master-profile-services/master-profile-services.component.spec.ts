@@ -1,11 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { StorageManagerService } from '@app/core/services';
 import { ServicesGeneratorFactoryService } from '@app/master/services/services-generator-factory.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../../../core/services/storage-manager.service';
 import { MasterProfileServicesComponent } from './master-profile-services.component';
 
 describe('MasterProfileServicesComponent', () => {
@@ -16,7 +14,7 @@ describe('MasterProfileServicesComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MasterProfileServicesComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           ServicesGeneratorFactoryService,
           {

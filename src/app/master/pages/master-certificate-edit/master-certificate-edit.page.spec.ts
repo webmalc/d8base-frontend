@@ -1,9 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
+
 import { CertificatesApiService } from '../../services/certificates-api.service';
 import { MasterCertificateEditPage } from './master-certificate-edit.page';
 
@@ -15,7 +15,7 @@ describe('MasterCertificateEditPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MasterCertificateEditPage],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
