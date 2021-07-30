@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as HttpCodes from '@app/core/constants/http.constants';
+import { getHttpErrorMessages } from '@app/core/functions/http.functions';
 import { AuthenticationService, ToastService } from '@app/core/services';
 import { Predicate } from '@app/core/types/common-types';
 import { environment } from '@env/environment';
@@ -60,15 +61,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   private handleBadRequestResponse(response: HttpErrorResponse): void {
-    const error = response.error;
-    const all = error.error?.__all__ || error.__all__;
-    const messages: string[] = Array.isArray(all)
-      ? all
-      : Array.isArray(error.password)
-      ? error.password
-      : error.error_description
-      ? [error.error_description]
-      : Object.entries(error).map(e => `${e[0]}: ${e[1]}`);
+    const messages = getHttpErrorMessages(response);
     if (messages.length > 0) {
       messages.forEach(message => this.toast.showError(message));
     } else {

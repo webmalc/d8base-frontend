@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PasswordRecoveryFormFields } from '@app/auth/enums/password-recovery-form-fields';
 import { PasswordRecoveryFormService } from '@app/auth/forms/password-recovery-form.service';
 import { PasswordRecoveryService } from '@app/auth/services/password-recovery.service';
-import { HelperService } from '@app/core/services/helper.service';
+import { getErrorListFromHttpErrorResponse } from '@app/core/functions/http.functions';
 
 @Component({
   selector: 'app-password-recovery-form',
@@ -34,7 +34,7 @@ export class PasswordRecoveryFormComponent implements OnInit {
         this.successMessages = ['password-recovery.link-sent'];
       },
       (err: HttpErrorResponse) => {
-        this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(err.error);
+        this.errorMessages = getErrorListFromHttpErrorResponse(err.error);
       },
     );
   }

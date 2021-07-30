@@ -1,11 +1,9 @@
-import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfessionalList, ReviewComment, ReviewList, ServiceList } from '@app/api/models';
 import { CommunicationService, ProfessionalsService } from '@app/api/services';
 import { AccountsService } from '@app/api/services/accounts.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { NavController } from '@ionic/angular';
 import { Observable, of, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
@@ -56,7 +54,6 @@ export class EditReviewCommentComponent implements OnInit, OnDestroy {
   );
   public readonly rates: number[] = [1, 2, 3, 4, 5];
   public selectedRate: number;
-  public defaultAvatar = HelperService.getNoAvatarLink();
   public reviewCommentForm: FormGroup = this.fb.group({
     description: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
   });

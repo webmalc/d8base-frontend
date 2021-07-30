@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
+import { calculateAge } from '@app/core/functions/datetime.functions';
+import { declination } from '@app/core/functions/string.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
@@ -73,15 +74,15 @@ export class MasterProfileInfoComponent {
   }
 
   public declinationYears(num: number): string {
-    return HelperService.declination(num, ['declination.years.1', 'declination.years.2', 'declination.years.3']);
+    return declination(num, ['declination.years.1', 'declination.years.2', 'declination.years.3']);
   }
 
   public getYearsFromBirthday(birthday: string): number {
-    return HelperService.calculateAge(birthday);
+    return calculateAge(birthday);
   }
 
   public declineReviews(num: number): string {
-    return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
+    return declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
   }
 
   private initContactsWithDefault(): void {

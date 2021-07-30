@@ -1,7 +1,7 @@
+import { removeNullProperties } from '@app/core/functions/object.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { ReadonlyApiServiceInterface } from '@app/core/interfaces/readonly-api-service-interface';
 import { ApiClientService } from '@app/core/services/api-client.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ export abstract class AbstractReadonlyApiService<T> implements ReadonlyApiServic
   protected constructor(protected client: ApiClientService) {}
 
   public get(params?: { [param: string]: string | string[] }): Observable<ApiListResponseInterface<T>> {
-    return this.client.get(this.getUrl(), HelperService.clear(params)).pipe(
+    return this.client.get(this.getUrl(), removeNullProperties(params)).pipe(
       map((raw: ApiListResponseInterface<T>) => {
         raw.results = this.transform(raw.results);
 

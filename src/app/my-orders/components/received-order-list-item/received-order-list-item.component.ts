@@ -1,8 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { ReceivedOrder, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { HelperService } from '@app/core/services/helper.service';
 import { ReceiverOrderStatusController } from '@app/my-orders/services';
 import { OrderListItem } from '../abstract/order-list-item';
 
@@ -62,9 +60,5 @@ export class ReceivedOrderListItemComponent extends OrderListItem {
 
   public onCompleteClick(): Promise<void> {
     return this.perform(() => this.orderStatusController.completeOrder(this.order));
-  }
-
-  public getPhoto(photo: string): string | SafeResourceUrl {
-    return photo || HelperService.getNoAvatarLink();
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { removeNullProperties } from '@app/core/functions/object.functions';
 import { ApiClientService } from '@app/core/services/api-client.service';
-import { HelperService } from '@app/core/services/helper.service';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
@@ -24,7 +24,7 @@ export class CalendarApiService {
     return this.client
       .get(
         this.getUrl(),
-        HelperService.clear({
+        removeNullProperties({
           professional: masterId?.toString(),
           service: serviceId?.toString(),
           start_datetime: startTime,

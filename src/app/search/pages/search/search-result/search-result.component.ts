@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Profile, Search, ServiceList } from '@app/api/models';
-import { HelperService } from '@app/core/services/helper.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -21,10 +20,6 @@ export class SearchResultComponent {
     this.isMoreServicesClicked = true;
   }
 
-  public declineReviews(num: number): string {
-    return HelperService.declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
-  }
-
   public needToRenderMoreServicesBtn(): boolean {
     return this.data.services.length > 3 && !this.isMoreServicesClicked;
   }
@@ -35,9 +30,5 @@ export class SearchResultComponent {
 
   public getCompanyName(): string {
     return this.data?.professional?.company ? this.data.professional.company : 'global.professional.private-person';
-  }
-
-  public getPhoto(): string {
-    return this.data.professional.user?.avatar || HelperService.getNoAvatarLink();
   }
 }

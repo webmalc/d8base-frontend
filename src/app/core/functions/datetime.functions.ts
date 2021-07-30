@@ -74,6 +74,29 @@ export function fromDatetime(datetime: string): { date: string; time: string } {
     : { date: null, time: null };
 }
 
+export function calculateAge(birthday: string): number {
+  const ageDifMs = Date.now() - new Date(birthday).getTime();
+  const ageDate = new Date(ageDifMs);
+
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+export function getTimeStringFromMinutes(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes - hours * 60;
+  const hoursStr = /^\d$/.test(hours.toString()) ? `0${hours.toString()}` : hours;
+  const minsStr = /^\d$/.test(mins.toString()) ? `0${mins.toString()}` : mins;
+
+  return `${hoursStr}:${minsStr}`;
+}
+
+export function getOffsetDate(date: Date, offset: number): Date {
+  const newDay = new Date(date);
+  newDay.setDate(date.getDate() + offset);
+
+  return newDay;
+}
+
 function getMonthNumberFormatted(date: Date): string {
   const month = date.getMonth() + 1;
   return padWithZero(month);

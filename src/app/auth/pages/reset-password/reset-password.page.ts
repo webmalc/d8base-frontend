@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResetPasswordFields } from '@app/auth/enums/reset-password-fields';
 import { ResetPasswordFormService } from '@app/auth/forms/reset-password-form.service';
 import { ResetPasswordApiService } from '@app/auth/services/reset-password-api.service';
-import { HelperService } from '@app/core/services/helper.service';
+import { getErrorListFromHttpErrorResponse } from '@app/core/functions/http.functions';
 import { delay, tap } from 'rxjs/operators';
 
 @Component({
@@ -44,8 +44,7 @@ export class ResetPasswordPage implements OnInit {
         )
         .subscribe(
           () => this.router.navigateByUrl('/auth/login'),
-          (error: HttpErrorResponse) =>
-            (this.errorMessages = HelperService.getErrorListFromHttpErrorResponse(error.error)),
+          (error: HttpErrorResponse) => (this.errorMessages = getErrorListFromHttpErrorResponse(error.error)),
         );
     });
   }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ProfessionalSchedule } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
+import { getOffsetDate } from '@app/core/functions/datetime.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import { HelperService } from '@app/core/services/helper.service';
 import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarGeneratorFactoryService } from '@app/master/services/calendar-generator-factory.service';
 import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
@@ -72,7 +72,7 @@ export class MasterProfileCalendarComponent implements OnInit {
 
   private updateEnabledPeriods(startDate: Date, masterId): void {
     this.calendarGeneratorFactory
-      .getEnabledPeriods(startDate, HelperService.getDate(startDate, 1), masterId)
+      .getEnabledPeriods(startDate, getOffsetDate(startDate, 1), masterId)
       .subscribe(list => this.periods.next(list));
   }
 }
