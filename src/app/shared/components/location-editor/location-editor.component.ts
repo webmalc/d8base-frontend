@@ -3,8 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserLocation } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { FullLocationService } from '@app/core/services/location/full-location.service';
-import { TimezoneService } from '@app/core/services/timezone.service';
-import { map, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 enum LocationFormFields {
   country = 'country',
@@ -30,7 +29,6 @@ export class LocationEditorComponent {
   @Output() public delete = new EventEmitter<UserLocation>();
 
   public readonly formFields = LocationFormFields;
-  public timezoneList$ = this.timezoneService.getTimezoneList().pipe(shareReplay(1));
   public country = new FormControl(null, [Validators.required]);
   public region = new FormControl(null);
   public subregion = new FormControl(null);
@@ -39,7 +37,7 @@ export class LocationEditorComponent {
   public coordinates = new FormControl(null);
   public postal = new FormControl(null);
   public address = new FormControl(null);
-  public timezone = new FormControl(null);
+  public timezone = new FormControl({ value: null, disabled: true });
   public isDefault = new FormControl(null);
   public form = new FormGroup({
     [this.formFields.country]: this.country,
@@ -55,11 +53,7 @@ export class LocationEditorComponent {
 
   private _item: Partial<UserLocation> = {};
 
-  constructor(
-    protected readonly timezoneService: TimezoneService,
-    public readonly fullLocationService: FullLocationService,
-    private readonly destroy$: NgDestroyService,
-  ) {
+  constructor(public readonly fullLocationService: FullLocationService, private readonly destroy$: NgDestroyService) {
     this.setTimezoneFromCity();
   }
 
@@ -116,23 +110,17 @@ export class LocationEditorComponent {
   }
 
   private setTimezoneFromCity(): void {
-    this.timezoneList$
+    this.city.valueChanges
       .pipe(
-        switchMap(timezoneList =>
-          this.city.valueChanges.pipe(
-            startWith(this.city.value),
-            map(city => timezoneList?.find(fullTimezone => fullTimezone.value === city?.timezone)),
-          ),
-        ),
+        // startWith(this.city.value),
+        map(city => city?.timezone),
         takeUntil(this.destroy$),
       )
       .subscribe(timezone => {
         if (timezone) {
           this.timezone.setValue(timezone, { emitEvent: false });
-          this.timezone.disable({ emitEvent: false });
         } else {
           this.timezone.reset({ emitEvent: false });
-          this.timezone.enable({ emitEvent: false });
         }
       });
   }

@@ -14,21 +14,13 @@
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.address' | translate }}
     </ion-label>
-    <ion-input [formControl]="address" name="first_name" type="text"> </ion-input>
+    <ion-input [formControl]="address" name="first_name" type="text"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="medium" position="floating">
       {{ 'location-edit-page.timezone' | translate }}
     </ion-label>
-    <ionic-selectable
-      [formControl]="timezone"
-      [canSearch]="true"
-      [canClear]="true"
-      [items]="timezoneList$ | async"
-      itemTextField="display_name"
-      itemValueField="value"
-    >
-    </ionic-selectable>
+    <ion-input [formControl]="timezone"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>{{ 'location-edit-page.make-default' | translate }}</ion-label>
