@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from './mocks';
 import { IntervalService } from '@app/shared/services/interval.service';
 import { of } from 'rxjs';
+import { CoreModule } from '@app/core/core.module';
 
 let ionicModuleImported = false;
 export const RootModules = () => {
@@ -24,7 +25,7 @@ export const RootModules = () => {
   return [IonicModule.forRoot(), ...ROOT_MODULES];
 };
 
-const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot()];
+const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot(), CoreModule];
 
 @NgModule({
   exports: [IonicModule, HttpClientTestingModule, RouterTestingModule, SharedModule, FormsModule, ReactiveFormsModule],

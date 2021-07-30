@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { StorageManagerMock } from '../../../../testing/mocks';
 import { ApiClientService } from '../api/api-client.service';
 import { AuthInterceptor } from './auth-interceptor.service';

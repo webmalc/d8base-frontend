@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { ReviewsModule } from '@app/reviews/reviews.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';

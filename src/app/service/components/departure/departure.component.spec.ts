@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';

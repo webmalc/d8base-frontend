@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { IonicModule } from '@ionic/angular';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { MasterProfilePortfolioComponent } from './master-profile-portfolio.component';

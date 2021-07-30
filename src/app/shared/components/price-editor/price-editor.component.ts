@@ -3,7 +3,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 import { Price, Rate } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
 import { RatesApiCache } from '@app/core/services/cache';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { UserSettingsService } from '@app/core/services/facades/user-settings.service';
 import { forkJoin, Observable } from 'rxjs';
 import { first, map, shareReplay, take, takeUntil } from 'rxjs/operators';
 

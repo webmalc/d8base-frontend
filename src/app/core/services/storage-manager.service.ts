@@ -4,9 +4,7 @@ import { Storage } from '@ionic/storage';
 /**
  *  Ionic DataStorage service proxy
  */
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StorageManagerService {
   constructor(private readonly storage: Storage) {}
 

@@ -1,6 +1,9 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { throwIfAlreadyLoaded } from '@app/core/functions/module.functions';
+import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
+import { CurrentUserFacadeService, LoaderEffects, UserSettingsService } from '@app/core/services/facades';
 import {
   AuthInterceptor,
   HeadersInterceptor,
@@ -25,6 +28,13 @@ import {
   LocationService,
   ApiClientService,
   IsUserRegisteredApiService,
+  SearchQueryService,
+  SearchFilterStateService,
+  SearchFilterStateConverter,
+  ContactsMergeToDefaultService,
+  MasterLocationApiService,
+  MasterScheduleApiService,
+  StorageManagerService,
 } from '@app/core/services';
 import {
   CategoriesApiCache,
@@ -40,8 +50,16 @@ import {
   SubregionsApiCache,
   UserLanguagesApiCache,
 } from '@app/core/services/cache';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { environment } from '@env/environment';
 
 @NgModule({
+  imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireMessagingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -79,9 +97,12 @@ import {
     GuessLocationByIpService,
     LocationResolverService,
     LocationService,
+    StorageManagerService,
 
     ApiClientService,
     IsUserRegisteredApiService,
+    MasterLocationApiService,
+    MasterScheduleApiService,
 
     CategoriesApiCache,
     CitiesApiCache,
@@ -95,6 +116,18 @@ import {
     SubcategoriesApiCache,
     SubregionsApiCache,
     UserLanguagesApiCache,
+
+    MustBeAuthorizedGuard,
+
+    CurrentUserFacadeService,
+    UserSettingsService,
+    LoaderEffects,
+
+    SearchFilterStateService,
+    SearchFilterStateConverter,
+    SearchQueryService,
+
+    ContactsMergeToDefaultService,
   ],
 })
 export class CoreModule {

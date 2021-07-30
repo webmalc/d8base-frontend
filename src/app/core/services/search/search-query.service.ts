@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '@app/api/services';
-import { SearchFilterStateConverter } from '@app/search/services/search-filter-state-converter.service';
+import { SearchFilterStateConverter } from '@app/core/services/search/search-filter-state-converter.service';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { SearchFilterFormValue } from '../interfaces/search-filter-form-value.interface';
+import { SearchFilterFormValue } from '../../../search/interfaces/search-filter-form-value.interface';
 
 const DEBOUNCE_DURATION_MS = 200;
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SearchQueryService {
   private readonly params$ = new BehaviorSubject<SearchService.SearchListParams | null>(null);
 

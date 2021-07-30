@@ -7,9 +7,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, shareReplay } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UserSettingsService {
   @Select(CurrentUserSelectors.settings)
   public readonly settings$: Observable<UserSettings | null>;

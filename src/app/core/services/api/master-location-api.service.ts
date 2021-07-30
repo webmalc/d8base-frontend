@@ -10,9 +10,7 @@ import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MasterLocationApiService
   extends AbstractApiService<MasterLocation>
   implements LocationApiServiceInterface, ApiServiceInterface<MasterLocation> {

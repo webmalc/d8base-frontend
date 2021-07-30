@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ProfessionalSchedule } from '@app/api/models';
+import { ProfessionalCalendar, ProfessionalSchedule } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { getOffsetDate } from '@app/core/functions/datetime.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
-import { MasterCalendar } from '@app/master/models/master-calendar';
 import { CalendarGeneratorFactoryService } from '@app/master/services/calendar-generator-factory.service';
-import { MasterScheduleApiService } from '@app/master/services/master-schedule-api.service';
+import { MasterScheduleApiService } from '@app/core/services/api/master-schedule-api.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
@@ -22,12 +21,12 @@ export class MasterProfileCalendarComponent implements OnInit {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
-  public enabledPeriods$: Observable<MasterCalendar[]>;
+  public enabledPeriods$: Observable<ProfessionalCalendar[]>;
   public schedule$: Observable<ProfessionalSchedule[]>;
   public scheduleEditor = new FormControl();
   public readonly formControl = new FormControl({ value: null, disabled: true });
 
-  private readonly periods: BehaviorSubject<MasterCalendar[]> = new BehaviorSubject<MasterCalendar[]>(null);
+  private readonly periods: BehaviorSubject<ProfessionalCalendar[]> = new BehaviorSubject<ProfessionalCalendar[]>(null);
   private selectedDate: Date;
 
   constructor(

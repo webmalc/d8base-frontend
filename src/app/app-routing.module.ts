@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { MainGuard } from '@app/core/guards/main.guard';
+import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
 import { ServiceWizardPath } from './service-wizard/const/service-wizard-path.const';
 import { NotFoundPageComponent } from './shared/components';
 
@@ -17,11 +17,11 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('src/app/profile/profile.module').then(m => m.ProfilePageModule),
-    canActivate: [MainGuard],
+    canActivate: [MustBeAuthorizedGuard],
   },
   {
     path: 'professional',
-    loadChildren: () => import('./master/master.module').then(m => m.MasterPageModule),
+    loadChildren: () => import('./master/master.module').then(m => m.ProfessionalPageModule),
   },
   {
     path: 'service',
@@ -34,7 +34,7 @@ const routes: Routes = [
   {
     path: 'message',
     loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule),
-    canActivate: [MainGuard],
+    canActivate: [MustBeAuthorizedGuard],
   },
   {
     path: 'search',
@@ -56,7 +56,7 @@ const routes: Routes = [
     path: 'saved-professionals',
     loadChildren: () =>
       import('./saved-professionals/saved-professionals.module').then(m => m.SavedProfessionalsModule),
-    canActivate: [MainGuard],
+    canActivate: [MustBeAuthorizedGuard],
   },
   { path: '**', component: NotFoundPageComponent },
 ];

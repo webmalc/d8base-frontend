@@ -8,7 +8,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { of, throwError } from 'rxjs';
 import { GCMDevice } from '@app/api/models/gcmdevice';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CurrentUser } from '@app/store/facades';
+import { CurrentUserFacadeService } from '@app/core/services/facades';
 
 function newDevice(registrationId: string): GCMDevice {
   return {
@@ -26,7 +26,7 @@ export class FirebaseService {
     private readonly swPush: SwPush,
     private readonly swUpdate: SwUpdate,
     private readonly communicationsApi: CommunicationService,
-    private readonly currentUser: CurrentUser,
+    private readonly currentUser: CurrentUserFacadeService,
     @Inject(WINDOW) private readonly window: Window,
   ) {
     this.subscribeToUser();

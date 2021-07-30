@@ -9,12 +9,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-master',
-  templateUrl: './master.page.html',
-  styleUrls: ['./master.page.scss'],
+  selector: 'app-professional-page',
+  templateUrl: './professional-page.component.html',
+  styleUrls: ['./professional-page.component.scss'],
   providers: [NgDestroyService],
 })
-export class MasterPage {
+export class ProfessionalPage {
   public defaultTab: string = MasterProfileSubmenu.Info;
   public tab$: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
   public editable$: Observable<boolean>;

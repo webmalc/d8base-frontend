@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';

@@ -4,8 +4,8 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import { Select } from '@ngxs/store';
 import { filter, mapTo } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
-export class CurrentUser {
+@Injectable()
+export class CurrentUserFacadeService {
   /**
    * Fires when user becomes authenticated
    */

@@ -4,10 +4,8 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class MainGuard implements CanActivate {
+@Injectable()
+export class MustBeAuthorizedGuard implements CanActivate {
   constructor(private readonly authenticator: AuthenticationService, private readonly router: Router) {}
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {

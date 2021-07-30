@@ -4,22 +4,22 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../core/proxies/storage-manager.service';
-import { MasterPage } from './master.page';
+import { StorageManagerService } from '../core/services/storage-manager.service';
+import { ProfessionalPage } from './professional-page.component';
 
 describe('MasterPage', () => {
-  let component: MasterPage;
-  let fixture: ComponentFixture<MasterPage>;
+  let component: ProfessionalPage;
+  let fixture: ComponentFixture<ProfessionalPage>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
-        declarations: [MasterPage],
+        declarations: [ProfessionalPage],
         providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(MasterPage);
+      fixture = TestBed.createComponent(ProfessionalPage);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

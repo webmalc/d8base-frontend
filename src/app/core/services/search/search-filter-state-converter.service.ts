@@ -35,7 +35,7 @@ function getTimeStamp(dateStr: string, timeStr: string, defaultTime: string): st
 const DAY_START_TIME = '00:00';
 const DAY_END_TIME = '23:59';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SearchFilterStateConverter {
   constructor(
     private readonly countriesApiCache: CountriesApiCache,

@@ -5,9 +5,7 @@ import { ApiClientService } from '@app/core/services/api/api-client.service';
 import { environment } from '@env/environment';
 import { plainToClass } from 'class-transformer';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MasterApiService extends AbstractApiService<Master> {
   private readonly url = environment.backend.master;
 

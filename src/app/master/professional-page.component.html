@@ -16,7 +16,7 @@
     >
       <ion-item lines="none" detail="false" button (click)="location.back()">
         <ion-icon class="ph5" name="arrow-back-outline"></ion-icon>
-        <ion-label> {{"global.back"|translate}} </ion-label>
+        <ion-label> {{ 'global.back' | translate }} </ion-label>
       </ion-item>
     </ion-col>
     <ion-col
@@ -33,7 +33,7 @@
     >
       <app-master-profile-submenu
         (selectedTab)="selectTab($event)"
-        defaultTab="{{defaultTab}}"
+        defaultTab="{{ defaultTab }}"
       ></app-master-profile-submenu>
     </ion-col>
   </ion-row>

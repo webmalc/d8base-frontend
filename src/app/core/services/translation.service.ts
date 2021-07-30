@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserSettingsService } from '@app/shared/services/user-settings.service';
+import { UserSettingsService } from '@app/core/services/facades/user-settings.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

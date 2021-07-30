@@ -3,8 +3,8 @@ import { Actions, Store } from '@ngxs/store';
 import { ActionContext, ActionStatus } from '@ngxs/store/src/actions-stream';
 import { Observable, OperatorFunction } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import * as LoaderActions from './loader.actions';
-import { LoaderAction } from './types/loader-action.type';
+import * as LoaderActions from '@app/store/loader/loader.actions';
+import { LoaderAction } from '@app/store/loader/types/loader-action.type';
 
 const ShowLoaderStatuses: ActionStatus[] = [ActionStatus.Dispatched];
 const HideLoaderStatuses: ActionStatus[] = [ActionStatus.Successful, ActionStatus.Canceled, ActionStatus.Errored];
@@ -28,7 +28,8 @@ function filterLoaderActionsStatus(allowedStatuses: ActionStatus[]) {
     return loaderTypeMatch && statusMatch;
   });
 }
-@Injectable({ providedIn: 'root' })
+
+@Injectable()
 export class LoaderEffects {
   constructor(actions$: Actions, store: Store) {
     actions$.pipe(ofShowLoaderAction()).subscribe(({ action }) => {

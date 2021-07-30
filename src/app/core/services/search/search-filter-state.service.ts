@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { getLocalDateString } from '@app/core/functions/datetime.functions';
-import { SearchFilterFormFields } from '../const/search-filters-form';
+import { SearchFilterFormFields } from '../../../search/const/search-filters-form';
 
 /**
  * Search for services up to 2 years in future
  */
 const FUTURE_TIMESPAN_YEARS = 2;
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SearchFilterStateService {
   public formFields = SearchFilterFormFields;
   public searchForm: FormGroup = this.fb.group({

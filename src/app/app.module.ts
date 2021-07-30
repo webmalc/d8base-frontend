@@ -2,14 +2,10 @@ import { registerLocaleData } from '@angular/common';
 import localeCanada from '@angular/common/locales/en-CA';
 import localeRussia from '@angular/common/locales/ru';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router, RouteReuseStrategy } from '@angular/router';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { CoreModule } from '@app/core/core.module';
 import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
-import { GeolocationService } from '@app/core/proxies/geolocation.service';
 import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -46,9 +42,6 @@ registerLocaleData(localeCanada, 'en-CA');
       defaultLanguage: environment.default_lang,
     }),
     ApiModule.forRoot({ rootUrl: `${environment.backend.url}/api` }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireMessagingModule,
     BrowserModule,
     CoreModule,
     ErrorHandlingModule,
@@ -64,7 +57,6 @@ registerLocaleData(localeCanada, 'en-CA');
       useClass: IonicRouteStrategy,
     },
     Geolocation,
-    GeolocationService,
     {
       provide: LocationAccuracy,
       useFactory: (platform: Platform) =>

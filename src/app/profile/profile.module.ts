@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutEditComponent } from '@app/profile/components/about-edit/about-edit.component';
 import { ChangeEmailComponent } from '@app/profile/components/change-email/change-email.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
+import { ProfileResolver } from '@app/profile/profile.resolver';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
@@ -26,5 +27,6 @@ import { ProfilePage } from './profile.page';
     IonicSelectableModule,
   ],
   declarations: [ProfilePage, UserContactEditComponent, UserEditComponent, AboutEditComponent, ChangeEmailComponent],
+  providers: [ProfileResolver],
 })
 export class ProfilePageModule {}

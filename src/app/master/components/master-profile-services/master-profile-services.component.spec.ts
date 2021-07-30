@@ -5,7 +5,7 @@ import { ServicesGeneratorFactoryService } from '@app/master/services/services-g
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../../../core/proxies/storage-manager.service';
+import { StorageManagerService } from '../../../core/services/storage-manager.service';
 import { MasterProfileServicesComponent } from './master-profile-services.component';
 
 describe('MasterProfileServicesComponent', () => {

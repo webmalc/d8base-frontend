@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { concat, Observable, Subject } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { map, shareReplay } from 'rxjs/operators';

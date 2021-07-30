@@ -3,9 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ResetPasswordFields } from '@app/auth/enums/reset-password-fields';
 import * as AppValidators from '@app/core/validators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ResetPasswordFormService {
   public form: FormGroup;
 

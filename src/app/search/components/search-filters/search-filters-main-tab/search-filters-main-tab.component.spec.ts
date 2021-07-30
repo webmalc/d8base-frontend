@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from '../../../../../testing/mocks';

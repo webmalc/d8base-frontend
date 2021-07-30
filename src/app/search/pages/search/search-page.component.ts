@@ -4,12 +4,12 @@ import { Search } from '@app/api/models';
 import { SearchService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
-import { SearchQueryService } from '@app/search/services/search-query.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
+import { SearchQueryService } from '@app/core/services/search/search-query.service';
 import { Platform } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { SearchFilterStateConverter } from '../../services/search-filter-state-converter.service';
+import { SearchFilterStateConverter } from '../../../core/services/search/search-filter-state-converter.service';
 
 @Component({
   selector: 'app-search',

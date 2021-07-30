@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageManagerService } from '@app/core/proxies/storage-manager.service';
+import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { ServiceWizardPath } from '@app/service-wizard/const/service-wizard-path.const';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';

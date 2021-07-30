@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchService } from '@app/api/services';
-import { SearchFilterStateService } from '@app/search/services/search-filter-state.service';
+import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SearchPage } from './search-page.component';
 
