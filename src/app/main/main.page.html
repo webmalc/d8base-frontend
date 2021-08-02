@@ -42,8 +42,8 @@
                 class="main-page-filter"
                 (emitter)="updateLocation($event)"
                 [enabled]="locationEnabled"
-                [country]="form.controls[formFields.country]"
-                [city]="form.controls[formFields.city]"
+                [country]="form.controls[formFields.country].value"
+                [city]="form.controls[formFields.city].value"
               ></app-location-picker>
             </ion-col>
           </ion-row>
