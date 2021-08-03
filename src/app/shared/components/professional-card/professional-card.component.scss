@@ -1,11 +1,11 @@
 :host {
-  display: flex;
-  position: relative;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto min-content;
 }
 
 .content {
   display: flex;
+  overflow: hidden;
 }
 
 .avatar {
@@ -21,15 +21,7 @@
 }
 
 .info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  .full-name {
-    color: var(--ion-color-dark);
-    font-weight: bold;
-    padding-bottom: 9px;
-  }
+  overflow: hidden;
 
   .title {
     font-size: 1rem;
