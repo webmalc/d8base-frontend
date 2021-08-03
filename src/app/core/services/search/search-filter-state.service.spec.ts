@@ -1,7 +1,6 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { SearchFilterStateService } from './search-filter-state.service';
 
 describe('SearchFilterStateService', () => {
@@ -9,8 +8,7 @@ describe('SearchFilterStateService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
-      providers: [SearchFilterStateService, FormBuilder],
+      imports: [...RootModules(), ComponentTestingModule],
     }),
       (httpMock = TestBed.inject(HttpTestingController));
   });
