@@ -38,7 +38,10 @@
   <app-chip *ngSwitchCase="fields.endPrice" (delete)="delete(filter.name)">
     {{ 'issuance.filters.main-tab.price-end' | translate }} {{ filter.value }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.priceCurrency" (delete)="delete([fields.startPrice, fields.endPrice])">
+  <app-chip
+    *ngSwitchCase="fields.priceCurrency"
+    (delete)="delete([fields.startPrice, fields.endPrice, fields.priceCurrency])"
+  >
     {{ 'flag-menu.currency' | translate }} {{ filter.value }}
   </app-chip>
   <app-chip *ngSwitchCase="fields.exactDatetime" (delete)="delete(filter.name)">

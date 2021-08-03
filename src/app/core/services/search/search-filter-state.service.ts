@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { getLocalDateString } from '@app/core/functions/datetime.functions';
-import { SearchFilterFormFields } from '../../../search/const/search-filters-form';
+import { SearchFilterFormFields } from '@app/search/const/search-filters-form';
+import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
+import { combineLatest } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { RatesApiCache } from '../cache';
+import { UserSettingsService } from '../facades';
 
 /**
  * Search for services up to 2 years in future
@@ -48,19 +53,36 @@ export class SearchFilterStateService {
   public minDate: string;
   public maxDate: string;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly userSettingsService: UserSettingsService,
+    private readonly ratesCache: RatesApiCache,
+  ) {
     this.setMinMaxDates();
+    this.setDefaultCurrency();
     this.handleCurrencySelectorChanges();
   }
 
-  public clear(): void {
-    this.searchForm.reset();
+  public patchValue(formValue: SearchFilterFormValue): void {
+    this.searchForm.patchValue(formValue);
+    if (!formValue.priceCurrency) {
+      this.setDefaultCurrency();
+    }
   }
 
   private setMinMaxDates(): void {
     const now = new Date(Date.now());
     this.minDate = getLocalDateString(now);
     this.maxDate = getLocalDateString(new Date(now.setFullYear(now.getFullYear() + FUTURE_TIMESPAN_YEARS)));
+  }
+
+  private setDefaultCurrency(): void {
+    combineLatest([this.ratesCache.list(), this.userSettingsService.userSettings$])
+      .pipe(take(1))
+      .subscribe(([rates, settings]) => {
+        const currency = rates.find(c => c.currency === settings.currency);
+        this.searchForm.controls[this.formFields.priceCurrency].setValue(currency);
+      });
   }
 
   private handleCurrencySelectorChanges(): void {

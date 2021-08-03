@@ -2,14 +2,13 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } 
 import { ActivatedRoute, Params } from '@angular/router';
 import { Search } from '@app/api/models';
 import { SearchService } from '@app/api/services';
-import { NgDestroyService } from '@app/core/services';
-import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
+import { NgDestroyService, SearchFilterStateConverter } from '@app/core/services';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { SearchQueryService } from '@app/core/services/search/search-query.service';
+import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
 import { Platform } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { SearchFilterStateConverter } from '../../../core/services/search/search-filter-state-converter.service';
 
 @Component({
   selector: 'app-search',
@@ -87,7 +86,7 @@ export class SearchPage implements AfterViewInit {
         takeUntil(this.destroy$),
       )
       .subscribe(formValue => {
-        this.state.searchForm.patchValue(formValue);
+        this.state.patchValue(formValue);
         this.cd.markForCheck();
       });
   }

@@ -15,7 +15,6 @@ export class UserSettingsService {
   public readonly userSettings$: Observable<UserSettings>;
 
   public langList: Array<UserSettings['language']> = ['en', 'ru'];
-  public currencyList: Array<UserSettings['currency']> = ['CAD', 'EUR', 'RUB', 'USD'];
   public unitsList: Array<UserSettings['units']> = [0, 1];
   public firstDayOfWeekList: Array<UserSettings['is_monday_start_of_a_week']> = [false, true];
 
