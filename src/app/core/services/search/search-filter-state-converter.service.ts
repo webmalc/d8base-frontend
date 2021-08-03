@@ -125,6 +125,7 @@ export class SearchFilterStateConverter {
     }
 
     return {
+      // null and undefined values are meant to be excluded
       tags: void 0,
       subregion: void 0,
       subcategories: data.subcategory?.map(({ id }) => id).join(','),
@@ -158,7 +159,7 @@ export class SearchFilterStateConverter {
       country: data.country?.id,
       city: data.city?.id,
       categories: data?.category?.map(({ id }) => id).join(','),
-      exactDatetime: data?.exactDatetime,
+      exactDatetime: data?.exactDatetime || null,
     };
   }
 
