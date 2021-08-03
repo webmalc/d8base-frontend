@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Category, City, Country, Language, Subcategory } from '@app/api/models';
+import { Category, City, Country, Language, Rate, Subcategory } from '@app/api/models';
 import { ProfessionalsService, SearchService } from '@app/api/services';
 import { emptyArrayToUndefined } from '@app/core/functions/array.functions';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { hasWord } from '@app/core/functions/string.functions';
-import { CitiesApiCache, CountriesApiCache, LanguagesApiCache } from '@app/core/services/cache';
+import { CitiesApiCache, CountriesApiCache, LanguagesApiCache, RatesApiCache } from '@app/core/services/cache';
 import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -41,6 +41,7 @@ export class SearchFilterStateConverter {
     private readonly countriesApiCache: CountriesApiCache,
     private readonly languagesApiCache: LanguagesApiCache,
     private readonly citiesApiCache: CitiesApiCache,
+    private readonly ratesApiCache: RatesApiCache,
     private readonly professionalsApi: ProfessionalsService,
   ) {}
 
@@ -51,12 +52,13 @@ export class SearchFilterStateConverter {
 
     return forkJoin(this.getExpandedParams(params)).pipe(
       map(
-        ([countries, city, categories, subcategories, languages]: [
+        ([countries, city, categories, subcategories, languages, rates]: [
           Country[],
           City,
           Category[],
           Subcategory[],
           Language[],
+          Rate[],
         ]) => {
           const country = params?.country ? countries.find(({ id }) => Number(id) === Number(params.country)) : void 0;
           const nationalities = params?.nationalities
@@ -70,7 +72,7 @@ export class SearchFilterStateConverter {
           const price =
             params?.priceCurrency && (params?.startPrice || params?.endPrice)
               ? {
-                  currency: { currency: params?.priceCurrency, value: void 0 },
+                  currency: rates.find(c => c.currency === params?.priceCurrency),
                   ...(params?.startPrice ? { start: params?.startPrice } : null),
                   ...(params?.endPrice ? { end: params?.endPrice } : null),
                 }
@@ -137,7 +139,7 @@ export class SearchFilterStateConverter {
       ratingFrom: data.rating,
       query: data.query || null,
       professionalLevel: data.professionalLevel?.value,
-      priceCurrency: data.priceCurrency?.currency,
+      priceCurrency: data.priceStart || data.priceEnd ? data.priceCurrency?.currency : void 0,
       postalCode: void 0,
       paymentMethods: data?.paymentMethods?.map(({ value }) => value).join(', '),
       onlyWithReviews: data?.onlyWithReviews || null,
@@ -171,6 +173,7 @@ export class SearchFilterStateConverter {
     Observable<Category[]>,
     Observable<Subcategory[]>,
     Observable<Language[]>,
+    Observable<Rate[]>,
   ] {
     return [
       params?.country || params?.nationalities ? this.countriesApiCache.list() : of([]),
@@ -180,6 +183,7 @@ export class SearchFilterStateConverter {
         ? this.getSubcategories(params.subcategories.split(',').map(idStr => parseInt(idStr, 10)))
         : of([]),
       params?.languages ? this.languagesApiCache.list() : of([]),
+      params?.priceCurrency ? this.ratesApiCache.list() : of([]),
     ];
   }
 
