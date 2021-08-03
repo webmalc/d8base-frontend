@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { getLocalDateString } from '@app/core/functions/datetime.functions';
-import { combineLatest } from 'rxjs';
 import { SearchFilterFormFields } from '@app/search/const/search-filters-form';
+import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
+import { combineLatest } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { RatesApiCache } from '../cache';
 import { UserSettingsService } from '../facades';
 
@@ -61,8 +63,11 @@ export class SearchFilterStateService {
     this.handleCurrencySelectorChanges();
   }
 
-  public clear(): void {
-    this.searchForm.reset();
+  public patchValue(formValue: SearchFilterFormValue): void {
+    this.searchForm.patchValue(formValue);
+    if (!formValue.priceCurrency) {
+      this.setDefaultCurrency();
+    }
   }
 
   private setMinMaxDates(): void {
@@ -72,10 +77,12 @@ export class SearchFilterStateService {
   }
 
   private setDefaultCurrency(): void {
-    combineLatest([this.ratesCache.list(), this.userSettingsService.userSettings$]).subscribe(([rates, settings]) => {
-      const currency = rates.find(c => c.currency === settings.currency);
-      this.searchForm.controls[this.formFields.priceCurrency].setValue(currency);
-    });
+    combineLatest([this.ratesCache.list(), this.userSettingsService.userSettings$])
+      .pipe(take(1))
+      .subscribe(([rates, settings]) => {
+        const currency = rates.find(c => c.currency === settings.currency);
+        this.searchForm.controls[this.formFields.priceCurrency].setValue(currency);
+      });
   }
 
   private handleCurrencySelectorChanges(): void {
