@@ -1,4 +1,3 @@
-<app-column-header>{{ 'location-edit-page.address' | translate }}</app-column-header>
 <ng-container *appIfSpinner="item">
   <app-country-selector [formControl]="country" [required]="true"></app-country-selector>
   <app-region-selector [formControl]="region" [country]="country.value"></app-region-selector>
