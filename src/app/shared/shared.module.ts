@@ -6,15 +6,12 @@ import { RouterModule } from '@angular/router';
 import {
   AddButtonComponent,
   CategorySelectorComponent,
-  CitySelectorComponent,
   ClientWidgetComponent,
   ColumnHeaderComponent,
   ContentWrapperComponent,
   CountryFlagComponent,
-  CountrySelectorComponent,
   DateIntervalEditorComponent,
   DaySelectorComponent,
-  DistrictSelectorComponent,
   DurationEditorComponent,
   DurationViewerComponent,
   FooterComponent,
@@ -26,7 +23,6 @@ import {
   ImagesControlComponent,
   LanguageComponent,
   LoadingIndicatorComponent,
-  LocationEditorPopoverComponent,
   LocationSelectorComponent,
   LocationViewerComponent,
   MainMenuComponent,
@@ -39,19 +35,25 @@ import {
   PriceComponent,
   PriceEditorComponent,
   ProfessionalCardComponent,
-  RegionSelectorComponent,
   ScheduleEditorComponent,
   ScheduleViewerComponent,
   ServiceLocationComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
   SubcategorySelectorComponent,
-  SubregionSelectorComponent,
-  PostalCodeSelectorComponent,
   OnMapPopoverComponent,
   SectionHeadingComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
+import {
+  CitySelectorComponent,
+  CountrySelectorComponent,
+  DistrictSelectorComponent,
+  PostalCodeSelectorComponent,
+  RegionSelectorComponent,
+  SubregionSelectorComponent,
+} from '@app/shared/components/location-editor';
+import { LocationEditorPopoverComponent } from '@app/shared/components/location-editor-popover/location-editor-popover.component';
 import { LocationEditorComponent } from '@app/shared/components/location-editor/location-editor.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
