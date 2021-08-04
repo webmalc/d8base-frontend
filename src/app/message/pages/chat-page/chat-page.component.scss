@@ -112,3 +112,11 @@
   color: var(--ion-color-medium);
   text-align: center;
 }
+
+.show-inner-scrollbar {
+  --overflow: scroll;
+}
+
+.show-scrollbar {
+  overflow-y: scroll;
+}
