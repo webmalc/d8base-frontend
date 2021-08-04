@@ -113,6 +113,10 @@
   text-align: center;
 }
 
+.disable-highlight {
+  --highlight-height: 0;
+}
+
 .show-inner-scrollbar {
   --overflow: scroll;
 }

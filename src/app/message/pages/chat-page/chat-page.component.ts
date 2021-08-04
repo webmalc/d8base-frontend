@@ -51,6 +51,9 @@ export class ChatPageComponent implements AfterViewInit {
   }
 
   public send(): void {
+    if (this.formControl.invalid) {
+      return;
+    }
     const value = this.formControl.value;
     this.formControl.disable();
     this.interlocutorData$
