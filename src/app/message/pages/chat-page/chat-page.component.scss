@@ -112,3 +112,15 @@
   color: var(--ion-color-medium);
   text-align: center;
 }
+
+.disable-highlight {
+  --highlight-height: 0;
+}
+
+.show-inner-scrollbar {
+  --overflow: scroll;
+}
+
+.show-scrollbar {
+  overflow-y: scroll;
+}

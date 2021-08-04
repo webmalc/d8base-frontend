@@ -12,7 +12,7 @@
     </ion-label>
   </ng-container>
 </app-column-header>
-<ion-content [scrollEvents]="true" #content>
+<ion-content [scrollEvents]="true" #content class="show-inner-scrollbar">
   <app-content-wrapper>
     <div class="messages-container" *appIfSpinner="chat$ | async as chatItems">
       <ion-infinite-scroll threshold="800px" [disabled]="true" position="top">
@@ -67,14 +67,14 @@
   </app-content-wrapper>
 </ion-content>
 <ion-footer class="ion-no-border">
-  <app-content-wrapper [preservePaddings]="true" style="overflow-y: scroll">
+  <app-content-wrapper class="show-scrollbar">
     <ion-item *ngIf="editingMode">
       <ion-icon name="pencil-outline" slot="start"></ion-icon>
       <ion-label>{{ 'messages.direct.edit-message' | translate }}</ion-label>
       <ion-icon name="close-outline" slot="end" (click)="resetInput()"></ion-icon>
     </ion-item>
     <form (ngSubmit)="send()">
-      <ion-item class="ion-item-bordered border-radius24">
+      <ion-item class="ion-item-bordered border-radius24 disable-highlight">
         <ion-input [formControl]="formControl" name="message"></ion-input>
         <ion-button type="submit" fill="clear" size="default" [disabled]="formControl.invalid">
           <ion-icon name="send-sharp"></ion-icon>
