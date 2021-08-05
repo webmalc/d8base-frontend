@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Professional } from '@app/api/models';
+import { professionalLevels } from '@app/core/constants/professional.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
+import { CategoriesApiCache, SubcategoriesApiCache } from '@app/core/services/cache';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-edit',
@@ -19,18 +22,34 @@ export class MasterEditComponent {
   public categoryControl = new FormControl(NaN);
   public subcategoryControl = new FormControl(NaN);
   public form: FormGroup;
-  public levelOptions = ['junior', 'middle', 'senior'];
+  public levelOptions = professionalLevels;
 
   private initialValue: Professional;
 
-  constructor() {
+  constructor(
+    private readonly categoryCache: CategoriesApiCache,
+    private readonly subcategoryCache: SubcategoriesApiCache,
+  ) {
     this.form = this.createForm();
   }
 
   @Input()
   public set item(item: Professional) {
     this.initialValue = item;
-    this.setFormValues(item);
+    if (item) {
+      this.setFormValues({
+        name: item.name,
+        description: item.description,
+        company: item.company,
+        experience: item.experience,
+        level: item.level,
+      });
+    } else {
+      this.form.reset();
+    }
+    if (item?.subcategory) {
+      this.setSubcategory(item.subcategory);
+    }
   }
 
   public save(): void {
@@ -58,7 +77,21 @@ export class MasterEditComponent {
     return new FormGroup(controls);
   }
 
-  private setFormValues(values: Professional): void {
+  private setFormValues(values: Partial<Professional>): void {
     this.form.patchValue(values);
+  }
+
+  private setSubcategory(subcategoryId: number): void {
+    this.subcategoryCache
+      .getByEntityId(subcategoryId)
+      .pipe(
+        switchMap(subcategory =>
+          this.categoryCache.getByEntityId(subcategory.category).pipe(map(category => [category, subcategory])),
+        ),
+      )
+      .subscribe(([category, subcategory]) => {
+        this.categoryControl.setValue(category);
+        this.subcategoryControl.setValue(subcategory);
+      });
   }
 }

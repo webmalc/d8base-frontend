@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { professionalLevels } from '@app/core/constants/professional.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { TranslationService } from '@app/core/services/translation.service';
 import { companyNameValidator } from '@app/core/validators';
@@ -18,7 +19,7 @@ import { ServiceStepsNavigationService } from '@app/service/services/service-ste
 export class ServicePublishStepSixComponent implements OnInit {
   public form: FormGroup;
   public formFields = ServicePublishStepSixFormFields;
-  public levelList = ['junior', 'middle', 'senior'];
+  public levelList = professionalLevels;
 
   constructor(
     public trans: TranslationService,
