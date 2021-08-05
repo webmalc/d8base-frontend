@@ -1,62 +1,77 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { fromDatetime } from '@app/core/functions/datetime.functions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProfessionalCertificate } from '@app/api/models';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { getNoAvatarLink } from '@app/core/functions/media.functions';
-import { Certificate } from '@app/master/models/certificate';
-import { AbstractEditComponent } from '@app/shared/abstract/abstract-edit-component';
-import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-
-enum CertificateFormFields {
-  name = 'name',
-  organization = 'organization',
-  date = 'date',
-  certificate_id = 'certificate_id',
-  url = 'url',
-  photo = 'photo',
-}
 
 @Component({
   selector: 'app-certificate-edit',
   templateUrl: './certificate-edit.component.html',
   styleUrls: ['./certificate-edit.component.scss'],
 })
-export class CertificateEditComponent extends AbstractEditComponent<Certificate> implements OnChanges {
-  public readonly formFields = CertificateFormFields;
-  public form: FormGroup = this.fb.group({
-    [this.formFields.name]: [null, Validators.required],
-    [this.formFields.organization]: [null, Validators.required],
-    [this.formFields.date]: [null],
-    [this.formFields.certificate_id]: [null],
-    [this.formFields.url]: [null],
-    [this.formFields.photo]: [null],
-  });
+export class CertificateEditComponent {
+  @Output() public readonly saveEmitter = new EventEmitter<ProfessionalCertificate>();
+  @Output() public readonly deleteEmitter = new EventEmitter<ProfessionalCertificate>();
 
+  public nameControl = new FormControl('', Validators.required);
+  public organizationControl = new FormControl('', Validators.required);
+  public dateControl = new FormControl(null);
+  public idControl = new FormControl(null);
+  public urlControl = new FormControl(null);
+  public photoControl = new FormControl('');
+
+  public form: FormGroup;
   public photo$: Observable<string>;
+  public initialValue: ProfessionalCertificate;
 
-  constructor(private readonly fb: FormBuilder) {
-    super();
+  constructor() {
+    this.form = this.createForm();
+    this.photo$ = this.photoControl.valueChanges.pipe(
+      startWith(''),
+      map(value => value || getNoAvatarLink()),
+    );
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.item) {
-      const item = this.item ?? {};
-      this.form.patchValue(item);
-      this.photo$ = this.form.valueChanges.pipe(
-        startWith(item),
-        map(formValue => formValue[this.formFields.photo] || getNoAvatarLink()),
-      );
-    }
+  @Input()
+  public set item(item: ProfessionalCertificate) {
+    this.initialValue = item;
+    this.setFormValues(item);
   }
 
-  protected transform(data: Certificate): Certificate {
-    const trans: Certificate = plainToClass(Certificate, { ...data, ...this.form.getRawValue() });
-    trans.date = fromDatetime(trans.date).date;
-    if (trans.photo && (trans.photo.slice(0, 7) === 'http://' || trans.photo.slice(0, 8) === 'https://')) {
-      delete trans.photo;
-    }
+  public get canDelete(): boolean {
+    return Boolean(this.initialValue?.id);
+  }
 
-    return trans;
+  public save(): void {
+    if (isFormInvalid(this.form)) {
+      return;
+    }
+    const updatedValue: ProfessionalCertificate = {
+      ...this.initialValue,
+      ...this.form.value,
+    };
+    this.saveEmitter.emit(updatedValue);
+  }
+
+  public delete(): void {
+    this.deleteEmitter.emit(this.initialValue);
+  }
+
+  private createForm(): FormGroup {
+    const controls: { [key in keyof Partial<ProfessionalCertificate>]: FormControl } = {
+      name: this.nameControl,
+      organization: this.organizationControl,
+      date: this.dateControl,
+      certificate_id: this.idControl,
+      url: this.urlControl,
+      photo: this.photoControl,
+    };
+    return new FormGroup(controls);
+  }
+
+  private setFormValues(values: ProfessionalCertificate): void {
+    this.form.patchValue(values);
   }
 }

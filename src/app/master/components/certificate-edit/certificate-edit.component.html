@@ -1,60 +1,59 @@
 <app-column-header [previousLocationFallback]="'/professional'">
   {{ 'certificates-edit-page.back' | translate }}
 </app-column-header>
-<ng-container *appIfSpinner="item">
-  <ion-item>
-    <ion-label color="medium" position="floating" class="label-for-required-input">
-      {{ 'certificates-edit-page.name' | translate }}
-    </ion-label>
-    <ion-input [formControl]="form.get(formFields.name)" name="name" type="text"></ion-input>
-  </ion-item>
-  <app-form-control-error [control]="form.get(formFields.name)"> </app-form-control-error>
 
-  <ion-item>
-    <ion-label color="medium" position="floating" class="label-for-required-input">
-      {{ 'certificates-edit-page.organization' | translate }}
-    </ion-label>
-    <ion-input [formControl]="form.get(formFields.organization)" name="organization" type="text"></ion-input>
-  </ion-item>
-  <app-form-control-error [control]="form.get(formFields.organization)"> </app-form-control-error>
+<ion-item>
+  <ion-label color="medium" position="floating" class="label-for-required-input">
+    {{ 'certificates-edit-page.name' | translate }}
+  </ion-label>
+  <ion-input [formControl]="nameControl" name="name" type="text"></ion-input>
+</ion-item>
+<app-form-control-error [control]="nameControl"> </app-form-control-error>
 
-  <ion-item>
-    <ion-label color="medium" position="stacked">
-      {{ 'certificates-edit-page.date' | translate }}
-    </ion-label>
-    <ion-input type="date" [formControl]="form.get(formFields.date)"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'certificates-edit-page.certificate-id' | translate }}
-    </ion-label>
-    <ion-input [formControl]="form.get(formFields.certificate_id)" name="certificate_id" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium" position="floating">
-      {{ 'certificates-edit-page.certificate-link' | translate }}
-    </ion-label>
-    <ion-input [formControl]="form.get(formFields.url)" name="url" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="medium">
-      {{ 'certificates-edit-page.certificate-photo' | translate }}
-    </ion-label>
-    <ion-thumbnail class="app-thumb-mr100">
-      <ion-img [src]="photo$ | async"></ion-img>
-    </ion-thumbnail>
-    <app-picture-selector [formControl]="form.get(formFields.photo)" [cropAfterSelect]="false"> </app-picture-selector>
-  </ion-item>
-  <ion-row class="ion-justify-content-center ion-margin-top">
-    <ion-col size="6">
-      <ion-button (click)="delete()" *ngIf="item.id" color="light" expand="block" fill="solid" size="medium">
-        {{ 'certificates-edit-page.remove' | translate }}
-      </ion-button>
-    </ion-col>
-    <ion-col size="6">
-      <ion-button (click)="save()" [disabled]="form.invalid || form.pristine" expand="block" fill="solid" size="medium">
-        {{ 'certificates-edit-page.save' | translate }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
-</ng-container>
+<ion-item>
+  <ion-label color="medium" position="floating" class="label-for-required-input">
+    {{ 'certificates-edit-page.organization' | translate }}
+  </ion-label>
+  <ion-input [formControl]="organizationControl" name="organization" type="text"></ion-input>
+</ion-item>
+<app-form-control-error [control]="organizationControl"> </app-form-control-error>
+
+<ion-item>
+  <ion-label color="medium" position="stacked">
+    {{ 'certificates-edit-page.date' | translate }}
+  </ion-label>
+  <ion-input type="date" [formControl]="dateControl"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label color="medium" position="floating">
+    {{ 'certificates-edit-page.certificate-id' | translate }}
+  </ion-label>
+  <ion-input [formControl]="idControl" name="certificate_id" type="text"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label color="medium" position="floating">
+    {{ 'certificates-edit-page.certificate-link' | translate }}
+  </ion-label>
+  <ion-input [formControl]="urlControl" name="url" type="text"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label color="medium">
+    {{ 'certificates-edit-page.certificate-photo' | translate }}
+  </ion-label>
+  <ion-thumbnail class="app-thumb-mr100">
+    <ion-img [src]="photo$ | async"></ion-img>
+  </ion-thumbnail>
+  <app-picture-selector [formControl]="photoControl" [cropAfterSelect]="false"> </app-picture-selector>
+</ion-item>
+<ion-row class="ion-justify-content-center ion-margin-top">
+  <ion-col size="6">
+    <ion-button (click)="delete()" *ngIf="canDelete" color="light" expand="block" fill="solid" size="medium">
+      {{ 'certificates-edit-page.remove' | translate }}
+    </ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button (click)="save()" [disabled]="form.pristine" expand="block" fill="solid" size="medium">
+      {{ 'certificates-edit-page.save' | translate }}
+    </ion-button>
+  </ion-col>
+</ion-row>
