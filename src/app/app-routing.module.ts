@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'professional',
-    loadChildren: () => import('./master/master.module').then(m => m.ProfessionalPageModule),
+    loadChildren: () => import('./professional/professional-page.module').then(m => m.ProfessionalPageModule),
   },
   {
     path: 'service',

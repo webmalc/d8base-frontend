@@ -1,5 +1,5 @@
 import { Category, City, Country, Rate, Subcategory } from '@app/api/models';
-import { Tag } from '@app/master/models/tag';
+import { Tag } from '@app/professional/models/tag';
 
 export interface SearchFilterFormValue {
   query?: string;

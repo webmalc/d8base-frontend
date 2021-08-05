@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnIn
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ScheduleService } from '@app/api/services';
 import { addDays, getLocalDateString } from '@app/core/functions/datetime.functions';
-import { MasterCalendar } from '@app/master/models/master-calendar';
+import { MasterCalendar } from '@app/professional/models/master-calendar';
 import { StepComponent } from '@app/order/abstract/step';
 import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';

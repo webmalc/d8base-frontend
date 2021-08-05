@@ -8,7 +8,7 @@ import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { ScheduleUnion } from '@app/core/models/schedule-union';
 import { LocationService } from '@app/core/services/location/location.service';
 import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
-import { MasterLocation } from '@app/master/models/master-location';
+import { MasterLocation } from '@app/professional/models/master-location';
 import { MasterLocationApiService } from '@app/core/services/api/master-location-api.service';
 import { MasterScheduleApiService } from '@app/core/services/api/master-schedule-api.service';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
