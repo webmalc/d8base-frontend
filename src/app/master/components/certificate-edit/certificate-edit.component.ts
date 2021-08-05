@@ -24,7 +24,8 @@ export class CertificateEditComponent {
 
   public form: FormGroup;
   public photo$: Observable<string>;
-  public initialValue: ProfessionalCertificate;
+
+  private initialValue: ProfessionalCertificate;
 
   constructor() {
     this.form = this.createForm();
