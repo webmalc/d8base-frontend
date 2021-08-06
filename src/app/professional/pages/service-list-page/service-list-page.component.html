@@ -1,0 +1,12 @@
+<app-header></app-header>
+<ion-content>
+  <app-content-wrapper>
+    <app-column-header>{{ 'master-profile.services.services-tab.master-services' | translate }}</app-column-header>
+    <app-professional-card
+      *ngIf="professional$ | async as professional"
+      [professional]="professional"
+      class="ion-padding-horizontal ion-padding-vertical"
+    ></app-professional-card>
+    <app-master-profile-services></app-master-profile-services>
+  </app-content-wrapper>
+</ion-content>

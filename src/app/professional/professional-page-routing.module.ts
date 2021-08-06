@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
+import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
 import { ProfessionalResolver } from '@app/professional/professional.resolver';
 import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
 
-import { ProfessionalPage } from './professional-page.component';
+import { ProfessionalPageComponent } from './professional-page.component';
 import { ProfessionalGuard } from './professional.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'my-profile',
     pathMatch: 'full',
     canActivate: [ProfessionalGuard],
   },
   {
-    path: ':master-id',
+    path: 'my-services',
     pathMatch: 'full',
-    component: ProfessionalPage,
-    resolve: {
-      context: ProfessionalResolver,
-    },
+    canActivate: [ProfessionalGuard],
   },
   {
     path: ':master-id',
@@ -28,8 +26,16 @@ const routes: Routes = [
     },
     children: [
       {
-        path: '',
-        component: ProfessionalPage,
+        path: 'profile',
+        component: ProfessionalPageComponent,
+        pathMatch: 'full',
+        resolve: {
+          context: ProfessionalResolver,
+        },
+      },
+      {
+        path: 'services',
+        component: ServiceListPageComponent,
         pathMatch: 'full',
       },
       {

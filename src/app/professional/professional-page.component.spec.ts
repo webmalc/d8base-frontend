@@ -5,21 +5,21 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { StorageManagerService } from '../core/services/storage-manager.service';
-import { ProfessionalPage } from './professional-page.component';
+import { ProfessionalPageComponent } from './professional-page.component';
 
 describe('MasterPage', () => {
-  let component: ProfessionalPage;
-  let fixture: ComponentFixture<ProfessionalPage>;
+  let component: ProfessionalPageComponent;
+  let fixture: ComponentFixture<ProfessionalPageComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
-        declarations: [ProfessionalPage],
+        declarations: [ProfessionalPageComponent],
         providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(ProfessionalPage);
+      fixture = TestBed.createComponent(ProfessionalPageComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

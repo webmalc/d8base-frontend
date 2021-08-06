@@ -9,6 +9,7 @@ import { MasterProfileInfoComponent } from '@app/professional/components/master-
 import { MasterProfilePortfolioComponent } from '@app/professional/components/master-profile-portfolio/master-profile-portfolio.component';
 import { MasterProfileServicesComponent } from '@app/professional/components/master-profile-services/master-profile-services.component';
 import { MasterProfileSubmenuComponent } from '@app/professional/components/master-profile-submenu/master-profile-submenu.component';
+import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
 import { CertificatesApiService } from '@app/professional/services/certificates-api.service';
 import { EducationApiService } from '@app/professional/services/education-api.service';
@@ -26,7 +27,7 @@ import { MasterProfileServiceEditComponent } from './components/master-profile-s
 import { ServiceViewerComponent } from './components/master-profile-services/service-viewer/service-viewer.component';
 import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
 import { MasterPageRoutingModule } from './professional-page-routing.module';
-import { ProfessionalPage } from './professional-page.component';
+import { ProfessionalPageComponent } from './professional-page.component';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalResolver } from './professional.resolver';
 
@@ -43,7 +44,7 @@ import { ProfessionalResolver } from './professional.resolver';
     TranslateModule,
   ],
   declarations: [
-    ProfessionalPage,
+    ProfessionalPageComponent,
     MasterProfileInfoComponent,
     MasterProfileServicesComponent,
     MasterProfileCalendarComponent,
@@ -56,6 +57,7 @@ import { ProfessionalResolver } from './professional.resolver';
     EducationComponent,
     CertificateComponent,
     ProfessionalContactEditComponent,
+    ServiceListPageComponent,
   ],
   providers: [
     MasterApiService,

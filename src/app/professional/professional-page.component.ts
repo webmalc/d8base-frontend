@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./professional-page.component.scss'],
   providers: [NgDestroyService],
 })
-export class ProfessionalPage {
+export class ProfessionalPageComponent {
   public defaultTab: string = MasterProfileSubmenu.Info;
   public tab$: BehaviorSubject<string> = new BehaviorSubject<string>(this.defaultTab);
   public editable$: Observable<boolean>;
