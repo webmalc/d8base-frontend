@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Profile, Search, ServiceList } from '@app/api/models';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
@@ -14,7 +15,14 @@ export class SearchResultComponent {
   public userId$: Observable<Profile['id']>;
 
   @Input() public data: Search;
+
+  public get currentUrl(): string {
+    return this.router.url;
+  }
+
   private isMoreServicesClicked: boolean = false;
+
+  constructor(private readonly router: Router) {}
 
   public onMoreServicesClick(): void {
     this.isMoreServicesClicked = true;

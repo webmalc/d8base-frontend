@@ -23,11 +23,16 @@
       </div>
     </div>
     <div class="bottom-buttons">
-      <ion-button size="medium" color="light" [routerLink]="'/professional/' + data.professional.id + '/services/'">
-        {{ 'Все услуги' | translate }} <ion-icon slot="end" name="documents-outline"></ion-icon>
+      <ion-button
+        size="medium"
+        color="light"
+        [routerLink]="'/professional/' + data.professional.id + '/services/'"
+        [queryParams]="{ redirectTo: currentUrl }"
+      >
+        {{ 'issuance.search-result.service-list' | translate }}
       </ion-button>
       <ion-button size="medium" color="light" [routerLink]="'/professional/' + data.professional.id + '/profile/'">
-        {{ 'Профиль' | translate }} <ion-icon slot="end" name="person-outline"></ion-icon>
+        {{ 'issuance.search-result.profile' | translate }}
       </ion-button>
       <ion-button
         size="medium"

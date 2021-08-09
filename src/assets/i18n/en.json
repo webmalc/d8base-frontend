@@ -701,7 +701,9 @@
       "more": "More services",
       "address": "Professional location",
       "select": "Select",
-      "chat": "Chat"
+      "chat": "Chat",
+      "service-list": "Все услуги",
+      "profile": "Профиль"
     }
   },
   "main-page": {

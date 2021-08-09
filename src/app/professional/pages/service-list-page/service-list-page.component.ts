@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-services-page',
+  selector: 'app-service-list-page',
   templateUrl: './service-list-page.component.html',
   styleUrls: ['./service-list-page.component.scss'],
 })
