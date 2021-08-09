@@ -66,13 +66,13 @@ export const mainMenuItems: MainMenuItem[] = [
   },
   {
     title: 'template.master-profile',
-    icon: 'construct-outline',
+    icon: 'settings-outline',
     link: '/professional/my-profile',
     masterOnly: true,
   },
   {
     title: 'template.master-services',
-    icon: 'construct-outline',
+    icon: 'list-circle-outline',
     link: '/professional/my-services',
     masterOnly: true,
   },
