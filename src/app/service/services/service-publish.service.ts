@@ -12,7 +12,6 @@ import {
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services';
 import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
-import { MasterLocationApiService } from '@app/core/services/api/master-location-api.service';
 import ServicePublishData from '@app/service/interfaces/service-publish-data.interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServicePublishDataPreparerService } from '@app/service/services/service-publish-data-preparer.service';
@@ -31,7 +30,6 @@ export class ServicePublishService {
     private readonly masterManager: MasterManagerService,
     private readonly accountsApi: AccountsService,
     private readonly api: AccountsService,
-    private readonly masterLocationApi: MasterLocationApiService,
     private readonly servicePublishDataFormatter: ServicePublishDataPreparerService,
   ) {}
 

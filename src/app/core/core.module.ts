@@ -25,15 +25,12 @@ import {
   UserManagerService,
   GuessLocationByIpService,
   LocationResolverService,
-  LocationService,
   ApiClientService,
   IsUserRegisteredApiService,
   SearchQueryService,
   SearchFilterStateService,
   SearchFilterStateConverter,
   ContactsMergeToDefaultService,
-  MasterLocationApiService,
-  MasterScheduleApiService,
   StorageManagerService,
 } from '@app/core/services';
 import {
@@ -96,13 +93,10 @@ import { environment } from '@env/environment';
     UserManagerService,
     GuessLocationByIpService,
     LocationResolverService,
-    LocationService,
     StorageManagerService,
 
     ApiClientService,
     IsUserRegisteredApiService,
-    MasterLocationApiService,
-    MasterScheduleApiService,
 
     CategoriesApiCache,
     CitiesApiCache,

@@ -91,6 +91,7 @@
     "my-profile": "My profile",
     "profile": "Profile",
     "master-profile": "Professional profile",
+    "master-services": "My services",
     "logout": "Logout",
     "download": "Download application",
     "become-master": "Become professional",
@@ -700,7 +701,9 @@
       "more": "More services",
       "address": "Professional location",
       "select": "Select",
-      "chat": "Chat"
+      "chat": "Chat",
+      "service-list": "Все услуги",
+      "profile": "Профиль"
     }
   },
   "main-page": {

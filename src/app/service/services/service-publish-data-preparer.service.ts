@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ProfessionalLocation, ProfessionalSchedule, Service, ServicePhoto, ServiceSchedule } from '@app/api/models';
+import {
+  Price,
+  ProfessionalLocation,
+  ProfessionalSchedule,
+  Service,
+  ServiceLocation,
+  ServicePhoto,
+  ServiceSchedule,
+} from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { fileToBase64 } from '@app/core/functions/media.functions';
-import { removeNullProperties } from '@app/core/functions/object.functions';
 import { PaymentMethods } from '@app/service/enums/payment-methods';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepOneDataInterface } from '@app/service/interfaces/step-one-data-interface';
@@ -11,8 +18,6 @@ import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-
 import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-interface';
 import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-interface';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
-import { Price } from '@app/service/models/price';
-import { ServiceLocation } from '@app/service/models/service-location';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import ServicePublishData from '../interfaces/service-publish-data.interface';
 
@@ -60,14 +65,12 @@ export class ServicePublishDataPreparerService {
   private getService(): Omit<Service, 'professional'> {
     const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-    const service = {
+    return {
       ...stepTwoData,
       is_base_schedule: stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule,
       is_auto_order_confirmation: stepSevenData.is_auto_order_confirmation ?? false,
       is_enabled: true, // always create already published service; the owner can un-publish it later
     };
-
-    return removeNullProperties(service);
   }
 
   private getNewMaster(): ProfessionalList {
@@ -106,31 +109,27 @@ export class ServicePublishDataPreparerService {
   }
 
   private getServiceLocation(): ServiceLocation {
-    const location = new ServiceLocation();
     const stepData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
-    location.max_distance = stepData?.max_distance;
-
-    return removeNullProperties(location);
+    return {
+      service: NaN,
+      max_distance: stepData?.max_distance,
+    };
   }
 
   private getServicePrice(): Price {
-    let price = new Price();
-    price.payment_methods = [];
+    const paymentMethods = [];
     const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
     if (stepSevenData.payment_cash) {
-      price.payment_methods.push(PaymentMethods.Cash);
+      paymentMethods.push(PaymentMethods.Cash);
     }
     if (stepSevenData.payment_online) {
-      price.payment_methods.push(PaymentMethods.Online);
+      paymentMethods.push(PaymentMethods.Online);
     }
-    price = {
-      ...price,
+    return {
       ...stepTwoData.price,
-      payment_methods: price.payment_methods,
+      payment_methods: paymentMethods,
     };
-
-    return removeNullProperties(price);
   }
 
   private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {

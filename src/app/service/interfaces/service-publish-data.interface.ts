@@ -1,9 +1,13 @@
-import { ProfessionalLocation, ServiceList, ServicePhoto } from '@app/api/models';
+import {
+  Price,
+  ProfessionalLocation,
+  ServiceList,
+  ServiceLocation,
+  ServicePhoto,
+  ServiceSchedule,
+} from '@app/api/models';
 import { ProfessionalList } from '@app/api/models/professional-list';
-import { MasterSchedule } from '@app/master/models/master-schedule';
-import { Price } from '@app/service/models/price';
-import { ServiceLocation } from '@app/service/models/service-location';
-import { ServiceSchedule } from '@app/service/models/service-schedule';
+import { MasterSchedule } from '@app/professional/models/master-schedule';
 
 export default interface ServicePublishData {
   master: ProfessionalList;

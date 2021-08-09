@@ -1,6 +1,11 @@
 <ion-item [color]="transparent ? '' : 'light'" [lines]="transparent ? 'none' : 'full'">
   <ion-buttons slot="start">
-    <ion-button id="backButton" (click)="back()" routerDirection="back" slot="start">
+    <ion-button
+      *ngIf="backButtonLink"
+      [routerLink]="backButtonLink"
+      [queryParams]="backButtonParams"
+      routerDirection="back"
+    >
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
   </ion-buttons>

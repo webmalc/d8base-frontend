@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { professionalLevels } from '@app/core/constants/professional.constants';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache } from '@app/core/services/cache/countries-api-cache.service';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
@@ -14,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 export class SearchFiltersAdditionalTabComponent implements OnInit {
   public readonly languages$ = this.languagesApiCache.list();
 
-  public readonly professionalLevels: { value: string; name: string }[] = ['junior', 'middle', 'senior'].map(value => ({
+  public readonly professionalLevels: { value: string; name: string }[] = professionalLevels.map(value => ({
     value,
     name: this.translate.instant(`global.professional-level.${value}`),
   }));

@@ -7,7 +7,7 @@ import {
   getTimeStringFromMinutes,
   stripTime,
 } from '@app/core/functions/datetime.functions';
-import { MasterCalendar } from '@app/master/models/master-calendar';
+import { MasterCalendar } from '@app/professional/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
 import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
 import { environment } from '@env/environment';
