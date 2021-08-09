@@ -5,11 +5,10 @@ import { AccountsService } from '@app/api/services';
 import { getOffsetDate } from '@app/core/functions/datetime.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
-import { MasterScheduleApiService } from '@app/core/services/api/master-schedule-api.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
-import { BehaviorSubject, concat, Observable } from 'rxjs';
+import { BehaviorSubject, concat, forkJoin, Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -31,7 +30,6 @@ export class MasterProfileCalendarComponent implements OnInit {
 
   constructor(
     private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
-    private readonly scheduleApi: MasterScheduleApiService,
     private readonly api: AccountsService,
   ) {
     this.enabledPeriods$ = this.periods.asObservable();
@@ -51,9 +49,13 @@ export class MasterProfileCalendarComponent implements OnInit {
 
   public updateSchedule(masterId: number): void {
     const newSchedules: AbstractSchedule[] = this.scheduleEditor.value ?? [];
-    const deleteOld$ = this.schedule$.pipe(switchMap(oldSchedules => this.scheduleApi.deleteList(oldSchedules)));
+    const deleteOld$ = this.schedule$.pipe(
+      switchMap(oldSchedules =>
+        forkJoin(oldSchedules.map(schedule => this.api.accountsProfessionalScheduleDelete(schedule.id))),
+      ),
+    );
 
-    const createNew$ = this.scheduleApi.createSet(
+    const createNew$ = this.api.accountsProfessionalScheduleSet(
       newSchedules.map(schedule => ({
         ...schedule,
         professional: masterId,

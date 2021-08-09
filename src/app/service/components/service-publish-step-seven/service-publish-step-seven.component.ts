@@ -1,16 +1,17 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
 import { defaultSchedule } from '@app/core/constants/schedule.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { ScheduleUnion } from '@app/core/models/schedule-union';
+import { MasterLocationApiService } from '@app/core/services/api/master-location-api.service';
+import { UserSettingsService } from '@app/core/services/facades/user-settings.service';
 import { LocationService } from '@app/core/services/location/location.service';
 import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import { MasterLocation } from '@app/professional/models/master-location';
-import { MasterLocationApiService } from '@app/core/services/api/master-location-api.service';
-import { MasterScheduleApiService } from '@app/core/services/api/master-schedule-api.service';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
@@ -18,7 +19,6 @@ import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-inte
 import { ServicePublishAuthStateManagerService } from '@app/service/services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
-import { UserSettingsService } from '@app/core/services/facades/user-settings.service';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
@@ -48,7 +48,7 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
     public readonly serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly formBuilder: FormBuilder,
     private readonly authStateManager: ServicePublishAuthStateManagerService,
-    private readonly masterScheduleApi: MasterScheduleApiService,
+    private readonly api: AccountsService,
     private readonly masterManager: MasterManagerService,
     private readonly userSetting: UserSettingsService,
     private readonly extendedLocation: LocationService,
@@ -242,7 +242,7 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
       .getMasterList()
       .pipe(
         switchMap(list =>
-          list.length > 0 ? this.masterScheduleApi.get({ professional: list[0].id.toString() }) : of(null),
+          list.length > 0 ? this.api.accountsProfessionalScheduleList({ professional: list[0].id }) : of(null),
         ),
         map((response: ApiListResponseInterface<ProfessionalSchedule>) => response?.results),
       )

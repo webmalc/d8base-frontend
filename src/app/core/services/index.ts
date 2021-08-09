@@ -22,6 +22,5 @@ export * from './storage-manager.service';
 export * from './api/api-client.service';
 export * from './api/is-user-registered-api.service';
 export * from './api/master-location-api.service';
-export * from './api/master-schedule-api.service';
 
 export * from './contacts-merge-to-default.service';

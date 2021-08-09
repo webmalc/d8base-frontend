@@ -33,7 +33,6 @@ import {
   SearchFilterStateConverter,
   ContactsMergeToDefaultService,
   MasterLocationApiService,
-  MasterScheduleApiService,
   StorageManagerService,
 } from '@app/core/services';
 import {
@@ -102,7 +101,6 @@ import { environment } from '@env/environment';
     ApiClientService,
     IsUserRegisteredApiService,
     MasterLocationApiService,
-    MasterScheduleApiService,
 
     CategoriesApiCache,
     CitiesApiCache,
