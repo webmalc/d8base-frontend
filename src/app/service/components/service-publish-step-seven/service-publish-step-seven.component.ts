@@ -1,17 +1,15 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models';
+import { ProfessionalLocation, ProfessionalSchedule, ServiceList, UserLocation } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { defaultSchedule } from '@app/core/constants/schedule.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ApiListResponseInterface } from '@app/core/interfaces/api-list-response.interface';
 import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
+import { PaginatedResult } from '@app/core/interfaces/paginated-result.interface';
 import { ScheduleUnion } from '@app/core/models/schedule-union';
-import { MasterLocationApiService } from '@app/core/services/api/master-location-api.service';
 import { UserSettingsService } from '@app/core/services/facades/user-settings.service';
-import { LocationService } from '@app/core/services/location/location.service';
 import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
-import { MasterLocation } from '@app/professional/models/master-location';
 import { ServicePublishStepSevenFormFields } from '@app/service/enums/service-publish-step-seven-form-fields';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
 import { StepSevenDataInterface } from '@app/service/interfaces/step-seven-data-interface';
@@ -32,7 +30,7 @@ import { first, map, switchMap } from 'rxjs/operators';
 export class ServicePublishStepSevenComponent implements IonViewDidEnter {
   public form: FormGroup;
   public formFields = ServicePublishStepSevenFormFields;
-  public defaultLocationList: MasterLocation[];
+  public defaultLocationList: ProfessionalLocation[];
   public selectedSchedules: ScheduleUnion[];
   public units: string[] = ['km', 'ml'];
   public masterExists: boolean;
@@ -51,8 +49,6 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
     private readonly api: AccountsService,
     private readonly masterManager: MasterManagerService,
     private readonly userSetting: UserSettingsService,
-    private readonly extendedLocation: LocationService,
-    private readonly masterLocation: MasterLocationApiService,
     private readonly cd: ChangeDetectorRef,
   ) {
     this.init();
@@ -197,12 +193,15 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
       .getMasterList()
       .pipe(
         switchMap(list =>
-          list.length > 0 ? this.extendedLocation.getList<MasterLocation>(this.masterLocation) : of(null),
+          list.length > 0
+            ? this.api.accountsProfessionalLocationsList({})
+            : of<PaginatedResult<ProfessionalLocation>>(null),
         ),
       )
-      .subscribe((res: MasterLocation[]) => {
-        if (res && res.length > 0) {
-          const defaultLocations = this.getCorrectLocations(res);
+      .subscribe(response => {
+        const results = response?.results;
+        if (results && results.length > 0) {
+          const defaultLocations = this.getCorrectLocations(results);
           if (defaultLocations.length > 0) {
             this.defaultLocationList = defaultLocations;
           }
@@ -210,18 +209,11 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
       });
   }
 
-  private getCorrectLocations(locations: MasterLocation[]): MasterLocation[] {
-    const ret: MasterLocation[] = [];
-    locations.forEach(loc => {
-      if (this.checkDefaultLocation(loc)) {
-        ret.push(loc);
-      }
-    });
-
-    return ret;
+  private getCorrectLocations(locations: ProfessionalLocation[]): ProfessionalLocation[] {
+    return locations.filter(loc => this.checkDefaultLocation(loc));
   }
 
-  private checkDefaultLocation(loc: MasterLocation): boolean {
+  private checkDefaultLocation(loc: ProfessionalLocation): boolean {
     if (loc.country && loc.city) {
       const stepTwo = this.servicePublishDataHolderService.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
 
