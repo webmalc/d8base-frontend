@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
 import { getNoAvatarLink } from '@app/core/functions/media.functions';
-import { getProfessionalProfileUrl } from '@app/core/functions/navigation.functions';
+import { getProfessionalProfileUrl, getProfessionalReviewsUrl } from '@app/core/functions/navigation.functions';
 import { declination } from '@app/core/functions/string.functions';
 
 @Component({
@@ -21,7 +21,11 @@ export class ProfessionalCardComponent {
   }
 
   public get professionalProfileUrl(): string {
-    return getProfessionalProfileUrl(this.professional?.id) ?? '';
+    return getProfessionalProfileUrl(this.professional?.id);
+  }
+
+  public get professionalReviewsUrl(): string {
+    return getProfessionalReviewsUrl(this.professional?.id);
   }
 
   public declineReviews(num: number): string {

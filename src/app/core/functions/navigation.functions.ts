@@ -25,6 +25,18 @@ export function getLastChild(route: ActivatedRoute): ActivatedRoute {
   return child;
 }
 
-export function getProfessionalProfileUrl(professionalId: number | string) {
-  return `/${Path.Professional}/${professionalId}/profile`;
+export function getProfessionalProfileUrl(professionalId: number | string): string {
+  return professionalId ? `/${Path.Professional}/${professionalId}/profile` : '';
+}
+
+export function getProfessionalServicesUrl(professionalId: number | string): string {
+  return professionalId ? `/${Path.Professional}/${professionalId}/services` : '';
+}
+
+export function getProfessionalReviewsUrl(professionalId: number | string): string {
+  return professionalId ? `/${Path.Reviews}/${professionalId}` : '';
+}
+
+export function getUserChatUrl(userId: number | string): string {
+  return userId ? `/${Path.Message}/chat/${userId}` : '';
 }
