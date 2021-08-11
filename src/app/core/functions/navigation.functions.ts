@@ -6,6 +6,7 @@ import {
   NavigationStart,
   RouterEvent,
 } from '@angular/router';
+import { Path } from '../constants/navigation.constants';
 
 export function isNavigationEvent(routerEvent: RouterEvent): boolean {
   return (
@@ -22,4 +23,8 @@ export function getLastChild(route: ActivatedRoute): ActivatedRoute {
     child = child.firstChild;
   }
   return child;
+}
+
+export function getProfessionalProfileUrl(professionalId: number | string) {
+  return `/${Path.Professional}/${professionalId}/profile`;
 }

@@ -5,9 +5,7 @@
   <div class="info">
     <div class="ion-padding-horizontal">
       <div class="title capitalize-first-letter">
-        <a [routerLink]="'/professional/' + professional.id">
-          {{ getName() }}
-        </a>
+        <a [routerLink]="professionalProfileUrl">{{ professionalName }}</a>
       </div>
       <div class="subtitle capitalize-first-letter">
         {{ professional.name }}

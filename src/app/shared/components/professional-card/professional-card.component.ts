@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
 import { getNoAvatarLink } from '@app/core/functions/media.functions';
+import { getProfessionalProfileUrl } from '@app/core/functions/navigation.functions';
 import { declination } from '@app/core/functions/string.functions';
 
 @Component({
@@ -14,9 +15,13 @@ export class ProfessionalCardComponent {
   public reviewsCount: number;
   public defaultAvatar = getNoAvatarLink();
 
-  public getName(): string {
+  public get professionalName(): string {
     const user = this.professional.user;
     return user ? `${user.first_name} ${user.last_name}` : '';
+  }
+
+  public get professionalProfileUrl(): string {
+    return getProfessionalProfileUrl(this.professional?.id) ?? '';
   }
 
   public declineReviews(num: number): string {
