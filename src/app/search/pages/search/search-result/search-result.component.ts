@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profile, Search, ServiceList } from '@app/api/models';
+import { getProfessionalServicesUrl, getUserChatUrl } from '@app/core/functions/navigation.functions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -18,6 +19,14 @@ export class SearchResultComponent {
 
   public get currentUrl(): string {
     return this.router.url;
+  }
+
+  public get professionalServicesUrl(): string {
+    return getProfessionalServicesUrl(this.data.professional?.id) ?? '';
+  }
+
+  public get professionalChatUrl(): string {
+    return getUserChatUrl(this.data.professional?.user.id) ?? '';
   }
 
   private isMoreServicesClicked: boolean = false;

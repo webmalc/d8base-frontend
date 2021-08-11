@@ -5,9 +5,7 @@
   <div class="info">
     <div class="ion-padding-horizontal">
       <div class="title capitalize-first-letter">
-        <a [routerLink]="'/professional/' + professional.id">
-          {{ getName() }}
-        </a>
+        <a [routerLink]="professionalProfileUrl">{{ professionalName }}</a>
       </div>
       <div class="subtitle capitalize-first-letter">
         {{ professional.name }}
@@ -16,7 +14,7 @@
     <div *ngIf="professional?.rating" class="ion-padding-start">
       <app-rating [rating]="professional.rating"></app-rating>
       <div class="reviews">
-        <a [routerLink]="'/reviews/' + professional?.id" (click)="$event.stopPropagation()">
+        <a [routerLink]="professionalReviewsUrl" (click)="$event.stopPropagation()">
           {{ professional?.reviews_count }} {{ declineReviews(professional?.reviews_count) | translate }}
         </a>
       </div>

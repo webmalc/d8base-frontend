@@ -26,19 +26,16 @@
       <ion-button
         size="medium"
         color="light"
-        [routerLink]="'/professional/' + data.professional.id + '/services/'"
+        [routerLink]="professionalServicesUrl"
         [queryParams]="{ redirectTo: currentUrl }"
       >
         {{ 'issuance.search-result.service-list' | translate }}
-      </ion-button>
-      <ion-button size="medium" color="light" [routerLink]="'/professional/' + data.professional.id + '/profile/'">
-        {{ 'issuance.search-result.profile' | translate }}
       </ion-button>
       <ion-button
         size="medium"
         color="light"
         [disabled]="(userId$ | async) === data.professional.user.id"
-        [routerLink]="'/message/chat/' + data.professional.user.id"
+        [routerLink]="professionalChatUrl"
       >
         {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
       </ion-button>
