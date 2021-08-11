@@ -6,7 +6,7 @@ import {
   NavigationStart,
   RouterEvent,
 } from '@angular/router';
-import { Path } from '../constants/navigation.constants';
+import { NavPath } from '../constants/navigation.constants';
 
 export function isNavigationEvent(routerEvent: RouterEvent): boolean {
   return (
@@ -26,25 +26,25 @@ export function getLastChild(route: ActivatedRoute): ActivatedRoute {
 }
 
 export function getProfessionalProfileUrl(professionalId: number | string): string {
-  return professionalId ? `/${Path.Professional}/${professionalId}/profile` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/profile` : '';
 }
 
 export function getNewProfessionalContactUrl(professionalId: number | string): string {
-  return professionalId ? `/${Path.Professional}/${professionalId}/profile/professional-contact-add` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/profile/professional-contact-add` : '';
 }
 
 export function getNewProfessionalLocationsUrl(professionalId: number | string): string {
-  return professionalId ? `/${Path.Professional}/${professionalId}/profile/location-add` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/profile/location-add` : '';
 }
 
 export function getProfessionalServicesUrl(professionalId: number | string): string {
-  return professionalId ? `/${Path.Professional}/${professionalId}/services` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/services` : '';
 }
 
 export function getProfessionalReviewsUrl(professionalId: number | string): string {
-  return professionalId ? `/${Path.Reviews}/${professionalId}` : '';
+  return professionalId ? `/${NavPath.Reviews}/${professionalId}` : '';
 }
 
 export function getUserChatUrl(userId: number | string): string {
-  return userId ? `/${Path.Message}/chat/${userId}` : '';
+  return userId ? `/${NavPath.Message}/chat/${userId}` : '';
 }

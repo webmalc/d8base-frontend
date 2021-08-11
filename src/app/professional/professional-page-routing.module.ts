@@ -23,6 +23,11 @@ const routes: Routes = [
     path: ':master-id',
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        canActivate: [ProfessionalGuard],
+      },
+      {
         path: 'services',
         component: ServiceListPageComponent,
         pathMatch: 'full',
