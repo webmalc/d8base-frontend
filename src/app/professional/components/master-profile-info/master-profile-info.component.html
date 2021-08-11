@@ -37,7 +37,7 @@
     <app-contacts-edit
       *appIfSpinner="contactsWithDefault$ | ifSpinnerErrorState | async as contacts"
       [contacts]="contacts"
-      addNewContactUrl="{{ addUrl }}"
+      [addNewContactUrl]="getNewContactUrl(context.professional.id)"
       editContactUrl="{{ editUrl }}"
       editDefaultContactUrl="{{ editDefaultUrl }}"
     ></app-contacts-edit>
@@ -57,7 +57,9 @@
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
       </ion-item>
-      <app-add-button routerLink="location-add/">{{ 'list-item.add-new-address' | translate }}</app-add-button>
+      <app-add-button [routerLink]="getNewLocationUrl(context.professional.id)">{{
+        'list-item.add-new-address' | translate
+      }}</app-add-button>
     </ion-list>
     <ng-template #viewLocations>
       <ion-item *ngFor="let location of context.professional.locations" lines="none">

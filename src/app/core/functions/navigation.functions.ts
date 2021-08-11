@@ -29,6 +29,14 @@ export function getProfessionalProfileUrl(professionalId: number | string): stri
   return professionalId ? `/${Path.Professional}/${professionalId}/profile` : '';
 }
 
+export function getNewProfessionalContactUrl(professionalId: number | string): string {
+  return professionalId ? `/${Path.Professional}/${professionalId}/profile/professional-contact-add` : '';
+}
+
+export function getNewProfessionalLocationsUrl(professionalId: number | string): string {
+  return professionalId ? `/${Path.Professional}/${professionalId}/profile/location-add` : '';
+}
+
 export function getProfessionalServicesUrl(professionalId: number | string): string {
   return professionalId ? `/${Path.Professional}/${professionalId}/services` : '';
 }

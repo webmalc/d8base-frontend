@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
+import { getNewProfessionalContactUrl, getNewProfessionalLocationsUrl } from '@app/core/functions/navigation.functions';
 import { declination } from '@app/core/functions/string.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
@@ -37,7 +38,6 @@ export class MasterProfileInfoComponent {
   public locations$: Observable<{ id: number; text: string }[]>;
   public readonly editDefaultUrl = 'professional-contact-add-default/';
   public readonly editUrl = 'professional-contact-edit/';
-  public readonly addUrl = 'professional-contact-add/';
   public readonly reviews$: Observable<ReviewList[]>;
   public readonly reviewsCount$: Observable<number>;
 
@@ -71,6 +71,14 @@ export class MasterProfileInfoComponent {
     this.reviewsCount$ = reviews$.pipe(map(({ count }) => count));
 
     this.initContactsWithDefault();
+  }
+
+  public getNewContactUrl(professionalId: number): string {
+    return getNewProfessionalContactUrl(professionalId);
+  }
+
+  public getNewLocationUrl(professionalId: number): string {
+    return getNewProfessionalLocationsUrl(professionalId);
   }
 
   public declinationYears(num: number): string {
