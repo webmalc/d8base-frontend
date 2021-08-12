@@ -1,7 +1,39 @@
-.footer-copy {
-  font-size: 12px;
+:host {
+  display: block;
 }
 
-.footer-min-height {
-  --min-height: 2.8rem;
+#backdrop-grid {
+  display: grid;
+  grid-template-columns: 5vw 60px auto min-content 5vw;
+  grid-template-rows: 3.5rem;
+  background-color: var(--ion-color-secondary);
+}
+
+#logo {
+  place-self: center;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#motto {
+  align-self: center;
+  grid-column: 4;
+  grid-row: 1;
+  white-space: nowrap;
+  font-size: 1.2rem;
+  color: var(--ion-color-secondary-contrast);
+}
+
+#transparent-grid {
+  display: grid;
+  grid-template-columns: 5vw min-content auto min-content 5vw;
+  grid-template-rows: 3.5rem;
+  align-items: center;
+}
+
+#copyright {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  grid-column-start: 2;
+  grid-column-end: 6;
 }

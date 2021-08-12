@@ -1,18 +1,18 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { FooterComponent } from './footer.component';
 
-describe('AppFooterComponent', () => {
+describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         declarations: [FooterComponent],
-        imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(FooterComponent);
