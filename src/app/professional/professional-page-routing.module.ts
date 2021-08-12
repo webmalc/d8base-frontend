@@ -31,6 +31,9 @@ const routes: Routes = [
         path: 'services',
         component: ServiceListPageComponent,
         pathMatch: 'full',
+        resolve: {
+          context: ProfessionalResolver,
+        },
       },
       {
         path: 'profile',
