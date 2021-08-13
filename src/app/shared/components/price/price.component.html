@@ -1,12 +1,8 @@
-<span *ngIf="price?.is_price_fixed && price?.price">
-  <b>
-    {{ price.price | currency: price.price_currency:'symbol-narrow' }}
-  </b>
+<span *ngIf="price?.is_price_fixed && price?.price" class="price">
+  {{ price.price | currency: price.price_currency:'symbol-narrow':'1.0-2' }}
 </span>
 
-<span *ngIf="!price?.is_price_fixed && price?.start_price && price?.end_price">
-  <b>
-    {{ price.start_price | currency: price.start_price_currency:'symbol-narrow' }}&nbsp;—
-    {{ price.end_price | currency: price.end_price_currency:'' }}
-  </b>
+<span *ngIf="!price?.is_price_fixed && price?.start_price && price?.end_price" class="price">
+  {{ price.start_price | currency: price.start_price_currency:'symbol-narrow' }}&nbsp;—
+  {{ price.end_price | currency: price.end_price_currency:'' }}
 </span>
