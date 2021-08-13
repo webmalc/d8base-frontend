@@ -7,12 +7,13 @@ import ProfessionalPageSelectors from '@app/store/professional-page/professional
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ProfessionalPhotosEditorService } from './services/professional-photos-editor.service';
 
 @Component({
   selector: 'app-professional-page',
   templateUrl: './professional-page.component.html',
   styleUrls: ['./professional-page.component.scss'],
-  providers: [NgDestroyService],
+  providers: [NgDestroyService, ProfessionalPhotosEditorService],
 })
 export class ProfessionalPageComponent {
   public defaultTab: string = MasterProfileSubmenu.Info;

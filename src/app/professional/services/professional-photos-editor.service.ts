@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ProfessionalPhotoList } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
 import { acceptedMimeTypes } from '@app/core/constants/image.constants';
@@ -10,13 +10,8 @@ import { Select } from '@ngxs/store';
 import { BehaviorSubject, forkJoin, from, Observable } from 'rxjs';
 import { concatMap, finalize, first, map, switchMap, takeUntil } from 'rxjs/operators';
 
-@Component({
-  selector: 'app-master-profile-portfolio',
-  templateUrl: './master-profile-portfolio.component.html',
-  styleUrls: ['./master-profile-portfolio.component.scss'],
-  providers: [NgDestroyService],
-})
-export class MasterProfilePortfolioComponent implements OnInit {
+@Injectable()
+export class ProfessionalPhotosEditorService {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
@@ -38,12 +33,7 @@ export class MasterProfilePortfolioComponent implements OnInit {
       ),
       map(data => data.results),
     );
-  }
-
-  public ngOnInit(): void {
-    this.masterPhotos$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(photosToAdd => {
-      this.addPhotos(photosToAdd);
-    });
+    this.subscribeToMasterPhotos();
   }
 
   public removeImage(photoId: number): void {
@@ -52,13 +42,7 @@ export class MasterProfilePortfolioComponent implements OnInit {
     });
   }
 
-  public addImages(event: Event): void {
-    const eventTarget = event.target as HTMLInputElement;
-    const fileList: FileList = eventTarget.files;
-    if (!fileList?.length) {
-      return;
-    }
-    const files = Array.from(fileList);
+  public addImages(files: File[]): void {
     this.pending$.next(true);
     this.context$
       .pipe(
@@ -82,6 +66,12 @@ export class MasterProfilePortfolioComponent implements OnInit {
       .subscribe(photosToAdd => {
         this.addPhotos(photosToAdd);
       });
+  }
+
+  private subscribeToMasterPhotos(): void {
+    this.masterPhotos$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(photosToAdd => {
+      this.addPhotos(photosToAdd);
+    });
   }
 
   private addPhotos(photosToAdd: ProfessionalPhotoList[]): void {

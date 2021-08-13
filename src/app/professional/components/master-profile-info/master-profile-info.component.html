@@ -30,6 +30,28 @@
     </ng-template>
   </section>
 
+  <ng-container *appIfSpinner="photos$ | async as photos">
+    <section *ngIf="context.canEdit || photos?.length">
+      <app-section-heading>
+        {{ 'master-profile.info.portfolio' | translate }}
+      </app-section-heading>
+      <app-image-carousel
+        class="ion-margin-vertical"
+        [photos]="photos"
+        [editable]="context.canEdit"
+        (add)="addPhotos($event)"
+        (remove)="removePhoto($event)"
+      ></app-image-carousel>
+    </section>
+  </ng-container>
+
+  <ng-template #viewContacts>
+    <app-contacts-view
+      *ngIf="context.professional.contacts?.length"
+      [contacts]="context.professional.contacts"
+    ></app-contacts-view>
+  </ng-template>
+
   <section *ngIf="context.canEdit; else viewContacts">
     <app-section-heading>
       {{ 'master-profile.info.contacts' | translate }}

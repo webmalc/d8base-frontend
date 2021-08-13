@@ -6,7 +6,6 @@ import { EducationComponent } from '@app/professional/components/education/educa
 import { ExperienceComponent } from '@app/professional/components/experience/experience.component';
 import { MasterProfileCalendarComponent } from '@app/professional/components/master-profile-calendar/master-profile-calendar.component';
 import { MasterProfileInfoComponent } from '@app/professional/components/master-profile-info/master-profile-info.component';
-import { MasterProfilePortfolioComponent } from '@app/professional/components/master-profile-portfolio/master-profile-portfolio.component';
 import { MasterProfileServicesComponent } from '@app/professional/components/master-profile-services/master-profile-services.component';
 import { MasterProfileSubmenuComponent } from '@app/professional/components/master-profile-submenu/master-profile-submenu.component';
 import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
@@ -30,6 +29,7 @@ import { MasterPageRoutingModule } from './professional-page-routing.module';
 import { ProfessionalPageComponent } from './professional-page.component';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalResolver } from './professional.resolver';
+import { ProfessionalPhotosEditorService } from './services/professional-photos-editor.service';
 
 @NgModule({
   imports: [
@@ -48,7 +48,6 @@ import { ProfessionalResolver } from './professional.resolver';
     MasterProfileInfoComponent,
     MasterProfileServicesComponent,
     MasterProfileCalendarComponent,
-    MasterProfilePortfolioComponent,
     MasterProfileMainInfoSectionComponent,
     ServiceViewerComponent,
     MasterProfileServiceEditComponent,
