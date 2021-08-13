@@ -13,7 +13,7 @@
         </ion-label>
         <ion-label slot="end" class="ion-text-end">
           <a [routerLink]="['/reviews', context.professional.id]">
-            {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
+            {{ reviewsCount | asReviews }}
           </a>
         </ion-label>
       </ion-item>
@@ -29,6 +29,28 @@
       </ion-item>
     </ng-template>
   </section>
+
+  <ng-container *appIfSpinner="photos$ | async as photos">
+    <section *ngIf="context.canEdit || photos?.length">
+      <app-section-heading>
+        {{ 'master-profile.info.portfolio' | translate }}
+      </app-section-heading>
+      <app-image-carousel
+        class="ion-margin-vertical"
+        [photos]="photos"
+        [editable]="context.canEdit"
+        (add)="addPhotos($event)"
+        (remove)="removePhoto($event)"
+      ></app-image-carousel>
+    </section>
+  </ng-container>
+
+  <ng-template #viewContacts>
+    <app-contacts-view
+      *ngIf="context.professional.contacts?.length"
+      [contacts]="context.professional.contacts"
+    ></app-contacts-view>
+  </ng-template>
 
   <section *ngIf="context.canEdit; else viewContacts">
     <app-section-heading>
@@ -89,7 +111,7 @@
           {{ 'master-profile.info.professional-experience' | translate }}
         </ion-label>
         <ion-text>
-          {{ context.professional.experience }} {{ declinationYears(context.professional.experience) | translate }}
+          {{ context.professional.experience | asYears }}
         </ion-text>
       </ion-item>
       <ion-item *ngIf="context.professional.level">
@@ -128,8 +150,7 @@
           {{ 'master-profile.info.age' | translate }}
         </ion-label>
         <ion-text>
-          {{ getYearsFromBirthday(context.user.birthday) }}
-          {{ declinationYears(getYearsFromBirthday(context.user.birthday)) | translate }}
+          {{ getYearsFromBirthday(context.user.birthday) | asYears }}
         </ion-text>
       </ion-item>
       <ion-item *ngIf="context.user.nationality">
@@ -140,20 +161,23 @@
           {{ context.user.nationality.name }}
         </ion-text>
       </ion-item>
+      <ion-item *ngIf="context.user.languages?.length">
+        <ion-label>
+          {{ 'master-profile.info.languages' | translate }}
+        </ion-label>
+        <ion-text>
+          <ng-container *ngFor="let language of context.user.languages; let isLast = last">
+            <app-language [language]="language" [inline]="true"></app-language>
+            <span *ngIf="!isLast">, </span>
+          </ng-container>
+        </ion-text>
+      </ion-item>
       <ng-container
-        *ngIf="!context.user.gender && !context.user.birthday && !context.user.nationality"
+        *ngIf="
+          !context.user.gender && !context.user.birthday && !context.user.nationality && !context.user.languages?.length
+        "
         [ngTemplateOutlet]="noData"
       ></ng-container>
-    </ion-list>
-
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>
-          <h1>{{ 'master-profile.info.languages' | translate }}</h1>
-        </ion-label>
-      </ion-list-header>
-      <app-language *ngFor="let language of context.user.languages" [language]="language"></app-language>
-      <ng-container *ngIf="!context.user.languages.length" [ngTemplateOutlet]="noData"></ng-container>
     </ion-list>
   </app-collapse-item>
 

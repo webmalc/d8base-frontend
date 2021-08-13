@@ -1,4 +1,7 @@
-<ion-item lines="none">
+<ion-item lines="none" *ngIf="!inline; else inline">
   <ion-icon name="checkbox-outline" color="secondary" slot="start"></ion-icon>
   <ion-label>{{ languageName }}</ion-label>
 </ion-item>
+<ng-template #inline>
+  <span>{{ languageName }}</span>
+</ng-template>

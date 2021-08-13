@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
 import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { getProfessionalProfileUrl, getProfessionalReviewsUrl } from '@app/core/functions/navigation.functions';
-import { declination } from '@app/core/functions/string.functions';
 
 @Component({
   selector: 'app-professional-card',
@@ -26,9 +25,5 @@ export class ProfessionalCardComponent {
 
   public get professionalReviewsUrl(): string {
     return getProfessionalReviewsUrl(this.professional?.id);
-  }
-
-  public declineReviews(num: number): string {
-    return declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
   }
 }

@@ -49,7 +49,6 @@
           <ng-container [ngSwitch]="tab$ | async">
             <app-master-profile-info *ngSwitchCase="menu.Info"></app-master-profile-info>
             <app-master-profile-calendar *ngSwitchCase="menu.Calendar"></app-master-profile-calendar>
-            <app-master-profile-portfolio *ngSwitchCase="menu.Portfolio"></app-master-profile-portfolio>
           </ng-container>
         </ion-col>
       </ion-row>

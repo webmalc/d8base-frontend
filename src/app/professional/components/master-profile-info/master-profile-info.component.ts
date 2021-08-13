@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ReviewList } from '@app/api/models';
+import { ProfessionalPhotoList, ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
 import { getNewProfessionalContactUrl, getNewProfessionalLocationsUrl } from '@app/core/functions/navigation.functions';
-import { declination } from '@app/core/functions/string.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { LocationResolverService } from '@app/core/services/location/location-resolver.service';
+import { ProfessionalPhotosEditorService } from '@app/professional/services/professional-photos-editor.service';
 import ProfessionalContactSelectors from '@app/store/professional-page/professional-contacts/professional-contacts.selectors';
 import { ProfessionalContactStateModel } from '@app/store/professional-page/professional-contacts/professional-contacts.state';
 import ProfessionalLocationSelectors from '@app/store/professional-page/professional-locations/professional-locations.selectors';
@@ -15,7 +15,7 @@ import ProfessionalPageStateModel from '@app/store/professional-page/professiona
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
 import { forkJoin, Observable } from 'rxjs';
-import { filter, map, share, switchMap } from 'rxjs/operators';
+import { filter, first, map, share, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-profile-info',
@@ -45,6 +45,7 @@ export class MasterProfileInfoComponent {
     private readonly fullLocationService: LocationResolverService,
     private readonly communicationService: CommunicationService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
+    private readonly professionalPhotosEditor: ProfessionalPhotosEditorService,
   ) {
     this.contextFiltered$ = this.context$.pipe(
       filter(context => Boolean(context?.professional) && Boolean(context?.user)),
@@ -73,6 +74,21 @@ export class MasterProfileInfoComponent {
     this.initContactsWithDefault();
   }
 
+  public get photos$(): Observable<ProfessionalPhotoList[]> {
+    return this.professionalPhotosEditor.photos$;
+  }
+
+  public addPhotos(files: File[]) {
+    if (!files?.length) {
+      return;
+    }
+    this.professionalPhotosEditor.addImages(files);
+  }
+
+  public removePhoto(index: number) {
+    this.photos$.pipe(first()).subscribe(photos => this.professionalPhotosEditor.removeImage(photos[index].id));
+  }
+
   public getNewContactUrl(professionalId: number): string {
     return getNewProfessionalContactUrl(professionalId);
   }
@@ -81,16 +97,8 @@ export class MasterProfileInfoComponent {
     return getNewProfessionalLocationsUrl(professionalId);
   }
 
-  public declinationYears(num: number): string {
-    return declination(num, ['declination.years.1', 'declination.years.2', 'declination.years.3']);
-  }
-
   public getYearsFromBirthday(birthday: string): number {
     return calculateAge(birthday);
-  }
-
-  public declineReviews(num: number): string {
-    return declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
   }
 
   private initContactsWithDefault(): void {
