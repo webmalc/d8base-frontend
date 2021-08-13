@@ -139,20 +139,23 @@
           {{ context.user.nationality.name }}
         </ion-text>
       </ion-item>
+      <ion-item *ngIf="context.user.languages?.length">
+        <ion-label>
+          {{ 'master-profile.info.languages' | translate }}
+        </ion-label>
+        <ion-text>
+          <ng-container *ngFor="let language of context.user.languages; let isLast = last">
+            <app-language [language]="language" [inline]="true"></app-language>
+            <span *ngIf="!isLast">, </span>
+          </ng-container>
+        </ion-text>
+      </ion-item>
       <ng-container
-        *ngIf="!context.user.gender && !context.user.birthday && !context.user.nationality"
+        *ngIf="
+          !context.user.gender && !context.user.birthday && !context.user.nationality && !context.user.languages?.length
+        "
         [ngTemplateOutlet]="noData"
       ></ng-container>
-    </ion-list>
-
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>
-          <h1>{{ 'master-profile.info.languages' | translate }}</h1>
-        </ion-label>
-      </ion-list-header>
-      <app-language *ngFor="let language of context.user.languages" [language]="language"></app-language>
-      <ng-container *ngIf="!context.user.languages.length" [ngTemplateOutlet]="noData"></ng-container>
     </ion-list>
   </app-collapse-item>
 

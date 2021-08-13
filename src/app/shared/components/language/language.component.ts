@@ -10,6 +10,9 @@ import { LanguagesApiCache, UserLanguagesApiCache } from '@app/core/services/cac
 export class LanguageComponent {
   public languageName;
 
+  @Input()
+  public inline: boolean;
+
   constructor(
     private readonly userLanguagesApiCache: UserLanguagesApiCache,
     private readonly languagesApiCache: LanguagesApiCache,
