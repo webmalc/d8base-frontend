@@ -3,7 +3,6 @@ import { ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
 import { getNewProfessionalContactUrl, getNewProfessionalLocationsUrl } from '@app/core/functions/navigation.functions';
-import { declination } from '@app/core/functions/string.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { LocationResolverService } from '@app/core/services/location/location-resolver.service';
@@ -81,16 +80,8 @@ export class MasterProfileInfoComponent {
     return getNewProfessionalLocationsUrl(professionalId);
   }
 
-  public declinationYears(num: number): string {
-    return declination(num, ['declination.years.1', 'declination.years.2', 'declination.years.3']);
-  }
-
   public getYearsFromBirthday(birthday: string): number {
     return calculateAge(birthday);
-  }
-
-  public declineReviews(num: number): string {
-    return declination(num, ['declination.reviews.1', 'declination.reviews.2', 'declination.reviews.3']);
   }
 
   private initContactsWithDefault(): void {

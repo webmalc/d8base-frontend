@@ -79,6 +79,8 @@ import {
   SubstringFilterPipe,
   CategoryByIdPipe,
   SubcategoryByIdPipe,
+  AsYearsPipe,
+  AsReviewsPipe,
 } from '@app/shared/pipes';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
@@ -191,6 +193,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     FullPriceControlComponent,
     ImagesControlComponent,
     SectionHeadingComponent,
+    AsYearsPipe,
+    AsReviewsPipe,
   ],
   exports: [
     IfSpinnerModule,
@@ -272,6 +276,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     FullPriceControlComponent,
     ImagesControlComponent,
     SectionHeadingComponent,
+    AsYearsPipe,
+    AsReviewsPipe,
   ],
   imports: [
     CommonModule,

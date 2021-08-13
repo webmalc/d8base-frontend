@@ -6,3 +6,5 @@ export * from './substring-filter.pipe';
 export * from './city-by-id.pipe';
 export * from './category-by-id.pipe';
 export * from './subcategory-by-id.pipe';
+export * from './as-reviews.pipe';
+export * from './as-years.pipe';

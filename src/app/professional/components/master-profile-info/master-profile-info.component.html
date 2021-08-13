@@ -13,7 +13,7 @@
         </ion-label>
         <ion-label slot="end" class="ion-text-end">
           <a [routerLink]="['/reviews', context.professional.id]">
-            {{ reviewsCount }} {{ declineReviews(reviewsCount) | translate }}
+            {{ reviewsCount | asReviews }}
           </a>
         </ion-label>
       </ion-item>
@@ -89,7 +89,7 @@
           {{ 'master-profile.info.professional-experience' | translate }}
         </ion-label>
         <ion-text>
-          {{ context.professional.experience }} {{ declinationYears(context.professional.experience) | translate }}
+          {{ context.professional.experience | asYears }}
         </ion-text>
       </ion-item>
       <ion-item *ngIf="context.professional.level">
@@ -128,8 +128,7 @@
           {{ 'master-profile.info.age' | translate }}
         </ion-label>
         <ion-text>
-          {{ getYearsFromBirthday(context.user.birthday) }}
-          {{ declinationYears(getYearsFromBirthday(context.user.birthday)) | translate }}
+          {{ getYearsFromBirthday(context.user.birthday) | asYears }}
         </ion-text>
       </ion-item>
       <ion-item *ngIf="context.user.nationality">
