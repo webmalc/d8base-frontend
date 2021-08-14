@@ -92,6 +92,7 @@
     "profile": "Profile",
     "master-profile": "Professional profile",
     "master-services": "My services",
+    "master-calendar": "My schedule",
     "logout": "Logout",
     "download": "Download application",
     "become-master": "Become professional",
@@ -512,6 +513,7 @@
       }
     },
     "info": {
+      "title": "Professional's profile",
       "information": "Information",
       "master-location": "Professional address",
       "portfolio": "Photos",

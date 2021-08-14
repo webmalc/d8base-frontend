@@ -1,0 +1,37 @@
+<app-header></app-header>
+<ion-content>
+  <app-content-wrapper *ngIf="context$ | async as context">
+    <app-column-header [previousLocationFallback]="professionalProfileUrl(context.professional.id)">
+      {{ 'master-profile.calendar.schedule' | translate }}
+    </app-column-header>
+    <ion-row *ngIf="context.canEdit">
+      <ion-col size="12">
+        <app-collapse-item title="{{ 'master-profile.calendar.schedule' | translate }}" [collapsed]="false">
+          <app-schedule-editor [schedule]="schedule$ | async" [formControl]="scheduleEditor"></app-schedule-editor>
+          <ion-button
+            type="submit"
+            expand="block"
+            [disabled]="scheduleEditor.invalid"
+            (click)="updateSchedule(context.professional.id)"
+          >
+            {{ 'global.save' | translate }}
+          </ion-button>
+        </app-collapse-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item lines="none" class="ion-item-bottom-border master-profile-tab-title">
+          {{ 'master-profile.calendar.title' | translate }}
+        </ion-item>
+        <app-calendar-component
+          (newDate)="changeDate($event, context.professional.id)"
+          [formControl]="formControl"
+          [enabledPeriods]="enabledPeriods$ | async"
+        >
+        </app-calendar-component>
+      </ion-col>
+    </ion-row>
+  </app-content-wrapper>
+  <app-footer></app-footer>
+</ion-content>

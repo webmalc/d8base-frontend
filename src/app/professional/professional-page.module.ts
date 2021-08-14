@@ -4,10 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CertificateComponent } from '@app/professional/components/certificate/certificate.component';
 import { EducationComponent } from '@app/professional/components/education/education.component';
 import { ExperienceComponent } from '@app/professional/components/experience/experience.component';
-import { MasterProfileCalendarComponent } from '@app/professional/components/master-profile-calendar/master-profile-calendar.component';
-import { MasterProfileInfoComponent } from '@app/professional/components/master-profile-info/master-profile-info.component';
-import { MasterProfileServicesComponent } from '@app/professional/components/master-profile-services/master-profile-services.component';
-import { MasterProfileSubmenuComponent } from '@app/professional/components/master-profile-submenu/master-profile-submenu.component';
+import { MasterProfileCalendarComponent } from '@app/professional/pages/master-profile-calendar/master-profile-calendar.component';
+// eslint-disable-next-line max-len
+import { MasterProfileServicesComponent } from '@app/professional/pages/service-list-page/master-profile-services/master-profile-services.component';
 import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
 import { CertificatesApiService } from '@app/professional/services/certificates-api.service';
@@ -20,16 +19,15 @@ import { ServicePageModule } from '@app/service/service.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { MasterProfileMainInfoSectionComponent } from './components';
+import { ProfessionalContactEditComponent } from './pages/professional-contact-edit/professional-contact-edit.component';
+import { ProfessionalCardLargeComponent } from './pages/professional-page/professional-card-large/professional-card-large.component';
+import { ProfessionalPageComponent } from './pages/professional-page/professional-page.component';
 // eslint-disable-next-line max-len
-import { MasterProfileServiceEditComponent } from './components/master-profile-services/master-profile-service-edit/master-profile-service-edit.component';
-import { ServiceViewerComponent } from './components/master-profile-services/service-viewer/service-viewer.component';
-import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
+import { MasterProfileServiceEditComponent } from './pages/service-list-page/master-profile-services/master-profile-service-edit/master-profile-service-edit.component';
+import { ServiceViewerComponent } from './pages/service-list-page/master-profile-services/service-viewer/service-viewer.component';
 import { MasterPageRoutingModule } from './professional-page-routing.module';
-import { ProfessionalPageComponent } from './professional-page.component';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalResolver } from './professional.resolver';
-import { ProfessionalPhotosEditorService } from './services/professional-photos-editor.service';
 
 @NgModule({
   imports: [
@@ -45,18 +43,16 @@ import { ProfessionalPhotosEditorService } from './services/professional-photos-
   ],
   declarations: [
     ProfessionalPageComponent,
-    MasterProfileInfoComponent,
     MasterProfileServicesComponent,
     MasterProfileCalendarComponent,
-    MasterProfileMainInfoSectionComponent,
     ServiceViewerComponent,
     MasterProfileServiceEditComponent,
-    MasterProfileSubmenuComponent,
     ExperienceComponent,
     EducationComponent,
     CertificateComponent,
     ProfessionalContactEditComponent,
     ServiceListPageComponent,
+    ProfessionalCardLargeComponent,
   ],
   providers: [
     MasterApiService,

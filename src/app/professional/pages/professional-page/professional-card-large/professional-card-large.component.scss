@@ -1,0 +1,14 @@
+:host {
+  display: grid;
+  grid-template-columns: 120px auto min-content;
+  grid-template-rows: 120px;
+}
+
+#professional-thumbnail {
+  width: auto;
+  height: auto;
+}
+
+#description {
+  padding-inline: 1em;
+}

@@ -92,6 +92,7 @@
     "profile": "Профиль",
     "master-profile": "Профиль мастера",
     "master-services": "Мои услуги",
+    "master-calendar": "Мой календарь",
     "logout": "Выйти",
     "download": "Скачать приложение",
     "become-master": "Стать мастером",
@@ -512,6 +513,7 @@
       }
     },
     "info": {
+      "title": "Профиль мастера",
       "information": "Информация",
       "master-location": "Адрес мастера",
       "portfolio": "Фото работ",

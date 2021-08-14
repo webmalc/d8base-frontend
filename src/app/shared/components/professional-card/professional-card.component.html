@@ -1,6 +1,6 @@
 <div class="content">
   <ion-thumbnail class="avatar">
-    <ion-img [src]="professional.user?.avatar || defaultAvatar"></ion-img>
+    <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
   </ion-thumbnail>
   <div class="info">
     <div class="ion-padding-horizontal">

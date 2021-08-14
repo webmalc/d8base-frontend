@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ProfessionalCalendar, ProfessionalSchedule } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { getOffsetDate } from '@app/core/functions/datetime.functions';
+import { getProfessionalProfileUrl } from '@app/core/functions/navigation.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
@@ -34,6 +35,10 @@ export class MasterProfileCalendarComponent implements OnInit {
   ) {
     this.enabledPeriods$ = this.periods.asObservable();
     this.schedule$ = api.accountsProfessionalScheduleList({}).pipe(map(response => response.results));
+  }
+
+  public professionalProfileUrl(professionalId: number): string {
+    return getProfessionalProfileUrl(professionalId);
   }
 
   public ngOnInit(): void {

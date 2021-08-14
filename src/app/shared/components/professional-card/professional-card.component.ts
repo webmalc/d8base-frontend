@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProfessionalList } from '@app/api/models';
-import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { getProfessionalProfileUrl, getProfessionalReviewsUrl } from '@app/core/functions/navigation.functions';
+import { getProfessionalName } from '@app/core/functions/professional.functions';
 
 @Component({
   selector: 'app-professional-card',
@@ -11,12 +11,9 @@ import { getProfessionalProfileUrl, getProfessionalReviewsUrl } from '@app/core/
 })
 export class ProfessionalCardComponent {
   @Input() public professional: ProfessionalList;
-  public reviewsCount: number;
-  public defaultAvatar = getNoAvatarLink();
 
   public get professionalName(): string {
-    const user = this.professional.user;
-    return user ? `${user.first_name} ${user.last_name}` : '';
+    return getProfessionalName(this.professional);
   }
 
   public get professionalProfileUrl(): string {

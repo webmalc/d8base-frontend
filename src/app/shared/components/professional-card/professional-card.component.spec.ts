@@ -1,8 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ProfessionalList } from '@app/api/models/professional-list';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 import { ProfessionalCardComponent } from './professional-card.component';
 
@@ -13,8 +12,9 @@ describe('ProfessionalCardComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         declarations: [ProfessionalCardComponent],
-        imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ProfessionalCardComponent);

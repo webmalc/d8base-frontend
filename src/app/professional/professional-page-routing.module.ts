@@ -1,26 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NavBranch, NavParams } from '@app/core/constants/navigation.constants';
 import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
+import { MasterProfileCalendarComponent } from '@app/professional/pages/master-profile-calendar/master-profile-calendar.component';
 import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
 import { ProfessionalResolver } from '@app/professional/professional.resolver';
-import { ProfessionalContactEditComponent } from './components/professional-contact-edit/professional-contact-edit.component';
+import { ProfessionalContactEditComponent } from './pages/professional-contact-edit/professional-contact-edit.component';
 
-import { ProfessionalPageComponent } from './professional-page.component';
+import { ProfessionalPageComponent } from './pages/professional-page/professional-page.component';
 import { ProfessionalGuard } from './professional.guard';
 
 const routes: Routes = [
   {
-    path: 'my-profile',
+    path: NavBranch.MyProfile,
     pathMatch: 'full',
     canActivate: [ProfessionalGuard],
   },
   {
-    path: 'my-services',
+    path: NavBranch.MyServices,
     pathMatch: 'full',
     canActivate: [ProfessionalGuard],
   },
   {
-    path: ':master-id',
+    path: NavBranch.MySchedule,
+    pathMatch: 'full',
+    canActivate: [ProfessionalGuard],
+  },
+  {
+    path: `:${NavParams.MasterId}`,
     children: [
       {
         path: '',
@@ -28,7 +35,7 @@ const routes: Routes = [
         canActivate: [ProfessionalGuard],
       },
       {
-        path: 'services',
+        path: NavBranch.Services,
         component: ServiceListPageComponent,
         pathMatch: 'full',
         resolve: {
@@ -36,7 +43,15 @@ const routes: Routes = [
         },
       },
       {
-        path: 'profile',
+        path: NavBranch.Schedule,
+        component: MasterProfileCalendarComponent,
+        pathMatch: 'full',
+        resolve: {
+          context: ProfessionalResolver,
+        },
+      },
+      {
+        path: NavBranch.Profile,
         children: [
           {
             path: '',

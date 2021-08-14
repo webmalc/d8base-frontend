@@ -1,3 +1,5 @@
+import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
+
 export interface MainMenuItem {
   title: string;
   icon?: string;
@@ -67,13 +69,19 @@ export const mainMenuItems: MainMenuItem[] = [
   {
     title: 'template.master-profile',
     icon: 'settings-outline',
-    link: '/professional/my-profile',
+    link: `/${NavPath.Professional}/${NavBranch.MyProfile}`,
     masterOnly: true,
   },
   {
     title: 'template.master-services',
     icon: 'list-circle-outline',
-    link: '/professional/my-services',
+    link: `/${NavPath.Professional}/${NavBranch.MyServices}`,
+    masterOnly: true,
+  },
+  {
+    title: 'template.master-calendar',
+    icon: 'calendar-outline',
+    link: `/${NavPath.Professional}/${NavBranch.MySchedule}`,
     masterOnly: true,
   },
   {

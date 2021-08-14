@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
 import { ProfessionalList } from '@app/api/models';
 import { NavBranch, NavParams } from '@app/core/constants/navigation.constants';
-import { getProfessionalProfileUrl, getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
+import {
+  getProfessionalProfileUrl,
+  getProfessionalScheduleUrl,
+  getProfessionalServicesUrl,
+} from '@app/core/functions/navigation.functions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
-// TODO separate into three different guards
+// TODO separate into different guards
 @Injectable()
 export class ProfessionalGuard implements CanActivate {
   @Select(CurrentUserSelectors.defaultProfessional)
@@ -30,6 +34,13 @@ export class ProfessionalGuard implements CanActivate {
       return this.defaultProfessional$.pipe(
         first(x => !!x),
         map(professional => this.router.parseUrl(getProfessionalServicesUrl(professional.id))),
+      );
+    }
+
+    if (path === NavBranch.MySchedule) {
+      return this.defaultProfessional$.pipe(
+        first(x => !!x),
+        map(professional => this.router.parseUrl(getProfessionalScheduleUrl(professional.id))),
       );
     }
 
