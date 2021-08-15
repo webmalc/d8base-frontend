@@ -1,34 +1,39 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { parseUriString } from '@app/core/functions/uri.functions';
-import { NgDestroyService } from '@app/core/services';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-column-header',
   templateUrl: './column-header.component.html',
-  providers: [NgDestroyService],
 })
 export class ColumnHeaderComponent {
   @Input()
-  public previousLocationFallback: string;
-
-  @Input()
   public transparent: boolean = false;
 
-  public backButtonLink: string;
-  public backButtonParams: object;
+  public backButtonLink$: Observable<string>;
+  public backButtonParams$: Observable<object>;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, ngDestroy$: NgDestroyService) {
+  private readonly backButtonUrl$ = new BehaviorSubject<string>('');
+
+  constructor(private readonly activatedRoute: ActivatedRoute) {
     if (!this.activatedRoute?.queryParamMap) {
       return;
     }
-    this.activatedRoute.queryParamMap.pipe(takeUntil(ngDestroy$)).subscribe(paramsMap => {
-      const param = paramsMap.get('redirectTo');
-      const redirectTo = param ? decodeURIComponent(param) : this.previousLocationFallback;
-      const { path, queryParams } = parseUriString(redirectTo);
-      this.backButtonParams = queryParams;
-      this.backButtonLink = path;
-    });
+    const url$ = combineLatest([this.activatedRoute.queryParamMap, this.backButtonUrl$]).pipe(
+      map(([paramsMap, backButtonUrl]) => {
+        const param = paramsMap.get('redirectTo');
+        const redirectTo = param ? decodeURIComponent(param) : backButtonUrl;
+        return parseUriString(redirectTo);
+      }),
+    );
+    this.backButtonLink$ = url$.pipe(map(url => url.path));
+    this.backButtonParams$ = url$.pipe(map(url => url.queryParams));
+  }
+
+  @Input()
+  public set previousLocationFallback(url: string) {
+    this.backButtonUrl$.next(url);
   }
 }
