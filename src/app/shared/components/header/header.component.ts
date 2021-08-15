@@ -39,16 +39,4 @@ export class HeaderComponent {
   public isDesktop(): boolean {
     return this.platformService.isDesktop();
   }
-
-  /**
-   * Enable/disable the specified menu. A workaround for wide (desktop) screen only
-   */
-  public toggleMenu(menuId: string): void {
-    this.menuController.get(menuId).then(menu => {
-      if (menu.classList.contains('menu-pane-visible')) {
-        // the menu is at the side pane, toggle its disabled flag manually
-        menu.disabled = !menu.disabled;
-      }
-    });
-  }
 }
