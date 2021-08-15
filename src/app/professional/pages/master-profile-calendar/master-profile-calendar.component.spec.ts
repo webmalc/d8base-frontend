@@ -1,10 +1,17 @@
+import { Injectable } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
+import { NgxsModule, State } from '@ngxs/store';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { StorageManagerMock } from 'src/testing/mocks';
 
 import { MasterProfileCalendarComponent } from './master-profile-calendar.component';
+
+@State({
+  name: 'MockState',
+  defaults: { professional: {} },
+})
+@Injectable()
+class MockState {}
 
 describe('MasterProfileCalendarComponent', () => {
   let component: MasterProfileCalendarComponent;
@@ -14,8 +21,8 @@ describe('MasterProfileCalendarComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [MasterProfileCalendarComponent],
-        imports: [...RootModules(), ComponentTestingModule],
-        providers: [CalendarGeneratorFactoryService, { provide: StorageManagerService, useClass: StorageManagerMock }],
+        imports: [...RootModules(), ComponentTestingModule, NgxsModule.forRoot([MockState])],
+        providers: [CalendarGeneratorFactoryService],
       }).compileComponents();
 
       fixture = TestBed.createComponent(MasterProfileCalendarComponent);

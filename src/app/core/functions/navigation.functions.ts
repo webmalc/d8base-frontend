@@ -6,7 +6,7 @@ import {
   NavigationStart,
   RouterEvent,
 } from '@angular/router';
-import { NavPath } from '../constants/navigation.constants';
+import { NavBranch, NavPath } from '../constants/navigation.constants';
 
 export function isNavigationEvent(routerEvent: RouterEvent): boolean {
   return (
@@ -26,19 +26,25 @@ export function getLastChild(route: ActivatedRoute): ActivatedRoute {
 }
 
 export function getProfessionalProfileUrl(professionalId: number | string): string {
-  return professionalId ? `/${NavPath.Professional}/${professionalId}/profile` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/${NavBranch.Profile}` : '';
 }
 
 export function getNewProfessionalContactUrl(professionalId: number | string): string {
-  return professionalId ? `/${NavPath.Professional}/${professionalId}/profile/professional-contact-add` : '';
+  return professionalId
+    ? `/${NavPath.Professional}/${professionalId}/${NavBranch.Profile}/professional-contact-add`
+    : '';
 }
 
 export function getNewProfessionalLocationsUrl(professionalId: number | string): string {
-  return professionalId ? `/${NavPath.Professional}/${professionalId}/profile/location-add` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/${NavBranch.Profile}/location-add` : '';
 }
 
 export function getProfessionalServicesUrl(professionalId: number | string): string {
-  return professionalId ? `/${NavPath.Professional}/${professionalId}/services` : '';
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/${NavBranch.Services}` : '';
+}
+
+export function getProfessionalScheduleUrl(professionalId: number | string): string {
+  return professionalId ? `/${NavPath.Professional}/${professionalId}/${NavBranch.Schedule}` : '';
 }
 
 export function getProfessionalReviewsUrl(professionalId: number | string): string {
@@ -46,5 +52,5 @@ export function getProfessionalReviewsUrl(professionalId: number | string): stri
 }
 
 export function getUserChatUrl(userId: number | string): string {
-  return userId ? `/${NavPath.Message}/chat/${userId}` : '';
+  return userId ? `/${NavPath.Message}/${NavBranch.Chat}/${userId}` : '';
 }

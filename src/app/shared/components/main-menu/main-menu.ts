@@ -1,3 +1,5 @@
+import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
+
 export interface MainMenuItem {
   title: string;
   icon?: string;
@@ -15,81 +17,113 @@ export interface MainMenuItem {
 
 export const mainMenuItems: MainMenuItem[] = [
   {
-    title: 'template.menu',
+    title: 'main-menu.account-title',
     isHeader: true,
   },
   {
-    title: 'template.search',
-    icon: 'search',
-    link: '/search',
-  },
-  {
-    title: 'template.favorites',
-    icon: 'heart-outline',
-    link: '/saved-professionals',
-    userOnly: true,
-  },
-  {
-    title: 'template.my-orders',
-    icon: 'calendar-outline',
-    link: '/my-orders/inbox',
-    masterOnly: true,
-  },
-  {
-    title: 'template.my-orders',
-    icon: 'calendar-outline',
-    link: '/my-orders/outbox',
-    clientOnly: true,
-  },
-  {
-    title: 'template.sign-in',
+    title: 'main-menu.log-in',
     icon: 'log-in-outline',
-    link: '/auth/login',
+    link: `/${NavPath.Auth}/${NavBranch.Login}`,
     guestOnly: true,
   },
   {
-    title: 'template.sign-up',
-    icon: 'reader-outline',
-    link: '/auth/registration',
+    title: 'main-menu.sign-up',
+    icon: 'create-outline',
+    link: `/${NavPath.Auth}/${NavBranch.Registration}`,
     guestOnly: true,
   },
   {
-    title: 'template.my-profile',
-    isHeader: true,
-    userOnly: true,
-  },
-  {
-    title: 'template.profile',
+    title: 'main-menu.my-account',
     icon: 'person-circle-outline',
-    link: '/profile',
+    link: `/${NavPath.Profile}`,
     userOnly: true,
   },
   {
-    title: 'template.master-profile',
-    icon: 'settings-outline',
-    link: '/professional/my-profile',
-    masterOnly: true,
-  },
-  {
-    title: 'template.master-services',
-    icon: 'list-circle-outline',
-    link: '/professional/my-services',
-    masterOnly: true,
-  },
-  {
-    title: 'template.miscellaneous',
-    isHeader: true,
-  },
-  {
-    title: 'template.service',
-    icon: 'medal-outline',
-    link: '/service/publish',
-  },
-  {
-    title: 'template.logout',
+    title: 'main-menu.log-out',
     icon: 'log-out-outline',
     link: '/auth/login',
     params: { logout: '' },
     userOnly: true,
+  },
+
+  {
+    title: 'main-menu.professional-title',
+    isHeader: true,
+    masterOnly: true,
+  },
+  {
+    title: 'main-menu.add-service',
+    icon: 'add-circle-outline',
+    link: `/${NavPath.Service}/${NavBranch.Publish}`,
+    masterOnly: true,
+  },
+  {
+    title: 'main-menu.service-list',
+    icon: 'list-outline',
+    link: `/${NavPath.Professional}/${NavBranch.MyServices}`,
+    masterOnly: true,
+  },
+  {
+    title: 'main-menu.received-orders',
+    icon: 'mail-unread-outline',
+    link: `/${NavPath.Orders}/${NavBranch.Inbox}`,
+    masterOnly: true,
+  },
+  {
+    title: 'main-menu.professional-profile',
+    icon: 'settings-outline',
+    link: `/${NavPath.Professional}/${NavBranch.MyProfile}`,
+    masterOnly: true,
+  },
+  {
+    title: 'main-menu.professional-schedule',
+    icon: 'calendar-outline',
+    link: `/${NavPath.Professional}/${NavBranch.MySchedule}`,
+    masterOnly: true,
+  },
+
+  {
+    title: 'main-menu.orders-title',
+    isHeader: true,
+  },
+  {
+    title: 'main-menu.search',
+    icon: 'search-outline',
+    link: `/${NavPath.Search}`,
+  },
+  {
+    title: 'main-menu.bookmarks',
+    icon: 'bookmarks-outline',
+    link: `/${NavPath.Bookmarks}`,
+    userOnly: true,
+  },
+  {
+    title: 'main-menu.sent-orders',
+    icon: 'list-outline',
+    link: `/${NavPath.Orders}/${NavBranch.Outbox}`,
+    userOnly: true,
+  },
+
+  {
+    title: 'main-menu.become-professional-title',
+    isHeader: true,
+    clientOnly: true,
+  },
+  {
+    title: 'main-menu.become-professional',
+    icon: 'medal-outline',
+    link: `/${NavPath.Service}/${NavBranch.Publish}`,
+    clientOnly: true,
+  },
+  {
+    title: 'main-menu.become-professional-title',
+    isHeader: true,
+    guestOnly: true,
+  },
+  {
+    title: 'main-menu.become-professional',
+    icon: 'medal-outline',
+    link: `/${NavPath.Service}/${NavBranch.Publish}`,
+    guestOnly: true,
   },
 ];

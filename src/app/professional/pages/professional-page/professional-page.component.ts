@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { ProfessionalPhotoList, ReviewList } from '@app/api/models';
+import { ProfessionalList, ProfessionalPhotoList, ReviewList } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
 import { getNewProfessionalContactUrl, getNewProfessionalLocationsUrl } from '@app/core/functions/navigation.functions';
+import { getProfessionalName } from '@app/core/functions/professional.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
+import { NgDestroyService } from '@app/core/services';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { LocationResolverService } from '@app/core/services/location/location-resolver.service';
 import { ProfessionalPhotosEditorService } from '@app/professional/services/professional-photos-editor.service';
@@ -18,11 +20,12 @@ import { forkJoin, Observable } from 'rxjs';
 import { filter, first, map, share, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-master-profile-info',
-  templateUrl: './master-profile-info.component.html',
-  styleUrls: ['./master-profile-info.component.scss'],
+  selector: 'app-professional-page',
+  templateUrl: './professional-page.component.html',
+  styleUrls: ['./professional-page.component.scss'],
+  providers: [NgDestroyService, ProfessionalPhotosEditorService],
 })
-export class MasterProfileInfoComponent {
+export class ProfessionalPageComponent {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
@@ -99,6 +102,10 @@ export class MasterProfileInfoComponent {
 
   public getYearsFromBirthday(birthday: string): number {
     return calculateAge(birthday);
+  }
+
+  public professionalName(professional: ProfessionalList): string {
+    return getProfessionalName(professional);
   }
 
   private initContactsWithDefault(): void {

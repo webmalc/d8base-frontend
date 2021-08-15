@@ -1,11 +1,15 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from 'src/testing/mocks';
-import { StorageManagerService } from '../core/services/storage-manager.service';
+import { NgxsModule, State } from '@ngxs/store';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ProfessionalPageComponent } from './professional-page.component';
+
+@State({
+  name: 'MockState',
+  defaults: { professional: {} },
+})
+@Injectable()
+class MockState {}
 
 describe('MasterPage', () => {
   let component: ProfessionalPageComponent;
@@ -14,13 +18,14 @@ describe('MasterPage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         declarations: [ProfessionalPageComponent],
-        providers: [{ provide: StorageManagerService, useClass: StorageManagerMock }],
+        imports: [...RootModules(), ComponentTestingModule, NgxsModule.forRoot([MockState])],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ProfessionalPageComponent);
       component = fixture.componentInstance;
+
       fixture.detectChanges();
     }),
   );

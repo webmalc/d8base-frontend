@@ -81,27 +81,31 @@
     "0": "Km",
     "1": "Miles"
   },
+  "main-menu": {
+    "account-title": "My account",
+    "my-account": "Profile",
+    "log-in": "Log in",
+    "log-out": "Log out",
+    "sign-up": "Sign up",
+    "orders-title": "My orders",
+    "become-professional-title": "Become professional",
+    "become-professional": "Publish new service",
+
+    "professional-title": "My services",
+    "add-service": "Add new service",
+    "service-list": "Service list",
+    "received-orders": "Received orders",
+    "professional-profile": "Professional profile",
+    "professional-schedule": "Schedule",
+
+    "client-title": "Order a service",
+    "search": "Search",
+    "bookmarks": "Bookmarks",
+    "sent-orders": "Sent orders"
+  },
   "template": {
     "main-menu-title": "Navigation",
-    "menu": "Menu",
-    "search": "Search",
-    "favorites": "Favorites",
-    "sign-in": "Sign-in",
-    "sign-up": "Sign-up",
-    "my-profile": "My profile",
-    "profile": "Profile",
-    "master-profile": "Professional profile",
-    "master-services": "My services",
-    "logout": "Logout",
-    "download": "Download application",
-    "become-master": "Become professional",
     "my-orders": "My orders",
-    "about": "About",
-    "support": "Support",
-    "terms-of-use": "Terms of use",
-    "service": "Service publication",
-    "preferences": "Preferences",
-    "miscellaneous": "Miscellaneous",
     "dark-theme": "Dark theme"
   },
   "login-form": {
@@ -512,6 +516,7 @@
       }
     },
     "info": {
+      "title": "Professional's profile",
       "information": "Information",
       "master-location": "Professional address",
       "portfolio": "Photos",

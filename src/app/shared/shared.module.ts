@@ -82,6 +82,7 @@ import {
   AsYearsPipe,
   AsReviewsPipe,
   AsStringPipe,
+  DefaultIfEmptyPipe,
 } from '@app/shared/pipes';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
@@ -197,6 +198,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsYearsPipe,
     AsReviewsPipe,
     AsStringPipe,
+    DefaultIfEmptyPipe,
   ],
   exports: [
     IfSpinnerModule,
@@ -281,6 +283,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsYearsPipe,
     AsReviewsPipe,
     AsStringPipe,
+    DefaultIfEmptyPipe,
   ],
   imports: [
     CommonModule,

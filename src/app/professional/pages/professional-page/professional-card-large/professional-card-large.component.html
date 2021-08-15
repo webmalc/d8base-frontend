@@ -1,0 +1,10 @@
+<ion-thumbnail id="professional-thumbnail">
+  <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
+</ion-thumbnail>
+
+<div id="description">
+  <h1>{{ professionalUserName }}</h1>
+  <span>{{ professional.name }}</span>
+</div>
+
+<app-saved-professional-toggle [professionalId]="professional.id" class="like"></app-saved-professional-toggle>

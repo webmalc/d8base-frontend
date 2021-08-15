@@ -81,27 +81,31 @@
     "0": "Км",
     "1": "Мили"
   },
+  "main-menu": {
+    "account-title": "Учётная запись",
+    "my-account": "Мои данные",
+    "log-in": "Вход",
+    "log-out": "Выйти",
+    "sign-up": "Регистрация",
+    "orders-title": "Заказ услуг",
+    "become-professional-title": "Стать мастером",
+    "become-professional": "Публикация услуги",
+
+    "professional-title": "Мои услуги",
+    "add-service": "Добавить услугу",
+    "service-list": "Список услуг",
+    "received-orders": "Входящие заказы",
+    "professional-profile": "Профиль мастера",
+    "professional-schedule": "Календарь",
+
+    "client-title": "Заказ услуг",
+    "search": "Поиск",
+    "bookmarks": "Избранное",
+    "sent-orders": "Мои заказы"
+  },
   "template": {
     "main-menu-title": "Навигация",
-    "menu": "Меню",
-    "search": "Поиск",
-    "favorites": "Избранное",
-    "sign-in": "Вход",
-    "sign-up": "Регистрация",
-    "my-profile": "Мой профиль",
-    "profile": "Профиль",
-    "master-profile": "Профиль мастера",
-    "master-services": "Мои услуги",
-    "logout": "Выйти",
-    "download": "Скачать приложение",
-    "become-master": "Стать мастером",
     "my-orders": "Мои заказы",
-    "about": "О сервисе",
-    "support": "Поддержка",
-    "terms-of-use": "Пользовательское соглашение",
-    "service": "Публикация услуги",
-    "preferences": "Настройки системы",
-    "miscellaneous": "Дополнительно",
     "dark-theme": "Темная тема"
   },
   "login-form": {
@@ -512,6 +516,7 @@
       }
     },
     "info": {
+      "title": "Профиль мастера",
       "information": "Информация",
       "master-location": "Адрес мастера",
       "portfolio": "Фото работ",
