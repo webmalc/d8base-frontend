@@ -14,17 +14,17 @@
     <ng-container *ngIf="context.isAuthenticated">
       <ng-container *ngIf="!context.isMaster; else master">
         <ion-item *ngIf="isDesktop()" [detail]="false" lines="none" slot="end" routerLink="/service/publish">
-          {{ 'template.become-master' | translate }}
+          {{ 'layout.become-professional' | translate }}
         </ion-item>
         <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/outbox" [detail]="false">
           <ion-icon class="pr5" name="calendar-outline"></ion-icon>
-          {{ 'template.my-orders' | translate }}
+          {{ 'layout.my-orders' | translate }}
         </ion-item>
       </ng-container>
       <ng-template #master>
         <ion-item class="my-orders" lines="none" slot="end" routerLink="/my-orders/inbox" [detail]="false">
           <ion-icon class="pr5" name="calendar-outline"></ion-icon>
-          {{ 'template.my-orders' | translate }}
+          {{ 'layout.my-orders' | translate }}
         </ion-item>
       </ng-template>
     </ng-container>
@@ -45,7 +45,7 @@
       routerDirection="forward"
       routerLinkActive="active"
     >
-      {{ 'template.sign-in' | translate }}
+      {{ 'layout.log-in' | translate }}
     </ion-item>
     <ion-item
       lines="none"
@@ -57,7 +57,7 @@
       routerLinkActive="active"
       routerDirection="forward"
     >
-      {{ 'template.sign-up' | translate }}
+      {{ 'layout.sign-up' | translate }}
     </ion-item>
     <ion-buttons slot="end">
       <ion-menu-toggle menu="flag-menu">

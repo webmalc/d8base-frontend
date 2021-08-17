@@ -103,8 +103,10 @@
     "bookmarks": "Избранное",
     "sent-orders": "Мои заказы"
   },
-  "template": {
-    "main-menu-title": "Навигация",
+  "layout": {
+    "log-in": "Войти",
+    "sign-up": "Зарегистрироваться",
+    "become-professional": "Стать мастером",
     "my-orders": "Мои заказы",
     "dark-theme": "Темная тема"
   },

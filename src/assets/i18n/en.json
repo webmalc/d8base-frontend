@@ -103,8 +103,10 @@
     "bookmarks": "Bookmarks",
     "sent-orders": "Sent orders"
   },
-  "template": {
-    "main-menu-title": "Navigation",
+  "layout": {
+    "log-in": "Log in",
+    "sign-up": "Sign up",
+    "become-professional": "List your business",
     "my-orders": "My orders",
     "dark-theme": "Dark theme"
   },
