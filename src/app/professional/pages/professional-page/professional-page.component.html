@@ -91,14 +91,16 @@
         }}</app-add-button>
       </ion-list>
       <ng-template #viewLocations>
-        <ion-item *ngFor="let location of context.professional.locations" lines="none">
-          <app-location-viewer [location]="location"></app-location-viewer>
-        </ion-item>
-        <ng-container *ngIf="!context.professional.locations?.length" [ngTemplateOutlet]="noData"></ng-container>
+        <ng-container *ngIf="context.professional.locations?.length">
+          <ion-item *ngFor="let location of context.professional.locations" lines="none">
+            <app-location-viewer [location]="location"></app-location-viewer>
+          </ion-item>
+          <app-data-placeholder *ngIf="!context.professional.locations?.length"></app-data-placeholder>
+        </ng-container>
       </ng-template>
     </section>
 
-    <app-collapse-item title="{{ 'master-profile.info.about' | translate }}">
+    <app-collapse-item title="{{ 'master-profile.info.about' | translate }}" [collapsed]="false">
       <ion-list lines="none">
         <ion-list-header>
           <ion-label>
@@ -129,13 +131,10 @@
             {{ 'global.professional-level.' + context.professional.level | translate }}
           </ion-text>
         </ion-item>
-        <ng-container
-          *ngIf="!context.professional.description && !context.professional.experience && !context.professional.level"
-          [ngTemplateOutlet]="noData"
-        ></ng-container>
+        <app-data-placeholder *ngIf="isDescriptionEmpty(context.professional)"></app-data-placeholder>
       </ion-list>
 
-      <ion-list lines="none">
+      <ion-list lines="none" *ngIf="!isUserInfoEmpty(context.user) || context.canEdit">
         <ion-list-header>
           <ion-label>
             <h1>{{ 'master-profile.info.information' | translate }}</h1>
@@ -179,33 +178,31 @@
             </ng-container>
           </ion-text>
         </ion-item>
-        <ng-container
-          *ngIf="
-            !context.user.gender &&
-            !context.user.birthday &&
-            !context.user.nationality &&
-            !context.user.languages?.length
-          "
-          [ngTemplateOutlet]="noData"
-        ></ng-container>
+        <app-data-placeholder *ngIf="isUserInfoEmpty(context.user)"></app-data-placeholder>
       </ion-list>
     </app-collapse-item>
 
-    <app-collapse-item title="{{ 'master-profile.info.experience' | translate }}">
-      <ion-item
-        lines="none"
-        class="ion-item-no-padding-right"
-        *ngFor="let experience of context.professional.experience_entries"
-      >
-        <app-experience [editable]="context.canEdit" [exp]="experience"></app-experience>
-      </ion-item>
-      <ng-container *ngIf="!context.professional.experience_entries.length" [ngTemplateOutlet]="noData"></ng-container>
-      <app-add-button *ngIf="context.canEdit" routerLink="experience-add/">
-        {{ 'master-profile.info.add-new-exp' | translate }}
-      </app-add-button>
+    <app-collapse-item
+      title="{{ 'master-profile.info.experience' | translate }}"
+      *ngIf="context.professional.experience_entries.length || context.canEdit"
+    >
+      <ion-list>
+        <app-experience
+          *ngFor="let experience of context.professional.experience_entries"
+          [editable]="context.canEdit"
+          [exp]="experience"
+        ></app-experience>
+        <app-data-placeholder *ngIf="!context.professional.experience_entries.length"></app-data-placeholder>
+        <app-add-button *ngIf="context.canEdit" routerLink="experience-add/">
+          {{ 'master-profile.info.add-new-exp' | translate }}
+        </app-add-button>
+      </ion-list>
     </app-collapse-item>
 
-    <app-collapse-item title="{{ 'master-profile.info.education' | translate }}">
+    <app-collapse-item
+      title="{{ 'master-profile.info.education' | translate }}"
+      *ngIf="context.professional.educations.length || context.canEdit"
+    >
       <ion-item
         *ngFor="let education of context.professional.educations"
         lines="none"
@@ -213,17 +210,20 @@
       >
         <app-education [education]="education" [editable]="context.canEdit"></app-education>
       </ion-item>
-      <ng-container *ngIf="!context.professional.educations.length" [ngTemplateOutlet]="noData"></ng-container>
+      <app-data-placeholder *ngIf="!context.professional.educations.length"></app-data-placeholder>
       <app-add-button *ngIf="context.canEdit" routerLink="education-add/">
         {{ 'master-profile.info.add-new-education' | translate }}
       </app-add-button>
     </app-collapse-item>
 
-    <app-collapse-item title="{{ 'master-profile.info.certificates' | translate }}">
+    <app-collapse-item
+      title="{{ 'master-profile.info.certificates' | translate }}"
+      *ngIf="context.professional.certificates.length || context.canEdit"
+    >
       <ion-item *ngFor="let certificate of context.professional.certificates">
         <app-certificate [certificate]="certificate" [editable]="context.canEdit"></app-certificate>
       </ion-item>
-      <ng-container *ngIf="!context.professional.certificates.length" [ngTemplateOutlet]="noData"></ng-container>
+      <app-data-placeholder *ngIf="!context.professional.certificates.length"></app-data-placeholder>
       <app-add-button *ngIf="context.canEdit" routerLink="certificate-add/">
         {{ 'master-profile.info.add-new-certificate' | translate }}
       </app-add-button>
@@ -237,12 +237,6 @@
         </a>
       </ion-item>
     </app-collapse-item>
-
-    <ng-template #noData>
-      <ion-item class="ion-text-center" lines="none">
-        <ion-label color="medium">{{ 'master-profile.info.no-data' | translate }}</ion-label>
-      </ion-item>
-    </ng-template>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

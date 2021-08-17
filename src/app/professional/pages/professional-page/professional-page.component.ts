@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfessionalList, ProfessionalPhotoList, ReviewList } from '@app/api/models';
+import { ProfessionalList, ProfessionalPhotoList, ReviewList, UserExtended } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
 import { getNewProfessionalContactUrl, getNewProfessionalLocationsUrl } from '@app/core/functions/navigation.functions';
@@ -79,6 +79,14 @@ export class ProfessionalPageComponent {
 
   public get photos$(): Observable<ProfessionalPhotoList[]> {
     return this.professionalPhotosEditor.photos$;
+  }
+
+  public isDescriptionEmpty(professional: ProfessionalList): boolean {
+    return !professional.description && !professional.experience && !professional.level;
+  }
+
+  public isUserInfoEmpty(user: UserExtended): boolean {
+    return !user.gender && !user.birthday && !user.nationality && !user.languages?.length;
   }
 
   public addPhotos(files: File[]) {
