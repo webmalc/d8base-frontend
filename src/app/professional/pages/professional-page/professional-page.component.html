@@ -139,7 +139,13 @@
           <ion-label>
             <h1>{{ 'master-profile.info.information' | translate }}</h1>
           </ion-label>
-          <ion-button *ngIf="context.canEdit" color="medium" fill="clear" routerLink="/profile/about">
+          <ion-button
+            *ngIf="context.canEdit"
+            color="medium"
+            fill="clear"
+            routerLink="/profile/about"
+            [queryParams]="{ redirectTo: '/professional/my-profile' }"
+          >
             <ion-icon name="create-outline"></ion-icon>
           </ion-button>
         </ion-list-header>
