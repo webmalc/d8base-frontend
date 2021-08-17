@@ -11,7 +11,7 @@ export class LanguageComponent {
   public languageName;
 
   @Input()
-  public inline: boolean;
+  public inline: boolean = false;
 
   constructor(
     private readonly userLanguagesApiCache: UserLanguagesApiCache,

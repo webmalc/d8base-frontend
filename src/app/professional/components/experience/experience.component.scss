@@ -1,0 +1,15 @@
+:host {
+  display: contents;
+}
+
+.experience-date {
+  color: var(--ion-color-medium);
+  font-size: 0.75rem;
+}
+
+.experience-title {
+  font-weight: bold;
+  &:first-letter {
+    text-transform: capitalize;
+  }
+}

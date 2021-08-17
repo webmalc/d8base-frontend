@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
-import { ColumnHeaderComponent } from './column-header.component';
+import { DataPlaceholderComponent } from './data-placeholder.component';
 
-describe('ColumnHeaderComponent', () => {
-  let component: ColumnHeaderComponent;
-  let fixture: ComponentFixture<ColumnHeaderComponent>;
+describe('DataPlaceholderComponent', () => {
+  let component: DataPlaceholderComponent;
+  let fixture: ComponentFixture<DataPlaceholderComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ColumnHeaderComponent],
+        declarations: [DataPlaceholderComponent],
         imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
-      fixture = TestBed.createComponent(ColumnHeaderComponent);
+
+      fixture = TestBed.createComponent(DataPlaceholderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

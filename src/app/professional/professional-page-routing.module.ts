@@ -12,6 +12,11 @@ import { ProfessionalGuard } from './professional.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: NavBranch.MyProfile,
+  },
+  {
     path: NavBranch.MyProfile,
     pathMatch: 'full',
     canActivate: [ProfessionalGuard],
