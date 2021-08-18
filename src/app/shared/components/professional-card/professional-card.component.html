@@ -10,7 +10,7 @@
       <div class="subtitle">
         <span class="capitalize-first-letter">{{ professional.name }}</span>
         <span>&nbsp;&diams;&nbsp;</span>
-        <span class="city">{{ (professional.locations[0]?.city | cityById$ | async)?.name }}</span>
+        <span class="city">{{ (defaultCityId | cityById$ | async)?.name }}</span>
       </div>
     </div>
     <div *ngIf="professional?.rating" class="rating">
