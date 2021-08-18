@@ -639,6 +639,12 @@
     "created-time": "Время отзыва",
     "answer": "Ответ мастера"
   },
+  "search": {
+    "result": {
+      "chat": "Чат",
+      "all-services": "Все"
+    }
+  },
   "issuance": {
     "search-placeholder": "Найти услугу/специалиста",
     "search-empty": "Ничего не найдено",
@@ -699,19 +705,6 @@
         "payment-methods": "Способ оплаты",
         "payment-methods-placeholder": "Выберите способ оплаты"
       }
-    },
-    "result": {
-      "you": "Вас",
-      "sort": "сортировка"
-    },
-    "search-result": {
-      "services": "Услуга(и) мастера",
-      "more": "Больше услуг",
-      "address": "Адрес мастера",
-      "select": "Выбрать",
-      "chat": "Чат",
-      "service-list": "Все услуги",
-      "profile": "Профиль"
     }
   },
   "main-page": {

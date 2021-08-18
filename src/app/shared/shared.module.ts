@@ -43,6 +43,7 @@ import {
   SubcategorySelectorComponent,
   OnMapPopoverComponent,
   SectionHeadingComponent,
+  AvatarComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import {
@@ -199,6 +200,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsReviewsPipe,
     AsStringPipe,
     DefaultIfEmptyPipe,
+    AvatarComponent,
   ],
   exports: [
     IfSpinnerModule,

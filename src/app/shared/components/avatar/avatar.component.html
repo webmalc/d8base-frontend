@@ -1,0 +1,8 @@
+<ion-thumbnail class="avatar">
+  <div *ngIf="!src" class="default-avatar">
+    <span class="default-avatar__initials">
+      {{ initials }}
+    </span>
+  </div>
+  <ion-img [src]="src" *ngIf="src"></ion-img>
+</ion-thumbnail>

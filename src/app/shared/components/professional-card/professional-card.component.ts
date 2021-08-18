@@ -23,4 +23,13 @@ export class ProfessionalCardComponent {
   public get professionalReviewsUrl(): string {
     return getProfessionalReviewsUrl(this.professional?.id);
   }
+
+  public get defaultCityId(): number {
+    if (!this.professional.locations) {
+      return NaN;
+    }
+    // TODO search for default location
+    const defaultLocation = this.professional.locations[0];
+    return defaultLocation?.city ?? NaN;
+  }
 }
