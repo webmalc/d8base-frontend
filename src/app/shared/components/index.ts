@@ -38,3 +38,4 @@ export * from './subcategory-selector/subcategory-selector.component';
 export * from './full-price-control/full-price-control.component';
 export * from './images-control/images-control.component';
 export * from './section-heading/section-heading.component';
+export * from './avatar/avatar.component';

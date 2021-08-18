@@ -9,13 +9,18 @@
 }
 
 .avatar {
-  border-radius: 9px;
-  overflow: hidden;
   --size: 100px;
   flex-shrink: 0;
 }
 
-.reviews {
+.rating {
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.rating__reviews-link {
+  padding-left: 0.5rem;
   color: var(--ion-color-primary);
   font-size: 0.8125rem;
 }
@@ -32,5 +37,10 @@
   .subtitle {
     font-size: 0.8125rem;
     color: var(--ion-color-medium);
+  }
+
+  .city {
+    font-size: 0.8125rem;
+    color: var(--ion-color-secondary);
   }
 }

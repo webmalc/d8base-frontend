@@ -639,6 +639,12 @@
     "created-time": "Created at",
     "answer": "Answer"
   },
+  "search": {
+    "result": {
+      "chat": "Chat",
+      "all-services": "All"
+    }
+  },
   "issuance": {
     "search-placeholder": "Find service/professional",
     "search-empty": "Nothing found",
@@ -699,19 +705,6 @@
         "payment-methods": "Payment method",
         "payment-methods-placeholder": "Select payment method"
       }
-    },
-    "result": {
-      "you": "for you",
-      "sort": "sorting"
-    },
-    "search-result": {
-      "services": "Professional service(s)",
-      "more": "More services",
-      "address": "Professional location",
-      "select": "Select",
-      "chat": "Chat",
-      "service-list": "Все услуги",
-      "profile": "Профиль"
     }
   },
   "main-page": {

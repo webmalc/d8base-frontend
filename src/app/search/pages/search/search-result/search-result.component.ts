@@ -29,20 +29,18 @@ export class SearchResultComponent {
     return getUserChatUrl(this.data.professional?.user.id) ?? '';
   }
 
-  private isMoreServicesClicked: boolean = false;
-
   constructor(private readonly router: Router) {}
 
-  public onMoreServicesClick(): void {
-    this.isMoreServicesClicked = true;
-  }
-
-  public needToRenderMoreServicesBtn(): boolean {
-    return this.data.services.length > 3 && !this.isMoreServicesClicked;
-  }
-
   public getServiceList(): ServiceList[] {
-    return this.isMoreServicesClicked ? this.data.services : this.data.services.slice(0, 3);
+    return this.data.services.slice(0, 3);
+  }
+
+  public getServiceCount(): number {
+    return this.data.services.length;
+  }
+
+  public get hasMoreServices(): boolean {
+    return this.getServiceCount() > this.getServiceList().length;
   }
 
   public getCompanyName(): string {

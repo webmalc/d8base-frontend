@@ -1,19 +1,21 @@
 <div class="content">
-  <ion-thumbnail class="avatar">
-    <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
-  </ion-thumbnail>
+  <a [routerLink]="professionalProfileUrl">
+    <app-avatar [user]="professional.user" class="avatar"></app-avatar>
+  </a>
   <div class="info">
     <div class="ion-padding-horizontal">
       <div class="title capitalize-first-letter">
         <a [routerLink]="professionalProfileUrl">{{ professionalName }}</a>
       </div>
-      <div class="subtitle capitalize-first-letter">
-        {{ professional.name }}
+      <div class="subtitle">
+        <span class="capitalize-first-letter">{{ professional.name }}</span>
+        <span>&nbsp;&diams;&nbsp;</span>
+        <span class="city">{{ (professional.locations[0]?.city | cityById$ | async)?.name }}</span>
       </div>
     </div>
-    <div *ngIf="professional?.rating" class="ion-padding-start">
+    <div *ngIf="professional?.rating" class="rating">
       <app-rating [rating]="professional.rating"></app-rating>
-      <div class="reviews">
+      <div class="rating__reviews-link">
         <a [routerLink]="professionalReviewsUrl" (click)="$event.stopPropagation()">
           {{ professional?.reviews_count | asReviews }}
         </a>
