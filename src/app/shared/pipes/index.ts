@@ -9,4 +9,5 @@ export * from './subcategory-by-id.pipe';
 export * from './as-reviews.pipe';
 export * from './as-years.pipe';
 export * from './as-string.pipe';
+export * from './as-services.pipe';
 export * from './default-if-empty.pipe';

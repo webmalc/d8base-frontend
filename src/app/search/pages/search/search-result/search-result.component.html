@@ -8,11 +8,12 @@
     <app-service-link *ngFor="let service of getServiceList()" [service]="service"></app-service-link>
     <div *ngIf="hasMoreServices">
       <a
-        class="ion-item-no-min-height more-services cursor-pointer"
+        class="more-services cursor-pointer"
         [routerLink]="professionalServicesUrl"
         [queryParams]="{ redirectTo: currentUrl }"
       >
         {{ 'search.result.all-services' | translate }}
+        {{ getServiceCount() | asServices }}
       </a>
     </div>
     <div class="bottom-buttons">
