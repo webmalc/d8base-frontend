@@ -10,39 +10,7 @@
   padding-top: 0.5rem;
 }
 
-.border-radius {
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.aie {
-  align-items: flex-end;
-}
-
-.master-level {
-  font-size: 12px;
-  color: var(--ion-color-secondary);
-}
-
 .more-services {
-  font-size: 16px;
+  font-size: 1.1rem;
   color: var(--ion-color-primary);
-}
-
-.section-title {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  color: var(--ion-color-medium);
-}
-
-.select-button-lg {
-  @media (max-width: 540px) {
-    display: none;
-  }
-}
-
-.select-button-sm {
-  @media (min-width: 540px) {
-    display: none;
-  }
 }

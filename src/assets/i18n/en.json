@@ -483,6 +483,11 @@
       "1": "is waiting",
       "2": "is waiting",
       "3": "is waiting"
+    },
+    "services": {
+      "1": "service",
+      "2": "services",
+      "3": "services"
     }
   },
   "master-profile": {

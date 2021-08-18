@@ -83,6 +83,7 @@ import {
   AsYearsPipe,
   AsReviewsPipe,
   AsStringPipe,
+  AsServicesPipe,
   DefaultIfEmptyPipe,
 } from '@app/shared/pipes';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -199,6 +200,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsYearsPipe,
     AsReviewsPipe,
     AsStringPipe,
+    AsServicesPipe,
     DefaultIfEmptyPipe,
     AvatarComponent,
   ],
@@ -285,6 +287,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsYearsPipe,
     AsReviewsPipe,
     AsStringPipe,
+    AsServicesPipe,
     DefaultIfEmptyPipe,
   ],
   imports: [
