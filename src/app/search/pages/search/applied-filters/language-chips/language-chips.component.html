@@ -1,0 +1,3 @@
+<app-chip *ngFor="let language of chips" (delete)="onDelete(language)">
+  {{ 'search.filters.language' | translate }}: <span class="ion-text-uppercase">{{ language }}</span>
+</app-chip>

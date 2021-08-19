@@ -49,40 +49,44 @@
   </app-chip>
 
   <!-- additional -->
-  <app-chip *ngSwitchCase="fields.ratingFrom">
+  <app-chip *ngSwitchCase="fields.ratingFrom" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.rating' | translate }} {{ filter.value }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.onlyWithReviews">
+  <app-chip *ngSwitchCase="fields.onlyWithReviews" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.only-with-reviews' | translate }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.onlyWithPhotos">
+  <app-chip *ngSwitchCase="fields.onlyWithPhotos" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.only-with-photos' | translate }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.onlyWithFixedPrice">
+  <app-chip *ngSwitchCase="fields.onlyWithFixedPrice" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.only-with-fixed-price' | translate }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.onlyWithCertificates">
+  <app-chip *ngSwitchCase="fields.onlyWithCertificates" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.only-with-certificates' | translate }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.startAge">
+  <app-chip *ngSwitchCase="fields.startAge" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.start-age' | translate }} {{ filter.value }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.endAge">
+  <app-chip *ngSwitchCase="fields.endAge" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.end-age' | translate }} {{ filter.value }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.nationalities">
+  <app-chip *ngSwitchCase="fields.nationalities" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.nationalities' | translate }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.languages">
+  <app-language-chips
+    *ngSwitchCase="fields.languages"
+    [languages]="filter.value"
+    (delete)="delete(filter.name, filter.value, $event)"
+  >
     {{ 'issuance.filters.additional.languages' | translate }}
-  </app-chip>
-  <app-chip *ngSwitchCase="fields.professionalLevel">
+  </app-language-chips>
+  <app-chip *ngSwitchCase="fields.professionalLevel" (delete)="delete(filter.name)">
     {{ 'global.professional-level.' + filter.value | translate }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.experience">
+  <app-chip *ngSwitchCase="fields.experience" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.experience' | translate }} {{ filter.value }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.paymentMethods">
+  <app-chip *ngSwitchCase="fields.paymentMethods" (delete)="delete(filter.name)">
     {{ 'issuance.filters.additional.payment-methods' | translate }}
   </app-chip>
 </ng-container>

@@ -648,6 +648,9 @@
     "result": {
       "chat": "Чат",
       "all-services": "Все"
+    },
+    "filters": {
+      "language": "Язык"
     }
   },
   "issuance": {

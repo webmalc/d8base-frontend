@@ -19,6 +19,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { SearchFiltersAdditionalTabComponent } from './components/search-filters/search-filters-additional-tab/search-filters-additional-tab.component';
 import { FiltersPage } from './pages/filters/filters.page';
 import { AppliedFiltersComponent } from './pages/search/applied-filters/applied-filters.component';
+import { LanguageChipsComponent } from './pages/search/applied-filters/language-chips/language-chips.component';
 import { SearchPage } from './pages/search/search-page.component';
 import { SearchPageGuard } from './search-page.guard';
 import { SearchPageRoutingModule } from './search-routing.module';
@@ -49,6 +50,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
     ChipComponent,
     CategoryChipsComponent,
     ServiceTypeChipsComponent,
+    LanguageChipsComponent,
   ],
   exports: [SearchFiltersComponent],
   providers: [SearchPageGuard],
