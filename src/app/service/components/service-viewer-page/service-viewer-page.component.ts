@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfessionalList, ServiceList } from '@app/api/models';
 import { ProfessionalsService, ServicesService } from '@app/api/services';
-import { Observable } from 'rxjs';
+import { getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -41,5 +41,9 @@ export class ServiceViewerPageComponent {
         this.master = master;
         this.service = service;
       });
+  }
+
+  public getProfessionalServicesUrl(professionalId: number) {
+    return getProfessionalServicesUrl(professionalId);
   }
 }

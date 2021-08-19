@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServicePhoto } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
+import { getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
+import { getProfessionalName } from '@app/core/functions/professional.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
@@ -49,6 +51,10 @@ export class ServiceEditorPageComponent {
       first(),
       map(params => params.from === 'publish'),
     );
+  }
+
+  public getProfessionalServicesUrl(professionalId: number) {
+    return getProfessionalServicesUrl(professionalId);
   }
 
   public setIsEnabled(service: Service, isEnabled: boolean): void {
