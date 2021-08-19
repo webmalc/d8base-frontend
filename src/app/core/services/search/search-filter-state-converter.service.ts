@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Category, City, Country, Language, Rate, Subcategory } from '@app/api/models';
+import { Category, City, Country, Language, Rate, ServiceList, Subcategory } from '@app/api/models';
 import { ProfessionalsService, SearchService } from '@app/api/services';
-import { emptyArrayToUndefined } from '@app/core/functions/array.functions';
+import { arrayToString, emptyArrayToUndefined } from '@app/core/functions/array.functions';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
-import { hasWord } from '@app/core/functions/string.functions';
+import { hasWord, toArray } from '@app/core/functions/string.functions';
 import { CitiesApiCache, CountriesApiCache, LanguagesApiCache, RatesApiCache } from '@app/core/services/cache';
 import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-function serviceTypesParams(data: SearchFilterFormValue): string {
-  const types = [];
+function getServiceTypes(data: SearchFilterFormValue): string | null {
+  const types: ServiceList['service_type'][] = [];
   if (data.isOnlineService) {
     types.push('online');
   }
@@ -21,7 +21,7 @@ function serviceTypesParams(data: SearchFilterFormValue): string {
     types.push('client');
   }
 
-  return types.join(',') || null;
+  return arrayToString(types) || null;
 }
 
 function getTimeStamp(dateStr: string, timeStr: string, defaultTime: string): string {
@@ -130,28 +130,28 @@ export class SearchFilterStateConverter {
       // null and undefined values are meant to be excluded
       tags: void 0,
       subregion: void 0,
-      subcategories: data.subcategory?.map(({ id }) => id).join(','),
+      subcategories: arrayToString(data.subcategory?.map(({ id }) => id)),
       startPrice: data.priceStart,
       startDatetime: getTimeStamp(data.dateFrom, data.timeFrom, DAY_START_TIME) || null,
       startAge: data.startAge,
-      serviceTypes: serviceTypesParams(data),
+      serviceTypes: getServiceTypes(data),
       region: void 0,
       ratingFrom: data.rating,
       query: data.query || null,
       professionalLevel: data.professionalLevel?.value,
       priceCurrency: data.priceStart || data.priceEnd ? data.priceCurrency?.currency : void 0,
       postalCode: void 0,
-      paymentMethods: data?.paymentMethods?.map(({ value }) => value).join(', '),
+      paymentMethods: arrayToString(data?.paymentMethods?.map(({ value }) => value)),
       onlyWithReviews: data?.onlyWithReviews || null,
       onlyWithPhotos: data?.onlyWithPhotos || null,
       onlyWithFixedPrice: data?.onlyWithFixedPrice || null,
       onlyWithCertificates: data?.onlyWithCertificates || null,
       onlyWithAutoOrderConfirmation: data.isInstantBooking || null,
-      nationalities: data?.nationalities?.map(({ id }) => id).join(', '),
+      nationalities: arrayToString(data?.nationalities?.map(({ id }) => id)),
       maxDistance: void 0,
       longitude: null,
       latitude: null,
-      languages: data.languages?.map(({ code }) => code).join(', '),
+      languages: arrayToString(data.languages?.map(({ code }) => code)),
       gender: void 0,
       experienceFrom: data?.experience,
       endPrice: data.priceEnd,
@@ -160,7 +160,7 @@ export class SearchFilterStateConverter {
       district: void 0,
       country: data.country?.id,
       city: data.city?.id,
-      categories: data?.category?.map(({ id }) => id).join(','),
+      categories: arrayToString(data?.category?.map(({ id }) => id)),
       exactDatetime: data?.exactDatetime || null,
     };
   }
@@ -178,11 +178,13 @@ export class SearchFilterStateConverter {
     return [
       params?.country || params?.nationalities ? this.countriesApiCache.list() : of([]),
       params?.city ? this.citiesApiCache.getByEntityId(params.city) : of(void 0),
-      params?.categories ? this.getCategories(params.categories.split(',').map(idStr => parseInt(idStr, 10))) : of([]),
+      params?.categories ? this.getCategories(toArray(params.categories).map(idStr => parseInt(idStr, 10))) : of([]),
       params?.subcategories
-        ? this.getSubcategories(params.subcategories.split(',').map(idStr => parseInt(idStr, 10)))
+        ? this.getSubcategories(toArray(params.subcategories).map(idStr => parseInt(idStr, 10)))
         : of([]),
-      params?.languages ? this.languagesApiCache.list() : of([]),
+      params?.languages
+        ? this.languagesApiCache.list().pipe(map(languages => languages.filter(l => params.languages.includes(l.code))))
+        : of([]),
       params?.priceCurrency ? this.ratesApiCache.list() : of([]),
     ];
   }
