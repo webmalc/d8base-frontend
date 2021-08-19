@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/'">
+    <app-column-header [backButtonUrl]="'/'">
       {{ 'registration-verification.confirmation' | translate }}
     </app-column-header>
     <ion-item *ngIf="success; else failure" lines="none">

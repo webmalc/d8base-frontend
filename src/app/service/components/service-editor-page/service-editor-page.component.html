@@ -4,7 +4,7 @@
     <app-info-row *ngIf="showSuccessOrderNotification$ | async">
       {{ 'order.success-title' | translate }}
     </app-info-row>
-    <app-column-header [transparent]="true" previousLocationFallback="/professional">
+    <app-column-header [transparent]="true" backButtonUrl="/professional">
       {{ 'service-details.edit' | translate }}
     </app-column-header>
     <ion-item-divider color="light">

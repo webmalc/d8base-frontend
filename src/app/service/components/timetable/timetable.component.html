@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/service/publish/step-seven'">{{
+    <app-column-header [backButtonUrl]="'/service/publish/step-seven'">{{
       'service-publish.step-seven.timetable.title' | translate
     }}</app-column-header>
     <app-schedule-editor [formControl]="scheduleEditor"></app-schedule-editor>

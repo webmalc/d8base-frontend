@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/profile'">
+    <app-column-header [backButtonUrl]="'/profile'">
       {{ 'profile-form.email-change.email-verification-title' | translate }}
     </app-column-header>
     <ng-container *appIfSpinner="!isLoading">

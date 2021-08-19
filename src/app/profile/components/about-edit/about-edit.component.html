@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/profile'">
+    <app-column-header [backButtonUrl]="'/profile'">
       {{ 'profile-edit.about' | translate }}
     </app-column-header>
     <form *appIfSpinner="form" [formGroup]="form">

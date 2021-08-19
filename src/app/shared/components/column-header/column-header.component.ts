@@ -33,7 +33,7 @@ export class ColumnHeaderComponent {
   }
 
   @Input()
-  public set previousLocationFallback(url: string) {
+  public set backButtonUrl(url: string) {
     this.backButtonUrl$.next(url);
   }
 }

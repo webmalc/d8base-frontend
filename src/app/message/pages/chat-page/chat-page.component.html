@@ -1,5 +1,5 @@
 <app-header></app-header>
-<app-column-header [previousLocationFallback]="'/message'">
+<app-column-header [backButtonUrl]="'/message'">
   <ng-container *ngIf="interlocutorData$ | async as interlocutorData">
     <ion-avatar slot="start">
       <img [src]="getAvatar(interlocutorData)" alt="{{ interlocutorData.first_name }}" />

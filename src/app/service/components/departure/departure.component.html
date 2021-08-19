@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content class="ion-padding-top">
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/service/publish/step-seven'">{{
+    <app-column-header [backButtonUrl]="'/service/publish/step-seven'">{{
       'service-publish.step-seven.departure.title' | translate
     }}</app-column-header>
     <form *ngIf="formService.form" [formGroup]="formService.form" (submit)="submitForm()">
