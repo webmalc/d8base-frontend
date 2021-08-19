@@ -4,8 +4,8 @@
       {{ service.name }}
     </h2>
   </ion-label>
-  <ion-label class="ion-align-self-start ion-text-wrap ion-text-end">
+  <div slot="end" class="ion-align-self-start ion-padding-vertical ion-text-wrap ion-text-end">
     <app-price [price]="service.price"></app-price>
     <app-duration-viewer [duration]="service.duration"></app-duration-viewer>
-  </ion-label>
+  </div>
 </ion-item>
