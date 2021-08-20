@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/professional'">{{
+    <app-column-header [backButtonUrl]="'/professional'">{{
       'contact-edit-page.contacts' | translate
     }}</app-column-header>
     <app-contact-edit

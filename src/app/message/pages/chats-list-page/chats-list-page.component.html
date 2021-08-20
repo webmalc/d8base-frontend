@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content class="ion-margin-top">
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/professional'">
+    <app-column-header [backButtonUrl]="'/professional'">
       {{ 'messages.chat-list-page.messages' | translate }}
     </app-column-header>
     <ion-searchbar

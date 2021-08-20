@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper *ngIf="context$ | async as context">
-    <app-column-header [previousLocationFallback]="professionalProfileUrl(context.professional.id)">
+    <app-column-header [backButtonUrl]="professionalProfileUrl(context.professional.id)">
       {{ 'master-profile.calendar.schedule' | translate }}
     </app-column-header>
     <ion-row *ngIf="context.canEdit">

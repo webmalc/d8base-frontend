@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content *ngIf="context$ | async as context">
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="getServicePageUrl(context.service.id)">{{
+    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">{{
       'service-details.schedule-title' | translate
     }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">

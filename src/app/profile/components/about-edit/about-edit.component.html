@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/profile'">
+    <app-column-header [backButtonUrl]="'/profile'">
       {{ 'profile-edit.about' | translate }}
     </app-column-header>
     <form *appIfSpinner="form" [formGroup]="form">
@@ -30,13 +30,7 @@
         >
         </ionic-selectable>
       </ion-item>
-      <ion-button
-        [disabled]="form.invalid || form.pristine"
-        class="ion-margin-top"
-        (click)="submitForm()"
-        expand="block"
-        fill="solid"
-      >
+      <ion-button class="ion-margin-top" (click)="submitForm()" expand="block" fill="solid">
         {{ 'profile-edit.save' | translate }}
       </ion-button>
     </form>

@@ -1,9 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="'/profile'">{{
-      'contact-edit-page.contacts' | translate
-    }}</app-column-header>
+    <app-column-header [backButtonUrl]="'/profile'">{{ 'contact-edit-page.contacts' | translate }}</app-column-header>
     <app-contact-edit
       *appIfSpinner="contactItems$ | ifSpinnerErrorState | async as contactItems"
       [contact]="contact$ | async"

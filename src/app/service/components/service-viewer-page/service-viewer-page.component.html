@@ -1,7 +1,9 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header>{{ 'service-details.title' | translate }}</app-column-header>
+    <app-column-header [backButtonUrl]="getProfessionalServicesUrl(service?.professional)">{{
+      'service-details.title' | translate
+    }}</app-column-header>
     <ng-container *appIfSpinner="service">
       <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
       <div class="ion-text-right">

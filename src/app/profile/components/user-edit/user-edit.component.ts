@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import * as AppValidators from '@app/core/validators';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
@@ -37,6 +38,10 @@ export class UserEditComponent implements OnInit {
   }
 
   public submitForm(): void {
+    if (isFormInvalid(this.form)) {
+      return;
+    }
+
     this.form.disable({ emitEvent: false });
     this.store.dispatch(new CurrentUserActions.UpdateProfile(this.form.getRawValue())).subscribe({
       next: () => {

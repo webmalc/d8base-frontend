@@ -54,3 +54,7 @@ export function getProfessionalReviewsUrl(professionalId: number | string): stri
 export function getUserChatUrl(userId: number | string): string {
   return userId ? `/${NavPath.Message}/${NavBranch.Chat}/${userId}` : '';
 }
+
+export function getServiceUrl(serviceId: number | string): string {
+  return serviceId ? `/${NavPath.Service}/${serviceId}` : '';
+}

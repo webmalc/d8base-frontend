@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { parseUriString } from '@app/core/functions/uri.functions';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-column-header',
@@ -16,24 +16,29 @@ export class ColumnHeaderComponent {
   public backButtonParams$: Observable<object>;
 
   private readonly backButtonUrl$ = new BehaviorSubject<string>('');
+  private readonly url$: Observable<{ path: string; queryParams?: object }>;
 
-  constructor(private readonly activatedRoute: ActivatedRoute) {
+  constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router) {
     if (!this.activatedRoute?.queryParamMap) {
       return;
     }
-    const url$ = combineLatest([this.activatedRoute.queryParamMap, this.backButtonUrl$]).pipe(
+    this.url$ = combineLatest([this.activatedRoute.queryParamMap, this.backButtonUrl$]).pipe(
       map(([paramsMap, backButtonUrl]) => {
         const param = paramsMap.get('redirectTo');
         const redirectTo = param ? decodeURIComponent(param) : backButtonUrl;
         return parseUriString(redirectTo);
       }),
     );
-    this.backButtonLink$ = url$.pipe(map(url => url.path));
-    this.backButtonParams$ = url$.pipe(map(url => url.queryParams));
+    this.backButtonLink$ = this.url$.pipe(map(url => url.path));
+    this.backButtonParams$ = this.url$.pipe(map(url => url.queryParams));
   }
 
   @Input()
-  public set previousLocationFallback(url: string) {
+  public set backButtonUrl(url: string) {
     this.backButtonUrl$.next(url);
+  }
+
+  public navigateBack(): void {
+    this.url$.pipe(first()).subscribe(url => this.router.navigate([url.path], { queryParams: url.queryParams }));
   }
 }

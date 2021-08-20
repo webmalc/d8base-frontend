@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [previousLocationFallback]="professionalProfileUrl">
+    <app-column-header [backButtonUrl]="professionalProfileUrl">
       {{ 'master-profile.edit-master.title' | translate }}
     </app-column-header>
     <app-master-edit (saveEmitter)="save($event)" [item]="item"></app-master-edit>

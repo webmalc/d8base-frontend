@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Language, Profile, UserLanguage } from '@app/api/models';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { Country } from '@app/profile/models/country';
+import { ColumnHeaderComponent } from '@app/shared/components';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import * as UserLanguagesActions from '@app/store/current-user/user-language-state/user-language.actions';
@@ -27,6 +29,9 @@ export class AboutEditComponent implements OnInit {
 
   @Select(UserLanguagesSelectors.entities)
   public userLanguages$: Observable<UserLanguage[]>;
+
+  @ViewChild(ColumnHeaderComponent)
+  public header: ColumnHeaderComponent;
 
   public languages$ = this.languagesApiCache.list();
   public form: FormGroup;
@@ -81,6 +86,10 @@ export class AboutEditComponent implements OnInit {
   }
 
   public submitForm(): void {
+    if (isFormInvalid(this.form)) {
+      return;
+    }
+
     let date: string;
     if (this.form.value[this.formFields.Birthday]) {
       date = fromDatetime(this.form.value[this.formFields.Birthday]).date;
@@ -105,7 +114,7 @@ export class AboutEditComponent implements OnInit {
     const updateUser$ = this.actions$.pipe(ofActionSuccessful(CurrentUserActions.UpdateProfile), first());
 
     forkJoin([updateLanguages$, updateUser$]).subscribe(() => {
-      this.router.navigate(['/profile']);
+      this.header.navigateBack();
     });
   }
 
