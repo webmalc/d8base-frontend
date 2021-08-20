@@ -29,13 +29,7 @@
         <ion-input type="text" name="email" formControlName="{{ formFields.Email }}"> </ion-input>
       </ion-item>
       <app-form-control-error [controlName]="formFields.Email"> </app-form-control-error>
-      <ion-button
-        [disabled]="form.invalid || form.pristine || form.disabled"
-        type="submit"
-        class="ion-margin-top"
-        fill="solid"
-        expand="block"
-      >
+      <ion-button [disabled]="form.disabled" type="submit" class="ion-margin-top" fill="solid" expand="block">
         {{ 'profile-form.button' | translate }}
       </ion-button>
     </form>

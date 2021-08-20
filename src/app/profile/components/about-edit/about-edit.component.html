@@ -30,13 +30,7 @@
         >
         </ionic-selectable>
       </ion-item>
-      <ion-button
-        [disabled]="form.invalid || form.pristine"
-        class="ion-margin-top"
-        (click)="submitForm()"
-        expand="block"
-        fill="solid"
-      >
+      <ion-button class="ion-margin-top" (click)="submitForm()" expand="block" fill="solid">
         {{ 'profile-edit.save' | translate }}
       </ion-button>
     </form>
