@@ -1,9 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [backButtonUrl]="'/profile'">{{
-      'profile-main-edit.main' | translate
-    }}</app-column-header>
+    <app-column-header [backButtonUrl]="'/profile'">{{ 'profile-main-edit.main' | translate }}</app-column-header>
     <form *ngIf="form" [formGroup]="form" (submit)="submitForm()">
       <ion-item>
         <ion-label class="label-for-required-input" color="medium" position="floating">

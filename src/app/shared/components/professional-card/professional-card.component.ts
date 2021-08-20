@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfessionalList } from '@app/api/models';
 import { getProfessionalProfileUrl, getProfessionalReviewsUrl } from '@app/core/functions/navigation.functions';
 import { getProfessionalName } from '@app/core/functions/professional.functions';
@@ -11,6 +12,11 @@ import { getProfessionalName } from '@app/core/functions/professional.functions'
 })
 export class ProfessionalCardComponent {
   @Input() public professional: ProfessionalList;
+  public queryParams: object;
+
+  constructor(router: Router) {
+    this.queryParams = { redirectTo: router.url };
+  }
 
   public get professionalName(): string {
     return getProfessionalName(this.professional);
