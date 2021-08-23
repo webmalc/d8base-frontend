@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Master } from '@app/core/models/master';
 import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
 import { UserManagerService } from '@app/core/services/managers/user-manager.service';
 import { ServicePublishSteps } from '@app/service/enums/service-publish-steps';
@@ -21,9 +20,7 @@ export class ServicePublishAuthStateManagerService {
         .pipe(first())
         .subscribe(isMaster =>
           isMaster
-            ? this.masterManager
-                .getMasterList()
-                .subscribe(masterList => this.update((masterList as Master[]).length === 0))
+            ? this.masterManager.getMasterList().subscribe(masterList => this.update(masterList.length === 0))
             : this.update(true),
         );
     }

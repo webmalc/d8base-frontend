@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ProfessionalCalendar } from '@app/api/models';
 import { addMinutes, getTimeStringFromMinutes, stripTime } from '@app/core/functions/datetime.functions';
-import { MasterCalendar } from '@app/professional/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
 import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
 import { environment } from '@env/environment';
@@ -16,7 +16,7 @@ export class CalendarService {
   private readonly intervals = environment.calendar_day_intervals;
   private readonly minutesInInterval = this.minutesInDay / this.intervals;
 
-  public generate(interval: number, enabledPeriods: MasterCalendar[]): CalendarInterval[] {
+  public generate(interval: number, enabledPeriods: ProfessionalCalendar[]): CalendarInterval[] {
     if (!Number.isInteger(this.minutesInInterval / interval)) {
       throw Error('cannot generate calendar with given interval');
     }
@@ -52,7 +52,7 @@ export class CalendarService {
     return enabledPeriods.some(period => time >= period.start && time < period.end);
   }
 
-  private generateEnabledPeriodsArray(enabledPeriods: MasterCalendar[]): Interval[] {
+  private generateEnabledPeriodsArray(enabledPeriods: ProfessionalCalendar[]): Interval[] {
     return enabledPeriods.map(v => ({
       start: new Date(v.start_datetime),
       end: new Date(v.end_datetime),

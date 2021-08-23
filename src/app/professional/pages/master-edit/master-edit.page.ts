@@ -1,41 +1,43 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Professional } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
 import { NavBranch, NavParams, NavPath } from '@app/core/constants/navigation.constants';
-import { Master } from '@app/core/models/master';
-import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
-import { MasterApiService } from '@app/professional/services/master-api.service';
-import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
+import { ColumnHeaderComponent } from '@app/shared/components';
 
 @Component({
   selector: 'app-master-edit-page',
   templateUrl: './master-edit.page.html',
   styleUrls: ['./master-edit.page.scss'],
 })
-export class MasterEditPage extends AbstractModelEditPage<Master> {
+export class MasterEditPage implements OnInit {
+  @ViewChild(ColumnHeaderComponent)
+  public header: ColumnHeaderComponent;
+
   public professionalProfileUrl = `/${NavPath.Professional}/${NavBranch.MyProfile}`;
+  public professional: Professional;
 
-  constructor(
-    protected readonly api: MasterApiService,
-    protected readonly route: ActivatedRoute,
-    protected readonly masterManager: MasterManagerService,
-    protected readonly router: Router,
-  ) {
-    super(route, api, masterManager);
+  constructor(protected readonly api: AccountsService, protected readonly route: ActivatedRoute) {}
+
+  public ngOnInit(): void {
+    const professionalId = parseInt(this.route.snapshot.paramMap.get(NavParams.MasterId), 10);
+    if (professionalId) {
+      this.api.accountsProfessionalsRead(professionalId).subscribe(professional => {
+        this.professional = professional;
+      });
+    } else {
+      this.professional = {
+        name: '',
+        subcategory: NaN,
+      };
+    }
   }
 
-  protected afterApiCallback(master?: Master): void {
-    this.router.navigateByUrl(this.professionalProfileUrl);
-  }
-
-  protected getItemId(): number {
-    return parseInt(this.route.snapshot.paramMap.get(NavParams.MasterId), 10);
-  }
-
-  protected getNewModel(): Master {
-    return new Master();
-  }
-
-  protected isUserOnly(): boolean {
-    return true;
+  public save(data): void {
+    const id = this.professional.id;
+    const saveCommand = id
+      ? this.api.accountsProfessionalsUpdate({ id, data })
+      : this.api.accountsProfessionalsCreate(data);
+    saveCommand.subscribe(() => this.header.navigateBack());
   }
 }

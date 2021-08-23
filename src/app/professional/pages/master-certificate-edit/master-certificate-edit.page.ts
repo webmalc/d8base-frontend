@@ -1,39 +1,55 @@
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
-import { Certificate } from '@app/professional/models/certificate';
-import { CertificatesApiService } from '@app/professional/services/certificates-api.service';
-import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
+import { ProfessionalCertificate } from '@app/api/models';
+import { AccountsService } from '@app/api/services/accounts.service';
+import { NavParams } from '@app/core/constants/navigation.constants';
+import { MasterManagerService } from '@app/core/services';
+import { ColumnHeaderComponent } from '@app/shared/components';
 
 @Component({
   selector: 'app-master-certificate-edit',
   templateUrl: './master-certificate-edit.page.html',
   styleUrls: ['./master-certificate-edit.page.scss'],
 })
-export class MasterCertificateEditPage extends AbstractModelEditPage<Certificate> {
+export class MasterCertificateEditPage implements OnInit {
+  @ViewChild(ColumnHeaderComponent)
+  public header: ColumnHeaderComponent;
+
+  public certificate: ProfessionalCertificate;
+
   constructor(
-    protected readonly route: ActivatedRoute,
-    protected readonly location: Location,
-    protected readonly api: CertificatesApiService,
-    protected readonly masterManager: MasterManagerService,
-  ) {
-    super(route, api, masterManager);
+    private readonly api: AccountsService,
+    private readonly route: ActivatedRoute,
+    private readonly masterManager: MasterManagerService,
+  ) {}
+
+  public ngOnInit(): void {
+    const certificateId = parseInt(this.route.snapshot.paramMap.get(NavParams.CertificateId), 10);
+    if (certificateId) {
+      this.api.accountsProfessionalCertificatesRead(certificateId).subscribe(certificate => {
+        this.certificate = certificate;
+      });
+    } else {
+      this.masterManager.getMasterList().subscribe(
+        professionals =>
+          (this.certificate = {
+            name: '',
+            organization: '',
+            professional: professionals[0].id,
+          }),
+      );
+    }
   }
 
-  protected afterApiCallback(): void {
-    this.location.back();
+  public save(data: ProfessionalCertificate): void {
+    const id = this.certificate.id;
+    const saveCommand = id
+      ? this.api.accountsProfessionalCertificatesUpdate({ id, data })
+      : this.api.accountsProfessionalCertificatesCreate(data);
+    saveCommand.subscribe(() => this.header.navigateBack());
   }
 
-  protected getItemId(): number {
-    return parseInt(this.route.snapshot.paramMap.get('certificate-id'), 10);
-  }
-
-  protected getNewModel(): Certificate {
-    return new Certificate();
-  }
-
-  protected isUserOnly(): boolean {
-    return false;
+  public delete(id: number): void {
+    this.api.accountsProfessionalCertificatesDelete(id).subscribe(() => this.header.navigateBack());
   }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ProfessionalCalendar } from '@app/api/models';
 import {
   addDays,
   getCurrentDay,
@@ -7,7 +8,6 @@ import {
   getTimeStringFromMinutes,
   stripTime,
 } from '@app/core/functions/datetime.functions';
-import { MasterCalendar } from '@app/professional/models/master-calendar';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
 import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
 import { environment } from '@env/environment';
@@ -51,7 +51,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   constructor(private readonly calendar: CalendarService) {}
 
   @Input()
-  public set enabledPeriods(list: MasterCalendar[]) {
+  public set enabledPeriods(list: ProfessionalCalendar[]) {
     this.isLoadingEnabledPeriods = Boolean(list);
     this.calendarIntervals = this.calendar.generate(CALENDAR_INTERVAL, list);
   }

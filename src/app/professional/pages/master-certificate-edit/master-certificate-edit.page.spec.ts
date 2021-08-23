@@ -1,10 +1,10 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 
-import { CertificatesApiService } from '../../services/certificates-api.service';
 import { MasterCertificateEditPage } from './master-certificate-edit.page';
 
 describe('MasterCertificateEditPage', () => {
@@ -14,6 +14,7 @@ describe('MasterCertificateEditPage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         declarations: [MasterCertificateEditPage],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
@@ -23,14 +24,13 @@ describe('MasterCertificateEditPage', () => {
               snapshot: {
                 paramMap: {
                   get(): string {
-                    return '';
+                    return '123';
                   },
                 },
               },
             },
           },
           { provide: StorageManagerService, useClass: StorageManagerMock },
-          CertificatesApiService,
         ],
       }).compileComponents();
 

@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { City } from '@app/api/models';
-import { District } from '@app/core/models/district';
-import { Region } from '@app/core/models/region';
-import { Subregion } from '@app/core/models/subregion';
+import { City, Country, District, Region, Subregion } from '@app/api/models';
 import {
   CitiesApiCache,
   CountriesApiCache,
@@ -10,7 +7,6 @@ import {
   RegionsApiCache,
   SubregionsApiCache,
 } from '@app/core/services/cache';
-import { Country } from '@app/profile/models/country';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 

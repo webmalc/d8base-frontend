@@ -1,6 +1,9 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-experience-edit (delete)="delete($event)" (save)="save($event)" [item]="item"></app-experience-edit>
+    <app-column-header [backButtonUrl]="'/professional'">
+      {{ 'experience-edit-page.back' | translate }}
+    </app-column-header>
+    <app-experience-edit (delete)="delete($event)" (save)="save($event)" [item]="experience"></app-experience-edit>
   </app-content-wrapper>
 </ion-content>

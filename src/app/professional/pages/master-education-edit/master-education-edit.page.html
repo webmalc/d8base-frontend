@@ -1,6 +1,9 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-education-edit (delete)="delete($event)" (save)="save($event)" [item]="item"> </app-education-edit>
+    <app-column-header [backButtonUrl]="'/professional'">
+      {{ 'education-edit-page.back' | translate }}
+    </app-column-header>
+    <app-education-edit (delete)="delete($event)" (save)="save($event)" [item]="education"> </app-education-edit>
   </app-content-wrapper>
 </ion-content>

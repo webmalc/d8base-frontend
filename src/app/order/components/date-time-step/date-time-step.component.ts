@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProfessionalCalendar } from '@app/api/models';
 import { ScheduleService } from '@app/api/services';
 import { addDays, getLocalDateString } from '@app/core/functions/datetime.functions';
-import { MasterCalendar } from '@app/professional/models/master-calendar';
 import { StepComponent } from '@app/order/abstract/step';
 import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
@@ -23,7 +23,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class DateTimeStepComponent extends StepComponent<DateTimeStepData> implements OnInit {
   public readonly formControl = new FormControl(null, Validators.required);
-  public displayedCalendars$: Observable<MasterCalendar[]>;
+  public displayedCalendars$: Observable<ProfessionalCalendar[]>;
   public duration: number;
 
   private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());

@@ -1,5 +1,4 @@
-import { Category } from '@app/core/models/category';
-import { Subcategory } from '@app/core/models/subcategory';
+import { Category, Subcategory } from '@app/api/models';
 
 export interface StepOneDataInterface {
   category: Category;

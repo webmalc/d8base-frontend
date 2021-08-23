@@ -4,7 +4,6 @@ import { StorageManagerService } from '@app/core/services/storage-manager.servic
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 
-import { EducationApiService } from '../../services/education-api.service';
 import { MasterEducationEditPage } from './master-education-edit.page';
 
 describe('MasterEducationEditPage', () => {
@@ -17,14 +16,13 @@ describe('MasterEducationEditPage', () => {
         declarations: [MasterEducationEditPage],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
-          EducationApiService,
           {
             provide: ActivatedRoute,
             useValue: {
               snapshot: {
                 paramMap: {
                   get(): string {
-                    return '';
+                    return '123';
                   },
                 },
               },

@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Certificate } from '@app/professional/models/certificate';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { plainToClass } from 'class-transformer';
 import { CertificateComponent } from './certificate.component';
 
 describe('CertificateComponent', () => {
@@ -18,17 +16,16 @@ describe('CertificateComponent', () => {
 
       fixture = TestBed.createComponent(CertificateComponent);
       component = fixture.componentInstance;
-      component.certificate = plainToClass(Certificate, {
+      component.certificate = {
         name: 'test',
         id: 1,
         date: '123',
         photo: 'link.asdf',
-        professional: 1,
         organization: 'test',
         certificate_id: '123',
         url: 'link.sdf',
         photo_thumbnail: 'link.sdfsdf',
-      });
+      };
       fixture.detectChanges();
     }),
   );

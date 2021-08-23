@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { MasterApiService } from '@app/professional/services/master-api.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 
@@ -30,7 +29,6 @@ describe('MasterEditPage', () => {
             },
           },
           { provide: StorageManagerService, useClass: StorageManagerMock },
-          MasterApiService,
         ],
       }).compileComponents();
 

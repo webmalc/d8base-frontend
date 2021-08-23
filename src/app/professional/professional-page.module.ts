@@ -9,10 +9,6 @@ import { MasterProfileCalendarComponent } from '@app/professional/pages/master-p
 import { MasterProfileServicesComponent } from '@app/professional/pages/service-list-page/master-profile-services/master-profile-services.component';
 import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
-import { CertificatesApiService } from '@app/professional/services/certificates-api.service';
-import { EducationApiService } from '@app/professional/services/education-api.service';
-import { ExperienceApiService } from '@app/professional/services/experience-api.service';
-import { MasterApiService } from '@app/professional/services/master-api.service';
 import { ServicesGeneratorFactoryService } from '@app/professional/services/services-generator-factory.service';
 import { ReviewsModule } from '@app/reviews/reviews.module';
 import { ServicePageModule } from '@app/service/service.module';
@@ -57,10 +53,6 @@ import { ProfessionalResolver } from './professional.resolver';
     DataPlaceholderComponent,
   ],
   providers: [
-    MasterApiService,
-    ExperienceApiService,
-    EducationApiService,
-    CertificatesApiService,
     CalendarGeneratorFactoryService,
     ServicesGeneratorFactoryService,
     ProfessionalGuard,

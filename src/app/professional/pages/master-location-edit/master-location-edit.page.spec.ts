@@ -21,7 +21,7 @@ describe('MasterLocationEditPage', () => {
               snapshot: {
                 paramMap: {
                   get(): string {
-                    return '';
+                    return '123';
                   },
                 },
               },

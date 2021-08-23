@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SentOrder } from '@app/api/models';
 import { isFormInvalid } from '@app/core/functions/form.functions';
-import { SentOrder } from '@app/core/models/sent-order';
 import { NgDestroyService } from '@app/core/services';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';

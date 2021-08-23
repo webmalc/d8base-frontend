@@ -1,5 +1,4 @@
-import { Category, City, Country, Rate, Subcategory } from '@app/api/models';
-import { Tag } from '@app/professional/models/tag';
+import { Category, City, Country, Rate, Subcategory, ServiceTag } from '@app/api/models';
 
 export interface SearchFilterFormValue {
   query?: string;
@@ -7,7 +6,7 @@ export interface SearchFilterFormValue {
   city?: City;
   category?: Category[];
   subcategory?: Subcategory[];
-  tags?: Tag[];
+  tags?: ServiceTag[];
   isOnlineBooking?: boolean;
   isInstantBooking?: boolean;
   dateFrom?: string;
