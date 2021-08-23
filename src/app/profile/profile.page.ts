@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Profile, UserContact, UserLanguage } from '@app/api/models';
+import { Profile, UserContact, UserLanguage, UserLocation } from '@app/api/models';
 import { getNoAvatarLink } from '@app/core/functions/media.functions';
-import { UserLocation } from '@app/core/models/user-location';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';

@@ -13,7 +13,7 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class CertificateEditComponent {
   @Output() public readonly saveEmitter = new EventEmitter<ProfessionalCertificate>();
-  @Output() public readonly deleteEmitter = new EventEmitter<ProfessionalCertificate>();
+  @Output() public readonly deleteEmitter = new EventEmitter<number>();
 
   public nameControl = new FormControl('', Validators.required);
   public organizationControl = new FormControl('', Validators.required);
@@ -57,7 +57,7 @@ export class CertificateEditComponent {
   }
 
   public delete(): void {
-    this.deleteEmitter.emit(this.initialValue);
+    this.deleteEmitter.emit(this.initialValue?.id);
   }
 
   private createForm(): FormGroup {

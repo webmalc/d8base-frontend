@@ -1,10 +1,13 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
+    <app-column-header [backButtonUrl]="'/professional'">
+      {{ 'certificates-edit-page.back' | translate }}
+    </app-column-header>
     <app-certificate-edit
       (deleteEmitter)="delete($event)"
       (saveEmitter)="save($event)"
-      [item]="item"
+      [item]="certificate"
     ></app-certificate-edit>
   </app-content-wrapper>
 </ion-content>

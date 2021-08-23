@@ -1,6 +1,4 @@
-import { PostalCode } from '@app/core/models/postal-code';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
+import { City, Country, PostalCode } from '@app/api/models';
 import { ServiceTimetableInterface } from '@app/service/interfaces/service-timetable-interface';
 
 export interface StepSevenDataInterface extends ServiceTimetableInterface {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { City } from '@app/profile/models/city';
+import { City } from '@app/api/models';
 import { IonItem, NavParams, PopoverController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 

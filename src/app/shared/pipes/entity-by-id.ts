@@ -1,5 +1,5 @@
 import { PipeTransform } from '@angular/core';
-import { ApiCache } from '@app/core/abstract/api-cache.service';
+import { ApiCache } from '@app/core/services/cache/api-cache.service';
 import { Observable, of } from 'rxjs';
 
 export abstract class EntityById<T> implements PipeTransform {

@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Language, Profile, UserLanguage } from '@app/api/models';
+import { Country, Language, Profile, UserLanguage } from '@app/api/models';
 import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
 import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
-import { Country } from '@app/profile/models/country';
 import { ColumnHeaderComponent } from '@app/shared/components';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';

@@ -1,39 +1,55 @@
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProfessionalExperience } from '@app/api/models';
+import { AccountsService } from '@app/api/services';
+import { NavParams } from '@app/core/constants/navigation.constants';
 import { MasterManagerService } from '@app/core/services/managers/master-manager.service';
-import { Experience } from '@app/professional/models/experience';
-import { ExperienceApiService } from '@app/professional/services/experience-api.service';
-import { AbstractModelEditPage } from '@app/shared/abstract/abstract-model-edit-page';
+import { ColumnHeaderComponent } from '@app/shared/components';
 
 @Component({
   selector: 'app-master-experience-edit',
   templateUrl: './master-experience-edit.page.html',
   styleUrls: ['./master-experience-edit.page.scss'],
 })
-export class MasterExperienceEditPage extends AbstractModelEditPage<Experience> {
+export class MasterExperienceEditPage implements OnInit {
+  @ViewChild(ColumnHeaderComponent)
+  public header: ColumnHeaderComponent;
+
+  public experience: ProfessionalExperience;
+
   constructor(
-    protected readonly experienceApi: ExperienceApiService,
-    protected readonly route: ActivatedRoute,
-    protected readonly masterManager: MasterManagerService,
-    protected readonly location: Location,
-  ) {
-    super(route, experienceApi, masterManager);
+    private readonly api: AccountsService,
+    private readonly route: ActivatedRoute,
+    private readonly masterManager: MasterManagerService,
+  ) {}
+
+  public ngOnInit(): void {
+    const experienceId = parseInt(this.route.snapshot.paramMap.get(NavParams.ExperienceId), 10);
+    if (experienceId) {
+      this.api.accountsProfessionalExperienceRead(experienceId).subscribe(experience => {
+        this.experience = experience;
+      });
+    } else {
+      this.masterManager.getMasterList().subscribe(
+        professionals =>
+          (this.experience = {
+            company: '',
+            title: '',
+            professional: professionals[0].id,
+          }),
+      );
+    }
   }
 
-  protected afterApiCallback(): void {
-    this.location.back();
+  public save(data: ProfessionalExperience): void {
+    const id = this.experience.id;
+    const saveCommand = id
+      ? this.api.accountsProfessionalExperienceUpdate({ id, data })
+      : this.api.accountsProfessionalExperienceCreate(data);
+    saveCommand.subscribe(() => this.header.navigateBack());
   }
 
-  protected getItemId(): number {
-    return parseInt(this.route.snapshot.paramMap.get('experience-id'), 10);
-  }
-
-  protected getNewModel(): Experience {
-    return new Experience();
-  }
-
-  protected isUserOnly(): boolean {
-    return false;
+  public delete(id: number): void {
+    this.api.accountsProfessionalExperienceDelete(id).subscribe(() => this.header.navigateBack());
   }
 }

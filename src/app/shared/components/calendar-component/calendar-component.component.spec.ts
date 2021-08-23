@@ -20,8 +20,8 @@ describe('CalendarComponentComponent', () => {
         {
           start_datetime: '2020-12-03T09:00:00+01:00',
           end_datetime: '2020-12-03T18:00:00+01:00',
-          professional: 1,
-          service: null,
+          professional: '1',
+          duration: 15,
         },
       ];
       fixture.detectChanges();

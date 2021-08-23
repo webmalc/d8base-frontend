@@ -4,7 +4,6 @@ import { StorageManagerService } from '@app/core/services/storage-manager.servic
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 
-import { ExperienceApiService } from '../../services/experience-api.service';
 import { MasterExperienceEditPage } from './master-experience-edit.page';
 
 describe('MasterExperienceEditPage', () => {
@@ -23,13 +22,12 @@ describe('MasterExperienceEditPage', () => {
               snapshot: {
                 paramMap: {
                   get(): string {
-                    return '';
+                    return '123';
                   },
                 },
               },
             },
           },
-          ExperienceApiService,
           { provide: StorageManagerService, useClass: StorageManagerMock },
         ],
       }).compileComponents();

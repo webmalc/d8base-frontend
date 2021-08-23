@@ -14,7 +14,7 @@ import ExperienceFormValue from './experience-form-value.interface';
 })
 export class ExperienceEditComponent {
   @Output() public save = new EventEmitter<ProfessionalExperience>();
-  @Output() public delete = new EventEmitter<ProfessionalExperience>();
+  @Output() public delete = new EventEmitter<number>();
 
   public readonly formFields = ExperienceFormFields;
   public form: FormGroup;
@@ -59,7 +59,7 @@ export class ExperienceEditComponent {
   }
 
   public onDelete(): void {
-    this.delete.emit(this.initialValue);
+    this.delete.emit(this.initialValue?.id);
   }
 
   private getExperience(): ProfessionalExperience {

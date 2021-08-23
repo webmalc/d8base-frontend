@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Profile } from '@app/api/models';
+import { City, Country, Profile } from '@app/api/models';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/api/is-user-registered-api.service';
 import * as AppValidators from '@app/core/validators';
-import { City } from '@app/profile/models/city';
-import { Country } from '@app/profile/models/country';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';

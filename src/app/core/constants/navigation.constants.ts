@@ -36,4 +36,7 @@ export enum NavBranch {
 
 export enum NavParams {
   MasterId = 'master-id',
+  CertificateId = 'certificate-id',
+  EducationId = 'education-id',
+  ExperienceId = 'experience-id',
 }
