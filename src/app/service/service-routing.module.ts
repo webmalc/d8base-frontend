@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
-import { ServiceEditorPageComponent } from '@app/service/components/service-editor-page/service-editor-page.component';
+import { ServiceEditorPageComponent } from '@app/service/pages/service-editor-page/service-editor-page.component';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import { ServicePublishStepFiveComponent } from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import { ServicePublishStepFourComponent } from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
@@ -11,7 +11,7 @@ import { ServicePublishStepSevenComponent } from '@app/service/components/servic
 import { ServicePublishStepSixComponent } from '@app/service/components/service-publish-step-six/service-publish-step-six.component';
 import { ServicePublishStepThreeComponent } from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
 import { ServicePublishStepTwoComponent } from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
-import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
+import { ServiceViewerPageComponent } from '@app/service/pages/service-viewer-page/service-viewer-page.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
 import {
@@ -19,7 +19,7 @@ import {
   ServiceInfoEditorComponent,
   ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
-} from './components/service-editor-page';
+} from './pages/service-editor-page';
 import { ServicePublishWrapperComponent } from './components/service-publish-wrapper/service-publish-wrapper.component';
 import { ServicePublishResetStateService } from './guards/service-publish-reset-state.service';
 
