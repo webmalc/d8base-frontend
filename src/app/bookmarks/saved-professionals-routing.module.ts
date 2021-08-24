@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserSavedProfessionalsListComponent } from './components/user-saved-professionals-list/user-saved-professionals.component';
+import { BookmarksListPageComponent } from './bookmarks-list-page.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: UserSavedProfessionalsListComponent,
+    component: BookmarksListPageComponent,
   },
 ];
 

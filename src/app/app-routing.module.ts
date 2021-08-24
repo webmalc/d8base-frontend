@@ -54,8 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'saved-professionals',
-    loadChildren: () =>
-      import('./saved-professionals/saved-professionals.module').then(m => m.SavedProfessionalsModule),
+    loadChildren: () => import('./bookmarks/bookmarks.module').then(m => m.BookmarksModule),
     canActivate: [MustBeAuthorizedGuard],
   },
   { path: '**', component: NotFoundPageComponent },
