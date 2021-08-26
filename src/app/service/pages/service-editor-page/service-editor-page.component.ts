@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Service, ServicePhoto } from '@app/api/models';
+import { Service, ServicePhoto, ServiceTag } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
 import { getProfessionalServicesUrl, getServiceUrl } from '@app/core/functions/navigation.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { distinct, filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-editor-page',
@@ -19,9 +19,11 @@ export class ServiceEditorPageComponent {
   public service$: Observable<Service>;
   public schedule$: Observable<AbstractSchedule[]>;
   public photos$: Observable<ServicePhoto[]>;
+  public tags$: Observable<ServiceTag[]>;
   public showSuccessOrderNotification$: Observable<boolean>;
 
   private readonly refresh$ = new BehaviorSubject<void>(null);
+  private readonly serviceId$ = new Subject<number>();
 
   constructor(
     private readonly serviceOperations: ServiceManagerService,
@@ -44,6 +46,12 @@ export class ServiceEditorPageComponent {
     );
     this.photos$ = this.service$.pipe(
       switchMap(service => api.accountsServicePhotosList({ service: service.id })),
+      map(response => response.results),
+      shareReplay(1),
+    );
+    this.tags$ = this.serviceId$.pipe(
+      distinct(),
+      switchMap(serviceId => this.api.accountsServiceTagsList({ service: serviceId })),
       map(response => response.results),
       shareReplay(1),
     );
@@ -78,5 +86,10 @@ export class ServiceEditorPageComponent {
 
   public deleteService(service: Service): void {
     this.serviceOperations.deleteService(service.id).subscribe(() => this.refresh$.next());
+  }
+
+  public getServiceTags(serviceId: number): Observable<ServiceTag[]> {
+    this.serviceId$.next(serviceId);
+    return this.tags$;
   }
 }

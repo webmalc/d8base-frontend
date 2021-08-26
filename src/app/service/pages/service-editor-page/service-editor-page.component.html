@@ -38,14 +38,17 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item *ngIf="service.description" class="ion-margin-top ion-align-items-start" lines="none">
-      <ion-text class="preserve-line-breaks">{{ service.description }}</ion-text>
-    </ion-item>
     <app-image-carousel
       *appIfSpinner="photos$ | ifSpinnerErrorState | async as photos"
       class="ion-margin-top"
       [photos]="photos"
     ></app-image-carousel>
+    <ion-item *ngIf="service.description" class="ion-margin-top ion-align-items-start" lines="none">
+      <ion-text class="preserve-line-breaks">{{ service.description }}</ion-text>
+    </ion-item>
+    <ng-container *ngIf="getServiceTags(service.id) | async as tags">
+      <app-service-tags-viewer *ngIf="tags.length" [tags]="tags"></app-service-tags-viewer>
+    </ng-container>
 
     <ion-item-divider color="light">
       <ion-label>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServicePhoto } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import * as AppValidators from '@app/core/validators';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { fileToBase64 } from '@app/core/functions/media.functions';
+import * as AppValidators from '@app/core/validators';
 import ServiceEditorContext from '@app/service/pages/service-editor-page/service-editor-context.interface';
 import { Observable, Subject } from 'rxjs';
 import { first, map, mergeMap, repeatWhen, switchMap, take } from 'rxjs/operators';
@@ -47,6 +48,10 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
   }
 
   public submit({ form, service }: ServiceEditorContext): void {
+    if (isFormInvalid(form)) {
+      return;
+    }
+
     const { description } = form.value;
     const newService: Service = {
       ...service,

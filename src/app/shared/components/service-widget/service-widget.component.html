@@ -5,6 +5,7 @@
 </app-more-info>
 
 <ng-template #serviceDetails>
+  <app-service-tags-viewer *ngIf="service.tags?.length" [tags]="service.tags"></app-service-tags-viewer>
   <ion-item lines="none">
     <div class="preserve-line-breaks capitalize-first-letter">{{ service.description }}</div>
   </ion-item>
