@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Service, ServicePhoto } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
-import { getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
-import { getProfessionalName } from '@app/core/functions/professional.functions';
+import { getProfessionalServicesUrl, getServiceUrl } from '@app/core/functions/navigation.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
@@ -26,8 +25,9 @@ export class ServiceEditorPageComponent {
 
   constructor(
     private readonly serviceOperations: ServiceManagerService,
-    route: ActivatedRoute,
     private readonly api: AccountsService,
+    private readonly router: Router,
+    route: ActivatedRoute,
     apiReadonly: ServicesService,
   ) {
     this.service$ = combineLatest([route.params, this.refresh$]).pipe(
@@ -53,8 +53,16 @@ export class ServiceEditorPageComponent {
     );
   }
 
-  public getProfessionalServicesUrl(professionalId: number) {
+  public get currentUrl(): string {
+    return this.router.url;
+  }
+
+  public getProfessionalServicesUrl(professionalId: number): string {
     return getProfessionalServicesUrl(professionalId);
+  }
+
+  public getServiceUrl(serviceId: number): string {
+    return getServiceUrl(serviceId);
   }
 
   public setIsEnabled(service: Service, isEnabled: boolean): void {
