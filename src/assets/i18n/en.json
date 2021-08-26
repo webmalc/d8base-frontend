@@ -258,10 +258,9 @@
     "minutes-short": "min"
   },
   "service-details": {
-    "title": "Service Information",
-    "location-title": "Service Location",
-    "schedule-title": "Service Schedule",
-    "description-title": "Service Description",
+    "title": "Essentials",
+    "location-title": "Time and Place",
+    "description-title": "Service Details",
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
     "instant-book-description": "Ordering of this service will be approved automatically",

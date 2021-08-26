@@ -17,7 +17,6 @@ import { ServicePublishGuardService } from '@app/service/guards/service-publish-
 import {
   ServiceDetailsEditComponent,
   ServiceInfoEditorComponent,
-  ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
 } from './pages/service-editor-page';
 import { ServicePublishWrapperComponent } from './components/service-publish-wrapper/service-publish-wrapper.component';
@@ -95,12 +94,8 @@ const routes: Routes = [
     component: ServiceInfoEditorComponent,
   },
   {
-    path: ':id/edit/location',
+    path: ':id/edit/time-and-place',
     component: ServiceTypeEditComponent,
-  },
-  {
-    path: ':id/edit/schedule',
-    component: ServiceScheduleEditComponent,
   },
   {
     path: ':id/edit/description',

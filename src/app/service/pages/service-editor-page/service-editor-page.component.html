@@ -38,12 +38,12 @@
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
-    <ion-item class="ion-margin-vertical" lines="none">
+    <ion-item *ngIf="service.description" class="ion-margin-top ion-align-items-start" lines="none">
       <ion-text class="preserve-line-breaks">{{ service.description }}</ion-text>
     </ion-item>
     <app-image-carousel
       *appIfSpinner="photos$ | ifSpinnerErrorState | async as photos"
-      class="ion-margin-bottom"
+      class="ion-margin-top"
       [photos]="photos"
     ></app-image-carousel>
 
@@ -51,26 +51,24 @@
       <ion-label>
         <h1>{{ 'service-details.location-title' | translate }}</h1>
       </ion-label>
-      <ion-button slot="end" color="medium" fill="clear" [routerLink]="'/service/' + service.id + '/edit/location'">
+      <ion-button
+        slot="end"
+        color="medium"
+        fill="clear"
+        [routerLink]="'/service/' + service.id + '/edit/time-and-place'"
+      >
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item-divider>
     <app-service-location [service]="service"></app-service-location>
-
-    <ion-item-divider color="light">
-      <ion-label>
-        <h1>{{ 'service-details.schedule-title' | translate }}</h1>
-      </ion-label>
-      <ion-button slot="end" color="medium" fill="clear" [routerLink]="'/service/' + service.id + '/edit/schedule'">
-        <ion-icon name="create-outline"></ion-icon>
-      </ion-button>
-    </ion-item-divider>
-    <ion-item *ngIf="service.is_base_schedule" lines="none">
-      {{ 'service-details.is-base-schedule' | translate }}:
-    </ion-item>
-    <ng-container *ngIf="schedule$ | async as schedule">
-      <app-schedule-viewer [schedule]="schedule"></app-schedule-viewer>
-    </ng-container>
+    <section>
+      <ion-item *ngIf="service.is_base_schedule" lines="none">
+        {{ 'service-details.is-base-schedule' | translate }}:
+      </ion-item>
+      <ng-container *ngIf="schedule$ | async as schedule">
+        <app-schedule-viewer [schedule]="schedule"></app-schedule-viewer>
+      </ng-container>
+    </section>
     <ion-item lines="none">
       <ion-label>{{ 'service-details.instant-book-title' | translate }}</ion-label>
       <ion-toggle

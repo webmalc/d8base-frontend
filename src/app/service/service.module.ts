@@ -8,7 +8,6 @@ import {
   ServiceEditorPageComponent,
   ServiceInfoEditorComponent,
   ServiceLocationEditorComponent,
-  ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
   ServiceDetailsEditComponent,
 } from '@app/service/pages/service-editor-page';
@@ -77,7 +76,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceEditorPageComponent,
     ServiceInfoEditorComponent,
     ServiceTypeEditComponent,
-    ServiceScheduleEditComponent,
     ServiceLocationEditorComponent,
     ServicePublishWrapperComponent,
     ServiceDetailsEditComponent,

@@ -5,6 +5,19 @@
       'service-details.location-title' | translate
     }}</app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
+      <ion-item lines="full">
+        <ion-label>
+          {{ 'service-details.is-base-schedule' | translate }}
+        </ion-label>
+        <ion-checkbox formControlName="is_base_schedule"></ion-checkbox>
+      </ion-item>
+      <app-schedule-editor
+        *ngIf="!context.form.controls.is_base_schedule.value"
+        [schedule]="schedule$ | async"
+        formControlName="schedule"
+      >
+      </app-schedule-editor>
+
       <section>
         <app-section-heading>{{ 'service-details.service-type' | translate }}</app-section-heading>
         <ion-radio-group formControlName="service_type">
@@ -23,7 +36,7 @@
         >
         </app-service-location-editor>
       </section>
-      <ion-button type="submit" expand="block" [disabled]="context.form.invalid">
+      <ion-button type="submit" expand="block" [disabled]="pending">
         {{ 'global.save' | translate }}
       </ion-button>
     </form>
