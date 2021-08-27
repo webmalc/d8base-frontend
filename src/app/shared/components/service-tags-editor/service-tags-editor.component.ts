@@ -4,6 +4,9 @@ import { normalizeString } from '@app/core/functions/string.functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+const MAX_TAGS = 10;
+const MAX_TAG_LENGTH = 20;
+
 interface TagModel {
   name: string;
 }
@@ -20,6 +23,8 @@ export class ServiceTagsEditorComponent {
   public form: FormGroup;
   public tagNameControl: FormControl;
   public hasValue$: Observable<boolean>;
+  public maxTagLength = MAX_TAG_LENGTH;
+
   private _tags: TagModel[] = [];
 
   constructor() {
@@ -42,7 +47,7 @@ export class ServiceTagsEditorComponent {
 
   public addTag() {
     const tagName = normalizeString(this.form.controls.tagName.value);
-    if (!tagName) {
+    if (!tagName || this.tags.length >= MAX_TAGS) {
       return;
     }
     this.form.reset();

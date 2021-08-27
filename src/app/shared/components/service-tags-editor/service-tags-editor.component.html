@@ -7,7 +7,11 @@
 
 <form (ngSubmit)="addTag()" [formGroup]="form">
   <ion-item>
-    <ion-input formControlName="tagName" [placeholder]="'tag-editor.enter-tag-name' | translate"></ion-input>
+    <ion-input
+      formControlName="tagName"
+      [placeholder]="'tag-editor.enter-tag-name' | translate"
+      [maxlength]="maxTagLength"
+    ></ion-input>
     <ion-button slot="end" type="submit" [disabled]="(hasValue$ | async) === false">
       {{ 'tag-editor.add-new-tag' | translate }}
     </ion-button>
