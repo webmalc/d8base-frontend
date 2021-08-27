@@ -1,3 +1,5 @@
 <ion-item lines="none">
-  <ion-chip *ngFor="let tag of tags" color="secondary" [disabled]="true">{{ tag.name }}</ion-chip>
+  <ion-chip *ngFor="let tag of tags" color="secondary" [disabled]="true">
+    <ion-label>{{ tag.name }}</ion-label>
+  </ion-chip>
 </ion-item>

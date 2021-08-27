@@ -267,8 +267,9 @@
     "address": "Адрес",
     "edit": "Редактирование услуги",
     "name": "Название",
-    "description": "Описание",
     "photos": "Фото",
+    "description": "Описание",
+    "tags": "Тэги",
     "duration-and-price": "Длительность и цена",
     "payment-methods": "Варианты оплаты",
     "is-base-schedule": "Используется базовое расписание мастера",
@@ -877,5 +878,9 @@
   "city-confirmation": {
     "title": "Ваш город {{city}}?",
     "choose": "Нет, выбрать другой"
+  },
+  "tag-editor": {
+    "enter-tag-name": "Введите имя тэга",
+    "add-new-tag": "Добавить тэг"
   }
 }

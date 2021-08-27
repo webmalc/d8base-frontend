@@ -1,17 +1,10 @@
 <app-header></app-header>
 <ion-content *ngIf="context$ | async as context">
   <app-content-wrapper>
-    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">{{
-      'service-details.description-title' | translate
-    }}</app-column-header>
+    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">
+      {{ 'service-details.description-title' | translate }}
+    </app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
-      <section>
-        <app-section-heading>{{ 'service-details.description' | translate }}</app-section-heading>
-        <ion-item>
-          <ion-textarea [autoGrow]="true" formControlName="description"></ion-textarea>
-        </ion-item>
-      </section>
-
       <section>
         <app-section-heading>{{ 'service-details.photos' | translate }}</app-section-heading>
         <app-image-carousel
@@ -23,7 +16,19 @@
           (remove)="removePhoto($event)"
         ></app-image-carousel>
       </section>
-
+      <section>
+        <app-section-heading>{{ 'service-details.description' | translate }}</app-section-heading>
+        <ion-item>
+          <ion-textarea [autoGrow]="true" formControlName="description"></ion-textarea>
+        </ion-item>
+      </section>
+      <section>
+        <app-section-heading>{{ 'service-details.tags' | translate }}</app-section-heading>
+        <app-service-tags-editor
+          [tags]="getServiceTags(context.service.id) | async"
+          (tagsChanged)="updateTags($event)"
+        ></app-service-tags-editor>
+      </section>
       <ion-button type="submit" expand="block">{{ 'global.save' | translate }}</ion-button>
     </form>
   </app-content-wrapper>
