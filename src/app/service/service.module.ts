@@ -8,11 +8,10 @@ import {
   ServiceEditorPageComponent,
   ServiceInfoEditorComponent,
   ServiceLocationEditorComponent,
-  ServiceScheduleEditComponent,
   ServiceTypeEditComponent,
   ServiceDetailsEditComponent,
-} from '@app/service/components/service-editor-page';
-import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
+} from '@app/service/pages/service-editor-page';
+import { ServiceEditorDepsService } from '@app/service/pages/service-editor-page/service-editor-deps.service';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
 import { ServicePublishStepFiveComponent } from '@app/service/components/service-publish-step-five/service-publish-step-five.component';
 import { ServicePublishStepFourComponent } from '@app/service/components/service-publish-step-four/service-publish-step-four.component';
@@ -22,7 +21,7 @@ import { ServicePublishStepSixComponent } from '@app/service/components/service-
 import { ServicePublishStepThreeComponent } from '@app/service/components/service-publish-step-three/service-publish-step-three.component';
 import { ServicePublishStepTwoComponent } from '@app/service/components/service-publish-step-two/service-publish-step-two.component';
 import { ServicePublishWrapperComponent } from '@app/service/components/service-publish-wrapper/service-publish-wrapper.component';
-import { ServiceViewerPageComponent } from '@app/service/components/service-viewer-page/service-viewer-page.component';
+import { ServiceViewerPageComponent } from '@app/service/pages/service-viewer-page/service-viewer-page.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishStepSevenDepartureFormService } from '@app/service/forms/service-publish-step-seven-departure-form.service';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
@@ -77,7 +76,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceEditorPageComponent,
     ServiceInfoEditorComponent,
     ServiceTypeEditComponent,
-    ServiceScheduleEditComponent,
     ServiceLocationEditorComponent,
     ServicePublishWrapperComponent,
     ServiceDetailsEditComponent,

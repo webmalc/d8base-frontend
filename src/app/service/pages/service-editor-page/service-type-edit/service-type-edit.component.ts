@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Service, ServiceLocation } from '@app/api/models';
+import { Service, ServiceLocation, ServiceSchedule } from '@app/api/models';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
 import { concat, forkJoin, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';
@@ -16,34 +17,60 @@ import { ServiceEditorDepsService } from '../service-editor-deps.service';
 })
 export class ServiceTypeEditComponent extends ServiceEditor {
   public readonly serviceTypes = serviceTypes;
-
   public type$: Observable<ServiceType>;
+  public schedule$: Observable<ServiceSchedule[]>;
+  public showScheduleEditor: boolean;
 
   constructor(route: ActivatedRoute, deps: ServiceEditorDepsService) {
     super(route, deps);
     this.type$ = this.context$.pipe(switchMap(context => context.form.controls.service_type.valueChanges));
+    this.schedule$ = this.context$.pipe(
+      switchMap(context =>
+        deps.api.accountsServiceScheduleList({
+          service: context.service.id,
+        }),
+      ),
+      map(response => response.results),
+      shareReplay(1),
+    );
   }
 
   public submit({ form, service }: ServiceEditorContext): void {
+    if (isFormInvalid(form)) {
+      return;
+    }
     const { service_type, location } = form.value;
     const disableOldLocation$ = this.disableServiceLocations(service.id);
     const enableNewLocation$ =
       service_type === 'online' ? of<ServiceLocation>(void 0) : this.createLocation(service.id, location);
+    const { is_base_schedule, schedule } = form.value;
+    const newSchedule: ServiceSchedule[] = schedule?.map(s => ({ ...s, service: service.id }));
+    const createNewSchedule$ = is_base_schedule
+      ? of<any>(void 0)
+      : this.deps.api.accountsServiceScheduleSet(newSchedule);
     const newService: Service = {
       ...service,
       service_type,
+      is_base_schedule,
     };
     const sources = [
       concat(disableOldLocation$, enableNewLocation$),
-      this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+      concat(
+        // must save the "is_base_schedule" flag before saving the schedules
+        this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+        createNewSchedule$,
+      ),
     ];
     this.saveAndReturn(sources);
   }
 
   protected createForm(service: Service): FormGroup {
+    this.showScheduleEditor = service.is_base_schedule;
     return new FormGroup({
       service_type: new FormControl(service.service_type, Validators.required),
       location: new FormControl(),
+      is_base_schedule: new FormControl(service.is_base_schedule),
+      schedule: new FormControl(),
     });
   }
 

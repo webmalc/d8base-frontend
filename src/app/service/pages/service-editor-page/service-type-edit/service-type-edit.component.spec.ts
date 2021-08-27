@@ -1,25 +1,25 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
+import { ServiceEditorDepsService } from '@app/service/pages/service-editor-page/service-editor-deps.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ServiceInfoEditorComponent } from './service-info-editor.component';
+import { ServiceTypeEditComponent } from './service-type-edit.component';
 
-describe('ServiceInfoEditComponent', () => {
-  let component: ServiceInfoEditorComponent;
-  let fixture: ComponentFixture<ServiceInfoEditorComponent>;
+describe('ServiceLocationEditComponent', () => {
+  let component: ServiceTypeEditComponent;
+  let fixture: ComponentFixture<ServiceTypeEditComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ServiceInfoEditorComponent],
+        declarations: [ServiceTypeEditComponent],
         imports: [TranslateModule.forRoot(), IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
         providers: [ServiceEditorDepsService],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(ServiceInfoEditorComponent);
+      fixture = TestBed.createComponent(ServiceTypeEditComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

@@ -7,12 +7,12 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-user-saved-professionals',
-  templateUrl: './user-saved-professionals.component.html',
-  styleUrls: ['./user-saved-professionals.component.scss'],
+  selector: 'app-bookmarks-list-page',
+  templateUrl: './bookmarks-list-page.component.html',
+  styleUrls: ['./bookmarks-list-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserSavedProfessionalsListComponent implements OnInit {
+export class BookmarksListPageComponent implements OnInit {
   @Select(UserSavedProfessionalsSelectors.professionalIds)
   public readonly professionalIds$: Observable<UserSavedProfessional['professional'][]>;
 

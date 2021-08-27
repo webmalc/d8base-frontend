@@ -258,19 +258,19 @@
     "minutes-short": "min"
   },
   "service-details": {
-    "title": "Service Information",
-    "location-title": "Service Location",
-    "schedule-title": "Service Schedule",
-    "description-title": "Service Description",
+    "title": "Essentials",
+    "location-title": "Time and Place",
+    "description-title": "Service Details",
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
     "instant-book-description": "Ordering of this service will be approved automatically",
     "address": "Address",
     "edit": "Service edit",
     "name": "Title",
-    "description": "Description",
-    "duration-and-price": "Duration and price",
     "photos": "Photos",
+    "description": "Description",
+    "tags": "Тэги",
+    "duration-and-price": "Duration and price",
     "payment-methods": "Payment options",
     "is-base-schedule": "The base professional schedule is used",
     "service-type": "Service location",
@@ -877,5 +877,9 @@
   "city-confirmation": {
     "title": "Are you in {{city}}?",
     "choose": "No, let me choose"
+  },
+  "tag-editor": {
+    "enter-tag-name": "Enter tag name",
+    "add-new-tag": "Add new tag"
   }
 }

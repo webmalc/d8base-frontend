@@ -32,6 +32,7 @@ import {
   SearchFilterStateConverter,
   ContactsMergeToDefaultService,
   StorageManagerService,
+  TagsManagerService,
 } from '@app/core/services';
 import {
   CategoriesApiCache,
@@ -94,6 +95,7 @@ import { environment } from '@env/environment';
     GuessLocationByIpService,
     LocationResolverService,
     StorageManagerService,
+    TagsManagerService,
 
     ApiClientService,
     IsUserRegisteredApiService,

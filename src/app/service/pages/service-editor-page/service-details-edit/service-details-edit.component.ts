@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Service, ServicePhoto } from '@app/api/models';
+import { Service, ServicePhoto, ServiceTag } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
-import * as AppValidators from '@app/core/validators';
+import { isFormInvalid } from '@app/core/functions/form.functions';
 import { fileToBase64 } from '@app/core/functions/media.functions';
-import ServiceEditorContext from '@app/service/components/service-editor-page/service-editor-context.interface';
+import { TagsManagerService } from '@app/core/services/managers';
+import * as AppValidators from '@app/core/validators';
+import ServiceEditorContext from '@app/service/pages/service-editor-page/service-editor-context.interface';
 import { Observable, Subject } from 'rxjs';
 import { first, map, mergeMap, repeatWhen, switchMap, take } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
@@ -18,10 +20,17 @@ import { ServiceEditorDepsService } from '../service-editor-deps.service';
 })
 export class ServiceDetailsEditComponent extends ServiceEditor {
   public photos$: Observable<ServicePhoto[]>;
+  public tags$: Observable<ServiceTag[]>;
+  public updatedTags: ServiceTag[];
 
   private readonly refreshPhotos$ = new Subject<void>();
 
-  constructor(private readonly api: AccountsService, route: ActivatedRoute, deps: ServiceEditorDepsService) {
+  constructor(
+    private readonly api: AccountsService,
+    private readonly tagsManager: TagsManagerService,
+    route: ActivatedRoute,
+    deps: ServiceEditorDepsService,
+  ) {
     super(route, deps);
     this.photos$ = this.context$.pipe(
       take(1),
@@ -29,6 +38,7 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
       switchMap(({ service }) => this.api.accountsServicePhotosList({ service: service.id })),
       map(response => response.results),
     );
+    this.tags$ = tagsManager.tags$;
   }
 
   public async addPhotos(files: File[], service: Service): Promise<void> {
@@ -46,7 +56,19 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
       .subscribe(() => this.refreshPhotos$.next());
   }
 
+  public getServiceTags(serviceId: number): Observable<ServiceTag[]> {
+    return this.tagsManager.getServiceTags(serviceId);
+  }
+
+  public updateTags(tags: ServiceTag[]) {
+    this.updatedTags = tags;
+  }
+
   public submit({ form, service }: ServiceEditorContext): void {
+    if (isFormInvalid(form)) {
+      return;
+    }
+
     const { description } = form.value;
     const newService: Service = {
       ...service,
@@ -55,6 +77,7 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
     const sources = [
       // TODO update pictures on submit
       this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
+      this.tagsManager.updateTags(service.id, this.updatedTags),
     ];
     this.saveAndReturn(sources);
   }

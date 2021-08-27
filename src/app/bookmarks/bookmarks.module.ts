@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserSavedProfessionalsListComponent } from './components/user-saved-professionals-list/user-saved-professionals.component';
+import { BookmarksListPageComponent } from './bookmarks-list-page.component';
 import { SavedProfessionalsRoutingModule } from './saved-professionals-routing.module';
 
 @NgModule({
-  declarations: [UserSavedProfessionalsListComponent],
-  exports: [UserSavedProfessionalsListComponent],
+  declarations: [BookmarksListPageComponent],
+  exports: [BookmarksListPageComponent],
   imports: [CommonModule, SharedModule, SavedProfessionalsRoutingModule, IonicModule, TranslateModule],
 })
-export class SavedProfessionalsModule {}
+export class BookmarksModule {}

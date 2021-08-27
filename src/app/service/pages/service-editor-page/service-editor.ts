@@ -1,7 +1,8 @@
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service } from '@app/api/models';
-import { ServiceEditorDepsService } from '@app/service/components/service-editor-page/service-editor-deps.service';
+import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
+import { ServiceEditorDepsService } from '@app/service/pages/service-editor-page/service-editor-deps.service';
 import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 import { filter, finalize, map, shareReplay, switchMap, take } from 'rxjs/operators';
 import ServiceEditorContext from './service-editor-context.interface';
@@ -27,7 +28,7 @@ export abstract class ServiceEditor {
   }
 
   public getServicePageUrl(serviceId: number): string {
-    return `/service/${serviceId}/edit`;
+    return `/${NavPath.Service}/${serviceId}/${NavBranch.Edit}`;
   }
 
   protected saveAndReturn(sources: Observable<any>[]): void {

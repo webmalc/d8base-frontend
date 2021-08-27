@@ -1,0 +1,19 @@
+<ion-item lines="none">
+  <ion-chip *ngFor="let tag of tags" color="secondary">
+    <ion-label>{{ tag.name }}</ion-label>
+    <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
+  </ion-chip>
+</ion-item>
+
+<form (ngSubmit)="addTag()" [formGroup]="form">
+  <ion-item>
+    <ion-input
+      formControlName="tagName"
+      [placeholder]="'tag-editor.enter-tag-name' | translate"
+      [maxlength]="maxTagLength"
+    ></ion-input>
+    <ion-button slot="end" type="submit" [disabled]="(hasValue$ | async) === false">
+      {{ 'tag-editor.add-new-tag' | translate }}
+    </ion-button>
+  </ion-item>
+</form>

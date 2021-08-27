@@ -44,6 +44,8 @@ import {
   OnMapPopoverComponent,
   SectionHeadingComponent,
   AvatarComponent,
+  ServiceTagsViewerComponent,
+  ServiceTagsEditorComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import {
@@ -203,6 +205,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsServicesPipe,
     DefaultIfEmptyPipe,
     AvatarComponent,
+    ServiceTagsViewerComponent,
+    ServiceTagsEditorComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -289,6 +293,9 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AsStringPipe,
     AsServicesPipe,
     DefaultIfEmptyPipe,
+    AvatarComponent,
+    ServiceTagsViewerComponent,
+    ServiceTagsEditorComponent,
   ],
   imports: [
     CommonModule,

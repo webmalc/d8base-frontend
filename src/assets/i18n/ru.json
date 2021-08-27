@@ -258,18 +258,18 @@
     "minutes-short": "мин"
   },
   "service-details": {
-    "title": "Информация об услуге",
-    "location-title": "Адрес оказания услуги",
-    "schedule-title": "Время оказания услуги",
-    "description-title": "Описание услуги",
+    "title": "Обязательная информация",
+    "location-title": "Место и время оказания услуги",
+    "description-title": "Подробное описание",
     "payment-title": "Доступные варианты оплаты",
     "instant-book-title": "Мгновенное подтверждение (Instant Book)",
     "instant-book-description": "Бронирования данной услуги акцептуются мастером автоматически и не требуют подтверждения мастером",
     "address": "Адрес",
     "edit": "Редактирование услуги",
     "name": "Название",
-    "description": "Описание",
     "photos": "Фото",
+    "description": "Описание",
+    "tags": "Тэги",
     "duration-and-price": "Длительность и цена",
     "payment-methods": "Варианты оплаты",
     "is-base-schedule": "Используется базовое расписание мастера",
@@ -878,5 +878,9 @@
   "city-confirmation": {
     "title": "Ваш город {{city}}?",
     "choose": "Нет, выбрать другой"
+  },
+  "tag-editor": {
+    "enter-tag-name": "Введите имя тэга",
+    "add-new-tag": "Добавить тэг"
   }
 }

@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Service, Subcategory } from '@app/api/models';
 import { AccountsService, ProfessionalsService } from '@app/api/services';
+import { NavPath } from '@app/core/constants/navigation.constants';
+import { IonViewDidLeave, IonViewWillEnter } from '@app/core/interfaces/ionic.interfaces';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
-import { map, takeUntil, filter, withLatestFrom, switchMap, tap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take, takeUntil } from 'rxjs/operators';
 import { ServiceIds } from './enums/service-ids.enum';
 import { ServiceWizardStateService } from './services';
 
@@ -13,14 +15,14 @@ import { ServiceWizardStateService } from './services';
   selector: 'app-service-wizard-page',
   templateUrl: './service-wizard-page.component.html',
 })
-export class ServiceWizardPage {
+export class ServiceWizardPage implements IonViewWillEnter, IonViewDidLeave {
   private readonly ngDestroy$ = new Subject<void>();
 
   constructor(
     private readonly wizardState: ServiceWizardStateService,
     private readonly router: Router,
-    private readonly accountsService: AccountsService,
-    private readonly professionalsService: ProfessionalsService,
+    private readonly api: AccountsService,
+    private readonly professionalsApi: ProfessionalsService,
     private readonly store: Store,
   ) {}
 
@@ -48,8 +50,8 @@ export class ServiceWizardPage {
   }
 
   private createService(service: Service): void {
-    this.accountsService.accountsServicesCreate(service).subscribe(({ id }) => {
-      this.router.navigate(['/', 'service', id]);
+    this.api.accountsServicesCreate(service).subscribe(({ id }) => {
+      this.router.navigate(['/', NavPath.Service, id]);
     });
   }
 
@@ -60,9 +62,9 @@ export class ServiceWizardPage {
         filter(defaultProfessional => Boolean(defaultProfessional)),
         take(1),
         map(({ subcategory }) => subcategory),
-        switchMap(subcategoryId => this.professionalsService.professionalsSubcategoriesRead(subcategoryId)),
+        switchMap(subcategoryId => this.professionalsApi.professionalsSubcategoriesRead(subcategoryId)),
         switchMap((subcategory: Subcategory) =>
-          this.professionalsService
+          this.professionalsApi
             .professionalsCategoriesRead(subcategory.category)
             .pipe(map(category => ({ category, subcategory }))),
         ),
