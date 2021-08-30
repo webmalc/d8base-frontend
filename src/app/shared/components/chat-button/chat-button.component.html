@@ -1,3 +1,7 @@
-<ion-button size="medium" [routerLink]="'/message/chat/' + userId">
-  {{ 'issuance.search-result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
-</ion-button>
+<ion-item lines="none">
+  <ion-buttons>
+    <ion-button size="medium" color="primary" fill="solid" [routerLink]="'/message/chat/' + userId">
+      {{ 'search.result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-item>
