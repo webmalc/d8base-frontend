@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServicePhoto, ServiceTag } from '@app/api/models';
@@ -8,6 +8,7 @@ import { fileToBase64 } from '@app/core/functions/media.functions';
 import { TagsManagerService } from '@app/core/services/managers';
 import * as AppValidators from '@app/core/validators';
 import ServiceEditorContext from '@app/service/pages/service-editor-page/service-editor-context.interface';
+import { ColumnHeaderComponent } from '@app/shared/components';
 import { Observable, Subject } from 'rxjs';
 import { first, map, mergeMap, repeatWhen, switchMap, take } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
@@ -22,6 +23,9 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
   public photos$: Observable<ServicePhoto[]>;
   public tags$: Observable<ServiceTag[]>;
   public updatedTags: ServiceTag[];
+
+  @ViewChild(ColumnHeaderComponent)
+  protected header: ColumnHeaderComponent;
 
   private readonly refreshPhotos$ = new Subject<void>();
 
