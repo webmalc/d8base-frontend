@@ -37,7 +37,7 @@ export class TagsManagerService {
         const createNewTags$ = newTags.map(tag => this.api.accountsServiceTagsCreate({ ...tag, service: serviceId }));
         const removeOldTags$ = removedTags.filter(tag => tag.id).map(tag => this.api.accountsServiceTagsDelete(tag.id));
         const updateTags$ = [...createNewTags$, ...removeOldTags$];
-        return updateTags$.length > 0 ? forkJoin(updateTags$) : of<null>();
+        return updateTags$.length > 0 ? forkJoin(updateTags$) : of<null>(null);
       }),
       tap(() => this.updateService()),
     );
