@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Service } from '@app/api/models';
 import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
 import { ServiceEditorDepsService } from '@app/service/pages/service-editor-page/service-editor-deps.service';
+import { ColumnHeaderComponent } from '@app/shared/components';
 import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 import { filter, finalize, map, shareReplay, switchMap, take } from 'rxjs/operators';
 import ServiceEditorContext from './service-editor-context.interface';
@@ -10,6 +11,8 @@ import ServiceEditorContext from './service-editor-context.interface';
 export abstract class ServiceEditor {
   public context$: Observable<ServiceEditorContext>;
   public pending: boolean = false;
+
+  protected abstract header: ColumnHeaderComponent;
 
   protected constructor(route: ActivatedRoute, protected readonly deps: ServiceEditorDepsService) {
     const service$ = route.params.pipe(
@@ -41,9 +44,7 @@ export abstract class ServiceEditor {
       ...sources,
     ])
       .pipe(finalize(() => (this.pending = false)))
-      .subscribe(([service]) => {
-        this.deps.router.navigateByUrl(this.getServicePageUrl(service.id));
-      });
+      .subscribe(() => this.header.navigateBack());
   }
 
   protected createForm$(service: Service): Observable<FormGroup> {

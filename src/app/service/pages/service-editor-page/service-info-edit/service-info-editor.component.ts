@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Price, Service } from '@app/api/models';
+import { ColumnHeaderComponent } from '@app/shared/components';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';
@@ -14,6 +15,9 @@ import { ServiceInfoEditFields } from './service-info-edit-fields.enum';
 })
 export class ServiceInfoEditorComponent extends ServiceEditor {
   public formFields = ServiceInfoEditFields;
+
+  @ViewChild(ColumnHeaderComponent)
+  protected header: ColumnHeaderComponent;
 
   constructor(route: ActivatedRoute, deps: ServiceEditorDepsService) {
     super(route, deps);

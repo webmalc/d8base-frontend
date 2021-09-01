@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Service, ServiceLocation, ServiceSchedule } from '@app/api/models';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { ServiceType, serviceTypes } from '@app/core/types/service-types';
+import { ColumnHeaderComponent } from '@app/shared/components';
 import { concat, forkJoin, Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { ServiceEditor } from '../service-editor';
@@ -20,6 +21,9 @@ export class ServiceTypeEditComponent extends ServiceEditor {
   public type$: Observable<ServiceType>;
   public schedule$: Observable<ServiceSchedule[]>;
   public showScheduleEditor: boolean;
+
+  @ViewChild(ColumnHeaderComponent)
+  protected header: ColumnHeaderComponent;
 
   constructor(route: ActivatedRoute, deps: ServiceEditorDepsService) {
     super(route, deps);
