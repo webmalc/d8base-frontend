@@ -1,0 +1,24 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'client'">
+    <app-section-heading>{{ 'service-details.location.from' | translate }}</app-section-heading>
+    <app-location-selector
+      [serviceId]="serviceId"
+      [professionalId]="professionalId"
+      (selectedLocationId)="selectLocationId($event)"
+    ></app-location-selector>
+    <ion-item>
+      <ion-label position="floating" class="label-for-required-input">
+        {{ 'service-details.location.attendance-distance' | translate }}
+      </ion-label>
+      <ion-input type="number" min="0" max="9999" (ionChange)="enterDistance($event)"> </ion-input>
+    </ion-item>
+  </ng-container>
+  <ng-container *ngSwitchCase="'professional'">
+    <app-section-heading>{{ 'service-details.location.choose-address' | translate }}</app-section-heading>
+    <app-location-selector
+      [serviceId]="serviceId"
+      [professionalId]="professionalId"
+      (selectedLocationId)="selectLocationId($event)"
+    ></app-location-selector>
+  </ng-container>
+</ng-container>

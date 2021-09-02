@@ -54,8 +54,7 @@ export const mainMenuItems: MainMenuItem[] = [
   {
     title: 'main-menu.add-service',
     icon: 'add-circle-outline',
-    // link: '/service-wizard',
-    link: `/${NavPath.Service}/${NavBranch.Publish}`,
+    link: `/${NavPath.Service}/${NavBranch.Add}`,
     masterOnly: true,
   },
   {

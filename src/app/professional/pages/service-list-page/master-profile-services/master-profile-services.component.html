@@ -23,6 +23,14 @@
         </app-service-viewer>
       </ion-list>
       <ion-list *ngIf="context.canEdit">
+        <ion-card routerLink="/service/add">
+          <ion-card-content>
+            <div class="add-new-service-card">
+              <ion-icon name="add-circle-outline" class="ion-padding-end"></ion-icon>
+              {{ 'master-profile.services.services-tab.add-new-service' | translate }}
+            </div>
+          </ion-card-content>
+        </ion-card>
         <app-service-editor
           *ngFor="let service of serviceList | serviceDataFilter: searchModel"
           (enableService)="enableService($event)"
@@ -32,14 +40,6 @@
           class="pv5"
         >
         </app-service-editor>
-        <ion-card routerLink="/service/publish">
-          <ion-card-content>
-            <div class="add-new-service-card">
-              <ion-icon name="add-circle-outline" class="ion-padding-end"></ion-icon>
-              {{ 'master-profile.services.services-tab.add-new-service' | translate }}
-            </div>
-          </ion-card-content>
-        </ion-card>
       </ion-list>
     </ion-col>
   </ion-row>

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { normalizeString } from '@app/core/functions/string.functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,8 +15,15 @@ interface TagModel {
   selector: 'app-service-tags-editor',
   templateUrl: './service-tags-editor.component.html',
   styleUrls: ['./service-tags-editor.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ServiceTagsEditorComponent),
+      multi: true,
+    },
+  ],
 })
-export class ServiceTagsEditorComponent {
+export class ServiceTagsEditorComponent implements ControlValueAccessor {
   @Output()
   public tagsChanged = new EventEmitter<TagModel[]>();
 
@@ -24,6 +31,9 @@ export class ServiceTagsEditorComponent {
   public tagNameControl: FormControl;
   public hasValue$: Observable<boolean>;
   public maxTagLength = MAX_TAG_LENGTH;
+
+  private onChange: (value: any) => void;
+  private onTouched: () => void;
 
   private _tags: TagModel[] = [];
 
@@ -43,6 +53,9 @@ export class ServiceTagsEditorComponent {
   public set tags(value: TagModel[]) {
     this._tags = value ?? [];
     this.tagsChanged.emit(this.tags);
+    if (this.onChange) {
+      this.onChange(this.tags);
+    }
   }
 
   public addTag() {
@@ -60,6 +73,18 @@ export class ServiceTagsEditorComponent {
 
   public removeTag(tag): void {
     this.tags = this.tags.filter(t => t.name !== tag.name);
+  }
+
+  public writeValue(value: TagModel[]): void {
+    this._tags = value ?? [];
+  }
+
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   private hasTag(name: string): boolean {

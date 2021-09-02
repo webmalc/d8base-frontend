@@ -1,0 +1,30 @@
+<app-service-step-container [form]="form">
+  <app-column-header [disableBackButton]="true">
+    {{ 'service-wizard.title' | translate }}
+  </app-column-header>
+  <form [formGroup]="form">
+    <section>
+      <app-section-heading>{{ 'service-details.description' | translate }}</app-section-heading>
+      <ion-item>
+        <ion-textarea [autoGrow]="true" [formControlName]="formFields.description"></ion-textarea>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.description"></app-form-control-error>
+    </section>
+
+    <section>
+      <app-section-heading>{{ 'service-details.photos' | translate }}</app-section-heading>
+      <app-image-carousel
+        class="ion-margin-vertical"
+        [files]="this.files"
+        [editable]="true"
+        (add)="onSelect($event)"
+        (remove)="onRemove($event)"
+      ></app-image-carousel>
+    </section>
+
+    <section>
+      <app-section-heading>{{ 'service-details.tags' | translate }}</app-section-heading>
+      <app-service-tags-editor [formControlName]="formFields.tags"></app-service-tags-editor>
+    </section>
+  </form>
+</app-service-step-container>

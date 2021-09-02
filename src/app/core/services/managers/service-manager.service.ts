@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Service } from '@app/api/models';
+import { ProfessionalList, Service, ServiceLocation, ServicePhoto, ServiceTag } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
+import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { mapTo } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
+import { forkJoin, Observable, of } from 'rxjs';
+import { mapTo, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceManagerService {
+  @Select(CurrentUserSelectors.defaultProfessional)
+  public readonly professional$: Observable<ProfessionalList>;
+
   constructor(
     private readonly api: AccountsService,
     private readonly alertController: AlertController,
@@ -50,6 +55,26 @@ export class ServiceManagerService {
     });
   }
 
+  public createService(data: {
+    service: Service;
+    photos: ServicePhoto[];
+    locations: ServiceLocation[];
+    tags: ServiceTag[];
+  }): Observable<Service> {
+    const { service, photos, locations, tags } = data;
+    return this.api
+      .accountsServicesCreate(service)
+      .pipe(
+        switchMap(service =>
+          forkJoin([
+            this.createPhotos(photos, service.id),
+            this.createLocations(locations, service.id),
+            this.createTags(tags, service.id),
+          ]).pipe(mapTo(service)),
+        ),
+      );
+  }
+
   private patchService(service: Service, changes: Partial<Service>): Observable<void> {
     return this.api
       .accountsServicesUpdate({
@@ -60,5 +85,23 @@ export class ServiceManagerService {
         },
       })
       .pipe(mapTo(void 0));
+  }
+
+  private createPhotos(photos: ServicePhoto[], service: number): Observable<ServicePhoto[]> {
+    return photos.length > 0
+      ? forkJoin(photos.map(photo => this.api.accountsServicePhotosCreate({ ...photo, service })))
+      : of([]);
+  }
+
+  private createLocations(locations: ServiceLocation[], service: number): Observable<ServiceLocation[]> {
+    return locations.length > 0
+      ? forkJoin(locations.map(location => this.api.accountsServiceLocationsCreate({ ...location, service })))
+      : of([]);
+  }
+
+  private createTags(tags: ServiceTag[], service: number): Observable<ServiceTag[]> {
+    return tags.length > 0
+      ? forkJoin(tags.map(tag => this.api.accountsServiceTagsCreate({ ...tag, service })))
+      : of([]);
   }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Service, ServicePhoto, ServiceTag } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
 import { getProfessionalServicesUrl, getServiceUrl } from '@app/core/functions/navigation.functions';
@@ -7,6 +7,7 @@ import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { TagsManagerService } from '@app/core/services/managers';
 import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
+import { ColumnHeaderComponent } from '@app/shared/components';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
 
@@ -17,6 +18,9 @@ import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
   providers: [ServicesApiCache],
 })
 export class ServiceEditorPageComponent {
+  @ViewChild(ColumnHeaderComponent)
+  public readonly header: ColumnHeaderComponent;
+
   public service$: Observable<Service>;
   public schedule$: Observable<AbstractSchedule[]>;
   public photos$: Observable<ServicePhoto[]>;
@@ -29,7 +33,6 @@ export class ServiceEditorPageComponent {
     private readonly serviceManager: ServiceManagerService,
     private readonly tagsManager: TagsManagerService,
     private readonly api: AccountsService,
-    private readonly router: Router,
     route: ActivatedRoute,
     apiReadonly: ServicesService,
   ) {
@@ -57,10 +60,6 @@ export class ServiceEditorPageComponent {
     );
   }
 
-  public get currentUrl(): string {
-    return this.router.url;
-  }
-
   public getProfessionalServicesUrl(professionalId: number): string {
     return getProfessionalServicesUrl(professionalId);
   }
@@ -81,10 +80,14 @@ export class ServiceEditorPageComponent {
   }
 
   public deleteService(service: Service): void {
-    this.serviceManager.deleteService(service.id).subscribe(() => this.refresh$.next());
+    this.serviceManager.deleteService(service.id).subscribe(() => this.navigateBack());
   }
 
   public getServiceTags(serviceId: number): Observable<ServiceTag[]> {
     return this.tagsManager.getServiceTags(serviceId);
+  }
+
+  private navigateBack(): void {
+    this.header.navigateBack();
   }
 }

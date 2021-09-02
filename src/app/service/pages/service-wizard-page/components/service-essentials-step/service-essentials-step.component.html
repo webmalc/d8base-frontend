@@ -1,0 +1,30 @@
+<app-service-step-container [form]="form">
+  <app-column-header [disableBackButton]="true">
+    {{ 'service-wizard.title' | translate }}
+  </app-column-header>
+  <form [formGroup]="form">
+    <section>
+      <app-section-heading [required]="true">{{ 'service-details.name' | translate }}</app-section-heading>
+      <ion-item>
+        <ion-input [formControlName]="formFields.name"></ion-input>
+      </ion-item>
+      <app-form-control-error [controlName]="formFields.name"></app-form-control-error>
+    </section>
+
+    <section>
+      <app-section-heading [required]="true">
+        {{ 'service-details.duration-and-price' | translate }}
+      </app-section-heading>
+      <app-duration-editor class="ion-margin" [formControlName]="formFields.duration"></app-duration-editor>
+      <app-form-control-error [controlName]="formFields.duration"></app-form-control-error>
+      <app-price-editor class="ion-margin" [formControlName]="formFields.price"></app-price-editor>
+      <app-form-control-error [controlName]="formFields.price"></app-form-control-error>
+    </section>
+
+    <section>
+      <app-section-heading>{{ 'service-details.payment-methods' | translate }}</app-section-heading>
+      <app-payment-method-editor [formControlName]="formFields.payment_methods"></app-payment-method-editor>
+      <app-form-control-error [controlName]="formFields.payment_methods"></app-form-control-error>
+    </section>
+  </form>
+</app-service-step-container>

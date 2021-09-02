@@ -1,0 +1,41 @@
+<app-service-step-container [form]="form">
+  <app-column-header [disableBackButton]="true">
+    {{ 'service-wizard.title' | translate }}
+  </app-column-header>
+  <form [formGroup]="form">
+    <section>
+      <app-section-heading>{{ 'service-wizard.time' | translate }}</app-section-heading>
+      <ion-item lines="full">
+        <ion-label>
+          {{ 'service-details.is-base-schedule' | translate }}
+        </ion-label>
+        <ion-checkbox [formControlName]="formFields.is_base_schedule"></ion-checkbox>
+      </ion-item>
+      <app-schedule-editor
+        *ngIf="!form.controls.is_base_schedule.value"
+        [schedule]="schedule$ | async"
+        [formControlName]="formFields.schedule"
+      >
+      </app-schedule-editor>
+    </section>
+
+    <section>
+      <app-section-heading>{{ 'service-wizard.place' | translate }}</app-section-heading>
+      <ion-radio-group [formControlName]="formFields.service_type">
+        <ion-item *ngFor="let type of serviceTypes" lines="full">
+          <ion-label>{{ 'service-location.' + type | translate }}</ion-label>
+          <ion-radio value="{{ type }}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </section>
+
+    <section>
+      <app-service-location-editor
+        [type]="form.controls[formFields.service_type].value"
+        [professionalId]="professionalId$ | async"
+        [formControlName]="formFields.location"
+      >
+      </app-service-location-editor>
+    </section>
+  </form>
+</app-service-step-container>

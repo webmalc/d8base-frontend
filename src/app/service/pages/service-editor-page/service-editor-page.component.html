@@ -86,7 +86,7 @@
     <ion-button *ngIf="!service.is_enabled" color="danger" expand="block" (click)="deleteService(service)">
       {{ 'master-profile.services.service-edit.delete' | translate }}
     </ion-button>
-    <ion-button expand="block" [routerLink]="getServiceUrl(service.id)" [queryParams]="{ redirectTo: currentUrl }">
+    <ion-button expand="block" [routerLink]="getServiceUrl(service.id)">
       {{ 'master-profile.services.service-edit.view' | translate }}
     </ion-button>
   </app-content-wrapper>

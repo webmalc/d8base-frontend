@@ -6,6 +6,7 @@ export enum NavPath {
   Message = 'message',
   Reviews = 'reviews',
   Service = 'service',
+  Order = 'order',
   Orders = 'my-orders',
   Bookmarks = 'saved-professionals',
 }
@@ -29,6 +30,7 @@ export enum NavBranch {
   // service path:
   Publish = 'publish',
   Edit = 'edit',
+  Add = 'add',
 
   // orders path:
   Inbox = 'inbox',

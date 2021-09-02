@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NavBranch } from '@app/core/constants/navigation.constants';
 
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
 import { ServiceEditorPageComponent } from '@app/service/pages/service-editor-page/service-editor-page.component';
@@ -23,6 +24,10 @@ import { ServicePublishWrapperComponent } from './components/service-publish-wra
 import { ServicePublishResetStateService } from './guards/service-publish-reset-state.service';
 
 const routes: Routes = [
+  {
+    path: NavBranch.Add,
+    loadChildren: () => import('./pages/service-wizard-page/service-wizard.module').then(m => m.ServiceWizardModule),
+  },
   {
     path: 'publish',
     canDeactivate: [ServicePublishResetStateService],

@@ -48,7 +48,7 @@ export class ServicePublishStepTwoComponent {
       [ServicePublishStepTwoFormFields.Name]: [data?.name, Validators.required],
       [ServicePublishStepTwoFormFields.Description]: [data?.description, AppValidators.descriptionValidator],
       [ServicePublishStepTwoFormFields.Duration]: [data?.duration, Validators.required],
-      [ServicePublishStepTwoFormFields.Price]: [data?.price, AppValidators.price],
+      [ServicePublishStepTwoFormFields.Price]: [data?.price, AppValidators.priceIntervalValidator],
       [ServicePublishStepTwoFormFields.Location]: [data?.service_type, Validators.required],
     });
   }
