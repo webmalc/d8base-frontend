@@ -1,0 +1,25 @@
+<app-service-step-container [form]="form">
+  <app-column-header [disableBackButton]="true">
+    {{ 'service-wizard.title' | translate }}
+  </app-column-header>
+  <app-service-widget *ngIf="service" [service]="service" [alwaysExpanded]="true"></app-service-widget>
+  <form [formGroup]="form">
+    <section>
+      <app-section-heading>
+        {{ 'service-wizard.summary-title' | translate }}
+      </app-section-heading>
+      <ion-item>
+        <ion-checkbox slot="start" [formControlName]="formFields.is_enabled"></ion-checkbox>
+        <ion-label>
+          {{ 'service-wizard.is-enabled' | translate }}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-checkbox slot="start" [formControlName]="formFields.is_auto_order_confirmation"></ion-checkbox>
+        <ion-label>
+          {{ 'service-wizard.is-auto-order-confirmation' | translate }}
+        </ion-label>
+      </ion-item>
+    </section>
+  </form>
+</app-service-step-container>

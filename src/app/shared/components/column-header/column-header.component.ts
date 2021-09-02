@@ -13,6 +13,9 @@ export class ColumnHeaderComponent {
   @Input()
   public backButtonUrl: string;
 
+  @Input()
+  public disableBackButton: boolean = false;
+
   constructor(private readonly navController: NavController, @Inject(WINDOW) private readonly window: Window) {}
 
   public navigateBack() {

@@ -11,7 +11,7 @@ export class ServicesGeneratorFactoryService {
   public getServiceList(masterId: number, showOnlyEnabled: boolean = false): Observable<ServiceList[]> {
     let params: ServicesService.ServicesServicesListParams = {
       professional: masterId,
-      ordering: 'created',
+      ordering: '-created', // sort descending
     };
     if (showOnlyEnabled) {
       params = {

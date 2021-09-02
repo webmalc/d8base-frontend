@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
-import { ServiceWizardPath } from './service-wizard/const/service-wizard-path.const';
+import { NavPath } from './core/constants/navigation.constants';
 import { NotFoundPageComponent } from './shared/components';
 
 const routes: Routes = [
@@ -11,49 +11,45 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'auth',
+    path: NavPath.Auth,
     loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'profile',
+    path: NavPath.Profile,
     loadChildren: () => import('src/app/profile/profile.module').then(m => m.ProfilePageModule),
     canActivate: [MustBeAuthorizedGuard],
   },
   {
-    path: 'professional',
+    path: NavPath.Professional,
     loadChildren: () => import('./professional/professional-page.module').then(m => m.ProfessionalPageModule),
   },
   {
-    path: 'service',
+    path: NavPath.Service,
     loadChildren: () => import('./service/service.module').then(m => m.ServicePageModule),
   },
   {
-    path: ServiceWizardPath,
-    loadChildren: () => import('./service-wizard/service-wizard.module').then(m => m.ServiceWizardModule),
-  },
-  {
-    path: 'message',
+    path: NavPath.Message,
     loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule),
     canActivate: [MustBeAuthorizedGuard],
   },
   {
-    path: 'search',
+    path: NavPath.Search,
     loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule),
   },
   {
-    path: 'order',
+    path: NavPath.Order,
     loadChildren: () => import('./order/order.module').then(m => m.OrderPageModule),
   },
   {
-    path: 'my-orders',
+    path: NavPath.Orders,
     loadChildren: () => import('./my-orders/my-orders.module').then(m => m.MyOrdersModule),
   },
   {
-    path: 'reviews',
+    path: NavPath.Reviews,
     loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule),
   },
   {
-    path: 'saved-professionals',
+    path: NavPath.Bookmarks,
     loadChildren: () => import('./bookmarks/bookmarks.module').then(m => m.BookmarksModule),
     canActivate: [MustBeAuthorizedGuard],
   },

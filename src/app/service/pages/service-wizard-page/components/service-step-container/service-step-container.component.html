@@ -1,0 +1,25 @@
+<app-header></app-header>
+<ion-content>
+  <app-content-wrapper>
+    <ng-content></ng-content>
+    <ion-row>
+      <ion-col>
+        <ng-container *ngIf="(isFirstStep$ | async) === false">
+          <ion-button expand="block" color="medium" (click)="prevStep()">
+            {{ 'global.back' | translate }}
+          </ion-button>
+        </ng-container>
+      </ion-col>
+      <ion-col>
+        <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">
+          {{ 'service-wizard.publish' | translate }}
+        </ion-button>
+        <ng-template #isNotLastStep>
+          <ion-button expand="block" (click)="nextStep()">
+            {{ 'global.forward' | translate }}
+          </ion-button>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </app-content-wrapper>
+</ion-content>

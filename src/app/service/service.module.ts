@@ -7,7 +7,6 @@ import { MasterPickerPopoverComponent } from '@app/service/components/master-pic
 import {
   ServiceEditorPageComponent,
   ServiceInfoEditorComponent,
-  ServiceLocationEditorComponent,
   ServiceTypeEditComponent,
   ServiceDetailsEditComponent,
 } from '@app/service/pages/service-editor-page';
@@ -39,6 +38,7 @@ import { StepSevenHandlerService } from '@app/service/services/steps-navigation-
 import { StepSixHandlerService } from '@app/service/services/steps-navigation-chain/step-six-handler.service';
 import { StepThreeHandlerService } from '@app/service/services/steps-navigation-chain/step-three-handler.service';
 import { StepTwoHandlerService } from '@app/service/services/steps-navigation-chain/step-two-handler.service';
+import { ServiceLocationEditorModule } from '@app/shared/service-location-editor/service-location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -59,6 +59,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     IonicSelectableModule,
     BrMaskerModule,
     RegistrationPageModule,
+    ServiceLocationEditorModule,
   ],
   declarations: [
     ServicePublishStepOneComponent,
@@ -76,7 +77,6 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceEditorPageComponent,
     ServiceInfoEditorComponent,
     ServiceTypeEditComponent,
-    ServiceLocationEditorComponent,
     ServicePublishWrapperComponent,
     ServiceDetailsEditComponent,
   ],

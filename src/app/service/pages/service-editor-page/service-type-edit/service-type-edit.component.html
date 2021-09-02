@@ -31,7 +31,8 @@
       <section>
         <app-service-location-editor
           [type]="(type$ | async) || context.service.service_type"
-          [service]="context.service"
+          [serviceId]="context.service.id"
+          [professionalId]="context.service.professional"
           formControlName="location"
         >
         </app-service-location-editor>

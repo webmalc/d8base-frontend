@@ -7,15 +7,15 @@
     <ion-icon slot="start" name="location-outline" color="secondary"></ion-icon>
     <ion-text>{{ 'service-location.professional' | translate }}</ion-text>
   </ion-item>
+  <ion-item lines="none" *ngSwitchCase="'client'">
+    <ion-icon slot="start" name="location-outline" color="secondary"></ion-icon>
+    <ion-text>{{ 'service-location.client' | translate }}</ion-text>
+  </ion-item>
+  <app-loading-indicator *ngSwitchDefault></app-loading-indicator>
   <ion-item *ngFor="let serviceLocation of service?.locations" lines="none">
     <ion-icon slot="start"></ion-icon>
     <ion-text>
       <app-location-viewer [location]="serviceLocation.location"></app-location-viewer>
     </ion-text>
   </ion-item>
-  <ion-item lines="none" *ngSwitchCase="'client'">
-    <ion-icon slot="start" name="location-outline" color="secondary"></ion-icon>
-    <ion-text>{{ 'service-location.client' | translate }}</ion-text>
-  </ion-item>
-  <app-loading-indicator *ngSwitchDefault></app-loading-indicator>
 </ng-container>

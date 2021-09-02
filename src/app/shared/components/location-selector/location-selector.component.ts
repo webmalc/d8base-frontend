@@ -1,5 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Service } from '@app/api/models';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { LocationEditorPopoverComponent } from '@app/shared/components/location-editor-popover/location-editor-popover.component';
 import { PopoverController } from '@ionic/angular';
@@ -15,41 +14,56 @@ import LocationSelectorContext from './location-selector-context.interface';
 /**
  * Professional location selector
  */
-export class LocationSelectorComponent {
+export class LocationSelectorComponent implements OnInit {
   public context$: Observable<LocationSelectorContext>;
   @Output() public selectedLocationId = new EventEmitter<number>();
-  private readonly service$ = new ReplaySubject<Service>(1);
+  private readonly serviceId$ = new BehaviorSubject<number>(NaN);
+  private readonly professionalId$ = new ReplaySubject<number>(NaN);
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
   constructor(private readonly api: AccountsService, private readonly popoverController: PopoverController) {
-    this.context$ = combineLatest([this.service$, this.refresh$]).pipe(
-      switchMap(([service]) =>
+    this.context$ = combineLatest([this.professionalId$, this.serviceId$, this.refresh$]).pipe(
+      switchMap(([professionalId, serviceId]) =>
         forkJoin({
           allLocations: api.accountsProfessionalLocationsList({
-            professional: service.professional,
+            professional: professionalId,
           }),
-          initialLocations: api.accountsServiceLocationsList({
-            service: service.id,
-          }),
-          service: of(service),
+          initialLocations: serviceId
+            ? api.accountsServiceLocationsList({
+                service: serviceId,
+              })
+            : of({ results: [] }),
+          serviceId: of(serviceId),
+          professionalId: of(professionalId),
         }),
       ),
       map(data => ({
-        service: data.service,
         professionalLocations: data.allLocations.results,
         initialLocation: data.initialLocations.results.filter(location => location.is_enabled)[0] ?? {
           max_distance: 0,
-          service: data.service.id,
+          service: data.serviceId,
           location: data.allLocations.results[0]?.id,
         },
+        professionalId: data.professionalId,
       })),
     );
   }
 
   @Input()
-  public set service(service: Service) {
-    this.service$.next(service);
-    this.emitInitialValue();
+  public set serviceId(id: number) {
+    this.serviceId$.next(id);
+  }
+
+  /**
+   * Required value
+   */
+  @Input()
+  public set professionalId(id: number) {
+    this.professionalId$.next(id);
+  }
+
+  public ngOnInit(): void {
+    this.context$.pipe(take(1)).subscribe(context => this.selectedLocationId.emit(context.initialLocation.location));
   }
 
   public onChange(event: CustomEvent): void {
@@ -70,13 +84,8 @@ export class LocationSelectorComponent {
 
     const newLocation = {
       ...data,
-      professional: context.service.professional,
+      professional: context.professionalId,
     };
     this.api.accountsProfessionalLocationsCreate(newLocation).subscribe(() => this.refresh$.next());
-  }
-
-  private emitInitialValue() {
-    // selectedLocationId has to emit the initial value
-    this.context$.pipe(take(1)).subscribe(context => this.selectedLocationId.emit(context.initialLocation.location));
   }
 }
