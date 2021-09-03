@@ -4,7 +4,7 @@ import { AccountsService } from '@app/api/services';
 import { OrderStatus } from '@app/core/types/order-status';
 
 @Injectable()
-export class SentOrderStatusController {
+export class SentOrderManager {
   constructor(private readonly api: AccountsService) {}
 
   public async discardOrder(order: SentOrder): Promise<void> {

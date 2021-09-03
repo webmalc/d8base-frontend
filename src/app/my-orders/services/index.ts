@@ -1,2 +1,2 @@
-export * from './receiver-order-status-controller.service';
-export * from './sent-order-status-controller.service';
+export * from './received-order-manager.service';
+export * from './sent-order-manager.service';

@@ -16,7 +16,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyOrdersPageComponent } from './my-orders-page.component';
 import { MyOrdersRoutingModule } from './my-orders-routing.module';
-import { ReceiverOrderStatusController, SentOrderStatusController } from './services';
+import { ReceivedOrderManager, SentOrderManager } from './services';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,6 @@ import { ReceiverOrderStatusController, SentOrderStatusController } from './serv
     ReactiveFormsModule,
     InfiniteScrollModule,
   ],
-  providers: [ReceiverOrderStatusController, SentOrderStatusController],
+  providers: [ReceivedOrderManager, SentOrderManager],
 })
 export class MyOrdersModule {}

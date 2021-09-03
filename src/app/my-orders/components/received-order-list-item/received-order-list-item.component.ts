@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReceivedOrder, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { ReceiverOrderStatusController } from '@app/my-orders/services';
+import { ReceivedOrderManager } from '@app/my-orders/services';
 import { OrderListItem } from '../abstract/order-list-item';
 
 @Component({
@@ -18,7 +18,7 @@ export class ReceivedOrderListItemComponent extends OrderListItem {
   constructor(
     private readonly servicesCache: ServicesApiCache,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly orderStatusController: ReceiverOrderStatusController,
+    private readonly orderStatusController: ReceivedOrderManager,
   ) {
     super();
   }

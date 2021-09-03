@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angu
 import { ProfessionalList, SentOrder, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ProfessionalsApiCache } from '@app/core/services/cache/professionals-api-cache.service';
-import { SentOrderStatusController } from '@app/my-orders/services';
+import { SentOrderManager } from '@app/my-orders/services';
 import { switchMap } from 'rxjs/operators';
 import { OrderListItem } from '../abstract/order-list-item';
 
@@ -22,7 +22,7 @@ export class SentOrderListItemComponent extends OrderListItem {
     private readonly servicesCache: ServicesApiCache,
     private readonly changeDetector: ChangeDetectorRef,
     private readonly masterCache: ProfessionalsApiCache,
-    private readonly orderStatusController: SentOrderStatusController,
+    private readonly orderStatusController: SentOrderManager,
   ) {
     super();
   }

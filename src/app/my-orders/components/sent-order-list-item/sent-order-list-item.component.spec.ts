@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProfessionalsApiCache, ServicesApiCache } from '@app/core/services/cache';
-import { SentOrderStatusController } from '@app/my-orders/services';
+import { SentOrderManager } from '@app/my-orders/services';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
@@ -17,7 +17,7 @@ describe('SentOrderListItemComponent', () => {
       TestBed.configureTestingModule({
         declarations: [SentOrderListItemComponent],
         imports: [RootModules(), ComponentTestingModule],
-        providers: [ServicesApiCache, SentOrderStatusController, ProfessionalsApiCache],
+        providers: [ServicesApiCache, SentOrderManager, ProfessionalsApiCache],
       }).compileComponents();
 
       fixture = TestBed.createComponent(SentOrderListItemComponent);
