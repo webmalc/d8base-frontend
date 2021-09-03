@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyOrdersPageComponent } from '@app/my-orders/my-orders-page.component';
+import { InboxPageComponent } from './pages/inbox-page/inbox-page.component';
+import { OutboxPageComponent } from './pages/outbox-page/outbox-page.component';
 import { ReceivedOrderPageComponent, SentOrderPageComponent } from './components';
 
 const routes: Routes = [
@@ -12,8 +13,7 @@ const routes: Routes = [
   {
     path: 'inbox',
     pathMatch: 'full',
-    component: MyOrdersPageComponent,
-    data: { isInbox: true },
+    component: InboxPageComponent,
   },
   {
     path: 'inbox/:id',
@@ -23,8 +23,7 @@ const routes: Routes = [
   {
     path: 'outbox',
     pathMatch: 'full',
-    component: MyOrdersPageComponent,
-    data: { isInbox: false },
+    component: OutboxPageComponent,
   },
   {
     path: 'outbox/:id',

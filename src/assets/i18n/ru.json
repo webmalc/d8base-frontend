@@ -101,7 +101,7 @@
     "client-title": "Заказ услуг",
     "search": "Поиск",
     "bookmarks": "Избранное",
-    "sent-orders": "Мои заказы"
+    "sent-orders": "Отправленные заказы"
   },
   "layout": {
     "log-in": "Войти",
@@ -758,7 +758,7 @@
     "day-off": "Нерабочий день"
   },
   "received_orders": {
-    "title": "Мои заказы",
+    "title": "Полученные заказы",
     "newTab": "Ожидают",
     "currentTab": "Текущие",
     "archiveTab": "Архив",
@@ -775,7 +775,7 @@
     "discard-confirmation": "Отклонить? Заказ будет перемещён в архив"
   },
   "sent_orders": {
-    "title": "Мои заказы",
+    "title": "Отправленные заказы",
     "currentTab": "Текущие",
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",

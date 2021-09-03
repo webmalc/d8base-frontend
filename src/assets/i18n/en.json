@@ -758,7 +758,7 @@
     "day-off": "Day off"
   },
   "received_orders": {
-    "title": "My orders",
+    "title": "Received orders",
     "newTab": "New",
     "currentTab": "Current",
     "archiveTab": "Archived",
@@ -775,7 +775,7 @@
     "discard-confirmation": "Discard? The order will be archived"
   },
   "sent_orders": {
-    "title": "My orders",
+    "title": "Sent orders",
     "currentTab": "Current",
     "archiveTab": "Archived",
     "empty-placeholder": "There is no orders",

@@ -8,7 +8,9 @@ import { Select } from '@ngxs/store';
 import { asyncScheduler, BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, observeOn, switchMap, takeUntil } from 'rxjs/operators';
 
-const DEFAULT_ORDER_STATUS: ReceivedOrder['status'] = 'not_confirmed';
+const defaultOrderStatus: ReceivedOrder['status'] = 'not_confirmed';
+const activeStatusesFilter = 'confirmed,paid';
+const deprecatedStatusesFilter = 'completed,canceled,overdue';
 
 @Component({
   selector: 'app-inbox',
@@ -32,7 +34,7 @@ export class InboxComponent implements AfterViewInit, OnDestroy {
   );
 
   private readonly currentFilter$ = new BehaviorSubject<AccountsService.AccountsOrdersReceivedListParams>({
-    statusIn: DEFAULT_ORDER_STATUS,
+    statusIn: defaultOrderStatus,
   });
   private readonly destroy$ = new Subject<void>();
 
@@ -60,13 +62,13 @@ export class InboxComponent implements AfterViewInit, OnDestroy {
     const currentTab: Tabs = e.detail.value;
     switch (currentTab) {
       case Tabs.current:
-        this.currentFilter$.next({ statusIn: 'confirmed,paid' });
+        this.currentFilter$.next({ statusIn: activeStatusesFilter });
         break;
       case Tabs.archive:
-        this.currentFilter$.next({ statusIn: 'completed,canceled' });
+        this.currentFilter$.next({ statusIn: deprecatedStatusesFilter });
         break;
       default:
-        this.currentFilter$.next({ statusIn: 'not_confirmed' });
+        this.currentFilter$.next({ statusIn: defaultOrderStatus });
         break;
     }
   }

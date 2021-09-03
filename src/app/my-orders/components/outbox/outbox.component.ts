@@ -8,6 +8,7 @@ import { Select } from '@ngxs/store';
 import { asyncScheduler, BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, observeOn, switchMap, takeUntil } from 'rxjs/operators';
 
+const defaultOrderStatus: SentOrder['status'] = 'not_confirmed';
 const activeStatusesFilter = 'confirmed,paid,not_confirmed';
 const deprecatedStatusesFilter = 'completed,canceled,overdue';
 
@@ -61,7 +62,7 @@ export class OutboxComponent implements AfterViewInit, OnDestroy {
         this.currentFilter$.next({ statusIn: deprecatedStatusesFilter });
         break;
       default:
-        this.currentFilter$.next({ statusIn: 'not_confirmed' });
+        this.currentFilter$.next({ statusIn: defaultOrderStatus });
         break;
     }
   }
