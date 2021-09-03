@@ -14,6 +14,7 @@ import { UserLocation } from '../models/user-location';
 import { OrderReminder } from '../models/order-reminder';
 import { ReceivedOrder } from '../models/received-order';
 import { SentOrder } from '../models/sent-order';
+import { CancelOrder } from '../models/cancel-order';
 import { ProfessionalCertificate } from '../models/professional-certificate';
 import { ProfessionalClosedPeriod } from '../models/professional-closed-period';
 import { ProfessionalContact } from '../models/professional-contact';
@@ -83,6 +84,7 @@ class AccountsService extends __BaseService {
   static readonly accountsOrdersSentReadPath = '/accounts/orders/sent/{id}/';
   static readonly accountsOrdersSentUpdatePath = '/accounts/orders/sent/{id}/';
   static readonly accountsOrdersSentPartialUpdatePath = '/accounts/orders/sent/{id}/';
+  static readonly accountsOrdersSentCancelPath = '/accounts/orders/sent/{id}/cancel/';
   static readonly accountsProfessionalCertificatesListPath = '/accounts/professional-certificates/';
   static readonly accountsProfessionalCertificatesCreatePath = '/accounts/professional-certificates/';
   static readonly accountsProfessionalCertificatesReadPath = '/accounts/professional-certificates/{id}/';
@@ -1920,6 +1922,51 @@ class AccountsService extends __BaseService {
   accountsOrdersSentPartialUpdate(params: AccountsService.AccountsOrdersSentPartialUpdateParams): __Observable<SentOrder> {
     return this.accountsOrdersSentPartialUpdateResponse(params).pipe(
       __map(_r => _r.body as SentOrder)
+    );
+  }
+
+  /**
+   * Cancel the order.
+   * @param params The `AccountsService.AccountsOrdersSentCancelParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this order.
+   *
+   * - `data`:
+   */
+  accountsOrdersSentCancelResponse(params: AccountsService.AccountsOrdersSentCancelParams): __Observable<__StrictHttpResponse<CancelOrder>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(params.id)}/cancel/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<CancelOrder>;
+      })
+    );
+  }
+  /**
+   * Cancel the order.
+   * @param params The `AccountsService.AccountsOrdersSentCancelParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this order.
+   *
+   * - `data`:
+   */
+  accountsOrdersSentCancel(params: AccountsService.AccountsOrdersSentCancelParams): __Observable<CancelOrder> {
+    return this.accountsOrdersSentCancelResponse(params).pipe(
+      __map(_r => _r.body as CancelOrder)
     );
   }
 
@@ -8847,6 +8894,18 @@ module AccountsService {
      */
     id: number;
     data: SentOrder;
+  }
+
+  /**
+   * Parameters for accountsOrdersSentCancel
+   */
+  export interface AccountsOrdersSentCancelParams {
+
+    /**
+     * A unique integer value identifying this order.
+     */
+    id: number;
+    data: CancelOrder;
   }
 
   /**
