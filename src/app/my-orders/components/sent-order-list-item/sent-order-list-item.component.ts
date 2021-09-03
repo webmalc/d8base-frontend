@@ -14,7 +14,9 @@ import { OrderListItem } from '../abstract/order-list-item';
 export class SentOrderListItemComponent extends OrderListItem {
   public service: Service;
   public master: ProfessionalList;
-  @Output() public statusChanged = new EventEmitter<void>();
+
+  @Output()
+  public statusChanged = new EventEmitter<void>();
 
   private _order: SentOrder;
 
@@ -50,6 +52,10 @@ export class SentOrderListItemComponent extends OrderListItem {
         this.master = master;
         this.changeDetector.markForCheck();
       });
+  }
+
+  public get canCancel(): boolean {
+    return this.order.status === 'not_confirmed' || this.order.status === 'confirmed';
   }
 
   public onDiscardClick(): Promise<void> {

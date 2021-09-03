@@ -1,0 +1,9 @@
+<ion-item>
+  <ion-label position="floating">
+    {{ 'cancel-order-popover.note-title' | translate }}
+  </ion-label>
+  <ion-textarea [formControl]="noteControl" [maxlength]="200"></ion-textarea>
+</ion-item>
+<ion-button expand="block" (click)="confirm()" [disabled]="noteControl.invalid">
+  {{ 'cancel-order-popover.confirm' | translate }}
+</ion-button>

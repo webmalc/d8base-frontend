@@ -7,6 +7,7 @@ import {
   ReceivedOrderListItemComponent,
   ReceivedOrderPageComponent,
   SentOrderPageComponent,
+  CancelConfirmationPopoverComponent,
 } from '@app/my-orders/components';
 import { InboxComponent } from '@app/my-orders/components/inbox/inbox.component';
 import { OutboxComponent } from '@app/my-orders/components/outbox/outbox.component';
@@ -28,6 +29,7 @@ import { ReceivedOrderManager, SentOrderManager } from './services';
     SentOrderListItemComponent,
     ReceivedOrderPageComponent,
     SentOrderPageComponent,
+    CancelConfirmationPopoverComponent,
   ],
   imports: [
     CommonModule,

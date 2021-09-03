@@ -793,7 +793,8 @@
     "accepted": "Подтверждён",
     "paid": "Оплачен",
     "completed": "Выполнен",
-    "canceled": "Отменён"
+    "canceled": "Отменён",
+    "overdue": "Просрочен"
   },
   "saved-professionals": {
     "title": "Избранное",
@@ -852,5 +853,9 @@
   "tag-editor": {
     "enter-tag-name": "Введите имя тэга",
     "add-new-tag": "Добавить тэг"
+  },
+  "cancel-order-popover": {
+    "note-title": "Укажите причину отмены",
+    "confirm": "Отменить заказ"
   }
 }

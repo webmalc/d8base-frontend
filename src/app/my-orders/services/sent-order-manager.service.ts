@@ -1,27 +1,30 @@
 import { Injectable } from '@angular/core';
-import { SentOrder } from '@app/api/models';
+import { CancelOrder, SentOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
-import { OrderStatus } from '@app/core/types/order-status';
+import { PopoverController } from '@ionic/angular';
+import { CancelConfirmationPopoverComponent } from '../components/cancel-confirmation-popover/cancel-confirmation-popover.component';
 
 @Injectable()
 export class SentOrderManager {
-  constructor(private readonly api: AccountsService) {}
+  constructor(private readonly api: AccountsService, private readonly popoverController: PopoverController) {}
 
   public async discardOrder(order: SentOrder): Promise<void> {
-    await this.setStatus(order, 'canceled');
-  }
-
-  private setStatus(order: SentOrder, status: OrderStatus): Promise<SentOrder> {
-    const acceptedOrder: SentOrder = {
-      ...order,
-      status,
-    };
-
-    return this.api
-      .accountsOrdersSentPartialUpdate({
-        id: acceptedOrder.id,
-        data: acceptedOrder,
-      })
-      .toPromise();
+    const pop = await this.popoverController.create({
+      component: CancelConfirmationPopoverComponent,
+      translucent: true,
+      animated: true,
+    });
+    await pop.present();
+    const eventDetail = await pop.onDidDismiss();
+    const cancelOrder: CancelOrder = eventDetail.data;
+    if (cancelOrder) {
+      await this.api
+        .accountsOrdersSentCancel({
+          id: order.id,
+          data: cancelOrder,
+        })
+        .toPromise();
+    }
+    await this.popoverController.dismiss();
   }
 }

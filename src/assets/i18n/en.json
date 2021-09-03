@@ -793,7 +793,8 @@
     "accepted": "Accepted",
     "paid": "Paid",
     "completed": "Completed",
-    "canceled": "Canceled"
+    "canceled": "Canceled",
+    "overdue": "Overdue"
   },
   "saved-professionals": {
     "title": "Favorites",
@@ -851,5 +852,9 @@
   "tag-editor": {
     "enter-tag-name": "Enter tag name",
     "add-new-tag": "Add new tag"
+  },
+  "cancel-order-popover": {
+    "note-title": "Please specify the reason for cancelling",
+    "confirm": "Cancel the order"
   }
 }
