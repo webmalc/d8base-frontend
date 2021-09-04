@@ -38,7 +38,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
       return;
     }
     if (file.size > MAX_SIZE) {
-      this.toastService.showError('client-errors.file-is-too-big', { translate: true });
+      this.toastService.showMessage('client-errors.file-is-too-big', { translate: true });
       return;
     }
     if (this.cropAfterSelect) {

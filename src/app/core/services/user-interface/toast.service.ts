@@ -13,7 +13,7 @@ const ERROR_TOAST_DURATION_MS = 3000;
 export class ToastService {
   constructor(private readonly toastController: ToastController, private readonly translateService: TranslateService) {}
 
-  public showError(error: string, params: ToastServiceParams = {}): void {
+  public showMessage(error: string, params: ToastServiceParams = {}): void {
     const duration = params.duration ?? ERROR_TOAST_DURATION_MS;
     const translate = Boolean(params.translate);
     const message = translate ? this.translateService.instant(error) : error;
