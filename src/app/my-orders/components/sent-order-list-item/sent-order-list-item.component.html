@@ -13,7 +13,7 @@
       {{ 'sent_orders.view' | translate }}
     </ion-button>
     <ng-container *ngIf="canCancel">
-      <ion-button slot="end" color="danger" (click)="onDiscardClick()" [disabled]="pending">
+      <ion-button slot="end" color="danger" (click)="onDiscardClick()">
         {{ 'sent_orders.discard' | translate }}
       </ion-button>
     </ng-container>

@@ -17,7 +17,7 @@
             <ion-label>{{ 'sent_orders.order-details-subtitle' | translate }}:</ion-label>
           </ion-list-header>
           <ng-container *ngIf="service.professional | masterById$ | async as professional">
-            <app-professional-card [professional]="professional"></app-professional-card>
+            <app-professional-card [professional]="professional" class="ion-margin-start"></app-professional-card>
             <app-chat-button
               *ngIf="(userId$ | async) !== service.professional"
               [userId]="professional.user.id"

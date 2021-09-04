@@ -790,7 +790,8 @@
     "ordered-service": "Забронированная услуга",
     "order-details": "Детали бронирования",
     "view": "Подробнее",
-    "discard": "Отменить"
+    "discard": "Отменить",
+    "order-discarded": "Заказ был отменён"
   },
   "order-status": {
     "title": "Статус заказа",
@@ -860,7 +861,10 @@
     "add-new-tag": "Добавить тэг"
   },
   "cancel-order-popover": {
-    "note-title": "Укажите причину отмены",
+    "reason-title": "Причина отмены",
+    "reasons-dates": "Перенос даты или времени",
+    "reasons-other": "Другая причина",
+    "note-title": "Комментарий",
     "confirm": "Отменить заказ"
   }
 }

@@ -8,7 +8,7 @@ import { CancelConfirmationPopoverComponent } from '../components/cancel-confirm
 export class SentOrderManager {
   constructor(private readonly api: AccountsService, private readonly popoverController: PopoverController) {}
 
-  public async discardOrder(order: SentOrder): Promise<void> {
+  public async discardOrder(order: SentOrder): Promise<boolean> {
     const pop = await this.popoverController.create({
       component: CancelConfirmationPopoverComponent,
       translucent: true,
@@ -24,7 +24,9 @@ export class SentOrderManager {
           data: cancelOrder,
         })
         .toPromise();
+      return true;
     }
     await this.popoverController.dismiss();
+    return false;
   }
 }

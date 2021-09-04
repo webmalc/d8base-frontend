@@ -63,19 +63,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   private handleBadRequestResponse(response: HttpErrorResponse): void {
     const messages = getHttpErrorMessages(response);
     if (messages.length > 0) {
-      messages.forEach(message => this.toast.showError(message));
+      messages.forEach(message => this.toast.showMessage(message));
     } else {
-      this.toast.showError(response.message);
+      this.toast.showMessage(response.message);
     }
   }
 
   private handleUnauthorizedResponse(): void {
-    this.toast.showError(ErrorMessages.AUTHENTICATION_ERROR, { translate: true });
+    this.toast.showMessage(ErrorMessages.AUTHENTICATION_ERROR, { translate: true });
     this.auth.logout(); // delete invalid credentials
     this.router.navigateByUrl('/auth/login');
   }
 
   private handleServerErrorResponse(): void {
-    this.toast.showError(ErrorMessages.GENERIC_SERVER_ERROR, { translate: true });
+    this.toast.showMessage(ErrorMessages.GENERIC_SERVER_ERROR, { translate: true });
   }
 }

@@ -1,17 +1,17 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProfessionalList, SentOrder, Service } from '@app/api/models';
+import { ToastService } from '@app/core/services';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ProfessionalsApiCache } from '@app/core/services/cache/professionals-api-cache.service';
 import { SentOrderManager } from '@app/my-orders/services';
 import { switchMap } from 'rxjs/operators';
-import { OrderListItem } from '../abstract/order-list-item';
 
 @Component({
   selector: 'app-sent-order-list-item',
   templateUrl: './sent-order-list-item.component.html',
   styleUrls: ['./sent-order-list-item.component.scss'],
 })
-export class SentOrderListItemComponent extends OrderListItem {
+export class SentOrderListItemComponent {
   public service: Service;
   public master: ProfessionalList;
 
@@ -25,9 +25,8 @@ export class SentOrderListItemComponent extends OrderListItem {
     private readonly changeDetector: ChangeDetectorRef,
     private readonly masterCache: ProfessionalsApiCache,
     private readonly orderStatusController: SentOrderManager,
-  ) {
-    super();
-  }
+    private readonly toast: ToastService,
+  ) {}
 
   public get order(): SentOrder {
     return this._order || ({} as SentOrder);
@@ -58,7 +57,11 @@ export class SentOrderListItemComponent extends OrderListItem {
     return this.order.status === 'not_confirmed' || this.order.status === 'confirmed';
   }
 
-  public onDiscardClick(): Promise<void> {
-    return this.perform(() => this.orderStatusController.discardOrder(this.order));
+  public async onDiscardClick(): Promise<void> {
+    const orderCanceled = await this.orderStatusController.discardOrder(this.order);
+    if (orderCanceled) {
+      this.toast.showMessage('sent_orders.order-discarded', { translate: true });
+      this.statusChanged.emit();
+    }
   }
 }
