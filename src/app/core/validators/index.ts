@@ -16,6 +16,7 @@ const MAXIMUM_FIRST_NAME_LENGTH = 30;
 const MAXIMUM_LAST_NAME_LENGTH = 150;
 
 const MINIMUM_DESCRIPTION_LENGTH = 20;
+const MAXIMUM_SERVICE_NAME_LENGTH = 250;
 
 export const passwordValidators = Validators.compose([
   Validators.required,
@@ -33,3 +34,5 @@ export const firstNameValidators = Validators.compose([
 export const lastNameValidators = Validators.compose([Validators.maxLength(MAXIMUM_LAST_NAME_LENGTH)]);
 
 export const descriptionValidator = Validators.minLength(MINIMUM_DESCRIPTION_LENGTH);
+
+export const serviceNameValidator = Validators.maxLength(MAXIMUM_SERVICE_NAME_LENGTH);

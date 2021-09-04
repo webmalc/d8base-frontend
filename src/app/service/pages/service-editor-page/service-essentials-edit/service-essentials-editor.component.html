@@ -1,21 +1,30 @@
 <app-header></app-header>
 <ion-content *ngIf="context$ | async as context">
   <app-content-wrapper>
-    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">{{
-      'service-details.title' | translate
-    }}</app-column-header>
+    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">
+      {{ 'service-editor.essentials-title' | translate }}
+    </app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
       <section>
         <app-section-heading>{{ 'service-details.name' | translate }}</app-section-heading>
         <ion-item>
           <ion-input [formControlName]="formFields.name"></ion-input>
         </ion-item>
+        <app-form-control-error [controlName]="formFields.name"></app-form-control-error>
       </section>
 
       <section>
         <app-section-heading>{{ 'service-details.duration-and-price' | translate }}</app-section-heading>
-        <app-duration-editor class="ion-margin" [formControlName]="formFields.duration"></app-duration-editor>
-        <app-price-editor class="ion-margin" [formControlName]="formFields.price"></app-price-editor>
+        <app-duration-editor
+          class="ion-margin-horizontal ion-margin-top"
+          [formControlName]="formFields.duration"
+        ></app-duration-editor>
+        <app-form-control-error [controlName]="formFields.duration"></app-form-control-error>
+        <app-price-editor
+          class="ion-margin-horizontal ion-margin-top"
+          [formControlName]="formFields.price"
+        ></app-price-editor>
+        <app-form-control-error [controlName]="formFields.price"></app-form-control-error>
       </section>
 
       <section>

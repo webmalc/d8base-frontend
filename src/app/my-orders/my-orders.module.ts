@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from '@app/infinite-scroll/infinite-scroll.module';
 import {
+  CancelConfirmationPopoverComponent,
   OrderStatusComponent,
   ReceivedOrderListItemComponent,
   ReceivedOrderPageComponent,
@@ -11,16 +12,18 @@ import {
 import { InboxComponent } from '@app/my-orders/components/inbox/inbox.component';
 import { OutboxComponent } from '@app/my-orders/components/outbox/outbox.component';
 import { SentOrderListItemComponent } from '@app/my-orders/components/sent-order-list-item/sent-order-list-item.component';
+import { InboxPageComponent } from '@app/my-orders/pages/inbox-page/inbox-page.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { MyOrdersPageComponent } from './my-orders-page.component';
 import { MyOrdersRoutingModule } from './my-orders-routing.module';
-import { ReceiverOrderStatusController, SentOrderStatusController } from './services';
+import { OutboxPageComponent } from './pages/outbox-page/outbox-page.component';
+import { ReceivedOrderManager, SentOrderManager } from './services';
 
 @NgModule({
   declarations: [
-    MyOrdersPageComponent,
+    InboxPageComponent,
+    OutboxPageComponent,
     OrderStatusComponent,
     InboxComponent,
     OutboxComponent,
@@ -28,6 +31,7 @@ import { ReceiverOrderStatusController, SentOrderStatusController } from './serv
     SentOrderListItemComponent,
     ReceivedOrderPageComponent,
     SentOrderPageComponent,
+    CancelConfirmationPopoverComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +42,6 @@ import { ReceiverOrderStatusController, SentOrderStatusController } from './serv
     ReactiveFormsModule,
     InfiniteScrollModule,
   ],
-  providers: [ReceiverOrderStatusController, SentOrderStatusController],
+  providers: [ReceivedOrderManager, SentOrderManager],
 })
 export class MyOrdersModule {}

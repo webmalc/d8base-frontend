@@ -257,8 +257,13 @@
     "minutes": "minutes",
     "minutes-short": "min"
   },
+  "service-viewer": {
+    "title": "Service information"
+  },
+  "service-editor": {
+    "essentials-title": "Essentials"
+  },
   "service-details": {
-    "title": "Essentials",
     "location-title": "Time and Place",
     "description-title": "Service Details",
     "payment-title": "Payment Options",
@@ -758,7 +763,7 @@
     "day-off": "Day off"
   },
   "received_orders": {
-    "title": "My orders",
+    "title": "Received orders",
     "newTab": "New",
     "currentTab": "Current",
     "archiveTab": "Archived",
@@ -775,7 +780,7 @@
     "discard-confirmation": "Discard? The order will be archived"
   },
   "sent_orders": {
-    "title": "My orders",
+    "title": "Sent orders",
     "currentTab": "Current",
     "archiveTab": "Archived",
     "empty-placeholder": "There is no orders",
@@ -793,7 +798,8 @@
     "accepted": "Accepted",
     "paid": "Paid",
     "completed": "Completed",
-    "canceled": "Canceled"
+    "canceled": "Canceled",
+    "overdue": "Overdue"
   },
   "saved-professionals": {
     "title": "Favorites",
@@ -851,5 +857,9 @@
   "tag-editor": {
     "enter-tag-name": "Enter tag name",
     "add-new-tag": "Add new tag"
+  },
+  "cancel-order-popover": {
+    "note-title": "Please specify the reason for cancelling",
+    "confirm": "Cancel the order"
   }
 }

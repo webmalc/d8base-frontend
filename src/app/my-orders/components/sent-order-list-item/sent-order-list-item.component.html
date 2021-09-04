@@ -8,15 +8,14 @@
   </ion-item>
   <app-professional-card *ngIf="master" [professional]="master" class="ion-padding-horizontal"></app-professional-card>
   <app-service-title [service]="service"></app-service-title>
-  <ion-item lines="none" *appIfSpinner="!pending">
+  <ion-item lines="none">
     <ion-button [routerLink]="['/my-orders', 'outbox', order.id]" color="secondary">
       {{ 'sent_orders.view' | translate }}
     </ion-button>
-    <!--    TODO: show the relevant buttons when the workflow becomes clear -->
-    <!--    <ng-container *ngIf="order.status === 'not_confirmed'">-->
-    <!--      <ion-button slot="end" color="danger" (click)="onDiscardClick()">-->
-    <!--        {{ 'sent_orders.discard' | translate }}-->
-    <!--      </ion-button>-->
-    <!--    </ng-container>-->
+    <ng-container *ngIf="canCancel">
+      <ion-button slot="end" color="danger" (click)="onDiscardClick()" [disabled]="pending">
+        {{ 'sent_orders.discard' | translate }}
+      </ion-button>
+    </ng-container>
   </ion-item>
 </ion-card>

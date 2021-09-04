@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ReceivedOrderManager } from '@app/my-orders/services';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { ReceivedOrderPageComponent } from './received-order-page.component';
 
-describe('ReceivedOrderPageComponent', () => {
-  let component: ReceivedOrderPageComponent;
-  let fixture: ComponentFixture<ReceivedOrderPageComponent>;
+import { OutboxPageComponent } from './outbox-page.component';
+
+describe('OutboxPageComponent', () => {
+  let component: OutboxPageComponent;
+  let fixture: ComponentFixture<OutboxPageComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ReceivedOrderPageComponent],
+        declarations: [OutboxPageComponent],
         imports: [...RootModules(), ComponentTestingModule],
-        providers: [ReceivedOrderManager],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(ReceivedOrderPageComponent);
+      fixture = TestBed.createComponent(OutboxPageComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

@@ -23,7 +23,7 @@ export interface ServiceList {
   is_auto_order_confirmation?: boolean;
   is_base_schedule?: boolean;
   is_enabled?: boolean;
-  locations?: Array<ServiceLocationInline>;
+  locations?: ServiceLocationInline[];
   modified?: string;
   name: string;
   price?: Price;

@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
-export class ReceiverOrderStatusController {
+export class ReceivedOrderManager {
   constructor(
     private readonly api: AccountsService,
     private readonly alertController: AlertController,

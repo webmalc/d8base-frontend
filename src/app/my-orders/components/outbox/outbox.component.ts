@@ -8,6 +8,10 @@ import { Select } from '@ngxs/store';
 import { asyncScheduler, BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, observeOn, switchMap, takeUntil } from 'rxjs/operators';
 
+const defaultOrderStatus: SentOrder['status'] = 'not_confirmed';
+const activeStatusesFilter = 'confirmed,paid,not_confirmed';
+const deprecatedStatusesFilter = 'completed,canceled,overdue';
+
 @Component({
   selector: 'app-outbox',
   templateUrl: './outbox.component.html',
@@ -26,7 +30,7 @@ export class OutboxComponent implements AfterViewInit, OnDestroy {
   ) => Observable<PaginatedResult<SentOrder>> = this.accountsService.accountsOrdersSentList.bind(this.accountsService);
 
   private readonly currentFilter$ = new BehaviorSubject<AccountsService.AccountsOrdersSentListParams>({
-    statusIn: 'confirmed,paid,not_confirmed',
+    statusIn: activeStatusesFilter,
   });
   private readonly destroy$ = new Subject<void>();
 
@@ -52,13 +56,13 @@ export class OutboxComponent implements AfterViewInit, OnDestroy {
   public changeTab(e: CustomEvent): void {
     switch (e.detail.value) {
       case Tabs.current:
-        this.currentFilter$.next({ statusIn: 'confirmed,paid,not_confirmed' });
+        this.currentFilter$.next({ statusIn: activeStatusesFilter });
         break;
       case Tabs.archive:
-        this.currentFilter$.next({ statusIn: 'completed,canceled' });
+        this.currentFilter$.next({ statusIn: deprecatedStatusesFilter });
         break;
       default:
-        this.currentFilter$.next({ statusIn: 'not_confirmed' });
+        this.currentFilter$.next({ statusIn: defaultOrderStatus });
         break;
     }
   }

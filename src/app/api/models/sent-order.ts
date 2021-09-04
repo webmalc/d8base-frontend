@@ -19,5 +19,5 @@ export interface SentOrder {
   service_location?: null | number;
   source?: 'online' | 'manual';
   start_datetime: string;
-  status?: 'not_confirmed' | 'confirmed' | 'paid' | 'completed' | 'canceled';
+  status?: 'not_confirmed' | 'confirmed' | 'paid' | 'completed' | 'canceled' | 'overdue';
 }
