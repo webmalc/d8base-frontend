@@ -790,7 +790,8 @@
     "ordered-service": "Забронированная услуга",
     "order-details": "Детали бронирования",
     "view": "Подробнее",
-    "discard": "Отменить"
+    "discard": "Отменить",
+    "order-discarded": "Заказ был отменён"
   },
   "order-status": {
     "title": "Статус заказа",

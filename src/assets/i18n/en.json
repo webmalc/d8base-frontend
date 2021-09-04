@@ -790,7 +790,8 @@
     "ordered-service": "Ordered service",
     "order-details": "Order details",
     "view": "View details",
-    "discard": "Cancel"
+    "discard": "Cancel",
+    "order-discarded": "The order was canceled"
   },
   "order-status": {
     "title": "Order status",

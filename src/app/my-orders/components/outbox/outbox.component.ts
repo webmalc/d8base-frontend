@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { SentOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
+import { NgDestroyService } from '@app/core/services';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
-import { Tabs } from '@app/my-orders/enums/tabs.enum';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
-import { asyncScheduler, BehaviorSubject, Observable, Subject } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, observeOn, switchMap, takeUntil } from 'rxjs/operators';
 
 const defaultOrderStatus: SentOrder['status'] = 'not_confirmed';
@@ -16,15 +16,19 @@ const deprecatedStatusesFilter = 'completed,canceled,overdue';
   selector: 'app-outbox',
   templateUrl: './outbox.component.html',
   styleUrls: ['./outbox.component.scss'],
+  providers: [NgDestroyService],
 })
-export class OutboxComponent implements AfterViewInit, OnDestroy {
+export class OutboxComponent implements AfterViewInit {
   @Select(CurrentUserSelectors.isAuthenticated)
   public isAuthenticated$: Observable<boolean>;
 
-  public tabs = Tabs;
+  public tabs = {
+    current: 'current',
+    archive: 'archived',
+  };
   public orders: SentOrder[];
-
   public readonly doLoad$ = new Subject<InfiniteScrollData<AccountsService.AccountsOrdersSentListParams, SentOrder>>();
+
   private readonly apiRequestFunction: (
     params: AccountsService.AccountsOrdersReceivedListParams,
   ) => Observable<PaginatedResult<SentOrder>> = this.accountsService.accountsOrdersSentList.bind(this.accountsService);
@@ -32,9 +36,10 @@ export class OutboxComponent implements AfterViewInit, OnDestroy {
   private readonly currentFilter$ = new BehaviorSubject<AccountsService.AccountsOrdersSentListParams>({
     statusIn: activeStatusesFilter,
   });
-  private readonly destroy$ = new Subject<void>();
 
-  constructor(private readonly accountsService: AccountsService) {}
+  private readonly refresh$ = new BehaviorSubject<void>(void 0);
+
+  constructor(private readonly accountsService: AccountsService, private readonly destroy$: NgDestroyService) {}
 
   public ngAfterViewInit(): void {
     this.isAuthenticated$
@@ -42,28 +47,32 @@ export class OutboxComponent implements AfterViewInit, OnDestroy {
         filter(isAuthenticated => Boolean(isAuthenticated)),
         observeOn(asyncScheduler),
         switchMap(() =>
-          this.currentFilter$.pipe(map(params => ({ params, apiRequestFunction: this.apiRequestFunction }))),
+          combineLatest([
+            this.currentFilter$.pipe(map(params => ({ params, apiRequestFunction: this.apiRequestFunction }))),
+            this.refresh$,
+          ]),
         ),
+        map(([value]) => value),
         takeUntil(this.destroy$),
       )
       .subscribe(this.doLoad$);
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-  }
-
   public changeTab(e: CustomEvent): void {
     switch (e.detail.value) {
-      case Tabs.current:
+      case this.tabs.current:
         this.currentFilter$.next({ statusIn: activeStatusesFilter });
         break;
-      case Tabs.archive:
+      case this.tabs.archive:
         this.currentFilter$.next({ statusIn: deprecatedStatusesFilter });
         break;
       default:
         this.currentFilter$.next({ statusIn: defaultOrderStatus });
         break;
     }
+  }
+
+  public refresh() {
+    this.refresh$.next();
   }
 }
