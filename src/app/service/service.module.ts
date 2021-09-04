@@ -6,7 +6,7 @@ import { DepartureComponent } from '@app/service/components/departure/departure.
 import { MasterPickerPopoverComponent } from '@app/service/components/master-picker/master-picker-popover.component';
 import {
   ServiceEditorPageComponent,
-  ServiceInfoEditorComponent,
+  ServiceEssentialsEditorComponent,
   ServiceTypeEditComponent,
   ServiceDetailsEditComponent,
 } from '@app/service/pages/service-editor-page';
@@ -75,7 +75,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     MasterPickerPopoverComponent,
     ServiceViewerPageComponent,
     ServiceEditorPageComponent,
-    ServiceInfoEditorComponent,
+    ServiceEssentialsEditorComponent,
     ServiceTypeEditComponent,
     ServicePublishWrapperComponent,
     ServiceDetailsEditComponent,

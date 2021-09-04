@@ -5,21 +5,21 @@ import { ServiceEditorDepsService } from '@app/service/pages/service-editor-page
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ServiceInfoEditorComponent } from './service-info-editor.component';
+import { ServiceEssentialsEditorComponent } from './service-essentials-editor.component';
 
 describe('ServiceInfoEditComponent', () => {
-  let component: ServiceInfoEditorComponent;
-  let fixture: ComponentFixture<ServiceInfoEditorComponent>;
+  let component: ServiceEssentialsEditorComponent;
+  let fixture: ComponentFixture<ServiceEssentialsEditorComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ServiceInfoEditorComponent],
+        declarations: [ServiceEssentialsEditorComponent],
         imports: [TranslateModule.forRoot(), IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
         providers: [ServiceEditorDepsService],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(ServiceInfoEditorComponent);
+      fixture = TestBed.createComponent(ServiceEssentialsEditorComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

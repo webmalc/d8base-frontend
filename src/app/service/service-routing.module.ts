@@ -17,7 +17,7 @@ import { TimetableComponent } from '@app/service/components/timetable/timetable.
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
 import {
   ServiceDetailsEditComponent,
-  ServiceInfoEditorComponent,
+  ServiceEssentialsEditorComponent,
   ServiceTypeEditComponent,
 } from './pages/service-editor-page';
 import { ServicePublishWrapperComponent } from './components/service-publish-wrapper/service-publish-wrapper.component';
@@ -96,7 +96,7 @@ const routes: Routes = [
   },
   {
     path: ':id/edit/info',
-    component: ServiceInfoEditorComponent,
+    component: ServiceEssentialsEditorComponent,
   },
   {
     path: ':id/edit/time-and-place',

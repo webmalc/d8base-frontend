@@ -6,15 +6,19 @@ import { ColumnHeaderComponent } from '@app/shared/components';
 import { ServiceEditor } from '../service-editor';
 import ServiceEditorContext from '../service-editor-context.interface';
 import { ServiceEditorDepsService } from '../service-editor-deps.service';
-import { ServiceInfoEditFields } from './service-info-edit-fields.enum';
 
 @Component({
-  selector: 'app-service-info-edit',
-  templateUrl: './service-info-editor.component.html',
-  styleUrls: ['./service-info-editor.component.scss'],
+  selector: 'app-service-essentials-edit',
+  templateUrl: './service-essentials-editor.component.html',
+  styleUrls: ['./service-essentials-editor.component.scss'],
 })
-export class ServiceInfoEditorComponent extends ServiceEditor {
-  public formFields = ServiceInfoEditFields;
+export class ServiceEssentialsEditorComponent extends ServiceEditor {
+  public formFields = {
+    name: 'name',
+    duration: 'duration',
+    price: 'price',
+    paymentMethods: 'paymentMethods',
+  };
 
   @ViewChild(ColumnHeaderComponent)
   protected header: ColumnHeaderComponent;
