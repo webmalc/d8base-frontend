@@ -257,8 +257,13 @@
     "minutes": "minutes",
     "minutes-short": "min"
   },
+  "service-viewer": {
+    "title": "Service information"
+  },
+  "service-editor": {
+    "essentials-title": "Essentials"
+  },
   "service-details": {
-    "title": "Essentials",
     "location-title": "Time and Place",
     "description-title": "Service Details",
     "payment-title": "Payment Options",

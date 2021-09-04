@@ -1,9 +1,9 @@
 <app-header></app-header>
 <ion-content *ngIf="context$ | async as context">
   <app-content-wrapper>
-    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">{{
-      'service-details.title' | translate
-    }}</app-column-header>
+    <app-column-header [backButtonUrl]="getServicePageUrl(context.service.id)">
+      {{ 'service-editor.essentials-title' | translate }}
+    </app-column-header>
     <form [formGroup]="context.form" (ngSubmit)="submit(context)">
       <section>
         <app-section-heading>{{ 'service-details.name' | translate }}</app-section-heading>

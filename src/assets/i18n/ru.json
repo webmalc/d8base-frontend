@@ -257,8 +257,13 @@
     "minutes": "минуты",
     "minutes-short": "мин"
   },
+  "service-viewer": {
+    "title": "Информация об услуге"
+  },
+  "service-editor": {
+    "essentials-title": "Обязательная информация"
+  },
   "service-details": {
-    "title": "Обязательная информация",
     "location-title": "Место и время оказания услуги",
     "description-title": "Подробное описание",
     "payment-title": "Доступные варианты оплаты",
