@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceList } from '@app/api/models';
 import { ServiceLocationInline } from '@app/api/models/service-location-inline';
+import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
 import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { MasterManagerService } from '@app/core/services';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
@@ -60,7 +61,7 @@ export class ServicePublishFinalStepComponent implements IonViewDidEnter {
         finalize(() => this.store.dispatch(new LoaderActions.HideLoader('service-publish'))),
       )
       .subscribe(service =>
-        this.router.navigate(['service', service.id, 'edit'], { queryParams: { from: 'publish' } }),
+        this.router.navigate([NavPath.Service, service.id, NavBranch.Edit], { queryParams: { from: 'publish' } }),
       );
   }
 }

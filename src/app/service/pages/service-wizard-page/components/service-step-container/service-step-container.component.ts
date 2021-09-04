@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavPath } from '@app/core/constants/navigation.constants';
+import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService, ServiceManagerService } from '@app/core/services';
 import { ServiceBuilderService } from '@app/service/pages/service-wizard-page/services';
@@ -51,7 +51,9 @@ export class ServiceStepContainerComponent {
   public async submit(): Promise<void> {
     this.serviceManager
       .createService(await this.serviceBuilder.build())
-      .subscribe(service => this.router.navigate([NavPath.Service, service.id], { queryParams: { from: 'publish' } }));
+      .subscribe(service =>
+        this.router.navigate([NavPath.Service, service.id, NavBranch.Edit], { queryParams: { from: 'publish' } }),
+      );
   }
 
   private subscribeToState(): void {
