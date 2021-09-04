@@ -9,14 +9,19 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./cancel-confirmation-popover.component.scss'],
 })
 export class CancelConfirmationPopoverComponent {
-  public noteControl = new FormControl('', Validators.required);
+  public reasonControl = new FormControl('', Validators.required);
+  public noteControl = new FormControl('');
+  public reasons: { [K in CancelOrder['cancel_reason']]: CancelOrder['cancel_reason'] } = {
+    dates: 'dates',
+    other: 'other',
+  };
 
   constructor(private readonly popoverController: PopoverController) {}
 
   public confirm(): void {
     const cancelOrder: CancelOrder = {
       cancel_note: this.noteControl.value,
-      cancel_reason: 'other',
+      cancel_reason: this.reasonControl.value,
     };
     this.popoverController.dismiss(cancelOrder);
   }

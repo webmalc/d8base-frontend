@@ -859,7 +859,10 @@
     "add-new-tag": "Add new tag"
   },
   "cancel-order-popover": {
-    "note-title": "Please specify the reason for cancelling",
+    "reason-title": "Cancelling reason",
+    "reasons-dates": "I want to choose another date",
+    "reasons-other": "Other",
+    "note-title": "Comment",
     "confirm": "Cancel the order"
   }
 }
