@@ -37,6 +37,7 @@ export class ServiceEssentialsEditorComponent extends ServiceEditor {
     const newPrice: Price = {
       ...service.price,
       ...price,
+      service: service.id,
       payment_methods: paymentMethods,
     };
     const newService: Service = {
@@ -45,8 +46,11 @@ export class ServiceEssentialsEditorComponent extends ServiceEditor {
       description,
       duration,
     };
+    const priceId = newPrice.id;
     const sources = [
-      this.deps.api.accountsServicePricesUpdate({ id: newPrice.id, data: newPrice }),
+      priceId
+        ? this.deps.api.accountsServicePricesUpdate({ id: priceId, data: newPrice })
+        : this.deps.api.accountsServicePricesCreate(newPrice),
       this.deps.api.accountsServicesUpdate({ id: service.id, data: newService }),
     ];
     this.saveAndReturn(sources);
@@ -57,7 +61,7 @@ export class ServiceEssentialsEditorComponent extends ServiceEditor {
       [this.formFields.name]: new FormControl(service.name, [Validators.required, AppValidators.serviceNameValidator]),
       [this.formFields.duration]: new FormControl(service.duration, Validators.required),
       [this.formFields.price]: new FormControl(service.price, AppValidators.priceIntervalValidator),
-      [this.formFields.paymentMethods]: new FormControl(service.price.payment_methods),
+      [this.formFields.paymentMethods]: new FormControl(service.price?.payment_methods ?? [], Validators.required),
     });
   }
 }
