@@ -826,6 +826,8 @@
   "form-errors": {
     "minlength": "Field value needs length at least {{ requiredLength }} symbols. Current length is {{ actualLength }}.",
     "maxlength": "Maximum length of field's value haven't to exceed {{ requiredLength }} symbols. Current length is {{ actualLength }}.",
+    "min": "Has to be at least {{ min }}.",
+    "max": "Has to be no more than {{ max }}.",
     "email": "Email is invalid.",
     "forbidNumericValue": "Field value can't contain numbers only.",
     "passwordMismatch": "Passwords are mismatch.",

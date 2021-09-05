@@ -59,7 +59,10 @@ export class ServiceEssentialsEditorComponent extends ServiceEditor {
   protected createForm(service: Service): FormGroup {
     return new FormGroup({
       [this.formFields.name]: new FormControl(service.name, [Validators.required, AppValidators.serviceNameValidator]),
-      [this.formFields.duration]: new FormControl(service.duration, Validators.required),
+      [this.formFields.duration]: new FormControl(service.duration, [
+        Validators.required,
+        AppValidators.durationValidator,
+      ]),
       [this.formFields.price]: new FormControl(service.price, AppValidators.priceIntervalValidator),
       [this.formFields.paymentMethods]: new FormControl(service.price?.payment_methods ?? [], Validators.required),
     });

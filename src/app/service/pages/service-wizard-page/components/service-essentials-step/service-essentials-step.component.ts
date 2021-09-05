@@ -58,7 +58,10 @@ export class ServiceEssentialsStepComponent extends StepComponent<ServiceEssenti
   private createForm(): FormGroup {
     return new FormGroup({
       [this.formFields.name]: new FormControl(defaults.name, [Validators.required, AppValidators.serviceNameValidator]),
-      [this.formFields.duration]: new FormControl(defaults.duration, Validators.required),
+      [this.formFields.duration]: new FormControl(defaults.duration, [
+        Validators.required,
+        AppValidators.durationValidator,
+      ]),
       [this.formFields.price]: new FormControl(defaults.price, AppValidators.priceIntervalValidator),
       [this.formFields.payment_methods]: new FormControl(defaults.payment_methods, Validators.required),
     });

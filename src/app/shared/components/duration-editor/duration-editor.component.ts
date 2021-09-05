@@ -1,6 +1,6 @@
-import { Component, forwardRef, OnDestroy } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { NgDestroyService } from '@app/core/services';
 import { takeUntil } from 'rxjs/operators';
 import { DurationFormFields } from './duration-form-fields';
 import { Duration } from './duration.interface';
@@ -14,6 +14,7 @@ function minutesFromDuration({ days, hours, minutes }: Duration): number {
 }
 
 function durationFromMinutes(minutes: number): Duration {
+  minutes = minutes ?? 0;
   const days = (minutes - (minutes % MINUTES_IN_DAY)) / MINUTES_IN_DAY;
   minutes = minutes - days * MINUTES_IN_DAY;
   const hours = (minutes - (minutes % MINUTES_IN_HOUR)) / MINUTES_IN_HOUR;
@@ -32,16 +33,15 @@ function durationFromMinutes(minutes: number): Duration {
       useExisting: forwardRef(() => DurationEditorComponent),
       multi: true,
     },
+    NgDestroyService,
   ],
 })
-export class DurationEditorComponent implements ControlValueAccessor, OnDestroy {
+export class DurationEditorComponent implements ControlValueAccessor {
   public isDisabled: boolean;
   public formFields = DurationFormFields;
   public form: FormGroup;
 
-  private readonly destroy$ = new Subject<void>();
-
-  constructor() {
+  constructor(private readonly destroy$: NgDestroyService) {
     this.createForm();
     this.subscribeOnFormValueChanges();
   }
@@ -63,29 +63,21 @@ export class DurationEditorComponent implements ControlValueAccessor, OnDestroy 
   }
 
   public writeValue(value: number): void {
-    if (!value) {
-      this.form.reset({}, { emitEvent: false });
-      return;
-    }
     this.form.setValue(durationFromMinutes(value), { emitEvent: false });
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
   }
 
   private createForm(): void {
     this.form = new FormGroup({
-      [DurationFormFields.Days]: new FormControl(),
-      [DurationFormFields.Hours]: new FormControl(),
-      [DurationFormFields.Minutes]: new FormControl(),
+      [DurationFormFields.Days]: new FormControl(0),
+      [DurationFormFields.Hours]: new FormControl(0),
+      [DurationFormFields.Minutes]: new FormControl(0),
     });
   }
 
   private subscribeOnFormValueChanges(): void {
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
       const duration = minutesFromDuration(value);
-      this.onChange(duration ? duration : null);
+      this.onChange(duration);
     });
   }
 
