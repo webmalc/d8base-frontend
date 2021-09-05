@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProfessionalList, Service, ServiceLocation, ServicePhoto, ServiceTag } from '@app/api/models';
+import { Price, ProfessionalList, Service, ServiceLocation, ServicePhoto, ServiceTag } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { AlertController } from '@ionic/angular';
@@ -57,16 +57,18 @@ export class ServiceManagerService {
 
   public createService(data: {
     service: Service;
+    price: Price;
     photos: ServicePhoto[];
     locations: ServiceLocation[];
     tags: ServiceTag[];
   }): Observable<Service> {
-    const { service, photos, locations, tags } = data;
+    const { service, price, photos, locations, tags } = data;
     return this.api
       .accountsServicesCreate(service)
       .pipe(
         switchMap(service =>
           forkJoin([
+            this.createPrice(price, service.id),
             this.createPhotos(photos, service.id),
             this.createLocations(locations, service.id),
             this.createTags(tags, service.id),
@@ -85,6 +87,13 @@ export class ServiceManagerService {
         },
       })
       .pipe(mapTo(void 0));
+  }
+
+  private createPrice(price: Price, service: number): Observable<Price> {
+    return this.api.accountsServicePricesCreate({
+      ...price,
+      service,
+    });
   }
 
   private createPhotos(photos: ServicePhoto[], service: number): Observable<ServicePhoto[]> {

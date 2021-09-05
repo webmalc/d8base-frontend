@@ -30,6 +30,7 @@
       <section>
         <app-section-heading>{{ 'service-details.payment-methods' | translate }}</app-section-heading>
         <app-payment-method-editor [formControlName]="formFields.paymentMethods"></app-payment-method-editor>
+        <app-form-control-error [controlName]="formFields.paymentMethods"></app-form-control-error>
       </section>
 
       <ion-button type="submit" expand="block">{{ 'global.save' | translate }}</ion-button>
