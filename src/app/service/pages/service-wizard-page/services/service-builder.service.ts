@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProfessionalList, Service, ServiceLocation, ServicePhoto, ServiceTag } from '@app/api/models';
+import { Price, ProfessionalList, Service, ServiceLocation, ServicePhoto, ServiceTag } from '@app/api/models';
 import { fileToBase64 } from '@app/core/functions/media.functions';
 import { StorageManagerService } from '@app/core/services';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -43,6 +43,7 @@ export class ServiceBuilderService {
 
   public async build(): Promise<{
     service: Service;
+    price: Price;
     photos: ServicePhoto[];
     locations: ServiceLocation[];
     tags: ServiceTag[];
@@ -56,18 +57,18 @@ export class ServiceBuilderService {
       is_base_schedule: state.is_base_schedule,
       is_enabled: state.is_enabled,
       name: state.name,
-      price: {
-        ...state.price,
-        payment_methods: state.payment_methods,
-      },
       professional: professional.id,
       service_type: state.service_type,
+    };
+    const price = {
+      ...state.price,
+      payment_methods: state.payment_methods,
     };
     const photos$ = state.photos.map(async p => ({ photo: await fileToBase64(p), service: NaN }));
     const photos: ServicePhoto[] = await Promise.all(photos$);
     const locations = state.location ? [state.location] : [];
     const tags = state.tags;
-    return { service, photos, locations, tags };
+    return { service, price, photos, locations, tags };
   }
 
   public async clear(): Promise<void> {
