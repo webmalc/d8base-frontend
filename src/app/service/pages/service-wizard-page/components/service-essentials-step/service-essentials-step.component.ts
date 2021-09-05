@@ -13,6 +13,13 @@ const emptyPrice: Price = {
   service: NaN,
 };
 
+const defaults: ServiceEssentialsInterface = {
+  name: '',
+  price: emptyPrice,
+  duration: 0,
+  payment_methods: [],
+};
+
 @Component({
   selector: 'app-service-info-step',
   templateUrl: './service-essentials-step.component.html',
@@ -40,20 +47,23 @@ export class ServiceEssentialsStepComponent extends StepComponent<ServiceEssenti
 
   public setState(state: AggregatedState): void {
     const newValue: ServiceEssentialsInterface = {
-      name: state.name ?? '',
-      duration: state.duration ?? 0,
-      price: state.price ?? emptyPrice,
-      payment_methods: state.payment_methods ?? [],
+      name: state.name ?? defaults.name,
+      duration: state.duration ?? defaults.duration,
+      price: state.price ?? defaults.price,
+      payment_methods: state.payment_methods ?? defaults.payment_methods,
     };
     this.form.setValue(newValue);
   }
 
   private createForm(): FormGroup {
     return new FormGroup({
-      [this.formFields.name]: new FormControl('', [Validators.required, AppValidators.serviceNameValidator]),
-      [this.formFields.duration]: new FormControl('', Validators.required),
-      [this.formFields.price]: new FormControl(emptyPrice, AppValidators.priceIntervalValidator),
-      [this.formFields.payment_methods]: new FormControl([], Validators.required),
+      [this.formFields.name]: new FormControl(defaults.name, [Validators.required, AppValidators.serviceNameValidator]),
+      [this.formFields.duration]: new FormControl(defaults.duration, [
+        Validators.required,
+        AppValidators.durationValidator,
+      ]),
+      [this.formFields.price]: new FormControl(defaults.price, AppValidators.priceIntervalValidator),
+      [this.formFields.payment_methods]: new FormControl(defaults.payment_methods, Validators.required),
     });
   }
 }

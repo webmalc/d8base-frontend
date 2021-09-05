@@ -1,6 +1,7 @@
 import { Validators } from '@angular/forms';
-import { forbidNumericValue } from './non-numeric.validator';
+import { environment } from '@env/environment';
 import { noWhitespaces } from './no-whitespaces.validator';
+import { forbidNumericValue } from './non-numeric.validator';
 
 export * from './email.validator';
 export * from './password-validators';
@@ -36,3 +37,5 @@ export const lastNameValidators = Validators.compose([Validators.maxLength(MAXIM
 export const descriptionValidator = Validators.minLength(MINIMUM_DESCRIPTION_LENGTH);
 
 export const serviceNameValidator = Validators.maxLength(MAXIMUM_SERVICE_NAME_LENGTH);
+
+export const durationValidator = Validators.min(environment.default_calendar_interval);
