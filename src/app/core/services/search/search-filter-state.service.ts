@@ -67,7 +67,7 @@ export class SearchFilterStateService {
   }
 
   public patchValue(formValue: SearchFilterFormValue): void {
-    this.form.patchValue(formValue);
+    this.form.patchValue(formValue, { emitEvent: false });
     if (!formValue.priceCurrency) {
       this.setDefaultCurrency();
     }
@@ -91,7 +91,7 @@ export class SearchFilterStateService {
       .pipe(take(1))
       .subscribe(([rates, settings]) => {
         const currency = rates.find(c => c.currency === settings.currency);
-        this.controls.priceCurrency.setValue(currency);
+        this.controls.priceCurrency.setValue(currency, { emitEvent: false });
       });
   }
 

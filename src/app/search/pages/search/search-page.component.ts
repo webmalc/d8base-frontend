@@ -53,7 +53,7 @@ export class SearchPage implements AfterViewInit {
     return this.platform.width() > 992;
   }
 
-  public onSubmit(): void {
+  public updateSearchResults(): void {
     this.query.searchByFormValue(this.state.form.value);
   }
 

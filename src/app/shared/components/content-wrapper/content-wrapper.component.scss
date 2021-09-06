@@ -12,10 +12,6 @@
   width: min(100vw, 36rem);
   background-color: var(--ion-background-color);
 
-  @media (max-width: 36rem) {
-    padding: 0;
-  }
-
   &.light-background {
     background-color: var(--ion-light-color);
   }

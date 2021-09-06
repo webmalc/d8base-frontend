@@ -17,55 +17,20 @@
   [city]="controls.city.value"
   [disabled]="controls.country.disabled"
 ></app-location-picker>
-<app-section-heading>{{ 'issuance.filters.main-tab.categories' | translate }}</app-section-heading>
-<ion-item lines="none">
-  <ion-label color="medium" position="floating">
-    {{ 'issuance.filters.main-tab.categories-select' | translate }}
-  </ion-label>
-  <ionic-selectable
-    (onChange)="initSubcategories($event.value)"
-    [formControl]="controls.category"
-    [canSearch]="true"
-    [canClear]="true"
-    [isMultiple]="true"
-    [items]="categoryList$ | async"
-    closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
-    itemTextField="name"
-    itemValueField="id"
-    searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
-    searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
-  >
-  </ionic-selectable>
-</ion-item>
-
-<ion-item lines="none">
-  <ion-label color="medium" position="floating">
-    {{ 'issuance.filters.main-tab.subcategories-select' | translate }}
-  </ion-label>
-  <ionic-selectable
-    [formControl]="controls.subcategory"
-    [canSearch]="true"
-    [canClear]="true"
-    [isEnabled]="!!controls.category.value && !!subcategoriesList?.length"
-    [isMultiple]="true"
-    [items]="subcategoriesList"
-    closeButtonText="{{ 'ion-selectable.close-button-text' | translate }}"
-    itemTextField="name"
-    itemValueField="id"
-    searchFailText="{{ 'ion-selectable.search-fail-text' | translate }}"
-    searchPlaceholder="{{ 'ion-selectable.search-text' | translate }}"
-  >
-  </ionic-selectable>
-</ion-item>
+<app-section-heading>{{ 'search.filters.categories-title' | translate }}</app-section-heading>
+<app-category-selector
+  [title]="'search.filters.category-label' | translate"
+  [formControl]="controls.category"
+></app-category-selector>
+<app-subcategory-selector
+  [title]="'search.filters.subcategory-label' | translate"
+  [formControl]="controls.subcategory"
+  [category]="controls.category.value"
+></app-subcategory-selector>
 <app-section-heading>{{ 'issuance.filters.main-tab.datetime' | translate }}</app-section-heading>
 <ion-item>
   <ion-label>{{ 'issuance.filters.main-tab.date-from' | translate }}</ion-label>
-  <ion-input
-    type="date"
-    [min]="stateManager.minDate"
-    [max]="stateManager.maxDate"
-    [formControl]="controls.dateFrom"
-  ></ion-input>
+  <ion-input type="date" [min]="state.minDate" [max]="state.maxDate" [formControl]="controls.dateFrom"></ion-input>
 </ion-item>
 <ion-item [hidden]="!controls.dateFrom.value">
   <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
@@ -74,12 +39,7 @@
 </ion-item>
 <ion-item>
   <ion-label>{{ 'issuance.filters.main-tab.date-to' | translate }}</ion-label>
-  <ion-input
-    type="date"
-    [min]="stateManager.minDate"
-    [max]="stateManager.maxDate"
-    [formControl]="controls.dateTo"
-  ></ion-input>
+  <ion-input type="date" [min]="state.minDate" [max]="state.maxDate" [formControl]="controls.dateTo"></ion-input>
 </ion-item>
 <ion-item [hidden]="!controls.dateTo.value">
   <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>

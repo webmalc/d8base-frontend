@@ -626,7 +626,11 @@
     },
     "filters": {
       "title": "Фильтры",
+      "apply": "Применить",
       "location-title": "Местоположение",
+      "categories-title": "Категории услуг",
+      "category-label": "Выберите категорию",
+      "subcategory-label": "Выберите подкатегорию",
       "language": "Язык"
     },
     "search-button": "Найти",

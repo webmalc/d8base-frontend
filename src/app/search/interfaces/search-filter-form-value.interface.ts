@@ -5,8 +5,8 @@ export interface SearchFilterFormValue {
   query?: string;
   country?: Country;
   city?: City;
-  category?: Category[];
-  subcategory?: Subcategory[];
+  category?: Category;
+  subcategory?: Subcategory;
   tags?: ServiceTag[];
   isOnlineBooking?: boolean;
   isInstantBooking?: boolean;

@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { WINDOW } from '@app/core/injection-tokens';
 import { NavController } from '@ionic/angular';
 
@@ -16,9 +16,13 @@ export class ColumnHeaderComponent {
   @Input()
   public disableBackButton: boolean = false;
 
+  @Output()
+  public beforeNavigatingBack = new EventEmitter<void>();
+
   constructor(private readonly navController: NavController, @Inject(WINDOW) private readonly window: Window) {}
 
   public navigateBack() {
+    this.beforeNavigatingBack.emit();
     if (this.canGoBack()) {
       this.navController.back();
     } else if (this.backButtonUrl) {

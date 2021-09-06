@@ -626,7 +626,11 @@
     },
     "filters": {
       "title": "Filters",
+      "apply": "Apply",
       "location-title": "Location",
+      "categories-title": "Service categories",
+      "category-label": "Choose category",
+      "subcategory-label": "Choose subcategory",
       "language": "Language"
     },
     "search-button": "Find",

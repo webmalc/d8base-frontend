@@ -1,8 +1,11 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header> {{ 'search.filters.title' | translate }} </app-column-header>
+    <app-column-header (beforeNavigatingBack)="applyFilters()">
+      {{ 'search.filters.title' | translate }}
+    </app-column-header>
     <app-basic-filters></app-basic-filters>
     <app-advanced-filters></app-advanced-filters>
+    <ion-button expand="block" (click)="submit()">Применить</ion-button>
   </app-content-wrapper>
 </ion-content>

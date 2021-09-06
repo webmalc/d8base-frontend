@@ -1,22 +1,24 @@
 <app-header></app-header>
 <ion-split-pane contentId="search-results" class="top-padded split-side-width">
+  <!--  Filters pane -->
   <ion-content>
     <ion-item lines="full" color="light">
       <ion-icon name="funnel-outline" slot="start"></ion-icon>
       <ion-label class="filters-panel__title">
-        {{ 'issuance.filters.title' | translate }}
+        {{ 'search.filters.title' | translate }}
       </ion-label>
     </ion-item>
     <app-basic-filters></app-basic-filters>
     <ion-item lines="none">
-      <ion-button (click)="onSubmit()" color="primary" size="medium" slot="end">
-        {{ 'issuance.filters.main-tab.apply' | translate }}
+      <ion-button (click)="updateSearchResults()" color="primary" size="medium" slot="end">
+        {{ 'search.filters.apply' | translate }}
       </ion-button>
     </ion-item>
   </ion-content>
+  <!--  Search results -->
   <ion-content id="search-results">
     <app-content-wrapper color="light">
-      <form [formGroup]="state.form" (ngSubmit)="onSubmit()" class="searchbar-container">
+      <form [formGroup]="state.form" (ngSubmit)="updateSearchResults()" class="searchbar-container">
         <ion-searchbar [placeholder]="'issuance.search-placeholder' | translate" [formControl]="state.controls.query">
         </ion-searchbar>
         <ion-button type="submit">
@@ -29,7 +31,7 @@
         (updateFilter)="editFilter($event)"
       ></app-applied-filters>
       <ion-buttons class="buttons-container">
-        <ion-button color="primary" fill="outline" routerLink="filters">
+        <ion-button color="primary" fill="outline" routerLink="/search/filters">
           {{ 'search.add-filters-button' | translate }}
         </ion-button>
       </ion-buttons>

@@ -7,6 +7,7 @@ import { SearchPageGuard } from './search-page.guard';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: SearchPage,
     canActivate: [SearchPageGuard],
   },

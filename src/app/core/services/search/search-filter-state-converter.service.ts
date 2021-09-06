@@ -84,8 +84,8 @@ export class SearchFilterStateConverter {
             query: params?.query,
             country,
             city,
-            category: emptyArrayToUndefined(categories),
-            subcategory: emptyArrayToUndefined(subcategories),
+            category: categories[0],
+            subcategory: subcategories[0],
             tags: void 0,
             isOnlineBooking: void 0,
             isInstantBooking: params?.onlyWithAutoOrderConfirmation,
@@ -130,7 +130,7 @@ export class SearchFilterStateConverter {
       // null and undefined values are meant to be excluded
       tags: void 0,
       subregion: void 0,
-      subcategories: arrayToString(data.subcategory?.map(({ id }) => id)) || null,
+      subcategories: data.subcategory?.id ? `${data.subcategory?.id}` : null,
       startPrice: data.priceStart,
       startDatetime: getTimeStamp(data.dateFrom, data.timeFrom, DAY_START_TIME) || null,
       startAge: data.startAge,
@@ -153,15 +153,15 @@ export class SearchFilterStateConverter {
       latitude: null,
       languages: arrayToString(data.languages?.map(({ code }) => code)) || null,
       gender: void 0,
-      experienceFrom: data?.experience,
+      experienceFrom: data.experience,
       endPrice: data.priceEnd,
       endDatetime: getTimeStamp(data.dateTo, data.timeTo, DAY_END_TIME) || null,
       endAge: data.endAge,
       district: void 0,
       country: data.country?.id,
       city: data.city?.id,
-      categories: arrayToString(data?.category?.map(({ id }) => id)) || null,
-      exactDatetime: data?.exactDatetime || null,
+      categories: data.category?.id ? `${data.category?.id}` : null,
+      exactDatetime: data.exactDatetime || null,
     };
   }
 

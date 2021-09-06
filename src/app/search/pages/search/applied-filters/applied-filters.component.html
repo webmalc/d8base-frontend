@@ -11,12 +11,12 @@
   <app-category-chips
     *ngSwitchCase="fields.categories"
     [categoryIds]="filter.value"
-    (delete)="delete(filter.name, filter.value, $event)"
+    (delete)="delete([filter.name, fields.subcategories])"
   ></app-category-chips>
   <app-category-chips
     *ngSwitchCase="fields.subcategories"
     [subcategoryIds]="filter.value"
-    (delete)="delete(filter.name, filter.value, $event)"
+    (delete)="delete(filter.name)"
   ></app-category-chips>
   <app-chip *ngSwitchCase="fields.onlyWithAutoOrderConfirmation" (delete)="delete(filter.name)">
     {{ 'issuance.filters.main-tab.instant-booking' | translate }}
