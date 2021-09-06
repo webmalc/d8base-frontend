@@ -7,7 +7,7 @@
           <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
           <ion-row>
             <ion-searchbar
-              [formControl]="form.get(formFields.query)"
+              [formControl]="controls.query"
               animated
               class="main-page-search"
               color="light"
@@ -22,7 +22,7 @@
                   type="date"
                   [min]="stateManager.minDate"
                   [max]="stateManager.maxDate"
-                  [formControl]="form.controls[formFields.dateFrom]"
+                  [formControl]="controls.dateFrom"
                 ></ion-input>
               </ion-item>
             </ion-col>
@@ -33,7 +33,7 @@
                   type="date"
                   [min]="stateManager.minDate"
                   [max]="stateManager.maxDate"
-                  [formControl]="form.controls[formFields.dateTo]"
+                  [formControl]="controls.dateTo"
                 ></ion-input>
               </ion-item>
             </ion-col>
@@ -41,9 +41,9 @@
               <app-location-picker
                 class="main-page-filter"
                 (emitter)="updateLocation($event)"
-                [enabled]="locationEnabled"
-                [country]="form.controls[formFields.country].value"
-                [city]="form.controls[formFields.city].value"
+                [disabled]="!locationEnabled"
+                [country]="controls.country.value"
+                [city]="controls.city.value"
               ></app-location-picker>
             </ion-col>
           </ion-row>

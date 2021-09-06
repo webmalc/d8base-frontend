@@ -11,7 +11,7 @@ import { PopoverController } from '@ionic/angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationPickerComponent {
-  @Input() public enabled: boolean = false;
+  @Input() public disabled: boolean = false;
   @Input() public country: Country;
   @Input() public city: City;
   @Output() public emitter: EventEmitter<ResolvedUserLocation> = new EventEmitter<ResolvedUserLocation>();
@@ -19,7 +19,7 @@ export class LocationPickerComponent {
   constructor(private readonly pop: PopoverController) {}
 
   public async initPopover(): Promise<void> {
-    if (!this.enabled) {
+    if (this.disabled) {
       return;
     }
     const pop = await this.pop.create({
@@ -36,9 +36,9 @@ export class LocationPickerComponent {
     });
     pop.onDidDismiss().then((data: { data: ResolvedUserLocation }) => {
       if (data.data) {
-        if (data.data?.city?.id !== this.city?.id) {
-          this.emitter.emit(data.data);
-        }
+        this.country = data.data.country;
+        this.city = data.data.city;
+        this.emitter.emit(data.data);
       }
     });
 
@@ -46,7 +46,7 @@ export class LocationPickerComponent {
   }
 
   public getLocationString(): string | null {
-    if (!(this.country && this.city)) {
+    if (!(this.country || this.city)) {
       return null;
     }
     if (this.country && this.city) {

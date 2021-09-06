@@ -9,7 +9,7 @@ import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-function getServiceTypes(data: SearchFilterFormValue): string | null {
+function getServiceTypes(data: SearchFilterFormValue): string {
   const types: ServiceList['service_type'][] = [];
   if (data.isOnlineService) {
     types.push('online');
@@ -21,7 +21,7 @@ function getServiceTypes(data: SearchFilterFormValue): string | null {
     types.push('client');
   }
 
-  return arrayToString(types) || null;
+  return arrayToString(types);
 }
 
 function getTimeStamp(dateStr: string, timeStr: string, defaultTime: string): string {
@@ -130,28 +130,28 @@ export class SearchFilterStateConverter {
       // null and undefined values are meant to be excluded
       tags: void 0,
       subregion: void 0,
-      subcategories: arrayToString(data.subcategory?.map(({ id }) => id)),
+      subcategories: arrayToString(data.subcategory?.map(({ id }) => id)) || null,
       startPrice: data.priceStart,
       startDatetime: getTimeStamp(data.dateFrom, data.timeFrom, DAY_START_TIME) || null,
       startAge: data.startAge,
-      serviceTypes: getServiceTypes(data),
+      serviceTypes: getServiceTypes(data) || null,
       region: void 0,
       ratingFrom: data.rating,
       query: data.query || null,
       professionalLevel: data.professionalLevel?.value,
       priceCurrency: data.priceStart || data.priceEnd ? data.priceCurrency?.currency : void 0,
       postalCode: void 0,
-      paymentMethods: arrayToString(data?.paymentMethods?.map(({ value }) => value)),
+      paymentMethods: arrayToString(data?.paymentMethods?.map(({ value }) => value)) || null,
       onlyWithReviews: data?.onlyWithReviews || null,
       onlyWithPhotos: data?.onlyWithPhotos || null,
       onlyWithFixedPrice: data?.onlyWithFixedPrice || null,
       onlyWithCertificates: data?.onlyWithCertificates || null,
       onlyWithAutoOrderConfirmation: data.isInstantBooking || null,
-      nationalities: arrayToString(data?.nationalities?.map(({ id }) => id)),
+      nationalities: arrayToString(data?.nationalities?.map(({ id }) => id)) || null,
       maxDistance: void 0,
       longitude: null,
       latitude: null,
-      languages: arrayToString(data.languages?.map(({ code }) => code)),
+      languages: arrayToString(data.languages?.map(({ code }) => code)) || null,
       gender: void 0,
       experienceFrom: data?.experience,
       endPrice: data.priceEnd,
@@ -160,7 +160,7 @@ export class SearchFilterStateConverter {
       district: void 0,
       country: data.country?.id,
       city: data.city?.id,
-      categories: arrayToString(data?.category?.map(({ id }) => id)),
+      categories: arrayToString(data?.category?.map(({ id }) => id)) || null,
       exactDatetime: data?.exactDatetime || null,
     };
   }

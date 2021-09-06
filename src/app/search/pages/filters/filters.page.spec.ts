@@ -1,5 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { FiltersPage } from './filters.page';
 
 describe('FiltersPage', () => {
@@ -9,8 +10,9 @@ describe('FiltersPage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
         declarations: [FiltersPage],
-        imports: [IonicModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(FiltersPage);

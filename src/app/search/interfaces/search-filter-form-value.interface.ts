@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Category, City, Country, Rate, Subcategory, ServiceTag } from '@app/api/models';
 
 export interface SearchFilterFormValue {
@@ -33,3 +34,5 @@ export interface SearchFilterFormValue {
   endAge?: number;
   exactDatetime?: boolean;
 }
+
+export type SearchFilterFormControls = { [K in keyof SearchFilterFormValue]: FormControl };

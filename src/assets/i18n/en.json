@@ -625,8 +625,13 @@
       "all-services": "All"
     },
     "filters": {
+      "title": "Filters",
+      "location-title": "Location",
       "language": "Language"
-    }
+    },
+    "search-button": "Find",
+    "add-filters-button": "Add filters",
+    "any-location": "Any location"
   },
   "issuance": {
     "search-placeholder": "Find service/professional",
@@ -696,7 +701,6 @@
     "date-to": "Date to",
     "any-date": "Any date",
     "any-time": "Any time",
-    "current-location": "Current location",
     "find-btn": "Find",
     "service-categories": "Service categories",
     "category-education": "Education",
@@ -708,13 +712,6 @@
     "category-photo": "Media",
     "category-pro": "Professional",
     "category-sport": "Sport"
-  },
-  "default-location": {
-    "title": "Is it your current location",
-    "select": "Select your location",
-    "country": "Select country",
-    "city": "Select city",
-    "save": "Save"
   },
   "order": {
     "step": {

@@ -16,6 +16,7 @@ export class AppliedFiltersComponent {
   public updateFilter = new EventEmitter<{ key: string; value: string }>();
 
   public fields: { [key in keyof SearchService.SearchListParams]: keyof SearchService.SearchListParams } = {
+    query: 'query',
     country: 'country',
     city: 'city',
     categories: 'categories',

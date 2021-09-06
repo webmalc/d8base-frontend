@@ -1,37 +1,39 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Category, Rate, Subcategory } from '@app/api/models';
+import { FormGroup } from '@angular/forms';
+import { Category, Subcategory } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
-import { NgDestroyService } from '@app/core/services';
-import { RatesApiCache } from '@app/core/services/cache';
+import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
+import { NgDestroyService, SearchQueryService } from '@app/core/services';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
+import { SearchFilterFormControls } from '@app/search/interfaces/search-filter-form-value.interface';
 import { forkJoin, Observable } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-search-filters-main-tab',
-  templateUrl: './search-filters-main-tab.component.html',
-  styleUrls: ['./search-filters-main-tab.component.scss'],
+  selector: 'app-basic-filters',
+  templateUrl: './basic-filters.component.html',
+  styleUrls: ['./basic-filters.component.scss'],
   providers: [NgDestroyService],
 })
-export class SearchFiltersMainTabComponent implements OnInit {
+export class BasicFiltersComponent implements OnInit {
   public categoryList$: Observable<Category[]> = this.professionalsApi
     .professionalsCategoriesList({})
     .pipe(map(({ results }) => results));
   public subcategoriesList: Subcategory[];
-  public rates$: Observable<Rate[]> = this.ratesApiCache.list();
 
-  public get formFields() {
-    return this.stateManager.formFields;
+  public get controls(): SearchFilterFormControls {
+    return this.stateManager.controls;
   }
 
-  public get form() {
-    return this.stateManager.searchForm;
+  public get form(): FormGroup {
+    return this.stateManager.form;
   }
 
   constructor(
     private readonly professionalsApi: ProfessionalsService,
     public readonly stateManager: SearchFilterStateService,
-    private readonly ratesApiCache: RatesApiCache,
+    private readonly filtersStateManager: SearchFilterStateService,
+    private readonly query: SearchQueryService,
     private readonly cd: ChangeDetectorRef,
     private readonly destroy$: NgDestroyService,
   ) {}
@@ -42,13 +44,17 @@ export class SearchFiltersMainTabComponent implements OnInit {
 
   public initSubcategories(categories: Category[]): void {
     this.subcategoriesList = null;
-    this.form.get(this.formFields.subcategory).reset();
+    this.controls.subcategory.reset();
     forkJoin(categories.map(c => this.professionalsApi.professionalsSubcategoriesList({ category: c.id })))
       .pipe(takeUntil(this.destroy$))
       .subscribe(subcategoriesList => {
         this.subcategoriesList = subcategoriesList.reduce((all, v) => all.concat(v.results), []);
         this.cd.detectChanges();
       });
+  }
+
+  public updateLocation(location: ResolvedUserLocation): void {
+    this.stateManager.updateLocation(location);
   }
 
   private detectChangesForIonicSelectable(): void {

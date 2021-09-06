@@ -4,21 +4,21 @@ import { RatingPickerComponent } from '@app/reviews/components/rating-picker/rat
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { SearchFiltersAdditionalTabComponent } from './search-filters-additional-tab.component';
+import { AdvancedFiltersComponent } from './advanced-filters.component';
 
 describe('SearchFiltersAdditionalTabComponent', () => {
-  let component: SearchFiltersAdditionalTabComponent;
-  let fixture: ComponentFixture<SearchFiltersAdditionalTabComponent>;
+  let component: AdvancedFiltersComponent;
+  let fixture: ComponentFixture<AdvancedFiltersComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [SearchFiltersAdditionalTabComponent, IonicSelectableComponent, RatingPickerComponent],
+        declarations: [AdvancedFiltersComponent, IonicSelectableComponent, RatingPickerComponent],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [SearchFilterStateService, FormBuilder],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(SearchFiltersAdditionalTabComponent);
+      fixture = TestBed.createComponent(AdvancedFiltersComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

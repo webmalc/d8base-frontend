@@ -1,4 +1,8 @@
 <app-header></app-header>
 <ion-content>
-  <app-search-filters [showBackButton]="true"></app-search-filters>
+  <app-content-wrapper>
+    <app-column-header> {{ 'search.filters.title' | translate }} </app-column-header>
+    <app-basic-filters></app-basic-filters>
+    <app-advanced-filters></app-advanced-filters>
+  </app-content-wrapper>
 </ion-content>

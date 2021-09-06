@@ -625,8 +625,13 @@
       "all-services": "Все"
     },
     "filters": {
+      "title": "Фильтры",
+      "location-title": "Местоположение",
       "language": "Язык"
-    }
+    },
+    "search-button": "Найти",
+    "add-filters-button": "Добавить фильтры",
+    "any-location": "Не указано"
   },
   "issuance": {
     "search-placeholder": "Найти услугу/специалиста",
@@ -696,7 +701,6 @@
     "date-to": "Дата до",
     "any-date": "Любая дата",
     "any-time": "Любое время",
-    "current-location": "Текущее местоположение",
     "find-btn": "Искать",
     "service-categories": "Категории услуг",
     "category-education": "Образование",
@@ -708,13 +712,6 @@
     "category-photo": "Фото и видео",
     "category-pro": "Профи",
     "category-sport": "Спорт"
-  },
-  "default-location": {
-    "title": "Это Ваше текущее местоположение",
-    "select": "Выберите Ваше местоположение",
-    "country": "Выберите страну",
-    "city": "Выберите город",
-    "save": "Сохранить"
   },
   "order": {
     "step": {

@@ -5,7 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { IonicModule, PopoverController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { StorageManagerMock } from '../../../../testing/mocks';
+import { StorageManagerMock } from '../../../testing/mocks';
 import { LocationPickerComponent } from './location-picker.component';
 
 describe('LocationPickerComponent', () => {

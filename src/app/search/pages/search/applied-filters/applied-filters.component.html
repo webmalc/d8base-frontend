@@ -1,5 +1,7 @@
 <ng-container *ngFor="let filter of filters" [ngSwitch]="filter.name">
-  <!-- main -->
+  <app-chip *ngSwitchCase="fields.query" (delete)="delete(filter.name)">
+    {{ '"' + filter.value + '"' }}
+  </app-chip>
   <app-chip *ngSwitchCase="fields.country" (delete)="delete(filter.name)">
     {{ (filter.value | countryById$ | async)?.name }}
   </app-chip>

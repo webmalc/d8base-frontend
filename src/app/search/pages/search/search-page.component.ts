@@ -54,7 +54,7 @@ export class SearchPage implements AfterViewInit {
   }
 
   public onSubmit(): void {
-    this.query.searchByFormValue(this.state.searchForm.value);
+    this.query.searchByFormValue(this.state.form.value);
   }
 
   public deleteFilter(key: string): void {
