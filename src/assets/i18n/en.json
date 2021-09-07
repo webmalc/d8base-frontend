@@ -635,6 +635,7 @@
     },
     "search-button": "Find",
     "add-filters-button": "Add filters",
+    "reset-filters-button": "Reset all",
     "any-location": "Any location"
   },
   "issuance": {
@@ -701,6 +702,7 @@
   },
   "main-page": {
     "search-placeholder": "Find service",
+    "date": "Date",
     "date-from": "Date from",
     "date-to": "Date to",
     "any-date": "Any date",

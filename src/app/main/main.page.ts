@@ -65,7 +65,7 @@ export class MainPage implements OnInit {
   }
 
   public searchByCategory(category: Category): void {
-    this.controls.category.setValue([category]);
+    this.controls.category.setValue(category);
     this.search();
   }
 
@@ -83,6 +83,12 @@ export class MainPage implements OnInit {
 
   public updateLocation(location: ResolvedUserLocation): void {
     this.stateManager.updateLocation(location);
+  }
+
+  public updateDate(event: CustomEvent) {
+    const value: string = event.detail.value;
+    this.controls.dateFrom.setValue(value);
+    this.controls.dateTo.setValue(value);
   }
 
   public search(): void {
