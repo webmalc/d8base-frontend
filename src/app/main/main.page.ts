@@ -13,7 +13,23 @@ import UserLocationSelectors from '@app/store/current-user/user-locations/user-l
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
-import { convertCategoryCodeToFaIconCode } from './enums/default-category-list';
+
+const faIconsCategoriesCodesMap = {
+  tutors: 'graduation-cap',
+  healthcare: 'stethoscope',
+  beauty: 'spa',
+  dating: 'venus-mars',
+  skilled: 'paint-roller',
+  home: 'home',
+  photo: 'camera',
+  professionals: 'user-tie',
+  other: 'briefcase',
+} as const;
+
+const defaultCode = 'tools' as const;
+
+const convertCategoryCodeToFaIconCode = (categoryCode: string): string =>
+  faIconsCategoriesCodesMap[categoryCode] ?? defaultCode;
 
 @Component({
   selector: 'app-main',
