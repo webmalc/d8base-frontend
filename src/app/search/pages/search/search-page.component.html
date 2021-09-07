@@ -34,7 +34,7 @@
         <ion-button color="primary" fill="outline" routerLink="/search/filters">
           {{ 'search.add-filters-button' | translate }}
         </ion-button>
-        <ion-button color="danger" fill="outline" routerLink="/search">
+        <ion-button color="danger" fill="outline" routerLink="/search" *ngIf="hasFilters()">
           {{ 'search.reset-filters-button' | translate }}
         </ion-button>
       </ion-buttons>
