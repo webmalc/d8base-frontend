@@ -2,7 +2,7 @@
   <app-chip *ngSwitchCase="fields.query" (delete)="delete(filter.name)">
     {{ '"' + filter.value + '"' }}
   </app-chip>
-  <app-chip *ngSwitchCase="fields.country" (delete)="delete(filter.name)">
+  <app-chip *ngSwitchCase="fields.country" (delete)="delete([filter.name, fields.city])">
     {{ (filter.value | countryById$ | async)?.name }}
   </app-chip>
   <app-chip *ngSwitchCase="fields.city" class="bold" (delete)="delete(filter.name)">
