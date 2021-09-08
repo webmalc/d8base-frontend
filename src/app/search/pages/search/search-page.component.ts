@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } 
 import { ActivatedRoute, Params } from '@angular/router';
 import { Search } from '@app/api/models';
 import { SearchService } from '@app/api/services';
+import { hasNonEmptyValues } from '@app/core/functions/object.functions';
 import { NgDestroyService, SearchFilterStateConverter } from '@app/core/services';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { SearchQueryService } from '@app/core/services/search/search-query.service';
@@ -53,8 +54,8 @@ export class SearchPage implements AfterViewInit {
     return this.platform.width() > 992;
   }
 
-  public onSubmit(): void {
-    this.query.searchByFormValue(this.state.searchForm.value);
+  public updateSearchResults(): void {
+    this.query.searchByFormValue(this.state.form.value);
   }
 
   public deleteFilter(key: string): void {
@@ -63,6 +64,10 @@ export class SearchPage implements AfterViewInit {
 
   public editFilter(options: { key: string; value: string }): void {
     this.query.setSearchParam(options.key, options.value);
+  }
+
+  public hasFilters(): boolean {
+    return hasNonEmptyValues(this.params);
   }
 
   private runSearchQuery(params: SearchService.SearchListParams): void {

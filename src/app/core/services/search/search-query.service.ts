@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '@app/api/services';
+import { NavPath } from '@app/core/constants/navigation.constants';
 import { SearchFilterStateConverter } from '@app/core/services/search/search-filter-state-converter.service';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { SearchFilterFormValue } from '../../../search/interfaces/search-filter-form-value.interface';
+import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
 
 const DEBOUNCE_DURATION_MS = 200;
 
@@ -22,7 +23,7 @@ export class SearchQueryService {
         debounceTime(DEBOUNCE_DURATION_MS),
       )
       .subscribe(queryParams => {
-        this.router.navigate(['/search'], { queryParams });
+        this.router.navigate([NavPath.Search], { queryParams });
       });
   }
 

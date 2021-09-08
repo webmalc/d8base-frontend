@@ -625,8 +625,32 @@
       "all-services": "All"
     },
     "filters": {
-      "language": "Language"
-    }
+      "title": "Filters",
+      "apply": "Apply",
+      "location-title": "Location",
+      "categories-title": "Service categories",
+      "category-label": "Choose category",
+      "subcategory-label": "Choose subcategory",
+      "instant-booking": "Instant booking",
+      "only-with-photos":"Only with pictures",
+      "only-with-fixed-price":"Only with fixed price",
+      "price-title": "Service cost",
+      "price-start": "Price from",
+      "price-end": "Price to",
+      "payment-methods": "Payment methods",
+      "languages": "Languages",
+      "professional-traits-title": "Professional's traits",
+      "only-with-reviews": "Only with reviews",
+      "only-with-certificates": "Only certified",
+      "start-age": "Age from",
+      "end-age": "Age to",
+      "nationality": "Nationality",
+      "professional-level": "Professional level"
+    },
+    "search-button": "Find",
+    "add-filters-button": "Add filters",
+    "reset-filters-button": "Reset all",
+    "any-location": "Any location"
   },
   "issuance": {
     "search-placeholder": "Find service/professional",
@@ -692,11 +716,11 @@
   },
   "main-page": {
     "search-placeholder": "Find service",
+    "date": "Date",
     "date-from": "Date from",
     "date-to": "Date to",
     "any-date": "Any date",
     "any-time": "Any time",
-    "current-location": "Current location",
     "find-btn": "Find",
     "service-categories": "Service categories",
     "category-education": "Education",
@@ -708,13 +732,6 @@
     "category-photo": "Media",
     "category-pro": "Professional",
     "category-sport": "Sport"
-  },
-  "default-location": {
-    "title": "Is it your current location",
-    "select": "Select your location",
-    "country": "Select country",
-    "city": "Select city",
-    "save": "Save"
   },
   "order": {
     "step": {

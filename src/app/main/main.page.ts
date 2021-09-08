@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Category, UserLocation } from '@app/api/models';
 import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
 import { NgDestroyService } from '@app/core/services';
@@ -6,12 +7,29 @@ import { DefaultCategoriesFactoryService } from '@app/main/services/default-cate
 import { SearchFilterStateConverter } from '@app/core/services/search/search-filter-state-converter.service';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { SearchQueryService } from '@app/core/services/search/search-query.service';
+import { SearchFilterFormControls } from '@app/search/interfaces/search-filter-form-value.interface';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
-import { convertCategoryCodeToFaIconCode } from './enums/default-category-list';
+
+const faIconsCategoriesCodesMap = {
+  tutors: 'graduation-cap',
+  healthcare: 'stethoscope',
+  beauty: 'spa',
+  dating: 'venus-mars',
+  skilled: 'paint-roller',
+  home: 'home',
+  photo: 'camera',
+  professionals: 'user-tie',
+  other: 'briefcase',
+} as const;
+
+const defaultCode = 'tools' as const;
+
+const convertCategoryCodeToFaIconCode = (categoryCode: string): string =>
+  faIconsCategoriesCodesMap[categoryCode] ?? defaultCode;
 
 @Component({
   selector: 'app-main',
@@ -37,12 +55,12 @@ export class MainPage implements OnInit {
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
   ) {}
 
-  public get formFields() {
-    return this.stateManager.formFields;
+  public get controls(): SearchFilterFormControls {
+    return this.stateManager.controls;
   }
 
-  public get form() {
-    return this.stateManager.searchForm;
+  public get form(): FormGroup {
+    return this.stateManager.form;
   }
 
   public ngOnInit(): void {
@@ -53,8 +71,8 @@ export class MainPage implements OnInit {
       )
       .subscribe(formValue => {
         if (formValue) {
-          this.form.controls[this.formFields.country].setValue(formValue.country);
-          this.form.controls[this.formFields.city].setValue(formValue.city);
+          this.controls.country.setValue(formValue.country);
+          this.controls.city.setValue(formValue.city);
         }
         this.locationEnabled = true;
       });
@@ -63,7 +81,7 @@ export class MainPage implements OnInit {
   }
 
   public searchByCategory(category: Category): void {
-    this.form.get(this.formFields.category).setValue([category]);
+    this.controls.category.setValue(category);
     this.search();
   }
 
@@ -80,13 +98,16 @@ export class MainPage implements OnInit {
   }
 
   public updateLocation(location: ResolvedUserLocation): void {
-    if (location) {
-      this.form.controls[this.formFields.country].setValue(location.country);
-      this.form.controls[this.formFields.city].setValue(location.city);
-    }
+    this.stateManager.updateLocation(location);
+  }
+
+  public updateDate(event: CustomEvent) {
+    const value: string = event.detail.value;
+    this.controls.dateFrom.setValue(value);
+    this.controls.dateTo.setValue(value);
   }
 
   public search(): void {
-    this.query.searchByFormValue(this.stateManager.searchForm.value);
+    this.query.searchByFormValue(this.stateManager.form.value);
   }
 }

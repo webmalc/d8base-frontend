@@ -1,0 +1,55 @@
+<ion-item lines="full">
+  <ion-label>{{ 'service-location.online' | translate }}</ion-label>
+  <ion-checkbox [formControl]="controls.isOnlineService" slot="end"></ion-checkbox>
+</ion-item>
+<ion-item lines="full">
+  <ion-label>{{ 'service-location.professional' | translate }}</ion-label>
+  <ion-checkbox [formControl]="controls.isAtMasterLocationService" slot="end"></ion-checkbox>
+</ion-item>
+<ion-item lines="none">
+  <ion-label>{{ 'service-location.client' | translate }}</ion-label>
+  <ion-checkbox [formControl]="controls.isAtClientLocationService" slot="end"></ion-checkbox>
+</ion-item>
+<app-section-heading>{{ 'search.filters.location-title' | translate }}</app-section-heading>
+<app-location-picker
+  (emitter)="updateLocation($event)"
+  [country]="controls.country.value"
+  [city]="controls.city.value"
+  [disabled]="controls.country.disabled"
+></app-location-picker>
+<app-section-heading>{{ 'search.filters.categories-title' | translate }}</app-section-heading>
+<app-category-selector
+  [title]="'search.filters.category-label' | translate"
+  [formControl]="controls.category"
+></app-category-selector>
+<app-subcategory-selector
+  [title]="'search.filters.subcategory-label' | translate"
+  [formControl]="controls.subcategory"
+  [category]="controls.category.value"
+></app-subcategory-selector>
+<app-section-heading>{{ 'issuance.filters.main-tab.datetime' | translate }}</app-section-heading>
+<ion-item>
+  <ion-label>{{ 'issuance.filters.main-tab.date-from' | translate }}</ion-label>
+  <ion-input type="date" [min]="state.minDate" [max]="state.maxDate" [formControl]="controls.dateFrom"></ion-input>
+</ion-item>
+<ion-item [hidden]="!controls.dateFrom.value">
+  <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
+  <ion-label>{{ 'issuance.filters.main-tab.time-from' | translate }}</ion-label>
+  <ion-input type="time" [formControl]="controls.timeFrom"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>{{ 'issuance.filters.main-tab.date-to' | translate }}</ion-label>
+  <ion-input type="date" [min]="state.minDate" [max]="state.maxDate" [formControl]="controls.dateTo"></ion-input>
+</ion-item>
+<ion-item [hidden]="!controls.dateTo.value">
+  <ion-icon name="return-down-forward-outline" slot="start"></ion-icon>
+  <ion-label>{{ 'issuance.filters.main-tab.time-to' | translate }}</ion-label>
+  <ion-input type="time" [formControl]="controls.timeTo"></ion-input>
+</ion-item>
+<ion-item lines="none">
+  <ion-label>
+    {{ 'issuance.filters.main-tab.exact-interval' | translate }}
+    <app-hint hint="{{ 'issuance.filters.main-tab.exact-interval-desc' | translate }}"></app-hint>
+  </ion-label>
+  <ion-checkbox [formControl]="controls.exactDatetime"></ion-checkbox>
+</ion-item>

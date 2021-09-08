@@ -1,5 +1,13 @@
+.search-fields-layout {
+  --ion-grid-column-padding: 1px;
+  ion-col {
+    background-color: var(--ion-color-base);
+  }
+}
+
 .main-page-search {
   --box-shadow: none;
+  padding: 0;
 }
 
 .main-title {
@@ -23,8 +31,4 @@
 .categories-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-}
-
-.main-page-filter {
-  height: 100%;
 }

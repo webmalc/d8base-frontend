@@ -1,80 +1,53 @@
 <app-header></app-header>
-<ion-content>
-  <ion-grid class="ion-no-padding">
-    <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center ion-no-padding">
-      <ion-col class="ion-d8b-gradient-bgc ion-padding-vertical" size="6" size-sm="10" size-xs="11">
-        <form [formGroup]="state.searchForm" (ngSubmit)="onSubmit()" action="">
-          <ion-searchbar
-            [formControlName]="state.formFields.query"
-            animated
-            class="ion-margin-vertical"
-            color="light"
-            placeholder="{{ 'issuance.search-placeholder' | translate }}"
-          ></ion-searchbar>
-        </form>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="!needToRenderFilters()" class="ion-justify-content-around ion-margin-top">
-      <ion-item
-        lines="none"
-        class="cursor-pointer ion-item-no-side-padding ion-item-no-vertical-padding ion-item-no-min-height filters-sort-btn-sm"
-        routerDirection="forward"
-        routerLink="filters/"
-        [detail]="false"
+<ion-split-pane contentId="search-results" class="top-padded split-side-width">
+  <!--  Filters pane -->
+  <ion-content>
+    <ion-item lines="full" color="light">
+      <ion-icon name="funnel-outline" slot="start"></ion-icon>
+      <ion-label class="filters-panel__title">
+        {{ 'search.filters.title' | translate }}
+      </ion-label>
+    </ion-item>
+    <app-basic-filters></app-basic-filters>
+    <ion-item lines="none">
+      <ion-button (click)="updateSearchResults()" color="primary" size="medium" slot="end">
+        {{ 'search.filters.apply' | translate }}
+      </ion-button>
+    </ion-item>
+  </ion-content>
+  <!--  Search results -->
+  <ion-content id="search-results">
+    <app-content-wrapper color="light">
+      <form [formGroup]="state.form" (ngSubmit)="updateSearchResults()" class="searchbar-container">
+        <ion-searchbar [placeholder]="'issuance.search-placeholder' | translate" [formControl]="state.controls.query">
+        </ion-searchbar>
+        <ion-button type="submit">
+          {{ 'search.search-button' | translate }}
+        </ion-button>
+      </form>
+      <app-applied-filters
+        [params]="params"
+        (deleteFilter)="deleteFilter($event)"
+        (updateFilter)="editFilter($event)"
+      ></app-applied-filters>
+      <ion-buttons class="buttons-container">
+        <ion-button color="primary" fill="outline" routerLink="/search/filters">
+          {{ 'search.add-filters-button' | translate }}
+        </ion-button>
+        <ion-button color="danger" fill="outline" routerLink="/search" *ngIf="hasFilters()">
+          {{ 'search.reset-filters-button' | translate }}
+        </ion-button>
+      </ion-buttons>
+      <app-infinite-scroll-container
+        [doLoad$]="doLoad$"
+        (loadResults)="onLoadResults($event)"
+        [emptyText]="'issuance.search-empty' | translate"
       >
-        {{ 'issuance.filters.title' | translate }}
-        <ion-icon class="ion-no-margin ion-margin-start" name="funnel-outline"></ion-icon>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-center ion-margin-bottom ion-margin-top">
-      <ion-col class="ion-no-padding" size="12">
-        <ion-row class="ion-margin-top">
-          <ion-col
-            *ngIf="needToRenderFilters()"
-            offset="0"
-            offset-lg="1"
-            offset-md="0"
-            offset-sm="1"
-            offset-xl="1"
-            size-lg="4"
-            size-md="5"
-            size-sm="10"
-            size-xl="3"
-            size-xs="12"
-          >
-            <app-search-filters></app-search-filters>
-          </ion-col>
-          <ion-col
-            offset="0"
-            offset-lg="1"
-            offset-md="2"
-            offset-sm="1"
-            offset-xl="1"
-            size-lg="5"
-            size-md="8"
-            size-sm="10"
-            size-xl="5"
-            size-xs="12"
-          >
-            <app-applied-filters
-              [params]="params"
-              (deleteFilter)="deleteFilter($event)"
-              (updateFilter)="editFilter($event)"
-              class="ion-margin-bottom"
-            ></app-applied-filters>
-            <app-infinite-scroll-container
-              [doLoad$]="doLoad$"
-              (loadResults)="onLoadResults($event)"
-              [emptyText]="'issuance.search-empty' | translate"
-            >
-              <ng-template appInfiniteScrollItem let-item>
-                <app-search-result [data]="item" class="ion-margin-bottom"></app-search-result>
-              </ng-template>
-            </app-infinite-scroll-container>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <app-footer></app-footer>
-</ion-content>
+        <ng-template appInfiniteScrollItem let-item>
+          <app-search-result [data]="item" class="ion-margin-bottom"></app-search-result>
+        </ng-template>
+      </app-infinite-scroll-container>
+    </app-content-wrapper>
+    <app-footer></app-footer>
+  </ion-content>
+</ion-split-pane>

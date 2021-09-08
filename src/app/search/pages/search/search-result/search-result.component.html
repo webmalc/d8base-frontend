@@ -19,7 +19,8 @@
     <div class="bottom-buttons">
       <ion-button
         size="medium"
-        color="light"
+        color="primary"
+        fill="outline"
         [disabled]="(userId$ | async) === data.professional.user.id"
         [routerLink]="professionalChatUrl"
         [queryParams]="{ redirectTo: currentUrl }"

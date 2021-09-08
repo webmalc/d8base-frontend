@@ -1,55 +1,50 @@
 <app-header></app-header>
 <ion-content class="background-color-white">
   <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
-    <div class="ion-d8b-gradient-bgc ion-padding-vertical">
+    <div class="ion-padding-vertical">
       <form [formGroup]="form" (ngSubmit)="search()">
-        <ion-grid>
+        <ion-grid class="search-fields-layout">
           <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
           <ion-row>
-            <ion-searchbar
-              [formControl]="form.get(formFields.query)"
-              animated
-              class="main-page-search"
-              color="light"
-              [placeholder]="'main-page.search-placeholder' | translate"
-            ></ion-searchbar>
+            <ion-col>
+              <ion-searchbar
+                [formControl]="controls.query"
+                animated
+                class="main-page-search"
+                color="light"
+                [placeholder]="'main-page.search-placeholder' | translate"
+              ></ion-searchbar>
+            </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="12">
-              <ion-item color="light" class="main-page-filter">
-                <ion-label position="stacked">{{ 'main-page.date-from' | translate }}</ion-label>
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
+              <ion-item lines="none">
                 <ion-input
                   type="date"
                   [min]="stateManager.minDate"
                   [max]="stateManager.maxDate"
-                  [formControl]="form.controls[formFields.dateFrom]"
-                ></ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col size-lg="3" size-md="3" size-sm="6" size-xl="3" size-xs="12">
-              <ion-item color="light" class="main-page-filter">
-                <ion-label position="stacked">{{ 'main-page.date-to' | translate }}</ion-label>
-                <ion-input
-                  type="date"
-                  [min]="stateManager.minDate"
-                  [max]="stateManager.maxDate"
-                  [formControl]="form.controls[formFields.dateTo]"
+                  (ionChange)="updateDate($event)"
                 ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
               <app-location-picker
-                class="main-page-filter"
                 (emitter)="updateLocation($event)"
-                [enabled]="locationEnabled"
-                [country]="form.controls[formFields.country].value"
-                [city]="form.controls[formFields.city].value"
+                [disabled]="!locationEnabled"
+                [country]="controls.country.value"
+                [city]="controls.city.value"
               ></app-location-picker>
             </ion-col>
           </ion-row>
           <ion-row class="ion-justify-content-center ion-margin-vertical">
             <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-              <ion-button type="submit" expand="block" fill="solid" size="medium">
+              <ion-button
+                type="submit"
+                expand="block"
+                fill="solid"
+                size="medium"
+                [disabled]="!this.controls.query.value"
+              >
                 {{'main-page.find-btn'|translate}}
               </ion-button>
             </ion-col>

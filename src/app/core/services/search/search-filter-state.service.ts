@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { getLocalDateString } from '@app/core/functions/datetime.functions';
-import { SearchFilterFormFields } from '@app/search/const/search-filters-form';
-import { SearchFilterFormValue } from '@app/search/interfaces/search-filter-form-value.interface';
+import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
+import {
+  SearchFilterFormControls,
+  SearchFilterFormValue,
+} from '@app/search/interfaces/search-filter-form-value.interface';
 import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { RatesApiCache } from '../cache';
@@ -15,40 +18,40 @@ const FUTURE_TIMESPAN_YEARS = 2;
 
 @Injectable()
 export class SearchFilterStateService {
-  public formFields = SearchFilterFormFields;
-  public searchForm: FormGroup = this.fb.group({
-    [this.formFields.query]: null,
-    [this.formFields.country]: null,
-    [this.formFields.city]: null,
-    [this.formFields.category]: null,
-    [this.formFields.subcategory]: null,
-    [this.formFields.tags]: null,
-    [this.formFields.isOnlineBooking]: null,
-    [this.formFields.isInstantBooking]: null,
-    [this.formFields.dateFrom]: null,
-    [this.formFields.dateTo]: null,
-    [this.formFields.timeFrom]: null,
-    [this.formFields.timeTo]: null,
-    [this.formFields.isOnlineService]: null,
-    [this.formFields.isAtMasterLocationService]: null,
-    [this.formFields.isAtClientLocationService]: null,
-    [this.formFields.priceCurrency]: null,
-    [this.formFields.priceStart]: { value: null, disabled: true },
-    [this.formFields.priceEnd]: { value: null, disabled: true },
-    [this.formFields.rating]: null,
-    [this.formFields.professionalLevel]: null,
-    [this.formFields.paymentMethods]: null,
-    [this.formFields.onlyWithReviews]: null,
-    [this.formFields.onlyWithPhotos]: null,
-    [this.formFields.onlyWithFixedPrice]: null,
-    [this.formFields.onlyWithCertificates]: null,
-    [this.formFields.nationalities]: null,
-    [this.formFields.languages]: null,
-    [this.formFields.experience]: null,
-    [this.formFields.startAge]: null,
-    [this.formFields.endAge]: null,
-    [this.formFields.exactDatetime]: null,
-  });
+  public controls: SearchFilterFormControls = {
+    query: new FormControl(null),
+    country: new FormControl(null),
+    city: new FormControl(null),
+    category: new FormControl(null),
+    subcategory: new FormControl(null),
+    tags: new FormControl(null),
+    isOnlineBooking: new FormControl(null),
+    isInstantBooking: new FormControl(null),
+    dateFrom: new FormControl(null),
+    dateTo: new FormControl(null),
+    timeFrom: new FormControl(null),
+    timeTo: new FormControl(null),
+    isOnlineService: new FormControl(null),
+    isAtMasterLocationService: new FormControl(null),
+    isAtClientLocationService: new FormControl(null),
+    priceCurrency: new FormControl(null),
+    priceStart: new FormControl({ value: null, disabled: true }),
+    priceEnd: new FormControl({ value: null, disabled: true }),
+    rating: new FormControl(null),
+    professionalLevel: new FormControl(null),
+    paymentMethods: new FormControl(null),
+    onlyWithReviews: new FormControl(null),
+    onlyWithPhotos: new FormControl(null),
+    onlyWithFixedPrice: new FormControl(null),
+    onlyWithCertificates: new FormControl(null),
+    nationalities: new FormControl(null),
+    languages: new FormControl(null),
+    experience: new FormControl(null),
+    startAge: new FormControl(null),
+    endAge: new FormControl(null),
+    exactDatetime: new FormControl(null),
+  };
+  public form = new FormGroup(this.controls);
 
   public minDate: string;
   public maxDate: string;
@@ -64,9 +67,16 @@ export class SearchFilterStateService {
   }
 
   public patchValue(formValue: SearchFilterFormValue): void {
-    this.searchForm.patchValue(formValue);
+    this.form.patchValue(formValue, { emitEvent: false });
     if (!formValue.priceCurrency) {
       this.setDefaultCurrency();
+    }
+  }
+
+  public updateLocation(location: ResolvedUserLocation): void {
+    if (location) {
+      this.controls.country.setValue(location.country);
+      this.controls.city.setValue(location.city);
     }
   }
 
@@ -81,17 +91,14 @@ export class SearchFilterStateService {
       .pipe(take(1))
       .subscribe(([rates, settings]) => {
         const currency = rates.find(c => c.currency === settings.currency);
-        this.searchForm.controls[this.formFields.priceCurrency].setValue(currency);
+        this.controls.priceCurrency.setValue(currency, { emitEvent: false });
       });
   }
 
   private handleCurrencySelectorChanges(): void {
-    const priceInputs = [
-      this.searchForm.controls[this.formFields.priceStart],
-      this.searchForm.controls[this.formFields.priceEnd],
-    ];
+    const priceInputs = [this.controls.priceStart, this.controls.priceEnd];
 
-    this.searchForm.controls[this.formFields.priceCurrency].valueChanges.subscribe(value => {
+    this.controls.priceCurrency.valueChanges.subscribe(value => {
       if (!value) {
         priceInputs.forEach(input => {
           input.reset();

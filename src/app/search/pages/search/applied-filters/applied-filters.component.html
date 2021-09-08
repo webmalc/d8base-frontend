@@ -1,6 +1,8 @@
 <ng-container *ngFor="let filter of filters" [ngSwitch]="filter.name">
-  <!-- main -->
-  <app-chip *ngSwitchCase="fields.country" (delete)="delete(filter.name)">
+  <app-chip *ngSwitchCase="fields.query" (delete)="delete(filter.name)">
+    {{ '"' + filter.value + '"' }}
+  </app-chip>
+  <app-chip *ngSwitchCase="fields.country" (delete)="delete([filter.name, fields.city])">
     {{ (filter.value | countryById$ | async)?.name }}
   </app-chip>
   <app-chip *ngSwitchCase="fields.city" class="bold" (delete)="delete(filter.name)">
@@ -9,12 +11,12 @@
   <app-category-chips
     *ngSwitchCase="fields.categories"
     [categoryIds]="filter.value"
-    (delete)="delete(filter.name, filter.value, $event)"
+    (delete)="delete([filter.name, fields.subcategories])"
   ></app-category-chips>
   <app-category-chips
     *ngSwitchCase="fields.subcategories"
     [subcategoryIds]="filter.value"
-    (delete)="delete(filter.name, filter.value, $event)"
+    (delete)="delete(filter.name)"
   ></app-category-chips>
   <app-chip *ngSwitchCase="fields.onlyWithAutoOrderConfirmation" (delete)="delete(filter.name)">
     {{ 'issuance.filters.main-tab.instant-booking' | translate }}

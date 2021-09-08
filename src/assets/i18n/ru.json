@@ -625,8 +625,32 @@
       "all-services": "Все"
     },
     "filters": {
-      "language": "Язык"
-    }
+      "title": "Фильтры",
+      "apply": "Применить",
+      "location-title": "Местоположение",
+      "categories-title": "Категории услуг",
+      "category-label": "Выберите категорию",
+      "subcategory-label": "Выберите подкатегорию",
+      "instant-booking": "Мгновенное бронирование",
+      "only-with-photos":"Только с фото",
+      "only-with-fixed-price":"Только с фиксированной ценой",
+      "price-title": "Стоимость услуги",
+      "price-start": "Цена от",
+      "price-end": "Цена до",
+      "payment-methods": "Способы оплаты",
+      "languages": "Языки",
+      "professional-traits-title": "Особенности исполнителя",
+      "only-with-reviews": "Только с отзывами",
+      "only-with-certificates": "Только сертифицированные",
+      "start-age": "Возраст от",
+      "end-age": "Возраст до",
+      "nationality": "Страна происхождения",
+      "professional-level": "Профессиональный уровень"
+    },
+    "search-button": "Найти",
+    "add-filters-button": "Добавить фильтры",
+    "reset-filters-button": "Удалить все",
+    "any-location": "Не указано"
   },
   "issuance": {
     "search-placeholder": "Найти услугу/специалиста",
@@ -668,35 +692,16 @@
         "price-end": "Цена по",
         "exact-interval": "Интервал целиком",
         "exact-interval-desc": "Забронировать мастера на весь указанный интервал"
-      },
-      "additional": {
-        "rating": "Рейтинг",
-        "only-with-photos": "Только с фото",
-        "only-with-reviews": "Только с отзывами",
-        "only-with-fixed-price": "Только с фиксированной ценой",
-        "only-with-certificates": "Только сертифицированные",
-        "nationalities": "Национальность",
-        "nationalities-placeholder": "Выберите страну",
-        "languages": "Владение языком",
-        "languages-placeholder": "Выберите языки",
-        "experience": "Опыт",
-        "age": "Возраст",
-        "start-age": "Возраст с",
-        "end-age": "Возраст по",
-        "professional-level": "Профессиональный уровень",
-        "professional-level-placeholder": "Выберите профессиональный уровень",
-        "payment-methods": "Способ оплаты",
-        "payment-methods-placeholder": "Выберите способ оплаты"
       }
     }
   },
   "main-page": {
     "search-placeholder": "Найти услугу",
+    "date": "Дата",
     "date-from": "Дата от",
     "date-to": "Дата до",
     "any-date": "Любая дата",
     "any-time": "Любое время",
-    "current-location": "Текущее местоположение",
     "find-btn": "Искать",
     "service-categories": "Категории услуг",
     "category-education": "Образование",
@@ -708,13 +713,6 @@
     "category-photo": "Фото и видео",
     "category-pro": "Профи",
     "category-sport": "Спорт"
-  },
-  "default-location": {
-    "title": "Это Ваше текущее местоположение",
-    "select": "Выберите Ваше местоположение",
-    "country": "Выберите страну",
-    "city": "Выберите город",
-    "save": "Сохранить"
   },
   "order": {
     "step": {

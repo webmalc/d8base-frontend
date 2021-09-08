@@ -5,16 +5,16 @@ import { SearchFilterStateService } from '@app/core/services/search/search-filte
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from '../../../../../testing/mocks';
-import { SearchFiltersMainTabComponent } from './search-filters-main-tab.component';
+import { BasicFiltersComponent } from './basic-filters.component';
 
 describe('SearchFiltersMainTabComponent', () => {
-  let component: SearchFiltersMainTabComponent;
-  let fixture: ComponentFixture<SearchFiltersMainTabComponent>;
+  let component: BasicFiltersComponent;
+  let fixture: ComponentFixture<BasicFiltersComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [SearchFiltersMainTabComponent, IonicSelectableComponent],
+        declarations: [BasicFiltersComponent, IonicSelectableComponent],
         imports: [...RootModules(), ComponentTestingModule],
         providers: [
           SearchFilterStateService,
@@ -23,7 +23,7 @@ describe('SearchFiltersMainTabComponent', () => {
         ],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(SearchFiltersMainTabComponent);
+      fixture = TestBed.createComponent(BasicFiltersComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

@@ -1,0 +1,7 @@
+<ion-item lines="none" [disabled]="disabled" (click)="initPopover()" button>
+  <ion-label *ngIf="getLocationString() as locaton; else noLocation">{{ locaton }}</ion-label>
+  <ion-icon *ngIf="!disabled" name="location-outline" slot="end"></ion-icon>
+</ion-item>
+<ng-template #noLocation>
+  <ion-label color="medium">{{ 'search.any-location' | translate }}</ion-label>
+</ng-template>
