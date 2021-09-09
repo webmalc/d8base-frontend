@@ -1,1 +1,1 @@
-export * from './data-placeholder/data-placeholder.component';
+export * from '../../shared/components/data-placeholder/placeholder.component';

@@ -45,6 +45,7 @@ import {
   AvatarComponent,
   ServiceTagsViewerComponent,
   ServiceTagsEditorComponent,
+  PlaceholderComponent,
 } from '@app/shared/components';
 import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import {
@@ -205,6 +206,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AvatarComponent,
     ServiceTagsViewerComponent,
     ServiceTagsEditorComponent,
+    PlaceholderComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -293,6 +295,7 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     AvatarComponent,
     ServiceTagsViewerComponent,
     ServiceTagsEditorComponent,
+    PlaceholderComponent,
   ],
   imports: [
     CommonModule,

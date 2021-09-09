@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProfessionalCalendar } from '@app/api/models';
-import { addMinutes, getTimeStringFromMinutes, stripTime } from '@app/core/functions/datetime.functions';
+import { addMinutes, stripTime } from '@app/core/functions/datetime.functions';
 import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
 import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
 import { environment } from '@env/environment';
@@ -16,8 +16,9 @@ export class CalendarService {
   private readonly intervals = environment.calendar_day_intervals;
   private readonly minutesInInterval = this.minutesInDay / this.intervals;
 
-  public generate(interval: number, enabledPeriods: ProfessionalCalendar[]): CalendarInterval[] {
-    if (!Number.isInteger(this.minutesInInterval / interval)) {
+  // TODO simplify logic
+  public generate(stepSize: number, enabledPeriods: ProfessionalCalendar[]): CalendarInterval[] {
+    if (!Number.isInteger(this.minutesInInterval / stepSize)) {
       throw Error('cannot generate calendar with given interval');
     }
     if (!Array.isArray(enabledPeriods) || !enabledPeriods.length) {
@@ -32,16 +33,21 @@ export class CalendarService {
       for (
         let minutes = intervals * this.minutesInInterval;
         minutes <= (intervals + 1) * this.minutesInInterval;
-        minutes += interval
+        minutes += stepSize
       ) {
         units.push({
-          minutes,
+          datetime: addMinutes(day, minutes),
           enabled: this.isEnabled(openedPeriodArray, day, minutes),
         });
       }
-      const startIntervalTimeString = getTimeStringFromMinutes(units[0].minutes);
-      const endIntervalTimeString = getTimeStringFromMinutes(units[units.length - 1].minutes - 1);
-      calendar.push({ title: `${startIntervalTimeString} - ${endIntervalTimeString}`, units });
+      const startIntervalTimeString = units[0].datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const endIntervalTimeString = addMinutes(units[units.length - 1].datetime, -1).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+      if (units.filter(x => x.enabled).length > 0) {
+        calendar.push({ title: `${startIntervalTimeString} - ${endIntervalTimeString}`, units });
+      }
     }
 
     return calendar;

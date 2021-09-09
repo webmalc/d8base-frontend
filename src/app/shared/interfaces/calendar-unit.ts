@@ -1,4 +1,4 @@
 export interface CalendarUnit {
-  minutes: number;
+  datetime: Date;
   enabled: boolean;
 }
