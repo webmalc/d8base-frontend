@@ -60,8 +60,6 @@ export class ServicePublishFinalStepComponent implements IonViewDidEnter {
         single(),
         finalize(() => this.store.dispatch(new LoaderActions.HideLoader('service-publish'))),
       )
-      .subscribe(service =>
-        this.router.navigate([NavPath.Service, service.id, NavBranch.Edit], { queryParams: { from: 'publish' } }),
-      );
+      .subscribe(service => this.router.navigate([NavPath.Professional, service.id, NavBranch.MyServices]));
   }
 }
