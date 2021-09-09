@@ -51,9 +51,7 @@ export class ServiceStepContainerComponent {
   public async submit(): Promise<void> {
     this.serviceManager
       .createService(await this.serviceBuilder.build())
-      .subscribe(service =>
-        this.router.navigate([NavPath.Service, service.id, NavBranch.Edit], { queryParams: { from: 'publish' } }),
-      );
+      .subscribe(() => this.router.navigate([NavPath.Professional, NavBranch.MyServices]));
   }
 
   private subscribeToState(): void {

@@ -9,7 +9,7 @@ import { TagsManagerService } from '@app/core/services/managers';
 import { ServiceManagerService } from '@app/core/services/managers/service-manager.service';
 import { ColumnHeaderComponent } from '@app/shared/components';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, first, map, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-editor-page',
@@ -25,7 +25,6 @@ export class ServiceEditorPageComponent {
   public schedule$: Observable<AbstractSchedule[]>;
   public photos$: Observable<ServicePhoto[]>;
   public tags$: Observable<ServiceTag[]>;
-  public showSuccessOrderNotification$: Observable<boolean>;
 
   private readonly refresh$ = new BehaviorSubject<void>(null);
 
@@ -54,10 +53,6 @@ export class ServiceEditorPageComponent {
       shareReplay(1),
     );
     this.tags$ = this.tagsManager.tags$;
-    this.showSuccessOrderNotification$ = route.queryParams.pipe(
-      first(),
-      map(params => params.from === 'publish'),
-    );
   }
 
   public getProfessionalServicesUrl(professionalId: number): string {
