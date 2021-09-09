@@ -5,7 +5,7 @@ import { MenuController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NewMessagesNotificationService } from '@app/shared/services/new-messages-notification.service';
+import { NewMessagesNotificationService } from '@app/core/services/new-messages-notification.service';
 import HeaderContext from './header-context.interface';
 
 @Component({

@@ -33,6 +33,8 @@ import {
   ContactsMergeToDefaultService,
   StorageManagerService,
   TagsManagerService,
+  NewMessagesNotificationService,
+  IntervalService,
 } from '@app/core/services';
 import {
   CategoriesApiCache,
@@ -50,6 +52,7 @@ import {
 } from '@app/core/services/cache';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
+
 import { environment } from '@env/environment';
 
 @NgModule({
@@ -124,6 +127,8 @@ import { environment } from '@env/environment';
     SearchQueryService,
 
     ContactsMergeToDefaultService,
+    NewMessagesNotificationService,
+    IntervalService,
   ],
 })
 export class CoreModule {

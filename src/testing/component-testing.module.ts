@@ -12,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from './mocks';
-import { IntervalService } from '@app/shared/services/interval.service';
+import { IntervalService } from '@app/core/services/interval.service';
 import { of } from 'rxjs';
 import { CoreModule } from '@app/core/core.module';
 
