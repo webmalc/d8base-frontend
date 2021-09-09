@@ -5,7 +5,7 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { NewMessagesNotificationService } from '@app/shared/services/new-messages-notification.service';
+import { NewMessagesNotificationService } from '@app/core/services/new-messages-notification.service';
 
 import { getChatListItems } from './chats-list-item.functions';
 import { ChatsListItem } from './chats-list-item.interface';

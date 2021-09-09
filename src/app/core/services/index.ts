@@ -20,3 +20,5 @@ export * from './api/api-client.service';
 export * from './api/is-user-registered-api.service';
 
 export * from './contacts-merge-to-default.service';
+export * from './interval.service';
+export * from './new-messages-notification.service';

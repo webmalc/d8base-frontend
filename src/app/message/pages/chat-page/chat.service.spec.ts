@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { NgDestroyService } from '@app/core/services';
-import { IntervalService } from '@app/shared/services/interval.service';
+import { IntervalService } from '@app/core/services/interval.service';
 import { ChatService } from './chat.service';
 
 describe('ChatService', () => {

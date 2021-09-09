@@ -93,8 +93,6 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NewMessagesNotificationService } from '@app/shared/services/new-messages-notification.service';
-import { IntervalService } from '@app/shared/services/interval.service';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
 import { ImageCropPopoverComponent } from './components/picture-selector/image-cropper/image-crop-popover.component';
 import { SavedProfessionalToggleComponent } from './components/saved-professional-toggle/saved-professional-toggle.component';
@@ -310,9 +308,6 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     IfSpinnerModule,
   ],
   providers: [
-    // TODO Create core module and move providers into it
-    NewMessagesNotificationService,
-    IntervalService,
     {
       provide: IF_SPINNER_MODULE_CONFIG_TOKEN,
       useValue: {
