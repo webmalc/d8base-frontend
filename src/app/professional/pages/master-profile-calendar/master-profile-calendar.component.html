@@ -21,11 +21,11 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-item lines="none" class="ion-item-bottom-border master-profile-tab-title">
+        <ion-item lines="none" class="master-profile-tab-title">
           {{ 'master-profile.calendar.title' | translate }}
         </ion-item>
         <app-calendar-component
-          (newDate)="changeDate($event, context.professional.id)"
+          (dateChanged)="changeDate($event, context.professional.id)"
           [formControl]="formControl"
           [enabledPeriods]="enabledPeriods$ | async"
         >

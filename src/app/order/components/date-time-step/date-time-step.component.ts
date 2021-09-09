@@ -40,10 +40,6 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     this.subscribeFormStatus();
   }
 
-  public getData(): DateTimeStepData {
-    return this.outputData;
-  }
-
   public showCalendarForDate(date: Date): void {
     this.currentlyViewedDate.next(date);
   }
@@ -55,7 +51,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
       return;
     }
     const start_datetime = data?.start_datetime;
-    this.form.get('datetime').setValue(new Date(start_datetime));
+    this.formControl.setValue(new Date(start_datetime));
     this.cd.markForCheck();
   }
 
@@ -96,8 +92,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   }
 
   private getStepState(): DateTimeStepData {
-    const datetime = this.form.get('datetime').value;
-
-    return { start_datetime: new Date(datetime).toISOString() };
+    const datetime: Date = this.formControl.value;
+    return { start_datetime: datetime.toISOString() };
   }
 }

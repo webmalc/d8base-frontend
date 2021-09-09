@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
-import { DataPlaceholderComponent } from './data-placeholder.component';
+import { PlaceholderComponent } from './placeholder.component';
 
 describe('DataPlaceholderComponent', () => {
-  let component: DataPlaceholderComponent;
-  let fixture: ComponentFixture<DataPlaceholderComponent>;
+  let component: PlaceholderComponent;
+  let fixture: ComponentFixture<PlaceholderComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [DataPlaceholderComponent],
+        declarations: [PlaceholderComponent],
         imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(DataPlaceholderComponent);
+      fixture = TestBed.createComponent(PlaceholderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

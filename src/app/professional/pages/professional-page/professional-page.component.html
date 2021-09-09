@@ -95,7 +95,7 @@
           <ion-item *ngFor="let location of context.professional.locations" lines="none">
             <app-location-viewer [location]="location"></app-location-viewer>
           </ion-item>
-          <app-data-placeholder *ngIf="!context.professional.locations?.length"></app-data-placeholder>
+          <app-placeholder *ngIf="!context.professional.locations?.length"></app-placeholder>
         </ng-container>
       </ng-template>
     </section>
@@ -131,7 +131,7 @@
             {{ 'global.professional-level.' + context.professional.level | translate }}
           </ion-text>
         </ion-item>
-        <app-data-placeholder *ngIf="isDescriptionEmpty(context.professional)"></app-data-placeholder>
+        <app-placeholder *ngIf="isDescriptionEmpty(context.professional)"></app-placeholder>
       </ion-list>
 
       <ion-list lines="none" *ngIf="!isUserInfoEmpty(context.user) || context.canEdit">
@@ -184,7 +184,7 @@
             </ng-container>
           </ion-text>
         </ion-item>
-        <app-data-placeholder *ngIf="isUserInfoEmpty(context.user)"></app-data-placeholder>
+        <app-placeholder *ngIf="isUserInfoEmpty(context.user)"></app-placeholder>
       </ion-list>
     </app-collapse-item>
 
@@ -198,7 +198,7 @@
           [editable]="context.canEdit"
           [exp]="experience"
         ></app-experience>
-        <app-data-placeholder *ngIf="!context.professional.experience_entries.length"></app-data-placeholder>
+        <app-placeholder *ngIf="!context.professional.experience_entries.length"></app-placeholder>
         <app-add-button *ngIf="context.canEdit" routerLink="experience-add/">
           {{ 'master-profile.info.add-new-exp' | translate }}
         </app-add-button>
@@ -216,7 +216,7 @@
       >
         <app-education [education]="education" [editable]="context.canEdit"></app-education>
       </ion-item>
-      <app-data-placeholder *ngIf="!context.professional.educations.length"></app-data-placeholder>
+      <app-placeholder *ngIf="!context.professional.educations.length"></app-placeholder>
       <app-add-button *ngIf="context.canEdit" routerLink="education-add/">
         {{ 'master-profile.info.add-new-education' | translate }}
       </app-add-button>
@@ -229,7 +229,7 @@
       <ion-item *ngFor="let certificate of context.professional.certificates">
         <app-certificate [certificate]="certificate" [editable]="context.canEdit"></app-certificate>
       </ion-item>
-      <app-data-placeholder *ngIf="!context.professional.certificates.length"></app-data-placeholder>
+      <app-placeholder *ngIf="!context.professional.certificates.length"></app-placeholder>
       <app-add-button *ngIf="context.canEdit" routerLink="certificate-add/">
         {{ 'master-profile.info.add-new-certificate' | translate }}
       </app-add-button>

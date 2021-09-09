@@ -15,7 +15,6 @@ import { ServicePageModule } from '@app/service/service.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { DataPlaceholderComponent } from './components';
 import { ProfessionalContactEditComponent } from './pages/professional-contact-edit/professional-contact-edit.component';
 import { ProfessionalCardLargeComponent } from './pages/professional-page/professional-card-large/professional-card-large.component';
 import { ProfessionalPageComponent } from './pages/professional-page/professional-page.component';
@@ -50,7 +49,6 @@ import { ProfessionalResolver } from './professional.resolver';
     ProfessionalContactEditComponent,
     ServiceListPageComponent,
     ProfessionalCardLargeComponent,
-    DataPlaceholderComponent,
   ],
   providers: [
     CalendarGeneratorFactoryService,

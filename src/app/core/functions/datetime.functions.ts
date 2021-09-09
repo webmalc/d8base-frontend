@@ -10,11 +10,6 @@ export function addDays(date: Date, days: number): Date {
   return newDate;
 }
 
-export function getMilliseconds(value: { minutes: number }): number {
-  const { minutes } = value;
-  return minutes * 60000;
-}
-
 export function stripTime(date: Date): Date {
   const result = new Date(date);
   result.setHours(0, 0, 0, 0);
@@ -79,15 +74,6 @@ export function calculateAge(birthday: string): number {
   const ageDate = new Date(ageDifMs);
 
   return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
-
-export function getTimeStringFromMinutes(minutes: number): string {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes - hours * 60;
-  const hoursStr = /^\d$/.test(hours.toString()) ? `0${hours.toString()}` : hours;
-  const minsStr = /^\d$/.test(mins.toString()) ? `0${mins.toString()}` : mins;
-
-  return `${hoursStr}:${minsStr}`;
 }
 
 export function getOffsetDate(date: Date, offset: number): Date {

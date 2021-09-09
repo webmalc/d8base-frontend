@@ -1,45 +1,34 @@
-<ion-row class="bgc-light ion-margin-top ion-padding-horizontal date-row">
-  <ion-item lines="none" class="bgc-light ion-padding-vertical">
-    <ion-icon
-      (click)="changeDate(-1)"
-      class="ion-activatable cursor-pointer pr5"
-      name="chevron-back-outline"
-    ></ion-icon>
-    <ion-item lines="none" class="ion-item-bordered ion-item-bottom-border">
-      {{ date | date: 'fullDate' }}
-    </ion-item>
-    <ion-icon
-      (click)="changeDate(1)"
-      class="ion-activatable cursor-pointer pl5"
-      name="chevron-forward-outline"
-    ></ion-icon>
-  </ion-item>
-  <ion-item lines="none" class="bgc-light ion-padding-vertical">
-    <div class="space-between-column">
-      <div>{{ 'calendar.timezone' | translate }}</div>
-      <div>{{ timezone }}</div>
-    </div>
-  </ion-item>
-</ion-row>
+<ion-item lines="none" *ngIf="selectedDatetime">
+  <ion-label>
+    {{ selectedDatetime | date }}
+  </ion-label>
+</ion-item>
+<app-placeholder *ngIf="!selectedDatetime && !disabled"></app-placeholder>
+<ion-item lines="none">
+  <ion-button slot="start" (click)="shiftDate(-1)">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+  </ion-button>
+  <ion-input type="date" [value]="viewedDay | date: 'yyyy-MM-dd'" (ionChange)="setDate($event)"></ion-input>
+  <ion-button slot="end" (click)="shiftDate(1)">
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-button>
+</ion-item>
 <ng-container *appIfSpinner="isLoadingEnabledPeriods">
   <ion-item *ngIf="!calendarIntervals" lines="full">
     <ion-label>{{ 'calendar.day-off' | translate }}</ion-label>
   </ion-item>
-  <app-collapse-item
-    *ngFor="let interval of calendarIntervals"
-    [collapsed]="false"
-    [titleBold]="false"
-    title="{{ interval.title }}"
-  >
-    <ion-row class="ion-justify-content-between ion-wrap border-top ion-padding-top">
+  <ng-container *ngFor="let interval of calendarIntervals">
+    <app-section-heading>{{ interval.title }}</app-section-heading>
+    <div class="timetable">
       <ion-button
         *ngFor="let unit of interval.units"
+        [fill]="getUnitFill(unit)"
         [color]="getUnitColor(unit)"
         [disabled]="disabled || !unit.enabled"
-        (click)="setStartTime(unit)"
+        (click)="setDatetime(unit)"
       >
-        {{ getTimeStringFromMinutes(unit.minutes) }}
+        {{ unit.datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
       </ion-button>
-    </ion-row>
-  </app-collapse-item>
+    </div>
+  </ng-container>
 </ng-container>

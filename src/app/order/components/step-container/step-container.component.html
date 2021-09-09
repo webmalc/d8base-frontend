@@ -3,17 +3,11 @@
   <app-content-wrapper>
     <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
     <ng-container *appIfSpinner="context$ | ifSpinnerErrorState | async as context">
-      <ion-row>
-        <ion-col>
-          <ion-list>
-            <ion-list-header class="fs20">
-              {{ 'order.selected-service' | translate }}
-            </ion-list-header>
-            <app-service-widget [service]="context?.service" [master]="context.professional"></app-service-widget>
-            <app-order-details [order]="orderDetailsState$ | async"></app-order-details>
-          </ion-list>
-        </ion-col>
-      </ion-row>
+      <app-section-heading>
+        {{ 'order.selected-service' | translate }}
+      </app-section-heading>
+      <app-service-widget [service]="context?.service"></app-service-widget>
+      <app-order-details [order]="orderDetailsState$ | async"></app-order-details>
       <ng-content></ng-content>
       <ion-row>
         <ion-col>

@@ -40,3 +40,4 @@ export * from './section-heading/section-heading.component';
 export * from './avatar/avatar.component';
 export * from './service-tags-viewer/service-tags-viewer.component';
 export * from './service-tags-editor/service-tags-editor.component';
+export * from './data-placeholder/placeholder.component';
