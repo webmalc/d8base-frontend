@@ -30,7 +30,9 @@ registerLocaleData(localeCanada, 'en-CA');
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'md', // TODO change to "ios" eventually
+    }),
     IonicStorageModule.forRoot(),
     StoreModule.forRoot(),
     LeafletModule.forRoot(),
