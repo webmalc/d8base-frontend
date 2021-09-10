@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CommunicationService } from '@app/api/services/communication.service';
-import { AuthenticationService } from '@app/core/services/index';
-import { IntervalService } from '@app/core/services/interval.service';
-import { environment } from '@env/environment';
-import { catchError, shareReplay, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
 import { ReceivedMessage } from '@app/api/models';
+import { CommunicationService } from '@app/api/services';
+import { environment } from '@env/environment';
+import { Observable, of } from 'rxjs';
+import { catchError, shareReplay, switchMap } from 'rxjs/operators';
+import { AuthenticationService } from './authentication.service';
+import { IntervalService } from './interval.service';
 
 type ResponseData = { count: number; next?: string; previous?: string; results: ReceivedMessage[] };
 
