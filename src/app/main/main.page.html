@@ -1,57 +1,67 @@
 <app-header></app-header>
 <ion-content class="background-color-white">
   <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
-    <div class="ion-padding-vertical">
-      <form [formGroup]="form" (ngSubmit)="search()">
-        <ion-grid class="search-fields-layout">
-          <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-searchbar
-                [formControl]="controls.query"
-                animated
-                class="main-page-search"
-                color="light"
-                [placeholder]="'main-page.search-placeholder' | translate"
-              ></ion-searchbar>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
-              <ion-item lines="none">
-                <ion-input
-                  type="date"
-                  [min]="stateManager.minDate"
-                  [max]="stateManager.maxDate"
-                  (ionChange)="updateDate($event)"
-                ></ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
-              <app-location-picker
-                (emitter)="updateLocation($event)"
-                [disabled]="!locationEnabled"
-                [country]="controls.country.value"
-                [city]="controls.city.value"
-              ></app-location-picker>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-center ion-margin-vertical">
-            <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-              <ion-button
-                type="submit"
-                expand="block"
-                fill="solid"
-                size="medium"
-                [disabled]="!this.controls.query.value"
-              >
-                {{'main-page.find-btn'|translate}}
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </form>
-    </div>
+    <ion-col class="ion-padding-bottom" size-xl="4" size-lg="5" size-md="6" size-sm="10" size-xs="12">
+      <div class="ion-padding-vertical">
+        <form [formGroup]="form" (ngSubmit)="search()">
+          <ion-grid class="search-fields-layout">
+            <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-searchbar
+                  [formControl]="controls.query"
+                  animated
+                  class="main-page-search"
+                  color="light"
+                  [placeholder]="'main-page.search-placeholder' | translate"
+                ></ion-searchbar>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
+                <ion-item lines="none">
+                  <ion-input
+                    type="date"
+                    [min]="stateManager.minDate"
+                    [max]="stateManager.maxDate"
+                    (ionChange)="updateDate($event)"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
+                <app-location-picker
+                  (emitter)="updateLocation($event)"
+                  [disabled]="!locationEnabled"
+                  [country]="controls.country.value"
+                  [city]="controls.city.value"
+                ></app-location-picker>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-checkbox slot="start" [formControl]="controls.isOnlineService"></ion-checkbox>
+                  <ion-label> {{ 'main-page.include-online' | translate }} </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center ion-margin-vertical">
+              <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
+                <ion-button
+                  type="submit"
+                  expand="block"
+                  fill="solid"
+                  size="medium"
+                  [disabled]="!this.controls.query.value"
+                >
+                  {{'main-page.find-btn'|translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </div>
+    </ion-col>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col class="ion-padding-bottom" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
