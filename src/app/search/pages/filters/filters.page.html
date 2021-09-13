@@ -2,10 +2,18 @@
 <ion-content>
   <app-content-wrapper>
     <app-column-header (beforeNavigatingBack)="applyFilters()">
-      {{ 'search.filters.title' | translate }}
+      <ion-label>{{ 'search.filters.title' | translate }}</ion-label>
+      <ion-icon name="options-outline" slot="end"></ion-icon>
     </app-column-header>
     <app-basic-filters></app-basic-filters>
     <app-advanced-filters></app-advanced-filters>
-    <ion-button expand="block" (click)="submit()">Применить</ion-button>
   </app-content-wrapper>
 </ion-content>
+<ion-footer>
+  <app-content-wrapper class="show-scrollbar">
+    <ion-item lines="none">
+      <ion-button (click)="reset()" color="danger" fill="outline">{{ 'search.filters.reset' | translate }}</ion-button>
+      <ion-button (click)="submit()" slot="end">{{ 'search.filters.apply' | translate }}</ion-button>
+    </ion-item>
+  </app-content-wrapper>
+</ion-footer>

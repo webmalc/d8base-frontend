@@ -1,20 +1,28 @@
 <app-header></app-header>
-<ion-split-pane contentId="search-results" class="top-padded split-side-width">
+<ion-split-pane #filtersPane contentId="search-results" class="top-padded split-side-width">
   <!--  Filters pane -->
-  <ion-content>
-    <ion-item lines="full" color="light">
-      <ion-icon name="funnel-outline" slot="start"></ion-icon>
-      <ion-label class="filters-panel__title">
-        {{ 'search.filters.title' | translate }}
-      </ion-label>
-    </ion-item>
-    <app-basic-filters></app-basic-filters>
-    <ion-item lines="none">
-      <ion-button (click)="updateSearchResults()" color="primary" size="medium" slot="end">
-        {{ 'search.filters.apply' | translate }}
-      </ion-button>
-    </ion-item>
-  </ion-content>
+  <ion-menu contentId="search-results">
+    <ion-content>
+      <ion-item lines="full" color="light">
+        <ion-icon name="options-outline" slot="start"></ion-icon>
+        <ion-label class="filters-panel__title">
+          {{ 'search.filters.title' | translate }}
+        </ion-label>
+      </ion-item>
+      <app-basic-filters></app-basic-filters>
+      <app-advanced-filters></app-advanced-filters>
+    </ion-content>
+    <ion-footer>
+      <ion-item lines="none">
+        <ion-button color="danger" fill="outline" routerLink="/search" *ngIf="hasFilters()">
+          {{ 'search.filters.reset' | translate }}
+        </ion-button>
+        <ion-button (click)="updateSearchResults()" slot="end">
+          {{ 'search.filters.apply' | translate }}
+        </ion-button>
+      </ion-item>
+    </ion-footer>
+  </ion-menu>
   <!--  Search results -->
   <ion-content id="search-results">
     <app-content-wrapper color="light">
@@ -31,11 +39,9 @@
         (updateFilter)="editFilter($event)"
       ></app-applied-filters>
       <ion-buttons class="buttons-container">
-        <ion-button color="primary" fill="outline" routerLink="/search/filters">
+        <ion-button *ngIf="showFiltersButton$ | async" color="primary" fill="outline" routerLink="/search/filters">
+          <ion-icon name="options-outline"></ion-icon>
           {{ 'search.add-filters-button' | translate }}
-        </ion-button>
-        <ion-button color="danger" fill="outline" routerLink="/search" *ngIf="hasFilters()">
-          {{ 'search.reset-filters-button' | translate }}
         </ion-button>
       </ion-buttons>
       <app-infinite-scroll-container

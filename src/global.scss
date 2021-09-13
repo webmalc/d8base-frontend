@@ -362,6 +362,10 @@
   display: none;
 }
 
+.show-scrollbar {
+  overflow-y: scroll;
+}
+
 section {
   margin-bottom: 1rem;
 }
@@ -376,4 +380,15 @@ ion-list:not(:last-of-type) {
 
 a {
   text-decoration: none;
+}
+
+// Thin scrollbar for Chrome and Safari
+ion-content::part(scroll)::-webkit-scrollbar {
+  // doesn't work due to bug https://github.com/ionic-team/ionic-framework/issues/17425
+  width: 0.2rem;
+}
+
+// Thin scrollbar for Firefox
+ion-content::part(scroll) {
+  scrollbar-width: thin;
 }

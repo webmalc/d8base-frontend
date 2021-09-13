@@ -49,6 +49,7 @@ export class ServiceStepContainerComponent {
   }
 
   public async submit(): Promise<void> {
+    await this.serviceBuilder.addData(this.serviceStepComponent.getState());
     this.serviceManager
       .createService(await this.serviceBuilder.build())
       .subscribe(() => this.router.navigate([NavPath.Professional, NavBranch.MyServices]));

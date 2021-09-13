@@ -20,4 +20,8 @@ export class FiltersPage {
   public applyFilters(): void {
     this.query.searchByFormValue(this.state.form.value);
   }
+
+  public reset(): void {
+    this.state.form.reset();
+  }
 }

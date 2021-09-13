@@ -627,6 +627,7 @@
     "filters": {
       "title": "Filters",
       "apply": "Apply",
+      "reset": "Reset",
       "location-title": "Location",
       "categories-title": "Service categories",
       "category-label": "Choose category",
@@ -648,8 +649,7 @@
       "professional-level": "Professional level"
     },
     "search-button": "Find",
-    "add-filters-button": "Add filters",
-    "reset-filters-button": "Reset all",
+    "add-filters-button": "Filters",
     "any-location": "Any location"
   },
   "issuance": {
