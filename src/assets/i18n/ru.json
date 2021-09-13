@@ -627,6 +627,7 @@
     "filters": {
       "title": "Фильтры",
       "apply": "Применить",
+      "reset": "Удалить все",
       "location-title": "Местоположение",
       "categories-title": "Категории услуг",
       "category-label": "Выберите категорию",
@@ -648,8 +649,7 @@
       "professional-level": "Профессиональный уровень"
     },
     "search-button": "Найти",
-    "add-filters-button": "Добавить фильтры",
-    "reset-filters-button": "Удалить все",
+    "add-filters-button": "Фильтры",
     "any-location": "Не указано"
   },
   "issuance": {

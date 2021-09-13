@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Search } from '@app/api/models';
 import { SearchService } from '@app/api/services';
@@ -7,9 +7,9 @@ import { NgDestroyService, SearchFilterStateConverter } from '@app/core/services
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { SearchQueryService } from '@app/core/services/search/search-query.service';
 import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
-import { Platform } from '@ionic/angular';
+import { IonSplitPane, Platform } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -19,9 +19,13 @@ import { switchMap, takeUntil } from 'rxjs/operators';
   providers: [NgDestroyService],
 })
 export class SearchPage implements AfterViewInit {
+  @ViewChild('filtersPane')
+  public readonly splitPane: IonSplitPane;
+
   public searchResult: Search[];
-  public readonly doLoad$ = new Subject<InfiniteScrollData<SearchService.SearchListParams, Search>>();
   public params: SearchService.SearchListParams;
+  public readonly doLoad$ = new Subject<InfiniteScrollData<SearchService.SearchListParams, Search>>();
+  public showFiltersButton$: Observable<boolean>; // = new BehaviorSubject<boolean>(true);
 
   private readonly apiRequestFunction: (
     params: SearchService.SearchListParams,
@@ -41,6 +45,10 @@ export class SearchPage implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    this.showFiltersButton$ = this.splitPane.ionSplitPaneVisible.pipe(
+      map(event => !event.detail.visible),
+      startWith(true),
+    );
     // we have to wait for infinite-scroll-container initialization before searching
     this.runSearchQueryOn(this.route.queryParams);
   }
