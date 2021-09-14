@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-split-pane #filtersPane contentId="search-results" class="top-padded split-side-width">
   <!--  Filters pane -->
-  <ion-menu contentId="search-results">
+  <aside class="flex-column">
     <ion-content>
       <ion-item lines="full" color="light">
         <ion-icon name="options-outline" slot="start"></ion-icon>
@@ -22,7 +22,7 @@
         </ion-button>
       </ion-item>
     </ion-footer>
-  </ion-menu>
+  </aside>
   <!--  Search results -->
   <ion-content id="search-results">
     <app-content-wrapper color="light">
