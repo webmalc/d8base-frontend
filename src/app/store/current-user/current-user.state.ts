@@ -71,7 +71,7 @@ export class CurrentUserState implements NgxsOnInit {
     { patchState, dispatch }: StateContext<CurrentUserStateModel>,
     { credentials }: CurrentUserActions.Login,
   ): Observable<any> {
-    patchState(notLoadedState);
+    patchState({ tokens: null });
     return this.client
       .post<AuthResponseInterface, LoginDataInterface>(TOKEN_OBTAIN_URL, {
         username: credentials.username,
@@ -83,7 +83,7 @@ export class CurrentUserState implements NgxsOnInit {
       .pipe(
         catchError(error => {
           if (400 === error.status && error.error.error === 'invalid_grant') {
-            patchState({ errors: ['login-page.incorrect-login-data'] });
+            patchState({ errors: ['login-page.incorrect-login-data'], tokens: emptyTokens });
           }
           return throwError(error);
         }),
