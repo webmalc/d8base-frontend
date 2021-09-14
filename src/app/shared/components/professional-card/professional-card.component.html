@@ -1,11 +1,11 @@
 <div class="content">
-  <a [routerLink]="professionalProfileUrl" [queryParams]="queryParams">
+  <a [routerLink]="professionalProfileUrl">
     <app-avatar [user]="professional.user" class="avatar"></app-avatar>
   </a>
   <div class="info">
     <div class="ion-padding-horizontal">
       <div class="title capitalize-first-letter">
-        <a [routerLink]="professionalProfileUrl" [queryParams]="queryParams">{{ professionalName }}</a>
+        <a [routerLink]="professionalProfileUrl">{{ professionalName }}</a>
       </div>
       <div class="subtitle">
         <span class="capitalize-first-letter">{{ professional.name }}</span>
@@ -18,7 +18,7 @@
     <div *ngIf="professional?.rating" class="rating">
       <app-rating [rating]="professional.rating"></app-rating>
       <div class="rating__reviews-link">
-        <a [routerLink]="professionalReviewsUrl" [queryParams]="queryParams" (click)="$event.stopPropagation()">
+        <a [routerLink]="professionalReviewsUrl" (click)="$event.stopPropagation()">
           {{ professional?.reviews_count | asReviews }}
         </a>
       </div>
