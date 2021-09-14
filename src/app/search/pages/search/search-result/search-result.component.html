@@ -7,11 +7,7 @@
     ></app-professional-card>
     <app-service-link *ngFor="let service of getServiceList()" [service]="service"></app-service-link>
     <div *ngIf="hasMoreServices">
-      <a
-        class="more-services cursor-pointer"
-        [routerLink]="professionalServicesUrl"
-        [queryParams]="{ redirectTo: currentUrl }"
-      >
+      <a class="more-services cursor-pointer" [routerLink]="professionalServicesUrl">
         {{ 'search.result.all-services' | translate }}
         {{ getServiceCount() | asServices }}
       </a>
@@ -23,7 +19,6 @@
         fill="outline"
         [disabled]="(userId$ | async) === data.professional.user.id"
         [routerLink]="professionalChatUrl"
-        [queryParams]="{ redirectTo: currentUrl }"
       >
         {{ 'search.result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
       </ion-button>

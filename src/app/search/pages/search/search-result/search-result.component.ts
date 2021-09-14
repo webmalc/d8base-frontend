@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Profile, Search, ServiceList } from '@app/api/models';
 import { getProfessionalServicesUrl, getUserChatUrl } from '@app/core/functions/navigation.functions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -17,10 +16,6 @@ export class SearchResultComponent {
 
   @Input() public data: Search;
 
-  public get currentUrl(): string {
-    return this.router.url;
-  }
-
   public get professionalServicesUrl(): string {
     return getProfessionalServicesUrl(this.data.professional?.id) ?? '';
   }
@@ -28,8 +23,6 @@ export class SearchResultComponent {
   public get professionalChatUrl(): string {
     return getUserChatUrl(this.data.professional?.user.id) ?? '';
   }
-
-  constructor(private readonly router: Router) {}
 
   public getServiceList(): ServiceList[] {
     return this.data.services.slice(0, 3);
