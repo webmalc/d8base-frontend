@@ -14,7 +14,7 @@
   </ion-button>
 </ion-item>
 <ng-container *appIfSpinner="isLoadingEnabledPeriods">
-  <ion-item *ngIf="!calendarIntervals" lines="full">
+  <ion-item *ngIf="!calendarIntervals" lines="none">
     <ion-label>{{ 'calendar.day-off' | translate }}</ion-label>
   </ion-item>
   <ng-container *ngFor="let interval of calendarIntervals">

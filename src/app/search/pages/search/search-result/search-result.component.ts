@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Profile, Search, ServiceList } from '@app/api/models';
-import { getProfessionalServicesUrl, getUserChatUrl } from '@app/core/functions/navigation.functions';
+import {
+  getProfessionalScheduleUrl,
+  getProfessionalServicesUrl,
+  getUserChatUrl,
+} from '@app/core/functions/navigation.functions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -17,11 +21,15 @@ export class SearchResultComponent {
   @Input() public data: Search;
 
   public get professionalServicesUrl(): string {
-    return getProfessionalServicesUrl(this.data.professional?.id) ?? '';
+    return getProfessionalServicesUrl(this.data.professional?.id);
   }
 
   public get professionalChatUrl(): string {
-    return getUserChatUrl(this.data.professional?.user.id) ?? '';
+    return getUserChatUrl(this.data.professional?.user.id);
+  }
+
+  public get professionalScheduleUrl(): string {
+    return getProfessionalScheduleUrl(this.data.professional.id);
   }
 
   public getServiceList(): ServiceList[] {
@@ -34,9 +42,5 @@ export class SearchResultComponent {
 
   public get hasMoreServices(): boolean {
     return this.getServiceCount() > this.getServiceList().length;
-  }
-
-  public getCompanyName(): string {
-    return this.data?.professional?.company ? this.data.professional.company : 'global.professional.private-person';
   }
 }

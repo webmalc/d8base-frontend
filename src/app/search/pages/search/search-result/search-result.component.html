@@ -13,13 +13,10 @@
       </a>
     </div>
     <div class="bottom-buttons">
-      <ion-button
-        size="medium"
-        color="primary"
-        fill="outline"
-        [disabled]="(userId$ | async) === data.professional.user.id"
-        [routerLink]="professionalChatUrl"
-      >
+      <ion-button size="medium" color="primary" [routerLink]="professionalScheduleUrl">
+        {{ 'search.result.order' | translate }}
+      </ion-button>
+      <ion-button size="medium" color="primary" fill="outline" [routerLink]="professionalChatUrl">
         {{ 'search.result.chat' | translate }} <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
       </ion-button>
     </div>

@@ -13,7 +13,7 @@
   <ion-label slot="start" color="primary" class="cursor-pointer" [routerLink]="'/service/' + service.id">
     {{ 'master-profile.services.service-presentation.more-info' | translate }}
   </ion-label>
-  <ion-button size="default" slot="end" [routerLink]="'/order/' + service.id">
+  <ion-button slot="end" [routerLink]="getServiceOrderUrl(service)">
     {{ 'master-profile.services.service-presentation.pick' | translate }}
     <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
   </ion-button>
