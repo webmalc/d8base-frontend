@@ -2,7 +2,13 @@ import { Component } from '@angular/core';
 import { ProfessionalList, ProfessionalPhotoList, ReviewList, UserExtended } from '@app/api/models';
 import { CommunicationService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
-import { getNewProfessionalContactUrl, getNewProfessionalLocationsUrl } from '@app/core/functions/navigation.functions';
+import {
+  getNewProfessionalContactUrl,
+  getNewProfessionalLocationsUrl,
+  getProfessionalScheduleUrl,
+  getProfessionalServicesUrl,
+  getUserChatUrl,
+} from '@app/core/functions/navigation.functions';
 import { getProfessionalName } from '@app/core/functions/professional.functions';
 import { ContactUnion } from '@app/core/models/contact-union';
 import { NgDestroyService } from '@app/core/services';
@@ -79,6 +85,18 @@ export class ProfessionalPageComponent {
 
   public get photos$(): Observable<ProfessionalPhotoList[]> {
     return this.professionalPhotosEditor.photos$;
+  }
+
+  public getProfessionalChatUrl(professional: ProfessionalList): string {
+    return getUserChatUrl(professional.user.id);
+  }
+
+  public getProfessionalServicesUrl(professional: ProfessionalList): string {
+    return getProfessionalServicesUrl(professional.id);
+  }
+
+  public getProfessionalScheduleUrl(professional: ProfessionalList): string {
+    return getProfessionalScheduleUrl(professional.id);
   }
 
   public isDescriptionEmpty(professional: ProfessionalList): boolean {

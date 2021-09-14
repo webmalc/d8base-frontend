@@ -466,11 +466,10 @@
     }
   },
   "master-profile": {
-    "submenu": {
+    "navbar": {
+      "chat": "Chat",
       "services": "Services",
-      "info": "Info",
-      "calendar": "Calendar",
-      "portfolio": "Portfolio"
+      "schedule": "Schedule"
     },
     "main-info": {
       "rating": "Professional rating",

@@ -466,11 +466,10 @@
     }
   },
   "master-profile": {
-    "submenu": {
+    "navbar": {
+      "chat": "Чат",
       "services": "Услуги",
-      "info": "Инфо",
-      "calendar": "Календарь",
-      "portfolio": "Портфолио"
+      "schedule": "Календарь"
     },
     "main-info": {
       "rating": "Рейтинг мастера",

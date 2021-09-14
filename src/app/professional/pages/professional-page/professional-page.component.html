@@ -7,14 +7,27 @@
       class="ion-margin-horizontal ion-margin-top"
     ></app-professional-card-large>
     <section>
-      <ion-list *ngIf="reviewsCount$ | async as reviewsCount; else noReviews" lines="none">
-        <ion-item>
+      <ion-item lines="none">
+        <ion-buttons>
+          <ion-button [routerLink]="getProfessionalChatUrl(context.professional)">
+            {{ 'master-profile.navbar.chat' | translate }}
+          </ion-button>
+          <ion-button [routerLink]="getProfessionalServicesUrl(context.professional)">
+            {{ 'master-profile.navbar.services' | translate }}
+          </ion-button>
+          <ion-button [routerLink]="getProfessionalScheduleUrl(context.professional)">
+            {{ 'master-profile.navbar.schedule' | translate }}
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+      <ng-container *ngIf="reviewsCount$ | async as reviewsCount; else noReviews">
+        <ion-item lines="none">
           <ion-label>
             {{ 'master-profile.main-info.rating' | translate }}
           </ion-label>
           <app-rating slot="end" [rating]="context.professional.rating"></app-rating>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>
             {{ 'master-profile.main-info.reviews' | translate }}
           </ion-label>
@@ -24,7 +37,7 @@
             </a>
           </ion-label>
         </ion-item>
-      </ion-list>
+      </ng-container>
       <ng-template #noReviews>
         <ion-item lines="none">
           <ion-label>
