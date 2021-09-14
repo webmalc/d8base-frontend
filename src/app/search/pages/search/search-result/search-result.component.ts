@@ -3,6 +3,7 @@ import { Profile, Search, ServiceList } from '@app/api/models';
 import {
   getProfessionalScheduleUrl,
   getProfessionalServicesUrl,
+  getServiceOrderUrl,
   getUserChatUrl,
 } from '@app/core/functions/navigation.functions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -30,6 +31,10 @@ export class SearchResultComponent {
 
   public get professionalScheduleUrl(): string {
     return getProfessionalScheduleUrl(this.data.professional.id);
+  }
+
+  public get serviceOrderUrl(): string {
+    return getServiceOrderUrl(this.data.services[0].id);
   }
 
   public getServiceList(): ServiceList[] {

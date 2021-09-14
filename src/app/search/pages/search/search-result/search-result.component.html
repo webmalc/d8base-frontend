@@ -13,7 +13,10 @@
       </a>
     </div>
     <div class="bottom-buttons">
-      <ion-button size="medium" color="primary" [routerLink]="professionalScheduleUrl">
+      <ion-button *ngIf="data.services.length === 1" size="medium" color="primary" [routerLink]="serviceOrderUrl">
+        {{ 'search.result.order' | translate }}
+      </ion-button>
+      <ion-button *ngIf="data.services.length > 1" size="medium" color="primary" [routerLink]="professionalScheduleUrl">
         {{ 'search.result.order' | translate }}
       </ion-button>
       <ion-button size="medium" color="primary" fill="outline" [routerLink]="professionalChatUrl">
