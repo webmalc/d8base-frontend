@@ -8,7 +8,7 @@
         <a [routerLink]="professionalProfileUrl">{{ professionalName }}</a>
       </div>
       <div class="subtitle">
-        <span class="capitalize-first-letter">{{ professional.name }}</span>
+        <span class="capitalize-first-letter">{{ (professional.subcategory | subcategoryById$ | async)?.name }}</span>
         <ng-container *ngIf="defaultCityId">
           <span>&nbsp;&diams;&nbsp;</span>
           <span class="city">{{ (defaultCityId | cityById$ | async)?.name }}</span>

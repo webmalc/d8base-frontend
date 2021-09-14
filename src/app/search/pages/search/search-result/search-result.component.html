@@ -7,7 +7,7 @@
     ></app-professional-card>
     <app-service-link *ngFor="let service of getServiceList()" [service]="service"></app-service-link>
     <div *ngIf="hasMoreServices">
-      <a class="more-services cursor-pointer" [routerLink]="professionalServicesUrl">
+      <a class="more-services" [routerLink]="professionalServicesUrl">
         {{ 'search.result.all-services' | translate }}
         {{ getServiceCount() | asServices }}
       </a>
