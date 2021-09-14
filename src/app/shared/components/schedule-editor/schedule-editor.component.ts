@@ -32,9 +32,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
   @Select(CurrentUserSelectors.isMondayFirstDayOfWeek)
   public isMondayFirstDayOfWeek$: Observable<boolean>;
 
-  // TODO remove Input(), use setDisabledState()
-  @Input() public disabled: boolean = false;
-
+  public disabled: boolean = false;
   public timetable: FormArray;
   public formFields = ScheduleEditorFormFields;
 
