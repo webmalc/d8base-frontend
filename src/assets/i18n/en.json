@@ -465,6 +465,13 @@
       "3": "services"
     }
   },
+  "professional-schedule": {
+    "title": "Professional schedule",
+    "schedule": "Schedule",
+    "choose-service": "Choose service",
+    "service-not-selected": "Not selected",
+    "order-action": "Order"
+  },
   "master-profile": {
     "navbar": {
       "chat": "Chat",
@@ -525,14 +532,6 @@
       "certificate-url": "Digital Certificate URL",
       "certificate-id": "Certificate ID",
       "no-data": "Not specified"
-    },
-    "portfolio": {
-      "gallery": "Gallery",
-      "add-photo": "Upload new photo"
-    },
-    "calendar": {
-      "schedule": "Schedule",
-      "title": "Calendar"
     },
     "edit-master": {
       "title": "Main",

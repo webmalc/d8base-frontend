@@ -465,6 +465,13 @@
       "3": "услуг"
     }
   },
+  "professional-schedule": {
+    "title": "Календарь мастера",
+    "schedule": "Расписание",
+    "choose-service": "Выберите услугу для заказа",
+    "service-not-selected": "Не выбрано",
+    "order-action": "Заказать"
+  },
   "master-profile": {
     "navbar": {
       "chat": "Чат",
@@ -525,14 +532,6 @@
       "certificate-url": "Ссылка на сертификат",
       "certificate-id": "ID сертификата",
       "no-data": "Не указано"
-    },
-    "portfolio": {
-      "gallery": "Галерея работ",
-      "add-photo": "Загрузить фотографии"
-    },
-    "calendar": {
-      "schedule": "Расписание",
-      "title": "Календарь"
     },
     "edit-master": {
       "title": "Основное",
