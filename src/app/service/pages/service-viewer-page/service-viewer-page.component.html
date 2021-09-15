@@ -7,7 +7,7 @@
     <ng-container *appIfSpinner="service">
       <app-service-widget [service]="service" [master]="master" [alwaysExpanded]="true"></app-service-widget>
       <div class="ion-text-right">
-        <ion-button size="default" class="ion-align-self-end" [routerLink]="'/order/' + service.id">
+        <ion-button [routerLink]="'/order/' + service.id">
           {{ 'master-profile.services.service-presentation.pick' | translate }}
           <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
         </ion-button>
