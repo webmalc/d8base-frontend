@@ -465,12 +465,18 @@
       "3": "services"
     }
   },
+  "professional-schedule": {
+    "title": "Professional schedule",
+    "schedule": "Schedule",
+    "choose-service": "Choose service",
+    "service-not-selected": "Not selected",
+    "order-action": "Order"
+  },
   "master-profile": {
-    "submenu": {
+    "navbar": {
+      "chat": "Chat",
       "services": "Services",
-      "info": "Info",
-      "calendar": "Calendar",
-      "portfolio": "Portfolio"
+      "schedule": "Schedule"
     },
     "main-info": {
       "rating": "Professional rating",
@@ -488,7 +494,7 @@
         "view": "View as user"
       },
       "service-presentation": {
-        "pick": "Date",
+        "pick": "Order",
         "more-info": "More info"
       },
       "services-tab": {
@@ -526,14 +532,6 @@
       "certificate-url": "Digital Certificate URL",
       "certificate-id": "Certificate ID",
       "no-data": "Not specified"
-    },
-    "portfolio": {
-      "gallery": "Gallery",
-      "add-photo": "Upload new photo"
-    },
-    "calendar": {
-      "schedule": "Schedule",
-      "title": "Calendar"
     },
     "edit-master": {
       "title": "Main",
@@ -621,6 +619,7 @@
   },
   "search": {
     "result": {
+      "order": "Book me",
       "chat": "Chat",
       "all-services": "All"
     },
@@ -722,6 +721,7 @@
       "client-details": "Order on behalf of",
       "summary": "Service order"
     },
+    "choose-another-service": "Pick another one",
     "identification": "Your contacts",
     "registered-user": "This email is registered. Please enter your password",
     "new-user": "Please enter a password. You can use it to track your order status",

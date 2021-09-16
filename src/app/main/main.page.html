@@ -3,9 +3,9 @@
   <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
     <ion-col class="ion-padding-bottom" size-xl="4" size-lg="5" size-md="6" size-sm="10" size-xs="12">
       <div class="ion-padding-vertical">
+        <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
         <form [formGroup]="form" (ngSubmit)="search()">
           <ion-grid class="search-fields-layout">
-            <ion-row class="ion-justify-content-center ion-margin-vertical main-title">Booking made simple</ion-row>
             <ion-row>
               <ion-col>
                 <ion-searchbar
@@ -45,20 +45,20 @@
                 </ion-item>
               </ion-col>
             </ion-row>
-            <ion-row class="ion-justify-content-center ion-margin-vertical">
-              <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-                <ion-button
-                  type="submit"
-                  expand="block"
-                  fill="solid"
-                  size="medium"
-                  [disabled]="!this.controls.query.value"
-                >
-                  {{'main-page.find-btn'|translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row>
           </ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
+              <ion-button
+                type="submit"
+                expand="block"
+                fill="solid"
+                size="medium"
+                [disabled]="!this.controls.query.value"
+              >
+                {{'main-page.find-btn'|translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
         </form>
       </div>
     </ion-col>

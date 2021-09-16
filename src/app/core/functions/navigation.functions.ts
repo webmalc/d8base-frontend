@@ -58,3 +58,7 @@ export function getUserChatUrl(userId: number | string): string {
 export function getServiceUrl(serviceId: number | string): string {
   return serviceId ? `/${NavPath.Service}/${serviceId}` : '';
 }
+
+export function getServiceOrderUrl(serviceId: number | string): string {
+  return serviceId ? `/${NavPath.Order}/${serviceId}` : '';
+}

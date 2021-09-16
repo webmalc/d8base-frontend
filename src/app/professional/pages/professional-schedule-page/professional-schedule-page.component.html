@@ -1,0 +1,58 @@
+<app-header></app-header>
+<ion-content>
+  <app-content-wrapper *ngIf="context$ | async as context">
+    <app-column-header [backButtonUrl]="professionalProfileUrl(context.professional.id)">
+      {{ 'professional-schedule.title' | translate }}
+    </app-column-header>
+    <ng-container *ngIf="context.canEdit; else serviceOrder">
+      <app-collapse-item title="{{ 'professional-schedule.schedule' | translate }}" [collapsed]="false">
+        <app-schedule-editor [schedule]="schedule$ | async" [formControl]="scheduleEditor"></app-schedule-editor>
+        <ion-button
+          type="submit"
+          expand="block"
+          [disabled]="scheduleEditor.invalid"
+          (click)="updateSchedule(context.professional.id)"
+        >
+          {{ 'global.save' | translate }}
+        </ion-button>
+      </app-collapse-item>
+    </ng-container>
+    <ng-template #serviceOrder>
+      <app-professional-card
+        [professional]="context.professional"
+        class="ion-padding-horizontal ion-padding-vertical"
+      ></app-professional-card>
+      <app-section-heading>
+        {{ 'professional-schedule.choose-service' | translate }}
+      </app-section-heading>
+      <ion-item lines="none">
+        <ionic-selectable
+          (onChange)="setService($event)"
+          [items]="services$ | async"
+          [canSearch]="true"
+          [placeholder]="'professional-schedule.service-not-selected' | translate"
+          [closeButtonText]="'global.cancel' | translate"
+          [itemValueField]="'id'"
+          [itemTextField]="'name'"
+        >
+        </ionic-selectable>
+      </ion-item>
+      <div class="ion-text-right">
+        <ion-button [disabled]="!serviceId" [routerLink]="serviceOrderUrl">
+          <ion-label>{{ 'professional-schedule.order-action' | translate }}</ion-label>
+          <ion-icon name="calendar-outline" class="ion-padding-start"></ion-icon>
+        </ion-button>
+      </div>
+    </ng-template>
+    <app-section-heading>
+      {{ 'professional-schedule.title' | translate }}
+    </app-section-heading>
+    <app-calendar-component
+      (dateChanged)="changeDate($event, context.professional.id)"
+      [formControl]="calendarViewer"
+      [enabledPeriods]="enabledPeriods$ | async"
+    >
+    </app-calendar-component>
+  </app-content-wrapper>
+  <app-footer></app-footer>
+</ion-content>

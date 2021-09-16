@@ -465,12 +465,18 @@
       "3": "услуг"
     }
   },
+  "professional-schedule": {
+    "title": "Календарь мастера",
+    "schedule": "Расписание",
+    "choose-service": "Выберите услугу для заказа",
+    "service-not-selected": "Не выбрано",
+    "order-action": "Заказать"
+  },
   "master-profile": {
-    "submenu": {
+    "navbar": {
+      "chat": "Чат",
       "services": "Услуги",
-      "info": "Инфо",
-      "calendar": "Календарь",
-      "portfolio": "Портфолио"
+      "schedule": "Календарь"
     },
     "main-info": {
       "rating": "Рейтинг мастера",
@@ -488,7 +494,7 @@
         "view": "Просмотр"
       },
       "service-presentation": {
-        "pick": "Дата",
+        "pick": "Заказать",
         "more-info": "Подробнее"
       },
       "services-tab": {
@@ -526,14 +532,6 @@
       "certificate-url": "Ссылка на сертификат",
       "certificate-id": "ID сертификата",
       "no-data": "Не указано"
-    },
-    "portfolio": {
-      "gallery": "Галерея работ",
-      "add-photo": "Загрузить фотографии"
-    },
-    "calendar": {
-      "schedule": "Расписание",
-      "title": "Календарь"
     },
     "edit-master": {
       "title": "Основное",
@@ -621,6 +619,7 @@
   },
   "search": {
     "result": {
+      "order": "Забронировать",
       "chat": "Чат",
       "all-services": "Все"
     },
@@ -722,6 +721,7 @@
       "client-details": "Заказ услуги",
       "summary": "Заказ услуги"
     },
+    "choose-another-service": "Выбрать другую",
     "identification": "Ваши данные",
     "registered-user": "Вы зарегистрированный пользователь. Для&nbsp;продолжения введите свой пароль",
     "new-user": "Введите пароль, используя который вы сможете отслеживать статус заказа",

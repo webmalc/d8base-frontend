@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavBranch, NavParams } from '@app/core/constants/navigation.constants';
 import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
-import { MasterProfileCalendarComponent } from '@app/professional/pages/master-profile-calendar/master-profile-calendar.component';
+import { ProfessionalSchedulePageComponent } from '@app/professional/pages/professional-schedule-page/professional-schedule-page.component';
 import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
 import { ProfessionalResolver } from '@app/professional/professional.resolver';
 import { ProfessionalContactEditComponent } from './pages/professional-contact-edit/professional-contact-edit.component';
@@ -49,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: NavBranch.Schedule,
-        component: MasterProfileCalendarComponent,
+        component: ProfessionalSchedulePageComponent,
         pathMatch: 'full',
         resolve: {
           context: ProfessionalResolver,
@@ -165,4 +165,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MasterPageRoutingModule {}
+export class ProfessionalRoutingModule {}

@@ -4,7 +4,7 @@ import { CalendarGeneratorFactoryService } from '@app/professional/services/cale
 import { NgxsModule, State } from '@ngxs/store';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
-import { MasterProfileCalendarComponent } from './master-profile-calendar.component';
+import { ProfessionalSchedulePageComponent } from './professional-schedule-page.component';
 
 @State({
   name: 'MockState',
@@ -14,18 +14,18 @@ import { MasterProfileCalendarComponent } from './master-profile-calendar.compon
 class MockState {}
 
 describe('MasterProfileCalendarComponent', () => {
-  let component: MasterProfileCalendarComponent;
-  let fixture: ComponentFixture<MasterProfileCalendarComponent>;
+  let component: ProfessionalSchedulePageComponent;
+  let fixture: ComponentFixture<ProfessionalSchedulePageComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [MasterProfileCalendarComponent],
+        declarations: [ProfessionalSchedulePageComponent],
         imports: [...RootModules(), ComponentTestingModule, NgxsModule.forRoot([MockState])],
         providers: [CalendarGeneratorFactoryService],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(MasterProfileCalendarComponent);
+      fixture = TestBed.createComponent(ProfessionalSchedulePageComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),
