@@ -21,7 +21,7 @@ export class ColumnHeaderComponent {
 
   constructor(private readonly navController: NavController, @Inject(WINDOW) private readonly window: Window) {}
 
-  public navigateBack() {
+  public navigateBack(): void {
     this.beforeNavigatingBack.emit();
     if (this.canGoBack()) {
       this.navController.back();

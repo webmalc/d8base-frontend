@@ -101,7 +101,7 @@ export class MainPage implements OnInit {
     this.stateManager.updateLocation(location);
   }
 
-  public updateDate(event: CustomEvent) {
+  public updateDate(event: CustomEvent): void {
     const value: string = event.detail.value;
     this.controls.dateFrom.setValue(value);
     this.controls.dateTo.setValue(value);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserContact } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { Action, State, StateContext } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as UserContactActions from './user-contacts.actions';
 
@@ -18,7 +19,7 @@ export class UserContactState {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Action(UserContactActions.LoadAllUserContacts)
-  public loadAllUserContacts({ setState }: StateContext<UserContactStateModel>) {
+  public loadAllUserContacts({ setState }: StateContext<UserContactStateModel>): Observable<any> {
     return this.accountsService.accountsContactsList({}).pipe(
       tap(({ results }) => {
         setState(results);
@@ -30,7 +31,7 @@ export class UserContactState {
   public createUserContact(
     { setState, getState }: StateContext<UserContactStateModel>,
     { contact }: UserContactActions.CreateUserContact,
-  ) {
+  ): Observable<any> {
     return this.accountsService.accountsContactsCreate(contact).pipe(
       tap(newUserContact => {
         const contacts = getState();
@@ -43,7 +44,7 @@ export class UserContactState {
   public updateUserContact(
     { setState, getState }: StateContext<UserContactStateModel>,
     { contact }: UserContactActions.UpdateUserContact,
-  ) {
+  ): Observable<any> {
     return this.accountsService.accountsContactsUpdate({ id: contact.id, data: contact }).pipe(
       tap(() => {
         const contacts = getState();
@@ -62,7 +63,7 @@ export class UserContactState {
   public deleteUserContact(
     { setState, getState }: StateContext<UserContactStateModel>,
     { contactId: contactIdToDelete }: UserContactActions.DeleteUserContact,
-  ) {
+  ): Observable<any> {
     const contacts = getState();
     const idToDelete = contacts.find(({ id }) => id === contactIdToDelete)?.id;
     return this.accountsService.accountsContactsDelete(idToDelete).pipe(

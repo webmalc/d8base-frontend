@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Routes } from '@angular/router';
 import {
   ServiceConditionsStepComponent,
   ServiceDetailsStepComponent,
@@ -8,7 +8,6 @@ import {
 } from './components';
 import { ServiceIds } from './enums/service-ids.enum';
 import { StepModel } from './interfaces/step-model.interface';
-import { AggregatedState } from './interfaces/steps-state.type';
 
 /**
  * SERVICE_STEPS stores a configuration of service creation stepper-wizard.
@@ -36,7 +35,7 @@ export const SERVICE_STEPS: StepModel[] = [
   },
 ];
 
-export const stepsRoutes = (guards: Type<CanActivate>[]) =>
+export const stepsRoutes: (guards: Type<CanActivate>[]) => Routes = guards =>
   SERVICE_STEPS.map(({ component, id }, idx) => ({
     path: `${id}`,
     pathMatch: 'full',

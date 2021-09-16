@@ -31,7 +31,7 @@ export class EducationEditComponent {
     });
   }
 
-  public get item() {
+  public get item(): ProfessionalEducation {
     return this.initialValue;
   }
 

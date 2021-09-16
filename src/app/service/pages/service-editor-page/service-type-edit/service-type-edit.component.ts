@@ -106,7 +106,8 @@ export class ServiceTypeEditComponent extends ServiceEditor {
     location: { location: number; max_distance: number; service: number },
   ): Observable<ServiceLocation> {
     const create$ = this.deps.api.accountsServiceLocationsCreate(location);
-    const update$ = (l: ServiceLocation) => this.deps.api.accountsServiceLocationsUpdate({ id: l.id, data: l });
+    const update$: (l: ServiceLocation) => Observable<ServiceLocation> = l =>
+      this.deps.api.accountsServiceLocationsUpdate({ id: l.id, data: l });
     return this.deps.api.accountsServiceLocationsList({ service: serviceId }).pipe(
       switchMap(locations => {
         const oldLocation = locations.results.find(l => l.location === location.location);

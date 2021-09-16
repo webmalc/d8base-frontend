@@ -154,7 +154,7 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
     this.items = this.items.concat(itemsAddition);
   }
 
-  private disableInfiniteScroll(disable: boolean = true) {
+  private disableInfiniteScroll(disable: boolean = true): void {
     if (disable) {
       this.selectableComponent.disableInfiniteScroll();
     } else {

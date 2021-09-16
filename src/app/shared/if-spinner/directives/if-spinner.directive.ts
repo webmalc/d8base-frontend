@@ -61,7 +61,7 @@ export class IfSpinnerDirective<T = unknown> {
     this.loadedTemplateRef = templateRef;
   }
 
-  private updateView() {
+  private updateView(): void {
     if (this.state) {
       switch (this.state) {
         case ContentState.LOADING: {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserSavedProfessional } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { Action, State, StateContext } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as UserSavedProfessionalActions from './saved-professionals.actions';
 
@@ -18,7 +19,7 @@ export class UserSavedProfessionalState {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Action(UserSavedProfessionalActions.LoadAllUserSavedProfessionals)
-  public loadAllUserSavedProfessionals({ setState }: StateContext<UserSavedProfessionalStateModel>) {
+  public loadAllUserSavedProfessionals({ setState }: StateContext<UserSavedProfessionalStateModel>): Observable<any> {
     return this.accountsService.accountsSavedProfessionalsList({}).pipe(
       tap(({ results }) => {
         setState(results);
@@ -30,7 +31,7 @@ export class UserSavedProfessionalState {
   public createUserSavedProfessional(
     { setState, getState }: StateContext<UserSavedProfessionalStateModel>,
     { professionalId }: UserSavedProfessionalActions.CreateUserSavedProfessional,
-  ) {
+  ): Observable<any> {
     return this.accountsService.accountsSavedProfessionalsCreate({ professional: professionalId }).pipe(
       tap(newUserSavedProfessional => {
         const savedProfessionals = getState();
@@ -43,7 +44,7 @@ export class UserSavedProfessionalState {
   public deleteUserSavedProfessional(
     { setState, getState }: StateContext<UserSavedProfessionalStateModel>,
     { professionalId: professionalIdToDelete }: UserSavedProfessionalActions.DeleteUserSavedProfessional,
-  ) {
+  ): Observable<any> {
     const savedProfessionals = getState();
     const idToDelete = savedProfessionals.find(({ professional }) => professional === professionalIdToDelete)?.id;
     return this.accountsService.accountsSavedProfessionalsDelete(idToDelete).pipe(

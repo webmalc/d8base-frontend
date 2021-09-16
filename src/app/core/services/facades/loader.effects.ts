@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Store } from '@ngxs/store';
 import { ActionContext, ActionStatus } from '@ngxs/store/src/actions-stream';
-import { Observable, OperatorFunction } from 'rxjs';
+import { MonoTypeOperatorFunction, Observable, OperatorFunction } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import * as LoaderActions from '@app/store/loader/loader.actions';
 import { LoaderAction } from '@app/store/loader/types/loader-action.type';
@@ -21,7 +21,9 @@ function ofHideLoaderAction(): OperatorFunction<ActionContext, any> {
   };
 }
 
-function filterLoaderActionsStatus(allowedStatuses: ActionStatus[]) {
+function filterLoaderActionsStatus(
+  allowedStatuses: ActionStatus[],
+): MonoTypeOperatorFunction<ActionContext<LoaderAction>> {
   return filter((ctx: ActionContext<LoaderAction>) => {
     const loaderTypeMatch = ctx.action?.loaderKey;
     const statusMatch = allowedStatuses.includes(ctx.status);

@@ -50,7 +50,7 @@ export class ExperienceEditComponent {
     this.initialValue = value;
   }
 
-  public get item() {
+  public get item(): ProfessionalExperience {
     return this.initialValue;
   }
 

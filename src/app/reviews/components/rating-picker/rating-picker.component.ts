@@ -18,11 +18,9 @@ export class RatingPickerComponent implements ControlValueAccessor {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onChange: (rating: number) => void = () => {};
+  public onChange: (rating: number) => void = () => void 0;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onTouched = () => {};
+  public onTouched: () => void = () => void 0;
 
   public writeValue(rating: number): void {
     this.selectedRating = this.ratings.includes(rating) ? rating : null;

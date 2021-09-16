@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProfessionalContact } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { Action, State, StateContext } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as ProfessionalContactActions from './professional-contacts.actions';
 
@@ -18,7 +19,7 @@ export class ProfessionalContactState {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Action(ProfessionalContactActions.LoadAllProfessionalContacts)
-  public loadAllProfessionalContacts({ setState }: StateContext<ProfessionalContactStateModel>) {
+  public loadAllProfessionalContacts({ setState }: StateContext<ProfessionalContactStateModel>): Observable<any> {
     return this.accountsService.accountsProfessionalContactsList({}).pipe(
       tap(({ results }) => {
         setState(results);
@@ -30,7 +31,7 @@ export class ProfessionalContactState {
   public createProfessionalContact(
     { setState, getState }: StateContext<ProfessionalContactStateModel>,
     { contact }: ProfessionalContactActions.CreateProfessionalContact,
-  ) {
+  ): Observable<any> {
     return this.accountsService.accountsProfessionalContactsCreate(contact).pipe(
       tap(newProfessionalContact => {
         const contacts = getState();
@@ -43,7 +44,7 @@ export class ProfessionalContactState {
   public updateProfessionalContact(
     { setState, getState }: StateContext<ProfessionalContactStateModel>,
     { contact }: ProfessionalContactActions.UpdateProfessionalContact,
-  ) {
+  ): Observable<any> {
     return this.accountsService.accountsProfessionalContactsUpdate({ id: contact.id, data: contact }).pipe(
       tap(() => {
         const contacts = getState();
@@ -62,7 +63,7 @@ export class ProfessionalContactState {
   public deleteProfessionalContact(
     { setState, getState }: StateContext<ProfessionalContactStateModel>,
     { contactId: contactIdToDelete }: ProfessionalContactActions.DeleteProfessionalContact,
-  ) {
+  ): Observable<any> {
     const contacts = getState();
     const idToDelete = contacts.find(({ id }) => id === contactIdToDelete)?.id;
     return this.accountsService.accountsProfessionalContactsDelete(idToDelete).pipe(

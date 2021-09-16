@@ -35,7 +35,7 @@ export class UserLocationState {
   ) {}
 
   @Action(UserLocationActions.LoadAllUserLocations)
-  public loadAllUserLocations({ patchState }: StateContext<UserLocationStateModel>) {
+  public loadAllUserLocations({ patchState }: StateContext<UserLocationStateModel>): Observable<any> {
     return this.accountsService.accountsLocationsList({}).pipe(
       tap(({ results }) => {
         patchState({ savedLocations: results });
@@ -47,7 +47,7 @@ export class UserLocationState {
   public createUserLocation(
     { patchState, getState }: StateContext<UserLocationStateModel>,
     { location }: UserLocationActions.CreateUserLocation,
-  ) {
+  ): Observable<any> {
     return this.accountsService.accountsLocationsCreate(location).pipe(
       tap(newUserLocation => {
         const locations = getState().savedLocations ?? [];
@@ -60,7 +60,7 @@ export class UserLocationState {
   public updateUserLocation(
     { dispatch }: StateContext<UserLocationStateModel>,
     { location }: UserLocationActions.UpdateUserLocation,
-  ) {
+  ): Observable<any> {
     return this.accountsService
       .accountsLocationsUpdate({ id: location.id, data: location })
       .pipe(mergeMap(() => dispatch(new UserLocationActions.LoadAllUserLocations())));
@@ -70,7 +70,7 @@ export class UserLocationState {
   public deleteUserLocation(
     { patchState, getState }: StateContext<UserLocationStateModel>,
     { locationId: locationIdToDelete }: UserLocationActions.DeleteUserLocation,
-  ) {
+  ): Observable<any> {
     const locations = getState().savedLocations ?? [];
     const idToDelete = locations.find(({ id }) => id === locationIdToDelete)?.id;
     return this.accountsService.accountsLocationsDelete(idToDelete).pipe(
@@ -81,9 +81,10 @@ export class UserLocationState {
   }
 
   @Action(UserLocationActions.GuessCurrentLocation)
-  public guessCurrentLocation({ patchState }: StateContext<UserLocationStateModel>) {
+  public guessCurrentLocation({ patchState }: StateContext<UserLocationStateModel>): Observable<any> {
     const getSaved$ = from(this.storage.get(USER_LOCATION_STORAGE_KEY)) as Observable<UserLocationStorageModel>;
-    const save$ = (model: UserLocationStorageModel) => from(this.storage.set(USER_LOCATION_STORAGE_KEY, model));
+    const save$: (model: UserLocationStorageModel) => Observable<any> = model =>
+      from(this.storage.set(USER_LOCATION_STORAGE_KEY, model));
     const guessAndSave$ = this.currentLocationService
       .guessLocation()
       .pipe(

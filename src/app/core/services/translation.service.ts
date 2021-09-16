@@ -18,11 +18,7 @@ export class TranslationService {
     return this.translator.get(key);
   }
 
-  public getCurrentLang(): string {
-    return this.translator.currentLang;
-  }
-
-  private subOnUserSettings() {
+  private subOnUserSettings(): void {
     this.userSettings.userSettings$
       .pipe(map(settings => settings.language))
       .subscribe(language => this.setLang(language));

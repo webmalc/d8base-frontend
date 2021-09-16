@@ -98,7 +98,7 @@ export class InfiniteScrollContainerComponent<T> {
     this.loadMore$.next(infiniteScroll);
   }
 
-  private disableInfiniteScroll(disabled: boolean = true) {
+  private disableInfiniteScroll(disabled: boolean = true): void {
     this.infiniteScroll.disabled = disabled;
   }
 

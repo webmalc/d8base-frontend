@@ -58,7 +58,7 @@ export class ServiceTagsEditorComponent implements ControlValueAccessor {
     }
   }
 
-  public addTag() {
+  public addTag(): void {
     const tagName = normalizeString(this.form.controls.tagName.value);
     if (!tagName || this.tags.length >= MAX_TAGS) {
       return;

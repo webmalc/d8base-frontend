@@ -51,7 +51,7 @@ export class LoginPage {
     await this.router.navigateByUrl('/auth/login');
   }
 
-  private subOnQueryParams() {
+  private subOnQueryParams(): void {
     this.route.queryParams
       .pipe(
         filter(params => params?.hasOwnProperty('logout')),

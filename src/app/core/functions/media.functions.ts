@@ -1,6 +1,6 @@
 import { environment } from '@env/environment';
 
-export function fileToBase64(file: Blob) {
+export function fileToBase64(file: Blob): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);

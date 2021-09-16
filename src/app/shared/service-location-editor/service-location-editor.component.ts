@@ -47,7 +47,7 @@ export class ServiceLocationEditorComponent implements ControlValueAccessor {
     this.update();
   }
 
-  private update() {
+  private update(): void {
     if (!this.onChange) {
       return;
     }

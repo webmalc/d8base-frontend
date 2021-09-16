@@ -51,7 +51,7 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
     this.refreshPhotos$.next();
   }
 
-  public removePhoto(index: number) {
+  public removePhoto(index: number): void {
     this.photos$
       .pipe(
         first(),
@@ -64,7 +64,7 @@ export class ServiceDetailsEditComponent extends ServiceEditor {
     return this.tagsManager.getServiceTags(serviceId);
   }
 
-  public updateTags(tags: ServiceTag[]) {
+  public updateTags(tags: ServiceTag[]): void {
     this.updatedTags = tags;
   }
 
