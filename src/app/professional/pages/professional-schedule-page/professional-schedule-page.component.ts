@@ -13,11 +13,11 @@ import { BehaviorSubject, concat, forkJoin, Observable } from 'rxjs';
 import { filter, first, map, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-master-profile-calendar',
-  templateUrl: './master-profile-calendar.component.html',
-  styleUrls: ['./master-profile-calendar.component.scss'],
+  selector: 'app-professional-schedule-page',
+  templateUrl: './professional-schedule-page.component.html',
+  styleUrls: ['./professional-schedule-page.component.scss'],
 })
-export class MasterProfileCalendarComponent implements OnInit {
+export class ProfessionalSchedulePageComponent implements OnInit {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 

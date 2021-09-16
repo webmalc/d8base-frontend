@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CertificateComponent } from '@app/professional/components/certificate/certificate.component';
 import { EducationComponent } from '@app/professional/components/education/education.component';
 import { ExperienceComponent } from '@app/professional/components/experience/experience.component';
-import { MasterProfileCalendarComponent } from '@app/professional/pages/master-profile-calendar/master-profile-calendar.component';
+import { ProfessionalSchedulePageComponent } from '@app/professional/pages/professional-schedule-page/professional-schedule-page.component';
 // eslint-disable-next-line max-len
 import { MasterProfileServicesComponent } from '@app/professional/pages/service-list-page/master-profile-services/master-profile-services.component';
 import { ServiceListPageComponent } from '@app/professional/pages/service-list-page/service-list-page.component';
@@ -42,7 +42,7 @@ import { ProfessionalResolver } from './professional.resolver';
   declarations: [
     ProfessionalPageComponent,
     MasterProfileServicesComponent,
-    MasterProfileCalendarComponent,
+    ProfessionalSchedulePageComponent,
     ServiceViewerComponent,
     MasterProfileServiceEditComponent,
     ExperienceComponent,
