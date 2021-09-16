@@ -22,7 +22,11 @@ export class LoadingIndicatorService {
         audit(isLoaderShown => (isLoaderShown ? timer(MAX_DELAY_MS) : of(true))),
       )
       .subscribe(async isLoaderShown => {
-        isLoaderShown ? await this.showLoadingIndicator() : await this.hideLoadingIndicator();
+        if (isLoaderShown) {
+          await this.showLoadingIndicator();
+        } else {
+          await this.hideLoadingIndicator();
+        }
       });
   }
 

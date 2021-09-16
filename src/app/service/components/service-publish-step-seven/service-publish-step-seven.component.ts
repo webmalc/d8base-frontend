@@ -274,6 +274,10 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
 
   private setControlDisabled(val: boolean, controlName: string): void {
     const control = this.form.controls[controlName] as FormControl;
-    val ? control.disable() : control.enable();
+    if (val) {
+      control.disable();
+    } else {
+      control.enable();
+    }
   }
 }

@@ -62,9 +62,11 @@ export class ChatPageComponent implements AfterViewInit {
         finalize(() => this.formControl.enable()),
       )
       .subscribe(data => {
-        this.editingMode
-          ? this.chatService.edit(data.id, this.editedMessageId, value)
-          : this.chatService.send(data.id, value);
+        if (this.editingMode) {
+          this.chatService.edit(data.id, this.editedMessageId, value);
+        } else {
+          this.chatService.send(data.id, value);
+        }
         this.resetInput();
       });
   }

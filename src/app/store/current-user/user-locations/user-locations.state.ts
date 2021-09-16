@@ -69,13 +69,13 @@ export class UserLocationState {
   @Action(UserLocationActions.DeleteUserLocation)
   public deleteUserLocation(
     { patchState, getState }: StateContext<UserLocationStateModel>,
-    { locationId: LocationIdToDelete }: UserLocationActions.DeleteUserLocation,
+    { locationId: locationIdToDelete }: UserLocationActions.DeleteUserLocation,
   ) {
-    const Locations = getState().savedLocations ?? [];
-    const idToDelete = Locations.find(({ id }) => id === LocationIdToDelete)?.id;
+    const locations = getState().savedLocations ?? [];
+    const idToDelete = locations.find(({ id }) => id === locationIdToDelete)?.id;
     return this.accountsService.accountsLocationsDelete(idToDelete).pipe(
       tap(() => {
-        patchState({ savedLocations: Locations.filter(({ id }) => id !== idToDelete) });
+        patchState({ savedLocations: locations.filter(({ id }) => id !== idToDelete) });
       }),
     );
   }

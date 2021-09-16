@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { IonicModule, PopoverController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from '../../../testing/mocks';
@@ -19,7 +18,6 @@ describe('LocationPickerComponent', () => {
         imports: [IonicModule.forRoot(), HttpClientTestingModule, TranslateModule.forRoot()],
         providers: [
           { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' } },
-          { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
           { provide: PopoverController, useValue: { create: () => Promise.resolve() } },
           { provide: StorageManagerService, useClass: StorageManagerMock },
         ],

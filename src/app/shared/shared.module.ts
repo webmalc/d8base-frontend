@@ -71,7 +71,6 @@ import { RatingHalfStarComponent } from '@app/shared/components/rating-half-star
 import { RatingComponent } from '@app/shared/components/rating/rating.component';
 import { ServicePublishAgreementComponent } from '@app/shared/components/service-publish-agreement/service-publish-agreement.component';
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
-import { UserLocationMapComponent } from '@app/shared/components/user-location-map/user-location-map.component';
 import { HintDirective } from '@app/shared/directives';
 import {
   CityByIdPipe,
@@ -116,7 +115,6 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     ErrorFlashbagComponent,
     PictureSelectorComponent,
     DebounceDirective,
-    UserLocationMapComponent,
     MediaLinksComponent,
     HeaderComponent,
     FooterComponent,
@@ -217,7 +215,6 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     FooterComponent,
     MainMenuComponent,
     CollapseItemComponent,
-    UserLocationMapComponent,
     InfoRowComponent,
     NumberDirective,
     ServicePublishAgreementComponent,

@@ -14,7 +14,7 @@ const uniqueArray = (arr: number[]): number[] => [...new Set(arr)];
 const getByIdFromArray = <T extends { id?: number }>(arr: T[]): EntityState<T>['byId'] =>
   arr.reduce((acc, curr) => ({ ...acc, [curr.id]: curr }), {});
 
-export const EmptyEntityState: EntityState<UserLanguage> = {
+export const emptyEntityState: EntityState<UserLanguage> = {
   byId: {},
   ids: [],
 };
@@ -24,7 +24,7 @@ export type UserLanguageStateModel = EntityState<UserLanguage>;
 @Injectable()
 @State<UserLanguageStateModel>({
   name: 'UserLanguage',
-  defaults: EmptyEntityState,
+  defaults: emptyEntityState,
 })
 export class UserLanguageState {
   constructor(private readonly accountsService: AccountsService) {}
