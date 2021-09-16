@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: NavPath.Professional,
-    loadChildren: () => import('./professional/professional-page.module').then(m => m.ProfessionalPageModule),
+    loadChildren: () => import('./professional/professional.module').then(m => m.ProfessionalModule),
   },
   {
     path: NavPath.Service,

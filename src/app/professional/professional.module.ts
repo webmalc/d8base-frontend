@@ -22,7 +22,7 @@ import { ProfessionalPageComponent } from './pages/professional-page/professiona
 // eslint-disable-next-line max-len
 import { MasterProfileServiceEditComponent } from './pages/service-list-page/master-profile-services/master-profile-service-edit/master-profile-service-edit.component';
 import { ServiceViewerComponent } from './pages/service-list-page/master-profile-services/service-viewer/service-viewer.component';
-import { MasterPageRoutingModule } from './professional-page-routing.module';
+import { ProfessionalRoutingModule } from './professional-routing.module';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalResolver } from './professional.resolver';
 
@@ -31,7 +31,7 @@ import { ProfessionalResolver } from './professional.resolver';
     CommonModule,
     FormsModule,
     IonicModule,
-    MasterPageRoutingModule,
+    ProfessionalRoutingModule,
     ReactiveFormsModule,
     ReviewsModule,
     SharedModule,
@@ -59,4 +59,4 @@ import { ProfessionalResolver } from './professional.resolver';
     ProfessionalResolver,
   ],
 })
-export class ProfessionalPageModule {}
+export class ProfessionalModule {}
