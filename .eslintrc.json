@@ -71,8 +71,7 @@
             "format": [
               "camelCase",
               "snake_case",
-              "PascalCase"
-              // TODO fix the code and remove
+              "PascalCase" // TODO fix the code and remove
             ],
             "leadingUnderscore": "allow"
           },
@@ -109,8 +108,7 @@
             ]
           }
         ],
-        "@typescript-eslint/no-invalid-this": "off",
-        // TODO consider initializing in constructor
+        "@typescript-eslint/no-invalid-this": "off", // TODO consider initializing in constructor
         "@typescript-eslint/prefer-literal-enum-member": "error",
         "@typescript-eslint/explicit-function-return-type": [
           "error",
@@ -164,8 +162,7 @@
         "no-redeclare": "error",
         "no-template-curly-in-string": "error",
         "no-useless-constructor": "off",
-        "no-shadow": "off",
-        // TODO set to "error"? ts enums issue
+        "no-shadow": "off", // TODO set to "error"? ts enums issue
         "one-var": ["off", "never"],
         "prefer-template": "error",
         "react/jsx-curly-spacing": "off",
