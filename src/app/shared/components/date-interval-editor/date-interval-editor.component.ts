@@ -37,7 +37,7 @@ export class DateIntervalEditorComponent implements ControlValueAccessor {
     this.isOngoing = value?.isOngoing;
   }
 
-  public toggleOngoing(event: CustomEvent) {
+  public toggleOngoing(event: CustomEvent): void {
     this.isOngoing = event.detail.checked;
     if (this.isOngoing) {
       this.endDate = null;
@@ -45,23 +45,23 @@ export class DateIntervalEditorComponent implements ControlValueAccessor {
     this.emitOnChange();
   }
 
-  public setStartDate(event: CustomEvent) {
+  public setStartDate(event: CustomEvent): void {
     this.startDate = event.detail.value;
     this.emitOnChange();
   }
 
-  public setEndDate(event: CustomEvent) {
+  public setEndDate(event: CustomEvent): void {
     this.endDate = event.detail.value;
     this.emitOnChange();
   }
 
-  public setTouched() {
+  public setTouched(): void {
     if (this.onTouched) {
       this.onTouched();
     }
   }
 
-  private emitOnChange() {
+  private emitOnChange(): void {
     if (this.onChange) {
       this.onChange({
         startDate: getLocalDateString(this.startDate),

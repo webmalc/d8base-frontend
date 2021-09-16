@@ -15,7 +15,7 @@ export class CollapseItemComponent {
   @Input() public collapsed: boolean = true;
   public readonly arrowUp = 'arrow-up-circle-outline';
   public readonly arrowDown = 'arrow-down-circle-outline';
-  @Input() public onClickFunc = () => void 0;
+  @Input() public onClickFunc: () => void = () => void 0;
 
   public collapse(): void {
     this.collapsed = !this.collapsed;

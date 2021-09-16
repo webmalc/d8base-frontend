@@ -4,8 +4,6 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { IonicModule } from '@ionic/angular';
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -34,13 +32,7 @@ describe('RegistrationPage', () => {
           IonicSelectableModule,
           IonicStorageModule.forRoot(),
         ],
-        providers: [
-          FormBuilder,
-          RegistrationService,
-          { provide: HttpClient, useValue: { post: () => of(true) } },
-          { provide: Geolocation, useValue: { getCurrentPosition: () => 'test' } },
-          { provide: LocationAccuracy, useValue: { canRequest: () => true, REQUEST_PRIORITY_HIGH_ACCURACY: 'test' } },
-        ],
+        providers: [FormBuilder, RegistrationService, { provide: HttpClient, useValue: { post: () => of(true) } }],
       }).compileComponents();
 
       router = TestBed.inject(Router);

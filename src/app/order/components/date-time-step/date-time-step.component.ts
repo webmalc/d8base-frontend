@@ -81,7 +81,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     );
   }
 
-  private updateServiceProfessional(professional: number) {
+  private updateServiceProfessional(professional: number): void {
     this.professional$.next(professional);
   }
 

@@ -27,7 +27,7 @@ export class ServiceManagerService {
     return this.patchService(service, { is_enabled: false });
   }
 
-  public setAutoConfirm(service: Service, autoConfirm: boolean) {
+  public setAutoConfirm(service: Service, autoConfirm: boolean): Observable<void> {
     return this.patchService(service, { is_auto_order_confirmation: autoConfirm });
   }
 

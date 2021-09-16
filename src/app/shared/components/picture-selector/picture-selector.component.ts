@@ -32,7 +32,7 @@ export class PictureSelectorComponent implements ControlValueAccessor {
 
   constructor(private readonly toastService: ToastService, private readonly popoverController: PopoverController) {}
 
-  public onFileSelected(event: Event) {
+  public onFileSelected(event: Event): void {
     const file: File = (event.target as HTMLInputElement).files[0];
     if (!file) {
       return;
@@ -68,14 +68,14 @@ export class PictureSelectorComponent implements ControlValueAccessor {
     this.clearUri();
   }
 
-  private save(image: File) {
+  private save(image: File): void {
     fileToBase64(image).then(base64 => {
       this.setUri(base64);
     });
   }
 
   private async cropAndSave(image: File): Promise<void> {
-    const callback = (base64: string) => {
+    const callback: (base64: string) => void = base64 => {
       this.setUri(base64);
     };
     const popover = await this.popoverController.create({

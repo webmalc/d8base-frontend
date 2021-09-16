@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Routes } from '@angular/router';
 import { ClientDetailsStepComponent } from '@app/order//components/client-details-step/client-details-step.component';
 import { SummaryStepComponent } from '@app/order//components/summary-step/summary-step.component';
 import { DateTimeStepComponent } from '@app/order/components/date-time-step/date-time-step.component';
@@ -49,7 +49,7 @@ export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ..
 
 export const orderWizardStorageKey = 'orderWizardStorageKey';
 
-export const stepsRoutes = (guards: Type<CanActivate>[]) =>
+export const stepsRoutes: (guards: Type<CanActivate>[]) => Routes = guards =>
   Object.values(ORDER_STEPS.byId).map(({ component, needGuards, id }) => ({
     path: `${id}`,
     pathMatch: 'full',

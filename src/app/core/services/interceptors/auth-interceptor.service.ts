@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private refresh$: Observable<never>;
 
   public intercept(request: HttpRequest<any>, next: HttpHandler, forceRefresh?: boolean): Observable<HttpEvent<any>> {
-    const handleRequestErrors = () =>
+    const handleRequestErrors: () => Observable<HttpEvent<any>> = () =>
       next.handle(request).pipe(
         catchError(error =>
           this.tokens$.pipe(

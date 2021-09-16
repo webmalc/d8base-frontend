@@ -97,7 +97,7 @@ export class ScheduleEditorComponent implements ControlValueAccessor {
     this.schedule = value;
   }
 
-  public setDisabledState(isDisabled: boolean) {
+  public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 

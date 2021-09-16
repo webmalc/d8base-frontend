@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, Store } from '@ngxs/store';
 import { ActionContext, ActionStatus } from '@ngxs/store/src/actions-stream';
-import { Observable, OperatorFunction } from 'rxjs';
+import { MonoTypeOperatorFunction, Observable, OperatorFunction } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import * as LoaderActions from '@app/store/loader/loader.actions';
 import { LoaderAction } from '@app/store/loader/types/loader-action.type';
 
-const ShowLoaderStatuses: ActionStatus[] = [ActionStatus.Dispatched];
-const HideLoaderStatuses: ActionStatus[] = [ActionStatus.Successful, ActionStatus.Canceled, ActionStatus.Errored];
+const showLoaderStatuses: ActionStatus[] = [ActionStatus.Dispatched];
+const hideLoaderStatuses: ActionStatus[] = [ActionStatus.Successful, ActionStatus.Canceled, ActionStatus.Errored];
 
 function ofShowLoaderAction(): OperatorFunction<ActionContext, any> {
   return function (o: Observable<ActionContext>) {
-    return o.pipe(filterLoaderActionsStatus(ShowLoaderStatuses));
+    return o.pipe(filterLoaderActionsStatus(showLoaderStatuses));
   };
 }
 
 function ofHideLoaderAction(): OperatorFunction<ActionContext, any> {
   return function (o: Observable<ActionContext>) {
-    return o.pipe(filterLoaderActionsStatus(HideLoaderStatuses));
+    return o.pipe(filterLoaderActionsStatus(hideLoaderStatuses));
   };
 }
 
-function filterLoaderActionsStatus(allowedStatuses: ActionStatus[]) {
+function filterLoaderActionsStatus(
+  allowedStatuses: ActionStatus[],
+): MonoTypeOperatorFunction<ActionContext<LoaderAction>> {
   return filter((ctx: ActionContext<LoaderAction>) => {
     const loaderTypeMatch = ctx.action?.loaderKey;
     const statusMatch = allowedStatuses.includes(ctx.status);

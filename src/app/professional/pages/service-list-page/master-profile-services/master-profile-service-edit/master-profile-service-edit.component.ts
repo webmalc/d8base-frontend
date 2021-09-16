@@ -13,7 +13,11 @@ export class MasterProfileServiceEditComponent {
   @Output() public deleteService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
 
   public onIsEnabled(isEnabled: boolean): void {
-    isEnabled ? this.enableService.emit(this.service) : this.disableService.emit(this.service);
+    if (isEnabled) {
+      this.enableService.emit(this.service);
+    } else {
+      this.disableService.emit(this.service);
+    }
   }
 
   public delete(): void {

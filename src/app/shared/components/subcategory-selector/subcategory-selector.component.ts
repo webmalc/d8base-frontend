@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, forwardRef, Input, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Category, Subcategory } from '@app/api/models';
-import { LocationService, ProfessionalsService } from '@app/api/services';
+import { ProfessionalsService } from '@app/api/services';
 import { normalizeString } from '@app/core/functions/string.functions';
 import { NgDestroyService } from '@app/core/services';
 import { IonicSelectableComponent } from 'ionic-selectable';
@@ -156,7 +156,7 @@ export class SubcategorySelectorComponent extends ItemSelectorControl<Subcategor
     this.items = this.items.concat(itemsAddition);
   }
 
-  private disableInfiniteScroll(disable: boolean = true) {
+  private disableInfiniteScroll(disable: boolean = true): void {
     // BUG ionic-selectable does not disable infinite scroll by disableInfiniteScroll();
     this.selectableComponent.hasInfiniteScroll = !disable;
     if (disable) {

@@ -72,7 +72,7 @@ export class OutboxComponent implements AfterViewInit {
     }
   }
 
-  public refresh() {
+  public refresh(): void {
     this.refresh$.next();
   }
 }

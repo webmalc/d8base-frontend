@@ -107,14 +107,14 @@ export class ProfessionalPageComponent {
     return !user.gender && !user.birthday && !user.nationality && !user.languages?.length;
   }
 
-  public addPhotos(files: File[]) {
+  public addPhotos(files: File[]): void {
     if (!files?.length) {
       return;
     }
     this.professionalPhotosEditor.addImages(files);
   }
 
-  public removePhoto(index: number) {
+  public removePhoto(index: number): void {
     this.photos$.pipe(first()).subscribe(photos => this.professionalPhotosEditor.removeImage(photos[index].id));
   }
 

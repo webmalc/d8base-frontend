@@ -116,7 +116,7 @@ export class CurrentUserState implements NgxsOnInit {
   public createProfessional(
     { dispatch }: StateContext<CurrentUserStateModel>,
     { master }: CurrentUserActions.CreateProfessional,
-  ) {
+  ): Observable<any> {
     return this.api.accountsProfilePartialUpdate({ account_type: 'professional' }).pipe(
       switchMap(() => this.api.accountsProfessionalsCreate(master)),
       switchMap(() => dispatch(new CurrentUserActions.LoadProfile())),
@@ -124,7 +124,7 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.LoadProfile)
-  public loadProfile({ patchState, dispatch }: StateContext<CurrentUserStateModel>) {
+  public loadProfile({ patchState, dispatch }: StateContext<CurrentUserStateModel>): Observable<any> {
     return this.api.accountsProfileList().pipe(
       tap(profile => {
         patchState({ profile: profile as Profile }); // TODO fix swagger
@@ -143,14 +143,17 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.LoadProfessionals)
-  public loadProfessionals({ patchState }: StateContext<CurrentUserStateModel>) {
+  public loadProfessionals({ patchState }: StateContext<CurrentUserStateModel>): Observable<any> {
     return this.api
       .accountsProfessionalsList({})
       .pipe(tap(response => patchState({ professionals: response.results })));
   }
 
   @Action(CurrentUserActions.Register)
-  public register({ dispatch }: StateContext<CurrentUserStateModel>, { user, userData }: CurrentUserActions.Register) {
+  public register(
+    { dispatch }: StateContext<CurrentUserStateModel>,
+    { user, userData }: CurrentUserActions.Register,
+  ): Observable<any> {
     return this.api.accountsRegisterCreate(user).pipe(
       // TODO fix swagger; returned user contains the "token" field
       mergeMap((user: any) => dispatch(new CurrentUserActions.AuthenticateWithToken(user.token))),
@@ -161,7 +164,7 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.LoadSettings)
-  public loadSettings({ patchState, dispatch }: StateContext<CurrentUserStateModel>) {
+  public loadSettings({ patchState, dispatch }: StateContext<CurrentUserStateModel>): Observable<any> {
     return this.api.accountsSettingsList({}).pipe(
       tap(response => {
         const settings = response.results[0];
@@ -176,7 +179,7 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.RestoreSettingsLocal)
-  public restoreSettings({ patchState }: StateContext<CurrentUserStateModel>) {
+  public restoreSettings({ patchState }: StateContext<CurrentUserStateModel>): Observable<any> {
     return from(this.storage.get(USER_SETTINGS_STORAGE_KEY)).pipe(
       tap(settings => {
         if (settings) {
@@ -192,7 +195,8 @@ export class CurrentUserState implements NgxsOnInit {
   public changeUserSettings(
     { getState, patchState, dispatch }: StateContext<CurrentUserStateModel>,
     { changes }: CurrentUserActions.ChangeUserSettings,
-  ) {
+  ): void {
+    // TODO actions should return observable
     const state = getState();
     const isAuthentificated = isAuthenticated(state);
     const { settings } = state;
@@ -214,7 +218,8 @@ export class CurrentUserState implements NgxsOnInit {
   public saveUserSettingsLanguage(
     { getState, dispatch, patchState }: StateContext<CurrentUserStateModel>,
     { newLanguage }: CurrentUserActions.ChangeUserSettingsLanguage,
-  ) {
+  ): void {
+    // TODO actions should return observable
     const state = getState();
     const isAuthentificated = isAuthenticated(state);
     const { settings } = state;
@@ -235,7 +240,10 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.SaveSettings)
-  public saveUserSettings({}: StateContext<CurrentUserStateModel>, { newSettings }: CurrentUserActions.SaveSettings) {
+  public saveUserSettings(
+    {}: StateContext<CurrentUserStateModel>,
+    { newSettings }: CurrentUserActions.SaveSettings,
+  ): Observable<any> {
     const id = newSettings.id;
     return id
       ? this.api.accountsSettingsUpdate({ id, data: newSettings })
@@ -246,7 +254,7 @@ export class CurrentUserState implements NgxsOnInit {
   public storeUserSettings(
     {}: StateContext<CurrentUserStateModel>,
     { newSettings }: CurrentUserActions.StoreSettingsLocal,
-  ) {
+  ): Observable<any> {
     return from(this.storage.set(USER_SETTINGS_STORAGE_KEY, newSettings));
   }
 
@@ -254,7 +262,7 @@ export class CurrentUserState implements NgxsOnInit {
   public updateProfile(
     { patchState, dispatch, getState }: StateContext<CurrentUserStateModel>,
     { changes }: CurrentUserActions.UpdateProfile,
-  ) {
+  ): Observable<any> {
     const { profile } = getState();
     const existingEmail = profile.email;
     const newEmail = changes.email;
@@ -275,7 +283,7 @@ export class CurrentUserState implements NgxsOnInit {
   public updateAvatar(
     { patchState }: StateContext<CurrentUserStateModel>,
     { avatar }: CurrentUserActions.UpdateAvatar,
-  ) {
+  ): Observable<any> {
     return this.api.accountsProfilePartialUpdate({ avatar }).pipe(
       tap(profile => {
         patchState({ profile });
@@ -284,12 +292,15 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.RegisterNewEmail)
-  public registerNewEmail({}: StateContext<CurrentUserStateModel>, { newEmail }: CurrentUserActions.RegisterNewEmail) {
+  public registerNewEmail(
+    {}: StateContext<CurrentUserStateModel>,
+    { newEmail }: CurrentUserActions.RegisterNewEmail,
+  ): Observable<any> {
     return this.api.accountsRegisterEmailCreate({ email: newEmail });
   }
 
   @Action(CurrentUserActions.ResendEmailVerification)
-  public resendEmailVerification() {
+  public resendEmailVerification(): Observable<any> {
     return this.api.accountsResendVerifyRegistrationCreate();
   }
 
@@ -297,7 +308,7 @@ export class CurrentUserState implements NgxsOnInit {
   public verifyEmail(
     { patchState, getState }: StateContext<CurrentUserStateModel>,
     { verifyEmail }: CurrentUserActions.VerifyEmailAction,
-  ) {
+  ): Observable<any> {
     const { profile } = getState();
     const { email, user_id } = verifyEmail;
 
@@ -319,7 +330,7 @@ export class CurrentUserState implements NgxsOnInit {
   }
 
   @Action(CurrentUserActions.RefreshTokens)
-  public refreshTokens({ getState, patchState }: StateContext<CurrentUserStateModel>) {
+  public refreshTokens({ getState, patchState }: StateContext<CurrentUserStateModel>): Observable<any> {
     const tokens = getState().tokens;
     const refreshData: RefreshDataInterface = {
       refresh_token: tokens.refresh_token,

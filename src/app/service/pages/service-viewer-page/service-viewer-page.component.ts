@@ -43,7 +43,7 @@ export class ServiceViewerPageComponent {
       });
   }
 
-  public getProfessionalServicesUrl(professionalId: number) {
+  public getProfessionalServicesUrl(professionalId: number): string {
     return getProfessionalServicesUrl(professionalId);
   }
 }
