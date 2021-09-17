@@ -14,6 +14,7 @@ const ITEM_HEIGHT = 47;
 @Component({
   selector: 'app-city-selector',
   templateUrl: './city-selector.component.html',
+  styleUrls: ['./city-selector.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

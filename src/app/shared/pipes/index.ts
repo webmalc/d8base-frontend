@@ -11,3 +11,5 @@ export * from './as-years.pipe';
 export * from './as-string.pipe';
 export * from './as-services.pipe';
 export * from './default-if-empty.pipe';
+export * from './region-by-id.pipe';
+export * from './subregion-by-id.pipe';

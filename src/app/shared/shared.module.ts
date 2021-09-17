@@ -86,6 +86,8 @@ import {
   AsStringPipe,
   AsServicesPipe,
   DefaultIfEmptyPipe,
+  RegionByIdPipe,
+  SubregionByIdPipe,
 } from '@app/shared/pipes';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
@@ -203,6 +205,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     ServiceTagsViewerComponent,
     ServiceTagsEditorComponent,
     PlaceholderComponent,
+    RegionByIdPipe,
+    SubregionByIdPipe,
   ],
   exports: [
     IfSpinnerModule,
@@ -291,6 +295,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     ServiceTagsViewerComponent,
     ServiceTagsEditorComponent,
     PlaceholderComponent,
+    RegionByIdPipe,
+    SubregionByIdPipe,
   ],
   imports: [
     CommonModule,
