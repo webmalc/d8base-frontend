@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchService } from '@app/api/services';
 import { fromArray, toArray } from '@app/core/functions/string.functions';
-import { SearchFilter } from '@app/search/interfaces/search-filter.interface';
+
+export interface SearchFilter {
+  name?: keyof SearchService.SearchListParams;
+  value?: any;
+}
 
 @Component({
   selector: 'app-applied-filters',
