@@ -386,11 +386,3 @@ ion-content::part(scroll)::-webkit-scrollbar {
 ion-content::part(scroll) {
   scrollbar-width: thin;
 }
-
-// ion-selectable style tweaks
-.ionic-selectable-value {
-  flex: unset !important;
-}
-.ionic-selectable-inner {
-  justify-content: flex-start !important;
-}
