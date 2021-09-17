@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FiltersPage } from '@app/search/pages/filters/filters.page';
+import { FiltersPageComponent } from '@app/search/pages/filters-page/filters-page.component';
 import { SearchPage } from './pages/search/search-page.component';
 import { SearchPageGuard } from './search-page.guard';
 
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'filters',
-    component: FiltersPage,
+    component: FiltersPageComponent,
   },
 ];
 

@@ -4,10 +4,10 @@ import { ColumnHeaderComponent } from '@app/shared/components';
 
 @Component({
   selector: 'app-filters',
-  templateUrl: './filters.page.html',
-  styleUrls: ['./filters.page.scss'],
+  templateUrl: './filters-page.component.html',
+  styleUrls: ['./filters-page.component.scss'],
 })
-export class FiltersPage {
+export class FiltersPageComponent {
   @ViewChild(ColumnHeaderComponent)
   public readonly header: ColumnHeaderComponent;
 

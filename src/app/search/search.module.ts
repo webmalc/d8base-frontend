@@ -16,7 +16,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { AdvancedFiltersComponent } from './components/advanced-filters/advanced-filters.component';
-import { FiltersPage } from './pages/filters/filters.page';
+import { FiltersPageComponent } from './pages/filters-page/filters-page.component';
 import { AppliedFiltersComponent } from './pages/search/applied-filters/applied-filters.component';
 import { LanguageChipsComponent } from './pages/search/applied-filters/language-chips/language-chips.component';
 import { SearchPage } from './pages/search/search-page.component';
@@ -39,7 +39,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
   ],
   declarations: [
     SearchPage,
-    FiltersPage,
+    FiltersPageComponent,
     BasicFiltersComponent,
     AdvancedFiltersComponent,
     SearchResultComponent,
