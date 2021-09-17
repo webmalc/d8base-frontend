@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CityPickerPopoverComponent } from '@app/auth/components/city-picker-popover/city-picker-popover.component';
 import { RegistrationFormComponent } from '@app/auth/components/registration-form/registration-form.component';
 import { RegistrationService } from '@app/auth/services/registration.service';
 import { SharedModule } from '@app/shared/shared.module';
@@ -22,7 +21,7 @@ import { RegistrationPage } from './registration.page';
     TranslateModule,
     IonicSelectableModule,
   ],
-  declarations: [RegistrationPage, RegistrationFormComponent, CityPickerPopoverComponent],
+  declarations: [RegistrationPage, RegistrationFormComponent],
   providers: [RegistrationService],
 })
 export class RegistrationPageModule {}
