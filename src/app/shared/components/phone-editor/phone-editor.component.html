@@ -15,8 +15,9 @@
       itemValueField="id"
     >
       <ng-template ionicSelectableValueTemplate let-value="value">
-        <span class="flag-icon flag-icon-{{ value?.tld }}"></span> {{ plusSignEnforce(value?.phone) }}</ng-template
-      >
+        <span class="flag-icon flag-icon-{{ value?.tld }}"></span>
+        {{ plusSignEnforce(value?.phone) }}
+      </ng-template>
       <ng-template ionicSelectableItemTemplate let-item="item">
         <div><span class="flag-icon flag-icon-{{ item?.tld }}"></span> {{ item?.name }}</div>
       </ng-template>
