@@ -80,11 +80,10 @@ export class CitySelectorComponent extends ItemSelectorControl<City> {
 
               let params: LocationService.LocationCitiesListParams = {
                 country: `${country.id}`,
+                ordering: '-population',
               };
 
-              if (!search) {
-                params = { ...params, ordering: '-population' };
-              } else {
+              if (search) {
                 params = { ...params, byName: normalizeString(search) };
               }
 
