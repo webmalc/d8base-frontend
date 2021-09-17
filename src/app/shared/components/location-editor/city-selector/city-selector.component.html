@@ -20,5 +20,11 @@
     itemTextField="name"
     itemValueField="id"
   >
+    <ng-template ionicSelectableItemTemplate let-item="item">
+      <span>{{ item.name }}</span>
+      <span class="subregion">
+        {{ (item.region | regionById$ | async)?.name }}
+      </span>
+    </ng-template>
   </ionic-selectable>
 </ion-item>
