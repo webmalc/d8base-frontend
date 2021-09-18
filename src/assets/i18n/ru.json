@@ -558,7 +558,7 @@
     "city": "Город",
     "district": "Район",
     "postal-code": "Индекс",
-    "timezone": "Временная зона",
+    "timezone": "Часовой пояс",
     "remove-location": "Удалить",
     "save-location": "Сохранить",
     "make-default": "Сделать адресом по умолчанию"

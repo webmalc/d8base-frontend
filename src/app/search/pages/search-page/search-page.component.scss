@@ -8,11 +8,17 @@
 
 .searchbar-container {
   display: flex;
+  align-items: stretch;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 
   ion-searchbar {
     padding: 0;
+  }
+
+  ion-button {
+    margin: 0;
+    height: auto;
   }
 }
 

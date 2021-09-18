@@ -4,7 +4,7 @@ import { StorageManagerService } from '@app/core/services/storage-manager.servic
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { StorageManagerMock } from '../../../../../testing/mocks';
+import { StorageManagerMock } from 'src/testing/mocks';
 import { BasicFiltersComponent } from './basic-filters.component';
 
 describe('SearchFiltersMainTabComponent', () => {

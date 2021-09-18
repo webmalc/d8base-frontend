@@ -1,21 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { FiltersPage } from './filters.page';
+import { FiltersPageComponent } from './filters-page.component';
 
 describe('FiltersPage', () => {
-  let component: FiltersPage;
-  let fixture: ComponentFixture<FiltersPage>;
+  let component: FiltersPageComponent;
+  let fixture: ComponentFixture<FiltersPageComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        declarations: [FiltersPage],
+        declarations: [FiltersPageComponent],
         imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(FiltersPage);
+      fixture = TestBed.createComponent(FiltersPageComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

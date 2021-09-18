@@ -123,7 +123,7 @@ export class LocationEditorComponent {
         if (timezone) {
           this.timezone.setValue(timezone, { emitEvent: false });
         } else {
-          this.timezone.reset({ emitEvent: false });
+          this.timezone.setValue(null, { emitEvent: false });
         }
       });
   }
