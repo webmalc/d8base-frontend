@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Category, UserLocation } from '@app/api/models';
 import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
-import { NgDestroyService } from '@app/core/services';
+import { NgDestroyService, PlatformService } from '@app/core/services';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterStateConverter } from '@app/core/services/search/search-filter-state-converter.service';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
@@ -53,6 +53,7 @@ export class MainPage implements OnInit {
     public readonly query: SearchQueryService,
     private readonly destroy$: NgDestroyService,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
+    private readonly platform: PlatformService,
   ) {}
 
   public get controls(): SearchFilterFormControls {
@@ -109,5 +110,9 @@ export class MainPage implements OnInit {
 
   public search(): void {
     this.query.searchByFormValue(this.stateManager.form.value);
+  }
+
+  public get isDesktop(): boolean {
+    return this.platform.isDesktop();
   }
 }

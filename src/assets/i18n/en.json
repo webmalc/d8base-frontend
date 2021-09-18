@@ -695,14 +695,13 @@
     }
   },
   "main-page": {
+    "title": "Booking made simple",
     "search-placeholder": "Find service",
-    "date": "Date",
-    "date-from": "Date from",
-    "date-to": "Date to",
-    "any-date": "Any date",
-    "any-time": "Any time",
+    "pick-a-date": "Pick a date",
+    "date-picked": "Date:",
     "include-online": "Include online services",
     "find-btn": "Find",
+    "more-filters": "Flexible search",
     "service-categories": "Service categories",
     "category-education": "Education",
     "category-medicine": "Medicine",
