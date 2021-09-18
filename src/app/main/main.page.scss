@@ -8,7 +8,7 @@
   }
 }
 
-.main-page-search {
+.no-shadow {
   --box-shadow: none;
   padding: 0;
 }
@@ -17,12 +17,7 @@
   color: var(--ion-color-light);
   font-size: 2.25rem;
   font-weight: bold;
-}
-
-.subtitle-bold {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--ion-color-dark);
+  text-align: center;
 }
 
 @media (max-width: 480px) {
@@ -31,7 +26,32 @@
   }
 }
 
+.categories-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ion-color-dark);
+}
+
 .categories-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.additional-links-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  color: var(--ion-color-light);
+  a {
+    color: var(--ion-color-light);
+  }
+  a:visited {
+    color: var(--ion-color-light);
+  }
+}
+
+.margin-right {
+  // has to explicitly set checkbox top/bottom margin to zero
+  margin: 0 16px 0 0;
 }
