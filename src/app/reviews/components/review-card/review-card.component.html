@@ -18,7 +18,7 @@
       <ion-icon *ngIf="star <= review?.rating" name="star" class="star star-rating fs20"></ion-icon>
     </ng-container>
   </ion-item>
-  <div class="description ion-padding-horizontal ion-padding-bottom fs16">{{ review?.description }}</div>
+  <div class="ion-padding-horizontal ion-padding-bottom">{{ review?.description }}</div>
   <ng-container *ngIf="showComment">
     <ng-container *ngIf="isAbleToEditComment$ | async; else notProfessionalComment">
       <ion-item class="comment-label" lines="none">
