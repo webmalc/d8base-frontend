@@ -194,7 +194,7 @@
 }
 
 .d8b-gradient-bgc {
-  background: linear-gradient(0deg, var(--ion-color-secondary) 11.37%, var(--ion-color-primary) 125.68%);
+  background: linear-gradient(-90deg, var(--ion-color-secondary) 11.37%, var(--ion-color-primary) 125.68%);
 }
 
 .d8b-container {
@@ -288,26 +288,14 @@
   --min-height: 36px;
 }
 
-.border-radius5 {
-  border-radius: 5px;
+.smooth-corners {
+  border-radius: 0.25rem;
+  --border-radius: 0.25rem !important;
 }
 
-.border-radius24 {
-  border-radius: 24px;
-}
-
-.ion-item-tag {
-  --padding-end: 0;
-  --inner-padding-end: 0;
-  --inner-padding-start: 0;
-  --padding-start: 0;
-  padding: 8px 12px;
-  background-color: #eef5ff;
-  --ion-item-background: #eef5ff;
-  border-radius: 16px;
-  margin: 2px 7px;
-  font-size: 12px;
-  line-height: 16px;
+.round-corners {
+  border-radius: 1.5rem;
+  --border-radius: 1.5rem;
 }
 
 .active {

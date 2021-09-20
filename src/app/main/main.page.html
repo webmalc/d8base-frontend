@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content class="background-color-white">
   <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
-    <ion-col class="ion-padding-bottom" size-xl="4" size-lg="5" size-md="6" size-sm="10" size-xs="12">
+    <ion-col class="ion-padding-bottom" size-xl="5" size-lg="6" size-md="7" size-sm="10" size-xs="12">
       <div class="ion-padding-vertical">
         <ion-row class="ion-justify-content-center ion-margin-vertical main-title">
           {{ 'main-page.title' | translate }}
@@ -13,15 +13,15 @@
                 <ion-searchbar
                   [formControl]="controls.query"
                   animated
-                  class="no-shadow"
+                  class="no-shadow smooth-corners"
                   color="light"
                   [placeholder]="'main-page.search-placeholder' | translate"
                 ></ion-searchbar>
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
-                <ion-item lines="none">
+              <ion-col size-xl="4" size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-item lines="none" class="smooth-corners">
                   <ion-label *ngIf="!controls.dateFrom.value"> {{ 'main-page.pick-a-date' | translate }} </ion-label>
                   <ion-label *ngIf="controls.dateFrom.value"> {{ 'main-page.date-picked' | translate }} </ion-label>
                   <ion-input
@@ -34,18 +34,17 @@
                   <ion-icon *ngIf="!isDesktop" slot="end" name="calendar-outline"></ion-icon>
                 </ion-item>
               </ion-col>
-              <ion-col size-lg="6" size-md="6" size-sm="12" size-xl="6" size-xs="12">
+              <ion-col size-xl="4" size-lg="6" size-md="6" size-sm="12" size-xs="12">
                 <app-location-picker
+                  class="smooth-corners"
                   (emitter)="updateLocation($event)"
                   [disabled]="!locationEnabled"
                   [country]="controls.country.value"
                   [city]="controls.city.value"
                 ></app-location-picker>
               </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-item lines="none">
+              <ion-col size-xl="4" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+                <ion-item lines="none" class="smooth-corners">
                   <ion-checkbox
                     slot="start"
                     class="margin-right"
