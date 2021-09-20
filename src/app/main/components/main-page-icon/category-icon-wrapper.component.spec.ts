@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MainPageIconComponent } from './main-page-icon.component';
+import { CategoryIconWrapperComponent } from './category-icon-wrapper.component';
 
 describe('MainPageIconComponent', () => {
-  let component: MainPageIconComponent;
-  let fixture: ComponentFixture<MainPageIconComponent>;
+  let component: CategoryIconWrapperComponent;
+  let fixture: ComponentFixture<CategoryIconWrapperComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [MainPageIconComponent],
+        declarations: [CategoryIconWrapperComponent],
         imports: [IonicModule.forRoot()],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(MainPageIconComponent);
+      fixture = TestBed.createComponent(CategoryIconWrapperComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

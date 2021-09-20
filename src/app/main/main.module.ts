@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryIconComponent } from '@app/main/components/category-icon/category-icon.component';
-import { MainPageIconComponent } from '@app/main/components/main-page-icon/main-page-icon.component';
+import { CategoryIconWrapperComponent } from '@app/main/components/main-page-icon/category-icon-wrapper.component';
 import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { LocationPickerModule } from '@app/shared/location-picker';
 import { SharedModule } from '@app/shared/shared.module';
@@ -38,7 +38,7 @@ import { MainPage } from './main.page';
     ReactiveFormsModule,
     LocationPickerModule,
   ],
-  declarations: [MainPage, CategoryIconComponent, MainPageIconComponent],
+  declarations: [MainPage, CategoryIconComponent, CategoryIconWrapperComponent],
   providers: [DefaultCategoriesFactoryService],
 })
 export class MainPageModule {
