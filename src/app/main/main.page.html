@@ -81,16 +81,12 @@
       <div class="ion-text-center ion-padding-vertical">
         <span class="categories-title"> {{'main-page.service-categories'|translate}} </span>
       </div>
-      <div
-        *appIfSpinner="defaultCategories$ | ifSpinnerErrorState | async as defaultCategories"
-        class="categories-container ion-margin-bottom"
-      >
+      <div *ngIf="defaultCategories$ | async as defaultCategories" class="categories-container">
         <app-category-icon
           *ngFor="let category of defaultCategories"
           [icon]="category.code"
           [text]="category.name"
           (click)="searchByCategory(category)"
-          size="2x"
         ></app-category-icon>
       </div>
     </ion-col>
