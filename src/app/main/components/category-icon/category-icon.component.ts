@@ -6,7 +6,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./category-icon.component.scss'],
 })
 export class CategoryIconComponent {
-  @Input() public size: string = '1x';
   @Input() public icon: string;
   @Input() public text: string;
+
+  public get src(): string {
+    return `assets/images/category/${this.icon || 'anything'}.svg`;
+  }
 }

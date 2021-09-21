@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+.inherit-parent-properties {
+  border-radius: inherit;
+}

@@ -12,24 +12,7 @@ import CurrentUserSelectors from '@app/store/current-user/current-user.selectors
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
-
-const faIconsCategoriesCodesMap = {
-  tutors: 'graduation-cap',
-  healthcare: 'stethoscope',
-  beauty: 'spa',
-  dating: 'venus-mars',
-  skilled: 'paint-roller',
-  home: 'home',
-  photo: 'camera',
-  professionals: 'user-tie',
-  other: 'briefcase',
-} as const;
-
-const defaultCode = 'tools' as const;
-
-const convertCategoryCodeToFaIconCode = (categoryCode: string): string =>
-  faIconsCategoriesCodesMap[categoryCode] ?? defaultCode;
+import { distinctUntilChanged, filter, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -91,9 +74,6 @@ export class MainPage implements OnInit {
       filter(language => Boolean(language)),
       distinctUntilChanged(),
       switchMap(() => this.defaultCategory.getList()),
-      map(categories =>
-        categories.map(category => ({ ...category, code: convertCategoryCodeToFaIconCode(category.code) })),
-      ),
       shareReplay(1),
     );
   }
