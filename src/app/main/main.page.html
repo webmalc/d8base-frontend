@@ -1,89 +1,75 @@
 <app-header></app-header>
-<ion-content class="background-color-white">
-  <ion-row class="d8b-gradient-bgc ion-justify-content-center ion-align-items-center">
-    <ion-col class="ion-padding-bottom" size-xl="5" size-lg="6" size-md="7" size-sm="10" size-xs="12">
-      <div class="ion-padding-vertical">
-        <ion-row class="ion-justify-content-center ion-margin-vertical main-title">
-          {{ 'main-page.title' | translate }}
-        </ion-row>
-        <form [formGroup]="form" (ngSubmit)="search()">
-          <ion-grid class="search-fields-layout">
-            <ion-row>
-              <ion-col>
-                <ion-searchbar
-                  [formControl]="controls.query"
-                  animated
-                  class="no-shadow smooth-corners"
-                  color="light"
-                  [placeholder]="'main-page.search-placeholder' | translate"
-                ></ion-searchbar>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size-xl="4" size-lg="6" size-md="6" size-sm="12" size-xs="12">
-                <ion-item lines="none" class="smooth-corners">
-                  <ion-label *ngIf="!controls.dateFrom.value"> {{ 'main-page.pick-a-date' | translate }} </ion-label>
-                  <ion-label *ngIf="controls.dateFrom.value"> {{ 'main-page.date-picked' | translate }} </ion-label>
-                  <ion-input
-                    type="date"
-                    [placeholder]="'Any date'"
-                    [min]="stateManager.minDate"
-                    [max]="stateManager.maxDate"
-                    (ionChange)="updateDate($event)"
-                  ></ion-input>
-                  <ion-icon *ngIf="!isDesktop" slot="end" name="calendar-outline"></ion-icon>
-                </ion-item>
-              </ion-col>
-              <ion-col size-xl="4" size-lg="6" size-md="6" size-sm="12" size-xs="12">
-                <app-location-picker
-                  class="smooth-corners"
-                  (emitter)="updateLocation($event)"
-                  [disabled]="!locationEnabled"
-                  [country]="controls.country.value"
-                  [city]="controls.city.value"
-                ></app-location-picker>
-              </ion-col>
-              <ion-col size-xl="4" size-lg="12" size-md="12" size-sm="12" size-xs="12">
-                <ion-item lines="none" class="smooth-corners">
-                  <ion-checkbox
-                    slot="start"
-                    class="margin-right"
-                    [formControl]="controls.isOnlineService"
-                  ></ion-checkbox>
-                  <ion-label> {{ 'main-page.include-online' | translate }} </ion-label>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
-              <ion-button
-                type="submit"
-                expand="block"
-                fill="solid"
-                size="medium"
-                [disabled]="!this.controls.query.value"
-              >
-                {{'main-page.find-btn'|translate}}
-              </ion-button>
+<ion-content>
+  <ion-row class="centering-container centering-container_gradient-background">
+    <ion-col class="centering-container__column" size-xl="5" size-lg="6" size-md="7" size-sm="10" size-xs="12">
+      <h1 class="title">{{ 'main-page.title' | translate }}</h1>
+      <form [formGroup]="form" (ngSubmit)="search()">
+        <ion-grid class="search-form">
+          <ion-row>
+            <ion-col>
+              <ion-searchbar
+                class="search-form_search-bar smooth-corners"
+                color="light"
+                [placeholder]="'main-page.search-placeholder' | translate"
+                [formControl]="controls.query"
+              ></ion-searchbar>
             </ion-col>
           </ion-row>
-          <div class="additional-links-bar">
-            <a routerLink="/search"> {{ 'main-page.more-filters' | translate }} </a>
-            <ion-icon name="settings-outline"></ion-icon>
-          </div>
-        </form>
-      </div>
+          <ion-row>
+            <ion-col size-xl="4" size-lg="6" size-md="6" size-sm="12" size-xs="12">
+              <ion-item lines="none" class="smooth-corners">
+                <ion-label *ngIf="!controls.dateFrom.value"> {{ 'main-page.pick-a-date' | translate }} </ion-label>
+                <ion-label *ngIf="controls.dateFrom.value"> {{ 'main-page.date-picked' | translate }} </ion-label>
+                <ion-input
+                  type="date"
+                  [placeholder]="'Any date'"
+                  [min]="stateManager.minDate"
+                  [max]="stateManager.maxDate"
+                  (ionChange)="updateDate($event)"
+                ></ion-input>
+                <ion-icon *ngIf="!isDesktop" slot="end" name="calendar-outline"></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col size-xl="4" size-lg="6" size-md="6" size-sm="12" size-xs="12">
+              <app-location-picker
+                class="smooth-corners"
+                (emitter)="updateLocation($event)"
+                [disabled]="!locationEnabled"
+                [country]="controls.country.value"
+                [city]="controls.city.value"
+              ></app-location-picker>
+            </ion-col>
+            <ion-col size-xl="4" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+              <ion-item lines="none" class="smooth-corners">
+                <ion-checkbox slot="start" class="margin-right" [formControl]="controls.isOnlineService"></ion-checkbox>
+                <ion-label> {{ 'main-page.include-online' | translate }} </ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-row class="search-form_submit-button">
+          <ion-col size-lg="4" size-md="5" size-sm="8" size-xl="3" size-xs="10">
+            <ion-button type="submit" expand="block" fill="solid" size="medium" [disabled]="!this.controls.query.value">
+              {{ 'main-page.find-btn'|translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <div class="additional-links-bar">
+          <a routerLink="/search">{{ 'main-page.more-filters' | translate }}</a>
+          <ion-icon name="settings-outline"></ion-icon>
+        </div>
+      </form>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-center ion-align-items-center">
-    <ion-col class="ion-padding-bottom" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
-      <div class="ion-text-center ion-padding-vertical">
-        <span class="categories-title"> {{'main-page.service-categories'|translate}} </span>
+  <ion-row class="centering-container">
+    <ion-col class="centering-container__column" size-lg="7" size-md="8" size-sm="10" size-xl="5" size-xs="12">
+      <div class="categories__title">
+        <span>{{ 'main-page.service-categories'|translate }}</span>
       </div>
-      <div *ngIf="defaultCategories$ | async as defaultCategories" class="categories-container">
+      <div *ngIf="defaultCategories$ | async as defaultCategories" class="categories">
         <app-category-icon
           *ngFor="let category of defaultCategories"
+          class="categories__item"
           [icon]="category.code"
           [text]="category.name"
           (click)="searchByCategory(category)"
