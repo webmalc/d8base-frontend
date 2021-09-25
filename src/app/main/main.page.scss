@@ -41,6 +41,7 @@
 }
 
 .additional-links-bar {
+  padding-top: 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,9 +57,14 @@
 
 .categories {
   display: grid;
+  gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
   @media (max-width: 768px) {
+    gap: 0;
     grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   &__title {
