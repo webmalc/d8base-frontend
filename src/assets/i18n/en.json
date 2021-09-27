@@ -845,12 +845,6 @@
   "client-errors": {
     "file-is-too-big": "File is too big"
   },
-  "agreement": {
-    "part-1": "By pressing the '{{ publish }}' button, you confirm you've accepted",
-    "eula": "the EULA",
-    "part-2": ", have read and and accepted",
-    "rules": "the rules"
-  },
   "city-confirmation": {
     "title": "Are you in {{city}}?",
     "choose": "No, let me choose"
@@ -865,5 +859,20 @@
     "reasons-other": "Other",
     "note-title": "Comment",
     "confirm": "Cancel the order"
+  },
+  "promo": {
+    "block-1-title": "Look for top-notch professionals",
+    "block-1-text": "and book services online ",
+    "block-1-button": "Find service provider",
+    "block-2-title": "Three easy steps",
+    "step-1-text": "Разместите объявление",
+    "step-1-note": "это совершенно бесплатно",
+    "step-2-text": "Опубликуйте расписание",
+    "step-2-note": "по любому количеству услуг",
+    "step-3-text": "Принимайте заказы онлайн",
+    "step-3-note": "от тысячи клиентов на нашем сайте",
+    "block-3-title": "Become a service provider",
+    "block-3-text": "и находите новых клиентов по всему миру",
+    "block-3-button": "Sign up"
   }
 }
