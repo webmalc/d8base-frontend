@@ -211,3 +211,8 @@ ion-content::part(scroll)::-webkit-scrollbar {
 ion-content::part(scroll) {
   scrollbar-width: thin;
 }
+
+// Don't use the all-caps Material buttons
+ion-button {
+  text-transform: unset !important;
+}
