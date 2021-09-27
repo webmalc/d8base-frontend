@@ -44,7 +44,9 @@
     "cancel": "Cancel",
     "not-specified": "Not specified",
     "page-not-found": "Page not found",
-    "clear": "Clear"
+    "clear": "Clear",
+    "ru": "RUS",
+    "en": "ENG"
   },
   "registration-verification": {
     "confirmation": "Registration confirmation",

@@ -35,7 +35,12 @@
       <ion-button *ngIf="!context.isAuthenticated" routerLink="/auth/login">
         {{ 'layout.log-in' | translate }}
       </ion-button>
-      <ion-button *ngIf="!context.isAuthenticated && isDesktop()" routerLink="/auth/registration">
+      <ion-button
+        *ngIf="!context.isAuthenticated && isDesktop()"
+        routerLink="/auth/registration"
+        fill="solid"
+        color="primary"
+      >
         {{ 'layout.sign-up' | translate }}
       </ion-button>
     </ion-buttons>
@@ -43,10 +48,8 @@
     <ion-buttons slot="end">
       <ion-menu-toggle menu="flag-menu">
         <ion-button>
-          <app-country-flag
-            *ngIf="currentLanguage$ | async as currentLanguage"
-            [lang]="currentLanguage"
-          ></app-country-flag>
+          <ion-icon name="globe-outline"></ion-icon>
+          <ion-label class="ion-padding-horizontal">{{ 'global.' + (currentLanguage$ | async) | translate }}</ion-label>
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>

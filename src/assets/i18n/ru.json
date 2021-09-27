@@ -44,7 +44,9 @@
     "cancel": "Отмена",
     "not-specified": "Не указано",
     "page-not-found": "Страница не найдена",
-    "clear": "Очистить"
+    "clear": "Очистить",
+    "ru": "RUS",
+    "en": "ENG"
   },
   "registration-verification": {
     "confirmation": "Подтверждение регистрации",
@@ -104,8 +106,8 @@
     "sent-orders": "Отправленные заказы"
   },
   "layout": {
-    "log-in": "Войти",
-    "sign-up": "Зарегистрироваться",
+    "log-in": "Вход",
+    "sign-up": "Регистрация",
     "become-professional": "Стать мастером",
     "my-orders": "Мои заказы",
     "dark-theme": "Темная тема"
