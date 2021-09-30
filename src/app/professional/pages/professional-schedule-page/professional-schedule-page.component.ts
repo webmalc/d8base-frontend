@@ -1,43 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ProfessionalCalendar, ProfessionalSchedule, ServiceList } from '@app/api/models';
+import { ProfessionalSchedule, ServiceList } from '@app/api/models';
 import { AccountsService, ServicesService } from '@app/api/services';
-import { getOffsetDate } from '@app/core/functions/datetime.functions';
 import { getProfessionalProfileUrl, getServiceOrderUrl } from '@app/core/functions/navigation.functions';
 import { AbstractSchedule } from '@app/core/models/abstract-schedule';
 import { CalendarGeneratorFactoryService } from '@app/professional/services/calendar-generator-factory.service';
 import ProfessionalPageStateModel from '@app/store/professional-page/professional-page-state.model';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Select } from '@ngxs/store';
-import { BehaviorSubject, concat, forkJoin, Observable } from 'rxjs';
-import { filter, first, map, switchMap } from 'rxjs/operators';
+import { concat, forkJoin, Observable } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-professional-schedule-page',
   templateUrl: './professional-schedule-page.component.html',
   styleUrls: ['./professional-schedule-page.component.scss'],
 })
-export class ProfessionalSchedulePageComponent implements OnInit {
+export class ProfessionalSchedulePageComponent {
   @Select(ProfessionalPageSelectors.context)
   public context$: Observable<ProfessionalPageStateModel>;
 
   public services$: Observable<ServiceList[]>;
-  public enabledPeriods$: Observable<ProfessionalCalendar[]>;
   public schedule$: Observable<ProfessionalSchedule[]>;
   public serviceId: number;
 
   public readonly scheduleEditor = new FormControl();
-  public readonly calendarViewer = new FormControl({ value: null, disabled: true });
-
-  private readonly periods: BehaviorSubject<ProfessionalCalendar[]> = new BehaviorSubject<ProfessionalCalendar[]>(null);
-  private selectedDate: Date;
 
   constructor(
     private readonly calendarGeneratorFactory: CalendarGeneratorFactoryService,
     private readonly api: AccountsService,
     private readonly servicesApi: ServicesService,
   ) {
-    this.enabledPeriods$ = this.periods.asObservable();
     this.schedule$ = api.accountsProfessionalScheduleList({}).pipe(map(response => response.results));
     this.services$ = this.context$.pipe(
       filter(x => Boolean(x)),
@@ -52,17 +45,6 @@ export class ProfessionalSchedulePageComponent implements OnInit {
 
   public professionalProfileUrl(professionalId: number): string {
     return getProfessionalProfileUrl(professionalId);
-  }
-
-  public ngOnInit(): void {
-    this.context$
-      .pipe(first(context => !!context?.professional))
-      .subscribe(context => this.updateEnabledPeriods(new Date(), context.professional.id));
-  }
-
-  public changeDate(date: Date, masterId: number): void {
-    this.selectedDate = date;
-    this.updateEnabledPeriods(date, masterId);
   }
 
   public updateSchedule(masterId: number): void {
@@ -81,21 +63,10 @@ export class ProfessionalSchedulePageComponent implements OnInit {
       })),
     );
 
-    concat(deleteOld$, createNew$).subscribe({
-      next: () => null,
-      complete: async () => {
-        this.updateEnabledPeriods(this.selectedDate ?? new Date(), masterId);
-      },
-    });
+    concat(deleteOld$, createNew$).subscribe();
   }
 
   public setService(data: { value: ServiceList }): void {
     this.serviceId = data.value.id;
-  }
-
-  private updateEnabledPeriods(startDate: Date, masterId): void {
-    this.calendarGeneratorFactory
-      .getEnabledPeriods(startDate, getOffsetDate(startDate, 1), masterId)
-      .subscribe(list => this.periods.next(list));
   }
 }
