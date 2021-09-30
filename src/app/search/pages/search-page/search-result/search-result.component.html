@@ -5,9 +5,11 @@
       [professional]="data.professional"
       class="ion-margin-bottom"
     ></app-professional-card>
+    <div class="top-separator"></div>
     <app-service-link *ngFor="let service of getServiceList()" [service]="service"></app-service-link>
-    <div *ngIf="hasMoreServices">
-      <a class="more-services" [routerLink]="professionalServicesUrl">
+    <div class="top-separator"></div>
+    <div *ngIf="hasMoreServices" class="more-services">
+      <a [routerLink]="professionalServicesUrl">
         {{ 'search.result.all-services' | translate }}
         {{ getServiceCount() | asServices }}
       </a>

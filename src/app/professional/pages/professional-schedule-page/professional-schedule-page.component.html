@@ -44,15 +44,6 @@
         </ion-button>
       </div>
     </ng-template>
-    <app-section-heading>
-      {{ 'professional-schedule.title' | translate }}
-    </app-section-heading>
-    <app-calendar-component
-      (dateChanged)="changeDate($event, context.professional.id)"
-      [formControl]="calendarViewer"
-      [enabledPeriods]="enabledPeriods$ | async"
-    >
-    </app-calendar-component>
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>
