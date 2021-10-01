@@ -188,7 +188,8 @@
             "selector": "CallExpression[callee.name='fit']",
             "message": "fit is forbidden"
           }
-        ]
+        ],
+        "object-shorthand": "off"
       }
     },
     {
