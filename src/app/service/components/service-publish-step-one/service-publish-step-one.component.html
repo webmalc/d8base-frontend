@@ -22,45 +22,17 @@
               {{ 'service-publish.step-one.category-title' | translate }}
             </div>
           </ion-item>
-          <ion-item class="ion-item-bordered">
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-one.category-subtitle' | translate }}
-            </ion-label>
-            <ionic-selectable
-              itemValueField="id"
-              itemTextField="name"
-              [items]="categoriesList$ | async"
-              [canSearch]="true"
-              [formControlName]="formFields.Category"
-              (onChange)="onCategoryChange()"
-              [closeButtonText]="trans.trans('ion-selectable.close-button-text') | async"
-              [searchFailText]="trans.trans('ion-selectable.search-fail-text') | async"
-              [searchPlaceholder]="trans.trans('ion-selectable.search-text') | async"
-            >
-            </ionic-selectable>
-          </ion-item>
+          <app-category-selector [formControlName]="formFields.Category"></app-category-selector>
           <app-form-control-error [controlName]="formFields.Category"></app-form-control-error>
           <ion-item lines="none" class="ion-item-no-side-padding ion-padding-top">
             <div class="label-for-required-input">
               {{ 'service-publish.step-one.subcategory-title' | translate }}
             </div>
           </ion-item>
-          <ion-item class="ion-item-bordered">
-            <ion-label color="medium" position="floating">
-              {{ 'service-publish.step-one.subcategory-subtitle' | translate }}
-            </ion-label>
-            <ionic-selectable
-              itemValueField="id"
-              itemTextField="name"
-              [canSearch]="true"
-              [items]="subcategoriesList$ | async"
-              [formControlName]="formFields.Subcategory"
-              [closeButtonText]="trans.trans('ion-selectable.close-button-text') | async"
-              [searchFailText]="trans.trans('ion-selectable.search-fail-text') | async"
-              [searchPlaceholder]="trans.trans('ion-selectable.search-text') | async"
-            >
-            </ionic-selectable>
-          </ion-item>
+          <app-subcategory-selector
+            [formControlName]="formFields.Subcategory"
+            [category]="this.form.controls[formFields.Category].value"
+          ></app-subcategory-selector>
           <app-form-control-error [controlName]="formFields.Subcategory"></app-form-control-error>
           <ion-row class="ion-justify-content-center">
             <ion-col size="6">

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Rate } from '@app/api/models';
+import { ProfessionalList, Rate } from '@app/api/models';
 import { professionalLevels } from '@app/core/constants/professional.constants';
 import { NgDestroyService } from '@app/core/services';
 import { CountriesApiCache, RatesApiCache, LanguagesApiCache } from '@app/core/services/cache';
@@ -9,6 +9,7 @@ import { SearchFilterFormControls } from '@app/search/interfaces/search-filter-f
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-advanced-filters',
   templateUrl: './advanced-filters.component.html',
@@ -18,25 +19,15 @@ import { takeUntil } from 'rxjs/operators';
 export class AdvancedFiltersComponent implements OnInit {
   public readonly languages$ = this.languagesApiCache.list();
 
-  public readonly professionalLevels: { value: string; name: string }[] = professionalLevels.map(value => ({
-    value,
-    name: this.translate.instant(`global.professional-level.${value}`),
-  }));
+  public readonly professionalLevels: {
+    value: ProfessionalList['level'];
+  }[] = professionalLevels.map((value: ProfessionalList['level']) => ({ value }));
 
-  public readonly paymentMethods: { value: string; name: string }[] = ['cash', 'online'].map(value => ({
-    value,
-    name: this.translate.instant(`service-payment-options.${value}`),
-  }));
+  public readonly paymentMethods: {
+    value: string;
+  }[] = ['cash', 'online'].map(value => ({ value }));
 
   public readonly rates$: Observable<Rate[]> = this.ratesApiCache.list();
-
-  public get controls(): SearchFilterFormControls {
-    return this.stateManager.controls;
-  }
-
-  public get form(): FormGroup {
-    return this.stateManager.form;
-  }
 
   constructor(
     private readonly countriesApiCache: CountriesApiCache,
@@ -47,6 +38,14 @@ export class AdvancedFiltersComponent implements OnInit {
     private readonly cd: ChangeDetectorRef,
     private readonly destroy$: NgDestroyService,
   ) {}
+
+  public get controls(): SearchFilterFormControls {
+    return this.stateManager.controls;
+  }
+
+  public get form(): FormGroup {
+    return this.stateManager.form;
+  }
 
   public ngOnInit(): void {
     this.detectChangesForIonicSelectable();

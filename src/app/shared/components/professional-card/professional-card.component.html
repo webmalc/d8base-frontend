@@ -10,7 +10,7 @@
       <div class="subtitle">
         <span class="capitalize-first-letter">{{ (professional.subcategory | subcategoryById$ | async)?.name }}</span>
         <ng-container *ngIf="defaultCityId">
-          <span>&nbsp;&diams;&nbsp;</span>
+          <span>&nbsp;&middot;&nbsp;</span>
           <span class="city">{{ (defaultCityId | cityById$ | async)?.name }}</span>
         </ng-container>
       </div>
