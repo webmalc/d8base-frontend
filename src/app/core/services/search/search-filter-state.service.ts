@@ -44,7 +44,7 @@ export class SearchFilterStateService {
     onlyWithPhotos: new FormControl(null),
     onlyWithFixedPrice: new FormControl(null),
     onlyWithCertificates: new FormControl(null),
-    nationalities: new FormControl(null),
+    nationality: new FormControl(null),
     languages: new FormControl(null),
     experience: new FormControl(null),
     startAge: new FormControl(null),

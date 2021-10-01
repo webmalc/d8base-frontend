@@ -27,7 +27,7 @@ export interface SearchFilterFormValue {
   onlyWithPhotos?: boolean;
   onlyWithFixedPrice?: boolean;
   onlyWithCertificates?: boolean;
-  nationalities?: Country[];
+  nationality?: Country;
   languages?: { code: string; name: string }[];
   experience?: number;
   startAge?: number;

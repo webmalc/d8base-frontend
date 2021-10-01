@@ -73,7 +73,7 @@
     {{ 'search.filters.end-age' | translate }} {{ filter.value }}
   </app-chip>
   <app-chip *ngSwitchCase="fields.nationalities" (delete)="delete(filter.name)">
-    {{ 'search.filters.nationalities' | translate }}
+    {{ ('search.filters.nationality' | translate) + ': ' + (filter.value | countryById$ | async)?.name }}
   </app-chip>
   <app-language-chips
     *ngSwitchCase="fields.languages"
