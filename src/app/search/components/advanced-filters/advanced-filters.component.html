@@ -45,9 +45,15 @@
     [formControl]="controls.paymentMethods"
     [isMultiple]="true"
     [canClear]="true"
-    itemTextField="name"
+    itemTextField="value"
     itemValueField="value"
   >
+    <ng-template ionicSelectableValueTemplate let-value="value">
+      <div *ngFor="let item of value">{{ 'service-payment-options.' + item.value | translate }}</div>
+    </ng-template>
+    <ng-template ionicSelectableItemTemplate let-item="item">
+      {{ 'service-payment-options.' + item.value | translate }}
+    </ng-template>
   </ionic-selectable>
 </ion-item>
 <app-section-heading>{{ 'search.filters.professional-traits-title' | translate }}</app-section-heading>
@@ -96,8 +102,14 @@
     [items]="professionalLevels"
     [formControl]="controls.professionalLevel"
     [canClear]="true"
-    itemTextField="name"
+    itemTextField="value"
     itemValueField="value"
   >
+    <ng-template ionicSelectableValueTemplate let-value="value">
+      {{ 'global.professional-level.' + value.value | translate }}
+    </ng-template>
+    <ng-template ionicSelectableItemTemplate let-item="item">
+      {{ 'global.professional-level.' + item.value | translate }}
+    </ng-template>
   </ionic-selectable>
 </ion-item>

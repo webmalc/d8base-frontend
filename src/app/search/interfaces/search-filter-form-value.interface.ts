@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { Category, City, Country, Rate, Subcategory, ServiceTag } from '@app/api/models';
+import { Category, City, Country, Rate, Subcategory, ServiceTag, ProfessionalList } from '@app/api/models';
 
 export interface SearchFilterFormValue {
   query?: string;
@@ -21,7 +21,7 @@ export interface SearchFilterFormValue {
   priceStart?: string;
   priceEnd?: string;
   rating?: number;
-  professionalLevel?: { value: 'junior' | 'middle' | 'senior' };
+  professionalLevel?: { value: ProfessionalList['level'] };
   paymentMethods?: { value: 'cash' | 'online' }[];
   onlyWithReviews?: boolean;
   onlyWithPhotos?: boolean;
