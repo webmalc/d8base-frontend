@@ -61,8 +61,8 @@ export class SearchFilterStateConverter {
           Rate[],
         ]) => {
           const country = params?.country ? countries.find(({ id }) => Number(id) === Number(params.country)) : void 0;
-          const nationalities = params?.nationalities
-            ? countries.filter(({ id }) =>
+          const nationality = params?.nationalities
+            ? countries.find(({ id }) =>
                 params.nationalities
                   .split(',')
                   .map(nationality => parseInt(nationality, 10))
@@ -108,7 +108,7 @@ export class SearchFilterStateConverter {
             onlyWithPhotos: params?.onlyWithPhotos,
             onlyWithFixedPrice: params?.onlyWithFixedPrice,
             onlyWithCertificates: params?.onlyWithCertificates,
-            nationalities: emptyArrayToUndefined(nationalities),
+            nationality,
             languages: emptyArrayToUndefined(languages),
             experience: params?.experienceFrom,
             startAge: params?.startAge,
@@ -147,7 +147,7 @@ export class SearchFilterStateConverter {
       onlyWithFixedPrice: data?.onlyWithFixedPrice || null,
       onlyWithCertificates: data?.onlyWithCertificates || null,
       onlyWithAutoOrderConfirmation: data.isInstantBooking || null,
-      nationalities: arrayToString(data?.nationalities?.map(({ id }) => id)) || null,
+      nationalities: data?.nationality ? `${data.nationality.id}` : null,
       maxDistance: void 0,
       longitude: null,
       latitude: null,
