@@ -10,6 +10,7 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { Category } from '../models/category';
 import { ProfessionalPhotoList } from '../models/professional-photo-list';
 import { ProfessionalList } from '../models/professional-list';
+import { ProfessionalSettings } from '../models/professional-settings';
 import { Subcategory } from '../models/subcategory';
 import { ProfessionalTagList } from '../models/professional-tag-list';
 @Injectable({
@@ -22,6 +23,12 @@ class ProfessionalsService extends __BaseService {
   static readonly professionalsProfessionalPhotosReadPath = '/professionals/professional-photos/{id}/';
   static readonly professionalsProfessionalsListPath = '/professionals/professionals/';
   static readonly professionalsProfessionalsReadPath = '/professionals/professionals/{id}/';
+  static readonly professionalsSettingsListPath = '/professionals/settings/';
+  static readonly professionalsSettingsCreatePath = '/professionals/settings/';
+  static readonly professionalsSettingsReadPath = '/professionals/settings/{id}/';
+  static readonly professionalsSettingsUpdatePath = '/professionals/settings/{id}/';
+  static readonly professionalsSettingsPartialUpdatePath = '/professionals/settings/{id}/';
+  static readonly professionalsSettingsDeletePath = '/professionals/settings/{id}/';
   static readonly professionalsSubcategoriesListPath = '/professionals/subcategories/';
   static readonly professionalsSubcategoriesReadPath = '/professionals/subcategories/{id}/';
   static readonly professionalsTagsListPath = '/professionals/tags/';
@@ -105,7 +112,7 @@ class ProfessionalsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/professionals/categories/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/professionals/categories/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -201,7 +208,7 @@ class ProfessionalsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/professionals/professional-photos/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/professionals/professional-photos/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -317,7 +324,7 @@ class ProfessionalsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/professionals/professionals/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/professionals/professionals/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -339,6 +346,264 @@ class ProfessionalsService extends __BaseService {
   professionalsProfessionalsRead(id: number): __Observable<ProfessionalList> {
     return this.professionalsProfessionalsReadResponse(id).pipe(
       __map(_r => _r.body as ProfessionalList)
+    );
+  }
+
+  /**
+   * The user settings viewset.
+   * @param params The `ProfessionalsService.ProfessionalsSettingsListParams` containing the following parameters:
+   *
+   * - `search`: A search term.
+   *
+   * - `professional`:
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   */
+  professionalsSettingsListResponse(params: ProfessionalsService.ProfessionalsSettingsListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSettings>}>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.search != null) __params = __params.set('search', params.search.toString());
+    if (params.professional != null) __params = __params.set('professional', params.professional.toString());
+    if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/professionals/settings/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSettings>}>;
+      })
+    );
+  }
+  /**
+   * The user settings viewset.
+   * @param params The `ProfessionalsService.ProfessionalsSettingsListParams` containing the following parameters:
+   *
+   * - `search`: A search term.
+   *
+   * - `professional`:
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   */
+  professionalsSettingsList(params: ProfessionalsService.ProfessionalsSettingsListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSettings>}> {
+    return this.professionalsSettingsListResponse(params).pipe(
+      __map(_r => _r.body as {count: number, next?: null | string, previous?: null | string, results: Array<ProfessionalSettings>})
+    );
+  }
+
+  /**
+   * The user settings viewset.
+   * @param data undefined
+   */
+  professionalsSettingsCreateResponse(data: ProfessionalSettings): __Observable<__StrictHttpResponse<ProfessionalSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = data;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/professionals/settings/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSettings>;
+      })
+    );
+  }
+  /**
+   * The user settings viewset.
+   * @param data undefined
+   */
+  professionalsSettingsCreate(data: ProfessionalSettings): __Observable<ProfessionalSettings> {
+    return this.professionalsSettingsCreateResponse(data).pipe(
+      __map(_r => _r.body as ProfessionalSettings)
+    );
+  }
+
+  /**
+   * The user settings viewset.
+   * @param id A unique integer value identifying this professional settings.
+   */
+  professionalsSettingsReadResponse(id: number): __Observable<__StrictHttpResponse<ProfessionalSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/professionals/settings/${encodeURIComponent(String(id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSettings>;
+      })
+    );
+  }
+  /**
+   * The user settings viewset.
+   * @param id A unique integer value identifying this professional settings.
+   */
+  professionalsSettingsRead(id: number): __Observable<ProfessionalSettings> {
+    return this.professionalsSettingsReadResponse(id).pipe(
+      __map(_r => _r.body as ProfessionalSettings)
+    );
+  }
+
+  /**
+   * The user settings viewset.
+   * @param params The `ProfessionalsService.ProfessionalsSettingsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional settings.
+   *
+   * - `data`:
+   */
+  professionalsSettingsUpdateResponse(params: ProfessionalsService.ProfessionalsSettingsUpdateParams): __Observable<__StrictHttpResponse<ProfessionalSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/professionals/settings/${encodeURIComponent(String(params.id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSettings>;
+      })
+    );
+  }
+  /**
+   * The user settings viewset.
+   * @param params The `ProfessionalsService.ProfessionalsSettingsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional settings.
+   *
+   * - `data`:
+   */
+  professionalsSettingsUpdate(params: ProfessionalsService.ProfessionalsSettingsUpdateParams): __Observable<ProfessionalSettings> {
+    return this.professionalsSettingsUpdateResponse(params).pipe(
+      __map(_r => _r.body as ProfessionalSettings)
+    );
+  }
+
+  /**
+   * The user settings viewset.
+   * @param params The `ProfessionalsService.ProfessionalsSettingsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional settings.
+   *
+   * - `data`:
+   */
+  professionalsSettingsPartialUpdateResponse(params: ProfessionalsService.ProfessionalsSettingsPartialUpdateParams): __Observable<__StrictHttpResponse<ProfessionalSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/professionals/settings/${encodeURIComponent(String(params.id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProfessionalSettings>;
+      })
+    );
+  }
+  /**
+   * The user settings viewset.
+   * @param params The `ProfessionalsService.ProfessionalsSettingsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this professional settings.
+   *
+   * - `data`:
+   */
+  professionalsSettingsPartialUpdate(params: ProfessionalsService.ProfessionalsSettingsPartialUpdateParams): __Observable<ProfessionalSettings> {
+    return this.professionalsSettingsPartialUpdateResponse(params).pipe(
+      __map(_r => _r.body as ProfessionalSettings)
+    );
+  }
+
+  /**
+   * The user settings viewset.
+   * @param id A unique integer value identifying this professional settings.
+   */
+  professionalsSettingsDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/professionals/settings/${encodeURIComponent(String(id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * The user settings viewset.
+   * @param id A unique integer value identifying this professional settings.
+   */
+  professionalsSettingsDelete(id: number): __Observable<null> {
+    return this.professionalsSettingsDeleteResponse(id).pipe(
+      __map(_r => _r.body as null)
     );
   }
 
@@ -418,7 +683,7 @@ class ProfessionalsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/professionals/subcategories/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/professionals/subcategories/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -509,7 +774,7 @@ class ProfessionalsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/professionals/tags/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/professionals/tags/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -624,6 +889,57 @@ module ProfessionalsService {
     ordering?: string;
     level?: string;
     experience?: string;
+  }
+
+  /**
+   * Parameters for professionalsSettingsList
+   */
+  export interface ProfessionalsSettingsListParams {
+
+    /**
+     * A search term.
+     */
+    search?: string;
+    professional?: number;
+
+    /**
+     * Number of results to return per page.
+     */
+    pageSize?: number;
+
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+
+    /**
+     * Which field to use when ordering the results.
+     */
+    ordering?: string;
+  }
+
+  /**
+   * Parameters for professionalsSettingsUpdate
+   */
+  export interface ProfessionalsSettingsUpdateParams {
+
+    /**
+     * A unique integer value identifying this professional settings.
+     */
+    id: number;
+    data: ProfessionalSettings;
+  }
+
+  /**
+   * Parameters for professionalsSettingsPartialUpdate
+   */
+  export interface ProfessionalsSettingsPartialUpdateParams {
+
+    /**
+     * A unique integer value identifying this professional settings.
+     */
+    id: number;
+    data: ProfessionalSettings;
   }
 
   /**

@@ -104,7 +104,7 @@ class ServicesService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/services/service-photos/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/services/service-photos/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -205,7 +205,7 @@ class ServicesService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/services/services/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/services/services/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -296,7 +296,7 @@ class ServicesService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/services/tags/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/services/tags/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,

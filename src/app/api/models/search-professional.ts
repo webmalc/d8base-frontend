@@ -4,6 +4,7 @@ import { ProfessionalContactInline } from './professional-contact-inline';
 import { ProfessionalEducationInline } from './professional-education-inline';
 import { ProfessionalExperienceInline } from './professional-experience-inline';
 import { ProfessionalLocationInline } from './professional-location-inline';
+import { ProfessionalScheduleInline } from './professional-schedule-inline';
 import { ProfessionalTagList } from './professional-tag-list';
 import { UserExtended } from './user-extended';
 export interface SearchProfessional {
@@ -23,6 +24,7 @@ export interface SearchProfessional {
   name: string;
   rating?: string;
   reviews_count?: number;
+  schedule?: Array<ProfessionalScheduleInline>;
   subcategory: number;
   tags?: Array<ProfessionalTagList>;
   user?: UserExtended;

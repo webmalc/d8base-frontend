@@ -142,7 +142,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/alternative-names/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/alternative-names/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -258,7 +258,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/cities/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/cities/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -349,7 +349,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/continents/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/continents/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -465,7 +465,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/countries/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/countries/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -561,7 +561,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/districts/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/districts/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -630,7 +630,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/languages/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/languages/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -746,7 +746,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/postal-codes/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/postal-codes/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -847,7 +847,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/regions/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/regions/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -948,7 +948,7 @@ class LocationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/location/subregions/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/location/subregions/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,

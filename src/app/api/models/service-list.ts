@@ -23,7 +23,11 @@ export interface ServiceList {
   is_auto_order_confirmation?: boolean;
   is_base_schedule?: boolean;
   is_enabled?: boolean;
-  locations?: ServiceLocationInline[];
+
+  /**
+   * Get the service locations.
+   */
+  locations?: Array<ServiceLocationInline>;
   modified?: string;
   name: string;
   price?: Price;

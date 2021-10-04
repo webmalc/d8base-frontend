@@ -108,7 +108,7 @@ class ContactsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/contacts/contacts/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/contacts/contacts/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,

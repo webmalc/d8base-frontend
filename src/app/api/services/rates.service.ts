@@ -83,7 +83,7 @@ class RatesService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/rates/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/rates/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,

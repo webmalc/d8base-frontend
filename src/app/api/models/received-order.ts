@@ -3,6 +3,7 @@ import { ReceivedOrderClient } from './received-order-client';
 import { UserLocationInline } from './user-location-inline';
 import { Phone } from './phone';
 export interface ReceivedOrder {
+  cancel_reason?: null | 'dates' | 'other';
   client?: ReceivedOrderClient;
   client_location?: UserLocationInline;
   created?: string;
