@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InfiniteScrollModule } from '@app/infinite-scroll/infinite-scroll.module';
+import { InfiniteScrollModule } from '@app/shared/infinite-scroll/infinite-scroll.module';
 import { ReviewsModule } from '@app/reviews/reviews.module';
 import { BasicFiltersComponent } from '@app/search/components/basic-filters/basic-filters.component';
 import { CategoryChipsComponent } from '@app/search/pages/search-page/applied-filters/category-chips/category-chips.component';

@@ -10,8 +10,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgDestroyService } from '@app/core/services';
-import { InfiniteScrollItemDirective } from '@app/infinite-scroll/directives/infinite-scroll-item.directive';
-import { InfiniteScrollData, PaginatedResult, Params } from '@app/infinite-scroll/models/infinite-scroll.model';
+import { InfiniteScrollItemDirective } from '@app/shared/infinite-scroll/directives/infinite-scroll-item.directive';
+import { InfiniteScrollData, PaginatedResult, Params } from '@app/shared/infinite-scroll/models/infinite-scroll.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, concatMap, switchMap, takeUntil, tap } from 'rxjs/operators';
