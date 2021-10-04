@@ -3,16 +3,18 @@
   <app-content-wrapper>
     <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
     <ng-container *appIfSpinner="context$ | ifSpinnerErrorState | async as context">
-      <ion-item lines="none">
-        <ion-label>
-          <h1>{{ 'order.selected-service' | translate }}</h1>
-        </ion-label>
-        <ion-button slot="end" fill="none" [routerLink]="getProfessionalScheduleUrl(context.service)">
-          {{ 'order.choose-another-service' | translate }}
-          <ion-icon name="close-outline" class="ion-padding-start"></ion-icon>
-        </ion-button>
-      </ion-item>
-      <app-service-widget [service]="context.service"></app-service-widget>
+      <ng-container *ngIf="isFirstStep$ | async">
+        <ion-item lines="none">
+          <ion-label>
+            <h1>{{ 'order.selected-service' | translate }}</h1>
+          </ion-label>
+          <ion-button slot="end" fill="none" [routerLink]="getProfessionalScheduleUrl(context.service)">
+            {{ 'order.choose-another-service' | translate }}
+            <ion-icon name="close-outline" class="ion-padding-start"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <app-service-widget [service]="context.service"></app-service-widget>
+      </ng-container>
       <app-order-details [order]="orderDetailsState$ | async"></app-order-details>
       <ng-content></ng-content>
       <ion-row>
