@@ -144,7 +144,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(registrationId)}/`,
+      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(String(registrationId))}/`,
       __body,
       {
         headers: __headers,
@@ -183,7 +183,7 @@ class CommunicationService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(params.registrationId)}/`,
+      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(String(params.registrationId))}/`,
       __body,
       {
         headers: __headers,
@@ -226,7 +226,7 @@ class CommunicationService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(params.registrationId)}/`,
+      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(String(params.registrationId))}/`,
       __body,
       {
         headers: __headers,
@@ -264,7 +264,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(registrationId)}/`,
+      this.rootUrl + `/communication/devices/fcm/${encodeURIComponent(String(registrationId))}/`,
       __body,
       {
         headers: __headers,
@@ -407,7 +407,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/communication/messages/list/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/messages/list/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -508,7 +508,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/communication/messages/received/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/messages/received/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -544,7 +544,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/communication/messages/received/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/messages/received/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -681,7 +681,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -722,7 +722,7 @@ class CommunicationService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -767,7 +767,7 @@ class CommunicationService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -807,7 +807,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/messages/sent/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -908,7 +908,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/communication/messages/suggested/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/messages/suggested/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -1019,7 +1019,7 @@ class CommunicationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/communication/reviews/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/communication/reviews/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,

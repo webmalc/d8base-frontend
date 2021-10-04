@@ -15,6 +15,7 @@ import { OrderReminder } from '../models/order-reminder';
 import { ReceivedOrder } from '../models/received-order';
 import { SentOrder } from '../models/sent-order';
 import { CancelOrder } from '../models/cancel-order';
+import { OrderShare } from '../models/order-share';
 import { ProfessionalCertificate } from '../models/professional-certificate';
 import { ProfessionalClosedPeriod } from '../models/professional-closed-period';
 import { ProfessionalContact } from '../models/professional-contact';
@@ -85,6 +86,12 @@ class AccountsService extends __BaseService {
   static readonly accountsOrdersSentUpdatePath = '/accounts/orders/sent/{id}/';
   static readonly accountsOrdersSentPartialUpdatePath = '/accounts/orders/sent/{id}/';
   static readonly accountsOrdersSentCancelPath = '/accounts/orders/sent/{id}/cancel/';
+  static readonly accountsOrdersShareListPath = '/accounts/orders/share/';
+  static readonly accountsOrdersShareCreatePath = '/accounts/orders/share/';
+  static readonly accountsOrdersShareReadPath = '/accounts/orders/share/{id}/';
+  static readonly accountsOrdersShareUpdatePath = '/accounts/orders/share/{id}/';
+  static readonly accountsOrdersSharePartialUpdatePath = '/accounts/orders/share/{id}/';
+  static readonly accountsOrdersShareDeletePath = '/accounts/orders/share/{id}/';
   static readonly accountsProfessionalCertificatesListPath = '/accounts/professional-certificates/';
   static readonly accountsProfessionalCertificatesCreatePath = '/accounts/professional-certificates/';
   static readonly accountsProfessionalCertificatesReadPath = '/accounts/professional-certificates/{id}/';
@@ -389,7 +396,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/contacts/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/contacts/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -430,7 +437,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/contacts/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/contacts/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -475,7 +482,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/contacts/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/contacts/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -515,7 +522,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/contacts/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/contacts/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -675,7 +682,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/languages/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/languages/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -716,7 +723,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/languages/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/languages/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -761,7 +768,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/languages/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/languages/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -801,7 +808,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/languages/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/languages/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -933,7 +940,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/locations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/locations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -974,7 +981,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/locations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/locations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1019,7 +1026,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/locations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/locations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1059,7 +1066,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/locations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/locations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -1241,7 +1248,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -1282,7 +1289,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1327,7 +1334,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1367,7 +1374,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/order-reminders/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -1528,7 +1535,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/orders/received/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/orders/received/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -1569,7 +1576,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/orders/received/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/orders/received/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1614,7 +1621,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/orders/received/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/orders/received/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1810,7 +1817,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -1851,7 +1858,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1896,7 +1903,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -1941,7 +1948,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(params.id)}/cancel/`,
+      this.rootUrl + `/accounts/orders/sent/${encodeURIComponent(String(params.id))}/cancel/`,
       __body,
       {
         headers: __headers,
@@ -1967,6 +1974,269 @@ class AccountsService extends __BaseService {
   accountsOrdersSentCancel(params: AccountsService.AccountsOrdersSentCancelParams): __Observable<CancelOrder> {
     return this.accountsOrdersSentCancelResponse(params).pipe(
       __map(_r => _r.body as CancelOrder)
+    );
+  }
+
+  /**
+   * The order share viewset.
+   * @param params The `AccountsService.AccountsOrdersShareListParams` containing the following parameters:
+   *
+   * - `search`: A search term.
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `order`:
+   *
+   * - `is_enabled`:
+   */
+  accountsOrdersShareListResponse(params: AccountsService.AccountsOrdersShareListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<OrderShare>}>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.search != null) __params = __params.set('search', params.search.toString());
+    if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    if (params.order != null) __params = __params.set('order', params.order.toString());
+    if (params.isEnabled != null) __params = __params.set('is_enabled', params.isEnabled.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/orders/share/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<OrderShare>}>;
+      })
+    );
+  }
+  /**
+   * The order share viewset.
+   * @param params The `AccountsService.AccountsOrdersShareListParams` containing the following parameters:
+   *
+   * - `search`: A search term.
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   *
+   * - `order`:
+   *
+   * - `is_enabled`:
+   */
+  accountsOrdersShareList(params: AccountsService.AccountsOrdersShareListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<OrderShare>}> {
+    return this.accountsOrdersShareListResponse(params).pipe(
+      __map(_r => _r.body as {count: number, next?: null | string, previous?: null | string, results: Array<OrderShare>})
+    );
+  }
+
+  /**
+   * The order share viewset.
+   * @param data undefined
+   */
+  accountsOrdersShareCreateResponse(data: OrderShare): __Observable<__StrictHttpResponse<OrderShare>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = data;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/accounts/orders/share/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<OrderShare>;
+      })
+    );
+  }
+  /**
+   * The order share viewset.
+   * @param data undefined
+   */
+  accountsOrdersShareCreate(data: OrderShare): __Observable<OrderShare> {
+    return this.accountsOrdersShareCreateResponse(data).pipe(
+      __map(_r => _r.body as OrderShare)
+    );
+  }
+
+  /**
+   * The order share viewset.
+   * @param id A unique integer value identifying this order share.
+   */
+  accountsOrdersShareReadResponse(id: number): __Observable<__StrictHttpResponse<OrderShare>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/orders/share/${encodeURIComponent(String(id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<OrderShare>;
+      })
+    );
+  }
+  /**
+   * The order share viewset.
+   * @param id A unique integer value identifying this order share.
+   */
+  accountsOrdersShareRead(id: number): __Observable<OrderShare> {
+    return this.accountsOrdersShareReadResponse(id).pipe(
+      __map(_r => _r.body as OrderShare)
+    );
+  }
+
+  /**
+   * The order share viewset.
+   * @param params The `AccountsService.AccountsOrdersShareUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this order share.
+   *
+   * - `data`:
+   */
+  accountsOrdersShareUpdateResponse(params: AccountsService.AccountsOrdersShareUpdateParams): __Observable<__StrictHttpResponse<OrderShare>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/accounts/orders/share/${encodeURIComponent(String(params.id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<OrderShare>;
+      })
+    );
+  }
+  /**
+   * The order share viewset.
+   * @param params The `AccountsService.AccountsOrdersShareUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this order share.
+   *
+   * - `data`:
+   */
+  accountsOrdersShareUpdate(params: AccountsService.AccountsOrdersShareUpdateParams): __Observable<OrderShare> {
+    return this.accountsOrdersShareUpdateResponse(params).pipe(
+      __map(_r => _r.body as OrderShare)
+    );
+  }
+
+  /**
+   * The order share viewset.
+   * @param params The `AccountsService.AccountsOrdersSharePartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this order share.
+   *
+   * - `data`:
+   */
+  accountsOrdersSharePartialUpdateResponse(params: AccountsService.AccountsOrdersSharePartialUpdateParams): __Observable<__StrictHttpResponse<OrderShare>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/accounts/orders/share/${encodeURIComponent(String(params.id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<OrderShare>;
+      })
+    );
+  }
+  /**
+   * The order share viewset.
+   * @param params The `AccountsService.AccountsOrdersSharePartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this order share.
+   *
+   * - `data`:
+   */
+  accountsOrdersSharePartialUpdate(params: AccountsService.AccountsOrdersSharePartialUpdateParams): __Observable<OrderShare> {
+    return this.accountsOrdersSharePartialUpdateResponse(params).pipe(
+      __map(_r => _r.body as OrderShare)
+    );
+  }
+
+  /**
+   * The order share viewset.
+   * @param id A unique integer value identifying this order share.
+   */
+  accountsOrdersShareDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/accounts/orders/share/${encodeURIComponent(String(id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * The order share viewset.
+   * @param id A unique integer value identifying this order share.
+   */
+  accountsOrdersShareDelete(id: number): __Observable<null> {
+    return this.accountsOrdersShareDeleteResponse(id).pipe(
+      __map(_r => _r.body as null)
     );
   }
 
@@ -2077,7 +2347,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2118,7 +2388,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2163,7 +2433,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2203,7 +2473,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-certificates/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2340,7 +2610,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2381,7 +2651,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2426,7 +2696,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2466,7 +2736,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-closed-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2598,7 +2868,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2639,7 +2909,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2684,7 +2954,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2724,7 +2994,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-contacts/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2856,7 +3126,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -2897,7 +3167,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2942,7 +3212,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -2982,7 +3252,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-educations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3114,7 +3384,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3155,7 +3425,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3200,7 +3470,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3240,7 +3510,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-experience/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3372,7 +3642,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3413,7 +3683,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3458,7 +3728,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3498,7 +3768,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-locations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3630,7 +3900,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3671,7 +3941,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3716,7 +3986,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3756,7 +4026,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-photos/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3903,7 +4173,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -3944,7 +4214,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -3989,7 +4259,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4029,7 +4299,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-schedule-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4207,7 +4477,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4248,7 +4518,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4293,7 +4563,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4333,7 +4603,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-schedule/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4465,7 +4735,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4506,7 +4776,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4551,7 +4821,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4591,7 +4861,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professional-tags/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4718,7 +4988,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professionals/can-review/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professionals/can-review/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4754,7 +5024,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/professionals/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professionals/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4795,7 +5065,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/professionals/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professionals/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4840,7 +5110,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/professionals/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/professionals/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -4880,7 +5150,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/professionals/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/professionals/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -4921,7 +5191,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/accounts/professionals/${encodeURIComponent(params.id)}/generate_calendar/`,
+      this.rootUrl + `/accounts/professionals/${encodeURIComponent(String(params.id))}/generate_calendar/`,
       __body,
       {
         headers: __headers,
@@ -5349,7 +5619,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -5390,7 +5660,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -5435,7 +5705,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -5475,7 +5745,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/review-comments/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -5622,7 +5892,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/reviews/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/reviews/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -5663,7 +5933,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/reviews/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/reviews/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -5708,7 +5978,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/reviews/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/reviews/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -5748,7 +6018,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/reviews/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/reviews/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -5875,7 +6145,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -5916,7 +6186,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -5961,7 +6231,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6001,7 +6271,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/saved-professionals/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6174,7 +6444,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6215,7 +6485,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6260,7 +6530,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6300,7 +6570,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-closed-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6437,7 +6707,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6478,7 +6748,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6523,7 +6793,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6563,7 +6833,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-locations/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6695,7 +6965,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6736,7 +7006,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6781,7 +7051,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -6821,7 +7091,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-photos/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6958,7 +7228,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -6999,7 +7269,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7044,7 +7314,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7084,7 +7354,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-prices/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -7231,7 +7501,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -7272,7 +7542,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7317,7 +7587,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7357,7 +7627,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-schedule-periods/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -7535,7 +7805,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -7576,7 +7846,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7621,7 +7891,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7661,7 +7931,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-schedule/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -7793,7 +8063,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -7834,7 +8104,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7879,7 +8149,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -7919,7 +8189,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/service-tags/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -8061,7 +8331,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/services/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/services/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -8102,7 +8372,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/services/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/services/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -8147,7 +8417,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/services/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/services/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -8187,7 +8457,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/services/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/services/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -8314,7 +8584,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/accounts/settings/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/settings/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -8355,7 +8625,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/accounts/settings/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/settings/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -8400,7 +8670,7 @@ class AccountsService extends __BaseService {
     __body = params.data;
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/accounts/settings/${encodeURIComponent(params.id)}/`,
+      this.rootUrl + `/accounts/settings/${encodeURIComponent(String(params.id))}/`,
       __body,
       {
         headers: __headers,
@@ -8440,7 +8710,7 @@ class AccountsService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/accounts/settings/${encodeURIComponent(id)}/`,
+      this.rootUrl + `/accounts/settings/${encodeURIComponent(String(id))}/`,
       __body,
       {
         headers: __headers,
@@ -8906,6 +9176,58 @@ module AccountsService {
      */
     id: number;
     data: CancelOrder;
+  }
+
+  /**
+   * Parameters for accountsOrdersShareList
+   */
+  export interface AccountsOrdersShareListParams {
+
+    /**
+     * A search term.
+     */
+    search?: string;
+
+    /**
+     * Number of results to return per page.
+     */
+    pageSize?: number;
+
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+
+    /**
+     * Which field to use when ordering the results.
+     */
+    ordering?: string;
+    order?: number;
+    isEnabled?: string;
+  }
+
+  /**
+   * Parameters for accountsOrdersShareUpdate
+   */
+  export interface AccountsOrdersShareUpdateParams {
+
+    /**
+     * A unique integer value identifying this order share.
+     */
+    id: number;
+    data: OrderShare;
+  }
+
+  /**
+   * Parameters for accountsOrdersSharePartialUpdate
+   */
+  export interface AccountsOrdersSharePartialUpdateParams {
+
+    /**
+     * A unique integer value identifying this order share.
+     */
+    id: number;
+    data: OrderShare;
   }
 
   /**

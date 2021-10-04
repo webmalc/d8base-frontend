@@ -2,6 +2,7 @@ export { AccountsService } from './services/accounts.service';
 export { CommunicationService } from './services/communication.service';
 export { ContactsService } from './services/contacts.service';
 export { LocationService } from './services/location.service';
+export { OrdersService } from './services/orders.service';
 export { ProfessionalsService } from './services/professionals.service';
 export { RatesService } from './services/rates.service';
 export { ScheduleService } from './services/schedule.service';
