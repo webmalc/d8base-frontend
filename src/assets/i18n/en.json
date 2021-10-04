@@ -877,5 +877,11 @@
     "block-3-title": "Become a service provider",
     "block-3-text": "and find new customers worldwide",
     "block-3-button": "Sign up"
+  },
+  "footer": {
+    "about": "About",
+    "support": "Support",
+    "eula": "End user license agreement",
+    "copy": "© 2021 d8base | All rights reserved"
   }
 }
