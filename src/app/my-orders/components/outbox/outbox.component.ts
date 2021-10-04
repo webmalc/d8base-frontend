@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { SentOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { NgDestroyService } from '@app/core/services';
-import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
+import { InfiniteScrollData, PaginatedResult } from '@app/shared/infinite-scroll/models/infinite-scroll.model';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';

@@ -1,5 +1,5 @@
 import { UserSettings } from '@app/api/models';
-import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interface';
 import { environment } from '@env/environment';
 import { CurrentUserStateModel } from './current-user-state.model';
 

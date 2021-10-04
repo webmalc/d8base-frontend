@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Profile } from '@app/api/models';
-import { RegistrationService } from '@app/auth/services/registration.service';
+import { RegistrationService } from '@app/auth/pages/registration/services/registration.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { IsUserRegisteredApiService } from '@app/core/services/api/is-user-registered-api.service';
 import * as AppValidators from '@app/core/validators';

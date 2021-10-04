@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ReceivedOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
-import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
+import { InfiniteScrollData, PaginatedResult } from '@app/shared/infinite-scroll/models/infinite-scroll.model';
 import { Tabs } from '@app/my-orders/enums/tabs.enum';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';

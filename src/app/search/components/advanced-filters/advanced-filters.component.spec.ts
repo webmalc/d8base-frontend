@@ -1,8 +1,8 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { RatingPickerComponent } from '@app/reviews/components/rating-picker/rating-picker.component';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
-import { IonicSelectableComponent } from 'ionic-selectable';
+import { SearchPageModule } from '@app/search/search.module';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { AdvancedFiltersComponent } from './advanced-filters.component';
 
@@ -13,8 +13,8 @@ describe('SearchFiltersAdditionalTabComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [AdvancedFiltersComponent, IonicSelectableComponent, RatingPickerComponent],
-        imports: [...RootModules(), ComponentTestingModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        imports: [...RootModules(), ComponentTestingModule, SearchPageModule],
         providers: [SearchFilterStateService, FormBuilder],
       }).compileComponents();
 

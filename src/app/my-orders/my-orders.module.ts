@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InfiniteScrollModule } from '@app/infinite-scroll/infinite-scroll.module';
+import { InfiniteScrollModule } from '@app/shared/infinite-scroll/infinite-scroll.module';
 import {
   CancelConfirmationPopoverComponent,
   OrderStatusComponent,

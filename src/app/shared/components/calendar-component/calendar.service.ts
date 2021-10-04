@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ProfessionalCalendar } from '@app/api/models';
 import { addMinutes, stripTime } from '@app/core/functions/datetime.functions';
-import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
-import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
 import { environment } from '@env/environment';
+import { CalendarInterval } from './calendar-interval';
+import { CalendarUnit } from './calendar-unit';
 
 interface Interval {
   start: Date;

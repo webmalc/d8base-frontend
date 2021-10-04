@@ -6,7 +6,7 @@ import { hasNonEmptyValues } from '@app/core/functions/object.functions';
 import { NgDestroyService, SearchFilterStateConverter } from '@app/core/services';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { SearchQueryService } from '@app/core/services/search/search-query.service';
-import { InfiniteScrollData, PaginatedResult } from '@app/infinite-scroll/models/infinite-scroll.model';
+import { InfiniteScrollData, PaginatedResult } from '@app/shared/infinite-scroll/models/infinite-scroll.model';
 import { IonSplitPane, Platform } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GuessLocationByIpService } from '@app/core/services/location/guess-location-by-ip.service';
-import { OnMapPopoverComponent } from '@app/shared/components/on-map-popover/on-map-popover.component';
+import { OnMapPopoverComponent } from '@app/shared/location-editor/on-map-popover/on-map-popover.component';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { concat, from, Observable } from 'rxjs';

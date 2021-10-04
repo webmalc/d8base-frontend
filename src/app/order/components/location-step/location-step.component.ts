@@ -7,7 +7,7 @@ import { LocationResolverService } from '@app/core/services/location/location-re
 import { StepComponent } from '@app/order/abstract/step';
 import LocationStepData from '@app/order/interfaces/location-step-data.interface';
 import StepContext from '@app/order/interfaces/step-context.interface';
-import { LocationEditorPopoverComponent } from '@app/shared/components/location-editor-popover/location-editor-popover.component';
+import { LocationEditorPopoverComponent } from '@app/shared/location-editor/location-editor-popover/location-editor-popover.component';
 import { PopoverController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';

@@ -8,7 +8,7 @@ import {
   ServiceEssentialsStepComponent,
   ServiceSummaryStepComponent,
 } from '@app/service/pages/service-wizard-page/components';
-import { ServiceLocationEditorModule } from '@app/shared/service-location-editor/service-location-editor.module';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,7 +39,7 @@ import { ServiceBuilderService, ServiceWizardStateService } from './services';
     ReactiveFormsModule,
     FormsModule,
     IonicSelectableModule,
-    ServiceLocationEditorModule,
+    LocationEditorModule,
   ],
   providers: [
     ServiceFirstStepGuardService,

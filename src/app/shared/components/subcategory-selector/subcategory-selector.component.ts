@@ -7,7 +7,7 @@ import { NgDestroyService } from '@app/core/services';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
-import { ItemSelectorControl } from '../location-editor/item-selector-control';
+import { ItemSelectorControl } from '../../location-editor/item-selector-control';
 
 const ITEM_HEIGHT = 47;
 

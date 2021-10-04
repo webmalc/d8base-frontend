@@ -1,6 +1,6 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interface';
 import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { StorageManagerMock } from 'src/testing/mocks';

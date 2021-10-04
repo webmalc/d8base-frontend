@@ -38,7 +38,7 @@ import { StepSevenHandlerService } from '@app/service/services/steps-navigation-
 import { StepSixHandlerService } from '@app/service/services/steps-navigation-chain/step-six-handler.service';
 import { StepThreeHandlerService } from '@app/service/services/steps-navigation-chain/step-three-handler.service';
 import { StepTwoHandlerService } from '@app/service/services/steps-navigation-chain/step-two-handler.service';
-import { ServiceLocationEditorModule } from '@app/shared/service-location-editor/service-location-editor.module';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -59,7 +59,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     IonicSelectableModule,
     BrMaskerModule,
     RegistrationPageModule,
-    ServiceLocationEditorModule,
+    LocationEditorModule,
   ],
   declarations: [
     ServicePublishStepOneComponent,

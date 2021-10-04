@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Category } from '@app/api/models';
 import { ProfessionalsService } from '@app/api/services';
 import { map } from 'rxjs/operators';
-import { ItemSelectorControl } from '../location-editor/item-selector-control';
+import { ItemSelectorControl } from '../../location-editor/item-selector-control';
 
 @Component({
   selector: 'app-category-selector',

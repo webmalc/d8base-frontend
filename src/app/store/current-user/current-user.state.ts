@@ -2,8 +2,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Profile } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
-import { GrantTypes } from '@app/auth/enums/grant-types';
-import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { GrantTypes } from '@app/store/current-user/grant-types';
+import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interface';
 import { WINDOW } from '@app/core/injection-tokens';
 import { LoginDataInterface } from '@app/core/interfaces/login-data-interface';
 import { RefreshDataInterface } from '@app/core/interfaces/refresh-data-interface';
