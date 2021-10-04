@@ -23,6 +23,10 @@
         class="ion-padding-horizontal ion-padding-vertical"
       ></app-professional-card>
       <app-section-heading>
+        {{ 'professional-schedule.schedule' | translate }}
+      </app-section-heading>
+      <app-schedule-viewer [schedule]="context.professional.schedule"></app-schedule-viewer>
+      <app-section-heading>
         {{ 'professional-schedule.choose-service' | translate }}
       </app-section-heading>
       <ion-item lines="none">
