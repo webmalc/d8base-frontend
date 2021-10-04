@@ -1,16 +1,16 @@
 <ng-container *ngIf="!expanded; else content">
   <ion-item lines="none">
-    <ion-note class="cursor-pointer" color="primary" (click)="expanded = true">{{
-      'accordion.expand' | translate
-    }}</ion-note>
+    <ion-label class="cursor-pointer" color="primary" (click)="expanded = true">
+      {{ 'accordion.expand' | translate }}
+    </ion-label>
   </ion-item>
 </ng-container>
 
 <ng-template #content>
   <ng-content></ng-content>
   <ion-item lines="none">
-    <ion-note class="cursor-pointer" color="primary" (click)="expanded = false">{{
-      'accordion.collapse' | translate
-    }}</ion-note>
+    <ion-label class="cursor-pointer" color="primary" (click)="expanded = false">
+      {{ 'accordion.collapse' | translate }}
+    </ion-label>
   </ion-item>
 </ng-template>
