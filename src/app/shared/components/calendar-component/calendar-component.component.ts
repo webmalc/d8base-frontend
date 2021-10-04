@@ -2,10 +2,10 @@ import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/cor
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ProfessionalCalendar } from '@app/api/models';
 import { addDays, getCurrentDay, stripTime } from '@app/core/functions/datetime.functions';
-import { CalendarInterval } from '@app/shared/interfaces/calendar-interval';
-import { CalendarUnit } from '@app/shared/interfaces/calendar-unit';
 import { environment } from '@env/environment';
 import { CalendarService } from './calendar.service';
+import { CalendarInterval } from './calendar-interval';
+import { CalendarUnit } from './calendar-unit';
 
 const CALENDAR_INTERVAL = environment.default_calendar_interval;
 

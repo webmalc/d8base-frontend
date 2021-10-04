@@ -10,7 +10,7 @@ import { ChipComponent } from '@app/search/pages/search-page/applied-filters/chi
 import { ServiceTypeChipsComponent } from '@app/search/pages/search-page/applied-filters/service-type-chips/service-type-chips.component';
 import { SearchResultComponent } from '@app/search/pages/search-page/search-result/search-result.component';
 import { ServiceLinkComponent } from '@app/search/pages/search-page/search-result/service-title/service-link.component';
-import { LocationPickerModule } from '@app/shared/location-picker';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -35,7 +35,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
     ReviewsModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
-    LocationPickerModule,
+    LocationEditorModule,
   ],
   declarations: [
     SearchPage,

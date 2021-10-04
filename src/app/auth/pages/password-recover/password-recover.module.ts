@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PasswordRecoveryFormComponent } from '@app/auth/components/password-recovery-form/password-recovery-form.component';
-import { PasswordRecoveryFormService } from '@app/auth/forms/password-recovery-form.service';
-import { PasswordRecoveryService } from '@app/auth/services/password-recovery.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { PasswordRecoveryFormComponent } from './components/password-recovery-form/password-recovery-form.component';
+import { PasswordRecoveryService } from './services/password-recovery.service';
+import { PasswordRecoverPage } from './pages/password-recover.page';
 import { PasswordRecoverPageRoutingModule } from './password-recover-routing.module';
-import { PasswordRecoverPage } from './password-recover.page';
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { PasswordRecoverPage } from './password-recover.page';
     TranslateModule,
   ],
   declarations: [PasswordRecoverPage, PasswordRecoveryFormComponent],
-  providers: [PasswordRecoveryFormService, PasswordRecoveryService],
+  providers: [PasswordRecoveryService],
 })
 export class PasswordRecoverPageModule {}

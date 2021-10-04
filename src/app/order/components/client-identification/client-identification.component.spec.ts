@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RegistrationService } from '@app/auth/services/registration.service';
+import { RegistrationService } from '@app/auth/pages/registration/services/registration.service';
 import { OrderWizardStateService } from '@app/order/services';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';

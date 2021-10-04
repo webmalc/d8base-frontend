@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RegistrationService } from '@app/auth/services/registration.service';
+import { RegistrationService } from '@app/auth/pages/registration/services/registration.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
 import { ServiceStepsNavigationService } from '../../services/service-steps-navigation.service';

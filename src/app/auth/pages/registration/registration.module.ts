@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegistrationFormComponent } from '@app/auth/components/registration-form/registration-form.component';
-import { RegistrationService } from '@app/auth/services/registration.service';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { IonicSelectableModule } from 'ionic-selectable';
+
+import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { RegistrationService } from './services/registration.service';
 import { RegistrationPageRoutingModule } from './registration-routing.module';
-import { RegistrationPage } from './registration.page';
+import { RegistrationPage } from './pages/registration.page';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { RegistrationPage } from './registration.page';
     SharedModule,
     ReactiveFormsModule,
     TranslateModule,
-    IonicSelectableModule,
+    LocationEditorModule,
   ],
   declarations: [RegistrationPage, RegistrationFormComponent],
   providers: [RegistrationService],

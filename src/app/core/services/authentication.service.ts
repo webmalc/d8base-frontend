@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
-import { Credentials } from '@app/auth/interfaces/credentials';
+import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interface';
+import { Credentials } from '@app/core/interfaces/credentials';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';

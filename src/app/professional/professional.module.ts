@@ -12,6 +12,7 @@ import { CalendarGeneratorFactoryService } from '@app/professional/services/cale
 import { ServicesGeneratorFactoryService } from '@app/professional/services/services-generator-factory.service';
 import { ReviewsModule } from '@app/reviews/reviews.module';
 import { ServicePageModule } from '@app/service/service.module';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -38,6 +39,7 @@ import { ProfessionalResolver } from './professional.resolver';
     ServicePageModule,
     TranslateModule,
     IonicSelectableModule,
+    LocationEditorModule,
   ],
   declarations: [
     ProfessionalPageComponent,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { City, Country, Profile } from '@app/api/models';
-import { RegistrationService } from '@app/auth/services/registration.service';
+import { RegistrationService } from '@app/auth/pages/registration/services/registration.service';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService } from '@app/core/services';
 import { AuthenticationService } from '@app/core/services/authentication.service';

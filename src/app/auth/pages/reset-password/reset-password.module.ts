@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ResetPasswordFormService } from '@app/auth/forms/reset-password-form.service';
-import { ResetPasswordApiService } from '@app/auth/services/reset-password-api.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { ResetPasswordApiService } from './services/reset-password-api.service';
 import { ResetPasswordPageRoutingModule } from './reset-password-routing.module';
-import { ResetPasswordPage } from './reset-password.page';
+import { ResetPasswordPage } from './pages/reset-password.page';
 
 @NgModule({
   imports: [
@@ -20,6 +19,6 @@ import { ResetPasswordPage } from './reset-password.page';
     TranslateModule,
   ],
   declarations: [ResetPasswordPage],
-  providers: [ResetPasswordApiService, ResetPasswordFormService],
+  providers: [ResetPasswordApiService],
 })
 export class ResetPasswordPageModule {}

@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interface';
 import { HTTP_UNAUTHORIZED } from '@app/core/constants/http.constants';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';

@@ -1,5 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicSelectableComponent } from 'ionic-selectable';
+import { ServicePageModule } from '@app/service/service.module';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ServicePublishAuthStateManagerService } from '../../services/service-publish-auth-state-manager.service';
 import { ServicePublishDataHolderService } from '../../services/service-publish-data-holder.service';
@@ -22,8 +23,8 @@ describe('ServicePublishStepSevenComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ServicePublishStepSevenComponent, IonicSelectableComponent],
-        imports: [...RootModules(), ComponentTestingModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        imports: [...RootModules(), ComponentTestingModule, ServicePageModule],
         providers: [
           ServicePublishDataHolderService,
           ServiceStepsNavigationService,

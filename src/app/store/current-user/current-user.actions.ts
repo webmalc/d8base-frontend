@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 
-import { AuthResponseInterface } from '@app/auth/interfaces/auth-response.interface';
+import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interface';
 import {
   DefaultRegisterUser,
   ProfessionalList,
