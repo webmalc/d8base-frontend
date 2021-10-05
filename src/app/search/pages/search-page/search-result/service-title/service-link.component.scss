@@ -1,6 +1,9 @@
 :host {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .title {
@@ -8,12 +11,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1.1rem;
-}
-
-.price {
-  text-align: end;
-}
-
-.price-divider {
-  flex: 1;
 }
