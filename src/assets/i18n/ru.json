@@ -44,10 +44,7 @@
     "cancel": "Отмена",
     "not-specified": "Не указано",
     "page-not-found": "Страница не найдена",
-    "clear": "Очистить",
-    "ru": "RUS",
-    "en": "ENG",
-	"de": "DEU"
+    "clear": "Очистить"
   },
   "registration-verification": {
     "confirmation": "Подтверждение регистрации",
