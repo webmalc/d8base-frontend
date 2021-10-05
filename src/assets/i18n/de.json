@@ -47,7 +47,8 @@
     "clear": "Klar",
     "ru": "RUS",
     "en": "ENG",
-	"de": "DEU"
+	"de": "DEU",
+	"fr": "FRA"
   },
   "registration-verification": {
     "confirmation": "Bestätigung der Anmeldung",
@@ -699,7 +700,7 @@
     }
   },
   "main-page": {
-    "title": "Professioneller Suchdienst mit\u00a0die Möglichkeit der Online-Buchungsdienste",
+    "title": "Professioneller Suchdienst mit die Möglichkeit der Online-Buchungsdienste",
     "search-placeholder": "Finden Sie einen Dienst",
     "pick-a-date": "Wenn?",
     "date-picked": "Datum:",

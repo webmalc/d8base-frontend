@@ -46,7 +46,10 @@
     "page-not-found": "Page not found",
     "clear": "Clear",
     "ru": "RUS",
-    "en": "ENG"
+    "en": "ENG",
+    "de": "DEU",
+    "fr": "FRE",
+    "es": "ESP"
   },
   "registration-verification": {
     "confirmation": "Registration confirmation",
@@ -92,14 +95,12 @@
     "orders-title": "My orders",
     "become-professional-title": "Become professional",
     "become-professional": "Publish new service",
-
     "professional-title": "My services",
     "add-service": "Add new service",
     "service-list": "Service list",
     "received-orders": "Received orders",
     "professional-profile": "Professional profile",
     "professional-schedule": "Schedule",
-
     "client-title": "Order a service",
     "search": "Search",
     "bookmarks": "Bookmarks",
@@ -634,8 +635,8 @@
       "category-label": "Choose category",
       "subcategory-label": "Choose subcategory",
       "instant-booking": "Instant booking",
-      "only-with-photos":"Only with pictures",
-      "only-with-fixed-price":"Only with fixed price",
+      "only-with-photos": "Only with pictures",
+      "only-with-fixed-price": "Only with fixed price",
       "price-title": "Service cost",
       "price-start": "Price from",
       "price-end": "Price to",

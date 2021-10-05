@@ -1,0 +1,883 @@
+{
+  "global": {
+    "professional-level": {
+      "junior": "Principiante",
+      "medio": "Medio",
+      "senior": "Experto"
+    },
+    "sex": {
+      "1": "Mujer",
+      "0": "Hombre"
+    },
+    "yn": {
+      "y": "Sí",
+      "n": "No"
+    },
+    "experience-dates": {
+      "until-now": "hasta ahora"
+    },
+    "rating": {
+      "1": "Malo",
+      "2": "Mediocre",
+      "3": "Bien",
+      "4": "Muy bien",
+      "5": "Genial"
+    },
+    "weekdays": {
+      "mon": "LU",
+      "aut": "MA",
+      "wed": "MI",
+      "thu": "JU",
+      "fri": "VI",
+      "sat": "SA",
+      "sun": "DO"
+    },
+    "master": {
+      "private-person": "persona privada"
+    },
+    "from": "C",
+    "to": "hasta",
+    "at": "en",
+    "back": "Back",
+    "forward": "Continuar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "not-specified": "No especificado",
+    "page-not-found": "Página no encontrada",
+    "clear": "Borrar"
+  },
+  "registration-verification": {
+    "confirmation": "Confirmación de registro",
+    "success": "Registro confirmado con éxito",
+    "failure": "Registro no confirmado"
+  },
+  "delete-confirmation": {
+    "delete-service": "¿Eliminar Servicio?",
+    "okay": "Eliminar",
+    "cancel": "Cancelar"
+  },
+  "service-photos": {
+    "title": "Ejemplos de obras"
+  },
+  "service-location": {
+    "online": "Servicio en Línea",
+    "professional": "Recepción del maestro",
+    "client": "Salida al cliente"
+  },
+  "service-payment-options": {
+    "cash": "Efectivo",
+    "online": "pago en línea"
+  },
+  "accordion": {
+    "expand": "Más detalles",
+    "colapso": "Colapso"
+  },
+  "ion-selectable": {
+    "close-button-text": "Cerrar",
+    "search-text": "Buscar",
+    "search-fail-text": "no se encontró nada"
+  },
+  "units": {
+    "0": "Km",
+    "1": "Millas"
+  },
+  "main-menu": {
+    "account-title": "cuenta",
+    "My-account": "mis datos",
+    "log-in": "iniciar sesión",
+    "log-out": "Salir",
+    "sign-up": "Registro",
+    "orders-title": "Orden de servicios",
+    "become-professional-title": "Convertirse en un maestro",
+    "become-professional": "Servicio de publicación",
+    "professional-title": "mis servicios",
+    "add-service": "Agregar Servicio",
+    "service-list": "lista de servicios",
+    "received-orders": "pedidos Entrantes",
+    "professional-profile": "perfil del asistente",
+    "professional-schedule": "Calendario",
+    "client-title": "Orden de Servicio",
+    "search": "Buscar",
+    "bookmarks": "favoritos",
+    "sent-orders": "pedidos Enviados"
+  },
+  "layout": {
+    "log-in": "iniciar sesión",
+    "sign-up": "Registro",
+    "become-professional": "Convertirse en un maestro",
+    "mis pedidos": "mis pedidos",
+    "dark-theme": "tema oscuro"
+  },
+  "login-form": {
+    "login": "Email",
+    "password": "Contraseña",
+    "sign-in": "iniciar sesión",
+    "forgot-password": "¿Olvidó su contraseña?",
+    "sign-up": "Registro"
+  },
+  "registration-form": {
+    "email": "Email",
+    "password": "Contraseña",
+    "confirm": "Confirmar contraseña",
+    "name": "Nombre",
+    "last-name": "Apellido",
+    "phone": "número de Teléfono",
+    "country": "País",
+    "ciudad": "Ciudad",
+    "register": "Regístrese"
+  },
+  "reset-password": {
+    "password": "Contraseña",
+    "confirm": "Confirmar contraseña",
+    "submit": "Cambiar contraseña",
+    "success": "Contraseña cambiada con éxito"
+  },
+  "password-recovery": {
+    "email": "Email",
+    "enviar": "Enviar",
+    "link-sent": "se ha enviado un Enlace de restablecimiento de contraseña"
+  },
+  "login-page": {
+    "incorrect-login-data": "nombre de usuario o contraseña incorrectos"
+  },
+  "profile-form": {
+    "title": "Perfil",
+    "main": "Principal",
+    "contacts": "datos de Contacto / redes Sociales",
+    "address": "Su dirección",
+    "phone": "Teléfono",
+    "corporate": "cliente corporativo",
+    "about": "acerca de mí",
+    "unidades": "Moneda, Km / Millas, Idioma",
+    "change-password": "Cambiar contraseña",
+    "group": {
+      "main": "Principal",
+      "credentials": "datos de acceso"
+    },
+    "fields": {
+      "name": "Nombre",
+      "surname": "Apellido",
+      "patronymic": "Patronímico",
+      "password": "Contraseña",
+      "email": "Introduzca su correo electrónico",
+      "phone": "número de Teléfono",
+      "avatar": "Avatar",
+      "género": "Género",
+      "edad": "fecha de nacimiento",
+      "main_language": "idioma preferido de comunicación",
+      "languages": "idiomas Adicionales"
+    },
+    "placeholders": {
+      "name": "Escriba su nombre",
+      "surname": "Introduzca su apellido",
+      "patronymic": "Introduzca su patronímico",
+      "password": "Introduzca la contraseña",
+      "email": "Introduzca la dirección de correo electrónico. correos",
+      "phone": "Introduzca el número de Teléfono",
+      "avatar": "Especificar avatar",
+      "género": "Especifique su género",
+      "edad": "Indique su edad",
+      "main_language": "lenguaje de comunicación",
+      "languages": "idiomas Adicionales"
+    },
+    "button": "Guardar",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "plugins": "Plugins",
+    "education": "Educación",
+    "bookmark": "favoritos",
+    "your-address": "Su dirección",
+    "main-address": "dirección principal",
+    "additional-address": "Additional Address",
+    "edad": "fecha de nacimiento",
+    "Nationality": "nacionalidad",
+    "languages": "Idiomas de comunicación",
+    "not-specified": "No especificado",
+    "email": "email confirmado",
+    "email-not-confirmed": "email NO confirmado",
+    "email-verification-sent": "Confirmación de la dirección de correo electrónico enviada a' {{email }}'",
+    "email-change": {
+      "email-registered": "el Correo electrónico de confirmación de la nueva dirección de correo electrónico fue enviado a' {{newEmail }}'",
+      "email-verified-success": "la Dirección de correo electrónico ha cambiado a' {{ newEmail }}'",
+      "email-verified-failure": "no se pudo cambiar la Dirección de correo electrónico",
+      "email-verification-title": "Verificación del cambio de dirección de correo electrónico"
+    }
+  },
+  "profile-main-edit": {
+    "main": "Principal"
+  },
+  "profile-edit": {
+    "about": "acerca de mí",
+    "save": "Guardar",
+    "birthday": "fecha de nacimiento",
+    "Nationality": "nacionalidad",
+    "languages": "Idiomas de comunicación"
+  },
+  "plugins-tab": {
+    "plugins": "Plugins",
+    "save": "Guardar"
+  },
+  "contacts-tab": {
+    "whatsapp": "Whatsapp",
+    "facebook_messenger": "Facebook Messenger",
+    "instagram": "Instagram",
+    "www": "Enlace al sitio",
+    "save": "Guardar"
+  },
+  "education-tab": {
+    "education": "Educación",
+    "experience": "Experiencia",
+    "certificate": {
+      "certificate": "documento de Respaldo",
+      "title": "Título",
+      "foto": "Foto",
+      "link": "Enlace",
+      "remove_certificate": "Eliminar documento",
+      "add_certificate": "Añadir documento"
+    },
+    "save": "Guardar"
+  },
+  "master-page": {
+    "main": "configuración básica",
+    "tags": "Etiquetas"
+  },
+  "bookmarks": {
+    "sin marcadores": "tus marcadores están vacíos"
+  },
+  "list-item": {
+    "add-new": "Añadir",
+    "add-new-contact": "Añadir nuevo contacto",
+    "add-new-address": "Añadir nueva dirección"
+  },
+  "duration": {
+    "days": "días",
+    "hours": "horas",
+    "minutes": "minutos",
+    "minutes-short": "min"
+  },
+  "service-viewer": {
+    "title": "información del Servicio"
+  },
+  "service-editor": {
+    "essentials-title": "información obligatoria"
+  },
+  "service-details": {
+    "location-title": "Ubicación y hora del Servicio",
+    "description-title": "descripción Detallada",
+    "payment-title": "opciones de pago Disponibles",
+    "instant-book-title": "confirmación instantánea (Instant Book)",
+    "instant-book-description": "las Reservas de este Servicio son aceptadas automáticamente por el maestro y no requieren confirmación por el maestro",
+    "address": "Dirección",
+    "editar": "servicios de Edición",
+    "name": "Nombre",
+    "photos": "Fotos",
+    "description": "Descripción",
+    "tags": "etiquetas",
+    "duration-and-price": "Duración y precio",
+    "payment-methods": "Opciones de pago",
+    "is-base-schedule": "se Utiliza la programación básica del asistente",
+    "service-type": "Lugar de Servicio",
+    "location": {
+      "service-geography": "Geografía del Servicio",
+      "attendance-distance": "Distancia a distancia",
+      "from": "desde la dirección",
+      "choose-address": "Seleccione una dirección"
+    }
+  },
+  "service-wizard": {
+    "title": "Agregar nuevo Servicio",
+    "time": "Time",
+    "place": "Lugar",
+    "publish": "Publicar",
+    "summary-title": "toques Finales",
+    "is-enabled": "Mostrar en los resultados de búsqueda",
+    "is-auto-order-confirmation": "Confirmar órdenes automáticamente"
+  },
+  "service-publish": {
+    "back-button": "Atrás",
+    "forward-button": "Continuar",
+    "step-one": {
+      "title": "Servicio de publicación",
+      "description": "Publique un anuncio sobre sus servicios en solo 3 minutos y será visto por miles de clientes que buscan Su Servicio y Usted.",
+      "subdesc": "¡Es gratis!",
+      "category-title": "Seleccione la categoría en la que desea colocar su Servicio",
+      "category-subtitle": "categoría de Servicio",
+      "subcategory-title": "Seleccione una subcategoría para su Servicio",
+      "subcategory-subtitle": "subcategoría de servicios"
+    },
+    "step-two": {
+      "title": "Información sobre su Servicio",
+      "first-info-row": "sugerencia: ¡toda la información se puede actualizar y editar fácilmente en cualquier momento!",
+      "service-title": "nombre del Servicio",
+      "service-placeholder": "Introduzca el nombre del Servicio",
+      "service-description": "Descripción del Servicio",
+      "service-description-placeholder": "Introduzca el texto de la descripción del Servicio",
+      "duration-and-price": "Tiempo y costo del Servicio para un cliente",
+      "precio fijo": "Precio fijo",
+      "fixed-price-title": "Costo",
+      "start-price": "Costo de",
+      "precio final": "Costo hasta",
+      "second-info-row": "Desea agregar un costo diferente según la Duración o el lugar; simplemente agregue más Servicio en el siguiente paso.",
+      "location": "Ubicación del Servicio",
+      "description-error": "longitud mínima de descripción de 20 caracteres"
+    },
+    "step-three": {
+      "title": "¿Quieres añadir fotos de Servicio? Con ellos, su Servicio será más brillante!",
+      "first-info-row": "No sabes qué fotos elegir, ¡no dudes en ir al siguiente paso! ¡Puedes agregar y actualizar fácilmente fotos en cualquier momento!",
+      "photos": "Añadir servicios de fotos",
+      "add-new-service": "¿Quieres añadir más Servicio?",
+      "second-info-row": "siempre puede agregar cualquier número de servicios en una fecha posterior.",
+      "add-new-service-button": "Añadir más Servicio"
+    },
+    "step-four": {
+      "title": "¡Felicidades! El Servicio está listo.",
+      "subtitle": "Solo queda aportar información Sobre usted.",
+      "first-info-row": "Escriba el correo Electrónico al que desea recibir comentarios sobre su Servicio.",
+      "email-title": "Tu Email",
+      "email-placeholder": "Introduzca su Email",
+      "new-user": "Eres un nuevo usuario.",
+      "name-title": "¿cómo puedo contactarte?",
+      "first-name-placeholder": "Nombre",
+      "last-name-placeholder": "apellido (opcional)",
+      "create-password": "por Favor, invente una contraseña",
+      "second-info-row": "una vez registrado, podrá guardar y editar el Servicio.",
+      "password-placeholder": "Ingrese su contraseña",
+      "password-info": "la Contraseña debe tener un mínimo de 8 caracteres",
+      "password-confirm": "Introduzca la contraseña de nuevo",
+      "forgot-password": "¿Olvidó su contraseña?",
+      "user-exists": "Usted es un usuario registrado.",
+      "enter-password": "para continuar, introduzca la contraseña"
+    },
+    "step-five": {
+      "title": "Ingrese la información sobre usted que desea que vean sus clientes.",
+      "company-title": "nombre de la empresa",
+      "company-placeholder": "nombre de la empresa",
+      "name-title": "Nombre",
+      "name-placeholder": "Escriba su nombre",
+      "last-name": "Introduzca su apellido",
+      "last-name-title": "Apellido",
+      "last-name-placeholder": "Introduzca su apellido",
+      "género": "Género",
+      "add-photo": "¡es una Buena idea agregar una foto a tu perfil!",
+      "first-info-row": "al Agregar tu foto principal al perfil, aumentarás la confianza en tu perfil y tendrás más clientes.",
+      "add-photo-title": "Añadir tu foto principal"
+    },
+    "step-six": {
+      "company-title": "nombre de la empresa",
+      "company-placeholder": "nombre de la empresa",
+      "title": "Agregue información adicional (opcional).",
+      "first-info-row": "¡Agregue información sobre usted para que los clientes lo seleccionen! O puede hacerlo más tarde.",
+      "description": "acerca de mí",
+      "description-placeholder": "Escriba el texto de descripción sobre Usted que desea que sus clientes vean en la parte superior del anuncio",
+      "specialization": "Especialización",
+      "specialization-placeholder": "Especialización",
+      "level": "nivel profesional",
+      "persona": "persona privada",
+      "company": "Empresa"
+    },
+    "step-seven": {
+      "timetable-desc": "establecer horario de Servicio",
+      "use-base-timetable": "Usar la programación básica del asistente",
+      "title": "Introduzca los datos y la dirección, para una mejor clasificación de su perfil.",
+      "first-info-row": "Desea recibir pagos en línea: conecte Paypal después de publicar su Servicio y reciba pagos hoy. ¡Es gratis!",
+      "timetable-title": "Tiempo de Servicio",
+      "location-title": "Dirección del Servicio",
+      "country-title": "País",
+      "country-placeholder": "Elige tu país",
+      "city-title": "Ciudad",
+      "city-placeholder": "Elige tu ciudad",
+      "address": "Dirección",
+      "address-placeholder": "Ingrese su dirección",
+      "postal": "código Postal",
+      "postal-placeholder": "su índice",
+      "location-radius": "Salida:",
+      "payment-title": "Pago",
+      "payment-description": "opciones de pago disponibles Para los clientes por sus servicios",
+      "payment-info": "podrá activar el Pago en línea después de publicar el Servicio",
+      "departure": {
+        "title": "Geografía de la salida",
+        "description": "el Radio dentro del cual se va"
+      },
+      "location-radius-within": "dentro de la ciudad",
+      "location-radius-radius": "En un Radio ",
+      "timetable": {
+        "title": "Tiempo de Servicio",
+        "add-new-time": "Añadir más tiempo",
+        "Popover-title": "Seleccione el día de la semana"
+      },
+      "use_default-location": "Usar una dirección existente",
+      "select-default-location": "Seleccione una dirección",
+      "instant-booking": "Confirmación automática (Instant Booking)",
+      "instant-booking-label": "Confirmar el Servicio automáticamente"
+    },
+    "final-step": {
+      "title": "¡Felicidades! Todo listo para enviar.",
+      "first-info-row": "si lo desea, agregue sus contactos y enlaces a perfiles en otros servicios, ¡esto aumentará la confianza en su oferta! O puede ir directamente a ver y publicar.",
+      "master-picker": {
+        "popover-title": "Seleccione un perfil de especialista"
+      },
+      "publish": "Publicar",
+      "ver": "Ver"
+    }
+  },
+  "messages": {
+    "chat-list-page": {
+      "search": "buscar contacto",
+      "empty-list": "la lista de diálogo está vacía",
+      "messages": "Mensajes"
+    },
+    "direct": {
+      "loading-text": "Descargar más mensajes...",
+      "editar-mensaje": "Editar mensaje",
+      "empty-chat-placeholder": "aún no has tenido correspondencia con este usuario. Envíe el primer mensaje para iniciar el diálogo."
+    },
+    "context-menu": {
+      "editar": "Editar",
+      "delete": "Eliminar"
+    }
+  },
+  "declination": {
+    "reviews": {
+      "1": "revisión",
+      "2": "comentarios",
+      "3": "comentarios"
+    },
+    "years": {
+      "1": "año",
+      "2": "años",
+      "3": "años"
+    },
+    "proposal": {
+      "1": "propuesta",
+      "2": "sugerencias",
+      "3": "propuestas"
+    },
+    "is-waiting": {
+      "1": "esperando",
+      "2": "esperando",
+      "3": "esperando"
+    },
+    "services": {
+      "1": "Servicio",
+      "2": "servicios",
+      "3": "servicios"
+    }
+  },
+  "professional-schedule": {
+    "title": "calendario maestro",
+    "schedule": "Horario",
+    "choose-service": "Elija un Servicio para ordenar",
+    "service-not-selected": "No seleccionado",
+    "order-action": "Ordenar"
+  },
+  "master-profile": {
+    "navbar": {
+      "chat": "Chat",
+      "services": "Servicios",
+      "schedule": "Calendario"
+    },
+    "main-info": {
+      "rating": "clasificación del maestro",
+      "sin calificación": "Sin calificación",
+      "reviews": "Opiniones"
+    },
+    "services": {
+      "service-edit": {
+        "published": "Servicio publicado",
+        "no publicado": "Servicio no publicado",
+        "publish": "Publicar",
+        "unpublish": "Retirar de la publicación",
+        "editar": "Editar",
+        "delete": "Eliminar",
+        "ver": "Ver"
+      },
+      "service-presentation": {
+        "pick": "Ordenar",
+        "more-info": "más información"
+      },
+      "services-tab": {
+        "master-services": "Master-Services",
+        "add-new-service": "Agregar Servicio",
+        "search-placeholder": "Buscar por nombre"
+      }
+    },
+    "info": {
+      "title": "perfil del asistente",
+      "information": "Información",
+      "master-location": "dirección del maestro",
+      "portfolio": "Fotos de obras",
+      "contacts": "Contactos",
+      "description": "Descripción",
+      "specialization": "Especialización",
+      "tags": "Etiquetas",
+      "about": "acerca del maestro",
+      "professional-experience": "experiencia laboral",
+      "professional-level": "nivel profesional",
+      "sexo": "Sexo",
+      "age": "Edad",
+      "Nationality": "nacionalidad",
+      "experience": "experiencia laboral",
+      "education": "Educación",
+      "certificates": "Certificados",
+      "availability": "disponibilidad del Servicio",
+      "languages": "Idiomas de comunicación",
+      "reviews": "Opiniones",
+      "on-map": "Ver en el mapa",
+      "from-here": "desde una dirección determinada",
+      "add-new-exp": "Añadir experiencia",
+      "add-new-education": "añadir educación",
+      "add-new-certificate": "Añadir certificado",
+      "certificate-url": "enlace al certificado",
+      "certificate-id": "id de certificado",
+      "no-data": "no especificado"
+    },
+    "edit-master": {
+      "title": "Básico",
+      "name": "Especialización",
+      "name-placeholder": "Introduzca la Especialización",
+      "description": "Descripción",
+      "description-placeholder": "Introduzca una descripción",
+      "company": "Organización",
+      "company-placeholder": "Introduzca la organización",
+      "experience": "experiencia laboral",
+      "experience-placeholder": "Introduzca la antigüedad",
+      "level": "nivel profesional",
+      "level-placeholder": "Seleccione un nivel profesional",
+      "subcategoría": "Subcategoría",
+      "subcategory-placeholder": "Seleccionar subcategoría",
+      "save": "Guardar"
+    }
+  },
+  "location-edit-page": {
+    "address": "Dirección",
+    "country": "País",
+    "region": "Región",
+    "subdistrito": "Subdistrito",
+    "ciudad": "Ciudad",
+    "district": "Distrito",
+    "postal-code": "Índice",
+    "timezone": "zona horaria",
+    "remove-location": "Eliminar",
+    "Save-location": "Guardar",
+    "make-default": "Hacer dirección predeterminada"
+  },
+  "category": "Seleccione una categoría",
+  "subcategoría": "seleccionar subcategoría",
+  "contact-edit-page": {
+    "contacts": "datos de Contacto",
+    "choice-contact": "Seleccione un contacto",
+    "enter-contact": "Introduzca su contacto",
+    "delete": "Eliminar",
+    "save": "Guardar",
+    "add-new": "Añadir más contacto"
+  },
+  "tags-edit-page": {
+    "save": "Guardar",
+    "master-tags": "etiquetas maestras",
+    "add-new-tag": "Añadir nueva etiqueta",
+    "add": "Añadir"
+  },
+  "experience-edit-page": {
+    "back": "Back",
+    "title": "título del puesto",
+    "company": "Organización",
+    "is-still-here": "Hasta ahora",
+    "start-date": "C",
+    "End-date": "por",
+    "description": "Descripción",
+    "remove": "Eliminar",
+    "save": "Guardar"
+  },
+  "education-edit-page": {
+    "back": "Back",
+    "university": "Universidad",
+    "degree": "grado avanzado",
+    "campo de estudio": "campo científico",
+    "is-still-here": "Hasta ahora",
+    "start-date": "C",
+    "End-date": "por",
+    "description": "Descripción",
+    "remove": "Eliminar",
+    "save": "Guardar"
+  },
+  "certificates-edit-page": {
+    "back": "Back",
+    "name": "Nombre",
+    "organization": "Organización",
+    "date": "fecha",
+    "certificate-id": "id de certificado",
+    "certificate-link": "Enlace",
+    "certificate-photo": "Fotos",
+    "remove": "Eliminar",
+    "save": "Guardar"
+  },
+  "master-review": {
+    "created-time": "tiempo de retiro",
+    "answer": "respuesta del maestro"
+  },
+  "search": {
+    "result": {
+      "order": "Reservar",
+      "chat": "Chat",
+      "all-services": "Todos"
+    },
+    "filters": {
+      "title": "Filtros",
+      "aplicar": "Aplicar",
+      "reset": "Eliminar todo",
+      "location-title": "Ubicación",
+      "categories-title": "categorías de servicios",
+      "category-label": "Seleccione una categoría",
+      "subcategory-label": "seleccionar subcategoría",
+      "instant-booking": "reservas instantáneas",
+      "only-with-photos": "sólo con fotos",
+      "only-with-fixed-price": "solo con precio fijo",
+      "price-title": "Costo del Servicio",
+      "price-start": "Precio desde",
+      "price-end": "Precio hasta",
+      "payment-methods": "métodos de pago",
+      "languages": "Idiomas",
+      "language": "Idioma",
+      "professional-traits-title": "características del artista",
+      "only-with-reviews": "solo con comentarios",
+      "only-with-certificates": "sólo certificados",
+      "start-age": "Edad desde",
+      "end-age": "Edad antes",
+      "nationality": "país de origen",
+      "professional-level": "nivel profesional"
+    },
+    "search-button": "Buscar",
+    "add-filters-button": "Filtros",
+    "any-location": "No especificado"
+  },
+  "issuance": {
+    "search-placeholder": "Encontrar un Servicio / especialista",
+    "search-empty": "no se encontró Nada",
+    "filters": {
+      "title": "Filtros",
+      "reset": "Restablecer",
+      "submenu": {
+        "main": "Básico",
+        "additional": "Adicional"
+      },
+      "main-tab": {
+        "country": "País",
+        "country-placeholder": "Seleccione un país",
+        "ciudad": "Ciudad",
+        "city-placeholder": "Elige una ciudad",
+        "on-map": "o especifique una dirección en el mapa",
+        "radius": "Radio de búsqueda",
+        "categories": "Categorías de búsqueda",
+        "categories-select": "seleccionar categorías",
+        "subcategorías": "Subcategorías de búsqueda",
+        "subcategories-select": "seleccionar subcategorías",
+        "tags": "Etiquetas",
+        "add": "Añadir",
+        "tags-select": "Seleccionar de la nube de etiquetas",
+        "online-booking": "reserva Online",
+        "online-booking-desc": "Mostrar ofertas sin reservas online",
+        "instant-booking": "reservas instantáneas",
+        "instant-booking-desc": "Mostrar solo las ofertas que se pueden reservar sin esperar la confirmación del asistente",
+        "datetime": "fecha, hora",
+        "availability": "disponibilidad del Servicio",
+        "price": "Costo del Servicio",
+        "aplicar": "Aplicar",
+        "date-from": "fecha con",
+        "date-to": "Date-to",
+        "time-from": "hora de Inicio",
+        "time-to": "hora de finalización",
+        "price-start": "precio con",
+        "price-end": "Precio por",
+        "exact-interval": "Intervalo completo",
+        "exact-interval-desc": "reservar maestros para todo el intervalo especificado"
+      }
+    }
+  },
+  "main-page": {
+    "title": "Servicio de búsqueda de especialistas con la posibilidad de servicios de reserva en línea",
+    "search-placeholder": "Buscar Servicio",
+    "pick-a-date": "¿Cuándo?",
+    "date-picked": "fecha:",
+    "include-online": "Remotamente",
+    "find-btn": "Buscar",
+    "more-filters": "búsqueda Flexible",
+    "service-categories": "Categorías de servicios",
+    "category-education": "Educación",
+    "category-medicine": "Medicina",
+    "category-beauty": "Belleza",
+    "category-dating": "Citas",
+    "category-repair": "Reparación",
+    "category-home": "Casa",
+    "category-photo": "fotos y videos",
+    "category-pro": "Pro",
+    "category-sport": "Sport"
+  },
+  "order": {
+    "step": {
+      "date-time": "selección de fecha y hora",
+      "location": "Selección de la ubicación del Servicio",
+      "client-details": "Servicio de Pedido",
+      "summary": "Servicio de Pedido"
+    },
+    "choose-another-service": "Elegir otro",
+    "identification": "Sus datos",
+    "registered-user": "Usted es un usuario registrado. Para & nbsp;continuar ingrese su contraseña",
+    "nuevo usuario": "Introduzca una contraseña con la que podrá realizar un seguimiento del estado del pedido",
+    "title": "Servicio de Pedido",
+    "selected-service": "Servicio Seleccionado",
+    "order-service": "Reservar",
+    "location-header": "Seleccione la ubicación del Servicio",
+    "final-step": "para completar la reserva, queda por hacer clic en el botón «Reservar».",
+    "comment-header": "Comentario sobre el pedido",
+    "date-time-header": "fecha y hora del Servicio",
+    "date-time-subheader": "Seleccione la fecha y hora de Inicio del Servicio que desee",
+    "date": "fecha de Servicio",
+    "time": "hora de Inicio del Servicio",
+    "client-details": "Sus datos",
+    "done": "orden formada",
+    "done-details": "Su reserva se ha enviado correctamente al asistente para su confirmación.",
+    "confirmation-sent": "correo electrónico con los detalles de la reserva enviado a Su dirección de correo electrónico",
+    "no seleccionado": "No seleccionado",
+    "is-for-me": "grabar Para mí",
+    "name": "Nombre",
+    "surname": "Apellido",
+    "email": "E-mail",
+    "phone": "Teléfono",
+    "is-not-for-me-description": "Introduzca el nombre y apellido de la persona que recibirá el Servicio",
+    "success-title": "el Servicio se ha publicado correctamente.",
+    "professional-address-error": "Continuar no es posible — el Servicio ha seleccionado \" Recepción del asistente\", pero el asistente no ha especificado ninguna dirección."
+  },
+  "flag-menu": {
+    "language": "Idioma de la interfaz",
+    "currency": "Moneda",
+    "unidades": "km / Millas",
+    "first-day-of-week": "Primer día de la semana",
+    "lunes": "Lunes",
+    "sunday": "Sunday"
+  },
+  "calendar": {
+    "timezone": "zona horaria",
+    "day-off": "No hay intervalos de tiempo disponibles para ordenar"
+  },
+  "received_orders": {
+    "title": "pedidos Recibidos",
+    "newTab": "Esperando",
+    "currentTab": "Actual",
+    "archiveTab": "Archivo",
+    "empty-placeholder": "no hay Pedidos",
+    "aceptar": "Aceptar",
+    "discard": "Rechazar",
+    "complete": "Finalizar",
+    "ver": "Más información",
+    "order-details-title": "detalles del pedido",
+    "order-details-subtitle": "estás reservado",
+    "order-number": "número de reserva",
+    "ordered-service": "Servicio reservado",
+    "order-details": "detalles de la reserva",
+    "discard-confirmation": "¿Rechazar? El pedido se moverá al archivo"
+  },
+  "sent_orders": {
+    "title": "pedidos Enviados",
+    "currentTab": "Actual",
+    "archiveTab": "Archivo",
+    "empty-placeholder": "no hay Pedidos",
+    "order-details-title": "detalles del pedido",
+    "order-details-subtitle": "has reservado",
+    "order-number": "número de reserva",
+    "ordered-service": "Servicio reservado",
+    "order-details": "detalles de la reserva",
+    "ver": "Más información",
+    "discard": "Cancelar",
+    "order-discarded": "Orden cancelada"
+  },
+  "order-status": {
+    "title": "estado del pedido",
+    "pending": "Esperando",
+    "accepted": "Confirmado",
+    "pagado": "Pagado",
+    "completed": "Completado",
+    "canceled": "Cancelado",
+    "overdue": "Vencido"
+  },
+  "saved-professionals": {
+    "title": "favoritos",
+    "empty": "Lista vacía"
+  },
+  "reviews": {
+    "title": "Opiniones",
+    "editar-revisión": "enviar comentarios",
+    "edit-comment": "Dejar un comentario",
+    "send-review": "enviar comentarios",
+    "description": "Revisión",
+    "date": "fecha",
+    "professional-comment": "respuesta del maestro",
+    "yours-comment": "su respuesta",
+    "all-reviews": "todos los comentarios",
+    "no-reviews": "no hay Comentarios.",
+    "enviar": "Enviar"
+  },
+  "orders-type": {
+    "enviado": "Enviado",
+    "received": "Recibido"
+  },
+  "form-errors": {
+    "minlength": "el Campo debe contener al menos {{ requiredlength }} caracteres. El número actual de caracteres es {{actualLength }}.",
+    "maxlength": "el número Máximo de caracteres no debe exceder {{ requiredLength }}. El número actual de caracteres es {{actualLength }}.",
+    "min": "no debe ser menor que {{min }}.",
+    "max": "no debe ser mayor que {{ max }}.",
+    "email": "la Dirección de correo electrónico no es correcta.",
+    "forbidNumericValue": "el Campo no debe contener solo números.",
+    "passwordMismatch": "las Contraseñas no coinciden.",
+    "required": "el Campo es obligatorio.",
+    "priceError": "el Precio 'de' debe ser menor que el precio 'de'.",
+    "emptyEndDate": "No se ha especificado una fecha de finalización.",
+    "emptyStartDate": "No se ha especificado una fecha de Inicio.",
+    "timeIntervalError": "El número de minutos debe ser un múltiplo de {{ interval }}.",
+    "timeCausalityError": "la hora de finalización debe ser mayor que la hora de Inicio.",
+    "whitespaces": "el Campo no debe contener espacios en blanco."
+  },
+  "server-errors": {
+    "unauthorized": "Acceso denegado",
+    "temporarily-unavailable": "el Servidor no está disponible temporalmente. Intenta actualizar la página.",
+    "genérico": "el Servidor no está disponible temporalmente"
+  },
+  "client-errors": {
+    "file-is-too-big": "el Tamaño del archivo es demasiado grande"
+  },
+  "city-confirmation": {
+    "title": "¿Tu ciudad {{city}}?",
+    "choose": "no, elija otro"
+  },
+  "tag-editor": {
+    "enter-tag-name": "Introduzca el nombre de la etiqueta",
+    "add-new-tag": "Añadir etiqueta"
+  },
+  "cancel-order-popover": {
+    "reason-title": "motivo de cancelación",
+    "reasons-dates": "Transferencia de fecha u hora",
+    "reasons-other": "Otra razón",
+    "note-title": "Comentario",
+    "confirm": "Cancelar pedido"
+  },
+  "promo": {
+    "block-1-title": "Busque especialistas de primera clase",
+    "block-1-text": "y reservar servicios en línea",
+    "block-1-button": "encontrar un especialista",
+    "block-2-title": "solo tres sencillos pasos",
+    "step-1-text": "Publicar un anuncio",
+    "Step-1-note": "es totalmente gratis",
+    "step-2-text": "publique un horario",
+    "Step-2-note": "para cualquier número de servicios",
+    "Step-3-text": "Tome pedidos en línea",
+    "Step-3-note": "de miles de clientes en nuestro sitio web",
+    "block-3-title": "Conviértete en un artista",
+    "block-3-text": "y encuentra nuevos clientes en todo el mundo",
+    "block-3-button": "Registrarse"
+  },
+  "footer": {
+    "about": "acerca del Servicio",
+    "support": "Support",
+    "eula": "acuerdo de Usuario",
+    "copy": " © 2021 d8base | todos los derechos reservados"
+  }
+}
