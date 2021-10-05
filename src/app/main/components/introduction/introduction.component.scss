@@ -139,7 +139,7 @@
   justify-content: center;
   &__photo {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-start;
     background-image: url('/assets/images/introduction/banner.png');
     background-repeat: no-repeat;
