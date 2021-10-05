@@ -44,11 +44,7 @@
     "cancel": "Abbrechen",
     "not-specified": "Keine Angabe",
     "page-not-found": "Seite nicht gefunden",
-    "clear": "Klar",
-    "ru": "RUS",
-    "en": "ENG",
-	"de": "DEU",
-	"fr": "FRA"
+    "clear": "Klar"
   },
   "registration-verification": {
     "confirmation": "Bestätigung der Anmeldung",
