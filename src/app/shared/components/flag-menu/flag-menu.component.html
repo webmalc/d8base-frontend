@@ -18,29 +18,31 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item *appIfSpinner="rateList$ | ifSpinnerErrorState | async as rateList">
-      <ion-label> {{ 'flag-menu.currency' | translate }}: </ion-label>
-      <ion-select [formControl]="form.controls[formFields.currency]">
-        <ion-select-option *ngFor="let rate of rateList" [value]="rate.currency">
-          {{ rate.currency }} ({{ rate.sign }})
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label> {{ 'flag-menu.units' | translate }}: </ion-label>
-      <ion-select [formControl]="form.controls[formFields.units]">
-        <ion-select-option *ngFor="let unit of userSettingsService.unitsList" [value]="unit">
-          {{ 'units.' + unit | translate | titlecase }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label> {{ 'flag-menu.first-day-of-week' | translate }}: </ion-label>
-      <ion-select [formControl]="form.controls[formFields.is_monday_start_of_a_week]">
-        <ion-select-option *ngFor="let day of userSettingsService.firstDayOfWeekList" [value]="day">
-          {{ (day ? 'flag-menu.monday' : 'flag-menu.sunday') | translate }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+    <form [formGroup]="form">
+      <ion-item *appIfSpinner="rateList$ | ifSpinnerErrorState | async as rateList">
+        <ion-label> {{ 'flag-menu.currency' | translate }}: </ion-label>
+        <ion-select [formControlName]="formFields.currency">
+          <ion-select-option *ngFor="let rate of rateList" [value]="rate.currency">
+            {{ rate.currency }} ({{ rate.sign }})
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label> {{ 'flag-menu.units' | translate }}: </ion-label>
+        <ion-select [formControlName]="formFields.units">
+          <ion-select-option *ngFor="let unit of userSettingsService.unitsList" [value]="unit">
+            {{ 'units.' + unit | translate | titlecase }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label> {{ 'flag-menu.first-day-of-week' | translate }}: </ion-label>
+        <ion-select [formControlName]="formFields.is_monday_start_of_a_week">
+          <ion-select-option *ngFor="let day of userSettingsService.firstDayOfWeekList" [value]="day">
+            {{ (day ? 'flag-menu.monday' : 'flag-menu.sunday') | translate }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
   </ion-list>
 </ion-content>

@@ -149,7 +149,7 @@
 
     @media (max-width: 768px) {
       justify-content: center;
-      background-position: center;
+      background-position-x: -260px;
     }
   }
 
@@ -164,7 +164,7 @@
 
   @media (max-width: 768px) {
     padding-top: 0;
-    margin-top: -14rem;
+    margin-top: -12rem;
     text-align: center;
     max-width: unset;
   }
@@ -174,5 +174,9 @@
     font-weight: 500;
     color: var(--ion-color-base);
     margin: unset;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
   }
 }
