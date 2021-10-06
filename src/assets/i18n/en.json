@@ -45,11 +45,18 @@
     "not-specified": "Not specified",
     "page-not-found": "Page not found",
     "clear": "Clear",
-    "ru": "RUS",
     "en": "ENG",
+    "ru": "RUS",
     "de": "DEU",
     "fr": "FRE",
     "es": "ESP"
+  },
+  "language": {
+    "en": "English",
+    "ru": "Русский",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español"
   },
   "registration-verification": {
     "confirmation": "Registration confirmation",
