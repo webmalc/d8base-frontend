@@ -10,6 +10,7 @@ import {
   OrderConfirmationComponent,
   SummaryStepComponent,
 } from '@app/order/components';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -41,6 +42,7 @@ import { OrderWizardStateService } from './services';
     FormsModule,
     IonicSelectableModule,
     RegistrationPageModule,
+    LocationEditorModule,
   ],
   providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService],
 })
