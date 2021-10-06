@@ -14,7 +14,7 @@
       <ion-label> {{ 'flag-menu.language' | translate }}: </ion-label>
       <ion-select [formControl]="languageControl">
         <ion-select-option *ngFor="let lang of userSettingsService.langList" [value]="lang">
-          {{ lang.toUpperCase() }}
+          {{ 'global.' + lang | translate }}
         </ion-select-option>
       </ion-select>
     </ion-item>
