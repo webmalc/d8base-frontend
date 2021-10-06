@@ -19,7 +19,7 @@ export interface UserSettings {
    * True - monday, False - sunday.
    */
   is_monday_start_of_a_week?: boolean;
-  language?: null | 'en' | 'fr' | 'de' | 'ru';
+  language?: null | 'en' | 'fr' | 'de' | 'ru' | 'es';
   modified?: string;
   modified_by?: number;
   units?: 0 | 1;
