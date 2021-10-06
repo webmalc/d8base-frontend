@@ -6,7 +6,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router, RouteReuseStrategy } from '@angular/router';
 import { CoreModule } from '@app/core/core.module';
 import { ErrorHandlingModule } from '@app/core/error-handling/error-handling.module';
-import { JsonTranslateLoader } from '@app/shared/services/json-translate-loader';
+import { JsonTranslateLoader } from '@app/core/services/json-translate-loader';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { environment } from '@env/environment';

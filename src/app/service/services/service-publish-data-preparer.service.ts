@@ -66,7 +66,10 @@ export class ServicePublishDataPreparerService {
     const stepTwoData = this.servicePublishDataHolder.getStepData<StepTwoDataInterface>(ServicePublishSteps.Two);
     const stepSevenData = this.servicePublishDataHolder.getStepData<StepSevenDataInterface>(ServicePublishSteps.Seven);
     return {
-      ...stepTwoData,
+      name: stepTwoData.name,
+      description: stepTwoData.description,
+      duration: stepTwoData.duration,
+      service_type: stepTwoData.service_type,
       is_base_schedule: stepSevenData.use_master_schedule || stepSevenData.need_to_create_master_schedule,
       is_auto_order_confirmation: stepSevenData.is_auto_order_confirmation ?? false,
       is_enabled: true, // always create already published service; the owner can un-publish it later
