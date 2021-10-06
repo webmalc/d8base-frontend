@@ -8,13 +8,6 @@ import { UserSettingsService } from '@app/core/services/facades/user-settings.se
 import { Observable } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-enum FlagMenuFormFields {
-  language = 'language',
-  currency = 'currency',
-  units = 'units',
-  is_monday_start_of_a_week = 'is_monday_start_of_a_week',
-}
-
 @Component({
   selector: 'app-flag-menu',
   templateUrl: './flag-menu.component.html',
@@ -24,7 +17,11 @@ enum FlagMenuFormFields {
 export class FlagMenuComponent {
   public defaultLocation$: Observable<UserLocation>;
   public rateList$: Observable<Rate[]>;
-  public formFields = FlagMenuFormFields;
+  public formFields = {
+    currency: 'currency',
+    units: 'units',
+    is_monday_start_of_a_week: 'is_monday_start_of_a_week',
+  };
   public languageControl = this.fb.control(null);
   public form: FormGroup = this.fb.group({
     [this.formFields.currency]: null,
