@@ -70,7 +70,9 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     });
     await popover.present();
     const { data } = await popover.onDidDismiss();
-    this.api.accountsLocationsCreate(data).subscribe(() => this.loadLocations());
+    if (data) {
+      this.api.accountsLocationsCreate(data).subscribe(() => this.loadLocations());
+    }
   }
 
   protected onStateChanged(data: LocationStepData): void {

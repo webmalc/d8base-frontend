@@ -38,7 +38,7 @@ export class LocationEditorComponent {
   public postal = new FormControl(null);
   public address = new FormControl(null);
   public timezone = new FormControl({ value: null, disabled: true });
-  public isDefault = new FormControl(null);
+  public isDefault = new FormControl(false);
   public form = new FormGroup({
     [this.formFields.country]: this.country,
     [this.formFields.region]: this.region,
