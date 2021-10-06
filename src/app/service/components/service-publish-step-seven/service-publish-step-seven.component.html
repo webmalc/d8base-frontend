@@ -121,13 +121,7 @@
           <ion-label color="medium" position="floating">
             {{ 'service-publish.step-seven.address-placeholder' | translate }}
           </ion-label>
-          <ion-textarea
-            rows="4"
-            type="text"
-            name="address"
-            (ionChange)="updateStepData()"
-            [formControlName]="formFields.Address"
-          ></ion-textarea>
+          <ion-textarea rows="4" type="text" name="address" [formControlName]="formFields.Address"></ion-textarea>
         </ion-item>
         <app-form-control-error [controlName]="formFields.Address"></app-form-control-error>
       </ng-template>
@@ -137,7 +131,7 @@
           <h1>{{ 'service-publish.step-seven.payment-title' | translate }}</h1>
         </ion-label>
       </ion-item-divider>
-      <ion-list (change)="updateStepData()">
+      <ion-list>
         <ion-list-header>
           <ion-label>
             <b>

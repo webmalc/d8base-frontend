@@ -83,8 +83,9 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
       ServicePublishSteps.Seven,
     );
     if (!this.useMasterSchedule) {
-      this.selectedSchedules = [...stepData?.timetable];
-      this.serviceSchedules = [...stepData?.timetable];
+      const timetable = stepData?.timetable ?? [];
+      this.selectedSchedules = [...timetable];
+      this.serviceSchedules = [...timetable];
     }
     // TODO use the reactive approach instead
   }
@@ -102,10 +103,6 @@ export class ServicePublishStepSevenComponent implements IonViewDidEnter {
     };
     await this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, data);
     this.serviceStepsNavigationService.next();
-  }
-
-  public async updateStepData(): Promise<void> {
-    await this.servicePublishDataHolderService.assignStepData(ServicePublishSteps.Seven, this.form.getRawValue());
   }
 
   public toggleUseMasterSchedule(event: CustomEvent): void {
