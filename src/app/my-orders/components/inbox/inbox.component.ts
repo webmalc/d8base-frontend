@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ReceivedOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services';
 import { InfiniteScrollData, PaginatedResult } from '@app/shared/infinite-scroll/models/infinite-scroll.model';
-import { Tabs } from '@app/my-orders/enums/tabs.enum';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { asyncScheduler, BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -22,7 +21,11 @@ export class InboxComponent implements AfterViewInit, OnDestroy {
   public isAuthenticated$: Observable<boolean>;
 
   public orders: ReceivedOrder[];
-  public tabs = Tabs;
+  public tabs = {
+    new: 'new',
+    current: 'current',
+    archive: 'archived',
+  };
 
   public readonly doLoad$ = new Subject<
     InfiniteScrollData<AccountsService.AccountsOrdersReceivedListParams, ReceivedOrder>
@@ -59,12 +62,12 @@ export class InboxComponent implements AfterViewInit, OnDestroy {
 
   public changeTab(e: CustomEvent): void {
     this.orders = null;
-    const currentTab: Tabs = e.detail.value;
+    const currentTab = e.detail.value;
     switch (currentTab) {
-      case Tabs.current:
+      case this.tabs.current:
         this.currentFilter$.next({ statusIn: activeStatusesFilter });
         break;
-      case Tabs.archive:
+      case this.tabs.archive:
         this.currentFilter$.next({ statusIn: deprecatedStatusesFilter });
         break;
       default:
