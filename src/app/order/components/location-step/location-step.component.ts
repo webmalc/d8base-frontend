@@ -124,6 +124,10 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
       const { id, location } = serviceLocation;
       return this.fullLocationService.getTextLocation({ ...location, id });
     });
+    if (locationsObservables.length === 0) {
+      this.locations = [];
+      return;
+    }
     forkJoin(locationsObservables)
       .pipe(takeUntil(this.ngDestroy$))
       .subscribe(locations => {
