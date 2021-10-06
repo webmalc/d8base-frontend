@@ -9,7 +9,7 @@ import LocationStepData from '@app/order/interfaces/location-step-data.interface
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { LocationEditorPopoverComponent } from '@app/shared/location-editor/location-editor-popover/location-editor-popover.component';
 import { PopoverController } from '@ionic/angular';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
 export enum LocationType {
@@ -142,11 +142,13 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
       .accountsLocationsList({})
       .pipe(
         switchMap(({ results: locations }) =>
-          forkJoin(
-            locations.map(location =>
-              this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline),
-            ),
-          ),
+          locations.length > 0
+            ? forkJoin(
+                locations.map(location =>
+                  this.fullLocationService.getTextLocation((location as unknown) as ProfessionalLocationInline),
+                ),
+              )
+            : of([]),
         ),
         takeUntil(this.ngDestroy$),
       )
