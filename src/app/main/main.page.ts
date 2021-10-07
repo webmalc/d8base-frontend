@@ -27,8 +27,8 @@ export class MainPage implements OnInit {
   public language$: Observable<string>;
 
   public defaultCategories$: Observable<Category[]>;
-
   public locationEnabled = false;
+  public showPromo = true;
 
   constructor(
     private readonly defaultCategory: DefaultCategoriesFactoryService,

@@ -1,3 +1,6 @@
+<ion-header *ngIf="showPromo">
+  <app-professional-promo (hideButtonClicked)="showPromo = false"></app-professional-promo>
+</ion-header>
 <app-header></app-header>
 <ion-content>
   <ion-row class="centering-container centering-container_gradient-background">
