@@ -872,6 +872,7 @@
     "confirm": "Cancel the order"
   },
   "promo": {
+    "top-banner-text": "List your business and find new clients in your local community and around the world",
     "block-1-title": "Look for top\u2011notch professionals",
     "block-1-text": "and book services online ",
     "block-1-button": "Find service provider",
@@ -882,8 +883,8 @@
     "step-2-note": "for any number of services",
     "step-3-text": "Accept orders online",
     "step-3-note": "from thousand of customers",
-    "block-3-title": "Become a service provider",
-    "block-3-text": "and find new customers worldwide",
+    "block-3-title": "List your business",
+    "block-3-text": "and find new clients in your local community and\u00a0around the world",
     "block-3-button": "Sign up"
   },
   "footer": {
