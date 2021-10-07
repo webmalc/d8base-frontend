@@ -3,16 +3,16 @@ import { FormGroup } from '@angular/forms';
 import { Category, UserLocation } from '@app/api/models';
 import { ResolvedUserLocation } from '@app/core/interfaces/user-location.interface';
 import { NgDestroyService, PlatformService } from '@app/core/services';
-import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterStateConverter } from '@app/core/services/search/search-filter-state-converter.service';
 import { SearchFilterStateService } from '@app/core/services/search/search-filter-state.service';
 import { SearchQueryService } from '@app/core/services/search/search-query.service';
+import { DefaultCategoriesFactoryService } from '@app/main/services/default-categories-factory.service';
 import { SearchFilterFormControls } from '@app/search/interfaces/search-filter-form-value.interface';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -28,7 +28,9 @@ export class MainPage implements OnInit {
 
   public defaultCategories$: Observable<Category[]>;
   public locationEnabled = false;
-  public showPromo = true;
+  public showPromo$: Observable<boolean>;
+
+  private readonly hidePromo$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly defaultCategory: DefaultCategoriesFactoryService,
@@ -37,7 +39,12 @@ export class MainPage implements OnInit {
     private readonly destroy$: NgDestroyService,
     private readonly searchFilterStateConverter: SearchFilterStateConverter,
     private readonly platform: PlatformService,
-  ) {}
+    store: Store,
+  ) {
+    this.showPromo$ = combineLatest([store.select(CurrentUserSelectors.isAuthenticated), this.hidePromo$]).pipe(
+      map(([isAuthenticated, isHidden]) => !isAuthenticated && !isHidden),
+    );
+  }
 
   public get controls(): SearchFilterFormControls {
     return this.stateManager.controls;
@@ -94,5 +101,9 @@ export class MainPage implements OnInit {
 
   public get isDesktop(): boolean {
     return this.platform.isDesktop();
+  }
+
+  public hidePromo(): void {
+    this.hidePromo$.next(true);
   }
 }

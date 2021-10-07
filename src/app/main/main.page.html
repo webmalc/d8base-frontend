@@ -1,5 +1,5 @@
-<ion-header *ngIf="showPromo">
-  <app-professional-promo (hideButtonClicked)="showPromo = false"></app-professional-promo>
+<ion-header *ngIf="showPromo$ | async">
+  <app-professional-promo (hideButtonClicked)="hidePromo()"></app-professional-promo>
 </ion-header>
 <app-header></app-header>
 <ion-content>
