@@ -1,7 +1,7 @@
 <div></div>
-<div class="horn"></div>
-<div class="title">{{ 'promo.top-banner-text' | translate }}</div>
-<div class="decoration"></div>
+<div class="horn" [routerLink]="servicePublishUrl"></div>
+<div class="title" [routerLink]="servicePublishUrl">{{ 'promo.top-banner-text' | translate }}</div>
+<div class="decoration" [routerLink]="servicePublishUrl"></div>
 <div class="close-area">
   <ion-icon name="close-outline" class="close-area__button" (click)="hideButtonClicked.emit()"></ion-icon>
 </div>
