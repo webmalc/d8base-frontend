@@ -5,6 +5,7 @@ import { AboutEditComponent } from '@app/profile/components/about-edit/about-edi
 import { ChangeEmailComponent } from '@app/profile/components/change-email/change-email.component';
 import { UserEditComponent } from '@app/profile/components/user-edit/user-edit.component';
 import { ProfileResolver } from '@app/profile/profile.resolver';
+import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
@@ -25,6 +26,7 @@ import { ProfilePage } from './profile.page';
     SharedModule,
     LeafletModule,
     IonicSelectableModule,
+    LocationEditorModule,
   ],
   declarations: [ProfilePage, UserContactEditComponent, UserEditComponent, AboutEditComponent, ChangeEmailComponent],
   providers: [ProfileResolver],
