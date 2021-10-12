@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute } from '@angular/router';
 import { SentOrder, ServiceList } from '@app/api/models';
 import { isFormInvalid } from '@app/core/functions/form.functions';
-import { getProfessionalScheduleUrl } from '@app/core/functions/navigation.functions';
+import { getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
 import { NgDestroyService } from '@app/core/services';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
@@ -58,8 +58,8 @@ export class StepContainerComponent implements OnInit {
     this.wizardState.doSubmit();
   }
 
-  public getProfessionalScheduleUrl(service: ServiceList): string {
-    return getProfessionalScheduleUrl(service.professional);
+  public getProfessionalServicesUrl(service: ServiceList): string {
+    return getProfessionalServicesUrl(service.professional);
   }
 
   private subscribeInputCurrentState(): void {
