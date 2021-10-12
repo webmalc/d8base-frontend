@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 import { CalendarWeekComponent } from './calendar-week.component';
 
@@ -10,8 +10,7 @@ describe('CalendarWeekComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [CalendarWeekComponent],
-        imports: [IonicModule.forRoot()],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(CalendarWeekComponent);

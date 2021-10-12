@@ -13,12 +13,13 @@ export class CalendarGeneratorService {
   constructor(private readonly api: ScheduleService) {}
 
   public generate(
-    fromMonth: number,
-    fromYear: number,
+    date: Date,
     monthLen: number,
     professional: string,
     service?: string | null,
   ): Observable<CalendarDateInterface[][]> {
+    const fromMonth = date.getMonth();
+    const fromYear = date.getFullYear();
     const toMonth = add(new Date(fromYear, fromMonth), { months: monthLen }).getMonth();
     const toYear = add(new Date(fromYear, fromMonth), { months: monthLen }).getFullYear();
     return this.api

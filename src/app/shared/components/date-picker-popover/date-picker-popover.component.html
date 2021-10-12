@@ -1,0 +1,4 @@
+<ion-content>
+  <app-calendar-month *ngFor="let month of months$ | async" [month]="month" (selectedDate)="pickDate($event)">
+  </app-calendar-month>
+</ion-content>

@@ -87,6 +87,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ChatButtonComponent } from './components/chat-button/chat-button.component';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
 import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
+import { DatePickerPopoverComponent } from './components/date-picker-popover/date-picker-popover.component';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
 import { HintPopoverComponent } from './components/hint-popover/hint-popover.component';
 import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
@@ -189,6 +190,7 @@ import { IfSpinnerModule } from './if-spinner/if-spinner.module';
     SubregionByIdPipe,
     CalendarMonthComponent,
     CalendarWeekComponent,
+    DatePickerPopoverComponent,
   ],
   exports: [
     IfSpinnerModule,

@@ -1,11 +1,16 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ProfessionalCalendar } from '@app/api/models';
-import { addDays, getCurrentDay, stripTime } from '@app/core/functions/datetime.functions';
+import { ScheduleService } from '@app/api/services';
+import { addDays, getCurrentDay, getLocalDateString, stripTime } from '@app/core/functions/datetime.functions';
 import { environment } from '@env/environment';
-import { CalendarService } from './calendar.service';
+import { ModalController } from '@ionic/angular';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { DatePickerPopoverComponent } from '../date-picker-popover/date-picker-popover.component';
 import { CalendarInterval } from './calendar-interval';
 import { CalendarUnit } from './calendar-unit';
+import { CalendarService } from './calendar.service';
 
 const CALENDAR_INTERVAL = environment.default_calendar_interval;
 
@@ -23,25 +28,48 @@ const CALENDAR_INTERVAL = environment.default_calendar_interval;
   ],
 })
 export class CalendarComponentComponent implements ControlValueAccessor {
-  @Output()
-  public dateChanged: EventEmitter<Date> = new EventEmitter<Date>();
-
   public disabled: boolean;
-  public calendarIntervals: CalendarInterval[];
-  public isLoadingEnabledPeriods: boolean = false;
-
-  public viewedDay: Date;
+  public calendarIntervals$: Observable<CalendarInterval[]>;
   public selectedDatetime: Date;
+  public readonly currentlyViewedDate$ = new BehaviorSubject<Date>(new Date());
+
+  private readonly professionalId$ = new BehaviorSubject<number>(NaN);
+  private readonly serviceId$ = new BehaviorSubject<number>(NaN);
 
   private onChange: (value: Date) => void;
   private onTouched: () => void;
 
-  constructor(private readonly calendar: CalendarService) {}
+  constructor(
+    private readonly calendar: CalendarService,
+    private readonly modalController: ModalController,
+    private readonly scheduleApi: ScheduleService,
+  ) {
+    this.calendarIntervals$ = this.getCalendars();
+  }
 
   @Input()
-  public set enabledPeriods(list: ProfessionalCalendar[]) {
-    this.isLoadingEnabledPeriods = Boolean(list);
-    this.calendarIntervals = this.calendar.generate(CALENDAR_INTERVAL, list);
+  public set professionalId(professionalId: number) {
+    this.professionalId$.next(professionalId);
+  }
+
+  @Input()
+  public set serviceId(serviceId: number) {
+    this.serviceId$.next(serviceId);
+  }
+
+  public async pickDate(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: DatePickerPopoverComponent,
+      componentProps: {
+        professionalId: this.professionalId$.value,
+        serviceId: this.serviceId$.value,
+      },
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.currentlyViewedDate$.next(data);
+    }
   }
 
   public setDatetime(unit: CalendarUnit): void {
@@ -51,14 +79,12 @@ export class CalendarComponentComponent implements ControlValueAccessor {
 
   public writeValue(date: Date): void {
     if (!date) {
-      this.viewedDay = getCurrentDay();
-      this.dateChanged.emit(this.viewedDay);
+      this.currentlyViewedDate$.next(getCurrentDay());
       this.selectedDatetime = null;
       return;
     }
-    this.viewedDay = stripTime(date);
     this.selectedDatetime = date;
-    this.dateChanged.emit(this.viewedDay);
+    this.currentlyViewedDate$.next(stripTime(date));
   }
 
   public registerOnChange(fn: any): void {
@@ -74,12 +100,8 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   }
 
   public shiftDate(offset: number): void {
-    if (!this.viewedDay) {
-      return;
-    }
-    const newDate = addDays(this.viewedDay, offset);
-    this.dateChanged.emit(newDate);
-    this.viewedDay = newDate;
+    const newDate = addDays(this.currentlyViewedDate$.value, offset);
+    this.currentlyViewedDate$.next(newDate);
   }
 
   public setDate(event: CustomEvent): void {
@@ -88,8 +110,7 @@ export class CalendarComponentComponent implements ControlValueAccessor {
       return;
     }
     const newDate = new Date(date);
-    this.dateChanged.emit(newDate);
-    this.viewedDay = newDate;
+    this.currentlyViewedDate$.next(newDate);
   }
 
   public getUnitColor(unit: CalendarUnit): string {
@@ -98,5 +119,22 @@ export class CalendarComponentComponent implements ControlValueAccessor {
 
   public getUnitFill(unit: CalendarUnit): string {
     return unit.datetime.getTime() === this.selectedDatetime?.getTime() ? 'solid' : 'outline';
+  }
+
+  private getCalendars(): Observable<CalendarInterval[]> {
+    return combineLatest([this.currentlyViewedDate$, this.professionalId$, this.serviceId$]).pipe(
+      switchMap(([startDate, professionalId, serviceId]) => {
+        const endDate = addDays(startDate, 1);
+        return !professionalId || !serviceId
+          ? of<ProfessionalCalendar[]>(null)
+          : this.scheduleApi.scheduleCalendarList({
+              service: serviceId?.toString(),
+              professional: professionalId?.toString(),
+              startDatetime: getLocalDateString(startDate),
+              endDatetime: getLocalDateString(endDate),
+            });
+      }),
+      map(list => this.calendar.generate(CALENDAR_INTERVAL, list)),
+    );
   }
 }

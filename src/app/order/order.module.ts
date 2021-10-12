@@ -10,7 +10,6 @@ import {
   OrderConfirmationComponent,
   SummaryStepComponent,
 } from '@app/order/components';
-import { CalendarPageComponent } from '@app/order/pages/calendar-page/calendar-page.component';
 import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
@@ -32,7 +31,6 @@ import { OrderWizardStateService } from './services';
     OrderConfirmationComponent,
     StepContainerComponent,
     ClientIdentificationComponent,
-    CalendarPageComponent,
   ],
   imports: [
     CommonModule,

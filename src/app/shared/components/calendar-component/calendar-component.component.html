@@ -1,6 +1,6 @@
 <ion-item lines="none" *ngIf="selectedDatetime">
   <ion-label>
-    {{ selectedDatetime | date }}
+    {{ selectedDatetime | date: 'yyyy-MM-dd, HH:mm' }}
   </ion-label>
 </ion-item>
 <app-placeholder *ngIf="!selectedDatetime && !disabled"></app-placeholder>
@@ -8,27 +8,24 @@
   <ion-button slot="start" (click)="shiftDate(-1)">
     <ion-icon name="chevron-back-outline"></ion-icon>
   </ion-button>
-  <ion-input type="date" [value]="viewedDay | date: 'yyyy-MM-dd'" (ionChange)="setDate($event)"></ion-input>
+  <ion-label class="cursor-pointer" (click)="pickDate()">
+    {{ currentlyViewedDate$ | async | date: 'yyyy-MM-dd' }}
+  </ion-label>
   <ion-button slot="end" (click)="shiftDate(1)">
     <ion-icon name="chevron-forward-outline"></ion-icon>
   </ion-button>
 </ion-item>
-<ng-container *appIfSpinner="isLoadingEnabledPeriods">
-  <ion-item *ngIf="!calendarIntervals" lines="none">
-    <ion-label>{{ 'calendar.day-off' | translate }}</ion-label>
-  </ion-item>
-  <ng-container *ngFor="let interval of calendarIntervals">
-    <app-section-heading>{{ interval.title }}</app-section-heading>
-    <div class="timetable">
-      <ion-button
-        *ngFor="let unit of interval.units"
-        [fill]="getUnitFill(unit)"
-        [color]="getUnitColor(unit)"
-        [disabled]="disabled || !unit.enabled"
-        (click)="setDatetime(unit)"
-      >
-        {{ unit.datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
-      </ion-button>
-    </div>
-  </ng-container>
+<ng-container *ngFor="let interval of calendarIntervals$ | async">
+  <app-section-heading>{{ interval.title }}</app-section-heading>
+  <div class="timetable">
+    <ion-button
+      *ngFor="let unit of interval.units"
+      [fill]="getUnitFill(unit)"
+      [color]="getUnitColor(unit)"
+      [disabled]="disabled || !unit.enabled"
+      (click)="setDatetime(unit)"
+    >
+      {{ unit.datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+    </ion-button>
+  </div>
 </ng-container>
