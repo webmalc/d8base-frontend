@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CalendarDateInterface} from '@app/core/interfaces/calendar-date-interface';
-import {Observable} from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CalendarDateInterface } from '@app/core/interfaces/calendar-date-interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calendar-month',
@@ -8,12 +8,9 @@ import {Observable} from 'rxjs';
   styleUrls: ['./calendar-month.component.scss'],
 })
 export class CalendarMonthComponent {
-
   @Input() public month: CalendarDateInterface[];
   @Input() public isMonStart: Observable<boolean>;
   @Output() public selectedDate: EventEmitter<Date> = new EventEmitter<Date>();
-
-  constructor() { }
 
   public getMonthTransKey(): number {
     return this.month[0].date.getMonth();
@@ -33,7 +30,7 @@ export class CalendarMonthComponent {
     return day + 1;
   }
 
-  public select(day: CalendarDateInterface) {
+  public select(day: CalendarDateInterface): void {
     if (day.isAvailable) {
       this.selectedDate.emit(day.date);
     }

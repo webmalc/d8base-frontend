@@ -1,5 +1,5 @@
 export interface CalendarDateInterface {
-  date: Date,
-  isAvailable: boolean,
-  selected: boolean
+  date: Date;
+  isAvailable: boolean;
+  selected: boolean;
 }

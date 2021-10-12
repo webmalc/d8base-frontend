@@ -10,6 +10,7 @@ import {
   OrderConfirmationComponent,
   SummaryStepComponent,
 } from '@app/order/components';
+import { CalendarPageComponent } from '@app/order/pages/calendar-page/calendar-page.component';
 import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
@@ -20,7 +21,6 @@ import { OrderAuthenticationGuardService, OrderFirstStepGuardService } from './g
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderPage } from './order.page';
 import { OrderWizardStateService } from './services';
-import {CalendarPageComponent} from '@app/order/pages/calendar-page/calendar-page.component';
 
 @NgModule({
   declarations: [
