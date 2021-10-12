@@ -4,11 +4,11 @@
     <ion-header>
       <app-calendar-week [isMonStart]="isMonStart"></app-calendar-week>
     </ion-header>
-    <app-calendar-month *ngFor="let month of data" [month]="month" (selectedDate)="handle($event)" [isMonStart]="isMonStart"
+    <app-calendar-month
+      *ngFor="let month of data"
+      [month]="month"
+      (selectedDate)="handle($event)"
+      [isMonStart]="isMonStart"
     ></app-calendar-month>
   </app-content-wrapper>
 </ion-content>
-
-
-
-
