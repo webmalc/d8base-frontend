@@ -751,6 +751,7 @@
     "new-user": "Please enter a password. You can use it to track your order status",
     "title": "Service order",
     "selected-service": "Selected service",
+    "forward": "Accept and continue",
     "order-service": "Place order",
     "location-header": "Choose the service location",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",

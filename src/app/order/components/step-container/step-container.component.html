@@ -1,41 +1,36 @@
-<app-header></app-header>
+<app-header>
+  <div class="header">
+    <ion-item lines="none" class="header__service-name">
+      <ion-buttons slot="start">
+        <ion-button [disabled]="isFirstStep$ | async" (click)="prevStep()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-label>{{ (currentStep$ | async).title | translate }}</ion-label>
+    </ion-item>
+  </div>
+</app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header>{{ (currentStep$ | async).title | translate }}</app-column-header>
-    <ng-container *appIfSpinner="context$ | ifSpinnerErrorState | async as context">
-      <ng-container *ngIf="isFirstStep$ | async">
-        <ion-item lines="none">
-          <ion-label>
-            <h1>{{ 'order.selected-service' | translate }}</h1>
-          </ion-label>
-          <ion-button slot="end" fill="none" [routerLink]="getProfessionalServicesUrl(context.service)">
-            {{ 'order.choose-another-service' | translate }}
-            <ion-icon name="close-outline" class="ion-padding-start"></ion-icon>
-          </ion-button>
-        </ion-item>
-        <app-service-widget [service]="context.service"></app-service-widget>
-      </ng-container>
-      <app-order-details [order]="orderDetailsState$ | async"></app-order-details>
+    <ng-container *ngIf="context$ | async as context">
       <ng-content></ng-content>
-      <ion-row>
-        <ion-col>
-          <ng-container *ngIf="(isFirstStep$ | async) === false">
-            <ion-button expand="block" color="medium" (click)="prevStep()">
-              {{ 'global.back' | translate }}
-            </ion-button>
-          </ng-container>
-        </ion-col>
-        <ion-col>
-          <ion-button *ngIf="isLastStep$ | async; else isNotLastStep" expand="block" color="success" (click)="submit()">
-            {{ 'order.order-service' | translate }}
-          </ion-button>
-          <ng-template #isNotLastStep>
-            <ion-button expand="block" (click)="nextStep()">
-              {{ 'global.forward' | translate }}
-            </ion-button>
-          </ng-template>
-        </ion-col>
-      </ion-row>
     </ng-container>
   </app-content-wrapper>
 </ion-content>
+<ion-footer>
+  <div class="footer">
+    <ion-button
+      *ngIf="isLastStep$ | async; else isNotLastStep"
+      expand="block"
+      (click)="submit()"
+      class="footer__button"
+    >
+      {{ 'order.order-service' | translate }}
+    </ion-button>
+    <ng-template #isNotLastStep>
+      <ion-button expand="block" (click)="nextStep()" class="footer__button">
+        {{ 'order.forward' | translate }}
+      </ion-button>
+    </ng-template>
+  </div>
+</ion-footer>
