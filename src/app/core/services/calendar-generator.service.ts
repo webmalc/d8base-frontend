@@ -8,9 +8,7 @@ import { ProfessionalCalendarByDays } from '@app/api/models/professional-calenda
 import { getMonthFirstDay, getMonthLastDay } from '@app/core/functions/datetime.functions';
 import { ProfessionalCalendar } from '@app/api/models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CalendarGeneratorService {
   constructor(private readonly api: ScheduleService) {}
 
