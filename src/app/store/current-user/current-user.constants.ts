@@ -6,6 +6,7 @@ import { CurrentUserStateModel } from './current-user-state.model';
 export const defaultSettings: UserSettings = {
   units: 0,
   currency: 'CAD',
+  is_monday_start_of_a_week: true,
   language: environment.default_lang as UserSettings['language'],
 };
 
