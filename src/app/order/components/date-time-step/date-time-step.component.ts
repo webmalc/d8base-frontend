@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfessionalCalendar } from '@app/api/models';
 import { ScheduleService } from '@app/api/services';
@@ -29,8 +29,8 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
   private readonly currentlyViewedDate = new BehaviorSubject<Date>(new Date());
   private readonly professional$ = new BehaviorSubject<number>(NaN);
 
-  constructor(private readonly scheduleApi: ScheduleService, protected readonly cd: ChangeDetectorRef) {
-    super(cd);
+  constructor(private readonly scheduleApi: ScheduleService) {
+    super();
     this.form = new FormGroup({
       datetime: this.formControl,
     });
@@ -44,7 +44,7 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     this.currentlyViewedDate.next(date);
   }
 
-  protected onStateChanged(data: DateTimeStepData): void {
+  public setState(data: DateTimeStepData): void {
     if (!data?.start_datetime) {
       this.form.reset();
 
@@ -52,11 +52,10 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     }
     const start_datetime = data?.start_datetime;
     this.formControl.setValue(new Date(start_datetime));
-    this.cd.markForCheck();
   }
 
-  protected onContextChanged(context: StepContext): void {
-    super.onContextChanged(context);
+  public setContext(context: StepContext): void {
+    super.setContext(context);
     this.updateCalendars();
     this.updateServiceProfessional(context.service.professional);
     this.duration = context.service.duration;

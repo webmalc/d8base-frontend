@@ -43,7 +43,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     private readonly fb: FormBuilder,
     private readonly ngDestroy$: NgDestroyService,
   ) {
-    super(cd);
+    super();
     this.form = this.fb.group({
       [this.formFields.IsForMe]: [false],
       [this.formFields.FirstName]: ['', Validators.required],
@@ -60,7 +60,7 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     this.subscribeFormStatus();
   }
 
-  protected onStateChanged(data: ClientDetailsStepData): void {
+  public setState(data: ClientDetailsStepData): void {
     if (!data) {
       return;
     }
@@ -73,8 +73,8 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     this.disableUserFields(isForMe);
   }
 
-  protected onContextChanged(context: StepContext): void {
-    super.onContextChanged(context);
+  public setContext(context: StepContext): void {
+    super.setContext(context);
     this.setSelfOrder();
   }
 

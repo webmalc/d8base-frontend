@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { StepComponent } from '@app/order/abstract/step';
 
 @Component({
@@ -14,11 +14,7 @@ import { StepComponent } from '@app/order/abstract/step';
   ],
 })
 export class SummaryStepComponent extends StepComponent<void> {
-  constructor(protected readonly cd: ChangeDetectorRef) {
-    super(cd);
-  }
-
-  protected onStateChanged(data: unknown): void {
+  public setState(data: unknown): void {
     return;
   }
 }

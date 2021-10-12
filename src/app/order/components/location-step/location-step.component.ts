@@ -49,7 +49,7 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     private readonly api: AccountsService,
     private readonly ngDestroy$: NgDestroyService,
   ) {
-    super(cd);
+    super();
     this.form = new FormGroup({
       location: this.formControl,
     });
@@ -75,12 +75,12 @@ export class LocationStepComponent extends StepComponent<LocationStepData> {
     }
   }
 
-  protected onStateChanged(data: LocationStepData): void {
+  public setState(data: LocationStepData): void {
     this.setFormControlValue(data?.[this.locationKey]);
   }
 
-  protected onContextChanged(context: StepContext): void {
-    super.onContextChanged(context);
+  public setContext(context: StepContext): void {
+    super.setContext(context);
     this.loadLocations();
   }
 
