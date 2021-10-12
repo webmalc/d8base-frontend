@@ -20,6 +20,7 @@ import { OrderAuthenticationGuardService, OrderFirstStepGuardService } from './g
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderPage } from './order.page';
 import { OrderWizardStateService } from './services';
+import {CalendarPageComponent} from '@app/order/pages/calendar-page/calendar-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { OrderWizardStateService } from './services';
     OrderConfirmationComponent,
     StepContainerComponent,
     ClientIdentificationComponent,
+    CalendarPageComponent,
   ],
   imports: [
     CommonModule,

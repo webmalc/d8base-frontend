@@ -98,6 +98,8 @@ import { LoadingErrorComponent } from './components/loading-error/loading-error.
 import { IfSpinnerModule } from './if-spinner/if-spinner.module';
 import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
 import { HintPopoverComponent } from './components/hint-popover/hint-popover.component';
+import {CalendarMonthComponent} from '@app/shared/components/calendar/calendar-month/calendar-month.component';
+import {CalendarWeekComponent} from '@app/shared/components/calendar/calendar-week/calendar-week.component';
 
 @NgModule({
   declarations: [
@@ -185,6 +187,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     PlaceholderComponent,
     RegionByIdPipe,
     SubregionByIdPipe,
+    CalendarMonthComponent,
+    CalendarWeekComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -268,6 +272,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     PlaceholderComponent,
     RegionByIdPipe,
     SubregionByIdPipe,
+    CalendarMonthComponent,
+    CalendarWeekComponent,
   ],
   imports: [
     CommonModule,

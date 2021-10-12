@@ -1,0 +1,49 @@
+.calendar {
+  display: grid;
+  padding: 1rem;
+  row-gap: 1.4rem;
+  justify-items: center;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.unavailable {
+  color: rgba(0, 0, 0, 0.2)
+}
+
+.selected {
+  background: #3880FF;
+  border-radius: 100px;
+  color: white;
+}
+
+.item {
+  line-height: 2rem;
+  width: 2rem;
+}
+
+.day-first {
+  grid-column: 1
+}
+.day-second {
+  grid-column: 2
+}
+.day-third {
+  grid-column: 3
+}
+.day-fourths {
+  grid-column: 4
+}
+.day-fifth {
+  grid-column: 5
+}
+.day-sixth {
+  grid-column: 6
+}
+.day-seventh {
+  grid-column: 7
+}
