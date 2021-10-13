@@ -4,8 +4,8 @@
   <ion-item class="service-info" lines="none">
     <ion-label position="stacked" color="medium">{{ 'order.service-name' | translate }}</ion-label>
     <ion-text>{{ service?.name }}</ion-text>
+    <app-price slot="end" class="ion-align-self-end" [price]="service?.price"></app-price>
   </ion-item>
-  <app-price slot="end" [price]="service?.price"></app-price>
 
   <ion-item class="service-info" lines="none">
     <ion-label position="stacked" color="medium">{{ 'order.service-date' | translate }}</ion-label>
