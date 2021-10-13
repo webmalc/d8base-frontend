@@ -1,12 +1,5 @@
 <app-step-container>
-  <ion-list>
-    <ion-list-header>
-      <ion-label
-        ><h1>{{ 'order.date-time-header' | translate }}</h1>
-      </ion-label>
-    </ion-list-header>
-    <app-calendar-component [formControl]="formControl" [serviceId]="serviceId" [professionalId]="professionalId">
-    </app-calendar-component>
-    <app-form-control-error [control]="formControl"></app-form-control-error>
-  </ion-list>
+  <app-calendar-component [formControl]="formControl" [serviceId]="serviceId" [professionalId]="professionalId">
+  </app-calendar-component>
+  <app-form-control-error [control]="formControl"></app-form-control-error>
 </app-step-container>

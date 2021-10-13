@@ -60,9 +60,11 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   public async pickDate(): Promise<void> {
     const modal = await this.modalController.create({
       component: DatePickerPopoverComponent,
+      cssClass: 'modal-fullheight',
       componentProps: {
         professionalId: this.professionalId$.value,
         serviceId: this.serviceId$.value,
+        selectedDate: this.currentlyViewedDate$.value,
       },
     });
     await modal.present();
@@ -114,10 +116,16 @@ export class CalendarComponentComponent implements ControlValueAccessor {
   }
 
   public getUnitColor(unit: CalendarUnit): string {
-    return unit.enabled ? 'secondary' : 'medium';
+    if (!unit.enabled) {
+      return 'light';
+    }
+    return unit.datetime.getTime() === this.selectedDatetime?.getTime() ? 'primary' : 'dark';
   }
 
   public getUnitFill(unit: CalendarUnit): string {
+    if (!unit.enabled) {
+      return 'solid';
+    }
     return unit.datetime.getTime() === this.selectedDatetime?.getTime() ? 'solid' : 'outline';
   }
 

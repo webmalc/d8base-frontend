@@ -23,26 +23,14 @@ export const ORDER_STEPS: StepsModel = {
       component: DateTimeStepComponent,
       title: 'order.step.date-time',
     },
-    [OrderIds.Location]: {
-      id: OrderIds.Location,
-      component: LocationStepComponent,
-      needGuards: true,
-      title: 'order.step.location',
-    },
     [OrderIds.ClientDetails]: {
       id: OrderIds.ClientDetails,
       component: ClientDetailsStepComponent,
       needGuards: true,
       title: 'order.step.client-details',
     },
-    [OrderIds.Summary]: {
-      id: OrderIds.Summary,
-      component: SummaryStepComponent,
-      needGuards: true,
-      title: 'order.step.summary',
-    },
   },
-  ids: [OrderIds.Date, OrderIds.ClientDetails, OrderIds.Location, OrderIds.Summary],
+  ids: [OrderIds.Date, OrderIds.ClientDetails],
 };
 
 export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ...acc, [curr]: null }), {});

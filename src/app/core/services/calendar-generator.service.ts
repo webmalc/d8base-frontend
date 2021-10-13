@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getDaysInMonth, add, format, differenceInMonths } from 'date-fns';
-import { CalendarDateInterface } from '@app/core/interfaces/calendar-date-interface';
 import { ScheduleService } from '@app/api/services/schedule.service';
+import { getMonthFirstDay, getMonthLastDay } from '@app/core/functions/datetime.functions';
+import { CalendarDateInterface } from '@app/core/interfaces/calendar-date-interface';
+import { add, differenceInMonths, format, getDaysInMonth } from 'date-fns';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ProfessionalCalendarByDays } from '@app/api/models/professional-calendar-by-days';
-import { getMonthFirstDay, getMonthLastDay } from '@app/core/functions/datetime.functions';
-import { ProfessionalCalendar } from '@app/api/models';
 
 @Injectable()
 export class CalendarGeneratorService {
@@ -31,7 +29,7 @@ export class CalendarGeneratorService {
       })
       .pipe(
         map(data => {
-          const intervalsHashtable = this.format(data);
+          const intervalsHashtable = new Set(data.map(x => x.date));
           const res: CalendarDateInterface[][] = [];
           for (
             let i = 0;
@@ -44,8 +42,7 @@ export class CalendarGeneratorService {
               const nowDay = add(new Date(nowMonth.getFullYear(), nowMonth.getMonth()), { days: j });
               days.push({
                 date: nowDay,
-                isAvailable: intervalsHashtable.hasOwnProperty(format(nowDay, 'y-MM-dd')),
-                selected: false,
+                isAvailable: intervalsHashtable.has(format(nowDay, 'y-MM-dd')),
               });
             }
             res.push(days);
@@ -54,11 +51,5 @@ export class CalendarGeneratorService {
           return res;
         }),
       );
-  }
-
-  private format(data: ProfessionalCalendarByDays[]): { [key: string]: ProfessionalCalendar[] } {
-    const res = {};
-    data.forEach(el => (res[el.date] = el.slots));
-    return res;
   }
 }

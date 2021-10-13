@@ -18,6 +18,9 @@ export class DatePickerPopoverComponent implements OnInit {
   @Input()
   public serviceId: number;
 
+  @Input()
+  public selectedDate: Date;
+
   public months$: Observable<CalendarDateInterface[][]>;
 
   constructor(
@@ -39,6 +42,10 @@ export class DatePickerPopoverComponent implements OnInit {
   }
 
   public async pickDate(date: Date): Promise<void> {
-    await this.modalController.dismiss(date);
+    this.selectedDate = date;
+  }
+
+  public async confirm(): Promise<void> {
+    await this.modalController.dismiss(this.selectedDate);
   }
 }

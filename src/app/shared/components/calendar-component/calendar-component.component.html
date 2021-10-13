@@ -1,17 +1,12 @@
-<ion-item lines="none" *ngIf="selectedDatetime">
-  <ion-label>
-    {{ selectedDatetime | date: 'yyyy-MM-dd, HH:mm' }}
-  </ion-label>
-</ion-item>
-<app-placeholder *ngIf="!selectedDatetime && !disabled"></app-placeholder>
 <ion-item lines="none">
-  <ion-button slot="start" (click)="shiftDate(-1)">
+  <ion-button slot="start" class="ion-align-self-center" (click)="shiftDate(-1)">
     <ion-icon name="chevron-back-outline"></ion-icon>
   </ion-button>
-  <ion-label class="cursor-pointer" (click)="pickDate()">
+  <ion-label position="stacked" color="medium"> Выбранная дата </ion-label>
+  <ion-input class="cursor-pointer" (click)="pickDate()">
     {{ currentlyViewedDate$ | async | date: 'yyyy-MM-dd' }}
-  </ion-label>
-  <ion-button slot="end" (click)="shiftDate(1)">
+  </ion-input>
+  <ion-button slot="end" class="ion-align-self-center" (click)="shiftDate(1)">
     <ion-icon name="chevron-forward-outline"></ion-icon>
   </ion-button>
 </ion-item>
@@ -20,6 +15,8 @@
   <div class="timetable">
     <ion-button
       *ngFor="let unit of interval.units"
+      class="interval-button"
+      mode="ios"
       [fill]="getUnitFill(unit)"
       [color]="getUnitColor(unit)"
       [disabled]="disabled || !unit.enabled"

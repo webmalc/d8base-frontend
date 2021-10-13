@@ -13,10 +13,13 @@ import { map } from 'rxjs/operators';
 })
 export class CalendarMonthComponent {
   @Input()
-  public month: CalendarDateInterface[] = [];
+  public workdays: CalendarDateInterface[] = [];
+
+  @Input()
+  public selectedDate: Date | null = null;
 
   @Output()
-  public selectedDate: EventEmitter<Date> = new EventEmitter<Date>();
+  public selected: EventEmitter<Date> = new EventEmitter<Date>();
 
   @Select(CurrentUserSelectors.settings)
   public userSettings$: Observable<UserSettings>;
@@ -28,11 +31,11 @@ export class CalendarMonthComponent {
   }
 
   public getMonthTransKey(): number {
-    return this.month[0]?.date.getMonth();
+    return this.workdays[0]?.date.getMonth();
   }
 
   public getYear(): string {
-    return this.month[0]?.date.getFullYear().toString();
+    return this.workdays[0]?.date.getFullYear().toString();
   }
 
   public getDay(day: number, isMonStart: boolean): number {
@@ -46,8 +49,13 @@ export class CalendarMonthComponent {
   }
 
   public select(day: CalendarDateInterface): void {
-    if (day.isAvailable) {
-      this.selectedDate.emit(day.date);
+    if (!day.isAvailable) {
+      return;
     }
+    this.selected.emit(day.date);
+  }
+
+  public isSelected(day: CalendarDateInterface): boolean {
+    return day.date.getTime() === this.selectedDate.getTime();
   }
 }
