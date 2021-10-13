@@ -6,6 +6,7 @@ import { UserManagerService } from '@app/core/services/managers/user-manager.ser
 import * as AppValidators from '@app/core/validators';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderClientDetailsFormFields } from '@app/order/enums/order-client-details-form';
+import { OrderIds } from '@app/order/enums/order-ids.enum';
 import { ClientDetailsStepData } from '@app/order/interfaces/client-details-step-data.type';
 import StepContext from '@app/order/interfaces/step-context.interface';
 import { OrderLocationsService } from '@app/order/services/order-locations.service';
@@ -70,15 +71,15 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
   }
 
   public get needLocations(): boolean {
-    return this.context.service.service_type !== 'online';
+    return this.context?.service.service_type !== 'online';
   }
 
   public get hasLocations(): boolean {
-    return Boolean(this.locations?.length) || this.context.service.service_type !== 'professional';
+    return Boolean(this.locations?.length) || this.context?.service.service_type !== 'professional';
   }
 
   public get canAddLocation(): boolean {
-    return this.context.service.service_type === 'client';
+    return this.context?.service.service_type === 'client';
   }
 
   public ngOnInit(): void {
@@ -86,7 +87,8 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     this.subscribeStatusChanges();
   }
 
-  public setState(data: ClientDetailsStepData): void {
+  public setState(state: any): void {
+    const data: ClientDetailsStepData = state[OrderIds.clientDetails];
     if (!data) {
       return;
     }

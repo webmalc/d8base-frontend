@@ -2,9 +2,8 @@ import { Component, forwardRef } from '@angular/core';
 import { ProfessionalList, ServiceList } from '@app/api/models';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
-import { OrderWizardStateService } from '@app/order/services/order-wizard-state.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-confirmation-step',
@@ -18,13 +17,7 @@ import { map } from 'rxjs/operators';
   ],
 })
 export class ConfirmationStepComponent extends StepComponent<void> {
-  public date$: Observable<Date>;
-
-  constructor(private readonly state: OrderWizardStateService) {
-    super();
-    // TODO should be transparent access to steps state with type checking
-    this.date$ = state.getStepStateById(OrderIds.Date).pipe(map(x => x?.start_datetime));
-  }
+  public date$ = new BehaviorSubject<Date | null>(null);
 
   public get professional(): ProfessionalList {
     return this.context?.professional;
@@ -34,7 +27,10 @@ export class ConfirmationStepComponent extends StepComponent<void> {
     return this.context?.service;
   }
 
-  public setState(): void {
-    // do nothing
+  public setState(data): void {
+    const dateStepState: DateTimeStepData = data[OrderIds.date];
+    if (dateStepState) {
+      this.date$.next(new Date(dateStepState.start_datetime));
+    }
   }
 }

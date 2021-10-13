@@ -1,5 +1,5 @@
 export enum OrderIds {
-  Date = 'date',
-  Confirmation = 'confirmation',
-  ClientDetails = 'client-details',
+  date = 'date',
+  confirmation = 'confirmation',
+  clientDetails = 'client-details',
 }

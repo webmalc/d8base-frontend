@@ -17,24 +17,24 @@ import { StepsState } from './interfaces/steps-state.type';
 
 export const ORDER_STEPS: StepsModel = {
   byId: {
-    [OrderIds.Date]: {
-      id: OrderIds.Date,
+    [OrderIds.date]: {
+      id: OrderIds.date,
       component: DateTimeStepComponent,
       title: 'order.step.date-time',
     },
-    [OrderIds.Confirmation]: {
-      id: OrderIds.Confirmation,
+    [OrderIds.confirmation]: {
+      id: OrderIds.confirmation,
       component: ConfirmationStepComponent,
       title: 'order.step.confirmation',
     },
-    [OrderIds.ClientDetails]: {
-      id: OrderIds.ClientDetails,
+    [OrderIds.clientDetails]: {
+      id: OrderIds.clientDetails,
       component: ClientDetailsStepComponent,
       needGuards: true,
       title: 'order.step.client-details',
     },
   },
-  ids: [OrderIds.Date, OrderIds.Confirmation, OrderIds.ClientDetails],
+  ids: [OrderIds.date, OrderIds.confirmation, OrderIds.clientDetails],
 };
 
 export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ...acc, [curr]: null }), {});

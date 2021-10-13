@@ -62,10 +62,10 @@ export class StepContainerComponent implements OnInit {
 
   private subscribeInputCurrentState(): void {
     this.wizardState
-      .getCurrentStepState()
+      .getState()
       .pipe(takeUntil(this.ngDestroy$))
-      .subscribe(currentState => {
-        this.stepComponent.setState(currentState);
+      .subscribe(state => {
+        this.stepComponent.setState(state);
         this.cd.markForCheck();
       });
   }
