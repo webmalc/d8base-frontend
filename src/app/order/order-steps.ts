@@ -1,9 +1,8 @@
 import { Type } from '@angular/core';
 import { CanActivate, Routes } from '@angular/router';
-import { ClientDetailsStepComponent } from '@app/order//components/client-details-step/client-details-step.component';
-import { SummaryStepComponent } from '@app/order//components/summary-step/summary-step.component';
+import { ClientDetailsStepComponent } from '@app/order/components/client-details-step/client-details-step.component';
+import { ConfirmationStepComponent } from '@app/order/components/confirmation-step/confirmation-step.component';
 import { DateTimeStepComponent } from '@app/order/components/date-time-step/date-time-step.component';
-import { LocationStepComponent } from '@app/order/components/location-step/location-step.component';
 import StepsModel from '@app/order/interfaces/steps-model.interface';
 import { OrderIds } from './enums/order-ids.enum';
 import { StepsState } from './interfaces/steps-state.type';
@@ -23,6 +22,11 @@ export const ORDER_STEPS: StepsModel = {
       component: DateTimeStepComponent,
       title: 'order.step.date-time',
     },
+    [OrderIds.Confirmation]: {
+      id: OrderIds.Confirmation,
+      component: ConfirmationStepComponent,
+      title: 'order.step.confirmation',
+    },
     [OrderIds.ClientDetails]: {
       id: OrderIds.ClientDetails,
       component: ClientDetailsStepComponent,
@@ -30,7 +34,7 @@ export const ORDER_STEPS: StepsModel = {
       title: 'order.step.client-details',
     },
   },
-  ids: [OrderIds.Date, OrderIds.ClientDetails],
+  ids: [OrderIds.Date, OrderIds.Confirmation, OrderIds.ClientDetails],
 };
 
 export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ...acc, [curr]: null }), {});

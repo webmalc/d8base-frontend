@@ -727,6 +727,7 @@
   "order": {
     "step": {
       "date-time": "Date/time select",
+      "confirmation": "Confirmation",
       "client-details": "Order details"
     },
     "choose-another-service": "Pick another one",
@@ -754,7 +755,10 @@
     "phone": "Phone",
     "is-not-for-me-description": "Enter the name of the person who will get the service",
     "success-title": "The service was successfully published.",
-    "professional-address-error": "Can't proceed — the service is \"at professional's place\", but the professional has no location specified."
+    "professional-address-error": "Can't proceed — the service is \"at professional's place\", but the professional has no location specified.",
+    "service-name": "Chosen service",
+    "service-date": "Date and time",
+    "service-location": "Service location"
   },
   "flag-menu": {
     "language": "Language",

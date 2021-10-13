@@ -1,6 +1,6 @@
 <div class="content">
   <a [routerLink]="professionalProfileUrl">
-    <app-avatar [user]="professional.user" class="avatar"></app-avatar>
+    <app-avatar [user]="professional?.user" class="avatar"></app-avatar>
   </a>
   <div class="info">
     <div class="ion-padding-horizontal">
@@ -8,7 +8,7 @@
         <a [routerLink]="professionalProfileUrl">{{ professionalName }}</a>
       </div>
       <div class="subtitle">
-        <span class="capitalize-first-letter">{{ (professional.subcategory | subcategoryById$ | async)?.name }}</span>
+        <span class="capitalize-first-letter">{{ (professional?.subcategory | subcategoryById$ | async)?.name }}</span>
         <ng-container *ngIf="defaultCityId">
           <span>&nbsp;&middot;&nbsp;</span>
           <span class="city">{{ (defaultCityId | cityById$ | async)?.name }}</span>
@@ -25,4 +25,4 @@
     </div>
   </div>
 </div>
-<app-saved-professional-toggle [professionalId]="professional.id" class="like"></app-saved-professional-toggle>
+<app-saved-professional-toggle [professionalId]="professional?.id" class="like"></app-saved-professional-toggle>

@@ -6,7 +6,7 @@
           <ion-icon name="chevron-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-label>{{ (currentStep$ | async).title | translate }}</ion-label>
+      <ion-label>{{ (currentStep$ | async)?.title | translate }}</ion-label>
     </ion-item>
   </div>
 </app-header>

@@ -1,0 +1,12 @@
+.professional-info {
+  margin: 1rem;
+  margin-block-end: 2rem;
+}
+
+.service-info {
+  margin-block-end: 1rem;
+
+  &__text {
+    font-weight: 400;
+  }
+}

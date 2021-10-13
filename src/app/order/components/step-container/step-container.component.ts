@@ -37,7 +37,9 @@ export class StepContainerComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.subscribeAll();
+    this.subscribeInputContext();
+    this.subscribeInputCurrentState();
+    this.subscribeStepRoute();
   }
 
   public nextStep(): void {
@@ -65,7 +67,7 @@ export class StepContainerComponent implements OnInit {
   private subscribeInputCurrentState(): void {
     this.wizardState
       .getCurrentStepState()
-      .pipe(take(1), takeUntil(this.ngDestroy$))
+      .pipe(takeUntil(this.ngDestroy$))
       .subscribe(currentState => {
         this.stepComponent.setState(currentState);
         this.cd.markForCheck();
@@ -82,28 +84,11 @@ export class StepContainerComponent implements OnInit {
       });
   }
 
-  private subscribeAll(): void {
-    this.subscribeInputContext();
-    this.subscribeInputCurrentState();
-    this.subscribeStepRoute();
-    this.resubscribeOnReset();
-  }
-
   private subscribeStepRoute(): void {
     this.route.params.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
-      const step = this.route.routeConfig.path.split('/').pop();
+      const step = this.route.routeConfig?.path.split('/').pop();
       this.wizardState.setCurrentStep(step as OrderIds);
       this.cd.markForCheck();
     });
-  }
-
-  private resubscribeOnReset(): void {
-    this.wizardState
-      .isReset()
-      .pipe(takeUntil(this.ngDestroy$))
-      .subscribe(() => {
-        this.ngDestroy$.next();
-        this.subscribeAll();
-      });
   }
 }

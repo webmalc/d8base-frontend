@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceList } from '@app/api/models';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
@@ -156,14 +155,6 @@ export class OrderWizardStateService {
   }
 
   private getSteps(context: StepContext): StepsModel {
-    const { service } = context;
-    const onlineServiceType: ServiceList['service_type'] = 'online';
-    if (service.service_type === onlineServiceType) {
-      return {
-        ...ORDER_STEPS,
-        ids: ORDER_STEPS.ids.filter(id => id !== OrderIds.Location),
-      };
-    }
     return ORDER_STEPS;
   }
 }

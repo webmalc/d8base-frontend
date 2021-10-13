@@ -9,6 +9,7 @@ import {
   LocationStepComponent,
   OrderConfirmationComponent,
   SummaryStepComponent,
+  ConfirmationStepComponent,
 } from '@app/order/components';
 import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
@@ -31,6 +32,7 @@ import { OrderWizardStateService } from './services';
     OrderConfirmationComponent,
     StepContainerComponent,
     ClientIdentificationComponent,
+    ConfirmationStepComponent,
   ],
   imports: [
     CommonModule,
