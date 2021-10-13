@@ -1,35 +1,62 @@
 <app-step-container>
+  <ng-container *ngIf="needLocations">
+    <section>
+      <app-section-heading>{{ 'order.location-header' | translate }}</app-section-heading>
+      <ng-container *appIfSpinner="locations">
+        <ion-radio-group *ngIf="hasLocations; else noLocationsError" [formControl]="locationFormControl">
+          <ion-item *ngFor="let location of locations" lines="none">
+            <ion-label>{{ location.text }}</ion-label>
+            <ion-radio slot="start" [value]="location.id"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <app-add-button *ngIf="canAddLocation" (click)="addNewLocation()">
+          {{ 'list-item.add-new-address' | translate }}
+        </app-add-button>
+        <app-form-control-error [control]="locationFormControl"></app-form-control-error>
+      </ng-container>
+    </section>
+  </ng-container>
+  <ng-template #noLocationsError>
+    <ion-item color="danger" lines="none">
+      <ion-label class="ion-text-wrap">
+        {{ 'order.professional-address-error' | translate }}
+      </ion-label>
+    </ion-item>
+  </ng-template>
+
   <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">{{ 'order.comment-header' | translate }}</ion-label>
+      <ion-textarea [formControlName]="formFields.comment"></ion-textarea>
+    </ion-item>
     <ion-item lines="none" *ngIf="!isSelfOrder">
-      <ion-label>{{ 'order.is-for-me' | translate }}</ion-label>
-      <ion-checkbox [formControlName]="formFields.IsForMe"></ion-checkbox>
+      <ion-label>{{ 'order.is-another-person' | translate }}</ion-label>
+      <ion-checkbox [formControlName]="formFields.isAnotherPerson"></ion-checkbox>
     </ion-item>
-    <ion-item *ngIf="!form.get(formFields.IsForMe).value" lines="none">
-      {{ 'order.is-not-for-me-description' | translate }}
-    </ion-item>
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating" class="label-for-required-input">{{ 'order.name' | translate }}</ion-label>
-        <ion-input [formControlName]="formFields.FirstName"></ion-input>
-      </ion-item>
-      <app-form-control-error [controlName]="formFields.FirstName"></app-form-control-error>
-      <ion-item>
-        <ion-label position="floating">{{ 'order.surname' | translate }}</ion-label>
-        <ion-input [formControlName]="formFields.LastName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">{{ 'order.email' | translate }}</ion-label>
-        <ion-input type="email" inputmode="email" [formControlName]="formFields.Email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" class="label-for-required-input">{{ 'order.phone' | translate }}</ion-label>
-        <ion-input type="tel" inputmode="tel" [formControlName]="formFields.Phone"></ion-input>
-      </ion-item>
-      <app-form-control-error [controlName]="formFields.Phone"></app-form-control-error>
-      <ion-item>
-        <ion-label position="floating">{{ 'order.comment-header' | translate }}</ion-label>
-        <ion-textarea [formControlName]="formFields.Comment"></ion-textarea>
-      </ion-item>
-    </ion-list>
+    <section>
+      <ng-container *ngIf="form.controls[formFields.isAnotherPerson].value">
+        <app-section-heading>
+          {{ 'order.is-not-for-me-description' | translate }}
+        </app-section-heading>
+        <ion-item>
+          <ion-label position="floating" class="label-for-required-input">{{ 'order.name' | translate }}</ion-label>
+          <ion-input [formControlName]="formFields.firstName"></ion-input>
+        </ion-item>
+        <app-form-control-error [controlName]="formFields.firstName"></app-form-control-error>
+        <ion-item>
+          <ion-label position="floating">{{ 'order.surname' | translate }}</ion-label>
+          <ion-input [formControlName]="formFields.lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">{{ 'order.email' | translate }}</ion-label>
+          <ion-input type="email" inputmode="email" [formControlName]="formFields.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" class="label-for-required-input">{{ 'order.phone' | translate }}</ion-label>
+          <ion-input type="tel" inputmode="tel" [formControlName]="formFields.phone"></ion-input>
+        </ion-item>
+        <app-form-control-error [controlName]="formFields.phone"></app-form-control-error>
+      </ng-container>
+    </section>
   </form>
 </app-step-container>

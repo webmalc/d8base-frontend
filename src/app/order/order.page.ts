@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfessionalList, Profile, SentOrder } from '@app/api/models';
 import { AccountsService, ProfessionalsService, ServicesService } from '@app/api/services';
+import { toNumber } from '@app/core/functions/string.functions';
+import { IonViewDidLeave, IonViewWillEnter } from '@app/core/interfaces/ionic.interfaces';
 import { ServicesApiCache } from '@app/core/services/cache';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
@@ -15,7 +17,7 @@ import { OrderWizardStateService } from './services';
   styleUrls: ['./order.page.scss'],
   providers: [ServicesApiCache],
 })
-export class OrderPage {
+export class OrderPage implements IonViewWillEnter, IonViewDidLeave {
   @Select(CurrentUserSelectors.profile)
   public profile$: Observable<Profile>;
 
@@ -107,7 +109,7 @@ export class OrderPage {
         takeUntil(this.ngDestroy$),
       )
       .subscribe(serviceId => {
-        this.serviceId = serviceId;
+        this.serviceId = toNumber(serviceId);
         this.setContext(serviceId);
       });
   }

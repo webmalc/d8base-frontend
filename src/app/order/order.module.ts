@@ -6,7 +6,6 @@ import {
   ClientDetailsStepComponent,
   ClientIdentificationComponent,
   DateTimeStepComponent,
-  LocationStepComponent,
   OrderConfirmationComponent,
   SummaryStepComponent,
   ConfirmationStepComponent,
@@ -20,13 +19,12 @@ import { StepContainerComponent } from './components/step-container/step-contain
 import { OrderAuthenticationGuardService, OrderFirstStepGuardService } from './guards';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderPage } from './order.page';
-import { OrderWizardStateService } from './services';
+import { OrderLocationsService, OrderWizardStateService } from './services';
 
 @NgModule({
   declarations: [
     OrderPage,
     DateTimeStepComponent,
-    LocationStepComponent,
     ClientDetailsStepComponent,
     SummaryStepComponent,
     OrderConfirmationComponent,
@@ -46,6 +44,11 @@ import { OrderWizardStateService } from './services';
     RegistrationPageModule,
     LocationEditorModule,
   ],
-  providers: [OrderFirstStepGuardService, OrderAuthenticationGuardService, OrderWizardStateService],
+  providers: [
+    OrderFirstStepGuardService,
+    OrderAuthenticationGuardService,
+    OrderWizardStateService,
+    OrderLocationsService,
+  ],
 })
 export class OrderPageModule {}

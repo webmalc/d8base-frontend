@@ -2,7 +2,7 @@ import { Component, forwardRef } from '@angular/core';
 import { ProfessionalList, ServiceList } from '@app/api/models';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
-import { OrderWizardStateService } from '@app/order/services';
+import { OrderWizardStateService } from '@app/order/services/order-wizard-state.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
