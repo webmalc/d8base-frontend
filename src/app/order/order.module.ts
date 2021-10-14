@@ -2,12 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationPageModule } from '@app/auth/pages/registration/registration.module';
-import {
-  ClientDetailsStepComponent,
-  ClientIdentificationComponent,
-  DateTimeStepComponent,
-  ConfirmationStepComponent,
-} from '@app/order/components';
+import { ClientDetailsStepComponent, DateTimeStepComponent, ConfirmationStepComponent } from '@app/order/components';
 import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
@@ -25,7 +20,6 @@ import { OrderLocationsService, OrderWizardStateService } from './services';
     DateTimeStepComponent,
     ClientDetailsStepComponent,
     StepContainerComponent,
-    ClientIdentificationComponent,
     ConfirmationStepComponent,
   ],
   imports: [

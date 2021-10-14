@@ -1,19 +1,30 @@
 <app-step-container>
   <app-professional-card class="professional-info" [professional]="professional"></app-professional-card>
-
   <ion-item class="service-info" lines="none">
     <ion-label position="stacked" color="medium">{{ 'order.service-name' | translate }}</ion-label>
     <ion-text>{{ service?.name }}</ion-text>
     <app-price slot="end" class="ion-align-self-end" [price]="service?.price"></app-price>
   </ion-item>
-
   <ion-item class="service-info" lines="none">
     <ion-label position="stacked" color="medium">{{ 'order.service-date' | translate }}</ion-label>
     <ion-text>{{ date$ | async | date: 'medium' }}</ion-text>
   </ion-item>
-
   <ion-item class="service-info" lines="none">
     <ion-label position="stacked" color="medium">{{ 'order.service-location' | translate }}</ion-label>
     <ion-text>{{ 'service-location.' + service?.service_type | translate }}</ion-text>
   </ion-item>
+
+  <section class="ion-padding-top" *ngIf="(isAuthenticated$ | async) === false">
+    <app-section-heading>{{ 'order.continue-as' | translate }}</app-section-heading>
+    <ion-radio-group value="login">
+      <ion-item lines="none">
+        <ion-radio value="login" slot="start"></ion-radio>
+        <ion-label>{{ 'order.existing-user' | translate }}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-radio value="register" slot="start" [disabled]="true"></ion-radio>
+        <ion-label>{{ 'order.new-user' | translate }}</ion-label>
+      </ion-item>
+    </ion-radio-group>
+  </section>
 </app-step-container>

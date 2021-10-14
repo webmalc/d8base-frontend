@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderAuthenticationGuardService, OrderFirstStepGuardService } from '@app/order/guards';
-import { ClientIdentificationComponent } from './components/';
+import { OrderAuthenticationGuardService } from '@app/order/guards';
 import { ORDER_STEPS, stepsRoutes } from './order-steps';
 import { OrderPage } from './order.page';
 
@@ -16,11 +15,6 @@ const routes: Routes = [
         redirectTo: `${ORDER_STEPS.ids[0]}`,
       },
       ...stepsRoutes([OrderAuthenticationGuardService]),
-      {
-        path: 'contact-info',
-        pathMatch: 'full',
-        component: ClientIdentificationComponent,
-      },
     ],
   },
 ];
