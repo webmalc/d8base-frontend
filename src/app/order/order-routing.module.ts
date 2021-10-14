@@ -15,7 +15,7 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: `${ORDER_STEPS.ids[0]}`,
       },
-      ...stepsRoutes([OrderFirstStepGuardService, OrderAuthenticationGuardService]),
+      ...stepsRoutes([OrderAuthenticationGuardService]),
       {
         path: 'contact-info',
         pathMatch: 'full',

@@ -70,8 +70,8 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     this.form.addControl('location', this.locationFormControl);
   }
 
-  public get needLocations(): boolean {
-    return this.context?.service.service_type !== 'online';
+  public get isOnline(): boolean {
+    return this.context?.service.service_type === 'online';
   }
 
   public get hasLocations(): boolean {
@@ -98,7 +98,10 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
       [this.formFields.isAnotherPerson]: isAnotherPerson,
       [this.formFields.comment]: data[this.formFields.comment],
     });
-    this.setFormControlValue(data?.[this.locationKey]);
+    const locationValue = data?.[this.locationKey];
+    if (locationValue) {
+      this.locationFormControl.setValue(locationValue);
+    }
     this.disableUserFields(!isAnotherPerson);
   }
 
@@ -183,8 +186,8 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
   private loadLocations(): void {
     this.locations = null;
     this.locationKey = '';
-    const service = this.context.service;
-    if (service.service_type === 'online') {
+    if (this.isOnline) {
+      this.locationFormControl.setValue('online');
       return;
     }
 
@@ -192,12 +195,6 @@ export class ClientDetailsStepComponent extends StepComponent<ClientDetailsStepD
     this.orderLocations.getLocations(this.context.service).subscribe(locations => {
       this.locations = locations;
       this.cd.markForCheck();
-    });
-  }
-
-  private setFormControlValue(value: any): void {
-    setTimeout(() => {
-      this.locationFormControl.setValue(value);
     });
   }
 }

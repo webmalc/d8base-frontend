@@ -738,7 +738,7 @@
     "selected-service": "Selected service",
     "forward": "Accept and continue",
     "order-service": "Place order",
-    "location-header": "Choose the service location",
+    "location-header": "Service location",
     "final-step": "The order data is ready. Tap 'Place Order' to proceed.",
     "comment-header": "Optional comments",
     "date": "Date",

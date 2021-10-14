@@ -15,8 +15,8 @@ export class OrderAuthenticationGuardService implements CanActivate {
           return true;
         }
         const serviceId = route.params.serviceId;
-
-        return this.router.parseUrl(`order/${serviceId}/contact-info`);
+        const path = route.url[0].path;
+        return this.router.parseUrl(`auth/login?redirectTo=order/${serviceId}/${path}`);
       }),
     );
   }
