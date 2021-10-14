@@ -1,5 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
+import { Params } from '@angular/router';
 import { ProfessionalList, ServiceList } from '@app/api/models';
+import { NavQueryParams } from '@app/core/constants/navigation.constants';
 import { AuthenticationService } from '@app/core/services';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
@@ -17,7 +19,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
     },
   ],
 })
-export class ConfirmationStepComponent extends StepComponent<void> {
+export class ConfirmationStepComponent extends StepComponent<{ params?: Params }> {
   public date$ = new BehaviorSubject<Date | null>(null);
   public isAuthenticated$: Observable<boolean>;
 
@@ -39,5 +41,10 @@ export class ConfirmationStepComponent extends StepComponent<void> {
     if (dateStepState) {
       this.date$.next(new Date(dateStepState.start_datetime));
     }
+  }
+
+  public changeLoginRegister(event: CustomEvent): void {
+    const value: string = event.detail.value;
+    this.outputData = value === 'register' ? { params: { [NavQueryParams.newUser]: true } } : {};
   }
 }

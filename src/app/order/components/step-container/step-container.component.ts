@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProfessionalList } from '@app/api/models/professional-list';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
 import { NgDestroyService } from '@app/core/services';
@@ -10,7 +9,7 @@ import StepContext from '@app/order/interfaces/step-context.interface';
 import StepModel from '@app/order/interfaces/step-model.interface';
 import { OrderWizardStateService } from '@app/order/services';
 import { Observable } from 'rxjs';
-import { map, take, takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-step-container',
@@ -34,10 +33,6 @@ export class StepContainerComponent implements OnInit {
     private readonly ngDestroy$: NgDestroyService,
   ) {}
 
-  public get professional$(): Observable<ProfessionalList> {
-    return this.context$.pipe(map(x => x.professional));
-  }
-
   public ngOnInit(): void {
     this.subscribeInputContext();
     this.subscribeInputCurrentState();
@@ -49,13 +44,11 @@ export class StepContainerComponent implements OnInit {
       return;
     }
 
-    this.wizardState.setCurrentStepState(this.stepComponent.outputData);
-    this.wizardState.nextStep();
+    this.wizardState.nextStep(this.stepComponent.outputData);
   }
 
   public prevStep(): void {
-    this.wizardState.setCurrentStepState(this.stepComponent.outputData);
-    this.wizardState.prevStep();
+    this.wizardState.prevStep(this.stepComponent.outputData);
   }
 
   public submit(): void {
@@ -63,15 +56,11 @@ export class StepContainerComponent implements OnInit {
       return;
     }
 
-    this.wizardState.setCurrentStepState(this.stepComponent.outputData);
-    this.wizardState.doSubmit();
+    this.wizardState.doSubmit(this.stepComponent.outputData);
   }
 
-  public async reset(professionalId: number): Promise<void> {
-    if (!professionalId) {
-      return;
-    }
-    this.wizardState.resetWizard();
+  public async reset(): Promise<void> {
+    const { professionalId } = this.wizardState.resetWizard();
     await this.router.navigateByUrl(getProfessionalServicesUrl(professionalId));
   }
 

@@ -43,3 +43,8 @@ export enum NavParams {
   EducationId = 'education-id',
   ExperienceId = 'experience-id',
 }
+
+export enum NavQueryParams {
+  redirectTo = 'redirectTo',
+  newUser = 'newUser',
+}
