@@ -9,7 +9,7 @@ import StepContext from '@app/order/interfaces/step-context.interface';
 import StepModel from '@app/order/interfaces/step-model.interface';
 import { OrderWizardStateService } from '@app/order/services';
 import { Observable } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-step-container',
@@ -34,9 +34,9 @@ export class StepContainerComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.subscribeInputContext();
-    this.subscribeInputCurrentState();
-    this.subscribeStepRoute();
+    this.subscribeOnContext();
+    this.subscribeOnState();
+    this.subscribeOnRoute();
   }
 
   public nextStep(): void {
@@ -64,7 +64,7 @@ export class StepContainerComponent implements OnInit {
     await this.router.navigateByUrl(getProfessionalServicesUrl(professionalId));
   }
 
-  private subscribeInputCurrentState(): void {
+  private subscribeOnState(): void {
     this.wizardState
       .getState()
       .pipe(takeUntil(this.ngDestroy$))
@@ -74,17 +74,17 @@ export class StepContainerComponent implements OnInit {
       });
   }
 
-  private subscribeInputContext(): void {
+  private subscribeOnContext(): void {
     this.wizardState
       .getContext()
-      .pipe(take(1), takeUntil(this.ngDestroy$))
+      .pipe(takeUntil(this.ngDestroy$))
       .subscribe(context => {
         this.stepComponent.setContext(context);
         this.cd.markForCheck();
       });
   }
 
-  private subscribeStepRoute(): void {
+  private subscribeOnRoute(): void {
     this.route.params.pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
       const step = this.route.routeConfig?.path.split('/').pop();
       this.wizardState.setCurrentStep(step as OrderIds);
