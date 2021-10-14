@@ -6,7 +6,6 @@ import {
   ClientDetailsStepComponent,
   ClientIdentificationComponent,
   DateTimeStepComponent,
-  OrderConfirmationComponent,
   ConfirmationStepComponent,
 } from '@app/order/components';
 import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
@@ -25,7 +24,6 @@ import { OrderLocationsService, OrderWizardStateService } from './services';
     OrderPage,
     DateTimeStepComponent,
     ClientDetailsStepComponent,
-    OrderConfirmationComponent,
     StepContainerComponent,
     ClientIdentificationComponent,
     ConfirmationStepComponent,

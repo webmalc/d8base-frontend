@@ -19,14 +19,16 @@
 </ion-content>
 <ion-footer>
   <div class="footer">
-    <ion-button
-      *ngIf="isLastStep$ | async; else isNotLastStep"
-      expand="block"
-      (click)="submit()"
-      class="footer__button"
-    >
-      {{ 'order.order-service' | translate }}
-    </ion-button>
+    <div *ngIf="isLastStep$ | async; else isNotLastStep" class="footer__button">
+      <ion-button expand="block" (click)="submit()">
+        {{ 'order.order-service' | translate }}
+      </ion-button>
+      <div class="eula">
+        <ion-note>
+          {{ 'order.eula' | translate }}
+        </ion-note>
+      </div>
+    </div>
     <ng-template #isNotLastStep>
       <ion-button expand="block" (click)="nextStep()" class="footer__button">
         {{ 'order.forward' | translate }}
