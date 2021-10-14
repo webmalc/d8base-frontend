@@ -53,6 +53,10 @@ const routes: Routes = [
     loadChildren: () => import('./bookmarks/bookmarks.module').then(m => m.BookmarksModule),
     canActivate: [MustBeAuthorizedGuard],
   },
+  {
+    path: NavPath.ProfessionalLanding,
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule)
+  },
   { path: '**', component: NotFoundPageComponent },
 ];
 

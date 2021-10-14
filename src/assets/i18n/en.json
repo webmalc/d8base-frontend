@@ -892,5 +892,42 @@
     "support": "Support",
     "eula": "End user license agreement",
     "copy": "© 2021 d8base | All rights reserved"
+  },
+  "landing": {
+    "first": {
+      "title": "D8base helps the client and the performer find each other",
+      "desc": "Expand your business opportunities with d8base",
+      "btn": "Start now"
+    },
+    "second": {
+      "title-first": "Wanna more clients?",
+      "title-second": "Publish your service on d8base",
+      "adv1": "Suitable for any business",
+      "adv2": "In just a few minutes",
+      "adv3": "Convenient from PC and smartphone",
+      "btn": "Publish"
+    },
+    "third": {
+      "block1": {
+        "title": "Everything is free and no commission",
+        "desc": "Publishing ads and working with profile is absolutely free"
+      },
+      "block2": {
+        "title": "Convenient chat and open contacts",
+        "desc": "You can communicate with the client the way you like. And indicate the ways of communication that you want"
+      },
+      "block3": {
+        "title": "More possibilities",
+        "desc": "The ability to exhibit an unlimited number of services, photos of works, post information about yourself, share a profile, find clients around the world"
+      }
+    },
+    "fourth": {
+      "title": "Do you want the client to sign up for you yourself? Set up your schedule and take orders online",
+      "adv1": "Set up an online appointment for your business in just a few minutes when publishing a service",
+      "adv2": "Share the schedule link on your social medias, websites and any other platforms",
+      "adv3": "Customers will be able to choose the time themselves and book it, and all entries will be reflected in the booking journal",
+      "adv4": "Your booking journal is always at hand! You can manage a client's record: create, confirm, transfer or cancel a booking",
+      "btn": "Try now"
+    }
   }
 }
