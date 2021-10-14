@@ -43,14 +43,13 @@ export class DateTimeStepComponent extends StepComponent<DateTimeStepData> imple
     this.subscribeFormStatus();
   }
 
-  public setState(state: any): void {
+  public setState(state): void {
     const data: DateTimeStepData = state[OrderIds.date];
     if (!data?.start_datetime) {
       this.form.reset();
-
       return;
     }
-    const start_datetime = data?.start_datetime;
+    const start_datetime = data.start_datetime;
     this.formControl.setValue(new Date(start_datetime));
   }
 

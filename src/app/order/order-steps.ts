@@ -39,7 +39,7 @@ export const ORDER_STEPS: StepsModel = {
 
 export const initState: StepsState = ORDER_STEPS.ids.reduce((acc, curr) => ({ ...acc, [curr]: null }), {});
 
-export const orderWizardStorageKey = 'orderWizardStorageKey';
+export const orderWizardStorageKey = 'recent_order_details';
 
 export const stepsRoutes: (guards: Type<CanActivate>[]) => Routes = guards =>
   Object.values(ORDER_STEPS.byId).map(({ component, needGuards, id }) => ({

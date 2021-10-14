@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
+import { NavPath } from '@app/core/constants/navigation.constants';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
@@ -23,7 +24,7 @@ export class OrderWizardStateService {
     map(state => !state || JSON.stringify(initState) === JSON.stringify(state)),
   );
   private path: string;
-  private storageKey: string;
+  private readonly storageKey: string = orderWizardStorageKey;
   private readonly filteredContext$: Observable<StepContext>;
 
   constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
@@ -96,9 +97,8 @@ export class OrderWizardStateService {
   }
 
   public async setContext(context: StepContext): Promise<void> {
-    const { service, client } = context;
-    this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
-    this.path = `order/${service?.id}`;
+    const { service } = context;
+    this.path = `${NavPath.Order}/${service?.id}`;
     this.steps = this.getSteps(context);
     this.context$.next(context);
     const state: StepsState = await this.storage.get(this.storageKey);

@@ -36,8 +36,8 @@ export class ConfirmationStepComponent extends StepComponent<{ params?: Params }
     return this.context?.service;
   }
 
-  public setState(data): void {
-    const dateStepState: DateTimeStepData = data[OrderIds.date];
+  public setState(state): void {
+    const dateStepState: DateTimeStepData = state[OrderIds.date];
     if (dateStepState) {
       this.date$.next(new Date(dateStepState.start_datetime));
     }

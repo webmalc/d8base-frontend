@@ -9,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { StepContainerComponent } from './components/step-container/step-container.component';
-import { OrderAuthenticationGuardService, OrderFirstStepGuardService } from './guards';
+import { OrderAuthenticationGuardService } from './guards';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderPage } from './order.page';
 import { OrderLocationsService, OrderWizardStateService } from './services';
@@ -34,11 +34,6 @@ import { OrderLocationsService, OrderWizardStateService } from './services';
     RegistrationPageModule,
     LocationEditorModule,
   ],
-  providers: [
-    OrderFirstStepGuardService,
-    OrderAuthenticationGuardService,
-    OrderWizardStateService,
-    OrderLocationsService,
-  ],
+  providers: [OrderAuthenticationGuardService, OrderWizardStateService, OrderLocationsService],
 })
 export class OrderPageModule {}
