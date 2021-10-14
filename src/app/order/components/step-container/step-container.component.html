@@ -7,6 +7,11 @@
         </ion-button>
       </ion-buttons>
       <ion-label>{{ (currentStep$ | async)?.title | translate }}</ion-label>
+      <ion-buttons slot="end" *ngIf="professional$ | async as professional">
+        <ion-button (click)="reset(professional?.id)">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </div>
 </app-header>
