@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfessionalList, Profile, SentOrder } from '@app/api/models';
 import { AccountsService, ProfessionalsService, ServicesService } from '@app/api/services';
+import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
+import { toNumber } from '@app/core/functions/string.functions';
+import { NgDestroyService } from '@app/core/services';
 import { ServicesApiCache } from '@app/core/services/cache';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderWizardStateService } from './services';
 
@@ -13,7 +16,7 @@ import { OrderWizardStateService } from './services';
   selector: 'app-order',
   templateUrl: './order.page.html',
   styleUrls: ['./order.page.scss'],
-  providers: [ServicesApiCache],
+  providers: [ServicesApiCache, NgDestroyService],
 })
 export class OrderPage {
   @Select(CurrentUserSelectors.profile)
@@ -22,7 +25,6 @@ export class OrderPage {
   @Select(CurrentUserSelectors.defaultProfessional)
   public currentProfessional$: Observable<ProfessionalList>;
 
-  private readonly ngDestroy$ = new Subject<void>();
   private serviceId: number;
   private isSelfOrder: boolean = false;
 
@@ -33,17 +35,10 @@ export class OrderPage {
     private readonly servicesApi: ServicesService,
     private readonly professionalsServiceApi: ProfessionalsService,
     private readonly accountsServiceApi: AccountsService,
-  ) {}
-
-  public ionViewWillEnter(): void {
+    private readonly ngDestroy$: NgDestroyService,
+  ) {
     this.subscribeToRouteParams();
     this.subscribeSubmit();
-  }
-
-  public ionViewDidLeave(): void {
-    this.ngDestroy$.next();
-    this.ngDestroy$.complete();
-    this.wizardState.resetWizard();
   }
 
   private subscribeSubmit(): void {
@@ -68,7 +63,7 @@ export class OrderPage {
       ...(this.isSelfOrder ? { source: 'manual' } : {}),
     };
     this.accountsServiceApi.accountsOrdersSentCreate(orderCreateParams).subscribe(({ id }) => {
-      this.router.navigate(['/', 'my-orders', 'outbox', id]);
+      this.router.navigate(['/', NavPath.Orders, NavBranch.Outbox, id]);
     });
   }
 
@@ -107,7 +102,7 @@ export class OrderPage {
         takeUntil(this.ngDestroy$),
       )
       .subscribe(serviceId => {
-        this.serviceId = serviceId;
+        this.serviceId = toNumber(serviceId);
         this.setContext(serviceId);
       });
   }

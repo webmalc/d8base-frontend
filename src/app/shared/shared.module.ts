@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
   AddButtonComponent,
+  AvatarComponent,
   CategorySelectorComponent,
   ClientWidgetComponent,
   ColumnHeaderComponent,
@@ -30,24 +31,25 @@ import {
   PaymentMethodViewerComponent,
   PhoneEditorComponent,
   PhotoPopoverComponent,
+  PlaceholderComponent,
   PriceComponent,
   PriceEditorComponent,
   ProfessionalCardComponent,
   ScheduleEditorComponent,
   ScheduleViewerComponent,
+  SectionHeadingComponent,
   ServiceLocationComponent,
+  ServiceTagsEditorComponent,
+  ServiceTagsViewerComponent,
   ServiceTitleComponent,
   ServiceWidgetComponent,
   SubcategorySelectorComponent,
-  SectionHeadingComponent,
-  AvatarComponent,
-  ServiceTagsViewerComponent,
-  ServiceTagsEditorComponent,
-  PlaceholderComponent,
 } from '@app/shared/components';
-import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { CalendarComponentComponent } from '@app/shared/components/calendar-component/calendar-component.component';
+import { CalendarMonthComponent } from '@app/shared/components/calendar/calendar-month/calendar-month.component';
+import { CalendarWeekComponent } from '@app/shared/components/calendar/calendar-week/calendar-week.component';
 import { CollapseItemComponent } from '@app/shared/components/collapse-item/collapse-item.component';
+import { ContactsViewComponent } from '@app/shared/components/contacts-view/contacts-view.component';
 import { ErrorFlashbagComponent } from '@app/shared/components/error-flashbag/error-flashbag.component';
 import { FlagMenuComponent } from '@app/shared/components/flag-menu/flag-menu.component';
 import { InfoRowComponent } from '@app/shared/components/info-row/info-row.component';
@@ -61,28 +63,34 @@ import { ServicePublishAgreementComponent } from '@app/shared/components/service
 import { SuccessFlashbagComponent } from '@app/shared/components/success-flashbag/success-flashbag.component';
 import { HintDirective } from '@app/shared/directives';
 import {
+  AsReviewsPipe,
+  AsServicesPipe,
+  AsStringPipe,
+  AsYearsPipe,
+  CategoryByIdPipe,
   CityByIdPipe,
   CountryByIdPipe,
+  DefaultIfEmptyPipe,
   MasterByIdPipe,
+  RegionByIdPipe,
   ServiceByIdPipe,
   ServiceDataFilterPipe,
-  SubstringFilterPipe,
-  CategoryByIdPipe,
   SubcategoryByIdPipe,
-  AsYearsPipe,
-  AsReviewsPipe,
-  AsStringPipe,
-  AsServicesPipe,
-  DefaultIfEmptyPipe,
-  RegionByIdPipe,
   SubregionByIdPipe,
+  SubstringFilterPipe,
 } from '@app/shared/pipes';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ChatButtonComponent } from './components/chat-button/chat-button.component';
+import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
+import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
+import { DatePickerPopoverComponent } from './components/date-picker-popover/date-picker-popover.component';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
+import { HintPopoverComponent } from './components/hint-popover/hint-popover.component';
+import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
 import { ImageCropPopoverComponent } from './components/picture-selector/image-cropper/image-crop-popover.component';
 import { SavedProfessionalToggleComponent } from './components/saved-professional-toggle/saved-professional-toggle.component';
 import { ServicePhotosComponent } from './components/service-photos/service-photos.component';
@@ -91,13 +99,8 @@ import { IonImageSpinnerDirective } from './directives/ion-image-spinner.directi
 import { IonImageViewSliderDirective } from './directives/ion-image-view-slider.directive';
 import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
-import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
-import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
-import { ChatButtonComponent } from './components/chat-button/chat-button.component';
-import { LoadingErrorComponent } from './components/loading-error/loading-error.component';
-import { IfSpinnerModule } from './if-spinner/if-spinner.module';
 import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
-import { HintPopoverComponent } from './components/hint-popover/hint-popover.component';
+import { IfSpinnerModule } from './if-spinner/if-spinner.module';
 
 @NgModule({
   declarations: [
@@ -185,6 +188,9 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     PlaceholderComponent,
     RegionByIdPipe,
     SubregionByIdPipe,
+    CalendarMonthComponent,
+    CalendarWeekComponent,
+    DatePickerPopoverComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -268,6 +274,8 @@ import { HintPopoverComponent } from './components/hint-popover/hint-popover.com
     PlaceholderComponent,
     RegionByIdPipe,
     SubregionByIdPipe,
+    CalendarMonthComponent,
+    CalendarWeekComponent,
   ],
   imports: [
     CommonModule,

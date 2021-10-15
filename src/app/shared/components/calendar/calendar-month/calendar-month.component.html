@@ -1,0 +1,83 @@
+<div class="ion-margin-vertical">
+  <ion-row class="ion-justify-content-center">
+    <ion-label class="title"
+      >{{ 'calendar.month.' + getMonthTransKey() | translate }} {{ getYear() | uppercase }}</ion-label
+    >
+  </ion-row>
+  <div class="calendar">
+    <ng-container *ngFor="let day of workdays">
+      <ng-container [ngSwitch]="getDay(day.date.getDay(), isMonStart | async)">
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="1"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-first item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="2"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-second item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="3"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-third item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="4"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-fourths item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="5"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-fifth item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="6"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-sixth item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+        <div
+          [class.unavailable]="!day.isAvailable"
+          *ngSwitchCase="7"
+          [class.cursor-pointer]="day.isAvailable"
+          [class.selected]="isSelected(day)"
+          class="ion-text-center day-seventh item"
+          (click)="select(day)"
+        >
+          {{ day.date.getDate() }}
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

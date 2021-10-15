@@ -1,0 +1,17 @@
+<app-calendar-week></app-calendar-week>
+<ion-content>
+  <div class="content-column">
+    <app-calendar-month
+      *ngFor="let month of months$ | async"
+      [workdays]="month"
+      [selectedDate]="selectedDate"
+      (selected)="pickDate($event)"
+    >
+    </app-calendar-month>
+  </div>
+</ion-content>
+<div>
+  <ion-button expand="block" (click)="confirm()">
+    <ion-label>{{ 'calendar.confirm' | translate }}</ion-label>
+  </ion-button>
+</div>

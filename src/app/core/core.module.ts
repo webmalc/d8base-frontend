@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { throwIfAlreadyLoaded } from '@app/core/functions/module.functions';
+import { CalendarGeneratorService } from '@app/core/services/calendar-generator.service';
 import { MustBeAuthorizedGuard } from '@app/core/services/guards/must-be-authorized.guard';
 import { CurrentUserFacadeService, LoaderEffects, UserSettingsService } from '@app/core/services/facades';
 import {
@@ -129,6 +130,7 @@ import { environment } from '@env/environment';
     ContactsMergeToDefaultService,
     NewMessagesNotificationService,
     IntervalService,
+    CalendarGeneratorService,
   ],
 })
 export class CoreModule {

@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SharedModule } from '@app/shared/shared.module';
+import { OrderPageModule } from '@app/order/order.module';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { CalendarComponentComponent } from './calendar-component.component';
 
-describe('CalendarComponentComponent', () => {
-  let component: CalendarComponentComponent;
-  let fixture: ComponentFixture<CalendarComponentComponent>;
+import { ConfirmationStepComponent } from './confirmation-step.component';
+
+describe('ConfirmationStepComponent', () => {
+  let component: ConfirmationStepComponent;
+  let fixture: ComponentFixture<ConfirmationStepComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [...RootModules(), ComponentTestingModule, SharedModule],
+        imports: [...RootModules(), ComponentTestingModule, OrderPageModule],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(CalendarComponentComponent);
+      fixture = TestBed.createComponent(ConfirmationStepComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

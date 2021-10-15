@@ -25,7 +25,7 @@ export class ProfessionalCardComponent {
   }
 
   public get defaultCityId(): number {
-    if (!this.professional.locations) {
+    if (!this.professional?.locations) {
       return NaN;
     }
     // TODO search for default location

@@ -74,6 +74,7 @@ export { ProfessionalSettings } from './models/professional-settings';
 export { Subcategory } from './models/subcategory';
 export { Rate } from './models/rate';
 export { ProfessionalCalendar } from './models/professional-calendar';
+export { ProfessionalCalendarByDays } from './models/professional-calendar-by-days';
 export { SearchProfessional } from './models/search-professional';
 export { ServiceTagList } from './models/service-tag-list';
 export { ServiceLocationInline } from './models/service-location-inline';

@@ -1,0 +1,7 @@
+.week {
+  display: grid;
+  padding: 1rem;
+  row-gap: 1.4rem;
+  justify-items: center;
+  grid-template-columns: repeat(7, 1fr);
+}

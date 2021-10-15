@@ -1,3 +1,26 @@
 :host {
   display: contents;
 }
+
+.header {
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid var(--ion-color-light);
+
+  &__service-name {
+    width: min(100vw, 36rem);
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+
+  &__button {
+    width: min(100vw, 36rem);
+  }
+}
+
+.eula {
+  padding: 0.5em;
+}

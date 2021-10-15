@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SharedModule } from '@app/shared/shared.module';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { CalendarComponentComponent } from './calendar-component.component';
 
-describe('CalendarComponentComponent', () => {
-  let component: CalendarComponentComponent;
-  let fixture: ComponentFixture<CalendarComponentComponent>;
+import { CalendarMonthComponent } from './calendar-month.component';
+
+describe('CalendarMonthComponent', () => {
+  let component: CalendarMonthComponent;
+  let fixture: ComponentFixture<CalendarMonthComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [...RootModules(), ComponentTestingModule, SharedModule],
+        declarations: [CalendarMonthComponent],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(CalendarComponentComponent);
+      fixture = TestBed.createComponent(CalendarMonthComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

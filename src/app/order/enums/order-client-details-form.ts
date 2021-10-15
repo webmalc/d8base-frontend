@@ -1,8 +1,8 @@
 export enum OrderClientDetailsFormFields {
-  IsForMe = 'is_another_person',
-  Email = 'email',
-  FirstName = 'first_name',
-  LastName = 'last_name',
-  Phone = 'phone',
-  Comment = 'note',
+  isAnotherPerson = 'is_another_person',
+  email = 'email',
+  firstName = 'first_name',
+  lastName = 'last_name',
+  phone = 'phone',
+  comment = 'note',
 }

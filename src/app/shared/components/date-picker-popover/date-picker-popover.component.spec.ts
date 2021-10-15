@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SharedModule } from '@app/shared/shared.module';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { CalendarComponentComponent } from './calendar-component.component';
 
-describe('CalendarComponentComponent', () => {
-  let component: CalendarComponentComponent;
-  let fixture: ComponentFixture<CalendarComponentComponent>;
+import { DatePickerPopoverComponent } from './date-picker-popover.component';
+
+describe('DatePickerPopoverComponent', () => {
+  let component: DatePickerPopoverComponent;
+  let fixture: ComponentFixture<DatePickerPopoverComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [...RootModules(), ComponentTestingModule, SharedModule],
+        imports: [...RootModules(), ComponentTestingModule],
       }).compileComponents();
 
-      fixture = TestBed.createComponent(CalendarComponentComponent);
+      fixture = TestBed.createComponent(DatePickerPopoverComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     }),

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { ServiceList } from '@app/api/models';
+import { Params, Router } from '@angular/router';
+import { NavPath } from '@app/core/constants/navigation.constants';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
@@ -24,7 +24,7 @@ export class OrderWizardStateService {
     map(state => !state || JSON.stringify(initState) === JSON.stringify(state)),
   );
   private path: string;
-  private storageKey: string;
+  private readonly storageKey: string = orderWizardStorageKey;
   private readonly filteredContext$: Observable<StepContext>;
 
   constructor(private readonly router: Router, private readonly storage: StorageManagerService) {
@@ -38,7 +38,8 @@ export class OrderWizardStateService {
     return this.submit$.asObservable();
   }
 
-  public doSubmit(): void {
+  public doSubmit(data: any): void {
+    this.setCurrentStepState(data);
     this.submit$.next(this.state$.value);
   }
 
@@ -69,13 +70,16 @@ export class OrderWizardStateService {
     this.setStepStateById(this.getIdOfCurrentStep(), data);
   }
 
-  public nextStep(): void {
+  public nextStep(data: any): void {
+    this.setCurrentStepState(data);
+    const params = data?.params;
     this.isLastStep()
       .pipe(first(isLastStep => !isLastStep))
-      .subscribe(() => this.goToStep(+1));
+      .subscribe(() => this.goToStep(+1, params));
   }
 
-  public prevStep(): void {
+  public prevStep(data: any): void {
+    this.setCurrentStepState(data);
     this.isFirstStep()
       .pipe(first(isFirstStep => !isFirstStep))
       .subscribe(() => this.goToStep(-1));
@@ -93,9 +97,8 @@ export class OrderWizardStateService {
   }
 
   public async setContext(context: StepContext): Promise<void> {
-    const { service, client } = context;
-    this.storageKey = `${orderWizardStorageKey}/${client?.id}/${service?.id}`;
-    this.path = `order/${service?.id}`;
+    const { service } = context;
+    this.path = `${NavPath.Order}/${service?.id}`;
     this.steps = this.getSteps(context);
     this.context$.next(context);
     const state: StepsState = await this.storage.get(this.storageKey);
@@ -116,13 +119,15 @@ export class OrderWizardStateService {
     return of(byId[ids[0]]);
   }
 
-  public resetWizard(): void {
+  public resetWizard(): { professionalId: number } {
+    const professionalId = this.context$.value?.professional?.id;
     this.clearState();
     this.context$.next(null);
     this.currentStepId$.next(this.steps.ids[0]);
     this.state$.next(initState);
     this.path = null;
     this.reset$.next();
+    return { professionalId };
   }
 
   public isReset(): Observable<void> {
@@ -138,12 +143,12 @@ export class OrderWizardStateService {
     await this.storage.set(this.storageKey, newState);
   }
 
-  private goToStep(offset: number): void {
+  private goToStep(offset: number, queryParams?: Params): void {
     this.currentStepId$.pipe(first()).subscribe(currentStepId => {
       const index = this.steps.ids.indexOf(currentStepId);
       const nextStepId = this.steps.ids[index + offset];
       this.currentStepId$.next(nextStepId);
-      this.router.navigate([this.path, nextStepId]);
+      this.router.navigate([this.path, nextStepId], { queryParams });
     });
   }
 
@@ -156,14 +161,6 @@ export class OrderWizardStateService {
   }
 
   private getSteps(context: StepContext): StepsModel {
-    const { service } = context;
-    const onlineServiceType: ServiceList['service_type'] = 'online';
-    if (service.service_type === onlineServiceType) {
-      return {
-        ...ORDER_STEPS,
-        ids: ORDER_STEPS.ids.filter(id => id !== OrderIds.Location),
-      };
-    }
     return ORDER_STEPS;
   }
 }

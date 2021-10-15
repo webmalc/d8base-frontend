@@ -1,4 +1,6 @@
-// TODO use moment.js or date-fns for datetime formatting/transforming
+// TODO use date-fns for datetime formatting/transforming
+
+import { getDaysInMonth } from 'date-fns';
 
 export function addMinutes(date: Date, minutes: number): Date {
   return new Date(date.getTime() + minutes * 60000);
@@ -76,11 +78,23 @@ export function calculateAge(birthday: string): number {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
-export function getOffsetDate(date: Date, offset: number): Date {
-  const newDay = new Date(date);
-  newDay.setDate(date.getDate() + offset);
+/**
+ * returns first day of the month in the YYYY-MM-DD format
+ */
+export function getMonthFirstDay(month: number, year: number): string {
+  const date = new Date(year, month - 1);
+  const monthStr = `0${date.getMonth() + 1}`.slice(-2);
+  return `${date.getFullYear()}-${monthStr}-01`;
+}
 
-  return newDay;
+/**
+ * returns last day of the month in the YYYY-MM-DD format
+ */
+export function getMonthLastDay(month: number, year: number): string {
+  const date = new Date(year, month - 1);
+  const monthStr = `0${date.getMonth() + 1}`.slice(-2);
+  const dayStr = `0${getDaysInMonth(date)}`.slice(-2);
+  return `${date.getFullYear()}-${monthStr}-${dayStr}`;
 }
 
 function getMonthNumberFormatted(date: Date): string {

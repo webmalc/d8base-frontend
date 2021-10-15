@@ -29,10 +29,6 @@ export class SearchResultComponent {
     return getUserChatUrl(this.data.professional?.user.id);
   }
 
-  public get professionalScheduleUrl(): string {
-    return getProfessionalScheduleUrl(this.data.professional.id);
-  }
-
   public get serviceOrderUrl(): string {
     return getServiceOrderUrl(this.data.services[0].id);
   }
