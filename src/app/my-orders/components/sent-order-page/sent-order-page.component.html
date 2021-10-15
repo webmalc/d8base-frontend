@@ -1,54 +1,18 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <ng-container *appIfSpinner="order$ | ifSpinnerErrorState | async as order">
-      <ion-item color="light" lines="full">
-        <ion-buttons slot="start">
-          <ion-button routerLink="/my-orders/outbox" routerDirection="back">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-title>{{ 'sent_orders.order-details-title' | translate }}</ion-title>
-      </ion-item>
-
-      <ng-container *ngIf="order.service | serviceById$ | async as service">
-        <ion-list>
-          <ion-list-header>
-            <ion-label>{{ 'sent_orders.order-details-subtitle' | translate }}:</ion-label>
-          </ion-list-header>
-          <ng-container *ngIf="service.professional | masterById$ | async as professional">
-            <app-professional-card [professional]="professional" class="ion-margin-start"></app-professional-card>
-            <app-chat-button
-              *ngIf="(userId$ | async) !== service.professional"
-              [userId]="professional.user.id"
-            ></app-chat-button>
-          </ng-container>
-          <ion-item lines="none">
-            <ion-label color="secondary">
-              <b>{{ 'sent_orders.order-number' | translate }} : {{ order.id }}</b>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-
-        <ion-list>
-          <ion-list-header>
-            <ion-label>{{ 'sent_orders.ordered-service' | translate }}:</ion-label>
-          </ion-list-header>
-          <app-service-widget [service]="service"></app-service-widget>
-          <ion-item lines="none">
-            <ion-label>{{ 'order-status.title' | translate }}:</ion-label>
-            <app-order-status [status]="order.status"></app-order-status>
-          </ion-item>
-        </ion-list>
-      </ng-container>
-
-      <ion-list>
-        <ion-list-header>
-          <ion-label>{{ 'sent_orders.order-details' | translate }}:</ion-label>
-        </ion-list-header>
-        <app-order-details [order]="order"></app-order-details>
-      </ion-list>
+    <app-column-header>{{ 'sent-orders.order-details-title' | translate }}</app-column-header>
+    <ng-container *ngIf="order$ | async as order">
+      <div class="order-brief-info">
+        <span class="order-brief-info__icon"><img src="assets/images/sent-order.svg" alt="sent order" /></span>
+        <h1 class="order-brief-info__heading">{{ 'sent-orders.order-sent' | translate: { orderNumber: order.id } }}</h1>
+        <span class="order-brief-info__details">{{ 'sent-orders.available-actions' | translate }}</span>
+      </div>
+      <div class="order-full-info">
+        <div class="order-full-info__more-info">
+          <a [routerLink]="" (click)="showMoreInfo()">{{ 'sent-orders.more-info' | translate }}</a>
+        </div>
+      </div>
     </ng-container>
   </app-content-wrapper>
-  <app-footer></app-footer>
 </ion-content>

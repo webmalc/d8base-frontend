@@ -10,11 +10,11 @@
   <app-service-title [service]="service"></app-service-title>
   <ion-item lines="none">
     <ion-button [routerLink]="['/my-orders', 'outbox', order.id]" color="secondary">
-      {{ 'sent_orders.view' | translate }}
+      {{ 'sent-orders.view' | translate }}
     </ion-button>
     <ng-container *ngIf="canCancel">
       <ion-button slot="end" color="danger" (click)="onDiscardClick()">
-        {{ 'sent_orders.discard' | translate }}
+        {{ 'sent-orders.discard' | translate }}
       </ion-button>
     </ng-container>
   </ion-item>
