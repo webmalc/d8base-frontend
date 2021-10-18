@@ -7,7 +7,13 @@
         </ion-label>
       </ion-item-divider>
       <ion-menu-toggle *ngIf="!item.isHeader && isShown(item)" menu="main-menu" [autoHide]="false">
-        <ion-item [routerLink]="item.link" [queryParams]="item.params" routerLinkActive="active" lines="full">
+        <ion-item
+          [routerLink]="item.link"
+          [queryParams]="item.params"
+          routerLinkActive="active"
+          lines="full"
+          [id]="item.title"
+        >
           <ion-icon [name]="item.icon" slot="start"></ion-icon>
           {{ item.title | translate }}
         </ion-item>
