@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Service } from '@app/api/models';
+import { NavQueryParams } from '@app/core/constants/navigation.constants';
 import { getServiceUrl } from '@app/core/functions/navigation.functions';
 
 /**
@@ -12,6 +13,8 @@ import { getServiceUrl } from '@app/core/functions/navigation.functions';
 })
 export class ServiceLinkComponent {
   @Input() public service: Service;
+
+  public queryParams = { [NavQueryParams.goBack]: true };
 
   public get serviceUrl(): string {
     return getServiceUrl(this.service.id);

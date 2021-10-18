@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header (beforeNavigatingBack)="applyFilters()">
+    <app-column-header (willNavigateBack)="applyFilters()">
       <ion-label>{{ 'search.filters.title' | translate }}</ion-label>
       <ion-icon name="options-outline" slot="end"></ion-icon>
     </app-column-header>

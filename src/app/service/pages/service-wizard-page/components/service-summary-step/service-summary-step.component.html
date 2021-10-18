@@ -1,5 +1,5 @@
 <app-service-step-container [form]="form">
-  <app-column-header [disableBackButton]="true">
+  <app-column-header>
     {{ 'service-wizard.title' | translate }}
   </app-column-header>
   <app-service-widget *ngIf="service" [service]="service" [alwaysExpanded]="true"></app-service-widget>
