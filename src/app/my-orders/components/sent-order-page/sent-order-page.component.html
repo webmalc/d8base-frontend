@@ -10,9 +10,27 @@
         <span class="order-brief-info__details">{{ 'sent-orders.available-actions' | translate }}</span>
       </div>
       <div class="order-full-info">
-        <div class="order-full-info__more-info">
+        <div class="order-full-info__more-info" *ngIf="!moreInfo">
           <a [routerLink]="" (click)="showMoreInfo()">{{ 'sent-orders.more-info' | translate }}</a>
         </div>
+
+        <ng-container *ngIf="moreInfo">
+          <section *ngIf="order.service | serviceById$ | async as service">
+            <app-section-heading>{{ 'sent-orders.service-section-title' | translate }}</app-section-heading>
+            <ion-item lines="none">
+              <ion-label position="stacked" color="medium">{{ 'sent-orders.service-name' | translate }}</ion-label>
+              <ion-text>{{ service.name }}</ion-text>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label position="stacked" color="medium">{{ 'sent-orders.start-datetime' | translate }}</ion-label>
+              <ion-text>{{ order.start_datetime | date }}</ion-text>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label position="stacked" color="medium">{{ 'sent-orders.service-location' | translate }}</ion-label>
+              <ion-text>{{ 'service-location.' + service.service_type | translate }}</ion-text>
+            </ion-item>
+          </section>
+        </ng-container>
       </div>
     </ng-container>
   </app-content-wrapper>

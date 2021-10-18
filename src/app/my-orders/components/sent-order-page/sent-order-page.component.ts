@@ -20,6 +20,7 @@ export class SentOrderPageComponent {
   public userId$: Observable<Profile['id']>;
 
   public order$: Observable<SentOrder>;
+  public moreInfo: boolean = false;
 
   constructor(route: ActivatedRoute, api: AccountsService) {
     this.order$ = route.params.pipe(
@@ -29,6 +30,6 @@ export class SentOrderPageComponent {
   }
 
   public showMoreInfo(): void {
-    // TODO show additional information
+    this.moreInfo = true;
   }
 }

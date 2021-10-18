@@ -795,11 +795,15 @@
     "order-details-title": "Заказ сформирован",
     "order-sent": "Заказ №{{orderNumber}} успешно сформирован!",
     "available-actions": "Вы можете создать новый заказ или вернуться к списку исполнителей",
-    "more-info": "Информация о заказе",
     "create-new": "Создать новый заказ",
     "view": "Подробности",
     "discard": "Отменить",
-    "order-discarded": "Заказ был отменён"
+    "order-discarded": "Заказ был отменён",
+    "more-info": "Информация о заказе",
+    "service-section-title": "Информация об услуге",
+    "service-name": "Выбранная услуга",
+    "start-datetime": "Выбранная дата",
+    "service-location": "Место оказания услуги"
   },
   "order-status": {
     "title": "Статус заказа",
