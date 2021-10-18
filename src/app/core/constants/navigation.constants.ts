@@ -47,4 +47,5 @@ export enum NavParams {
 export enum NavQueryParams {
   redirectTo = 'redirectTo',
   newUser = 'newUser',
+  goBack = 'goBack',
 }

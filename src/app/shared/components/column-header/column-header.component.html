@@ -1,7 +1,7 @@
 <div class="header">
   <ion-item lines="none" class="header__title">
     <ion-buttons slot="start">
-      <ion-button (click)="navigateBack()" *ngIf="!disableBackButton">
+      <ion-button (click)="navigateBack()" *ngIf="canGoBack$ | async">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>

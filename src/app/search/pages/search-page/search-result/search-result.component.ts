@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Profile, Search, ServiceList } from '@app/api/models';
+import { NavQueryParams } from '@app/core/constants/navigation.constants';
 import {
-  getProfessionalScheduleUrl,
   getProfessionalServicesUrl,
   getServiceOrderUrl,
   getUserChatUrl,
@@ -20,6 +20,8 @@ export class SearchResultComponent {
   public userId$: Observable<Profile['id']>;
 
   @Input() public data: Search;
+
+  public queryParams = { [NavQueryParams.goBack]: true };
 
   public get professionalServicesUrl(): string {
     return getProfessionalServicesUrl(this.data.professional?.id);

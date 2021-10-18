@@ -1,2 +1,2 @@
-<a class="title capitalize-first-letter" [routerLink]="serviceUrl">{{ service.name }}</a>
+<a class="title capitalize-first-letter" [routerLink]="serviceUrl" [queryParams]="queryParams">{{ service.name }}</a>
 <app-price class="price" [price]="service.price"></app-price>
