@@ -797,19 +797,23 @@
     "order-details": "Order details",
     "discard-confirmation": "Discard? The order will be archived"
   },
-  "sent_orders": {
+  "sent-orders": {
     "title": "Sent orders",
     "currentTab": "Current",
     "archiveTab": "Archived",
     "empty-placeholder": "There is no orders",
-    "order-details-title": "Order details",
-    "order-details-subtitle": "Your order",
-    "order-number": "Order number",
-    "ordered-service": "Ordered service",
-    "order-details": "Order details",
+    "order-details-title": "Order sent",
+    "order-sent": "Order #{{orderNumber}} was sent",
+    "available-actions": "You can book another service or search for more professionals",
+    "create-new": "Create new order",
     "view": "View details",
     "discard": "Cancel",
-    "order-discarded": "The order was canceled"
+    "order-discarded": "The order was canceled",
+    "more-info": "Show order details",
+    "service-section-title": "Service information",
+    "service-name": "Service name",
+    "start-datetime": "Time",
+    "service-location": "Place"
   },
   "order-status": {
     "title": "Order status",

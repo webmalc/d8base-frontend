@@ -60,7 +60,7 @@ export class SentOrderListItemComponent {
   public async onDiscardClick(): Promise<void> {
     const orderCanceled = await this.orderStatusController.discardOrder(this.order);
     if (orderCanceled) {
-      this.toast.showMessage('sent_orders.order-discarded', { translate: true });
+      this.toast.showMessage('sent-orders.order-discarded', { translate: true });
       this.statusChanged.emit();
     }
   }

@@ -787,19 +787,23 @@
     "order-details": "Детали бронирования",
     "discard-confirmation": "Отклонить? Заказ будет перемещён в архив"
   },
-  "sent_orders": {
+  "sent-orders": {
     "title": "Отправленные заказы",
     "currentTab": "Текущие",
     "archiveTab": "Архив",
     "empty-placeholder": "Заказов нет",
-    "order-details-title": "Детали заказа",
-    "order-details-subtitle": "Вы забронировали",
-    "order-number": "Номер бронирования",
-    "ordered-service": "Забронированная услуга",
-    "order-details": "Детали бронирования",
-    "view": "Подробнее",
+    "order-details-title": "Заказ сформирован",
+    "order-sent": "Заказ №{{orderNumber}} успешно сформирован!",
+    "available-actions": "Вы можете создать новый заказ или вернуться к списку исполнителей",
+    "create-new": "Создать новый заказ",
+    "view": "Подробности",
     "discard": "Отменить",
-    "order-discarded": "Заказ был отменён"
+    "order-discarded": "Заказ был отменён",
+    "more-info": "Информация о заказе",
+    "service-section-title": "Информация об услуге",
+    "service-name": "Выбранная услуга",
+    "start-datetime": "Выбранная дата",
+    "service-location": "Место оказания услуги"
   },
   "order-status": {
     "title": "Статус заказа",

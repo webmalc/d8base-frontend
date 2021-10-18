@@ -1,14 +1,14 @@
 <ion-segment (ionChange)="changeTab($event)" [value]="tabs.current">
   <ion-segment-button [value]="tabs.current">
-    <ion-label>{{ 'sent_orders.currentTab' | translate }}</ion-label>
+    <ion-label>{{ 'sent-orders.currentTab' | translate }}</ion-label>
   </ion-segment-button>
   <ion-segment-button [value]="tabs.archive">
-    <ion-label>{{ 'sent_orders.archiveTab' | translate }}</ion-label>
+    <ion-label>{{ 'sent-orders.archiveTab' | translate }}</ion-label>
   </ion-segment-button>
 </ion-segment>
 
 <ion-list>
-  <app-infinite-scroll-container [doLoad$]="doLoad$" [emptyText]="'sent_orders.empty-placeholder' | translate">
+  <app-infinite-scroll-container [doLoad$]="doLoad$" [emptyText]="'sent-orders.empty-placeholder' | translate">
     <ng-template appInfiniteScrollItem let-item>
       <app-sent-order-list-item [order]="item" (statusChanged)="refresh()"></app-sent-order-list-item>
     </ng-template>
