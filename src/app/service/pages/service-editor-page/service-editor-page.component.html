@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content *ngIf="service$ | async as service">
   <app-content-wrapper>
-    <app-column-header [transparent]="true" [backButtonUrl]="getProfessionalServicesUrl(service.professional)">
+    <app-column-header [backButtonUrl]="getProfessionalServicesUrl(service.professional)">
       {{ 'service-details.edit' | translate }}
     </app-column-header>
     <ion-item-divider color="light">
