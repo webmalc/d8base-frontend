@@ -1,25 +1,16 @@
 <app-header>
-  <div class="header">
-    <ion-item lines="none" class="header__service-name">
-      <ion-buttons slot="start">
-        <ion-button [disabled]="isFirstStep$ | async" (click)="prevStep()">
-          <ion-icon name="chevron-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-label>{{ (currentStep$ | async)?.title | translate }}</ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="reset()">
-          <ion-icon name="close-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
-  </div>
+  <app-column-header
+    [customDiscardButton]="true"
+    [customBackButton]="(isFirstStep$ | async) === false"
+    (discard)="reset()"
+    (back)="prevStep()"
+  >
+    {{ (currentStep$ | async)?.title | translate }}
+  </app-column-header>
 </app-header>
 <ion-content>
   <app-content-wrapper>
-    <ng-container *ngIf="context$ | async as context">
-      <ng-content></ng-content>
-    </ng-container>
+    <ng-content></ng-content>
   </app-content-wrapper>
 </ion-content>
 <ion-footer>

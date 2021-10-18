@@ -17,8 +17,20 @@ export class ColumnHeaderComponent {
     this.backButtonUrl$.next(value);
   }
 
+  @Input()
+  public customDiscardButton: boolean = false;
+
+  @Input()
+  public customBackButton: boolean = false;
+
   @Output()
   public willNavigateBack = new EventEmitter<void>();
+
+  @Output()
+  public discard = new EventEmitter<void>();
+
+  @Output()
+  public back = new EventEmitter<void>();
 
   public canGoBack$: Observable<boolean>;
 
