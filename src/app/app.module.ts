@@ -1,4 +1,5 @@
 import { registerLocaleData } from '@angular/common';
+import localeFrench from '@angular/common/locales/fr-CA';
 import localeCanada from '@angular/common/locales/en-CA';
 import localeRussia from '@angular/common/locales/ru';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -26,6 +27,7 @@ import { StoreModule } from './store/store.module';
 
 registerLocaleData(localeRussia, 'ru');
 registerLocaleData(localeCanada, 'en-CA');
+registerLocaleData(localeFrench, 'fr-CA');
 
 @NgModule({
   declarations: [AppComponent],
