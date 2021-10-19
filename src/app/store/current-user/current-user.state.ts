@@ -171,8 +171,6 @@ export class CurrentUserState implements NgxsOnInit {
         dispatch(new CurrentUserActions.StoreSettingsLocal(settings));
         if (settings) {
           patchState({ settings });
-        } else {
-          patchState({ settings: guestState.settings });
         }
       }),
     );
