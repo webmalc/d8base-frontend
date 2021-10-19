@@ -3,11 +3,15 @@ import { AuthResponseInterface } from '@app/core/interfaces/auth-response.interf
 import { environment } from '@env/environment';
 import { CurrentUserStateModel } from './current-user-state.model';
 
+const defaultLanguage: UserSettings['language'] = /^ru/.test(navigator?.language)
+  ? 'ru'
+  : (environment.default_lang as UserSettings['language']);
+
 export const defaultSettings: UserSettings = {
   units: 0,
   currency: 'CAD',
   is_monday_start_of_a_week: true,
-  language: environment.default_lang as UserSettings['language'],
+  language: defaultLanguage,
 };
 
 export const emptyTokens: AuthResponseInterface = {
