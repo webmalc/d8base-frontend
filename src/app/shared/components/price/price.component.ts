@@ -8,4 +8,6 @@ import { Price } from '@app/api/models/price';
 })
 export class PriceComponent {
   @Input() public price: Price;
+  public readonly digits = '1.0-2'; // 0..2 decimal digits
+  public readonly locale = 'fr-CA'; // whitespace grouping separator
 }
