@@ -10,14 +10,14 @@
     (delete)="delete($event)"
     #slides
   >
-    <ion-slide *ngFor="let photo of photos" #slide>
-      <ion-thumbnail class="thumbnail">
-        <ion-img appViewOnClick [src]="photo.photo_thumbnail" [fullSizeSrc]="photo.photo"></ion-img>
-      </ion-thumbnail>
-    </ion-slide>
     <ion-slide *ngIf="editable" (click)="input.click()" #slide>
       <ion-thumbnail class="thumbnail add-button">
         <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-thumbnail>
+    </ion-slide>
+    <ion-slide *ngFor="let photo of photos" #slide>
+      <ion-thumbnail class="thumbnail">
+        <ion-img appViewOnClick [src]="photo.photo_thumbnail" [fullSizeSrc]="photo.photo"></ion-img>
       </ion-thumbnail>
     </ion-slide>
     <input type="file" multiple class="hidden" [accept]="acceptedImageTypes" (change)="addFiles($event)" #input />

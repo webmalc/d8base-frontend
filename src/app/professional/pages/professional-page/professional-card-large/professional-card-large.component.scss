@@ -1,14 +1,48 @@
-:host {
-  display: grid;
-  grid-template-columns: 120px auto min-content;
-  grid-template-rows: 120px;
+.top-icon {
+  height: 1.6rem;
+  width: 1.6rem;
+}
+.cent-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__left {
+    padding-bottom: 1.8rem;
+  }
+  &__right {
+    padding-bottom: 1rem;
+  }
+
+}
+.avatar {
+  --border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+.rating {
+  font-size: 20px;
+  line-height: 24px;
+  padding-left: 0.5rem;
+  font-weight: bold;
+}
+.review-count {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 10px;
+}
+.review-title {
+  font-weight: normal;
+  font-size: 11px;
+}
+.name-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-#professional-thumbnail {
-  width: auto;
-  height: auto;
-}
-
-#description {
-  padding-inline: 1em;
+.add-photo {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  size: 4rem;
 }

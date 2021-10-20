@@ -9,4 +9,8 @@ import { ProfessionalCertificateInline } from '@app/api/models/professional-cert
 export class CertificateComponent {
   @Input() public certificate: ProfessionalCertificateInline;
   @Input() public editable: boolean = false;
+
+  public getInfoColSize(): string {
+    return this.certificate.photo ? "9" : "12";
+  }
 }

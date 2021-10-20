@@ -504,10 +504,12 @@
       }
     },
     "info": {
+      "edit-data": "Редактировать данные",
+      "book-btn": "Создать бронирование",
       "title": "Профиль мастера",
       "information": "Информация",
       "master-location": "Адрес мастера",
-      "portfolio": "Фото работ",
+      "portfolio": "Лучшие работы",
       "contacts": "Контакты",
       "description": "Описание",
       "specialization": "Специализация",

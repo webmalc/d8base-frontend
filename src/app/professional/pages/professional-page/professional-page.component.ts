@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProfessionalList, ProfessionalPhotoList, ReviewList, UserExtended } from '@app/api/models';
-import { CommunicationService } from '@app/api/services';
+import { CommunicationService, ServicesService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
 import {
   getNewProfessionalContactUrl,
@@ -49,12 +49,14 @@ export class ProfessionalPageComponent {
   public readonly editUrl = 'professional-contact-edit/';
   public readonly reviews$: Observable<ReviewList[]>;
   public readonly reviewsCount$: Observable<number>;
+  public readonly servicesCount$: Observable<number>;
 
   constructor(
     private readonly fullLocationService: LocationResolverService,
     private readonly communicationService: CommunicationService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly professionalPhotosEditor: ProfessionalPhotosEditorService,
+    private readonly servicesService: ServicesService
   ) {
     this.contextFiltered$ = this.context$.pipe(
       filter(context => Boolean(context?.professional) && Boolean(context?.user)),
@@ -79,6 +81,11 @@ export class ProfessionalPageComponent {
 
     this.reviews$ = reviews$.pipe(map(({ results }) => results));
     this.reviewsCount$ = reviews$.pipe(map(({ count }) => count));
+    this.servicesCount$ = this.contextFiltered$.pipe(
+      map(({ professional }) => professional),
+      switchMap(professional => this.servicesService.servicesServicesList({professional: professional.id})),
+      map(list => list.count)
+    );
 
     this.initContactsWithDefault();
   }

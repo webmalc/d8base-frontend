@@ -4,24 +4,29 @@
   padding: 0 0 1.5rem 0;
   .review-date {
     --color: var(--ion-color-medium);
+    font-size: 12px;
   }
   .rating {
     font-weight: 700;
-  }
-  .comment-label {
-    font-weight: 700;
-  }
-  .comment {
-    --background: var(--ion-color-light);
-    --color: var(--ion-color-medium-shade);
-    .comment-content {
-      padding: 12px 0;
-    }
   }
   .star {
     color: var(--ion-color-warning);
   }
   .star-rating {
     margin-left: 5px;
+  }
+  .star-rating:last-child {
+    margin-right: 10px;
+  }
+  .name {
+    margin-left: 7px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--ion-color-dark)
+  }
+  .text {
+    font-size: 14px;
+    color: var(--ion-color-dark)
   }
 }

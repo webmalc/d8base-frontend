@@ -1,10 +1,43 @@
-<ion-thumbnail id="professional-thumbnail">
-  <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
-</ion-thumbnail>
+<ion-row class="ion-justify-content-center max-width100 ion-margin-vertical">
+  <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
+    <ion-row class="ion-align-self-start">
+      <ion-icon name="share-social-outline" class="top-icon"></ion-icon>
+    </ion-row>
+    <div class="cent-container cent-container__left ion-justify-content-center">
+      <ion-row class="ion-align-self-center">
+        <app-rating-full-star></app-rating-full-star>
+        <div class="rating">{{professional.rating || "0.0"}}</div>
+      </ion-row>
+    </div>
+  </ion-col>
+  <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="6">
+    <ion-avatar class="avatar">
+      <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
+    </ion-avatar>
+    <a routerLink="/profile" *ngIf="canEdit">
+      <img class="add-photo" src="assets/images/professional/add-photo.svg" alt="">
+    </a>
+  </ion-col>
+  <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
+    <ion-row class="ion-justify-content-end">
+      <ion-icon name="create-outline" class="top-icon"></ion-icon>
+    </ion-row>
+    <div class="cent-container cent-container__right ion-justify-content-center">
+      <div class="ion-align-self-center ion-text-center">
+        <a [routerLink]="['/reviews', professional.id]" class="review-count">
+          {{ reviewsCount }}
+          <br />
+          <span class="review-title">
+            {{declineReviews(reviewsCount) | translate}}
+          </span>
+        </a>
+      </div>
+    </div>
+  </ion-col>
+</ion-row>
 
-<div id="description">
-  <h1>{{ professionalUserName }}</h1>
-  <span>{{ professional.name }}</span>
-</div>
-
-<app-saved-professional-toggle [professionalId]="professional.id" class="like"></app-saved-professional-toggle>
+<ion-row class="ion-justify-content-center">
+  <ion-col size="10" class="ion-text-center name-title">
+    {{professionalUserName}}
+  </ion-col>
+</ion-row>

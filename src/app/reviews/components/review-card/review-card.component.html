@@ -1,24 +1,27 @@
 <ion-card class="review">
-  <ion-item lines="none">
-    <ion-avatar class="avatar" slot="start">
-      <ion-img [src]="review?.user.avatar_thumbnail || defaultAvatar"></ion-img>
-    </ion-avatar>
-    <ion-label>
-      {{ review?.user.first_name }}
-      {{ review?.user.last_name }}
-    </ion-label>
-    <span *ngIf="countryCode$ | async as countryCode" class="flag-icon flag-icon-{{ countryCode || 'ca' }}"></span>
-  </ion-item>
-  <ion-item lines="none" class="review-date"
-    >{{ 'reviews.date' | translate }} {{ review?.created | date: 'longDate' }}
-  </ion-item>
-  <ion-item lines="none" class="rating">
-    <ion-label class="star-label" slot="start">{{ 'global.rating.' + review?.rating | translate }}</ion-label>
-    <ng-container *ngFor="let star of ratings">
-      <ion-icon *ngIf="star <= review?.rating" name="star" class="star star-rating fs20"></ion-icon>
-    </ng-container>
-  </ion-item>
-  <div class="ion-padding-horizontal ion-padding-bottom">{{ review?.description }}</div>
+  <ion-row class="ion-padding-start">
+    <ion-col size="2">
+      <ion-avatar class="avatar" style="width: 100%; height: 100%">
+        <ion-img [src]="review?.user.avatar_thumbnail || defaultAvatar"></ion-img>
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="10">
+      <div class="name">
+        {{ review?.user.first_name }}
+        {{ review?.user.last_name }}
+      </div>
+      <div class="review-date">
+        <ng-container *ngFor="let star of ratings">
+          <ion-icon *ngIf="star <= review?.rating" name="star" class="star star-rating"></ion-icon>
+        </ng-container>
+        {{ review?.created | date: 'd.M.y h:m' }}
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-start ion-margin-top">
+    <ion-text class="ion-padding-bottom text">{{ review?.description }}</ion-text>
+  </ion-row>
+
   <ng-container *ngIf="showComment">
     <ng-container *ngIf="isAbleToEditComment$ | async; else notProfessionalComment">
       <ion-item class="comment-label" lines="none">

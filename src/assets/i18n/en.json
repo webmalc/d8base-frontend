@@ -514,10 +514,12 @@
       }
     },
     "info": {
+      "edit-data": "Edit data",
+      "book-btn": "Create reservation",
       "title": "Professional's profile",
       "information": "Information",
       "master-location": "Professional address",
-      "portfolio": "Photos",
+      "portfolio": "Best works",
       "contacts": "Contacts",
       "description": "Description",
       "specialization": "Expertise area",
