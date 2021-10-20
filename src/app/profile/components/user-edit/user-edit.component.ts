@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
+import { NavPath } from '@app/core/constants/navigation.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import * as AppValidators from '@app/core/validators';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
@@ -54,7 +55,7 @@ export class UserEditComponent implements OnInit {
     this.store.dispatch(new CurrentUserActions.UpdateProfile(this.form.getRawValue())).subscribe({
       next: () => {
         this.form.enable({ emitEvent: false });
-        this.router.navigate(['/profile']);
+        this.router.navigate([NavPath.Profile]);
       },
       error: () => {
         this.form.enable({ emitEvent: false });
