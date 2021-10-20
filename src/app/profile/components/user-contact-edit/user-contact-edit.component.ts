@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact, Country, UserContact } from '@app/api/models';
+import { NavPath } from '@app/core/constants/navigation.constants';
+import { toNumber } from '@app/core/functions/string.functions';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsApiCache } from '@app/core/services/cache';
 import * as UserContactActions from '@app/store/current-user/user-contacts/user-contacts.actions';
@@ -41,8 +43,8 @@ export class UserContactEditComponent implements OnInit {
 
   public ngOnInit(): void {
     const snapshot = this.route.snapshot;
-    this.contactId = parseInt(snapshot.paramMap.get('contact-id'), 10);
-    const defaultContactId = parseInt(snapshot.paramMap.get('default-contact-id'), 10);
+    this.contactId = toNumber(snapshot.paramMap.get('contact-id'));
+    const defaultContactId = toNumber(snapshot.paramMap.get('default-contact-id'));
     const newContact = { contact: defaultContactId, id: null, value: '' };
 
     this.contact$ = this.contacts$.pipe(
@@ -99,7 +101,7 @@ export class UserContactEditComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        this.router.navigate(['/profile']);
+        this.router.navigate([NavPath.Profile]);
       });
   }
 }
