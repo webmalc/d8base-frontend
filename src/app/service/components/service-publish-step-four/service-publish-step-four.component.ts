@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { City, Country, Profile } from '@app/api/models';
+import { City, Country, Profile, UserLocation } from '@app/api/models';
 import { RegistrationService } from '@app/auth/pages/registration/services/registration.service';
 import { isFormInvalid } from '@app/core/functions/form.functions';
-import { NgDestroyService } from '@app/core/services';
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { LocationResolverService, NgDestroyService } from '@app/core/services';
 import { IsUserRegisteredApiService } from '@app/core/services/api/is-user-registered-api.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
 import * as AppValidators from '@app/core/validators';
 import { ServicePublishStepFourFormFields } from '@app/service/enums/service-publish-step-four-form-fields';
 import { ServiceStepsNavigationService } from '@app/service/services/service-steps-navigation.service';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { debounceTime, first, map, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, first, map, switchMap, takeUntil } from 'rxjs/operators';
 import ServicePublishStepFourContext from './service-publish-step-four-context.interface';
 
 const DEBOUNCE_DURATION_MS = 500;
@@ -30,24 +31,30 @@ export class ServicePublishStepFourComponent {
   @Select(CurrentUserSelectors.errors)
   public errorMessages$: Observable<string[]>;
 
+  @Select(UserLocationSelectors.defaultLocation)
+  public defaultLocation$: Observable<UserLocation>;
+
   public form: FormGroup;
   public context$: Observable<ServicePublishStepFourContext>;
   public readonly formFields = ServicePublishStepFourFormFields;
   private readonly isUserExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly emailChanged$: Subject<void> = new Subject<void>();
 
+  // codebeat:disable[ARITY]
   constructor(
     public serviceStepsNavigationService: ServiceStepsNavigationService,
     private readonly formBuilder: FormBuilder,
     private readonly authenticationService: AuthenticationService,
     private readonly isRegisteredApi: IsUserRegisteredApiService,
     private readonly registrationService: RegistrationService,
+    private readonly locationResolver: LocationResolverService,
     private readonly destroy$: NgDestroyService,
   ) {
     this.context$ = combineLatest([authenticationService.isAuthenticated$, this.isUserExists$]).pipe(
       map(([isAuthenticated, isUserExisting]) => ({ isAuthenticated, isUserExisting })),
     );
     this.form = this.createForm();
+    this.subscribeOnDefaultLocation();
     this.subscribeOnEmailChanges();
     this.subscribeOnProfile();
   }
@@ -113,6 +120,19 @@ export class ServicePublishStepFourComponent {
         ),
       },
     );
+  }
+
+  private subscribeOnDefaultLocation(): void {
+    this.defaultLocation$
+      .pipe(
+        filter(x => !!x?.country),
+        switchMap(defaultLocation => this.locationResolver.resolveLocation(defaultLocation)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(result => {
+        this.form.controls[this.formFields.Country].setValue(result.country);
+        this.form.controls[this.formFields.City].setValue(result.city);
+      });
   }
 
   private subscribeOnProfile(): void {

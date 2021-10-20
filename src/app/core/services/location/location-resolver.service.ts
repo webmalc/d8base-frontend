@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { City, Country, District, Region, Subregion } from '@app/api/models';
+import { City, Country, District, Region, Subregion, UserLocation } from '@app/api/models';
 import {
   CitiesApiCache,
   CountriesApiCache,
@@ -9,6 +9,11 @@ import {
 } from '@app/core/services/cache';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+
+export type BriefLocation = {
+  country: Country;
+  city: City;
+};
 
 export type FullLocation = {
   country: Country;
@@ -27,6 +32,7 @@ export interface LocationInterface {
 
 @Injectable()
 export class LocationResolverService {
+  // codebeat:disable[ARITY]
   constructor(
     private readonly countriesApi: CountriesApiCache,
     private readonly regionApi: RegionsApiCache,
@@ -35,14 +41,11 @@ export class LocationResolverService {
     private readonly districtApi: DistrictsApiCache,
   ) {}
 
-  public getCountryCode(location: LocationInterface): Observable<string> {
-    const countryId = location?.country;
-    return !countryId
-      ? of(null)
-      : this.countriesApi.getByEntityId(countryId).pipe(
-          map(country => country.code),
-          catchError(() => of(null)),
-        );
+  public resolveLocation(location: UserLocation): Observable<BriefLocation> {
+    return forkJoin({
+      country: location.country ? this.countriesApi.getByEntityId(location.country) : of(null),
+      city: location.city ? this.citiesApi.getByEntityId(location.city) : of(null),
+    });
   }
 
   public getTextLocation(

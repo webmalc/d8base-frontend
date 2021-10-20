@@ -9,11 +9,11 @@
         <ion-label color="medium" position="stacked">
           {{ 'profile-edit.birthday' | translate }}
         </ion-label>
-        <ion-input type="date" formControlName="{{ this.formFields.Birthday }}"></ion-input>
+        <ion-input type="date" formControlName="{{ this.formFields.birthday }}"></ion-input>
       </ion-item>
       <app-country-selector
         [title]="'profile-edit.nationality' | translate"
-        [formControlName]="this.formFields.Nationality"
+        [formControlName]="this.formFields.nationality"
       ></app-country-selector>
       <ion-item>
         <ion-label color="medium" position="floating">
@@ -24,7 +24,7 @@
           [isMultiple]="true"
           [canClear]="true"
           [items]="languages$ | async"
-          [formControlName]="this.formFields.Languages"
+          [formControlName]="this.formFields.languages"
           itemTextField="name"
           itemValueField="code"
         >

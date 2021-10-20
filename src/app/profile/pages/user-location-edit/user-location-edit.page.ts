@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserLocation } from '@app/api/models';
+import { NavParams, NavPath } from '@app/core/constants/navigation.constants';
+import { toNumber } from '@app/core/functions/string.functions';
 import * as UserLocationActions from '@app/store/current-user/user-locations/user-locations.actions';
 import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-location-edit',
@@ -16,19 +18,21 @@ export class UserLocationEditPage implements OnInit {
   @Select(UserLocationSelectors.locations)
   public locations$: Observable<UserLocation[]>;
 
+  @Select(UserLocationSelectors.defaultLocation)
+  public defaultLocation$: Observable<UserLocation>;
+
   public location$: Observable<UserLocation>;
 
   private readonly locationId$: Observable<number> = this.route.params.pipe(
-    map(params => parseInt(params['location-id'], 10)),
+    map(params => toNumber(params[NavParams.LocationId])),
   );
 
+  // codebeat:disable[ARITY]
   constructor(private readonly store: Store, private readonly router: Router, private readonly route: ActivatedRoute) {}
 
   public ngOnInit(): void {
-    this.location$ = this.locations$.pipe(
-      filter(locations => Boolean(locations)),
-      withLatestFrom(this.locationId$),
-      map(([locations, locationId]) => locations?.find(({ id }) => locationId === id) || {}),
+    this.location$ = this.locationId$.pipe(
+      switchMap(locationId => (!locationId ? this.getEmptyLocation() : this.getLocation(locationId))),
     );
   }
 
@@ -44,6 +48,24 @@ export class UserLocationEditPage implements OnInit {
   }
 
   private navigateToProfile(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate([NavPath.Profile]);
+  }
+
+  private getLocation(locationId): Observable<UserLocation> {
+    return this.locations$.pipe(
+      filter(locations => Boolean(locations)),
+      map(locations => locations?.find(({ id }) => locationId === id) || {}),
+    );
+  }
+
+  private getEmptyLocation(): Observable<UserLocation> {
+    return this.defaultLocation$.pipe(
+      map(location => ({
+        country: location?.country,
+        region: location?.region,
+        subregion: location?.subregion,
+        city: location?.city,
+      })),
+    );
   }
 }
