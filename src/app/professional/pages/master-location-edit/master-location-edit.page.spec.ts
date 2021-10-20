@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
+import { of } from 'rxjs';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { StorageManagerMock } from 'src/testing/mocks';
 import { MasterLocationEditPage } from './master-location-edit.page';
@@ -18,13 +19,7 @@ describe('MasterLocationEditPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              snapshot: {
-                paramMap: {
-                  get(): string {
-                    return '123';
-                  },
-                },
-              },
+              params: of({ 'location-id': 123 }),
             },
           },
           { provide: StorageManagerService, useClass: StorageManagerMock },
