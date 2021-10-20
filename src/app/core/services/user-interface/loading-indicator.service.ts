@@ -32,7 +32,7 @@ export class LoadingIndicatorService {
 
   private async showLoadingIndicator(): Promise<void> {
     if (!this.loading) {
-      this.loading = this.loadingController.create();
+      this.loading = this.loadingController.create({ mode: 'ios' });
       const indicator = await this.loading;
       await indicator.present();
     }
