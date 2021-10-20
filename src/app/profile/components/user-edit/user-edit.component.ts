@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Profile } from '@app/api/models';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import * as AppValidators from '@app/core/validators';
-import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select, Store } from '@ngxs/store';
@@ -18,7 +17,16 @@ import { first } from 'rxjs/operators';
 })
 export class UserEditComponent implements OnInit {
   public form: FormGroup;
-  public formFields = ProfileFormFields;
+  public formFields = {
+    email: 'email',
+    firstName: 'first_name',
+    lastName: 'last_name',
+    patronymic: 'patronymic',
+    phone: 'phone',
+    gender: 'gender',
+    avatar: 'avatar',
+  };
+
   public user: Profile;
 
   @Select(CurrentUserSelectors.profile)
@@ -56,12 +64,12 @@ export class UserEditComponent implements OnInit {
 
   private createForm(user: Profile): FormGroup {
     return this.formBuilder.group({
-      [ProfileFormFields.FirstName]: [user.first_name, AppValidators.firstNameValidators],
-      [ProfileFormFields.LastName]: [user.last_name, AppValidators.lastNameValidators],
-      [ProfileFormFields.Patronymic]: [user.patronymic, Validators.maxLength(30)],
-      [ProfileFormFields.Email]: [user.email, [Validators.required, AppValidators.email]],
-      [ProfileFormFields.Phone]: [user.phone_extended],
-      [ProfileFormFields.Gender]: [user.gender?.toString()],
+      [this.formFields.firstName]: [user.first_name, AppValidators.firstNameValidators],
+      [this.formFields.lastName]: [user.last_name, AppValidators.lastNameValidators],
+      [this.formFields.patronymic]: [user.patronymic, Validators.maxLength(30)],
+      [this.formFields.email]: [user.email, [Validators.required, AppValidators.email]],
+      [this.formFields.phone]: [user.phone_extended],
+      [this.formFields.gender]: [user.gender?.toString()],
     });
   }
 }

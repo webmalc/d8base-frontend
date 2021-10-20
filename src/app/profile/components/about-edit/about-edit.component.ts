@@ -6,7 +6,6 @@ import { fromDatetime } from '@app/core/functions/datetime.functions';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { CountriesApiCache } from '@app/core/services/cache';
 import { LanguagesApiCache } from '@app/core/services/cache/languages-api-cache.service';
-import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import { ColumnHeaderComponent } from '@app/shared/components';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
@@ -34,7 +33,11 @@ export class AboutEditComponent implements OnInit {
 
   public languages$ = this.languagesApiCache.list();
   public form: FormGroup;
-  public formFields = ProfileFormFields;
+  public formFields = {
+    birthday: 'birthday',
+    languages: 'languages',
+    nationality: 'nationality',
+  };
 
   constructor(
     public readonly languagesApiCache: LanguagesApiCache,
@@ -62,9 +65,9 @@ export class AboutEditComponent implements OnInit {
       )
       .subscribe(({ user, nationality, languages }) => {
         this.form = this.formBuilder.group({
-          [this.formFields.Birthday]: [user.birthday],
-          [this.formFields.Nationality]: [nationality],
-          [this.formFields.Languages]: [languages],
+          [this.formFields.birthday]: [user.birthday],
+          [this.formFields.nationality]: [nationality],
+          [this.formFields.languages]: [languages],
         });
       });
   }
@@ -90,16 +93,16 @@ export class AboutEditComponent implements OnInit {
     }
 
     let date: string;
-    if (this.form.value[this.formFields.Birthday]) {
-      date = fromDatetime(this.form.value[this.formFields.Birthday]).date;
+    if (this.form.value[this.formFields.birthday]) {
+      date = fromDatetime(this.form.value[this.formFields.birthday]).date;
     }
     const data: Partial<Profile> = {
       birthday: date,
-      nationality: this.form.value[this.formFields.Nationality]?.id,
+      nationality: this.form.value[this.formFields.nationality]?.id,
     };
 
     // TODO: Fix swagger model Language, replace code: string -> UserLanguage['language'] type
-    const newLanguages: UserLanguage[] = (this.form.value[this.formFields.Languages] as Language[]).map(({ code }) => ({
+    const newLanguages: UserLanguage[] = (this.form.value[this.formFields.languages] as Language[]).map(({ code }) => ({
       language: code as UserLanguage['language'],
     }));
 
