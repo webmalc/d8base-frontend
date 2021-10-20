@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProfessionalList, ProfessionalLocation } from '@app/api/models';
+import { ProfessionalList, ProfessionalLocation, UserLocation } from '@app/api/models';
+import { NavParams, NavPath } from '@app/core/constants/navigation.constants';
+import { toNumber } from '@app/core/functions/string.functions';
 import { NgDestroyService } from '@app/core/services';
+import UserLocationSelectors from '@app/store/current-user/user-locations/user-locations.selectors';
 import * as ProfessionalLocationActions from '@app/store/professional-page/professional-locations/professional-locations.actions';
 import ProfessionalLocationSelectors from '@app/store/professional-page/professional-locations/professional-locations.selectors';
 import ProfessionalPageSelectors from '@app/store/professional-page/professional-page.selectors';
 import { Actions, ofActionSuccessful, Select, Store } from '@ngxs/store';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-location-edit',
@@ -22,8 +25,16 @@ export class MasterLocationEditPage implements OnInit {
   @Select(ProfessionalLocationSelectors.locations)
   public locations$: Observable<ProfessionalLocation[]>;
 
+  @Select(UserLocationSelectors.defaultLocation)
+  public defaultLocation$: Observable<UserLocation>;
+
   public location$: Observable<ProfessionalLocation>;
 
+  private readonly locationId$: Observable<number> = this.route.params.pipe(
+    map(params => toNumber(params[NavParams.LocationId])),
+  );
+
+  // codebeat:disable[ARITY]
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -33,18 +44,8 @@ export class MasterLocationEditPage implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.location$ = this.locations$.pipe(
-      filter(locations => Boolean(locations)),
-      switchMap(locations =>
-        combineLatest([this.professional$, this.route.params]).pipe(
-          map(
-            ([professional, params]) =>
-              locations?.find(({ id }) => parseInt(params['location-id'], 10) === id) || {
-                professional: professional?.id,
-              },
-          ),
-        ),
-      ),
+    this.location$ = this.locationId$.pipe(
+      switchMap(locationId => (!locationId ? this.getEmptyLocation() : this.getLocation(locationId))),
     );
 
     this.subscribeToActionSuccess();
@@ -73,7 +74,23 @@ export class MasterLocationEditPage implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        this.router.navigate(['/professional']);
+        this.router.navigate([NavPath.Professional]);
       });
+  }
+
+  private getLocation(locationId): Observable<ProfessionalLocation> {
+    return this.locations$.pipe(map(locations => locations?.find(({ id }) => locationId === id)));
+  }
+
+  private getEmptyLocation(): Observable<ProfessionalLocation> {
+    return combineLatest([this.defaultLocation$, this.professional$]).pipe(
+      map(([defaultLocation, professional]) => ({
+        professional: professional?.id,
+        country: defaultLocation?.country,
+        region: defaultLocation?.region,
+        subregion: defaultLocation?.subregion,
+        city: defaultLocation?.city,
+      })),
+    );
   }
 }

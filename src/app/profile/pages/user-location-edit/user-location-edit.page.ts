@@ -61,8 +61,10 @@ export class UserLocationEditPage implements OnInit {
   private getEmptyLocation(): Observable<UserLocation> {
     return this.defaultLocation$.pipe(
       map(location => ({
-        country: location.country,
-        city: location.city,
+        country: location?.country,
+        region: location?.region,
+        subregion: location?.subregion,
+        city: location?.city,
       })),
     );
   }
