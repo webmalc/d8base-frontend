@@ -50,13 +50,13 @@ export class RegistrationFormComponent {
   public readonly registrationFormData = new EventEmitter<{ user: DefaultRegisterUser; location: UserLocation }>();
 
   @Select(UserLocationSelectors.defaultLocation)
-  public defaultLocation: Observable<UserLocation>;
+  public defaultLocation$: Observable<UserLocation>;
 
   private _pending: boolean = false;
 
   // codebeat:disable[ARITY]
   constructor(private readonly fb: FormBuilder, locationResolver: LocationResolverService, destroy$: NgDestroyService) {
-    this.defaultLocation
+    this.defaultLocation$
       .pipe(
         filter(x => !!x?.country),
         switchMap(defaultLocation => locationResolver.resolveLocation(defaultLocation)),
