@@ -11,6 +11,6 @@ export class CertificateComponent {
   @Input() public editable: boolean = false;
 
   public getInfoColSize(): string {
-    return this.certificate.photo ? "9" : "12";
+    return this.certificate.photo ? '9' : '12';
   }
 }

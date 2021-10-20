@@ -56,7 +56,7 @@ export class ProfessionalPageComponent {
     private readonly communicationService: CommunicationService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly professionalPhotosEditor: ProfessionalPhotosEditorService,
-    private readonly servicesService: ServicesService
+    private readonly servicesService: ServicesService,
   ) {
     this.contextFiltered$ = this.context$.pipe(
       filter(context => Boolean(context?.professional) && Boolean(context?.user)),
@@ -84,7 +84,7 @@ export class ProfessionalPageComponent {
     this.servicesCount$ = this.contextFiltered$.pipe(
       map(({ professional }) => professional),
       switchMap(professional => this.servicesService.servicesServicesList({professional: professional.id})),
-      map(list => list.count)
+      map(list => list.count),
     );
 
     this.initContactsWithDefault();
