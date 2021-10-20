@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RegistrationPageModule } from '@app/auth/pages/registration/registration.module';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
-import { RegistrationFormFields } from './registration-form-fields';
 import { RegistrationFormComponent } from './registration-form.component';
 
 describe('RegistrationFormComponent', () => {
@@ -32,8 +31,8 @@ describe('RegistrationFormComponent', () => {
   });
 
   xit('test submit registration form', () => {
-    const email = (component as any).registrationFormService.form.controls[RegistrationFormFields.Email];
-    const pwd = (component as any).registrationFormService.form.controls[RegistrationFormFields.Password];
+    const email = (component as any).registrationFormService.form.controls.email;
+    const pwd = (component as any).registrationFormService.form.controls.password;
 
     email.setValue('test@test.te');
     pwd.setValue('test');
