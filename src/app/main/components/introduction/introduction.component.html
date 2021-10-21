@@ -41,7 +41,7 @@
     <div class="professional-promo">
       <h1 class="professional-promo__title">{{ 'promo.block-3-title' | translate }}</h1>
       <p class="professional-promo__note">{{ 'promo.block-3-text' | translate }}</p>
-      <ion-button color="light" size="large" routerLink="/auth/registration" class="professional-promo__button">
+      <ion-button color="light" size="large" [routerLink]="becomeProfessionalUrl" class="professional-promo__button">
         <ion-icon name="search-outline"></ion-icon>
         <ion-label>{{ 'promo.block-3-button' | translate }}</ion-label>
       </ion-button>
