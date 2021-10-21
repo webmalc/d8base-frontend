@@ -42,6 +42,7 @@ export enum NavParams {
   CertificateId = 'certificate-id',
   EducationId = 'education-id',
   ExperienceId = 'experience-id',
+  LocationId = 'location-id',
 }
 
 export enum NavQueryParams {

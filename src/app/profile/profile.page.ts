@@ -4,7 +4,6 @@ import { Profile, UserContact, UserLanguage, UserLocation } from '@app/api/model
 import { getNoAvatarLink } from '@app/core/functions/media.functions';
 import { NgDestroyService } from '@app/core/services';
 import { ContactsMergeToDefaultService } from '@app/core/services/contacts-merge-to-default.service';
-import { ProfileFormFields } from '@app/profile/enums/profile-form-fields';
 import * as CurrentUserActions from '@app/store/current-user/current-user.actions';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import UserContactSelectors from '@app/store/current-user/user-contacts/user-contacts.selectors';
@@ -50,7 +49,6 @@ export class ProfilePage {
   public avatarLoading$ = new BehaviorSubject<boolean>(false);
   public avatarSelector = new FormControl();
 
-  public formFields = ProfileFormFields;
   constructor(
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly ngDestroy$: NgDestroyService,

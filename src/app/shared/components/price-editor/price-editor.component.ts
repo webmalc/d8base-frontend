@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Price, Rate } from '@app/api/models';
 import { NgDestroyService } from '@app/core/services';
@@ -40,6 +40,7 @@ export class PriceEditorComponent implements ControlValueAccessor {
     ratesApi: RatesApiCache,
     private readonly userSettings: UserSettingsService,
     private readonly destroy$: NgDestroyService,
+    private readonly cd: ChangeDetectorRef,
   ) {
     this.currency$ = forkJoin([
       ratesApi.list(),
@@ -75,7 +76,12 @@ export class PriceEditorComponent implements ControlValueAccessor {
     }
   }
 
-  public setCurrency(rate: Rate): void {
+  public toggleFixedPrice(event: CustomEvent): void {
+    const isPriceFixed: boolean = event.detail.checked;
+    this.changeField('is_price_fixed', isPriceFixed);
+  }
+
+  private setCurrency(rate: Rate): void {
     const code = rate.currency;
     if (!this.value.is_price_fixed) {
       this.writeField('start_price_currency', code);
@@ -83,11 +89,7 @@ export class PriceEditorComponent implements ControlValueAccessor {
     } else {
       this.writeField('price_currency', code);
     }
-  }
-
-  public toggleFixedPrice(event: CustomEvent): void {
-    const isPriceFixed: boolean = event.detail.checked;
-    this.changeField('is_price_fixed', isPriceFixed);
+    this.cd.detectChanges();
   }
 
   private subscribeCurrencyControlValues(): void {
