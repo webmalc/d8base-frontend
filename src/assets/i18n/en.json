@@ -274,7 +274,7 @@
     "essentials-title": "Essentials"
   },
   "service-details": {
-    "location-title": "Time and Place",
+    "location-title": "Service Location",
     "description-title": "Service Details",
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
@@ -324,7 +324,7 @@
       "service-placeholder": "Enter service name",
       "service-description": "Service description",
       "service-description-placeholder": "Enter service description",
-      "duration-and-price": "The duration per session and its price",
+      "duration-and-price": "Duration and price",
       "fixed-price": "Fixed service price",
       "fixed-price-title": "Service price",
       "start-price": "from",
@@ -898,7 +898,7 @@
     "step-3-note": "from thousand of customers",
     "block-3-title": "List your business",
     "block-3-text": "and find new clients in your local community and\u00a0around the world",
-    "block-3-button": "Sign up"
+    "block-3-button": "Publish"
   },
   "footer": {
     "about": "About",

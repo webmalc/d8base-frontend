@@ -264,7 +264,7 @@
     "essentials-title": "Обязательная информация"
   },
   "service-details": {
-    "location-title": "Место и время оказания услуги",
+    "location-title": "Место оказания услуги",
     "description-title": "Подробное описание",
     "payment-title": "Доступные варианты оплаты",
     "instant-book-title": "Мгновенное подтверждение (Instant Book)",
@@ -275,7 +275,7 @@
     "photos": "Фото",
     "description": "Описание",
     "tags": "теги",
-    "duration-and-price": "Длительность и цена",
+    "duration-and-price": "Продолжительность и стоимость",
     "payment-methods": "Варианты оплаты",
     "is-base-schedule": "Используется базовое расписание мастера",
     "service-type": "Место оказания услуги",
@@ -314,7 +314,7 @@
       "service-placeholder": "Введите название услуги",
       "service-description": "Описание услуги",
       "service-description-placeholder": "Введите текст описания услуги",
-      "duration-and-price": "Время оказания услуги для одного клиента и её стоимость",
+      "duration-and-price": "Продолжительность и стоимость",
       "fixed-price": "Стоимость услуги фиксированная",
       "fixed-price-title": "Стоимость",
       "start-price": "Стоимость от",
@@ -888,7 +888,7 @@
     "step-3-note": "от тысячи клиентов на нашем сайте",
     "block-3-title": "Станьте исполнителем",
     "block-3-text": "и находите новых клиентов по всему миру",
-    "block-3-button": "Зарегистрироваться"
+    "block-3-button": "Опубликовать услугу"
   },
   "footer": {
     "about": "О сервисе",

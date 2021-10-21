@@ -2,7 +2,7 @@ import { Component, forwardRef } from '@angular/core';
 import { Params } from '@angular/router';
 import { ProfessionalList, ServiceList } from '@app/api/models';
 import { NavQueryParams } from '@app/core/constants/navigation.constants';
-import { AuthenticationService } from '@app/core/services';
+import { AuthenticationService, LocaleService } from '@app/core/services';
 import { StepComponent } from '@app/order/abstract/step';
 import { OrderIds } from '@app/order/enums/order-ids.enum';
 import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
@@ -23,7 +23,7 @@ export class ConfirmationStepComponent extends StepComponent<{ params?: Params }
   public date$ = new BehaviorSubject<Date | null>(null);
   public isAuthenticated$: Observable<boolean>;
 
-  constructor(authenticator: AuthenticationService) {
+  constructor(private readonly localeService: LocaleService, authenticator: AuthenticationService) {
     super();
     this.isAuthenticated$ = authenticator.isAuthenticated$;
   }
@@ -34,6 +34,10 @@ export class ConfirmationStepComponent extends StepComponent<{ params?: Params }
 
   public get service(): ServiceList {
     return this.context?.service;
+  }
+
+  public get locale(): string {
+    return this.localeService.locale;
   }
 
   public setState(state): void {

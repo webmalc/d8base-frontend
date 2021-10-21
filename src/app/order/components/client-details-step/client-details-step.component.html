@@ -25,10 +25,9 @@
     </ion-item>
   </ng-template>
 
-  <app-section-heading>{{ 'order.client-details' | translate }}</app-section-heading>
+  <app-section-heading>{{ 'order.comment-header' | translate }}</app-section-heading>
   <form [formGroup]="form">
     <ion-item>
-      <ion-label position="stacked" color="medium">{{ 'order.comment-header' | translate }}</ion-label>
       <ion-textarea [formControlName]="formFields.comment"></ion-textarea>
     </ion-item>
     <ion-item lines="none" *ngIf="!isSelfOrder">
