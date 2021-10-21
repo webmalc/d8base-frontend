@@ -324,7 +324,7 @@
       "service-placeholder": "Enter service name",
       "service-description": "Service description",
       "service-description-placeholder": "Enter service description",
-      "duration-and-price": "The duration per session and its price",
+      "duration-and-price": "Duration and price",
       "fixed-price": "Fixed service price",
       "fixed-price-title": "Service price",
       "start-price": "from",
