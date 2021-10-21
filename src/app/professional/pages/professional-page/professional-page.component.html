@@ -1,28 +1,37 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper *ngIf="context$ | async as context">
-
     <app-professional-card-large
       [professional]="context.professional"
       [reviewsCount]="reviewsCount$ | async"
       [canEdit]="context.canEdit"
     ></app-professional-card-large>
 
-
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" class="ion-justify-content-center" *ngIf="!context.canEdit">
-        <ion-button color="primary" fill="outline" class="book-btn" [routerLink]="getProfessionalServicesUrl(context.professional)">
-          {{'master-profile.info.book-btn'|translate}}
+        <ion-button
+          color="primary"
+          fill="outline"
+          class="book-btn"
+          [routerLink]="getProfessionalServicesUrl(context.professional)"
+        >
+          {{ 'master-profile.info.book-btn' | translate }}
         </ion-button>
       </ion-col>
 
       <ion-col size="12">
-        <ion-item [routerLink]="getProfessionalServicesUrl(context.professional)" class="ion-item-no-side-padding pl5"
-                  lines="none" detail detail-icon="chevron-forward-outline">
-          <ion-label class="services-title">{{'master-profile.navbar.services'|translate}} ({{servicesCount$ | async}})</ion-label>
+        <ion-item
+          [routerLink]="getProfessionalServicesUrl(context.professional)"
+          class="ion-item-no-side-padding pl5"
+          lines="none"
+          detail
+          detail-icon="chevron-forward-outline"
+        >
+          <ion-label class="services-title"
+            >{{ 'master-profile.navbar.services' | translate }} ({{ servicesCount$ | async }})</ion-label
+          >
         </ion-item>
       </ion-col>
-
     </ion-row>
 
     <ng-container *appIfSpinner="photos$ | async as photos">
@@ -71,8 +80,12 @@
         {{ 'master-profile.info.master-location' | translate }}
       </app-section-heading>
       <ion-list *ngIf="context.canEdit; else viewLocations">
-        <ion-item *ngFor="let location of editableLocations$ | async"
-                  detail detail-icon="create-outline" [routerLink]="'location-edit/' + location.id">
+        <ion-item
+          *ngFor="let location of editableLocations$ | async"
+          detail
+          detail-icon="create-outline"
+          [routerLink]="'location-edit/' + location.id"
+        >
           <app-location-viewer [location]="location"></app-location-viewer>
         </ion-item>
         <app-add-button [routerLink]="getNewLocationUrl(context.professional.id)">{{
@@ -91,11 +104,17 @@
 
     <app-collapse-item title="{{ 'master-profile.info.about' | translate }}" [collapsed]="false">
       <ion-list lines="none">
-
-        <ion-item button lines="none" routerLink="edit" *ngIf="context.canEdit" [detail]="false" class="ion-item-no-min-height">
+        <ion-item
+          button
+          lines="none"
+          routerLink="edit"
+          *ngIf="context.canEdit"
+          [detail]="false"
+          class="ion-item-no-min-height"
+        >
           <ion-icon name="create-outline" color="primary"></ion-icon>
           <ion-label class="ion-margin-start about-edit-title" color="primary">
-            {{"master-profile.info.edit-data"|translate}}
+            {{ 'master-profile.info.edit-data' | translate }}
           </ion-label>
         </ion-item>
 
@@ -179,15 +198,18 @@
       *ngIf="context.professional.experience_entries.length || context.canEdit"
     >
       <ng-container *ngIf="context.canEdit">
-        <ion-item *ngFor="let experience of context.professional.experience_entries"
-                  class="ion-align-items-start ion-item-details-align-center pt10"
-                  routerLink="experience-edit/{{ experience.id }}" detail detail-icon="create-outline">
+        <ion-item
+          *ngFor="let experience of context.professional.experience_entries"
+          class="ion-align-items-start ion-item-details-align-center pt10"
+          routerLink="experience-edit/{{ experience.id }}"
+          detail
+          detail-icon="create-outline"
+        >
           <app-experience [exp]="experience"></app-experience>
         </ion-item>
       </ng-container>
       <ng-container *ngIf="!context.canEdit">
-        <ion-item *ngFor="let experience of context.professional.experience_entries"
-                  class="ion-align-items-start pt10">
+        <ion-item *ngFor="let experience of context.professional.experience_entries" class="ion-align-items-start pt10">
           <app-experience [exp]="experience"></app-experience>
         </ion-item>
       </ng-container>
@@ -203,9 +225,13 @@
       *ngIf="context.professional.educations.length || context.canEdit"
     >
       <ng-container *ngIf="context.canEdit">
-        <ion-item *ngFor="let education of context.professional.educations"
-                  class="ion-align-items-start ion-item-details-align-center pt10"
-                  routerLink="education-edit/{{ education.id }}" detail detail-icon="create-outline">
+        <ion-item
+          *ngFor="let education of context.professional.educations"
+          class="ion-align-items-start ion-item-details-align-center pt10"
+          routerLink="education-edit/{{ education.id }}"
+          detail
+          detail-icon="create-outline"
+        >
           <app-education [education]="education"></app-education>
         </ion-item>
       </ng-container>
@@ -225,9 +251,13 @@
       *ngIf="context.professional.certificates.length || context.canEdit"
     >
       <ng-container *ngIf="context.canEdit">
-        <ion-item *ngFor="let certificate of context.professional.certificates"
-                  class="ion-align-items-start ion-item-details-align-center pt10"
-                  routerLink="certificate-edit/{{ certificate.id }}" detail detail-icon="create-outline">
+        <ion-item
+          *ngFor="let certificate of context.professional.certificates"
+          class="ion-align-items-start ion-item-details-align-center pt10"
+          routerLink="certificate-edit/{{ certificate.id }}"
+          detail
+          detail-icon="create-outline"
+        >
           <app-certificate [certificate]="certificate"></app-certificate>
         </ion-item>
       </ng-container>
@@ -236,7 +266,6 @@
           <app-certificate [certificate]="certificate"></app-certificate>
         </ion-item>
       </ng-container>
-
 
       <app-placeholder *ngIf="!context.professional.certificates.length"></app-placeholder>
       <app-add-button *ngIf="context.canEdit" routerLink="certificate-add/">

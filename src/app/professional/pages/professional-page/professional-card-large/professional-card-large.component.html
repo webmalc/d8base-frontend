@@ -6,7 +6,7 @@
     <div class="cent-container cent-container__left ion-justify-content-center">
       <ion-row class="ion-align-self-center">
         <app-rating-full-star></app-rating-full-star>
-        <div class="rating">{{professional.rating || "0.0"}}</div>
+        <div class="rating">{{ professional.rating || '0.0' }}</div>
       </ion-row>
     </div>
   </ion-col>
@@ -15,7 +15,7 @@
       <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
     </ion-avatar>
     <a routerLink="/profile" *ngIf="canEdit">
-      <img class="add-photo" src="assets/images/professional/add-photo.svg" alt="">
+      <img class="add-photo" src="assets/images/professional/add-photo.svg" alt="" />
     </a>
   </ion-col>
   <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
@@ -28,7 +28,7 @@
           {{ reviewsCount }}
           <br />
           <span class="review-title">
-            {{declineReviews(reviewsCount) | translate}}
+            {{ declineReviews(reviewsCount) | translate }}
           </span>
         </a>
       </div>
@@ -38,6 +38,6 @@
 
 <ion-row class="ion-justify-content-center">
   <ion-col size="10" class="ion-text-center name-title">
-    {{professionalUserName}}
+    {{ professionalUserName }}
   </ion-col>
 </ion-row>

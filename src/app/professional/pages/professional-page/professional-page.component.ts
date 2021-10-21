@@ -83,7 +83,7 @@ export class ProfessionalPageComponent {
     this.reviewsCount$ = reviews$.pipe(map(({ count }) => count));
     this.servicesCount$ = this.contextFiltered$.pipe(
       map(({ professional }) => professional),
-      switchMap(professional => this.servicesService.servicesServicesList({professional: professional.id})),
+      switchMap(professional => this.servicesService.servicesServicesList({ professional: professional.id })),
       map(list => list.count),
     );
 
