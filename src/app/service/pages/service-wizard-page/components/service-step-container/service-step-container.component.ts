@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { NgDestroyService, ServiceManagerService } from '@app/core/services';
 import { ServiceBuilderService } from '@app/service/pages/service-wizard-page/services';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { getServiceCreatedUrl } from '@app/core/functions/navigation.functions';
+
 import { ServiceWizardStateService } from '../../services/service-wizard-state.service';
 import { StepComponent } from '../step/step';
 
@@ -52,7 +53,7 @@ export class ServiceStepContainerComponent {
     await this.serviceBuilder.addData(this.serviceStepComponent.getState());
     this.serviceManager
       .createService(await this.serviceBuilder.build())
-      .subscribe(() => this.router.navigate([NavPath.Professional, NavBranch.MyServices]));
+      .subscribe(service => this.router.navigateByUrl(getServiceCreatedUrl(service.id)));
   }
 
   private subscribeToState(): void {

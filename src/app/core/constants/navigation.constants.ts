@@ -31,6 +31,7 @@ export enum NavBranch {
   Publish = 'publish',
   Edit = 'edit',
   Add = 'add',
+  Success = 'success',
 
   // orders path:
   Inbox = 'inbox',
