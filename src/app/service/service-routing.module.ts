@@ -15,6 +15,7 @@ import { ServicePublishStepTwoComponent } from '@app/service/components/service-
 import { ServiceViewerPageComponent } from '@app/service/pages/service-viewer-page/service-viewer-page.component';
 import { TimetableComponent } from '@app/service/components/timetable/timetable.component';
 import { ServicePublishGuardService } from '@app/service/guards/service-publish-guard.service';
+import { ServiceCreatedPageComponent } from '@app/service/pages/service-created-page';
 import {
   ServiceDetailsEditComponent,
   ServiceEssentialsEditorComponent,
@@ -22,6 +23,8 @@ import {
 } from './pages/service-editor-page';
 import { ServicePublishWrapperComponent } from './components/service-publish-wrapper/service-publish-wrapper.component';
 import { ServicePublishResetStateService } from './guards/service-publish-reset-state.service';
+import { ServiceResolver } from './service.resolver';
+import { ProfessionalResolver } from './professional.resolver';
 
 const routes: Routes = [
   {
@@ -105,6 +108,14 @@ const routes: Routes = [
   {
     path: ':id/edit/description',
     component: ServiceDetailsEditComponent,
+  },
+  {
+    path: ':id/success',
+    component: ServiceCreatedPageComponent,
+    resolve: {
+      service: ServiceResolver,
+      professional: ProfessionalResolver,
+    },
   },
   {
     path: ':id',

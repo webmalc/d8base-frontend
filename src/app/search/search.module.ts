@@ -51,5 +51,6 @@ import { SearchPageRoutingModule } from './search-routing.module';
     LanguageChipsComponent,
   ],
   providers: [SearchPageGuard],
+  exports: [ServiceLinkComponent],
 })
 export class SearchPageModule {}

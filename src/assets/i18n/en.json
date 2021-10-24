@@ -305,6 +305,12 @@
     "is-enabled": "Make the service searchable",
     "is-auto-order-confirmation": "Automatically confirm incoming orders"
   },
+  "service-created": {
+    "title": "Service created",
+    "message": "The service was successfully published!",
+    "details": "You can publish a new service or go back to the service list",
+    "add-new-service": "Publish new service"
+  },
   "service-publish": {
     "back-button": "Back",
     "forward-button": "Continue",

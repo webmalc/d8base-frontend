@@ -62,3 +62,7 @@ export function getServiceUrl(serviceId: number | string): string {
 export function getServiceOrderUrl(serviceId: number | string): string {
   return serviceId ? `/${NavPath.Order}/${serviceId}` : '';
 }
+
+export function getServiceCreatedUrl(serviceId: number | string): string {
+  return serviceId ? `/${NavPath.Service}/${serviceId}/${NavBranch.Success}` : '';
+}

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceList } from '@app/api/models';
 import { ServiceLocationInline } from '@app/api/models/service-location-inline';
-import { NavBranch, NavPath } from '@app/core/constants/navigation.constants';
 import { IonViewDidEnter } from '@app/core/interfaces/ionic.interfaces';
 import { MasterManagerService } from '@app/core/services';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
@@ -12,6 +11,7 @@ import { ServiceStepsNavigationService } from '@app/service/services/service-ste
 import * as LoaderActions from '@app/store/loader/loader.actions';
 import { Store } from '@ngxs/store';
 import { finalize, single } from 'rxjs/operators';
+import { getServiceCreatedUrl } from '@app/core/functions/navigation.functions';
 
 @Component({
   selector: 'app-service-publish-final-step',
@@ -60,6 +60,6 @@ export class ServicePublishFinalStepComponent implements IonViewDidEnter {
         single(),
         finalize(() => this.store.dispatch(new LoaderActions.HideLoader('service-publish'))),
       )
-      .subscribe(service => this.router.navigate([NavPath.Professional, NavBranch.MyServices]));
+      .subscribe(service => this.router.navigateByUrl(getServiceCreatedUrl(service.id)));
   }
 }
