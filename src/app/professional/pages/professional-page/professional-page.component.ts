@@ -45,11 +45,13 @@ export class ProfessionalPageComponent {
 
   public contextFiltered$: Observable<ProfessionalPageStateModel>;
   public locations$: Observable<{ id: number; text: string }[]>;
+  public currentTab: string = 'info';
   public readonly editDefaultUrl = 'professional-contact-add-default/';
   public readonly editUrl = 'professional-contact-edit/';
   public readonly reviews$: Observable<ReviewList[]>;
   public readonly reviewsCount$: Observable<number>;
   public readonly servicesCount$: Observable<number>;
+  public readonly defaultLocation$: Observable<string>;
 
   constructor(
     private readonly fullLocationService: LocationResolverService,
@@ -88,6 +90,10 @@ export class ProfessionalPageComponent {
     );
 
     this.initContactsWithDefault();
+  }
+
+  public onTabChange(event: CustomEvent) {
+    this.currentTab = event.detail.value;
   }
 
   public get photos$(): Observable<ProfessionalPhotoList[]> {

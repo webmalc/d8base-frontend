@@ -44,4 +44,7 @@
   right: 1rem;
   bottom: 1rem;
   size: 4rem;
+  &:hover {
+    color: var(--ion-color-primary)
+  }
 }

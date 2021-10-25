@@ -1,42 +1,40 @@
-<ion-card>
-  <app-service-title [service]="service"></app-service-title>
-  <ion-item lines="none">
-    <!--      TODO: ensure the commented code is not needed and remove it -->
-    <!--    <ion-label *ngIf="service.is_enabled" class="ion-align-self-end">-->
-    <!--      <div>-->
-    <!--        <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>-->
-    <!--        {{ 'master-profile.services.service-edit.published' | translate }}-->
-    <!--      </div>-->
-    <!--      <div>-->
-    <!--        <a class="cursor-pointer" (click)="onIsEnabled(false)">-->
-    <!--          <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>-->
-    <!--          {{ 'master-profile.services.service-edit.unpublish' | translate }}-->
-    <!--        </a>-->
-    <!--      </div>-->
-    <!--    </ion-label>-->
-    <ion-label *ngIf="!service.is_enabled" class="ion-align-self-end">
-      <div>
-        <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
-        {{ 'master-profile.services.service-edit.not-published' | translate }}
-      </div>
-      <!--      <div>-->
-      <!--        <a class="cursor-pointer" (click)="onIsEnabled(true)">-->
-      <!--          <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>-->
-      <!--          {{ 'master-profile.services.service-edit.publish' | translate }}-->
-      <!--        </a>-->
-      <!--      </div>-->
-      <!--      <div>-->
-      <!--        <a class="text-color-danger cursor-pointer" (click)="delete()">-->
-      <!--          <ion-icon class="mr10" color="medium" name="delete-outline"></ion-icon>-->
-      <!--          {{ 'master-profile.services.service-edit.delete' | translate }}-->
-      <!--        </a>-->
-      <!--      </div>-->
-    </ion-label>
-    <ion-label slot="end" class="ion-align-self-end ion-text-end">
-      <a [routerLink]="'/service/' + service.id + '/edit'">
-        <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>
-        {{ 'master-profile.services.service-edit.edit' | translate }}
+<ion-card class="ion-padding-horizontal">
+
+  <ion-card-header class="header">
+    <ion-card-title>
+      <a [routerLink]="'/service/' + service.id + '/edit'" *ngIf="canEdit">
+        {{service.name}}
       </a>
-    </ion-label>
+      <ion-text *ngIf="!canEdit">
+        {{service.name}}
+      </ion-text>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-item lines="none">
+    <span class="price">{{ getPrice(service.price) }}</span>
+    <span class="duration">&nbsp;/ {{getDuration(service.duration)}}</span>
+  </ion-item>
+  <ion-item lines="none" class="desc">
+    {{service.description}}
+  </ion-item>
+
+  <app-image-carousel
+    *ngIf="photos"
+    class="ion-margin-vertical photos-size"
+    [photos]="photos"
+    [editable]="false"
+    justify="ion-justify-content-start"
+  ></app-image-carousel>
+
+  <ion-item lines="none" class="ion-margin-bottom">
+    <ion-button
+      [routerLink]="getServiceOrderUrl(service)"
+      class="book-btn"
+      color="primary"
+      size="medium"
+      fill="solid">
+      {{'master-profile.services.service-edit.book'|translate}}
+    </ion-button>
   </ion-item>
 </ion-card>
