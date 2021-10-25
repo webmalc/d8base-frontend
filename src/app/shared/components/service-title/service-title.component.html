@@ -1,5 +1,5 @@
 <ion-item lines="none" *ngIf="service">
-  <ion-label class="ion-align-self-start ion-text-wrap">
+  <ion-label class="ion-align-self-start ion-text-wrap" [class.link]="link" [routerLink]="link">
     <h2 class="capitalize-first-letter">
       {{ service.name }}
     </h2>
