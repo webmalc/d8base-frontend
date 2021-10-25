@@ -387,8 +387,9 @@
       "first-info-row": "Provide more information about yourself.",
       "description": "About",
       "description-placeholder": "This text will be displayed as a part of the search result",
-      "specialization": "Specialization",
-      "specialization-placeholder": "Specialization",
+      "specialization": "Specialization or profession",
+      "specialization-placeholder": "E.g. \"divorce lawyer\"",
+      "specialization-explanation": "This info is meant to be shown below your name",
       "level": "Level",
       "person": "Private person",
       "company": "Company"
