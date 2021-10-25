@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavQueryParams } from '@app/core/constants/navigation.constants';
 import { WINDOW } from '@app/core/injection-tokens';
 import { NavController } from '@ionic/angular';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
 @Component({
@@ -43,7 +43,8 @@ export class ColumnHeaderComponent {
     @Inject(WINDOW) private readonly window: Window,
   ) {
     this.backButtonUrl$ = new BehaviorSubject<string>('');
-    this.preferHistory$ = route.queryParamMap.pipe(map(paramMap => paramMap.has(NavQueryParams.goBack)));
+    // TODO improve ActivatedRoute mock in tests
+    this.preferHistory$ = route.queryParamMap?.pipe(map(paramMap => paramMap.has(NavQueryParams.goBack))) ?? of(false);
     this.canGoBack$ = combineLatest([this.preferHistory$, this.backButtonUrl$]).pipe(
       map(([preferHistory, url]) => preferHistory || Boolean(url)),
     );
