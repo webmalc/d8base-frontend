@@ -7,18 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { LandingPageRoutingModule } from './landing-routing.module';
 
 import { LandingPage } from './landing.page';
-import {SharedModule} from '@app/shared/shared.module';
-import {TranslateModule} from '@ngx-translate/core';
+import { SharedModule } from '@app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    LandingPageRoutingModule,
-    SharedModule,
-    TranslateModule
-  ],
-  declarations: [LandingPage]
+  imports: [CommonModule, FormsModule, IonicModule, LandingPageRoutingModule, SharedModule, TranslateModule],
+  declarations: [LandingPage],
 })
 export class LandingPageModule {}

@@ -6,8 +6,8 @@ import { LandingPage } from './landing.page';
 const routes: Routes = [
   {
     path: '',
-    component: LandingPage
-  }
+    component: LandingPage,
+  },
 ];
 
 @NgModule({

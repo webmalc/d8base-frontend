@@ -55,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: NavPath.ProfessionalLanding,
-    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule)
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule),
   },
   { path: '**', component: NotFoundPageComponent },
 ];
