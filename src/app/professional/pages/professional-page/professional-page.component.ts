@@ -51,7 +51,7 @@ export class ProfessionalPageComponent {
   public readonly reviews$: Observable<ReviewList[]>;
   public readonly reviewsCount$: Observable<number>;
   public readonly servicesCount$: Observable<number>;
-  public readonly defaultLocation$: Observable<string>;
+  public readonly defaultLocation$: Observable<{ id: number; text: string }>;
 
   constructor(
     private readonly fullLocationService: LocationResolverService,
@@ -69,6 +69,10 @@ export class ProfessionalPageComponent {
         forkJoin(professional.locations.map(x => this.fullLocationService.getTextLocation(x))),
       ),
     );
+    this.defaultLocation$ = this.contextFiltered$.pipe(
+      switchMap(({ professional }) =>
+        this.fullLocationService.getTextLocation(professional.locations.filter(l => l.is_default).pop())
+    ));
 
     const reviews$ = this.contextFiltered$.pipe(
       map(({ professional }) => professional),
