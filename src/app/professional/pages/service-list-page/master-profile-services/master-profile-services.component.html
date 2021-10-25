@@ -9,20 +9,14 @@
         <ion-input (ionChange)="search($event)" (keydown.escape)="clearSearchModel()" [value]="searchModel">
         </ion-input>
       </ion-item>
-      <ion-button
-        *ngIf="context.canEdit"
-        color="primary"
-        fill="outline"
-        class="new-btn"
-        routerLink="/service/add"
-      >
+      <ion-button *ngIf="context.canEdit" color="primary" fill="outline" class="new-btn" routerLink="/service/add">
         <ion-icon name="add-outline" color="primary" slot="end"></ion-icon>
         {{ 'master-profile.services.services-tab.add-new-service' | translate }}
       </ion-button>
     </ion-col>
     <ion-col class="ion-no-padding ion-justify-content-center" size="12">
       <ion-list>
-        <ng-container *ngIf="(photosByService$ | async) as photos">
+        <ng-container *ngIf="photosByService$ | async as photos">
           <app-service-editor
             *ngFor="let service of serviceList | serviceDataFilter: searchModel"
             (enableService)="enableService($event)"

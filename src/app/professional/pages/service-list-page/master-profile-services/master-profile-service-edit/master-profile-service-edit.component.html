@@ -1,22 +1,21 @@
 <ion-card class="ion-padding-horizontal">
-
   <ion-card-header class="header">
     <ion-card-title>
       <a [routerLink]="'/service/' + service.id + '/edit'" *ngIf="canEdit">
-        {{service.name}}
+        {{ service.name }}
       </a>
       <ion-text *ngIf="!canEdit">
-        {{service.name}}
+        {{ service.name }}
       </ion-text>
     </ion-card-title>
   </ion-card-header>
 
   <ion-item lines="none">
     <span class="price">{{ getPrice(service.price) }}</span>
-    <span class="duration">&nbsp;/ {{getDuration(service.duration)}}</span>
+    <span class="duration">&nbsp;/ {{ getDuration(service.duration) }}</span>
   </ion-item>
   <ion-item lines="none" class="desc">
-    {{service.description}}
+    {{ service.description }}
   </ion-item>
 
   <app-image-carousel
@@ -28,13 +27,8 @@
   ></app-image-carousel>
 
   <ion-item lines="none" class="ion-margin-bottom">
-    <ion-button
-      [routerLink]="getServiceOrderUrl(service)"
-      class="book-btn"
-      color="primary"
-      size="medium"
-      fill="solid">
-      {{'master-profile.services.service-edit.book'|translate}}
+    <ion-button [routerLink]="getServiceOrderUrl(service)" class="book-btn" color="primary" size="medium" fill="solid">
+      {{ 'master-profile.services.service-edit.book' | translate }}
     </ion-button>
   </ion-item>
 </ion-card>

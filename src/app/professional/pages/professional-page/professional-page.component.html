@@ -9,7 +9,6 @@
 
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" class="ion-justify-content-center">
-
         <ng-container *ngIf="!context.canEdit" class="ion-margin-vertical">
           <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-min-height ion-margin-top">
             <ion-icon name="bag-handle-outline" size="small"></ion-icon>
@@ -17,7 +16,7 @@
               {{ context.professional.description }}
             </ion-text>
           </ion-item>
-          <ng-container *ngIf="(defaultLocation$ | async) as defLoc">
+          <ng-container *ngIf="defaultLocation$ | async as defLoc">
             <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-min-height mb1" *ngIf="defLoc.text">
               <ion-icon name="location-outline" size="small"></ion-icon>
               <ion-text class="pl5 card-desc">
@@ -25,7 +24,6 @@
               </ion-text>
             </ion-item>
           </ng-container>
-
         </ng-container>
 
         <ion-button
@@ -50,10 +48,10 @@
 
         <ion-segment *ngIf="!context.canEdit" value="info" (ionChange)="onTabChange($event)">
           <ion-segment-button value="services">
-            <ion-label>{{'master-profile.tabs.services'|translate}}</ion-label>
+            <ion-label>{{ 'master-profile.tabs.services' | translate }}</ion-label>
           </ion-segment-button>
           <ion-segment-button value="info">
-            <ion-label>{{'master-profile.tabs.info'|translate}}</ion-label>
+            <ion-label>{{ 'master-profile.tabs.info' | translate }}</ion-label>
           </ion-segment-button>
         </ion-segment>
       </ion-col>
@@ -137,7 +135,7 @@
           </ion-item>
           <app-add-button [routerLink]="getNewLocationUrl(context.professional.id)">{{
             'list-item.add-new-address' | translate
-            }}</app-add-button>
+          }}</app-add-button>
         </ion-list>
         <ng-template #viewLocations>
           <ng-container *ngIf="context.professional.locations?.length">
@@ -256,7 +254,10 @@
           </ion-item>
         </ng-container>
         <ng-container *ngIf="!context.canEdit">
-          <ion-item *ngFor="let experience of context.professional.experience_entries" class="ion-align-items-start pt10">
+          <ion-item
+            *ngFor="let experience of context.professional.experience_entries"
+            class="ion-align-items-start pt10"
+          >
             <app-experience [exp]="experience"></app-experience>
           </ion-item>
         </ng-container>
@@ -329,7 +330,6 @@
         </ion-item>
       </app-collapse-item>
     </ng-template>
-
   </app-content-wrapper>
   <app-footer></app-footer>
 </ion-content>

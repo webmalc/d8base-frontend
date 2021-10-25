@@ -71,8 +71,9 @@ export class ProfessionalPageComponent {
     );
     this.defaultLocation$ = this.contextFiltered$.pipe(
       switchMap(({ professional }) =>
-        this.fullLocationService.getTextLocation(professional.locations.filter(l => l.is_default).pop())
-    ));
+        this.fullLocationService.getTextLocation(professional.locations.filter(l => l.is_default).pop()),
+      ),
+    );
 
     const reviews$ = this.contextFiltered$.pipe(
       map(({ professional }) => professional),
@@ -96,7 +97,7 @@ export class ProfessionalPageComponent {
     this.initContactsWithDefault();
   }
 
-  public onTabChange(event: CustomEvent) {
+  public onTabChange(event: CustomEvent): void {
     this.currentTab = event.detail.value;
   }
 
