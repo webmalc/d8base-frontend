@@ -6,6 +6,11 @@ export interface ProfessionalLocationInline {
   country?: null | number;
   district?: null | number;
   id?: number;
+
+  /**
+   * is default location?
+   */
+  is_default?: boolean;
   postal_code?: null | number;
   region?: null | number;
   subregion?: null | number;

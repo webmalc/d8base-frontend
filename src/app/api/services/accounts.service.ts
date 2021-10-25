@@ -11,6 +11,7 @@ import { ChangePassword } from '../models/change-password';
 import { UserContact } from '../models/user-contact';
 import { UserLanguage } from '../models/user-language';
 import { UserLocation } from '../models/user-location';
+import { UserNotificationsSettings } from '../models/user-notifications-settings';
 import { OrderReminder } from '../models/order-reminder';
 import { ReceivedOrder } from '../models/received-order';
 import { SentOrder } from '../models/sent-order';
@@ -70,6 +71,12 @@ class AccountsService extends __BaseService {
   static readonly accountsLocationsUpdatePath = '/accounts/locations/{id}/';
   static readonly accountsLocationsPartialUpdatePath = '/accounts/locations/{id}/';
   static readonly accountsLocationsDeletePath = '/accounts/locations/{id}/';
+  static readonly accountsNotificationsSettingsListPath = '/accounts/notifications-settings/';
+  static readonly accountsNotificationsSettingsCreatePath = '/accounts/notifications-settings/';
+  static readonly accountsNotificationsSettingsReadPath = '/accounts/notifications-settings/{id}/';
+  static readonly accountsNotificationsSettingsUpdatePath = '/accounts/notifications-settings/{id}/';
+  static readonly accountsNotificationsSettingsPartialUpdatePath = '/accounts/notifications-settings/{id}/';
+  static readonly accountsNotificationsSettingsDeletePath = '/accounts/notifications-settings/{id}/';
   static readonly accountsOrderRemindersListPath = '/accounts/order-reminders/';
   static readonly accountsOrderRemindersCreatePath = '/accounts/order-reminders/';
   static readonly accountsOrderRemindersReadPath = '/accounts/order-reminders/{id}/';
@@ -1087,6 +1094,259 @@ class AccountsService extends __BaseService {
    */
   accountsLocationsDelete(id: number): __Observable<null> {
     return this.accountsLocationsDeleteResponse(id).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * The user notifications settings viewset.
+   * @param params The `AccountsService.AccountsNotificationsSettingsListParams` containing the following parameters:
+   *
+   * - `search`: A search term.
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   */
+  accountsNotificationsSettingsListResponse(params: AccountsService.AccountsNotificationsSettingsListParams): __Observable<__StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<UserNotificationsSettings>}>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.search != null) __params = __params.set('search', params.search.toString());
+    if (params.pageSize != null) __params = __params.set('page_size', params.pageSize.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    if (params.ordering != null) __params = __params.set('ordering', params.ordering.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/notifications-settings/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<{count: number, next?: null | string, previous?: null | string, results: Array<UserNotificationsSettings>}>;
+      })
+    );
+  }
+  /**
+   * The user notifications settings viewset.
+   * @param params The `AccountsService.AccountsNotificationsSettingsListParams` containing the following parameters:
+   *
+   * - `search`: A search term.
+   *
+   * - `page_size`: Number of results to return per page.
+   *
+   * - `page`: A page number within the paginated result set.
+   *
+   * - `ordering`: Which field to use when ordering the results.
+   */
+  accountsNotificationsSettingsList(params: AccountsService.AccountsNotificationsSettingsListParams): __Observable<{count: number, next?: null | string, previous?: null | string, results: Array<UserNotificationsSettings>}> {
+    return this.accountsNotificationsSettingsListResponse(params).pipe(
+      __map(_r => _r.body as {count: number, next?: null | string, previous?: null | string, results: Array<UserNotificationsSettings>})
+    );
+  }
+
+  /**
+   * The user notifications settings viewset.
+   * @param data undefined
+   */
+  accountsNotificationsSettingsCreateResponse(data: UserNotificationsSettings): __Observable<__StrictHttpResponse<UserNotificationsSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = data;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/accounts/notifications-settings/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<UserNotificationsSettings>;
+      })
+    );
+  }
+  /**
+   * The user notifications settings viewset.
+   * @param data undefined
+   */
+  accountsNotificationsSettingsCreate(data: UserNotificationsSettings): __Observable<UserNotificationsSettings> {
+    return this.accountsNotificationsSettingsCreateResponse(data).pipe(
+      __map(_r => _r.body as UserNotificationsSettings)
+    );
+  }
+
+  /**
+   * The user notifications settings viewset.
+   * @param id A unique integer value identifying this user notifications settings.
+   */
+  accountsNotificationsSettingsReadResponse(id: number): __Observable<__StrictHttpResponse<UserNotificationsSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/accounts/notifications-settings/${encodeURIComponent(String(id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<UserNotificationsSettings>;
+      })
+    );
+  }
+  /**
+   * The user notifications settings viewset.
+   * @param id A unique integer value identifying this user notifications settings.
+   */
+  accountsNotificationsSettingsRead(id: number): __Observable<UserNotificationsSettings> {
+    return this.accountsNotificationsSettingsReadResponse(id).pipe(
+      __map(_r => _r.body as UserNotificationsSettings)
+    );
+  }
+
+  /**
+   * The user notifications settings viewset.
+   * @param params The `AccountsService.AccountsNotificationsSettingsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this user notifications settings.
+   *
+   * - `data`:
+   */
+  accountsNotificationsSettingsUpdateResponse(params: AccountsService.AccountsNotificationsSettingsUpdateParams): __Observable<__StrictHttpResponse<UserNotificationsSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/accounts/notifications-settings/${encodeURIComponent(String(params.id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<UserNotificationsSettings>;
+      })
+    );
+  }
+  /**
+   * The user notifications settings viewset.
+   * @param params The `AccountsService.AccountsNotificationsSettingsUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this user notifications settings.
+   *
+   * - `data`:
+   */
+  accountsNotificationsSettingsUpdate(params: AccountsService.AccountsNotificationsSettingsUpdateParams): __Observable<UserNotificationsSettings> {
+    return this.accountsNotificationsSettingsUpdateResponse(params).pipe(
+      __map(_r => _r.body as UserNotificationsSettings)
+    );
+  }
+
+  /**
+   * The user notifications settings viewset.
+   * @param params The `AccountsService.AccountsNotificationsSettingsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this user notifications settings.
+   *
+   * - `data`:
+   */
+  accountsNotificationsSettingsPartialUpdateResponse(params: AccountsService.AccountsNotificationsSettingsPartialUpdateParams): __Observable<__StrictHttpResponse<UserNotificationsSettings>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.data;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/accounts/notifications-settings/${encodeURIComponent(String(params.id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<UserNotificationsSettings>;
+      })
+    );
+  }
+  /**
+   * The user notifications settings viewset.
+   * @param params The `AccountsService.AccountsNotificationsSettingsPartialUpdateParams` containing the following parameters:
+   *
+   * - `id`: A unique integer value identifying this user notifications settings.
+   *
+   * - `data`:
+   */
+  accountsNotificationsSettingsPartialUpdate(params: AccountsService.AccountsNotificationsSettingsPartialUpdateParams): __Observable<UserNotificationsSettings> {
+    return this.accountsNotificationsSettingsPartialUpdateResponse(params).pipe(
+      __map(_r => _r.body as UserNotificationsSettings)
+    );
+  }
+
+  /**
+   * The user notifications settings viewset.
+   * @param id A unique integer value identifying this user notifications settings.
+   */
+  accountsNotificationsSettingsDeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/accounts/notifications-settings/${encodeURIComponent(String(id))}/`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * The user notifications settings viewset.
+   * @param id A unique integer value identifying this user notifications settings.
+   */
+  accountsNotificationsSettingsDelete(id: number): __Observable<null> {
+    return this.accountsNotificationsSettingsDeleteResponse(id).pipe(
       __map(_r => _r.body as null)
     );
   }
@@ -8960,6 +9220,56 @@ module AccountsService {
      */
     id: number;
     data: UserLocation;
+  }
+
+  /**
+   * Parameters for accountsNotificationsSettingsList
+   */
+  export interface AccountsNotificationsSettingsListParams {
+
+    /**
+     * A search term.
+     */
+    search?: string;
+
+    /**
+     * Number of results to return per page.
+     */
+    pageSize?: number;
+
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+
+    /**
+     * Which field to use when ordering the results.
+     */
+    ordering?: string;
+  }
+
+  /**
+   * Parameters for accountsNotificationsSettingsUpdate
+   */
+  export interface AccountsNotificationsSettingsUpdateParams {
+
+    /**
+     * A unique integer value identifying this user notifications settings.
+     */
+    id: number;
+    data: UserNotificationsSettings;
+  }
+
+  /**
+   * Parameters for accountsNotificationsSettingsPartialUpdate
+   */
+  export interface AccountsNotificationsSettingsPartialUpdateParams {
+
+    /**
+     * A unique integer value identifying this user notifications settings.
+     */
+    id: number;
+    data: UserNotificationsSettings;
   }
 
   /**

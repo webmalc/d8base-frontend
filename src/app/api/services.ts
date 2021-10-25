@@ -8,4 +8,5 @@ export { RatesService } from './services/rates.service';
 export { ScheduleService } from './services/schedule.service';
 export { SearchService } from './services/search.service';
 export { ServicesService } from './services/services.service';
+export { TypeaheadService } from './services/typeahead.service';
 export { UsersService } from './services/users.service';
