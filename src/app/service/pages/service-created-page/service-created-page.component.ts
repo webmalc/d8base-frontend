@@ -24,6 +24,6 @@ export class ServiceCreatedPageComponent {
   }
 
   public get professionalServicesUrl(): string {
-    return `/${NavPath.Professional}/${NavBranch.Services}`;
+    return `/${NavPath.Professional}/${NavBranch.MyServices}`;
   }
 }
