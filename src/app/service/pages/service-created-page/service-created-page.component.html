@@ -10,7 +10,7 @@
       <span class="service-created__details">{{ 'service-created.details' | translate }}</span>
     </div>
     <ion-card *ngIf="service$ | async as service" class="service-card">
-      <app-service-title [service]="service"></app-service-title>
+      <app-service-title [service]="service" [link]="getServiceLink(service.id)"></app-service-title>
     </ion-card>
     <ion-button expand="block" [routerLink]="addNewServiceUrl">
       {{ 'service-created.add-new-service' | translate }}

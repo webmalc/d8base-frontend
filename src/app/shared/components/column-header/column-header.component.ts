@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavQueryParams } from '@app/core/constants/navigation.constants';
 import { WINDOW } from '@app/core/injection-tokens';
 import { NavController } from '@ionic/angular';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-column-header',
@@ -35,6 +35,7 @@ export class ColumnHeaderComponent {
   public canGoBack$: Observable<boolean>;
 
   private readonly backButtonUrl$: BehaviorSubject<string>;
+  private readonly preferHistory$: Observable<boolean>;
 
   constructor(
     private readonly navController: NavController,
@@ -42,21 +43,27 @@ export class ColumnHeaderComponent {
     @Inject(WINDOW) private readonly window: Window,
   ) {
     this.backButtonUrl$ = new BehaviorSubject<string>('');
-    this.canGoBack$ = combineLatest([route.queryParamMap, this.backButtonUrl$]).pipe(
-      map(([paramMap, url]) => paramMap.has(NavQueryParams.goBack) || Boolean(url)),
+    // TODO improve ActivatedRoute mock in tests
+    this.preferHistory$ = route.queryParamMap?.pipe(map(paramMap => paramMap.has(NavQueryParams.goBack))) ?? of(false);
+    this.canGoBack$ = combineLatest([this.preferHistory$, this.backButtonUrl$]).pipe(
+      map(([preferHistory, url]) => preferHistory || Boolean(url)),
     );
   }
 
   public navigateBack(): void {
     this.willNavigateBack.emit();
-    if (this.canGoBack()) {
-      this.navController.back();
-    } else if (this.backButtonUrl$.value) {
-      this.navController.navigateBack(this.backButtonUrl$.value);
-    }
+    combineLatest([this.preferHistory$, this.backButtonUrl$])
+      .pipe(first())
+      .subscribe(([preferHistory, backButtonUrl]) => {
+        if (preferHistory && this.hasHistory()) {
+          this.navController.back();
+        } else if (backButtonUrl) {
+          this.navController.navigateBack(backButtonUrl);
+        }
+      });
   }
 
-  private canGoBack(): boolean {
+  private hasHistory(): boolean {
     return this.window.history.length > 1;
   }
 }

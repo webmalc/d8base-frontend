@@ -8,4 +8,5 @@ import { Service } from '@app/api/models';
 })
 export class ServiceTitleComponent {
   @Input() public service: Partial<Service> = {};
+  @Input() public link: any[] | string;
 }
