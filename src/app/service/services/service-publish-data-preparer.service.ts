@@ -3,6 +3,7 @@ import {
   Price,
   ProfessionalLocation,
   ProfessionalSchedule,
+  Profile,
   Service,
   ServiceLocation,
   ServicePhoto,
@@ -43,7 +44,7 @@ export class ServicePublishDataPreparerService {
       serviceSchedule: this.getServiceSchedule(),
       masterSchedule: this.getProfessionalSchedule(),
       servicePrice: this.getServicePrice(),
-      avatar: this.getAvatar(),
+      user: this.getUserProfile(),
     };
   }
 
@@ -141,8 +142,12 @@ export class ServicePublishDataPreparerService {
     return await Promise.all([...data.photos.map(async val => ({ service: null, photo: await fileToBase64(val) }))]);
   }
 
-  private getAvatar(): string {
+  private getUserProfile(): Partial<Profile> {
     const data = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
-    return data._avatar;
+    return {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      avatar: data._avatar,
+    };
   }
 }
