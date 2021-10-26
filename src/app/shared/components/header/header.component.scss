@@ -17,3 +17,16 @@
 .my-orders {
   white-space: nowrap;
 }
+
+@media (min-width: 768px) {
+  ion-header {
+    height: 80px;
+  }
+}
+
+.toolbar {
+  height: 100%;
+  --min-height: 100%;
+  margin: auto;
+  width: min(100vw, 40rem); // TODO extract mixin
+}
