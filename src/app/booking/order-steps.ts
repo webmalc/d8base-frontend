@@ -1,9 +1,9 @@
 import { Type } from '@angular/core';
 import { CanActivate, Routes } from '@angular/router';
-import { ClientDetailsStepComponent } from '@app/order/components/client-details-step/client-details-step.component';
-import { ConfirmationStepComponent } from '@app/order/components/confirmation-step/confirmation-step.component';
-import { DateTimeStepComponent } from '@app/order/components/date-time-step/date-time-step.component';
-import StepsModel from '@app/order/interfaces/steps-model.interface';
+import { ClientDetailsStepComponent } from '@app/booking/components/client-details-step/client-details-step.component';
+import { ConfirmationStepComponent } from '@app/booking/components/confirmation-step/confirmation-step.component';
+import { DateTimeStepComponent } from '@app/booking/components/date-time-step/date-time-step.component';
+import StepsModel from '@app/booking/interfaces/steps-model.interface';
 import { OrderIds } from './enums/order-ids.enum';
 import { StepsState } from './interfaces/steps-state.type';
 

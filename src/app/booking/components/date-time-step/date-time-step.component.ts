@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { StepComponent } from '@app/order/abstract/step';
-import { OrderIds } from '@app/order/enums/order-ids.enum';
-import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
-import StepContext from '@app/order/interfaces/step-context.interface';
+import { StepComponent } from '@app/booking/abstract/step';
+import { OrderIds } from '@app/booking/enums/order-ids.enum';
+import DateTimeStepData from '@app/booking/interfaces/date-time-step-data.interface';
+import StepContext from '@app/booking/interfaces/step-context.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: NavPath.Order,
-    loadChildren: () => import('./order/order.module').then(m => m.OrderPageModule),
+    loadChildren: () => import('./booking/order.module').then(m => m.OrderPageModule),
   },
   {
     path: NavPath.Orders,

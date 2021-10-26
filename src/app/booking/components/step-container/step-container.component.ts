@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { isFormInvalid } from '@app/core/functions/form.functions';
 import { getProfessionalServicesUrl } from '@app/core/functions/navigation.functions';
 import { NgDestroyService } from '@app/core/services';
-import { StepComponent } from '@app/order/abstract/step';
-import { OrderIds } from '@app/order/enums/order-ids.enum';
-import StepContext from '@app/order/interfaces/step-context.interface';
-import StepModel from '@app/order/interfaces/step-model.interface';
-import { OrderWizardStateService } from '@app/order/services';
+import { StepComponent } from '@app/booking/abstract/step';
+import { OrderIds } from '@app/booking/enums/order-ids.enum';
+import StepContext from '@app/booking/interfaces/step-context.interface';
+import StepModel from '@app/booking/interfaces/step-model.interface';
+import { OrderWizardStateService } from '@app/booking/services';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import StepContext from '@app/order/interfaces/step-context.interface';
-import { StepsState } from '@app/order/interfaces/steps-state.type';
+import StepContext from '@app/booking/interfaces/step-context.interface';
+import { StepsState } from '@app/booking/interfaces/steps-state.type';
 
 export abstract class StepComponent<T> {
   public outputData: T;
