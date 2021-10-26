@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: NavPath.Orders,
-    loadChildren: () => import('./my-orders/my-orders.module').then(m => m.MyOrdersModule),
+    loadChildren: () => import('./orders/my-orders.module').then(m => m.MyOrdersModule),
   },
   {
     path: NavPath.Reviews,

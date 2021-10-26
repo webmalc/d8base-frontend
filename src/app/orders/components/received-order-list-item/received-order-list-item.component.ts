@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReceivedOrder, Service } from '@app/api/models';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { ReceivedOrderManager } from '@app/my-orders/services';
+import { ReceivedOrderManager } from '@app/orders/services';
 import { OrderListItem } from '../abstract/order-list-item';
 
 @Component({
