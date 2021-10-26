@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ServiceList } from '@app/api/models';
+import { ServiceList, ServicePhoto } from '@app/api/models';
+import { getServiceOrderUrl } from '@app/core/functions/navigation.functions';
 
 @Component({
   selector: 'app-service-editor',
@@ -8,6 +9,8 @@ import { ServiceList } from '@app/api/models';
 })
 export class MasterProfileServiceEditComponent {
   @Input() public service: ServiceList;
+  @Input() public canEdit: boolean;
+  @Input() public photos: ServicePhoto[];
   @Output() public enableService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
   @Output() public disableService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
   @Output() public deleteService: EventEmitter<ServiceList> = new EventEmitter<ServiceList>();
@@ -18,6 +21,10 @@ export class MasterProfileServiceEditComponent {
     } else {
       this.disableService.emit(this.service);
     }
+  }
+
+  public getServiceOrderUrl(service: ServiceList): string {
+    return getServiceOrderUrl(service.id);
   }
 
   public delete(): void {

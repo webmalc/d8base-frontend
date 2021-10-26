@@ -1,18 +1,15 @@
-<ion-list lines="none">
-  <ion-item *ngFor="let contact of contacts">
-    <ion-icon name="{{ getContactIcon(contact.contact_display) }}" color="secondary"></ion-icon>
-    <ion-label color="medium" class="ion-padding-start">
-      {{ contact.contact_display }}
-    </ion-label>
-    <ion-text color="secondary">
+<ion-list>
+  <ion-item
+    *ngFor="let contact of contacts"
+    class=""
+    [routerLink]="getUrl(contact)"
+    detail
+    detail-icon="create-outline"
+  >
+    <ion-icon name="{{ getContactIcon(contact.contact_display) }}"></ion-icon>
+    <ion-text class="ion-margin-start">
       {{ contact.value || '—' }}
     </ion-text>
-    <ion-button *ngIf="contact.id" slot="end" fill="clear" routerLink="{{ editContactUrl + contact.id }}">
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-button>
-    <ion-button *ngIf="!contact.id" slot="end" fill="clear" routerLink="{{ editDefaultContactUrl + contact.contact }}">
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-button>
   </ion-item>
   <app-add-button [routerLink]="addNewContactUrl">
     {{ 'contact-edit-page.add-new' | translate }}

@@ -29,6 +29,10 @@
   --service-photo-thumb-size: 72px;
 }
 
+.ion-item-details-align-center::part(detail-icon) {
+  align-self: center !important;
+}
+
 .label-for-required-input::after {
   content: '*';
   color: red;

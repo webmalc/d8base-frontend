@@ -52,6 +52,8 @@ export class ImageCarouselComponent implements AfterViewInit {
   @HostBinding('class.nav-buttons-hidden')
   public isNavButtonsHidden: boolean = true;
 
+  public justifyClass: string;
+
   public slideOptions = {
     initialSlide: 0,
     slidesPerView: 'auto',
@@ -67,6 +69,11 @@ export class ImageCarouselComponent implements AfterViewInit {
   private _photos: Photo[];
 
   constructor(private readonly ngDestroy$: NgDestroyService, private readonly cd: ChangeDetectorRef) {}
+
+  @Input()
+  public set justify(j: string) {
+    this.justifyClass = j || 'ion-justify-content-center';
+  }
 
   @Input()
   public set files(files: File[]) {

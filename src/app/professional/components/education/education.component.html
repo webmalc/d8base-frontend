@@ -1,27 +1,15 @@
-<ion-row class="ion-justify-content-between ion-align-items-center">
-  <ion-note color="medium" *ngIf="!education.is_still_here">
-    {{ education.start_date }} - {{ education.end_date }}
-  </ion-note>
-  <ion-note color="medium" *ngIf="education.is_still_here">
-    {{ education.start_date }} - {{ 'global.experience-dates.until-now' | translate }}
-  </ion-note>
-  <ion-buttons *ngIf="editable">
-    <ion-button
-      size="medium"
-      routerDirection="forward"
-      routerLink="education-edit/{{ education.id }}"
-      routerLinkActive="active"
-    >
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-</ion-row>
 <ion-label>
-  <div>
+  <div *ngIf="!education.is_still_here" class="education-date">
+    {{ education.start_date }} - {{ education.end_date }}
+  </div>
+  <div *ngIf="education.is_still_here" class="education-date">
+    {{ education.start_date }} - {{ 'global.experience-dates.until-now' | translate }}
+  </div>
+  <div class="university">
     <b>{{ education.university }}</b>
   </div>
   <div>{{ education.deegree }}</div>
-</ion-label>
-<ion-label class="ion-text-wrap ion-margin-vertical">
-  {{ education.description }}
+  <div class="ion-text-wrap ion-margin-vertical">
+    {{ education.description }}
+  </div>
 </ion-label>

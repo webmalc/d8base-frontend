@@ -1,10 +1,7 @@
-<ion-list lines="none">
-  <ion-item *ngFor="let contact of contacts">
-    <ion-icon name="{{ getContactIcon(contact.contact_display) }}" color="secondary"></ion-icon>
-    <ion-label color="medium" class="ion-padding-start">
-      {{ contact.contact_display }}
-    </ion-label>
-    <ion-text color="secondary">
+<ion-list>
+  <ion-item *ngFor="let contact of contacts" detail="false">
+    <ion-icon name="{{ getContactIcon(contact.contact_display) }}"></ion-icon>
+    <ion-text class="ion-margin-start">
       {{ contact.value || '—' }}
     </ion-text>
   </ion-item>

@@ -1,42 +1,52 @@
-<ion-card>
-  <app-service-title [service]="service"></app-service-title>
-  <ion-item lines="none">
-    <!--      TODO: ensure the commented code is not needed and remove it -->
-    <!--    <ion-label *ngIf="service.is_enabled" class="ion-align-self-end">-->
-    <!--      <div>-->
-    <!--        <ion-icon class="mr10" color="success" name="radio-button-on"></ion-icon>-->
-    <!--        {{ 'master-profile.services.service-edit.published' | translate }}-->
-    <!--      </div>-->
-    <!--      <div>-->
-    <!--        <a class="cursor-pointer" (click)="onIsEnabled(false)">-->
-    <!--          <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>-->
-    <!--          {{ 'master-profile.services.service-edit.unpublish' | translate }}-->
-    <!--        </a>-->
-    <!--      </div>-->
-    <!--    </ion-label>-->
-    <ion-label *ngIf="!service.is_enabled" class="ion-align-self-end">
-      <div>
-        <ion-icon class="mr10" color="warning" name="radio-button-on"></ion-icon>
-        {{ 'master-profile.services.service-edit.not-published' | translate }}
-      </div>
-      <!--      <div>-->
-      <!--        <a class="cursor-pointer" (click)="onIsEnabled(true)">-->
-      <!--          <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>-->
-      <!--          {{ 'master-profile.services.service-edit.publish' | translate }}-->
-      <!--        </a>-->
-      <!--      </div>-->
-      <!--      <div>-->
-      <!--        <a class="text-color-danger cursor-pointer" (click)="delete()">-->
-      <!--          <ion-icon class="mr10" color="medium" name="delete-outline"></ion-icon>-->
-      <!--          {{ 'master-profile.services.service-edit.delete' | translate }}-->
-      <!--        </a>-->
-      <!--      </div>-->
-    </ion-label>
-    <ion-label slot="end" class="ion-align-self-end ion-text-end">
-      <a [routerLink]="'/service/' + service.id + '/edit'">
-        <ion-icon class="mr10" color="medium" name="create-outline"></ion-icon>
-        {{ 'master-profile.services.service-edit.edit' | translate }}
+<ion-card class="ion-padding-horizontal">
+  <ion-card-header class="header">
+    <ion-card-title *ngIf="!service.is_enabled">
+      <ion-row class="ion-align-items-center ion-no-padding ion-margin-vertical warning-row">
+        <ion-icon color="warning" name="information-circle"></ion-icon>
+        <span class="warning-text ion-padding-start">{{
+          'master-profile.services.service-edit.not-published' | translate
+        }}</span>
+      </ion-row>
+    </ion-card-title>
+    <ion-card-subtitle>
+      <a [routerLink]="'/service/' + service.id + '/edit'" *ngIf="canEdit" class="title-text">
+        {{ service.name }}
       </a>
-    </ion-label>
+      <ion-text *ngIf="!canEdit" class="title-text">
+        {{ service.name }}
+      </ion-text>
+    </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-item lines="none">
+    <app-price [price]="service.price"></app-price>
+    <span class="duration">&nbsp;/ <app-duration-viewer [duration]="service.duration"></app-duration-viewer></span>
+  </ion-item>
+  <ion-item lines="none" class="desc">
+    {{ service.description }}
+  </ion-item>
+
+  <app-image-carousel
+    *ngIf="photos"
+    class="ion-margin-vertical photos-size"
+    [photos]="photos"
+    [editable]="false"
+    justify="ion-justify-content-start"
+  ></app-image-carousel>
+
+  <ion-item lines="none" class="ion-margin-bottom">
+    <ion-button *ngIf="!service.is_enabled" class="book-btn" disabled="true" color="medium" size="medium" fill="solid">
+      {{ 'master-profile.services.service-edit.book' | translate }}
+    </ion-button>
+    <ion-button
+      [routerLink]="getServiceOrderUrl(service)"
+      *ngIf="service.is_enabled"
+      class="book-btn"
+      color="primary"
+      size="medium"
+      fill="solid"
+    >
+      {{ 'master-profile.services.service-edit.book' | translate }}
+    </ion-button>
   </ion-item>
 </ion-card>

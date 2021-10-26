@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProfessionalList, ProfessionalPhotoList, ReviewList, UserExtended } from '@app/api/models';
-import { CommunicationService } from '@app/api/services';
+import { CommunicationService, ServicesService } from '@app/api/services';
 import { calculateAge } from '@app/core/functions/datetime.functions';
 import {
   getNewProfessionalContactUrl,
@@ -45,16 +45,20 @@ export class ProfessionalPageComponent {
 
   public contextFiltered$: Observable<ProfessionalPageStateModel>;
   public locations$: Observable<{ id: number; text: string }[]>;
+  public currentTab: string = 'info';
   public readonly editDefaultUrl = 'professional-contact-add-default/';
   public readonly editUrl = 'professional-contact-edit/';
   public readonly reviews$: Observable<ReviewList[]>;
   public readonly reviewsCount$: Observable<number>;
+  public readonly servicesCount$: Observable<number>;
+  public readonly defaultLocation$: Observable<{ id: number; text: string }>;
 
   constructor(
     private readonly fullLocationService: LocationResolverService,
     private readonly communicationService: CommunicationService,
     private readonly contactsMergeToDefaultService: ContactsMergeToDefaultService,
     private readonly professionalPhotosEditor: ProfessionalPhotosEditorService,
+    private readonly servicesService: ServicesService,
   ) {
     this.contextFiltered$ = this.context$.pipe(
       filter(context => Boolean(context?.professional) && Boolean(context?.user)),
@@ -63,6 +67,11 @@ export class ProfessionalPageComponent {
     this.locations$ = this.contextFiltered$.pipe(
       switchMap(({ professional }) =>
         forkJoin(professional.locations.map(x => this.fullLocationService.getTextLocation(x))),
+      ),
+    );
+    this.defaultLocation$ = this.contextFiltered$.pipe(
+      switchMap(({ professional }) =>
+        this.fullLocationService.getTextLocation(professional.locations.filter(l => l.is_default).pop()),
       ),
     );
 
@@ -79,8 +88,17 @@ export class ProfessionalPageComponent {
 
     this.reviews$ = reviews$.pipe(map(({ results }) => results));
     this.reviewsCount$ = reviews$.pipe(map(({ count }) => count));
+    this.servicesCount$ = this.contextFiltered$.pipe(
+      map(({ professional }) => professional),
+      switchMap(professional => this.servicesService.servicesServicesList({ professional: professional.id })),
+      map(list => list.count),
+    );
 
     this.initContactsWithDefault();
+  }
+
+  public onTabChange(event: CustomEvent): void {
+    this.currentTab = event.detail.value;
   }
 
   public get photos$(): Observable<ProfessionalPhotoList[]> {

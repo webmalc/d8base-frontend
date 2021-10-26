@@ -17,4 +17,8 @@ export class ContactsEditComponent {
   public getContactIcon(contactDisplay: string): string {
     return getContactIconName(contactDisplay);
   }
+
+  public getUrl(contact: ContactUnion): string {
+    return contact.id ? this.editContactUrl + contact.id : this.editDefaultContactUrl + contact.contact;
+  }
 }

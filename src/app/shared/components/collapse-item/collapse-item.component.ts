@@ -13,8 +13,8 @@ export class CollapseItemComponent {
   @Input() public noSidePadding: boolean = false;
   @Input() public titleBold: boolean = true;
   @Input() public collapsed: boolean = true;
-  public readonly arrowUp = 'arrow-up-circle-outline';
-  public readonly arrowDown = 'arrow-down-circle-outline';
+  public readonly arrowUp = 'chevron-up-outline';
+  public readonly arrowDown = 'chevron-down-outline';
   @Input() public onClickFunc: () => void = () => void 0;
 
   public collapse(): void {

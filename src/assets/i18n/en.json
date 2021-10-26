@@ -466,6 +466,21 @@
       "2": "years",
       "3": "years"
     },
+    "days": {
+      "1": "day",
+      "2": "days",
+      "3": "days"
+    },
+    "hours": {
+      "1": "hour",
+      "2": "hours",
+      "3": "hours"
+    },
+    "minutes": {
+      "1": "minute",
+      "2": "minutes",
+      "3": "minutes"
+    },
     "proposal": {
       "1": "proposal",
       "2": "proposals",
@@ -495,6 +510,10 @@
       "services": "Services",
       "schedule": "Schedule"
     },
+    "tabs": {
+      "services": "Services",
+      "info": "info"
+    },
     "main-info": {
       "rating": "Professional rating",
       "no-rating": "Not rated",
@@ -508,7 +527,8 @@
         "unpublish": "Unpublish",
         "edit": "Edit",
         "delete": "Delete",
-        "view": "View as user"
+        "view": "View as user",
+        "book": "Book"
       },
       "service-presentation": {
         "pick": "Order",
@@ -521,10 +541,12 @@
       }
     },
     "info": {
+      "edit-data": "Edit data",
+      "book-btn": "Create reservation",
       "title": "Professional's profile",
       "information": "Information",
       "master-location": "Professional address",
-      "portfolio": "Photos",
+      "portfolio": "Best works",
       "contacts": "Contacts",
       "description": "Description",
       "specialization": "Expertise area",
