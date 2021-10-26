@@ -1,7 +1,8 @@
 <ion-row class="ion-justify-content-between max-width100 ion-margin-vertical">
   <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
     <ion-row class="ion-align-self-start">
-      <ion-icon name="share-social-outline" class="top-icon"></ion-icon>
+      <ion-icon name="share-social-outline" class="top-icon" *ngIf="canEdit"></ion-icon>
+      <ion-icon name="chevron-back-outline" class="top-icon" (click)="back()" *ngIf="!canEdit"></ion-icon>
     </ion-row>
     <div class="cent-container cent-container__left ion-justify-content-center">
       <ion-row class="ion-align-self-center">
@@ -20,8 +21,9 @@
   </ion-col>
   <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
     <ion-row class="ion-justify-content-end">
-      <ion-icon name="create-outline" class="top-icon"></ion-icon>
-      <ion-icon name="create-outline" class="top-icon"></ion-icon>
+      <ion-icon name="create-outline" class="top-icon" *ngIf="canEdit"></ion-icon>
+      <ion-icon name="share-social-outline" class="top-icon" *ngIf="!canEdit"></ion-icon>
+      <app-saved-professional-toggle [professionalId]="professional.id" *ngIf="!canEdit"></app-saved-professional-toggle>
     </ion-row>
     <div class="cent-container cent-container__right ion-justify-content-center">
       <div class="ion-align-self-center ion-text-center">
