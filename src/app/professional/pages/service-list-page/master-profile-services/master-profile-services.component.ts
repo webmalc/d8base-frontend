@@ -42,7 +42,7 @@ export class MasterProfileServicesComponent {
       map(data => data.map(r => r.results)),
       map((res: ServicePhoto[][]) => {
         const m = new Map<number, ServicePhoto[]>();
-        res.forEach(photos => m.set(photos[0].service, photos));
+        res.filter(r => r.length).forEach(photos => m.set(photos[0].service, photos));
         return m;
       }),
     );
