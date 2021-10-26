@@ -1,27 +1,3 @@
-import { Price } from '@app/api/models/price';
-
-export function getServicePriceStr(price: Price): string {
-  const currency = price.price_currency || price.start_price_currency || price.end_price_currency;
-  if (price.is_price_fixed && price.price) {
-    return `${Math.round(parseInt(price.price, 10))} ${currency}`;
-  }
-
-  if (price.start_price) {
-    if (price.end_price) {
-      return `${Math.round(parseInt(price.start_price, 10))} - ${Math.round(
-        parseInt(price.end_price, 10),
-      )} ${currency}`;
-    }
-
-    return `${Math.round(parseInt(price.start_price, 10))}${currency}`;
-  }
-  if (price.end_price) {
-    return `${Math.round(parseInt(price.end_price, 10))}${currency}`;
-  }
-
-  return '-';
-}
-
 interface Duration {
   days: number;
   hours: number;
