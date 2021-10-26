@@ -47,8 +47,12 @@ export class UserLocationEditPage implements OnInit {
     this.store.dispatch(new UserLocationActions.DeleteUserLocation(id)).subscribe(() => this.navigateToProfile());
   }
 
+  public get profileUrl(): string {
+    return `/${NavPath.Profile}`;
+  }
+
   private navigateToProfile(): void {
-    this.router.navigate([NavPath.Profile]);
+    this.router.navigateByUrl(this.profileUrl);
   }
 
   private getLocation(locationId): Observable<UserLocation> {
