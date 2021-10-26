@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { OrderPageModule } from '@app/order/order.module';
-import { OrderWizardStateService } from '@app/order/services/order-wizard-state.service';
+import { OrderPageModule } from '@app/booking/order.module';
+import { OrderWizardStateService } from '@app/booking/services/order-wizard-state.service';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 import { ClientDetailsStepComponent } from './client-details-step.component';

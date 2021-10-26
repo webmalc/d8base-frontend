@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderAuthenticationGuardService } from '@app/order/guards';
+import { OrderAuthenticationGuardService } from '@app/booking/guards';
 import { ORDER_STEPS, stepsRoutes } from './order-steps';
 import { OrderPage } from './order.page';
 

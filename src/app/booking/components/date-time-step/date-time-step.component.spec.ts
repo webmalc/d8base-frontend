@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { OrderWizardStateService } from '@app/order/services/order-wizard-state.service';
+import { OrderWizardStateService } from '@app/booking/services/order-wizard-state.service';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageManagerMock } from 'src/testing/mocks';

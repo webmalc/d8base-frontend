@@ -3,9 +3,9 @@ import { Params } from '@angular/router';
 import { ProfessionalList, ServiceList } from '@app/api/models';
 import { NavQueryParams } from '@app/core/constants/navigation.constants';
 import { AuthenticationService, LocaleService } from '@app/core/services';
-import { StepComponent } from '@app/order/abstract/step';
-import { OrderIds } from '@app/order/enums/order-ids.enum';
-import DateTimeStepData from '@app/order/interfaces/date-time-step-data.interface';
+import { StepComponent } from '@app/booking/abstract/step';
+import { OrderIds } from '@app/booking/enums/order-ids.enum';
+import DateTimeStepData from '@app/booking/interfaces/date-time-step-data.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({

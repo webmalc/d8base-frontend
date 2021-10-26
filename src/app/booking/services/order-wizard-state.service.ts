@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { NavPath } from '@app/core/constants/navigation.constants';
 import { StorageManagerService } from '@app/core/services/storage-manager.service';
-import { OrderIds } from '@app/order/enums/order-ids.enum';
+import { OrderIds } from '@app/booking/enums/order-ids.enum';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { filter, first, map, shareReplay } from 'rxjs/operators';
 import StepContext from '../interfaces/step-context.interface';
