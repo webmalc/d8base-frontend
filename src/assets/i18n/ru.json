@@ -542,8 +542,8 @@
     },
     "edit-master": {
       "title": "Основное",
-      "name": "Специализация",
-      "name-placeholder": "Введите специализацию",
+      "name": "Специализация или профессия",
+      "name-placeholder": "Например, «Юрист по земельным вопросам»",
       "description": "Описание",
       "description-placeholder": "Введите описание",
       "company": "Организация",

@@ -552,8 +552,8 @@
     },
     "edit-master": {
       "title": "Main",
-      "name": "Expertise area",
-      "name-placeholder": "Enter expertise area",
+      "name": "Specialization or profession",
+      "name-placeholder": "E.g. \"divorce lawyer\"",
       "description": "Description",
       "description-placeholder": "Enter description",
       "company": "Company",
