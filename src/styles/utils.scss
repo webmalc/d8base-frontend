@@ -1,0 +1,108 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.fs18 {
+  font-size: 18px;
+}
+
+.fs14 {
+  font-size: 14px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.fs20 {
+  font-size: 1.25rem;
+}
+
+.fs13 {
+  font-size: 13px;
+}
+
+.pt10 {
+  padding-top: 10px;
+}
+
+.mb1 {
+  margin-bottom: 1rem;
+}
+
+.pr5 {
+  padding-right: 5px;
+}
+
+.pv5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.smooth-corners {
+  border-radius: 0.25rem;
+  --border-radius: 0.25rem !important;
+}
+
+.round-corners {
+  border-radius: 1.5rem;
+  --border-radius: 1.5rem;
+}
+
+
+.preserve-line-breaks {
+  white-space: pre-line;
+}
+
+.background-color-white {
+  --ion-background-color: var(--ion-color-light);
+}
+
+.capitalize-first-letter:first-letter {
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
+}
+
+.show-scrollbar {
+  overflow-y: scroll;
+}
+
+
+// TODO remove this classes:
+
+.max-width100 {
+  max-width: 100%;
+}
+
+.no-padding-left {
+  padding-left: 0;
+  --padding-start: 0;
+}
+
+.ion-item-bottom-border {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+
+.ion-item-no-side-padding {
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-start: 0;
+}
+
+.ion-item-bordered {
+  --border-width: 0;
+  --inner-border-width: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.13);
+  border-left: 1px solid rgba(0, 0, 0, 0.13);
+  border-right: 1px solid rgba(0, 0, 0, 0.13);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.ion-item-no-min-height {
+  --min-height: 0px;
+}

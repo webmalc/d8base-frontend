@@ -1,0 +1,19 @@
+:root {
+  --service-photo-thumb-size: 72px;
+}
+
+section {
+  margin-bottom: 1rem;
+}
+
+section:not(:last-of-type) {
+  border-bottom: 1px solid var(--ion-color-light);
+}
+
+ion-list:not(:last-of-type) {
+  border-bottom: 1px solid var(--ion-color-light);
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,32 @@
+// Thin scrollbar for Chrome and Safari
+ion-content::part(scroll)::-webkit-scrollbar {
+  // doesn't work due to bug https://github.com/ionic-team/ionic-framework/issues/17425
+  width: 0.2rem;
+}
+
+// Thin scrollbar for Firefox
+ion-content::part(scroll) {
+  scrollbar-width: thin;
+}
+
+// Don't use the all-caps Material buttons
+ion-button {
+  text-transform: unset !important;
+}
+
+// Split pane width
+.split-pane-visible > .split-pane-side {
+  max-width: 300px;
+}
+
+// Custom headings
+.sc-ion-label-md-s h1 {
+  font-weight: bold;
+  font-size: 1rem;
+  --ion-padding: 0;
+}
+
+// ???
+.ion-item-details-align-center::part(detail-icon) {
+  align-self: center !important;
+}
