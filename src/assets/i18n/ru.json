@@ -1,5 +1,9 @@
 {
   "global": {
+    "shorten": {
+      "more": "Подробнее",
+      "less": "Свернуть"
+    },
     "professional-level": {
       "junior": "Начальный",
       "middle": "Средний",

@@ -18,6 +18,16 @@
   --border-radius: 50%;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.avatar-img {
+  @media (max-width: 575px){
+    width: 80%;
+  }
+  @media (max-width: 475px) {
+    width: 100%;
+  }
 }
 .rating {
   font-size: 20px;
@@ -41,10 +51,20 @@
 
 .add-photo {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  right: .5rem;
+  bottom: .5rem;
   size: 4rem;
+  border: 3px solid var(--ion-color-light);
+  border-radius: 50%;
   &:hover {
     color: var(--ion-color-primary);
+  }
+  @media (max-width: 575px){
+    right: .9rem;
+    bottom: .9rem;
+  }
+  @media (max-width: 475px) {
+    right: .4rem;
+    bottom: .4rem;
   }
 }

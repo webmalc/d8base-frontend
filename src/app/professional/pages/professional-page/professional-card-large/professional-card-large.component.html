@@ -1,4 +1,4 @@
-<ion-row class="ion-justify-content-center max-width100 ion-margin-vertical">
+<ion-row class="ion-justify-content-between max-width100 ion-margin-vertical">
   <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
     <ion-row class="ion-align-self-start">
       <ion-icon name="share-social-outline" class="top-icon"></ion-icon>
@@ -10,9 +10,9 @@
       </ion-row>
     </div>
   </ion-col>
-  <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="6">
+  <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="5" class="ion-justify-content-center">
     <ion-avatar class="avatar">
-      <ion-img [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
+      <ion-img class="avatar-img" [src]="professional.user?.avatar | defaultIfEmpty"></ion-img>
     </ion-avatar>
     <a routerLink="/profile" *ngIf="canEdit">
       <img class="add-photo" src="assets/images/professional/add-photo.svg" alt="" />
@@ -20,6 +20,7 @@
   </ion-col>
   <ion-col size-lg="4" size-xl="4" size-md="4" size-sm="4" size-xs="3">
     <ion-row class="ion-justify-content-end">
+      <ion-icon name="create-outline" class="top-icon"></ion-icon>
       <ion-icon name="create-outline" class="top-icon"></ion-icon>
     </ion-row>
     <div class="cent-container cent-container__right ion-justify-content-center">
@@ -35,8 +36,7 @@
     </div>
   </ion-col>
 </ion-row>
-
-<ion-row class="ion-justify-content-center">
+<ion-row class="ion-justify-content-center ion-margin-bottom">
   <ion-col size="10" class="ion-text-center name-title">
     {{ professionalUserName }}
   </ion-col>

@@ -1,5 +1,9 @@
 {
   "global": {
+    "shorten": {
+      "more": "More",
+      "less": "Less"
+    },
     "professional-level": {
       "junior": "Junior",
       "middle": "Middle",

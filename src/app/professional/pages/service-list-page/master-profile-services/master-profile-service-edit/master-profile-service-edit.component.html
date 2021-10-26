@@ -18,23 +18,23 @@
     </ion-card-subtitle>
   </ion-card-header>
 
-  <ion-item lines="none">
+  <ion-item lines="none" *ngIf="service.description">
     <app-price [price]="service.price"></app-price>
     <span class="duration">&nbsp;/ <app-duration-viewer [duration]="service.duration"></app-duration-viewer></span>
   </ion-item>
   <ion-item lines="none" class="desc">
-    {{ service.description }}
+    <app-shorten [text]="service.description" [max]="100"></app-shorten>
   </ion-item>
 
   <app-image-carousel
     *ngIf="photos"
-    class="ion-margin-vertical photos-size"
+    class="photos-size ion-margin-top"
     [photos]="photos"
     [editable]="false"
     justify="ion-justify-content-start"
   ></app-image-carousel>
 
-  <ion-item lines="none" class="ion-margin-bottom">
+  <ion-item lines="none" class="ion-margin-vertical">
     <ion-button *ngIf="!service.is_enabled" class="book-btn" disabled="true" color="medium" size="medium" fill="solid">
       {{ 'master-profile.services.service-edit.book' | translate }}
     </ion-button>

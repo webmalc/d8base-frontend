@@ -23,7 +23,7 @@ export function getServiceDuration(duration: number): Duration {
   }
 
   const days = Math.floor(hours / 24);
-  const hoursAfterDays = Math.floor(duration - days * 24);
+  const hoursAfterDays = Math.floor((duration - days * 24 * 60) / 60);
   const minutesAfterHours = Math.round(duration - days * 24 * 60 - hoursAfterDays * 60);
 
   return {

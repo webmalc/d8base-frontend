@@ -26,21 +26,23 @@ import { ServiceViewerComponent } from './pages/service-list-page/master-profile
 import { ProfessionalRoutingModule } from './professional-routing.module';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalResolver } from './professional.resolver';
+import {NgStringPipesModule} from 'ngx-pipes';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ProfessionalRoutingModule,
-    ReactiveFormsModule,
-    ReviewsModule,
-    SharedModule,
-    ServicePageModule,
-    TranslateModule,
-    IonicSelectableModule,
-    LocationEditorModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ProfessionalRoutingModule,
+        ReactiveFormsModule,
+        ReviewsModule,
+        SharedModule,
+        ServicePageModule,
+        TranslateModule,
+        IonicSelectableModule,
+        LocationEditorModule,
+        NgStringPipesModule,
+    ],
   declarations: [
     ProfessionalPageComponent,
     MasterProfileServicesComponent,

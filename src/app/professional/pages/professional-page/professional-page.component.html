@@ -9,21 +9,23 @@
 
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" class="ion-justify-content-center">
-        <ng-container *ngIf="!context.canEdit" class="ion-margin-vertical">
-          <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-min-height ion-margin-top">
-            <ion-icon name="bag-handle-outline" size="small"></ion-icon>
-            <ion-text class="pl5 card-desc">
-              {{ context.professional.description }}
-            </ion-text>
-          </ion-item>
-          <ng-container *ngIf="defaultLocation$ | async as defLoc">
-            <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-min-height mb1" *ngIf="defLoc.text">
-              <ion-icon name="location-outline" size="small"></ion-icon>
+        <ng-container *ngIf="!context.canEdit && context.professional.name">
+          <div class="ion-margin-bottom">
+            <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-min-height">
+              <ion-icon name="bag-handle-outline" size="small" slot="start" class="icon-margin"></ion-icon>
               <ion-text class="pl5 card-desc">
-                {{ defLoc.text }}
+                <app-shorten [text]="context.professional.name" [max]="80"></app-shorten>
               </ion-text>
             </ion-item>
-          </ng-container>
+            <ng-container *ngIf="defaultLocation$ | async as defLoc">
+              <ion-item lines="none" class="ion-item-no-side-padding ion-item-no-min-height" *ngIf="defLoc.text">
+                <ion-icon name="location-outline" size="small" slot="start" class="icon-margin"></ion-icon>
+                <ion-text class="pl5 card-desc">
+                  {{ defLoc.text }}
+                </ion-text>
+              </ion-item>
+            </ng-container>
+          </div>
         </ng-container>
 
         <ion-button
@@ -94,31 +96,29 @@
         </section>
       </ng-container>
 
-      <ng-template #viewContacts>
-        <app-section-heading>
-          {{ 'master-profile.info.contacts' | translate }}
-        </app-section-heading>
-        <app-contacts-view
-          *ngIf="context.professional.contacts?.length"
-          [contacts]="context.professional.contacts"
-        ></app-contacts-view>
-      </ng-template>
+      <ng-container *ngIf="context.professional.contacts?.length">
+        <ng-template #viewContacts>
+          <app-section-heading>
+            {{ 'master-profile.info.contacts' | translate }}
+          </app-section-heading>
+          <app-contacts-view
+            [contacts]="context.professional.contacts"
+          ></app-contacts-view>
+        </ng-template>
 
-      <section *ngIf="context.canEdit; else viewContacts">
-        <app-section-heading>
-          {{ 'master-profile.info.contacts' | translate }}
-        </app-section-heading>
-        <app-contacts-edit
-          *appIfSpinner="contactsWithDefault$ | ifSpinnerErrorState | async as contacts"
-          [contacts]="contacts"
-          [addNewContactUrl]="getNewContactUrl(context.professional.id)"
-          editContactUrl="{{ editUrl }}"
-          editDefaultContactUrl="{{ editDefaultUrl }}"
-        ></app-contacts-edit>
-      </section>
-      <ng-template #viewContacts>
-        <app-contacts-view [contacts]="context.professional.contacts"></app-contacts-view>
-      </ng-template>
+        <section *ngIf="context.canEdit; else viewContacts">
+          <app-section-heading>
+            {{ 'master-profile.info.contacts' | translate }}
+          </app-section-heading>
+          <app-contacts-edit
+            *appIfSpinner="contactsWithDefault$ | ifSpinnerErrorState | async as contacts"
+            [contacts]="contacts"
+            [addNewContactUrl]="getNewContactUrl(context.professional.id)"
+            editContactUrl="{{ editUrl }}"
+            editDefaultContactUrl="{{ editDefaultUrl }}"
+          ></app-contacts-edit>
+        </section>
+      </ng-container>
 
       <section *ngIf="context.canEdit">
         <app-section-heading>
@@ -148,7 +148,7 @@
       </section>
 
       <app-collapse-item title="{{ 'master-profile.info.about' | translate }}" [collapsed]="false">
-        <ion-list lines="none">
+        <ion-list lines="none" class="ion-no-padding">
           <ion-item
             button
             lines="none"
@@ -167,9 +167,7 @@
             <ion-label position="stacked" color="medium">
               {{ 'master-profile.info.description' | translate }}
             </ion-label>
-            <ion-text class="desc-ws">
-              {{ context.professional.description }}
-            </ion-text>
+            <ion-text class="desc-ws"><app-shorten [max]="90" [text]="context.professional.description"></app-shorten></ion-text>
           </ion-item>
           <ion-item *ngIf="context.professional.experience">
             <ion-label position="stacked" color="medium">

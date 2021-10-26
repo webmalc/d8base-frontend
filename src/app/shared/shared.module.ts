@@ -101,6 +101,8 @@ import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
 import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
 import { IfSpinnerModule } from './if-spinner/if-spinner.module';
+import {ShortenComponent} from '@app/shared/components/shorten/shorten.component';
+import {NgStringPipesModule} from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -191,6 +193,7 @@ import { IfSpinnerModule } from './if-spinner/if-spinner.module';
     CalendarMonthComponent,
     CalendarWeekComponent,
     DatePickerPopoverComponent,
+    ShortenComponent,
   ],
   exports: [
     IfSpinnerModule,
@@ -276,6 +279,7 @@ import { IfSpinnerModule } from './if-spinner/if-spinner.module';
     SubregionByIdPipe,
     CalendarMonthComponent,
     CalendarWeekComponent,
+    ShortenComponent,
   ],
   imports: [
     CommonModule,
@@ -288,6 +292,7 @@ import { IfSpinnerModule } from './if-spinner/if-spinner.module';
     LeafletModule,
     ImageCropperModule,
     IfSpinnerModule,
+    NgStringPipesModule,
   ],
   providers: [
     {

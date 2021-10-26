@@ -1,0 +1,2 @@
+<div>{{ text | shorten : current }}<span class="ext" *ngIf="isRenderMoreBtn()" (click)="showMore()">...{{ 'global.shorten.more' | translate }}</span></div>
+<div *ngIf="isRenderLessBtn()" (click)="showLess()" class="ext">...{{ 'global.shorten.less' | translate }}</div>

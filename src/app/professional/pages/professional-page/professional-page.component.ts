@@ -97,6 +97,10 @@ export class ProfessionalPageComponent {
     this.initContactsWithDefault();
   }
 
+  public trim(data: string): string {
+    return data.trim();
+  }
+
   public onTabChange(event: CustomEvent): void {
     this.currentTab = event.detail.value;
   }
