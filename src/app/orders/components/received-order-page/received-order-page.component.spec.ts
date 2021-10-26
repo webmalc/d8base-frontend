@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ReceivedOrderManager } from '@app/my-orders/services';
+import { ReceivedOrderManager } from '@app/orders/services';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 import { ReceivedOrderPageComponent } from './received-order-page.component';
 

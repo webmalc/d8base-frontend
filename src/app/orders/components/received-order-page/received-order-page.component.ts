@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Profile, ReceivedOrder } from '@app/api/models';
 import { AccountsService } from '@app/api/services/accounts.service';
 import { ServicesApiCache } from '@app/core/services/cache';
-import { ReceivedOrderManager } from '@app/my-orders/services';
+import { ReceivedOrderManager } from '@app/orders/services';
 import CurrentUserSelectors from '@app/store/current-user/current-user.selectors';
 import { Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';

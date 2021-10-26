@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ServicesApiCache } from '@app/core/services/cache';
 
-import { ReceivedOrderListItemComponent } from '@app/my-orders/components';
-import { ReceivedOrderManager } from '@app/my-orders/services';
+import { ReceivedOrderListItemComponent } from '@app/orders/components';
+import { ReceivedOrderManager } from '@app/orders/services';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 describe('ReceivedOrderListItemComponent', () => {

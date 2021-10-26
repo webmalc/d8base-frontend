@@ -3,7 +3,7 @@ import { ProfessionalList, SentOrder, Service } from '@app/api/models';
 import { ToastService } from '@app/core/services';
 import { ServicesApiCache } from '@app/core/services/cache';
 import { ProfessionalsApiCache } from '@app/core/services/cache/professionals-api-cache.service';
-import { SentOrderManager } from '@app/my-orders/services';
+import { SentOrderManager } from '@app/orders/services';
 import { switchMap } from 'rxjs/operators';
 
 @Component({

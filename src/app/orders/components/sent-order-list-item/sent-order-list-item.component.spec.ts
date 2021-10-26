@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProfessionalsApiCache, ServicesApiCache } from '@app/core/services/cache';
-import { SentOrderManager } from '@app/my-orders/services';
+import { SentOrderManager } from '@app/orders/services';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';

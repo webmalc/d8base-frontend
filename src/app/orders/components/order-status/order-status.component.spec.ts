@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { OrderStatusComponent } from '@app/my-orders/components';
+import { OrderStatusComponent } from '@app/orders/components';
 import { ComponentTestingModule, RootModules } from 'src/testing/component-testing.module';
 
 describe('OrderStatusComponent', () => {

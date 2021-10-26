@@ -8,11 +8,11 @@ import {
   ReceivedOrderListItemComponent,
   ReceivedOrderPageComponent,
   SentOrderPageComponent,
-} from '@app/my-orders/components';
-import { InboxComponent } from '@app/my-orders/components/inbox/inbox.component';
-import { OutboxComponent } from '@app/my-orders/components/outbox/outbox.component';
-import { SentOrderListItemComponent } from '@app/my-orders/components/sent-order-list-item/sent-order-list-item.component';
-import { InboxPageComponent } from '@app/my-orders/pages/inbox-page/inbox-page.component';
+} from '@app/orders/components';
+import { InboxComponent } from '@app/orders/components/inbox/inbox.component';
+import { OutboxComponent } from '@app/orders/components/outbox/outbox.component';
+import { SentOrderListItemComponent } from '@app/orders/components/sent-order-list-item/sent-order-list-item.component';
+import { InboxPageComponent } from '@app/orders/pages/inbox-page/inbox-page.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
