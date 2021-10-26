@@ -84,6 +84,8 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ShortenComponent } from '@app/shared/components/shorten/shorten.component';
+import { NgStringPipesModule } from 'ngx-pipes';
 import { ChatButtonComponent } from './components/chat-button/chat-button.component';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
 import { ContactsEditComponent } from './components/contacts-edit/contacts-edit.component';
@@ -101,8 +103,6 @@ import { IonImageViewDirective } from './directives/ion-image-view.directive';
 import { NumberDirective } from './directives/number.directive';
 import { IF_SPINNER_MODULE_CONFIG_TOKEN } from './if-spinner/if-spinner.config';
 import { IfSpinnerModule } from './if-spinner/if-spinner.module';
-import {ShortenComponent} from '@app/shared/components/shorten/shorten.component';
-import {NgStringPipesModule} from 'ngx-pipes';
 
 @NgModule({
   declarations: [

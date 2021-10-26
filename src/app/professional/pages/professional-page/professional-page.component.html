@@ -48,7 +48,7 @@
           {{ 'master-profile.navbar.chat' | translate }}
         </ion-button>
 
-        <ion-segment *ngIf="!context.canEdit" value="info" (ionChange)="onTabChange($event)">
+        <ion-segment *ngIf="!context.canEdit" value="info" class="ion-margin-top" (ionChange)="onTabChange($event)">
           <ion-segment-button value="services">
             <ion-label>{{ 'master-profile.tabs.services' | translate }}</ion-label>
           </ion-segment-button>
@@ -101,9 +101,7 @@
           <app-section-heading>
             {{ 'master-profile.info.contacts' | translate }}
           </app-section-heading>
-          <app-contacts-view
-            [contacts]="context.professional.contacts"
-          ></app-contacts-view>
+          <app-contacts-view [contacts]="context.professional.contacts"></app-contacts-view>
         </ng-template>
 
         <section *ngIf="context.canEdit; else viewContacts">
@@ -167,7 +165,9 @@
             <ion-label position="stacked" color="medium">
               {{ 'master-profile.info.description' | translate }}
             </ion-label>
-            <ion-text class="desc-ws"><app-shorten [max]="90" [text]="context.professional.description"></app-shorten></ion-text>
+            <ion-text class="desc-ws"
+              ><app-shorten [max]="90" [text]="context.professional.description"></app-shorten
+            ></ion-text>
           </ion-item>
           <ion-item *ngIf="context.professional.experience">
             <ion-label position="stacked" color="medium">

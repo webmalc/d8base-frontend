@@ -22,7 +22,7 @@
   justify-content: center;
 }
 .avatar-img {
-  @media (max-width: 575px){
+  @media (max-width: 575px) {
     width: 80%;
   }
   @media (max-width: 475px) {
@@ -51,20 +51,20 @@
 
 .add-photo {
   position: absolute;
-  right: .5rem;
-  bottom: .5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
   size: 4rem;
   border: 3px solid var(--ion-color-light);
   border-radius: 50%;
   &:hover {
     color: var(--ion-color-primary);
   }
-  @media (max-width: 575px){
-    right: .9rem;
-    bottom: .9rem;
+  @media (max-width: 575px) {
+    right: 0.9rem;
+    bottom: 0.9rem;
   }
   @media (max-width: 475px) {
-    right: .4rem;
-    bottom: .4rem;
+    right: 0.4rem;
+    bottom: 0.4rem;
   }
 }

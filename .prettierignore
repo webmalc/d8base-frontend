@@ -43,3 +43,4 @@ config.xml
 *.jpeg
 *.svg
 /src/assets
+/src/app/shared/components/shorten/shorten.component.html

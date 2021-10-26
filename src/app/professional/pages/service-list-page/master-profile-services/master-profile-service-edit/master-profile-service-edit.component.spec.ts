@@ -21,6 +21,7 @@ describe('MasterProfileServiceEditComponent', () => {
         service_type: 'client',
         duration: 1,
         name: 'service',
+        description: 'test',
         price: {
           is_price_fixed: true,
           price: '100',

@@ -17,6 +17,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { NgStringPipesModule } from 'ngx-pipes';
 import { ProfessionalContactEditComponent } from './pages/professional-contact-edit/professional-contact-edit.component';
 import { ProfessionalCardLargeComponent } from './pages/professional-page/professional-card-large/professional-card-large.component';
 import { ProfessionalPageComponent } from './pages/professional-page/professional-page.component';
@@ -26,23 +27,22 @@ import { ServiceViewerComponent } from './pages/service-list-page/master-profile
 import { ProfessionalRoutingModule } from './professional-routing.module';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalResolver } from './professional.resolver';
-import {NgStringPipesModule} from 'ngx-pipes';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        ProfessionalRoutingModule,
-        ReactiveFormsModule,
-        ReviewsModule,
-        SharedModule,
-        ServicePageModule,
-        TranslateModule,
-        IonicSelectableModule,
-        LocationEditorModule,
-        NgStringPipesModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ProfessionalRoutingModule,
+    ReactiveFormsModule,
+    ReviewsModule,
+    SharedModule,
+    ServicePageModule,
+    TranslateModule,
+    IonicSelectableModule,
+    LocationEditorModule,
+    NgStringPipesModule,
+  ],
   declarations: [
     ProfessionalPageComponent,
     MasterProfileServicesComponent,

@@ -6,7 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./shorten.component.scss'],
 })
 export class ShortenComponent {
-
   @Input() public text: string;
   public current: number;
   private maximum: number;
