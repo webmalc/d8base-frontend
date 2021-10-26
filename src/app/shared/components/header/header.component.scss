@@ -1,3 +1,9 @@
+ion-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 410px) {
   .my-orders {
     font-size: 12px;
@@ -25,8 +31,5 @@
 }
 
 .toolbar {
-  height: 100%;
-  --min-height: 100%;
-  margin: auto;
   width: min(100vw, 40rem); // TODO extract mixin
 }
