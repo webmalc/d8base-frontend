@@ -1,8 +1,4 @@
-ion-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import 'src/styles/mixins.scss';
 
 @media (max-width: 410px) {
   .my-orders {
@@ -24,12 +20,12 @@ ion-header {
   white-space: nowrap;
 }
 
-@media (min-width: 768px) {
-  ion-header {
-    height: 80px;
-  }
-}
-
 .toolbar {
-  width: min(100vw, 40rem); // TODO extract mixin
+  @include content-width;
+
+  @media (min-width: 768px) {
+    height: 80px;
+    --min-height: 80px;
+    margin-inline: auto;
+  }
 }

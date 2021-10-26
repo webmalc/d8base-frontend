@@ -1,9 +1,11 @@
+@import 'src/styles/mixins.scss';
+
 .header {
   display: flex;
   justify-content: center;
   border-top: 2px solid var(--ion-color-light);
 
   &__title {
-    width: min(100vw, 36rem);
+    @include content-width;
   }
 }
