@@ -1,9 +1,7 @@
 <app-header></app-header>
 <ion-content>
   <app-content-wrapper>
-    <app-column-header [backButtonUrl]="profileUrl">
-      {{ 'location-edit-page.address' | translate }}
-    </app-column-header>
+    <app-column-header [backButtonUrl]="profileUrl">{{ 'location-edit-page.address' | translate }}</app-column-header>
     <app-location-editor
       (delete)="delete($event.id)"
       (save)="save($event)"
