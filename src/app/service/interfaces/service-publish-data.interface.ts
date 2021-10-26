@@ -18,4 +18,5 @@ export default interface ServicePublishData {
   serviceLocation: ServiceLocation;
   masterLocation: ProfessionalLocation; // has empty 'id' if new
   servicePrice: Price;
+  avatar: any;
 }

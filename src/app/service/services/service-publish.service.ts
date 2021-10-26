@@ -49,6 +49,7 @@ export class ServicePublishService {
     serviceLocation,
     masterLocation,
     servicePrice,
+    avatar,
   }: ServicePublishData): Observable<ServiceList> {
     let createdService: ServiceList;
     let createdMaster: ProfessionalList;
@@ -67,6 +68,7 @@ export class ServicePublishService {
       switchMap(reply => {
         createdService = reply;
         return forkJoin({
+          avatar: avatar ? this.changeAvatar(avatar) : of(),
           photosRet: this.createPhotos(servicePhotos, createdService),
           scheduleRet: this.createServiceSchedule(serviceSchedule, createdService),
           masterScheduleRet: this.createMasterSchedule(masterSchedule, createdMaster),
@@ -137,5 +139,9 @@ export class ServicePublishService {
       location: masterLoc.id,
       service: service.id,
     });
+  }
+
+  private changeAvatar(avatar: string): Observable<any> {
+    return this.accountsApi.accountsProfilePartialUpdate({ avatar });
   }
 }
