@@ -3,6 +3,7 @@ import {
   Price,
   ProfessionalLocation,
   ProfessionalSchedule,
+  Profile,
   Service,
   ServiceLocation,
   ServicePhoto,
@@ -19,6 +20,7 @@ import { StepSixDataInterface } from '@app/service/interfaces/step-six-data-inte
 import { StepThreeDataInterface } from '@app/service/interfaces/step-three-data-interface';
 import { StepTwoDataInterface } from '@app/service/interfaces/step-two-data-interface';
 import { ServicePublishDataHolderService } from '@app/service/services/service-publish-data-holder.service';
+import { StepFiveDataInterface } from '@app/service/interfaces/step-five-data-interface';
 import ServicePublishData from '../interfaces/service-publish-data.interface';
 
 @Injectable()
@@ -42,6 +44,7 @@ export class ServicePublishDataPreparerService {
       serviceSchedule: this.getServiceSchedule(),
       masterSchedule: this.getProfessionalSchedule(),
       servicePrice: this.getServicePrice(),
+      user: this.getUserProfile(),
     };
   }
 
@@ -137,5 +140,14 @@ export class ServicePublishDataPreparerService {
 
   private async generateServicePhotos(data: StepThreeDataInterface): Promise<ServicePhoto[]> {
     return await Promise.all([...data.photos.map(async val => ({ service: null, photo: await fileToBase64(val) }))]);
+  }
+
+  private getUserProfile(): Partial<Profile> {
+    const data = this.servicePublishDataHolder.getStepData<StepFiveDataInterface>(ServicePublishSteps.Five);
+    return {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      avatar: data._avatar ?? '',
+    };
   }
 }
