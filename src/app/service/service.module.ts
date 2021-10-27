@@ -5,10 +5,10 @@ import { RegistrationPageModule } from '@app/auth/pages/registration/registratio
 import { DepartureComponent } from '@app/service/components/departure/departure.component';
 import { MasterPickerPopoverComponent } from '@app/service/components/master-picker/master-picker-popover.component';
 import {
+  ServiceDetailsEditComponent,
   ServiceEditorPageComponent,
   ServiceEssentialsEditorComponent,
   ServiceTypeEditComponent,
-  ServiceDetailsEditComponent,
 } from '@app/service/pages/service-editor-page';
 import { ServiceEditorDepsService } from '@app/service/pages/service-editor-page/service-editor-deps.service';
 import { ServicePublishFinalStepComponent } from '@app/service/components/service-publish-final-step/service-publish-final-step.component';
@@ -39,10 +39,14 @@ import { StepSixHandlerService } from '@app/service/services/steps-navigation-ch
 import { StepThreeHandlerService } from '@app/service/services/steps-navigation-chain/step-three-handler.service';
 import { StepTwoHandlerService } from '@app/service/services/steps-navigation-chain/step-two-handler.service';
 import { LocationEditorModule } from '@app/shared/location-editor/location-editor.module';
+import { ServiceCreatedPageComponent } from '@app/service/pages/service-created-page';
+import { ServiceResolver } from '@app/service/service.resolver';
+import { ProfessionalResolver } from '@app/service/professional.resolver';
 import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrMaskerModule } from 'br-mask';
+
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ServicePublishResetStateService } from './guards/service-publish-reset-state.service';
 import { ServicePageRoutingModule } from './service-routing.module';
@@ -79,6 +83,7 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServiceTypeEditComponent,
     ServicePublishWrapperComponent,
     ServiceDetailsEditComponent,
+    ServiceCreatedPageComponent,
   ],
   providers: [
     ServicePublishDataHolderService,
@@ -99,6 +104,8 @@ import { ServicePageRoutingModule } from './service-routing.module';
     ServicePublishGuardService,
     ServiceEditorDepsService,
     ServicePublishResetStateService,
+    ServiceResolver,
+    ProfessionalResolver,
   ],
 })
 export class ServicePageModule {}

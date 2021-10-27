@@ -278,7 +278,7 @@
     "essentials-title": "Essentials"
   },
   "service-details": {
-    "location-title": "Time and Place",
+    "location-title": "Service Location",
     "description-title": "Service Details",
     "payment-title": "Payment Options",
     "instant-book-title": "Instant Book",
@@ -309,6 +309,12 @@
     "is-enabled": "Make the service searchable",
     "is-auto-order-confirmation": "Automatically confirm incoming orders"
   },
+  "service-created": {
+    "title": "Service created",
+    "message": "The service was successfully published!",
+    "details": "You can publish a new service or go back to the service list",
+    "add-new-service": "Publish new service"
+  },
   "service-publish": {
     "back-button": "Back",
     "forward-button": "Continue",
@@ -328,7 +334,7 @@
       "service-placeholder": "Enter service name",
       "service-description": "Service description",
       "service-description-placeholder": "Enter service description",
-      "duration-and-price": "The duration per session and its price",
+      "duration-and-price": "Duration and price",
       "fixed-price": "Fixed service price",
       "fixed-price-title": "Service price",
       "start-price": "from",
@@ -385,8 +391,9 @@
       "first-info-row": "Provide more information about yourself.",
       "description": "About",
       "description-placeholder": "This text will be displayed as a part of the search result",
-      "specialization": "Specialization",
-      "specialization-placeholder": "Specialization",
+      "specialization": "Specialization or profession",
+      "specialization-placeholder": "E.g. \"divorce lawyer\"",
+      "specialization-explanation": "This info is meant to be shown below your name",
       "level": "Level",
       "person": "Private person",
       "company": "Company"
@@ -571,8 +578,8 @@
     },
     "edit-master": {
       "title": "Main",
-      "name": "Expertise area",
-      "name-placeholder": "Enter expertise area",
+      "name": "Specialization or profession",
+      "name-placeholder": "E.g. \"divorce lawyer\"",
       "description": "Description",
       "description-placeholder": "Enter description",
       "company": "Company",
@@ -924,12 +931,49 @@
     "step-3-note": "from thousand of customers",
     "block-3-title": "List your business",
     "block-3-text": "and find new clients in your local community and\u00a0around the world",
-    "block-3-button": "Sign up"
+    "block-3-button": "Publish"
   },
   "footer": {
     "about": "About",
     "support": "Support",
     "eula": "End user license agreement",
     "copy": "© 2021 d8base | All rights reserved"
+  },
+  "landing": {
+    "first": {
+      "title": "D8base helps the client and the performer find each other",
+      "desc": "Expand your business opportunities with d8base",
+      "btn": "Start now"
+    },
+    "second": {
+      "title-first": "Wanna more clients?",
+      "title-second": "Publish your service on d8base",
+      "adv1": "Suitable for any business",
+      "adv2": "In just a few minutes",
+      "adv3": "Convenient from PC and smartphone",
+      "btn": "Publish"
+    },
+    "third": {
+      "block1": {
+        "title": "Everything is free and no commission",
+        "desc": "Publishing ads and working with profile is absolutely free"
+      },
+      "block2": {
+        "title": "Convenient chat and open contacts",
+        "desc": "You can communicate with the client the way you like. And indicate the ways of communication that you want"
+      },
+      "block3": {
+        "title": "More possibilities",
+        "desc": "The ability to exhibit an unlimited number of services, photos of works, post information about yourself, share a profile, find clients around the world"
+      }
+    },
+    "fourth": {
+      "title": "Do you want the client to sign up for you yourself? Set up your schedule and take orders online",
+      "adv1": "Set up an online appointment for your business in just a few minutes when publishing a service",
+      "adv2": "Share the schedule link on your social medias, websites and any other platforms",
+      "adv3": "Customers will be able to choose the time themselves and book it, and all entries will be reflected in the booking journal",
+      "adv4": "Your booking journal is always at hand! You can manage a client's record: create, confirm, transfer or cancel a booking",
+      "btn": "Try now"
+    }
   }
 }

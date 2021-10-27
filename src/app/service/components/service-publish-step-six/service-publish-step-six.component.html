@@ -53,6 +53,9 @@
         </ion-label>
         <ion-input type="text" name="description" [formControlName]="formFields.Specialization"></ion-input>
       </ion-item>
+      <div class="fs14">
+        {{ 'service-publish.step-six.specialization-explanation' | translate }}
+      </div>
       <app-form-control-error [controlName]="formFields.Specialization"></app-form-control-error>
       <ion-item lines="none" class="ion-item-no-side-padding ion-margin-top">
         {{ 'service-publish.step-six.level' | translate }}

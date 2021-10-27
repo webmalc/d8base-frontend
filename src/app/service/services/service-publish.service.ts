@@ -3,6 +3,7 @@ import {
   Price,
   ProfessionalLocation,
   ProfessionalSchedule,
+  Profile,
   Service,
   ServiceList,
   ServiceLocation,
@@ -49,6 +50,7 @@ export class ServicePublishService {
     serviceLocation,
     masterLocation,
     servicePrice,
+    user,
   }: ServicePublishData): Observable<ServiceList> {
     let createdService: ServiceList;
     let createdMaster: ProfessionalList;
@@ -67,6 +69,7 @@ export class ServicePublishService {
       switchMap(reply => {
         createdService = reply;
         return forkJoin({
+          user: this.patchUser(user),
           photosRet: this.createPhotos(servicePhotos, createdService),
           scheduleRet: this.createServiceSchedule(serviceSchedule, createdService),
           masterScheduleRet: this.createMasterSchedule(masterSchedule, createdMaster),
@@ -137,5 +140,9 @@ export class ServicePublishService {
       location: masterLoc.id,
       service: service.id,
     });
+  }
+
+  private patchUser(profile: Partial<Profile>): Observable<Profile> {
+    return this.accountsApi.accountsProfilePartialUpdate(profile);
   }
 }

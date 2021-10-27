@@ -9,6 +9,7 @@ export enum NavPath {
   Order = 'order',
   Orders = 'my-orders',
   Bookmarks = 'saved-professionals',
+  ProfessionalLanding = 'landing',
 }
 
 export enum NavBranch {
@@ -31,6 +32,7 @@ export enum NavBranch {
   Publish = 'publish',
   Edit = 'edit',
   Add = 'add',
+  Success = 'success',
 
   // orders path:
   Inbox = 'inbox',

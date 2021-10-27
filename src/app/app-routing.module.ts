@@ -38,11 +38,11 @@ const routes: Routes = [
   },
   {
     path: NavPath.Order,
-    loadChildren: () => import('./order/order.module').then(m => m.OrderPageModule),
+    loadChildren: () => import('./booking/order.module').then(m => m.OrderPageModule),
   },
   {
     path: NavPath.Orders,
-    loadChildren: () => import('./my-orders/my-orders.module').then(m => m.MyOrdersModule),
+    loadChildren: () => import('./orders/my-orders.module').then(m => m.MyOrdersModule),
   },
   {
     path: NavPath.Reviews,
@@ -52,6 +52,10 @@ const routes: Routes = [
     path: NavPath.Bookmarks,
     loadChildren: () => import('./bookmarks/bookmarks.module').then(m => m.BookmarksModule),
     canActivate: [MustBeAuthorizedGuard],
+  },
+  {
+    path: NavPath.ProfessionalLanding,
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule),
   },
   { path: '**', component: NotFoundPageComponent },
 ];

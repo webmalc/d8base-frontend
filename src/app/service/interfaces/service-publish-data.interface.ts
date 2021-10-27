@@ -2,6 +2,7 @@ import {
   Price,
   ProfessionalLocation,
   ProfessionalSchedule,
+  Profile,
   ServiceList,
   ServiceLocation,
   ServicePhoto,
@@ -18,4 +19,5 @@ export default interface ServicePublishData {
   serviceLocation: ServiceLocation;
   masterLocation: ProfessionalLocation; // has empty 'id' if new
   servicePrice: Price;
+  user: Profile;
 }

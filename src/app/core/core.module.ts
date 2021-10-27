@@ -36,6 +36,7 @@ import {
   TagsManagerService,
   NewMessagesNotificationService,
   IntervalService,
+  LocaleService,
 } from '@app/core/services';
 import {
   CategoriesApiCache,
@@ -131,6 +132,7 @@ import { environment } from '@env/environment';
     NewMessagesNotificationService,
     IntervalService,
     CalendarGeneratorService,
+    LocaleService,
   ],
 })
 export class CoreModule {

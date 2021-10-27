@@ -15,6 +15,7 @@ import { StorageManagerMock } from './mocks';
 import { IntervalService } from '@app/core/services/interval.service';
 import { of } from 'rxjs';
 import { CoreModule } from '@app/core/core.module';
+import { ActivatedRoute } from '@angular/router';
 
 let ionicModuleImported = false;
 export const RootModules = () => {
@@ -36,6 +37,21 @@ const ROOT_MODULES = [TranslateModule.forRoot(), StoreModule.forRoot(), CoreModu
       provide: IntervalService,
       useValue: {
         ticks: () => of(void 0),
+      },
+    },
+    {
+      provide: ActivatedRoute,
+      useValue: {
+        paramMap: of({
+          get: () => '1',
+        }),
+        queryParamMap: of({
+          has: () => false,
+        }),
+        params: of({}),
+        queryParams: of({}),
+        data: of({}),
+        snapshot: of({}),
       },
     },
 

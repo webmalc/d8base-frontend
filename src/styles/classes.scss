@@ -1,0 +1,45 @@
+.label-for-required-input::after {
+  content: '*';
+  color: red;
+  margin-left: 0.1em;
+}
+
+.map-popover-width {
+  --width: 40vw;
+  @media (max-width: 1200px) {
+    --width: 50vw;
+  }
+  @media (max-width: 992px) {
+    --width: 60vw;
+  }
+  @media (max-width: 768px) {
+    --width: 80vw;
+  }
+  @media (max-width: 576px) {
+    --width: 95vw;
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+.popover-big {
+  --width: 90%;
+  --height: 90%;
+}
+
+.popover-medium {
+  --width: 50%;
+  --ion-background-color: var(--ion-color-secondary);
+  --ion-color: var(--ion-color-secondary-contrast);
+}
+
+.modal-fullscreen {
+  --width: 100%;
+  --height: 100%;
+}
+
+.modal-fullheight {
+  --height: 100%;
+}

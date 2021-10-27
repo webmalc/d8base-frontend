@@ -1,0 +1,28 @@
+@import 'src/styles/mixins.scss';
+
+:host {
+  display: contents;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid var(--ion-color-light);
+
+  &__service-name {
+    @include content-width;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+
+  &__button {
+    @include content-width;
+  }
+}
+
+.eula {
+  padding: 0.5em;
+}
