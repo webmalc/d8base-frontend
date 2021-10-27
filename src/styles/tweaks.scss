@@ -14,6 +14,10 @@ ion-button {
   text-transform: unset !important;
 }
 
+ion-segment-button {
+  text-transform: none;
+}
+
 // Split pane width
 .split-pane-visible > .split-pane-side {
   max-width: 300px;
